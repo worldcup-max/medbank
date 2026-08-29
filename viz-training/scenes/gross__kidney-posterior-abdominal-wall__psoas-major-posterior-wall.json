@@ -429,14 +429,14 @@
       "anchor": {
         "on": "right_hip_bone",
         "uvw": [
-          0.3162,
-          0.3412,
-          0.66
+          0.277,
+          0.3837,
+          0.6681
         ],
         "radius": 0.018
       },
       "status": "ok",
-      "calibrated_by": "geometry: CONTACT AREA — iliacus lines the whole fossa, so the anchor is the centroid of the 122 hip-bone vertices lying within 3 mm of the muscle, not the single nearest corner of the contact (closest approach 0.33 mm)",
+      "calibrated_by": "geometry: CONTACT AREA — iliacus lines the whole fossa, so the anchor is the centroid of the 122 hip-bone vertices lying within 3 mm of the muscle, snapped 7.9 mm back onto the bone because the centroid of a patch on a concave surface floats above it (closest approach 0.33 mm)",
       "calibration_gap_mm": 0.33,
       "terms": [
         "iliac fossa"
@@ -582,7 +582,7 @@
     {
       "key": "ivc",
       "name": "inferior vena cava",
-      "label": "Inferior vena cava — medial to the left of nothing, right of the aorta",
+      "label": "Inferior vena cava — on the medial edge of the right psoas",
       "role": "context",
       "group": "Relations",
       "layer": "vessel",
@@ -639,6 +639,40 @@
         "lumbosacral trunk"
       ],
       "narration": "The posterior abdominal wall ends at the pelvic brim, and the sacral promontory is its central marker. The lumbosacral trunk, carrying part of L4 and all of L5 from the lumbar plexus down to the sacral plexus, crosses the ala of the sacrum at the medial border of psoas — the anatomical hinge that joins the two plexuses."
+    },
+    {
+      "key": "l3_tp_tip",
+      "label": "Tip of the L3 transverse process (right)",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "l3",
+        "uvw": [0, 0.6007, 0.627]
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -x on FMA13074 (LPS +X is the body's LEFT, so -x is the right side; the widest point of a lumbar vertebra IS the tip of its transverse process; 42.8 mm from surface centroid, 1500 vertices)",
+      "terms": ["transverse process", "tip of the transverse process", "L3", "psoas origin", "ureter", "quadratus lumborum", "longest transverse process"],
+      "narration": "The tip of the third lumbar transverse process — the longest of the five, and the widest point of the lumbar column. Psoas arises from the front of it, quadratus lumborum inserts into it, and the ureter descends on the line joining these tips: on a plain film, that line is where you look for a ureteric stone."
+    },
+    {
+      "key": "ql_iliac_attachment",
+      "label": "Quadratus lumborum — iliac attachment",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "right_hip_bone",
+        "uvw": [0.5896, 0.7927, 0.8928],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — the point on FMA16586 nearest FMA22348 right quadratus lumborum, which is the muscle's lower attachment on the iliolumbar ligament and the adjacent inner lip of the iliac crest (gap 0.15 mm · 1 witness, so a measurement with no second witness to converge on it)",
+      "calibration_gap_mm": 0.15,
+      "terms": ["iliac crest", "inner lip of the iliac crest", "iliolumbar ligament", "quadratus lumborum origin"],
+      "narration": "Quadratus lumborum takes its lower attachment here, on the iliolumbar ligament and the inner lip of the iliac crest behind it, and pulls upwards on the twelfth rib from this fixed point."
     }
   ],
   "views": [
@@ -767,7 +801,7 @@
           "duration": 6
         }
       ],
-      "narration": "The front of psoas is a shelf, and a good deal of the abdomen lies on it. Working down: the kidney and its vessels above, the ureter running the length of the muscle, the gonadal vessels crossing it obliquely, the genitofemoral nerve on its surface, and on the right the caecum and appendix, on the left the descending and sigmoid colon. Medially, the aorta and the inferior vena cava lie in the groove between psoas and the vertebral bodies, with the lumbar sympathetic trunk hidden along the medial border. The ureter is the relation to remember for the operating theatre: find psoas and the ureter is on it, in front of the tips of the lumbar transverse processes, crossing the brim where the common iliac artery divides. Lateral to psoas, the kidney sits on the bed of quadratus lumborum with three nerves — subcostal, iliohypogastric and ilioinguinal — running downwards and laterally across it. Two clinical consequences. A retrocaecal appendix lies directly on the right psoas, so extending the hip stretches the muscle and reproduces the pain: the psoas sign. And an inflamed retroperitoneal structure of any kind can wipe out the psoas shadow on a plain film."
+      "narration": "The front of psoas is a shelf, and a good deal of the abdomen lies on it. Two of the things on that shelf are drawn here — the kidney and the ureter — and the rest are described: the gonadal vessels, the genitofemoral nerve, the sympathetic trunk and the bowel have no model in this scene, so look for them in your head, not on the screen. Working down: the kidney and its vessels above, the ureter running the length of the muscle, the gonadal vessels crossing it obliquely, the genitofemoral nerve on its surface, and on the right the caecum and appendix, on the left the descending and sigmoid colon. Medially, the aorta and the inferior vena cava lie in the groove between psoas and the vertebral bodies, with the lumbar sympathetic trunk hidden along the medial border. The ureter is the relation to remember for the operating theatre: find psoas and the ureter is on it, in front of the tips of the lumbar transverse processes, crossing the brim where the common iliac artery divides. Lateral to psoas, the kidney sits on the bed of quadratus lumborum with three nerves — subcostal, iliohypogastric and ilioinguinal — running downwards and laterally across it. Two clinical consequences. A retrocaecal appendix lies directly on the right psoas, so extending the hip stretches the muscle and reproduces the pain: the psoas sign. And an inflamed retroperitoneal structure of any kind can wipe out the psoas shadow on a plain film."
     },
     {
       "mode": "cross_section",
@@ -801,9 +835,18 @@
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "l3",
           "intensity": 0.9
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "l3_tp_tip",
+          "intensity": 0.85
         }
       ],
-      "narration": "Cut across the muscle at L3 and you see why the lumbar plexus is where it is. Psoas arises in two sheets — one from the bodies and discs in front of the intervertebral foramina, one from the transverse processes behind them. The anterior rami of L1 to L4 emerge from the foramina straight into the cleft between those two sheets, and they branch and join there, inside the muscle. Learn the six branches and the side they leave by, because that is the question. Emerging on the LATERAL border, from above down: iliohypogastric and ilioinguinal, both from L1; then the lateral cutaneous nerve of the thigh from L2 and L3; then the femoral nerve, the largest, from L2, L3 and L4, in the groove between psoas and iliacus. Emerging on the MEDIAL border: the obturator nerve, L2, L3 and L4, and the lumbosacral trunk from L4 and L5. Piercing the ANTERIOR surface and running down on it: the genitofemoral nerve, L1 and L2. So a psoas haematoma — in a haemophiliac, or on an anticoagulant — presents as a flexed hip with a femoral nerve palsy: weak knee extension, lost knee jerk, numbness over the front of the thigh and the medial leg. That single presentation tests the whole of this beat."
+      "narration": "No nerve in this beat is drawn — the catalog holds no branch of the lumbar plexus, so what you see is the muscle and the vertebra, and the plexus is described onto them. Cut across the muscle at L3 and you see why the lumbar plexus is where it is. Psoas arises in two sheets — one from the bodies and discs in front of the intervertebral foramina, one from the transverse processes behind them. The anterior rami of L1 to L4 emerge from the foramina straight into the cleft between those two sheets, and they branch and join there, inside the muscle. Learn the six branches and the side they leave by, because that is the question. Emerging on the LATERAL border, from above down: iliohypogastric and ilioinguinal, both from L1; then the lateral cutaneous nerve of the thigh from L2 and L3; then the femoral nerve, the largest, from L2, L3 and L4, in the groove between psoas and iliacus. Emerging on the MEDIAL border: the obturator nerve, L2, L3 and L4, and the lumbosacral trunk from L4 and L5. Piercing the ANTERIOR surface and running down on it: the genitofemoral nerve, L1 and L2. So a psoas haematoma — in a haemophiliac, or on an anticoagulant — presents as a flexed hip with a femoral nerve palsy: weak knee extension, lost knee jerk, numbness over the front of the thigh and the medial leg. That single presentation tests the whole of this beat."
     },
     {
       "mode": "location",
@@ -852,6 +895,11 @@
             "right_ql"
           ],
           "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ql_iliac_attachment",
+          "intensity": 0.8
         }
       ],
       "narration": "The wall has a roof and a doorway, and both are made of arches. Above, the diaphragm cannot sit on the muscles or they could not pass, so it arches over each one on a thickened band of fascia. The medial arcuate ligament runs from the body of L1 or L2 to the transverse process of L1, over psoas; the lateral arcuate ligament continues from that transverse process out to the twelfth rib, over quadratus lumborum. The sympathetic trunk enters the abdomen behind the medial arch. Below, psoas and iliacus leave together under the inguinal ligament. The gap beneath that ligament is split by the iliopectineal arch into a lateral muscular compartment — iliopsoas and the femoral nerve — and a medial vascular one — femoral artery, vein and canal. Remember the order laterally to medially at the mid-inguinal point: nerve, artery, vein, empty space, lymph node. NAVEL."
@@ -904,14 +952,16 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "No nerve of the lumbar plexus exists in the catalog. The femoral, obturator, genitofemoral, iliohypogastric and ilioinguinal nerves, the lateral cutaneous nerve of the thigh and the lumbosacral trunk all have no model, so beat four teaches the plexus entirely by narration over a CROSS_SECTION of the muscle. This is the weakest point of the scene, because the plexus is the reason psoas is examined at all. Every branch and every root value is carried in match.terms and in the psoas structure's terms[], so a note naming any of them still opens this scene at the right subject.",
     "Psoas minor is absent from the catalog. It is present in only about sixty per cent of people and is not examinable in its own right, so its omission costs little, but the scene cannot show the student the small muscle they may meet in the dissecting room in front of psoas major.",
     "There is no psoas fascia and no iliac fascia. The fascial sheath is the whole mechanism of a psoas abscess tracking to the groin, and it cannot be drawn: beat six traces the route through the muscle body itself as the nearest honest approximation, and says in narration that the sheath is what confines the pus. PEEL_LAYER is authored in beat four so the beat becomes real the day layered models exist; today it degrades to hiding the muscle layer.",
     "The lumbar sympathetic trunk, the lumbar arteries and the gonadal vessels are not in the catalog, so three of psoas's named relations are narrated rather than shown.",
-    "No landmark anchors were authored. The lesser trochanter, the sacral promontory, the tips of the lumbar transverse processes and the mid-inguinal point would all be worth anchoring, but anchors in this corpus are placed by measurement on the actual geometry and these meshes are not in the local decimated set. An anchor dropped where a region merely looks right teaches a wrong point the student cannot detect.",
+    "CORRECTED 2026-08-29: this note used to read 'No landmark anchors were authored' — while the same file carried two, the iliac fossa and the lesser trochanter, both measured and both reviewed in the viewer on 2026-08-28. The note was written before them and never revised, and it also claimed the meshes were not in meshes-lite/, which they are. Two further anchors have now been measured and added: the tip of the L3 transverse process by EXTREME -x (the widest point of a lumbar vertebra is that tip) and the iliac attachment of quadratus lumborum by CONTACT against FMA22348 at 0.15 mm. Four anchors total; the two new ones are status needs-review. The sacral promontory was attempted and NOT authored: EXTREME -y inside the top slab of the sacrum lands at u=0.69, off the midline and out on the ala, and the promontory is a midline lip. It is neither of derive-landmark.mjs's two definitions, so it is left unauthored rather than placed at a plausible-looking coordinate. The mid-inguinal point is likewise unauthorable — it is defined against the pubic symphysis and the anterior superior iliac spine as a point in soft tissue, not a point on any mesh.",
     "The intervertebral disc of L2 stands in for all five lumbar discs, which are separate models in the catalog. Only one is shown, to make the point that the discs are part of the origin, without turning the lumbar spine group into a wall of identical labels.",
     "This scene does not claim to cover 'Kidney', 'Ureters' or 'Abdominal aorta & IVC' although all three appear in it. They are here as relations of psoas, to teach the wall as a bed, not as structures in their own right; all three already have their own scenes.",
     "Ribs and inguinal ligaments are single-sided models. The right twelfth rib and right inguinal ligament are shown; the left-sided equivalents exist in the catalog but were omitted so the bony attachment group stays readable, since the teaching point is the level and the doorway rather than the side."

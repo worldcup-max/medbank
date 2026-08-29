@@ -533,7 +533,7 @@
         "artery of the ligament of the head",
         "foveolar artery"
       ],
-      "narration": "The obturator artery comes off this trunk, leaves the pelvis through the obturator foramen, and sends an acetabular branch along the ligament of the head. That is the third and smallest source of blood to the head."
+      "narration": "The obturator artery comes off this trunk, leaves the pelvis through the obturator foramen, and sends an acetabular branch along the ligament of the head. That is the second and smallest of the three sources of blood to the head, and the one that fails first."
     },
     {
       "key": "ext_iliac_vein",
@@ -878,6 +878,8 @@
     "author": "task",
     "authored_at": "2026-08-27",
     "audited_at": "2026-08-29",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   }
 }

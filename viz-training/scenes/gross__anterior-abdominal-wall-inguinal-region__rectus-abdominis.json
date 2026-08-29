@@ -541,7 +541,7 @@
         "xiphoid process",
         "xiphisternum",
         "upper end of the linea alba",
-        "T9 dermatome"
+        "T6 dermatome"
       ],
       "narration": "The top of the midline. The linea alba runs from here to the pubic symphysis, and the medial fibres of both recti take hold of it."
     },
@@ -877,7 +877,9 @@
     "author": "task",
     "authored_at": "2026-08-27",
     "audited_at": "2026-08-28",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   },
   "gaps": [
     "The tendinous intersections have no mesh and never will — they are markings on the muscle, not objects. Three of them are usually described, at the xiphoid, the umbilicus and midway between, and they are the reason the six-pack is visible and the reason a rectus sheath haematoma above the umbilicus is compartmentalised while one below it is free to spread. All of that is narration in this scene. A provider that shipped rectus abdominis as several bellies rather than one would let this be shown.",

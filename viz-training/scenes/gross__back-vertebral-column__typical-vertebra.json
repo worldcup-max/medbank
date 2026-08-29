@@ -86,14 +86,14 @@
       "anchor": {
         "on": "l2",
         "uvw": [
-          0.5233,
-          0.2081,
-          0.6857
+          0.5453,
+          0.1898,
+          0.4324
         ],
         "radius": 0.022
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — midline ray: solid from Y -114.7 to -81.5 — 33.2 mm of bone in front of the canal; centred vertically in a 24.6 mm span of body",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — midline ray: solid from Y -114.7 to -81.5 — 33.2 mm of bone in front of the canal; centred vertically in a 24.6 mm span of body · snapped 12.5 mm onto the parent's surface (-y, the aspect the narration describes): the measured point marks a volume, and a patch can only be painted on a surface",
       "calibration_gap_mm": 0,
       "terms": [
         "vertebral body",
@@ -112,14 +112,14 @@
       "anchor": {
         "on": "l2",
         "uvw": [
-          0.5233,
-          0.5225,
-          0.47
+          0.4747,
+          0.6142,
+          0.4924
         ],
         "radius": 0.022
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — midline ray: hollow from Y -81.5 to -63.8 — a 17.7 mm gap between body and arch",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — midline ray: hollow from Y -81.5 to -63.8 — a 17.7 mm gap between body and arch · snapped 8.4 mm onto the parent's surface: the measured point marks a volume, and a patch can only be painted on a surface",
       "calibration_gap_mm": 0,
       "terms": [
         "vertebral foramen",
@@ -326,7 +326,7 @@
         "pedicle",
         "pedicles"
       ],
-      "narration": "The short thick bridge from the body back to the arch. The notches above and below it make the intervertebral foramen where the nerve leaves."
+      "narration": "The short thick bridge from the body back to the arch. Its own lower notch, meeting the upper notch of the pedicle below, makes the intervertebral foramen where the nerve leaves."
     },
     {
       "key": "pedicle_right",
@@ -570,6 +570,7 @@
     },
     {
       "mode": "cross_section",
+      "beat": 4,
       "title": "Body in front, ring behind",
       "ops": [
         {
@@ -591,7 +592,7 @@
     },
     {
       "mode": "associated_organs",
-      "beat": 3,
+      "beat": 5,
       "title": "How the neighbours lock on",
       "ops": [
         {
@@ -623,10 +624,11 @@
           "view": "lateral"
         }
       ],
-      "narration": "Two vertebrae meet in three places: a disc between the bodies and a small synovial joint on each side between the articular processes. The notch left between the pedicles is the intervertebral foramen, and the spinal nerve leaves through it."
+      "narration": "Two vertebrae meet in three places: a disc between the bodies and a small synovial joint on each side between the articular processes. Their pedicles leave a window between them — the notch under the pedicle above meeting the notch over the pedicle below — and that window is the intervertebral foramen, through which the spinal nerve leaves."
     },
     {
       "mode": "comparison",
+      "beat": 6,
       "title": "Same plan, three regions",
       "ops": [
         {
@@ -658,7 +660,9 @@
     "author": "task",
     "authored_at": "2026-08-26",
     "landmarks_by": "tools/derive-vertebra-landmarks.mjs",
-    "landmarks_at": "2026-08-26"
+    "landmarks_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "The named parts of a typical vertebra have no separate models in the catalog — a whole vertebra is the smallest unit it holds. They are therefore placed as landmark anchors on the L2 mesh, measured on the geometry by tools/derive-vertebra-landmarks.mjs rather than estimated.",

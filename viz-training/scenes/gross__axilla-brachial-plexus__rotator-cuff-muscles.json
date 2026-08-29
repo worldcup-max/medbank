@@ -259,6 +259,81 @@
       "narration": "Three facets on one bump. Supraspinatus takes the top, infraspinatus the middle, teres minor the lowest."
     },
     {
+      "key": "facet_superior",
+      "label": "Greater tubercle — superior facet",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffe08a",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.5516,
+          0.4058,
+          0.9823
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the humerus and supraspinatus, measured on the source meshes (gap 0.34 mm) — tools/derive-landmark.mjs --parent FMA23130 --contact FMA32544",
+      "terms": [
+        "superior facet",
+        "superior facet of greater tubercle",
+        "supraspinatus insertion"
+      ],
+      "narration": "The top facet. Supraspinatus lands here, the highest of the three, which is why its tendon is the one that rubs under the acromion."
+    },
+    {
+      "key": "facet_middle",
+      "label": "Greater tubercle — middle facet",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.5564,
+          0.7226,
+          0.9516
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the humerus and infraspinatus, measured on the source meshes (gap 0.06 mm) — tools/derive-landmark.mjs --parent FMA23130 --contact FMA32547",
+      "terms": [
+        "middle facet",
+        "middle facet of greater tubercle",
+        "infraspinatus insertion"
+      ],
+      "narration": "The middle facet, behind and below the superior one. Infraspinatus lands here."
+    },
+    {
+      "key": "facet_inferior",
+      "label": "Greater tubercle — inferior facet",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#f0a83a",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.5303,
+          0.6131,
+          0.9251
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the humerus and teres minor, measured on the source meshes (gap 0.23 mm) — tools/derive-landmark.mjs --parent FMA23130 --contact FMA32553",
+      "terms": [
+        "inferior facet",
+        "inferior facet of greater tubercle",
+        "teres minor insertion"
+      ],
+      "narration": "The lowest facet. Teres minor lands here. Measured on the mesh the three sit in the order the textbook gives them — supraspinatus highest, then infraspinatus, then teres minor."
+    },
+    {
       "key": "lesser_tubercle",
       "label": "Lesser tubercle",
       "role": "part",
@@ -361,19 +436,19 @@
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "supraspinatus",
-          "to": "greater_tubercle",
+          "to": "facet_superior",
           "kind": "inserts on"
         },
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "infraspinatus",
-          "to": "greater_tubercle",
+          "to": "facet_middle",
           "kind": "inserts on"
         },
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "teres_minor",
-          "to": "greater_tubercle",
+          "to": "facet_inferior",
           "kind": "inserts on"
         },
         {
@@ -383,7 +458,7 @@
           "kind": "inserts on"
         }
       ],
-      "narration": "Three go to the greater tubercle, one to the lesser. That single fact carries the whole movement story."
+      "narration": "Three go to the greater tubercle — supraspinatus to the superior facet, infraspinatus to the middle, teres minor to the inferior — and one, subscapularis, to the lesser. That single fact carries the whole movement story."
     },
     {
       "mode": "contraction_filter",
@@ -453,11 +528,12 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
-    "The catalog has no separate meshes for the three facets of the greater tubercle, so the superior, middle and inferior facets are taught in narration on one landmark rather than as three targets.",
+    "RESOLVED 2026-08-29 audit. The catalog has no separate meshes for the three facets of the greater tubercle, but it does not need them: each facet is defined by the tendon that lands on it, and all four cuff meshes are held locally, so each facet was MEASURED as the contact point between the humerus and its muscle — supraspinatus 0.34 mm, infraspinatus 0.06 mm, teres minor 0.23 mm. The three now exist as separate anchors and beat 4 points each muscle at its own facet instead of all three at one bump. The measurement checks itself: the three come out in descending height on the bone (w = 0.982, 0.952, 0.925) in exactly the order the textbook gives them, which is not something a guess would produce.",
     "There is no mesh for the joint capsule or the subacromial bursa, so the cuff's blending with the capsule and the site of subacromial impingement are described but not shown.",
-    "The greater tubercle anchor is an EXTREME (the most lateral point of the proximal 12% of the bone), not a contact measurement, because no supraspinatus mesh is held locally to measure a contact against. The lesser tubercle anchor IS a contact (subscapularis, gap 0.09 mm). Both stay status:\"needs-review\" until a human has looked at them once."
-  ]
+    "CORRECTED 2026-08-29 audit. This note previously said the greater tubercle anchor had to be an EXTREME because no supraspinatus mesh was held locally to measure a contact against. That was false — FMA32544 is in meshes-lite, as are all four cuff muscles, and re-running the contact derivation gave uvw [0.5516, 0.4058, 0.9823] at a gap of 0.34 mm. The greater_tubercle anchor is deliberately LEFT as the extreme, because the extreme is the tubercle as a whole while a contact is one facet of it; the contact measurements are authored as the three new facet anchors instead. The two agree to within 0.06 of a uvw unit, which is the corroboration the extreme never had. The lesser tubercle anchor IS a contact (subscapularis, gap 0.09 mm) and re-derived to the same coordinate this run. All anchors stay status:\"needs-review\" until a human has looked at them once."  ]
 }

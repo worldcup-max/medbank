@@ -353,7 +353,9 @@
       "terms": [
         "flexor retinaculum",
         "transverse carpal ligament",
-        "roof of the carpal tunnel"
+        "roof of the carpal tunnel",
+        "carpal tunnel",
+        "median nerve"
       ],
       "narration": "A tough band across the front of the wrist. The long flexor tendons pass under it."
     },
@@ -388,7 +390,9 @@
       },
       "terms": [
         "ulnar head of pronator teres",
-        "coronoid process"
+        "coronoid process",
+        "median nerve",
+        "pronator syndrome"
       ],
       "narration": "From the coronoid process of the ulna. The median nerve runs between the two heads — the site of pronator syndrome."
     },
@@ -608,7 +612,7 @@
           "view": "anterior"
         }
       ],
-      "narration": "Four superficial muscles, all from the medial epicondyle. Lateral to medial: pronator teres, flexor carpi radialis, palmaris longus, flexor carpi ulnaris."
+      "narration": "Four superficial muscles, all sharing the common flexor origin on the medial epicondyle. Lateral to medial: pronator teres, flexor carpi radialis, palmaris longus, flexor carpi ulnaris. Two of them have a second head that does not come from the epicondyle — pronator teres from the coronoid process, flexor carpi ulnaris from the olecranon — and both of those second heads matter because a nerve passes between the pair."
     },
     {
       "mode": "location",
@@ -896,11 +900,14 @@
   "gaps": [
     "The catalog holds no nerve or artery meshes for the upper limb, so the median nerve between the heads of pronator teres, the ulnar nerve between the heads of flexor carpi ulnaris, and the radial and ulnar arteries are taught in narration only. Nerve supply — median nerve to everything here except flexor carpi ulnaris and the ulnar half of profundus — cannot be shown as a structure.",
     "Pronator teres, flexor carpi ulnaris and flexor digitorum superficialis have no whole-muscle mesh; each is authored from its two heads, which is anatomically finer and teaches the nerve relationships better, but a student list will show two entries per muscle.",
-    "There is no mesh for the common flexor origin, the bicipital aponeurosis or the antebrachial fascia, so those attachments are described rather than shown. The interosseous membrane is NOT missing — FMA23707 is in the catalog and is authored as a part of the Radius & ulna scene — and it is the boundary this compartment is defined by, so it should be added here.",
-    "All four fingers reached by the long flexor tendons are now drawn as proximal, middle and distal phalanges (FMA24451/24455/24460 index, FMA24452/24456/24461 middle, FMA24453/24457/24462 ring, FMA24454/24458/24463 little), so the four-tendon fan is shown rather than described. Of the six newly added, only the three proximal phalanges are in the local mesh set today; the middle and distal phalanges of index, ring and little finger (FMA24455, FMA24460, FMA24457, FMA24462, FMA24458, FMA24463) are catalogued but not yet fetched, so until they are, beat 7's insertion pairs and beat 8's fan traces render on the middle finger only."
+    "There is no mesh for the common flexor origin, the bicipital aponeurosis or the antebrachial fascia, so those attachments are described rather than shown. The interosseous membrane is present and authored here as FMA23707; this note previously said it still needed adding, which was stale.",
+    "All four fingers reached by the long flexor tendons are drawn as proximal, middle and distal phalanges (FMA24451/24455/24460 index, FMA24452/24456/24461 middle, FMA24453/24457/24462 ring, FMA24454/24458/24463 little), so the four-tendon fan is shown rather than described. As of the 2026-08-29 audit every one of these is in the local mesh set, so beat 7's insertion pairs and beat 8's fan traces render on all four digits; the earlier note saying only the middle finger would draw is stale.",
+    "Beat 9 peels the fascia layer, which removes the interosseous membrane along with the flexor retinaculum because both are tagged fascia. The teaching point of the beat is the retinaculum, and the membrane is out of frame at the wrist, so this is harmless today — but a renderer that peels per-structure rather than per-layer should peel the retinaculum alone."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

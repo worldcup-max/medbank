@@ -75,13 +75,19 @@ first rib and clavicle, so the interscalene groove that beat 1 teaches is render
 
 ## 2 · Views the curriculum asks for and the scene does not have
 
-- `back-vertebral-column__spinal-cord-in-vertebral-canal` — curriculum requires a `vasculature` view
+- DONE (2026-08-28: catalog re-searched under ten spellings — no vertebral, spinal, radicular, segmental
+  medullary, posterior intercostal or lumbar vessel exists; gap note added, view correctly not authored)
+  `back-vertebral-column__spinal-cord-in-vertebral-canal` — curriculum requires a `vasculature` view
   ("segmental blood supply"). There is none, and `gaps[]` does not record the omission even though it
   records six others. It is genuinely unauthorable (no vertebral or spinal artery in the catalog), so
   the fix is the gap note, not the view.
-- `embryology__pharyngeal-apparatus__pharyngeal-pouches` — curriculum requires `glands`. Beat 3 and
+- DONE (2026-08-28: beat 3 re-moded `associated_organs` → `glands`; beat 5 left as-is; gap note added)
+  `embryology__pharyngeal-apparatus__pharyngeal-pouches` — curriculum requires `glands`. Beat 3 and
   beat 4 already *are* glands views (thymus, both parathyroid pairs, the C cells); they are moded
   `associated_organs`. Re-mode one.
+
+**SECTION 2 IS NOW CLEAR (2026-08-28).** Sections 1 and 2 are both clear; the next run falls through
+to the audit walk at `next to audit`.
 
 **Neither was caught by validation.** Nothing in the eight stages compares a scene's view modes to the
 `views` its curriculum entry asks for. That check is worth adding — it is a three-line comparison and
@@ -94,17 +100,28 @@ it is the only thing standing between the corpus and a silently incomplete scene
 - **`arm__humerus`** promises "the four places it commonly breaks" in its learning goal and beat 7
   delivers three; `arm__median-ulnar-radial-nerves` `gaps[1]` then defers to a fourth that was never
   written. Either add the supracondylar/median-nerve pair to beat 7 or drop "four" from both.
-- **kidney vs ureters** give different segmental levels for the same referred pain — T10–L1 in one,
-  T11–L2 in the other. The right answer is kidney T10–L1, ureter T11–L2; say both in both.
+- DONE (2026-08-29 audit) **kidney vs ureters** give different segmental levels for the same referred pain — T10–L1 in one,
+  T11–L2 in the other. The right answer is kidney T10–L1, ureter T11–L2; say both in both. — both scenes
+  now state both levels and use the one-segment difference to explain the loin-to-groin march itself,
+  rather than leaving it as two numbers that look like a contradiction.
 - **liver vs spleen** each claim to be the most commonly injured abdominal organ, in the same topic.
   Split it by mechanism: spleen commonest in blunt trauma, liver in penetrating.
-- **`inguinal-ligament-landmarks` vs `inguinal-canal`** teach the deep-ring occlusion test as
-  diagnostic and as unreliable respectively. The canal scene is right.
-- **`inguinal-ligament-landmarks`** conflates the supracristal plane (highest point of the crest, L4)
-  with the transtubercular plane (tubercle of the crest, L5) on one anchor, and the anchor's geometry
-  is the supracristal point while its terms claim both.
-- **`forearm-hand__radius-ulna`** `gaps[]` says eleven anchors were derived; there are ten. The
-  obvious eleventh is the neck of the radius, which the head narration already names.
+- DONE (2026-08-28 audit) **`inguinal-ligament-landmarks` vs `inguinal-canal`** teach the deep-ring
+  occlusion test as diagnostic and as unreliable respectively. The canal scene is right. — the landmarks
+  scene now states the test, then says it is unreliable and that the inferior epigastric artery settles
+  it at operation, matching the canal scene word for sense.
+- DONE (2026-08-28 audit) **`inguinal-ligament-landmarks`** conflates the supracristal plane (highest
+  point of the crest, L4) with the transtubercular plane (tubercle of the crest, L5) on one anchor, and
+  the anchor's geometry is the supracristal point while its terms claim both. — anchor relabelled
+  "Iliac crest — highest point (supracristal plane)", `terms` reduced to the supracristal set, and the
+  narration now names the tubercle and the L5 transtubercular plane explicitly as the OTHER point.
+- DONE (2026-08-29 audit) **`forearm-hand__radius-ulna`** `gaps[]` says eleven anchors were derived;
+  there are ten. The obvious eleventh is the neck of the radius, which the head narration already names.
+  — count corrected to ten. The neck was NOT authored, and that is the finding: a neck is the narrowest
+  cross-section, which is neither of `derive-landmark.mjs`'s two definitions. The nearest measurable
+  proxy, contact between the radius and supinator, converges at 0.21 mm but on one witness and lands at
+  w=0.81, below the radial tuberosity at w=0.83 — upper shaft, not neck. Recorded in the scene's `gaps[]`
+  with the measurement, so no later run re-derives it and believes it.
 - **`back-vertebral-column__typical-vertebra`** — `CORPUS.md` records 16 landmarks, the file has 13.
 - **Eight views across the four Back & Vertebral Column scenes carry no `beat` number**, and
   `typical-vertebra` numbers two different beats "3". Every run reported the validator clean, because
@@ -190,6 +207,12 @@ amount of re-searching will change them.
 - **The four heart chambers** — `tools/ingest-full-archive.mjs --fetch` on FMA7096, FMA7097, FMA7098,
   FMA7101, FMA7236, FMA7133. Called "the cheapest win on the list" in three separate runs; the script
   is already written and has never been run.
+- **The anterior interventricular artery (the LAD).** Added 2026-08-29. Searched under anterior
+  interventricular, interventricular, descending, anterior descending, paraconal and marginal: the catalog
+  holds only `set of interventricular septal branches` FMA71669/FMA71670, which are intramural and not the
+  groove vessel. The commonest infarct territory in medicine has no artery drawn anywhere in the corpus.
+  `gross__heart-pericardium__heart` now uses the great cardiac vein as an explicit stand-in for the groove
+  and says so in narration. Highest-value cardiac mesh after the four chambers.
 - Ligaments beyond the inguinal and long plantar; fascia and retinacula beyond the wrist flexor
   retinaculum; renal internal architecture; the branches of the internal iliac artery.
 
@@ -205,8 +228,13 @@ anchors to students today and says so in its own `gaps[]`.
 - **`CAPABILITIES.svg` is `{ native: [], degraded: [] }`.** Every op in every diagram or sequence
   scene therefore warns "unknown to the svg adapter" — 1209 warnings across the corpus, which is
   precisely the volume that trains people to stop reading warnings. Raised in a dozen consecutive runs.
-- **No beat-ordinal check** in the validator (see §3).
-- **No curriculum-view-coverage check** in the validator (see §2).
+- **No beat-ordinal check** in the validator (see §3). *Confirmed beyond Back & Vertebral Column on
+  2026-08-29: `gross__heart-pericardium__heart` had views numbered 1, 2, (none), 3, (none) and had been
+  reported clean by every run since it was authored. Renumbered. Assume other scenes are affected.*
+- **No curriculum-view-coverage check** in the validator (see §2). *This is now the second and third scene
+  found missing a required view — `abdominal-aorta-ivc` had no `associated_organs` beat at all on
+  2026-08-29, on a `ready` scene. Three misses across two audits is enough: this three-line comparison is
+  the highest-value validator change on the list.*
 - **`DEMAND.json` has never been built.** `tools/build-demand.mjs` exists and has never been run, so
   the demand-priority branch of the authoring task has never once executed. An untested branch in a
   scheduled task is a branch that will surprise someone.

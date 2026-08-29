@@ -719,9 +719,12 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-28",
+    "audited_by": "task"
   },
   "gaps": [
+    "Audit 2026-08-28: gaps[2] below says the humerus scene pairs each of FOUR fracture sites with the nerve at risk. Until today that scene taught three, and this sentence was the only place the fourth was promised. The supracondylar region has now been measured and authored on gross__arm__humerus and beat 7 there names four sites and four nerves, so the cross-reference is true. Nothing in this scene changed.",
     "Routed to its deferred diagram mode, not to 3D. The catalog holds no nerve of the upper limb — the only nerve models in all 934 entries are the right and left optic nerves. There is nothing to resolve for a single one of this scene's thirteen nerve structures. 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes: this becomes a 3D scene the day upper-limb nerve models exist, with no curriculum edit.",
     "This scene deliberately does NOT repeat the humerus scene's radial nerve beat. That scene is 3D and already traces the radial nerve as a concept along measured bony waypoints on the real humerus mesh, and pairs each of the four fracture sites with the nerve at risk. What it cannot do is show the median and ulnar nerves, the motor territories or the sensory maps, because none of those are bone. This scene is that half: three whole courses, what each nerve moves, what each nerve feels, and how to read a deformed hand backwards to the lesion. A student who works through both has the topic.",
     "Status is 'planned', not 'ready'. Structures, seven beats, ops and narration are fully authored, but no artwork has been drawn for the SVG engine, so nothing renders today. Promote to 'ready' once the three-nerve arm artwork exists — an anterior view, a posterior view and a hand map — with the labelled regions this scene names.",

@@ -369,7 +369,7 @@
         "superficial inguinal ring",
         "rolled backwards on itself"
       ],
-      "narration": "The bottom edge of the sheet. It has no bone to attach to between the anterior superior iliac spine and the pubic tubercle, so it rolls backwards on itself and becomes the inguinal ligament. A triangular gap in the aponeurosis just above and lateral to the pubic tubercle is the superficial inguinal ring. The whole inguinal region is built on this one free border."
+      "narration": "The bottom edge of the sheet. It has no bone to attach to between the anterior superior iliac spine and the pubic tubercle, so it rolls backwards on itself and becomes the inguinal ligament. A triangular gap in the aponeurosis just above and medial to the pubic tubercle is the superficial inguinal ring. The whole inguinal region is built on this one free border."
     },
     {
       "key": "eo_lateral_digitations",
@@ -850,7 +850,9 @@
     "author": "task",
     "authored_at": "2026-08-27",
     "audited_at": "2026-08-28",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   },
   "gaps": [
     "The catalog carries no aponeurosis as a separate object — every flat muscle is one mesh from its fleshy origin to its tendinous end. So the single most important fact in this topic, that a muscle becomes a sheet and that the sheet then chooses a side of the rectus, is taught by relationships and by one measured contact rather than by anything the student can see change. A provider that shipped muscle and aponeurosis separately would close this outright, and it is the highest-value acquisition for this topic.",

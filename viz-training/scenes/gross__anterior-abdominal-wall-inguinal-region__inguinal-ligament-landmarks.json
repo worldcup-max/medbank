@@ -140,7 +140,7 @@
         "hands in pockets",
         "rolled under"
       ],
-      "narration": "Follow the external oblique down and its aponeurosis simply runs out of bone. Between the anterior superior iliac spine and the pubic tubercle it has no attachment, so the free edge folds under and back, and that fold is the inguinal ligament. A triangular defect in the same aponeurosis just above and lateral to the pubic tubercle is the superficial inguinal ring."
+      "narration": "Follow the external oblique down and its aponeurosis simply runs out of bone. Between the anterior superior iliac spine and the pubic tubercle it has no attachment, so the free edge folds under and back, and that fold is the inguinal ligament. A triangular defect in the same aponeurosis just above and medial to the pubic tubercle is the superficial inguinal ring."
     },
     {
       "key": "extiliac_a_r",
@@ -274,16 +274,16 @@
       "color": "#e74c3c",
       "render": "anchor",
       "anchor": {
-        "on": "hip_r",
+        "on": "inglig_r",
         "uvw": [
-          0.559,
-          0.085,
-          0.451
+          0.5421,
+          0.6379,
+          0.4125
         ],
         "radius": 0.025
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: MIDPOINT — halfway between the measured ASIS and the measured pubic symphysis. This is the textbook definition of the mid-inguinal point carried out on the bone, not an estimate. It lies off the bone surface, in soft tissue, which is correct: the femoral artery is there; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "calibrated_by": "geometry: MIDPOINT — halfway between the measured ASIS and the measured pubic symphysis. This is the textbook definition of the mid-inguinal point carried out on the bone, not an estimate. It lies off the bone surface, in soft tissue, which is correct: the femoral artery is there; see tools/derive-inguinal-sheath-landmarks.mjs · re-parented onto inglig_r and snapped 11.8 mm onto its surface: the point lies on that structure, not on hip_r, and a patch can only be painted on a surface",
       "terms": [
         "mid-inguinal point",
         "midway between ASIS and pubic symphysis",
@@ -302,16 +302,16 @@
       "color": "#8e44ad",
       "render": "anchor",
       "anchor": {
-        "on": "hip_r",
+        "on": "inglig_r",
         "uvw": [
-          0.541,
-          0.04,
-          0.474
+          0.4982,
+          0.561,
+          0.4575
         ],
         "radius": 0.025
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: MIDPOINT — halfway between the measured ASIS and the measured pubic crest. The true midpoint of the inguinal ligament is halfway between ASIS and PUBIC TUBERCLE; the tubercle could not be isolated in this model, so the pubic crest stands in for it and this point sits slightly MEDIAL to the true midpoint. The deep inguinal ring itself is not emitted at all — it is an opening in the transversalis fascia, which has no model; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "calibrated_by": "geometry: MIDPOINT — halfway between the measured ASIS and the measured pubic crest. The true midpoint of the inguinal ligament is halfway between ASIS and PUBIC TUBERCLE; the tubercle could not be isolated in this model, so the pubic crest stands in for it and this point sits slightly MEDIAL to the true midpoint. The deep inguinal ring itself is not emitted at all — it is an opening in the transversalis fascia, which has no model; see tools/derive-inguinal-sheath-landmarks.mjs · re-parented onto inglig_r and snapped 11.1 mm onto its surface: the point lies on that structure, not on hip_r, and a patch can only be painted on a surface",
       "terms": [
         "midpoint of the inguinal ligament",
         "midway between ASIS and pubic tubercle",
@@ -795,7 +795,9 @@
     "author": "task",
     "authored_at": "2026-08-27",
     "audited_at": "2026-08-28",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   },
   "gaps": [
     "The PUBIC TUBERCLE — the single most clinically useful point in this scene — has no separate model and could not be isolated geometrically: nothing in the surface of the hip bone distinguishes the tubercle from the rest of the pubic crest. The anchor therefore carries the honest name 'pubic crest', measured as the point where the rectus abdominis actually meets the bone, and the narration says the tubercle lies at its lateral end, about two and a half centimetres from the midline. Everything taught against the tubercle — the hernia rule, the midpoint of the ligament — is stated against a landmark that is a centimetre or two medial to it, and says so.",

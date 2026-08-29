@@ -166,7 +166,7 @@
         "atrial appendage",
         "comb"
       ],
-      "narration": "Parallel muscle ridges like the teeth of a comb, in front of the crista and inside the auricle. Blood stagnates between them in atrial fibrillation, which is where the clot of a cardioembolic stroke forms."
+      "narration": "Parallel muscle ridges like the teeth of a comb, in front of the crista and inside the auricle. The same ridges line the left auricle, and it is there — not here — that blood stagnates in atrial fibrillation and the clot of a cardioembolic stroke forms. A clot on this side goes to the lungs, not the brain."
     },
     {
       "key": "fossa_ovalis",
@@ -565,7 +565,7 @@
         {
           "op": "CROSS_SECTION",
           "axis": "x",
-          "offset": 0.0,
+          "offset": 0,
           "animate": true
         },
         {
@@ -667,7 +667,11 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   },
   "gaps": [
     "Routed to its deferred diagram mode, not to 3D. The catalog holds no chamber at all: searching all 934 entries for atrium, ventricle, chamber and septum returns the four ventricles of the BRAIN, the septum pellucidum, the papillary muscles and the wall of heart, and nothing cardiac that is a chamber. The heart scene gross__heart-pericardium__heart deliberately does not claim to cover this structure for that reason, and authoring a second 3D scene from the same valves and papillary muscles would have repeated it without teaching a chamber.",
@@ -675,6 +679,7 @@
     "Status is 'planned', not 'ready'. The scene is fully authored — twenty-three regions, seven beats, ops and narration — but no artwork has been drawn for the SVG engine, so nothing renders today. Promote it to 'ready' once a four-chamber cut drawing exists with the labelled regions this scene names, or once the ingest above lets it become a 3D scene.",
     "The valves and great vessels are authored as context regions here even though six of them DO exist in the catalog (tricuspid FMA7234, mitral FMA7235, pulmonary FMA7246, and the caval, pulmonary and aortic vessels). They are context because the valves are taught in full by the heart scene; this scene borrows them only as the doors between chambers. The aortic valve is the one door with no model in either set.",
     "Beat 6 traces concept:blood through thirteen waypoints, several of which are the chambers themselves rather than a lumen. That is deliberate: the point of the beat is the ORDER, and a student who can say the order can answer the flow question in any form the exam asks it.",
+    "Audit 2026-08-29: beat 6's path steps straight from pulm_valve to pulm_veins_in, and its narration says 'out the pulmonary valve to the lungs'. The lungs, the pulmonary trunk's division and the pulmonary capillary bed are NOT drawn in this scene — the leg of the circuit between those two waypoints is described, not shown. Left as-is because the beat is explicitly about chamber order, but the illustrator should not draw a vessel joining those two points, and a student should not be asked to trace it.",
     "Wall thicknesses are given as the standard 3-5 mm right and 8-12 mm left. Chamber volumes, the conduction system's course through the septum, and the fibrous skeleton are not drawn — the conduction system has its own curriculum entry and its own scene to come."
   ]
 }

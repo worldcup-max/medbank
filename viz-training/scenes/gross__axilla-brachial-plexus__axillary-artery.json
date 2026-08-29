@@ -60,6 +60,17 @@
       "axillary vein",
       "cords of the brachial plexus",
       "ligation of the axillary artery",
+      "axillary nerve",
+      "triangular space",
+      "clavipectoral fascia",
+      "surgical neck of humerus",
+      "intertubercular groove",
+      "latissimus dorsi",
+      "serratus anterior",
+      "suprascapular artery",
+      "dorsal scapular artery",
+      "brachiocephalic trunk",
+      "arch of the aorta",
       "Screw The Lawyer Save A Patient"
     ]
   },
@@ -359,7 +370,7 @@
           "view": "anterior"
         }
       ],
-      "narration": "One continuous vessel runs from the aortic arch to the fingers and changes its name twice on the way. At the outer border of the first rib the subclavian becomes the axillary. At the lower border of teres major the axillary becomes the brachial. Those two landmarks are worth marks on their own."
+      "narration": "One continuous vessel runs from the root of the neck to the fingers and changes its name twice on the way. On the left the subclavian artery comes straight off the arch of the aorta; on the right it comes off the brachiocephalic trunk. From there the course is the same on both sides. At the outer border of the first rib the subclavian becomes the axillary. At the lower border of teres major the axillary becomes the brachial. Those two landmarks are worth marks on their own."
     },
     {
       "mode": "vasculature",
@@ -478,7 +489,7 @@
           "direction": "outward"
         }
       ],
-      "narration": "Peel the axillary sheath off and three things are inside it: the artery and the cords, wrapped together. The vein is outside the sheath, medial to the artery, and it is the structure at risk in a clearance. This arrangement is why one injection into the sheath anaesthetises the whole arm."
+      "narration": "Peel the axillary sheath off and four things are inside it: the second part of the artery and the three cords, wrapped together. The vein is outside the sheath, medial to the artery, and it is the structure at risk in a clearance. This arrangement is why one injection into the sheath anaesthetises the whole arm."
     },
     {
       "mode": "vasculature",
@@ -550,7 +561,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "Routed to its deferred diagram mode, not to 3D. The catalog has no axillary artery and none of its six branches — searching it for axillary, thoracoacromial, circumflex humeral and subscapular returns nothing. The nearest models are the subclavian artery and the subclavian vein, which are the proximal continuations, not this vessel. 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes.",
@@ -558,6 +571,9 @@
     "Status is 'planned', not 'ready'. Structures, six beats, ops and narration are all authored, but no artwork has been drawn for the SVG engine, so nothing renders today. Promote to 'ready' once the three-part artery with its six labelled branches exists as artwork and the engine can play the six beats.",
     "The scapular anastomosis is drawn as a single labelled region rather than as its individual vessels. The suprascapular and dorsal scapular arteries have no models and no separate diagram regions here; naming them inside the anastomosis region keeps beat 5 about the principle of collateral flow rather than about a vessel list.",
     "PEEL_LAYER in beat 4 is authored because the teaching move is to take the sheath off and see what is inside it. On a drawn diagram the engine will reveal the layer rather than remove geometry, which is the intended degradation.",
-    "The axillary sheath itself has no model in the catalog, as the axillary vessels scene also records. It exists here only as a diagram region."
+    "The axillary sheath itself has no model in the catalog, as the axillary vessels scene also records. It exists here only as a diagram region.",
+    "AUDIT 2026-08-29. Named in narration but not authored as a drawn region: the axillary nerve and the quadrangular and triangular spaces (beats 3 and 6), the clavipectoral fascia and the surgical neck and intertubercular groove of the humerus (branch narration), latissimus dorsi and serratus anterior as branch destinations, and the suprascapular and dorsal scapular arteries (folded into the single anastomosis region, as the note above records). All are now in match.terms so the scene is searchable by them, but the artwork must either draw them or the narration must keep describing them as named-not-shown. The quadrangular space in particular carries the surgical-neck teaching in beat 6 and is worth drawing.",
+    "AUDIT 2026-08-29. Beat 1 previously said the vessel 'runs from the aortic arch to the fingers', which is true only on the left; on the right the subclavian arises from the brachiocephalic trunk. Corrected. Beat 4 previously said 'three things are inside it: the artery and the cords', a count that matches neither reading; corrected to four — the second part of the artery and the three cords — which agrees with the sheath structure's own narration here and with the axillary vein scene's beat 5.",
+    "AUDIT 2026-08-29. Catalog re-searched under nine spellings — axillar, axillary, thoracoacromial, acromiothoracic, circumflex, subscapular, thoracodorsal, basilic, sheath. The only hits are 'circumflex branch of left coronary artery' and the subscapularis muscles; there is no upper-limb artery of any kind below the subclavian. The diagram routing stands on evidence, not on the earlier note."
   ]
 }

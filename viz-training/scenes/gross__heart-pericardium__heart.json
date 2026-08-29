@@ -16,7 +16,11 @@
   "gaps": [
     "The four chambers, the aortic valve and the interventricular septum are NOT in the free source set, but they ARE in the full BodyParts3D archive: right atrium FMA7096, left atrium FMA7097, right ventricle FMA7098, left ventricle FMA7101, aortic valve FMA7236. Run tools/ingest-full-archive.mjs --fetch on those ids to close this gap; no scene rewrite is needed beyond adding the parts.",
     "The pericardium is absent from BOTH source sets - it appears in neither the part-of nor the is-a parts list, so this gap cannot be closed from BodyParts3D at all. The pericardium half of this topic stays narration-only until another provider supplies it.",
-    "Until the ingest runs, the chambers are taught through their valves and papillary muscles, which is honest but second-best."
+    "Until the ingest runs, the chambers are taught through their valves and papillary muscles, which is honest but second-best. Add interventricular septum FMA7133 to the ingest list above — it was named in the first gap line and its id was missing from it until the 2026-08-29 audit.",
+    "Audit 2026-08-29, failure-mode-1 finding: the right lung was drawn with TWO lobes. The catalog carries the third under the side-less name 'middle lobe of lung', FMA7383 — not 'middle lobe of right lung' — and it is in meshes-lite. Added as context and named in beat 2. Because that catalog name carries no side, nothing in the id or the name says right; the side is asserted by this scene's label and terms, and a later run must not 'correct' it.",
+    "The anterior interventricular artery (the LAD) does not exist in the catalog under any of anterior interventricular, interventricular, descending, anterior descending or paraconal — only the interventricular SEPTAL branches as sets, FMA71669 and FMA71670, which are intramural and are not the groove vessel. The great cardiac vein now stands in for the anterior interventricular groove and its narration says so openly rather than implying the artery is on screen. The commonest infarct territory in the corpus therefore has no artery drawn anywhere; that is the highest-value cardiac mesh still missing after the four chambers.",
+    "The diaphragm, FMA13295, was named in beat 2's narration ('above the diaphragm') and not drawn. It is in the catalog and in meshes-lite, and has been added as a context structure in a new 'Floor' group; the narration now says the heart sits on it, which is also the relation the diaphragmatic surface needs.",
+    "Beat 4's flow trace passes through lung_ul_l as the single lung waypoint. One lobe is standing for the whole pulmonary circuit — the capillary bed where the blood actually changes colour is not a structure in any provider, so the colour change in the pump animation happens at that waypoint by convention, not by geometry."
   ],
   "provider": {
     "primary": "bodyparts3d",
@@ -344,7 +348,7 @@
     {
       "key": "great_cardiac_vein",
       "name": "great cardiac vein",
-      "label": "Great cardiac vein",
+      "label": "Great cardiac vein — the LAD runs beside it",
       "role": "part",
       "group": "Cardiac veins",
       "layer": "vessel",
@@ -353,9 +357,13 @@
         "bodyparts3d": "FMA4707"
       },
       "terms": [
-        "great cardiac vein"
+        "great cardiac vein",
+        "anterior interventricular artery",
+        "left anterior descending artery",
+        "LAD",
+        "anterior interventricular groove"
       ],
-      "narration": "Runs beside the anterior interventricular artery and drains into the coronary sinus."
+      "narration": "Runs up the anterior interventricular groove and turns left into the coronary sinus. The artery it accompanies in that groove — the anterior interventricular, the LAD of the cath lab — has no model in the catalog, so the vein is standing in for the groove: what you see lit here is the vein, and the artery lies alongside it. The anterior interventricular (left anterior descending) artery runs in this same groove and has no model in this set, so a search for LAD lands here: the vein marks the artery's course, and the artery itself is not drawn."
     },
     {
       "key": "coronary_sinus",
@@ -408,6 +416,24 @@
       "narration": ""
     },
     {
+      "key": "lung_ml_r",
+      "name": "middle lobe of lung",
+      "label": "Right lung — middle lobe",
+      "role": "context",
+      "group": "Lungs",
+      "layer": "organ",
+      "color": "#dfc5d4",
+      "refs": {
+        "bodyparts3d": "FMA7383"
+      },
+      "terms": [
+        "right lung",
+        "middle lobe",
+        "middle lobe of right lung"
+      ],
+      "narration": ""
+    },
+    {
       "key": "lung_ul_l",
       "name": "upper lobe of left lung",
       "label": "Left lung — upper lobe",
@@ -440,6 +466,24 @@
         "lower lobe"
       ],
       "narration": ""
+    },
+    {
+      "key": "diaphragm",
+      "name": "diaphragm",
+      "label": "Diaphragm",
+      "role": "context",
+      "group": "Floor",
+      "layer": "muscle",
+      "color": "#c9a49a",
+      "refs": {
+        "bodyparts3d": "FMA13295"
+      },
+      "terms": [
+        "diaphragm",
+        "central tendon",
+        "diaphragmatic surface of the heart"
+      ],
+      "narration": "The floor the heart rests on. Its central tendon carries the heart's diaphragmatic surface, which is why the apex beat moves when the diaphragm moves."
     },
     {
       "key": "trachea",
@@ -493,18 +537,23 @@
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "Lungs",
           "intensity": 0.25
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "diaphragm"
         }
       ],
-      "narration": "It nestles between the two lungs, above the diaphragm, with the great vessels rising from its top."
+      "narration": "It nestles between the two lungs and sits on the diaphragm, with the great vessels rising from its top. Note the lobes: three on the right — upper, middle and lower — and two on the left, because the heart's leftward tilt takes the space the third would have filled."
     },
     {
       "mode": "cross_section",
+      "beat": 3,
       "title": "Inside — the valves",
       "ops": [
         {
           "op": "CROSS_SECTION",
           "axis": "z",
-          "offset": 0.0,
+          "offset": 0,
           "animate": true
         },
         {
@@ -520,11 +569,11 @@
           "target": "Valves"
         }
       ],
-      "narration": "Cut it open and the four chambers are defined by their doors: tricuspid and pulmonary on the right, mitral on the left, each held shut by the papillary muscles."
+      "narration": "Cut it open and the chambers are defined by their doors. Two kinds. The atrioventricular valves — tricuspid on the right, mitral on the left — are held down by chordae running to the papillary muscles, so they cannot blow back into the atrium. The semilunar valves — pulmonary here, and the aortic, which has no model in this set and sits behind and to its right — have no chordae and no papillary muscles at all; they snap shut on the back-pressure of the blood itself."
     },
     {
       "mode": "mechanism",
-      "beat": 3,
+      "beat": 4,
       "title": "How it works — one beat",
       "ops": [
         {
@@ -535,6 +584,7 @@
             "tricuspid",
             "pulm_valve",
             "pulm_artery",
+            "lung_ul_l",
             "pulm_vein",
             "mitral",
             "asc_aorta",
@@ -555,6 +605,7 @@
     },
     {
       "mode": "vasculature",
+      "beat": 5,
       "title": "Its own blood supply",
       "ops": [
         {
@@ -581,6 +632,10 @@
     "author": "human",
     "authored_at": "2026-08-23",
     "approved_by": "frank",
-    "approved_at": "2026-08-23"
+    "approved_at": "2026-08-23",
+    "audited_at": "2026-08-29",
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   }
 }

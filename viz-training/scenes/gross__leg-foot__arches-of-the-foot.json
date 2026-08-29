@@ -540,7 +540,7 @@
         "adduction of the toes",
         "PAD"
       ],
-      "narration": "One of the three plantar interossei, the fourth layer of the sole. They adduct the toes towards the second — PAD, as in the hand — and with the other short muscles they are the active support of the arches, which is why the arch falls when the foot is tired and holds when it is working."
+      "narration": "The first of the three plantar interossei, arising from the medial side of the third metatarsal and pulling the third toe towards the second. There are three, not four, because the second toe is the line the others are pulled towards and cannot be adducted to itself — PAD, plantar adduct, as in the hand. As a group they run along the metatarsals and shorten the forefoot under load, so they are part of the active support of the transverse arch: the arch falls when the foot is tired and holds when it is working."
     },
     {
       "key": "plantar_io_2",
@@ -560,7 +560,7 @@
         "adduction of the toes",
         "PAD"
       ],
-      "narration": "One of the three plantar interossei, the fourth layer of the sole. They adduct the toes towards the second — PAD, as in the hand — and with the other short muscles they are the active support of the arches, which is why the arch falls when the foot is tired and holds when it is working."
+      "narration": "The second, from the medial side of the fourth metatarsal to the fourth toe. Note that each one arises from a single metatarsal and lies on its medial side only — that is what separates a plantar interosseous from a dorsal one, which arises from two bones by two heads and abducts instead."
     },
     {
       "key": "plantar_io_3",
@@ -580,7 +580,7 @@
         "adduction of the toes",
         "PAD"
       ],
-      "narration": "One of the three plantar interossei, the fourth layer of the sole. They adduct the toes towards the second — PAD, as in the hand — and with the other short muscles they are the active support of the arches, which is why the arch falls when the foot is tired and holds when it is working."
+      "narration": "The third and most lateral, from the fifth metatarsal to the fifth toe. All three are supplied by the lateral plantar nerve, and together with the dorsal interossei they form the fourth and deepest layer of the sole — the layer lying directly on the plantar ligaments that hold the arches. The dorsal interossei of the foot have no meshes, so this layer is shown here as its plantar half only."
     }
   ],
   "views": [
@@ -615,6 +615,22 @@
           "target": "Medial longitudinal arch"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "cuneiform_int"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "cuneiform_lat"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mt2"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mt3"
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "medial"
         },
@@ -640,6 +656,10 @@
           "target": "calcaneus"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "mt4"
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "lateral"
         },
@@ -659,6 +679,10 @@
         {
           "op": "ISOLATE_REGION",
           "target": "Transverse arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "cuneiform_med"
         },
         {
           "op": "ROTATE_TO_VIEW",
@@ -929,12 +953,15 @@
     "The plantar aponeurosis has no model. It is the tie of the medial arch and the whole windlass mechanism depends on it, so it is authored twice as a traced concept along the sole, from the calcaneal tubercle forward to the toes.",
     "The short plantar ligament, the plantar calcaneocuboid, is not in the catalog; only the long plantar ligament is. The lateral arch is therefore taught with one of its two plantar ligaments visible and the other named.",
     "No nerves or vessels of the foot exist in the catalog, so the medial and lateral plantar nerves and the plantar arch are not shown. This matters for the layered dissection beat, where the neurovascular plane between the first and second layers can only be described.",
-    "The second, third and fourth layers of the sole are only partly in the catalog. Quadratus plantae is absent altogether, and adductor hallucis exists only as its two separate heads, so the layered anatomy of the sole is summarised in the peel beat rather than shown layer by layer. The three plantar interossei do exist individually (FMA37741, FMA37743, FMA37745) and could carry the fourth layer; it is the dorsal interossei of the foot that have no meshes.",
+    "The second, third and fourth layers of the sole are only partly in the catalog. Quadratus plantae is absent altogether, and adductor hallucis exists only as its two separate heads, so the layered anatomy of the sole is summarised in the peel beat rather than shown layer by layer. The three plantar interossei do exist individually (FMA37741, FMA37743, FMA37745) and are now authored, so the fourth layer is drawn as its plantar half; it is the dorsal interossei of the foot that have no meshes, so that layer is still incomplete on the dorsal side.",
+    "The spring ligament, the plantar aponeurosis, the short plantar ligament and quadratus plantae were all re-searched at the 2026-08-29 audit under 'calcaneonavicular', 'aponeuros', 'plantar', 'fascia' and 'quadratus plantae'. All four are genuinely absent — the only 'aponeuros' hit in the whole catalog is the epicranial aponeurosis. The gap notes above stand on that evidence rather than on an earlier note.",
     "There is no model of the fibro-fatty heel pad, and the only skin in the catalog is one undivided whole-body mesh, so the covering that actually takes ground contact is described only.",
     "The transverse arch is really a half dome completed by the opposite foot, and only one foot is modelled here, so the completed dome is described in narration and cannot be shown."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

@@ -67,7 +67,22 @@
       "central line",
       "Mondor disease",
       "caput medusae of the chest wall",
-      "superior vena cava obstruction"
+      "superior vena cava obstruction",
+      "scalenus anterior",
+      "scalene tubercle",
+      "phrenic nerve",
+      "clavicle",
+      "suprasternal notch",
+      "cervical pleura",
+      "pneumothorax",
+      "internal jugular vein",
+      "superficial epigastric vein",
+      "deltoid",
+      "pectoralis major",
+      "subscapularis",
+      "sternoclavicular joint",
+      "apical group of axillary nodes",
+      "lateral pectoral nerve"
     ]
   },
   "camera": {
@@ -511,7 +526,7 @@
           "view": "anterior"
         }
       ],
-      "narration": "The cephalic vein is the exception and examiners like exceptions. It is superficial from the wrist to the shoulder, runs up in the deltopectoral groove between deltoid and pectoralis major, then pierces the clavipectoral fascia in the infraclavicular fossa and joins the axillary vein near the first rib. Three things pierce that fascia going out — the cephalic vein, the thoracoacromial vessels and the lateral pectoral nerve — and lymphatics from the apical nodes pierce it going in. Because the cephalic vein is superficial and constant, it is the vein used for a cut-down and for feeding a pacemaker lead into the heart."
+      "narration": "The cephalic vein is the exception and examiners like exceptions. It is superficial from the wrist to the shoulder, runs up in the deltopectoral groove between deltoid and pectoralis major, then pierces the clavipectoral fascia in the infraclavicular fossa and joins the axillary vein near the first rib. Four things pierce that fascia, two each way. Going out: the thoracoacromial vessels and the lateral pectoral nerve. Going in: the cephalic vein, on its way to join the axillary vein, and the lymphatics travelling up to the apical nodes. Because the cephalic vein is superficial and constant, it is the vein used for a cut-down and for feeding a pacemaker lead into the heart."
     },
     {
       "mode": "cross_section",
@@ -604,12 +619,16 @@
           "view": "anterior"
         }
       ],
-      "narration": "The infraclavicular approach to a central line is pure axillary anatomy. The needle goes under the clavicle at the junction of its medial two-thirds and lateral third and is aimed at the suprasternal notch, staying flat against the back of the bone. The first rib lies behind the vein at that point and is the shield that keeps the needle off the pleura. Go too deep or too lateral and you find the artery behind, or the dome of the pleura, and cause a pneumothorax. Remember the order at the first rib from front to back: vein, then scalenus anterior with the phrenic nerve on it, then artery and plexus."
+      "narration": "The infraclavicular approach to a central line is pure axillary anatomy. The needle goes in a finger's breadth below the clavicle at the junction of its medial third and lateral two-thirds and is aimed at the suprasternal notch, staying flat against the back of the bone. The first rib lies behind the vein at that point and is the shield that keeps the needle off the pleura. Go too deep or too lateral and you find the artery behind, or the dome of the pleura, and cause a pneumothorax. Remember the order at the first rib from front to back: vein, then scalenus anterior with the phrenic nerve on it, then artery and plexus."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   },
   "gaps": [
     "Routed to its deferred diagram mode rather than 3D. The catalog holds no axillary vein, no basilic vein, no cephalic vein, no brachial venae comitantes and none of the named tributaries — searching available-meshes.json for 'vein' returns 21 entries and not one of them is in the upper limb below the subclavian. The nearest existing models are the right and left subclavian veins (FMA4755, FMA4763) and the brachiocephalic veins (FMA4751, FMA4761), which are the continuations of this vessel, not this vessel. 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes; the day an upper-limb venous model set exists this scene becomes a 3D scene with no curriculum edit.",
@@ -618,6 +637,9 @@
     "The axillary sheath and the clavipectoral fascia have no models in the catalog, as the axillary vessels scene also records. Both exist here only as drawn regions, and both carry real teaching weight in beats 4 and 5 — the sheath is the basis of the axillary block and of the air-embolism point, the fascia is what the cephalic vein pierces.",
     "There are no lymph nodes anywhere in the catalog. The lateral (humeral) group is present here as a single drawn region against the vein because it is the anatomical reason for lymphoedema, not as an attempt to teach the node groups — that is the separate 'Axillary lymph nodes' scene.",
     "PEEL_LAYER in beat 4 is authored because the teaching move is to lift the clavipectoral fascia and watch the cephalic vein pass through it. On drawn artwork the engine will reveal the layer rather than remove geometry, which is the intended degradation.",
+    "AUDIT 2026-08-29. Beat 7 placed the infraclavicular puncture at 'the junction of the medial two-thirds and lateral third' of the clavicle, which is the wrong side of the bone — the landmark is the junction of the medial THIRD with the lateral two-thirds, a finger's breadth below the clavicle. Corrected. This was the only factual error found; the rest of the scene is internally consistent and agrees with the artery and lymph-node scenes on the vein's position (medial throughout, anteromedial low down), on the sheath excluding the vein, and on the lateral group's node count.",
+    "AUDIT 2026-08-29. Named in narration but not authored as drawn regions: scalenus anterior and the phrenic nerve on it (beat 7's front-to-back order at the first rib), the clavicle itself, the suprasternal notch, the cervical pleura, the sternoclavicular joint, the lateral pectoral nerve (one of the three structures piercing the clavipectoral fascia in beat 4), and the superficial epigastric vein. All are now in match.terms. Beat 7 is the hollow one: its entire teaching is a needle path past a clavicle, a first rib, a scalenus anterior and a pleura, and only the first rib is a region in this scene. Note that scalenus anterior DOES exist in the catalog (FMA13392 right, FMA13393 left), as do both first ribs and both clavicles — so if this scene is ever re-routed to 3D, beat 7 is the part that could be drawn first.",
+    "AUDIT 2026-08-29. Catalog re-searched under 'vein', 'basilic', 'cephalic', 'axillar' and 'thoracoacromial'. 'vein' returns exactly 21 entries and the earlier gap note's claim holds character for character: none is in the upper limb below the subclavian. 'cephalic' matches only the two brachiocephalic veins, which is the trap — it is a substring hit, not a cephalic vein.",
     "The vein is drawn as three segments named by their relation to pectoralis minor. That division is a teaching device borrowed from the artery, not a standard anatomical description of the vein — anatomists do not conventionally divide the axillary vein into parts. It is used here only so that the ops can address the vein at a given level, and the narration never claims the vein has three named parts."
   ]
 }

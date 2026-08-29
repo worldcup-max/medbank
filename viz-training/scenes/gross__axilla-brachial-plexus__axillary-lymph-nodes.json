@@ -71,7 +71,18 @@
       "axillary tail of Spence",
       "quadrants of the breast",
       "TNM staging",
-      "N stage"
+      "N stage",
+      "axillary vein",
+      "pectoralis major",
+      "coracoid process",
+      "subscapularis",
+      "serratus anterior",
+      "latissimus dorsi",
+      "cephalic vein",
+      "supratrochlear nodes",
+      "iliac crest",
+      "lateral thoracic vessels",
+      "subscapular vessels"
     ]
   },
   "camera": {
@@ -183,9 +194,9 @@
     },
     {
       "key": "interpectoral",
-      "label": "Interpectoral nodes (Rotter's)",
+      "label": "Interpectoral nodes (Rotter's) — the sixth group",
       "role": "part",
-      "group": "The five groups",
+      "group": "The extra group",
       "layer": "organ",
       "color": "#8caf68",
       "terms": [
@@ -429,7 +440,7 @@
           "kind": "drains to"
         }
       ],
-      "narration": "Three groups take lymph in from outside and each has its own territory. The anterior group takes the breast and the front of the trunk above the umbilicus. The posterior group takes the back of the trunk down to the iliac crest. The lateral group takes the upper limb. Say those three sentences and you have answered most of what is asked about this topic. The other two groups take nothing from outside — they only take from each other."
+      "narration": "Three groups take lymph in from outside and each has its own territory. The anterior group takes the breast and the front of the trunk above the umbilicus. The posterior group takes the back of the trunk down to the iliac crest. The lateral group takes the upper limb. Say those three sentences and you have answered most of what is asked about this topic. The central group takes nothing from outside — only from the first three. The apical group takes from the central group and from two direct routes: the upper part of the breast, and the strip of arm that follows the cephalic vein."
     },
     {
       "mode": "glands",
@@ -482,6 +493,10 @@
         {
           "op": "SHOW_STRUCTURE",
           "target": "pec_minor"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The extra group"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
@@ -607,7 +622,11 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   },
   "gaps": [
     "There are no lymph nodes anywhere in available-meshes.json — searching the 934 entries for 'lymph' and for 'node' returns nothing, in any region of the body. Not one node exists to render, so a 3D scene of this structure is impossible today rather than merely thin. Routed to its deferred diagram mode; 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes.",
@@ -617,6 +636,9 @@
     "The five groups and the three levels are authored as two separate sets of drawn regions covering the same nodes, because the conversion between them is the examinable move and a student needs to see both labelled at once in beat 4. On artwork they should be the same nodes under two overlays, not two sets of nodes.",
     "PEEL_LAYER in beat 6 is authored because the operative move is to lift pectoralis major and minor off the axilla and expose the nerves. On drawn artwork the engine will reveal the layer rather than remove geometry, which is the intended degradation.",
     "The breast has no model in the catalog either, which is also why the 'Breast (mammary gland)' scene is held. Here the breast is a drawn region and only needs to show which quadrant drains which way.",
-    "Node counts per group are given as the ranges in standard texts. They vary between sources and between people; they are narrated as approximate and no exam answer should depend on the exact figure."
+    "Node counts per group are given as the ranges in standard texts. They vary between sources and between people; they are narrated as approximate and no exam answer should depend on the exact figure.",
+    "AUDIT 2026-08-29. The interpectoral (Rotter's) nodes were sitting inside a group literally named 'The five groups', which then contained six structures — so beat 1's 'HIGHLIGHT The five groups' lit six while the narration counted five, and beat 2's 'the other two groups take nothing from outside' was arithmetic against the wrong set. Rotter's nodes are their own group now ('The extra group'), which is what the structure's own label already said, and beat 4 shows that group explicitly because level II is where the surgeon counts them.",
+    "AUDIT 2026-08-29. Named in narration but not drawn as regions: the axillary vein (the roof of the clearance in beat 6), pectoralis major, subscapularis, serratus anterior and latissimus dorsi as the walls and targets the groups and nerves sit on, the cephalic vein route to the apical nodes, the supratrochlear nodes, and the iliac crest as the posterior drainage limit. All are now in match.terms. The axillary vein is the one the artwork must draw — beat 6's operative rule is stated against a vessel that is not on screen.",
+    "AUDIT 2026-08-29. Catalog re-searched: 'lymph' and 'node' both return zero of 934, and so do the wall structures' vessels. The earlier absence claim is confirmed by search, not quoted from the note."
   ]
 }

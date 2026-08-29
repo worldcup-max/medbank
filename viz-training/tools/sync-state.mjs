@@ -242,12 +242,22 @@ if (haveMesh === null) {
     }
     if (holed.length > 12) console.log(`  … and ${holed.length - 12} more`);
   }
+  /* Write the gap file EVERY run, including when it is empty.
+     The first version only wrote it when there were gaps, so when the last six meshes were delivered
+     on 2026-08-28 the file kept its six stale ids — and within a day two separate readers had quoted
+     it as evidence that six meshes were missing when all six were on disk. STATE.json said
+     modelsMissing: 0 in the same breath. A file that is only ever written on failure eventually
+     describes a failure that is over, and this corpus has already been bitten once by a stale note
+     becoming evidence. So: always written, always dated, and it says so when it is empty. */
+  const gapPath = join(ROOT, 'mesh-gaps.txt');
+  const stamp = `# written by tools/sync-state.mjs at ${new Date().toISOString()}\n`;
   if (gapIds.size) {
-    const gapPath = join(ROOT, 'mesh-gaps.txt');
-    writeFileSync(gapPath, [...gapIds].sort().join('\n') + '\n');
+    writeFileSync(gapPath, stamp + [...gapIds].sort().join('\n') + '\n');
     console.log(`\n${gapIds.size} distinct model(s) referenced and not fetched → viz-training/mesh-gaps.txt`);
     console.log('Fetch, decimate and upload them (see DEPLOY-3D.md); nothing in this repo can do it — the');
     console.log('mirror is unreachable from the task, the desktop VM and the cloud container alike.');
+  } else {
+    writeFileSync(gapPath, stamp + '# no gaps: every model referenced by a live scene is in meshes-lite/\n');
   }
 
   /* The repair cursor. Authoring order is the curriculum's; repair order is the same order, because a

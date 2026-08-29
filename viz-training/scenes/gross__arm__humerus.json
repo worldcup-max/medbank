@@ -47,7 +47,11 @@
       "axillary nerve",
       "radial nerve",
       "ulnar nerve",
-      "supracondylar fracture"
+      "supracondylar fracture",
+      "supracondylar region",
+      "median nerve",
+      "brachial artery",
+      "Volkmann's ischaemic contracture"
     ]
   },
   "camera": {
@@ -315,6 +319,34 @@
       "narration": "A shallow spiral on the back of the shaft. The radial nerve and profunda brachii artery lie in it — a mid-shaft fracture here gives wrist drop."
     },
     {
+      "key": "supracondylar_region",
+      "label": "Supracondylar region",
+      "role": "part",
+      "group": "Distal end",
+      "render": "anchor",
+      "color": "#c9552f",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.4055,
+          0.536,
+          0.1009
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the most ANTERIOR point of the bone within the slab z:0.10-0.25 — the front of the distal shaft, just above the epicondylar flare (Z-fraction 0.101, against 0.066 for the medial and 0.081 for the lateral epicondyle); 173 vertices considered; see tools/derive-landmark.mjs --parent FMA23130 --extreme -y --slab z:0.10,0.25",
+      "terms": [
+        "supracondylar region",
+        "supracondylar fracture",
+        "median nerve",
+        "brachial artery",
+        "Volkmann's ischaemic contracture",
+        "children"
+      ],
+      "narration": "The flattened neck of bone just above the two epicondyles, and the commonest fracture site in a child. The brachial artery and the median nerve lie together on the front of it. The lower fragment tilts backwards and the sharp front edge of the upper fragment is driven forwards into both."
+    },
+    {
       "key": "medial_epicondyle",
       "label": "Medial epicondyle",
       "role": "part",
@@ -351,7 +383,7 @@
       "anchor": {
         "on": "humerus",
         "uvw": [
-          0.0,
+          0,
           0.796,
           0.081
         ],
@@ -588,22 +620,29 @@
           "targets": [
             "surgical_neck",
             "radial_groove",
+            "supracondylar_region",
             "medial_epicondyle"
           ],
           "layout": "stacked"
         }
       ],
-      "narration": "Three fracture sites, three nerves. Surgical neck takes the axillary nerve. Mid-shaft takes the radial. Medial epicondyle takes the ulnar. Say the site, then say the nerve."
+      "narration": "Four fracture sites, four nerves, from the top down. Surgical neck takes the axillary nerve. Mid-shaft, in the radial groove, takes the radial. The supracondylar region takes the median nerve — and the brachial artery with it, which is the one that costs a hand. Medial epicondyle takes the ulnar. Say the site, then say the nerve."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-28",
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   },
   "gaps": [
     "Every named part of the humerus is a landmark anchor, because the catalog's smallest unit is the whole bone — there is no separate mesh for a tubercle, a groove or an epicondyle. Each anchor was measured on the mesh by tools/derive-humerus-landmarks.mjs and carries its definition and its measurement in calibrated_by. All stay status:\"needs-review\" until a human has looked at them once.",
     "The capitulum anchor has the largest contact gap of the set (4.85 mm to the radial head) because the joint space is wide there on the decimated meshes. It is the one anchor most worth a human eye.",
     "The surgical neck is a short region rather than a point, and the anatomical neck is a line round the head that no measurement here isolates; both are taught in narration on the nearest measured anchor.",
-    "No nerve meshes exist in the catalog, so the radial nerve is traced as a concept along bony waypoints rather than shown as a structure. The axillary and ulnar nerves are named in narration only."
+    "No nerve meshes exist in the catalog, so the radial nerve is traced as a concept along bony waypoints rather than shown as a structure. The axillary, median and ulnar nerves are named in narration only. Re-searched 2026-08-28 under nerve, nervus, median, ulnar, radial and axillary: nothing.",
+    "The brachial artery is named in the supracondylar narration and is not on screen: the catalog holds no upper-limb artery distal to the subclavian (re-searched 2026-08-28 for brachial, profunda, collateral, recurrent, radial artery and ulnar artery — the whole limb returns nothing). The vessel is described rather than shown, and gross__arm__brachial-artery teaches it as a diagram for the same reason.",
+    "The supracondylar region was measured on 2026-08-28 during the audit, to settle a contradiction: the learning goal promised four fracture sites, beat 7 delivered three, and gross__arm__median-ulnar-radial-nerves deferred to a fourth that had never been authored. It is a region rather than a point, so it is anchored at the most anterior point of the distal shaft above the epicondylar flare — the surface the artery and the median nerve actually lie on — and stays needs-review like the rest of the set."
   ]
 }

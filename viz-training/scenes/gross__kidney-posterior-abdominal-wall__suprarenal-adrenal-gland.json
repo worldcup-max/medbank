@@ -438,6 +438,42 @@
         "vertebral level"
       ],
       "narration": "The glands straddle the T12 to L1 level, which is also where their arteries arise and where computed tomography finds them as thin inverted Y or V shapes against the crura."
+    },
+    {
+      "key": "right_gland_kidney_septum",
+      "label": "Right gland — the fascial septum onto the kidney",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "right_adrenal",
+        "uvw": [0.3333, 0.7304, 0.6496],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — the point on FMA15629 nearest FMA7204 right kidney, which is where the septum of renal fascia runs between the two organs (gap 0.14 mm · 1 witness, so a measurement with no second witness to converge on it)",
+      "calibration_gap_mm": 0.14,
+      "terms": ["renal fascia", "septum", "suprarenal gland", "upper pole", "renal ptosis", "adrenalectomy"],
+      "narration": "Where the pyramidal right gland meets the upper pole of the right kidney. The two are not continuous: a septum of renal fascia runs between them, which is why a dropped kidney leaves its gland behind and why an adrenalectomy need not be a nephrectomy. The septum itself has no mesh — this anchor marks the plane it occupies."
+    },
+    {
+      "key": "left_gland_kidney_septum",
+      "label": "Left gland — the fascial septum onto the kidney",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "left_adrenal",
+        "uvw": [0.9466, 0.8845, 0.6801],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — the point on FMA15630 nearest FMA7205 left kidney (gap 0.12 mm · 1 witness, so a measurement with no second witness to converge on it)",
+      "calibration_gap_mm": 0.12,
+      "terms": ["renal fascia", "septum", "left suprarenal gland", "medial border", "upper pole"],
+      "narration": "The crescentic left gland meets the kidney along its MEDIAL border rather than on top of it — compare where this anchor sits with its opposite number on the right, and the shape difference stops being a memorised line."
     }
   ],
   "views": [
@@ -486,6 +522,18 @@
           "from": "left_adrenal",
           "to": "left_kidney",
           "kind": "lies along the medial border"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_gland_kidney_septum",
+            "left_gland_kidney_septum"
+          ],
+          "layout": "side-by-side"
         }
       ],
       "narration": "Two small retroperitoneal endocrine glands, about five grams each, at the level of T12 to L1 against the crura of the diaphragm. They are not identical and the differences are examinable. The right gland is pyramidal and sits like a cap on the upper pole of the right kidney. The left gland is crescentic and lies along the medial border of the upper half of the left kidney, reaching further down. Both lie within the renal fascia with the kidney, but a septum of that fascia separates the two organs — which is why a mobile kidney descends and leaves its gland behind, and why an adrenalectomy need not be a nephrectomy. The name suprarenal describes only the right one honestly; adrenal, meaning beside the kidney, describes both."
@@ -595,7 +643,7 @@
           "kind": "long left suprarenal vein"
         }
       ],
-      "narration": "The blood supply is the most reliably asked fact about this gland, and it has a shape worth memorising: three arteries in, one vein out, and the two sides drain differently. The superior suprarenal artery comes from the inferior phrenic artery above. The middle suprarenal artery comes straight off the aorta. The inferior suprarenal artery comes from the renal artery below. Between them they divide into dozens of small branches before entering the capsule, so the gland is one of the most richly perfused tissues in the body per gram — and it bleeds accordingly. Drainage is by a single vein on each side, and here the sides part company. The right suprarenal vein is very short and enters the inferior vena cava directly. The left suprarenal vein is long, descends, and joins the left renal vein. Three consequences. In surgery, the right vein is the one that avulses into a cava that cannot be clamped, so it is identified and ligated first. In diagnosis, adrenal venous sampling to localise an aldosterone-producing adenoma is straightforward on the left and technically difficult on the right. And in oncology, a right-sided adrenal tumour has a very short route into the cava."
+      "narration": "Before the detail, one honest warning: not one suprarenal vessel is drawn in this beat. The catalog holds no suprarenal artery and no suprarenal vein, so each is taught against the trunk it springs from or drains into — the diaphragm standing for the inferior phrenic, the aorta for the middle artery, the renal artery for the inferior, the cava and the left renal vein for the two destinations. Picture the branches in the gaps between. The blood supply is the most reliably asked fact about this gland, and it has a shape worth memorising: three arteries in, one vein out, and the two sides drain differently. The superior suprarenal artery comes from the inferior phrenic artery above. The middle suprarenal artery comes straight off the aorta. The inferior suprarenal artery comes from the renal artery below. Between them they divide into dozens of small branches before entering the capsule, so the gland is one of the most richly perfused tissues in the body per gram — and it bleeds accordingly. Drainage is by a single vein on each side, and here the sides part company. The right suprarenal vein is very short and enters the inferior vena cava directly. The left suprarenal vein is long, descends, and joins the left renal vein. Three consequences. In surgery, the right vein is the one that avulses into a cava that cannot be clamped, so it is identified and ligated first. In diagnosis, adrenal venous sampling to localise an aldosterone-producing adenoma is straightforward on the left and technically difficult on the right. And in oncology, a right-sided adrenal tumour has a very short route into the cava."
     },
     {
       "mode": "glands",
@@ -627,7 +675,7 @@
           "intensity": 0.9
         }
       ],
-      "narration": "Cut the gland across and there are two tissues inside one capsule, with different origins, different control and different products. The outer yellow cortex is mesodermal and makes steroids in three zones, learned from outside in as salt, sugar, sex. Zona glomerulosa makes aldosterone under angiotensin II and potassium — the salt. Zona fasciculata, the thickest zone, makes cortisol under pituitary corticotropin — the sugar. Zona reticularis makes androgens, chiefly dehydroepiandrosterone — the sex. The inner grey-red medulla is neural crest tissue, effectively a modified sympathetic ganglion whose cells have lost their axons: preganglionic fibres of the greater splanchnic nerve pass through the coeliac plexus without relay and synapse directly on chromaffin cells, which release adrenaline and noradrenaline into the blood rather than onto a target. So the cortex is an endocrine gland taking orders from the pituitary, and the medulla is a piece of the sympathetic nervous system that secretes into the circulation. Only the cortex is essential to life: remove it, or destroy it, and the patient dies without replacement, whereas the medulla can be removed without hormone replacement at all."
+      "narration": "Everything in this beat is described, not drawn: the gland is one solid model with no cortex, no medulla and no zones inside it, so the cut surface you see is uniform and the layers below are yours to imagine. Cut the gland across and there are two tissues inside one capsule, with different origins, different control and different products. The outer yellow cortex is mesodermal and makes steroids in three zones, learned from outside in as salt, sugar, sex. Zona glomerulosa makes aldosterone under angiotensin II and potassium — the salt. Zona fasciculata, the thickest zone, makes cortisol under pituitary corticotropin — the sugar. Zona reticularis makes androgens, chiefly dehydroepiandrosterone — the sex. The inner grey-red medulla is neural crest tissue, effectively a modified sympathetic ganglion whose cells have lost their axons: preganglionic fibres of the greater splanchnic nerve pass through the coeliac plexus without relay and synapse directly on chromaffin cells, which release adrenaline and noradrenaline into the blood rather than onto a target. So the cortex is an endocrine gland taking orders from the pituitary, and the medulla is a piece of the sympathetic nervous system that secretes into the circulation. Only the cortex is essential to life: remove it, or destroy it, and the patient dies without replacement, whereas the medulla can be removed without hormone replacement at all."
     },
     {
       "mode": "location",
@@ -669,13 +717,15 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "The gland is one solid model. The catalog holds no adrenal cortex, no medulla and no zona glomerulosa, fasciculata or reticularis. Beat four therefore teaches the entire internal organisation — which is the whole endocrine point of the organ — by narration over a CROSS_SECTION of the undivided gland, with PEEL_LAYER authored so the beat becomes real the day layered models exist. Every zone and hormone name is in match.terms, so a note that says 'zona fasciculata' still opens this scene at the right subject. This structure's second preferred mode, diagram, would teach the cortex-medulla split far better than the 3D model does, and a companion diagram-mode scene is the highest-value addition here.",
     "There is no right suprarenal vein and no left suprarenal vein in the catalog, and no inferior phrenic, superior suprarenal, middle suprarenal or inferior suprarenal artery. The entire vascular teaching of beat three — three arteries in, one vein out, and the left-right asymmetry that dominates adrenal surgery — is taught through the vessels the branches come FROM: the diaphragm for the inferior phrenic, the aorta for the middle, the renal artery for the inferior, and the cava and left renal vein as the two destinations. That is option (b), an adjacent structure that exists, and the labels say so plainly, but the student cannot see the short right vein that the narration calls the most dangerous vessel in the operation. Acquiring the two suprarenal veins would be the single most useful mesh addition for this scene.",
     "The right renal artery model is used to carry the inferior suprarenal artery's teaching for both sides, because that branch arises from the renal artery. Its catalog name is right renal artery and the label says renal artery, so nothing is mislabelled, but a student rotating the scene sees only one side of a bilateral supply.",
-    "No landmark anchors were authored. Anchors in this corpus are placed by measurement on the real geometry and these meshes are not in the local decimated set, so the hilum of each gland, the point of entry of the right suprarenal vein into the cava, and the cortex-medulla junction could not be positioned honestly. An anchor dropped where a region merely looks right teaches a wrong point the student cannot detect.",
+    "CORRECTED 2026-08-29: the previous note said no anchors could be authored because the meshes were not in the local decimated set. They are in meshes-lite/, and two anchors have now been measured — the point on each gland where it meets its kidney, which is the plane the fascial septum occupies (0.14 mm on the right, 0.12 mm on the left, one witness each). Both are status needs-review. Two others were ATTEMPTED AND REFUSED by derive-landmark.mjs, and the refusals are themselves findings. The entry of the right suprarenal vein into the cava: the nearest approach between FMA15629 and FMA10951 is 34.2 mm, so in this model the right gland and the cava do not touch at all — beat two's 'in front and medial: the inferior vena cava' is anatomically right but is not a contact a student can see here, and the 34 mm is the width of the space the short vein has to cross. The junction of the left suprarenal vein with the left renal vein: nearest approach 14.3 mm between FMA15630 and FMA14336, the gland sitting above the vein it drains into, which is exactly why the left vein is the long one. The cortex-medulla junction remains unauthorable — it is inside a solid mesh, and neither an extreme nor a contact.",
     "There is no peritoneum and no lesser sac, so the left gland's relation to the stomach across the omental bursa is asserted rather than shown. The stomach and the gland are both present, so the relation is drawn between two real structures.",
     "There are no splanchnic nerves and no coeliac plexus in the catalog. The medulla's unique innervation — preganglionic fibres synapsing directly on chromaffin cells — is taught against the coeliac artery as a positional proxy for the plexus that surrounds it, and the narration says that is what it is.",
     "There is no pancreas mesh, only the pancreatic duct, used as context under the honest label 'Pancreatic duct - marking the pancreas' because the duct runs the length of the gland and shows where it lies.",

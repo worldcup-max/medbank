@@ -505,7 +505,7 @@
       "name": "sacrum",
       "label": "Sacrum",
       "role": "part",
-      "group": "Sacrum",
+      "group": "Sacrum & coccyx",
       "layer": "bone",
       "color": "#cdc3a6",
       "refs": {
@@ -993,7 +993,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "Sacrum",
+          "target": "Sacrum & coccyx",
           "intensity": 0.35
         },
         {
@@ -1029,6 +1029,7 @@
     },
     {
       "mode": "cross_section",
+      "beat": 4,
       "title": "Body in front, canal behind",
       "ops": [
         {
@@ -1055,7 +1056,7 @@
     },
     {
       "mode": "mechanism",
-      "beat": 4,
+      "beat": 5,
       "title": "How weight comes down",
       "ops": [
         {
@@ -1081,6 +1082,7 @@
     },
     {
       "mode": "mechanism",
+      "beat": 6,
       "title": "Take the discs away",
       "ops": [
         {
@@ -1106,7 +1108,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "Sub-parts of a vertebra — body, pedicle, lamina, spinous and transverse processes, vertebral foramen — are not separate models in the catalog. They are taught here by cross-section and narration rather than as labelled parts.",

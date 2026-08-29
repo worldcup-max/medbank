@@ -135,6 +135,7 @@
       "iliac fossa",
       "renal plexus",
       "T10 to L1",
+      "T11 to L2",
       "referred pain",
       "urine formation",
       "nephron",
@@ -744,6 +745,145 @@
         "urine"
       ],
       "narration": "The end of the line. Urine formed in the cortex and medulla passes calyx to pelvis to ureter and reaches the bladder at the vesicoureteric junction — the third and narrowest constriction, and the commonest place for a stone to arrest."
+    },
+    {
+      "key": "right_upper_pole",
+      "label": "Right kidney — upper pole",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "right_kidney",
+        "uvw": [0.7014, 0.6992, 1],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +z on FMA7204 (LPS +Z superior, long axis z, span 102.2 mm, 54.0 mm from surface centroid, 1502 vertices)",
+      "terms": ["upper pole", "right upper pole", "suprarenal gland", "twelfth rib", "diaphragm"],
+      "narration": "The upper pole of the right kidney: capped by the suprarenal gland, resting on the diaphragm, and crossed behind by the twelfth rib. It lies about half a vertebral body lower than the left upper pole."
+    },
+    {
+      "key": "right_lower_pole",
+      "label": "Right kidney — lower pole",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "right_kidney",
+        "uvw": [0.4476, 0.2491, 0],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -z on FMA7204 (LPS +Z superior, long axis z, span 102.2 mm, 52.7 mm from surface centroid, 1502 vertices)",
+      "terms": ["lower pole", "right lower pole", "ballotable", "accessory renal artery", "horseshoe kidney"],
+      "narration": "The lower pole of the right kidney — the part a thin patient's lower pole is balloted at on deep inspiration, the usual destination of an accessory renal artery, and the pole at which the two halves of a horseshoe kidney are fused."
+    },
+    {
+      "key": "right_hilum",
+      "label": "Right renal hilum",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "right_kidney",
+        "uvw": [0.6654, 0.3137, 0.5234],
+        "radius": 0.034
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — the point on FMA7204 nearest all three structures that pass through the hilum (FMA14752 renal artery 0.31 mm, FMA14335 renal vein 0.44 mm, FMA15571 ureter 0.29 mm · 3 witnesses · spread 21.2 mm over a 102.2 mm organ)",
+      "calibration_gap_mm": 0.44,
+      "terms": ["hilum", "renal hilum", "right renal hilum", "vein artery ureter", "VAU", "renal sinus", "duodenum"],
+      "narration": "The medial notch where three things pass, front to back: vein, artery, ureter. The second part of the duodenum descends directly over this point, which is why the right renal vessels cannot be reached from in front without a Kocher manoeuvre."
+    },
+    {
+      "key": "left_upper_pole",
+      "label": "Left kidney — upper pole",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "left_kidney",
+        "uvw": [0.3419, 0.6837, 1],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +z on FMA7205 (LPS +Z superior, long axis z, span 103.0 mm, 52.7 mm from surface centroid, 1502 vertices)",
+      "terms": ["upper pole", "left upper pole", "eleventh rib", "twelfth rib", "spleen", "T12"],
+      "narration": "The upper pole of the left kidney, reaching to about T12 — higher than the right, and crossed behind by both the eleventh and the twelfth ribs. The spleen lies against its front."
+    },
+    {
+      "key": "left_lower_pole",
+      "label": "Left kidney — lower pole",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "left_kidney",
+        "uvw": [0.5224, 0.2827, 0],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -z on FMA7205 (LPS +Z superior, long axis z, span 103.0 mm, 52.9 mm from surface centroid, 1502 vertices)",
+      "terms": ["lower pole", "left lower pole", "L2", "not ballotable"],
+      "narration": "The lower pole of the left kidney, reaching only to about L2 — which is why the left is almost never ballotable and why a mass in the left hypochondrium that you can get above is more likely renal than splenic."
+    },
+    {
+      "key": "left_hilum",
+      "label": "Left renal hilum — on the transpyloric plane",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "left_kidney",
+        "uvw": [0.4312, 0.3621, 0.4534],
+        "radius": 0.035
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — the point on FMA7205 nearest all three structures that pass through the hilum (FMA14753 renal artery 0.22 mm, FMA14336 renal vein 0.83 mm, FMA15572 ureter 0.21 mm · 3 witnesses · spread 21.6 mm over a 103.0 mm organ)",
+      "calibration_gap_mm": 0.83,
+      "terms": ["hilum", "renal hilum", "left renal hilum", "transpyloric plane", "L1", "vein artery ureter", "VAU"],
+      "narration": "The left hilum lies almost exactly on the transpyloric plane, at the lower border of L1 — the most useful single level in the abdomen. The same order holds here: vein, artery, ureter from front to back."
+    },
+    {
+      "key": "right_puj",
+      "label": "Pelviureteric junction (right)",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "right_ureter",
+        "uvw": [0.5336, 0.9119, 1],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +z on FMA15571 — the ureter model begins at the pelviureteric junction, so the topmost point of that mesh IS the junction (LPS +Z superior, long axis z, span 277.1 mm, 108.3 mm from surface centroid, 1107 vertices)",
+      "terms": ["pelviureteric junction", "PUJ", "first constriction", "hydronephrosis", "renal colic"],
+      "narration": "The first of the three ureteric constrictions, where the funnel of the renal pelvis narrows into the ureter. A stone arrested here obstructs the kidney and dilates the pelvis and calyces into a hydronephrosis. This anchor marks the junction as a point on the ureter, not as a dilated pelvis — the renal pelvis itself has no mesh."
+    },
+    {
+      "key": "renal_angle",
+      "label": "Renal angle (costovertebral angle)",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "rib12",
+        "uvw": [0.5147, 0.9475, 0.5274],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — the renal angle is the corner between the lower border of the twelfth rib and the LATERAL border of erector spinae, and the lateral column of erector spinae is iliocostalis lumborum. The anchor is the point on FMA8533 nearest FMA22740 right iliocostalis lumborum (gap 0.29 mm · 1 witness, so a measurement without a second witness to converge on it)",
+      "calibration_gap_mm": 0.29,
+      "terms": ["renal angle", "costovertebral angle", "renal angle tenderness", "Murphy's kidney punch", "erector spinae", "iliocostalis lumborum", "pyelonephritis", "loin incision"],
+      "narration": "Where the lower border of the twelfth rib meets the lateral border of erector spinae, the kidney comes closest to the skin. This is where you press or percuss for tenderness in pyelonephritis, and where a percutaneous tract or a biopsy needle enters — always BELOW the rib, because the costodiaphragmatic recess of the pleura dips behind its medial half."
     }
   ],
   "views": [
@@ -835,6 +975,15 @@
           "from": "diaphragm",
           "to": "Kidneys",
           "kind": "roofs the bed and moves them on breathing"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "renal_angle",
+          "intensity": 0.9
         }
       ],
       "narration": "Turn the body round and the kidney lies on a muscular bed of four structures. From medial to lateral, psoas major, quadratus lumborum and the aponeurosis of transversus abdominis; above all three, the diaphragm. Three nerves run downwards and laterally across quadratus lumborum immediately behind the kidney — subcostal, iliohypogastric and ilioinguinal — and they are what a loin incision must respect. The ribs are the exam point. The twelfth rib crosses the back of BOTH kidneys; the eleventh crosses the LEFT kidney only, because the left is higher. Behind the medial half of the twelfth rib the pleura dips down as the costodiaphragmatic recess, so any posterior approach — a percutaneous nephrolithotomy tract, a renal biopsy, a loin incision — is made below the twelfth rib. Go above it and you enter the pleura before the kidney and produce a pneumothorax. The renal angle itself, between the lower border of the twelfth rib and the lateral border of erector spinae, is where the kidney is nearest the skin: that is where you tap for tenderness in pyelonephritis, and where the needle goes in."
@@ -875,9 +1024,13 @@
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "right_kidney",
           "intensity": 0.9
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
         }
       ],
-      "narration": "Cut a kidney in the coronal plane and read it from outside in. Four coverings first, and their order is a standing question: the fibrous renal capsule stripped straight off the surface, then perirenal fat, then renal fascia — the fascia of Gerota — and outside that pararenal fat, heaviest behind. The fascia is open inferiorly, which is why blood or pus from the kidney can track down towards the pelvis, and why a kidney that loses its fat sags: renal ptosis, a mobile kidney with intermittent obstruction. Inside the capsule, the outer third is cortex, granular, and it dips inwards between the pyramids as the renal columns of Bertin. The inner two thirds are medulla, arranged as eight to eighteen striated pyramids whose bases face the cortex and whose apices — the papillae — point into the sinus. Each papilla is pierced by collecting ducts and projects into a minor calyx. Two or three minor calyces join to form a major calyx, two or three major calyces form the renal pelvis, and the pelvis narrows at the pelviureteric junction into the ureter. A nephron straddles the two zones — corpuscle and convoluted tubules in the cortex, the loop of Henle running down into the medulla — which is why the medulla can concentrate urine, and why the outer medulla — where the straight proximal tubule and the thick ascending limb do the most work on the least oxygen — is the zone that dies first in ischaemic acute tubular necrosis."
+      "narration": "Before you start: what follows is described, not drawn. The kidney here is one solid model, so the coverings, the cortex, the pyramids and the calyces are named against a cut surface that does not show them — only the hilum and the two poles are clickable points on this organ. Cut a kidney in the coronal plane and read it from outside in. Four coverings first, and their order is a standing question: the fibrous renal capsule stripped straight off the surface, then perirenal fat, then renal fascia — the fascia of Gerota — and outside that pararenal fat, heaviest behind. The fascia is open inferiorly, which is why blood or pus from the kidney can track down towards the pelvis, and why a kidney that loses its fat sags: renal ptosis, a mobile kidney with intermittent obstruction. Inside the capsule, the outer third is cortex, granular, and it dips inwards between the pyramids as the renal columns of Bertin. The inner two thirds are medulla, arranged as eight to eighteen striated pyramids whose bases face the cortex and whose apices — the papillae — point into the sinus. Each papilla is pierced by collecting ducts and projects into a minor calyx. Two or three minor calyces join to form a major calyx, two or three major calyces form the renal pelvis, and the pelvis narrows at the pelviureteric junction into the ureter. A nephron straddles the two zones — corpuscle and convoluted tubules in the cortex, the loop of Henle running down into the medulla — which is why the medulla can concentrate urine, and why the outer medulla — where the straight proximal tubule and the thick ascending limb do the most work on the least oxygen — is the zone that dies first in ischaemic acute tubular necrosis."
     },
     {
       "mode": "vasculature",
@@ -931,7 +1084,7 @@
           "kind": "compresses it against the aorta"
         }
       ],
-      "narration": "Three things pass through the hilum and their order front to back is fixed: vein, artery, ureter — V, A, U. Say it as you look at the picture and you will not lose the mark. The renal arteries leave the aorta at L1 to L2, just below the superior mesenteric artery. Because the aorta lies left of the midline the right artery is long and passes behind the inferior vena cava, while the left is short. The veins are the mirror: the right is short and joins the cava directly, the left is three times longer, crossing in front of the aorta and behind the superior mesenteric artery. Two consequences follow from that crossing and both are examinable. First, the left renal vein is squeezed in the angle between artery and aorta — the nutcracker — and because it also receives the left gonadal and left suprarenal veins, that compression, or a tumour thrombus in it, shows up as a left varicocele that does not empty on lying down. Second, the left kidney is the one taken for transplantation, because a long vein is easier to sew. Inside the kidney the artery divides into five segmental branches which are true end arteries with no anastomoses between them, so each segment can be resected — and each can be infarcted — on its own."
+      "narration": "Three things pass through the hilum and their order front to back is fixed: vein, artery, ureter — V, A, U. Say it as you look at the picture and you will not lose the mark. The renal arteries leave the aorta at L1 to L2, just below the superior mesenteric artery. Because the aorta lies left of the midline the right artery is long and passes behind the inferior vena cava, while the left is short. The veins are the mirror: the right is short and joins the cava directly, the left is three times longer, crossing in front of the aorta and behind the superior mesenteric artery. Two consequences follow from that crossing and both are examinable. First, the left renal vein is squeezed in the angle between artery and aorta — the nutcracker — and because it also receives the left gonadal and left suprarenal veins — the gonadal vein is not in this model, so picture it entering from below — that compression, or a tumour thrombus in it, shows up as a left varicocele that does not empty on lying down. Second, the left kidney is the one taken for transplantation, because a long vein is easier to sew. Inside the kidney the artery divides into five segmental branches which are true end arteries with no anastomoses between them, so each segment can be resected — and each can be infarcted — on its own."
     },
     {
       "mode": "mechanism",
@@ -970,7 +1123,7 @@
           "intensity": 0.85
         }
       ],
-      "narration": "Urine formation in one line of anatomy. About a fifth of the cardiac output — over a litre a minute — enters by the renal arteries and reaches roughly a million glomeruli in the cortex of each kidney. Filtration there produces about 180 litres a day of filtrate; the tubules reabsorb ninety-nine per cent of it, so one to two litres leaves as urine. The convoluted tubules sit in the cortex, the loops of Henle and the collecting ducts run down through the pyramids, and the ducts open on the papilla into a minor calyx. From there the route is fixed and worth reciting: minor calyx, major calyx, renal pelvis, pelviureteric junction, ureter, vesicoureteric junction, bladder. Smooth muscle in the pelvis and ureter drives peristaltic waves — urine does not simply run downhill — and it is that peristalsis working against an obstruction which produces the severe colicky pain of a stone."
+      "narration": "Everything microscopic in this beat — glomeruli, tubules, loops, collecting ducts — is described, not drawn; what moves on screen is the trace from kidney to ureter to bladder. Urine formation in one line of anatomy. About a fifth of the cardiac output — over a litre a minute — enters by the renal arteries and reaches roughly a million glomeruli in the cortex of each kidney. Filtration there produces about 180 litres a day of filtrate; the tubules reabsorb ninety-nine per cent of it, so one to two litres leaves as urine. The convoluted tubules sit in the cortex, the loops of Henle and the collecting ducts run down through the pyramids, and the ducts open on the papilla into a minor calyx. From there the route is fixed and worth reciting: minor calyx, major calyx, renal pelvis, pelviureteric junction, ureter, vesicoureteric junction, bladder. Smooth muscle in the pelvis and ureter drives peristaltic waves — urine does not simply run downhill — and it is that peristalsis working against an obstruction which produces the severe colicky pain of a stone."
     },
     {
       "mode": "location",
@@ -1013,20 +1166,31 @@
           "from": "left_renal_vein",
           "to": "ivc",
           "kind": "route of tumour thrombus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "right_puj",
+          "intensity": 0.9
         }
       ],
-      "narration": "Five presentations, all readable off what you have just seen. Renal colic: a stone lodges at the pelviureteric junction, at the pelvic brim, or at the vesicoureteric junction, and the pain follows the nerve supply of the kidney and ureter from T10 to L1 — loin to groin, radiating to the scrotum or labium, colicky, with the patient rolling about rather than lying still. Pyelonephritis: constant loin pain with fever, and tenderness elicited in the renal angle below the twelfth rib. Obstruction: back-pressure dilates the pelvis and calyces into a hydronephrosis, which is why an obstructed kidney is a surgical emergency and an unobstructed one is not. Trauma and access: the kidney is retroperitoneal, so bleeding is often contained by renal fascia, and every posterior approach stays below the twelfth rib to keep out of the pleura. And tumour: a renal cell carcinoma presents late with the triad of loin pain, a mass and haematuria, spreads along the renal vein into the cava, and on the left announces itself as a varicocele that will not empty. Two developmental variants complete the picture — the horseshoe kidney fused at its lower poles and caught under the inferior mesenteric artery during its ascent, and the pelvic kidney that never ascended at all, which is felt as a pelvic mass and injured in pelvic surgery."
+      "narration": "Five presentations, all readable off what you have just seen. Renal colic: a stone lodges at the pelviureteric junction, at the pelvic brim, or at the vesicoureteric junction, and the pain follows the segmental nerve supply of the organ it is sitting in. The kidney itself refers to T10 to L1; the ureter refers to T11 to L2. That one segment of difference is the loin-to-groin march: a stone at the pelviureteric junction hurts in the loin at the kidney's own levels, and as it descends the pain drops with it into the groin, the scrotum or the labium on the ureter's lower levels. The pain is colicky and the patient rolls about rather than lying still. Pyelonephritis: constant loin pain with fever, and tenderness elicited in the renal angle below the twelfth rib. Obstruction: back-pressure dilates the pelvis and calyces into a hydronephrosis, which is why an obstructed kidney is a surgical emergency and an unobstructed one is not. Trauma and access: the kidney is retroperitoneal, so bleeding is often contained by renal fascia, and every posterior approach stays below the twelfth rib to keep out of the pleura. And tumour: a renal cell carcinoma presents late with the triad of loin pain, a mass and haematuria, spreads along the renal vein into the cava, and on the left announces itself as a varicocele that will not empty. Two developmental variants complete the picture — the horseshoe kidney fused at its lower poles and caught under the inferior mesenteric artery during its ascent, and the pelvic kidney that never ascended at all, which is felt as a pelvic mass and injured in pelvic surgery."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "The kidney is one solid model. The catalog holds no renal cortex, medulla, pyramid, papilla, column of Bertin, minor calyx, major calyx or renal pelvis, so beat three teaches the internal architecture entirely by narration over a CROSS_SECTION cut of the whole organ. A student can see that the organ has an inside but cannot click a pyramid or a calyx. Every internal name is carried in match.terms and in the kidney structures' own terms[], so a note that says 'column of Bertin' still opens this scene at the right subject. An internal-structure model, or a companion diagram-mode scene of the coronal section, is the single highest-value addition for this topic.",
     "There is no renal capsule, no perirenal fat, no renal fascia and no pararenal fat. The four coverings are one of the two things most reliably asked about the kidney and none of them has a mesh. They are narrated in beat three and PEEL_LAYER is authored there so that the beat becomes real the day layered models exist; today the op degrades to hiding the organ layer, which is an honest approximation of stripping the coverings but not a demonstration of them.",
     "The renal pelvis has no separate model, so the pelviureteric junction is shown as the point where the ureter model begins rather than as a named narrowing. Hydronephrosis therefore cannot be shown as a dilated pelvis, only described.",
-    "No landmark anchors were authored. Anchors in this corpus are placed by measurement on the actual geometry, and these meshes are not in the local decimated set, so the hilum, the upper and lower poles, the renal angle and the three ureteric constrictions could not be positioned honestly. An anchor dropped where a region merely looks right teaches a wrong point the student cannot detect. Ingesting FMA7204, FMA7205 and FMA15571 locally would yield at least six anchors and would make beats two, three and six clickable rather than narrated.",
+    "CORRECTED 2026-08-29: the previous note here said no anchors could be authored because the meshes were not in the local decimated set. That was stale — FMA7204, FMA7205 and FMA15571 are all in meshes-lite/, and eight anchors have now been measured: both upper and lower poles by EXTREME ±z, both hila by CONTACT against the renal artery, renal vein and ureter (three converging witnesses each, largest gap 0.83 mm), and the pelviureteric junction as the topmost point of the ureter mesh. An eighth anchor, the renal angle, was very nearly not authored on the same false reasoning: the first draft of this note said the catalog holds no erector spinae. It holds no mesh under that name, nor under sacrospinalis, but it holds all three of the muscle's columns under their own names — iliocostalis lumborum, longissimus thoracis, spinalis thoracis — and the renal angle is defined against the LATERAL column, so a contact between the twelfth rib and iliocostalis lumborum measures it directly (0.29 mm, one witness). Searching once for the clinical name would have lost it. What still cannot be anchored is the pelvic-brim and vesicoureteric constrictions, which sit on the ureter's course rather than at a measurable extreme of it. The eight authored anchors carry status needs-review: the measurement and its evidence are in each calibrated_by, but nobody has yet opened them in the viewer.",
     "The peritoneum is absent, as it is throughout this corpus, so 'retroperitoneal' is asserted rather than shown. Morison's pouch is described against the liver and the right kidney, both of which exist.",
     "The five segmental arteries are not in the catalog; only the main renal artery trunk on each side is. The end-artery principle and the avascular plane of Brodel are therefore narrated against a single vessel.",
     "The gonadal veins are not in the catalog, so the left varicocele story is told through the left renal vein alone. This weakens beat four's strongest clinical hook, since the vein whose obstruction the student must picture cannot be drawn.",

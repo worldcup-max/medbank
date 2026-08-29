@@ -298,6 +298,140 @@
       "narration": "The neck of this bone is the most dangerous point in the lower limb. The common fibular division winds round it under nothing but skin, so a tight plaster, a badly placed strap or a night on a hard edge produces a foot drop."
     },
     {
+      "key": "ischial_tuberosity",
+      "label": "Ischial tuberosity",
+      "role": "part",
+      "group": "Bony frame",
+      "layer": "bone",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "hip_bone",
+        "uvw": [
+          0.638,
+          0.748,
+          0.066
+        ],
+        "radius": 0.021
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT point where semitendinosus (FMA22358, gap 0.39 mm) and the long head of biceps femoris (FMA45888, 0.49 mm) meet the hip bone — two witnesses 26.4 mm apart on a 207.9 mm bone (12.7%). Adductor magnus (FMA22459) was tried as a third witness and REJECTED: it scatters the set over 67.7 mm and the tool refused to emit, because that muscle also contacts the ischiopubic ramus far from the tuberosity. tools/derive-landmark.mjs --parent FMA16586 --contact FMA22358,FMA45888",
+      "terms": [
+        "ischial tuberosity",
+        "hamstring origin",
+        "midway between the ischial tuberosity and the greater trochanter"
+      ],
+      "narration": "What you sit on, and the medial end of the surface marking. The hamstrings arise here, and the nerve passes down just lateral to it."
+    },
+    {
+      "key": "ischial_spine",
+      "label": "Ischial spine",
+      "role": "part",
+      "group": "Bony frame",
+      "layer": "bone",
+      "render": "anchor",
+      "color": "#f0b93f",
+      "anchor": {
+        "on": "hip_bone",
+        "uvw": [
+          0.678,
+          0.76,
+          0.316
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT point between the hip bone and gemellus superior (FMA22334), gap 0.05 mm — one witness, but gemellus superior arises from the ischial spine and from nowhere else, so the contact IS the spine. It sits 0.25 of the bone's height above the ischial tuberosity anchor (w 0.316 vs 0.066), which is the correct separation. tools/derive-landmark.mjs --parent FMA16586 --contact FMA22334",
+      "terms": [
+        "ischial spine",
+        "greater sciatic foramen",
+        "lesser sciatic foramen",
+        "sacrospinous ligament"
+      ],
+      "narration": "The point that divides the greater sciatic foramen above from the lesser below. The nerve leaves above this level, through the greater foramen. Below it, through the lesser foramen, the tendon of obturator internus comes out — and the internal pudendal vessels and nerve go back in beside it."
+    },
+    {
+      "key": "psis",
+      "label": "Posterior superior iliac spine",
+      "role": "part",
+      "group": "Bony frame",
+      "layer": "bone",
+      "render": "anchor",
+      "color": "#e0a832",
+      "anchor": {
+        "on": "hip_bone",
+        "uvw": [
+          0.673,
+          0.998,
+          0.76
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the most POSTERIOR point of the upper quarter of the hip bone (extreme +y within z:0.75–1.0), 90.3 mm from the surface centroid. The PSIS is defined by position rather than by an attachment, so no contact measurement applies. It lands at v=0.998 — the back edge of the bone — which is what the definition asks for. tools/derive-landmark.mjs --parent FMA16586 --extreme +y --slab z:0.75,1.0",
+      "terms": [
+        "posterior superior iliac spine",
+        "PSIS",
+        "dimple of Venus",
+        "surface marking of the sciatic nerve"
+      ],
+      "narration": "The skin dimple at the top of the buttock. The upper end of the surface marking starts midway between this point and the ischial tuberosity."
+    },
+    {
+      "key": "greater_trochanter",
+      "label": "Greater trochanter",
+      "role": "part",
+      "group": "Bony frame",
+      "layer": "bone",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.129,
+          0.534,
+          0.933
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT point where gluteus medius (FMA22330, gap 0.13 mm), gluteus minimus (FMA22332, 0.57 mm) and piriformis (FMA22340, 0.11 mm) converge on the femur — three witnesses over 20.4 mm of a 440.2 mm bone (4.6%). Identical to the anchor of the same name in gross__gluteal-region-hip-joint__proximal-femur, deliberately: a student reads the two scenes consecutively and the landmark must not move between them. tools/derive-landmark.mjs --parent FMA24474 --contact FMA22330,FMA22332,FMA22340",
+      "terms": [
+        "greater trochanter",
+        "midway between the ischial tuberosity and the greater trochanter",
+        "palpable landmark of the hip"
+      ],
+      "narration": "The lateral end of the surface marking, and the only one of the three points you can feel through the buttock without pressing hard."
+    },
+    {
+      "key": "neck_of_fibula",
+      "label": "Neck of the fibula",
+      "role": "part",
+      "group": "Bony frame",
+      "layer": "bone",
+      "render": "anchor",
+      "color": "#d19a2c",
+      "anchor": {
+        "on": "fibula",
+        "uvw": [
+          0.478,
+          0.56,
+          0.921
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT point where fibularis longus (FMA22552, gap 0.17 mm) and extensor digitorum longus (FMA22548, 0.29 mm) meet the fibula — two witnesses 28.3 mm apart on a 351 mm bone (8.1%). Both arise from the head and upper shaft, so the mean lies just below the head: the tip of the fibula measures at w=1.000 (extreme +z) and this point is 27.7 mm below it, which is the level at which the common fibular nerve crosses. READ AS: a measured point on the upper fibula at neck level, not a measured neck — a neck is a narrowest cross-section, which is neither of this tool's two definitions. tools/derive-landmark.mjs --parent FMA24480 --contact FMA22552,FMA22548",
+      "terms": [
+        "neck of the fibula",
+        "common fibular nerve",
+        "common peroneal nerve",
+        "foot drop",
+        "tight plaster"
+      ],
+      "narration": "The most dangerous 3 cm in the lower limb. The nerve is against bone here with nothing over it but skin."
+    },
+    {
       "key": "biceps_long",
       "name": "long head of right biceps femoris",
       "label": "Biceps femoris — long head",
@@ -716,7 +850,7 @@
           "view": "posterior"
         }
       ],
-      "narration": "Two bony points give you the line. Start midway between the posterior superior iliac spine and the ischial tuberosity. Curve laterally and downwards to a point midway between the ischial tuberosity and the greater trochanter. Then run straight down the middle of the back of the thigh to the top of the diamond behind the knee. Every clinical fact about this nerve hangs on that line."
+      "narration": "Three bony points give you the line, and all three are marked on the bones here — measured on the meshes, not placed by eye. Start midway between the posterior superior iliac spine and the ischial tuberosity. Curve laterally and downwards to a point midway between the ischial tuberosity and the greater trochanter. Then run straight down the middle of the back of the thigh to the top of the diamond behind the knee. Every clinical fact about this nerve hangs on that line."
     },
     {
       "mode": "associated_organs",
@@ -841,6 +975,15 @@
         {
           "op": "SHOW_STRUCTURE",
           "target": "fibula"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neck_of_fibula"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "neck_of_fibula",
+          "intensity": 0.95
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
@@ -999,7 +1142,8 @@
     "Status is 'candidate', not 'ready'. The scene passes the gate and renders, but the structure the curriculum asked for is present only as a concept path, and a human should decide whether a trace over the correct beds is enough to call the entry taught. Promote to 'ready' on that decision, or when a sciatic nerve model exists and the traces are re-authored against it.",
     "3d_anatomy is used and 'diagram' is recorded in deferred_modes. A drawn diagram would show the nerve itself, the root values and the sensory map far better than a trace does; the 3D scene is stronger on the relations, the depth and the injection anatomy. Ideally the topic ends up with both.",
     "No ligament of the pelvis is modelled. The sacrotuberous and sacrospinous ligaments complete the greater sciatic foramen the nerve leaves through, and the sacrospinous ligament separates it from the lesser sciatic foramen. Both are narrated only.",
-    "The greater sciatic notch, the ischial spine, the ischial tuberosity, the posterior superior iliac spine, the greater trochanter and the neck of the fibula are sub-features of whole-bone models. Beat 4 marks the nerve on a patient using two of them, and does it by lighting the whole bone and naming the point. Placing them as measured landmark anchors is the clear next improvement for this scene — the humerus scene shows the pattern — but the pelvis and fibula meshes were not measured in this run, and an anchor placed by eye on a nerve that runs beside the hip joint would be worse than none.",
+    "The ischial spine, the ischial tuberosity, the posterior superior iliac spine, the greater trochanter and the neck of the fibula are sub-features of whole-bone models. All five are now MEASURED landmark anchors, each carrying its measurement in calibrated_by and each status 'needs-review', so beat 4 marks the nerve on a patient against points on the bone rather than by lighting whole bones. The greater trochanter anchor is the same coordinate as in the proximal femur scene by design. The neck of the fibula is the weakest of the five and says so in its own calibrated_by: it is a measured point at neck level, derived from where fibularis longus and extensor digitorum longus arise, not a measured neck.",
+    "The GREATER SCIATIC NOTCH was NOT authored as an anchor and no later run should try. It is a concavity — a notch is defined by the absence of bone — so the nearest-contact definition returns the muscle lying across it and the extreme definition returns the rim on either side. Neither is the notch. It stays named on the hip bone in beat 1 and in the hip_bone narration.",
     "The sensory territory of the nerve cannot be shown. The only skin in the catalog is FMA7163, a single whole-body mesh with no regional divisions, so a dermatome patch cannot be lit on it and beats 8 and 9 describe the numb areas instead. The saphenous strip on the medial side of the leg, which is the exception that proves the lesion is sciatic and not spinal, is narration only.",
     "The intrinsic muscles of the sole are not modelled individually here, so the tibial division's hand-like control of the foot is represented by flexor digitorum longus and named in narration.",
     "The artery to the sciatic nerve, from the inferior gluteal artery, is named but not shown. No gluteal vessel exists as a model — that gap belongs to the Gluteal vessels entry, which is authored separately and which this scene does not claim to cover.",
@@ -1007,6 +1151,10 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   }
 }

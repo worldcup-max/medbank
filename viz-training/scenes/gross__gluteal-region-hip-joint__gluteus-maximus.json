@@ -399,6 +399,32 @@
         "trochanteric bursa"
       ],
       "narration": "The greater trochanter is the landmark you feel through the buttock; gluteus maximus passes over it with a bursa in between, and gluteus medius and minimus land on it. Only the lowest quarter of maximus reaches the bone itself, at the gluteal tuberosity."
+    },
+    {
+      "key": "greater_trochanter",
+      "label": "Greater trochanter",
+      "role": "part",
+      "group": "Bony frame",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0,
+          0.4119,
+          0.8864
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -x within slab z:0.8,1.0 on FMA24474 (right femur, 440.2 mm, long axis z) — the most lateral point of the upper fifth of the bone. 559 vertices considered, 189.3 mm from the surface centroid.",
+      "terms": [
+        "greater trochanter",
+        "trochanteric bursa",
+        "trochanteric bursitis",
+        "palpable landmark of the buttock"
+      ],
+      "narration": "The point, not the whole bone. This is what you feel through the buttock, what gluteus maximus slides over on its bursa, and the upper end of the line to the posterior superior iliac spine that beat 10 divides into quadrants. Tenderness here and nowhere else is trochanteric bursitis."
     }
   ],
   "views": [
@@ -706,11 +732,16 @@
           "intensity": 0.95
         },
         {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "greater_trochanter",
+          "intensity": 0.9
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "posterior"
         }
       ],
-      "narration": "Divide the buttock into quarters with a vertical and a horizontal line. Inject into the upper outer quadrant only. The needle lands in gluteus medius, well above and lateral to the sciatic nerve. Any other quadrant risks the nerve, and a sciatic injection injury means a foot that cannot dorsiflex. The safer alternative is further forward still, on the side of the hip between the two iliac spines."
+      "narration": "Divide the buttock into quarters with a vertical and a horizontal line. Inject into the upper outer quadrant only. The needle lands in gluteus medius, well above and lateral to the sciatic nerve. Be precise about what is wrong with the other three: the two lower quadrants are where the sciatic nerve runs, and a sciatic injection injury means a foot that cannot dorsiflex; the upper inner quadrant is not over the nerve but over the superior gluteal vessels and the greater sciatic foramen, which is its own reason to avoid it. The safer alternative is further forward still, on the side of the hip between the two iliac spines."
     },
     {
       "mode": "mechanism",
@@ -780,12 +811,14 @@
     "No ligament of the pelvis is modelled — the sacrotuberous ligament gives about a fifth of the muscle's origin and the sacrospinous ligament divides the greater from the lesser sciatic foramen, and both are described only in narration.",
     "No nerve of the lower limb exists as a model, so the sciatic nerve is authored as a traced concept path across the short rotators, and the inferior and superior gluteal nerves — the two nerves the whole clinical beat turns on — are taught by lighting the muscles they supply.",
     "No artery is modelled in this region either. The superior and inferior gluteal vessels are named in narration only; they are the subject of the separate Gluteal vessels curriculum entry, which this scene does not claim to cover.",
-    "The greater trochanter, the gluteal tuberosity, the posterior gluteal line, the ischial tuberosity and the posterior superior iliac spine are all sub-features of whole-bone meshes. They are taught by lighting the femur or the hip bone and naming the feature. Authoring them as landmark anchors is the obvious next improvement, but the meshes were not measured in this run and an anchor placed by eye would be worse than none.",
+    "The greater trochanter is now a measured landmark anchor on FMA24474 (extreme -x within the top fifth of the bone), single-witness and status 'needs-review'. The gluteal tuberosity, the posterior gluteal line, the ischial tuberosity and the posterior superior iliac spine are still sub-features taught by lighting the femur or the hip bone and naming them: a tuberosity and a line are roughened areas, not points, and neither of derive-landmark.mjs's definitions returns an area. The ischial tuberosity and the PSIS are point-like and ARE derivable in principle — the tuberosity by contact with the hamstrings, the PSIS by extreme — and are the obvious next measurement here. They were not attempted in this run and an anchor placed by eye would be worse than none.",
     "The trochanteric and gluteal bursae have no meshes, so trochanteric bursitis is mentioned rather than shown.",
     "This scene does not cover Hip joint, Proximal femur, Sciatic nerve or Gluteal vessels. The femur and hip bone appear here only as the frame the muscle is stretched over; the hip joint capsule itself is never shown."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

@@ -114,7 +114,7 @@
         "c2",
         "cervical vertebra"
       ],
-      "narration": "The dens rises from its body into the ring of the atlas above. The canal is still wide at this level. The cervical enlargement of the cord begins below it, from about C4."
+      "narration": "The dens rises from its body into the ring of the atlas above. The canal is still wide at this level. The cervical enlargement of the cord lies well below it: about the C4 to T1 vertebral levels."
     },
     {
       "key": "c3",
@@ -131,7 +131,7 @@
         "c3",
         "cervical vertebra"
       ],
-      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+      "narration": "A cervical ring, wide and triangular. The cervical enlargement has not started yet at this level — it begins at about C4, just below."
     },
     {
       "key": "c4",
@@ -148,7 +148,7 @@
         "c4",
         "cervical vertebra"
       ],
-      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+      "narration": "A cervical ring. The canal is wide and triangular here, with the cervical enlargement of the cord inside it. It is widest of all at the atlas, which is why the cord usually escapes a fracture up there."
     },
     {
       "key": "c5",
@@ -165,7 +165,7 @@
         "c5",
         "cervical vertebra"
       ],
-      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+      "narration": "A cervical ring. The canal is wide and triangular here, with the cervical enlargement of the cord inside it. It is widest of all at the atlas, which is why the cord usually escapes a fracture up there."
     },
     {
       "key": "c6",
@@ -182,7 +182,7 @@
         "c6",
         "cervical vertebra"
       ],
-      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+      "narration": "A cervical ring. The canal is wide and triangular here, with the cervical enlargement of the cord inside it. It is widest of all at the atlas, which is why the cord usually escapes a fracture up there."
     },
     {
       "key": "c7",
@@ -199,7 +199,7 @@
         "c7",
         "cervical vertebra"
       ],
-      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+      "narration": "A cervical ring. The canal is wide and triangular here, with the cervical enlargement of the cord inside it. It is widest of all at the atlas, which is why the cord usually escapes a fracture up there."
     },
     {
       "key": "t1",
@@ -216,7 +216,7 @@
         "t1",
         "thoracic vertebra"
       ],
-      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+      "narration": "The first thoracic ring, and the lower end of the cervical enlargement. Below this level the canal narrows and rounds off, and the room to spare around the cord runs out."
     },
     {
       "key": "t2",
@@ -572,6 +572,7 @@
     },
     {
       "mode": "cross_section",
+      "beat": 2,
       "title": "What fills the ring",
       "ops": [
         {
@@ -593,6 +594,7 @@
     },
     {
       "mode": "cross_section",
+      "beat": 3,
       "title": "The canal in the midline",
       "ops": [
         {
@@ -619,11 +621,11 @@
           "view": "lateral"
         }
       ],
-      "narration": "Split the column in the midline and the canal reads as a single passage with the bodies in front of it and the arches behind. The cord runs the upper two thirds of it and stops; the lower third holds roots and fluid."
+      "narration": "Split the column in the midline and the canal reads as a single passage with the bodies in front of it and the arches behind. The bright thread near the top is the central canal — the only piece of cord tissue in this model, and only 34 millimetres of it, at the atlas and axis. Everything else about the cord here is description, not display: it would fill the upper two thirds of this passage and stop, leaving the lower third to roots and fluid."
     },
     {
       "mode": "mechanism",
-      "beat": 2,
+      "beat": 4,
       "title": "Where the cord stops",
       "ops": [
         {
@@ -657,7 +659,7 @@
     },
     {
       "mode": "associated_organs",
-      "beat": 3,
+      "beat": 5,
       "title": "How the nerves get out",
       "ops": [
         {
@@ -679,7 +681,7 @@
     },
     {
       "mode": "mechanism",
-      "beat": 4,
+      "beat": 6,
       "title": "Where the needle goes",
       "ops": [
         {
@@ -708,6 +710,7 @@
     },
     {
       "mode": "comparison",
+      "beat": 7,
       "title": "Room to spare, region by region",
       "ops": [
         {
@@ -730,8 +733,10 @@
   "provenance": {
     "author": "task",
     "authored_at": "2026-08-26",
-    "corrected_at": "2026-08-26",
-    "corrected_by": "measurement of FMA78497 against the vertebral levels"
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "THE SPINAL CORD ITSELF HAS NO MODEL. The catalog holds 934 meshes and not one of them is the cord: the only entry in its neighbourhood is the central canal, a thread down the middle of the cord. The scene is built on the bony canal, which is complete, and uses the central canal to show where the cord runs. That is honest but it is not the cord, and it is the reason this scene is candidate and not ready.",

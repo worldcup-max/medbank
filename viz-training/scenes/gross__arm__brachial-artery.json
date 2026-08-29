@@ -337,6 +337,22 @@
       "narration": "It begins beside the artery but leaves it halfway down, piercing the medial intermuscular septum to reach the back of the arm. So below mid-arm the ulnar nerve is no longer a relation of this artery."
     },
     {
+      "key": "radial_nerve",
+      "label": "Radial nerve",
+      "role": "context",
+      "group": "Relations",
+      "layer": "nerve",
+      "color": "#5aa0e0",
+      "terms": [
+        "radial nerve",
+        "radial groove",
+        "lateral to the biceps tendon",
+        "between brachialis and brachioradialis",
+        "cubital fossa"
+      ],
+      "narration": "It leaves the artery early, going backwards with the profunda brachii into the radial groove, and reappears at the lateral edge of the cubital fossa between brachialis and brachioradialis. It is the fourth and most lateral of the four things you read across the fossa — and the only one of the four that is not a relation of the artery in the arm itself."
+    },
+    {
       "key": "venae",
       "label": "Venae comitantes & basilic vein",
       "role": "part",
@@ -403,7 +419,7 @@
         "claw hand deformity",
         "children"
       ],
-      "narration": "A child falls on the outstretched hand and the sharp lower fragment tears or presses the artery in front of it. The flexor compartment loses its blood, the muscle dies and shortens, and the hand is pulled into a fixed claw. Pain on passive extension of the fingers is the early sign — not the absent pulse, which comes late."
+      "narration": "A child falls on the outstretched hand. The lower fragment tilts backwards, which drives the sharp front edge of the upper fragment forwards into the artery and the median nerve lying in front of it. The flexor compartment loses its blood, the muscle dies and shortens, and the hand is pulled into a fixed claw. Pain on passive extension of the fingers is the early sign — not the absent pulse, which comes late."
     },
     {
       "key": "coracobrachialis",
@@ -698,9 +714,14 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-28",
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   },
   "gaps": [
+    "Audit 2026-08-28: beat 5 asked the student to read four things across the cubital fossa from medial to lateral — median nerve, artery, biceps tendon, radial nerve — and only three of them were authored. The radial nerve has been added as a drawn context region in Relations, which beat 5 already shows, so the mnemonic now has four things to point at. This is the same fault the repair backlog recorded against axilla-brachial-plexus__axillary-vein.",
     "Routed to its deferred diagram mode, not to 3D. The catalog holds no brachial artery and none of its branches — searching it for brachial, profunda, collateral, recurrent, radial artery and ulnar artery returns nothing at all. The nearest arterial models in the whole upper limb are the right and left subclavian arteries, which are two name-changes proximal to this vessel and cannot stand in for it. 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes: this becomes a 3D scene the day upper-limb vessel models exist, with no curriculum edit.",
     "Status is 'planned', not 'ready'. Structures, seven beats, ops and narration are fully authored, but no artwork has been drawn for the SVG engine, so nothing renders today. Promote to 'ready' once the arm-and-cubital-fossa artwork exists with the labelled regions this scene names and the engine can play the seven beats.",
     "The humerus, biceps and brachialis are authored as context regions of the diagram even though the humerus, both heads of biceps and the triceps heads DO exist as models in the catalog. Mixing a real bone model into an otherwise drawn vessel diagram was rejected: the teaching here is the course and the branching, and half a 3D scene would teach neither well. When the vessels arrive the whole scene converts at once.",

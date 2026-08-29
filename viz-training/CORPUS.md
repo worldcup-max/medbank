@@ -6,12 +6,12 @@ One line per authored scene. Regenerate the app-facing lookup with
 | course | topic | structure | mesh parts | landmarks | status | scene |
 |---|---|---|---|---|---|---|
 | Gross Anatomy | Arm (Brachium) | Biceps brachii & Triceps brachii | 5 muscle heads + 4 bones | 6 (measured, 0.0–0.2 mm) | ✅ ready | `scenes/gross__arm__biceps-triceps.json` |
-| Gross Anatomy | Heart & Pericardium | Heart | 18 (valves, papillary muscles, great vessels, coronaries, cardiac veins) + lungs/trachea context | 0 | ✅ ready | `scenes/gross__heart-pericardium__heart.json` |
-| Gross Anatomy | Back & Vertebral Column | Vertebral column | 25 vertebrae (C1–C7, T1–T12, L1–L5, sacrum) + 5 lumbar discs as context | 0 | ✅ ready | `scenes/gross__back-vertebral-column__vertebral-column.json` |
-| Gross Anatomy | Back & Vertebral Column | Typical vertebra | 3 regional exemplars (L2, T6, C5) + 2 neighbour vertebrae + 2 discs | 16 | ✅ ready | `scenes/gross__back-vertebral-column__typical-vertebra.json` |
-| Gross Anatomy | Back & Vertebral Column | Intervertebral disc | 4 disc parts (L4/5, L5/S1, T6/7, C5/6) + 3 lumbar discs, 6 vertebrae & sacrum as context | 0 | ✅ ready | `scenes/gross__back-vertebral-column__intervertebral-disc.json` |
-| Gross Anatomy | Back & Vertebral Column | Spinal cord in vertebral canal | 25 vertebrae (C1–C7, T1–T12, L1–L5) + sacrum, 2 discs, central canal of cord | 0 | 🟡 candidate | `scenes/gross__back-vertebral-column__spinal-cord-in-vertebral-canal.json` |
-| Gross Anatomy | Back & Vertebral Column | Erector spinae / deep back muscles | 19 muscle parts (3 columns × 9, transversospinal ×6, splenius ×2, levatores ×2) + 8 extrinsic/intermediate muscles & 6 bones as context | 0 | ✅ ready | `scenes/gross__back-vertebral-column__erector-spinae-deep-back-muscles.json` |
+| Gross Anatomy | Heart & Pericardium | Heart | 20 (valves, papillary muscles, great vessels, coronaries, cardiac veins) + lungs (all five lobes), diaphragm, trachea context | 0 | ✅ ready · audited 2026-08-29 | `scenes/gross__heart-pericardium__heart.json` |
+| Gross Anatomy | Back & Vertebral Column | Vertebral column | 24 vertebrae (C1–C7, T1–T12, L1–L5) + sacrum + all 23 intervertebral discs as context | 1 (coccyx, measured on the sacral mesh) | ✅ ready | `scenes/gross__back-vertebral-column__vertebral-column.json` |
+| Gross Anatomy | Back & Vertebral Column | Typical vertebra | 3 regional exemplars (L2, T6, C5) + 2 neighbour vertebrae + 2 discs | 13 | ✅ ready · audited 2026-08-29 (landmark count corrected 16 → 13; beats renumbered — two views were both "3" and one had none; intervertebral foramen re-described as the paired pedicle notches) | `scenes/gross__back-vertebral-column__typical-vertebra.json` |
+| Gross Anatomy | Back & Vertebral Column | Intervertebral disc | 4 disc exemplars (L4/5, L5/S1, T6/7, C5/6) within the complete set of 23 discs + all 24 vertebrae & sacrum as context | 1 | ✅ ready · audited 2026-08-29 (structure line corrected — the scene holds the whole column, not 6 vertebrae; coccyx anchor was uncounted; three views had no beat number) | `scenes/gross__back-vertebral-column__intervertebral-disc.json` |
+| Gross Anatomy | Back & Vertebral Column | Spinal cord in vertebral canal | 24 vertebrae (C1–C7, T1–T12, L1–L5) + sacrum, 2 discs, central canal of cord | 0 | 🟡 candidate · audited 2026-08-29 (vertebra count corrected 25 → 24; C3 claimed the cervical enlargement sat at its level while C2 said it began at C4 — enlargement now stated once as C4–T1 and applied consistently; midline beat no longer implies a cord is drawn; three views had no beat number. Stays candidate: no cord mesh, and the curriculum-required `vasculature` view is unauthorable — no vertebral/spinal/segmental vessel in the catalog) | `scenes/gross__back-vertebral-column__spinal-cord-in-vertebral-canal.json` |
+| Gross Anatomy | Back & Vertebral Column | Erector spinae / deep back muscles | 19 muscle parts (3 columns × 9, transversospinal ×7 (semispinalis ×3, multifidus, rotatores ×3), levatores ×2 in their own group, splenius ×2) + 8 extrinsic/intermediate muscles & 6 bones as context | 0 | ✅ ready · audited 2026-08-29 | `scenes/gross__back-vertebral-column__erector-spinae-deep-back-muscles.json` |
 | Gross Anatomy | Pectoral Region & Breast | Pectoralis major | 3 heads (clavicular, sternocostal, abdominal) + 16 context (clavicle, sternum, 5 costal cartilages, humerus, pec minor, subclavius, serratus anterior, deltoid, latissimus, obliques) | 0 | ✅ ready | `scenes/gross__pectoral-region-breast__pectoralis-major.json` |
 
 **8 scenes · 7 ready · 1 candidate · 0 blocked · 556 term mappings.**
@@ -58,7 +58,8 @@ anatomy scenes to add their bony landmarks.
   are narrated. `covers` is declared but `candidate` keeps the structure on the worklist.
 
 ## Run 2026-08-26 (run 3) — Erector spinae, then across to the pectoral region
-- **Erector spinae / deep back muscles** — `ready`. `gross__back-vertebral-column__erector-spinae-deep-back-muscles`
+- **Erector spinae / deep back muscles** — `ready`, audited 2026-08-29. `gross__back-vertebral-column__erector-spinae-deep-back-muscles`
+  *(2026-08-29 audit: levatores costarum moved out of the Transversospinalis group — beat 6 was isolating that group and narrating "three muscles, one plan" over five. Beat 4's "only column that reaches the skull" softened to "reliably reaches" to agree with gaps[1] on spinalis capitis.)*
   · Gross Anatomy · Back & Vertebral Column · 3d_anatomy · 19 parts + 14 context · ready.
   There is no mesh called "erector spinae", but all three of its columns are in the catalog by name, so the
   muscle is assembled from its nine named parts — iliocostalis lumborum/thoracis/cervicis, longissimus
@@ -121,7 +122,8 @@ anatomy scenes to add their bony landmarks.
   35 ops, including the 1-2-3 branch rule and the route of breast-cancer spread traced as `concept:lymph`.
   Held as `candidate`, not `ready`: a scene whose entire named subject is narrated rather than shown has not
   earned the status. Measured node anchors on the axillary walls are the one change that would release it.
-- **Brachial plexus** — `planned`. `gross__axilla-brachial-plexus__brachial-plexus`
+- **Brachial plexus** — `planned`, audited 2026-08-29. `gross__axilla-brachial-plexus__brachial-plexus`
+  *(2026-08-29 audit: no-upper-limb-nerve claim re-verified independently against all 934 catalog entries — diagram routing correct. Fixed the ULTRA mnemonic, which was presented twice as the proximal-to-distal ORDER of the posterior cord's branches when its letters spell a different order.)*
   · Gross Anatomy · Axilla & Brachial Plexus · diagram · 32 parts + 4 context · **planned**. *(2026-08-28: diagram routing re-opened per the repair backlog and re-confirmed. The scalenes, first rib, clavicle and subclavian artery all exist as meshes, so the interscalene corridor is renderable — but a fresh search on nerve, plexus, root, trunk, cord and ganglion still returns four meshes in the whole catalog, none of the upper limb, so the subject of all six beats does not exist. Stays diagram.)*
   Routed to its deferred `diagram` mode because the catalog holds **no nerve of the upper limb at all** —
   a search of all 934 entries for plexus, nerve, root, trunk and cord returns two optic nerves and two
@@ -143,7 +145,7 @@ anatomy scenes to add their bony landmarks.
   complementary, one for the space and one for the branching tree. Three parts divided by pectoralis minor;
   six branches tied part by part with SHOW_RELATIONSHIP; `PEEL_LAYER` takes the axillary sheath off to show
   artery and cords inside it and the vein outside; `concept:collateral_flow` walks the scapular anastomosis
-  to explain where the vessel may safely be tied. Six beats, 31 ops. `covers` is `["Axillary artery"]`.
+  to explain where the vessel may safely be tied. Six beats, 31 ops. `covers` is `["Axillary artery"]`. **Audited 2026-08-29**: beat 1 said the vessel runs "from the aortic arch", true only on the left — now states brachiocephalic trunk on the right; beat 4 counted "three things" inside the axillary sheath and listed artery + cords — now four (second part of the artery + three cords), matching the vein scene. Catalog re-searched under nine spellings, absence confirmed.
 - **Axillary vein** — `planned`. `gross__axilla-brachial-plexus__axillary-vein`
   · Gross Anatomy · Axilla & Brachial Plexus · diagram · 17 parts + 1 context · **planned**.
   The catalog holds 21 veins and not one of them is in the upper limb below the subclavian — no axillary,
@@ -155,7 +157,7 @@ anatomy scenes to add their bony landmarks.
   venae comitantes at the lower border of teres major, the tributary tree that copies the artery's
   branches, the cephalic vein piercing the clavipectoral fascia, the front-to-back cross-section, and the
   three clinical failures — air embolism, effort thrombosis (Paget-Schroetter), lymphoedema. Seven beats,
-  33 ops. `covers` is `["Axillary vein"]`.
+  33 ops. `covers` is `["Axillary vein"]`. **Audited 2026-08-29**: one factual error — beat 7 placed the infraclavicular puncture at the junction of the medial two-thirds and lateral third of the clavicle; corrected to medial third / lateral two-thirds. Named-not-drawn structures logged in `gaps[]`; beat 7 is the hollow beat.
 - **Axillary lymph nodes** — `planned`. `gross__axilla-brachial-plexus__axillary-lymph-nodes`
   · Gross Anatomy · Axilla & Brachial Plexus · diagram · 18 parts · **planned**.
   **There is not one lymph node anywhere in the catalog** — 934 entries searched for lymph and for node,
@@ -168,10 +170,14 @@ anatomy scenes to add their bony landmarks.
   clearance — long thoracic, thoracodorsal, intercostobrachial — each with its own signature deficit; and
   a final beat on how to actually palpate an axilla. Seven beats, 33 ops. `covers` is
   `["Axillary lymph nodes"]`. This is the picture the 3D axillary vessels scene names as the single change
-  that would release it, drawn separately because that scene teaches the space and this one the nodes.
+  that would release it, drawn separately because that scene teaches the space and this one the nodes. **Audited 2026-08-29**: the interpectoral (Rotter's) nodes were inside a group named "The five groups"
+  that therefore held six structures, so beat 1 highlighted six while narrating five and beat 2's "the other
+  two groups" counted against the wrong set; Rotter's now has its own group and beat 4 shows it explicitly at
+  level II. Named-not-drawn structures logged in `gaps[]` — the axillary vein is the one the artwork most needs.
 
 ## Run 2026-08-26 (run 8) — Rotator cuff, then the humerus that carries every landmark
-- **Rotator cuff muscles** — `ready`. `gross__axilla-brachial-plexus__rotator-cuff-muscles`
+- **Rotator cuff muscles** — `ready`, audited 2026-08-29. `gross__axilla-brachial-plexus__rotator-cuff-muscles`
+  *(2026-08-29 audit: the three facets of the greater tubercle are now MEASURED anchors, one per cuff tendon, and beat 4 points each muscle at its own facet. A gaps[] note claiming no supraspinatus mesh was held locally was false and is corrected.)*
   · Gross Anatomy · Axilla & Brachial Plexus · 3d_anatomy · 6 parts (4 muscles + 2 landmarks) + 5 context ·
   **ready**. The first fully-resolved 3D scene in this topic, and the topic's last structure. All four cuff
   muscles exist and were copied verbatim from the catalog: `right supraspinatus` FMA32544,
@@ -183,8 +189,9 @@ anatomy scenes to add their bony landmarks.
   `COMPARE_STRUCTURES`, supraspinatus traced under the acromion with the painful arc, and the teres trap.
   Two landmark anchors on the humerus — greater and lesser tubercle — carry the insertion story.
   `covers` is `["Rotator cuff muscles"]`.
-- **Humerus** — `ready`. `gross__arm__humerus` · Gross Anatomy · Arm (Brachium) · 3d_anatomy · 12 parts
-  (1 bone + 11 landmarks) + 3 context · **ready**. The catalog's smallest unit is the whole bone, so every
+- **Humerus** — `ready`. `gross__arm__humerus` · Gross Anatomy · Arm (Brachium) · 3d_anatomy · 13 parts
+  (1 bone + 12 landmarks) + 3 context · **ready**. *(amended by the audit of 2026-08-28: a twelfth landmark,
+  the supracondylar region, measured and added; beat 7 now pairs four fracture sites with four nerves.)* The catalog's smallest unit is the whole bone, so every
   named part of the humerus had to be a measured anchor or nothing. `tools/derive-humerus-landmarks.mjs`
   (new this run) measures eleven of them on the mesh itself and prints the evidence for each: six by
   CONTACT with a named neighbour — head (scapula, 1.00 mm), lesser tubercle (subscapularis, 0.09 mm),
@@ -196,11 +203,18 @@ anatomy scenes to add their bony landmarks.
   63.8 mm, head to trochlea 257.4 mm on a 307.5 mm bone. Seven beats, 25 ops: the whole bone in place, top
   end, shaft from behind, a draggable transverse cut, bottom end with both articulations, the radial nerve
   traced as `concept:radial_nerve` along neck → groove → lateral epicondyle, and a closing beat pairing
-  three fracture sites with three nerves. `covers` is `["Humerus"]`.
+  fracture sites with the nerve at risk at each. The audit of 2026-08-28 measured a twelfth anchor — the
+  supracondylar region, the most anterior point of the distal shaft within the slab z:0.10–0.25, sitting at
+  Z-fraction 0.101 against 0.066 and 0.081 for the two epicondyles — because the learning goal promised
+  four fracture sites, beat 7 delivered three, and the nerves scene deferred to a fourth nobody had written.
+  Beat 7 now compares four: surgical neck/axillary, radial groove/radial, supracondylar/median (with the
+  brachial artery), medial epicondyle/ulnar. `covers` is `["Humerus"]`.
 
 ## Run 2026-08-26 (run 9) — the brachial artery and the three nerves, both unresolvable
 - **Brachial artery** — `planned`. `gross__arm__brachial-artery` · Gross Anatomy · Arm (Brachium) ·
-  diagram · 17 parts + 5 context · **planned**. Routed to its deferred `diagram` mode. The catalog holds
+  diagram · 17 parts + 6 context · **planned**. *(amended by the audit of 2026-08-28: the radial nerve added
+  as a drawn context region, because beat 5 asked the student to read four things across the cubital fossa
+  and only three were authored.)* Routed to its deferred `diagram` mode. The catalog holds
   **no brachial artery and none of its branches** — brachial, profunda, collateral, recurrent, radial
   artery and ulnar artery all return nothing across the 934 entries, and the nearest arterial models in the
   whole limb are the two subclavian arteries, two name-changes proximal. Same absence that sent the
@@ -227,7 +241,7 @@ anatomy scenes to add their bony landmarks.
 
 ## Run 2026-08-26 (run 10) — the forearm, where the catalog finally cooperates
 - **Flexor compartment of forearm** — `ready`. `gross__forearm-hand__flexor-compartment` · Gross Anatomy ·
-  Forearm & Hand · 3d_anatomy · 11 parts + 16 context · **ready**. *(2026-08-28: the nine phalanges of the index, ring and little fingers added, so beats 7 and 8 show the four-tendon fan on all four digits instead of one; six of those meshes — the middle and distal phalanges of the three added digits — are catalogued but not yet fetched, so the scene now draws 22/28 and those two beats render on the middle finger only until they are.)* The first fully resolvable scene since
+  Forearm & Hand · 3d_anatomy · 11 parts + 17 context · **ready**. *(2026-08-28: the nine phalanges of the index, ring and little fingers added, so beats 7 and 8 show the four-tendon fan on all four digits instead of one.)* *(2026-08-29 audit: those meshes have since arrived — the scene draws **28/28** and both beats render on all four digits; the two gap notes claiming otherwise, and a third saying the interosseous membrane still needed adding when it was already authored, were stale and are corrected. Beat 2's "all from the medial epicondyle" contradicted the scene's own ulnar and humeral head narrations and now names the two second heads explicitly.)* The first fully resolvable scene since
   the humerus: every muscle of all three flexor layers exists in the catalog. Superficial four (pronator
   teres by its humeral and ulnar heads, flexor carpi radialis, palmaris longus, flexor carpi ulnaris by its
   humeral and ulnar heads), the middle layer alone (flexor digitorum superficialis by its humeroulnar and
@@ -244,7 +258,8 @@ anatomy scenes to add their bony landmarks.
   Anatomy · Forearm & Hand · 3d_anatomy · 13 parts + 8 context · **ready**. Superficial six
   (brachioradialis, extensor carpi radialis longus and brevis, extensor digitorum, extensor digiti minimi,
   extensor carpi ulnaris by both heads) and deep five (supinator, abductor pollicis longus, extensor
-  pollicis brevis and longus, extensor indicis), plus anconeus. Context carries the snuffbox: scaphoid and
+  pollicis brevis and longus, extensor indicis), plus anconeus, which beat 2 now lights faintly and names
+  as belonging to the compartment but not to the six. Context carries the snuffbox: scaphoid and
   trapezium as its floor, first, second and fifth metacarpals as the insertion targets that make wrist
   deviation obvious. Nine beats, 45 ops: the compartment from behind; superficial group; deep group; the
   three thumb muscles winding to the radial side; the snuffbox with its two borders compared and its floor
@@ -253,7 +268,7 @@ anatomy scenes to add their bony landmarks.
   bones. `covers` is `["Extensor compartment of forearm"]`.
 
 - **Radius & ulna** — `ready`. `gross__forearm-hand__radius-ulna` · Gross Anatomy · Forearm & Hand ·
-  3d_anatomy · 13 parts (2 bones, the interosseous membrane, and **11 derived landmark anchors**) + 9
+  3d_anatomy · 13 parts (2 bones, the interosseous membrane, and **10 derived landmark anchors**) + 9
   context · **ready**. The two bones themselves are the only osteology meshes the catalog holds for the
   forearm, so every named feature — head of radius, radial tuberosity, ulnar notch, radial styloid,
   olecranon, trochlear notch, coronoid process, radial notch, head of ulna, ulnar styloid — was measured on
@@ -268,8 +283,10 @@ anatomy scenes to add their bony landmarks.
   0.8 mm further distally than the radial styloid**, so the ~1 cm styloid step is taught but must not be
   measured off the model. `covers` is `["Radius & ulna"]`.
 - **Carpal tunnel** — `ready`. `gross__forearm-hand__carpal-tunnel` · Gross Anatomy · Forearm & Hand ·
-  3d_anatomy · 20 parts + 5 context · **ready**. Roof (flexor retinaculum), the four pillars as whole bones
-  (scaphoid and trapezium laterally, pisiform and hamate medially), the floor (lunate, capitate, triquetral,
+  3d_anatomy · 23 parts + 5 context · **ready**. Roof (flexor retinaculum), the four pillars as whole bones
+  (scaphoid and trapezium laterally, pisiform and hamate medially) with three measured landmark anchors on
+  their retinacular attachments (scaphoid tubercle 0.45 mm, trapezium tubercle 0.20 mm, hook of hamate
+  2.80 mm; the pisiform needs none), the floor (lunate, capitate, triquetral,
   trapezoid), the four muscles whose nine tendons pass through, the four thenar muscles, and the three
   tendons that pass outside. Ten beats, 45 ops: where the tunnel is; the arch of the carpus; the four
   pillars compared as proximal and distal pairs; the lid going on; the transverse section every exam draws;
@@ -282,7 +299,7 @@ anatomy scenes to add their bony landmarks.
 ## Run 2026-08-27 (run 12) — the hand finished, then out of the upper limb
 
 - **Intrinsic hand muscles & arches** — `ready`. `gross__forearm-hand__intrinsic-hand-muscles-arches` ·
-  Gross Anatomy · Forearm & Hand · 3d_anatomy · 13 parts + 15 context · **ready**. All five intrinsic
+  Gross Anatomy · Forearm & Hand · 3d_anatomy · 13 parts + 16 context · **ready**. *(2026-08-29 audit: flexor digitorum profundus FMA38479 added as the one extrinsic in the scene, because beat 6 traced the lumbricals from a tendon that was not on screen; beats 2 and 11 disagreed with the scene's own fpb_deep narration about whether the deep head of flexor pollicis brevis is median or ulnar, and now both say ulnar.)* All five intrinsic
   groups: thenar (abductor pollicis brevis, opponens pollicis, both heads of flexor pollicis brevis),
   hypothenar (abductor, flexor and opponens digiti minimi), adductor pollicis by both heads, and the deep
   palm as the catalog holds it — **lumbricals, palmar interossei and dorsal interossei are single meshes
@@ -298,7 +315,7 @@ anatomy scenes to add their bony landmarks.
   ulnar claw, with the paradox that a wrist lesion claws worse than an elbow lesion. `covers` is
   `["Intrinsic hand muscles & arches"]`.
 - **Gluteus maximus** — `ready`. `gross__gluteal-region-hip-joint__gluteus-maximus` · Gross Anatomy ·
-  Gluteal Region & Hip Joint · 3d_anatomy · 14 parts + 3 context · **ready**. The muscle itself, its two
+  Gluteal Region & Hip Joint · 3d_anatomy · 15 parts + 3 context · **ready** · audited 2026-08-29. The muscle itself, its two
   insertions (iliotibial tract and the gluteal tuberosity of the femur), tensor fasciae latae as the front
   half of the same sling, gluteus medius and minimus as the abductors underneath, the full stack of short
   lateral rotators (piriformis, gemellus superior, obturator internus, gemellus inferior, quadratus
@@ -310,7 +327,8 @@ anatomy scenes to add their bony landmarks.
   rotation compared against medius and minimus rotating the other way; the maximus lifted off to show
   piriformis as the key to the foramen; the sciatic nerve as a traced `concept:sciatic_nerve` path across
   the rotators; a section showing how deep the fat is before a needle reaches muscle; the upper outer
-  quadrant; inferior versus superior gluteal palsy told apart by watching the patient walk; and a closing
+  quadrant, with the greater trochanter lit as a measured anchor and the other three quadrants now
+  distinguished correctly (sciatic nerve below, superior gluteal vessels above and medial); inferior versus superior gluteal palsy told apart by watching the patient walk; and a closing
   four-layer peel. `covers` is `["Gluteus maximus"]` only — Hip joint, Proximal femur, Sciatic nerve and
   Gluteal vessels are explicitly *not* claimed and are named in `gaps`.
 
@@ -339,7 +357,7 @@ anatomy scenes to add their bony landmarks.
 ### `gross__gluteal-region-hip-joint__proximal-femur`
 - **id** `gross__gluteal-region-hip-joint__proximal-femur` · **course** Gross Anatomy · **topic** Gluteal
   Region & Hip Joint · **structure** Proximal femur · **mode** `3d_anatomy` (deferred: `diagram`) ·
-  **19 structures (17 parts) · 11 views · 46 ops** · **status `ready`**.
+  **23 structures (21 parts) · 11 views · 46 ops** · **status `ready`** · audited 2026-08-29.
 - Right femur FMA24474 is the subject; right hip bone FMA16586 the frame. Muscles are grouped by the
   landmark they attach to rather than by action — On the greater trochanter (piriformis, gluteus medius,
   gluteus minimus, obturator internus, both gemelli, obturator externus), On the intertrochanteric crest
@@ -356,6 +374,18 @@ anatomy scenes to add their bony landmarks.
 - `covers` is `["Proximal femur"]` only. `gaps` is heavy by design: no femoral artery, no profunda, no
   circumflex femoral or obturator arteries, no capsule, no ligament of the head, and no separate head /
   neck / trochanter meshes.
+- **Amended 2026-08-29 (audit).** Four measured landmark anchors added on FMA24474, closing the gap the
+  scene itself called "the strongest case in the corpus for measured landmark anchors": **greater
+  trochanter** (three witnesses — gluteus medius, minimus, piriformis — scattered 4.6% of the bone),
+  **trochanteric fossa** (obturator externus, 0.23 mm), **quadrate tubercle** (quadratus femoris,
+  0.02 mm), **lesser trochanter** (psoas major, 0.87 mm; iliacus rejected as a second witness for 17.7%
+  scatter). All `render:"anchor"`, all `status:"needs-review"`, each carrying its measurement and its
+  refusals in `calibrated_by`. Five features were deliberately NOT anchored and the reasons are now in
+  `gaps[]` — the **gluteal tuberosity** measurement is clean and anatomically wrong (glutes maximus's
+  nearest point is a third of the way down the shaft), and the fovea, intertrochanteric line and crest are
+  ridges, which neither of `derive-landmark.mjs`'s definitions describes. Beat 2's narration said "learn
+  these six names" while naming seven, and named the trochanteric fossa over an *anterior* view of a bone
+  whose fossa faces posteromedially; the fossa moved to beat 3, which is the posterior view.
 
 ## Run 2026-08-27 (run 13) — the gluteal region finished, both subjects unmodelled
 
@@ -367,8 +397,8 @@ relations, and the relations resolve. Both are `candidate`, not `ready` — see 
 
 ### `gross__gluteal-region-hip-joint__sciatic-nerve`
 - id `gross__gluteal-region-hip-joint__sciatic-nerve` · Gross Anatomy · Gluteal Region & Hip Joint ·
-  **Sciatic nerve** · mode `3d_anatomy` (deferred: `diagram`) · 25 structures (20 parts) · 12 views ·
-  67 ops · **candidate** · degrades `PEEL_LAYER`.
+  **Sciatic nerve** · mode `3d_anatomy` (deferred: `diagram`) · 30 structures (25 parts) · 12 views ·
+  69 ops · **candidate** · degrades `PEEL_LAYER` · audited 2026-08-29.
 - The nerve itself is `concept:sciatic_nerve`, traced across the four beds it actually lies on — gemellus
   superior, the tendon of obturator internus, gemellus inferior, quadratus femoris — every one of them a
   real model. Roof `right gluteus maximus` FMA22328. Gateway `right piriformis` FMA22340. Frame
@@ -387,12 +417,30 @@ relations, and the relations resolve. Both are `candidate`, not `ready` — see 
   breaks the rule; foot drop traced round the neck of the fibula; the complete lesion and the flail foot;
   the three ways it is damaged; sciatica as a root problem and not a trunk one; and a cross-section
   counting the layers a needle passes.
-- `covers` is `["Sciatic nerve"]` only.
+- `covers` is `["Sciatic nerve"]` only. (**Re-corrected 2026-08-29 (audit).** An earlier entry on this line
+  changed it to `["Hip joint"]` and claimed "the scene file has always said `["Hip joint"]`". The scene file
+  has never said that; it says `["Sciatic nerve"]`, which is also what CURRICULUM.json spells and what
+  `sync-state.mjs` matches against. The "correction" was made from memory rather than from the file — the
+  third failure mode in REPAIR-BACKLOG.md — and it is reversed here against the file itself.)
+- **Audit 2026-08-29.** Five measured landmark anchors added: ischial tuberosity (semitendinosus + long head
+  of biceps, 12.7% scatter; adductor magnus rejected — the tool refused at 67.7 mm), ischial spine (gemellus
+  superior, 0.05 mm), posterior superior iliac spine (extreme +y in the upper quarter), greater trochanter
+  (the same three-witness contact the proximal femur scene uses, deliberately identical), and neck of the
+  fibula (fibularis longus + extensor digitorum longus, 27.7 mm below the fibular tip — flagged in its own
+  `calibrated_by` as a measured point at neck level, not a measured neck). Beat 4 said "two bony points give
+  you the line" and then named three; corrected. The greater sciatic notch was deliberately not anchored —
+  a notch is defined by absent bone, which neither definition in `derive-landmark.mjs` can measure.
 
 ### `gross__gluteal-region-hip-joint__gluteal-vessels`
 - id `gross__gluteal-region-hip-joint__gluteal-vessels` · Gross Anatomy · Gluteal Region & Hip Joint ·
-  **Gluteal vessels** · mode `3d_anatomy` (deferred: `diagram`) · 17 structures (10 parts) · 10 views ·
-  53 ops · **candidate** · no degraded ops.
+  **Gluteal vessels** · mode `3d_anatomy` (deferred: `diagram`) · 19 structures (12 parts) · 10 views ·
+  53 ops · **candidate** · no degraded ops · audited 2026-08-29. Two measured landmark anchors on
+  FMA24474 added in that audit — greater trochanter and lesser trochanter (contact with psoas major);
+  `concept:retinacular_vessels` now runs from the trochanter anchor rather than from quadratus
+  femoris, which is the cruciate site, not the trochanteric one. **Amended 2026-08-29 (later audit):** the
+  greater trochanter anchor was re-derived from the extreme definition to the three-witness contact
+  definition so that it is the same coordinate as in `proximal-femur` and `sciatic-nerve`. The topic now
+  marks that landmark in one place in all three scenes.
 - Taught through the parent vessel that does exist: `right internal iliac artery` FMA18809, with
   `right common iliac artery` FMA14765, `right external iliac artery` FMA18806, `descending aorta` FMA3784,
   `right internal iliac vein` FMA18887 and `right common iliac vein` FMA21387. Territory and floor from the
@@ -567,7 +615,9 @@ relations, and the relations resolve. Both are `candidate`, not `ready` — see 
 
 ### `gross__leg-foot__ankle-joint`
 - id `gross__leg-foot__ankle-joint` · Gross Anatomy · Leg & Foot · **Ankle joint** · mode `3d_anatomy`
-  (deferred: `diagram`) · 14 structures (11 parts) · 11 views · 41 ops · **ready** · degrades `PEEL_LAYER`.
+  (deferred: `diagram`) · 18 structures (14 parts) · 11 views · 43 ops · **ready** · degrades `PEEL_LAYER`
+  · audited 2026-08-29 (tarsal-tunnel count corrected four→five; `right fifth metatarsal bone` FMA24515
+  added as `mt5` and shown in beat 9, where the avulsion check was previously named and not drawn).
 - Subject `right talus` FMA24482 as the tenon; the mortise from `right tibia` FMA24477, `right fibula`
   FMA24480 and `interosseous membrane of right leg` FMA35192. Joints below from `right calcaneus` FMA24497
   and `navicular bone of right foot` FMA24500. Movers: `right calcaneal tendon` FMA258847, `right soleus`
@@ -627,8 +677,11 @@ relations, and the relations resolve. Both are `candidate`, not `ready` — see 
 
 ### `gross__leg-foot__arches-of-the-foot`
 - id `gross__leg-foot__arches-of-the-foot` · Gross Anatomy · Leg & Foot · **Arches of the foot** · mode
-  `3d_anatomy` (deferred: `diagram`) · 23 structures (17 parts) · 12 views · 50 ops · **ready** ·
-  degrades `PEEL_LAYER`.
+  `3d_anatomy` (deferred: `diagram`) · 26 structures (17 parts) · 12 views · 56 ops · **ready** ·
+  degrades `PEEL_LAYER` · audited 2026-08-29 (beats 2, 3 and 4 isolated an arch group and then narrated
+  bones belonging to the other groups — the cuneiforms and MT2/MT3 in the medial arch, MT4 in the lateral,
+  the medial cuneiform in the transverse — all now shown explicitly; the three plantar interossei, which
+  carried one identical paragraph three times, now each name their own metatarsal and toe).
 - **The best-resolved scene in the lower limb.** Medial arch complete, bone by bone: `right calcaneus`
   FMA24497, `right talus` FMA24482, `navicular bone of right foot` FMA24500, `right medial cuneiform bone`
   FMA24521, `right first metatarsal bone` FMA24507, with `sesamoid bone of right foot` FMA45097. Lateral
@@ -816,15 +869,26 @@ relations, and the relations resolve. Both are `candidate`, not `ready` — see 
 
 ### `gross__heart-pericardium__conducting-system`
 `gross` · Heart & Pericardium · **Conducting system** · mode `diagram` (deferred: `3d_anatomy`) ·
-17 structures (13 parts) · 7 views · 38 ops · **planned** · covers `["Conducting system"]`
+17 structures (13 parts) · 7 views · 38 ops · **planned** · covers `["Conducting system"]` · audited 2026-08-29
 
 - Routed to `diagram` because that is the **first** entry in this structure's `preferred_modes`, not as a
   downgrade. The curriculum puts diagram ahead of 3D here for the same reason it does for the cardiac
   cycle: the teaching point is a sequence in time, not a shape in space.
-- No mesh exists for any part of it. All 934 catalog entries searched for *node*, *bundle*, *Purkinje*,
-  *sinoatrial*, *atrioventricular* — nothing cardiac comes back. Unlike the chambers, this gap is **not**
-  closable by ingesting more of the archive: the conducting tissue is a few millimetres of specialised
-  muscle and is not separately segmented anywhere in BodyParts3D.
+- No mesh exists for any part of it. **Re-searched 2026-08-29 (audit) under twenty-seven spellings** —
+  node, nodal, sinoatrial, sinuatrial, atrioventricular, bundle, Purkinje, conducting, moderator, trabecula,
+  annulus, anulus, crista, terminalis, septum, septal, papillary, valve, cusp, coronary, atrium, atrial,
+  ventricle, heart, cardiac, pericardium, vena cava. Every conducting term returns nothing, and *terminalis*
+  returns only the lamina and striae terminales of the brain, not the crista. The claim stands. Unlike the
+  chambers, this gap is **not** closable by ingesting more of the archive.
+- Two things that search corrected. The old note said the nearest entries were "the papillary muscles, the
+  moderator band's parent chamber and *wall of heart*" — **there is no chamber mesh in the catalog at all**;
+  *atrium* returns nothing and *ventricle* returns only the four brain ventricles. And the search found more
+  than expected: superior vena cava FMA4720 (the SA node's landmark), coronary sinus FMA4706 and tricuspid
+  valve FMA7234 (two of the three sides of the triangle of Koch), anterior papillary muscle of the right
+  ventricle FMA7260 (where the right bundle ends), the two septal-branch sets FMA71670/FMA71669, the trunk
+  of the right coronary FMA3802 and the circumflex FMA3895. A future `3d_anatomy` version could draw the
+  **frame** the conducting system hangs on, though never the system itself. Recorded in `gaps[]`; not acted
+  on, because `diagram` is the curriculum's first preference here.
 - Parts in five groups: **The pacemaker** SA node; **Across the atria** internodal pathways, Bachmann's
   bundle; **The gate** AV node, triangle of Koch; **The bridge** bundle of His, fibrous skeleton;
   **The branches** right bundle, left bundle with its two fascicles, Purkinje fibres; **Blood supply**
@@ -993,8 +1057,13 @@ covers `["Flat abdominal muscles"]`
   the first scene in the corpus to carry the complete set. Context: `FMA13377`/`FMA13378` rectus abdominis,
   `FMA21964`/`FMA21965` inguinal ligament, `FMA16586`/`FMA16587` hip bones, `FMA8066` fifth rib,
   `FMA8533` twelfth rib.
-- **Eight anchors, all eight measured, seven on the right external oblique** — the only flat muscle on
-  disk — and one on the right hip bone. Origin from the fifth rib (0.55 mm) · origin from the twelfth rib
+- **AUDITED AND SIGNED 2026-08-28.** Three fixes: two stale "not on disk" gap notes corrected (all fifteen
+  models are now in `meshes-lite/`), the nerve supply of transversus abdominis added to beat 4 — the learning
+  goal promises it "of each" and beat 4 alone had none — and "transpyloric plane" removed from the iliac
+  crest anchor's terms, which teaches the supracristal plane at L4 and not the transpyloric at L1.
+  15 of 15 models in hand; no hollow beats. Six left/right pairs, every one correctly sided.
+- **Eight anchors, all eight measured, seven on the right external oblique** — still the only flat muscle
+  anything has been measured ON, though all three are now on disk — and one on the right hip bone. Origin from the fifth rib (0.55 mm) · origin from the twelfth rib
   (0.65 mm) · insertion into the iliac crest (0.22 mm, identified as crest rather than pubis by where the
   matching point sits on the hip bone's own box) · aponeurosis in front of the rectus (0.34 mm) · lower free
   border, lateral fleshy edge and upper limit as extremes · summit of the iliac crest.
@@ -1016,8 +1085,15 @@ covers `["Flat abdominal muscles"]`
 
 ### `gross__anterior-abdominal-wall-inguinal-region__inguinal-canal`
 `gross` · Anterior Abdominal Wall & Inguinal Region · **Inguinal canal** · mode `3d_anatomy`
-(deferred: `diagram`) · 13 structures (8 parts) · 7 views · 38 ops · **ready** ·
+(deferred: `diagram`) · 15 structures (9 parts) · 7 views · 38 ops · **ready** ·
 covers `["Inguinal canal"]`
+
+- **AUDITED AND SIGNED 2026-08-28.** The vas ran backwards: the `vas_r` narration had the duct entering at
+  the deep ring and leaving at the superficial ring *before* crossing the ureter, which puts it outside the
+  wall on its way into the pelvis. Corrected to superficial ring in, deep ring out, ureter crossed beyond it.
+  `FMA15571 right ureter` added as context so beat 5 draws that crossing rather than asserting it, and two
+  stale gap notes (the deferent duct and the "only two meshes on disk" claim) rewritten. 12 of 12 models in
+  hand; no hollow beats.
 
 - **A space taught entirely through its walls** — authoring rule 2(b). Parts: `FMA13336` external oblique
   (anterior wall), `FMA13892` internal oblique (roof, and the lateral anterior wall), `FMA22344` transversus
@@ -1078,6 +1154,10 @@ covers `["Rectus sheath"]`
   muscle belly, so the internal oblique splitting into two laminae is narration and `SHOW_RELATIONSHIP`
   only; no transversalis fascia, extraperitoneal fat or peritoneum; no epigastric vessels and no
   thoracoabdominal nerves; no tendinous intersections. Only the right side could be measured.
+- Audited 2026-08-28: Carnett's sign had the wrong mechanism (segmental innervation rather than
+  position of the lesion relative to the contracted muscle) and beat 3 contradicted `linea_semilunaris`
+  over whether a Spigelian hernia is visible; both fixed. Stale gap note about meshes not being on disk
+  rewritten — all 17 models are now in `meshes-lite/`. Still `ready`.
 
 ### `gross__anterior-abdominal-wall-inguinal-region__inguinal-ligament-landmarks`
 `gross` · Anterior Abdominal Wall & Inguinal Region · **Inguinal ligament & landmarks** · mode `3d_anatomy`
@@ -1110,6 +1190,14 @@ covers `["Inguinal ligament & landmarks"]`
   femoral, ilioinguinal or genitofemoral nerve; no spermatic cord, round ligament or conjoint tendon. The
   ligament meshes themselves were not on disk, so no anchor sits on the ligament and its course is authored
   as a trace between two measured bony points.
+- Audited 2026-08-28: the iliac-crest anchor conflated the supracristal plane (highest point, L4) with the
+  transtubercular plane (tubercle of the crest, L5) — relabelled, `terms` cut to the supracristal set, and
+  the tubercle now named in narration as the point this is NOT. The deep-ring occlusion test was taught as
+  diagnostic, contradicting `inguinal-canal` in the same topic — now stated, flagged unreliable, and the
+  inferior epigastric artery named as what settles it. Deep-ring offset harmonised to "about one
+  centimetre — a finger's breadth" across all three mentions. Stale on-disk gap note rewritten: all 16
+  models are now in `meshes-lite/`, so the two midpoints could be re-derived on the ligament itself.
+  Still `ready`.
 
 **56 scenes · 41 ready · 5 candidate · 10 planned · 0 blocked · 5011 term mappings.**
 **Anterior Abdominal Wall & Inguinal Region COMPLETE — 5 of 5. Gross Anatomy 46 of 81.**
@@ -1362,8 +1450,8 @@ covers `["Pancreas"]`
 
 | course | topic | structure | mode | mesh parts | status | scene |
 |---|---|---|---|---|---|---|
-| Gross Anatomy | Kidney & Posterior Abdominal Wall | Kidney | 3d_anatomy | 27 structures, 13 parts (both kidneys, both renal arteries and veins, both ureters, psoas, quadratus lumborum, transversus abdominis, diaphragm, 12th rib) | ✅ ready | `scenes/gross__kidney-posterior-abdominal-wall__kidney.json` |
-| Gross Anatomy | Kidney & Posterior Abdominal Wall | Suprarenal (adrenal) gland | 3d_anatomy | 15 structures, 9 parts (both glands, both kidneys, IVC, left renal vein, aorta, renal artery, diaphragm) | ✅ ready | `scenes/gross__kidney-posterior-abdominal-wall__suprarenal-adrenal-gland.json` |
+| Gross Anatomy | Kidney & Posterior Abdominal Wall | Kidney | 3d_anatomy | 35 structures, 21 parts (both kidneys, both renal arteries and veins, both ureters, psoas, quadratus lumborum, transversus abdominis, diaphragm, 12th rib; 8 measured anchors — both poles and both hila, the PUJ and the renal angle) | ✅ ready · audited 2026-08-29 | `scenes/gross__kidney-posterior-abdominal-wall__kidney.json` |
+| Gross Anatomy | Kidney & Posterior Abdominal Wall | Suprarenal (adrenal) gland | 3d_anatomy | 17 structures, 11 parts (both glands, both kidneys, IVC, left renal vein, aorta, renal artery, diaphragm; 2 measured anchors on the gland-kidney fascial septum) | ✅ ready · audited 2026-08-29 | `scenes/gross__kidney-posterior-abdominal-wall__suprarenal-adrenal-gland.json` |
 
 - **Kidney** — resolved outright and generously. `right kidney`, `left kidney`, both renal arteries, both
   renal veins and both ureters all exist, and so does the entire muscular bed: psoas major, quadratus
@@ -1403,8 +1491,8 @@ covers `["Pancreas"]`
 
 | course | topic | structure | mode | mesh parts | status | scene |
 |---|---|---|---|---|---|---|
-| Gross Anatomy | Kidney & Posterior Abdominal Wall | Ureters | 3d_anatomy | 20 structures, 5 parts (both ureters, bladder, right psoas, right common iliac artery; kidneys, iliac arteries, renal arteries, aorta, cava, sacrum, L5, hip bone, prostate, seminal vesicle as context) | ✅ ready | `scenes/gross__kidney-posterior-abdominal-wall__ureters.json` |
-| Gross Anatomy | Kidney & Posterior Abdominal Wall | Abdominal aorta & IVC | 3d_anatomy | 31 structures, 14 parts (aorta, cava, coeliac, SMA, IMA, both renal arteries, both common iliac arteries, both renal veins, both common iliac veins, diaphragm) | ✅ ready | `scenes/gross__kidney-posterior-abdominal-wall__abdominal-aorta-ivc.json` |
+| Gross Anatomy | Kidney & Posterior Abdominal Wall | Ureters | 3d_anatomy | audited 2026-08-29 (referred-pain levels reconciled with the kidney scene; the vas, added earlier as `vas_r`, is now actually shown in beat 2 with a relationship to the ureter — the male water-under-the-bridge crossing had been narrated over a hidden group) · 22 structures, 6 parts (both ureters, bladder, right psoas, right common iliac artery; kidneys, iliac arteries, renal arteries, aorta, cava, sacrum, L5, hip bone, prostate, seminal vesicle as context) | ✅ ready | `scenes/gross__kidney-posterior-abdominal-wall__ureters.json` |
+| Gross Anatomy | Kidney & Posterior Abdominal Wall | Abdominal aorta & IVC | 3d_anatomy | 35 structures, 14 parts (aorta, cava, coeliac, SMA, IMA, both renal arteries, both common iliac arteries, both renal veins, both common iliac veins, diaphragm; all six vertebral levels T12-L5 as bone, duodenum) · 6 views incl. associated_organs | ✅ ready · audited 2026-08-29, May-Thurner side error fixed | `scenes/gross__kidney-posterior-abdominal-wall__abdominal-aorta-ivc.json` |
 
 - **Ureters** — both `right ureter` and `left ureter` exist, and so does everything the course is measured
   against: psoas major for the abdominal part, the common iliac artery for the crossing at the brim, the hip
@@ -1442,7 +1530,10 @@ covers `["Pancreas"]`
 ### `gross__kidney-posterior-abdominal-wall__psoas-major-posterior-wall`
 
 `gross` · Kidney & Posterior Abdominal Wall · **Psoas major & posterior wall** · `3d_anatomy` ·
-22 structures (11 parts) · 6 views · 41 ops · **ready** · degrades `PEEL_LAYER`
+26 structures (15 parts) · 6 views · 44 ops · **ready** · audited 2026-08-29 · degrades `PEEL_LAYER`
+
+Four measured anchors: the iliac fossa and the lesser trochanter (reviewed 2026-08-28), plus the tip
+of the L3 transverse process and the iliac attachment of quadratus lumborum, added 2026-08-29.
 
 Covers `Psoas major & posterior wall`. The last structure in topic 14, which is now complete.
 
@@ -2027,7 +2118,7 @@ mappings.**
 | course | topic | structure | mode | parts | status | scene |
 |---|---|---|---|---|---|---|
 | Embryology | Pharyngeal Apparatus | Pharyngeal arches | sequence (svg) | 14 regions, 13 parts (the shared five-ingredient plan — cartilage, muscle, nerve, artery, ectoderm outside and endoderm inside; neural crest for skeleton and connective tissue against paraxial mesoderm for muscle; the rule that a muscle keeps its own arch's nerve wherever it migrates; arch 1 with Meckel's cartilage, malleus and incus, the sphenomandibular ligament, the muscles of mastication and CN V; arch 2 with Reichert's cartilage, stapes and styloid, the muscles of facial expression, CN VII and the cervical sinus it buries; arch 3 with greater horn of hyoid, stylopharyngeus and CN IX; arch 4 with thyroid cartilage, the constrictors, cricothyroid and the superior laryngeal nerve; arch 5 authored as an explicit absence; arch 6 with the remaining laryngeal cartilages, all other intrinsic laryngeal muscles and the recurrent laryngeal nerve; the six arch arteries and their asymmetric regression; why the left recurrent laryngeal nerve is towed into the chest by the ductus arteriosus; Treacher Collins, Pierre Robin sequence, congenital facial palsy and branchial cyst, 22q11.2) · 5 views · 24 ops | 🔵 planned | `scenes/embryology__pharyngeal-apparatus__pharyngeal-arches.json` |
-| Embryology | Pharyngeal Apparatus | Pharyngeal pouches | sequence (svg) | 12 regions, 11 parts (pouches as the endodermal inside of the apparatus against ectodermal clefts outside; dorsal and ventral wings of pouches 3 and 4; pouch 1 as the tubotympanic recess giving middle ear, mastoid antrum and auditory tube, meeting cleft 1 at the tympanic membrane; pouch 2 as the palatine tonsil and its fossa; pouch 3 giving thymus and inferior parathyroid; pouch 4 giving superior parathyroid and the ultimopharyngeal body with its neural-crest C cells; the descent of the thymus and the parathyroid crossover; ectopic parathyroid sites along the thymic route and the failed neck exploration; DiGeorge syndrome grouped by the pouch that failed; medullary thyroid carcinoma explained from C-cell origin; a four-line revision summary) · 5 views · 27 ops | 🔵 planned | `scenes/embryology__pharyngeal-apparatus__pharyngeal-pouches.json` |
+| Embryology | Pharyngeal Apparatus | Pharyngeal pouches | sequence (svg) | 12 regions, 11 parts (pouches as the endodermal inside of the apparatus against ectodermal clefts outside; dorsal and ventral wings of pouches 3 and 4; pouch 1 as the tubotympanic recess giving middle ear, mastoid antrum and auditory tube, meeting cleft 1 at the tympanic membrane; pouch 2 as the palatine tonsil and its fossa; pouch 3 giving thymus and inferior parathyroid; pouch 4 giving superior parathyroid and the ultimopharyngeal body with its neural-crest C cells; the descent of the thymus and the parathyroid crossover; ectopic parathyroid sites along the thymic route and the failed neck exploration; DiGeorge syndrome grouped by the pouch that failed; medullary thyroid carcinoma explained from C-cell origin; a four-line revision summary) · 5 views · 27 ops · beat 3 re-moded to `glands` 2026-08-28 to satisfy the curriculum view list | 🔵 planned | `scenes/embryology__pharyngeal-apparatus__pharyngeal-pouches.json` |
 
 ### `embryology__pharyngeal-apparatus__pharyngeal-arches`
 
@@ -2081,7 +2172,7 @@ complete and topic 5 half done, all 18 held on artwork; the cursor now stands at
 
 | course | topic | structure | mode | parts | status | scene |
 |---|---|---|---|---|---|---|
-| Embryology | Pharyngeal Apparatus | Pharyngeal clefts & membranes | sequence (svg) | 14 regions, 13 parts (clefts as the ectodermal outside against the endodermal pouches inside; the one-survivor rule; cleft 1 as the external acoustic meatus, the auricular hillocks around its mouth, the solid meatal plug and late recanalisation with congenital aural atresia; first-cleft anomalies clustering at the ear — preauricular pit and sinus, duplicated meatus, and their relation to the facial nerve; clefts 2, 3 and 4 sinking into the cervical sinus; the second-arch operculum as the movement that buries them; the three-layered closing membrane and the tympanic membrane as the only survivor, its three layers read off the three germ layers; the outside-versus-inside discipline stated as a self-test; branchial cyst at the anterior border of sternocleidomastoid, swelling after a sore throat, tract between the carotids; branchial sinus and complete fistula with the external opening at a cleft derivative and the internal opening in the tonsillar fossa; reading a neck lump by position, with the over-forty warning; a four-line revision summary) · 5 views · 27 ops | 🔵 planned | `scenes/embryology__pharyngeal-apparatus__pharyngeal-clefts-membranes.json` |
+| Embryology | Pharyngeal Apparatus | Pharyngeal clefts & membranes | sequence (svg) | 14 regions, 13 parts (clefts as the ectodermal outside against the endodermal pouches inside; the one-survivor rule; cleft 1 as the external acoustic meatus, the auricular hillocks around its mouth, the solid meatal plug and late recanalisation with congenital aural atresia; first-cleft anomalies clustering at the ear — preauricular pit and sinus, duplicated meatus, and their relation to the facial nerve; clefts 2, 3 and 4 sinking into the cervical sinus; the second-arch operculum as the movement that buries them; the three-layered closing membrane and the tympanic membrane as the only survivor, its three layers read off the three germ layers; the outside-versus-inside discipline stated as a self-test; branchial cyst at the anterior border of sternocleidomastoid, swelling after a sore throat, tract between the carotids; branchial sinus and complete fistula with the external opening at a cleft derivative and the internal opening in the tonsillar fossa; reading a neck lump by position, with the over-forty warning; a four-line revision summary) · 5 views · 27 ops · beat 3 re-moded to `glands` 2026-08-28 to satisfy the curriculum view list | 🔵 planned | `scenes/embryology__pharyngeal-apparatus__pharyngeal-clefts-membranes.json` |
 | Embryology | Pharyngeal Apparatus | Thyroid gland development | sequence (svg) | 14 regions, 13 parts (midline endodermal origin in the pharyngeal floor between tuberculum impar and copula, the first endocrine gland, about day 24; the foramen cecum as the fixed upper end; the bilobed diverticulum descending in front of the pharyngeal gut on the thyroglossal duct; the relation at the hyoid and the bone ossifying around it; arrival on the second to fourth tracheal rings by about week 7 and why the gland moves on swallowing; the pyramidal lobe and levator glandulae thyroideae as surviving duct; the two lineages — follicular cells from this endoderm, C cells arriving from the fourth-pouch ultimopharyngeal body and neural crest in origin; follicles and colloid from about week 11 against maternal thyroxine before that; thyroglossal duct cyst, midline, rising on tongue protrusion, and the acquired thyroglossal fistula; the Sistrunk procedure and why the middle third of the hyoid is taken; ectopic and lingual thyroid with the scan-before-excision rule; thyroid agenesis, the well-looking newborn and the heel prick; a five-line revision summary) · 5 views · 27 ops | 🔵 planned | `scenes/embryology__pharyngeal-apparatus__thyroid-gland-development.json` |
 
 ### `embryology__pharyngeal-apparatus__pharyngeal-clefts-membranes`
@@ -2339,3 +2430,20 @@ consequence and not as the lesion. `gaps[]` says so explicitly, because it is th
 28 of 46 structures authored, 0 ready. The cursor advances to `embryology / GIT Development / Foregut
 derivatives`. The previous run's note that the cursor should not be allowed to advance is answered in
 RUNLOG.md, not overruled here.**
+
+## Audit 2026-08-28 — amendments to two existing scenes
+
+### `gross__anterior-abdominal-wall-inguinal-region__rectus-sheath` (amended, audited)
+Now **23 structures (11 parts) · 6 views · 31 ops · ready**, signed `audited_at 2026-08-28`.
+Added as context: `FMA8194` right sixth and `FMA8070` right fifth costal cartilage (beat narration named
+five, six and seven and drew only the seventh) and `FMA18806` right external iliac artery, so beat 5's
+inferior-epigastric concept trace now starts at the real parent vessel. All 15 model ids re-checked against
+the catalog; all names character-exact; all right/left pairs correctly sided. `gaps[]` rewritten to record
+the 2026-08-28 catalog searches as evidence rather than asserting absence.
+
+### `gross__arm__biceps-triceps` (amended, audited)
+Now **16 structures (11 parts) · 4 views · 14 ops · ready**, signed `audited_at 2026-08-28`.
+Added `FMA37665` right coracobrachialis (named twice in narration, previously not drawn); added the
+`contraction_filter` beat 4 that CURRICULUM.json requires for **both** Biceps brachii and Triceps brachii
+and that the scene did not have; numbered the previously unnumbered third view. Three gap notes added
+(transverse humeral ligament, bicipital aponeurosis/labrum, and brachialis/anconeus as a scope decision).

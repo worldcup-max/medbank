@@ -671,6 +671,10 @@
           "target": "Blood supply"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "vas_r"
+        },
+        {
           "op": "HIDE_STRUCTURE",
           "target": "Kidneys"
         },
@@ -695,6 +699,12 @@
           "from": "right_common_iliac_artery",
           "to": "right_ureter",
           "kind": "the ureter crosses in front of the bifurcation"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "vas_r",
+          "to": "right_ureter",
+          "kind": "the vas crosses above the ureter — water under the bridge in the male"
         }
       ],
       "narration": "Follow it down. From the pelviureteric junction the ureter runs vertically on psoas major, across the tips of the lumbar transverse processes, with the gonadal vessels crossing in front of it obliquely — a stone patient's pain and a varicocele are neighbours for a reason. On the right it starts behind the second part of the duodenum and is crossed by the right colic and ileocolic vessels and the root of the mesentery; on the left it is crossed by the left colic vessels and disappears behind the sigmoid mesocolon. At the pelvic brim it crosses in front of the bifurcation of the common iliac artery, at the level of the sacroiliac joint. In the pelvis it runs backwards and downwards on the lateral wall in front of the internal iliac artery, as far as the ischial spine, then turns forwards and medially to the bladder. The last crossing is the examinable one and it differs by sex. In the female the uterine artery crosses above it about two centimetres lateral to the cervix — water under the bridge — and the ureter there lies close to the lateral fornix of the vagina. In the male the vas deferens crosses above it in the same place. On a plain film the whole course is a line: transverse process tips, sacroiliac joint, ischial spine, then medially to the bladder."
@@ -824,18 +834,20 @@
           "animate": true
         }
       ],
-      "narration": "Read the clinic off the course. Renal colic: severe loin pain radiating to the groin, the scrotum or the labium, colicky, with a restless patient and microscopic haematuria. The site of the pain tracks the stone — loin for the upper ureter, iliac fossa as it crosses the brim, groin and genitalia lower down, and suprapubic pain with frequency and strangury once it reaches the intramural part. That is referred pain along T11 to L2, which is why it can be mistaken for appendicitis on the right and diverticulitis on the left. Most stones under five millimetres pass; larger ones and any obstructed infected kidney need drainage — a stent or a nephrostomy — as an emergency, because an obstructed infected system is the one that kills. Now injury. Four operations account for most ureteric damage: hysterectomy, where the ureter is clamped with the uterine pedicle two centimetres lateral to the cervix; anterior resection and sigmoid colectomy, where the left ureter lies behind the mesocolon; ovarian surgery at the pelvic brim, where the ureter is under the suspensory ligament with the ovarian vessels; and any pelvic operation for a large mass that has dragged the ureter out of place. A ureter tied is recognised late — loin pain and a rising creatinine or urine leaking from the wound. Which is why the rule in pelvic surgery is not to avoid the ureter but to see it, follow it, and know that the peristalsing cord crossing the iliac bifurcation is the one you must not cut."
+      "narration": "Read the clinic off the course. Renal colic: severe loin pain radiating to the groin, the scrotum or the labium, colicky, with a restless patient and microscopic haematuria. The site of the pain tracks the stone — loin for the upper ureter, iliac fossa as it crosses the brim, groin and genitalia lower down, and suprapubic pain with frequency and strangury once it reaches the intramural part. That is referred pain along T11 to L2 — one segment lower than the kidney's own T10 to L1, and that difference is the loin-to-groin march itself: pain that starts at the kidney's levels in the loin drops with the stone into the ureter's lower ones. It is why renal colic can be mistaken for appendicitis on the right and diverticulitis on the left. Most stones under five millimetres pass; larger ones and any obstructed infected kidney need drainage — a stent or a nephrostomy — as an emergency, because an obstructed infected system is the one that kills. Now injury. Four operations account for most ureteric damage: hysterectomy, where the ureter is clamped with the uterine pedicle two centimetres lateral to the cervix; anterior resection and sigmoid colectomy, where the left ureter lies behind the mesocolon; ovarian surgery at the pelvic brim, where the ureter is under the suspensory ligament with the ovarian vessels; and any pelvic operation for a large mass that has dragged the ureter out of place. A ureter tied is recognised late — loin pain and a rising creatinine or urine leaking from the wound. Which is why the rule in pelvic surgery is not to avoid the ureter but to see it, follow it, and know that the peristalsing cord crossing the iliac bifurcation is the one you must not cut."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
-    "The three constrictions have no models and no anchors. They are the single most examinable fact about the ureter and the student can only hear them, not click them. Anchors in this corpus are placed by measurement on real geometry and FMA15571 is not in the local decimated set, so positioning them would have been guesswork; a point dropped where a narrowing merely looks right teaches a location the student cannot check. Ingesting FMA15571 and FMA15572 locally would yield three honest anchors per side and would make beat three clickable rather than narrated.",
-    "The gonadal vessels are not in the catalog. The testicular and ovarian vessels crossing the ureter obliquely are a named relation in every syllabus and cannot be drawn, so beat two asserts the crossing in narration only.",
-    "There is no uterus, no cervix, no vagina, no broad ligament and no uterine artery in the catalog. The water-under-the-bridge relation — the commonest cause of surgical ureteric injury — is therefore taught through the internal iliac artery and words alone, which is the weakest part of this scene. A female pelvis model, or a companion diagram-mode scene of the uterine artery crossing, is the highest-value addition for this structure.",
-    "The male counterpart of that crossing is narrated against the seminal vesicle and prostate. It need not be: the vas is in the catalog under the name 'right deferent duct' (FMA19235), and adding it would let the vas-crosses-ureter relation be shown rather than described.",
+    "The three constrictions have no models and no anchors. They are the single most examinable fact about the ureter and the student can only hear them, not click them. FMA15571 and FMA15572 ARE now in the local decimated set — the earlier note here saying they were not is corrected as of the 2026-08-29 audit — so two of the three are measurable and one is not. The pelviureteric junction is a contact point (ureter against renal pelvis, and the renal pelvis has no separate mesh, so the nearest witness is the ureter's own proximal extreme) and the vesicoureteric junction is a contact point (ureter against bladder, FMA15900, which is in hand). The pelvic-brim constriction is neither a contact nor a positional extreme — the ureter merely kinks over the iliac bifurcation without touching it in the mesh — so it fits neither definition derive-landmark.mjs supports and must not be placed by eye. Deriving the two junctions is the honest next step; the brim constriction stays narrated.",
+    "The gonadal vessels are not in the catalog — re-searched at the 2026-08-29 audit under 'gonad', 'testicular' and 'ovarian', all three returning nothing. The testicular and ovarian vessels crossing the ureter obliquely are a named relation in every syllabus and cannot be drawn, so beat two asserts the crossing in narration only.",
+    "There is no uterus, no cervix, no vagina, no broad ligament, no ovary and no uterine artery in the catalog — re-searched at the 2026-08-29 audit under 'uter', 'cervi', 'vagin', 'ovary', 'ovarian' and 'broad ligament'; the only hits for 'cervi' are cervical vertebrae and neck muscles. The water-under-the-bridge relation — the commonest cause of surgical ureteric injury — is therefore taught through the internal iliac artery and words alone, which is the weakest part of this scene. A female pelvis model, or a companion diagram-mode scene of the uterine artery crossing, is the highest-value addition for this structure.",
+    "RESOLVED. The male counterpart of that crossing used to be narrated against the seminal vesicle and prostate because the vas was thought absent. It is in the catalog under the anatomical name 'right deferent duct' (FMA19235), it is in meshes-lite, and it is now authored as `vas_r` and shown in beat two with an explicit relationship to the right ureter. Only the left vas is still absent from the scene; the crossing is symmetrical and one side carries the teaching.",
     "The renal pelvis has no separate model, so the pelviureteric junction is shown only as the point where the ureter mesh begins. Hydronephrosis and hydroureter cannot be shown as dilatation, only described.",
     "The ureteric orifices, the interureteric bar and the trigone are not modelled — the bladder is one solid mesh. The oblique intramural course and the flap-valve mechanism, and therefore vesicoureteric reflux, are narrated over the outside of the bladder. A cut-open bladder base is what this beat actually needs.",
     "The vesical and middle rectal arteries are absent, so the lower segmental supply is taught through the internal iliac trunk as a whole.",

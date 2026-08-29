@@ -271,6 +271,25 @@
       "narration": "Four small muscles that arise from a tendon and insert into a tendon — from flexor digitorum profundus in the palm to the extensor expansion on the back of each finger. That crossing is why one muscle bends the knuckle and straightens the finger at the same time. The lateral two are median; the medial two are ulnar."
     },
     {
+      "key": "fdp",
+      "name": "right flexor digitorum profundus",
+      "label": "Flexor digitorum profundus (extrinsic)",
+      "role": "context",
+      "group": "Deep muscles of the palm",
+      "layer": "muscle",
+      "color": "#7e2b52",
+      "refs": {
+        "bodyparts3d": "FMA38479"
+      },
+      "terms": [
+        "flexor digitorum profundus",
+        "FDP",
+        "lumbrical origin",
+        "extrinsic muscle"
+      ],
+      "narration": "Not an intrinsic — it comes from the forearm — but it is here because the lumbricals arise from its tendons in the palm. Flexor digitorum longus does the same for the lumbricals of the foot; this is the upper-limb half of that pair."
+    },
+    {
       "key": "palmar_interossei",
       "name": "set of palmar interossei of right hand",
       "label": "Palmar interossei",
@@ -400,7 +419,7 @@
         "Guyon's canal",
         "deep branch of ulnar nerve"
       ],
-      "narration": "The deep branch of the ulnar nerve hooks round this bone to reach the deep palm. A fractured hook of hamate can paralyse every ulnar-supplied muscle in the palm — the interossei, adductor pollicis, the medial two lumbricals and the hypothenar group — and leave sensation untouched. The three thenar muscles and the lateral two lumbricals are median and survive it."
+      "narration": "The deep branch of the ulnar nerve hooks round this bone to reach the deep palm. A fractured hook of hamate can paralyse the deep branch's territory in the palm — the interossei, adductor pollicis, the medial two lumbricals and the deep head of flexor pollicis brevis — and leave sensation untouched. The hypothenar muscles are usually spared, because their branches leave in Guyon's canal before the nerve reaches the hook, and that sparing is how you place the lesion. Abductor pollicis brevis, opponens pollicis, the superficial head of flexor pollicis brevis and the lateral two lumbricals are median and survive."
     },
     {
       "key": "capitate",
@@ -650,11 +669,11 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "opponens_pollicis",
+          "target": "fpb_deep",
           "intensity": 0.9
         }
       ],
-      "narration": "Three muscles make the ball of the thumb, and the median nerve supplies all three: abductor pollicis brevis on top, flexor pollicis brevis beside it, opponens pollicis underneath running onto the shaft of the first metacarpal. The recurrent branch that carries them leaves the median nerve just past the retinaculum, a few millimetres deep to the skin."
+      "narration": "Three muscles make the ball of the thumb, and the median nerve supplies all three with one exception you can see lit separately here — the deep head of flexor pollicis brevis is ulnar, which is why a complete median lesion leaves a flicker of thumb flexion. Abductor pollicis brevis on top, flexor pollicis brevis beside it, opponens pollicis underneath running onto the shaft of the first metacarpal. The recurrent branch that carries them leaves the median nerve just past the retinaculum, a few millimetres deep to the skin."
     },
     {
       "mode": "location",
@@ -755,6 +774,10 @@
         },
         {
           "op": "SHOW_STRUCTURE",
+          "target": "fdp"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
           "target": "Distal transverse arch"
         },
         {
@@ -765,7 +788,7 @@
           "op": "TRACE_STRUCTURE",
           "target": "lumbricals",
           "path": [
-            "mc3",
+            "fdp",
             "lumbricals",
             "pp_index",
             "pp_middle",
@@ -779,7 +802,7 @@
           "view": "lateral"
         }
       ],
-      "narration": "Follow the muscle forwards. It starts on the tendon of flexor digitorum profundus in the palm, passes in front of the knuckle joint, then turns onto the back of the finger to join the extensor expansion. In front of one joint and behind the next: contracting bends the knuckle and straightens the finger. That posture — knuckles flexed, fingers straight — is the position the intrinsics hold, and losing it is what a claw hand means."
+      "narration": "Follow the muscle forwards. It starts on the tendon of flexor digitorum profundus in the palm — that muscle is now on screen beside the lumbricals, the one extrinsic in this scene, because you cannot see where a lumbrical comes from without it — passes in front of the knuckle joint, then turns onto the back of the finger to join the extensor expansion. In front of one joint and behind the next: contracting bends the knuckle and straightens the finger. That posture — knuckles flexed, fingers straight — is the position the intrinsics hold, and losing it is what a claw hand means."
     },
     {
       "mode": "cross_section",
@@ -940,7 +963,7 @@
           "layout": "side-by-side"
         }
       ],
-      "narration": "Count the supply. The ulnar nerve takes all the interossei, the medial two lumbricals, all three hypothenar muscles, adductor pollicis and the deep head of flexor pollicis brevis — everything now lit. The median nerve keeps only the three thenar muscles and the lateral two lumbricals. So an ulnar lesion at the wrist wastes the whole palm."
+      "narration": "Count the supply. The ulnar nerve takes all the interossei, the medial two lumbricals, all three hypothenar muscles, adductor pollicis and the deep head of flexor pollicis brevis — everything now lit. The median nerve keeps only the three thenar muscles — and of those, only the superficial head of flexor pollicis brevis, since the deep head was just counted on the ulnar side — plus the lateral two lumbricals. So an ulnar lesion at the wrist wastes the whole palm."
     },
     {
       "mode": "mechanism",
@@ -979,7 +1002,7 @@
     }
   ],
   "gaps": [
-    "There is no palmaris brevis mesh in the catalog, so the small skin muscle over the hypothenar eminence — the one that puckers the ulnar border of the palm and the only hand muscle supplied by the superficial branch of the ulnar nerve — is described in narration but not shown.",
+    "There is no palmaris brevis mesh in the catalog — re-searched 2026-08-29 under palmaris, brevis and palmar; only palmaris LONGUS exists, which is a forearm muscle and a different structure — so the small skin muscle over the hypothenar eminence, the one that puckers the ulnar border of the palm and the only hand muscle supplied by the superficial branch of the ulnar nerve, is neither shown nor currently named in any beat. It is listed in match.terms so a note mentioning it finds this scene; a student is not told it exists. Beat 3 should name it as the fourth hypothenar muscle once there is anything to show, or in narration alone if the mesh never arrives.",
     "No artery of the hand exists as a model: neither the superficial nor the deep palmar arch, nor the radial or ulnar artery in the forearm, nor the common and proper palmar digital branches. Both arches are therefore authored as traced concept paths along the bones and muscles they run over, with the level of each stated in narration. This is the single largest gap in the scene, because the curriculum entry names the arches explicitly.",
     "No peripheral nerve of the upper limb is modelled, so the deep branch of the ulnar nerve hooking round the hamate, the recurrent branch of the median nerve to the thenar muscles, and the digital nerves are taught by lighting the muscles they supply rather than by tracing a nerve model.",
     "The interossei and the lumbricals exist in the catalog only as sets, not as individually numbered muscles. First dorsal interosseous — clinically the most important single muscle in the hand — cannot be isolated and lit on its own; it is taught inside the dorsal interossei set.",
@@ -989,6 +1012,10 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   }
 }

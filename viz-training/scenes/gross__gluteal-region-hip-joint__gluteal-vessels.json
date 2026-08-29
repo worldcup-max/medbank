@@ -125,8 +125,7 @@
       "role": "context",
       "group": "Parent vessels",
       "layer": "vessel",
-      "color": "#922b21"
-    ,
+      "color": "#922b21",
       "refs": {
         "bodyparts3d": "FMA18806"
       },
@@ -411,6 +410,58 @@
         "avascular necrosis"
       ],
       "narration": "The trochanteric anastomosis sits in the hollow on the inner side of the greater trochanter. The retinacular vessels that feed the head of the femur come off it and run up the neck under the capsule — which is why a fracture of the neck can starve the head."
+    },
+    {
+      "key": "greater_trochanter",
+      "label": "Greater trochanter",
+      "role": "part",
+      "group": "Bony frame",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.129,
+          0.534,
+          0.933
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT point where gluteus medius (FMA22330, gap 0.13 mm), gluteus minimus (FMA22332, 0.57 mm) and piriformis (FMA22340, 0.11 mm) converge on FMA24474 — three witnesses over 20.4 mm of a 440.2 mm bone (4.6%). CHANGED 2026-08-29: this anchor previously used the EXTREME definition (most lateral point of the upper fifth, uvw [0.000,0.412,0.886]) while the proximal femur scene in the same topic was about to be given the contact point. Both land on the same corner of the bone, but a student reads the two scenes consecutively and the marker must not move between them, so the topic is unified on the three-witness contact. The extreme point is recorded here so the earlier measurement is not lost. tools/derive-landmark.mjs --parent FMA24474 --contact FMA22330,FMA22332,FMA22340",
+      "terms": [
+        "greater trochanter",
+        "trochanteric fossa",
+        "trochanteric anastomosis",
+        "surface marking of the superior gluteal artery"
+      ],
+      "narration": "The lower end of the surface-marking line: the superior gluteal artery emerges at the junction of the upper and middle thirds of a line from the posterior superior iliac spine to this point. The trochanteric anastomosis lies in the hollow on its medial side. The anchor marks the lateral prominence you can feel; the fossa is on the far side of it and has no marker of its own."
+    },
+    {
+      "key": "lesser_trochanter",
+      "label": "Lesser trochanter",
+      "role": "part",
+      "group": "Bony frame",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.4568,
+          0.4523,
+          0.7735
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — the nearest point on FMA24474 to FMA22342 (right psoas major), the muscle that inserts on it. Gap 0.87 mm, spread 0 mm, 1 witness — a measurement with no second witness, hence needs-review.",
+      "calibration_gap_mm": 0.87,
+      "terms": [
+        "lesser trochanter",
+        "cruciate anastomosis",
+        "level of the cruciate anastomosis"
+      ],
+      "narration": "The level of the cruciate anastomosis. Beat 7 asks you to find it on the back of quadratus femoris; this marker is the height at which to look, on the other side of the same bone."
     }
   ],
   "views": [
@@ -624,7 +675,7 @@
           "op": "TRACE_STRUCTURE",
           "target": "concept:retinacular_vessels",
           "path": [
-            "quadratus_femoris",
+            "greater_trochanter",
             "femur"
           ],
           "duration": 7
@@ -779,13 +830,15 @@
     "Status is 'candidate', not 'ready'. The scene passes the gate, but the two arteries the curriculum entry names are present only as concept traces, and a human should decide whether tracing them from a real parent vessel across real muscles is enough to call the entry taught. Promote to 'ready' on that decision, or when gluteal artery models exist.",
     "The branching of the internal iliac artery into an anterior and a posterior division cannot be shown — the model is the undivided trunk. Beat 2 therefore teaches the division by narration over a highlighted trunk, which is weaker than a drawn diagram would be. This is the single strongest argument for also authoring the deferred diagram mode for this entry.",
     "The trochanteric and cruciate anastomoses are the heart of beats 6 and 7 and neither can be drawn. The medial and lateral circumflex femoral arteries, the first perforating artery and the retinacular vessels have no models, so the anastomoses are traced as concepts onto the bone and muscle they lie on. A diagram would show these far better; the 3D scene contributes the depth and the exact position on quadratus femoris and in the trochanteric fossa.",
-    "The greater sciatic notch, the ischial spine and the trochanteric fossa are sub-features of whole-bone models. Beat 8 turns on the artery being pinned at the top of the notch and can only light the whole hip bone while naming the point. Measured landmark anchors on the pelvis would make beats 3, 5 and 8 substantially better and are the obvious next improvement.",
+    "Two femoral landmarks are now measured anchors on FMA24474 rather than a lit whole bone: the greater trochanter (extreme -x in the top fifth) and the lesser trochanter (contact with psoas major, gap 0.87 mm). Both are single-witness and carry status 'needs-review'. The greater sciatic notch, the ischial spine and the trochanteric fossa are still sub-features of whole-bone models and are NOT anchored: a notch and a fossa are concavities, and derive-landmark.mjs measures a nearest point or a furthest point, neither of which finds the inside of a hollow. Beat 8 therefore still turns on the artery being pinned at the top of the notch while lighting the whole hip bone. The ischial spine is point-like and is derivable by contact with gemellus superior; that is the obvious next measurement and was not attempted in this run.",
     "No ligament of the pelvis is modelled. The sacrotuberous and sacrospinous ligaments complete both sciatic foramina, and the out-through-the-greater, in-through-the-lesser course of the internal pudendal artery in beat 5 is impossible to show properly without the sacrospinous ligament between them.",
     "The superficial and deep branches of the superior gluteal artery are named and traced as one path. Splitting them into two traces would need branch points that do not exist as geometry, so the distinction is carried in narration and in the two territory groups.",
     "This scene does not cover Gluteus maximus, Hip joint, Proximal femur or Sciatic nerve. Those muscles and bones appear only as the territory the vessels supply and the frame they run on; the sciatic nerve is named because it shares the gap below piriformis, and it is authored as its own scene."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

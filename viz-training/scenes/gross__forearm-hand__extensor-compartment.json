@@ -509,11 +509,16 @@
           "intensity": 0.6
         },
         {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Anconeus",
+          "intensity": 0.3
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "posterior"
         }
       ],
-      "narration": "Six superficial muscles, running radial to ulnar. Four of them start on the lateral epicondyle; brachioradialis and extensor carpi radialis longus start higher, on the supracondylar ridge."
+      "narration": "Six superficial muscles, running radial to ulnar. Four of them start on the lateral epicondyle; brachioradialis and extensor carpi radialis longus start higher, on the supracondylar ridge. Anconeus is lit faintly behind the elbow — it belongs to this compartment and this nerve, but it works on the elbow rather than the wrist, so it is not one of the six."
     },
     {
       "mode": "location",
@@ -621,6 +626,10 @@
         {
           "op": "SHOW_STRUCTURE",
           "target": "Abductor pollicis longus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
@@ -743,11 +752,13 @@
     "There is no extensor retinaculum mesh, so the six extensor compartments of the wrist and the tunnels that group these tendons are described but not shown. The flexor retinaculum does exist and is used in the flexor compartment scene.",
     "The catalog holds no upper limb nerves or arteries, so the radial nerve, the posterior interosseous nerve running through supinator, and the radial artery crossing the snuffbox floor are narration only.",
     "Extensor carpi ulnaris has no whole-muscle mesh; it is authored from its humeral and ulnar heads, so the student list shows two entries for one muscle.",
-    "There is no mesh for the common extensor origin or the extensor expansions on the fingers, so the shared origin and the finger insertions are described rather than shown. The interosseous membrane exists — FMA23707 — and beat 3 already narrates 'the membrane between them', so it should be drawn rather than described.",
+    "There is no mesh for the common extensor origin or the extensor expansions on the fingers, so the shared origin and the finger insertions are described rather than shown. The interosseous membrane is no longer among them: FMA23707 is authored as the `iom` structure and is on screen in every beat that shows the Bones group, including beat 3, which narrates 'the membrane between them'. This note previously read as an instruction to add it; that work is done.",
     "Lister's tubercle on the back of the radius has no separate mesh or authored landmark, so the pulley that extensor pollicis longus hooks around is named in narration only."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

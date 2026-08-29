@@ -765,9 +765,15 @@
             "radial_styloid"
           ],
           "duration": 9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "head_of_radius",
+          "to": "head_of_ulna",
+          "kind": "axis of pronation and supination"
         }
       ],
-      "narration": "The turning axis runs from the centre of the radial head to the head of the ulna. The radius spins on that line at the top and swings around it at the bottom, which is why the hand turns but the elbow does not."
+      "narration": "What is traced here is the radius itself, top to bottom: head, tuberosity, ulnar notch, styloid. The turning AXIS is the second line drawn, and it is not the same line — it runs from the centre of the radial head to the head of the ulna, cutting across the radius rather than along it. The radius spins on that axis at the top and swings around it at the bottom, which is why the hand turns but the elbow does not."
     },
     {
       "mode": "mechanism",
@@ -878,15 +884,31 @@
           "intensity": 0.9
         },
         {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "head_of_radius",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "head_of_ulna",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ulnar_notch",
+          "intensity": 0.9
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "posterior"
         }
       ],
-      "narration": "Four names to keep. Colles: the lower radius breaks and the fragment tilts backwards — the dinner-fork wrist. Smith: the same break tilting forwards. Monteggia: the upper ulna breaks and the radial head dislocates. Galeazzi: the lower radius breaks and the distal radioulnar joint dislocates. In the last two, one bone breaking forces the other out of joint — because the two are a single ring."
+      "narration": "Four names to keep, and every site named is lit. Colles: the lower radius breaks and the fragment tilts backwards — the dinner-fork wrist. Smith: the same break tilting forwards. Monteggia: the upper ulna breaks and the radial head dislocates. Galeazzi: the lower radius breaks and the distal radioulnar joint dislocates. In the last two, one bone breaking forces the other out of joint — because the two are a single ring."
     }
   ],
   "gaps": [
-    "The catalog's smallest unit is a whole radius and a whole ulna, so every named feature — olecranon, coronoid process, trochlear and radial notches, both styloid processes, the radial tuberosity, both heads — is a derived landmark anchor rather than its own model. Each was measured on the meshes by tools/derive-forearm-landmarks.mjs and carries the measurement that placed it; all eleven stay status:\"needs-review\" until a human clears them in-app.",
+    "The catalog's smallest unit is a whole radius and a whole ulna, so every named feature — olecranon, coronoid process, trochlear and radial notches, both styloid processes, the radial tuberosity, both heads — is a derived landmark anchor rather than its own model. Each was measured on the meshes by tools/derive-forearm-landmarks.mjs and carries the measurement that placed it; all TEN stay status:\"needs-review\" until a human clears them in-app. This note previously said eleven; the file has ten and always did.",
+    "The obvious eleventh landmark is the neck of the radius, which the head-of-radius narration names. It is not authored because it cannot be measured honestly with the two definitions tools/derive-landmark.mjs offers. A neck is defined by being the NARROWEST part of a bone, which is neither a contact nor an extreme. Tried 2026-08-29: contact between the radius and supinator converges to a 0.21 mm gap, but on a single witness, and it lands at w=0.81 — below the radial tuberosity at w=0.83, so it is upper shaft and not neck. Placing the anchor by eye between the head and the tuberosity would look measured and would not be, so it stays unauthored until either a neck mesh exists or the tool learns a minimum-cross-section definition.",
     "Measured on these meshes the ulna reaches 0.8 mm further distally than the radial styloid, so the roughly 1 cm step by which the radial styloid normally lies below the ulnar styloid is NOT visible on the model. The narration teaches the relationship because it is what a Colles fracture abolishes, but a student must not read the offset off this scene. The same is true in the full-resolution and lite mesh sets, so it is the source segmentation, not the decimation.",
     "There is no mesh for the annular ligament, the triangular fibrocartilage / articular disc of the distal radioulnar joint, the oblique cord or the elbow joint capsule, so the ligaments that actually hold these two pivots together are described rather than shown.",
     "Pronation and supination are taught as before-and-after positions with the muscles that drive them. The renderer cannot animate the radius crossing the ulna, because that needs an articulated skeleton and BodyParts3D delivers static meshes.",
@@ -894,6 +916,8 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

@@ -315,7 +315,7 @@
         "C5 to T1",
         "ULTRA"
       ],
-      "narration": "All three posterior divisions — C5 to T1. Its branches from above down are upper subscapular, thoracodorsal, lower subscapular, axillary, radial: ULTRA."
+      "narration": "All three posterior divisions — C5 to T1. Its branches from above down are upper subscapular, thoracodorsal, lower subscapular, axillary, radial. The mnemonic ULTRA — Upper subscapular, Lower subscapular, Thoracodorsal, Radial, Axillary — names the same five as a set, so use it to check that you have all five, not to put them in order."
     },
     {
       "key": "cord_medial",
@@ -789,7 +789,7 @@
           "kind": "gives"
         }
       ],
-      "narration": "Above the clavicle only four nerves leave: dorsal scapular from C5, long thoracic from C5, C6 and C7, and suprascapular and nerve to subclavius from the upper trunk. Below it the cords give their own branches — remember the posterior cord's as ULTRA: upper subscapular, thoracodorsal, lower subscapular, axillary, radial."
+      "narration": "Above the clavicle only four nerves leave: dorsal scapular from C5, long thoracic from C5, C6 and C7, and suprascapular and nerve to subclavius from the upper trunk. Below it the cords give their own branches. The posterior cord's five, in the order they leave from above down, are upper subscapular, thoracodorsal, lower subscapular, axillary, radial; ULTRA is a checklist of the same five in a different order, not the order itself."
     },
     {
       "mode": "mechanism",
@@ -832,7 +832,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "Routed to its deferred diagram mode, not to 3D. The catalog holds no nerve of the upper limb at all — searching it for plexus, nerve, root, trunk and cord returns only the two optic nerves and the choroid plexuses of the cerebral hemispheres. There is nothing to resolve for a single one of this scene's thirty nerve structures, so a 3D scene here would show scaffolding with no subject in it. 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes: this becomes a 3D scene the day upper-limb nerve models exist, with no curriculum edit.",
@@ -840,6 +842,7 @@
     "ROUTING RE-OPENED AND RE-CONFIRMED 2026-08-28, as REPAIR-BACKLOG.md section 1 asked. The scalenes, first rib, clavicle and axillary artery are authored as context regions of the diagram, not as models. Scalenus anterior (FMA13392) and scalenus medius (FMA13390) DO exist in the catalog — an earlier note here said they did not, because the search used the spelling 'scalene' and the catalog spells it 'scalenus' — as do the right first rib (FMA7857) and the clavicle. The axillary artery has no catalog entry under any spelling searched (axillary, axillar); the subclavian artery does (FMA3953, right), which is the vessel beat 1 names at the first rib, so the supraclavicular part of the journey is renderable. The routing nevertheless STAYS 'diagram'. The interscalene groove is a container, and re-searching the catalog for nerve, plexus, root, trunk, cord and ganglion returns four meshes in total — two optic nerves and two choroid plexuses — so all thirty nerve structures, which are the subject of every one of the six beats, remain unresolvable. A 3D scene here would draw the corridor and leave it empty. Revisit again the day any upper-limb nerve mesh exists; nothing else needs to change when it does.",
     "The 'Lesions' group is a teaching device rather than an anatomical structure — three named clinical pictures drawn beside the level that produces them. Beat 6 uses SHOW_RELATIONSHIP to tie each to its trunk or branch. A renderer that treats structures as strictly anatomical will need to accept these as annotation regions.",
     "TRACE_STRUCTURE in beat 2 follows concept:nerve_fibres along the five stages rather than a subject with a model, in the same way the heart scene traces blood. The stages are group names, so the trace walks Roots to Trunks to Divisions to Cords to Terminal branches.",
+    "Beat 2 counts six divisions but the scene authors two division structures, one anterior and one posterior, because the diagram draws the anterior and posterior sets as bands rather than as six separate cords of fibre. The count in the narration is the anatomical count; the structure list is the drawing. If the artwork later separates all six, split div_anterior and div_posterior into three each and no beat needs rewriting.",
     "Root values are given as the standard prefixed plexus. Postfixed and prefixed variants are mentioned in no beat, and neither is the contribution from C4 or T2, because the exam asks for the standard arrangement."
   ]
 }

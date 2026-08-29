@@ -1,7 +1,11 @@
 # The authoring prompt the live task carries
 
-**This file needs pasting into the live task — updated 2026-08-28.** The task is repointed from authoring
-to a **Gross Anatomy audit pass**. Paste the block below over the task's prompt in the Scheduled panel.
+**This file needs pasting into the live task — updated 2026-08-29 (third revision).** The task is repointed
+from authoring to a **Gross Anatomy audit pass** and told what to do when Gross is finished: move to
+Neuroanatomy, never back to Embryology. Back to **two** scenes per run after the first night at three
+produced a signed scene with a surviving error roughly one time in three, and a new rule — fix the fact,
+not the instance — for the habit behind most of them. Paste the block below over the task's prompt in
+the Scheduled panel.
 
 Otherwise this file is a record, not a to-do. It is here so the prompt is reviewable in the repo and
 diffable when it changes.
@@ -35,10 +39,29 @@ Repo folder: the connected medbank folder. Everything you touch is under viz-tra
 code, never git commit or push, never deploy, never drive a browser, never fetch anything over the network,
 and never touch the Smart-Drill engine.
 
-DO NOT AUTHOR NEW STRUCTURES THIS RUN. The curriculum cursor has walked into Embryology while Gross Anatomy
-is unfinished, and every Embryology scene written since is a sequence scene no engine can draw. Authoring is
-suspended until Gross is signed off. If you finish the Gross audit, say so at the top of RUNLOG.md in
-capitals and STOP — do not resume authoring without a human deciding to.
+DO NOT AUTHOR NEW GROSS OR EMBRYOLOGY STRUCTURES. The curriculum cursor walked into Embryology while Gross
+Anatomy was unfinished, and all 28 Embryology scenes are sequence scenes no engine can draw. Embryology stays
+suspended indefinitely — it is blocked on SVG artwork, not on authoring, so a 29th scene helps nobody.
+
+WHEN THE GROSS AUDIT IS COMPLETE — every gross scene carrying provenance.audited_at — do not stop. Say so at
+the top of RUNLOG.md in capitals, then MOVE TO NEUROANATOMY and author it at 2 structures per run, following
+the same rules below. Neuroanatomy is next because it can actually be drawn: the catalog holds 97 brain
+meshes. Verified coverage, so you do not waste runs discovering it:
+
+  STRONG — author as 3d_anatomy:
+    Cerebrum, Gross & Lobes ...... gyri, lobes, corpus callosum, internal capsule, commissures
+    Ventricular System & CSF ..... all four ventricles, cerebral aqueduct, choroid plexus (no meninges)
+    Basal Ganglia & Diencephalon . caudate, putamen, globus pallidus, thalamus, internal capsule
+    Brainstem .................... pons, medulla oblongata, peduncle of midbrain, both colliculi
+    Limbic System ................ hippocampus, amygdala, fornix, commissure of fornix
+    Cerebellum ................... whole cerebellum only — no lobes, peduncles or deep nuclei
+
+  DEAD — the catalog has nothing, so route to the structure's next preferred_mode and say why in gaps[]:
+    Cranial Nerves ............... only the two optic nerves exist
+    Blood Supply of the Brain .... no cerebral artery, no circle of Willis, no dural venous sinus
+    Spinal Cord .................. no cord, no tract of any kind
+
+Check each of these yourself before relying on it — that table is a starting point, not evidence.
 
 FIRST, EVERY RUN — before you read anything else:
 
@@ -86,7 +109,17 @@ Read each one back, end to end, as if a student had just complained about it. Yo
  4. OPS. Every op's target exists in structures[]. Every anchor.on names a real structure. Every op is from
     the ten-op vocabulary.
 
- 5. THE SCENE AGAINST ITSELF. Almost every anatomical error the audit found was already stated CORRECTLY
+ 5. FIX THE FACT, NOT THE INSTANCE. This is the rule the overnight audit most needed and did not have.
+    Every time you find a fact stated wrongly, the correction is not finished when that sentence is
+    fixed. GREP THE WHOLE FILE, AND THE OTHER SCENES IN THE SAME TOPIC, FOR EVERY OTHER PLACE THAT FACT
+    APPEARS — narration, labels, terms[], gaps[] — and fix or reconcile every one of them before you
+    sign anything. On 2026-08-29 three separate runs reported repairing a contradiction, called it the
+    run's highest-value catch, and left a third copy of the same error alive in the same file. One of
+    them was still teaching that all three thenar muscles are median two cards below the fix. A
+    half-applied correction is worse than none, because the scene now carries a signature saying
+    somebody looked.
+
+ 6. THE SCENE AGAINST ITSELF. Almost every anatomical error the audit found was already stated CORRECTLY
     somewhere else in the same corpus, usually in the same file. The kidney scene said you cannot get above
     an enlarged kidney in beat 1 and that you can, two structures later. The clavicle scene named subclavius
     as separating the subclavian vein from the artery, then correctly described subclavius as lying between
@@ -94,31 +127,78 @@ Read each one back, end to end, as if a student had just complained about it. Yo
     appears twice, check the two against each other. That one pass would have caught more than any external
     check. Also compare against the OTHER scenes in the same topic — a student reads them consecutively.
 
- 6. CURRICULUM VIEWS. The structure's CURRICULUM.json entry lists the `views` it must have. Check the
+ 7. CURRICULUM VIEWS. The structure's CURRICULUM.json entry lists the `views` it must have. Check the
     scene's beat modes cover them. Nothing in the validator does this, and two scenes are missing a
     required mode with nobody having noticed.
 
- 7. NARRATION AGAINST GEOMETRY. This is the one that matters most and the one no tool can check. Read
+ 8. NARRATION AGAINST GEOMETRY. This is the one that matters most and the one no tool can check. Read
     each beat's narration and ask: is the thing this sentence names actually on screen at this moment? A beat that
     says "trace the bile duct" over a scene with no bile duct is teaching a student to look for something
     that is not there. Either the narration says openly that it is being described rather than shown, or the
     beat is rewritten. Anything named and not drawn belongs in gaps[] AND in terms[].
 
- 8. COVERS. Every name in covers[] is spelled exactly as CURRICULUM.json spells it, and the scene can
+ 9. COVERS. Every name in covers[] is spelled exactly as CURRICULUM.json spells it, and the scene can
     genuinely teach it. A scene claiming a structure it cannot teach is worse than one that never existed:
     the gap stops being visible and nobody returns to it. sync-state.mjs reports covers[] entries matching
     nothing — a typo there covers nothing.
 
- 9. DRAWABILITY. sync-state.mjs tells you how many of the scene's models are in meshes-lite/. You cannot
+10. DRAWABILITY. sync-state.mjs tells you how many of the scene's models are in meshes-lite/. You cannot
     fetch them — the mirror is unreachable from this task — so do not try. Record the count in RUNLOG. If a
     scene is missing most of its models, say which teaching beats are hollow as a result; that list is what
     tells a human which meshes to fetch first.
 
-10. STATUS. "ready" only if the validator passes AND the scene teaches what it claims. Anything you could
+11. STATUS. "ready" only if the validator passes AND the scene teaches what it claims. Anything you could
     not fully resolve is "candidate" or "planned", never "ready". Do not touch a scene held with
     delivery_hold — that hold lifts itself when the meshes arrive.
 
-11. SIGN IT. When the scene is correct, add to its provenance:
+12. LANDMARKS. You built `tools/derive-landmark.mjs` for this — use it. Wherever a scene names a feature
+    ON a bone (coracoid process, lesser trochanter, a malleolus, McBurney's point) and there is no mesh
+    for that feature, the old pattern was to label the whole bone "Scapula — coracoid process". That is
+    a bone pretending to be a landmark: the student clicks and lights up the entire scapula. Measure it
+    instead, and author it as a `render:"anchor"` with the measurement in `calibrated_by` and
+    `status:"needs-review"`. Three definitions, and the right one depends on what the feature IS:
+
+      --contact <id>[,<id>]   a point where a neighbour touches: a tubercle a muscle pulls on, a joint
+                              surface. Give more than one witness where the anatomy offers one — three
+                              structures attaching to the same process should converge, and that
+                              convergence is the proof. One witness is a measurement with no check on it.
+      --contact <id> --area N a SURFACE, not a point: a fossa, a facet, the popliteal surface. Averages
+                              every parent vertex within N mm of the neighbour, so the anchor is the
+                              middle of the contact patch. Without it the single nearest vertex lands
+                              wherever the two meshes happen to come closest — for the iliac fossa that
+                              was down at the pelvic brim, well off the surface iliacus actually lines.
+      --extreme <±axis>       a point defined by position: the lateral malleolus is the lowest point of
+                              the fibula. `--slab axis:from,to` restricts it to part of the bone, and
+                              also narrows a --contact when the neighbour attaches over a long line
+                              (pectoralis major runs down the lateral lip; restricted to the proximal
+                              quarter its two heads agree to 4 mm instead of 31 mm).
+
+    The tool REFUSES to emit when a contact gap exceeds 3 mm or the witnesses scatter over more than a
+    quarter of the bone. A refusal is a result, not a failure: it means the definition is wrong. The
+    axillary apex refused because it is the gap between the clavicle and the first rib, and a space
+    bounded by three bones is not a landmark on any one of them.
+
+    NEVER place an anchor by eye. An anchor whose parent mesh is not in `meshes-lite/` cannot be
+    measured, so it is not authored — say so in gaps[] and move on. A guessed anchor is worse than a
+    missing one, because a measured-looking coordinate is believed.
+
+    When a feature genuinely cannot be measured yet, mark the parent honestly rather than letting it
+    pass as the feature: `approx: {shown_as: "<parent>", detail: "<feature>"}` on the parent structure.
+    The player then shows it in amber with a dashed leader and says which bone is really lit, and
+    `MESH-GAPS.md` lists it as open work. And a label of the form "Duodenum — the outlet" is NOT an
+    approximation: the organ is correctly modelled and the dash is just a description.
+
+    `status:"needs-review"` stays until someone opens the scene and LOOKS at the patch, then records who
+    in `reviewed_by`. Measuring proves the coordinate; only looking proves it landed on the feature.
+
+13. SIGN IT — and understand what the signature costs. `audited_at` takes the scene off the worklist
+    permanently. A scene signed with an error still in it is worse off than one never audited, because
+    the stamp is what stops anyone looking again. Of the first 33 scenes signed, roughly one in three
+    still taught something false, and every one of those errors was findable by reading the file.
+    If you are not confident, do not sign: say in RUNLOG what you could not settle and leave it unsigned.
+    An unsigned scene costs one more run. A wrongly signed one costs a student.
+
+    When the scene is correct, add to its provenance:
       "audited_at": "<today's date>", "audited_by": "task"
     That, and nothing else, is what moves the audit cursor on. Never sign a scene you changed without
     re-running the validator on it.

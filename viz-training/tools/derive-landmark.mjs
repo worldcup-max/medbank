@@ -88,7 +88,16 @@ export function contactPoint(parent, other, opts = {}) {
   const near = dists.filter(d => d.mm <= opts.area);
   if (!near.length) return { p: best.p, mm: Math.sqrt(best.d2), area: 0 };
   const c = [0, 1, 2].map(a => near.reduce((s, d) => s + d.p[a], 0) / near.length);
-  return { p: c, mm: Math.sqrt(best.d2), area: near.length };
+  /* The centroid of a patch on a CONCAVE surface floats in the air above it — the iliac fossa is a
+     bowl, so the middle of the contact area sat 8 mm off the bone. An anchor must be a point ON the
+     surface (the renderer paints outward from it, and a point far enough inside or outside never
+     reaches the bone at all), so snap the centroid to the nearest vertex of the patch. */
+  let snap = near[0], bd = Infinity;
+  for (const d of near) {
+    const q = (d.p[0] - c[0]) ** 2 + (d.p[1] - c[1]) ** 2 + (d.p[2] - c[2]) ** 2;
+    if (q < bd) { bd = q; snap = d; }
+  }
+  return { p: snap.p, mm: Math.sqrt(best.d2), area: near.length, snapped_mm: +Math.sqrt(bd).toFixed(2) };
 }
 export function extremePoint(parent, dirSpec, slab) {
   const sign = dirSpec[0] === '-' ? -1 : 1, ax = AXIS[dirSpec.slice(-1)];
@@ -113,7 +122,8 @@ export function derive(opts) {
     out.method = 'CONTACT';
     out.evidence = { gaps_mm: cs.map(c => ({ [c.id]: +c.mm.toFixed(2) })), spread_mm: +spread.toFixed(2),
                      witnesses: cs.length };
-    if (opts.area) out.evidence.contact_area_verts = cs.map(c => c.area);
+    if (opts.area) { out.evidence.contact_area_verts = cs.map(c => c.area);
+                     out.evidence.centroid_snapped_mm = cs.map(c => c.snapped_mm); }
     if (opts.slab) out.evidence.within = opts.slab;
     if (worst > 3) { out.refused = 'contact gap ' + worst.toFixed(2) + ' mm — the surfaces do not meet there'; return out; }
     if (spread > span * 0.25) { out.refused = 'contacts scatter over ' + spread.toFixed(1) + ' mm of a ' + span.toFixed(0) + ' mm bone'; return out; }

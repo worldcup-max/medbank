@@ -107,7 +107,7 @@
         "intercrural fibres",
         "inguinal ligament"
       ],
-      "narration": "The aponeurosis of this muscle is the anterior wall along the whole length of the canal. Two things belong to it. Its lower free border, rolled back on itself, is the inguinal ligament, which is the floor. And a triangular gap in it just above and lateral to the pubic tubercle is the superficial inguinal ring, the way out."
+      "narration": "The aponeurosis of this muscle is the anterior wall along the whole length of the canal. Two things belong to it. Its lower free border, rolled back on itself, is the inguinal ligament, which is the floor. And a triangular gap in it just above and medial to the pubic tubercle is the superficial inguinal ring, the way out. Medial — that is the whole basis of the bedside rule: an inguinal hernia comes out here, above and medial to the tubercle, and a femoral one below and lateral to it."
     },
     {
       "key": "intobl_r",
@@ -525,7 +525,7 @@
           "intensity": 0.9
         }
       ],
-      "narration": "The deep ring is a hole in the transversalis fascia, lateral, about one centimetre above the midpoint of the inguinal ligament, and immediately lateral to the inferior epigastric artery. The superficial ring is a triangular gap in the external oblique aponeurosis, medial, just above and lateral to the pubic tubercle. One is deep and lateral, the other superficial and medial, and the canal runs between them. That is the obliquity, and it is the first of the two defences: the two holes do not lie opposite each other, so a rise in pressure presses the front wall onto the back wall instead of pushing through."
+      "narration": "The deep ring is a hole in the transversalis fascia, lateral, about one centimetre above the midpoint of the inguinal ligament, and immediately lateral to the inferior epigastric artery. The superficial ring is a triangular gap in the external oblique aponeurosis, medial, just above and medial to the pubic tubercle. One is deep and lateral, the other superficial and medial, and the canal runs between them. That is the obliquity, and it is the first of the two defences: the two holes do not lie opposite each other, so a rise in pressure presses the front wall onto the back wall instead of pushing through."
     },
     {
       "mode": "mechanism",
@@ -688,7 +688,9 @@
     "author": "task",
     "authored_at": "2026-08-27",
     "audited_at": "2026-08-28",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-08-29",
+    "corrected_by": "human review — the task audit signed this scene while an error remained"
   },
   "gaps": [
     "The canal itself is a space and has no mesh. It is taught here entirely through the four structures that bound it — external oblique, internal oblique, transversus abdominis and the inguinal ligament — which is option (b) in the authoring rule: teach it through the adjacent structures that do exist. Three of the four walls are real models. The posterior wall is transversalis fascia, which has no mesh at all, so it is narrated over the muscles in front of it. The lumen between them is not, and a provider will never ship it, so this gap is permanent and only a labelled overlay or a diagram will ever close it.",

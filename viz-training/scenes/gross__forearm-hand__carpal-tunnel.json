@@ -232,6 +232,85 @@
       "narration": "The small bone between trapezium and capitate, deep in the floor of the arch."
     },
     {
+      "key": "scaphoid_tubercle",
+      "label": "Tubercle of the scaphoid",
+      "role": "part",
+      "group": "Retinacular attachments",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "scaphoid",
+        "uvw": [
+          0.1407,
+          0.005,
+          0.4933
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "contact: nearest point on the right scaphoid (FMA24435, 23.8 mm span, right side, long axis x) to the flexor retinaculum (FMA40120). Gap 0.45 mm — the surfaces meet. One witness.",
+      "calibration_gap_mm": 0.45,
+      "terms": [
+        "tubercle of scaphoid",
+        "scaphoid tubercle",
+        "proximal lateral attachment of the flexor retinaculum"
+      ],
+      "narration": "The proximal lateral post. Measured here as the point where the scaphoid actually touches the retinaculum, not by eye."
+    },
+    {
+      "key": "trapezium_tubercle",
+      "label": "Tubercle of the trapezium",
+      "role": "part",
+      "group": "Retinacular attachments",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "trapezium",
+        "uvw": [
+          0.7376,
+          0.3229,
+          0.97
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "contact: nearest point on the right trapezium (FMA24443, 20.1 mm span, right side, long axis z) to the flexor retinaculum (FMA40120). Gap 0.20 mm — the tightest of the four attachments. One witness.",
+      "calibration_gap_mm": 0.2,
+      "terms": [
+        "tubercle of trapezium",
+        "trapezial ridge",
+        "distal lateral attachment of the flexor retinaculum"
+      ],
+      "narration": "The distal lateral post. The groove for flexor carpi radialis lies immediately medial to it."
+    },
+    {
+      "key": "hamate_hook",
+      "label": "Hook of the hamate",
+      "role": "part",
+      "group": "Retinacular attachments",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "hamate",
+        "uvw": [
+          0.3795,
+          0.0103,
+          0.4102
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "contact: nearest point on the right hamate (FMA24448, 22.8 mm span, right side, long axis y) to the flexor retinaculum (FMA40120). Gap 2.80 mm — the loosest of the three measured, within the 3 mm tolerance but the one to re-check first. One witness.",
+      "calibration_gap_mm": 2.8,
+      "terms": [
+        "hook of hamate",
+        "hamulus",
+        "distal medial attachment of the flexor retinaculum",
+        "Guyon's canal"
+      ],
+      "narration": "The distal medial post, and the lateral wall of Guyon's canal. It is the carpal bone that breaks in a golfer or a batsman gripping a handle."
+    },
+    {
       "key": "fds_humeroulnar",
       "name": "humeroulnar head of right flexor digitorum superficialis",
       "label": "Flexor digitorum superficialis — humeroulnar head",
@@ -605,9 +684,18 @@
           "from": "trapezium",
           "to": "hamate",
           "kind": "distal attachments of the retinaculum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Retinacular attachments"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Retinacular attachments",
+          "intensity": 0.9
         }
       ],
-      "narration": "The retinaculum is tied to four bony points. Laterally the tubercle of the scaphoid and the tubercle of the trapezium; medially the pisiform and the hook of the hamate. Proximal pair first, distal pair second — that is the order to recite them in."
+      "narration": "The retinaculum is tied to four bony points, marked here on the bones. Laterally the tubercle of the scaphoid and the tubercle of the trapezium; medially the pisiform — a whole bone, so no marker is needed — and the hook of the hamate. Proximal pair first, distal pair second — that is the order to recite them in."
     },
     {
       "mode": "associated_organs",
@@ -817,13 +905,15 @@
   ],
   "gaps": [
     "There is no median nerve mesh in the catalog — no peripheral nerve of the upper limb has one — so the single most important content of the carpal tunnel is authored as a traced concept path with narration, not as a model. The same applies to the ulnar nerve and artery in Guyon's canal, the recurrent and palmar cutaneous branches, and the superficial palmar arch.",
-    "The catalog's smallest units here are whole carpal bones, so the tubercle of the scaphoid, the tubercle of the trapezium and the hook of the hamate — the four points the retinaculum is actually tied to — are taught by lighting the whole bone. They were not authored as landmark anchors because the carpal meshes are not in the local mesh set and this run may not fetch anything, so no anchor could be measured; an anchor placed by eye would be worse than none. Deriving them is the obvious next improvement to this scene.",
+    "RESOLVED 2026-08-29: this note previously said the carpal meshes were not in the local mesh set, so no attachment landmark could be measured. That was stale — all twenty-five of this scene's models are present. The retinaculum is tied to FOUR points, of which the pisiform is a whole bone and needs no marker; the other three are now measured landmark anchors, derived as the nearest point on each bone to the flexor retinaculum: scaphoid tubercle 0.45 mm, trapezium tubercle 0.20 mm, hook of hamate 2.80 mm. Each has one witness only, and all three are status needs-review until a human clears them in-app.",
     "There is no mesh for the common flexor synovial sheath, the radial bursa, the palmar aponeurosis or the transverse carpal ligament as a structure separate from the flexor retinaculum, so the sheaths the tendons run in are described rather than shown.",
     "Tendons are not modelled separately from their muscle bellies: a scene that says \"nine tendons in the tunnel\" is showing four muscles whose tendons those are. The count is taught in narration and in the cross-section beat.",
     "The scaphoid, lunate, capitate, triquetral and trapezoid also appear in the wrist beats of the Radius & ulna scene. That is deliberate overlap — this scene is the one that teaches them as the wall of a tunnel."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

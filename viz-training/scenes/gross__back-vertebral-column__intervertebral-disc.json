@@ -967,6 +967,7 @@
     },
     {
       "mode": "cross_section",
+      "beat": 3,
       "title": "Soft centre, tough ring",
       "ops": [
         {
@@ -988,7 +989,7 @@
     },
     {
       "mode": "mechanism",
-      "beat": 3,
+      "beat": 4,
       "title": "Why a prolapse goes backwards and sideways",
       "ops": [
         {
@@ -1027,7 +1028,7 @@
     },
     {
       "mode": "associated_organs",
-      "beat": 4,
+      "beat": 5,
       "title": "The nerve next door",
       "ops": [
         {
@@ -1047,10 +1048,11 @@
           "view": "lateral"
         }
       ],
-      "narration": "The gap between two pedicles is the intervertebral foramen, and it lies just behind and above the disc. The nerve leaving there is the one named for the vertebra above — but a posterolateral prolapse at L4/5 usually misses that nerve and catches the one crossing to the level below, giving L5 symptoms. L5/S1 catches S1. Learn the pair: the level of the disc and the root it traps are not the same number."
+      "narration": "The notch under the pedicle of one vertebra and the notch over the pedicle of the next leave a window between them — the intervertebral foramen. It sits behind and to the side of the disc, and the nerve leaving it hugs the roof of the window, above disc level. That nerve is the one named for the vertebra above — but a posterolateral prolapse at L4/5 usually misses that nerve and catches the one crossing to the level below, giving L5 symptoms. L5/S1 catches S1. Learn the pair: the level of the disc and the root it traps are not the same number."
     },
     {
       "mode": "comparison",
+      "beat": 6,
       "title": "Thicker where you bend",
       "ops": [
         {
@@ -1079,6 +1081,7 @@
     },
     {
       "mode": "mechanism",
+      "beat": 7,
       "title": "Take the discs away",
       "ops": [
         {
@@ -1104,7 +1107,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "Nucleus pulposus and annulus fibrosus have no separate entries in the catalog — the smallest unit it holds is the whole disc. The cross-section beat therefore teaches the two zones by narration over a solid disc rather than by two labelled parts. Two models, or one measured anchor at the centre of the nucleus, would make that beat literal.",

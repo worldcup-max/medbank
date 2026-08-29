@@ -260,6 +260,26 @@
       "narration": "In front, the head of the talus meets the navicular. Together with the joint between calcaneus and cuboid this makes the midtarsal joint, which adds its own share to turning the forefoot. The tuberosity of the navicular is the palpable landmark for tibialis posterior."
     },
     {
+      "key": "mt5",
+      "name": "right fifth metatarsal bone",
+      "label": "Fifth metatarsal",
+      "role": "context",
+      "group": "The joints below",
+      "layer": "bone",
+      "color": "#d6cbaf",
+      "refs": {
+        "bodyparts3d": "FMA24515"
+      },
+      "terms": [
+        "fifth metatarsal",
+        "base of fifth metatarsal",
+        "avulsion fracture",
+        "fibularis brevis",
+        "inversion injury"
+      ],
+      "narration": "Here only for its base, at the prominent bump on the outer border of the foot. Fibularis brevis inserts on it, so a violent inversion pulls the tendon taut and can snap the base off. That is why the examination of a twisted ankle always includes pressing on this bone: an avulsion here is the fracture most often missed when the eye is on the lateral malleolus."
+    },
+    {
       "key": "tendo_calcaneus",
       "name": "right calcaneal tendon",
       "label": "Calcaneal tendon (Achilles)",
@@ -372,7 +392,7 @@
         "tarsal tunnel",
         "medial longitudinal arch"
       ],
-      "narration": "Its tendon hooks behind the medial malleolus, using the bone as a pulley, then runs forward to the navicular. Behind that malleolus it is the first of four structures under the flexor retinaculum — the tarsal tunnel. Remember the order front to back as Tom, Dick and a Very Nervous Harry: tibialis posterior, flexor digitorum longus, the posterior tibial vessels, the tibial nerve, then flexor hallucis longus."
+      "narration": "Its tendon hooks behind the medial malleolus, using the bone as a pulley, then runs forward to the navicular. Behind that malleolus it is the first of five structures under the flexor retinaculum — the tarsal tunnel. Remember the order front to back as Tom, Dick and a Very Nervous Harry: tibialis posterior, flexor digitorum longus, the posterior tibial vessels, the tibial nerve, then flexor hallucis longus."
     },
     {
       "key": "fhl",
@@ -658,8 +678,18 @@
           "target": "fib_brevis"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "mt5"
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "lateral"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fib_brevis",
+          "to": "mt5",
+          "kind": "insertion on the base — what an inversion injury avulses"
         },
         {
           "op": "TRACE_STRUCTURE",
@@ -727,7 +757,8 @@
     }
   ],
   "gaps": [
-    "There are no ligaments of the ankle in the catalog. The deltoid ligament, the anterior talofibular, calcaneofibular and posterior talofibular bands, the anterior and posterior tibiofibular ligaments of the syndesmosis and the joint capsule are the substance of this topic and none can be shown. They are authored as traced concept paths between the bones they join, and named in narration. This is the largest single gap in the scene and the first thing to revisit if a ligament set becomes available.",
+    "The base of the fifth metatarsal was named twice — in fibularis brevis's narration and in the check-the-foot instruction at the end of beat nine — with no fifth metatarsal on screen. It is in the catalog (FMA24515, 'right fifth metatarsal bone') and in meshes-lite, and it is now authored as `mt5` and shown in beat nine with its fibularis brevis insertion. Only the base matters here; the whole bone stands in for it, and there is no separate mesh for the tuberosity to anchor.",
+    "There are no ligaments of the ankle in the catalog — re-searched at the 2026-08-29 audit under 'deltoid', 'talofibular', 'calcaneofibular', 'tibiofibular' and 'calcaneonavicular'; the only 'deltoid' hits are the three parts of the shoulder muscle. The deltoid ligament, the anterior talofibular, calcaneofibular and posterior talofibular bands, the anterior and posterior tibiofibular ligaments of the syndesmosis and the joint capsule are the substance of this topic and none can be shown. They are authored as traced concept paths between the bones they join, and named in narration. This is the largest single gap in the scene and the first thing to revisit if a ligament set becomes available.",
     "The syndesmosis is taught here by lighting the lower ends of the two bones and the membrane above; the inferior tibiofibular joint itself has no model.",
     "Articular cartilage, the synovial membrane and the joint cavity are not modelled, so the cut-plane beat shows the bony gap and describes what the clear space on an X-ray means.",
     "The flexor and extensor retinacula have no models, so the tarsal tunnel is described by naming its contents in order behind the medial malleolus rather than shown as a roofed space.",
@@ -737,6 +768,8 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }
