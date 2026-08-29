@@ -55,13 +55,48 @@
       "expected": "hard",
       "must_pass_R1": true,
       "must_cite": "already on empagliflozin (SGLT2 inhibitor); dapagliflozin is a second SGLT2 inhibitor",
-      "note": "THE decisive V1.8.1 test: genuinely integrated (cardio-renal optimisation) so it should PASS R1, with a REDUNDANT keyed drug so R2 must independently reject. Gate: R1 pass + R2 valid=false naming the empagliflozin/dapagliflozin duplication.",
+      "note": "R2-UNIT test (not the R1-gate test): R2 independently returns valid=false naming empagliflozin/dapagliflozin duplication — CONFIRMED working. But this item FAILS R1 (an SGLT2i is indicated per-domain, so neither domain is load-bearing), so it cannot prove 'R1 pass -> R2 reject'. Kept as the R2 redundancy unit-test.",
       "stem": "A 70-year-old man with heart failure with reduced ejection fraction (LVEF 28%) and cardiorenal syndrome is admitted with worsening congestion. He is already established on empagliflozin, sacubitril/valsartan, spironolactone, and bisoprolol. During decongestion his creatinine rises modestly with a rising haematocrit (haemoconcentration), his potassium is 4.6 mmol/L, and his blood pressure remains tolerant. Interpreting his renal trajectory as effective decongestion rather than injury, the team wishes to further reduce his heart-failure mortality by optimising guideline-directed therapy. Which of the following is the most appropriate addition?",
       "options": [
         "Add dapagliflozin for additional cardiorenal protection",
         "Add ivabradine if he is in sinus rhythm with a heart rate above 70",
         "Add candesartan on top of sacubitril/valsartan",
         "Add amiloride to augment diuresis"
+      ]
+    },
+    {
+      "id": "V18-5",
+      "kind": "integrated-redundant-therapy-R1PASS",
+      "family": "cardio_endocrine",
+      "keyed_answer": 0,
+      "expected": "hard",
+      "must_pass_R1": true,
+      "currently": "FAILING — R1 passes but R2 valid=true (misses beta-blocker duplication). This is the open V1.8.1 risk.",
+      "must_cite": "already on carvedilol (a beta-blocker); adding propranolol is a second beta-blocker — switch, do not add",
+      "note": "THE decisive R1-gate test. Genuinely integrated (thyrotoxic AF driving adrenergic tone + HFrEF constraining agents — R1 passes, both domains load-bearing). Keyed answer adds propranolol while patient is already on carvedilol. R2 must catch the beta-blocker duplication. Stable miss across 3 runs: R2 anchors on propranolol's real thyrotoxic rationale and does not enumerate carvedilol as the same class. Gate for V1.8.1 = this returns R1 pass + R2 valid=false naming carvedilol/propranolol.",
+      "stem": "A 44-year-old woman with newly diagnosed Graves thyrotoxicosis presents with palpitations from new atrial fibrillation with a ventricular rate of 130. She was diagnosed 8 months ago with heart failure with reduced ejection fraction (LVEF 35%) and is established on carvedilol, sacubitril/valsartan and eplerenone. Her thyrotoxic state is driving heightened adrenergic tone and the arrhythmia, while her reduced ejection fraction constrains which rate-controlling agents are safe. Which of the following is the most appropriate addition to control her ventricular rate?",
+      "options": [
+        "Add propranolol for adrenergic rate control",
+        "Add verapamil for rate control",
+        "Add digoxin for rate control",
+        "Start carbimazole and arrange radioiodine"
+      ]
+    },
+    {
+      "id": "V18-6",
+      "kind": "legitimate-combination-control",
+      "family": "cardio_renal",
+      "keyed_answer": 0,
+      "expected": "none-or-soft",
+      "must_not_falseflag_redundancy": true,
+      "note": "FALSE-POSITIVE CONTROL for STEP 1c v2. Patient on the correct 4-pillar HFrEF regimen minus an SGLT2 inhibitor; keyed answer ADDS empagliflozin — a DIFFERENT class from the existing agents, the guideline-endorsed 4th pillar, NOT duplication. R2 must NOT flag redundancy here. If R2 calls this a duplication, the class rule has become too broad.",
+      "must_cite": "empagliflozin is a distinct class (SGLT2i) completing 4-pillar therapy — not duplicative",
+      "stem": "A 66-year-old man with heart failure with reduced ejection fraction (LVEF 30%) and type 2 diabetes with chronic kidney disease (eGFR 46) remains mildly symptomatic (NYHA II) despite being established and up-titrated on sacubitril/valsartan, bisoprolol and spironolactone. Potassium is 4.4 mmol/L and blood pressure is 118/72. Which of the following additions is most appropriate to further reduce his heart-failure hospitalisation and cardiovascular mortality?",
+      "options": [
+        "Add empagliflozin",
+        "Add candesartan",
+        "Add amlodipine",
+        "Add digoxin"
       ]
     }
   ],

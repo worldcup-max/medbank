@@ -11,7 +11,7 @@
   "covers": [
     "Large intestine"
   ],
-  "learning_goal": "Name the parts of the large intestine in order, tell large bowel from small bowel on four features at a spotter table, use the three taeniae to find the base of the appendix and the rectosigmoid junction, place the midgut–hindgut line at the splenic flexure and say what that means for blood supply, and explain why the caecum, the sigmoid and the rectum are the three places large bowel disease presents.",
+  "learning_goal": "Name the parts of the large intestine in order, tell large bowel from small bowel on four features at a spotter table, use the three taeniae to find the base of the appendix and the rectosigmoid junction, place the midgut–hindgut line at the junction of the proximal two thirds and distal third of the transverse colon — near, but not at, the splenic flexure — and say what that means for blood supply, and explain why the caecum, the sigmoid and the rectum are the three places large bowel disease presents.",
   "status": "candidate",
   "provider": {
     "primary": "bodyparts3d",
@@ -294,6 +294,91 @@
         "fistula in ano"
       ],
       "narration": "Skeletal muscle under voluntary control, supplied by the inferior rectal branch of the pudendal nerve. It surrounds the whole anal canal and overlaps the involuntary internal sphincter, which is thickened circular smooth muscle of the gut wall. Continence is the two sphincters plus the puborectalis sling, which pulls the anorectal junction forward and keeps the anorectal angle acute. Divide the sphincter above the anorectal ring when laying open a fistula and the patient is incontinent — that is the single most important line in anal surgery."
+    },
+    {
+      "key": "appendix_base",
+      "label": "Base of the appendix — where the three taeniae converge",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#f5b041",
+      "render": "anchor",
+      "anchor": {
+        "on": "appendix",
+        "uvw": [
+          0.1021,
+          0.5403,
+          0.7988
+        ],
+        "radius": 0.029
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT on the appendix (FMA14542, 48.4 mm span) witnessed by all three taeniae — free 0.62 mm, mesocolic 0.37 mm, omental 0.38 mm; the three witnesses agree to within 8.3 mm, which is the convergence itself and is the evidence. tools/derive-landmark.mjs --parent FMA14542 --contact FMA76893,FMA76891,FMA76892",
+      "terms": [
+        "base of the appendix",
+        "taeniae converge",
+        "McBurney's point",
+        "caecum",
+        "appendicectomy",
+        "retrocaecal appendix"
+      ],
+      "narration": "The one fixed point of the appendix. Whatever the tip is doing, the base sits where the three taeniae run together on the caecum, and that is how a surgeon finds an appendix that cannot be seen: pick up any band and follow it down. Note what this marker is and is not — it is the base of the appendix on the gut, measured where the three bands meet. McBurney's point is a different thing: a point on the abdominal wall a third of the way along the line from the right anterior superior iliac spine to the umbilicus, which is where the base usually lies underneath. The two are related by surface anatomy, not identical, and this scene draws only the first."
+    },
+    {
+      "key": "rectosigmoid_junction",
+      "label": "Rectosigmoid junction — where the taeniae end",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#e59866",
+      "render": "anchor",
+      "anchor": {
+        "on": "rectum",
+        "uvw": [
+          0.6405,
+          0.22,
+          0.8658
+        ],
+        "radius": 0.034
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT at the upper end of the rectum (FMA14544, 132.1 mm span, long axis z) witnessed by all three taeniae — free 0.59 mm, mesocolic 0.91 mm, omental 0.93 mm, spread 27.3 mm over a 132 mm parent. tools/derive-landmark.mjs --parent FMA14544 --contact FMA76893,FMA76891,FMA76892",
+      "terms": [
+        "rectosigmoid junction",
+        "S3",
+        "taeniae fan out",
+        "Sudeck's point",
+        "sigmoid colon",
+        "rigid sigmoidoscopy"
+      ],
+      "narration": "The upper end of the rectum, in front of the third sacral vertebra, and the point at which the three taeniae spread out into a complete longitudinal coat again. That is the definition to give: not a level on a ruler but a change in the wall. The fatty tags stop here and the mesocolon ends here too, which is why the rectum cannot twist and the sigmoid immediately above it can. It is also Sudeck's point, the weak anastomosis between the last sigmoid artery and the superior rectal."
+    },
+    {
+      "key": "anorectal_ring",
+      "label": "Anorectal ring",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#cd6155",
+      "render": "anchor",
+      "anchor": {
+        "on": "rectum",
+        "uvw": [
+          0.4296,
+          0.79,
+          0.1769
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT at the lower end of the rectum (FMA14544) against the external anal sphincter (FMA21930), gap 0.17 mm. One witness, because one witness is the definition — the ring is where the sphincter complex grips the gut tube. tools/derive-landmark.mjs --parent FMA14544 --contact FMA21930",
+      "terms": [
+        "anorectal ring",
+        "puborectalis",
+        "external anal sphincter",
+        "internal anal sphincter",
+        "fistula in ano",
+        "incontinence",
+        "anorectal angle"
+      ],
+      "narration": "Palpable as a firm ring at the top of the anal canal on rectal examination: the puborectalis sling and the upper external sphincter together, at the anorectal junction. It is the continence mechanism, and it is the line a surgeon must not cross. A fistula track can be laid open below it; divide it and the patient is incontinent for life."
     },
     {
       "key": "ileum",
@@ -597,17 +682,19 @@
           "target": "Colonic bed"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
           "op": "TRACE_STRUCTURE",
           "target": "concept:faecal-stream",
           "path": [
             "ileum",
-            "appendix",
+            "appendix_base",
             "free_taenia",
-            "liver",
-            "omental_taenia",
-            "spleen",
-            "mesocolic_taenia",
+            "rectosigmoid_junction",
             "rectum",
+            "anorectal_ring",
             "anal_sphincter"
           ],
           "duration": 12
@@ -619,7 +706,7 @@
           "kind": "ileocaecal junction"
         }
       ],
-      "narration": "Walk it in order. The ileum opens into the caecum in the right iliac fossa, and the appendix hangs just below the opening. The ascending colon runs up the right flank to the hepatic flexure under the liver. The transverse colon loops forward and down across the abdomen, hung on the transverse mesocolon, and rises again to the splenic flexure high on the left under the spleen. The descending colon runs down the left flank to the pelvic brim. There it becomes the sigmoid colon, which is on a mesentery and therefore mobile, and at the third sacral vertebra it becomes the rectum. Ascending and descending are fixed to the back wall; caecum, transverse and sigmoid hang free. Which parts are mobile is the whole of the volvulus answer."
+      "narration": "Walk it in order — and be clear about what you are walking on, because the colon itself is not drawn in this scene. The trace follows the free taenia from the base of the appendix to the rectosigmoid junction, because that band lies on every segment of colon in turn and is the only continuous thing here that does. The ileum opens into the caecum in the right iliac fossa, and the appendix hangs just below the opening. The ascending colon runs up the right flank to the hepatic flexure under the liver, which is on screen as the landmark for that bend. The transverse colon loops forward and down across the abdomen, hung on the transverse mesocolon, and rises again to the splenic flexure high on the left under the spleen, likewise on screen for the bend and not because anything passes through it. The descending colon runs down the left flank to the pelvic brim. There it becomes the sigmoid colon, which is on a mesentery and therefore mobile, and at the third sacral vertebra it becomes the rectum. Ascending and descending are fixed to the back wall; caecum, transverse and sigmoid hang free. Which parts are mobile is the whole of the volvulus answer."
     },
     {
       "mode": "comparison",
@@ -685,12 +772,19 @@
           "path": [
             "aorta",
             "sma",
-            "appendix",
-            "free_taenia",
+            "appendix"
+          ],
+          "duration": 5
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial-blood",
+          "path": [
+            "aorta",
             "ima",
             "rectum"
           ],
-          "duration": 10
+          "duration": 5
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -699,7 +793,7 @@
           "kind": "meet at the watershed"
         }
       ],
-      "narration": "One line divides the large intestine in two. Everything up to the junction of the proximal two thirds and distal third of the transverse colon is midgut and belongs to the superior mesenteric artery. Everything after it is hindgut and belongs to the inferior mesenteric artery. That line sits near the splenic flexure and it explains three separate exam answers: the referred pain shifts from umbilical to suprapubic across it, the venous drainage stays portal on both sides but the lymphatics follow the arteries, and the collateral supply is thinnest there. The marginal artery runs along the whole mesenteric border joining the two systems — it is what allows a colon to survive ligation of one trunk, and where it fails you get ischaemic colitis at the flexure."
+      "narration": "One line divides the large intestine in two. Everything up to the junction of the proximal two thirds and distal third of the transverse colon is midgut and belongs to the superior mesenteric artery. Everything after it is hindgut and belongs to the inferior mesenteric artery. That line sits near the splenic flexure and it explains three separate exam answers: the referred pain shifts from umbilical to suprapubic across it, the venous drainage stays portal on both sides but the lymphatics follow the arteries, and the collateral supply is thinnest there. Watch the two traces run separately from the aorta, one to each territory, because that is the truth of it: two trunks, two supplies, meeting nowhere on screen. The thing that does join them is the marginal artery of Drummond, running along the whole mesenteric border — it is what allows a colon to survive ligation of one trunk, and where it fails you get ischaemic colitis at the flexure. It has no model in this scene and is described rather than shown; picture it as a single vessel following the mesocolic band from the caecum to the rectosigmoid."
     },
     {
       "mode": "cross_section",
@@ -719,6 +813,10 @@
           "axis": "x",
           "offset": 0.0,
           "animate": true
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "anorectal_ring"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
@@ -766,8 +864,6 @@
           "path": [
             "appendix",
             "free_taenia",
-            "omental_taenia",
-            "mesocolic_taenia",
             "rectum"
           ],
           "duration": 8
@@ -820,18 +916,21 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "There is no caecum and no colon of any kind in the catalog. Searching all 934 entries for colon, caecum, cecum, bowel, intestine, flexure, haustrum and appendage returns nothing but the three taeniae, the appendix, the rectum and the external anal sphincter. So the colon is taught through the three bands that run along it — option (b) of the resolution rule, teaching a structure through an adjacent one that exists — and this works better than it sounds, because the taeniae ARE the course of the colon: they start at the base of the appendix, run the length of every segment, and fan out at the rectosigmoid junction. What cannot be shown is the tube itself. A student cannot point at the ascending colon as an object, only at the bands lying on it, and the labels say so.",
     "Because the tube is missing, this scene is held at 'candidate' rather than 'ready'. Everything the validator checks passes, but a large intestine scene with no caecum and no colon wall cannot answer a spotter question that says 'identify the structure arrowed'. Ingesting caecum and colon meshes from a fuller archive would promote it with no re-authoring: the beats, the ops and the narration are already written to accept them.",
-    "The three taeniae exist and the earlier small-intestine scene said they did not — its gaps[] claims 'not one large-bowel mesh apart from the appendix and the rectum', which was wrong because the search there did not include the word taenia. FMA76891, FMA76892 and FMA76893 are all in the catalog. That gap note in gross__stomach-intestines__small-intestine should be corrected by a human; it is not this scene's file to edit.",
+    "The three taeniae exist and an earlier version of the small-intestine scene said they did not, because the search there did not include the word taenia. FMA76891, FMA76892 and FMA76893 are all in the catalog. RESOLVED: that gap note in gross__stomach-intestines__small-intestine has since been corrected and now names all three ids; re-verified against available-meshes.json on 2026-08-29. Nothing further is owed here — the note is kept as the record of a false-absence claim, which is the commonest failure mode in this corpus.",
     "Haustra and appendices epiploicae have no models. Both are named in every large-versus-small-bowel answer and both are narrated in beats 1 and 3 and carried in terms[], but the haustra are a consequence of the taeniae being short and have no separate mesh, and the fatty tags are not in the catalog at all.",
     "The ileocaecal valve is narrated and not drawn. It has no mesh, and without a caecum there is nothing for it to sit on. Its competence decides whether large bowel obstruction becomes a closed loop, so it is exam-relevant and is in terms[] — a note naming it opens this scene and hears the answer in beat 3.",
     "No anal canal, no internal anal sphincter and no pectinate line. Only the external sphincter, FMA21930, exists. Beat 5 therefore teaches the canal by cutting through the rectum and the external sphincter and narrating the line, which is the part students actually lose marks on. A model of the anal canal with its columns would let the pectinate line be authored as a measured anchor.",
     "The colic arteries have no meshes. Only the two trunks exist, so beat 4 traces from the aorta through each trunk to the bowel it supplies and narrates the ileocolic, right colic, middle colic, left colic, sigmoid and superior rectal branches. The marginal artery of Drummond — the anastomosis the whole watershed idea depends on — is named and not drawn, and it is the single most useful vessel in this topic.",
     "The colic flexures are taught by their neighbours: the hepatic flexure through the liver and the splenic flexure through the spleen, both carried as context. That is deliberate, because the relations are what makes the flexures examinable — the splenic flexure is higher, more posterior and more acute, and it tears the spleen when the colon is pulled. But neither bend is a selectable object in this scene.",
     "No mesocolon and no peritoneum. The transverse and sigmoid mesocolons, the paracolic gutters and the fusion that made the ascending and descending colon secondarily retroperitoneal are all narrated and all in terms[], but a fold of peritoneum has no model. 'Peritoneum & mesentery' is its own curriculum entry, authored in the same run as this scene and routed to diagram mode for exactly this reason.",
-    "No landmark anchors were authored. None of these meshes is in the local decimated set, so McBurney's point, the rectosigmoid junction at S3 and the anorectal ring could not be placed by measurement, and this corpus does not place anchors by eye. Ingesting FMA14542, FMA76893 and FMA14544 locally would allow all three: McBurney's point as the taeniae-to-appendix convergence, the rectosigmoid junction as a taenia-to-rectum contact, and the anorectal ring as a rectum-to-sphincter contact."
+    "CORRECTED 2026-08-29: this note previously said no landmark anchors could be authored because none of these meshes was in the local decimated set. That was false when checked — all eighteen of this scene's models are in meshes-lite/, and the three anchors it named as blocked have now been measured and authored: base of the appendix (three-taenia convergence on FMA14542, gaps 0.37–0.62 mm, witnesses agreeing to 8.3 mm), rectosigmoid junction (three-taenia contact at the upper end of FMA14544, gaps 0.59–0.93 mm), and the anorectal ring (FMA14544 against FMA21930, gap 0.17 mm). All three are status needs-review until a human opens the scene and confirms the patch landed on the feature. Note the one substitution made deliberately: the old note called the first anchor McBurney's point, which it is not. McBurney's point is on the anterior abdominal wall and there is no abdominal-wall mesh in this scene to place it on; what is measured here is the base of the appendix on the gut, and the label and narration say so.",
+    "Still unanchored: the ileocaecal junction and the pectinate line. The first needs a caecum and the second an anal canal, and neither exists in the catalog, so both remain described-not-shown. A guessed coordinate for either would be worse than the gap."
   ]
 }

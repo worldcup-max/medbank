@@ -784,7 +784,7 @@
           "duration": 11
         }
       ],
-      "narration": "Branches in order, and the order is the exam answer. From the left side come fifteen to twenty jejunal and ileal arteries that form arcades in the mesentery. From the right side, in ascending order along the gut, come the ileocolic, the right colic and the middle colic. The first branch of all is the inferior pancreaticoduodenal, which turns back to meet its coeliac partner. Notice the geometry: the artery enters the root of the mesentery, which is only fifteen centimetres long, so the entire midgut hangs from a narrow stalk with one artery in it. That is why malrotation permits volvulus and why volvulus round the superior mesenteric artery infarcts the whole small bowel at once."
+      "narration": "Branches in order — and be careful, because there are two orders and examiners ask for the first. Coming down the artery from its origin: inferior pancreaticoduodenal first, then the middle colic, then the right colic, then the ileocolic, with the fifteen to twenty jejunal and ileal arteries leaving the left side all the way down and forming arcades in the mesentery. Read the same three colic branches along the bowel instead of along the artery and they reverse — ileocolic, right colic, middle colic, caecum to transverse colon — which is the order the trace in this beat follows. Learn the origin order for the viva and the gut order for the operating list. The inferior pancreaticoduodenal, first off the trunk, turns back to meet its coeliac partner. Notice the geometry: the artery enters the root of the mesentery, which is only fifteen centimetres long, so the entire midgut hangs from a narrow stalk with one artery in it. That is why malrotation permits volvulus and why volvulus round the superior mesenteric artery infarcts the whole small bowel at once."
     },
     {
       "mode": "vasculature",
@@ -895,11 +895,20 @@
           "path": [
             "midgut",
             "smv",
+            "portal_v"
+          ],
+          "duration": 5
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:venous-blood",
+          "path": [
+            "hindgut",
             "imv",
             "splenic_v",
             "portal_v"
           ],
-          "duration": 9
+          "duration": 6
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
@@ -913,7 +922,7 @@
           "kind": "drains into, not into its own artery's vein"
         }
       ],
-      "narration": "The veins mirror the arteries with one deliberate exception. The superior mesenteric vein runs on the right of its artery. The splenic vein runs behind the pancreas. The two meet behind the neck of the pancreas to form the portal vein. The inferior mesenteric vein breaks the pattern: it climbs to the left of the midline past the duodenojejunal flexure and joins the splenic vein. All of it goes through the liver first. Three consequences worth memorising: gut cancers metastasise to the liver before anywhere else; a pancreatic tumour at the confluence obstructs bile duct and portal vein together; and in portal hypertension the pressure escapes through porto-systemic anastomoses at the lower oesophagus, the umbilicus and the anal canal, giving varices, caput medusae and haemorrhoids."
+      "narration": "The veins mirror the arteries with one deliberate exception, and the two traces show it: midgut blood goes straight up the superior mesenteric vein into the portal vein, while hindgut blood goes up the inferior mesenteric vein into the splenic vein and only then into the portal. The superior mesenteric vein runs on the right of its artery. The splenic vein runs behind the pancreas. The two meet behind the neck of the pancreas to form the portal vein. The inferior mesenteric vein breaks the pattern: it climbs to the left of the midline past the duodenojejunal flexure and joins the splenic vein. All of it goes through the liver first. Three consequences worth memorising: gut cancers metastasise to the liver before anywhere else; a pancreatic tumour at the confluence obstructs bile duct and portal vein together; and in portal hypertension the pressure escapes through porto-systemic anastomoses at the lower oesophagus, the umbilicus and the anal canal, giving varices, caput medusae and haemorrhoids."
     },
     {
       "mode": "comparison",
@@ -957,14 +966,16 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "Routed to diagram, which is the FIRST entry in this structure's preferred_modes, and 3d_anatomy is recorded in deferred_modes. That ordering is the curriculum's and it is right for the teaching: the subject here is a territory map — which artery owns which stretch of gut — and the answer is a plane of relationships, not a shape. A 3D scene would show three arteries floating in front of an aorta and would not show the two junction lines that the whole topic turns on.",
-    "Unusually for a deferred scene, the 3D version is fully resolvable today and the work is done here so nobody has to repeat it. The catalog holds the coeliac artery, the superior mesenteric artery, the inferior mesenteric artery, the left gastric, splenic and common hepatic arteries, the descending aorta, the splenic and superior mesenteric veins, and the gut segments themselves — duodenum, jejunum, ileum, appendix and rectum. Whoever promotes this scene should resolve each of those against available-meshes.json by name and keep the beats as authored.",
+    "Unusually for a deferred scene, the 3D version is fully resolvable today and the work is done here so nobody has to repeat it. The catalog holds the coeliac artery, the superior mesenteric artery, the inferior mesenteric artery, the left gastric, splenic and common hepatic arteries, the descending aorta, the splenic and superior mesenteric veins, and the gut segments themselves — duodenum, jejunum, ileum, appendix and rectum. RESOLVED 2026-08-29 — the ids are written out here so that nobody repeats the search, and one of them is a trap. The catalog spells the coeliac trunk the American way: it is FMA50737 'celiac artery', and a search for 'coeliac' returns nothing at all. The rest: FMA14749 superior mesenteric artery, FMA14750 inferior mesenteric artery, FMA14768 left gastric artery, FMA14773 splenic artery, FMA14771 common hepatic artery, FMA3784 descending aorta, FMA14331 splenic vein, FMA14332 superior mesenteric vein, FMA7206 duodenum, FMA7207 jejunum, FMA7208 ileum, FMA14542 appendix, FMA14544 rectum. All fourteen are in meshes-lite/ today, so a 3D promotion would draw immediately. Keep the beats as authored.",
     "Status is 'planned', not 'ready'. The scene is fully authored — twenty-nine labelled regions, seven beats, ops and narration — but no artwork exists for the SVG engine, so nothing renders today. It needs one main drawing: the aorta with its three unpaired branches, the gut laid out in three shaded territories, the marginal artery running the length of the colon, and the two watershed points marked. A second small panel for the three referred-pain bands on the abdominal wall would complete beat seven.",
     "The colon is missing from the catalog entirely — no caecum, no ascending, transverse, descending or sigmoid colon, and no flexures. The only large-gut meshes are the three taeniae coli, FMA76891, FMA76892 and FMA76893 — which, since they run the whole length of the colon, would let a 3D version trace the marginal artery along the bowel's actual course. Since three of this scene's seven beats are about colonic supply and both watersheds are colonic, a 3D version would be teaching the marginal artery against bowel that is not drawn. This is the same absence recorded by the Large intestine scene, and it is the highest-value acquisition for this topic.",
-    "No portal vein, no inferior mesenteric vein, no gastroduodenal artery, no colic arteries of any kind and no rectal arteries in the catalog. Beats three, four and six therefore name more vessels than any provider could currently render, which is correct: the teaching is the branching order, and abbreviating it to the four vessels that happen to have meshes would leave a student unable to answer a standard viva question.",
+    "No portal vein, no inferior mesenteric vein, no gastroduodenal artery, no colic arteries of any kind and no rectal arteries in the catalog. Re-verified 2026-08-29 by substring search of all 934 entries for portal, mesenteric, gastroduodenal, pancreatico, colic, rect, hepatic, gastric and splen — the only gut vessels that exist are the celiac, superior and inferior mesenteric, left gastric, splenic and common hepatic arteries and the splenic and superior mesenteric veins. Beats three, four and six therefore name more vessels than any provider could currently render, which is correct: the teaching is the branching order, and abbreviating it to the four vessels that happen to have meshes would leave a student unable to answer a standard viva question.",
     "The referred-pain bands are authored as a labelled region because that is what they are on a diagram. They have no anatomical surface of their own and never will; in a future 3D version they should become anchors on the anterior abdominal wall rather than structures.",
     "Sympathetic afferent pathways — greater, lesser and least splanchnic nerves — are named in narration and terms[] but are not drawn. No nerve of the abdomen exists in the catalog, and the splanchnic route is better taught as a sequence-mode scene in the neuroanatomy course, which is entirely unauthored.",
     "This scene deliberately does not claim to cover 'Portal venous system', which is a separate curriculum entry under Liver, Biliary Tract, Pancreas & Spleen. Beat six teaches the confluence and the porto-systemic sites because gut venous drainage cannot be taught without them, but the anastomoses themselves, their clinical measurement and their management belong to that entry and it stays unauthored."
