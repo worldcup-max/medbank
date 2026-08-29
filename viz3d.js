@@ -1256,10 +1256,6 @@
       return 'the whole ' + parent.toLowerCase().replace(/\s*\(\w+\)$/, '') +
              ' is highlighted — there is no separate model of the ' + detail.toLowerCase();
     }
-    function isApprox(key) {
-      var st2 = structures.filter(function (x) { return x.key === key; })[0];
-      return !!(st2 && st2.approx && st2.approx.detail);
-    }
     function buildList() {
       var list = $('list'); list.innerHTML = '';
       Array.prototype.slice.call(pinWrap.children).forEach(function (c) { if (c !== leads) pinWrap.removeChild(c); });
@@ -1807,8 +1803,8 @@
 
        Nothing here invents anatomy: the spoken lines are the student's own sentence and the structure
        narration the scene's author wrote. */
-    var teachTurn = 0, teachOn = false;
-    function stopTeach() { teachTurn++; teachOn = false; }
+    var teachTurn = 0;
+    function stopTeach() { teachTurn++; }
     var GEN2 = { the:1, a:1, an:1, of:1, and:1, or:1, to:1, in:1, on:1, its:1, part:1, parts:1, process:1,
                  head:1, region:1, body:1, left:1, right:1, muscle:1, bone:1, border:1, surface:1, area:1,
                  artery:1, arteries:1, vein:1, veins:1, nerve:1, nerves:1, ligament:1, tendon:1, trunk:1,
@@ -1964,12 +1960,11 @@
                                        (r.narration || '') });
       });
       try { warm(stops.map(function (x) { return x.line; })); } catch (e) {}   // buy the whole tour up front
-      var turn = ++teachTurn, n = 0; teachOn = true;
+      var turn = ++teachTurn, n = 0;
       stopTour(); stopSpin();
       function step() {
         if (turn !== teachTurn || !running) return;
         if (n >= stops.length) {                       // end on the subject, in context, with its neighbours up
-          teachOn = false;
           selected = [key].concat(rel.map(function (r) { return r.key; }));
           ghost = true; labelsAll = true; $('ghost').classList.add('pri'); $('labels').classList.add('pri');
           drawConnects(key, rel, key);
