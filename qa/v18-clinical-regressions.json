@@ -1,18 +1,69 @@
 {
   "note": "V1.8 regression set — the three TRUE clinical errors from Production Run #1 that R2 must now catch after the redundant/contraindicated-therapy + mechanism-wording checks. Run each via POST /admin/integrated/review-debug {stem,options,answer,...} after deploying V1.8. R2 must return valid=false (→ severity hard) FOR THE RIGHT REASON (the reason string must name the specific error). These are the acceptance test for V1.8; they join the permanent benchmark.",
   "cases": [
-    { "id":"V18-1", "kind":"redundant-therapy", "family":"cardio_endocrine", "keyed_answer":2, "expected":"hard",
-      "must_cite":"already on empagliflozin — dapagliflozin is a second SGLT2 inhibitor",
-      "stem":"A 62-year-old woman with type 2 diabetes and heart failure with reduced ejection fraction (LVEF 30%) is on empagliflozin, sacubitril/valsartan, and carvedilol. She reports good adherence. Her HbA1c is 7.2%. Which of the following is the most appropriate next step in her management?",
-      "options":["Add sitagliptin to improve glycemic control","Add pioglitazone to improve glycemic control","Add dapagliflozin to further reduce heart failure risk","Increase carvedilol dose for heart failure"] },
-    { "id":"V18-2", "kind":"guideline-contradiction", "family":"endocrine_renal", "keyed_answer":2, "expected":"hard",
-      "must_cite":"metformin is dose-reduced not stopped at eGFR >=30",
-      "stem":"A 65-year-old woman with type 2 diabetes for 15 years and stage 3b chronic kidney disease (eGFR 38 mL/min/1.73m2) has persistent albuminuria (UACR 500 mg/g) despite lisinopril 20 mg. HbA1c 8.2. She takes metformin 500 mg twice daily and glimepiride 2 mg daily. Which of the following is the most appropriate change to her diabetes regimen?",
-      "options":["Continue current regimen and recheck HbA1c in 3 months","Increase glimepiride to 4 mg daily","Stop metformin and start an SGLT2 inhibitor","Switch metformin to insulin","Add linagliptin"] },
-    { "id":"V18-3", "kind":"mechanism-wording", "family":"cardio_renal", "keyed_answer":1, "expected":"hard",
-      "must_cite":"hyperkalaemia causes peaked T via altered/accelerated repolarisation, not 'delayed repolarisation'",
-      "stem":"A 68-year-old man with CKD stage 3 and hypertension presents with 3 days of oliguria and dyspnea. Bilateral crackles and pitting edema. ECG reveals peaked T waves in the precordial leads. Potassium 6.8 mmol/L, creatinine 320 umol/L (baseline 150), bicarbonate 16. Which of the following best explains the ECG finding?",
-      "options":["Uraemic pericarditis causing epicardial inflammation","Hyperkalaemia causing delayed repolarisation","Volume overload causing left ventricular strain","Metabolic acidosis causing increased intracellular potassium shift"] }
+    {
+      "id": "V18-1",
+      "kind": "redundant-therapy",
+      "family": "cardio_endocrine",
+      "keyed_answer": 2,
+      "expected": "hard",
+      "must_cite": "already on empagliflozin — dapagliflozin is a second SGLT2 inhibitor",
+      "stem": "A 62-year-old woman with type 2 diabetes and heart failure with reduced ejection fraction (LVEF 30%) is on empagliflozin, sacubitril/valsartan, and carvedilol. She reports good adherence. Her HbA1c is 7.2%. Which of the following is the most appropriate next step in her management?",
+      "options": [
+        "Add sitagliptin to improve glycemic control",
+        "Add pioglitazone to improve glycemic control",
+        "Add dapagliflozin to further reduce heart failure risk",
+        "Increase carvedilol dose for heart failure"
+      ]
+    },
+    {
+      "id": "V18-2",
+      "kind": "guideline-contradiction",
+      "family": "endocrine_renal",
+      "keyed_answer": 2,
+      "expected": "hard",
+      "must_cite": "metformin is dose-reduced not stopped at eGFR >=30",
+      "stem": "A 65-year-old woman with type 2 diabetes for 15 years and stage 3b chronic kidney disease (eGFR 38 mL/min/1.73m2) has persistent albuminuria (UACR 500 mg/g) despite lisinopril 20 mg. HbA1c 8.2. She takes metformin 500 mg twice daily and glimepiride 2 mg daily. Which of the following is the most appropriate change to her diabetes regimen?",
+      "options": [
+        "Continue current regimen and recheck HbA1c in 3 months",
+        "Increase glimepiride to 4 mg daily",
+        "Stop metformin and start an SGLT2 inhibitor",
+        "Switch metformin to insulin",
+        "Add linagliptin"
+      ]
+    },
+    {
+      "id": "V18-3",
+      "kind": "mechanism-wording",
+      "family": "cardio_renal",
+      "keyed_answer": 1,
+      "expected": "hard",
+      "must_cite": "hyperkalaemia causes peaked T via altered/accelerated repolarisation, not 'delayed repolarisation'",
+      "stem": "A 68-year-old man with CKD stage 3 and hypertension presents with 3 days of oliguria and dyspnea. Bilateral crackles and pitting edema. ECG reveals peaked T waves in the precordial leads. Potassium 6.8 mmol/L, creatinine 320 umol/L (baseline 150), bicarbonate 16. Which of the following best explains the ECG finding?",
+      "options": [
+        "Uraemic pericarditis causing epicardial inflammation",
+        "Hyperkalaemia causing delayed repolarisation",
+        "Volume overload causing left ventricular strain",
+        "Metabolic acidosis causing increased intracellular potassium shift"
+      ]
+    },
+    {
+      "id": "V18-4",
+      "kind": "integrated-redundant-therapy",
+      "family": "cardio_renal",
+      "keyed_answer": 0,
+      "expected": "hard",
+      "must_pass_R1": true,
+      "must_cite": "already on empagliflozin (SGLT2 inhibitor); dapagliflozin is a second SGLT2 inhibitor",
+      "note": "THE decisive V1.8.1 test: genuinely integrated (cardio-renal optimisation) so it should PASS R1, with a REDUNDANT keyed drug so R2 must independently reject. Gate: R1 pass + R2 valid=false naming the empagliflozin/dapagliflozin duplication.",
+      "stem": "A 70-year-old man with heart failure with reduced ejection fraction (LVEF 28%) and cardiorenal syndrome is admitted with worsening congestion. He is already established on empagliflozin, sacubitril/valsartan, spironolactone, and bisoprolol. During decongestion his creatinine rises modestly with a rising haematocrit (haemoconcentration), his potassium is 4.6 mmol/L, and his blood pressure remains tolerant. Interpreting his renal trajectory as effective decongestion rather than injury, the team wishes to further reduce his heart-failure mortality by optimising guideline-directed therapy. Which of the following is the most appropriate addition?",
+      "options": [
+        "Add dapagliflozin for additional cardiorenal protection",
+        "Add ivabradine if he is in sinus rhythm with a heart rate above 70",
+        "Add candesartan on top of sacubitril/valsartan",
+        "Add amiloride to augment diuresis"
+      ]
+    }
   ],
   "note2": "#V18-3 is subtle: the DIAGNOSIS (hyperkalaemia) is right but the MECHANISM wording is wrong. R2 should flag the mechanism inaccuracy. If R2 passes it because the association is correct, that is an acceptable-but-noted softer miss — the harder acceptance bar is V18-1 and V18-2 (unambiguous)."
 }
