@@ -86,7 +86,9 @@
       "Pott's fracture",
       "fibular graft",
       "intraosseous access",
-      "medullary cavity"
+      "medullary cavity",
+      "fibularis tertius",
+      "peroneus tertius"
     ]
   },
   "camera": {
@@ -432,6 +434,113 @@
         "push off"
       ],
       "narration": "From the lower two thirds of the back of the fibula. It is the bulkiest of the deep three because it drives the final push-off from the big toe."
+    },
+    {
+      "key": "med_malleolus",
+      "label": "Medial malleolus",
+      "role": "part",
+      "group": "Landmarks on the bones",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "tibia",
+        "uvw": [
+          0.752,
+          0.5415,
+          0.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -z on the right tibia — the medial malleolus is simply the lowest point of the bone (198 mm from the surface centroid, 1502 vertices considered); see tools/derive-landmark.mjs --parent FMA24477 --extreme -z",
+      "terms": [
+        "medial malleolus",
+        "medial wall of the ankle mortise",
+        "deltoid ligament",
+        "Pott's fracture"
+      ],
+      "narration": "The short blunt process on the inner side of the ankle, felt through the skin. It gives the medial wall of the mortise, and the tendons of tibialis posterior, flexor digitorum longus and flexor hallucis longus pass behind it with the posterior tibial vessels and tibial nerve between the second and the third."
+    },
+    {
+      "key": "lat_malleolus",
+      "label": "Lateral malleolus",
+      "role": "part",
+      "group": "Landmarks on the bones",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "fibula",
+        "uvw": [
+          0.6033,
+          0.7918,
+          0.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -z on the right fibula — the lateral malleolus is the lowest point of the bone (177.3 mm from the surface centroid, 1502 vertices considered); see tools/derive-landmark.mjs --parent FMA24480 --extreme -z",
+      "terms": [
+        "lateral malleolus",
+        "lateral wall of the ankle mortise",
+        "syndesmosis",
+        "Pott's fracture"
+      ],
+      "narration": "The long thin process on the outer side of the ankle. Compare it with the medial one on screen: it descends about a centimetre lower and sits slightly further back, which is why the foot inverts more easily than it everts and why the lateral ligament is the one that tears."
+    },
+    {
+      "key": "fib_head_apex",
+      "label": "Apex of head of fibula (styloid process)",
+      "role": "part",
+      "group": "Landmarks on the bones",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "fibula",
+        "uvw": [
+          0.393,
+          0.6015,
+          1.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +z on the right fibula — the apex of the head is the highest point of the bone (174 mm from the surface centroid, 1502 vertices considered); see tools/derive-landmark.mjs --parent FMA24480 --extreme +z",
+      "terms": [
+        "apex of head of fibula",
+        "styloid process of fibula",
+        "head of fibula",
+        "biceps femoris",
+        "fibular collateral ligament"
+      ],
+      "narration": "The upward spike on the back of the head, where biceps femoris and the fibular collateral ligament of the knee take hold. Find it at the side of the knee a finger's breadth below the joint line; the neck, and the common fibular nerve on it, lie a centimetre below this point."
+    },
+    {
+      "key": "soleal_line",
+      "label": "Soleal line",
+      "role": "part",
+      "group": "Landmarks on the bones",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "tibia",
+        "uvw": [
+          0.4957,
+          0.6128,
+          0.776
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch between the right tibia and right soleus, averaged over every tibial vertex within 6 mm of soleus (38 vertices, nearest gap 1.9 mm, one witness — soleus is the only structure that defines this line); see tools/derive-landmark.mjs --parent FMA24477 --contact FMA22558 --area 6",
+      "calibration_gap_mm": 1.9,
+      "terms": [
+        "soleal line",
+        "popliteal line",
+        "soleus",
+        "posterior surface of tibia",
+        "flexor digitorum longus"
+      ],
+      "narration": "The oblique ridge running down and medially across the back of the upper tibia. Soleus arises along it, and it is the dividing line of the posterior surface: everything above belongs to popliteus, everything below and medial to flexor digitorum longus and tibialis posterior."
     }
   ],
   "views": [
@@ -466,6 +575,10 @@
           "target": "The two bones"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks on the bones"
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "anterior"
         },
@@ -487,11 +600,15 @@
           "target": "fibula"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks on the bones"
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "lateral"
         }
       ],
-      "narration": "The fibula has a head, a neck, a shaft and a lower end. The head is felt at the side of the knee, a finger below the joint line. The neck below it is bare bone with the common fibular nerve wound directly around it — the most commonly injured nerve in the lower limb, and the reason a tight plaster at this point causes foot drop. The lower end is the lateral malleolus, which reaches about two centimetres lower than the medial one."
+      "narration": "The fibula has a head, a neck, a shaft and a lower end. The head is felt at the side of the knee, a finger below the joint line. The neck below it is bare bone with the common fibular nerve wound directly around it — the most commonly injured nerve in the lower limb, and the reason a tight plaster at this point causes foot drop. The lower end is the lateral malleolus, which reaches about a centimetre lower than the medial one."
     },
     {
       "mode": "location",
@@ -501,6 +618,10 @@
         {
           "op": "ISOLATE_REGION",
           "target": "The two bones"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks on the bones"
         },
         {
           "op": "ROTATE_TO_VIEW",
@@ -568,7 +689,7 @@
           "view": "superior"
         }
       ],
-      "narration": "Slide the cut down the leg. The two bones and the membrane between them divide the leg into compartments, and the walls are the membrane, the bones themselves, and the deep fascia with its two intermuscular septa. Anterior compartment in front of the membrane, lateral compartment against the side of the fibula, posterior compartment behind, itself split into a superficial and a deep part. Four compartments, four nerves, four actions — this cut is the single most useful picture in the leg."
+      "narration": "Slide the cut down the leg. The two bones and the membrane between them divide the leg into compartments, and the walls are the membrane, the bones themselves, and the deep fascia with its two intermuscular septa. Anterior compartment in front of the membrane, lateral compartment against the side of the fibula, posterior compartment behind, itself split into a superficial and a deep part. Four compartments but only three nerves, because the tibial nerve serves both the superficial and the deep posterior compartment: deep fibular in front, superficial fibular laterally, tibial behind. This cut is the single most useful picture in the leg."
     },
     {
       "mode": "cross_section",
@@ -596,7 +717,7 @@
           "view": "anterior"
         }
       ],
-      "narration": "The anterior compartment holds tibialis anterior, extensor hallucis longus and extensor digitorum longus. They dorsiflex, they are supplied by the deep fibular nerve, and the anterior tibial artery runs down on the membrane with them. The lateral compartment holds only the two fibularis muscles. They evert, they are supplied by the superficial fibular nerve, and they contain no artery of their own. Note that both nerves are branches of the common fibular nerve at the neck of the fibula, so one injury there loses dorsiflexion and eversion together."
+      "narration": "The anterior compartment holds tibialis anterior, extensor hallucis longus and extensor digitorum longus, and below them a fourth muscle, fibularis tertius, which is not drawn here — it is the lowest part of extensor digitorum longus split off to reach the fifth metatarsal, and although its name says fibularis it lies in the anterior compartment and is supplied by the deep fibular nerve, so it dorsiflexes as well as everts. They dorsiflex, they are supplied by the deep fibular nerve, and the anterior tibial artery runs down on the membrane with them. The lateral compartment holds only the two fibularis muscles. They evert, they are supplied by the superficial fibular nerve, and they contain no artery of their own. Note that both nerves are branches of the common fibular nerve at the neck of the fibula, so one injury there loses dorsiflexion and eversion together."
     },
     {
       "mode": "cross_section",
@@ -651,7 +772,7 @@
           "view": "lateral"
         }
       ],
-      "narration": "Nine muscles take origin from this thin bone and it bears no weight, which is why a surgeon can remove the middle of a fibula as a bone graft and the patient still walks. Leave the upper quarter to protect the nerve and the lower quarter to keep the ankle mortise, and the rest is spare."
+      "narration": "Eight muscles take origin from this thin bone — soleus, tibialis posterior and flexor hallucis longus behind, extensor digitorum longus, extensor hallucis longus and fibularis tertius in front, fibularis longus and brevis at the side — and a ninth, biceps femoris, inserts into its head. It still bears no weight, which is why a surgeon can remove the middle of a fibula as a bone graft and the patient still walks. Leave the upper quarter to protect the nerve and the lower quarter to keep the ankle mortise, and the rest is spare."
     },
     {
       "mode": "cross_section",
@@ -734,14 +855,17 @@
   ],
   "gaps": [
     "The catalog holds no arteries or nerves below the external iliac. The anterior tibial artery, the posterior tibial artery, the fibular artery, the common fibular nerve at the fibular neck and the tibial nerve are therefore named in narration and, for the nutrient artery, authored as a traced concept path. The fibular neck relationship is the single most examinable thing in this scene and it is currently taught by words rather than by a model.",
-    "The tibial tuberosity, the anterior border, the soleal line, the intercondylar eminence, the interosseous borders, the malleoli and the fibular styloid are all sub-features of one whole-bone mesh. Each is taught by lighting the bone and naming the feature. Measured landmark anchors would be the obvious improvement and were not attempted, because an anchor placed by eye is worse than none.",
+    "Four landmarks on these bones are now measured anchors rather than the whole bone lit up: the medial malleolus and the soleal line on the tibia, the lateral malleolus and the apex of the fibular head on the fibula. They are status needs-review until someone opens the scene and looks at where each patch landed. Three named features are still taught by lighting the whole bone: the tibial tuberosity REFUSED derivation (its only possible witness is the patella, and the patellar ligament has no mesh, so the patella sits 6.48 mm away — above the 3 mm limit; do not re-derive it and believe the number). The neck of the fibula is a narrowest cross-section, which is neither of derive-landmark.mjs's two definitions, exactly as the neck of the radius was. The anterior border, the intercondylar eminence and the interosseous borders are lines along a bone, not points on it.",
     "No ligaments of the knee or ankle exist in the catalog, so the superior and inferior tibiofibular joints are shown as a lit relationship between the two bones rather than as modelled ligaments, and the syndesmosis is described in narration.",
     "The deep fascia of the leg and the anterior and posterior intermuscular septa have no models. They are named in the cross-section beat as the walls that complete each compartment.",
     "The medullary cavity, periosteum and growth plates are internal architecture a surface model cannot show; the cut-plane beat opens the shell and describes what a sawn section would reveal.",
-    "This scene does not cover Ankle joint, Popliteal fossa or Arches of the foot. The talus, the calcaneus and gastrocnemius appear here only as the ends of the story."
+    "This scene does not cover Ankle joint, Popliteal fossa or Arches of the foot. The talus, the calcaneus and gastrocnemius appear here only as the ends of the story.",
+    "Fibularis tertius exists in the catalog as FMA22550 (right) but its mesh is not in meshes-lite/, so it cannot be drawn and this task cannot fetch it. It is named in the anterior-compartment beat as described rather than shown, and in the fibular-attachments count. Fetching FMA22550 would complete the anterior compartment — it is the only muscle of the leg missing from this scene."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

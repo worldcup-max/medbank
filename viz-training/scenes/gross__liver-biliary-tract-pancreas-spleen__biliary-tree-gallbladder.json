@@ -120,7 +120,9 @@
       "hepatoduodenal ligament",
       "free edge of the lesser omentum",
       "epiploic foramen",
-      "duct to the right artery to the left vein behind"
+      "duct to the right artery to the left vein behind",
+      "fundus of gallbladder",
+      "gallbladder fossa on the liver"
     ]
   },
   "camera": {
@@ -409,6 +411,151 @@
         "laparoscopy"
       ],
       "narration": "The gallbladder sits under the right dome and descends with it on inspiration, which is what makes Murphy's sign possible at all. When inflammation or gas reaches the underside of the diaphragm the phrenic nerve carries it to C3, C4 and C5, and the patient reports pain at the tip of the right shoulder — the same mechanism that causes shoulder pain after a laparoscopic cholecystectomy."
+    },
+    {
+      "key": "gb_fundus",
+      "label": "Fundus of the gallbladder",
+      "role": "part",
+      "group": "Measured landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "gallbladder",
+        "uvw": [
+          0.347,
+          0.156,
+          0.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -z on the gallbladder (FMA7202, 46 mm, right side, long axis z) — the fundus is the lowest point of the organ, and the measured point is also the most anterior of the low points (v=0.16, where +y is posterior), which is the direction the fundus is described as pointing; see tools/derive-landmark.mjs --parent FMA7202 --extreme -z",
+      "terms": [
+        "fundus",
+        "fundus of gallbladder",
+        "Murphy's sign",
+        "ninth costal cartilage",
+        "tip of the ninth costal cartilage",
+        "transpyloric plane"
+      ],
+      "narration": "The blind rounded end, and the only part of the gallbladder that reaches beyond the inferior border of the liver to touch the anterior abdominal wall. This is the point that meets your fingers under the right costal margin when the patient breathes in."
+    },
+    {
+      "key": "gb_neck",
+      "label": "Neck of the gallbladder (Hartmann's pouch)",
+      "role": "part",
+      "group": "Measured landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "gallbladder",
+        "uvw": [
+          0.8781,
+          0.8753,
+          1.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +z on the gallbladder — the neck is the highest point of the organ, and the measured point is also its most posterior (v=0.88), matching the description of a neck that narrows and turns backwards into the cystic duct; see tools/derive-landmark.mjs --parent FMA7202 --extreme +z",
+      "terms": [
+        "neck of gallbladder",
+        "Hartmann's pouch",
+        "cystic duct",
+        "spiral valve of Heister",
+        "biliary colic",
+        "Mirizzi syndrome"
+      ],
+      "narration": "The narrow upper end that turns back towards the porta. Its posterior wall dilates as Hartmann's pouch, which is where a stone lodges — and from where a big stone can press on the common hepatic duct outside it and jaundice the patient without ever entering a duct. The cystic duct continues from this point and has no mesh, so the anchor marks where the tree leaves the geometry."
+    },
+    {
+      "key": "gb_duod_contact",
+      "label": "Gallbladder–duodenum contact",
+      "role": "part",
+      "group": "Measured landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "gallbladder",
+        "uvw": [
+          0.8284,
+          0.7863,
+          0.7543
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT between the gallbladder and the duodenum, nearest gap 0.44 mm, one witness. Note the position: w=0.75 on the organ's long axis, so the two meshes meet nearer the neck than the middle of the body; the narration is written to that measurement rather than to the textbook phrase; see tools/derive-landmark.mjs --parent FMA7202 --contact FMA7206",
+      "calibration_gap_mm": 0.44,
+      "terms": [
+        "first part of the duodenum",
+        "cholecystoduodenal fistula",
+        "gallstone ileus",
+        "Rigler's triad",
+        "adhesion"
+      ],
+      "narration": "Where the gallbladder actually touches the first part of the duodenum on this body — closer to the neck than to the fundus. Chronic inflammation fuses the two here, and a large stone can ulcerate straight through into the gut."
+    },
+    {
+      "key": "gb_fossa",
+      "label": "Gallbladder fossa",
+      "role": "part",
+      "group": "Measured landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "liver",
+        "uvw": [
+          0.2823,
+          0.2426,
+          0.3056
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch between the liver and the gallbladder, averaged over the 98 liver vertices within 8 mm of the gallbladder (nearest gap 0.18 mm, centroid 6.72 mm from that nearest vertex, one witness — the gallbladder is by definition the only structure that defines its own fossa); see tools/derive-landmark.mjs --parent FMA7197 --contact FMA7202 --area 8",
+      "calibration_gap_mm": 0.18,
+      "terms": [
+        "gallbladder fossa",
+        "visceral surface of the liver",
+        "bare of peritoneum",
+        "cystic veins",
+        "segment IV",
+        "segment V",
+        "gallbladder carcinoma"
+      ],
+      "narration": "The bed the gallbladder lies in, on the visceral surface of the right lobe between segments four and five. It is bare of peritoneum and cystic veins pass straight from the gallbladder into the liver through it — which is why gallbladder carcinoma reaches those two segments early."
+    },
+    {
+      "key": "duod_papilla",
+      "label": "Major duodenal papilla",
+      "role": "part",
+      "group": "Measured landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "duodenum",
+        "uvw": [
+          0.1858,
+          0.5779,
+          0.414
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT between the duodenum and the pancreatic duct, nearest gap 1.26 mm, one witness. The pancreatic duct's own termination is where the ampulla opens, so the point where it meets the duodenal wall IS the papilla; see tools/derive-landmark.mjs --parent FMA7206 --contact FMA10419",
+      "calibration_gap_mm": 1.26,
+      "terms": [
+        "major duodenal papilla",
+        "ampulla of Vater",
+        "hepatopancreatic ampulla",
+        "sphincter of Oddi",
+        "second part of the duodenum",
+        "ERCP",
+        "gallstone pancreatitis",
+        "double duct sign"
+      ],
+      "narration": "The opening on the posteromedial wall of the second part of the duodenum, measured as the point where the pancreatic duct meets the duodenal wall. Bile duct and pancreatic duct share the last short channel behind it, guarded by the sphincter of Oddi — one stone here blocks two systems, and this is the point the endoscopist cannulates at ERCP."
     }
   ],
   "views": [
@@ -420,6 +567,10 @@
         {
           "op": "SHOW_STRUCTURE",
           "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Measured landmarks"
         },
         {
           "op": "HIDE_STRUCTURE",
@@ -447,7 +598,7 @@
           "kind": "descends with inspiration"
         }
       ],
-      "narration": "Start on the surface, because this is an organ you examine before you image it. The fundus of the gallbladder lies at the tip of the ninth costal cartilage, where the lateral border of the right rectus abdominis crosses the costal margin — near the transpyloric plane at L1. The rest of the organ hides behind the liver in its fossa on the visceral surface. Because the liver and gallbladder both hang from the diaphragm, they descend on inspiration; place your fingers under the right costal margin at that point, ask the patient to take a deep breath, and if the gallbladder is inflamed the movement drives it onto your hand and the patient stops mid-breath. That is Murphy's sign, and its value is that it is positive in cholecystitis and negative in uncomplicated biliary colic."
+      "narration": "Start on the surface, because this is an organ you examine before you image it. The fundus of the gallbladder lies at the tip of the ninth costal cartilage, where the lateral border of the right rectus abdominis crosses the costal margin — near the transpyloric plane at L1. The rest of the organ hides behind the liver in its fossa on the visceral surface — the fundus, the neck and that fossa are all lit here as measured points rather than as the whole organ. Because the liver and gallbladder both hang from the diaphragm, they descend on inspiration; place your fingers under the right costal margin at that point, ask the patient to take a deep breath, and if the gallbladder is inflamed the movement drives it onto your hand and the patient stops mid-breath. That is Murphy's sign, and its value is that it is positive in cholecystitis and negative in uncomplicated biliary colic."
     },
     {
       "mode": "mechanism",
@@ -485,6 +636,10 @@
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "gallbladder",
           "intensity": 0.85
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Measured landmarks"
         }
       ],
       "narration": "Learn the order of the tree once and it never leaves you. Right and left hepatic ducts leave the porta hepatis and unite as the common hepatic duct. The cystic duct comes off the gallbladder and joins it, and from that junction downwards the tube is called the common bile duct. The bile duct runs in the free edge of the lesser omentum, then behind the first part of the duodenum, then in a groove on the back of the head of the pancreas, and finally meets the main pancreatic duct in the ampulla of Vater to open on the major duodenal papilla. Now the flow. Between meals the sphincter of Oddi is shut, so bile leaving the liver takes the only open path — up the cystic duct into the gallbladder, where it is concentrated tenfold. When fat reaches the duodenum, cholecystokinin contracts the gallbladder and relaxes the sphincter, and concentrated bile is emptied down the same cystic duct into the bile duct and out at the papilla. The cystic duct is therefore a two-way street, and its spiral valve of Heister keeps it patent whichever way bile is moving. Ninety-five per cent of the bile salts are then reabsorbed in the terminal ileum and returned to the liver — the enterohepatic circulation, which is why ileal resection or Crohn's disease causes fat malabsorption and gallstones."
@@ -576,6 +731,10 @@
           "axis": "z",
           "offset": 0.0,
           "animate": true
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Measured landmarks"
         }
       ],
       "narration": "One stone, four different patients, and the difference is only where it lodges. Impacted in Hartmann's pouch or the cystic duct and then falling back: the gallbladder contracts against a closed outlet and the patient gets biliary colic — severe constant epigastric or right upper quadrant pain after a fatty meal, lasting hours, with no fever and no jaundice. Impacted and staying there: the trapped bile inflames the wall and you have acute cholecystitis — the same pain plus fever, right upper quadrant tenderness and a positive Murphy's sign, still without jaundice because the bile duct itself is open. If the obstruction stays sterile the gallbladder fills with mucus as a mucocoele; if it becomes infected, an empyema. Passed into the common bile duct: choledocholithiasis, and now bile cannot reach the gut at all — jaundice, pale stools, dark urine and itching, with a conjugated bilirubin and a raised alkaline phosphatase. Add infection behind that obstruction and it is ascending cholangitis: Charcot's triad of pain, fever with rigors and jaundice, becoming Reynolds pentad with confusion and shock. Impacted at the ampulla, where bile duct and pancreatic duct share a channel: bile refluxes into the pancreas and you have gallstone pancreatitis — which is why every patient with pancreatitis needs an ultrasound of the gallbladder."
@@ -588,6 +747,10 @@
         {
           "op": "SHOW_STRUCTURE",
           "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Measured landmarks"
         },
         {
           "op": "ROTATE_TO_VIEW",
@@ -635,6 +798,10 @@
         },
         {
           "op": "SHOW_STRUCTURE",
+          "target": "Measured landmarks"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
           "target": "Calot's triangle"
         },
         {
@@ -666,15 +833,17 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "The ducts do not exist in the catalog. Searching all 934 entries for bile, biliary, cystic, choledoch, hepatic duct, ampulla, papilla and sphincter returns the gallbladder, the pancreatic duct and nothing else. So the common hepatic duct, the cystic duct, the right and left hepatic ducts and the common bile duct - the entire tree of this structure's name - are narrated and traced but cannot be drawn or clicked. This is why the scene is status:\"candidate\" and not \"ready\": the storage organ is real geometry, the plumbing is words. A student can learn the order of the tree from beat two and can point to the gallbladder, but cannot follow a duct with the cursor.",
     "Bile itself is authored as concept:bile-storage and concept:bile-release, which is the declared abstraction for a path that is anatomy while its subject is not a model. The path walks liver to gallbladder, then gallbladder to pancreatic duct to duodenum. That is geometrically honest at every waypoint - each of those four is a real mesh in the right place - but the leg that the trace skips is precisely the cystic duct and the bile duct. The same is true of concept:gallstone in beat four.",
     "The pancreatic duct is used as a member of the biliary group rather than as pancreatic anatomy, because it is the one mesh that reaches the ampulla. It genuinely ends where the bile duct ends, so it marks the destination correctly, but a student looking at it is seeing the pancreatic half of the common channel and not the biliary half. The label and the narration say this outright.",
     "Calot's triangle cannot be shown as a triangle. Two of its three boundaries - the cystic duct and the common hepatic duct - have no mesh, so beat three teaches it against the hepatic artery and the gallbladder, which do exist, and names the boundaries in narration. The cystic artery has no mesh of its own either; it is taught through its parent, the common hepatic artery, under option (a).",
-    "No landmark anchors were authored. The fundus, Hartmann's pouch, the neck and the gallbladder fossa are all places ON the gallbladder mesh, and anchors in this corpus are measured on the actual geometry rather than typed in by eye. FMA7202 is not in the local decimated set, so nothing could be measured. Ingesting the gallbladder mesh locally would yield at least four anchors and would make beat one and beat five clickable rather than narrated.",
-    "The sphincter of Oddi, the major duodenal papilla and the second part of the duodenum are not separable - the duodenum is one model. Beat four therefore compares the gallbladder with the pancreatic duct to make the point about the shared channel, and the cross-section is authored on the duodenum as a whole. A papilla anchor on the duodenal mesh is the cheapest fix and is blocked by the same missing local geometry.",
+    "Five landmark anchors are now measured on the local geometry: the fundus and the neck of the gallbladder and its contact with the duodenum on FMA7202, the gallbladder fossa on the liver, and the major duodenal papilla on the duodenum. THE PREVIOUS NOTE HERE WAS FALSE — it said FMA7202 was not in the local decimated set and that nothing could be measured. It is in meshes-lite/, as are the liver, the duodenum and the pancreatic duct, and all five anchors above were measured from those files. All five are status needs-review until someone opens the scene and looks at where each landed. The same false sentence appears in several other scenes in this topic and in the neighbouring ones; it is recorded in REPAIR-BACKLOG.md so that each is re-measured rather than believed.",
+    "The sphincter of Oddi and the second part of the duodenum are not separable — the duodenum is one model — but the major duodenal papilla is no longer only narrated: it is the measured anchor duod_papilla, placed where the pancreatic duct meets the duodenal wall (1.26 mm). The sphincter itself has no mesh and no measurable definition, and is described rather than shown. Beat four still compares the gallbladder with the pancreatic duct to make the point about the shared channel, because the biliary half of that channel does not exist.",
     "The peritoneum, the lesser omentum and the hepatoduodenal ligament have no meshes, the same absence recorded by the liver, peritoneum, pleura and pericardium scenes. The free edge and the epiploic foramen are taught in beat three as a relation between structures that do exist - the artery, the portal tributaries, the cava and the duodenum.",
     "This scene does not claim to cover 'Pancreas' or 'Portal venous system' even though the pancreatic duct and both portal tributaries appear in it. They are here as the biliary tree's destination and as the third member of the triad, not as taught subjects."
   ]

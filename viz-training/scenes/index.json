@@ -19597,7 +19597,7 @@
       "topic": "Leg & Foot",
       "structure": "Popliteal fossa",
       "learning_goal": "Name the four muscular boundaries, the floor and the roof of the popliteal fossa, list its contents in order from superficial to deep, and use that order to explain why a swelling behind the knee gives the signs it does.",
-      "gaps": 7,
+      "gaps": 8,
       "match": {
         "topics": [
           "popliteal fossa",
@@ -19711,8 +19711,13 @@
         },
         {
           "key": "fibula",
-          "label": "Fibula — head & neck",
+          "label": "Fibula",
           "group": "Floor"
+        },
+        {
+          "key": "fibular_head",
+          "label": "Head of the fibula",
+          "group": "Landmarks"
         },
         {
           "key": "add_magnus",
@@ -19777,13 +19782,15 @@
         "tibia": "tibia",
         "right tibia": "tibia",
         "posterior surface of the tibia": "tibia_posterior",
-        "head of fibula": "fibula",
-        "neck of fibula": "fibula",
-        "common fibular nerve": "fibula",
+        "head of fibula": "fibular_head",
+        "neck of fibula": "fibular_head",
+        "common fibular nerve": "fibular_head",
         "common peroneal nerve": "fibula",
-        "foot drop": "fibula",
-        "fibula head neck": "fibula",
+        "foot drop": "fibular_head",
+        "fibula": "fibula",
         "right fibula": "fibula",
+        "biceps femoris insertion": "fibular_head",
+        "head of the fibula": "fibular_head",
         "patella": "patella",
         "knee joint": "patella",
         "front of the knee": "patella",
@@ -19810,8 +19817,8 @@
         "right calcaneal tendon": "tendo_calcaneus"
       },
       "counts": {
-        "structures": 18,
-        "parts": 13,
+        "structures": 19,
+        "parts": 14,
         "views": 10
       }
     },
@@ -19832,7 +19839,7 @@
       "topic": "Leg & Foot",
       "structure": "Tibia & fibula",
       "learning_goal": "Tell the tibia and the fibula apart on sight and by side, name the landmarks on each, explain why the tibia carries the body weight while the fibula is only a strut for muscles and for the ankle, and predict what is injured when each one breaks.",
-      "gaps": 6,
+      "gaps": 7,
       "match": {
         "topics": [
           "leg",
@@ -19904,7 +19911,9 @@
           "pott s fracture",
           "fibular graft",
           "intraosseous access",
-          "medullary cavity"
+          "medullary cavity",
+          "fibularis tertius",
+          "peroneus tertius"
         ]
       },
       "parts": [
@@ -19967,6 +19976,26 @@
           "key": "fhl",
           "label": "Flexor hallucis longus",
           "group": "Deep posterior compartment"
+        },
+        {
+          "key": "med_malleolus",
+          "label": "Medial malleolus",
+          "group": "Landmarks on the bones"
+        },
+        {
+          "key": "lat_malleolus",
+          "label": "Lateral malleolus",
+          "group": "Landmarks on the bones"
+        },
+        {
+          "key": "fib_head_apex",
+          "label": "Apex of head of fibula (styloid process)",
+          "group": "Landmarks on the bones"
+        },
+        {
+          "key": "soleal_line",
+          "label": "Soleal line",
+          "group": "Landmarks on the bones"
         }
       ],
       "terms": {
@@ -19979,20 +20008,20 @@
         "tibial tuberosity": "tibia",
         "anterior border": "tibia",
         "subcutaneous surface": "tibia",
-        "soleal line": "tibia",
-        "medial malleolus": "tibia",
+        "soleal line": "soleal_line",
+        "medial malleolus": "med_malleolus",
         "right tibia": "tibia",
         "fibula": "fibula",
-        "head of fibula": "fibula",
+        "head of fibula": "fib_head_apex",
         "apex of head": "fibula",
-        "styloid process of fibula": "fibula",
+        "styloid process of fibula": "fib_head_apex",
         "neck of fibula": "fibula",
         "shaft of fibula": "fibula",
-        "lateral malleolus": "fibula",
+        "lateral malleolus": "lat_malleolus",
         "right fibula": "fibula",
         "interosseous membrane": "iom",
         "interosseous border": "iom",
-        "syndesmosis": "iom",
+        "syndesmosis": "lat_malleolus",
         "anterior compartment": "iom",
         "deep posterior compartment": "iom",
         "interosseous membrane of right leg": "iom",
@@ -20051,7 +20080,7 @@
         "calf muscle pump": "soleus",
         "right soleus": "soleus",
         "tibialis posterior": "tib_post",
-        "posterior surface of tibia": "tib_post",
+        "posterior surface of tibia": "soleal_line",
         "medial longitudinal arch": "tib_post",
         "right tibialis posterior": "tib_post",
         "flexor digitorum longus": "fdl",
@@ -20060,11 +20089,20 @@
         "flexor hallucis longus": "fhl",
         "big toe flexion": "fhl",
         "push off": "fhl",
-        "right flexor hallucis longus": "fhl"
+        "right flexor hallucis longus": "fhl",
+        "medial wall of the ankle mortise": "med_malleolus",
+        "deltoid ligament": "med_malleolus",
+        "pott s fracture": "med_malleolus",
+        "lateral wall of the ankle mortise": "lat_malleolus",
+        "apex of head of fibula": "fib_head_apex",
+        "biceps femoris": "fib_head_apex",
+        "fibular collateral ligament": "fib_head_apex",
+        "apex of head of fibula styloid process": "fib_head_apex",
+        "popliteal line": "soleal_line"
       },
       "counts": {
-        "structures": 17,
-        "parts": 12,
+        "structures": 21,
+        "parts": 16,
         "views": 12
       }
     },
@@ -20191,7 +20229,9 @@
           "hepatoduodenal ligament",
           "free edge of the lesser omentum",
           "epiploic foramen",
-          "duct to the right artery to the left vein behind"
+          "duct to the right artery to the left vein behind",
+          "fundus of gallbladder",
+          "gallbladder fossa on the liver"
         ]
       },
       "parts": [
@@ -20219,18 +20259,43 @@
           "key": "cha",
           "label": "Hepatic artery — parent of the cystic artery",
           "group": "Calot's triangle"
+        },
+        {
+          "key": "gb_fundus",
+          "label": "Fundus of the gallbladder",
+          "group": "Measured landmarks"
+        },
+        {
+          "key": "gb_neck",
+          "label": "Neck of the gallbladder (Hartmann's pouch)",
+          "group": "Measured landmarks"
+        },
+        {
+          "key": "gb_duod_contact",
+          "label": "Gallbladder–duodenum contact",
+          "group": "Measured landmarks"
+        },
+        {
+          "key": "gb_fossa",
+          "label": "Gallbladder fossa",
+          "group": "Measured landmarks"
+        },
+        {
+          "key": "duod_papilla",
+          "label": "Major duodenal papilla",
+          "group": "Measured landmarks"
         }
       ],
       "terms": {
         "gallbladder": "gallbladder",
         "gall bladder": "gallbladder",
-        "fundus": "gallbladder",
+        "fundus": "gb_fundus",
         "body of gallbladder": "gallbladder",
-        "neck of gallbladder": "gallbladder",
-        "hartmann s pouch": "gallbladder",
-        "gallbladder fossa": "gallbladder",
+        "neck of gallbladder": "gb_neck",
+        "hartmann s pouch": "gb_neck",
+        "gallbladder fossa": "gb_fossa",
         "concentrates bile": "gallbladder",
-        "murphy s sign": "gallbladder",
+        "murphy s sign": "gb_fundus",
         "cholecystitis": "gallbladder",
         "mucocoele": "gallbladder",
         "empyema of the gallbladder": "gallbladder",
@@ -20249,23 +20314,23 @@
         "liver where bile is made": "liver",
         "pancreatic duct": "pancreatic_duct",
         "duct of wirsung": "pancreatic_duct",
-        "ampulla of vater": "pancreatic_duct",
-        "hepatopancreatic ampulla": "pancreatic_duct",
-        "sphincter of oddi": "pancreatic_duct",
-        "major duodenal papilla": "pancreatic_duct",
-        "gallstone pancreatitis": "pancreatic_duct",
+        "ampulla of vater": "duod_papilla",
+        "hepatopancreatic ampulla": "duod_papilla",
+        "sphincter of oddi": "duod_papilla",
+        "major duodenal papilla": "duod_papilla",
+        "gallstone pancreatitis": "duod_papilla",
         "head of the pancreas": "pancreatic_duct",
-        "ercp": "pancreatic_duct",
+        "ercp": "duod_papilla",
         "pancreatic duct the bile duct s partner at the ampulla": "pancreatic_duct",
         "duodenum": "duodenum",
-        "second part of the duodenum": "duodenum",
+        "second part of the duodenum": "duod_papilla",
         "cholecystokinin": "duodenum",
         "cck": "duodenum",
         "fatty meal": "duodenum",
-        "first part of the duodenum": "duodenum",
-        "cholecystoduodenal fistula": "duodenum",
-        "gallstone ileus": "duodenum",
-        "rigler s triad": "duodenum",
+        "first part of the duodenum": "gb_duod_contact",
+        "cholecystoduodenal fistula": "gb_duod_contact",
+        "gallstone ileus": "gb_duod_contact",
+        "rigler s triad": "gb_duod_contact",
         "epiploic foramen": "duodenum",
         "duodenum where bile arrives": "duodenum",
         "common hepatic artery": "cha",
@@ -20309,12 +20374,12 @@
         "peptic ulcer": "stomach",
         "stomach the lesser omentum runs from here": "stomach",
         "right ninth rib": "rib9",
-        "ninth costal cartilage": "rib9",
-        "transpyloric plane": "rib9",
+        "ninth costal cartilage": "gb_fundus",
+        "transpyloric plane": "gb_fundus",
         "murphy s point": "rib9",
         "lateral border of rectus abdominis": "rib9",
         "boas sign": "rib9",
-        "fundus of gallbladder": "rib9",
+        "fundus of gallbladder": "gb_fundus",
         "right ninth rib the surface marking": "rib9",
         "diaphragm": "diaphragm",
         "phrenic nerve": "diaphragm",
@@ -20322,11 +20387,27 @@
         "right shoulder tip pain": "diaphragm",
         "descends with inspiration": "diaphragm",
         "laparoscopy": "diaphragm",
-        "diaphragm the route to the shoulder tip": "diaphragm"
+        "diaphragm the route to the shoulder tip": "diaphragm",
+        "tip of the ninth costal cartilage": "gb_fundus",
+        "fundus of the gallbladder": "gb_fundus",
+        "cystic duct": "gb_neck",
+        "spiral valve of heister": "gb_neck",
+        "biliary colic": "gb_neck",
+        "mirizzi syndrome": "gb_neck",
+        "neck of the gallbladder hartmann s pouch": "gb_neck",
+        "adhesion": "gb_duod_contact",
+        "gallbladder duodenum contact": "gb_duod_contact",
+        "visceral surface of the liver": "gb_fossa",
+        "bare of peritoneum": "gb_fossa",
+        "cystic veins": "gb_fossa",
+        "segment iv": "gb_fossa",
+        "segment v": "gb_fossa",
+        "gallbladder carcinoma": "gb_fossa",
+        "double duct sign": "duod_papilla"
       },
       "counts": {
-        "structures": 12,
-        "parts": 5,
+        "structures": 17,
+        "parts": 10,
         "views": 6
       }
     },

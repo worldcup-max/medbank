@@ -71,11 +71,11 @@
   "runs": 0,
   "lastRunAt": null,
   "note": "coveredStructures and cursor are DERIVED from viz-training/scenes/ by tools/sync-state.mjs. Do not hand-edit them: the scenes directory is the source of truth, and a second one always drifts. The authoring task runs this tool first, every run, before choosing what to author.",
-  "syncedAt": "2026-08-29T08:43:22.049Z",
+  "syncedAt": "2026-08-29T10:07:16.354Z",
   "meshGaps": {
     "scenesEmpty": 0,
     "scenesWithHoles": 0,
     "modelsMissing": 0,
-    "checkedAt": "2026-08-29T08:43:22.048Z"
+    "checkedAt": "2026-08-29T10:07:16.354Z"
   }
 }

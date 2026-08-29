@@ -565,8 +565,11 @@ relations, and the relations resolve. Both are `candidate`, not `ready` — see 
 
 ### `gross__leg-foot__gastrocnemius-soleus`
 - id `gross__leg-foot__gastrocnemius-soleus` · Gross Anatomy · Leg & Foot · **Gastrocnemius & soleus** ·
-  mode `3d_anatomy` (deferred: `diagram`) · 15 structures (6 parts) · 11 views · 54 ops · **ready** ·
-  degrades `PEEL_LAYER`.
+  mode `3d_anatomy` (deferred: `diagram`) · 16 structures (6 parts) · 11 views · 54 ops · **ready** ·
+  degrades `PEEL_LAYER`. Audited 2026-08-29: the popliteal artery was said twice to pass under the
+  tendinous arch of soleus; it ends at the lower border of popliteus and it is the posterior tibial
+  that passes under the arch. Both sentences corrected, and the stale gap note claiming the
+  interosseous membrane still needed authoring here was retired.
 - Both heads exist as separate meshes and so does the muscle beneath and the tendon they share:
   `medial head of right gastrocnemius` FMA45957, `lateral head of right gastrocnemius` FMA45960,
   `right soleus` FMA22558, `right plantaris` FMA22560, `right calcaneal tendon` FMA258847. Insertion on
@@ -590,7 +593,13 @@ relations, and the relations resolve. Both are `candidate`, not `ready` — see 
 
 ### `gross__leg-foot__tibia-fibula`
 - id `gross__leg-foot__tibia-fibula` · Gross Anatomy · Leg & Foot · **Tibia & fibula** · mode `3d_anatomy`
-  (deferred: `diagram`) · 17 structures (12 parts) · 12 views · 43 ops · **ready** · degrades `PEEL_LAYER`.
+  (deferred: `diagram`) · 21 structures (16 parts) · 12 views · 46 ops · **ready** · degrades `PEEL_LAYER`
+  · audited 2026-08-29. Four measured anchors added — medial malleolus and soleal line on the tibia, lateral
+  malleolus and apex of the fibular head on the fibula, all `needs-review`. Corrections at audit: "four
+  nerves" for four compartments (the tibial nerve serves both posterior compartments, so three), the lateral
+  malleolus descends about one centimetre lower than the medial and not two, and the fibular attachment count
+  is eight origins plus biceps femoris inserting on the head. Fibularis tertius `FMA22550` exists in the
+  catalog but not in `meshes-lite/`; it is named as described-not-shown and recorded in `gaps[]`.
 - Subjects `right tibia` FMA24477 and `right fibula` FMA24480. **The interosseous membrane exists** —
   `interosseous membrane of right leg` FMA35192 — contrary to the note left by the previous run, which
   assumed it absent without looking. It is authored as a `part`, not narration, and it carries the whole
@@ -647,8 +656,14 @@ relations, and the relations resolve. Both are `candidate`, not `ready` — see 
 
 ### `gross__leg-foot__popliteal-fossa`
 - id `gross__leg-foot__popliteal-fossa` · Gross Anatomy · Leg & Foot · **Popliteal fossa** · mode
-  `3d_anatomy` (deferred: `diagram`) · 16 structures (11 parts) · 10 views · 40 ops · **ready** ·
-  degrades `PEEL_LAYER`.
+  `3d_anatomy` (deferred: `diagram`) · 19 structures (14 parts) · 10 views · 40 ops · **ready** ·
+  degrades `PEEL_LAYER`. Audited 2026-08-29: `fibula` was labelled "Fibula — head & neck", lighting a
+  351 mm bone for a palpable point, so the head is now a measured anchor `fibular_head`
+  (biceps femoris 0.30 mm, tibia at the superior tibiofibular joint 0.95 mm, agreeing to 17.7 mm),
+  `status:"needs-review"`; the neck is recorded in `gaps[]` as unmeasurable. The two exit sentences
+  naming the popliteal artery under the arch of soleus were corrected to the posterior tibial, and the
+  medial head of gastrocnemius now takes origin from the popliteal surface above the medial condyle in
+  both Leg & Foot scenes.
 - **A region whose entire contents are unmodelled, authored from its walls.** Boundaries: `long head of
   right biceps femoris` FMA45888 and `short head of right biceps femoris` FMA45891 superolaterally; `right
   semimembranosus` FMA22448 and `right semitendinosus` FMA22358 superomedially; `lateral head of right
@@ -1390,8 +1405,15 @@ covers `["Liver"]`
 
 ### `gross__liver-biliary-tract-pancreas-spleen__biliary-tree-gallbladder`
 `gross` · Liver, Biliary Tract, Pancreas & Spleen · **Biliary tree & gallbladder** · mode `3d_anatomy`
-(deferred: `diagram`) · 12 structures (5 parts) · 6 views · 38 ops · **candidate** ·
-covers `["Biliary tree & gallbladder"]`
+(deferred: `diagram`) · 17 structures (10 parts) · 6 views · 43 ops · **candidate** ·
+covers `["Biliary tree & gallbladder"]` · audited 2026-08-29
+
+- **The "no local geometry" gap note was false.** It claimed `FMA7202` was not in `meshes-lite/` and that
+  no anchor could be measured. It is, and so are the liver, duodenum and pancreatic duct. Five anchors were
+  measured at audit and added, all `needs-review`: fundus (EXTREME −z) and neck/Hartmann's pouch (EXTREME +z)
+  on the gallbladder, its contact with the duodenum (0.44 mm, and nearer the neck than the body — the
+  narration is written to the measurement), the gallbladder fossa on the liver (98-vertex patch, 0.18 mm),
+  and the major duodenal papilla on the duodenum where the pancreatic duct meets the wall (1.26 mm).
 
 - **The gallbladder is real, the tree is not.** `FMA7202` gallbladder, `FMA7197` liver, `FMA10419`
   pancreatic duct and `FMA7206` duodenum are the four points bile passes through that actually exist;

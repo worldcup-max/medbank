@@ -146,7 +146,7 @@
         "calf muscle pump",
         "peripheral heart"
       ],
-      "narration": "The broad flat muscle underneath, named for its shape like a sole fish. It arises from the back of the head and upper shaft of the fibula and from the soleal line of the tibia, and between those two origins its upper edge forms a tendinous arch. The popliteal artery and the tibial nerve pass under that arch to enter the deep compartment. Soleus starts below the knee, so it crosses only the ankle."
+      "narration": "The broad flat muscle underneath, named for its shape like a sole fish. It arises from the back of the head and upper shaft of the fibula and from the soleal line of the tibia, and between those two origins its upper edge forms a tendinous arch. The popliteal artery has already ended at the lower border of popliteus, just above this arch, so what passes under the arch into the deep compartment is its continuation, the posterior tibial artery, together with the tibial nerve. Soleus starts below the knee, so it crosses only the ankle."
     },
     {
       "key": "plantaris",
@@ -638,7 +638,7 @@
           "view": "posterior"
         }
       ],
-      "narration": "The path traced here is the tibial nerve. It comes down through the popliteal fossa, dives under the tendinous arch of soleus with the popliteal artery, and supplies both calf muscles and the deep three below them. Its root value for plantarflexion is S1 and S2. Tap the calcaneal tendon and you test that arc: the ankle jerk is an S1 reflex, and it is the first to disappear in an S1 root lesion from a prolapsed disc."
+      "narration": "The path traced here is the tibial nerve. It comes down through the popliteal fossa, dives under the tendinous arch of soleus with the posterior tibial artery — the popliteal artery has divided just above the arch — and supplies both calf muscles and the deep three below them. Its root value for plantarflexion is S1 and S2. Tap the calcaneal tendon and you test that arc: the ankle jerk is an S1 reflex, and it is the first to disappear in an S1 root lesion from a prolapsed disc."
     },
     {
       "mode": "mechanism",
@@ -764,12 +764,14 @@
     "No nerve of the lower limb exists as a model. The tibial nerve is a traced concept path through the muscles it supplies; its root value, the ankle jerk and the contrast with the common fibular nerve are narration.",
     "The soleal line of the tibia, the tendinous arch of soleus and the calcaneal tuberosity are sub-features of whole-bone and whole-muscle meshes, taught by lighting the parent and naming the feature. Measured landmark anchors would be a real improvement here, particularly for the arch, and were not attempted because an anchor placed by eye would be worse than none.",
     "The retrocalcaneal and subcutaneous calcaneal bursae have no models, so the two kinds of posterior heel pain are named but not shown.",
-    "The deep fascia of the leg and the intermuscular septa are not modelled, so two of the walls that make the posterior compartments a closed box are described in the cross-section beat rather than drawn. The interosseous membrane is not one of them: FMA35192 is in the catalog and is authored in both the Tibia & fibula and Ankle joint scenes, so the fourth wall can be drawn here and should be.",
+    "The deep fascia of the leg and the intermuscular septa are not modelled, so two of the walls that make the posterior compartments a closed box are described in the cross-section beat rather than drawn. The interosseous membrane is not one of them: FMA35192 is in the catalog and is now authored in this scene as the fourth wall, alongside the Tibia & fibula and Ankle joint scenes.",
     "The fabella is a variant sesamoid with no mesh; it is mentioned in the lateral head's narration only.",
     "This scene does not cover Popliteal fossa, Ankle joint or Tibia & fibula. The bones, popliteus and the talus appear only as the frame the calf pulls on, and the boundaries and contents of the popliteal fossa are named rather than taught in order."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

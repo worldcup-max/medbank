@@ -7308,3 +7308,166 @@ real, every `name` matching the catalog character for character, zero side error
 targets, 100 of 100 anchors carrying a real measurement and `needs-review`.** The one scene short of a
 curriculum-required view declares the gap honestly and is held at `candidate` rather than signed as ready.
 The habit that caused nine false absences on 2026-08-28 has not recurred once.
+
+## 2026-08-29 — audit walk · `leg-foot__gastrocnemius-soleus`, `leg-foot__popliteal-fossa`
+
+Backlog sections 1 and 2 are clear, so this run FELL THROUGH TO THE AUDIT WALK at `next to audit`.
+The gross audit is NOT complete: 39 of 76 scenes signed at the start of this run, 41 at the end.
+
+**Checks actually performed on both scenes:** ids against `available-meshes.json` (34 refs, all present);
+names character-for-character against the catalog (34/34 exact); sides (both scenes are entirely right —
+no left/right pair in either, so no FMA7333/FMA7370 trap to fall into); op targets and groups (every
+`target`, `from`, `to`, `path` and `targets` entry resolves to a key, a group, `*` or a `concept:`,
+all ops within the ten-op vocabulary); curriculum views (gastroc needs location + contraction_filter +
+mechanism — has all three; popliteal fossa needs cross_section + vasculature — has both); covers[]
+(one entry each, matching CURRICULUM exactly, no orphans in sync-state); narration against geometry;
+the scene against itself and against its sibling; drawability.
+
+**WRONG — the popliteal artery does not pass under the arch of soleus.** Stated twice in
+`gastrocnemius-soleus` (the soleus card, and beat 7's tibial-nerve trace) and implied twice more in
+`popliteal-fossa` (`add_magnus`, "it enters at the hiatus and leaves at the arch of soleus"; beat 5,
+"it leaves under the arch of soleus with the artery"). The corpus already contained the correct version
+three cards away, in `popliteal-fossa`'s soleus card: the artery ends at the lower border of popliteus,
+and the posterior tibial continuation is what passes under the arch. Failure mode 2 exactly. All four
+instances rewritten to name the posterior tibial and to say where the division happens; the correct
+card left as the anchor of truth. Grepped both Leg & Foot scenes and the Thigh scenes for every other
+occurrence of "arch of soleus" — five hits total, all accounted for.
+
+**WRONG — a bone pretending to be a landmark.** `popliteal-fossa`'s `fibula` carried the label
+"Fibula — head & neck" while lighting the entire 351 mm bone; the head is a palpable point and the
+neck is where the whole foot-drop teaching lives. Measured it with `derive-landmark.mjs` instead:
+`--contact FMA45888,FMA24477 --slab z:0.85,1.0`, two witnesses (biceps femoris long head at its
+insertion, 0.30 mm; tibia at the superior tibiofibular joint, 0.95 mm) converging to 17.74 mm on a
+351 mm bone. Authored as `fibular_head`, `render:"anchor"`, uvw [0.5341, 0.6488, 0.9631], r 0.018,
+`status:"needs-review"` — measured, not looked at. Beat 9's highlight retargeted from the whole bone
+to the anchor; the bone's label is now plainly "Fibula". The NECK was not authored and that is the
+finding: a neck is a narrowest cross-section, which is neither of the tool's two definitions, and
+there is no common fibular nerve mesh to give a contact witness. Recorded in `gaps[]` with the reason,
+so no later run re-derives it by eye and believes it.
+
+**WRONG — one origin stated two ways.** The medial head of gastrocnemius arose "above the medial
+condyle, on the popliteal surface" in one scene and "from the back of the medial femoral condyle" in
+the other, and the `popliteal_surface` anchor's `calibrated_by` asserted a third version (origins on
+the supracondylar lines). Reconciled to the popliteal surface just above the medial condyle in both
+scenes; the anchor's evidence text now describes the same geometry it actually measured (origins on
+either side of the surface, midpoint on it) without changing a single number.
+
+**STALE GAP NOTE.** `gastrocnemius-soleus` `gaps[5]` still instructed the reader to author FMA35192
+as the fourth wall of the compartment. It was authored in the backlog section-1 pass and the structure
+`iom` has been in the file since. Retired.
+
+**Checked and found sound:** the NVA order (nerve, vein, artery from behind forwards) is stated three
+times in `popliteal-fossa` — beats 5, 6 and 7 — and agrees each time. Plantaris absence (one in ten)
+and the relative size of the two gastrocnemius heads (medial larger) agree across both scenes.
+Semitendinosus superficial to semimembranosus is stated once and consistent with the boundary beat.
+
+**Models in hand vs referenced:** gastrocnemius-soleus 16/16 in `meshes-lite/`; popliteal-fossa 17/17
+(19 structures, two of which are anchors carrying no id — now three). No hollow teaching beats from
+missing geometry in either scene. What IS hollow is the neurovascular content: every vessel and nerve
+below the external iliac is absent from the catalog, so `popliteal-fossa` beats 4, 5, 8 and 10 and
+`gastrocnemius-soleus` beats 7 and 8 trace concept paths between muscles and bones. Both scenes say so
+openly in narration ("the path traced here is...") and in `gaps[]`. A lower-limb neurovascular mesh set
+is the single highest-value fetch for this topic.
+
+**Signed.** Both scenes carry `provenance.audited_at: 2026-08-29`.
+Validator: `104/104 scenes valid`, both scenes ✓ ready (degrades PEEL_LAYER only).
+Index: `104 scenes (54 ready) · 11830 term mappings`. sync-state: cursor advanced to
+`gross__leg-foot__tibia-fibula`; gross audit now 41/76.
+
+---
+
+## 2026-08-29 — audit run · `gross__leg-foot__tibia-fibula`, `gross__liver-biliary-tract-pancreas-spleen__biliary-tree-gallbladder`
+
+Sections 1 and 2 of `REPAIR-BACKLOG.md` are clear, so this run fell through to the audit walk at
+`next to audit`, as the backlog's own closing line instructs. Gross audit stands at **43/76 signed**;
+it is NOT complete, so no Neuroanatomy authoring this run.
+
+Checks actually performed on both scenes: (1) every `refs.bodyparts3d` looked up in
+`available-meshes.json`; (2) every `name` compared character-for-character with the catalog name;
+(3) sides; (4) every op target and `anchor.on` resolved against `structures[]`; (5)/(6) whole-file
+consistency and comparison with the other scenes in the same topic; (7) curriculum `views`;
+(8) narration against what is on screen; (9) `covers[]`; (10) drawability; (12) landmark derivation.
+
+### `gross__leg-foot__tibia-fibula` — ready, signed
+
+- **IDs and names: clean.** All 17 model ids exist; all 17 names match the catalog verbatim.
+- **Sides: clean, and all one side.** Every structure is the RIGHT limb — tibia `FMA24477`, fibula
+  `FMA24480`, membrane `FMA35192`. No left/right pair in this scene, so no crossing risk; the left
+  twins (`FMA22545` tibialis anterior, `FMA22553`/`FMA22555` fibularis longus/brevis, `FMA35193`
+  membrane) exist in the catalog and are correctly *not* used.
+- **WRONG — "Four compartments, four nerves, four actions" (beat 6).** There are four compartments
+  but three nerves: the tibial nerve supplies both the superficial and the deep posterior compartment.
+  The scene knew this: beat 8 says "all three are supplied by the tibial nerve" two beats later.
+  Rewritten to name the three nerves and say why there are not four.
+- **WRONG — lateral malleolus "about two centimetres lower than the medial one" (beat 3).** It is
+  about one centimetre. Fixed here, and **also in `gross__leg-foot__ankle-joint.json`**, which carried
+  the same sentence and was already signed — the fact, not the instance.
+- **WRONG — "Nine muscles take origin from this thin bone" (beat 9).** Eight take origin; the ninth
+  attachment is biceps femoris *inserting* on the head. Rewritten with the eight named.
+- **Fibularis tertius was missing entirely.** `FMA22550 right fibularis tertius` is in the catalog —
+  found by searching `fibular`, which also returns `fibularis tertius` on both sides. Beat 7 taught a
+  three-muscle anterior compartment. Its mesh is **not** in `meshes-lite/` and this task cannot fetch,
+  so it is now named in beat 7 as described-not-shown, with its compartment, nerve and action, plus a
+  `gaps[]` entry naming the id for whoever fetches next. Not added as a structure, because that would
+  have put a hole in a scene that currently has none.
+- **Catalog re-searched for the two absence claims and both hold.** No leg artery or nerve of any kind
+  (`arter` returns 26, none below the external iliac; `nerv` returns only the two optic nerves;
+  `popliteal`, `saphenous`, `peroneal` all zero). No knee or ankle ligament (`ligament` returns four —
+  two inguinal, two long plantar; `cruciate`, `collateral`, `menisc`, `talofibular` all zero).
+- **Four landmarks measured** where the scene previously lit the whole bone, all `needs-review`:
+  medial malleolus (EXTREME −z on the tibia, 198 mm from centroid), lateral malleolus (EXTREME −z on
+  the fibula, 177.3 mm), apex of the head of the fibula / styloid process (EXTREME +z, 174 mm), soleal
+  line (CONTACT patch tibia↔soleus, `--area 6`, 38 vertices, nearest gap 1.9 mm, one witness — soleus
+  is the only structure that defines that line). **The tibial tuberosity REFUSED** at 6.48 mm: its only
+  possible witness is the patella and the patellar ligament has no mesh. The neck of the fibula is a
+  narrowest-cross-section, which is neither definition — the same result the radius neck gave. All
+  three refusals are recorded in `gaps[]` with their numbers so nobody re-derives and believes them.
+- **Curriculum views** `location`, `cross_section` — both present. **covers[]** `Tibia & fibula`,
+  spelled as `CURRICULUM.json` spells it.
+- **Drawability: 17 of 17 models in `meshes-lite/`.** No hollow beats. The one thing named and not
+  drawn is fibularis tertius, above; the vessels and nerves were already honest in `gaps[]`.
+
+### `gross__liver-biliary-tract-pancreas-spleen__biliary-tree-gallbladder` — candidate, signed
+
+Signed as `candidate`, not promoted: the ducts genuinely do not exist and the scene says so.
+
+- **IDs and names: clean.** All 12 model ids exist, all 12 names verbatim. No sided structure in the
+  scene, so no side error possible.
+- **WRONG, and the highest-value catch of the run — `gaps[4]` said "FMA7202 is not in the local
+  decimated set, so nothing could be measured."** `meshes-lite/FMA7202.stl` is on disk, and so are the
+  liver, duodenum and pancreatic duct. The note was suppressing work on geometry that was already
+  there. **Five anchors measured and added**, all `needs-review`: fundus (EXTREME −z, and the lowest
+  point is also the most anterior, which is the direction the fundus is described as pointing), neck /
+  Hartmann's pouch (EXTREME +z, also the most posterior — "narrows and turns backwards" confirmed by
+  measurement), gallbladder↔duodenum contact (0.44 mm), gallbladder fossa on the **liver**
+  (`--area 8`, 98-vertex patch, 0.18 mm), and the **major duodenal papilla** on the duodenum, measured
+  as the point where the pancreatic duct meets the duodenal wall (1.26 mm). `gaps[5]`, which said the
+  papilla anchor was "blocked by the same missing local geometry", was rewritten too.
+  - Honest note on one of them: the duodenal contact lands at w=0.75 along the gallbladder's long
+    axis — nearer the neck than the middle of the body. The narration was written to the measurement
+    rather than to the textbook phrase, and the measurement is quoted in `calibrated_by`.
+- **The same false sentence is alive in at least ten other scenes** — `liver`, `pancreas`, `spleen`,
+  `portal-venous-system`, `lungs`, `bony-pelvis`, `stomach`, `small-intestine`, `large-intestine`,
+  `ureters`, and a note in `abdominal-aorta-ivc` already recording that it was false there.
+  `sync-state.mjs` reports every mesh of all 64 gross scenes present, so **every one of them is
+  stale**. Added as a new item in section 3 of `REPAIR-BACKLOG.md`. This is failure mode 1 again: a
+  note in a file became the evidence.
+- **Catalog re-searched, and the duct claim holds.** `cystic`, `bile`, `biliar`, `choledoch`,
+  `ampulla`, `omentum`, `peritone` all return zero; `hepatic` returns only the common hepatic artery;
+  `duct` returns 30 hits, all of them abductors and adductors plus the cerebral aqueduct. So the
+  common hepatic, cystic, right and left hepatic and common bile ducts really are absent, and
+  `candidate` is the correct status.
+- **Anatomy read against itself: no contradiction found.** Greater splanchnic T5–T9 with epigastric
+  first pain, and the move to the right upper quadrant only when parietal peritoneum is involved;
+  Murphy's positive in cholecystitis and negative in uncomplicated colic, stated consistently in beat 1
+  and beat 4; the triad as duct-right / artery-left / vein-behind in three places, agreeing each time;
+  Courvoisier stated with its exceptions rather than as a slogan.
+- **Curriculum views** `mechanism`, `associated_organs` — both present. **covers[]** correct.
+- **Drawability: 12 of 12 models in `meshes-lite/`.** No beat is hollow for want of a mesh that exists;
+  the hollow parts of this scene are the ducts, which exist nowhere.
+
+**Validator: `104/104 scenes valid`, no scene blocked.** Both audited scenes re-validated after
+editing (`tibia-fibula` ready, 21 structures / 46 ops; `biliary-tree-gallbladder` candidate, 17
+structures / 43 ops). **Index: `104 scenes (54 ready) · 11855 term mappings`.** `sync-state.mjs`
+re-run: `drawable 64 of 64`, audit cursor advanced to
+`gross__liver-biliary-tract-pancreas-spleen__liver`, STATE.json already in step.

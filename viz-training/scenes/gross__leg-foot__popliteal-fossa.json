@@ -174,7 +174,7 @@
         "inferomedial boundary",
         "medial condyle of femur"
       ],
-      "narration": "The medial head arises from the back of the medial femoral condyle and makes the lower inner edge of the diamond. It is the larger of the two heads. The bursa behind semimembranosus sits right against it, so a cyst here bulges medially and is felt best with the knee straight."
+      "narration": "The medial head arises from the popliteal surface of the femur just above the medial condyle and makes the lower inner edge of the diamond. It is the larger of the two heads. The bursa behind semimembranosus sits right against it, so a cyst here bulges medially and is felt best with the knee straight."
     },
     {
       "key": "gastroc_lat",
@@ -268,7 +268,7 @@
         "radius": 0.02
       },
       "status": "ok",
-      "calibrated_by": "geometry: CONTACT — the two heads of gastrocnemius arise from the supracondylar lines that flank the popliteal surface, so the midpoint between them is the surface (gaps 0.25 mm, 0.66 mm; the two origins lie 52 mm apart on a 440 mm bone)",
+      "calibrated_by": "geometry: CONTACT — the two heads of gastrocnemius arise on either side of the popliteal surface, so the midpoint between them lies on the surface (gaps 0.25 mm, 0.66 mm; the two origins lie 52 mm apart on a 440 mm bone)",
       "calibration_gap_mm": 0.25,
       "terms": [
         "popliteal surface"
@@ -324,7 +324,7 @@
     {
       "key": "fibula",
       "name": "right fibula",
-      "label": "Fibula — head & neck",
+      "label": "Fibula",
       "role": "part",
       "group": "Floor",
       "layer": "bone",
@@ -339,7 +339,35 @@
         "common peroneal nerve",
         "foot drop"
       ],
-      "narration": "The head of the fibula is the bony point at the lower outer angle of the diamond, and it is where the biceps tendon ends. Just below it the common fibular nerve winds round the bare neck of the bone. Nowhere else in the body does a large nerve lie so directly on bone under thin skin, and that is why a tight plaster, a badly placed leg support or a fracture here gives foot drop."
+      "narration": "The fibula. Its head is the bony point at the lower outer angle of the diamond, and it is where the biceps tendon ends. Just below the head the common fibular nerve winds round the bare neck of the bone. Nowhere else in the body does a large nerve lie so directly on bone under thin skin, and that is why a tight plaster, a badly placed leg support or a fracture here gives foot drop."
+    },
+    {
+      "key": "fibular_head",
+      "label": "Head of the fibula",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "fibula",
+        "uvw": [
+          0.5341,
+          0.6488,
+          0.9631
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — two witnesses at the proximal end of the fibula, restricted to slab z:0.85,1.0: the long head of biceps femoris, which inserts on the head (gap 0.30 mm), and the tibia at the superior tibiofibular joint, which articulates with it (gap 0.95 mm). They agree to 17.74 mm on a 351 mm bone.",
+      "calibration_gap_mm": 0.95,
+      "terms": [
+        "head of fibula",
+        "neck of fibula",
+        "common fibular nerve",
+        "biceps femoris insertion",
+        "foot drop"
+      ],
+      "narration": "The head of the fibula, measured rather than guessed: it is where the biceps femoris tendon lands and where the tibia meets the fibula above. It is the palpable point at the inferolateral angle of the diamond. The neck is the narrow part immediately below this patch — that is the surface the common fibular nerve crosses, and it is the reason a lesion here and not anywhere else in the leg gives foot drop."
     },
     {
       "key": "patella",
@@ -376,7 +404,7 @@
         "hiatus in adductor magnus",
         "femoral artery becomes popliteal artery"
       ],
-      "narration": "The gap in the lower tendon of adductor magnus is the adductor hiatus, and it is the doorway into the fossa. The femoral artery passes through it and changes its name to the popliteal artery on the other side. Learn the vessel by its doorways: it enters at the hiatus and leaves at the arch of soleus."
+      "narration": "The gap in the lower tendon of adductor magnus is the adductor hiatus, and it is the doorway into the fossa. The femoral artery passes through it and changes its name to the popliteal artery on the other side. Learn the vessel by its doorways: it enters at the hiatus and ends at the lower border of popliteus, and it is its posterior tibial continuation that passes on under the arch of soleus."
     },
     {
       "key": "soleus",
@@ -583,7 +611,7 @@
           "duration": 6
         }
       ],
-      "narration": "From the skin inwards the order is nerve, vein, artery. The sciatic nerve divides at the top of the fossa, usually at its apex. The tibial nerve is the larger part and runs straight down the middle, the most superficial of the three, and it leaves under the arch of soleus with the artery. The common fibular nerve peels off laterally and follows the medial border of the biceps tendon to the neck of the fibula. The popliteal vein lies between the two, wrapped in the same fibrous sheath as the artery. Remember it as NVA from behind forwards, and remember that the deepest structure is the one you can injure without seeing any bleeding at the surface."
+      "narration": "From the skin inwards the order is nerve, vein, artery. The sciatic nerve divides at the top of the fossa, usually at its apex. The tibial nerve is the larger part and runs straight down the middle, the most superficial of the three, and it leaves under the arch of soleus with the posterior tibial artery. The common fibular nerve peels off laterally and follows the medial border of the biceps tendon to the neck of the fibula. The popliteal vein lies between the two, wrapped in the same fibrous sheath as the artery. Remember it as NVA from behind forwards, and remember that the deepest structure is the one you can injure without seeing any bleeding at the surface."
     },
     {
       "mode": "cross_section",
@@ -674,7 +702,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "fibula",
+          "target": "fibular_head",
           "intensity": 0.9
         },
         {
@@ -728,10 +756,13 @@
     "The knee joint capsule and the oblique popliteal ligament are not modelled, so the middle third of the floor is taught by lighting the femur and popliteus on either side of it.",
     "There is no model of the semimembranosus bursa or of the fat that fills the fossa, so the popliteal cyst is taught by highlighting semimembranosus and the medial head of gastrocnemius between which it forms.",
     "The sciatic nerve scene for the gluteal region is where the division into tibial and common fibular nerves is introduced; this scene picks the two up at the apex of the fossa without a model for either.",
-    "This scene does not cover Ankle joint or Arches of the foot. Soleus, the calcaneal tendon and the interosseous membrane appear here only as the lower doorway out of the fossa."
+    "This scene does not cover Ankle joint or Arches of the foot. Soleus, the calcaneal tendon and the interosseous membrane appear here only as the lower doorway out of the fossa.",
+    "The neck of the fibula has no anchor. A neck is a narrowest cross-section, which is neither of derive-landmark.mjs's two definitions, and no common fibular nerve mesh exists to give a contact witness. The head IS measured (fibular_head, two witnesses), and the narration places the neck immediately below that patch rather than lighting the whole bone for it."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

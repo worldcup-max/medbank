@@ -127,6 +127,15 @@ it is the only thing standing between the corpus and a silently incomplete scene
   `typical-vertebra` numbers two different beats "3". Every run reported the validator clean, because
   nothing checks beat ordinals. Renumber, and add the check.
 
+- **NEW (2026-08-29 audit) — "not in the local decimated set" is a false claim repeated across at least
+  eleven scenes.** The biliary-tree scene said `FMA7202` was not in `meshes-lite/` and that therefore no
+  anchor could be measured; it is there, and five anchors were measured from it at audit. The same sentence
+  is still live in `liver`, `pancreas`, `spleen`, `portal-venous-system`, `lungs`, `bony-pelvis`, `stomach`,
+  `small-intestine`, `large-intestine` and `ureters`. `sync-state.mjs` reports **every mesh of all 64 gross
+  scenes is present**, so every one of those notes is stale and each is suppressing landmark work on geometry
+  that is sitting on disk. This is failure mode 1 wearing different clothes: a note became the evidence.
+  Re-measure at each scene's audit; do not carry the sentence forward.
+
 ## 4 · Embryology — twenty-four scenes that will ship the day the SVG engine exists
 
 None of these can be seen today, which is exactly why they are easy to leave. They are also the
