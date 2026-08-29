@@ -30,3 +30,6 @@ content/Pediatrics/Ewurum/Pneumonia/note.pdf.src.md
 .fuse_hidden0000001700000002
 viz-training/meshes-lite/
 viz-training/RUNLOG.md
+
+# dev-only tooling: eslint for viz-training/tools/lint-viz3d.mjs. Reinstallable, never shipped.
+node_modules/
