@@ -755,12 +755,22 @@
       "color": "#ffcf5c",
       "anchor": {
         "on": "right_kidney",
-        "uvw": [0.7014, 0.6992, 1],
+        "uvw": [
+          0.7014,
+          0.6992,
+          1
+        ],
         "radius": 0.02
       },
       "status": "needs-review",
       "calibrated_by": "geometry: EXTREME +z on FMA7204 (LPS +Z superior, long axis z, span 102.2 mm, 54.0 mm from surface centroid, 1502 vertices)",
-      "terms": ["upper pole", "right upper pole", "suprarenal gland", "twelfth rib", "diaphragm"],
+      "terms": [
+        "upper pole",
+        "right upper pole",
+        "suprarenal gland",
+        "twelfth rib",
+        "diaphragm"
+      ],
       "narration": "The upper pole of the right kidney: capped by the suprarenal gland, resting on the diaphragm, and crossed behind by the twelfth rib. It lies about half a vertebral body lower than the left upper pole."
     },
     {
@@ -772,12 +782,22 @@
       "color": "#ffcf5c",
       "anchor": {
         "on": "right_kidney",
-        "uvw": [0.4476, 0.2491, 0],
+        "uvw": [
+          0.4476,
+          0.2491,
+          0
+        ],
         "radius": 0.02
       },
       "status": "needs-review",
       "calibrated_by": "geometry: EXTREME -z on FMA7204 (LPS +Z superior, long axis z, span 102.2 mm, 52.7 mm from surface centroid, 1502 vertices)",
-      "terms": ["lower pole", "right lower pole", "ballotable", "accessory renal artery", "horseshoe kidney"],
+      "terms": [
+        "lower pole",
+        "right lower pole",
+        "ballotable",
+        "accessory renal artery",
+        "horseshoe kidney"
+      ],
       "narration": "The lower pole of the right kidney — the part a thin patient's lower pole is balloted at on deep inspiration, the usual destination of an accessory renal artery, and the pole at which the two halves of a horseshoe kidney are fused."
     },
     {
@@ -789,13 +809,25 @@
       "color": "#ffcf5c",
       "anchor": {
         "on": "right_kidney",
-        "uvw": [0.6654, 0.3137, 0.5234],
+        "uvw": [
+          0.6654,
+          0.3137,
+          0.5234
+        ],
         "radius": 0.034
       },
       "status": "needs-review",
       "calibrated_by": "geometry: CONTACT — the point on FMA7204 nearest all three structures that pass through the hilum (FMA14752 renal artery 0.31 mm, FMA14335 renal vein 0.44 mm, FMA15571 ureter 0.29 mm · 3 witnesses · spread 21.2 mm over a 102.2 mm organ)",
       "calibration_gap_mm": 0.44,
-      "terms": ["hilum", "renal hilum", "right renal hilum", "vein artery ureter", "VAU", "renal sinus", "duodenum"],
+      "terms": [
+        "hilum",
+        "renal hilum",
+        "right renal hilum",
+        "vein artery ureter",
+        "VAU",
+        "renal sinus",
+        "duodenum"
+      ],
       "narration": "The medial notch where three things pass, front to back: vein, artery, ureter. The second part of the duodenum descends directly over this point, which is why the right renal vessels cannot be reached from in front without a Kocher manoeuvre."
     },
     {
@@ -807,12 +839,23 @@
       "color": "#ffcf5c",
       "anchor": {
         "on": "left_kidney",
-        "uvw": [0.3419, 0.6837, 1],
+        "uvw": [
+          0.3419,
+          0.6837,
+          1
+        ],
         "radius": 0.02
       },
       "status": "needs-review",
       "calibrated_by": "geometry: EXTREME +z on FMA7205 (LPS +Z superior, long axis z, span 103.0 mm, 52.7 mm from surface centroid, 1502 vertices)",
-      "terms": ["upper pole", "left upper pole", "eleventh rib", "twelfth rib", "spleen", "T12"],
+      "terms": [
+        "upper pole",
+        "left upper pole",
+        "eleventh rib",
+        "twelfth rib",
+        "spleen",
+        "T12"
+      ],
       "narration": "The upper pole of the left kidney, reaching to about T12 — higher than the right, and crossed behind by both the eleventh and the twelfth ribs. The spleen lies against its front."
     },
     {
@@ -824,12 +867,21 @@
       "color": "#ffcf5c",
       "anchor": {
         "on": "left_kidney",
-        "uvw": [0.5224, 0.2827, 0],
+        "uvw": [
+          0.5224,
+          0.2827,
+          0
+        ],
         "radius": 0.02
       },
       "status": "needs-review",
       "calibrated_by": "geometry: EXTREME -z on FMA7205 (LPS +Z superior, long axis z, span 103.0 mm, 52.9 mm from surface centroid, 1502 vertices)",
-      "terms": ["lower pole", "left lower pole", "L2", "not ballotable"],
+      "terms": [
+        "lower pole",
+        "left lower pole",
+        "L2",
+        "not ballotable"
+      ],
       "narration": "The lower pole of the left kidney, reaching only to about L2 — which is why the left is almost never ballotable and why a mass in the left hypochondrium that you can get above is more likely renal than splenic."
     },
     {
@@ -841,13 +893,25 @@
       "color": "#ffcf5c",
       "anchor": {
         "on": "left_kidney",
-        "uvw": [0.4312, 0.3621, 0.4534],
+        "uvw": [
+          0.4312,
+          0.3621,
+          0.4534
+        ],
         "radius": 0.035
       },
       "status": "needs-review",
       "calibrated_by": "geometry: CONTACT — the point on FMA7205 nearest all three structures that pass through the hilum (FMA14753 renal artery 0.22 mm, FMA14336 renal vein 0.83 mm, FMA15572 ureter 0.21 mm · 3 witnesses · spread 21.6 mm over a 103.0 mm organ)",
       "calibration_gap_mm": 0.83,
-      "terms": ["hilum", "renal hilum", "left renal hilum", "transpyloric plane", "L1", "vein artery ureter", "VAU"],
+      "terms": [
+        "hilum",
+        "renal hilum",
+        "left renal hilum",
+        "transpyloric plane",
+        "L1",
+        "vein artery ureter",
+        "VAU"
+      ],
       "narration": "The left hilum lies almost exactly on the transpyloric plane, at the lower border of L1 — the most useful single level in the abdomen. The same order holds here: vein, artery, ureter from front to back."
     },
     {
@@ -859,12 +923,22 @@
       "color": "#ffcf5c",
       "anchor": {
         "on": "right_ureter",
-        "uvw": [0.5336, 0.9119, 1],
+        "uvw": [
+          0.5336,
+          0.9119,
+          1
+        ],
         "radius": 0.02
       },
       "status": "needs-review",
       "calibrated_by": "geometry: EXTREME +z on FMA15571 — the ureter model begins at the pelviureteric junction, so the topmost point of that mesh IS the junction (LPS +Z superior, long axis z, span 277.1 mm, 108.3 mm from surface centroid, 1107 vertices)",
-      "terms": ["pelviureteric junction", "PUJ", "first constriction", "hydronephrosis", "renal colic"],
+      "terms": [
+        "pelviureteric junction",
+        "PUJ",
+        "first constriction",
+        "hydronephrosis",
+        "renal colic"
+      ],
       "narration": "The first of the three ureteric constrictions, where the funnel of the renal pelvis narrows into the ureter. A stone arrested here obstructs the kidney and dilates the pelvis and calyces into a hydronephrosis. This anchor marks the junction as a point on the ureter, not as a dilated pelvis — the renal pelvis itself has no mesh."
     },
     {
@@ -876,13 +950,26 @@
       "color": "#ffcf5c",
       "anchor": {
         "on": "rib12",
-        "uvw": [0.5147, 0.9475, 0.5274],
+        "uvw": [
+          0.5147,
+          0.9475,
+          0.5274
+        ],
         "radius": 0.018
       },
       "status": "needs-review",
       "calibrated_by": "geometry: CONTACT — the renal angle is the corner between the lower border of the twelfth rib and the LATERAL border of erector spinae, and the lateral column of erector spinae is iliocostalis lumborum. The anchor is the point on FMA8533 nearest FMA22740 right iliocostalis lumborum (gap 0.29 mm · 1 witness, so a measurement without a second witness to converge on it)",
       "calibration_gap_mm": 0.29,
-      "terms": ["renal angle", "costovertebral angle", "renal angle tenderness", "Murphy's kidney punch", "erector spinae", "iliocostalis lumborum", "pyelonephritis", "loin incision"],
+      "terms": [
+        "renal angle",
+        "costovertebral angle",
+        "renal angle tenderness",
+        "Murphy's kidney punch",
+        "erector spinae",
+        "iliocostalis lumborum",
+        "pyelonephritis",
+        "loin incision"
+      ],
       "narration": "Where the lower border of the twelfth rib meets the lateral border of erector spinae, the kidney comes closest to the skin. This is where you press or percuss for tenderness in pyelonephritis, and where a percutaneous tract or a biopsy needle enters — always BELOW the rib, because the costodiaphragmatic recess of the pleura dips behind its medial half."
     }
   ],
@@ -1195,6 +1282,7 @@
     "The five segmental arteries are not in the catalog; only the main renal artery trunk on each side is. The end-artery principle and the avascular plane of Brodel are therefore narrated against a single vessel.",
     "The gonadal veins are not in the catalog, so the left varicocele story is told through the left renal vein alone. This weakens beat four's strongest clinical hook, since the vein whose obstruction the student must picture cannot be drawn.",
     "This scene does not claim to cover 'Ureters', 'Suprarenal (adrenal) gland' or 'Abdominal aorta & IVC' even though all of them appear in it. The ureters are here as the kidney's outflow, not as a course with three constrictions and a segmental blood supply; the suprarenal glands are here as a relation; the aorta and cava are here only to fix where the renal vessels begin and end. All three remain on the worklist as separate curriculum entries.",
-    "Ribs are single-sided models in the catalog. The eleventh rib shown is the right eleventh rib, used to teach a left-sided relation, because it is the same bone mirrored and the teaching point is the level rather than the side. The label and narration say plainly that it is the left kidney that the eleventh rib crosses, so nothing is misrepresented, but a student rotating the scene will see the rib on the wrong side."
+    "Ribs are single-sided models in the catalog. The eleventh rib shown is the right eleventh rib, used to teach a left-sided relation, because it is the same bone mirrored and the teaching point is the level rather than the side. The label and narration say plainly that it is the left kidney that the eleventh rib crosses, so nothing is misrepresented, but a student rotating the scene will see the rib on the wrong side.",
+    "Beat two names the three nerves crossing quadratus lumborum behind the kidney — subcostal, iliohypogastric, ilioinguinal — and the costodiaphragmatic recess of the pleura. None is in the catalog (searched under each name, and under pleura: nothing in 934 entries). They are the reason every posterior approach stays below the twelfth rib, so they are taught in words and not drawn."
   ]
 }

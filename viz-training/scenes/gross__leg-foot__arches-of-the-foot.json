@@ -702,7 +702,7 @@
           "layout": "side-by-side"
         }
       ],
-      "narration": "Across the foot at the level of the cuneiforms and the metatarsal bases there is a third arch. Each cuneiform is a wedge, narrow below and wide above, and wedges stacked side by side make a vault. This arch is only half a dome on one foot; put the two feet together and the dome is complete, which is the classic way of describing it."
+      "narration": "Across the foot at the level of the cuneiforms and the metatarsal bases there is a third arch. The intermediate and lateral cuneiforms are wedges with the narrow edge downwards; the medial cuneiform is the exception, with its wide edge down. Stacked side by side those wedges make a vault, and the comparison lit here is between the exception and the rule. This arch is only half a dome on one foot; put the two feet together and the dome is complete, which is the classic way of describing it."
     },
     {
       "mode": "location",
@@ -956,7 +956,8 @@
     "The second, third and fourth layers of the sole are only partly in the catalog. Quadratus plantae is absent altogether, and adductor hallucis exists only as its two separate heads, so the layered anatomy of the sole is summarised in the peel beat rather than shown layer by layer. The three plantar interossei do exist individually (FMA37741, FMA37743, FMA37745) and are now authored, so the fourth layer is drawn as its plantar half; it is the dorsal interossei of the foot that have no meshes, so that layer is still incomplete on the dorsal side.",
     "The spring ligament, the plantar aponeurosis, the short plantar ligament and quadratus plantae were all re-searched at the 2026-08-29 audit under 'calcaneonavicular', 'aponeuros', 'plantar', 'fascia' and 'quadratus plantae'. All four are genuinely absent — the only 'aponeuros' hit in the whole catalog is the epicranial aponeurosis. The gap notes above stand on that evidence rather than on an earlier note.",
     "There is no model of the fibro-fatty heel pad, and the only skin in the catalog is one undivided whole-body mesh, so the covering that actually takes ground contact is described only.",
-    "The transverse arch is really a half dome completed by the opposite foot, and only one foot is modelled here, so the completed dome is described in narration and cannot be shown."
+    "The transverse arch is really a half dome completed by the opposite foot, and only one foot is modelled here, so the completed dome is described in narration and cannot be shown.",
+    "Only one sesamoid of the great toe is in the catalog (FMA45097). The pair under the head of the first metatarsal is narrated over that single mesh, so the student hears two and sees one."
   ],
   "provenance": {
     "author": "task",

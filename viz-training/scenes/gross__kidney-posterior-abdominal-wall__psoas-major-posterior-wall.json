@@ -649,11 +649,24 @@
       "color": "#ffcf5c",
       "anchor": {
         "on": "l3",
-        "uvw": [0, 0.6007, 0.627]
+        "uvw": [
+          0,
+          0.6007,
+          0.627
+        ],
+        "radius": 0.018
       },
       "status": "needs-review",
       "calibrated_by": "geometry: EXTREME -x on FMA13074 (LPS +X is the body's LEFT, so -x is the right side; the widest point of a lumbar vertebra IS the tip of its transverse process; 42.8 mm from surface centroid, 1500 vertices)",
-      "terms": ["transverse process", "tip of the transverse process", "L3", "psoas origin", "ureter", "quadratus lumborum", "longest transverse process"],
+      "terms": [
+        "transverse process",
+        "tip of the transverse process",
+        "L3",
+        "psoas origin",
+        "ureter",
+        "quadratus lumborum",
+        "longest transverse process"
+      ],
       "narration": "The tip of the third lumbar transverse process — the longest of the five, and the widest point of the lumbar column. Psoas arises from the front of it, quadratus lumborum inserts into it, and the ureter descends on the line joining these tips: on a plain film, that line is where you look for a ureteric stone."
     },
     {
@@ -665,13 +678,22 @@
       "color": "#ffcf5c",
       "anchor": {
         "on": "right_hip_bone",
-        "uvw": [0.5896, 0.7927, 0.8928],
+        "uvw": [
+          0.5896,
+          0.7927,
+          0.8928
+        ],
         "radius": 0.018
       },
       "status": "needs-review",
       "calibrated_by": "geometry: CONTACT — the point on FMA16586 nearest FMA22348 right quadratus lumborum, which is the muscle's lower attachment on the iliolumbar ligament and the adjacent inner lip of the iliac crest (gap 0.15 mm · 1 witness, so a measurement with no second witness to converge on it)",
       "calibration_gap_mm": 0.15,
-      "terms": ["iliac crest", "inner lip of the iliac crest", "iliolumbar ligament", "quadratus lumborum origin"],
+      "terms": [
+        "iliac crest",
+        "inner lip of the iliac crest",
+        "iliolumbar ligament",
+        "quadratus lumborum origin"
+      ],
       "narration": "Quadratus lumborum takes its lower attachment here, on the iliolumbar ligament and the inner lip of the iliac crest behind it, and pulls upwards on the twelfth rib from this fixed point."
     }
   ],
@@ -964,6 +986,7 @@
     "CORRECTED 2026-08-29: this note used to read 'No landmark anchors were authored' — while the same file carried two, the iliac fossa and the lesser trochanter, both measured and both reviewed in the viewer on 2026-08-28. The note was written before them and never revised, and it also claimed the meshes were not in meshes-lite/, which they are. Two further anchors have now been measured and added: the tip of the L3 transverse process by EXTREME -x (the widest point of a lumbar vertebra is that tip) and the iliac attachment of quadratus lumborum by CONTACT against FMA22348 at 0.15 mm. Four anchors total; the two new ones are status needs-review. The sacral promontory was attempted and NOT authored: EXTREME -y inside the top slab of the sacrum lands at u=0.69, off the midline and out on the ala, and the promontory is a midline lip. It is neither of derive-landmark.mjs's two definitions, so it is left unauthored rather than placed at a plausible-looking coordinate. The mid-inguinal point is likewise unauthorable — it is defined against the pubic symphysis and the anterior superior iliac spine as a point in soft tissue, not a point on any mesh.",
     "The intervertebral disc of L2 stands in for all five lumbar discs, which are separate models in the catalog. Only one is shown, to make the point that the discs are part of the origin, without turning the lumbar spine group into a wall of identical labels.",
     "This scene does not claim to cover 'Kidney', 'Ureters' or 'Abdominal aorta & IVC' although all three appear in it. They are here as relations of psoas, to teach the wall as a bed, not as structures in their own right; all three already have their own scenes.",
-    "Ribs and inguinal ligaments are single-sided models. The right twelfth rib and right inguinal ligament are shown; the left-sided equivalents exist in the catalog but were omitted so the bony attachment group stays readable, since the teaching point is the level and the doorway rather than the side."
+    "Ribs and inguinal ligaments are single-sided models. The right twelfth rib and right inguinal ligament are shown; the left-sided equivalents exist in the catalog but were omitted so the bony attachment group stays readable, since the teaching point is the level and the doorway rather than the side.",
+    "No nerve of the posterior abdominal wall is in the catalog — re-searched under subcostal, iliohypogastric, ilioinguinal and genitofemoral, all returning nothing — so the whole lumbar plexus is narrated against the muscle it emerges from rather than drawn."
   ]
 }
