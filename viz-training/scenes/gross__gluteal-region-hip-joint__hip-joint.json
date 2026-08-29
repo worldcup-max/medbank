@@ -121,7 +121,7 @@
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: CONTACT — the socket is where the femur meets the hip bone (gaps 1.02mm · 1 witness)",
       "calibration_gap_mm": 1.02,
       "terms": [
@@ -129,7 +129,9 @@
         "the socket",
         "hip socket"
       ],
-      "narration": "The socket is the acetabulum. Its articular surface is a horseshoe called the lunate surface; the floor inside the horseshoe, the acetabular fossa, is not articular and holds fat. The rim is deepened all round by a fibrocartilaginous labrum, and the gap below is bridged by the transverse acetabular ligament."
+      "narration": "The socket is the acetabulum. Its articular surface is a horseshoe called the lunate surface; the floor inside the horseshoe, the acetabular fossa, is not articular and holds fat. The rim is deepened all round by a fibrocartilaginous labrum, and the gap below is bridged by the transverse acetabular ligament.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "femur",
@@ -171,7 +173,7 @@
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: CONTACT — the ball is where the femur meets the hip bone (gaps 1.02mm · 1 witness)",
       "calibration_gap_mm": 1.02,
       "terms": [
@@ -179,7 +181,62 @@
         "femoral head",
         "the ball"
       ],
-      "narration": "The ball is the head of the femur, more than half a sphere. The small pit on it is the fovea, where the ligament of the head attaches."
+      "narration": "The ball is the head of the femur, more than half a sphere. The small pit on it is the fovea, where the ligament of the head attaches.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
+    },
+    {
+      "key": "greater_trochanter",
+      "label": "Greater trochanter",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0,
+          0.4119,
+          0.8864
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -x within slab z:0.8,1.0 on FMA24474 (right femur, 440.2 mm, long axis z) — the most lateral point of the upper fifth of the bone. 559 vertices considered, 189.3 mm from the surface centroid.",
+      "terms": [
+        "greater trochanter",
+        "trochanteric fossa",
+        "palpable landmark of the hip",
+        "abductor insertion"
+      ],
+      "narration": "The one part of this region you can put a finger on. Gluteus medius and minimus land here, the short lateral rotators reach its medial surface, and the line from the ischial tuberosity to this point is how beat 1 finds the joint from behind. The hollow on its medial side is the trochanteric fossa."
+    },
+    {
+      "key": "lesser_trochanter",
+      "label": "Lesser trochanter",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.4568,
+          0.4523,
+          0.7735
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — the nearest point on FMA24474 to FMA22342 (right psoas major), the muscle that inserts on it. Gap 0.87 mm, spread 0 mm, 1 witness — a measurement with no second witness, hence needs-review.",
+      "calibration_gap_mm": 0.87,
+      "terms": [
+        "lesser trochanter",
+        "insertion of iliopsoas",
+        "intertrochanteric line",
+        "extracapsular"
+      ],
+      "narration": "Where iliopsoas ends, on the back and medial side of the upper femur. It marks the lower limit of the neck: the intertrochanteric line in front runs down to it, so a fracture at this level is extracapsular and the head keeps its blood supply."
     },
     {
       "key": "sacrum",
@@ -672,9 +729,14 @@
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "Bones of the joint",
           "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "greater_trochanter",
+          "intensity": 0.95
         }
       ],
-      "narration": "The hip joint is buried. Muscle covers it on every side, so you can never see it or feel it directly on a patient. You locate it instead: about two centimetres below the midpoint of the inguinal ligament in front, and midway between the ischial tuberosity and the greater trochanter behind."
+      "narration": "The hip joint is buried. Muscle covers it on every side, so you can never see it or feel it directly on a patient. You locate it instead: about two centimetres below the midpoint of the inguinal ligament in front, and midway between the ischial tuberosity and the greater trochanter behind. The marker lit on the femur is that trochanter — the only bony point of this region you can actually find through the skin."
     },
     {
       "mode": "location",
@@ -742,11 +804,16 @@
           "intensity": 0.9
         },
         {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lesser_trochanter",
+          "intensity": 0.8
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "anterior"
         }
       ],
-      "narration": "The capsule runs from the acetabular rim to the intertrochanteric line in front, but behind it stops halfway along the neck. So the whole neck is inside the capsule in front and only the medial half behind. That line is the difference between an intracapsular and an extracapsular fracture, and therefore between a neck that loses its blood supply and one that does not."
+      "narration": "The two markers are the ends of the argument: the head above, the lesser trochanter below. The capsule runs from the acetabular rim to the intertrochanteric line in front, but behind it stops halfway along the neck. So the whole neck is inside the capsule in front and only the medial half behind. That line is the difference between an intracapsular and an extracapsular fracture, and therefore between a neck that loses its blood supply and one that does not."
     },
     {
       "mode": "mechanism",
@@ -1039,7 +1106,7 @@
     "The catalog holds no capsule or ligament of the hip. The iliofemoral, pubofemoral and ischiofemoral ligaments carry most of the joint's stability and two whole beats turn on them, but they can only be narrated against the bones and shown with a relationship connector.",
     "There is no acetabular labrum, no transverse acetabular ligament and no ligament of the head of the femur in the catalog, so the deepening of the socket and the fovea are taught by cutting the bone models and describing what would be there.",
     "No articular cartilage is modelled, so the lunate surface and the non-articular acetabular fossa are shown as bone shape only.",
-    "The head, neck, greater and lesser trochanters are features of the whole femur mesh rather than separate models, so they are taught by lighting the femur and naming the feature. Authoring them as measured landmark anchors is the obvious next improvement and was not attempted in this run.",
+    "The head, neck and trochanters are features of the whole femur mesh rather than separate models. Three of the four are now measured landmark anchors on FMA24474 rather than a lit whole bone: the head (contact with the hip bone), the greater trochanter (most lateral point of the upper fifth) and the lesser trochanter (contact with psoas major). All three are single-witness measurements and carry status 'needs-review'. The NECK is not authored and should not be: a neck is a narrowest cross-section, which is neither of derive-landmark.mjs's two definitions, and the same finding was recorded in the radius-ulna scene. It is still taught by lighting the femur and naming it.",
     "No nerve of the lower limb exists as a model. The sciatic nerve behind the joint is authored as a traced concept path across piriformis and quadratus femoris, and the femoral and obturator nerves are taught by lighting the muscles they supply.",
     "No artery of the lower limb is modelled, so the blood supply of the head of the femur is not shown here at all. It is taught in the Proximal femur scene, which this scene does not claim to cover.",
     "The psoas bursa is described but has no model, so its communication with the joint cavity is narration only.",
@@ -1047,6 +1114,8 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

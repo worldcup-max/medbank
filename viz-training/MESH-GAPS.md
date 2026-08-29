@@ -56,31 +56,35 @@ carrying a feature. Those just lose the marking.
 flagged `status: "needs-review"`. Deciding which sentences describe the bone and which describe the
 feature is authoring, not measurement, and the tool has no business guessing at it.
 
-## Measured (17)
+## Measured (16)
+
+Each was opened in the viewer and looked at — the patch is on the feature it names.
 
 - **Iliac crest** — `erector-spinae-deep-back-muscles` · iliocostalis lumborum arises from the crest
 - **Angle of the sixth rib** — `erector-spinae-deep-back-muscles` · iliocostalis thoracis inserts on the rib angles
 - **Mastoid process** — `erector-spinae-deep-back-muscles` · longissimus capitis inserts on the mastoid
 - **Acetabulum** — `hip-joint` · the socket is where the femur meets the hip bone
 - **Head of femur** — `hip-joint` · the ball is where the femur meets the hip bone
-- **Upper end of the femur** — `proximal-femur` · the upper end is the top of the bone
 - **Iliac fossa** — `psoas-major-posterior-wall` · iliacus fills the fossa
 - **Lesser trochanter** — `psoas-major-posterior-wall` · psoas major inserts on the lesser trochanter
 - **Ischial spine** — `ureters` · coccygeus arises from the ischial spine
 - **Medial malleolus** — `ankle-joint` · the medial malleolus is the most medial point of the lower tibia (right leg: medial is +X)
 - **Lateral malleolus** — `ankle-joint` · the lateral malleolus is the lowest point of the fibula
-- **Popliteal surface of the femur** — `popliteal-fossa` · the popliteal surface is the posterior aspect of the lower femur
-- **Posterior surface of the tibia** — `popliteal-fossa` · the floor of the fossa is the posterior aspect of the upper tibia
+- **Popliteal surface of the femur** — `popliteal-fossa` · the two heads of gastrocnemius arise from the supracondylar lines that flank the popliteal surface, so the midpoint between them IS the surface
+- **Posterior surface of the tibia** — `popliteal-fossa` · popliteus covers the posterior surface of the upper tibia — the floor of the fossa below the joint line
 - **Bicipital groove** — `pectoralis-major` · both heads of pectoralis major insert on the lateral lip of the groove
 - **Lumbosacral angle** — `bony-pelvis` · the angle is the L5/S1 junction
 - **Body of the pubis** — `pelvic-diaphragm-levator-ani` · pubococcygeus arises from the body of the pubis
 - **Ischial spine** — `pelvic-diaphragm-levator-ani` · coccygeus arises from the ischial spine
 
+## Dropped after looking at it
+
+- **Upper end of the femur** — a REGION (head, neck, both trochanters), not a point. The patch covered only the head, so the anchor was removed and the whole femur is the answer in a scene about its upper end.
+
 ## Still open (1)
 
 - **apex of the axilla** — shown as the whole **Clavicle** (`axillary-vessels-lymph-nodes`, `clavicle`)
 
-The axillary apex was **refused** by the tool, correctly: it is the gap between the clavicle and the
-first rib, and those two surfaces are 3.27 mm apart, so there is no contact point to measure. A space
-bounded by three bones is not a landmark on any one of them. It needs either a different definition
-(the midpoint of the three boundaries) or a scene that shows the space itself.
+The axillary apex was **refused** by the tool: it is the gap between the clavicle and the first rib,
+and those surfaces are 3.27 mm apart, so there is no contact point to measure. A space bounded by three
+bones is not a landmark on any one of them.

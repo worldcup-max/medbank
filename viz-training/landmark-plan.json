@@ -1,55 +1,292 @@
 {
   "note": "One row per approximated landmark. `def` states how it is measured; run-landmark-plan.mjs measures them and refuses any whose evidence is weak. `drop` means it was never an approximation: the whole parent IS the answer, so the marking comes off and nothing is anchored.",
   "rows": [
-    { "scene": "gross__back-vertebral-column__erector-spinae-deep-back-muscles", "on": "hip_bone", "key": "iliac_crest", "label": "Iliac crest",
-      "def": { "contact": ["FMA22740"] }, "why": "iliocostalis lumborum arises from the crest", "terms": ["iliac crest"] },
-    { "scene": "gross__back-vertebral-column__erector-spinae-deep-back-muscles", "on": "rib6", "key": "rib6_angle", "label": "Angle of the sixth rib",
-      "def": { "contact": ["FMA22742"] }, "why": "iliocostalis thoracis inserts on the rib angles", "terms": ["angle of the rib", "rib angle"] },
-    { "scene": "gross__back-vertebral-column__erector-spinae-deep-back-muscles", "on": "temporal", "key": "mastoid_process", "label": "Mastoid process",
-      "def": { "contact": ["FMA22754"] }, "why": "longissimus capitis inserts on the mastoid", "terms": ["mastoid process", "mastoid"] },
-
-    { "scene": "gross__gluteal-region-hip-joint__hip-joint", "on": "hip_bone", "key": "acetabulum", "label": "Acetabulum",
-      "def": { "contact": ["FMA24474"] }, "why": "the socket is where the femur meets the hip bone", "terms": ["acetabulum", "the socket", "hip socket"] },
-    { "scene": "gross__gluteal-region-hip-joint__hip-joint", "on": "femur", "key": "femoral_head", "label": "Head of femur",
-      "def": { "contact": ["FMA16586"] }, "why": "the ball is where the femur meets the hip bone", "terms": ["head of femur", "femoral head", "the ball"] },
-
-    { "scene": "gross__gluteal-region-hip-joint__proximal-femur", "on": "femur", "key": "femur_upper_end", "label": "Upper end of the femur",
-      "def": { "extreme": "+z", "radius": 0.035 }, "why": "the upper end is the top of the bone", "terms": ["upper end", "proximal femur"] },
-
-    { "scene": "gross__kidney-posterior-abdominal-wall__psoas-major-posterior-wall", "on": "right_hip_bone", "key": "iliac_fossa", "label": "Iliac fossa",
-      "def": { "contact": ["FMA22322"] }, "why": "iliacus fills the fossa", "terms": ["iliac fossa"] },
-    { "scene": "gross__kidney-posterior-abdominal-wall__psoas-major-posterior-wall", "on": "right_femur", "key": "lesser_trochanter", "label": "Lesser trochanter",
-      "def": { "contact": ["FMA22342"] }, "why": "psoas major inserts on the lesser trochanter", "terms": ["lesser trochanter"] },
-
-    { "scene": "gross__kidney-posterior-abdominal-wall__ureters", "on": "right_hip_bone", "key": "ischial_spine", "label": "Ischial spine",
-      "def": { "contact": ["FMA46443"] }, "why": "coccygeus arises from the ischial spine", "terms": ["ischial spine"] },
-
-    { "scene": "gross__leg-foot__ankle-joint", "on": "tibia", "key": "medial_malleolus", "label": "Medial malleolus",
-      "def": { "extreme": "+x", "slab": "z:0,0.2" }, "why": "the medial malleolus is the most medial point of the lower tibia (right leg: medial is +X)", "terms": ["medial malleolus"] },
-    { "scene": "gross__leg-foot__ankle-joint", "on": "fibula", "key": "lateral_malleolus", "label": "Lateral malleolus",
-      "def": { "extreme": "-z" }, "why": "the lateral malleolus is the lowest point of the fibula", "terms": ["lateral malleolus"] },
-
-    { "scene": "gross__leg-foot__popliteal-fossa", "on": "femur", "key": "popliteal_surface", "label": "Popliteal surface of the femur",
-      "def": { "extreme": "+y", "slab": "z:0,0.25", "radius": 0.03 }, "why": "the popliteal surface is the posterior aspect of the lower femur", "terms": ["popliteal surface"] },
-    { "scene": "gross__leg-foot__popliteal-fossa", "on": "tibia", "key": "tibia_posterior", "label": "Posterior surface of the tibia",
-      "def": { "extreme": "+y", "slab": "z:0.7,1", "radius": 0.03 }, "why": "the floor of the fossa is the posterior aspect of the upper tibia", "terms": ["posterior surface of the tibia"] },
-
-    { "scene": "gross__pectoral-region-breast__axillary-vessels-lymph-nodes", "on": "clavicle", "key": "axillary_apex", "label": "Apex of the axilla",
-      "def": { "contact": ["FMA7857"] }, "why": "the apex is the gap between the clavicle and the first rib", "terms": ["apex of the axilla", "cervicoaxillary canal"] },
-
-    { "scene": "gross__pectoral-region-breast__pectoralis-major", "on": "humerus", "key": "bicipital_groove", "label": "Bicipital groove",
-      "def": { "contact": ["FMA34690", "FMA79979"] }, "why": "both heads of pectoralis major insert on the lateral lip of the groove", "terms": ["bicipital groove", "intertubercular groove", "lateral lip"] },
-
-    { "scene": "gross__pelvis-perineum__bony-pelvis", "on": "l5", "key": "lumbosacral_angle", "label": "Lumbosacral angle",
-      "def": { "contact": ["FMA16202"] }, "why": "the angle is the L5/S1 junction", "terms": ["lumbosacral angle", "sacral promontory"] },
-
-    { "scene": "gross__pelvis-perineum__pelvic-diaphragm-levator-ani", "on": "right_hip_bone", "key": "pubis_body", "label": "Body of the pubis",
-      "def": { "contact": ["FMA45854"] }, "why": "pubococcygeus arises from the body of the pubis", "terms": ["pubis", "body of the pubis"] },
-    { "scene": "gross__pelvis-perineum__pelvic-diaphragm-levator-ani", "on": "right_hip_bone", "key": "ischial_spine", "label": "Ischial spine",
-      "def": { "contact": ["FMA46443"] }, "why": "coccygeus arises from the ischial spine", "terms": ["ischial spine"] },
-
-    { "scene": "gross__back-vertebral-column__spinal-cord-in-vertebral-canal", "on": "l4", "drop": "a vertebral LEVEL, not a feature on the bone — the whole L4 is the answer" },
-    { "scene": "gross__leg-foot__arches-of-the-foot", "on": "talus", "drop": "the talus IS the keystone — the whole bone is the answer" },
-    { "scene": "gross__pelvis-perineum__bony-pelvis", "on": "sacrum", "drop": "the sacrum IS the keystone — the whole bone is the answer" }
+    {
+      "scene": "gross__back-vertebral-column__erector-spinae-deep-back-muscles",
+      "on": "hip_bone",
+      "key": "iliac_crest",
+      "label": "Iliac crest",
+      "def": {
+        "contact": [
+          "FMA22740"
+        ]
+      },
+      "why": "iliocostalis lumborum arises from the crest",
+      "terms": [
+        "iliac crest"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__erector-spinae-deep-back-muscles",
+      "on": "rib6",
+      "key": "rib6_angle",
+      "label": "Angle of the sixth rib",
+      "def": {
+        "contact": [
+          "FMA22742"
+        ]
+      },
+      "why": "iliocostalis thoracis inserts on the rib angles",
+      "terms": [
+        "angle of the rib",
+        "rib angle"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__erector-spinae-deep-back-muscles",
+      "on": "temporal",
+      "key": "mastoid_process",
+      "label": "Mastoid process",
+      "def": {
+        "contact": [
+          "FMA22754"
+        ]
+      },
+      "why": "longissimus capitis inserts on the mastoid",
+      "terms": [
+        "mastoid process",
+        "mastoid"
+      ]
+    },
+    {
+      "scene": "gross__gluteal-region-hip-joint__hip-joint",
+      "on": "hip_bone",
+      "key": "acetabulum",
+      "label": "Acetabulum",
+      "def": {
+        "contact": [
+          "FMA24474"
+        ]
+      },
+      "why": "the socket is where the femur meets the hip bone",
+      "terms": [
+        "acetabulum",
+        "the socket",
+        "hip socket"
+      ]
+    },
+    {
+      "scene": "gross__gluteal-region-hip-joint__hip-joint",
+      "on": "femur",
+      "key": "femoral_head",
+      "label": "Head of femur",
+      "def": {
+        "contact": [
+          "FMA16586"
+        ]
+      },
+      "why": "the ball is where the femur meets the hip bone",
+      "terms": [
+        "head of femur",
+        "femoral head",
+        "the ball"
+      ]
+    },
+    {
+      "scene": "gross__gluteal-region-hip-joint__proximal-femur",
+      "on": "femur",
+      "drop": "a REGION (head, neck and both trochanters), not a point — verified on the model: the anchor patch covers only the head. The whole femur is the answer in a scene about its upper end."
+    },
+    {
+      "scene": "gross__kidney-posterior-abdominal-wall__psoas-major-posterior-wall",
+      "on": "right_hip_bone",
+      "key": "iliac_fossa",
+      "label": "Iliac fossa",
+      "def": {
+        "contact": [
+          "FMA22322"
+        ],
+        "area": 3
+      },
+      "why": "iliacus lines the whole fossa — the centroid of the contact patch, not its nearest corner",
+      "terms": [
+        "iliac fossa"
+      ]
+    },
+    {
+      "scene": "gross__kidney-posterior-abdominal-wall__psoas-major-posterior-wall",
+      "on": "right_femur",
+      "key": "lesser_trochanter",
+      "label": "Lesser trochanter",
+      "def": {
+        "contact": [
+          "FMA22342"
+        ]
+      },
+      "why": "psoas major inserts on the lesser trochanter",
+      "terms": [
+        "lesser trochanter"
+      ]
+    },
+    {
+      "scene": "gross__kidney-posterior-abdominal-wall__ureters",
+      "on": "right_hip_bone",
+      "key": "ischial_spine",
+      "label": "Ischial spine",
+      "def": {
+        "contact": [
+          "FMA46443"
+        ]
+      },
+      "why": "coccygeus arises from the ischial spine",
+      "terms": [
+        "ischial spine"
+      ]
+    },
+    {
+      "scene": "gross__leg-foot__ankle-joint",
+      "on": "tibia",
+      "key": "medial_malleolus",
+      "label": "Medial malleolus",
+      "def": {
+        "extreme": "+x",
+        "slab": "z:0,0.2"
+      },
+      "why": "the medial malleolus is the most medial point of the lower tibia (right leg: medial is +X)",
+      "terms": [
+        "medial malleolus"
+      ]
+    },
+    {
+      "scene": "gross__leg-foot__ankle-joint",
+      "on": "fibula",
+      "key": "lateral_malleolus",
+      "label": "Lateral malleolus",
+      "def": {
+        "extreme": "-z"
+      },
+      "why": "the lateral malleolus is the lowest point of the fibula",
+      "terms": [
+        "lateral malleolus"
+      ]
+    },
+    {
+      "scene": "gross__leg-foot__popliteal-fossa",
+      "on": "femur",
+      "key": "popliteal_surface",
+      "label": "Popliteal surface of the femur",
+      "def": {
+        "contact": [
+          "FMA45957",
+          "FMA45960"
+        ]
+      },
+      "why": "the two heads of gastrocnemius arise from the supracondylar lines that flank the popliteal surface, so the midpoint between them IS the surface",
+      "terms": [
+        "popliteal surface"
+      ]
+    },
+    {
+      "scene": "gross__leg-foot__popliteal-fossa",
+      "on": "tibia",
+      "key": "tibia_posterior",
+      "label": "Posterior surface of the tibia",
+      "def": {
+        "contact": [
+          "FMA22591"
+        ]
+      },
+      "why": "popliteus covers the posterior surface of the upper tibia — the floor of the fossa below the joint line",
+      "terms": [
+        "posterior surface of the tibia"
+      ]
+    },
+    {
+      "scene": "gross__pectoral-region-breast__axillary-vessels-lymph-nodes",
+      "on": "clavicle",
+      "key": "axillary_apex",
+      "label": "Apex of the axilla",
+      "def": {
+        "contact": [
+          "FMA7857"
+        ]
+      },
+      "why": "the apex is the gap between the clavicle and the first rib",
+      "terms": [
+        "apex of the axilla",
+        "cervicoaxillary canal"
+      ]
+    },
+    {
+      "scene": "gross__pectoral-region-breast__pectoralis-major",
+      "on": "humerus",
+      "key": "bicipital_groove",
+      "label": "Bicipital groove",
+      "def": {
+        "contact": [
+          "FMA34690",
+          "FMA79979"
+        ],
+        "slab": "z:0.72,1"
+      },
+      "why": "both heads of pectoralis major reach the lateral lip beside the tubercles; restricted to the proximal quarter the two witnesses agree to 4 mm",
+      "terms": [
+        "bicipital groove",
+        "intertubercular groove",
+        "lateral lip"
+      ]
+    },
+    {
+      "scene": "gross__pelvis-perineum__bony-pelvis",
+      "on": "l5",
+      "key": "lumbosacral_angle",
+      "label": "Lumbosacral angle",
+      "def": {
+        "contact": [
+          "FMA16202"
+        ]
+      },
+      "why": "the angle is the L5/S1 junction",
+      "terms": [
+        "lumbosacral angle",
+        "sacral promontory"
+      ]
+    },
+    {
+      "scene": "gross__pelvis-perineum__pelvic-diaphragm-levator-ani",
+      "on": "right_hip_bone",
+      "key": "pubis_body",
+      "label": "Body of the pubis",
+      "def": {
+        "contact": [
+          "FMA45854"
+        ]
+      },
+      "why": "pubococcygeus arises from the body of the pubis",
+      "terms": [
+        "pubis",
+        "body of the pubis"
+      ]
+    },
+    {
+      "scene": "gross__pelvis-perineum__pelvic-diaphragm-levator-ani",
+      "on": "right_hip_bone",
+      "key": "ischial_spine",
+      "label": "Ischial spine",
+      "def": {
+        "contact": [
+          "FMA46443"
+        ]
+      },
+      "why": "coccygeus arises from the ischial spine",
+      "terms": [
+        "ischial spine"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__spinal-cord-in-vertebral-canal",
+      "on": "l4",
+      "drop": "a vertebral LEVEL, not a feature on the bone — the whole L4 is the answer"
+    },
+    {
+      "scene": "gross__leg-foot__arches-of-the-foot",
+      "on": "talus",
+      "drop": "the talus IS the keystone — the whole bone is the answer"
+    },
+    {
+      "scene": "gross__pelvis-perineum__bony-pelvis",
+      "on": "sacrum",
+      "drop": "the sacrum IS the keystone — the whole bone is the answer"
+    }
   ]
 }

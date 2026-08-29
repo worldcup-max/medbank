@@ -108,32 +108,7 @@
         "gluteal tuberosity",
         "linea aspera"
       ],
-      "narration": "The longest and strongest bone in the body."
-    },
-    {
-      "key": "femur_upper_end",
-      "label": "Upper end of the femur",
-      "role": "part",
-      "group": "Landmarks",
-      "render": "anchor",
-      "color": "#ffcf5c",
-      "anchor": {
-        "on": "femur",
-        "uvw": [
-          0.5767,
-          0.3063,
-          1
-        ],
-        "radius": 0.035
-      },
-      "status": "needs-review",
-      "calibrated_by": "geometry: EXTREME +z — the upper end is the top of the bone (EXTREME +z · 232.2mm from centroid)",
-      "calibration_gap_mm": 0,
-      "terms": [
-        "upper end",
-        "proximal femur"
-      ],
-      "narration": "The upper end has four things to name: a head, a neck, and two trochanters. In front, the trochanters are joined by a rough intertrochanteric line; behind, by a sharper intertrochanteric crest that carries the quadrate tubercle."
+      "narration": "The longest and strongest bone in the body. The upper end has four things to name: a head, a neck, and two trochanters. In front, the trochanters are joined by a rough intertrochanteric line; behind, by a sharper intertrochanteric crest that carries the quadrate tubercle."
     },
     {
       "key": "hip_bone",
@@ -154,6 +129,110 @@
         "greater sciatic foramen"
       ],
       "narration": "The socket the head sits in, and the origin of most of the muscles that land on the trochanters. The obturator foramen below is where the obturator artery leaves the pelvis."
+    },
+    {
+      "key": "greater_trochanter",
+      "label": "Greater trochanter",
+      "role": "part",
+      "group": "Bone",
+      "layer": "bone",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.129,
+          0.534,
+          0.933
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT point where gluteus medius (FMA22330, gap 0.13 mm), gluteus minimus (FMA22332, 0.57 mm) and piriformis (FMA22340, 0.11 mm) converge on the femur — three witnesses scattered over 20.4 mm of a 440.2 mm bone (4.6%). Cross-checked against the most lateral point of the proximal 12% of the shaft, which lands at u=0.00, w=0.886: the same corner of the bone. tools/derive-landmark.mjs --parent FMA24474 --contact FMA22330,FMA22332,FMA22340",
+      "terms": [
+        "greater trochanter",
+        "trochanteric bursitis",
+        "palpable landmark of the hip"
+      ],
+      "narration": "The only part of the upper femur you can feel on a patient — the lateral bump about a hand's breadth below the iliac crest. Piriformis on its upper border, medius on its lateral surface, minimus in front."
+    },
+    {
+      "key": "trochanteric_fossa",
+      "label": "Trochanteric fossa",
+      "role": "part",
+      "group": "Bone",
+      "layer": "bone",
+      "render": "anchor",
+      "color": "#f0b93f",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.358,
+          0.523,
+          0.906
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT point between the femur and obturator externus (FMA22326), gap 0.23 mm — one witness, no convergence check possible, because obturator externus is the only muscle that reaches the fossa. It sits medial to the greater trochanter anchor (u 0.358 vs 0.129) and at the same height (w 0.906 vs 0.933), which is where the fossa belongs. tools/derive-landmark.mjs --parent FMA24474 --contact FMA22326",
+      "terms": [
+        "trochanteric fossa",
+        "obturator externus",
+        "medial side of the greater trochanter"
+      ],
+      "narration": "The pit on the medial side of the greater trochanter. Obturator externus lands here, and nothing else does."
+    },
+    {
+      "key": "quadrate_tubercle",
+      "label": "Quadrate tubercle",
+      "role": "part",
+      "group": "Bone",
+      "layer": "bone",
+      "render": "anchor",
+      "color": "#e0a832",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.393,
+          0.631,
+          0.815
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT point between the femur and quadratus femoris (FMA22338), gap 0.02 mm — one witness, but the tightest contact measured on this bone, and it is the most posterior of the four anchors (v 0.631), which is where the intertrochanteric crest runs. tools/derive-landmark.mjs --parent FMA24474 --contact FMA22338",
+      "terms": [
+        "quadrate tubercle",
+        "intertrochanteric crest",
+        "quadratus femoris"
+      ],
+      "narration": "The rounded swelling at the midpoint of the intertrochanteric crest, behind. Quadratus femoris attaches here."
+    },
+    {
+      "key": "lesser_trochanter",
+      "label": "Lesser trochanter",
+      "role": "part",
+      "group": "Bone",
+      "layer": "bone",
+      "render": "anchor",
+      "color": "#d19a2c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.457,
+          0.452,
+          0.774
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT point between the femur and psoas major (FMA22342), gap 0.87 mm — ONE witness, and the weakest of the four. Iliacus (FMA22322) was tried as a second witness and rejected: adding it scatters the pair over 77.8 mm (17.7% of the bone) and drags the mean to v=0.234, far anterior, because iliacus spreads down the front of the shaft below the trochanter. The psoas-only point sits just below and medial to the quadrate tubercle (w 0.774 vs 0.815), which is the correct relation. tools/derive-landmark.mjs --parent FMA24474 --contact FMA22342",
+      "terms": [
+        "lesser trochanter",
+        "iliopsoas",
+        "hip flexion"
+      ],
+      "narration": "Points backwards and medially. Iliopsoas alone attaches here, and it is that pull that flexes and externally rotates the shaft once the neck is broken."
     },
     {
       "key": "glut_med",
@@ -491,7 +570,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur_upper_end",
+          "target": "femur",
           "intensity": 0.9
         }
       ],
@@ -508,7 +587,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur_upper_end",
+          "target": "femur",
           "intensity": 0.95
         },
         {
@@ -516,7 +595,7 @@
           "view": "anterior"
         }
       ],
-      "narration": "From the top down: the head, smooth and spherical, with the fovea on its medial side. Then the neck, running down and out. Then the greater trochanter laterally and the lesser trochanter pointing backwards and medially. Joining them in front, the intertrochanteric line; the pit between the crest and the neck behind is the trochanteric fossa. Learn these six names before you learn anything attached to them."
+      "narration": "From the top down: the head, smooth and spherical, with the fovea on its medial side. Then the neck, running down and out. Then the greater trochanter laterally and the lesser trochanter pointing backwards and medially — both marked here, and both measured on the bone rather than guessed. Joining them in front, the intertrochanteric line. Learn those six names — head, fovea, neck, greater trochanter, lesser trochanter, intertrochanteric line — before you learn anything attached to them. The two features that face backwards wait for the next beat."
     },
     {
       "mode": "location",
@@ -529,7 +608,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur_upper_end",
+          "target": "femur",
           "intensity": 0.95
         },
         {
@@ -537,7 +616,7 @@
           "view": "posterior"
         }
       ],
-      "narration": "Turn it round. The intertrochanteric crest behind is sharper than the line in front, and carries the rounded quadrate tubercle at its midpoint. Below it the gluteal tuberosity runs down into the linea aspera. The front and the back look different enough that a question can show you one view and expect you to say which it is."
+      "narration": "Turn it round, and the two features that were hidden a moment ago come into view. The intertrochanteric crest behind is sharper than the line in front, and carries the rounded quadrate tubercle at its midpoint — marked. Medial to the greater trochanter, between it and the neck, is the pit of the trochanteric fossa — also marked. Below the crest the gluteal tuberosity runs down into the linea aspera; that one is a roughening rather than a point, so it is named on the bone and not marked. The front and the back look different enough that a question can show you one view and expect you to say which it is."
     },
     {
       "mode": "mechanism",
@@ -578,7 +657,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur_upper_end",
+          "target": "femur",
           "intensity": 0.85
         }
       ],
@@ -641,7 +720,7 @@
             "ext_iliac_artery",
             "quadratus_femoris",
             "obturator_externus",
-            "femur_upper_end"
+            "femur"
           ],
           "duration": 10
         },
@@ -671,7 +750,7 @@
           "path": [
             "int_iliac_artery",
             "hip_bone",
-            "femur_upper_end"
+            "femur"
           ],
           "duration": 8
         },
@@ -708,7 +787,7 @@
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "hip_bone",
-          "to": "femur_upper_end",
+          "to": "femur",
           "kind": "capsule"
         },
         {
@@ -786,7 +865,8 @@
     }
   ],
   "gaps": [
-    "The head, neck, greater trochanter, lesser trochanter, trochanteric fossa, intertrochanteric line and crest, quadrate tubercle and gluteal tuberosity are all sub-features of a single whole-femur mesh. Every one of them is taught by lighting the femur and naming the feature. This scene is the strongest case in the corpus so far for measured landmark anchors, and they were not attempted here because an anchor placed by eye would be worse than none.",
+    "The head, neck, greater trochanter, lesser trochanter, trochanteric fossa, intertrochanteric line and crest, quadrate tubercle and gluteal tuberosity are all sub-features of a single whole-femur mesh (FMA24474). FOUR of them are now measured landmark anchors — greater trochanter, trochanteric fossa, quadrate tubercle, lesser trochanter — each with its measurement in calibrated_by and each status 'needs-review'. Only the greater trochanter has more than one witness; the other three are single-contact measurements, which the tool reports as such.",
+    "Five features were NOT authored as anchors, and the reason is recorded so no later run re-derives them and believes the result. GLUTEAL TUBEROSITY: the contact with gluteus maximus (FMA22328) measures at w=0.630, a third of the way down the shaft, and at v=0.438 rather than posteriorly — the nearest point of that mesh to the bone is where its distal fibres lie against the shaft, not where its deep quarter inserts. The measurement is clean (gap 0.55 mm) and anatomically wrong, which is exactly the case an anchor must not be authored from. HEAD: the contact with the hip bone (gap 1.02 mm, u=0.664, w=0.977) is correct but marks a region, not a point, and the head needs no marker. FOVEA, INTERTROCHANTERIC LINE and INTERTROCHANTERIC CREST: each is a facet or a ridge, not a point, and neither of derive-landmark.mjs's two definitions — contact, extreme — describes a ridge. They stay named-on-the-bone.",
     "The femoral artery, the profunda femoris and the medial and lateral circumflex femoral arteries have no models. The retinacular supply of the head — the single most examinable fact about this bone — is authored as a traced concept path from the external iliac artery through the plane between quadratus femoris and obturator externus onto the femur, with the named branches carried in narration.",
     "The obturator artery and its acetabular branch have no models either, so the artery of the ligament of the head is traced as a concept from the internal iliac artery across the hip bone.",
     "There is no ligament of the head of the femur, no capsule and no retinaculum in the catalog, so the capsular attachment that separates an intracapsular from an extracapsular fracture is shown with a relationship connector and a cut plane rather than as a surface.",
@@ -796,6 +876,8 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

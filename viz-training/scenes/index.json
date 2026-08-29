@@ -10355,7 +10355,7 @@
       "topic": "Arm (Brachium)",
       "structure": "Brachial artery",
       "learning_goal": "Trace the brachial artery from the lower border of teres major to its division in the cubital fossa, name its branches in order, place the median nerve against it at every level, and say why a supracondylar fracture threatens the forearm.",
-      "gaps": 7,
+      "gaps": 8,
       "match": {
         "topics": [
           "arm",
@@ -10533,7 +10533,7 @@
         "deep artery of the arm": "br_profunda",
         "radial groove": "br_profunda",
         "spiral groove": "br_profunda",
-        "radial nerve": "br_profunda",
+        "radial nerve": "radial_nerve",
         "radial collateral artery": "br_profunda",
         "middle collateral artery": "br_profunda",
         "nutrient artery of the humerus": "br_nutrient",
@@ -10561,6 +10561,8 @@
         "crosses in front of the artery": "median_nerve",
         "posterior compartment": "ulnar_nerve",
         "medial epicondyle": "ulnar_nerve",
+        "lateral to the biceps tendon": "radial_nerve",
+        "between brachialis and brachioradialis": "radial_nerve",
         "venae comitantes": "venae",
         "brachial veins": "venae",
         "basilic vein": "venae",
@@ -10593,7 +10595,7 @@
         "triceps medial head": "triceps_medial"
       },
       "counts": {
-        "structures": 24,
+        "structures": 25,
         "parts": 17,
         "views": 7
       }
@@ -10613,7 +10615,7 @@
       "topic": "Arm (Brachium)",
       "structure": "Humerus",
       "learning_goal": "Point to every named part of the humerus on the bone, and say which nerve is at risk at each of the four places it commonly breaks.",
-      "gaps": 4,
+      "gaps": 6,
       "match": {
         "topics": [
           "arm",
@@ -10645,7 +10647,11 @@
           "axillary nerve",
           "radial nerve",
           "ulnar nerve",
-          "supracondylar fracture"
+          "supracondylar fracture",
+          "supracondylar region",
+          "median nerve",
+          "brachial artery",
+          "volkmann s ischaemic contracture"
         ]
       },
       "parts": [
@@ -10688,6 +10694,11 @@
           "key": "radial_groove",
           "label": "Radial groove",
           "group": "Shaft"
+        },
+        {
+          "key": "supracondylar_region",
+          "label": "Supracondylar region",
+          "group": "Distal end"
         },
         {
           "key": "medial_epicondyle",
@@ -10759,6 +10770,12 @@
         "radial nerve": "radial_groove",
         "profunda brachii artery": "radial_groove",
         "wrist drop": "radial_groove",
+        "supracondylar region": "supracondylar_region",
+        "supracondylar fracture": "supracondylar_region",
+        "median nerve": "supracondylar_region",
+        "brachial artery": "supracondylar_region",
+        "volkmann s ischaemic contracture": "supracondylar_region",
+        "children": "supracondylar_region",
         "medial epicondyle": "medial_epicondyle",
         "common flexor origin": "medial_epicondyle",
         "ulnar nerve": "medial_epicondyle",
@@ -10774,8 +10791,8 @@
         "capitulum": "capitulum"
       },
       "counts": {
-        "structures": 15,
-        "parts": 12,
+        "structures": 16,
+        "parts": 13,
         "views": 7
       }
     },
@@ -10794,7 +10811,7 @@
       "topic": "Arm (Brachium)",
       "structure": "Median, ulnar & radial nerves",
       "learning_goal": "Follow each of the three nerves through the arm, name the bony point where each is injured, and work out from a wrist drop, a claw hand or a hand of benediction which nerve has been cut and at what level.",
-      "gaps": 7,
+      "gaps": 8,
       "match": {
         "topics": [
           "arm",
@@ -11110,7 +11127,7 @@
       "topic": "Axilla & Brachial Plexus",
       "structure": "Axillary artery",
       "learning_goal": "State where the axillary artery begins and ends, divide it into three parts by pectoralis minor, name the one, two and three branches of each part, and say where the vessel can safely be tied.",
-      "gaps": 6,
+      "gaps": 9,
       "match": {
         "topics": [
           "axilla",
@@ -11155,6 +11172,17 @@
           "axillary vein",
           "cords of the brachial plexus",
           "ligation of the axillary artery",
+          "axillary nerve",
+          "triangular space",
+          "clavipectoral fascia",
+          "surgical neck of humerus",
+          "intertubercular groove",
+          "latissimus dorsi",
+          "serratus anterior",
+          "suprascapular artery",
+          "dorsal scapular artery",
+          "brachiocephalic trunk",
+          "arch of the aorta",
           "screw the lawyer save a patient"
         ]
       },
@@ -11310,7 +11338,7 @@
       "topic": "Axilla & Brachial Plexus",
       "structure": "Axillary lymph nodes",
       "learning_goal": "Name the five anatomical groups of axillary nodes and say what each one drains, convert them into the surgeon's three levels using pectoralis minor, and use both to explain sentinel node biopsy, axillary clearance and the three nerves that can be injured doing it.",
-      "gaps": 8,
+      "gaps": 11,
       "match": {
         "topics": [
           "axilla",
@@ -11366,7 +11394,18 @@
           "axillary tail of spence",
           "quadrants of the breast",
           "tnm staging",
-          "n stage"
+          "n stage",
+          "axillary vein",
+          "pectoralis major",
+          "coracoid process",
+          "subscapularis",
+          "serratus anterior",
+          "latissimus dorsi",
+          "cephalic vein",
+          "supratrochlear nodes",
+          "iliac crest",
+          "lateral thoracic vessels",
+          "subscapular vessels"
         ]
       },
       "parts": [
@@ -11402,8 +11441,8 @@
         },
         {
           "key": "interpectoral",
-          "label": "Interpectoral nodes (Rotter's)",
-          "group": "The five groups"
+          "label": "Interpectoral nodes (Rotter's) — the sixth group",
+          "group": "The extra group"
         },
         {
           "key": "level1",
@@ -11506,7 +11545,7 @@
         "interpectoral nodes": "interpectoral",
         "rotter s nodes": "interpectoral",
         "between pectoralis major and minor": "interpectoral",
-        "interpectoral nodes rotter s": "interpectoral",
+        "interpectoral nodes rotter s the sixth group": "interpectoral",
         "low axilla": "level1",
         "lateral to pectoralis minor": "level1",
         "level i lateral to pectoralis minor": "level1",
@@ -11574,7 +11613,7 @@
       "topic": "Axilla & Brachial Plexus",
       "structure": "Axillary vein",
       "learning_goal": "State where the axillary vein begins and ends, name what forms it and what drains into it, place it correctly against the artery and the cords at every level, and explain the three things that go wrong with it — air embolism, effort thrombosis, and lymphoedema after clearance.",
-      "gaps": 7,
+      "gaps": 10,
       "match": {
         "topics": [
           "axilla",
@@ -11626,7 +11665,22 @@
           "central line",
           "mondor disease",
           "caput medusae of the chest wall",
-          "superior vena cava obstruction"
+          "superior vena cava obstruction",
+          "scalenus anterior",
+          "scalene tubercle",
+          "phrenic nerve",
+          "clavicle",
+          "suprasternal notch",
+          "cervical pleura",
+          "pneumothorax",
+          "internal jugular vein",
+          "superficial epigastric vein",
+          "deltoid",
+          "pectoralis major",
+          "subscapularis",
+          "sternoclavicular joint",
+          "apical group of axillary nodes",
+          "lateral pectoral nerve"
         ]
       },
       "parts": [
@@ -11826,7 +11880,7 @@
       "topic": "Axilla & Brachial Plexus",
       "structure": "Brachial plexus",
       "learning_goal": "Draw the plexus from roots to terminal branches, name the root value of each branch, and work out from any lesion which muscles and which patch of skin will fail.",
-      "gaps": 6,
+      "gaps": 7,
       "match": {
         "topics": [
           "axilla",
@@ -12280,6 +12334,21 @@
           "group": "Landmarks"
         },
         {
+          "key": "facet_superior",
+          "label": "Greater tubercle — superior facet",
+          "group": "Landmarks"
+        },
+        {
+          "key": "facet_middle",
+          "label": "Greater tubercle — middle facet",
+          "group": "Landmarks"
+        },
+        {
+          "key": "facet_inferior",
+          "label": "Greater tubercle — inferior facet",
+          "group": "Landmarks"
+        },
+        {
           "key": "lesser_tubercle",
           "label": "Lesser tubercle",
           "group": "Landmarks"
@@ -12337,11 +12406,23 @@
         "deltoid spinal part": "deltoid_spinal",
         "spinal part of right deltoid": "deltoid_spinal",
         "greater tuberosity": "greater_tubercle",
+        "superior facet": "facet_superior",
+        "superior facet of greater tubercle": "facet_superior",
+        "supraspinatus insertion": "facet_superior",
+        "greater tubercle superior facet": "facet_superior",
+        "middle facet": "facet_middle",
+        "middle facet of greater tubercle": "facet_middle",
+        "infraspinatus insertion": "facet_middle",
+        "greater tubercle middle facet": "facet_middle",
+        "inferior facet": "facet_inferior",
+        "inferior facet of greater tubercle": "facet_inferior",
+        "teres minor insertion": "facet_inferior",
+        "greater tubercle inferior facet": "facet_inferior",
         "lesser tuberosity": "lesser_tubercle"
       },
       "counts": {
-        "structures": 11,
-        "parts": 6,
+        "structures": 14,
+        "parts": 9,
         "views": 7
       }
     },
@@ -12360,7 +12441,7 @@
       "topic": "Back & Vertebral Column",
       "structure": "Erector spinae / deep back muscles",
       "learning_goal": "Name the three columns of erector spinae from lateral to medial, strip the back down to them layer by layer, and say what bilateral and unilateral contraction each layer produces.",
-      "gaps": 7,
+      "gaps": 9,
       "match": {
         "topics": [
           "back",
@@ -12495,12 +12576,12 @@
         {
           "key": "levatores_longi",
           "label": "Levatores costarum longi",
-          "group": "Transversospinalis"
+          "group": "Levatores costarum"
         },
         {
           "key": "levatores_breves",
           "label": "Levatores costarum breves",
-          "group": "Transversospinalis"
+          "group": "Levatores costarum"
         },
         {
           "key": "splenius_capitis",
@@ -13443,7 +13524,7 @@
         {
           "key": "sacrum",
           "label": "Sacrum",
-          "group": "Sacrum"
+          "group": "Sacrum & coccyx"
         },
         {
           "key": "coccyx",
@@ -13666,6 +13747,21 @@
           "group": "Floor"
         },
         {
+          "key": "scaphoid_tubercle",
+          "label": "Tubercle of the scaphoid",
+          "group": "Retinacular attachments"
+        },
+        {
+          "key": "trapezium_tubercle",
+          "label": "Tubercle of the trapezium",
+          "group": "Retinacular attachments"
+        },
+        {
+          "key": "hamate_hook",
+          "label": "Hook of the hamate",
+          "group": "Retinacular attachments"
+        },
+        {
           "key": "fds_humeroulnar",
           "label": "Flexor digitorum superficialis — humeroulnar head",
           "group": "Contents — tendons"
@@ -13727,11 +13823,11 @@
         "roof of the carpal tunnel": "flexor_retinaculum",
         "flexor retinaculum of right wrist": "flexor_retinaculum",
         "scaphoid": "scaphoid",
-        "tubercle of scaphoid": "scaphoid",
+        "tubercle of scaphoid": "scaphoid_tubercle",
         "lateral pillar": "scaphoid",
         "right scaphoid": "scaphoid",
         "trapezium": "trapezium",
-        "tubercle of trapezium": "trapezium",
+        "tubercle of trapezium": "trapezium_tubercle",
         "groove for flexor carpi radialis": "trapezium",
         "right trapezium": "trapezium",
         "pisiform": "pisiform",
@@ -13739,8 +13835,8 @@
         "sesamoid bone": "pisiform",
         "right pisiform": "pisiform",
         "hamate": "hamate",
-        "hook of hamate": "hamate",
-        "guyon s canal": "hamate",
+        "hook of hamate": "hamate_hook",
+        "guyon s canal": "hamate_hook",
         "right hamate": "hamate",
         "lunate": "lunate",
         "floor of the carpal tunnel": "lunate",
@@ -13756,6 +13852,15 @@
         "trapezoid": "trapezoid",
         "distal row": "trapezoid",
         "right trapezoid": "trapezoid",
+        "scaphoid tubercle": "scaphoid_tubercle",
+        "proximal lateral attachment of the flexor retinaculum": "scaphoid_tubercle",
+        "tubercle of the scaphoid": "scaphoid_tubercle",
+        "trapezial ridge": "trapezium_tubercle",
+        "distal lateral attachment of the flexor retinaculum": "trapezium_tubercle",
+        "tubercle of the trapezium": "trapezium_tubercle",
+        "hamulus": "hamate_hook",
+        "distal medial attachment of the flexor retinaculum": "hamate_hook",
+        "hook of the hamate": "hamate_hook",
         "flexor digitorum superficialis": "fds_humeroulnar",
         "fds": "fds_humeroulnar",
         "four tendons": "fds_humeroulnar",
@@ -13821,8 +13926,8 @@
         "right fifth metacarpal bone": "mc5"
       },
       "counts": {
-        "structures": 25,
-        "parts": 20,
+        "structures": 28,
+        "parts": 23,
         "views": 10
       }
     },
@@ -14057,7 +14162,7 @@
       "topic": "Forearm & Hand",
       "structure": "Flexor compartment of forearm",
       "learning_goal": "Name the three layers of the flexor compartment, say what each muscle moves, and tell flexor digitorum superficialis from profundus by the phalanx its tendon ends on.",
-      "gaps": 4,
+      "gaps": 5,
       "match": {
         "topics": [
           "forearm",
@@ -14200,12 +14305,15 @@
         "flexor retinaculum": "flexor_retinaculum",
         "transverse carpal ligament": "flexor_retinaculum",
         "roof of the carpal tunnel": "flexor_retinaculum",
+        "carpal tunnel": "flexor_retinaculum",
+        "median nerve": "pronator_teres_ulnar",
         "flexor retinaculum of right wrist": "flexor_retinaculum",
         "pronator teres": "pronator_teres_humeral",
         "humeral head of pronator teres": "pronator_teres_humeral",
         "pronator teres humeral head": "pronator_teres_humeral",
         "humeral head of right pronator teres": "pronator_teres_humeral",
         "ulnar head of pronator teres": "pronator_teres_ulnar",
+        "pronator syndrome": "pronator_teres_ulnar",
         "pronator teres ulnar head": "pronator_teres_ulnar",
         "ulnar head of right pronator teres": "pronator_teres_ulnar",
         "flexor carpi radialis": "fcr",
@@ -14453,6 +14561,11 @@
         "ip extension": "lumbricals",
         "lumbrical plus": "lumbricals",
         "set of lumbricals of right hand": "lumbricals",
+        "fdp": "fdp",
+        "lumbrical origin": "fdp",
+        "extrinsic muscle": "fdp",
+        "flexor digitorum profundus extrinsic": "fdp",
+        "right flexor digitorum profundus": "fdp",
         "palmar interossei": "palmar_interossei",
         "pad": "palmar_interossei",
         "adduction": "palmar_interossei",
@@ -14525,7 +14638,7 @@
         "proximal phalanx of right little finger": "pp_little"
       },
       "counts": {
-        "structures": 28,
+        "structures": 29,
         "parts": 13,
         "views": 12
       }
@@ -14547,7 +14660,7 @@
       "topic": "Forearm & Hand",
       "structure": "Radius & ulna",
       "learning_goal": "Tell the radius from the ulna at either end, name the parts of each, and explain how the radius turns over the ulna at two joints to pronate and supinate the hand.",
-      "gaps": 5,
+      "gaps": 6,
       "match": {
         "topics": [
           "forearm",
@@ -14883,6 +14996,16 @@
           "key": "quadratus_femoris",
           "label": "Quadratus femoris",
           "group": "Gluteal floor"
+        },
+        {
+          "key": "greater_trochanter",
+          "label": "Greater trochanter",
+          "group": "Bony frame"
+        },
+        {
+          "key": "lesser_trochanter",
+          "label": "Lesser trochanter",
+          "group": "Bony frame"
         }
       ],
       "terms": {
@@ -14951,30 +15074,33 @@
         "pudendal canal": "obturator_internus",
         "right obturator internus": "obturator_internus",
         "quadratus femoris": "quadratus_femoris",
-        "cruciate anastomosis": "quadratus_femoris",
+        "cruciate anastomosis": "lesser_trochanter",
         "medial circumflex femoral artery": "quadratus_femoris",
-        "trochanteric anastomosis": "quadratus_femoris",
+        "trochanteric anastomosis": "greater_trochanter",
         "right quadratus femoris": "quadratus_femoris",
         "hip bone": "hip_bone",
         "greater sciatic notch": "hip_bone",
         "ischial spine": "hip_bone",
         "posterior superior iliac spine": "hip_bone",
         "pelvic fracture": "hip_bone",
-        "greater trochanter": "hip_bone",
+        "greater trochanter": "greater_trochanter",
         "right hip bone": "hip_bone",
         "sacrum": "sacrum",
         "sacrotuberous ligament": "sacrum",
         "pressure sore": "sacrum",
         "femur": "femur",
-        "trochanteric fossa": "femur",
+        "trochanteric fossa": "greater_trochanter",
         "retinacular vessels": "femur",
         "head of the femur": "femur",
         "avascular necrosis": "femur",
-        "right femur": "femur"
+        "right femur": "femur",
+        "surface marking of the superior gluteal artery": "greater_trochanter",
+        "lesser trochanter": "lesser_trochanter",
+        "level of the cruciate anastomosis": "lesser_trochanter"
       },
       "counts": {
-        "structures": 17,
-        "parts": 10,
+        "structures": 19,
+        "parts": 12,
         "views": 10
       }
     },
@@ -15114,6 +15240,11 @@
           "key": "adductor_magnus",
           "label": "Adductor magnus",
           "group": "Hamstrings"
+        },
+        {
+          "key": "greater_trochanter",
+          "label": "Greater trochanter",
+          "group": "Bony frame"
         }
       ],
       "terms": {
@@ -15136,7 +15267,7 @@
         "gluteus medius": "glut_med",
         "abduction": "glut_med",
         "trendelenburg": "glut_med",
-        "greater trochanter": "glut_med",
+        "greater trochanter": "greater_trochanter",
         "upper outer quadrant": "glut_med",
         "right gluteus medius": "glut_med",
         "gluteus minimus": "glut_min",
@@ -15191,12 +15322,14 @@
         "sacrotuberous ligament": "sacrum",
         "origin of gluteus maximus": "sacrum",
         "femur": "femur",
-        "trochanteric bursa": "femur",
-        "right femur": "femur"
+        "trochanteric bursa": "greater_trochanter",
+        "right femur": "femur",
+        "trochanteric bursitis": "greater_trochanter",
+        "palpable landmark of the buttock": "greater_trochanter"
       },
       "counts": {
-        "structures": 17,
-        "parts": 14,
+        "structures": 18,
+        "parts": 15,
         "views": 12
       }
     },
@@ -15297,6 +15430,16 @@
         {
           "key": "femoral_head",
           "label": "Head of femur",
+          "group": "Landmarks"
+        },
+        {
+          "key": "greater_trochanter",
+          "label": "Greater trochanter",
+          "group": "Landmarks"
+        },
+        {
+          "key": "lesser_trochanter",
+          "label": "Lesser trochanter",
           "group": "Landmarks"
         },
         {
@@ -15426,14 +15569,19 @@
         "head of femur": "femoral_head",
         "fovea capitis": "femur",
         "neck of femur": "femur",
-        "greater trochanter": "femur",
-        "lesser trochanter": "femur",
-        "intertrochanteric line": "femur",
+        "greater trochanter": "greater_trochanter",
+        "lesser trochanter": "lesser_trochanter",
+        "intertrochanteric line": "lesser_trochanter",
         "intertrochanteric crest": "femur",
         "neck shaft angle": "femur",
         "right femur": "femur",
         "femoral head": "femoral_head",
         "the ball": "femoral_head",
+        "trochanteric fossa": "greater_trochanter",
+        "palpable landmark of the hip": "greater_trochanter",
+        "abductor insertion": "greater_trochanter",
+        "insertion of iliopsoas": "lesser_trochanter",
+        "extracapsular": "lesser_trochanter",
         "sacrum": "sacrum",
         "sacroiliac joint": "sacrum",
         "weight transmission": "sacrum",
@@ -15532,12 +15680,11 @@
         "quadrate tubercle": "quadratus_femoris",
         "right quadratus femoris": "quadratus_femoris",
         "obturator externus": "obturator_externus",
-        "trochanteric fossa": "obturator_externus",
         "right obturator externus": "obturator_externus"
       },
       "counts": {
-        "structures": 28,
-        "parts": 26,
+        "structures": 30,
+        "parts": 28,
         "views": 13
       }
     },
@@ -15558,7 +15705,7 @@
       "topic": "Gluteal Region & Hip Joint",
       "structure": "Proximal femur",
       "learning_goal": "Name every landmark on the upper end of the femur and the muscle attached to each, trace the retinacular blood supply of the head, and explain why an intracapsular fracture of the neck causes avascular necrosis while an intertrochanteric fracture does not.",
-      "gaps": 7,
+      "gaps": 8,
       "match": {
         "topics": [
           "proximal femur",
@@ -15627,9 +15774,24 @@
           "group": "Bone"
         },
         {
-          "key": "femur_upper_end",
-          "label": "Upper end of the femur",
-          "group": "Landmarks"
+          "key": "greater_trochanter",
+          "label": "Greater trochanter",
+          "group": "Bone"
+        },
+        {
+          "key": "trochanteric_fossa",
+          "label": "Trochanteric fossa",
+          "group": "Bone"
+        },
+        {
+          "key": "quadrate_tubercle",
+          "label": "Quadrate tubercle",
+          "group": "Bone"
+        },
+        {
+          "key": "lesser_trochanter",
+          "label": "Lesser trochanter",
+          "group": "Bone"
         },
         {
           "key": "glut_med",
@@ -15717,24 +15879,28 @@
         "head of femur": "femur",
         "fovea capitis": "femur",
         "neck of femur": "femur",
-        "greater trochanter": "femur",
-        "lesser trochanter": "femur",
-        "trochanteric fossa": "femur",
+        "greater trochanter": "greater_trochanter",
+        "lesser trochanter": "lesser_trochanter",
+        "trochanteric fossa": "trochanteric_fossa",
         "intertrochanteric line": "femur",
-        "intertrochanteric crest": "femur",
-        "quadrate tubercle": "femur",
+        "intertrochanteric crest": "quadrate_tubercle",
+        "quadrate tubercle": "quadrate_tubercle",
         "gluteal tuberosity": "femur",
         "linea aspera": "femur",
         "right femur": "femur",
-        "upper end": "femur_upper_end",
-        "proximal femur": "femur_upper_end",
-        "upper end of the femur": "femur_upper_end",
         "hip bone": "hip_bone",
         "acetabulum": "hip_bone",
         "ischial tuberosity": "gemellus_inf",
         "obturator foramen": "hip_bone",
         "greater sciatic foramen": "hip_bone",
         "right hip bone": "hip_bone",
+        "trochanteric bursitis": "greater_trochanter",
+        "palpable landmark of the hip": "greater_trochanter",
+        "obturator externus": "obturator_externus",
+        "medial side of the greater trochanter": "trochanteric_fossa",
+        "quadratus femoris": "quadratus_femoris",
+        "iliopsoas": "lesser_trochanter",
+        "hip flexion": "lesser_trochanter",
         "gluteus medius": "glut_med",
         "lateral surface of greater trochanter": "glut_med",
         "abduction": "glut_med",
@@ -15756,15 +15922,11 @@
         "right gemellus superior": "gemellus_sup",
         "gemellus inferior": "gemellus_inf",
         "right gemellus inferior": "gemellus_inf",
-        "obturator externus": "obturator_externus",
         "under the neck": "obturator_externus",
         "obturator nerve": "obturator_externus",
         "right obturator externus": "obturator_externus",
-        "quadratus femoris": "quadratus_femoris",
         "right quadratus femoris": "quadratus_femoris",
         "psoas major": "psoas",
-        "iliopsoas": "psoas",
-        "hip flexion": "psoas",
         "right psoas major": "psoas",
         "iliacus": "iliacus",
         "femoral nerve": "iliacus",
@@ -15802,8 +15964,8 @@
         "right external iliac vein": "ext_iliac_vein"
       },
       "counts": {
-        "structures": 20,
-        "parts": 18,
+        "structures": 23,
+        "parts": 21,
         "views": 11
       }
     },
@@ -15824,7 +15986,7 @@
       "topic": "Gluteal Region & Hip Joint",
       "structure": "Sciatic nerve",
       "learning_goal": "Trace the sciatic nerve from the greater sciatic foramen to the popliteal fossa naming what it lies on at every step, mark its course on a patient, say what each of its two divisions supplies, and work out from a foot drop or a flail foot where the nerve has been damaged.",
-      "gaps": 9,
+      "gaps": 10,
       "match": {
         "topics": [
           "gluteal region",
@@ -15920,6 +16082,31 @@
           "group": "Roof"
         },
         {
+          "key": "ischial_tuberosity",
+          "label": "Ischial tuberosity",
+          "group": "Bony frame"
+        },
+        {
+          "key": "ischial_spine",
+          "label": "Ischial spine",
+          "group": "Bony frame"
+        },
+        {
+          "key": "psis",
+          "label": "Posterior superior iliac spine",
+          "group": "Bony frame"
+        },
+        {
+          "key": "greater_trochanter",
+          "label": "Greater trochanter",
+          "group": "Bony frame"
+        },
+        {
+          "key": "neck_of_fibula",
+          "label": "Neck of the fibula",
+          "group": "Bony frame"
+        },
+        {
           "key": "biceps_long",
           "label": "Biceps femoris — long head",
           "group": "Tibial division"
@@ -15992,21 +16179,21 @@
       ],
       "terms": {
         "piriformis": "piriformis",
-        "greater sciatic foramen": "piriformis",
+        "greater sciatic foramen": "ischial_spine",
         "key to the gluteal region": "piriformis",
         "below piriformis": "piriformis",
         "piriformis syndrome": "piriformis",
         "right piriformis": "piriformis",
         "gemellus superior": "gemellus_sup",
-        "ischial spine": "gemellus_sup",
+        "ischial spine": "ischial_spine",
         "floor of the gluteal region": "gemellus_sup",
         "right gemellus superior": "gemellus_sup",
         "obturator internus": "obturator_internus",
         "tendon of obturator internus": "obturator_internus",
-        "lesser sciatic foramen": "obturator_internus",
+        "lesser sciatic foramen": "ischial_spine",
         "right obturator internus": "obturator_internus",
         "gemellus inferior": "gemellus_inf",
-        "ischial tuberosity": "gemellus_inf",
+        "ischial tuberosity": "ischial_tuberosity",
         "right gemellus inferior": "gemellus_inf",
         "quadratus femoris": "quadratus_femoris",
         "the nerve lies on quadratus femoris": "quadratus_femoris",
@@ -16023,24 +16210,31 @@
         "right gluteus medius": "glut_med",
         "hip bone": "hip_bone",
         "greater sciatic notch": "hip_bone",
-        "posterior superior iliac spine": "hip_bone",
+        "posterior superior iliac spine": "psis",
         "acetabulum": "hip_bone",
         "right hip bone": "hip_bone",
         "sacrum": "sacrum",
         "sacral plexus": "sacrum",
         "anterior sacral foramina": "sacrum",
         "femur": "femur",
-        "greater trochanter": "femur",
+        "greater trochanter": "greater_trochanter",
         "posterior dislocation of the hip": "femur",
         "back of the femur": "femur",
         "right femur": "femur",
         "fibula": "fibula",
-        "neck of the fibula": "fibula",
-        "common fibular nerve": "fibula",
-        "common peroneal nerve": "fibula",
-        "tight plaster": "fibula",
-        "foot drop": "tibialis_anterior",
+        "neck of the fibula": "neck_of_fibula",
+        "common fibular nerve": "neck_of_fibula",
+        "common peroneal nerve": "neck_of_fibula",
+        "tight plaster": "neck_of_fibula",
+        "foot drop": "neck_of_fibula",
         "right fibula": "fibula",
+        "hamstring origin": "ischial_tuberosity",
+        "midway between the ischial tuberosity and the greater trochanter": "ischial_tuberosity",
+        "sacrospinous ligament": "ischial_spine",
+        "psis": "psis",
+        "dimple of venus": "psis",
+        "surface marking of the sciatic nerve": "psis",
+        "palpable landmark of the hip": "greater_trochanter",
         "long head of biceps femoris": "biceps_long",
         "hamstring": "biceps_long",
         "crosses the sciatic nerve": "biceps_long",
@@ -16108,8 +16302,8 @@
         "right fibularis brevis": "fibularis_brevis"
       },
       "counts": {
-        "structures": 25,
-        "parts": 20,
+        "structures": 30,
+        "parts": 25,
         "views": 12
       }
     },
@@ -16128,7 +16322,7 @@
       "topic": "Heart & Pericardium",
       "structure": "Conducting system",
       "learning_goal": "Trace the impulse from the sinoatrial node to the Purkinje fibres, name where each part lies and what it contributes to the ECG, and predict which rhythm fails when a named coronary artery is blocked.",
-      "gaps": 6,
+      "gaps": 9,
       "match": {
         "topics": [
           "heart",
@@ -16390,7 +16584,7 @@
       "topic": "Heart & Pericardium",
       "structure": "Heart chambers",
       "learning_goal": "Identify each of the four chambers in a cut heart by its own wall markings, name what enters and leaves it, and explain why the left ventricle is thick and the right is thin.",
-      "gaps": 6,
+      "gaps": 7,
       "match": {
         "topics": [
           "heart",
@@ -16649,7 +16843,7 @@
       "topic": "Heart & Pericardium",
       "structure": "Heart",
       "learning_goal": "Know the heart's valves, its own blood supply, and the great vessels entering and leaving it.",
-      "gaps": 3,
+      "gaps": 7,
       "match": {
         "topics": [
           "heart",
@@ -16812,6 +17006,10 @@
         "acute marginal": "marginal",
         "marginal branch of right coronary artery": "marginal",
         "great cardiac vein": "great_cardiac_vein",
+        "anterior interventricular artery": "great_cardiac_vein",
+        "left anterior descending artery": "great_cardiac_vein",
+        "lad": "great_cardiac_vein",
+        "anterior interventricular groove": "great_cardiac_vein",
         "coronary sinus": "coronary_sinus",
         "right lung": "lung_ul_r",
         "upper lobe": "lung_ul_r",
@@ -16820,16 +17018,23 @@
         "lower lobe": "lung_ll_r",
         "right lung lower lobe": "lung_ll_r",
         "lower lobe of right lung": "lung_ll_r",
+        "middle lobe": "lung_ml_r",
+        "middle lobe of right lung": "lung_ml_r",
+        "right lung middle lobe": "lung_ml_r",
+        "middle lobe of lung": "lung_ml_r",
         "left lung": "lung_ul_l",
         "left lung upper lobe": "lung_ul_l",
         "upper lobe of left lung": "lung_ul_l",
         "left lung lower lobe": "lung_ll_l",
         "lower lobe of left lung": "lung_ll_l",
+        "diaphragm": "diaphragm",
+        "central tendon": "diaphragm",
+        "diaphragmatic surface of the heart": "diaphragm",
         "trachea": "trachea",
         "windpipe": "trachea"
       },
       "counts": {
-        "structures": 24,
+        "structures": 26,
         "parts": 18,
         "views": 5
       }
@@ -16851,7 +17056,7 @@
       "topic": "Kidney & Posterior Abdominal Wall",
       "structure": "Abdominal aorta & IVC",
       "learning_goal": "Say where the aorta enters the abdomen and where it ends, list its three unpaired midline branches and their vertebral levels with the gut segments they feed, list the paired lateral branches, say where the cava is formed and where it leaves, name its tributaries and the three asymmetries between right and left, and use those levels and relations to explain an aneurysm, a caval obstruction and why the two vessels are approached differently at operation.",
-      "gaps": 9,
+      "gaps": 13,
       "match": {
         "topics": [
           "abdominal aorta",
@@ -17132,9 +17337,8 @@
         "leriche syndrome": "right_common_iliac_artery",
         "right common iliac artery the end of the aorta": "right_common_iliac_artery",
         "left common iliac artery": "left_common_iliac_artery",
-        "right common iliac vein": "right_common_iliac_vein",
-        "may thurner": "left_common_iliac_artery",
-        "crosses the vein": "left_common_iliac_artery",
+        "left external iliac artery": "left_common_iliac_artery",
+        "left internal iliac artery": "left_common_iliac_artery",
         "external iliac artery": "right_external_iliac_artery",
         "femoral artery": "right_external_iliac_artery",
         "inguinal ligament": "right_external_iliac_artery",
@@ -17159,6 +17363,7 @@
         "left varicocele": "left_renal_vein",
         "retroaortic renal vein": "left_renal_vein",
         "left renal vein crosses the aorta": "left_renal_vein",
+        "right common iliac vein": "right_common_iliac_vein",
         "formation of the ivc": "right_common_iliac_vein",
         "union of the common iliac veins": "right_common_iliac_vein",
         "almost vertical": "right_common_iliac_vein",
@@ -17212,14 +17417,24 @@
         "azygos vein": "diaphragm",
         "cisterna chyli": "diaphragm",
         "diaphragm two openings two levels": "diaphragm",
+        "twelfth thoracic vertebra": "t12",
+        "vertebral levels": "t12",
+        "twelfth thoracic vertebra the aortic hiatus the coeliac trunk": "t12",
+        "second lumbar vertebra": "l2",
+        "gonadal artery": "l2",
+        "testicular artery": "l2",
+        "ovarian artery": "l2",
+        "second lumbar vertebra the gonadal arteries": "l2",
+        "third lumbar vertebra": "l3",
+        "third lumbar vertebra the inferior mesenteric artery": "l3",
         "first lumbar vertebra": "l1",
         "renal arteries": "l1",
-        "vertebral levels": "l1",
         "first lumbar vertebra the transpyloric plane": "l1",
         "fourth lumbar vertebra": "l4",
         "iliac crest": "l4",
         "fourth lumbar vertebra the bifurcation": "l4",
         "fifth lumbar vertebra": "l5",
+        "may thurner": "l5",
         "common iliac veins": "l5",
         "fifth lumbar vertebra the cava is formed": "l5",
         "psoas major": "right_psoas",
@@ -17244,13 +17459,18 @@
         "tumour thrombus": "right_kidney",
         "caval extension": "right_kidney",
         "right kidney a lateral relation": "right_kidney",
+        "duodenum": "duodenum",
+        "superior mesenteric artery syndrome": "duodenum",
+        "bile duct": "duodenum",
+        "foregut midgut junction": "duodenum",
+        "duodenum the third part crosses in front of the aorta": "duodenum",
         "left kidney": "left_kidney",
         "aorta": "left_kidney"
       },
       "counts": {
-        "structures": 31,
+        "structures": 35,
         "parts": 14,
-        "views": 5
+        "views": 6
       }
     },
     {

@@ -393,13 +393,15 @@
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: CONTACT — coccygeus arises from the ischial spine (gaps 0.34mm · 1 witness)",
       "calibration_gap_mm": 0.34,
       "terms": [
         "ischial spine"
       ],
-      "narration": "In the pelvis the ureter runs downwards and backwards on the lateral wall, in front of the internal iliac artery, as far as the ischial spine. There it turns sharply forwards and medially to reach the bladder. That right-angled turn at the spine is the single most useful landmark for finding the pelvic ureter at operation, and it is where the ureter is closest to the structures that endanger it."
+      "narration": "In the pelvis the ureter runs downwards and backwards on the lateral wall, in front of the internal iliac artery, as far as the ischial spine. There it turns sharply forwards and medially to reach the bladder. That right-angled turn at the spine is the single most useful landmark for finding the pelvic ureter at operation, and it is where the ureter is closest to the structures that endanger it.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "right_common_iliac_artery",

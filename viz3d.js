@@ -2022,7 +2022,11 @@
     function filterList(q) {
       q = norm(q || '');
       Array.prototype.forEach.call(host.querySelectorAll('.mb3d-part'), function (b) {
-        var t = norm(b.textContent || '');
+        /* Match the NAME, not the description under it. Searching "coracoid" used to keep pectoralis
+           minor in the list — its narration says the muscle inserts on the coracoid — and since it sits
+           higher in the list, Enter opened the muscle instead of the process the student asked for. */
+        var lab = b.querySelector('b');
+        var t = norm((lab ? lab.textContent : b.textContent) || '');
         b.style.display = (!q || t.indexOf(q) >= 0) ? '' : 'none';
       });
       Array.prototype.forEach.call(host.querySelectorAll('.mb3d-grp'), function (g) { g.style.display = q ? 'none' : ''; });

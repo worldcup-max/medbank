@@ -429,19 +429,21 @@
       "anchor": {
         "on": "right_hip_bone",
         "uvw": [
-          0.5108,
-          0.2141,
-          0.3644
+          0.3162,
+          0.3412,
+          0.66
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
-      "calibrated_by": "geometry: CONTACT — iliacus fills the fossa (gaps 0.33mm · 1 witness)",
+      "status": "ok",
+      "calibrated_by": "geometry: CONTACT AREA — iliacus lines the whole fossa, so the anchor is the centroid of the 122 hip-bone vertices lying within 3 mm of the muscle, not the single nearest corner of the contact (closest approach 0.33 mm)",
       "calibration_gap_mm": 0.33,
       "terms": [
         "iliac fossa"
       ],
-      "narration": "The smooth concave inner surface of the ilium is the iliac fossa, and iliacus lines it."
+      "narration": "The smooth concave inner surface of the ilium is the iliac fossa, and iliacus lines it.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "right_femur",
@@ -479,13 +481,15 @@
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: CONTACT — psoas major inserts on the lesser trochanter (gaps 0.87mm · 1 witness)",
       "calibration_gap_mm": 0.87,
       "terms": [
         "lesser trochanter"
       ],
-      "narration": "Iliopsoas ends on the lesser trochanter, on the back and medial side of the upper femur. Because the tendon pulls the femur forwards and rotates it laterally, an avulsion fracture of the lesser trochanter in an adult is a red flag: the bone that gave way is usually weakened by a metastasis."
+      "narration": "Iliopsoas ends on the lesser trochanter, on the back and medial side of the upper femur. Because the tendon pulls the femur forwards and rotates it laterally, an avulsion fracture of the lesser trochanter in an adult is a red flag: the bone that gave way is usually weakened by a metastasis.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "right_inguinal_ligament",

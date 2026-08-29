@@ -522,13 +522,15 @@
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: CONTACT — coccygeus arises from the ischial spine (gaps 0.34mm · 1 witness)",
       "calibration_gap_mm": 0.34,
       "terms": [
         "ischial spine"
       ],
-      "narration": "The back anchor: the ischial spine, where the tendinous arch ends and coccygeus arises."
+      "narration": "The back anchor: the ischial spine, where the tendinous arch ends and coccygeus arises.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "pubis_body",
@@ -546,14 +548,16 @@
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: CONTACT — pubococcygeus arises from the body of the pubis (gaps 0.56mm · 1 witness)",
       "calibration_gap_mm": 0.56,
       "terms": [
         "pubis",
         "body of the pubis"
       ],
-      "narration": "The front anchor: the back of the body of the pubis, where the tendinous arch begins."
+      "narration": "The front anchor: the back of the body of the pubis, where the tendinous arch begins.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "left_hip_bone",

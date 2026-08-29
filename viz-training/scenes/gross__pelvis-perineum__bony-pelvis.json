@@ -259,14 +259,16 @@
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: CONTACT — the angle is the L5/S1 junction (gaps 1.48mm · 1 witness)",
       "calibration_gap_mm": 1.48,
       "terms": [
         "lumbosacral angle",
         "sacral promontory"
       ],
-      "narration": "The pelvis is tilted, not upright: the plane of the inlet makes an angle of about sixty degrees with the horizontal in the standing position, and the lumbar column meets the sacrum at a sharp lumbosacral angle. That angle is the reason L5 tends to slip forwards on the sacrum in spondylolisthesis, and it is held back mainly by the iliolumbar ligaments running from the L5 transverse process to the iliac crest."
+      "narration": "The pelvis is tilted, not upright: the plane of the inlet makes an angle of about sixty degrees with the horizontal in the standing position, and the lumbar column meets the sacrum at a sharp lumbosacral angle. That angle is the reason L5 tends to slip forwards on the sacrum in spondylolisthesis, and it is held back mainly by the iliolumbar ligaments running from the L5 transverse process to the iliac crest.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "right_femur",

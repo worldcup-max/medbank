@@ -143,13 +143,15 @@
         ],
         "radius": 0.02
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: EXTREME +x within z:0,0.2 — the medial malleolus is the most medial point of the lower tibia (right leg: medial is +X) (EXTREME +x within z:0,0.2 · 189.7mm from centroid)",
       "calibration_gap_mm": 0,
       "terms": [
         "medial malleolus"
       ],
-      "narration": "The medial malleolus comes down as the inner wall. It is short — it reaches only to about the middle of the medial side of the talus."
+      "narration": "The medial malleolus comes down as the inner wall. It is short — it reaches only to about the middle of the medial side of the talus.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "fibula",
@@ -186,13 +188,15 @@
         ],
         "radius": 0.02
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: EXTREME -z — the lateral malleolus is the lowest point of the fibula (EXTREME -z · 177.3mm from centroid)",
       "calibration_gap_mm": 0,
       "terms": [
         "lateral malleolus"
       ],
-      "narration": "The lateral malleolus descends about two centimetres lower than the medial one and lies slightly further back. That extra length is a bony block against eversion, and it is the reason the foot turns inwards far more easily than it turns out."
+      "narration": "The lateral malleolus descends about two centimetres lower than the medial one and lies slightly further back. That extra length is a bony block against eversion, and it is the reason the foot turns inwards far more easily than it turns out.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "iom",

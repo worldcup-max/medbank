@@ -315,21 +315,23 @@
       "anchor": {
         "on": "humerus",
         "uvw": [
-          0.54,
-          0.2783,
-          0.7341
+          0.5698,
+          0.2745,
+          0.7775
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
-      "calibrated_by": "geometry: CONTACT — both heads of pectoralis major insert on the lateral lip of the groove (gaps 0.17mm, 0.39mm · spread 31.18mm)",
-      "calibration_gap_mm": 0.17,
+      "status": "ok",
+      "calibrated_by": "geometry: CONTACT within the proximal quarter of the humerus (z:0.72,1) — both heads of pectoralis major reach the lateral lip beside the tubercles there, and restricted to that slab the two agree to 4.1 mm (gaps 0.97 mm, 0.39 mm)",
+      "calibration_gap_mm": 0.39,
       "terms": [
         "bicipital groove",
         "intertubercular groove",
         "lateral lip"
       ],
-      "narration": "All three heads converge on the lateral lip of the bicipital groove. Remember the three muscles of the groove: pectoralis major on the lateral lip, teres major on the medial lip, latissimus dorsi on the floor."
+      "narration": "All three heads converge on the lateral lip of the bicipital groove. Remember the three muscles of the groove: pectoralis major on the lateral lip, teres major on the medial lip, latissimus dorsi on the floor.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "pec_minor",

@@ -169,7 +169,7 @@
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: the point on the scapula where pectoralis minor, coracobrachialis and the short head of biceps all make contact (gaps 0.20, 0.16 and 0.14 mm; the three agree to within 12.8 mm on a 158 mm bone)",
       "calibration_gap_mm": 0.2,
       "terms": [
@@ -177,7 +177,9 @@
         "medial border of coracoid",
         "coracoid"
       ],
-      "narration": "The insertion is the medial border and upper surface of the coracoid process, the hook of bone at the top of this blade. Because the muscle pulls on the coracoid and not on the humerus, it moves the scapula, never the arm."
+      "narration": "The insertion is the medial border and upper surface of the coracoid process, the hook of bone at the top of this blade. Because the muscle pulls on the coracoid and not on the humerus, it moves the scapula, never the arm.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "pec_major_sternocostal",

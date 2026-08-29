@@ -261,19 +261,21 @@
       "anchor": {
         "on": "femur",
         "uvw": [
-          0.8405,
-          1,
-          0.051
+          0.5041,
+          0.6656,
+          0.1168
         ],
-        "radius": 0.03
+        "radius": 0.02
       },
-      "status": "needs-review",
-      "calibrated_by": "geometry: EXTREME +y within z:0,0.25 — the popliteal surface is the posterior aspect of the lower femur (EXTREME +y within z:0,0.25 · 195.6mm from centroid)",
-      "calibration_gap_mm": 0,
+      "status": "ok",
+      "calibrated_by": "geometry: CONTACT — the two heads of gastrocnemius arise from the supracondylar lines that flank the popliteal surface, so the midpoint between them is the surface (gaps 0.25 mm, 0.66 mm; the two origins lie 52 mm apart on a 440 mm bone)",
+      "calibration_gap_mm": 0.25,
       "terms": [
         "popliteal surface"
       ],
-      "narration": "The upper part of the floor is the flat popliteal surface of the femur between the two supracondylar lines. The artery lies directly on this bone. That is why a supracondylar fracture of the femur is an emergency: the lower fragment is pulled backwards by gastrocnemius, straight into the vessel."
+      "narration": "The upper part of the floor is the flat popliteal surface of the femur between the two supracondylar lines. The artery lies directly on this bone. That is why a supracondylar fracture of the femur is an emergency: the lower fragment is pulled backwards by gastrocnemius, straight into the vessel.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "tibia",
@@ -303,19 +305,21 @@
       "anchor": {
         "on": "tibia",
         "uvw": [
-          0.7251,
-          1,
-          0.9518
+          0.5783,
+          0.6399,
+          0.8235
         ],
-        "radius": 0.03
+        "radius": 0.018
       },
-      "status": "needs-review",
-      "calibrated_by": "geometry: EXTREME +y within z:0.7,1 — the floor of the fossa is the posterior aspect of the upper tibia (EXTREME +y within z:0.7,1 · 138.8mm from centroid)",
-      "calibration_gap_mm": 0,
+      "status": "ok",
+      "calibrated_by": "geometry: CONTACT — popliteus covers the posterior surface of the upper tibia, the floor of the fossa below the joint line (gap 0.23 mm)",
+      "calibration_gap_mm": 0.23,
       "terms": [
         "posterior surface of the tibia"
       ],
-      "narration": "Below the joint the floor becomes the back of the tibia, covered by popliteus and then by the fascia over it. The soleal line on this surface gives origin to soleus, whose upper tendinous arch is where the fossa ends."
+      "narration": "Below the joint the floor becomes the back of the tibia, covered by popliteus and then by the fascia over it. The soleal line on this surface gives origin to soleus, whose upper tendinous arch is where the fossa ends.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "fibula",

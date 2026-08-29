@@ -329,7 +329,7 @@
       "name": "set of right levatores costarum longi",
       "label": "Levatores costarum longi",
       "role": "part",
-      "group": "Transversospinalis",
+      "group": "Levatores costarum",
       "layer": "muscle",
       "color": "#7a6aa0",
       "refs": {
@@ -346,7 +346,7 @@
       "name": "set of right levatores costarum breves",
       "label": "Levatores costarum breves",
       "role": "part",
-      "group": "Transversospinalis",
+      "group": "Levatores costarum",
       "layer": "muscle",
       "color": "#8a7ab0",
       "refs": {
@@ -570,13 +570,15 @@
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: CONTACT — iliocostalis lumborum arises from the crest (gaps 0.16mm · 1 witness)",
       "calibration_gap_mm": 0.16,
       "terms": [
         "iliac crest"
       ],
-      "narration": "The rest of the origin: the medial part of the iliac crest and the sacroiliac ligaments."
+      "narration": "The rest of the origin: the medial part of the iliac crest and the sacroiliac ligaments.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "rib6",
@@ -610,14 +612,16 @@
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: CONTACT — iliocostalis thoracis inserts on the rib angles (gaps 0.35mm · 1 witness)",
       "calibration_gap_mm": 0.35,
       "terms": [
         "angle of the rib",
         "rib angle"
       ],
-      "narration": "Iliocostalis works along the angles of the ribs, which is the line of bone you can feel two finger-breadths lateral to the spines."
+      "narration": "Iliocostalis works along the angles of the ribs, which is the line of bone you can feel two finger-breadths lateral to the spines.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
       "key": "rib12",
@@ -684,14 +688,16 @@
         ],
         "radius": 0.018
       },
-      "status": "needs-review",
+      "status": "ok",
       "calibrated_by": "geometry: CONTACT — longissimus capitis inserts on the mastoid (gaps 0.22mm · 1 witness)",
       "calibration_gap_mm": 0.22,
       "terms": [
         "mastoid process",
         "mastoid"
       ],
-      "narration": "Longissimus capitis and splenius capitis both end on the mastoid process."
+      "narration": "Longissimus capitis and splenius capitis both end on the mastoid process.",
+      "reviewed_by": "claude/in-viewer 2026-08-28",
+      "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     }
   ],
   "views": [
@@ -764,6 +770,10 @@
         },
         {
           "op": "HIDE_STRUCTURE",
+          "target": "Levatores costarum"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
           "target": "Splenius"
         },
         {
@@ -809,7 +819,7 @@
           "view": "posterior"
         }
       ],
-      "narration": "Compare them at the same thoracic level. Iliocostalis is a flat lateral strap on the rib angles. Longissimus is the thick belly in the middle and the only column that reaches the skull. Spinalis is a thin ribbon hugging the spines, and it is often hard to separate on a real cadaver. Each column has a lumborum, thoracis and cervicis part where the region allows it."
+      "narration": "Compare them at the same thoracic level. Iliocostalis is a flat lateral strap on the rib angles. Longissimus is the thick belly in the middle and the only column that reliably reaches the skull. Spinalis is a thin ribbon hugging the spines, and it is often hard to separate on a real cadaver. Each column has a lumborum, thoracis and cervicis part where the region allows it."
     },
     {
       "mode": "cross_section",
@@ -847,6 +857,10 @@
           "target": "Transversospinalis"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "Levatores costarum"
+        },
+        {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "multifidus",
           "intensity": 0.8
@@ -862,7 +876,7 @@
           "view": "posterior"
         }
       ],
-      "narration": "Deep to erector spinae is the transversospinal group. Every fibre in it runs from a transverse process upward and medially to a spinous process, which is the opposite slope to splenius. Three muscles, one plan, sorted by how far each one travels. Semispinalis crosses four to six segments, multifidus two to four, rotatores one to two. The shorter the muscle, the less it moves and the more it senses and stabilises."
+      "narration": "Deep to erector spinae is the transversospinal group. Every fibre in it runs from a transverse process upward and medially to a spinous process, which is the opposite slope to splenius. Three muscles, one plan, sorted by how far each one travels. Semispinalis crosses four to six segments, multifidus two to four, rotatores one to two. The shorter the muscle, the less it moves and the more it senses and stabilises. Two more slips lie in the same plane and are not part of that group at all: the levatores costarum, long and short, which run from a transverse process down to a rib. They sit here by depth, but they lift ribs, so count three transversospinal muscles and treat the levatores as neighbours."
     },
     {
       "mode": "contraction_filter",
@@ -955,7 +969,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "There is no mesh called 'erector spinae'. The catalog's smallest units are the nine named parts of the three columns, so the muscle is taught by assembling them — option (a) of the resolve rule, a more specific sibling that does exist. The consequence is that the common tendon of origin, the single sheet from which all three columns rise, has no model and is narrated over the sacrum and hip bone.",
@@ -964,6 +980,8 @@
     "No nerves. The whole teaching point of this scene — that intrinsic back muscles are supplied by dorsal rami and extrinsic ones are not — cannot be shown, only said. The catalog holds two optic nerves and nothing else.",
     "The rotatores exist as 'thoracic rotator', one unsided mesh covering both sides, while the cervical and lumbar rotators are sided. The scene is otherwise built on the right side, so that one model is labelled as a bilateral pair rather than silently left to look like a right-sided muscle.",
     "Interspinales and intertransversarii are in the catalog only as unsided sets. They are genuine deep back muscles but would render across the midline in a right-sided scene, so they are omitted here and named in the narration instead.",
-    "PEEL_LAYER is not authored. The layer vocabulary in the spec runs skin, fascia, muscle, vessel, organ, bone — it cannot name the three dissection layers this structure is actually taught in (superficial extrinsic, intermediate, deep intrinsic), and every muscle here is layer 'muscle', so a peel would clear the whole scene at once. The layer dissection is authored with HIDE_STRUCTURE on groups instead, which is native and does exactly what the teaching needs. If the layer vocabulary ever gains dissection depth, beats 2 and 3 become PEEL_LAYER with no other edit."
+    "PEEL_LAYER is not authored. The layer vocabulary in the spec runs skin, fascia, muscle, vessel, organ, bone — it cannot name the three dissection layers this structure is actually taught in (superficial extrinsic, intermediate, deep intrinsic), and every muscle here is layer 'muscle', so a peel would clear the whole scene at once. The layer dissection is authored with HIDE_STRUCTURE on groups instead, which is native and does exactly what the teaching needs. If the layer vocabulary ever gains dissection depth, beats 2 and 3 become PEEL_LAYER with no other edit.",
+    "AUDIT 2026-08-29. The levatores costarum were filed in the 'Transversospinalis' group, so beat 6 isolated that group, put five kinds of muscle on screen and narrated 'three muscles, one plan'. They are deep back muscles by position but they are not transversospinal — they run from a transverse process DOWN to a rib and they elevate ribs. They now have their own group, beat 3 hides it alongside the transversospinal group, and beat 6 shows it and names it as the exception rather than leaving it silently in shot.",
+    "AUDIT 2026-08-29. Beat 4 said longissimus is 'the only column that reaches the skull'; it now says 'reliably reaches'. Spinalis capitis does exist anatomically and would be a second one, but it is inconstant and usually inseparable from semispinalis capitis, and it has no mesh — which gaps[1] already records. The two statements now agree."
   ]
 }

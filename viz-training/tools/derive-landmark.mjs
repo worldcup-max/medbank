@@ -7,6 +7,7 @@
  *   node viz-training/tools/derive-landmark.mjs --parent FMA24474 --contact FMA22342 --name "lesser trochanter"
  *   node viz-training/tools/derive-landmark.mjs --parent FMA24480 --extreme -z --name "lateral malleolus"
  *   node viz-training/tools/derive-landmark.mjs --parent FMA24477 --extreme +x --slab z:0,0.15 --name "medial malleolus"
+ *   node viz-training/tools/derive-landmark.mjs --parent FMA16586 --contact FMA22322 --area 3 --name "iliac fossa"
  *   ... --json          machine-readable, for the batch runner
  *
  * ---- the two definitions ----
@@ -53,26 +54,45 @@ export function loadMesh(id) {
 const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
 const mean = ps => [0, 1, 2].map(a => ps.reduce((s, p) => s + p[a], 0) / ps.length);
 
-/* nearest point ON parent to other, and the gap */
-export function contactPoint(parent, other) {
-  let best = null;
-  for (const p of parent.v) for (const q of other.v) {
-    const d = (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2 + (p[2] - q[2]) ** 2;
-    if (!best || d < best.d2) best = { d2: d, p };
+function slabPool(parent, slab) {
+  if (!slab) return parent.v;
+  const b = bbox(parent.v);
+  const [ax, range] = slab.split(':');
+  const [f, t] = range.split(',').map(Number);
+  const i = AXIS[ax], lo = b.lo[i] + b.size[i] * f, hi = b.lo[i] + b.size[i] * t;
+  const pool = parent.v.filter(p => p[i] >= lo && p[i] <= hi);
+  if (!pool.length) throw new Error('slab ' + slab + ' contains no vertices');
+  return pool;
+}
+/* Nearest point ON parent to other, and the gap.
+ *
+ * `area` changes what is returned, and it matters for a broad attachment. Iliacus does not touch the
+ * hip bone at a point — it lines the whole iliac fossa — so the single nearest vertex lands wherever
+ * the two meshes happen to come closest, which was at the fossa's lower edge by the brim. With `area`,
+ * every parent vertex lying within that many millimetres of the other mesh is collected and their
+ * centroid is returned: the middle of the contact PATCH rather than its nearest corner. Use it for
+ * surfaces (a fossa, a facet); leave it off for a point (a tubercle, a joint). */
+export function contactPoint(parent, other, opts = {}) {
+  const pool = slabPool(parent, opts.slab);
+  let best = null; const dists = [];
+  for (const p of pool) {
+    let m = Infinity;
+    for (const q of other.v) {
+      const d = (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2 + (p[2] - q[2]) ** 2;
+      if (d < m) m = d;
+    }
+    dists.push({ p, mm: Math.sqrt(m) });
+    if (!best || m < best.d2) best = { d2: m, p };
   }
-  return { p: best.p, mm: Math.sqrt(best.d2) };
+  if (!opts.area) return { p: best.p, mm: Math.sqrt(best.d2) };
+  const near = dists.filter(d => d.mm <= opts.area);
+  if (!near.length) return { p: best.p, mm: Math.sqrt(best.d2), area: 0 };
+  const c = [0, 1, 2].map(a => near.reduce((s, d) => s + d.p[a], 0) / near.length);
+  return { p: c, mm: Math.sqrt(best.d2), area: near.length };
 }
 export function extremePoint(parent, dirSpec, slab) {
   const sign = dirSpec[0] === '-' ? -1 : 1, ax = AXIS[dirSpec.slice(-1)];
-  const b = bbox(parent.v);
-  let pool = parent.v;
-  if (slab) {
-    const [a2, range] = slab.split(':');
-    const [f, t] = range.split(',').map(Number);
-    const i = AXIS[a2], lo = b.lo[i] + b.size[i] * f, hi = b.lo[i] + b.size[i] * t;
-    pool = parent.v.filter(p => p[i] >= lo && p[i] <= hi);
-    if (!pool.length) throw new Error('slab ' + slab + ' contains no vertices');
-  }
+  const pool = slabPool(parent, slab);
   let best = null;
   for (const p of pool) { const val = p[ax] * sign; if (!best || val > best.val) best = { val, p }; }
   return { p: best.p, pool: pool.length };
@@ -86,13 +106,15 @@ export function derive(opts) {
                          longAxis: 'xyz'[B.size.indexOf(Math.max(...B.size))] } };
   let point, radius = 0.02;
   if (opts.contact && opts.contact.length) {
-    const cs = opts.contact.map(id => ({ id, ...contactPoint(parent, loadMesh(id)) }));
+    const cs = opts.contact.map(id => ({ id, ...contactPoint(parent, loadMesh(id), { area: opts.area, slab: opts.slab }) }));
     const worst = Math.max(...cs.map(c => c.mm));
     const pts = cs.map(c => c.p);
     const spread = pts.length < 2 ? 0 : Math.max(...pts.flatMap((a, i) => pts.slice(i + 1).map(b => dist(a, b))));
     out.method = 'CONTACT';
     out.evidence = { gaps_mm: cs.map(c => ({ [c.id]: +c.mm.toFixed(2) })), spread_mm: +spread.toFixed(2),
                      witnesses: cs.length };
+    if (opts.area) out.evidence.contact_area_verts = cs.map(c => c.area);
+    if (opts.slab) out.evidence.within = opts.slab;
     if (worst > 3) { out.refused = 'contact gap ' + worst.toFixed(2) + ' mm — the surfaces do not meet there'; return out; }
     if (spread > span * 0.25) { out.refused = 'contacts scatter over ' + spread.toFixed(1) + ' mm of a ' + span.toFixed(0) + ' mm bone'; return out; }
     point = mean(pts);
@@ -112,7 +134,8 @@ export function derive(opts) {
 if (import.meta.url === 'file://' + process.argv[1]) {
   const o = derive({ parent: arg('parent'), name: arg('name'),
                      contact: (arg('contact') || '').split(',').filter(Boolean),
-                     extreme: arg('extreme'), slab: arg('slab'), radius: arg('radius') });
+                     extreme: arg('extreme'), slab: arg('slab'), radius: arg('radius'),
+                     area: arg('area') ? parseFloat(arg('area')) : null });
   if (process.argv.includes('--json')) { console.log(JSON.stringify(o, null, 2)); process.exit(o.refused ? 1 : 0); }
   console.log((o.name || 'landmark') + '  on ' + o.parent + '  ·  ' + o.span + ' mm, ' + o.frame.side + ', long axis ' + o.frame.longAxis);
   console.log('  ' + (o.method || ''));
