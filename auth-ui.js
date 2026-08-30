@@ -411,11 +411,19 @@
       '#mbAcct .gear{width:26px;height:26px;flex:0 0 26px;border:0;border-radius:7px;background:none;',
       '  color:var(--dimmer,#8b84a0);font-size:13.5px;cursor:pointer;display:grid;place-items:center}',
       '#mbAcct .gear:hover{background:var(--panel2,#f1eefb);color:var(--text,#1c1830)}',
-      '#mbAcct .meta{display:flex;align-items:center;gap:7px;margin:7px 0 0;padding-left:1px}',
+      '#mbAcct .meta{display:flex;flex-direction:column;gap:2px;margin:7px 0 0;padding-left:1px}',
+      '#mbAcct .meta .r1{display:flex;align-items:center;gap:7px;margin-top:3px}',
+      '#mbAcct .meta .lvl{font-size:11.5px;color:var(--dim,#5c5570);line-height:1.35;min-width:0;',
+      '  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
       '#mbAcct .meta .sch{font-size:11.5px;color:var(--dim,#5c5570);line-height:1.35;min-width:0;',
       '  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}',
       '#mbAcct .meta b{color:var(--text,#1c1830);font-weight:650}',
       '#mbAcct .meta .add{color:var(--accent,#5b21b6);font-weight:650}',
+      '#mbAcct .schin{width:100%;font:inherit;font-size:11.5px;color:var(--text,#1c1830);',
+      '  background:var(--panel2,#f1eefb);border:1px solid var(--accent,#5b21b6);border-radius:7px;',
+      '  padding:3px 7px;outline:none}',
+      '#mbAcct .meta .add{cursor:pointer}',
+      '#mbAcct .meta .add:hover{text-decoration:underline}',
       '#mbAcct .pill{font-size:9.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;',
       '  border-radius:20px;padding:2px 7px;white-space:nowrap;flex:0 0 auto}',
       '#mbAcct .pill.ok{color:var(--recall,#0d9488);background:color-mix(in srgb,var(--recall,#0d9488) 14%,transparent)}',
@@ -437,6 +445,36 @@
     }catch(_){ return ''; }
   }
 
+  /* the school slot doubles as its own tiny editor until school lands in the profile model */
+  function wireSchool(host){
+    var t=host.querySelector('[data-school]'); if(!t) return;
+    t.onclick=function(e){
+      e.stopPropagation();
+      var inp=document.createElement('input');
+      inp.type='text'; inp.placeholder='e.g. University of Lagos';
+      inp.setAttribute('aria-label','Your school');
+      inp.className='schin';
+      inp.value=schoolOf();
+      host.innerHTML=''; host.appendChild(inp);
+      inp.focus();
+      inp.onclick=function(ev){ ev.stopPropagation(); };
+      function save(){
+        var v=(inp.value||'').trim();
+        try{
+          if(v){ localStorage.setItem('mb_school', v); if(window.MB_USER) window.MB_USER.school=v; }
+          else localStorage.removeItem('mb_school');
+        }catch(_){}
+        updateChip();
+      }
+      inp.onkeydown=function(ev){
+        ev.stopPropagation();
+        if(ev.key==='Enter'){ save(); }
+        else if(ev.key==='Escape'){ updateChip(); }
+      };
+      inp.onblur=save;
+    };
+  }
+
   function ensureChip(){
     if(chip||typeof document==="undefined") return;
     var side=document.getElementById('sidebar'); if(!side) return;
@@ -447,7 +485,8 @@
       '<div class="top"><span class="tile">\u2601</span>'
       + '<span class="who"><span class="nm">Not signed in</span><span class="em">This device only</span></span>'
       + '<button class="gear" type="button" title="Settings" aria-label="Settings">\u2699</button></div>'
-      + '<div class="meta"><span class="sch"></span><span class="pill no">\u26a0 Not syncing</span></div>';
+      + '<div class="meta"><span class="sch"></span><span class="lvl"></span>'
+      + '<div class="r1"><span class="pill no">\u26a0 Not syncing</span></div></div>';
     chip.onclick=function(e){ e.stopPropagation(); toggleMenu(); };
     chip.querySelector('.gear').onclick=function(e){
       e.stopPropagation(); closeMenu(); if(window.go) go('settings');
@@ -460,7 +499,7 @@
     if(!chip) return;
     var sb=client(); if(!sb){ chip.style.display="none"; return; }
     var nm=chip.querySelector('.nm'), em=chip.querySelector('.em'),
-        sch=chip.querySelector('.sch'),
+        sch=chip.querySelector('.sch'), lvl=chip.querySelector('.lvl'),
         pill=chip.querySelector('.pill');
     try{
       var ses=await sb.auth.getSession();
@@ -474,16 +513,19 @@
         }catch(_){}
         var st=(window.MB_SYNC&&MB_SYNC.status)?(MB_SYNC.status()||{}):{};
         var school=schoolOf();
-        var bits=[];
-        if(school) bits.push('<b>'+esc(school)+'</b>');
-        if(st.level) bits.push('<b>'+esc(st.level)+' level</b>');
-        sch.innerHTML = bits.length ? bits.join(' \u00b7 ')
-                                    : '<span class="add">\uff0b Add your school</span>';
+        // the school slot is ALWAYS present — a prompt until the student fills it in
+        sch.innerHTML = school ? ('\ud83c\udfeb <b>'+esc(school)+'</b>')
+                               : '<span class="add" data-school>\uff0b Add your school</span>';
+        wireSchool(sch);
+        lvl.innerHTML = st.level ? ('\ud83c\udf93 <b>'+esc(st.level)+' level</b>') : '';
+        lvl.style.display = st.level ? '' : 'none';
         pill.className = 'pill ' + (st.syncing ? 'ok' : 'no');
         pill.textContent = st.syncing ? '\u2713 Synced' : '\u26a0 Not syncing';
       } else {
         nm.textContent="Not signed in"; em.textContent="Progress stays on this device";
-        sch.innerHTML='<span class="add">Sign in to sync</span>';
+        sch.innerHTML='<span class="add" data-school>\uff0b Add your school</span>';
+        wireSchool(sch);
+        lvl.innerHTML=''; lvl.style.display='none';
         pill.className='pill no'; pill.textContent='\u26a0 Not syncing';
         try{ window.MB_USER=null; localStorage.removeItem("mb_user_name"); }catch(_){}
       }
