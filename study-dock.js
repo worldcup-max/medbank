@@ -9,7 +9,7 @@
  * ===================================================================== */
 (function () {
   if (typeof window === "undefined" || typeof document === "undefined") return;
-  var V = "#5b21b6", INK = "#1c1830", DIM = "#5c5570", LINE = "#e6e3f0", TINT = "#f6f3fe";
+  var V = "#5b21b6", INK = "#1c1830", DIM = "var(--dim)", LINE = "var(--line)", TINT = "var(--panel2)";
 
   var tab=null, drawer=null, scrim=null, injected=false;
   var active="ask";                 // ask | source | note
@@ -77,7 +77,7 @@
       "@media(prefers-reduced-motion:reduce){.mbdock-live{animation:none;background:rgba(255,214,64,.6)}}"+
       "#mbDockScrim{position:fixed;inset:0;z-index:100000;background:rgba(28,20,45,.4);opacity:0;transition:opacity .2s;pointer-events:none}"+
       "#mbDockScrim.on{opacity:1;pointer-events:auto}"+
-      "#mbDock{position:fixed;top:0;right:0;bottom:0;z-index:100001;width:min(420px,92vw);background:#fff;box-shadow:-14px 0 44px rgba(28,20,45,.25);"+
+      "#mbDock{position:fixed;top:0;right:0;bottom:0;z-index:100001;width:min(420px,92vw);background:var(--card,#fff);box-shadow:-14px 0 44px rgba(28,20,45,.25);"+
         "transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:"+INK+"}"+
       "#mbDock.on{transform:translateX(0)}"+
       /* desktop: pinned side panel that pushes content instead of overlaying */
@@ -90,7 +90,7 @@
       "#mbDock .dfoot{border-top:1px solid "+LINE+";padding:10px 12px calc(env(safe-area-inset-bottom,0px) + 10px)}"+
       "#mbDock .bub{max-width:88%;padding:10px 12px;border-radius:13px;margin:8px 0;font-size:14px;line-height:1.5;white-space:normal}"+
       "#mbDock .bub.u{background:"+V+";color:#fff;margin-left:auto;border-bottom-right-radius:4px}"+
-      "#mbDock .bub.a{background:#f2eefb;color:"+INK+";border-bottom-left-radius:4px}"+
+      "#mbDock .bub.a{background:var(--panel2);color:"+INK+";border-bottom-left-radius:4px}"+
       "#mbDock .bub.a p{margin:.4em 0}"+
       "#mbDock textarea,#mbDock input{width:100%;box-sizing:border-box;border:1px solid "+LINE+";border-radius:11px;padding:11px;font-size:15px;font-family:inherit;color:"+INK+"}"+
       "#mbDock .dsend{margin-top:8px;width:100%;border:0;border-radius:11px;background:"+V+";color:#fff;font-weight:800;padding:12px;font-size:14px;cursor:pointer}"+
@@ -202,7 +202,7 @@
         var lines=tr.querySelectorAll(".trline"), pick=null;
         for(var i=0;i<lines.length;i++){ if((+lines[i].getAttribute("data-t")) <= hlT+1) pick=lines[i]; else break; }
         if(!pick && lines.length) pick=lines[0];
-        if(pick){ pick.style.transition="background .5s"; pick.style.background="#efe7fd";
+        if(pick){ pick.style.transition="background .5s"; pick.style.background="var(--panel2)";
           try{ pick.scrollIntoView({block:"center",behavior:"smooth"}); }catch(_){ pick.scrollIntoView(); }
           setTimeout(function(){ pick.style.background="transparent"; }, 2600); }
       }, 90);
