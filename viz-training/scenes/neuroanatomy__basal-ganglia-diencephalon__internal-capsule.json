@@ -1,0 +1,559 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__basal-ganglia-diencephalon__internal-capsule",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Basal Ganglia & Diencephalon",
+  "structure": "Internal capsule",
+  "covers": [
+    "Internal capsule"
+  ],
+  "learning_goal": "Find the internal capsule by its neighbours rather than by its own outline — anterior limb between caudate head and lentiform nucleus, genu at the bend, posterior limb between thalamus and lentiform nucleus — then use that map to say which fibres a lesion at each point would cut, and why a few millimetres of damage here costs a whole half of the body.",
+  "status": "candidate",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "internal capsule",
+      "white matter",
+      "stroke",
+      "lacunar infarct",
+      "neuroimaging orientation"
+    ],
+    "terms": [
+      "internal capsule",
+      "anterior limb of internal capsule",
+      "genu of internal capsule",
+      "posterior limb of internal capsule",
+      "retrolentiform part",
+      "sublentiform part",
+      "corona radiata",
+      "cerebral peduncle",
+      "crus cerebri",
+      "corticospinal tract",
+      "corticobulbar tract",
+      "corticonuclear tract",
+      "pyramidal tract",
+      "thalamocortical fibres",
+      "superior thalamic radiation",
+      "anterior thalamic radiation",
+      "optic radiation",
+      "auditory radiation",
+      "frontopontine fibres",
+      "somatotopy",
+      "lentiform nucleus",
+      "lenticular nucleus",
+      "caudate nucleus",
+      "putamen",
+      "globus pallidus",
+      "thalamus",
+      "lenticulostriate artery",
+      "anterior choroidal artery",
+      "recurrent artery of Heubner",
+      "pure motor stroke",
+      "pure sensory stroke",
+      "lacunar syndrome",
+      "contralateral hemiplegia",
+      "homonymous hemianopia"
+    ]
+  },
+  "camera": {
+    "framing": "superior",
+    "autoRotate": 0.004,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "ic_ant_r",
+      "name": "anterior limb of right internal capsule",
+      "label": "Internal capsule — anterior limb (R)",
+      "role": "part",
+      "group": "Internal capsule",
+      "layer": "organ",
+      "color": "#ffffff",
+      "refs": {
+        "bodyparts3d": "FMA72908"
+      },
+      "terms": [
+        "anterior limb of internal capsule",
+        "internal capsule",
+        "frontopontine fibres",
+        "anterior thalamic radiation"
+      ],
+      "narration": "The only limb of the capsule this catalog carries, and the front arm of the V. It lies between the head of the caudate nucleus medially and the lentiform nucleus laterally, and it carries frontopontine fibres and the anterior thalamic radiation running to and from the prefrontal cortex. It is the limb whose lesions are the quietest: damage here disturbs behaviour and drive rather than power, which is exactly why the clinically loud part of this structure is the part that is missing from the screen."
+    },
+    {
+      "key": "ic_ant_l",
+      "name": "anterior limb of left internal capsule",
+      "label": "Internal capsule — anterior limb (L)",
+      "role": "part",
+      "group": "Internal capsule",
+      "layer": "organ",
+      "color": "#ffffff",
+      "refs": {
+        "bodyparts3d": "FMA72909"
+      },
+      "terms": [
+        "anterior limb of internal capsule",
+        "left internal capsule"
+      ],
+      "narration": "The left anterior limb. Both are shown so the two Vs read as a pair opening forwards, which is the shape an axial scan gives you."
+    },
+    {
+      "key": "caud_r",
+      "name": "right caudate nucleus",
+      "label": "Caudate nucleus (R)",
+      "role": "context",
+      "group": "Medial wall",
+      "layer": "organ",
+      "color": "#4f9bff",
+      "refs": {
+        "bodyparts3d": "FMA72826"
+      },
+      "terms": [
+        "caudate nucleus",
+        "head of caudate",
+        "striatum"
+      ],
+      "narration": "The medial wall of the anterior limb. Its head is what the anterior limb is pressed against in front; further back the capsule leaves the caudate behind and takes the thalamus as its medial neighbour instead, and the point where the medial neighbour changes over is the genu."
+    },
+    {
+      "key": "caud_l",
+      "name": "left caudate nucleus",
+      "label": "Caudate nucleus (L)",
+      "role": "context",
+      "group": "Medial wall",
+      "layer": "organ",
+      "color": "#4f9bff",
+      "refs": {
+        "bodyparts3d": "FMA72827"
+      },
+      "terms": [
+        "caudate nucleus",
+        "left caudate"
+      ],
+      "narration": "The left caudate, the medial wall of the left anterior limb."
+    },
+    {
+      "key": "thal_r",
+      "name": "right thalamus",
+      "label": "Thalamus (R)",
+      "role": "context",
+      "group": "Medial wall",
+      "layer": "organ",
+      "color": "#9c74c4",
+      "refs": {
+        "bodyparts3d": "FMA258714"
+      },
+      "terms": [
+        "thalamus",
+        "posterior limb of internal capsule",
+        "ventral posterolateral nucleus",
+        "superior thalamic radiation"
+      ],
+      "narration": "The medial wall of the POSTERIOR limb, and therefore the single most useful landmark in this scene. The posterior limb is the slab of white matter in the gap between this nucleus and the lentiform nucleus lateral to it. The slab itself has no mesh, so the way to find it here is to look at the space rather than at a shape: thalamus on one side, putamen and globus pallidus on the other, capsule in between."
+    },
+    {
+      "key": "thal_l",
+      "name": "left thalamus",
+      "label": "Thalamus (L)",
+      "role": "context",
+      "group": "Medial wall",
+      "layer": "organ",
+      "color": "#9c74c4",
+      "refs": {
+        "bodyparts3d": "FMA258716"
+      },
+      "terms": [
+        "thalamus",
+        "left thalamus"
+      ],
+      "narration": "The left thalamus, medial wall of the left posterior limb, and the left half of the same gap."
+    },
+    {
+      "key": "put_r",
+      "name": "right putamen",
+      "label": "Putamen (R)",
+      "role": "context",
+      "group": "Lentiform nucleus — lateral wall",
+      "layer": "organ",
+      "color": "#e07b7b",
+      "refs": {
+        "bodyparts3d": "FMA72828"
+      },
+      "terms": [
+        "putamen",
+        "lentiform nucleus",
+        "lenticular nucleus"
+      ],
+      "narration": "The lateral half of the lateral wall. Putamen and globus pallidus together are the lentiform nucleus — the catalog has no single mesh of that name, so the lentiform nucleus in this scene is these two lit as one group. The capsule is lateral to the caudate and thalamus and medial to this, along its whole length."
+    },
+    {
+      "key": "put_l",
+      "name": "left putamen",
+      "label": "Putamen (L)",
+      "role": "context",
+      "group": "Lentiform nucleus — lateral wall",
+      "layer": "organ",
+      "color": "#e07b7b",
+      "refs": {
+        "bodyparts3d": "FMA72829"
+      },
+      "terms": [
+        "putamen",
+        "left putamen"
+      ],
+      "narration": "The left putamen, the lateral half of the left lateral wall."
+    },
+    {
+      "key": "gp_r",
+      "name": "right globus pallidus",
+      "label": "Globus pallidus (R)",
+      "role": "context",
+      "group": "Lentiform nucleus — lateral wall",
+      "layer": "organ",
+      "color": "#f0c419",
+      "refs": {
+        "bodyparts3d": "FMA72830"
+      },
+      "terms": [
+        "globus pallidus",
+        "pallidum",
+        "lentiform nucleus"
+      ],
+      "narration": "The medial half of the lentiform nucleus, and so the structure actually in contact with the posterior limb. When a lentiform bleed damages the capsule, this is the tissue it crosses to get there."
+    },
+    {
+      "key": "gp_l",
+      "name": "left globus pallidus",
+      "label": "Globus pallidus (L)",
+      "role": "context",
+      "group": "Lentiform nucleus — lateral wall",
+      "layer": "organ",
+      "color": "#f0c419",
+      "refs": {
+        "bodyparts3d": "FMA72831"
+      },
+      "terms": [
+        "globus pallidus",
+        "left globus pallidus"
+      ],
+      "narration": "The left globus pallidus, in the same relation on the left."
+    },
+    {
+      "key": "wm_r",
+      "name": "white matter structure of cerebral hemisphere",
+      "label": "Hemispheric white matter",
+      "role": "context",
+      "group": "Where the fibres come from and go",
+      "layer": "organ",
+      "color": "#d8d8d8",
+      "refs": {
+        "bodyparts3d": "FMA61822"
+      },
+      "terms": [
+        "white matter",
+        "corona radiata",
+        "centrum semiovale",
+        "projection fibres"
+      ],
+      "narration": "One undivided mesh of hemispheric white matter, ghosted. The corona radiata — the fan of projection fibres spreading from the capsule up to the cortex — is inside this mesh and is not separable from it, so the fan is described in beat 4 and not drawn. Its importance is the reason the capsule matters: the same fibres that are spread over centimetres of corona are squeezed into millimetres of capsule."
+    },
+    {
+      "key": "peduncle",
+      "name": "peduncle of midbrain",
+      "label": "Cerebral peduncle",
+      "role": "context",
+      "group": "Where the fibres come from and go",
+      "layer": "organ",
+      "color": "#c9a27a",
+      "refs": {
+        "bodyparts3d": "FMA62394"
+      },
+      "terms": [
+        "cerebral peduncle",
+        "crus cerebri",
+        "corticospinal tract",
+        "corticobulbar tract"
+      ],
+      "narration": "Where the descending fibres of the posterior limb go next. Corona radiata, then internal capsule, then the crus of this peduncle, then the pons, then the medullary pyramid — one continuous funnel with three names along it. The peduncle is a single mesh containing crus, tegmentum and substantia nigra undivided, so it is shown as the destination of the trace and not as a dissected structure."
+    },
+    {
+      "key": "lv_r",
+      "name": "right lateral ventricle",
+      "label": "Lateral ventricle (R)",
+      "role": "context",
+      "group": "Cavities for orientation",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78449"
+      },
+      "terms": [
+        "lateral ventricle",
+        "frontal horn",
+        "optic radiation",
+        "temporal horn"
+      ],
+      "narration": "Ghosted for orientation. On an axial scan the frontal horns sit just medial to the caudate heads and give you the level at which the V of the capsule is best seen; the optic radiation, leaving the retrolentiform part of the capsule, sweeps round the temporal horn as Meyer's loop."
+    },
+    {
+      "key": "lv_l",
+      "name": "left lateral ventricle",
+      "label": "Lateral ventricle (L)",
+      "role": "context",
+      "group": "Cavities for orientation",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78450"
+      },
+      "terms": [
+        "lateral ventricle",
+        "left lateral ventricle"
+      ],
+      "narration": "The left cavity, ghosted for the same reason."
+    },
+    {
+      "key": "v3",
+      "name": "third ventricle",
+      "label": "Third ventricle",
+      "role": "context",
+      "group": "Cavities for orientation",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78454"
+      },
+      "terms": [
+        "third ventricle",
+        "midline"
+      ],
+      "narration": "The midline slit. Everything in this scene is lateral to it, and the two capsules never meet across it — which is why a capsular lesion is always one-sided."
+    },
+    {
+      "key": "occ_r",
+      "name": "right occipital lobe",
+      "label": "Occipital lobe (R)",
+      "role": "context",
+      "group": "Where the fibres come from and go",
+      "layer": "organ",
+      "color": "#8fa8c8",
+      "refs": {
+        "bodyparts3d": "FMA72975"
+      },
+      "terms": [
+        "occipital lobe",
+        "visual cortex",
+        "optic radiation",
+        "homonymous hemianopia"
+      ],
+      "narration": "The endpoint of the optic radiation, shown so the retrolentiform part of the capsule has a visible destination. The radiation itself has no mesh; the lobe is here to make the direction of travel real rather than to stand in for the fibres."
+    },
+    {
+      "key": "occ_l",
+      "name": "left occipital lobe",
+      "label": "Occipital lobe (L)",
+      "role": "context",
+      "group": "Where the fibres come from and go",
+      "layer": "organ",
+      "color": "#8fa8c8",
+      "refs": {
+        "bodyparts3d": "FMA72976"
+      },
+      "terms": [
+        "occipital lobe",
+        "left occipital lobe"
+      ],
+      "narration": "The left occipital lobe, endpoint of the left optic radiation."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "The V on the axial cut",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.05,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Internal capsule",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Cut the brain horizontally at the level of the thalamus and each internal capsule appears as a V with its point directed medially. What is lit is the front arm only — the anterior limb — because it is the only part of the capsule this catalog holds as a mesh. Fix the whole shape now so the next beats have something to hang on: from the point of the V, called the genu, the front arm runs forward and laterally between the caudate head and the lentiform nucleus, and the back arm, the posterior limb, runs backward and laterally between the thalamus and the lentiform nucleus. Two further parts continue past the back of the lentiform nucleus: the retrolentiform part behind it and the sublentiform part below it."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Find it by its walls, not by its outline",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.05
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Medial wall",
+            "Lentiform nucleus — lateral wall"
+          ],
+          "layout": "overlay"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "thal_r",
+          "to": "gp_r",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "This is the working method for the rest of the scene, and it is not a workaround for the missing mesh — it is how the capsule is defined anatomically. It has no boundary of its own; it is named entirely by what lies on either side of it. Medial wall lit on one side: caudate head in front, thalamus behind. Lateral wall lit on the other: putamen and globus pallidus together, the lentiform nucleus. The connector drawn between the right thalamus and the right globus pallidus spans the posterior limb — the capsule is what fills that span, and the changeover from caudate to thalamus along the medial wall marks the genu. Read the gap, not a shape, and you will find the posterior limb on any scan whether or not it is coloured in."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "What runs in each part",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.05
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ic_ant_r",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ic_ant_r",
+          "to": "caud_r",
+          "kind": "boundary"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ic_ant_r",
+          "to": "put_r",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "Take the parts in order round the V. Anterior limb, lit here between caudate head and putamen: frontopontine fibres and the anterior thalamic radiation, prefrontal traffic. Genu: corticobulbar — corticonuclear — fibres for the motor nuclei of the cranial nerves, so the face and tongue. Posterior limb: corticospinal fibres for the limbs and trunk, with the superior thalamic radiation carrying sensation the other way, and the somatotopy runs front to back in the order arm, then trunk, then leg, so the leg fibres sit most posteriorly. Retrolentiform part: optic radiation. Sublentiform part: auditory radiation. Only the anterior limb is drawn; everything from the genu backwards is described over the gap you learned to read in beat 2. That order — face at the genu, arm, trunk, leg going back — is the one fact from this scene worth memorising verbatim, because every capsular stroke pattern falls out of it."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Fan, funnel, stalk",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:corticospinal-fibres",
+          "path": [
+            "wm_r",
+            "ic_ant_r",
+            "peduncle"
+          ],
+          "duration": 5000
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ic_ant_r",
+          "to": "peduncle",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Why so much depends on so little. Every projection fibre between one hemisphere and the rest of the nervous system passes through this one place. Above it they are spread across the whole width of the hemisphere as the corona radiata; below it they gather into the crus of the cerebral peduncle and go on into the pons and the medullary pyramid. The trace runs white matter, capsule, peduncle in that order — but note honestly what it passes through: the fibres it represents run in the POSTERIOR limb, and the trace waypoint is the anterior limb, because that is the only capsular mesh available. Take the trace as the direction of the funnel rather than as the exact course, and take the corona radiata as a property of the ghosted white-matter mesh rather than as a structure you can see."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Small vessels, small lesions, large deficits",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.05
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Internal capsule",
+            "Lentiform nucleus — lateral wall"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "occ_r",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "The capsule is supplied by small perforating vessels rather than by a named trunk: lenticulostriate branches of the middle cerebral artery to most of the posterior limb, the recurrent artery of Heubner from the anterior cerebral to much of the anterior limb, and the anterior choroidal artery to the lower posterior limb and the retrolentiform part. These come straight off large arteries without a step down in pressure, which is why they are the vessels that occlude in lacunar infarction and rupture in hypertensive haemorrhage. So: a lesion of a few millimetres in the posterior limb gives a dense contralateral hemiplegia of face, arm and leg equally, with no aphasia, no neglect and no visual field loss — the pure motor lacunar stroke, and the absence of cortical signs is the diagnosis. Damage the thalamic sensory fibres beside it and the mirror image is a pure sensory stroke. An anterior choroidal occlusion can add a homonymous hemianopia by taking the retrolentiform fibres to the occipital lobe lit here. No cerebral artery, no lenticulostriate branch and no perforator exists in this catalog, so every vessel in this beat is named and none is drawn."
+    }
+  ],
+  "gaps": [
+    "THE POSTERIOR LIMB, THE GENU, AND THE RETROLENTIFORM AND SUBLENTIFORM PARTS HAVE NO MESH. Only FMA72908 / FMA72909, the two anterior limbs, exist. Searched the full 934-entry catalog for capsul, limb, genu, posterior limb, retrolentiform, retrolenticular, sublentiform, sublenticular, corona, radiata, corticospinal, corticobulbar, corticonuclear, pyramidal, projection, tract, radiation, lemniscus, white — the only hits are the two anterior limbs, four optic-tract/nerve entries and FMA61822, one undivided hemispheric white-matter mesh. This is the central absence of the scene and it is the clinically decisive part, so the scene is built around it rather than over it: beat 2 teaches the capsule as the space between its two walls, which is both how it is defined anatomically and a method that survives the missing geometry, and beats 3, 4 and 5 each say in themselves which of the things they name is drawn and which is not. STATUS IS `candidate` FOR THIS REASON AND NOT A DELIVERY ONE — all seventeen models are present in meshes-lite/ and every beat renders.",
+    "NO LENTIFORM NUCLEUS AS A SINGLE MESH. Searched lentiform, lenticular, lentiglobus. The putamen and the globus pallidus are both present and together they ARE the lentiform nucleus, so the group `Lentiform nucleus — lateral wall` holds the two of them and beat 2 lights the group rather than a mesh. This is a grouping, not an approximation: nothing on screen is standing in for anything.",
+    "NO CORONA RADIATA. FMA61822 `white matter structure of cerebral hemisphere` contains it but does not separate it, so beat 4 names the fan and ghosts the block of white matter it is inside. The wm_r structure card says this in as many words, so a student is not left to assume the ghosted mesh is the corona.",
+    "NO INTRACRANIAL VESSEL OF ANY KIND — no middle or anterior cerebral artery, no lenticulostriate or choroidal branch, no circle of Willis, no dural venous sinus. Searched lenticulostriate, striate, perforator, cerebral artery, middle cerebral, anterior cerebral, choroidal, Heubner, communicating, Willis, sinus, vein of Galen. Beat 5 names all three supplying territories and draws none of them, and says so. This matches the routing already recorded for this course: Blood Supply of the Brain has no geometry at all.",
+    "THE BEAT 4 TRACE PASSES THROUGH THE WRONG LIMB AND SAYS SO. Corticospinal fibres run in the posterior limb; the trace waypoint is `ic_ant_r`, the anterior limb, because it is the only capsular key that exists. TRACE_STRUCTURE requires every waypoint to be a real structure key, so the alternatives were to route the trace through a nucleus, which would teach a false course, or to drop the beat, which would lose the fan-funnel-stalk idea entirely. The narration names the discrepancy explicitly rather than letting the animation assert it. Re-route the moment a posterior-limb mesh exists.",
+    "NO ANCHOR WAS AUTHORED FOR THE GENU, although its parent meshes are on disk. The genu is defined as the bend of a structure that is not present — you cannot measure the corner of a shape you do not have — and the nearest measurable proxy, the contact between the anterior limb and the thalamus, is a definition of where the anterior limb ENDS rather than where the capsule turns; derive-landmark.mjs would emit a number for it and the number would be believed. Not attempted, deliberately. Revisit if a posterior-limb or whole-capsule mesh is ever fetched, when `--contact` between the two limbs becomes the correct definition.",
+    "SIDES, STATED EXPLICITLY BECAUSE THE IDS DO NOT CARRY THEM. Right / left in this scene: anterior limb of internal capsule FMA72908 / FMA72909, caudate FMA72826 / FMA72827, putamen FMA72828 / FMA72829, globus pallidus FMA72830 / FMA72831, lateral ventricle FMA78449 / FMA78450, occipital lobe FMA72975 / FMA72976. The thalamus pair is the trap and breaks the consecutive-id pattern: FMA258714 is RIGHT and FMA258716 is LEFT. Each was read off the catalog name individually.",
+    "THE CAUDATE, PUTAMEN, GLOBUS PALLIDUS AND THALAMUS ARE DELIBERATELY NOT IN covers[]. All four are separate CURRICULUM.json structures with their own scenes in this same topic, and they appear here only as the walls that define the capsule. The complementary claim holds in the other direction: `neuroanatomy__basal-ganglia-diencephalon__basal-ganglia` shows the same two anterior limbs and does not claim `Internal capsule`."
+  ]
+}

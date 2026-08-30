@@ -9503,3 +9503,236 @@ and why.
   gap, no witness, no tool. They are the only six of 223 that do.
 - `ribs-sternum` carries `audited_at` with no run block recording what was checked, and it contained one
   of today's errors.
+
+---
+
+## 2026-08-30 — NEUROANATOMY AUTHORING RUN 1 (Thalamus · Hypothalamus & pituitary)
+
+**Backlog check first.** `REPAIR-BACKLOG.md` sections 1 and 2 are both marked clear and I confirmed it by
+reading them: every row in section 1 carries `DONE`, both section 2 items carry `DONE`, and the section 2
+footer says so. The backlog therefore no longer outranks the cursor and this run falls through to the walk.
+
+**Gross audit confirmed complete, from the files and not from a note.** Iterated `viz-training/scenes/`,
+parsed every scene and grouped by `subject`: all 76 gross scenes carry `provenance.audited_at`; the only
+unaudited non-embryology entry was `index.json`, which is not a scene. Embryology is 0/28 and stays
+suspended (sequence scenes blocked on SVG artwork). `next to audit` points at
+`embryology__cardiovascular-development__cardiac-looping` and was correctly **not** followed.
+
+**Authored 2 structures**, both in Basal Ganglia & Diencephalon, both the next unauthored entries in
+`CURRICULUM.json` order after "Basal ganglia":
+
+1. `neuroanatomy__basal-ganglia-diencephalon__thalamus` — 21 structures (4 parts), 6 views.
+   Curriculum requires `cross_section` and `location`; both present (beats 3–4 and 1–2). Models in hand
+   vs referenced: **0 / 21**. Every beat is hollow. Cheapest fetch that changes that: FMA258714 +
+   FMA258716 make beats 1 and 4 draw anything at all.
+2. `neuroanatomy__basal-ganglia-diencephalon__hypothalamus-pituitary` — 15 structures (5 parts), 5 views.
+   Curriculum requires `location`, `glands`, `mechanism`; all three present. Models in hand vs referenced:
+   **0 / 15**. Every beat hollow; FMA62327, FMA74877, FMA62045 and FMA13889 are the four that are the
+   scene's actual subject and buy beats 1, 3 and 4.
+
+**Catalog searched for every structure under more than one spelling, per failure mode 1.** The searches
+that paid off and would have been missed by a single clinical-name query:
+- `tuber cinereum` (FMA62327) and `lamina terminalis` (FMA61975) exist. Searching "hypothalamus" alone
+  returns **nothing**, and a run that searched only that would have written "the hypothalamus is not in
+  the catalog" and routed the structure to `diagram`. It is in the catalog — under the names of its parts.
+- `habenula` (FMA62032), `pineal body` (FMA62033), `stria medullaris of thalamus` (FMA73413/73414) —
+  the epithalamus is present and gives the thalamus a drawn posterior boundary.
+- `brachium of inferior colliculus` (FMA73463) exists, which is what let beat 5 trace a second, auditory
+  afferent instead of asserting the pattern from vision alone.
+- Searched but genuinely absent, each under many spellings and recorded in `gaps[]`: any hypothalamic or
+  thalamic **nucleus**; infundibulum / stalk / median eminence; adenohypophysis / neurohypophysis / pars
+  distalis / pars nervosa; portal / hypophysial vessel; any **tract** or fasciculus; interthalamic
+  adhesion / massa intermedia; hypothalamic sulcus; posterior limb / genu of internal capsule; sella
+  turcica / hypophysial fossa; **mening / dura / arachnoid / pia / falx / tentorium / diaphragma /
+  cistern — zero hits, which settles the Meninges structure of the Ventricular System & CSF topic in
+  advance**; cavernous sinus / internal carotid (only the two COMMON carotids exist, FMA3941 R /
+  FMA4058 L, and they stop in the neck, so neither was used).
+
+**Sides, said out loud because both scenes contain pairs.** thalamus **FMA258714 right, FMA258716 left**
+— not consecutive, and the same trap the basal ganglia scene flagged. optic tract **FMA62382 right,
+FMA67936 left** — different id ranges entirely, the second trap, and the one most likely to be inferred
+wrongly from a neighbour. Also: stria medullaris FMA73413 R / FMA73414 L, internal capsule anterior limb
+FMA72908 R / FMA72909 L, lateral ventricle FMA78449 R / FMA78450 L, fornix FMA72924 R / FMA72925 L, optic
+nerve FMA50875 R / FMA50878 L. Every one was read back off the catalog `name` individually. Unpaired
+midline meshes, labelled with no side: third ventricle, corpus-callosum-adjacent commissures (not used),
+tuber cinereum, lamina terminalis, optic chiasm, pituitary gland, habenula, pineal body. The **mammillary
+body (FMA74877) is unpaired in the catalog but paired in life** — flagged in both scenes in the same words
+rather than silently drawn as one body.
+
+**Consistency pass across the topic, per failure mode 2.** Three facts appear in more than one of the
+three Basal Ganglia & Diencephalon scenes and were reconciled deliberately, not left to chance:
+- *Only the anterior limb of the internal capsule exists.* The basal ganglia scene already said this. The
+  thalamus scene needed it stated differently, because for the thalamus the missing limb is the one that
+  forms its lateral wall — so the drawn anterior limb is in the wrong place relative to this subject. That
+  is said in both capsule structure cards AND in beat 3, so a student cannot read the lit sheet as the wall.
+- *The hypothalamic sulcus divides thalamus from hypothalamus.* Stated in the thalamus scene (beat 2, third
+  ventricle card) and in the hypothalamus scene (beat 2, third ventricle card) in the same terms, both
+  saying it is a groove with no mesh and both anchoring it between the interventricular foramen and the
+  cerebral aqueduct. Two scenes a student reads consecutively now agree word for sense.
+- *The fornix ends in the mammillary body, and the mammillothalamic tract runs from there to the anterior
+  nucleus of the thalamus.* Appears in four structure cards and two beats across the two new scenes;
+  all six say the same thing and all six say the tract is not drawn.
+
+**Narration against geometry (check 8).** Every beat was read asking whether the thing it names is on
+screen. Where it is not, the beat says so in itself rather than only in `gaps[]`: beat 3 of the thalamus
+scene names the posterior limb as the gap between two lit shapes; beat 5 traces the two afferents that
+*are* drawn and explicitly labels the other seven as described; beats 3 and 4 of the hypothalamus scene
+state that the two pituitary lobes are one mesh and that the portal system and the axonal tract are
+concepts walking a real path. Everything named and not drawn is in both `gaps[]` and `terms[]`.
+
+**Landmarks (check 12).** No anchor authored in either scene, and that is a measurement decision rather
+than an omission: `derive-landmark.mjs` cannot measure against a mesh that is not in `meshes-lite/`, and
+**no brain mesh in this corpus has been fetched**. Placing the sella turcica, the pulvinar, the geniculate
+bodies or the anterior tubercle by eye is exactly what that tool exists to prevent. The sella is instead
+marked with `approx {shown_as: "sphenoid bone", detail: "sella turcica / hypophysial fossa"}` so the
+player shows amber and names the bone that is really lit. Both `gaps[]` record the correct future call —
+`--contact FMA13889 --area N` for the fossa, because it is a surface and not a point; `--contact` against
+the optic tract with the medial geniculate as a second witness for the geniculate bodies; `--extreme`
+with an anterior `--slab` for the anterior tubercle.
+
+**Status.** Both `candidate`, never `ready` — a delivery reason, not an authoring one. 0 of 36 models
+across the two scenes are present in `meshes-lite/`, so both scenes would render an empty stage today.
+
+**Validator:** `115/115 scenes valid`. Both new scenes pass all eight stages; the only capability lines
+are the standard svg-adapter notices on other files. **Index:** `index.json written · 115 scenes
+(54 ready) · 13029 term mappings`. **sync-state:** re-run afterwards; both new scenes are matched to their
+curriculum entries, `covers[]` matched with no typos, `STATE.json was already in step`, and the mesh-gap
+list grew from 77 to **85 distinct unfetched models**.
+
+**Nothing was signed with `audited_at` this run** — these are new scenes, and the audit signature is for
+scenes read back later.
+
+---
+
+## 2026-08-30 — neuroanatomy authoring run 2 · Internal capsule + Midbrain
+
+**THE GROSS ANATOMY AUDIT IS COMPLETE — RE-VERIFIED THIS RUN BY LISTING THE SCENES DIRECTORY, NOT BY
+READING THE HEADER NOTE. 76 gross scene files, 76 carrying `provenance.audited_at`, zero unsigned.
+Sections 1 and 2 of `REPAIR-BACKLOG.md` are both clear, so the backlog no longer outranks the cursor.
+`next to audit` points at `embryology__cardiovascular-development__cardiac-looping` and was correctly
+NOT followed: embryology is suspended. Authored two neuroanatomy structures instead.**
+
+**Authored:** `neuroanatomy__basal-ganglia-diencephalon__internal-capsule` (last structure of the Basal
+Ganglia & Diencephalon topic — that topic is now complete) and `neuroanatomy__brainstem__midbrain`
+(first scene of the Brainstem topic).
+
+**Catalog searched for the structure, with more than one spelling, before anything was written.**
+Internal capsule: capsul, limb, genu, posterior limb, retrolentiform, retrolenticular, sublentiform,
+sublenticular, lentiform, lenticular, corona, radiata, corticospinal, corticobulbar, corticonuclear,
+pyramidal, projection, tract, radiation, lemniscus, white, claustrum, external capsule, accumbens.
+Midbrain: midbrain, mesencephalon, peduncle, crus, tegmentum, tectum, nigra, substantia, ruber, red
+nucleus, periaqueductal, colliculus, brachium, aqueduct, interpeduncular, oculomotor, trochlear, nerve,
+cranial, geniculate, genicul, metathalamus, pineal, habenula, mammillary/mamillary, decussation,
+cerebellar, vermis, tonsil, flocculus, dentate. Two results worth recording because they settle later
+topics without spending a run on them: **`cerebellum` returns exactly one entry** (FMA67944, whole organ
+— no vermis, lobe, peduncle, tonsil or deep nucleus), and **`nerve` returns exactly two** (left and right
+optic), which confirms the Cranial Nerves topic is dead for 3D by search rather than by assumption.
+
+**Internal capsule — what the run had to decide.** Only the two anterior limbs exist as meshes
+(FMA72908/72909). The clinically decisive part — the posterior limb — does not, and neither does the
+genu, the retrolentiform or the sublentiform part, or the corona radiata. The choice was to author a
+scene around the gap rather than over it: beat 2 teaches the capsule as **the space between its two
+walls** (caudate head then thalamus medially, putamen plus globus pallidus laterally), which is how the
+capsule is defined anatomically and is a method that keeps working on a scan where nothing is coloured
+in. Beat 3 gives the fibre content of all five parts in order round the V and states which single part
+is drawn. Beat 4's corticospinal trace routes through `ic_ant_r` because it is the only capsular key
+that exists, and the narration **says so explicitly** — the fibres it stands for run in the posterior
+limb. That is check 8 applied against the run's own animation rather than against someone else's prose.
+17 structures, all 17 in `meshes-lite/`, scene draws complete; `candidate` for the authoring reason, not
+a delivery one.
+
+**Midbrain — what the run had to decide.** FMA62394 `peduncle of midbrain` is one undivided block
+containing crus, tegmentum, substantia nigra, red nucleus, periaqueductal grey and both cranial-nerve
+nuclei. Beat 3 is therefore written as a map read over a solid mesh and says that in itself, and the
+peduncle structure card repeats the caveat so a student meeting the mesh outside that beat is not misled.
+Beat 4's auditory trace ends on `thal_r` with the narration stating the thalamus stands for the medial
+geniculate body rather than being it. `FMA83740 interpeduncular fossa` is in the catalog but not on disk,
+and was **not** authored as an anchor: it is a hollow bounded by two crura and the mammillary bodies — a
+space between structures, not a point on one — the same shape of definition that made
+`derive-landmark.mjs` refuse the axillary apex. 23 structures.
+
+**Models in hand vs referenced — and this changed underneath the run, which is itself the finding.**
+Internal capsule **17/17 in `meshes-lite/`**, every beat renders. Midbrain was **15/23** when authored:
+the eight absent were FMA73422/73423 superior colliculi, FMA73434/73435 inferior colliculi and
+FMA73461-73464 the four brachia, verified one file at a time against a 478-file `meshes-lite/`, and the
+scene was written saying the posterior half of beat 2 and all of beat 4 were hollow. **Re-checked at the
+end of the run: 491 files, all eight present, `75 of 75 scenes have every mesh`.** Midbrain is now 23/23
+and every beat renders; the scene's `gaps[]` carries both readings with the date of each rather than
+being quietly overwritten. The corpus has no scene drawing with holes for the first time.
+**The lesson is the one this run was already chasing: a delivery claim is true only on the day it is
+measured.** It went stale here inside a single run. Never quote one, including the ones written today.
+
+**Sides, said out loud (check 3).** Internal capsule scene: FMA72908 right / FMA72909 left anterior limb;
+FMA258714 **right** and FMA258716 **left** thalamus, which does not follow the consecutive-id rule.
+Midbrain scene has the worst trap met so far — **the four brachia interleave rather than grouping by
+colliculus**: FMA73461 superior R, FMA73462 superior L, FMA73463 inferior R, FMA73464 inferior L. And the
+optic tracts share no numbering block at all: FMA62382 **right**, FMA67936 **left**. Every one read off
+the catalog name individually rather than inferred from a neighbour.
+
+**FIX THE FACT, NOT THE INSTANCE (check 5) — the run's highest-value catch, and it is in a scene the run
+did not author today.** `neuroanatomy__basal-ganglia-diencephalon__basal-ganglia` carried
+"none of the seventeen is present in `meshes-lite/` — no brain mesh in this corpus has been fetched yet.
+Until they are, every beat of this scene is hollow", and gave that as its entire reason for being
+`candidate`. **All seventeen are on disk**, checked one file at a time, and `sync-state.mjs` reports the
+scene drawing complete. This is exactly the "not in the local decimated set" habit `REPAIR-BACKLOG.md`
+section 3 warns is a lower bound rather than an inventory, and it had spread inside the file: the
+`gaps[]` note on anchors gave the same stale absence as its reason for authoring none. Both were
+rewritten, and the anchor note now gives the **correct, per-feature** reasons — head/body/tail of the
+caudate are regions of a continuous C and not points; the genu is the bend of a shape that has no mesh;
+the two pallidal segments are internal divisions of one mesh. The same sentence was then grepped for
+across all eleven neuroanatomy scenes — and the first draft of this block claimed no third copy was live.
+**That claim was wrong, and the grep that disproved it was run before the block was signed.** Three more
+copies were alive: `...__thalamus` ("NONE of the twenty-one is present"), `...__hypothalamus-pituitary`
+("NONE of the fifteen"), and `...__ventricles`, where the sentence was doing the most damage of the three
+— it was the stated reason no anchor was authored for the floor of the fourth ventricle, on a scene all
+twenty-three of whose meshes are on disk. All three are corrected, and in each the anchor note now gives
+the real, per-feature DEFINITION reason and names the derivation to attempt at that scene's audit
+(lateral geniculate as a two-witness contact against the optic tract; the hypophysial fossa as
+`--contact FMA13889 --area N`, a surface not a point; the obex as an `--extreme` on the caudal limit of
+FMA78469 cross-checked against the central canal). That is the difference between impossible work and
+open work, and the stale sentence had been converting the second into the first across five files.
+`CORPUS.md`'s line for the basal-ganglia scene is struck through and amended rather than deleted.
+**Note for the next run: the identical stale claim ("0 of 36 models present") stands in the earlier RUNLOG
+block for the thalamus and hypothalamus scenes.** It is left there because a run log records what was true
+at the time — but it is not evidence, and as of today it is false.
+
+**Scene against itself, and against its topic (check 6).** Both new scenes were read end to end before
+anything was judged. Cross-checked against the three existing Basal Ganglia & Diencephalon scenes: the
+new internal-capsule scene's account of the anterior limb between caudate head and lentiform nucleus, the
+posterior limb between thalamus and lentiform, and the genu at the changeover agrees with beat 3 of the
+basal-ganglia scene word for sense; the lentiform-is-putamen-plus-pallidus grouping agrees with its beat 4;
+and both scenes state the same lenticulostriate story with the same "named, not drawn" disclaimer. The
+midbrain scene's account of the descending funnel (corona radiata → capsule → crus → pons → pyramid)
+agrees with beat 4 of the internal-capsule scene authored in the same run, and both name the peduncle as
+one undivided mesh in the same terms.
+
+**Covers (check 9).** `covers[]` is one name each, spelled as `CURRICULUM.json` spells it, and
+`sync-state.mjs` matched both with no unmatched entries — coverage went 120 → 122. Caudate, putamen,
+globus pallidus, thalamus, pons, medulla and cerebellum all appear as context in these scenes and none is
+claimed; `Cerebral aqueduct` is not a curriculum structure in its own right and is taught in the midbrain
+scene without claiming Ventricles.
+
+**Landmarks (check 12).** No anchor authored in either scene, and in both cases that is a definition
+decision rather than the old "the mesh isn't on disk" excuse — the internal-capsule scene's meshes are
+all on disk. Genu: the corner of a shape with no mesh; the nearest measurable proxy defines where the
+anterior limb ends, not where the capsule turns, and would emit a number that would be believed. Not
+attempted. Midbrain: every named feature is inside the undivided peduncle or on a colliculus that is not
+on disk. Two further definitions were rejected **before** measuring — the pontomesencephalic junction is
+a transverse line, not a point, and the interpeduncular fossa is a space bounded by three structures.
+Each refusal is written into the scene's `gaps[]` so a later run cannot re-derive it and believe it.
+
+**Status (check 11).** Both `candidate`, neither signed with `audited_at` — these are new scenes and the
+signature is for a later read-back.
+
+**Validator:** `117/117 scenes valid`; both new scenes pass all eight stages, the only capability lines
+are the standard svg-adapter notices on other files. **Index:** `index.json written · 117 scenes
+(54 ready) · 13173 term mappings`. **sync-state (final re-run, after the mesh delivery landed):** 122 of
+207 structures covered by 117 scenes, gross 59/81, **`75 of 75 scenes have every mesh in meshes-lite/`
+(491 files)** — no scene in the corpus draws with holes, and `mesh-gaps.txt` is empty for the first time.
+`STATE.json was already in step`. All three tools were run twice, before and after the five stale-note
+corrections, and both new scenes pass all eight stages each time.
+
+**Nothing was signed with `audited_at` this run** — both scenes are new, and the signature is for a later
+read-back. The five scenes whose notes were corrected are not signed either: the correction was to a
+stated fact, not a read-back of the whole file, and signing on that basis is what the backlog says costs
+a student.

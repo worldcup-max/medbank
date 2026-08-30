@@ -1,0 +1,686 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__basal-ganglia-diencephalon__thalamus",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Basal Ganglia & Diencephalon",
+  "structure": "Thalamus",
+  "covers": [
+    "Thalamus"
+  ],
+  "learning_goal": "Place the thalamus by its six walls rather than by memorising a picture — third ventricle medially, internal capsule laterally, hypothalamus below the hypothalamic sulcus, fornix and ventricular body above — then use that position to explain why every sensory modality except smell stops here, and why a lesion a centimetre across produces a whole-body sensory loss that later turns to pain.",
+  "status": "candidate",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "thalamus",
+      "diencephalon",
+      "sensory pathways",
+      "stroke",
+      "neuroimaging orientation"
+    ],
+    "terms": [
+      "thalamus",
+      "diencephalon",
+      "dorsal thalamus",
+      "epithalamus",
+      "stria medullaris",
+      "habenula",
+      "habenular commissure",
+      "pineal body",
+      "pineal gland",
+      "interthalamic adhesion",
+      "massa intermedia",
+      "third ventricle",
+      "hypothalamic sulcus",
+      "internal medullary lamina",
+      "anterior nucleus",
+      "medial dorsal nucleus",
+      "ventral anterior nucleus",
+      "ventral lateral nucleus",
+      "ventral posterolateral nucleus",
+      "VPL",
+      "ventral posteromedial nucleus",
+      "VPM",
+      "pulvinar",
+      "lateral geniculate body",
+      "medial geniculate body",
+      "optic tract",
+      "brachium of inferior colliculus",
+      "reticular nucleus of thalamus",
+      "internal capsule",
+      "posterior limb of internal capsule",
+      "thalamic radiation",
+      "medial lemniscus",
+      "spinothalamic tract",
+      "trigeminothalamic tract",
+      "olfaction",
+      "thalamic pain syndrome",
+      "Dejerine-Roussy",
+      "thalamic haemorrhage",
+      "artery of Percheron",
+      "thalamic hand"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "thal_r",
+      "name": "right thalamus",
+      "label": "Thalamus (R)",
+      "role": "part",
+      "group": "Thalamus",
+      "layer": "organ",
+      "color": "#9c74c4",
+      "refs": {
+        "bodyparts3d": "FMA258714"
+      },
+      "terms": [
+        "thalamus",
+        "right thalamus",
+        "dorsal thalamus",
+        "diencephalon"
+      ],
+      "narration": "An egg of grey matter about four centimetres long lying obliquely at the very centre of the hemisphere, its narrow anterior tubercle pointing forwards and medially and its swollen pulvinar overhanging the midbrain behind. This is one undivided mesh: the internal medullary lamina and the twenty-odd nuclei it separates are named in beat 5 and are not drawn, so every nucleus you hear about is a region of this single shape rather than an object you can click."
+    },
+    {
+      "key": "thal_l",
+      "name": "left thalamus",
+      "label": "Thalamus (L)",
+      "role": "part",
+      "group": "Thalamus",
+      "layer": "organ",
+      "color": "#9c74c4",
+      "refs": {
+        "bodyparts3d": "FMA258716"
+      },
+      "terms": [
+        "thalamus",
+        "left thalamus"
+      ],
+      "narration": "The left thalamus. Both are shown because the pair defines the third ventricle between them, and because in most brains the two touch across that slit at the interthalamic adhesion — a grey contact, not a commissure, carrying no fibres from one side to the other. The adhesion is not a separate mesh, so on screen the two shapes simply approach each other."
+    },
+    {
+      "key": "sm_r",
+      "name": "right stria medullaris of thalamus",
+      "label": "Stria medullaris (R)",
+      "role": "part",
+      "group": "Epithalamic border",
+      "layer": "organ",
+      "color": "#e8e8e8",
+      "refs": {
+        "bodyparts3d": "FMA73413"
+      },
+      "terms": [
+        "stria medullaris",
+        "stria medullaris thalami",
+        "habenula",
+        "epithalamus"
+      ],
+      "narration": "The white ridge along the upper medial edge of the right thalamus. It is the ridge that marks where the medial (ventricular) surface meets the superior surface, and it is a useful border for that alone; the fibres running in it are heading backwards to the habenula. Do not confuse it with the stria terminalis, which is a different bundle following the tail of the caudate."
+    },
+    {
+      "key": "sm_l",
+      "name": "left stria medullaris of thalamus",
+      "label": "Stria medullaris (L)",
+      "role": "part",
+      "group": "Epithalamic border",
+      "layer": "organ",
+      "color": "#e8e8e8",
+      "refs": {
+        "bodyparts3d": "FMA73414"
+      },
+      "terms": [
+        "stria medullaris",
+        "left stria medullaris"
+      ],
+      "narration": "The same ridge on the left, converging with its fellow on the habenula behind."
+    },
+    {
+      "key": "hab",
+      "name": "habenula",
+      "label": "Habenula",
+      "role": "context",
+      "group": "Epithalamic border",
+      "layer": "organ",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA62032"
+      },
+      "terms": [
+        "habenula",
+        "habenular nucleus",
+        "epithalamus",
+        "habenular commissure"
+      ],
+      "narration": "Where the two striae medullares end, at the posterior end of the roof of the third ventricle. Habenula, stria medullaris and pineal together are the epithalamus — dorsal and posterior to the thalamus proper and, despite the shared name, not part of it. Shown as context so the posterior boundary of the thalamus is a shape rather than an assertion."
+    },
+    {
+      "key": "pineal",
+      "name": "pineal body",
+      "label": "Pineal body",
+      "role": "context",
+      "group": "Epithalamic border",
+      "layer": "organ",
+      "color": "#d8a0c0",
+      "refs": {
+        "bodyparts3d": "FMA62033"
+      },
+      "terms": [
+        "pineal body",
+        "pineal gland",
+        "epithalamus",
+        "melatonin",
+        "Parinaud syndrome"
+      ],
+      "narration": "The midline cone slung backwards from the epithalamus between the two thalami, sitting immediately above the superior colliculi. It calcifies with age, which makes it the midline marker radiologists use to see whether a mass has shifted the brain sideways. A pineal tumour presses on the tectum below it and on the cerebral aqueduct, which is why it presents with an upgaze palsy and a hydrocephalus rather than with anything endocrine."
+    },
+    {
+      "key": "v3",
+      "name": "third ventricle",
+      "label": "Third ventricle",
+      "role": "context",
+      "group": "The medial wall",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78454"
+      },
+      "terms": [
+        "third ventricle",
+        "hypothalamic sulcus",
+        "interthalamic adhesion",
+        "midline"
+      ],
+      "narration": "The midline slit the two thalami face across. The medial surface of the thalamus is literally the upper part of the lateral wall of this ventricle, and a shallow groove on that wall — the hypothalamic sulcus, running from the interventricular foramen to the cerebral aqueduct — is the line below which the wall stops being thalamus and becomes hypothalamus. The sulcus is a surface groove with no mesh of its own, so it is described here and not drawn."
+    },
+    {
+      "key": "lv_r",
+      "name": "right lateral ventricle",
+      "label": "Lateral ventricle (R)",
+      "role": "context",
+      "group": "The roof",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78449"
+      },
+      "terms": [
+        "lateral ventricle",
+        "body of lateral ventricle",
+        "interventricular foramen",
+        "floor of the body"
+      ],
+      "narration": "The superior surface of the thalamus forms most of the floor of the body of this ventricle, so anything growing off the thalamus grows straight into CSF. Ghosted here so the roof of the thalamus reads as a floor of something else."
+    },
+    {
+      "key": "lv_l",
+      "name": "left lateral ventricle",
+      "label": "Lateral ventricle (L)",
+      "role": "context",
+      "group": "The roof",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78450"
+      },
+      "terms": [
+        "lateral ventricle",
+        "left lateral ventricle"
+      ],
+      "narration": "The left cavity, ghosted for the same reason."
+    },
+    {
+      "key": "fornix_r",
+      "name": "right fornix of forebrain",
+      "label": "Fornix (R)",
+      "role": "context",
+      "group": "The roof",
+      "layer": "organ",
+      "color": "#f2efe4",
+      "refs": {
+        "bodyparts3d": "FMA72924"
+      },
+      "terms": [
+        "fornix",
+        "body of fornix",
+        "column of fornix",
+        "interventricular foramen"
+      ],
+      "narration": "The white arch that rides over the top of the thalamus in the midline and then dives down in front of it as the column of the fornix, ending in the mammillary body. Its column and the anterior tubercle of the thalamus together bound the interventricular foramen — the surgeon's landmark for finding the thalamus from inside the ventricle."
+    },
+    {
+      "key": "fornix_l",
+      "name": "left fornix of forebrain",
+      "label": "Fornix (L)",
+      "role": "context",
+      "group": "The roof",
+      "layer": "organ",
+      "color": "#f2efe4",
+      "refs": {
+        "bodyparts3d": "FMA72925"
+      },
+      "terms": [
+        "fornix",
+        "left fornix"
+      ],
+      "narration": "The left arch, the mirror of the right, ending in the same way on the mammillary body of its own side."
+    },
+    {
+      "key": "ic_ant_r",
+      "name": "anterior limb of right internal capsule",
+      "label": "Internal capsule — anterior limb (R)",
+      "role": "context",
+      "group": "The lateral wall",
+      "layer": "organ",
+      "color": "#ffffff",
+      "refs": {
+        "bodyparts3d": "FMA72908"
+      },
+      "terms": [
+        "internal capsule",
+        "anterior limb of internal capsule",
+        "posterior limb of internal capsule",
+        "thalamic radiation"
+      ],
+      "narration": "The lateral wall of the thalamus is the internal capsule — but it is the POSTERIOR limb that lies against the thalamus, and only the anterior limb exists as a mesh in this catalog. What is drawn here is therefore in front of the thalamus rather than beside it, and beat 3 says so at the point where the difference matters. Read the drawn sheet as the near end of a sheet that continues backwards past the thalamus and is not shown."
+    },
+    {
+      "key": "ic_ant_l",
+      "name": "anterior limb of left internal capsule",
+      "label": "Internal capsule — anterior limb (L)",
+      "role": "context",
+      "group": "The lateral wall",
+      "layer": "organ",
+      "color": "#ffffff",
+      "refs": {
+        "bodyparts3d": "FMA72909"
+      },
+      "terms": [
+        "internal capsule",
+        "left internal capsule"
+      ],
+      "narration": "The left anterior limb, carrying the same caveat: the limb that actually walls the thalamus laterally is the posterior one, which has no mesh."
+    },
+    {
+      "key": "put_r",
+      "name": "right putamen",
+      "label": "Putamen (R)",
+      "role": "context",
+      "group": "The lateral wall",
+      "layer": "organ",
+      "color": "#e07b7b",
+      "refs": {
+        "bodyparts3d": "FMA72828"
+      },
+      "terms": [
+        "putamen",
+        "lentiform nucleus",
+        "basal ganglia"
+      ],
+      "narration": "Context, and the far side of the wall: on an axial cut the posterior limb of the capsule runs between the thalamus medially and the lentiform nucleus laterally. Basal ganglia rather than diencephalon, and taught in their own scene."
+    },
+    {
+      "key": "caud_r",
+      "name": "right caudate nucleus",
+      "label": "Caudate nucleus (R)",
+      "role": "context",
+      "group": "The lateral wall",
+      "layer": "organ",
+      "color": "#4f9bff",
+      "refs": {
+        "bodyparts3d": "FMA72826"
+      },
+      "terms": [
+        "caudate nucleus",
+        "body of caudate",
+        "stria terminalis",
+        "basal ganglia"
+      ],
+      "narration": "The body of the caudate arches over the superolateral edge of the thalamus in the floor of the ventricular body, separated from it by a groove carrying the stria terminalis and the thalamostriate vein. That groove is the boundary between diencephalon and telencephalon on this surface, and it is the line a surgeon opens along."
+    },
+    {
+      "key": "mam",
+      "name": "mammillary body",
+      "label": "Mammillary body",
+      "role": "context",
+      "group": "The floor",
+      "layer": "organ",
+      "color": "#d9a066",
+      "refs": {
+        "bodyparts3d": "FMA74877"
+      },
+      "terms": [
+        "mammillary body",
+        "hypothalamus",
+        "fornix",
+        "mammillothalamic tract",
+        "Papez circuit"
+      ],
+      "narration": "Hypothalamus, not thalamus — shown to make the floor of the diencephalon visible and to mark where the fornix ends. From here the mammillothalamic tract runs up into the anterior nucleus of the thalamus, which is the step of the Papez circuit that makes an anterior thalamic lesion a memory lesion. That tract has no mesh; the two ends of it do. Note this single mesh stands for both mammillary bodies — the catalog carries no left and right."
+    },
+    {
+      "key": "ot_r",
+      "name": "right optic tract",
+      "label": "Optic tract (R)",
+      "role": "context",
+      "group": "Afferents that end here",
+      "layer": "organ",
+      "color": "#7fb069",
+      "refs": {
+        "bodyparts3d": "FMA62382"
+      },
+      "terms": [
+        "optic tract",
+        "lateral geniculate body",
+        "optic radiation",
+        "visual pathway"
+      ],
+      "narration": "The visual afferent, sweeping round the cerebral peduncle to end on the lateral geniculate body — a knuckle on the underside of the pulvinar. The geniculate bodies are thalamus, and this is the clearest demonstration of what the thalamus is for: the visual pathway does not reach cortex without stopping here. The geniculate bodies have no mesh of their own, so the tract is drawn arriving at the thalamic mass rather than at a named knuckle."
+    },
+    {
+      "key": "ot_l",
+      "name": "left optic tract",
+      "label": "Optic tract (L)",
+      "role": "context",
+      "group": "Afferents that end here",
+      "layer": "organ",
+      "color": "#7fb069",
+      "refs": {
+        "bodyparts3d": "FMA67936"
+      },
+      "terms": [
+        "optic tract",
+        "left optic tract"
+      ],
+      "narration": "The left tract, ending on the left lateral geniculate body in the same way."
+    },
+    {
+      "key": "bic_r",
+      "name": "brachium of right inferior colliculus",
+      "label": "Brachium of inferior colliculus (R)",
+      "role": "context",
+      "group": "Afferents that end here",
+      "layer": "organ",
+      "color": "#7fb069",
+      "refs": {
+        "bodyparts3d": "FMA73463"
+      },
+      "terms": [
+        "brachium of inferior colliculus",
+        "medial geniculate body",
+        "auditory pathway",
+        "inferior colliculus"
+      ],
+      "narration": "The auditory equivalent, and the reason it is worth having on screen: it runs forwards from the inferior colliculus of the midbrain up onto the medial geniculate body. Hearing takes the same architecture as vision — a midbrain relay, then a thalamic relay, then cortex — and the two brachia are the visible proof that the geniculate bodies belong to the thalamus and not to the tectum."
+    },
+    {
+      "key": "ic_coll_r",
+      "name": "right inferior colliculus",
+      "label": "Inferior colliculus (R)",
+      "role": "context",
+      "group": "Afferents that end here",
+      "layer": "organ",
+      "color": "#8f9ea8",
+      "refs": {
+        "bodyparts3d": "FMA73434"
+      },
+      "terms": [
+        "inferior colliculus",
+        "tectum",
+        "auditory pathway"
+      ],
+      "narration": "Midbrain tectum, below and behind the pulvinar — the far end of the brachium. Context only; the brainstem scenes teach it."
+    },
+    {
+      "key": "sc_coll_r",
+      "name": "right superior colliculus",
+      "label": "Superior colliculus (R)",
+      "role": "context",
+      "group": "Afferents that end here",
+      "layer": "organ",
+      "color": "#8f9ea8",
+      "refs": {
+        "bodyparts3d": "FMA73422"
+      },
+      "terms": [
+        "superior colliculus",
+        "tectum",
+        "pulvinar",
+        "Parinaud syndrome"
+      ],
+      "narration": "The visual reflex centre of the tectum, tucked under the overhang of the pulvinar and under the pineal. It is here to show how little room there is behind the thalamus: a pineal or a posterior thalamic mass reaches this plate almost immediately, and the upgaze palsy follows."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The centre of the hemisphere",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Thalamus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The medial wall"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The roof"
+        }
+      ],
+      "narration": "Two grey eggs set obliquely at the centre of the brain with a slit between them. Each is about four centimetres long, narrow and pointed in front, broad and overhanging behind. Everything else in this scene is a wall: the slit between them is the third ventricle, the arch above is the fornix, the cavity above that is the body of the lateral ventricle. Fix the shape and the obliquity now — the anterior ends nearly meet in the midline while the posterior ends splay apart over the midbrain — because every later beat is about what lies against which surface."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Six walls, and the sulcus that sets the lower one",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "thal_r",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "thal_r",
+          "to": "v3",
+          "kind": "boundary"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "thal_r",
+          "to": "lv_r",
+          "kind": "boundary"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "thal_r",
+          "to": "caud_r",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "Name the neighbours in order and the thalamus stops needing to be memorised. Medially, the third ventricle — the thalamic surface IS the upper half of its lateral wall. Above, the floor of the body of the lateral ventricle, with the fornix arching over medially and the body of the caudate riding the lateral edge. Laterally, the internal capsule. Below, the hypothalamus and the subthalamus. Behind, the pulvinar overhangs the midbrain tectum. The one boundary you cannot see is the one that is asked about: the hypothalamic sulcus, a shallow groove on the ventricular wall running from the interventricular foramen back to the cerebral aqueduct. Above that line the wall is thalamus, below it hypothalamus. It is a groove on a surface and has no mesh here, so trace it between the two landmarks that do — the foramen in front, bounded by the column of the fornix and the anterior tubercle, and the aqueduct behind."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "The axial cut — and what is missing from it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.05,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "thal_r",
+            "put_r"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "This is the cut every CT head is read on. Medial to lateral it goes: third ventricle, thalamus, posterior limb of the internal capsule, lentiform nucleus, insula. Two of those five are lit — the thalamus and the lentiform nucleus — and the sheet that should lie between them is the one this catalog does not carry. Only the anterior limb of the capsule exists as a mesh, and the anterior limb lies in front of the thalamus, between caudate head and lentiform nucleus, not beside it. So read the gap between the two lit shapes as the posterior limb: it carries the corticospinal fibres for the opposite half of the body and the thalamocortical fibres coming out of the thalamus itself, which is why a bleed that starts in the thalamus becomes a hemiplegia the moment it crosses one centimetre laterally."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "The coronal cut — roof, floor and the pair across the midline",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "thal_r",
+            "thal_l"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The floor"
+        }
+      ],
+      "narration": "On the coronal cut the diencephalon stacks vertically and the stack is the answer to most exam questions here. Fornix at the top, thalamus below it on each side of the ventricular slit, hypothalamus below the sulcus with the mammillary body marking its back end, and the whole column suspended between the two lentiform nuclei. Note what does not happen across the midline: the two thalami touch at the interthalamic adhesion in about three quarters of brains, but nothing crosses there. It is grey matter in contact, not a commissure — the epithalamic commissures behind, at the habenula and under the pineal, are the ones that do carry fibres."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Everything stops here except smell",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:visual-afferent",
+          "path": [
+            "ot_r",
+            "thal_r"
+          ],
+          "duration": 3500
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:auditory-afferent",
+          "path": [
+            "ic_coll_r",
+            "bic_r",
+            "thal_r"
+          ],
+          "duration": 4000
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Thalamus",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Two afferents are traced arriving, and they are the two you can see: the optic tract onto the lateral geniculate body, and the brachium of the inferior colliculus onto the medial geniculate body. Take them as the pattern for the rest, which are described only. Body sensation from the medial lemniscus and the spinothalamic tract lands in the ventral posterolateral nucleus, the face in the ventral posteromedial; the cerebellum and the globus pallidus feed the ventral lateral and ventral anterior nuclei and so shape movement; the mammillothalamic tract feeds the anterior nucleus and so serves memory; the medial dorsal nucleus talks to prefrontal cortex; the pulvinar to the parietal and occipital association cortex. Olfaction is the exception in the whole nervous system — it reaches cortex directly and only afterwards involves the medial dorsal nucleus. None of those nuclei is a mesh: this is one undivided shape, divided in life by a Y-shaped sheet of white matter called the internal medullary lamina, and nothing in this scene draws that sheet or the nuclei on either side of it."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Small lesion, whole half of the body",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.05
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Thalamus"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "thal_l",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Because every modality funnels through a structure the size of a walnut, a lacunar infarct here produces a pure sensory stroke: numbness of the opposite face, arm, trunk and leg at once, with no weakness and no cortical signs, from a lesion in the ventral posterior nucleus a few millimetres across. Weeks to months later a proportion of these turn into the thalamic pain syndrome of Dejerine and Roussy — the numb side becomes spontaneously and unbearably painful, and light touch is agony. A larger thalamic haemorrhage adds two signs worth knowing because they are almost specific: the eyes deviate down and inwards, looking at the patient's own nose, from pressure on the tectum below, and the hand takes up a posture with the wrist flexed and the fingers extended. The arterial supply is not drawn — no cerebral artery of any kind exists in this catalog — but the single fact worth carrying is that in some people both anteromedial thalami are fed by one vessel off one posterior cerebral artery, the artery of Percheron, so one occlusion infarcts both thalami and the patient presents with a sudden loss of consciousness and amnesia rather than with a hemi-anything."
+    }
+  ],
+  "gaps": [
+    "THE THALAMUS IS ONE UNDIVIDED MESH. FMA258714 / FMA258716 carry no nuclei and no internal medullary lamina. Searched nucleus, nuclei, lamina, medullary, pulvinar, geniculate, ventral posterior, VPL, VPM, anterior nucleus, medial dorsal, reticular, intralaminar, centromedian — the only 'nucleus' entries in the whole catalog are the two caudate nuclei. Every nucleus named in beat 5 is therefore described and not shown, and beat 5 says so in itself. The lateral and medial geniculate bodies matter most, because the two afferents that ARE traced end on them; both traces are authored as arriving at the thalamic mass, and the structure cards for the optic tract and the brachium of the inferior colliculus both state that the knuckle they end on is not separately drawn.",
+    "NO POSTERIOR LIMB OF THE INTERNAL CAPSULE, so the lateral wall of the thalamus is absent. Searched capsule, limb, genu, retrolentiform, sublentiform, corona, radiata, thalamic radiation, corticospinal, pyramidal, lemniscus, spinothalamic, tract. Only the anterior limb exists (FMA72908 / FMA72909) and it lies in FRONT of the thalamus, not beside it — the structure cards for both limbs and beat 3 state this explicitly rather than letting the drawn sheet be read as the wall. This is the same absence recorded in the basal ganglia scene of this topic and the two files state it the same way.",
+    "NO INTERTHALAMIC ADHESION, NO HYPOTHALAMIC SULCUS. Searched adhesion, massa intermedia, interthalamic, commissure (which returns anterior, posterior and fornical commissures only), sulcus, hypothalamic. Both are named in beats 2 and 4 as features of surfaces that are drawn, and both are the sort of thing that would be authored as an anchor if the parent meshes were fetched — the sulcus in particular is a line rather than a point and would need a run of anchors, so it is described between two landmarks that do exist, the interventricular foramen and the cerebral aqueduct.",
+    "NO MAMMILLOTHALAMIC TRACT and no tract of any kind. Both ends exist — the mammillary body (FMA74877) and the thalamus — and the connection between them is stated in the mammillary body card and in beat 5 as a described pathway. Searched mammillothalamic, mamillothalamic, tract, bundle, fasciculus, lemniscus, Vicq d'Azyr.",
+    "THE MAMMILLARY BODY IS A SINGLE UNPAIRED MESH. FMA74877 is 'mammillary body' with no left or right in the catalog, although the structure is a pair in life. Its card says so. The same mesh and the same caveat appear in the hypothalamus and pituitary scene of this topic, worded consistently.",
+    "NO SUBTHALAMUS. The subthalamic region is named in beat 2 as the fourth wall below and is not drawn; there is no subthalamic nucleus, no zona incerta and no substantia nigra in the catalog (searched subthalam, Luys, zona incerta, nigra, substantia). Recorded identically in the basal ganglia scene.",
+    "NO INTRACRANIAL VESSEL OF ANY KIND, so the artery of Percheron and the thalamoperforating branches of beat 6 are named and not drawn. Searched Percheron, perforat, thalamoperforat, posterior cerebral, communicating, choroidal, basilar, Willis, cerebral artery, dural sinus, thalamostriate vein, internal cerebral vein. This matches the neuroanatomy blood-supply routing recorded across this course: the catalog holds no cerebral artery, no circle of Willis and no dural venous sinus. The thalamostriate vein is named in the caudate card as the content of the groove and is likewise not drawn.",
+    "DELIVERY IS NO LONGER THE REASON — CHECKED 2026-08-30, FILE BY FILE. This scene previously said that none of its models was in meshes-lite/ and that every beat was therefore hollow. That is false now and the sentence had already been carried forward once: ALL of this scene's models are on disk and sync-state.mjs reports 75 of 75 scenes drawing complete. Every beat renders. The scene stays `candidate` for the authoring reasons recorded elsewhere in this list, not for a delivery one. The corollary matters more than the correction: derive-landmark.mjs CAN now measure against these parents, so the anchor work this note was suppressing is open work rather than impossible work.",
+    "SIDES, STATED EXPLICITLY BECAUSE THE IDS DO NOT CARRY THEM. Right / left in this scene: thalamus FMA258714 right and FMA258716 left — NOT consecutive, and the trap in this topic; stria medullaris of thalamus FMA73413 right and FMA73414 left; anterior limb of internal capsule FMA72908 right and FMA72909 left; lateral ventricle FMA78449 right and FMA78450 left; fornix of forebrain FMA72924 right and FMA72925 left. The optic tracts break the pattern entirely and were the second trap: right is FMA62382 and left is FMA67936, from different id ranges. Each was read back off the catalog name individually rather than inferred from a neighbouring id.",
+    "NO ANCHORS WERE AUTHORED. The features named on a surface here — the anterior tubercle, the pulvinar, the two geniculate bodies, the hypothalamic sulcus, the groove holding the stria terminalis — were not measured, and the reason given here was a stale delivery claim rather than a definition problem: all twenty-one meshes are on disk as of 2026-08-30, so derive-landmark.mjs CAN measure against them and this is open work, not impossible work. Placing them by eye remains what that tool exists to prevent. Derive at this scene's audit: the lateral geniculate body is plausibly derivable as a --contact of the thalamus against the optic tract, with more than one witness available if the medial geniculate is done at the same time against the brachium of the inferior colliculus; the anterior tubercle is plausibly an --extreme on the anteromedial axis with a --slab restricting it to the anterior quarter.",
+    "INTERNAL CAPSULE, BASAL GANGLIA AND HYPOTHALAMUS ARE DELIBERATELY NOT IN covers[]. All three are separate CURRICULUM.json structures, two of them in this same topic, and each appears here only as far as the thalamus needs it — the capsule as the lateral wall, the caudate and putamen as what lies beyond it, the hypothalamus and mammillary body as the floor. Claiming any of them would hide a gap that is currently visible."
+  ]
+}

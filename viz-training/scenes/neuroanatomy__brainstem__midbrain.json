@@ -1,0 +1,723 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__brainstem__midbrain",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Brainstem",
+  "structure": "Midbrain",
+  "covers": [
+    "Midbrain"
+  ],
+  "learning_goal": "Place the midbrain as the short segment between diencephalon and pons, divide it front to back into crus, tegmentum and tectum around the cerebral aqueduct, name the four colliculi on its back and what each one does, and use that arrangement to explain why a lesion here takes an eye and the opposite limbs together, and why a mass above it kills by blocking the aqueduct.",
+  "status": "candidate",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "brainstem",
+      "midbrain",
+      "hydrocephalus",
+      "coma",
+      "eye movements",
+      "neuroimaging orientation"
+    ],
+    "terms": [
+      "midbrain",
+      "mesencephalon",
+      "cerebral peduncle",
+      "crus cerebri",
+      "tegmentum",
+      "tectum",
+      "quadrigeminal plate",
+      "superior colliculus",
+      "inferior colliculus",
+      "brachium of superior colliculus",
+      "brachium of inferior colliculus",
+      "cerebral aqueduct",
+      "aqueduct of Sylvius",
+      "periaqueductal grey",
+      "substantia nigra",
+      "red nucleus",
+      "interpeduncular fossa",
+      "oculomotor nerve",
+      "trochlear nerve",
+      "cranial nerve III",
+      "cranial nerve IV",
+      "Weber syndrome",
+      "Benedikt syndrome",
+      "Parinaud syndrome",
+      "dorsal midbrain syndrome",
+      "uncal herniation",
+      "blown pupil",
+      "Kernohan's notch",
+      "obstructive hydrocephalus",
+      "Mickey Mouse sign",
+      "hummingbird sign",
+      "progressive supranuclear palsy",
+      "pineal body",
+      "medial geniculate body",
+      "lateral geniculate body",
+      "decerebrate posturing"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": 0.5
+  },
+  "structures": [
+    {
+      "key": "peduncle",
+      "name": "peduncle of midbrain",
+      "label": "Midbrain — peduncle",
+      "role": "part",
+      "group": "Midbrain",
+      "layer": "organ",
+      "color": "#c9a27a",
+      "refs": {
+        "bodyparts3d": "FMA62394"
+      },
+      "terms": [
+        "cerebral peduncle",
+        "peduncle of midbrain",
+        "crus cerebri",
+        "tegmentum",
+        "substantia nigra",
+        "red nucleus",
+        "corticospinal tract"
+      ],
+      "narration": "The bulk of the midbrain and the only mesh of its substance in this catalog — one undivided block on each side, carrying everything in front of the aqueduct. Strictly the peduncle is crus plus tegmentum, with the substantia nigra as the black plate between them; the crus in front holds the descending corticospinal, corticobulbar and corticopontine fibres, and the tegmentum behind it holds the red nucleus, the oculomotor and trochlear nuclei and the periaqueductal grey. None of those three divisions is separable in this mesh, so read this as the front two-thirds of the midbrain entire and take the internal map from beat 3."
+    },
+    {
+      "key": "aqueduct",
+      "name": "cerebral aqueduct",
+      "label": "Cerebral aqueduct",
+      "role": "part",
+      "group": "Midbrain",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78467"
+      },
+      "terms": [
+        "cerebral aqueduct",
+        "aqueduct of Sylvius",
+        "periaqueductal grey",
+        "obstructive hydrocephalus"
+      ],
+      "narration": "The narrowest point in the whole ventricular system, and the axis the midbrain is built around: everything in front of it is tegmentum and crus, everything behind it is tectum. It carries CSF from the third ventricle to the fourth. A pinhole a few millimetres long draining the entire supratentorial CSF volume is a design with no margin, which is why a pineal tumour, a tectal glioma or simple aqueduct stenosis produces hydrocephalus of the lateral and third ventricles with a normal-sized fourth — a pattern that localises the block to this one line before any other information is available."
+    },
+    {
+      "key": "sc_r",
+      "name": "right superior colliculus",
+      "label": "Superior colliculus (R)",
+      "role": "part",
+      "group": "Tectum",
+      "layer": "organ",
+      "color": "#7fb069",
+      "refs": {
+        "bodyparts3d": "FMA73422"
+      },
+      "terms": [
+        "superior colliculus",
+        "tectum",
+        "quadrigeminal plate",
+        "visual reflexes",
+        "pupillary light reflex",
+        "Parinaud syndrome"
+      ],
+      "narration": "The upper of the two swellings on the back of the midbrain, and a visual reflex centre — it turns the head and eyes towards something that moves, and the pretectal area just in front of it handles the pupillary light reflex. Vertical gaze is organised at this level too, which is why a mass pressing on the tectum produces Parinaud syndrome. It receives its input through the brachium of the superior colliculus from the optic tract."
+    },
+    {
+      "key": "sc_l",
+      "name": "left superior colliculus",
+      "label": "Superior colliculus (L)",
+      "role": "part",
+      "group": "Tectum",
+      "layer": "organ",
+      "color": "#7fb069",
+      "refs": {
+        "bodyparts3d": "FMA73423"
+      },
+      "terms": [
+        "superior colliculus",
+        "left superior colliculus"
+      ],
+      "narration": "The left superior colliculus. The four colliculi together make the quadrigeminal plate, so both pairs are shown rather than one side."
+    },
+    {
+      "key": "ic_r",
+      "name": "right inferior colliculus",
+      "label": "Inferior colliculus (R)",
+      "role": "part",
+      "group": "Tectum",
+      "layer": "organ",
+      "color": "#5f9a4a",
+      "refs": {
+        "bodyparts3d": "FMA73434"
+      },
+      "terms": [
+        "inferior colliculus",
+        "auditory pathway",
+        "lateral lemniscus",
+        "medial geniculate body"
+      ],
+      "narration": "The lower swelling, and an obligatory relay in the auditory pathway rather than a reflex centre: every ascending auditory fibre synapses here before going on through the brachium of the inferior colliculus to the medial geniculate body. Upper pair visual, lower pair auditory — superior for sight, inferior for sound, and the order runs top to bottom in the sensible way."
+    },
+    {
+      "key": "ic_l",
+      "name": "left inferior colliculus",
+      "label": "Inferior colliculus (L)",
+      "role": "part",
+      "group": "Tectum",
+      "layer": "organ",
+      "color": "#5f9a4a",
+      "refs": {
+        "bodyparts3d": "FMA73435"
+      },
+      "terms": [
+        "inferior colliculus",
+        "left inferior colliculus"
+      ],
+      "narration": "The left inferior colliculus, completing the quadrigeminal plate."
+    },
+    {
+      "key": "bsc_r",
+      "name": "brachium of right superior colliculus",
+      "label": "Brachium of superior colliculus (R)",
+      "role": "part",
+      "group": "Tectum",
+      "layer": "organ",
+      "color": "#a8c98f",
+      "refs": {
+        "bodyparts3d": "FMA73461"
+      },
+      "terms": [
+        "brachium of superior colliculus",
+        "optic tract",
+        "lateral geniculate body"
+      ],
+      "narration": "The arm that carries fibres from the optic tract into the superior colliculus, running forwards and upwards towards the lateral geniculate body. It is the visual input cable of the tectum, and it is the reason the optic tract is shown in this scene at all."
+    },
+    {
+      "key": "bsc_l",
+      "name": "brachium of left superior colliculus",
+      "label": "Brachium of superior colliculus (L)",
+      "role": "part",
+      "group": "Tectum",
+      "layer": "organ",
+      "color": "#a8c98f",
+      "refs": {
+        "bodyparts3d": "FMA73462"
+      },
+      "terms": [
+        "brachium of superior colliculus",
+        "left brachium"
+      ],
+      "narration": "The left visual input cable, in the same relation."
+    },
+    {
+      "key": "bic_r",
+      "name": "brachium of right inferior colliculus",
+      "label": "Brachium of inferior colliculus (R)",
+      "role": "part",
+      "group": "Tectum",
+      "layer": "organ",
+      "color": "#8ab472",
+      "refs": {
+        "bodyparts3d": "FMA73463"
+      },
+      "terms": [
+        "brachium of inferior colliculus",
+        "auditory pathway",
+        "medial geniculate body"
+      ],
+      "narration": "The auditory output cable, carrying fibres from the inferior colliculus forwards to the medial geniculate body of the thalamus, from which the auditory radiation runs to the temporal lobe. Neither geniculate body exists as a mesh here, so the brachium ends on the thalamus rather than on a named nucleus."
+    },
+    {
+      "key": "bic_l",
+      "name": "brachium of left inferior colliculus",
+      "label": "Brachium of inferior colliculus (L)",
+      "role": "part",
+      "group": "Tectum",
+      "layer": "organ",
+      "color": "#8ab472",
+      "refs": {
+        "bodyparts3d": "FMA73464"
+      },
+      "terms": [
+        "brachium of inferior colliculus",
+        "left brachium"
+      ],
+      "narration": "The left auditory output cable."
+    },
+    {
+      "key": "pons",
+      "name": "pons",
+      "label": "Pons",
+      "role": "context",
+      "group": "Brainstem below",
+      "layer": "organ",
+      "color": "#b98f6d",
+      "refs": {
+        "bodyparts3d": "FMA67943"
+      },
+      "terms": [
+        "pons",
+        "brainstem",
+        "pontomesencephalic junction"
+      ],
+      "narration": "The segment below, and the lower boundary of the midbrain. The junction between them is where the oculomotor nerve emerges into the interpeduncular fossa on the front and the trochlear nerve emerges on the back — the only cranial nerve to leave the brainstem posteriorly, and the reason a dorsal midbrain lesion can give a vertical diplopia. The pons has its own scene."
+    },
+    {
+      "key": "medulla",
+      "name": "medulla oblongata",
+      "label": "Medulla oblongata",
+      "role": "context",
+      "group": "Brainstem below",
+      "layer": "organ",
+      "color": "#a87f5d",
+      "refs": {
+        "bodyparts3d": "FMA62004"
+      },
+      "terms": [
+        "medulla oblongata",
+        "brainstem",
+        "medullary pyramid"
+      ],
+      "narration": "Shown so the three brainstem segments read as one continuous stalk. The corticospinal fibres that enter the crus of the midbrain pass through the pons and reach the pyramids of this segment before decussating; the funnel is unbroken from corona radiata to spinal cord."
+    },
+    {
+      "key": "thal_r",
+      "name": "right thalamus",
+      "label": "Thalamus (R)",
+      "role": "context",
+      "group": "Diencephalon above",
+      "layer": "organ",
+      "color": "#9c74c4",
+      "refs": {
+        "bodyparts3d": "FMA258714"
+      },
+      "terms": [
+        "thalamus",
+        "diencephalon",
+        "medial geniculate body",
+        "lateral geniculate body"
+      ],
+      "narration": "The upper boundary. The midbrain is the segment between this and the pons, and the geniculate bodies that both brachia run towards are the postero-inferior corner of the thalamus — present inside this mesh but not separable from it."
+    },
+    {
+      "key": "thal_l",
+      "name": "left thalamus",
+      "label": "Thalamus (L)",
+      "role": "context",
+      "group": "Diencephalon above",
+      "layer": "organ",
+      "color": "#9c74c4",
+      "refs": {
+        "bodyparts3d": "FMA258716"
+      },
+      "terms": [
+        "thalamus",
+        "left thalamus"
+      ],
+      "narration": "The left thalamus. FMA258714 is right and FMA258716 is left — the pair does not follow the usual consecutive-id rule."
+    },
+    {
+      "key": "pineal",
+      "name": "pineal body",
+      "label": "Pineal body",
+      "role": "context",
+      "group": "Diencephalon above",
+      "layer": "organ",
+      "color": "#d98cb0",
+      "refs": {
+        "bodyparts3d": "FMA62033"
+      },
+      "terms": [
+        "pineal body",
+        "pineal gland",
+        "pineal tumour",
+        "Parinaud syndrome",
+        "quadrigeminal cistern"
+      ],
+      "narration": "Sitting immediately above and in front of the superior colliculi, in the recess at the back of the third ventricle. It is context rather than midbrain, and it is here for one clinical reason: a pineal mass compresses the tectum behind it and the aqueduct beneath it at the same time, giving the paralysis of upward gaze and the hydrocephalus that together make Parinaud syndrome. This scene shows the anatomy that explains why those two signs travel together."
+    },
+    {
+      "key": "post_comm",
+      "name": "posterior commissure",
+      "label": "Posterior commissure",
+      "role": "context",
+      "group": "Diencephalon above",
+      "layer": "organ",
+      "color": "#e0d0e8",
+      "refs": {
+        "bodyparts3d": "FMA62072"
+      },
+      "terms": [
+        "posterior commissure",
+        "pretectal area",
+        "pupillary light reflex",
+        "consensual reflex"
+      ],
+      "narration": "The band crossing the midline at the junction of third ventricle and aqueduct, just above the superior colliculi. Fibres of the pupillary light reflex cross in it to reach the opposite Edinger-Westphal nucleus, which is what makes the consensual response consensual. A lesion here is the classic cause of light-near dissociation."
+    },
+    {
+      "key": "ot_r",
+      "name": "right optic tract",
+      "label": "Optic tract (R)",
+      "role": "context",
+      "group": "Visual input to the tectum",
+      "layer": "organ",
+      "color": "#e8e07a",
+      "refs": {
+        "bodyparts3d": "FMA62382"
+      },
+      "terms": [
+        "optic tract",
+        "brachium of superior colliculus",
+        "lateral geniculate body",
+        "pupillary light reflex"
+      ],
+      "narration": "Sweeping backwards round the crus of the midbrain — its curve is what makes the front of the peduncle recognisable from the side. Most of its fibres end in the lateral geniculate body for vision; the ones that matter here leave it for the pretectal area and the superior colliculus, by way of the brachium, and serve the light reflex and visual orienting rather than sight itself."
+    },
+    {
+      "key": "ot_l",
+      "name": "left optic tract",
+      "label": "Optic tract (L)",
+      "role": "context",
+      "group": "Visual input to the tectum",
+      "layer": "organ",
+      "color": "#e8e07a",
+      "refs": {
+        "bodyparts3d": "FMA67936"
+      },
+      "terms": [
+        "optic tract",
+        "left optic tract"
+      ],
+      "narration": "The left optic tract, curving round the left crus in the same way."
+    },
+    {
+      "key": "chiasm",
+      "name": "optic chiasm",
+      "label": "Optic chiasm",
+      "role": "context",
+      "group": "Visual input to the tectum",
+      "layer": "organ",
+      "color": "#f0ea9a",
+      "refs": {
+        "bodyparts3d": "FMA62045"
+      },
+      "terms": [
+        "optic chiasm",
+        "optic tract",
+        "decussation"
+      ],
+      "narration": "Where the two tracts begin, shown so their course backwards to the midbrain has a visible origin. It is well in front of the midbrain and belongs to the visual pathway rather than to this segment."
+    },
+    {
+      "key": "mamm",
+      "name": "mammillary body",
+      "label": "Mammillary body",
+      "role": "context",
+      "group": "Floor in front",
+      "layer": "organ",
+      "color": "#c48fa8",
+      "refs": {
+        "bodyparts3d": "FMA74877"
+      },
+      "terms": [
+        "mammillary body",
+        "interpeduncular fossa",
+        "oculomotor nerve",
+        "posterior perforated substance"
+      ],
+      "narration": "The front wall of the interpeduncular fossa, and the landmark that tells you where the midbrain starts on the base of the brain. The fossa is the hollow between the two crura, bounded in front by these bodies; the oculomotor nerve emerges into it on each side, and its floor is the posterior perforated substance where the small vessels enter. The fossa itself has a catalog entry that has not been fetched, so on screen it is a space between the two peduncles rather than a lit surface."
+    },
+    {
+      "key": "cerebellum",
+      "name": "cerebellum",
+      "label": "Cerebellum",
+      "role": "context",
+      "group": "Brainstem below",
+      "layer": "organ",
+      "color": "#8fa8c8",
+      "refs": {
+        "bodyparts3d": "FMA67944"
+      },
+      "terms": [
+        "cerebellum",
+        "superior cerebellar peduncle",
+        "tentorial notch",
+        "decussation of superior cerebellar peduncles"
+      ],
+      "narration": "Ghosted behind and below. It matters to the midbrain in two ways: the superior cerebellar peduncles enter the tegmentum and decussate within it before reaching the red nucleus and thalamus — which no mesh here shows — and the cerebellum sits below the tentorium whose notch the midbrain passes through, the aperture that uncal herniation closes."
+    },
+    {
+      "key": "v3",
+      "name": "third ventricle",
+      "label": "Third ventricle",
+      "role": "context",
+      "group": "Diencephalon above",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78454"
+      },
+      "terms": [
+        "third ventricle",
+        "cerebral aqueduct",
+        "hydrocephalus"
+      ],
+      "narration": "The cavity the aqueduct drains, ghosted. Its posterior end funnels into the aqueduct beneath the pineal body — follow the water forwards from the aqueduct and this is where it came from."
+    },
+    {
+      "key": "v4",
+      "name": "fourth ventricle",
+      "label": "Fourth ventricle",
+      "role": "context",
+      "group": "Brainstem below",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78469"
+      },
+      "terms": [
+        "fourth ventricle",
+        "cerebral aqueduct",
+        "hydrocephalus"
+      ],
+      "narration": "The cavity the aqueduct delivers into, between pons and cerebellum. Its size is the diagnostic point of beat 5: in aqueduct stenosis the two lateral ventricles and the third are large and this one is normal, because the obstruction lies between them."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The short segment in the middle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Midbrain",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "peduncle",
+          "to": "pons",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Three segments make the brainstem and this is the top one, about two centimetres long — the shortest of the three, and the only one that passes through the notch of the tentorium. Above it the thalamus, below it the pons, and the whole of it lit here. Everything travelling between the cerebral hemispheres and the spinal cord passes through this segment, and it also contains the nuclei of two cranial nerves, an auditory relay, a visual reflex centre and the narrowest part of the ventricular system, packed into a block the size of a thumb joint. That density is what makes small lesions here so consequential and is the theme of the last two beats."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Front and back — fossa and quadrigeminal plate",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "peduncle",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Floor in front"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Tectum",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "The midbrain looks completely different from the two sides, so learn both. From the front: two thick crura diverging upwards, the hollow between them the interpeduncular fossa with the mammillary bodies at its front edge, and the optic tracts curving round the outside of each crus. The oculomotor nerve emerges into that fossa — it has no mesh in this catalog and is named here, not drawn. Then the camera swings behind: four rounded swellings, the quadrigeminal plate, two above and two below, with the trochlear nerve appearing just beneath the inferior pair. No other part of the brainstem has anything on its back like these, so the colliculi are how you know you are looking at a midbrain."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Three layers around one tube",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": -0.12,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "aqueduct",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "aqueduct",
+          "to": "peduncle",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "Cut across it and the organising rule is a single tube with layers wrapped round it. The aqueduct, lit, is that tube. Behind it, everything is tectum — the colliculi and nothing else. In front of it, the tegmentum: periaqueductal grey immediately around the tube, then the oculomotor nucleus at the level of the superior colliculi and the trochlear nucleus at the level of the inferior ones, then the red nucleus, and the medial lemniscus laterally. In front of the tegmentum, the black plate of the substantia nigra, and in front of that the crus with its descending fibres — corticospinal and corticobulbar in the middle three-fifths, corticopontine on either side. Be clear about what is drawn: only the aqueduct and the undivided peduncle. The substantia nigra, the red nucleus, the periaqueductal grey and both cranial nerve nuclei are inside that one mesh and cannot be separated from it, so this beat is a map read over a solid block, not a dissection."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "The colliculi and their arms",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Tectum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Visual input to the tectum"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:auditory-relay",
+          "path": [
+            "ic_r",
+            "bic_r",
+            "thal_r"
+          ],
+          "duration": 4000
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "sc_r",
+            "ic_r"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Four hills and two pairs of arms. Superior colliculus above, visual: it takes fibres from the optic tract through the brachium of the superior colliculus and turns the eyes and head towards movement, and the pretectal area just in front of it runs the light reflex, whose fibres cross in the posterior commissure. Inferior colliculus below, auditory, and unlike the superior it is not a reflex centre but a compulsory synapse — the trace runs from it along the brachium of the inferior colliculus to the thalamus, standing for the medial geniculate body, which is inside the thalamic mesh and not separable from it. So: superior takes visual input in through its brachium, inferior sends auditory output on through its. The direction of each arm is worth as much as its name."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "A pinhole for all the water",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:csf",
+          "path": [
+            "v3",
+            "aqueduct",
+            "v4"
+          ],
+          "duration": 4500
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pineal",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Follow the water: third ventricle, aqueduct, fourth ventricle, in that order and through a channel a millimetre or two across. Everything made in the lateral and third ventricles has to pass this point, and nothing else drains it. Block it — congenital stenosis, a tectal glioma, a pineal mass like the one lit here — and the lateral and third ventricles enlarge while the fourth stays normal, which is the imaging signature that puts the lesion at this level and nowhere else. The pineal case is the one to remember whole, because the same mass reaches two structures at once: downwards onto the aqueduct for the hydrocephalus, backwards onto the tectum for the loss of upward gaze. Parinaud syndrome is not two coincidences, it is one tumour in a place where two things are within a few millimetres of each other."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "Why a midbrain stroke takes an eye and the opposite side",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": -0.12
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "peduncle",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "peduncle",
+          "to": "mamm",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "The pattern that names every brainstem lesion: a cranial nerve on the same side and the limbs on the other, because the nerve leaves before the long tracts have crossed. In the midbrain the nerve is the third. Weber syndrome is a lesion of the crus catching the oculomotor fibres as they pass through it — an ipsilateral eye down and out with a dilated pupil and a drooping lid, and a contralateral hemiplegia. Move back into the tegmentum and Benedikt syndrome adds a contralateral tremor from the red nucleus, with the same third nerve palsy. Both come from small branches of the posterior cerebral and basilar arteries, none of which exists in this catalog. Herniation produces the same third nerve palsy by a different route: the uncus is forced through the tentorial notch, presses the nerve against the free edge, and the pupil blows on the side of the mass — and if the crus is pushed against the opposite edge, the hemiplegia appears on the same side as the mass instead of the opposite, the false localising sign of Kernohan's notch."
+    }
+  ],
+  "gaps": [
+    "NO SUBSTANTIA NIGRA, NO RED NUCLEUS, NO PERIAQUEDUCTAL GREY, AND NO CRANIAL NERVE NUCLEUS. Searched the full 934-entry catalog for nigra, substantia, ruber, red nucleus, tegment, tectum, crus, periaqueductal, grey, gray, oculomotor, trochlear, Edinger, nucleus, lemniscus, reticular. FMA62394 `peduncle of midbrain` is one undivided mesh that contains all of them, and the only nucleus meshes in the catalog anywhere are the two caudate nuclei. Beat 3 is therefore explicitly a map read over a solid block and says so in itself; the peduncle structure card repeats the caveat so a student meeting the mesh outside the beat is not misled.",
+    "NO CRANIAL NERVE III AND NO CRANIAL NERVE IV. Searched oculomotor, trochlear, third nerve, fourth nerve, nerve, cranial, and the whole `nerve` set: the catalog holds exactly two nerve meshes, the left and right optic nerves, neither used here. This is the same absence already recorded for the Cranial Nerves topic of this course. Beats 2 and 6 name both nerves and draw neither, and each says so where it says it. The interpeduncular fossa the third nerve emerges into is handled by the next gap.",
+    "THE INTERPEDUNCULAR FOSSA HAS A CATALOG ENTRY THAT IS NOT ON DISK. FMA83740 `interpeduncular fossa` exists in available-meshes.json but is not in meshes-lite/, so it is not used as a model. It was NOT authored as an anchor either: it is a hollow bounded by two crura and the mammillary bodies, which is a space between structures rather than a point on one of them — the same shape of definition that made derive-landmark.mjs refuse the axillary apex. Beat 2 names it and the mammillary-body card describes it as the space between the two peduncles, which is what the student actually sees.",
+    "THE EIGHT TECTAL MESHES ARRIVED DURING THIS RUN — READ THIS BEFORE BELIEVING ANY DELIVERY NOTE. When this scene was written, FMA73422/73423 superior colliculi, FMA73434/73435 inferior colliculi and FMA73461/73462/73463/73464 the four brachia were verified absent from meshes-lite/ (478 files), and this note said beat 2's posterior half and the whole of beat 4 were hollow. Re-checked at the end of the same run: 491 files, all eight present, and sync-state.mjs reports 75 of 75 scenes drawing complete. All twenty-three of this scene's models are on disk and every beat renders. The scene stays `candidate` for authoring reasons only — the undivided peduncle mesh and the absent cranial nerves below. The wider lesson is the one REPAIR-BACKLOG.md section 3 keeps making: a delivery claim is true only on the day it is measured, so check meshes-lite/ rather than quoting a note, including this one. The corollary: derive-landmark.mjs can now measure against the colliculi, and the brachium-to-colliculus contacts are worth attempting at this scene's audit.",
+    "NO GENICULATE BODY OF EITHER KIND. Searched geniculate, genicul, corpus geniculatum, metathalamus. Both are inside FMA258714 / FMA258716, the thalamic meshes, and are not separable from them, so the beat 4 auditory trace ends on `thal_r` and the narration states that the thalamus is standing for the medial geniculate body rather than pretending to be it.",
+    "NO SUPERIOR CEREBELLAR PEDUNCLE AND NO DECUSSATION. Searched peduncle, brachium conjunctivum, decussation, cerebellar — the only `peduncle` hit in the entire catalog is FMA62394, the midbrain's own. The cerebellum card names the peduncles entering the tegmentum and says no mesh shows them. The Cerebellum topic of this course will meet the same absence: verified today that `cerebellum` returns exactly one entry, FMA67944, the whole organ, with no lobe, vermis, tonsil, flocculus or deep nucleus.",
+    "NO INTRACRANIAL VESSEL OF ANY KIND, so the posterior cerebral and basilar branches of beat 6 are named and not drawn. Searched basilar, posterior cerebral, vertebral, perforator, quadrigeminal artery, circle of Willis, sinus. Consistent with the blood-supply routing recorded for this course.",
+    "NO ANCHORS WERE AUTHORED. Every feature this scene names on a structure is either inside the undivided peduncle mesh, which cannot be measured into parts, or on a colliculus mesh that is not on disk — and derive-landmark.mjs cannot measure a parent it does not have. Two definitions were considered and rejected before measuring rather than after: the pontomesencephalic junction, which would be a `--contact` between peduncle and pons and is a transverse LINE rather than a point, and the interpeduncular fossa, covered above. Revisit the junction if the tool ever gains a line primitive; do not derive it as a point.",
+    "SIDES, STATED EXPLICITLY BECAUSE THE IDS DO NOT CARRY THEM. Right / left in this scene: superior colliculus FMA73422 / FMA73423, inferior colliculus FMA73434 / FMA73435, brachium of superior colliculus FMA73461 / FMA73462, brachium of inferior colliculus FMA73463 / FMA73464, thalamus FMA258714 / FMA258716. The two colliculus pairs and the superior-brachium pair are consecutive and ascending right-then-left; the INFERIOR brachia are not — FMA73463 is RIGHT and FMA73464 is LEFT, while FMA73461/73462 are the SUPERIOR pair, so the four brachia interleave superior-right, superior-left, inferior-right, inferior-left across 73461-73464 rather than grouping by colliculus. Each was read off the catalog name individually. The pons, medulla, cerebellum, aqueduct, chiasm, pineal body, posterior commissure, mammillary body and both non-lateral ventricles are unpaired midline meshes with no side. The optic tracts break the pattern entirely: FMA62382 is RIGHT and FMA67936 is LEFT, not consecutive and not in the same numbering block.",
+    "THE PONS, MEDULLA, CEREBELLUM AND THALAMUS ARE DELIBERATELY NOT IN covers[]. All four are separate CURRICULUM.json structures with their own scenes, and each appears here only as a boundary of the midbrain. `Cerebral aqueduct` is not a curriculum structure in its own right — it belongs to Ventricles under Ventricular System & CSF, which is already authored — so beat 5 teaches it as the midbrain's central tube without claiming the ventricular structure."
+  ]
+}

@@ -1,0 +1,566 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__basal-ganglia-diencephalon__hypothalamus-pituitary",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Basal Ganglia & Diencephalon",
+  "structure": "Hypothalamus & pituitary",
+  "covers": [
+    "Hypothalamus & pituitary"
+  ],
+  "learning_goal": "Box in the hypothalamus with the four landmarks that are visible on the base of the brain — optic chiasm in front, mammillary bodies behind, tuber cinereum and its stalk between, lamina terminalis closing the front wall — then use that box to explain the two completely different ways it controls the two lobes of the pituitary, and why a tumour in the sella turcica takes the visual fields before it takes anything else.",
+  "status": "candidate",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "hypothalamus",
+      "pituitary",
+      "endocrine control",
+      "diencephalon",
+      "visual pathway",
+      "sella turcica"
+    ],
+    "terms": [
+      "hypothalamus",
+      "pituitary gland",
+      "hypophysis",
+      "adenohypophysis",
+      "anterior pituitary",
+      "pars distalis",
+      "neurohypophysis",
+      "posterior pituitary",
+      "pars nervosa",
+      "infundibulum",
+      "pituitary stalk",
+      "median eminence",
+      "tuber cinereum",
+      "mammillary body",
+      "lamina terminalis",
+      "optic chiasm",
+      "optic nerve",
+      "optic tract",
+      "third ventricle",
+      "hypothalamic sulcus",
+      "sella turcica",
+      "hypophysial fossa",
+      "diaphragma sellae",
+      "cavernous sinus",
+      "hypophysial portal system",
+      "releasing hormone",
+      "supraoptic nucleus",
+      "paraventricular nucleus",
+      "oxytocin",
+      "vasopressin",
+      "antidiuretic hormone",
+      "Rathke's pouch",
+      "craniopharyngioma",
+      "bitemporal hemianopia",
+      "pituitary adenoma",
+      "prolactinoma",
+      "pituitary apoplexy",
+      "diabetes insipidus",
+      "SIADH",
+      "Wernicke encephalopathy",
+      "Korsakoff syndrome",
+      "Papez circuit",
+      "thermoregulation"
+    ]
+  },
+  "camera": {
+    "framing": "medial",
+    "autoRotate": 0.004,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "tuber",
+      "name": "tuber cinereum",
+      "label": "Tuber cinereum",
+      "role": "part",
+      "group": "Hypothalamus — what is drawn of it",
+      "layer": "organ",
+      "color": "#c98fb0",
+      "refs": {
+        "bodyparts3d": "FMA62327"
+      },
+      "terms": [
+        "tuber cinereum",
+        "hypothalamus",
+        "infundibulum",
+        "median eminence",
+        "pituitary stalk",
+        "floor of third ventricle"
+      ],
+      "narration": "The grey swelling in the floor of the third ventricle, between the optic chiasm in front and the mammillary bodies behind. This is the piece of hypothalamus you can actually see on the base of a brain, and it is the piece that matters most: its middle draws down into a funnel, the infundibulum, and the funnel becomes the pituitary stalk. The uppermost part of that funnel, the median eminence, is where the hypothalamic releasing hormones are handed over to blood — beat 4 turns on it. Neither the infundibulum nor the median eminence is a separate mesh here, so the stalk is a described continuity between this shape and the gland below it."
+    },
+    {
+      "key": "mam",
+      "name": "mammillary body",
+      "label": "Mammillary body",
+      "role": "part",
+      "group": "Hypothalamus — what is drawn of it",
+      "layer": "organ",
+      "color": "#d9a066",
+      "refs": {
+        "bodyparts3d": "FMA74877"
+      },
+      "terms": [
+        "mammillary body",
+        "posterior hypothalamus",
+        "fornix",
+        "mammillothalamic tract",
+        "Papez circuit",
+        "Wernicke encephalopathy"
+      ],
+      "narration": "Two pea-sized swellings behind the tuber cinereum — posterior hypothalamus, and the back wall of the box. The fornix ends here; from here the mammillothalamic tract runs up to the anterior nucleus of the thalamus, which is the memory limb of the Papez circuit and the reason thiamine deficiency, which destroys these bodies first, produces the amnesia of Korsakoff's syndrome. Note this single mesh stands for both mammillary bodies — the catalog carries no left and right — and the tract itself is not drawn."
+    },
+    {
+      "key": "lt",
+      "name": "lamina terminalis",
+      "label": "Lamina terminalis",
+      "role": "part",
+      "group": "Hypothalamus — what is drawn of it",
+      "layer": "organ",
+      "color": "#e6d7c3",
+      "refs": {
+        "bodyparts3d": "FMA61975"
+      },
+      "terms": [
+        "lamina terminalis",
+        "anterior wall of third ventricle",
+        "preoptic area",
+        "anterior commissure",
+        "circumventricular organ"
+      ],
+      "narration": "The thin sheet closing the front of the third ventricle, running up from the optic chiasm to the anterior commissure. It is the front wall of the hypothalamic box, it is the original front end of the neural tube, and it carries one of the circumventricular organs — a patch with no blood-brain barrier that samples plasma osmolality directly. That is the sensor half of the thirst-and-vasopressin loop in beat 5. Surgeons open it to drain a third ventricle from in front, which is the practical reason to know it is a membrane and not bone."
+    },
+    {
+      "key": "pit",
+      "name": "pituitary gland",
+      "label": "Pituitary gland",
+      "role": "part",
+      "group": "Pituitary",
+      "layer": "organ",
+      "color": "#f0c419",
+      "refs": {
+        "bodyparts3d": "FMA13889"
+      },
+      "terms": [
+        "pituitary gland",
+        "hypophysis",
+        "adenohypophysis",
+        "anterior lobe",
+        "neurohypophysis",
+        "posterior lobe",
+        "pars distalis",
+        "pars nervosa",
+        "Rathke's pouch",
+        "pituitary adenoma"
+      ],
+      "narration": "A gland the size of a pea hanging from the stalk into the hypophysial fossa of the sphenoid bone. One shape, two organs: the anterior lobe is glandular epithelium that climbed up from the roof of the developing mouth as Rathke's pouch, and the posterior lobe is nervous tissue that grew down from the floor of the diencephalon — the same downgrowth the tuber cinereum and infundibulum belong to. They are controlled in two entirely different ways, which beat 4 draws. This is one undivided mesh: the two lobes are named throughout and are not separately drawn."
+    },
+    {
+      "key": "chiasm",
+      "name": "optic chiasm",
+      "label": "Optic chiasm",
+      "role": "part",
+      "group": "The visual relations",
+      "layer": "organ",
+      "color": "#7fb069",
+      "refs": {
+        "bodyparts3d": "FMA62045"
+      },
+      "terms": [
+        "optic chiasm",
+        "chiasma",
+        "decussation",
+        "nasal retinal fibres",
+        "bitemporal hemianopia",
+        "suprasellar"
+      ],
+      "narration": "The front wall of the box, sitting directly above and in front of the pituitary. Fibres from the nasal half of each retina cross here; those halves see the temporal half of each visual field. So a mass growing up out of the sella presses the crossing fibres first and takes the outer half of each field — bitemporal hemianopia, and the reason a patient with a pituitary tumour may notice it by clipping doorframes on both sides before noticing anything endocrine."
+    },
+    {
+      "key": "on_r",
+      "name": "right optic nerve",
+      "label": "Optic nerve (R)",
+      "role": "context",
+      "group": "The visual relations",
+      "layer": "organ",
+      "color": "#9ac47f",
+      "refs": {
+        "bodyparts3d": "FMA50875"
+      },
+      "terms": [
+        "optic nerve",
+        "prechiasmatic",
+        "junctional scotoma"
+      ],
+      "narration": "Entering the chiasm from the right orbit. Included so the geometry of the field defect is readable: press in front of the chiasm and you take one eye entirely; press the middle and you take both temporal fields; press behind and you are into the tract and taking a homonymous half of the world."
+    },
+    {
+      "key": "on_l",
+      "name": "left optic nerve",
+      "label": "Optic nerve (L)",
+      "role": "context",
+      "group": "The visual relations",
+      "layer": "organ",
+      "color": "#9ac47f",
+      "refs": {
+        "bodyparts3d": "FMA50878"
+      },
+      "terms": [
+        "optic nerve",
+        "left optic nerve"
+      ],
+      "narration": "The left nerve, entering from the left orbit."
+    },
+    {
+      "key": "ot_r",
+      "name": "right optic tract",
+      "label": "Optic tract (R)",
+      "role": "context",
+      "group": "The visual relations",
+      "layer": "organ",
+      "color": "#7fb069",
+      "refs": {
+        "bodyparts3d": "FMA62382"
+      },
+      "terms": [
+        "optic tract",
+        "lateral geniculate body",
+        "homonymous hemianopia",
+        "suprachiasmatic nucleus"
+      ],
+      "narration": "Leaving the back of the chiasm and sweeping round the midbrain to the thalamus. It also gives the hypothalamus its clock: a small branch reaches the suprachiasmatic nucleus just above the chiasm, which is how daylight sets the circadian rhythm. That nucleus has no mesh — like every hypothalamic nucleus in this catalog — so it is named in beat 5 and not shown."
+    },
+    {
+      "key": "ot_l",
+      "name": "left optic tract",
+      "label": "Optic tract (L)",
+      "role": "context",
+      "group": "The visual relations",
+      "layer": "organ",
+      "color": "#7fb069",
+      "refs": {
+        "bodyparts3d": "FMA67936"
+      },
+      "terms": [
+        "optic tract",
+        "left optic tract"
+      ],
+      "narration": "The left tract, leaving the chiasm on the left."
+    },
+    {
+      "key": "v3",
+      "name": "third ventricle",
+      "label": "Third ventricle",
+      "role": "context",
+      "group": "The cavity it lines",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78454"
+      },
+      "terms": [
+        "third ventricle",
+        "hypothalamic sulcus",
+        "infundibular recess",
+        "optic recess",
+        "floor of third ventricle"
+      ],
+      "narration": "The hypothalamus is not an organ with a capsule; it is the lower part of the wall and the whole of the floor of this cavity. The dividing line above is the hypothalamic sulcus, a shallow groove running from the interventricular foramen to the cerebral aqueduct: above it the wall is thalamus, below it hypothalamus. The sulcus is a surface groove with no mesh, so it is described here and in the thalamus scene in the same words rather than drawn in either."
+    },
+    {
+      "key": "fornix_r",
+      "name": "right fornix of forebrain",
+      "label": "Fornix (R)",
+      "role": "context",
+      "group": "The cavity it lines",
+      "layer": "organ",
+      "color": "#f2efe4",
+      "refs": {
+        "bodyparts3d": "FMA72924"
+      },
+      "terms": [
+        "fornix",
+        "column of fornix",
+        "mammillary body",
+        "hippocampus"
+      ],
+      "narration": "The arch from the hippocampus, diving down in front of the thalamus as the column of the fornix and ending in the mammillary body of its own side. It is the input the mammillary body exists to receive, and it is what makes the posterior hypothalamus a memory structure as well as an autonomic one."
+    },
+    {
+      "key": "fornix_l",
+      "name": "left fornix of forebrain",
+      "label": "Fornix (L)",
+      "role": "context",
+      "group": "The cavity it lines",
+      "layer": "organ",
+      "color": "#f2efe4",
+      "refs": {
+        "bodyparts3d": "FMA72925"
+      },
+      "terms": [
+        "fornix",
+        "left fornix"
+      ],
+      "narration": "The left arch, ending in the same way."
+    },
+    {
+      "key": "thal_r",
+      "name": "right thalamus",
+      "label": "Thalamus (R)",
+      "role": "context",
+      "group": "The cavity it lines",
+      "layer": "organ",
+      "color": "#9c74c4",
+      "refs": {
+        "bodyparts3d": "FMA258714"
+      },
+      "terms": [
+        "thalamus",
+        "hypothalamic sulcus",
+        "anterior nucleus",
+        "diencephalon"
+      ],
+      "narration": "The upper storey of the same wall, shown so the sulcus between them has something on both sides of it. Also the destination of the mammillothalamic tract: mammillary body up to anterior nucleus of thalamus, then on to cingulate cortex. It has its own scene."
+    },
+    {
+      "key": "thal_l",
+      "name": "left thalamus",
+      "label": "Thalamus (L)",
+      "role": "context",
+      "group": "The cavity it lines",
+      "layer": "organ",
+      "color": "#9c74c4",
+      "refs": {
+        "bodyparts3d": "FMA258716"
+      },
+      "terms": [
+        "thalamus",
+        "left thalamus"
+      ],
+      "narration": "The left thalamus, the upper storey on the other side."
+    },
+    {
+      "key": "sphenoid",
+      "name": "sphenoid bone",
+      "label": "Sphenoid bone — the fossa is not separately modelled",
+      "role": "context",
+      "group": "The bony house",
+      "layer": "bone",
+      "color": "#d9d2c5",
+      "refs": {
+        "bodyparts3d": "FMA52736"
+      },
+      "approx": {
+        "shown_as": "sphenoid bone",
+        "detail": "sella turcica / hypophysial fossa"
+      },
+      "terms": [
+        "sphenoid bone",
+        "sella turcica",
+        "hypophysial fossa",
+        "diaphragma sellae",
+        "transsphenoidal",
+        "cavernous sinus"
+      ],
+      "narration": "The bone the gland sits in. The hypophysial fossa is a saddle-shaped hollow on its upper surface and has no mesh of its own, so clicking this lights the whole sphenoid rather than the saddle — the amber marking says as much. Two consequences are worth the space: the sphenoid air sinus lies directly below the fossa, which is why a pituitary tumour is removed through the nose, and the cavernous sinus with the internal carotid artery and cranial nerves III, IV, V1, V2 and VI lies on each side of it, which is why a tumour that expands sideways rather than upwards presents with a squint rather than a field defect. No dural sinus and no intracranial artery exists in this catalog, so both are named and not drawn."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Four landmarks on the base of the brain",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Hypothalamus — what is drawn of it"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The visual relations"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Pituitary"
+        }
+      ],
+      "narration": "Turn a brain over and the hypothalamus is the only part of the diencephalon you can see, because it is the floor. Front to back in the midline: the optic chiasm, then the grey swelling of the tuber cinereum with the stalk hanging off it, then the two mammillary bodies. That row is the hypothalamus from the outside — about the size of a thumbnail and weighing four grams, controlling temperature, appetite, thirst, sleep, the autonomic nervous system and the entire endocrine system. Everything lit here is drawn; what is not drawn is anything inside it. This catalog contains no hypothalamic nucleus of any kind, so treat the lit shapes as the box and the nuclei as furniture you are told about."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The box, and its lid",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "tuber",
+          "to": "v3",
+          "kind": "boundary"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lt",
+          "to": "chiasm",
+          "kind": "boundary"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fornix_r",
+          "to": "mam",
+          "kind": "continuity"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Hypothalamus — what is drawn of it",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "On the midline cut the box closes. In front, the lamina terminalis runs up from the chiasm — the anterior wall. Below and behind, tuber cinereum then mammillary bodies — the floor. Medially, the cavity of the third ventricle, which the hypothalamus lines. Above, the hypothalamic sulcus, and above that the thalamus; that groove is the ceiling and it is the one boundary in this beat that is described rather than lit, because it is a groove on a surface with no mesh. Laterally the internal capsule and the subthalamus, neither of which is drawn here. The fornix crosses the box from above to end in the mammillary body — the connector shown here — and it is worth noticing that a structure this small has a wall shared with the memory system, a wall shared with the visual system and a floor that becomes an endocrine gland."
+    },
+    {
+      "mode": "glands",
+      "beat": 3,
+      "title": "One gland, two organs",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Pituitary"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The bony house"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "tuber",
+          "to": "pit",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "The gland hangs from the tuber cinereum by the stalk and sits in a saddle of the sphenoid bone, with a shelf of dura, the diaphragma sellae, over it and only the stalk passing through. Its two halves have nothing in common but an address. The posterior lobe is brain: it grew down from the floor of the diencephalon, it is continuous with the hypothalamus through the stalk, and it is made of axon terminals and glia rather than gland cells. The anterior lobe is not brain at all: it climbed up from the roof of the primitive mouth as Rathke's pouch, lost its connection to the pharynx, and is true glandular epithelium. That single embryological fact predicts everything in the next beat, and it also explains craniopharyngioma — a tumour arising from remnants of Rathke's pouch along the stalk, which is why it sits above the sella and takes the visual fields early. The mesh here is one shape: the two lobes are named and not separately drawn, and the saddle is not drawn either, so the bone lights whole."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Two lobes, two completely different controls",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:portal-blood",
+          "path": [
+            "tuber",
+            "pit"
+          ],
+          "duration": 4000
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:axonal-transport",
+          "path": [
+            "tuber",
+            "pit"
+          ],
+          "duration": 4000
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "tuber",
+            "pit"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "The same two shapes and the same route down the stalk, traced twice, because two quite different things travel it. The anterior lobe is controlled by BLOOD: hypothalamic neurons release tiny amounts of releasing and inhibiting hormones into a capillary bed in the median eminence, and a portal system carries that blood straight down the stalk to a second capillary bed in the anterior lobe, without ever passing through the general circulation. That is why the doses are minute and why cutting the stalk raises prolactin — prolactin is the one held under tonic inhibition by dopamine, so removing the control releases it while every other anterior hormone falls. The posterior lobe is controlled by AXONS: cell bodies in the supraoptic and paraventricular nuclei make vasopressin and oxytocin, and their own axons carry the hormone down the stalk to be released from terminals in the posterior lobe, which stores rather than makes. Neither the portal vessels nor the tract is drawn — the catalog contains no hypophysial portal vein and no hypothalamohypophysial tract — so both traces are concepts walking a real path between two real shapes."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "What goes wrong, and where you would predict it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pit",
+            "chiasm"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "mam",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Sort the lesions by direction. Upwards out of the sella and you hit the chiasm: bitemporal hemianopia, the classic presentation of a pituitary adenoma or of a craniopharyngioma. Sideways and you are in the cavernous sinus: a third, fourth or sixth nerve palsy and facial numbness, with the visual fields intact. Bleeding into an adenoma is pituitary apoplexy — sudden headache, sudden field loss, ophthalmoplegia and an acute loss of cortisol that is the part which kills. Damage the stalk or the posterior lobe and vasopressin fails: cranial diabetes insipidus, litres of dilute urine and unquenchable thirst, with the sensor for that thirst sitting in the lamina terminalis at the other end of the box. Too much vasopressin is SIADH, the mirror image. Destroy the mammillary bodies lit here — thiamine deficiency does it first and fastest — and you get Wernicke's encephalopathy acutely and the dense amnesia of Korsakoff's syndrome after. And the diffuse functions belong to nuclei this catalog does not carry: the anterior hypothalamus loses heat and the posterior conserves it, so a lesion of the anterior region gives uncontrolled hyperthermia; the ventromedial nucleus signals satiety and the lateral hunger; the suprachiasmatic nucleus keeps the clock, set by the branch off the optic tract shown here. Every one of those nuclei is named and none is drawn."
+    }
+  ],
+  "gaps": [
+    "NO HYPOTHALAMIC NUCLEUS OF ANY KIND. Searched hypothalam, supraoptic, paraventricular, suprachiasmatic, arcuate, ventromedial, dorsomedial, preoptic, lateral hypothalamic, infundibular nucleus, nucleus, mammillary nucleus. The catalog's only 'nucleus' entries are the two caudate nuclei. This is the defining limit of the scene and it is stated in beat 1 before any nucleus is named, again in the optic tract card for the suprachiasmatic nucleus, and again in beat 5: the drawn shapes are the box, and the nuclei are described furniture. It is also why the scene is honest as 3d_anatomy despite the subject having no mesh of its own — four genuine hypothalamic and perihypothalamic landmarks DO exist and are drawn (tuber cinereum FMA62327, mammillary body FMA74877, lamina terminalis FMA61975, optic chiasm FMA62045), and the hypothalamus is by definition the floor and lower wall of the third ventricle, which is drawn.",
+    "NO INFUNDIBULUM AND NO MEDIAN EMINENCE as separate meshes. Searched infundib, stalk, median eminence, pars, neurohypophys, adenohypophys, hypophysial. The tuber cinereum mesh is the parent the funnel arises from and the pituitary mesh is what it ends on, so the stalk is authored as a described continuity between the two and both beat 3 and beat 4 say so. The median eminence carries the whole of beat 4's portal story and its absence is stated inside that beat rather than only here.",
+    "THE PITUITARY IS ONE UNDIVIDED MESH. FMA13889 carries no anterior and no posterior lobe, and the two lobes are different organs with different embryology and opposite control mechanisms — which is the entire content of beats 3 and 4. Both beats and the structure card state that the lobes are named and not separately drawn. Searched anterior lobe, posterior lobe, pars distalis, pars nervosa, pars intermedia, adenohypophysis, neurohypophysis.",
+    "NO HYPOPHYSIAL PORTAL SYSTEM AND NO HYPOTHALAMOHYPOPHYSIAL TRACT, so both of beat 4's mechanisms are concept traces walking between two real shapes rather than drawn vessels or drawn axons. Searched portal, hypophysial vein, hypophyseal, tract, hypothalamohypophysial, supraopticohypophysial. This is consistent with the course-wide absence: no intracranial vessel of any kind exists in this catalog — no cerebral artery, no circle of Willis, no dural venous sinus — which is also why the cavernous sinus and internal carotid artery of the sphenoid card and beat 5 are named and not drawn (searched cavernous, sinus, internal carotid, carotid — only the two COMMON carotid arteries exist, FMA3941 right and FMA4058 left, and they stop in the neck, so neither was used).",
+    "THE SELLA TURCICA HAS NO MESH, and is marked honestly rather than faked. The sphenoid bone (FMA52736) carries `approx: {shown_as: 'sphenoid bone', detail: 'sella turcica / hypophysial fossa'}` so the player shows it in amber and says which bone is really lit. It was NOT authored as an anchor, and the reason recorded here was a stale delivery claim: as of 2026-08-30 all fifteen meshes including FMA52736 the sphenoid and FMA13889 the pituitary are on disk, so the measurement is open work. Derive at this scene's audit — the fossa is a SURFACE rather than a point, so the right call is `--contact FMA13889 --area N` against the sphenoid, which averages the contact patch instead of taking the single nearest vertex. The diaphragma sellae is dura and absent for the same reason as every meningeal structure.",
+    "NO MENINGES ANYWHERE IN THE CATALOG. Searched mening, dura, dural, arachnoid, pia, falx, tentorium, diaphragma, cistern — zero hits across all 934 entries. This affects the diaphragma sellae named in beat 3 and is recorded here because the Meninges structure of the Ventricular System & CSF topic depends on the same finding.",
+    "THE MAMMILLARY BODY IS A SINGLE UNPAIRED MESH. FMA74877 is 'mammillary body' with no left or right, although the structure is a pair in life and beats 1 and 5 both speak of two. Its card says so. The same mesh and the same caveat appear in the thalamus scene of this topic, worded consistently.",
+    "NO MAMMILLOTHALAMIC TRACT and no tract of any kind (searched mammillothalamic, mamillothalamic, tract, fasciculus, bundle, Vicq d'Azyr). Both ends are drawn — the mammillary body here and the thalamus as context — and the connection is described in the mammillary body card, the thalamus card and beat 2. Stated identically in the thalamus scene.",
+    "DELIVERY IS NO LONGER THE REASON — CHECKED 2026-08-30, FILE BY FILE. This scene previously said that none of its models was in meshes-lite/ and that every beat was therefore hollow. That is false now and the sentence had already been carried forward once: ALL of this scene's models are on disk and sync-state.mjs reports 75 of 75 scenes drawing complete. Every beat renders. The scene stays `candidate` for the authoring reasons recorded elsewhere in this list, not for a delivery one. The corollary matters more than the correction: derive-landmark.mjs CAN now measure against these parents, so the anchor work this note was suppressing is open work rather than impossible work.",
+    "SIDES, STATED EXPLICITLY BECAUSE THE IDS DO NOT CARRY THEM. Right / left in this scene: optic nerve FMA50875 right and FMA50878 left; optic tract FMA62382 right and FMA67936 left — from different id ranges and the trap here, so each was read back off the catalog name rather than inferred; fornix of forebrain FMA72924 right and FMA72925 left; thalamus FMA258714 right and FMA258716 left, which is NOT consecutive and is the trap this topic shares with the thalamus and basal ganglia scenes. Four structures in this scene are genuinely unpaired midline meshes and are labelled without a side: tuber cinereum, lamina terminalis, optic chiasm and pituitary gland. The mammillary body is unpaired in the catalog but paired in life, which is a different thing and is recorded above.",
+    "THALAMUS IS DELIBERATELY NOT IN covers[]. It is a separate CURRICULUM.json structure in this same topic with its own scene, and appears here only as the upper storey of the wall the hypothalamic sulcus divides. The same is true of the fornix and hippocampus, which belong to the Limbic System topic. Claiming any of them would hide a gap that is currently visible."
+  ]
+}

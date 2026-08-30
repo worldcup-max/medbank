@@ -2926,8 +2926,12 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   anterior limb of internal capsule FMA72908 R / FMA72909 L, amygdala FMA72832 R / FMA72833 L, insula
   FMA72977 R / FMA72978 L, lateral ventricle FMA78449 R / FMA78450 L, and the pair that breaks the
   consecutive-id pattern — thalamus **FMA258714 right, FMA258716 left**.
-- `candidate`, not `ready`: 17 of 17 models missing from `meshes-lite/`. Every beat is hollow until the
-  brain meshes are fetched.
+- ~~`candidate`, not `ready`: 17 of 17 models missing from `meshes-lite/`.~~ **Amended 2026-08-30: that
+  delivery gap is closed.** All 17 were verified on disk individually and `sync-state.mjs` reports the scene
+  drawing complete; every beat renders. The scene's two stale `gaps[]` notes were rewritten — the second of
+  them had also given "the parent mesh is not on disk" as the reason no anchor was authored, which was the
+  wrong reason as well as a stale one (see the new note for the per-feature definition reasons). It stays
+  `candidate` for the authoring reasons only: no posterior limb, no substantia nigra, no subthalamic nucleus.
 - Absences stated in the scene where the student would otherwise be misled: no substantia nigra, no
   subthalamic nucleus, globus pallidus undivided (no GPi/GPe), and **only the anterior limb of the internal
   capsule** — no genu, no posterior limb, so the beat that turns on capsular stroke is written as narration
@@ -2936,3 +2940,110 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
 - Thalamus and Internal capsule are deliberately **not** in `covers[]` — both are separate curriculum
   structures in this topic and appear here only as neighbours.
 
+
+### `neuroanatomy__basal-ganglia-diencephalon__thalamus` (new)
+- id `neuroanatomy__basal-ganglia-diencephalon__thalamus` · Neuroanatomy · Basal Ganglia & Diencephalon ·
+  Thalamus · mode `3d_anatomy` · provider `bodyparts3d` · status **candidate** · 21 structures (4 parts) ·
+  6 views · covers "Thalamus" only.
+- Built as a boundary scene rather than a nucleus scene, because the thalamus mesh is undivided: the six
+  walls (third ventricle medially, internal capsule laterally, fornix and ventricular floor above,
+  hypothalamus below the hypothalamic sulcus, pulvinar over the tectum behind) are the teaching, and the
+  nuclei are named in beat 5 as described-not-shown.
+- Curriculum views `cross_section` + `location` both present (beats 3 and 4 cross-section; beats 1 and 2
+  location; beats 5 and 6 mechanism).
+- Sides: thalamus **FMA258714 right, FMA258716 left** (not consecutive); stria medullaris FMA73413 R /
+  FMA73414 L; anterior limb of internal capsule FMA72908 R / FMA72909 L; lateral ventricle FMA78449 R /
+  FMA78450 L; fornix FMA72924 R / FMA72925 L; optic tract **FMA62382 right, FMA67936 left** (different id
+  ranges — the second trap).
+- `candidate`, not `ready`: 21 of 21 models missing from `meshes-lite/`. Every beat is hollow.
+- Absences stated where a student would otherwise be misled: no thalamic nucleus and no geniculate body,
+  no internal medullary lamina, **no posterior limb of the internal capsule** (so the drawn anterior limb
+  lies in front of the thalamus, not beside it — said in both capsule cards and in beat 3), no
+  interthalamic adhesion, no hypothalamic sulcus, no mammillothalamic tract, no cerebral vessel.
+- Internal capsule, basal ganglia and hypothalamus deliberately **not** in `covers[]`.
+
+### `neuroanatomy__basal-ganglia-diencephalon__hypothalamus-pituitary` (new)
+- id `neuroanatomy__basal-ganglia-diencephalon__hypothalamus-pituitary` · Neuroanatomy · Basal Ganglia &
+  Diencephalon · Hypothalamus & pituitary · mode `3d_anatomy` · provider `bodyparts3d` · status
+  **candidate** · 15 structures (5 parts) · 5 views · covers "Hypothalamus & pituitary" only.
+- Routed to `3d_anatomy` and not to `diagram` despite there being no "hypothalamus" mesh, because four
+  genuine hypothalamic/perihypothalamic landmarks exist and are drawn — tuber cinereum FMA62327,
+  mammillary body FMA74877, lamina terminalis FMA61975, optic chiasm FMA62045 — plus the pituitary gland
+  FMA13889 and the third ventricle whose floor the hypothalamus is.
+- Curriculum views `location` + `glands` + `mechanism` all present (beats 1–2 location, beat 3 glands,
+  beats 4–5 mechanism).
+- Sella turcica marked honestly rather than faked: `approx {shown_as: sphenoid bone, detail: sella
+  turcica / hypophysial fossa}` on FMA52736. No anchor authored — derive-landmark cannot measure a mesh
+  that is not in `meshes-lite/`; the gap note records that the correct future call is
+  `--contact FMA13889 --area N`, because the fossa is a surface and not a point.
+- Sides: optic nerve FMA50875 R / FMA50878 L; optic tract **FMA62382 right, FMA67936 left**; fornix
+  FMA72924 R / FMA72925 L; thalamus **FMA258714 right, FMA258716 left**. Four true midline meshes carry no
+  side: tuber cinereum, lamina terminalis, optic chiasm, pituitary gland.
+- `candidate`, not `ready`: 15 of 15 models missing from `meshes-lite/`. Every beat is hollow.
+- Absences stated in the beat that needs them: no hypothalamic nucleus of any kind, no infundibulum and no
+  median eminence, pituitary undivided (no anterior/posterior lobe), no hypophysial portal system and no
+  hypothalamohypophysial tract (beat 4's two mechanisms are concept traces), **no meninges anywhere in the
+  catalog** (searched nine spellings, zero hits — this also settles the Meninges structure of the
+  Ventricular System & CSF topic), no cavernous sinus and no internal carotid artery.
+
+
+### `neuroanatomy__basal-ganglia-diencephalon__internal-capsule` (new)
+- id `neuroanatomy__basal-ganglia-diencephalon__internal-capsule` · Neuroanatomy · Basal Ganglia &
+  Diencephalon · Internal capsule · mode `3d_anatomy` · provider `bodyparts3d` · status **candidate** ·
+  17 structures (2 parts) · 5 views · 24 ops · covers "Internal capsule" only.
+- Curriculum views required (`cross_section`, `mechanism`) both present: beats 1-3 `cross_section`,
+  beats 4-5 `mechanism`.
+- All 17 ids verified in `available-meshes.json`, names character-for-character, and all 17 present in
+  `meshes-lite/` — the scene draws complete. Sides: anterior limb FMA72908 R / FMA72909 L, caudate
+  FMA72826 R / FMA72827 L, putamen FMA72828 R / FMA72829 L, globus pallidus FMA72830 R / FMA72831 L,
+  lateral ventricle FMA78449 R / FMA78450 L, occipital lobe FMA72975 R / FMA72976 L, and the trap pair —
+  thalamus **FMA258714 right, FMA258716 left**.
+- `candidate` for an **authoring** reason, not a delivery one: only the two anterior limbs exist as meshes.
+  No genu, no posterior limb, no retrolentiform or sublentiform part, no corona radiata — and the posterior
+  limb is the part the clinical teaching turns on. The scene is built around that rather than over it: beat 2
+  teaches the capsule as the space between its two walls (caudate then thalamus medially, lentiform nucleus
+  laterally), which is how the capsule is defined anatomically and survives the missing geometry.
+- Honest disclosure carried in the beat, not only in `gaps[]`: beat 4's corticospinal trace routes through
+  `ic_ant_r` because it is the only capsular key that exists, and the narration says the fibres it stands for
+  actually run in the posterior limb. Beat 5 names three arterial territories and draws none.
+- No anchor authored. The genu is the bend of a shape with no mesh, so there is nothing to measure the corner
+  of; the nearest proxy would define where the anterior limb ends, not where the capsule turns. Not attempted,
+  deliberately, and recorded so no later run derives it and believes it.
+- Caudate, putamen, globus pallidus and thalamus deliberately **not** in `covers[]` — all four have their own
+  scenes in this topic and appear here only as the walls that define the capsule. The complementary boundary
+  holds: `...__basal-ganglia` shows the same two anterior limbs and does not claim "Internal capsule".
+
+
+### `neuroanatomy__brainstem__midbrain` (new — first Brainstem scene)
+- id `neuroanatomy__brainstem__midbrain` · Neuroanatomy · Brainstem · Midbrain · mode `3d_anatomy` ·
+  provider `bodyparts3d` · status **candidate** · 23 structures (10 parts) · 6 views · 31 ops ·
+  covers "Midbrain" only.
+- Curriculum views required (`cross_section`, `location`) both present: beats 1-2 `location`,
+  beats 3-6 `cross_section`.
+- All 23 ids verified in `available-meshes.json`, names character-for-character. **23 of 23 in
+  `meshes-lite/` — the scene draws complete.** Recorded because it is the kind of fact this corpus keeps
+  getting wrong: at the start of this run the eight tectal meshes (FMA73422/73423 superior colliculi,
+  FMA73434/73435 inferior, FMA73461-73464 the four brachia) were verified ABSENT, and the scene was written
+  saying beat 2's posterior half and all of beat 4 were hollow. They arrived during the run — `meshes-lite/`
+  went 478 → 491 files — and the scene's `gaps[]` now carries both readings and the date of each. `candidate`
+  is therefore an authoring status here, not a delivery one.
+- Sides, and this scene has the worst id trap in the corpus so far: the four brachia interleave rather than
+  grouping by colliculus — FMA73461 **superior** R, FMA73462 **superior** L, FMA73463 **inferior** R,
+  FMA73464 **inferior** L. Colliculi FMA73422 R / FMA73423 L superior, FMA73434 R / FMA73435 L inferior.
+  Optic tracts break the numbering entirely: FMA62382 **right**, FMA67936 **left**. Thalamus FMA258714 R /
+  FMA258716 L. Aqueduct, pons, medulla, cerebellum, pineal body, posterior commissure, mammillary body,
+  chiasm and the third and fourth ventricles are unpaired midline meshes.
+- Absences stated in the beat that needs them: FMA62394 `peduncle of midbrain` is one undivided block, so
+  crus, tegmentum, substantia nigra, red nucleus, periaqueductal grey and both cranial-nerve nuclei are a map
+  read over a solid mesh and beat 3 says so. No CN III or CN IV (the catalog holds two nerve meshes in total,
+  both optic). No geniculate body of either kind — beat 4's auditory trace ends on the thalamus and says the
+  thalamus is standing for the medial geniculate rather than pretending to be it. No superior cerebellar
+  peduncle or decussation. No basilar or posterior cerebral artery, so beat 6's vessels are named only.
+- `FMA83740 interpeduncular fossa` is in the catalog but not on disk, and was **not** authored as an anchor
+  either: it is a hollow bounded by two crura and the mammillary bodies, a space between structures rather
+  than a point on one, the same shape of definition that made `derive-landmark.mjs` refuse the axillary apex.
+- Verified for the topics ahead while searching: `cerebellum` returns exactly one catalog entry, FMA67944,
+  the whole organ — no vermis, lobe, tonsil, flocculus or deep nucleus. The task's coverage table calling
+  Cerebellum "whole cerebellum only" is confirmed by search, not assumed.
+- Pons, medulla, cerebellum and thalamus deliberately **not** in `covers[]` — each has its own curriculum
+  entry and appears here only as a boundary of the midbrain.
