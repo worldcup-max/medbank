@@ -343,26 +343,28 @@
   function closeMenu(){ if(menu&&menu.parentNode) menu.parentNode.removeChild(menu); menu=null; try{ document.removeEventListener("click", outsideMenu, true); }catch(_){} }
   function outsideMenu(e){ if(menu && !menu.contains(e.target) && e.target!==chip) closeMenu(); }
   function mItem(icon,label){
-    var it=el("div","display:flex;align-items:center;gap:11px;padding:12px 16px;cursor:pointer;font-size:14.5px;color:"+C.ink,"<span style='width:20px;text-align:center;font-size:15px'>"+icon+"</span><span>"+esc(label)+"</span>");
-    it.onmouseenter=function(){ it.style.background=C.tint; };
-    it.onmouseleave=function(){ it.style.background="#fff"; };
+    var it=el("div",null,"<span style='width:20px;text-align:center;font-size:15px'>"+icon+"</span><span>"+esc(label)+"</span>");
+    it.className="mrow";
     return it;
   }
   async function toggleMenu(){
     if(menu){ closeMenu(); return; }
     var sb=client(); var signedIn=false, name="", email="", st={};
     if(sb){ try{ var ses=await sb.auth.getSession(); if(ses.data.session){ signedIn=true; var u=ses.data.session.user; email=u.email||""; name=(u.user_metadata&&u.user_metadata.full_name)||""; st=(window.MB_SYNC&&MB_SYNC.status)?(MB_SYNC.status()||{}):{}; } }catch(_){} }
-    menu=el("div","position:fixed;right:14px;top:calc(env(safe-area-inset-top,0px) + 56px);z-index:100000;background:#fff;border:1px solid "+C.line+";border-radius:14px;box-shadow:0 16px 46px rgba(28,20,45,.24);min-width:242px;overflow:hidden;font-family:-apple-system,Segoe UI,Roboto,sans-serif");
+    menu=el("div"); menu.id="mbAcctMenu";
+    (function(){ var r = chip ? chip.getBoundingClientRect() : {left:14,top:innerHeight-80};
+      menu.style.left = Math.max(10, r.left) + "px";
+      menu.style.bottom = Math.max(10, innerHeight - (r.top||0) + 8) + "px"; })();
     if(signedIn){
-      menu.appendChild(el("div","padding:14px 16px;border-bottom:1px solid #f0edf6",
-        "<div style='font-weight:800;color:"+C.ink+"'>"+esc(name||"Your account")+"</div>"+
-        "<div style='font-size:12.5px;color:"+C.dim+";word-break:break-all'>"+esc(email)+"</div>"+
+      menu.appendChild(el("div","padding:14px 16px;border-bottom:1px solid var(--line,#f0edf6)",
+        "<div style='font-weight:800;color:var(--text,#1c1830)'>"+esc(name||"Your account")+"</div>"+
+        "<div style='font-size:12.5px;color:var(--dim,#5c5570);word-break:break-all'>"+esc(email)+"</div>"+
         // AUTH-04 — don't say "Synced" unless MB_SYNC is actually active on this device
         (st.syncing
           ? "<div style='font-size:12px;color:"+C.teal+";margin-top:4px;font-weight:600'>✓ Synced"+(st.level?(" · "+esc(st.level)+" level"):"")+"</div>"
           : "<div style='font-size:12px;color:#b3391f;margin-top:4px;font-weight:600'>⚠ Not syncing — this device only</div>")));
     } else {
-      menu.appendChild(el("div","padding:14px 16px;border-bottom:1px solid #f0edf6;font-weight:700;color:"+C.ink,"Not signed in"));
+      menu.appendChild(el("div","padding:14px 16px;border-bottom:1px solid var(--line,#f0edf6);font-weight:700;color:var(--text,#1c1830)"+"","Not signed in"));
     }
     var rows;
     if(signedIn){
@@ -386,29 +388,112 @@
     document.body.appendChild(menu);
     setTimeout(function(){ document.addEventListener("click", outsideMenu, true); },0);
   }
+  /* ---- account card, pinned to the bottom of the left panel ---- */
+  function styleOnce(){
+    if(document.getElementById('mb-acct-css')) return;
+    var st=document.createElement('style'); st.id='mb-acct-css';
+    st.textContent = [
+      '#mbAcct{margin:10px 8px calc(10px + env(safe-area-inset-bottom,0px));width:calc(100% - 16px);',
+      '  display:block;text-align:left;font:inherit;cursor:pointer;color:inherit;',
+      '  background:var(--card,#fff);border:1px solid var(--line,#e6e3f0);border-radius:14px;',
+      '  padding:12px 12px 10px;transition:border-color .14s,box-shadow .18s}',
+      '#mbAcct:hover{border-color:var(--accent,#5b21b6);box-shadow:0 6px 18px var(--shadow,rgba(20,16,38,.10))}',
+      '#mbAcct .top{display:flex;align-items:flex-start;gap:9px}',
+      '#mbAcct .tile{width:30px;height:30px;flex:0 0 30px;border-radius:9px;display:grid;place-items:center;',
+      '  background:var(--panel2,#f1eefb);color:var(--accent,#5b21b6);font-size:14px}',
+      '#mbAcct .who{min-width:0;flex:1}',
+      '#mbAcct .nm{display:block;font-weight:650;font-size:13.5px;color:var(--text,#1c1830);',
+      '  line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+      '#mbAcct .em{display:block;font-size:11.5px;color:var(--dim,#5c5570);line-height:1.35;',
+      '  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+      '#mbAcct .chev{color:var(--dimmer,#8b84a0);font-size:11px;flex:0 0 auto;margin-top:2px}',
+      '#mbAcct .meta{margin:10px 0 0;display:flex;flex-direction:column;gap:3px}',
+      '#mbAcct .meta span{font-size:11.5px;color:var(--dim,#5c5570);line-height:1.4;',
+      '  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+      '#mbAcct .meta b{color:var(--text,#1c1830);font-weight:650}',
+      '#mbAcct .meta .add{color:var(--accent,#5b21b6);font-weight:650}',
+      '#mbAcct .foot{margin-top:10px;padding-top:9px;border-top:1px solid var(--line,#e6e3f0);',
+      '  display:flex;align-items:center;gap:8px}',
+      '#mbAcct .pill{font-size:10px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;',
+      '  border-radius:20px;padding:3px 8px;white-space:nowrap}',
+      '#mbAcct .pill.ok{color:var(--recall,#0d9488);background:color-mix(in srgb,var(--recall,#0d9488) 14%,transparent)}',
+      '#mbAcct .pill.no{color:#e2574b;background:rgba(226,87,75,.14)}',
+      '#mbAcct .gear{margin-left:auto;width:28px;height:28px;flex:0 0 28px;border:0;border-radius:8px;',
+      '  background:none;color:var(--dimmer,#8b84a0);font-size:14px;cursor:pointer;display:grid;place-items:center}',
+      '#mbAcct .gear:hover{background:var(--panel2,#f1eefb);color:var(--text,#1c1830)}',
+      '#mbAcctMenu{position:fixed;z-index:100000;background:var(--card,#fff);',
+      '  border:1px solid var(--line,#e6e3f0);border-radius:14px;overflow:hidden;min-width:242px;',
+      '  box-shadow:0 18px 50px var(--shadow,rgba(28,20,45,.24));font:inherit}',
+      '#mbAcctMenu .mrow{display:flex;align-items:center;gap:11px;padding:11px 15px;cursor:pointer;',
+      '  font-size:14px;color:var(--text,#1c1830)}',
+      '#mbAcctMenu .mrow:hover{background:var(--panel2,#f1eefb)}',
+      '@media(max-width:820px){#mbAcct{margin-bottom:calc(18px + env(safe-area-inset-bottom,0px))}}'
+    ].join('');
+    document.head.appendChild(st);
+  }
+
+  function schoolOf(){
+    try{
+      var u=window.MB_USER||{};
+      return u.school || localStorage.getItem('mb_school') || '';
+    }catch(_){ return ''; }
+  }
+
   function ensureChip(){
     if(chip||typeof document==="undefined") return;
-    chip=el("button","position:fixed;right:14px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:9999;width:40px;height:40px;border-radius:50%;transition:right .24s ease;border:0;cursor:pointer;font-weight:800;font-size:16px;color:#fff;background:"+C.violet+";box-shadow:0 4px 14px rgba(91,33,182,.35);display:flex;align-items:center;justify-content:center","☁");
-    chip.id="mbAvatar";
+    var side=document.getElementById('sidebar'); if(!side) return;
+    styleOnce();
+    chip=document.createElement('button');
+    chip.id='mbAcct'; chip.type='button';
+    chip.innerHTML =
+      '<div class="top"><span class="tile">\u2601</span>'
+      + '<span class="who"><span class="nm">Not signed in</span><span class="em">Progress stays on this device</span></span>'
+      + '<span class="chev">\u25b4</span></div>'
+      + '<div class="meta"><span class="sch"></span><span class="lvl"></span></div>'
+      + '<div class="foot"><span class="pill no">\u26a0 Not syncing</span>'
+      + '<button class="gear" type="button" title="Settings" aria-label="Settings">\u2699</button></div>';
     chip.onclick=function(e){ e.stopPropagation(); toggleMenu(); };
-    document.body.appendChild(chip);
+    chip.querySelector('.gear').onclick=function(e){
+      e.stopPropagation(); closeMenu(); if(window.go) go('settings');
+    };
+    side.appendChild(chip);
     updateChip();
   }
+
   async function updateChip(){
     if(!chip) return;
     var sb=client(); if(!sb){ chip.style.display="none"; return; }
-    try{ var ses=await sb.auth.getSession();
-      if(ses.data.session){ var u=ses.data.session.user; chip.textContent=initialOf((u.user_metadata&&u.user_metadata.full_name),u.email);
-        // publish the signed-in name so app.html can greet the actual student (cached so the FIRST paint has it too)
-        try{ var fn=(u.user_metadata&&u.user_metadata.full_name)||"";
-          window.MB_USER={ name:fn, email:u.email||"" };
-          if(fn) localStorage.setItem("mb_user_name", fn); else localStorage.removeItem("mb_user_name");
+    var nm=chip.querySelector('.nm'), em=chip.querySelector('.em'),
+        sch=chip.querySelector('.sch'), lvl=chip.querySelector('.lvl'),
+        pill=chip.querySelector('.pill');
+    try{
+      var ses=await sb.auth.getSession();
+      if(ses.data.session){
+        var u=ses.data.session.user;
+        var fn=(u.user_metadata&&u.user_metadata.full_name)||"";
+        nm.textContent = fn || "Your account";
+        em.textContent = u.email||"";
+        try{ window.MB_USER={ name:fn, email:u.email||"" };
+             if(fn) localStorage.setItem("mb_user_name", fn); else localStorage.removeItem("mb_user_name");
         }catch(_){}
+        var st=(window.MB_SYNC&&MB_SYNC.status)?(MB_SYNC.status()||{}):{};
+        var school=schoolOf();
+        sch.innerHTML = school ? ('\ud83c\udfeb <b>'+esc(school)+'</b>')
+                               : '<span class="add">\uff0b Add your school</span>';
+        lvl.innerHTML = st.level ? ('\ud83c\udf93 <b>'+esc(st.level)+' level</b>') : '';
+        lvl.style.display = st.level ? '' : 'none';
+        pill.className = 'pill ' + (st.syncing ? 'ok' : 'no');
+        pill.textContent = st.syncing ? '\u2713 Synced' : '\u26a0 Not syncing';
+      } else {
+        nm.textContent="Not signed in"; em.textContent="Progress stays on this device";
+        sch.innerHTML=''; sch.style.display='none';
+        lvl.innerHTML='Sign in to sync across your phone and laptop'; lvl.style.display='';
+        pill.className='pill no'; pill.textContent='\u26a0 Not syncing';
+        try{ window.MB_USER=null; localStorage.removeItem("mb_user_name"); }catch(_){}
       }
-      else { chip.textContent="☁"; try{ window.MB_USER=null; localStorage.removeItem("mb_user_name"); }catch(_){} }
-      chip.style.background=C.violet;
     }catch(_){}
   }
+
   function toast(m){ try{ alert(m); }catch(_){} }
 
   window.MB_openAuth=open;
@@ -416,6 +501,7 @@
   if(typeof document!=="undefined"){
     if(configured()) document.addEventListener("DOMContentLoaded", function(){
       setTimeout(ensureChip, 800);
+      try{ window.MB_refreshAccountCard = updateChip; }catch(_){}
       try{ var sbr=client(); if(sbr && sbr.auth && sbr.auth.onAuthStateChange){ sbr.auth.onAuthStateChange(function(ev, session){
         if(ev==="PASSWORD_RECOVERY"){ try{ renderResetPassword(sbr); }catch(_){} return; }
         // Account-isolation guard for OUT-OF-BAND session changes (e.g. another tab/window signs in
