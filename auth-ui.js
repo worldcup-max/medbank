@@ -393,41 +393,39 @@
     if(document.getElementById('mb-acct-css')) return;
     var st=document.createElement('style'); st.id='mb-acct-css';
     st.textContent = [
-      '#mbAcct{margin:10px 8px calc(10px + env(safe-area-inset-bottom,0px));width:calc(100% - 16px);',
-      '  display:block;text-align:left;font:inherit;cursor:pointer;color:inherit;',
-      '  background:var(--card,#fff);border:1px solid var(--line,#e6e3f0);border-radius:14px;',
-      '  padding:12px 12px 10px;transition:border-color .14s,box-shadow .18s}',
-      '#mbAcct:hover{border-color:var(--accent,#5b21b6);box-shadow:0 6px 18px var(--shadow,rgba(20,16,38,.10))}',
-      '#mbAcct .top{display:flex;align-items:flex-start;gap:9px}',
-      '#mbAcct .tile{width:30px;height:30px;flex:0 0 30px;border-radius:9px;display:grid;place-items:center;',
-      '  background:var(--panel2,#f1eefb);color:var(--accent,#5b21b6);font-size:14px}',
+      '#mbAcct{position:sticky;bottom:0;z-index:5;margin:auto 8px 0;width:calc(100% - 16px);',
+      '  display:block;text-align:left;font:inherit;cursor:pointer;color:inherit;flex:0 0 auto;',
+      '  background:var(--card,#fff);border:1px solid var(--line,#e6e3f0);border-radius:12px;',
+      '  padding:9px 10px;margin-bottom:calc(10px + env(safe-area-inset-bottom,0px));',
+      '  box-shadow:0 0 0 8px var(--sidebg,#efe9fb),0 -12px 16px -14px var(--shadow,rgba(20,16,38,.18));',
+      '  transition:border-color .14s,box-shadow .18s}',
+      '#mbAcct:hover{border-color:var(--accent,#5b21b6)}',
+      '#mbAcct .top{display:flex;align-items:center;gap:9px}',
+      '#mbAcct .tile{width:28px;height:28px;flex:0 0 28px;border-radius:8px;display:grid;place-items:center;',
+      '  background:var(--panel2,#f1eefb);color:var(--accent,#5b21b6);font-size:13px}',
       '#mbAcct .who{min-width:0;flex:1}',
       '#mbAcct .nm{display:block;font-weight:650;font-size:13.5px;color:var(--text,#1c1830);',
-      '  line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+      '  line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
       '#mbAcct .em{display:block;font-size:11.5px;color:var(--dim,#5c5570);line-height:1.35;',
       '  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
-      '#mbAcct .chev{color:var(--dimmer,#8b84a0);font-size:11px;flex:0 0 auto;margin-top:2px}',
-      '#mbAcct .meta{margin:10px 0 0;display:flex;flex-direction:column;gap:3px}',
-      '#mbAcct .meta span{font-size:11.5px;color:var(--dim,#5c5570);line-height:1.4;',
-      '  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+      '#mbAcct .gear{width:26px;height:26px;flex:0 0 26px;border:0;border-radius:7px;background:none;',
+      '  color:var(--dimmer,#8b84a0);font-size:13.5px;cursor:pointer;display:grid;place-items:center}',
+      '#mbAcct .gear:hover{background:var(--panel2,#f1eefb);color:var(--text,#1c1830)}',
+      '#mbAcct .meta{display:flex;align-items:center;gap:7px;margin:7px 0 0;padding-left:1px}',
+      '#mbAcct .meta .sch{font-size:11.5px;color:var(--dim,#5c5570);line-height:1.35;min-width:0;',
+      '  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}',
       '#mbAcct .meta b{color:var(--text,#1c1830);font-weight:650}',
       '#mbAcct .meta .add{color:var(--accent,#5b21b6);font-weight:650}',
-      '#mbAcct .foot{margin-top:10px;padding-top:9px;border-top:1px solid var(--line,#e6e3f0);',
-      '  display:flex;align-items:center;gap:8px}',
-      '#mbAcct .pill{font-size:10px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;',
-      '  border-radius:20px;padding:3px 8px;white-space:nowrap}',
+      '#mbAcct .pill{font-size:9.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;',
+      '  border-radius:20px;padding:2px 7px;white-space:nowrap;flex:0 0 auto}',
       '#mbAcct .pill.ok{color:var(--recall,#0d9488);background:color-mix(in srgb,var(--recall,#0d9488) 14%,transparent)}',
       '#mbAcct .pill.no{color:#e2574b;background:rgba(226,87,75,.14)}',
-      '#mbAcct .gear{margin-left:auto;width:28px;height:28px;flex:0 0 28px;border:0;border-radius:8px;',
-      '  background:none;color:var(--dimmer,#8b84a0);font-size:14px;cursor:pointer;display:grid;place-items:center}',
-      '#mbAcct .gear:hover{background:var(--panel2,#f1eefb);color:var(--text,#1c1830)}',
       '#mbAcctMenu{position:fixed;z-index:100000;background:var(--card,#fff);',
       '  border:1px solid var(--line,#e6e3f0);border-radius:14px;overflow:hidden;min-width:242px;',
       '  box-shadow:0 18px 50px var(--shadow,rgba(28,20,45,.24));font:inherit}',
       '#mbAcctMenu .mrow{display:flex;align-items:center;gap:11px;padding:11px 15px;cursor:pointer;',
       '  font-size:14px;color:var(--text,#1c1830)}',
-      '#mbAcctMenu .mrow:hover{background:var(--panel2,#f1eefb)}',
-      '@media(max-width:820px){#mbAcct{margin-bottom:calc(18px + env(safe-area-inset-bottom,0px))}}'
+      '#mbAcctMenu .mrow:hover{background:var(--panel2,#f1eefb)}'
     ].join('');
     document.head.appendChild(st);
   }
@@ -447,11 +445,9 @@
     chip.id='mbAcct'; chip.type='button';
     chip.innerHTML =
       '<div class="top"><span class="tile">\u2601</span>'
-      + '<span class="who"><span class="nm">Not signed in</span><span class="em">Progress stays on this device</span></span>'
-      + '<span class="chev">\u25b4</span></div>'
-      + '<div class="meta"><span class="sch"></span><span class="lvl"></span></div>'
-      + '<div class="foot"><span class="pill no">\u26a0 Not syncing</span>'
-      + '<button class="gear" type="button" title="Settings" aria-label="Settings">\u2699</button></div>';
+      + '<span class="who"><span class="nm">Not signed in</span><span class="em">This device only</span></span>'
+      + '<button class="gear" type="button" title="Settings" aria-label="Settings">\u2699</button></div>'
+      + '<div class="meta"><span class="sch"></span><span class="pill no">\u26a0 Not syncing</span></div>';
     chip.onclick=function(e){ e.stopPropagation(); toggleMenu(); };
     chip.querySelector('.gear').onclick=function(e){
       e.stopPropagation(); closeMenu(); if(window.go) go('settings');
@@ -464,7 +460,7 @@
     if(!chip) return;
     var sb=client(); if(!sb){ chip.style.display="none"; return; }
     var nm=chip.querySelector('.nm'), em=chip.querySelector('.em'),
-        sch=chip.querySelector('.sch'), lvl=chip.querySelector('.lvl'),
+        sch=chip.querySelector('.sch'),
         pill=chip.querySelector('.pill');
     try{
       var ses=await sb.auth.getSession();
@@ -478,16 +474,16 @@
         }catch(_){}
         var st=(window.MB_SYNC&&MB_SYNC.status)?(MB_SYNC.status()||{}):{};
         var school=schoolOf();
-        sch.innerHTML = school ? ('\ud83c\udfeb <b>'+esc(school)+'</b>')
-                               : '<span class="add">\uff0b Add your school</span>';
-        lvl.innerHTML = st.level ? ('\ud83c\udf93 <b>'+esc(st.level)+' level</b>') : '';
-        lvl.style.display = st.level ? '' : 'none';
+        var bits=[];
+        if(school) bits.push('<b>'+esc(school)+'</b>');
+        if(st.level) bits.push('<b>'+esc(st.level)+' level</b>');
+        sch.innerHTML = bits.length ? bits.join(' \u00b7 ')
+                                    : '<span class="add">\uff0b Add your school</span>';
         pill.className = 'pill ' + (st.syncing ? 'ok' : 'no');
         pill.textContent = st.syncing ? '\u2713 Synced' : '\u26a0 Not syncing';
       } else {
         nm.textContent="Not signed in"; em.textContent="Progress stays on this device";
-        sch.innerHTML=''; sch.style.display='none';
-        lvl.innerHTML='Sign in to sync across your phone and laptop'; lvl.style.display='';
+        sch.innerHTML='<span class="add">Sign in to sync</span>';
         pill.className='pill no'; pill.textContent='\u26a0 Not syncing';
         try{ window.MB_USER=null; localStorage.removeItem("mb_user_name"); }catch(_){}
       }
