@@ -45,6 +45,9 @@
       "second part of axillary artery",
       "third part of axillary artery",
       "axillary lymph nodes",
+      "teres major",
+      "latissimus dorsi",
+      "cords of the brachial plexus",
       "level I nodes",
       "level II nodes",
       "level III nodes",
@@ -519,7 +522,7 @@
           "view": "anterior"
         }
       ],
-      "narration": "This is the exam fact. The axillary artery begins at the outer border of the first rib and runs behind pectoralis minor on its way to the arm. The muscle cuts it into three parts: the first part is above the muscle, the second part is behind it, the third part is below it. The number of branches follows the number of the part. One branch from the first part, the superior thoracic. Two from the second, the thoracoacromial and the lateral thoracic. Three from the third, the subscapular and the two circumflex humeral arteries. One, two, three — the muscle is what makes that countable."
+      "narration": "This is the exam fact. The axillary artery begins at the outer border of the first rib and runs behind pectoralis minor on its way to the arm. The muscle cuts it into three parts: the first part is above the muscle, the second part is behind it, the third part is below it. The number of branches follows the number of the part. One branch from the first part, the superior thoracic. Two from the second, the thoracoacromial and the lateral thoracic. Three from the third, the subscapular and the two circumflex humeral arteries. One, two, three — the muscle is what makes that countable. Be clear about what you are looking at: the vessel on screen is the subclavian artery, which stops at the first rib. The axillary artery and every branch just named are described here, not drawn, so read the three parts off the muscle's upper border, its back and its lower border."
     },
     {
       "mode": "associated_organs",
@@ -538,15 +541,15 @@
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "pec_minor",
-          "to": "subclavian_vein",
-          "kind": "landmark for nodal levels"
+          "to": "clavicle",
+          "kind": "level three lies above the muscle, at the apex under the clavicle"
         },
         {
           "op": "ROTATE_TO_VIEW",
           "view": "anterior"
         }
       ],
-      "narration": "The same muscle levels the axillary lymph nodes, and this is how a breast cancer is staged in theatre. Level one lies lateral to and below the muscle. Level two lies behind it. Level three lies medial to and above it, up at the apex of the axilla. In the Patey modified radical mastectomy pectoralis minor is divided precisely so the surgeon can reach level three, and pectoralis major is left alone. Remember the direction: artery parts are numbered from above downward, node levels from below upward."
+      "narration": "No lymph node is drawn in this beat — there is none in the model set — so take the muscle on screen as the ruler and place the levels around it. The same muscle levels the axillary lymph nodes, and this is how a breast cancer is staged in theatre. Level one lies lateral to and below the muscle. Level two lies behind it. Level three lies medial to and above it, up at the apex of the axilla. In the Patey modified radical mastectomy pectoralis minor is divided precisely so the surgeon can reach level three, and pectoralis major is left alone. Remember the direction: artery parts are numbered from above downward, node levels from below upward."
     },
     {
       "mode": "cross_section",
@@ -576,7 +579,7 @@
           "view": "superior"
         }
       ],
-      "narration": "Cut across at the level of the fourth rib and read from front to back. Skin, then superficial fascia holding the breast, then pectoral fascia, then pectoralis major. Then the clavipectoral fascia with pectoralis minor inside it. Then the axillary vessels and the cords of the brachial plexus. Then subscapularis on the front of the scapula behind. The anterior wall of the axilla is those two pectoral muscles plus that fascia; the posterior wall is subscapularis, teres major and latissimus dorsi."
+      "narration": "Cut across at the level of the fourth rib and read from front to back. Skin, then superficial fascia holding the breast, then pectoral fascia, then pectoralis major. Then the clavipectoral fascia with pectoralis minor inside it. Then the axillary vessels and the cords of the brachial plexus. Then subscapularis on the front of the scapula behind. The anterior wall of the axilla is those two pectoral muscles plus that fascia; the posterior wall is subscapularis, teres major and latissimus dorsi — of those three only subscapularis is on screen, and the vessels and cords in the middle of that list are named rather than drawn."
     },
     {
       "mode": "location",
@@ -610,12 +613,14 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
-    "No coracoid process mesh. The insertion is taught on the whole right scapula, with the coracoid named in narration and highlighted as part of the bone. This is the option-(b) route in the authoring rules — an adjacent structure that does exist — and it is a good candidate for a measured landmark anchor once the scapula geometry can be inspected offline.",
+    "There is no coracoid process mesh. The insertion is carried by a measured landmark anchor on the right scapula, derived as the point where pectoralis minor, coracobrachialis and the short head of biceps all contact the bone; the three witnesses agree to within 12.8 mm on a 158 mm bone. What the anchor cannot distinguish is the medial border of the coracoid, which is what pectoralis minor actually takes, from the tip, which carries the conjoint tendon — beat 2 separates them in narration only.",
     "No axillary artery and no axillary vein. The catalog stops at the subclavian vessels, so beat 4 traces the subclavian artery to the first rib and then narrates the three parts of the axillary artery against the muscle rather than showing them. The single most examined fact about this muscle is therefore spoken, not seen. None of the named branches — superior thoracic, thoracoacromial, lateral thoracic, subscapular, circumflex humeral — exist as meshes either.",
-    "No lymph nodes anywhere in the catalog. Beat 5 places the three nodal levels by their relation to the muscle in narration only. The curriculum's separate 'Axillary lymph nodes' entry cannot be authored as a 3D scene from this catalog and should take its deferred diagram mode when the cursor reaches it.",
+    "No lymph nodes anywhere in the catalog. Beat 5 places the three nodal levels by their relation to the muscle in narration only. The curriculum's separate 'Axillary lymph nodes' entry cannot be authored as a 3D scene from this catalog, and is authored in diagram mode for exactly that reason.",
     "No pectoral nerves. The medial pectoral nerve piercing the muscle, and the lateral pectoral nerve piercing the clavipectoral fascia, are both taught here and neither can be shown; the catalog holds two optic nerves and nothing else named.",
     "No fascia of any kind. The clavipectoral fascia is the organising idea of beats 2 and 6 — it encloses this muscle and subclavius, and four structures pierce it — and it has no model. Subclavius stands in for it visually.",
     "Ribs are shown as whole ribs. The origin is from the outer surfaces of ribs three to five near their cartilages, not from the whole shaft, so the highlighted bone is larger than the true attachment area."

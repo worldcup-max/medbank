@@ -137,14 +137,14 @@
       "anchor": {
         "on": "tibia",
         "uvw": [
-          0.8713,
-          0.636,
-          0.0285
+          0.752,
+          0.5415,
+          0.0
         ],
         "radius": 0.02
       },
-      "status": "ok",
-      "calibrated_by": "geometry: EXTREME +x within z:0,0.2 — the medial malleolus is the most medial point of the lower tibia (right leg: medial is +X) (EXTREME +x within z:0,0.2 · 189.7mm from centroid)",
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -z on the right tibia — the medial malleolus is the lowest point of the bone. Unified 2026-08-30 with gross__leg-foot__tibia-fibula, which uses the same definition, so the marker does not move between the two scenes of this topic.",
       "calibration_gap_mm": 0,
       "terms": [
         "medial malleolus"

@@ -97,7 +97,10 @@
       "deoxygenated blood",
       "oxygenated blood",
       "pulmonary circulation",
-      "systemic circulation"
+      "systemic circulation",
+      "Eustachian valve",
+      "jugular venous pulse",
+      "azygos collateral"
     ]
   },
   "camera": {
@@ -259,7 +262,11 @@
         "T8",
         "central tendon",
         "shortest intrathoracic course",
-        "drains below the diaphragm"
+        "drains below the diaphragm",
+        "Eustachian valve",
+        "valve of the inferior vena cava",
+        "jugular venous pulse",
+        "JVP"
       ],
       "narration": "Drains everything below the diaphragm. It pierces the central tendon at T8 and enters the right atrium within a couple of centimetres, so its course inside the chest is almost nothing. Because the opening is in the tendon rather than in muscle, it is held open when the diaphragm contracts and inspiration actually helps venous return."
     },
@@ -916,7 +923,7 @@
           "intensity": 0.6
         }
       ],
-      "narration": "The great vessels are the six trunks that enter or leave the heart: the aorta, the pulmonary trunk, the pulmonary veins, the two venae cavae, and — by courtesy — the brachiocephalic veins that form the upper one. They are called great for one reason only: every one of them carries the entire output of a chamber. Block any of them and the circulation stops in seconds, which is why they get their own name and their own lecture."
+      "narration": "The great vessels are the six trunks that enter or leave the heart: the aorta, the pulmonary trunk, the pulmonary veins, the two venae cavae, and — by courtesy — the brachiocephalic veins that form the upper one. They are called great because each carries blood to or from a whole circulation rather than to a single organ, and because between them they account for the entire cardiac output. That does not mean each is equally irreplaceable, and the difference is worth fixing now because it decides how the emergencies in this scene present. Cut the aorta or plug the pulmonary trunk and the circulation stops in seconds. Obstruct the superior vena cava slowly and the azygos system opens up instead, so the patient arrives over weeks with a swollen face and full neck veins rather than dead — which is exactly the case beat seven describes. Occlude one pulmonary vein or one brachiocephalic vein and the other three, or the other side, carry on."
     },
     {
       "mode": "vasculature",
@@ -946,7 +953,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "sternal_angle",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "TRACE_STRUCTURE",
@@ -986,7 +993,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "brachiocephalic_trunk_origin",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -1040,7 +1047,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "pulmonary_bifurcation",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -1094,7 +1101,7 @@
           "intensity": 0.9
         }
       ],
-      "narration": "Above the diaphragm everything drains to the superior vena cava; below it everything drains to the inferior. The superior is made behind the right first costal cartilage by the two brachiocephalic veins, and the left one crosses the midline behind the manubrium to get there. The inferior barely exists in the chest at all: it comes through the central tendon at T8 and is in the atrium a couple of centimetres later. Both open into the right atrium, and neither has a valve."
+      "narration": "Above the diaphragm everything drains to the superior vena cava; below it everything drains to the inferior. The superior is made behind the right first costal cartilage by the two brachiocephalic veins, and the left one crosses the midline behind the manubrium to get there. The inferior barely exists in the chest at all: it comes through the central tendon at T8 and is in the atrium a couple of centimetres later. Both open into the right atrium. The superior opening has no valve of any kind, and the inferior has only the rudimentary Eustachian valve, which guards nothing in an adult — so right atrial pressure is transmitted straight back up the neck, and that is why the jugular venous pulse can be read as a manometer of the right heart."
     },
     {
       "mode": "associated_organs",
@@ -1198,13 +1205,13 @@
         {
           "op": "CROSS_SECTION",
           "axis": "z",
-          "offset": 0.0,
+          "offset": 0,
           "animate": true
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "sternal_angle",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "COMPARE_STRUCTURES",
@@ -1220,7 +1227,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "There is no brachiocephalic trunk in the catalog — the largest branch of the arch, and the one the whole left-versus-right asymmetry depends on. It is taught here through the two vessels it divides into, which do exist (right common carotid and right subclavian), plus a measured anchor at its origin on the arch. That anchor is a nearest-contact between the arch and the right subclavian artery, so the 17.84 mm it prints is literally the length of the missing vessel. Ingesting a brachiocephalic trunk mesh would upgrade beat 3 from an inference to a sight.",
@@ -1232,6 +1241,8 @@
     "There is no aortic valve mesh, although the pulmonary, mitral and tricuspid valves all exist. The aortic root is therefore taught with a measured anchor on the ascending aorta rather than with the valve itself, and the three sinuses and the coronary ostia are narration.",
     "The descending aorta mesh does not stop at the diaphragm — it continues to the aortic bifurcation in the abdomen. The scene's aortic hiatus anchor is measured against the twelfth thoracic vertebra rather than taken as the lowest point of the mesh, because the lowest point of the mesh is in the pelvis and labelling it T12 would be a lie the student could not check. tools/derive-great-vessel-landmarks.mjs emits that lowest point separately as 'aorta_lowest' so the discrepancy stays visible; it is deliberately not carried into the scene.",
     "All twelve anchors in this scene are measured contacts or extremes and every one records how it was placed. All twelve remain status 'needs-review' until a human clears them in-app. Four of them — sternal_angle, aortic_hiatus, svc_atrial_junction and ivc_atrial_junction — reproduce the Mediastinum scene's values to three decimal places, having been derived by a separate tool that never consulted it. A fifth agrees on the measurement but not on the anchor: this scene's pulmonary_bifurcation and the Mediastinum scene's ligamentum_arteriosum are the same arch-to-pulmonary-artery contact at the same 1.93 mm gap, but one is expressed on the pulmonary artery and the other on the arch, so their uvw values differ by construction and are not a match. That agreement across two independently written tools is the only real evidence either of them is right.",
-    "The scene does not claim to cover 'Heart chambers' or 'Heart valves'. It shows the heart as a single wall mesh and the pulmonary valve as context, so it can say which chamber each vessel leaves but cannot teach the chambers themselves."
+    "The scene does not claim to cover 'Heart chambers' or 'Heart valves'. It shows the heart as a single wall mesh and the pulmonary valve as context, so it can say which chamber each vessel leaves but cannot teach the chambers themselves.",
+    "Two statements were corrected at audit on 2026-08-29 and both were contradicted elsewhere in the corpus rather than being merely arguable. Beat five said the two venae cavae open into the right atrium and \"neither has a valve\"; the Heart chambers scene, in the same course, correctly teaches that the superior cava enters with nothing guarding it while the inferior opening carries the rudimentary Eustachian valve. Beat five now says both, and draws the JVP conclusion the pair actually supports. Beat one said of all six great vessels that blocking any of them stops the circulation in seconds; the scene’s own beat seven teaches slow superior vena caval obstruction as a syndrome the patient survives for weeks, and gaps[5] records the azygos collateral that is why. Beat one now separates the vessels that are irreplaceable in seconds from the ones that are collateralised, and points forward to beat seven.",
+    "The Eustachian valve now named in beat five has no mesh — the catalog carries the pulmonary, mitral, tricuspid and, in this region, no aortic or caval valve. It is in the inferior vena cava’s terms and is narrated as a named-not-drawn structure. The scene does not attempt to show it."
   ]
 }

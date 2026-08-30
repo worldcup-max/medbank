@@ -112,11 +112,13 @@
       "banti syndrome",
       "red pulp",
       "white pulp",
-      "T10 to L2",
       "foregut derivative",
       "dorsal mesogastrium",
       "left tenth rib",
-      "left eleventh rib"
+      "left eleventh rib",
+      "splenic notch on the anterior border",
+      "hilum of the spleen",
+      "lower pole of the spleen"
     ]
   },
   "camera": {
@@ -150,7 +152,7 @@
         "red pulp",
         "white pulp",
         "splenomegaly",
-        "one ounce three inches five inches"
+        "1 3 5 7 9 11"
       ],
       "narration": "A soft purple organ about the size of a clenched fist, lying in the left hypochondrium with its long axis along the tenth rib. Its outer diaphragmatic surface is smooth and convex against the dome of the diaphragm; its inner visceral surface is moulded into impressions by the stomach, the left kidney, the tail of the pancreas and the colon. The anterior border is notched, and that notch is the single most useful sign at the bedside because no other left upper quadrant mass has one. It is entirely intraperitoneal except at the hilum, and its capsule is thin — which is why it is both the most commonly injured organ in blunt abdominal trauma and the organ that bleeds most freely when it is."
     },
@@ -440,6 +442,174 @@
         "left lower rib fractures"
       ],
       "narration": "The lower limit. A normal spleen does not reach below the costal margin and does not cross the midaxillary line — so a spleen you can feel is already about three times its normal size. Fractures of these lower left ribs are the classic mechanism of splenic rupture, and any patient with them deserves imaging of the spleen."
+    },
+    {
+      "key": "hilum",
+      "label": "Hilum of the spleen",
+      "role": "part",
+      "group": "Landmarks on the spleen",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "spleen",
+        "uvw": [
+          0.5048,
+          0.5241,
+          0.3421
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT, two witnesses — the splenic artery (gap 0.31 mm) and the splenic vein (gap 0.56 mm) meet the spleen 1.31 mm apart on a 99 mm organ; tools/derive-landmark.mjs --parent FMA7196 --contact FMA14773,FMA14331",
+      "calibration_gap_mm": 0.56,
+      "terms": [
+        "hilum of the spleen",
+        "splenic artery",
+        "splenic vein",
+        "lienorenal ligament",
+        "gastrosplenic ligament",
+        "tail of the pancreas",
+        "splenunculus",
+        "accessory spleen"
+      ],
+      "narration": "The one part of the spleen not covered by peritoneum, on the visceral surface where the two ligaments meet. The splenic artery divides here and the splenic vein leaves here, and the tail of the pancreas arrives from behind inside the lienorenal ligament. The point is measured from where the artery and the vein actually touch the organ, and the two agree to within 1.3 mm."
+    },
+    {
+      "key": "gastric_impression",
+      "label": "Gastric impression",
+      "role": "part",
+      "group": "Landmarks on the spleen",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "spleen",
+        "uvw": [
+          0.5817,
+          0.4326,
+          0.4973
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch with the stomach, averaged over every spleen vertex within 12 mm of it (gap 0.40 mm, 634 vertices); tools/derive-landmark.mjs --parent FMA7196 --contact FMA7148 --area 12",
+      "calibration_gap_mm": 0.4,
+      "terms": [
+        "gastric impression",
+        "greater curvature",
+        "gastric fundus",
+        "gastrosplenic ligament",
+        "short gastric arteries"
+      ],
+      "narration": "The largest of the impressions, made by the fundus and greater curvature on the front of the visceral surface. The gastrosplenic ligament crosses this gap with the short gastric vessels inside it."
+    },
+    {
+      "key": "renal_impression",
+      "label": "Renal impression",
+      "role": "part",
+      "group": "Landmarks on the spleen",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "spleen",
+        "uvw": [
+          0.3053,
+          0.6819,
+          0.3624
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch with the left kidney, averaged over every spleen vertex within 12 mm of it (gap 0.18 mm, 365 vertices); tools/derive-landmark.mjs --parent FMA7196 --contact FMA7205 --area 12",
+      "calibration_gap_mm": 0.18,
+      "terms": [
+        "renal impression",
+        "left kidney",
+        "lienorenal ligament",
+        "splenorenal ligament",
+        "retroperitoneal"
+      ],
+      "narration": "Behind and below the gastric impression, made by the upper pole of the left kidney. The peritoneum reflected across this contact is the lienorenal ligament, which carries the splenic vessels and the pancreatic tail to the hilum."
+    },
+    {
+      "key": "diaphragmatic_surface",
+      "label": "Diaphragmatic surface",
+      "role": "part",
+      "group": "Landmarks on the spleen",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "spleen",
+        "uvw": [
+          0.9659,
+          0.5997,
+          0.3929
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch with the diaphragm, averaged over every spleen vertex within 15 mm of it (gap 0.57 mm, 662 vertices); tools/derive-landmark.mjs --parent FMA7196 --contact FMA13295 --area 15",
+      "calibration_gap_mm": 0.57,
+      "terms": [
+        "diaphragmatic surface",
+        "left dome of the diaphragm",
+        "moves with respiration",
+        "Kehr sign",
+        "left subphrenic space"
+      ],
+      "narration": "The middle of the patch where the smooth convex outer surface lies against the left dome. This contact is why the spleen descends on inspiration and why blood collecting here irritates a phrenic-supplied membrane and is felt at the left shoulder tip."
+    },
+    {
+      "key": "lower_pole",
+      "label": "Lower pole — the tip you feel",
+      "role": "part",
+      "group": "Landmarks on the spleen",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "spleen",
+        "uvw": [
+          0.7831,
+          0.4343,
+          0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -z (the inferior-most vertex of the mesh; z is the vertical axis here, confirmed against the rib and kidney centroids), 44.0 mm from the centroid, 1502 vertices considered; tools/derive-landmark.mjs --parent FMA7196 --extreme -z",
+      "terms": [
+        "lower pole",
+        "enlarges towards the right iliac fossa",
+        "palpate on inspiration",
+        "costal margin",
+        "splenomegaly"
+      ],
+      "narration": "The inferomedial tip. A normal one sits well above the costal margin and cannot be felt; it is this point that comes down and across towards the right iliac fossa when the spleen enlarges, and this point your fingers are waiting for at the costal margin as the patient breathes in."
+    },
+    {
+      "key": "upper_pole",
+      "label": "Upper pole",
+      "role": "part",
+      "group": "Landmarks on the spleen",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "spleen",
+        "uvw": [
+          0.4598,
+          0.6295,
+          1
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +z (the superior-most vertex of the mesh), 46.0 mm from the centroid, 1502 vertices considered; tools/derive-landmark.mjs --parent FMA7196 --extreme +z",
+      "terms": [
+        "upper pole",
+        "ninth rib",
+        "left dome of the diaphragm",
+        "Traube space"
+      ],
+      "narration": "The posterosuperior end, tucked under the left dome behind the ninth rib. Nothing of the spleen lies above this and everything above it in the left upper quadrant is pleura and lung — which is why splenic dullness occupies only a narrow band."
     }
   ],
   "views": [
@@ -455,6 +625,10 @@
         {
           "op": "HIDE_STRUCTURE",
           "target": "Splenic vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks on the spleen"
         },
         {
           "op": "ROTATE_TO_VIEW",
@@ -476,6 +650,11 @@
           "from": "diaphragm",
           "to": "spleen",
           "kind": "roofs it and moves it"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lower_pole",
+          "intensity": 0.8
         }
       ],
       "narration": "The spleen sits in the left hypochondrium, behind the ninth, tenth and eleventh ribs, with its long axis along the tenth rib in the midaxillary line. It is completely hidden by the rib cage, and it does not cross the midaxillary line. That single fact governs the examination. A normal spleen cannot be felt; if you can feel one at all it has roughly tripled in size and grown downwards and medially, towards the right iliac fossa, because the diaphragm and the ribs block every other direction. So palpate from the right iliac fossa upwards towards the left costal margin, one hand's breadth at a time, asking the patient to breathe in — and if you find nothing, roll them onto the right side and feel again, which brings a moderately enlarged spleen forwards under your fingers."
@@ -504,6 +683,10 @@
         {
           "op": "SHOW_STRUCTURE",
           "target": "spleen"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks on the spleen"
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -594,13 +777,17 @@
           "target": "Surface markings"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks on the spleen"
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "superior"
         },
         {
           "op": "CROSS_SECTION",
           "axis": "y",
-          "offset": 0.0,
+          "offset": 0,
           "animate": true
         },
         {
@@ -618,6 +805,11 @@
           "op": "PEEL_LAYER",
           "layer": "organ",
           "direction": "inward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "hilum",
+          "intensity": 0.9
         }
       ],
       "narration": "Cut across at the level of the hilum and the arrangement makes surgical sense. The stomach lies in front, the spleen behind and to the left, and between them is the gastrosplenic ligament and, deep to the stomach, the cavity of the lesser sac. The two ligaments meet at the hilum, so the hilum is the one part of the spleen that is not covered by peritoneum — everything else is intraperitoneal, which is why a torn spleen bleeds straight into the general peritoneal cavity. Note also what is delivered to the hilum inside the lienorenal ligament: the splenic artery and vein, and the tail of the pancreas immediately behind them. A surgeon mobilising the spleen is working within millimetres of the pancreatic tail, and small accessory spleens — splenunculi, present in about one person in ten — hide in exactly these folds. Missing one is a classic cause of a failed splenectomy for haematological disease."
@@ -660,9 +852,13 @@
           "from": "rib9",
           "to": "spleen",
           "kind": "upper limit of splenic dullness"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks on the spleen"
         }
       ],
-      "narration": "Both present as a left upper quadrant mass and the anatomy separates them completely. The spleen is intraperitoneal and hangs from the diaphragm, so it moves down on inspiration, you cannot get your hand between it and the costal margin, it is dull to percussion because nothing hollow lies in front of it, it has a notched medial border, and it enlarges towards the right iliac fossa along its long axis. The kidney is retroperitoneal, so it moves little, you can get above it, it is resonant because the colon lies in front, it has no notch, and it is ballottable between two hands. One more percussion sign is worth having: Traube's space, bounded by the sixth rib above, the left midaxillary line laterally and the left costal margin below, is normally resonant over the gastric air bubble, and dullness there is an early sign of splenic enlargement — before anything at all can be palpated."
+      "narration": "Both present as a left upper quadrant mass and the anatomy separates them completely. The spleen is intraperitoneal and hangs from the diaphragm, so it moves down on inspiration, you cannot get your hand between it and the costal margin, it is dull to percussion because nothing hollow lies in front of it, it has a notch on its anterior border, which you feel as your fingers slip over the medial edge of the descending mass, and it enlarges towards the right iliac fossa along its long axis. The kidney is retroperitoneal, so it moves little, you can get above it, it is resonant because the colon lies in front, it has no notch, and it is ballottable between two hands. One more percussion sign is worth having: Traube's space, bounded by the sixth rib above, the left midaxillary line laterally and the left costal margin below, is normally resonant over the gastric air bubble, and dullness there is an early sign of splenic enlargement — before anything at all can be palpated."
     },
     {
       "mode": "mechanism",
@@ -701,8 +897,8 @@
           "target": "concept:haemorrhage",
           "path": [
             "spleen",
-            "diaphragm",
-            "liver"
+            "diaphragmatic_surface",
+            "diaphragm"
           ],
           "duration": 6
         }
@@ -712,16 +908,20 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "There is no colon of any kind in the catalog — no caecum, ascending, transverse, descending or sigmoid colon, and no splenic flexure. The colic impression on the visceral surface and the phrenicocolic ligament that the lower pole rests on are therefore narrated in beats two and five and cannot be shown. This matters more than it sounds: the phrenicocolic shelf is the reason an enlarging spleen travels towards the right iliac fossa rather than straight down, which is the single most examined fact about splenomegaly. A caecum-and-colon set remains the outstanding acquisition from run 29 and it now blocks a second scene.",
     "There is no pancreas mesh, only the pancreatic duct. The tail of the pancreas — the relation that makes the hilum surgically dangerous — is taught through the duct under the honest label 'Pancreatic duct - marking the tail at the hilum', which is option (a): the duct is inside the gland and runs its full length, so its left end genuinely is where the tail is. The same substitution and the same wording are used by the pancreas and liver scenes.",
     "There is no portal vein. The splenic vein and the superior mesenteric vein both exist and both are drawn, and the narration says plainly that there is no portal vein until they meet behind the neck of the pancreas, so the outflow is taught truthfully to the point of the confluence and then narrated. Portal hypertension and congestive splenomegaly are therefore explained against the two tributaries and the liver rather than against the vessel that actually carries the pressure. This is the fourth consecutive scene in this topic to record the same gap.",
     "No peritoneum and no peritoneal ligaments. The gastrosplenic ligament, the lienorenal ligament and the phrenicocolic ligament are the subject of beats two and four and none of them has a mesh; each is taught as a relation between two structures that do exist. The lesser sac is narrated in beat four against the stomach and the spleen. Same absence as recorded by the peritoneum, pleura and pericardium scenes — a provider question, not an ingest question.",
-    "No landmark anchors were authored. The hilum, the splenic notch and the four impressions on the visceral surface are all points that would be far more useful clicked than narrated, but FMA7196 is not in the local decimated set and anchors in this corpus are measured on real geometry rather than typed in by eye. Ingesting FMA7196 would yield at least six measured anchors on one mesh and would make beats one, two and four clickable.",
+    "Six landmark anchors are now authored and measured. The note that used to sit here said FMA7196 was not in the local decimated set and that no anchor could therefore be measured; that was false — the mesh is on disk, and it is the eleventh scene found carrying that same stale sentence. Measured at audit on 2026-08-29: hilum (CONTACT, two witnesses, splenic artery 0.31 mm and splenic vein 0.56 mm, agreeing to 1.31 mm on a 99 mm organ), gastric impression (CONTACT patch, 0.40 mm, 634 vertices), renal impression (CONTACT patch, 0.18 mm, 365 vertices), diaphragmatic surface (CONTACT patch, 0.57 mm, 662 vertices), lower pole and upper pole (EXTREME -z and +z). All six are status needs-review until somebody opens the scene and looks at the patch. Note the axis check: the vertical axis of these meshes is z, not the long axis y that derive-landmark reports, confirmed against the rib-nine, rib-eleven and left-kidney centroids — an --extreme -y run returns a posterior point, not the lower pole.",
     "No accessory spleen or splenunculus mesh exists, and none could — they are variable in number and position. Beat four names them and their usual hiding places in narration only.",
     "Red pulp and white pulp are microscopic subjects and belong to a histology scene; they are in match.terms so a note that mentions them still opens this scene, but nothing here shows them. The curriculum keeps 'diagram' as this structure's second mode, recorded in deferred_modes, which is where the pulp architecture and the immunological function would properly be taught.",
-    "This scene does not claim to cover 'Portal venous system' even though the splenic vein, the superior mesenteric vein and the liver all appear in it. They are here as the spleen's outflow, not as the portal system with its porto-systemic anastomoses in their own right. That entry stays on the worklist."
+    "This scene does not claim to cover 'Portal venous system' even though the splenic vein, the superior mesenteric vein and the liver all appear in it. They are here as the spleen's outflow, not as the portal system with its porto-systemic anastomoses in their own right. That entry stays on the worklist.",
+    "Three anchor derivations REFUSED and are recorded here so no later run re-derives them and believes the result. Pancreatic impression: the pancreatic duct mesh stops 11.46 mm short of the spleen, so there is no contact patch — the tail relation taught in beats two and four is true anatomy but is not present in this geometry, and the beat-two SHOW_RELATIONSHIP is drawn across that gap. Ribs nine, ten and eleven: gaps of 6.01, 10.71 and 17.48 mm. That refusal is anatomically correct rather than a modelling failure — the diaphragm and the costodiaphragmatic pleural recess lie between the ribs and the spleen, which is the whole reason the spleen is protected and why splenic dullness is a narrow band. No rib-contact anchor should ever be authored on this organ.",
+    "Beat five previously described the notch as being on the medial border while the spleen structure narration and match.terms both put it on the anterior border. Corrected at audit to the anterior border in both places, with the medial edge kept only as where the fingers meet it during palpation. The match term \"one ounce three inches five inches\" was also a garbled rendering of the 1-3-5-7-9-11 mnemonic the rib-ten narration states correctly, and \"T10 to L2\" was a stray segmental level belonging to no structure in this scene; both removed."
   ]
 }

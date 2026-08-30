@@ -11,7 +11,7 @@
   "covers": [
     "Pelvic diaphragm (levator ani)"
   ],
-  "learning_goal": "Name the two muscles of the pelvic diaphragm and the three parts of levator ani, state the origin of each part from the pubis, the tendinous arch and the ischial spine, describe the line of attachment and the funnel shape it produces, list what passes through the urogenital hiatus and what does not, explain why the puborectalis sling sets the anorectal angle and how that angle is the mechanical basis of faecal continence, give the nerve supply, and account for stress incontinence, pelvic organ prolapse and obstetric floor injury from the anatomy.",
+  "learning_goal": "Name the two muscles of the pelvic diaphragm and the three parts of levator ani, state the origin of each part from the pubis, the tendinous arch and the ischial spine, describe the line of attachment and the funnel shape it produces, distinguish the levator hiatus from the urogenital hiatus that forms its anterior part and list what passes through each, explain why the puborectalis sling sets the anorectal angle and how that angle is the mechanical basis of faecal continence, give the nerve supply, and account for stress incontinence, pelvic organ prolapse and obstetric floor injury from the anatomy.",
   "status": "ready",
   "provider": {
     "primary": "bodyparts3d",
@@ -165,7 +165,7 @@
         "levator hiatus",
         "genital hiatus"
       ],
-      "narration": "The mirror muscle. The two pubococcygei approach each other behind the midline viscera and meet in the anococcygeal body, so the pair form a shelf with a gap left in front. That gap is the urogenital hiatus, and everything the floor fails to close is a hole the viscera can come through."
+      "narration": "The mirror muscle. The two pubococcygei approach each other behind the midline viscera and meet in the anococcygeal body, so the pair form a shelf with a gap left in front. That whole gap is the levator hiatus, and it has two parts: the anorectum comes through its back half, held by the puborectalis sling; the urethra, and the vagina in the female, come through its front half, which is the urogenital hiatus proper and has no muscle round it at all. Everything the floor fails to close is a hole the viscera can come through, and the front half is the hole they come through."
     },
     {
       "key": "right_puborectalis",
@@ -189,7 +189,7 @@
         "obstructed defaecation",
         "anismus"
       ],
-      "narration": "The most inferior and most important fibres. They arise from the pubis, pass backwards without any bony insertion at all, and blend with the fibres of the other side behind the anorectal junction — a U-shaped sling, not a sheet. Tone in the sling drags the junction forwards and holds the anorectal angle at about eighty degrees at rest. That angle, not the sphincters, is the main mechanism of gross faecal continence: the anterior rectal wall is pressed against the top of the anal canal like a flap valve every time intra-abdominal pressure rises."
+      "narration": "The most inferior and most important fibres. They arise from the pubis, pass backwards without any bony insertion at all, and blend with the fibres of the other side behind the anorectal junction — a U-shaped sling, not a sheet. Tone in the sling drags the junction forwards and holds the anorectal angle at about ninety degrees at rest. That angle, not the sphincters, is the main mechanism of gross faecal continence: the anterior rectal wall is pressed against the top of the anal canal like a flap valve every time intra-abdominal pressure rises."
     },
     {
       "key": "left_puborectalis",
@@ -383,7 +383,7 @@
         "stress incontinence",
         "urethral support"
       ],
-      "narration": "The urethra leaves the pelvis through the gap left in front between the two pubococcygei. The floor does not close round it — the sphincter urethrae, in the deep perineal pouch below, does that. What levator ani provides is the backstop: the pubovaginalis fibres and the fascia slung between them hold the urethra against a firm hammock, so that a cough presses the urethra shut against it. Lose that support and the same cough simply pushes urine out. That is stress incontinence in one sentence."
+      "narration": "The urethra leaves the pelvis through the urogenital hiatus, the front half of the gap between the two pubococcygei — in front of the anorectum, which uses the back half. The floor does not close round it — the sphincter urethrae, in the deep perineal pouch below, does that. What levator ani provides is the backstop: the pubovaginalis fibres and the fascia slung between them hold the urethra against a firm hammock, so that a cough presses the urethra shut against it. Lose that support and the same cough simply pushes urine out. That is stress incontinence in one sentence."
     },
     {
       "key": "urinary_bladder",
@@ -706,7 +706,7 @@
           "op": "SHOW_RELATIONSHIP",
           "from": "right_pubococcygeus",
           "to": "left_pubococcygeus",
-          "kind": "the gap between them is the urogenital hiatus"
+          "kind": "the gap between them is the levator hiatus — its front half is the urogenital hiatus"
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -715,7 +715,7 @@
           "kind": "hammock support of the bladder neck"
         }
       ],
-      "narration": "The two halves of levator ani do not meet in front. The gap they leave is the urogenital hiatus, and through it pass the urethra and the anal canal in both sexes, with the vagina between them in the female. Behind the anal canal the two halves do meet, in the anococcygeal body. So the floor is deficient exactly where the viscera need to escape, and that deficiency is the weak point of the whole pelvis: it is through the hiatus that the bladder, the uterus and the rectum prolapse. Note what the floor does not do. It does not close the urethra — that is the sphincter urethrae in the deep perineal pouch below, a separate structure often called the urogenital diaphragm. What levator ani provides is a firm hammock behind the urethra, so a rise in abdominal pressure compresses the urethra against it. The perineal body, the fibromuscular node between the anal canal and the vagina or bulb of the penis, is the other anchor: levator ani, the external anal sphincter, the perineal muscles and the vaginal wall all meet there, which is why it is the structure protected by a mediolateral episiotomy."
+      "narration": "The two halves of levator ani do not meet in front. The gap they leave is the levator hiatus, and through it pass the anorectum behind and the urethra in front, with the vagina between them in the female. Be exact about the names, because the examiner will be: the whole opening is the levator hiatus; its anterior part, in front of the puborectalis sling and the perineal body, is the urogenital hiatus, and that part transmits the urethra and the vagina only. The anorectum does not pass through the urogenital hiatus — it passes behind it, gripped by the sling. Behind the anal canal the two halves do meet, in the anococcygeal body. So the floor is deficient exactly where the viscera need to escape, and that deficiency is the weak point of the whole pelvis: it is through the hiatus that the bladder, the uterus and the rectum prolapse. Note what the floor does not do. It does not close the urethra — that is the sphincter urethrae in the deep perineal pouch below, a separate structure often called the urogenital diaphragm. What levator ani provides is a firm hammock behind the urethra, so a rise in abdominal pressure compresses the urethra against it. The perineal body, the fibromuscular node between the anal canal and the vagina or bulb of the penis, is the other anchor: levator ani, the external anal sphincter, the perineal muscles and the vaginal wall all meet there, which is why it is the structure protected by a mediolateral episiotomy."
     },
     {
       "mode": "contraction_filter",
@@ -820,7 +820,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-28"
+    "authored_at": "2026-08-28",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "There is no vagina, uterus or pubovaginalis in the catalog, so the entire female floor — which is where this topic is examined and where it matters clinically — is taught in narration over male viscera. Pubovaginalis, the vaginal wall as the anterior and posterior support, cystocele, rectocele and uterine prolapse are all spoken, not shown. This is the largest gap in the scene and the same missing female pelvis set that has blocked 'Internal reproductive organs' since run 34.",
@@ -832,6 +834,7 @@
     "No sacrospinous or sacrotuberous ligament, so coccygeus is again used as a proxy marker for the sacrospinous ligament it lies on, as in the bony pelvis scene.",
     "The anal canal and the internal anal sphincter are not separate models; the rectum mesh ends at the junction and the external anal sphincter is the only sphincter present. The layered account of continence in beat four therefore lights one of the three muscles it describes.",
     "The anorectal angle cannot be measured or drawn on the geometry. Beat four uses SHOW_RELATIONSHIP between the sling and the rectum and states the value; a future renderer with measured anchors on the pubis and the anorectal junction could draw it and animate the change on contraction, which for this scene would be close to the whole teaching point.",
-    "This scene does not claim to cover 'Bony pelvis', 'Urinary bladder' or 'Internal reproductive organs' although parts of all three appear in it. The hip bones and sacrum are here only to carry the origin line, the bladder and prostate only to make the word support concrete."
+    "This scene does not claim to cover 'Bony pelvis', 'Urinary bladder' or 'Internal reproductive organs' although parts of all three appear in it. The hip bones and sacrum are here only to carry the origin line, the bladder and prostate only to make the word support concrete.",
+    "Only the right piriformis is shown, so the '*' views are asymmetric on the one structure the scene uses as an exam trap. This is a DELIVERY gap, not a catalog gap: the left piriformis is in the catalog as FMA22341 — it was authored at this audit, found not to be in the local decimated set, and removed again so the scene keeps drawing complete. Add it the day that mesh is fetched; nothing else in the scene needs to change."
   ]
 }

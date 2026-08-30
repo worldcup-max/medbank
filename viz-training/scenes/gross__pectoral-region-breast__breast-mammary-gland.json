@@ -213,7 +213,7 @@
         "deep fascia",
         "foramen of Langer"
       ],
-      "narration": "An upper outer prolongation of the gland that pierces the deep fascia and enters the axilla. It matters twice: it is the commonest site of breast cancer, and a lump felt in the axilla may be breast tissue rather than a node."
+      "narration": "An upper outer prolongation of the gland that pierces the deep fascia and enters the axilla. It matters twice: it carries breast tissue into the axilla, so the upper outer quadrant and its tail together hold the most glandular tissue and the most cancers; and a lump felt in the axilla may be breast tissue rather than a node."
     },
     {
       "key": "arteries",
@@ -244,7 +244,7 @@
         "level II",
         "level III"
       ],
-      "narration": "About three quarters of the lymph of the breast, and almost all of the lateral part, goes to the axillary nodes — first to the anterior pectoral group along the lower border of pectoralis minor. Pectoralis minor divides these nodes into levels one, two and three. The sentinel node is the first node the lateral breast drains into, and it is the node biopsied to stage the axilla."
+      "narration": "About three quarters of the lymph of the breast, and almost all of the lateral part, goes to the axillary nodes — first to the anterior pectoral group along the lower border of pectoralis minor. Pectoralis minor divides these nodes into levels one, two and three. The sentinel node is the first node that the lymph of a given tumour reaches — for most breast cancers a node of the anterior pectoral group — and it is the node biopsied to stage the axilla."
     },
     {
       "key": "lymph_parasternal",
@@ -411,13 +411,16 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "Routed to its deferred diagram mode, not to 3D. The catalog was searched for breast, mammary, nipple, areola and lactiferous and returns nothing at all — there is no model of the breast, of a lobe, of a duct, of the suspensory ligaments or of the retromammary space. This is a provider gap, not a curriculum decision: 3d_anatomy stays first in preferred_modes and is recorded here in deferred_modes, so this becomes a 3D scene the day a mammary mesh exists, with no curriculum edit.",
     "Status is 'planned', not 'ready'. The scene is a complete authored diagram — structures, beats, ops and narration are all written — but no artwork has been drawn for the SVG engine yet, so nothing renders today. It should be promoted to 'ready' once the sagittal-section artwork and the labelled regions exist and the engine can play the six beats.",
     "The CROSS_SECTION op in beat 2 is authored as the teaching move the section needs. On a hand-drawn diagram the cut is already in the artwork, so the engine will treat this as a reveal rather than a live cut plane.",
     "No lymph nodes exist as models anywhere in the catalog, so beat 5 could not have been shown in 3D even if the gland itself had a mesh. The same gap blocks the topic's 'Axillary vessels & lymph nodes' entry.",
+    "Audit 2026-08-29 re-searched the catalog independently under breast, mammar, nipple, areol, lactif, gland, lymph, node, sweat, fascia and retromammar. The absence claims above are CONFIRMED, not inherited: the only whole-body soft-tissue hits are FMA7163 skin and the three named endocrine glands (both adrenals, pituitary), none of which can stand in for a mammary gland. The 'no lymph node anywhere in the catalog' claim is likewise confirmed — zero hits for lymph and for node.",
     "Sagittal framing is declared in camera.framing, which is outside the six named rotation views of the op vocabulary. The SVG engine ignores camera framing; it is recorded so a future 3D version of this scene knows which plane the teaching assumes."
   ]
 }

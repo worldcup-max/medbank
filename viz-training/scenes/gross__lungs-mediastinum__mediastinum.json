@@ -252,23 +252,16 @@
       "narration": "Leaves the right ventricle in front of everything else at the root of the heart and divides under the arch of the aorta. A clot large enough to sit astride that division kills in minutes."
     },
     {
-      "key": "esophagus_note",
+      "key": "esophagus",
+      "name": "esophagus",
       "label": "Oesophagus",
       "role": "part",
       "group": "Posterior mediastinum",
-      "render": "anchor",
+      "layer": "organ",
       "color": "#7dcea0",
-      "anchor": {
-        "on": "t4",
-        "uvw": [
-          0.5,
-          0.05,
-          0.5
-        ],
-        "radius": 0.03
+      "refs": {
+        "bodyparts3d": "FMA7131"
       },
-      "status": "needs-review",
-      "calibrated_by": "author: placed on the front of the fourth thoracic vertebral body, where the oesophagus runs. The oesophagus mesh was not available locally to measure a contact against, so this anchor marks the position it occupies rather than the organ itself — see gaps[].",
       "terms": [
         "oesophagus",
         "esophagus",
@@ -281,6 +274,85 @@
         "barium swallow"
       ],
       "narration": "Runs the whole length of the mediastinum in front of the vertebral bodies and behind the trachea, then behind the heart. Three things narrow it in the chest: the arch of the aorta, the left principal bronchus, and the diaphragm at T10. An enlarged left atrium presses on it from in front, which is why a barium swallow was once a cardiology investigation."
+    },
+    {
+      "key": "constriction_arch",
+      "label": "Oesophageal constriction — arch of the aorta",
+      "role": "part",
+      "group": "Posterior mediastinum",
+      "render": "anchor",
+      "color": "#a9dfbf",
+      "anchor": {
+        "on": "esophagus",
+        "uvw": [
+          0.7132,
+          0.7519,
+          0.5966
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the centre of the CONTACT patch between the oesophagus and the arch of the aorta. One witness, gap 2.02 mm, 50 parent vertices within 6 mm, centroid snapped 0.84 mm; see tools/derive-landmark.mjs --parent FMA7131 --contact FMA3768 --area 6",
+      "terms": [
+        "oesophageal constriction",
+        "arch of the aorta",
+        "second constriction",
+        "about 22 cm from the incisors"
+      ],
+      "narration": "The first of the three places the oesophagus is narrowed inside the chest. The arch crosses its left side and indents it, and this is the level a swallowed coin or a caustic burn most often stops. It is the highest of the three thoracic constrictions — the measured anchor sits above the bronchial one on the same mesh, which is the geometry agreeing with the textbook order."
+    },
+    {
+      "key": "constriction_bronchus",
+      "label": "Oesophageal constriction — left principal bronchus",
+      "role": "part",
+      "group": "Posterior mediastinum",
+      "render": "anchor",
+      "color": "#82e0aa",
+      "anchor": {
+        "on": "esophagus",
+        "uvw": [
+          0.4145,
+          0.7037,
+          0.5401
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the centre of the CONTACT patch between the oesophagus and the bronchus mesh. One witness, gap 1.16 mm, 51 parent vertices within 6 mm, centroid snapped 2.63 mm; see tools/derive-landmark.mjs --parent FMA7131 --contact FMA7409 --area 6. The catalog holds one generic bronchus mesh, so this is the airway crossing the oesophagus rather than the left principal bronchus specifically — but the patch lies to the left of the midline and below the arch, which is where the left bronchus crosses.",
+      "terms": [
+        "oesophageal constriction",
+        "left principal bronchus",
+        "third constriction",
+        "about 27 cm from the incisors"
+      ],
+      "narration": "The left principal bronchus crosses in front of the oesophagus and narrows it again, a little below the arch."
+    },
+    {
+      "key": "constriction_diaphragm",
+      "label": "Oesophageal hiatus (T10)",
+      "role": "part",
+      "group": "Posterior mediastinum",
+      "render": "anchor",
+      "color": "#58d68d",
+      "anchor": {
+        "on": "esophagus",
+        "uvw": [
+          0.4401,
+          0.3043,
+          0.0397
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the centre of the CONTACT patch between the oesophagus and the diaphragm — the oesophageal hiatus. One witness, gap 0.31 mm, 325 parent vertices within 6 mm, centroid snapped 6.07 mm; see tools/derive-landmark.mjs --parent FMA7131 --contact FMA13295 --area 6",
+      "terms": [
+        "oesophageal hiatus",
+        "T10",
+        "diaphragmatic constriction",
+        "hiatus hernia",
+        "right crus"
+      ],
+      "narration": "The last constriction, where the oesophagus passes through the muscle of the right crus at T10 — through the diaphragm, not behind it like the aorta, so this opening does grip. It is the lowest point of the anchor set, which is the geometry confirming the level."
     },
     {
       "key": "sternal_angle",
@@ -321,14 +393,14 @@
       "anchor": {
         "on": "t4",
         "uvw": [
-          0.633,
-          0.162,
-          0.174
+          0.4614,
+          0.318,
+          0.246
         ],
-        "radius": 0.02
+        "radius": 0.018
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: nearest CONTACT point between the fourth thoracic vertebra and the descending aorta — the back end of the transthoracic plane, where the superior mediastinum stops (gap 3.72 mm); see tools/derive-mediastinum-landmarks.mjs",
+      "calibrated_by": "geometry: the centre of the CONTACT patch between the fourth thoracic vertebra and the intervertebral disk of the fourth thoracic vertebra — that is, the T4/T5 disc itself, which is what the narration names. One witness, gap 0.07 mm, 260 parent vertices within 8 mm, centroid snapped 2.24 mm; see tools/derive-landmark.mjs --parent FMA9248 --contact FMA13501 --area 8. RE-DERIVED 2026-08-29: the previous definition was the T4-to-descending-aorta contact at a 3.72 mm gap, which the current tool refuses — correctly, because the aorta lies off the front-left of the body and is not the back end of the plane at all.",
       "terms": [
         "T4/T5",
         "lower border of T4",
@@ -549,6 +621,29 @@
         "lower limit"
       ],
       "narration": "The bottom of the posterior mediastinum. Below the diaphragm the same structures continue, but they are abdominal from here."
+    },
+    {
+      "key": "diaphragm",
+      "name": "diaphragm",
+      "label": "Diaphragm",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "muscle",
+      "color": "#c39bd3",
+      "refs": {
+        "bodyparts3d": "FMA13295"
+      },
+      "terms": [
+        "diaphragm",
+        "floor of the mediastinum",
+        "caval opening",
+        "T8",
+        "oesophageal hiatus",
+        "T10",
+        "aortic hiatus",
+        "T12"
+      ],
+      "narration": "The floor. Three structures leave the mediastinum through or behind it, and the levels count down in even numbers: the inferior vena cava through the central tendon at T8, the oesophagus through the right crus at T10, the aorta behind the muscle at T12. Only the first two are gripped by it."
     },
     {
       "key": "trachea",
@@ -873,8 +968,23 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "esophagus_note",
+          "target": "esophagus",
           "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "constriction_arch",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "constriction_bronchus",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "constriction_diaphragm",
+          "intensity": 0.8
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
@@ -886,7 +996,7 @@
           "view": "lateral"
         }
       ],
-      "narration": "Behind the pericardium and in front of the vertebral bodies, from the dividing plane down to the diaphragm. Its contents are the descending thoracic aorta, the oesophagus with the vagal trunks on it, the thoracic duct, the azygos and hemiazygos veins, and the sympathetic chains and splanchnic nerves on the sides of the vertebrae. This is why a stab wound in the back that misses the lung can still be fatal, and why an oesophageal tear here floods the space with saliva and gastric contents."
+      "narration": "Behind the pericardium and in front of the vertebral bodies, from the dividing plane down to the diaphragm. Its contents are the descending thoracic aorta, the oesophagus with the vagal trunks on it, the thoracic duct, the azygos and hemiazygos veins, and the sympathetic chains and splanchnic nerves on the sides of the vertebrae. This is why a stab wound in the back that misses the lung can still be fatal, and why an oesophageal tear here floods the space with saliva and gastric contents. Three marks are lit along the oesophagus itself: where the arch of the aorta crosses it, where the left bronchus crosses it lower down, and where it goes through the diaphragm at T10. Those are the three thoracic constrictions, and they are where a swallowed object stops and where a caustic burn is worst. The vagal trunks, the thoracic duct and the azygos veins are named here but are not drawn — no mesh for any of them exists."
     },
     {
       "mode": "mechanism",
@@ -917,7 +1027,7 @@
             "arch_summit",
             "ligamentum_arteriosum",
             "trachea",
-            "esophagus_note"
+            "esophagus"
           ],
           "duration": 8
         },
@@ -966,17 +1076,19 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "There is no pericardium mesh in the catalog, so the middle mediastinum is shown as the heart and the great vessel roots rather than as the sac that actually defines it. This matters more here than in most scenes, because the anterior, middle and posterior divisions are defined by the pericardium: without it, beats 4 to 6 draw their boundaries from the heart's own surface and say so in narration. A pericardium mesh would make this scene substantially better.",
-    "The oesophagus is a defining content of the posterior mediastinum and its mesh exists in the catalog, but it was not available locally to measure a contact against, so it appears here as an authored anchor on the front of the T4 body rather than as a model. That anchor is marked 'author' in calibrated_by, not 'geometry' — it is the one landmark in this scene that was not measured, and it should be replaced by the mesh once ingested. The Lungs scene already carries the oesophagus as a context model, so the id is known good.",
+    "CORRECTED 2026-08-29 (audit): this note previously said the oesophagus mesh 'was not available locally', so the oesophagus was carried as an anchor placed by eye on the front of the T4 body — the only unmeasured landmark in the scene, on a scene marked ready. That was false. FMA7131 is in meshes-lite, and the Lungs scene in this same topic was already drawing it. The oesophagus is now a model in the Posterior mediastinum group, and the three thoracic constrictions have been measured off it as contacts: arch of the aorta (gap 2.02 mm), the bronchus mesh (1.16 mm) and the diaphragm (0.31 mm). The measured heights agree with the textbook order — arch above bronchus above hiatus — which is the check on the definitions.",
     "The thymus exists as two lobe meshes and is the front layer of the superior mediastinum and the classic anterior mediastinal mass, but neither lobe was available locally and the scene teaches it in narration only. Adding both lobes would let beat 5 show the four-Ts space with the structure that most often fills it.",
     "No nerve of the thorax is in the catalog: not the phrenic, not the vagus, not the recurrent laryngeals, not the sympathetic chain or the splanchnics. Beat 7 therefore traces the left recurrent laryngeal nerve as a declared concept along the structures it passes, rather than as a model. This is a real teaching loss — the phrenic-in-front, vagus-behind rule is examined constantly and can only be narrated here.",
     "The azygos vein and the thoracic duct are absent from the catalog. Both are named repeatedly, because the azygos arch is one of the six events on the transthoracic plane and the duct is the reason a posterior mediastinal injury causes chylothorax, but neither can be shown.",
-    "The diaphragm mesh exists in the catalog but was not available locally, so the floor of the mediastinum is implied rather than drawn and the three openings are taught by their vertebral levels. The T8, T10 and T12 rule survives that; the shape of the openings does not.",
+    "CORRECTED 2026-08-29 (audit): this note previously said the diaphragm mesh 'was not available locally'. FMA13295 is in meshes-lite and the Lungs scene was already drawing it. The diaphragm is now a context model in Boundaries, so the floor of the mediastinum is drawn rather than implied. What remains true is that the three openings are not separately modelled — the caval opening and the aortic hiatus are taught by their vertebral levels and by the measured contacts of the vessels themselves, and only the oesophageal hiatus has an anchor derived from the diaphragm.",
     "Mediastinal lymph nodes have no meshes anywhere in the catalog, so nodal disease — the commonest reason a student is asked about this space at all — is entirely narrated.",
     "The scene deliberately does not claim to cover the curriculum's 'Great vessels' entry. The arch, the ascending and descending aorta, both cavae and the pulmonary arteries are all present here as the contents that define the divisions, but the branching pattern, the surface markings and the development that a great-vessels scene owes the student are not taught, and marking that entry covered here would hide it.",
-    "Eight of the nine anchors are measured contacts or extremes and are recorded as such; all nine are status 'needs-review' until a human clears them in-app. The ludwig_posterior anchor has a 3.72 mm gap because the descending aorta lies just off the front-left of the T4 body rather than against it, which is anatomically correct and is why the number is printed rather than rounded away."
+    "CORRECTED 2026-08-29 (audit): this note said 'eight of the nine anchors'. There were eight anchors, not nine, and seven of them were measured — the count was written from memory. There are now ten, after the oesophagus was demoted from a guessed anchor to a model and three constrictions were measured off it, and ALL TEN are measured contacts or extremes with the measurement in calibrated_by. All ten remain status 'needs-review' until a human clears them in-app. The ludwig_posterior anchor was the weakest of them — a T4-to-descending-aorta contact at 3.72 mm, which the current derive-landmark.mjs would refuse — and has been re-derived on the T4/T5 intervertebral disc at 0.07 mm, which is the structure the beat-2 narration actually names."
   ]
 }

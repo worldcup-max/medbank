@@ -120,7 +120,7 @@
       "name": "superior mesenteric vein",
       "label": "Superior mesenteric vein — the midgut half",
       "role": "part",
-      "group": "Portal tributaries",
+      "group": "Portal system",
       "layer": "vessel",
       "color": "#2874a6",
       "refs": {
@@ -145,7 +145,7 @@
       "name": "splenic vein",
       "label": "Splenic vein — the foregut and hindgut half",
       "role": "part",
-      "group": "Portal tributaries",
+      "group": "Portal system",
       "layer": "vessel",
       "color": "#5499c7",
       "refs": {
@@ -168,7 +168,7 @@
       "name": "liver",
       "label": "Liver — the first capillary bed's destination",
       "role": "part",
-      "group": "Portal tributaries",
+      "group": "Portal system",
       "layer": "organ",
       "color": "#8e4a2f",
       "refs": {
@@ -356,7 +356,7 @@
       "name": "spleen",
       "label": "Spleen — the pressure gauge",
       "role": "part",
-      "group": "Portal tributaries",
+      "group": "Portal system",
       "layer": "organ",
       "color": "#7b3f5e",
       "refs": {
@@ -379,7 +379,7 @@
       "name": "pancreatic duct",
       "label": "Pancreatic duct — marking the neck, where the two veins meet",
       "role": "part",
-      "group": "Portal tributaries",
+      "group": "Portal system",
       "layer": "organ",
       "color": "#f4d03f",
       "refs": {
@@ -530,7 +530,7 @@
       "ops": [
         {
           "op": "SHOW_STRUCTURE",
-          "target": "Portal tributaries"
+          "target": "Portal system"
         },
         {
           "op": "SHOW_STRUCTURE",
@@ -588,7 +588,7 @@
         },
         {
           "op": "SHOW_STRUCTURE",
-          "target": "Portal tributaries"
+          "target": "Portal system"
         },
         {
           "op": "TRACE_STRUCTURE",
@@ -671,7 +671,7 @@
           "duration": 7
         }
       ],
-      "narration": "When the liver obstructs flow, portal blood reverses and escapes wherever portal and systemic veins touch. There are four such places, and this is the first and the most dangerous. In the submucosa at the lower end of the oesophagus, oesophageal tributaries of the left gastric vein — portal — anastomose with oesophageal tributaries of the azygos vein — systemic. Under pressure this plexus becomes varices: thin-walled veins bulging into the lumen of a tube that swallows solid food. Rupture gives sudden painless haematemesis with melaena in a patient who may have spider naevi, palmar erythema, ascites and a large spleen. Management follows the anatomy: resuscitate, terlipressin to drop splanchnic inflow, endoscopic band ligation of the varices, balloon tamponade if bleeding continues, and a TIPSS — a channel made inside the liver between the portal and hepatic veins — to decompress the system when everything else fails. Note that a shunt relieves the pressure at the cost of sending unfiltered gut blood to the brain, which is why encephalopathy follows."
+      "narration": "When the liver obstructs flow, portal blood reverses and escapes wherever portal and systemic veins touch. There are four such places, and this is the first and the most dangerous. In the submucosa at the lower end of the oesophagus, oesophageal tributaries of the left gastric vein — portal — anastomose with oesophageal tributaries of the azygos vein — systemic. Under pressure this plexus becomes varices: thin-walled veins bulging into the lumen of a tube that swallows solid food. Rupture gives sudden painless haematemesis with melaena in a patient who may have spider naevi, palmar erythema, ascites and a large spleen. Management follows the anatomy: resuscitate, terlipressin to drop splanchnic inflow, endoscopic band ligation of the varices, balloon tamponade if bleeding continues, and a TIPSS — a channel made inside the liver between the portal and hepatic veins — to decompress the system when everything else fails. Note that a shunt relieves the pressure at the cost of sending unfiltered gut blood to the brain, which is why encephalopathy follows. One thing to read correctly on the screen: the reversed-flow trace has to start on the splenic vein, because there is no portal vein model in this scene to start it on. The left gastric vein does not arise from the splenic vein — it leaves the portal vein at or just above the confluence and runs along the lesser curvature to the cardia. The veins that do reach the stomach from the splenic vein are the short gastrics, from the fundus, and they are the reason splenic vein thrombosis gives gastric varices without oesophageal ones."
     },
     {
       "mode": "comparison",
@@ -779,12 +779,14 @@
           "direction": "inward"
         }
       ],
-      "narration": "Normal portal pressure is about five to ten millimetres of mercury; above twelve the collaterals open and varices bleed. Classify the cause by where the obstruction sits relative to the liver, because it decides the picture. Pre-hepatic — portal vein thrombosis, often from neonatal umbilical sepsis or from a hypercoagulable state, and splenic vein thrombosis from pancreatic disease: a big spleen and varices in a patient with normal liver function and no ascites. Intra-hepatic — cirrhosis from alcohol, chronic hepatitis B or C, or the periportal pipe-stem fibrosis of schistosomiasis, which is the commonest cause across much of West Africa: varices plus jaundice, ascites and encephalopathy, except in schistosomiasis where synthetic function is preserved for years. Post-hepatic — hepatic vein thrombosis in Budd-Chiari, constrictive pericarditis, or right heart failure: a tender enlarged liver and gross ascites, with the spleen affected later. Whatever the cause, the consequences are the same four and they are all visible in this scene: splenomegaly with hypersplenism, varices at the four anastomoses, ascites from portal pressure and low albumin together, and encephalopathy as gut nitrogen bypasses the liver. Reversed, hepatofugal flow on Doppler ultrasound is the confirmation."
+      "narration": "Normal portal pressure is about five to ten millimetres of mercury; above twelve the collaterals open and varices bleed. Classify the cause by where the obstruction sits relative to the liver, because it decides the picture. Pre-hepatic — portal vein thrombosis, often from neonatal umbilical sepsis or from a hypercoagulable state, and splenic vein thrombosis from pancreatic disease: a big spleen and varices in a patient with normal liver function and no ascites. Intra-hepatic — cirrhosis from alcohol, chronic hepatitis B or C, or the periportal pipe-stem fibrosis of schistosomiasis, which is the commonest cause across much of West Africa: varices plus jaundice, ascites and encephalopathy, except in schistosomiasis where synthetic function is preserved for years. Post-hepatic — hepatic vein thrombosis in Budd-Chiari, constrictive pericarditis, or right heart failure: a tender enlarged liver and gross ascites, with the spleen affected later. Whatever the cause, the consequences are the same four and they are all visible in this scene: splenomegaly with hypersplenism, varices at the four anastomoses, ascites from portal pressure and low albumin together, and encephalopathy as gut nitrogen bypasses the liver. Reversed, hepatofugal flow on Doppler ultrasound is the confirmation. The trace runs superior mesenteric to splenic to stomach to oesophagus for the same reason as in beat three — the confluence is the last drawn vessel before the missing portal vein, so treat the splenic segment as standing for the portal vein and not as the origin of the left gastric."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "blocked_reason": [],
   "gaps": [
@@ -796,8 +798,10 @@
     "There is no colon of any kind — no caecum, ascending, transverse, descending or sigmoid. Two-thirds of the hindgut and a large part of the midgut territory in beat two are therefore named but not drawn, and the retroperitoneal anastomoses behind the ascending and descending colon in beat four have nothing to sit behind. The caecum and colon set is outstanding from run 29 and now blocks a third scene.",
     "There is no pancreas mesh, only the pancreatic duct, used here under the honest label 'Pancreatic duct - marking the neck, where the two veins meet'. The confluence is the single most important location in this scene and it is fixed against a line inside the gland rather than the gland's own surface.",
     "The right internal iliac vein exists in the catalog as FMA18887 and was deliberately left out: one side is enough to teach the systemic destination and two would clutter beat four without adding a fact.",
-    "No landmark anchors were authored. The confluence behind the neck of the pancreas, the porta hepatis and the dentate line are all points that would teach far better clicked than narrated, but none of these meshes is in the local decimated set and anchors in this corpus are measured on real geometry, never typed in by eye.",
+    "No landmark anchors were authored. The confluence behind the neck of the pancreas, the porta hepatis and the dentate line are all points that would teach far better clicked than narrated, and all eighteen of this scene's meshes ARE in the local set — an earlier version of this note said they were not, which was false and suppressed the work. No anchor is authored here for definitional reasons instead: the portal confluence is a junction of two vessels behind a gland that has no mesh, the porta hepatis refused at 3.78 mm in the liver scene, and the dentate line is a mucosal boundary on a rectum mesh that stops above the anal canal.",
     "The four anastomoses are ultimately a diagram subject as much as a spatial one — they are submucosal plexuses, invisible at organ scale. The curriculum keeps diagram as this structure's second mode and it is recorded in deferred_modes. When the SVG engine is used for this topic, a paired portal-and-systemic vessel chart would complement rather than replace this scene.",
+    "CONSEQUENCE OF THE MISSING PORTAL VEIN, recorded 2026-08-29: the collateral-flow traces in beats three and five have to begin on the splenic vein, because it is the last drawn vessel before the confluence. Read naively that draws the left gastric vein out of the splenic vein, which is wrong — the left gastric leaves the portal vein at or just above the confluence, and it is the short gastrics that reach the stomach from the splenic vein. Both beats now say this out loud rather than letting the geometry imply otherwise, and the stomach card already stated it correctly. The same substitution applies to beat one's SHOW_RELATIONSHIP from the splenic vein to the liver, which stands for the portal vein's own course in the free edge of the lesser omentum.",
+    "The group formerly called 'Portal tributaries' was renamed 'Portal system' on 2026-08-29: it contains the liver, the spleen and the pancreatic duct as well as the two forming veins, and only two of its five members are tributaries of anything.",
     "This scene does not claim to cover 'Liver', 'Spleen' or 'Pancreas', all of which appear in it as context or as parts of the pathway. Each has its own scene in this topic."
   ]
 }

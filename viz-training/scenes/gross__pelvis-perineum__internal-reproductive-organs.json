@@ -516,6 +516,27 @@
       "narration": "The mirror trunk. Because the pelvic organs are midline and supplied from both sides, the internal genitalia keep their blood supply if one internal iliac artery is ligated — the anastomosis across the midline is generous."
     },
     {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Abdominal aorta — where the gonad came from, and where its lymph returns",
+      "role": "context",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "descending aorta",
+        "testicular artery",
+        "L2",
+        "para-aortic lymph nodes",
+        "retroperitoneum"
+      ],
+      "narration": "Drawn because two of the most examined facts in this topic point here and nowhere else in the pelvis. The testicular artery leaves the front of the aorta at L2, and testicular lymph returns to the para-aortic nodes lying alongside it at the same level — not to the internal iliac nodes that drain the prostate and the seminal vesicles, and not to the groin. Both follow the gonad's origin beside the kidney rather than its final position in the scrotum. Use it as the upper end of the scene: everything above the pelvic brim in the male genital tract is aortic territory, everything below it is internal iliac territory."
+    },
+    {
       "key": "right_pubococcygeus",
       "name": "right pubococcygeus",
       "label": "Pubococcygeus (right) — the floor they sit on",
@@ -824,10 +845,18 @@
           "target": "concept:lymph",
           "path": [
             "right_testis",
-            "right_internal_iliac",
-            "sacrum"
+            "aorta"
           ],
           "duration": 7
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:lymph",
+          "path": [
+            "prostate",
+            "right_internal_iliac"
+          ],
+          "duration": 5
         },
         {
           "op": "PEEL_LAYER",
@@ -835,23 +864,25 @@
           "direction": "outward"
         }
       ],
-      "narration": "Finish with the three tables that answer most questions on this topic. Arteries: testis from the abdominal aorta at L2; vas from the inferior vesical; seminal vesicle, prostate and bladder base from the inferior vesical and middle rectal; erectile tissue from the internal pudendal — everything except the testis from the internal iliac. Veins: the pampiniform plexus becomes the testicular vein, right into the cava and left into the left renal vein; the prostatic plexus drains to the internal iliac veins and, crucially, into the vertebral venous plexus, giving sclerotic spinal metastases. Lymph: testis to para-aortic at L2, prostate and seminal vesicles to internal iliac, scrotal and penile skin to superficial inguinal, glans to deep inguinal and external iliac. Nerves: parasympathetic S2 to S4 for erection, sympathetic L1 and L2 for emission and closure of the bladder neck, pudendal for expulsion and sensation — point and shoot. Now read the clinic straight off them. A left varicocele of sudden onset means look at the left kidney. A hard craggy prostate with back pain means peripheral zone cancer in the vertebral plexus until proved otherwise. A dry orgasm after prostatectomy is retrograde ejaculation from a damaged bladder neck. Impotence after rectal surgery is injury to the pelvic plexus on the sidewall. And an acutely painful, high-riding testis in a fifteen-year-old is torsion, explored within six hours, because no investigation is worth the gonad."
+      "narration": "Finish with the three tables that answer most questions on this topic. Arteries: testis from the abdominal aorta at L2; vas from the inferior vesical; seminal vesicle, prostate and bladder base from the inferior vesical and middle rectal; erectile tissue from the internal pudendal — everything except the testis from the internal iliac. Veins: the pampiniform plexus becomes the testicular vein, right into the cava and left into the left renal vein; the prostatic plexus drains to the internal iliac veins and, crucially, into the vertebral venous plexus, giving sclerotic spinal metastases. Lymph: testis to para-aortic at L2, prostate and seminal vesicles to internal iliac, scrotal and penile skin to superficial inguinal, glans to deep inguinal and external iliac. Watch the two lymph traces run in opposite directions on the screen — the testicular one climbs past the whole pelvis to the aorta, the prostatic one stops at the internal iliac beside it — because that divergence is the fact itself, and there are no node meshes to land on at either end. Nerves: parasympathetic S2 to S4 for erection, sympathetic L1 and L2 for emission and closure of the bladder neck, pudendal for expulsion and sensation — point and shoot. Now read the clinic straight off them. A left varicocele of sudden onset means look at the left kidney. A hard craggy prostate with back pain means peripheral zone cancer in the vertebral plexus until proved otherwise. A dry orgasm after prostatectomy is retrograde ejaculation from a damaged bladder neck. Impotence after rectal surgery is injury to the pelvic plexus on the sidewall. And an acutely painful, high-riding testis in a fifteen-year-old is torsion, explored within six hours, because no investigation is worth the gonad."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-28"
+    "authored_at": "2026-08-28",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "There is no female internal genital organ in the catalog at all — no uterus, no ovary, no uterine tube, no vagina, no cervix, no broad or round ligament. The curriculum entry says 'male/female organs in situ' and half of it therefore has nothing on screen. Every female statement in this scene — the two peritoneal pouches, the pouch of Douglas, the uterine artery crossing the ureter, the uterine and vaginal branches of the internal iliac — is spoken over male viscera or over the rectum and bladder. THIS IS WHY THE SCENE IS status:'candidate' AND NOT 'ready': a scene that teaches one sex should not silently close a curriculum entry that names both. The decision a human needs to make is whether to (a) keep this as the male scene, split the curriculum entry into male and female, and leave the female half openly unauthored, or (b) source a female pelvis mesh set. The same missing set has now held back the bladder, the pelvic diaphragm and this scene.",
-    "The vas deferens is drawn nowhere in this scene, and it is the single most damaging omission for the male half. It is NOT absent from the catalog — 'right deferent duct' FMA19235 and 'left deferent duct' FMA19236 are both there, and were missed because the search used the clinical name rather than the catalog's. The vas is the spine of the whole tract — it is what makes the testis, the epididymis, the ampulla and the ejaculatory duct one continuous story, it is what crosses the ureter, and it is what a vasectomy divides. Beat one traces sperm from epididymis straight to seminal vesicle with the connecting duct invisible, and the 'water under the bridge' relationship in beat four is drawn from the seminal vesicle to the ureter as the nearest existing proxy for a crossing the student cannot see. A ductus deferens pair would upgrade this scene more than any other single model.",
+    "RESOLVED 2026-08-29 — kept here as the record of a false absence claim. This gap formerly read that the vas deferens was drawn nowhere in the scene. It was never absent from the catalog: 'right deferent duct' FMA19235 and 'left deferent duct' FMA19236 were both present the whole time and were missed because the search used the clinical name 'vas deferens' rather than the catalog's. Both are now authored as right_vas and left_vas in the Duct system group, beat one's sperm trace runs testis - epididymis - vas - seminal vesicle - prostate - urethra - glans with no invisible link, and beat four's 'water under the bridge' relationship now runs right_vas to right_ureter, which is the crossing itself rather than the seminal-vesicle-to-ureter proxy it used to be. What remains genuinely missing is the ampulla of the vas as a separate mesh: the widening on the base of the bladder is named in beats one and four and is part of the single deferent-duct model.",
     "No spermatic cord, pampiniform plexus, testicular artery or testicular vein. The venous drainage asymmetry — right to the cava, left at a right angle into the left renal vein — is the mechanism of varicocele and is taught in beats two and five entirely in words, with COMPARE_STRUCTURES between the two testes as the only visual anchor.",
     "No tunica vaginalis, tunica albuginea, seminiferous tubules or rete testis: the testis is one solid model. Hydrocele, haematocele and the internal architecture of beat two have nothing to appear in or on.",
     "No prostatic zones. The transition and peripheral zones are the entire clinical point of beat three, and the prostate is a single undifferentiated mesh, so the CROSS_SECTION cuts a solid object while the narration names structures on a cut face that is not there. Three anchors on the prostate — verumontanum, transition zone, peripheral zone — would make that beat clickable and would be the highest-value addition to the male half of this scene.",
     "No verumontanum, prostatic utricle, ejaculatory duct or bulbourethral gland meshes, so the junction where the genital tract joins the urinary tract is narrated over an intact urethra.",
     "No corpus spongiosum in the catalog, although the corpus cavernosum and the glans are present. The spongy urethra therefore runs through nothing, and the bulb of the penis — the site of straddle injury — cannot be shown.",
     "No nerve meshes anywhere in the catalog except the optic nerves, so the pelvic splanchnic nerves, hypogastric nerves, the inferior hypogastric plexus and the pudendal nerve are all narration. Beat five uses SHOW_RELATIONSHIP from the sacrum to the corpus cavernosum as an honest proxy for the S2-S4 supply, but it lights a bone where a nerve belongs.",
-    "No lymph nodes and no lymphatic vessels, so the para-aortic versus inguinal distinction — arguably the most examined single fact in this topic — is traced with concept:lymph along the internal iliac artery and the sacrum as stand-in waypoints rather than along a nodal chain.",
+    "No lymph nodes and no lymphatic vessels anywhere in the catalog, so the para-aortic versus inguinal distinction — arguably the most examined single fact in this topic — cannot be traced along a nodal chain. CORRECTED 2026-08-29: beat five previously ran a single concept:lymph trace from the testis to the RIGHT INTERNAL ILIAC ARTERY and then the sacrum, which drew testicular lymph into the pelvic nodal field and so taught the exact error the same beat warns against two sentences later. It now runs two traces to two different destinations — testis to the abdominal aorta (para-aortic, L2) and prostate to the internal iliac — with the descending aorta FMA3784 added as context for the purpose. The vessels stand in for the nodes that lie along them; the narration says so.",
     "This scene does not claim to cover 'Urinary bladder', 'Bony pelvis' or 'Pelvic diaphragm (levator ani)', all of which are already authored in this topic and appear here only as relations."
   ]
 }

@@ -50,6 +50,10 @@
       "medial pectoral nerve",
       "thoracoacromial artery",
       "pectoral fascia",
+      "clavipectoral fascia",
+      "breast",
+      "teres major",
+      "latissimus dorsi",
       "adduction",
       "medial rotation",
       "pectoralis minor",
@@ -555,7 +559,7 @@
           "view": "anterior"
         }
       ],
-      "narration": "Between the clavicular head and deltoid is a furrow, the deltopectoral groove. The cephalic vein runs up in it and dives through the clavipectoral fascia to join the axillary vein. At the top the groove widens into the deltopectoral triangle, bounded by clavicle, deltoid and pectoralis major, and that triangle is the surface landmark used for infraclavicular blocks and for shoulder approaches."
+      "narration": "Between the clavicular head and deltoid is a furrow, the deltopectoral groove. The cephalic vein runs up in it and dives through the clavipectoral fascia to join the axillary vein. At the top the groove widens into the deltopectoral triangle, bounded by clavicle, deltoid and pectoralis major, and that triangle is the surface landmark used for infraclavicular blocks and for shoulder approaches. Look for the groove itself between the two muscles on screen: the vein and the fascia are being described, not shown, because neither exists as a model here."
     },
     {
       "mode": "cross_section",
@@ -607,18 +611,20 @@
           "view": "anterior"
         }
       ],
-      "narration": "Both pectoral nerves supply this muscle: the lateral pectoral nerve from the lateral cord to the clavicular head, the medial pectoral nerve from the medial cord to the sternocostal and abdominal heads. The medial nerve pierces pectoralis minor on its way, so the nerve named medial lies lateral to the other one at the muscle. Three things to carry: absence of the sternocostal head is the defining feature of Poland syndrome; the muscle is a workhorse flap for head, neck and chest wall reconstruction because its blood supply from the thoracoacromial artery enters near the clavicle; and a rupture at the tendon tears the sternocostal head, typically in bench pressing, leaving a lump on the chest and a hollow at the axillary fold."
+      "narration": "Nothing in this beat is drawn — there is no nerve and no vessel in this model set, so hold the heads on screen and put the supply onto them from the words. Both pectoral nerves supply this muscle: the lateral pectoral nerve from the lateral cord to the clavicular head, the medial pectoral nerve from the medial cord to the sternocostal and abdominal heads. The medial nerve pierces pectoralis minor on its way, so the nerve named medial lies lateral to the other one at the muscle. Three things to carry: absence of the sternocostal head is the defining feature of Poland syndrome; the muscle is a workhorse flap for head, neck and chest wall reconstruction because its blood supply from the thoracoacromial artery enters near the clavicle; and a rupture at the tendon tears the sternocostal head, typically in bench pressing, leaving a lump on the chest and a hollow at the axillary fold."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "No pectoral nerves and no thoracoacromial artery. Every nerve and vessel in this scene is narrated over muscle and bone: the lateral and medial pectoral nerves, the cephalic vein in the deltopectoral groove, and the arterial supply that makes the muscle a flap. The catalog holds two optic nerves and no named branch of the axillary artery, so beats 5 and 7 describe structures the student cannot see.",
     "No fascia. The pectoral fascia and the clavipectoral fascia are both taught here — the clavipectoral fascia is what the cephalic vein pierces and what encloses pectoralis minor and subclavius — and neither has a model. The cross-section beat counts layers by narration.",
-    "No breast. Searching the catalog for breast, mammary gland or nipple returns nothing at all. The relationship of the breast to the pectoral fascia is narrated in beat 6, but the curriculum's separate 'Breast (mammary gland)' entry cannot be authored as a 3D scene from this catalog and should be routed to its deferred diagram mode when it comes up.",
+    "No breast. Searching the catalog for breast, mammary gland or nipple returns nothing at all. The relationship of the breast to the pectoral fascia is narrated in beat 6, but the curriculum's separate 'Breast (mammary gland)' entry cannot be authored as a 3D scene from this catalog, and is authored in diagram mode for exactly that reason.",
     "The intercostal muscles exist only as three unsided whole-body meshes (external, internal, innermost), so they are named in the cross-section narration rather than shown; adding one would render the entire rib cage's worth of muscle on both sides.",
-    "The insertion is taught on the whole humerus. There is no separate mesh for the bicipital groove or its lips, so 'lateral lip of the intertubercular sulcus' is narrated against the bone rather than marked on it. This is a good candidate for a measured landmark anchor once the humerus geometry is available offline."
+    "There is no separate mesh for the bicipital groove or its lips, so the insertion is carried by a measured landmark anchor on the humerus rather than by geometry of its own. The anchor was derived as a contact point, restricted to the proximal quarter of the shaft, from both heads of pectoralis major; the two witnesses agree to 4.1 mm. The lateral lip is therefore marked on the bone, but the medial lip and the floor of the groove — named in the same beat for teres major and latissimus dorsi — are not."
   ]
 }

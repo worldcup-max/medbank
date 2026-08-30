@@ -13,7 +13,7 @@
   ],
   "learning_goal": "Say where the axillary artery and vein begin and end, divide the artery into three parts by pectoralis minor and name the branches of each, and place the five groups and three levels of axillary nodes well enough to explain how breast cancer spreads.",
   "status": "candidate",
-  "candidate_reason": "The three subjects this curriculum entry names — the axillary artery, the axillary vein and the axillary lymph nodes — have no models in the catalog. The scene teaches them through the subclavian vessels, the first rib, pectoralis minor and teres major, which do exist, and narrates the rest. It is honest teaching but it is not the scene the entry asks for, so it is held for review rather than marked ready. See gaps.",
+  "candidate_reason": "The three subjects this curriculum entry names — the axillary artery, the axillary vein and the axillary lymph nodes — have no models in the catalog. The scene teaches them through the subclavian vessels, the first rib, pectoralis minor and teres major, which do exist, and narrates the rest. It is honest teaching but it is not the scene the entry asks for, so it is held for review rather than marked ready. See gaps. Audit 2026-08-29: two node/wall sites have now been measured and authored, which the scene's own gaps[] used to name as 'the single change that would let the scene reach ready'. That sentence was wrong and contradicted this reason two fields above it — anchors were never the blocker. The blocker is that the axillary artery, the axillary vein and every lymph node in the body are absent from the catalog, and no measurement can supply them. The scene stays a candidate until those meshes exist.",
   "provider": {
     "primary": "bodyparts3d",
     "fallbacks": []
@@ -318,7 +318,7 @@
         "lateral group of nodes",
         "humeral group"
       ],
-      "narration": "The lateral wall is narrow — just the intertubercular groove of the humerus with the tendons of biceps and coracobrachialis in it. The lateral or humeral group of nodes lies against the axillary vein on this side and drains the whole upper limb."
+      "narration": "The lateral wall is narrow — just the intertubercular groove of the humerus, with the tendon of the long head of biceps running in it and coracobrachialis alongside on the medial side of the shaft. The lateral or humeral group of nodes lies against the axillary vein on this side and drains the whole upper limb."
     },
     {
       "key": "clavicle",
@@ -379,6 +379,70 @@
         "costoclavicular ligament"
       ],
       "narration": "Subclavius and pectoralis minor are the two muscles enclosed by the clavipectoral fascia. Lymphatics from the apical nodes pierce that fascia on their way out of the axilla."
+    },
+    {
+      "key": "anterior_group_site",
+      "label": "Anterior (pectoral) group — site on the medial wall",
+      "role": "part",
+      "group": "Node sites",
+      "render": "anchor",
+      "color": "#58d68d",
+      "anchor": {
+        "on": "serratus_anterior",
+        "uvw": [
+          0.344,
+          0.1818,
+          0.6179
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the centre of the CONTACT patch between serratus anterior and pectoralis minor — the point on the medial wall at the lower border of pectoralis minor where the anterior group lies. One witness, gap 0.33 mm, 94 parent vertices within 8 mm, centroid snapped 4.62 mm; see tools/derive-landmark.mjs --parent FMA13398 --contact FMA13375 --area 8. This marks the SITE, not a node: there is no lymph node mesh in the catalog, so what is lit is the patch of medial wall the group sits on.",
+      "terms": [
+        "anterior group",
+        "pectoral group",
+        "level I nodes",
+        "sentinel node",
+        "medial wall of axilla",
+        "lower border of pectoralis minor"
+      ],
+      "narration": "The first place breast lymph arrives, and the usual site of the sentinel node. It lies on serratus anterior at the lower border of pectoralis minor — which is exactly where these two muscles meet, so the point can be measured rather than guessed. Lateral to and below pectoralis minor, so it is level one.",
+      "approx": {
+        "shown_as": "Serratus anterior at the pectoralis minor border",
+        "detail": "anterior (pectoral) group of axillary nodes"
+      }
+    },
+    {
+      "key": "lateral_wall_site",
+      "label": "Lateral wall — the intertubercular groove",
+      "role": "part",
+      "group": "Node sites",
+      "render": "anchor",
+      "color": "#48c9b0",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.7986,
+          0.3483,
+          0.8562
+        ],
+        "radius": 0.021
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the centre of the CONTACT patch between the humerus and TWO witnesses that bracket the intertubercular groove — subscapularis on the lesser tubercle (gap 0.09 mm, 155 parent vertices) and teres major on the medial lip (gap 0.35 mm, 32 vertices) — restricted to the proximal quarter of the bone. Spread between the two witnesses 39 mm on a 307.5 mm bone, inside the tool's quarter-of-the-bone limit; centroids snapped 3.95 mm and 1.70 mm; see tools/derive-landmark.mjs --parent FMA23130 --contact FMA13414,FMA32551 --area 8 --slab z:0.75,1.0. Two independent witnesses converging is the check; one would have been a measurement with nothing to test it against. This marks the WALL, not the nodes.",
+      "terms": [
+        "lateral wall of axilla",
+        "intertubercular groove",
+        "lateral group",
+        "humeral group",
+        "lymphoedema",
+        "axillary vein"
+      ],
+      "narration": "The narrow lateral wall of the pyramid: the intertubercular groove, bracketed here by the two muscles that insert on either lip of it. The lateral or humeral group of nodes lies against the axillary vein on this side and drains the whole upper limb — which is why clearing the axilla for a breast cancer takes the arm's own drainage with it and the limb swells.",
+      "approx": {
+        "shown_as": "Proximal humerus at the intertubercular groove",
+        "detail": "lateral (humeral) group of axillary nodes against the axillary vein"
+      }
     }
   ],
   "views": [
@@ -519,8 +583,22 @@
           "intensity": 0.7
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "Node sites"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "anterior_group_site",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lateral_wall_site",
+          "intensity": 0.8
+        },
+        {
           "op": "SHOW_RELATIONSHIP",
-          "from": "serratus_anterior",
+          "from": "anterior_group_site",
           "to": "subclavian_vein",
           "kind": "the anterior nodes drain toward the central and apical groups"
         },
@@ -529,7 +607,7 @@
           "view": "anterior"
         }
       ],
-      "narration": "There are twenty to forty nodes in the axilla, in five groups, and each group sits on a wall you have already learned. The anterior or pectoral group lies on the medial wall at the lower border of pectoralis minor, and takes lymph from the breast and the front of the trunk. The posterior or subscapular group lies on the posterior wall along the lower border of subscapularis, and takes the back of the trunk down to the iliac crest. The lateral or humeral group lies on the lateral wall against the vein, and takes the whole upper limb. Those three drain into the central group in the fat of the axilla, and the central group drains into the apical group at the apex, behind the clavicle. From the apex, lymph leaves as the subclavian trunk and joins the venous angle. Three groups in, one in the middle, one at the top."
+      "narration": "There are twenty to forty nodes in the axilla, in five groups, and each group sits on a wall you have already learned. The anterior or pectoral group lies on the medial wall at the lower border of pectoralis minor, and takes lymph from the breast and the front of the trunk. The posterior or subscapular group lies on the posterior wall along the lower border of subscapularis, and takes the back of the trunk down to the iliac crest. The lateral or humeral group lies on the lateral wall against the vein, and takes the whole upper limb. Those three drain into the central group in the fat of the axilla, and the central group drains into the apical group at the apex, behind the clavicle. From the apex, lymph leaves as the subclavian trunk and joins the venous angle. Three groups in, one in the middle, one at the top. Two of the five sites are marked on the model — the anterior group where pectoralis minor meets the medial wall, and the lateral wall itself — and both are measured points on the wall, not nodes: there is no lymph node in the catalog to draw. The posterior, central and apical groups are described here and not marked, for the reason given in the scene's gaps."
     },
     {
       "mode": "glands",
@@ -579,7 +657,7 @@
           "op": "TRACE_STRUCTURE",
           "target": "concept:lymph",
           "path": [
-            "serratus_anterior",
+            "anterior_group_site",
             "pec_minor",
             "clavicle",
             "subclavian_vein",
@@ -627,12 +705,14 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "There is no axillary artery in the catalog and no axillary vein. Both are shown as their proximal continuations, the subclavian artery and the subclavian vein, with the name change at the outer border of the first rib narrated against the rib itself. The central subject of this curriculum entry is therefore spoken rather than seen, and this is the main reason the scene is held as a candidate rather than marked ready.",
     "None of the six branches of the axillary artery exist as models: superior thoracic, thoracoacromial, lateral thoracic, subscapular, anterior circumflex humeral, posterior circumflex humeral. Beat 3 counts them one-two-three against pectoralis minor without showing any of them. The one-two-three rule is the most examinable fact in this entry and it currently has no picture.",
-    "There are no lymph nodes anywhere in the catalog — not one, on any wall, in any region. All five axillary groups and all three surgical levels are placed by their relation to a muscle or a wall in narration only. Measured anchors would be the right fix, but the house standard for an anchor is a position measured on the source mesh, and the meshes for these walls are not in the local mesh set, so no anchor was authored rather than guessing one. This is the single change that would let the scene reach ready.",
+    "There are no lymph nodes anywhere in the catalog — not one, on any wall, in any region — so all five groups and all three surgical levels are sites on a wall, never a node. PARTLY CLOSED at audit 2026-08-29. This entry used to add that 'the meshes for these walls are not in the local mesh set, so no anchor was authored'. That was false and it was the only thing stopping the work: all fifteen of this scene's meshes are in meshes-lite/. Two sites are now measured. ANTERIOR (pectoral) group: the contact patch between serratus anterior and pectoralis minor, gap 0.33 mm — the group's textbook position IS that junction, so the anatomy and the geometry define the same point. LATERAL WALL, which the humeral group lies against: the humerus at the intertubercular groove, two witnesses (subscapularis 0.09 mm, teres major 0.35 mm) bracketing the two lips of the groove and agreeing to 39 mm on a 307.5 mm bone. Both carry approx{} so the player says which structure is really lit. THREE REFUSALS, recorded so no later run re-derives them and believes the answer. POSTERIOR (subscapular) group: subscapularis against teres major measures 3.23 mm and against latissimus dorsi 5.84 mm, both over the tool's 3 mm limit — the posterior wall muscles overlap in life and do not touch in these meshes, so there is no contact to measure. APICAL group: the apex is the gap bounded by the clavicle, the first rib and the upper border of the scapula; clavicle against first rib measures 3.27 mm and refuses, and a space bounded by three bones is not a landmark on any one of them. The clavicle therefore keeps its approx{} rather than pretending to be the apex. CENTRAL group: it lies in the axillary fat, which has no mesh and no neighbour to measure against, so it is not measurable at all rather than merely unmeasured.",
     "No lymphatic vessels and no subclavian lymph trunk, so beat 7 traces the route of spread as a concept along the structures the route passes, not along the vessels themselves.",
     "No brachial plexus. The cords are named in beat 8 by their position around the artery and cannot be shown, and the long thoracic nerve on the medial wall — the nerve whose injury wings the scapula after an axillary clearance — has no model either.",
     "No breast. The organ whose drainage this entry exists to explain is not in the catalog, so beat 7 begins at the medial wall rather than at the tumour. The separate breast scene is planned for the same reason.",

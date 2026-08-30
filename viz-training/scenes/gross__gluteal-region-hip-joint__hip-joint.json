@@ -195,14 +195,14 @@
       "anchor": {
         "on": "femur",
         "uvw": [
-          0,
-          0.4119,
-          0.8864
+          0.129,
+          0.534,
+          0.933
         ],
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: EXTREME -x within slab z:0.8,1.0 on FMA24474 (right femur, 440.2 mm, long axis z) — the most lateral point of the upper fifth of the bone. 559 vertices considered, 189.3 mm from the surface centroid.",
+      "calibrated_by": "geometry: the CONTACT point where gluteus medius (FMA22330, gap 0.13 mm), gluteus minimus (FMA22332, 0.57 mm) and piriformis (FMA22340, 0.11 mm) converge on FMA24474 — three witnesses over 20.4 mm of a 440.2 mm bone. Unified 2026-08-30 with the other three scenes of this topic, which already carried this point, so the marker does not move between them.",
       "terms": [
         "greater trochanter",
         "trochanteric fossa",
@@ -275,7 +275,7 @@
         "femoral nerve",
         "femoral artery"
       ],
-      "narration": "The front of the joint lies just below the middle of this ligament. That is where you feel the femoral pulse, and it is the surface marking a clinician uses to find the joint from outside."
+      "narration": "The front of the joint lies about two centimetres below the midpoint of this ligament. The femoral pulse is a different point — the mid-inguinal point, midway between the anterior superior iliac spine and the pubic symphysis, a little further medial. Use the ligament's midpoint to find the joint, the mid-inguinal point to find the artery."
     },
     {
       "key": "psoas",

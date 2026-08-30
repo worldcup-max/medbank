@@ -210,22 +210,22 @@
     },
     {
       "key": "t4_level",
-      "label": "T4 — the vertebral level of the fork",
+      "label": "T4 — lower border, the level of the fork",
       "role": "part",
       "group": "Levels",
       "render": "anchor",
       "color": "#a569bd",
       "anchor": {
-        "on": "trachea",
+        "on": "t4",
         "uvw": [
-          0.463,
-          0.995,
-          0.018
+          0.5,
+          0.96,
+          0.0
         ],
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: nearest CONTACT point between the trachea and the fourth thoracic vertebra — the vertebral level the bifurcation lies at (gap 11.41 mm); see tools/derive-mediastinum-landmarks.mjs",
+      "calibrated_by": "geometry: the lowest (most inferior) vertex of the fourth thoracic vertebra — its lower border, 41.7 mm from the T4 centroid, over 1500 vertices; see tools/derive-landmark.mjs --parent FMA9248 --extreme -z. Cross-check: this point sits at z=1297.7 and the carina anchor (the lowest vertex of the trachea) at z=1299.1, so the bifurcation and the lower border of T4 agree to 1.4 mm in the vertical — the measurement confirms the taught level rather than assuming it. NOTE the vertical axis of these meshes is z, not the long axis the tool prints. This anchor replaces an earlier one placed on the trachea at its nearest approach to T4: that contact measures 11.41 mm and derive-landmark.mjs REFUSES it (\"the surfaces do not meet there\"), correctly — the trachea does not touch T4 because the oesophagus lies between them, so the airway is the wrong parent for a vertebral level.",
       "terms": [
         "T4",
         "T4/T5",
@@ -234,7 +234,7 @@
         "behind the airway",
         "oesophagus between"
       ],
-      "narration": "The back of the airway faces the bodies of the thoracic vertebrae, and the fork lies at the lower border of T4. The gap you can see here is real: the oesophagus lies between the trachea and the vertebral column, which is why a barium swallow shows the arch of the aorta indenting it from the left."
+      "narration": "The back of the airway faces the bodies of the thoracic vertebrae, and the fork lies at the lower border of T4 — this point. The airway does not reach the bone: the oesophagus lies between the trachea and the vertebral column, which is why a barium swallow shows the arch of the aorta indenting it from the left."
     },
     {
       "key": "sternal_angle",
@@ -367,6 +367,27 @@
         "superior mediastinum"
       ],
       "narration": "Begins and ends at the level of the sternal angle, arching over the left principal bronchus and the left pulmonary artery."
+    },
+    {
+      "key": "esophagus",
+      "name": "esophagus",
+      "label": "Oesophagus",
+      "role": "context",
+      "group": "Relations",
+      "layer": "organ",
+      "color": "#7dcea0",
+      "refs": {
+        "bodyparts3d": "FMA7131"
+      },
+      "terms": [
+        "oesophagus",
+        "esophagus",
+        "behind the trachea",
+        "membranous posterior wall",
+        "tracheo-oesophageal fistula",
+        "C6"
+      ],
+      "narration": "Directly behind the trachea for its whole length, sharing the soft membranous back wall with it and beginning at the same level, the lower border of the cricoid at C6. It is what fills the gap between the airway and the bodies of the vertebrae, and it is the other half of a tracheo-oesophageal fistula."
     },
     {
       "key": "rul",
@@ -688,9 +709,8 @@
           "intensity": 1.0
         },
         {
-          "op": "PEEL_LAYER",
-          "layer": "bone",
-          "direction": "outward"
+          "op": "SHOW_STRUCTURE",
+          "target": "Levels"
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -704,7 +724,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "The catalog holds one generic 'bronchus' mesh and no separate right and left principal bronchi, so the difference that carries beat 6 — wider, shorter, more vertical on the right — is taught by narration, by the highlighted right lower lobe and by the arch anchor, not by two distinguishable models. Two principal bronchus meshes would let COMPARE_STRUCTURES do that work directly.",
@@ -712,7 +734,7 @@
     "Nothing below the segmental bronchus exists as a model: bronchioles, terminal and respiratory bronchioles, alveolar ducts and alveoli are all beyond the resolution of a whole-body catalog. Beat 5 therefore ends inside the lobe and the acinus is carried by narration. The alveolus is properly a microscopic scene, and the histology course entry for the respiratory tract is where it should be taught.",
     "The C-shaped ring in beat 3 is shown by cutting the trachea mesh across, but the mesh is a smooth surface with no separate cartilage and trachealis, so the cut shows the lumen and the outline rather than the cartilage bar itself. The teaching point survives the simplification; the histological distinction does not.",
     "The larynx, cricoid cartilage and thyroid cartilage are not in the catalog as an airway — only the thyroid cartilage exists, and it is not modelled continuous with the trachea. The 'beginning of the trachea' anchor is therefore the top of the tracheal mesh, which is where the cricoid would sit, and the cricoid itself is named but not drawn.",
-    "The oesophagus is not shown, though it is the trachea's constant posterior relation, because it was not available locally to measure against and the scene already carries its relation in the T4 anchor's narration. The 11.41 mm gap in the t4_level measurement is exactly the space the oesophagus occupies, which is why that gap is recorded rather than hidden.",
-    "All six anchors are status 'needs-review' with the measurement that placed them recorded in calibrated_by. They are honest measurements of an extreme or a contact, not a claim that the label sits where an anatomist would put a pin: the carina anchor is the lowest vertex of the tracheal mesh, which is the bifurcation, but the ridge itself has no geometry of its own. A human should clear each one in-app before release."
+    "CLOSED at audit 2026-08-29. This entry previously said the oesophagus 'was not available locally to measure against'. That was false: FMA7131 is in the catalog under the American spelling 'esophagus' and its mesh is on disk, and the mediastinum scene in this same topic already carries it as a model with three measured anchors. It is now drawn here as a context structure, so beat 1's 'in front of the oesophagus' and the trachea's shared membranous back wall are shown rather than asserted. The 11.41 mm that the old t4_level anchor recorded is the oesophagus, and it is now visibly the oesophagus.",
+    "The five anchors are status 'needs-review' with the measurement that placed them recorded in calibrated_by. They are honest measurements of an extreme or a contact, not a claim that the label sits where an anatomist would put a pin: the carina anchor is the lowest vertex of the tracheal mesh, which is the bifurcation, but the ridge itself has no geometry of its own. A human should clear each one in-app before release. Three of the five (carina, trachea_start, sternal_angle) still carry the pre-gate script tools/derive-mediastinum-landmarks.mjs; their printed gaps are 65.5 mm and 54.5 mm from centroid (extremes, so no gate applies) and 0.11 mm (a contact, well inside the 3 mm limit), so all three would survive derive-landmark.mjs's refusal gate today. arch_over_airway is a 0.36 mm contact and also passes. t4_level was the one that did not, and it has been re-derived."
   ]
 }

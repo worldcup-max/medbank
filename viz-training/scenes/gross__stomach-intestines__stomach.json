@@ -894,11 +894,6 @@
           "view": "posterior"
         },
         {
-          "op": "PEEL_LAYER",
-          "layer": "organ",
-          "direction": "inward"
-        },
-        {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "splenic_a",
           "intensity": 0.9

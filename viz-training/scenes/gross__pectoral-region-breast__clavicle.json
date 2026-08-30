@@ -39,6 +39,9 @@
       "lateral third",
       "conoid tubercle",
       "trapezoid line",
+      "sternal facet",
+      "acromial facet",
+      "platysma",
       "coracoclavicular ligament",
       "costoclavicular ligament",
       "subclavian groove",
@@ -189,6 +192,87 @@
       "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
+      "key": "sternal_facet",
+      "label": "Sternal (medial) facet",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "clavicle",
+        "uvw": [
+          0.9668,
+          0.1067,
+          0.1852
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT PATCH between the clavicle and the manubrium, averaged over every clavicular vertex within 4 mm of the manubrium (gap 0.12 mm, 113 vertices in the patch, centroid 2.27 mm from the single nearest vertex) — the sternoclavicular articular surface",
+      "calibration_gap_mm": 0.12,
+      "terms": [
+        "sternal facet",
+        "sternal end",
+        "sternoclavicular joint",
+        "articular disc"
+      ],
+      "narration": "The saddle-shaped articular surface at the medial end. It is bigger than the shallow socket on the manubrium it sits in, which is the geometric reason the joint depends on its disc and its ligaments rather than on bony fit."
+    },
+    {
+      "key": "acromial_facet",
+      "label": "Acromial (lateral) facet",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "clavicle",
+        "uvw": [
+          0.0275,
+          0.8447,
+          0.7177
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT PATCH between the clavicle and the scapula, averaged over every clavicular vertex within 4 mm of the scapula (gap 0.99 mm, 65 vertices, centroid 1.32 mm from the nearest single vertex) — the clavicular half of the acromioclavicular joint. Cross-checks against the `acromion` anchor, which is the same contact measured on the scapula.",
+      "calibration_gap_mm": 0.99,
+      "terms": [
+        "acromial facet",
+        "acromial end",
+        "acromioclavicular joint",
+        "lateral third"
+      ],
+      "narration": "A small flat oval facing outward and slightly downward. Flat surfaces resist shear badly, which is why this joint separates where the medial one does not."
+    },
+    {
+      "key": "subclavian_groove",
+      "label": "Subclavian groove",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "clavicle",
+        "uvw": [
+          0.5248,
+          0.3512,
+          0.4564
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT PATCH between the clavicle and subclavius, averaged over every clavicular vertex within 6 mm of the muscle (gap 0.22 mm, 188 vertices, centroid 1.38 mm from the nearest single vertex). A groove is a surface, not a point, so the area form was used deliberately; the patch sits at u=0.52, the middle third, which is where the groove is described.",
+      "calibration_gap_mm": 0.22,
+      "terms": [
+        "subclavian groove",
+        "groove for subclavius",
+        "undersurface of the middle third",
+        "subclavius"
+      ],
+      "narration": "The groove on the undersurface of the middle third that subclavius inserts into. It is the only muscle mark on this bone with a name of its own, and it marks the middle third — the part that breaks."
+    },
+    {
       "key": "rib1",
       "name": "right first rib",
       "label": "1st rib",
@@ -307,7 +391,7 @@
     {
       "key": "sternohyoid",
       "name": "right sternohyoid",
-      "label": "Sternohyoid — the fifth attachment",
+      "label": "Sternohyoid — the sixth attachment",
       "role": "part",
       "group": "Muscles attached to it",
       "layer": "muscle",
@@ -321,7 +405,7 @@
         "strap muscles",
         "ansa cervicalis"
       ],
-      "narration": "A strap muscle of the neck taking a small slip from the back of the medial end of the clavicle, alongside its origin from the upper posterior manubrium and the posterior sternoclavicular ligament. Four muscles are usually taught on this bone; this is the fifth, and it sits behind the sternocleidomastoid rather than on a surface of its own."
+      "narration": "A strap muscle of the neck taking a small slip from the back of the medial end of the clavicle, alongside its origin from the upper posterior manubrium and the posterior sternoclavicular ligament. Six muscles attach to this bone; this is the one most often left out of the list, because it sits behind sternocleidomastoid rather than on a surface of its own."
     },
     {
       "key": "pec_major_clavicular",
@@ -542,16 +626,24 @@
           "kind": "acromioclavicular joint"
         },
         {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "sternal_facet",
+            "acromial_facet"
+          ],
+          "layout": "side-by-side"
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "anterior"
         }
       ],
-      "narration": "Medially it meets the manubrium at the sternoclavicular joint. Laterally it meets the acromion at the acromioclavicular joint. Both are synovial, and the medial one is the only synovial link the whole upper limb has with the axial skeleton. The medial joint has a strong articular disc and dislocates very rarely. The lateral joint is flat and weak, and it separates easily — a fall on the point of the shoulder gives you the step deformity of a separated shoulder, while a fall on the outstretched hand travels up the arm and breaks the shaft."
+      "narration": "Medially it meets the manubrium at the sternoclavicular joint. Laterally it meets the acromion at the acromioclavicular joint. Both are synovial, and the medial one is the only synovial link the whole upper limb has with the axial skeleton. Compare the two facets lit here: the medial one is a saddle, deep and disc-backed, and dislocates very rarely; the lateral one is a small flat oval, weak against shear, and it separates easily — a fall on the point of the shoulder gives you the step deformity of a separated shoulder, while a fall on the outstretched hand travels up the arm and breaks the shaft."
     },
     {
       "mode": "location",
       "beat": 4,
-      "title": "Four muscles, four surfaces",
+      "title": "Six muscles on one bone",
       "ops": [
         {
           "op": "SHOW_STRUCTURE",
@@ -561,6 +653,11 @@
           "op": "PEEL_LAYER",
           "layer": "muscle",
           "direction": "outward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "subclavian_groove",
+          "intensity": 0.8
         },
         {
           "op": "SHOW_STRUCTURE",
@@ -584,7 +681,7 @@
           "view": "anterior"
         }
       ],
-      "narration": "Divide the bone in half and the attachments sort themselves out. On the medial half: sternocleidomastoid on the top, pectoralis major on the front, subclavius underneath in its groove. On the lateral third: trapezius on the back border, deltoid on the front border. Sternohyoid also takes a small area on the undersurface of the medial end, and the sternoclavicular joint capsule and the costoclavicular ligament hold the medial end down. Five muscles in all, and the two that matter for fractures are sternocleidomastoid pulling up and deltoid pulling down."
+      "narration": "Six muscles, and dividing the bone in half sorts them out. On the medial two-thirds, four: sternocleidomastoid on the upper surface, pectoralis major on the front, subclavius underneath in its groove, sternohyoid on a small area on the back of the undersurface. On the lateral third, two: trapezius on the posterior border, deltoid on the anterior border. Count them the same way every time — four medial, two lateral, six in all. The ligaments are separate and are not in the count: the sternoclavicular capsule and the costoclavicular ligament hold the medial end down, the coracoclavicular ligament holds the lateral end up. Of the six, the two that matter for a fracture are sternocleidomastoid pulling the medial fragment up and deltoid pulling the lateral fragment down."
     },
     {
       "mode": "associated_organs",
@@ -701,11 +798,15 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
-    "The clavicle's own surface landmarks have no meshes and could not be added as measured anchors. The conoid tubercle, the trapezoid line, the subclavian groove, the sternal facet and the acromial facet are all taught in narration only. The house standard for an anchor is a position measured on the source mesh, and the clavicle mesh is not in the local mesh set, so guessing uvw values here would have been worse than saying nothing. This is the first thing to add once that mesh can be inspected offline.",
-    "No ligaments of any kind. The costoclavicular ligament, the coracoclavicular ligament with its conoid and trapezoid parts, and the articular disc of the sternoclavicular joint are the three things that actually explain the clavicle's stability, and none of them exist as models. Bone-to-bone relationships stand in for them: the first rib for the costoclavicular ligament, the scapula for the coracoclavicular.",
+    "CORRECTED 2026-08-29 (audit). The previous note here said the clavicle mesh was not in the local set and that no surface landmark could therefore be measured. That was false: FMA13322 is on disk, and three of the five landmarks were derived at audit with tools/derive-landmark.mjs — sternal facet (contact with the manubrium, 0.12 mm, 113-vertex patch), acromial facet (contact with the scapula, 0.99 mm, 65-vertex patch, cross-checking against the `acromion` anchor which is the same joint measured from the scapula side), and subclavian groove (contact with subclavius, 0.22 mm, 188-vertex patch, all three using the --area form because a facet and a groove are surfaces and not points). All three are status needs-review: measurement proves the coordinate, only looking proves it landed on the feature.",
+    "The conoid tubercle and the trapezoid line are still narration only, and this is a definition problem rather than a delivery one. Both are defined by the coracoclavicular ligament, which has no mesh, and the scapula is not a usable substitute witness: the nearest scapular contact to the clavicle is the acromioclavicular joint, so --contact FMA13395 returns the acromial facet (uvw [0.0328,0.894,0.6573], 0.99 mm — the same point as the acromial facet anchor) and not the tubercle at all. It is a measured, reproducible and completely wrong answer, which is exactly the kind that gets believed. Recorded here so no later run re-derives it and trusts it. They become measurable the day a coracoclavicular ligament mesh exists.",
+    "None of this bone's ligaments exist as models. Re-searched at audit 2026-08-29 under ligament, ligamentum, coracoclav, costoclav, conoid, trapezoid, capsule, disc and disk: the whole catalog holds exactly four ligaments (both inguinal, both long plantar) and none is here, and the only 'capsule' hits are the internal capsule of the brain. One trap to record — FMA23725 'right trapezoid' IS in the catalog and is the CARPAL BONE, not the trapezoid line of the clavicle; do not wire it into this scene. So the costoclavicular ligament, the coracoclavicular ligament with its conoid and trapezoid parts, and the articular disc of the sternoclavicular joint — the three things that actually explain this bone's stability — are all narration. Bone-to-bone relationships stand in: the first rib for the costoclavicular ligament, the scapula for the coracoclavicular.",
+    "Platysma is named in beat 6 as the first layer of the front-to-back read and is not drawn. It is NOT absent from the catalog — FMA45739 right platysma exists — but it is not in meshes-lite/, so it could not be added without putting a model in the scene that no adapter can deliver. This is a fetch, not an authoring job, and it is the one mesh that would complete beat 6's layer sequence. 'platysma' is carried in match.terms so the beat is searchable on a structure it only describes.",
     "No brachial plexus. Beats 5 and 6 place the trunks behind the artery in narration; the catalog holds two optic nerves and no other named nerve.",
     "No pleura. The cervical pleura over the lung apex is the structure at risk in an infraclavicular line, and the upper lobe of the lung stands in for it.",
     "The axillary artery and axillary vein do not exist as models, so the subclavian vessels are shown and the name change at the outer border of the first rib is narrated rather than seen. Same limitation as the pectoralis minor scene.",

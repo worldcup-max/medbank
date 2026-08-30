@@ -177,7 +177,170 @@
         "liver span",
         "Riedel's lobe"
       ],
-      "narration": "The largest gland in the body, about 1.5 kilograms, wedge-shaped and lying almost entirely under the right dome of the diaphragm. It occupies the right hypochondrium, crosses the epigastrium and reaches into the left hypochondrium. Its smooth convex diaphragmatic surface faces up, forward and back; its flat visceral surface faces down, backwards and to the left, moulded by the organs it rests on. The sharp inferior border runs along the right costal margin and is the edge you feel on examination — a normal liver edge is just palpable at the costal margin on deep inspiration, and the span percussed in the right midclavicular line is twelve to fifteen centimetres. It descends with inspiration because the diaphragm pushes it, so always start palpating low in the right iliac fossa and work up, or you will miss a large liver entirely."
+      "narration": "The largest gland in the body, about 1.5 kilograms, wedge-shaped and lying almost entirely under the right dome of the diaphragm. It occupies the right hypochondrium, crosses the epigastrium and reaches into the left hypochondrium. Its smooth convex diaphragmatic surface faces up, forward and back; its flat visceral surface faces down, backwards and to the left, moulded by the organs it rests on. The sharp inferior border runs along the right costal margin and is the edge you feel on examination — a normal liver edge is just palpable at the costal margin on deep inspiration, and the span percussed in the right midclavicular line is six to twelve centimetres — a craniocaudal height of up to about fifteen centimetres on imaging is still normal, so the percussion figure and the radiological one are not the same number. It descends with inspiration because the diaphragm pushes it, so always start palpating low in the right iliac fossa and work up, or you will miss a large liver entirely."
+    },
+    {
+      "key": "gallbladder_fossa",
+      "label": "Gallbladder fossa",
+      "role": "part",
+      "group": "Landmarks on the liver",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "liver",
+        "uvw": [
+          0.2823,
+          0.2426,
+          0.3056
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch between the liver and the gallbladder, averaged over every liver vertex within 6 mm of it (gap 0.18 mm); tools/derive-landmark.mjs --parent FMA7197 --contact FMA7202 --area 6",
+      "calibration_gap_mm": 0.18,
+      "terms": [
+        "gallbladder fossa",
+        "Cantlie's line",
+        "quadrate lobe",
+        "interlobar plane"
+      ],
+      "narration": "The shallow bed the gallbladder lies in, on the visceral surface to the right of the quadrate lobe. It is the anterior end of Cantlie's line: the plane from here back to the groove for the inferior vena cava is what divides the functional right half of the liver from the left."
+    },
+    {
+      "key": "ivc_groove",
+      "label": "Groove for the inferior vena cava",
+      "role": "part",
+      "group": "Landmarks on the liver",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "liver",
+        "uvw": [
+          0.526,
+          0.552,
+          0.6992
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch between the liver and the inferior vena cava, averaged over every liver vertex within 6 mm of it (gap 0.65 mm); tools/derive-landmark.mjs --parent FMA7197 --contact FMA10951 --area 6",
+      "calibration_gap_mm": 0.65,
+      "terms": [
+        "groove for the inferior vena cava",
+        "Cantlie's line",
+        "caudate lobe",
+        "hepatic veins",
+        "bare area"
+      ],
+      "narration": "A deep vertical gutter on the posterior surface holding the cava. It is the posterior end of Cantlie's line, the right limb of the H of fissures above the porta, and the place the three hepatic veins leave the liver."
+    },
+    {
+      "key": "renal_impression",
+      "label": "Renal impression",
+      "role": "part",
+      "group": "Landmarks on the liver",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "liver",
+        "uvw": [
+          0.1861,
+          0.7729,
+          0.2678
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch between the liver and the right kidney, averaged over every liver vertex within 6 mm of it (gap 0.59 mm); tools/derive-landmark.mjs --parent FMA7197 --contact FMA7204 --area 6",
+      "calibration_gap_mm": 0.59,
+      "terms": [
+        "renal impression",
+        "right kidney",
+        "hepatorenal recess",
+        "Morison's pouch",
+        "FAST scan"
+      ],
+      "narration": "The hollow the right kidney presses into the visceral surface. The peritoneal recess in front of it is Morison's pouch — the lowest part of the upper peritoneal cavity in a supine patient, and the first window of a FAST scan."
+    },
+    {
+      "key": "suprarenal_impression",
+      "label": "Suprarenal impression",
+      "role": "part",
+      "group": "Landmarks on the liver",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "liver",
+        "uvw": [
+          0.3739,
+          0.8801,
+          0.4244
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch between the liver and the right suprarenal gland, averaged over every liver vertex within 6 mm of it (gap 0.26 mm); tools/derive-landmark.mjs --parent FMA7197 --contact FMA15629 --area 6",
+      "calibration_gap_mm": 0.26,
+      "terms": [
+        "suprarenal impression",
+        "right suprarenal gland",
+        "bare area"
+      ],
+      "narration": "A small triangular patch against the right suprarenal gland, at the medial end of the bare area. It is the one impression that lies where there is no peritoneum between the liver and what it touches."
+    },
+    {
+      "key": "duodenal_impression",
+      "label": "Duodenal impression",
+      "role": "part",
+      "group": "Landmarks on the liver",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "liver",
+        "uvw": [
+          0.3356,
+          0.4022,
+          0.3589
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch between the liver and the duodenum, averaged over every liver vertex within 6 mm of it (gap 0.78 mm); tools/derive-landmark.mjs --parent FMA7197 --contact FMA7206 --area 6",
+      "calibration_gap_mm": 0.78,
+      "terms": [
+        "duodenal impression",
+        "first part of the duodenum",
+        "epiploic foramen",
+        "gallstone ileus"
+      ],
+      "narration": "Made by the first part of the duodenum, just right of the gallbladder fossa. The same duodenum forms the lower boundary of the epiploic foramen, and a large stone can erode from the gallbladder straight into it."
+    },
+    {
+      "key": "gastric_impression",
+      "label": "Gastric impression",
+      "role": "part",
+      "group": "Landmarks on the liver",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "liver",
+        "uvw": [
+          0.7572,
+          0.2232,
+          0.6463
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch between the liver and the stomach, averaged over every liver vertex within 6 mm of it (gap 0.41 mm); tools/derive-landmark.mjs --parent FMA7197 --contact FMA7148 --area 6",
+      "calibration_gap_mm": 0.41,
+      "terms": [
+        "gastric impression",
+        "stomach",
+        "left lobe",
+        "posterior gastric ulcer"
+      ],
+      "narration": "The broad concavity on the under-surface of the left lobe where it lies on the stomach. Because the left lobe covers the stomach, a normal stomach is not palpable, and a penetrating gastric ulcer can burrow into the liver here."
     },
     {
       "key": "gallbladder",
@@ -201,7 +364,7 @@
         "ninth costal cartilage",
         "Murphy's sign"
       ],
-      "narration": "Sitting in its fossa on the visceral surface, the gallbladder is doing double duty here. Anatomically it is the right boundary of the quadrate lobe. Functionally it marks the line that actually divides the liver: draw a plane from the gallbladder fossa in front to the groove for the inferior vena cava behind, and that plane — Cantlie's line — separates the true right half from the true left half. Its own triangle matters too: cystic duct, common hepatic duct and the inferior border of the liver bound Calot's triangle, in which the cystic artery is found and tied at cholecystectomy."
+      "narration": "Sitting in its fossa on the visceral surface, the gallbladder is doing double duty here. Anatomically it is the right boundary of the quadrate lobe. Functionally it marks the line that actually divides the liver: draw a plane from the gallbladder fossa in front to the groove for the inferior vena cava behind, and that plane — Cantlie's line — separates the true right half from the true left half. Its own triangle matters too: cystic duct, common hepatic duct and the inferior surface of the liver bound the hepatocystic triangle, and it is inside that triangle that the cystic artery is found and clipped at cholecystectomy. Calot's original triangle used the cystic artery itself as its upper boundary, which is why the two names are not interchangeable."
     },
     {
       "key": "cha",
@@ -548,6 +711,10 @@
         },
         {
           "op": "HIDE_STRUCTURE",
+          "target": "Landmarks on the liver"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
           "target": "Venous outflow"
         },
         {
@@ -572,7 +739,7 @@
           "kind": "surface marking of the fundus"
         }
       ],
-      "narration": "The liver fills the right hypochondrium, crosses the epigastrium and reaches into the left hypochondrium, and almost all of it hides behind the ribs. Its upper border reaches the fourth intercostal space on the right in the midclavicular line — higher than students expect — and its lower border follows the costal margin. Two examination facts follow. First, you cannot palpate a normal liver except as a soft edge at the costal margin on deep inspiration, so a liver you feel easily is either enlarged or pushed down by hyperinflated lungs, and percussing the span in the midclavicular line — twelve to fifteen centimetres — is what tells you which. Second, it descends on inspiration because the diaphragm drives it, so start palpating in the right iliac fossa and move up a hand's breadth at a time. Start at the costal margin and a grossly enlarged liver will slide past you unnoticed."
+      "narration": "The liver fills the right hypochondrium, crosses the epigastrium and reaches into the left hypochondrium, and almost all of it hides behind the ribs. Its upper border reaches the fourth intercostal space on the right in the midclavicular line — higher than students expect — and its lower border follows the costal margin. Two examination facts follow. First, you cannot palpate a normal liver except as a soft edge at the costal margin on deep inspiration, so a liver you feel easily is either enlarged or pushed down by hyperinflated lungs, and percussing the span in the midclavicular line — six to twelve centimetres is normal — is what tells you which. Second, it descends on inspiration because the diaphragm drives it, so start palpating in the right iliac fossa and move up a hand's breadth at a time. Start at the costal margin and a grossly enlarged liver will slide past you unnoticed."
     },
     {
       "mode": "comparison",
@@ -610,7 +777,7 @@
           "kind": "the interlobar plane runs between them"
         }
       ],
-      "narration": "The liver has two different divisions and confusing them costs marks. The anatomical division is what you see: the falciform ligament on the front separates a large right lobe from a small left lobe, and on the visceral surface an H of fissures marks off two more — the quadrate lobe in front between gallbladder and ligamentum teres, and the caudate lobe behind between the inferior vena cava and the fissure for the ligamentum venosum. The functional division is what matters surgically: a plane from the gallbladder fossa in front to the groove for the inferior vena cava behind — Cantlie's line — divides the liver into right and left halves of roughly equal size, each with its own hepatic artery, portal vein branch and bile duct. On that scheme the quadrate lobe belongs to the functional LEFT half, and the caudate lobe belongs to both and drains straight into the cava, which is why it survives in Budd–Chiari. Subdivide further by the hepatic veins and the portal branches and you get Couinaud's eight segments, numbered anticlockwise from the caudate as segment I; each is independent enough to be resected alone."
+      "narration": "The liver has two different divisions and confusing them costs marks. The anatomical division is by peritoneal folds and fissures, none of which has a mesh, so take this part on description and not on what is lit: the falciform ligament on the front separates a large right lobe from a small left lobe, and on the visceral surface an H of fissures marks off two more — the quadrate lobe in front between gallbladder and ligamentum teres, and the caudate lobe behind between the inferior vena cava and the fissure for the ligamentum venosum. The functional division is what matters surgically: a plane from the gallbladder fossa in front to the groove for the inferior vena cava behind — Cantlie's line — divides the liver into right and left halves of roughly equal size, each with its own hepatic artery, portal vein branch and bile duct. On that scheme the quadrate lobe belongs to the functional LEFT half, and the caudate lobe belongs to both and drains straight into the cava, which is why it survives in Budd–Chiari. Subdivide further by the hepatic veins and the portal branches and you get Couinaud's eight segments, numbered from the caudate lobe as segment I with segment IV the quadrate; each has its own inflow, outflow and drainage and is independent enough to be resected alone. The two structures lit here, the gallbladder and the cava, are the only parts of this scheme with geometry — the segments themselves are named, not drawn."
     },
     {
       "mode": "associated_organs",
@@ -655,7 +822,7 @@
           "kind": "enters at the porta hepatis"
         }
       ],
-      "narration": "The porta hepatis is a transverse slit on the visceral surface where everything enters and the bile leaves. Three structures pass, wrapped in the free right edge of the lesser omentum — the hepatoduodenal ligament — and their arrangement is a standing exam question. Duct to the right, artery to the left, vein behind: the common bile duct anteriorly on the right, the hepatic artery proper anteriorly on the left, and the portal vein behind both. Put a finger through the epiploic foramen behind that free edge, pinch it between finger and thumb, and you have occluded the liver's entire inflow — the Pringle manoeuvre, used to control torrential bleeding from a torn liver. If the bleeding continues despite it, the source is not the inflow but the hepatic veins or the cava behind. Remember the boundaries of that foramen as a set: the free edge in front, the inferior vena cava behind, the caudate lobe above, the first part of the duodenum below."
+      "narration": "The porta hepatis is a transverse slit on the visceral surface where everything enters and the bile leaves. Three structures pass, wrapped in the free right edge of the lesser omentum — the hepatoduodenal ligament — and their arrangement is a standing exam question. Duct to the right, artery to the left, vein behind — and note that of those three only the artery is drawn here, because the catalog has no bile duct and no portal vein: the common bile duct anteriorly on the right, the hepatic artery proper anteriorly on the left, and the portal vein behind both. Put a finger through the epiploic foramen behind that free edge, pinch it between finger and thumb, and you have occluded the liver's entire inflow — the Pringle manoeuvre, used to control torrential bleeding from a torn liver. If the bleeding continues despite it, the source is not the inflow but the hepatic veins or the cava behind. Remember the boundaries of that foramen as a set: the free edge in front, the inferior vena cava behind, the caudate lobe above, the first part of the duodenum below."
     },
     {
       "mode": "vasculature",
@@ -757,7 +924,7 @@
           "kind": "hepatorenal recess lies between"
         }
       ],
-      "narration": "Peritoneum covers the liver everywhere except one patch. The falciform ligament runs from the anterior abdominal wall and the umbilicus to the liver, carrying the obliterated left umbilical vein — the ligamentum teres — in its free lower edge. Where the falciform layers reach the top of the liver they separate and run laterally as the coronary ligament, whose extreme right and left ends are the triangular ligaments. The gap enclosed between the two layers of the coronary ligament is the bare area, in direct contact with the diaphragm and with the right suprarenal gland. Three consequences. Infection in the bare area can spread to the subphrenic space and through the diaphragm to the pleura. Blood from a lacerated liver, on the other hand, escapes into the peritoneal cavity and collects in the hepatorenal recess — Morison's pouch — between the liver and the right kidney, which is why that is the first window of a FAST scan. And in portal hypertension the small veins accompanying the ligamentum teres reopen, producing the dilated umbilical veins called caput medusae."
+      "narration": "Peritoneum covers the liver everywhere except one patch. None of the folds named in this beat has a mesh, so they are described against the two surfaces that do — the liver and the diaphragm — rather than shown. The falciform ligament runs from the anterior abdominal wall and the umbilicus to the liver, carrying the obliterated left umbilical vein — the ligamentum teres — in its free lower edge. Where the falciform layers reach the top of the liver they separate and run laterally as the coronary ligament, whose extreme right and left ends are the triangular ligaments. The gap enclosed between the two layers of the coronary ligament is the bare area, in direct contact with the diaphragm and with the right suprarenal gland. Three consequences. Infection in the bare area can spread to the subphrenic space and through the diaphragm to the pleura. Blood from a lacerated liver, on the other hand, escapes into the peritoneal cavity and collects in the hepatorenal recess — Morison's pouch — between the liver and the right kidney, which is why that is the first window of a FAST scan. And in portal hypertension the small veins accompanying the ligamentum teres reopen, producing the dilated umbilical veins called caput medusae."
     },
     {
       "mode": "associated_organs",
@@ -789,6 +956,10 @@
           "target": "gallbladder"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks on the liver"
+        },
+        {
           "op": "SHOW_RELATIONSHIP",
           "from": "liver",
           "to": "stomach",
@@ -807,11 +978,54 @@
           "kind": "suprarenal impression"
         }
       ],
-      "narration": "Turn the liver over and its visceral surface is a cast of everything it lies on. Going anticlockwise from the left: the gastric impression and the oesophageal groove on the left lobe, the duodenal impression to the right of the gallbladder, the colic impression from the hepatic flexure at the front right, the renal impression behind it, and the suprarenal impression against the bare area. Learn them as relations rather than as names, because each is a clinical route: a gastric ulcer can penetrate the left lobe, gallstones can erode into the duodenum and cause gallstone ileus, a subphrenic collection sits above and a hepatorenal one below, and hepatomegaly is felt where it displaces the hepatic flexure. Note also the fissures on this surface, which form an H — the ligamentum teres and ligamentum venosum on the left limb, the gallbladder and the inferior vena cava on the right limb, and the porta hepatis as the crossbar."
+      "narration": "Turn the liver over and its visceral surface is a cast of everything it lies on. Going anticlockwise from the left: the gastric impression and the oesophageal groove on the left lobe, the duodenal impression to the right of the gallbladder, the colic impression from the hepatic flexure at the front right, the renal impression behind it, and the suprarenal impression against the bare area. Learn them as relations rather than as names, because each is a clinical route: a gastric ulcer can penetrate the left lobe, gallstones can erode into the duodenum and cause gallstone ileus, a subphrenic collection sits above and a hepatorenal one below, and hepatomegaly is felt where it displaces the hepatic flexure. The impressions are marked here as measured points on the liver's own surface. The fissures are not: they have no geometry, but note that they form an H — the ligamentum teres and ligamentum venosum on the left limb, the gallbladder and the inferior vena cava on the right limb, and the porta hepatis as the crossbar."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 7,
+      "title": "The liver on an axial slice",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Surface markings"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ivc",
+          "intensity": 0.85
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "liver",
+          "to": "ivc",
+          "kind": "the cava sits in its groove at the back"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "liver",
+          "to": "stomach",
+          "kind": "left lobe in front of the stomach"
+        }
+      ],
+      "narration": "Cut the abdomen across at the level of the porta and read the slice the way a radiologist does, from the front backwards and from the patient's right to left. The right lobe fills the right side of the section from the flank almost to the midline; the left lobe tapers across the front of the stomach. At the back of the liver, hard against it and slightly right of the midline, is the inferior vena cava in its groove — the single most reliable way to orient yourself on any axial liver image. The aorta lies to its left in front of the vertebral body. Between the liver and the right kidney behind it is the hepatorenal recess. On a slice a centimetre or two lower you would pick up the gallbladder in its fossa, and the line joining that fossa to the caval groove is Cantlie's plane seen end-on — which is why the interlobar plane is easier to find on a scan than on the surface of the organ. What the slice cannot show you here is the portal triad in section, because neither the portal vein nor the bile duct has a model in this corpus; on a real scan those two plus the hepatic artery are the three dots in the porta."
     },
     {
       "mode": "location",
-      "beat": 7,
+      "beat": 8,
       "title": "Where it goes wrong",
       "ops": [
         {
@@ -848,21 +1062,25 @@
           "kind": "inflow occluded in the Pringle manoeuvre"
         }
       ],
-      "narration": "Four presentations, all readable off this anatomy. Trauma: the liver is the most commonly injured solid abdominal organ, protected by ribs that transmit force rather than absorb it, and a laceration bleeds into the peritoneum where Morison's pouch collects it — control is by packing and by the Pringle manoeuvre at the free edge of the lesser omentum. Cirrhosis: fibrosis obstructs sinusoidal flow, portal pressure rises, and it escapes through the porto-systemic anastomoses this scene has already named — oesophageal varices at the cardia, caput medusae at the umbilicus, haemorrhoids at the anal canal — with ascites and congestive splenomegaly alongside. Obstruction of outflow: hepatic vein thrombosis gives the triad of hepatomegaly, ascites and abdominal pain with a spared caudate lobe, while right heart failure gives a smooth tender liver with a nutmeg cut surface. And tumour: the dual supply means metastases are fed almost entirely by the hepatic artery while normal parenchyma lives on the portal vein — the reason chemotherapy and embolisation can be delivered selectively down the artery. Percussing the liver span remains the cheapest way to detect the first sign of any of these."
+      "narration": "Four presentations, all readable off this anatomy. Trauma: the liver is the most commonly injured solid organ in penetrating abdominal trauma and runs second to the spleen in blunt trauma, protected by ribs that transmit force rather than absorb it, and a laceration bleeds into the peritoneum where Morison's pouch collects it — control is by packing and by the Pringle manoeuvre at the free edge of the lesser omentum. Cirrhosis: fibrosis obstructs sinusoidal flow, portal pressure rises, and it escapes through the porto-systemic anastomoses this scene has already named — oesophageal varices at the cardia, caput medusae at the umbilicus, haemorrhoids at the anal canal — with ascites and congestive splenomegaly alongside. Obstruction of outflow: hepatic vein thrombosis gives the triad of hepatomegaly, ascites and abdominal pain with a spared caudate lobe, while right heart failure gives a smooth tender liver with a nutmeg cut surface. And tumour: the dual supply means metastases are fed almost entirely by the hepatic artery while normal parenchyma lives on the portal vein — the reason chemotherapy and embolisation can be delivered selectively down the artery. Percussing the liver span remains the cheapest way to detect the first sign of any of these."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "The liver is one single model. The catalog holds no right lobe, left lobe, caudate lobe or quadrate lobe, no falciform ligament, ligamentum teres or ligamentum venosum, and no Couinaud segment of any kind. Beat two therefore teaches the two divisions by narration and by using the gallbladder and the inferior vena cava as the two ends of Cantlie's line, which is honest — that plane genuinely is defined by those two structures — but a student cannot click a segment. Every lobe and segment name is in terms[] and in the liver structure's own terms[], so a note that says 'caudate lobe' still opens this scene at the right subject.",
     "There is no portal vein in the catalog. It is taught through the two veins that form it, the superior mesenteric and the splenic, which are both present and which meet at the confluence — option (b), an adjacent structure that exists. The narration says plainly that there is no portal vein until that junction, so nothing is misrepresented, but the vessel that carries three-quarters of the liver's blood cannot be shown entering the porta. Acquiring a portal vein mesh is the highest-value single addition for this topic and for 'Portal venous system', which is a separate curriculum entry and stays unauthored.",
     "There is no bile duct, no common hepatic duct, no right or left hepatic duct and no cystic duct. The gallbladder exists and is used, so the biliary system is present only as a reservoir with no plumbing. That means the third member of the portal triad is narrated but not drawn in beat three, and Calot's triangle cannot be shown at all. This is the blocking gap for 'Biliary tree & gallbladder', the next structure in this topic.",
     "There are no hepatic veins. Beat four traces outflow into the inferior vena cava, which does exist, but the three veins themselves — and therefore the venous planes that define the Couinaud segments — are narrated only. Budd-Chiari and the caudate lobe's independent drainage are taught against the cava alone.",
-    "No landmark anchors were authored. Anchors in this corpus are measured on the actual geometry, and the liver mesh is not in the local decimated set, so the porta hepatis, the bare area, the gallbladder fossa, the groove for the inferior vena cava and the H of fissures could not be placed by measurement. They were not typed in by eye: an anchor put where a region looks plausible teaches a wrong point the student cannot detect. Ingesting FMA7197 locally is the cheapest unlock for this topic, because it would yield at least six anchors on one mesh and would make beats two, three and six clickable rather than narrated.",
+    "Six landmark anchors were measured on the liver mesh and authored, all status:\"needs-review\" until somebody opens the scene and looks at the patch. The gallbladder fossa (contact with FMA7202, gap 0.18 mm), the groove for the inferior vena cava (FMA10951, 0.65 mm), the renal impression (FMA7204, 0.59 mm), the suprarenal impression (FMA15629, 0.26 mm), the duodenal impression (FMA7206, 0.78 mm) and the gastric impression (FMA7148, 0.41 mm), each averaged over the contact patch within 6 mm. Three more were attempted and are NOT authored, so that no later run re-derives them and believes the answer. The porta hepatis, defined as the contact between the liver and the common hepatic artery, refused at a gap of 3.78 mm — the artery does not reach the mesh's surface, and the porta is in truth a slit occupied by three structures of which two have no model at all, so it is not a point on this bone-equivalent. The oesophageal groove refused at 4.07 mm on only five vertices. The bare area DID emit, from the liver-diaphragm contact, and was rejected by judgement rather than by the tool: that contact patch is 766 vertices spread over 41 mm, which is the whole diaphragmatic surface of the liver and not the peritoneum-free patch between the layers of the coronary ligament. Labelling it 'bare area' would light the wrong thing. The earlier note here — that the liver mesh was not in the local decimated set — was false: FMA7197 and all sixteen other meshes in this scene are in meshes-lite/.",
     "No peritoneum and no peritoneal ligaments. The falciform, coronary and triangular ligaments, the lesser omentum and the bare area are the entire subject of beat five and none of them has a mesh — the same absence recorded by the peritoneum, pleura and pericardium scenes. The bare area is taught as a relation between the liver and the diaphragm, both of which exist.",
     "There is no pancreas mesh, only the pancreatic duct. It is used as context under the honest label 'Pancreatic duct - marking the pancreas', because the duct runs the length of the gland and shows where it lies. Courvoisier's law and the portal confluence are therefore taught against a line inside the gland rather than its surface, and the narration says so.",
-    "This scene does not claim to cover 'Biliary tree & gallbladder' or 'Portal venous system' even though the gallbladder and both portal tributaries appear in it. The gallbladder is here as the marker of the interlobar plane and as one boundary of Calot's triangle, not as a taught organ with its own ducts and stones; the portal veins are here as the liver's inflow, not as the porto-systemic anastomoses in their own right. Both remain on the worklist."
+    "This scene does not claim to cover 'Biliary tree & gallbladder' or 'Portal venous system' even though the gallbladder and both portal tributaries appear in it. The gallbladder is here as the marker of the interlobar plane and as one boundary of Calot's triangle, not as a taught organ with its own ducts and stones; the portal veins are here as the liver's inflow, not as the porto-systemic anastomoses in their own right. Both remain on the worklist.",
+    "The gastric impression anchor is the least secure of the six. Its patch measures high and anterior on the left lobe (uvw 0.757, 0.223, 0.646), which is where the fundus meets the liver rather than the broad body-of-stomach concavity a dissected liver shows. It is authored as needs-review for exactly that reason; whoever reviews it should decide whether to keep it or re-derive it with a larger --area.",
+    "This scene teaches the anatomical and functional divisions of the liver, but the whole Couinaud scheme, the falciform, coronary and triangular ligaments, the ligamentum teres and venosum, the H of fissures and the porta hepatis itself are narration only, and beats two, three, five and six now say so in the narration rather than leaving a student hunting the screen for a fold that was never drawn."
   ]
 }

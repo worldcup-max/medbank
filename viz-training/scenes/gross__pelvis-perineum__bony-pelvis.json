@@ -271,6 +271,150 @@
       "reviewed_note": "opened in the 3D viewer and looked at: the patch lands on the feature the label names. Checked by Claude on 2026-08-28 at Frank’s request, not by an independent human reader — the measurement and its evidence are in calibrated_by."
     },
     {
+      "key": "asis",
+      "label": "Anterior superior iliac spine (right)",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#5dade2",
+      "anchor": {
+        "on": "right_hip_bone",
+        "uvw": [
+          0.149,
+          0.0188,
+          0.6628
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — nearest point on the right hip bone to the right inguinal ligament within the lateral quarter of the bone (gap 0.09 mm, 1 witness, slab x:0.0,0.25): the ligament's lateral attachment, which is the ASIS by definition. Cross-checked against the independently derived ASIS in gross__anterior-abdominal-wall-inguinal-region__inguinal-ligament-landmarks (a constrained anterior extreme): the two land 6.5 mm apart on a 208 mm bone, so two different definitions agree.",
+      "calibration_gap_mm": 0.09,
+      "terms": [
+        "anterior superior iliac spine",
+        "ASIS",
+        "iliac crest",
+        "inguinal ligament",
+        "sartorius origin",
+        "leg length measurement"
+      ],
+      "narration": "The front end of the iliac crest, subcutaneous and findable on any patient. The inguinal ligament starts here, so this point and the pubic tubercle together define the boundary between abdomen and thigh."
+    },
+    {
+      "key": "pubic_tubercle",
+      "label": "Pubic tubercle (right)",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#5dade2",
+      "anchor": {
+        "on": "right_hip_bone",
+        "uvw": [
+          0.8682,
+          0.0391,
+          0.1997
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — nearest point on the right hip bone to the right inguinal ligament within the medial fifth of the bone (gap 0.52 mm, 1 witness, slab x:0.8,1.0): the ligament's medial attachment, which is the pubic tubercle by definition. It sits 18.8 mm lateral and below the pubic-crest anchor measured from rectus abdominis in gross__anterior-abdominal-wall-inguinal-region__inguinal-ligament-landmarks, and about 23 mm from the symphysis anchor in that same scene — which matches the textbook 2 to 3 cm from the midline.",
+      "calibration_gap_mm": 0.52,
+      "terms": [
+        "pubic tubercle",
+        "pubic crest",
+        "inguinal ligament",
+        "inguinal hernia",
+        "femoral hernia",
+        "pubic symphysis"
+      ],
+      "narration": "The knob at the lateral end of the pubic crest, two to three centimetres from the midline, where the inguinal ligament ends. A groin lump whose neck is above and medial to it is an inguinal hernia; below and lateral, a femoral hernia."
+    },
+    {
+      "key": "ischial_spine",
+      "label": "Ischial spine (right)",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#5dade2",
+      "anchor": {
+        "on": "right_hip_bone",
+        "uvw": [
+          0.6943,
+          0.7585,
+          0.3197
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — nearest point on the right hip bone to the right coccygeus (gap 0.34 mm, 1 witness). Coccygeus arises from the ischial spine, and it is the only structure in this scene that attaches there, so it is the one available witness. The sacrospinous ligament, which would be the second, has no mesh.",
+      "calibration_gap_mm": 0.34,
+      "terms": [
+        "ischial spine",
+        "sacrospinous ligament",
+        "station zero",
+        "pudendal nerve block",
+        "greater sciatic foramen",
+        "lesser sciatic foramen",
+        "interspinous diameter"
+      ],
+      "narration": "The point between the greater and the lesser sciatic notch, and the most clinically useful landmark in the pelvis. It is palpable per vaginam, it defines station zero in labour, and it is the target for a pudendal nerve block because the nerve crosses the sacrospinous ligament just medial to its tip."
+    },
+    {
+      "key": "ischial_tuberosity",
+      "label": "Ischial tuberosity (right)",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#5dade2",
+      "anchor": {
+        "on": "right_hip_bone",
+        "uvw": [
+          0.6945,
+          0.6332,
+          0.0
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -z — the lowest vertex of the right hip bone, 113.8 mm from its surface centroid. The tuberosity is the most inferior part of the hip bone in the anatomical position, so position alone defines it; no contact witness was used because neither hamstring nor the sacrotuberous ligament has a mesh.",
+      "terms": [
+        "ischial tuberosity",
+        "sitting",
+        "intertuberous diameter",
+        "pelvic outlet",
+        "sacrotuberous ligament",
+        "hamstring origin"
+      ],
+      "narration": "What you sit on. Weight in sitting bypasses the femur and arrives here, the outlet is measured between the two of them at about eleven centimetres, and the sacrotuberous ligament runs from here up to the back of the sacrum."
+    },
+    {
+      "key": "sacral_promontory",
+      "label": "Sacral promontory",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#f5b041",
+      "anchor": {
+        "on": "sacrum",
+        "uvw": [
+          0.4908,
+          0.0,
+          0.7786
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -y within x:0.45,0.55 — the most anterior vertex of the sacrum inside a midline slab, 52.5 mm from its surface centroid. The midline restriction is what makes it the promontory rather than the ala: unrestricted, the most anterior vertex sits off to one side at u 0.69. It lands at u 0.4908, on the midline, in the upper quarter of the bone, which is the anterior lip of the S1 body.",
+      "terms": [
+        "sacral promontory",
+        "pelvic brim",
+        "true conjugate",
+        "obstetric conjugate",
+        "diagonal conjugate",
+        "lumbosacral angle"
+      ],
+      "narration": "The anterior lip of the first sacral vertebra, the most posterior point of the pelvic brim and the point every obstetric diameter of the inlet is measured from. If a finger can reach it per vaginam, the inlet is suspect."
+    },
+    {
       "key": "right_femur",
       "name": "right femur",
       "label": "Femur (right) — what the acetabulum holds",
@@ -566,9 +710,28 @@
           "from": "right_hip_bone",
           "to": "left_hip_bone",
           "kind": "pubic symphysis"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "asis",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pubic_tubercle",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ischial_tuberosity",
+          "intensity": 0.8
         }
       ],
-      "narration": "The bony pelvis is built from four bones: two hip bones, the sacrum and the coccyx. Each hip bone is itself three bones — ilium, ischium and pubis — fused in the adult at the acetabulum, where they met as a Y-shaped triradiate cartilage until adolescence. Three joints close the ring. Behind, a sacroiliac joint on each side, part synovial and part fibrous, so irregular and so tightly bound by ligaments that it barely moves. In front, the pubic symphysis, a secondary cartilaginous joint. Because it is a ring, load can pass round it and injury cannot stay in one place: a displaced fracture at one point implies a second break or a joint disruption elsewhere. Weight from the vertebral column enters at the sacroiliac joints and travels forwards along the arcuate line to the acetabulum in standing, or backwards to the ischial tuberosities in sitting. Learn those two arches and you have understood why the pelvis is shaped the way it is."
+      "narration": "The bony pelvis is built from four bones: two hip bones, the sacrum and the coccyx. Each hip bone is itself three bones — ilium, ischium and pubis — fused in the adult at the acetabulum, where they met as a Y-shaped triradiate cartilage until adolescence. Three joints close the ring. Behind, a sacroiliac joint on each side, part synovial and part fibrous, so irregular and so tightly bound by ligaments that it barely moves. In front, the pubic symphysis, a secondary cartilaginous joint. Because it is a ring, load can pass round it and injury cannot stay in one place: a displaced fracture at one point implies a second break or a joint disruption elsewhere. Weight from the vertebral column enters at the sacroiliac joints and travels forwards along the arcuate line to the acetabulum in standing, or backwards to the ischial tuberosities in sitting. Learn those two arches and you have understood why the pelvis is shaped the way it is. Four of the points you will be asked to find are lit on the bone: the anterior superior iliac spine and the pubic tubercle in front, the ischial spine and the ischial tuberosity behind and below, with the sacral promontory on the sacrum. Each is a measured point on the geometry, not a label on the whole bone."
     },
     {
       "mode": "location",
@@ -610,6 +773,15 @@
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "right_common_iliac",
           "intensity": 0.85
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sacral_promontory",
+          "intensity": 0.9
         }
       ],
       "narration": "Look down into the pelvis and one line divides it in two. Trace it from behind forwards: the sacral promontory, the anterior border of the ala of the sacrum, the arcuate line of the ilium, the pectineal line — the pecten — of the superior pubic ramus, the pubic crest, and the upper border of the pubic symphysis. That is the pelvic brim, or linea terminalis. Above it is the greater or false pelvis, walled by the iliac fossae and really part of the abdomen, holding coils of ileum and the sigmoid colon. Below it is the lesser or true pelvis, a short curved canal containing the bladder, the rectum and the internal reproductive organs. The brim is not just a boundary for description. The common iliac artery divides on it in front of the sacroiliac joint, and the ureter crosses it at exactly that point. The external iliac artery then follows the arcuate line out to the thigh while the internal iliac turns down into the true pelvis. Find the brim and you have found both."
@@ -647,6 +819,21 @@
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "sacrum",
           "intensity": 0.9
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sacral_promontory",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sacral_promontory",
+          "to": "ischial_tuberosity",
+          "kind": "inlet to outlet — the curved pelvic axis"
         }
       ],
       "narration": "Cut the pelvis in the midline and the true pelvis is a curved canal, not a straight tube: a short anterior wall at the symphysis, about four centimetres, and a long concave posterior wall of sacrum and coccyx, about twelve. The axis therefore curves forwards — the curve of Carus — and that is the path a fetal head must follow. Three diameters of the inlet are named and all three run from the sacral promontory forwards. The anatomical or true conjugate reaches the upper border of the symphysis, about eleven centimetres. The obstetric conjugate reaches the nearest point on the back of the symphysis and is the shortest and the one that actually limits the head, about ten centimetres. The diagonal conjugate reaches the lower border of the symphysis and is the only one you can measure with a finger per vaginam, about twelve and a half; subtract one and a half to two centimetres to estimate the obstetric conjugate. Note the shape rule: at the inlet the widest diameter is transverse, at the outlet it is anteroposterior — which is why the head enters the pelvis facing sideways and rotates to face backwards before it is delivered. The outlet is bounded by the lower border of the symphysis, the ischiopubic rami, the ischial tuberosities, the sacrotuberous ligaments and the tip of the coccyx, with an intertuberous diameter of about eleven centimetres."
@@ -692,6 +879,15 @@
           "from": "right_obturator_internus",
           "to": "right_hip_bone",
           "kind": "lines the lateral wall over the obturator foramen"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ischial_spine",
+          "intensity": 0.95
         }
       ],
       "narration": "Two ligaments turn the back of the pelvis from an open notch into two doorways. The sacrospinous ligament runs from the ischial spine to the side of the sacrum and coccyx; the sacrotuberous ligament runs from the ischial tuberosity up to the back of the sacrum, the coccyx and the posterior iliac spines. Between the greater sciatic notch above and the sacrospinous ligament below is the greater sciatic foramen; between the sacrospinous ligament above and the sacrotuberous below is the lesser sciatic foramen. Those two ligaments also do mechanical work: they resist the forward tilt of the upper sacrum that body weight tries to produce, and they are the reason the sacrum does not rotate out of the ring. Piriformis fills the greater foramen and is the key to what passes through it — superior gluteal vessels and nerve above the muscle; inferior gluteal vessels and nerve, the sciatic nerve, the posterior cutaneous nerve of the thigh, the nerve to quadratus femoris and the pudendal neurovascular bundle below it. The lesser foramen transmits the tendon of obturator internus and its nerve, and carries the pudendal nerve and internal pudendal vessels back into the perineum after they hook round the ischial spine. The third opening is anterior: the obturator foramen, closed by the obturator membrane except for the obturator canal at its upper edge, where the obturator nerve and vessels leave."
@@ -729,9 +925,23 @@
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "sacrum",
           "intensity": 0.85
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ischial_spine",
+          "intensity": 0.85
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ischial_tuberosity",
+          "intensity": 0.85
         }
       ],
-      "narration": "The pelvis is the most sexually dimorphic part of the skeleton, and the differences are all in one direction: the female pelvis is built to let a head through. Compare feature by feature. The female inlet is oval or rounded and transversely wide; the male is heart-shaped, narrowed by a projecting promontory. The female cavity is shallow and roomy with straight side walls; the male is deep and funnel-shaped. The female sacrum is shorter, wider and less curved; the male is longer, narrower and more curved forwards. The female subpubic angle is a wide arch of eighty to ninety degrees, admitting two fingers; the male is a narrow V of fifty to sixty, admitting one. The female ischial spines are everted and the tuberosities are turned out, giving a wide intertuberous diameter; the male spines project inwards. The female greater sciatic notch is wide, near ninety degrees; the male is narrow, near seventy. And the female bone is generally lighter and smoother, with less prominent muscle markings. Four shapes are described — gynaecoid, the classic round female inlet; android, heart-shaped and male-like, the one that obstructs; anthropoid, oval front to back; platypelloid, flattened side to side — but in practice a pelvis is judged by how labour progresses, not by measuring it."
+      "narration": "Read this beat knowing that only one pelvis is on screen: there is no second skeleton in the catalog to set beside it, so the comparison that follows is described against the bone you are looking at rather than shown. The pelvis is the most sexually dimorphic part of the skeleton, and the differences are all in one direction: the female pelvis is built to let a head through. Compare feature by feature. The female inlet is oval or rounded and transversely wide; the male is heart-shaped, narrowed by a projecting promontory. The female cavity is shallow and roomy with straight side walls; the male is deep and funnel-shaped. The female sacrum is shorter, wider and less curved; the male is longer, narrower and more curved forwards. The female subpubic angle is a wide arch of eighty to ninety degrees, admitting two fingers; the male is a narrow V of fifty to sixty, admitting one. The female ischial spines are everted and the tuberosities are turned out, giving a wide intertuberous diameter; the male spines project inwards. The female greater sciatic notch is wide, near ninety degrees; the male is narrow, near seventy. And the female bone is generally lighter and smoother, with less prominent muscle markings. Four shapes are described — gynaecoid, the classic round female inlet; android, heart-shaped and male-like, the one that obstructs; anthropoid, oval front to back; platypelloid, flattened side to side — but in practice a pelvis is judged by how labour progresses, not by measuring it."
     },
     {
       "mode": "mechanism",
@@ -780,6 +990,16 @@
           "op": "PEEL_LAYER",
           "layer": "muscle",
           "direction": "outward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ischial_spine",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sacral_promontory",
+          "intensity": 0.85
         }
       ],
       "narration": "Five things the bone explains. Pelvic fracture and haemorrhage: the ring breaks in at least two places, the branches of the internal iliac artery and the presacral venous plexus lie against the bone, and the retroperitoneum will hold several litres — which is why an open-book injury is closed early with a binder and why the pelvis is one of the places a trauma patient bleeds to death without a drop appearing outside. Associated visceral injury: fragments of pubic ramus lie against the bladder and the membranous urethra, so blood at the meatus, a high-riding prostate and inability to pass urine mean a urethral injury and no catheter is passed. The ischial spine in obstetrics: it is palpable per vaginam, it defines station zero, and it is the target for a pudendal nerve block, because the nerve crosses the sacrospinous ligament just medial to the tip of the spine. Cephalopelvic disproportion: the obstetric conjugate is the narrowest point of the inlet and cannot be measured directly, so it is estimated from the diagonal conjugate — reach the promontory with a finger and the inlet is suspect. And the iliac crest: subcutaneous along its whole length, at the level of L4, it is the standard site for bone marrow aspiration and for taking a bone graft. Every one of those is a fact about a shape you can hold in your hand."
@@ -787,16 +1007,18 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "The coccyx is not in the catalog. It is one of the four bones of the pelvis and one boundary of the outlet, so a scene about the bony pelvis that cannot show it is incomplete. It is narrated throughout and carried in match.terms; the sacrum model ends where the coccyx would begin.",
     "The hip bone is a single fused model. Ilium, ischium and pubis have no separate meshes, so the three constituent bones and the triradiate cartilage are named in narration over one object. The student cannot isolate the ischium or click the pubis. This is anatomically defensible in an adult, where the bones are fused, but it weakens the paediatric point about the triradiate cartilage.",
-    "No ligament of the pelvis exists in the catalog: no sacrospinous, no sacrotuberous, no iliolumbar, no pubic symphysis, no sacroiliac joint capsule and no obturator membrane. Beat four therefore teaches the two ligaments that convert the sciatic notches into foramina by narration, using coccygeus as a proxy marker for the sacrospinous ligament — the muscle lies directly on it — and piriformis to show where the greater foramen is. This is the largest gap in the scene, because the foramina and their contents are the most examined part of the topic.",
+    "No ligament that binds the pelvis exists in the catalog: no sacrospinous, no sacrotuberous, no iliolumbar, no pubic symphysis, no sacroiliac capsule and no obturator membrane. (The inguinal ligament, which is drawn here, is the rolled lower border of the external oblique aponeurosis rather than a ligament of the girdle, and it is present.) Beat four therefore teaches the two ligaments that convert the sciatic notches into foramina by narration, using coccygeus as a proxy marker for the sacrospinous ligament — the muscle lies directly on it — and piriformis to show where the greater foramen is. This is the largest remaining gap in the scene, because the foramina and their contents are the most examined part of the topic.",
     "There is no second pelvis to compare against, so beat five cannot actually show a male pelvis beside a female one. COMPARE_STRUCTURES is authored between the two hip bones so the beat has a visual anchor, but the sexual dimorphism is taught entirely in narration. A companion diagram-mode scene showing the two inlets side by side would be the single highest-value addition for this topic, and would make the obstetric material examinable rather than merely readable.",
-    "The individual bony landmarks — anterior superior iliac spine, ischial spine, ischial tuberosity, pubic tubercle, sacral promontory, pecten pubis — have no models and no anchors were authored for them. Anchors in this corpus are placed by measurement on the actual geometry and these meshes are not in the local decimated set. Ingesting the two hip bones and the sacrum locally would yield a dozen anchors and would turn beats one, three and five from narrated lists into clickable points, which for a bone scene is close to the whole value.",
-    "The diameters of the inlet and outlet cannot be drawn. CROSS_SECTION in beat three exposes the curved canal so the student sees the short anterior wall against the long posterior one, but the conjugates and the intertuberous diameter are numbers spoken over the picture. Measured anchors on the promontory and the symphysis would let a future renderer draw the lines.",
+    "Landmarks, part-fixed on 2026-08-29. The claim previously made here — that the hip bone and sacrum meshes were not in the local set and so no landmark could be measured — was false; both are in meshes-lite. Five anchors have now been derived with tools/derive-landmark.mjs and are carried in the Landmarks group: ASIS and pubic tubercle (contact with the two ends of the inguinal ligament, 0.09 and 0.52 mm), ischial spine (contact with coccygeus, 0.34 mm), ischial tuberosity (lowest vertex of the hip bone) and sacral promontory (most anterior midline vertex of the sacrum). All five are status needs-review until someone opens the scene and looks at the patch. Still unmeasured: the posterior superior iliac spine, the iliac crest as a line rather than a point, the arcuate line and the pecten pubis — none of them has a witness structure in this scene, and a line is not an anchor. The acetabulum was measured against the femoral head and refused in practice: the contact centroid had to be snapped 7.8 mm to reach the bone, because the socket is a deep bowl, so it was not authored rather than emitted as a point that only looks measured.",
+    "The diameters of the inlet and outlet still cannot be drawn as lines. CROSS_SECTION in beat three exposes the curved canal so the student sees the short anterior wall against the long posterior one, and the promontory is now a measured point, but the symphysis end of each conjugate is not measured in this scene and the intertuberous diameter needs the left tuberosity, which is not authored. The numbers are spoken over the picture. A symphysis anchor and a left-side mirror of the tuberosity would let a future renderer draw all three conjugates and the outlet.",
     "This scene does not claim to cover 'Pelvic diaphragm (levator ani)', 'Urinary bladder' or 'Internal iliac vessels' although parts of all three appear in it. Coccygeus is here only as a marker for the sacrospinous ligament, the bladder and rectum only to show what the lesser pelvis holds, and the iliac arteries only to trace the brim. All three remain on the worklist as separate curriculum entries.",
-    "Piriformis, obturator internus, coccygeus and the iliac arteries are shown on the right side only. Their left counterparts exist in the catalog but were omitted so the bone stays visible through the scene; the teaching points are the openings and the brim, neither of which is side-specific."
+    "Piriformis, obturator internus, coccygeus, the iliac arteries and all four hip-bone anchors are on the right side only. Their left counterparts exist in the catalog but were omitted so the bone stays visible through the scene; the teaching points are the openings and the brim, neither of which is side-specific."
   ]
 }

@@ -293,6 +293,48 @@
       "narration": "The mirror vesicle. Its duct joins the vas to form the ejaculatory duct, which pierces the prostate to open into the prostatic urethra."
     },
     {
+      "key": "right_deferent_duct",
+      "name": "right deferent duct",
+      "label": "Vas deferens (right) — crossing the base",
+      "role": "part",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#5d6d7e",
+      "refs": {
+        "bodyparts3d": "FMA19235"
+      },
+      "terms": [
+        "deferent duct",
+        "vas deferens",
+        "ductus deferens",
+        "ampulla of the vas",
+        "ejaculatory duct",
+        "base of the bladder",
+        "rectovesical septum"
+      ],
+      "narration": "The duct itself, not a concept. It leaves the deep inguinal ring, crosses in front of the external iliac vessels, hooks over the ureter — water under the bridge — and runs down the back of the bladder medial to the seminal vesicle, widening into its ampulla. The two ampullae and the two vesicles are what lie on the base of the male bladder, between it and the rectum, and they are why the male base is not in direct contact with the rectum below the rectovesical pouch."
+    },
+    {
+      "key": "left_deferent_duct",
+      "name": "left deferent duct",
+      "label": "Vas deferens (left)",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#85929e",
+      "refs": {
+        "bodyparts3d": "FMA19236"
+      },
+      "terms": [
+        "deferent duct",
+        "vas deferens",
+        "left",
+        "ejaculatory duct",
+        "prostatic urethra"
+      ],
+      "narration": "The mirror duct. At the lower end of the base each ampulla is joined by the duct of its seminal vesicle to form the ejaculatory duct, which pierces the prostate and opens into the prostatic urethra beside the prostatic utricle."
+    },
+    {
       "key": "rectum",
       "name": "rectum",
       "label": "Rectum — behind, across the pouch",
@@ -493,6 +535,147 @@
         "sacral nerve roots"
       ],
       "narration": "Behind the pelvis, the sacrum carries the roots that run the bladder. The parasympathetic supply is the pelvic splanchnic nerves from the ventral rami of S2, S3 and S4 — motor to detrusor and inhibitory to the neck — reaching the bladder through the inferior hypogastric plexus. Sympathetic fibres come from L1 and L2 through the hypogastric nerves. That is why a lesion of the cauda equina at these roots gives painless retention with overflow, and why saddle anaesthesia and retention together are a surgical emergency."
+    },
+    {
+      "key": "right_ureteric_orifice",
+      "label": "Right ureteric orifice — upper right corner of the trigone",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "bladder",
+        "uvw": [
+          0.2252,
+          0.971,
+          0.5367
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT PATCH between the bladder and the right ureter, averaged over every bladder vertex within 3 mm of the ureter (gap 0.90 mm, 16 vertices in the patch, centroid 1.10 mm from the single nearest vertex). Sits at u=0.23 — the body's RIGHT, since +X in the source frame is the body's left — and at v=0.97, the posterior wall, which is the base. Cross-checks against the left orifice at u=0.72 and the same v.",
+      "calibration_gap_mm": 0.9,
+      "terms": [
+        "ureteric orifice",
+        "right",
+        "trigone",
+        "interureteric bar",
+        "vesicoureteric junction",
+        "cystoscopy"
+      ],
+      "narration": "The right upper corner of the trigone, where the intramural ureter finally opens. Follow the interureteric bar across the base and the left orifice is at its far end."
+    },
+    {
+      "key": "left_ureteric_orifice",
+      "label": "Left ureteric orifice — upper left corner of the trigone",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "bladder",
+        "uvw": [
+          0.7174,
+          0.9842,
+          0.528
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT PATCH between the bladder and the left ureter, averaged over every bladder vertex within 3 mm of the ureter (gap 0.87 mm, 10 vertices, centroid 1.45 mm from the nearest single vertex). The mirror of the right orifice: same v and w to within 0.9 % of the organ's span, u reflected about the midline.",
+      "calibration_gap_mm": 0.87,
+      "terms": [
+        "ureteric orifice",
+        "left",
+        "trigone",
+        "interureteric bar",
+        "reflux"
+      ],
+      "narration": "The left upper corner. The two orifices are about two and a half centimetres apart in the empty bladder and five in the full one, and the measured separation of these two anchors is the distance the filling bladder stretches."
+    },
+    {
+      "key": "internal_urethral_orifice",
+      "label": "Internal urethral orifice — the lowest corner",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "bladder",
+        "uvw": [
+          0.4581,
+          0.7637,
+          0.0368
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT PATCH between the bladder and the urethra, averaged over every bladder vertex within 3 mm of the urethra (gap 0.41 mm, 22 vertices, centroid 5.89 mm from the nearest single vertex — the patch form matters here, because the single nearest vertex sits on the rim of the outlet rather than in the middle of it). At w=0.04 it is the lowest point of the whole organ, which is the claim the emptying narration makes.",
+      "calibration_gap_mm": 0.41,
+      "terms": [
+        "internal urethral orifice",
+        "trigone",
+        "bladder neck",
+        "internal urethral sphincter",
+        "lowest point"
+      ],
+      "narration": "The third corner, and the lowest point of the bladder — which is why it empties completely under gravity rather than leaving a pool behind. The three corners together are the trigone."
+    },
+    {
+      "key": "bladder_neck",
+      "label": "Neck of the bladder — on the prostate",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "bladder",
+        "uvw": [
+          0.5605,
+          0.6592,
+          0.0023
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the CONTACT PATCH between the bladder and the prostate, averaged over every bladder vertex within 3 mm of the prostate (gap 0.16 mm, 62 vertices, centroid 4.70 mm from the nearest single vertex). Lands 0.4 % of the organ's height below the internal urethral orifice and 10 % of its depth in front of it, which is the expected relation of the neck to the orifice it surrounds.",
+      "calibration_gap_mm": 0.16,
+      "terms": [
+        "neck of the bladder",
+        "bladder neck",
+        "puboprostatic ligament",
+        "pubovesical ligament",
+        "internal urethral sphincter",
+        "benign prostatic hyperplasia"
+      ],
+      "narration": "The lowest and most fixed part, resting directly on the prostate and held forwards by the puboprostatic ligaments in the male, pubovesical in the female. It is the part a median lobe enlarges into."
+    },
+    {
+      "key": "apex",
+      "label": "Apex — forwards to the top of the symphysis",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "bladder",
+        "uvw": [
+          0.5011,
+          0,
+          0.6725
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -y on the bladder mesh — the most ANTERIOR vertex, +Y in the source frame being posterior (1502 vertices considered, 51.6 mm from the surface centroid). It lands on the midline at u=0.50, which is the check: the apex is a midline point, and nothing in the definition forced it there.",
+      "terms": [
+        "apex of the bladder",
+        "median umbilical ligament",
+        "urachus",
+        "patent urachus",
+        "pubic symphysis"
+      ],
+      "narration": "The forward point of the pyramid, at the upper border of the pubic symphysis. The median umbilical ligament — the obliterated urachus — runs up from here to the umbilicus, which is the track a patent urachus leaks along in the newborn."
     }
   ],
   "views": [
@@ -570,9 +753,23 @@
           "from": "bladder",
           "to": "right_seminal_vesicle",
           "kind": "vas and vesicle on the base"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_deferent_duct",
+          "to": "right_ureter",
+          "kind": "the vas crosses above the ureter — water under the bridge"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
         }
       ],
-      "narration": "Describe the empty bladder as a pyramid on its side and the parts fall into place. The apex points forwards to the top of the symphysis and gives attachment to the median umbilical ligament, the fibrous remnant of the urachus running to the umbilicus — a patent urachus leaks urine at the navel in the newborn. The base faces backwards and downwards and is the only surface with a fixed shape whether the bladder is full or empty; it carries the trigone inside and, in the male, the two vasa and the seminal vesicles outside. The superior surface is the only one covered by peritoneum, so it is the only one that ruptures into the abdomen. The two inferolateral surfaces rest on the pubic bones and levator ani. The neck is the lowest and the most fixed part, held by the puboprostatic ligaments in the male and pubovesical in the female, and it is where the urethra begins. Learn which surfaces are covered by peritoneum and you have already answered the question about bladder rupture."
+      "narration": "Describe the empty bladder as a pyramid on its side and the parts fall into place. The apex — the anchor at the front — points forwards to the top of the symphysis and gives attachment to the median umbilical ligament, the fibrous remnant of the urachus running to the umbilicus — a patent urachus leaks urine at the navel in the newborn. The base faces backwards and downwards and is the only surface with a fixed shape whether the bladder is full or empty; it carries the trigone inside and, in the male, the two vasa deferentia with their ampullae and the two seminal vesicles outside, all of them drawn here rather than described. The superior surface is the only one covered by peritoneum, so it is the only one that ruptures into the abdomen. The two inferolateral surfaces rest on the pubic bones and levator ani. The neck, the anchor sitting on the prostate, is the lowest and the most fixed part, held by the puboprostatic ligaments in the male and pubovesical in the female, and it is where the urethra begins. Learn which surfaces are covered by peritoneum and you have already answered the question about bladder rupture."
     },
     {
       "mode": "cross_section",
@@ -598,6 +795,26 @@
           "animate": true
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Landmarks",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:trigone",
+          "path": [
+            "right_ureteric_orifice",
+            "left_ureteric_orifice",
+            "internal_urethral_orifice",
+            "right_ureteric_orifice"
+          ],
+          "duration": 6
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "posterior"
         },
@@ -620,7 +837,7 @@
           "duration": 7
         }
       ],
-      "narration": "Cut the bladder open and almost all of the lining is thrown into folds that flatten as it fills — except for one triangle on the base, which is always smooth. That is the trigone, and it is smooth because the mucosa there is firmly bound to the muscle beneath. Its three corners are the two ureteric orifices above, joined by the raised interureteric bar, and the internal urethral orifice below. The trigone is developmentally different from the rest of the bladder — it comes from the absorbed ends of the mesonephric ducts rather than the cloaca — which is why it has its own sensitivity, why it is the first place inflammation is felt, and why it is the landmark that orients every cystoscopy. Now watch the ureter enter. It pierces the wall obliquely and travels two centimetres inside the muscle before it opens. As the bladder fills, the rising pressure flattens that intramural tunnel shut, so urine cannot reflux upwards; each ureter is closed by the very pressure that would push urine back. Peristalsis opens it briefly and squirts urine in, which is the jet seen at cystoscopy. Where the tunnel is too short or too straight — congenitally, or after surgery — reflux follows, and reflux with infection scars the growing kidney."
+      "narration": "Cut the bladder open and almost all of the lining is thrown into folds that flatten as it fills — except for one triangle on the base, which is always smooth. That is the trigone, and it is smooth because the mucosa there is firmly bound to the muscle beneath. Its three corners are the two ureteric orifices above, joined by the raised interureteric bar, and the internal urethral orifice below — and those three corners are lit here as measured anchors, each one placed at the point where the ureter or the urethra actually meets the bladder wall in the geometry, so the triangle you are shown is the triangle the tubes define. The trigone's smooth mucosa itself is not modelled; the corners are. The trigone is developmentally different from the rest of the bladder — it comes from the absorbed ends of the mesonephric ducts rather than the cloaca — which is why it has its own sensitivity, why it is the first place inflammation is felt, and why it is the landmark that orients every cystoscopy. Now watch the ureter enter. It pierces the wall obliquely and travels two centimetres inside the muscle before it opens. As the bladder fills, the rising pressure flattens that intramural tunnel shut, so urine cannot reflux upwards; each ureter is closed by the very pressure that would push urine back. Peristalsis opens it briefly and squirts urine in, which is the jet seen at cystoscopy. Where the tunnel is too short or too straight — congenitally, or after surgery — reflux follows, and reflux with infection scars the growing kidney."
     },
     {
       "mode": "mechanism",
@@ -716,10 +933,14 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-28"
+    "authored_at": "2026-08-28",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
-    "The trigone has no mesh, and it is the single most examined internal feature of this organ. Beat three cuts the bladder open with CROSS_SECTION and names the three corners and the interureteric bar over an undifferentiated wall. The ureteric orifices and the internal urethral orifice likewise have no models and no anchors — three measured anchors on the base would turn the whole beat from a recitation into a clickable cystoscopic view, and would be the highest-value single addition to this scene.",
+    "The trigone has no mesh of its own, but its three corners are now measured anchors rather than narration: the two ureteric orifices are the contact patches of the ureters on the bladder wall (0.90 mm and 0.87 mm) and the internal urethral orifice is the contact patch of the urethra (0.41 mm), all three placed with derive-landmark.mjs and all three status needs-review until somebody opens the scene and looks at the patch. What is still missing is the SURFACE between them — the smooth, firmly bound mucosa that is the trigone proper, and the raised interureteric bar joining the two upper corners. Beat three lights the triangle's vertices and describes its face.",
+    "The neck and the apex are likewise anchors, not models: the neck is the bladder's contact with the prostate (0.16 mm) and the apex is the most anterior vertex of the mesh, which lands on the midline as it should. The median umbilical ligament that the apex gives attachment to has no mesh, so the anchor marks the attachment and the ligament is still spoken.",
+    "An anchor for the two vasa on the base was attempted and REFUSED, correctly: derive-landmark.mjs measured both deferent ducts against the bladder at 0.39 mm and 0.42 mm but the two contacts sit 26.1 mm apart on an 83 mm organ, beyond the tool's quarter-of-the-organ scatter limit. That is not a bad measurement, it is a bad definition — the vasa reach the base as a bilateral pair and there is no single midline point for them. Recorded so no later run re-derives it and believes the average of the two.",
     "The bladder is one hollow model with no wall layers, so detrusor, the interlacing muscle bundles and the transitional epithelium cannot be shown or peeled. Trabeculation and diverticula in outflow obstruction, narrated in beats two and five, have nothing to appear on.",
     "The intramural course of the ureter — the oblique two-centimetre tunnel that is the anti-reflux valve — cannot be seen, because the ureter model stops at the bladder surface rather than running within its wall. This is the mechanism of beat three and it is taught entirely in narration with COMPARE_STRUCTURES between the two ureters as a visual anchor.",
     "No female urethra, uterus or vagina in the catalog. The female bladder differs in every relation that matters — the uterus and vagina behind, two peritoneal pouches instead of one, a four-centimetre urethra, no prostate — and all of it is spoken over male viscera. Same missing female pelvis set that has now blocked three scenes in this topic.",

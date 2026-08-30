@@ -95,8 +95,13 @@ it is the only thing standing between the corpus and a silently incomplete scene
 
 ## 3 · Contradictions still open — these need a judgement, not a rewrite
 
-- **`pectoral-region-breast__clavicle`** counts the muscles attached to the clavicle three ways in one
-  beat: the title says four, the narration says five, the trace path now names six. Pick a number.
+- DONE (2026-08-29 audit) **`pectoral-region-breast__clavicle`** counts the muscles attached to the clavicle
+  three ways in one beat: the title says four, the narration says five, the trace path now names six. Pick a
+  number. — the number is **six**, and it is the trace path that was right. Four on the medial two-thirds
+  (sternocleidomastoid, pectoralis major, subclavius, sternohyoid), two on the lateral third (trapezius,
+  deltoid). Title, narration and the sternohyoid structure card all now say six, and the narration states the
+  4+2 split explicitly so the count is reconstructable rather than memorised. The ligaments are named in the
+  same breath as explicitly *not* in the count, which is where the old "four" probably came from.
 - **`arm__humerus`** promises "the four places it commonly breaks" in its learning goal and beat 7
   delivers three; `arm__median-ulnar-radial-nerves` `gaps[1]` then defers to a fourth that was never
   written. Either add the supracondylar/median-nerve pair to beat 7 or drop "four" from both.
@@ -104,8 +109,10 @@ it is the only thing standing between the corpus and a silently incomplete scene
   T11–L2 in the other. The right answer is kidney T10–L1, ureter T11–L2; say both in both. — both scenes
   now state both levels and use the one-segment difference to explain the loin-to-groin march itself,
   rather than leaving it as two numbers that look like a contradiction.
-- **liver vs spleen** each claim to be the most commonly injured abdominal organ, in the same topic.
-  Split it by mechanism: spleen commonest in blunt trauma, liver in penetrating.
+- DONE (2026-08-29 audit) **liver vs spleen** each claim to be the most commonly injured abdominal organ, in the same topic.
+  Split it by mechanism: spleen commonest in blunt trauma, liver in penetrating. — the spleen scene was
+  already correctly qualified ("in blunt abdominal trauma"); the liver scene's beat 7 said "the most commonly
+  injured solid abdominal organ" flat, and now says penetrating first and second to the spleen in blunt.
 - DONE (2026-08-28 audit) **`inguinal-ligament-landmarks` vs `inguinal-canal`** teach the deep-ring
   occlusion test as diagnostic and as unreliable respectively. The canal scene is right. — the landmarks
   scene now states the test, then says it is unreliable and that the inferior epigastric artery settles
@@ -122,6 +129,15 @@ it is the only thing standing between the corpus and a silently incomplete scene
   proxy, contact between the radius and supinator, converges at 0.21 mm but on one witness and lands at
   w=0.81, below the radial tuberosity at w=0.83 — upper shaft, not neck. Recorded in the scene's `gaps[]`
   with the measurement, so no later run re-derives it and believes it.
+- **NEW (2026-08-29 audit) — the adductor tubercle is measurable and two signed scenes say it is not.**
+  `gross__thigh__adductor-canal` derived it at audit: `--parent FMA24474 --contact FMA22459`, gap 0.49 mm,
+  stable under `--slab z:0,0.15` and `z:0,0.25`, and 25 mm above the medial epicondyle — exactly the
+  relation `gross__thigh__femur` states in words. But `gross__thigh__femur` and `gross__thigh__hamstrings`
+  both still carry "the adductor tubercle is a sub-feature of a whole-bone mesh and is named rather than
+  marked", and both are already signed, so the anchor was not added to them. It should be. Same for the
+  medial epicondyle, which fell out of the same cross-check for free. This is failure mode 1 in its
+  landmark form: a definition was thought impossible, was never attempted, and the note became evidence.
+
 - **`back-vertebral-column__typical-vertebra`** — `CORPUS.md` records 16 landmarks, the file has 13.
 - **Eight views across the four Back & Vertebral Column scenes carry no `beat` number**, and
   `typical-vertebra` numbers two different beats "3". Every run reported the validator clean, because
@@ -135,6 +151,65 @@ it is the only thing standing between the corpus and a silently incomplete scene
   scenes is present**, so every one of those notes is stale and each is suppressing landmark work on geometry
   that is sitting on disk. This is failure mode 1 wearing different clothes: a note became the evidence.
   Re-measure at each scene's audit; do not carry the sentence forward.
+  **2026-08-29 (later run):** cleared in `spleen` — `FMA7196` was on disk, six anchors measured (hilum on two
+  converging witnesses at 1.31 mm, gastric / renal / diaphragmatic contact patches, both poles) and three
+  refusals recorded. That run also found a second trap worth carrying: `derive-landmark.mjs` reports the
+  spleen's long axis as `y`, but **z is the vertical axis** of these meshes, so `--extreme -y` returns a
+  measured, reproducible and completely wrong "lower pole". Confirm the vertical axis against neighbouring
+  centroids before trusting any `--extreme` result. Remaining scenes still carrying the stale sentence:
+  `portal-venous-system`, `lungs`, `bony-pelvis`, `stomach`, `small-intestine`, `large-intestine`, `ureters`.
+  **2026-08-29:** cleared in `liver` (six anchors measured, three refusals recorded) and in `pancreas` (two
+  measured, five refusals recorded). Still live in `biliary-tree-gallbladder`, `spleen`, `portal-venous-system`,
+  `lungs`, `bony-pelvis`, `stomach`, `small-intestine`, `large-intestine`, `ureters`, `kidney`,
+  `suprarenal-adrenal-gland` and `abdominal-aorta-ivc`.
+  **2026-08-29 (audit run):** cleared in `lungs` — `FMA7383` was on disk and the horizontal fissure, missing
+  an anchor entirely on a scene whose learning goal is placing the fissures, was measured at 0.09 mm. Cleared
+  in `mediastinum`, where the note had done real damage: the oesophagus AND the diaphragm were both claimed
+  absent, both were on disk, and the oesophagus had been carried as an anchor **placed by eye** on a `ready`
+  scene. Both are now models and four anchors were measured (three oesophageal constrictions, plus
+  `ludwig_posterior` re-derived on the T4/T5 disc at 0.07 mm after its old 3.72 mm definition was found to
+  exceed the tool's own refusal gate). Still live in `biliary-tree-gallbladder`, `portal-venous-system`,
+  `bony-pelvis`, `stomach`, `small-intestine`, `large-intestine`, `ureters`, `kidney`,
+  `suprarenal-adrenal-gland` and `abdominal-aorta-ivc`.
+  **2026-08-29 (audit run) — THE SENTENCE IS NOT CONFINED TO THE ABDOMEN.** Found in
+  `pectoral-region-breast__axillary-vessels-lymph-nodes`, where `gaps[]` said the axillary wall meshes "are
+  not in the local mesh set" and that no node anchor could therefore be measured — while naming that anchor
+  work as "the single change that would let the scene reach ready". All fifteen of that scene's meshes were
+  on disk. Two sites measured at audit (anterior/pectoral group 0.33 mm; lateral wall on two converging
+  witnesses, 0.09 and 0.35 mm) and three refusals recorded. Also cleared in
+  `lungs-mediastinum__tracheobronchial-tree`, which claimed the oesophagus was "not available locally" when
+  `FMA7131` was on disk and the `mediastinum` scene in the same topic already carried it as a model.
+  **Treat the list above as a lower bound, not an inventory** — assume the sentence is present in any topic
+  and check `meshes-lite/` before believing it. A third instance sits in
+  `pectoral-region-breast__clavicle` (`CORPUS.md` ~line 113: "the clavicle mesh is not in the local set", so
+  the conoid tubercle, trapezoid line and subclavian groove were never derived). `FMA13322.stl` is on disk.
+  That scene is two places down the audit walk; derive them when it comes up.
+  **2026-08-29 (audit run): DONE in `clavicle`.** `FMA13322.stl` was on disk exactly as predicted. Three
+  anchors measured — sternal facet (manubrium, 0.12 mm, 113-vertex patch), acromial facet (scapula, 0.99 mm,
+  65 vertices, cross-checking the existing `acromion` anchor from the opposite side of the same joint) and
+  subclavian groove (subclavius, 0.22 mm, 188 vertices) — all with `--area`, all `needs-review`. The conoid
+  tubercle and trapezoid line could NOT be derived and that is a definition problem, not a delivery one:
+  their ligament has no mesh, and `--contact FMA13395` silently returns the acromioclavicular joint instead,
+  because the nearest scapular point to the clavicle is the AC joint and not the coracoid. That refusal is
+  recorded in the scene's `gaps[]` with its wrong uvw, so a later run cannot re-derive it and believe it.
+  **A fourth variant of the same habit found in the same file:** `gaps[]` said "no ligaments of any kind"
+  and the catalog does hold four (both inguinal, both long plantar) — none of them this bone's, so the
+  teaching consequence was right and the sentence was wrong. Re-scoped. And a live trap: **`FMA23725`
+  "right trapezoid" is in the catalog and is the CARPAL BONE**, not the trapezoid line — the exact shape of
+  mistake a run searching for "trapezoid" would make. Named in `gaps[]`.
+
+- **NEW (2026-08-29 audit) — anchors derived by the bespoke per-topic scripts predate `derive-landmark.mjs`'s
+  refusal gate, and some of them would not pass it.** `mediastinum`'s `ludwig_posterior` was a 3.72 mm
+  contact, above the 3 mm limit, and its `calibrated_by` defended the gap as anatomically correct instead of
+  treating it as a wrong definition. It was: re-defined against the T4/T5 disc it names, it measures 0.07 mm.
+  Every scene whose anchors say `see tools/derive-<topic>-landmarks.mjs` rather than `derive-landmark.mjs`
+  should have its printed gaps read at audit, and anything over 3 mm re-defined rather than excused.
+  **2026-08-29 (audit run): second instance confirmed.** `tracheobronchial-tree`'s `t4_level` was an 11.41 mm
+  trachea-to-T4 contact whose `calibrated_by` presented the gap as a finding. Re-run today the tool REFUSES
+  it, and correctly: the trachea does not touch T4 because the oesophagus lies between them, so the airway
+  was the wrong parent for a vertebral level. Re-derived as the lowest vertex of T4 itself — its lower border
+  — which cross-checks against the carina anchor to 1.4 mm in the vertical. Two for two: assume every
+  pre-gate anchor is suspect until its printed gap has been read.
 
 ## 4 · Embryology — twenty-four scenes that will ship the day the SVG engine exists
 

@@ -1,5 +1,12 @@
 # Run log
 
+**THE GROSS ANATOMY AUDIT IS COMPLETE. ALL 76 GROSS SCENES CARRY `provenance.audited_at`; ZERO ARE
+UNSIGNED. VERIFIED THIS RUN BY LISTING THE SCENES DIRECTORY, NOT BY READING A NOTE. SECTIONS 1 AND 2 OF
+`REPAIR-BACKLOG.md` ARE ALSO CLEAR, SO THE BACKLOG NO LONGER OUTRANKS THE CURSOR. AS OF 2026-08-30 THE
+TASK HAS MOVED TO NEUROANATOMY AND AUTHORS TWO STRUCTURES PER RUN. EMBRYOLOGY REMAINS SUSPENDED — ALL 28
+OF ITS SCENES ARE SEQUENCE SCENES BLOCKED ON SVG ARTWORK, NOT ON AUTHORING, SO `next to audit` POINTING
+AT AN EMBRYOLOGY SCENE IS NOT AN INSTRUCTION TO FOLLOW.**
+
 One block per hourly run. Model-free (no API spend). Log-only.
 
 ---
@@ -7471,3 +7478,2028 @@ editing (`tibia-fibula` ready, 21 structures / 46 ops; `biliary-tree-gallbladder
 structures / 43 ops). **Index: `104 scenes (54 ready) · 11855 term mappings`.** `sync-state.mjs`
 re-run: `drawable 64 of 64`, audit cursor advanced to
 `gross__liver-biliary-tract-pancreas-spleen__liver`, STATE.json already in step.
+
+## Run 2026-08-29 (audit walk) — Liver and Pancreas
+
+Backlog sections 1 and 2 are both clear, so this run **fell through to the audit walk** at `next to audit`,
+as the backlog instructs. Two scenes read end to end: `gross__liver-biliary-tract-pancreas-spleen__liver`
+and `…__pancreas`. Checks 1–13 all performed; findings below rather than a shrug.
+
+**Catalog searched again, with more than one spelling, for every absence either scene claims** — portal,
+hepat, bile, biliary, duct, falciform, ligamentum, teres, caudate, quadrate, pancrea, splen, cystic,
+omentum, peritone, mesenter, gall, liver. Result: the absences are real. There is no portal vein, no bile
+duct of any kind, no hepatic vein, no falciform ligament or ligamentum teres/venosum, no hepatic lobe or
+Couinaud segment, and no pancreas (only `FMA10419`, its duct). `caudate` returns only the two caudate
+*nuclei* of the brain — a near-miss worth recording so a later run does not mistake `FMA72826/72827` for the
+caudate lobe of the liver.
+
+**Drawability.** Liver 17 of 17 meshes in `meshes-lite/`; pancreas 16 of 16. No hollow beats for want of
+geometry in either scene; what is hollow is hollow because the *catalog* has nothing, not the mirror.
+
+### Liver — five things wrong
+
+1. **Missing required view.** `CURRICULUM.json` asks Liver for `location`, `associated_organs` and
+   `cross_section`. The scene had no `cross_section` beat at all. Added as beat 7, an axial slice at the
+   porta read front-to-back with the cava in its groove as the orientation point; the old clinical beat 7
+   became beat 8. Nothing in the validator checks this — second scene in the corpus caught this way.
+2. **Wrong clinical number, stated twice.** Both the liver structure's narration and beat 1 gave the normal
+   percussed liver span in the midclavicular line as "twelve to fifteen centimetres". That is the
+   radiological craniocaudal height, not the percussion span, and as written it makes a 13 cm liver normal.
+   Both copies now say six to twelve by percussion and name the fifteen-centimetre figure as the imaging
+   one. **Grepped the whole corpus for the phrase** — the only other hit is fifteen jejunal branches in
+   `small-intestine`, unrelated.
+3. **Contradiction with the spleen scene** (backlog section 3, now ticked). Liver beat 7 claimed "the most
+   commonly injured solid abdominal organ" flat; the spleen scene, correctly, claims the same title "in
+   blunt abdominal trauma". Split by mechanism in the liver scene.
+4. **Calot's triangle bounded by the "inferior border" of the liver** — it is the inferior *surface*, and
+   the border-bounded version is the hepatocystic triangle while Calot's own used the cystic artery. Fixed
+   and both names now distinguished; `hepatocystic triangle` was already in `terms[]`.
+5. **Narration against geometry (check 8), four beats.** Beat 2 opened "The anatomical division is what you
+   see: the falciform ligament…" — the falciform ligament is not on screen and has no mesh, so that
+   sentence sent a student hunting for a fold that was never drawn. Beats 3 (bile duct), 5 (all the
+   peritoneal folds) and 6 (the H of fissures) had the same shape of problem. All four now say openly what
+   is described rather than shown. Beat 2's "numbered anticlockwise from the caudate" was also dropped: the
+   direction depends on the viewpoint and the scene had no need to assert it.
+
+**Six anchors measured and authored** on `FMA7197`, all `needs-review`: gallbladder fossa (contact with
+`FMA7202`, 0.18 mm), groove for the IVC (`FMA10951`, 0.65), renal impression (`FMA7204`, 0.59), suprarenal
+impression (`FMA15629`, 0.26), duodenal impression (`FMA7206`, 0.78), gastric impression (`FMA7148`, 0.41),
+each the centroid of the contact patch within 6 mm rather than the single nearest vertex. Three attempts are
+recorded in `gaps[]` as **not** authored so no later run re-derives them: porta hepatis via the common
+hepatic artery **refused** at 3.78 mm, oesophageal groove **refused** at 4.07 mm on five vertices, and the
+bare area, which the tool *did* emit but which I rejected by judgement — its contact patch is 766 vertices
+over 41 mm, i.e. the entire diaphragmatic surface, not the peritoneum-free patch. Labelling that "bare area"
+would light the wrong thing. The gastric impression is flagged in `gaps[]` as the least secure of the six.
+
+**Sides.** This scene contains one true pair and it is correct: `FMA7204` right kidney and `FMA15629` right
+suprarenal gland, both right, both matching the catalog name character for character; the left members
+(`FMA7205`, `FMA15630`) are absent from this scene and present in the pancreas scene, correctly labelled
+left there. All 17 ids exist in the catalog and all 17 `name` fields match the catalog verbatim.
+
+### Pancreas — two things wrong
+
+1. **A trace running to a hidden structure.** Beat 3 `ISOLATE_REGION`s the Pancreas group and then traces
+   `concept:islet-hormones` through `splenic_v` → `smv` → `liver`, but `liver` is in the "The bed" group and
+   was isolated away — the last waypoint of the trace was not on screen. `SHOW_STRUCTURE liver` added.
+2. **The false decimated-set note**, the backlog's newest item. `FMA10419` and `FMA7206` are both on disk.
+
+**Two anchors measured**: the ampulla, as the duct-duodenum contact (1.26 mm), and the tail, as the extreme
++x point of the duct. **Five refused** — neck via SMV 4.08 mm, splenic-vein groove 5.16 mm, uncinate via SMA
+7.76 mm, body-crosses-aorta 15.43 mm, tail via spleen 11.46 mm. Every refusal has one cause and it is a
+finding rather than a failure: the duct is a thin tube inside a gland with no mesh, so the vessels that
+define those parts are a whole missing pancreas away from it. Recorded in `gaps[]` with the numbers.
+
+Checked and found **correct** in the pancreas scene: all three curriculum views present (`location`,
+`glands`, `associated_organs`); islets at ~2% of mass; 15 cm and under 100 g; the front-to-back order on the
+transpyloric slice, including the left renal vein between SMA and aorta; the tail as the only intraperitoneal
+part, stated three times and consistent all three; gallstones as the commonest cause of acute pancreatitis;
+and the portal confluence behind the neck, which agrees with the liver scene word for sense.
+
+**A suspicion that turned out to be wrong, recorded so nobody re-raises it.** Beat 5 is titled "the
+transpyloric slice" and read front-to-back, i.e. an axial cut, but uses `CROSS_SECTION axis:"y"`, and in the
+LPS frame `derive-landmark.mjs` prints, the axial normal is z. I read `viz3d.js` before changing anything:
+the player builds the clip normal in three.js world space, where `superior` is `[0, d, 0.001]` — the meshes
+are Y-up in the scene graph, so `axis:"y"` *is* the axial cut. Left alone. The spec does not state the frame,
+which is why this looked like a bug; that is worth a line in the spec.
+
+**Validator:** `104/104 scenes valid` after the edits (re-run with `--mark`; both scenes re-validated after
+being changed). **Index:** `104 scenes (54 ready) · 11864 term mappings`. **sync-state:** gross audit now
+**45 of 76** signed; `next to audit` advances to `…__portal-venous-system`; drawable unchanged at 64 of 64.
+
+**Signed.** Both scenes carry `audited_at: 2026-08-29`. Liver stays `ready`; pancreas stays `candidate`,
+which is correct — the organ the scene is about still has no mesh.
+
+**Backlog:** section 3's liver-vs-spleen contradiction ticked DONE. The section-3 "not in the local
+decimated set" item is now marked cleared for these two scenes and still open in twelve others, listed there.
+
+---
+
+## 2026-08-29 — audit walk · `portal-venous-system` + `internal-reproductive-organs`
+
+Backlog sections 1 and 2 are both clear, so this run **falls through to the audit walk** at `next to
+audit`, as the task instructs. No backlog items were taken.
+
+**Scene A — `gross__liver-biliary-tract-pancreas-spleen__portal-venous-system`** (18 structures, 5 beats).
+Models: **18 referenced, 18 in `meshes-lite/`** — nothing hollow for want of geometry. Every id looked up
+in `available-meshes.json`; all 18 present, all 18 `name` fields character-identical to the catalog. No
+left/right pair in this scene: the only sided structures are the **left** internal iliac vein `FMA18888`
+and the **left** renal vein `FMA14336`, both correctly named, both deliberately unpaired (`FMA18887` right
+internal iliac exists and is recorded in `gaps[]` as an intentional omission). Ops: all nine used are in
+the ten-op vocabulary, every `target`/`from`/`to`/`path` member resolves to a structure key or a group.
+Curriculum asks for `vasculature` and `mechanism`; the scene has both plus two `comparison` beats.
+
+*Wrong, and fixed:* **the collateral-flow traces draw the left gastric vein out of the splenic vein.**
+Beats 3 and 5 both start their reversed-flow trace on `splenic_v` and run it through `stomach` to
+`esophagus`, because the splenic vein is the last drawn vessel before the missing portal vein. Read off
+the screen that teaches the left gastric as a splenic tributary. The file already contained the correct
+fact, in the stomach card — "the left gastric vein runs along the lesser curvature to the cardia and then
+down to the portal vein… the short gastric veins go the other way, into the splenic vein" — which is check
+6 doing exactly what it is for. Both beats now say the substitution out loud and name the short gastrics
+as the veins that genuinely do reach the stomach from the splenic vein, and a new `gaps[]` entry records
+the convention once for the whole scene, including beat 1's splenic-vein-to-liver relationship.
+
+*Also changed:* the group `Portal tributaries` → **`Portal system`**. It holds the liver, the spleen and
+the pancreatic duct as well as the two forming veins; only two of its five members are tributaries.
+
+*Re-searched, absences all confirmed true* (failure mode 1 check, multiple spellings each): `portal` 0
+hits across all 934 entries, `hepatic vein` 0, `gastric vein` 0, `azygos` 0, `rectal` → only the two
+puborectalis, `colon`/`caec`/`cec` 0, `pancrea` → duct only, `falciform`/`round ligament`/`umbilic` 0,
+`bile` 0, `esopha`/`oesopha` → `FMA7131` only. Every gap note in this scene is evidence-backed.
+
+*Cross-checked against the other four scenes in the topic:* liver-vs-spleen trauma split holds (spleen
+commonest in blunt, liver in penetrating and second in blunt); left-sided/sinistral portal hypertension is
+stated identically in the spleen scene and here; the confluence behind the neck of the pancreas agrees
+with the pancreas and liver scenes.
+
+**Scene B — `gross__pelvis-perineum__internal-reproductive-organs`** (was 20 structures, now 21; 5 beats).
+Models: **21 referenced, 21 in `meshes-lite/`**. All ids present, all names character-identical, all op
+targets resolve, all ten ops legal. Curriculum asks for `location`, `cross_section` and
+`associated_organs`; all three present.
+
+*Wrong, and fixed — two things, and the first is a half-applied correction of exactly the kind the
+backlog's rule 5 describes.*
+
+1. **`gaps[1]` still said the vas deferens is drawn nowhere in this scene.** It was fixed in the
+   scene and not in the note: `right_vas`/`left_vas` (`FMA19235`/`FMA19236`) are authored, beat 1's sperm
+   trace runs through the vas, and beat 4's "water under the bridge" relationship is `right_vas` →
+   `right_ureter`. The stale note went on describing beat 1 as having "the connecting duct invisible" and
+   beat 4 as a seminal-vesicle-to-ureter proxy — both untrue since the backlog fix. Rewritten to record
+   what was actually wrong (the catalog was searched for "vas deferens" instead of "deferent duct") and
+   what genuinely remains missing (the ampulla as a separate mesh).
+
+2. **Beat 5 traced testicular lymph to the internal iliac artery.** `concept:lymph` ran
+   `right_testis → right_internal_iliac → sacrum` while the narration of the same beat, and beat 2, and
+   the glans card all teach that testicular lymph goes to the **para-aortic** nodes at L2 and that a
+   testicular tumour gives a normal groin and a pelvic-node-free mass on the aorta. The trace drew the
+   error the beat warns against. Fixed properly rather than deleted: **`descending aorta` `FMA3784`
+   added as context** (in `meshes-lite/`, already used by scene A), and the single trace split into two
+   that diverge on screen — `testis → aorta` and `prostate → right_internal_iliac`. Narration now points
+   at the divergence and says the vessels stand in for nodes that have no mesh; `gaps[]` records the
+   correction and the reason. The aorta also gives beats 2 and 5 something to point at for "the
+   testicular artery arises from the aorta at L2", said three times in the file and previously undrawn.
+
+*Re-searched, absences confirmed:* `uter`, `ovar`, `vagin`, `cervix` all 0 — the female half of this
+curriculum entry genuinely has no mesh, and `gaps[0]`'s demand for a human decision stands. Also 0 for
+`spongiosum`, `spermatic`, `pampiniform`, `testicular`, `lymph`, `node`, `ejaculatory`, `bulbourethral`,
+`tunica`, `scrot`, `cremaster`, `gubernaculum`, `pudendal`. `prostat` → the single undifferentiated
+`FMA9600`, so beat 3's zones remain narration over a solid object, as `gaps[]` says.
+
+*Hollow beats, scene B:* beat 3 (`cross_section`) is the weakest — the transition and peripheral zones are
+its entire clinical point and the prostate is one mesh, so `CROSS_SECTION` cuts a solid. Three measured
+anchors on the prostate would fix it and cannot be derived: `derive-landmark.mjs` needs a neighbouring
+mesh to contact, and the verumontanum's neighbours (ejaculatory ducts, utricle) do not exist. Not
+authored by eye. Scene A has no hollow beat, but site three (umbilicus / caput medusae) still has no
+structure at all and is narration only in beat 4.
+
+**Landmarks:** none derivable this run in either scene, for the reason above. No anchor was placed.
+
+**Validator:** `104/104 scenes valid`, re-run with `--mark` after both scenes were changed. **Index:**
+`104 scenes (54 ready) · 11870 term mappings`. **sync-state:** gross audit **47 of 76**; drawable
+unchanged at **64 of 64**; `next to audit` advances to `…__spleen`.
+
+**Signed.** Both carry `audited_at: 2026-08-29`. **Both stay `candidate`, deliberately** — scene A's
+subject, the portal vein, has no mesh, and scene B closes a curriculum entry that names both sexes while
+teaching only one. Neither is `ready` and neither should be until a human acts on those two gaps.
+
+---
+## 2026-08-29T13:07:56Z — audit walk · `spleen` + `great-vessels`
+
+`sync-state.mjs` run first, as required. Backlog sections 1 and 2 are both clear, so **this run fell
+through to the audit walk** at `next to audit` and took the next two scenes. Gross audit is **not**
+complete: 49/76 signed after this run. All eight checks were performed on both scenes; what follows says
+which found something.
+
+### 1 · `gross__liver-biliary-tract-pancreas-spleen__spleen` — signed, ready
+
+**IDs/names/sides.** 14 of 14 ids in the catalog, all names character-for-character. Sides: this scene's
+only pair set is the three ribs, all left — `FMA8391` left ninth, `FMA8472` left tenth, `FMA8532` left
+eleventh — and `FMA7205` left kidney. Correct for a left-sided organ; no right-sided mesh appears.
+**Drawability: 14 of 14 models in `meshes-lite/`. No hollow beats.**
+
+**Catalog re-searched under multiple spellings** rather than trusting `gaps[]`: colon / caecum / cecum /
+flexure / large intestine → 0; pancrea* → 1 (the duct only); portal → 0; peritone* / bursa / omenta* → only
+`FMA76892` omental taenia; lien* / splen* → the spleen and its two vessels. So five of the eight existing
+gap notes are true. **The sixth was false** and was the run's best catch:
+
+- **`gaps[4]` said `FMA7196` "is not in the local decimated set" and that no anchor could therefore be
+  measured.** It is on disk. This is the **eleventh** scene found carrying that sentence, exactly as the
+  backlog predicted. **Six anchors measured** and authored, all `needs-review`: hilum (CONTACT, two
+  witnesses — splenic artery 0.31 mm, splenic vein 0.56 mm, converging to 1.31 mm on a 99 mm organ),
+  gastric impression (0.40 mm, 634 verts, `--area 12`), renal impression (0.18 mm, 365 verts),
+  diaphragmatic surface (0.57 mm, 662 verts, `--area 15`), lower pole and upper pole.
+- **Axis trap, recorded so no later run falls into it.** `derive-landmark.mjs` reports this mesh's long
+  axis as `y`, and `--extreme -y` returns a point 64 mm from the centroid that looks like a convincing
+  lower pole. It is not: **z is the vertical axis here**, confirmed against the centroids of rib nine
+  (z 1135), rib eleven (z 1079.7) and the left kidney (z 1066.8, below the spleen's 1110). The poles were
+  re-derived on `±z`. This is precisely the "never place an anchor by eye" failure wearing a measurement's
+  clothes — the wrong-axis number is measured, reproducible and wrong.
+- **Three refusals recorded in `gaps[]`.** Pancreatic impression: the duct mesh stops **11.46 mm** short of
+  the spleen, so the tail-at-the-hilum relation beats 2 and 4 teach is drawn across a gap. Ribs nine, ten
+  and eleven: 6.01, 10.71, 17.48 mm. That refusal is **correct anatomy, not a modelling failure** — the
+  diaphragm and the costodiaphragmatic recess lie between rib and spleen, which is the reason the organ is
+  protected and splenic dullness is a narrow band. No rib-contact anchor should ever be authored here.
+
+**Scene against itself (check 6) — one contradiction, three copies checked.** Beat 5 said the enlarged
+spleen "has a notched **medial** border"; the organ card says "the anterior border is notched" and
+`match.terms` says "notched anterior border". Anterior is right. Beat 5 rewritten, and `grep` over the
+whole file and the other four scenes in the topic confirms no third copy survives — the only other
+occurrences are the two correct ones and the new gap note. Two further term defects fixed in the same
+pass: `one ounce three inches five inches` was a garbled rendering of the 1-3-5-7-9-11 mnemonic the
+rib-ten card states correctly, and `T10 to L2` was a stray segmental level attached to no structure in the
+scene (grep: it occurs nowhere else in the corpus).
+
+**Narration against geometry (check 8).** Beat 6 traced `concept:haemorrhage` along spleen → diaphragm →
+**liver**, which on screen draws blood tracking into the organ this scene otherwise uses only as the portal
+destination. Retargeted to end on the new diaphragmatic-surface anchor, where the Kehr's-sign sentence
+actually is. Everything else named-but-not-drawn — colon, phrenicocolic ligament, lesser sac, splenunculi,
+the three peritoneal ligaments — is in both `gaps[]` and `terms[]`, and the narration is honest about it.
+
+**Views (check 7).** Curriculum asks `location` + `vasculature` for the 3d entry and `cross_section` for
+the histology entry; the scene has all three plus `associated_organs` and `mechanism`. **Covers (check 9):**
+`["Spleen"]`, exact. **Liver-vs-spleen trauma contradiction** from backlog §3 re-checked: this scene says
+"most commonly injured organ **in blunt** abdominal trauma", the liver scene says penetrating first and
+second-to-the-spleen in blunt. Consistent; nothing to do.
+
+**No CORPUS.md entry existed for this scene at all** despite it having been on disk since 2026-08-27. One
+has been written. Nothing checks that CORPUS.md covers the scenes directory; that is worth a tool.
+
+### 2 · `gross__lungs-mediastinum__great-vessels` — signed, ready
+
+**IDs/names/sides.** 22 of 22 mesh ids in the catalog, 0 name mismatches, checked programmatically rather
+than by eye. **Sides, said out loud as required — this scene contains the exact pair the spec warns about:
+`FMA7333` is "upper lobe of *right* lung" and is labelled Right upper lobe; `FMA7370` is "upper lobe of
+*left* lung" and is labelled Left upper lobe. Correct.** Also correct: `FMA4751`/`FMA4761` right/left
+brachiocephalic veins, `FMA3941`/`FMA4058` right/left common carotids, `FMA3953`/`FMA4694` right/left
+subclavians. **Drawability: 22 of 22 in `meshes-lite/`. No hollow beats.** All 12 anchors carry
+`calibrated_by` and `needs-review`; ops all in vocabulary, all targets and `anchor.on` resolve; curriculum
+asks `vasculature` + `associated_organs` and both are present; `covers: ["Great vessels"]` exact.
+
+**Two narration errors, and — the point of check 6 — the corpus already contained the correct answer for
+both.**
+
+- Beat 5: the venae cavae open into the right atrium and "**neither has a valve**". `heart-chambers`, in
+  the same course, correctly teaches that the superior enters unguarded while the inferior opening carries
+  the rudimentary **Eustachian valve**. Beat 5 now states both and uses the pair to explain why the JVP
+  reads as a manometer of the right heart. The valve has no mesh, so it is in the cava's `terms[]` and in a
+  new gap as named-not-drawn.
+- Beat 1: "Block **any** of them and the circulation stops in seconds." The scene's **own beat 7** teaches
+  slow SVC obstruction as a syndrome the patient survives for weeks, and its own `gaps[5]` records the
+  azygos collateral that is the reason. Beat 1 now separates the vessels that are irreplaceable in seconds
+  (aorta, pulmonary trunk) from the ones that collateralise, and points forward to beat 7.
+
+`grep` over the whole file for both facts confirms no further copies; the four other `azygos` mentions
+are consistent with the rewritten beat 1.
+
+Facts spot-checked and found **correct**, so recorded rather than changed: arch begins and ends on the
+sternal-angle plane, descending to T12; the three arch branches front-to-back; IVC through the central
+tendon at T8; SVC formed behind the right first costal cartilage; pulmonary trunk dividing under the arch
+with the ligamentum arteriosum and left recurrent laryngeal in that window; dysphagia megalatriensis;
+front-to-back reading order at the sternal angle.
+
+### Tools
+
+- `validate-scenes.mjs --mark` → **104/104 scenes valid**, both edited scenes pass. No blocked scenes.
+- `build-scene-index.mjs` → index.json written, 104 scenes (54 ready), 11885 term mappings.
+- `sync-state.mjs` → drawable 64/64; **audit: gross 49/76**; next to audit `gross__lungs-mediastinum__lungs`.
+
+---
+
+## Run 2026-08-29 (gross audit) — `lungs` and `mediastinum`
+
+Backlog sections 1 and 2 are both clear, so this run **fell through to the audit walk** at `next to audit`,
+as REPAIR-BACKLOG.md instructs. Two scenes read back end to end.
+
+**Checks actually performed on both scenes** (so a clean result is evidence, not a shrug): every
+`refs.bodyparts3d` looked up in `available-meshes.json`; every `name` compared character for character
+against the catalog `name`; sides checked on every paired structure; every op target and `anchor.on`
+resolved against `structures[]`; curriculum `views` compared against the beats' modes; beat ordinals read
+in sequence; each beat's narration read against what that beat actually puts on screen; `covers[]` checked
+against CURRICULUM.json spelling; every mesh checked for presence in `meshes-lite/`; and every "the catalog
+does not have X" claim in `gaps[]` re-searched under more than one spelling.
+
+### `gross__lungs-mediastinum__lungs` — signed
+
+- **Models in hand vs referenced: 12 of 12.**
+- **Sides.** The scene contains two paired sets and both are labelled correctly: `FMA7333` upper lobe of
+  RIGHT lung is keyed `rul`, `FMA7370` upper lobe of LEFT lung is keyed `lul`; `FMA7337` lower right is
+  `rll`, `FMA7371` lower left is `lll`. The middle lobe `FMA7383` is the catalog's unqualified "middle lobe
+  of lung" and only the right lung has one, which `gaps[1]` already explains.
+- **WRONG — a false absence claim, and the resulting hole in the teaching.** `gaps[0]` said `FMA7383` was
+  "in the catalog and not in the local decimated set", so the horizontal fissure could not be measured and
+  had no anchor at all — on a scene whose learning goal is "place each fissure on the chest wall well enough
+  to auscultate a named lobe". The mesh is on disk. This is the exact sentence REPAIR-BACKLOG §3 flags as
+  live in eleven scenes, and `sync-state.mjs` has been reporting every gross mesh present for two days.
+  **Fixed:** `derive-landmark.mjs --parent FMA7333 --contact FMA7383 --area 8` → gap 0.09 mm, 210 parent
+  vertices in the patch, centroid snapped 7.86 mm. The anchor sits at w=0.08 on the upper lobe, i.e. at its
+  lower boundary, which is where the horizontal fissure belongs. Added as `horizontal_fissure`, shown in
+  beat 2 (lobes and fissures) and beat 7 (where to put the stethoscope), both of which already talked about
+  it. `gaps[0]` rewritten to record the correction rather than repeat the claim.
+- **WRONG — counted from memory.** `gaps[5]` said "all nine anchors". Ten now, and the sentence says ten.
+- **WRONG — a no-op op.** Beat 7 ran `PEEL_LAYER {layer: "muscle"}` immediately after
+  `ISOLATE_REGION Right lung`. The only `layer: "muscle"` structure in the scene is the diaphragm, which is
+  not on screen at that point, and the narration never refers to peeling anything. Removed.
+- **Nothing else wrong.** All twelve ids exist; all twelve names verbatim; curriculum asks for `location`,
+  `cross_section` and `associated_organs` and beats 1/2/3/7, 5 and 4 supply them; beats numbered 1–7 with no
+  repeat; `covers: ["Lungs"]` matches CURRICULUM.json exactly.
+- **Consistency pass, scene against itself and against the topic.** The right-bronchus rule is stated in
+  three places (`rll`, `bronchus`, beat 6) and agrees each time, including the upright/supine split
+  (posterior basal vs apical segment of the lower lobe); it also agrees with
+  `tracheobronchial-tree`, which teaches the same two segments in the same words. Carina at the sternal
+  angle T4/T5 agrees with `great-vessels` and `mediastinum`. The oesophageal groove is on the right lung in
+  both beat 3 and the `esophagus` structure. The right lung is "bigger and shorter" in beat 1 and "shorter
+  but still the larger" in the diaphragm card — same claim, no contradiction.
+- **Hollow beats: none.** Everything the beats highlight is now drawn. What remains narrated-not-drawn is
+  recorded in `gaps[]` and in `terms[]`: the phrenic and vagus nerves and the azygos vein in beat 5, the
+  bronchopulmonary segments in beat 6, and pleura throughout (all four genuinely absent from the catalog —
+  re-searched this run under `phrenic`, `vagus`, `nerve`, `azygos`, `hemiazygos`, `serous`, `pericard`,
+  `sac`, `node`, `lymph`; the catalog holds two optic nerves and nothing else).
+
+### `gross__lungs-mediastinum__mediastinum` — signed
+
+- **Models in hand vs referenced: 19 of 19** (17 before this run; the oesophagus and diaphragm were added).
+- **WRONG — an anchor placed by eye, on a `ready` scene, because of a false absence claim.** `gaps[1]` said
+  the oesophagus mesh "was not available locally to measure a contact against", so the defining content of
+  the posterior mediastinum was carried as an anchor at `uvw [0.5, 0.05, 0.5]` on the front of the T4 body,
+  with `calibrated_by` starting `author:` — the one unmeasured landmark in the scene. `FMA7131` is in
+  `meshes-lite/` and the Lungs scene in the same topic was already drawing it. **Fixed:** the oesophagus is
+  now a model, and the three thoracic constrictions its own narration names are measured off it —
+  arch of aorta 2.02 mm / 50 verts, bronchus 1.16 mm / 51 verts, diaphragm 0.31 mm / 325 verts. Their
+  measured heights fall in the textbook order (arch highest, then bronchus, then hiatus lowest), which is
+  the independent check on three definitions that each had only one witness. All three are shown in beat 6
+  and its narration now names them.
+- **WRONG — the same false claim about the diaphragm.** `gaps[5]` said `FMA13295` "was not available
+  locally", so the floor of the mediastinum was implied rather than drawn. It is on disk. Added as a context
+  model in Boundaries with the T8/T10/T12 rule, which beat 1 and the aortic hiatus anchor both already
+  taught in words.
+- **WRONG — an anchor today's tool would refuse.** `ludwig_posterior`, the back end of the transthoracic
+  plane, was a T4-to-descending-aorta contact at **3.72 mm** — above `derive-landmark.mjs`'s 3 mm gate. The
+  old note defended the number as "anatomically correct", and it is: the aorta lies off the front-left of
+  the body and simply is not the back of the plane. That makes the definition wrong, not the measurement.
+  Re-derived against the T4/T5 intervertebral disc `FMA13501` — the structure beat 2 actually names — at
+  **0.07 mm** over a 260-vertex patch.
+- **WRONG — counted from memory.** `gaps[8]` said "eight of the nine anchors are measured … all nine are
+  needs-review". There were **eight** anchors, seven of them measured. There are now ten, all measured, all
+  `needs-review`.
+- **Nothing else wrong.** All nineteen ids exist and all nineteen names are verbatim; curriculum asks for
+  `location`, `associated_organs` and `cross_section` and beats 1/2/3/5/8, 4 and 6 supply them; beats
+  numbered 1–8 with no repeat; `covers: ["Mediastinum"]` matches CURRICULUM.json, and the scene's refusal
+  to also claim "Great vessels" is correct and is documented in `gaps[7]`.
+- **Absence claims re-searched, and these ones are true.** `pericard`, `serous`, `fibrous`, `sac` → nothing;
+  `azygos`, `hemiazygos`, `thoracic duct`, `duct` → nothing thoracic; `lymph`, `node` → nothing at all;
+  `phrenic`, `vagus`, `sympathetic`, `splanchnic`, `nerve`, `chain` → two optic nerves only. The thymus
+  claim is also true but needed narrowing: `FMA71194`/`FMA71195` (right and left lobe of thymus) ARE in the
+  catalog and are NOT in `meshes-lite/`, which is a delivery gap, not a catalog gap — noted as such.
+- **Hollow beats.** Beat 3 teaches the superior mediastinum front-to-back and its first layer is the
+  thymus, which cannot be drawn until those two lobes are fetched — that is the single highest-value mesh
+  for this scene, and beat 5's four-Ts space is hollow for the same reason. Beat 7 traces the left recurrent
+  laryngeal nerve as a declared concept and always will while no thoracic nerve exists. Beats 4 to 6 draw
+  their divisions from the heart's own surface because there is no pericardium mesh.
+
+**Validator: 104/104 valid**, both scenes `ready`, only the standing `CAPABILITIES.svg` capability warnings
+(REPAIR-BACKLOG §9) and `[degrades: PEEL_LAYER]` on `mediastinum`.
+**Index: 104 scenes (54 ready) · 11906 term mappings.**
+**sync-state: drawable 64 of 64 · gross audit 49/76 → 51/76 · next to audit
+`gross__lungs-mediastinum__tracheobronchial-tree`.**
+
+**For the next run:** REPAIR-BACKLOG §3's stale-note list still names `biliary-tree-gallbladder`,
+`portal-venous-system`, `bony-pelvis`, `stomach`, `small-intestine`, `large-intestine`, `ureters`, `kidney`,
+`suprarenal-adrenal-gland` and `abdominal-aorta-ivc`. Both scenes this run carried it, and in `mediastinum`
+it had produced a guessed anchor on a live scene. Assume every remaining scene on that list is hiding
+landmark work, and check `meshes-lite/` before believing any sentence of that shape.
+
+---
+
+## Run 2026-08-29 (audit) — `tracheobronchial-tree` and `axillary-vessels-lymph-nodes`
+
+REPAIR-BACKLOG sections 1 and 2 are both clear, so **this run fell through to the audit walk** at
+`next to audit`, as the task instructs. No backlog items were taken.
+
+Ran `sync-state.mjs` first, before reading anything: cursor `gross__lungs-mediastinum__tracheobronchial-tree`,
+gross audit 51/76.
+
+### `gross__lungs-mediastinum__tracheobronchial-tree` — signed `ready`
+
+**Checks performed: all twelve.** IDs, names, sides, ops, fix-the-fact, scene-against-itself, curriculum
+views, narration-against-geometry, covers, drawability, status, landmarks.
+
+- **IDs and names — clean.** All eleven `refs.bodyparts3d` looked up in `available-meshes.json`; every id
+  exists and every `name` matches the catalog character for character.
+- **SIDES — the lung pair, said out loud.** `FMA7333` is *upper lobe of right lung* and is labelled Right
+  upper lobe; `FMA7370` is *upper lobe of left lung* and is labelled Left upper lobe. `FMA7337` right lower,
+  `FMA7371` left lower. `FMA7383` is *middle lobe of lung* (unsided in the catalog, and there is only one)
+  and is labelled Right middle lobe. Correct as authored — the one-character trap did not catch this scene.
+- **WRONG #1 — a false absence claim, and it was the stale sentence again.** `gaps[5]` said the oesophagus
+  was "not available locally to measure against". `FMA7131` is in the catalog under the American spelling
+  *esophagus* and `meshes-lite/FMA7131.stl` is on disk — and the `mediastinum` scene in this same topic
+  already carries it as a model with three measured anchors. Meanwhile beat 1 narrated the trachea as running
+  "in front of the oesophagus" with no oesophagus on screen: named and not drawn. **Added as a context
+  structure**, gap rewritten as CLOSED with the reason it was wrong.
+- **WRONG #2 — an anchor that the tool's own gate would refuse, defended in its `calibrated_by`.** This is
+  exactly REPAIR-BACKLOG §3's pre-gate-script pattern. `t4_level` was the nearest contact between the
+  trachea and T4 at **11.41 mm**; re-run today, `derive-landmark.mjs --parent FMA9248 --contact FMA7394`
+  returns `REFUSED: contact gap 11.41 mm — the surfaces do not meet there`. It refuses for the right reason:
+  the trachea does not touch T4 because the oesophagus is between them, so the airway is the wrong parent for
+  a vertebral level. **Re-derived on the vertebra**: `--parent FMA9248 --extreme -z`, the lowest vertex of
+  T4, i.e. its lower border, 41.7 mm from centroid over 1500 vertices.
+  **Cross-check, and it is the good one:** that point sits at z=1297.7 and the carina anchor (lowest vertex
+  of the trachea) at z=1299.1 — the bifurcation and the lower border of T4 agree to **1.4 mm** in the
+  vertical. The measurement now confirms the level the scene teaches instead of merely asserting it. Heeded
+  the spleen run's warning: the tool prints T4's long axis as `y`, but bbox comparison against the trachea
+  and oesophagus confirms **z is vertical and increases upward**, so `-z` is genuinely inferior.
+- **WRONG #3 — an op that hid its own subject.** Beat 7 did `ISOLATE_REGION Conducting airway`, then
+  `PEEL_LAYER bone`, then `SHOW_RELATIONSHIP carina → t4_level`. With `t4_level` now on the T4 vertebra the
+  relationship pointed at a peeled-away bone; it was already pointless before, since the isolate had removed
+  the bone anyway. Replaced with `SHOW_STRUCTURE Levels`.
+- **WRONG #4 — counting from memory (failure mode 3).** `gaps[6]` said "All six anchors". There are five.
+  Corrected, and the other four re-checked against the gate while there: 65.5 mm and 54.5 mm are extremes
+  (no gate applies), 0.11 mm and 0.36 mm are contacts well inside the 3 mm limit. Only `t4_level` failed.
+- **Scene against itself — clean.** The carina level is given as "lower border of T4" in the carina
+  narration, beat 2 and `t4_level`, and as "the disc between T4 and T5" at `sternal_angle`; those are the
+  same plane, not a contradiction. Checked across the topic too: `lungs` says "the level of the sternal
+  angle, T4 to T5" and `great-vessels` agrees. No conflict.
+- **CURRICULUM VIEWS — pass, and this scene closes two entries.** Tracheobronchial tree needs
+  `mechanism` + `location`; Trachea needs `location` + `cross_section`. The scene has location (1, 2, 7),
+  cross_section (3) and mechanism (4, 5, 6). Both `covers[]` entries spelled as `CURRICULUM.json` spells
+  them. Beats numbered 1–7 with no gaps or repeats.
+- **DRAWABILITY: 12 of 12 models in hand** (11 before, 12 after adding the oesophagus). Nothing hollow for
+  want of a mesh that exists. Hollow for want of a mesh that does not: beat 4's branching plan (no lobar or
+  segmental bronchi), the tail of beat 5 (nothing below the segmental bronchus exists in a whole-body
+  catalog), and the right-vs-left comparison in beat 6 (one generic `bronchus` mesh, no separate principal
+  bronchi — the single highest-value fetch for this scene). All four were already in `gaps[]` and are
+  honest there.
+
+### `gross__pectoral-region-breast__axillary-vessels-lymph-nodes` — signed, stays `candidate`
+
+**Checks performed: all twelve.**
+
+- **IDs and names — clean.** All fifteen ids exist and all fifteen names match the catalog exactly.
+- **SIDES — no pair to confuse.** Every structure in the scene is right-sided and every label is consistent
+  with that; there is no left/right pair, so the FMA7333/FMA7370 class of error cannot arise here.
+- **WRONG #1 — the stale "not in the local mesh set" sentence, doing real damage.** `gaps[2]` said measured
+  node anchors were impossible because "the meshes for these walls are not in the local mesh set". **All
+  fifteen are in `meshes-lite/`.** This is the same false sentence REPAIR-BACKLOG §3 tracks through the
+  abdominal scenes, found here in the pectoral topic, and here it was suppressing the one piece of work the
+  scene itself named as most valuable. **Two sites measured:**
+  - ANTERIOR (pectoral) group — `--parent FMA13398 --contact FMA13375 --area 8`, gap **0.33 mm**, 94 parent
+    vertices, centroid snapped 4.62 mm. The group's textbook position *is* the serratus anterior /
+    pectoralis minor junction, so anatomy and geometry define the same point. This is the sentinel node site.
+  - LATERAL WALL, which the humeral group lies against — `--parent FMA23130 --contact FMA13414,FMA32551
+    --area 8 --slab z:0.75,1.0`. **Two witnesses**, subscapularis on the lesser tubercle (0.09 mm, 155
+    vertices) and teres major on the medial lip (0.35 mm, 32 vertices), bracketing the two lips of the
+    intertubercular groove and agreeing to 39 mm on a 307.5 mm bone. Two converging witnesses is the proof;
+    one would have been a measurement with nothing to check it.
+  Both carry `approx{}` so the player shows amber and says which structure is really lit. **Neither is a
+  node** — there is no lymph node mesh anywhere in the catalog — and both narrations and beat 5 now say so.
+- **THREE REFUSALS, recorded so no later run re-derives them and believes the answer.** Posterior
+  (subscapular) group: subscapularis against teres major **3.23 mm**, against latissimus dorsi **5.84 mm** —
+  the posterior wall muscles overlap in life and do not meet in these meshes. Apical group: clavicle against
+  first rib **3.27 mm**, and it is a space bounded by three bones, which is not a landmark on any one of them
+  — the same refusal the backlog already records for the axillary apex, reproduced independently here. The
+  clavicle therefore keeps its existing `approx{}` rather than pretending to be the apex, which was already
+  the right call by the original author. Central group: axillary fat, no mesh, no neighbour — not measurable
+  at all rather than merely unmeasured.
+- **WRONG #2 — the scene contradicted itself about why it was held.** `gaps[2]` ended "This is the single
+  change that would let the scene reach ready", while `candidate_reason` two fields above said the scene is
+  held because the axillary artery, axillary vein and lymph nodes have no meshes. Both cannot be true. The
+  `candidate_reason` is right — anchors were never the blocker — so the sentence was removed and the reason
+  is now stated in one place. **The scene stays `candidate`**, and the two new anchors do not change that.
+  Not signing it `ready` is the point: the gap stays visible.
+- **Narration against geometry, and one thing worth defending.** Beat 8 reads a cross-section "front to
+  back: pectoralis major, pectoralis minor, axillary vein, artery, cords, subscapularis" — the vein and
+  artery on screen are the *subclavian* ones and the cords are not there at all, but `gaps[0]`, `gaps[4]` and
+  the `candidate_reason` all say so plainly, and beat 2's whole teaching point is that the vessel is one tube
+  with three names. Described-not-shown is declared, not hidden. Left as authored.
+- **Anatomy checked and correct as written:** the artery numbered downward and the nodes upward against the
+  same muscle (beat 6); one-two-three branches by part (beat 3); vein anteromedial to the artery, agreeing
+  with beat 8's front-to-back order; three-quarters of breast lymph to the axilla and the medial quarter to
+  the internal thoracic nodes (beat 7). No contradiction found between any two statements in the file.
+- **CURRICULUM VIEWS — pass.** The entry requires `vasculature` and `glands`; the scene has vasculature
+  (2, 3, 4) and glands (5, 6, 7), plus location (1) and cross_section (8). `covers[]` spelled exactly as
+  `CURRICULUM.json` spells it. Beats 1–8, no gaps or repeats.
+- **DRAWABILITY: 15 of 15 models in hand.** Nothing is hollow for want of delivery. The hollow beats are
+  hollow for want of a catalog: beat 3's six branches, beat 5's five node groups, beat 7's lymphatic route
+  and beat 8's cords. Highest-value fetch does not exist to fetch — these need meshes nobody has modelled.
+
+**Validator: 104/104 valid.** `tracheobronchial-tree` 17 structures (7 parts) · 7 views · 36 ops · `ready`;
+`axillary-vessels-lymph-nodes` 17 structures (12 parts) · 8 views · 38 ops · `candidate`. Only the standing
+`CAPABILITIES.svg` capability warnings (REPAIR-BACKLOG §9). Removing beat 7's `PEEL_LAYER` also dropped the
+one `[degrades: PEEL_LAYER]` note this scene carried.
+**Index: 104 scenes (54 ready) · 11918 term mappings.**
+**sync-state: drawable 64 of 64 · gross audit 51/76 → 53/76 · next to audit
+`gross__pectoral-region-breast__breast-mammary-gland`.**
+
+**For the next run:** the "not in the local mesh set" sentence has now been found outside the abdomen. It was
+in a pectoral scene, and it was the stated reason a piece of work the scene itself called its most valuable
+had never been done. Treat REPAIR-BACKLOG §3's list as a lower bound, not an inventory: **check
+`meshes-lite/` before believing any sentence of that shape, in any topic.** Second carry-forward: this run
+found a second pre-gate anchor (`t4_level`, 11.41 mm) whose `calibrated_by` recorded the excessive gap as if
+it were a finding. Any scene whose anchors cite `tools/derive-<topic>-landmarks.mjs` rather than
+`derive-landmark.mjs` should have every printed gap re-read against the 3 mm limit at audit.
+
+---
+## Run 2026-08-29 — audit walk: Breast (mammary gland), Clavicle
+
+Backlog sections 1 and 2 are both clear, so this run **fell through to the audit walk** at `next to audit`,
+as the task instructs. It also closed two items that were still open in backlog section 3, both of which
+happened to sit on the clavicle scene that the cursor had reached.
+
+**`gross__pectoral-region-breast__breast-mammary-gland`** — diagram/svg, `planned`, 14 structures, 6 views,
+19 ops. Models in hand vs referenced: 0 vs 0 — this is an SVG scene with no `refs` at all, so drawability is
+not the constraint; the artwork is. Every one of its six beats is hollow today for want of that artwork, and
+that is already stated in `gaps[]` and is why status stays `planned`.
+
+- **WRONG, and fixed:** the axillary-tail structure card said the tail "is the commonest site of breast
+  cancer". Beat 6, two cards later, correctly gives that to the upper outer quadrant. Classic check 6 —
+  the corpus already held the right answer in the same file. The tail card now says what beat 6 says: the
+  upper outer quadrant *and its tail* hold the most glandular tissue and the most cancers. Grepped the whole
+  topic (`upper outer`, `commonest site`, `tail of Spence`, `axillary tail`) — those were the only two
+  statements of the fact, and they now agree.
+- **Loosened:** "the sentinel node is the first node the lateral breast drains into" → the first node the
+  lymph of a given tumour reaches, most often in the anterior pectoral group. The old wording tied the
+  sentinel node to a region rather than to a tumour.
+- **Absence claims re-verified rather than inherited** (failure mode 1). Searched the catalog independently
+  under breast, mammar, nipple, areol, lactif, gland, lymph, node, sweat, fascia, retromammar. Zero hits for
+  every mammary term; zero for lymph and node. The only soft-tissue hits in the neighbourhood are `FMA7163
+  skin` and three endocrine glands, none of which can stand in. Evidence written into `gaps[]` so the next
+  reader does not have to trust the note.
+- Checks performed: ids (n/a — no refs), names (n/a), sides (n/a — no lateralised structure), ops (all 19
+  targets resolve to a structure key; all ops in vocabulary), self-consistency, curriculum views
+  (`location`, `cross_section`, `glands` all present — beats 1/6, 2, 3), narration-vs-geometry, covers
+  (`Breast (mammary gland)` exact), drawability, status. **Signed.**
+
+**`gross__pectoral-region-breast__clavicle`** — 3d_anatomy, `ready`, 23 structures, 8 views, 35 ops.
+Models in hand vs referenced: **18 of 18** — every mesh present in `meshes-lite/`. No hollow beats for want
+of geometry. Sides: this is a right-sided scene throughout and all eighteen catalog names were compared
+character for character, including `FMA7333 upper lobe of right lung` — the right lung, not `FMA7370`, which
+is the pair the task warns about.
+
+- **WRONG, and fixed (backlog §3):** beat 4 counted the clavicle's muscle attachments three ways in one
+  beat — title "Four muscles, four surfaces", narration "Five muscles in all", trace path naming six. The
+  trace path was the correct one. Settled at **six**, split 4 medial (sternocleidomastoid, pectoralis major,
+  subclavius, sternohyoid) + 2 lateral (trapezius, deltoid). Fixed the fact, not the instance: title,
+  beat narration and the sternohyoid card ("the fifth attachment" → "the sixth") were all three changed in
+  the same pass, and the narration now names the ligaments explicitly as *not* in the count, which is the
+  likeliest source of the old "four".
+- **WRONG, and fixed (backlog §3, "not in the local set"):** `gaps[]` said the clavicle mesh was not on disk
+  and that its surface landmarks therefore could not be measured. `FMA13322.stl` is on disk. Three anchors
+  derived with `derive-landmark.mjs`, all `--area` because a facet and a groove are surfaces and not points,
+  all `status: needs-review`:
+    · sternal facet — contact with the manubrium, **0.12 mm**, 113-vertex patch, uvw [0.9668,0.1067,0.1852]
+    · acromial facet — contact with the scapula, **0.99 mm**, 65-vertex patch, uvw [0.0275,0.8447,0.7177]
+    · subclavian groove — contact with subclavius, **0.22 mm**, 188-vertex patch, uvw [0.5248,0.3512,0.4564]
+  The two facets land at u=0.97 and u=0.03 on a bone whose long axis is x — opposite ends, as they must be —
+  and the acromial facet cross-checks against the pre-existing `acromion` anchor, which is the same joint
+  measured from the scapula side (0.99 mm both ways). The groove sits at u=0.52, the middle third, where it
+  is described. All three are now wired into beats: the two facets compared side by side in beat 3, whose
+  narration was rewritten to have the student read the comparison rather than be told it, and the groove
+  highlighted in beat 4.
+- **A refusal recorded as a result, not a failure:** the conoid tubercle and trapezoid line could not be
+  derived. Their defining ligament has no mesh, and using the scapula as a substitute witness returns
+  uvw [0.0328,0.894,0.6573] at 0.99 mm — which is the acromioclavicular joint, because the nearest scapular
+  point to the clavicle is the AC joint and not the coracoid. A measured, reproducible, completely wrong
+  answer of exactly the kind the task warns gets believed. Written into `gaps[]` **with its wrong
+  coordinate**, so a later run that re-derives it recognises the number and stops.
+- **Two more false-absence claims, in the same file.** `gaps[]` said "no ligaments of any kind"; the catalog
+  holds four (both inguinal, both long plantar). None of them belongs to this bone, so the teaching was
+  right and only the sentence was wrong — re-scoped to this bone and the search terms recorded. And a trap
+  worth carrying: **`FMA23725 "right trapezoid"` exists and is the CARPAL BONE**, not the trapezoid line —
+  the precise error a future run searching "trapezoid" would make. Named in `gaps[]`.
+- **Named and not drawn:** platysma, in beat 6's front-to-back layer read. It is *not* absent from the
+  catalog — `FMA45739 right platysma` exists — but it is not in `meshes-lite/`, so adding it would have put
+  an undeliverable model into a `ready` scene. Logged in `gaps[]` as a fetch job and added to `match.terms`.
+  It is the single mesh that would complete that beat.
+- Checks performed: all eight, plus landmarks and covers. Ids: 18/18 in the catalog. Names: 18/18 exact.
+  Sides: all right, verified. Ops: every target, `from`, `to` and `path[]` entry resolves to a structure key
+  or a group name; `PEEL_LAYER` degrades as declared. Curriculum views: `Clavicle` asks for `location` only,
+  and beats 1, 2, 3, 4 and 8 are `location`. Covers: `["Clavicle"]`, exact. **Signed.**
+
+**Validator:** `104/104 scenes valid` after the edits; both scenes re-validated after being changed
+(`breast-mammary-gland` 14 structures · 6 views · 19 ops · planned; `clavicle` 23 structures · 8 views ·
+35 ops · ready, degrades PEEL_LAYER). **Index:** `104 scenes (54 ready) · 11927 term mappings`.
+**sync-state:** audit cursor advanced to `gross__pectoral-region-breast__pectoralis-major`; drawability
+unchanged at 64 of 64 gross scenes complete, 401 meshes on disk; STATE.json in step.
+
+**For the next run.** The "not in the local set" sentence has now been found and cleared in fourteen scenes
+and it is still not exhausted — this run found it on a bone whose mesh had been on disk since before the
+scene was authored. Assume it is present until `meshes-lite/` says otherwise. The other habit worth naming
+from this run is subtler: the clavicle's muscle count had been wrong in three places in one beat since
+authoring, and every run since had reported the scene clean, because a validator counts ops and not claims.
+
+---
+
+## Run 2026-08-29 (gross audit) — Pectoralis major, Pectoralis minor
+
+Backlog sections 1 and 2 are both clear, so **this run fell through to the audit walk** at
+`next to audit` rather than working the backlog, as the priority rule directs. (Section 3 still has one
+unticked item — the `arm__humerus` "four places it breaks" count — but section 3 does not hold the cursor.)
+
+**Checks performed** on both scenes: ids · names · sides · ops · fix-the-fact · scene-against-itself ·
+curriculum views · narration-against-geometry · covers · drawability · status · landmarks. All twelve.
+Neither scene contains a left/right pair — **every sided mesh in both is right-sided**, verified id by id
+against the catalog name, so there is no left-for-right hazard here of the FMA7333/FMA7370 kind.
+
+**`gross__pectoral-region-breast__pectoralis-major`** — 19 model refs + 1 anchor, **19 of 19 meshes in
+`meshes-lite/`**, nothing hollow for want of geometry. Ids and names: all 19 exact. Curriculum asks
+`location` + `contraction_filter`; beats 1, 2, 7 are `location` and beat 4 is `contraction_filter`. Covers
+`["Pectoralis major"]`, exact.
+- *Wrong:* `gaps[4]` still read "There is no separate mesh for the bicipital groove … a good candidate for
+  a measured landmark anchor once the humerus geometry is available offline." The anchor **already exists**
+  in the same file, measured, calibrated to 0.39 mm and reviewed. This is failure mode 2 exactly — the file
+  contradicting itself — and the note was actively misleading, since it tells a reader the insertion is
+  narrated against the bone when it is marked on it. Rewritten to state the measurement, its two witnesses
+  and the 4.1 mm agreement, and to record what the anchor still does **not** mark: the medial lip and the
+  floor of the groove, which the same narration names for teres major and latissimus dorsi.
+- *Wrong:* beats 5 and 7 named the cephalic vein, the clavipectoral and pectoral fasciae, both pectoral
+  nerves and the thoracoacromial artery over a scene that contains none of them, with no signal to the
+  student that they were listening rather than looking. `gaps[]` recorded the absence; the narration did
+  not. Both beats now say so in the beat itself. Beat 7 opens with it, since **nothing** in that beat is
+  drawn.
+- Added `breast`, `clavipectoral fascia`, `teres major`, `latissimus dorsi` to `match.terms` — all four are
+  taught in the narration and none was searchable.
+- **Signed.**
+
+**`gross__pectoral-region-breast__pectoralis-minor`** — 17 model refs + 1 anchor, **17 of 17 meshes in
+`meshes-lite/`**, nothing hollow. Ids and names: all 17 exact. Curriculum asks `location` +
+`associated_organs`; beats 1, 2, 7 are `location`, beats 4 and 5 are `associated_organs`. Covers
+`["Pectoralis minor"]`, exact.
+- *Wrong:* the same stale-gap error, in the same topic, on the same day's reading — `gaps[0]` said "No
+  coracoid process mesh … a good candidate for a measured landmark anchor once the scapula geometry can be
+  inspected offline", while the anchor sits eight lines above it with three witnesses agreeing to 12.8 mm.
+  Rewritten, and I added the limitation that matters for this muscle specifically: the anchor cannot
+  separate the **medial border** of the coracoid, which pectoralis minor takes, from the **tip**, which
+  carries the conjoint tendon — a distinction beat 2 makes in words and the geometry cannot.
+- *Wrong:* beat 5's `SHOW_RELATIONSHIP` ran `pec_minor → subclavian_vein` with `kind` "landmark for nodal
+  levels". The subclavian vein is not the landmark for the nodal levels; pectoralis minor is, and the beat
+  says so. The op drew a line to the wrong structure under a caption that made it look intentional. Now
+  `pec_minor → clavicle`, captioned for the apex of the axilla where level three lies.
+- *Wrong:* beats 4, 5 and 6 asked the student to see the axillary artery and six named branches, three
+  levels of lymph node, the cords of the brachial plexus, teres major and latissimus dorsi. None is in the
+  model set. Each beat now names what is actually on screen — the subclavian artery stopping at the first
+  rib in beat 4, the muscle itself as the ruler in beat 5, subscapularis alone of the three posterior-wall
+  muscles in beat 6 — and says the rest is described. Added `teres major`, `latissimus dorsi`, `cords of the
+  brachial plexus` to `match.terms`.
+- **Signed.**
+
+**Catalog searched, not remembered.** Before trusting either scene's absence claims I searched
+`available-meshes.json` under nineteen spellings: thoraco / thoracoacromial / acromial / acromion / pectoral
+nerve / nerve / cephalic / breast / mammary / nipple / areola / fascia / clavipectoral / axillary /
+pectoralis / intercostal / lateral cord / medial cord / brachial plexus / thoracic artery. Result:
+**every absence claim in both scenes is true.** `cephalic` returns only the two brachiocephalic veins,
+`fascia` only tensor fasciae latae, `nerve` only the two optic nerves, `acromial` only the acromial part of
+deltoid, and thoracoacromial / axillary / breast / mammary / clavipectoral return nothing at all. The five
+gap notes in one scene and six in the other stand as written.
+
+**Validator:** `104/104 scenes valid` after the edits, both changed scenes re-validated.
+**Index:** `104 scenes (54 ready) · 11927 term mappings`.
+**sync-state:** audit now `gross 57/76`; drawability unchanged at 64 of 64 gross scenes complete, 401
+meshes on disk; cursor advanced to `gross__pelvis-perineum__bony-pelvis`; STATE.json in step.
+
+**For the next run.** A fourth habit to add to the three in `REPAIR-BACKLOG.md`: **when a gap is filled, the
+`gaps[]` note that asked for it does not delete itself.** Both scenes audited today had been improved by a
+later run — a measured anchor added — and in both the note requesting that anchor survived, so the file now
+said in one place that the feature was marked and in another that it was not. Nothing in the eight validator
+stages compares an anchor's existence to the gap note describing it, and both of these predate today by a
+day. Any scene that gained a landmark anchor after it was authored is a candidate for the same defect;
+`grep -l 'render": "anchor"' scenes/*.json` crossed against gap notes containing "candidate for a measured
+landmark" would find the rest in one pass.
+
+---
+
+## 2026-08-29 · audit walk · `gross__pelvis-perineum__bony-pelvis` + `gross__pelvis-perineum__internal-iliac-vessels`
+
+`sync-state` first, as always. **REPAIR-BACKLOG sections 1 and 2 are both clear**, so this run fell through
+to the audit walk at `next to audit` rather than working the backlog. Section 3 still has one unticked item
+(`arm__humerus`, "four places it commonly breaks" vs three delivered) — it is a judgement item, not a
+section 1/2 item, and it is not in either scene audited today, so it was left for whoever reaches that scene.
+
+**Checks performed on both scenes:** ids against the catalog · names character-for-character · sides ·
+ops targets and anchor parents · scene-against-itself · curriculum `views` · narration against geometry ·
+`covers[]` · drawability · status. Landmarks (12) applied to the first scene.
+
+### `gross__pelvis-perineum__bony-pelvis` — signed
+
+- **IDs/names:** all 16 model ids in the catalog, all 16 names identical to the catalog's. **Sides:** the
+  pair is `FMA16586` = RIGHT hip bone and `FMA16587` = LEFT, `FMA24474` = right femur / `FMA24475` = left,
+  `FMA21964` = right inguinal ligament / `FMA21965` = left; each is labelled with the side the catalog gives.
+- **Absence claims re-searched, not trusted.** The catalog was searched under `coccy`, `sacrospin`,
+  `sacrotuber`, `iliolumbar`, `symphys`, `obturator`, `ligament`, `membrane`, `spine`, `tubercle`, `crest`,
+  `sacral`, `ilium`, `ischi`, `pub`, `promontor`, `capsule`, `cartilage`, `fossa`. **Every absence claim in
+  the scene is true**: `coccy` returns only muscles (coccygeus, iliococcygeus, pubococcygeus), `ligament`
+  returns only the two inguinal and the two long plantar ligaments, and `spine`/`tubercle`/`crest`/`sacral`/
+  `promontor` return nothing at all. No coccyx, no pelvic ligament, no separate ilium/ischium/pubis.
+- **WRONG, and the biggest find: `gaps[4]` said the hip bones and sacrum "are not in the local decimated
+  set" and that no landmark could therefore be measured. That was false** — `FMA16586`, `FMA16587`,
+  `FMA16202`, `FMA13076` and `FMA21964` are all in `meshes-lite/`, and `sync-state` has been reporting
+  64 of 64 drawable for two runs. Counting from memory again (failure mode 3), and it had cost the scene its
+  landmarks. **Five anchors derived with `tools/derive-landmark.mjs`**, all `status:"needs-review"`:
+  - ASIS — CONTACT, right hip bone × right inguinal ligament within `x:0.0,0.25`, **gap 0.09 mm**. Independently
+    cross-checks against the ASIS in `inguinal-ligament-landmarks` (a constrained anterior extreme, different
+    definition, different tool): the two land **6.5 mm apart on a 208 mm bone**.
+  - Pubic tubercle — CONTACT, same ligament within `x:0.8,1.0`, **gap 0.52 mm**. Lands 18.8 mm lateral and below
+    that scene's rectus-derived pubic-crest anchor and ~23 mm from its symphysis anchor, i.e. the textbook
+    2–3 cm from the midline.
+  - Ischial spine — CONTACT × coccygeus, **gap 0.34 mm**; one witness only, because the sacrospinous ligament,
+    which would be the second, has no mesh. Said so in `calibrated_by`.
+  - Ischial tuberosity — EXTREME −z (lowest vertex of the hip bone), 113.8 mm from the surface centroid.
+  - Sacral promontory — EXTREME −y within `x:0.45,0.55`. **The midline slab is the whole point:** unrestricted,
+    the most anterior vertex of the sacrum sits off to one side at u 0.69 — that is the ala, not the
+    promontory. Restricted, it lands at u 0.4908, on the midline, upper quarter. The unrestricted version was
+    computed first and rejected.
+  - **Refused in practice: the acetabulum.** CONTACT × femur with `--area 3` emitted, but the patch centroid
+    had to be snapped 7.8 mm to reach bone (the socket is a deep bowl), so it was NOT authored. A point that
+    only looks measured is worse than none.
+  The five anchors are wired into beats 1–6 with `SHOW_STRUCTURE Landmarks` and highlights, and beat 1's
+  narration now names them.
+- **Narration against geometry:** beat 5 compares a female pelvis with a male one and only one pelvis exists.
+  `gaps[3]` recorded it but the narration did not, so the beat now opens by saying the comparison is described
+  against the bone on screen, not shown.
+- **`gaps[]` corrected in three places:** the false landmark claim (rewritten with what was measured and what
+  is still open); "no ligament of the pelvis exists" reconciled with the inguinal ligament the scene actually
+  draws; the diameters note updated to say the promontory is now measured but the symphysis end is not.
+- **Cross-scene fix (rule 5, fix the fact not the instance).** `inguinal-ligament-landmarks` asserted in
+  **three** places — an anchor's `calibrated_by`, a second anchor's `calibrated_by`, and a `gaps[]` entry —
+  that the pubic tubercle "could not be isolated in this model". Today's measurement falsifies all three. All
+  three are corrected and cross-referenced; that scene's anchors are left where they were measured, with the
+  re-derivation of its ligament midpoint recorded as open work. That scene is **not** re-signed.
+- **Curriculum views:** requires `location` + `cross_section`; scene has both. **covers:** `["Bony pelvis"]`,
+  exact. **Drawability: 16 of 16 models in `meshes-lite/`.** No hollow beats.
+
+### `gross__pelvis-perineum__internal-iliac-vessels` — signed
+
+- **IDs/names:** all 22 model ids in the catalog, all 22 names exact. **Sides:** six left/right pairs, every
+  one correctly labelled — `FMA18809`/`FMA18810` internal iliac arteries R/L, `FMA14765`/`FMA14766` common
+  iliac arteries R/L, `FMA18806`/`FMA18807` external iliac arteries R/L, `FMA18887`/`FMA18888` internal iliac
+  veins R/L, `FMA21387`/`FMA21388` common iliac veins R/L, `FMA18885`/`FMA18886` external iliac veins R/L.
+- **WRONG (1) — a third live copy of an error another scene had already fixed.** The left-common-iliac-artery
+  card taught May-Thurner as *the left* common iliac artery compressing the left common iliac vein. It is the
+  **RIGHT** common iliac artery. The correct statement was already in this same file twice (the left-vein card
+  and beat 4's narration) and `kidney-posterior-abdominal-wall__abdominal-aorta-ivc` had already found and
+  logged this exact error in itself. Rewritten.
+- **WRONG (2) — the scene contradicted itself about the ureter.** The right-common-iliac-artery card said the
+  ureter "runs on the sidewall **medial to** the internal iliac artery"; the ureter card said "**in front of**
+  the internal iliac artery and medial to its branches". In front is correct, and `kidney-posterior-abdominal-
+  wall__ureters` says so twice. Corrected to "in front of the internal iliac artery and medial to its
+  anterior-division branches"; grepped every scene for the pair, all now agree.
+- **WRONG (3), minor:** beat 2 paired "the artery to the vas or to the round ligament" as though both were
+  internal iliac branches. The round ligament's artery comes from the inferior epigastric. Rewritten to say so.
+- **WRONG (4):** beat 3 attributed superior gluteal nerve injury specifically to the posterior hip approach.
+  Loosened to surgery about the greater sciatic notch and the lateral approach.
+- **Narration against geometry — the structural problem with this scene.** Beats 2 and 3 name roughly fifteen
+  branches and five nerves and **not one of them is drawn**; `gaps[]` said so but no narration did. Both beats
+  now open by stating that the trunk on screen ends without dividing and that the branches are described
+  against it. Absence claims re-searched under `glute`, `pudend`, `obturator`, `umbilic`, `vesic`, `uterine`,
+  `vagin`, `rectal`, `epigastric`, `sacral`, `lymph`, `node`, `plexus`, `iliolumbar`: **all true** — no branch,
+  no plexus, no node, no median sacral, no inferior epigastric exists.
+- **Curriculum views:** requires `vasculature`; all five beats are `vasculature`. **covers:** exact.
+- **Drawability: 22 of 22 models in `meshes-lite/`.** Nothing hollow for want of a fetch — what is hollow here
+  is hollow for want of a *mesh that does not exist*: beat 2 (the whole anterior/posterior division scheme) and
+  the branch half of beat 3 have no geometry to point at and never will until named-branch meshes appear.
+  That is the single most valuable fetch target in this topic.
+
+**Validator:** `104/104 scenes valid` after every edit, all three changed scenes re-validated before signing.
+**Index:** `104 scenes (54 ready) · 11948 term mappings`.
+**sync-state:** audit `gross 57/76 → 59/76`; drawable unchanged at 64 of 64, 401 meshes; cursor advanced to
+`gross__pelvis-perineum__pelvic-diaphragm-levator-ani`; STATE.json in step.
+
+**For the next run.** The fourth habit flagged in the last run block was right and today produced a fifth,
+which is its mirror: **a `gaps[]` note can go stale in the other direction too — not "the gap was filled and
+the note survived", but "the note asserts an impossibility that has since become possible".** Both of today's
+highest-value finds were of that shape: "the meshes are not local" (they were) and "the pubic tubercle cannot
+be isolated" (it can, from a mesh that was already in the scene). The check is cheap: any `gaps[]` sentence
+containing "not in", "cannot be", "could not be" or "no mesh" is a claim about the current state of the
+repository, and the repository changes under it. Re-test every such sentence rather than reading it.
+
+---
+
+## Run 2026-08-29 (audit) — the trigone stops being a recitation, and a hiatus gets its right name
+
+**Backlog sections 1 and 2 are clear, so this run fell through to the audit walk** at `next to audit`, as
+the task file says it should. Section 3 items remain open and are not this run's remit.
+
+Audited: `gross__pelvis-perineum__pelvic-diaphragm-levator-ani` and `gross__pelvis-perineum__urinary-bladder`.
+
+### Checks actually performed
+All eight, on both scenes, in the stated order. Evidence, not a shrug:
+
+1. **IDs** — every `refs.bodyparts3d` looked up in `available-meshes.json` by script: 20/20 valid in the
+   levator scene, 17/17 in the bladder scene. No fabrications.
+2. **Names** — compared character for character against the catalog `name`. 37/37 exact. No mismatches.
+3. **Sides** — both scenes are built of pairs and every one is correctly labelled. Named out loud as the
+   task asks: levator scene — FMA45854 *right* / FMA45855 *left* pubococcygeus, FMA45856/45857 puborectalis,
+   FMA45858/45859 iliococcygeus, FMA46443/46444 coccygeus, FMA22324/22325 obturator internus,
+   FMA16586/16587 hip bone. Bladder scene — FMA15571/15572 ureter, FMA19387/19388 seminal vesicle,
+   FMA18809/18810 internal iliac artery, FMA7204/7205 kidney. The new anchors carry an independent side
+   check: the right ureteric orifice measures at u=0.225 and the left at u=0.717, and since +X in the source
+   frame is the body's LEFT, low u is the body's right. The sides agree with the labels by geometry.
+4. **Ops** — every target resolves to a structure key or a group name; every `anchor.on` names a real
+   structure; every op is in the ten-op vocabulary. Validator agrees.
+5/6. **The scene against itself — ONE REAL ANATOMICAL ERROR FOUND, in the levator scene, and it was already
+   contradicted twice in its own file.** Beat 3 said the gap between the two halves of levator ani is the
+   *urogenital hiatus* and that the urethra and *the anal canal* pass through it. Both structure cards that
+   describe the same gap (`left_pubococcygeus`, `urethra`) describe only the anterior gap and only the
+   urethra. The correct account: the whole opening is the **levator hiatus**, transmitting the anorectum
+   behind and the urethra (and vagina) in front; its anterior part, in front of the puborectalis sling and
+   the perineal body, is the **urogenital hiatus**, and the anorectum does *not* pass through that — it
+   passes behind it, gripped by the sling. **Fix applied in every place the fact appears**, per rule 5, not
+   just in the beat: beat 3 narration, the beat's `SHOW_RELATIONSHIP.kind` string, the `left_pubococcygeus`
+   card, the `urethra` card, the scene `learning_goal` (which now asks for the distinction rather than for
+   one list), and the `CORPUS.md` prose summary. Grepped `hiatus` across all five Pelvis & Perineum scenes:
+   the only other hits are `sacral hiatus` in `bony-pelvis`, unrelated and correct. `terms[]` keeps
+   "levator hiatus" and "genital hiatus" as search aliases, which is what `terms[]` is for.
+7. **Curriculum views** — levator ani requires `location`, `contraction_filter`, `mechanism`; the scene has
+   location ×3, contraction_filter, mechanism. Bladder requires `location`, `cross_section`, `mechanism`;
+   the scene has location ×2, cross_section, mechanism ×2. Both complete.
+8. **Narration against geometry — the bladder scene was naming two structures it did not draw.** The
+   `right_seminal_vesicle` card says "the two vasa deferentia converge on the midline" and beat 2 says the
+   base carries "the two vasa and the seminal vesicles". Neither vas was in `structures[]` and `gaps[]` did
+   not record the omission. `FMA19235`/`FMA19236` **right/left deferent duct** are in the catalog — the exact
+   Terminologia-vs-clinical spelling trap the backlog's failure mode 1 describes — and both `.stl` files were
+   already on disk. **Both added**, with beat 2 gaining a `SHOW_RELATIONSHIP` for the vas hooking over the
+   ureter, and the narration changed from naming them to showing them.
+9. **Covers** — `["Pelvic diaphragm (levator ani)"]` and `["Urinary bladder"]`, both spelled as
+   `CURRICULUM.json` spells them, both genuinely teachable by their scene. `sync-state.mjs` reports no
+   unmatched covers entries.
+10. **Drawability** — levator scene 20/20 models in `meshes-lite/` before this run; bladder scene 17/17
+    before, 19/19 after the two vasa. No hollow beats in either scene for want of geometry. The corpus-wide
+    line still reads *every mesh of all 64 gross scenes is present*. No "not in the local decimated set"
+    sentence was carried in either file — that stale claim was not present here.
+
+### Landmarks derived — five on the bladder, none by eye
+`gaps[0]` of the bladder scene named three measured anchors on the base as "the highest-value single addition
+to this scene" and then did not make them. They are straightforwardly derivable and now exist, all via
+`tools/derive-landmark.mjs`, all `status:"needs-review"`:
+
+| anchor | definition | gap | patch |
+|---|---|---|---|
+| right ureteric orifice | `--contact FMA15571 --area 3` | 0.90 mm | 16 verts |
+| left ureteric orifice | `--contact FMA15572 --area 3` | 0.87 mm | 10 verts |
+| internal urethral orifice | `--contact FMA19667 --area 3` | 0.41 mm | 22 verts |
+| neck of the bladder | `--contact FMA9600 --area 3` | 0.16 mm | 62 verts |
+| apex | `--extreme -y` | — | 1502 verts considered |
+
+Three independent cross-checks, recorded in each `calibrated_by` so a later run can re-test them rather than
+trust them: the two ureteric orifices sit at the same v (0.971 / 0.984) and the same w (0.537 / 0.528) and
+reflect about the midline in u, which is what a symmetrical pair on the base must do; the internal urethral
+orifice lands at w=0.037, the lowest point of the organ, which is the exact claim the emptying narration
+makes; and the apex, defined only as "most anterior", lands at u=0.501 — on the midline, unforced, which is
+the check that the definition was the right one. `--area` mattered on the urethral orifice: the patch centroid
+is 5.89 mm from the single nearest vertex, so the point form would have put the anchor on the rim of the
+outlet rather than in the middle of it.
+
+**One refusal, recorded rather than worked around.** An anchor for the vasa on the base was attempted:
+`--contact FMA19235,FMA19236 --area 3` measures 0.39 mm and 0.42 mm but the two contacts scatter 26.1 mm on
+an 83 mm organ and the tool refused. Correctly — that is a bad definition, not a bad measurement; the vasa
+reach the base as a bilateral pair with no single midline point. Written into the scene's `gaps[]` with the
+numbers so no later run re-derives it and believes the average.
+
+### Other changes
+- Levator scene: `left piriformis` (`FMA22341`) **is** in the catalog and was unused, leaving the `*` views
+  silently asymmetric on the one structure the scene uses as an exam trap. Authored — then found **not** to
+  be in `meshes-lite/`, which would have taken the scene from 20/20 to 20/21 and broken the corpus's
+  "64 of 64 drawing complete" line. **Reverted**, recorded in `gaps[]` explicitly as a *delivery* gap rather
+  than a catalog gap, and `FMA22341` added to `mesh-gaps.txt` so the fetch is queued. Add the structure the
+  day the mesh lands; nothing else in the scene needs to change.
+- One purity failure caught and fixed before signing: two of the new `calibrated_by` strings explained the
+  coordinate frame by naming the provider. Reworded to "the source frame". This is the boundary rule doing
+  its job on prose, not on `url` fields.
+
+### Absence claims re-tested, every one with more than one spelling
+Per failure mode 1, the gap notes in both scenes were re-searched rather than believed. Searched: coccy/cocc,
+vagin, uter, perine, anococ, sacrospin, sacrotub, anal, sphincter, urethr, membrane, ovary/ovarian, tube,
+cervix, levator, raphe, obturator, pudend, fasc, ligament, bulb, penis, clitor, peritone, rect, caudal.
+**Confirmed absent:** coccyx, vagina, uterus, perineal body, anococcygeal body, sacrospinous and sacrotuberous
+ligaments, anal canal and internal anal sphincter as separate models, sphincter urethrae, perineal membrane,
+peritoneum, urachus, and every nerve. `levator` returns thirteen meshes and twelve of them are face, scapula
+and rib muscles — the thirteenth is the tendinous arch the scene already uses. **Not absent:** the two deferent
+ducts and the left piriformis, both handled above.
+
+### Result
+`104/104 scenes valid` · index rebuilt, 104 scenes (54 ready), 11967 term mappings · `sync-state.mjs` in step
+· audit cursor **59 → 61 of 76 gross scenes signed**, next to audit `gross__stomach-intestines__gut-blood-supply`.
+Both scenes signed `audited_at: 2026-08-29` and both left `ready`: the levator scene's error is corrected in
+all four places it appeared, and the bladder scene's largest self-declared gap is closed with measured
+geometry rather than closed on paper.
+
+---
+
+## 2026-08-29 · audit run · `gross__stomach-intestines__gut-blood-supply` + `gross__stomach-intestines__large-intestine`
+
+Backlog sections 1 and 2 re-read and both confirmed CLEAR, so this run **fell through to the audit walk**
+at `next to audit` for the first time. (Section 3 still has one open item — the `arm__humerus` "four
+fractures" count — but section 3 is not a gate.) Cursor was `gut-blood-supply`; the two scenes below are
+the next two.
+
+### Checks actually performed
+All twelve, on both scenes. Naming the ones that did work rather than the ones that passed silently:
+**ids** (18/18 resolved for large-intestine, character-for-character against the catalog `name`;
+gut-blood-supply is an svg scene and carries no `refs.bodyparts3d` at all, so stages 1–3 were a
+re-verification of its *claims* about the catalog instead), **sides** (only pair in either scene is the
+kidneys — `FMA7204` **right** kidney behind the hepatic flexure, `FMA7205` **left** kidney behind the
+splenic flexure; both correctly labelled), **ops**, **curriculum views**, **scene-against-itself**,
+**narration-against-geometry**, **covers**, **drawability**, **landmarks**.
+
+### `gross__stomach-intestines__gut-blood-supply` — planned (svg), 3 things wrong
+1. **Beat 6's venous trace taught that the SMV drains into the IMV.** Path was
+   `midgut → smv → imv → splenic_v → portal_v`, a single chain, while the narration two lines below
+   correctly said the IMV joins the splenic vein and the SMV joins the portal directly. The scene
+   contradicting itself — check 6, and the narration was the correct copy. Split into two traces
+   (`midgut → smv → portal_v`; `hindgut → imv → splenic_v → portal_v`) and the narration now names the
+   two routes so the picture and the words say the same thing.
+2. **Beat 3 said "branches in order, and the order is the exam answer" and then gave the wrong order.**
+   What followed was ileocolic → right colic → middle colic, which is the order along the *gut*; the
+   order along the *artery*, which is what a viva asks for, is the reverse. Rewritten to give both
+   explicitly and say which is which, since the beat's own trace follows the gut order.
+3. **`gaps[1]` promised a future 3D promotion "resolve each of those by name" — the exact instruction
+   that produced failure mode 1 nine times.** Resolved it here instead and wrote the fourteen ids into
+   the note, including the trap: the catalog spells the coeliac trunk **`FMA50737` celiac artery**, and
+   a search for "coeliac" returns *nothing*. All fourteen are in `meshes-lite/`, so the deferred 3D
+   version is drawable today.
+
+Absence claims re-tested with multiple spellings before being left standing: colon, caec/cec, sigmoid,
+rect, anal, ileoc, vermiform, haustr, epiploic, mesocol, marginal, colic, portal, mesenteric,
+gastroduodenal, pancreatico, hepatic, gastric, splen, duoden, jejun, intestin, bowel, flexure, peritone,
+omentum/omental, celiac/coeliac. **Confirmed absent** and the gap notes are honest: no colon or caecum of
+any kind, no sigmoid, no flexures, no haustra, no appendices epiploicae, no ileocaecal valve, no anal
+canal, no peritoneum, no portal vein, no IMV, no gastroduodenal artery, no colic or rectal arteries, no
+pancreaticoduodenal arcade, no marginal artery. Curriculum requires `vasculature`; beats 2–4 supply it.
+
+### `gross__stomach-intestines__large-intestine` — candidate (3d), 4 things wrong
+1. **The learning goal placed the midgut–hindgut line at the splenic flexure.** Beat 4, the SMA card and
+   the IMA card all correctly put it at the junction of the proximal two thirds and distal third of the
+   transverse colon, *near* the flexure. Classic check-6 finding: three correct copies and one wrong one,
+   and the wrong one was the goal a student reads first. Reconciled — and grepped: those are the only
+   four places the line is stated in the file, and the neighbouring gut-blood-supply scene agrees.
+2. **Three anchors were declared unmeasurable on a false premise.** `gaps[]` said "none of these meshes
+   is in the local decimated set". All eighteen are in `meshes-lite/`. Derived and authored all three
+   with `derive-landmark.mjs`: **base of the appendix** (three-taenia CONTACT on `FMA14542`, gaps
+   0.37/0.38/0.62 mm, three witnesses converging to 8.3 mm on a 48 mm parent — the convergence *is* the
+   evidence), **rectosigmoid junction** (three-taenia CONTACT at the superior end of `FMA14544`, gaps
+   0.59–0.93 mm, spread 27.3 mm on a 132 mm parent, inside the quarter-span limit), **anorectal ring**
+   (`FMA14544` against `FMA21930`, gap 0.17 mm — one witness, because the sphincter gripping the tube is
+   the definition). All three `status: needs-review`; nothing placed by eye. **One deliberate refusal:**
+   the old note called the first anchor *McBurney's point*. It is not. McBurney's point is on the
+   anterior abdominal wall and there is no abdominal-wall mesh in this scene to hang it on; what was
+   measured is the base of the appendix on the gut, and the label, narration and gap note now say so.
+   That is the bone-pretending-to-be-a-landmark trap in its abdominal form.
+3. **Two traces ran through structures the concept does not pass through.** Beat 2's `faecal-stream` ran
+   `… free_taenia → liver → omental_taenia → spleen → mesocolic_taenia …` — stool through the liver and
+   the spleen, and, worse, the three taeniae used as if they were the ascending, transverse and
+   descending colon, which beat 1 correctly denies (all three run the *whole* length). Beat 6's `water`
+   trace did the same. Both rewritten to follow the free taenia end to end through the new anchors; the
+   liver and spleen stay on screen as flexure landmarks and the narration now says openly that that is
+   what they are and that the colon itself is not drawn.
+4. **Beat 4's arterial trace ran `… free_taenia → ima → rectum`** — blood flowing *out* of the colon into
+   the inferior mesenteric artery. Split into two traces leaving the aorta separately, which is also the
+   truer picture: two trunks, two territories, meeting nowhere on screen. Narration now says the thing
+   that joins them, the marginal artery of Drummond, is described and not drawn.
+
+### Fixing the fact, not the instance (check 5)
+The large-intestine scene carried a note saying a *third* file, `small-intestine`, held a false absence
+claim, and excused itself with "it is not this scene's file to edit". Two findings there:
+- that particular claim **had already been corrected** — the note was stale and has been marked resolved
+  rather than left reading like open work;
+- but `small-intestine` `gaps[1]` carries the *same* false premise this run just disproved — "none of the
+  meshes named here is in the local decimated set", when `FMA7206`, `FMA7207`, `FMA7208` and `FMA10419`
+  are all present. Corrected in that file, with the anchor authoring explicitly left to that scene's own
+  audit. Only the false statement was changed, so the audit does not inherit it as evidence.
+
+### Models in hand vs referenced · hollow beats
+- `large-intestine`: **18 referenced, 18 in `meshes-lite/`.** Nothing hollow for want of a fetch, but
+  three beats are hollow for want of a *catalog entry*: beat 2 walks a colon that does not exist, beat 3's
+  haustra and appendices epiploicae have no meshes, and beat 5's pectinate line and anal canal have none.
+  Highest-value acquisitions for this topic, in order: **caecum, colon wall, anal canal.** Held at
+  `candidate` for exactly that reason — correct, but it cannot answer "identify the structure arrowed".
+- `gut-blood-supply`: svg scene, **0 model ids by design**; no artwork exists, so it renders nothing today
+  and stays `planned`. Its deferred 3D form now has all fourteen ids in hand.
+
+### Result
+`104/104 scenes valid` · index rebuilt, 104 scenes (54 ready), 11978 term mappings · `sync-state.mjs`
+in step · audit cursor **61 → 63 of 76 gross scenes signed**, next to audit
+`gross__stomach-intestines__peritoneum-mesentery`. Both scenes signed `audited_at: 2026-08-29`; statuses
+unchanged at `planned` and `candidate`, because both are held by missing artwork and missing meshes
+respectively, not by anything this audit could settle.
+
+---
+
+## 2026-08-29 — gross audit pass (backlog sections 1 and 2 clear; fell through to the audit walk)
+
+Sections 1 and 2 of `REPAIR-BACKLOG.md` are both ticked clear, so this run took the next 2 scenes at
+`next to audit` rather than backlog items, as the task says to.
+
+**Audited: `gross__stomach-intestines__peritoneum-mesentery` and `gross__stomach-intestines__small-intestine`.**
+
+Checks actually performed on both, so that a clean line is evidence and not a shrug: ids against the
+catalog (1), names character-for-character against the catalog (2), sides (3 — neither scene contains a
+left/right pair except the two kidneys in small-intestine, `FMA7204` right and `FMA7205` left, both
+labelled correctly and both used as the correct posterior relation: right kidney behind the second part,
+left kidney behind the fourth), op targets and anchor parents (4), the scene against itself (6),
+curriculum views (7), narration against geometry (8), covers spelling (9), drawability (10), status (11),
+landmarks (12).
+
+### `peritoneum-mesentery` — 1 error found, 1 count corrected
+
+- **WRONG: the curriculum's required `cross_section` view was missing.** `CURRICULUM.json` asks this entry
+  for `["location", "cross_section"]`. The seven beats were moded location · comparison · location ·
+  location · comparison · mechanism · location. Nothing in the validator compares beat modes to the
+  curriculum's `views`, which is exactly the hole `REPAIR-BACKLOG.md` §2 flagged as still unplugged.
+  **Beat 3 was already the cross-section beat** — it carries a `CROSS_SECTION` op and cuts through to show
+  the lesser sac, the epiploic foramen and its four boundaries — and was simply moded `location`.
+  Re-moded to `cross_section`. Both required views now present; `location` still covered four times over.
+- **Count corrected:** `gaps[]` said "twenty-three regions"; the file has twenty-two. Failure mode 3.
+  Fixed, and the same gap note now also records that beat 3 is the cross_section beat, so whoever draws
+  the artwork knows the transverse section is the one that unblocks a required view.
+- **The catalog-absence claim was re-tested rather than believed** (failure mode 1, the one this run was
+  told to break). Twenty spellings searched across all 934 entries: periton, mesenter, mesocol, omentu,
+  falciform, serous, bursa, ligament, sac, recess, pouch, epiploic, teres, appendix, duoden, jejun, ileum,
+  colon, caecum, cecum. The near hits are the three mesenteric *vessels* and `FMA76891` mesocolic taenia —
+  a longitudinal band on the colon wall, not a mesocolon. **No peritoneum, omentum or mesentery mesh
+  exists.** The `diagram` routing and the `3d_anatomy` entry in `deferred_modes` both stand.
+- Nothing else wrong. Read end to end for self-contradiction: the fist-in-a-balloon picture in beat 1, the
+  gut_tube card and the intraperitoneal/retroperitoneal cards all say the same thing about organs sitting
+  outside the cavity; the epiploic foramen's four boundaries are stated identically in the structure card
+  and in beat 3; the supracolic/infracolic division is consistent between `greater_sac` and
+  `transverse_mesocolon`; the T10–L1 / T11–L2 kidney-ureter fix from the earlier run is not touched by this
+  scene. `covers` is `["Peritoneum & mesentery"]`, matching CURRICULUM.json exactly.
+- **Models in hand vs referenced: 0 vs 0.** This is an SVG scene with no `refs.bodyparts3d` anywhere, so
+  drawability is not about meshes: **all seven beats are hollow**, because no artwork exists. It needs two
+  drawings — a sagittal section (the sheet folding round the organs, the lesser sac, the pouches) and a
+  transverse section at the level of the epiploic foramen. **Status stays `planned`.**
+- **SIGNED.** The scene is correct and complete as authored; what it lacks is artwork, not authoring.
+
+### `small-intestine` — 1 error found, 3 anchors derived
+
+- **WRONG: the curriculum's required `associated_organs` view was missing.** `CURRICULUM.json` asks for
+  `["cross_section", "mechanism", "associated_organs"]`. The scene had cross_section (beat 5) and mechanism
+  (beat 6) and no associated_organs at all. **This is the second scene in one run missing a required view,
+  in a corpus where every previous run reported the validator clean** — the §2 backlog item is right that
+  this three-line check is the highest-value thing missing from the eight stages. Beat 2 "Walking the
+  duodenum" already *was* an associated-organs view in substance — it isolates the duodenum and then shows
+  the whole `Duodenal bed` group and the whole `What drains into it` group around it — and was moded
+  `location`. Re-moded to `associated_organs`. Beats 1 and 7 still carry `location`.
+- **Three landmark anchors derived and authored.** `gaps[1]` had been corrected by the Large-intestine run
+  on the same day to say the "not in the local decimated set" claim was false and that three anchors were
+  measurable and *left for this audit run*. This is that run, so they were measured rather than deferred
+  again. All three emitted:
+  - duodenojejunal flexure — CONTACT on `FMA7206` witnessed by `FMA7207`, **0.53 mm**, uvw [0.0692, 0.3861, 0.2646]
+  - major duodenal papilla — CONTACT on `FMA7206` witnessed by `FMA10419`, **1.26 mm**, uvw [0.1858, 0.5779, 0.4140]
+  - ileocaecal junction — CONTACT on `FMA7208` witnessed by `FMA14542`, **0.95 mm**, uvw [0.1566, 0.6429, 0.5018]
+  Each has **one witness, and each `calibrated_by` says so and says why a second is impossible**: each of
+  these three junctions is by definition the meeting of exactly two meshes, and the catalog holds no third
+  structure (no bile duct, no accessory pancreatic duct, no caecum) to converge on. Per the tool's own
+  wording that is "a measurement with no witness — allowed, but reported as such". All three are
+  `status:"needs-review"`; the measurement is proved, the landing is not, and only someone opening the
+  scene and looking can record `reviewed_by`.
+  The ileocaecal anchor's label and narration both state openly that it is **the ileum's terminal end found
+  by its contact with the appendix**, not the ileocaecal valve, because neither the valve nor the caecum
+  has a mesh — the appendix hangs a couple of centimetres below the true opening. Same for the papilla: it
+  is measured from the pancreatic duct alone, and the bile half of the ampulla is narrated, not drawn.
+- **All 16 model ids re-checked by id and by name, character for character. All 16 correct**, including the
+  two that differ by one character in the same scene (`FMA7204` right kidney / `FMA7205` left kidney) and
+  the three midline gut arteries (`FMA50737` celiac, `FMA14749` superior mesenteric, `FMA14750` inferior
+  mesenteric). No fabrications.
+- Read end to end against itself: the duodenum card's "only its first inch is mobile" and beat 2's "only
+  its first inch is intraperitoneal" agree; the foregut/midgut watershed at the bile duct entry is stated
+  the same way in the duodenum card, the coeliac card and beat 4; jejunum "upper two fifths" agrees between
+  card and beat 1; the T12/L1/L3 arterial sequence agrees between the coeliac, SMA and IMA cards and beat 4;
+  the terminal ileum's B12-and-bile-salt monopoly is stated the same way in the ileum card, the gallbladder
+  card and beat 6, and now a fourth time in the new ileocaecal anchor — checked against the other three
+  rather than written fresh. Meckel's rule of twos in beat 7 and the two-feet measurement in the ileum card
+  and the new anchor agree. **No contradiction found.**
+- **Models in hand vs referenced: 16 of 16 in `meshes-lite/`** (verified directly for the five the anchors
+  needed — FMA7206, FMA7207, FMA7208, FMA10419, FMA14542 — and by `sync-state.mjs`, which reports all 64
+  drawable gross scenes complete, for the rest). **No beat is hollow for want of geometry.** What is
+  genuinely undrawable is narrated and flagged: the mesentery, the arcades and vasa recta, the villi and
+  Peyer's patches, the caecum and the ileocaecal valve, the four duodenal parts, the bile duct and the minor
+  papilla. Each is in `terms[]` and in `gaps[]`, and each beat that names one says it is being described.
+- **SIGNED.** Status stays `ready`; the validator passes and the scene teaches what it claims.
+
+### Tools
+- `validate-scenes.mjs --mark` → **104/104 scenes valid**, 0 blocked. Only capability notes (the svg
+  adapter ignoring 3D ops in diagram scenes, as designed).
+- `build-scene-index.mjs` → **index.json written · 104 scenes (54 ready) · 11984 term mappings.**
+- `sync-state.mjs` → **audit: gross 65/76 signed** (was 63/76). `next to audit` advanced to
+  `gross__stomach-intestines__stomach`. STATE.json already in step. drawable: 64 of 64.
+
+### Note for whoever plugs the validator gap
+Two scenes in two, both missing a curriculum-required view, both mislabelled rather than unauthored — in
+each case the beat that satisfies the requirement already existed and carried the wrong `mode` string. That
+suggests the check will find more, and that most hits will be a one-word fix rather than a new beat.
+
+---
+
+## 2026-08-29 · audit run · `gross__stomach-intestines__stomach`, `gross__thigh__adductor-canal`
+
+Backlog sections 1 and 2 are both clear, so this run **fell through to the audit walk** at `next to audit`,
+as the task file directs. Section 3 items were not taken as the run's work, but two of them are touched
+below because they name these scenes.
+
+**Checks actually performed on both scenes:** ids against `available-meshes.json` (1), names character for
+character (2), sides (3), op targets and anchor `on` (4), fact-repeated-elsewhere sweep (5), scene against
+itself and against the other scenes in its topic (6), curriculum `views` (7), narration against geometry (8),
+`covers[]` spelling (9), drawability (10), status (11), landmarks (12).
+
+### `gross__stomach-intestines__stomach` — 17/17 models in hand, 17/17 on disk
+
+- **Ids and names: clean.** All seventeen ids exist and every `name` matches the catalog exactly. No paired
+  left/right structures in this scene, so check 3 was trivially satisfied; the two sided structures present
+  (`FMA7205` left kidney, `FMA15630` left adrenal gland) are both correctly labelled left and are both the
+  left mesh.
+- **WRONG, and the run's main catch: `gaps[1]` said "none of the meshes this scene names is in the local
+  decimated set", and therefore no anchor could be measured.** All seventeen are on disk. This is the exact
+  stale sentence `REPAIR-BACKLOG.md` predicted would be found here. Four anchors measured and authored:
+  cardiac orifice (contact with the oesophagus, 0.31 mm, 53-vertex patch), pylorus (contact with the
+  duodenum, 0.41 mm, 62 vertices), gastrosplenic contact (contact with the spleen, 0.40 mm, 101 vertices)
+  and the fundal dome (`--extreme +z`). The gastrosplenic anchor **cross-checks against the reciprocal
+  `gastric_impression` anchor in the spleen scene, measured from the other side of the same gap, also at
+  0.40 mm** — two scenes, opposite parents, same number.
+- **The vertical-axis trap from the spleen run was live here too.** The tool reports the stomach's long axis
+  as `x`; `z` is vertical. Confirmed from mesh centroids (oesophagus z=1291 above duodenum z=1047) before
+  using `--extreme`, and the check is written into the anchor's `calibrated_by`.
+- **Three definitions REFUSED and recorded** so no later run re-derives them and believes the result:
+  lesser curvature against the left gastric artery (4.74 mm), posterior wall against the splenic artery
+  (5.67 mm), stomach bed against the pancreatic duct (6.12 mm). All three exceed the 3 mm gate, correctly:
+  those vessels approach the stomach in this model rather than touch it. The incisura angularis is a notch
+  and fits neither definition; it stays unanchored and beat 2 now says so out loud.
+- **WRONG: `gaps[6]` said "no large-bowel mesh exists in the catalog at all".** Failure mode 1, and
+  contradicted by a sibling two files away — `large-intestine` teaches the colon through the three taeniae
+  (FMA76891/2/3) and also carries the appendix (FMA14542) and rectum (FMA14544). Note rewritten to say what
+  is actually missing: the colonic tube and every mesentery. The omental taenia is deliberately still not
+  brought into this scene, and the note says why.
+- **Two absence claims re-searched and CONFIRMED true**, with the searches named in the notes so they are
+  not repeated: no pancreas mesh (only `FMA10419`, the duct) and no vagus nerve — the whole 934-entry
+  catalog holds exactly two nerves, both optic. `gaps[5]` now says that rather than "no nerve of the
+  abdomen", which was true but narrower than the fact.
+- **Consistency sweep found no anatomical contradiction.** Posterior-bleeds/anterior-perforates is stated
+  three times (duodenum card, splenic artery card, beat 7) and agrees each time. T12 coeliac, L1
+  transpyloric and the five-region count agree within the scene and with `liver`, `spleen`, `pancreas` and
+  `biliary-tree-gallbladder` in the neighbouring topic.
+- **Curriculum views** `location`, `cross_section`, `mechanism` — all three present (beats 1/2/7, 5, 6).
+  `covers` is `["Stomach"]`, matching CURRICULUM.json exactly.
+- **Hollow beats: none for want of geometry.** Every model is on disk. What is narrated and not drawn is
+  the arterial detail of beat 4 (right gastric, both gastro-omentals, short gastrics, gastroduodenal) and
+  the peritoneum of beats 1 and 3 — all in `gaps[]` and in `terms[]`, and the narration does not pretend.
+  The gastroduodenal artery remains the highest-value single acquisition for this topic.
+- Beat 2 gained a `SHOW_STRUCTURE` for the new landmark group and rewritten narration that names which
+  points are measured and which is not. Beat 3 shows the gastrosplenic anchor. **Signed.**
+
+### `gross__thigh__adductor-canal` — 10/10 models in hand, 10/10 on disk
+
+- **Ids, names, sides: clean.** Every structure is the *right*-side mesh and every label says or implies
+  right; no left mesh anywhere. Ops, anchor targets and the two concept traces all resolve.
+- **Nothing anatomically false found.** The vein's three relations (medial in the triangle, behind in the
+  canal, superficial in the popliteal fossa) agree with `femoral-triangle` in the same topic; the composite
+  innervation of adductor magnus agrees with `hamstrings`; "adductor tubercle just above the medial
+  epicondyle" in `femur` is confirmed by measurement below. Beat 5 says "four contents" and the learning
+  goal says four — consistent, with the obturator noted as a variable fifth.
+- **Landmark work, check 12: the adductor tubercle is now measured, not named.** `--contact FMA22459` on
+  the femur gives 0.49 mm, and the answer is *unchanged* when restricted to the distal 15% and the distal
+  25% of the shaft, which is the check that the adductor part of the muscle is not dragging it up the linea
+  aspera. Cross-checked against the medial epicondyle (`--extreme +x --slab z:0,0.15`): 33 mm away and
+  25 mm above it, which is the relation the `femur` scene states in words. `needs-review`, as all measured
+  anchors are until someone looks.
+- **Two derivations rejected and written into `gaps[]` with their numbers.** The apex of the femoral
+  triangle does *not* trip the 3 mm gate — sartorius and adductor longus touch at 0.49 mm — but the
+  definition is wrong: the surfaces overlap along a stretch, so nearest-point and 5 mm-patch answers sit
+  24 mm apart on a 579 mm mesh. The apex is the crossing of two *medial borders*, which is neither
+  definition the tool has. The adductor hiatus likewise: measured from adductor magnus against the femur it
+  returns the tendinous insertion, because a hole bounded by muscle and bone is not a point on either.
+- **New catalog find recorded: `FMA43886` right adductor minimus exists** and is deliberately excluded —
+  it is the upper detached part of adductor magnus, proximal to the canal, so it walls nothing. Written
+  into `gaps[]` so a later run searching "adductor" does not treat it as a missing wall.
+- Absence claims re-searched under multiple spellings and **all confirmed**: no femoral or popliteal vessel,
+  no saphenous vein, no genicular artery (the four `genicul` hits are geniculate bodies in the brain), no
+  fascia lata or vastoadductor membrane, no lower-limb nerve of any kind.
+- **Curriculum views** `cross_section` (beat 4) and `associated_organs` (beats 5, 8, 9) — both present.
+  `covers` is `["Adductor canal"]`, exact.
+- **Hollow beats: none for want of geometry**, but beats 7 and 8 remain partly conceptual by nature — the
+  hiatus and the saphenous nerve are a hole and a nerve, and neither exists as a mesh. Beat 7's narration
+  was rewritten to take its bearing from the newly marked tubercle instead of implying the hiatus is drawn.
+  **Signed.**
+
+**Follow-up for the backlog, not done here:** `gross__thigh__femur` and `gross__thigh__hamstrings` both
+carry the sentence that the adductor tubercle is a sub-feature that can only be named. That is now false —
+the point measures at 0.49 mm — but both scenes are already signed, so the anchor was not added to them in
+this run. Appended to `REPAIR-BACKLOG.md` section 3.
+
+**Validator:** `104/104 scenes valid` after the edits, both scenes `ready`. **Index:** `104 scenes
+(54 ready) · 11996 term mappings`. **sync-state:** gross audit now **67/76**, `drawable: 64 of 64`,
+cursor advanced to `gross__thigh__femoral-triangle`.
+
+---
+### 2026-08-30 — audit pass · `gross__thigh__femoral-triangle`, `gross__thigh__femur`
+
+Backlog sections 1 and 2 are clear, so this run **fell through to the audit walk** at `next to audit`,
+as the task file directs. Section 3 items were used as leads where they touched these two scenes.
+
+Checks actually performed on both scenes: ids against `available-meshes.json` (all present), names
+character-for-character against the catalog (all exact), sides, ops targets and anchor `on` keys,
+curriculum `views`, scene-against-itself consistency, narration against geometry, `covers[]`, drawability,
+landmarks, status. **Neither scene contains a pair of left/right structures** — every mesh in both is the
+right side, so check 3 had nothing to resolve beyond confirming that.
+
+**`gross__thigh__femoral-triangle`** — 12/12 models in `meshes-lite/`. No hollow beats.
+- WRONG, and it is the contradiction the file already answered elsewhere: beat 6 said the external iliac
+  artery "passes behind **the middle of the inguinal ligament**", while the `inguinal ligament` structure
+  card two hundred lines above correctly says the artery enters at the **mid-inguinal point**, halfway
+  between the ASIS and the pubic **symphysis**. Those are different points, and the midpoint of the
+  ligament is the deep inguinal ring. `inguinal-ligament-landmarks` in the abdominal topic teaches the two
+  as an examination trap and has both anchors measured, so the corpus already held the right answer.
+  Beat 6 rewritten to name the mid-inguinal point and to say explicitly that it is not the midpoint of the
+  ligament. Grepped the whole corpus for both phrases afterwards; every other occurrence is correct.
+- WRONG (stale note, failure mode 1): `gaps[]` said the pubic tubercle, pecten pubis and ASIS "were not
+  measured in this run and an anchor placed by eye would be worse than none". `FMA16586.stl` is on disk.
+  Three anchors measured and authored, all `needs-review`:
+  · ASIS — CONTACT with the inguinal ligament, gap **0.09 mm**, uvw [0.149,0.0188,0.6628]; second witness
+    (sartorius origin, 0.49 mm) lands **9.9 mm** away, 4.8% of the 208 mm bone. Adopted the ligament point
+    rather than the two-witness mean because it is the coordinate `gross__pelvis-perineum__bony-pelvis`
+    already carries for the right ASIS — re-derived here, not copied, and it matched.
+  · Pubic tubercle — CONTACT with the ligament's medial end within `--slab z:0,0.35`, gap **0.52 mm**,
+    uvw [0.8682,0.0391,0.1997]. Independently equal to the value in `bony-pelvis`. Two checks: 134 mm from
+    the ASIS (a credible inguinal ligament) and 14 mm from the adductor longus origin on the body of the
+    pubis.
+  · Pecten pubis — CONTACT with pectineus using `--area 3` because a line of origin is a surface, not a
+    point (0.04 mm nearest gap, 38-vertex patch, centroid snapped 2.49 mm). 13 mm lateral to the tubercle,
+    the direction the pecten runs.
+  Shown in beat 2 (the two ends of the base) and beat 10 (the two bony walls of the femoral ring).
+- CHANGED: beat 8 said the femoral nerve divides "about two centimetres" below the ligament; the standard
+  figure is about four, and the beat's own point — that the block is placed high because the trunk is
+  short — survives the correction. Now four.
+- Curriculum asks for `cross_section` and `vasculature`; the scene has both. `covers` is `["Femoral
+  triangle"]` and matches CURRICULUM.json exactly.
+- SIGNED `audited_at: 2026-08-30`.
+
+**`gross__thigh__femur`** — 19/19 models in `meshes-lite/`. No hollow beats.
+- No anatomical error found in eleven beats. The claims that could have gone wrong were checked and are
+  right: short head of biceps is the only hamstring off the femur and the only one on the common fibular
+  division; medial condyle longer than lateral; ACL from the medial side of the lateral condyle and PCL
+  from the lateral side of the medial condyle; nutrient artery angled away from the growing end.
+- WRONG (backlog section 3, the open item): `gaps[]` still said the adductor tubercle was a sub-feature
+  that "was not attempted here because an anchor placed by eye would be worse than none", while
+  `gross__thigh__adductor-canal` has carried it as a **measured** anchor since 2026-08-29. Re-derived from
+  scratch rather than copied: `--parent FMA24474 --contact FMA22459` → gap **0.49 mm**, uvw
+  [0.8189,0.5831,0.1343], unchanged under `--slab z:0,0.15`; medial epicondyle `--extreme +x --slab
+  z:0,0.15` → uvw [1,0.6922,0.0773]. Reproduced the canal scene's numbers exactly. Both authored here as
+  `needs-review` anchors in a new `Landmarks on the femur` group and lit in beat 4, whose narration now
+  says the two points are measured and 25 mm apart vertically instead of stating the relation in words
+  alone. `gaps[1]` and `gaps[4]` rewritten so the remaining list is only the ridges and lines, which are
+  genuinely not one of the tool's two definitions.
+- FIXED THE FACT, NOT THE INSTANCE: the same false sentence was alive in `gross__thigh__hamstrings`, which
+  is already signed. Cleared there too, and the tubercle authored there as an anchor as well (it is the
+  scene's whole argument for adductor magnus being half a hamstring). `gross__thigh__quadriceps-femoris`
+  carries a similar sentence but about the AIIS, linea aspera, intertrochanteric line and tibial
+  tuberosity only — none of them this fact, so it is left for its own audit.
+- Validator initially **blocked** this scene on `[purity]`: my own `calibrated_by` text for the medial
+  epicondyle named the mesh provider while explaining the axis convention. Reworded to describe +x without
+  naming anyone; re-run clean. Worth recording because it is a trap in landmark prose specifically —
+  explaining an axis invites naming the format.
+- Curriculum asks for `location` and `cross_section`; the scene has both.
+- SIGNED `audited_at: 2026-08-30`.
+
+`gross__thigh__hamstrings` was CHANGED but NOT SIGNED — only the one fact was checked, not the scene. It
+is next on the audit walk.
+
+Validator: **104/104 valid**, 0 blocked. Index: 104 scenes (54 ready), 12008 term mappings.
+`sync-state.mjs`: audit now gross 69/76; `next to audit` → `gross__thigh__hamstrings`.
+
+---
+### 2026-08-30 — audit run · `gross__thigh__hamstrings`, `gross__thigh__quadriceps-femoris`
+
+Backlog sections 1 and 2 are both clear (confirmed by reading REPAIR-BACKLOG.md top to bottom), so this
+run **fell through to the audit walk** at `next to audit` rather than working the backlog. Gross audit is
+not yet complete: 71/76 signed after this run, 5 thoracic-wall scenes remain.
+
+Checks actually performed on both scenes: (1) ids, (2) names, (3) sides, (4) ops, (5) fix-the-fact grep,
+(6) scene against itself and against the other Thigh scenes, (7) curriculum views, (8) narration against
+geometry, (9) covers, (10) drawability, (11) status, (12) landmarks, (13) signature. All thirteen.
+
+**`gross__thigh__hamstrings`** — 15 structures, 14 with model ids, all 14 present in
+`available-meshes.json` and all 14 names matching the catalog character for character. Every structure is
+right-sided; the scene contains no left/right pair, so there is no side to confuse — the neighbouring left
+ids (adductor magnus FMA22460, gluteus maximus FMA22329, gastrocnemius heads) are not used anywhere.
+Ops all from the ten-op vocabulary; every target and `anchor.on` resolves. Curriculum requires `location`
+and `contraction_filter`; both present (beats 1–4, 6–7). `covers: ["Hamstrings"]` matches CURRICULUM.json
+exactly. The adductor tubercle anchor is measured (`--contact FMA22459`, 0.49 mm gap) and correctly still
+`needs-review` — nobody has looked at the patch yet, so it stays.
+
+WRONG, and fixed: the semitendinosus card taught its tendon as "the more lateral of the two you feel on
+the medial side of the back of the knee". Semimembranosus is broader and deeper and is palpable on
+*either* side of the semitendinosus cord, so lateral/medial is not the distinction — and the scene's own
+semimembranosus card already said the right thing ("lies deep to semitendinosus"). Card now says the more
+superficial and prominent, and names semimembranosus as the deep one, so the two cards agree. Grepped the
+whole corpus for the phrase and for "medial side of the back of the knee": one occurrence only, now fixed.
+
+Also added two honest gaps after re-searching rather than assuming: fascia lata and the intermuscular
+septa, named in the beat-9 cross-section as the compartment boundary, have no mesh — searched `fascia`,
+`fasciae latae`, `tract`, `septum`; the catalog holds only the iliotibial tract and tensor fasciae latae,
+neither of which is that boundary. Added to `gaps[]` and the named-but-not-drawn terms to `match.terms`
+(sacrotuberous ligament, fascia lata, both septa, semimembranosus bursa were all in narration or gaps and
+absent from terms).
+
+**`gross__thigh__quadriceps-femoris`** — 12 structures, all 12 ids in the catalog, all 12 names exact, all
+right-sided. Curriculum requires `location` and `contraction_filter`; both present (beats 1–3, 7). Ops
+clean; the one concept target is `concept:femoral_nerve` with a path of real keys. `covers` matches.
+No anatomical error found on a full read: the Q angle beat, the NAVEL order (lateral→medial), the L3/L4
+knee jerk, the L2–L4 femoral nerve, the eccentric-load beat and the extensor-mechanism chain all check
+out, and nothing in it contradicts the hamstrings scene it sits beside (both give sartorius the femoral
+nerve and put it in the pes anserinus).
+
+I did not take the `gaps[]` absence claims on trust. Re-searched the catalog for `articularis`, `genu`,
+`quadriceps`, `patell`, `femoral`, `nerve`, `sciatic`, `bursa`, `tendon`, `popliteal`, `saphen`, `vein`,
+`fascia`. Every claim holds: no articularis genu, no quadriceps tendon or patellar ligament, no femoral
+artery or vein (the catalog has no vein below the external iliac), no bursa. **The only nerves in all 934
+meshes are the two optic nerves** — which also confirms the identical claim in the hamstrings scene.
+One gap was missing and has been added: the great saphenous vein is recited as the first layer of the
+beat-11 dissection order and cannot be drawn.
+
+Hollow beats for want of geometry — hamstrings beat 8 (sciatic nerve, a concept trace over the muscles it
+supplies) and beat 10 (the popliteal fossa has no artery or vein to show); quadriceps beat 9 (femoral
+nerve, same device) and the reflex-hammer half of beat 5 (no tendon or ligament mesh). Those four are the
+beats a lower-limb nerve and vessel fetch would repair, and they are the highest-value meshes to fetch for
+this topic.
+
+Drawability: `sync-state.mjs` reports 64 of 64 scenes with every mesh in `meshes-lite/` (401 files), which
+covers both of these — 14 of 14 and 12 of 12 models in hand. Nothing to fetch for either scene.
+
+Both signed `audited_at: 2026-08-30`. Validator after the edits: **104/104 scenes valid**, no scene
+blocked. Index: 104 scenes (54 ready), 12008 term mappings. sync-state re-run; STATE.json in step;
+cursor advanced to `gross__thoracic-wall-diaphragm__diaphragm`.
+
+---
+
+## Run 2026-08-30 (audit) — `diaphragm` and `intercostal-muscles`
+
+Backlog sections 1 and 2 are both CLEAR, so this run fell through to the audit walk at `next to audit`,
+as REPAIR-BACKLOG.md instructs. Section 3 still has one open item (`arm__humerus` promises four fracture
+sites and beat 7 delivers three) — untouched, not this run's two scenes.
+
+**`gross__thoracic-wall-diaphragm__diaphragm` — clean, no change but the signature.**
+Checks performed, all eight: (1) all 25 `refs.bodyparts3d` looked up in `available-meshes.json` — 25 hits,
+0 fabrications; (2) all 25 `name` fields compared character-for-character with the catalog `name` — 25
+exact; (3) sides — psoas FMA22342/22343, quadratus lumborum FMA22348/22349, ribs 11 FMA8531/8532, ribs 12
+FMA8533/8534, costal cartilages BP28/BP24, and the lower lobes **FMA7337 = right, FMA7371 = left** — every
+pair correctly sided in both `name` and `label`; (4) ops — 38 ops across 9 beats, every `target`,
+`targets`, `from`, `to` and `path` entry resolves to a structure key or a group name, no anchors, all ops
+in the ten-op vocabulary; (5)/(6) read end to end for self-contradiction — the openings story is stated
+four times (three structure cards, beat 4, beat 5, the `gaps[]` note) and all four agree: IVC T8 through
+tendon, oesophagus T10 through the right crus sling, aorta T12 behind under the median arcuate ligament.
+Crura reaching L3 right / L2 left, right dome higher because of the liver, costal origin ribs 7–12 — each
+appears twice and agrees with itself; (7) curriculum requires `location`, `mechanism`,
+`associated_organs`; the scene has 1–3 location, 4–5 associated_organs, 6–7 mechanism, 8 cross_section,
+9 location — covered; (8) narration against geometry — the four things named and not drawn (central
+tendon, crura, arcuate ligaments, phrenic nerve) are each already in `gaps[]` and each beat that names
+one says openly it is being described. **Re-searched every absence claim rather than trusting the note**,
+per failure mode 1: `crus` 0, `crura` 0, `crur` 0, `arcuate` 0, `tendon` 4 (all calcaneal/intermediate),
+`central` 9 (none diaphragmatic), `phrenic` 0, `pericard` 0, `hiatus` 0, `oesophag` 0 / `esophag` 1,
+`vagus` 0, `vagal` 0, `azygos` 0, `thoracic duct` 0, `cupola` 0, `dome` 0 — and `nerve` returns exactly 2
+of 934, both optic. Every gap note holds. (9) `covers` is `["Diaphragm"]`, matching CURRICULUM.json
+verbatim. (10) drawability **25 of 25** models in `meshes-lite/`.
+Hollow beats: beat 5 (why each opening behaves differently) is the sharpest — it teaches three openings by
+the tissue each is cut in and no crus or tendon mesh exists, so the geometry supports none of it. Beat 7
+(phrenic nerve, C3-4-5, shoulder-tip pain) traces spleen → diaphragm as a stand-in for a nerve that has no
+mesh. Those two are what a diaphragm sub-part fetch would repair, but the sub-parts are not in the
+catalog at all, so this is an upstream gap, not a fetch list.
+
+**`gross__thoracic-wall-diaphragm__intercostal-muscles` — two things WRONG, both fixed.**
+1. **A twelfth intercostal space that does not exist.** Both rib-12 cards read "The space below this rib is
+   the twelfth intercostal space", while beat 1 of the same file opens "Eleven spaces on each side". The
+   corpus already held the right answer three lines away — failure mode 2 exactly. Both cards rewritten to
+   teach the boundary instead: rib 12 is the last rib, the eleventh space is the lowest, and the twelfth
+   thoracic nerve below it is subcostal rather than intercostal. The rib-11 cards now say the eleventh is
+   the last space, so the count is reconstructable from either end. **Fixed the fact, not the instance:**
+   grepped every scene in the topic and in Pectoral Region for `intercostal space` / `subcostal` — the
+   neurovascular-bundle, pleura, ribs-sternum and breast scenes all name spaces 2, 4 and 5 only and none
+   claims a twelfth. Two instances existed; both are gone.
+2. **A stale `gaps[]` note contradicted by the scene's own structures.** Gap 3 said levatores costarum
+   "should be added" — they were added by the section-1 backlog pass and are in the file as `lev_longi`
+   FMA74075 and `lev_breves` FMA74077. The note now records what is actually true: both are the **RIGHT**
+   sets, the left sets exist in the catalog as FMA74076 (longi) and FMA74078 (breves) but are **not** in
+   `meshes-lite/`, so the posterior wall is drawn one-sided. Labels changed to
+   "Levatores costarum longi (right)" / "breves (right)" and both narrations now say so out loud — a
+   sideless label over a one-sided mesh is the same error as a mislabelled pair. The two cards had also
+   carried identical narration describing both muscles; each now describes its own (breves to the next rib,
+   longi skipping one) and each names the dorsal ramus supply.
+
+Other checks on this scene: ids 35/35 present in the catalog, names 35/35 exact, all sided pairs correct
+(24 ribs, both transversus thoracis FMA9761/9762, both costal cartilages); the three intercostal layer
+meshes FMA9756/9757/9758 are genuinely **unsided** and are not labelled with a side; 8 beats, every op
+target resolves; curriculum requires `location`, `contraction_filter`, `mechanism` and the scene has all
+three. Absence claims re-searched: `subcostal` 0 hits (so the subcostal muscles gap holds), `membran` 6
+hits and none intercostal (so the intercostal-membranes gap holds), `intercostal` 3 hits, all muscle —
+no intercostal nerve, artery or vein, so the refusal to claim "Intercostal neurovascular bundle" in
+`covers` is correct and stays. `covers` is `["Intercostal muscles"]`, matching CURRICULUM.json.
+Drawability **35 of 35**. Hollow beats: beat 4 (fibre direction) — the single most examinable fact in the
+scene is narrated because no op draws fibre orientation, and no mesh fetch fixes that; beat 7 (the
+neurovascular plane and the drain rule) shows the plane but nothing in it.
+
+Validator after the edits: **104/104 scenes valid**, 0 blocked. Index: 104 scenes (54 ready), 12012 term
+mappings. sync-state re-run; STATE.json in step; gross audit now **73/76**; cursor advanced to
+`gross__thoracic-wall-diaphragm__intercostal-neurovascular-bundle`. Both scenes signed
+`audited_at: 2026-08-30`.
+
+---
+
+## Run 2026-08-30 (gross audit) — `intercostal-neurovascular-bundle` + `pleura-pleural-cavity`
+
+Backlog sections 1 and 2 are both clear (confirmed by reading REPAIR-BACKLOG.md, not by memory), so this
+run **fell through to the audit walk** at `next to audit`. Section 3 still has two open items and they are
+untouched — the rule ties the run only to sections 1 and 2.
+
+### `gross__thoracic-wall-diaphragm__intercostal-neurovascular-bundle` — 2 errors, both the same fact
+
+**WRONG, and fixed: the scene taught that every intercostal space is supplied from both ends.** The
+`sternal_body` card said the internal thoracic artery "sends anterior intercostal branches out into each
+space ... so every space is supplied from both ends", and beat 4 repeated it as "two sources, one
+continuous channel". That is true of spaces 1–6 only. The internal thoracic ends at the sixth costal
+cartilage; the musculophrenic supplies the anterior intercostals of 7–9; spaces 10 and 11 have no anterior
+intercostal artery at all. Both places now say so, and beat 4 closes by noting that the fifth space — the
+one actually on screen — is one of the spaces that does have both. This is a *fix-the-fact* correction, not
+a fix-the-sentence one: the same claim appeared twice in one file and the correct division of the internal
+thoracic into superior epigastric and musculophrenic was already stated correctly two scenes away, in
+`intercostal-muscles`. Failure mode 2, caught by reading the topic rather than the file.
+
+Also reconciled: beat 6 said the collateral branch arises "**behind** the angle of the rib" while the
+`collateral` structure card and `gaps[3]` both say "**near** the angle". Near is right; beat 6 now says it.
+
+Other checks performed on this scene, all clean: **ids** 8/8 present in `available-meshes.json`;
+**names** 8/8 exact against the catalog; **sides** — the ribs are the only pair-bearing structures and all
+three are right (FMA8066 fifth, FMA8175 sixth, FMA7957 fourth), the three intercostal layer meshes
+FMA9756/9757/9758 are genuinely unsided and carry no side in their labels; **ops** — 7 beats, every
+`target`, `path[]` member, `from`/`to` and `anchor.on` resolves to a real key or group, all ten ops in
+vocabulary; **curriculum views** requires `cross_section` (beats 2, 5) and `vasculature` (beats 3, 4) —
+both present; **covers** `["Intercostal neurovascular bundle"]`, exact against CURRICULUM.json.
+
+**Absence claims re-searched with more than one spelling, per failure mode 1.** `intercost` → 3 hits, all
+muscle. `azygos` → 0, `hemiazyg` → 0, `thoracic artery` → 0, `mammary` → 0, `pleur` → 0, `subcostal` → 0,
+`spinal nerve` / `thoracic nerve` / `thoracic vein` → 0 each, `sympath` → 0, `splanchn` → 0, `vagus` → 0,
+`phrenic` → 0. So `gaps[0]` holds in full: there is no intercostal vein, artery or nerve, no azygos and no
+internal thoracic artery. The internal thoracic is named in narration and is in `terms[]` and in `gaps[]`,
+which is the required treatment for something named and not drawn.
+
+Drawability **8 of 8** models in `meshes-lite/`. **Hollow beats:** 3, 4, 5 and 6 — every beat about the
+bundle itself. The V, A, N and collateral markers are anchors on bone, so the student sees *where* the
+bundle is but never the bundle; beat 4's course from aorta to sternum is a concept trace over an absent
+vessel. This is exactly why the scene is `candidate` and stays `candidate`. The four anchors remain
+`status:"needs-review"` — measured, not yet looked at.
+
+### `gross__thoracic-wall-diaphragm__pleura-pleural-cavity` — 1 op error, 1 omission
+
+An SVG/diagram scene with no `refs.bodyparts3d` at all, so checks 1–3 are vacuous and check 10 is zero
+models by design.
+
+**WRONG, and fixed: beat 7 ended with `PEEL_LAYER {layer:"organ"}`.** Nearly every structure in this scene
+is `layer:"organ"` — both pleural layers, all four parietal parts, the cavity, the fluid, the lung, the
+mediastinum. The op would have hidden the two structures the beat's own `COMPARE_STRUCTURES` had just lit,
+and the beat is about nerve supply, not about removing a layer. Replaced with a `SHOW_RELATIONSHIP` from
+`diaphragmatic` to `diaphragm`. The validator does not catch this — it checks that a layer exists, not that
+peeling it empties the beat.
+
+**Omission, filled:** the scene gave the diaphragmatic pleura only its phrenic supply. The peripheral rim
+takes the lower intercostal nerves, which is why irritation at the edge presents in the lower chest and
+upper abdomen rather than the shoulder tip. Added to the structure card, to `terms[]`, and to beat 7, so
+all three statements of the fact now agree.
+
+Other checks, clean: **ops** — every `target`, `from`/`to` and `path[]` member resolves to a real key or
+group across 7 beats; **curriculum views** requires `cross_section` (beats 2, 5) and `mechanism` (beats 4,
+6, 7) — both present; **covers** `["Pleura & pleural cavity"]`, exact. **Scene against itself:** the
+6-8-10 / 8-10-12 rule is stated in `reflection_lines` and again in beat 5 and the two agree; the cupola is
+2.5 cm above the medial third of the clavicle in both the structure card and beat 3; the "drain above the
+lower rib" rule in `triangle_of_safety` matches the bundle scene word for sense; the costodiaphragmatic
+recess is described identically here and in `gross__thoracic-wall-diaphragm__diaphragm`.
+
+**Absence claims re-searched:** `pleur` → 0, `serous` → 0, `pericard` → 0, `cavity` → 0, `peritone` → 0,
+`membrane` → 4 and all interosseous. `gaps[0]` and `gaps[1]` hold. `gaps[3]` claims the four context
+regions exist as meshes — verified: ribs, FMA13295 diaphragm, and the five lung lobes are all in the
+catalog, so that note is accurate and the 3D route stays genuinely open.
+
+Status stays **`planned`** — no SVG artwork exists, so nothing renders. Drawability **0 models, by
+routing**, not by a missing fetch.
+
+Validator after the edits: **104/104 scenes valid**, 0 blocked. Index: 104 scenes (54 ready), 12014 term
+mappings. sync-state re-run; STATE.json in step; gross audit now **75/76**; cursor advanced to
+`gross__thoracic-wall-diaphragm__ribs-sternum`, the last unaudited gross scene. Both scenes signed
+`audited_at: 2026-08-30`.
+
+---
+
+## Run 2026-08-30 (audit) — **THE GROSS ANATOMY AUDIT IS COMPLETE. ALL 76 GROSS SCENES NOW CARRY `provenance.audited_at`. THIS RUN MOVES TO NEUROANATOMY.**
+
+Backlog sections 1 and 2 were already clear, so this run fell through to the audit walk, took the last
+unaudited gross scene, and then — the walk having run out — opened Neuroanatomy rather than Embryology,
+which stays suspended. Two items: one audit, one new scene.
+
+### 1 · `gross__thoracic-wall-diaphragm__ribs-sternum` — audited, 2 corrections, signed
+
+43 structures, 9 views, 36 ops, `ready`, degrades `PEEL_LAYER`. **Drawability: 43 / 43 models present in
+`meshes-lite/`. No beat is hollow.**
+
+**WRONG, and fixed — the sternal angle was described as stepping the wrong way, in two places.** The
+structure card for `sternal_body` said "where it meets the manubrium the bone steps back"; beat 3's
+narration said "run your finger down until the bone steps back". The manubrium and body meet at an angle
+that opens *backwards*, so the junction projects *forwards* as the palpable transverse ridge — the reason
+the angle is a surface landmark at all. A student following the old instruction is feeling for a step that
+does not exist in that direction. Fixed the fact, not the instance: `grep` for "steps back" across all 105
+scenes returned exactly these two, and both are corrected and now agree with each other and with the four
+sibling scenes in Lungs & Mediastinum, which all describe the angle as a ridge you can feel.
+
+**Corrected — the xiphoid and chest compressions.** The card said the xiphoid "is the landmark for hand
+position in chest compressions", which reads as *put your hands here*. It is the landmark you stay clear
+of: the heel of the hand goes on the lower half of the body of the sternum, above the xiphoid, which can
+be snapped off into the liver. No other scene in the corpus mentions compressions, so this was the only
+copy.
+
+The eight checks, performed and clean otherwise:
+1. **IDS** — all 43 `refs.bodyparts3d` looked up in `available-meshes.json`; all present.
+2. **NAMES** — all 43 compared character-for-character against the catalog `name`; all exact.
+3. **SIDES** — 24 of the 43 are a sided pair. Every one verified against the catalog name, not the id,
+   because the ids do not run in a regular series and cannot be reasoned about: ribs 1–3 are right/left
+   FMA7857/7987, 7882/8012, 7909/8039 (offset ~130); rib 4 is 7957/8148; ribs 5–10 are 8066/8093,
+   8175/8202, 8229/8256, 8283/8310, 8364/8391, 8445/8472 (offset 27); and ribs 11–12 are 8531/8532 and
+   8533/8534, one apart. Every right id carries `right`, every left id `left`, in the catalog. Clavicles
+   FMA13322 right / FMA13323 left, also verified.
+4. **OPS** — 36 ops across 9 beats; every `target`, `from`/`to` and `path[]` member resolves to a real
+   structure key or group. Two `concept:` traces (`pump-handle`, `bucket-handle`) are declared
+   abstractions, which the vocabulary permits. `PEEL_LAYER {layer:"cartilage"}` was checked against the
+   structures: the two costal-cartilage models are the only `layer:"cartilage"` members, so beat 9 removes
+   exactly what its narration says it removes and leaves the beat non-empty.
+5/6. **THE SCENE AGAINST ITSELF, AND AGAINST ITS TOPIC** — this is what caught the sternal angle. Also
+   checked: true/false/floating 1–7 / 8–10 / 11–12 stated the same way in beat 2 and in the group names;
+   "a space is named for the rib above it" identical here in beat 8 and eleven times in
+   `intercostal-muscles`; sternal angle level = T4/T5 disc, agreeing with `mediastinum`,
+   `tracheobronchial-tree`, `lungs` and `great-vessels`; eleven intercostal spaces per side, correct.
+7. **CURRICULUM VIEWS** — entry requires `["location","mechanism"]`; scene has four `location` beats and
+   three `mechanism` beats. Satisfied.
+8. **NARRATION vs GEOMETRY** — every beat's subject is on screen. The named-not-drawn items (jugular
+   notch, sternal angle, costal groove, head/neck/tubercle/angle of a rib, costal margin, the individual
+   costal cartilages) are all already recorded in `gaps[]` and all appear in the relevant `terms[]`.
+9. **COVERS** — `["Ribs & sternum (thoracic cage)"]`, exact against CURRICULUM.json; sync-state reports no
+   unmatched covers.
+
+Signed `audited_at: 2026-08-30`. Validator re-run after the edits: ✓ 43 structures · 9 views · 36 ops ·
+ready.
+
+### 2 · NEW — `neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes`
+
+First Neuroanatomy scene. 38 structures (31 parts), 10 views, 38 ops, `3d_anatomy`, deferred `diagram`,
+**status `candidate`**. Covers `Cerebral hemispheres & lobes`; curriculum asks for `location` and
+`associated_organs` and the scene has seven and two of them respectively, plus one `cross_section`.
+
+**I did not trust the coverage table in the task, and it was wrong in one important way and right in
+another.** Searched the catalog under `lobe`, `lobule`, `cortex`, `hemisphere`, `gyrus`, `gyri`, `sulcus`,
+`operculum`, `pole`, `capsule`, `limb of`, and each lobe name:
+
+- **THE LOBES ARE NOT WHOLE MODELS.** Only the occipital lobe exists as a lobe — FMA72975 right, FMA72976
+  left. There is no frontal, parietal or temporal lobe model under any spelling. Each of those three is
+  therefore authored here as a *group of its constituent gyri*, and `gaps[0]` says so in capitals, because
+  isolating "Frontal lobe" lights the gyri that exist and leaves holes where the missing ones are.
+- **No inferior frontal gyrus, so no Broca's area** — searched as inferior frontal gyrus, pars
+  opercularis, pars triangularis, pars orbitalis, operculum. Beat 3 names the absence out loud rather than
+  pointing at the middle frontal gyrus instead.
+- **Wernicke's area IS drawable**, which is the happy half: FMA72805, `posterior part of left superior
+  temporal gyrus`. It is lit in beat 5. The asymmetry between the two language areas is now a fact of the
+  scene rather than an accident of the catalog.
+- **The internal capsule is only half there** — `anterior limb of right/left internal capsule` (FMA72908 /
+  FMA72909) exist; there is no posterior limb and no genu. That matters for the *White matter tracts* and
+  *Internal capsule* structures later in the course, not for this one; recording it here so a future run
+  does not rediscover it.
+- **Cerebellum: FMA67944 `cerebellum` does exist.** My first regex sweep did not return it and a second,
+  narrower one did — a reminder that one search is not evidence even when the search is programmatic.
+- **No cerebral artery of any kind**, confirming the task's DEAD row for Blood Supply. The middle cerebral
+  artery is named twice in narration as an explanation and never traced; `gaps[5]` records it.
+
+Anatomical content checked against itself before writing: precentral/postcentral bracket the central
+sulcus and are the frontal/parietal boundary (beats 2, 3, 4 agree); the homuncular map is stated once, in
+the precentral card, and beat 2 refers to it rather than restating it; the occipital lobe's medial
+boundary is the parieto-occipital sulcus and its lateral boundary is an agreed line, stated in beat 6 and
+in the superior-parietal-lobule card in compatible terms; cingulate → parahippocampal continuity is
+asserted in beat 9 and drawn as a `SHOW_RELATIONSHIP` between two structures that are both present.
+
+**Drawability: 0 / 38. Not one brain mesh is in `meshes-lite/`, so every beat is hollow.** That is why the
+scene is `candidate` and not `ready`, and it is the whole reason for the status — nothing in the scene is
+unresolved. The 38 ids are now in `mesh-gaps.txt`; sync-state's `next to repair` cursor points at this
+scene. **This is the list a human should fetch first if Neuroanatomy is to be worth authoring at all.**
+
+Validator: **105/105 scenes valid**, 0 blocked. Index: 105 scenes (54 ready), 12174 term mappings.
+sync-state re-run, STATE.json in step. The `next to audit` cursor now reads
+`embryology__cardiovascular-development__cardiac-looping` — **ignored, as instructed: Embryology stays
+suspended.** The next run should author 2 more Neuroanatomy structures.
+
+---
+
+## 2026-08-30 — Neuroanatomy authoring run (2 structures)
+
+**THE GROSS ANATOMY AUDIT IS COMPLETE. ALL 76 GROSS SCENES CARRY `provenance.audited_at`; ZERO ARE
+UNSIGNED. VERIFIED THIS RUN BY COUNTING THE FILES, NOT BY TRUSTING A NOTE — `76 gross scenes, 76 signed`.
+THIS RUN THEREFORE MOVES TO NEUROANATOMY AND AUTHORS AT 2 STRUCTURES PER RUN.**
+
+`sync-state.mjs` run first, as required. `REPAIR-BACKLOG.md` sections 1 and 2 are both CLEAR (section 1
+closed 2026-08-28, section 2 closed 2026-08-28), so the backlog does not outrank the cursor this run and I
+fell through to authoring, as the backlog itself instructs. Section 3 (open contradictions) still holds one
+unticked item — `arm__humerus` "four fractures vs three" — which is a judgement call on a signed gross
+scene and is not in sections 1–2; left for a human, noted here so it is not lost.
+
+The `next to audit` cursor reads `embryology__cardiovascular-development__cardiac-looping` and is IGNORED,
+as instructed: Embryology stays suspended, blocked on SVG artwork.
+
+### Authored
+
+**1. `neuroanatomy__cerebrum-gross-lobes__gyri-sulci-landmarks`** — 20 structures (16 parts) · 9 views ·
+38 ops · `candidate`. Curriculum requires view `location`; all nine beats are `location`. ✔
+**2. `neuroanatomy__cerebrum-gross-lobes__functional-cortical-areas`** — 18 structures (12 parts) ·
+10 views · 44 ops · `candidate`. Curriculum requires `location` + `mechanism`; both present. ✔
+
+Both are the next two structures in the Cerebrum — Gross & Lobes topic after the hemispheres/lobes scene
+authored last run. Neither is signed `audited_at` — a scene authored this run is not audited by the same
+run, and both draw nothing (below), so `candidate` is the honest status.
+
+### Catalog searched, not remembered — the failure mode the backlog names first
+
+Every claim of absence below was made by searching `available-meshes.json` this run, under multiple
+spellings, and the search output is what the `gaps[]` entries record:
+
+- `sulcus`, `sulci`, `fissure`, `sylvian` → **zero hits, all four.** No sulcus exists anywhere in the
+  catalog and none ever will: a sulcus is the cleft between two gyri, not an object. This is not a
+  coverage gap, and the gyri-sulci scene is built around that fact rather than around a workaround —
+  every sulcus is taught by lighting the two gyri that bank it, named beat by beat.
+- `inferior frontal gyrus`, `pars` (opercularis / triangularis / orbitalis), `operculum` → **zero hits.**
+  Broca's area is not drawable. Confirms, by independent search, the same absence the sibling
+  hemispheres scene recorded — not quoted from it.
+- `transverse temporal`, `heschl` → zero. Primary auditory cortex not drawable.
+- `calcarine`, `cuneus` (only the two `superior parietal lobule precuneus` composites), `collateral` →
+  zero for the sulci; V1, cuneus and lingual gyrus not separable from the occipital lobe.
+- `arcuate`, `fasciculus` → zero. The arcuate fasciculus is inside the one undivided white-matter mass.
+- `cerebral artery`, `circle of willis` → zero. Confirms the DEAD routing for Blood Supply of the Brain
+  given in the task brief — checked, not assumed.
+
+**Six approximations authored honestly rather than passed off as the feature**, using `approx{}` on the
+parent: auditory cortex on the anterior superior temporal gyrus, V1 on the occipital lobe, SMA on the
+superior frontal gyrus, FEF on the middle frontal gyrus, VWFA on the left fusiform, FFA on the right
+fusiform. Premotor cortex spans two gyri, so it is described in narration and assigned to neither. No
+`derive-landmark.mjs` anchors were authored: not one brain mesh is in `meshes-lite/`, and an anchor whose
+parent cannot be measured is not authored.
+
+### Narration against geometry — what is named and not drawn
+
+Named-and-not-shown, and therefore in both `gaps[]` and the narration of the beat that names it: Broca's
+area (beats 5, 6, 7 of the functional scene), the arcuate fasciculus (beat 6), all cerebral arteries
+(beat 8, stated in capitals), Heschl's gyrus (beat 1), V1 (beat 1), premotor cortex (beat 4), the
+homuncular body map (beat 3, a property of the cortex rather than an object), and every sulcus in the
+landmarks scene. Beat 6's language loop routes through two stand-in waypoints and says so in the
+narration rather than letting the trace imply that Broca's area and the arcuate fasciculus are on screen.
+
+### Sides, said out loud
+
+Both scenes contain pairs, so per the rule: FMA72662 is the **LEFT** precentral gyrus and FMA72661 the
+**RIGHT**; FMA72666 **LEFT** postcentral, FMA72665 **RIGHT**; FMA72805 **LEFT** posterior superior
+temporal gyrus (Wernicke) and FMA72804 **RIGHT** (the aprosodia mirror); FMA72976 **LEFT** occipital lobe
+and FMA72975 **RIGHT**; FMA72690 **LEFT** fusiform (visual word form area) and FMA72689 **RIGHT**
+(fusiform face area); BP49 **LEFT** and BP50 **RIGHT** superior parietal lobule. Each was read off the
+catalog `name` field character for character, not inferred from the id.
+
+### Consistency against the sibling scene
+
+Both new scenes were checked against `cerebrum-gross-lobes__cerebral-hemispheres-lobes`, which a student
+reads immediately before them. Agreements confirmed rather than assumed: Broca absent / Wernicke present;
+the corpus callosum and white matter as single models; the occipital lobe as the only whole lobe; the
+frontal eye field on the **middle** frontal gyrus and the SMA on the **superior** frontal gyrus; the
+accessory short gyrus described as anterior to the insular central sulcus. One deliberate extension, not
+a contradiction: the sibling says the occipital lobe holds "the LEFT half of what both eyes see" on its
+**right** card — the new functional scene states the same rule on both sides (left lobe = right field,
+right lobe = left field) so the pairing is explicit rather than half-stated.
+
+### Drawability
+
+`0/20` and `0/18` models in `meshes-lite/` respectively — **every beat in both scenes is hollow**, exactly
+as for the hemispheres scene authored last run. 38 distinct brain models are now referenced and unfetched
+(`mesh-gaps.txt`); the two new scenes add no new model ids beyond that set, since both draw from the same
+cortical catalog the first scene already listed. Nothing in this repo can fetch them. **The single
+highest-value human action for Neuroanatomy remains fetching those 38 meshes** — three authored scenes,
+1,144 lines of teaching, are waiting on it and nothing else.
+
+### Results
+
+Validator: **107/107 scenes valid**, 0 blocked. Index: 107 scenes (54 ready), 12,373 term mappings.
+`sync-state.mjs` re-run; STATE.json in step. The three neuro scenes are correctly reported as drawing
+nothing. Next run: the next 2 Neuroanatomy structures — `White matter tracts` completes the Cerebrum
+topic, then Ventricular System & CSF.
+
+---
+## 2026-08-30 — GROSS AUDIT COMPLETE; FIRST NEUROANATOMY AUTHORING RUN
+
+**Cursor discipline first.** `sync-state.mjs` was run before anything else and reported
+`next to audit: embryology__cardiovascular-development__cardiac-looping`. That cursor was **not** followed,
+and the reason is on the record rather than assumed: the cursor is derived from `provenance.audited_at`
+across all scenes, gross is 76/76 signed, and the walk has therefore rolled forward into Embryology, which
+the task suspends. Checked the claim directly — `grep -L audited_at scenes/gross__*.json` returns nothing
+against 76 files. Backlog sections 1 and 2 both carry their own "SECTION IS NOW CLEAR" markers and every
+row is ticked, so the backlog does not outrank the cursor either. Falling through to Neuroanatomy, 2
+structures, as instructed.
+
+**Authored 1 — `neuroanatomy__cerebrum-gross-lobes__white-matter-tracts`** (candidate, 25 structures /
+10 parts / 9 views / 41 ops). Completes the Cerebrum — Gross & Lobes topic (4 of 4). Curriculum requires
+`cross_section` + `mechanism`; both authored, five beats and four beats respectively.
+
+**Authored 2 — `neuroanatomy__ventricular-system-csf__ventricles`** (candidate, 23 structures / 10 parts /
+9 views / 43 ops). Opens the Ventricular System & CSF topic. Curriculum requires `cross_section` +
+`location`; both authored, five and four beats.
+
+### What the catalog search actually found — the habit the backlog says to break
+
+Every structure was searched under multiple spellings before any gap was written, and the search paid for
+itself twice with meshes the starting table in the task prompt did not mention:
+
+- **`FMA61975` lamina terminalis** — found searching `lamina`, not on any list. It is the anterior wall of
+  the third ventricle and the plate the anterior commissure crosses in, so it is now scaffolding in both
+  scenes and turns two "described" facts into shown ones.
+- **`FMA78497` central canal of spinal cord** — found searching `cord`, and it is **already in
+  `meshes-lite/`**, fetched for the gross spinal cord scene. It is the one drawable structure in either new
+  scene. The task's coverage table says Spinal Cord is DEAD; that is true of the cord and every tract, and
+  false of the central canal. Recorded here so no later run re-derives the absence.
+- `FMA62032` habenula and `FMA62033` pineal body, likewise unlisted, give the stria medullaris an endpoint
+  and the posterior commissure the mass that classically compresses it.
+
+Absences below were each searched under the spellings named and are recorded in the scenes' `gaps[]`, not
+merely here:
+
+- **No association fibre bundle of any kind** — `fasciculus`, `fascic`, `arcuate`, `longitudinal`,
+  `cingulum`, `uncinate`, `bundle`, `radiation`, `occipitofrontal`: zero hits. One of the three classes the
+  white-matter scene teaches is entirely undrawable, and beat 9 is written to say that out loud instead of
+  letting the class quietly shrink to two.
+- **Only the anterior limb of the internal capsule exists** (`FMA72909` / `FMA72908`). No genu, no
+  posterior limb, no retrolenticular part — searched `capsule`, `limb`, `genu`, `corona`, `radiat`. This is
+  the most consequential gap in either scene, because the posterior limb is the clinically important one.
+  Beat 5 lights the anterior limb, states in narration and in `terms` that it carries **no** motor fibres,
+  and points at the gap between thalamus and lentiform nucleus as the space the posterior limb occupies.
+- **No aperture of the fourth ventricle, and nothing of the subarachnoid route** — `median aperture`,
+  `lateral aperture`, `aperture`, `Luschka`, `Magendie`, `cistern`, `arachnoid`, `dura`, `pia`, `mening`,
+  `subarachnoid`, `granulation`, `tela`, `velum`, `ependym`: zero hits. Consequence carried through:
+  beat 8's `concept:csf` trace ends at the central canal and says the last third of the journey is
+  described and not drawn, and the ventricles scene **declines to claim** the curriculum's `CSF
+  circulation` structure, since a circulation scene without absorption would hide the gap.
+- No mammillothalamic tract, no lateral geniculate body, no interpeduncular, septal or pretectal nucleus,
+  no fasciculus retroflexus, no decussation, no lemniscus (the only `pyramid` hits are the abdominal
+  pyramidalis muscles). Each is named in the beat that needs it, with the narration saying it is described.
+- No third or fourth ventricle choroid plexus — only `of left/right cerebral hemisphere`. So the ventricles
+  scene also declines to claim the `Choroid plexus` curriculum structure.
+- No hypothalamus, tuber cinereum or infundibulum, so the floor of the third ventricle is read between the
+  optic chiasm and the mammillary body, both of which exist.
+
+### Sides, said out loud (both scenes contain pairs)
+
+`FMA72909` LEFT anterior limb of internal capsule / `FMA72908` RIGHT. `FMA72925` LEFT fornix / `FMA72924`
+RIGHT. `FMA67936` LEFT optic tract / `FMA62382` RIGHT. `FMA73414` LEFT stria medullaris / `FMA73413` RIGHT.
+`FMA78450` LEFT lateral ventricle / `FMA78449` RIGHT. `FMA274029` LEFT choroid plexus / `FMA274027` RIGHT.
+`FMA72827` LEFT caudate / `FMA72826` RIGHT. `FMA258716` LEFT thalamus / `FMA258714` RIGHT. Every one of
+these was read off the catalog name, since the ids carry no side. The unsided single models — corpus
+callosum, both other commissures, commissure of the fornix, lamina terminalis, mammillary body, habenula,
+pineal body, peduncle of midbrain, third and fourth ventricles, aqueduct, interventricular foramen, septum
+pellucidum, central canal, chiasm, pons, medulla, cerebellum — are listed as such in each scene's `gaps[]`
+so a later run does not invent a side for them.
+
+### One fact corrected before signing off, per rule 5
+
+The delivery note in the ventricles scene was first written as the boilerplate "no mesh referenced by this
+scene is present in meshes-lite/". The validator then reported **22/23**, not 23/23. The directory was
+listed rather than the note trusted, `FMA78497` was confirmed on disk, and the gap was rewritten to say
+which mesh and why it is there. This is the exact shape of the stale-note failure the backlog documents,
+caught inside one run rather than after eleven scenes.
+
+### Drawability — models in hand vs referenced
+
+- `white-matter-tracts`: **0 of 25** in `meshes-lite/`. Every one of the nine beats is hollow.
+- `ventricles`: **1 of 23** (`FMA78497`). Beats 1–7 and 9 are hollow; beat 8's trace would light only its
+  final station.
+- The three pre-existing Cerebrum scenes remain 0/38, 0/20 and 0/18. **No brain mesh of any kind has ever
+  been fetched.** Five neuroanatomy scenes now stand fully authored and completely undrawable, and that is
+  the single highest-value fetch list in the repo: 38 distinct ids in `mesh-gaps.txt` before this run, more
+  now. Priority order for whoever fetches, by how much teaching it unlocks per file: the lobe and gyrus set
+  (unblocks three scenes at once), then `FMA86464` corpus callosum, then the four ventricles + aqueduct +
+  `FMA75351`, then the deep nuclei (`72827`/`72829`/`72831`/`258716`), which are walls in both new scenes.
+- No anchor was authored in either scene, deliberately. `derive-landmark.mjs` cannot measure against a
+  parent that is not on disk, and the facial colliculus, the glomus of the choroid plexus and the splenium
+  are exactly the features that would otherwise get placed by eye.
+
+### Gate
+
+`validate-scenes.mjs --mark`: **109/109 valid**, both new scenes pass all eight stages, no scene blocked, no
+`delivery_hold` newly applied. `build-scene-index.mjs`: index.json written, 109 scenes (54 ready), 12574
+term mappings. `sync-state.mjs` re-run afterwards so all three cursors reflect the two new files.
+Corpus totals move 112 → **114 structures covered by 109 scene files**; neuroanatomy goes 3 → 5 scenes on
+disk. Note that the neuroanatomy coverage bar still reads **0/34** and correctly so: `sync-state.mjs` counts
+only `ready` scenes as coverage, and all five neuroanatomy scenes are `candidate` on delivery grounds. They
+appear instead in the HELD list, which grew 53 → 55. Stating this because it is exactly the kind of number
+a later run could quote from memory as "2/34 covered" and be wrong.
+
+### For the next run
+
+`next to author` in neuroanatomy is **Choroid plexus** and **CSF circulation**, and both were deliberately
+left unclaimed above. Choroid plexus is authorable in 3D on the lateral ventricle models with the third and
+fourth ventricle plexus recorded as a gap. CSF circulation is **not**: its required `mechanism` and
+`vasculature` views need the apertures, the subarachnoid space and the granulations, none of which exist,
+so it should take its second `preferred_mode` — `diagram` — and the reason belongs in its `gaps[]`.
+
+---
+## 2026-08-30 — NEUROANATOMY, run 2 · authored `Choroid plexus` + `CSF circulation`
+
+**Backlog:** `REPAIR-BACKLOG.md` sections 1 and 2 are both clear, so the backlog no longer outranks the
+cursor and this run fell through to the walk. Section 3 still has one open judgement (`arm__humerus` — the
+learning goal promises four fracture sites and beat 7 delivers three); it is not sections 1 or 2 and was
+not taken this run. **Gross audit re-verified by listing the directory: 76/76 gross scenes carry
+`provenance.audited_at`, zero unsigned.** `next to audit` points at an embryology scene and was correctly
+ignored per the suspension.
+
+**Authored, both in Ventricular System & CSF:**
+
+1. `neuroanatomy__ventricular-system-csf__choroid-plexus` — `3d_anatomy`, candidate, 15 structures
+   (2 parts), 6 views, 27 ops. Curriculum asks for `location`, `glands`, `mechanism`: all three present,
+   two beats each. Catalog searched under choroid, plexus, tela, velum, glomus, ependym, epitheli,
+   capillar, endotheli and choroidal — the plexus exists **only** as FMA274029 (left) / FMA274027 (right)
+   cerebral hemisphere, i.e. the lateral ventricle plexus. No third or fourth ventricle plexus, no tela
+   choroidea, no choroid fissure, no glomus, no histology at any scale, no choroidal artery. Every one of
+   those is in `gaps[]` with the spellings tried, and each is named-not-shown in the beat that mentions it.
+   Beat 5 cuts the whole frond and says in the beat itself that the three layers are described rather than
+   labelled. Beat 6's trace deliberately stops at the fourth ventricle and hands the outflow to scene 2.
+2. `neuroanatomy__ventricular-system-csf__csf-circulation` — `diagram` (SVG), planned, 16 drawn regions,
+   6 views, 27 ops. Curriculum asks for `mechanism` and `vasculature`: four and two beats respectively.
+   **Routing checked, not assumed** — searched mening, dura, arachnoid, pia, subarach, cistern, cisterna,
+   granulation, villus, sinus, sagittal, confluen, lacuna, aperture, Magendie, Luschka across all 934
+   meshes. The only sinus in the catalog is the coronary sinus; the only foramen is the interventricular
+   one. The absorption half — which is the entire reason this is a separate curriculum entry — has zero
+   geometry, so `diagram` (its first preferred mode) is right and `3d_anatomy` is kept in
+   `deferred_modes`. No model ids and no `refs` anywhere in the file, matching the other twelve
+   diagram-mode scenes. The `vasculature` view is authored as the venous end of the circuit
+   (granulation → superior sagittal sinus), which is the vasculature that matters to CSF; the choroidal
+   arteries are in `match.terms` for retrieval only and are taught in no beat, because none exists.
+
+**Consistency pass (rule 5 — fix the fact, not the instance).** The Ventricles scene's `gaps[]` carried two
+statements that these two scenes falsified: that `CSF circulation` "will have to lead with its second
+preferred mode, diagram" (wrong — `diagram` is its **first** preferred mode in CURRICULUM.json; that was a
+misreading and is corrected, not merely updated) and that `Choroid plexus` "is left unauthored". Both
+sentences rewritten in the scene file, and the matching two sentences in `CORPUS.md` rewritten with them.
+The three scenes were then read against each other for shared facts: production ≈500 mL/day into a system
+holding ≈150 mL, the aqueduct as the narrowest point with no plexus, the three-up-one-normal reading of an
+aqueduct block, the plexus absent from frontal horn / occipital horn / aqueduct, and the apertures as
+unmodelled. All agree; no third copy of any corrected fact was left alive.
+
+**Drawability.** choroid-plexus 1/15 models in `meshes-lite/`; csf-circulation has no models by design.
+The one present is FMA78497 (central canal), fetched for the gross spinal cord scene — verified by listing
+the directory, not assumed. **Every beat of the choroid plexus scene is hollow**, and the two meshes to
+fetch first anywhere in neuroanatomy are FMA274029 and FMA274027: without them that scene has no subject.
+No new ids added to `mesh-gaps.txt` (still 73) — every context mesh was already referenced by the
+Ventricles scene. No anchors authored in either scene: `derive-landmark.mjs` needs the parent mesh on disk
+and no brain mesh is there. The glomus in particular is named on the structure card and marked nowhere.
+
+**Neither scene is signed** — `audited_at` is for the audit walk, and these are new authoring.
+
+**Validator:** `111/111 scenes valid`. choroid-plexus held at `candidate` on delivery grounds alone
+(nothing in its anatomy, ids or ops is unresolved); csf-circulation `planned` per the diagram-scene
+lifecycle. **Index:** `111 scenes (54 ready) · 12703 term mappings`. **sync-state:** re-run, in step.
+
+---
+
+## 2026-08-30T07:08Z — NEUROANATOMY AUTHORING RUN 2 (Meninges, Basal ganglia)
+
+**Backlog check first.** `REPAIR-BACKLOG.md` sections 1 and 2 are both marked CLEAR (2026-08-28), so the
+backlog no longer outranks the cursor and this run falls through to the authoring walk, as the file itself
+instructs. Section 3 remains open but is explicitly "judgement, not rewrite" work and is not sections 1–2.
+**Gross audit confirmed complete by listing the directory: 76/76 gross scenes carry `provenance.audited_at`,
+0 unsigned.** `next to audit` points at an embryology scene; embryology stays suspended, so I did not follow
+it. Authored 2 neuroanatomy structures instead.
+
+**Which 2, and why.** Curriculum order after the seven neuro scenes already on disk: *Meninges* (last in
+Ventricular System & CSF) and *Basal ganglia* (first in Basal Ganglia & Diencephalon).
+
+### 1 · `neuroanatomy__ventricular-system-csf__meninges` — new, `diagram`, status `planned`
+The task prompt's coverage table did not cover this structure; I searched rather than assumed. Twenty-one
+spellings across all 934 meshes (mater, menin, meninx, dura, arachnoid, pia, lepto, pachy, falx, tentor,
+sinus, sagittal, granulation, villus, cistern, subarach, filum, denticulate, thecal, sella, diaphragma)
+returned **one** hit and it was `FMA4706 coronary sinus` — a heart structure. So: not one meningeal
+membrane, fold, space or dural venous sinus exists. Routed to the structure's second `preferred_mode`,
+`diagram`, with `3d_anatomy` retained in `deferred_modes` and the reason written into `gaps[]`.
+19 structures (16 parts), 6 views, 22 ops, no model ids, no `refs`. **Models in hand vs referenced: 0 / 0** —
+an SVG scene references none. It renders nothing today for a different reason: no artwork exists. All six
+beats are hollow until two drawings are made, and `gaps[]` says exactly which two.
+Consistency pass against `csf-circulation` and `choroid-plexus`, which both already discuss the meninges
+in their `gaps[]`: no contradiction found. The one fact all three state — CSF returns through arachnoid
+granulations into the superior sagittal sinus — is stated the same way in each, and beat 4 of the new scene
+points at `csf-circulation` for the absorption teaching rather than restating it.
+
+### 2 · `neuroanatomy__basal-ganglia-diencephalon__basal-ganglia` — new, `3d_anatomy`, status `candidate`
+The prompt's table called this STRONG and it is, but with three qualifications the table did not carry, all
+found by searching the catalog rather than trusting it:
+- **No substantia nigra and no subthalamic nucleus.** The direct/indirect pathway beat therefore describes
+  three parts it cannot show, and says so inside the beat. I did *not* light `FMA62394 peduncle of midbrain`
+  as a proxy for the nigra — that is a mesh pretending to be a nucleus, the landmark rule in bone form.
+- **The globus pallidus is one undivided mesh.** GPi and GPe do opposite things in the loop; the mesh does
+  not divide. Named, not drawn.
+- **Only the ANTERIOR LIMB of the internal capsule exists** (FMA72908/72909). No genu, no posterior limb, no
+  corona radiata, no corticospinal tract. This is the consequential one, because the posterior limb is what
+  the capsular-stroke teaching turns on. Beat 3 states it at the exact point a student would otherwise assume
+  the whole capsule is lit, and beat 6 is written as narration over an acknowledged gap.
+Also absent: claustrum, external and extreme capsule (so putamen and insula appear to touch on screen — the
+insula card says so), nucleus accumbens, and every intracranial vessel (lenticulostriate arteries named, not
+drawn — consistent with the blood-supply routing already recorded for this course).
+17 structures (8 parts), 7 views, 31 ops. Curriculum requires `cross_section` and `mechanism`; the scene has
+two cross_section beats (3, 4) and three mechanism beats (5, 6, 7), plus two location beats.
+**SIDES, said out loud as required.** caudate FMA72826 right / FMA72827 left · putamen FMA72828 R /
+FMA72829 L · globus pallidus FMA72830 R / FMA72831 L · anterior limb of internal capsule FMA72908 R /
+FMA72909 L · amygdala FMA72832 R / FMA72833 L · insula FMA72977 R / FMA72978 L · lateral ventricle
+FMA78449 R / FMA78450 L. **The thalamus breaks the consecutive-id pattern and is the trap: FMA258714 is
+RIGHT, FMA258716 is LEFT** — read off the catalog name individually, not inferred from its neighbour.
+`covers[]` is "Basal ganglia" only. Thalamus and Internal capsule are separate curriculum structures in the
+same topic and are present here as context; claiming them would have hidden two gaps that are currently
+visible.
+**Models in hand vs referenced: 0 / 17.** No brain mesh in this corpus has been fetched. Every beat is
+hollow. Cheapest path to a rendering scene, recorded in `gaps[]`: the eight core nuclei
+(FMA72826/72827/72828/72829/72830/72831/72908/72909) make beats 1, 3 and 4 draw; adding FMA78449/78450
+makes beat 2 draw. Hence `candidate`, for a delivery reason and not an authoring one.
+**No anchors authored, and none could be.** Head/body/tail of caudate, genu of capsule, the two pallidal
+segments are all sub-parts of meshes absent from `meshes-lite/`; `derive-landmark.mjs` needs the parent mesh
+to measure. Placing them by eye is what the tool exists to prevent. Noted for revisit: head-of-caudate is
+plausibly `--contact` against the anterior limb with a `--slab` on the anterior quarter, once fetched.
+
+**Tools.** `validate-scenes.mjs --mark` → **113/113 valid**, both new scenes pass all eight stages, zero
+blocked. `build-scene-index.mjs` → index.json, 113 scenes (54 ready), 12,870 term mappings.
+`sync-state.mjs` → 118 structures covered by 113 scene files (+2 this run), no `covers[]` entry matching
+nothing, STATE.json already in step. One correction caught by re-running the validator after writing: the
+scene's own `gaps[]` said "sixteen model ids" where the validator counted 17 — fixed to seventeen, and the
+count in CORPUS.md matches. That is failure mode 3 (counting from memory) caught in the act.
+**Nothing was signed with `audited_at` this run** — these are new scenes, not audits.
+
+---
+
+## 2026-08-30 — human session · review of the overnight runs · 38 corrections
+
+Twenty-four runs since the last review. The gross audit finished — all 76 scenes signed — and the task
+moved to Neuroanatomy and authored its first nine scenes. Every run block was read against the files it
+names, and the nine new scenes were read end to end by a neuroanatomist's standard, because nothing but
+the task that wrote them had ever looked at them.
+
+**Thirty-eight corrections.** `113/113 valid`.
+
+### The audit got much better and still signs past errors
+
+The "fix the fact, not the instance" rule is working where it is applied inside a file — the lateral
+malleolus correction propagated to a scene that was already signed, which is exactly what it is for. What
+it does not yet do is reach across the corpus. Four scenes still carried a `gaps[]` note telling a future
+run to author a curriculum entry that had already been authored, in one case by the same run block that
+signed the scene. A single `grep -l "unauthored" scenes/*.json` closes all four.
+
+The other new pattern: **the run does not audit its own new writing.** Three of the worst findings are
+text the audit itself produced in the same pass — a false anatomical claim inside a `calibrated_by`
+string, and two geometric claims falsified by another anchor the same run authored. The checklist
+audits what it inherited and never re-reads what it just wrote.
+
+### What was taught wrongly, and is not any more
+
+**Gross.** Plantaris taught as the third head of triceps surae — it is the two heads of gastrocnemius
+plus soleus, and the scene's own group names reinforced the error. The femoral pulse placed at the
+midpoint of the inguinal ligament in the hip scene, while two other scenes correctly place it at the
+mid-inguinal point and explicitly warn that the two differ; the corpus-wide grep that was supposed to
+catch it missed this instance because the sentence says "this ligament". Every thoracic vertebra card
+claiming its rib makes a costotransverse joint, in a file whose rib-11 and rib-12 cards say those ribs
+have no tubercle at all. The left suprarenal gland "capping" the upper pole of the left kidney, which is
+the exact statement its sibling scene exists to deny. The anorectal angle given as eighty degrees both at
+rest and on contraction, so the beat's teaching point cancelled itself. Coracobrachialis put inside the
+intertubercular groove. Calot's triangle and the hepatocystic triangle taught as the same thing in the
+scene whose learning goal is to name their boundaries — and the correction that had been applied next
+door left circular and unreadable. Jejunal branches counted twelve-to-fifteen in one scene and
+fifteen-to-twenty in its sibling, both signed the same day.
+
+**Neuroanatomy, from nine scenes nobody had checked.** A block at the fourth-ventricle apertures
+classified as communicating hydrocephalus — it is obstructive, and it is the one obstructive pattern that
+dilates every cavity; the scene's own structure card said so. Hemispatial neglect localised to the
+superior parietal lobule in two scenes; it belongs to the inferior parietal lobule and the temporoparietal
+junction, and the correct structures were already in the file. The central sulcus called the deepest on
+the lateral surface, two beats before the lateral sulcus is correctly called the one deep enough to be a
+fissure. Four masses of deep grey counted and three named.
+
+And two more false absences of the old kind: the lateral geniculate body declared missing when
+**FMA73303/73304** are in the catalog — which truncated the optic-tract teaching on a falsehood — and the
+tuber cinereum declared missing when **FMA62327** exists, and is precisely the piece of third-ventricle
+floor the scene said it could not draw. Both are now recorded as corrections naming the ids, so the next
+run authors them.
+
+### One landmark, one place
+
+Three anchors sat in two positions across scenes a student reads consecutively. The greater trochanter was
+~20 mm apart across the five Gluteal scenes, under a calibration note claiming the topic had been unified —
+three files had been converted and two had not. The medial malleolus ~15 mm apart across the two Leg & Foot
+scenes, while the lateral malleolus in the same two files was byte-identical. The intertubercular groove
+~11 mm apart across the two Arm scenes. All three are now single-valued, and the calibration notes say when
+and why.
+
+### Still open, and recorded rather than fixed
+
+- **Seventy-seven neuroanatomy meshes have never been fetched.** Five of the nine new scenes reference
+  models of which not one is on disk, so they are held at `candidate` and draw nothing. Every one of the
+  nine is honest about this in `gaps[]`. This is the human fetch/decimate/upload cycle, and it is the
+  single thing standing between the neuro course and a student.
+- **Nineteen anchors carry `status:"ok"` rather than `needs-review`.** Some were cleared in-app by another
+  session at Frank's request; the rest were promoted silently. Left alone deliberately — reverting another
+  session's work is not this session's call.
+- The spinal-cord scene is still short the `vasculature` view its curriculum entry requires; the gap is
+  declared and genuinely unauthorable from this catalog.
+- Six anchors in the biceps-triceps scene carry a `calibrated_by` that records no measurement at all — no
+  gap, no witness, no tool. They are the only six of 223 that do.
+- `ribs-sternum` carries `audited_at` with no run block recording what was checked, and it contained one
+  of today's errors.

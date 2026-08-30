@@ -164,6 +164,65 @@
       "narration": "This is the main duct, the duct of Wirsung, and it runs the whole length of the gland from tail to head — so it draws the axis of the pancreas even though the gland's own surface is not shown here. Read the five parts along it. The head sits in the C of the duodenum. The uncinate process hooks off the head backwards and to the left, behind the superior mesenteric vessels. The neck is the short piece in front of the portal confluence. The body crosses the aorta and the vertebral column at L1. The tail runs in the splenorenal ligament to the hilum of the spleen — the only part of the pancreas that is not retroperitoneal. Near the head the duct turns down and joins the bile duct in the ampulla of Vater. An accessory duct, the duct of Santorini, often persists and opens separately at the minor papilla about two centimetres higher, and when the two embryonic duct systems fail to fuse at all you have pancreas divisum."
     },
     {
+      "key": "ampulla",
+      "label": "Ampulla of Vater — where the duct meets the duodenum",
+      "role": "part",
+      "group": "Pancreas",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "pancreatic_duct",
+        "uvw": [
+          0.1306,
+          0.384,
+          0.0667
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the pancreatic duct and the duodenum (gap 1.26 mm, one witness); tools/derive-landmark.mjs --parent FMA10419 --contact FMA7206",
+      "calibration_gap_mm": 1.26,
+      "terms": [
+        "ampulla of Vater",
+        "hepatopancreatic ampulla",
+        "major duodenal papilla",
+        "sphincter of Oddi",
+        "bile duct",
+        "gallstone pancreatitis",
+        "ERCP",
+        "double duct sign"
+      ],
+      "narration": "The lower end of the duct, where it turns down, is joined by the bile duct and opens on the posteromedial wall of the second part of the duodenum. This single point carries most of the topic's pathology: a stone impacted here obstructs both ducts at once and is the commonest cause of acute pancreatitis, and a tumour of the head obstructs the bile duct just above it and gives painless jaundice. It is measured as the contact between the duct and the duodenum, so it marks the papilla rather than the ampulla's interior."
+    },
+    {
+      "key": "tail_tip",
+      "label": "Tail of the pancreas",
+      "role": "part",
+      "group": "Pancreas",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "pancreatic_duct",
+        "uvw": [
+          1,
+          0.9223,
+          0.9807
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +x (the body's left) on the pancreatic duct, 72.8 mm from its centroid; tools/derive-landmark.mjs --parent FMA10419 --extreme +x",
+      "terms": [
+        "tail of the pancreas",
+        "splenorenal ligament",
+        "splenic hilum",
+        "distal pancreatectomy",
+        "intraperitoneal",
+        "islets of Langerhans"
+      ],
+      "narration": "The left-hand end of the duct, and so of the gland. The tail runs in the splenorenal ligament to the hilum of the spleen and is the only intraperitoneal part of the pancreas — which is why a splenectomy can injure it and leave a pancreatic fistula. The islets are densest here."
+    },
+    {
       "key": "duodenum",
       "name": "duodenum",
       "label": "Duodenum — the C around the head",
@@ -440,7 +499,7 @@
         "body of the pancreas",
         "retroperitoneal"
       ],
-      "narration": "Caps the upper pole of the left kidney immediately behind the body of the pancreas. It is listed because posterior relations are asked for as a set, and because a mass here and a mass in the pancreatic body look alike on an axial slice until you find the plane between them."
+      "narration": "Lies along the medial border of the upper half of the left kidney — crescentic, not a cap — immediately behind the body of the pancreas. It is listed because posterior relations are asked for as a set, and because a mass here and a mass in the pancreatic body look alike on an axial slice until you find the plane between them."
     },
     {
       "key": "aorta",
@@ -555,7 +614,7 @@
           "kind": "tail reaches the hilum"
         }
       ],
-      "narration": "The pancreas lies across the back of the abdomen, sloping up and to the left, about fifteen centimetres long and weighing under a hundred grams. It is retroperitoneal — secondarily so, having been swung back against the posterior wall during development — and that single fact governs its behaviour. It cannot be palpated. Its inflammation is felt in the back. Its collections spread along retroperitoneal planes rather than into the peritoneal cavity. Name the parts from right to left: head in the C of the duodenum, uncinate process hooking behind the superior mesenteric vessels, neck in front of the portal confluence, body crossing the aorta at L1, and tail in the splenorenal ligament touching the hilum of the spleen. Only that tail is intraperitoneal. The transpyloric plane at the lower border of L1 runs through the neck, and it is the single most useful line in abdominal anatomy: the pylorus, the fundus of the gallbladder, the origin of the portal vein, the renal hila and the origin of the superior mesenteric artery are all on it."
+      "narration": "The pancreas lies across the back of the abdomen, sloping up and to the left, about fifteen centimetres long and weighing under a hundred grams. It is retroperitoneal — secondarily so, having been swung back against the posterior wall during development — and that single fact governs its behaviour. It cannot be palpated. Its inflammation is felt in the back. Its collections spread along retroperitoneal planes rather than into the peritoneal cavity. Two of the five parts are marked as measured points on the duct — the ampulla at its lower right end and the tail at its left end; the other three are read off the duct's course and named. From right to left: head in the C of the duodenum, uncinate process hooking behind the superior mesenteric vessels, neck in front of the portal confluence, body crossing the aorta at L1, and tail in the splenorenal ligament touching the hilum of the spleen. Only that tail is intraperitoneal. The transpyloric plane at the lower border of L1 runs through the neck, and it is the single most useful line in abdominal anatomy: the pylorus, the fundus of the gallbladder, the origin of the portal vein, the renal hila and the origin of the superior mesenteric artery are all on it."
     },
     {
       "mode": "associated_organs",
@@ -620,6 +679,10 @@
           "target": "smv"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "liver"
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "anterior"
         },
@@ -657,7 +720,7 @@
           "layout": "side-by-side"
         }
       ],
-      "narration": "The pancreas is the clearest example in the body of a gland that is both exocrine and endocrine, and the two halves are told apart by where their product goes. Ninety-eight per cent of the gland by mass is exocrine: acini of serous cells packed with zymogen granules, draining through ductules into the main duct and out at the ampulla into the duodenum. They secrete about a litre and a half a day of alkaline juice — amylase, lipase, and proteases released as inactive precursors. Trypsinogen becomes trypsin only when duodenal enterokinase cleaves it, and trypsin then activates the rest; premature activation inside the gland is precisely what acute pancreatitis is. Secretin from the duodenum drives the watery bicarbonate component that neutralises gastric acid, and cholecystokinin drives the enzyme-rich component. The remaining two per cent is a million islets of Langerhans, most densely in the tail, which have no ducts at all and secrete straight into the capillaries and so into the portal vein: beta cells make insulin, alpha cells glucagon, delta cells somatostatin, PP cells pancreatic polypeptide. Two destinations from one organ — duodenum for the juice, portal vein for the hormones — and every pancreatic disease can be sorted by which of the two it damages."
+      "narration": "The pancreas is the clearest example in the body of a gland that is both exocrine and endocrine, and the two halves are told apart by where their product goes. Ninety-eight per cent of the gland by mass is exocrine: acini of serous cells packed with zymogen granules, draining through ductules into the main duct and out at the ampulla into the duodenum. They secrete about a litre and a half a day of alkaline juice — amylase, lipase, and proteases released as inactive precursors. Trypsinogen becomes trypsin only when duodenal enterokinase cleaves it, and trypsin then activates the rest; premature activation inside the gland is precisely what acute pancreatitis is. Secretin from the duodenum drives the watery bicarbonate component that neutralises gastric acid, and cholecystokinin drives the enzyme-rich component. The remaining two per cent is a million islets of Langerhans, most densely in the tail, which have no ducts at all and secrete straight into the capillaries and so into the portal vein: beta cells make insulin, alpha cells glucagon, delta cells somatostatin, PP cells pancreatic polypeptide. Two destinations from one organ — duodenum for the juice, portal vein for the hormones, and the trace follows real geometry at every waypoint even though the acini and the islets themselves are microscopic and have nothing to draw — and every pancreatic disease can be sorted by which of the two it damages."
     },
     {
       "mode": "vasculature",
@@ -805,7 +868,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "There is no pancreas in the catalog. Searching all 934 entries for pancreas, pancreatic, islet, acinus, uncinate, head, neck, body and tail returns the pancreatic duct alone. So the gland itself - the organ this scene is about - has no surface a student can click, and the scene is status:\"candidate\" for that reason. The duct is used as the gland's stand-in because it runs the full length of the pancreas and therefore occupies its exact position and axis: option (a), the most specific part that does exist. Every label and narration says openly that this is the duct standing for the gland. The head, neck, body, tail and uncinate process are read off the duct's course and named in narration, and all five are in terms[] so a note that says 'uncinate process' still opens this scene.",
@@ -813,7 +878,7 @@
     "There is no bile duct. Its passage behind or through the head of the pancreas is the mechanism of Courvoisier's law and of the double duct sign, and it is taught in beats two and six through the gallbladder, which does exist, plus narration. The same absence is recorded in the liver and biliary scenes; a bile duct mesh is the single highest-value addition for this whole topic, since three consecutive structures are all missing it.",
     "The gastroduodenal, superior and inferior pancreaticoduodenal arteries and the arcades between them have no meshes. Beat four therefore traces the arterial supply through the coeliac trunk and splenic artery, which exist, and names the arcades. The dual foregut-midgut supply of the head is stated but cannot be shown as two vessels meeting.",
     "The portal vein has no mesh, so the confluence behind the neck is shown as the meeting of the splenic and superior mesenteric veins, which are both present. The narration says plainly that the portal vein begins at that junction, so nothing is misrepresented, but the vessel whose involvement decides resectability cannot itself be lit.",
-    "No landmark anchors were authored. The head, neck, body, tail, uncinate process, the groove for the splenic vein and the point where the duct meets the ampulla are all places ON meshes that are not in the local decimated set, and anchors in this corpus are measured on real geometry rather than estimated by eye. Ingesting FMA10419 and FMA7206 locally would yield at least six anchors and would make beats one, three and five clickable rather than narrated.",
+    "Two landmark anchors were measured and authored, both status:\"needs-review\". The ampulla is the contact between the pancreatic duct and the duodenum (gap 1.26 mm, one witness), which marks the major papilla; the tail is the extreme +x point of the duct, 72.8 mm from its centroid. Five more were attempted on the duct and all REFUSED, and the refusals are recorded here so no later run re-derives them: neck via the superior mesenteric vein, 4.08 mm; groove for the splenic vein via FMA14331, 5.16 mm; uncinate via the superior mesenteric artery, 7.76 mm; body-crossing-the-aorta via FMA3784, 15.43 mm; tail via the spleen, 11.46 mm. Every one of those refusals has the same cause and it is not a tool failure: the duct is a thin tube buried inside a gland that has no mesh, so the vessels that define those parts are separated from the duct by the whole thickness of the missing pancreas. The head, neck, body and uncinate process are therefore not placeable until a pancreas mesh exists. The earlier note here — that FMA10419 and FMA7206 were not in the local decimated set — was false; both are in meshes-lite/, along with all sixteen meshes this scene uses.",
     "The lesser sac, the transverse mesocolon and the splenorenal ligament have no meshes - the same peritoneal absence recorded across this corpus. The pseudocyst relation in beat two is taught as a relation between the stomach and the gland, both of which are drawn.",
     "This scene does not claim to cover 'Spleen' or 'Portal venous system' even though the spleen and both portal tributaries appear in it. The spleen is here as the end point of the tail and as the organ lost in a distal pancreatectomy, not as a taught organ with its own relations and vasculature; both remain on the worklist."
   ]

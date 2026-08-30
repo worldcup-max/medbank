@@ -305,6 +305,34 @@
       "narration": "The left oblique fissure is slightly more vertical than the right and is the only fissure the left lung has. Two lobes on the left, one fissure; three lobes on the right, two fissures."
     },
     {
+      "key": "horizontal_fissure",
+      "label": "Horizontal fissure — right",
+      "role": "part",
+      "group": "Surfaces & landmarks",
+      "render": "anchor",
+      "color": "#f5b041",
+      "anchor": {
+        "on": "rul",
+        "uvw": [
+          0.491,
+          0.4485,
+          0.0799
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the centre of the CONTACT patch between the upper and middle lobes of the right lung — the horizontal fissure surface. One witness, gap 0.09 mm, 210 parent vertices within 8 mm of the middle lobe, centroid snapped 7.86 mm back onto the parent surface; see tools/derive-landmark.mjs --parent FMA7333 --contact FMA7383 --area 8",
+      "terms": [
+        "horizontal fissure",
+        "transverse fissure",
+        "minor fissure",
+        "fourth rib",
+        "fourth costal cartilage",
+        "right lung only"
+      ],
+      "narration": "The second fissure, on the right lung only. It runs forward from the oblique fissure in the midaxillary line along the line of the fourth rib to the sternum, cutting the upper lobe off from the middle lobe. It is the one fissure visible on a normal chest film, which is why it is the first thing to look for when a film is asymmetrical."
+    },
+    {
       "key": "cardiac_notch",
       "label": "Cardiac notch",
       "role": "part",
@@ -648,6 +676,11 @@
           "intensity": 0.9
         },
         {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "horizontal_fissure",
+          "intensity": 0.9
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "lateral"
         }
@@ -835,9 +868,9 @@
           "intensity": 0.9
         },
         {
-          "op": "PEEL_LAYER",
-          "layer": "muscle",
-          "direction": "inward"
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "horizontal_fissure",
+          "intensity": 0.8
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
@@ -850,14 +883,16 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
-    "The horizontal fissure has no anchor. Every other landmark here was measured on the meshes with tools/derive-lung-landmarks.mjs, but the middle lobe mesh FMA7383 is in the catalog and not in the local decimated set, so the upper-to-middle-lobe contact could not be measured. The fissure is taught in the narration of beats 2 and 7 by its surface marking — the fourth rib in front — and the anchor should be derived and added once that mesh is ingested. It was not typed in by eye: an anchor placed by guess puts the words 'horizontal fissure' somewhere plausible and the student believes it.",
+    "CORRECTED 2026-08-29 (audit): this note previously said the middle lobe mesh FMA7383 was 'in the catalog and not in the local decimated set', so the horizontal fissure could not be measured and had no anchor. That was false — FMA7383 is on disk, as are all twelve of this scene's meshes. The anchor has now been derived from the upper-lobe / middle-lobe contact patch (gap 0.09 mm, 210 vertices within 8 mm, centroid snapped 7.86 mm) and is shown in beats 2 and 7. It is 'needs-review' like the others.",
     "The catalog name for the right middle lobe is the unqualified 'middle lobe of lung'. That is copied verbatim, as the canonical stage requires. Only the right lung has a middle lobe, so the name is not ambiguous in practice, but a reader comparing scene to catalog should know why the word 'right' is missing.",
     "There is one generic 'bronchus' mesh and no separate right and left principal bronchi, so beat 6 traces the airway through a single context structure and the right-versus-left difference is carried by the narration rather than by two meshes. Bronchopulmonary segments — ten on the right, eight to ten on the left — have no meshes at all and are named in terms[] only, so a note mentioning 'posterior basal segment' still finds this scene.",
     "Pleura is deliberately absent. It has its own curriculum entry and its own scene, gross__thoracic-wall-diaphragm__pleura-pleural-cavity, and no pleural mesh exists in the catalog. This scene mentions the costodiaphragmatic recess only where it explains the lung's lower border.",
     "The phrenic and vagus nerves are named in beat 5 because their relation to the root is examinable, but neither is drawn — no nerve of the thorax is in the catalog. The azygos vein, which arches over the right root, is likewise named and not drawn.",
-    "All nine anchors are status 'needs-review' with the measurement that placed them recorded in calibrated_by. They are honest measurements of a contact or an extreme, not a claim that the label is in the exact spot an anatomist would mark: the cardiac notch anchor, for example, is the nearest contact between the left upper lobe and the wall of the heart, which lands in the cardiac impression rather than precisely on the notch's upper edge. A human should clear each one in-app before it is released."
+    "All ten anchors are status 'needs-review' with the measurement that placed them recorded in calibrated_by. They are honest measurements of a contact or an extreme, not a claim that the label is in the exact spot an anatomist would mark: the cardiac notch anchor, for example, is the nearest contact between the left upper lobe and the wall of the heart, which lands in the cardiac impression rather than precisely on the notch's upper edge. A human should clear each one in-app before it is released."
   ]
 }
