@@ -26,23 +26,34 @@ ok(!dependencyGate({removeA_changes:true,removeB_changes:true,inferential:false,
 { const r=qaScore({dependency:3,coherence:2,educational:2,discrimination:2,targetClarity:1,difficulty:1,noArtificialComplexity:2});
   ok(r.total===13 && !r.approve && /total/.test(r.reason), 'Q4 total 13 → reject'); }
 
-// --- readiness gate ---
+// --- readiness gate (PRODUCTION contract: ≥100 approved · ≥8 families · each family ≥10 · each pair ≥3 · top ≤30%) ---
 function bank(families){ const out=[]; Object.keys(families).forEach(f=>{ for(let i=0;i<families[f];i++) out.push({integration_family:f}); }); return out; }
-// ready: 8 families x 3 = 24 (>=20 total, >=2 each), none dominates (<=35%)
-{ const fams={}; ['cardio_renal','cardio_endocrine','endocrine_renal','resp_cardiac','neuro_endocrine','pregnancy_cardio','gi_hepatic','onco_haem'].forEach(f=>fams[f]=3);
-  const r=readinessGate(bank(fams)); ok(r.ready && r.total===24 && r.families===8, 'R1 20+/8 families/≥2 each/no dominance → READY'); }
-// not ready: too few total (16 < 20)
-{ const r=readinessGate(bank({cardio_renal:8,cardio_endocrine:8})); ok(!r.ready && !r.checks.enough_total, 'R2 <20 total → not ready'); }
-// not ready: one family dominates (>35%)
-{ const r=readinessGate(bank({cardio_renal:12, cardio_endocrine:2,endocrine_renal:2,resp_cardiac:2,neuro_endocrine:2,pregnancy_cardio:2,gi_hepatic:2,onco_haem:2}));
-  ok(!r.ready && !r.checks.no_family_dominates && r.biggest_family_share>0.35, 'R3 one family >35% → not ready (no silent skew)'); }
+const TEN_FAMILIES=['cardio_renal','cardio_endocrine','endocrine_renal','resp_cardiac','neuro_endocrine','pregnancy_cardio','gi_hepatic','onco_haem','hepatic_pharm','infect_immunology'];
+// ready: 10 families x 10 = 100, each ≥10, each pair ≥3, top share 10% ≤30%
+{ const fams={}; TEN_FAMILIES.forEach(f=>fams[f]=10);
+  const r=readinessGate(bank(fams)); ok(r.ready && r.total===100 && r.families===10, 'R1 100 total / 10 families / each ≥10 / balanced → READY'); }
+// not ready: too few total (80 < 100) even if each family ≥10 — volume gate
+{ const fams={}; ['cardio_renal','cardio_endocrine','endocrine_renal','resp_cardiac','neuro_endocrine','pregnancy_cardio','gi_hepatic','onco_haem'].forEach(f=>fams[f]=10);
+  const r=readinessGate(bank(fams)); ok(!r.ready && !r.checks.enough_total, 'R2 80<100 total → not ready (volume)'); }
+// not ready: one family dominates (>30%)
+{ const r=readinessGate(bank({cardio_renal:40, cardio_endocrine:10,endocrine_renal:10,resp_cardiac:10,neuro_endocrine:10,pregnancy_cardio:10,gi_hepatic:10,onco_haem:10}));
+  ok(!r.ready && !r.checks.no_family_dominates && r.biggest_family_share>0.30, 'R3 one family >30% → not ready (no silent skew)'); }
 // not ready: <8 families
 { const r=readinessGate(bank({cardio_renal:60,cardio_endocrine:60})); ok(!r.ready && !r.checks.enough_families, 'R4 <8 families → not ready (breadth)'); }
-// analytics pairs: only families with >=3
+// analytics pairs: only families with >=3 are analytics-ready
 { const r=readinessGate(bank({cardio_renal:5, cardio_endocrine:2, neuro_endocrine:1}));
   ok(r.analytics_ready_families.length===1 && r.analytics_ready_families[0]==='cardio_renal', 'R5 only families ≥3 are analytics-ready (MIN_EV)'); }
-// realistic infect-noise bank (what we actually have) → NOT ready
-{ const r=readinessGate(bank({cardio_endocrine:3})); ok(!r.ready, 'R6 current real supply (~cardio_endocrine 3) → NOT ready (matches the live verdict)'); }
+// each-family-full gate: 10 families present but two below 10 → not ready + blockers name the shortfall
+{ const fams={}; TEN_FAMILIES.forEach(f=>fams[f]=10); fams.cardio_endocrine=2; fams.endocrine_renal=2;
+  const r=readinessGate(bank(fams)); ok(!r.ready && !r.checks.every_family_full && !r.checks.every_pair_ready, 'R6 two families below 10 (and below 3) → not ready (per-family + per-pair)'); }
+// deficits expose per-family shortfall to the ≥10 gate (drives deficit-aware acquisition)
+{ const fams={}; TEN_FAMILIES.forEach(f=>fams[f]=10); fams.endocrine_renal=2;
+  const r=readinessGate(bank(fams)); ok(r.deficits.endocrine_renal===8 && r.deficits.cardio_renal===0, 'R7 deficits = per-family shortfall to ≥10'); }
+// FAIL CLOSED: empty bank is never ready
+{ const r=readinessGate([]); ok(!r.ready && r.total===0, 'R8 empty bank → fail closed (not ready)'); }
+// current real supply (47, min family 2) → NOT ready, matches the live verdict
+{ const fams={neuro_endocrine:9,resp_cardiac:9,gi_hepatic:5,infect_immunology:5,cardio_renal:5,onco_haem:4,pregnancy_cardio:3,hepatic_pharm:3,cardio_endocrine:2,endocrine_renal:2};
+  const r=readinessGate(bank(fams)); ok(!r.ready && r.total===47 && !r.checks.enough_total, 'R9 live corpus (47) → NOT ready (production gate)'); }
 
 // --- lifecycle ---
 ok(nextStatus('candidate','ai_review')==='ai_reviewed' && nextStatus('ai_reviewed','to_human')==='pending' && nextStatus('pending','approve')==='approved', 'L1 lifecycle candidate→ai_reviewed→pending→approved');

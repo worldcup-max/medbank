@@ -111,12 +111,51 @@ Per-box record templates:
 
 ---
 
+## MEGA QBANK — CANONICAL PHASE SPINE (A → F)
+
+Two distinct tracks — never conflate them:
+- **QA ENGINE** = the quality-control machinery UNDERNEATH the corpus (infrastructure milestone).
+- **PHASE A–F** = the product/corpus journey ON TOP of it (product milestone).
+V1.8.2 hardened the QA engine; it did NOT advance the phase. We are still in Phase A.
+
+```
+                 MEGA QBANK
+                      │
+         ┌────────────┴────────────┐
+         │  QA ENGINE  🔒 V1.8.2   │   R1 dependency → R2 clinical/mechanism
+         │  R1 · R2 · R3 · R4      │   → R3 SBA → R4 deterministic redundancy
+         └────────────┬────────────┘
+                      ↓
+   PHASE A  CORPUS GROWTH → READINESS         🟢 CURRENT  (47 / 100 approved, 10 families)
+     gate: ≥100 approved · ≥8 families · ≥10/family · no family >30% · ≥3/integration-pair
+                      ↓
+   PHASE B  INTEGRATED MODE (student-facing)  🔜  one primary target_id; integrated_topics[]/case_id = metadata; selector serves; requested-vs-delivered
+                      ↓
+   PHASE C  REASONING PROFILE — integration axis  🔜  evidence-gated, NO premature claims; [Drill this] → Smart Drill
+                      ↓
+   PHASE D  A8 RETEST POOL → CANONICAL PROMOTION  🔜  promotion contract + quality gate; PRESERVE target identity
+                      ↓
+   PHASE E  CASE MODE — multi-stage clinical cases  🔜  content-gated on genuine integrated inventory (NOT yet branching)
+                      ↓
+   PHASE F  BRANCHING  🔜  evolving patient state · multi-step decisions · adaptive paths
+```
+
+**Critical-path spine:** A (grow) → B (unlock) → D (promote) → E (cases) → F (branching); C is a fast-follow to B.
+Branching is Phase F, NOT the next thing — building it now = a clever UI over a thin corpus. Do NOT jump QA → branching.
+
+Phase A is not merely "47 → 100": the corpus must be structurally DIVERSE (family + integration-pair balance) or Case Mode/branching inherit a bad foundation. Track family/pair balance + R4 catch-rate by archetype (redundant / contraindicated / wrong-sequencing / mechanism-wording) as production QA feedback.
+
+---
+
 ## CURRENT POSITION & IMMEDIATE PATH
 
-Foundation 🔒 → A6 🔒 → A7 🔒 → A8 ⏸ → **V1.6: Phase 1 🟢 live-collecting · Phase 2 ✅ ON · Phase 3 ✅ ON · Phase 4 📝 contract** → V1.7 → V1.8+. (Frank activated Phase 2/3 on the diagnosis-validation evidence; live A/B runs, cut if it doesn't beat generic.)
+Foundation 🔒 → A6 🔒 → A7 🔒 → A8 ⏸ (Phase D) → **V1.6: Phase 1 🟢 · Phase 2 ✅ ON · Phase 3 ✅ ON · Phase 4 📝** → **QA ENGINE 🔒 V1.8.2** → **PHASE A 🟢 CURRENT** → B → C → D → E → F.
 
-Do NOT: reopen Target retrieval, redo A6, tune V1 adjudicator, or start V1.7/V1.8 in parallel.
+Immediate objective: run weekday acquisition into the human-review queue, take 47 → 100+ approved while holding breadth (family + integration-pair balance) and quality, then unlock Integrated Mode (Phase B).
 
-**Working protocol (agreed):** each run I re-open this file and tick what shipped. Before starting any box, I state what I understand about that box and ask for the context you'll provide — no code until the contract is agreed.
+Do NOT: reopen Target retrieval, redo A6, tune V1 adjudicator, modify the frozen R1/R2/R3/R4 QA engine without a documented defect, or start Phase B/E/F before their gates.
 
-_Last ticked: 2026-08-25 — 🔒 V1.6 ARCHITECTURALLY COMPLETE + FROZEN. Adversarial battery 20/20 (all 10 scenarios: oscillating, mixed, sparse, persistent miscon/gap, intervention-resistant, exhaustion, restart, concurrent, flag transitions). 15/15 harnesses green. ONE open item = a product decision, not a bug: no bounded-escalation rule for Targets that repeatedly fail intervention (recurs indefinitely once A7 supplies) — deferred to Frank. gap+fragile live, misconception built/off. V1.7 may now open. A6/A7 untouched._
+**Working protocol (agreed):** each run I re-open this file and tick what shipped. Before starting any box, I state what I understand and ask for context — no code until the contract is agreed.
+
+_Last ticked: 2026-08-30 — 🔒 QA ENGINE V1.8.2 FROZEN: R1 dependency → R2 clinical/mechanism → R3 SBA → R4 deterministic medication-redundancy. Live gate passed (6-case #3 hard citing Na trajectory; V18-4 SGLT2i + V18-5 β-blocker caught via R4 with R1 passing, 3× stable; V18-6 legit combo not false-flagged). Offline 92/92. V1.8/1.8.1/1.8.2 scope docs written. Weekday integrated-qbank-acquisition schedule RESUMED into human-review queue. Canonical phase spine A→F established; branching correctly seated at Phase F. Phase A is current (47/100 approved). A6/A7/R1/R3 untouched._
+_Prior tick: 2026-08-25 — 🔒 V1.6 ARCHITECTURALLY COMPLETE + FROZEN. Adversarial 20/20; 15/15 harnesses green. Open item: no bounded-escalation rule for Targets that repeatedly fail intervention — deferred. gap+fragile live, misconception built/off._

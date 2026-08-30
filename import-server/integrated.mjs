@@ -171,25 +171,36 @@ export function qaScore(scores){
     reason: approve?null:(dep<QA_DEP_MIN ? ("dependency "+dep+" < "+QA_DEP_MIN+" (mandatory)") : ("total "+total+" < "+QA_THRESHOLD)) };
 }
 
-/* Content-readiness gate over the APPROVED bank. Do NOT expose Integrated Mode until ready. */
-export const READINESS = { minApproved:20, minFamilies:8, minPerFamily:2, maxFamilyShare:0.35, minPerPairAnalytics:3 };
+/* SINGLE CANONICAL content-readiness gate over the APPROVED bank (V1.8.2). There is exactly ONE definition — the
+   PRODUCTION contract — so no future caller can accidentally use a relaxed variant. FAIL CLOSED: ready is false
+   unless there is real inventory AND every check passes. Integrated Mode stays LOCKED until ready===true. */
+export const READINESS = { minApproved:100, minFamilies:8, minPerFamily:10, maxFamilyShare:0.30, minPerPairAnalytics:3 };
 export function readinessGate(approved, cfg){
   const R=Object.assign({}, READINESS, cfg||{});
-  approved=approved||[];
+  approved=Array.isArray(approved)?approved:[];
   const byFamily={}; approved.forEach(it=>{ const f=(it&&it.integration_family)||"?"; byFamily[f]=(byFamily[f]||0)+1; });
   const total=approved.length, families=Object.keys(byFamily);
-  const familiesOverMin=families.filter(f=>byFamily[f]>=R.minPerFamily);
+  const familiesFull = families.filter(f=>byFamily[f]>=R.minPerFamily);        // present families at the ≥10 full gate
+  const pairsReady   = families.filter(f=>byFamily[f]>=R.minPerPairAnalytics); // present pairs at the ≥3 analytics gate
   const biggestShare = total ? Math.max(0, ...families.map(f=>byFamily[f]/total)) : 0;
+  const enoughFamilies = families.length>=R.minFamilies;
   const checks={
     enough_total: total>=R.minApproved,
-    enough_families: families.length>=R.minFamilies,
-    families_over_min_size: familiesOverMin.length>=R.minFamilies,
-    no_family_dominates: biggestShare<=R.maxFamilyShare
+    enough_families: enoughFamilies,
+    every_family_full: enoughFamilies && families.length>0 && familiesFull.length===families.length,   // each present family ≥10
+    every_pair_ready:  enoughFamilies && families.length>0 && pairsReady.length===families.length,      // each present pair ≥3
+    no_family_dominates: total>0 && biggestShare<=R.maxFamilyShare
   };
-  const ready = Object.values(checks).every(Boolean);
-  const analytics_ready_families = families.filter(f=>byFamily[f]>=R.minPerPairAnalytics);
+  const ready = total>0 && Object.values(checks).every(Boolean);   // FAIL CLOSED
+  const blockers=[];
+  if(!checks.enough_total) blockers.push(total+" / "+R.minApproved+" approved");
+  if(!checks.enough_families) blockers.push(families.length+" / "+R.minFamilies+" families present");
+  if(!checks.every_pair_ready) blockers.push((families.length-pairsReady.length)+" pair(s) below "+R.minPerPairAnalytics);
+  if(!checks.every_family_full) blockers.push((families.length-familiesFull.length)+" family(ies) below "+R.minPerFamily);
+  if(!checks.no_family_dominates) blockers.push("top family "+Math.round(biggestShare*100)+"% > "+Math.round(R.maxFamilyShare*100)+"%");
+  const deficits={}; families.forEach(f=>{ deficits[f]=Math.max(0, R.minPerFamily-byFamily[f]); });   // shortfall to the ≥10 full gate, per family — drives deficit-aware acquisition
   return { ready, total, families:families.length, byFamily, biggest_family_share:Math.round(biggestShare*100)/100,
-    checks, analytics_ready_families, gate:R };
+    checks, analytics_ready_families:pairsReady, blockers, deficits, gate:R };
 }
 
 /* Deterministic answer-position rebalancer. The transformer biases the key toward option A; we FIX it after

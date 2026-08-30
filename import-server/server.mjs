@@ -2552,7 +2552,8 @@ app.get("/admin/integrated/readiness", async (req,res)=>{
     const gate=readinessGate((r.data||[]).map(x=>({ integration_family:x.integration_family })));
     const counts=await admin.from("integrated_items").select("review_status");
     const by={}; (counts.data||[]).forEach(x=>{ by[x.review_status]=(by[x.review_status]||0)+1; });
-    res.json({ ok:true, readiness:gate, by_status:by });
+    // fail-closed: Integrated Mode is available ONLY when the single production gate says ready===true.
+    res.json({ ok:true, integrated_mode: gate.ready?"available":"locked", readiness:gate, blockers:gate.blockers, deficits:gate.deficits, by_status:by });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 
