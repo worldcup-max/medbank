@@ -66,7 +66,11 @@
       "iliotibial tract",
       "quadriceps wasting",
       "intramuscular injection vastus lateralis",
-      "straight leg raise"
+      "straight leg raise",
+      "great saphenous vein",
+      "fascia lata",
+      "profunda femoris",
+      "suprapatellar bursa"
     ]
   },
   "camera": {
@@ -674,12 +678,15 @@
     "No nerve of the lower limb exists as a model, so the femoral nerve is authored as a traced concept path from psoas major through iliacus and under the inguinal ligament to the muscles it supplies. Its root value and its branches are narration only.",
     "There is no femoral artery or femoral vein in the catalog — the arterial supply of the quadriceps from the profunda femoris and its perforators is named, not shown, and the NAVEL order of the femoral triangle is described rather than displayed. This matters most for the separate Femoral triangle and Adductor canal entries, which this scene does not claim to cover.",
     "The anterior inferior iliac spine, the linea aspera, the intertrochanteric line and the tibial tuberosity are sub-features of whole-bone meshes. They are taught by lighting the hip bone, the femur or the tibia and naming the feature. Authoring them as landmark anchors is the next obvious improvement, but the meshes were not measured in this run and an anchor placed by eye would be worse than none.",
+    "The great saphenous vein, recited as the first layer in the dissection order in beat 11, has no mesh — searched as saphenous, saphena and vein, and the catalog holds no vein below the external iliac. It is named in that beat and not drawn.",
     "Articularis genu has no separate mesh, so it is described as the deep fibres of vastus intermedius rather than shown apart from it.",
     "The suprapatellar bursa and the knee joint capsule are not modelled, so the relation of the bursa to the joint cavity is narrated only.",
     "This scene does not cover Femur, Femoral triangle or Adductor canal. The femur, hip bone and tibia appear here only as the frame the muscle is stretched over, and sartorius appears as the boundary muscle rather than as the roof of the canal."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-30",
+    "audited_by": "task"
   }
 }

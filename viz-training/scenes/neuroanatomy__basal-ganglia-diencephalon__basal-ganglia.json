@@ -1,0 +1,629 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__basal-ganglia-diencephalon__basal-ganglia",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Basal Ganglia & Diencephalon",
+  "structure": "Basal ganglia",
+  "covers": [
+    "Basal ganglia"
+  ],
+  "learning_goal": "Assemble the deep grey masses by name — which nuclei make the striatum, which make the lentiform nucleus, and where the internal capsule runs between them — then use that arrangement to explain why a small bleed here costs a whole half of the body and why the movement disorders come in a too-little and a too-much pair.",
+  "status": "candidate",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "basal ganglia",
+      "movement disorders",
+      "stroke",
+      "deep brain stimulation",
+      "neuroimaging orientation"
+    ],
+    "terms": [
+      "basal ganglia",
+      "basal nuclei",
+      "corpus striatum",
+      "striatum",
+      "neostriatum",
+      "caudate nucleus",
+      "head of caudate",
+      "body of caudate",
+      "tail of caudate",
+      "putamen",
+      "globus pallidus",
+      "pallidum",
+      "lentiform nucleus",
+      "lenticular nucleus",
+      "internal capsule",
+      "anterior limb of internal capsule",
+      "genu of internal capsule",
+      "posterior limb of internal capsule",
+      "corticospinal tract",
+      "corona radiata",
+      "thalamus",
+      "subthalamic nucleus",
+      "substantia nigra",
+      "direct pathway",
+      "indirect pathway",
+      "dopamine",
+      "D1 receptor",
+      "D2 receptor",
+      "hypokinetic",
+      "hyperkinetic",
+      "Parkinson's disease",
+      "Huntington's disease",
+      "boxcar ventricles",
+      "hemiballismus",
+      "Wilson's disease",
+      "lacunar infarct",
+      "lenticulostriate artery",
+      "hypertensive haemorrhage",
+      "pure motor stroke",
+      "deep brain stimulation",
+      "amygdala",
+      "insula",
+      "external capsule",
+      "claustrum"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": 0.35
+  },
+  "structures": [
+    {
+      "key": "caud_r",
+      "name": "right caudate nucleus",
+      "label": "Caudate nucleus (R)",
+      "role": "part",
+      "group": "Striatum",
+      "layer": "organ",
+      "color": "#4f9bff",
+      "refs": {
+        "bodyparts3d": "FMA72826"
+      },
+      "terms": [
+        "caudate nucleus",
+        "head of caudate",
+        "body of caudate",
+        "tail of caudate",
+        "striatum",
+        "corpus striatum"
+      ],
+      "narration": "The C-shaped one. Its bulbous head bulges into the frontal horn of the lateral ventricle, its body arches back over the thalamus in the floor of the ventricular body, and its thin tail curves down and forward into the roof of the temporal horn to end at the amygdala. It follows the ventricle everywhere, so if you can find the lateral ventricle you have found the caudate."
+    },
+    {
+      "key": "caud_l",
+      "name": "left caudate nucleus",
+      "label": "Caudate nucleus (L)",
+      "role": "part",
+      "group": "Striatum",
+      "layer": "organ",
+      "color": "#4f9bff",
+      "refs": {
+        "bodyparts3d": "FMA72827"
+      },
+      "terms": [
+        "caudate nucleus",
+        "left caudate"
+      ],
+      "narration": "The left member of the pair, identical in form. Both are shown so that the C-shape reads in three dimensions rather than as a slice."
+    },
+    {
+      "key": "put_r",
+      "name": "right putamen",
+      "label": "Putamen (R)",
+      "role": "part",
+      "group": "Striatum",
+      "layer": "organ",
+      "color": "#e07b7b",
+      "refs": {
+        "bodyparts3d": "FMA72828"
+      },
+      "terms": [
+        "putamen",
+        "striatum",
+        "lentiform nucleus",
+        "shell"
+      ],
+      "narration": "The most lateral of the deep grey masses, a shell of grey lying just deep to the insula. It belongs to two different groupings at once: with the caudate it is the striatum, and with the globus pallidus it is the lentiform nucleus. That double membership is the single most confusing thing here and the next beat exists to fix it."
+    },
+    {
+      "key": "put_l",
+      "name": "left putamen",
+      "label": "Putamen (L)",
+      "role": "part",
+      "group": "Striatum",
+      "layer": "organ",
+      "color": "#e07b7b",
+      "refs": {
+        "bodyparts3d": "FMA72829"
+      },
+      "terms": [
+        "putamen",
+        "left putamen"
+      ],
+      "narration": "The left putamen. Paired with the right so the symmetry of the lentiform wedge is visible from in front."
+    },
+    {
+      "key": "gp_r",
+      "name": "right globus pallidus",
+      "label": "Globus pallidus (R)",
+      "role": "part",
+      "group": "Pallidum",
+      "layer": "organ",
+      "color": "#f0c419",
+      "refs": {
+        "bodyparts3d": "FMA72830"
+      },
+      "terms": [
+        "globus pallidus",
+        "pallidum",
+        "lentiform nucleus",
+        "GPi",
+        "GPe",
+        "pallidotomy"
+      ],
+      "narration": "The pale one, medial to the putamen and wedged against the internal capsule. It is the output nucleus of the whole system: almost everything the basal ganglia do to movement, they do by changing how hard this nucleus inhibits the thalamus. It has an internal and an external segment which behave quite differently, and this catalog carries it as one undivided mesh — so the segments are named in beat 5 and not drawn."
+    },
+    {
+      "key": "gp_l",
+      "name": "left globus pallidus",
+      "label": "Globus pallidus (L)",
+      "role": "part",
+      "group": "Pallidum",
+      "layer": "organ",
+      "color": "#f0c419",
+      "refs": {
+        "bodyparts3d": "FMA72831"
+      },
+      "terms": [
+        "globus pallidus",
+        "left globus pallidus"
+      ],
+      "narration": "The left globus pallidus, same undivided mesh, same caveat about its two segments."
+    },
+    {
+      "key": "ic_ant_r",
+      "name": "anterior limb of right internal capsule",
+      "label": "Internal capsule — anterior limb (R)",
+      "role": "part",
+      "group": "Internal capsule",
+      "layer": "organ",
+      "color": "#ffffff",
+      "refs": {
+        "bodyparts3d": "FMA72908"
+      },
+      "terms": [
+        "anterior limb of internal capsule",
+        "internal capsule",
+        "frontopontine fibres",
+        "anterior thalamic radiation"
+      ],
+      "narration": "The white sheet driven between the head of the caudate medially and the lentiform nucleus laterally. It is what separates the two halves of the striatum, and the grey bridges that cross it between caudate and putamen are what gave the striatum its striped name. Only this limb exists as a mesh: the genu and the posterior limb do not, and beat 3 says so where it matters most."
+    },
+    {
+      "key": "ic_ant_l",
+      "name": "anterior limb of left internal capsule",
+      "label": "Internal capsule — anterior limb (L)",
+      "role": "part",
+      "group": "Internal capsule",
+      "layer": "organ",
+      "color": "#ffffff",
+      "refs": {
+        "bodyparts3d": "FMA72909"
+      },
+      "terms": [
+        "anterior limb of internal capsule",
+        "left internal capsule"
+      ],
+      "narration": "The left anterior limb, dividing the left caudate head from the left lentiform nucleus in the same way."
+    },
+    {
+      "key": "thal_r",
+      "name": "right thalamus",
+      "label": "Thalamus (R)",
+      "role": "context",
+      "group": "Diencephalon — not basal ganglia",
+      "layer": "organ",
+      "color": "#9c74c4",
+      "refs": {
+        "bodyparts3d": "FMA258714"
+      },
+      "terms": [
+        "thalamus",
+        "diencephalon",
+        "ventral anterior nucleus",
+        "ventral lateral nucleus"
+      ],
+      "narration": "Shown as context and deliberately not counted as a basal ganglion: it is diencephalon, not telencephalon, and it is the target the pallidum acts on rather than part of the machinery. Geographically it is the medial neighbour — the posterior limb of the internal capsule runs between it and the lentiform nucleus. It has its own scene."
+    },
+    {
+      "key": "thal_l",
+      "name": "left thalamus",
+      "label": "Thalamus (L)",
+      "role": "context",
+      "group": "Diencephalon — not basal ganglia",
+      "layer": "organ",
+      "color": "#9c74c4",
+      "refs": {
+        "bodyparts3d": "FMA258716"
+      },
+      "terms": [
+        "thalamus",
+        "left thalamus"
+      ],
+      "narration": "The left thalamus, context for the same reason."
+    },
+    {
+      "key": "lv_r",
+      "name": "right lateral ventricle",
+      "label": "Lateral ventricle (R)",
+      "role": "context",
+      "group": "Cavities that shape them",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78449"
+      },
+      "terms": [
+        "lateral ventricle",
+        "frontal horn",
+        "body of lateral ventricle",
+        "temporal horn",
+        "boxcar ventricles"
+      ],
+      "narration": "Ghosted, because the caudate cannot be understood without it. Head against the frontal horn, body along the floor of the body, tail in the roof of the temporal horn — the caudate is a cast of the ventricle's convex side, and that is why caudate atrophy shows on a scan as a squared-off frontal horn."
+    },
+    {
+      "key": "lv_l",
+      "name": "left lateral ventricle",
+      "label": "Lateral ventricle (L)",
+      "role": "context",
+      "group": "Cavities that shape them",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78450"
+      },
+      "terms": [
+        "lateral ventricle",
+        "left lateral ventricle"
+      ],
+      "narration": "The left cavity, ghosted for the same reason."
+    },
+    {
+      "key": "v3",
+      "name": "third ventricle",
+      "label": "Third ventricle",
+      "role": "context",
+      "group": "Cavities that shape them",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78454"
+      },
+      "terms": [
+        "third ventricle",
+        "midline",
+        "diencephalon"
+      ],
+      "narration": "The midline slit between the two thalami. It marks the medial limit of the whole arrangement: everything in this scene is lateral to it, and the deep grey of the two sides never meets across it."
+    },
+    {
+      "key": "ins_r",
+      "name": "right insula",
+      "label": "Insula (R)",
+      "role": "context",
+      "group": "Lateral neighbours",
+      "layer": "organ",
+      "color": "#b0b0b0",
+      "refs": {
+        "bodyparts3d": "FMA72977"
+      },
+      "terms": [
+        "insula",
+        "insular cortex",
+        "external capsule",
+        "claustrum",
+        "extreme capsule"
+      ],
+      "narration": "The buried cortex the putamen sits beneath, and the lateral bookend of the whole stack. Between the two, going outwards, are the external capsule, the claustrum and the extreme capsule — three layers this catalog does not carry, so on screen the putamen appears to touch the insula when in life it does not."
+    },
+    {
+      "key": "ins_l",
+      "name": "left insula",
+      "label": "Insula (L)",
+      "role": "context",
+      "group": "Lateral neighbours",
+      "layer": "organ",
+      "color": "#b0b0b0",
+      "refs": {
+        "bodyparts3d": "FMA72978"
+      },
+      "terms": [
+        "insula",
+        "left insula"
+      ],
+      "narration": "The left insula, the same lateral bookend on the other side."
+    },
+    {
+      "key": "amyg_r",
+      "name": "right amygdala",
+      "label": "Amygdala (R)",
+      "role": "context",
+      "group": "Lateral neighbours",
+      "layer": "organ",
+      "color": "#7fb069",
+      "refs": {
+        "bodyparts3d": "FMA72832"
+      },
+      "terms": [
+        "amygdala",
+        "tail of caudate",
+        "temporal horn",
+        "limbic system"
+      ],
+      "narration": "Context, and the reason the caudate's tail stops where it does: the tail runs forward in the roof of the temporal horn and ends on the amygdala. Functionally the amygdala is limbic rather than motor, and it is taught in the limbic scene, but it is the anatomical full stop at the end of the C."
+    },
+    {
+      "key": "amyg_l",
+      "name": "left amygdala",
+      "label": "Amygdala (L)",
+      "role": "context",
+      "group": "Lateral neighbours",
+      "layer": "organ",
+      "color": "#7fb069",
+      "refs": {
+        "bodyparts3d": "FMA72833"
+      },
+      "terms": [
+        "amygdala",
+        "left amygdala"
+      ],
+      "narration": "The left amygdala, the same full stop on the left."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Deep grey, and how deep",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Striatum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Pallidum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Cavities that shape them"
+        }
+      ],
+      "narration": "Four masses of grey matter buried in the white matter of each hemisphere, lit here against the ghosted ventricles. They are grey where they should be white, which is the whole reason they are called nuclei rather than cortex. Note what is lit and what is not: the caudate, the putamen and the globus pallidus are basal ganglia; the thalamus beside them is not, and neither is the amygdala, although both are often taught in the same breath."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The C that follows the ventricle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "caud_r",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "caud_r",
+          "path": [
+            "caud_r",
+            "lv_r",
+            "amyg_r"
+          ],
+          "duration": 4500
+        }
+      ],
+      "narration": "Follow the right caudate from front to end. Head in the frontal horn, body arching backwards over the thalamus, tail curling down and forward inside the temporal horn to finish on the amygdala. It is a horseshoe opening forwards, and it is a horseshoe because the ventricle is one — the developing hemisphere swings back and down and takes both with it. Everything C-shaped in the hemisphere is C-shaped for this one reason: caudate, lateral ventricle, fornix, hippocampus."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "The axial cut, and the capsule between",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.05,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Internal capsule",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ic_ant_r",
+          "to": "caud_r",
+          "kind": "boundary"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ic_ant_r",
+          "to": "put_r",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "This is the picture every axial scan shows and it reads as a V opening forwards on each side. Caudate head medial, lentiform nucleus lateral, and the white anterior limb driven between them — that is what is lit. The rest of the V is described, not drawn, and you must hold the difference: from the anterior limb the capsule bends at the genu and continues as the posterior limb, which runs between the thalamus medially and the lentiform nucleus laterally. Neither the genu nor the posterior limb exists as a mesh in this catalog, so the capsule on screen stops halfway round the bend. Since the posterior limb is the part that carries the corticospinal fibres, read beat 6 as narration over a gap rather than over a shape."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "Two groupings of the same three nuclei",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Striatum",
+            "Pallidum"
+          ],
+          "layout": "overlay"
+        }
+      ],
+      "narration": "The naming trips everyone once, so take it as two overlapping sets over the same three nuclei. Striatum, the input side, is caudate plus putamen — lit as one colour here — and it is where the cortex sends its signal. Lentiform nucleus, a purely visual grouping shaped like a lens on a coronal section, is putamen plus globus pallidus. Corpus striatum is all three together. So the putamen is in both sets and the caudate and the pallidus in one each: input is striatum, output is pallidum, and lentiform is a shape rather than a function. On this coronal cut the lentiform wedge is the obvious one, which is exactly why the older name stuck."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "The loop, and the two ways round it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:motor-loop",
+          "path": [
+            "put_r",
+            "gp_r",
+            "thal_r"
+          ],
+          "duration": 5000
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "gp_r",
+          "to": "thal_r",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "One loop, traced here from striatum to pallidum to thalamus: cortex feeds the striatum, the striatum works on the pallidum, the pallidum inhibits the thalamus, and the thalamus drives cortex back. The system's resting state is a brake held on, and movement is the brake released. The direct pathway releases it — striatum inhibits the internal pallidal segment, the thalamus is disinhibited, movement is facilitated. The indirect pathway tightens it, running striatum to external segment to subthalamic nucleus and back to the internal segment, which inhibits the thalamus harder. Dopamine from the substantia nigra excites the direct route through D1 receptors and inhibits the indirect through D2, so it favours movement either way. Three of those parts are not on screen: this catalog has no substantia nigra and no subthalamic nucleus, and the globus pallidus is one undivided mesh with no internal or external segment. What is traced is the anatomical skeleton of the loop; the two pathways are described over it."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Why a small lesion here is a large deficit",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.05
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "put_r",
+            "Internal capsule"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "The clinical weight of this region is mostly about its neighbour. Every motor and sensory fibre for one half of the body funnels from the fan of the corona radiata into the narrow internal capsule, so a lesion of a few millimetres there does what a large cortical lesion would do — a dense contralateral hemiplegia with no cortical signs, the pure motor lacunar stroke. The putamen lit beside it is the commonest site of hypertensive intracerebral haemorrhage, because the small lenticulostriate branches that supply both it and the capsule come straight off the middle cerebral artery and take its pressure without a step down. That is why a putaminal bleed presents as a capsular stroke: the blood is next door and the capsule is what suffers. No cerebral artery exists in this catalog, so the vessels are named here and not drawn."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Too little movement, too much movement",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "caud_r",
+            "put_r",
+            "gp_r"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Cavities that shape them"
+        }
+      ],
+      "narration": "Sort the disorders by which way the brake moved. Too much brake is hypokinetic: Parkinson's disease, where nigral dopamine is lost, the direct pathway is under-driven and the indirect over-driven — bradykinesia, rigidity, a resting tremor. Too little brake is hyperkinetic: Huntington's disease, where the striatum and above all the caudate degenerates, so look at the caudate lit against the ghosted ventricle and picture that head wasting away until the frontal horn squares off into the boxcar shape a scan reports. Hemiballismus, violent flinging of one side, is classically a lesion of the contralateral subthalamic nucleus — the indirect pathway's amplifier, absent from this catalog. Wilson's disease attacks the putamen and can be seen there as cavitation. Deep brain stimulation works by putting an electrode back into this loop, usually in the subthalamic nucleus or the internal pallidal segment."
+    }
+  ],
+  "gaps": [
+    "NO SUBSTANTIA NIGRA AND NO SUBTHALAMIC NUCLEUS. Searched substantia, nigra, subthalam, Luys, pars compacta, pars reticulata, nucleus, tegment, crus, peduncle across all 934 entries; the only 'nucleus' hits are the two caudate nuclei. Both are functionally part of the basal ganglia system and both are named in beats 5 and 7 as described-not-shown, which those beats state in themselves. The peduncle of midbrain (FMA62394) exists and contains the substantia nigra within it, but lighting a peduncle and calling it the nigra would be a mesh pretending to be a nucleus, so it was not used.",
+    "THE GLOBUS PALLIDUS IS ONE UNDIVIDED MESH. FMA72830 / FMA72831 carry no internal or external segment, and the two segments do opposite things in the loop — GPe belongs to the indirect pathway, GPi is the output that inhibits the thalamus. Beat 5 names both and says the mesh does not divide. Searched pallid, medial pallidum, lateral pallidum, GPi, GPe, segment.",
+    "ONLY THE ANTERIOR LIMB OF THE INTERNAL CAPSULE EXISTS (FMA72908 / FMA72909). No genu, no posterior limb, no retrolentiform or sublentiform part, no corona radiata, no corticospinal tract — searched capsule, genu, limb, corona, radiata, corticospinal, pyramidal, projection, tract. This is the most consequential absence in the scene, because the posterior limb is the part the clinical teaching turns on. Beat 3 states it at the point the student would otherwise assume the whole capsule is lit, and beat 6 is written as narration over an acknowledged gap rather than as a pointer at a shape.",
+    "NO CLAUSTRUM, NO EXTERNAL CAPSULE, NO EXTREME CAPSULE, and no nucleus accumbens or ventral striatum (searched claustr, external capsule, extreme, accumbens, ventral striatum, basal forebrain, substantia innominata, nucleus basalis). The consequence is visible rather than merely absent: with those three layers missing, the putamen and the insula appear to touch on screen. The insula structure card says so.",
+    "NO INTRACRANIAL VESSEL OF ANY KIND, so the lenticulostriate arteries of beat 6 are named and not drawn. Searched lenticulostriate, striate, cerebral artery, middle cerebral, choroidal, communicating, Willis, perforator. This matches the neuroanatomy blood-supply routing already recorded elsewhere in this course: the catalog holds no cerebral artery, no circle of Willis and no dural venous sinus.",
+    "STATUS IS `candidate`, NOT `ready`, FOR A DELIVERY REASON AND NOT AN AUTHORING ONE. All seventeen model ids were checked against available-meshes.json and every name is the catalog's own name character for character, but none of the seventeen is present in meshes-lite/ — no brain mesh in this corpus has been fetched yet. Until they are, every beat of this scene is hollow. The ids are listed in mesh-gaps.txt by sync-state.mjs; fetching the eight core nuclei (FMA72826/72827 caudate, FMA72828/72829 putamen, FMA72830/72831 globus pallidus, FMA72908/72909 anterior limb) makes beats 1, 3 and 4 render, and adding the two lateral ventricles (FMA78449/78450) makes beat 2 render.",
+    "SIDES, STATED EXPLICITLY BECAUSE THE IDS DO NOT CARRY THEM. Right / left in this scene: caudate FMA72826 / FMA72827, putamen FMA72828 / FMA72829, globus pallidus FMA72830 / FMA72831, anterior limb of internal capsule FMA72908 / FMA72909, amygdala FMA72832 / FMA72833, insula FMA72977 / FMA72978, lateral ventricle FMA78449 / FMA78450. The thalamus pair breaks the pattern and is the trap: it is FMA258714 right and FMA258716 left, not consecutive. Each was read back off the catalog name individually rather than inferred from the neighbouring id.",
+    "NO ANCHORS WERE AUTHORED. The features this scene names on a structure — the head, body and tail of the caudate, the genu of the capsule, the two pallidal segments — are all sub-parts of meshes that are not in meshes-lite/, and derive-landmark.mjs cannot measure against a mesh it does not have. Placing them by eye is what the landmark tool exists to prevent, so they are named in narration and left unmarked. Revisit once the caudate meshes are fetched: head-of-caudate is plausibly derivable as a --contact against the anterior limb of the internal capsule with --slab restricting it to the anterior quarter.",
+    "THALAMUS AND INTERNAL CAPSULE ARE DELIBERATELY NOT IN covers[]. Both are separate CURRICULUM.json structures in this same topic with their own scenes to come, and both appear here only as far as the basal ganglia need them — the thalamus as the target of the output and as the medial wall of the posterior limb, the capsule as the sheet that splits the striatum. Claiming either would hide a gap that is currently visible."
+  ]
+}

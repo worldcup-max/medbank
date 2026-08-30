@@ -1,0 +1,763 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__cerebrum-gross-lobes__functional-cortical-areas",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Cerebrum — Gross & Lobes",
+  "structure": "Functional cortical areas",
+  "covers": [
+    "Functional cortical areas"
+  ],
+  "learning_goal": "Place the primary motor, somatosensory, auditory and visual cortices on named gyri, state the homuncular order and use it to predict which artery a given deficit implicates, and distinguish the fluent and non-fluent aphasias by the part of the language network destroyed.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "cerebral cortex",
+      "cortical localisation",
+      "stroke",
+      "aphasia",
+      "higher cortical function"
+    ],
+    "terms": [
+      "primary motor cortex",
+      "M1",
+      "Brodmann area 4",
+      "primary somatosensory cortex",
+      "S1",
+      "Brodmann areas 3 1 2",
+      "motor homunculus",
+      "sensory homunculus",
+      "supplementary motor area",
+      "premotor cortex",
+      "frontal eye field",
+      "Brodmann area 8",
+      "prefrontal cortex",
+      "Broca's area",
+      "expressive aphasia",
+      "non-fluent aphasia",
+      "Wernicke's area",
+      "receptive aphasia",
+      "fluent aphasia",
+      "Brodmann area 22",
+      "conduction aphasia",
+      "arcuate fasciculus",
+      "Gerstmann syndrome",
+      "primary auditory cortex",
+      "Heschl's gyrus",
+      "primary visual cortex",
+      "V1",
+      "striate cortex",
+      "Brodmann area 17",
+      "fusiform face area",
+      "prosopagnosia",
+      "visual word form area",
+      "hemispatial neglect",
+      "insular cortex",
+      "anterior cerebral artery",
+      "middle cerebral artery",
+      "posterior cerebral artery"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": -0.4
+  },
+  "structures": [
+    {
+      "key": "m1_l",
+      "name": "left precentral gyrus",
+      "label": "Primary motor cortex — M1 (L)",
+      "role": "part",
+      "group": "Primary areas",
+      "layer": "cortex",
+      "color": "#d98f6a",
+      "refs": {
+        "bodyparts3d": "FMA72662"
+      },
+      "terms": [
+        "precentral gyrus",
+        "primary motor cortex",
+        "M1",
+        "Brodmann area 4",
+        "motor homunculus",
+        "corticospinal tract"
+      ],
+      "narration": "Primary motor cortex occupies the whole precentral gyrus, Brodmann area 4. Its output is the corticospinal tract, which decussates in the medulla, so this gyrus moves the opposite side of the body. The map along it is inverted: leg over the top edge, then trunk, arm and hand, face last, just above the lateral sulcus."
+    },
+    {
+      "key": "s1_l",
+      "name": "left postcentral gyrus",
+      "label": "Primary somatosensory cortex — S1 (L)",
+      "role": "part",
+      "group": "Primary areas",
+      "layer": "cortex",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA72666"
+      },
+      "terms": [
+        "postcentral gyrus",
+        "primary somatosensory cortex",
+        "S1",
+        "Brodmann areas 3 1 2",
+        "sensory homunculus",
+        "thalamus"
+      ],
+      "narration": "Primary somatosensory cortex, Brodmann areas 3, 1 and 2, taking thalamic input from the opposite half of the body and carrying the same inverted map as the motor strip facing it. Because the two maps are aligned across the central sulcus, a small lesion at one point gives weakness and numbness of the same body part."
+    },
+    {
+      "key": "m1_r",
+      "name": "right precentral gyrus",
+      "label": "Primary motor cortex — M1 (R)",
+      "role": "context",
+      "group": "Primary areas",
+      "layer": "cortex",
+      "color": "#d98f6a",
+      "refs": {
+        "bodyparts3d": "FMA72661"
+      },
+      "terms": [
+        "precentral gyrus",
+        "primary motor cortex",
+        "M1"
+      ],
+      "narration": "The right motor strip, driving the left side of the body. Present so the crossed control can be shown rather than asserted."
+    },
+    {
+      "key": "s1_r",
+      "name": "right postcentral gyrus",
+      "label": "Primary somatosensory cortex — S1 (R)",
+      "role": "context",
+      "group": "Primary areas",
+      "layer": "cortex",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA72665"
+      },
+      "terms": [
+        "postcentral gyrus",
+        "primary somatosensory cortex",
+        "S1"
+      ],
+      "narration": "The right sensory strip, receiving from the left side of the body."
+    },
+    {
+      "key": "aud_l",
+      "name": "anterior part of left superior temporal gyrus",
+      "label": "Auditory cortex — on the hidden surface (L)",
+      "role": "part",
+      "group": "Primary areas",
+      "layer": "cortex",
+      "color": "#6f9e8c",
+      "refs": {
+        "bodyparts3d": "FMA72801"
+      },
+      "terms": [
+        "superior temporal gyrus",
+        "primary auditory cortex",
+        "Heschl's gyrus",
+        "transverse temporal gyrus",
+        "Brodmann areas 41 42"
+      ],
+      "narration": "Primary auditory cortex is not on this outer face: it is Heschl's transverse gyrus on the UPPER surface of this gyrus, inside the lateral sulcus, and there is no model for it. What is lit here is the gyrus that carries it. Each ear projects to both hemispheres, so one cortical lesion never makes an ear deaf — it degrades sound localisation instead.",
+      "approx": {
+        "shown_as": "anterior part of left superior temporal gyrus",
+        "detail": "primary auditory cortex (Heschl's transverse temporal gyrus, on the superior surface within the lateral sulcus)"
+      }
+    },
+    {
+      "key": "vis_l",
+      "name": "left occipital lobe",
+      "label": "Visual cortex — V1 in the calcarine banks (L)",
+      "role": "part",
+      "group": "Primary areas",
+      "layer": "cortex",
+      "color": "#8f7fbf",
+      "refs": {
+        "bodyparts3d": "FMA72976"
+      },
+      "terms": [
+        "occipital lobe",
+        "primary visual cortex",
+        "V1",
+        "striate cortex",
+        "Brodmann area 17",
+        "calcarine sulcus",
+        "macular sparing"
+      ],
+      "narration": "Primary visual cortex lines the calcarine sulcus on the medial face of this lobe — upper bank the lower visual field, lower bank the upper — so the whole lobe is lit for a strip that is mostly buried. This lobe holds the RIGHT half of the visual field of both eyes. Its posterior pole, the macular representation, is fed by the middle cerebral artery as well as the posterior, which is the accepted explanation for macular sparing.",
+      "approx": {
+        "shown_as": "left occipital lobe",
+        "detail": "primary visual cortex (striate cortex in the banks of the calcarine sulcus)"
+      }
+    },
+    {
+      "key": "vis_r",
+      "name": "right occipital lobe",
+      "label": "Visual cortex (R)",
+      "role": "context",
+      "group": "Primary areas",
+      "layer": "cortex",
+      "color": "#8f7fbf",
+      "refs": {
+        "bodyparts3d": "FMA72975"
+      },
+      "terms": [
+        "occipital lobe",
+        "primary visual cortex",
+        "homonymous hemianopia"
+      ],
+      "narration": "The right occipital lobe holds the LEFT half of the visual field of both eyes. Destroy it and the result is a left homonymous hemianopia — a field defect, not an eye defect."
+    },
+    {
+      "key": "sma_l",
+      "name": "left superior frontal gyrus",
+      "label": "Supplementary motor area (L)",
+      "role": "part",
+      "group": "Motor association",
+      "layer": "cortex",
+      "color": "#e0a97e",
+      "refs": {
+        "bodyparts3d": "FMA72654"
+      },
+      "terms": [
+        "superior frontal gyrus",
+        "supplementary motor area",
+        "SMA",
+        "Brodmann area 6",
+        "premotor cortex",
+        "paracentral lobule"
+      ],
+      "narration": "The supplementary motor area sits on the medial face of this gyrus, in front of the leg area, and plans self-initiated movement sequences. A lesion here leaves a limb with normal power that is simply not used until it is asked for. The leg area of M1 and S1 also lies on this medial surface, in the paracentral lobule — which is why an anterior cerebral artery stroke takes the leg and spares the face.",
+      "approx": {
+        "shown_as": "left superior frontal gyrus",
+        "detail": "supplementary motor area (medial part of Brodmann area 6)"
+      }
+    },
+    {
+      "key": "fef_l",
+      "name": "left middle frontal gyrus",
+      "label": "Frontal eye field & prefrontal cortex (L)",
+      "role": "part",
+      "group": "Motor association",
+      "layer": "cortex",
+      "color": "#e0a97e",
+      "refs": {
+        "bodyparts3d": "FMA72656"
+      },
+      "terms": [
+        "middle frontal gyrus",
+        "frontal eye field",
+        "Brodmann area 8",
+        "dorsolateral prefrontal cortex",
+        "executive function"
+      ],
+      "narration": "The posterior end of this gyrus is the frontal eye field, which drives conjugate gaze towards the OPPOSITE side. Destroy it and the eyes drift towards the damaged hemisphere — the patient looks at the lesion and away from the weak limbs. The rest of the gyrus is dorsolateral prefrontal cortex: planning, working memory, and the inhibition that is lost in a frontal syndrome.",
+      "approx": {
+        "shown_as": "left middle frontal gyrus",
+        "detail": "frontal eye field (posterior part of the gyrus, Brodmann area 8)"
+      }
+    },
+    {
+      "key": "wern_l",
+      "name": "posterior part of left superior temporal gyrus",
+      "label": "Wernicke's area (L)",
+      "role": "part",
+      "group": "Language network",
+      "layer": "cortex",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA72805"
+      },
+      "terms": [
+        "posterior superior temporal gyrus",
+        "Wernicke's area",
+        "Brodmann area 22",
+        "receptive aphasia",
+        "fluent aphasia"
+      ],
+      "narration": "Wernicke's area, in the roughly ninety-five per cent of people whose language sits on the left. Damage gives fluent, well-articulated, meaningless speech in a patient who cannot understand and does not know anything is wrong. It is the receptive half of the network, and it is drawable — which the expressive half is not."
+    },
+    {
+      "key": "wern_r",
+      "name": "posterior part of right superior temporal gyrus",
+      "label": "Superior temporal gyrus, posterior (R)",
+      "role": "context",
+      "group": "Language network",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72804"
+      },
+      "terms": [
+        "posterior superior temporal gyrus",
+        "aprosodia",
+        "non-dominant hemisphere"
+      ],
+      "narration": "The mirror region on the non-dominant side. Its loss takes the emotional tone of speech rather than its meaning: the patient understands and is understood, flatly."
+    },
+    {
+      "key": "smg_l",
+      "name": "left supramarginal gyrus",
+      "label": "Supramarginal gyrus (L)",
+      "role": "part",
+      "group": "Language network",
+      "layer": "cortex",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA72668"
+      },
+      "terms": [
+        "supramarginal gyrus",
+        "Brodmann area 40",
+        "conduction aphasia",
+        "arcuate fasciculus",
+        "inferior parietal lobule"
+      ],
+      "narration": "On the dominant side this gyrus lies over the arcuate fasciculus, the bundle joining the receptive and expressive ends of the language network. Interrupt it and comprehension survives and speech stays fluent, but repetition fails — conduction aphasia. The fasciculus itself is white matter with no model of its own."
+    },
+    {
+      "key": "ang_l",
+      "name": "left angular gyrus",
+      "label": "Angular gyrus (L)",
+      "role": "part",
+      "group": "Language network",
+      "layer": "cortex",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA72670"
+      },
+      "terms": [
+        "angular gyrus",
+        "Brodmann area 39",
+        "Gerstmann syndrome",
+        "alexia",
+        "acalculia",
+        "agraphia"
+      ],
+      "narration": "Where vision, hearing and touch are read together into language. A dominant-side lesion gives Gerstmann's four: cannot write, cannot calculate, cannot name the fingers, cannot tell left from right."
+    },
+    {
+      "key": "vwfa_l",
+      "name": "left fusiform gyrus",
+      "label": "Visual word form area (L)",
+      "role": "part",
+      "group": "Higher visual",
+      "layer": "cortex",
+      "color": "#a08fc0",
+      "refs": {
+        "bodyparts3d": "FMA72690"
+      },
+      "terms": [
+        "fusiform gyrus",
+        "visual word form area",
+        "alexia without agraphia",
+        "ventral stream"
+      ],
+      "narration": "The posterior part of this gyrus on the dominant side is where a word is recognised as a shape before it is a sound. Disconnect it from the language network — classically a left posterior cerebral artery infarct taking the splenium with it — and the patient can write a sentence and then cannot read it back.",
+      "approx": {
+        "shown_as": "left fusiform gyrus",
+        "detail": "visual word form area (posterior part of the gyrus)"
+      }
+    },
+    {
+      "key": "ffa_r",
+      "name": "right fusiform gyrus",
+      "label": "Fusiform face area (R)",
+      "role": "part",
+      "group": "Higher visual",
+      "layer": "cortex",
+      "color": "#a08fc0",
+      "refs": {
+        "bodyparts3d": "FMA72689"
+      },
+      "terms": [
+        "fusiform gyrus",
+        "fusiform face area",
+        "prosopagnosia",
+        "ventral stream"
+      ],
+      "narration": "The face area, weighted to the right. Bilateral damage gives prosopagnosia: every feature of a face is seen perfectly and the face belongs to nobody.",
+      "approx": {
+        "shown_as": "right fusiform gyrus",
+        "detail": "fusiform face area (lateral part of the gyrus)"
+      }
+    },
+    {
+      "key": "itg_l",
+      "name": "left inferior temporal gyrus",
+      "label": "Inferior temporal gyrus — ventral stream (L)",
+      "role": "context",
+      "group": "Higher visual",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72688"
+      },
+      "terms": [
+        "inferior temporal gyrus",
+        "ventral stream",
+        "what pathway",
+        "object recognition"
+      ],
+      "narration": "The far end of the ventral 'what' stream, which runs forwards from the occipital lobe along the underside of the temporal lobe turning shapes into objects."
+    },
+    {
+      "key": "spl_r",
+      "name": "right superior parietal lobule precuneus",
+      "label": "Superior parietal lobule (R) — dorsal stream",
+      "role": "part",
+      "group": "Higher visual",
+      "layer": "cortex",
+      "color": "#a08fc0",
+      "refs": {
+        "bodyparts3d": "BP50"
+      },
+      "terms": [
+        "superior parietal lobule",
+        "precuneus",
+        "dorsal stream",
+        "where pathway",
+        "hemispatial neglect"
+      ],
+      "narration": "The far end of the dorsal 'where' stream, which runs from the occipital lobe up into the parietal lobe and places things in space. A right-sided lesion here is the classic cause of left hemispatial neglect: the patient does not report the left half of the world and does not know it is missing."
+    },
+    {
+      "key": "ins_l",
+      "name": "left insula",
+      "label": "Insula (L)",
+      "role": "context",
+      "group": "Higher visual",
+      "layer": "cortex",
+      "color": "#b56576",
+      "refs": {
+        "bodyparts3d": "FMA72978"
+      },
+      "terms": [
+        "insula",
+        "insular cortex",
+        "gustatory cortex",
+        "interoception",
+        "middle cerebral artery"
+      ],
+      "narration": "Buried in the floor of the lateral sulcus: taste, visceral sensation and the felt state of the body. The middle cerebral artery runs across it, so insular cortex is among the first tissue lost in a proximal occlusion and insular involvement on early imaging predicts a large infarct."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The four primary areas",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Primary areas"
+        }
+      ],
+      "narration": "Four regions where the cortex does one job and does it first: motor on the precentral gyrus, somatosensory on the postcentral, auditory on the superior temporal, visual in the occipital lobe. Two of the four are lit on the gyrus that carries them rather than on themselves — auditory cortex is inside the lateral sulcus and visual cortex is inside the calcarine sulcus, and neither has a model."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Motor and sensory face each other",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "m1_l",
+            "s1_l"
+          ]
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "m1_l",
+          "intensity": 0.85
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "s1_l",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Area 4 in front, areas 3, 1 and 2 behind, one sulcus apart and carrying the same body map in the same order. That alignment is why weakness and numbness of the same part travel together, and why a deficit that splits them points below the cortex rather than at it."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The homunculus is upside down",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Primary areas"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sma_l"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:homunculus",
+          "path": [
+            "sma_l",
+            "m1_l",
+            "s1_l"
+          ],
+          "duration": 4000
+        }
+      ],
+      "narration": "The trace runs from the medial surface outwards along the strip, in the order the body is mapped: leg and perineum over the top edge and down the medial face, then trunk, arm and hand on the convexity, then the face just above the lateral sulcus. The hand and the lips take a share of cortex out of all proportion to their size. The strip itself is lit; the body map along it is described, because the map is a property of the cortex and not a separate object."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "The frontal association areas",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Motor association"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "m1_l"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "fef_l",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "In front of the motor strip, movement is planned rather than executed: the supplementary motor area on the medial face of the superior frontal gyrus, premotor cortex on the convexity, and the frontal eye field at the back of the middle frontal gyrus. Premotor cortex has no model of its own and is being described here — it occupies the part of these two gyri immediately in front of the precentral gyrus."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "Language: one end drawable, one end not",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Language network"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "wern_l",
+          "intensity": 0.85
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "smg_l",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "Wernicke's area is lit at the back of the superior temporal gyrus. Broca's area is NOT on screen and cannot be: it is the pars opercularis and pars triangularis of the inferior frontal gyrus, and the catalog has no inferior frontal gyrus. It would lie in front of the face area of the motor strip, below the middle frontal gyrus — that space, forward and low, is where to picture it."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "The loop a repeated word takes",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:language-loop",
+          "path": [
+            "aud_l",
+            "wern_l",
+            "smg_l",
+            "fef_l",
+            "m1_l"
+          ],
+          "duration": 5000
+        }
+      ],
+      "narration": "A heard word arrives at auditory cortex, is understood at Wernicke's area, and travels forward under the supramarginal gyrus in the arcuate fasciculus to Broca's area, which drives the face area of the motor strip to say it. Two waypoints on this path are stand-ins: the arcuate fasciculus is white matter with no model, and Broca's area is absent from the catalog, so the trace passes through the supramarginal and middle frontal gyri that overlie their positions. Both are named as substitutions rather than shown."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Three aphasias, three lesions",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "wern_l",
+            "smg_l"
+          ]
+        }
+      ],
+      "narration": "Ask two questions and the lesion follows. Is speech fluent? If not, the front end is gone — Broca's aphasia, effortful speech, comprehension intact, the patient painfully aware. If it is fluent, can they understand? If not, Wernicke's area is gone. If they understand and are fluent but cannot repeat, the connection between the two has gone and the lesion is under the supramarginal gyrus. Only the last two regions are on screen; the first is the absent inferior frontal gyrus."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Which artery does the deficit name",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "m1_l",
+            "vis_l"
+          ]
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sma_l",
+          "intensity": 0.6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ins_l",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "The homunculus turns a deficit into a vessel. Leg weaker than arm points to the medial surface and the anterior cerebral artery. Face and arm weaker than leg, with aphasia or neglect, points to the convexity and the middle cerebral artery — the insula, lit here, is the first cortex it reaches. An isolated hemianopia points behind, to the posterior cerebral artery. NO CEREBRAL ARTERY IS ON SCREEN: none exists in the catalog, so the territories are inferred from the cortex that is lit, and this beat is reasoning rather than tracing."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "Two streams out of the occipital lobe",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Higher visual"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "vis_l"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "vis_r"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "vis_r",
+          "to": "spl_r",
+          "kind": "continuity"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "vis_l",
+          "to": "vwfa_l",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Everything seen leaves the occipital lobe two ways. Upward into the parietal lobe is the dorsal 'where' stream, and a right-sided lesion on it gives left neglect. Forward along the underside is the ventral 'what' stream, ending in the fusiform and inferior temporal gyri — faces on the right, written words on the left. That single split explains why one patient loses half the world and another loses only faces."
+    },
+    {
+      "mode": "location",
+      "beat": 10,
+      "title": "What a map like this does not say",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        }
+      ],
+      "narration": "Cut across and the cortex is a rim a few millimetres deep over a mass of white matter. Every area named here is a patch of that rim, and it works only through the fibres under it: the same aphasia follows a cut in the arcuate fasciculus as a lesion of the cortex it joins. Localisation names where a function fails, not where it lives."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "gaps": [
+    "NO BROCA'S AREA. The inferior frontal gyrus is absent from the catalog on both sides — searched as inferior frontal gyrus, pars opercularis, pars triangularis, pars orbitalis and operculum, all zero hits. The expressive half of the language network therefore cannot be lit, and beats 5, 6 and 7 each say so in the narration rather than lighting a neighbouring gyrus and letting it pass. Wernicke's area, by contrast, IS drawable (FMA72805). This matches the sibling scene neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes, which records the same absence.",
+    "PRIMARY AUDITORY CORTEX has no model: Heschl's transverse temporal gyrus lies on the superior surface of the superior temporal gyrus, inside the lateral sulcus. FMA72801 (the anterior superior temporal gyrus) is lit in its place and carries an approx{} so the player shows it as an approximation.",
+    "PRIMARY VISUAL CORTEX has no model: V1 lines the calcarine sulcus, and no sulcus of any kind exists in the catalog. The whole occipital lobe is lit in its place, with an approx{}. The same applies to the cuneus and lingual gyrus, which are not separable from the lobe.",
+    "The supplementary motor area, premotor cortex, the frontal eye field, the visual word form area and the fusiform face area are all parts of larger gyri with no models of their own. Each is authored on its parent gyrus with an approx{} naming the part actually meant, except premotor cortex, which spans two gyri and is described in beat 4 rather than assigned to either.",
+    "THE ARCUATE FASCICULUS is white matter and the catalog carries hemispheric white matter only as one undivided mass (FMA61822) — searched as arcuate, fasciculus and superior longitudinal, no hits. The language loop in beat 6 therefore routes through the supramarginal gyrus that overlies it, and the beat states the substitution.",
+    "NO CEREBRAL ARTERY EXISTS IN THE CATALOG — searched as artery, cerebral artery and circle of Willis. Beat 8 teaches arterial territories by reasoning from the cortex on screen and says openly that no vessel is drawn. The vascular teaching for this topic is blocked on geometry, not on authoring, and belongs to the Blood Supply of the Brain topic when meshes exist.",
+    "SIDES: FMA72662 is the LEFT precentral gyrus and FMA72661 the RIGHT; FMA72666 the LEFT postcentral and FMA72665 the RIGHT; FMA72805 the LEFT posterior superior temporal gyrus and FMA72804 the RIGHT; FMA72976 the LEFT occipital lobe and FMA72975 the RIGHT; FMA72690 the LEFT fusiform gyrus and FMA72689 the RIGHT. Language is authored on the left and the face area on the right deliberately, and each is stated as a population tendency rather than a rule.",
+    "No mesh referenced by this scene is present in meshes-lite/ yet — no brain model has been fetched. Every beat is hollow until they are, which is why the status is 'candidate'."
+  ]
+}

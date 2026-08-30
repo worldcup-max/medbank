@@ -274,6 +274,36 @@
         "medial malleolus"
       ],
       "narration": "The saphenous nerve leaves the canal and carries on down the medial side of the leg along this bone to the medial malleolus. That is the sensory territory a canal block numbs and the reason a nerve of the thigh has a complaint felt at the ankle."
+    },
+    {
+      "key": "adductor_tubercle",
+      "label": "Adductor tubercle",
+      "role": "part",
+      "group": "Landmarks on the femur",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.8189,
+          0.5831,
+          0.1343
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT, the single point where adductor magnus meets the femur (gap 0.49 mm) on a 440 mm bone; tools/derive-landmark.mjs --parent FMA24474 --contact FMA22459. The result is unchanged when the search is restricted to the distal 15% and to the distal 25% of the shaft (--slab z:0,0.15 and z:0,0.25), which is the check that it is not being pulled up the linea aspera by the adductor part of the muscle. Cross-checked against the most medial point of the distal femur, the medial epicondyle (--extreme +x --slab z:0,0.15, uvw [1,0.6922,0.0773]): the tubercle lies 33 mm from it and 25 mm ABOVE it, which is the relation gross__thigh__femur states in words.",
+      "calibration_gap_mm": 0.49,
+      "terms": [
+        "adductor tubercle",
+        "adductor magnus",
+        "hamstring part",
+        "medial epicondyle",
+        "medial supracondylar line",
+        "adductor hiatus",
+        "tibial division of the sciatic nerve"
+      ],
+      "narration": "The bony marker of the lower end of the canal, measured where the hamstring part of adductor magnus takes hold of the femur. Put your thumb on the medial epicondyle at the knee and slide it about two and a half centimetres up the medial supracondylar line and you are on it. The tendon running to it is the medial boundary of the adductor hiatus, so this palpable point tells you where the femoral artery leaves the canal and becomes the popliteal artery."
     }
   ],
   "views": [
@@ -485,9 +515,13 @@
         {
           "op": "ROTATE_TO_VIEW",
           "view": "posterior"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "adductor_tubercle"
         }
       ],
-      "narration": "Follow the artery down the canal to the gap in adductor magnus, between its adductor fibres and its hamstring fibres. That gap is the adductor hiatus, and the artery is called the popliteal artery from the moment it passes through. The hiatus is a fixed opening in a muscle, which is why the vessel is tethered there and why that point is where an artery tears in a violent hyperextension injury of the knee."
+      "narration": "Follow the artery down the canal to the gap in adductor magnus, between its adductor fibres and its hamstring fibres. That gap is the adductor hiatus, and the artery is called the popliteal artery from the moment it passes through. The hiatus itself has no surface to mark, so take your bearing from the tubercle lit on the femur: the hamstring tendon runs to that point and forms the medial edge of the opening, and the tubercle is the only part of this arrangement you can feel through the skin. The hiatus is a fixed opening in a muscle, which is why the vessel is tethered there and why that point is where an artery tears in a violent hyperextension injury of the knee."
     },
     {
       "mode": "associated_organs",
@@ -595,12 +629,16 @@
     "The descending genicular artery and the genicular anastomosis round the knee have no meshes and are named in narration only.",
     "No nerve of the lower limb exists as a model. The saphenous nerve — the content that makes this region clinically distinctive — is authored as a traced concept path from the canal, across the artery, through the roof and down the medial side of the leg. The nerve to vastus medialis and the variable obturator contribution are narration only.",
     "The subsartorial fascia, also called the vastoadductor membrane, is the actual roof of the canal and has no mesh. It is taught by lighting sartorius and describing the sheet beneath it. A modelled roof would be the most useful addition here, because the whole teaching point of the roof is that the nerve pierces it and the vessels do not.",
-    "The adductor hiatus is a gap between two parts of adductor magnus, not an object, so it is taught by isolating and highlighting that muscle from behind and naming the opening. The adductor tubercle is a sub-feature of the whole femur mesh and is named rather than marked.",
+    "The adductor hiatus is a gap between two parts of adductor magnus, not an object, so it is taught by isolating and highlighting that muscle from behind and naming the opening. It could not be anchored either: measured from the muscle against the femur in the distal third it returns the tendinous insertion (0.49 mm) and not the opening, because a hole bounded by muscle and bone is not a point on either. THE ADDUCTOR TUBERCLE IS NOW MARKED rather than merely named — it is the tendon's attachment and it did measure, at 0.49 mm, cross-checked 25 mm above the medial epicondyle. The earlier version of this note said the tubercle was a sub-feature of the whole femur mesh that could only be named; that was a definition problem, not a delivery one, and it is resolved.",
     "The great saphenous vein is not in the catalog, so the companionship of the saphenous nerve with that vein below the knee is narrated.",
-    "This scene does not cover Femur or Quadriceps femoris. The femur and vastus medialis appear here only as the wall and the frame of the canal."
+    "This scene does not cover Femur or Quadriceps femoris. The femur and vastus medialis appear here only as the wall and the frame of the canal.",
+    "The apex of the femoral triangle — where sartorius crosses adductor longus — was attempted as an anchor on sartorius and is NOT authored, so that no later run derives it and believes the number. It does not refuse the 3 mm gate (both muscles touch, gap 0.49 mm) but the definition is wrong: the two nearest surfaces overlap along a stretch of the thigh, so the answer wanders with the method — the nearest-point definition gives uvw [0.7280,0.2154,0.6112] and the 5 mm patch centroid gives [0.7008,0.2478,0.5691], about 24 mm apart on a 579 mm mesh. The apex is the crossing of the MEDIAL BORDER of sartorius with the MEDIAL BORDER of adductor longus, which is neither of the tool's two definitions. It stays narrated.",
+    "Right adductor minimus exists in the catalog as a separate mesh (FMA43886), which is worth recording because a later run searching 'adductor' will find it. It is deliberately not in this scene: adductor minimus is the upper detached portion of adductor magnus and lies proximal to the canal, above the apex of the femoral triangle, so it forms no wall. The wall of the canal is the adductor magnus mesh already present."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   }
 }

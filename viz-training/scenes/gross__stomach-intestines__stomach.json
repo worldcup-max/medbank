@@ -511,6 +511,124 @@
         "coeliac trunk origin"
       ],
       "narration": "Enters the abdomen behind the diaphragm at T12 and gives the coeliac trunk almost immediately. Three midline branches feed the gut: coeliac at T12 for the foregut, superior mesenteric at L1 for the midgut, inferior mesenteric at L3 for the hindgut."
+    },
+    {
+      "key": "cardiac_orifice",
+      "label": "Cardiac orifice",
+      "role": "part",
+      "group": "Landmarks on the stomach",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "stomach",
+        "uvw": [
+          0.2705,
+          0.8165,
+          0.9323
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch with the oesophagus, averaged over every stomach vertex within 6 mm of it (gap 0.31 mm, 53 vertices, centroid snapped 3.28 mm to the surface); tools/derive-landmark.mjs --parent FMA7148 --contact FMA7131 --area 6",
+      "calibration_gap_mm": 0.31,
+      "terms": [
+        "cardia",
+        "cardiac orifice",
+        "gastro-oesophageal junction",
+        "Z-line",
+        "angle of His",
+        "lower oesophageal sphincter",
+        "T11"
+      ],
+      "narration": "Where the oesophagus opens into the stomach, measured from where the two meshes actually meet. It matters as a level, not as a sphincter: the fundus is by definition everything ABOVE a horizontal line through this point, so find this and the fundus defines itself. The oesophagus meets the fundus here at a sharp angle, the angle of His, and that flap is most of what keeps acid down."
+    },
+    {
+      "key": "pylorus",
+      "label": "Pylorus",
+      "role": "part",
+      "group": "Landmarks on the stomach",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "stomach",
+        "uvw": [
+          0.0237,
+          0.3854,
+          0.1634
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch with the duodenum, averaged over every stomach vertex within 6 mm of it (gap 0.41 mm, 62 vertices, centroid snapped 7.68 mm to the surface); tools/derive-landmark.mjs --parent FMA7148 --contact FMA7206 --area 6",
+      "calibration_gap_mm": 0.41,
+      "terms": [
+        "pylorus",
+        "pyloric sphincter",
+        "pyloric canal",
+        "duodenal cap",
+        "transpyloric plane",
+        "L1",
+        "pyloric stenosis",
+        "succussion splash"
+      ],
+      "narration": "The outlet, measured where the stomach meets the duodenum. This is the one true anatomical sphincter of the organ — a thickened ring of circular muscle — and it lies on the transpyloric plane at L1, a finger’s breadth right of the midline. Compare it with the cardiac orifice on the other anchor: the pylorus sits low and to the right, the cardia high and to the left, and the line between them is the axis of the J."
+    },
+    {
+      "key": "gastrosplenic_contact",
+      "label": "Gastric surface against the spleen",
+      "role": "part",
+      "group": "Landmarks on the stomach",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "stomach",
+        "uvw": [
+          0.8573,
+          0.7475,
+          0.4273
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch with the spleen, averaged over every stomach vertex within 4 mm of it (gap 0.40 mm, 101 vertices); tools/derive-landmark.mjs --parent FMA7148 --contact FMA7196 --area 4. Cross-checks against the reciprocal anchor gastric_impression in gross__liver-biliary-tract-pancreas-spleen__spleen, measured from the other side of the same gap at the same 0.40 mm.",
+      "calibration_gap_mm": 0.4,
+      "terms": [
+        "gastrosplenic ligament",
+        "short gastric arteries",
+        "fundus",
+        "greater curvature",
+        "gastric impression",
+        "splenectomy"
+      ],
+      "narration": "The patch of the fundus and upper greater curvature that faces the spleen. The gastrosplenic ligament bridges this gap carrying the short gastric arteries, which is why a spleen taken out carelessly can leave the fundus without its supply. The same contact is anchored from the spleen’s side as the gastric impression, and the two measurements agree."
+    },
+    {
+      "key": "fundus_dome",
+      "label": "Fundus — its dome",
+      "role": "part",
+      "group": "Landmarks on the stomach",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "stomach",
+        "uvw": [
+          0.7335,
+          0.7339,
+          1
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +z on the stomach mesh, 1502 vertices considered, 70.6 mm from the centroid; tools/derive-landmark.mjs --parent FMA7148 --extreme +z. The vertical axis was confirmed as z, not the tool’s reported long axis x, by comparing mesh centroids: oesophagus z=1291 lies above duodenum z=1047. Read this as the highest point of THIS mesh rather than as a fixed anatomical point — the stomach is distensible and its dome moves with filling and with posture. It is above and to the left of the cardiac orifice anchor, which is the relation being taught.",
+      "terms": [
+        "fundus",
+        "fundus of the stomach",
+        "gastric bubble",
+        "left dome of the diaphragm",
+        "erect abdominal film",
+        "magenstrasse"
+      ],
+      "narration": "The top of the fundus, lying up under the left dome of the diaphragm. Gas collects here in the erect patient and shows as the gastric bubble under the left hemidiaphragm; free gas under the RIGHT dome means a viscus has perforated instead. Check it against the cardiac orifice anchor — this point is higher and further left, which is the whole of the definition of the fundus."
     }
   ],
   "views": [
@@ -569,6 +687,10 @@
           "target": "Inlet & outlet"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks on the stomach"
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "anterior"
         },
@@ -590,7 +712,7 @@
           "kind": "leaves at the pylorus"
         }
       ],
-      "narration": "Trace the outline with your eye from the cardia. The fundus is everything above a horizontal line through the cardiac orifice — that is its definition, not its shape. Below it the body forms the bulk. The body ends at the incisura angularis, a notch on the lesser curvature that is the only sharp landmark on the whole organ. Beyond the incisura is the pyloric antrum, narrowing into the pyloric canal, ending at the pylorus. Examiners ask for the boundary between body and antrum: it is the incisura, and a line from it to the greater curvature."
+      "narration": "Trace the outline with your eye from the cardia. Three of the points named here are marked, and each was measured on the geometry rather than placed by eye: the cardiac orifice where the oesophagus meets the stomach, the pylorus where the duodenum leaves it, and the dome of the fundus above them both. The fundus is everything above a horizontal line through the cardiac orifice — that is its definition, not its shape, and the two anchors let you check it. Below it the body forms the bulk. The body ends at the incisura angularis, a notch on the lesser curvature that is the only sharp landmark on the whole organ and the one point here that is NOT marked, because a notch cannot be measured by contact or by extreme and this corpus does not guess. Beyond the incisura is the pyloric antrum, narrowing into the pyloric canal, ending at the pylorus. Examiners ask for the boundary between body and antrum: it is the incisura, and a line from it to the greater curvature."
     },
     {
       "mode": "associated_organs",
@@ -630,6 +752,10 @@
           "from": "stomach",
           "to": "pancreatic_duct",
           "kind": "lies on"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "gastrosplenic_contact"
         }
       ],
       "narration": "Turn the stomach forwards and a shelf of structures is revealed behind it. From above down: the left dome of the diaphragm, the spleen, the left kidney and suprarenal gland, the pancreas, and the transverse mesocolon. Between the stomach and that shelf is the lesser sac, a flat closed space entered only through the epiploic foramen. Every one of these relations is an exam answer and a clinical one: a posterior ulcer penetrates into pancreas, a fluid collection behind the stomach is a pancreatic pseudocyst, and pus in the lesser sac cannot escape."
@@ -700,7 +826,7 @@
         {
           "op": "CROSS_SECTION",
           "axis": "y",
-          "offset": 0.0,
+          "offset": 0,
           "animate": true
         },
         {
@@ -789,15 +915,17 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "The stomach is one single model. The catalog holds no separate fundus, body, pyloric antrum, pyloric canal, cardia or pylorus, and no mesh for either curvature or the incisura angularis, so the five regions and the two curvatures are taught by narration and by term mapping rather than by a highlightable part. Every one of those names is in this scene's terms[] and in the stomach structure's own terms[], so a note that says 'pyloric antrum' still opens this scene at the right subject.",
-    "No landmark anchors were authored. Anchors in this corpus are measured on the actual geometry, and none of the meshes this scene names is in the local decimated set, so the incisura angularis, the cardiac orifice, the pylorus and the two curvatures could not be placed by measurement. They were not typed in by eye: an anchor put where a region looks plausible teaches a wrong point that the student has no way to detect. Ingesting FMA7148 locally is the single cheapest unlock for this topic, because it would give six anchors on one mesh.",
-    "There is no pancreas mesh in the catalog — only the pancreatic duct, FMA10419. The duct is used as context under the honest label 'Pancreatic duct — marking the pancreas', because the duct runs the length of the gland and so shows where it lies. Everything taught about the pancreas in the stomach bed is therefore taught against a line inside it rather than against its surface, and the narration says so.",
+    "Five landmark anchors were attempted on the stomach mesh and four are authored. THE EARLIER NOTE HERE WAS FALSE: it said none of this scene's meshes was in the local decimated set, and in fact all seventeen are, so the anchors could be and now have been measured. The cardiac orifice (0.31 mm against the oesophagus), the pylorus (0.41 mm against the duodenum) and the gastrosplenic contact (0.40 mm against the spleen, agreeing with the spleen scene's reciprocal anchor) are contact patches; the fundal dome is an extreme point and is labelled as a property of this mesh rather than a fixed point, because a distensible bag has no fixed top. THREE DEFINITIONS WERE REFUSED BY tools/derive-landmark.mjs and are recorded so that no later run re-derives them and believes the answer: the lesser curvature against the left gastric artery (4.74 mm), the posterior wall against the splenic artery (5.67 mm) and the stomach bed against the pancreatic duct (6.12 mm) all exceed the tool's 3 mm gate. All three are real relations that the vessels approach rather than touch in this model, so the refusals are correct and the relations stay narrated. The incisura angularis is a notch and matches neither of the tool's two definitions, so it remains unanchored.",
+    "There is no pancreas mesh in the catalog — re-searched today, the only entry containing 'pancrea' is FMA10419, the pancreatic duct. The duct is used as context under the honest label 'Pancreatic duct — marking the pancreas', because the duct runs the length of the gland and so shows where it lies. Everything taught about the pancreas in the stomach bed is therefore taught against a line inside it rather than against its surface, and the narration says so.",
     "No peritoneum, no omenta and no lesser sac. The lesser omentum, greater omentum, gastrosplenic ligament and omental bursa are all named in the narration of beats 1 and 3 and all appear in terms[], but a serous membrane and a potential space have no meshes and no proxy. This is the same limitation the pleura scene records and it is why 'Peritoneum & mesentery' is a separate curriculum entry.",
     "Only three of the arteries taught in beat 4 exist as meshes: the coeliac trunk, the left gastric and the splenic, plus the common hepatic. The right gastric, both gastro-omental arteries, the short gastrics and the gastroduodenal artery have no models, so the two arches are narrated and traced through the vessels that do exist rather than drawn. The gastroduodenal artery is the highest-value single acquisition for this topic: it is the reason a posterior duodenal ulcer bleeds, and beat 7 currently has to teach that against the splenic artery alone.",
-    "There is no portal vein mesh, and no vagus nerve — no nerve of the abdomen is in the catalog. The portal confluence is taught through the splenic and superior mesenteric veins that form it, and the anterior and posterior vagal trunks, which matter for vagotomy and for receptive relaxation, are named in terms[] and narration only.",
-    "The transverse mesocolon and transverse colon are part of the stomach bed and part of the greater omentum's attachment, and no large-bowel mesh exists in the catalog at all. Beat 3 lists the mesocolon in the bed without showing it."
+    "There is no portal vein mesh, and no vagus nerve. Re-searched today under vagus, vagal and nerve: the entire 934-entry catalog holds exactly two nerves, the left and right optic, so no abdominal nerve of any kind can be drawn anywhere in this corpus. The portal confluence is taught through the splenic and superior mesenteric veins that form it, and the anterior and posterior vagal trunks, which matter for vagotomy and for receptive relaxation, are named in terms[] and narration only.",
+    "The transverse mesocolon and the transverse colon are part of the stomach bed and of the greater omentum's attachment, and neither has a mesh. AN EARLIER VERSION OF THIS NOTE SAID THERE IS NO LARGE-BOWEL MESH IN THE CATALOG AT ALL, WHICH IS WRONG and contradicted gross__stomach-intestines__large-intestine two files away in the same topic: the three taeniae coli (FMA76893 free, FMA76891 mesocolic, FMA76892 omental), the appendix (FMA14542) and the rectum (FMA14544) all exist, and the large-intestine scene teaches the colon through the bands. What is missing is the colonic tube itself and every mesentery, so beat 3 lists the mesocolon in the bed without showing it, and the omental taenia — the band the greater omentum actually hangs from — is not brought into this scene because without the transverse colon under it there is nothing for a student to read it against."
   ]
 }

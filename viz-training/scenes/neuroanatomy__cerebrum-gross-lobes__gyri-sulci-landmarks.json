@@ -1,0 +1,698 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__cerebrum-gross-lobes__gyri-sulci-landmarks",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Cerebrum — Gross & Lobes",
+  "structure": "Gyri & sulci landmarks",
+  "covers": [
+    "Gyri & sulci landmarks"
+  ],
+  "learning_goal": "Find the central and lateral sulci on any brain or scan by the gyri that bracket them, name the gyri each sulcus separates on the lateral, medial and inferior surfaces, and use those landmarks to say which lobe a given piece of cortex belongs to.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "cerebrum",
+      "cerebral cortex",
+      "surface anatomy of the brain",
+      "brain landmarks",
+      "neuroimaging orientation"
+    ],
+    "terms": [
+      "gyrus",
+      "sulcus",
+      "central sulcus",
+      "lateral sulcus",
+      "Sylvian fissure",
+      "superior temporal sulcus",
+      "parieto-occipital sulcus",
+      "calcarine sulcus",
+      "cingulate sulcus",
+      "collateral sulcus",
+      "olfactory sulcus",
+      "circular sulcus of insula",
+      "precentral gyrus",
+      "postcentral gyrus",
+      "superior frontal gyrus",
+      "middle frontal gyrus",
+      "superior temporal gyrus",
+      "middle temporal gyrus",
+      "inferior temporal gyrus",
+      "supramarginal gyrus",
+      "angular gyrus",
+      "precuneus",
+      "cingulate gyrus",
+      "parahippocampal gyrus",
+      "fusiform gyrus",
+      "insula",
+      "operculum"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": -0.4
+  },
+  "structures": [
+    {
+      "key": "precg_l",
+      "name": "left precentral gyrus",
+      "label": "Precentral gyrus (L)",
+      "role": "part",
+      "group": "Central sulcus bank",
+      "layer": "cortex",
+      "color": "#d98f6a",
+      "refs": {
+        "bodyparts3d": "FMA72662"
+      },
+      "terms": [
+        "precentral gyrus",
+        "central sulcus",
+        "precentral sulcus",
+        "anterior bank of central sulcus"
+      ],
+      "narration": "The front wall of the central sulcus. It runs from the midline down and forwards to the lateral sulcus, and it is bounded in front by the precentral sulcus — so on a scan it is the gyrus with a sulcus on each side and the three long frontal gyri running into its front edge."
+    },
+    {
+      "key": "postcg_l",
+      "name": "left postcentral gyrus",
+      "label": "Postcentral gyrus (L)",
+      "role": "part",
+      "group": "Central sulcus bank",
+      "layer": "cortex",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA72666"
+      },
+      "terms": [
+        "postcentral gyrus",
+        "central sulcus",
+        "postcentral sulcus",
+        "posterior bank of central sulcus"
+      ],
+      "narration": "The back wall of the same sulcus, parallel to the gyrus in front of it and usually the thinner of the two. The pair face each other along the whole length of the central sulcus, and that facing pair is what makes the sulcus identifiable — neither gyrus alone would settle it."
+    },
+    {
+      "key": "precg_r",
+      "name": "right precentral gyrus",
+      "label": "Precentral gyrus (R)",
+      "role": "context",
+      "group": "Central sulcus bank",
+      "layer": "cortex",
+      "color": "#d98f6a",
+      "refs": {
+        "bodyparts3d": "FMA72661"
+      },
+      "terms": [
+        "precentral gyrus",
+        "central sulcus"
+      ],
+      "narration": "The same gyrus on the right. The two central sulci are close to symmetrical, which is why an asymmetry between them on a scan is worth a second look."
+    },
+    {
+      "key": "postcg_r",
+      "name": "right postcentral gyrus",
+      "label": "Postcentral gyrus (R)",
+      "role": "context",
+      "group": "Central sulcus bank",
+      "layer": "cortex",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA72665"
+      },
+      "terms": [
+        "postcentral gyrus",
+        "central sulcus"
+      ],
+      "narration": "The right posterior bank, completing the second facing pair."
+    },
+    {
+      "key": "sfg_l",
+      "name": "left superior frontal gyrus",
+      "label": "Superior frontal gyrus (L)",
+      "role": "part",
+      "group": "Frontal gyri",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72654"
+      },
+      "terms": [
+        "superior frontal gyrus",
+        "superior frontal sulcus",
+        "cingulate sulcus",
+        "paracentral lobule"
+      ],
+      "narration": "The uppermost of the three long frontal gyri, running along the top edge and turning onto the medial surface. Below it on the lateral face is the superior frontal sulcus, whose back end meets the precentral sulcus — the classic way of finding the precentral gyrus on an axial slice."
+    },
+    {
+      "key": "mfg_l",
+      "name": "left middle frontal gyrus",
+      "label": "Middle frontal gyrus (L)",
+      "role": "part",
+      "group": "Frontal gyri",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72656"
+      },
+      "terms": [
+        "middle frontal gyrus",
+        "superior frontal sulcus",
+        "inferior frontal sulcus"
+      ],
+      "narration": "Between the superior and inferior frontal sulci. It is the widest of the three and it runs forwards from the precentral gyrus, so following it backwards lands on the motor strip."
+    },
+    {
+      "key": "orb",
+      "name": "orbital gyri straight gyrus",
+      "label": "Orbital & straight gyri",
+      "role": "context",
+      "group": "Frontal gyri",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "BP51"
+      },
+      "terms": [
+        "orbital gyri",
+        "straight gyrus",
+        "gyrus rectus",
+        "olfactory sulcus"
+      ],
+      "narration": "The undersurface of the frontal lobe. The straight gyrus is the medial strip and the orbital gyri lie lateral to it; the olfactory sulcus is the straight groove between them, and it is straight because the olfactory tract lies in it. Both are carried as one model here, so the sulcus between them cannot be lit — it is named, not shown."
+    },
+    {
+      "key": "stg_a_l",
+      "name": "anterior part of left superior temporal gyrus",
+      "label": "Superior temporal gyrus, anterior (L)",
+      "role": "part",
+      "group": "Temporal gyri",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72801"
+      },
+      "terms": [
+        "superior temporal gyrus",
+        "lateral sulcus",
+        "Sylvian fissure",
+        "temporal operculum"
+      ],
+      "narration": "The lower lip of the lateral sulcus. Its upper surface, hidden inside the sulcus, is the temporal operculum — one of the three lips that roof the insula over."
+    },
+    {
+      "key": "stg_p_l",
+      "name": "posterior part of left superior temporal gyrus",
+      "label": "Superior temporal gyrus, posterior (L)",
+      "role": "part",
+      "group": "Temporal gyri",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72805"
+      },
+      "terms": [
+        "superior temporal gyrus",
+        "lateral sulcus",
+        "posterior ramus of lateral sulcus"
+      ],
+      "narration": "The back end of the gyrus, where the lateral sulcus turns upwards and ends. That upturned end is the hinge the supramarginal gyrus wraps around."
+    },
+    {
+      "key": "mtg_l",
+      "name": "left middle temporal gyrus",
+      "label": "Middle temporal gyrus (L)",
+      "role": "part",
+      "group": "Temporal gyri",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72686"
+      },
+      "terms": [
+        "middle temporal gyrus",
+        "superior temporal sulcus",
+        "inferior temporal sulcus"
+      ],
+      "narration": "Between the superior and inferior temporal sulci. The superior temporal sulcus above it is the longest sulcus on the temporal lobe and runs backwards to end in the angular gyrus, so it is the road that leads to the second landmark of the inferior parietal lobule."
+    },
+    {
+      "key": "itg_l",
+      "name": "left inferior temporal gyrus",
+      "label": "Inferior temporal gyrus (L)",
+      "role": "part",
+      "group": "Temporal gyri",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72688"
+      },
+      "terms": [
+        "inferior temporal gyrus",
+        "inferior temporal sulcus",
+        "occipitotemporal sulcus"
+      ],
+      "narration": "The lowest gyrus visible from the side, turning round the inferior margin onto the undersurface. The occipitotemporal sulcus on that undersurface separates it from the fusiform gyrus."
+    },
+    {
+      "key": "smg_l",
+      "name": "left supramarginal gyrus",
+      "label": "Supramarginal gyrus (L)",
+      "role": "part",
+      "group": "Parietal gyri",
+      "layer": "cortex",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA72668"
+      },
+      "terms": [
+        "supramarginal gyrus",
+        "inferior parietal lobule",
+        "lateral sulcus"
+      ],
+      "narration": "Caps the upturned end of the lateral sulcus. Sulcus first, gyrus second: find where the lateral sulcus stops and turns up, and the cortex folded around that turn is this gyrus."
+    },
+    {
+      "key": "ang_l",
+      "name": "left angular gyrus",
+      "label": "Angular gyrus (L)",
+      "role": "part",
+      "group": "Parietal gyri",
+      "layer": "cortex",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA72670"
+      },
+      "terms": [
+        "angular gyrus",
+        "inferior parietal lobule",
+        "superior temporal sulcus"
+      ],
+      "narration": "Caps the upturned end of the superior temporal sulcus, immediately behind the supramarginal gyrus. Two sulci ending side by side, two gyri wrapped around them — that is the whole of the inferior parietal lobule."
+    },
+    {
+      "key": "spl_l",
+      "name": "left superior parietal lobule precuneus",
+      "label": "Superior parietal lobule & precuneus (L)",
+      "role": "part",
+      "group": "Parietal gyri",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "BP49"
+      },
+      "terms": [
+        "superior parietal lobule",
+        "precuneus",
+        "intraparietal sulcus",
+        "parieto-occipital sulcus",
+        "marginal ramus of cingulate sulcus"
+      ],
+      "narration": "Above the intraparietal sulcus on the lateral face, continuing onto the medial face as the precuneus. The precuneus is bounded in front by the upturned end of the cingulate sulcus and behind by the parieto-occipital sulcus, which is the only sharp boundary the occipital lobe has anywhere."
+    },
+    {
+      "key": "occ_l",
+      "name": "left occipital lobe",
+      "label": "Occipital lobe (L)",
+      "role": "part",
+      "group": "Occipital",
+      "layer": "cortex",
+      "color": "#8f7fbf",
+      "refs": {
+        "bodyparts3d": "FMA72976"
+      },
+      "terms": [
+        "occipital lobe",
+        "parieto-occipital sulcus",
+        "calcarine sulcus",
+        "cuneus",
+        "lingual gyrus"
+      ],
+      "narration": "On the medial surface the parieto-occipital sulcus meets the calcarine sulcus in a Y, and the wedge between the two arms is the cuneus, with the lingual gyrus below the calcarine. That Y is the most reliable landmark on a midline sagittal image. The lobe is carried whole here, so cuneus and lingual gyrus are named on this card rather than lit apart."
+    },
+    {
+      "key": "cing_l",
+      "name": "left cingulate gyrus",
+      "label": "Cingulate gyrus (L)",
+      "role": "part",
+      "group": "Medial & inferior",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72718"
+      },
+      "terms": [
+        "cingulate gyrus",
+        "cingulate sulcus",
+        "callosal sulcus",
+        "limbic lobe"
+      ],
+      "narration": "Arches over the corpus callosum, with the callosal sulcus below it and the cingulate sulcus above. The cingulate sulcus sends a branch up to the top edge just behind the paracentral lobule, and that branch is how the central sulcus is found on a midline image."
+    },
+    {
+      "key": "phg_l",
+      "name": "left parahippocampal gyrus",
+      "label": "Parahippocampal gyrus (L)",
+      "role": "part",
+      "group": "Medial & inferior",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72706"
+      },
+      "terms": [
+        "parahippocampal gyrus",
+        "collateral sulcus",
+        "uncus",
+        "limbic lobe"
+      ],
+      "narration": "The most medial gyrus of the undersurface, hooked forwards at its front end as the uncus. The collateral sulcus is its lateral boundary, separating it from the fusiform gyrus."
+    },
+    {
+      "key": "fus_l",
+      "name": "left fusiform gyrus",
+      "label": "Fusiform gyrus (L)",
+      "role": "part",
+      "group": "Medial & inferior",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72690"
+      },
+      "terms": [
+        "fusiform gyrus",
+        "occipitotemporal gyrus",
+        "collateral sulcus",
+        "occipitotemporal sulcus"
+      ],
+      "narration": "The middle strip of the undersurface, with the collateral sulcus on its medial side and the occipitotemporal sulcus on its lateral side. It crosses the temporo-occipital boundary without interruption, which is why it has two names."
+    },
+    {
+      "key": "ins_l",
+      "name": "left insula",
+      "label": "Insula (L)",
+      "role": "part",
+      "group": "Buried cortex",
+      "layer": "cortex",
+      "color": "#b56576",
+      "refs": {
+        "bodyparts3d": "FMA72978"
+      },
+      "terms": [
+        "insula",
+        "lateral sulcus",
+        "circular sulcus of insula",
+        "central sulcus of insula",
+        "operculum"
+      ],
+      "narration": "The floor of the lateral sulcus, roofed over by the frontal, parietal and temporal opercula. Its own circular sulcus marks its rim and its own central sulcus divides its short anterior gyri from its long posterior ones — a whole set of sulci that cannot be seen at all from the outside."
+    },
+    {
+      "key": "acsg_l",
+      "name": "left accessory short gyrus",
+      "label": "Accessory short gyrus (L)",
+      "role": "context",
+      "group": "Buried cortex",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72702"
+      },
+      "terms": [
+        "accessory short gyrus",
+        "short gyri of insula",
+        "central sulcus of insula"
+      ],
+      "narration": "One of the short gyri of the anterior insula, in front of the central sulcus of the insula."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Ridges and clefts",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Every ridge on the surface is a gyrus and every cleft between two ridges is a sulcus. Only the gyri are objects: a sulcus is the space where two gyri face each other, so every sulcus in this scene is taught by lighting the two gyri that bank it. Nothing on screen is ever the sulcus itself."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The central sulcus, from its two banks",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "precg_l",
+            "postcg_l"
+          ]
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "precg_l",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "postcg_l",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Two long parallel gyri running down and forwards from the top edge towards the lateral sulcus. The gap between them is the central sulcus. It is the deepest sulcus on the lateral surface and the boundary between the frontal and parietal lobes, and it is found by these two gyri rather than by looking for a groove."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Two ways to find it on a scan",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sfg_l",
+          "to": "precg_l",
+          "kind": "continuity"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "mfg_l",
+          "intensity": 0.5
+        }
+      ],
+      "narration": "From above, the superior frontal sulcus runs backwards along the edge of the superior frontal gyrus and stops where it meets the precentral sulcus; the gyrus immediately behind that junction is the precentral gyrus. The middle frontal gyrus, lit here, runs into the same junction from in front. Neither sulcus has a model — they are read off the gyri lit on screen."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "The lateral sulcus and its lower lip",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "stg_a_l",
+            "precg_l"
+          ]
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "stg_a_l",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "The long horizontal cleft that separates the temporal lobe below from the frontal and parietal lobes above. Its lower lip is the superior temporal gyrus, lit here; its upper lip is the underside of the frontal and parietal cortex. It is the one sulcus deep enough to be a genuine fissure, and the middle cerebral artery runs in it."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "Where two sulci end, two gyri wrap",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Parietal gyri"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stg_p_l"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mtg_l"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "smg_l",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ang_l",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "The lateral sulcus turns up and stops, and the supramarginal gyrus caps it. Just behind, the superior temporal sulcus turns up and stops, and the angular gyrus caps that. The two temporal gyri whose sulci these are stay on screen so the pairing is visible: superior temporal gyrus below the first, middle temporal gyrus below the second."
+    },
+    {
+      "mode": "location",
+      "beat": 6,
+      "title": "Three long temporal gyri",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Temporal gyri"
+        }
+      ],
+      "narration": "Superior, middle and inferior, stacked with a sulcus between each pair: the superior temporal sulcus above the middle gyrus, the inferior temporal sulcus below it. The same three-and-two pattern as the frontal lobe, rotated ninety degrees."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "The medial surface: the Y at the back",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "spl_l",
+            "occ_l"
+          ]
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cing_l",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "Turn to the midline. The parieto-occipital sulcus runs down between the precuneus in front and the occipital lobe behind, meets the calcarine sulcus coming forwards from the pole, and the two make a Y lying on its side. The cingulate gyrus, lit, sweeps around the corpus callosum below all of it. The sulci are the gaps between the lit gyri; the cuneus, the wedge inside the Y, is part of the occipital model and is not lit separately."
+    },
+    {
+      "mode": "location",
+      "beat": 8,
+      "title": "The undersurface: two sulci, three strips",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Medial & inferior"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "itg_l"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "phg_l",
+          "to": "fus_l",
+          "kind": "adjacency"
+        }
+      ],
+      "narration": "Working from the midline outwards on the underside: parahippocampal gyrus, then the collateral sulcus, then the fusiform gyrus, then the occipitotemporal sulcus, then the inferior temporal gyrus turning up onto the side. Three strips and two clefts, and the order never changes."
+    },
+    {
+      "mode": "location",
+      "beat": 9,
+      "title": "The sulci nobody can see",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Buried cortex"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ins_l",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Two-thirds of the cortex is inside the folds, and the insula is the extreme case: a whole region with its own circular and central sulci, invisible until the lateral sulcus is opened. Remember that proportion when reading a surface map — most of what is being named is not on the surface at all."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "gaps": [
+    "NO SULCUS HAS A MODEL, ANYWHERE IN THE CATALOG. Searched under sulcus, sulci, fissure and Sylvian: zero hits of any kind. This is not a coverage gap that will close — a sulcus is a cleft between two gyri, not an object, so BodyParts3D has nothing to represent. Every sulcus in this scene is therefore taught by lighting the two gyri that bank it, and each beat says which two. That is the honest form of the teaching rather than a workaround.",
+    "The inferior frontal gyrus has no model on either side, so the frontal lobe here shows two of its three long gyri and the inferior frontal sulcus cannot be banked. Searched as inferior frontal gyrus, pars opercularis, pars triangularis, pars orbitalis and operculum — all absent. Beat 3 names the superior frontal sulcus route to the central sulcus, which is drawable, rather than the inferior route, which is not.",
+    "The cuneus and lingual gyrus have no separate models — the occipital lobe is carried whole (FMA72976 / FMA72975) — so the Y of the parieto-occipital and calcarine sulci in beat 7 is described on the occipital structure card, not lit as three parts. Same for the paracentral lobule, which is part of the superior frontal gyrus model.",
+    "The orbital gyri and the straight gyrus are one model (BP51), so the olfactory sulcus between them cannot be banked either; it is named on that structure card.",
+    "No operculum of any kind exists as a model, so beat 9 can show the insula isolated but cannot lift the three lips off it. The frontal, parietal and temporal opercula are named on the insula and superior temporal gyrus cards.",
+    "Right-side models exist for every gyrus used here except the ones already noted, but this scene carries the left side as its teaching set plus the right central-sulcus pair, to keep the surface readable. FMA72662 is the LEFT precentral gyrus and FMA72661 the RIGHT; FMA72666 is the LEFT postcentral and FMA72665 the RIGHT.",
+    "No mesh referenced by this scene is present in meshes-lite/ yet — the brain models have not been fetched. Every beat is hollow until they are, which is why the status is 'candidate'; nothing in the anatomy or the ops is unresolved."
+  ]
+}

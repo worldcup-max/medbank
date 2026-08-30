@@ -61,7 +61,12 @@
       "popliteal fossa",
       "gastrocnemius",
       "hamstring tightness",
-      "gluteal fold"
+      "gluteal fold",
+      "sacrotuberous ligament",
+      "fascia lata",
+      "lateral intermuscular septum",
+      "medial intermuscular septum",
+      "semimembranosus bursa"
     ]
   },
   "camera": {
@@ -131,7 +136,7 @@
         "long cord-like tendon",
         "graft"
       ],
-      "narration": "Named for its tendon, which is half the length of the muscle. It shares a common origin with the long head of biceps femoris and ends on the medial surface of the tibia as part of the pes anserinus. Its cord-like tendon is the more lateral of the two you feel on the medial side of the back of the knee, and it is commonly harvested as a graft."
+      "narration": "Named for its tendon, which is half the length of the muscle. It shares a common origin with the long head of biceps femoris and ends on the medial surface of the tibia as part of the pes anserinus. Its cord-like tendon is the more superficial and prominent of the two you feel on the medial side of the back of the knee — semimembranosus is the broader one lying deep to it — and it is commonly harvested as a graft."
     },
     {
       "key": "semimembranosus",
@@ -352,6 +357,34 @@
         "insertion of biceps femoris"
       ],
       "narration": "The lateral landing site, and a dangerous one. Both heads of biceps femoris insert into the head of the fibula, and the common fibular nerve winds round the neck just below it, where it lies against bare bone. A fracture or a tight cast there gives foot drop."
+    },
+    {
+      "key": "adductor_tubercle",
+      "label": "Adductor tubercle",
+      "role": "part",
+      "group": "Bony frame",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.8189,
+          0.5831,
+          0.1343
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT, the point where adductor magnus meets the femur (gap 0.49 mm on a 440 mm bone); tools/derive-landmark.mjs --parent FMA24474 --contact FMA22459, unchanged under --slab z:0,0.15. Same measurement as gross__thigh__adductor-canal and gross__thigh__femur, re-derived here rather than copied.",
+      "calibration_gap_mm": 0.49,
+      "terms": [
+        "adductor tubercle",
+        "adductor magnus",
+        "hamstring part",
+        "tibial nerve",
+        "medial supracondylar line"
+      ],
+      "narration": "Where the hamstring part of adductor magnus ends, and the reason this muscle counts as half a hamstring: its ischial fibres run to a tendon on this tubercle and are supplied by the tibial division of the sciatic nerve, exactly like the true hamstrings beside it."
     }
   ],
   "views": [
@@ -748,13 +781,16 @@
     "No nerve of the lower limb exists as a model. The sciatic nerve — the single most important structure in this compartment — is authored as a traced concept path down the muscles it supplies, and the split into tibial and common fibular divisions is narration only. The common fibular nerve winding round the neck of the fibula is taught by lighting the fibula and naming it.",
     "There is no popliteal artery or vein in the catalog, so the contents of the popliteal fossa are described rather than shown. The fossa itself is the separate Popliteal fossa curriculum entry, which this scene does not claim to cover.",
     "No tendon is modelled separately from its muscle, so the long cord of semitendinosus, the membranous upper tendon of semimembranosus and the conjoint tendon of the common origin are taught from the muscle bellies and the narration.",
-    "The ischial tuberosity, the linea aspera, the adductor tubercle and the head of the fibula are sub-features of whole-bone meshes. They are taught by lighting the hip bone, femur or fibula and naming the feature; authoring them as landmark anchors is the next improvement, but the meshes were not measured in this run and an anchor placed by eye would be worse than none.",
+    "The ischial tuberosity, the linea aspera and the head of the fibula are sub-features of whole-bone meshes, taught by lighting the hip bone, femur or fibula and naming the feature. The adductor tubercle is no longer on that list: it is measurable as the contact between adductor magnus and the femur (0.49 mm) and is now a measured anchor in this scene. The other three are ridges or broad areas rather than points and have not yet been given a definition the landmark tool can measure.",
     "The sacrotuberous ligament, which the common hamstring origin blends with, has no mesh in the catalog and is described in narration.",
     "The semimembranosus bursa is not modelled, so a popliteal cyst is mentioned rather than shown.",
+    "The fascia lata and the intermuscular septa that close the posterior compartment have no mesh — searched as fascia, fasciae latae, tract and septum, and the only fascial models in the catalog are the iliotibial tract and tensor fasciae latae, neither of which is the compartment boundary this scene needs. Beat 9 therefore names the septa running from the fascia lata to the linea aspera without drawing them.",
     "This scene does not cover Femur, Gluteus maximus, Sciatic nerve or Popliteal fossa. Gluteus maximus appears only as the muscle whose lower border the hamstrings pass under, the gastrocnemius heads only as the lower borders of the diamond, and the bones only as the frame."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-30",
+    "audited_by": "task"
   }
 }

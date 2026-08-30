@@ -1,0 +1,1087 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Cerebrum — Gross & Lobes",
+  "structure": "Cerebral hemispheres & lobes",
+  "covers": [
+    "Cerebral hemispheres & lobes"
+  ],
+  "learning_goal": "Orient a hemisphere from the central and lateral sulci, name the four surface lobes plus the insula and say what bounds each, place the primary motor, sensory, auditory and visual cortices on named gyri, and describe what the corpus callosum and the hemispheric white matter carry.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "cerebrum",
+      "cerebral cortex",
+      "brain",
+      "forebrain",
+      "telencephalon",
+      "cortical localisation",
+      "stroke"
+    ],
+    "terms": [
+      "cerebrum",
+      "cerebral hemisphere",
+      "cerebral cortex",
+      "lobe",
+      "frontal lobe",
+      "parietal lobe",
+      "temporal lobe",
+      "occipital lobe",
+      "insula",
+      "limbic lobe",
+      "gyrus",
+      "sulcus",
+      "central sulcus",
+      "lateral sulcus",
+      "Sylvian fissure",
+      "parieto-occipital sulcus",
+      "calcarine sulcus",
+      "precentral gyrus",
+      "postcentral gyrus",
+      "primary motor cortex",
+      "primary somatosensory cortex",
+      "homunculus",
+      "Broca's area",
+      "Wernicke's area",
+      "angular gyrus",
+      "supramarginal gyrus",
+      "fusiform gyrus",
+      "cingulate gyrus",
+      "parahippocampal gyrus",
+      "uncus",
+      "corpus callosum",
+      "anterior commissure",
+      "white matter",
+      "corona radiata",
+      "centrum semiovale"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": -0.4
+  },
+  "structures": [
+    {
+      "key": "sfg_r",
+      "name": "right superior frontal gyrus",
+      "label": "Superior frontal gyrus (R)",
+      "role": "part",
+      "group": "Frontal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72653"
+      },
+      "terms": [
+        "superior frontal gyrus",
+        "frontal lobe",
+        "supplementary motor area",
+        "frontal eye field"
+      ],
+      "narration": "The uppermost of the three long frontal gyri. Its medial face carries the supplementary motor area, which is why a lesion here can leave a limb that moves normally to command but is not used spontaneously."
+    },
+    {
+      "key": "sfg_l",
+      "name": "left superior frontal gyrus",
+      "label": "Superior frontal gyrus (L)",
+      "role": "part",
+      "group": "Frontal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72654"
+      },
+      "terms": [
+        "superior frontal gyrus",
+        "frontal lobe",
+        "supplementary motor area",
+        "frontal eye field"
+      ],
+      "narration": "The uppermost of the three long frontal gyri. Its medial face carries the supplementary motor area, which is why a lesion here can leave a limb that moves normally to command but is not used spontaneously."
+    },
+    {
+      "key": "mfg_r",
+      "name": "right middle frontal gyrus",
+      "label": "Middle frontal gyrus (R)",
+      "role": "part",
+      "group": "Frontal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72655"
+      },
+      "terms": [
+        "middle frontal gyrus",
+        "frontal lobe",
+        "frontal eye field",
+        "dorsolateral prefrontal cortex"
+      ],
+      "narration": "The middle of the three. Its posterior end holds the frontal eye field, which drives conjugate gaze to the opposite side — the reason a large frontal stroke leaves the eyes looking towards the damaged hemisphere."
+    },
+    {
+      "key": "mfg_l",
+      "name": "left middle frontal gyrus",
+      "label": "Middle frontal gyrus (L)",
+      "role": "part",
+      "group": "Frontal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72656"
+      },
+      "terms": [
+        "middle frontal gyrus",
+        "frontal lobe",
+        "frontal eye field",
+        "dorsolateral prefrontal cortex"
+      ],
+      "narration": "The middle of the three. Its posterior end holds the frontal eye field, which drives conjugate gaze to the opposite side — the reason a large frontal stroke leaves the eyes looking towards the damaged hemisphere."
+    },
+    {
+      "key": "orb",
+      "name": "orbital gyri straight gyrus",
+      "label": "Orbital & straight gyri",
+      "role": "part",
+      "group": "Frontal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "BP51"
+      },
+      "terms": [
+        "orbital gyri",
+        "gyrus rectus",
+        "straight gyrus",
+        "orbitofrontal cortex",
+        "olfactory sulcus"
+      ],
+      "narration": "The undersurface of the frontal lobe, sitting on the orbital plate. The straight gyrus is the strip closest to the midline, with the olfactory tract in the sulcus beside it — which is why anosmia and disinhibition travel together after a frontal head injury. Carried as one model, so the individual orbital gyri cannot be lit apart."
+    },
+    {
+      "key": "precg_r",
+      "name": "right precentral gyrus",
+      "label": "Precentral gyrus (R)",
+      "role": "part",
+      "group": "Frontal lobe",
+      "layer": "cortex",
+      "color": "#d98f6a",
+      "refs": {
+        "bodyparts3d": "FMA72661"
+      },
+      "terms": [
+        "precentral gyrus",
+        "primary motor cortex",
+        "M1",
+        "Brodmann area 4",
+        "motor homunculus",
+        "central sulcus"
+      ],
+      "narration": "Primary motor cortex. It runs from the midline down to the lateral sulcus, mapped upside down: the leg over the top edge and into the medial surface, the face at the bottom. That map is the whole of why an anterior cerebral artery stroke takes the leg and a middle cerebral artery stroke takes the face and arm."
+    },
+    {
+      "key": "precg_l",
+      "name": "left precentral gyrus",
+      "label": "Precentral gyrus (L)",
+      "role": "part",
+      "group": "Frontal lobe",
+      "layer": "cortex",
+      "color": "#d98f6a",
+      "refs": {
+        "bodyparts3d": "FMA72662"
+      },
+      "terms": [
+        "precentral gyrus",
+        "primary motor cortex",
+        "M1",
+        "Brodmann area 4",
+        "motor homunculus",
+        "central sulcus"
+      ],
+      "narration": "Primary motor cortex. It runs from the midline down to the lateral sulcus, mapped upside down: the leg over the top edge and into the medial surface, the face at the bottom. That map is the whole of why an anterior cerebral artery stroke takes the leg and a middle cerebral artery stroke takes the face and arm."
+    },
+    {
+      "key": "postcg_r",
+      "name": "right postcentral gyrus",
+      "label": "Postcentral gyrus (R)",
+      "role": "part",
+      "group": "Parietal lobe",
+      "layer": "cortex",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA72665"
+      },
+      "terms": [
+        "postcentral gyrus",
+        "primary somatosensory cortex",
+        "S1",
+        "Brodmann areas 3 1 2",
+        "sensory homunculus",
+        "central sulcus"
+      ],
+      "narration": "Primary somatosensory cortex, lying immediately behind the central sulcus and carrying the same upside-down map as the gyrus in front of it. The two gyri face each other across the sulcus, which is what makes the central sulcus findable on any scan."
+    },
+    {
+      "key": "postcg_l",
+      "name": "left postcentral gyrus",
+      "label": "Postcentral gyrus (L)",
+      "role": "part",
+      "group": "Parietal lobe",
+      "layer": "cortex",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA72666"
+      },
+      "terms": [
+        "postcentral gyrus",
+        "primary somatosensory cortex",
+        "S1",
+        "Brodmann areas 3 1 2",
+        "sensory homunculus",
+        "central sulcus"
+      ],
+      "narration": "Primary somatosensory cortex, lying immediately behind the central sulcus and carrying the same upside-down map as the gyrus in front of it. The two gyri face each other across the sulcus, which is what makes the central sulcus findable on any scan."
+    },
+    {
+      "key": "spl_r",
+      "name": "right superior parietal lobule precuneus",
+      "label": "Superior parietal lobule & precuneus (R)",
+      "role": "part",
+      "group": "Parietal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "BP50"
+      },
+      "terms": [
+        "superior parietal lobule",
+        "precuneus",
+        "parietal lobe",
+        "sensory association cortex",
+        "parieto-occipital sulcus"
+      ],
+      "narration": "Sensory association cortex behind the postcentral gyrus, continuing round onto the medial surface as the precuneus. A right-sided lesion here is the classic cause of contralateral neglect — the patient does not report the left half of the world and does not know it is missing."
+    },
+    {
+      "key": "spl_l",
+      "name": "left superior parietal lobule precuneus",
+      "label": "Superior parietal lobule & precuneus (L)",
+      "role": "part",
+      "group": "Parietal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "BP49"
+      },
+      "terms": [
+        "superior parietal lobule",
+        "precuneus",
+        "parietal lobe",
+        "sensory association cortex",
+        "parieto-occipital sulcus"
+      ],
+      "narration": "Sensory association cortex behind the postcentral gyrus, continuing round onto the medial surface as the precuneus. The precuneus is bounded behind by the parieto-occipital sulcus, which is the only sharp boundary the occipital lobe has."
+    },
+    {
+      "key": "smg_r",
+      "name": "right supramarginal gyrus",
+      "label": "Supramarginal gyrus (R)",
+      "role": "part",
+      "group": "Parietal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72667"
+      },
+      "terms": [
+        "supramarginal gyrus",
+        "inferior parietal lobule",
+        "Brodmann area 40",
+        "conduction aphasia",
+        "arcuate fasciculus"
+      ],
+      "narration": "The first half of the inferior parietal lobule, curling around the upturned end of the lateral sulcus. On the dominant side it sits over the arcuate fasciculus, and damage there gives conduction aphasia: comprehension intact, speech fluent, repetition lost."
+    },
+    {
+      "key": "smg_l",
+      "name": "left supramarginal gyrus",
+      "label": "Supramarginal gyrus (L)",
+      "role": "part",
+      "group": "Parietal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72668"
+      },
+      "terms": [
+        "supramarginal gyrus",
+        "inferior parietal lobule",
+        "Brodmann area 40",
+        "conduction aphasia",
+        "arcuate fasciculus"
+      ],
+      "narration": "The first half of the inferior parietal lobule, curling around the upturned end of the lateral sulcus. On the dominant side it sits over the arcuate fasciculus, and damage there gives conduction aphasia: comprehension intact, speech fluent, repetition lost."
+    },
+    {
+      "key": "ang_r",
+      "name": "right angular gyrus",
+      "label": "Angular gyrus (R)",
+      "role": "part",
+      "group": "Parietal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72669"
+      },
+      "terms": [
+        "angular gyrus",
+        "inferior parietal lobule",
+        "Brodmann area 39",
+        "Gerstmann syndrome"
+      ],
+      "narration": "The second half of the inferior parietal lobule, curling around the end of the superior temporal sulcus. A dominant-side lesion gives Gerstmann's four: cannot write, cannot calculate, cannot name fingers, cannot tell left from right."
+    },
+    {
+      "key": "ang_l",
+      "name": "left angular gyrus",
+      "label": "Angular gyrus (L)",
+      "role": "part",
+      "group": "Parietal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72670"
+      },
+      "terms": [
+        "angular gyrus",
+        "inferior parietal lobule",
+        "Brodmann area 39",
+        "Gerstmann syndrome"
+      ],
+      "narration": "The second half of the inferior parietal lobule, curling around the end of the superior temporal sulcus. A dominant-side lesion gives Gerstmann's four: cannot write, cannot calculate, cannot name fingers, cannot tell left from right."
+    },
+    {
+      "key": "stg_a_r",
+      "name": "anterior part of right superior temporal gyrus",
+      "label": "Superior temporal gyrus, anterior (R)",
+      "role": "part",
+      "group": "Temporal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72800"
+      },
+      "terms": [
+        "superior temporal gyrus",
+        "temporal lobe",
+        "primary auditory cortex",
+        "Heschl's gyrus",
+        "Brodmann areas 41 42"
+      ],
+      "narration": "The upper temporal gyrus, forming the lower lip of the lateral sulcus. Primary auditory cortex is on its upper surface inside the sulcus, so it is hidden in this view — and because each ear reaches both sides, one lesion does not make an ear deaf."
+    },
+    {
+      "key": "stg_a_l",
+      "name": "anterior part of left superior temporal gyrus",
+      "label": "Superior temporal gyrus, anterior (L)",
+      "role": "part",
+      "group": "Temporal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72801"
+      },
+      "terms": [
+        "superior temporal gyrus",
+        "temporal lobe",
+        "primary auditory cortex",
+        "Heschl's gyrus",
+        "Brodmann areas 41 42"
+      ],
+      "narration": "The upper temporal gyrus, forming the lower lip of the lateral sulcus. Primary auditory cortex is on its upper surface inside the sulcus, so it is hidden in this view — and because each ear reaches both sides, one lesion does not make an ear deaf."
+    },
+    {
+      "key": "stg_p_r",
+      "name": "posterior part of right superior temporal gyrus",
+      "label": "Superior temporal gyrus, posterior (R)",
+      "role": "part",
+      "group": "Temporal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72804"
+      },
+      "terms": [
+        "superior temporal gyrus",
+        "Wernicke's area",
+        "receptive aphasia",
+        "Brodmann area 22"
+      ],
+      "narration": "The back end of the superior temporal gyrus. On the dominant side this is Wernicke's area; on this side it is the mirror region, and its loss takes the prosody of speech rather than its meaning."
+    },
+    {
+      "key": "stg_p_l",
+      "name": "posterior part of left superior temporal gyrus",
+      "label": "Superior temporal gyrus, posterior (L)",
+      "role": "part",
+      "group": "Temporal lobe",
+      "layer": "cortex",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA72805"
+      },
+      "terms": [
+        "superior temporal gyrus",
+        "Wernicke's area",
+        "receptive aphasia",
+        "fluent aphasia",
+        "Brodmann area 22"
+      ],
+      "narration": "Wernicke's area in the ninety-five per cent of people whose language is on the left. Damage gives fluent, well-articulated, meaningless speech in a patient who cannot understand and does not know anything is wrong — the opposite of Broca's aphasia in every respect."
+    },
+    {
+      "key": "mtg_r",
+      "name": "right middle temporal gyrus",
+      "label": "Middle temporal gyrus (R)",
+      "role": "part",
+      "group": "Temporal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72685"
+      },
+      "terms": [
+        "middle temporal gyrus",
+        "temporal lobe",
+        "superior temporal sulcus"
+      ],
+      "narration": "Between the superior and inferior temporal gyri, separated from each by its own sulcus. The superior temporal sulcus above it runs backwards to end in the angular gyrus."
+    },
+    {
+      "key": "mtg_l",
+      "name": "left middle temporal gyrus",
+      "label": "Middle temporal gyrus (L)",
+      "role": "part",
+      "group": "Temporal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72686"
+      },
+      "terms": [
+        "middle temporal gyrus",
+        "temporal lobe",
+        "superior temporal sulcus"
+      ],
+      "narration": "Between the superior and inferior temporal gyri, separated from each by its own sulcus. The superior temporal sulcus above it runs backwards to end in the angular gyrus."
+    },
+    {
+      "key": "itg_r",
+      "name": "right inferior temporal gyrus",
+      "label": "Inferior temporal gyrus (R)",
+      "role": "part",
+      "group": "Temporal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72687"
+      },
+      "terms": [
+        "inferior temporal gyrus",
+        "temporal lobe",
+        "ventral stream"
+      ],
+      "narration": "The lowest gyrus on the lateral surface, turning onto the undersurface below. It is the far end of the ventral 'what' stream that begins in the occipital lobe."
+    },
+    {
+      "key": "itg_l",
+      "name": "left inferior temporal gyrus",
+      "label": "Inferior temporal gyrus (L)",
+      "role": "part",
+      "group": "Temporal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72688"
+      },
+      "terms": [
+        "inferior temporal gyrus",
+        "temporal lobe",
+        "ventral stream"
+      ],
+      "narration": "The lowest gyrus on the lateral surface, turning onto the undersurface below. It is the far end of the ventral 'what' stream that begins in the occipital lobe."
+    },
+    {
+      "key": "fus_r",
+      "name": "right fusiform gyrus",
+      "label": "Fusiform gyrus (R)",
+      "role": "part",
+      "group": "Temporal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72689"
+      },
+      "terms": [
+        "fusiform gyrus",
+        "occipitotemporal gyrus",
+        "fusiform face area",
+        "prosopagnosia"
+      ],
+      "narration": "On the undersurface, between the inferior temporal and parahippocampal gyri and straddling the temporo-occipital boundary. Bilateral damage here is the lesion of prosopagnosia — faces are seen perfectly and recognised by nobody."
+    },
+    {
+      "key": "fus_l",
+      "name": "left fusiform gyrus",
+      "label": "Fusiform gyrus (L)",
+      "role": "part",
+      "group": "Temporal lobe",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72690"
+      },
+      "terms": [
+        "fusiform gyrus",
+        "occipitotemporal gyrus",
+        "visual word form area"
+      ],
+      "narration": "On the undersurface, between the inferior temporal and parahippocampal gyri. On the dominant side its posterior part is the visual word form area, the region whose disconnection produces alexia without agraphia."
+    },
+    {
+      "key": "occ_r",
+      "name": "right occipital lobe",
+      "label": "Occipital lobe (R)",
+      "role": "part",
+      "group": "Occipital lobe",
+      "layer": "cortex",
+      "color": "#8f7fbf",
+      "refs": {
+        "bodyparts3d": "FMA72975"
+      },
+      "terms": [
+        "occipital lobe",
+        "primary visual cortex",
+        "V1",
+        "calcarine sulcus",
+        "striate cortex",
+        "Brodmann area 17",
+        "parieto-occipital sulcus"
+      ],
+      "narration": "The only lobe the catalog carries whole. Primary visual cortex lines the calcarine sulcus on its medial face, upper bank taking the lower visual field and lower bank the upper — so this lobe holds the LEFT half of what both eyes see."
+    },
+    {
+      "key": "occ_l",
+      "name": "left occipital lobe",
+      "label": "Occipital lobe (L)",
+      "role": "part",
+      "group": "Occipital lobe",
+      "layer": "cortex",
+      "color": "#8f7fbf",
+      "refs": {
+        "bodyparts3d": "FMA72976"
+      },
+      "terms": [
+        "occipital lobe",
+        "primary visual cortex",
+        "V1",
+        "calcarine sulcus",
+        "striate cortex",
+        "Brodmann area 17",
+        "parieto-occipital sulcus"
+      ],
+      "narration": "Its posterior pole is the macular representation, supplied from both the posterior and the middle cerebral arteries — which is why a posterior cerebral artery stroke classically spares central vision."
+    },
+    {
+      "key": "ins_r",
+      "name": "right insula",
+      "label": "Insula (R)",
+      "role": "part",
+      "group": "Insula",
+      "layer": "cortex",
+      "color": "#b56576",
+      "refs": {
+        "bodyparts3d": "FMA72977"
+      },
+      "terms": [
+        "insula",
+        "insular cortex",
+        "island of Reil",
+        "lateral sulcus",
+        "operculum",
+        "circular sulcus"
+      ],
+      "narration": "The fifth lobe, buried in the floor of the lateral sulcus and covered over by the frontal, parietal and temporal opercula. Reaching it means opening the sulcus — which is exactly what the surgeon does to reach the middle cerebral artery running in it."
+    },
+    {
+      "key": "ins_l",
+      "name": "left insula",
+      "label": "Insula (L)",
+      "role": "part",
+      "group": "Insula",
+      "layer": "cortex",
+      "color": "#b56576",
+      "refs": {
+        "bodyparts3d": "FMA72978"
+      },
+      "terms": [
+        "insula",
+        "insular cortex",
+        "island of Reil",
+        "lateral sulcus",
+        "operculum",
+        "circular sulcus"
+      ],
+      "narration": "The fifth lobe, buried in the floor of the lateral sulcus. It handles visceral sensation, taste and the felt sense of the body's own state, and it is the last cortex the developing brain covers over."
+    },
+    {
+      "key": "acsg_r",
+      "name": "right accessory short gyrus",
+      "label": "Accessory short gyrus (R)",
+      "role": "context",
+      "group": "Insula",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72701"
+      },
+      "terms": [
+        "accessory short gyrus",
+        "insula",
+        "short gyri of insula"
+      ],
+      "narration": "One of the short gyri of the anterior insula, in front of the central sulcus of the insula."
+    },
+    {
+      "key": "acsg_l",
+      "name": "left accessory short gyrus",
+      "label": "Accessory short gyrus (L)",
+      "role": "context",
+      "group": "Insula",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72702"
+      },
+      "terms": [
+        "accessory short gyrus",
+        "insula",
+        "short gyri of insula"
+      ],
+      "narration": "One of the short gyri of the anterior insula, in front of the central sulcus of the insula."
+    },
+    {
+      "key": "cing_r",
+      "name": "right cingulate gyrus",
+      "label": "Cingulate gyrus (R)",
+      "role": "context",
+      "group": "Limbic border",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72717"
+      },
+      "terms": [
+        "cingulate gyrus",
+        "limbic lobe",
+        "cingulate sulcus",
+        "Papez circuit"
+      ],
+      "narration": "Arches over the corpus callosum on the medial surface. With the parahippocampal gyrus below it, it makes the ring sometimes called the limbic lobe — the border between the cortex and the structures under it."
+    },
+    {
+      "key": "cing_l",
+      "name": "left cingulate gyrus",
+      "label": "Cingulate gyrus (L)",
+      "role": "context",
+      "group": "Limbic border",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72718"
+      },
+      "terms": [
+        "cingulate gyrus",
+        "limbic lobe",
+        "cingulate sulcus",
+        "Papez circuit"
+      ],
+      "narration": "Arches over the corpus callosum on the medial surface, following its curve from the genu in front to the splenium behind."
+    },
+    {
+      "key": "phg_r",
+      "name": "right parahippocampal gyrus",
+      "label": "Parahippocampal gyrus (R)",
+      "role": "context",
+      "group": "Limbic border",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72705"
+      },
+      "terms": [
+        "parahippocampal gyrus",
+        "limbic lobe",
+        "uncus",
+        "entorhinal cortex",
+        "uncal herniation"
+      ],
+      "narration": "On the undersurface, medial to the fusiform gyrus. Its hooked anterior end is the uncus — the piece that presses on the midbrain and the oculomotor nerve when a mass above the tentorium herniates."
+    },
+    {
+      "key": "phg_l",
+      "name": "left parahippocampal gyrus",
+      "label": "Parahippocampal gyrus (L)",
+      "role": "context",
+      "group": "Limbic border",
+      "layer": "cortex",
+      "color": "#e9d8c8",
+      "refs": {
+        "bodyparts3d": "FMA72706"
+      },
+      "terms": [
+        "parahippocampal gyrus",
+        "limbic lobe",
+        "uncus",
+        "entorhinal cortex",
+        "uncal herniation"
+      ],
+      "narration": "On the undersurface, medial to the fusiform gyrus, wrapping the hippocampus it is named for. Its cortex is the gateway through which the rest of the cortex talks to the hippocampus."
+    },
+    {
+      "key": "cc",
+      "name": "corpus callosum",
+      "label": "Corpus callosum",
+      "role": "part",
+      "group": "Connections",
+      "layer": "white matter",
+      "color": "#f0ece2",
+      "refs": {
+        "bodyparts3d": "FMA86464"
+      },
+      "terms": [
+        "corpus callosum",
+        "commissural fibres",
+        "genu",
+        "splenium",
+        "rostrum",
+        "body of corpus callosum",
+        "forceps minor",
+        "forceps major"
+      ],
+      "narration": "The great commissure: roughly two hundred million axons joining matching points in the two hemispheres. Rostrum, genu, body and splenium front to back — the model is one piece, so those parts are named here rather than lit separately. Cut it and each hemisphere still works, but neither can tell the other what it knows."
+    },
+    {
+      "key": "ac",
+      "name": "anterior commissure",
+      "label": "Anterior commissure",
+      "role": "part",
+      "group": "Connections",
+      "layer": "white matter",
+      "color": "#f0ece2",
+      "refs": {
+        "bodyparts3d": "FMA61961"
+      },
+      "terms": [
+        "anterior commissure",
+        "commissural fibres",
+        "temporal lobes"
+      ],
+      "narration": "A small bundle crossing in front of the columns of the fornix, joining the two temporal lobes and the olfactory regions. It is the commissure that survives when the corpus callosum is absent."
+    },
+    {
+      "key": "wm_hem",
+      "name": "white matter structure of cerebral hemisphere",
+      "label": "Hemispheric white matter",
+      "role": "context",
+      "group": "Connections",
+      "layer": "white matter",
+      "color": "#efe9dc",
+      "refs": {
+        "bodyparts3d": "FMA61822"
+      },
+      "terms": [
+        "white matter",
+        "centrum semiovale",
+        "corona radiata",
+        "association fibres",
+        "commissural fibres",
+        "projection fibres",
+        "arcuate fasciculus",
+        "superior longitudinal fasciculus"
+      ],
+      "narration": "Everything under the cortex: association fibres within a hemisphere, commissural fibres across to the other, projection fibres up and down to the brainstem and cord. Carried as one mass, so an individual tract cannot be lit — the named bundles are taught here by narration."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Two hemispheres, one folded sheet",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "A sheet of cortex a few millimetres thick, crumpled to fit the skull, so that two-thirds of it is hidden inside the folds. The ridges are gyri, the clefts between them sulci, and the whole is split into two hemispheres joined underneath by the corpus callosum."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The central sulcus divides the map",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "precg_l",
+            "postcg_l"
+          ]
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "precg_l",
+          "intensity": 0.7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "postcg_l",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "Two long gyri face each other across the deepest sulcus on the lateral surface. In front is motor, behind is sensory, and the sulcus between them is the boundary between the frontal and parietal lobes. Find these two and you have oriented the whole hemisphere."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Frontal lobe",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Frontal lobe"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Everything in front of the central sulcus and above the lateral sulcus. Three long gyri run front to back — superior, middle and inferior — with the precentral gyrus standing across their back ends, and the orbital gyri folded underneath onto the roof of the orbit. The inferior frontal gyrus, which carries Broca's area, has no model in the catalog and is not on screen: it is the gyrus that would lie below the middle one."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Parietal lobe",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Parietal lobe"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Behind the central sulcus: the postcentral gyrus first, then the superior parietal lobule above and, below it, the supramarginal and angular gyri wrapping the upturned ends of two sulci. Those last two are the inferior parietal lobule, and on the dominant side they are language."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "Temporal lobe and the lateral sulcus",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Temporal lobe"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "stg_p_l",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Below the lateral sulcus. Three gyri again — superior, middle, inferior — with the fusiform gyrus turning onto the undersurface. The lit patch is the back of the left superior temporal gyrus: Wernicke's area, where speech is understood. Auditory cortex itself lies on the upper surface of that gyrus inside the sulcus, so it cannot be seen from outside."
+    },
+    {
+      "mode": "location",
+      "beat": 6,
+      "title": "Occipital lobe",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Occipital lobe"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "The smallest lobe, at the back. On the medial surface the parieto-occipital sulcus cuts it off cleanly; on the lateral surface there is no boundary at all, only an agreed line, which is why the lateral extent of an occipital infarct is always argued about. Visual cortex lines the calcarine sulcus on the medial face — described here, because the sulcus is a cleft in this model and not a part of it."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "The fifth lobe, hidden",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Insula"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Insula",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Strip the frontal, parietal and temporal lips away and the insula is underneath, sunk in the floor of the lateral sulcus. It is cortex like any other; it is simply the piece the growing hemisphere folded over. The middle cerebral artery runs across it."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 8,
+      "title": "What joins the two halves",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Connections"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cc",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ac",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "The corpus callosum arches across the midline, its front end the genu and its back end the splenium; the much smaller anterior commissure crosses below its front end and joins the temporal lobes. Everything a hemisphere knows reaches the other side through one of these."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 9,
+      "title": "The limbic border on the medial surface",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Limbic border"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "cc"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cing_l",
+          "to": "phg_l",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "The cingulate gyrus rides over the corpus callosum and runs backwards, narrows behind the splenium, and continues forwards on the undersurface as the parahippocampal gyrus. One continuous ring around the edge of the hemisphere — the limbic lobe. Its hooked front end, the uncus, is what herniates over the tentorium and takes the third nerve with it."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 10,
+      "title": "Cortex outside, white matter inside",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "wm_hem",
+          "intensity": 0.5
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Cut across and the grey is on the outside, the white inside. Three kinds of fibre fill it: association fibres running within one hemisphere, commissural fibres crossing to the other, and projection fibres funnelling down towards the brainstem. The white matter is one model here, so those three are named rather than shown."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "gaps": [
+    "THE LOBES ARE NOT WHOLE MODELS. The catalog carries only the occipital lobe as a lobe (FMA72975 / FMA72976). The frontal, parietal and temporal lobes were searched under lobe, lobule, cortex and hemisphere spellings and have no whole-lobe model, so each is built here as a GROUP of its constituent gyri. Isolating 'Frontal lobe' therefore lights the gyri that were fetched, not the lobe's full extent — the gyri that have no model leave holes in it.",
+    "No inferior frontal gyrus, and therefore no Broca's area, on either side. Searched as inferior frontal gyrus, pars opercularis, pars triangularis, pars orbitalis and operculum. Beat 3 says openly that the gyrus is absent rather than pointing at the middle frontal gyrus in its place. Wernicke's area, by contrast, IS drawable — it is the posterior part of the superior temporal gyrus, FMA72805.",
+    "Sulci are clefts, not objects, and none of them is a model: central, lateral, parieto-occipital, calcarine and cingulate sulci are all taught by naming the two gyri that face across them. The central sulcus is the one case where this works perfectly, because precentral and postcentral gyri are both present and bracket it.",
+    "Primary auditory cortex (Heschl's gyrus, on the upper surface of the superior temporal gyrus) and primary visual cortex (in the banks of the calcarine sulcus) have no separate models. Both are stated in the narration as described-not-shown.",
+    "The corpus callosum is one model, so rostrum, genu, body and splenium cannot be lit apart; they are named on the single structure card. The same applies to the hemispheric white matter, which is one mass — the corona radiata, centrum semiovale and arcuate fasciculus are named, not shown.",
+    "No cerebral artery of any kind is in the catalog — searched as artery, cerebral artery, circle of Willis, and by branch name. The middle cerebral artery is named twice in narration as an explanation and is never traced; the vascular teaching for this topic is blocked on geometry, not on authoring.",
+    "No mesh for this scene is present in meshes-lite/ yet: none of the 38 brain models it references has been fetched. Every beat is hollow until they are. The scene is authored at status 'candidate' for that reason and not because anything in it is unresolved."
+  ]
+}

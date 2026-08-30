@@ -60,6 +60,59 @@ export function sbaGate(v){
 /* ── Aggregate the specialist verdicts into ONE severity + recommended action. Deterministic and unit-tested;
    the reviewers (LLM) supply the signals, this maps them. Severity: hard > major > minor > none.
    hard → auto-reject; major/minor/none → to the HUMAN queue (never auto-approved), carrying the flags. */
+/* ===== Deterministic redundant-therapy gate (V1.8.2) =====================================================
+   Redundancy detection is a STRUCTURED FACT-CHECK, not clinical judgement, so it lives in code — never inside an
+   LLM reviewer's attention budget (that competes with R2's mechanism reconstruction; see the #3/ODS regression).
+   Rule: FLAG only when the keyed therapy is ADDED and its therapeutic class is ALREADY PRESENT in the stem's meds
+   AND concurrent same-class use ordinarily constitutes duplicate therapy. DIFFERENT classes combined on purpose
+   (the 4-pillar HFrEF regimen, loop+thiazide, dual bronchodilators) never match, so legitimate combinations are
+   safe BY CONSTRUCTION. Versioned so the rule set is auditable. */
+export const DRUG_CLASS_VERSION = "1.8.2";
+export const DRUG_CLASSES = {
+  // beta-blockers (incl. combined alpha/beta) — two beta-blockers is never intentional combination therapy
+  carvedilol:["beta_blocker"], labetalol:["beta_blocker"], bisoprolol:["beta_blocker"], metoprolol:["beta_blocker"],
+  nebivolol:["beta_blocker"], atenolol:["beta_blocker"], propranolol:["beta_blocker"], sotalol:["beta_blocker"],
+  // SGLT2 inhibitors
+  empagliflozin:["sglt2i"], dapagliflozin:["sglt2i"], canagliflozin:["sglt2i"], ertugliflozin:["sglt2i"],
+  // RAAS blockers — ACE-I / ARB / ARNI all share raas_blocker so dual RAAS (incl. on top of an ARNI) is caught
+  lisinopril:["acei","raas_blocker"], ramipril:["acei","raas_blocker"], enalapril:["acei","raas_blocker"],
+  perindopril:["acei","raas_blocker"], captopril:["acei","raas_blocker"],
+  losartan:["arb","raas_blocker"], candesartan:["arb","raas_blocker"], valsartan:["arb","raas_blocker"],
+  irbesartan:["arb","raas_blocker"], telmisartan:["arb","raas_blocker"], olmesartan:["arb","raas_blocker"],
+  sacubitril:["arni","arb","raas_blocker"],   // sacubitril/valsartan is written with a slash; matching sacubitril tags the ARNI
+  // MRA / potassium-sparing — two MRAs, or MRA + K-sparing, is redundant/hazardous
+  spironolactone:["mra","k_sparing"], eplerenone:["mra","k_sparing"], amiloride:["k_sparing"], triamterene:["k_sparing"],
+  // non-dihydropyridine CCB, biguanide, loop, thiazide, DPP-4 (distinct classes; here for completeness)
+  verapamil:["non_dhp_ccb"], diltiazem:["non_dhp_ccb"], metformin:["biguanide"],
+  furosemide:["loop"], bumetanide:["loop"], torsemide:["loop"],
+  hydrochlorothiazide:["thiazide"], indapamide:["thiazide"], bendroflumethiazide:["thiazide"],
+  sitagliptin:["dpp4"], linagliptin:["dpp4"], saxagliptin:["dpp4"]
+};
+const _RED_SUBSTITUTION = /\b(switch|switching|replace|replacing|substitut|stop|stopping|discontinu|change\s+\w+\s+to|instead of|in place of|down-?titrat|reduce|reducing)\b/i;
+const _RED_ADDITIVE = /\b(add|adding|start|starting|commenc|initiat|introduc|up-?titrat|increase|increasing|combine|combining)\b/i;
+function _drugsIn(text){ const t=" "+String(text||"").toLowerCase()+" "; const found=[]; for(const name in DRUG_CLASSES){ if(new RegExp("\\b"+name+"\\b","i").test(t)) found.push(name); } return found; }
+function _classesOf(names){ const s=new Set(); names.forEach(n=>(DRUG_CLASSES[n]||[]).forEach(c=>s.add(c))); return s; }
+export function redundancyGate(q){
+  q=q||{}; const opts=q.options||[]; const ai=(typeof q.answer==="number")?q.answer:0;
+  const keyedText=String(opts[ai]||"");
+  const present=_drugsIn(q.stem);                     // meds the patient is already on (from the stem)
+  const keyedDrugs=_drugsIn(keyedText);               // drug named in the keyed option
+  // additive iff the option introduces a drug and is NOT phrased as a switch/stop/substitution
+  const additive = _RED_ADDITIVE.test(keyedText) || (!_RED_SUBSTITUTION.test(keyedText) && keyedDrugs.length>0);
+  const substitution = _RED_SUBSTITUTION.test(keyedText);
+  const presentClasses=_classesOf(present), keyedClasses=_classesOf(keyedDrugs);
+  const shared=[...keyedClasses].filter(c=>presentClasses.has(c));
+  const conflicts=[]; if(shared.length){ present.forEach(p=>{ if((DRUG_CLASSES[p]||[]).some(c=>shared.includes(c))) conflicts.push(p); }); }
+  const duplicate = additive && !substitution && shared.length>0 && keyedDrugs.length>0
+                    && conflicts.filter(p=>!keyedDrugs.includes(p)).length>0;   // must duplicate a DIFFERENT existing agent
+  const dupPartners=conflicts.filter(p=>!keyedDrugs.includes(p));
+  const reason = duplicate
+    ? ("keyed therapy "+keyedDrugs.join("/")+" duplicates existing "+dupPartners.join("/")+" (shared class: "+shared.join(", ")+") — switch/adjust the existing agent, do not add a second of the same class")
+    : "";
+  return { version:DRUG_CLASS_VERSION, duplicate, additive, substitution, present_drugs:present, present_classes:[...presentClasses],
+           keyed_drugs:keyedDrugs, keyed_classes:[...keyedClasses], shared_classes:shared, conflicts:dupPartners, reason };
+}
+
 export const SEVERITY_RANK = { none:0, minor:1, major:2, hard:3 };
 export function qaVerdict(inp){
   inp=inp||{};
@@ -85,6 +138,9 @@ export function qaVerdict(inp){
   if(sba.distractor_correct) fail("single_best_answer","hard","a distractor is actually correct (two correct answers)");
   else if(sba.defensible_alternative || answerDispute) fail("single_best_answer","major","a competing answer remains defensible after reasoning; the keyed answer's priority is not established");
   else pass("single_best_answer");
+  // 4 redundant therapy (deterministic gate; hard — a duplicate-class drug is a clinical medication error).
+  //   Only evaluated when a redundancy verdict is supplied, so legacy callers/tests are unchanged.
+  if(inp.redundancy){ inp.redundancy.duplicate ? fail("redundant_therapy","hard",inp.redundancy.reason||"keyed therapy duplicates an existing drug class") : pass("redundant_therapy"); }
   // 5 integration quality (artificial→major, adequate→minor, strong→pass)
   if(iq==="artificial") fail("integration_quality","major","integration is an artificial label pairing");
   else if(iq==="adequate") fail("integration_quality","minor","integration is real but close to pattern-recognition");
@@ -239,7 +295,8 @@ export async function runCandidate(question, deps){
   // Injected as separate specialists so one model never polices integration + medicine + answer-uniqueness at once.
   const clin = deps.clinical ? clinicalGate(await deps.clinical(reviewQ, proposal)) : { pass:true, valid:true, matches_key:true, stem_sufficient:true, errors:[], skipped:true };
   const sba  = deps.sba      ? sbaGate(await deps.sba(reviewQ, proposal))          : { pass:true, single_best:true, distractor_flaw:"none", leakage:false, skipped:true };
-  const qa = qaVerdict({ dependency:dep, integration_quality:(verdict&&verdict.quality)||"adequate", clinical:clin, sba });
+  const redundancy = redundancyGate(reviewQ);   // deterministic same-class duplicate-therapy check
+  const qa = qaVerdict({ dependency:dep, integration_quality:(verdict&&verdict.quality)||"adequate", clinical:clin, sba, redundancy });
   const rec = {
     question_id: srcId,
     primary_topic: proposal.primary_topic||null,

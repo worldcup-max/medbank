@@ -1,0 +1,531 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__ventricular-system-csf__choroid-plexus",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Ventricular System & CSF",
+  "structure": "Choroid plexus",
+  "covers": [
+    "Choroid plexus"
+  ],
+  "learning_goal": "Say exactly where choroid plexus is and where it is not, describe the three layers a molecule crosses to become cerebrospinal fluid and which of them is the barrier, and use the rate of production to explain why an obstruction rises in pressure rather than settling.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "ventricular system",
+      "CSF",
+      "CSF production",
+      "blood-CSF barrier",
+      "hydrocephalus",
+      "neuroimaging orientation"
+    ],
+    "terms": [
+      "choroid plexus",
+      "choroid plexus of lateral ventricle",
+      "glomus",
+      "glomus of choroid plexus",
+      "choroid plexus calcification",
+      "choroid fissure",
+      "tela choroidea",
+      "choroidal epithelium",
+      "ependyma",
+      "fenestrated capillary",
+      "tight junction",
+      "blood-CSF barrier",
+      "blood-brain barrier",
+      "CSF production",
+      "cerebrospinal fluid",
+      "carbonic anhydrase",
+      "acetazolamide",
+      "Na-K-ATPase",
+      "choroid plexus papilloma",
+      "choroid plexus carcinoma",
+      "overproduction hydrocephalus",
+      "anterior choroidal artery",
+      "posterior choroidal artery",
+      "intraventricular haemorrhage",
+      "xanthochromia",
+      "CSF protein",
+      "CSF glucose"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": -0.3
+  },
+  "structures": [
+    {
+      "key": "cp_l",
+      "name": "choroid plexus of left cerebral hemisphere",
+      "label": "Choroid plexus (L)",
+      "role": "part",
+      "group": "Choroid plexus",
+      "layer": "vessel",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA274029"
+      },
+      "terms": [
+        "choroid plexus",
+        "choroid plexus of lateral ventricle",
+        "glomus",
+        "choroid fissure",
+        "choroid plexus calcification"
+      ],
+      "narration": "The left lateral ventricle's plexus: a frond of vessels wrapped in a single layer of cuboidal epithelium, hanging into the cavity along the line where the ventricular wall is thinnest. It runs along the floor of the body and the roof of the temporal horn, and it is bulkiest at the atrium, where the tuft is called the glomus. The glomus is not a separate model — it is the thick part of this one, and it is the part that calcifies with age into the bright symmetrical dot a CT report calls normal."
+    },
+    {
+      "key": "cp_r",
+      "name": "choroid plexus of right cerebral hemisphere",
+      "label": "Choroid plexus (R)",
+      "role": "part",
+      "group": "Choroid plexus",
+      "layer": "vessel",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA274027"
+      },
+      "terms": [
+        "choroid plexus",
+        "glomus",
+        "choroid plexus calcification"
+      ],
+      "narration": "The mirror frond on the right. The pair calcify at much the same rate, so on a CT the two glomera are read against each other: symmetrical bright dots at the atria are age, a single bright mass that displaces the ventricle is not."
+    },
+    {
+      "key": "lv_l",
+      "name": "left lateral ventricle",
+      "label": "Lateral ventricle (L)",
+      "role": "context",
+      "group": "Cavities it lies in",
+      "layer": "ventricle",
+      "color": "#4fa8d8",
+      "refs": {
+        "bodyparts3d": "FMA78450"
+      },
+      "terms": [
+        "lateral ventricle",
+        "body of lateral ventricle",
+        "atrium",
+        "trigone",
+        "temporal horn",
+        "frontal horn",
+        "occipital horn"
+      ],
+      "narration": "The cavity the plexus hangs into, and the one that makes most of the fluid. Match the two shapes on screen and the rule falls out of the geometry: the plexus follows the body, the atrium and the temporal horn, and stops short of the frontal horn in front and the occipital horn behind."
+    },
+    {
+      "key": "lv_r",
+      "name": "right lateral ventricle",
+      "label": "Lateral ventricle (R)",
+      "role": "context",
+      "group": "Cavities it lies in",
+      "layer": "ventricle",
+      "color": "#4fa8d8",
+      "refs": {
+        "bodyparts3d": "FMA78449"
+      },
+      "terms": [
+        "lateral ventricle",
+        "ventricular asymmetry"
+      ],
+      "narration": "The right cavity, carrying the right plexus in the same position. The system is close to symmetrical, which is what makes an asymmetry worth a second look."
+    },
+    {
+      "key": "v3",
+      "name": "third ventricle",
+      "label": "Third ventricle",
+      "role": "context",
+      "group": "Cavities with plexus not modelled",
+      "layer": "ventricle",
+      "color": "#7fb8dd",
+      "refs": {
+        "bodyparts3d": "FMA78454"
+      },
+      "terms": [
+        "third ventricle",
+        "tela choroidea",
+        "roof of third ventricle"
+      ],
+      "narration": "In life a small plexus hangs from the roof of this cavity, slung in the tela choroidea between the two fornices. Neither that plexus nor the tela has a model in this catalog, so what is lit here is the cavity that contains them, not the tissue itself."
+    },
+    {
+      "key": "v4",
+      "name": "fourth ventricle",
+      "label": "Fourth ventricle",
+      "role": "context",
+      "group": "Cavities with plexus not modelled",
+      "layer": "ventricle",
+      "color": "#7fb8dd",
+      "refs": {
+        "bodyparts3d": "FMA78469"
+      },
+      "terms": [
+        "fourth ventricle",
+        "roof of fourth ventricle",
+        "lateral aperture",
+        "foramen of Luschka",
+        "Bochdalek's flower basket"
+      ],
+      "narration": "The fourth ventricle carries plexus in its roof, and a tuft of it pokes out through each lateral aperture into the subarachnoid space — the only place plexus is found outside a ventricle. Again the cavity is drawn and the plexus in it is not: there is no model for it and none for the apertures."
+    },
+    {
+      "key": "aq",
+      "name": "cerebral aqueduct",
+      "label": "Cerebral aqueduct",
+      "role": "context",
+      "group": "Cavities without plexus",
+      "layer": "ventricle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA78467"
+      },
+      "terms": [
+        "cerebral aqueduct",
+        "aqueduct of Sylvius",
+        "no choroid plexus"
+      ],
+      "narration": "The one part of the system that is worth naming for the absence: the aqueduct has no choroid plexus at all. It is a through-channel a millimetre or two wide, and nothing is added to the fluid along it."
+    },
+    {
+      "key": "ivf",
+      "name": "interventricular foramen",
+      "label": "Interventricular foramen",
+      "role": "context",
+      "group": "Cavities without plexus",
+      "layer": "ventricle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA75351"
+      },
+      "terms": [
+        "interventricular foramen",
+        "foramen of Monro",
+        "continuity of plexus"
+      ],
+      "narration": "The doorway the lateral and third ventricle plexuses are continuous through — the tissue runs from one cavity into the other rather than starting again. In life there is one foramen per side; the catalog carries a single unsided model, so read what is drawn as the doorway rather than as one of the pair."
+    },
+    {
+      "key": "fx_l",
+      "name": "left fornix of forebrain",
+      "label": "Fornix (L)",
+      "role": "context",
+      "group": "The line it hangs from",
+      "layer": "white_matter",
+      "color": "#efe7dc",
+      "refs": {
+        "bodyparts3d": "FMA72925"
+      },
+      "terms": [
+        "fornix",
+        "choroid fissure",
+        "attachment of choroid plexus"
+      ],
+      "narration": "The upper lip of the choroid fissure. The plexus is not free in the fluid: it is slung along a slit between the fornix above and the thalamus below, and it invaginates the ventricular wall at that slit rather than growing out of it. Find the fornix and the plexus is beside it for the whole length of the ventricle."
+    },
+    {
+      "key": "fx_r",
+      "name": "right fornix of forebrain",
+      "label": "Fornix (R)",
+      "role": "context",
+      "group": "The line it hangs from",
+      "layer": "white_matter",
+      "color": "#efe7dc",
+      "refs": {
+        "bodyparts3d": "FMA72924"
+      },
+      "terms": [
+        "fornix",
+        "choroid fissure"
+      ],
+      "narration": "The same lip on the right. The two fornices converge in the midline and the roof of the third ventricle is slung between them, which is why the plexus of the two lateral ventricles and of the third is one continuous sheet."
+    },
+    {
+      "key": "th_l",
+      "name": "left thalamus",
+      "label": "Thalamus (L)",
+      "role": "context",
+      "group": "The line it hangs from",
+      "layer": "nucleus",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA258716"
+      },
+      "terms": [
+        "thalamus",
+        "choroid fissure",
+        "floor of body of lateral ventricle"
+      ],
+      "narration": "The lower lip of the same fissure. The plexus lies on the thalamus in the floor of the body of the ventricle, which is why a coronal slice through the body shows the tuft sitting on the thalamic surface rather than floating."
+    },
+    {
+      "key": "th_r",
+      "name": "right thalamus",
+      "label": "Thalamus (R)",
+      "role": "context",
+      "group": "The line it hangs from",
+      "layer": "nucleus",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA258714"
+      },
+      "terms": [
+        "thalamus",
+        "choroid fissure"
+      ],
+      "narration": "The right thalamus, giving the same floor on the right side."
+    },
+    {
+      "key": "cc",
+      "name": "corpus callosum",
+      "label": "Corpus callosum",
+      "role": "context",
+      "group": "Orientation",
+      "layer": "white_matter",
+      "color": "#d8d2f0",
+      "refs": {
+        "bodyparts3d": "FMA86464"
+      },
+      "terms": [
+        "corpus callosum",
+        "roof of lateral ventricle"
+      ],
+      "narration": "The roof of the ventricle, drawn here only so the cavity can be placed. Nothing hangs from it: the plexus is on the far side of the cavity, down at the fissure."
+    },
+    {
+      "key": "cbl",
+      "name": "cerebellum",
+      "label": "Cerebellum",
+      "role": "context",
+      "group": "Orientation",
+      "layer": "organ",
+      "color": "#b56576",
+      "refs": {
+        "bodyparts3d": "FMA67944"
+      },
+      "terms": [
+        "cerebellum",
+        "roof of fourth ventricle"
+      ],
+      "narration": "The roof and back wall of the fourth ventricle, drawn to place that cavity. The fourth ventricle's plexus lies against its front surface, in the roof, and is not modelled."
+    },
+    {
+      "key": "cc_sc",
+      "name": "central canal of spinal cord",
+      "label": "Central canal of the spinal cord",
+      "role": "context",
+      "group": "Cavities without plexus",
+      "layer": "ventricle",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA78497"
+      },
+      "terms": [
+        "central canal",
+        "no choroid plexus"
+      ],
+      "narration": "The far end of the system, and another place with no plexus. Nothing is secreted below the fourth ventricle."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Where it is",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Choroid plexus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Cavities it lies in"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cp_l",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The plexus is lit inside the ghosted cast of the lateral ventricle, and the two shapes together are the whole of the location rule. It runs along the floor of the body, thickens at the atrium into the glomus, and turns forward into the roof of the temporal horn. That is a C within a C. What is lit is the lateral ventricle plexus only; the third and fourth ventricles have plexus of their own which this catalog does not carry and which is therefore described in beat 3 and not drawn."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Where it is not",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Choroid plexus",
+            "Cavities without plexus"
+          ]
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Cavities it lies in"
+        }
+      ],
+      "narration": "The negatives are examinable and they are visible here as the gap between the two lit groups. No plexus in the frontal horn, none in the occipital horn, none in the aqueduct, none in the central canal. The aqueduct matters most: fluid passes through it and nothing is added, so an aqueduct blocked upstream of the fourth ventricle still has a full-rate supply arriving above it."
+    },
+    {
+      "mode": "glands",
+      "beat": 3,
+      "title": "The whole secretory organ, and how much of it is drawn",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Choroid plexus",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Cavities with plexus not modelled"
+        }
+      ],
+      "narration": "Treat the plexus as one gland distributed through four cavities. Two lateral ventricles, which is what is lit and which makes the bulk of the fluid; the roof of the third ventricle; and the roof of the fourth, with a tuft protruding through each lateral aperture. The third and fourth ventricle plexuses have no model in this catalog: the cavities that hold them are lit dimly beside the two that are drawn, so what you see is where they are rather than what they look like. Total mass is a few grams, and it makes roughly its own weight in fluid every few minutes."
+    },
+    {
+      "mode": "glands",
+      "beat": 4,
+      "title": "Slung on a fissure, not growing from a wall",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cp_l",
+          "intensity": 0.85
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cp_l",
+          "to": "fx_l",
+          "kind": "boundary"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cp_l",
+          "to": "th_l",
+          "kind": "boundary"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cp_l",
+          "to": "ivf",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Three things are lit with the plexus and they are its anatomy. Above, the fornix; below, the thalamus; between them the choroid fissure, the slit the plexus invaginates through. The fissure itself has no model, so it is the line between the two lit lips. Third, the interventricular foramen: the plexus is continuous through it into the third ventricle, so this is one sheet folded through several cavities rather than four separate glands. The double layer of pia carrying the vessels into the fissure is the tela choroidea, which is named here and not drawn."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "The three layers, and which one is the barrier",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Choroid plexus"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.1,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cp_l",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Cut across the frond and count outwards from the blood: a fenestrated capillary, a thin stroma, and a single layer of cuboidal epithelium whose cells are stitched to each other by tight junctions. That last layer is the blood-CSF barrier, and the reversal is the point — everywhere else in the brain the tight junctions are in the capillary and the choroidal capillary here is leaky instead. The epithelium then works: sodium is pumped into the ventricle, carbonic anhydrase supplies the bicarbonate, and water follows. It is active secretion, not filtration, which is why the fluid is not simply dilute plasma and why acetazolamide, a carbonic anhydrase inhibitor, reduces the rate. None of these three layers has a model — the cut is through the whole frond and the layers are described, not shown, so read this beat as a caption on the tissue rather than as a labelled section."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Rate, and why a blockage does not settle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:csf",
+          "path": [
+            "cp_l",
+            "lv_l",
+            "ivf",
+            "v3",
+            "aq",
+            "v4"
+          ],
+          "duration": 5000
+        }
+      ],
+      "narration": "Roughly half a litre a day into a system that holds about 150 millilitres: the whole volume is replaced several times between waking and sleeping. Secretion is largely independent of the pressure it is working against, and that single fact is what makes obstruction dangerous — the plexus does not slow down because the exit is blocked, so pressure climbs until something else gives. The trace runs from the plexus to the fourth ventricle and stops there: the apertures, the subarachnoid space and the arachnoid granulations that absorb the fluid have no models in this catalog, so the outflow half of the circuit belongs to the CSF circulation scene and is not drawn here. A papilloma of the plexus is the one tumour that causes hydrocephalus by making too much rather than by blocking the way out — and it usually blocks as well."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "gaps": [
+    "NO THIRD OR FOURTH VENTRICLE PLEXUS MODEL. The catalog carries choroid plexus only as 'of left / right cerebral hemisphere' (FMA274029 / FMA274027), which is the lateral ventricle plexus. Searched choroid, plexus, tela, velum and glomus. Beats 1 and 3 state the omission and light the containing cavities instead, so the scene never implies the lateral ventricles make all of the fluid.",
+    "NO TELA CHOROIDEA and no choroid fissure in the catalog (searched tela, velum, fissure, choroid fissure). Beat 4 builds the fissure as the line between the two structures that bound it — fornix above (FMA72925 / FMA72924) and thalamus below (FMA258716 / FMA258714) — both of which are lit, and names the tela as described rather than shown.",
+    "NO HISTOLOGY EXISTS AT THIS SCALE: no ependyma, no choroidal epithelium, no capillary of any kind, no tight junction. Searched ependym, epitheli, capillar, endotheli. Beat 5 therefore cuts the whole frond and describes the three layers in narration, and says so in the beat itself. If this teaching is wanted as a labelled section it belongs in a microscopic-mode scene, not here.",
+    "NO GLOMUS as a separate model. The glomus is the thick atrial part of FMA274029 / FMA274027 and is called that on the structure cards; nothing is marked on the mesh. No anchor was authored for it: derive-landmark.mjs needs the parent mesh in meshes-lite/ to measure against and it is not there.",
+    "NO ABSORPTION SIDE AT ALL: no meninges, dura, arachnoid, pia, subarachnoid space, cistern, arachnoid granulation or dural venous sinus, and no aperture of the fourth ventricle. Searched mening, dura, arachnoid, pia, subarach, cistern, granulation, sinus, aperture, Magendie, Luschka — the only sinus in the catalog is the coronary sinus and the only foramen is the interventricular one. Beat 6's trace ends at the fourth ventricle for this reason and the narration says so.",
+    "NO CHOROIDAL ARTERY. Searched choroidal, anterior choroidal, posterior choroidal — no cerebral artery of any kind exists in this catalog. The blood supply of the plexus is named in match.terms for retrieval and is not taught in any beat, because none of it can be drawn.",
+    "SIDES: FMA274029 is the LEFT choroid plexus and FMA274027 the RIGHT; FMA78450 is the LEFT lateral ventricle and FMA78449 the RIGHT; FMA72925 is the LEFT fornix and FMA72924 the RIGHT; FMA258716 is the LEFT thalamus and FMA258714 the RIGHT. The third and fourth ventricles, the aqueduct, the interventricular foramen, the corpus callosum, the cerebellum and the central canal are unsided single models.",
+    "DELIVERY: 14 of this scene's 15 meshes are absent from meshes-lite/. The single exception is FMA78497, the central canal of the spinal cord, verified by listing the directory. Both choroid plexus models are missing, so every beat is hollow and the status is 'candidate' on delivery grounds alone — nothing in the anatomy, the ids or the ops is unresolved. The two meshes worth fetching first are FMA274029 and FMA274027: without them this scene has no subject."
+  ]
+}

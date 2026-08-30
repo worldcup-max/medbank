@@ -1,0 +1,568 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__ventricular-system-csf__meninges",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Ventricular System & CSF",
+  "structure": "Meninges",
+  "covers": [
+    "Meninges"
+  ],
+  "learning_goal": "Name the three layers in order from the bone inwards, say which of the three spaces between them is a real space and which two are only potential, and use the layer a bleed sits in to predict its shape on a scan, the vessel that caused it and whether it can cross a suture.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "meninges",
+      "head injury",
+      "intracranial haemorrhage",
+      "CSF",
+      "lumbar puncture",
+      "neurosurgery",
+      "spinal anaesthesia"
+    ],
+    "terms": [
+      "meninges",
+      "meninx",
+      "dura mater",
+      "pachymeninx",
+      "leptomeninges",
+      "arachnoid mater",
+      "pia mater",
+      "endosteal layer",
+      "periosteal layer of dura",
+      "meningeal layer of dura",
+      "falx cerebri",
+      "tentorium cerebelli",
+      "falx cerebelli",
+      "diaphragma sellae",
+      "tentorial notch",
+      "uncal herniation",
+      "subfalcine herniation",
+      "dural venous sinus",
+      "superior sagittal sinus",
+      "straight sinus",
+      "transverse sinus",
+      "cavernous sinus",
+      "extradural space",
+      "epidural space",
+      "extradural haematoma",
+      "middle meningeal artery",
+      "pterion",
+      "lucid interval",
+      "lentiform haematoma",
+      "biconvex haematoma",
+      "subdural space",
+      "subdural haematoma",
+      "bridging veins",
+      "crescentic haematoma",
+      "chronic subdural",
+      "subarachnoid space",
+      "subarachnoid haemorrhage",
+      "berry aneurysm",
+      "thunderclap headache",
+      "xanthochromia",
+      "cisterna magna",
+      "lumbar cistern",
+      "lumbar puncture",
+      "filum terminale",
+      "denticulate ligament",
+      "conus medullaris",
+      "cauda equina",
+      "meningitis",
+      "arachnoid granulation",
+      "spinal epidural space",
+      "epidural anaesthesia"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "skull",
+      "label": "Skull — inner table",
+      "role": "context",
+      "group": "The container",
+      "layer": "bone",
+      "color": "#d8d2c4",
+      "terms": [
+        "inner table",
+        "calvaria",
+        "suture",
+        "pterion"
+      ],
+      "narration": "The outermost thing in the diagram and the reason two of the three spaces are only potential: the outer layer of dura is stuck to this bone as its periosteum, so there is nothing to open up until something forces it."
+    },
+    {
+      "key": "dura_periosteal",
+      "label": "Dura — periosteal (endosteal) layer",
+      "role": "part",
+      "group": "Dura mater",
+      "layer": "fascia",
+      "color": "#8d6e63",
+      "terms": [
+        "periosteal layer",
+        "endosteal layer",
+        "dura mater",
+        "pachymeninx"
+      ],
+      "narration": "The outer of the two dural layers, and it is simply the periosteum of the inner table of the skull. It stops at the foramen magnum: it does not continue into the spine, which is why the spinal dura is a single layer and why a spinal extradural space exists as a real, injectable space when the cranial one does not."
+    },
+    {
+      "key": "dura_meningeal",
+      "label": "Dura — meningeal layer",
+      "role": "part",
+      "group": "Dura mater",
+      "layer": "fascia",
+      "color": "#795548",
+      "terms": [
+        "meningeal layer",
+        "dura mater",
+        "dural fold",
+        "dural reflection"
+      ],
+      "narration": "The inner of the two, a tough fibrous sheet that covers the brain and continues through the foramen magnum as the spinal dura. Everywhere the two layers separate, the gap between them is a dural venous sinus, and everywhere the meningeal layer folds inwards away from the bone it becomes one of the four dural partitions."
+    },
+    {
+      "key": "arachnoid",
+      "label": "Arachnoid mater",
+      "role": "part",
+      "group": "Leptomeninges",
+      "layer": "fascia",
+      "color": "#b0bec5",
+      "terms": [
+        "arachnoid mater",
+        "leptomeninges",
+        "arachnoid trabeculae",
+        "avascular"
+      ],
+      "narration": "A thin avascular membrane held against the inner face of the dura by the pressure of the fluid beneath it. It bridges straight across the sulci rather than dipping into them — that single fact is what creates the subarachnoid cisterns at the base of the brain, where the gap between a smooth arachnoid and an irregular brain is widest."
+    },
+    {
+      "key": "pia",
+      "label": "Pia mater",
+      "role": "part",
+      "group": "Leptomeninges",
+      "layer": "fascia",
+      "color": "#ef9a9a",
+      "terms": [
+        "pia mater",
+        "leptomeninges",
+        "perivascular space",
+        "Virchow-Robin space"
+      ],
+      "narration": "Transparent, vascular, and stuck to the brain so closely that it follows every gyrus and sulcus and dips into every fissure. It also follows the vessels a short way into the brain, which is why an inflammatory process in the subarachnoid space reaches the cortex along the perivascular spaces."
+    },
+    {
+      "key": "space_extradural",
+      "label": "Extradural space — potential",
+      "role": "part",
+      "group": "The three spaces",
+      "layer": "fascia",
+      "color": "#e53935",
+      "terms": [
+        "extradural space",
+        "epidural space",
+        "potential space",
+        "middle meningeal artery"
+      ],
+      "narration": "Between bone and periosteal dura, and inside the skull it does not exist until arterial pressure strips the dura off the bone. That is why the classic cause is the middle meningeal artery torn at the pterion, where the bone is thinnest. In the spine, by contrast, this is a genuine fat-filled space containing the internal vertebral venous plexus, and it is where an epidural catheter sits."
+    },
+    {
+      "key": "space_subdural",
+      "label": "Subdural space — potential",
+      "role": "part",
+      "group": "The three spaces",
+      "layer": "fascia",
+      "color": "#8e24aa",
+      "terms": [
+        "subdural space",
+        "potential space",
+        "bridging veins",
+        "dural border cell layer"
+      ],
+      "narration": "Between dura and arachnoid, and in a normal head there is no space here at all — the two membranes are apposed, and what tears is a plane of weak cells within the dural border. It opens when a bridging vein, running from the cortex up into the superior sagittal sinus, is torn by the brain moving relative to the skull."
+    },
+    {
+      "key": "space_subarachnoid",
+      "label": "Subarachnoid space — the real one",
+      "role": "part",
+      "group": "The three spaces",
+      "layer": "fascia",
+      "color": "#1e88e5",
+      "terms": [
+        "subarachnoid space",
+        "cerebrospinal fluid",
+        "cistern",
+        "cisterna magna",
+        "lumbar cistern",
+        "circle of Willis"
+      ],
+      "narration": "The only one of the three that exists in health, and the one that holds the CSF. It also holds the major cerebral arteries and the cranial nerves on their way out, so a ruptured berry aneurysm bleeds directly into the fluid and mixes with it everywhere."
+    },
+    {
+      "key": "falx_cerebri",
+      "label": "Falx cerebri",
+      "role": "part",
+      "group": "The four dural folds",
+      "layer": "fascia",
+      "color": "#6d4c41",
+      "terms": [
+        "falx cerebri",
+        "sickle",
+        "superior sagittal sinus",
+        "inferior sagittal sinus",
+        "subfalcine herniation"
+      ],
+      "narration": "A sickle in the midline between the two hemispheres, carrying the superior sagittal sinus in its attached upper edge and the inferior sagittal sinus in its free lower edge. Its free edge is why a mass pushes the cingulate gyrus underneath it rather than across it — subfalcine herniation."
+    },
+    {
+      "key": "tentorium",
+      "label": "Tentorium cerebelli",
+      "role": "part",
+      "group": "The four dural folds",
+      "layer": "fascia",
+      "color": "#6d4c41",
+      "terms": [
+        "tentorium cerebelli",
+        "tentorial notch",
+        "tentorial incisure",
+        "supratentorial",
+        "infratentorial",
+        "uncal herniation",
+        "third nerve palsy"
+      ],
+      "narration": "A tent roof over the cerebellum, dividing the cavity into a supratentorial and an infratentorial compartment — the division radiology reports in. Its free anterior border bounds the tentorial notch, through which the midbrain passes, and it is against that border that the uncus is pushed in uncal herniation, catching the oculomotor nerve and giving a fixed dilated pupil on the side of the mass."
+    },
+    {
+      "key": "falx_cerebelli",
+      "label": "Falx cerebelli",
+      "role": "part",
+      "group": "The four dural folds",
+      "layer": "fascia",
+      "color": "#795548",
+      "terms": [
+        "falx cerebelli",
+        "occipital sinus"
+      ],
+      "narration": "A small vertical fold between the cerebellar hemispheres, below the tentorium, carrying the occipital sinus. Worth knowing as the fourth of the set rather than for itself."
+    },
+    {
+      "key": "diaphragma_sellae",
+      "label": "Diaphragma sellae",
+      "role": "part",
+      "group": "The four dural folds",
+      "layer": "fascia",
+      "color": "#795548",
+      "terms": [
+        "diaphragma sellae",
+        "pituitary stalk",
+        "empty sella",
+        "hypophysial fossa"
+      ],
+      "narration": "A small circular shelf roofing the pituitary fossa with a hole in it for the stalk. When that hole is wide, CSF pressure remodels the fossa and the gland flattens against its floor — the empty sella."
+    },
+    {
+      "key": "sinus_sagittal",
+      "label": "Superior sagittal sinus",
+      "role": "context",
+      "group": "Between the dural layers",
+      "layer": "vessel",
+      "color": "#3949ab",
+      "terms": [
+        "superior sagittal sinus",
+        "dural venous sinus",
+        "arachnoid granulation",
+        "venous sinus thrombosis"
+      ],
+      "narration": "The type specimen of a dural venous sinus: a vein with no muscular wall and no valves, lying in the gap where the two dural layers separate along the attached edge of the falx. Bridging veins drain into it from below and arachnoid granulations push up into it from below, so it is both the vessel that tears in a subdural and the vessel that takes the CSF back."
+    },
+    {
+      "key": "granulations",
+      "label": "Arachnoid granulations",
+      "role": "context",
+      "group": "Between the dural layers",
+      "layer": "fascia",
+      "color": "#90a4ae",
+      "terms": [
+        "arachnoid granulation",
+        "arachnoid villus",
+        "Pacchionian body",
+        "CSF absorption"
+      ],
+      "narration": "Tufts of arachnoid that push through the meningeal dura into the sinus and its lateral lacunae, returning fluid to blood. They are drawn here only as the point where the three layers are pierced; the absorption itself is taught in the CSF circulation scene rather than repeated here."
+    },
+    {
+      "key": "spinal_dura",
+      "label": "Spinal dura & the lumbar cistern",
+      "role": "part",
+      "group": "Below the foramen magnum",
+      "layer": "fascia",
+      "color": "#8d6e63",
+      "terms": [
+        "spinal dura",
+        "dural sac",
+        "thecal sac",
+        "lumbar cistern",
+        "cauda equina",
+        "conus medullaris",
+        "filum terminale",
+        "denticulate ligament",
+        "lumbar puncture",
+        "S2"
+      ],
+      "narration": "Single-layered, because the periosteal layer stopped at the foramen magnum. The sac ends at about S2 while the cord ends at about L1 to L2, so between those two levels there is subarachnoid space with cauda equina roots floating in it and no cord to hit — which is the whole basis of lumbar puncture at L3/4 or L4/5. The cord is slung within the space by the denticulate ligaments on each side and tethered below by the filum terminale."
+    },
+    {
+      "key": "bleed_extradural",
+      "label": "Extradural haematoma",
+      "role": "part",
+      "group": "Reading a bleed by its layer",
+      "layer": "vessel",
+      "color": "#d32f2f",
+      "terms": [
+        "extradural haematoma",
+        "epidural haematoma",
+        "biconvex",
+        "lentiform",
+        "lucid interval",
+        "middle meningeal artery",
+        "does not cross sutures"
+      ],
+      "narration": "Arterial, fast, and shaped by the dura's adhesion to the bone: it cannot spread past a suture where the periosteal dura is firmly bound, so it piles up into a biconvex lens. Typically a temporal blow, a brief loss of consciousness, a lucid interval, then rapid deterioration."
+    },
+    {
+      "key": "bleed_subdural",
+      "label": "Subdural haematoma",
+      "role": "part",
+      "group": "Reading a bleed by its layer",
+      "layer": "vessel",
+      "color": "#7b1fa2",
+      "terms": [
+        "subdural haematoma",
+        "crescentic",
+        "concave",
+        "bridging veins",
+        "crosses sutures",
+        "chronic subdural",
+        "cerebral atrophy",
+        "anticoagulation"
+      ],
+      "narration": "Venous, slower, and shaped by the opposite constraint: nothing binds this plane to a suture, so it spreads out into a thin crescent over the whole convexity — but it is stopped by the falx and the tentorium, because those are dura and the blood is under them. Elderly and alcoholic brains are atrophic, their bridging veins stretched, so trivial trauma bleeds and the presentation may be weeks of confusion rather than an acute collapse."
+    },
+    {
+      "key": "bleed_subarachnoid",
+      "label": "Subarachnoid haemorrhage",
+      "role": "part",
+      "group": "Reading a bleed by its layer",
+      "layer": "vessel",
+      "color": "#1565c0",
+      "terms": [
+        "subarachnoid haemorrhage",
+        "berry aneurysm",
+        "thunderclap headache",
+        "meningism",
+        "xanthochromia",
+        "star pattern",
+        "basal cisterns"
+      ],
+      "narration": "Blood into fluid, so it takes no lens or crescent shape at all — it fills the cisterns and fissures and appears as a star of white in the basal cisterns on CT. Thunderclap headache with neck stiffness, because blood in the subarachnoid space irritates the same meninges that infection does. A negative CT does not end it: the lumbar puncture looks for xanthochromia."
+    },
+    {
+      "key": "meningitis",
+      "label": "Where meningitis lives",
+      "role": "part",
+      "group": "Reading a bleed by its layer",
+      "layer": "fascia",
+      "color": "#00897b",
+      "terms": [
+        "meningitis",
+        "meningism",
+        "leptomeningitis",
+        "pia-arachnoid",
+        "neck stiffness",
+        "photophobia"
+      ],
+      "narration": "Infection sits in the subarachnoid space, between arachnoid and pia — meningitis is a leptomeningitis. Because that space is continuous over the whole brain and cord and full of moving fluid, the process is never local, and the sample that diagnoses it can be taken far away in the lumbar cistern."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "Three layers, from the bone inwards",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Dura mater",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Leptomeninges",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Read the section outwards-in and count four membranes, not three: bone, then periosteal dura, then meningeal dura, then arachnoid, then pia on the brain itself. The dura is one tough sheet everywhere except where the two layers separate, and where they separate you get a venous sinus. Arachnoid and pia together are the leptomeninges, and they are as flimsy as the dura is tough."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "One real space and two that are not there yet",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three spaces"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "space_subarachnoid",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "This is the beat to get right, because everything clinical follows from it. Only the subarachnoid space exists in a healthy head: it holds fluid, the arteries of the circle of Willis and the cranial nerves. The extradural and subdural spaces are potential — the layers are stuck together, and a bleed does not enter them so much as create them. That is why an extradural bleed needs arterial pressure to strip the dura from the bone, and why a subdural can be venous and slow."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 3,
+      "title": "The four folds, and the two hernias they permit",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The four dural folds"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "falx_cerebri",
+          "to": "tentorium",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "The meningeal dura folds inwards in four places and each fold has a free edge; the free edges are the clinically interesting part, because a swelling brain squeezes past them. Falx cerebri between the hemispheres — cingulate gyrus under its free edge, subfalcine herniation. Tentorium cerebelli roofing the posterior fossa — uncus over its free edge into the notch, third nerve compressed, pupil blown on the same side as the mass. Falx cerebelli and diaphragma sellae complete the four. The falx and tentorium meet at the straight sinus, so the two are one continuous partition, not two."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "Between the layers — the sinuses and the way out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Between the dural layers",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "granulations",
+          "to": "sinus_sagittal",
+          "kind": "continuity"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "space_subdural",
+          "to": "sinus_sagittal",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "One gap does two opposite jobs. Fluid leaves the subarachnoid space upwards through the arachnoid granulations into the superior sagittal sinus — that is the absorption route, taught properly in the CSF circulation scene. Blood leaves the cortex upwards through the bridging veins into the same sinus — and those veins cross the subdural plane naked, which is exactly why they tear. Absorption and subdural haemorrhage are the same anatomical crossing, used two ways."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Below the foramen magnum the arithmetic changes",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Below the foramen magnum"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": -0.4,
+          "animate": true
+        }
+      ],
+      "narration": "The periosteal layer stopped at the foramen magnum, so the spinal dura is single and the extradural space around it is a genuine fat-and-vein-filled space — which is where the epidural needle stops. Go further and you are through dura and arachnoid together into the lumbar cistern. Two levels matter and they are different: the cord ends at L1 to L2, the dural sac at S2. Between them is fluid and floating cauda equina roots, so a needle at L3/4 or L4/5 in an adult is below the cord and inside the sac."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "Name the layer and you have named the bleed",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "bleed_extradural",
+            "bleed_subdural",
+            "bleed_subarachnoid"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0
+        }
+      ],
+      "narration": "Three shapes, three vessels, three layers, and the shape is a consequence of the layer rather than a fact to memorise separately. Extradural: middle meningeal artery, biconvex, stopped by sutures because the dura is glued to bone along them, lucid interval. Subdural: bridging vein, crescentic, crosses sutures freely because nothing binds this plane to bone, but stopped by the falx and tentorium since the blood is deep to the dura and those folds are dura. Subarachnoid: berry aneurysm, no shape at all — it disperses through fluid into the cisterns. Infection occupies the same subarachnoid space, which is why meningism and a subarachnoid bleed present so alike and why the lumbar puncture answers both."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS SECOND PREFERRED MODE, AND THE ROUTING WAS MEASURED RATHER THAN ASSUMED. Searched all 934 catalog entries for: mater, menin, meninx, dura, arachnoid, pia, lepto, pachy, falx, tentor, sinus, sagittal, granulation, villus, cistern, subarach, filum, denticulate, thecal, sella, diaphragma. Total hits across the whole set: ONE — `FMA4706 coronary sinus`, which is in the heart. Not one meningeal membrane, fold, space or dural venous sinus exists in this catalog. This structure is the single largest hole in neuroanatomy coverage and there is no partial 3D version of it worth authoring.",
+    "This scene therefore contains NO model ids and no `refs` on any structure: every structure is a drawn region for the SVG engine, following the same pattern as the other diagram-mode scenes in the corpus. `deferred_modes` keeps `3d_anatomy` on the record, and the whole scene — structures, beats and narration — survives the move unchanged the day dura, arachnoid, pia, falx, tentorium and the sagittal sinus are ingested.",
+    "Status is `planned`, not `ready`. The scene is fully authored — twenty regions, six beats, ops and narration — but no artwork exists for the SVG engine. Promote it once two drawings exist: a coronal section through the vertex showing bone, both dural layers, arachnoid, pia, the superior sagittal sinus in the falx with granulations pushing into it, and a bridging vein crossing the subdural plane; plus a sagittal view for the folds. The three haematoma shapes of beat 6 need a third small drawing, or three insets on the coronal.",
+    "OVERLAP WITH `neuroanatomy__ventricular-system-csf__csf-circulation` IS DELIBERATE AND BOUNDED. That scene owns the fluid: production, the route through the cavities, absorption at the granulations, and hydrocephalus. This scene owns the membranes: the layers, the three spaces, the four folds, and what bleeds where. The granulations appear in both because they are the point the two subjects touch, and beat 4 says explicitly that the absorption teaching lives in the other scene rather than restating it. The one fact stated in both — that fluid returns through the granulations into the superior sagittal sinus — is stated the same way in both.",
+    "NO MIDDLE MENINGEAL ARTERY, no bridging vein and no berry aneurysm in the catalog either (searched meningeal, bridging, emissary, aneurysm, cerebral artery, communicating, Willis). Beats 4 and 6 name all three and they are drawn regions of the diagram, not models. This is the same absence recorded in the neuroanatomy blood-supply gap: the catalog holds no intracranial vessel of any kind.",
+    "NO ANCHORS WERE AUTHORED and none could be. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`, and this scene has no parent mesh at all. The pterion is named in beat 6 as the site of the extradural bleed; it is a suture junction on a skull mesh the catalog does not carry, so it is described and not marked."
+  ]
+}

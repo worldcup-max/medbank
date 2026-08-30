@@ -1,0 +1,817 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__cerebrum-gross-lobes__white-matter-tracts",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Cerebrum — Gross & Lobes",
+  "structure": "White matter tracts",
+  "covers": [
+    "White matter tracts"
+  ],
+  "learning_goal": "Sort every bundle of cerebral white matter into one of three classes — association within a hemisphere, commissural between the hemispheres, projection between cortex and everything below it — say what each named bundle connects to what, and predict the deficit when one of them is cut.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "cerebrum",
+      "white matter",
+      "cerebral connectivity",
+      "tracts",
+      "disconnection syndromes"
+    ],
+    "terms": [
+      "white matter",
+      "association fibres",
+      "commissural fibres",
+      "projection fibres",
+      "corpus callosum",
+      "genu",
+      "splenium",
+      "rostrum",
+      "forceps minor",
+      "forceps major",
+      "anterior commissure",
+      "posterior commissure",
+      "hippocampal commissure",
+      "commissure of fornix",
+      "fornix",
+      "mammillary body",
+      "Papez circuit",
+      "internal capsule",
+      "anterior limb",
+      "posterior limb",
+      "corona radiata",
+      "centrum semiovale",
+      "crus cerebri",
+      "cerebral peduncle",
+      "corticospinal tract",
+      "corticobulbar tract",
+      "optic tract",
+      "stria medullaris",
+      "habenula",
+      "alexia without agraphia",
+      "Parinaud syndrome",
+      "Weber syndrome"
+    ]
+  },
+  "camera": {
+    "framing": "medial",
+    "autoRotate": 0.004,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "wm",
+      "name": "white matter structure of cerebral hemisphere",
+      "label": "Cerebral white matter (the mass)",
+      "role": "context",
+      "group": "The white core",
+      "layer": "white_matter",
+      "color": "#efe7dc",
+      "refs": {
+        "bodyparts3d": "FMA61822"
+      },
+      "terms": [
+        "white matter",
+        "centrum semiovale",
+        "corona radiata",
+        "myelinated axons"
+      ],
+      "narration": "Everything deep to the cortical ribbon and outside the deep nuclei: myelinated axons and nothing else. It is one undivided model, so the centrum semiovale, the corona radiata and every association bundle inside it are named on this card rather than lit apart. Cut it anywhere and all three classes of fibre are in the same cut face — that is the point of this scene, and it is why the classes are learnt by where a fibre ends rather than by where it runs."
+    },
+    {
+      "key": "cc",
+      "name": "corpus callosum",
+      "label": "Corpus callosum",
+      "role": "part",
+      "group": "Commissural",
+      "layer": "white_matter",
+      "color": "#d8d2f0",
+      "refs": {
+        "bodyparts3d": "FMA86464"
+      },
+      "terms": [
+        "corpus callosum",
+        "rostrum",
+        "genu",
+        "body of corpus callosum",
+        "splenium",
+        "forceps minor",
+        "forceps major",
+        "callosal disconnection",
+        "alexia without agraphia"
+      ],
+      "narration": "The largest commissure in the body — on the order of two hundred million axons joining matching points in the two hemispheres. Front to back it is rostrum, genu, body, splenium. Fibres from the genu sweep forwards into both frontal poles as the forceps minor; fibres from the splenium sweep back into both occipital lobes as the forceps major. It is one model here, so those four parts are named on this card and not lit separately. Its underside is the roof of the lateral ventricles."
+    },
+    {
+      "key": "ac",
+      "name": "anterior commissure",
+      "label": "Anterior commissure",
+      "role": "part",
+      "group": "Commissural",
+      "layer": "white_matter",
+      "color": "#b9a7e6",
+      "refs": {
+        "bodyparts3d": "FMA61961"
+      },
+      "terms": [
+        "anterior commissure",
+        "lamina terminalis",
+        "temporal lobe connections",
+        "olfactory decussation"
+      ],
+      "narration": "A small round bundle crossing the midline inside the lamina terminalis, at the front wall of the third ventricle. It joins the two temporal lobes — amygdalae and the middle and inferior temporal cortex — and carries the olfactory crossing. On a midline scan it is the landmark for the AC–PC line that imaging is aligned to."
+    },
+    {
+      "key": "lt",
+      "name": "lamina terminalis",
+      "label": "Lamina terminalis",
+      "role": "context",
+      "group": "Commissural",
+      "layer": "white_matter",
+      "color": "#cdc4b4",
+      "refs": {
+        "bodyparts3d": "FMA61975"
+      },
+      "terms": [
+        "lamina terminalis",
+        "anterior wall of third ventricle"
+      ],
+      "narration": "The thin sheet closing the front of the third ventricle, stretched between the optic chiasm below and the rostrum of the corpus callosum above. It is here as scaffolding: it is the plate the anterior commissure crosses in, and it tells you the commissure's depth."
+    },
+    {
+      "key": "pc",
+      "name": "posterior commissure",
+      "label": "Posterior commissure",
+      "role": "part",
+      "group": "Commissural",
+      "layer": "white_matter",
+      "color": "#b9a7e6",
+      "refs": {
+        "bodyparts3d": "FMA62072"
+      },
+      "terms": [
+        "posterior commissure",
+        "dorsal midbrain",
+        "light-near dissociation",
+        "Parinaud syndrome",
+        "consensual light reflex"
+      ],
+      "narration": "Crosses at the join between the third ventricle and the cerebral aqueduct, just below the pineal body. The fibres that make a light shone in one eye constrict the other pupil cross here, so a pineal tumour pressing on it gives pupils that will not react to light but still constrict to near — light-near dissociation — alongside the loss of upgaze."
+    },
+    {
+      "key": "pin",
+      "name": "pineal body",
+      "label": "Pineal body",
+      "role": "context",
+      "group": "Commissural",
+      "layer": "organ",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA62033"
+      },
+      "terms": [
+        "pineal body",
+        "pineal gland",
+        "pineal region tumour"
+      ],
+      "narration": "Sits immediately above the posterior commissure. It is context, not a tract, and it is here because it is the thing that classically compresses the commissure below it."
+    },
+    {
+      "key": "fxc",
+      "name": "commissure of fornix of forebrain",
+      "label": "Commissure of the fornix",
+      "role": "part",
+      "group": "Commissural",
+      "layer": "white_matter",
+      "color": "#b9a7e6",
+      "refs": {
+        "bodyparts3d": "FMA61970"
+      },
+      "terms": [
+        "commissure of fornix",
+        "hippocampal commissure",
+        "psalterium",
+        "crura of fornix"
+      ],
+      "narration": "The hippocampal commissure. Fibres pass between the two crura of the fornix as they run together under the splenium, so it is a commissure sitting inside what is otherwise a projection pathway. Fourth and last of the commissures that can be drawn here."
+    },
+    {
+      "key": "fx_l",
+      "name": "left fornix of forebrain",
+      "label": "Fornix (L)",
+      "role": "part",
+      "group": "Limbic projection",
+      "layer": "white_matter",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA72925"
+      },
+      "terms": [
+        "fornix",
+        "alveus",
+        "fimbria",
+        "crus of fornix",
+        "body of fornix",
+        "column of fornix",
+        "Papez circuit"
+      ],
+      "narration": "The output cable of the hippocampus. Axons leave the hippocampal surface as the alveus, gather as the fimbria, arch back and up as the crus, join their fellow under the splenium as the body, and turn down in front of the interventricular foramen as the column to reach the mammillary body. Alveus, fimbria, crus, body and column are all one model here — they are stages of the same cable, named on this card."
+    },
+    {
+      "key": "fx_r",
+      "name": "right fornix of forebrain",
+      "label": "Fornix (R)",
+      "role": "context",
+      "group": "Limbic projection",
+      "layer": "white_matter",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA72924"
+      },
+      "terms": [
+        "fornix",
+        "crus of fornix"
+      ],
+      "narration": "The same cable on the right. The two crura running side by side under the splenium are what the hippocampal commissure crosses between, so the pair has to be on screen for that beat to mean anything."
+    },
+    {
+      "key": "hip_l",
+      "name": "left hippocampus",
+      "label": "Hippocampus (L)",
+      "role": "context",
+      "group": "Limbic projection",
+      "layer": "cortex",
+      "color": "#b56576",
+      "refs": {
+        "bodyparts3d": "FMA72714"
+      },
+      "terms": [
+        "hippocampus",
+        "hippocampal formation"
+      ],
+      "narration": "Where the fornix starts. It is context in this scene — the Limbic System topic teaches it properly — but a tract with no visible origin is a tract a student cannot place."
+    },
+    {
+      "key": "mb",
+      "name": "mammillary body",
+      "label": "Mammillary body",
+      "role": "part",
+      "group": "Limbic projection",
+      "layer": "nucleus",
+      "color": "#d98f6a",
+      "refs": {
+        "bodyparts3d": "FMA74877"
+      },
+      "terms": [
+        "mammillary body",
+        "mammillothalamic tract",
+        "Papez circuit",
+        "Wernicke-Korsakoff"
+      ],
+      "narration": "Where the fornix ends: two small bumps on the floor of the third ventricle behind the pituitary stalk. From here the mammillothalamic tract runs to the anterior thalamic nucleus and closes the Papez circuit — that tract has no model in the catalog, so beat 6 states it and traces only as far as the thalamus, which does. These bodies are the structures that atrophy in Wernicke–Korsakoff, which is why an amnesic syndrome can come from a cable rather than from cortex."
+    },
+    {
+      "key": "ic_l",
+      "name": "anterior limb of left internal capsule",
+      "label": "Internal capsule — anterior limb (L)",
+      "role": "part",
+      "group": "Projection",
+      "layer": "white_matter",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA72909"
+      },
+      "terms": [
+        "internal capsule",
+        "anterior limb",
+        "anterior thalamic radiation",
+        "frontopontine fibres"
+      ],
+      "narration": "The limb between the head of the caudate on its medial side and the lentiform nucleus on its lateral side. It carries frontopontine fibres and the anterior thalamic radiation — prefrontal cortex to and from the thalamus — and it carries no corticospinal fibres at all. That matters here because the anterior limb is the only limb with a model, and a student who meets it first will otherwise assume it is the motor one."
+    },
+    {
+      "key": "ic_r",
+      "name": "anterior limb of right internal capsule",
+      "label": "Internal capsule — anterior limb (R)",
+      "role": "context",
+      "group": "Projection",
+      "layer": "white_matter",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA72908"
+      },
+      "terms": [
+        "internal capsule",
+        "anterior limb"
+      ],
+      "narration": "The right anterior limb, for symmetry on the axial cut. The V of the two capsules pointing medially is the shape an axial slice at this level is recognised by."
+    },
+    {
+      "key": "cd_l",
+      "name": "left caudate nucleus",
+      "label": "Caudate nucleus (L)",
+      "role": "context",
+      "group": "Capsule walls",
+      "layer": "nucleus",
+      "color": "#8f7fbf",
+      "refs": {
+        "bodyparts3d": "FMA72827"
+      },
+      "terms": [
+        "caudate nucleus",
+        "head of caudate"
+      ],
+      "narration": "The medial wall of the anterior limb. The limb is defined by what is on either side of it, so the wall is what makes it identifiable."
+    },
+    {
+      "key": "put_l",
+      "name": "left putamen",
+      "label": "Putamen (L)",
+      "role": "context",
+      "group": "Capsule walls",
+      "layer": "nucleus",
+      "color": "#8f7fbf",
+      "refs": {
+        "bodyparts3d": "FMA72829"
+      },
+      "terms": [
+        "putamen",
+        "lentiform nucleus"
+      ],
+      "narration": "With the globus pallidus it makes the lentiform nucleus, the lateral wall of both limbs of the capsule."
+    },
+    {
+      "key": "gp_l",
+      "name": "left globus pallidus",
+      "label": "Globus pallidus (L)",
+      "role": "context",
+      "group": "Capsule walls",
+      "layer": "nucleus",
+      "color": "#8f7fbf",
+      "refs": {
+        "bodyparts3d": "FMA72831"
+      },
+      "terms": [
+        "globus pallidus",
+        "lentiform nucleus"
+      ],
+      "narration": "The medial half of the lentiform nucleus, wedged against the capsule. Its name is literal: it is pale because it is full of myelinated fibres — a grey-matter nucleus that looks white."
+    },
+    {
+      "key": "th_l",
+      "name": "left thalamus",
+      "label": "Thalamus (L)",
+      "role": "context",
+      "group": "Capsule walls",
+      "layer": "nucleus",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA258716"
+      },
+      "terms": [
+        "thalamus",
+        "posterior limb of internal capsule",
+        "thalamic radiation"
+      ],
+      "narration": "The medial wall of the posterior limb. The posterior limb is the gap between this and the lentiform nucleus — and since it has no model, the gap between these two lit structures is the only honest way to show where it runs."
+    },
+    {
+      "key": "cp",
+      "name": "peduncle of midbrain",
+      "label": "Cerebral peduncle (crus cerebri)",
+      "role": "part",
+      "group": "Projection",
+      "layer": "white_matter",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA62394"
+      },
+      "terms": [
+        "cerebral peduncle",
+        "crus cerebri",
+        "corticospinal tract",
+        "corticobulbar tract",
+        "frontopontine",
+        "temporopontine",
+        "Weber syndrome"
+      ],
+      "narration": "Where the projection fibres go next. Everything descending from the cortex funnels from the corona radiata through the internal capsule into this, so the whole motor output of one hemisphere is packed into a bundle a student can cover with a thumb. Across it: frontopontine fibres medially, corticospinal and corticobulbar in the middle three-fifths, temporopontine laterally. A lesion here takes the third nerve as it emerges alongside and the descending motor fibres together — Weber's syndrome."
+    },
+    {
+      "key": "ot_l",
+      "name": "left optic tract",
+      "label": "Optic tract (L)",
+      "role": "part",
+      "group": "Projection",
+      "layer": "white_matter",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA67936"
+      },
+      "terms": [
+        "optic tract",
+        "lateral geniculate body",
+        "homonymous hemianopia",
+        "visual pathway"
+      ],
+      "narration": "A projection tract that can actually be seen from the outside. It sweeps back from the chiasm around the peduncle to the lateral geniculate body of the thalamus, carrying the whole of the opposite half of the visual world from both eyes. Cut it and the deficit is a contralateral homonymous hemianopia, characteristically incongruous between the two eyes because the fibres from the two retinas have not yet fully sorted themselves."
+    },
+    {
+      "key": "ot_r",
+      "name": "right optic tract",
+      "label": "Optic tract (R)",
+      "role": "context",
+      "group": "Projection",
+      "layer": "white_matter",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA62382"
+      },
+      "terms": [
+        "optic tract"
+      ],
+      "narration": "The right tract, carrying the left half of the visual field of both eyes."
+    },
+    {
+      "key": "chi",
+      "name": "optic chiasm",
+      "label": "Optic chiasm",
+      "role": "context",
+      "group": "Projection",
+      "layer": "white_matter",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA62045"
+      },
+      "terms": [
+        "optic chiasm",
+        "decussation of nasal fibres",
+        "bitemporal hemianopia"
+      ],
+      "narration": "The partial decussation the tracts begin at. It is what makes an optic tract different from an optic nerve: everything in front of it is one eye, everything behind it is one half of the field."
+    },
+    {
+      "key": "sm_l",
+      "name": "left stria medullaris of thalamus",
+      "label": "Stria medullaris of thalamus (L)",
+      "role": "part",
+      "group": "Limbic projection",
+      "layer": "white_matter",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA73414"
+      },
+      "terms": [
+        "stria medullaris of thalamus",
+        "habenula",
+        "septal nuclei"
+      ],
+      "narration": "A thin ridge along the upper medial edge of the thalamus, carrying fibres backwards from the septal and preoptic region to the habenula. Small, but worth knowing because it is a fibre bundle you can name on the surface of a specimen rather than only in a cut."
+    },
+    {
+      "key": "sm_r",
+      "name": "right stria medullaris of thalamus",
+      "label": "Stria medullaris of thalamus (R)",
+      "role": "context",
+      "group": "Limbic projection",
+      "layer": "white_matter",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA73413"
+      },
+      "terms": [
+        "stria medullaris of thalamus"
+      ],
+      "narration": "The right ridge, running to the right habenula."
+    },
+    {
+      "key": "hab",
+      "name": "habenula",
+      "label": "Habenula",
+      "role": "context",
+      "group": "Limbic projection",
+      "layer": "nucleus",
+      "color": "#b56576",
+      "refs": {
+        "bodyparts3d": "FMA62032"
+      },
+      "terms": [
+        "habenula",
+        "habenular commissure",
+        "fasciculus retroflexus"
+      ],
+      "narration": "Where the stria medullaris ends, just in front of the pineal body. Its own onward bundle, the fasciculus retroflexus to the interpeduncular nucleus, has no model in the catalog and is named rather than shown."
+    },
+    {
+      "key": "lv_l",
+      "name": "left lateral ventricle",
+      "label": "Lateral ventricle (L)",
+      "role": "context",
+      "group": "The white core",
+      "layer": "ventricle",
+      "color": "#9fd0e0",
+      "refs": {
+        "bodyparts3d": "FMA78450"
+      },
+      "terms": [
+        "lateral ventricle",
+        "roof of lateral ventricle"
+      ],
+      "narration": "Here only to orient the commissures: the corpus callosum roofs it, the fornix runs in its floor and medial wall, and the column of the fornix bounds the interventricular foramen in front. Three of this scene's tracts are placed by their relation to this one cavity."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "One white core, three destinations",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The white core"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.15,
+          "animate": true
+        }
+      ],
+      "narration": "Cut a hemisphere across and the white matter is one continuous mass — no seam anywhere marks off one bundle from another. The three classes are defined by where an axon ends, not by where it lies: association fibres end in the same hemisphere, commissural fibres cross to the other one, projection fibres leave the cortex altogether for the thalamus, brainstem or cord. Every named bundle in the rest of this scene is a region of this one mass, and the mass is a single model, so the naming has to come from the endpoints."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "The commissure you cannot miss",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cc",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cc",
+          "to": "lv_l",
+          "kind": "adjacency"
+        }
+      ],
+      "narration": "On a midline image the corpus callosum is the arched white band across the middle of the picture, and its underside is the roof of the lateral ventricle lit beside it. Read it front to back — rostrum curling down, genu, body, splenium — and remember which end serves which pole: genu to the frontal poles, splenium to the occipital. That second fact is the whole of alexia without agraphia: a left occipital lesion with the splenium cut leaves a patient who can write a sentence and then cannot read it back, because the right hemisphere still sees but can no longer reach the left hemisphere's language cortex."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "The three smaller commissures",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Commissural"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ac",
+            "pc"
+          ]
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "fxc"
+        }
+      ],
+      "narration": "Three more crossings, all on the midline and all small. The anterior commissure is in the lamina terminalis at the front wall of the third ventricle, joining the temporal lobes. The posterior commissure is at the back, where the third ventricle narrows into the aqueduct, under the pineal body lit above it. The commissure of the fornix lies between the two crura under the splenium. Learn them by the wall of the third ventricle each one sits in — front, back, and roof — because that is how they are found on a scan."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Why the posterior commissure is a pupil question",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pc",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pin",
+          "to": "pc",
+          "kind": "compression"
+        }
+      ],
+      "narration": "Light in one eye constricts both pupils because the pretectal fibres of the reflex cross in this commissure. A pineal tumour growing down onto it — the relationship lit here — takes out the light reflex in both eyes while the near response, whose fibres run more ventrally, survives. Add the loss of upgaze from the same region and that is Parinaud's syndrome. The pretectal nuclei themselves have no model, so this beat lights the commissure and the mass above it and describes the reflex arc rather than tracing it."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "The internal capsule — and the limb that is missing",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.05
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Capsule walls"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ic_l"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ic_r"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ic_l",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "An axial cut through the capsule: caudate medially, lentiform nucleus laterally, thalamus behind. The lit red bar is the ANTERIOR limb only — frontopontine and anterior thalamic fibres, and no motor fibres whatever. The genu and the posterior limb, which carry the corticobulbar and corticospinal tracts and are what a lacunar stroke destroys, have no model in this catalog. So look at the gap between the thalamus and the lentiform nucleus behind the lit bar: that gap is where the posterior limb runs, and this scene can show you the space but not the structure."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Projection fibres, funnelling down",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Projection"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:corticospinal-fibres",
+          "path": [
+            "wm",
+            "ic_l",
+            "cp"
+          ],
+          "duration": 4000
+        }
+      ],
+      "narration": "The descending motor path narrows at every step: a whole hemisphere of cortex, then the fan of the corona radiata inside the white mass, then the capsule, then the cerebral peduncle. The traced subject is the fibre population itself, which is not a model — the three structures it steps through are. That funnelling is why a lesion the size of a pea in the capsule can do what a lesion the size of a plum in the cortex does. In the peduncle the corticospinal and corticobulbar fibres take the middle three-fifths, frontopontine medial to them and temporopontine lateral; the third nerve emerges just medial to the bundle, which is why one small midbrain infarct gives a blown pupil on one side and a weak arm on the other."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "The fornix: hippocampus to mammillary body",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Limbic projection"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "fx_l",
+          "path": [
+            "hip_l",
+            "fx_l",
+            "mb"
+          ],
+          "duration": 3500
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "mb",
+          "to": "th_l",
+          "kind": "projection"
+        }
+      ],
+      "narration": "Out of the hippocampus, arching up and forwards over the thalamus, down as the column in front of the interventricular foramen, and into the mammillary body. From there the mammillothalamic tract goes on to the anterior thalamic nucleus — that tract has no model, so the last leg is drawn as a relationship between the mammillary body and the thalamus and is described rather than traced. Thiamine deficiency wrecks the mammillary bodies, and the amnesia that follows is a cut cable rather than damaged cortex."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Two tracts you can see without cutting",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ot_l",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "chi",
+          "to": "ot_l",
+          "kind": "continuity"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sm_l",
+          "to": "hab",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Almost every tract in this scene needs a cut to be seen. Two do not. From below, the optic tract runs back from the chiasm around the peduncle to the thalamus, carrying the opposite half of the visual field of both eyes — a tract lesion gives a contralateral homonymous hemianopia, usually incongruous. And on the upper medial edge of the thalamus, the stria medullaris runs back to the habenula. Their endpoints, the lateral geniculate body and the interpeduncular nucleus, have no models: the relationships lit here stop at the thalamus and the habenula, which do."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "The class with nothing to show",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The white core"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "wm",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "Association fibres are the third class and not one of them exists as a model: no arcuate or superior longitudinal fasciculus, no uncinate, no cingulum, no inferior fronto-occipital bundle. They are all inside the single lit mass. Hold on to two of them anyway, because they are the ones examined: the cingulum runs inside the cingulate gyrus and is the long association fibre of the limbic lobe, and the arcuate fasciculus curls round the end of the lateral sulcus from Wernicke's area to Broca's — cut it and speech is fluent, comprehension intact, and repetition impossible. This beat names them; it does not show them, and no amount of rotating this scene will find them."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "gaps": [
+    "NO ASSOCIATION FIBRE BUNDLE EXISTS IN THE CATALOG. Searched under fasciculus, fascic, arcuate, longitudinal, cingulum, uncinate, bundle, radiation and occipitofrontal: zero hits of any kind. One of the three classes this scene teaches is therefore entirely undrawable, and beat 9 says so out loud rather than implying the class is minor. The whole mass they lie in is FMA61822, which is why that model carries them on its card.",
+    "ONLY THE ANTERIOR LIMB OF THE INTERNAL CAPSULE EXISTS (FMA72909 left, FMA72908 right). There is no genu, no posterior limb, no retrolenticular or sublenticular part — searched as internal capsule, capsule, limb, genu, corona and radiata. This is the single most consequential gap in the scene, because the posterior limb is the clinically important one. Beat 5 lights the anterior limb, states in terms that it carries no motor fibres, and points at the gap between thalamus and lentiform nucleus where the posterior limb would be. Nothing here should be read as showing the corticospinal tract in the capsule.",
+    "The corpus callosum is one model (FMA86464): rostrum, genu, body and splenium have no separate ids, and neither do the forceps minor and major. Searched all six terms. They are named on the corpus callosum card and in beat 2 rather than lit apart, so the alexia-without-agraphia teaching is spoken, not shown.",
+    "The fornix is one model per side (FMA72925 left, FMA72924 right) covering alveus, fimbria, crus, body and column together — searched all five. The trace in beat 7 therefore steps hippocampus → fornix → mammillary body rather than stepping through the named stages.",
+    "The mammillothalamic tract has no model (searched mammillothalamic, mamill, thalamic, tract). Beat 7 draws the last leg of the Papez circuit as a SHOW_RELATIONSHIP from the mammillary body to the thalamus and says in narration that it is being described rather than traced.",
+    "No endpoint nucleus of the two surface tracts exists: no lateral geniculate body (searched geniculate, geniculum), no interpeduncular nucleus, no septal nucleus, no pretectal nucleus, no fasciculus retroflexus. Beat 8's relationships stop at the thalamus and the habenula, which do exist, and the narration names what lies beyond.",
+    "The pyramidal decussation, the medial lemniscus and every named brainstem tract are absent (searched decussat, lemnisc, pyramid — the only pyramid hits are the abdominal pyramidalis muscles). The descending trace in beat 6 therefore ends at the peduncle of the midbrain, which is the last drawable station.",
+    "SIDES, stated explicitly because the ids differ by one character: FMA72909 is the LEFT anterior limb of the internal capsule and FMA72908 the RIGHT; FMA72925 is the LEFT fornix and FMA72924 the RIGHT; FMA67936 is the LEFT optic tract and FMA62382 the RIGHT; FMA73414 is the LEFT stria medullaris and FMA73413 the RIGHT. The corpus callosum, both other commissures, the commissure of the fornix, the lamina terminalis, the mammillary body, the habenula, the pineal body and the peduncle of the midbrain are unsided single models.",
+    "No mesh referenced by this scene is present in meshes-lite/ — no brain model of any kind has been fetched yet, so all nine beats are hollow and the status is 'candidate' on delivery grounds alone. Nothing in the anatomy, the ids or the ops is unresolved. No anchor is authored anywhere in this scene: derive-landmark.mjs needs the parent mesh on disk to measure against, and none is, so placing one would be a guess."
+  ]
+}

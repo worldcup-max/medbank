@@ -337,6 +337,92 @@
         "medial compartment"
       ],
       "narration": "It lies behind pectineus and adductor longus, out of the triangle but immediately deep to its medial floor. The two divisions of the obturator nerve sandwich it, which is the landmark for the nerve in the medial compartment."
+    },
+    {
+      "key": "asis",
+      "label": "Anterior superior iliac spine",
+      "role": "part",
+      "group": "Landmarks on the hip bone",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "hip_bone",
+        "uvw": [
+          0.149,
+          0.0188,
+          0.6628
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT, the lateral end of the inguinal ligament (gap 0.09 mm on a 208 mm bone); tools/derive-landmark.mjs --parent FMA16586 --contact FMA21964. Checked against a second, independent witness — the origin of sartorius (gap 0.49 mm) — which lands 9.9 mm away, 4.8% of the bone's span, so the two structures the spine is defined by agree. This is the same coordinate gross__pelvis-perineum__bony-pelvis already carries for the right ASIS, re-derived here rather than copied.",
+      "calibration_gap_mm": 0.09,
+      "terms": [
+        "anterior superior iliac spine",
+        "ASIS",
+        "sartorius",
+        "inguinal ligament",
+        "mid-inguinal point",
+        "supracristal plane"
+      ],
+      "narration": "The lateral end of the inguinal ligament and the origin of sartorius, in the same place because they are the same corner of bone. It is the point you measure limb length from and one of the two ends of every line drawn across the groin."
+    },
+    {
+      "key": "pubic_tubercle",
+      "label": "Pubic tubercle",
+      "role": "part",
+      "group": "Landmarks on the hip bone",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "hip_bone",
+        "uvw": [
+          0.8682,
+          0.0391,
+          0.1997
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT, the medial end of the inguinal ligament (gap 0.52 mm), restricted to the lower third of the bone so the search cannot return the lateral end; tools/derive-landmark.mjs --parent FMA16586 --contact FMA21964 --slab z:0,0.35. Two independent checks: it lies 134 mm from the measured ASIS, a credible length for the inguinal ligament on a 208 mm hip bone, and 14 mm from the origin of adductor longus on the body of the pubis, which is where that origin belongs relative to the tubercle.",
+      "calibration_gap_mm": 0.52,
+      "terms": [
+        "pubic tubercle",
+        "inguinal ligament",
+        "femoral hernia",
+        "inguinal hernia",
+        "saphenofemoral junction"
+      ],
+      "narration": "The single most useful bony point in the groin. A femoral hernia comes out below and lateral to it; an inguinal hernia lies above and medial. The saphenofemoral junction is about four centimetres below and lateral to it. Every one of those statements is a direction from this point, so find it first."
+    },
+    {
+      "key": "pecten_pubis",
+      "label": "Pecten pubis (pectineal line)",
+      "role": "part",
+      "group": "Landmarks on the hip bone",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "hip_bone",
+        "uvw": [
+          0.7908,
+          0.0749,
+          0.233
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT with --area 3, the middle of the patch where pectineus takes origin (nearest gap 0.04 mm, 38 vertices in the patch, centroid snapped 2.49 mm to the surface); tools/derive-landmark.mjs --parent FMA16586 --contact FMA22450 --area 3. --area is used because the pecten is a line of origin, not a point, so the nearest single vertex would land at one end of it. It sits 13 mm lateral to the measured pubic tubercle, which is the direction the pecten runs.",
+      "calibration_gap_mm": 0.04,
+      "terms": [
+        "pecten pubis",
+        "pectineal line",
+        "pectineus",
+        "femoral ring",
+        "posterior wall of the femoral ring",
+        "lacunar ligament"
+      ],
+      "narration": "The sharp ridge running back and laterally from the pubic tubercle. Pectineus arises along it, and it is the hard posterior wall of the femoral ring — one of the two rigid edges that make a femoral hernia strangulate."
     }
   ],
   "views": [
@@ -371,6 +457,10 @@
           "target": "Boundaries"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks on the hip bone"
+        },
+        {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "inguinal_lig",
           "intensity": 0.95
@@ -378,9 +468,14 @@
         {
           "op": "ROTATE_TO_VIEW",
           "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Landmarks on the hip bone",
+          "intensity": 0.95
         }
       ],
-      "narration": "Above, the inguinal ligament forms the base. Laterally, the medial border of sartorius. Medially, the medial border of adductor longus. Three lines, one space. Say them in that order — base, lateral, medial — and you will never leave one out."
+      "narration": "Above, the inguinal ligament forms the base. Laterally, the medial border of sartorius. Medially, the medial border of adductor longus. Three lines, one space. Say them in that order — base, lateral, medial — and you will never leave one out. The two lit points are the ends of the base: the anterior superior iliac spine laterally and the pubic tubercle medially, both measured on the bone rather than estimated."
     },
     {
       "mode": "location",
@@ -496,7 +591,7 @@
           "view": "anterior"
         }
       ],
-      "narration": "The external iliac artery comes down inside the pelvis, passes behind the middle of the inguinal ligament and is called the femoral artery from that moment. It crosses the floor of the triangle, gives the profunda femoris from its back and lateral side about four centimetres down, and leaves at the apex into the adductor canal. Two landmarks worth memorising: the mid-inguinal point for the pulse, and the profunda origin, because that is the branch that supplies most of the thigh."
+      "narration": "The external iliac artery comes down inside the pelvis, passes behind the inguinal ligament at the mid-inguinal point — halfway between the anterior superior iliac spine and the pubic symphysis, not the midpoint of the ligament itself, which lies further laterally and marks the deep inguinal ring — and is called the femoral artery from that moment. It crosses the floor of the triangle, gives the profunda femoris from its back and lateral side about four centimetres down, and leaves at the apex into the adductor canal. Two landmarks worth memorising: the mid-inguinal point for the pulse, and the profunda origin, because that is the branch that supplies most of the thigh."
     },
     {
       "mode": "vasculature",
@@ -556,7 +651,7 @@
           "view": "anterior"
         }
       ],
-      "narration": "The path traced here is the femoral nerve, L2, L3 and L4. It forms inside psoas major, runs down in the groove between psoas and iliacus, and enters the thigh lateral to the artery and behind the iliac fascia rather than in the femoral sheath. About two centimetres below the ligament it explodes into its branches. That short trunk is why a femoral nerve block is placed high, just below the ligament and just lateral to the pulse."
+      "narration": "The path traced here is the femoral nerve, L2, L3 and L4. It forms inside psoas major, runs down in the groove between psoas and iliacus, and enters the thigh lateral to the artery and behind the iliac fascia rather than in the femoral sheath. About four centimetres below the ligament it explodes into its anterior and posterior divisions. That short trunk is why a femoral nerve block is placed high, just below the ligament and just lateral to the pulse."
     },
     {
       "mode": "cross_section",
@@ -615,6 +710,20 @@
           "from": "fem_vein",
           "to": "pectineus",
           "kind": "boundary"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks on the hip bone"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pecten_pubis",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pubic_tubercle",
+          "intensity": 0.9
         },
         {
           "op": "ROTATE_TO_VIEW",
@@ -692,10 +801,13 @@
     "The femoral sheath, the femoral canal and the femoral ring are fascial spaces with no mesh. They are the clinical heart of the region, so they are taught by lighting the vein and the pecten pubis of the hip bone and describing the four walls of the ring. A modelled sheath would be the single most valuable addition to this scene.",
     "The great saphenous vein and the saphenous opening in the fascia lata are not in the catalog, so the saphenofemoral junction is described by its landmark — four centimetres below and lateral to the pubic tubercle — rather than shown.",
     "The fascia lata itself has no mesh on this side of the thigh, so the roof of the triangle is narrated. The iliotibial tract exists but is a lateral structure and would misrepresent the roof if used for it.",
-    "The pubic tubercle, the pecten pubis and the anterior superior iliac spine are sub-features of the whole hip bone mesh. They are taught by lighting the bone and naming the feature. Landmark anchors would be a real improvement here, more than in most scenes, because hernia teaching turns entirely on the pubic tubercle — but the mesh was not measured in this run and an anchor placed by eye would be worse than none."
+    "The pubic tubercle, the pecten pubis and the anterior superior iliac spine were listed here as unmeasured sub-features of the whole hip bone mesh. That note was stale: FMA16586 is in the local decimated set, and all three were measured at this audit and are now anchors — the ASIS on two converging witnesses (sartorius and the lateral end of the inguinal ligament, 9.9 mm apart), the pubic tubercle as the medial end of the inguinal ligament within the lower third of the bone, and the pecten pubis as the pectineus contact patch. All three are status needs-review until someone opens the scene and looks at where they landed. The femoral ring's other two walls, the lacunar ligament and the vein, are still not marked: the ligament has no mesh and a wall is not a point.",
+    "The femoral sheath's lateral, intermediate and medial compartments have no meshes, so beat 10 lights the measured pecten pubis and the pubic tubercle as the two bony walls of the femoral ring and names the other two. The ring itself is not drawn."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-30",
+    "audited_by": "task"
   }
 }

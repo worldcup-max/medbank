@@ -107,7 +107,7 @@
         "angle of Louis",
         "manubriosternal joint"
       ],
-      "narration": "The long middle plate. Where it meets the manubrium the bone steps back — that ridge is the sternal angle."
+      "narration": "The long middle plate. It meets the manubrium at an angle that opens backwards, so the junction juts forwards as a transverse ridge you can feel through the skin — that ridge is the sternal angle."
     },
     {
       "key": "xiphoid",
@@ -126,7 +126,7 @@
         "xiphisternal joint",
         "infrasternal angle"
       ],
-      "narration": "The small cartilaginous tip that ossifies late. It marks the infrasternal angle and is the landmark for hand position in chest compressions."
+      "narration": "The small cartilaginous tip that ossifies late. It marks the infrasternal angle, and in chest compressions it is the landmark you stay clear of: the heel of the hand goes on the lower half of the body of the sternum, above the xiphoid, because the xiphoid can be snapped off and driven into the liver."
     },
     {
       "key": "r1",
@@ -1074,7 +1074,7 @@
           "intensity": 0.5
         }
       ],
-      "narration": "Manubrium, body, xiphoid process. Feel the jugular notch on top, run your finger down until the bone steps back — that step is the sternal angle."
+      "narration": "Manubrium, body, xiphoid process. Feel the jugular notch on top, run your finger down until the bone juts forwards under it as a transverse ridge — that ridge is the sternal angle."
     },
     {
       "mode": "location",
@@ -1255,7 +1255,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-30",
+    "audited_by": "task"
   },
   "gaps": [
     "Costal cartilage is carried as one composite model per side, so a single cartilage cannot be highlighted on its own. The catalog does hold the first to seventh cartilages individually on each side; they can replace the composite without changing a single op if per-cartilage teaching is ever needed.",

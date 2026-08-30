@@ -203,9 +203,11 @@
         "diaphragmatic pleura",
         "phrenic nerve",
         "shoulder tip pain",
-        "C3 C4 C5"
+        "C3 C4 C5",
+        "lower intercostal nerves",
+        "peripheral diaphragmatic pleura"
       ],
-      "narration": "On the upper surface of the diaphragm. Its central part takes the phrenic nerve — C3, C4, C5 — which is why irritation here is felt at the tip of the shoulder."
+      "narration": "On the upper surface of the diaphragm, and supplied in two territories. The central part takes the phrenic nerve — C3, C4, C5 — which is why irritation there is felt at the tip of the shoulder. The peripheral rim takes the lower intercostal nerves instead, so irritation at the edge is felt in the lower chest wall and upper abdomen, where it can imitate an acute abdomen."
     },
     {
       "key": "mediastinal",
@@ -642,17 +644,20 @@
           "kind": "pain felt over"
         },
         {
-          "op": "PEEL_LAYER",
-          "layer": "organ",
-          "direction": "outward"
+          "op": "SHOW_RELATIONSHIP",
+          "from": "diaphragmatic",
+          "to": "diaphragm",
+          "kind": "pain referred from"
         }
       ],
-      "narration": "Visceral pleura has autonomic supply and no pain fibres, so a lung lesion is silent until it reaches the surface. Parietal pleura is somatic: intercostal nerves over the ribs, phrenic over the central diaphragm and the mediastinum. So costal pleurisy is a sharp catch in the chest wall on inspiration, while diaphragmatic irritation is felt at the tip of the shoulder — C3, C4, C5, and the same referral you meet again with a ruptured spleen."
+      "narration": "Visceral pleura has autonomic supply and no pain fibres, so a lung lesion is silent until it reaches the surface. Parietal pleura is somatic: intercostal nerves over the ribs, phrenic over the central diaphragm and the mediastinum, lower intercostal nerves over the peripheral rim of the diaphragm. So costal pleurisy is a sharp catch in the chest wall on inspiration; irritation of the central diaphragmatic pleura is felt at the tip of the shoulder — C3, C4, C5, the same referral you meet again with a ruptured spleen — and irritation of its peripheral rim is felt low in the chest and upper abdomen instead."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-30",
+    "audited_by": "task"
   },
   "gaps": [
     "Routed to its deferred diagram mode, not to 3D. The catalog holds no pleura of any kind — searching all 934 entries for pleura, serous, membrane and cavity returns interosseous membranes, the septum pellucidum and nothing else. The subject of this scene has no model, so a 3D scene here would show ribs, lungs and diaphragm with the actual structure missing from the middle of it. 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes: this becomes a 3D scene the day a pleural sac model exists, with no curriculum edit.",

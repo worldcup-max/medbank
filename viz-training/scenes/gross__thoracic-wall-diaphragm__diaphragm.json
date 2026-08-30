@@ -813,7 +813,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-30",
+    "audited_by": "task"
   },
   "gaps": [
     "The catalog holds ONE diaphragm mesh and no sub-parts. There is no central tendon, no right or left crus, and no median, medial or lateral arcuate ligament — a search of all 934 names returns nothing for crus, crura, arcuate or central tendon. So the single most structural fact about this muscle, that a muscular rim converges on a fibrous centre, is narrated and cannot be shown or highlighted separately.",

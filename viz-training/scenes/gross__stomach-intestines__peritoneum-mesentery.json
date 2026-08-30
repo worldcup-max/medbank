@@ -570,7 +570,7 @@
       "narration": "One membrane, two nerve supplies, and every abdominal pain question turns on it. The visceral layer has autonomic supply: it feels only stretch and ischaemia, gives dull colicky pain, and refers it to the midline by embryological gut — epigastric for foregut, umbilical for midgut, suprapubic for hindgut. The parietal layer has somatic supply from the overlying wall: it is exquisitely sensitive, localises exactly, and produces guarding and rebound. Appendicitis is the two in sequence — umbilical pain first while only the visceral layer is involved, then a shift to the right iliac fossa when the parietal peritoneum is touched. And the diaphragmatic peritoneum is phrenic, C3 to C5, so blood under the diaphragm is felt at the shoulder tip."
     },
     {
-      "mode": "location",
+      "mode": "cross_section",
       "beat": 3,
       "title": "The greater sac, the lesser sac and the door between",
       "ops": [
@@ -745,12 +745,14 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
     "Routed to its deferred diagram mode, not to 3D. The catalog holds no peritoneum, no omentum and no mesentery of any kind — searching all 934 entries for peritoneum, mesentery, mesocolon, omentum, falciform, serous and sac returns nothing. The subject of this scene has no model, so a 3D scene here would show a stomach, a liver and some bowel with the actual structure missing from between them. 3d_anatomy stays first in the curriculum's preferred_modes and is recorded in deferred_modes: this becomes a 3D scene the day peritoneal fold models exist, with no curriculum edit.",
     "This is the same absence as the pleura and the pericardium. The free BodyParts3D set is built from solid organs, muscles, bones and vessels; serous membranes and the double folds derived from them are simply not in it. Closing this gap needs a different provider or a purpose-built model, not a further ingest of the same archive.",
-    "Status is 'planned', not 'ready'. The scene is fully authored — twenty-three regions, seven beats, ops and narration — but no artwork exists for the SVG engine, so nothing renders today. It needs two drawings rather than one: a sagittal section showing the sheet folding round the organs, the lesser sac and the pouches, and a transverse section at the level of the epiploic foramen. Promote it to 'ready' once those exist with the labelled regions this scene names.",
+    "Status is 'planned', not 'ready'. The scene is fully authored — twenty-two regions, seven beats, ops and narration — but no artwork exists for the SVG engine, so nothing renders today. It needs two drawings rather than one: a sagittal section showing the sheet folding round the organs, the lesser sac and the pouches, and a transverse section at the level of the epiploic foramen. Beat 3 is the scene's cross_section beat (the curriculum asks for location and cross_section, and beat 3 is the one that cuts) so the transverse drawing is the one that unblocks the required view. Promote it to 'ready' once both exist with the labelled regions this scene names.",
     "The abdominal wall, diaphragm, posterior wall and gut tube are authored as context regions of a drawing even though models for all of them exist in the catalog — diaphragm, stomach, liver, spleen, kidneys, the small bowel segments. They are drawn here because the diagram engine draws the whole picture. When the 3D version arrives they become real refs and only the peritoneal folds themselves stay as authored geometry.",
     "The peritoneal folds of the anterior abdominal wall — the median, medial and lateral umbilical folds and the supravesical and inguinal fossae — are named in terms[] but are not authored as regions here. They belong to the inguinal region scenes, which are already authored, and repeating them would split the same teaching across two scenes.",
     "The broad ligament is in terms[] and is deliberately not taught here beyond a mention. It is a peritoneal fold and belongs to this topic by definition, but its contents are the whole of female pelvic anatomy and it is properly taught in 'Internal reproductive organs' under Pelvis & Perineum, which is still unauthored.",

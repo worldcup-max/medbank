@@ -1,0 +1,533 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__ventricular-system-csf__csf-circulation",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Ventricular System & CSF",
+  "structure": "CSF circulation",
+  "covers": [
+    "CSF circulation"
+  ],
+  "learning_goal": "Follow one millilitre of cerebrospinal fluid from the choroid plexus to the venous blood, name every space and hole it passes through in order, and use the point at which that route is interrupted to separate obstructive from communicating hydrocephalus and to predict what a scan will show.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "ventricular system",
+      "CSF",
+      "CSF circulation",
+      "hydrocephalus",
+      "raised intracranial pressure",
+      "lumbar puncture",
+      "meninges"
+    ],
+    "terms": [
+      "cerebrospinal fluid",
+      "CSF circulation",
+      "CSF flow",
+      "CSF production",
+      "CSF absorption",
+      "choroid plexus",
+      "lateral ventricle",
+      "interventricular foramen",
+      "foramen of Monro",
+      "third ventricle",
+      "cerebral aqueduct",
+      "aqueduct of Sylvius",
+      "aqueduct stenosis",
+      "fourth ventricle",
+      "median aperture",
+      "foramen of Magendie",
+      "lateral aperture",
+      "foramen of Luschka",
+      "subarachnoid space",
+      "cisterna magna",
+      "cerebellomedullary cistern",
+      "basal cisterns",
+      "interpeduncular cistern",
+      "lumbar cistern",
+      "cauda equina",
+      "arachnoid granulation",
+      "arachnoid villus",
+      "superior sagittal sinus",
+      "dural venous sinus",
+      "lateral lacuna",
+      "glymphatic pathway",
+      "cranial nerve sleeve",
+      "spinal nerve root sleeve",
+      "Monro-Kellie doctrine",
+      "intracranial pressure",
+      "obstructive hydrocephalus",
+      "non-communicating hydrocephalus",
+      "communicating hydrocephalus",
+      "normal pressure hydrocephalus",
+      "Hakim's triad",
+      "hydrocephalus ex vacuo",
+      "colloid cyst",
+      "posterior fossa tumour",
+      "subarachnoid haemorrhage",
+      "tuberculous meningitis",
+      "ventriculoperitoneal shunt",
+      "external ventricular drain",
+      "third ventriculostomy",
+      "lumbar puncture",
+      "opening pressure",
+      "papilloedema",
+      "acetazolamide"
+    ]
+  },
+  "camera": {
+    "framing": "medial"
+  },
+  "structures": [
+    {
+      "key": "plexus",
+      "label": "Choroid plexus — the source",
+      "role": "part",
+      "group": "Production",
+      "layer": "vessel",
+      "color": "#c9a227",
+      "terms": [
+        "choroid plexus",
+        "CSF production",
+        "blood-CSF barrier",
+        "carbonic anhydrase",
+        "acetazolamide"
+      ],
+      "narration": "Fronds of vessels clothed in a single layer of epithelium, in both lateral ventricles and in the roofs of the third and fourth. They secrete rather than filter: sodium is pumped into the cavity and water follows. About 500 millilitres a day, into a system that holds about 150 — several complete turnovers between waking and sleeping. Secretion barely slows when the pressure downstream rises, which is the reason every blockage on this diagram becomes a pressure problem."
+    },
+    {
+      "key": "lat_vent",
+      "label": "Lateral ventricles",
+      "role": "part",
+      "group": "Inside the brain",
+      "layer": "ventricle",
+      "color": "#4fa8d8",
+      "terms": [
+        "lateral ventricle",
+        "frontal horn",
+        "temporal horn",
+        "atrium",
+        "external ventricular drain"
+      ],
+      "narration": "The first and much the largest reservoir, one per hemisphere. A drain put in for acute hydrocephalus goes into the frontal horn of one of them, because it is the part of the system furthest from anything that matters and closest to the skull."
+    },
+    {
+      "key": "monro",
+      "label": "Interventricular foramen (of Monro)",
+      "role": "part",
+      "group": "Inside the brain",
+      "layer": "ventricle",
+      "color": "#c23a3a",
+      "terms": [
+        "interventricular foramen",
+        "foramen of Monro",
+        "colloid cyst"
+      ],
+      "narration": "One doorway per side, a few millimetres across, bounded in front by the column of the fornix and behind by the front of the thalamus. A colloid cyst grows exactly here and plugs both at once: both lateral ventricles balloon, the third and fourth stay normal."
+    },
+    {
+      "key": "v3",
+      "label": "Third ventricle",
+      "role": "part",
+      "group": "Inside the brain",
+      "layer": "ventricle",
+      "color": "#4fa8d8",
+      "terms": [
+        "third ventricle",
+        "third ventriculostomy",
+        "lamina terminalis"
+      ],
+      "narration": "A midline slit between the two thalami. Its floor is thin enough to be opened endoscopically — a third ventriculostomy makes a new hole from here straight into the basal cisterns, bypassing a blocked aqueduct without any shunt hardware at all."
+    },
+    {
+      "key": "aqueduct",
+      "label": "Cerebral aqueduct (of Sylvius)",
+      "role": "part",
+      "group": "Inside the brain",
+      "layer": "ventricle",
+      "color": "#c23a3a",
+      "terms": [
+        "cerebral aqueduct",
+        "aqueduct of Sylvius",
+        "aqueduct stenosis",
+        "narrowest point"
+      ],
+      "narration": "A millimetre or two of canal through the midbrain, with no choroid plexus and no room to spare. The narrowest point in the whole circuit and therefore the commonest place for it to fail: stenosis dilates the third and both lateral ventricles and leaves the fourth normal."
+    },
+    {
+      "key": "v4",
+      "label": "Fourth ventricle",
+      "role": "part",
+      "group": "Inside the brain",
+      "layer": "ventricle",
+      "color": "#4fa8d8",
+      "terms": [
+        "fourth ventricle",
+        "rhomboid fossa",
+        "posterior fossa tumour"
+      ],
+      "narration": "The last cavity inside the brain, a tent between the pons and medulla in front and the cerebellum behind. It is the only one with a way out, and it is squeezed flat by anything growing in the posterior fossa."
+    },
+    {
+      "key": "apertures",
+      "label": "The three exits — median & lateral apertures",
+      "role": "part",
+      "group": "Leaving the brain",
+      "layer": "ventricle",
+      "color": "#e07a3d",
+      "terms": [
+        "median aperture",
+        "foramen of Magendie",
+        "lateral aperture",
+        "foramen of Luschka",
+        "fourth ventricle outlets"
+      ],
+      "narration": "One median aperture in the roof of the fourth ventricle and one lateral aperture at each side: three holes, and the only way fluid leaves the ventricles. Everything upstream of them is inside the brain; everything downstream is outside it, in the subarachnoid space. Block all three — by scarring after meningitis or haemorrhage, or by a malformation — and every cavity in the system dilates together, including the fourth."
+    },
+    {
+      "key": "cisterna_magna",
+      "label": "Cisterna magna",
+      "role": "part",
+      "group": "Around the brain",
+      "layer": "space",
+      "color": "#8fbfe0",
+      "terms": [
+        "cisterna magna",
+        "cerebellomedullary cistern",
+        "cisternal puncture"
+      ],
+      "narration": "The pool the median aperture opens into, between the underside of the cerebellum and the back of the medulla. It is the first place fluid arrives after leaving the ventricles and the largest of the cisterns."
+    },
+    {
+      "key": "basal_cisterns",
+      "label": "Basal cisterns",
+      "role": "part",
+      "group": "Around the brain",
+      "layer": "space",
+      "color": "#8fbfe0",
+      "terms": [
+        "basal cisterns",
+        "interpeduncular cistern",
+        "prepontine cistern",
+        "subarachnoid haemorrhage",
+        "star sign"
+      ],
+      "narration": "Where the arachnoid bridges the hollows at the base of the brain, the space between it and the brain opens into pools. Fluid from the cisterna magna and the lateral apertures runs forward through them and then up over the hemispheres. They are also where blood collects after an aneurysm ruptures — the pattern of a subarachnoid haemorrhage on CT is these cisterns filled in white, and the same blood then scars the absorption route."
+    },
+    {
+      "key": "convexity",
+      "label": "Subarachnoid space over the convexity",
+      "role": "part",
+      "group": "Around the brain",
+      "layer": "space",
+      "color": "#a8cfe8",
+      "terms": [
+        "subarachnoid space",
+        "arachnoid mater",
+        "pia mater",
+        "convexity",
+        "Monro-Kellie doctrine"
+      ],
+      "narration": "Between the arachnoid and the pia, the fluid climbs over the surface of the hemispheres towards the midline at the vertex. This is the layer that buoys the brain: suspended in it, a brain of about 1400 grams weighs some fifty. Skull, brain, blood and fluid share one fixed box, so a rise in the volume of any one of them must be paid for by the others."
+    },
+    {
+      "key": "lumbar_cistern",
+      "label": "Lumbar cistern",
+      "role": "part",
+      "group": "Around the brain",
+      "layer": "space",
+      "color": "#a8cfe8",
+      "terms": [
+        "lumbar cistern",
+        "cauda equina",
+        "lumbar puncture",
+        "opening pressure",
+        "L3/4 interspace"
+      ],
+      "narration": "Fluid runs down the spinal subarachnoid space as well as up over the brain, and below the end of the cord it lies in a sac holding nothing but the roots of the cauda equina. That is why a needle can be put in at L3/4 without hitting cord, and why the pressure read there is the pressure of the whole system — when the system is communicating."
+    },
+    {
+      "key": "granulations",
+      "label": "Arachnoid granulations",
+      "role": "part",
+      "group": "Absorption",
+      "layer": "space",
+      "color": "#b56576",
+      "terms": [
+        "arachnoid granulation",
+        "arachnoid villus",
+        "Pacchionian granulation",
+        "one-way valve",
+        "lateral lacuna"
+      ],
+      "narration": "Tufts of arachnoid that push through the dura into the venous sinuses and their lacunae, clustered along the superior sagittal sinus at the vertex. They behave as one-way valves: fluid passes into venous blood when CSF pressure exceeds venous pressure and blood never passes back. Absorption is passive and pressure-driven, so it rises as pressure rises — which is what normally holds the volume steady against a production rate that does not vary."
+    },
+    {
+      "key": "sss",
+      "label": "Superior sagittal sinus",
+      "role": "part",
+      "group": "Absorption",
+      "layer": "vessel",
+      "color": "#3f5f8f",
+      "terms": [
+        "superior sagittal sinus",
+        "dural venous sinus",
+        "venous sinus thrombosis",
+        "return to venous blood"
+      ],
+      "narration": "The venous channel in the upper edge of the falx, and the destination of the whole circuit: fluid rejoins the blood here. Thrombose the sinus and the venous pressure the granulations must exceed goes up, absorption fails, and the patient develops raised pressure with normal-sized ventricles."
+    },
+    {
+      "key": "alt_routes",
+      "label": "The other ways out",
+      "role": "part",
+      "group": "Absorption",
+      "layer": "space",
+      "color": "#8f7fbf",
+      "terms": [
+        "cranial nerve sleeve",
+        "spinal nerve root sleeve",
+        "cribriform plate",
+        "nasal lymphatics",
+        "glymphatic pathway",
+        "meningeal lymphatic"
+      ],
+      "narration": "The granulations are not the only exit, and this is the part of the picture that has changed. Fluid also leaves along the sleeves of cranial and spinal nerve roots into lymphatics — the olfactory nerves through the cribriform plate especially — and there is a perivascular, so-called glymphatic route through the brain itself. Teach the granulations as the main and examinable answer, but not as the whole of it."
+    },
+    {
+      "key": "obstructive",
+      "label": "Obstructive hydrocephalus",
+      "role": "part",
+      "group": "When it fails",
+      "layer": "space",
+      "color": "#c23a3a",
+      "terms": [
+        "obstructive hydrocephalus",
+        "non-communicating hydrocephalus",
+        "aqueduct stenosis",
+        "colloid cyst",
+        "posterior fossa tumour"
+      ],
+      "narration": "A block anywhere from a foramen of Monro to the three apertures. The rule is mechanical: everything upstream of the block dilates, everything downstream is normal, and the last normal cavity names the level. A lumbar puncture here is dangerous, because the pressure below the block is not the pressure above it and dropping it invites the brain to move."
+    },
+    {
+      "key": "communicating",
+      "label": "Communicating hydrocephalus",
+      "role": "part",
+      "group": "When it fails",
+      "layer": "space",
+      "color": "#d98f6a",
+      "terms": [
+        "communicating hydrocephalus",
+        "subarachnoid haemorrhage",
+        "tuberculous meningitis",
+        "normal pressure hydrocephalus",
+        "Hakim's triad",
+        "hydrocephalus ex vacuo"
+      ],
+      "narration": "The ventricles still connect to the subarachnoid space, so the whole system dilates including the fourth; the failure is downstream, in the cisterns or at the granulations, usually scarred by old blood or old meningitis. Normal pressure hydrocephalus is its slow form — gait first, then incontinence, then dementia, with a pressure that reads normal on a single measurement. Not every big ventricle is hydrocephalus: ventricles enlarged because the brain around them has atrophied are ex vacuo, and the sulci are wide too, which is the discriminator."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "One millilitre, all the way round",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:csf",
+          "path": [
+            "plexus",
+            "lat_vent",
+            "monro",
+            "v3",
+            "aqueduct",
+            "v4",
+            "apertures",
+            "cisterna_magna",
+            "basal_cisterns",
+            "convexity",
+            "granulations",
+            "sss"
+          ],
+          "duration": 9000
+        }
+      ],
+      "narration": "Plexus, lateral ventricle, foramen of Monro, third ventricle, aqueduct, fourth ventricle, out through the three apertures, cisterna magna, basal cisterns, up over the convexity, through the arachnoid granulations and into the superior sagittal sinus. Twelve steps and one direction. Learn the order in one piece, because every clinical question in this topic is a question about where the line is cut. Note the halfway point: the apertures are the boundary between inside the brain and outside it, and that boundary is the whole of the obstructive-versus-communicating distinction."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Made at a fixed rate, absorbed at a variable one",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Production",
+            "Absorption"
+          ],
+          "layout": "opposed"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "granulations",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The two ends of the circuit behave differently, and that asymmetry is the mechanism. Production is active secretion at about 500 millilitres a day and is nearly indifferent to the pressure it works against. Absorption is passive through the granulations and rises as pressure rises. So the system self-regulates by absorbing faster, never by making less — and when the outlet is blocked the inlet keeps running. That is why obstruction raises pressure instead of reaching a comfortable new balance, and why acetazolamide, which attacks the only adjustable term, is a weak and temporary measure rather than a treatment."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Where it can be cut, and what the scan shows",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "When it fails"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Inside the brain"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Leaving the brain"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "obstructive",
+          "to": "aqueduct",
+          "kind": "cause"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "communicating",
+          "to": "granulations",
+          "kind": "cause"
+        }
+      ],
+      "narration": "Read the scan backwards along the route in beat 1. Both lateral ventricles big, third and fourth normal: the foramina, so think colloid cyst. Lateral and third big, fourth normal: the aqueduct. All four big: the block is at or beyond the apertures, or the granulations have failed — communicating. The last normal cavity names the level, every time, and it works because the route has only one direction. Add one negative: wide ventricles with wide sulci and no pressure is atrophy, not hydrocephalus."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Three ways to re-plumb it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lat_vent",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "v3",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "v3",
+          "to": "basal_cisterns",
+          "kind": "bypass"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lat_vent",
+          "to": "alt_routes",
+          "kind": "bypass"
+        }
+      ],
+      "narration": "Every treatment is the same idea — give the fluid somewhere to go. An external ventricular drain into a frontal horn buys days and measures the pressure while it does. A ventriculoperitoneal shunt is the permanent version, a valved tube from the ventricle to the peritoneum, and it fails by blocking, by infecting, or by draining too well and collapsing the ventricles. A third ventriculostomy makes a hole in the floor of the third ventricle into the basal cisterns and needs no hardware, but only helps when the block is below that point — which returns the choice of operation to the question of level in beat 3."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 5,
+      "title": "The venous end — where fluid becomes blood",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Absorption"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Around the brain"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "granulations",
+          "to": "sss",
+          "kind": "drainage"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "The circuit is closed by a vein, not by a lymphatic, and the join is worth seeing from above: granulations cluster along the superior sagittal sinus at the vertex and along the lacunae either side of it, which is exactly where the fluid climbing the convexity arrives. The valve is one-way and it is driven by the difference between CSF and venous pressure — so the venous side sets the threshold. If sinus pressure rises, whether from thrombosis or from a raised central venous pressure, absorption stops without anything in the ventricles being blocked at all, and the pressure rises with normal-sized ventricles. Fluid also leaves along nerve root sleeves into lymphatics and by the perivascular glymphatic route; the granulations are the main path but not the only one."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 6,
+      "title": "One fixed box",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Around the brain",
+            "Absorption"
+          ]
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "convexity",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Brain, blood and cerebrospinal fluid share a rigid skull, so their volumes sum to a constant: the Monro-Kellie doctrine. A growing mass is compensated first by squeezing fluid out of the convexity and the cisterns and out of the venous compartment, which is why early raised pressure shows as effaced sulci and small cisterns rather than as symptoms. When that reserve is spent the pressure curve turns almost vertical and a small further increase costs a great deal. It also runs the other way: after a lumbar puncture leak, low fluid volume lets the brain sag and the veins engorge, producing the postural headache that is the mirror image of this beat."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "gaps": [
+    "ROUTED TO `diagram`, ITS FIRST PREFERRED MODE, AND THE ROUTING WAS CHECKED RATHER THAN ASSUMED. The absorption half of this circuit has no geometry whatever in the catalog: searched mening, dura, arachnoid, pia, subarach, cistern, cisterna, granulation, villus, sinus, sagittal, confluen, lacuna, aperture, Magendie and Luschka across all 934 meshes. The only sinus is the coronary sinus and the only foramen is the interventricular one. A 3d_anatomy scene could draw the ventricular half and would have to stop at the fourth ventricle — which is exactly what the Ventricles scene already does in its beat 8. So the second half of the journey is the whole reason this structure exists as a separate entry, and it is unauthorable in 3D today. `deferred_modes` keeps 3d_anatomy on the record for the day the meninges arrive.",
+    "This scene therefore contains NO model ids and no `refs` on any structure: every structure is a drawn region for the SVG engine, following the same pattern as the other diagram-mode scenes in the corpus.",
+    "OVERLAP WITH THE VENTRICLES SCENE IS DELIBERATE AND BOUNDED. The four cavities and two channels are taught properly, wall by wall, in neuroanatomy__ventricular-system-csf__ventricles, which covers 'Ventricles'. Here they appear only as stations on a route, and this scene covers 'CSF circulation' alone. The two agree on the numbers — about 500 mL produced daily into a system holding about 150 mL, the aqueduct as the narrowest point, and the same three-up-one-normal reading of an aqueduct block — and were read against each other for that.",
+    "CHOROID PLEXUS is a single station here. It is taught as a secretory organ, with its layers and its blood-CSF barrier, in neuroanatomy__ventricular-system-csf__choroid-plexus; that scene's trace deliberately stops at the fourth ventricle and hands the outflow to this one.",
+    "NO ARTERY ANYWHERE IN THE HEAD. The 'vasculature' view the curriculum asks for is authored here as the VENOUS end of the circuit — granulations into the superior sagittal sinus — which is the vasculature that matters to CSF. Arterial supply of the plexus (anterior and posterior choroidal arteries) is named in match.terms for retrieval only: searched choroidal, cerebral artery, basilar, circle of Willis, communicating — none exists.",
+    "The glymphatic and meningeal-lymphatic routes are stated as a real but secondary exit rather than as settled examinable fact, deliberately. If the corpus later takes a position on them, this card and beat 5 are the two places to change and they must be changed together."
+  ]
+}

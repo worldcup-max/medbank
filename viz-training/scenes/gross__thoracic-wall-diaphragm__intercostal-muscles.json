@@ -577,7 +577,7 @@
         "intercostal space",
         "costal groove"
       ],
-      "narration": "The space below this rib is the eleventh intercostal space — a space is named for the rib above it."
+      "narration": "The space below this rib is the eleventh intercostal space — a space is named for the rib above it — and it is the last one, because rib 12 has no rib beneath it."
     },
     {
       "key": "l11",
@@ -597,7 +597,7 @@
         "intercostal space",
         "costal groove"
       ],
-      "narration": "The space below this rib is the eleventh intercostal space — a space is named for the rib above it."
+      "narration": "The space below this rib is the eleventh intercostal space — a space is named for the rib above it — and it is the last one, because rib 12 has no rib beneath it."
     },
     {
       "key": "r12",
@@ -614,10 +614,11 @@
         "rib 12",
         "twelfth rib",
         "rib",
-        "intercostal space",
-        "costal groove"
+        "floating rib",
+        "subcostal nerve",
+        "eleventh intercostal space"
       ],
-      "narration": "The space below this rib is the twelfth intercostal space — a space is named for the rib above it."
+      "narration": "Rib 12 is the last rib, so there is no space below it — the eleventh space, between ribs 11 and 12, is the lowest of the eleven. Below rib 12 the wall continues as the posterior abdominal wall, and the twelfth thoracic nerve running there is subcostal rather than intercostal."
     },
     {
       "key": "l12",
@@ -634,10 +635,11 @@
         "rib 12",
         "twelfth rib",
         "rib",
-        "intercostal space",
-        "costal groove"
+        "floating rib",
+        "subcostal nerve",
+        "eleventh intercostal space"
       ],
-      "narration": "The space below this rib is the twelfth intercostal space — a space is named for the rib above it."
+      "narration": "Rib 12 is the last rib, so there is no space below it — the eleventh space, between ribs 11 and 12, is the lowest of the eleven. Below rib 12 the wall continues as the posterior abdominal wall, and the twelfth thoracic nerve running there is subcostal rather than intercostal."
     },
     {
       "key": "manubrium",
@@ -713,7 +715,7 @@
     {
       "key": "lev_longi",
       "name": "set of right levatores costarum longi",
-      "label": "Levatores costarum longi",
+      "label": "Levatores costarum longi (right)",
       "role": "context",
       "group": "Intercostal muscles",
       "layer": "muscle",
@@ -725,14 +727,15 @@
         "levatores costarum",
         "levator costae",
         "transverse process",
+        "dorsal ramus",
         "accessory muscle of inspiration"
       ],
-      "narration": "Small fan-shaped muscles running from the transverse processes down to the rib below — the breves to the next rib, the longi skipping one. They elevate the ribs and are why the back of the wall is thicker than a front-on view suggests. Dorsal rami, not intercostal nerves."
+      "narration": "Small fan-shaped muscles from the transverse processes of the thoracic vertebrae. The longi, found in the lower thoracic region, skip a rib and reach the second rib below. They elevate the ribs — accessory muscles of inspiration — and are why the back of the wall is thicker than a front-on view suggests. Supplied by dorsal rami, not by the intercostal nerves. Only the right set is drawn here."
     },
     {
       "key": "lev_breves",
       "name": "set of right levatores costarum breves",
-      "label": "Levatores costarum breves",
+      "label": "Levatores costarum breves (right)",
       "role": "context",
       "group": "Intercostal muscles",
       "layer": "muscle",
@@ -744,9 +747,10 @@
         "levatores costarum",
         "levator costae",
         "transverse process",
+        "dorsal ramus",
         "accessory muscle of inspiration"
       ],
-      "narration": "Small fan-shaped muscles running from the transverse processes down to the rib below — the breves to the next rib, the longi skipping one. They elevate the ribs and are why the back of the wall is thicker than a front-on view suggests. Dorsal rami, not intercostal nerves."
+      "narration": "The breves run from each thoracic transverse process to the rib immediately below, one pair to each level from T1 down. Like the longi they elevate the ribs and are supplied by dorsal rami, not by the intercostal nerves. Only the right set is drawn here."
     }
   ],
   "views": [
@@ -964,13 +968,16 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-30",
+    "audited_by": "task"
   },
   "gaps": [
     "Each intercostal layer is one model covering all the spaces at once, not eleven separate muscles, so a single space cannot be isolated. The teaching that depends on one space — the neurovascular plane, drain insertion — is carried by the cross-section beat and the narration instead.",
     "The external and internal intercostal membranes have no models. The external muscle is replaced in front by a membrane and the internal behind by another; both are named in narration only, and a student cannot see where each sheet stops.",
-    "Subcostal muscles are not in the catalog and are not shown. Levatores costarum ARE — FMA74075 and FMA74077 on the right, FMA74076 and FMA74078 on the left, as longi and breves sets — and an earlier note here wrongly said otherwise, which is why the posterior part of the wall looks thinner than it is. They should be added.",
+    "Subcostal muscles are not in the catalog and are not shown. Levatores costarum ARE, and are now present in the scene: FMA74075 longi and FMA74077 breves, the RIGHT sets. The left sets exist in the catalog (FMA74076 longi, FMA74078 breves) but are not in meshes-lite, so the posterior wall is drawn on the right side only and both cards say so; fetching those two meshes would make the back of the wall symmetrical.",
     "The intercostal nerve, artery and vein are not present. Only the plane they occupy can be shown, so this scene does NOT cover the curriculum structure \"Intercostal neurovascular bundle\" — that needs its own scene, and the VAN order still has to be taught there.",
-    "Fibre direction is the single most examinable fact here and it is narrated rather than shown, because no op draws fibre orientation. A diagram-mode companion would carry it better; diagram is recorded as the deferred mode."
+    "Fibre direction is the single most examinable fact here and it is narrated rather than shown, because no op draws fibre orientation. A diagram-mode companion would carry it better; diagram is recorded as the deferred mode.",
+    "Rib 12 is present but there is no twelfth intercostal space — an earlier version of this scene said there was, on both rib 12 cards, contradicting beat 1. Both cards now teach the boundary instead: eleven spaces, and the subcostal nerve below the last rib."
   ]
 }

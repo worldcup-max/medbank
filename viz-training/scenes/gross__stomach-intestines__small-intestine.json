@@ -490,6 +490,93 @@
         "pouch of Douglas"
       ],
       "narration": "Marks the floor of the abdomen for orientation. Coils of ileum drop into the pelvis in front of the rectum, which is why pelvic collections irritate small bowel and why free fluid gathers there first."
+    },
+    {
+      "key": "dj_flexure",
+      "label": "Duodenojejunal flexure — the ligament of Treitz",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#f7dc6f",
+      "render": "anchor",
+      "anchor": {
+        "on": "duodenum",
+        "uvw": [
+          0.0692,
+          0.3861,
+          0.2646
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT on the duodenum (FMA7206, 119.6 mm span) witnessed by the jejunum (FMA7207) at 0.53 mm. One witness only — the flexure is by definition the single place these two meshes meet end to end, so a second witness does not exist; the 0.53 mm gap is the whole of the evidence. tools/derive-landmark.mjs --parent FMA7206 --contact FMA7207",
+      "terms": [
+        "duodenojejunal flexure",
+        "ligament of Treitz",
+        "suspensory muscle of the duodenum",
+        "L2",
+        "upper gastrointestinal bleeding",
+        "root of the mesentery"
+      ],
+      "narration": "Where the fixed gut becomes the mobile gut, at L2 just left of the midline. The suspensory muscle of the duodenum — the ligament of Treitz — slings it from the right crus of the diaphragm. It is the surgeon's landmark for the start of the jejunum and the clinician's dividing line: bleeding above it is upper gastrointestinal and comes up as haematemesis, bleeding below it is lower. The root of the mesentery starts here and runs down to the right sacroiliac joint. Note what this marker is: a point measured where the duodenum meets the jejunum. The suspensory muscle itself has no model in the catalog and is not drawn."
+    },
+    {
+      "key": "duodenal_papilla",
+      "label": "Major duodenal papilla — the ampulla of Vater",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#f4d03f",
+      "render": "anchor",
+      "anchor": {
+        "on": "duodenum",
+        "uvw": [
+          0.1858,
+          0.5779,
+          0.414
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT on the duodenum (FMA7206, 119.6 mm span) witnessed by the pancreatic duct (FMA10419) at 1.26 mm. One witness — the duct's termination is the papilla, and no second structure in the catalog meets the duodenum here (there is no bile duct mesh). tools/derive-landmark.mjs --parent FMA7206 --contact FMA10419",
+      "terms": [
+        "major duodenal papilla",
+        "ampulla of Vater",
+        "hepatopancreatic ampulla",
+        "sphincter of Oddi",
+        "second part of the duodenum",
+        "gallstone pancreatitis",
+        "ERCP"
+      ],
+      "narration": "Halfway down the posteromedial wall of the second part of the duodenum, where the bile duct and the main pancreatic duct open together through the hepatopancreatic ampulla, guarded by the sphincter of Oddi. This marker is measured from the pancreatic duct's contact with the duodenum only — the catalog has no bile duct, so the bile half of the junction is narrated and not drawn. It is the target of ERCP and the site where an impacted gallstone gives jaundice and pancreatitis at once. The minor papilla, about two centimetres above and in front of it, is not measurable here and is not marked."
+    },
+    {
+      "key": "ileocaecal_junction",
+      "label": "Ileocaecal junction — the end of the small bowel",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#e59866",
+      "render": "anchor",
+      "anchor": {
+        "on": "ileum",
+        "uvw": [
+          0.1566,
+          0.6429,
+          0.5018
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT on the ileum (FMA7208, 201.6 mm span) witnessed by the appendix (FMA14542) at 0.95 mm. One witness — there is no caecum mesh in the catalog, so the appendix is the only structure that meets the ileum at this corner, and it hangs a couple of centimetres below the true opening; the marker is therefore the ileum's terminal end rather than the valve itself. tools/derive-landmark.mjs --parent FMA7208 --contact FMA14542",
+      "terms": [
+        "ileocaecal junction",
+        "ileocaecal valve",
+        "terminal ileum",
+        "caecum",
+        "right iliac fossa",
+        "vitamin B12",
+        "bile salts",
+        "Meckel's diverticulum"
+      ],
+      "narration": "The end of six metres of small bowel, in the right iliac fossa. The ileocaecal valve here holds contents back long enough for the terminal ileum to absorb vitamin B12 and bile salts, and stops colonic bacteria travelling back up. Measure Meckel's from this point: two feet proximal, on the antimesenteric border. The valve itself and the caecum have no models in the catalog — this marker is the ileum's terminal end, found by its contact with the appendix, and the label says so."
     }
   ],
   "views": [
@@ -531,7 +618,7 @@
       "narration": "Duodenum, jejunum, ileum — about six metres in the cadaver and rather shorter in life because of muscle tone. Divide it by mobility, not by length. The duodenum is fixed to the back wall and cannot be delivered out of a wound. The jejunum and ileum hang on a mesentery and can be run through your fingers metre by metre, which is exactly what the surgeon does looking for a perforation. The jejunum takes the upper two fifths, the ileum the lower three, and there is no line between them — only a change in character."
     },
     {
-      "mode": "location",
+      "mode": "associated_organs",
       "beat": 2,
       "title": "Walking the duodenum",
       "ops": [
@@ -546,6 +633,14 @@
         {
           "op": "SHOW_STRUCTURE",
           "target": "What drains into it"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "dj_flexure"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "duodenal_papilla"
         },
         {
           "op": "ROTATE_TO_VIEW",
@@ -706,6 +801,10 @@
           "target": "appendix"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "ileocaecal_junction"
+        },
+        {
           "op": "TRACE_STRUCTURE",
           "target": "concept:chyme",
           "path": [
@@ -771,11 +870,14 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-29",
+    "audited_by": "task"
   },
   "gaps": [
-    "The duodenum is one model. The catalog holds no separate superior, descending, horizontal or ascending part, no duodenal cap, no major or minor duodenal papilla and no duodenojejunal flexure, so beat 2 walks the four parts by tracing along the duodenum and lighting each posterior relation in turn — the bed teaches the part. Every part name and the ligament of Treitz are in terms[], so a note naming any of them opens this scene.",
-    "No landmark anchors were authored. CORRECTED 2026-08-29 (from the Large intestine audit, same topic): the reason recorded here — 'none of the meshes named here is in the local decimated set' — is false. FMA7206, FMA7207, FMA7208 and FMA10419 are all in meshes-lite/ and have been for some time, so the three anchors this note describes as blocked are measurable today: the duodenojejunal flexure as a duodenum-to-jejunum contact, the ileocaecal junction as an ileum-to-appendix contact, and the major duodenal papilla as the duodenum-to-pancreatic-duct contact. The equivalent three were derived and authored in the Large intestine scene in this run and all three emitted. This scene has not yet been audited and the anchors are left for that run, which is where they belong; what is fixed here is only the false statement, so that the audit does not inherit it as evidence.",
+    "The duodenum is one model. The catalog holds no separate superior, descending, horizontal or ascending part, no duodenal cap, no major or minor duodenal papilla and no duodenojejunal flexure, so beat 2 walks the four parts by tracing along the duodenum and lighting each posterior relation in turn — the bed teaches the part. Two of those named features are now marked as measured anchors rather than left to the narration: the duodenojejunal flexure and the major duodenal papilla (see below). Every part name and the ligament of Treitz are in terms[], so a note naming any of them opens this scene. Beat 2 is moded 'associated_organs', which is the mode the curriculum entry asks for and which no other beat here supplied: what it actually does is show the duodenum surrounded by the organs that bed it and drain into it.",
+    "Three landmark anchors were derived and authored at audit on 2026-08-29, closing the note that stood here: the duodenojejunal flexure (duodenum-to-jejunum contact, 0.53 mm), the major duodenal papilla (duodenum-to-pancreatic-duct contact, 1.26 mm) and the ileocaecal junction (ileum-to-appendix contact, 0.95 mm). All three emitted. Each has a single witness and that is stated in its calibrated_by, because each of these three junctions is by definition a meeting of exactly two meshes — there is no third structure in the catalog to converge on. All three carry status 'needs-review': the measurement is proved, the landing on the feature is not, and only somebody opening the scene and looking can settle that.",
+    "Two features named in beat 2 remain unmarkable and are narrated only. The minor duodenal papilla has no witness — no accessory pancreatic duct mesh exists — and the bile duct has no mesh at all, so the major papilla is measured from the pancreatic duct alone and the bile half of the ampulla is described rather than shown. The four parts of the duodenum are likewise not separable: a part of a tube is a length, not a point, and derive-landmark.mjs measures points.",
     "There is no caecum and no colon wall of any kind in the catalog. The large-gut meshes that do exist are the three taeniae coli (FMA76891, FMA76892, FMA76893), the appendix, the rectum and the external anal sphincter — an earlier version of this note said only the appendix and the rectum, which the Large intestine scene disproved. So the ileum's ending is taught through the appendix, which hangs from the caecum a couple of centimetres below the ileocaecal opening and whose base is found by the converging taeniae. That is option (b) of the resolution rule, teaching a structure through an adjacent one that exists, and the label says what is being shown. The ileocaecal valve itself is narrated and not drawn.",
     "No mesentery and no peritoneum. The root of the mesentery, its fifteen-centimetre oblique line from the duodenojejunal flexure to the right sacroiliac joint, the windows, and the fat encroachment that distinguishes ileum from jejunum are all narrated in beats 1 and 3 and all in terms[], but a double fold of peritoneum has no model. This is the single biggest omission in the scene, because half of the jejunum-versus-ileum answer is a statement about the mesentery. 'Peritoneum & mesentery' is its own curriculum entry and is still unauthored.",
     "No pancreas mesh exists — only the pancreatic duct, FMA10419 — so the head of the pancreas, which the duodenum curves around and which is the whole reason the C is a C, is represented by the duct that runs through it. The label says so.",

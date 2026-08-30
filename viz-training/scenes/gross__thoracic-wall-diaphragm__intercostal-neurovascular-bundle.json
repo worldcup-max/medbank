@@ -214,7 +214,7 @@
         "anterior intercostal artery",
         "anastomosis"
       ],
-      "narration": "Behind the sternum the internal thoracic artery runs down and sends anterior intercostal branches out into each space. They meet the posterior ones coming the other way, so every space is supplied from both ends."
+      "narration": "Behind the sternum the internal thoracic artery runs down and sends anterior intercostal branches out into the upper six spaces. At the sixth costal cartilage it ends by dividing into the superior epigastric and musculophrenic arteries, and it is the musculophrenic that supplies the anterior intercostals of spaces seven to nine. Spaces ten and eleven have no anterior intercostal artery at all, so they are fed from behind only."
     },
     {
       "key": "ic_vein",
@@ -436,7 +436,7 @@
           "view": "anterior"
         }
       ],
-      "narration": "The posterior intercostal artery leaves the aorta behind, runs forward in the groove, and meets the anterior intercostal branch of the internal thoracic artery in front. Two sources, one continuous channel — which is why bleeding from a torn intercostal artery does not stop when you press on one end."
+      "narration": "The posterior intercostal artery leaves the aorta behind, runs forward in the groove, and in the upper nine spaces meets an anterior intercostal branch coming the other way — from the internal thoracic artery in spaces one to six, from its musculophrenic branch in seven to nine. There the space is a channel open at both ends, which is why bleeding from a torn intercostal artery does not stop when you press on one end. The tenth and eleventh spaces are the exception: they have no anterior intercostal artery and are supplied from the aorta alone. This is the fifth space, so it has both."
     },
     {
       "mode": "cross_section",
@@ -501,7 +501,7 @@
           "view": "medial"
         }
       ],
-      "narration": "Behind the angle of the rib the artery splits and sends a collateral branch down to run along the top of the rib below. So the lower border of the space has a vessel too. The rule still holds, because the main bundle is far bigger — but this is why textbooks say safer rather than safe, and why a drain is inserted by blunt dissection rather than by pushing a trocar in blind."
+      "narration": "Near the angle of the rib the artery splits and sends a collateral branch down to run along the top of the rib below. So the lower border of the space has a vessel too. The rule still holds, because the main bundle is far bigger — but this is why textbooks say safer rather than safe, and why a drain is inserted by blunt dissection rather than by pushing a trocar in blind."
     },
     {
       "mode": "location",
@@ -537,7 +537,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-30",
+    "audited_by": "task"
   },
   "gaps": [
     "THE SUBJECT OF THIS SCENE HAS NO MESH. There is no intercostal vein, artery or nerve in the catalog at any level — a search of all 934 names for artery, vein and nerve returns 49 entries and not one of them is intercostal. No azygos vein and no internal thoracic artery either. This is why the scene is status:\"candidate\" and not \"ready\": every one of the three things the student is here to learn is carried by an authored marker rather than by a model.",

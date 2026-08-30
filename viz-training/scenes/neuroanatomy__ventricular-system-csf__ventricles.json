@@ -1,0 +1,797 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__ventricular-system-csf__ventricles",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Ventricular System & CSF",
+  "structure": "Ventricles",
+  "covers": [
+    "Ventricles"
+  ],
+  "learning_goal": "Name the four ventricles and the two channels between them in order, say what forms the walls of each so that a ventricle can be identified on any slice, and know where the system is narrow enough to block.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "ventricular system",
+      "CSF",
+      "hydrocephalus",
+      "neuroimaging orientation"
+    ],
+    "terms": [
+      "ventricle",
+      "lateral ventricle",
+      "frontal horn",
+      "anterior horn",
+      "body of lateral ventricle",
+      "atrium",
+      "trigone",
+      "occipital horn",
+      "temporal horn",
+      "interventricular foramen",
+      "foramen of Monro",
+      "third ventricle",
+      "interthalamic adhesion",
+      "cerebral aqueduct",
+      "aqueduct of Sylvius",
+      "aqueduct stenosis",
+      "fourth ventricle",
+      "rhomboid fossa",
+      "floor of fourth ventricle",
+      "foramen of Magendie",
+      "foramen of Luschka",
+      "central canal",
+      "septum pellucidum",
+      "cavum septi pellucidi",
+      "choroid plexus",
+      "hydrocephalus",
+      "ventriculomegaly",
+      "external ventricular drain"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": -0.3
+  },
+  "structures": [
+    {
+      "key": "lv_l",
+      "name": "left lateral ventricle",
+      "label": "Lateral ventricle (L)",
+      "role": "part",
+      "group": "Lateral ventricles",
+      "layer": "ventricle",
+      "color": "#4fa8d8",
+      "refs": {
+        "bodyparts3d": "FMA78450"
+      },
+      "terms": [
+        "lateral ventricle",
+        "frontal horn",
+        "anterior horn",
+        "body of lateral ventricle",
+        "atrium",
+        "trigone",
+        "occipital horn",
+        "posterior horn",
+        "temporal horn",
+        "inferior horn"
+      ],
+      "narration": "A C-shaped cavity wrapped round the thalamus, one in each hemisphere and much the largest part of the system. Five regions, all in this one model: the frontal horn in front of the interventricular foramen, the body above the thalamus, the atrium or trigone where the C turns, and from the atrium the occipital horn running back and the temporal horn running forwards and down into the temporal lobe. The horns are named on this card because the model is undivided — but the shape on screen shows them, which is why this is the one ventricle best learnt from the outside rather than from a slice."
+    },
+    {
+      "key": "lv_r",
+      "name": "right lateral ventricle",
+      "label": "Lateral ventricle (R)",
+      "role": "part",
+      "group": "Lateral ventricles",
+      "layer": "ventricle",
+      "color": "#4fa8d8",
+      "refs": {
+        "bodyparts3d": "FMA78449"
+      },
+      "terms": [
+        "lateral ventricle",
+        "midline shift",
+        "ventricular asymmetry"
+      ],
+      "narration": "The mirror cavity on the right. The pair are close to symmetrical, so on a scan an asymmetry is either a normal variant or the first sign of something pushing — which is why the two are always read against each other rather than singly."
+    },
+    {
+      "key": "sp",
+      "name": "septum pellucidum",
+      "label": "Septum pellucidum",
+      "role": "part",
+      "group": "Lateral ventricles",
+      "layer": "white_matter",
+      "color": "#efe7dc",
+      "refs": {
+        "bodyparts3d": "FMA61844"
+      },
+      "terms": [
+        "septum pellucidum",
+        "cavum septi pellucidi",
+        "medial wall of frontal horn"
+      ],
+      "narration": "The thin double membrane between the two frontal horns and bodies, slung from the corpus callosum above to the fornix below. It is the medial wall of each of those cavities. The two leaves can stay apart and leave a slit between them, the cavum septi pellucidi — normal in the newborn, and a normal variant in some adults, not a fifth ventricle whatever it looks like."
+    },
+    {
+      "key": "ivf",
+      "name": "interventricular foramen",
+      "label": "Interventricular foramen (of Monro)",
+      "role": "part",
+      "group": "Channels",
+      "layer": "ventricle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA75351"
+      },
+      "terms": [
+        "interventricular foramen",
+        "foramen of Monro",
+        "column of fornix",
+        "colloid cyst"
+      ],
+      "narration": "The doorway from each lateral ventricle into the third. It is bounded in front by the column of the fornix and behind by the front of the thalamus, and that pair of neighbours is how it is located on a scan. There are two of them in life, one per side; the catalog carries a single unsided model, so treat what is drawn as the doorway rather than as one of the pair. A colloid cyst sitting in it blocks both lateral ventricles at once and leaves the third and fourth normal — the classic way a headache turns out to be a plug in a hole three millimetres wide."
+    },
+    {
+      "key": "v3",
+      "name": "third ventricle",
+      "label": "Third ventricle",
+      "role": "part",
+      "group": "Midline cavities",
+      "layer": "ventricle",
+      "color": "#4fa8d8",
+      "refs": {
+        "bodyparts3d": "FMA78454"
+      },
+      "terms": [
+        "third ventricle",
+        "interthalamic adhesion",
+        "lamina terminalis",
+        "infundibular recess",
+        "pineal recess",
+        "tuber cinereum",
+        "hypothalamus"
+      ],
+      "narration": "A midline slit, narrow side to side and tall front to back. Its lateral walls are the thalamus above and the hypothalamus below; its front wall is the lamina terminalis; its floor runs from the optic chiasm back over the infundibulum and the mammillary bodies; its back wall carries the pineal recess with the posterior commissure under it. The interthalamic adhesion crosses the cavity from one thalamus to the other in most brains and is absent in a fifth or so of people — it is grey matter through the ventricle, not a commissure."
+    },
+    {
+      "key": "aq",
+      "name": "cerebral aqueduct",
+      "label": "Cerebral aqueduct (of Sylvius)",
+      "role": "part",
+      "group": "Channels",
+      "layer": "ventricle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA78467"
+      },
+      "terms": [
+        "cerebral aqueduct",
+        "aqueduct of Sylvius",
+        "aqueduct stenosis",
+        "obstructive hydrocephalus",
+        "midbrain"
+      ],
+      "narration": "A canal a millimetre or two across running through the midbrain from the third ventricle to the fourth, with no choroid plexus and no room to spare. It is the narrowest point in the whole system, which makes it the commonest place for the system to block: aqueduct stenosis dilates the third and both lateral ventricles and leaves the fourth normal, and that pattern of three-up-one-normal on a scan names the level of the obstruction without anything else being known."
+    },
+    {
+      "key": "v4",
+      "name": "fourth ventricle",
+      "label": "Fourth ventricle",
+      "role": "part",
+      "group": "Midline cavities",
+      "layer": "ventricle",
+      "color": "#4fa8d8",
+      "refs": {
+        "bodyparts3d": "FMA78469"
+      },
+      "terms": [
+        "fourth ventricle",
+        "rhomboid fossa",
+        "floor of fourth ventricle",
+        "facial colliculus",
+        "median aperture",
+        "foramen of Magendie",
+        "lateral aperture",
+        "foramen of Luschka"
+      ],
+      "narration": "A tent lying between the back of the pons and medulla in front and the cerebellum behind, diamond-shaped when the cerebellum is lifted off — the rhomboid fossa. Its floor is the surface the cranial nerve nuclei of the pons and medulla lie under, so a lesion in this floor is read as a list of nerve palsies. Three holes lead out of it into the subarachnoid space: one median aperture in the roof and a lateral aperture at each side. None of the three has a model, so they are named here and in beat 6, not shown."
+    },
+    {
+      "key": "cc_sc",
+      "name": "central canal of spinal cord",
+      "label": "Central canal of the spinal cord",
+      "role": "part",
+      "group": "Midline cavities",
+      "layer": "ventricle",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA78497"
+      },
+      "terms": [
+        "central canal",
+        "obex",
+        "syringomyelia",
+        "syrinx"
+      ],
+      "narration": "The fourth ventricle narrows at the obex and continues into the cord as this canal, so the system does not stop at the skull. In the adult it is usually closed along much of its length. When it opens out and fills, the result is a syrinx, which classically takes the pain and temperature fibres crossing in front of it and leaves touch and position intact — a cavity in the midline producing a suspended, cape-like loss."
+    },
+    {
+      "key": "cp_l",
+      "name": "choroid plexus of left cerebral hemisphere",
+      "label": "Choroid plexus (L)",
+      "role": "part",
+      "group": "Plexus",
+      "layer": "vessel",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA274029"
+      },
+      "terms": [
+        "choroid plexus",
+        "CSF production",
+        "glomus",
+        "choroid plexus calcification"
+      ],
+      "narration": "The frond of vascular tissue that makes the cerebrospinal fluid, lying along the floor of the body of the lateral ventricle and the roof of the temporal horn. It is bulkiest at the atrium, where the tuft is called the glomus and where it calcifies with age — a bright spot on a CT that is normal, not a lesion. Note where it is not: there is none in the frontal or occipital horn and none in the aqueduct."
+    },
+    {
+      "key": "cp_r",
+      "name": "choroid plexus of right cerebral hemisphere",
+      "label": "Choroid plexus (R)",
+      "role": "part",
+      "group": "Plexus",
+      "layer": "vessel",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA274027"
+      },
+      "terms": [
+        "choroid plexus",
+        "CSF production"
+      ],
+      "narration": "The same frond on the right. Between them the lateral ventricles produce most of the CSF, though the third and fourth ventricles have plexus of their own that this catalog does not carry."
+    },
+    {
+      "key": "cc",
+      "name": "corpus callosum",
+      "label": "Corpus callosum",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "white_matter",
+      "color": "#d8d2f0",
+      "refs": {
+        "bodyparts3d": "FMA86464"
+      },
+      "terms": [
+        "corpus callosum",
+        "roof of lateral ventricle"
+      ],
+      "narration": "The roof of the frontal horn and body of each lateral ventricle. On a coronal slice it is the arch over the two cavities, and the septum pellucidum hangs from its underside between them."
+    },
+    {
+      "key": "cd_l",
+      "name": "left caudate nucleus",
+      "label": "Caudate nucleus (L)",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "nucleus",
+      "color": "#8f7fbf",
+      "refs": {
+        "bodyparts3d": "FMA72827"
+      },
+      "terms": [
+        "caudate nucleus",
+        "head of caudate",
+        "floor of frontal horn"
+      ],
+      "narration": "Runs along the whole length of the lateral ventricle, which is why it is C-shaped too: the head bulges into the floor and lateral wall of the frontal horn, and the tail follows the ventricle round into the roof of the temporal horn. Find the caudate and the lateral ventricle is beside it, everywhere."
+    },
+    {
+      "key": "cd_r",
+      "name": "right caudate nucleus",
+      "label": "Caudate nucleus (R)",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "nucleus",
+      "color": "#8f7fbf",
+      "refs": {
+        "bodyparts3d": "FMA72826"
+      },
+      "terms": [
+        "caudate nucleus"
+      ],
+      "narration": "The right caudate, giving the same wall to the right ventricle."
+    },
+    {
+      "key": "th_l",
+      "name": "left thalamus",
+      "label": "Thalamus (L)",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "nucleus",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA258716"
+      },
+      "terms": [
+        "thalamus",
+        "floor of body of lateral ventricle",
+        "wall of third ventricle"
+      ],
+      "narration": "Two ventricles at once: its top makes the floor of the body of the lateral ventricle, its medial face makes the upper lateral wall of the third. The lateral ventricle is wrapped round it, and that is the reason for the C."
+    },
+    {
+      "key": "th_r",
+      "name": "right thalamus",
+      "label": "Thalamus (R)",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "nucleus",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA258714"
+      },
+      "terms": [
+        "thalamus",
+        "interthalamic adhesion"
+      ],
+      "narration": "The right thalamus. The two face each other across the slit of the third ventricle and, in most brains, touch across it at the interthalamic adhesion."
+    },
+    {
+      "key": "fx_l",
+      "name": "left fornix of forebrain",
+      "label": "Fornix (L)",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "white_matter",
+      "color": "#efe7dc",
+      "refs": {
+        "bodyparts3d": "FMA72925"
+      },
+      "terms": [
+        "fornix",
+        "column of fornix",
+        "boundary of interventricular foramen"
+      ],
+      "narration": "Runs in the floor and medial wall of the lateral ventricle, and its column is the front boundary of the interventricular foramen. It is the structure that makes the foramen findable, so it is context here and taught properly in the White matter tracts scene."
+    },
+    {
+      "key": "lt",
+      "name": "lamina terminalis",
+      "label": "Lamina terminalis",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "white_matter",
+      "color": "#cdc4b4",
+      "refs": {
+        "bodyparts3d": "FMA61975"
+      },
+      "terms": [
+        "lamina terminalis",
+        "anterior wall of third ventricle",
+        "third ventriculostomy"
+      ],
+      "narration": "The front wall of the third ventricle, from the optic chiasm up to the rostrum of the corpus callosum. Endoscopic surgery goes through this wall or through the floor behind it to make a new route out when the aqueduct is blocked."
+    },
+    {
+      "key": "chi",
+      "name": "optic chiasm",
+      "label": "Optic chiasm",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "white_matter",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA62045"
+      },
+      "terms": [
+        "optic chiasm",
+        "optic recess",
+        "floor of third ventricle"
+      ],
+      "narration": "The front of the floor of the third ventricle, with the optic recess dipping down in front of it. It is the reason a dilated third ventricle can press on the visual pathway from above."
+    },
+    {
+      "key": "mb",
+      "name": "mammillary body",
+      "label": "Mammillary body",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "nucleus",
+      "color": "#d98f6a",
+      "refs": {
+        "bodyparts3d": "FMA74877"
+      },
+      "terms": [
+        "mammillary body",
+        "floor of third ventricle",
+        "tuber cinereum"
+      ],
+      "narration": "The back of the floor of the third ventricle. Between it and the chiasm lie the tuber cinereum and the infundibulum, which have no models here; the floor is therefore read between these two lit landmarks."
+    },
+    {
+      "key": "pin",
+      "name": "pineal body",
+      "label": "Pineal body",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "organ",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA62033"
+      },
+      "terms": [
+        "pineal body",
+        "pineal recess",
+        "posterior wall of third ventricle"
+      ],
+      "narration": "Set into the back wall of the third ventricle, with the pineal recess pushing into its stalk. A tumour here sits directly on top of the entrance to the aqueduct, which is why pineal masses present as hydrocephalus rather than as an endocrine complaint."
+    },
+    {
+      "key": "pons",
+      "name": "pons",
+      "label": "Pons",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "organ",
+      "color": "#cdc4b4",
+      "refs": {
+        "bodyparts3d": "FMA67943"
+      },
+      "terms": [
+        "pons",
+        "floor of fourth ventricle",
+        "rhomboid fossa"
+      ],
+      "narration": "The upper half of the floor of the fourth ventricle is the back of the pons. The ventricle is a cavity between structures rather than inside one, so it is identified by the pons and cerebellum on either side of it."
+    },
+    {
+      "key": "med",
+      "name": "medulla oblongata",
+      "label": "Medulla oblongata",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "organ",
+      "color": "#cdc4b4",
+      "refs": {
+        "bodyparts3d": "FMA62004"
+      },
+      "terms": [
+        "medulla oblongata",
+        "floor of fourth ventricle",
+        "obex"
+      ],
+      "narration": "The lower half of the same floor, narrowing to the obex where the ventricle becomes the central canal."
+    },
+    {
+      "key": "cbl",
+      "name": "cerebellum",
+      "label": "Cerebellum",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "organ",
+      "color": "#b56576",
+      "refs": {
+        "bodyparts3d": "FMA67944"
+      },
+      "terms": [
+        "cerebellum",
+        "roof of fourth ventricle",
+        "posterior fossa mass"
+      ],
+      "narration": "The roof and back wall of the fourth ventricle. A mass in the cerebellum flattens the ventricle in front of it and blocks the system at that level — the reason a posterior fossa tumour in a child presents with morning headache and vomiting."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The cast of the cavities",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Lateral ventricles"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Midline cavities"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Channels"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "With the brain ghosted away, what is left is the shape of the fluid. Four cavities and two channels, in a fixed order: a lateral ventricle in each hemisphere, both opening through the interventricular foramen into the third ventricle on the midline, the third draining down the cerebral aqueduct into the fourth between brainstem and cerebellum, and the fourth continuing as the central canal. Learn the order once and every blockage question becomes a question of what is dilated above the block and normal below it."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Why the lateral ventricle is a C",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lv_l",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lv_l",
+          "to": "th_l",
+          "kind": "adjacency"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lv_l",
+          "to": "cd_l",
+          "kind": "adjacency"
+        }
+      ],
+      "narration": "From the side the cavity is a C on its back, opening forwards, and the two structures lit with it explain the shape: it is wrapped round the thalamus, and the caudate nucleus runs along it for its whole length. Frontal horn in front of the foramen, body over the thalamus, atrium at the turn, then the occipital horn back and the temporal horn forwards and down. The regions are one model, so read them off the shape."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "A coronal cut through the frontal horns",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.35,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "lv_l",
+            "lv_r"
+          ]
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sp",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "The commonest slice in neurology, and it is read by the walls rather than by the cavity. Roof: corpus callosum. Medial wall: the septum pellucidum, lit between the two. Floor and lateral wall: the head of the caudate bulging in. Two slit-like horns with a membrane between them and a nucleus under each — name those three things and the slice is placed."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "The doorway, and what stands either side of it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ivf",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fx_l",
+          "to": "ivf",
+          "kind": "boundary"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "th_l",
+          "to": "ivf",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "The interventricular foramen is small and it is found by its two neighbours, both lit: the column of the fornix in front of it and the front of the thalamus behind. A cyst grown in this doorway shuts both lateral ventricles while the third and fourth stay their normal size, and that combination on a scan localises the lesion to a gap you could pass a wire through. In life there are two foramina, one per side; a single model is drawn here."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "The third ventricle, read wall by wall",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Midline cavities"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Walls & neighbours"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "v3",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "A slit you could post a card through, and every one of its walls is a structure worth knowing. Front, the lamina terminalis running up from the optic chiasm. Floor, chiasm to mammillary bodies, with the infundibulum between them. Sides, thalamus above and hypothalamus below. Back, the pineal body with the recess beneath it. Everything named here except the hypothalamus, the tuber cinereum and the infundibulum is lit on screen; those three have no model and are read from the lit landmarks around them."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "Aqueduct and fourth ventricle — the narrow part",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "aq",
+          "intensity": 0.9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "aq",
+            "v4"
+          ]
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "v4",
+          "to": "cbl",
+          "kind": "adjacency"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "v4",
+          "to": "pons",
+          "kind": "adjacency"
+        }
+      ],
+      "narration": "The two lit together make the point: a canal a couple of millimetres across opening into a tent. The aqueduct is the narrowest point of the system, has no choroid plexus and no give, and is where the system most often blocks. The fourth ventricle is a space between the pons and medulla in front and the cerebellum behind, both lit here, and its floor is the rhomboid fossa under which the pontine and medullary cranial nerve nuclei lie. Its three exits — one median aperture and two lateral ones — have no models anywhere in the catalog and are named, not shown."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Where the fluid is made, and where it is not",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Plexus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lateral ventricles"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cp_l",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "The choroid plexus lies along the floor of the body and the roof of the temporal horn, and is bulkiest at the atrium where the tuft calcifies with age. Note the negative as carefully as the positive: no plexus in the frontal horn, none in the occipital horn, none in the aqueduct. The third and fourth ventricles have plexus of their own that this catalog does not carry, so what is lit here is the lateral ventricle share only — most of the total, but not all of it."
+    },
+    {
+      "mode": "location",
+      "beat": 8,
+      "title": "Following the fluid out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:csf",
+          "path": [
+            "cp_l",
+            "lv_l",
+            "ivf",
+            "v3",
+            "aq",
+            "v4",
+            "cc_sc"
+          ],
+          "duration": 6000
+        }
+      ],
+      "narration": "Plexus, lateral ventricle, foramen, third ventricle, aqueduct, fourth ventricle — and then out through apertures that are not on screen into the subarachnoid space, to be absorbed at the top of the brain. The trace ends instead at the central canal, which is the one continuation that has a model; the exits, the cisterns, the subarachnoid space and the arachnoid granulations have none, so the last third of the journey is described here and not drawn. Roughly half a litre is made each day into a system holding about 150 millilitres, so the whole volume turns over several times between waking and sleeping."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 9,
+      "title": "Reading a block by what is dilated",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Lateral ventricles",
+            "Midline cavities"
+          ]
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Channels",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Both channels are lit, and both are narrow enough to plug. Work backwards from the scan: lateral ventricles big, third and fourth normal means the foramen. All three of lateral and third big, fourth normal means the aqueduct. Everything big, including the fourth, means the block is beyond the fourth ventricle's exits or the fluid is not being absorbed — communicating hydrocephalus. One rule and three answers, and it comes from the order in beat 1 rather than from anything new."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-30"
+  },
+  "gaps": [
+    "NO EXIT FROM THE FOURTH VENTRICLE HAS A MODEL. Searched median aperture, lateral aperture, aperture, Magendie, Luschka and foramen — the only foramen in the catalog is the interventricular one. The three holes are therefore named in the fourth ventricle card and in beats 6 and 8 and are explicitly not shown. This is the reason beat 8's trace stops at the central canal instead of leaving the system.",
+    "NOTHING OF THE SUBARACHNOID ROUTE EXISTS: no meninges of any kind, no dura, arachnoid or pia, no subarachnoid space, no cistern, no arachnoid granulation, no dural venous sinus. Searched all nine terms plus mening, tela and velum. Absorption cannot be shown at all, which is also why this scene does NOT claim to cover the curriculum's 'CSF circulation' structure — that one needs the absorption half, and it has since been authored as neuroanatomy__ventricular-system-csf__csf-circulation in `diagram`, which is its first preferred mode.",
+    "The interventricular foramen is PAIRED in life and the catalog carries one unsided model (FMA75351). The scene says so on the structure card and in beat 4 rather than letting a single lit doorway imply there is only one.",
+    "Choroid plexus exists only as 'of left / right cerebral hemisphere' (FMA274029 / FMA274027) — that is the lateral ventricle plexus. Searched choroid, plexus, tela and glomus: there is no third or fourth ventricle plexus model. Beat 7 states the omission rather than implying the lateral ventricles make all of it. This scene covers 'Ventricles' only; the curriculum's separate 'Choroid plexus' structure needs the glands and mechanism views and has since been authored as neuroanatomy__ventricular-system-csf__choroid-plexus.",
+    "The lateral ventricle is one model per side (FMA78450 left, FMA78449 right): frontal horn, body, atrium, occipital horn and temporal horn have no separate ids — searched all five under both the horn and the cornu spellings. They are named on the structure card and read off the C shape in beat 2.",
+    "The fourth ventricle floor's named features have no models — no facial colliculus, no hypoglossal or vagal trigone, no striae medullares of the fourth ventricle, no obex. Beat 6 names the rhomboid fossa and says the cranial nerve nuclei lie under it; it does not mark any point on it. No anchor was authored for any of them because the parent mesh is not in meshes-lite/ and cannot be measured.",
+    "The hypothalamus, tuber cinereum and infundibulum have no models (searched hypothalam, tuber, infundib, pituitary stalk), so the floor and lower lateral wall of the third ventricle in beat 5 are read between the optic chiasm and the mammillary body, both of which do exist. The pituitary gland (FMA13889) exists but is outside the ventricle and is not carried here.",
+    "SIDES: FMA78450 is the LEFT lateral ventricle and FMA78449 the RIGHT; FMA274029 is the LEFT choroid plexus and FMA274027 the RIGHT; FMA72827 is the LEFT caudate and FMA72826 the RIGHT; FMA258716 is the LEFT thalamus and FMA258714 the RIGHT. The third and fourth ventricles, the aqueduct, the interventricular foramen, the septum pellucidum, the central canal, the lamina terminalis, the chiasm, the mammillary body, the pineal body, the pons, the medulla and the cerebellum are unsided single models.",
+    "DELIVERY: 22 of this scene's 23 meshes are absent from meshes-lite/. The single exception is FMA78497, the central canal of the spinal cord, which was fetched for the Gross Anatomy spinal cord scene and is on disk — verified by listing the directory, not assumed. Every brain model proper is missing, so all nine beats are hollow and the status is 'candidate' on delivery grounds alone. Nothing in the anatomy, the ids or the ops is unresolved. No anchor is authored anywhere in this scene: derive-landmark.mjs needs the parent mesh on disk to measure against, and for every feature worth marking here it is not."
+  ]
+}

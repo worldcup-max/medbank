@@ -458,6 +458,60 @@
         "compartments of the thigh"
       ],
       "narration": "The fascia lata thickens laterally into this band and sends septa inwards to the linea aspera. Those septa are the walls between the three compartments of the thigh, and the ridge on the back of the femur is where all of them are anchored."
+    },
+    {
+      "key": "adductor_tubercle",
+      "label": "Adductor tubercle",
+      "role": "part",
+      "group": "Landmarks on the femur",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.8189,
+          0.5831,
+          0.1343
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT, the single point where adductor magnus meets the femur (gap 0.49 mm) on a 440 mm bone; tools/derive-landmark.mjs --parent FMA24474 --contact FMA22459. Re-measured at this audit and unchanged when the search is restricted to the distal 15% of the shaft (--slab z:0,0.15), which is the check that it is not being pulled up the linea aspera by the adductor part of the muscle. It lies 33 mm from the medial epicondyle and 25 mm above it, the relation this scene's beat 4 states in words.",
+      "calibration_gap_mm": 0.49,
+      "terms": [
+        "adductor tubercle",
+        "adductor magnus",
+        "hamstring part",
+        "medial supracondylar line",
+        "adductor hiatus"
+      ],
+      "narration": "The bony end of the medial supracondylar line, measured where the hamstring part of adductor magnus takes hold of the femur. Put a thumb on the medial epicondyle and slide it about two and a half centimetres up the medial supracondylar line and you are on it. The tendon running to it is the medial edge of the adductor hiatus, so this point marks where the femoral artery leaves the thigh and becomes popliteal."
+    },
+    {
+      "key": "medial_epicondyle",
+      "label": "Medial epicondyle",
+      "role": "part",
+      "group": "Landmarks on the femur",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          1,
+          0.6922,
+          0.0773
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +x within the distal 15% of the bone — the most medial point of the lower end (+x is the body's left, so on this right femur it is the medial side); tools/derive-landmark.mjs --parent FMA24474 --extreme +x --slab z:0,0.15. Cross-checked against the adductor tubercle contact point, 33 mm away and 25 mm below it.",
+      "terms": [
+        "medial epicondyle",
+        "medial condyle",
+        "tibial collateral ligament",
+        "adductor tubercle"
+      ],
+      "narration": "The bump you can feel on the inner side of the knee, above the joint line. The tibial collateral ligament takes off from it, and the adductor tubercle sits about two and a half centimetres above it — which is why the epicondyle is the landmark you find first and count up from."
     }
   ],
   "views": [
@@ -547,9 +601,14 @@
           "from": "femur",
           "to": "patella",
           "kind": "articulation"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Landmarks on the femur",
+          "intensity": 0.95
         }
       ],
-      "narration": "From below, the lower end is two condyles separated behind by the intercondylar fossa and joined in front by the patellar surface. The medial condyle is longer and its epicondyle carries the adductor tubercle just above it. The cruciate ligaments take their femoral attachments from the walls of that fossa — the anterior cruciate from the medial side of the lateral condyle, the posterior cruciate from the lateral side of the medial condyle."
+      "narration": "From below, the lower end is two condyles separated behind by the intercondylar fossa and joined in front by the patellar surface. The medial condyle is longer, and the two lit points on its inner side are measured, not sketched: the medial epicondyle, and the adductor tubercle twenty-five millimetres above it at the end of the medial supracondylar line. The cruciate ligaments take their femoral attachments from the walls of that fossa — the anterior cruciate from the medial side of the lateral condyle, the posterior cruciate from the lateral side of the medial condyle."
     },
     {
       "mode": "location",
@@ -742,14 +801,16 @@
   ],
   "gaps": [
     "The medullary cavity, the endosteum, the periosteum, the trabecular pattern and the epiphyseal plates are internal architecture that a surface model cannot show. The cut-plane beats open the outer shell and describe what a real sawn section would reveal; the marrow itself is authored as a traced concept rather than displayed.",
-    "The linea aspera, the gluteal tuberosity, the pectineal and spiral lines, the supracondylar lines, the adductor tubercle, the intercondylar fossa, the nutrient foramen and the patellar surface are all sub-features of one whole-femur mesh. Each is taught by lighting the femur and naming the feature. Measured landmark anchors are the obvious next improvement, and were not attempted here because an anchor placed by eye would be worse than none.",
+    "The linea aspera, the gluteal tuberosity, the pectineal and spiral lines, the supracondylar lines, the intercondylar fossa, the nutrient foramen and the patellar surface are sub-features of one whole-femur mesh, taught by lighting the femur and naming the feature. Two of the features formerly on this list are no longer estimated: the adductor tubercle and the medial epicondyle are now measured anchors (contact with adductor magnus at 0.49 mm, and the most medial point of the distal 15% of the bone). The remaining features are ridges and lines rather than points, which is neither definition the landmark tool offers, so they stay narrated.",
     "No artery of the lower limb below the external iliac exists in the catalog, so the nutrient artery, the profunda femoris and its perforating branches are authored as a traced concept path along the back of the shaft and named in narration.",
     "No ligament of the knee exists in the catalog — the only ligaments in it are the inguinal and the long plantar. The cruciates, the collaterals and the knee capsule are named in the lower-end beat but not shown, so the femoral attachments of the cruciate ligaments are narration only.",
-    "The adductor hiatus is defined by the gap between adductor magnus and the femur rather than by a modelled opening, and the femoral vessels that pass through it have no models, so the hiatus is described where adductor magnus meets the adductor tubercle.",
+    "The adductor hiatus is defined by the gap between adductor magnus and the femur rather than by a modelled opening, and the femoral vessels that pass through it have no models, so the hiatus is described at the measured adductor tubercle anchor where adductor magnus ends.",
     "This scene does not cover Proximal femur, Hip joint or Quadriceps femoris. The upper end, the acetabulum and the four heads of quadriceps appear here only as the ends of the bone and the muscles hanging off the shaft; the retinacular blood supply of the head belongs to the Proximal femur scene and is deliberately not repeated."
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-30",
+    "audited_by": "task"
   }
 }

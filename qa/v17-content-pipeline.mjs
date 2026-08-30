@@ -1,6 +1,6 @@
 /* V1.7 Integrated Content Pipeline — deterministic core tests (real import-server/integrated.mjs). */
 import { dependencyGate, qaScore, readinessGate, nextStatus, READINESS, runCandidate, applyHumanReview,
-         clinicalGate, sbaGate, qaVerdict, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from '../import-server/integrated.mjs';
+         clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from '../import-server/integrated.mjs';
 let pass=0, fail=0; const ok=(c,m)=>{ if(c)pass++; else{ fail++; console.log('  ✗ '+m); } };
 (async()=>{
 
@@ -223,6 +223,18 @@ const corpus=[
 { const corpus=[1,2,3].map(()=>({ question_id:'S2', source_question_ids:['S2'], review_status:'ai_reviewed', qa:{diversity:{tier:'ok'}} }));
   ok(sourceBudget('S2', corpus, 3).exhausted, 'SB2 3 distinct good → exhausted (stop mining this source)'); }
 { ok(!sourceBudget('S3', [], 3).exhausted, 'SB3 unseen source → not exhausted'); }
+
+// ===== V1.8.2 deterministic redundant-therapy gate =====
+const rg=(stem,options,answer)=>redundancyGate({stem,options,answer});
+ok(rg("on empagliflozin, sacubitril/valsartan, spironolactone, and bisoprolol",["Add dapagliflozin","Add ivabradine","x","y"],0).duplicate===true,'redundancy: SGLT2i dapagliflozin on empagliflozin = duplicate');
+ok(rg("established on carvedilol, sacubitril/valsartan and eplerenone",["Add propranolol for rate control","Add verapamil","Add digoxin","carbimazole"],0).duplicate===true,'redundancy: 2nd beta-blocker (propranolol on carvedilol) = duplicate');
+ok(rg("up-titrated on sacubitril/valsartan, bisoprolol and spironolactone",["Add empagliflozin","Add candesartan","Add amlodipine","Add digoxin"],0).duplicate===false,'redundancy: 4-pillar + SGLT2i (distinct class) = NOT duplicate (legit-combo guard)');
+ok(rg("on sacubitril/valsartan and bisoprolol",["Add candesartan on top","Add empagliflozin","x","y"],0).duplicate===true,'redundancy: ARB on ARNI (dual RAAS) = duplicate');
+ok(rg("on spironolactone and furosemide",["Add amiloride","Add metolazone","x","y"],0).duplicate===true,'redundancy: amiloride on spironolactone (k-sparing overlap) = duplicate');
+ok(rg("on carvedilol and ramipril",["Switch carvedilol to bisoprolol","x","y","z"],0).duplicate===false,'redundancy: switch (not additive) = NOT duplicate');
+ok(rg("on ramipril and bisoprolol",["Add spironolactone","x","y","z"],0).duplicate===false,'redundancy: ACE-I + MRA (different classes) = NOT duplicate');
+ok(qaVerdict({dependency:{pass:true},clinical:{valid:true,matches_key:true,stem_sufficient:true},sba:{single_best:true},redundancy:rg("on carvedilol",["Add propranolol","x"],0)}).severity==='hard','redundancy: duplicate -> qaVerdict severity hard');
+ok(!qaVerdict({dependency:{pass:true},clinical:{valid:true,matches_key:true,stem_sufficient:true},sba:{single_best:true}}).criteria.redundant_therapy,'redundancy: absent when no verdict supplied (legacy-safe)');
 
 console.log('\n'+pass+' passed, '+fail+' failed');
 process.exit(fail?1:0);
