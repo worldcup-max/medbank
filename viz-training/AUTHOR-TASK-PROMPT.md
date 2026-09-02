@@ -43,9 +43,17 @@ DO NOT AUTHOR NEW GROSS OR EMBRYOLOGY STRUCTURES. The curriculum cursor walked i
 Anatomy was unfinished, and all 28 Embryology scenes are sequence scenes no engine can draw. Embryology stays
 suspended indefinitely — it is blocked on SVG artwork, not on authoring, so a 29th scene helps nobody.
 
-WHEN THE GROSS AUDIT IS COMPLETE — every gross scene carrying provenance.audited_at — do not stop. Say so at
-the top of RUNLOG.md in capitals, then MOVE TO NEUROANATOMY and author it at 2 structures per run, following
-the same rules below. Neuroanatomy is next because it can actually be drawn: the catalog holds 97 brain
+THE GROSS AUDIT IS COMPLETE — all 76 scenes carry provenance.audited_at. NEUROANATOMY IS THE WORK NOW.
+
+  While any Neuroanatomy structure is still unauthored, AUTHORING COMES FIRST: 2 structures per run from
+  `next to author`, following the same rules below. Do not start the Neuroanatomy audit walk until the
+  course is fully authored — 13 of its 34 structures are written; finish the other 21 first, then audit.
+
+  Both cursors now skip Embryology, which is marked `suspended` in CURRICULUM.json. If a cursor ever hands
+  you work you are forbidden to do, that is a bug in the tool and not a reason to stop: say so in RUNLOG in
+  capitals so a human sees it that hour. On 2026-08-30 every cursor pointed at Embryology, the task
+  correctly refused, and then ran once an hour for two days doing nothing and logging nothing. A run that
+  can find no permitted work must still write a RUNLOG block saying exactly that. Neuroanatomy is next because it can actually be drawn: the catalog holds 97 brain
 meshes. Verified coverage, so you do not waste runs discovering it:
 
   STRONG — author as 3d_anatomy:

@@ -134,8 +134,21 @@ for (const w of worklist) {
    So a structure with any scene is ATTENDED and the cursor moves past it. It is not forgotten: it is
    listed under "held" below, every run, with its status and the reason it is not ready. Skipped means
    invisible; held means someone has to look. */
+/* A SUSPENDED course is skipped by both cursors.
+   On 2026-08-30 the gross audit finished, and every cursor this tool prints landed in Embryology —
+   a course the task is forbidden to author because all 28 of its scenes wait on artwork that does not
+   exist. The task obeyed and stopped. It ran sync-state, found nothing it was allowed to do, wrote no
+   RUNLOG block, and did that once an hour for two days while Neuroanatomy sat 13 of 34 authored with
+   no cursor naming it. Obedient and stuck is still stuck, and the fault was here: the handoff to
+   Neuroanatomy was written into the task's prompt and never into the tool that tells it where to go.
+   `suspended` lives in CURRICULUM.json so the reason travels with the data, and the course is still
+   counted and printed every run — skipped is not the same as hidden. */
+const suspended = new Set(
+  Object.entries(curriculum.courses || {}).filter(([, v]) => v.suspended).map(([k]) => k)
+);
 let cursor = null;
 for (const w of worklist) {
+  if (suspended.has(w.courseKey)) continue;
   if (authored.has(slot(w))) continue;
   cursor = { courseKey: w.courseKey, topicIndex: w.topicIndex, structureIndex: w.structureIndex };
   break;
@@ -179,7 +192,7 @@ if (orphans.length) {
   for (const o of orphans) console.log(`  ? ${o.file} · structure "${o.structure}"`);
 }
 
-const next = worklist.find(w => !authored.has(slot(w)));
+const next = worklist.find(w => !suspended.has(w.courseKey) && !authored.has(slot(w)));
 
 /* Everything that has a scene but is not shippable. This list is the whole point of moving the cursor
    past them: they stay in front of a human every run instead of stalling the queue in silence. */
@@ -298,10 +311,16 @@ for (const r of sceneMeshes) {
   if (r.audited) auditByCourse[k].done++;
   else if (!auditByCourse[k].next) auditByCourse[k].next = r.id;
 }
-const auditCourse = order.find(c => auditByCourse[c] && auditByCourse[c].next);
+const auditCourse = order.find(c => !suspended.has(c) && auditByCourse[c] && auditByCourse[c].next);
 if (auditCourse) {
   const a = auditByCourse[auditCourse];
   console.log(`\naudit: ${auditCourse} ${a.done}/${a.all} scenes read back and signed (provenance.audited_at)`);
+}
+
+for (const k of suspended) {
+  const t = auditByCourse[k];
+  console.log(`\nSUSPENDED: ${k} — ${(curriculum.courses[k] || {}).suspended}`);
+  if (t) console.log(`  ${t.all} scene(s) authored and waiting; both cursors skip this course.`);
 }
 
 console.log(`\nnext to author: ${done ? 'nothing — the curriculum is covered' : `${next.courseKey} / ${next.topic} / ${next.name}`}`);

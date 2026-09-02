@@ -9736,3 +9736,57 @@ corrections, and both new scenes pass all eight stages each time.
 read-back. The five scenes whose notes were corrected are not signed either: the correction was to a
 stated fact, not a read-back of the whole file, and signing on that basis is what the backlog says costs
 a student.
+
+---
+
+## 2026-09-01 — human session · two days of runs that did nothing, and why
+
+**The task has authored nothing since 2026-08-30.** It fired every hour for two days. The only files it
+touched in that time were `STATE.json` and `mesh-gaps.txt`, both written by `sync-state.mjs` — which is
+step one of its own prompt. It ran step one, found nothing it was permitted to do, and stopped. No scene,
+no RUNLOG block, forty-odd times.
+
+### The mechanism, and whose fault it is
+
+The gross audit completed on 2026-08-30. From that moment every cursor this repo prints pointed into
+Embryology:
+
+```
+next to author: embryology / GIT Development / Foregut derivatives
+next to audit:  embryology__cardiovascular-development__cardiac-looping
+```
+
+Embryology is the one course the prompt forbids — all 28 of its scenes wait on SVG artwork that does not
+exist, so a 29th helps nobody. The task read both cursors, found both pointing at forbidden work, and
+correctly refused.
+
+Meanwhile Neuroanatomy sat at 13 of 34 structures authored with **no cursor naming it.** The handoff to
+Neuroanatomy had been written into the task's prompt and never into the tool that tells it where to go.
+That is this session's mistake, not the task's: it was obedient and stuck, which is the better of the two
+failures, but it is still two days.
+
+### Fixed
+
+`suspended` is now a field on the course in `CURRICULUM.json`, carrying its own reason, and both the
+author cursor and the audit cursor in `sync-state.mjs` skip a suspended course. The course is still
+counted and printed every run under a `SUSPENDED:` heading — skipped is not the same as hidden, and a
+course that vanishes from the report is a course nobody returns to.
+
+```
+SUSPENDED: embryology — Blocked on SVG artwork, not on authoring...
+  28 scene(s) authored and waiting; both cursors skip this course.
+
+next to author: neuroanatomy / Brainstem / Pons
+next to audit:  neuroanatomy__basal-ganglia-diencephalon__basal-ganglia
+```
+
+### The prompt now says two things it did not
+
+**Authoring before auditing, within Neuroanatomy.** Twenty-one structures are unwritten and thirteen are
+written; finishing the course beats re-reading a third of it.
+
+**A run that can find no permitted work must still write a RUNLOG block saying so.** That is the change
+that matters more than the cursor fix. The corpus has spent two days in a state that was invisible because
+the only symptom was silence, and silence is what a healthy hour looks like from outside. If a cursor ever
+hands the task work it is forbidden to do, that is a bug in the tooling, and the task's job is to say so
+in capitals that hour rather than to wait for someone to notice.

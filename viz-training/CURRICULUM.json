@@ -1751,7 +1751,8 @@
       "defaultModes": [
         "sequence",
         "diagram"
-      ]
+      ],
+      "suspended": "Blocked on SVG artwork, not on authoring. 28 scenes are already written and none can be drawn; a 29th helps nobody. The author and audit cursors skip this course until artwork exists, and sync-state.mjs reports it every run so it does not become invisible."
     },
     "neuroanatomy": {
       "level": 300,
