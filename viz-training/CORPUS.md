@@ -3047,3 +3047,43 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   Cerebellum "whole cerebellum only" is confirmed by search, not assumed.
 - Pons, medulla, cerebellum and thalamus deliberately **not** in `covers[]` — each has its own curriculum
   entry and appears here only as a boundary of the midbrain.
+
+### `neuroanatomy__brainstem__pons` (new — second Brainstem scene)
+- id `neuroanatomy__brainstem__pons` · Neuroanatomy · Brainstem · Pons · mode `3d_anatomy` ·
+  provider `bodyparts3d` · status **candidate** · 9 structures (1 part) · 6 views · 30 ops ·
+  covers "Pons" only.
+- Curriculum views required (`cross_section`, `location`) both present: beats 1-2 `location`,
+  beats 3-6 `cross_section`.
+- All 9 ids verified in `available-meshes.json`, names character-for-character; **9 of 9 in
+  `meshes-lite/` — the scene draws complete.** `candidate` is an authoring status, not a delivery one:
+  FMA67943 is one undivided block, so basilar part, tegmentum, pontine nuclei and the four cranial
+  nerve nuclei are named over it and none can be lit.
+- Sides: none. Every mesh in the scene is unpaired midline, stated in `gaps[]` rather than assumed.
+- One `approx` and no anchors: the clivus is shown as the whole occipital bone (FMA52735), marked
+  `approx {shown_as, detail}`. Not derived — a broad sloping surface with no neighbouring mesh in
+  contact, so `--contact --area` would have no witness. The pontomedullary junction (a line) and the
+  cerebellopontine angle (a space bounded by three structures) were both rejected before measuring.
+- Largest hollow: no cranial nerve V/VI/VII/VIII and no nucleus of any of them, so beat 4 lights only
+  the fourth ventricle floor. Highest-value fetch is a basilar artery — beat 6's locked-in syndrome and
+  Millard-Gubler are both arterial and neither vessel can be drawn.
+
+### `neuroanatomy__brainstem__medulla-oblongata` (new — third Brainstem scene)
+- id `neuroanatomy__brainstem__medulla-oblongata` · Neuroanatomy · Brainstem · Medulla oblongata ·
+  mode `3d_anatomy` · provider `bodyparts3d` · status **candidate** · 9 structures (2 parts) ·
+  6 views · 30 ops · covers "Medulla oblongata" only.
+- Curriculum views required (`cross_section`, `mechanism`) both present: beats 1-2 `location`,
+  beat 3 `cross_section`, beats 4-6 `mechanism`.
+- All 9 ids verified, **9 of 9 in `meshes-lite/` — draws complete.** FMA62004 is one undivided block:
+  pyramids, olives, both dorsal column nuclei and both decussations are inside it.
+- Catalog trap recorded in `gaps[]`: `gracilis` (FMA43883/43884) is the thigh muscle, `pyramidalis`
+  (FMA22346/22347) the abdominal muscle, `stria medullaris of thalamus` (FMA73413/73414) diencephalon —
+  three false hits a single-spelling search would have counted as medullary.
+- Sides: none; every mesh unpaired midline, though the clinical content of beat 6 is intensely
+  lateralised and must be read in words rather than off the screen. Stated in `gaps[]`.
+- One `approx` and no anchors: the foramen magnum shown as the whole occipital bone. Rejected before
+  measuring — a foramen is a closed curve bounding a hole and `derive-landmark.mjs` emits points, so
+  any output would land on bone beside the hole. The atlas (FMA12519) is drawn as a second bony witness
+  to the level. The obex was also rejected: both its candidate witnesses are cavity meshes, so the
+  anchor would sit inside the medulla rather than on it.
+- Confirms the Spinal Cord topic's routing independently: the catalog holds `central canal of spinal
+  cord` (the cavity) and no cord tissue at all.

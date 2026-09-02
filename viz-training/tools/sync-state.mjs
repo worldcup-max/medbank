@@ -81,6 +81,7 @@ for (const f of readdirSync(scenesDir)) {
     ...rec,
     mode: s.mode || '',
     audited: !!(s.provenance && s.provenance.audited_at),
+    authoredAt: (s.provenance && s.provenance.authored_at) || '',
     meshIds: [...new Set((s.structures || []).map(x => x.refs && x.refs.bodyparts3d).filter(Boolean))]
   });
 
@@ -303,13 +304,42 @@ if (haveMesh === null) {
    back — file order is topic-then-structure, so it walks a topic at a time. A scene is
    audited when it carries provenance.audited_at. That is derived from the scene file like everything
    else here, so there is no list to keep in step. */
+
+/* FRESH-FIRST, while a course is still being written.
+
+   Curriculum order is the right walk for a FINISHED course: it reads the way a student reads. It is the
+   wrong walk for a course still being authored, and Neuroanatomy showed why. Every one of its scenes sat
+   at `candidate` because `ready` only arrives with a signature, and the signature was queued behind 21
+   unwritten structures — so a course whose meshes were all in hand reached no student for weeks.
+
+   So while a course still has unauthored structures, its audit queue is ordered by provenance.authored_at,
+   NEWEST FIRST: the run audits what the run before it wrote. That is not a run marking its own homework —
+   a separate run with its own context reads it, which is the one thing the audit has never had. It is also
+   the cheapest possible audit, because the scene is an hour old rather than three weeks old, and it is the
+   only ordering under which a scene can go `ready` in the same day it was authored.
+
+   When the course is fully authored the queue falls back to file order — topic-then-structure — because
+   at that point nothing is fresher than anything else and reading order is worth more than recency. */
+const pendingByCourse = {};
+for (const w of worklist) {
+  if (!authored.has(slot(w))) pendingByCourse[w.courseKey] = (pendingByCourse[w.courseKey] || 0) + 1;
+}
+
 const auditByCourse = {};
 for (const r of sceneMeshes) {
   const k = courseKeyByName.get(norm(r.course)) || 'unknown';
-  (auditByCourse[k] = auditByCourse[k] || { done: 0, all: 0, next: null });
+  (auditByCourse[k] = auditByCourse[k] || { done: 0, all: 0, next: null, queue: [], fresh: false });
   auditByCourse[k].all++;
   if (r.audited) auditByCourse[k].done++;
-  else if (!auditByCourse[k].next) auditByCourse[k].next = r.id;
+  else auditByCourse[k].queue.push(r);
+}
+for (const [k, a] of Object.entries(auditByCourse)) {
+  a.fresh = (pendingByCourse[k] || 0) > 0;
+  if (a.fresh) {
+    /* newest first; a scene with no authored_at is oldest, and sorts last */
+    a.queue.sort((x, y) => (y.authoredAt || '').localeCompare(x.authoredAt || '') || x.id.localeCompare(y.id));
+  }
+  a.next = a.queue.length ? a.queue[0].id : null;
 }
 const auditCourse = order.find(c => !suspended.has(c) && auditByCourse[c] && auditByCourse[c].next);
 if (auditCourse) {
@@ -324,7 +354,15 @@ for (const k of suspended) {
 }
 
 console.log(`\nnext to author: ${done ? 'nothing — the curriculum is covered' : `${next.courseKey} / ${next.topic} / ${next.name}`}`);
-if (auditCourse) console.log(`next to audit:  ${auditByCourse[auditCourse].next}`);
+if (auditCourse) {
+  const a = auditByCourse[auditCourse];
+  console.log(`next to audit:  ${a.next}${a.fresh ? '   (fresh-first: this course is still being authored)' : ''}`);
+  if (a.fresh && a.queue.length > 1) {
+    console.log(`  audit queue, freshest first:`);
+    for (const r of a.queue.slice(0, 4)) console.log(`    ${r.authoredAt || '(no authored_at)'}  ${r.id}`);
+    if (a.queue.length > 4) console.log(`    ... and ${a.queue.length - 4} older`);
+  }
+}
 if (repairNext) {
   console.log(`next to repair: ${repairNext.r.id}  (${repairNext.kind === 'empty' ? 'draws nothing' : repairNext.r.missing.length + ' meshes missing'})`);
 }

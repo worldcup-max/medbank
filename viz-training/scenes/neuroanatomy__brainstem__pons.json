@@ -1,0 +1,477 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__brainstem__pons",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Brainstem",
+  "structure": "Pons",
+  "covers": [
+    "Pons"
+  ],
+  "learning_goal": "Recognise the pons as the middle brainstem segment by its bulging front and its middle cerebellar peduncles, divide it into a basilar part in front and a tegmentum behind with the floor of the fourth ventricle as its back wall, place the four cranial nerve nuclei it contains — trigeminal, abducens, facial, vestibulocochlear — in the columns that the fourth ventricle's floor lays out, and use that arrangement to explain the crossed syndromes of the pons and the locked-in state.",
+  "status": "candidate",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-02"
+  },
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "brainstem",
+      "pons",
+      "cranial nerve nuclei",
+      "stroke",
+      "coma",
+      "neuroimaging orientation"
+    ],
+    "terms": [
+      "pons",
+      "basilar part of pons",
+      "basis pontis",
+      "pontine tegmentum",
+      "middle cerebellar peduncle",
+      "brachium pontis",
+      "pontocerebellar fibres",
+      "pontine nuclei",
+      "corticopontine fibres",
+      "corticospinal tract",
+      "medial lemniscus",
+      "floor of fourth ventricle",
+      "rhomboid fossa",
+      "facial colliculus",
+      "trigeminal nerve",
+      "abducens nerve",
+      "facial nerve",
+      "vestibulocochlear nerve",
+      "cranial nerve V",
+      "cranial nerve VI",
+      "cranial nerve VII",
+      "cranial nerve VIII",
+      "cerebellopontine angle",
+      "vestibular schwannoma",
+      "acoustic neuroma",
+      "pontomesencephalic junction",
+      "pontomedullary junction",
+      "Millard-Gubler syndrome",
+      "Foville syndrome",
+      "one-and-a-half syndrome",
+      "medial longitudinal fasciculus",
+      "internuclear ophthalmoplegia",
+      "locked-in syndrome",
+      "central pontine myelinolysis",
+      "osmotic demyelination",
+      "pinpoint pupils",
+      "basilar artery",
+      "clivus",
+      "trigeminal neuralgia"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": 0.5
+  },
+  "structures": [
+    {
+      "key": "pons",
+      "name": "pons",
+      "label": "Pons",
+      "role": "primary",
+      "group": "Pons",
+      "layer": "organ",
+      "color": "#c9a27a",
+      "refs": {
+        "bodyparts3d": "FMA67943"
+      },
+      "terms": [
+        "pons",
+        "basilar part of pons",
+        "basis pontis",
+        "pontine tegmentum",
+        "pontine nuclei",
+        "middle cerebellar peduncle",
+        "corticospinal tract",
+        "medial lemniscus"
+      ],
+      "narration": "One undivided mesh, and the only mesh of pontine substance in this catalog — the whole segment, from the sharp step down off the midbrain above to the equally sharp step down onto the medulla below, about two and a half centimetres of it. Its shape is its name: a bridge, bulging forwards in the midline and tapering on each side into the middle cerebellar peduncle, which carries it back into the cerebellum. Internally it is two storeys that this mesh does not separate. In front, the basilar part: descending corticospinal, corticobulbar and corticopontine fibres broken into bundles by the pontine nuclei scattered among them, and the transverse pontocerebellar fibres crossing the midline to become the middle cerebellar peduncle of the other side. Behind, the tegmentum: the continuation of the medulla's tegmentum upwards, carrying the medial lemniscus, the medial longitudinal fasciculus and the four cranial nerve nuclei of this level. Read beats 3 and 4 as a map over this block, because nothing inside it can be lit on its own."
+    },
+    {
+      "key": "v4",
+      "name": "fourth ventricle",
+      "label": "Fourth ventricle",
+      "role": "part",
+      "group": "Pons",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78469"
+      },
+      "terms": [
+        "fourth ventricle",
+        "floor of fourth ventricle",
+        "rhomboid fossa",
+        "facial colliculus",
+        "cerebral aqueduct"
+      ],
+      "narration": "The tent-shaped cavity behind the pons, and the structure that makes the pons legible: its floor IS the back of the pontine tegmentum, so every nucleus in beat 4 is placed by reference to this surface. The upper half of the diamond-shaped floor is pontine and the lower half is medullary, which is why this one cavity is shared between two scenes. The cranial nerve nuclei lie in columns either side of the midline sulcus of that floor, motor medial and sensory lateral, and the one visible bump on it — the facial colliculus — is not the facial nucleus but the abducens nucleus with facial fibres looping over it. That single fact explains why a lesion at that bump takes the eye and the face together."
+    },
+    {
+      "key": "aqueduct",
+      "name": "cerebral aqueduct",
+      "label": "Cerebral aqueduct",
+      "role": "context",
+      "group": "Midbrain above",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78467"
+      },
+      "terms": [
+        "cerebral aqueduct",
+        "fourth ventricle",
+        "CSF"
+      ],
+      "narration": "The channel delivering CSF into the top of the fourth ventricle. Shown so the cavity behind the pons has a visible inlet: water arrives here from the midbrain and leaves at the bottom of the ventricle, over the medulla."
+    },
+    {
+      "key": "peduncle",
+      "name": "peduncle of midbrain",
+      "label": "Midbrain — peduncle",
+      "role": "context",
+      "group": "Midbrain above",
+      "layer": "organ",
+      "color": "#b98f6d",
+      "refs": {
+        "bodyparts3d": "FMA62394"
+      },
+      "terms": [
+        "peduncle of midbrain",
+        "crus cerebri",
+        "pontomesencephalic junction",
+        "corticospinal tract"
+      ],
+      "narration": "The segment above, and the upper boundary of the pons. The junction between them is abrupt on the front — the two crura dive into the upper border of the pontine bulge — and it is where the trochlear nerve, having come round from the back of the midbrain, passes forwards. The corticospinal fibres that filled the middle of each crus enter the basilar pons here and are immediately broken into scattered bundles by the pontine nuclei, which is why a pontine infarct can spare some fibres and take others in a way a peduncular infarct does not. The midbrain has its own scene."
+    },
+    {
+      "key": "medulla",
+      "name": "medulla oblongata",
+      "label": "Medulla oblongata",
+      "role": "context",
+      "group": "Medulla below",
+      "layer": "organ",
+      "color": "#a87f5d",
+      "refs": {
+        "bodyparts3d": "FMA62004"
+      },
+      "terms": [
+        "medulla oblongata",
+        "pontomedullary junction",
+        "medullary pyramid",
+        "abducens nerve",
+        "facial nerve",
+        "vestibulocochlear nerve"
+      ],
+      "narration": "The segment below. The pontomedullary junction is the most crowded exit line in the brainstem: the abducens nerve leaves at the midline, the facial and vestibulocochlear nerves at the lateral end of the same groove, at the cerebellopontine angle. None of the three has a mesh here, so the junction is drawn as a step between two blocks and the nerves are named rather than shown. Below it the scattered corticospinal bundles of the basilar pons regather into the single compact pyramid on each side. The medulla has its own scene."
+    },
+    {
+      "key": "cerebellum",
+      "name": "cerebellum",
+      "label": "Cerebellum",
+      "role": "context",
+      "group": "Cerebellum behind",
+      "layer": "organ",
+      "color": "#8fa8c8",
+      "refs": {
+        "bodyparts3d": "FMA67944"
+      },
+      "terms": [
+        "cerebellum",
+        "middle cerebellar peduncle",
+        "cerebellopontine angle",
+        "pontocerebellar fibres",
+        "vestibular schwannoma"
+      ],
+      "narration": "Sitting behind the pons with the fourth ventricle as the gap between them, and connected to it by the middle cerebellar peduncle — much the largest of the three cerebellar peduncles, and made entirely of fibres that started in the pontine nuclei of the OTHER side. That is the anatomical reason the cerebral cortex controls the opposite limbs and yet talks to the same-side cerebellum through a crossing here. The peduncle itself has no mesh in this catalog, so it appears as the taper of the pons where it meets this surface rather than as a lit cable. The recess where pons, medulla and cerebellum meet is the cerebellopontine angle, the site of the vestibular schwannoma, and it is the space this scene shows best."
+    },
+    {
+      "key": "occiput",
+      "name": "occipital bone",
+      "label": "Occipital bone (clivus)",
+      "role": "context",
+      "group": "Skull base in front",
+      "layer": "bone",
+      "color": "#ddd3c0",
+      "refs": {
+        "bodyparts3d": "FMA52735"
+      },
+      "approx": {
+        "shown_as": "occipital bone",
+        "detail": "clivus"
+      },
+      "narration": "The bone the pons lies against. The clivus is the smooth slope on the inside of the basilar part of this bone, running down from the dorsum sellae to the foramen magnum, and the front of the pons rests on it with only the basilar artery and the meninges between. The whole occipital bone is lit rather than the clivus alone: no mesh divides it, and derive-landmark.mjs cannot measure it, because the clivus is a broad sloping SURFACE with no neighbouring mesh in contact — the pons is separated from it by structures the catalog does not hold, so a contact measurement would have no witness. It is marked as an approximation for that reason.",
+      "terms": [
+        "clivus",
+        "occipital bone",
+        "basilar artery",
+        "foramen magnum",
+        "prepontine cistern"
+      ]
+    },
+    {
+      "key": "v3",
+      "name": "third ventricle",
+      "label": "Third ventricle",
+      "role": "context",
+      "group": "Midbrain above",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78454"
+      },
+      "terms": [
+        "third ventricle",
+        "cerebral aqueduct",
+        "CSF"
+      ],
+      "narration": "Ghosted, as the source of the water the aqueduct brings down. It is here only to give the CSF trace of beat 5 a beginning above the segment."
+    },
+    {
+      "key": "central_canal",
+      "name": "central canal of spinal cord",
+      "label": "Central canal",
+      "role": "context",
+      "group": "Medulla below",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78497"
+      },
+      "terms": [
+        "central canal of spinal cord",
+        "fourth ventricle",
+        "obex"
+      ],
+      "narration": "The thread the fourth ventricle narrows into below, at the obex. Shown so the ventricular cavity behind the pons is seen to have a bottom as well as a top — though almost no CSF continues down it, the flow leaving instead through the lateral and median apertures into the subarachnoid space."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The bridge in the middle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pons",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pons",
+          "to": "peduncle",
+          "kind": "continuity"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pons",
+          "to": "medulla",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "The middle of the three brainstem segments, and the easiest of the three to recognise from the side: it is the one that bulges. Above it the midbrain, below it the medulla, and both junctions are steps rather than tapers, so the pons is bounded by two visible ledges. The bulge is not the tracts passing through — those pass through all three segments — it is the transverse fibres crossing to the cerebellum, which is why no other segment has it. Hold on to two boundaries and one shape and the pons is identifiable on any scan: upper step, lower step, and a belly on the front."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Front against bone, back against ventricle, sides into cerebellum",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "occiput",
+          "intensity": 0.7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "v4",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pons",
+          "to": "cerebellum",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "Three surfaces, three different neighbours. In front, bone: the pons lies on the clivus with the basilar artery running up the midline groove between them — the artery has no mesh in this catalog and is named, not drawn, and the lit bone is the whole occipital bone standing in for its clivus. Behind, fluid: the fourth ventricle, whose floor is the back of the pons itself, with the cerebellum roofing it. At the sides, the pons narrows into the middle cerebellar peduncles and disappears into the cerebellum; that peduncle has no separate mesh, so watch for the taper rather than a cable. Where the lateral edge of the pons, the top of the medulla and the front of the cerebellum meet is the cerebellopontine angle — the corner visible here between the three lit blocks, and the place a vestibular schwannoma grows, pressing the eighth nerve first, then the seventh, then the fifth."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Two storeys, cut across",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": -0.2,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pons",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pons",
+          "to": "v4",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "Cut across the pons and the rule is a front half and a back half, divided at the level of the trapezoid body. The front half is the basilar part: descending fibres from the cortex, chopped into small bundles by the grey pontine nuclei among them, plus the transverse fibres those nuclei send across the midline into the opposite middle cerebellar peduncle. The back half is the tegmentum, and it is simply the medulla's tegmentum continued upwards — medial lemniscus lying transversely, spinothalamic fibres lateral to it, medial longitudinal fasciculus close to the midline just under the ventricular floor, and the four cranial nerve nuclei of this level. The ventricular floor, lit, is its back wall. Be exact about what is drawn: the pontine mesh is one solid block. Basilar part, tegmentum, pontine nuclei, lemnisci and every nucleus named in the next beat are inside it and cannot be lit separately, so this is a map read over a block and the only real boundary on screen is the one between the block and the ventricle."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "Four nerves, and the bump that explains two of them",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Pons"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "v4",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pons",
+            "medulla"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "The pons carries the nuclei of cranial nerves five, six, seven and eight, and the floor of the fourth ventricle in front of you is the grid they are arranged on. Two rules place all of them. First, columns: motor nuclei medial to the midline sulcus, sensory nuclei lateral to it — so abducens and facial motor lie medial, and the trigeminal sensory and vestibular nuclei lie lateral. Second, levels: trigeminal in the middle of the pons, and abducens, facial and vestibulocochlear down at its lower border, which is exactly where those three nerves are seen to leave at the pontomedullary junction. The one feature you could point to on this floor is the facial colliculus, the small elevation near the midline in the upper half — and it is a trap worth learning as a trap. The bump is the abducens nucleus. What raises it is the motor fibres of the facial nerve looping backwards over that nucleus before turning forwards to leave. A lesion of a few millimetres there therefore takes the sixth nerve and the seventh together, a combination that looks like two problems and is one. None of these nuclei, and no cranial nerve, has a mesh in this catalog — this beat names them on a floor that is drawn and lights nothing but the ventricle."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Through, not into — CSF passing the pons",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:csf",
+          "path": [
+            "v3",
+            "aqueduct",
+            "v4",
+            "central_canal"
+          ],
+          "duration": 5000
+        }
+      ],
+      "narration": "Follow the water past this segment: third ventricle, aqueduct, fourth ventricle, and then almost nothing down the central canal — the trace shows the canal because it is the anatomical continuation, but the real exit is sideways, through the two lateral apertures and the median aperture in the roof of the fourth ventricle, into the subarachnoid space. Those apertures have no mesh and are not on screen. The point for the pons is a contrast with the midbrain above: there the channel is a pinhole and any mass produces hydrocephalus, whereas here the cavity is wide, so a pontine lesion produces its damage by destroying tissue rather than by damming fluid. When posterior fossa masses do cause hydrocephalus it is usually by compressing the fourth ventricle from behind — the cerebellum's doing rather than the pons'."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "Crossed signs, and the worst survivable stroke",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": -0.2
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pons",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pons",
+          "to": "occiput",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "The brainstem rule again — a cranial nerve on the side of the lesion, the limbs on the other — and in the pons the nerve is the sixth or the seventh. A lesion of the lower basilar pons catching the abducens and facial fibres as they run forwards through it gives an ipsilateral lateral rectus palsy and facial weakness with a contralateral hemiplegia: Millard-Gubler. Further back, into the tegmentum at the facial colliculus, and the abducens NUCLEUS is hit rather than its fibres, which also takes the neighbouring gaze centre, so the eyes cannot look towards the lesion at all — a gaze palsy rather than a single muscle palsy, and with the medial longitudinal fasciculus a millimetre away the combination can become the one-and-a-half syndrome. Now the extreme case. The basilar artery runs up the front of this segment against the clival surface of the bone lit here, and its occlusion infarcts the whole basilar pons: every descending motor fibre is destroyed while the tegmentum behind, carrying sensation and consciousness, survives on other supply. The patient is awake, aware and sensate, and can move nothing except the eyes vertically, because vertical gaze is organised up in the midbrain and horizontal gaze is organised here. Locked-in syndrome is a lesion confined to the front half of a block two and a half centimetres long — the clearest argument in the brainstem for learning which storey a structure lives on. Central pontine myelinolysis, from correcting hyponatraemia too fast, destroys the same central basilar region and can produce the same picture without a vessel being involved at all. The basilar artery is named throughout this beat and has no mesh in the catalog; the bone it runs against is drawn, and the artery is not."
+    }
+  ],
+  "gaps": [
+    "THE PONS IS ONE UNDIVIDED MESH. FMA67943 is the only pontine entry in the whole 934-entry catalog. Searched pons, pontine, pontis, basilar part, basis, tegmentum, trapezoid, brachium, pontocerebellar — the only `trapezoid` hits are the two carpal bones, FMA23725 and FMA24445, which are wrist and not brainstem. So the basilar part, the tegmentum, the pontine nuclei and the trapezoid body are all inside one block. Beats 3, 4 and 6 turn on the difference between the front half and the back half of that block, and each of them says openly that the division is being described and not drawn. The structure card repeats the caveat, so a student meeting the mesh outside a beat is not misled.",
+    "NO MIDDLE CEREBELLAR PEDUNCLE, AND NO CEREBELLAR PEDUNCLE OF ANY KIND. Searched peduncle, brachium pontis, brachium conjunctivum, restiform, crus cerebelli. The catalog contains exactly one `peduncle`, FMA62394, which is the midbrain's. This is the same absence the midbrain scene recorded and it matters more here, because the middle cerebellar peduncle is what gives the pons its name and shape. Beat 2 and the cerebellum card both tell the student to read it as the lateral taper of the pontine mesh into the cerebellar surface, rather than looking for a cable that is not there. Re-verified today that `cerebellum` returns exactly one entry, FMA67944, the whole organ, with no lobe, vermis, tonsil, flocculus, peduncle or deep nucleus.",
+    "NO CRANIAL NERVE V, VI, VII OR VIII, AND NO NUCLEUS OF ANY OF THEM. Searched trigeminal, abducens, facial, vestibulocochlear, cochlear, vestibular, acoustic, auditory, fifth nerve, sixth nerve, seventh nerve, eighth nerve, nerve, cranial, nucleus, colliculus of facial, ganglion. The catalog holds exactly two nerve meshes, FMA50875 and FMA50878, the right and left optic nerves, neither of which belongs in this scene; and exactly two nucleus meshes, the caudate nuclei FMA72826 and FMA72827. Beat 4 is therefore entirely a map over the drawn ventricular floor: the four nuclei, the columns and the facial colliculus are named and none is lit. This is the single largest hollow in the scene and it is the same absence recorded for the Cranial Nerves topic of this course, whose routing away from 3d_anatomy it independently confirms.",
+    "NO INTRACRANIAL VESSEL, SO THE BASILAR ARTERY IS NAMED AND NEVER DRAWN. Searched basilar, vertebral artery, pontine artery, perforator, anterior inferior cerebellar, AICA, circle of Willis, cerebral artery, sinus. The only intracranial-adjacent vessels in the catalog are the two common carotid arteries, FMA3941 and FMA4058, which end in the neck. This costs beat 6 a great deal: the basilar artery is the whole mechanism of both locked-in syndrome and Millard-Gubler, and the student is told where it runs — up the midline groove on the front of the pons, against the clivus — with the bone drawn and the vessel absent. A basilar artery mesh is the highest-value fetch for this scene and probably for the course.",
+    "THE CLIVUS IS SHOWN AS THE WHOLE OCCIPITAL BONE, MARKED AS AN APPROXIMATION. Searched clivus, basilar part of occipital, basiocciput, dorsum sellae, sphenoid: FMA52735 `occipital bone` is the only relevant entry and it is undivided. It was NOT derived as a landmark, and the reason is a definition failure rather than a tool failure: the clivus is a broad sloping surface, so it would need `--contact --area`, and there is no neighbouring mesh in contact with it to act as the witness — the pons is held off it by the basilar artery and the meninges, neither of which the catalog holds. A `--contact` with no witness cannot be measured, so `approx: {shown_as, detail}` is used on the parent and the player will show the whole bone in amber with the clivus named. Fetch a sphenoid and the dorsum sellae could bound it from above, at which point a slab-restricted derivation becomes possible.",
+    "NO ANCHORS WERE AUTHORED, AND THE PONTOMEDULLARY JUNCTION WAS REJECTED BEFORE MEASURING. The junction is where three cranial nerves leave and would be the most useful anchor in the scene, but it is a transverse LINE across the front of the brainstem, not a point, and derive-landmark.mjs emits points. This is the identical rejection the midbrain scene recorded for the pontomesencephalic junction, and the reasoning carries: do not derive it as a point, revisit it if the tool ever gains a line primitive. The cerebellopontine angle was also considered and rejected: like the axillary apex, it is a space bounded by three structures rather than a feature on any one of them, which is the shape of definition the tool refuses by design. The facial colliculus cannot be derived either — it is a feature on the inner surface of the pons, and its witness would be the abducens nucleus, which has no mesh.",
+    "SIDES: THERE ARE NONE TO GET WRONG IN THIS SCENE, WHICH IS ITSELF WORTH STATING. Every structure here is an unpaired midline mesh — pons FMA67943, medulla FMA62004, cerebellum FMA67944, peduncle of midbrain FMA62394, third ventricle FMA78454, fourth ventricle FMA78469, cerebral aqueduct FMA78467, central canal FMA78497, occipital bone FMA52735. No left/right pair appears, so no laterality check applies. Note that FMA62394 `peduncle of midbrain` is a single entry covering both crura, unlike the colliculi above it, which are paired.",
+    "THE MIDBRAIN, MEDULLA, CEREBELLUM AND VENTRICLES ARE DELIBERATELY NOT IN covers[]. Each is a separate CURRICULUM.json structure with its own scene and appears here only as a boundary of the pons. The fourth ventricle is given `role: part` rather than context because its floor is literally the back of the pons and beat 4 cannot be taught without it — but the ventricular system as a curriculum structure belongs to Ventricles under Ventricular System & CSF, which is already authored, and this scene does not claim it.",
+    "DRAWABILITY: all nine models are in meshes-lite/, so every beat renders. What is hollow is not geometry but granularity — the two beats that carry the most teaching, 4 and 6, light one solid block and one ventricle while naming four nuclei, four cranial nerves and one artery that no mesh exists for. Fetching more meshes cannot fix beat 4; only a segmented pons would."
+  ]
+}

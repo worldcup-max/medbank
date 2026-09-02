@@ -1,0 +1,499 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__brainstem__medulla-oblongata",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Brainstem",
+  "structure": "Medulla oblongata",
+  "covers": [
+    "Medulla oblongata"
+  ],
+  "learning_goal": "Place the medulla between the pons and the spinal cord at the foramen magnum, divide it into an open upper half behind the fourth ventricle and a closed lower half around the central canal, follow the two decussations that happen inside it — motor in front, sensory behind — and use their different levels to explain why a lesion here can cross the body's signs, and why the vital centres in its tegmentum make this the one brainstem segment whose damage stops breathing.",
+  "status": "candidate",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-02"
+  },
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "brainstem",
+      "medulla oblongata",
+      "decussation",
+      "stroke",
+      "respiratory arrest",
+      "coning",
+      "neuroimaging orientation"
+    ],
+    "terms": [
+      "medulla oblongata",
+      "myelencephalon",
+      "medullary pyramid",
+      "pyramidal decussation",
+      "motor decussation",
+      "sensory decussation",
+      "decussation of medial lemniscus",
+      "internal arcuate fibres",
+      "gracile nucleus",
+      "cuneate nucleus",
+      "gracile tubercle",
+      "cuneate tubercle",
+      "dorsal column",
+      "DCML",
+      "medial lemniscus",
+      "spinothalamic tract",
+      "inferior olivary nucleus",
+      "olive",
+      "inferior cerebellar peduncle",
+      "nucleus ambiguus",
+      "nucleus tractus solitarius",
+      "dorsal motor nucleus of vagus",
+      "hypoglossal nucleus",
+      "vagus nerve",
+      "glossopharyngeal nerve",
+      "hypoglossal nerve",
+      "accessory nerve",
+      "cranial nerve IX",
+      "cranial nerve X",
+      "cranial nerve XI",
+      "cranial nerve XII",
+      "obex",
+      "floor of fourth ventricle",
+      "central canal",
+      "open medulla",
+      "closed medulla",
+      "medial medullary syndrome",
+      "Dejerine syndrome",
+      "lateral medullary syndrome",
+      "Wallenberg syndrome",
+      "posterior inferior cerebellar artery",
+      "vertebral artery",
+      "respiratory centre",
+      "vasomotor centre",
+      "foramen magnum",
+      "tonsillar herniation",
+      "coning",
+      "Cushing reflex"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": 0.5
+  },
+  "structures": [
+    {
+      "key": "medulla",
+      "name": "medulla oblongata",
+      "label": "Medulla oblongata",
+      "role": "primary",
+      "group": "Medulla",
+      "layer": "organ",
+      "color": "#c9a27a",
+      "refs": {
+        "bodyparts3d": "FMA62004"
+      },
+      "terms": [
+        "medulla oblongata",
+        "myelencephalon",
+        "medullary pyramid",
+        "pyramidal decussation",
+        "inferior olivary nucleus",
+        "gracile nucleus",
+        "cuneate nucleus",
+        "medial lemniscus",
+        "nucleus ambiguus",
+        "respiratory centre"
+      ],
+      "narration": "One undivided mesh, and the only mesh of medullary substance in the catalog — a cone about three centimetres long, wide where it meets the pons and narrowing to spinal-cord width at the foramen magnum. Its surface features are what you would name in a specimen and none of them is separable here: the two pyramids flanking the anterior median fissure on the front, the oval olive lateral to each pyramid, and on the back the gracile and cuneate tubercles below the ventricle. Its interior is three things stacked front to back — the pyramids in front, the tegmentum in the middle holding the lemnisci, the olivary nuclei, the cranial nerve nuclei and the vital centres, and behind them either the fourth ventricle or, lower down, the closed grey matter around the central canal. Every internal structure named in beats 3 to 6 lies inside this single block, so read those beats as a map over it."
+    },
+    {
+      "key": "v4",
+      "name": "fourth ventricle",
+      "label": "Fourth ventricle",
+      "role": "part",
+      "group": "Medulla",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78469"
+      },
+      "terms": [
+        "fourth ventricle",
+        "floor of fourth ventricle",
+        "obex",
+        "open medulla",
+        "hypoglossal trigone",
+        "vagal trigone"
+      ],
+      "narration": "The lower half of this diamond-shaped floor is medullary; the upper half is pontine, which is why one cavity is shared between two scenes. Its presence is what divides the medulla in two: where the ventricle lies behind it, the medulla is `open` and its grey matter is spread out flat under the floor; below the obex, the point where the ventricle narrows away, the medulla is `closed` and that grey matter has folded back round a central canal, arranged much as the spinal cord's is. Two small triangles on the medullary half of the floor mark nuclei directly — the hypoglossal trigone medially and the vagal trigone lateral to it — and neither has a mesh, so they are named against a drawn surface."
+    },
+    {
+      "key": "central_canal",
+      "name": "central canal of spinal cord",
+      "label": "Central canal",
+      "role": "part",
+      "group": "Medulla",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78497"
+      },
+      "terms": [
+        "central canal of spinal cord",
+        "closed medulla",
+        "obex",
+        "fourth ventricle"
+      ],
+      "narration": "The thread the fourth ventricle becomes at the obex, running on down through the closed lower medulla and into the spinal cord. It is the anatomical continuation of the ventricular system and carries almost no flow, since CSF leaves the fourth ventricle sideways through apertures the catalog does not hold. Its importance here is as the axis of the closed medulla: below the obex, every structure is placed by reference to this line rather than to a ventricular floor."
+    },
+    {
+      "key": "pons",
+      "name": "pons",
+      "label": "Pons",
+      "role": "context",
+      "group": "Above",
+      "layer": "organ",
+      "color": "#b98f6d",
+      "refs": {
+        "bodyparts3d": "FMA67943"
+      },
+      "terms": [
+        "pons",
+        "pontomedullary junction",
+        "basilar part of pons",
+        "corticospinal tract"
+      ],
+      "narration": "The segment above, and the upper boundary. At the step between them the corticospinal fibres, which the pontine nuclei had broken into scattered bundles, regather into the single compact pyramid on each side — so the pyramid is not a new tract, it is the same fibres made tidy again. The pontomedullary junction is also the exit line of the abducens, facial and vestibulocochlear nerves; none has a mesh. The pons has its own scene."
+    },
+    {
+      "key": "peduncle",
+      "name": "peduncle of midbrain",
+      "label": "Midbrain — peduncle",
+      "role": "context",
+      "group": "Above",
+      "layer": "organ",
+      "color": "#a87f5d",
+      "refs": {
+        "bodyparts3d": "FMA62394"
+      },
+      "terms": [
+        "peduncle of midbrain",
+        "crus cerebri",
+        "corticospinal tract",
+        "medial lemniscus"
+      ],
+      "narration": "Shown so the descending motor funnel has a visible top within the brainstem. Corticospinal fibres run crus, then basilar pons, then pyramid, then across the midline in this segment — four named stages and one continuous bundle. The medial lemniscus that this scene builds runs the other way through the same three segments, having started here in the medulla. The midbrain has its own scene."
+    },
+    {
+      "key": "cerebellum",
+      "name": "cerebellum",
+      "label": "Cerebellum",
+      "role": "context",
+      "group": "Behind",
+      "layer": "organ",
+      "color": "#8fa8c8",
+      "refs": {
+        "bodyparts3d": "FMA67944"
+      },
+      "terms": [
+        "cerebellum",
+        "inferior cerebellar peduncle",
+        "cerebellar tonsil",
+        "tonsillar herniation",
+        "coning",
+        "olivocerebellar fibres"
+      ],
+      "narration": "Roofing the fourth ventricle behind the open medulla, and connected to this segment by the inferior cerebellar peduncle — which has no mesh, and which carries the olivocerebellar and spinocerebellar fibres in. Two clinical facts hang on this relation. The peduncle runs in the dorsolateral medulla and is one of the structures a Wallenberg infarct destroys, giving the ipsilateral ataxia in that syndrome. And the cerebellar tonsils sit immediately above the foramen magnum with the medulla beside them: raised pressure drives them down through it and the medulla is crushed against the rim, which is the mechanism of coning and the reason the respiratory centre in this segment is what fails first. The tonsil has no separate mesh either — the whole cerebellum is lit."
+    },
+    {
+      "key": "occiput",
+      "name": "occipital bone",
+      "label": "Occipital bone (foramen magnum)",
+      "role": "context",
+      "group": "Bone around",
+      "layer": "bone",
+      "color": "#ddd3c0",
+      "refs": {
+        "bodyparts3d": "FMA52735"
+      },
+      "approx": {
+        "shown_as": "occipital bone",
+        "detail": "foramen magnum"
+      },
+      "terms": [
+        "foramen magnum",
+        "occipital bone",
+        "clivus",
+        "tonsillar herniation",
+        "vertebral artery",
+        "accessory nerve"
+      ],
+      "narration": "The bone that defines where the medulla ends and the spinal cord begins: the two are continuous tissue and the boundary is a bony plane, the foramen magnum, and nothing else. The whole occipital bone is lit because the catalog holds no separate foramen mesh. The ring is marked as an approximation rather than derived, because a foramen is a HOLE — a closed curve of bone with a space inside it — and derive-landmark.mjs emits points on a surface, so there is nothing here it could correctly measure. Through this ring pass the medulla, the two vertebral arteries and the spinal roots of the accessory nerve running up to join it; none of the three vessels or nerves exists in the catalog."
+    },
+    {
+      "key": "atlas",
+      "name": "atlas",
+      "label": "Atlas (C1)",
+      "role": "context",
+      "group": "Bone around",
+      "layer": "bone",
+      "color": "#cfc5b2",
+      "refs": {
+        "bodyparts3d": "FMA12519"
+      },
+      "terms": [
+        "atlas",
+        "first cervical vertebra",
+        "foramen magnum",
+        "vertebral artery",
+        "spinal cord"
+      ],
+      "narration": "The first vertebra, immediately below the foramen magnum, and the top of the canal the cord continues down. It fixes the lower end of this scene: what is inside the ring of the atlas is spinal cord and no longer medulla, though nothing in the tissue itself changes at that line. The vertebral artery grooves the top of its posterior arch before turning into the foramen magnum — the artery is absent from the catalog, so the groove is described and the vessel is not drawn."
+    },
+    {
+      "key": "aqueduct",
+      "name": "cerebral aqueduct",
+      "label": "Cerebral aqueduct",
+      "role": "context",
+      "group": "Above",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78467"
+      },
+      "terms": [
+        "cerebral aqueduct",
+        "fourth ventricle",
+        "CSF"
+      ],
+      "narration": "The inlet at the far end of the fourth ventricle, ghosted, so the cavity over this segment is seen to be filled from above rather than to begin here."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The last segment, and where it stops",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "medulla",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "medulla",
+          "to": "pons",
+          "kind": "continuity"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "medulla",
+          "to": "occiput",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "The lowest of the three brainstem segments, a cone three centimetres long, wide at the pons above and spinal-cord width below. Its upper boundary is a visible step off the pontine bulge. Its lower boundary is not visible at all: the medulla becomes the spinal cord at the foramen magnum, and the change is one of name and of surroundings rather than of tissue — above the ring it is brain and below it is cord. That is worth dwelling on, because it means the segment carrying the respiratory and vasomotor centres sits in the narrowest part of the cranial cavity, with the cerebellar tonsils immediately behind it and a rim of bone all round. Beat 6 is what that costs."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Front and back — pyramids, olives, tubercles",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "medulla",
+          "intensity": 1.0
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "v4",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "From the front, three long ridges each side of the midline: the pyramid nearest the median fissure, the olive lateral to it, and the groove between them from which the hypoglossal rootlets emerge — with the glossopharyngeal, vagus and cranial accessory rootlets emerging in a second line behind the olive. From the back, the upper half is not a surface at all but the floor of the fourth ventricle, lit here, and the lower half carries two pairs of swellings at the top of the dorsal columns: the gracile tubercle beside the midline and the cuneate tubercle lateral to it, each raised by the nucleus inside it. Be clear what the mesh gives you. Pyramid, olive and both tubercles are surface features of one undivided block: they are named in this beat and none of them lights up on its own. The ventricular floor is the only thing here that is genuinely a separate drawn surface, and the rootlet lines are described against a block that has no rootlets."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Open above, closed below",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": -0.32,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "v4",
+            "central_canal"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "v4",
+          "to": "central_canal",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "One segment with two different cross-sections, and the thing that differs is what is behind. In the upper, open medulla the fourth ventricle lies against the back, so the grey matter is spread out flat beneath its floor in columns — this is where the nuclei are arranged in the same medial-motor, lateral-sensory bands as in the pons. At the obex the ventricle closes down into the central canal, and in the lower, closed medulla the grey matter has wrapped back round that canal into something close to the H-shape of the spinal cord. The two cavities compared here are the whole of the difference. Everything else — the pyramids in front, the tegmentum in the middle — runs through both halves unchanged."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The motor crossing, in front and low",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": -0.32
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:corticospinal",
+          "path": [
+            "peduncle",
+            "pons",
+            "medulla"
+          ],
+          "duration": 5000
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "medulla",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Follow the motor fibres down: crus of the midbrain, scattered through the basilar pons, regathered into the pyramid, and then — at the very bottom of the medulla, right at the junction with the cord — about four fifths of them swing across the midline in the pyramidal decussation and continue as the lateral corticospinal tract of the opposite side. That crossing is the anatomical fact behind the whole clinical rule that one hemisphere runs the opposite half of the body, and it happens here, in the last centimetre of the brain. The trace is drawn between three blocks and is a path, not a mesh: no tract in this catalog exists as geometry, and the decussation itself is inside the medullary block. Two consequences to carry away. Above this level, motor signs are contralateral to the lesion; below it, ipsilateral. And a lesion sitting exactly on the decussation can take the arm of one side and the leg of the other, because the fibres for the arm cross above those for the leg — a cruciate hemiplegia, which sounds impossible until you know where the crossing is."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "The sensory crossing, behind and higher",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": -0.28,
+          "animate": true
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:dcml",
+          "path": [
+            "central_canal",
+            "medulla",
+            "pons",
+            "peduncle"
+          ],
+          "duration": 5500
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "v4",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Now the same segment, the other direction and the other half. Fine touch, vibration and proprioception have travelled all the way up the spinal cord uncrossed, in the dorsal columns, and they arrive at the gracile and cuneate nuclei under those two tubercles — the trace enters from below along the central canal for that reason. There they synapse for the first time. The second neurons then sweep forwards and across the midline as the internal arcuate fibres, and turn upward on the far side as the medial lemniscus, which runs on through the pons and midbrain to the thalamus. So the medulla contains two decussations, and the exam point is that they are separate: the motor crossing is anterior and at the very bottom, the sensory crossing is posterior and rather higher. Pain and temperature are not in this story at all — they crossed in the spinal cord at the segment of entry and are already on the far side, lying laterally in the medulla, which is why beat 6 can take them away without touching the medial lemniscus. Everything traced here is inside one block; the path is drawn between segments to give the direction and the level, not to show a tract."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Medial and lateral, and why this segment kills",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": -0.3
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "medulla",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cerebellum",
+          "to": "occiput",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "The medulla splits its strokes cleanly into a medial one and a lateral one, and the two share almost nothing. Medial medullary syndrome, from the vertebral artery or its anterior spinal branch, takes the pyramid, the medial lemniscus and the hypoglossal fibres beside them: contralateral hemiplegia sparing the face, contralateral loss of vibration and proprioception, and the tongue deviating towards the lesion. Lateral medullary syndrome, Wallenberg's, from the vertebral or posterior inferior cerebellar artery, takes none of those and instead destroys the dorsolateral tegmentum: pain and temperature lost on the opposite body but the SAME side of the face, because the spinal trigeminal nucleus is here and uncrossed; ipsilateral Horner's; ataxia from the inferior cerebellar peduncle; vertigo and nystagmus from the vestibular nuclei; and hoarseness with dysphagia from the nucleus ambiguus. That last is what makes it dangerous rather than merely striking, and it is the theme of this segment. The vital centres — respiratory, vasomotor, and the reflex arcs for vomiting, coughing and swallowing — all lie in this tegmentum, and they exist nowhere else. So the medulla is the one brainstem segment where damage stops breathing directly. Which brings back the geometry of beat 1: the cerebellar tonsils sit just above the foramen magnum, whose bone is lit here, and raised intracranial pressure forces them down through it onto this segment. Coning is fatal for an anatomical reason and not a vague one — the last thing squeezed is the only thing that breathes. Neither vertebral artery, nor PICA, nor any of the nuclei named in this beat has a mesh in the catalog; all are named against the drawn block."
+    }
+  ],
+  "gaps": [
+    "THE MEDULLA IS ONE UNDIVIDED MESH. FMA62004 is the only medullary entry in the 934-entry catalog. Searched medulla, medullary, myelencephalon, oblongata, pyramid, pyramidal, olive, olivary, olivar, decussation, decussate, gracile, gracilis, cuneate, cuneatus, tubercle, lemniscus, arcuate, obex. The near-misses are instructive and were all checked individually: FMA43883/43884 `gracilis` are the thigh muscles, FMA22346/22347 `pyramidalis` are the abdominal muscles, and FMA73413/73414 `stria medullaris of thalamus` is diencephalon and not medulla — three names that a single-spelling search would have wrongly counted as hits, which is the mirror image of the failure mode REPAIR-BACKLOG.md describes. So the pyramids, the olives, both dorsal column nuclei, both decussations and every vital centre are inside one block. Beats 2 to 6 all say so where they say it, and the structure card repeats the caveat.",
+    "NO CRANIAL NERVE IX, X, XI OR XII, AND NO NUCLEUS OF ANY OF THEM. Searched glossopharyngeal, vagus, vagal, accessory, hypoglossal, ninth, tenth, eleventh, twelfth, nerve, cranial, nucleus, ambiguus, solitarius, solitary tract, trigone. The catalog holds two nerve meshes, the optic nerves FMA50875 and FMA50878, and two nucleus meshes, the caudate nuclei FMA72826 and FMA72827. Nothing usable. This costs beat 2 its rootlet lines and beat 6 the nucleus ambiguus, which is the single most important nucleus in the segment; both name them against the drawn block and neither pretends to show them. Same absence as recorded for the Cranial Nerves topic and for the pons scene.",
+    "NO INFERIOR CEREBELLAR PEDUNCLE, AND NO CEREBELLAR TONSIL. Searched peduncle, restiform body, brachium, tonsil, floccul, vermis, nodul, cerebell. The catalog holds exactly one `peduncle`, FMA62394, the midbrain's, and exactly one cerebellar entry, FMA67944, the whole organ — re-verified today rather than quoted from the pons scene. The peduncle matters to beat 6 (it is the ataxia in Wallenberg) and the tonsil matters to beat 1 and beat 6 (it is the coning), so both are named over the whole-cerebellum mesh. A segmented cerebellum would be the second most valuable fetch for this course after an intracranial arterial tree.",
+    "NO VERTEBRAL ARTERY, NO PICA, NO ANTERIOR SPINAL ARTERY — NO INTRACRANIAL VESSEL AT ALL. Searched vertebral artery, posterior inferior cerebellar, PICA, anterior spinal, posterior spinal, basilar, perforator, circle of Willis, sinus. The only vessels reaching anywhere near are FMA3941 and FMA4058, the common carotids, which end in the neck. Beat 6 is built on two arterial territories and can draw neither, so it teaches medial-versus-lateral by position within the block instead. This is the same highest-value fetch identified in the pons scene, and it is worth more here, because the whole of this segment's clinical teaching is territorial.",
+    "NO SPINAL CORD. Searched spinal cord, cord, myel, funiculus, dorsal column, fasciculus, corticospinal, spinothalamic, tract, filum, decussation. The catalog holds FMA78497 `central canal of spinal cord` — the cavity — and no cord tissue whatsoever; every other `spinal` hit is a back muscle or the spinal part of deltoid. So this scene's lower boundary is drawn as bone: the foramen magnum ring and the atlas mark where the cord begins, and no cord is shown below them. This independently confirms the routing recorded for the Spinal Cord topic of this course, which cannot be authored as 3d_anatomy for exactly this reason.",
+    "THE FORAMEN MAGNUM IS SHOWN AS THE WHOLE OCCIPITAL BONE, MARKED AS AN APPROXIMATION, AND WAS NOT DERIVED. Searched foramen magnum, foramen, magnum, basiocciput, condyle: FMA52735 `occipital bone` is undivided and is the only entry. It was rejected before measuring rather than after, and for a reason of definition: derive-landmark.mjs emits a point on a parent surface, and a foramen is a closed curve bounding a hole — the correct output would be a ring, which the tool has no primitive for, and any point it did emit would land on bone somewhere beside the hole rather than at it. `approx: {shown_as, detail}` on the parent is therefore the honest handling, and the atlas is drawn as a second bony witness to the level so the student can see where the ring must be even though it is not lit. Revisit if the tool gains a ring or curve primitive; do not derive it as a point.",
+    "NO ANCHORS WERE AUTHORED. Besides the foramen magnum above, three definitions were considered and rejected. The obex is the point where the fourth ventricle closes into the central canal — a genuine point, and the one derivation in this scene that could almost work as a `--contact` between FMA78469 and FMA78497 — but both are cavity meshes rather than surfaces of the parent it would be labelling, so the anchor would sit in a space inside the medulla rather than on it, and a student clicking it would light nothing. The pontomedullary junction is a transverse line, the same rejection the pons and midbrain scenes both recorded. The gracile and cuneate tubercles are surface swellings raised from within by nuclei that have no mesh, so they have no witness to contact. Nothing here was placed by eye.",
+    "SIDES: NO PAIRED STRUCTURE APPEARS IN THIS SCENE, WHICH IS STATED RATHER THAN ASSUMED. Every mesh used is unpaired and midline — medulla FMA62004, pons FMA67943, cerebellum FMA67944, peduncle of midbrain FMA62394 (one entry covering both crura), fourth ventricle FMA78469, central canal FMA78497, cerebral aqueduct FMA78467, occipital bone FMA52735, atlas FMA12519. No left/right check applies. Note that the scene's clinical content is intensely lateralised — every syndrome in beat 6 has a side — while its geometry has none, so the beats state laterality in words and the student cannot read it off the screen.",
+    "THE PONS, MIDBRAIN, CEREBELLUM AND VENTRICLES ARE DELIBERATELY NOT IN covers[]. Each is its own CURRICULUM.json structure with its own scene. The fourth ventricle and the central canal are given `role: part` because the open/closed division taught in beat 3 is defined by which of the two lies behind the tissue, and the beat cannot be taught without both — but the ventricular system as a curriculum structure belongs to Ventricles under Ventricular System & CSF, already authored, and this scene does not claim it.",
+    "DRAWABILITY: all nine models are in meshes-lite/, so every beat renders. As with the pons, what is missing is granularity rather than delivery. Beats 4, 5 and 6 carry the segment's whole teaching value and light one solid block: two decussations, four cranial nerves, six nuclei and three arteries are named across them and none exists as geometry. Fetching more of this catalog cannot fix that — only a segmented brainstem could — and the honest summary is that this scene teaches level and front-to-back position well, and internal structure only as narration over a block that says so."
+  ]
+}

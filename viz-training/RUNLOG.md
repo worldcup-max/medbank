@@ -9790,3 +9790,131 @@ that matters more than the cursor fix. The corpus has spent two days in a state 
 the only symptom was silence, and silence is what a healthy hour looks like from outside. If a cursor ever
 hands the task work it is forbidden to do, that is a bug in the tooling, and the task's job is to say so
 in capitals that hour rather than to wait for someone to notice.
+
+---
+- 2026-09-02 — **AUTHORING RUN (not an audit run).** `sync-state.mjs` first, as required. Backlog sections
+  1 and 2 are both clear, so the backlog no longer outranks the cursor; but Neuroanatomy is not fully
+  authored (13 of 34 at the start of this run), so authoring still comes before the audit walk and
+  `next to audit` was deliberately NOT followed. Two structures authored from `next to author`:
+  **Brainstem / Pons** and **Brainstem / Medulla oblongata**. Embryology skipped, as instructed.
+
+  **`neuroanatomy__brainstem__pons`** — new. 9 structures, 6 views, 30 ops, `candidate`.
+  Curriculum requires `location` + `cross_section`; both present (1-2, 3-6). **Models: 9 referenced,
+  9 in `meshes-lite/` — draws complete.**
+
+  **`neuroanatomy__brainstem__medulla-oblongata`** — new. 9 structures, 6 views, 30 ops, `candidate`.
+  Curriculum requires `cross_section` + `mechanism`; both present (beat 3, beats 4-6), with beats 1-2
+  `location` as orientation. **Models: 9 referenced, 9 in `meshes-lite/` — draws complete.**
+
+  **Catalog searched with multiple spellings before any absence was written, per the backlog's first
+  failure mode.** Terms tried for these two scenes: pons/pontine/pontis/basilar part/basis/tegmentum/
+  trapezoid/brachium/pontocerebellar; medulla/medullary/myelencephalon/oblongata/pyramid/pyramidal/
+  olive/olivary/olivar/decussation/gracile/gracilis/cuneate/cuneatus/tubercle/lemniscus/arcuate/obex;
+  peduncle/restiform/brachium pontis/brachium conjunctivum/tonsil/floccul/vermis; trigeminal/abducens/
+  facial/vestibulocochlear/glossopharyngeal/vagus/accessory/hypoglossal/nerve/nucleus/ambiguus/
+  solitarius; basilar/vertebral/PICA/AICA/anterior spinal/circle of Willis/sinus; spinal cord/cord/
+  myel/funiculus/dorsal column/fasciculus/tract/clivus/foramen magnum/basiocciput/condyle/atlas.
+
+  **The search paid for itself three times, and the catch is worth naming because it is the exact
+  inverse of the failure the backlog describes.** Searching `gracil`, `pyramid` and `medullaris` returns
+  hits — FMA43883/43884 `gracilis`, FMA22346/22347 `pyramidalis`, FMA73413/73414 `stria medullaris of
+  thalamus`. None is brainstem: they are the thigh muscle, the abdominal muscle and a diencephalic
+  band. A run that trusted a substring match would have put a thigh muscle in a medulla scene, which is
+  the same class of error as writing "there is no X" after one failed search — the fix in both
+  directions is to read the catalog's full name back before believing the hit. Recorded in the medulla
+  scene's `gaps[]` so the next run meets it.
+
+  Verified absences, each after the searches above: the pons and the medulla are ONE undivided mesh
+  each (FMA67943, FMA62004); no cerebellar peduncle of any kind (the catalog's only `peduncle` is
+  FMA62394, the midbrain's); no cerebellar subdivision (FMA67944 is the whole organ — re-verified today
+  rather than quoted from the midbrain scene's note); no cranial nerve V-XII and no nucleus of any of
+  them (the catalog holds two nerve meshes, the optic nerves, and two nucleus meshes, the caudates);
+  no intracranial vessel at all; no spinal cord tissue.
+
+  **Hollow beats, for whoever fetches meshes next.** Both scenes render every beat, so the hollowness is
+  granularity and not delivery. Pons beat 4 names four cranial nerves, four nuclei and the facial
+  colliculus and lights only the fourth ventricle floor. Pons beat 6 and medulla beat 6 are both built
+  on arterial territories — basilar, vertebral, PICA — and can draw no vessel. Medulla beats 4 and 5
+  trace both decussations between whole segments because no tract exists as geometry. **A basilar and
+  vertebral arterial tree is the highest-value fetch for this course; a segmented cerebellum is second.
+  Neither would fix pons beat 4 — only a segmented brainstem could, and nothing in this catalog offers
+  one.** Every beat that names something it cannot draw says so inside the beat, and each such
+  structure appears in both `terms[]` and `gaps[]`.
+
+  Anchors: NONE authored in either scene, and five definitions were rejected BEFORE measuring rather
+  than after — clivus (broad surface, no mesh in contact to witness it), foramen magnum (a closed curve
+  bounding a hole; the tool emits points, which would land on bone beside the hole), obex (both
+  candidate witnesses are cavity meshes, so the point would sit inside the medulla rather than on its
+  surface), pontomedullary junction (a transverse line — the same rejection the midbrain scene recorded
+  for the pontomesencephalic junction), cerebellopontine angle (a space bounded by three structures,
+  the axillary-apex shape the tool refuses by design). The clivus and the foramen magnum are instead
+  carried as `approx {shown_as, detail}` on the occipital bone, so the player shows the whole bone in
+  amber and names what is really meant. Nothing was placed by eye.
+
+  Sides: neither scene contains a single paired mesh — every structure in both is unpaired midline.
+  That is stated explicitly in both `gaps[]` rather than left as an absence, and the medulla scene adds
+  the warning that its beat 6 clinical content is intensely lateralised while its geometry is not, so
+  laterality there must be read in words.
+
+  Consistency pass across the topic, since a student reads the three Brainstem scenes consecutively:
+  the corticospinal funnel is now told identically in all three (crus → scattered through basilar pons
+  → regathered as pyramid → decussation at the bottom of the medulla), each scene naming only its own
+  stage and handing on; the fourth ventricle's floor is claimed as pontine in its upper half and
+  medullary in its lower half in both scenes that use it, with each saying the cavity is shared; and
+  the cerebellar-peduncle and cranial-nerve absences are stated in the same terms in all three rather
+  than being rediscovered. `covers[]` in both new scenes holds exactly one entry, spelled as
+  `CURRICULUM.json` spells it, and every neighbouring segment is `context` and deliberately unclaimed.
+
+  Validator: `119/119 scenes valid`, both new scenes passing all eight stages, no scene `blocked`.
+  Index: `119 scenes (54 ready) · 13255 term mappings`. `sync-state.mjs` re-run last: `77 of 77 scenes
+  have every mesh in meshes-lite/ (491 files)`, neuroanatomy now 15 scenes, `next to author` advanced to
+  **Brainstem / Reticular formation**, `next to audit` unchanged at
+  `neuroanatomy__basal-ganglia-diencephalon__basal-ganglia`. Nothing was signed with `audited_at` this
+  run — an authoring run has nothing to sign, and 0 of 15 neuroanatomy scenes are audited by design
+  until the course is fully written.
+
+  Note for the run that reaches the Reticular formation: `reticul` returns NOTHING in the catalog, and
+  the reticular formation is a diffuse network rather than a delimited body even in principle. Search
+  it again rather than trusting this line — but expect to route it to `diagram` and record why.
+
+---
+
+## 2026-09-02 — human session · interleaving the audit so scenes reach students
+
+The 15:07 run was the first under rev 4 and it was clean: two Brainstem scenes, 18 model references with
+zero fabrications, zero name mismatches and zero missing meshes, `covers[]` spelled as the curriculum
+spells it, no anchor placed by eye. Its best catch was the inverse of the failure we have been chasing —
+`gracil`, `pyramid` and `medullaris` all return catalog hits, and none is brainstem: FMA43883 is the thigh
+muscle, FMA22346 the abdominal one, FMA73413 a diencephalic band. A run trusting substring matches puts a
+thigh muscle in a medulla scene. Verified all three independently before believing the write-up.
+
+### The finding that made this change
+
+**Every one of Neuroanatomy's 15 scenes sat at `candidate`, and all 491 of their meshes were on disk.**
+In gross the pattern is exact — 54 `ready`, all audited; 10 `candidate`, none audited. So `ready` arrives
+only with `audited_at`, and rev 4 had queued the entire audit behind 21 unwritten structures. That is
+roughly 11 authoring runs, then 17 audit runs, before a single brainstem scene reached a student.
+
+Nobody chose that. It fell out of two reasonable rules meeting: *finish authoring before auditing*, and
+*ready requires a signature*.
+
+### Fixed, without removing a check
+
+`sync-state.mjs` now orders a course's audit queue by `provenance.authored_at`, **newest first, while that
+course still has unauthored structures** — falling back to file order once it is finished, because at that
+point nothing is fresher than anything else and reading order is worth more than recency. The prompt makes
+one run author 2 and audit 2, audits first when a run is tight, and the two it audits are the two the
+previous run wrote.
+
+This is not a run marking its own homework. That failure is already on record here — a run correcting a
+scene and re-reading only what it had just written. A different run with its own context reading an
+hour-old scene is the second pair of eyes the audit has never actually had, and it is cheaper than a cold
+read of an unrelated topic three weeks later.
+
+The rule that carries the risk is the anchoring one, so it is stated plainly: form the verdict from
+`available-meshes.json` and `CURRICULUM.json` alone, and read the previous run's RUNLOG block only
+afterwards. **If the two accounts disagree, the disagreement is the finding.** A confident RUNLOG block is
+not evidence — it is a claim by something with exactly the same failure modes as the reader.
+
+Nothing in the eight-stage validator, the delivery gate, the catalog discipline or the signing rule
+changed. Same checks, run an hour after authoring instead of three weeks after.

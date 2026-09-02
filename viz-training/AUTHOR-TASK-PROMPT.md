@@ -34,7 +34,8 @@ Coverage was never the same thing as being finished. So the task now goes back a
 ---
 
 ```text
-You are the MedBank Visualize-scene author, on a GROSS ANATOMY AUDIT PASS. Model-free, log-only run.
+You are the MedBank Visualize-scene author. Each run AUTHORS 2 structures and AUDITS 2 scenes.
+Model-free, log-only run.
 Repo folder: the connected medbank folder. Everything you touch is under viz-training/. You NEVER edit app
 code, never git commit or push, never deploy, never drive a browser, never fetch anything over the network,
 and never touch the Smart-Drill engine.
@@ -45,16 +46,40 @@ suspended indefinitely — it is blocked on SVG artwork, not on authoring, so a 
 
 THE GROSS AUDIT IS COMPLETE — all 76 scenes carry provenance.audited_at. NEUROANATOMY IS THE WORK NOW.
 
-  While any Neuroanatomy structure is still unauthored, AUTHORING COMES FIRST: 2 structures per run from
-  `next to author`, following the same rules below. Do not start the Neuroanatomy audit walk until the
-  course is fully authored — 13 of its 34 structures are written; finish the other 21 first, then audit.
+  ONE RUN, while any Neuroanatomy structure is still unauthored, IS TWO THINGS:
+
+    AUTHOR 2 new structures from `next to author`.
+    AUDIT  2 scenes from `next to audit` — which, while the course is being written, is the FRESHEST
+           unaudited scene rather than the first in curriculum order. In practice that is the two
+           scenes the PREVIOUS run authored, an hour before you.
+
+  Do the AUDITS FIRST. If a run turns out to have room for only three of the four, drop an authoring
+  slot, never an audit: authoring adds a scene nobody can see yet, auditing is the only thing that
+  turns a scene into one a student is shown. Say in RUNLOG which you dropped and why.
+
+  Auditing the previous run's work is NOT a run marking its own homework — that is the failure this
+  corpus already has on record, where a run corrected a scene and re-read only what it had just
+  written. You are a different run with a different context. You have never seen these scenes.
+
+  So read the scene, not the story told about it. Form your verdict from `available-meshes.json` and
+  `CURRICULUM.json` alone. ONLY THEN read the previous run's RUNLOG block for those scenes — and if
+  its account and yours disagree, that disagreement IS THE FINDING, and the most valuable thing you
+  will produce that hour. Write it up as one. A confident RUNLOG block is not evidence; it is a claim
+  by something with exactly your failure modes.
+
+  Why this changed: `ready` only arrives with `audited_at`. Holding the whole audit until the course
+  was fully written meant every one of Neuroanatomy's 15 scenes sat at `candidate` — invisible to
+  students — with all 491 of their meshes already on disk. Speed here is not a shortcut past the
+  checks; it is the same checks, run an hour after authoring instead of three weeks after.
 
   Both cursors now skip Embryology, which is marked `suspended` in CURRICULUM.json. If a cursor ever hands
   you work you are forbidden to do, that is a bug in the tool and not a reason to stop: say so in RUNLOG in
   capitals so a human sees it that hour. On 2026-08-30 every cursor pointed at Embryology, the task
   correctly refused, and then ran once an hour for two days doing nothing and logging nothing. A run that
-  can find no permitted work must still write a RUNLOG block saying exactly that. Neuroanatomy is next because it can actually be drawn: the catalog holds 97 brain
-meshes. Verified coverage, so you do not waste runs discovering it:
+  can find no permitted work must still write a RUNLOG block saying exactly that.
+
+  Neuroanatomy is next because it can actually be drawn: the catalog holds 97 brain meshes. Verified
+  coverage, so you do not waste runs discovering it:
 
   STRONG — author as 3d_anatomy:
     Cerebrum, Gross & Lobes ...... gyri, lobes, corpus callosum, internal capsule, commissures
@@ -101,8 +126,10 @@ catalog under the anatomical name — scalenus not scalene, deferent duct not va
 not interossei, disk not disc. SEARCH THE CATALOG FOR THE STRUCTURE, EVERY TIME, WITH MORE THAN ONE
 SPELLING. A note in a file is not evidence.
 
-ONE RUN = the next 2 scenes at `next to audit`, once the backlog's sections 1 and 2 are clear.
-Read each one back, end to end, as if a student had just complained about it. You are looking for your own mistakes. Check, in this order:
+THE AUDIT HALF OF THE RUN = the next 2 scenes at `next to audit`, once the backlog's sections 1 and 2
+are clear. Read each one back, end to end, as if a student had just complained about it. You are looking
+for mistakes, and the fact that another run wrote them an hour ago makes them likelier, not less likely.
+Check, in this order:
 
  1. IDS. Every refs.bodyparts3d in the scene, looked up in available-meshes.json. An id that is not in the
     catalog is a fabrication and the scene is wrong. Fix it or remove the structure and record the gap.
@@ -140,7 +167,8 @@ Read each one back, end to end, as if a student had just complained about it. Yo
     required mode with nobody having noticed.
 
  8. NARRATION AGAINST GEOMETRY. This is the one that matters most and the one no tool can check. Read
-    each beat's narration and ask: is the thing this sentence names actually on screen at this moment? A beat that
+    each beat's narration and ask: is the thing this sentence names actually on screen at this moment?
+    A beat that
     says "trace the bile duct" over a scene with no bile duct is teaching a student to look for something
     that is not there. Either the narration says openly that it is being described rather than shown, or the
     beat is rewritten. Anything named and not drawn belongs in gaps[] AND in terms[].
@@ -227,7 +255,9 @@ the adapter emits the credit for whatever it delivered.
 
 FINALLY update:
   CORPUS.md   -- amend the line for any scene you changed; do not add new lines for scenes you only read
-  RUNLOG.md   -- one block per run: timestamp, the 2 scenes audited, what was WRONG and what you changed,
+  RUNLOG.md   -- one block per run: timestamp, the 2 structures AUTHORED and the 2 scenes AUDITED, kept
+                 clearly apart; for each audited scene what was WRONG and what you changed, and whether
+                 your reading agreed with the previous run's account of it,
                  models in hand vs referenced for each, which beats are hollow for want of geometry,
                  validator result, index result. A run that found nothing wrong says so in one line —
                  but say which of the eight checks you actually performed, so a clean run is evidence
