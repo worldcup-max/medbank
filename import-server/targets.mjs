@@ -121,12 +121,41 @@ export const RECON = { T_match:0.80, T_new:0.45, tieGap:0.12, nearMiss:0.30 };  
 /* normalise a topic for comparison (so "Bronchiolitis" == "bronchiolitis ") */
 function nkey(s){ return String(s||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim(); }
 
+/* 01.5c — TOPIC key. `nkey` is still the general normaliser (skills, excludes haystack); this one is used
+   ONLY for topic comparison in candidateFilter/retrieveCandidates.
+   Problem it fixes: "Systemic inflammatory response syndrome (SIRS)" and "Systemic Inflammatory Response
+   Syndrome" produced two identities, because nkey keeps the token "sirs". T1/T2 retrieval then never fired
+   and the resolver was forced to mint a duplicate target.
+   DELIBERATELY NARROW. A parenthetical is dropped ONLY when its contents are a plausible ACRONYM of the
+   words before it: letters only, 2-8 chars, and matching the leading initials of the preceding words
+   (optionally skipping short link words like "of"/"and"). So:
+     "Systemic inflammatory response syndrome (SIRS)" → drops "(SIRS)"      ✔ same topic
+     "Tetralogy of Fallot (TOF)"                      → drops "(TOF)"       ✔ same topic
+     "Diabetes mellitus (type 1)"                     → KEPT                ✔ NOT the same topic as (type 2)
+     "Anaemia (severe)"                               → KEPT               ✔ a qualifier, not an acronym
+   Anything that is not an initials-match is left alone, so this can never merge two topics that merely
+   share a parenthetical. */
+const TKEY_STOP = { of:1, and:1, the:1, in:1, to:1, for:1, with:1, a:1, an:1 };
+export function stripAcronym(raw){
+  const s = String(raw||"");
+  return s.replace(/\s*\(([A-Za-z]{2,8})\)\s*$/, function(m, acr){
+    const before = s.slice(0, s.length - m.length);
+    const words = before.toLowerCase().replace(/[^a-z ]+/g," ").split(/\s+/).filter(Boolean);
+    if(!words.length) return m;                                  // nothing to form initials from → keep
+    const all  = words.map(w=>w[0]).join("");
+    const kept = words.filter(w=>!TKEY_STOP[w]).map(w=>w[0]).join("");
+    const a = acr.toLowerCase();
+    return (a === all || a === kept) ? "" : m;                   // initials match → drop; otherwise keep
+  });
+}
+function tkey(s){ return nkey(stripAcronym(s)); }
+
 /* DETERMINISTIC pre-filter: a candidate target is only eligible if it shares the topic AND skill.
    A different skill or topic is never a match, no matter how similar the wording. */
 export function candidateFilter(proposed, targets){
-  const pt=nkey(proposed.topic), ps=nkey(proposed.skill);
+  const pt=tkey(proposed.topic), ps=nkey(proposed.skill);
   return (targets||[]).filter(t=> t && t.status!=="deprecated" && t.status!=="merged"
-    && nkey(t.topic)===pt
+    && tkey(t.topic)===pt
     && (!ps || !nkey(t.skill) || nkey(t.skill)===ps) );
 }
 
@@ -144,11 +173,11 @@ function jaccard(a,b){ let i=0; a.forEach(w=>{ if(b.has(w)) i++; }); const u=a.s
 export function retrieveCandidates(proposed, targets, cfg){
   const R = Object.assign({}, RETRIEVAL, cfg||{});
   const active=(targets||[]).filter(t=> t && t.status!=="deprecated" && t.status!=="merged");
-  const pt=nkey(proposed.topic), ps=nkey(proposed.skill), pTok=stmtTokens(proposed.knowledge_statement);
+  const pt=tkey(proposed.topic), ps=nkey(proposed.skill), pTok=stmtTokens(proposed.knowledge_statement);
   const seen={}, ranked=[];
   const add=(t,tier,score)=>{ if(seen[t.target_id]) return; seen[t.target_id]=1; ranked.push(Object.assign({}, t, { _tier:tier, _retScore:(score==null?null:+score.toFixed(2)) })); };
-  active.forEach(t=>{ if(nkey(t.topic)===pt && (!ps || !nkey(t.skill) || nkey(t.skill)===ps)) add(t,"T1",null); });   // T1
-  active.forEach(t=>{ if(nkey(t.topic)===pt) add(t,"T2",null); });                                                    // T2
+  active.forEach(t=>{ if(tkey(t.topic)===pt && (!ps || !nkey(t.skill) || nkey(t.skill)===ps)) add(t,"T1",null); });   // T1
+  active.forEach(t=>{ if(tkey(t.topic)===pt) add(t,"T2",null); });                                                    // T2
   const t3=active.map(t=>({t, ov:jaccard(pTok, stmtTokens(t.canonical_statement))}))
     .filter(x=>x.ov>=R.floor).sort((a,b)=>b.ov-a.ov);                                                                 // T3 (overlap desc)
   t3.forEach(x=> add(x.t,"T3",x.ov));
