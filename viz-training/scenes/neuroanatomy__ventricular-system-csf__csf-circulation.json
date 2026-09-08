@@ -316,7 +316,7 @@
         "colloid cyst",
         "posterior fossa tumour"
       ],
-      "narration": "A block anywhere from a foramen of Monro to the three apertures. The rule is mechanical: everything upstream of the block dilates, everything downstream is normal, and the last normal cavity names the level. A lumbar puncture here is dangerous, because the pressure below the block is not the pressure above it and dropping it invites the brain to move."
+      "narration": "A block anywhere from a foramen of Monro to the three apertures. The rule is mechanical: everything upstream of the block dilates, everything downstream is normal, and the last normal cavity names the level. The apertures are the exception the rule contains: block those and there is no cavity left downstream to stay normal, so every cavity dilates and the pattern looks communicating while the cause is still an obstruction. A lumbar puncture in any of these is dangerous, because the pressure below the block is not the pressure above it and dropping it invites the brain to move."
     },
     {
       "key": "communicating",
@@ -520,7 +520,11 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "audited_at": "2026-09-08",
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "task"
   },
   "gaps": [
     "ROUTED TO `diagram`, ITS FIRST PREFERRED MODE, AND THE ROUTING WAS CHECKED RATHER THAN ASSUMED. The absorption half of this circuit has no geometry whatever in the catalog: searched mening, dura, arachnoid, pia, subarach, cistern, cisterna, granulation, villus, sinus, sagittal, confluen, lacuna, aperture, Magendie and Luschka across all 934 meshes. The only sinus is the coronary sinus and the only foramen is the interventricular one. A 3d_anatomy scene could draw the ventricular half and would have to stop at the fourth ventricle — which is exactly what the Ventricles scene already does in its beat 8. So the second half of the journey is the whole reason this structure exists as a separate entry, and it is unauthorable in 3D today. `deferred_modes` keeps 3d_anatomy on the record for the day the meninges arrive.",
@@ -528,6 +532,7 @@
     "OVERLAP WITH THE VENTRICLES SCENE IS DELIBERATE AND BOUNDED. The four cavities and two channels are taught properly, wall by wall, in neuroanatomy__ventricular-system-csf__ventricles, which covers 'Ventricles'. Here they appear only as stations on a route, and this scene covers 'CSF circulation' alone. The two agree on the numbers — about 500 mL produced daily into a system holding about 150 mL, the aqueduct as the narrowest point, and the same three-up-one-normal reading of an aqueduct block — and were read against each other for that.",
     "CHOROID PLEXUS is a single station here. It is taught as a secretory organ, with its layers and its blood-CSF barrier, in neuroanatomy__ventricular-system-csf__choroid-plexus; that scene's trace deliberately stops at the fourth ventricle and hands the outflow to this one.",
     "NO ARTERY ANYWHERE IN THE HEAD. The 'vasculature' view the curriculum asks for is authored here as the VENOUS end of the circuit — granulations into the superior sagittal sinus — which is the vasculature that matters to CSF. Arterial supply of the plexus (anterior and posterior choroidal arteries) is named in match.terms for retrieval only: searched choroidal, cerebral artery, basilar, circle of Willis, communicating — none exists.",
-    "The glymphatic and meningeal-lymphatic routes are stated as a real but secondary exit rather than as settled examinable fact, deliberately. If the corpus later takes a position on them, this card and beat 5 are the two places to change and they must be changed together."
+    "The glymphatic and meningeal-lymphatic routes are stated as a real but secondary exit rather than as settled examinable fact, deliberately. If the corpus later takes a position on them, this card and beat 5 are the two places to change and they must be changed together.",
+    "AUDITED 2026-09-08. Catalog absence claims in this file were re-tested rather than trusted: all 934 entries searched for mater, menin, dura, arachnoid, pia, lepto, pachy, falx, tentor, sinus, sagittal, granulat, villus, cistern, subarach, foramen, apertur, monro, choroid, ventric, aqueduct, basilar, communicating, carotid. Confirmed: the only sinus is FMA4706 coronary sinus, the only foramen is FMA75351 interventricular foramen, no meningeal or intracranial vascular mesh of any kind exists. The routing to `diagram` stands. CORRECTED in the same pass: the `obstructive` card stated a rule ('the last normal cavity names the level') that its own stated range falsifies at the apertures — beat 3 already carried the exception and the card did not."
   ]
 }

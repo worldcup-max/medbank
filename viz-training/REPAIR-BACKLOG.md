@@ -102,7 +102,7 @@ it is the only thing standing between the corpus and a silently incomplete scene
   deltoid). Title, narration and the sternohyoid structure card all now say six, and the narration states the
   4+2 split explicitly so the count is reconstructable rather than memorised. The ligaments are named in the
   same breath as explicitly *not* in the count, which is where the old "four" probably came from.
-- **`arm__humerus`** promises "the four places it commonly breaks" in its learning goal and beat 7
+- DONE (verified 2026-09-08) **`arm__humerus`** promises "the four places it commonly breaks" in its learning goal and beat 7
   delivers three; `arm__median-ulnar-radial-nerves` `gaps[1]` then defers to a fourth that was never
   written. Either add the supracondylar/median-nerve pair to beat 7 or drop "four" from both.
 - DONE (2026-08-29 audit) **kidney vs ureters** give different segmental levels for the same referred pain — T10–L1 in one,
@@ -129,7 +129,7 @@ it is the only thing standing between the corpus and a silently incomplete scene
   proxy, contact between the radius and supinator, converges at 0.21 mm but on one witness and lands at
   w=0.81, below the radial tuberosity at w=0.83 — upper shaft, not neck. Recorded in the scene's `gaps[]`
   with the measurement, so no later run re-derives it and believes it.
-- **NEW (2026-08-29 audit) — the adductor tubercle is measurable and two signed scenes say it is not.**
+- DONE (applied 2026-08-30; verified 2026-09-08 — the anchor and the corrected gaps[] note are present in `femur`, `hamstrings` and `adductor-canal`) **NEW (2026-08-29 audit) — the adductor tubercle is measurable and two signed scenes say it is not.**
   `gross__thigh__adductor-canal` derived it at audit: `--parent FMA24474 --contact FMA22459`, gap 0.49 mm,
   stable under `--slab z:0,0.15` and `z:0,0.25`, and 25 mm above the medial epicondyle — exactly the
   relation `gross__thigh__femur` states in words. But `gross__thigh__femur` and `gross__thigh__hamstrings`
@@ -138,8 +138,8 @@ it is the only thing standing between the corpus and a silently incomplete scene
   medial epicondyle, which fell out of the same cross-check for free. This is failure mode 1 in its
   landmark form: a definition was thought impossible, was never attempted, and the note became evidence.
 
-- **`back-vertebral-column__typical-vertebra`** — `CORPUS.md` records 16 landmarks, the file has 13.
-- **Eight views across the four Back & Vertebral Column scenes carry no `beat` number**, and
+- DONE (verified 2026-09-08 — file has 13 anchors and `CORPUS.md` line 11 records 13) **`back-vertebral-column__typical-vertebra`** — `CORPUS.md` records 16 landmarks, the file has 13.
+- DONE (verified 2026-09-08 — all five Back scenes now number their beats 1..n with no gaps and no repeats; the validator beat-ordinal check is still NOT written and remains open) **Eight views across the four Back & Vertebral Column scenes carry no `beat` number**, and
   `typical-vertebra` numbers two different beats "3". Every run reported the validator clean, because
   nothing checks beat ordinals. Renumber, and add the check.
 
@@ -409,3 +409,32 @@ anchors to students today and says so in its own `gaps[]`.
 - **NEW (2026-09-08 audit) — HIGHLIGHT_STRUCTURE accepts a GROUP name and nothing objects.**
   `cerebral-hemispheres-lobes` beat 7 highlighted `"Insula"`, the group, not `ins_l`/`ins_r`. The op pins
   a label, so the label was indeterminate. Fixed there; the corpus has never been swept for the pattern.
+
+---
+
+## 2026-09-08 — verification pass, no cursor work available
+
+`sync-state.mjs` reports `next to author: nothing — the curriculum is covered`, and all 34 Neuroanatomy
+scenes carry `provenance.audited_at`. There was no authoring slot and no unaudited scene, so this run
+spent itself on section 3 and on the stale-claim sweep the task mandates.
+
+**Four section-3 items were already fixed by later runs and had never been ticked.** That is the same
+failure this file exists to name, one level up: the backlog itself became a stale note, and a run
+following it would have re-done finished work. Ticked above with the evidence.
+
+**Stale-delivery-claim sweep, corpus-wide.** Every `gaps[]` entry in all 142 scenes was matched for an
+absence assertion and every FMA id it names was stat'd against `meshes-lite/` (494 files). 69 entries
+name an id that is on disk; each was read, and in every case the on-disk id is the *stand-in*, not the
+thing claimed absent. **No new stale delivery claim was found.** The six scenes held at `candidate`
+whose models are 100% on disk are held for a real reason, and all three of the load-bearing absence
+claims were re-searched in `available-meshes.json` under multiple spellings and confirmed:
+
+| claim | spellings searched | result |
+|---|---|---|
+| no caecum or colon (`large-intestine`) | caecum, cecum, colon, sigmoid, appendix, rectum | TRUE — catalog holds only `appendix` FMA14542 and `rectum` FMA14544 |
+| no pancreas (`pancreas`) | pancreas, pancrea* | TRUE — only `pancreatic duct` FMA10419 |
+| no biliary tree (`biliary-tree-gallbladder`) | bile, biliary, choledoch, cystic duct, hepatic duct | TRUE — nothing |
+| no spinal cord (`spinal-cord-in-vertebral-canal`) | spinal cord, medulla spinalis, cord | TRUE — only `central canal of spinal cord` FMA78497 |
+
+These four holds are correct and should not be re-litigated; they are mesh-ingestion work, not authoring
+work. What is still open in section 3 is listed above it.

@@ -3774,3 +3774,37 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   `ins_l` + `ins_r` so the pinned label is determinate.
 - Same false "none of the 38 brain models has been fetched" gap note corrected; all 38 on disk.
   Status `candidate` → `ready`.
+
+### `neuroanatomy__ventricular-system-csf__csf-circulation` (amended: audited & corrected)
+- Audited 2026-09-08. `provenance.audited_at` / `corrected_at` set; `status` stays `planned` (svg mode,
+  no artwork — correctly not promoted).
+- Corrected: the `obstructive` structure card taught "the last normal cavity names the level" over a range
+  that explicitly includes the three apertures, where no cavity downstream remains to be normal. Beat 3 had
+  the exception; the card did not. The card now carries it.
+- Re-tested every catalog absence claim in `gaps[]` against all 934 entries. All hold: one sinus (FMA4706
+  coronary), one foramen (FMA75351 interventricular), no meningeal or intracranial vascular mesh at all.
+
+### `neuroanatomy__ventricular-system-csf__meninges` (amended: audited)
+- Audited 2026-09-08, no content change. `provenance.audited_at` set; `status` stays `planned` — awaiting
+  the two SVG drawings named in `gaps[2]`, which still matches the status field.
+- gaps[0]'s absence claim re-measured across all 934 entries: exactly one hit, `FMA4706 coronary sinus`.
+
+### `neuroanatomy__ventricular-system-csf__ventricles` (amended: corrected)
+- Corrected 2026-09-08 by the CSF-circulation audit, not by its own. Beat 9 read a dilated fourth ventricle
+  as communicating hydrocephalus outright; an aperture block is obstructive and is the one obstructive
+  pattern that dilates every cavity, as the CSF-circulation scene already taught two files away. Beat 9 now
+  states both branches and says why the distinction decides whether an LP is safe.
+
+### 2026-09-08 (re-audit pass) — `neuroanatomy__brainstem__pons`
+- CORRECTED. Beat 4's facial-colliculus sentence gave "the upper half" with no reference frame, two
+  sentences after placing the abducens nucleus "down at its lower border". Both true (upper half of the
+  RHOMBOID FOSSA, lower part of the PONS) and mutually contradictory as written. Beat 4 rewritten to name
+  the frame explicitly and to state that the two descriptions are the same place seen from two ends.
+  `corrected_at` / `corrected_by` added; `audited_at` re-stamped 2026-09-08. Still `ready`, 9/9 models on disk.
+
+### 2026-09-08 (re-audit pass) — `neuroanatomy__brainstem__medulla-oblongata`
+- CORRECTED (gaps only, no teaching change). The "no cerebellar peduncle" entry listed `brachium` among its
+  search stems and reported one total hit; bare `brachium` in fact returns four — the colliculus brachia
+  FMA73461/73462/73463/73464, which are midbrain and not cerebellar. Conclusion unchanged, note corrected so
+  a later re-run does not read four-against-one as a stale note. `corrected_at` / `corrected_by` added;
+  `audited_at` re-stamped 2026-09-08. Still `ready`, 9/9 models on disk.

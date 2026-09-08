@@ -15,7 +15,9 @@
   "status": "planned",
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "audited_at": "2026-09-08",
+    "audited_by": "task"
   },
   "provider": {
     "primary": "svg",
@@ -563,6 +565,7 @@
     "Status is `planned`, not `ready`. The scene is fully authored — twenty regions, six beats, ops and narration — but no artwork exists for the SVG engine. Promote it once two drawings exist: a coronal section through the vertex showing bone, both dural layers, arachnoid, pia, the superior sagittal sinus in the falx with granulations pushing into it, and a bridging vein crossing the subdural plane; plus a sagittal view for the folds. The three haematoma shapes of beat 6 need a third small drawing, or three insets on the coronal.",
     "OVERLAP WITH `neuroanatomy__ventricular-system-csf__csf-circulation` IS DELIBERATE AND BOUNDED. That scene owns the fluid: production, the route through the cavities, absorption at the granulations, and hydrocephalus. This scene owns the membranes: the layers, the three spaces, the four folds, and what bleeds where. The granulations appear in both because they are the point the two subjects touch, and beat 4 says explicitly that the absorption teaching lives in the other scene rather than restating it. The one fact stated in both — that fluid returns through the granulations into the superior sagittal sinus — is stated the same way in both.",
     "NO MIDDLE MENINGEAL ARTERY, no bridging vein and no berry aneurysm in the catalog either (searched meningeal, bridging, emissary, aneurysm, cerebral artery, communicating, Willis). Beats 4 and 6 name all three and they are drawn regions of the diagram, not models. This is the same absence recorded in the neuroanatomy blood-supply gap: the catalog holds no intracranial vessel of any kind.",
-    "NO ANCHORS WERE AUTHORED and none could be. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`, and this scene has no parent mesh at all. The pterion is named in beat 6 as the site of the extradural bleed; it is a suture junction on a skull mesh the catalog does not carry, so it is described and not marked."
+    "NO ANCHORS WERE AUTHORED and none could be. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`, and this scene has no parent mesh at all. The pterion is named in beat 6 as the site of the extradural bleed; it is a suture junction on a skull mesh the catalog does not carry, so it is described and not marked.",
+    "AUDITED 2026-09-08, unchanged. The absence claim in gaps[0] was re-measured, not trusted: all 934 catalog entries searched for mater, menin, meninx, dura, arachnoid, pia, lepto, pachy, falx, tentor, sinus, sagittal, granulat, villus, cistern, subarach, filum, denticulate, thecal, sella, diaphragma, pterion, emissary, aneurysm, bridging. Total hits: one, FMA4706 coronary sinus, in the heart. The claim holds exactly as written. Curriculum views cross_section and associated_organs are both present; every op target resolves to a key or group in this file; the gaps[2] statement that status is `planned` still matches the status field."
   ]
 }

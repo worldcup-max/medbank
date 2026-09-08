@@ -16,8 +16,10 @@
   "provenance": {
     "author": "task",
     "authored_at": "2026-09-02",
-    "audited_at": "2026-09-02",
-    "audited_by": "task"
+    "audited_at": "2026-09-08",
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "task"
   },
   "provider": {
     "primary": "bodyparts3d",
@@ -282,7 +284,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "pons",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -324,7 +326,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "v4",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -357,7 +359,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "pons",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -388,7 +390,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "v4",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "COMPARE_STRUCTURES",
@@ -399,7 +401,7 @@
           "layout": "row"
         }
       ],
-      "narration": "The pons carries the nuclei of cranial nerves five, six, seven and eight, and the floor of the fourth ventricle in front of you is the grid they are arranged on. Two rules place all of them. First, columns: motor nuclei medial to the midline sulcus, sensory nuclei lateral to it — so abducens and facial motor lie medial, and the trigeminal sensory and vestibular nuclei lie lateral. Second, levels: trigeminal in the middle of the pons, and abducens, facial and vestibulocochlear down at its lower border, which is exactly where those three nerves are seen to leave at the pontomedullary junction. The one feature you could point to on this floor is the facial colliculus, the small elevation near the midline in the upper half — and it is a trap worth learning as a trap. The bump is the abducens nucleus. What raises it is the motor fibres of the facial nerve looping backwards over that nucleus before turning forwards to leave. A lesion of a few millimetres there therefore takes the sixth nerve and the seventh together, a combination that looks like two problems and is one. None of these nuclei, and no cranial nerve, has a mesh in this catalog — this beat names them on a floor that is drawn and lights nothing but the ventricle."
+      "narration": "The pons carries the nuclei of cranial nerves five, six, seven and eight, and the floor of the fourth ventricle in front of you is the grid they are arranged on. Two rules place all of them. First, columns: motor nuclei medial to the midline sulcus, sensory nuclei lateral to it — so abducens and facial motor lie medial, and the trigeminal sensory and vestibular nuclei lie lateral. Second, levels: trigeminal in the middle of the pons, and abducens, facial and vestibulocochlear down at its lower border, which is exactly where those three nerves are seen to leave at the pontomedullary junction. The one feature you could point to on this floor is the facial colliculus, the small elevation beside the midline in the UPPER half of the diamond — upper half of the FLOOR, which is the pontine half, and within that half it sits low, just above the striae medullares. Say the frame out loud every time, because the two halves of this sentence look like a contradiction and are not: the abducens nucleus is in the upper half of the rhomboid fossa and in the LOWER part of the pons, which is the same place described from two ends, and it is why the sixth nerve leaves at the pontomedullary junction — and it is a trap worth learning as a trap. The bump is the abducens nucleus. What raises it is the motor fibres of the facial nerve looping backwards over that nucleus before turning forwards to leave. A lesion of a few millimetres there therefore takes the sixth nerve and the seventh together, a combination that looks like two problems and is one. None of these nuclei, and no cranial nerve, has a mesh in this catalog — this beat names them on a floor that is drawn and lights nothing but the ventricle."
     },
     {
       "mode": "cross_section",
@@ -417,7 +419,7 @@
         {
           "op": "CROSS_SECTION",
           "axis": "x",
-          "offset": 0.0,
+          "offset": 0,
           "animate": true
         },
         {
@@ -455,7 +457,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "pons",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_RELATIONSHIP",

@@ -12272,3 +12272,356 @@ have read its own run rule as half-failed every hour and reported it as a proble
 
 What remains is audit and repair: 2 neuroanatomy scenes unsigned, 22 gross structures still held at
 `candidate` or `planned`. `142/142 valid`, `81 of 81 drawable`, 71 ready.
+
+---
+
+## 2026-09-08 — audit-only run (0 authored, 2 audited, 1 collateral correction)
+
+**AUTHORED: nothing, and this is not a dropped slot.** `sync-state.mjs` reports `next to author: nothing —
+the curriculum is covered`. Every non-suspended structure has a scene; Embryology and Histology are both
+`suspended` and both cursors skip them. The task file's standing instruction to author 2 has no work left
+to point at in Neuroanatomy. Backlog sections 1 and 2 are both marked CLEAR, so this run fell through to
+the audit walk, as the file says it should.
+
+**AUDITED: the last two unsigned scenes in the corpus.** Both are `mode: "diagram"`, `provider: "svg"`,
+zero model ids, so checks 1–3 (ids, names, sides) are vacuous by construction and are recorded as such
+rather than as passes. Checks actually performed on both: 4 ops/targets, 5 fix-the-fact, 6 scene against
+itself and against the other three scenes in the topic, 7 curriculum views, 8 narration against geometry,
+9 covers, 10 drawability, 11 status, 12 landmarks, 13 signature, 14 stale-note re-test.
+
+### `neuroanatomy__ventricular-system-csf__csf-circulation` — SIGNED, one correction
+
+- **Ops (4):** all ten-vocabulary; every target resolves to a key or a group; `concept:csf` is the declared
+  abstraction and matches the validator's `CONCEPT` pattern. Beat 1's `path[]` has 12 entries and the
+  narration says "twelve steps" — counted, not assumed.
+- **Views (7):** curriculum asks `mechanism` + `vasculature`. Beats 1–4 mechanism, beats 5–6 vasculature. Met.
+- **Covers (9):** `["CSF circulation"]`, character-exact against CURRICULUM.json.
+- **WRONG, and corrected:** the `obstructive` structure card gave its rule as "a block anywhere from a
+  foramen of Monro to the three apertures … the last normal cavity names the level." Its own stated range
+  falsifies it: block the three apertures and there is no cavity downstream left to be normal. Beat 3 states
+  the exception correctly ("still obstructive, and the one obstructive pattern that dilates every cavity");
+  the card, two screens earlier, did not. Classic failure mode 2 — the corpus already contained the right
+  answer, in the same file. Card rewritten to carry the exception.
+- **Stale-note re-test (14):** every absence claim in `gaps[]` re-measured against all 934 catalog entries,
+  not quoted. Searched mater, menin, meninx, dura, arachnoid, pia, lepto, pachy, falx, tentor, sinus,
+  sagittal, granulat, villus, cistern, subarach, foramen, apertur, monro, choroid, ventric, aqueduct,
+  basilar, communicating, carotid, cerebral, artery, vein. Confirmed: **one** sinus in the whole catalog
+  (`FMA4706 coronary sinus`, in the heart), **one** foramen (`FMA75351 interventricular foramen`), no
+  intracranial artery or vein of any kind. The routing to `diagram` and the `deferred_modes: ["3d_anatomy"]`
+  both stand. No gaps entry describes the file's own state, so the second stale-note trap does not apply.
+- **Drawability (10) / status (11):** 0 models referenced, 0 required, nothing to fetch. Held at `planned`
+  because the SVG engine has no artwork — same reason Histology is suspended. `CAPABILITIES.svg` is still
+  `{native: [], degraded: []}`, so the validator emits ~20 "unknown to the svg adapter" capability *notices*
+  for this scene. Those are notices, not errors: the scene is valid and every beat is hollow until artwork
+  exists. This is the honest state, not a defect to sign away.
+- **Landmarks (12):** none authored, none possible — no parent mesh in `meshes-lite/` to measure against.
+  Correct as it stands.
+
+### `neuroanatomy__ventricular-system-csf__meninges` — SIGNED, no content change
+
+- **Ops (4):** all valid; group targets `Dura mater`, `Leptomeninges`, `The three spaces`, `The four dural
+  folds`, `Between the dural layers`, `Below the foramen magnum` all exist in `structures[]`; key targets
+  all resolve.
+- **Views (7):** curriculum asks `cross_section` + `associated_organs`. Beats 1, 2, 5, 6 cross_section;
+  beats 3, 4 associated_organs. Met.
+- **Covers (9):** `["Meninges"]`, exact.
+- **Read for self-contradiction (6) and found none.** The scene is unusually tight: the periosteal layer
+  stopping at the foramen magnum is stated in the `dura_periosteal` card, used in `space_extradural` to
+  explain why the spinal extradural space is real and the cranial one potential, and used again in
+  `spinal_dura` and beat 5 — three statements, all consistent. The "stopped by sutures / crosses sutures but
+  stopped by the falx" pair in beat 6 agrees with both haematoma cards. Beat 1 says "count four membranes,
+  not three" and then lists four; the count is reconstructable rather than asserted.
+- **Stale-note re-test (14):** gaps[0] claims a 934-entry sweep found exactly one hit. Re-run independently
+  with the same 25 stems: **exactly one**, `FMA4706 coronary sinus`. The claim holds verbatim. gaps[2] says
+  "Status is `planned`, not `ready`" and the `status` field reads `planned` — the note and the field agree,
+  which is the specific trap check 14 warns about and it is clean here.
+- **Drawability (10):** 0 models, 0 required. All six beats are hollow for want of SVG artwork, which
+  gaps[2] already specifies in detail (a coronal at the vertex, a sagittal for the folds, three haematoma
+  insets). Left at `planned`.
+
+### AGREEMENT WITH THE PREVIOUS RUN
+
+Both scenes were authored 2026-08-30, not by the run an hour before me, so there is no immediately-preceding
+RUNLOG block claiming them. Their own `gaps[]` blocks are the prior account, and I read them only after
+forming a verdict from `available-meshes.json` and `CURRICULUM.json`. **My reading agrees with them on the
+catalog facts** — which is worth stating precisely because the last two runs found delivery claims that had
+silently stopped being true. These had not: the meninges sweep is the most sharply falsifiable claim in the
+corpus ("total hits: ONE") and it survived an independent re-run. **My reading disagrees with neither on
+state**; the one disagreement I found was between scenes, not with a log, and is below.
+
+### COLLATERAL CORRECTION — `neuroanatomy__ventricular-system-csf__ventricles` (already signed 2026-09-08)
+
+This is the run's highest-value catch and it came out of check 6, comparing against the other scenes in the
+topic rather than reading the audited file alone. The Ventricles scene, **audited and signed earlier today**,
+taught in beat 9: *"Everything big, including the fourth, means the block is beyond the fourth ventricle's
+exits or the fluid is not being absorbed — communicating hydrocephalus."* Two files away, CSF circulation
+beat 3 teaches the same scan finding correctly: a block **at** the three apertures is still obstructive, and
+is the one obstructive pattern that dilates every cavity. A student reads these consecutively — same topic,
+same "read the scan backwards" device — and the Ventricles version would have them call an aperture block
+communicating. That is the branch on which a lumbar puncture is safe or dangerous.
+
+Beat 9 rewritten to state both branches and to name the consequence. `corrected_at` / `corrected_by` added;
+`audited_at` left at its earlier value, since the audit did happen — it just missed this. Note for whoever
+reads the next block: **this is exactly the failure the task file predicts.** A scene can pass its own audit
+and still be wrong in a way only visible from the scene next door. Auditing a topic's scenes in isolation
+cannot catch it; auditing the last one in a topic can.
+
+Applied rule 5 (fix the fact, not the instance): grepped all four Ventricular-System scenes for every
+statement of the dilatation-pattern rule. Four places state it — ventricles beat 9, csf-circulation beat 3,
+the csf-circulation `obstructive` card, the `apertures` card. Two were wrong (beat 9, the card), both are
+fixed, and the remaining two were checked to agree with the repaired versions rather than assumed to.
+
+### RESULT
+
+- validator: **142/142 valid**, 0 blocked. (svg capability notices as described — not errors.)
+- index: `index.json` written · 142 scenes (71 ready) · 14740 term mappings
+- sync-state: 81 of 81 3D scenes have every mesh in `meshes-lite/` (494 files); `next to author: nothing`;
+  **the audit cursor is now empty — every scene in the corpus that is not in a suspended course carries
+  `provenance.audited_at`.**
+
+### WHAT THE NEXT RUN SHOULD KNOW
+
+The audit walk has run out of work and so has the author cursor. Nothing in Neuroanatomy, Gross or the
+Ventricular topic is unaudited or unauthored; Embryology (28 scenes) and Histology (4) are suspended and
+blocked on the SVG engine, not on this task. **A run that finds no permitted work must still write a block
+saying so** — that is the 2026-08-30 lesson and it applies from here on. The single unblock that would give
+this task real work again is building `CAPABILITIES.svg` and the artwork behind it: it would free 32 idle
+scenes at once, including the two signed today, both of which are fully authored and draw nothing.
+
+---
+
+## 2026-09-08 (later run) — 0 AUTHORED · 2 RE-AUDITED (`brainstem__pons`, `brainstem__medulla-oblongata`)
+
+### WHY THIS RUN LOOKS DIFFERENT FROM ITS INSTRUCTIONS
+
+`sync-state.mjs` was run first, as required. **Both cursors are empty and neither is a bug in the tool.**
+`next to author: nothing — the curriculum is covered` (207 structures, 147 covered by 142 scene files;
+Embryology and Histology suspended, and both cursors correctly skip them). The audit cursor emits nothing
+because **every scene in the corpus outside a suspended course now carries `provenance.audited_at`** —
+verified independently rather than taken from the previous block: 33 scenes lack the stamp and all 33 are
+`embryology__*`, `histology__*` or `index.json`. REPAIR-BACKLOG.md sections 1 and 2 are both marked clear,
+so the backlog does not outrank the cursor this hour either.
+
+So: **no work at the cursors, and this run says so, per the 2026-08-30 rule.** What it did instead is
+argued for below rather than assumed, because "nothing to do" is the state in which a run is most likely to
+either idle or invent work.
+
+### WHAT IT DID INSTEAD, AND WHY THAT IS THE RIGHT SECOND CHOICE
+
+Of the corpus's 142 scenes, the two audited here are the clearest remaining instance of the failure the task
+file names first: **`pons` and `medulla-oblongata` were authored 2026-09-02 and signed `audited_at: 2026-09-02`
+— same day, same run, marking its own homework.** They have never been read by a different context. That is
+the exact condition the task warns produces a stamp that stops anyone looking again. Re-auditing them is not
+new work invented to fill an hour; it is the audit those two scenes never actually received.
+
+Verdict formed from `available-meshes.json` and `CURRICULUM.json` alone, before reading either scene's
+`gaps[]` or any prior RUNLOG block.
+
+### CHECKS PERFORMED — all fourteen, named so this is evidence and not a shrug
+
+Mechanical checks were run over **all 34 Neuroanatomy scenes**, not just the two, since the sweep costs the
+same: **0 fabricated ids, 0 name mismatches against the catalog, 0 referenced meshes absent from
+`meshes-lite/`.**
+
+1. **IDS** — all 18 refs across the two scenes resolve in the 934-entry catalog. Clean.
+2. **NAMES** — every `name` matches the catalog string. Clean.
+3. **SIDES** — *no paired structure appears in either scene.* Both are entirely unpaired midline meshes
+   (pons FMA67943, medulla FMA62004, cerebellum FMA67944, peduncle of midbrain FMA62394 — one entry covering
+   BOTH crura, unlike the paired colliculi — third/fourth ventricles FMA78454/FMA78469, aqueduct FMA78467,
+   central canal FMA78497, occipital bone FMA52735, atlas FMA12519). Stated out loud as required. Worth
+   noting that both scenes' *clinical* content is intensely lateralised while their geometry is not, so
+   laterality is carried in words and cannot be read off the screen — the scenes already say this.
+4. **OPS** — every target resolves to a `structures[]` entry; every op in vocabulary. Clean.
+5/6. **FIX THE FACT / THE SCENE AGAINST ITSELF** — this is where the one teaching defect was found. See below.
+7. **CURRICULUM VIEWS** — Pons requires `["cross_section","location"]`: beats 1–2 location, 3–6 cross_section. Met.
+   Medulla requires `["cross_section","mechanism"]`: beat 3 cross_section, beats 4–6 mechanism. Met.
+8. **NARRATION AGAINST GEOMETRY** — the hardest check and both scenes pass it unusually well. Every hollow
+   beat states its own hollowness in-beat: beat 4 of the pons ends "this beat names them on a floor that is
+   drawn and lights nothing but the ventricle"; beat 6 of the medulla ends "all are named against the drawn
+   block". Nothing is named as shown that is not shown.
+9. **COVERS** — `["Pons"]` and `["Medulla oblongata"]`, exact against CURRICULUM.json. Both scenes explicitly
+   decline to claim the neighbouring segments and the ventricles, correctly.
+10. **DRAWABILITY** — pons 9 referenced / **9 on disk**; medulla 9 referenced / **9 on disk**. Every beat
+    renders. What is hollow is granularity, not delivery: the two highest-teaching beats in each scene
+    (pons 4 and 6; medulla 4, 5, 6) light one solid block while naming four nuclei, four cranial nerves and
+    three arteries. **No mesh fetch can fix this — only a segmented brainstem could.** Both scenes say so.
+11. **STATUS** — both remain `ready`; both re-validated after the edits.
+12. **LANDMARKS** — none authored in either, and every rejection re-examined and upheld: the pontomedullary
+    junction is a transverse LINE and `derive-landmark.mjs` emits points; the cerebellopontine angle is a
+    space bounded by three structures (the axillary-apex shape of refusal); the foramen magnum is a closed
+    curve round a hole; the obex, facial colliculus, gracile and cuneate tubercles are features whose only
+    possible witnesses are cavity meshes or nuclei that do not exist. Nothing was placed by eye.
+13. **SIGN** — both signed, with `corrected_at`/`corrected_by` alongside, since both were changed.
+14. **STALE-NOTE RE-TEST — every absence claim in both scenes re-run independently.** All hold:
+    · `pons|pontine|pontis|trapezoid` → 3, of which the only brainstem hit is FMA67943; the two `trapezoid`
+      hits are the CARPAL bones FMA23725/FMA24445, wrist and not brainstem.
+    · cranial nerves V–XII, all stems → **0**. The catalog's only nerves are the two optic nerves
+      FMA50875/FMA50878. Its only `nucleus` meshes are the two caudate nuclei FMA72826/FMA72827.
+    · every intracranial vessel stem → **0**. The nearest are the common carotids FMA3941/FMA4058, which end
+      in the neck, plus FMA4706 coronary sinus, which is cardiac. **The basilar artery remains the
+      highest-value single fetch in this course** — it is the entire mechanism of locked-in syndrome.
+    · `cerebell|tonsil|vermis|floccul` → **1**, FMA67944, the whole organ. No lobe, peduncle, nucleus or tonsil.
+    · the medulla's near-miss traps re-checked individually and all three are correctly excluded:
+      FMA43883/43884 `gracilis` are THIGH muscles, FMA22346/22347 `pyramidalis` are ABDOMINAL muscles,
+      FMA73413/73414 `stria medullaris of thalamus` is diencephalon. A single-spelling search would have
+      counted all six as hits — this is the REPAIR-BACKLOG failure mode running in the opposite direction,
+      and the authoring run had already caught it.
+    · no `gaps[]` entry in either scene describes the file's own state, so the second stale-note trap does
+      not apply here.
+
+### FINDING 1 — `brainstem__pons` beat 4: a reference frame stated two ways and never named (CORRECTED)
+
+**This is the run's one teaching defect and it is a check-6 catch, the scene against itself, in a single
+paragraph.** Beat 4 places the nuclei by level: *"abducens, facial and vestibulocochlear down at its lower
+border."* Two sentences later it places the facial colliculus — which IS the abducens nucleus — as *"the
+small elevation near the midline in the upper half."* Both statements are true and they are about the same
+nucleus. They are true in **different reference frames**: the colliculus is in the upper half of the
+RHOMBOID FOSSA (whose upper half is pontine and lower half medullary) and in the lower part of the PONS.
+Neither frame was named. A student reading the beat straight through meets "lower border" and "upper half"
+about one structure, four lines apart, with nothing to reconcile them — and the natural reading, "upper half
+of the pons", is wrong and would put the sixth nerve's exit in the wrong place.
+
+Not a fabrication and not a false fact, which is why it survived the same-day audit: every individual
+sentence is correct. It is only visible when the beat is read as a student reads it, end to end. Beat 4
+rewritten to name the frame explicitly and to say that the two descriptions are one place seen from two
+ends, tied to the observable consequence (the sixth nerve leaving at the pontomedullary junction).
+
+**Rule 5 applied — the fact, not the instance.** Grepped all 142 scenes for `facial colliculus`: four files
+carry it. The pons scene's own `fourth ventricle` structure card was checked and is CLEAN — it establishes
+"upper half is pontine, lower half is medullary" in the sentence before it uses "upper half", so the frame is
+already named there; that card is in fact where the correct wording came from, another instance of the corpus
+already containing its own answer. `cranial-nerves__cranial-nerve-nuclei` (twice) and
+`cranial-nerves__cranial-nerve-courses` state only the colliculus's *identity* — abducens nucleus with facial
+fibres over it, ipsilateral lateral rectus plus ipsilateral whole face — give no level, and agree with the
+pons scene exactly. `ventricular-system-csf__ventricles` names it only as a feature without a mesh. **No
+second copy of the ambiguity exists.** This correction is complete, not half-applied.
+
+### FINDING 2 — `brainstem__medulla-oblongata` gaps[]: an understated search that would read as stale (CORRECTED)
+
+The "no cerebellar peduncle" entry lists `brachium` among its stems and concludes *"exactly one `peduncle`,
+FMA62394."* True of `peduncle`; **bare `brachium` returns four** — FMA73461/73462/73463/73464, the brachia of
+the right and left superior and inferior colliculi. They are midbrain relays, not cerebellar peduncles, so
+the anatomical conclusion is untouched. But a future run re-running the listed stems gets four hits against a
+note claiming one, and check 14 tells it to treat that as a stale note and re-open a settled question. Entry
+corrected in place, dated, with the four ids named and their exclusion reasoned. The pons scene's equivalent
+entry searched the specific phrases `brachium pontis` / `brachium conjunctivum`, which genuinely return zero,
+and needed no change.
+
+### AGREEMENT WITH THE PREVIOUS RUN
+
+No immediately-preceding block claims these two — they were authored 2026-09-02, so their `gaps[]` blocks are
+the prior account, read only after the verdict was formed. **My reading agrees with them on every catalog
+fact and every delivery claim, all re-run rather than quoted** — which is worth stating precisely because the
+two runs before me found delivery claims that had silently stopped being true, and these had not. **The one
+disagreement is Finding 1, and it is a disagreement with the same-day audit rather than with the gaps blocks:
+that audit reported the scene clean, and the scene was not.** Recorded as the finding it is. The value of the
+re-audit is entirely in that one paragraph, and it was only findable by reading the beat as prose.
+
+### RESULT
+
+- validator: **142/142 valid**, 0 blocked. (SVG capability *notices* on the diagram-mode scenes, as on every
+  recent run — notices, not errors; `CAPABILITIES.svg` is still `{native: [], degraded: []}`.)
+- index: `index.json` written · 142 scenes (71 ready) · 14740 term mappings
+- sync-state: 81 of 81 3D scenes have every mesh in `meshes-lite/` (494 files); STATE.json already in step;
+  both cursors still empty.
+
+### WHAT THE NEXT RUN SHOULD KNOW
+
+The cursors are exhausted and will stay exhausted. There is no authoring work and no first-pass audit work
+left outside the two suspended courses. **The remaining productive pattern is the one this run used: the
+corpus contains scenes signed on their authoring date by their authoring run, and those signatures are worth
+what the task file says they are worth — nothing.** A next run with no cursor work should list the scenes
+where `authored_at == audited_at` and re-audit the next two; this run's Finding 1 is the evidence that pass
+yields real defects. **Do not re-audit scenes whose audit date differs from their authoring date until that
+list is exhausted.**
+
+The single unblock that would give this task genuine work again is unchanged and is not in its power: build
+`CAPABILITIES.svg` and the artwork behind it, freeing 32 fully-authored idle scenes at once. After that, a
+segmented brainstem mesh and an intracranial arterial tree are the two fetches that would most raise what
+Neuroanatomy can actually teach — every beat in both scenes audited today that carries clinical weight is
+narration over a solid block, and says so honestly.
+
+---
+
+## 2026-09-08 (hourly run) — NO CURSOR WORK EXISTED; VERIFICATION RUN INSTEAD
+
+**AUTHORED: 0. AUDITED: 0 new scenes.** Both slots were empty and that is the run's first finding, stated
+plainly so it is not mistaken for a run that did nothing:
+
+- `sync-state.mjs` prints `next to author: nothing — the curriculum is covered`. Every Neuroanatomy
+  structure with catalog coverage is authored; what remains (Spinal Cord, Cranial Nerves, Blood Supply)
+  is the DEAD list from the task file and already has scenes routed to their next preferred_mode.
+- All 34 Neuroanatomy scenes carry `provenance.audited_at` — checked directly in the files, not taken
+  from `sync-state.mjs`, which prints no audit cursor at all when the queue is empty. So there was no
+  "freshest unaudited scene" to read.
+- Embryology (28 scenes) and Histology (4) are `suspended`; both cursors skip them and I did not author
+  into either.
+
+REPAIR-BACKLOG sections 1 and 2 are clear, so per the task I fell through — but with no audit walk to
+fall through *to*, the run went to section 3 and to the mandated stale-note sweep.
+
+### What was actually done
+
+**1. Four section-3 backlog items were already fixed and had never been ticked.** Read the files, not the
+notes:
+- `arm__humerus` "four fracture sites" — beat 7 now names four sites and four nerves (surgical neck /
+  axillary, mid-shaft radial groove / radial, supracondylar / median + brachial artery, medial epicondyle /
+  ulnar), and `gaps[5]` records the supracondylar anchor measured on 2026-08-28. The dependent
+  cross-reference in `arm__median-ulnar-radial-nerves` `gaps[0]` was updated in the same session and is
+  now true. Ticked.
+- adductor tubercle / medial epicondyle on `thigh__femur` and `thigh__hamstrings` — both anchors present
+  (contact with adductor magnus, 0.49 mm; extreme +x in the distal 15%), and the "sub-feature, named not
+  marked" sentence has been replaced in both scenes' `gaps[]`. `thigh__adductor-canal` agrees. Ticked.
+- `typical-vertebra` landmark count — file has 13 anchors, `CORPUS.md` line 11 says 13. Ticked.
+- Back & Vertebral Column beat numbering — all five scenes number 1..n, no repeats, no missing ordinals.
+  Ticked, with the caveat recorded that the *validator check* for beat ordinals was never written and
+  remains open.
+
+That the backlog itself had gone stale is worth naming: a run following it in good faith would have
+re-derived anchors that already exist. Same failure mode as the `gaps[]` notes, one level up.
+
+**2. Corpus-wide stale-delivery-claim sweep (task item 14).** Every `gaps[]` entry across all 142 scenes
+was matched for an absence assertion, and every FMA id named inside such an entry was stat'd against
+`meshes-lite/` (494 files). 69 entries name an id that IS on disk; each was read in context.
+**Result: no new stale delivery claim. In every one of the 69 the on-disk id is the stand-in structure,
+not the thing being claimed absent.** The two-scenes-invisible-for-a-stale-sentence failure of
+2026-09-08's earlier run does not repeat elsewhere in the corpus.
+
+**3. The four load-bearing absence claims re-searched, multiple spellings each** — because the task's
+first rule is that a note in a file is not evidence:
+
+| scene (held `candidate`) | searched | verdict |
+|---|---|---|
+| `stomach-intestines__large-intestine` | caecum, cecum, colon, sigmoid, appendix, rectum | claim TRUE — catalog has only `appendix` FMA14542, `rectum` FMA14544 |
+| `liver-...__pancreas` | pancreas, pancrea* | claim TRUE — only `pancreatic duct` FMA10419 |
+| `liver-...__biliary-tree-gallbladder` | bile, biliary, choledoch, cystic duct, hepatic duct | claim TRUE — nothing |
+| `back-vertebral-column__spinal-cord-in-vertebral-canal` | spinal cord, medulla spinalis, cord | claim TRUE — only `central canal of spinal cord` FMA78497 |
+
+All six gross scenes held at `candidate` with 100% of their models on disk (`gluteal-vessels` 17/17,
+`biliary-tree-gallbladder` 12/12, `pancreas` 16/16, `internal-reproductive-organs` 23/23,
+`large-intestine` 18/18, `spinal-cord-in-vertebral-canal` 28/28) are held for a **real subject-missing
+reason, not a delivery reason.** None should be promoted, and none should be re-litigated by a later run:
+they are mesh-ingestion work.
+
+### Checks performed
+Of the audit's checks, this run ran 1 (IDS — every id in every absence note stat'd), 10 (DRAWABILITY —
+`sync-state.mjs` reports 81 of 81 drawable scenes have every mesh present, 494 files), 11 (STATUS — the
+six candidate holds read against their stated reasons) and 14 (STALE NOTES, corpus-wide) exhaustively.
+Checks 2–9 and 12–13 were not run, because they are per-scene and no scene was under audit.
+
+### Results
+- **No scene file was modified.** Only `REPAIR-BACKLOG.md` (four ticks + a dated verification section)
+  and this log.
+- validator: `142/142 scenes valid`, 71 ready. No blocked scene.
+- index: `142 scenes (71 ready) · 14740 term mappings`.
+- `sync-state.mjs` re-run; STATE.json already in step.
+- `CORPUS.md` NOT amended — no scene changed, and the task says not to add lines for scenes only read.
+
+### FOR A HUMAN — the schedule is now doing no work
+This task runs hourly and, as of today, there is nothing in its remit left to do: authoring is complete
+to the limit of the catalog, and the audit queue is empty. Every subsequent run will land here. The
+corpus is blocked on **mesh ingestion and the SVG engine**, neither of which this task is allowed to
+touch. Highest-value meshes to fetch, in order, from the four verified absences above: **bile duct**
+(unblocks three consecutive scenes in one topic), **pancreas**, **caecum + colon**, **spinal cord**.
+Until then, consider pausing or re-scoping this schedule rather than letting it run hourly to write
+this same block.

@@ -280,6 +280,12 @@ capability · purity · lifecycle), plus a delivery check that holds any scene w
 A scene it rejects is left status:"blocked" with its blocked_reason. Record it in RUNLOG.md so it can be
 fixed; do not sign it.
 
+FORMATTING: write every scene file as `JSON.stringify(scene, null, 2) + "\n"` — TWO-space indent, one
+trailing newline, exactly like the other 140. On 2026-09-08 two scenes were written with a 1-space indent
+instead. Nothing broke and the validator passed, but each file showed as ~900 changed lines in the diff
+for one corrected sentence, which hides the real edit from whoever reviews it. A correction nobody can
+see is close to a correction nobody made.
+
 BOUNDARY, unchanged: the scene contains NO URL, no file extension, no CDN host, no library name, and no
 provider name outside provider{} and refs{}. No `url` fields, ever. No attribution string in the scene —
 the adapter emits the credit for whatever it delivered.
