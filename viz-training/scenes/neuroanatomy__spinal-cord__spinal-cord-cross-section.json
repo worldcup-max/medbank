@@ -1,0 +1,406 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__spinal-cord__spinal-cord-cross-section",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Spinal Cord",
+  "structure": "Spinal cord cross-section",
+  "covers": [
+    "Spinal cord cross-section"
+  ],
+  "learning_goal": "Read a transverse section of the cord: name the grey horns and what each contains, place the three white funiculi and know which tracts run in each, use Rexed's laminae only as far as the clinically useful ones go, explain why the grey matter changes shape between cervical, thoracic, lumbar and sacral levels, and use that regional shape to say which level a section came from.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-02",
+    "audited_at": "2026-09-03",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "spinal cord",
+      "cross-section",
+      "tracts",
+      "cord syndromes"
+    ],
+    "terms": [
+      "spinal cord cross-section",
+      "grey matter",
+      "white matter",
+      "anterior horn",
+      "ventral horn",
+      "posterior horn",
+      "dorsal horn",
+      "lateral horn",
+      "intermediolateral cell column",
+      "substantia gelatinosa",
+      "nucleus proprius",
+      "Clarke's column",
+      "nucleus dorsalis",
+      "Rexed laminae",
+      "anterior funiculus",
+      "lateral funiculus",
+      "posterior funiculus",
+      "posterior column",
+      "gracile fasciculus",
+      "cuneate fasciculus",
+      "lateral corticospinal tract",
+      "anterior corticospinal tract",
+      "lateral spinothalamic tract",
+      "anterior spinothalamic tract",
+      "posterior spinocerebellar tract",
+      "anterior spinocerebellar tract",
+      "anterior white commissure",
+      "central canal",
+      "ependyma",
+      "cervical enlargement",
+      "lumbosacral enlargement",
+      "conus medullaris",
+      "lower motor neuron",
+      "syringomyelia",
+      "anterior spinal artery syndrome",
+      "Brown-Sequard syndrome",
+      "subacute combined degeneration"
+    ]
+  },
+  "camera": {
+    "framing": "superior"
+  },
+  "structures": [
+    {
+      "key": "outline",
+      "label": "The section itself — grey inside, white outside",
+      "role": "context",
+      "group": "The shape of the section",
+      "layer": "organ",
+      "color": "#e8e2d4",
+      "terms": [
+        "spinal cord cross-section",
+        "grey matter",
+        "white matter",
+        "anterior median fissure",
+        "posterior median sulcus",
+        "central canal",
+        "ependyma"
+      ],
+      "narration": "A drawn transverse section, oriented as every atlas draws it — anterior at the bottom of the page, posterior at the top. Two features fix the orientation before anything else is named: a deep anterior median fissure in front, and a shallow posterior median sulcus behind. Inside is an H or butterfly of grey matter with the central canal at its waist, lined by ependyma; outside is white matter. The arrangement is the reverse of the brain, where grey is on the surface, and stating that once prevents the commonest reading error. What follows is only two questions asked of that picture: what is in the grey, and what is travelling through the white."
+    },
+    {
+      "key": "anterior_horn",
+      "label": "Anterior horn — the motor output",
+      "role": "primary",
+      "group": "The grey matter",
+      "layer": "organ",
+      "color": "#cc0000",
+      "terms": [
+        "anterior horn",
+        "ventral horn",
+        "lower motor neuron",
+        "alpha motor neuron",
+        "Rexed lamina IX",
+        "medial motor column",
+        "lateral motor column",
+        "poliomyelitis",
+        "motor neuron disease"
+      ],
+      "narration": "The blunt anterior limb of the H, and the only place in the cord from which a movement can be commanded. It holds the alpha motor neurons — the lower motor neurons — grouped into columns with a rule worth carrying: medial columns supply axial and trunk muscles, lateral columns supply limb muscles, and within the lateral group flexors lie behind extensors. That is why the horn is bulky wherever limbs attach and small in the thorax. Damage confined to this horn gives pure lower motor neuron signs at the level involved — wasting, fasciculation, flaccid weakness, absent reflexes — with no sensory loss at all, which is what poliomyelitis and spinal muscular atrophy demonstrate."
+    },
+    {
+      "key": "posterior_horn",
+      "label": "Posterior horn — the sensory input",
+      "role": "primary",
+      "group": "The grey matter",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "terms": [
+        "posterior horn",
+        "dorsal horn",
+        "substantia gelatinosa",
+        "nucleus proprius",
+        "Rexed lamina II",
+        "Clarke's column",
+        "nucleus dorsalis",
+        "posterior spinocerebellar tract",
+        "pain",
+        "temperature"
+      ],
+      "narration": "The slender posterior limb, reaching almost to the surface, and the entry point for everything the body reports. Its tip is the substantia gelatinosa, lamina II, where the small fibres carrying pain and temperature terminate — the layer the gate-control account of pain is built on and the target of spinal opioid action. Deeper lies the nucleus proprius for touch and pressure. At the base of the horn, from about T1 to L2, sits Clarke's column, whose cells give rise to the posterior spinocerebellar tract; it is present at no other levels, which is why that tract does not exist below the upper lumbar cord and why leg proprioception has to ascend first to reach it."
+    },
+    {
+      "key": "lateral_horn",
+      "label": "Lateral horn — autonomic, and only at some levels",
+      "role": "primary",
+      "group": "The grey matter",
+      "layer": "organ",
+      "color": "#e69138",
+      "terms": [
+        "lateral horn",
+        "intermediolateral cell column",
+        "Rexed lamina VII",
+        "sympathetic",
+        "preganglionic",
+        "T1-L2",
+        "S2-S4",
+        "sacral parasympathetic nucleus",
+        "Horner's syndrome"
+      ],
+      "narration": "A small lateral projection between the other two horns, and the single most useful level marker on a section, because it exists only where it has work to do. The intermediolateral cell column occupies it from T1 to L2 and holds the preganglionic sympathetic neurons for the whole body; the sacral parasympathetic nucleus occupies the equivalent position at S2 to S4 without forming so distinct a horn. So a section with a clear lateral horn is thoracic or upper lumbar until proved otherwise. Its clinical value follows: the sympathetic supply to the head leaves at T1, which is why a lesion of the cord or root at that level produces Horner's syndrome, and why cord injury above T6 removes sympathetic control of the splanchnic bed and permits autonomic dysreflexia."
+    },
+    {
+      "key": "posterior_columns",
+      "label": "Posterior funiculus — fine touch, vibration, proprioception",
+      "role": "primary",
+      "group": "The white matter",
+      "layer": "organ",
+      "color": "#45818e",
+      "terms": [
+        "posterior funiculus",
+        "posterior column",
+        "dorsal column",
+        "gracile fasciculus",
+        "cuneate fasciculus",
+        "DCML",
+        "uncrossed",
+        "gracile nucleus",
+        "cuneate nucleus",
+        "subacute combined degeneration"
+      ],
+      "narration": "The wedge between the posterior horn and the midline, carrying the first-order axons of fine touch, vibration and conscious proprioception all the way to the medulla without crossing. Its internal order is the one somatotopic fact every student needs: the gracile fasciculus lies medially and carries the leg, the cuneate fasciculus lies laterally and carries the arm, and the cuneate only exists above about T6 because that is where arm fibres join. Lower fibres are pushed medially by each new arrival, so the column is layered sacral-to-cervical from the midline outwards. Because the fibres are uncrossed here, a lesion of this column gives loss on the SAME side, below the level — the sign that separates it from the spinothalamic loss it is usually tested against."
+    },
+    {
+      "key": "lateral_funiculus",
+      "label": "Lateral funiculus — the crowded one",
+      "role": "primary",
+      "group": "The white matter",
+      "layer": "organ",
+      "color": "#8e7cc3",
+      "terms": [
+        "lateral funiculus",
+        "lateral corticospinal tract",
+        "lateral spinothalamic tract",
+        "posterior spinocerebellar tract",
+        "anterior spinocerebellar tract",
+        "rubrospinal tract",
+        "somatotopy",
+        "Brown-Sequard syndrome"
+      ],
+      "narration": "The white matter lateral to the grey, and the part of the section where most of the clinically important traffic runs. Posteriorly and superficially, the two spinocerebellar tracts hug the surface — posterior uncrossed, anterior already crossed. Just deep to them is the lateral corticospinal tract, which crossed in the medulla and is the main motor supply to the limbs, laid out with sacral fibres most lateral. Anterolaterally lies the lateral spinothalamic tract carrying pain and temperature from the OPPOSITE side, having crossed in the anterior white commissure one or two segments ABOVE the level at which it entered the cord, and with the same lateral-is-sacral order. That direction is worth saying deliberately, because it is the whole reason a hemisection's contralateral sensory level sits one or two segments BELOW the lesion: the fibres that would have crossed at the level of the lesion entered a segment or two lower down. Hold both somatotopies together and an extrinsic cord compression's sacral sparing, and an intrinsic lesion's sacral involvement, become predictions instead of facts."
+    },
+    {
+      "key": "anterior_funiculus",
+      "label": "Anterior funiculus and the white commissure",
+      "role": "part",
+      "group": "The white matter",
+      "layer": "organ",
+      "color": "#6aa84f",
+      "terms": [
+        "anterior funiculus",
+        "anterior corticospinal tract",
+        "anterior spinothalamic tract",
+        "anterior white commissure",
+        "vestibulospinal tract",
+        "reticulospinal tract",
+        "decussation",
+        "syringomyelia"
+      ],
+      "narration": "The white matter in front of the grey, on either side of the anterior median fissure, holding the uncrossed anterior corticospinal tract for axial muscles, the anterior spinothalamic tract for crude touch, and the vestibulospinal and reticulospinal tracts that set postural tone. Its most examined feature is not a tract but a crossing: the anterior white commissure, just in front of the central canal, where second-order pain and temperature fibres cross the midline. Because both sides' fibres pass through those few millimetres, a lesion expanding from the centre of the cord interrupts them first and on both sides while touching nothing else. That is the cape-like, bilateral, dissociated sensory loss of syringomyelia, and it is read directly off this one structure."
+    },
+    {
+      "key": "levels",
+      "label": "Telling the level from the shape",
+      "role": "part",
+      "group": "Reading the section",
+      "layer": "organ",
+      "color": "#c27ba0",
+      "terms": [
+        "cervical enlargement",
+        "lumbosacral enlargement",
+        "thoracic cord",
+        "sacral cord",
+        "conus medullaris",
+        "grey-to-white ratio",
+        "lateral horn",
+        "cuneate fasciculus"
+      ],
+      "narration": "Four sections side by side, because the differences are mechanical rather than arbitrary. Grey matter is proportional to the muscle and skin the segment serves; white matter is proportional to how much traffic is still passing through on its way to or from the brain. So the cervical section is the largest overall, oval and wide, with big horns for the arm and the most white matter of all because everything below is still travelling. The thoracic section is small and round with slender horns and a clear lateral horn. The lumbosacral section has huge horns for the leg with comparatively little white matter left. The sacral section is tiny and is almost all grey. Four rules of thumb, one principle: shape follows the amount of work done at that segment and the amount of traffic still passing."
+    },
+    {
+      "key": "syndromes",
+      "label": "Four lesions read off the section",
+      "role": "part",
+      "group": "Reading the section",
+      "layer": "organ",
+      "color": "#a64d79",
+      "terms": [
+        "Brown-Sequard syndrome",
+        "syringomyelia",
+        "anterior spinal artery syndrome",
+        "subacute combined degeneration",
+        "dissociated sensory loss",
+        "ipsilateral",
+        "contralateral"
+      ],
+      "narration": "The section earns its keep here, because each classical cord syndrome is a shape drawn on it. Hemisection — Brown-Sequard: ipsilateral loss of motor power and of posterior column sensation below the level, contralateral loss of pain and temperature starting a segment or two lower, because one set of fibres crossed high in the medulla and the other crossed right here. Central expansion — syringomyelia: bilateral dissociated loss at the level of the cavity, from the commissure alone. Anterior spinal artery territory — the anterior two-thirds: motor and spinothalamic loss with the posterior columns spared, since they have their own posterior arteries. And a selective loss of the posterior and lateral columns — subacute combined degeneration in B12 deficiency. Four patterns, one picture, and none of them needs to be memorised as a list once the section is in the student's head."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "Orienting the section",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The shape of the section"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "outline",
+          "intensity": 1
+        }
+      ],
+      "narration": "Fix the orientation first, because every later statement depends on it. Anterior is at the bottom of the page and is marked by the deep anterior median fissure; posterior is at the top and is marked by the shallow posterior median sulcus. Grey matter forms a butterfly inside, white matter surrounds it, and the central canal sits at the waist of the butterfly — the reverse of the arrangement in the cerebrum. Nothing here is a mesh: this is a drawn section. The catalog holds no spinal cord, no grey or white matter and no tract of any kind, and its one relevant entry — the central canal — is modelled for its uppermost 34 millimetres only, as the `spinal-cord-in-vertebral-canal` scene in the Gross course records. Only two questions follow: what is in the grey, and what is passing through the white."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "The grey matter — three horns, three jobs",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The grey matter"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "posterior_horn",
+            "lateral_horn",
+            "anterior_horn"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Read the butterfly from behind forwards and it is a sensory-to-motor gradient. The posterior horn takes everything in: pain and temperature to the substantia gelatinosa at its tip, touch and pressure to the nucleus proprius, and — between T1 and L2 only — proprioception to Clarke's column at its base. The lateral horn between them is autonomic and exists only at T1 to L2 and, less distinctly, S2 to S4. The anterior horn sends everything out: alpha motor neurons arranged medial for trunk, lateral for limb. That arrangement is worth stating as a principle rather than a list, because it is the segmental reflex arc drawn in position — in at the back, out at the front, with the autonomic column sitting between the two in the levels that need it."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "The white matter — three funiculi and what runs in them",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The white matter"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "posterior_columns",
+            "lateral_funiculus",
+            "anterior_funiculus"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lateral_funiculus",
+          "intensity": 1
+        }
+      ],
+      "narration": "The horns divide the surrounding white matter into three funiculi, and each carries a defined set. Posterior: fine touch, vibration and conscious proprioception, uncrossed, gracile medial for the leg and cuneate lateral for the arm. Lateral: the lateral corticospinal tract, already crossed in the medulla; the lateral spinothalamic tract, carrying the opposite side's pain and temperature; and both spinocerebellar tracts on the surface. Anterior: anterior corticospinal and anterior spinothalamic, with the postural tracts. Two facts do most of the clinical work. The posterior columns are uncrossed AT THIS LEVEL and the spinothalamic is crossed, which is the whole of dissociated sensory loss. And in both the corticospinal and spinothalamic tracts sacral fibres lie most laterally, which is why a compression from outside spares the sacrum and a lesion from inside does not."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "Four levels, four shapes",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Reading the section"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "levels",
+          "intensity": 1
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        }
+      ],
+      "narration": "Now use the section to place itself, sliding the cut down the cord. Cervical: the biggest section, wide and oval, large horns for the arm, and the most white matter anywhere because all the traffic from below is still present — and a cuneate fasciculus, which appears only above about T6. Thoracic: small and round, thin horns, a distinct lateral horn, and a high proportion of white matter. Lumbosacral: massive horns for the leg with much less white matter, since most ascending traffic has not joined and most descending traffic has left. Sacral: tiny, almost all grey. The axis here is the long axis of the cord, which is the vertical axis of the body — this is the same cut travelling to a different level, not four different planes."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Drawing the lesion on the section",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Reading the section"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "syndromes",
+            "levels"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "syndromes",
+          "to": "anterior_funiculus",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Finish by shading parts of the section and reading the patient off it. Shade one half: ipsilateral weakness and posterior column loss, contralateral pain and temperature loss a segment or two below — Brown-Sequard, and the mismatch of levels is only the distance the crossing fibres travelled before they crossed. Shade the middle around the canal: bilateral pain and temperature loss at that level and nothing else, because the anterior white commissure is where both sides cross — syringomyelia. Shade the anterior two-thirds: motor and spinothalamic loss with vibration and proprioception intact, the territory of the anterior spinal artery. Shade the posterior and lateral columns together: subacute combined degeneration. The examination in every case is the same question asked backwards — which shading would produce this?"
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS SECOND PREFERRED MODE, AND THE ROUTING WAS MEASURED THIS RUN RATHER THAN TAKEN FROM THE TASK PROMPT'S COVERAGE TABLE. All 934 catalog entries were searched for: spinal, spinal cord, medulla spinalis, cord, tract, tractus, fasciculus, funicul, column, horn, cornu, grey matter, gray matter, white matter, commissure, lamina, Rexed, ganglion, root, radix, cauda, cauda equina, filum, conus, denticulate, dura, arachnoid, pia, ependyma. Results: `tract` returns only the two optic tracts and the two iliotibial tracts; `horn`, `funicul`, `root`, `ganglion`, `dura`, `arachnoid`, `pia`, `conus` and `filum` return nothing at all. NOT NOTHING, AND THE TASK PROMPT'S TABLE IS WRONG ON THIS POINT: `FMA78497 central canal of spinal cord` DOES exist and is already used by `gross__back-vertebral-column__spinal-cord-in-vertebral-canal`. It does not rescue this scene — that scene records that the model holds only the topmost 34 mm, so it is neither a cord nor a full-length canal — but the prompt's line 'Spinal Cord: no cord, no tract of any kind' should read 'no cord, no tract, and only the upper 34 mm of the central canal'. Recorded here because the prompt's table is exactly the kind of remembered list REPAIR-BACKLOG warns against trusting.",
+    "THE SUBJECT IS AN INTERNAL SECTION, WHICH IS AN INDEPENDENT AND STRONGER REASON FOR `diagram`. Everything this scene teaches is grey and white matter organisation inside the cord: horns, nuclei, funiculi, tract positions and somatotopy within tracts. No surface mesh of a cord — not even a complete one — would show any of it, so unlike most of this course's 3D gaps, a delivery of the cord would leave every beat exactly as hollow. `deferred_modes` keeps `3d_anatomy` on record only for the day a segmented cord with distinguishable grey matter arrives, which is a different and much larger ask than a surface.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: a labelled transverse section at a thoracic level with all three horns, the central canal, the anterior white commissure and the three funiculi; a tract map on the same outline with the six named tracts placed and each one's crossing status marked, since beat 3 is entirely about crossed versus uncrossed; and a four-panel level comparison drawn to true relative size, because beat 4's whole argument is proportion and a panel drawn to uniform size teaches the opposite of what it says. A fourth, optional drawing — the same outline with four lesion shadings — would let beat 5 be shown rather than described.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following the pattern of the other `diagram` scenes in this course. FMA78497 was deliberately NOT imported despite existing: it is the upper cervical canal only, and putting it on screen beside a drawn thoracic section would state a level the section does not have. Beat 1 says out loud that nothing here is a mesh and why, so no beat asks a student to look for something absent.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`; this scene has no parent mesh, and its features are internal boundaries rather than points on a surface. Nothing was placed by eye.",
+    "OVERLAP WITH `gross__back-vertebral-column__spinal-cord-in-vertebral-canal` WAS CHECKED AGAINST THAT FILE, NOT FROM MEMORY, AND THE DIVISION IS CLEAN: that scene owns the cord's RELATIONS — its length, where it ends, how the roots leave, where a needle goes — and shows them in 3D against the vertebrae; this scene owns what is INSIDE a section and shows none of the vertebral canal. The one shared fact is the level of the conus, and this scene does not state it, deferring to the gross scene. Neither claims the other's `covers[]` entry. The three tract scenes that follow in this topic — `Ascending tracts`, `Descending tracts` — will restate tract positions; when they are authored, they must match beat 3 here, and the somatotopy statement (sacral fibres most lateral in both corticospinal and spinothalamic) is the one most likely to be contradicted, so it is flagged here in advance. SECOND FACT NOW FLAGGED, because it was WRONG HERE AT AUDIT (2026-09-03) and must not be re-broken: the spinothalamic second-order fibres cross in the anterior white commissure one or two segments ABOVE their level of entry, not below. The `lateral_funiculus` card said 'below' as authored while the `syndromes` card and beat 5 both correctly derived the consequence — a contralateral level one or two segments BELOW the lesion — from it. Corrected, and the card now states the direction and the consequence in the same breath so the two cannot drift apart again.",
+    "CATALOG SEARCH TRAPS RECORDED FOR THE NEXT RUN, since the searches in the first gap note return two hits that look relevant and are not. `white matter` returns FMA61822 `white matter structure of cerebral hemisphere` — cerebral, not cord. `lamina` returns FMA61975 `lamina terminalis` — the wall of the third ventricle, nothing to do with Rexed's laminae. `cauda` returns only the two caudate nuclei, not cauda equina. A run searching those words and reading only the hit count would reach the wrong conclusion in all three cases.",
+    "TWO STATEMENTS ARE DELIBERATELY BOUNDED. Rexed's laminae are named only where they are used clinically — II for the substantia gelatinosa, VII for the intermediolateral column, IX for the motor columns — rather than listed I to X, because the full list is recall without a use at this level. And the sacral-sparing rule in beat 3 is stated as a prediction from somatotopy, which is how it is taught; it is less reliable in practice than the classical account suggests, and a later run that wants to qualify it should do so in the `lateral_funiculus` card rather than adding a contradicting sentence elsewhere.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Spinal cord cross-section`, spelled as `CURRICULUM.json` spells it. `Ascending tracts` and `Descending tracts` are named throughout because a funiculus cannot be described without its contents, and are NOT claimed: each is the next structure in this topic and has its own scene.",
+    "CURRICULUM VIEWS: `cross_section` is the only required view and all five beats carry it, correctly — no beat asks the student to look at an exterior, and the one beat that moves (beat 4) moves the same cut to a different level rather than changing plane. Its CROSS_SECTION op uses `axis:\"z\"`, the vertical axis of these meshes, which is the correct axis for a transverse cut and is consistent with the axial cuts in `brainstem__pons` and `cerebrum-gross-lobes__white-matter-tracts`; coronal cuts in this course use `axis:\"y\"`.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch. The hollowness is entirely at the artwork layer, and unusually for this course no mesh fetch would reduce it — see the second gap note. Whoever prioritises fetches should read this scene as evidence that the Spinal Cord topic is an ARTWORK request, not a mesh request."
+  ]
+}

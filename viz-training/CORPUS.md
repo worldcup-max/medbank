@@ -2861,8 +2861,12 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   that structure is now authored separately as `neuroanatomy__ventricular-system-csf__csf-circulation` in
   `diagram`, its first preferred mode. It also does not claim `Choroid plexus`, now authored separately as
   `neuroanatomy__ventricular-system-csf__choroid-plexus`.
-- 22/23 models missing from meshes-lite. The one present is FMA78497, fetched for the gross spinal cord
-  scene — verified by listing the directory. No anchors authored.
+- AMENDED AT AUDIT 2026-09-08: **status `ready`, `audited_at` 2026-09-08**, now **24 structures** — the
+  tuber cinereum (FMA62327) was authored into the floor of the third ventricle, closing a correction the
+  scene had recorded on 2026-08-30 and never applied. **All 24 models are on disk; no beat is hollow.**
+  The old line here ("22/23 models missing from meshes-lite") was stale and was the reason the scene sat
+  at `candidate` for nine days; the scene's own `gaps[]` contradicted it three entries earlier. No anchors
+  authored — the obex remains the only attemptable definition and was not attempted.
 
 ### `neuroanatomy__ventricular-system-csf__choroid-plexus` (new)
 - id `neuroanatomy__ventricular-system-csf__choroid-plexus` · Neuroanatomy · Ventricular System & CSF ·
@@ -2919,8 +2923,19 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
 
 ### `neuroanatomy__basal-ganglia-diencephalon__basal-ganglia` (new)
 - id `neuroanatomy__basal-ganglia-diencephalon__basal-ganglia` · Neuroanatomy · Basal Ganglia &
-  Diencephalon · Basal ganglia · mode `3d_anatomy` · provider `bodyparts3d` · status **candidate** ·
-  17 structures (8 parts) · 7 views · 31 ops · covers "Basal ganglia" only.
+  Diencephalon · Basal ganglia · mode `3d_anatomy` · provider `bodyparts3d` · status **✅ ready ·
+  audited 2026-09-04** · 17 structures (8 parts) · 7 views · 31 ops · covers "Basal ganglia" only.
+- **Audited 2026-09-04 and signed with NO changes to the scene file.** All 17 ids and names re-checked
+  against `available-meshes.json` character-for-character and all 17 sides re-read off catalog names
+  (not inferred from neighbouring ids); all 17 meshes confirmed on disk file-by-file; all 31 ops and
+  every op target and `anchor.on` resolved; covers[] spelling matched to `CURRICULUM.json`; curriculum
+  views `cross_section` + `mechanism` both present. Every absence claimed in `gaps[]` was re-searched
+  independently under multiple spellings before being believed — nigr/nigra/substantia, subthalam/Luys,
+  claustr, capsul, corona/radiat, striat, lentiform, accumbens, tegment, arter/vein/sinus — and every
+  one is TRUE: the catalog's only `nucleus` entries really are the two caudate nuclei, its only capsule
+  entries really are the two anterior limbs. Internal consistency pass found no contradiction; the
+  putamen's double membership, the posterior limb's absence and the undivided pallidum are each stated
+  the same way in the structure card, the beat and `gaps[]`.
 - All 17 ids verified in `available-meshes.json`, names character-for-character. Sides: caudate
   FMA72826 R / FMA72827 L, putamen FMA72828 R / FMA72829 L, globus pallidus FMA72830 R / FMA72831 L,
   anterior limb of internal capsule FMA72908 R / FMA72909 L, amygdala FMA72832 R / FMA72833 L, insula
@@ -2943,8 +2958,8 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
 
 ### `neuroanatomy__basal-ganglia-diencephalon__thalamus` (new)
 - id `neuroanatomy__basal-ganglia-diencephalon__thalamus` · Neuroanatomy · Basal Ganglia & Diencephalon ·
-  Thalamus · mode `3d_anatomy` · provider `bodyparts3d` · status **candidate** · 21 structures (4 parts) ·
-  6 views · covers "Thalamus" only.
+  Thalamus · mode `3d_anatomy` · provider `bodyparts3d` · status **✅ ready · audited 2026-09-04** ·
+  25 structures (8 parts, 4 measured anchors) · 6 views · 36 ops · covers "Thalamus" only.
 - Built as a boundary scene rather than a nucleus scene, because the thalamus mesh is undivided: the six
   walls (third ventricle medially, internal capsule laterally, fornix and ventricular floor above,
   hypothalamus below the hypothalamic sulcus, pulvinar over the tectum behind) are the teaching, and the
@@ -2955,8 +2970,34 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   FMA73414 L; anterior limb of internal capsule FMA72908 R / FMA72909 L; lateral ventricle FMA78449 R /
   FMA78450 L; fornix FMA72924 R / FMA72925 L; optic tract **FMA62382 right, FMA67936 left** (different id
   ranges — the second trap).
-- `candidate`, not `ready`: 21 of 21 models missing from `meshes-lite/`. Every beat is hollow.
-- Absences stated where a student would otherwise be misled: no thalamic nucleus and no geniculate body,
+- ~~`candidate`, not `ready`: 21 of 21 models missing from `meshes-lite/`. Every beat is hollow.~~
+  **FALSE, and corrected at the 2026-09-04 audit. This line was the last live copy of a delivery claim the
+  scene file itself had already retracted on 2026-08-30** — the scene's `gaps[]` said plainly that all 21
+  models were on disk while this file still said none of them was. A half-applied correction, exactly the
+  failure `REPAIR-BACKLOG.md` names: the fact was fixed in the instance and not in the corpus index. All 21
+  were re-verified on disk file-by-file at audit. Every beat renders. The structure and parts counts on the
+  line above were also wrong (21/4, now 25/8 with the four new anchors) and are corrected.
+- **Audited and signed 2026-09-04, with four anchors DERIVED at the audit** — the scene's own `gaps[]` had
+  named this as work open at its audit, and it was done rather than deferred. Lateral geniculate body
+  (`--parent FMA258714 --contact FMA62382 --area 3`, gap 0.45 mm, 55-vertex patch); medial geniculate body
+  (`--contact FMA73463 --area 3`, gap 0.13 mm, 18 vertices); anterior tubercle (`--extreme -y`, 18.9 mm from
+  centroid, identical under `--slab z:0.4,1.0` and `z:0.5,1.0`); posterior pole (`--extreme +y`). All four
+  `needs-review`. **Two checks made them trustworthy and both generalise.** (1) The direction of the y axis
+  was established from mesh centroids, not from the tool's `longAxis` report — pineal y=-75.3 vs mammillary
+  y=-103.3 proves more negative y is anterior, z=1560 vs 1551 proves +z is superior. Without that check
+  `--extreme -y` returns a reproducible and completely wrong "posterior pole". This is the spleen scene's
+  2026-08-29 trap recurring on brain meshes; assume it on every `--extreme`. (2) The two geniculate anchors
+  cross-check each other: on a right-sided mesh lower u is more lateral, and the lateral geniculate came out
+  at u 0.20 against the medial's u 0.53, both at w 0.04–0.06 on the inferior surface. The anatomy predicted
+  that ordering and the measurement produced it — one witness each, but not one piece of evidence each.
+- Two features REFUSED at audit, for definition reasons and not delivery ones, both recorded in `gaps[]`:
+  the hypothalamic sulcus is a LINE and needs a run of anchors the tool has no primitive for; the pulvinar
+  is a REGION, so what was measured is the posterior extremity of the mesh and it is labelled "posterior
+  pole", not "pulvinar", with the distinction written into its `calibrated_by`.
+- Beats 2 and 5 rewired onto the new anchors, and the three places that said the geniculate bodies are not
+  drawn — the optic-tract card, the brachium card and `gaps[0]` — were all reconciled in the same edit
+  rather than one of them being left behind.
+- Absences stated where a student would otherwise be misled: no thalamic nucleus and no geniculate body mesh,
   no internal medullary lamina, **no posterior limb of the internal capsule** (so the drawn anterior limb
   lies in front of the thalamus, not beside it — said in both capsule cards and in beat 3), no
   interthalamic adhesion, no hypothalamic sulcus, no mammillothalamic tract, no cerebral vessel.
@@ -2965,7 +3006,18 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
 ### `neuroanatomy__basal-ganglia-diencephalon__hypothalamus-pituitary` (new)
 - id `neuroanatomy__basal-ganglia-diencephalon__hypothalamus-pituitary` · Neuroanatomy · Basal Ganglia &
   Diencephalon · Hypothalamus & pituitary · mode `3d_anatomy` · provider `bodyparts3d` · status
-  **candidate** · 15 structures (5 parts) · 5 views · covers "Hypothalamus & pituitary" only.
+  **ready** (audited 2026-09-08) · 16 structures (6 parts) · 5 views · covers "Hypothalamus & pituitary"
+  only.
+- AUDITED AND CHANGED 2026-09-08. (a) The optic chiasm card called itself "the front wall of the box"
+  while the learning goal, beat 2, the lamina terminalis card and `ventricular-system-csf__ventricles`
+  all give the front WALL to the lamina terminalis and the chiasm the front of the FLOOR — corrected to
+  "front edge of the floor", with the wall named in the same sentence. (b) The sella turcica is no longer
+  an `approx` marker on the whole sphenoid: it is MEASURED, `--contact FMA13889 --area 3`, contact gap
+  0.65 mm, u=0.4985 confirming the midline, authored as `sella` render:"anchor" status:"needs-review"
+  with the single-witness limitation and the 3/5/8 mm centroid drift recorded in `calibrated_by`. The
+  `approx` was removed from the sphenoid in the same pass. (c) Beat 3's sentence "the bone lights whole"
+  was true before the anchor and false after it, and was rewritten rather than left as a stale half of
+  the correction. 15/15 meshes on disk; no hollow beats.
 - Routed to `3d_anatomy` and not to `diagram` despite there being no "hypothalamus" mesh, because four
   genuine hypothalamic/perihypothalamic landmarks exist and are drawn — tuber cinereum FMA62327,
   mammillary body FMA74877, lamina terminalis FMA61975, optic chiasm FMA62045 — plus the pituitary gland
@@ -3050,8 +3102,16 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
 
 ### `neuroanatomy__brainstem__pons` (new — second Brainstem scene)
 - id `neuroanatomy__brainstem__pons` · Neuroanatomy · Brainstem · Pons · mode `3d_anatomy` ·
-  provider `bodyparts3d` · status **candidate** · 9 structures (1 part) · 6 views · 30 ops ·
-  covers "Pons" only.
+  provider `bodyparts3d` · status **ready** (audited and signed 2026-09-02) · 9 structures (1 part) ·
+  6 views · 30 ops · covers "Pons" only.
+- **Audit 2026-09-02 — two anatomical corrections, both in narration, neither caught at authoring.**
+  (1) The cerebellum card said the pontocerebellar crossing lets the cortex "talk to the same-side
+  cerebellum through a crossing", which is self-contradictory and wrong; rewritten to state that each
+  hemisphere is wired to the OPPOSITE cerebellar hemisphere, which in turn governs its own side's limbs,
+  so the two crossings cancel — and that this is why cerebellar signs are ipsilateral. (2) Beat 2 gave
+  the vestibular schwannoma compression order as VIII → VII → V; corrected to VIII first, then V (lost
+  corneal reflex as the classic second sign), with VII typically the last to fail despite being nearest.
+  Whole file and the other two Brainstem scenes grepped for both facts: no other copy of either exists.
 - Curriculum views required (`cross_section`, `location`) both present: beats 1-2 `location`,
   beats 3-6 `cross_section`.
 - All 9 ids verified in `available-meshes.json`, names character-for-character; **9 of 9 in
@@ -3069,8 +3129,13 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
 
 ### `neuroanatomy__brainstem__medulla-oblongata` (new — third Brainstem scene)
 - id `neuroanatomy__brainstem__medulla-oblongata` · Neuroanatomy · Brainstem · Medulla oblongata ·
-  mode `3d_anatomy` · provider `bodyparts3d` · status **candidate** · 9 structures (2 parts) ·
-  6 views · 30 ops · covers "Medulla oblongata" only.
+  mode `3d_anatomy` · provider `bodyparts3d` · status **ready** (audited and signed 2026-09-02) ·
+  9 structures (2 parts) · 6 views · 30 ops · covers "Medulla oblongata" only.
+- **Audit 2026-09-02 — nothing wrong found.** All 9 ids re-looked-up and all 9 catalog names matched
+  character for character; every op target resolves; both required views present; both decussations,
+  the two medullary syndromes, the cruciate-hemiplegia claim and the coning mechanism read correct and
+  consistent with the pons and midbrain scenes; every named-not-drawn structure appears in both `terms[]`
+  and `gaps[]`. No change to the file except the signature.
 - Curriculum views required (`cross_section`, `mechanism`) both present: beats 1-2 `location`,
   beat 3 `cross_section`, beats 4-6 `mechanism`.
 - All 9 ids verified, **9 of 9 in `meshes-lite/` — draws complete.** FMA62004 is one undivided block:
@@ -3087,3 +3152,603 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   anchor would sit inside the medulla rather than on it.
 - Confirms the Spinal Cord topic's routing independently: the catalog holds `central canal of spinal
   cord` (the cavity) and no cord tissue at all.
+
+### `neuroanatomy__brainstem__reticular-formation` (new — fourth and last Brainstem scene)
+- id `neuroanatomy__brainstem__reticular-formation` · Neuroanatomy · Brainstem · Reticular formation ·
+  mode **`diagram`** (deferred `3d_anatomy`) · provider `svg` · status **planned** · 12 structures
+  (9 parts) · 5 views · 18 ops · covers "Reticular formation" only.
+- **AUDITED 2026-09-02** (`provenance.audited_at`), unchanged. Status stays `planned` and NOT `ready`
+  because no artwork exists; the signature closes the audit, not the delivery. All eight checks
+  re-run independently: zero catalog hits re-verified under 25 spellings, every op target resolves,
+  both required views present, no paired structure, no fact stated twice inconsistently.
+- Curriculum views required (`location`, `mechanism`) both present: beats 1-2 `location`, beats 3-5
+  `mechanism`.
+- **NO model ids and no `refs` on any structure.** Routing measured, not assumed: `reticul`, `raphe`,
+  `locus`, `coerul`, `tegment`, `gigantocellular`, `parvocellular`, `pedunculopontine`, `intralaminar`,
+  `periaqueductal`, `nigra`, `ruber`, `ambigu`, `solitar` all return ZERO catalog hits.
+- Unusually, the routing would be right even with meshes: the reticular formation is defined by having
+  no boundary, so a hard-edged mesh of it would misteach the subject. Recorded in `gaps[]` with an
+  explicit instruction not to accept one. Artwork brief: soft-gradient midsagittal core, one transverse
+  section showing the three columns, one bilateral two-route arousal diagram.
+
+### `neuroanatomy__cerebellum__cerebellar-lobes` (new — first Cerebellum scene)
+- id `neuroanatomy__cerebellum__cerebellar-lobes` · Neuroanatomy · Cerebellum · Cerebellar lobes ·
+  mode `3d_anatomy` · provider `bodyparts3d` · status **ready** · 9 structures (1 part) · 5 views ·
+  24 ops · covers "Cerebellar lobes" only.
+- **AUDITED 2026-09-02** and promoted `candidate` → `ready`; no other change. All 9 ids and names
+  re-looked-up in `available-meshes.json` character-for-character, all 9 exact; every op target
+  resolves; both required views present; no paired mesh, so no side to mislabel. The `3d_anatomy`
+  routing was re-examined and upheld — beats 2-4 are described-not-drawn, which is disclosed by
+  `approx{}` and argued both ways in `gaps[]`, so it is a stated judgement and not a defect.
+- Curriculum views required (`location`, `cross_section`) both present: beats 1-3 `location`,
+  beats 4-5 `cross_section`.
+- All 9 ids verified in `available-meshes.json`, names character-for-character; **9 of 9 in
+  `meshes-lite/` — draws complete.** FMA67944 is one undivided block, so all three lobes, both fissures,
+  the three longitudinal zones and the deep nuclei are named over it; `approx {shown_as, detail}` set on
+  the cerebellum for exactly that reason, plus a second `approx` on the occipital bone for the fossa.
+- **Routing call recorded rather than left implicit**: kept at `3d_anatomy` because beats 1 and 5
+  (location, and the pressure syndromes) are genuinely drawn, but beats 2-4 carry more named-not-drawn
+  content than any other 3D scene in this course. `gaps[]` states the case both ways and names `diagram`
+  as the honest fallback if a later run judges a labelled drawing teaches the lobes better.
+- Sides: none — every mesh unpaired midline, while beat 5 is entirely lateralised in words.
+- No anchors. Four rejections recorded: foramen magnum (a hole, not a point), posterior fossa (defined by
+  its rim, so a contact patch would measure the wrong thing), both fissures (lines with no lobe mesh to
+  witness them), and the cerebellar tonsil — a PAIRED swelling on an unsided mesh, where a `--contact`
+  against the medulla would return one midline point for something that is not there.
+- Warns the next structure in the topic: `Cerebellar peduncles` has no mesh of any peduncle and should
+  expect to route to `diagram`.
+
+### `neuroanatomy__cerebellum__cerebellar-peduncles` (new — second Cerebellum scene)
+- id `neuroanatomy__cerebellum__cerebellar-peduncles` · Neuroanatomy · Cerebellum · Cerebellar
+  peduncles · mode **`diagram`** (deferred `3d_anatomy`) · provider `svg` · status **planned** ·
+  8 structures (2 parts) · 5 views · 18 ops · covers "Cerebellar peduncles" only.
+- Curriculum views required (`cross_section`, `mechanism`) both present: beats 1-2 `cross_section`
+  (the cut face left when the cerebellum is lifted off), beats 3-5 `mechanism`.
+- **NO model ids and no `refs`.** Routing measured this run under 24 spellings — peduncle, pedunculus,
+  brachium pontis, brachium conjunctivum, restiform, juxtarestiform, crus cerebelli, velum, olivary,
+  pontocerebellar, spinocerebellar, dentatothalamic, decussation: the catalog's only `peduncle` is
+  FMA62394, the midbrain's crus cerebri, and its only `brachium` entries are the four collicular
+  brachia FMA73461-73464. Not one of the six peduncles exists.
+- Second, independent reason for `diagram`: the subject is a cut surface and the traffic inside it,
+  which no surface mesh carries even in a segmented brainstem. FMA67944 and FMA67943 were deliberately
+  NOT imported as context, so no drawn part can be mistaken for a measured one.
+- Teaches the double crossing at full length (pons, then superior peduncle in the midbrain) and the
+  three per-peduncle lesions: Wallenberg, cerebellopontine-angle schwannoma, MS plaque.
+
+### `neuroanatomy__cerebellum__deep-cerebellar-nuclei` (new — third Cerebellum scene)
+- id `neuroanatomy__cerebellum__deep-cerebellar-nuclei` · Neuroanatomy · Cerebellum · Deep cerebellar
+  nuclei · mode **`diagram`** (deferred `3d_anatomy`) · provider `svg` · status **planned** ·
+  7 structures (2 parts) · 5 views · 19 ops · covers "Deep cerebellar nuclei" only.
+- Curriculum views: `cross_section` is the only required view and all five beats carry it — correct
+  rather than lazy, since the whole subject is what a coronal section through the white matter shows.
+- **NO model ids and no `refs`.** Routing measured under 22 spellings — dentate, dentatus, emboliform,
+  globose, globosus, interposit, fastigi, roof nucleus, hilum, corpus medullare, vestibular, Purkinje,
+  olive: the catalog's only brain `nucleus` entries are the two caudate nuclei FMA72826/72827, and its
+  only cerebellar entry is FMA67944 undivided. No vestibular nucleus and no olive either.
+- Carries the fact the topic is built on: afferents drop excitatory collaterals on the nuclei, Purkinje
+  cells are the cortex's only output and are inhibitory, so these four nuclei plus the borrowed
+  vestibular nuclei are the ONLY output of the cerebellum.
+
+### `neuroanatomy__cerebellum__cerebellar-peduncles` (audited 2026-09-02)
+- Audited and signed. One claim WITHDRAWN rather than corrected: "the inferior is the smallest"
+  (beat 1 and the `icp` card) — sources disagree on inferior vs superior and nothing on disk settles
+  it; both sentences now assert only that the middle is larger than the other two together. Catalog
+  re-searched under twenty-one spellings; routing to `diagram` confirmed on two grounds. 0 models
+  referenced, 0 in hand; all five beats hollow for want of artwork, not geometry. status `planned`.
+
+### `neuroanatomy__cerebellum__deep-cerebellar-nuclei` (audited 2026-09-02)
+- Audited and signed after two fixes. (1) The `vestibular` card called the vestibular nuclei the
+  "fifth nucleus" in its label and "the fourth nucleus" in its closing line — an internal
+  contradiction the previous run's consistency check did not reach; now states four intramural
+  nuclei = three units plus a borrowed fifth. (2) Beat 1's CROSS_SECTION carried `axis:"z"` under a
+  CORONAL narration; changed to `y`, matching every other coronal cut in the course. 0 models
+  referenced, 0 in hand; all five beats hollow for want of artwork. status `planned`.
+
+### `neuroanatomy__cerebellum__cerebellar-function` (new — fourth and last Cerebellum scene)
+- id `neuroanatomy__cerebellum__cerebellar-function` · Neuroanatomy · Cerebellum · Cerebellar function
+- `diagram`, `deferred_modes: [3d_anatomy]`, provider svg, status `planned`, authored 2026-09-02.
+  8 structures (4 parts) · 5 views, all `mechanism` (the only required view) · covers "Cerebellar
+  function" only. The cerebellum as a comparator: efference copy vs actual movement, feedforward
+  prediction, the three functional divisions, the climbing fibre as error signal and long-term
+  depression, and every classical sign and bedside test derived from the model. Romberg's stated
+  explicitly as NOT a cerebellar sign. Catalog re-searched: `cerebellum` undivided and `pons` are the
+  only relevant meshes and both deliberately excluded from a drawn circuit. 0 models referenced.
+
+### `neuroanatomy__spinal-cord__spinal-cord-cross-section` (new — first Spinal Cord scene)
+- id `neuroanatomy__spinal-cord__spinal-cord-cross-section` · Neuroanatomy · Spinal Cord · Spinal cord
+  cross-section
+- `diagram`, `deferred_modes: [3d_anatomy]`, provider svg, status `planned`, authored 2026-09-02.
+  9 structures (3 parts) · 5 views, all `cross_section` (the only required view) · covers "Spinal cord
+  cross-section" only. Three horns and their nuclei; three funiculi with tract positions, crossing
+  status and somatotopy; four levels told apart by grey-to-white proportion; four cord syndromes read
+  off the section. Catalog re-searched under twenty-eight spellings: no cord, no tract, no horn, no
+  root, no meninx — but `FMA78497 central canal of spinal cord` DOES exist (upper 34 mm only), which
+  corrects the author prompt's coverage table. Deliberately not imported. 0 models referenced, and no
+  mesh fetch would help this scene — it is an artwork request.
+
+### `neuroanatomy__cerebellum__cerebellar-function` (audited 2026-09-03)
+- Signed `audited_at` 2026-09-03. No anatomical error found; the scene is internally consistent and
+  agrees with all three sibling Cerebellum scenes. Two non-teaching corrections. A `gaps[]` note
+  called the flocculonodular lobe's direct Purkinje projection to the vestibular nuclei "the
+  fastigial-to-vestibular exception", naming the wrong structure — the fastigial nucleus projects
+  there too but as an ordinary deep nucleus by the juxtarestiform body. Both facts were already
+  stated correctly in the structure cards of this scene and of `deep-cerebellar-nuclei`; only the
+  provenance note was wrong. And beat 1's `TRACE_STRUCTURE` path ended on `signs`, a card the same
+  beat had ghosted with `ISOLATE_REGION` and never mentions — trimmed to `loop -> feedforward`.
+  Catalog re-verified independently: `cerebell` returns FMA67944 alone, `nucle` returns only the two
+  caudate nuclei, `tract` only the optic and iliotibial pairs. 0 models referenced. All five beats
+  hollow for want of artwork; status stays `planned`, correctly.
+
+### `neuroanatomy__spinal-cord__spinal-cord-cross-section` (audited 2026-09-03)
+- Signed `audited_at` 2026-09-03. **One anatomical error, corrected.** The `lateral_funiculus` card
+  said the spinothalamic second-order fibres cross in the anterior white commissure "one or two
+  segments below its entry". They cross one or two segments ABOVE entry. The `syndromes` card and
+  beat 5 both already derived the correct consequence — a contralateral level one or two segments
+  below the lesion — from the wrong mechanism, so the file contained the right answer twice and the
+  wrong cause once. Card now states direction and consequence in one sentence. Corpus-wide grep for
+  other copies: none, the fact appears nowhere else. `gaps[]` records the correction and three
+  catalog search traps (`white matter`, `lamina` and `cauda` each return a cerebral hit with no cord
+  relevance). 0 models referenced.
+
+### `neuroanatomy__spinal-cord__ascending-tracts` (new — second Spinal Cord scene)
+- id `neuroanatomy__spinal-cord__ascending-tracts` · Neuroanatomy · Spinal Cord · Ascending tracts ·
+  `diagram` (second preferred mode; Spinal Cord is mesh-dead and the routing was re-measured, not
+  quoted), `deferred_modes: [3d_anatomy]`, status `planned`, 6 structures, beats 1-4 `mechanism` and
+  beat 5 `cross_section` (both required views), covers "Ascending tracts" only. Built on one variable
+  — where the second-order neuron crosses. DCML crosses in the medulla, spinothalamic in the cord one
+  or two segments above entry, spinocerebellar not at all or twice. Dissociated loss, Brown-Sequard,
+  syringomyelia and SCD derived from those two crossing points. 0 models referenced; artwork request.
+
+### `neuroanatomy__spinal-cord__descending-tracts` (new — third Spinal Cord scene)
+- id `neuroanatomy__spinal-cord__descending-tracts` · Neuroanatomy · Spinal Cord · Descending tracts ·
+  `diagram`, `deferred_modes: [3d_anatomy]`, status `planned`, 6 structures, beats 1-4 `mechanism` and
+  beat 5 `cross_section` (both required views), covers "Descending tracts" only. Corticospinal from
+  precentral gyrus to anterior horn with all six lesion levels and the pyramidal decussation as the
+  contralateral/ipsilateral boundary; corticobulbar and its two exceptions; the four extrapyramidal
+  tracts; spasticity as release of the medullary reticulospinal brake; decorticate vs decerebrate with
+  the red nucleus as the boundary. FMA62394 `peduncle of midbrain` is the one available mesh and was
+  deliberately declined (reasoning in `gaps[]`). 0 models referenced.
+
+### `neuroanatomy__spinal-cord__ascending-tracts` (amended at audit 2026-09-03)
+- Audited and signed (`provenance.audited_at` 2026-09-03). Two corrections, both precision rather than
+  anatomy: beat 1 said flatly "the catalog holds no cord", which contradicted its own `gaps[]` recording
+  FMA78497 `central canal of spinal cord` — beat 1 now uses the sibling `spinal-cord-cross-section`
+  wording (uppermost 34 mm only, therefore not used); and `gaps[0]` listed `gracil` among searches
+  returning "nothing at all" when it returns the two gracilis muscles of the thigh, a false-absence note
+  of exactly the kind REPAIR-BACKLOG.md warns later runs will quote as evidence. Content unchanged.
+
+### `neuroanatomy__spinal-cord__descending-tracts` (amended at audit 2026-09-03)
+- Audited and signed (`provenance.audited_at` 2026-09-03). One anatomical error corrected: the
+  `posturing` card placed a lesion "BELOW the red nucleus, in the pons or UPPER MIDBRAIN" — the red
+  nucleus sits in the rostral midbrain, so the sentence contradicted itself; now reads caudal midbrain,
+  pons, or down to the vestibular nuclei. Beat 1's blanket "no cord, no tract" also reconciled with
+  `gaps[1]`, which records that FMA62394 (crus cerebri) DOES exist and was deliberately declined.
+
+### `neuroanatomy__spinal-cord__reflex-arc` (new — fourth and final Spinal Cord scene)
+- id `neuroanatomy__spinal-cord__reflex-arc` · Neuroanatomy · Spinal Cord · Reflex arc · `diagram`
+  (FIRST preferred mode here, unlike the two tract scenes), `deferred_modes: [3d_anatomy]`, status
+  `planned`, 5 structures, all five beats `mechanism` (the only view CURRICULUM.json requires; no
+  `cross_section` beat was padded in). Covers "Reflex arc" only. Five obligatory components with no
+  brain among them; monosynaptic stretch reflex against polysynaptic withdrawal and crossed extension;
+  the gamma loop as reflex gain with the Golgi tendon organ as the spindle's mirror image; hyperreflexia,
+  clonus and Babinski derived as release of an intact circuit, matching the account `descending-tracts`
+  reserved for this scene. 0 models referenced; artwork request. Spinal Cord topic now complete (4/4).
+
+### `neuroanatomy__cranial-nerves__cranial-nerve-nuclei` (new — first Cranial Nerves scene)
+- id `neuroanatomy__cranial-nerves__cranial-nerve-nuclei` · Neuroanatomy · Cranial Nerves · Cranial
+  nerve nuclei · `diagram` (second preferred; `3d_anatomy` unauthorable and re-measured this run, not
+  quoted from the prompt's DEAD table), `deferred_modes: [3d_anatomy]`, status `planned`, 5 structures,
+  beats 1-3 `location` and beats 4-5 `cross_section` (both required views), covers "Cranial nerve
+  nuclei" only. Built on the alar/basal rotation at the fourth ventricle: motor medial, sensory lateral,
+  sulcus limitans the border; six columns; the rule of four for levels; medial vs lateral brainstem
+  infarct read off the columns, with the vascular territories deferred to `brainstem__medulla-oblongata`
+  which owns them. The two optic nerve meshes were declined — CN II is the one nerve with no brainstem
+  nucleus. 0 models referenced, but this scene is a MESH request, not only an artwork one: segmented
+  brainstem nuclei would convert four of its five beats.
+
+### `neuroanatomy__cranial-nerves__cranial-nerve-courses` (new — second Cranial Nerves scene)
+- id `neuroanatomy__cranial-nerves__cranial-nerve-courses` · Neuroanatomy · Cranial Nerves · Cranial
+  nerve courses · `diagram` (second preferred; routing re-measured this run), `deferred_modes:
+  [3d_anatomy]`, status `planned`, 5 structures, beats 1-3 `location` and beats 4-5
+  `associated_organs` (both required views), covers "Cranial nerve courses" only. Three journeys —
+  out of the brain (exits reproduce the column order, IV the dorsal crossed exception), through the
+  skull (three fossae, nearly numerical order, V's three exits), and out to the target (V and VII's
+  long courses; IX-XII from one foramen to four destinations). Cavernous sinus given its own card:
+  travelling together means being lost together. The optic-pathway meshes named by
+  `cranial-nerve-nuclei` were declined here with the decision recorded, CN II being the worst
+  representative of a scene about peripheral courses. 0 models referenced. **Records a correction to
+  the prompt's DEAD verdict: the SKULL BASE is in the catalog (sphenoid, occipital, right temporal
+  already in `meshes-lite/`), so a 3D beat 2 is buildable today — the topic's only cheap 3D win.**
+
+### `neuroanatomy__cranial-nerves__cn-function-testing` (new — third and final Cranial Nerves scene)
+- id `neuroanatomy__cranial-nerves__cn-function-testing` · Neuroanatomy · Cranial Nerves · CN function
+  testing · `diagram` (FIRST preferred mode here), `deferred_modes: [3d_anatomy]`, status `planned`,
+  5 structures, all five beats `mechanism` (the only required view; no `location` beat padded in),
+  covers "CN function testing" only. The examination as one method applied twelve times: every test is
+  a circuit, so ask which limb failed. Dissociation (pupillary, corneal, gag, jaw jerk each pair one
+  nerve in with a different nerve out), company (the pattern names the compartment), level (forehead,
+  palate, tongue). 0 models referenced; pure artwork request. **Cranial Nerves topic now complete
+  (3/3), all three `diagram`.** Also records that the EFFECTORS exist in the catalog — 43 muscles of
+  facial expression, all 12 masticatory meshes, an eyeball — none in `meshes-lite/`, and none the
+  right object for a scene about acts.
+
+### `neuroanatomy__spinal-cord__reflex-arc` — AUDITED 2026-09-03, three corrections
+- Latency corrected in all three copies (learning_goal, `stretch` card, beat 2): the monosynaptic knee
+  jerk is ~20 ms, not ~30; ~30 is the ankle. Both values now given wherever the number appears.
+- The `withdrawal` card claimed the reflex arc "is also the pathway that pain and temperature reach the
+  brain by" — false, and contradicted by its own beat 3, which already had it right. Card rewritten to
+  the beat's account: one afferent, two parallel paths, the reflex finishing first.
+- `gaps[]` claimed the reflex root values were "stated once"; they appear twice. Note corrected.
+- Signed `audited_at: 2026-09-03`. Status stays `planned` (artwork).
+
+### `neuroanatomy__cranial-nerves__cranial-nerve-nuclei` — AUDITED 2026-09-03, two corrections
+- `gaps[0]` presented an exhaustive catalog search but omitted two of its own terms' positive hits:
+  `colliculus` returns 8 meshes and `ventricle` returns FMA78469 `fourth ventricle`. Neither changes
+  the routing (the facial colliculus is a different structure; the ventricle mesh is a cavity, not a
+  floor with a sulcus limitans on it) but the note as written would have taught a later run that the
+  fourth ventricle is absent from the catalog, which is false. Amended with both hits and the reasons.
+- Beat 4 now states which half of the rule of four is anatomy and which is arithmetic, which `gaps[8]`
+  already claimed it did. `terms[]` on the `levels` card had the mode string `cross_section` in it;
+  replaced with `facial colliculus` and `trochlear nucleus`.
+- Signed `audited_at: 2026-09-03`. Status stays `planned` (artwork).
+
+### `neuroanatomy__cranial-nerves__cranial-nerve-courses` — AUDITED 2026-09-03, two corrections
+- Read back end to end by a run that had not written it. IDs: none to check (zero model ids, zero
+  `refs`) — confirmed by grep, not by trusting the gaps note that says so. Names, sides: no catalog
+  names used, so nothing to compare. Ops: all 19 in the ten-op vocabulary; every `target` resolves to a
+  key in `structures[]` and every `ISOLATE_REGION` target to a real `group`. Curriculum views:
+  `location` + `associated_organs` required, beats 1–3 `location` and 4–5 `associated_organs` — covered.
+  `covers[]`: one entry, spelled as CURRICULUM.json spells it.
+- Catalog claims in `gaps[]` re-searched independently and they hold up unusually well: `nerve` really
+  does return only FMA50875/50878; `foramen` really does return only the cardiac interventricular
+  foramen; `canal` only the central canal of the spinal cord; `sinus` only the coronary sinus; `meatus`,
+  `fissure`, `petrous`, `dura`, `olive`, `bulb`, `root`, `ganglion` all genuinely empty. The skull-base
+  finding is correct and was verified on disk: FMA52736 sphenoid, FMA52735 occipital and FMA52738 right
+  temporal are all in `meshes-lite/`; FMA52740 ethmoid is in the catalog and not delivered.
+- CORRECTION 1 — a false absence claim. `gaps[2]` said the topic has "no parotid, no tongue, no palate,
+  no larynx". `palate` returns FMA53655/53656, the palatine bones, and the SAME gaps note two paragraphs
+  earlier lists "palatines" among the skull bones that exist. Scoped to "no SOFT palate or uvula", with
+  the bones named. The teaching consequence was right; the sentence was wrong.
+- CORRECTION 2 — a counted-from-memory number. "Forty-three muscles of facial expression are in the
+  catalog"; the enumerable set is THIRTY-NINE. Corrected, and the same number corrected in
+  `cn-function-testing`, which carried it too.
+- Also scoped: "NONE of the facial or masticatory meshes is in `meshes-lite/`" is true, but the XI
+  targets of beat 5 are half-delivered — FMA13408 right sternocleidomastoid and the three right
+  trapezius parts are on disk, all four left partners are not.
+- Signed `audited_at: 2026-09-03`. Status stays `planned` (artwork).
+
+### `neuroanatomy__cranial-nerves__cn-function-testing` — AUDITED 2026-09-03, four corrections
+- Same eight checks. Ops (19) all in vocabulary and all targets resolve; curriculum requires `mechanism`
+  only and all five beats are `mechanism`; `covers[]` one entry, correctly spelled; zero model ids.
+  Anatomy read against itself and against the other two Cranial Nerves scenes: Weber/Rinne stated in one
+  direction only, uvula-away and tongue-towards given together with mechanisms, forehead sparing and the
+  III pupil rule identical to `cranial-nerve-courses`. No anatomical error found.
+- CORRECTION 1 — `gaps[0]` listed `eyeball`, `pterygoid` and `orbicularis` as returning NOTHING while
+  the same note two sentences later lists all three as present. Self-contradiction; removed from the
+  negative list.
+- CORRECTION 2 — `palate` claimed to return nothing; returns the two palatine bones. Same fix as above,
+  applied to both files in the same pass.
+- CORRECTION 3 — "FORTY-THREE muscles of facial expression" → 39.
+- CORRECTION 4, the substantive one — `gaps[1]` said "no beat here could be rendered today". FALSE. The
+  entire afferent visual pathway is in `meshes-lite/`: FMA50875/50878 optic nerves, FMA62045 optic
+  chiasm, FMA67936/FMA62382 optic tracts. Beat 2's three-level field rule is a statement about exactly
+  that geometry and `optic chiasm` is already in the `vision` card's `terms[]`. Also false as a blanket:
+  the XI effectors (right SCM, three right trapezius parts) are on disk. Routing unchanged — the tests
+  are acts, not shapes — but the delivery claim is rewritten and beat 1's narration, which carried the
+  same "none of those meshes is on disk" sentence, is fixed with it.
+- Signed `audited_at: 2026-09-03`. Status stays `planned` (artwork).
+
+### `neuroanatomy__blood-supply-of-the-brain__circle-of-willis` (new — first Blood Supply scene)
+- id `neuroanatomy__blood-supply-of-the-brain__circle-of-willis` · Neuroanatomy · Blood Supply of the
+  Brain · Circle of Willis · `diagram` (second preferred mode) · `planned` · 4 structures, 4 views
+  (1 `location`, 3 `vasculature` — both curriculum views covered), 15 ops, 0 model ids.
+- Routing forced by a catalog that contains NO intracranial vessel at all. Verified this run under
+  twenty-odd spellings: the most cranial arteries in the catalog are FMA4058/FMA3941, the COMMON
+  carotids, which end in the neck. `basilar`, `communicating`, `circle`, `willis`, `choroidal`,
+  `lenticulostriate` all empty; `vertebral` returns twenty-three disks and vertebrae and no artery,
+  which is the live trap and is recorded in both new scenes.
+- Teaching spine: build the ring from two inflows rather than memorise a heptagon; the middle cerebral
+  is the biggest vessel and is NOT in the circle; collateral protects against slow stenosis and not
+  against embolism, and the complete ring is a minority finding; aneurysms sit at junctions and localise
+  by what they press on — posterior communicating on III with the pupil, anterior communicating on the
+  chiasm.
+
+### `neuroanatomy__blood-supply-of-the-brain__anterior-circulation` (new — second Blood Supply scene)
+- id `neuroanatomy__blood-supply-of-the-brain__anterior-circulation` · Neuroanatomy · Blood Supply of
+  the Brain · Anterior circulation · `diagram` (FIRST preferred mode) · `planned` · 4 structures,
+  4 views (2 `vasculature`, 2 `mechanism` — both curriculum views covered), 15 ops, 0 model ids.
+- Teaching spine: the homunculus crossing the territory boundary generates both stroke syndromes (ACA
+  leg, MCA face and arm); the lateral surface carries language, neglect, field and gaze, so it names the
+  hemisphere; ONE artery gives TWO diseases — lenticulostriate/capsular versus cortical branch — and the
+  bedside discriminator is whether the weakness is equal and whether any cortical sign exists; watershed
+  fails under global hypoperfusion, not embolism; the carotid gives the ophthalmic before the ring, so
+  amaurosis fugax plus contralateral limb signs names one vessel.
+- Cortical gyri exist as meshes and were deliberately not imported: a territory crosses many gyri and
+  stops in the middle of several, so shading whole-gyrus surfaces would assert a boundary the catalog
+  does not contain. Flagged for a later auditor: the gaze rule here (eyes towards the lesion) is the
+  opposite of the pontine rule owned by `brainstem__pons`, and that pair is the likeliest place in the
+  course for a conflation.
+
+### `neuroanatomy__blood-supply-of-the-brain__circle-of-willis` (amended 2026-09-03 — audited)
+- AUDITED and signed `provenance.audited_at: 2026-09-03`. One anatomical error corrected and it was
+  stated three times in the file: the loop was called SEVEN vessels in the `ring` narration while the
+  structure label correctly said "six arteries and three joins" (= nine), and the learning goal called
+  the ring a "heptagon". The circle is NINE — two carotid terminations, two anterior cerebrals, two
+  posterior cerebrals, one anterior and two posterior communicating. All three copies fixed and the
+  narration now names the nine members explicitly so the count is reconstructable. Status stays
+  `planned`: blocked on artwork, not on authoring.
+
+### `neuroanatomy__blood-supply-of-the-brain__anterior-circulation` (amended 2026-09-03 — audited)
+- AUDITED and signed `provenance.audited_at: 2026-09-03`. No anatomical error found. One gaps[] claim
+  tightened: it said the "superior/middle/inferior temporal gyri" were confirmed present, but the
+  catalog holds the superior temporal gyrus ONLY as its anterior and posterior parts
+  (FMA72801/72800, FMA72805/72804) and not as a whole-gyrus mesh. Corrected so a later run does not
+  reference an id that does not exist. Status stays `planned`.
+
+### `neuroanatomy__blood-supply-of-the-brain__posterior-circulation` (new — third Blood Supply scene)
+- id `neuroanatomy__blood-supply-of-the-brain__posterior-circulation` · Neuroanatomy · Blood Supply of
+  the Brain · Posterior circulation · `diagram` (FIRST preferred mode) · `planned` · 4 structures,
+  4 views (all `vasculature`, the only view the curriculum asks for), 15 ops, 0 model ids.
+- Teaching spine: paired vertebrals fuse into ONE basilar, so one vertebral is expendable and a basilar
+  occlusion is bilateral; PICA infarcts the LATERAL medulla, so crossed sensory loss with NO weakness
+  (the corticospinal tract is medial) — the signature no anterior vessel can imitate; basilar
+  perforators are the posterior lenticulostriates, giving a pontine lacune singly and locked-in
+  syndrome collectively, with vertical gaze spared because it is organised in the midbrain; posterior
+  cerebral takes the occipital lobe, so hemianopia with macular sparing, and it belongs to the circle
+  of Willis through the posterior communicating.
+- Catalog re-searched this run under sixteen spellings: no vertebral, basilar, cerebellar or cerebral
+  artery; `cerebell` returns ONE entry, FMA67944 the whole cerebellum. Beats 2–4 are hollow twice over
+  because brainstem INTERNAL anatomy (tracts, nuclei, reticular formation) has no mesh either.
+
+### `neuroanatomy__blood-supply-of-the-brain__dural-venous-sinuses` (new — fourth, topic complete)
+- id `neuroanatomy__blood-supply-of-the-brain__dural-venous-sinuses` · Neuroanatomy · Blood Supply of
+  the Brain · Dural venous sinuses · `diagram` (SECOND preferred mode; `3d_anatomy` unsupportable) ·
+  `planned` · 4 structures, 4 views (3 `vasculature` + 1 `cross_section` — both curriculum views
+  covered), 15 ops, 0 model ids.
+- Teaching spine: a sinus is a SPACE between two dural layers — no valves, no muscle, held open — and
+  all four clinical facts are that structure applied; the route is one trace (superior sagittal /
+  inferior sagittal + vein of Galen → straight → confluence → transverse → sigmoid → internal jugular);
+  sinus thrombosis is a pressure disease whose infarct is haemorrhagic and crosses arterial
+  territories, while a torn bridging vein is a slow subdural; the cavernous sinus is a crowding disease
+  (III, IV, V1, V2 in the wall, VI beside the carotid in the lumen) with a valveless door from the face.
+- `sinus` searched across all 934 catalog entries returns EXACTLY ONE: FMA4706 `coronary sinus`, a
+  cardiac structure. No dura, falx, tentorium, arachnoid or granulation of any kind. The only meshes
+  on this scene's route are the two internal jugular veins (FMA4754/FMA4762), which lie outside the
+  skull; named in gaps[] so their absence reads as a decision. Beat 3 uses `CROSS_SECTION` with zero
+  geometry deliberately and says so in its own narration.
+- Blood Supply of the Brain is now 4/4 authored, all `diagram`, all blocked on ARTWORK alone.
+
+### `neuroanatomy__blood-supply-of-the-brain__posterior-circulation` (amended 2026-09-04 — audited)
+- Read back by a run that had never seen it. All ten mesh claims in `gaps[]` re-measured against
+  `available-meshes.json` and every one held (`arter`=26 none intracranial, `basilar`/`communicat`/
+  `choroidal`/`perforat`/`calcarine`/`circul`=0, `vertebr`=45 none arterial, `cerebell`=1 whole organ,
+  `tract`=4 iliotibial+optic only). All eight withheld brainstem meshes confirmed present in
+  `meshes-lite/` by listing the directory.
+- ONE CORRECTION: `gaps[]` claimed BOTH this scene's sibling and `brainstem__pons` flag the
+  eyes-towards vs eyes-away gaze pair. Only `anterior-circulation` does; `pons` is signed and states
+  its own rule correctly but carries no cross-reference. Note rewritten to say what is actually true.
+- `audited_at` 2026-09-04. Status stays `planned` — zero models, all four beats hollow for want of artwork.
+
+### `neuroanatomy__blood-supply-of-the-brain__dural-venous-sinuses` (amended 2026-09-04 — audited)
+- Read back independently; the catalog absence claims all held (`sinus`=1 coronary sinus, `dura`,
+  `falx`, `tentorium`, `arachnoid`, `granulation`, `cavernous`, `sagittal`, `emissary`, `petrosal` = 0;
+  `jugular` = the two internal jugulars only).
+- ONE CORRECTION — the scene against itself: the `wall` structure narration listed THREE dural lines
+  along which sinuses run; beat 1 listed FOUR. Four is right and beat 1 was right — the transverse
+  sinus that beat 2 traces runs in the attached margin of the tentorium. Structure narration now
+  states four.
+- `audited_at` 2026-09-04. Status stays `planned`.
+
+### `neuroanatomy__limbic-system__hippocampus` (new — first Limbic System scene)
+- id `neuroanatomy__limbic-system__hippocampus` · Neuroanatomy · Limbic System · `3d_anatomy` ·
+  15 structures · 7 views (location ×2, cross_section ×2, mechanism ×3) · **`ready`** (audited and
+  promoted 2026-09-04 by a later run; `audited_at` set).
+- Position-first: hippocampus in the floor of the inferior horn, so it is curved, paired, and its
+  output takes the long arch. Fornix traced whole to the mammillary body; Papez closed as two
+  concentric arches around the corpus callosum.
+- DELIVERY: 14/15 meshes in `meshes-lite/`. Missing: FMA72713 RIGHT HIPPOCAMPUS — in the catalog,
+  not on disk. Highest-value single fetch in this topic; without it every bilateral argument is
+  drawn against one visible hippocampus.
+- Described-not-drawn and recorded: dentate gyrus, Ammon's horn, CA1, subiculum, fimbria (none in
+  catalog under any spelling), mammillothalamic tract and cingulum (`tract` = 4 entries total),
+  anterior thalamic nucleus (whole thalamus lit instead, said out loud).
+- AUDIT 2026-09-04: clean on all eight checks. 15/15 ids exist and 15/15 names match the catalog
+  character for character; every op target and `path[]` waypoint resolves; beats run 1-7 with no
+  repeat; curriculum views all present; `concept:papez` is the spec's documented form. The sides
+  claim was re-derived rather than read, including the FMA258716-L / FMA258714-R inversion. The
+  authoring run's account of this file was accurate in every particular checked. Promoted to `ready`.
+
+### `neuroanatomy__limbic-system__fornix-papez-circuit` (new — third and LAST Limbic System scene)
+- id `neuroanatomy__limbic-system__fornix-papez-circuit` · Neuroanatomy · Limbic System ·
+  `3d_anatomy` · 14 structures · 5 views (location ×2, mechanism ×3) · **ready** (audited 2026-09-08).
+- AUDITED AND CHANGED 2026-09-08 by the following run, as its own gaps[] asked. One error: the fornix
+  card counted the COMMISSURE among the segments "visible on this mesh", but the commissure is FMA61970,
+  a separate mesh with its own card two entries below — the card both miscounted the object and
+  contradicted the scene's own structures[]. Beat 1's "only four are drawn" was correct throughout; the
+  card was corrected and the matching fimbria gap note reconciled in the same pass. All 14 ids, names and
+  sides re-read against the catalog; all 14 meshes on disk; no hollow beats.
+- The fornix as a shape with a reason and Papez as a visible loop. Five segments named on one arch;
+  the arch read against what it passes — callosum over, septum pellucidum hanging from it, body
+  roofing the third ventricle, column forming the ANTERIOR wall of the interventricular foramen with
+  the thalamus as the posterior wall. Column divides at the ANTERIOR COMMISSURE into precommissural
+  (septal) and postcommissural (mammillary, and the half that carries Papez). Closes with three cuts
+  in one ring — hippocampus, fornix, mammillary body — and the colloid cyst as the fourth.
+- **TWO MESHES FOUND ONLY BY SEARCHING PAST THE CLINICAL NAME:** `monro` returns NOTHING while
+  `interventricular` returns FMA75351 INTERVENTRICULAR FORAMEN, the fornix's highest-yield relation;
+  `septum` returns FMA61844 SEPTUM PELLUCIDUM, which fixes the body of the fornix on any image. Both
+  on disk. Textbook instance of failure mode 1 avoided.
+- DELIVERY: **14/14 meshes on disk — the scene draws complete and no beat is hollow.** Built to trace
+  Papez on the LEFT side only, deliberately avoiding FMA72713 (right hippocampus, catalog but not
+  disk), so the topic's known delivery gap costs this scene nothing.
+- Described-not-drawn and recorded: mammillothalamic tract, cingulum, anterior thalamic nucleus,
+  fimbria, the pre/postcommissural split (a division of fibres within one mesh), septal nuclei and
+  preoptic area (none in catalog).
+- Anterior commissure is drawn as the DIVIDING LANDMARK and the narration says explicitly it is not a
+  Papez station — named as the commonest error in this topic.
+- **This is the 34th of 34 Neuroanatomy structures. The course is now fully authored.** Unsigned by
+  design: the authoring run must not audit its own work.
+
+### `neuroanatomy__limbic-system__amygdala` (new — second Limbic System scene)
+- id `neuroanatomy__limbic-system__amygdala` · Neuroanatomy · Limbic System · `3d_anatomy` ·
+  **12** structures · 4 views (location ×2, mechanism ×2) · `candidate` · `audited_at` 2026-09-04.
+- Position and two exits rather than "the fear centre": in front of the hippocampal head under the
+  uncus; stria terminalis the long way round the ventricle to the hypothalamus; Kluver-Bucy read as
+  one deficit (meaning not attached to perception) rather than four symptoms.
+- **THE STRIA TERMINALIS EXISTS** — FMA72940 (L) / FMA72939 (R). `amygdalofugal` returns nothing and
+  stopping there would have produced a scene with no drawn output. Failure mode 1, caught.
+- **AUDIT 2026-09-04 — CORRECTED, THEN SIGNED. The scene declared the hypothalamus absent from the
+  catalog and it is not.** `tuber` returns FMA62327 TUBER CINEREUM, the floor of the hypothalamus, in
+  the catalog and on disk. Teaching consequence, not bookkeeping: beat 3's entire yield is "the
+  destination is the HYPOTHALAMUS" and the beat was ending its trace on the THALAMUS while saying so
+  — two names two letters apart, one of which the stria merely runs beside without synapsing in.
+  FIXED: FMA62327 added to `The road out` with `approx` marking it as the hypothalamic REGION rather
+  than the exact terminal field (which is the anterior/medial hypothalamus, preoptic area and bed
+  nucleus — genuinely absent, re-verified); trace extended to end on it; narration now separates the
+  handrail from the destination. **The corpus already held the right answer in two places** —
+  `basal-ganglia-diencephalon__hypothalamus-pituitary` DRAWS FMA62327 (the old note cited it as
+  recording "the same absence"; it records a narrower and correct one, no hypothalamic *nucleus*),
+  and the sibling `hippocampus` scene written the same hour names the tuber cinereum as real.
+  Failure modes 1 and 6 together, in a `gaps[]` whose first entry congratulates the run for avoiding
+  failure mode 1. Both notes left standing side by side as the corpus's clearest example.
+- DELIVERY: 10/12 meshes in `meshes-lite/` (re-verified by statting each file). Missing: both striae
+  terminales, so beat 3 is hollow IN ITS MIDDLE — since the audit both ENDS of the output argument
+  draw, so what is lost is the road rather than the destination. Second priority after FMA72713.
+- Signed but deliberately NOT promoted to `ready`: beat 3's *subject* mesh is undeliverable, which is
+  different in kind from the hippocampus scene's missing mirror-image. Promote when FMA72940/72939
+  land; nothing else is outstanding.
+- BP51 `orbital gyri straight gyrus` used deliberately for orbitofrontal cortex; non-FMA id, flagged
+  in `gaps[]` so it does not read as a fabrication.
+
+### `histology__epithelium__simple-epithelia` (new)
+- id `histology__epithelium__simple-epithelia` · Histology · Epithelium · Simple epithelia · mode
+  `microscopic` · provider `svg` · status **planned** · 8 structures (0 mesh parts) · 5 views · 18 ops ·
+  covers "Simple epithelia" only.
+- **FIRST HISTOLOGY SCENE IN THE CORPUS.** Zero model ids, zero `refs`, zero anchors — and unlike most
+  non-3d scenes here that is not a provider gap but the nature of the subject: the teaching is cellular
+  arrangement two orders of magnitude below the mesh catalog's scale, so `3d_anatomy` is deliberately NOT
+  listed in `deferred_modes`. `microscopic` is the structure's FIRST preferred mode, so this is correct
+  routing, not a fallback. The catalog was searched anyway rather than assumed (epitheli, mucosa, membrane,
+  lamina, cell, goblet, villus, cilium, gland, duct, tubule, alveolus, follicle): nothing at this scale
+  exists; `lamina` returns only lamina terminalis and `membrane` only the two interosseous membranes.
+- Structure: the two-question classification method and the basement membrane first, then polarity, then
+  the three simple types as one comparison, then the two ways a simple epithelium is misread —
+  pseudostratified (real, and named for the protest) and the tangential cut (artefact).
+- Curriculum view `cross_section` is the only one required and all five beats carry it.
+- Beat 1 states out loud that nothing on screen is a model, so no beat asks a student to look for an
+  absent shape.
+- `gaps[]` lists the four drawings that must exist before promotion, and names the one that cannot be
+  substituted by a photomicrograph: the tangential-cut panel, whose subject IS the cut plane.
+
+### `histology__epithelium__stratified-epithelia` (new)
+- id `histology__epithelium__stratified-epithelia` · Histology · Epithelium · Stratified epithelia · mode
+  `microscopic` · provider `svg` · status **planned** · 8 structures (1 part, 0 mesh parts) · 5 views ·
+  18 ops · covers "Stratified epithelia" only.
+- Same routing and the same zero-mesh reasoning as its sibling above, catalog re-searched independently
+  (epidermis, skin, keratin, stratum, corneum, urotheli, bladder, ureter, oesophagus): nothing.
+- Structure: the surface-cell naming rule, the layers-versus-exchange trade, then the keratinised /
+  non-keratinised pair, the five epidermal strata read as one keratinocyte's life with pemphigus and
+  pemphigoid marked at the two junction levels, the rare stratified cuboidal and columnar, transitional
+  epithelium in two states, and metaplasia in both directions.
+- **Authored in the same run as the simple-epithelia scene and cross-checked against it before either was
+  saved.** Three facts appear in both files and were deliberately written to agree: the two-question
+  method (same words, same order, both beat 1s); the basement membrane as the line defining invasion; and
+  the DIRECTION of the two metaplasias — airway columnar→squamous, oesophagus squamous→columnar. That
+  third is flagged in both `gaps[]` as the thing most likely to be broken by a later edit, and each file
+  states both directions so a corrupted copy has a live correct one in the same topic.
+- Transitional epithelium given a full card and a two-panel beat rather than a list line, and the reason
+  is recorded so a later run does not "simplify" it: it is the one epithelium whose appearance depends on
+  the state of the organ, and a single relaxed panel would teach the error the beat exists to prevent.
+- Curriculum view `cross_section` is the only one required and all five beats carry it.
+
+### `histology__epithelium__glandular-epithelium` (new)
+- id `histology__epithelium__glandular-epithelium` · Histology · Epithelium · Glandular epithelium ·
+  mode `microscopic` · provider `svg` · status **planned** · 12 structures (2 parts) · 5 views
+  (cross_section ×2, glands ×1, mechanism ×2) · covers "Glandular epithelium" only.
+- Built as FOUR QUESTIONS ASKED IN ORDER rather than four lists: kept its duct (exocrine) or lost it
+  (endocrine); shape of the end piece (simple/compound × tubular/acinar); how the product leaves the
+  cell (merocrine/apocrine/holocrine); what is in it (serous/mucous). Beat 5 runs all four on the
+  pancreas, which answers question one BOTH ways in one section.
+- Two limits stated in the scene rather than only in `gaps[]`, and both should survive later edits.
+  Only HOLOCRINE secretion has an unambiguous light-microscopic signature (basal-to-luminal gradient
+  ending in pyknotic nuclei); merocrine is inferred from an unremarkable apex and "apocrine" blebs can
+  be a fixation product, with several such glands reclassified as exocytotic on EM. And the serous
+  DEMILUNE is taught as the examinable picture WITH its artefact caveat — cryofixation work suggests the
+  crescent is largely produced by fixation swelling the mucous cells.
+- Zero models referenced; nothing to fetch. Catalog searched before the absence was claimed: `gland`
+  returns exactly THREE entries (both adrenals and the pituitary) and `acin`/`islet`/`goblet`/
+  `sebaceous`/`myoepithel`/`demilune`/`epitheli` return nothing.
+
+### `histology__epithelium__cell-junctions` (new — completes the Epithelium topic, 4 of 4)
+- id `histology__epithelium__cell-junctions` · Histology · Epithelium · Cell junctions · mode
+  `microscopic` · provider `svg` · status **planned** · 8 structures · 5 views (cross_section ×2,
+  mechanism ×3) · covers "Cell junctions" only.
+- The junctional complex as a STACK IN FIXED ORDER down the lateral surface — tight, adherens,
+  desmosome — with gap junctions and hemidesmosomes in a separate group because one communicates and
+  one anchors to the floor. Each junction learnt by the single question it answers. Beat 5 is the payoff
+  and is ONE RULE, not two diseases: the blister forms at the level of the junction attacked, so
+  pemphigus (desmoglein → desmosome) splits intraepidermally with a thin roof, erosions, Nikolsky
+  positive, mucosa involved, fishnet immunofluorescence; pemphigoid (BP180/BP230 → hemidesmosome)
+  splits subepidermally with a tough roof, tense intact bullae, Nikolsky negative, mucosa spared, linear
+  band. Type VII collagen and dystrophic EB are the same rule one level deeper.
+- Carries an explicit MODALITY card: the only three light-microscopic findings in the whole topic are the
+  terminal bar, the spinous-layer prickles and acantholysis. Everything else is EM, freeze fracture or
+  immunofluorescence, and beats 1 and 3 repeat the limit in their own narration. The artwork list in
+  `gaps[]` requires each figure to be labelled with its modality.
+- Zero models referenced. Catalog searched: `junction`, `desmosome`, `zonula`, `occlud`, `adheren`,
+  `claudin`, `cadherin`, `connexin`, `epitheli`, `basement` and `cell` all return NOTHING; `membrane`
+  returns only the four interosseous membranes, noted so a later run does not mistake the hit.
+
+---
+
+## Amendments — audit run 2026-09-08 (four scenes read back, four promoted to `ready`)
+
+### `neuroanatomy__basal-ganglia-diencephalon__internal-capsule` (amended: audited)
+- **status `candidate` → `ready`, `audited_at` 2026-09-08.** All 17 ids verified against
+  `available-meshes.json`, all 17 names character-for-character, all 17 on disk, every op target resolves,
+  both required curriculum views (`cross_section`, `mechanism`) present. **Nothing was found wrong.**
+  The scene's central absence — no posterior limb, genu, retrolentiform or sublentiform mesh — is real
+  (re-searched: `capsul` returns exactly the two anterior limbs) and is taught around honestly rather than
+  papered over, so it does not bar `ready`.
+
+### `neuroanatomy__brainstem__midbrain` (amended: audited, one false gap corrected)
+- **status `candidate` → `ready`, `audited_at` 2026-09-08.** 23/23 ids, names and disk files verified.
+- **CORRECTION: `gaps[]` claimed "NO GENICULATE BODY OF EITHER KIND".** All four are in the catalog —
+  FMA73303/73304 lateral, FMA73309/73310 medial — and none is in `meshes-lite/`. Restated as a DELIVERY
+  gap with the four ids, and the two structure cards that repeated the false claim were corrected with it.
+
+### `neuroanatomy__ventricular-system-csf__choroid-plexus` (amended: audited)
+- **status `candidate` → `ready`, `audited_at` 2026-09-08.** 15/15 ids, names and disk files verified;
+  `location` + `glands` + `mechanism` all present as the curriculum requires.
+- **CORRECTION: the delivery gap said 14 of 15 meshes were missing and asked a human to fetch
+  FMA274029/FMA274027 — both were already on disk.** The scene was fully drawable and invisible.
+  The glomus anchor note was also corrected: the obstacle is definitional (a thickening, not a contact or
+  an extremity), not delivery.
+
+### `neuroanatomy__basal-ganglia-diencephalon__thalamus` (amended: false absence corrected, signature kept)
+- Not re-audited; edited under "fix the fact, not the instance". Three statements that the geniculate
+  bodies "have no mesh" now say they are catalogued and unfetched, with the four ids. The four measured
+  anchors stand as the right treatment for today and should be retired when the meshes arrive.
+
+### `neuroanatomy__cerebrum-gross-lobes__white-matter-tracts` (amended: internal contradiction closed)
+- `gaps[5]` said no lateral geniculate body exists; `gaps[9]`, in the same file, gave its id. Both now say
+  the same thing: catalogued, not on disk, therefore a fetch job and **not** drawable today — `gaps[9]`
+  had said it "should be authored", which would have referenced four ids that cannot render.
+
+### `neuroanatomy__cerebrum-gross-lobes__white-matter-tracts` (amended: audited 2026-09-08 → ready)
+- 25 → 27 structures. Added two measured anchors on the corpus callosum mesh: `cc_genu`
+  (EXTREME -y within slab x:0.45,0.55, 43.2 mm from centroid, v=0.022) and `cc_splen`
+  (EXTREME +y, same slab, v=0.942). Both `needs-review`. The unrestricted extremes land at u=0.18
+  and u=0.96 — on forceps fibres, off the midline — so the midline slab is load-bearing.
+- Beat 6 and beat 7 each had an op reaching into a group their own `ISOLATE_REGION` ghosts
+  (`wm`, `th_l`); explicit `SHOW_STRUCTURE` added before each, as beat 9 of the sibling scene
+  already did correctly.
+- `gaps[]` claim "no mesh referenced by this scene is present in meshes-lite/ … all nine beats are
+  hollow" was FALSE: all 25 models on disk. Corrected. Status `candidate` → `ready`.
+
+### `neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes` (amended: audited 2026-09-08 → ready)
+- Beat 10 `CROSS_SECTION axis:"z"` (axial) under narration describing a cut viewed from the front
+  (coronal) → `axis:"y"`, narration now names the plane. Axis frame measured, not assumed.
+- Beat 7 `HIGHLIGHT_STRUCTURE target:"Insula"` targeted a GROUP, not a structure; replaced with
+  `ins_l` + `ins_r` so the pinned label is determinate.
+- Same false "none of the 38 brain models has been fetched" gap note corrected; all 38 on disk.
+  Status `candidate` → `ready`.

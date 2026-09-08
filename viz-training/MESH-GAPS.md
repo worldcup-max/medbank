@@ -88,3 +88,14 @@ Each was opened in the viewer and looked at — the patch is on the feature it n
 The axillary apex was **refused** by the tool: it is the gap between the clavicle and the first rib,
 and those surfaces are 3.27 mm apart, so there is no contact point to measure. A space bounded by three
 bones is not a landmark on any one of them.
+
+## Catalog-present, disk-absent (2026-09-04)
+
+Not landmark gaps — these meshes exist in `available-meshes.json` and are simply not in `meshes-lite/`.
+Each is one fetch and each unblocks a beat that is currently hollow.
+
+| id | name | blocks |
+|---|---|---|
+| `FMA72713` | right hippocampus | `limbic-system__hippocampus` beats 2 and 3; every bilateral argument in both Limbic scenes is drawn against one visible hippocampus |
+| `FMA72940` | left stria terminalis | `limbic-system__amygdala` beat 3 — the whole output argument |
+| `FMA72939` | right stria terminalis | as above |

@@ -232,19 +232,20 @@
       "anchor": {
         "on": "scapula",
         "uvw": [
-          0.254,
-          0.311,
-          0.863
+          0.2521,
+          0.3035,
+          0.8593
         ],
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: nearest CONTACT point between the bone and the attaching muscle, measured on the source meshes",
-      "calibration_gap_mm": 0.0,
+      "calibrated_by": "geometry: CONTACT on FMA13395 (right scapula, 158.3 mm long axis z) against FMA37686, the long head of biceps — gap 0.55 mm, 1 witness. tools/derive-landmark.mjs --parent FMA13395 --contact FMA37686. Re-measured 2026-09-08: the previous coordinate was sound (1.04 mm away) but recorded a gap of 0 mm, which is not a measurement any surface pair produces.",
+      "calibration_gap_mm": 0.55,
       "terms": [
         "supraglenoid tubercle"
       ],
-      "narration": "The small bump just above the glenoid — where the long head of biceps begins."
+      "narration": "The small bump just above the glenoid — where the long head of biceps begins.",
+      "calibration_witnesses": 1
     },
     {
       "key": "intertubercular_groove",
@@ -263,14 +264,15 @@
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: nearest CONTACT point between the humerus and the long head of biceps (gap 0.39 mm); see tools/derive-humerus-landmarks.mjs. Unified 2026-08-30 with gross__arm__humerus, which carries the measured value.",
-      "calibration_gap_mm": 0.09,
+      "calibrated_by": "geometry: nearest CONTACT point between the humerus and the long head of biceps (gap 0.39 mm); reproduced 2026-09-08 with tools/derive-landmark.mjs --parent FMA23130 --contact FMA37686 --slab z:0.75,1. Unified 2026-08-30 with gross__arm__humerus, which carries the measured value.",
+      "calibration_gap_mm": 0.39,
       "terms": [
         "intertubercular groove",
         "bicipital groove",
         "intertubercular sulcus"
       ],
-      "narration": "The gutter between the two tubercles — the tendon runs down it, held in by the transverse ligament."
+      "narration": "The gutter between the two tubercles — the tendon runs down it, held in by the transverse ligament.",
+      "calibration_witnesses": 1
     },
     {
       "key": "radial_tuberosity",
@@ -282,20 +284,21 @@
       "anchor": {
         "on": "radius",
         "uvw": [
-          0.903,
-          0.664,
-          0.859
+          0.8662,
+          0.6464,
+          0.8318
         ],
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: nearest CONTACT point between the bone and the attaching muscle, measured on the source meshes",
+      "calibrated_by": "geometry: CONTACT on FMA23464 (right radius, 229.4 mm) against FMA37686, the long head of biceps — gap 0.10 mm, 1 witness. tools/derive-landmark.mjs --parent FMA23464 --contact FMA37686. Unified 2026-09-08 with gross__forearm-hand__radius-ulna, which already carried this exact value while this scene sat 6.72 mm away. The short head (FMA37684) is NOT a valid second witness here — the two heads share one distal tendon but only the long head’s mesh reaches the tuberosity, and including it made the tool refuse at a 36.19 mm gap.",
       "calibration_gap_mm": 0.1,
       "terms": [
         "radial tuberosity",
         "bicipital tuberosity"
       ],
-      "narration": "Where the biceps tendon attaches — pulling here supinates as well as flexes."
+      "narration": "Where the biceps tendon attaches — pulling here supinates as well as flexes.",
+      "calibration_witnesses": 1
     },
     {
       "key": "coracoid_process",
@@ -307,19 +310,20 @@
       "anchor": {
         "on": "scapula",
         "uvw": [
-          0.314,
-          0.101,
-          0.862
+          0.3257,
+          0.0458,
+          0.8437
         ],
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: nearest CONTACT point between the bone and the attaching muscle, measured on the source meshes",
-      "calibration_gap_mm": 0.0,
+      "calibrated_by": "ONE LANDMARK, ONE PLACE. Unified 2026-09-08 with gross__pectoral-region-breast__clavicle and __pectoralis-minor, which carry this exact coordinate, were reviewed in the viewer on 2026-08-28, and rest on the better measurement: CONTACT on FMA13395 against all THREE structures that attach to the coracoid — FMA13375 pectoralis minor (gap 0.20 mm), FMA37665 coracobrachialis (0.16 mm) and FMA37684 short head of biceps (0.14 mm), 3 witnesses converging over 12.79 mm. Re-derived independently 2026-09-08 and reproduced to the digit. This scene had sat 6.87 mm away from its two siblings with a recorded gap of 0 mm. tools/derive-landmark.mjs --parent FMA13395 --contact FMA13375,FMA37665,FMA37684",
+      "calibration_gap_mm": 0.14,
       "terms": [
         "coracoid process"
       ],
-      "narration": "The hook in front — origin of the short head, with coracobrachialis."
+      "narration": "The hook in front — origin of the short head, with coracobrachialis.",
+      "calibration_witnesses": 3
     },
     {
       "key": "infraglenoid_tubercle",
@@ -331,19 +335,20 @@
       "anchor": {
         "on": "scapula",
         "uvw": [
-          0.225,
-          0.38,
-          0.626
+          0.2274,
+          0.382,
+          0.624
         ],
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: nearest CONTACT point between the bone and the attaching muscle, measured on the source meshes",
-      "calibration_gap_mm": 0.1,
+      "calibrated_by": "geometry: CONTACT on FMA13395 against FMA37699, the long head of triceps — gap 0.61 mm, 1 witness. tools/derive-landmark.mjs --parent FMA13395 --contact FMA37699. Re-measured 2026-09-08: coordinate sound (0.47 mm away), recorded gap corrected from 0.1 mm.",
+      "calibration_gap_mm": 0.61,
       "terms": [
         "infraglenoid tubercle"
       ],
-      "narration": "Below the glenoid — the long head of triceps starts here, which is why it crosses the shoulder."
+      "narration": "Below the glenoid — the long head of triceps starts here, which is why it crosses the shoulder.",
+      "calibration_witnesses": 1
     },
     {
       "key": "olecranon",
@@ -355,15 +360,14 @@
       "anchor": {
         "on": "ulna",
         "uvw": [
-          0.789,
-          0.991,
-          0.95
+          0.8137,
+          0.8396,
+          1
         ],
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: nearest CONTACT point between the bone and the attaching muscle, measured on the source meshes",
-      "calibration_gap_mm": 0.2,
+      "calibrated_by": "geometry: EXTREME +z on FMA23467 (right ulna, 247.7 mm, long axis z) — the olecranon is the proximal tip of the ulna, a feature defined by POSITION, not by what touches it. 109.5 mm from the centroid, 1502 vertices considered. tools/derive-landmark.mjs --parent FMA23467 --extreme +z. Corrected 2026-09-08: this anchor had been defined as a contact against the triceps, which is wrong twice over — the triceps tendon attaches over a broad area (three heads converge with 15.43 mm spread, so no single contact point is the landmark), and the resulting coordinate sat 17.33 mm from the tip, the largest landmark error in the corpus. gross__forearm-hand__radius-ulna already carried the correct value.",
       "terms": [
         "olecranon",
         "olecranon process"
@@ -486,7 +490,9 @@
     "approved_by": "frank",
     "approved_at": "2026-08-23",
     "audited_at": "2026-08-28",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
   },
   "gaps": [
     "The transverse humeral ligament, which holds the long head's tendon in the intertubercular groove and is named in that landmark's narration, does not exist in the catalog — searched 2026-08-28 as 'transverse humeral', 'transverse ligament' and 'ligament'. Narration only; nothing on screen holds the tendon down.",

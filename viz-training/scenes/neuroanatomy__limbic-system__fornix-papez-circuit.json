@@ -1,0 +1,576 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__limbic-system__fornix-papez-circuit",
+  "mode": "3d_anatomy",
+  "deferred_modes": [],
+  "course": "Neuroanatomy",
+  "topic": "Limbic System",
+  "structure": "Fornix & Papez circuit",
+  "covers": [
+    "Fornix & Papez circuit"
+  ],
+  "learning_goal": "Learn the fornix as a SHAPE WITH A REASON and Papez as a LOOP YOU CAN SEE, not as two lists. The fornix is the hippocampus's output cable, and it takes an absurdly long C-shaped route — back, up, over, forward, down — to reach a target a few centimetres from where it started, because it has to climb out of a ventricle and get over the thalamus to do it. Everything clinical follows from where that arch passes: it is slung under the corpus callosum with the septum pellucidum hanging from it, its body roofs the THIRD VENTRICLE, and its columns form the front wall of the INTERVENTRICULAR FORAMEN — so a cyst at that foramen, or a surgeon entering the third ventricle, is working in the middle of the memory circuit. Then the split most students never learn: at the ANTERIOR COMMISSURE the column divides, precommissural to the septal region and postcommissural to the mammillary body, and it is the postcommissural half that carries Papez. Close the loop from there and Korsakoff, colloid cyst and forniceal amnesia stop being three facts and become three points on one ring.",
+  "status": "ready",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-04",
+    "audited_at": "2026-09-08",
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
+  },
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "limbic system",
+      "fornix",
+      "Papez circuit",
+      "memory",
+      "amnesia"
+    ],
+    "terms": [
+      "fornix",
+      "fimbria",
+      "crus of fornix",
+      "body of fornix",
+      "column of fornix",
+      "commissure of fornix",
+      "hippocampal commissure",
+      "psalterium",
+      "precommissural fornix",
+      "postcommissural fornix",
+      "anterior commissure",
+      "mammillary body",
+      "mammillothalamic tract",
+      "anterior nucleus of thalamus",
+      "cingulate gyrus",
+      "cingulum",
+      "parahippocampal gyrus",
+      "entorhinal cortex",
+      "Papez circuit",
+      "septum pellucidum",
+      "interventricular foramen",
+      "foramen of Monro",
+      "third ventricle",
+      "colloid cyst",
+      "Korsakoff syndrome",
+      "Wernicke encephalopathy",
+      "thiamine",
+      "anterograde amnesia"
+    ]
+  },
+  "camera": {
+    "framing": "medial",
+    "autoRotate": 0.004,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "fornix_l",
+      "name": "left fornix of forebrain",
+      "label": "Fornix (L)",
+      "role": "primary",
+      "group": "The arch",
+      "layer": "organ",
+      "color": "#f6b26b",
+      "refs": {
+        "bodyparts3d": "FMA72925"
+      },
+      "terms": [
+        "fornix",
+        "fimbria",
+        "crus of fornix",
+        "body of fornix",
+        "column of fornix",
+        "precommissural fornix",
+        "postcommissural fornix"
+      ],
+      "narration": "The hippocampus's output cable, and the whole scene in one object. Read it in five segments, back to front: the FIMBRIA gathering on the ventricular surface of the hippocampus; the CRUS sweeping back and up under the splenium of the corpus callosum; the COMMISSURE where the two crura exchange fibres; the BODY running forward under the callosum, roofing the third ventricle; and the COLUMN turning down in front of the third ventricle to end in the mammillary body. Four of those five are drawn, but not all on this object: the CRUS, BODY and COLUMN are regions of this one continuous arch, while the COMMISSURE has a mesh of its own and is a separate card in this scene. The FIMBRIA has no mesh at all and is named rather than lit. Hold the shape rather than the list: it is long because it must climb out of a ventricle and cross over the thalamus, and every clinical fact in this scene is a consequence of something it passes on the way."
+    },
+    {
+      "key": "fornix_r",
+      "name": "right fornix of forebrain",
+      "label": "Fornix (R)",
+      "role": "primary",
+      "group": "The arch",
+      "layer": "organ",
+      "color": "#f6b26b",
+      "refs": {
+        "bodyparts3d": "FMA72924"
+      },
+      "terms": [
+        "fornix",
+        "crus of fornix",
+        "body of fornix",
+        "column of fornix",
+        "bilateral"
+      ],
+      "narration": "The right arch, identical in course. From the side the two look like a single structure; from above they are a pair that converge in the midline as they run forward, separate again as the columns dive, and are joined in between by their commissure. That convergence is why the fornix is described as one body and two crura and two columns — it is a pair that shares a middle."
+    },
+    {
+      "key": "fornix_comm",
+      "name": "commissure of fornix of forebrain",
+      "label": "Commissure of the fornix (psalterium)",
+      "role": "part",
+      "group": "The arch",
+      "layer": "organ",
+      "color": "#e69138",
+      "refs": {
+        "bodyparts3d": "FMA61970"
+      },
+      "terms": [
+        "commissure of fornix",
+        "hippocampal commissure",
+        "psalterium",
+        "crus of fornix",
+        "splenium",
+        "interhemispheric"
+      ],
+      "narration": "The triangular sheet where the two crura come together under the splenium and fibres cross between them — the hippocampal commissure, the psalterium. Two consequences worth carrying. It is a direct interhemispheric link between the two hippocampi, which is the short route by which a seizure focus in one medial temporal lobe seeds its partner, and why independent bilateral foci are common in long-standing temporal lobe epilepsy. And it is the reason a unilateral forniceal injury is often quieter than it looks: the crossing gives each hippocampus a route to both sides of the circuit."
+    },
+    {
+      "key": "hipp_l",
+      "name": "left hippocampus",
+      "label": "Hippocampus (L)",
+      "role": "primary",
+      "group": "Papez — the stations",
+      "layer": "organ",
+      "color": "#4f9bff",
+      "refs": {
+        "bodyparts3d": "FMA72714"
+      },
+      "terms": [
+        "hippocampus",
+        "fimbria",
+        "consolidation",
+        "declarative memory",
+        "inferior horn"
+      ],
+      "narration": "Where the circuit starts and finishes. Shown here only as the origin of the arch and the return address of the loop — `limbic-system__hippocampus` owns the structure itself, its position in the floor of the inferior horn, its coronal section and the amnesia it causes, and this scene deliberately does not restate that argument. What matters here is one geometric fact: the fibres leave the hippocampus BACKWARDS, along its ventricular surface, which is why a structure in the temporal lobe reaches a target behind the optic chiasm by going the long way round the top."
+    },
+    {
+      "key": "phg_l",
+      "name": "left parahippocampal gyrus",
+      "label": "Parahippocampal gyrus (L)",
+      "role": "primary",
+      "group": "Papez — the stations",
+      "layer": "organ",
+      "color": "#7fb3ff",
+      "refs": {
+        "bodyparts3d": "FMA72706"
+      },
+      "terms": [
+        "parahippocampal gyrus",
+        "entorhinal cortex",
+        "cingulum",
+        "perforant path",
+        "Papez circuit"
+      ],
+      "narration": "The last station before the loop closes. The cingulum bundle runs forward and down from the cingulate gyrus into this gyrus, whose anterior part — the ENTORHINAL cortex — is the funnel through which the information re-enters the hippocampus by the perforant path. It is worth naming as a station rather than skipping to 'back to the hippocampus', because it is the point at which Papez stops being a closed ring and becomes a loop that the whole of the rest of the cortex can feed into: entorhinal cortex is where association cortex delivers."
+    },
+    {
+      "key": "mamm",
+      "name": "mammillary body",
+      "label": "Mammillary body",
+      "role": "primary",
+      "group": "Papez — the stations",
+      "layer": "organ",
+      "color": "#cc0000",
+      "refs": {
+        "bodyparts3d": "FMA74877"
+      },
+      "terms": [
+        "mammillary body",
+        "postcommissural fornix",
+        "mammillothalamic tract",
+        "anterior nucleus of thalamus",
+        "Korsakoff syndrome",
+        "Wernicke encephalopathy",
+        "thiamine"
+      ],
+      "narration": "The target of the POSTCOMMISSURAL column and the hinge of the circuit: everything that arrives here leaves again by the mammillothalamic tract to the anterior nucleus of the thalamus. Two paired swellings on the base of the brain behind the tuber cinereum, and the site where THIAMINE deficiency does its damage — which is the reason Korsakoff's amnesia looks like a hippocampal amnesia in a patient whose hippocampi are intact. The circuit is cut at the hinge rather than at the start, and the deficit is much the same, which is the strongest single argument that the loop and not the hippocampus alone is the unit of function. Shrunken mammillary bodies on MRI are the chronic sign."
+    },
+    {
+      "key": "thal_l",
+      "name": "left thalamus",
+      "label": "Thalamus (L)",
+      "role": "context",
+      "group": "Papez — the stations",
+      "layer": "organ",
+      "color": "#b4a7d6",
+      "refs": {
+        "bodyparts3d": "FMA258716"
+      },
+      "terms": [
+        "thalamus",
+        "anterior nucleus of thalamus",
+        "mammillothalamic tract",
+        "interventricular foramen",
+        "Papez circuit"
+      ],
+      "narration": "Two roles at once, and keeping them apart is the point. It is the next STATION — the ANTERIOR nucleus, which is not separately modelled, so the whole thalamus is lit and the narration says which corner is meant. And it is the OBSTACLE: the fornix arches over the top of it, which is the reason the arch is an arch. It is also the posterior boundary of the interventricular foramen whose anterior boundary is the fornix's own column, so thalamus and fornix are the two lips of that hole. `basal-ganglia-diencephalon__thalamus` owns the nuclei."
+    },
+    {
+      "key": "cing_l",
+      "name": "left cingulate gyrus",
+      "label": "Cingulate gyrus (L)",
+      "role": "context",
+      "group": "Papez — the stations",
+      "layer": "organ",
+      "color": "#93c47d",
+      "refs": {
+        "bodyparts3d": "FMA72718"
+      },
+      "terms": [
+        "cingulate gyrus",
+        "cingulum",
+        "limbic lobe",
+        "Papez circuit",
+        "corpus callosum"
+      ],
+      "narration": "The return arm, and the second of the two concentric arches this scene exists to show. Thalamus projects up into it; it carries the traffic backwards along the CINGULUM bundle to the parahippocampal gyrus. Seen from the medial side the cingulate gyrus rides OVER the corpus callosum while the fornix runs UNDER it — two arches around the same landmark, meeting at both ends. That single picture is the whole of Papez, and it is the reason this scene is authored in 3D rather than as a diagram."
+    },
+    {
+      "key": "tuber",
+      "name": "tuber cinereum",
+      "label": "Tuber cinereum — floor of the hypothalamus",
+      "role": "context",
+      "group": "Papez — the stations",
+      "layer": "organ",
+      "color": "#dd7e6b",
+      "refs": {
+        "bodyparts3d": "FMA62327"
+      },
+      "terms": [
+        "tuber cinereum",
+        "hypothalamus",
+        "mammillary body",
+        "precommissural fornix",
+        "septal region"
+      ],
+      "narration": "The grey floor of the hypothalamus, drawn as the neighbourhood the fornix's column descends into: the mammillary bodies sit immediately behind it, and the whole of this surface is diencephalic floor. It also marks, by proximity rather than by identity, where the PRECOMMISSURAL fibres are going — the septal region and preoptic area, neither of which has a mesh in this catalog. `basal-ganglia-diencephalon__hypothalamus-pituitary` owns this structure."
+    },
+    {
+      "key": "ac",
+      "name": "anterior commissure",
+      "label": "Anterior commissure — where the column divides",
+      "role": "primary",
+      "group": "What the arch passes",
+      "layer": "organ",
+      "color": "#a64d79",
+      "refs": {
+        "bodyparts3d": "FMA61961"
+      },
+      "terms": [
+        "anterior commissure",
+        "column of fornix",
+        "precommissural fornix",
+        "postcommissural fornix",
+        "septal nuclei",
+        "lamina terminalis"
+      ],
+      "narration": "A small round bundle crossing the midline in the front wall of the third ventricle, and the landmark that gives the column of the fornix its two halves. The descending column meets it and divides: fibres passing IN FRONT of it are the PRECOMMISSURAL fornix, ending in the septal region and preoptic area; fibres passing BEHIND it are the POSTCOMMISSURAL fornix, continuing to the mammillary body. That distinction is why 'the fornix goes to the mammillary body' is a useful half-truth — the postcommissural half does, and it is the half that carries Papez. The anterior commissure itself is not part of this circuit: it is a neocortical commissure linking the two temporal lobes, and it is shown here purely as the dividing landmark. Naming it as a Papez station is the commonest error in this topic."
+    },
+    {
+      "key": "cc",
+      "name": "corpus callosum",
+      "label": "Corpus callosum",
+      "role": "context",
+      "group": "What the arch passes",
+      "layer": "organ",
+      "color": "#d9d2e9",
+      "refs": {
+        "bodyparts3d": "FMA86464"
+      },
+      "terms": [
+        "corpus callosum",
+        "splenium",
+        "body of corpus callosum",
+        "genu",
+        "septum pellucidum"
+      ],
+      "narration": "The reference surface for the entire scene: the fornix runs UNDER it, the cingulate gyrus OVER it, and the crura and their commissure sit beneath its SPLENIUM. If you can find the callosum on a midline image you can find every structure in this scene by its relation to it, which is exactly how the fornix is identified on a sagittal MRI. `cerebrum-gross-lobes__white-matter-tracts` owns it."
+    },
+    {
+      "key": "sp",
+      "name": "septum pellucidum",
+      "label": "Septum pellucidum",
+      "role": "context",
+      "group": "What the arch passes",
+      "layer": "organ",
+      "color": "#cfe2f3",
+      "refs": {
+        "bodyparts3d": "FMA61844"
+      },
+      "terms": [
+        "septum pellucidum",
+        "body of fornix",
+        "corpus callosum",
+        "lateral ventricle",
+        "cavum septi pellucidi"
+      ],
+      "narration": "A thin double membrane slung in the midline between the corpus callosum ABOVE and the body of the fornix BELOW, separating the two lateral ventricles. It is here because it is the best proof of where the body of the fornix runs: the septum has to end somewhere at its lower edge, and that lower edge IS the fornix. On a coronal image the two membranes and the arch beneath them are read together, and absence of the septum pellucidum is one of the recognised markers of midline forebrain malformation."
+    },
+    {
+      "key": "v3",
+      "name": "third ventricle",
+      "label": "Third ventricle",
+      "role": "context",
+      "group": "What the arch passes",
+      "layer": "cavity",
+      "color": "#8fd6c8",
+      "refs": {
+        "bodyparts3d": "FMA78454"
+      },
+      "terms": [
+        "third ventricle",
+        "body of fornix",
+        "roof of third ventricle",
+        "column of fornix",
+        "colloid cyst"
+      ],
+      "narration": "The slit-like midline cavity the fornix is wrapped around, and the reason this arch is surgical territory. The BODY of the fornix forms the roof of it; the COLUMNS descend in its anterior wall. So an approach to a lesion in the third ventricle is an approach through or beside the fornix, and that is the anatomical basis of post-operative memory impairment after third-ventricular surgery — a well-described complication rather than an incidental one."
+    },
+    {
+      "key": "ivf",
+      "name": "interventricular foramen",
+      "label": "Interventricular foramen (of Monro)",
+      "role": "primary",
+      "group": "What the arch passes",
+      "layer": "cavity",
+      "color": "#ffd966",
+      "refs": {
+        "bodyparts3d": "FMA75351"
+      },
+      "terms": [
+        "interventricular foramen",
+        "foramen of Monro",
+        "column of fornix",
+        "thalamus",
+        "colloid cyst",
+        "obstructive hydrocephalus",
+        "CSF"
+      ],
+      "narration": "The channel from each lateral ventricle into the third, and the single highest-yield relation the fornix has. Its ANTERIOR boundary is the column of the fornix; its POSTERIOR boundary is the anterior pole of the thalamus. Both lips are lit in this scene. That is why a COLLOID CYST — a benign lesion that sits exactly here — causes obstructive hydrocephalus of both lateral ventricles with a normal third and fourth, and why it is the classic cause of positional headache and of drop attacks with no loss of consciousness. `ventricular-system-csf__ventricles` owns the ventricular system; this scene borrows the foramen because the fornix is one of its walls."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "One arch, five segments, from the side",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The arch"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "fornix_l",
+          "intensity": 1
+        }
+      ],
+      "narration": "Look at the shape before any name is attached to it. The fornix is a C laid on its side: it rises from the temporal lobe at the back and bottom, sweeps up and back under the splenium, runs forward under the corpus callosum, and dives down at the front. Now put the five segments on it, back to front — FIMBRIA on the hippocampus, CRUS climbing, COMMISSURE crossing, BODY running forward, COLUMN descending. Only four are drawn: the fimbria is the sheet of fibres still on the surface of the hippocampus and has no mesh of its own, so it is named here and not lit. Ask the question the shape poses and carry it through the scene: why does a cable travel the long way round the top of the brain to reach something a few centimetres in front of where it started? Because it starts inside a ventricle and its target is on the base of the brain, and the thalamus is in the way."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "What it is slung between — callosum, septum, third ventricle, foramen",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What the arch passes"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The arch"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ivf",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fornix_l",
+          "to": "ivf",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "Now the neighbours, because they are where the clinical weight sits. The corpus callosum arches OVER the fornix. The SEPTUM PELLUCIDUM hangs between the two, its lower edge resting on the body of the fornix — which is the easiest way to be sure on an image which arch you are looking at. Underneath, the body of the fornix forms the ROOF of the THIRD VENTRICLE, and the columns descend in its front wall. And here is the relation to memorise: the column of the fornix is the ANTERIOR wall of the INTERVENTRICULAR FORAMEN, with the anterior pole of the thalamus as its posterior wall. Both lips are lit. A colloid cyst sitting in that hole blocks both lateral ventricles while the third and fourth stay normal — positional headache, and drop attacks without loss of consciousness. And a surgeon entering the third ventricle is working between the two halves of the memory circuit, which is why memory impairment is a recognised complication of that approach rather than a surprise."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "The column divides at the anterior commissure",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What the arch passes"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mamm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tuber"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ac",
+            "fornix_l"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fornix_l",
+          "to": "mamm",
+          "kind": "projection"
+        }
+      ],
+      "narration": "The detail that turns a memorised sentence into an understood one. As the column descends it meets the ANTERIOR COMMISSURE — the small round bundle crossing the midline in the front wall of the third ventricle — and splits around it. Fibres passing IN FRONT are the PRECOMMISSURAL fornix and end in the septal region and preoptic area. Fibres passing BEHIND are the POSTCOMMISSURAL fornix and go on to the MAMMILLARY BODY. So 'the fornix ends in the mammillary body' is a half-truth: the postcommissural half does, and that is the half that carries Papez. Three honest limits, stated rather than glossed. The split itself is not a separate mesh — it is a division of fibres within the column, described here against the commissure that defines it. The septal nuclei and preoptic area have NO mesh in this catalog, so the precommissural destination is named and the tuber cinereum beside it shows only the neighbourhood. And the anterior commissure is NOT a station in this circuit — it is a neocortical commissure joining the temporal lobes, shown purely as the landmark, and calling it part of Papez is the commonest error in this topic."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Papez, traced once, whole",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Papez — the stations"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The arch"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "mamm",
+          "to": "thal_l",
+          "kind": "projection"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "thal_l",
+          "to": "cing_l",
+          "kind": "projection"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cing_l",
+          "to": "phg_l",
+          "kind": "projection"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:papez",
+          "path": [
+            "hipp_l",
+            "fornix_l",
+            "mamm",
+            "thal_l",
+            "cing_l",
+            "phg_l",
+            "hipp_l"
+          ],
+          "duration": 9000
+        }
+      ],
+      "narration": "Now run the whole loop and watch the shape rather than the names. Hippocampus, out along the FORNIX, down the postcommissural column to the MAMMILLARY BODY; up the mammillothalamic tract to the ANTERIOR NUCLEUS of the THALAMUS; up and forward into the CINGULATE GYRUS; backwards along the CINGULUM to the PARAHIPPOCAMPAL GYRUS; and through the entorhinal cortex into the hippocampus again. The trace returns to where it began, which is the one thing a list of five arrows cannot show you. And look at what the loop actually is geometrically: TWO CONCENTRIC ARCHES around the corpus callosum, the fornix on the inside and the cingulate gyrus on the outside, joined at the front by the mammillary body and thalamus and at the back by the parahippocampal gyrus. Three links here are described and NOT drawn, and this beat says so rather than letting connectors pass as anatomy: the mammillothalamic tract and the cingulum bundle have no mesh in this catalog, and the anterior thalamic nucleus is not separable from the whole thalamus lit for it. Every STATION is real geometry; every WIRE between them is a connector."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Three lesions, one ring",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Papez — the stations"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ivf"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "fornix_l",
+            "mamm"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ivf",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Finish by cutting the ring in three places and reading off what happens, because this is the payoff for having learnt it as a loop. Cut it at the START, at both hippocampi: dense anterograde amnesia, and `limbic-system__hippocampus` owns that argument. Cut it at the CABLE, at both fornices — third-ventricular surgery, or a tumour in the septal region: memory impairment again, from a lesion nowhere near the hippocampus, and usually only when the damage is bilateral, because the commissure gives each side a route across. Cut it at the HINGE, at the mammillary bodies, which is what thiamine deficiency does: Korsakoff's syndrome, with confabulation, following Wernicke's encephalopathy — an amnesia that looks hippocampal in a patient whose hippocampi are intact. One circuit, three points of failure, and a strikingly similar deficit from each. That similarity is the argument that the LOOP rather than any one station is the functional unit, and it is also the practical reason to know where the fornix runs: the fourth cut, the one made by a colloid cyst at the interventricular foramen still lit here, is the one that presents as headache and hydrocephalus and is easy to forget is happening inside the memory circuit."
+    }
+  ],
+  "gaps": [
+    "CATALOG SEARCHED FOR THIS STRUCTURE UNDER MANY SPELLINGS BEFORE ANY ABSENCE WAS CLAIMED, WHICH IS WHAT PRODUCED THIS SCENE'S TWO BEST STRUCTURES. `fornix` returns three (both fornices of forebrain and their commissure). `monro` returns NOTHING and would have been the natural clinical search — `interventricular` returns FMA75351 INTERVENTRICULAR FORAMEN, on disk, which is the single highest-yield relation the fornix has and would have been declared absent by one search under the eponym. `septum` returns FMA61844 SEPTUM PELLUCIDUM, which fixes the body of the fornix on any image. `commissur` returns three, of which FMA61961 anterior commissure is the landmark beat 3 is built on. `psalterium`, `fimbria`, `precommissural`, `postcommissural`, `mammillothalamic`, `cingulum`, `tela` and `septal nuclei` all return NOTHING. Recorded in this shape deliberately: REPAIR-BACKLOG.md names one-search-under-the-clinical-name as the commonest source of false absence claims in this corpus, and the foramen of Monro is a textbook instance of the trap.",
+    "DELIVERY: ALL 14 STRUCTURE MESHES ARE IN meshes-lite/, VERIFIED BY STATTING EACH FILE THIS RUN. No beat of this scene is hollow and nothing here waits on a fetch. That is partly an authoring choice worth stating: FMA72713, the RIGHT HIPPOCAMPUS, is in the catalog but is NOT on disk and is the known delivery gap of this topic, so this scene was built to trace Papez on the LEFT side only rather than making a bilateral argument it could not draw. The bilateral arguments belong to `limbic-system__hippocampus`, which makes them and states its own missing mesh. Nothing was omitted for anatomical reasons.",
+    "THREE WIRES OF THE PAPEZ CIRCUIT ARE NAMED AND NOT DRAWN, AND BEAT 4 SAYS SO IN ITS OWN NARRATION. Searched `mammillothalamic`, `cingulum`, `tract`, `bundle`, `fasciculus`: `tract` returns exactly FOUR entries in the whole catalog — the two iliotibial tracts and the two optic tracts — and there is no mammillothalamic tract, no cingulum and no fornix-related fasciculus. The ANTERIOR NUCLEUS of the thalamus is the third: `nucleus` returns only the two caudate nuclei, so the whole thalamus is lit and the narration names which corner is meant. All three links are drawn with `SHOW_RELATIONSHIP`, which is the spec's connector op and claims no geometry, and none of the three is claimed in `covers[]`.",
+    "THE FIMBRIA AND THE PRE/POSTCOMMISSURAL SPLIT ARE DESCRIBED, NOT DRAWN, AND BOTH ARE INTERNAL DIVISIONS RATHER THAN MISSING MESHES. The fornix exists as ONE whole mesh per side; three of its five named segments — crus, body, column — are regions of that single arch, the commissure is a fourth segment carrying its own mesh (FMA61970) and its own card, and beat 1 names all five while lighting the arch and the commissure together. The fimbria is the only one of the five that lies OUTSIDE the mesh — it is still on the surface of the hippocampus — and is therefore the one segment named with nothing of its own lit. The precommissural/postcommissural division of the column is likewise a division of fibres within one mesh, authored in beat 3 against the anterior commissure that defines it rather than as two objects.",
+    "NO SEPTAL NUCLEI AND NO PREOPTIC AREA, so the PRECOMMISSURAL destination is named and not drawn. Searched `septal` (returns three CARDIAC entries and nothing in the brain), `preoptic`, `bed nucleus`, `diagonal band`, `nucleus accumbens`, `substantia innominata`: all NOTHING. The tuber cinereum FMA62327 is drawn nearby as hypothalamic floor and beat 3 states explicitly that it shows the neighbourhood rather than the target. NOTE FOR LATER RUNS: the hypothalamus IS partly drawable in this catalog — tuber cinereum and mammillary body both exist and are both on disk — and a sibling scene in this topic wrongly recorded it as wholly absent on 2026-09-04 and was corrected at audit the same day. Do not re-copy the absence claim; search `tuber` and `mammill`.",
+    "NO ANCHORS WERE AUTHORED AND NONE WAS ATTEMPTED. Every feature this scene would want to mark — the junction of crus and body, the point where the column meets the anterior commissure, the lower edge of the septum pellucidum — is either a division within one smooth soft-tissue mesh or a contact between two structures where the contact is the whole of the relationship rather than a point on either. `derive-landmark.mjs` derives a point on a parent from contact with a neighbour or from an extreme along an axis, and neither definition applies. The nearest genuine candidate is the anterior lip of the interventricular foramen (`--parent FMA72925 --contact FMA75351`), which was NOT run because the foramen is a cavity mesh rather than a solid neighbour and a contact against the inside of a hole is not what the tool measures. Nothing was placed by eye. Flagged as a real candidate for a later run with a cavity-aware definition.",
+    "SIDES, STATED OUT LOUD BECAUSE THE IDS DO NOT CARRY THEM. FMA72925 = LEFT fornix of forebrain, FMA72924 = RIGHT. FMA72714 = LEFT hippocampus (FMA72713 is the right and is deliberately NOT used — see the delivery note). FMA72706 = LEFT parahippocampal gyrus. FMA258716 = LEFT thalamus, FMA258714 = RIGHT — this pair runs the OPPOSITE way round from every other pair in the scene and is the known trap in this course. FMA72718 = LEFT cingulate gyrus. UNPAIRED MIDLINE STRUCTURES, carrying no side and claiming none: FMA61970 commissure of fornix, FMA74877 mammillary body (a paired swelling modelled as one midline object), FMA62327 tuber cinereum, FMA61961 anterior commissure, FMA86464 corpus callosum, FMA61844 septum pellucidum, FMA78454 third ventricle, FMA75351 interventricular foramen. Every `name` is the catalog's name character for character.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `mechanism` and `location` for `Fornix & Papez circuit`. Beats 1-2 are `location` and beats 3-5 are `mechanism`. Both covered, and `mechanism` is listed first in the curriculum because the circuit is the point — which is why three of the five beats are mechanism and the location beats exist to make the circuit legible rather than as an anatomy preamble.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Fornix & Papez circuit`, spelled as CURRICULUM.json spells it. `Hippocampus` and `Amygdala` are NOT claimed although the hippocampus is the origin of the arch and both have their own authored scenes in this topic; the amygdala does not appear here at all. `Thalamus`, `Hypothalamus & pituitary` and `Ventricles` are not claimed although the thalamus, tuber cinereum, third ventricle and interventricular foramen are all drawn — each belongs to a structure with its own scene, and each narration says which scene owns it.",
+    "DELIBERATE NON-OVERLAP WITH THE OTHER TWO LIMBIC SCENES, READ AGAINST BOTH BEFORE AUTHORING. `limbic-system__hippocampus` owns the hippocampus's position, its coronal section, mesial temporal sclerosis, uncal herniation and the bilateral amnesia argument, and it already traces the fornix once as its OUTPUT. This scene does not restate any of that: it owns the fornix as an object — its five segments, the septum pellucidum, the third ventricle roof, the interventricular foramen, the anterior commissure split — and Papez as a closed loop with three lesion sites. The overlap is the fornix trace itself, and it is intentional: a student meets it in the hippocampus scene as 'where the output goes' and here as 'what this arch IS'. THE FACTS SHARED BY BOTH FILES, which must be changed in both if changed in either: fimbria-crus-commissure-body-column in that order; the commissure lies under the splenium and links the two hippocampi; the fornix runs under the callosum and the cingulate over it as two concentric arches; the mammillary body is the Papez hinge and the site of thiamine damage; the anterior thalamic nucleus, mammillothalamic tract and cingulum are named and not drawn. `limbic-system__amygdala` contrasts the stria terminalis with the fornix as two arches that both follow the ventricle — that explanation is stated identically in all three files.",
+    "AUDITED 2026-09-08 BY THE FOLLOWING RUN, NOT BY THE RUN THAT WROTE IT, WHICH IS WHAT THIS LIST'S LAST ENTRY ASKED FOR. All fourteen ids and names re-read against available-meshes.json character for character: all fourteen match, and all fourteen meshes are on disk (FMA72713, the right hippocampus, is correctly absent from the scene as well as from the disk). Every absence claim in this list was RE-RUN rather than believed, since a gaps[] note is not evidence: fimbria 0, psalter 0, preoptic 0, hypothalam 0, infundib 0 and mammillothalamic 0 all confirmed; `septal` confirmed as three CARDIAC entries; `tract` confirmed as exactly four, the two iliotibial and the two optic; `nucleus` confirmed as only the two caudate. Every op target, every SHOW_RELATIONSHIP endpoint and every step of beat 4's seven-station trace resolves to a real key; view modes are location,location,mechanism,mechanism,mechanism, covering both modes the curriculum asks for; covers[] holds one entry spelled as CURRICULUM.json spells it. ONE THING WAS WRONG AND IS FIXED. The fornix card said four of the five segments were 'visible on this mesh as regions of one continuous arch', counting the COMMISSURE among them — but the commissure is FMA61970, a separate mesh with its own structure card two entries below, so the sentence both miscounted this object and quietly contradicted the scene's own structures[]. Beat 1's 'only four are drawn' was and is correct; it was the card that overreached. Both the card and the fimbria gap note were corrected in the same pass so the count is stated identically in the two places it appears. NOT AN ERROR, CHECKED AND LET STAND: a search of the catalog under `fasciculus` and `bundle` finds the two STRIAE MEDULLARES of the thalamus (FMA73413/4), which this scene does not use — correctly, since they are the habenular pathway and not a Papez wire, and `limbic-system__amygdala` already names them explicitly as the tract this topic must not confuse with the stria terminalis.",
+    "RETIRED 2026-09-08: this scene previously carried a gaps entry insisting its status was `candidate` and that it had not been signed. Both had ceased to be true — the scene is `ready` and carries audited_at. A stale entry that describes the file’s own state is the most expensive kind, because the next reader trusts it over the field beside it."
+  ]
+}

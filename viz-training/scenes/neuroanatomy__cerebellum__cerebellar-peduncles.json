@@ -1,0 +1,374 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__cerebellum__cerebellar-peduncles",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Cerebellum",
+  "structure": "Cerebellar peduncles",
+  "covers": [
+    "Cerebellar peduncles"
+  ],
+  "learning_goal": "Know the three peduncles as the only three ways in or out of the cerebellum, attach each to its brainstem segment — inferior to the medulla, middle to the pons, superior to the midbrain — sort them by direction of traffic (inferior mixed, middle almost purely afferent and by far the largest, superior almost purely efferent), and use the two decussations they contain to explain why cerebellar signs are on the same side as the lesion.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-02",
+    "audited_at": "2026-09-02",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "cerebellum",
+      "brainstem",
+      "cerebellar connections",
+      "ataxia",
+      "stroke"
+    ],
+    "terms": [
+      "cerebellar peduncle",
+      "inferior cerebellar peduncle",
+      "restiform body",
+      "juxtarestiform body",
+      "middle cerebellar peduncle",
+      "brachium pontis",
+      "superior cerebellar peduncle",
+      "brachium conjunctivum",
+      "posterior spinocerebellar tract",
+      "cuneocerebellar tract",
+      "olivocerebellar fibres",
+      "inferior olivary nucleus",
+      "climbing fibres",
+      "mossy fibres",
+      "vestibulocerebellar fibres",
+      "pontocerebellar fibres",
+      "pontine nuclei",
+      "corticopontine fibres",
+      "anterior spinocerebellar tract",
+      "dentate nucleus",
+      "dentatothalamic tract",
+      "decussation of superior cerebellar peduncle",
+      "ventral lateral nucleus of thalamus",
+      "double crossing",
+      "ipsilateral",
+      "fourth ventricle",
+      "superior medullary velum",
+      "cerebellopontine angle",
+      "acoustic neuroma",
+      "vestibular schwannoma",
+      "PICA infarct",
+      "Wallenberg syndrome",
+      "multiple sclerosis",
+      "intention tremor"
+    ]
+  },
+  "camera": {
+    "framing": "posterior"
+  },
+  "structures": [
+    {
+      "key": "stem",
+      "label": "Brainstem — the three levels of attachment",
+      "role": "context",
+      "group": "Where they attach",
+      "layer": "organ",
+      "color": "#c9a27a",
+      "terms": [
+        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla oblongata",
+        "fourth ventricle"
+      ],
+      "narration": "Drawn from behind with the cerebellum lifted away — the standard dissection, and the only view in which all three peduncles are seen at once. That removal opens the floor of the fourth ventricle, and the three stalks are then seen converging on each side, one from each brainstem segment. The order from below upwards is the order of the segments: inferior from the medulla, middle from the pons, superior from the midbrain. If a student can rebuild that picture they can never mismatch a peduncle to a level."
+    },
+    {
+      "key": "cbm",
+      "label": "Cerebellum — attached only in front",
+      "role": "context",
+      "group": "Where they attach",
+      "layer": "organ",
+      "color": "#8fa8c8",
+      "terms": [
+        "cerebellum",
+        "cerebellar hemisphere",
+        "vermis",
+        "cerebellar cortex",
+        "deep cerebellar nuclei"
+      ],
+      "narration": "Shown ghosted in its proper place so the point of the whole scene is visible: the cerebellum has no other connection to the rest of the nervous system. It touches the brainstem in front and nothing anywhere else, so every fibre entering or leaving it — all of the spinal, vestibular, olivary and cortical input, and all of the output — passes through one of these six stalks. That is what makes them worth a scene of their own rather than a line in the cerebellum's."
+    },
+    {
+      "key": "icp",
+      "label": "Inferior cerebellar peduncle — from the medulla",
+      "role": "primary",
+      "group": "The three peduncles",
+      "layer": "organ",
+      "color": "#6aa84f",
+      "terms": [
+        "inferior cerebellar peduncle",
+        "restiform body",
+        "juxtarestiform body",
+        "posterior spinocerebellar tract",
+        "cuneocerebellar tract",
+        "olivocerebellar fibres",
+        "climbing fibres",
+        "vestibulocerebellar fibres"
+      ],
+      "narration": "Far smaller than the middle peduncle, and the only mixed one. It has two parts with different jobs, which is why it is the one students find untidy. The restiform body is the large lateral part and is purely afferent: the posterior spinocerebellar tract carrying unconscious proprioception from the leg, the cuneocerebellar tract carrying the same from the arm, and — much the biggest contribution — olivocerebellar fibres from the opposite inferior olive, which are the climbing fibres. The juxtarestiform body is the small medial part beside it, and it carries the two-way vestibular traffic: vestibular nerve and nuclei in, and cerebellar fibres back out to those nuclei. So the mixed traffic is not spread through the peduncle; it is one purely afferent bundle lying against one two-way bundle."
+    },
+    {
+      "key": "mcp",
+      "label": "Middle cerebellar peduncle — from the pons",
+      "role": "primary",
+      "group": "The three peduncles",
+      "layer": "organ",
+      "color": "#e69138",
+      "terms": [
+        "middle cerebellar peduncle",
+        "brachium pontis",
+        "pontocerebellar fibres",
+        "pontine nuclei",
+        "corticopontine fibres",
+        "mossy fibres",
+        "cerebellopontine angle"
+      ],
+      "narration": "By far the largest of the three — larger than the other two together — and almost entirely afferent, which is the fact to lead with, because its size makes students assume it is the main output and it is very nearly the opposite. It carries one thing: pontocerebellar fibres from the pontine nuclei of the OTHER side. The chain behind it is corticopontine fibres descending from the whole cerebral cortex to the pontine nuclei, those nuclei projecting across the midline, and the crossed bundle entering the cerebellum here as mossy fibres. That is the first of the two crossings this scene exists to teach, and it is also why the pons is as bulky as it is: the pons is largely the relay station for this peduncle."
+    },
+    {
+      "key": "scp",
+      "label": "Superior cerebellar peduncle — to the midbrain",
+      "role": "primary",
+      "group": "The three peduncles",
+      "layer": "organ",
+      "color": "#8e7cc3",
+      "terms": [
+        "superior cerebellar peduncle",
+        "brachium conjunctivum",
+        "dentate nucleus",
+        "dentatothalamic tract",
+        "decussation of superior cerebellar peduncle",
+        "ventral lateral nucleus of thalamus",
+        "anterior spinocerebellar tract",
+        "superior medullary velum"
+      ],
+      "narration": "The outflow, and the only peduncle that is mainly efferent. It arises from the deep nuclei — chiefly the dentate — runs forward in the roof of the upper fourth ventricle with the superior medullary velum stretched between the two of them, and enters the midbrain, where it decussates completely in the tegmentum just below the red nucleus. From there the dentatothalamic fibres reach the ventral lateral nucleus of the thalamus and then the motor cortex. Two riders. It is not purely efferent: the anterior spinocerebellar tract, having already crossed in the cord, sneaks in through it as the one afferent bundle. And its decussation is the second of the two crossings."
+    },
+    {
+      "key": "crossings",
+      "label": "The two crossings, and why signs are ipsilateral",
+      "role": "part",
+      "group": "Why it matters clinically",
+      "layer": "organ",
+      "color": "#cc0000",
+      "terms": [
+        "double crossing",
+        "ipsilateral",
+        "decussation of superior cerebellar peduncle",
+        "pontocerebellar fibres",
+        "dentatothalamic tract",
+        "corticospinal tract",
+        "limb ataxia"
+      ],
+      "narration": "The single most examined fact about the cerebellum, and it is nothing but bookkeeping about these stalks. Follow a signal from the left motor cortex: corticopontine fibres descend to the left pontine nuclei, which cross — CROSSING ONE — so the right cerebellar hemisphere is driven by the left cortex. Cerebellar output leaves the right dentate through the right superior peduncle and crosses in the midbrain — CROSSING TWO — reaching the left thalamus and left motor cortex, which then drives the right side of the body by a corticospinal tract that crosses again in the medulla. Two crossings between cortex and cerebellum cancel, and the third, below the cerebellum, puts the whole loop back on the side the cerebellar hemisphere sits on. So a right cerebellar lesion gives right-sided limb ataxia — the opposite of every other lesion above the medulla. Count the crossings rather than memorising the conclusion."
+    },
+    {
+      "key": "lesions",
+      "label": "Lesions, one peduncle at a time",
+      "role": "part",
+      "group": "Why it matters clinically",
+      "layer": "organ",
+      "color": "#a64d79",
+      "terms": [
+        "PICA infarct",
+        "Wallenberg syndrome",
+        "acoustic neuroma",
+        "vestibular schwannoma",
+        "cerebellopontine angle",
+        "multiple sclerosis",
+        "intention tremor",
+        "nystagmus"
+      ],
+      "narration": "Each peduncle fails in its own way, and each way is a common exam case. Inferior: the lateral medullary (Wallenberg) syndrome from a PICA or vertebral occlusion takes the restiform body among much else, so ipsilateral limb ataxia sits beside the crossed sensory loss and the Horner's. Middle: it forms the floor of the cerebellopontine angle, so a vestibular schwannoma growing there compresses it along with the facial and vestibulocochlear nerves — deafness, facial weakness and ipsilateral ataxia together is an angle lesion until proved otherwise. Superior: it is a favourite site for demyelination, and a plaque in it gives the coarse ipsilateral intention tremor that used to be counted among Charcot's triad. Ipsilateral in all three, for the reason the previous card sets out."
+    },
+    {
+      "key": "velum",
+      "label": "Roof of the fourth ventricle",
+      "role": "context",
+      "group": "Why it matters clinically",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "terms": [
+        "fourth ventricle",
+        "superior medullary velum",
+        "inferior medullary velum",
+        "hydrocephalus"
+      ],
+      "narration": "Ghosted behind the stalks to place them. The upper part of the ventricular roof is the superior medullary velum, a thin sheet slung between the two superior peduncles; the lower part is the inferior medullary velum and the choroid plexus. The peduncles are therefore the walls of the ventricle's upper end, not merely neighbours of it, which is why a mass in this region obstructs CSF as readily as it interrupts fibres — the ataxia and the hydrocephalus come from the same few millimetres."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "Cerebellum lifted off — three stalks on each side",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three peduncles"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "icp",
+            "mcp",
+            "scp"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "This is the cut the anatomy is built on: divide the six peduncles and the cerebellum comes away, leaving the floor of the fourth ventricle exposed and three cut stalks on each side. Read them from below upwards, because that is the order of the brainstem segments they come from — inferior from the medulla, middle from the pons, superior from the midbrain. Their sizes are as unequal as their names are similar: the middle is larger than the other two together, the inferior and superior are both far smaller than it, and the superior lies most medially and roofs the top of the ventricle. Nothing here is a mesh — this is a drawn section, because the catalog holds no peduncle of any kind and a peduncle is a cut surface rather than a body. Fix the three levels now; everything else in this scene is traffic on them."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "What each one carries",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three peduncles"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "mcp",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "icp",
+            "scp"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Sort them by direction and the untidiness disappears. Middle: afferent, essentially pure, one source only — pontocerebellar fibres from the opposite pontine nuclei, carrying the cerebral cortex's plan. Superior: efferent, essentially pure, one source only — the deep nuclei, chiefly the dentate, going to the opposite thalamus; the anterior spinocerebellar tract is the single afferent exception in it. Inferior: mixed, and mixed in a specific way rather than generally — the restiform body is purely afferent with the two posterior spinocerebellar-type tracts and the olivary climbing fibres, while the juxtarestiform body beside it carries vestibular traffic in both directions. So: one in, one out, one both, and the largest is an input. The size of the middle peduncle is the commonest source of error here, because bulk looks like output."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Crossing one — cortex to cerebellum through the pons",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "mcp",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:corticopontocerebellar",
+          "path": [
+            "stem",
+            "mcp",
+            "cbm"
+          ],
+          "duration": 5000
+        }
+      ],
+      "narration": "Follow the plan for a movement. Corticopontine fibres leave the whole cerebral cortex, descend with the corticospinal tract through the internal capsule and the crus of the midbrain, and end in the pontine nuclei of their own side. Those nuclei then send their axons ACROSS the midline into the opposite middle cerebellar peduncle, entering the cerebellum as mossy fibres. One crossing, and it is complete. The consequence to hold: the left cerebral hemisphere talks to the RIGHT cerebellar hemisphere. This is also the largest fibre traffic anywhere in the brainstem and the reason the pons has a belly at all — the pons is, in bulk, the relay for this one peduncle."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Crossing two — cerebellum back to cortex through the midbrain",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "scp",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:dentatothalamic",
+          "path": [
+            "cbm",
+            "scp",
+            "stem",
+            "crossings"
+          ],
+          "duration": 6000
+        }
+      ],
+      "narration": "Now the correction coming back. Output leaves the cerebellar cortex through the deep nuclei — the hemisphere through the dentate — and the dentate's axons enter the superior cerebellar peduncle, run forward under the roof of the fourth ventricle, and decussate completely in the midbrain tegmentum just below the red nucleus. Beyond the decussation they are the dentatothalamic tract, ending in the ventral lateral nucleus of the thalamus and relayed to the motor cortex. That is crossing two, and it undoes crossing one: the right cerebellum ends up influencing the left cortex, which was what drove it. The loop closes on itself, and everything about cerebellar laterality follows from the fact that these two crossings exist and cancel."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Three crossings, one side — and three ways to break it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Why it matters clinically"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "crossings",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "crossings",
+            "lesions"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Count them once and you never memorise the answer again. Cortex to cerebellum crosses in the pons. Cerebellum to cortex crosses in the midbrain. Cortex to limb crosses in the medulla. Two of those cancel and the third leaves the whole loop serving the limbs on the side the cerebellar hemisphere is on, so a cerebellar lesion gives ipsilateral limb ataxia — alone among lesions above the medulla. Then the three named cases, one per peduncle. Inferior: Wallenberg's lateral medullary syndrome from a PICA or vertebral occlusion, ataxia on the side of the lesion alongside the crossed pain and temperature loss. Middle: a vestibular schwannoma at the cerebellopontine angle, pressing the peduncle along with the seventh and eighth nerves, so deafness plus facial weakness plus ipsilateral ataxia names the site before any scan. Superior: a demyelinating plaque, giving the coarse intention tremor. And because these stalks are also the walls of the upper fourth ventricle, any mass among them buys hydrocephalus with the ataxia."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS SECOND PREFERRED MODE, AND THE ROUTING WAS MEASURED THIS RUN RATHER THAN QUOTED FROM THE CEREBELLAR-LOBES SCENE THAT PREDICTED IT. Searched all 934 catalog entries for: peduncle, pedunculus, peduncular, brachium, brachium pontis, brachium conjunctivum, restiform, juxtarestiform, crus, crus cerebelli, corpus restiforme, cerebellar, cerebell, velum, medullary velum, olive, olivary, oliva, pontine nuclei, pontocerebellar, spinocerebellar, cuneocerebellar, dentatothalamic, decussation. The catalog's only `peduncle` is FMA62394 `peduncle of midbrain`, which is the crus cerebri and belongs to the corticospinal system, not to the cerebellum; its only `brachium` entries are FMA73461-73464, the brachia of the superior and inferior colliculi, which are midbrain roof. `cerebell` returns FMA67944 `cerebellum` and nothing else. Every other term returns zero. Not one of the six peduncles exists in any spelling.",
+    "THE SUBJECT IS A CUT SURFACE, WHICH IS A SECOND AND INDEPENDENT REASON FOR `diagram`. Even a segmented brainstem would show the peduncles only as the region where cerebellum and brainstem are continuous; what this scene teaches is the fibre traffic inside them, which no surface mesh carries. The standard teaching image — cerebellum lifted off, three stalks cut across, the floor of the fourth ventricle exposed — is a dissection, not a view of an intact specimen, and no camera angle on a whole-organ mesh reproduces it. `deferred_modes` keeps `3d_anatomy` on record for the day a segmented brainstem arrives, but even then the fibres would have to be an overlay.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: the posterior dissection view with the cerebellum removed and all six stalks cut, labelled by level; a traffic diagram of the three peduncles sorted by direction, with the restiform and juxtarestiform bodies drawn as two adjacent bundles rather than one; and a two-crossing circuit diagram carrying cortex, pontine nuclei, cerebellar cortex, dentate, decussation, thalamus and back, drawn on one side only so the crossings are countable. The third is the load-bearing one — beats 3 to 5 are all argument about it.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following the pattern of the other `diagram` scenes in this course. Nothing is claimed to be drawn from the catalog and no beat asks the student to look for a mesh. The two structures that DO have meshes and could have been imported as context — FMA67944 cerebellum and FMA67943 pons — are deliberately left out, because mixing one real mesh into a drawn section would suggest the drawn parts are equally measured.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`; this scene has no parent mesh. Beyond that, a peduncle is a bundle crossing a plane, so its landmark would be an AREA on a cut face, not a point on a surface — the same class of rejection already recorded for the primary and posterolateral fissures in the cerebellar-lobes scene. The decussation of the superior peduncle was also considered: it is a midline volume inside the midbrain tegmentum, invisible to a tool that measures contact between surfaces. Nothing was placed by eye.",
+    "OVERLAP WITH THE CEREBELLAR-LOBES, PONS, MEDULLA AND MIDBRAIN SCENES IS DELIBERATE AND WAS CHECKED AGAINST THOSE FILES RATHER THAN RESTATED FROM MEMORY. `cerebellar-lobes` states the double crossing in its `pons` and `peduncle` structure cards and says the peduncles have their own scene; this scene states the same crossing at full length and its two load-bearing details are identical — pontocerebellar fibres cross, and the superior peduncle decussates in the midbrain. `medulla-oblongata` owns Wallenberg's syndrome as a vascular territory; this scene names it only as the inferior-peduncle lesion and adds nothing about the territory. Neither scene is contradicted and neither is claimed in `covers[]`.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Cerebellar peduncles`, spelled as `CURRICULUM.json` spells it. `Deep cerebellar nuclei` is named in beats 2 and 4 because the superior peduncle's origin cannot be stated without the dentate, and is NOT claimed: it is the next structure in this topic and has its own scene.",
+    "CURRICULUM VIEWS: `cross_section` and `mechanism` are both required and both present — `cross_section` at beats 1 and 2, which is the correct mode for them because the beat's whole content is the cut face left when the cerebellum is removed, and `mechanism` at beats 3, 4 and 5.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch. The hollowness here is at the artwork layer only. Note for whoever fetches meshes: a segmented brainstem would NOT complete this scene, unlike most of the 3D gaps in this course — three drawings would.",
+    "AUDIT 2026-09-02 — ONE CORRECTION, AND IT IS A CLAIM WITHDRAWN RATHER THAN CORRECTED. Beat 1 said \"the inferior is the smallest\" and the `icp` card opened \"The smallest and the only mixed one\". Standard texts do NOT agree on which of the inferior and superior peduncles is smallest — some rank the superior smallest, others the inferior — and this run could not settle it from anything on disk. What is uncontested is that the middle is larger than the other two together. Both sentences now say that and say the other two are far smaller, without ranking them against each other. The ranking is not lost work: if a source is ever settled, the sentence to restore is in this note. Do not re-assert it from memory.",
+    "AUDIT 2026-09-02 — CATALOG RE-SEARCHED INDEPENDENTLY, ROUTING CONFIRMED. All 934 entries searched for: peduncle, pedunc, brachium, restiform, juxtarestiform, crus, cerebell, velum, oliv, olivary, pontine, nucle, dentate, fastigi, emboliform, globose, interposit, pons, vermis, tonsil, flocc. Results: `peduncle of midbrain` (the crus cerebri, corticospinal, not cerebellar), the four collicular `brachium` entries, `interpeduncular fossa`, `cerebellum` undivided, `pons`. No peduncle of the cerebellum in any spelling; no restiform, no velum, no olive, no pontine nucleus. The previous run's account and this reading AGREE, including its warning that `peduncle of midbrain` is the wrong peduncle. Zero refs in the file, so the id, name and side checks are vacuously clean. Anatomical spot-checks that PASSED: Wallenberg (ipsilateral limb ataxia, ipsilateral face / contralateral body sensory loss, Horner's); the two-crossing argument in beats 3–5 counted through independently and consistent with the `crossings` card and with the deep-nuclei scene; anterior spinocerebellar as the one afferent in the superior peduncle; restiform purely afferent vs juxtarestiform two-way, stated identically in the card and in beat 2."
+  ]
+}

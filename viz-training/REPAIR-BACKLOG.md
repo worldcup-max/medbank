@@ -324,3 +324,88 @@ anchors to students today and says so in its own `gaps[]`.
   scheduled task is a branch that will surprise someone.
 - **Run 32 is undocumented.** `spleen.json` and `portal-venous-system.json` exist and validate; no run
   block records authoring them.
+
+- **NEW (2026-09-02 audit) — a CROSS_SECTION axis can contradict the plane its own narration names,
+  and nothing checks it.** `neuroanatomy__cerebellum__deep-cerebellar-nuclei` beat 1 narrated a
+  CORONAL cut with `axis:"z"`; fixed to `y` at audit. The convention across this course is
+  y = coronal, z = axial/transverse (`ventricles`, `basal-ganglia`, `thalamus` all use y for coronal;
+  `pons`, `white-matter-tracts` use z for axial), and z is the vertical axis of these meshes.
+  **Still open: `gross__kidney-posterior-abdominal-wall__kidney` narrates "coronal" with `axis:"z"`.**
+  Left unfixed deliberately — that scene is signed, was outside the audit's two, and the convention is
+  inferred from siblings rather than written down. Two jobs here: (a) write the axis convention into
+  `model3d-scene-spec-v2.md` so it is evidence rather than a pattern, then (b) fix the kidney scene and
+  add a validator check comparing a CROSS_SECTION axis to any plane word in the beat's narration.
+
+- **NEW (2026-09-03 audit) — a third class of defect that passes all eight validator stages: an op
+  that reaches out of its own beat's `ISOLATE_REGION`.** `ISOLATE_REGION` ghosts everything outside
+  its group, while `TRACE_STRUCTURE` and `SHOW_RELATIONSHIP` light whatever they name. The validator
+  checks only that a target RESOLVES, so an op naming a structure in a ghosted group is accepted
+  silently. It is legal and sometimes right — `cerebellar-function` beat 2 draws a connector to the
+  `signs` card and that connector is the beat's whole argument — but in beat 1 of the same scene a
+  `TRACE_STRUCTURE` ended on `signs`, which beat 1 ghosts and never mentions, so the trace walked the
+  student into a card for no stated reason. Trimmed at audit. Two jobs: (a) a validator WARNING (not
+  a rejection) whenever an op target sits outside the beat's isolated group, and (b) a sweep of the
+  corpus for the same pattern, since nothing has ever looked for it. This is now the third such class
+  after beat ordinals and section axes, and all three are one-line comparisons the validator does not
+  make.
+
+- **NEW (2026-09-04 audit) — THE AUTHOR CURSOR NOW POINTS AT HISTOLOGY, WHICH IS SVG-BLOCKED EXACTLY
+  AS EMBRYOLOGY IS. A HUMAN DECISION IS NEEDED BEFORE THE NEXT RUN.** `Fornix & Papez circuit` was
+  authored on 2026-09-04 and was the 34th of 34 Neuroanatomy structures, so the course is fully
+  authored and `sync-state.mjs` rolled the cursor on to `histology / Epithelium / Simple epithelia`.
+  Every Histology structure's `preferred_modes` are `["microscopic","diagram"]` — verified in
+  `CURRICULUM.json` this run, not remembered — and **both route to the SVG engine, neither is
+  `3d_anatomy`**. Since `CAPABILITIES.svg` is still `{ native: [], degraded: [] }` (§9 above),
+  authoring Histology produces scenes as undrawable as the 28 idle Embryology ones. This is the
+  2026-08-30 failure one course to the right. Three options, in the run's order of value: (a) build
+  `CAPABILITIES.svg` and commission artwork — unblocks 46 histology AND 28 embryology scenes at once;
+  (b) mark `histology` `suspended` in `CURRICULUM.json` so both cursors skip it and the task idles
+  honestly; (c) declare authoring finished and re-point the task at audit and repair, which still
+  hold real work (14 unsigned Neuroanatomy scenes, ~100 anchors at `needs-review`, §3 and §9 items,
+  three one-line validator checks). The audit cursor has 14 scenes left either way, so the next run
+  is not idle — but it must author nothing.
+
+- **NEW (2026-09-04 audit) — failure mode 1 recurred INSIDE a `gaps[]` note that congratulates the
+  run for catching failure mode 1.** `limbic-system__amygdala` correctly caught the stria terminalis
+  (searching `stria` after `amygdalofugal` returned nothing) and wrote that catch up as gaps[0] — then
+  two entries below declared "NO HYPOTHALAMUS IN THIS CATALOG", specifically that `tuber` "returns
+  NOTHING". It returns `FMA62327 tuber cinereum`, in the catalog and on disk. Beat 3's whole yield is
+  "the destination is the HYPOTHALAMUS" and the trace was ending on the **thalamus** while saying so.
+  Corrected at audit the same day; both notes deliberately left side by side in the file. **The
+  general lesson, which is new and belongs at the top of this document's list of habits: catching the
+  habit once in a run is not evidence of having avoided it elsewhere in the same run**, and a
+  self-congratulating gaps[] entry should raise suspicion of the rest of the array rather than
+  lowering it. Corroboration was available in two places and neither was checked — the sibling scene
+  written the same hour names the tuber cinereum as real, and `hypothalamus-pituitary`, cited by the
+  bad note as "record[ing] the same absence", actually *draws* FMA62327.
+
+- **NEW (2026-09-02) — the AUTHOR-TASK prompt's Neuroanatomy coverage table is itself a remembered
+  list and has at least one error.** It marks Spinal Cord DEAD as "no cord, no tract of any kind".
+  No cord and no tract is correct; but `FMA78497 central canal of spinal cord` exists and has been in
+  use in `gross__back-vertebral-column__spinal-cord-in-vertebral-canal` for weeks. The routing
+  consequence is nil (that model is the upper 34 mm only), but the prompt line should be corrected, and
+  the general point is the one this file already makes: the table is a starting point, never evidence.
+
+
+- **NEW (2026-09-08 audit) — the stale "not in meshes-lite/" sentence is alive in NEUROANATOMY, and it
+  cost two finished scenes nine days of invisibility.** `cerebrum-gross-lobes__white-matter-tracts` (25
+  models) and `cerebrum-gross-lobes__cerebral-hemispheres-lobes` (38 models) each carried a gaps[] entry
+  saying not one of their meshes had been fetched and that every beat was hollow. Every mesh of both was
+  on disk. Both sat at `candidate` on that ground alone; both are `ready` today. It also suppressed
+  landmark work: the genu and splenium of the corpus callosum were measurable the whole time and were
+  derived at this audit. **Proposed fix, and it is mechanical rather than cultural:** `sync-state.mjs`
+  already computes which model ids are present in `meshes-lite/`; the validator should REJECT (or at
+  minimum warn on) any `gaps[]` string asserting a model is absent from the local set when it is not.
+  Fourth one-line validator check on the §9 list, and the only one that closes a habit rather than a
+  defect class.
+- **NEW (2026-09-08 audit) — a CROSS_SECTION axis can contradict the beat's CAMERA rather than its
+  words.** `cerebral-hemispheres-lobes` beat 10 cut on `axis:"z"` and then rotated to `anterior`; you see
+  a cut face from the front only if the plane is coronal (`y`). The narration said merely "cut across",
+  so the axis-versus-narration check proposed on 2026-09-02 would NOT have caught it. Extend the
+  proposed check to compare the axis against any `ROTATE_TO_VIEW` in the same beat. Fixed at audit; axis
+  frame measured from mesh centroids (x left+/right−, y anterior−/posterior+, z vertical) rather than
+  inferred from sibling scenes, and that convention still is not written into
+  `model3d-scene-spec-v2.md` — job (a) from the 2026-09-02 entry remains open.
+- **NEW (2026-09-08 audit) — HIGHLIGHT_STRUCTURE accepts a GROUP name and nothing objects.**
+  `cerebral-hemispheres-lobes` beat 7 highlighted `"Insula"`, the group, not `ins_l`/`ins_r`. The op pins
+  a label, so the label was indeterminate. Fixed there; the corpus has never been swept for the pattern.

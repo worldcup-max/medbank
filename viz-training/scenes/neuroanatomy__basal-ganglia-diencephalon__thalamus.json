@@ -12,10 +12,14 @@
     "Thalamus"
   ],
   "learning_goal": "Place the thalamus by its six walls rather than by memorising a picture — third ventricle medially, internal capsule laterally, hypothalamus below the hypothalamic sulcus, fornix and ventricular body above — then use that position to explain why every sensory modality except smell stops here, and why a lesion a centimetre across produces a whole-body sensory loss that later turns to pain.",
-  "status": "candidate",
+  "status": "ready",
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "audited_at": "2026-09-04",
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
   },
   "provider": {
     "primary": "bodyparts3d",
@@ -96,7 +100,7 @@
         "dorsal thalamus",
         "diencephalon"
       ],
-      "narration": "An egg of grey matter about four centimetres long lying obliquely at the very centre of the hemisphere, its narrow anterior tubercle pointing forwards and medially and its swollen pulvinar overhanging the midbrain behind. This is one undivided mesh: the internal medullary lamina and the twenty-odd nuclei it separates are named in beat 5 and are not drawn, so every nucleus you hear about is a region of this single shape rather than an object you can click."
+      "narration": "An egg of grey matter about four centimetres long lying obliquely at the very centre of the hemisphere, its narrow anterior tubercle pointing forwards and medially and its swollen pulvinar overhanging the midbrain behind. This is one undivided mesh: the internal medullary lamina and the twenty-odd nuclei it separates are named in beat 5 and are not drawn, so every nucleus you hear about is a region of this single shape rather than an object you can click. Four points ON that shape are marked, because they could be measured against neighbouring meshes rather than guessed: the two geniculate bodies, the anterior tubercle and the posterior pole."
     },
     {
       "key": "thal_l",
@@ -391,7 +395,7 @@
         "optic radiation",
         "visual pathway"
       ],
-      "narration": "The visual afferent, sweeping round the cerebral peduncle to end on the lateral geniculate body — a knuckle on the underside of the pulvinar. The geniculate bodies are thalamus, and this is the clearest demonstration of what the thalamus is for: the visual pathway does not reach cortex without stopping here. The geniculate bodies have no mesh of their own, so the tract is drawn arriving at the thalamic mass rather than at a named knuckle."
+      "narration": "The visual afferent, sweeping round the cerebral peduncle to end on the lateral geniculate body — a knuckle on the underside of the pulvinar. The geniculate bodies are thalamus, and this is the clearest demonstration of what the thalamus is for: the visual pathway does not reach cortex without stopping here. The geniculate bodies have no mesh on disk — they are in the catalog and have not been fetched — but the point where this tract meets the thalamus was measured at audit and is marked: the tract is drawn arriving at that marker rather than at an unnamed stretch of thalamic surface."
     },
     {
       "key": "ot_l",
@@ -427,7 +431,7 @@
         "auditory pathway",
         "inferior colliculus"
       ],
-      "narration": "The auditory equivalent, and the reason it is worth having on screen: it runs forwards from the inferior colliculus of the midbrain up onto the medial geniculate body. Hearing takes the same architecture as vision — a midbrain relay, then a thalamic relay, then cortex — and the two brachia are the visible proof that the geniculate bodies belong to the thalamus and not to the tectum."
+      "narration": "The auditory equivalent, and the reason it is worth having on screen: it runs forwards from the inferior colliculus of the midbrain up onto the medial geniculate body. Hearing takes the same architecture as vision — a midbrain relay, then a thalamic relay, then cortex — and the two brachia are the visible proof that the geniculate bodies belong to the thalamus and not to the tectum. The medial geniculate body is not on disk either; the point where this brachium lands on the thalamus was measured at audit and is marked."
     },
     {
       "key": "ic_coll_r",
@@ -465,6 +469,119 @@
         "Parinaud syndrome"
       ],
       "narration": "The visual reflex centre of the tectum, tucked under the overhang of the pulvinar and under the pineal. It is here to show how little room there is behind the thalamus: a pineal or a posterior thalamic mass reaches this plate almost immediately, and the upgaze palsy follows."
+    },
+    {
+      "key": "lgb_r",
+      "label": "Lateral geniculate body (R)",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "thal_r",
+        "uvw": [
+          0.2018,
+          0.7231,
+          0.0353
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch between the right thalamus (FMA258714) and the right optic tract (FMA62382), averaged over the 55 parent vertices within 3 mm of the tract — gap 0.45 mm, patch centroid 0.43 mm off the surface. One witness, because the optic tract is the only mesh that reaches this knuckle; the check on it is the medial geniculate anchor derived the same way in the same run, which lands at u 0.53 against this one's u 0.20 — that is, the lateral geniculate is measurably LATERAL to the medial geniculate on a right-sided mesh where lower u is more lateral. Both sit at w 0.04-0.06, the inferior surface, which is where the geniculate bodies belong.",
+      "calibration_gap_mm": 0.45,
+      "terms": [
+        "lateral geniculate body",
+        "lateral geniculate nucleus",
+        "LGB",
+        "optic tract",
+        "optic radiation",
+        "visual pathway"
+      ],
+      "narration": "The knuckle on the underside of the pulvinar where the optic tract ends. It is thalamus, not midbrain, and it is the relay the visual pathway cannot bypass: retina to optic tract to here, then optic radiation to the occipital cortex. No mesh for it has been delivered — FMA73303 exists in the catalog and is not in meshes-lite/ — so this marker is the measured patch where the tract meets the thalamic surface: it shows you where the body is, not its extent, and it should be replaced by the real mesh once that is fetched."
+    },
+    {
+      "key": "mgb_r",
+      "label": "Medial geniculate body (R)",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "thal_r",
+        "uvw": [
+          0.5308,
+          0.6087,
+          0.0617
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch between the right thalamus (FMA258714) and the brachium of the right inferior colliculus (FMA73463), averaged over the 18 parent vertices within 3 mm — gap 0.13 mm. Weaker than the lateral geniculate anchor and the weakness is recorded rather than smoothed over: the patch is 18 vertices and its centroid sits 1.45 mm off the surface, against 55 vertices and 0.43 mm for the lateral. One witness. The cross-check is positional and it passes: this anchor is medial (u 0.53) to the lateral geniculate (u 0.20) on a right-sided mesh, and both are on the inferior surface.",
+      "calibration_gap_mm": 0.13,
+      "terms": [
+        "medial geniculate body",
+        "medial geniculate nucleus",
+        "MGB",
+        "brachium of inferior colliculus",
+        "auditory radiation",
+        "auditory pathway"
+      ],
+      "narration": "Where the brachium of the inferior colliculus lands. Auditory relay, medial to its visual counterpart, and the second half of the proof that the geniculate bodies are thalamic: both brachia climb forwards out of the tectum ONTO the thalamus rather than staying in the midbrain."
+    },
+    {
+      "key": "ant_tubercle_r",
+      "label": "Anterior tubercle (R)",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "thal_r",
+        "uvw": [
+          0.6695,
+          0,
+          0.5621
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -y on the right thalamus (FMA258714) — the most anterior vertex of the mesh, 18.9 mm from the centroid. Verified anterior with the mesh centroids rather than assumed: pineal body y=-75.3, mammillary body y=-103.3, so more negative y is anterior on these meshes and +z is superior. Stable under --slab z:0.4,1.0 and z:0.5,1.0 (identical vertex) and moves 1.5 mm under z:0.6,1.0. The result lands anteromedial (u 0.67, where higher u is medial on a right-sided mesh) and in the upper half (w 0.56), which is where the anterior tubercle is.",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "anterior tubercle of thalamus",
+        "anterior tubercle",
+        "interventricular foramen",
+        "foramen of Monro",
+        "column of fornix"
+      ],
+      "narration": "The forward point of the thalamus, and half of a surgical landmark: with the column of the fornix in front of it, it bounds the interventricular foramen. If you are inside the body of the lateral ventricle looking for the thalamus, this is the corner you find first."
+    },
+    {
+      "key": "post_pole_r",
+      "label": "Posterior pole — pulvinar overhang (R)",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "thal_r",
+        "uvw": [
+          0.3207,
+          1,
+          0.2802
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +y on the right thalamus (FMA258714), 17.2 mm from the centroid, with +y confirmed posterior from the pineal and mammillary centroids as above. READ THE LABEL EXACTLY: the pulvinar is a REGION of the posterior thalamus, not a point, and no point definition can bound a region. What is measured here is the posterior extremity of the mesh — the tip of the overhang — and the label says pole rather than pulvinar for that reason. It lands posterolateral (u 0.32) and low (w 0.28), consistent with an overhang that leans out over the tectum.",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "pulvinar",
+        "posterior pole of thalamus",
+        "superior colliculus",
+        "pineal body"
+      ],
+      "narration": "The back end of the thalamus, overhanging the midbrain tectum. This marks the tip of the overhang, not the whole pulvinar. It is worth having on screen because of how little space is behind it: the superior colliculus is immediately below and the pineal immediately medial, which is why a posterior thalamic or pineal mass produces an upgaze palsy so early."
     }
   ],
   "views": [
@@ -512,7 +629,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "thal_r",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -531,9 +648,23 @@
           "from": "thal_r",
           "to": "caud_r",
           "kind": "boundary"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ant_tubercle_r",
+          "intensity": 1
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "post_pole_r",
+          "intensity": 0.7
         }
       ],
-      "narration": "Name the neighbours in order and the thalamus stops needing to be memorised. Medially, the third ventricle — the thalamic surface IS the upper half of its lateral wall. Above, the floor of the body of the lateral ventricle, with the fornix arching over medially and the body of the caudate riding the lateral edge. Laterally, the internal capsule. Below, the hypothalamus and the subthalamus. Behind, the pulvinar overhangs the midbrain tectum. The one boundary you cannot see is the one that is asked about: the hypothalamic sulcus, a shallow groove on the ventricular wall running from the interventricular foramen back to the cerebral aqueduct. Above that line the wall is thalamus, below it hypothalamus. It is a groove on a surface and has no mesh here, so trace it between the two landmarks that do — the foramen in front, bounded by the column of the fornix and the anterior tubercle, and the aqueduct behind."
+      "narration": "Name the neighbours in order and the thalamus stops needing to be memorised. Medially, the third ventricle — the thalamic surface IS the upper half of its lateral wall. Above, the floor of the body of the lateral ventricle, with the fornix arching over medially and the body of the caudate riding the lateral edge. Laterally, the internal capsule. Below, the hypothalamus and the subthalamus. Behind, the pulvinar overhangs the midbrain tectum. The one boundary you cannot see is the one that is asked about: the hypothalamic sulcus, a shallow groove on the ventricular wall running from the interventricular foramen back to the cerebral aqueduct. Above that line the wall is thalamus, below it hypothalamus. It is a groove on a surface and has no mesh here, so trace it between its two ends: the interventricular foramen in front, which IS drawn here — bounded by the column of the fornix and the anterior tubercle — and the cerebral aqueduct behind, which is NOT in this scene and is described rather than shown. Only the front end is something you can look at. The anterior tubercle is marked here, and the posterior pole with it, so the forward-and-medial tilt of the egg reads as a line between two measured points rather than as an impression."
     },
     {
       "mode": "cross_section",
@@ -581,7 +712,7 @@
         {
           "op": "CROSS_SECTION",
           "axis": "y",
-          "offset": 0.0,
+          "offset": 0,
           "animate": true
         },
         {
@@ -634,10 +765,24 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "Thalamus",
-          "intensity": 1.0
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lgb_r",
+          "intensity": 1
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "mgb_r",
+          "intensity": 1
         }
       ],
-      "narration": "Two afferents are traced arriving, and they are the two you can see: the optic tract onto the lateral geniculate body, and the brachium of the inferior colliculus onto the medial geniculate body. Take them as the pattern for the rest, which are described only. Body sensation from the medial lemniscus and the spinothalamic tract lands in the ventral posterolateral nucleus, the face in the ventral posteromedial; the cerebellum and the globus pallidus feed the ventral lateral and ventral anterior nuclei and so shape movement; the mammillothalamic tract feeds the anterior nucleus and so serves memory; the medial dorsal nucleus talks to prefrontal cortex; the pulvinar to the parietal and occipital association cortex. Olfaction is the exception in the whole nervous system — it reaches cortex directly and only afterwards involves the medial dorsal nucleus. None of those nuclei is a mesh: this is one undivided shape, divided in life by a Y-shaped sheet of white matter called the internal medullary lamina, and nothing in this scene draws that sheet or the nuclei on either side of it."
+      "narration": "Two afferents are traced arriving, and they are the two you can see, each ending on a marked point: the optic tract onto the lateral geniculate body, and the brachium of the inferior colliculus onto the medial geniculate body. Those two markers are measured contact patches, not drawn nuclei — they tell you where each body is, not how big it is, and the lateral one sitting lateral to the medial one is the relation worth taking away. Take them as the pattern for the rest, which are described only. Body sensation from the medial lemniscus and the spinothalamic tract lands in the ventral posterolateral nucleus, the face in the ventral posteromedial; the cerebellum and the globus pallidus feed the ventral lateral and ventral anterior nuclei and so shape movement; the mammillothalamic tract feeds the anterior nucleus and so serves memory; the medial dorsal nucleus talks to prefrontal cortex; the pulvinar to the parietal and occipital association cortex. Olfaction is the exception in the whole nervous system — it reaches cortex directly and only afterwards involves the medial dorsal nucleus. None of those nuclei is a mesh: this is one undivided shape, divided in life by a Y-shaped sheet of white matter called the internal medullary lamina, and nothing in this scene draws that sheet or the nuclei on either side of it."
     },
     {
       "mode": "mechanism",
@@ -664,23 +809,24 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "thal_l",
-          "intensity": 1.0
+          "intensity": 1
         }
       ],
       "narration": "Because every modality funnels through a structure the size of a walnut, a lacunar infarct here produces a pure sensory stroke: numbness of the opposite face, arm, trunk and leg at once, with no weakness and no cortical signs, from a lesion in the ventral posterior nucleus a few millimetres across. Weeks to months later a proportion of these turn into the thalamic pain syndrome of Dejerine and Roussy — the numb side becomes spontaneously and unbearably painful, and light touch is agony. A larger thalamic haemorrhage adds two signs worth knowing because they are almost specific: the eyes deviate down and inwards, looking at the patient's own nose, from pressure on the tectum below, and the hand takes up a posture with the wrist flexed and the fingers extended. The arterial supply is not drawn — no cerebral artery of any kind exists in this catalog — but the single fact worth carrying is that in some people both anteromedial thalami are fed by one vessel off one posterior cerebral artery, the artery of Percheron, so one occlusion infarcts both thalami and the patient presents with a sudden loss of consciousness and amnesia rather than with a hemi-anything."
     }
   ],
   "gaps": [
-    "THE THALAMUS IS ONE UNDIVIDED MESH. FMA258714 / FMA258716 carry no nuclei and no internal medullary lamina. Searched nucleus, nuclei, lamina, medullary, pulvinar, geniculate, ventral posterior, VPL, VPM, anterior nucleus, medial dorsal, reticular, intralaminar, centromedian — the only 'nucleus' entries in the whole catalog are the two caudate nuclei. Every nucleus named in beat 5 is therefore described and not shown, and beat 5 says so in itself. The lateral and medial geniculate bodies matter most, because the two afferents that ARE traced end on them; both traces are authored as arriving at the thalamic mass, and the structure cards for the optic tract and the brachium of the inferior colliculus both state that the knuckle they end on is not separately drawn.",
+    "THE THALAMUS IS ONE UNDIVIDED MESH. FMA258714 / FMA258716 carry no nuclei and no internal medullary lamina. Searched nucleus, nuclei, lamina, medullary, pulvinar, geniculate, ventral posterior, VPL, VPM, anterior nucleus, medial dorsal, reticular, intralaminar, centromedian — the only 'nucleus' entries in the whole catalog are the two caudate nuclei. Every nucleus named in beat 5 is therefore described and not shown, and beat 5 says so in itself. CORRECTED 2026-09-08: `geniculate` was listed among the searched strings above, and it DOES return four entries — FMA73303 / FMA73304 lateral and FMA73309 / FMA73310 medial. None of the four is in meshes-lite/, so nothing on screen changes and the anchors below remain the right treatment for today, but the reason is DELIVERY and not absence: this is a fetch job with four known ids, and when they arrive the two geniculate anchors should be retired in favour of the meshes. The lateral and medial geniculate bodies matter most, because the two afferents that ARE traced end on them; AS OF THE 2026-09-04 AUDIT BOTH ARE MARKED AS MEASURED ANCHORS on the thalamic surface rather than left as unnamed stretches of it — lateral geniculate from the optic-tract contact (0.45 mm, 55-vertex patch), medial geniculate from the brachium of the inferior colliculus (0.13 mm, 18-vertex patch), each cross-checked against the other for mediolateral order. They are still not nuclei: an anchor marks where a body is and says nothing about its extent, and the two structure cards and both anchor cards say so.",
     "NO POSTERIOR LIMB OF THE INTERNAL CAPSULE, so the lateral wall of the thalamus is absent. Searched capsule, limb, genu, retrolentiform, sublentiform, corona, radiata, thalamic radiation, corticospinal, pyramidal, lemniscus, spinothalamic, tract. Only the anterior limb exists (FMA72908 / FMA72909) and it lies in FRONT of the thalamus, not beside it — the structure cards for both limbs and beat 3 state this explicitly rather than letting the drawn sheet be read as the wall. This is the same absence recorded in the basal ganglia scene of this topic and the two files state it the same way.",
     "NO INTERTHALAMIC ADHESION, NO HYPOTHALAMIC SULCUS. Searched adhesion, massa intermedia, interthalamic, commissure (which returns anterior, posterior and fornical commissures only), sulcus, hypothalamic. Both are named in beats 2 and 4 as features of surfaces that are drawn, and both are the sort of thing that would be authored as an anchor if the parent meshes were fetched — the sulcus in particular is a line rather than a point and would need a run of anchors, so it is described between two landmarks that do exist, the interventricular foramen and the cerebral aqueduct.",
     "NO MAMMILLOTHALAMIC TRACT and no tract of any kind. Both ends exist — the mammillary body (FMA74877) and the thalamus — and the connection between them is stated in the mammillary body card and in beat 5 as a described pathway. Searched mammillothalamic, mamillothalamic, tract, bundle, fasciculus, lemniscus, Vicq d'Azyr.",
     "THE MAMMILLARY BODY IS A SINGLE UNPAIRED MESH. FMA74877 is 'mammillary body' with no left or right in the catalog, although the structure is a pair in life. Its card says so. The same mesh and the same caveat appear in the hypothalamus and pituitary scene of this topic, worded consistently.",
     "NO SUBTHALAMUS. The subthalamic region is named in beat 2 as the fourth wall below and is not drawn; there is no subthalamic nucleus, no zona incerta and no substantia nigra in the catalog (searched subthalam, Luys, zona incerta, nigra, substantia). Recorded identically in the basal ganglia scene.",
     "NO INTRACRANIAL VESSEL OF ANY KIND, so the artery of Percheron and the thalamoperforating branches of beat 6 are named and not drawn. Searched Percheron, perforat, thalamoperforat, posterior cerebral, communicating, choroidal, basilar, Willis, cerebral artery, dural sinus, thalamostriate vein, internal cerebral vein. This matches the neuroanatomy blood-supply routing recorded across this course: the catalog holds no cerebral artery, no circle of Willis and no dural venous sinus. The thalamostriate vein is named in the caudate card as the content of the groove and is likewise not drawn.",
-    "DELIVERY IS NO LONGER THE REASON — CHECKED 2026-08-30, FILE BY FILE. This scene previously said that none of its models was in meshes-lite/ and that every beat was therefore hollow. That is false now and the sentence had already been carried forward once: ALL of this scene's models are on disk and sync-state.mjs reports 75 of 75 scenes drawing complete. Every beat renders. The scene stays `candidate` for the authoring reasons recorded elsewhere in this list, not for a delivery one. The corollary matters more than the correction: derive-landmark.mjs CAN now measure against these parents, so the anchor work this note was suppressing is open work rather than impossible work.",
+    "DELIVERY IS NO LONGER THE REASON — CHECKED 2026-08-30, FILE BY FILE. This scene previously said that none of its models was in meshes-lite/ and that every beat was therefore hollow. That is false now and the sentence had already been carried forward once: ALL of this scene's models are on disk — all twenty-one verified individually again at the 2026-09-04 audit, not taken from this note. Every beat renders. The scene stays `candidate` for the authoring reasons recorded elsewhere in this list, not for a delivery one. The corollary matters more than the correction: derive-landmark.mjs CAN now measure against these parents, so the anchor work this note was suppressing is open work rather than impossible work.",
     "SIDES, STATED EXPLICITLY BECAUSE THE IDS DO NOT CARRY THEM. Right / left in this scene: thalamus FMA258714 right and FMA258716 left — NOT consecutive, and the trap in this topic; stria medullaris of thalamus FMA73413 right and FMA73414 left; anterior limb of internal capsule FMA72908 right and FMA72909 left; lateral ventricle FMA78449 right and FMA78450 left; fornix of forebrain FMA72924 right and FMA72925 left. The optic tracts break the pattern entirely and were the second trap: right is FMA62382 and left is FMA67936, from different id ranges. Each was read back off the catalog name individually rather than inferred from a neighbouring id.",
-    "NO ANCHORS WERE AUTHORED. The features named on a surface here — the anterior tubercle, the pulvinar, the two geniculate bodies, the hypothalamic sulcus, the groove holding the stria terminalis — were not measured, and the reason given here was a stale delivery claim rather than a definition problem: all twenty-one meshes are on disk as of 2026-08-30, so derive-landmark.mjs CAN measure against them and this is open work, not impossible work. Placing them by eye remains what that tool exists to prevent. Derive at this scene's audit: the lateral geniculate body is plausibly derivable as a --contact of the thalamus against the optic tract, with more than one witness available if the medial geniculate is done at the same time against the brachium of the inferior colliculus; the anterior tubercle is plausibly an --extreme on the anteromedial axis with a --slab restricting it to the anterior quarter.",
-    "INTERNAL CAPSULE, BASAL GANGLIA AND HYPOTHALAMUS ARE DELIBERATELY NOT IN covers[]. All three are separate CURRICULUM.json structures, two of them in this same topic, and each appears here only as far as the thalamus needs it — the capsule as the lateral wall, the caudate and putamen as what lies beyond it, the hypothalamus and mammillary body as the floor. Claiming any of them would hide a gap that is currently visible."
+    "FOUR ANCHORS WERE DERIVED AT THE 2026-09-04 AUDIT, and two features were refused. This note previously said no anchors were authored and named the work as open; it was done. MEASURED: lateral geniculate body, --parent FMA258714 --contact FMA62382 --area 3, gap 0.45 mm over 55 vertices; medial geniculate body, --contact FMA73463 --area 3, gap 0.13 mm over 18 vertices; anterior tubercle, --extreme -y, 18.9 mm from the centroid and identical under --slab z:0.4,1.0 and z:0.5,1.0; posterior pole, --extreme +y, 17.2 mm from the centroid. All four are status needs-review: measuring proves the coordinate, only looking proves it landed. TWO CHECKS THAT MADE THEM TRUSTWORTHY, both worth repeating elsewhere. First, the axis was confirmed from mesh centroids rather than from the tool's report: derive-landmark.mjs calls the thalamus's long axis y, and it is right here, but the DIRECTION of y had to be settled independently — pineal body y=-75.3 against mammillary body y=-103.3 proves more negative y is anterior, and z=1560 for the thalamus against z=1551 for the pineal proves +z is superior. Without that, --extreme -y would have returned a measured, reproducible and completely wrong 'posterior pole'. This is the same trap the spleen scene recorded on 2026-08-29 and it recurs on brain meshes. Second, the geniculate anchors check each other: one witness each is one witness too few, but on a right-sided mesh lower u is more lateral, and the lateral geniculate came out at u 0.20 against the medial's u 0.53, with both at w 0.04-0.06 on the inferior surface. The anatomy predicted that ordering and the measurement produced it. REFUSED, and the refusals are definition problems, not delivery ones: the HYPOTHALAMIC SULCUS is a line on a surface, and a line needs a run of anchors that this tool has no primitive for — a single point on it would be arbitrary and would be believed. The PULVINAR is a region, so no point definition bounds it; what was measured is the posterior extremity of the mesh and it is labelled 'posterior pole' for exactly that reason, with the distinction stated in its own calibrated_by. The groove holding the stria terminalis is likewise a line, between the thalamus and the caudate, and was not attempted.",
+    "INTERNAL CAPSULE, BASAL GANGLIA AND HYPOTHALAMUS ARE DELIBERATELY NOT IN covers[]. All three are separate CURRICULUM.json structures, two of them in this same topic, and each appears here only as far as the thalamus needs it — the capsule as the lateral wall, the caudate and putamen as what lies beyond it, the hypothalamus and mammillary body as the floor. Claiming any of them would hide a gap that is currently visible.",
+    "THE POSTERIOR END OF THE HYPOTHALAMIC SULCUS IS DESCRIBED, NOT SHOWN. The cerebral aqueduct exists in the catalog as FMA78467 but is not a structure in this scene, so beat 2 has one drawn landmark and one spoken one. Corrected 2026-09-08: the beat had called both of them landmarks that \"do\" have a mesh. Adding FMA78467 as context would close it."
   ]
 }

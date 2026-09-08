@@ -1,0 +1,504 @@
+{
+  "schema": 2,
+  "id": "histology__epithelium__glandular-epithelium",
+  "mode": "microscopic",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Histology",
+  "topic": "Epithelium",
+  "structure": "Glandular epithelium",
+  "covers": [
+    "Glandular epithelium"
+  ],
+  "learning_goal": "Treat every gland as an epithelium that grew downwards and then answer four questions about it in a fixed order, because the four answers together are the classification and each one predicts something you can see on a slide. FIRST: did it keep its duct? Kept it and it is EXOCRINE; lost it and it is ENDOCRINE, and the product goes into blood — which is why endocrine glands sit in a net of capillaries and exocrine glands sit on a tree of ducts. SECOND, for an exocrine gland: what shape is the secretory end piece — round ACINUS, tube, or a tube ending in a sac? THIRD: how does the product actually leave the cell — MEROCRINE by exocytosis, APOCRINE with a shred of apex, HOLOCRINE by the whole cell dying? That question is the one students memorise as three words and never learn to read, and it is readable: only a holocrine gland has cells with disintegrating nuclei at the lumen. FOURTH: what is in the product — SEROUS protein or MUCOUS glycoprotein — because that single answer is why one acinus stains dark purple and the one beside it stains almost white.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-08"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "histology",
+      "epithelium",
+      "glands",
+      "secretion",
+      "slide reading",
+      "exocrine",
+      "endocrine"
+    ],
+    "terms": [
+      "glandular epithelium",
+      "gland",
+      "exocrine gland",
+      "endocrine gland",
+      "duct",
+      "acinus",
+      "alveolus",
+      "tubular gland",
+      "tubuloacinar gland",
+      "simple gland",
+      "compound gland",
+      "secretory end piece",
+      "merocrine secretion",
+      "eccrine secretion",
+      "apocrine secretion",
+      "holocrine secretion",
+      "exocytosis",
+      "serous cell",
+      "mucous cell",
+      "serous demilune",
+      "zymogen granule",
+      "goblet cell",
+      "unicellular gland",
+      "myoepithelial cell",
+      "intercalated duct",
+      "striated duct",
+      "sebaceous gland",
+      "mammary gland",
+      "parotid gland",
+      "submandibular gland",
+      "sublingual gland",
+      "pancreatic acinus",
+      "islet of Langerhans",
+      "thyroid follicle",
+      "PAS stain",
+      "cystic fibrosis",
+      "acne vulgaris",
+      "hidradenitis suppurativa",
+      "pleomorphic adenoma"
+    ]
+  },
+  "camera": {
+    "framing": "cross_section"
+  },
+  "structures": [
+    {
+      "key": "downgrowth",
+      "label": "Every gland is an epithelium that grew down",
+      "role": "primary",
+      "group": "How a gland is made",
+      "layer": "tissue",
+      "color": "#e8e2d4",
+      "terms": [
+        "glandular epithelium",
+        "downgrowth",
+        "invagination",
+        "surface epithelium",
+        "duct",
+        "basement membrane",
+        "connective tissue"
+      ],
+      "narration": "Start with the developmental fact, because the whole classification falls out of it. A gland is not a separate kind of tissue: it is a patch of surface epithelium that divided, sank into the connective tissue underneath, and kept secreting down there. The basement membrane sinks with it, so a gland — like the surface it came from — is still an avascular sheet of cells sitting on a basement membrane with connective tissue and capillaries outside it. Everything a gland does, it does across that membrane. Hold that picture and the first question answers itself: the stalk the cells sank down through either stays open as a DUCT or it does not."
+    },
+    {
+      "key": "exo_vs_endo",
+      "label": "Question 1 — did it keep its duct?",
+      "role": "primary",
+      "group": "How a gland is made",
+      "layer": "tissue",
+      "color": "#c4956c",
+      "terms": [
+        "exocrine gland",
+        "endocrine gland",
+        "duct",
+        "ductless gland",
+        "hormone",
+        "capillary",
+        "fenestrated capillary",
+        "islet of Langerhans",
+        "thyroid follicle",
+        "pancreas"
+      ],
+      "narration": "The single division that matters most, and it is visible rather than remembered. An EXOCRINE gland kept the stalk: it has a duct, and the duct delivers the product back to a surface — the skin, the gut lumen, the airway. An ENDOCRINE gland lost the stalk entirely: it has no duct, so the only way out is the blood, and its cells therefore sit wrapped in capillaries. On a slide you do not need to know which gland you are looking at to tell them apart. Look for ducts. A field full of secretory end pieces with pale ducts running between them is exocrine; a clump of cells with no duct anywhere and capillaries running between the cell cords is endocrine. The PANCREAS is the demonstration, because it is both in one section: dark purple exocrine acini draining into ducts, and pale islets of Langerhans sitting among them with no duct at all. If a student can find the islets, they have understood question one."
+    },
+    {
+      "key": "goblet",
+      "label": "The one-cell gland — goblet cell",
+      "role": "primary",
+      "group": "How a gland is made",
+      "layer": "cell",
+      "color": "#7fb3d5",
+      "terms": [
+        "goblet cell",
+        "unicellular gland",
+        "mucin",
+        "mucous",
+        "PAS stain",
+        "H&E",
+        "simple columnar epithelium",
+        "respiratory epithelium",
+        "small intestine"
+      ],
+      "narration": "The simplest exocrine gland in the body is one cell, and it never sank anywhere: the GOBLET cell sits in the surface epithelium itself, wedged between the columnar cells of the gut and the airway, and secretes mucin straight onto the surface it lives in. It is worth its own card for two reasons. It proves the definition — a gland is a secretory epithelial cell, and multicellularity and ducts are elaborations rather than requirements. And it is the commonest place a student is misled by staining: the mucin in the goblet is washed out by routine processing, so on H&E the cell looks EMPTY, a clear balloon with a squashed dark nucleus pushed to its base. It is not empty. Stain the same section with PAS and it goes magenta. The pale-on-H&E, magenta-on-PAS pattern is the signature of mucus wherever it appears in this scene."
+    },
+    {
+      "key": "acinus_shape",
+      "label": "Question 2 — the shape of the end piece",
+      "role": "primary",
+      "group": "The exocrine tree",
+      "layer": "tissue",
+      "color": "#a569bd",
+      "terms": [
+        "acinus",
+        "alveolus",
+        "tubular gland",
+        "coiled tubular gland",
+        "tubuloacinar gland",
+        "secretory end piece",
+        "simple gland",
+        "compound gland",
+        "branched gland",
+        "gastric gland",
+        "sweat gland",
+        "salivary gland"
+      ],
+      "narration": "A multicellular exocrine gland is a tree, and it is named by its BRANCHES and its FRUIT. The branch question is simple: a duct that does not branch makes the gland SIMPLE, a duct that branches makes it COMPOUND. The fruit question is the shape of the secretory end piece — a round ball of cells around a tiny central lumen is an ACINUS (some texts say alveolus); a straight or coiled cylinder is TUBULAR; a mixture is TUBULOACINAR. Then read real glands off the two words. Gastric glands: simple tubular, straight down into the mucosa. Sweat glands: simple coiled tubular, which is why a section through the dermis shows the same gland cut a dozen times over. Salivary and pancreatic glands: compound tubuloacinar or compound acinar, and that is why their sections look like bunches of grapes. The point of the two words is that they are what you can SEE — you are not asked to recognise the gland, you are asked to describe the tree."
+    },
+    {
+      "key": "ducts",
+      "label": "The duct is not a pipe — intercalated and striated",
+      "role": "primary",
+      "group": "The exocrine tree",
+      "layer": "tissue",
+      "color": "#5d8aa8",
+      "terms": [
+        "intercalated duct",
+        "striated duct",
+        "excretory duct",
+        "duct system",
+        "simple cuboidal epithelium",
+        "simple columnar epithelium",
+        "basal striations",
+        "mitochondria",
+        "ion transport",
+        "cystic fibrosis"
+      ],
+      "narration": "The duct modifies the product on the way out, which is the fact that makes duct histology worth learning rather than skipping. Nearest the acinus is the INTERCALATED duct — the narrowest, lined by flat simple cuboidal cells, easy to miss. Next is the STRIATED duct, lined by taller cells whose bases look vertically striped on a good section; those stripes are columns of mitochondria packed between infoldings of the basal membrane, and they are there because this duct is pumping ions. That is why saliva leaves the mouth hypotonic despite starting near-isotonic in the acinus. Then the excretory ducts, which get progressively taller and eventually stratified as they approach the surface they open onto. The clinical weight sits on the ion transport: in CYSTIC FIBROSIS the duct cannot reabsorb chloride normally, which is the basis of the sweat test, and the same failure elsewhere gives thick unmoved secretions that block the pancreatic ducts and the airways."
+    },
+    {
+      "key": "myoepithelial",
+      "label": "Myoepithelial cells — the squeeze",
+      "role": "part",
+      "group": "The exocrine tree",
+      "layer": "cell",
+      "color": "#cd6155",
+      "terms": [
+        "myoepithelial cell",
+        "basket cell",
+        "basement membrane",
+        "actin",
+        "smooth muscle actin",
+        "oxytocin",
+        "milk ejection",
+        "salivary gland",
+        "sweat gland",
+        "mammary gland",
+        "pleomorphic adenoma"
+      ],
+      "narration": "Flattened contractile cells wrapped around the outside of the acinus and the intercalated duct, INSIDE the basement membrane — epithelial in origin, muscle-like in behaviour, which is why they are called myoepithelial and why they stain for smooth muscle actin. They contract and squeeze the end piece to expel what is in it. In the breast they are the target of oxytocin and the whole mechanism of milk ejection: the alveolus does not push milk out, the basket around it does. They are also why the commonest salivary tumour, PLEOMORPHIC ADENOMA, looks so chaotic under the microscope — it arises from a cell that can differentiate down both epithelial and mesenchymal-looking lines, so one tumour contains ducts, myxoid tissue and cartilage-like matrix together."
+    },
+    {
+      "key": "merocrine",
+      "label": "Question 3a — merocrine: nothing is lost",
+      "role": "primary",
+      "group": "Three ways out of a cell",
+      "layer": "cell",
+      "color": "#58d68d",
+      "terms": [
+        "merocrine secretion",
+        "eccrine secretion",
+        "exocytosis",
+        "secretory vesicle",
+        "zymogen granule",
+        "pancreatic acinar cell",
+        "eccrine sweat gland",
+        "rough endoplasmic reticulum",
+        "Golgi apparatus"
+      ],
+      "narration": "The default, and by far the commonest: the product is packaged into vesicles and released by EXOCYTOSIS, and the cell loses nothing but the vesicle membrane, which it recycles. The classic is the pancreatic acinar cell, and it is worth reading as a map of its own machinery: intensely basophilic at the BASE, because that end is stuffed with rough endoplasmic reticulum making protein, and full of dark pink ZYMOGEN granules at the APEX, waiting at the lumen. Base blue, apex pink, in one cell. Eccrine sweat glands work the same way, which is why 'eccrine' and 'merocrine' are used interchangeably. The reason to name this mode at all is that it is the one where the cell looks INTACT — no missing apex, no dying nuclei — and that absence is the diagnostic feature when you are choosing between the three."
+    },
+    {
+      "key": "apocrine",
+      "label": "Question 3b — apocrine: the apex goes with it",
+      "role": "primary",
+      "group": "Three ways out of a cell",
+      "layer": "cell",
+      "color": "#f5b041",
+      "terms": [
+        "apocrine secretion",
+        "apical cytoplasm",
+        "decapitation secretion",
+        "apical blebs",
+        "lipid droplet",
+        "mammary gland",
+        "lactation",
+        "apocrine sweat gland",
+        "axilla",
+        "hidradenitis suppurativa",
+        "ceruminous gland"
+      ],
+      "narration": "The cell pinches off the apical rim of its own cytoplasm along with the product, so a thin shell of membrane and cytoplasm is lost with every secretion and the cell then repairs itself. On a section the giveaway is the free surface: it is not smooth, it carries rounded BLEBS bulging into the lumen. Two places to know. The lactating breast uses it for the FAT of milk — the lipid droplet is pushed against the apex and leaves wrapped in a shell of apical membrane, which is why milk fat globules have a membrane, while milk PROTEIN from the same cell leaves merocrine by ordinary exocytosis. One cell, two modes at once, which is the fact that stops the three modes being read as three types of gland. The other place is the APOCRINE sweat glands of the axilla, areola and groin, which open into hair follicles rather than onto skin and whose blockage and rupture is the basis of hidradenitis suppurativa. A caution worth carrying: electron microscopy has shown that several glands called apocrine on light microscopy secrete largely by exocytosis, so treat apocrine as a described morphology rather than a settled mechanism."
+    },
+    {
+      "key": "holocrine",
+      "label": "Question 3c — holocrine: the cell is the secretion",
+      "role": "primary",
+      "group": "Three ways out of a cell",
+      "layer": "cell",
+      "color": "#e74c3c",
+      "terms": [
+        "holocrine secretion",
+        "sebaceous gland",
+        "sebum",
+        "pilosebaceous unit",
+        "hair follicle",
+        "basal cell",
+        "pyknotic nucleus",
+        "cell death",
+        "meibomian gland",
+        "tarsal gland",
+        "acne vulgaris",
+        "chalazion"
+      ],
+      "narration": "The whole cell dies and becomes the product. Basal cells at the edge of the gland divide, their daughters are pushed inwards, they fill progressively with lipid, their nuclei shrink and fragment, and finally they disintegrate into the duct — the cells ARE the sebum. This is the one secretion mode that is unmistakable down a microscope, and it is the payoff of this beat: a holocrine gland shows a gradient from small dark basal cells at the rim to huge pale foamy cells at the centre, with PYKNOTIC, dying nuclei nearest the lumen. Nothing else in the body looks like that. SEBACEOUS glands are the example — almost always attached to a hair follicle as the pilosebaceous unit, which is why blockage of that unit gives ACNE — and the meibomian (tarsal) glands of the eyelid are the same tissue opening onto the lid margin instead, which is why a blocked one gives a chalazion."
+    },
+    {
+      "key": "serous",
+      "label": "Question 4a — serous: dark, round, protein",
+      "role": "primary",
+      "group": "What is in the product",
+      "layer": "cell",
+      "color": "#8e44ad",
+      "terms": [
+        "serous cell",
+        "serous acinus",
+        "zymogen granule",
+        "basophilia",
+        "rough endoplasmic reticulum",
+        "amylase",
+        "parotid gland",
+        "pancreas",
+        "round nucleus",
+        "narrow lumen"
+      ],
+      "narration": "A serous cell makes watery protein-rich secretion — enzymes — and it is built and stained accordingly. Pyramidal cell, ROUND nucleus sitting in the middle or lower third, cytoplasm strongly BASOPHILIC at the base from packed rough ER, apical granules, and a narrow central lumen. A serous acinus is a small dark round ball. The PAROTID is essentially purely serous, which is why it looks like a purple mulberry at low power and why it is the gland that makes the amylase in saliva, and the exocrine pancreas is serous by the same description. Learn the cell by its nucleus: round and central. That is the fastest way to separate it from its partner."
+    },
+    {
+      "key": "mucous",
+      "label": "Question 4b — mucous: pale, flat nucleus, glycoprotein",
+      "role": "primary",
+      "group": "What is in the product",
+      "layer": "cell",
+      "color": "#aed6f1",
+      "terms": [
+        "mucous cell",
+        "mucous acinus",
+        "mucin",
+        "mucinogen granule",
+        "PAS stain",
+        "mucicarmine",
+        "flattened nucleus",
+        "basal nucleus",
+        "sublingual gland",
+        "wide lumen"
+      ],
+      "narration": "A mucous cell makes viscous glycoprotein, and everything about its appearance follows from the mucin being washed out in processing. The cytoplasm looks EMPTY or faintly bluish-grey on H&E, the granules leave holes, and the nucleus is squashed FLAT against the base of the cell — the same pressure that flattens the nucleus of a goblet cell. A mucous acinus is therefore a large pale ball with a wide lumen and a row of dark flattened nuclei around the outside, and it is unmistakable beside a serous one. The SUBLINGUAL gland is predominantly mucous. And the confirmation is a stain rather than an opinion: PAS or mucicarmine turns all of that pale cytoplasm magenta, which is exactly how a pathologist proves that an adenocarcinoma is mucin-producing."
+    },
+    {
+      "key": "demilune",
+      "label": "Serous demilunes — and the artefact warning",
+      "role": "part",
+      "group": "What is in the product",
+      "layer": "cell",
+      "color": "#d7bde2",
+      "terms": [
+        "serous demilune",
+        "demilune of Giannuzzi",
+        "mixed acinus",
+        "seromucous gland",
+        "submandibular gland",
+        "sublingual gland",
+        "fixation artefact",
+        "cryofixation",
+        "parotid gland"
+      ],
+      "narration": "Many glands are MIXED, and in a mixed acinus the classical picture is a mucous acinus with a crescent — a DEMILUNE — of serous cells capping one side, draining into the same lumen through gaps between the mucous cells. The SUBMANDIBULAR gland is the standard example: mixed, mostly serous, with demilunes; the sublingual is mixed, mostly mucous; the parotid is serous only. That is the classic teaching and it is what a student will be shown and asked to name. It also needs a caveat stated in the same breath, because this is one of the clearest cases in histology where a textbook picture is partly made by the method: work with rapid freezing rather than chemical fixation shows the serous and mucous cells lying side by side in the same ring, and the crescent appears to be produced when routine fixation swells the mucous cells and pushes the serous ones outwards. Learn the demilune, because you will be asked for it and it does mark a mixed gland — but learn it as a preparation-dependent appearance rather than as a settled arrangement of living tissue."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "A gland is a surface that grew downwards",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How a gland is made"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:downgrowth",
+          "path": [
+            "downgrowth",
+            "exo_vs_endo"
+          ],
+          "duration": 5000
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "exo_vs_endo",
+            "goblet"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Begin with where glands come from, because it makes the classification derivable rather than memorable. A gland is surface epithelium that sank into the connective tissue below and went on secreting, carrying its basement membrane down with it. Now ask the first question: did the stalk stay open? If it did, the gland is EXOCRINE and delivers its product back to a surface through a DUCT. If it closed, the gland is ENDOCRINE, the only way out is the blood, and the cells sit in a mesh of capillaries instead of on a tree of ducts. You can settle that question on a slide without knowing what organ you are looking at — hunt for ducts. And hold the goblet cell beside both as the proof of what a gland minimally is: one secretory cell, still in the surface, no stalk, no duct, and an exocrine gland all the same."
+    },
+    {
+      "mode": "glands",
+      "beat": 2,
+      "title": "The tree — branches, fruit, and the plumbing between",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The exocrine tree"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "acinus_shape",
+            "ducts"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "myoepithelial",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "myoepithelial",
+          "to": "acinus_shape",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "Now describe an exocrine gland the way you would describe a tree, in two words you can read off the section. Does the duct branch — simple or COMPOUND? What shape is the end piece — ACINAR, TUBULAR, or tubuloacinar? Gastric glands are simple tubular, sweat glands simple coiled tubular, salivary glands compound tubuloacinar, and that is the whole vocabulary. Then look at what is between the acini, because the duct is not inert plumbing: the narrow intercalated duct first, then the STRIATED duct whose basal stripes are stacked mitochondria driving ion transport, which is why saliva ends up hypotonic and why cystic fibrosis is a disease of ducts as much as of glands. And wrapped around the outside of the acinus, inside the basement membrane, the MYOEPITHELIAL basket that squeezes it empty — the mechanism of milk ejection, and the cell of origin of the commonest salivary tumour."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Three ways out of a cell, and only one you can see",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Three ways out of a cell"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "merocrine",
+            "apocrine",
+            "holocrine"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "holocrine",
+          "intensity": 1
+        }
+      ],
+      "narration": "Three modes, and the useful way to learn them is by asking how much of the cell leaves with the product. MEROCRINE: none of it — plain exocytosis, the cell intact afterwards, and this is most glands, the pancreatic acinus and the eccrine sweat gland among them. APOCRINE: the apical rim goes too, so the free surface carries rounded blebs; the fat of milk leaves this way while the protein of the same milk leaves merocrine, which is the fact that stops these being three types of gland rather than three modes. HOLOCRINE: the entire cell dies and IS the product, which is the sebaceous gland. Now the honest part, because it decides what this beat is worth. Only ONE of the three can be read confidently on a routine light-microscope slide: holocrine, by the gradient from small dark basal cells to huge pale foamy cells with fragmenting nuclei at the lumen. Merocrine is inferred from an intact apex, apocrine from blebs that fixation can also produce, and electron microscopy has reclassified several 'apocrine' glands as exocytotic. So: name the mode from the gland when you know the gland, and read it from the section only for holocrine."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Dark and pale — the two cells you sort every salivary gland with",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What is in the product"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "serous",
+            "mucous"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "demilune",
+          "to": "mucous",
+          "kind": "boundary"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "goblet"
+        }
+      ],
+      "narration": "The last question is what is in the product, and it is the one that changes what you see most dramatically. SEROUS cells make enzyme-rich watery secretion: pyramidal, ROUND central nucleus, deeply basophilic base packed with rough ER, apical zymogen granules, narrow lumen — a small dark ball. MUCOUS cells make glycoprotein that washes out in processing: pale or empty cytoplasm, nucleus squashed FLAT against the base, wide lumen — a big pale ball. Parotid serous, sublingual mostly mucous, submandibular mixed. Where they mix, the classic picture is a serous DEMILUNE capping a mucous acinus — worth knowing, and worth knowing with its caveat, because rapid-freezing work suggests the crescent is largely produced by fixation swelling the mucous cells. And notice that the goblet cell lit beside them obeys exactly the same rule as any other mucous cell: pale on H&E because the mucin has gone, magenta on PAS because it was there. One staining behaviour, read the same way in a one-celled gland and in a compound one."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Four answers, one gland — run it on the pancreas",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "exo_vs_endo",
+            "acinus_shape",
+            "merocrine",
+            "serous"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "exo_vs_endo",
+          "intensity": 1
+        }
+      ],
+      "narration": "Finish by running the four questions on one section, because separately they are four facts and together they are a method. Take the pancreas. ONE, ducts? Yes, everywhere — so the bulk of this organ is EXOCRINE; and also no, in the pale islands scattered through it, which have no duct and sit in capillaries and are ENDOCRINE. One organ, both answers, which is why it is the slide to learn this on. TWO, shape? Compound acinar — a branching duct tree ending in round balls. THREE, mode? Merocrine: the acinar cells are intact, with no blebs and no dying nuclei. FOUR, content? Serous: round central nuclei, base intensely blue with rough ER, apex full of pink zymogen granules. So: a compound acinar merocrine serous exocrine gland with endocrine islets in it — and every word of that was read off the section rather than recalled. Do the same on a submandibular gland and the answers change at questions two and four but the method does not. That transfer is the point of the scene."
+    }
+  ],
+  "gaps": [
+    "NO MODELS ARE REFERENCED AND NONE COULD BE. This is a microscopic scene: its subject is a cell and a secretory end piece, and available-meshes.json is a catalog of gross organ surfaces. Searched it anyway rather than assuming, because REPAIR-BACKLOG.md's failure mode 1 is exactly the habit of not searching. RESULT, COPIED FROM THE SEARCH RATHER THAN FROM MEMORY: `gland` returns exactly THREE entries in the whole catalog — left adrenal gland, right adrenal gland, pituitary gland — and nothing else. There is no parotid, no submandibular, no sublingual, no thyroid, no lacrimal, no pancreas entry under that word. `acin`, `acinar`, `islet`, `goblet`, `sebaceous`, `myoepithel`, `demilune`, `zymogen`, `epitheli`, `basement` and `cell` all return NOTHING. So there is no gap to fetch here and no gross organ worth borrowing as a stand-in: the pancreas that beats 1 and 5 are built on is a drawn section, not a mesh. The correct provider is `svg` and every structure card therefore carries no refs{}. NOTE ON HOW THIS ENTRY WAS WRITTEN: its first draft claimed `gland` returned fifteen entries and listed parotid, submandibular, sublingual, thyroid and lacrimal among them. That was written from memory of what a gross catalog would plausibly contain, was wrong, and was caught by running the search before the scene was validated. It is recorded rather than quietly deleted because it is failure mode 3 committed inside a note whose whole subject is failure mode 1 — the same pairing `limbic-system__amygdala` has on record, and the second instance in this corpus of a run catching a habit in one sentence and committing its sibling in the next.",
+    "STATUS IS `planned` AND NO ARTWORK EXISTS. Promote it when six drawings exist. (1) A gland forming: surface epithelium invaginating, with the basement membrane drawn continuous from surface to end piece, and the stalk shown twice — patent as a duct, and lost — since beat 1 is built on that fork. (2) A low-power PANCREAS with dark acini and two or three pale islets in the same field, which is the single most load-bearing figure in the scene: beat 1 and the whole of beat 5 depend on the reader seeing exocrine and endocrine in one section. (3) A branching diagram of simple vs compound crossed with tubular vs acinar — four boxes, with a named real gland in each. (4) A salivary duct sequence, intercalated then striated, with the BASAL STRIATIONS actually drawn as vertical lines and a mitochondrion inset, because 'striated' is meaningless as a word alone. (5) A three-panel secretion figure at the same magnification, and it must show what beat 3 claims is visible: intact apex for merocrine, apical blebs for apocrine, and for holocrine the full gradient from small dark basal cells to foamy cells with PYKNOTIC nuclei at the lumen. A holocrine panel without visible dying nuclei would fail the beat. (6) A two-panel serous/mucous comparison at one magnification with the nuclei drawn honestly — round and central against flattened and basal — ideally as an H&E/PAS pair, since the pale-then-magenta behaviour is stated three times in this scene and shown nowhere.",
+    "DRAWABILITY: ZERO models referenced, so nothing is missing from meshes-lite/ and nothing is waiting on a fetch. The hollowness is entirely at the artwork layer. This is the systemic finding already recorded in `histology__epithelium__simple-epithelia` and `histology__epithelium__stratified-epithelia`: non-3d scenes in this corpus reach `planned` and stop, because `ready` requires something to draw. Histology is 46 structures on that path and this is the third of them.",
+    "THE THREE SECRETION MODES ARE NOT EQUALLY READABLE, AND BEAT 3 SAYS SO RATHER THAN TEACHING THREE PARALLEL FACTS. Only HOLOCRINE has an unambiguous light-microscopic signature (the basal-to-luminal gradient ending in pyknotic nuclei). Merocrine is an inference from an unremarkable apex, and apocrine blebs can be produced by fixation. The apocrine card and beat 3 both state that electron microscopy has reclassified several light-microscopically 'apocrine' glands as secreting largely by exocytosis. Recorded here as a gap because it is a limit on what the eventual artwork can honestly show: panels 5b and 5c of the artwork list must not be drawn as though the student could tell them apart on an unlabelled slide.",
+    "THE SEROUS DEMILUNE IS TAUGHT WITH ITS ARTEFACT CAVEAT, DELIBERATELY. The crescent is the standard examinable picture of a mixed acinus and is presented as such, but cryofixation work indicates the serous and mucous cells lie side by side in life and that the crescent is largely produced by chemical fixation swelling the mucous cells. Both are said in the demilune card and the caveat is repeated in beat 4. Flagged here so that a later run does not 'correct' the caveat away as a contradiction: it is one fact with a stated dependence on method, not two competing claims.",
+    "COVERS[] HOLDS EXACTLY ONE ENTRY, `Glandular epithelium`, spelled as CURRICULUM.json spells it. The scene draws heavily on `Simple epithelia` — the goblet cell, the basement membrane, the simple cuboidal and columnar duct linings — and claims none of it, because that structure has its own authored scene in this topic. Endocrine glands are described in beat 1 as the other half of question one and are NOT claimed either: there is no endocrine structure in the Epithelium topic, and the pancreatic islet, thyroid follicle and adrenal cortex belong to whatever later topic takes them. Claiming them here would hide that gap.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `cross_section`, `glands` and `mechanism` for this structure. Beats 1 and 5 are `cross_section`, beat 2 is `glands`, beats 3 and 4 are `mechanism`. All three covered. The `glands` beat is the exocrine tree because that is where duct-and-end-piece architecture lives; the two `mechanism` beats are the two questions that are about PROCESS — how the product leaves the cell, and what it is made of.",
+    "CROSS-CHECKED AGAINST THE TWO SIBLING SCENES IN THIS TOPIC BEFORE AUTHORING, SINCE A STUDENT READS THEM CONSECUTIVELY. `simple-epithelia` owns the two classification questions, the basement membrane, pseudostratification and the tangential-section trap; this scene restates the basement membrane in one sentence only, as the thing that sinks with the downgrowth, and does not re-teach classification. `stratified-epithelia` owns keratinisation and metaplasia. FACTS SHARED WITH `simple-epithelia` AND WHICH MUST BE CHANGED IN BOTH IF CHANGED IN EITHER: the goblet cell is a unicellular gland; mucin washes out in processing, so it is pale on H&E and magenta on PAS; a mucous cell's nucleus is flattened against the base by the granules above it; epithelium is avascular and sits on a basement membrane with the capillaries outside. Each of those is stated in both files and was read in both before being written here."
+  ]
+}

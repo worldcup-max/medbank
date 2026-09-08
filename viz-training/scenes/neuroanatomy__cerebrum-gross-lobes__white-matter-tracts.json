@@ -12,7 +12,7 @@
     "White matter tracts"
   ],
   "learning_goal": "Sort every bundle of cerebral white matter into one of three classes — association within a hemisphere, commissural between the hemispheres, projection between cortex and everything below it — say what each named bundle connects to what, and predict the deficit when one of them is cut.",
-  "status": "candidate",
+  "status": "ready",
   "provider": {
     "primary": "bodyparts3d",
     "fallbacks": []
@@ -109,6 +109,57 @@
         "alexia without agraphia"
       ],
       "narration": "The largest commissure in the body — on the order of two hundred million axons joining matching points in the two hemispheres. Front to back it is rostrum, genu, body, splenium. Fibres from the genu sweep forwards into both frontal poles as the forceps minor; fibres from the splenium sweep back into both occipital lobes as the forceps major. It is one model here, so those four parts are named on this card and not lit separately. Its underside is the roof of the lateral ventricles."
+    },
+    {
+      "key": "cc_genu",
+      "label": "Corpus callosum — genu",
+      "role": "part",
+      "group": "Commissural",
+      "color": "#8f7fd8",
+      "render": "anchor",
+      "anchor": {
+        "on": "cc",
+        "uvw": [
+          0.5433,
+          0.0224,
+          0.4195
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -y (most ANTERIOR vertex) of the corpus callosum FMA86464, restricted to the midline slab x:0.45,0.55 so that the 132 midline vertices are considered rather than all 1502. The unrestricted -y extreme lands at u=0.1795 — off to one side, on a forceps-minor fibre and not on the genu — which is why the slab is load-bearing and not decoration. 43.2 mm from the mesh centroid; v=0.022 confirms it is at the anterior end. Axis frame verified against neighbouring centroids this run: x is left(+)/right(−), y anterior(−)/posterior(+), z vertical. See tools/derive-landmark.mjs --parent FMA86464 --extreme -y --slab x:0.45,0.55",
+      "terms": [
+        "genu of corpus callosum",
+        "forceps minor",
+        "frontal poles"
+      ],
+      "narration": "The front knee of the corpus callosum, marked on the model rather than lit as the whole band. Fibres leaving here sweep forwards into both frontal poles as the forceps minor. Measured as the most anterior midline point of the callosal mesh; it has not yet been looked at in the player, so it is unsigned."
+    },
+    {
+      "key": "cc_splen",
+      "label": "Corpus callosum — splenium",
+      "role": "part",
+      "group": "Commissural",
+      "color": "#8f7fd8",
+      "render": "anchor",
+      "anchor": {
+        "on": "cc",
+        "uvw": [
+          0.4817,
+          0.9421,
+          0.3724
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +y (most POSTERIOR vertex) of FMA86464 within the same midline slab x:0.45,0.55; 37.7 mm from the centroid, v=0.942. Same slab caveat as the genu — the unrestricted extreme lands at u=0.9586, on a forceps-major fibre off the midline. The two anchors sit 0.92 of the mesh's y-span apart, which is the internal cross-check that they are the two ends of the same band. See tools/derive-landmark.mjs --parent FMA86464 --extreme y --slab x:0.45,0.55",
+      "terms": [
+        "splenium of corpus callosum",
+        "forceps major",
+        "alexia without agraphia",
+        "occipital lobes"
+      ],
+      "narration": "The thick back end. Fibres from here sweep back into both occipital lobes as the forceps major, and this is the piece whose section — with a left occipital lesion — gives alexia without agraphia. Marked as a point on the callosal mesh because the splenium has no model of its own."
     },
     {
       "key": "ac",
@@ -574,9 +625,19 @@
           "from": "cc",
           "to": "lv_l",
           "kind": "adjacency"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cc_genu",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cc_splen",
+          "intensity": 0.8
         }
       ],
-      "narration": "On a midline image the corpus callosum is the arched white band across the middle of the picture, and its underside is the roof of the lateral ventricle lit beside it. Read it front to back — rostrum curling down, genu, body, splenium — and remember which end serves which pole: genu to the frontal poles, splenium to the occipital. That second fact is the whole of alexia without agraphia: a left occipital lesion with the splenium cut leaves a patient who can write a sentence and then cannot read it back, because the right hemisphere still sees but can no longer reach the left hemisphere's language cortex."
+      "narration": "On a midline image the corpus callosum is the arched white band across the middle of the picture, and its underside is the roof of the lateral ventricle lit beside it. Read it front to back — rostrum curling down, genu, body, splenium. The genu and the splenium are marked as measured points on the band; the rostrum and body have no marker and are named only. Remember which end serves which pole: genu to the frontal poles, splenium to the occipital. That second fact is the whole of alexia without agraphia: a left occipital lesion with the splenium cut leaves a patient who can write a sentence and then cannot read it back, because the right hemisphere still sees but can no longer reach the left hemisphere's language cortex."
     },
     {
       "mode": "cross_section",
@@ -692,6 +753,10 @@
           "target": "Projection"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "wm"
+        },
+        {
           "op": "TRACE_STRUCTURE",
           "target": "concept:corticospinal-fibres",
           "path": [
@@ -702,7 +767,7 @@
           "duration": 4000
         }
       ],
-      "narration": "The descending motor path narrows at every step: a whole hemisphere of cortex, then the fan of the corona radiata inside the white mass, then the capsule, then the cerebral peduncle. The traced subject is the fibre population itself, which is not a model — the three structures it steps through are. That funnelling is why a lesion the size of a pea in the capsule can do what a lesion the size of a plum in the cortex does. In the peduncle the corticospinal and corticobulbar fibres take the middle three-fifths, frontopontine medial to them and temporopontine lateral; the third nerve emerges just medial to the bundle, which is why one small midbrain infarct gives a blown pupil on one side and a weak arm on the other."
+      "narration": "The descending motor path narrows at every step: a whole hemisphere of cortex, then the fan of the corona radiata inside the white mass, then the capsule, then the cerebral peduncle. The traced subject is the fibre population itself, which is not a model — the three structures it steps through are. Note honestly what the middle waypoint is: the capsular mesh on disk is the ANTERIOR limb, and the corticospinal fibres this trace represents run in the POSTERIOR limb, which has no mesh. The path is a route through the structures that exist, not a claim about which limb carries motor traffic — beat 5 said it plainly, and it still holds. That funnelling is why a lesion the size of a pea in the capsule can do what a lesion the size of a plum in the cortex does. In the peduncle the corticospinal and corticobulbar fibres take the middle three-fifths, frontopontine medial to them and temporopontine lateral; the third nerve emerges just medial to the bundle, which is why one small midbrain infarct gives a blown pupil on one side and a weak arm on the other."
     },
     {
       "mode": "mechanism",
@@ -720,6 +785,10 @@
         {
           "op": "ISOLATE_REGION",
           "target": "Limbic projection"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "th_l"
         },
         {
           "op": "TRACE_STRUCTURE",
@@ -801,19 +870,24 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "audited_at": "2026-09-08",
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
   },
   "gaps": [
     "NO ASSOCIATION FIBRE BUNDLE EXISTS IN THE CATALOG. Searched under fasciculus, fascic, arcuate, longitudinal, cingulum, uncinate, bundle, radiation and occipitofrontal: zero hits of any kind. One of the three classes this scene teaches is therefore entirely undrawable, and beat 9 says so out loud rather than implying the class is minor. The whole mass they lie in is FMA61822, which is why that model carries them on its card.",
     "ONLY THE ANTERIOR LIMB OF THE INTERNAL CAPSULE EXISTS (FMA72909 left, FMA72908 right). There is no genu, no posterior limb, no retrolenticular or sublenticular part — searched as internal capsule, capsule, limb, genu, corona and radiata. This is the single most consequential gap in the scene, because the posterior limb is the clinically important one. Beat 5 lights the anterior limb, states in terms that it carries no motor fibres, and points at the gap between thalamus and lentiform nucleus where the posterior limb would be. Nothing here should be read as showing the corticospinal tract in the capsule.",
-    "The corpus callosum is one model (FMA86464): rostrum, genu, body and splenium have no separate ids, and neither do the forceps minor and major. Searched all six terms. They are named on the corpus callosum card and in beat 2 rather than lit apart, so the alexia-without-agraphia teaching is spoken, not shown.",
+    "The corpus callosum is one model (FMA86464): rostrum, genu, body and splenium have no separate ids, and neither do the forceps minor and major. Searched all six terms. CORRECTED 2026-09-08 (audit): the genu and the splenium are nonetheless MEASURABLE as positional landmarks and are now authored as anchors on the callosal mesh (midline-slab extremes in y). The rostrum and the body are not — neither is defined by position or by contact, so derive-landmark.mjs has no definition for them and none was guessed. The alexia-without-agraphia teaching in beat 2 now has the splenium marked rather than merely named.",
     "The fornix is one model per side (FMA72925 left, FMA72924 right) covering alveus, fimbria, crus, body and column together — searched all five. The trace in beat 7 therefore steps hippocampus → fornix → mammillary body rather than stepping through the named stages.",
     "The mammillothalamic tract has no model (searched mammillothalamic, mamill, thalamic, tract). Beat 7 draws the last leg of the Papez circuit as a SHOW_RELATIONSHIP from the mammillary body to the thalamus and says in narration that it is being described rather than traced.",
-    "No endpoint nucleus of the two surface tracts exists: no lateral geniculate body (searched geniculate, geniculum), no interpeduncular nucleus, no septal nucleus, no pretectal nucleus, no fasciculus retroflexus. Beat 8's relationships stop at the thalamus and the habenula, which do exist, and the narration names what lies beyond.",
+    "CORRECTED 2026-09-08: this note previously said outright that no lateral geniculate body exists. It does — see the next-but-three entry. The accurate statement is that of the endpoint nuclei of the two surface tracts, the LATERAL GENICULATE BODY EXISTS IN THE CATALOG AND IS NOT ON DISK (FMA73303 right, FMA73304 left), while the interpeduncular nucleus, the septal nucleus, the pretectal nucleus and the fasciculus retroflexus are genuinely absent from the catalog. Beat 8's relationships stop at the thalamus and the habenula, which do exist and are fetched, and the narration names what lies beyond.",
     "The pyramidal decussation, the medial lemniscus and every named brainstem tract are absent (searched decussat, lemnisc, pyramid — the only pyramid hits are the abdominal pyramidalis muscles). The descending trace in beat 6 therefore ends at the peduncle of the midbrain, which is the last drawable station.",
     "SIDES, stated explicitly because the ids differ by one character: FMA72909 is the LEFT anterior limb of the internal capsule and FMA72908 the RIGHT; FMA72925 is the LEFT fornix and FMA72924 the RIGHT; FMA67936 is the LEFT optic tract and FMA62382 the RIGHT; FMA73414 is the LEFT stria medullaris and FMA73413 the RIGHT. The corpus callosum, both other commissures, the commissure of the fornix, the lamina terminalis, the mammillary body, the habenula, the pineal body and the peduncle of the midbrain are unsided single models.",
-    "No mesh referenced by this scene is present in meshes-lite/ — no brain model of any kind has been fetched yet, so all nine beats are hollow and the status is 'candidate' on delivery grounds alone. Nothing in the anatomy, the ids or the ops is unresolved. No anchor is authored anywhere in this scene: derive-landmark.mjs needs the parent mesh on disk to measure against, and none is, so placing one would be a guess.",
-    "CORRECTED 2026-08-30: an earlier note here said the lateral geniculate body has no model. It does — FMA73303 on the right and FMA73304 on the left, found by searching 'geniculate', which also returns both medial geniculate bodies. The optic tract's endpoint is therefore drawable and should be authored; only the interpeduncular nucleus is genuinely absent.",
-    "No cranial nerve except the optic nerve is in the catalog. The oculomotor nerve, named twice in this scene as the structure that makes a crus lesion into Weber's syndrome, is described and not drawn."
+    "CORRECTED 2026-09-08 (audit): this entry previously read 'No mesh referenced by this scene is present in meshes-lite/ — no brain model of any kind has been fetched yet, so all nine beats are hollow'. THAT WAS FALSE WHEN READ THIS RUN. All 25 of this scene's models are on disk (checked file by file against meshes-lite/, not quoted from a note); sync-state.mjs reports only two Neuroanatomy scenes drawing with holes and neither is this one. NO BEAT IS HOLLOW. The scene was held at 'candidate' on a delivery ground that had stopped being true, which is exactly the 'not in the local decimated set' habit REPAIR-BACKLOG.md §3 warns is a lower bound rather than an inventory. Two anchors have now been derived from geometry that was sitting on disk the whole time.",
+    "CORRECTED 2026-08-30: an earlier note here said the lateral geniculate body has no model. It does — FMA73303 on the right and FMA73304 on the left, found by searching 'geniculate', which also returns both medial geniculate bodies. EXTENDED 2026-09-08: the four ids are FMA73303 / FMA73304 lateral and FMA73309 / FMA73310 medial, and NONE OF THE FOUR IS IN meshes-lite/ — checked this run, not quoted. So the endpoint is catalogued but NOT drawable today: it is a fetch job, not an authoring job, and authoring it before the meshes arrive would reference four ids that cannot render. Of the endpoint nuclei only the interpeduncular, septal and pretectal nuclei are absent from the catalog itself. The contradiction between this entry and the fifth one in this list stood in the same file for nine days; the fifth entry has now been corrected to match.",
+    "No cranial nerve except the optic nerve is in the catalog. The oculomotor nerve, named twice in this scene as the structure that makes a crus lesion into Weber's syndrome, is described and not drawn.",
+    "THE BEAT 6 TRACE PASSES THROUGH THE WRONG LIMB AND NOW SAYS SO. The waypoint `ic_l` is the anterior limb; the corticospinal fibres the trace represents run in the posterior limb, for which no mesh exists in the 934-entry catalog. Disclosed inside the beat on 2026-09-08 to match the wording the sibling internal-capsule scene already used at its beat 4. Fetching a posterior-limb mesh would close this; nothing else will."
   ]
 }

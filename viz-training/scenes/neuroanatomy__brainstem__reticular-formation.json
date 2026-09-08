@@ -1,0 +1,460 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__brainstem__reticular-formation",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Brainstem",
+  "structure": "Reticular formation",
+  "covers": [
+    "Reticular formation"
+  ],
+  "learning_goal": "Understand the reticular formation as a diffuse core running the length of the brainstem tegmentum rather than a nucleus with a border, split it into a median, a medial and a lateral column with different jobs, follow the ascending arousal projections through the thalamus and the hypothalamus to the whole cortex, and use that geometry to explain why a small brainstem lesion abolishes consciousness while a large hemispheric one does not.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-02",
+    "audited_at": "2026-09-02",
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "brainstem",
+      "reticular formation",
+      "consciousness",
+      "coma",
+      "sleep",
+      "arousal",
+      "anaesthesia",
+      "pain modulation"
+    ],
+    "terms": [
+      "reticular formation",
+      "reticular core",
+      "tegmentum",
+      "ascending reticular activating system",
+      "ARAS",
+      "arousal",
+      "consciousness",
+      "wakefulness",
+      "sleep-wake cycle",
+      "raphe nuclei",
+      "serotonin",
+      "median column",
+      "medial column",
+      "gigantocellular nucleus",
+      "lateral column",
+      "parvocellular",
+      "locus coeruleus",
+      "noradrenaline",
+      "pedunculopontine nucleus",
+      "laterodorsal tegmental nucleus",
+      "acetylcholine",
+      "ventral tegmental area",
+      "dopamine",
+      "tuberomammillary nucleus",
+      "histamine",
+      "orexin",
+      "intralaminar nuclei of thalamus",
+      "reticular nucleus of thalamus",
+      "basal forebrain",
+      "central pattern generator",
+      "respiratory centre",
+      "vasomotor centre",
+      "pontine micturition centre",
+      "reticulospinal tract",
+      "postural tone",
+      "descending pain modulation",
+      "periaqueductal grey",
+      "raphe magnus",
+      "gate control",
+      "coma",
+      "brainstem death",
+      "persistent vegetative state",
+      "locked-in syndrome",
+      "decerebrate posturing",
+      "decorticate posturing",
+      "sedation",
+      "general anaesthesia"
+    ]
+  },
+  "camera": {
+    "framing": "medial"
+  },
+  "structures": [
+    {
+      "key": "brainstem_outline",
+      "label": "Brainstem — the tegmentum as the container",
+      "role": "context",
+      "group": "Where it lies",
+      "layer": "organ",
+      "color": "#c9a27a",
+      "terms": [
+        "brainstem",
+        "midbrain",
+        "pons",
+        "medulla oblongata",
+        "tegmentum"
+      ],
+      "narration": "Drawn as the sagittal profile of the three segments so the reticular core has somewhere to live. Everything in this scene sits in the tegmentum — the middle storey, behind the descending fibres in front and in front of the ventricular floor and the aqueduct behind. That one sentence places the entire subject: the reticular formation is not a structure added to the brainstem, it is what the brainstem is made of everywhere that is neither a named tract nor a named nucleus."
+    },
+    {
+      "key": "core",
+      "label": "Reticular formation — the diffuse core",
+      "role": "primary",
+      "group": "Where it lies",
+      "layer": "organ",
+      "color": "#8e7cc3",
+      "terms": [
+        "reticular formation",
+        "reticular core",
+        "net",
+        "isodendritic core",
+        "polysynaptic"
+      ],
+      "narration": "A continuous column of neurons and interwoven fibres running from the upper cervical cord to the diencephalon — reticular means net, and the net is the point. Its cells have enormous dendritic fields that cut across the long axis, so a single neuron samples many pathways and projects widely, some sending one axon both up to the thalamus and down to the cord. It has no capsule and no border you could cut around, which is exactly why it is drawn here as a shaded field with soft edges rather than an outlined body: any diagram that gives it a crisp outline is teaching a falsehood about the one property that defines it."
+    },
+    {
+      "key": "col_median",
+      "label": "Median column — raphe nuclei",
+      "role": "part",
+      "group": "The three columns",
+      "layer": "organ",
+      "color": "#c27ba0",
+      "terms": [
+        "raphe nuclei",
+        "median column",
+        "serotonin",
+        "5-HT",
+        "raphe magnus",
+        "mood",
+        "sleep"
+      ],
+      "narration": "The thinnest of the three, sitting right on the midline seam — raphe means seam — and made of serotonergic cells. Their axons reach almost everywhere: cortex, limbic system, cerebellum, and down into the spinal cord. Two consequences worth carrying. Upward, they set mood and sleep, which is the anatomical address of the drugs that act on serotonin. Downward, the raphe magnus in the medulla is the last relay of descending pain modulation, so this column is one seam doing two apparently unrelated jobs."
+    },
+    {
+      "key": "col_medial",
+      "label": "Medial column — the effector half",
+      "role": "part",
+      "group": "The three columns",
+      "layer": "organ",
+      "color": "#6aa84f",
+      "terms": [
+        "medial column",
+        "gigantocellular nucleus",
+        "magnocellular",
+        "reticulospinal tract",
+        "pontine reticulospinal",
+        "medullary reticulospinal",
+        "postural tone"
+      ],
+      "narration": "Large-celled, occupying the medial two-thirds of the tegmentum, and it is the output half of the system: this is where the reticulospinal tracts arise. The pontine one facilitates extensor tone and the medullary one inhibits it, so the two are a balance rather than a pair — and that balance is what extensor posturing is: the pontine drive left unopposed when the input that recruits the medullary inhibitory side is cut. The level names the picture — above the red nucleus, decorticate with the arms flexed; below it, decerebrate with the arms extended. Read this column as the one that DOES things to the body."
+    },
+    {
+      "key": "col_lateral",
+      "label": "Lateral column — the receiver half",
+      "role": "part",
+      "group": "The three columns",
+      "layer": "organ",
+      "color": "#e69138",
+      "terms": [
+        "lateral column",
+        "parvocellular",
+        "small-celled",
+        "cranial nerve reflexes",
+        "vital centres"
+      ],
+      "narration": "Small-celled and lying lateral to the medial column, taking input from the cranial nerve nuclei and the ascending sensory systems and feeding it medially. It is the afferent and integrating side, and it is the part that organises reflexes with a fixed pattern — the arcs for coughing, vomiting, swallowing and sneezing all live here. The division to remember is functional and not merely topographical: lateral takes in and coordinates, medial sends out."
+    },
+    {
+      "key": "aras",
+      "label": "Ascending reticular activating system",
+      "role": "part",
+      "group": "Upward — arousal",
+      "layer": "organ",
+      "color": "#f1c232",
+      "terms": [
+        "ascending reticular activating system",
+        "ARAS",
+        "arousal",
+        "wakefulness",
+        "consciousness",
+        "level of consciousness"
+      ],
+      "narration": "The ascending half, and the reason this structure is on any curriculum. It begins in the upper pons and midbrain — NOT in the medulla, which is worth stating plainly, because the arousal system occupies only the top of a core that runs the whole length. From there it fans upward on both sides in two routes and reaches essentially the whole cortex. It carries no information about what is being perceived. It sets whether anything is perceived at all, which is why consciousness is usefully split into level, owned here, and content, owned by the cortex."
+    },
+    {
+      "key": "route_thalamic",
+      "label": "Dorsal route — through the thalamus",
+      "role": "part",
+      "group": "Upward — arousal",
+      "layer": "organ",
+      "color": "#3d85c6",
+      "terms": [
+        "intralaminar nuclei of thalamus",
+        "midline thalamic nuclei",
+        "reticular nucleus of thalamus",
+        "thalamocortical",
+        "cholinergic",
+        "pedunculopontine nucleus",
+        "laterodorsal tegmental nucleus"
+      ],
+      "narration": "Cholinergic cells of the pedunculopontine and laterodorsal tegmental nuclei project to the intralaminar and midline thalamic nuclei, which project diffusely to the whole cortex — so this route works by changing how the thalamus relays everything else. It is the switch between the thalamus passing sensory traffic through in the waking state and shutting it into rhythmic bursts in slow-wave sleep, which is why the EEG changes shape rather than merely amplitude when someone falls asleep. Bilateral thalamic damage can therefore produce coma without a single cortical cell being injured."
+    },
+    {
+      "key": "route_hypothalamic",
+      "label": "Ventral route — through the hypothalamus and basal forebrain",
+      "role": "part",
+      "group": "Upward — arousal",
+      "layer": "organ",
+      "color": "#674ea7",
+      "terms": [
+        "locus coeruleus",
+        "noradrenaline",
+        "ventral tegmental area",
+        "dopamine",
+        "tuberomammillary nucleus",
+        "histamine",
+        "orexin",
+        "hypocretin",
+        "basal forebrain",
+        "narcolepsy"
+      ],
+      "narration": "The second, thalamus-bypassing route: monoaminergic cells — noradrenaline from the locus coeruleus, dopamine from the ventral tegmental area, serotonin from the raphe — run forward through the lateral hypothalamus and basal forebrain to the cortex directly. The hypothalamic relay is where histamine and orexin join in, and both are clinically loud: sedating antihistamines cross into the brain and block the histamine arm, and loss of the orexin neurons is narcolepsy. Because the two routes are separate, a lesion has to be placed high and centrally to take both, which is the anatomy behind the next beat."
+    },
+    {
+      "key": "descending",
+      "label": "Downward — tone, vital centres and pain",
+      "role": "part",
+      "group": "Downward — control",
+      "layer": "organ",
+      "color": "#45818e",
+      "terms": [
+        "reticulospinal tract",
+        "postural tone",
+        "central pattern generator",
+        "respiratory centre",
+        "vasomotor centre",
+        "cardiac centre",
+        "periaqueductal grey",
+        "raphe magnus",
+        "descending pain modulation",
+        "gate control"
+      ],
+      "narration": "The same core, projecting the other way, and it does three separate jobs that are easy to meet as three unrelated facts. Tone: the reticulospinal tracts set the background postural drive the corticospinal system then works on top of. Vital and rhythmic function: the respiratory and cardiovascular centres of the medulla and the pattern generators for swallowing, vomiting and micturition are reticular neurons rather than discrete organs, which is why no dissection ever finds a `respiratory centre` with an edge. Pain: cortex and periaqueductal grey drive the raphe magnus, which drives the dorsal horn to suppress incoming pain traffic — the descending limb of gate control, and the endogenous system opioids act on."
+    },
+    {
+      "key": "coma",
+      "label": "Coma — where a lesion has to be",
+      "role": "part",
+      "group": "Why it matters clinically",
+      "layer": "organ",
+      "color": "#cc0000",
+      "terms": [
+        "coma",
+        "Glasgow Coma Scale",
+        "level of consciousness",
+        "upper brainstem",
+        "bilateral thalamic infarct",
+        "central herniation",
+        "toxic and metabolic coma"
+      ],
+      "narration": "The clinical rule this scene exists to justify: to abolish consciousness a lesion must damage the ARAS in the upper pons or midbrain, or damage BOTH thalami, or damage BOTH cortices diffusely. A single large hemispheric stroke does not cause coma by itself — a hemiplegic patient who is unconscious has either a second problem or a mass pushing downward onto the brainstem. Size is not the variable; position is. That is also why a few millilitres of infarct in the paramedian midbrain can do what a whole lobe cannot, and why toxic and metabolic causes, which depress everything at once, are the commonest coma of all."
+    },
+    {
+      "key": "contrasts",
+      "label": "Three states that separate level from content",
+      "role": "part",
+      "group": "Why it matters clinically",
+      "layer": "organ",
+      "color": "#a64d79",
+      "terms": [
+        "persistent vegetative state",
+        "unresponsive wakefulness",
+        "locked-in syndrome",
+        "brainstem death",
+        "coma",
+        "sleep-wake cycle"
+      ],
+      "narration": "Put three states beside each other and the split does the teaching. Vegetative state: ARAS intact, cortex destroyed — eyes open, sleep-wake cycles present, no awareness. Locked-in: the ventral pons destroyed while the tegmentum behind it survives — fully aware and fully awake, and paralysed, so the reticular core being spared is the whole tragedy. Brainstem death: the core itself gone, so arousal and the vital centres go together and the apnoea test is the bedside proof. Level and content are dissociable in both directions, and each of these is one of the directions."
+    },
+    {
+      "key": "anaesthesia",
+      "label": "Sedation and anaesthesia act here",
+      "role": "context",
+      "group": "Why it matters clinically",
+      "layer": "organ",
+      "color": "#999999",
+      "terms": [
+        "general anaesthesia",
+        "sedation",
+        "benzodiazepine",
+        "opioid",
+        "antihistamine",
+        "respiratory depression"
+      ],
+      "narration": "Drugs that reduce consciousness converge on this core, which is also why they depress breathing at doses not far above the ones that sedate: arousal and the respiratory pattern generator are neighbours in the same tegmentum, made of the same kind of neuron. The single most useful thing this anatomy predicts at the bedside is that sedation and respiratory depression are not two separate side effects to be weighed against each other — they are one effect, seen at two levels of the same column."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "A core, not a nucleus",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "core",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "core",
+          "to": "brainstem_outline",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Start with what it is not. The reticular formation is not a nucleus, has no border, and cannot be dissected out; it is the tegmental core of the whole brainstem, everything left over once you have named the tracts in front and the cranial nerve nuclei beside it, running continuously from the upper cervical cord to the diencephalon. Its cells have wide dendritic fields lying across the long axis, so each one listens to many pathways, and many project both upward and downward from a single axon. Note how it is drawn: a graded shading with soft edges, deliberately, because a crisp outline would contradict the one property that matters. A student who leaves with `diffuse, longitudinal, tegmental, everywhere at once` has the anatomy."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Three columns across, three jobs",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three columns"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "col_median",
+            "col_medial",
+            "col_lateral"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Cut across the tegmentum at any level and the same three columns appear, arranged from the midline outwards. Median, on the seam: the raphe nuclei, serotonergic, projecting almost everywhere and running descending pain control from the raphe magnus at the bottom. Medial, large-celled and taking up most of the width: the output side, the origin of the reticulospinal tracts and of most ascending arousal fibres. Lateral, small-celled: the input side, gathering from the cranial nerve nuclei and organising the fixed reflex patterns — cough, vomit, swallow, sneeze. Lateral receives, medial acts, median modulates. Because the columns run the whole length, the level of a lesion tells you which function is lost and the column tells you which kind."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Upward — two routes to the whole cortex",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Upward — arousal"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:aras",
+          "path": [
+            "core",
+            "aras",
+            "route_thalamic",
+            "route_hypothalamic"
+          ],
+          "duration": 6000
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "aras",
+          "intensity": 1
+        }
+      ],
+      "narration": "The ascending arousal system starts in the upper pons and midbrain — not along the whole core, which is the detail most summaries lose — and divides into two. The dorsal route is cholinergic, into the intralaminar and midline thalamic nuclei and out from there to the whole cortex; it works by setting the thalamus to relay or to burst, which is the difference between waking and slow-wave sleep on an EEG. The ventral route is monoaminergic and skips the thalamus, running through the lateral hypothalamus and basal forebrain to the cortex directly, picking up histamine and orexin on the way. Two routes, both bilateral, both diffuse. This system carries no content whatever: it decides whether the cortex is in a state to have content at all."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Downward — tone, breathing, and turning pain down",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Downward — control"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:reticulospinal",
+          "path": [
+            "core",
+            "col_medial",
+            "descending"
+          ],
+          "duration": 5000
+        }
+      ],
+      "narration": "The same neurons, projecting caudally, and three jobs that are usually met as three unrelated facts. Postural tone: pontine reticulospinal fibres facilitate extensors, medullary ones inhibit them, and the cortex normally drives the inhibitory side — so losing that drive tips the balance towards extension. Be exact about WHERE, because this is the part examiners test: a lesion ABOVE the red nucleus gives DECORTICATE posturing, arms flexed; a lesion BELOW it — classically between the superior and inferior colliculi — gives DECEREBRATE posturing, arms extended. Removing the cortex alone is decorticate, not decerebrate. Vital rhythms: the respiratory and vasomotor centres, and the pattern generators for swallowing, vomiting and micturition, are reticular neurons, not organs — no dissection finds a respiratory centre with an edge, and this is why. Pain: the periaqueductal grey drives the raphe magnus, which drives the dorsal horn to shut incoming traffic down, which is the descending arm of gate control and the system opioids exploit. One core, three outputs, and the only thing they share is the address."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Why a small lesion here beats a large one anywhere else",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Why it matters clinically"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "coma",
+          "intensity": 1
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "coma",
+            "contrasts"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Consciousness needs an intact ARAS and at least one working cortex, so coma requires a lesion in the upper brainstem, in both thalami, or across both hemispheres — and a unilateral hemispheric stroke, however large, does not qualify. If a hemiplegic patient is unconscious, look for a mass pushing the brainstem down rather than for more hemisphere. Then read the three dissociations against each other. Vegetative state: core intact, cortex gone — awake and unaware, with sleep-wake cycles preserved, which is what makes it so hard to explain to families. Locked-in: the ventral pons infarcted and the tegmentum spared — aware, awake, and able to move only the eyes vertically. Brainstem death: the core itself destroyed, so arousal and breathing fail together. Level and content are separable in both directions, and these are the two directions. Finally the pharmacology falls out of the same picture: sedatives act on this core, and the respiratory pattern generator is a few millimetres from the arousal cells, so sedation and respiratory depression are one effect seen at two levels rather than two side effects to trade off."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS SECOND PREFERRED MODE, AND THE ROUTING WAS MEASURED, NOT ASSUMED. Searched all 934 catalog entries for: reticul, formation, raphe, locus, coerul, cerul, ceruleus, tegment, gigantocellular, parvocellular, magnocellular, pedunculopontine, ventral tegmental, tuberomammillary, intralaminar, periaqueductal, aqueductal grey, grey, gray, substantia, nigra, red nucleus, ruber, ambigu, solitar, nucleus, arousal, ascending. Total brainstem hits: ZERO. The catalog's only `nucleus` entries are the two caudate nuclei FMA72826 and FMA72827, and its only midbrain entry of any kind is FMA62394 `peduncle of midbrain`. `ascending` returns the ascending aorta and two parts of trapezius; `tuber` returns FMA62327 `tuber cinereum`, which is hypothalamus and belongs to another scene. Nothing here is renderable as 3D.",
+    "THE ROUTING WOULD BE RIGHT EVEN IF THE MESHES EXISTED, AND THAT IS THE UNUSUAL PART. Every other structure routed away from `3d_anatomy` in this corpus is routed for want of geometry. This one has no geometry in principle: the reticular formation is defined by NOT having a boundary, so a mesh of it would be a lie about the subject. A diagram can shade a gradient and an STL cannot. `deferred_modes` keeps `3d_anatomy` on the record because a future segmented brainstem could carry the core as a graded volume overlay on a real tegmentum — but if that day comes, the overlay must stay graded. Do not accept a hard-edged reticular mesh.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: a midsagittal brainstem with the core shaded as a soft longitudinal gradient from cervical cord to diencephalon and NO outline; one transverse section showing the three columns arranged from the midline outwards, ideally at pontine level where all three are widest; and an arousal diagram carrying both ascending routes, dorsal through the thalamus and ventral through the hypothalamus and basal forebrain, both drawn bilaterally, since the bilaterality is the whole argument of beat 5. The illustrator brief is that beat 1 and the primary structure card both promise soft edges, and a crisp outline breaks the scene's central claim.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following the same pattern as the other `diagram` scenes in this course. Nothing is claimed to be drawn from the catalog and no beat asks the student to look for a mesh.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`; this scene has no parent mesh. Beyond that, the two features a run might reach for — the pontomedullary and pontomesencephalic junctions, which would give the arousal system its lower limit — are transverse LINES rather than points, the identical rejection already recorded in the pons and midbrain scenes. Nothing was placed by eye.",
+    "OVERLAP WITH THE THREE BRAINSTEM SEGMENT SCENES IS DELIBERATE AND BOUNDED, AND THE SHARED FACTS WERE CHECKED AGAINST THEM RATHER THAN RESTATED FROM MEMORY. `medulla-oblongata` owns the vital centres as a property of ITS tegmentum and says they exist nowhere else; this scene says the same centres are reticular neurons rather than discrete organs, which is the same fact from the other side and does not contradict it. `pons` owns locked-in syndrome as a basilar artery territory; this scene uses it only as the level-versus-content contrast and repeats its two load-bearing details identically — ventral pons destroyed, tegmentum spared, vertical eye movement preserved because vertical gaze is organised in the midbrain. Neither scene is contradicted, and neither is claimed in `covers[]`.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Reticular formation`, spelled as `CURRICULUM.json` spells it. The thalamus, hypothalamus and periaqueductal grey are named in beats 3 and 4 as the targets of the projections and are NOT claimed: the thalamus and the hypothalamus are separate curriculum structures with their own authored scenes under Basal Ganglia & Diencephalon.",
+    "CURRICULUM VIEWS: `location` and `mechanism` are both required and both present — `location` at beats 1 and 2, `mechanism` at beats 3, 4 and 5.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch. Unlike the pons and medulla scenes, whose hollowness is granularity, this scene is hollow at the artwork layer only: no mesh in any catalog would improve it, and one drawing would complete it."
+  ]
+}

@@ -236,8 +236,31 @@ Check, in this order:
 
     When the scene is correct, add to its provenance:
       "audited_at": "<today's date>", "audited_by": "task"
+    AND IF YOU CHANGED ANYTHING, also:
+      "corrected_at": "<today's date>", "corrected_by": "task"
+    A scene that was repaired and carries only audited_at reads as one that was clean on arrival. The
+    gross corpus stamps both; the neuro scenes were not, so six days of real corrections are invisible
+    in the files that carry them.
     That, and nothing else, is what moves the audit cursor on. Never sign a scene you changed without
     re-running the validator on it.
+
+14. A NOTE IN THE FILE IS A CLAIM, NOT A FACT — INCLUDING YOUR OWN. Every gaps[] entry you read is a
+    sentence some earlier run wrote and nothing has re-checked since. Two kinds go stale silently and
+    both were found live on 2026-09-08:
+
+      DELIVERY CLAIMS. Two scenes said "no mesh referenced by this scene is present in meshes-lite/ —
+      every beat is hollow", and gave that as the reason they were held at `candidate`. All 38 models
+      were on disk. Two whole scenes were invisible to students because of a sentence that had simply
+      stopped being true. A third blamed an absent colliculus mesh in one entry while the entry above
+      it correctly said all 23 were present.
+
+      STATE CLAIMS. One scene carried a gaps entry insisting its status was `candidate` and unsigned
+      while the status field beside it read `ready`. A note that describes the file's own state is the
+      most expensive kind to leave stale, because the next reader believes it over the field.
+
+    So: STAT EVERY MESH ID A GAPS ENTRY MENTIONS, and read every gaps entry against the status,
+    provenance and structures[] of the file it sits in. Correct or retire what no longer holds, and say
+    in the entry that you did and when. This costs one pass and it is the cheapest finding in the list.
 
 THEN, once per run, in this order:
   node viz-training/tools/validate-scenes.mjs --mark

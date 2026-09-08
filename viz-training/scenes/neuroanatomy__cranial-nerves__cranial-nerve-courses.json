@@ -1,0 +1,344 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__cranial-nerves__cranial-nerve-courses",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Cranial Nerves",
+  "structure": "Cranial nerve courses",
+  "covers": [
+    "Cranial nerve courses"
+  ],
+  "learning_goal": "Follow each cranial nerve from the surface of the brain, through the skull base, to what it supplies — and learn the three journeys as one geometry rather than twelve lists. The exits from the brainstem are given by the columns of `cranial-nerve-nuclei`; the exits from the skull are given by which fossa the nerve is heading for, so the foramina group into anterior, middle and posterior in the same order as the nerves themselves; and the targets are given by the pharyngeal arch or somite the nerve grew with. Then use the grouping clinically: nerves that travel together are lost together, so a cavernous sinus lesion takes III, IV, V1, V2 and VI, a jugular foramen lesion takes IX, X and XI, and the pattern of a palsy names the compartment rather than the nerve.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-03",
+    "audited_at": "2026-09-03",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "cranial nerves",
+      "cranial nerve courses",
+      "skull base",
+      "cranial foramina",
+      "cavernous sinus"
+    ],
+    "terms": [
+      "cranial nerve courses",
+      "cranial foramina",
+      "skull base",
+      "anterior cranial fossa",
+      "middle cranial fossa",
+      "posterior cranial fossa",
+      "cribriform plate",
+      "optic canal",
+      "superior orbital fissure",
+      "foramen rotundum",
+      "foramen ovale",
+      "internal acoustic meatus",
+      "jugular foramen",
+      "hypoglossal canal",
+      "foramen magnum",
+      "cavernous sinus",
+      "optic chiasm",
+      "optic tract",
+      "lateral geniculate body",
+      "trigeminal ganglion",
+      "ophthalmic nerve",
+      "maxillary nerve",
+      "mandibular nerve",
+      "geniculate ganglion",
+      "chorda tympani",
+      "facial canal",
+      "stylomastoid foramen",
+      "parotid gland",
+      "recurrent laryngeal nerve",
+      "carotid sheath",
+      "pharyngeal arch",
+      "cavernous sinus syndrome",
+      "jugular foramen syndrome",
+      "Bell's palsy",
+      "uncal herniation"
+    ]
+  },
+  "camera": {
+    "framing": "inferior"
+  },
+  "structures": [
+    {
+      "key": "exits",
+      "label": "Where each nerve leaves the brain — the first of three journeys",
+      "role": "primary",
+      "group": "Out of the brain",
+      "layer": "organ",
+      "color": "#f1c232",
+      "terms": [
+        "cranial nerve attachment",
+        "midbrain",
+        "pons",
+        "medulla oblongata",
+        "interpeduncular fossa",
+        "cerebellopontine angle",
+        "postolivary sulcus",
+        "preolivary sulcus",
+        "trochlear nerve",
+        "dorsal exit"
+      ],
+      "narration": "Each nerve makes three journeys — out of the brain, through the skull, and out to its target — and the first is the one the columns already predict. I and II never touch the brainstem: the olfactory nerves enter the olfactory bulb off the forebrain, and the optic nerve is a tract of the central nervous system running back to the diencephalon. III leaves the MIDBRAIN ventrally in the interpeduncular fossa, between the peduncles. IV is the exception on every count — it is the only nerve to leave DORSALLY, below the inferior colliculi, and the only one to cross before it leaves, so each trochlear nucleus drives the opposite eye. V leaves the middle of the PONS laterally. VI, VII and VIII come out along the pontomedullary junction from medial to lateral, VI just above the pyramid, VII and VIII together at the cerebellopontine angle — which is why one acoustic neuroma deafens a patient and then weakens their face. IX, X and cranial XI leave the MEDULLA in a line behind the olive, and XII in front of it, between olive and pyramid. Medial column in front of the olive, branchial column behind it: the same medial-to-lateral order as the nuclei, seen from outside."
+    },
+    {
+      "key": "foramina",
+      "label": "Through the skull base — the foramina in fossa order",
+      "role": "primary",
+      "group": "Through the skull",
+      "layer": "organ",
+      "color": "#cc0000",
+      "terms": [
+        "cranial foramina",
+        "cribriform plate",
+        "optic canal",
+        "superior orbital fissure",
+        "foramen rotundum",
+        "foramen ovale",
+        "internal acoustic meatus",
+        "jugular foramen",
+        "hypoglossal canal",
+        "foramen magnum",
+        "anterior cranial fossa",
+        "middle cranial fossa",
+        "posterior cranial fossa"
+      ],
+      "narration": "The skull base is three steps down from front to back, and the nerves leave in almost the order of their numbers, which makes the list nearly free. ANTERIOR fossa: I only, through the cribriform plate of the ethmoid — dozens of filaments through a sieve, which is why a cribriform fracture tears them and gives anosmia and a CSF leak from the nose together. MIDDLE fossa, the crowded one: II through the OPTIC CANAL with the ophthalmic artery; III, IV, V1 and VI through the SUPERIOR ORBITAL FISSURE; V2 through FORAMEN ROTUNDUM to the pterygopalatine fossa and the face; V3 through FORAMEN OVALE to the infratemporal fossa, the only division not going forwards. POSTERIOR fossa: VII and VIII into the INTERNAL ACOUSTIC MEATUS in the petrous temporal bone; IX, X and XI through the JUGULAR FORAMEN; XII through its own HYPOGLOSSAL CANAL. Note two things the numbering hides. The spinal root of XI is the one nerve that comes UP through the foramen magnum before turning round and going out again through the jugular foramen. And V is the only nerve using three different exits, one per division — a fact worth holding, because it means a lesion can take one division of the face and spare the other two."
+    },
+    {
+      "key": "cavernous",
+      "label": "The cavernous sinus — five nerves in one small room",
+      "role": "part",
+      "group": "Through the skull",
+      "layer": "organ",
+      "color": "#3d85c6",
+      "terms": [
+        "cavernous sinus",
+        "cavernous sinus syndrome",
+        "internal carotid artery",
+        "abducens nerve",
+        "ophthalmic nerve",
+        "maxillary nerve",
+        "ophthalmoplegia",
+        "uncal herniation",
+        "posterior communicating artery aneurysm"
+      ],
+      "narration": "One compartment deserves its own card, because more cranial nerves can be lost at once here than anywhere else in the head. The cavernous sinus is a venous space either side of the body of the sphenoid. III, IV, V1 and V2 run in its LATERAL WALL, in that order from top down; VI runs FREE INSIDE the blood, alongside the internal carotid artery. So a lesion filling the sinus gives a total ophthalmoplegia with a numb forehead and cheek and a spared jaw — the pattern names the room, not any one nerve. And the position of VI explains its reputation: lying loose in the sinus and having the longest intracranial course of any nerve, it is the one most often palsied by raised intracranial pressure, which is why an isolated sixth nerve palsy is a FALSE localising sign and means measure the pressure rather than find the lesion. Set that against the third nerve, whose parasympathetic pupillary fibres run on its OUTSIDE: compression from a posterior communicating artery aneurysm or from uncal herniation takes the pupil FIRST and the eye movements after, while a diabetic microvascular infarct of the same nerve starves the core and SPARES the pupil. Pupil involved means surgical until proven otherwise."
+    },
+    {
+      "key": "vfacial",
+      "label": "V and VII — the two long peripheral courses",
+      "role": "part",
+      "group": "Out to the target",
+      "layer": "organ",
+      "color": "#6aa84f",
+      "terms": [
+        "trigeminal ganglion",
+        "ophthalmic nerve",
+        "maxillary nerve",
+        "mandibular nerve",
+        "muscles of mastication",
+        "facial canal",
+        "geniculate ganglion",
+        "chorda tympani",
+        "stapedius",
+        "stylomastoid foramen",
+        "parotid gland",
+        "Bell's palsy",
+        "muscles of facial expression"
+      ],
+      "narration": "V and VII have the longest and most examinable courses, and each is read by asking what it collects on the way. V: one sensory ganglion, the TRIGEMINAL, on the petrous apex, then three divisions to three exits and three strips of face — V1 to forehead and cornea, V2 to cheek, V3 to jaw. Only V3 carries MOTOR fibres, to the muscles of mastication, because only the mandibular division follows the first pharyngeal arch out. So a numb face with a weak jaw is V3; a numb face with a normal jaw is V1 or V2. VII takes a longer and stranger route: out at the cerebellopontine angle with VIII, into the internal acoustic meatus, then a right-angled bend at the GENICULATE GANGLION, back through the facial canal in the petrous bone giving the nerve to STAPEDIUS and then the CHORDA TYMPANI for taste from the front of the tongue and the submandibular and sublingual glands, and finally out of the STYLOMASTOID FORAMEN to cross the parotid gland and fan into the muscles of facial expression. That order is a clinical instrument: a lesion at the stylomastoid foramen weakens the face alone, while one higher in the canal adds hyperacusis and loss of taste, so the accompanying symptoms give the LEVEL. And the fact the whole set turns on — the upper face has bilateral cortical input and the lower face does not — means a nerve lesion takes the whole side including the forehead, while a stroke spares the forehead. Forehead involved is the peripheral nerve."
+    },
+    {
+      "key": "lowerfour",
+      "label": "IX to XII — the neck four, and the recurrent detour",
+      "role": "part",
+      "group": "Out to the target",
+      "layer": "organ",
+      "color": "#a64d79",
+      "terms": [
+        "jugular foramen",
+        "jugular foramen syndrome",
+        "carotid sheath",
+        "carotid sinus",
+        "stylopharyngeus",
+        "recurrent laryngeal nerve",
+        "vagus nerve",
+        "sternocleidomastoid",
+        "trapezius",
+        "hypoglossal canal",
+        "genioglossus",
+        "tongue deviation"
+      ],
+      "narration": "The last four leave together and then separate completely, and each ends up somewhere its number does not suggest. IX is almost all sensory — the back of the tongue including taste, the pharynx, and the CAROTID SINUS baroreceptors, the afferent limb of the reflex the solitary nucleus runs — with one muscle only, stylopharyngeus. X descends the neck in the CAROTID SHEATH and keeps going, the only cranial nerve to leave the head and neck entirely, supplying the pharynx, larynx, and the viscera to the left colic flexure. Its RECURRENT LARYNGEAL branches make the detour worth knowing: both hook under an arch of the embryonic aortic system and are dragged down as the heart descends, so the right turns under the subclavian artery and the left goes all the way to the aortic arch and back — which is why a left recurrent palsy, and hoarseness, can be the presenting sign of a lung tumour or an aortic aneurysm. XI runs down to sternocleidomastoid and trapezius, superficial in the posterior triangle, where it is famously cut in a node biopsy. XII crosses the neck to the tongue muscles; genioglossus pushes the tongue out, so one dead XII lets the other side push the tongue TOWARDS the weak side. Together at the jugular foramen they give one syndrome — hoarse, dysphagic, weak shoulder — and apart they give three quite different ones."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Out of the brain — read the exits off the columns",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Out of the brain"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "exits",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Look at the brainstem from in front. III between the peduncles of the midbrain, V from the side of the pons, VI, VII and VIII along the pontomedullary junction medial to lateral, IX, X and XI behind the olive, XII in front of it. The line in front of the olive is the somatic motor column and the line behind it is the branchial one — the same order as the nuclei, now visible from outside. Then turn the stem round for the single exception: IV alone leaves DORSALLY, below the inferior colliculus, and alone crosses first, so it drives the opposite eye. Nothing in this scene is a mesh. The catalog holds no cranial nerve but the two optic ones and no ganglion of any kind; it does hold the pons, medulla and midbrain peduncle, but drawing an exit ON them would show a surface with nothing emerging from it. It also holds the bones of the skull base, which is why beat 2 says openly that its foramina are drawn in a map and not cut in the bone you would see. This is a drawn map, and that is said first so no beat sends a student looking for something absent."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Through the skull — three fossae, nearly in numerical order",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Through the skull"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "foramina",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "foramina",
+          "to": "exits",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Now the floor of the skull from above, stepping down front to back — drawn, not shown: the sphenoid, temporal and occipital bones that carry these holes do exist as geometry, but this beat is a map of which nerve uses which opening rather than a picture of the openings themselves. Anterior fossa: I through the cribriform plate. Middle fossa: II through the optic canal; III, IV, V1 and VI through the superior orbital fissure; V2 through foramen rotundum; V3 through foramen ovale. Posterior fossa: VII and VIII into the internal acoustic meatus, IX, X and XI through the jugular foramen, XII through the hypoglossal canal. The numbers run almost in order because the nerves and the fossae develop in the same rostrocaudal sequence — this is a consequence, not a coincidence, and it is why the list can be reconstructed instead of memorised. Two things to hold against the pattern: the spinal root of XI enters through the foramen magnum before leaving by the jugular foramen, and V uses three exits, one per division, which is what lets a lesion take one strip of face and spare the rest."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Five nerves in one room — the cavernous sinus",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Through the skull"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cavernous",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "foramina",
+            "cavernous"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Stop at the sinus, because travelling together means being lost together. III, IV, V1 and V2 in the lateral wall, top to bottom; VI loose inside the blood beside the internal carotid. Fill that room and you get a frozen eye, a numb forehead and cheek, and a working jaw — a pattern that names the compartment. Two consequences follow from position alone. VI, unsupported in the sinus and with the longest intracranial course, is the nerve raised pressure palsies first, so an isolated sixth is a false localising sign. And III carries its pupillary fibres on the outside, so a compressing aneurysm or a herniating uncus blows the pupil before the eye stops moving, while a diabetic infarct of the same nerve spares it. Pupil involved means image the arteries."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "Out to the target — what V and VII collect on the way",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Out to the target"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "vfacial",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:facial-nerve-course",
+          "path": [
+            "exits",
+            "foramina",
+            "vfacial"
+          ],
+          "duration": 6000
+        }
+      ],
+      "narration": "Trace VII the whole way and the examination writes itself: cerebellopontine angle, internal acoustic meatus, the bend at the geniculate ganglion, the nerve to stapedius, the chorda tympani taking taste and two salivary glands, then out of the stylomastoid foramen through the parotid to the face. Weakness alone means the lesion is at the foramen or beyond; add hyperacusis or lost taste and it is higher in the canal. Then V, which collects almost nothing on the way and instead splits once: three divisions, three exits, three strips of face, and motor fibres in V3 only, following the first pharyngeal arch to the muscles of mastication. The organs each nerve ends on are the point of this beat — cornea, cheek, jaw muscles for V; the tear film, the two lower salivary glands, the front of the tongue and every muscle of expression for VII — and the forehead is the discriminator that matters most: spared in a stroke, weak in a nerve palsy."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "The neck four — one foramen, four destinations",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Out to the target"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lowerfour",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "vfacial",
+            "lowerfour"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Follow the last four to their organs. IX to the back of the tongue, the pharynx and the carotid sinus — sensation and one muscle. X down the carotid sheath and out of the head altogether, to larynx, pharynx, heart, lungs and gut as far as the left colic flexure, with the recurrent laryngeal branches hooking under the subclavian on the right and the aortic arch on the left, dragged there by the descent of the heart, which is why hoarseness can be a chest sign. XI to sternocleidomastoid and trapezius, lying superficially in the posterior triangle. XII to the tongue, where genioglossus protrudes, so the tongue points at the dead side. Lost together at the jugular foramen they give hoarseness, dysphagia and a drooping shoulder in one patient; lost separately they give three unrelated presentations. The pattern of loss names the compartment — which is the same lesson as the cavernous sinus, at the other end of the skull base."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS SECOND PREFERRED MODE, AND THE ROUTING WAS MEASURED THIS RUN AGAINST `available-meshes.json` RATHER THAN QUOTED FROM `cranial-nerve-nuclei` OR FROM THE PROMPT'S COVERAGE TABLE. All 934 entries were searched under: nerve, nervus, cranial, ganglion, ganglia, root, rootlet, foramen, foramina, canal, meatus, fissure, cribriform, ethmoid, sphenoid, petrous, temporal bone, jugular, hypoglossal, ovale, rotundum, stylomastoid, sinus, cavernous, chorda, tympani, geniculate, trigeminal, facial, vagus, laryngeal, larynx, glossopharyngeal, olfactory, bulb, olive, chiasm, optic, tract, parotid, stylopharyngeus, genioglossus, sternocleidomastoid, trapezius. FINDINGS, positive and negative both recorded: `nerve` returns ONLY FMA50875 and FMA50878, the optic nerves; `ganglion`, `root`, `cribriform`, `jugular`, `hypoglossal`, `ovale`, `rotundum`, `stylomastoid`, `cavernous`, `chorda`, `tympani`, `trigeminal`, `facial`, `laryngeal`, `glossopharyngeal`, `olfactory`, `vagus`, `tongue`, `genioglossus`, `stylopharyngeus`, `parotid`, `meatus`, `fissure`, `petrous`, `bulb`, `dura`, `tentorium`, `uncus` and `olive` return NOTHING AT ALL. Positive hits that are NOT what the word means here, each recorded rather than passed over: `geniculate` returns the four GENICULATE BODIES of the thalamus, not the geniculate ganglion of VII; `foramen` returns FMA75351 `interventricular foramen`, which is the cardiac one, not a skull foramen; `canal` returns only FMA78497 `central canal of spinal cord`; `sinus` returns only FMA4706 `coronary sinus`, so there is no dural venous sinus and beat 3's cavernous sinus has no mesh; `stylo` returns the two stylohyoids and no styloid process; `pyramid` returns the two pyramidalis muscles of the abdomen and not the medullary pyramid. These are the same trap `cranial-nerve-nuclei` records for `accessory` and `trapezoid`.",
+    "THE SKULL BASE OF BEAT 2 IS IN THE CATALOG, AND THIS CONTRADICTS THE COVERAGE NOTE THE RUN STARTED FROM. The task prompt's table marks Cranial Nerves DEAD because 'only the two optic nerves exist', which is true OF THE NERVES and was allowed to imply that the topic has no geometry at all. Searching for the BONES instead returns a complete skull: FMA52734 `frontal bone`, FMA52789/52788 parietal bones, FMA52739/52738 temporal bones, FMA52735 `occipital bone`, FMA52736 `sphenoid bone`, FMA52740 `ethmoid`, FMA52748 `mandible`, the maxillae, zygomatics, palatines, lacrimals, nasals, conchae, FMA9710 `vomer` and FMA52749 `hyoid bone` — fifty `bone` hits in all. Three of these are ALREADY IN `meshes-lite/` and already used by other Neuroanatomy scenes: FMA52736 sphenoid, FMA52735 occipital, FMA52738 right temporal. Between them those three carry almost every foramen beat 2 names — optic canal, superior orbital fissure, foramen rotundum and foramen ovale in the sphenoid; internal acoustic meatus and stylomastoid foramen in the temporal; the jugular foramen at the temporo-occipital suture; the hypoglossal canal and foramen magnum in the occipital. Only the cribriform plate (ethmoid, FMA52740) is in the catalog but not yet delivered. The scene is still routed `diagram` because its SUBJECT is the nerves and not the bones, and a beat showing three bones with no nerve emerging from any hole would teach the wrong thing; but the note that follows from this is concrete and should not be lost: a `3d_anatomy` beat 2, with the real skull base shown and the nerve courses drawn over it, is buildable TODAY with meshes already on disk, and is by a wide margin the cheapest improvement available to this topic. Recorded as a measurement, in the terms REPAIR-BACKLOG.md asks for: the earlier reading was a note quoted rather than a catalog searched.",
+    "THE TARGET MUSCLES OF BEATS 4 AND 5 LARGELY EXIST TOO, recorded so that 'the catalog has no facial muscles' never enters this topic's files. Thirty-nine muscles of facial expression are in the catalog (this said forty-three until the audit of 2026-09-03 counted the entries; the same wrong number was carried in `cn-function-testing` gaps[1] and is corrected there too) — orbicularis oculi in orbital and palpebral parts, orbicularis oris, both zygomatici, frontalis, occipitalis, the levators and depressors of the lip and angle — as are all twelve masticatory meshes (masseter in four parts, temporalis, medial pterygoid, both heads of each lateral pterygoid), FMA13408/13409 sternocleidomastoid and the six parts of trapezius. NONE of the facial or masticatory meshes is in `meshes-lite/`, so none of those could be drawn today; but the XI targets of beat 5 PARTLY CAN — FMA13408 right sternocleidomastoid and the ascending, descending and transverse parts of the right trapezius are delivered, while all four left partners are not, which the earlier wording did not distinguish and the audit of 2026-09-03 measured. None is imported in any case, because this scene teaches ROUTES and the muscle at the end of a route is where the route stops rather than what it is — and a half-delivered, one-sided pair is a second reason. What has no mesh anywhere is everything in between: no nerve, no ganglion, no foramen as an object, no parotid, no tongue, no larynx, and no SOFT palate or uvula — the palatine BONES (FMA53655/53656) do exist and are named among the skull bones in the gap above, so 'no palate' unqualified contradicted this file's own previous paragraph and has been scoped; `cn-function-testing` carried the same unqualified sentence and is corrected with it.",
+    "THE VISUAL PATHWAY IS THE ONE COURSE IN THIS TOPIC THAT COULD BE DRAWN FROM MESHES, AND IT WAS STILL NOT IMPORTED. FMA50875 and FMA50878 (optic nerves), FMA62045 (optic chiasm), FMA67936 and FMA62382 (optic tracts) and FMA73303/73304 (lateral geniculate bodies) together model CN II end to end — nerve, decussation, tract, thalamic relay. `cranial-nerve-nuclei` gaps[1] named THIS scene as where they belong if any scene claims them, so the decision is made here rather than deferred again: they are NOT imported, for two reasons and not one. First, a scene whose other eleven nerves are drawn lines would present one measured surface beside them and imply the rest were measured too — the judgement `brainstem__midbrain` made about FMA62394. Second and more decisive, CN II is the WORST representative of this scene's subject: it is a CNS tract with no peripheral course, no foramen shared with anything, no ganglion and no branch, so the one nerve that can be shown is the one that demonstrates none of the three journeys the scene teaches. The visual pathway belongs to a `3d_anatomy` scene of its own under Blood Supply's neighbour topics or under a future visual-pathway structure, not here. This is recorded so a later run does not read the absence as an oversight and 'fix' it.",
+    "THE SUBJECT IS A SET OF ROUTES AND SHARED COMPARTMENTS, WHICH IS AN INDEPENDENT REASON FOR `diagram`. Beat 2 is a map of WHICH NERVE USES WHICH HOLE, which is a correspondence and not a shape — the bones themselves exist, as the note above records, and showing them would not by itself say what passes through anything; beat 3 is the contents of a venous space, which is a list of what shares a room rather than a shape; beats 4 and 5 are courses whose teaching value is the ORDER of what is collected along them. Even a fully segmented head with every nerve delivered would help beats 1, 4 and 5 substantially and beat 3 hardly at all, since the cavernous sinus lesson is about which structures are adjacent, not what they look like. `deferred_modes` keeps `3d_anatomy` against that day; a segmented cranial nerve set plus a skull base would be the single most valuable fetch this topic could receive, jointly with the segmented nuclei that `cranial-nerve-nuclei` asks for.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: a ventral view of the brainstem with all twelve attachments marked and the pre-olivary and post-olivary lines drawn as lines, plus a small dorsal inset for IV, since beat 1's entire argument is that the exits reproduce the column order and a list of attachments cannot show that; a view of the skull base from above with the three fossae shaded and every foramen labelled with the nerves passing it, which would replace most of beat 2 and is the single most reusable image in the topic, since `CN function testing` will want the same picture; and a coronal section through the cavernous sinus showing the four nerves in the lateral wall in order with VI and the carotid inside the lumen, because beat 3's clinical pattern is read directly off that arrangement and no sentence conveys it as well.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following every other `diagram` scene in this course. Beat 1 says out loud that nothing here is a mesh.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`. The features this scene would want anchors for are FORAMINA, and the parent bones ARE available — FMA52736, FMA52735 and FMA52738 are in `meshes-lite/` — so the honest reason for authoring none is not absence but definition: a foramen is a HOLE, defined by bone that is not there, and the tool's two definitions are `--contact` (a neighbour touching) and `--extreme` (a position on a surface). Neither describes an opening, and the neighbour that would witness a nerve foramen is the nerve, which has no mesh. This is the same class of refusal the axillary apex produced. Nothing was placed by eye, and no anchor should be added here until the tool can define an aperture. The brainstem meshes that do exist (FMA67943 pons, FMA62004 medulla oblongata, FMA62394 peduncle of midbrain) could in principle carry contact anchors for the nerve attachments of beat 1, but the neighbour needed as a witness is the nerve itself and no nerve mesh exists, so there is nothing to measure against. Nothing was placed by eye.",
+    "CONSISTENCY WITH THE REST OF THE COURSE WAS CHECKED AGAINST THE FILES, NOT FROM MEMORY. Division of labour with `cranial-nerve-nuclei`: that scene owns the six columns, the nuclei themselves and the medial-versus-lateral brainstem syndromes; this scene owns the exits, foramina and peripheral distributions and states the column order only as the thing beat 1's attachments reproduce. Both scenes state the trochlear facts identically — dorsal exit, crossed before leaving, so nuclear and nerve lesions hit opposite eyes — and both state that the facial fibres relate to the abducens nucleus at the facial colliculus, which `brainstem__pons` also states and which is checked against that file: the colliculus is the ABDUCENS nucleus with facial fibres over it, not the facial nucleus, and no scene here says otherwise. The dorsal motor nucleus of the vagus supplying viscera as far as the left colic flexure is stated in `cranial-nerve-nuclei` and the vagal course to the same limit is stated here in the same terms. The tongue deviating TOWARDS a nuclear or nerve lesion is stated the same way in `cranial-nerve-nuclei`, `spinal-cord__descending-tracts` and `brainstem__medulla-oblongata`, and this scene gives the mechanism (genioglossus protrudes, so the working side pushes the tongue across) rather than restating the sign. Nothing here contradicts those files.",
+    "FOUR STATEMENTS ARE DELIBERATELY BOUNDED. The recurrent laryngeal asymmetry is explained by the descent of the heart dragging nerves hooked round embryonic aortic arches; the arch numbers themselves are Embryology's and are not restated here, since that course owns them and is suspended. The forehead-sparing rule is stated as bilateral cortical input to the upper face, which is the standard account and is stated ONCE, in the `vfacial` card and referred to rather than repeated in beat 4. The pupil-sparing rule for the third nerve is given as the conventional peripheral-parasympathetic versus central-microvascular account, and the scene says what to DO about it (image the arteries) rather than claiming the rule is without exceptions, because it is not. And `sinus` in this scene always means the cavernous VENOUS sinus or the carotid SINUS baroreceptor and never a paranasal air sinus; both are named in full at first use for exactly that reason.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `location` and `associated_organs` for `Cranial nerve courses`. Beats 1 to 3 are `location` — brain surface, skull base, cavernous sinus, three successive locations along one journey — and beats 4 and 5 are `associated_organs`, which is the correct mode for them because their subject IS what each nerve ends on. Both required views are covered and neither is padded. No `cross_section` beat was authored, unlike `cranial-nerve-nuclei`, because the curriculum does not ask for one here.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Cranial nerve courses`, spelled as CURRICULUM.json spells it. `Cranial nerve nuclei` is NOT claimed although beat 1 leans on the column order, because a course is not a nucleus and that scene owns the columns. `CN function testing` is NOT claimed although beats 3, 4 and 5 read several signs, because testing is a procedure and this scene teaches the routes those tests probe; that structure remains visible as the topic's one unauthored item. Nothing in Gross Anatomy claims these nerves: the head and neck are outside that course's authored topics.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch. All five beats are hollow for want of ARTWORK, and beat 2 is the most hollow of them, since a skull base drawn from above is doing work no amount of narration replaces. Unlike the Spinal Cord topic, this scene is NOT purely an artwork request. A segmented cranial nerve set would convert beats 1, 4 and 5, and beat 2 needs no fetch at all beyond FMA52740 (ethmoid) since sphenoid, occipital and right temporal are already delivered. The artwork is still the shorter road to `ready` and should be read as the first ask; the skull-base re-mode is the second and is cheap."
+  ]
+}

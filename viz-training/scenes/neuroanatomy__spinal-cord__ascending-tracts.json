@@ -1,0 +1,359 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__spinal-cord__ascending-tracts",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Spinal Cord",
+  "structure": "Ascending tracts",
+  "covers": [
+    "Ascending tracts"
+  ],
+  "learning_goal": "Follow each ascending system from receptor to cortex as a three-neuron chain, and fix for each one the single fact that decides its clinical picture: WHERE it crosses. Dorsal column-medial lemniscus crosses in the medulla, so cord lesions give ipsilateral loss; spinothalamic crosses in the cord one or two segments above entry, so the same lesion gives contralateral loss beginning just below the level; spinocerebellar either does not cross or crosses twice, so it stays ipsilateral and never reaches consciousness at all. Derive dissociated sensory loss, Brown-Sequard, syringomyelia and subacute combined degeneration from those crossing points rather than memorising them.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-03",
+    "audited_at": "2026-09-03",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "spinal cord",
+      "ascending tracts",
+      "sensory pathways",
+      "dissociated sensory loss"
+    ],
+    "terms": [
+      "ascending tracts",
+      "dorsal column",
+      "posterior column",
+      "DCML",
+      "medial lemniscus",
+      "gracile fasciculus",
+      "cuneate fasciculus",
+      "gracile nucleus",
+      "cuneate nucleus",
+      "internal arcuate fibres",
+      "sensory decussation",
+      "spinothalamic tract",
+      "lateral spinothalamic tract",
+      "anterior spinothalamic tract",
+      "anterolateral system",
+      "anterior white commissure",
+      "Lissauer's tract",
+      "substantia gelatinosa",
+      "first order neuron",
+      "second order neuron",
+      "third order neuron",
+      "dorsal root ganglion",
+      "ventral posterolateral nucleus",
+      "VPL",
+      "postcentral gyrus",
+      "primary somatosensory cortex",
+      "sensory homunculus",
+      "posterior spinocerebellar tract",
+      "anterior spinocerebellar tract",
+      "cuneocerebellar tract",
+      "Clarke's column",
+      "accessory cuneate nucleus",
+      "unconscious proprioception",
+      "dissociated sensory loss",
+      "syringomyelia",
+      "Brown-Sequard syndrome",
+      "subacute combined degeneration",
+      "tabes dorsalis",
+      "Romberg test",
+      "sensory ataxia"
+    ]
+  },
+  "camera": {
+    "framing": "posterior"
+  },
+  "structures": [
+    {
+      "key": "plan",
+      "label": "The common plan — three neurons, one crossing",
+      "role": "primary",
+      "group": "The shared plan",
+      "layer": "organ",
+      "color": "#f1c232",
+      "terms": [
+        "first order neuron",
+        "second order neuron",
+        "third order neuron",
+        "dorsal root ganglion",
+        "decussation",
+        "ventral posterolateral nucleus",
+        "postcentral gyrus"
+      ],
+      "narration": "Every conscious sensory pathway in this scene is built the same way, and learning the plan once means learning only one variable afterwards. The FIRST order neuron has its cell body in the dorsal root ganglion and carries the signal in from the receptor. The SECOND order neuron begins wherever the first one synapses and is the one that CROSSES the midline. The THIRD order neuron sits in the ventral posterolateral nucleus of the thalamus and delivers the signal to the postcentral gyrus, laid out as the sensory homunculus. That is the whole scaffold. The only thing that differs between the two conscious systems is WHERE the second-order neuron starts and therefore where the crossing happens — high in the medulla for the dorsal columns, right there in the cord for the spinothalamic. Fix that one difference and every dissociated sensory picture in neurology follows from it."
+    },
+    {
+      "key": "dcml",
+      "label": "Dorsal column-medial lemniscus — fine touch, vibration, proprioception",
+      "role": "primary",
+      "group": "The two conscious systems",
+      "layer": "organ",
+      "color": "#45818e",
+      "terms": [
+        "dorsal column",
+        "posterior column",
+        "DCML",
+        "gracile fasciculus",
+        "cuneate fasciculus",
+        "gracile nucleus",
+        "cuneate nucleus",
+        "internal arcuate fibres",
+        "sensory decussation",
+        "medial lemniscus",
+        "uncrossed",
+        "two-point discrimination",
+        "subacute combined degeneration",
+        "tabes dorsalis"
+      ],
+      "narration": "Fine touch, vibration, two-point discrimination and conscious proprioception, carried by large myelinated fibres. The first-order axon enters the cord and turns straight UP without synapsing, which is what makes this system unusual: its first neuron runs from the toe to the medulla in one cell. It ascends in the posterior funiculus, gracile fasciculus medially for the leg, cuneate laterally for the arm, the cuneate existing only above about T6 where arm fibres join. It synapses at last in the gracile and cuneate nuclei of the medulla. There the second-order axons sweep forward as the internal arcuate fibres and CROSS — the sensory decussation — then turn up as the medial lemniscus to the ventral posterolateral nucleus. So the crossing is in the MEDULLA, above the whole length of the cord, and a cord lesion therefore takes out sensation on its OWN side. That single fact is half of every dissociated sensory loss."
+    },
+    {
+      "key": "spinothalamic",
+      "label": "Spinothalamic / anterolateral — pain, temperature, crude touch",
+      "role": "primary",
+      "group": "The two conscious systems",
+      "layer": "organ",
+      "color": "#cc0000",
+      "terms": [
+        "spinothalamic tract",
+        "lateral spinothalamic tract",
+        "anterior spinothalamic tract",
+        "anterolateral system",
+        "Lissauer's tract",
+        "substantia gelatinosa",
+        "anterior white commissure",
+        "crossed",
+        "syringomyelia",
+        "cordotomy"
+      ],
+      "narration": "Pain and temperature in the lateral spinothalamic tract, crude touch and pressure in the anterior, carried in by small thinly myelinated and unmyelinated fibres. The first-order axon enters and travels only a segment or two up or down in Lissauer's tract before synapsing in the posterior horn — substantia gelatinosa and the laminae around it. The second-order axon then crosses IMMEDIATELY, in the anterior white commissure, one or two segments ABOVE the level at which the fibre entered the cord, and ascends in the anterolateral white matter with sacral fibres most lateral. It reaches the same ventral posterolateral nucleus as the medial lemniscus, so both systems converge on one thalamic relay and one cortex. Because the crossing is in the CORD, a cord lesion takes out pain and temperature on the OPPOSITE side, beginning one or two segments BELOW the lesion — the fibres that would have crossed at the level of the lesion entered a segment or two lower down. That is the other half of dissociated loss, and the reason an anterolateral cordotomy is done on the side opposite the pain."
+    },
+    {
+      "key": "spinocerebellar",
+      "label": "Spinocerebellar — proprioception that never reaches consciousness",
+      "role": "primary",
+      "group": "The unconscious system",
+      "layer": "organ",
+      "color": "#6aa84f",
+      "terms": [
+        "posterior spinocerebellar tract",
+        "anterior spinocerebellar tract",
+        "cuneocerebellar tract",
+        "Clarke's column",
+        "nucleus dorsalis",
+        "accessory cuneate nucleus",
+        "unconscious proprioception",
+        "inferior cerebellar peduncle",
+        "superior cerebellar peduncle",
+        "double crossing",
+        "ipsilateral"
+      ],
+      "narration": "The third destination, and the one students most often try to force into the three-neuron plan, where it does not fit. These fibres carry unconscious proprioception from muscle spindles and tendon organs to the cerebellum, never to the thalamus and never to consciousness, so their damage produces ataxia and not numbness. The POSTERIOR spinocerebellar tract arises from Clarke's column, which exists only from about T1 to L2 — leg fibres below L2 must ascend in the gracile fasciculus first to reach it — and runs UNCROSSED up the surface of the lateral funiculus into the inferior cerebellar peduncle. Its upper-limb equivalent is the cuneocerebellar tract, from the accessory cuneate nucleus of the medulla, also uncrossed and also by the inferior peduncle. The ANTERIOR spinocerebellar tract is the exception that proves the rule: it crosses in the cord, ascends, and then crosses BACK inside the superior cerebellar peduncle. Two crossings cancel. So every one of these tracts ends in the cerebellar half on the SAME side as the limb it reports on, which is why cerebellar signs are ipsilateral."
+    },
+    {
+      "key": "somatotopy",
+      "label": "Somatotopy — the layering inside each tract",
+      "role": "part",
+      "group": "Reading the tracts",
+      "layer": "organ",
+      "color": "#8e7cc3",
+      "terms": [
+        "somatotopy",
+        "gracile fasciculus",
+        "cuneate fasciculus",
+        "sacral sparing",
+        "extramedullary",
+        "intramedullary",
+        "lamination"
+      ],
+      "narration": "Each ascending tract is layered, and the layering has one cause: new fibres join from below and push the existing ones aside. In the posterior columns each new arrival joins LATERALLY, so the column reads sacral-to-cervical from the midline outwards and the leg (gracile) ends up medial to the arm (cuneate). In the spinothalamic tract each new arrival joins MEDIALLY, so the order is the reverse and sacral fibres finish most LATERAL, closest to the surface. That is the basis of the classical distinction between an extramedullary compression, which reaches the outermost fibres first and so tends to produce a sensory level that ascends as it grows, and an intramedullary lesion, which starts centrally and classically spares the sacral fibres at the surface. Stated as a prediction, which is how it is taught; sacral sparing is less reliable at the bedside than the textbook rule implies, and the `spinal-cord-cross-section` scene bounds the same claim in the same way."
+    },
+    {
+      "key": "lesions",
+      "label": "Four lesions, read off the crossing points",
+      "role": "part",
+      "group": "Reading the tracts",
+      "layer": "organ",
+      "color": "#a64d79",
+      "terms": [
+        "dissociated sensory loss",
+        "Brown-Sequard syndrome",
+        "syringomyelia",
+        "subacute combined degeneration",
+        "tabes dorsalis",
+        "anterior spinal artery syndrome",
+        "Romberg test",
+        "sensory ataxia"
+      ],
+      "narration": "Every classical sensory picture in the cord is one of these two crossing points being interrupted. HEMISECTION, Brown-Sequard: dorsal column loss ipsilateral and below the level because it had not crossed yet; spinothalamic loss contralateral and starting a segment or two lower because it had. CENTRAL CAVITY, syringomyelia: only the fibres crossing the anterior white commissure at that level are caught, on both sides, giving a bilateral cape of lost pain and temperature with touch, vibration and power intact. SELECTIVE POSTERIOR COLUMN LOSS: subacute combined degeneration in B12 deficiency, which also takes the lateral columns, and tabes dorsalis; both give sensory ataxia and a positive Romberg, because the patient was using vision to replace the proprioception the dorsal columns are no longer delivering. ANTERIOR SPINAL ARTERY territory: the anterior two-thirds, so spinothalamic and motor go and the posterior columns are spared by their own posterior arteries. Four pictures, two crossing points, no list to memorise."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "The plan every sensory pathway follows",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The shared plan"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "plan",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Learn the scaffold before either pathway. Neuron one: cell body in the dorsal root ganglion, carrying the signal in from the receptor. Neuron two: begins where neuron one synapses, and is the neuron that crosses the midline. Neuron three: in the ventral posterolateral nucleus of the thalamus, delivering to the postcentral gyrus. Both conscious systems use that identical chain and both end in the same thalamic nucleus and the same cortex. Only one variable differs between them — where neuron one hands over, and therefore where the crossing happens. Nothing in this beat is a mesh: this is a drawn circuit. The catalog holds no tract, no nucleus of any of these and no lemniscus, and its one relevant cord entry — the central canal — is modelled for its uppermost 34 millimetres only, as the `spinal-cord-cross-section` scene records, so it states a level this drawing does not have and is not used. The pathway is therefore drawn rather than shown, and that is stated here so no beat asks a student to look for something absent."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Dorsal columns — crossing late, in the medulla",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two conscious systems"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "dcml",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:dcml-pathway",
+          "path": [
+            "dcml",
+            "plan"
+          ],
+          "duration": 6000
+        }
+      ],
+      "narration": "Follow one axon from a toe. It enters the cord and does NOT synapse — it turns and climbs the posterior funiculus as one enormously long first-order cell, in the gracile fasciculus because it came from the leg. Arm fibres joining above about T6 lie lateral to it in the cuneate fasciculus. Only in the medulla, in the gracile and cuneate nuclei, does it hand over. The second-order axon then curves forward as an internal arcuate fibre, crosses the midline in the sensory decussation, and ascends as the medial lemniscus to the thalamus. The teaching point is the LATENESS of that crossing: for the entire height of the spinal cord these fibres are on the side they started on. Interrupt them anywhere in the cord and the patient loses vibration and joint position sense on that same side, below that level."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Spinothalamic — crossing at once, in the cord",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two conscious systems"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "spinothalamic",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "dcml",
+            "spinothalamic"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Now the same journey for a pain fibre, side by side with the last one. It enters, travels a segment or two in Lissauer's tract, and synapses almost immediately in the posterior horn. The second-order axon crosses THERE, in the anterior white commissure, one or two segments above the level it entered, and ascends anterolaterally to the same thalamic nucleus. Say the direction of that offset deliberately, because everything clinical hangs on it: the fibres crossing at any given level entered one or two segments LOWER, so a lesion at that level produces contralateral loss beginning one or two segments BELOW it. Hold the two pathways together now. Same start, same finish, same relay — and one crosses in the medulla while the other crosses in the cord. Dissociated sensory loss is not a syndrome to memorise; it is what that one difference looks like in a patient."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The cerebellar route — never conscious, always ipsilateral",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The unconscious system"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "spinocerebellar",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:spinocerebellar-pathway",
+          "path": [
+            "spinocerebellar",
+            "plan"
+          ],
+          "duration": 5000
+        }
+      ],
+      "narration": "The third stream, and it breaks the plan on purpose. It carries muscle spindle and tendon organ information to the cerebellum, not the thalamus, so it never reaches awareness and its failure is clumsiness rather than numbness. Posterior spinocerebellar: from Clarke's column, present only from about T1 to L2, so leg fibres from below must first climb the gracile fasciculus to reach it — uncrossed, entering by the inferior cerebellar peduncle. Cuneocerebellar: the same job for the arm, from the accessory cuneate nucleus, also uncrossed and also by the inferior peduncle. Anterior spinocerebellar: crosses in the cord, then crosses back within the superior cerebellar peduncle, so it too finishes on the side it started. Every route lands in the cerebellar hemisphere of its own side, which is exactly why cerebellar signs are ipsilateral to the lesion — the same conclusion the `cerebellar-peduncles` scene reaches by counting crossings from the other end."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Where each tract sits on the section, and what a lesion does",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Reading the tracts"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "somatotopy",
+            "lesions"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.0,
+          "animate": true
+        }
+      ],
+      "narration": "Put the three systems back onto a transverse section, in the positions the `spinal-cord-cross-section` scene places them, and the lesions draw themselves. Posterior funiculus: dorsal columns, gracile medial for leg and cuneate lateral for arm. Lateral funiculus: spinothalamic anterolaterally with sacral fibres most lateral, and both spinocerebellar tracts hugging the surface behind it. The cut here is transverse, on the vertical z axis, the same convention this course uses for every axial cut. Now shade. Half the section: dorsal column loss on that side, spinothalamic loss on the other starting slightly lower — Brown-Sequard. The middle, around the canal: bilateral pain and temperature loss only, from the commissure — syringomyelia. The posterior and lateral columns: subacute combined degeneration. The anterior two-thirds: anterior spinal artery, posterior columns spared. Each one is a crossing point interrupted, and the section is the only thing that needs to be remembered."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS SECOND PREFERRED MODE, AND THE ROUTING WAS MEASURED THIS RUN AGAINST `available-meshes.json` RATHER THAN QUOTED FROM THE PROMPT'S COVERAGE TABLE OR FROM THE SIBLING SCENE. All 934 entries were searched under: spinal, cord, tract, tractus, fascicul, funicul, lemniscus, lemniscal, gracil, cuneate, cuneatus, nucleus, nucle, decussation, arcuate, commissur, Lissauer, gelatinosa, Clarke, dorsalis, thalamic, spinothalamic, corticospinal, spinocerebellar, ganglion, root, horn, cornu, column, lamina, postcentral, somatosensory. Findings: `tract` returns ONLY the two optic and two iliotibial tracts; `nucle` returns ONLY the two caudate nuclei in the entire brain; `commissur` returns the anterior commissure, the commissure of the fornix and the posterior commissure, none of them the anterior white commissure of the cord; `lamina` returns FMA61975 `lamina terminalis`, which is the wall of the third ventricle and has nothing to do with Rexed's laminae; `fascicul`, `funicul`, `lemniscus`, `cuneate`, `horn`, `root`, `ganglion` and `decussation` return nothing at all; `gracil` returns the two gracilis muscles of the thigh and nothing in the cord, which is worth saying precisely rather than as a bare 'nothing', since a false absence note is the failure mode REPAIR-BACKLOG.md names first. FMA78497 `central canal of spinal cord` exists and is the ONLY cord entry, and the `gross__back-vertebral-column__spinal-cord-in-vertebral-canal` scene records that it models the topmost 34 mm only. So not one structure in this pathway has a mesh.",
+    "THE SUBJECT IS A PATHWAY WITH A CROSSING POINT, WHICH IS AN INDEPENDENT AND STRONGER REASON FOR `diagram` THAN THE CATALOG GAP. This scene teaches WHERE a fibre changes sides, over a course running from a dorsal root ganglion to the postcentral gyrus. Even a fully segmented cord, medulla and thalamus would show none of it: a decussation is traffic, not a surface. `deferred_modes` keeps `3d_anatomy` only for the day tract volumes exist as separate geometry, which is a tractography deliverable and not a mesh fetch.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: a single tall figure carrying cord, medulla, pons, midbrain, thalamus and cortex with the dorsal column and spinothalamic pathways drawn on it in two colours and their crossings marked at the correct heights — this is load-bearing, because beats 2 and 3 are entirely an argument about the difference in those two heights; a transverse section with all six tracts placed and each labelled crossed or uncrossed; and a small inset showing the one-to-two-segment offset of the spinothalamic crossing, since that offset is the most-missed fact in the scene and the one beat 3 spends most of its words on.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following the pattern of every other `diagram` scene in this course. FMA78497 was deliberately NOT imported despite existing, for the reason the `spinal-cord-cross-section` scene gives: it is upper cervical canal only, and placing it beside a drawn full-length pathway would state a level the drawing does not have. Beat 1 says out loud that nothing here is a mesh.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`; this scene has no parent mesh, and a decussation is a place in a pathway rather than a point on a surface. Nothing was placed by eye.",
+    "CONSISTENCY WITH `neuroanatomy__spinal-cord__spinal-cord-cross-section` WAS CHECKED AGAINST THAT FILE LINE BY LINE, NOT FROM MEMORY, BECAUSE THAT SCENE EXPLICITLY FLAGGED THIS ONE AS THE MOST LIKELY PLACE TO CONTRADICT IT. Three shared facts, all now stated identically in both: the spinothalamic second-order fibres cross in the anterior white commissure one or two segments ABOVE entry (that scene had 'below' as authored and it was corrected at audit on 2026-09-03, the same run that authored this scene); sacral fibres lie most laterally in both the spinothalamic and corticospinal tracts, stated in both as a prediction and bounded in both as less reliable at the bedside than the classical rule implies; and Clarke's column exists only from about T1 to L2, so leg fibres ascend in the gracile fasciculus to reach it. The cuneate fasciculus appearing only above about T6 is likewise stated the same way in both.",
+    "CONSISTENCY WITH THE CEREBELLUM TOPIC ALSO CHECKED. The anterior spinocerebellar double crossing and the resulting ipsilaterality are owned by `neuroanatomy__cerebellum__cerebellar-peduncles`; this scene reaches the same conclusion from the cord end and names that scene rather than restating the count, so there is one authority for it. The anterior spinocerebellar tract as the one afferent entering by the superior peduncle is stated the same way in both.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `mechanism` and `cross_section`. Beats 1 to 4 are `mechanism` and beat 5 is `cross_section`, so both are covered. Beat 5's CROSS_SECTION op uses `axis:\"z\"`, the vertical axis of these meshes and therefore the transverse cut its narration names, consistent with `spinal-cord-cross-section` beat 4, `brainstem__pons` and `cerebrum-gross-lobes__white-matter-tracts`; coronal cuts in this course use `axis:\"y\"`.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Ascending tracts`, spelled as CURRICULUM.json spells it. `Spinal cord cross-section` is not claimed although beat 5 uses a section, because that scene teaches the section itself and this one only borrows it; `Descending tracts` is not claimed although the corticospinal somatotopy is named in the `somatotopy` card, because that is a comparison and not the pathway.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch. As with `spinal-cord-cross-section`, no mesh fetch would reduce this scene's hollowness at all — every one of the five beats is hollow for want of ARTWORK. Whoever prioritises fetches should read the whole Spinal Cord topic as an artwork request rather than a mesh request."
+  ]
+}

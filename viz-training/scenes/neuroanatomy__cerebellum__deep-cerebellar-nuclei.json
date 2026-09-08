@@ -1,0 +1,362 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__cerebellum__deep-cerebellar-nuclei",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Cerebellum",
+  "structure": "Deep cerebellar nuclei",
+  "covers": [
+    "Deep cerebellar nuclei"
+  ],
+  "learning_goal": "Find the four nuclei buried in the white matter above the roof of the fourth ventricle, name them in order from the midline outwards, match each to the longitudinal zone of cortex that projects to it and to the peduncle its output leaves by, understand that the cerebellar cortex only inhibits and the nuclei are the sole output, and read a midline versus a lateral cerebellar syndrome off that map.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-02",
+    "audited_at": "2026-09-02",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "cerebellum",
+      "cerebellar circuitry",
+      "ataxia",
+      "movement disorders"
+    ],
+    "terms": [
+      "deep cerebellar nuclei",
+      "dentate nucleus",
+      "emboliform nucleus",
+      "globose nucleus",
+      "interposed nucleus",
+      "fastigial nucleus",
+      "roof nucleus",
+      "hilum of dentate nucleus",
+      "arbor vitae",
+      "Purkinje cell",
+      "GABA",
+      "inhibition",
+      "mossy fibre",
+      "climbing fibre",
+      "inferior olivary nucleus",
+      "granule cell",
+      "parallel fibre",
+      "vermis",
+      "intermediate zone",
+      "paravermal zone",
+      "cerebellar hemisphere",
+      "flocculonodular lobe",
+      "vestibular nuclei",
+      "superior cerebellar peduncle",
+      "dentatothalamic tract",
+      "dentatorubrothalamic tract",
+      "red nucleus",
+      "ventral lateral nucleus of thalamus",
+      "juxtarestiform body",
+      "uncinate fasciculus of cerebellum",
+      "truncal ataxia",
+      "dysmetria",
+      "intention tremor",
+      "medulloblastoma",
+      "deep brain stimulation"
+    ]
+  },
+  "camera": {
+    "framing": "posterior"
+  },
+  "structures": [
+    {
+      "key": "white_matter",
+      "label": "Cerebellar white matter — where they are buried",
+      "role": "context",
+      "group": "Where they lie",
+      "layer": "organ",
+      "color": "#e8e2d4",
+      "terms": [
+        "arbor vitae",
+        "cerebellar white matter",
+        "corpus medullare",
+        "fourth ventricle",
+        "roof of fourth ventricle"
+      ],
+      "narration": "The branching core of the organ, drawn in a coronal section through the cerebellum because that is the one plane in which all four nuclei on both sides appear together. The nuclei sit deep in this white matter, close to the midline and just above the roof of the fourth ventricle — so they are near neither the surface nor the middle of the hemisphere, and a student who pictures them out in the lateral hemisphere will misread every section. Their position over the ventricle is also the clinical hinge of this scene: a tumour arising in the fourth ventricle reaches the midline nuclei before anything else."
+    },
+    {
+      "key": "fastigial",
+      "label": "Fastigial nucleus — the midline one",
+      "role": "primary",
+      "group": "The four nuclei, midline outwards",
+      "layer": "organ",
+      "color": "#c27ba0",
+      "terms": [
+        "fastigial nucleus",
+        "roof nucleus",
+        "vermis",
+        "vestibular nuclei",
+        "juxtarestiform body",
+        "truncal ataxia",
+        "gait ataxia"
+      ],
+      "narration": "The most medial of the four, sitting almost on the midline in the roof of the ventricle — fastigium means the apex of a roof, which is both its name and its address. It receives from the VERMIS, and its output is the odd one out: instead of leaving by the superior peduncle it goes mostly to the vestibular nuclei and the reticular formation, and it goes there through the juxtarestiform body of the INFERIOR peduncle. So the oldest, most medial part of the cerebellum keeps the oldest, most direct route out. Its business is the trunk — posture, balance and gait — which is why a midline lesion drops a patient rather than spoiling their reaching."
+    },
+    {
+      "key": "interposed",
+      "label": "Interposed nuclei — globose and emboliform",
+      "role": "primary",
+      "group": "The four nuclei, midline outwards",
+      "layer": "organ",
+      "color": "#6aa84f",
+      "terms": [
+        "globose nucleus",
+        "emboliform nucleus",
+        "interposed nucleus",
+        "intermediate zone",
+        "paravermal zone",
+        "red nucleus",
+        "dentatorubrothalamic tract",
+        "superior cerebellar peduncle"
+      ],
+      "narration": "Two small nuclei taken together as the interposed nucleus, lying between the fastigial and the dentate — globose the more medial and rounded, emboliform the more lateral and plug-shaped, sitting against the hilum of the dentate. They receive from the INTERMEDIATE (paravermal) zone, the strip of cortex either side of the vermis, and their output leaves by the superior peduncle to the contralateral red nucleus and thalamus. Their job matches their input: correcting a limb movement WHILE it is happening, using the spinal feedback that reaches the same strip of cortex. Learning them as one unit named for its position is the way to keep the order straight; the individual names carry no function."
+    },
+    {
+      "key": "dentate",
+      "label": "Dentate nucleus — the large lateral one",
+      "role": "primary",
+      "group": "The four nuclei, midline outwards",
+      "layer": "organ",
+      "color": "#8e7cc3",
+      "terms": [
+        "dentate nucleus",
+        "hilum of dentate nucleus",
+        "cerebellar hemisphere",
+        "cerebrocerebellum",
+        "dentatothalamic tract",
+        "ventral lateral nucleus of thalamus",
+        "superior cerebellar peduncle",
+        "dysmetria",
+        "intention tremor"
+      ],
+      "narration": "Much the largest of the four and the most lateral, a crumpled bag of grey matter that looks in section like a folded purse with its mouth — the hilum — facing medially and forwards. The superior cerebellar peduncle streams out of that hilum, so on a good section the nucleus and its outflow are one picture. It receives from the lateral HEMISPHERE, the part that has expanded in primates, and it projects through the superior peduncle to the contralateral ventral lateral thalamus and on to the motor cortex, with a branch to the red nucleus — the dentatothalamic and dentatorubrothalamic fibres. Its job is the planning and timing of a movement before it starts, which is why dentate damage gives dysmetria and an intention tremor that worsens as the finger approaches the target."
+    },
+    {
+      "key": "vestibular",
+      "label": "Vestibular nuclei — the fifth nucleus by function",
+      "role": "context",
+      "group": "The four nuclei, midline outwards",
+      "layer": "organ",
+      "color": "#45818e",
+      "terms": [
+        "vestibular nuclei",
+        "flocculonodular lobe",
+        "vestibulocerebellum",
+        "Purkinje cell",
+        "nystagmus"
+      ],
+      "narration": "Drawn outside the cerebellum, in the brainstem, because they complete the map and are the commonest omission. The flocculonodular lobe has no deep nucleus of its own: its Purkinje cells project straight out of the cerebellum to the vestibular nuclei, which therefore serve as its output nucleus. That is the only place where cerebellar cortex reaches a target directly, and it is the reason a flocculonodular lesion presents with nystagmus and truncal unsteadiness rather than with limb signs. Four zones, but only three nuclear units inside the organ — the fourth zone's output nucleus is borrowed from the brainstem, and that is why this card counts a fifth nucleus rather than a fourth."
+    },
+    {
+      "key": "circuit",
+      "label": "The circuit — cortex inhibits, nuclei speak",
+      "role": "part",
+      "group": "How the circuit works",
+      "layer": "organ",
+      "color": "#f1c232",
+      "terms": [
+        "Purkinje cell",
+        "GABA",
+        "inhibition",
+        "mossy fibre",
+        "climbing fibre",
+        "granule cell",
+        "parallel fibre",
+        "inferior olivary nucleus",
+        "collateral"
+      ],
+      "narration": "The one piece of wiring worth carrying out of this topic. Every fibre entering the cerebellum — mossy fibres from the pontine nuclei and the spinal cord, climbing fibres from the inferior olive — sends an excitatory collateral to a deep nucleus on its way to the cortex. The nuclei therefore fire continuously. The cortex then does one thing to them: Purkinje cells, the sole output of the cerebellar cortex, are GABAergic and INHIBITORY, so all the elaborate processing in the cortical layers ends as sculpted inhibition applied to a nucleus that is already talking. Nothing leaves the cerebellum except from these four nuclei and the vestibular nuclei. Read the whole organ that way and the cortex stops looking like the output and starts looking like the editor."
+    },
+    {
+      "key": "syndromes",
+      "label": "Midline versus lateral, read off the map",
+      "role": "part",
+      "group": "How the circuit works",
+      "layer": "organ",
+      "color": "#cc0000",
+      "terms": [
+        "truncal ataxia",
+        "gait ataxia",
+        "dysmetria",
+        "intention tremor",
+        "dysdiadochokinesia",
+        "nystagmus",
+        "medulloblastoma",
+        "deep brain stimulation",
+        "ipsilateral"
+      ],
+      "narration": "Because the nuclei are ordered medial to lateral and so are the zones that feed them, the syndromes are ordered too. A midline mass — the child's medulloblastoma in the vermis and the roof of the fourth ventricle — takes the fastigial nuclei first: truncal and gait ataxia, unable to sit unsupported, with hydrocephalus from the same lesion. A lateral hemisphere lesion takes the dentate: ipsilateral limb dysmetria, intention tremor and dysdiadochokinesia with the trunk comparatively spared. The interposed nuclei lie between them anatomically and clinically, and a lesion large enough to isolate them is rare, which is why their syndrome is rarely described separately. One further use of the same map: the dentate's outflow is a stimulation target for tremor, and its position is why."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "A coronal cut — four nuclei on each side",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The four nuclei, midline outwards"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "fastigial",
+            "interposed",
+            "dentate"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Cut the cerebellum coronally and the white matter opens out as the arbor vitae, with four grey masses on each side embedded in it, close to the midline and above the roof of the fourth ventricle. Name them from the midline outwards, which is the only order worth learning because it is also the order of everything else in this scene: fastigial, globose, emboliform, dentate. Globose and emboliform are taken together as the interposed nucleus, so it is really three units per side. Sizes are unequal — the dentate is much the largest and is a crumpled sheet rather than a ball, with its hilum facing medially. Nothing here is a mesh: this is a drawn section, because the catalog holds no cerebellar entry beyond the whole organ and a nucleus buried in white matter is not a surface anything could deliver."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Each nucleus belongs to a strip of cortex",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The four nuclei, midline outwards"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fastigial",
+          "to": "vestibular",
+          "kind": "continuity"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "dentate",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Overlay the longitudinal zones from the lobes scene and the map is one-to-one, medial to medial and lateral to lateral. Vermis projects to the fastigial nucleus; intermediate zone to the interposed; lateral hemisphere to the dentate. The flocculonodular lobe is the exception: it has no nucleus of its own and its Purkinje cells run straight out to the vestibular nuclei in the brainstem, which act as its deep nucleus and are drawn here outside the organ for that reason. Two things follow immediately. The medial-to-lateral order of the nuclei IS the trunk-to-limb order of function. And because the zones run the length of the organ while the nuclei are clustered near the midline, a lesion at the surface and a lesion in the depths of the same zone give the same syndrome."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Three ways out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The four nuclei, midline outwards"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:cerebellar-outflow",
+          "path": [
+            "dentate",
+            "interposed",
+            "fastigial",
+            "vestibular"
+          ],
+          "duration": 6000
+        }
+      ],
+      "narration": "Now the outputs, and they do not all leave the same way. Dentate and interposed both use the SUPERIOR peduncle, decussate in the midbrain, and reach the contralateral red nucleus and ventral lateral thalamus, and from the thalamus the motor cortex — the dentatothalamic and dentatorubrothalamic route. The fastigial nucleus does something different: it leaves by the juxtarestiform body of the INFERIOR peduncle to the vestibular nuclei and the reticular formation, which then act on the trunk by the vestibulospinal and reticulospinal tracts. And the flocculonodular lobe bypasses the deep nuclei entirely. So the lateral, newer machinery reports upward to the cortex and the medial, older machinery reports downward to the cord. That difference in destination, not any difference in the nuclei themselves, is why the midline syndrome is a postural one."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "The nuclei are the output; the cortex only inhibits",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How the circuit works"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "circuit",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "circuit",
+          "to": "dentate",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "The wiring in one paragraph, because it explains why these small nuclei matter more than their size suggests. Everything that enters the cerebellum drops an excitatory collateral onto a deep nucleus before climbing to the cortex, so the nuclei have a standing output whether the cortex is doing anything or not. The cortex's only contribution is inhibition: Purkinje cells are its sole output cell, they are GABAergic, and they end on these nuclei. All the computation in the cortical layers therefore arrives as a pattern of restraint carved into a signal that is already running. Nothing else leaves the cerebellum. That single fact reframes the organ — the cortex is not the output stage, it is the editor, and these four nuclei are the voice."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Reading a syndrome off the section",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How the circuit works"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "syndromes",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "syndromes",
+            "circuit"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Put the section beside the patient. Midline: a medulloblastoma in the vermis and the roof of the fourth ventricle sits on the fastigial nuclei, so the child has truncal and gait ataxia and cannot sit unsupported, with the vomiting and headache of obstructive hydrocephalus from the same mass — the nuclei's position over the ventricle is why one lesion does both. Lateral: a hemisphere tumour or infarct takes the dentate, giving ipsilateral limb dysmetria, intention tremor and dysdiadochokinesia with a comparatively steady trunk. The laterality is ipsilateral for the reason the peduncles scene counts out: two crossings between cortex and cerebellum, and they cancel. And the interposed nuclei, lying between the other two, give the syndrome that is rarely seen alone, because a lesion that reaches them has usually reached a neighbour."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS SECOND PREFERRED MODE, AND THE ROUTING WAS MEASURED THIS RUN RATHER THAN QUOTED. Searched all 934 catalog entries for: dentate, dentatus, nucleus dentatus, emboliform, globose, globosus, interposit, interposed, fastigi, roof nucleus, deep cerebellar, nuclei, nucleus, corpus dentatum, hilum, cerebell, arbor, corpus medullare, vestibular, Purkinje, olive, olivary. The catalog's only `nucleus` entries in the entire brain are FMA72826 and FMA72827, the two caudate nuclei; its only cerebellar entry is FMA67944 `cerebellum`, undivided; there is no vestibular nucleus and no olive. Not one of the four nuclei exists in any spelling, and neither does the vestibular nucleus this scene needs as the fifth.",
+    "THE SUBJECT IS INTERNAL, WHICH IS AN INDEPENDENT REASON FOR `diagram`. These nuclei are grey masses buried in white matter. Even a segmented cerebellum delivering four nuclear surfaces would leave beats 2 to 4 — zone-to-nucleus mapping, three different outflow routes, and the inhibitory cortex — as overlaid arrows on those surfaces, since all three are connectivity rather than shape. `deferred_modes` keeps `3d_anatomy` on record because the POSITION of the four, which is beat 1, would genuinely be better in 3D.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: a coronal section of the cerebellum with all four nuclei on both sides, drawn in true relative size so the dentate's dominance and its medially-facing hilum are visible; a zone-to-nucleus map putting the three cortical strips beside the three nuclear units and the flocculonodular lobe beside the vestibular nuclei; and a circuit diagram carrying an afferent fibre, its collateral to the nucleus, the Purkinje cell, and the inhibitory sign on the terminal, since beat 4 is entirely about that sign.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following the pattern of the other `diagram` scenes in this course. Nothing is claimed to be drawn from the catalog and no beat asks the student to look for a mesh.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`; the only candidate parent, FMA67944, is a surface of the whole organ and these nuclei are inside it, so there is no contact for the tool to witness and no extreme that would find them. The hilum of the dentate was considered as the one feature with a plausible geometric definition and rejected for the same reason: it is a notch in a buried sheet, invisible to a tool that measures between surfaces. Nothing was placed by eye.",
+    "OVERLAP WITH THE OTHER THREE CEREBELLUM SCENES IS DELIBERATE AND WAS CHECKED AGAINST THOSE FILES RATHER THAN RESTATED FROM MEMORY. `cerebellar-lobes` owns the three longitudinal zones and states that each has its own output nucleus without naming them; this scene names them and uses the identical zone order and the identical functional split (vermis trunk, intermediate zone limb correction during movement, hemisphere planning before movement), so the two agree word for sense. `cerebellar-peduncles` owns the two crossings and states that the superior peduncle arises chiefly from the dentate; this scene states the same and adds the fastigial exception, which the peduncles scene also carries in its `icp` card as the juxtarestiform body's outward traffic. Neither is contradicted and neither is claimed in `covers[]`.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Deep cerebellar nuclei`, spelled as `CURRICULUM.json` spells it. `Cerebellar lobes`, `Cerebellar peduncles` and `Cerebellar function` are each named only where a nucleus cannot be explained without them and are NOT claimed; each has or will have its own scene.",
+    "CURRICULUM VIEWS: `cross_section` is the only required view and all five beats carry it, which is correct rather than lazy — the scene's entire subject is what a section through the white matter shows, and no beat asks the student to look at an exterior. No `location` or `mechanism` view is claimed.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch. A segmented cerebellum — already named in the cerebellar-lobes scene as this course's second most valuable fetch — would improve beat 1 and would not complete the scene.",
+    "AUDIT 2026-09-02 — TWO CORRECTIONS. (1) The `vestibular` card's label calls it \"the fifth nucleus by function\" and its closing line said \"Four nuclei, four zones — and the fourth nucleus is borrowed\", contradicting the label, the group name (`The four nuclei, midline outwards`) and beat 1's count in the same file. The count that is right is four intramural nuclei = three units (fastigial, interposed, dentate) plus the borrowed vestibular as a fifth; the line now says so explicitly instead of implying the vestibular is the fourth. (2) Beat 1 narrates a CORONAL cut but its CROSS_SECTION op carried `axis:\"z\"`. Every other coronal cut in this course — `ventricular-system-csf__ventricles`, `basal-ganglia-diencephalon__basal-ganglia`, `basal-ganglia-diencephalon__thalamus` — uses `axis:\"y\"`, and `z` is the vertical axis of these meshes (the trap recorded in REPAIR-BACKLOG for the spleen's long axis), so `z` is an axial cut and would have shown the nuclei in the wrong plane. Changed to `y`. Nothing in the validator checks a section axis against the plane its narration names; worth adding.",
+    "AUDIT 2026-09-02 — CATALOG RE-SEARCHED INDEPENDENTLY, ROUTING CONFIRMED. All 934 entries searched for: dentate, emboliform, globose, globosus, interposit, interposed, fastigi, nucle, nucleus, cerebell, arbor, corpus medullare, vestibular, Purkinje, olive, oliv, olivary, vermis, tonsil, flocc, culmen, declive, uvula, nodul, velum. The only `nucle` hits in the whole catalog are `left caudate nucleus` and `right caudate nucleus`; the only cerebellar entry is the undivided `cerebellum`. The previous run's account and this reading AGREE. Zero refs in the file, so the id, name and side checks are vacuously clean rather than passed."
+  ]
+}

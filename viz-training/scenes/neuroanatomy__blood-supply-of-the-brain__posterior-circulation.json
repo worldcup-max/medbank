@@ -1,0 +1,271 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__blood-supply-of-the-brain__posterior-circulation",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Blood Supply of the Brain",
+  "structure": "Posterior circulation",
+  "covers": [
+    "Posterior circulation"
+  ],
+  "learning_goal": "Read the vertebrobasilar territory as a rule about WHAT IS PACKED TOGETHER rather than as a list of syndromes. The posterior circulation supplies the brainstem, the cerebellum and the occipital lobes, and the brainstem is the one place in the nervous system where cranial nerve nuclei, long tracts and the reticular formation lie within millimetres of each other — so a posterior stroke gives CROSSED signs (cranial nerve on the side of the lesion, limbs on the other), or vertigo and ataxia, or a visual field loss, none of which the anterior circulation produces. Then use that to separate the three named vessels a student actually needs: PICA for the lateral medulla, the basilar perforators for the base of the pons, and the posterior cerebral for the occipital lobe.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-03",
+    "audited_at": "2026-09-04",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "blood supply of the brain",
+      "posterior circulation",
+      "vertebrobasilar",
+      "brainstem stroke"
+    ],
+    "terms": [
+      "posterior circulation",
+      "vertebral artery",
+      "basilar artery",
+      "posterior inferior cerebellar artery",
+      "PICA",
+      "anterior inferior cerebellar artery",
+      "superior cerebellar artery",
+      "posterior cerebral artery",
+      "lateral medullary syndrome",
+      "Wallenberg syndrome",
+      "crossed signs",
+      "locked-in syndrome",
+      "pontine perforators",
+      "homonymous hemianopia",
+      "macular sparing",
+      "calcarine sulcus",
+      "vertebral artery dissection",
+      "vertigo",
+      "ataxia",
+      "dysphagia",
+      "Horner syndrome"
+    ]
+  },
+  "camera": {
+    "framing": "posterior"
+  },
+  "structures": [
+    {
+      "key": "trunk",
+      "label": "Vertebrals to basilar — one vessel for two sides",
+      "role": "primary",
+      "group": "The vertebrobasilar trunk",
+      "layer": "vessel",
+      "color": "#cc0000",
+      "terms": [
+        "vertebral artery",
+        "basilar artery",
+        "foramen magnum",
+        "transverse foramen",
+        "vertebral artery dissection",
+        "subclavian artery",
+        "posterior circulation"
+      ],
+      "narration": "The posterior supply starts as a PAIR and becomes SINGLE before it supplies anything important. Each vertebral artery leaves the subclavian, climbs the transverse foramina of the upper six cervical vertebrae, crosses the arch of the atlas and enters the skull through the foramen magnum; the two then FUSE at the lower border of the pons into ONE BASILAR artery, which runs up the front of the pons and ends by dividing into the two posterior cerebral arteries. Two consequences follow from that shape and they are the reason to learn it. First, because the vertebrals fuse, one vertebral can be occluded or hypoplastic and the territory still be perfused — the mirror image of the carotids, which protect each other only through the circle of Willis. Second, because the basilar is a SINGLE midline vessel supplying a midline structure from the front, a basilar occlusion is not a one-sided stroke: it takes both sides of the brainstem at once. The vertebral's course also explains its commonest young-patient disease — it is fixed in bone and then turns sharply at the atlas, so neck rotation or trauma can tear the intima, and VERTEBRAL ARTERY DISSECTION is a leading cause of stroke under fifty, typically with neck or occipital pain days before the deficit."
+    },
+    {
+      "key": "branches",
+      "label": "Three cerebellar arteries — and why PICA is the one that is named",
+      "role": "primary",
+      "group": "Branches and what each takes",
+      "layer": "vessel",
+      "color": "#f1c232",
+      "terms": [
+        "posterior inferior cerebellar artery",
+        "PICA",
+        "anterior inferior cerebellar artery",
+        "AICA",
+        "superior cerebellar artery",
+        "lateral medullary syndrome",
+        "Wallenberg syndrome",
+        "crossed signs",
+        "Horner syndrome",
+        "dysphagia",
+        "nystagmus",
+        "spinothalamic tract"
+      ],
+      "narration": "Three paired cerebellar arteries come off the trunk in order from below upwards — POSTERIOR INFERIOR cerebellar (PICA) from the vertebral, ANTERIOR INFERIOR cerebellar (AICA) from the lower basilar, SUPERIOR cerebellar from the top of the basilar — and each supplies a slice of cerebellum AND the piece of brainstem it passes. That second half is why they matter: a cerebellar artery stroke is usually a BRAINSTEM stroke with cerebellar signs attached. PICA is the one worth knowing in full because it produces the cleanest demonstration of crossed signs in medicine. Occluding it infarcts the LATERAL MEDULLA, and the deficits are simply a list of what lies there: the spinothalamic tract, giving loss of pain and temperature in the opposite ARM AND LEG; the spinal trigeminal nucleus a few millimetres away, giving loss of pain and temperature on the SAME side of the FACE; the nucleus ambiguus, giving hoarseness and difficulty swallowing; the vestibular nuclei, giving vertigo and nystagmus; the descending sympathetic fibres, giving an ipsilateral Horner syndrome; and the inferior cerebellar peduncle, giving ipsilateral ataxia. Note what is NOT on that list: there is no limb weakness, because the corticospinal tract is in the medial medulla and PICA does not reach it. Face one side, body the other, no weakness — that combination cannot be produced by any anterior circulation vessel, and recognising it is the practical yield of this beat."
+    },
+    {
+      "key": "pons",
+      "label": "Basilar perforators — the base of the pons and locked-in syndrome",
+      "role": "part",
+      "group": "Branches and what each takes",
+      "layer": "vessel",
+      "color": "#a64d79",
+      "terms": [
+        "basilar artery",
+        "pontine perforating arteries",
+        "basis pontis",
+        "corticospinal tract",
+        "locked-in syndrome",
+        "basilar occlusion",
+        "end artery",
+        "reticular formation",
+        "vertical gaze"
+      ],
+      "narration": "The basilar gives dozens of tiny PERFORATING branches straight backwards into the pons, and they are end arteries off a high-pressure midline trunk — the posterior circulation's equivalent of the lenticulostriates, and they fail for the same reason, chronic hypertension. A single perforator gives a small pontine lacunar infarct, most often a pure motor stroke, because the corticospinal fibres run through the BASE of the pons in scattered bundles. Occlusion of the basilar TRUNK is the other extreme and is the reason this vessel is treated as an emergency: it takes the base of the pons on BOTH sides at once, cutting every descending motor fibre to the body and to the lower cranial nerves while leaving the TEGMENTUM behind it — and therefore the reticular formation and consciousness — intact. The patient is fully awake and aware, quadriplegic and unable to speak or swallow, and can move only the eyes VERTICALLY, because vertical gaze is organised in the midbrain above the lesion while horizontal gaze is organised in the pons within it. That is LOCKED-IN SYNDROME, and the single most important thing about it is that it is mistaken for coma; the way to tell is to ask the patient to look up. `brainstem__pons` owns the internal anatomy this beat reads off."
+    },
+    {
+      "key": "pca",
+      "label": "Posterior cerebral artery — the occipital lobe, so the visual field",
+      "role": "part",
+      "group": "Branches and what each takes",
+      "layer": "vessel",
+      "color": "#3d85c6",
+      "terms": [
+        "posterior cerebral artery",
+        "occipital lobe",
+        "calcarine sulcus",
+        "visual cortex",
+        "homonymous hemianopia",
+        "macular sparing",
+        "thalamus",
+        "midbrain",
+        "fetal posterior cerebral artery",
+        "posterior communicating artery",
+        "alexia without agraphia"
+      ],
+      "narration": "The basilar ends by dividing into the two POSTERIOR CEREBRAL arteries, which curve round the midbrain and run back to supply the OCCIPITAL LOBE and the inferior surface of the temporal lobe, along with deep branches to the thalamus and the midbrain. So the territory carries VISION, and a posterior cerebral occlusion gives a HOMONYMOUS HEMIANOPIA of the opposite half-field, characteristically with MACULAR SPARING — the occipital pole that represents the macula sits at a border zone that the middle cerebral also reaches, so the central field survives when the rest of the territory does not, and that sparing is itself an argument about collateral supply rather than a quirk. Because the territory includes the thalamus and the midbrain, a proximal occlusion adds sensory loss or a third nerve palsy to the field defect, which is how a posterior cerebral stroke is distinguished from an occipital one. Two connections to the rest of the topic and neither is decoration: the posterior cerebral is joined to the internal carotid by the POSTERIOR COMMUNICATING artery, so it is a member of the circle of Willis and can be fed from the front; and in the FETAL variant it is fed mainly from the carotid, which moves the occipital lobe into the anterior circulation in that person and makes a carotid disease present as a visual field loss. `circle-of-willis` owns the ring itself and is where that variant is stated in full."
+    }
+  ],
+  "views": [
+    {
+      "mode": "vasculature",
+      "beat": 1,
+      "title": "Paired, then single — the shape of the vertebrobasilar trunk",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The vertebrobasilar trunk"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "trunk",
+          "intensity": 1
+        }
+      ],
+      "narration": "Two vertebral arteries up through the neck bones and in through the foramen magnum; they FUSE at the bottom of the pons into one basilar; the basilar runs up the front of the brainstem and splits into the two posterior cerebrals at the top. That is the whole skeleton, and two clinical facts hang directly on it: one vertebral can be lost without consequence because its fellow feeds the same basilar, and a basilar occlusion is bilateral because there is only one basilar. Nothing in this beat is a mesh. The catalog holds NO vertebral artery, NO basilar and NO cerebral artery of any kind — searched again this run under artery, arteria, vertebral, basilar, cerebral, cerebellar, communicating and carotid, and the only carotids present are the two COMMON carotids, which end in the neck. `vertebral` in this catalog returns intervertebral disks and vertebral bones, not a vessel. Every artery here is therefore a drawn line. The brainstem and cerebellum it lies on DO exist as meshes and are deliberately not shown, for the reason `circle-of-willis` gives: a measured surface under drawn vessels implies the vessels were measured too."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "PICA and the lateral medulla — face one side, body the other",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Branches and what each takes"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "branches",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "trunk",
+          "to": "branches",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Three cerebellar arteries come off in order from below up: PICA from the vertebral, AICA from the low basilar, superior cerebellar from the top. Take PICA and do not memorise its syndrome — read it off the cross-section. Everything in the LATERAL medulla goes, and nothing in the medial medulla does. Lateral holds the spinothalamic tract (opposite body loses pain and temperature), the spinal trigeminal nucleus (same side of the FACE loses pain and temperature), the nucleus ambiguus (hoarse, cannot swallow), the vestibular nuclei (vertigo, nystagmus), descending sympathetics (Horner) and the inferior cerebellar peduncle (ataxia). Medial holds the corticospinal tract — so there is NO weakness. Crossed sensory loss without weakness is the signature, and no anterior circulation vessel can produce it. This beat is drawn: the medullary cross-section it argues from is owned by `brainstem__medulla-oblongata`, and here it is a diagram because the tracts and nuclei being pointed at have no meshes in the catalog."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "Perforators into the pons — a lacune, or locked-in",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Branches and what each takes"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pons",
+          "intensity": 1
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "branches",
+            "pons"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Now the branches that go straight into the midline. Dozens of perforators leave the back of the basilar into the base of the pons; they are end arteries off a high-pressure trunk, so hypertension takes them out one at a time and the result is a small pontine lacune, usually a pure motor stroke. Block the basilar TRUNK instead and every perforator fails together: the base of the pons dies on both sides, taking all descending motor fibres, while the tegmentum behind it — and with it the reticular formation and consciousness — survives on other supply. The patient is awake, aware, quadriplegic, mute, and able to move the eyes only up and down, because vertical gaze is organised above the lesion in the midbrain. Locked-in syndrome is a stroke that looks like coma, and the bedside test is to ask for vertical eye movement. Same vessel, two diseases, separated by whether one perforator or the trunk is occluded — the same deep-versus-trunk distinction `anterior-circulation` draws for the lenticulostriates."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "Posterior cerebral — the field defect, and the door back to the circle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Branches and what each takes"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pca",
+          "intensity": 1
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:vertebrobasilar-course",
+          "path": [
+            "trunk",
+            "branches",
+            "pons",
+            "pca"
+          ],
+          "duration": 6000
+        }
+      ],
+      "narration": "Follow the trunk to its end. The basilar divides into the two posterior cerebrals, which wrap round the midbrain and run back to the occipital lobes. Territory equals vision, so occlusion equals a homonymous hemianopia of the opposite half-field, usually with the central few degrees SPARED because the occipital pole is a borderzone the middle cerebral also reaches — macular sparing is a collateral argument, not a curiosity. Deep branches to the thalamus and midbrain mean a proximal occlusion adds sensory loss or a third nerve palsy, which is what separates a proximal posterior cerebral stroke from a distal occipital one. Finally, notice that this vessel belongs to two systems at once: the posterior communicating artery ties it to the internal carotid, so it is part of the circle of Willis, and in the fetal variant it is supplied from the carotid altogether. That is the seam between this scene and `anterior-circulation`, and it is the reason a visual field defect does not by itself prove a posterior circulation stroke."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS FIRST PREFERRED MODE, AND THE ROUTING WAS MEASURED THIS RUN AGAINST `available-meshes.json`, NOT TAKEN FROM THE TASK PROMPT'S COVERAGE TABLE NOR FROM THE TWO SIBLING SCENES THAT ALREADY SAY IT. All 934 entries were searched under: artery, arteria, arterial, vertebral, basilar, cerebellar, cerebral, communicating, carotid, internal carotid, perforating, perforator, circumferential, choroidal, thalamoperforating, calcarine, occipital, vein, venous, sinus, jugular. FINDINGS: `arter` returns 26 entries, all thoracic, abdominal, pelvic or limb; the most cranial are FMA4058 and FMA3941, the LEFT and RIGHT COMMON CAROTID ARTERIES, which stop in the neck. `basilar`, `communicat`, `choroidal`, `perforat`, `calcarine` and `circul` return NOTHING. `vertebr` returns forty-five entries and NOT ONE IS AN ARTERY — intervertebral disks and vertebral bodies, exactly the trap REPAIR-BACKLOG.md records. `cerebell` returns ONE entry, FMA67944 `cerebellum`, the whole organ, and no cerebellar vessel. `sinus` returns only FMA4706 `coronary sinus`. NOT ONE INTRACRANIAL VESSEL EXISTS IN THIS CATALOG, and this scene's entire subject is intracranial vessels.",
+    "THE ABSENCE IS NOT THE ONLY REASON, AND THE OTHER ONE WOULD SURVIVE THE ARRIVAL OF A VESSEL TREE. Three of the four beats teach the CONTENTS of a piece of brainstem rather than the vessel: beat 2 is a cross-section of the lateral medulla read as a list of tracts and nuclei, beat 3 is base-versus-tegmentum in the pons, and beat 4 turns on macular representation at the occipital pole. None of those internal structures — spinothalamic tract, spinal trigeminal nucleus, nucleus ambiguus, vestibular nuclei, reticular formation, corticospinal tract, calcarine cortex — has a mesh in the catalog either; `tract` returns two iliotibial tracts and the two optic tracts and nothing else. So even a perfect segmented posterior arterial tree would convert beat 1 only. `deferred_modes` keeps `3d_anatomy` for that partial day.",
+    "THE BRAINSTEM AND CEREBELLUM THIS SCENE ARGUES OVER ARE IN THE CATALOG AND ARE DELIBERATELY NOT SHOWN. FMA67943 pons, FMA62004 medulla oblongata, FMA62394 peduncle of midbrain, FMA67944 cerebellum, FMA72976/FMA72975 the occipital lobes and FMA258714/FMA258716 the thalami are all present in `available-meshes.json` and all in `meshes-lite/` — verified by listing the directory this run. They are withheld for the reason `circle-of-willis` and `anterior-circulation` both give and which is now the topic's settled convention: a measured surface underneath hand-drawn vessels implies the vessels were measured too. Recorded so a later run does not read the absence as an oversight and add the one deliverable thing.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: the vertebrobasilar trunk seen from behind with the two vertebrals fusing into one basilar and the three cerebellar arteries labelled in order from below upwards, since beat 1's whole argument is the paired-then-single shape; a medullary cross-section with the PICA territory shaded over the lateral third and each structure inside it labelled with its deficit, because beat 2 is a picture argument and a prose list of six deficits is exactly what this scene exists to replace; and a mid-sagittal or axial pontine figure with base and tegmentum separately shaded, because locked-in syndrome is the difference between two shaded areas and nothing else conveys it.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following every other `diagram` scene in this course. Beat 1 says out loud that nothing here is a mesh.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`. The features this scene would want are the origin of PICA and the vertebrobasilar junction; both the feature and its parent are vessels, and no vessel mesh exists to be either. Nothing was placed by eye.",
+    "CONSISTENCY WITH THE REST OF THE COURSE WAS CHECKED AGAINST THE FILES, NOT FROM MEMORY. The VERTICAL GAZE claim here — that a locked-in patient can move the eyes up and down because vertical gaze is organised in the midbrain and horizontal gaze in the pons — is stated in `brainstem__pons` in those terms and was read against it this run; the two agree. `brainstem__pons` also states that a pontine lesion means the eyes cannot look TOWARDS the lesion, which is the mirror of the hemispheric rule `anterior-circulation` states (eyes deviate towards a hemispheric lesion); the pair was compared this run and they do not contradict. CORRECTED AT AUDIT 2026-09-04: this note previously claimed BOTH scenes flag the pair as the commonest place in the course to conflate the two directions. Only `anterior-circulation` carries that flag; `brainstem__pons` states the pontine rule correctly but does not cross-reference the hemispheric one, and it is signed, so the flag was not retro-fitted. The claim is now stated as it actually stands. The DEEP-VERSUS-TRUNK argument in beat 3 is deliberately the same argument `anterior-circulation` makes for the lenticulostriates, and beat 3 says so, because the parallel is the teaching point rather than a duplication. The FETAL posterior cerebral variant is owned by `circle-of-willis` and is named here only as a seam.",
+    "TWO STATEMENTS ARE DELIBERATELY BOUNDED. Macular sparing is given as 'usually' and explained as a borderzone effect rather than asserted as a rule, because it is inconstant and its mechanism is disputed. And vertebral artery dissection is given as 'a leading cause of stroke under fifty' rather than with a percentage, because published figures vary with ascertainment; the teaching point is to think of it in a young patient with neck pain, not to know a number.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires exactly one view for `Posterior circulation` — `vasculature`. All four beats are `vasculature` and each covers a different part of the tree (trunk, cerebellar branches, perforators, terminal branch), so the required view is covered without padding. No `mechanism` beat was authored even though beat 3 argues a mechanism, because the curriculum asks for `mechanism` under `Anterior circulation` and that scene holds it.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Posterior circulation`, spelled as CURRICULUM.json spells it. `Circle of Willis` is NOT claimed although the posterior communicating artery and the fetal variant are named, and `Anterior circulation` is not claimed although the middle cerebral is named as the source of macular sparing; both remain owned by their own scenes. `Dural venous sinuses` is not claimed and is authored separately the same run.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch, and all four beats are hollow for want of ARTWORK. Three of the four are hollow twice over: beats 2, 3 and 4 need brainstem INTERNAL anatomy, which the catalog does not contain at any level, so no fetch of vessels alone would fill them. The single highest-value fetch for this topic remains a segmented cerebral and cerebellar arterial tree, which would convert beat 1 here and the first two beats of both sibling scenes; the second is a labelled brainstem with tracts and nuclei, which would serve this topic and the whole of Brainstem and Spinal Cord.",
+    "AUDIT 2026-09-04: EVERY FACTUAL CLAIM IN gaps[] WAS RE-MEASURED AGAINST available-meshes.json BY A DIFFERENT RUN AND ALL HELD. `arter` = 26 entries, most cranial being FMA4058 and FMA3941 the common carotids; `basilar`, `communicat`, `choroidal`, `perforat`, `calcarine`, `circul`, `cavernous`, `dura`, `falx` = ZERO; `vertebr` = 45 entries, none an artery; `cerebell` = exactly ONE, FMA67944 cerebellum; `tract` = exactly FOUR, the two iliotibial and the two optic tracts; `sinus` = exactly ONE, FMA4706 coronary sinus. The eight withheld meshes named in this file (FMA67943 pons, FMA62004 medulla oblongata, FMA62394 peduncle of midbrain, FMA67944 cerebellum, FMA72976/FMA72975 occipital lobes, FMA258714 right thalamus / FMA258716 left thalamus) all exist in the catalog under those exact names and all eight are present in meshes-lite/ — directory listed, not remembered. SIDES CHECKED OUT LOUD: FMA258714 is the RIGHT thalamus and FMA258716 the LEFT; FMA72975 is the RIGHT occipital lobe and FMA72976 the LEFT. None is referenced by this scene, so no side can be mislabelled here, but the pairs are recorded because the next Limbic and Diencephalon scenes will reference them."
+  ]
+}

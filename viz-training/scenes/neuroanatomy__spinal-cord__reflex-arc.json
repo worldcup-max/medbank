@@ -1,0 +1,340 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__spinal-cord__reflex-arc",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Spinal Cord",
+  "structure": "Reflex arc",
+  "covers": [
+    "Reflex arc"
+  ],
+  "learning_goal": "Build the reflex arc from its five obligatory components and use the count of synapses to separate the two reflexes that are actually tested at the bedside: the stretch reflex is monosynaptic, so a tap produces a contraction in about twenty milliseconds at the knee and about thirty at the ankle, and its loss localises to one segment; the withdrawal reflex is polysynaptic and multisegmental, so it recruits whole limbs and its crossed extension keeps the patient standing. Then use the same circuit twice more — the gamma loop as the thing that sets reflex gain, and descending inhibition as the thing that normally restrains it — to derive hyperreflexia, clonus and the Babinski sign as release of a circuit that was always there rather than as new signs appearing.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-03",
+    "audited_at": "2026-09-03",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "spinal cord",
+      "reflex arc",
+      "stretch reflex",
+      "withdrawal reflex",
+      "hyperreflexia"
+    ],
+    "terms": [
+      "reflex arc",
+      "monosynaptic",
+      "polysynaptic",
+      "stretch reflex",
+      "myotatic reflex",
+      "deep tendon reflex",
+      "muscle spindle",
+      "intrafusal fibre",
+      "Ia afferent",
+      "annulospiral ending",
+      "alpha motor neuron",
+      "gamma motor neuron",
+      "gamma loop",
+      "reciprocal inhibition",
+      "Ia inhibitory interneuron",
+      "Golgi tendon organ",
+      "Ib afferent",
+      "autogenic inhibition",
+      "withdrawal reflex",
+      "flexor reflex",
+      "nociceptive reflex",
+      "crossed extensor reflex",
+      "dorsal root ganglion",
+      "anterior horn",
+      "effector",
+      "receptor",
+      "afferent limb",
+      "efferent limb",
+      "integrating centre",
+      "reflex segments",
+      "biceps reflex",
+      "triceps reflex",
+      "knee jerk",
+      "ankle jerk",
+      "hyperreflexia",
+      "areflexia",
+      "clonus",
+      "Babinski sign",
+      "plantar response",
+      "Jendrassik manoeuvre",
+      "spinal shock"
+    ]
+  },
+  "camera": {
+    "framing": "posterior"
+  },
+  "structures": [
+    {
+      "key": "arc",
+      "label": "The five components every reflex has",
+      "role": "primary",
+      "group": "The circuit",
+      "layer": "organ",
+      "color": "#f1c232",
+      "terms": [
+        "reflex arc",
+        "receptor",
+        "afferent limb",
+        "integrating centre",
+        "efferent limb",
+        "effector",
+        "dorsal root ganglion",
+        "anterior horn",
+        "alpha motor neuron"
+      ],
+      "narration": "Five components, and a reflex fails if any one of them fails — which is the whole diagnostic use of testing them. RECEPTOR: the muscle spindle for a stretch reflex, a nociceptor in the skin for a withdrawal. AFFERENT LIMB: a sensory axon whose cell body sits in the dorsal root ganglion, entering by the dorsal root. INTEGRATING CENTRE: the grey matter of one or more cord segments, which is either a single synapse or a chain of interneurons. EFFERENT LIMB: an alpha motor neuron from the anterior horn, leaving by the ventral root. EFFECTOR: the muscle. Notice what the list does NOT contain — the brain. The arc is complete within the cord, which is why a reflex survives below a complete cord transection and why an absent reflex localises to the segment and not to the hemisphere. The descending tracts modulate this circuit; they do not constitute it, and that distinction is the whole of beat 4."
+    },
+    {
+      "key": "stretch",
+      "label": "The stretch reflex — the only monosynaptic one",
+      "role": "primary",
+      "group": "The two reflexes",
+      "layer": "organ",
+      "color": "#45818e",
+      "terms": [
+        "stretch reflex",
+        "myotatic reflex",
+        "deep tendon reflex",
+        "monosynaptic",
+        "muscle spindle",
+        "intrafusal fibre",
+        "Ia afferent",
+        "annulospiral ending",
+        "reciprocal inhibition",
+        "Ia inhibitory interneuron",
+        "knee jerk",
+        "ankle jerk"
+      ],
+      "narration": "Tap the patellar tendon and you have not tapped a tendon reflex — you have stretched the muscle, and the receptor is inside the muscle. The spindle is a bundle of intrafusal fibres lying in parallel with the working extrafusal ones, wrapped by an annulospiral ending that fires when it is stretched. Its Ia afferent runs to the cord and synapses DIRECTLY on the alpha motor neurons of the same muscle. One synapse, and that is the point: the latency is around twenty milliseconds at the knee and around thirty at the ankle, the difference being conduction distance rather than any extra synapse, and both far too short for anything to have been decided anywhere, which is why the reflex is a test of a segment rather than of a patient's cooperation. The same Ia afferent also branches onto a Ia inhibitory interneuron that switches the antagonist OFF — reciprocal inhibition — so quadriceps contracts and hamstrings relax in one act. The reflex is a length servo: it opposes any change in muscle length, which is what holds a joint against a load without anyone attending to it. Named as segments: biceps C5-6, brachioradialis C5-6, triceps C7-8, knee L3-4, ankle S1-2."
+    },
+    {
+      "key": "withdrawal",
+      "label": "Withdrawal and crossed extension — polysynaptic and multisegmental",
+      "role": "primary",
+      "group": "The two reflexes",
+      "layer": "organ",
+      "color": "#cc0000",
+      "terms": [
+        "withdrawal reflex",
+        "flexor reflex",
+        "nociceptive reflex",
+        "polysynaptic",
+        "crossed extensor reflex",
+        "interneuron",
+        "Lissauer's tract",
+        "multisegmental"
+      ],
+      "narration": "Stand on something sharp and the response is not one muscle but a posture. The nociceptive afferent enters the cord and runs UP AND DOWN through several segments before it reaches anything — the same short intersegmental travel the pain fibres of the `ascending-tracts` scene make in Lissauer's tract — and then drives chains of interneurons rather than a single synapse. Polysynaptic means slower, graded with stimulus strength, and capable of recruiting every flexor in the limb at once, which is what lifts the whole leg rather than twitching one muscle. Then the half that students forget: the crossed EXTENSOR reflex. Interneurons cross the midline and drive the extensors of the opposite leg, because a leg that is being lifted has to be paid for by a leg that takes the weight. One stimulus, one arc, a flexion on one side and an extension on the other. And note what this arc is NOT: it is not the route by which pain reaches consciousness. The same primary nociceptive afferent also feeds the spinothalamic tract, so the two run in parallel from the same input, and because the reflex closes inside the cord it finishes before the spinothalamic signal reaches the cortex. The foot has already left the ground when the pain is felt."
+    },
+    {
+      "key": "gain",
+      "label": "The gamma loop — what sets how brisk a reflex is",
+      "role": "part",
+      "group": "Tuning the circuit",
+      "layer": "organ",
+      "color": "#6aa84f",
+      "terms": [
+        "gamma motor neuron",
+        "gamma loop",
+        "intrafusal fibre",
+        "muscle spindle",
+        "alpha-gamma coactivation",
+        "Golgi tendon organ",
+        "Ib afferent",
+        "autogenic inhibition",
+        "Jendrassik manoeuvre",
+        "reflex gain"
+      ],
+      "narration": "A spindle that has gone slack reports nothing, and a muscle that shortens would slacken its own spindles — so there is a second motor neuron whose only job is to keep the receptor taut. The gamma motor neuron supplies the contractile ends of the intrafusal fibres, and descending pathways drive alpha and gamma together so the spindle stays sensitive throughout a movement. That makes the gamma loop the GAIN control on every stretch reflex in the body: the same tap gives a bigger jerk when gamma drive is high. The Jendrassik manoeuvre — clenching the teeth or pulling the hands apart while the tendon is struck — works by raising that drive, which is why it is a legitimate part of the examination and not a trick. One more receptor completes the pair, and it is the opposite of the spindle in every way: the Golgi tendon organ lies IN SERIES in the tendon rather than in parallel in the belly, it reports FORCE rather than length, and its Ib afferent inhibits its own muscle through an interneuron — autogenic inhibition. Spindle in parallel, senses length, excites; tendon organ in series, senses tension, inhibits. That contrast is the most reliable way to keep the two apart."
+    },
+    {
+      "key": "release",
+      "label": "Hyperreflexia, clonus and Babinski as one released circuit",
+      "role": "part",
+      "group": "Tuning the circuit",
+      "layer": "organ",
+      "color": "#a64d79",
+      "terms": [
+        "hyperreflexia",
+        "areflexia",
+        "clonus",
+        "Babinski sign",
+        "plantar response",
+        "upper motor neuron",
+        "lower motor neuron",
+        "disinhibition",
+        "spinal shock",
+        "reflex grading"
+      ],
+      "narration": "Now the clinical payoff, and it needs no new anatomy at all — only this circuit and the tracts of the `descending-tracts` scene. The arc is intact in the cord and is normally RESTRAINED from above. Cut the restraint with an upper motor neuron lesion and the same arc runs unopposed: reflexes become brisk, the reflexogenic zone widens, and a sustained stretch can set the loop oscillating against itself — clonus, which is the stretch reflex repeatedly re-triggering its own stretch. The extensor plantar response is the same release: the Babinski sign is a fragment of the flexor withdrawal pattern, with the great toe going up as part of a limb that is trying to withdraw, normally suppressed after infancy by the corticospinal tract. Reflexes are graded 0 absent, 1 reduced, 2 normal, 3 brisk, 4 clonus. Cut the arc ITSELF instead — anterior horn, root or nerve, a lower motor neuron lesion — and the reflex is ABSENT, because nothing remains to be disinhibited. Brisk means the arc is intact and unrestrained; absent means the arc is broken. And the caveat the `descending-tracts` scene states in the same words: for days to weeks after an acute cord injury the picture is spinal shock, flaccid and areflexic, and only later becomes the spastic hyperreflexic one described here."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "Five components, no brain",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The circuit"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "arc",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Receptor, afferent limb, integrating centre, efferent limb, effector — and testing a reflex tests all five at once, which is why an absent reflex is such a cheap localiser. In goes the sensory axon by the dorsal root, its cell body in the dorsal root ganglion; out goes the alpha motor neuron by the ventral root from the anterior horn. The circuit closes inside the cord segment. Nothing in this scene is a mesh: it is a drawn circuit. The catalog holds no muscle spindle, no tendon organ, no dorsal root ganglion, no root, no horn and no interneuron, and its one relevant cord entry — the central canal — is modelled for its uppermost 34 millimetres only, as the `spinal-cord-cross-section` scene records. Every element here is therefore drawn rather than shown, and that is said before anything is claimed so no beat sends a student looking for something absent."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "One synapse — the stretch reflex",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two reflexes"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "stretch",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:stretch-reflex-loop",
+          "path": [
+            "stretch",
+            "arc"
+          ],
+          "duration": 5000
+        }
+      ],
+      "narration": "Follow the loop once. The tendon tap stretches the MUSCLE, the spindle inside it reports the stretch by its Ia afferent, and that afferent synapses directly on the alpha motor neurons of the same muscle — one synapse, about twenty milliseconds at the knee and thirty at the ankle, no decision anywhere. The muscle shortens and cancels the stretch that started it, which is what a length servo does. A branch of the same afferent inhibits the antagonist through a Ia interneuron, so the joint moves instead of stiffening. Because the loop is confined to one or two segments, its absence is a segmental sign: biceps C5-6, triceps C7-8, knee L3-4, ankle S1-2. This is the only monosynaptic reflex in the body, and the reason it is the one clinicians tap."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Many synapses — withdrawal, and the leg that takes the weight",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two reflexes"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "withdrawal",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "stretch",
+            "withdrawal"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Hold the two circuits side by side, because the contrast is the lesson. The stretch reflex: one receptor type, one synapse, one muscle, one segment, fixed size. The withdrawal reflex: a nociceptor, a chain of interneurons, every flexor in the limb, several segments, and an output graded by how bad the stimulus was. Then the crossed extension — interneurons cross the midline and extend the opposite limb, because withdrawing one leg means loading the other. Note the timing, since it is the most counter-intuitive fact here: the arc is complete before the spinothalamic signal has reached the cortex, so the foot has already left the ground when the pain is felt. Withdrawal is not a response to pain; it runs in parallel with it."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The gain control, and the two receptors that oppose each other",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Tuning the circuit"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "gain",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "gain",
+          "to": "stretch",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "The reflex has a volume knob and two receptors that pull opposite ways. The gamma motor neuron tightens the ends of the spindle so the receptor stays sensitive even as the muscle shortens; descending pathways drive alpha and gamma together, so the same tap gives a brisker jerk when that drive is higher, and the Jendrassik manoeuvre exploits exactly this. The Golgi tendon organ is the spindle's mirror image on every axis: in series in the tendon not parallel in the belly, sensing force not length, inhibiting its own muscle not exciting it. Learn them as a pair and neither can be confused with the other. This beat is also the hinge to the next one — if descending drive sets the gain, then removing descending drive is not a loss of reflexes but a change in their setting."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Brisk means intact — reading the arc at the bedside",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Tuning the circuit"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "release",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "arc",
+            "release"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "One question decides everything at the bedside: is the arc intact, and is it restrained? Arc intact, restraint removed — an upper motor neuron lesion — gives brisk reflexes, a wide reflexogenic zone, clonus when a sustained stretch keeps re-triggering the loop, and an extensor plantar, which is a surviving fragment of the withdrawal pattern of beat 3 released from corticospinal suppression. Arc broken at the horn, root, nerve or muscle — a lower motor neuron lesion — gives an ABSENT reflex, because there is nothing left to release. Grade 0 to 4, with 4 meaning clonus. The one thing that breaks the rule is time: immediately after an acute cord injury there is spinal shock, and the picture is flaccid and areflexic for days to weeks before it becomes the brisk one, which is stated the same way in `descending-tracts` so the two scenes cannot be read as disagreeing."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS FIRST PREFERRED MODE, AND THE ROUTING WAS MEASURED THIS RUN AGAINST `available-meshes.json` RATHER THAN QUOTED FROM THE SIBLING SCENES OR FROM THE PROMPT'S COVERAGE TABLE. All 934 entries were searched under: spindle, intrafusal, extrafusal, fusimotor, tendon organ, Golgi, receptor, nociceptor, afferent, efferent, neuron, motor, alpha, gamma, interneuron, synapse, ganglion, root, radicul, rootlet, horn, cornu, grey matter, white matter, lamina, cord, spinal, tract, reflex, arc, nerve. Findings: `reflex`, `spindle`, `Golgi`, `neuron`, `motor`, `interneuron`, `ganglion`, `root`, `horn`, `cornu`, `afferent` and `efferent` return NOTHING; `nerve` returns ONLY the two optic nerves; `tract` returns ONLY the two optic and two iliotibial tracts; `lamina` returns FMA61975 `lamina terminalis`, the wall of the third ventricle, which has nothing to do with Rexed's laminae; `spinal` returns sixteen entries of which fifteen are back muscles (spinalis, semispinalis, interspinales) and one is FMA78497 `central canal of spinal cord`. Not one component of this arc has a mesh.",
+    "FMA78497 WAS DELIBERATELY NOT IMPORTED, for the reason `spinal-cord-cross-section` and `ascending-tracts` both give: it models the uppermost 34 millimetres of the canal only, as the `gross__back-vertebral-column__spinal-cord-in-vertebral-canal` scene records, so placing it beside a drawn arc at a named segmental level would state a level the drawing does not have. This is recorded so a later run does not read its absence as an oversight and 'fix' it.",
+    "THE SUBJECT IS A CIRCUIT, WHICH IS AN INDEPENDENT AND STRONGER REASON FOR `diagram` THAN THE CATALOG GAP — and here it is stronger than for either tract scene, because a synapse COUNT is the entire teaching point. Beats 2 and 3 are an argument about one synapse versus many, and beat 4 about which of two receptors is in series and which in parallel. A fully segmented cord would show none of that: the number of synapses in a path is not a shape, and the arc is what CURRICULUM.json asks for under `mechanism`, its only required view. `deferred_modes` keeps `3d_anatomy` only against a day when circuit-level geometry exists, which no mesh fetch would deliver.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: a cord segment in transverse outline with all five components of beat 1 drawn on it — spindle in a muscle belly, afferent through the dorsal root ganglion and dorsal root, the synapse in the grey matter, the alpha motor neuron out through the ventral root — because beat 1 is a list of five things and a list is the weakest possible substitute for a picture of a loop; the same segment drawn twice side by side, monosynaptic against polysynaptic with the interneuron chain and the midline crossing of the crossed extensor shown, since beat 3's whole argument is that comparison; and a spindle-versus-tendon-organ inset drawn with the spindle in parallel with the extrafusal fibres and the tendon organ in series in the tendon, which is the one fact of beat 4 that a sentence conveys worst and a drawing conveys instantly.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following every other `diagram` scene in this topic. Beat 1 says out loud that nothing here is a mesh.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`; this scene has no parent mesh at all, and a synapse is a junction in a circuit rather than a point on a surface, so neither the `--contact` nor the `--extreme` definition applies. Nothing was placed by eye.",
+    "CONSISTENCY WITH THE REST OF THE TOPIC WAS CHECKED AGAINST THE FILES, NOT FROM MEMORY. `descending-tracts` `gaps[]` explicitly reserved three facts for this scene and all three are honoured here: the anterior horn as the sole motor outflow, the segmental reflex and its gamma loop, and — the one it named as the thing this scene MUST match — spasticity and hyperreflexia as DISINHIBITION of a circuit that remains intact, not as a new sign. The `release` card states it in those terms and reaches the same conclusion by the same argument. Spinal shock is stated here in the same terms as the `umn` card of that scene: flaccid and areflexic for days to weeks after acute injury, spastic later. The intersegmental travel of nociceptive afferents in Lissauer's tract is stated as `ascending-tracts` states it, and this scene points at that scene rather than restating the spinothalamic course, so there is one authority for it.",
+    "ONE CLAIM IS DELIBERATELY BOUNDED. The Babinski sign is explained as a released fragment of the flexor withdrawal synergy, which is the standard account and the one that makes it derivable rather than memorable; the scene does not claim this is the only account offered in the literature, and a later run wanting to qualify it should do so in the `release` card rather than adding a second sentence elsewhere. The reflex root values are given as the ranges standardly examined (biceps and brachioradialis C5-6, triceps C7-8, knee L3-4, ankle S1-2). They appear in TWO places, the `stretch` card and beat 2, and the two were read against each other in the 2026-09-03 audit: the card lists brachioradialis and beat 2 omits it, but no value differs between them. The earlier claim in this file that they were stated 'once' was itself wrong and is corrected here rather than left as a note a later run would trust.",
+    "AUDIT 2026-09-03 — THREE CORRECTIONS, recorded so the reasoning is not lost. (1) LATENCY. The scene said the monosynaptic latency is 'about thirty milliseconds' at the KNEE, in three places: `learning_goal`, the `stretch` card and beat 2. The patellar reflex latency is about twenty milliseconds; thirty is the ankle jerk, the difference being conduction distance and not an extra synapse. All three copies were fixed together and both values are now given wherever the number appears, so the figure cannot be read as contradicting the ankle. (2) THE WITHDRAWAL CARD CONTRADICTED ITS OWN BEAT. The card said the withdrawal circuit 'is also the pathway that pain and temperature reach the brain by', which is false — that is the spinothalamic tract — while beat 3 already stated the relation correctly as two paths running in parallel from one afferent. The card now says what the beat says. (3) The root-value note above. Nothing else in the file was changed and the anatomy of beats 1, 4 and 5 was checked and stands.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `mechanism` and NOTHING ELSE for `Reflex arc`. All five beats are `mechanism`, so the requirement is met and no beat was invented to pad a mode it does not ask for. In particular no `cross_section` beat was authored, unlike the two tract scenes in this topic, because the curriculum does not request one here and a section of a drawn circuit would show nothing the mechanism beats do not.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Reflex arc`, spelled as CURRICULUM.json spells it. `Spinal cord cross-section` is not claimed although beat 1 names the horns and roots, because that scene teaches the section and this one borrows its vocabulary; `Descending tracts` is not claimed although beat 5 turns on descending inhibition, because that is the tract scene's subject and this scene names it rather than teaching it. With this scene the Spinal Cord topic's four curriculum structures are all authored.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch. All five beats are hollow for want of ARTWORK. This is the fourth and last Spinal Cord scene to reach that conclusion, so the topic is now unanimous: whoever prioritises fetches should read the whole Spinal Cord topic as an artwork request and not a mesh request, and no mesh fetch would move any of its four scenes towards `ready`."
+  ]
+}

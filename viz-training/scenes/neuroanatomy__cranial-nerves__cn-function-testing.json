@@ -1,0 +1,330 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__cranial-nerves__cn-function-testing",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Cranial Nerves",
+  "structure": "CN function testing",
+  "covers": [
+    "CN function testing"
+  ],
+  "learning_goal": "Turn the cranial nerve examination from a sequence of twelve remembered manoeuvres into a set of questions each of which has a known anatomical answer. Every test is a circuit with an afferent limb, a centre and an efferent limb, so an abnormal result is read by asking WHICH LIMB failed — and the reflexes are the instrument that separates them, because a reflex with two different nerves in it localises by dissociation: corneal, pupillary, gag and jaw jerk each pair one nerve in with a different nerve out. Then place the failure along the course from `cranial-nerve-courses`: nucleus, nerve, compartment or muscle, using the company a nerve keeps to decide which.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-03",
+    "audited_at": "2026-09-03",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "cranial nerves",
+      "cranial nerve examination",
+      "neurological examination",
+      "cranial nerve testing"
+    ],
+    "terms": [
+      "CN function testing",
+      "cranial nerve examination",
+      "pupillary light reflex",
+      "consensual reflex",
+      "relative afferent pupillary defect",
+      "swinging flashlight test",
+      "corneal reflex",
+      "gag reflex",
+      "jaw jerk",
+      "accommodation reflex",
+      "visual fields",
+      "confrontation",
+      "bitemporal hemianopia",
+      "homonymous hemianopia",
+      "diplopia",
+      "H test",
+      "nystagmus",
+      "Rinne test",
+      "Weber test",
+      "conductive hearing loss",
+      "sensorineural hearing loss",
+      "forehead sparing",
+      "upper motor neuron facial palsy",
+      "Bell's palsy",
+      "uvula deviation",
+      "tongue deviation",
+      "shoulder shrug",
+      "anosmia",
+      "afferent limb",
+      "efferent limb",
+      "dissociation"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "principle",
+      "label": "Every test is a circuit — ask which limb failed",
+      "role": "primary",
+      "group": "The method",
+      "layer": "organ",
+      "color": "#f1c232",
+      "terms": [
+        "afferent limb",
+        "efferent limb",
+        "dissociation",
+        "reflex testing",
+        "localisation",
+        "cranial nerve examination"
+      ],
+      "narration": "The examination looks like twelve unrelated manoeuvres and is really one method applied twelve times. Each test drives an input down one nerve and reads an output from another, so an abnormal result is never 'nerve X is broken' until you have asked which limb of the circuit failed. Three ways to ask. First, DISSOCIATION: if a reflex has a different nerve in and out, testing it twice — once from each side — separates them, and that is what makes the corneal, pupillary and gag reflexes the most informative parts of the examination rather than its rituals. Second, COMPANY: nerves that travel together fail together, so the question after 'which nerve' is always 'what else is out', and the answer names the compartment from `cranial-nerve-courses` — the superior orbital fissure, the cavernous sinus, the cerebellopontine angle, the jugular foramen. Third, LEVEL: for the motor nerves, whether the upper face, the palate or the tongue behaves as though the lesion is above or below the nucleus. A cranial nerve examination that produces a compartment rather than a nerve is the one that has been done properly."
+    },
+    {
+      "key": "vision",
+      "label": "I and II — smell, acuity, fields, and the pupil as a two-nerve circuit",
+      "role": "primary",
+      "group": "Sensation in",
+      "layer": "organ",
+      "color": "#3d85c6",
+      "terms": [
+        "anosmia",
+        "visual acuity",
+        "visual fields",
+        "confrontation",
+        "bitemporal hemianopia",
+        "homonymous hemianopia",
+        "pupillary light reflex",
+        "consensual reflex",
+        "relative afferent pupillary defect",
+        "swinging flashlight test",
+        "accommodation reflex",
+        "optic chiasm"
+      ],
+      "narration": "I is tested one nostril at a time with a smell that is not an irritant — an irritant is trigeminal and would pass with a dead olfactory nerve — and anosmia after head injury is usually the filaments sheared at the cribriform plate. II is tested four ways, and the field is the one that localises: because the nasal fibres cross at the chiasm, a lesion IN FRONT of it takes one eye, a lesion AT it takes both temporal fields (the classic pituitary bitemporal hemianopia), and a lesion BEHIND it takes the same half of both fields. One test, three levels, read off the crossing. Then the pupil, which is the cleanest circuit in the body: light IN along II, out along III to both sides at once, so shining into one eye constricts both. Two consequences. A dead II gives NO response from that eye, direct or consensual, but its pupil still constricts when the OTHER eye is lit — the efferent is intact. A dead III gives no constriction in that eye whichever eye is lit, while the other pupil responds to both. Afferent lesion, both pupils behave the same as each other; efferent lesion, they differ. The swinging flashlight test turns that into a sign: swing the light to the affected eye and the pupil paradoxically dilates, because it is losing more drive than it gains — a relative afferent pupillary defect, the most sensitive test of optic nerve disease there is."
+    },
+    {
+      "key": "eyes",
+      "label": "III, IV and VI — three nerves, one movement, and where the pupil points",
+      "role": "primary",
+      "group": "Movement out",
+      "layer": "organ",
+      "color": "#cc0000",
+      "terms": [
+        "H test",
+        "diplopia",
+        "lateral rectus",
+        "superior oblique",
+        "ptosis",
+        "mydriasis",
+        "down and out",
+        "nystagmus",
+        "cavernous sinus syndrome",
+        "false localising sign"
+      ],
+      "narration": "Test them together, because they cannot be separated by the patient's report and can be by the pattern. Trace an H and watch for the eye that fails to reach a corner. VI is simplest: lateral rectus only, so the eye will not abduct and the double vision is worst looking towards the lesion. IV supplies the superior oblique, which turns the eye DOWN when it is already turned IN, so the complaint is double vision going down stairs and the patient tilts the head away from the affected side to compensate. III supplies the other four muscles, the levator and the pupil, so a complete third gives a dilated pupil, a drooping lid and an eye resting DOWN AND OUT — pulled by the two muscles III does not supply, which is why that resting position is diagnostic rather than arbitrary. Then the question that changes management: is the PUPIL involved? Involved means compression from outside — aneurysm, uncal herniation — because the parasympathetic fibres ride on the surface; spared means the microvascular core has infarcted, as in diabetes. And an isolated VI with nothing else is a false localising sign of raised pressure rather than a lesion of the nerve, for the reason `cranial-nerve-courses` gives: it has the longest intracranial course and lies unsupported in the cavernous sinus. All three out together, with a numb forehead, is not three palsies but one cavernous sinus."
+    },
+    {
+      "key": "facesense",
+      "label": "V and VII — the reflex that separates them, and the sign that levels them",
+      "role": "part",
+      "group": "The face",
+      "layer": "organ",
+      "color": "#6aa84f",
+      "terms": [
+        "corneal reflex",
+        "jaw jerk",
+        "muscles of mastication",
+        "jaw deviation",
+        "forehead sparing",
+        "upper motor neuron facial palsy",
+        "Bell's palsy",
+        "hyperacusis",
+        "taste",
+        "chorda tympani"
+      ],
+      "narration": "V is tested as three sensory strips and one muscle group: light touch over forehead, cheek and jaw, then clench and open the jaw against resistance — the pterygoids protrude, so a weak V3 lets the jaw DEVIATE TOWARDS the weak side, the same logic as the tongue. The CORNEAL REFLEX is the dissociation test of the face: in along V1, out along VII to both eyes. Touch the affected cornea and if neither eye blinks the afferent V1 is out; if the other eye blinks but this one does not, the efferent VII is out on this side. One reflex, two nerves, told apart by which eye responds. The JAW JERK is the one deep tendon reflex above the neck — in and out along V3 through the mesencephalic nucleus — and it is brisk in an upper motor neuron lesion above the pons, which is how a bilaterally weak face is placed. Then VII, where the single most useful sign in the whole examination lives: ask the patient to raise their eyebrows. The upper face has bilateral cortical input, so a cortical or capsular lesion SPARES the forehead and a lesion of the nerve itself does not. Forehead weak means the nerve; forehead spared means above the nucleus. Add hyperacusis or loss of taste on the front of the tongue and the lesion is inside the facial canal above the branches that carry them, exactly as the course predicts."
+    },
+    {
+      "key": "lower",
+      "label": "VIII to XII — hearing, palate, shoulder, tongue",
+      "role": "part",
+      "group": "The face",
+      "layer": "organ",
+      "color": "#a64d79",
+      "terms": [
+        "Rinne test",
+        "Weber test",
+        "conductive hearing loss",
+        "sensorineural hearing loss",
+        "nystagmus",
+        "gag reflex",
+        "uvula deviation",
+        "palatal weakness",
+        "shoulder shrug",
+        "sternocleidomastoid",
+        "trapezius",
+        "tongue deviation",
+        "fasciculation"
+      ],
+      "narration": "VIII splits into two tests. Hearing: Rinne compares air with bone conduction at one ear and Weber puts the fork on the forehead to compare the two ears. Air better than bone is normal or sensorineural; bone better than air is conductive. Weber lateralises TOWARDS a conductive loss and AWAY from a sensorineural one — the fact worth stating carefully, because a deaf ear that hears the fork loudest is a blocked ear, not a dead nerve. Balance is tested by looking for nystagmus and by the vestibulo-ocular reflex, which involves the same VIII in and III, IV and VI out — another two-nerve circuit. IX and X are tested together because they share the gag: sensation from the pharynx in along IX, elevation of the palate out along X. Say 'ah' and the uvula deviates AWAY from the weak side, because the working side pulls it across — the opposite convention to the tongue, and the pair is worth learning together for exactly that reason. Hoarseness adds the recurrent laryngeal branch of X. XI is tested by shrugging against resistance (trapezius) and turning the head against resistance (sternocleidomastoid), and the crossed action matters: the sternocleidomastoid turns the head to the OPPOSITE side, so a weak right XI is found by failing to turn LEFT. XII: stick the tongue out and it deviates TOWARDS the weak side, since genioglossus protrudes; add wasting and fasciculation and the lesion is the lower motor neuron rather than above it."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "One method, twelve times — in, centre, out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The method"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "principle",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Before any manoeuvre, the method. Every test drives an input down one nerve and reads an output from another, so the finding is not a broken nerve until you have said which limb broke. Dissociation separates the limbs of a reflex, company names the compartment, and the level question — forehead, palate, tongue — separates a lesion above the nucleus from one below it. Nothing in this scene is a mesh: it is a drawn set of circuits. The catalog holds no cranial nerve but the two optic ones and no ganglion at all. It does hold the effectors — the muscles of facial expression, the muscles of mastication, sternocleidomastoid and trapezius, and an eyeball — but a test is an ACT rather than a shape: a mesh of orbicularis oculi does not show a blink. Not all of them are absent from disk — the right sternocleidomastoid and the right trapezius are delivered, and so is the whole optic pathway — and they are still not used, because a scene that drew two of its effectors and none of the others would imply the rest had been measured. That is said first so no beat sends a student looking for something absent."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "The pupil — the circuit that tells afferent from efferent",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Sensation in"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "vision",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:pupillary-light-reflex",
+          "path": [
+            "vision",
+            "principle"
+          ],
+          "duration": 5000
+        }
+      ],
+      "narration": "Follow the light in along II and out along III to BOTH sides, and every pupillary sign falls out of the wiring. Optic nerve dead: light in that eye moves neither pupil, light in the good eye moves both, and swinging the torch across makes the bad pupil dilate — a relative afferent pupillary defect. Third nerve dead: that pupil moves for no light at all, while the other moves for both. Afferent lesion, the two pupils always match; efferent lesion, they differ. Test the fields in the same breath, because the chiasm turns one manoeuvre into a level: one eye means in front of it, both temporal fields mean at it, the same half of both fields means behind it. And test smell with something that is not an irritant, since an irritant is trigeminal and would be smelt by a patient with no olfactory nerve at all."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Trace an H — and ask whether the pupil is in",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Movement out"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "eyes",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "eyes",
+            "vision"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Three nerves, one movement, and the pattern of failure names which. No abduction is VI. Trouble looking down and in, with a head tilt away from the side, is IV. A dilated pupil, a ptosis and an eye sitting down and out is a complete III — down and out because those are the pulls of the two muscles III does NOT supply. Then the management question, which is about the pupil and not the eye: involved means compression from outside, since the parasympathetic fibres run on the surface, and that is an aneurysm or a herniation until imaged; spared means the core has infarcted, as in diabetes. Two patterns are not palsies at all: an isolated VI can be raised intracranial pressure stretching the longest intracranial course in the head, and III, IV, VI and a numb forehead together is one cavernous sinus rather than four separate lesions."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The corneal reflex, and the eyebrow that gives the level",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The face"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "facesense",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "facesense",
+          "to": "principle",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Here is dissociation done properly. The corneal reflex goes in along V1 and out along VII to both eyes, so touching the affected cornea answers a different question from touching the other one: neither eye blinks means the sensory V1 is gone; the other eye blinks and this one does not means the motor VII is gone on this side. Test V's three strips and the jaw, which deviates towards the weak side because the pterygoids protrude. Then raise the eyebrows, the single most useful request in the examination: the forehead has bilateral cortical input, so it is SPARED by a lesion above the nucleus and WEAK in a lesion of the nerve. Hyperacusis or lost taste puts that nerve lesion inside the facial canal, above the branches carrying them — the examination reading a level off the course, which is the whole ambition of this scene."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Fork, uvula, shoulder, tongue — and the two that deviate opposite ways",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The face"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lower",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "facesense",
+            "lower"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Finish down the list. Rinne at each ear, Weber on the forehead: lateralising towards the bad ear means conductive, away from it means sensorineural. Gag: in along IX, out along X, another two-nerve circuit. Say 'ah' and watch the uvula pull AWAY from the weak side; stick the tongue out and watch it push TOWARDS the weak side. Learn that pair as a pair, because it is the commonest thing to get backwards, and both follow from the same rule — the working muscle wins, and a palate is pulled up while a tongue is pushed out. Shrug and turn the head for XI, remembering the sternocleidomastoid turns the head to the opposite side. Wasting and fasciculation of the tongue make the lesion lower motor neuron. Finally, run the company check across the whole examination: IX, X and XI together is a jugular foramen; VII and VIII together with ataxia is a cerebellopontine angle; a cranial nerve on one side with long tracts on the other is the brainstem, as `cranial-nerve-nuclei` derives."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS FIRST PREFERRED MODE, AND THE ROUTING WAS MEASURED THIS RUN AGAINST `available-meshes.json` RATHER THAN QUOTED FROM ITS SIBLING SCENES. All 934 entries were searched under: nerve, cranial, nucleus, ganglion, pupil, iris, sphincter pupillae, ciliary, cornea, conjunctiva, eyeball, orbit, rectus, oblique, levator palpebrae, eyelid, tympanic, cochlea, semicircular, vestibule, uvula, palate, pharynx, larynx, tongue, genioglossus, masseter, temporalis, pterygoid, orbicularis, sternocleidomastoid, trapezius, olfactory, optic. FINDINGS: `nerve` returns ONLY the two optic nerves; `pupil`, `iris`, `cornea`, `orbit`, `eyelid`, `cochlea`, `semicircular`, `uvula`, `pharynx`, `larynx`, `tongue`, `genioglossus`, `ganglion` and `olfactory` return NOTHING; `eyeball`, `pterygoid` and `orbicularis` DO return meshes and are listed as present below, so their appearance in this negative list before the audit of 2026-09-03 was a clerical contradiction of the same gaps note two sentences later. `palate` returns TWO ENTRIES — FMA53655/53656, the palatine BONES — and this sentence said `palate` returned nothing until the audit of 2026-09-03 re-ran the search; the teaching consequence is unchanged, because the soft palate and uvula whose elevation beat 5 reads are absent, but the sentence was a false absence claim of exactly the kind REPAIR-BACKLOG.md records, and `cranial-nerve-courses` carried the same wrong sentence and has been corrected with it. `rectus` returns twelve entries, all abdominal, femoral or capitis, and NOT ONE extraocular rectus — a trap of exactly the kind REPAIR-BACKLOG.md records, since a run in a hurry would score `rectus` as a hit and put an abdominal muscle in an eye-movement beat; `oblique` and `levator` are the same trap, returning abdominal obliques, adductor heads, levator scapulae and levator labii, and no superior oblique and no levator palpebrae superioris. THE EFFECTORS, HOWEVER, LARGELY DO EXIST, and saying otherwise would repeat the failure this corpus is on record for: ALL FOUR muscles of mastication are present (FMA49001/49002/49004/49005 masseter in four parts, FMA49007/49008 temporalis, FMA49012/49013 medial pterygoid, FMA49022-49025 the two heads of each lateral pterygoid — twelve meshes), and THIRTY-NINE muscles of facial expression are present (this said FORTY-THREE until the audit of 2026-09-03 counted them: the enumerable set under orbicularis, zygomaticus, frontalis, occipitalis, levator/depressor labii and anguli, depressor septi, risorius, buccinator, mentalis, nasalis, procerus, platysma, corrugator is 39, and the same wrong number was carried in `cranial-nerve-courses` gaps[2] and has been corrected there), including orbicularis oculi in orbital and palpebral parts, orbicularis oris, both zygomatici, frontalis, occipitalis, the levators of the lip and angle, and the depressors. Sternocleidomastoid (FMA13408/13409) and trapezius (six parts) are present, and so is FMA12513 `eyeball`. What is absent is everything the tests actually read: no pupil, iris, cornea, cochlea, semicircular canal, vestibule, tympanic membrane, palate, uvula, pharynx, larynx or tongue, and no nerve to connect any of them.",
+    "DELIVERY, RE-MEASURED AGAINST `meshes-lite/` AT THE AUDIT OF 2026-09-03 RATHER THAN CARRIED FORWARD. ZERO of the 39 facial and ZERO of the 12 masticatory meshes are on disk, and neither is FMA12513 `eyeball` — that part of the earlier note is confirmed. TWO PARTS OF IT WERE WRONG AND ARE CORRECTED HERE. First, the sentence read as a blanket 'none of those effector meshes', and the XI effectors ARE delivered: FMA13408 right sternocleidomastoid and the ascending, descending and transverse parts of the RIGHT trapezius (FMA33581/33586/33584) are all in `meshes-lite/`; their left partners (FMA13409, FMA33583/33587/33585) are NOT, so beat 5's shrug-and-turn pair is half-delivered and one-sided, which is the reason not to use it rather than absence. Second, the claim that 'no beat here could be rendered today' is false: the ENTIRE AFFERENT VISUAL PATHWAY IS ON DISK — FMA50875 and FMA50878 optic nerves, FMA62045 optic chiasm, FMA67936 and FMA62382 optic tracts, five meshes — and beat 2's three-level field rule (in front of the chiasm, at it, behind it) is precisely a statement about that geometry, with `optic chiasm` already sitting in the `vision` card's terms[]. The routing does not change, for the reason the next gap gives, but a run reading this note must not conclude that the topic has no deliverable geometry: `cranial-nerve-courses` gaps[3] makes the same finding and reaches the same decision on independent grounds. That is the delivery fact; the ROUTING fact is separate and stands on its own: the muscles are the wrong objects for this scene. A mesh of orbicularis oculi does not show a blink, a mesh of trapezius does not show a shrug against resistance, and beats 2 and 4 turn on which pupil moved and which eye blinked, neither of which is a surface. Showing the two or three effectors that could be delivered while every other element remained a drawn circuit would also imply the rest were measured — the judgement `cranial-nerve-nuclei` made about the optic meshes and `brainstem__midbrain` made about FMA62394. Recorded so a later run does not read the absence as an oversight and 'fix' it, and equally so that no later run repeats 'the catalog has no facial muscles', which is false.",
+    "THE SUBJECT IS A SET OF PROCEDURES AND THEIR INFERENCES, WHICH IS AN INDEPENDENT AND STRONGER REASON FOR `diagram` THAN THE CATALOG GAP — and the curriculum agrees, since `diagram` is this structure's FIRST preferred mode and the only structure in the topic for which it is. Beat 2's whole content is which pupil moves when, beat 4's is which eye blinks when, and neither is a shape at any level of segmentation. `deferred_modes` keeps `3d_anatomy` only against a day when an animated head with eyes, pupils, palate and tongue exists, which is an animation request and not a mesh fetch.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: a two-by-two of the pupillary responses — light in each eye, for an afferent and an efferent lesion — since beat 2's entire teaching is a table of four outcomes and prose is the worst possible carrier for it; a face drawn twice side by side, upper motor neuron beside lower motor neuron, with the forehead shaded in one and not the other, because that single comparison is the most used sign in the examination; and one figure showing the uvula deviating away and the tongue deviating towards, drawn together on one page, since beat 5 says explicitly that these are learnt as a pair and the pairing is what the drawing would supply.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following every other `diagram` scene in this course. Beat 1 says out loud that nothing here is a mesh.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`. The features this scene names are acts and responses — a blink, a shrug, a deviation — and none is a point on a surface, so neither `--contact` nor `--extreme` applies regardless of which meshes are present. Nothing was placed by eye.",
+    "CONSISTENCY WITH THE TOPIC WAS CHECKED AGAINST THE FILES, NOT FROM MEMORY, AND THIS SCENE IS THE THIRD OF THREE THAT MUST AGREE. Division of labour: `cranial-nerve-nuclei` owns the columns and the brainstem syndromes, `cranial-nerve-courses` owns the exits, foramina and peripheral distributions, and this scene owns the tests and their inferences, naming the other two rather than restating them. Four facts appear in more than one file and were compared line by line: FOREHEAD SPARING is stated identically here and in `cranial-nerve-courses` (bilateral cortical input to the upper face; forehead weak means the nerve, spared means above the nucleus). THE PUPIL RULE — surface parasympathetic fibres, so compression involves the pupil and microvascular infarction spares it — is stated in both, in the same terms and with the same bounding. THE SIXTH NERVE as a false localising sign is stated in both, with the reason (longest intracranial course, unsupported in the cavernous sinus) given in `cranial-nerve-courses` and referred to here. TONGUE DEVIATION TOWARDS the weak side is stated in `cranial-nerve-nuclei`, `cranial-nerve-courses`, `brainstem__medulla-oblongata` and `spinal-cord__descending-tracts`, and this scene adds the uvula deviating AWAY beside it — the two are given together and each with its mechanism, precisely so that the pair cannot be remembered as a single direction. Nothing here contradicts those files.",
+    "TWO STATEMENTS ARE DELIBERATELY BOUNDED. The gag reflex is given as IX in and X out, which is the standard teaching, and the scene does not claim the afferent is purely IX in every subject; and the gag is not described as a test to be performed routinely, because it is unpleasant and often absent normally, so the beat teaches what it would show rather than urging it. The Weber and Rinne interpretation is stated once, in the `lower` card and beat 5 in the same direction (lateralising TOWARDS a conductive loss, AWAY from a sensorineural one), and the two were read against each other this run because this is the single most commonly inverted fact in the examination.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `mechanism` and NOTHING ELSE for `CN function testing`. All five beats are `mechanism` and no beat was invented to pad a mode the curriculum does not ask for; in particular no `location` beat was authored, although beats 3 and 5 name compartments, because the locating is done by `cranial-nerve-courses` and repeating it here would create a second copy of the foramina to drift.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `CN function testing`, spelled as CURRICULUM.json spells it. `Cranial nerve courses` and `Cranial nerve nuclei` are NOT claimed although both are used throughout, because this scene teaches the inference and those own the anatomy. WITH THIS SCENE THE CRANIAL NERVES TOPIC'S THREE CURRICULUM STRUCTURES ARE ALL AUTHORED, all three as `diagram`, and the topic is complete as authoring work and blocked only on artwork.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch. All five beats are hollow for want of ARTWORK. Read the Cranial Nerves topic as follows when prioritising: `cranial-nerve-courses` beat 2 could be re-moded to `3d_anatomy` today on skull bones already delivered, which makes it the only cheap 3D win in the topic; `cranial-nerve-nuclei` would need a segmented set of brainstem nuclei that does not exist; and THIS scene needs no mesh at any point and should be read as a pure artwork request, like the whole Spinal Cord topic."
+  ]
+}

@@ -1,0 +1,395 @@
+{
+  "schema": 2,
+  "id": "histology__epithelium__stratified-epithelia",
+  "mode": "microscopic",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Histology",
+  "topic": "Epithelium",
+  "structure": "Stratified epithelia",
+  "covers": [
+    "Stratified epithelia"
+  ],
+  "learning_goal": "Name a stratified epithelium by the shape of its SURFACE cells, not its basal ones; distinguish keratinised from non-keratinised stratified squamous and say which surfaces of the body carry each and why; read the layers of the epidermis as one cell's life story from basal division to surface loss; and recognise transitional epithelium as the bladder's answer to changing volume rather than as a fourth shape.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-04"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "histology",
+      "epithelium",
+      "skin",
+      "tissue classification",
+      "microscopy",
+      "slide reading"
+    ],
+    "terms": [
+      "stratified epithelium",
+      "stratified squamous epithelium",
+      "keratinised",
+      "non-keratinised",
+      "epidermis",
+      "stratum basale",
+      "stratum spinosum",
+      "stratum granulosum",
+      "stratum lucidum",
+      "stratum corneum",
+      "keratinocyte",
+      "keratin",
+      "keratohyalin granule",
+      "desmosome",
+      "hemidesmosome",
+      "oesophagus",
+      "esophagus",
+      "oral mucosa",
+      "vagina",
+      "cornea",
+      "stratified cuboidal epithelium",
+      "stratified columnar epithelium",
+      "transitional epithelium",
+      "urothelium",
+      "umbrella cell",
+      "dome cell",
+      "uroplakin",
+      "bladder",
+      "ureter",
+      "renal pelvis",
+      "metaplasia",
+      "squamous metaplasia",
+      "dysplasia",
+      "squamous cell carcinoma",
+      "pemphigus",
+      "bullous pemphigoid",
+      "psoriasis"
+    ]
+  },
+  "camera": {
+    "framing": "cross_section"
+  },
+  "structures": [
+    {
+      "key": "surface_rule",
+      "label": "The naming rule — the surface cells decide",
+      "role": "context",
+      "group": "How to classify",
+      "layer": "tissue",
+      "color": "#e8e2d4",
+      "terms": [
+        "stratified epithelium",
+        "classification",
+        "surface cells",
+        "basal cells",
+        "apical surface",
+        "basement membrane"
+      ],
+      "narration": "Same two questions as for a simple epithelium and the same order. More than one layer between the basement membrane and the free surface makes it stratified; the shape of the cells AT THE FREE SURFACE names it. That second half is where marks are lost, because in a stratified epithelium the basal cells are almost always cuboidal or low columnar whatever the epithelium is called — they are the dividing cells, and dividing cells are plump. Stratified squamous epithelium therefore has cuboidal cells at the bottom, and it is still squamous, because you name it from the top. Read the layers upwards and you are also reading a sequence in time: cells are born at the base, are pushed up, flatten as they go, and are lost from the surface."
+    },
+    {
+      "key": "why_layers",
+      "label": "Why layers at all — the trade against exchange",
+      "role": "primary",
+      "group": "How to classify",
+      "layer": "tissue",
+      "color": "#e69138",
+      "terms": [
+        "abrasion",
+        "mechanical protection",
+        "avascular",
+        "basement membrane",
+        "diffusion distance",
+        "turnover",
+        "mitosis",
+        "stratum basale"
+      ],
+      "narration": "Layers buy protection and cost exchange, and the whole distribution of stratified epithelia in the body follows from that one trade. A surface that must survive abrasion sacrifices permeability and stacks cells; a surface that must let things across cannot afford to. So no stratified epithelium lines an alveolus or a capillary, and no simple epithelium covers a palm. The cost has a consequence worth carrying: epithelium is avascular, so a thick epithelium has a supply problem, which is why mitosis is confined to the deepest layer where the basement membrane and the vessels beneath it are closest, and why every cell above the basal layer is on a one-way trip. It also explains the turnover: about a month for the epidermis, days for the oesophagus, and it is why these are the surfaces where a carcinogen has dividing cells to act on."
+    },
+    {
+      "key": "non_keratinised",
+      "label": "Stratified squamous, non-keratinised — wet surfaces",
+      "role": "primary",
+      "group": "The stratified squamous pair",
+      "layer": "tissue",
+      "color": "#45818e",
+      "terms": [
+        "stratified squamous epithelium",
+        "non-keratinised",
+        "oesophagus",
+        "esophagus",
+        "oral cavity",
+        "oropharynx",
+        "vagina",
+        "anal canal",
+        "cornea",
+        "nucleated surface cells",
+        "Barrett's oesophagus"
+      ],
+      "narration": "Many layers, flattening towards the surface, and the surface cells STILL HAVE NUCLEI. That is the whole distinction and it is visible at low power: a pale, flattened, nucleated top layer instead of a dead pink one. These are the wet surfaces, kept wet by glands elsewhere — mouth, oropharynx, oesophagus, vagina, the lower anal canal, and the cornea, which is stratified squamous non-keratinised and must also be transparent. They are tough against abrasion and remain permeable enough to matter, which is why drugs are given under the tongue. The oesophagus is the one to fix, because it is the junction that generates the pathology: stratified squamous above, simple columnar in the stomach below, an abrupt line between them, and reflux across that line converts squamous to intestinal-type columnar — Barrett's, which is metaplasia in the direction OPPOSITE to the squamous metaplasia of the airway."
+    },
+    {
+      "key": "keratinised",
+      "label": "Stratified squamous, keratinised — the epidermis",
+      "role": "primary",
+      "group": "The stratified squamous pair",
+      "layer": "tissue",
+      "color": "#8e7cc3",
+      "terms": [
+        "stratified squamous keratinised epithelium",
+        "epidermis",
+        "keratin",
+        "stratum corneum",
+        "anucleate",
+        "cornified",
+        "skin",
+        "hard palate",
+        "gingiva",
+        "dry surface",
+        "water loss"
+      ],
+      "narration": "The same epithelium with a dead roof on it. The surface cells lose their nuclei and their organelles and are left as flattened bags of keratin, stacked and cross-linked into the stratum corneum. On a section that layer is anucleate, deeply eosinophilic and often looks shed and wispy at the edge. The purpose is not abrasion — the layers below already do that — it is WATER. A keratinised surface is a dry surface that does not lose water to the air, which is why it covers the outside of the body and, inside the mouth, only the hard palate and gingiva, the two places chewing makes dry and abraded at once. Thickness follows use: thin over most of the body, and thick with an extra stratum lucidum on the palm and sole."
+    },
+    {
+      "key": "epidermal_layers",
+      "label": "The five layers as one cell's life",
+      "role": "primary",
+      "group": "The stratified squamous pair",
+      "layer": "tissue",
+      "color": "#6aa84f",
+      "terms": [
+        "stratum basale",
+        "stratum germinativum",
+        "stratum spinosum",
+        "stratum granulosum",
+        "stratum lucidum",
+        "stratum corneum",
+        "keratinocyte",
+        "keratohyalin granule",
+        "desmosome",
+        "hemidesmosome",
+        "prickle cell",
+        "pemphigus vulgaris",
+        "bullous pemphigoid",
+        "psoriasis"
+      ],
+      "narration": "Read the epidermis from the bottom up and it is not five facts but one cell's biography. STRATUM BASALE: a single row of cuboidal cells on the basement membrane, anchored by hemidesmosomes, and the only layer that divides. STRATUM SPINOSUM: several layers of cells joined by desmosomes so numerous that shrinkage in processing pulls the cells apart between them and leaves the spines the layer is named for — an artefact that became a diagnostic feature. STRATUM GRANULOSUM: two or three layers packed with keratohyalin granules, the last living layer, where the nucleus is lost. STRATUM LUCIDUM: a thin clear band, present only in thick skin. STRATUM CORNEUM: dead, anucleate, keratin. The two junction types that hold this together are also two diseases at two different levels, which is the cleanest illustration in histology that a structure is a disease waiting to happen: antibodies against desmosomes split the epidermis WITHIN the spinous layer and give the fragile, easily ruptured blisters of pemphigus vulgaris, while antibodies against hemidesmosomes split it at the BASEMENT MEMBRANE and give the tense, deep, subepidermal blisters of bullous pemphigoid. Deep and tense, or superficial and flaccid — the level of the split is the diagnosis."
+    },
+    {
+      "key": "cuboidal_columnar",
+      "label": "Stratified cuboidal and columnar — rare, and mostly ducts",
+      "role": "part",
+      "group": "The rarer two",
+      "layer": "tissue",
+      "color": "#c27ba0",
+      "terms": [
+        "stratified cuboidal epithelium",
+        "stratified columnar epithelium",
+        "sweat gland duct",
+        "salivary gland duct",
+        "excretory duct",
+        "male urethra",
+        "conjunctiva",
+        "large duct"
+      ],
+      "narration": "Worth a short card and no more, because their whole clinical importance is that they exist and are not something else. Stratified cuboidal is usually two layers and lines the larger excretory ducts — sweat glands, salivary glands — where a duct needs to be tougher than a simple cuboidal tubule without becoming skin. Stratified columnar is rarer still: parts of the male urethra, the largest gland ducts, patches of conjunctiva, and it often appears only as a short transition between two other epithelia rather than as a lining in its own right. If you think you are looking at one of these two, check first that you are not looking at a tangential cut or at the junction between two epithelia, which is what they usually turn out to be."
+    },
+    {
+      "key": "transitional",
+      "label": "Transitional epithelium — shaped by how full the organ is",
+      "role": "primary",
+      "group": "The rarer two",
+      "layer": "tissue",
+      "color": "#cc0000",
+      "terms": [
+        "transitional epithelium",
+        "urothelium",
+        "umbrella cell",
+        "dome cell",
+        "uroplakin",
+        "fusiform vesicle",
+        "renal pelvis",
+        "ureter",
+        "bladder",
+        "proximal urethra",
+        "distension",
+        "impermeability",
+        "urothelial carcinoma",
+        "schistosomiasis"
+      ],
+      "narration": "The urinary lining, from renal pelvis to proximal urethra, and the reason its name is a warning: 'transitional' does not mean a transition between two other epithelia, it means the epithelium itself changes shape. Relaxed, it is many layers deep with large rounded UMBRELLA CELLS bulging into the lumen, each often binucleate, covering several cells beneath. Distended, it thins to two or three layers of flattened cells and looks, misleadingly, like stratified squamous. So the SAME bladder gives two different answers depending on whether it was fixed full or empty, and a slide must be read with that in mind. The umbrella cells carry uroplakin plaques and a reserve of membrane in fusiform vesicles, which does two jobs at once: it lets the apical surface unfold as the organ fills, and it makes that surface impermeable — urine sits against this epithelium for hours and must not be reabsorbed. Its tumours are urothelial carcinomas, and they are multifocal because the whole tract shares the exposure; the exception worth knowing is that chronic schistosomiasis drives squamous metaplasia and then squamous carcinoma instead."
+    },
+    {
+      "key": "metaplasia",
+      "label": "Metaplasia — when a surface changes its class",
+      "role": "primary",
+      "group": "Reading the change",
+      "layer": "tissue",
+      "color": "#a64d79",
+      "terms": [
+        "metaplasia",
+        "squamous metaplasia",
+        "intestinal metaplasia",
+        "Barrett's oesophagus",
+        "cervical transformation zone",
+        "smoking",
+        "dysplasia",
+        "carcinoma in situ",
+        "squamous cell carcinoma",
+        "adenocarcinoma"
+      ],
+      "narration": "An epithelium can be replaced by another type when the demands on it change, and it is reversible, adaptive and not itself malignant — but it marks the place to look. Two directions, and keeping them apart is the point of this card. TOWARDS squamous: the airway under cigarette smoke replaces its pseudostratified ciliated columnar with stratified squamous, trading the mucociliary escalator for abrasion resistance it does not need, which is why smokers' airways clear poorly. The bladder does the same under chronic irritation. AWAY from squamous: the lower oesophagus under acid replaces stratified squamous with intestinal-type columnar, which is Barrett's. The cervical transformation zone, where columnar meets squamous, does both and is where nearly all cervical carcinoma arises. The sequence to hold is metaplasia, then dysplasia, then carcinoma in situ, then invasion — and only the last of those has crossed the basement membrane."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "Name it from the top",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How to classify"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "surface_rule",
+            "why_layers"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "The same two questions as for the simple epithelia, in the same order: how many layers from the basement membrane to the free surface, and then what shape are the cells AT THE SURFACE. More than one layer is stratified, and the surface cells name it — which is why an epithelium with cuboidal cells at its base is still called squamous. Layers are a trade: they buy resistance to abrasion and they cost permeability, so they appear exactly where wear matters and exchange does not. Nothing on this screen is a model; this is drawn artwork of a section, because the subject is cellular arrangement and no surface mesh has cells in it."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Wet and dry — the same epithelium with and without a dead roof",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The stratified squamous pair"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "non_keratinised",
+            "keratinised"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Two panels of the same epithelium, differing only at the top. On the left, non-keratinised: the surface cells are flattened but ALIVE and their nuclei are visible — oesophagus, mouth, vagina, cornea, all wet surfaces. On the right, keratinised: the surface cells have lost their nuclei and become flattened plates of keratin, the stratum corneum, deeply pink and often frayed at the edge of the section. The difference is about water, not wear. A keratinised surface is waterproof and therefore dry, which is why it is the outside of the body and, in the mouth, only the hard palate and gingiva. Look for nuclei in the top layer and you have the answer in one glance."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Five layers, read as one cell's life",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The stratified squamous pair"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "epidermal_layers",
+          "intensity": 1
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:keratinocyte-life",
+          "path": [
+            "epidermal_layers",
+            "keratinised"
+          ],
+          "duration": 5000
+        }
+      ],
+      "narration": "Trace a single keratinocyte from birth to loss and the five named layers stop being a list. It is born in the stratum basale, the only dividing layer, anchored to the basement membrane by hemidesmosomes. It is pushed into the stratum spinosum, held to its neighbours by desmosomes so numerous that processing shrinkage leaves visible spines between the cells. In the stratum granulosum it fills with keratohyalin granules and loses its nucleus — the last living layer. In thick skin it passes through the thin clear stratum lucidum. It arrives in the stratum corneum as a dead keratin plate and is shed, about a month after it was born. Two blistering diseases are marked on this trace at the two levels the junctions sit: pemphigus vulgaris splits the epithelium within the spinous layer and blisters flaccidly, bullous pemphigoid splits it at the basement membrane and blisters tensely."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "The bladder answers twice",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The rarer two"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "transitional",
+            "cuboidal_columnar"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "transitional",
+          "intensity": 1
+        }
+      ],
+      "narration": "Two drawings of transitional epithelium side by side, relaxed and distended, because a single drawing of it teaches half the truth. Relaxed: many layers, and large rounded umbrella cells bulging into the lumen, often binucleate. Distended: two or three layers of flat cells that a student will call stratified squamous unless warned. Same tissue, same slide, different filling — and the umbrella cells are what makes it possible, unfolding stored membrane from fusiform vesicles while their uroplakin plaques keep urine out of the wall. Stratified cuboidal and stratified columnar sit in the panel beside it for completeness: two-layered duct linings, uncommon, and more often a junction between two epithelia than a lining in their own right."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "When a surface changes its class",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Reading the change"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "metaplasia",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "metaplasia",
+          "to": "non_keratinised",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Finish where classification becomes clinical. Metaplasia is one differentiated epithelium replaced by another because the demand changed, and it runs in both directions: TOWARDS stratified squamous in the smoker's airway and the chronically irritated bladder, AWAY from it in the acid-exposed lower oesophagus, which becomes intestinal-type columnar and is Barrett's. The cervical transformation zone does both and is where almost all cervical carcinoma begins. Metaplasia itself is adaptive and reversible; what makes it matter is that it marks a surface under sustained stress, and the road from there runs metaplasia, dysplasia, carcinoma in situ, invasion. Only the last step has crossed the basement membrane, which is why beat 1's insistence on finding that line is not merely a counting aid."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `microscopic`, ITS FIRST PREFERRED MODE, WHICH IS THE CORRECT ROUTING AND NOT A FALLBACK, for the same reason as `histology__epithelium__simple-epithelia`: the subject is cellular arrangement two orders of magnitude below the mesh catalog's scale. `3d_anatomy` is deliberately not in `deferred_modes`. The catalog was searched rather than assumed — epitheli, epidermis, skin, keratin, stratum, corneum, mucosa, urotheli, bladder, ureter, oesophagus, esophagus, cell, layer, membrane, lamina — and holds no tissue-level entry; the bladder and ureter do not appear at all, and `membrane` returns only the interosseous membranes of forearm and leg. Nothing at this scale exists in the catalog and nothing will.",
+    "STATUS IS `planned` AND NO ARTWORK EXISTS. Promote it when four drawings exist: (1) a two-panel comparison of stratified squamous non-keratinised beside keratinised, at the same magnification, with the surface nuclei drawn present on one and absent on the other, since that is the entire distinction of beat 2; (2) a labelled epidermis in thick skin with all five strata and the spines of the spinous layer visible, and the two split levels of pemphigus and pemphigoid marked ON it, because beat 3 reads the diseases off the layers; (3) a two-panel transitional epithelium, relaxed and distended, drawn from the same wall so the reader sees it is one tissue — this is the drawing the beat cannot do without, and a single relaxed panel would actively teach the error the beat exists to prevent; (4) a metaplasia figure showing both directions from a squamous surface. A fifth, optional panel of stratified cuboidal duct would complete beat 4.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, and no anchors were authored or are possible: `derive-landmark.mjs` measures against a parent mesh in `meshes-lite/` and this scene has none. Nothing was placed by eye. Beat 1 says out loud that nothing on screen is a model, so no beat asks a student to look for something absent.",
+    "CURRICULUM VIEWS: the entry requires `cross_section` only, and all five beats carry it. Correct — every statement here is about what a section through the sheet shows.",
+    "CONTRADICTION RISK MANAGED EXPLICITLY WITH `histology__epithelium__simple-epithelia`, WHICH WAS AUTHORED IN THE SAME RUN. Three facts appear in both files and were written to agree deliberately rather than by chance, and any later edit to one MUST be applied to the other in the same edit. (a) The two-question classification method, stated in the same order and the same words in both beat 1s. (b) The basement membrane as the line that defines invasion — stated in the simple scene's basement-membrane card and in this scene's metaplasia card, and the two use the same sequence. (c) The DIRECTION of the two metaplasias, which is the single most likely thing to be broken later: the airway goes pseudostratified columnar TO stratified squamous, and the lower oesophagus goes stratified squamous TO intestinal-type columnar. They run opposite ways. Both files state both directions and each names the other case, so a run that corrupts one has a live copy of the correct version in the same topic.",
+    "DIVISION OF THE TOPIC: this scene owns everything with more than one cell layer, plus transitional epithelium and metaplasia; the simple-epithelia scene owns the classification scheme's origin, the basement membrane, cell polarity, all one-layered epithelia, and the pseudostratified impostor. The TANGENTIAL-CUT trap is taught in the simple scene and is deliberately not repeated here, but it bears on this scene too — a tangentially cut simple epithelium is most often mistaken for a stratified one — so the `cuboidal_columnar` card points back at it rather than restating it.",
+    "TRANSITIONAL EPITHELIUM'S PLACE IS A DELIBERATE JUDGEMENT AND IS RECORDED SO IT IS NOT 'FIXED'. It is stratified, so it belongs here; but its name misleads in a way that costs students marks, and it is the one epithelium whose appearance depends on the state of the organ rather than on its identity. It is therefore given a full card and a two-panel beat rather than a line in a list. `CURRICULUM.json` gives no separate `Transitional epithelium` structure in this topic, so nothing is being claimed that another scene owns.",
+    "DRAWABILITY: ZERO models referenced. Nothing to fetch; the hollowness is entirely at the artwork layer. See the systemic finding recorded in `histology__epithelium__simple-epithelia` gaps[] and in RUNLOG.md for 2026-09-04 — 58 non-3d scenes in this corpus are `planned` and none has ever reached `ready`, and Histology is 46 more on the same path.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Stratified epithelia`, spelled as `CURRICULUM.json` spells it. Cell junctions are named at length in the epidermal-layers card because the two blistering diseases cannot be explained without them, and are NOT claimed: `Cell junctions` is a separate structure in this topic with its own scene to come, and when it is authored it must agree with this card that pemphigus is desmosomal and intraepidermal and pemphigoid hemidesmosomal and subepidermal."
+  ]
+}

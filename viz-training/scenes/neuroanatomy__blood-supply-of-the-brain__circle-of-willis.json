@@ -1,0 +1,263 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__blood-supply-of-the-brain__circle-of-willis",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Blood Supply of the Brain",
+  "structure": "Circle of Willis",
+  "covers": [
+    "Circle of Willis"
+  ],
+  "learning_goal": "Build the circle from its two inflows rather than memorising a ring of nine names, and then use it as an argument about what happens when one inflow fails. Two carotids in front and one basilar behind, joined by three communicating vessels — one anterior, two posterior — so the ring is not decoration but the only route by which one side can feed the other. Then read the three consequences that follow from the geometry alone: a complete circle makes a slow carotid occlusion survivable and an incomplete one makes it a stroke; the communicating arteries are the commonest sites of berry aneurysm because a junction is where flow divides; and an aneurysm's first sign is often a nerve rather than a deficit, because the ring sits directly on the third nerve and the optic chiasm.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-03",
+    "audited_at": "2026-09-03",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "blood supply of the brain",
+      "cerebral circulation",
+      "circle of Willis",
+      "cerebral arteries"
+    ],
+    "terms": [
+      "Circle of Willis",
+      "cerebral arterial circle",
+      "internal carotid artery",
+      "vertebral artery",
+      "basilar artery",
+      "anterior cerebral artery",
+      "middle cerebral artery",
+      "posterior cerebral artery",
+      "anterior communicating artery",
+      "posterior communicating artery",
+      "anterior circulation",
+      "posterior circulation",
+      "anastomosis",
+      "collateral circulation",
+      "berry aneurysm",
+      "saccular aneurysm",
+      "subarachnoid haemorrhage",
+      "third nerve palsy",
+      "bitemporal hemianopia",
+      "interpeduncular fossa",
+      "watershed"
+    ]
+  },
+  "camera": {
+    "framing": "inferior"
+  },
+  "structures": [
+    {
+      "key": "inflow",
+      "label": "Two inflows — the carotids in front, the basilar behind",
+      "role": "primary",
+      "group": "Getting blood to the ring",
+      "layer": "vessel",
+      "color": "#cc0000",
+      "terms": [
+        "internal carotid artery",
+        "common carotid artery",
+        "vertebral artery",
+        "basilar artery",
+        "anterior circulation",
+        "posterior circulation",
+        "carotid siphon",
+        "foramen magnum"
+      ],
+      "narration": "Everything about the circle follows from there being TWO supplies and not one, arriving from opposite ends. In front, each internal carotid comes up the neck, turns through the petrous temporal bone and the cavernous sinus, and reaches the base of the brain beside the optic chiasm — the ANTERIOR circulation, which will feed the cerebral hemispheres. Behind, the two vertebral arteries climb through the transverse foramina of the cervical vertebrae, enter through the foramen magnum, and JOIN at the lower border of the pons into one BASILAR artery — the POSTERIOR circulation, which will feed the brainstem, the cerebellum and the back of the hemispheres. That fusion is the fact to hold: the posterior supply is already a single vessel before the ring, so the two vertebrals protect each other, while the two carotids do not protect each other except through the ring itself. Three arteries arrive at the base of the brain; the circle is what happens when they meet."
+    },
+    {
+      "key": "ring",
+      "label": "The ring — six arteries and three joins",
+      "role": "primary",
+      "group": "The ring itself",
+      "layer": "vessel",
+      "color": "#f1c232",
+      "terms": [
+        "cerebral arterial circle",
+        "anterior cerebral artery",
+        "anterior communicating artery",
+        "posterior cerebral artery",
+        "posterior communicating artery",
+        "middle cerebral artery",
+        "anastomosis",
+        "interpeduncular fossa"
+      ],
+      "narration": "Build it rather than remember it. Each internal carotid ends by DIVIDING into an anterior cerebral artery, which runs forward and medially, and a middle cerebral artery, which runs laterally into the lateral sulcus. The basilar ends by dividing into the two posterior cerebral arteries. That gives four corners in front and two behind, and they are not yet a circle. Three vessels close it: ONE ANTERIOR COMMUNICATING artery joining the two anterior cerebrals across the midline, and TWO POSTERIOR COMMUNICATING arteries, one on each side, running back from the internal carotid to the posterior cerebral. So the loop itself is NINE vessels — the two carotid terminations, the two anterior cerebrals and the two posterior cerebrals, closed by one anterior and two posterior communicating arteries — six arteries and three joins, which is the count the structure card gives and the only count this scene uses. It lies in the interpeduncular fossa on the underside of the brain, around the optic chiasm, the pituitary stalk and the midbrain. The MIDDLE cerebral artery is the great exception worth stating explicitly, because it is the commonest thing to get wrong: it is the largest branch of the carotid and the commonest site of stroke, and it is NOT PART OF THE CIRCLE — it leaves the ring at a corner and never returns to it, which is exactly why an occluded middle cerebral cannot be rescued by collateral flow the way a slowly occluded carotid can."
+    },
+    {
+      "key": "collateral",
+      "label": "Why a ring at all — collateral flow and the incomplete circle",
+      "role": "part",
+      "group": "What the ring is for",
+      "layer": "vessel",
+      "color": "#3d85c6",
+      "terms": [
+        "collateral circulation",
+        "anastomosis",
+        "carotid stenosis",
+        "carotid occlusion",
+        "hypoplastic communicating artery",
+        "fetal posterior cerebral artery",
+        "watershed",
+        "cross-flow"
+      ],
+      "narration": "A ring means every territory has two ways in, and that is the whole clinical point. If one internal carotid narrows SLOWLY, flow can cross the anterior communicating artery from the other side and come back down the posterior communicating from the basilar, and the patient may be entirely well with one carotid occluded — which is why a carotid can be found blocked on a scan ordered for something else. Two conditions bound that reassurance and both matter more than the anatomy. First, SPEED: collateral takes time to recruit, so a sudden embolic occlusion strokes a brain a gradual atheromatous one would not, and the ring is protective against stenosis rather than against embolism. Second, COMPLETENESS: the textbook circle is present in well under half of people. The commonest variants are a thin or absent posterior communicating artery, an absent or hypoplastic anterior communicating, and a FETAL posterior cerebral, in which the occipital lobe is fed from the carotid instead of the basilar — which turns a carotid problem into a visual one. So the correct statement is that the circle CAN provide collateral flow and often does not, and that is a reason to image the circle in a particular patient rather than to assume it."
+    },
+    {
+      "key": "aneurysm",
+      "label": "Berry aneurysms — why the junctions, and why a nerve comes first",
+      "role": "part",
+      "group": "What the ring is for",
+      "layer": "vessel",
+      "color": "#a64d79",
+      "terms": [
+        "berry aneurysm",
+        "saccular aneurysm",
+        "subarachnoid haemorrhage",
+        "thunderclap headache",
+        "anterior communicating artery",
+        "posterior communicating artery",
+        "third nerve palsy",
+        "pupil involvement",
+        "bitemporal hemianopia",
+        "polycystic kidney disease"
+      ],
+      "narration": "Aneurysms of the ring are not scattered: they sit at BRANCH POINTS, because a junction is where flowing blood is turned and where the muscular wall has a defect at the fork. That single mechanism predicts the epidemiology — the anterior communicating artery is the commonest site, then the posterior communicating, then the middle cerebral bifurcation — and it is worth learning as a consequence rather than a list. Rupture gives subarachnoid haemorrhage: a sudden headache at maximum intensity within seconds, neck stiffness, and blood in the cisterns at the base, which is where the ring lies. But the reason this scene teaches aneurysms at all is that the ring sits ON TOP OF THINGS, so the mass effect localises before any rupture. A POSTERIOR COMMUNICATING aneurysm presses the third nerve running just below it and gives a painful third nerve palsy WITH THE PUPIL INVOLVED — the compressive pattern `cranial-nerves__cranial-nerve-courses` derives from the pupillary fibres lying on the outside of the nerve. An ANTERIOR COMMUNICATING aneurysm sits on the optic chiasm and can give a visual field defect. A third nerve palsy with a dilated pupil is an aneurysm until imaging says otherwise, and that sentence is the practical yield of knowing where the circle is."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Three arteries arrive at the base of the brain",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Getting blood to the ring"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "inflow",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Look at the underside of the brain. Two internal carotids arrive in front, beside the optic chiasm, having come up the neck and through the cavernous sinus. Two vertebral arteries arrive behind, through the foramen magnum, and have already fused into one basilar artery at the lower border of the pons. Front supply paired, back supply single — that asymmetry is the reason the ring matters more to the carotids than to the vertebrals. Nothing in this beat is a mesh. The catalog holds the two COMMON carotid arteries and nothing above them: no internal carotid, no vertebral artery, no basilar, no cerebral artery of any kind and no communicating artery, so every vessel named here is a drawn line. The brain structures the ring sits on DO exist as geometry — the pons, the midbrain peduncle, the optic chiasm — and are deliberately not shown, because a base of brain with no vessel on it teaches the opposite of this scene. That is said first so no beat sends a student looking for something absent."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "Close the ring — three communicating vessels, and the one artery that is not in it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The ring itself"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ring",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "inflow",
+          "to": "ring",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Each carotid divides into an anterior and a middle cerebral artery; the basilar divides into the two posterior cerebrals. Now close it with three vessels and only three: one anterior communicating across the midline between the anterior cerebrals, and one posterior communicating on each side from carotid back to posterior cerebral. Trace it round once in each direction and the ring is learnt, because every segment is either an inflow, a terminal branch, or a join. Then the exception that carries most of the clinical weight: the MIDDLE cerebral artery is the biggest vessel here and is NOT part of the circle. It leaves at a corner and goes to the lateral surface of the hemisphere. That is why a middle cerebral occlusion is a stroke with no collateral rescue available, while a carotid occlusion proximal to the ring may be silent."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "The ring as an insurance policy — and how often it is not paid up",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What the ring is for"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "collateral",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ring",
+            "collateral"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Occlude one internal carotid on the drawing and follow where blood can still go: across the anterior communicating from the opposite carotid, and up the posterior communicating from the basilar. Both routes exist only because the ring is closed, and that is the argument for a ring. Two limits, and neither is optional. Collateral needs TIME to open, so a gradual stenosis is survivable and a sudden embolus is not — the ring protects against narrowing, not against clot. And the complete textbook ring is a minority finding: a hypoplastic or absent communicating artery on one side is common, and a fetal posterior cerebral moves the occipital lobe onto the carotid supply, so that a carotid disease presents with a visual field loss the diagram would not predict. Read the circle as a question to be asked of the individual patient's angiogram, not as a fact about all patients."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "Junctions bleed — and press on the third nerve first",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What the ring is for"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "aneurysm",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:aneurysm-sites",
+          "path": [
+            "ring",
+            "aneurysm"
+          ],
+          "duration": 5000
+        }
+      ],
+      "narration": "Mark the branch points and you have marked the aneurysm sites, because a fork is where flow is turned and where the muscular coat is congenitally thin. Commonest is the anterior communicating artery, then the posterior communicating, then the middle cerebral bifurcation — an order that falls out of the mechanism rather than needing memorising. Rupture is subarachnoid haemorrhage, and the blood collects in the basal cisterns for the simple reason that the ring lies there. Before rupture, position localises: the posterior communicating artery lies directly above the third nerve, so its aneurysm gives a painful third nerve palsy with a dilated pupil — the surface parasympathetic fibres are compressed first, exactly as the cranial nerve courses scene derives — and the anterior communicating artery lies on the optic chiasm, so its aneurysm can take the visual fields. A third nerve palsy with the pupil involved is imaged urgently. That is the whole ring paying off as a clinical rule."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS SECOND PREFERRED MODE, AND THE ROUTING WAS MEASURED THIS RUN AGAINST `available-meshes.json` RATHER THAN TAKEN FROM THE TASK PROMPT'S COVERAGE TABLE. All 934 entries were searched under: artery, arteria, arterial, carotid, internal carotid, vertebral, basilar, communicating, cerebral, circle, circulus, willis, choroidal, ophthalmic, striate, lenticulostriate, callosomarginal, pericallosal, trunk, vein, venous, sinus, dural, sagittal, transverse sinus, straight sinus, cavernous, jugular. FINDINGS: `artery` returns 26 entries and every one is thoracic, abdominal, pelvic or limb — the most cranial are FMA4058 and FMA3941, the LEFT AND RIGHT COMMON CAROTID ARTERIES, which stop in the neck and never reach the ring. `carotid` returns exactly those two and NO internal carotid. `basilar`, `communicating`, `circle`, `willis`, `choroidal` and `lenticulostriate` return NOTHING AT ALL. `vertebral` returns twenty-three entries and NOT ONE IS AN ARTERY — they are intervertebral disks and vertebral bones, and this is the precise trap REPAIR-BACKLOG.md records: a run scoring `vertebral` as a hit would put a lumbar disk in a cerebral circulation beat. `cerebral` returns four entries and none is a vessel: the cerebral aqueduct, the two choroid plexuses and a white matter structure. `sinus` returns only FMA4706 `coronary sinus`, so there is no dural venous sinus either, which is the same finding `cranial-nerve-courses` records for the cavernous sinus. THE WHOLE OF THIS TOPIC'S SUBJECT IS ABSENT FROM THE CATALOG: not one intracranial vessel of any kind exists.",
+    "THE ABSENCE IS THE ROUTING REASON, BUT IT IS NOT THE ONLY ONE, AND THE SECOND WOULD STAND EVEN IF EVERY VESSEL ARRIVED. Two of this scene's four beats teach things that are not shapes. Beat 3's subject is COLLATERAL FLOW — where blood goes when a segment is blocked — which is a direction through a network and cannot be read off a surface; a mesh of a complete circle would in fact teach beat 3 wrongly, by showing as universal an arrangement that is a minority finding. Beat 4's subject is where aneurysms form and what they press on, which is a claim about junction mechanics and about a nerve that has no mesh. Beats 1 and 2 WOULD convert to `3d_anatomy` immediately if a segmented cerebral arterial tree existed, and `deferred_modes` keeps `3d_anatomy` for that day. A vessel set for the base of the brain is the single most valuable fetch this topic could receive; it would convert the first two beats of all four Blood Supply structures at once.",
+    "THE STRUCTURES THE RING SITS ON ARE IN THE CATALOG AND ARE DELIBERATELY NOT SHOWN. FMA67943 pons, FMA62004 medulla oblongata, FMA62394 peduncle of midbrain, FMA62045 optic chiasm and both optic nerves and tracts are all in `available-meshes.json` AND all are in `meshes-lite/` — verified by listing the directory this run, not by quoting a note. They are not imported because a base of brain rendered as a measured surface with every artery drawn as a line over it would imply the vessels had been measured too, which is the judgement `brainstem__midbrain` made about FMA62394 and `cranial-nerve-courses` made about the optic pathway. Recorded so a later run does not read the absence as an oversight and 'fix' it by adding the one thing that is deliverable.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: the ring seen from below with all nine loop vessels and the middle cerebral drawn LEAVING the loop, since beat 2's whole teaching is which vessels are in the circle and which is not, and prose is a poor carrier for a closed shape; the same ring drawn three times with one carotid occluded and the collateral path arrowed, since beat 3 is a flow argument and an arrow is the argument; and one figure of the ring superimposed on the optic chiasm and the third nerve, because beat 4's two localising signs are read straight off that overlap and no sentence conveys the adjacency as well.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following every other `diagram` scene in this course. Beat 1 says out loud that nothing here is a mesh.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`. The features this scene would want anchors for are the junctions of the ring, and BOTH the feature and its parent are missing — there is no vessel mesh to be a parent and no vessel mesh to be a witness, so neither `--contact` nor `--extreme` has anything to operate on. Nothing was placed by eye.",
+    "CONSISTENCY WITH THE REST OF THE COURSE WAS CHECKED AGAINST THE FILES, NOT FROM MEMORY. THE PUPIL RULE for the third nerve — parasympathetic fibres on the outside, so compression involves the pupil first and microvascular infarction spares it — is stated in `cranial-nerves__cranial-nerve-courses` and in `cranial-nerves__cn-function-testing`, and this scene states it in the same terms and names the posterior communicating aneurysm those two scenes already name as its cause; the three files were read against each other this run and agree. The CAVERNOUS SINUS is named here only as somewhere the internal carotid passes on its way up, and its contents are left to `cranial-nerve-courses`, which owns them, rather than restated. This scene does NOT state arterial TERRITORIES — which artery supplies which cortex, and what a middle cerebral stroke looks like — because `Anterior circulation` and `Posterior circulation` own those, and duplicating them here would create a second copy to drift; the middle cerebral is named here only for the structural fact that it is not part of the ring.",
+    "TWO STATEMENTS ARE DELIBERATELY BOUNDED. The completeness of the circle is given as 'present in well under half of people' rather than as a single percentage, because published figures vary widely with the definition of hypoplasia and the imaging modality, and a precise-looking number would be false precision; the teaching point is that incompleteness is common, not what the figure is. And the collateral argument is bounded explicitly to SLOW occlusion — the scene says in the card and again in beat 3 that the ring protects against stenosis and not against embolism, stated twice deliberately because the unqualified version is the commonest way this fact is remembered wrongly.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `vasculature` and `location` for `Circle of Willis`. Beat 1 is `location` — where the three inflows arrive on the base of the brain — and beats 2, 3 and 4 are `vasculature`. Both required views are covered and neither is padded; no `mechanism` beat was authored, although beat 3 is an argument about flow, because the curriculum asks for `mechanism` under `Anterior circulation` and that is where the territory-and-deficit reasoning belongs.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Circle of Willis`, spelled as CURRICULUM.json spells it. `Anterior circulation` and `Posterior circulation` are NOT claimed although both are named in beat 1, because this scene teaches the ANASTOMOSIS and those two own the territories; both remain visible as unauthored. `Dural venous sinuses` is not claimed and is untouched.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch, and all four beats are hollow for want of ARTWORK. Prioritise this topic as follows: no scene in Blood Supply of the Brain can be improved by any mesh currently on disk, because the catalog contains no intracranial vessel at all — this is a pure fetch-then-author request at the catalog level, unlike Cranial Nerves where a skull base is already delivered and one beat could be re-moded today."
+  ]
+}

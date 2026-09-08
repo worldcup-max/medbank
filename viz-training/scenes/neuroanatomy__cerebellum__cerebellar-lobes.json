@@ -1,0 +1,447 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__cerebellum__cerebellar-lobes",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Cerebellum",
+  "structure": "Cerebellar lobes",
+  "covers": [
+    "Cerebellar lobes"
+  ],
+  "learning_goal": "Place the cerebellum in the posterior fossa behind the brainstem and under the tentorium, divide it the two ways that matter — the three lobes separated by two fissures, and the three longitudinal zones from the midline outwards — recognise that the lobes are the older division and the zones are the one that predicts the clinical picture, and use both to explain why a midline tumour makes a child fall over while a hemisphere stroke makes an adult miss a target on one side.",
+  "status": "ready",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-02",
+    "audited_at": "2026-09-02",
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
+  },
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "cerebellum",
+      "posterior fossa",
+      "ataxia",
+      "paediatric brain tumour",
+      "stroke",
+      "neuroimaging orientation"
+    ],
+    "terms": [
+      "cerebellum",
+      "cerebellar lobes",
+      "anterior lobe",
+      "posterior lobe",
+      "flocculonodular lobe",
+      "primary fissure",
+      "posterolateral fissure",
+      "horizontal fissure",
+      "vermis",
+      "paravermal zone",
+      "intermediate zone",
+      "cerebellar hemisphere",
+      "vestibulocerebellum",
+      "archicerebellum",
+      "spinocerebellum",
+      "palaeocerebellum",
+      "cerebrocerebellum",
+      "neocerebellum",
+      "folia",
+      "arbor vitae",
+      "cerebellar cortex",
+      "cerebellar tonsil",
+      "tonsillar herniation",
+      "posterior fossa",
+      "tentorium cerebelli",
+      "fourth ventricle",
+      "middle cerebellar peduncle",
+      "truncal ataxia",
+      "gait ataxia",
+      "limb ataxia",
+      "dysmetria",
+      "intention tremor",
+      "dysdiadochokinesia",
+      "nystagmus",
+      "medulloblastoma",
+      "pilocytic astrocytoma",
+      "Dandy-Walker malformation",
+      "Chiari malformation",
+      "alcoholic cerebellar degeneration",
+      "PICA infarct"
+    ]
+  },
+  "camera": {
+    "framing": "posterior",
+    "autoRotate": 0.004,
+    "initialYaw": 0.4
+  },
+  "structures": [
+    {
+      "key": "cerebellum",
+      "name": "cerebellum",
+      "label": "Cerebellum",
+      "role": "primary",
+      "group": "Cerebellum",
+      "layer": "organ",
+      "color": "#8fa8c8",
+      "refs": {
+        "bodyparts3d": "FMA67944"
+      },
+      "approx": {
+        "shown_as": "cerebellum",
+        "detail": "anterior, posterior and flocculonodular lobes"
+      },
+      "terms": [
+        "cerebellum",
+        "cerebellar hemisphere",
+        "vermis",
+        "anterior lobe",
+        "posterior lobe",
+        "flocculonodular lobe",
+        "folia",
+        "arbor vitae",
+        "cerebellar tonsil"
+      ],
+      "narration": "ONE UNDIVIDED MESH, and the only cerebellar entry in the catalog — the whole organ, both hemispheres and the vermis between them, with its folia on the surface. Every division this scene teaches is inside it and none can be lit on its own, so the scene is marked as an approximation on this structure and each beat says which division it is describing rather than showing. What the mesh does give you is real and worth having: the size and shape of the organ, its position behind the brainstem and below the occipital lobes, the transverse folia that distinguish it from cerebral gyri at a glance, and the surfaces it presents to the fourth ventricle in front and the skull behind."
+    },
+    {
+      "key": "v4",
+      "name": "fourth ventricle",
+      "label": "Fourth ventricle",
+      "role": "part",
+      "group": "Cerebellum",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78469"
+      },
+      "terms": [
+        "fourth ventricle",
+        "roof of fourth ventricle",
+        "nodule",
+        "vermis",
+        "hydrocephalus"
+      ],
+      "narration": "The cavity the cerebellum roofs, and the reason a cerebellar mass is an emergency rather than merely a disability. The anterior surface of the cerebellum forms the back wall and roof of this tent, with the nodule of the vermis pressing into it from behind. Anything growing in the vermis therefore occludes the ventricle early — long before it has grown large — and the presentation is the headache and vomiting of obstructive hydrocephalus rather than clumsiness. The nodule itself has no mesh; the ventricle does, so the relation can be shown even though the part cannot."
+    },
+    {
+      "key": "pons",
+      "name": "pons",
+      "label": "Pons",
+      "role": "context",
+      "group": "Brainstem in front",
+      "layer": "organ",
+      "color": "#c9a27a",
+      "refs": {
+        "bodyparts3d": "FMA67943"
+      },
+      "terms": [
+        "pons",
+        "middle cerebellar peduncle",
+        "pontocerebellar fibres",
+        "cerebellopontine angle"
+      ],
+      "narration": "The segment the cerebellum is bolted to in front, by much the largest of its three peduncles. The middle cerebellar peduncle carries pontine fibres that crossed the midline, so each cerebellar hemisphere receives from the OPPOSITE cerebral cortex — and since a cerebellar hemisphere governs the limbs of its own side, the two crossings cancel and cortex and cerebellum end up working on the same limbs. No cerebellar peduncle exists as a mesh, so read it as the taper where the pons meets this surface. The pons has its own scene."
+    },
+    {
+      "key": "medulla",
+      "name": "medulla oblongata",
+      "label": "Medulla oblongata",
+      "role": "context",
+      "group": "Brainstem in front",
+      "layer": "organ",
+      "color": "#a87f5d",
+      "refs": {
+        "bodyparts3d": "FMA62004"
+      },
+      "terms": [
+        "medulla oblongata",
+        "inferior cerebellar peduncle",
+        "cerebellar tonsil",
+        "tonsillar herniation",
+        "posterior inferior cerebellar artery"
+      ],
+      "narration": "The segment below and in front, joined by the inferior cerebellar peduncle, which brings in spinal and vestibular input and again has no mesh. Its clinical importance to this scene is the tonsils: they lie on either side of the medulla at the bottom of the cerebellum, immediately above the foramen magnum, so a posterior fossa mass pushes them down onto it. The medulla has its own scene, and the coning mechanism is taught there."
+    },
+    {
+      "key": "peduncle",
+      "name": "peduncle of midbrain",
+      "label": "Midbrain — peduncle",
+      "role": "context",
+      "group": "Brainstem in front",
+      "layer": "organ",
+      "color": "#b98f6d",
+      "refs": {
+        "bodyparts3d": "FMA62394"
+      },
+      "terms": [
+        "peduncle of midbrain",
+        "superior cerebellar peduncle",
+        "dentatothalamic",
+        "cerebellar outflow"
+      ],
+      "narration": "Shown to give the cerebellum's output a visible destination. The superior cerebellar peduncle — the outflow, and the only one of the three that is mainly efferent — leaves the front of the cerebellum, crosses the midline in the midbrain, and reaches the thalamus and then the motor cortex. That decussation is the second of the two crossings that make cerebellar signs ipsilateral. The peduncle itself has no mesh; the midbrain has its own scene."
+    },
+    {
+      "key": "aqueduct",
+      "name": "cerebral aqueduct",
+      "label": "Cerebral aqueduct",
+      "role": "context",
+      "group": "Brainstem in front",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78467"
+      },
+      "terms": [
+        "cerebral aqueduct",
+        "fourth ventricle",
+        "obstructive hydrocephalus"
+      ],
+      "narration": "The inlet above the fourth ventricle, ghosted. It is here for one clinical reason: it shows that the cavity the cerebellum compresses is fed from a channel too narrow to buffer anything, so the fluid backs up into the third and lateral ventricles the moment the fourth is squeezed."
+    },
+    {
+      "key": "central_canal",
+      "name": "central canal of spinal cord",
+      "label": "Central canal",
+      "role": "context",
+      "group": "Brainstem in front",
+      "layer": "organ",
+      "color": "#2f6fb0",
+      "refs": {
+        "bodyparts3d": "FMA78497"
+      },
+      "terms": [
+        "central canal of spinal cord",
+        "obex",
+        "fourth ventricle"
+      ],
+      "narration": "The thread below the obex, shown so the fourth ventricle is seen to have a floor-end as well as a roof. Almost no fluid goes down it; the outlet is sideways through apertures the catalog does not hold."
+    },
+    {
+      "key": "occiput",
+      "name": "occipital bone",
+      "label": "Occipital bone (posterior fossa)",
+      "role": "context",
+      "group": "Bone around",
+      "layer": "bone",
+      "color": "#ddd3c0",
+      "refs": {
+        "bodyparts3d": "FMA52735"
+      },
+      "approx": {
+        "shown_as": "occipital bone",
+        "detail": "posterior cranial fossa and foramen magnum"
+      },
+      "terms": [
+        "posterior cranial fossa",
+        "occipital bone",
+        "foramen magnum",
+        "tentorium cerebelli",
+        "tonsillar herniation"
+      ],
+      "narration": "The box. The cerebellum sits in the posterior cranial fossa, floored and backed by this bone and roofed by the tentorium cerebelli, which is dura and has no mesh in this catalog. That roof matters more than it sounds: the posterior fossa is a small compartment with rigid walls and only two exits — up through the tentorial notch and down through the foramen magnum — so it tolerates a mass far worse than the supratentorial space does. The whole bone is lit because no mesh divides the fossa or the foramen from the rest of it, which is why this structure is marked as an approximation."
+    },
+    {
+      "key": "atlas",
+      "name": "atlas",
+      "label": "Atlas (C1)",
+      "role": "context",
+      "group": "Bone around",
+      "layer": "bone",
+      "color": "#cfc5b2",
+      "refs": {
+        "bodyparts3d": "FMA12519"
+      },
+      "terms": [
+        "atlas",
+        "foramen magnum",
+        "cerebellar tonsil",
+        "Chiari malformation"
+      ],
+      "narration": "The first vertebra, marking the level below the foramen magnum. It is here as the second bony witness to where the exit is: in a Chiari I malformation the tonsils descend more than 5 mm below the plane of the FORAMEN MAGNUM — McRae’s line, on the occipital bone — and that is the measurement, made on a sagittal scan against that one bony landmark. The atlas is a useful second landmark on the image but is not what the descent is measured against; tonsils reaching past the C1 arch mean more marked disease, not the diagnostic threshold."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "A small organ in a small box",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cerebellum",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cerebellum",
+          "to": "occiput",
+          "kind": "boundary"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cerebellum",
+          "to": "pons",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Behind the brainstem, below the occipital lobes, in the posterior cranial fossa: bone behind and below, tentorium above, brainstem in front, and the fourth ventricle as the gap between the cerebellum and that brainstem. It holds about a tenth of the brain's volume and more than half of its neurons, and its surface is folded into fine transverse folia rather than the coarse gyri of the cerebrum — that texture alone identifies it on any image. Two structural facts to carry forward. It is attached only in front, by three peduncles on each side, so everything that goes in or out passes through the brainstem. And its compartment is small and rigid with two narrow exits, which is why a lesion here presents by pressure at least as often as by loss of function."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Two fissures, three lobes",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cerebellum",
+          "intensity": 1
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cerebellum",
+          "to": "v4",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "The classical division, and the one the curriculum names. Two fissures cut the organ into three lobes. The primary fissure is on the upper surface and separates the anterior lobe in front from the posterior lobe behind it. The posterolateral fissure is underneath, and separates the small flocculonodular lobe — flocculus on each side, nodule in the midline — from everything else. The posterior lobe is much the largest of the three, the flocculonodular much the smallest and much the oldest. Be exact about what is on screen: the mesh is one undivided block, so neither fissure and none of the three lobes is lit here. They are named against the surface, and the superior and inferior views are given so the two fissures can at least be located in the right place on the right face — the primary fissure on the upper surface, the posterolateral fissure below. The one relation this beat can genuinely show is the flocculonodular lobe's, because the nodule presses into the fourth ventricle and the ventricle IS drawn."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The other division — three strips from the midline out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cerebellum",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cerebellum",
+          "to": "medulla",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "Now cut the same organ the other way, longitudinally, and you get the division that actually predicts the clinical picture. The vermis is the narrow midline ridge — the word means worm and the folia running across it look like one. Beside it on each side is the paravermal or intermediate zone, a strip a centimetre or so wide. Lateral to that is the hemisphere proper, much the largest. Each strip has its own output nucleus and its own job: vermis for trunk, posture and eye movement; intermediate zone for the limbs during a movement, correcting it as it happens; hemisphere for planning a movement before it starts. That is why the two divisions are not rivals. Lobes are the developmental and comparative story, zones are the functional one, and the exam question about a falling child versus a missing hand is a question about zones. As in beat 2, none of the three strips is a separate mesh; the vermis is nameable on the drawn surface as the midline ridge and the others are described."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "Inside, and the three functional divisions the sections show",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cerebellum",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cerebellum",
+          "to": "v4",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "A midline cut shows the arrangement that gives the section its name: cortex over the whole folded surface, white matter branching into every folium in the pattern called the arbor vitae, and the deep nuclei buried in that white matter near the roof of the fourth ventricle. Now overlay the third naming system, the one by input and age, because it maps onto the lobes almost exactly and students meet the three sets as though they were unrelated. The vestibulocerebellum IS the flocculonodular lobe — oldest, vestibular input, balance and eye movement. The spinocerebellum is the vermis and intermediate zone — spinal input, posture and limb correction. The cerebrocerebellum is the lateral hemisphere — cortical input by way of the pontine nuclei, and it is the part that has expanded in primates. Three lobes, three zones, three functional divisions: two of those systems are cuts through the same organ in different planes, and the third is the reason both exist. Nothing in this beat is separately drawn — cortex, white matter and the deep nuclei are all inside one mesh, and the deep nuclei have no mesh in the catalog at all. The cut face is real; the labels on it are a map."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Where the lesion is, and what the patient does",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": -0.15
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "cerebellum",
+            "v4"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cerebellum",
+          "to": "atlas",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "Read the zones back as syndromes. A midline lesion — the vermis and flocculonodular lobe — gives truncal and gait ataxia with nystagmus, and the patient can be near-normal lying down and unable to sit unsupported: the classic child with a medulloblastoma, wide-based and vomiting, because the same mass blocks the fourth ventricle. Chronic alcohol damages the anterior vermis selectively and produces the same gait with the arms comparatively spared. A hemisphere lesion — tumour, or a PICA or superior cerebellar artery infarct — gives limb ataxia on the SAME side as the lesion: dysmetria, intention tremor, dysdiadochokinesia, all ipsilateral, because the two crossings cancel. That is the single most examined fact about this organ and it follows from the anatomy in the pons and midbrain cards rather than from memory. Then the pressure story, which is what actually kills. The posterior fossa is small and rigid, so a mass here obstructs the fourth ventricle early and drives the tonsils down through the foramen magnum onto the medulla — the bones bounding both exits are lit in this beat. Cerebellar signs are what brings the patient in; hydrocephalus and coning are what the clock is running on."
+    }
+  ],
+  "gaps": [
+    "THE CEREBELLUM IS ONE UNDIVIDED MESH, AND THIS SCENE'S SUBJECT IS ITS SUBDIVISIONS. FMA67944 is the only cerebellar entry in the 934-entry catalog. Searched cerebell, cerebellar, vermis, vermal, floccul, nodul, tonsil, lobe, lobul, fissur, primary fissure, horizontal, declive, culmen, uvula, pyramid, tuber, arbor, folia, folium, dentate, emboliform, globose, fastigi, interposit, cortex, grey, gray. Hits: `lobe` returns only lung, thymus and occipital-lobe entries; `lobul` returns the two superior parietal lobules; `pyramid` returns the two pyramidalis ABDOMINAL muscles and `tuber` returns FMA62327 tuber cinereum in the hypothalamus — three near-misses that a substring search would wrongly count, the same trap the medulla scene recorded. Every other term returns nothing. So no lobe, no fissure, no zone, no deep nucleus and no tonsil exists.",
+    "THE ROUTING DECISION, STATED SO A LATER RUN DOES NOT HAVE TO GUESS. This scene stays at `3d_anatomy`, its first preferred mode, rather than falling to `diagram`, and it is a close call that could reasonably be revisited. For it: the organ's position, size, folial texture, relation to the fourth ventricle it roofs, and the two bony exits of its fossa are all genuinely rendered, and beats 1 and 5 — location and the pressure syndromes — are fully drawn. Against it: beats 2, 3 and 4 name three lobes, two fissures, three zones and three deep-nucleus groups on a block that shows none of them, which is more named-not-drawn content than any other 3D scene in this course. `approx {shown_as, detail}` is set on the cerebellum for exactly this reason, so the player shows it in amber and says which body is really lit. If a run later judges that a labelled drawing teaches beats 2 to 4 better than an amber block does, the honest move is to re-route to `diagram` and keep this scene as the location half — `deferred_modes` holds `diagram` on the record for that.",
+    "NO CEREBELLAR PEDUNCLE OF ANY KIND. Searched peduncle, brachium pontis, brachium conjunctivum, restiform, crus cerebelli, inferior/middle/superior cerebellar. The catalog's only `peduncle` is FMA62394, the midbrain's, and the only `brachium` entries are the four brachia of the colliculi, FMA73461-73464, which are midbrain roof and not cerebellar. All three peduncles are therefore named against the taper where the cerebellum meets the brainstem. This is the same absence recorded in the pons, medulla and midbrain scenes, re-verified today rather than quoted from them, and it costs the NEXT structure in this topic — Cerebellar peduncles — its entire subject, so that one should expect to route to `diagram`.",
+    "NO TENTORIUM CEREBELLI AND NO MENINGES AT ALL. Searched tentor, dura, mater, menin, falx, arachnoid, pia, sinus. The only hit across the whole catalog is FMA4706 coronary sinus, in the heart — identical to the finding already recorded in the Meninges scene. The tentorium is the roof of the box beat 1 describes, so the compartment is bounded on screen by bone below and behind and by nothing above; the narration says so rather than letting the open top pass unremarked.",
+    "NO VESSEL, SO THE PICA AND SUPERIOR CEREBELLAR TERRITORIES OF BEAT 5 ARE NAMED AND NEVER DRAWN. Searched posterior inferior cerebellar, PICA, superior cerebellar, AICA, anterior inferior cerebellar, basilar, vertebral artery, cerebellar artery. Nothing. The only vessels reaching anywhere near the head are the two common carotids, FMA3941 and FMA4058, which end in the neck. Same highest-value fetch as the pons and medulla scenes identified: a vertebrobasilar tree would let this course draw territory instead of describing it.",
+    "THE FORAMEN MAGNUM AND THE POSTERIOR FOSSA ARE BOTH SHOWN AS THE WHOLE OCCIPITAL BONE, MARKED AS AN APPROXIMATION, AND NEITHER WAS DERIVED. FMA52735 is undivided and is the only occipital entry. The foramen was rejected before measuring for the same definitional reason the medulla scene recorded — derive-landmark.mjs emits a point on a surface and a foramen is a closed curve bounding a hole, so any point it emitted would land on bone beside the hole. The fossa is a broad concave surface whose only candidate witness is the cerebellum itself; a `--contact --area` between them would return the middle of the contact patch, which is a real measurement of the wrong thing, since the fossa is defined by its rim and not by where the organ happens to touch it. The atlas is drawn as a second bony witness to the level instead. Nothing was placed by eye.",
+    "NO ANCHORS WERE AUTHORED. Besides the two rejections above, the primary and posterolateral fissures were considered and rejected: they are LINES across a surface, not points, and their witness would have to be a lobe mesh that does not exist. The cerebellar tonsil was also considered — it is the one feature here with real clinical weight and a plausible witness in the medulla or the foramen rim — and rejected because it is a paired swelling on a mesh that has no side, so a `--contact` against the medulla would return one point on the midline between two tonsils, which is a measured coordinate for something that is not there. That is precisely the class of anchor the corpus has been burned by, so it is recorded here rather than derived.",
+    "SIDES: NO PAIRED MESH APPEARS IN THIS SCENE. Every structure is unpaired and midline — cerebellum FMA67944, fourth ventricle FMA78469, pons FMA67943, medulla FMA62004, peduncle of midbrain FMA62394, cerebral aqueduct FMA78467, central canal FMA78497, occipital bone FMA52735, atlas FMA12519 — so no left/right check applies. Note the same tension the medulla scene records: beat 5 is entirely lateralised in words (ipsilateral limb ataxia, one tonsil or both) while the geometry has no side, so laterality must be read from the narration and cannot be read off the screen.",
+    "THE BRAINSTEM SEGMENTS, THE VENTRICLES AND THE OTHER THREE CEREBELLUM STRUCTURES ARE DELIBERATELY NOT IN covers[]. `covers[]` holds exactly one entry, `Cerebellar lobes`, spelled as CURRICULUM.json spells it. Cerebellar peduncles, Deep cerebellar nuclei and Cerebellar function are the other three structures of this topic and each is named here only where a lobe cannot be explained without it — the peduncles in beats 1 and 3, the deep nuclei in beat 4 — with the teaching left to their own scenes.",
+    "CURRICULUM VIEWS: `location` and `cross_section` are both required and both present — `location` at beats 1, 2 and 3, `cross_section` at beats 4 and 5.",
+    "DRAWABILITY: all nine models are in meshes-lite/, so every beat renders. As with the pons and the medulla, the hollowness is granularity rather than delivery, and here it is worse than in either: beats 2, 3 and 4 carry the scene's whole named content and light one amber block plus one ventricle. No amount of fetching fixes it — only a segmented cerebellum would, and the catalog has no cerebellar entry beyond the whole organ. A segmented cerebellum is the second most valuable fetch for this course after a vertebrobasilar arterial tree, and this scene plus the three others in this topic are what it would unlock."
+  ]
+}

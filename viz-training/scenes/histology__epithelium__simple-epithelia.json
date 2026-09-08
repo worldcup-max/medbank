@@ -1,0 +1,389 @@
+{
+  "schema": 2,
+  "id": "histology__epithelium__simple-epithelia",
+  "mode": "microscopic",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Histology",
+  "topic": "Epithelium",
+  "structure": "Simple epithelia",
+  "covers": [
+    "Simple epithelia"
+  ],
+  "learning_goal": "Classify any simple epithelium from a section by asking two questions in a fixed order — how many layers, then what shape are the cells at the free surface — and then use the shape to predict the job, so that squamous means exchange, cuboidal means absorption and secretion in a duct or tubule, and columnar means a busy absorptive or secretory surface. Then apply the two traps that make students misclassify: a tangential cut through a simple epithelium looks stratified, and pseudostratified epithelium looks stratified and is not.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-04"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "histology",
+      "epithelium",
+      "tissue classification",
+      "microscopy",
+      "slide reading"
+    ],
+    "terms": [
+      "simple epithelium",
+      "simple squamous epithelium",
+      "simple cuboidal epithelium",
+      "simple columnar epithelium",
+      "pseudostratified columnar epithelium",
+      "endothelium",
+      "mesothelium",
+      "basement membrane",
+      "basal lamina",
+      "apical surface",
+      "basal surface",
+      "lateral surface",
+      "polarity",
+      "microvilli",
+      "brush border",
+      "striated border",
+      "cilia",
+      "goblet cell",
+      "nucleus position",
+      "alveolus",
+      "glomerulus",
+      "Bowman's capsule",
+      "proximal convoluted tubule",
+      "collecting duct",
+      "small intestine",
+      "gallbladder",
+      "uterine tube",
+      "respiratory epithelium",
+      "trachea",
+      "tangential section",
+      "oblique section",
+      "metaplasia",
+      "Barrett's oesophagus",
+      "ciliary dyskinesia",
+      "Kartagener syndrome"
+    ]
+  },
+  "camera": {
+    "framing": "cross_section"
+  },
+  "structures": [
+    {
+      "key": "the_question",
+      "label": "The two questions, asked in this order",
+      "role": "context",
+      "group": "How to classify",
+      "layer": "tissue",
+      "color": "#e8e2d4",
+      "terms": [
+        "epithelium",
+        "simple epithelium",
+        "stratified epithelium",
+        "classification",
+        "apical surface",
+        "basement membrane"
+      ],
+      "narration": "Every epithelium in the body is named by the same two questions and the order matters. FIRST: how many layers of cells sit between the free surface and the basement membrane? One layer is simple; more than one is stratified. SECOND, and only then: what shape are the cells at the FREE SURFACE? Flat is squamous, as tall as wide is cuboidal, taller than wide is columnar. Asking shape first is the commonest way to get the answer wrong, because in a stratified epithelium the basal cells are a different shape from the surface cells and only the surface counts. Find the basement membrane, count up from it to the surface, then look at the top."
+    },
+    {
+      "key": "basement_membrane",
+      "label": "The basement membrane — where counting starts",
+      "role": "primary",
+      "group": "How to classify",
+      "layer": "tissue",
+      "color": "#b08968",
+      "terms": [
+        "basement membrane",
+        "basal lamina",
+        "lamina densa",
+        "lamina lucida",
+        "reticular lamina",
+        "type IV collagen",
+        "laminin",
+        "PAS stain",
+        "avascular",
+        "carcinoma in situ"
+      ],
+      "narration": "A thin sheet of extracellular matrix beneath every epithelium, and the line every count starts from. On a routine H&E it is often invisible and is inferred from where the cells stop; PAS stains it magenta and makes it explicit. It matters far beyond classification for two reasons. Epithelium is avascular — nothing crosses this sheet but diffusion, which is why an epithelium's thickness is limited by how far oxygen will travel. And it is the boundary that defines invasion: a malignant epithelial tumour that has not crossed it is carcinoma in situ, and the same tumour a millimetre later, through it, is invasive carcinoma with access to vessels and lymphatics."
+    },
+    {
+      "key": "polarity",
+      "label": "Polarity — three surfaces, three different memberships",
+      "role": "primary",
+      "group": "How to classify",
+      "layer": "tissue",
+      "color": "#e69138",
+      "terms": [
+        "polarity",
+        "apical surface",
+        "lateral surface",
+        "basal surface",
+        "microvilli",
+        "cilia",
+        "tight junction",
+        "hemidesmosome",
+        "nucleus position"
+      ],
+      "narration": "An epithelial cell is not the same on all sides, and this single fact does more diagnostic work than any list. The APICAL surface faces the lumen or the outside world and carries whatever the cell does there — microvilli for absorption, cilia for movement. The LATERAL surfaces face the neighbours and carry the junctions that make the sheet a seal. The BASAL surface faces the basement membrane and anchors to it. Polarity is also visible at the lowest magnification through the nucleus: in a tall absorptive cell the nucleus sits basally, pushed down by the machinery above it, and a row of nuclei all at the same level near the base is one of the quickest confirmations that an epithelium is simple columnar rather than something else."
+    },
+    {
+      "key": "simple_squamous",
+      "label": "Simple squamous — one flat layer, built for exchange",
+      "role": "primary",
+      "group": "The three simple types",
+      "layer": "tissue",
+      "color": "#45818e",
+      "terms": [
+        "simple squamous epithelium",
+        "endothelium",
+        "mesothelium",
+        "alveolus",
+        "type I pneumocyte",
+        "Bowman's capsule",
+        "loop of Henle",
+        "pleura",
+        "peritoneum",
+        "pericardium",
+        "diffusion"
+      ],
+      "narration": "A single layer of flattened cells, so thin that at low power the only sign of it is a row of nuclei bulging into the space, each nucleus flattened with the cell. The shape is the function: where the barrier's job is to let things across, the barrier is made as thin as it can be. Hence the alveolus, where gas crosses in fractions of a micrometre; the glomerulus and the thin limb of the loop of Henle; and the linings that must be slippery rather than protective. Two of those linings have their own names and both are simple squamous: ENDOTHELIUM lines blood and lymphatic vessels, MESOTHELIUM lines the pleural, pericardial and peritoneal cavities. They are not different tissues, and knowing that is what makes mesothelioma a tumour of a serosal lining rather than a mystery."
+    },
+    {
+      "key": "simple_cuboidal",
+      "label": "Simple cuboidal — one layer, as tall as it is wide",
+      "role": "primary",
+      "group": "The three simple types",
+      "layer": "tissue",
+      "color": "#6aa84f",
+      "terms": [
+        "simple cuboidal epithelium",
+        "proximal convoluted tubule",
+        "distal convoluted tubule",
+        "collecting duct",
+        "thyroid follicle",
+        "germinal epithelium of ovary",
+        "brush border",
+        "duct",
+        "secretion",
+        "absorption"
+      ],
+      "narration": "One layer of cells about as tall as they are wide, with a round central nucleus — the roundness and the central position are the fastest confirmation. This is the default epithelium of small ducts and tubules everywhere: the kidney tubules, the ducts of exocrine glands, the surface of the ovary, and the follicles of the thyroid where the cells surround stored colloid. It does moderate work in both directions, absorbing and secreting. On a kidney section it also teaches a distinction worth having early: the proximal convoluted tubule has a brush border of microvilli that blurs its lumen and stains deeply, while the distal tubule has a crisp clear lumen and more nuclei round it — same class of epithelium, different apical specialisation, and the specialisation is what tells them apart."
+    },
+    {
+      "key": "simple_columnar",
+      "label": "Simple columnar — one layer, taller than wide",
+      "role": "primary",
+      "group": "The three simple types",
+      "layer": "tissue",
+      "color": "#8e7cc3",
+      "terms": [
+        "simple columnar epithelium",
+        "microvilli",
+        "brush border",
+        "striated border",
+        "goblet cell",
+        "small intestine",
+        "colon",
+        "stomach",
+        "gallbladder",
+        "uterine tube",
+        "ciliated columnar",
+        "basal nucleus",
+        "Barrett's oesophagus"
+      ],
+      "narration": "One layer of tall cells with oval nuclei lined up near the base. Height buys internal volume, so this is the epithelium of surfaces doing sustained absorptive or secretory work: the whole of the gut from stomach to rectum, the gallbladder, and — ciliated, with a different job — the uterine tube. Two apical specialisations decide which subtype you are looking at. Microvilli give the striated or brush border of the intestine, a fringe that multiplies surface area many times over. Cilia, longer and visibly separate, move the surface film, which is what the uterine tube uses to carry the oocyte. Goblet cells are scattered through it: single-celled mucous glands, pale and rounded because their mucin dissolves out in processing, and their number rises steadily from duodenum to colon. This is also the epithelium at the centre of Barrett's oesophagus, where acid reflux replaces the oesophagus's stratified squamous lining with an intestinal-type columnar one — metaplasia, a change of epithelial class, and a premalignant one."
+    },
+    {
+      "key": "pseudostratified",
+      "label": "Pseudostratified — the one that lies about its layers",
+      "role": "primary",
+      "group": "The traps",
+      "layer": "tissue",
+      "color": "#cc0000",
+      "terms": [
+        "pseudostratified columnar epithelium",
+        "pseudostratified ciliated columnar epithelium",
+        "respiratory epithelium",
+        "trachea",
+        "bronchus",
+        "basal cell",
+        "goblet cell",
+        "cilia",
+        "mucociliary escalator",
+        "epididymis",
+        "stereocilia",
+        "ciliary dyskinesia",
+        "Kartagener syndrome",
+        "smoking metaplasia"
+      ],
+      "narration": "Every cell reaches the basement membrane; not every cell reaches the surface. The nuclei therefore sit at several different heights and the epithelium LOOKS stratified, but it is simple, and the definition — one layer, because all cells touch the basement membrane — is what the name is protesting about. Two places to know it. The airway, from nose to bronchi, is pseudostratified ciliated columnar with goblet cells: mucus on top, cilia beating it mouthwards, the mucociliary escalator. Lose the cilia's function and you get the recurrent sinusitis and bronchiectasis of primary ciliary dyskinesia, with situs inversus in Kartagener's; poison them with cigarette smoke and the epithelium first loses cilia, then converts to stratified squamous altogether. The epididymis is the other, pseudostratified columnar with stereocilia — which are long microvilli, not cilia at all, and do not beat. That mis-naming is old and is not going to be fixed, so learn it as a name rather than as a fact."
+    },
+    {
+      "key": "tangential",
+      "label": "The tangential cut — the commonest reason for a wrong answer",
+      "role": "primary",
+      "group": "The traps",
+      "layer": "tissue",
+      "color": "#a64d79",
+      "terms": [
+        "tangential section",
+        "oblique section",
+        "plane of section",
+        "artefact",
+        "simple epithelium",
+        "stratified epithelium",
+        "basement membrane"
+      ],
+      "narration": "A section is a two-dimensional slice through a three-dimensional sheet, and if the knife passes obliquely through a curved simple epithelium it cuts a long shallow ramp through one layer of cells and prints several rows of nuclei — a simple epithelium that reads as stratified. This is not a rare artefact; on any tubular organ some part of the wall is cut obliquely. Three checks settle it. Look for a region of the same section cut perpendicularly, where the epithelium suddenly becomes one clean layer. Follow the basement membrane: if it runs obliquely across the field rather than parallel to the surface, the cut is oblique. And ask whether the surface cells and the deep cells differ in kind, because a truly stratified epithelium changes character from base to surface while a tangentially cut simple one does not. The general rule is worth stating once for the whole course: never classify a tissue from the worst-cut part of the slide."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "Two questions, in order",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How to classify"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "the_question",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "the_question",
+          "to": "basement_membrane",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "Start at the basement membrane and count upwards, then look at the shape of the cells at the top. One layer is simple and the shape at the surface names it: squamous, cuboidal or columnar. That is the whole classification, and every difficulty in this topic is a difficulty in seeing one of those two things rather than in knowing the scheme. Nothing on this screen is a model: this is drawn artwork of a section, because what is being taught is arrangement at the cellular scale and no surface mesh has cells in it."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Polarity — why the nucleus tells you where you are",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How to classify"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "polarity",
+            "basement_membrane"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Before the three types, one drawn cell with its three surfaces labelled: apical facing the lumen, lateral facing the neighbours, basal on the basement membrane. Two things follow that you will use on every slide. The apical specialisation — microvilli or cilia — tells you the job. And the position of the nucleus tells you the polarity at a magnification where you cannot yet see anything else: basally placed, evenly levelled nuclei mean a simple epithelium with tall cells, and nuclei at several heights mean either stratified or the pseudostratified impostor of beat 5."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "The three simple types, side by side",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three simple types"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "simple_squamous",
+            "simple_cuboidal",
+            "simple_columnar"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Three panels, one layer each, differing only in the height of the cell — and height is the variable that carries the meaning. Flat where the job is to let things across: alveolus, glomerulus, the lining of a vessel or a serous cavity. Cube-shaped where the job is moderate transport in a tube: kidney tubules, gland ducts, thyroid follicles. Tall where the job is sustained absorption or secretion and the cell needs volume to do it: stomach to rectum, gallbladder, uterine tube. Read left to right and the sequence is a graph of how much work the cell does against how thin the barrier can afford to be."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "What sits on top — microvilli, cilia and goblet cells",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three simple types"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "simple_columnar",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "simple_columnar",
+          "to": "polarity",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Same class, different apical surface, different organ. Microvilli, short and packed, give the intestinal brush border and multiply absorptive area; they are too small to resolve individually in the light microscope, which is why they appear as a stripe rather than as fringes. Cilia are longer, individually visible, and beat — the uterine tube and the airway use them to move a surface film. Goblet cells sit between the columnar cells as single-celled mucous glands, and their density rises from duodenum to colon. One diagnostic consequence to carry: a brush border in the kidney marks the proximal tubule and separates it from the distal at a glance, and goblet cells in an oesophageal biopsy are abnormal by definition and are the finding that makes it Barrett's."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Two ways a simple epithelium looks stratified",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The traps"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pseudostratified",
+            "tangential"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "tangential",
+          "to": "basement_membrane",
+          "kind": "boundary"
+        }
+      ],
+      "narration": "Both panels show several rows of nuclei and neither is stratified, and the two are distinguished by different evidence. In PSEUDOSTRATIFIED epithelium the tissue really is like that: every cell reaches the basement membrane, only the tall ones reach the surface, and the nuclei sit at staggered heights everywhere you look. It is the airway lining and the epididymis, and it is a real, named, reproducible appearance. In a TANGENTIAL CUT the tissue is not like that at all and the microscope is lying: the plane of section ramped through a curved single layer. The distinguishing test is to move across the slide — the pseudostratified appearance persists wherever the epithelium is cut cleanly, the tangential one resolves into a single layer as soon as the cut becomes perpendicular. Follow the basement membrane to tell which you have."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `microscopic`, ITS FIRST PREFERRED MODE, WHICH IS THE CORRECT ROUTING AND NOT A FALLBACK. The subject is the arrangement of cells at a scale two orders of magnitude below anything in the mesh catalog, so `3d_anatomy` is not a deferred option here and is deliberately not listed in `deferred_modes` — `diagram` is the only fallback, and it would be a downgrade of drawing style rather than of engine. The catalog was searched anyway rather than assumed, on the principle that a note is not evidence: epitheli, epithelium, mucosa, membrane, lamina, basement, cell, goblet, villus, microvillus, cilium, gland, duct, tubule, alveolus, follicle. It holds no tissue-level or cell-level entry of any kind; `lamina` returns FMA61975 lamina terminalis (the wall of the third ventricle) and `membrane` returns the interosseous membranes of forearm and leg. Nothing in the catalog is relevant at this scale and nothing ever will be.",
+    "STATUS IS `planned` AND NO ARTWORK EXISTS. THIS SCENE CANNOT BE SHOWN TO A STUDENT UNTIL IT IS DRAWN, AND IT IS THE FIRST HISTOLOGY SCENE IN THE CORPUS. Promote it when four drawings exist: (1) a single labelled epithelial cell showing apical, lateral and basal surfaces with the basement membrane beneath, for beats 1 and 2; (2) a three-panel comparison of simple squamous, cuboidal and columnar drawn to the SAME magnification, because beat 3's entire argument is relative cell height and panels normalised to equal height would teach the opposite of what the narration says; (3) an apical-specialisation panel showing a brush border, a ciliated border and a goblet cell on the same columnar outline, for beat 4; (4) a two-panel trap figure — pseudostratified with every cell reaching the basement membrane, beside a curved simple epithelium with an oblique cut plane drawn ACROSS it so the reader can see the ramp that produces the false layers. Drawing (4) is the one that cannot be substituted by a photomicrograph, because the point of it is the cut plane, which a photomicrograph cannot show.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, and no anchors were authored or are possible: `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/` and this scene has no parent mesh. Nothing was placed by eye. Beat 1 states out loud that nothing on screen is a model and why, so no beat asks a student to look for something absent.",
+    "SYSTEMIC FINDING, RECORDED HERE BECAUSE THIS IS THE FIRST SCENE OF A NEW COURSE AND SOMEBODY SHOULD DECIDE BEFORE THERE ARE FORTY-SIX OF THEM. Every non-3d scene in this corpus is `planned` and none has ever reached `ready`: 12 gross `diagram` scenes, 18 neuroanatomy `diagram` scenes and 28 embryology `sequence` scenes, 58 in all, written and unshippable. Embryology has been formally suspended for exactly this reason. Histology is 46 more scenes on the same non-3d path, and the only thing that distinguishes `microscopic` from the suspended `sequence` mode is that the spec calls the SVG engine 'existing' for the former. If that engine can in fact render a `microscopic` scene today, this scene should be tested against it before the other 45 are written. If it cannot, Histology should be suspended alongside Embryology rather than authored into the same queue. This is an authoring-cursor policy question and is above what one run should settle alone; it is stated here and in RUNLOG.md for 2026-09-04.",
+    "CURRICULUM VIEWS: the entry requires `cross_section` only, and all five beats carry it, correctly — every statement in this scene is about what a section through the sheet shows, and there is no view of an epithelium from outside that would teach any of it.",
+    "TWO STATEMENTS ARE DELIBERATELY BOUNDED, so that a later run does not read them as omissions and 'fix' them into errors. First, the classification is given as simple versus stratified with the three shapes, and TRANSITIONAL and STRATIFIED epithelia are named only where a contrast needs them — they belong to `Stratified epithelia`, the next structure in this topic, which is authored in the same run as this one and must not be contradicted. Second, stereocilia are stated to be long microvilli that do not beat; that is correct and is the reason the name is called out as a misnomer rather than quietly used.",
+    "OVERLAP WITH `histology__epithelium__stratified-epithelia` WAS SETTLED WHEN BOTH WERE AUTHORED, IN THE SAME RUN, AND THE DIVISION IS: this scene owns the classification scheme itself, the basement membrane, polarity, and everything with ONE cell layer including the pseudostratified impostor; that scene owns everything with more than one layer, including transitional epithelium and the surface-cell rule for naming a stratified epithelium. Both scenes state the two-question method and they state it in the same words on purpose — a student meets it twice and must not meet two versions of it. If either is ever edited, the other must be checked in the same edit.",
+    "DRAWABILITY: ZERO models referenced, so nothing to fetch and nothing a mesh delivery could improve. Whoever prioritises fetches should read the Histology course as an ARTWORK request, not a mesh request — as the Spinal Cord topic of Neuroanatomy already records for itself.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Simple epithelia`, spelled as `CURRICULUM.json` spells it. Cell junctions are named in the polarity card because a lateral surface cannot be described without them, and are NOT claimed: `Cell junctions` is a separate structure in this same topic with its own scene to come."
+  ]
+}

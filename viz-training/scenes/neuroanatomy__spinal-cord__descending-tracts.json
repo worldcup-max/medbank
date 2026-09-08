@@ -1,0 +1,362 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__spinal-cord__descending-tracts",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Spinal Cord",
+  "structure": "Descending tracts",
+  "covers": [
+    "Descending tracts"
+  ],
+  "learning_goal": "Follow the corticospinal tract from the precentral gyrus to the anterior horn, naming every place it can be interrupted and what each interruption looks like, and fix the pyramidal decussation in the medulla as the point that decides whether a lesion gives contralateral or ipsilateral weakness. Then use the extrapyramidal tracts — rubrospinal, vestibulospinal, reticulospinal, tectospinal — to explain the things a pure corticospinal account cannot: why an upper motor neuron lesion produces spasticity rather than flaccidity, why a forehead is spared in an upper motor neuron facial palsy, and why decorticate and decerebrate posturing differ.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-03",
+    "audited_at": "2026-09-03",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "spinal cord",
+      "descending tracts",
+      "motor pathways",
+      "upper motor neuron"
+    ],
+    "terms": [
+      "descending tracts",
+      "corticospinal tract",
+      "pyramidal tract",
+      "lateral corticospinal tract",
+      "anterior corticospinal tract",
+      "corticobulbar tract",
+      "precentral gyrus",
+      "primary motor cortex",
+      "motor homunculus",
+      "corona radiata",
+      "posterior limb of internal capsule",
+      "crus cerebri",
+      "cerebral peduncle",
+      "basilar pons",
+      "medullary pyramid",
+      "pyramidal decussation",
+      "anterior horn",
+      "lower motor neuron",
+      "upper motor neuron",
+      "spasticity",
+      "hyperreflexia",
+      "Babinski sign",
+      "clonus",
+      "clasp-knife",
+      "extrapyramidal",
+      "rubrospinal tract",
+      "red nucleus",
+      "vestibulospinal tract",
+      "reticulospinal tract",
+      "tectospinal tract",
+      "decorticate posturing",
+      "decerebrate posturing",
+      "lacunar infarct",
+      "upper motor neuron facial palsy",
+      "Bell's palsy"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "corticospinal",
+      "label": "Corticospinal tract — the direct route, and where it crosses",
+      "role": "primary",
+      "group": "The pyramidal system",
+      "layer": "organ",
+      "color": "#cc0000",
+      "terms": [
+        "corticospinal tract",
+        "pyramidal tract",
+        "precentral gyrus",
+        "primary motor cortex",
+        "motor homunculus",
+        "corona radiata",
+        "posterior limb of internal capsule",
+        "crus cerebri",
+        "basilar pons",
+        "medullary pyramid",
+        "pyramidal decussation",
+        "lateral corticospinal tract",
+        "anterior corticospinal tract"
+      ],
+      "narration": "Two neurons, not three, and one crossing. The upper motor neuron begins in the precentral gyrus — with a substantial contribution from the premotor and parietal cortex, so 'the motor strip' understates it — and its axons funnel through the corona radiata into the POSTERIOR limb of the internal capsule. From there through the middle of the crus cerebri, then scattered among the pontine nuclei in the basilar pons, then gathered again into the pyramid on the front of the medulla. At the bottom of the medulla about eighty-five per cent of the fibres CROSS — the pyramidal decussation — and descend as the lateral corticospinal tract in the lateral funiculus, sacral fibres most lateral, to synapse on lower motor neurons in the anterior horn. The remaining fifteen per cent stay uncrossed as the anterior corticospinal tract and cross segmentally in the anterior white commissure, supplying axial and girdle muscles bilaterally. That bilateral axial supply is why a unilateral lesion weakens a hand and not a trunk."
+    },
+    {
+      "key": "corticobulbar",
+      "label": "Corticobulbar — the same tract for the head, mostly bilateral",
+      "role": "primary",
+      "group": "The pyramidal system",
+      "layer": "organ",
+      "color": "#e69138",
+      "terms": [
+        "corticobulbar tract",
+        "cranial nerve nuclei",
+        "genu of internal capsule",
+        "bilateral innervation",
+        "upper motor neuron facial palsy",
+        "Bell's palsy",
+        "forehead sparing",
+        "hypoglossal nucleus",
+        "facial nucleus"
+      ],
+      "narration": "The head's share of the same system, running with the corticospinal fibres as far as the brainstem and leaving through the genu of the internal capsule to reach the motor cranial nerve nuclei. The rule that matters is that this supply is BILATERAL to almost every nucleus, so one hemisphere's lesion leaves most cranial nerve function intact. Two exceptions carry nearly all the clinical weight. The part of the facial nucleus supplying the LOWER face receives contralateral fibres only, while the part supplying the forehead keeps its bilateral supply — so a cortical or capsular stroke weakens the lower face and SPARES the forehead, whereas a lesion of the facial nerve itself takes the whole side, which is the distinction between an upper motor neuron facial palsy and Bell's palsy. The genioglossus supply through the hypoglossal nucleus is likewise effectively contralateral, so the protruded tongue deviates AWAY from the side of a cortical lesion and TOWARDS the side of a nerve or nuclear lesion."
+    },
+    {
+      "key": "levels",
+      "label": "Six places one tract can be cut",
+      "role": "part",
+      "group": "The pyramidal system",
+      "layer": "organ",
+      "color": "#c27ba0",
+      "terms": [
+        "upper motor neuron",
+        "lacunar infarct",
+        "internal capsule",
+        "crus cerebri",
+        "medullary pyramid",
+        "pyramidal decussation",
+        "cord lesion",
+        "ipsilateral",
+        "contralateral"
+      ],
+      "narration": "Because the pathway is long and crosses only once, its level is readable from the pattern of weakness, and this is the practical use of everything above. CORTEX: weakness restricted by the homunculus, so a face-and-arm or a leg-alone pattern, often with cortical signs beside it. CORONA RADIATA and INTERNAL CAPSULE: the fibres are packed tightest here, so a lacunar infarct a few millimetres across produces a dense contralateral hemiplegia of face, arm and leg equally, with no cortical signs — the most efficient lesion in neurology. CRUS CEREBRI: contralateral hemiplegia with an ipsilateral third nerve palsy, because the nerve leaves beside it. PONS and PYRAMID: contralateral hemiplegia with the cranial nerve signs of that level. BELOW THE DECUSSATION, in the cord: the fibres have already crossed, so weakness is IPSILATERAL to the lesion and below it. Everything above the decussation is contralateral; everything below is ipsilateral. That is the one sentence the whole tract exists to support."
+    },
+    {
+      "key": "extrapyramidal",
+      "label": "The four extrapyramidal tracts — tone, posture and the head",
+      "role": "primary",
+      "group": "The extrapyramidal system",
+      "layer": "organ",
+      "color": "#45818e",
+      "terms": [
+        "extrapyramidal",
+        "rubrospinal tract",
+        "red nucleus",
+        "ventral tegmental decussation",
+        "vestibulospinal tract",
+        "lateral vestibulospinal tract",
+        "medial vestibulospinal tract",
+        "reticulospinal tract",
+        "pontine reticulospinal",
+        "medullary reticulospinal",
+        "tectospinal tract",
+        "superior colliculus",
+        "dorsal tegmental decussation",
+        "muscle tone"
+      ],
+      "narration": "Four brainstem-origin systems that carry no voluntary command but set the background the command acts on. RUBROSPINAL, from the red nucleus of the midbrain, crossing at once in the ventral tegmental decussation and facilitating FLEXOR tone, particularly in the upper limb. VESTIBULOSPINAL: the lateral tract, uncrossed, from the lateral vestibular nucleus, driving antigravity EXTENSOR tone in the trunk and legs, and the medial tract running bilaterally to the neck for head stabilisation. RETICULOSPINAL, the largest of the four and the most clinically important: the pontine component facilitates extensor tone, the medullary component INHIBITS it, and the medullary component takes its instruction from the cortex. TECTOSPINAL, from the superior colliculus, crossing in the dorsal tegmental decussation and turning the head towards a visual stimulus. Note the pattern before the clinical beat: flexor drive is a midbrain job, extensor drive is a pontine and vestibular job, and the only brake is medullary and cortically driven."
+    },
+    {
+      "key": "umn",
+      "label": "Why an upper motor neuron lesion is spastic",
+      "role": "part",
+      "group": "Reading the system",
+      "layer": "organ",
+      "color": "#8e7cc3",
+      "terms": [
+        "upper motor neuron",
+        "lower motor neuron",
+        "spasticity",
+        "hyperreflexia",
+        "clonus",
+        "clasp-knife",
+        "Babinski sign",
+        "pyramidal weakness",
+        "flaccid",
+        "disinhibition"
+      ],
+      "narration": "The question a pure corticospinal account cannot answer: cutting a tract removes something, so why does the limb become STIFF rather than merely weak? Because the corticospinal tract is not the only thing lost. The cortex's main brake on extensor tone is the medullary reticulospinal system, which it drives; remove the cortical input and that brake is released while the pontine reticulospinal and vestibulospinal facilitation continue unopposed. The result is disinhibition, not just loss: increased tone, velocity-dependent and clasp-knife in character, brisk reflexes, clonus, and an extensor plantar response. Contrast the lower motor neuron lesion of the anterior horn or the nerve — nothing downstream is left to be disinhibited, so it is flaccid, wasted, areflexic and fasciculating. And note the pyramidal DISTRIBUTION of the weakness itself: upper limb extensors and lower limb flexors go first, which is the same imbalance the released tracts predict. Spinal shock is the caveat worth stating: for days to weeks after an acute cord injury the picture is flaccid and areflexic, and only later becomes spastic."
+    },
+    {
+      "key": "posturing",
+      "label": "Decorticate and decerebrate — the red nucleus as the boundary",
+      "role": "part",
+      "group": "Reading the system",
+      "layer": "organ",
+      "color": "#a64d79",
+      "terms": [
+        "decorticate posturing",
+        "decerebrate posturing",
+        "red nucleus",
+        "rubrospinal tract",
+        "vestibulospinal tract",
+        "brainstem herniation",
+        "prognosis"
+      ],
+      "narration": "The clearest demonstration that these tracts are real, and the one place a student can locate a lesion in a comatose patient from posture alone. A lesion ABOVE the red nucleus leaves the rubrospinal tract intact, so its flexor drive to the upper limb survives while cortical control is gone: the arms flex and adduct and the legs extend — decorticate. A lesion BELOW the red nucleus — which sits in the ROSTRAL midbrain, so 'below' means the caudal midbrain, the pons, or anywhere down to the vestibular nuclei — removes that flexor drive as well, leaving the vestibulospinal and pontine reticulospinal extensor drive alone and unopposed: everything extends and the arms pronate — decerebrate. The boundary between the two postures is the red nucleus itself, which is why a patient whose posturing changes from decorticate to decerebrate is deteriorating downwards through the brainstem and why decerebrate carries the worse prognosis. Two postures, one anatomical landmark, and no need to memorise which is which once the rubrospinal tract's job is known."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "The corticospinal tract, cortex to anterior horn",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The pyramidal system"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "corticospinal",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:corticospinal-pathway",
+          "path": [
+            "corticospinal",
+            "levels"
+          ],
+          "duration": 7000
+        }
+      ],
+      "narration": "One tract, two neurons, one crossing — and the crossing is the whole scene. From the precentral gyrus, down through the corona radiata, into the POSTERIOR limb of the internal capsule, through the middle of the crus cerebri, broken up among the pontine nuclei, gathered into the medullary pyramid. At the bottom of the medulla about eighty-five per cent of the fibres cross and continue as the lateral corticospinal tract to the limbs; the rest stay uncrossed as the anterior corticospinal tract and supply axial muscles bilaterally, which is why a hemisphere lesion does not leave a patient unable to sit. Nothing in this scene is a mesh: it is a drawn pathway. The catalog holds no tract, no pyramid, no red nucleus and no reticular formation, and its one relevant cord entry — the central canal — is modelled for its uppermost 34 millimetres only, as the `spinal-cord-cross-section` scene records. One waypoint on this route, the crus cerebri, DOES exist as a mesh and was deliberately declined, because the tract's position in the middle of the crus is an interior fact a surface cannot show; `brainstem__midbrain` owns it. So every structure named here is drawn, and beat 1 says so before anything else is claimed."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Corticobulbar, and the two exceptions that matter",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The pyramidal system"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "corticobulbar",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "corticobulbar",
+          "to": "corticospinal",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "The head's fibres travel with the limb's until the brainstem, leaving by the genu of the internal capsule for the motor cranial nerve nuclei. Almost all of those nuclei get BILATERAL cortical supply, which is why one stroke does not abolish chewing, swallowing or eye closure. Two exceptions do the clinical work. The lower face is supplied contralaterally only while the forehead keeps its bilateral supply — so a stroke drops the mouth and spares the brow, while a facial nerve lesion takes the whole half of the face. And the genioglossus is effectively contralateral, so the tongue points away from a cortical lesion and towards a nerve lesion. Both exceptions are the same idea: where bilateral supply is lost, a unilateral lesion becomes visible."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Six lesions on one line",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The pyramidal system"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "levels",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "corticospinal",
+            "levels"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Walk down the tract and cut it in six places. Cortex: patchy weakness shaped by the homunculus, face and arm together or leg alone. Internal capsule: everything packed into a few millimetres, so a tiny lacunar infarct gives a dense equal hemiplegia of face, arm and leg with no cortical signs. Crus cerebri: hemiplegia with an ipsilateral third nerve palsy. Pons and pyramid: hemiplegia plus that level's cranial nerve. Below the decussation, in the cord: the fibres have already crossed, so the weakness is on the SAME side as the lesion. One rule covers all six — above the pyramidal decussation, contralateral; below it, ipsilateral — and the accompanying cranial nerve is what fixes the height."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The extrapyramidal four, and why weakness becomes stiffness",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The extrapyramidal system"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "extrapyramidal",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "extrapyramidal",
+          "to": "umn",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Four brainstem tracts set the tone the corticospinal command acts on. Rubrospinal from the midbrain, crossed, driving upper limb FLEXOR tone. Lateral vestibulospinal, uncrossed, driving antigravity EXTENSOR tone. Reticulospinal, the largest: pontine facilitates extension, medullary inhibits it, and the medullary component is the one the cortex drives. Tectospinal, crossed, turning the head to what the eyes have found. Now answer the question a pure pyramidal account cannot. Cutting the corticospinal tract should give a floppy limb; upper motor neuron lesions give a stiff one. The reason is that the cortex's brake — the medullary reticulospinal system — is cut with it, while the extensor facilitation from pons and vestibular nuclei carries on unopposed. Spasticity is a release phenomenon, not a loss, and every other upper motor neuron sign follows the same logic."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "On the section, and posturing as a level test",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Reading the system"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "umn",
+            "posturing"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.0,
+          "animate": true
+        }
+      ],
+      "narration": "Place them on a transverse section, in the positions the `spinal-cord-cross-section` scene uses, with the cut on the vertical z axis as every axial cut in this course is. Lateral corticospinal tract in the lateral funiculus with sacral fibres most lateral — the same lamination as the spinothalamic beside it, which is why a compression from outside and a lesion from inside make opposite predictions for the sacral segments. Anterior corticospinal, vestibulospinal and reticulospinal in the anterior funiculus. Then read the brainstem instead of the cord. A comatose patient with arms flexed has a lesion ABOVE the red nucleus, whose rubrospinal flexor drive still works — decorticate. Arms extended and pronated means the lesion is BELOW it, leaving only extensor drive — decerebrate. The red nucleus is the boundary, deterioration from one posture to the other means the lesion is descending, and neither posture has to be memorised once the rubrospinal tract's job is known."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS SECOND PREFERRED MODE, AND THE ROUTING WAS MEASURED THIS RUN AGAINST `available-meshes.json`. All 934 entries were searched under: corticospinal, pyramidal, pyramid, tract, tractus, decussation, rubrospinal, red nucleus, ruber, vestibulospinal, reticulospinal, reticular, tectospinal, tectum, colliculus, corticobulbar, corona, radiata, capsule, crus, peduncle, cerebral peduncle, precentral, motor cortex, horn, anterior horn, funicul, nucle, lemniscus. Findings: `tract` returns ONLY two optic and two iliotibial tracts; `nucle` returns ONLY the two caudate nuclei, so there is no red nucleus, no vestibular nucleus and no reticular formation; `capsule` returns ONLY FMA72908 and FMA72909, the anterior limb of the internal capsule on each side — and the corticospinal fibres run in the POSTERIOR limb, which does not exist in the catalog, a trap worth naming because the anterior limb is a plausible-looking wrong answer; `colliculus` returns the four colliculi and their brachia, which are the tectospinal origin but not the tract; `peduncle` returns FMA62394 `peduncle of midbrain`, which IS the crus cerebri this pathway passes through. So of every structure in this scene, exactly one — the crus — has a mesh, and it is a waypoint rather than a subject.",
+    "THAT ONE AVAILABLE MESH WAS DELIBERATELY NOT IMPORTED, AND THE REASONING IS RECORDED SO A LATER RUN DOES NOT 'FIX' IT. FMA62394 `peduncle of midbrain` exists and beat 1 names the crus cerebri as a waypoint. Importing it would put a single measured surface into a drawn circuit, implying the rest of the pathway is equally measured, which is the same judgement `cerebellar-function` made about FMA67944 and `spinal-cord-cross-section` made about FMA78497. It is also the wrong subject: what this scene teaches at the midbrain is that the tract occupies the MIDDLE of the crus, and a surface of the whole crus cannot show an interior position. `neuroanatomy__brainstem__midbrain` owns that mesh and is the right place for it.",
+    "THE SUBJECT IS A PATHWAY WITH A CROSSING POINT, WHICH IS AN INDEPENDENT AND STRONGER REASON FOR `diagram` THAN THE CATALOG GAP, exactly as for `Ascending tracts`. Beat 3 is entirely an argument about the HEIGHT at which the tract is interrupted, and beat 4 about which of four tone-setting systems survives; neither is a shape. `deferred_modes` keeps `3d_anatomy` only against the arrival of tract volumes as separate geometry, which is tractography rather than a mesh fetch.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: a tall figure from precentral gyrus to anterior horn with the corticospinal tract drawn on it and all six lesion levels of beat 3 marked at their true heights, plus the pyramidal decussation drawn as the boundary between contralateral and ipsilateral — load-bearing, since beats 1 and 3 are both argument about it; a brainstem column showing the four extrapyramidal origins with each tract's crossing marked and its flexor or extensor effect colour-coded, because beat 4's whole point is the balance between them; and a paired decorticate/decerebrate figure with the red nucleus drawn at the boundary between the two. A transverse section with the descending tracts placed would let beat 5's first half be shown rather than described, and should reuse the outline drawn for `spinal-cord-cross-section` so the two scenes are visibly the same section.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`. The only mesh this scene could have claimed is FMA62394, which was correctly not imported, and in any case the feature that matters — the tract's position within the middle three-fifths of the crus — is an interior region and not a contact or an extreme, so neither of the tool's two definitions applies. Nothing was placed by eye.",
+    "CONSISTENCY WITH `spinal-cord-cross-section` AND `ascending-tracts` WAS CHECKED AGAINST BOTH FILES, NOT FROM MEMORY. Four shared facts, all stated identically: the lateral corticospinal tract crossed in the medulla; the anterior corticospinal tract uncrossed in the cord and crossing segmentally; sacral fibres most lateral in the lateral corticospinal tract, stated as a somatotopic prediction and bounded in all three scenes as less reliable at the bedside than the classical sacral-sparing rule implies; and the anterior horn as the sole motor outflow with its medial-axial, lateral-limb column arrangement. The proportion crossing at the decussation is given here as about eighty-five per cent, which is the figure most sources give; textbooks range from about seventy-five to ninety, and a later run wanting to widen it should do so in the `corticospinal` card rather than adding a second figure elsewhere.",
+    "TWO STATEMENTS ARE DELIBERATELY BOUNDED. Spasticity is explained as release of the medullary reticulospinal brake rather than as loss of the corticospinal tract itself; this is the account the evidence supports — an isolated pyramidal lesion in primates gives weakness and a Babinski but little spasticity — and it is stated as the mechanism rather than hedged, but the scene does not claim the corticospinal tract contributes nothing. And spinal shock is named explicitly in the `umn` card so that the flaccid, areflexic acute cord injury is not read as contradicting the spastic account; that caveat belongs in that card and should not be added as a separate sentence elsewhere.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Descending tracts`, spelled as CURRICULUM.json spells it. `Ascending tracts` is not claimed although the spinothalamic somatotopy is named for comparison in beat 5. `Reflex arc`, the fourth structure in this topic, is NOT claimed and is deliberately left alone: the anterior horn appears here only as the corticospinal tract's destination, and the segmental reflex itself, its gamma loop and the basis of hyperreflexia belong to that scene when it is authored. It must match this scene's account of spasticity as disinhibition when it is.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `mechanism` and `cross_section`. Beats 1 to 4 are `mechanism` and beat 5 is `cross_section`, so both are covered. Beat 5's CROSS_SECTION op uses `axis:\"z\"`, the vertical axis of these meshes and therefore the transverse cut its narration names, consistent with `spinal-cord-cross-section` beat 4 and `ascending-tracts` beat 5; coronal cuts in this course use `axis:\"y\"`.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch. All five beats are hollow for want of ARTWORK, and — with the single, deliberately declined exception of FMA62394 — no mesh fetch would reduce that. This is now the third Spinal Cord scene reaching the same conclusion, so the topic as a whole should be read by fetch prioritisation as an artwork request."
+  ]
+}

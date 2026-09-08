@@ -12,10 +12,14 @@
     "Basal ganglia"
   ],
   "learning_goal": "Assemble the deep grey masses by name — which nuclei make the striatum, which make the lentiform nucleus, and where the internal capsule runs between them — then use that arrangement to explain why a small bleed here costs a whole half of the body and why the movement disorders come in a too-little and a too-much pair.",
-  "status": "candidate",
+  "status": "ready",
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "audited_at": "2026-09-04",
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
   },
   "provider": {
     "primary": "bodyparts3d",
@@ -138,7 +142,7 @@
         "lentiform nucleus",
         "shell"
       ],
-      "narration": "The most lateral of the deep grey masses, a shell of grey lying just deep to the insula. It belongs to two different groupings at once: with the caudate it is the striatum, and with the globus pallidus it is the lentiform nucleus. That double membership is the single most confusing thing here and the next beat exists to fix it."
+      "narration": "The most lateral of the basal ganglia proper, a shell of grey lying deep to the insula — though not the most lateral grey in the hemisphere, since the claustrum lies lateral again, beyond the external capsule. It belongs to two different groupings at once: with the caudate it is the striatum, and with the globus pallidus it is the lentiform nucleus. That double membership is the single most confusing thing here and the next beat exists to fix it."
     },
     {
       "key": "put_l",
@@ -441,7 +445,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "caud_r",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "TRACE_STRUCTURE",
@@ -478,7 +482,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "Internal capsule",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -493,7 +497,7 @@
           "kind": "boundary"
         }
       ],
-      "narration": "This is the picture every axial scan shows and it reads as a V opening forwards on each side. Caudate head medial, lentiform nucleus lateral, and the white anterior limb driven between them — that is what is lit. The rest of the V is described, not drawn, and you must hold the difference: from the anterior limb the capsule bends at the genu and continues as the posterior limb, which runs between the thalamus medially and the lentiform nucleus laterally. Neither the genu nor the posterior limb exists as a mesh in this catalog, so the capsule on screen stops halfway round the bend. Since the posterior limb is the part that carries the corticospinal fibres, read beat 6 as narration over a gap rather than over a shape."
+      "narration": "This is the picture every axial scan shows: on each side the capsule reads as a V with its point — the genu — directed MEDIALLY, opening laterally around the lentiform nucleus. (The horseshoe opening forwards, two beats back, is the caudate; the capsule is the other way round.) Caudate head medial, lentiform nucleus lateral, and the white anterior limb driven between them — that is what is lit. The rest of the V is described, not drawn, and you must hold the difference: from the anterior limb the capsule bends at the genu and continues as the posterior limb, which runs between the thalamus medially and the lentiform nucleus laterally. Neither the genu nor the posterior limb exists as a mesh in this catalog, so the capsule on screen stops halfway round the bend. Since the posterior limb is the part that carries the corticospinal fibres, read beat 6 as narration over a gap rather than over a shape."
     },
     {
       "mode": "cross_section",
@@ -511,7 +515,7 @@
         {
           "op": "CROSS_SECTION",
           "axis": "y",
-          "offset": 0.0
+          "offset": 0
         },
         {
           "op": "COMPARE_STRUCTURES",

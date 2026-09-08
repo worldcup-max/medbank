@@ -12,7 +12,7 @@
     "Choroid plexus"
   ],
   "learning_goal": "Say exactly where choroid plexus is and where it is not, describe the three layers a molecule crosses to become cerebrospinal fluid and which of them is the barrier, and use the rate of production to explain why an obstruction rises in pressure rather than settling.",
-  "status": "candidate",
+  "status": "ready",
   "provider": {
     "primary": "bodyparts3d",
     "fallbacks": []
@@ -516,16 +516,18 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "audited_at": "2026-09-08",
+    "audited_by": "task"
   },
   "gaps": [
     "NO THIRD OR FOURTH VENTRICLE PLEXUS MODEL. The catalog carries choroid plexus only as 'of left / right cerebral hemisphere' (FMA274029 / FMA274027), which is the lateral ventricle plexus. Searched choroid, plexus, tela, velum and glomus. Beats 1 and 3 state the omission and light the containing cavities instead, so the scene never implies the lateral ventricles make all of the fluid.",
     "NO TELA CHOROIDEA and no choroid fissure in the catalog (searched tela, velum, fissure, choroid fissure). Beat 4 builds the fissure as the line between the two structures that bound it — fornix above (FMA72925 / FMA72924) and thalamus below (FMA258716 / FMA258714) — both of which are lit, and names the tela as described rather than shown.",
     "NO HISTOLOGY EXISTS AT THIS SCALE: no ependyma, no choroidal epithelium, no capillary of any kind, no tight junction. Searched ependym, epitheli, capillar, endotheli. Beat 5 therefore cuts the whole frond and describes the three layers in narration, and says so in the beat itself. If this teaching is wanted as a labelled section it belongs in a microscopic-mode scene, not here.",
-    "NO GLOMUS as a separate model. The glomus is the thick atrial part of FMA274029 / FMA274027 and is called that on the structure cards; nothing is marked on the mesh. No anchor was authored for it: derive-landmark.mjs needs the parent mesh in meshes-lite/ to measure against and it is not there.",
+    "NO GLOMUS as a separate model. The glomus is the thick atrial part of FMA274029 / FMA274027 and is called that on the structure cards; nothing is marked on the mesh. No anchor was authored for it, and the reason given here until the 2026-09-08 audit — that the parent mesh is not in meshes-lite/ — WAS FALSE: both plexus meshes are on disk, checked by listing the directory this run. The real obstacle is a definition one. The glomus is a THICKENING of the frond at the atrium, not a contact and not an extremity: `--contact` has no second structure to witness it, since the plexus touches the thalamus and fornix along its whole length rather than at the glomus, and `--extreme` would return an end of the frond rather than its fattest part. derive-landmark.mjs has no thickness primitive, so a number for the glomus would be a guess wearing a measurement's clothes. Not attempted, deliberately.",
     "NO ABSORPTION SIDE AT ALL: no meninges, dura, arachnoid, pia, subarachnoid space, cistern, arachnoid granulation or dural venous sinus, and no aperture of the fourth ventricle. Searched mening, dura, arachnoid, pia, subarach, cistern, granulation, sinus, aperture, Magendie, Luschka — the only sinus in the catalog is the coronary sinus and the only foramen is the interventricular one. Beat 6's trace ends at the fourth ventricle for this reason and the narration says so.",
     "NO CHOROIDAL ARTERY. Searched choroidal, anterior choroidal, posterior choroidal — no cerebral artery of any kind exists in this catalog. The blood supply of the plexus is named in match.terms for retrieval and is not taught in any beat, because none of it can be drawn.",
     "SIDES: FMA274029 is the LEFT choroid plexus and FMA274027 the RIGHT; FMA78450 is the LEFT lateral ventricle and FMA78449 the RIGHT; FMA72925 is the LEFT fornix and FMA72924 the RIGHT; FMA258716 is the LEFT thalamus and FMA258714 the RIGHT. The third and fourth ventricles, the aqueduct, the interventricular foramen, the corpus callosum, the cerebellum and the central canal are unsided single models.",
-    "DELIVERY: 14 of this scene's 15 meshes are absent from meshes-lite/. The single exception is FMA78497, the central canal of the spinal cord, verified by listing the directory. Both choroid plexus models are missing, so every beat is hollow and the status is 'candidate' on delivery grounds alone — nothing in the anatomy, the ids or the ops is unresolved. The two meshes worth fetching first are FMA274029 and FMA274027: without them this scene has no subject."
+    "DELIVERY, RE-MEASURED AT AUDIT 2026-09-08: ALL 15 OF THIS SCENE'S MESHES ARE ON DISK, INCLUDING BOTH CHOROID PLEXUS MODELS. NO BEAT IS HOLLOW. This entry read `14 of this scene's 15 meshes are absent from meshes-lite/ ... every beat is hollow and the status is candidate on delivery grounds alone ... without them this scene has no subject`, and it asked a human to fetch two ids that were already delivered. It was true on the morning it was written and stale by that evening — the tectal and plexus meshes arrived in the same batch — and because the status was pinned to it, a scene whose subject was on disk sat invisible for nine days. The entry that says a scene cannot be seen is the most expensive one in the file to leave unchecked. Status promoted to `ready` at this audit; nothing in the anatomy, the ids or the ops was unresolved then or now."
   ]
 }

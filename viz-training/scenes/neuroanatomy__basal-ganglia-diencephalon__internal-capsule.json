@@ -12,10 +12,14 @@
     "Internal capsule"
   ],
   "learning_goal": "Find the internal capsule by its neighbours rather than by its own outline — anterior limb between caudate head and lentiform nucleus, genu at the bend, posterior limb between thalamus and lentiform nucleus — then use that map to say which fibres a lesion at each point would cut, and why a few millimetres of damage here costs a whole half of the body.",
-  "status": "candidate",
+  "status": "ready",
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "audited_at": "2026-09-08",
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
   },
   "provider": {
     "primary": "bodyparts3d",
@@ -107,7 +111,7 @@
         "anterior limb of internal capsule",
         "left internal capsule"
       ],
-      "narration": "The left anterior limb. Both are shown so the two Vs read as a pair opening forwards, which is the shape an axial scan gives you."
+      "narration": "The left anterior limb. Both are shown so the two Vs read as a pair, each with its point directed medially and opening laterally — the shape an axial scan gives you, and the same thing beat 1 says."
     },
     {
       "key": "caud_r",
@@ -401,7 +405,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "Internal capsule",
-          "intensity": 1.0
+          "intensity": 1
         }
       ],
       "narration": "Cut the brain horizontally at the level of the thalamus and each internal capsule appears as a V with its point directed medially. What is lit is the front arm only — the anterior limb — because it is the only part of the capsule this catalog holds as a mesh. Fix the whole shape now so the next beats have something to hang on: from the point of the V, called the genu, the front arm runs forward and laterally between the caudate head and the lentiform nucleus, and the back arm, the posterior limb, runs backward and laterally between the thalamus and the lentiform nucleus. Two further parts continue past the back of the lentiform nucleus: the retrolentiform part behind it and the sublentiform part below it."
@@ -462,7 +466,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "ic_ant_r",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_RELATIONSHIP",

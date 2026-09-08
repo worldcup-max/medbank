@@ -1,0 +1,274 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__blood-supply-of-the-brain__dural-venous-sinuses",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Blood Supply of the Brain",
+  "structure": "Dural venous sinuses",
+  "covers": [
+    "Dural venous sinuses"
+  ],
+  "learning_goal": "Understand the sinuses as SPACES BETWEEN TWO LAYERS OF DURA rather than as veins, because every clinical fact follows from that one structural difference. They have no muscular wall and no valves, so they cannot constrict and blood in them can flow either way; they are held open by the dura, so they do not collapse when pressure falls and they do not seal when torn. From that: why a tear at the top of the brain gives a subdural haematoma of venous origin, why sinus thrombosis presents as raised intracranial pressure rather than as a stroke territory, why the cavernous sinus turns a facial infection into a cranial nerve palsy, and why the whole system ends in one internal jugular vein on each side.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-03",
+    "audited_at": "2026-09-04",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "blood supply of the brain",
+      "venous drainage",
+      "dural venous sinuses",
+      "cerebral venous thrombosis"
+    ],
+    "terms": [
+      "dural venous sinus",
+      "superior sagittal sinus",
+      "inferior sagittal sinus",
+      "straight sinus",
+      "confluence of sinuses",
+      "transverse sinus",
+      "sigmoid sinus",
+      "cavernous sinus",
+      "great cerebral vein",
+      "vein of Galen",
+      "bridging vein",
+      "internal jugular vein",
+      "arachnoid granulation",
+      "cerebral venous sinus thrombosis",
+      "subdural haematoma",
+      "papilloedema",
+      "falx cerebri",
+      "tentorium cerebelli",
+      "emissary vein",
+      "danger triangle of the face"
+    ]
+  },
+  "camera": {
+    "framing": "medial"
+  },
+  "structures": [
+    {
+      "key": "wall",
+      "label": "A space between two layers of dura — not a vein",
+      "role": "primary",
+      "group": "What a sinus is",
+      "layer": "vessel",
+      "color": "#3d85c6",
+      "terms": [
+        "dural venous sinus",
+        "dura mater",
+        "endosteal layer",
+        "meningeal layer",
+        "falx cerebri",
+        "tentorium cerebelli",
+        "valveless",
+        "endothelium",
+        "emissary vein"
+      ],
+      "narration": "A dural venous sinus is not a vessel that happens to be large. It is a GAP held open between the two layers of the cranial dura — the outer layer stuck to the skull and the inner layer that folds inward to make the falx and the tentorium — lined only by endothelium, with NO muscular wall and NO valves. Four properties follow, and every clinical item in this scene is one of them applied. First, no valves means flow can reverse and infection can travel BACKWARDS into the skull, which is the whole basis of the danger triangle of the face and of the emissary veins that connect the scalp to the sinuses. Second, no muscle means the sinus cannot constrict; a torn sinus does not go into spasm and bleeds until it is packed. Third, being held open by dura means it does not collapse, so it stays patent when venous pressure is low — and equally that a sinus wall cannot move out of the way of a growing mass. Fourth, the sinuses lie WHERE THE DURAL FOLDS ARE, which is why their map is simply the map of the falx and the tentorium: along the attached top edge of the falx, along its lower free edge, along the line where falx meets tentorium, and along the attached edge of the tentorium itself — four lines, which is exactly the list beat 1 gives. Learn the folds and the sinuses are placed rather than remembered."
+    },
+    {
+      "key": "route",
+      "label": "The route out — sagittal to straight to transverse to jugular",
+      "role": "primary",
+      "group": "The drainage route",
+      "layer": "vessel",
+      "color": "#cc0000",
+      "terms": [
+        "superior sagittal sinus",
+        "inferior sagittal sinus",
+        "straight sinus",
+        "great cerebral vein",
+        "vein of Galen",
+        "confluence of sinuses",
+        "transverse sinus",
+        "sigmoid sinus",
+        "jugular foramen",
+        "internal jugular vein",
+        "arachnoid granulation"
+      ],
+      "narration": "There is one route and it is worth tracing whole, because almost every named sinus is a segment of it. The SUPERIOR SAGITTAL sinus runs front to back in the attached upper edge of the falx, just under the midline of the vault, taking blood from the surface of both hemispheres. The INFERIOR SAGITTAL sinus runs in the free LOWER edge of the falx, is much smaller, and joins the GREAT CEREBRAL VEIN — the vein of Galen, draining the deep structures — to form the STRAIGHT sinus, which runs back in the line where the falx meets the tentorium. Superior sagittal and straight meet at the CONFLUENCE OF SINUSES near the internal occipital protuberance, and from there a TRANSVERSE sinus runs laterally on each side in the attached edge of the tentorium, becomes the S-shaped SIGMOID sinus, and leaves the skull through the JUGULAR FORAMEN as the INTERNAL JUGULAR VEIN. Surface blood goes over the top, deep blood goes through the middle, and both leave by the same two doors. One further job of the superior sagittal sinus is not venous at all: the ARACHNOID GRANULATIONS project into it and are where cerebrospinal fluid is returned to the blood, which is why a superior sagittal thrombosis raises intracranial pressure by blocking CSF absorption as well as by blocking venous return."
+    },
+    {
+      "key": "thrombosis",
+      "label": "Sinus thrombosis and the bridging veins — two ways this system fails",
+      "role": "part",
+      "group": "When it fails",
+      "layer": "vessel",
+      "color": "#f1c232",
+      "terms": [
+        "cerebral venous sinus thrombosis",
+        "papilloedema",
+        "raised intracranial pressure",
+        "venous infarct",
+        "haemorrhagic infarct",
+        "bridging vein",
+        "subdural haematoma",
+        "cerebral atrophy",
+        "dehydration",
+        "pregnancy",
+        "thrombophilia",
+        "seizure"
+      ],
+      "narration": "Two failures, and they look nothing alike because one is a blockage and one is a tear. CEREBRAL VENOUS SINUS THROMBOSIS blocks the outflow, so the pressure rises everywhere behind it: headache that is worse lying flat and on straining, PAPILLOEDEMA, seizures, and — if the congestion is severe enough that capillary pressure exceeds what the tissue can take — a VENOUS infarct, which is characteristically HAEMORRHAGIC and, crucially, DOES NOT RESPECT AN ARTERIAL TERRITORY. That last point is the diagnostic one: an infarct that crosses territory boundaries or sits parasagittally on both sides is venous until proven otherwise. It is a disease of pregnancy and the puerperium, dehydration, thrombophilia and the combined pill, and it is treated with ANTICOAGULATION even when there is already haemorrhage, which is counter-intuitive and therefore examined. The other failure is mechanical. BRIDGING VEINS cross the subdural space from the brain surface to the superior sagittal sinus, and they are tethered at the sinus end and mobile at the brain end. Shearing tears them, and because the bleeding is venous and low-pressure the collection accumulates SLOWLY — a SUBDURAL haematoma, which in an elderly or alcoholic brain has extra room to expand into as the brain has shrunk and stretched those same veins, so a trivial injury weeks earlier produces a confused patient with no lucid history."
+    },
+    {
+      "key": "cavernous",
+      "label": "The cavernous sinus — where a facial infection becomes a nerve palsy",
+      "role": "part",
+      "group": "When it fails",
+      "layer": "vessel",
+      "color": "#a64d79",
+      "terms": [
+        "cavernous sinus",
+        "internal carotid artery",
+        "oculomotor nerve",
+        "trochlear nerve",
+        "abducens nerve",
+        "ophthalmic nerve",
+        "maxillary nerve",
+        "cavernous sinus thrombosis",
+        "danger triangle of the face",
+        "ophthalmic vein",
+        "proptosis",
+        "chemosis",
+        "valveless"
+      ],
+      "narration": "The CAVERNOUS SINUS sits on either side of the body of the sphenoid beside the pituitary, and it is the exception that proves the rule about sinuses being simple spaces: it is trabeculated, and it has things running THROUGH it. The internal carotid artery passes through its centre with the ABDUCENS nerve beside the artery, and the OCULOMOTOR, TROCHLEAR, OPHTHALMIC and MAXILLARY nerves run in its lateral wall. That crowding is the entire clinical point, and it makes the cavernous sinus the one place where a single lesion takes cranial nerves III, IV, V1, V2 and VI together. It receives the OPHTHALMIC VEINS from the orbit, and since no sinus has valves, blood from the face can flow BACKWARDS along them — which is why infection in the DANGER TRIANGLE between the corners of the mouth and the bridge of the nose can reach the skull. CAVERNOUS SINUS THROMBOSIS is therefore a septic emergency: proptosis and chemosis from obstructed orbital drainage, a painful eye, and an ophthalmoplegia that begins with a SIXTH nerve palsy because the abducens lies free within the sinus next to the artery rather than protected in the wall. `cranial-nerves__cranial-nerve-courses` owns the nerves themselves; this scene owns the space they share and the reason they fail together."
+    }
+  ],
+  "views": [
+    {
+      "mode": "vasculature",
+      "beat": 1,
+      "title": "Where the dura folds, a sinus runs",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What a sinus is"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "wall",
+          "intensity": 1
+        }
+      ],
+      "narration": "Start with the falx and the tentorium, not with a list of sinuses. A sinus is a space held open between the two dural layers, endothelium-lined, with no muscle and no valves — so the sinuses lie exactly where the dural folds are: along the attached top edge of the falx, along its free lower edge, along the falx-tentorium junction, and along the attached edge of the tentorium. Say the four properties once here and every later beat is a deduction: no valves means flow can reverse; no muscle means a tear will not close itself; dural tethering means the space cannot collapse; and the folds place the map. Nothing in this beat is a mesh. The catalog holds NO dural venous sinus of any kind — `sinus` searched across all 934 entries this run returns exactly ONE entry, FMA4706 `coronary sinus`, which is in the heart — and there is no dura, no falx and no tentorium either. The nearest thing present is the pair of INTERNAL JUGULAR VEINS, FMA4754 and FMA4762, which are where this scene's route ENDS and begin outside the skull. Everything drawn here is a drawing."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "Trace it once, whole — surface over the top, deep through the middle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The drainage route"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "route",
+          "intensity": 1
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:venous-outflow",
+          "path": [
+            "wall",
+            "route"
+          ],
+          "duration": 6000
+        }
+      ],
+      "narration": "One trace, front to back and then out. Superior sagittal sinus along the top of the falx, collecting the cortical surface. Inferior sagittal sinus in the free edge below, joining the great cerebral vein of Galen from the deep structures to become the straight sinus. The two arrive together at the confluence behind, and from there a transverse sinus each side along the edge of the tentorium, curving down as the sigmoid, out through the jugular foramen, and it is now the internal jugular vein. Surface blood over the top, deep blood through the middle, one exit each side. Add the one thing in the roof that is not about veins: the arachnoid granulations poke up into the superior sagittal sinus and return CSF to the blood there. Hold that, because it is why a clot in this particular sinus raises intracranial pressure twice over — the venous blood cannot leave and the CSF cannot be absorbed."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "A coronal cut at the vertex — sinus, granulations, bridging veins, and the subdural space",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "When it fails"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "thrombosis",
+          "intensity": 1
+        }
+      ],
+      "narration": "Cut coronally through the top of the head and read the layers outward from the brain: cortex, then the subarachnoid space, then arachnoid, then the SUBDURAL plane, then dura splitting into two layers to enclose the triangular superior sagittal sinus at the apex, with the falx hanging down from it between the hemispheres and arachnoid granulations projecting up into the sinus lumen. Now put the BRIDGING VEINS on that section: they leave the cortical surface, cross the subarachnoid and subdural planes, and enter the sinus — tethered at the top, mobile at the bottom. The section explains both failures at once. Shearing tears a bridging vein where it is fixed, and the blood collects in the subdural plane it was crossing: a slowly expanding SUBDURAL haematoma, and slower still and larger in an atrophic brain, where the veins are already stretched and there is room. Block the sinus at the apex instead and nothing can leave: pressure rises across the whole drainage field, giving papilloedema, and any infarct that results is haemorrhagic and PARASAGITTAL — spread across the midline and across arterial boundaries, which is the sign that says venous rather than arterial. This beat is the `cross_section` view the curriculum asks for, and it is drawn rather than cut from geometry: there is no dura, no sinus, no arachnoid and no bridging vein in the catalog, so the section is a diagram of a section and says so."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "The cavernous sinus — a crowded room, and a door from the face",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "When it fails"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cavernous",
+          "intensity": 1
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "thrombosis",
+            "cavernous"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "One sinus behaves unlike the rest and it is the one that gets asked about. Beside the pituitary, on each side of the sphenoid body, the cavernous sinus has the internal carotid artery running through its middle with the SIXTH nerve loose beside it, and the third, fourth, ophthalmic and maxillary nerves embedded in its lateral wall. So a single lesion here takes five nerves and an artery, and no other single place in the head does that. It drains the orbit through the ophthalmic veins, and because no sinus has valves that connection runs both ways: infection from the danger triangle of the face can reach it. Cavernous sinus thrombosis is therefore septic and urgent — a proptosed, swollen, painful eye with an ophthalmoplegia that starts as a sixth nerve palsy, since the abducens is the one nerve lying free in the blood rather than protected in the wall. Compare the two failures side by side: a superior sagittal thrombosis is a PRESSURE disease with headache and papilloedema, and a cavernous thrombosis is a CROWDING disease with an eye and nerve picture, and the difference is entirely what each sinus happens to have next to it."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram` — ITS SECOND PREFERRED MODE — AND THE ROUTING WAS MEASURED THIS RUN AGAINST `available-meshes.json`. CURRICULUM.json lists `3d_anatomy` first for this structure and the catalog cannot support it. All 934 entries were searched under: sinus, sinuses, dural, dura, falx, tentorium, meninx, meninges, arachnoid, granulation, pia, sagittal, straight, transverse, sigmoid, confluence, cavernous, petrosal, occipital sinus, emissary, vein, venous, jugular, Galen, great cerebral, bridging, diploic. FINDINGS: `sinus` returns EXACTLY ONE entry in the whole catalog, FMA4706 `coronary sinus`, which is a cardiac structure; `dura`, `falx`, `tentorium`, `meninx`, `arachnoid`, `granulation`, `emissary`, `petrosal`, `cavernous` and `sagittal` return NOTHING AT ALL; `vein` returns 21 entries, all cardiac, abdominal, pelvic or great veins of the neck and none intracranial; `jugular` returns the two INTERNAL JUGULAR VEINS, FMA4754 and FMA4762, which are the only structures in this scene's route that exist as meshes and which lie OUTSIDE the skull, downstream of everything taught here. There is no meningeal geometry of any kind in this catalog — the same finding `ventricular-system-csf__meninges` records and the reason that scene is `planned` too.",
+    "THE ABSENCE IS THE ROUTING REASON, AND UNLIKE THE ARTERIAL SCENES IN THIS TOPIC A MESH FETCH WOULD NOT FULLY CONVERT IT. A dural sinus is a SPACE, and its teaching value is the relationship of that space to the two dural layers around it — beat 1 and beat 3 are both arguments about layers, and a surface mesh of a lumen shows the space while hiding exactly the walls that make it a sinus rather than a vein. Beat 2, the route, WOULD convert to `3d_anatomy` immediately given a segmented sinus tree, and beat 4 would convert partly. `deferred_modes` keeps `3d_anatomy` for that, but the correct long-term artwork for beats 1 and 3 is a drawn coronal section regardless of what geometry arrives.",
+    "BEAT 3 IS AUTHORED AS A DRAWN SECTION AND SAYS SO IN ITS OWN NARRATION. `CROSS_SECTION` is used as the op because the curriculum requires the `cross_section` view and because the beat genuinely is a section argument, but there is no geometry to cut: no dura, no sinus, no arachnoid, no bridging vein. The op therefore describes what the drawing must show rather than instructing a renderer to slice a mesh, and the narration tells the student it is a diagram of a section so that nobody looks for a draggable plane. Recorded explicitly because a later run seeing `CROSS_SECTION` in a scene with zero models could reasonably read it as an error; it is deliberate, and if that judgement is wrong the fix is to re-mode the beat, not to add the one mesh that exists.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: a mid-sagittal head with the falx and tentorium shaded and the superior sagittal, inferior sagittal, straight and transverse sinuses drawn along their edges, since beat 1's claim is that the sinus map IS the fold map and only one picture makes that self-evident; the coronal vertex section of beat 3 showing the triangular sinus, both dural layers, the falx, an arachnoid granulation and a bridging vein crossing the subdural plane, which carries beats 1 and 3 and the whole subdural-haematoma argument; and a coronal section through the cavernous sinus with the carotid in the lumen, the sixth nerve beside it and III, IV, V1 and V2 in the lateral wall, because beat 4's entire yield is which nerve is where.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following every other `diagram` scene in this course. Beat 1 says out loud that nothing here is a mesh, and names the two internal jugular veins as the only related meshes that exist so that their absence from the scene reads as a decision rather than an oversight.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`. The features this scene would want are the confluence of sinuses and the jugular foramen; the confluence has neither a mesh nor a parent mesh, and although the jugular foramen is a feature of the occipital bone, no skull base mesh is present in `meshes-lite/` for this course to measure against. Nothing was placed by eye.",
+    "CONSISTENCY WITH THE REST OF THE COURSE WAS CHECKED AGAINST THE FILES, NOT FROM MEMORY. `cranial-nerves__cranial-nerve-courses` states the cavernous sinus contents — III, IV, V1, V2 in the lateral wall and VI beside the carotid in the lumen — and this scene states them identically and defers the nerves themselves to that scene, owning only the space and why its occupants fail together; the two files were read against each other this run. `circle-of-willis` records the same finding about the catalog holding no dural venous sinus and predicts this scene would meet the same wall, which it did. `ventricular-system-csf__csf-circulation` owns CSF absorption at the arachnoid granulations; this scene names the granulations only to explain why a superior sagittal thrombosis raises pressure twice over, and states the absorption fact in the same terms that scene uses. The MENINGES scene is `planned` and unauthored, so the layer sequence in beat 3 is stated here in full rather than deferred; when that scene is written the two must be reconciled and this note is the flag.",
+    "TWO STATEMENTS ARE DELIBERATELY BOUNDED. The direction of flow in the ophthalmic veins is given as possible rather than usual — the absence of valves permits reversal, it does not mean blood normally runs backwards from the face — because the unqualified version is the commonest way the danger triangle is remembered wrongly. And anticoagulation in the presence of venous haemorrhagic infarction is stated as the accepted treatment without a regimen, since it is the counter-intuitive principle that is the teaching point and dosing belongs elsewhere.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `vasculature` and `cross_section` for `Dural venous sinuses`. Beats 1, 2 and 4 are `vasculature` — what a sinus is, the drainage route, and the cavernous sinus — and beat 3 is `cross_section`, the coronal vertex section, which is a genuine section argument and not a mode added to satisfy the checklist: the subdural plane, the bridging vein crossing it and the sinus at the apex cannot be shown in any other view. Both required views are covered.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Dural venous sinuses`, spelled as CURRICULUM.json spells it. `Meninges` is NOT claimed although beat 3 names all the layers, because that structure belongs to `Ventricular System & CSF` and remains unauthored and visible; `Circle of Willis` is not claimed although the internal carotid is named passing through the cavernous sinus.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch, and all four beats are hollow for want of ARTWORK. With this scene, ALL FOUR structures of Blood Supply of the Brain are authored, all four `diagram`, all four blocked on artwork alone and none on authoring. The topic now needs exactly two things and no more runs of this task: an illustrator, and — if `3d_anatomy` is ever wanted here — a segmented intracranial vessel set, arterial and venous, which the catalog does not contain a single member of.",
+    "AUDIT 2026-09-04: ONE INTERNAL INCONSISTENCY FIXED. The `wall` structure narration listed THREE dural lines along which sinuses run (attached edge of falx, free edge of falx, falx-tentorium junction) while beat 1 listed FOUR, adding the attached edge of the tentorium. Four is correct and beat 1 was right: the transverse sinus that beat 2 traces runs in the attached posterolateral margin of the tentorium, so a three-line map cannot place a sinus the very next beat follows. The structure narration now states four and says so explicitly. This is check 6 — the scene against itself — and the corpus already held the correct answer one beat away, as REPAIR-BACKLOG.md predicts it usually does."
+  ]
+}

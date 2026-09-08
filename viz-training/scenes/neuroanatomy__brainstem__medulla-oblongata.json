@@ -12,10 +12,12 @@
     "Medulla oblongata"
   ],
   "learning_goal": "Place the medulla between the pons and the spinal cord at the foramen magnum, divide it into an open upper half behind the fourth ventricle and a closed lower half around the central canal, follow the two decussations that happen inside it — motor in front, sensory behind — and use their different levels to explain why a lesion here can cross the body's signs, and why the vital centres in its tegmentum make this the one brainstem segment whose damage stops breathing.",
-  "status": "candidate",
+  "status": "ready",
   "provenance": {
     "author": "task",
-    "authored_at": "2026-09-02"
+    "authored_at": "2026-09-02",
+    "audited_at": "2026-09-02",
+    "audited_by": "task"
   },
   "provider": {
     "primary": "bodyparts3d",

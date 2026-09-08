@@ -12,7 +12,7 @@
     "Cerebral hemispheres & lobes"
   ],
   "learning_goal": "Orient a hemisphere from the central and lateral sulci, name the four surface lobes plus the insula and say what bounds each, place the primary motor, sensory, auditory and visual cortices on named gyri, and describe what the corpus callosum and the hemispheric white matter carry.",
-  "status": "candidate",
+  "status": "ready",
   "provider": {
     "primary": "bodyparts3d",
     "fallbacks": []
@@ -977,7 +977,12 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "Insula",
+          "target": "ins_l",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ins_r",
           "intensity": 0.8
         }
       ],
@@ -1054,7 +1059,7 @@
         },
         {
           "op": "CROSS_SECTION",
-          "axis": "z",
+          "axis": "y",
           "offset": 0,
           "animate": true
         },
@@ -1068,12 +1073,14 @@
           "view": "anterior"
         }
       ],
-      "narration": "Cut across and the grey is on the outside, the white inside. Three kinds of fibre fill it: association fibres running within one hemisphere, commissural fibres crossing to the other, and projection fibres funnelling down towards the brainstem. The white matter is one model here, so those three are named rather than shown."
+      "narration": "Cut coronally — the plane you are looking straight at from the front — and the grey is on the outside, the white inside. Three kinds of fibre fill it: association fibres running within one hemisphere, commissural fibres crossing to the other, and projection fibres funnelling down towards the brainstem. The white matter is one model here, so those three are named rather than shown."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "audited_at": "2026-09-08",
+    "audited_by": "task"
   },
   "gaps": [
     "THE LOBES ARE NOT WHOLE MODELS. The catalog carries only the occipital lobe as a lobe (FMA72975 / FMA72976). The frontal, parietal and temporal lobes were searched under lobe, lobule, cortex and hemisphere spellings and have no whole-lobe model, so each is built here as a GROUP of its constituent gyri. Isolating 'Frontal lobe' therefore lights the gyri that were fetched, not the lobe's full extent — the gyri that have no model leave holes in it.",
@@ -1082,6 +1089,7 @@
     "Primary auditory cortex (Heschl's gyrus, on the upper surface of the superior temporal gyrus) and primary visual cortex (in the banks of the calcarine sulcus) have no separate models. Both are stated in the narration as described-not-shown.",
     "The corpus callosum is one model, so rostrum, genu, body and splenium cannot be lit apart; they are named on the single structure card. The same applies to the hemispheric white matter, which is one mass — the corona radiata, centrum semiovale and arcuate fasciculus are named, not shown.",
     "No cerebral artery of any kind is in the catalog — searched as artery, cerebral artery, circle of Willis, and by branch name. The middle cerebral artery is named twice in narration as an explanation and is never traced; the vascular teaching for this topic is blocked on geometry, not on authoring.",
-    "No mesh for this scene is present in meshes-lite/ yet: none of the 38 brain models it references has been fetched. Every beat is hollow until they are. The scene is authored at status 'candidate' for that reason and not because anything in it is unresolved."
+    "CORRECTED 2026-09-08 (audit): this entry previously read 'No mesh for this scene is present in meshes-lite/ yet: none of the 38 brain models it references has been fetched. Every beat is hollow until they are.' THAT WAS FALSE WHEN READ THIS RUN — all 38 are on disk, checked id by id against meshes-lite/. No beat is hollow and the 'candidate' status rested on a delivery ground that no longer existed. Same stale sentence as the sibling white-matter-tracts scene carried; assume it survives elsewhere in this course.",
+    "AXIS CONVENTION, measured this run rather than assumed: on these brain meshes x is left(+)/right(−), y is anterior(−)/posterior(+) and z is vertical — verified from the centroids of the optic chiasm, pineal body, occipital lobe and precentral gyrus. Beat 10's CROSS_SECTION was authored as axis 'z' (axial) while its narration described a cut seen from the front, which is coronal; corrected to axis 'y' at audit. This is the second instance of the CROSS_SECTION-axis-versus-narration defect recorded in REPAIR-BACKLOG.md §9, after deep-cerebellar-nuclei."
   ]
 }

@@ -748,7 +748,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
   },
   "gaps": [
     "NO BROCA'S AREA. The inferior frontal gyrus is absent from the catalog on both sides — searched as inferior frontal gyrus, pars opercularis, pars triangularis, pars orbitalis and operculum, all zero hits. The expressive half of the language network therefore cannot be lit, and beats 5, 6 and 7 each say so in the narration rather than lighting a neighbouring gyrus and letting it pass. Wernicke's area, by contrast, IS drawable (FMA72805). This matches the sibling scene neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes, which records the same absence.",
@@ -758,6 +760,6 @@
     "THE ARCUATE FASCICULUS is white matter and the catalog carries hemispheric white matter only as one undivided mass (FMA61822) — searched as arcuate, fasciculus and superior longitudinal, no hits. The language loop in beat 6 therefore routes through the supramarginal gyrus that overlies it, and the beat states the substitution.",
     "NO CEREBRAL ARTERY EXISTS IN THE CATALOG — searched as artery, cerebral artery and circle of Willis. Beat 8 teaches arterial territories by reasoning from the cortex on screen and says openly that no vessel is drawn. The vascular teaching for this topic is blocked on geometry, not on authoring, and belongs to the Blood Supply of the Brain topic when meshes exist.",
     "SIDES: FMA72662 is the LEFT precentral gyrus and FMA72661 the RIGHT; FMA72666 the LEFT postcentral and FMA72665 the RIGHT; FMA72805 the LEFT posterior superior temporal gyrus and FMA72804 the RIGHT; FMA72976 the LEFT occipital lobe and FMA72975 the RIGHT; FMA72690 the LEFT fusiform gyrus and FMA72689 the RIGHT. Language is authored on the left and the face area on the right deliberately, and each is stated as a population tendency rather than a rule.",
-    "No mesh referenced by this scene is present in meshes-lite/ yet — no brain model has been fetched. Every beat is hollow until they are, which is why the status is 'candidate'."
+    "CORRECTED 2026-09-08: this entry read that no mesh referenced by the scene was present in meshes-lite/ and that every beat was hollow — and gave that as the reason the status is `candidate`. IT WAS FALSE. All 18 of this scene’s models are on disk and every beat renders; re-checked id by id on 2026-09-08. The scene is still `candidate` for the one honest reason: it carries no provenance.audited_at, and `ready` is what a signature buys. Nothing about delivery is holding it."
   ]
 }

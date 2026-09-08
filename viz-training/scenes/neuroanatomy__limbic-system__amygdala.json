@@ -1,0 +1,459 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__limbic-system__amygdala",
+  "mode": "3d_anatomy",
+  "deferred_modes": [],
+  "course": "Neuroanatomy",
+  "topic": "Limbic System",
+  "structure": "Amygdala",
+  "covers": [
+    "Amygdala"
+  ],
+  "learning_goal": "Learn the amygdala by its POSITION and its TWO EXITS, not as 'the fear centre'. It is a grey nucleus in the roof of the temporal horn, immediately in FRONT of the head of the hippocampus, so the two are hit together by the same lesions and are separated only by which symptom appears. Its short route out is the STRIA TERMINALIS, which follows the tail of the caudate all the way round the ventricle to the hypothalamus; its direct route is the ventral amygdalofugal path. From that: why an amygdala output is autonomic and endocrine rather than motor, why stimulating it produces fear and dread rather than movement, and why the bilateral lesion syndrome — Kluver-Bucy — is a failure to ATTACH MEANING to what is seen rather than a failure to see it.",
+  "status": "ready",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-04",
+    "audited_at": "2026-09-04",
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
+  },
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "limbic system",
+      "amygdala",
+      "fear",
+      "emotion",
+      "temporal lobe"
+    ],
+    "terms": [
+      "amygdala",
+      "amygdaloid body",
+      "corpus amygdaloideum",
+      "stria terminalis",
+      "ventral amygdalofugal pathway",
+      "central nucleus",
+      "basolateral nucleus",
+      "uncus",
+      "temporal horn",
+      "hippocampus",
+      "Kluver-Bucy syndrome",
+      "hyperorality",
+      "hypersexuality",
+      "placidity",
+      "visual agnosia",
+      "fear conditioning",
+      "autonomic response",
+      "hypothalamus",
+      "temporal lobe epilepsy",
+      "aura",
+      "dread",
+      "Urbach-Wiethe"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": 0.35
+  },
+  "structures": [
+    {
+      "key": "amyg_l",
+      "name": "left amygdala",
+      "label": "Amygdala (L)",
+      "role": "primary",
+      "group": "The nucleus",
+      "layer": "organ",
+      "color": "#e06666",
+      "refs": {
+        "bodyparts3d": "FMA72833"
+      },
+      "terms": [
+        "amygdala",
+        "amygdaloid body",
+        "corpus amygdaloideum",
+        "almond",
+        "basolateral nucleus",
+        "central nucleus",
+        "uncus",
+        "temporal horn"
+      ],
+      "narration": "An almond-shaped mass of grey matter in the ROOF and anterior wall of the inferior horn of the lateral ventricle, deep to the uncus, sitting immediately IN FRONT OF AND ABOVE the head of the hippocampus and continuous with it behind. It is a true nucleus — a cluster of cell groups, unlike the hippocampus beside it, which is folded cortex — and its two functionally important groups are the BASOLATERAL group, which receives from the cortex and does the learning, and the CENTRAL nucleus, which projects to the hypothalamus and brainstem and produces the response. Neither group has its own mesh in this catalog; the almond is drawn whole and the parts are named."
+    },
+    {
+      "key": "amyg_r",
+      "name": "right amygdala",
+      "label": "Amygdala (R)",
+      "role": "primary",
+      "group": "The nucleus",
+      "layer": "organ",
+      "color": "#e06666",
+      "refs": {
+        "bodyparts3d": "FMA72832"
+      },
+      "terms": [
+        "amygdala",
+        "bilateral",
+        "Kluver-Bucy syndrome",
+        "Urbach-Wiethe disease"
+      ],
+      "narration": "The mirror image, and as with the hippocampus the pairing carries the clinical weight. A unilateral amygdala lesion is usually silent or subtle. It takes a BILATERAL lesion to produce Kluver-Bucy syndrome, which is why the syndrome is seen after bilateral temporal lobectomy, herpes simplex encephalitis, late frontotemporal dementia and — rarely and famously — Urbach-Wiethe disease, which calcifies both amygdalae and abolishes the recognition of fear in other people's faces while leaving every other kind of recognition intact."
+    },
+    {
+      "key": "hipp_l",
+      "name": "left hippocampus",
+      "label": "Hippocampus (L)",
+      "role": "context",
+      "group": "The nucleus",
+      "layer": "organ",
+      "color": "#4f9bff",
+      "refs": {
+        "bodyparts3d": "FMA72714"
+      },
+      "terms": [
+        "hippocampus",
+        "head of hippocampus",
+        "temporal horn",
+        "medial temporal lobe",
+        "anterograde amnesia"
+      ],
+      "narration": "Shown as the neighbour, because the relationship is the reason both are damaged together. The amygdala caps the FRONT of the hippocampal head; a coronal plane a centimetre apart shows one or the other. So a medial temporal insult hits both, and the two deficits are separated by their content rather than by their site: the hippocampal loss is MEMORY, the amygdala loss is the EMOTIONAL VALUE attached to what is remembered. `limbic-system__hippocampus` owns the memory half in full."
+    },
+    {
+      "key": "phg_l",
+      "name": "left parahippocampal gyrus",
+      "label": "Parahippocampal gyrus (L)",
+      "role": "context",
+      "group": "The nucleus",
+      "layer": "organ",
+      "color": "#7fb3ff",
+      "refs": {
+        "bodyparts3d": "FMA72706"
+      },
+      "terms": [
+        "parahippocampal gyrus",
+        "uncus",
+        "entorhinal cortex",
+        "medial temporal lobe",
+        "tentorial notch"
+      ],
+      "narration": "The surface the amygdala lies under: the amygdala sits deep to the UNCUS, the hooked front end of this gyrus. That is worth holding for two reasons. It is why the amygdala is at the herniation site, dragged over the tentorial edge with the uncus by any expanding hemispheric mass. And it is why an uncal seizure focus produces the classic temporal lobe aura — a rising epigastric sensation, an unpleasant smell, dread — rather than a movement: this is a region whose outputs are autonomic and affective."
+    },
+    {
+      "key": "caud_l",
+      "name": "left caudate nucleus",
+      "label": "Caudate nucleus (L)",
+      "role": "context",
+      "group": "The road out",
+      "layer": "organ",
+      "color": "#a2c4c9",
+      "refs": {
+        "bodyparts3d": "FMA72827"
+      },
+      "terms": [
+        "caudate nucleus",
+        "tail of caudate",
+        "stria terminalis",
+        "lateral ventricle",
+        "C-shape"
+      ],
+      "narration": "Context, and the only way to make sense of the amygdala's main output. The tail of the caudate curves down and forward in the roof of the temporal horn and ENDS at the amygdala; the stria terminalis runs beside it the whole way. So the amygdala's principal exit takes the long C-shaped route round the ventricle rather than the short way across, for the same reason the fornix does — it is following a cavity. `basal-ganglia-diencephalon__basal-ganglia` owns the caudate itself."
+    },
+    {
+      "key": "stria_l",
+      "name": "left stria terminalis",
+      "label": "Stria terminalis (L)",
+      "role": "primary",
+      "group": "The road out",
+      "layer": "organ",
+      "color": "#f6b26b",
+      "refs": {
+        "bodyparts3d": "FMA72940"
+      },
+      "terms": [
+        "stria terminalis",
+        "tail of caudate",
+        "hypothalamus",
+        "bed nucleus of the stria terminalis",
+        "central nucleus of amygdala",
+        "autonomic"
+      ],
+      "narration": "The amygdala's long output. It leaves the nucleus, arches back and up in the groove between the caudate and the thalamus, follows the C of the ventricle forward, and ends in the HYPOTHALAMUS and the septal region — so the target of the amygdala is not motor cortex but the autonomic and endocrine machinery. This is the anatomical answer to why the output of fear is a heart rate, a pupil, a cortisol pulse and a freeze, rather than an action: the wire goes to the hypothalamus. There is a second and much shorter route, the VENTRAL AMYGDALOFUGAL pathway, which cuts straight underneath to the same destinations and has no mesh in this catalog; it is named in beat 3 and not drawn."
+    },
+    {
+      "key": "stria_r",
+      "name": "right stria terminalis",
+      "label": "Stria terminalis (R)",
+      "role": "primary",
+      "group": "The road out",
+      "layer": "organ",
+      "color": "#f6b26b",
+      "refs": {
+        "bodyparts3d": "FMA72939"
+      },
+      "terms": [
+        "stria terminalis",
+        "hypothalamus",
+        "autonomic"
+      ],
+      "narration": "The right-sided partner, following the right ventricle on the same C. Shown so the pair reads as two symmetrical arches, which is how they appear from above and which distinguishes them from the fornix arches lying medial to them. Both striæ were fetched on 2026-09-08 and now draw, so beat 3 traces the structure itself rather than a route between its endpoints."
+    },
+    {
+      "key": "thal_l",
+      "name": "left thalamus",
+      "label": "Thalamus (L)",
+      "role": "context",
+      "group": "The road out",
+      "layer": "organ",
+      "color": "#b4a7d6",
+      "refs": {
+        "bodyparts3d": "FMA258716"
+      },
+      "terms": [
+        "thalamus",
+        "stria terminalis",
+        "caudate nucleus",
+        "groove"
+      ],
+      "narration": "Context and a landmark: the stria terminalis runs in the GROOVE between the thalamus and the tail-then-body of the caudate, so the thalamus is the surface that tells you where the stria is. It is the road's handrail and NOT its destination — the destination is the hypothalamus, whose floor is drawn beside it as the tuber cinereum."
+    },
+    {
+      "key": "tuber",
+      "name": "tuber cinereum",
+      "label": "Tuber cinereum — the floor of the hypothalamus",
+      "role": "primary",
+      "group": "The road out",
+      "layer": "organ",
+      "color": "#cc0000",
+      "approx": {
+        "shown_as": "tuber cinereum",
+        "detail": "hypothalamus — the stria terminalis ends in the ANTERIOR and MEDIAL hypothalamus, the preoptic area and the bed nucleus of the stria terminalis, none of which is separately modelled in this catalog"
+      },
+      "refs": {
+        "bodyparts3d": "FMA62327"
+      },
+      "terms": [
+        "tuber cinereum",
+        "hypothalamus",
+        "bed nucleus of the stria terminalis",
+        "preoptic area",
+        "mammillary body",
+        "autonomic",
+        "endocrine"
+      ],
+      "narration": "The visible floor of the HYPOTHALAMUS on the base of the brain, the grey swelling between the optic chiasm in front and the mammillary bodies behind. It is drawn here as the destination the stria terminalis is heading for, and it is drawn as an APPROXIMATION rather than as the exact target: the stria's terminal fields are the anterior and medial hypothalamus, the preoptic area and the bed nucleus of the stria terminalis, and none of those has a mesh. What the tuber cinereum does show truthfully is the REGION, and the region is the whole argument of beat 3 — the amygdala's output arrives at the floor of the diencephalon, where autonomic and endocrine control lives, and not at anything that moves a limb. `basal-ganglia-diencephalon__hypothalamus-pituitary` owns this structure and draws it with the mammillary body, lamina terminalis, chiasm and pituitary around it."
+    },
+    {
+      "key": "cing_l",
+      "name": "left cingulate gyrus",
+      "label": "Cingulate gyrus (L)",
+      "role": "context",
+      "group": "Where the meaning goes",
+      "layer": "organ",
+      "color": "#93c47d",
+      "refs": {
+        "bodyparts3d": "FMA72718"
+      },
+      "terms": [
+        "cingulate gyrus",
+        "limbic lobe",
+        "anterior cingulate",
+        "emotion"
+      ],
+      "narration": "The limbic cortex the amygdala talks to and is talked to by. Its anterior part is where the affective significance the amygdala assigns becomes something the rest of the cortex can act on — the difference between a response and a feeling. Shown in the mechanism beats so the amygdala is not left looking like an isolated switch."
+    },
+    {
+      "key": "insula_l",
+      "name": "left insula",
+      "label": "Insula (L)",
+      "role": "context",
+      "group": "Where the meaning goes",
+      "layer": "organ",
+      "color": "#c27ba0",
+      "refs": {
+        "bodyparts3d": "FMA72978"
+      },
+      "terms": [
+        "insula",
+        "interoception",
+        "visceral sensation",
+        "taste",
+        "disgust",
+        "temporal lobe epilepsy"
+      ],
+      "narration": "Buried in the depth of the lateral sulcus just above and lateral to the amygdala, and its close partner in the autonomic half of this system: the insula is where visceral sensation arrives. That adjacency is why the rising epigastric aura of temporal lobe epilepsy is hard to localise between the two, and why disgust and nausea belong to this region rather than to the amygdala alone."
+    },
+    {
+      "key": "orbg",
+      "name": "orbital gyri straight gyrus",
+      "label": "Orbital & straight gyri",
+      "role": "context",
+      "group": "Where the meaning goes",
+      "layer": "organ",
+      "color": "#ffd966",
+      "refs": {
+        "bodyparts3d": "BP51"
+      },
+      "terms": [
+        "orbitofrontal cortex",
+        "gyrus rectus",
+        "straight gyrus",
+        "uncinate fasciculus",
+        "inhibition",
+        "disinhibition"
+      ],
+      "narration": "The undersurface of the frontal lobe, connected to the amygdala by the uncinate fasciculus, and the reason the amygdala is not the last word on behaviour: the orbitofrontal cortex is what restrains the response. That pairing is why disinhibition after orbitofrontal damage and placidity after amygdala damage are opposite halves of the same circuit, and why frontotemporal dementia can produce both at once. The uncinate fasciculus itself has no mesh and is named only."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "In front of the hippocampus, under the uncus",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The nucleus"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "amyg_l",
+          "intensity": 1
+        }
+      ],
+      "narration": "One position, and it does most of the work in this scene. The amygdala is an almond of grey matter in the ROOF and front wall of the inferior horn of the lateral ventricle, deep to the uncus, lying immediately in FRONT of the head of the hippocampus and blending into it behind. Look at the two together: they are neighbours, not partners, and they do different jobs with the same input. Everything that reaches the medial temporal lobe reaches both, which is why a single lesion there gives a memory problem AND an emotional one, and why telling them apart at the bedside is done by the symptom rather than by the scan."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The pair — and why one is not enough",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The nucleus"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "amyg_l",
+            "amyg_r"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Both amygdalae from the front, sitting either side of the midline at the top of each temporal horn. The symmetry is the clinical point: a unilateral amygdala lesion is usually silent, and it takes a BILATERAL lesion to produce KLUVER-BUCY syndrome — placidity and loss of fear, hyperorality, hypersexuality, and a visual agnosia in which objects are seen accurately but not recognised for what they mean. Read that list as one deficit rather than four: the amygdala attaches emotional significance to perception, and without it a snake is a shape, food is a shape, and nothing carries a warning. The causes are the ones that take both temporal lobes at once — bilateral lobectomy, herpes encephalitis, late frontotemporal dementia."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "The long way out — stria terminalis round the ventricle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The road out"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "stria_l",
+          "intensity": 1
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "stria_l",
+          "path": [
+            "amyg_l",
+            "stria_l",
+            "thal_l",
+            "tuber"
+          ],
+          "duration": 6000
+        }
+      ],
+      "narration": "Follow the output. The stria terminalis leaves the amygdala, arches back and up beside the TAIL OF THE CAUDATE, runs the whole C of the ventricle in the groove between the caudate and the thalamus, and ends forward in the hypothalamus and septal region. Two things to take from watching it. First, the shape is a consequence of the cavity, exactly as the fornix's arch is — structures that develop with the ventricle travel with it. Second, and this is the yield: the destination is the HYPOTHALAMUS, and the trace ends on it — on the TUBER CINEREUM, the grey floor of the hypothalamus you can see on the base of the brain. The amygdala's output goes to the machinery that runs heart rate, pupil, cortisol and the freeze response, not to anything that moves a limb voluntarily. Two honest limits. The thalamus the trace passes through is the handrail, not a station: the stria runs in the groove beside it and does not synapse there. And the tuber cinereum is the hypothalamic REGION rather than the exact terminal field — the stria ends in the anterior and medial hypothalamus, the preoptic area and the bed nucleus of the stria terminalis, none of which is separately modelled, which is why the tuber is marked as an approximation. There is also a second, shorter road — the ventral amygdalofugal pathway, straight underneath to the same targets — which has no mesh here and is named rather than drawn."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Fear in, response out — and what restrains it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Where the meaning goes"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "amyg_l",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "amyg_l",
+          "to": "orbg",
+          "kind": "association"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "amyg_l",
+          "to": "cing_l",
+          "kind": "association"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "amyg_l",
+            "orbg"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Put the circuit together in one sentence and the syndromes fall out of it. Sensory information arrives at the BASOLATERAL group from the cortex; the CENTRAL nucleus sends the answer down to the hypothalamus and brainstem; the cingulate makes it a feeling; and the ORBITOFRONTAL cortex, tied to the amygdala by the uncinate fasciculus, decides whether to let the response run. So: stimulate the amygdala in an awake patient and you get fear and dread with no movement, which is also the temporal lobe seizure aura. Destroy both and you get placidity and Kluver-Bucy. Damage the orbitofrontal end instead and you get the opposite — disinhibition, with the amygdala unrestrained. The two nuclear groups, the uncinate fasciculus and the hypothalamus are all named here and NOT drawn, which the scene records; what IS drawn is every station large enough to have a mesh, and the relationships between them are shown as connectors rather than as invented geometry."
+    }
+  ],
+  "gaps": [
+    "THE STRIA TERMINALIS EXISTS IN THE CATALOG AND IS AUTHORED — THIS IS THE FAILURE MODE 1 CATCH OF THIS RUN. The obvious search for an amygdala output is `amygdalofugal`, which returns NOTHING, and stopping there would have produced a scene whose only exit was described. Searching `stria` instead returns FOUR entries, of which FMA72940 LEFT STRIA TERMINALIS and FMA72939 RIGHT STRIA TERMINALIS are exactly the pathway beat 3 needs. (The other two, FMA73414 and FMA73413, are the striae medullares of the thalamus — a DIFFERENT tract, habenular not amygdaloid, and deliberately not used here.) Recorded loudly because REPAIR-BACKLOG.md names this exact habit as the commonest source of false absence claims in this corpus. AUDIT NOTE 2026-09-04: this entry is true and the catch was real — and the SAME RUN then committed the identical error two entries below, declaring the hypothalamus absent when the tuber cinereum was in the catalog and on disk. Both notes are left standing side by side deliberately. A run that has just caught failure mode 1 is not thereby immune to it, and this file is now the corpus's clearest single example of that.",
+    "DELIVERY, CLOSED 2026-09-08: ALL 12 OF THIS SCENE’S STRUCTURE MESHES ARE NOW IN meshes-lite/. This entry previously recorded 10 of 12, the two absentees being FMA72940 and FMA72939, the striæ terminales — which made beat 3 hollow in its middle, tracing along a structure that would not render. Both were fetched and decimated on 2026-09-08 (3000 triangles; FMA72939 shed 5 stray fragments of 0.23 mm or less, worth knowing if its surface ever looks nicked). Beat 3 is now whole: the road as well as both its ends.",
+    "CORRECTED AT AUDIT 2026-09-04 — THE PREVIOUS NOTE HERE WAS A FALSE ABSENCE CLAIM, AND IT WAS THE CENTRAL DEFECT OF THIS SCENE. The authoring run wrote 'NO HYPOTHALAMUS IN THIS CATALOG' and specifically that a search for `tuber` 'returns NOTHING'. It does not: `tuber` returns FMA62327 TUBER CINEREUM, which is the floor of the hypothalamus, is in available-meshes.json, and is in meshes-lite/ on disk. Three independent things should have stopped that sentence being written. (1) The catalog answers the search. (2) `basal-ganglia-diencephalon__hypothalamus-pituitary` — cited in the old note as 'record[ing] the same absence' — does the opposite: it DRAWS FMA62327, with the mammillary body, lamina terminalis, optic chiasm and pituitary around it, and its own gap note is carefully narrower, claiming only that no hypothalamic NUCLEUS exists. (3) `limbic-system__hippocampus`, authored by the same run in the same hour, names the tuber cinereum in the mammillary body's narration as a real landmark. The corpus contained the correct answer in two places, one of them the sibling file. This is failure mode 1 and failure mode 6 together, inside a gaps[] note whose FIRST entry congratulates the run for avoiding failure mode 1 — which is the lesson worth keeping: catching the habit once in a run is not evidence of having avoided it elsewhere in the same run. TEACHING CONSEQUENCE, which is why this mattered rather than being a bookkeeping slip: beat 3's entire yield is the sentence 'the destination is the HYPOTHALAMUS', and the beat was ending its trace on the THALAMUS while telling the student it was doing so. Two structures whose names differ by two letters, one of which the stria merely runs beside without synapsing in. FIXED: FMA62327 authored into `The road out` with `approx` marking it as the hypothalamic REGION rather than the exact terminal field, beat 3's trace extended to end on it, and the narration now separates the handrail (thalamus) from the destination (hypothalamus). STILL GENUINELY ABSENT and correctly recorded: the stria's actual terminal nuclei — searched `bed nucleus`, `preoptic`, `hypothalam`, `infundibul`, all return NOTHING; `septal` returns three CARDIAC entries and nothing in the brain. FMA74877 mammillary body exists and is deliberately NOT used here: it is the FORNIX's target, is owned by `limbic-system__hippocampus`, and borrowing it would teach the wrong endpoint for this tract.",
+    "THE AMYGDALA'S INTERNAL NUCLEI ARE NAMED AND NOT DRAWN. Searched basolateral, corticomedial, central nucleus, lateral nucleus, amygdaloid, corpus amygdaloideum: the amygdala exists as ONE whole mesh per side and `nucleus` in this catalog returns only the two caudate nuclei. Beats 1 and 4 name the basolateral (input, learning) and central (output, response) groups because the input-output distinction is the argument, and both beats say the groups are described rather than shown. The UNCINATE FASCICULUS is a fourth described-not-drawn item — `uncinate` returns nothing — and `SHOW_RELATIONSHIP` is used for it, which is the spec's connector op and claims no geometry.",
+    "NO ANCHORS WERE AUTHORED AND NONE WAS ATTEMPTED. Every feature worth marking here — the uncus, the amygdalohippocampal junction, the origin of the stria — is a region of a smooth soft-tissue mesh with no attaching neighbour to witness it and no defining axis, so neither of `derive-landmark.mjs`'s definitions applies. Nothing was placed by eye.",
+    "SIDES, STATED OUT LOUD. FMA72833 = LEFT amygdala, FMA72832 = RIGHT amygdala. FMA72940 = LEFT stria terminalis, FMA72939 = RIGHT. FMA72714 = LEFT hippocampus. FMA72706 = LEFT parahippocampal gyrus. FMA72827 = LEFT caudate nucleus (FMA72826 is the right and is NOT used here). FMA258716 = LEFT thalamus. FMA72718 = LEFT cingulate gyrus. FMA72978 = LEFT insula. FMA62327 tuber cinereum is UNPAIRED — a midline structure, so it carries no side and none is claimed for it. Every `name` is the catalog's name character for character, including `orbital gyri straight gyrus` (BP51), which is the catalog's own odd spelling and is left verbatim rather than tidied.",
+    "BP51 IS A NON-FMA ID AND IS USED DELIBERATELY. It is in available-meshes.json and in meshes-lite/, and it is the only orbitofrontal geometry the catalog holds. Its name, `orbital gyri straight gyrus`, describes a combined region rather than one gyrus, so the label reads `Orbital & straight gyri` and the narration treats it as the undersurface of the frontal lobe rather than as a named single gyrus. Flagged because a later run seeing a `BP` prefix among FMA ids could reasonably read it as a fabrication; it is not.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `location` and `mechanism` for `Amygdala`. Beats 1-2 are `location` and beats 3-4 are `mechanism`. Both covered. No `cross_section` beat was authored: the section that would be worth cutting is the coronal one through the amygdala and hippocampal head, and it is authored in `limbic-system__hippocampus` beats 3 and 4, which the curriculum asks for there and not here.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Amygdala`, spelled as CURRICULUM.json spells it. `Fornix & Papez circuit` is NOT claimed although the fornix is contrasted with the stria terminalis in beat 3, and `Hippocampus` is not claimed although it is shown as a neighbour in beat 1 — that structure is authored as its own scene the same run. `Basal ganglia` is not claimed although the caudate is shown and named.",
+    "CONSISTENCY WITH `limbic-system__hippocampus`, AUTHORED THE SAME RUN AND READ AGAINST THIS FILE. Both scenes state that the amygdala lies in front of the hippocampal head, that the uncus is the herniation point, that the bilateral lesion is what produces the syndrome, and that these two structures are separated by symptom rather than by site. The two arch-shaped outputs are deliberately given the same explanation — fornix and stria terminalis both take the long C-shaped road because they follow the ventricle — and each scene names the other's tract as the comparison. If a later run changes either explanation it must change both; this note is the flag. AUDIT 2026-09-04: the two scenes were re-read against each other and the cross-checks above all hold. The one place they DISAGREED was the hypothalamus — `hippocampus` names the tuber cinereum as a real landmark in the mammillary body's narration while this scene declared it absent — and that disagreement, between two files written in the same hour, is what exposed this scene's central error. It is the argument for reading the sibling before signing.",
+    "STATUS: `ready` AS OF 2026-09-08. The 2026-09-04 audit signed this scene and held it at `candidate` for delivery and delivery alone, recording the exact condition for release — \"promote to `ready` the moment FMA72940 and FMA72939 land; nothing else in this file is outstanding.\" They landed on 2026-09-08 and the scene was promoted on that stated condition, not on a fresh judgement. The anatomy was checked at the audit and is unchanged."
+  ]
+}

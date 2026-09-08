@@ -1,0 +1,422 @@
+{
+  "schema": 2,
+  "id": "histology__epithelium__cell-junctions",
+  "mode": "microscopic",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Histology",
+  "topic": "Epithelium",
+  "structure": "Cell junctions",
+  "covers": [
+    "Cell junctions"
+  ],
+  "learning_goal": "Learn the junctional complex as a STACK IN A FIXED ORDER down the lateral surface of an epithelial cell — tight junction, then adherens junction, then desmosome, with gap junctions scattered below and hemidesmosomes at the floor — and learn each one by the single question it answers, because the order and the questions together predict every disease in this scene. Tight junction: what may pass BETWEEN the cells, and which end of the cell is the apex. Adherens junction and desmosome: what holds the cells to EACH OTHER, one anchored to actin and one to keratin. Gap junction: what passes THROUGH one cell into the next without entering the space between. Hemidesmosome: what holds the sheet to its BASEMENT MEMBRANE. Then read the blistering diseases off the stack — pemphigus splits the desmosomes and blisters INSIDE the epidermis, pemphigoid splits the hemidesmosomes and blisters UNDER it — and notice that the level of the blister is simply the level of the junction that was attacked.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-08"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "histology",
+      "epithelium",
+      "cell junctions",
+      "cell adhesion",
+      "membrane biology",
+      "slide reading"
+    ],
+    "terms": [
+      "cell junction",
+      "junctional complex",
+      "terminal bar",
+      "tight junction",
+      "zonula occludens",
+      "occludin",
+      "claudin",
+      "adherens junction",
+      "zonula adherens",
+      "E-cadherin",
+      "catenin",
+      "actin",
+      "terminal web",
+      "desmosome",
+      "macula adherens",
+      "desmoglein",
+      "desmocollin",
+      "keratin",
+      "intermediate filament",
+      "tonofilament",
+      "gap junction",
+      "nexus",
+      "connexin",
+      "connexon",
+      "hemidesmosome",
+      "integrin",
+      "basement membrane",
+      "lamina lucida",
+      "focal adhesion",
+      "paracellular pathway",
+      "transcellular pathway",
+      "apical polarity",
+      "fence function",
+      "pemphigus vulgaris",
+      "bullous pemphigoid",
+      "Nikolsky sign",
+      "acantholysis",
+      "epidermolysis bullosa",
+      "Charcot-Marie-Tooth",
+      "E-cadherin loss",
+      "lobular carcinoma",
+      "intercalated disc"
+    ]
+  },
+  "camera": {
+    "framing": "cross_section"
+  },
+  "structures": [
+    {
+      "key": "the_stack",
+      "label": "The stack — and why the order is not arbitrary",
+      "role": "primary",
+      "group": "The junctional complex",
+      "layer": "cell",
+      "color": "#e8e2d4",
+      "terms": [
+        "junctional complex",
+        "terminal bar",
+        "tight junction",
+        "adherens junction",
+        "desmosome",
+        "apical",
+        "lateral surface",
+        "polarity"
+      ],
+      "narration": "Run down the lateral surface of one columnar cell from its free surface and the junctions arrive in a fixed order: TIGHT junction first, right at the apex; ADHERENS junction immediately below it; DESMOSOMES below that, scattered rather than continuous. Those three together are the JUNCTIONAL COMPLEX, and on light microscopy they are not individually resolvable — what you can see is a dark line across the apical ends of adjacent cells, which the older literature calls the TERMINAL BAR. Say that plainly at the start: almost everything else in this scene is electron microscopy or immunofluorescence, and a student who expects to find a desmosome on an H&E slide is looking for something no light microscope will show. The order matters because it is functional. The seal has to be at the top or it seals nothing; the mechanical anchors sit below the seal so that pulling on the sheet does not tear the seal open."
+    },
+    {
+      "key": "tight",
+      "label": "Tight junction (zonula occludens) — the seal and the fence",
+      "role": "primary",
+      "group": "The junctional complex",
+      "layer": "cell",
+      "color": "#e74c3c",
+      "terms": [
+        "tight junction",
+        "zonula occludens",
+        "occludin",
+        "claudin",
+        "ZO-1",
+        "paracellular pathway",
+        "fence function",
+        "apical polarity",
+        "blood-brain barrier",
+        "blood-testis barrier",
+        "belt"
+      ],
+      "narration": "A continuous BELT — zonula means belt — running right round the apex of every cell, where the outer leaflets of adjacent membranes are pulled into contact by rows of CLAUDINS and occludins. It does two different jobs and both are examinable. The GATE: it closes the paracellular route, so anything crossing this epithelium must go THROUGH the cells and be handled by their transporters rather than leaking between them. That is what makes an epithelium a barrier at all, and it is why tight junctions are the anatomical basis of the blood-brain and blood-testis barriers. But the gate is selective rather than absolute — which claudins are present sets how leaky the belt is, so the proximal tubule is deliberately leaky and the distal nephron and bladder are tight. The FENCE: because the belt encircles the cell, membrane proteins cannot diffuse past it, so the apical membrane keeps a different protein population from the basolateral one. That fence is the physical basis of POLARITY — of a cell having an apex at all — and every absorptive mechanism that puts a transporter on one side and a pump on the other depends on it."
+    },
+    {
+      "key": "adherens",
+      "label": "Adherens junction (zonula adherens) — cadherin to actin",
+      "role": "primary",
+      "group": "The junctional complex",
+      "layer": "cell",
+      "color": "#f5b041",
+      "terms": [
+        "adherens junction",
+        "zonula adherens",
+        "E-cadherin",
+        "catenin",
+        "beta-catenin",
+        "actin",
+        "terminal web",
+        "calcium-dependent",
+        "belt",
+        "lobular carcinoma",
+        "epithelial-mesenchymal transition"
+      ],
+      "narration": "The second belt, immediately below the tight junction: E-CADHERIN molecules reaching across the gap and binding their partners on the next cell, calcium-dependent, linked on the inside through CATENINS to a ring of ACTIN. The actin rings of all the cells in the sheet join up into the TERMINAL WEB, so the epithelium has one continuous contractile band running through it — which is how a sheet of cells changes shape together during development and how a wound edge purses closed. Two things follow. First, this junction is not only mechanical: beta-catenin is also a signalling molecule, so the state of cell-cell adhesion is reported to the nucleus. Second, the clinical one: LOSS of E-cadherin frees cells from each other and is a step in invasion and metastasis. Lobular carcinoma of the breast characteristically loses it, which is why its cells infiltrate in single file rather than forming the cohesive masses of a ductal carcinoma. That single-file pattern IS the missing adherens junction, seen down a microscope."
+    },
+    {
+      "key": "desmosome",
+      "label": "Desmosome (macula adherens) — a spot weld to keratin",
+      "role": "primary",
+      "group": "The junctional complex",
+      "layer": "cell",
+      "color": "#a569bd",
+      "terms": [
+        "desmosome",
+        "macula adherens",
+        "desmoglein",
+        "desmocollin",
+        "plakoglobin",
+        "desmoplakin",
+        "keratin",
+        "intermediate filament",
+        "tonofilament",
+        "prickle cell",
+        "spinous layer",
+        "intercalated disc"
+      ],
+      "narration": "Not a belt but a SPOT — macula means spot — and that difference is the whole of the distinction from the adherens junction. Desmogleins and desmocollins bridge the gap; on the inside a dense plaque of plakoglobin and desmoplakin anchors not actin but KERATIN intermediate filaments, which loop into the plaque and run back across the cell to the desmosome on the far side. So the epithelium is stitched together into one continuous keratin network, and that is why stratified squamous epithelium can be scraped, stretched and chewed without coming apart. This is also the one junction with a genuine light-microscopic footprint: in the SPINOUS layer of the epidermis the cells shrink slightly in processing but stay pinned at their desmosomes, so the cell borders appear covered in tiny spines — the 'prickle cells' — and each prickle marks a desmosome. Worth knowing that cardiac muscle uses the same junction in the intercalated disc for the same reason: high mechanical load."
+    },
+    {
+      "key": "gap",
+      "label": "Gap junction (nexus) — a shared pore, not an adhesion",
+      "role": "primary",
+      "group": "Communication and anchorage",
+      "layer": "cell",
+      "color": "#58d68d",
+      "terms": [
+        "gap junction",
+        "nexus",
+        "connexin",
+        "connexon",
+        "electrical coupling",
+        "second messenger",
+        "calcium",
+        "cAMP",
+        "syncytium",
+        "cardiac muscle",
+        "smooth muscle",
+        "osteocyte",
+        "Charcot-Marie-Tooth"
+      ],
+      "narration": "The odd one out, and the one to keep separate in your head: a gap junction holds nothing together. Six CONNEXIN subunits form a CONNEXON — a pore — in one membrane, it docks with a connexon in the next cell, and the result is a channel from cytoplasm to cytoplasm. Ions, calcium, cyclic AMP and other small molecules under about a kilodalton pass straight from one cell into the next WITHOUT ever entering the extracellular space, which is exactly what distinguishes this from every other junction here. Consequences: a sheet of cells becomes electrically and metabolically one unit, which is how cardiac and smooth muscle contract as a syncytium, how an early embryo shares signals, and how osteocytes buried in bone stay alive and coordinated. The channels also close on a rise in intracellular calcium or a fall in pH, which isolates a dying cell from its neighbours. And connexin mutations cause disease in the places that depend most on coupling — some forms of Charcot-Marie-Tooth and of congenital deafness."
+    },
+    {
+      "key": "hemidesmosome",
+      "label": "Hemidesmosome — the sheet to its floor",
+      "role": "primary",
+      "group": "Communication and anchorage",
+      "layer": "cell",
+      "color": "#5d8aa8",
+      "terms": [
+        "hemidesmosome",
+        "integrin",
+        "alpha6-beta4 integrin",
+        "BP180",
+        "BP230",
+        "laminin",
+        "basement membrane",
+        "lamina lucida",
+        "keratin",
+        "anchoring fibril",
+        "type VII collagen",
+        "focal adhesion",
+        "epidermolysis bullosa"
+      ],
+      "narration": "Half a desmosome in appearance and a different molecule underneath — which is the trap in the name. It looks like a plaque with keratin filaments running into it, but there is no cell on the other side and the bridging protein is not a cadherin: it is an INTEGRIN, alpha6-beta4, binding LAMININ in the basement membrane, together with BP180 and BP230, the two antigens the pemphigoid autoantibodies find. So the basal cell is pinned to its floor by the same keratin network that pins it to its neighbours, and the sheet and its substrate become one mechanical unit. Below the basement membrane, anchoring fibrils of type VII collagen tie the whole thing into the dermis; when they are defective the split happens even deeper, which is dystrophic epidermolysis bullosa. Read the depth of a blister as an address: the deeper the failed attachment, the deeper the split and the more likely it is to scar."
+    },
+    {
+      "key": "blister_level",
+      "label": "The blister is at the level of the junction attacked",
+      "role": "primary",
+      "group": "Reading the level",
+      "layer": "tissue",
+      "color": "#cd6155",
+      "terms": [
+        "pemphigus vulgaris",
+        "bullous pemphigoid",
+        "desmoglein 3",
+        "desmoglein 1",
+        "BP180",
+        "BP230",
+        "acantholysis",
+        "Nikolsky sign",
+        "intraepidermal blister",
+        "subepidermal blister",
+        "direct immunofluorescence",
+        "chicken wire",
+        "mucosal involvement"
+      ],
+      "narration": "This is the payoff of learning the stack in order, and it is one rule rather than two diseases. PEMPHIGUS VULGARIS: autoantibodies against DESMOGLEIN, so the DESMOSOMES fail. The desmosome is between keratinocytes, so the split is INTRAEPIDERMAL — the cells fall apart from one another, which is ACANTHOLYSIS, the blister roof is thin and breaks, the patient presents with erosions rather than intact bullae, sliding a finger on normal-looking skin shears it (Nikolsky positive), and because desmoglein 3 is well represented in mucosa the mouth is usually involved and often first. Immunofluorescence outlines every cell — the 'chicken wire' or fishnet pattern — because the antigen is on the cell surfaces. BULLOUS PEMPHIGOID: autoantibodies against BP180 and BP230, so the HEMIDESMOSOMES fail. Those are below the whole epidermis, so the split is SUBEPIDERMAL, the roof is the full thickness of the epidermis and therefore tough, the patient presents with large TENSE intact blisters, Nikolsky is negative, mucosa is usually spared, and immunofluorescence gives a single LINEAR band along the basement membrane rather than a net. Deeper attack, deeper split, tougher roof — the whole clinical picture is derivable from where in the stack the antibody landed."
+    },
+    {
+      "key": "what_you_see",
+      "label": "What you can actually see, and with what",
+      "role": "context",
+      "group": "Reading the level",
+      "layer": "tissue",
+      "color": "#b0b0b0",
+      "terms": [
+        "terminal bar",
+        "prickle cell",
+        "spinous layer",
+        "electron microscopy",
+        "immunofluorescence",
+        "immunohistochemistry",
+        "H&E",
+        "freeze fracture",
+        "acantholysis"
+      ],
+      "narration": "The honesty card, because this topic is taught with pictures that come from four different machines and students conflate them. On ROUTINE H&E you can see exactly three things from this scene: the TERMINAL BAR, a dark line across the apical ends of adjacent cells, which is the whole junctional complex unresolved; the PRICKLES of the spinous layer, each one a desmosome held while the cells shrank; and ACANTHOLYSIS, cells rounded up and floating apart in a pemphigus blister, which is desmosomal failure visible at light-microscope scale. Everything else here needs something more. The three-layer stack, the pore of a connexon and the plaque of a hemidesmosome are ELECTRON microscopy; the belt-versus-spot geometry of zonula against macula comes largely from FREEZE FRACTURE; the chicken-wire and linear patterns of the blistering diseases are IMMUNOFLUORESCENCE on a fresh biopsy, not stains. Naming the instrument beside each fact is not pedantry — it is what stops a student hunting for a tight junction on a slide that cannot show one."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "One cell, top to bottom, in order",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The junctional complex"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:down-the-lateral-surface",
+          "path": [
+            "the_stack",
+            "tight",
+            "adherens",
+            "desmosome"
+          ],
+          "duration": 6000
+        }
+      ],
+      "narration": "Take one columnar cell and walk down its side from the free surface. TIGHT junction at the apex — a continuous belt that seals the gap between the cells. ADHERENS junction just below it — a second continuous belt, cadherin outside and actin inside. DESMOSOMES below that — spots, not belts, anchoring keratin. Those three in that order are the JUNCTIONAL COMPLEX. Learn the order as a piece of engineering rather than a list: the seal must be above everything else or it seals nothing, and the mechanical anchors sit beneath the seal so that load on the sheet is taken by the anchors instead of tearing the seal apart. And note now what you are looking at, because it governs the whole scene: at light-microscope resolution these three are one dark line across the tops of the cells, the terminal bar. The three-layer picture in your head is an electron micrograph."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "The seal that also makes an apex",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The junctional complex"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "tight",
+          "intensity": 1
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "tight",
+            "adherens"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "The tight junction answers two questions at once and students usually learn only the first. As a GATE it closes the paracellular route, so molecules crossing the epithelium must pass through the cells and be selected by their transporters. That is what turns a sheet of cells into a barrier, and it is what the blood-brain and blood-testis barriers are made of. It is a tunable gate rather than a wall — the claudins present decide how leaky it is, which is why the proximal tubule leaks deliberately and the bladder does not. As a FENCE it does something quite different: because the belt goes right round the cell, membrane proteins cannot slide past it, so the apical membrane keeps a different set of proteins from the basolateral one. That is POLARITY, and it is the precondition for every directional transport mechanism in the body — a pump on one face and a channel on the other only works if the cell can keep them apart. Then look at the adherens belt beneath it: same belt geometry, entirely different job, holding cells together through cadherin and actin rather than sealing the space between them."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Two ways to be held, two filaments",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "adherens",
+            "desmosome",
+            "hemidesmosome"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "desmosome",
+          "to": "hemidesmosome",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Three anchoring junctions, and the clean way to hold them apart is by asking two questions of each: belt or spot, and which filament. ADHERENS — belt, cadherin, ACTIN, joining the cells' actin rings into one contractile terminal web that lets the sheet change shape together. DESMOSOME — spot, desmoglein and desmocollin, KERATIN, stitching the whole epithelium into one continuous intermediate-filament network so it survives being stretched and abraded. HEMIDESMOSOME — spot, but INTEGRIN rather than cadherin, because there is no cell on the far side: it binds laminin in the basement membrane, and it runs keratin into the same network. So the keratin skeleton of the epidermis is continuous from cell to cell to floor, which is the mechanical claim this beat exists to make and the reason the next beat's diseases behave as they do. Two honest notes on what is shown: none of these plaques is resolvable by light microscopy, and the belt-versus-spot geometry comes from freeze fracture — this beat is a diagram of electron-microscopic and molecular findings, not of anything a student will meet on a slide."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The junction that holds nothing together",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Communication and anchorage"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "gap",
+          "intensity": 1
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "gap",
+            "tight"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Set the gap junction against the tight junction, because the pair makes the distinction stick. The TIGHT junction controls what goes BETWEEN two cells — it is about the extracellular space. The GAP junction abolishes the extracellular space for small molecules: two docked connexons make a continuous channel from one cytoplasm into the next, and ions, calcium and cyclic AMP pass THROUGH without ever being outside a cell. It provides no mechanical strength whatsoever, which is why it is the one junction that is not an adhesion and why it belongs in a different group from everything above. What it buys is coordination: cardiac and smooth muscle contract as a syncytium because of it, an early embryo shares signals through it, and osteocytes sealed inside bone stay alive by it. It is also gated — closing on a calcium rise or a pH fall, which quarantines a damaged cell from its neighbours instead of letting the damage spread through the shared pore."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Read the blister, name the junction",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Reading the level"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "desmosome"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hemidesmosome"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "desmosome",
+            "hemidesmosome"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "blister_level",
+          "intensity": 1
+        }
+      ],
+      "narration": "Now collect the whole scene into one rule: the blister forms at the level of the junction that was attacked, and everything else about the disease follows from that level. Attack the DESMOSOME — pemphigus vulgaris, antibodies to desmoglein — and the split is between keratinocytes, INSIDE the epidermis. Thin roof, so the blisters break and the patient shows erosions; shearing normal skin peels it, so Nikolsky is positive; the mouth is usually involved; the cells round up and float apart, which is acantholysis and is the one thing here you can see on an ordinary slide; and immunofluorescence outlines every cell in a chicken-wire net, because the antigen is on the cell surfaces. Attack the HEMIDESMOSOME — bullous pemphigoid, antibodies to BP180 and BP230 — and the split is BENEATH the whole epidermis. The roof is full-thickness and tough, so the blisters are large, tense and intact; Nikolsky is negative; mucosa is usually spared; and immunofluorescence gives one LINEAR band along the basement membrane instead of a net. Same rule one level deeper again for the anchoring fibrils of type VII collagen and dystrophic epidermolysis bullosa, which splits below the basement membrane and scars. You are not memorising two diseases. You are reading a depth off the stack in beat 1."
+    }
+  ],
+  "gaps": [
+    "NO MODELS ARE REFERENCED AND NONE COULD BE, AND THE CATALOG WAS SEARCHED RATHER THAN ASSUMED. `junction`, `desmosome`, `hemidesmosome`, `zonula`, `occlud`, `adheren`, `claudin`, `cadherin`, `connexin`, `epitheli`, `basement` and `cell` ALL RETURN NOTHING in available-meshes.json. `membrane` returns exactly four entries and all four are interosseous membranes of the forearm and leg — a gross fibrous sheet, nothing to do with a plasma membrane, and named here so a later run does not mistake the hit for a relevant one. This is a molecular-scale subject and the catalog is gross organ surfaces; the correct provider is `svg` and every structure card carries no refs{}.",
+    "STATUS IS `planned` AND NO ARTWORK EXISTS. Promote it when five drawings exist. (1) THE STACK — one lateral cell border from apex downwards with tight, adherens and desmosome in that order, drawn at electron-microscope scale and LABELLED as such, plus an inset of what the same region looks like on H&E, which is a single dark terminal bar. Beat 1 makes both claims and the figure must make both or it teaches the three-layer picture as something visible. (2) A tight junction from two angles: in section, showing the outer leaflets in contact; and in face view as a continuous belt encircling the cell, since the GATE and the FENCE are two different pictures and the fence only makes sense once the belt is seen to close. (3) A three-panel anchoring comparison at one scale — adherens with actin, desmosome with keratin, hemidesmosome with keratin and integrin against a basement membrane — with the FILAMENT drawn in a distinct colour in each, because filament identity is the whole of beat 3. (4) A connexon pair in section with a molecule passing through and the extracellular space drawn EXPLICITLY unbreached, which is the one thing that separates a gap junction from everything else in the scene. (5) A two-panel blister figure with the split level drawn on the same epidermis, intraepidermal beside subepidermal, and the two immunofluorescence patterns — fishnet and linear band — beside them. That fifth figure carries beat 5 entirely.",
+    "DRAWABILITY: ZERO models referenced, so nothing is missing from meshes-lite/ and nothing waits on a fetch; the hollowness is entirely at the artwork layer. Same systemic finding as `simple-epithelia`, `stratified-epithelia` and `glandular-epithelium`: non-3d scenes in this corpus reach `planned` and stop, because `ready` requires something to draw. This is the fourth Histology scene and it completes the Epithelium topic — all four of its CURRICULUM.json structures are now authored, and all four are `planned` for the same reason.",
+    "ALMOST NOTHING IN THIS SCENE IS VISIBLE BY LIGHT MICROSCOPY, AND THE SCENE SAYS SO THREE TIMES RATHER THAN ONCE. The `what_you_see` card lists the only three light-microscopic findings in the topic — the terminal bar, the prickles of the spinous layer, and acantholysis — and names the instrument behind every other claim: electron microscopy for the stack, the connexon and the plaques, freeze fracture for belt-versus-spot, immunofluorescence for the two blistering patterns. Beat 1 and beat 3 each repeat the limit in their own narration rather than delegating it to the card. Recorded as a gap because it constrains the artwork: the figures in the list above must be labelled with their modality, and a drawing of a junctional complex presented as though it were a histology slide would teach the error this scene is built to prevent.",
+    "THE SPINOUS-LAYER PRICKLES ARE A PROCESSING ARTEFACT AND ARE TAUGHT AS ONE. The spines appear because the cells shrink in fixation while staying pinned at their desmosomes; they are not projections of the living cell. The desmosome card states this. Flagged so a later run does not read the artefact note as an error and 'correct' it away — it is the same category as the serous demilune caveat in `glandular-epithelium`, a real and examinable appearance that depends on how the tissue was prepared, and both are stated with that dependence attached.",
+    "COVERS[] HOLDS EXACTLY ONE ENTRY, `Cell junctions`, spelled as CURRICULUM.json spells it. The scene leans on `Simple epithelia` for polarity and the basement membrane and on `Stratified epithelia` for the layers of the epidermis and the two blistering diseases, and claims neither. The epidermal strata are NOT re-taught here — beat 5 needs only 'inside the epidermis' against 'beneath it' — because `stratified-epithelia` owns the five layers and already marks the two split levels on them.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `cross_section` and `mechanism` for this structure. Beats 1 and 5 are `cross_section` and beats 2, 3 and 4 are `mechanism`. Both covered. The two cross_section beats are deliberately the first and the last: beat 1 establishes the stack as a picture, beat 5 reads a real section against it, and the three mechanism beats in between are what each junction DOES.",
+    "CROSS-CHECKED AGAINST THE THREE SIBLING SCENES IN THIS TOPIC BEFORE AUTHORING, SINCE A STUDENT READS ALL FOUR CONSECUTIVELY. FACTS SHARED WITH `stratified-epithelia` AND WHICH MUST BE CHANGED IN BOTH IF CHANGED IN EITHER: pemphigus splits INTRAepidermally at the desmosome and pemphigoid SUBepidermally at the hemidesmosome; the spinous layer's prickles are desmosomes held through shrinkage; the epidermis is one continuous keratin network. That scene marks the two split levels on its five-layer epidermis figure and this scene explains why the levels are where they are — deliberate division of labour rather than duplication. SHARED WITH `simple-epithelia`: epithelium is avascular and sits on a basement membrane; apical, lateral and basal surfaces differ, and this scene supplies the mechanism (the tight junction's fence) for the polarity that scene asserts. SHARED WITH `glandular-epithelium`: the basement membrane sinks with a gland's downgrowth, so the hemidesmosomal floor described here is continuous from surface to secretory end piece."
+  ]
+}

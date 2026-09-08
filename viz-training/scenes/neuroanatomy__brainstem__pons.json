@@ -12,10 +12,12 @@
     "Pons"
   ],
   "learning_goal": "Recognise the pons as the middle brainstem segment by its bulging front and its middle cerebellar peduncles, divide it into a basilar part in front and a tegmentum behind with the floor of the fourth ventricle as its back wall, place the four cranial nerve nuclei it contains — trigeminal, abducens, facial, vestibulocochlear — in the columns that the fourth ventricle's floor lays out, and use that arrangement to explain the crossed syndromes of the pons and the locked-in state.",
-  "status": "candidate",
+  "status": "ready",
   "provenance": {
     "author": "task",
-    "authored_at": "2026-09-02"
+    "authored_at": "2026-09-02",
+    "audited_at": "2026-09-02",
+    "audited_by": "task"
   },
   "provider": {
     "primary": "bodyparts3d",
@@ -57,6 +59,8 @@
       "cerebellopontine angle",
       "vestibular schwannoma",
       "acoustic neuroma",
+      "corneal reflex",
+      "ipsilateral cerebellar signs",
       "pontomesencephalic junction",
       "pontomedullary junction",
       "Millard-Gubler syndrome",
@@ -198,7 +202,7 @@
         "pontocerebellar fibres",
         "vestibular schwannoma"
       ],
-      "narration": "Sitting behind the pons with the fourth ventricle as the gap between them, and connected to it by the middle cerebellar peduncle — much the largest of the three cerebellar peduncles, and made entirely of fibres that started in the pontine nuclei of the OTHER side. That is the anatomical reason the cerebral cortex controls the opposite limbs and yet talks to the same-side cerebellum through a crossing here. The peduncle itself has no mesh in this catalog, so it appears as the taper of the pons where it meets this surface rather than as a lit cable. The recess where pons, medulla and cerebellum meet is the cerebellopontine angle, the site of the vestibular schwannoma, and it is the space this scene shows best."
+      "narration": "Sitting behind the pons with the fourth ventricle as the gap between them, and connected to it by the middle cerebellar peduncle — much the largest of the three cerebellar peduncles, and made entirely of fibres that started in the pontine nuclei of the OTHER side. Follow that through, because the crossing here is what makes the two halves of the motor system agree: one cerebral hemisphere drives the limbs of the opposite side, and the pontocerebellar crossing wires it to the cerebellar hemisphere of the opposite side too — and a cerebellar hemisphere governs the limbs on its OWN side. Cortex and cerebellum therefore end up working on the same limbs by two different routes, which is also why cerebellar signs are ipsilateral to the cerebellar lesion while corticospinal signs are contralateral to the cortical one. The peduncle itself has no mesh in this catalog, so it appears as the taper of the pons where it meets this surface rather than as a lit cable. The recess where pons, medulla and cerebellum meet is the cerebellopontine angle, the site of the vestibular schwannoma, and it is the space this scene shows best."
     },
     {
       "key": "occiput",
@@ -329,7 +333,7 @@
           "kind": "boundary"
         }
       ],
-      "narration": "Three surfaces, three different neighbours. In front, bone: the pons lies on the clivus with the basilar artery running up the midline groove between them — the artery has no mesh in this catalog and is named, not drawn, and the lit bone is the whole occipital bone standing in for its clivus. Behind, fluid: the fourth ventricle, whose floor is the back of the pons itself, with the cerebellum roofing it. At the sides, the pons narrows into the middle cerebellar peduncles and disappears into the cerebellum; that peduncle has no separate mesh, so watch for the taper rather than a cable. Where the lateral edge of the pons, the top of the medulla and the front of the cerebellum meet is the cerebellopontine angle — the corner visible here between the three lit blocks, and the place a vestibular schwannoma grows, pressing the eighth nerve first, then the seventh, then the fifth."
+      "narration": "Three surfaces, three different neighbours. In front, bone: the pons lies on the clivus with the basilar artery running up the midline groove between them — the artery has no mesh in this catalog and is named, not drawn, and the lit bone is the whole occipital bone standing in for its clivus. Behind, fluid: the fourth ventricle, whose floor is the back of the pons itself, with the cerebellum roofing it. At the sides, the pons narrows into the middle cerebellar peduncles and disappears into the cerebellum; that peduncle has no separate mesh, so watch for the taper rather than a cable. Where the lateral edge of the pons, the top of the medulla and the front of the cerebellum meet is the cerebellopontine angle — the corner visible here between the three lit blocks, and the place a vestibular schwannoma grows. It arises on the eighth nerve itself, so hearing loss and imbalance come first; as it enlarges into the angle it reaches the fifth, and a lost corneal reflex is the classic second sign. The seventh is the nearest nerve of the three and usually the LAST to fail — facial weakness is a late sign, not an early one, which is the part students most often get backwards."
     },
     {
       "mode": "cross_section",

@@ -1,0 +1,608 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__limbic-system__hippocampus",
+  "mode": "3d_anatomy",
+  "deferred_modes": [],
+  "course": "Neuroanatomy",
+  "topic": "Limbic System",
+  "structure": "Hippocampus",
+  "covers": [
+    "Hippocampus"
+  ],
+  "learning_goal": "Place the hippocampus in the floor of the INFERIOR HORN of the lateral ventricle and let everything else follow from that one position. Because it lies in a ventricle it is curved, paired, and has an output that has to travel a long way round to reach the front of the brain — the FORNIX, arching under the corpus callosum to the mammillary body. Because it is deep in the medial temporal lobe it is the first thing a temporal mass, a herniation or a hypoxic insult reaches. And because its job is CONSOLIDATION rather than storage, a bilateral lesion gives dense anterograde amnesia with old memories and skills intact — the single most examined fact in this topic, and one the geometry explains rather than decorates.",
+  "status": "ready",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-04",
+    "audited_at": "2026-09-04",
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
+  },
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "limbic system",
+      "hippocampus",
+      "memory",
+      "temporal lobe epilepsy",
+      "amnesia"
+    ],
+    "terms": [
+      "hippocampus",
+      "hippocampal formation",
+      "dentate gyrus",
+      "subiculum",
+      "Ammon's horn",
+      "cornu ammonis",
+      "CA1",
+      "fornix",
+      "fimbria",
+      "crus of fornix",
+      "body of fornix",
+      "column of fornix",
+      "commissure of fornix",
+      "mammillary body",
+      "Papez circuit",
+      "inferior horn",
+      "temporal horn",
+      "parahippocampal gyrus",
+      "entorhinal cortex",
+      "uncus",
+      "anterograde amnesia",
+      "consolidation",
+      "declarative memory",
+      "mesial temporal sclerosis",
+      "temporal lobe epilepsy",
+      "Korsakoff syndrome",
+      "uncal herniation"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": 0.35
+  },
+  "structures": [
+    {
+      "key": "hipp_l",
+      "name": "left hippocampus",
+      "label": "Hippocampus (L)",
+      "role": "primary",
+      "group": "The hippocampal formation",
+      "layer": "organ",
+      "color": "#4f9bff",
+      "refs": {
+        "bodyparts3d": "FMA72714"
+      },
+      "terms": [
+        "hippocampus",
+        "hippocampal formation",
+        "Ammon's horn",
+        "cornu ammonis",
+        "CA1",
+        "dentate gyrus",
+        "subiculum",
+        "inferior horn",
+        "temporal horn"
+      ],
+      "narration": "A curved ridge of cortex rolled into the floor of the INFERIOR (temporal) HORN of the lateral ventricle, running front to back through the medial temporal lobe with its head bulging forward under the uncus. It is cortex, not a nucleus — three-layered allocortex folded on itself, so a coronal section through it shows two interlocking C's, Ammon's horn and the dentate gyrus. The shape is worth holding because it is the reason the output leaves BACKWARDS: fibres gather on its ventricular surface as the fimbria, which continues as the crus of the fornix, so the road out of the hippocampus starts at the back of a structure whose target lies at the front."
+    },
+    {
+      "key": "hipp_r",
+      "name": "right hippocampus",
+      "label": "Hippocampus (R)",
+      "role": "primary",
+      "group": "The hippocampal formation",
+      "layer": "organ",
+      "color": "#4f9bff",
+      "refs": {
+        "bodyparts3d": "FMA72713"
+      },
+      "terms": [
+        "hippocampus",
+        "right hippocampus",
+        "bilateral",
+        "anterograde amnesia"
+      ],
+      "narration": "The mirror of the left, and the pairing is the clinical point rather than a symmetry note. ONE hippocampus can be removed — as it is in surgery for drug-resistant temporal lobe epilepsy — with a material-specific memory deficit rather than amnesia. It takes BOTH to produce the dense anterograde amnesia the topic is famous for, which is why the injuries that do it are the ones that hit the medial temporal lobes on both sides at once: hypoxia, herpes simplex encephalitis, and bilateral surgery. Verbal material leans left and visuospatial material leans right in most people, which is what 'material-specific' means at the bedside."
+    },
+    {
+      "key": "phg_l",
+      "name": "left parahippocampal gyrus",
+      "label": "Parahippocampal gyrus (L)",
+      "role": "part",
+      "group": "The hippocampal formation",
+      "layer": "organ",
+      "color": "#7fb3ff",
+      "refs": {
+        "bodyparts3d": "FMA72706"
+      },
+      "terms": [
+        "parahippocampal gyrus",
+        "entorhinal cortex",
+        "uncus",
+        "perforant path",
+        "medial temporal lobe",
+        "uncal herniation"
+      ],
+      "narration": "The gyrus on the medial surface of the temporal lobe that the hippocampus is rolled into, and the doorway through which nearly all cortical input reaches it: its anterior part is the ENTORHINAL cortex, whose perforant path is the hippocampus's principal afferent. Its front end hooks medially as the UNCUS, and that hook sits directly over the edge of the tentorium beside the midbrain — so a temporal mass pushes the uncus through the tentorial notch and compresses the third nerve and the midbrain. The same medial temporal position that makes this the memory gateway makes it the herniation site."
+    },
+    {
+      "key": "phg_r",
+      "name": "right parahippocampal gyrus",
+      "label": "Parahippocampal gyrus (R)",
+      "role": "part",
+      "group": "The hippocampal formation",
+      "layer": "organ",
+      "color": "#7fb3ff",
+      "refs": {
+        "bodyparts3d": "FMA72705"
+      },
+      "terms": [
+        "parahippocampal gyrus",
+        "entorhinal cortex",
+        "uncus",
+        "tentorial notch"
+      ],
+      "narration": "The right-sided partner, shown so the pair can be read together on the underside of the brain. Both parahippocampal gyri are lit in beat 2 because the medial temporal region is a bilateral structure clinically: it is the bilateral insult that causes amnesia, and it is the uncus on the side of an expanding mass that herniates."
+    },
+    {
+      "key": "vent_l",
+      "name": "left lateral ventricle",
+      "label": "Lateral ventricle (L)",
+      "role": "context",
+      "group": "The cavity that shapes it",
+      "layer": "cavity",
+      "color": "#8fd6c8",
+      "refs": {
+        "bodyparts3d": "FMA78450"
+      },
+      "terms": [
+        "lateral ventricle",
+        "inferior horn",
+        "temporal horn",
+        "atrium",
+        "choroid plexus",
+        "CSF"
+      ],
+      "narration": "The ventricle is context here and it is the single most useful piece of context in the scene: the hippocampus is IN its inferior horn, in the floor, and the fornix runs along the ventricular system all the way forward. Find the temporal horn on a coronal MRI and the grey ridge in its floor is the hippocampus — that is how mesial temporal sclerosis is read, as a small hippocampus with a widened temporal horn beside it."
+    },
+    {
+      "key": "vent_r",
+      "name": "right lateral ventricle",
+      "label": "Lateral ventricle (R)",
+      "role": "context",
+      "group": "The cavity that shapes it",
+      "layer": "cavity",
+      "color": "#8fd6c8",
+      "refs": {
+        "bodyparts3d": "FMA78449"
+      },
+      "terms": [
+        "lateral ventricle",
+        "inferior horn",
+        "temporal horn"
+      ],
+      "narration": "The right ventricle, shown for the same reason as the left: the two temporal horns are the landmarks the hippocampi are read against, and asymmetry between them is the finding. `ventricular-system-csf__ventricles` owns the ventricular system itself; this scene borrows only the inferior horn."
+    },
+    {
+      "key": "fornix_l",
+      "name": "left fornix of forebrain",
+      "label": "Fornix (L)",
+      "role": "primary",
+      "group": "The output road",
+      "layer": "organ",
+      "color": "#f6b26b",
+      "refs": {
+        "bodyparts3d": "FMA72925"
+      },
+      "terms": [
+        "fornix",
+        "fimbria",
+        "crus of fornix",
+        "body of fornix",
+        "column of fornix",
+        "mammillary body",
+        "Papez circuit"
+      ],
+      "narration": "The output. Fibres leave the hippocampus as the fimbria on its ventricular surface, sweep back and up as the CRUS of the fornix under the splenium of the corpus callosum, run forward as the BODY of the fornix under the callosum, and turn down in front of the third ventricle as the COLUMN to end in the MAMMILLARY BODY. It is a long arch to reach a target that sits only a few centimetres from where it started, and it is long because it has to get out of a ventricle and over a thalamus to do it. Follow it once in 3D and the Papez circuit stops being a list."
+    },
+    {
+      "key": "fornix_r",
+      "name": "right fornix of forebrain",
+      "label": "Fornix (R)",
+      "role": "primary",
+      "group": "The output road",
+      "layer": "organ",
+      "color": "#f6b26b",
+      "refs": {
+        "bodyparts3d": "FMA72924"
+      },
+      "terms": [
+        "fornix",
+        "crus of fornix",
+        "column of fornix",
+        "mammillary body"
+      ],
+      "narration": "The right arch, identical in course. Seen from the side the two fornices look like one structure; seen from above they are a pair of arches that converge in the midline as they run forward, which is the arrangement the commissure sits in."
+    },
+    {
+      "key": "fornix_comm",
+      "name": "commissure of fornix of forebrain",
+      "label": "Commissure of the fornix",
+      "role": "part",
+      "group": "The output road",
+      "layer": "organ",
+      "color": "#e69138",
+      "refs": {
+        "bodyparts3d": "FMA61970"
+      },
+      "terms": [
+        "commissure of fornix",
+        "hippocampal commissure",
+        "psalterium",
+        "crus of fornix",
+        "interhemispheric"
+      ],
+      "narration": "Where the two crura come together under the splenium, fibres cross between them — the hippocampal commissure, the psalterium. It matters for one reason worth stating plainly: the two hippocampi are directly connected, so a seizure focus in one medial temporal lobe has a short route to the other, and bilateral independent foci are common in long-standing temporal lobe epilepsy."
+    },
+    {
+      "key": "mamm",
+      "name": "mammillary body",
+      "label": "Mammillary body",
+      "role": "primary",
+      "group": "The output road",
+      "layer": "organ",
+      "color": "#cc0000",
+      "refs": {
+        "bodyparts3d": "FMA74877"
+      },
+      "terms": [
+        "mammillary body",
+        "fornix",
+        "mammillothalamic tract",
+        "anterior nucleus of thalamus",
+        "Papez circuit",
+        "Korsakoff syndrome",
+        "thiamine",
+        "Wernicke encephalopathy"
+      ],
+      "narration": "The destination of the fornix, a small paired swelling on the underside of the hypothalamus behind the tuber cinereum. It is the hinge of the Papez circuit: hippocampus to fornix to mammillary body, mammillary body to anterior thalamic nucleus by the mammillothalamic tract, thalamus to cingulate gyrus, cingulate back to the parahippocampal gyrus and into the hippocampus again. The mammillary bodies are also where THIAMINE deficiency does its damage, which is why Korsakoff's amnesia looks like a hippocampal amnesia without a hippocampal lesion — the circuit is cut at the hinge rather than at the start. Atrophic mammillary bodies on MRI are the chronic sign."
+    },
+    {
+      "key": "thal_l",
+      "name": "left thalamus",
+      "label": "Thalamus (L)",
+      "role": "context",
+      "group": "The output road",
+      "layer": "organ",
+      "color": "#b4a7d6",
+      "refs": {
+        "bodyparts3d": "FMA258716"
+      },
+      "terms": [
+        "thalamus",
+        "anterior nucleus of thalamus",
+        "mammillothalamic tract",
+        "Papez circuit"
+      ],
+      "narration": "Shown as the next station and as the obstacle the fornix arches over. The relevant part is the ANTERIOR nucleus, which is not separately modelled here — the whole thalamus is lit and the narration says which corner of it is meant, rather than pretending the nucleus is drawn. `basal-ganglia-diencephalon__thalamus` owns the nuclei."
+    },
+    {
+      "key": "thal_r",
+      "name": "right thalamus",
+      "label": "Thalamus (R)",
+      "role": "context",
+      "group": "The output road",
+      "layer": "organ",
+      "color": "#b4a7d6",
+      "refs": {
+        "bodyparts3d": "FMA258714"
+      },
+      "terms": [
+        "thalamus",
+        "anterior nucleus of thalamus"
+      ],
+      "narration": "The right thalamus, for the same reason. Note the sides while both are lit: FMA258716 is the LEFT thalamus and FMA258714 the RIGHT — the ids are one character apart and the catalog names, not the numbers, are what settle it."
+    },
+    {
+      "key": "cing_l",
+      "name": "left cingulate gyrus",
+      "label": "Cingulate gyrus (L)",
+      "role": "context",
+      "group": "The circuit closes",
+      "layer": "organ",
+      "color": "#93c47d",
+      "refs": {
+        "bodyparts3d": "FMA72718"
+      },
+      "terms": [
+        "cingulate gyrus",
+        "cingulum",
+        "Papez circuit",
+        "limbic lobe",
+        "corpus callosum"
+      ],
+      "narration": "The arch of cortex over the corpus callosum that carries the circuit back. Thalamus to cingulate, cingulate along the cingulum bundle to the parahippocampal gyrus, and into the hippocampus — the loop is closed. Seen in 3D the cingulate gyrus and the fornix are two concentric arches around the callosum, the fornix inside and the cingulate outside, and that picture is the whole of Papez in one image."
+    },
+    {
+      "key": "cing_r",
+      "name": "right cingulate gyrus",
+      "label": "Cingulate gyrus (R)",
+      "role": "context",
+      "group": "The circuit closes",
+      "layer": "organ",
+      "color": "#93c47d",
+      "refs": {
+        "bodyparts3d": "FMA72717"
+      },
+      "terms": [
+        "cingulate gyrus",
+        "cingulum",
+        "limbic lobe"
+      ],
+      "narration": "The right arch. Both are shown in the mechanism beats so the circuit can be traced on one side while the other stays visible as its mirror."
+    },
+    {
+      "key": "cc",
+      "name": "corpus callosum",
+      "label": "Corpus callosum",
+      "role": "context",
+      "group": "The circuit closes",
+      "layer": "organ",
+      "color": "#d9d2e9",
+      "refs": {
+        "bodyparts3d": "FMA86464"
+      },
+      "terms": [
+        "corpus callosum",
+        "splenium",
+        "body of corpus callosum",
+        "genu"
+      ],
+      "narration": "Context and a landmark rather than a limbic structure. The fornix runs under it and the cingulate gyrus over it, and the crura of the fornix and their commissure sit under its SPLENIUM — so the callosum is the reference surface that tells you which arch you are looking at. `cerebrum-gross-lobes__white-matter-tracts` owns it."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "In the floor of the temporal horn",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The hippocampal formation"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The cavity that shapes it"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "hipp_l",
+          "intensity": 1
+        }
+      ],
+      "narration": "Start with the position, because every other fact in this scene is a consequence of it. The hippocampus is a curved ridge of cortex lying in the FLOOR OF THE INFERIOR HORN of the lateral ventricle, deep in the medial temporal lobe, running from the head under the uncus backwards and up towards the atrium. The ventricles are ghosted beside it so the relationship reads: hippocampus inside the cavity, not beside it. Two things follow immediately and are used later. It is curved because the ventricle is curved. And it is DEEP and MEDIAL, which is why it is reached by things that come from inside — herniation, hypoxia, viral encephalitis — rather than by a blow to the side of the head."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The pair, and the gyrus they are rolled into",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The hippocampal formation"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "hipp_l",
+            "hipp_r"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "From below, both hippocampi and both parahippocampal gyri together. The gyrus is the surface you can see on the underside of the brain; the hippocampus is what that surface is rolled into, hidden in the ventricle above it. The anterior parahippocampal gyrus is the ENTORHINAL cortex, the funnel through which cortical information reaches the hippocampus, and its hooked front end is the UNCUS lying against the tentorial edge. Note the symmetry — both hippocampi draw here — and then note why it matters: losing ONE hippocampus costs material-specific memory — verbal on the left, visuospatial on the right — while losing BOTH costs the ability to lay down new declarative memory at all."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "A coronal cut through the temporal horn",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The hippocampal formation"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The cavity that shapes it"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "hipp_r",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Cut coronally through the middle of the temporal lobes and read the section the way a radiologist reads it: temporal horn as a dark slit, hippocampus as the grey mass in its floor, parahippocampal gyrus below and medial to it, the tentorial edge and the midbrain just medial again. This is the view in which MESIAL TEMPORAL SCLEROSIS is diagnosed — a shrunken, bright hippocampus on one side with the temporal horn dilated to fill the space — and it is the commonest cause of drug-resistant temporal lobe epilepsy in adults, the reason a hippocampus is ever removed. Be honest about the limit of the geometry: the internal architecture this section would ideally show, Ammon's horn interlocking with the dentate gyrus and the CA1 sector that is most vulnerable to hypoxia, has NO mesh in the catalog. The cut shows the whole hippocampus as one body; the layers inside it are described here and not drawn, and `gaps[]` records that."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "Same cut, one level forward — the uncus at the tentorial edge",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.18,
+          "animate": true
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The hippocampal formation"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "phg_r",
+          "intensity": 1
+        }
+      ],
+      "narration": "Move the plane forward to the head of the hippocampus and the uncus comes into the section, hooked medially towards the midline. There is nothing between it and the midbrain but the free edge of the tentorium, and that is the whole anatomy of uncal herniation: a mass anywhere in the hemisphere pushes this hook over the edge, which compresses the third nerve — a blown pupil on the SAME side — and then the midbrain itself. The oculomotor nerve is named and NOT drawn; the catalog contains no cranial nerve except the two optic nerves, and `cranial-nerves__cranial-nerve-courses` owns it. What this beat can genuinely show is why the uncus is the part that goes: it is the most medial point of the temporal lobe and it already overhangs the notch."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Out along the fornix to the mammillary body",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The output road"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "fornix_l",
+          "intensity": 1
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "fornix_l",
+          "path": [
+            "hipp_l",
+            "fornix_l",
+            "fornix_comm",
+            "mamm"
+          ],
+          "duration": 6000
+        }
+      ],
+      "narration": "Trace the output once, whole. Fibres leave the hippocampus along its ventricular surface as the FIMBRIA, sweep back and up under the splenium as the CRUS, exchange fibres with the other side at the COMMISSURE, run forward under the corpus callosum as the BODY, and dive down in front of the third ventricle as the COLUMN to end in the MAMMILLARY BODY. Watch the arch rather than the names: the hippocampus sits in a ventricle at the bottom and back, its target sits at the front and middle, and the fornix is the detour that connects them over the top of the thalamus. The commissure is not decoration — it is the direct link between the two hippocampi, and it is why a temporal lobe seizure focus can seed its partner."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Papez, closed — two arches around the callosum",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The circuit closes"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "mamm",
+          "to": "thal_l",
+          "kind": "projection"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "thal_l",
+          "to": "cing_l",
+          "kind": "projection"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:papez",
+          "path": [
+            "hipp_l",
+            "fornix_l",
+            "mamm",
+            "thal_l",
+            "cing_l",
+            "phg_l"
+          ],
+          "duration": 8000
+        }
+      ],
+      "narration": "Now close the loop and look at the shape it makes. Mammillary body up to the ANTERIOR nucleus of the thalamus by the mammillothalamic tract; thalamus to the CINGULATE gyrus; cingulate back along the cingulum to the parahippocampal gyrus; parahippocampal into the hippocampus. Seen from the medial side the circuit is simply two concentric arches around the corpus callosum — the fornix on the inside, the cingulate gyrus on the outside — meeting at each end. Two of the links are described and not drawn, and the beat says so: the mammillothalamic tract and the cingulum bundle have no mesh in this catalog, and the anterior thalamic nucleus is not separable from the whole thalamus that is lit for it. What is drawn is every station; what is described is the wiring between them."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Why the lesion is amnesia — and which amnesia",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The hippocampal formation"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The output road"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "hipp_l",
+            "mamm"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "The hippocampus CONSOLIDATES: it converts experience into durable declarative memory and hands it to the cortex, where it is stored. It is not the store. That distinction is the whole clinical picture and it can be read off the two lit structures. Take out both hippocampi and the patient cannot form new declarative memories — dense ANTEROGRADE amnesia — while childhood memories, vocabulary, and motor skills survive, because those are cortical, and procedural learning runs through the basal ganglia and cerebellum instead. Cut the circuit at its hinge instead, at the MAMMILLARY BODIES, and thiamine deficiency produces a memory disorder that looks much the same: Korsakoff's, with confabulation, following Wernicke's encephalopathy. Same circuit, different point of failure, and the geometry shown here is why one lesion can imitate the other. Retrograde loss is typically graded — recent years hit hardest, remote memories spared — which is itself an argument that consolidation takes time and that this structure is what performs it."
+    }
+  ],
+  "gaps": [
+    "MESH IN HAND: 14 of 15 STRUCTURE MESHES ARE IN meshes-lite/, VERIFIED BY LISTING THE DIRECTORY THIS RUN. The exception is FMA72713, the RIGHT HIPPOCAMPUS. It IS in available-meshes.json under exactly that name — this is not a catalog absence — but the file is not in meshes-lite/, while its partner FMA72714 (left hippocampus) is. That is a delivery gap, not an authoring one, and it is the single highest-value fetch for the whole Limbic System topic: without it beat 2 (the pair) and beat 3 (the coronal section, which highlights the right hippocampus so the section is read on the side the left-sided beats have not already lit) are half-drawn, and every bilateral argument in this scene — amnesia needs BOTH — is made against one visible hippocampus. Recorded here and in RUNLOG so a human fetching one mesh knows which one.",
+    "THE INTERNAL ARCHITECTURE OF THE HIPPOCAMPUS HAS NO MESH AND IS DESCRIBED, NOT DRAWN. Searched across all 934 catalog entries under: dentate, gyrus dentatus, Ammon, cornu, ammonis, CA1, CA3, subiculum, fimbria, alveus, perforant, entorhinal, uncus, hippocampal sulcus. EVERY ONE RETURNS NOTHING. The hippocampus exists only as a single whole-organ mesh per side. Beat 3 therefore states the interlocking Ammon's-horn-and-dentate section in words and says openly that the cut shows one undifferentiated body — including the CA1 sector, which is the part that matters for hypoxic damage and cannot be shown. The FIMBRIA named in beat 5 is likewise not a mesh: the trace runs hippocampus to fornix directly and the narration names the fimbria as the first segment of that road rather than as a lit object.",
+    "TWO WIRES OF THE PAPEZ CIRCUIT ARE NAMED AND NOT DRAWN, AND BEAT 6 SAYS SO IN ITS OWN NARRATION. `mammillothalamic`, `cingulum`, `tract` and `bundle` were searched: `tract` returns exactly FOUR entries in the whole catalog — the two iliotibial tracts and the two optic tracts — and there is no mammillothalamic tract and no cingulum. `SHOW_RELATIONSHIP` is used for both links, which is the spec's connector op and does not claim a mesh. The ANTERIOR NUCLEUS of the thalamus is a third described-not-drawn item: `nucleus` in this catalog returns only the caudate nuclei, so the whole thalamus is lit and the narration names which part of it is meant. None of the three is claimed in `covers[]`.",
+    "NO ANCHORS WERE AUTHORED AND NONE WAS ATTEMPTED, DELIBERATELY. `tools/derive-landmark.mjs` derives a point ON a parent mesh from contact with a neighbour or from an extreme along an axis. Every feature this scene would want an anchor for — the head of the hippocampus, the fimbria, the uncus, the crus of the fornix — is a REGION of a smooth curved soft-tissue mesh with no attaching neighbour to witness it and no axis that defines it, so neither definition applies and the tool would either refuse or return a number with nothing checking it. The uncus is the closest to measurable (the most medial extreme of the parahippocampal gyrus, `--extreme` on the medial axis) and was still not authored, because 'most medial point of the gyrus' is a proxy for a hook rather than the hook itself and a measured-looking coordinate is believed. Nothing was placed by eye.",
+    "SIDES, STATED OUT LOUD BECAUSE THE IDS DO NOT CARRY THEM. FMA72714 = LEFT hippocampus, FMA72713 = RIGHT hippocampus. FMA72706 = LEFT parahippocampal gyrus, FMA72705 = RIGHT. FMA72925 = LEFT fornix of forebrain, FMA72924 = RIGHT. FMA78450 = LEFT lateral ventricle, FMA78449 = RIGHT. FMA72718 = LEFT cingulate gyrus, FMA72717 = RIGHT. FMA258716 = LEFT thalamus, FMA258714 = RIGHT — note that this pair runs the OPPOSITE way round from the others in numeric order, which is exactly the trap the spec warns about. Every `name` in this scene is the catalog's name character for character.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `location`, `cross_section` and `mechanism` for `Hippocampus`. Beats 1-2 are `location`, beats 3-4 are `cross_section`, beats 5-7 are `mechanism`. All three are covered, and each cross_section beat is a genuine section argument — beat 3 is how mesial temporal sclerosis is read and beat 4 is why the uncus herniates — rather than a mode added to satisfy the checklist.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Hippocampus`, spelled as CURRICULUM.json spells it. `Fornix & Papez circuit` is NOT claimed although beats 5 and 6 trace both, and `Amygdala` is not claimed although the tail of the caudate is described elsewhere as ending at it; both remain unauthored and visible to sync-state.mjs so that the fornix scene is still written. Claiming them here would hide two structures behind one scene.",
+    "AUDITED AND PROMOTED 2026-09-04 BY A DIFFERENT RUN FROM THE ONE THAT WROTE IT. All fifteen ids were looked up in available-meshes.json and all fifteen exist; all fifteen `name` fields match the catalog character for character; every op target, `path[]` waypoint, `from` and `to` resolves to a key or a group in this file; beat ordinals run 1-7 with no repeat; the ten-op vocabulary is not exceeded and `concept:papez` is the spec's documented form for a traced path with no mesh subject; the `views` CURRICULUM.json requires (`location`, `cross_section`, `mechanism`) are all present. THE SIDES CLAIM IN THE NOTE ABOVE WAS RE-DERIVED FROM THE CATALOG RATHER THAN READ, INCLUDING THE TRAP IT FLAGS: FMA258716 is indeed the LEFT thalamus and FMA258714 the RIGHT, which is the reverse of the ordering every other pair in this scene follows. The authoring run's account of this file was accurate in every particular the audit could check, including its 14-of-15 delivery count and its claim that `tract` returns exactly four catalog entries (two iliotibial, two optic — confirmed). CROSS_SECTION `axis:\"y\"` for a coronal cut matches the convention the rest of this course uses. Promoted to `ready`. The right-hippocampus delivery gap does NOT block promotion — 14 of 15 meshes deliver and the bilateral argument is still made, in words, against one visible hippocampus — but it remains the highest-value single fetch in this topic and is stated above so a student meets it as a stated limit rather than as a missing shape.",
+    "CLOSED 2026-09-08: FMA72713 (right hippocampus) was the one model of this scene’s fifteen that was not on disk, so beat 2 compared a pair with one side empty and beat 3 highlighted the absent one. It was fetched and decimated the same day (3000 triangles, surface moved 0.019 mm max) and all 15 models now render. The disclosure that was added to beat 2 that morning has been removed rather than left to go stale, which is the whole point of rule 14."
+  ]
+}

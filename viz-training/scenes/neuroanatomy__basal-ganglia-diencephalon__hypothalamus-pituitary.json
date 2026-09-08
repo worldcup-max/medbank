@@ -12,10 +12,12 @@
     "Hypothalamus & pituitary"
   ],
   "learning_goal": "Box in the hypothalamus with the four landmarks that are visible on the base of the brain — optic chiasm in front, mammillary bodies behind, tuber cinereum and its stalk between, lamina terminalis closing the front wall — then use that box to explain the two completely different ways it controls the two lobes of the pituitary, and why a tumour in the sella turcica takes the visual fields before it takes anything else.",
-  "status": "candidate",
+  "status": "ready",
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "audited_at": "2026-09-08",
+    "audited_by": "task"
   },
   "provider": {
     "primary": "bodyparts3d",
@@ -189,7 +191,7 @@
         "bitemporal hemianopia",
         "suprasellar"
       ],
-      "narration": "The front wall of the box, sitting directly above and in front of the pituitary. Fibres from the nasal half of each retina cross here; those halves see the temporal half of each visual field. So a mass growing up out of the sella presses the crossing fibres first and takes the outer half of each field — bitemporal hemianopia, and the reason a patient with a pituitary tumour may notice it by clipping doorframes on both sides before noticing anything endocrine."
+      "narration": "The front edge of the FLOOR of the box, sitting directly above and in front of the pituitary — the anterior WALL is the lamina terminalis, which runs up from the chiasm to the anterior commissure, and keeping the two apart is what makes beat 2 readable. Fibres from the nasal half of each retina cross here; those halves see the temporal half of each visual field. So a mass growing up out of the sella presses the crossing fibres first and takes the outer half of each field — bitemporal hemianopia, and the reason a patient with a pituitary tumour may notice it by clipping doorframes on both sides before noticing anything endocrine."
     },
     {
       "key": "on_r",
@@ -357,17 +359,13 @@
     {
       "key": "sphenoid",
       "name": "sphenoid bone",
-      "label": "Sphenoid bone — the fossa is not separately modelled",
+      "label": "Sphenoid bone",
       "role": "context",
       "group": "The bony house",
       "layer": "bone",
       "color": "#d9d2c5",
       "refs": {
         "bodyparts3d": "FMA52736"
-      },
-      "approx": {
-        "shown_as": "sphenoid bone",
-        "detail": "sella turcica / hypophysial fossa"
       },
       "terms": [
         "sphenoid bone",
@@ -377,7 +375,35 @@
         "transsphenoidal",
         "cavernous sinus"
       ],
-      "narration": "The bone the gland sits in. The hypophysial fossa is a saddle-shaped hollow on its upper surface and has no mesh of its own, so clicking this lights the whole sphenoid rather than the saddle — the amber marking says as much. Two consequences are worth the space: the sphenoid air sinus lies directly below the fossa, which is why a pituitary tumour is removed through the nose, and the cavernous sinus with the internal carotid artery and cranial nerves III, IV, V1, V2 and VI lies on each side of it, which is why a tumour that expands sideways rather than upwards presents with a squint rather than a field defect. No dural sinus and no intracranial artery exists in this catalog, so both are named and not drawn."
+      "narration": "The bone the gland sits in. The hypophysial fossa — the saddle-shaped hollow on its upper surface — has no mesh of its own, so it is marked on this bone as a measured anchor rather than by lighting the whole sphenoid; the anchor card carries the measurement. Two consequences are worth the space: the sphenoid air sinus lies directly below the fossa, which is why a pituitary tumour is removed through the nose, and the cavernous sinus with the internal carotid artery and cranial nerves III, IV, V1, V2 and VI lies on each side of it, which is why a tumour that expands sideways rather than upwards presents with a squint rather than a field defect. No dural sinus and no intracranial artery exists in this catalog, so both are named and not drawn."
+    },
+    {
+      "key": "sella",
+      "label": "Hypophysial fossa (sella turcica)",
+      "role": "part",
+      "group": "The bony house",
+      "color": "#e8a33d",
+      "render": "anchor",
+      "anchor": {
+        "on": "sphenoid",
+        "uvw": [
+          0.4985,
+          0.6824,
+          0.6105
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT patch between the sphenoid bone (FMA52736) and the pituitary gland (FMA13889), averaged over vertices within 3 mm of the neighbour — contact gap 0.65 mm across 26 parent vertices, u=0.4985 confirming the midline. ONE WITNESS ONLY: the pituitary is the sole neighbour that touches the fossa, so there is no convergence check. The centroid also drifts with the averaging radius (v 0.682 at 3 mm, 0.749 at 5 mm, 0.787 at 8 mm), which is why 3 mm — the tightest patch, least averaged — was taken and why this is needs-review. See tools/derive-landmark.mjs --parent FMA52736 --contact FMA13889 --area 3",
+      "terms": [
+        "sella turcica",
+        "hypophysial fossa",
+        "pituitary fossa",
+        "diaphragma sellae",
+        "transsphenoidal",
+        "sphenoid sinus"
+      ],
+      "narration": "The saddle on the upper surface of the body of the sphenoid that the pituitary sits in, marked where the gland actually rests on the bone rather than by lighting the whole sphenoid. It is roofed by the diaphragma sellae, a shelf of dura with only the stalk passing through — dura has no mesh anywhere in this catalog, so that roof is named and not drawn. The floor of this saddle is the roof of the sphenoid air sinus, which is the entire basis of the transsphenoidal approach."
     }
   ],
   "views": [
@@ -474,9 +500,14 @@
           "from": "tuber",
           "to": "pit",
           "kind": "continuity"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sella",
+          "intensity": 0.9
         }
       ],
-      "narration": "The gland hangs from the tuber cinereum by the stalk and sits in a saddle of the sphenoid bone, with a shelf of dura, the diaphragma sellae, over it and only the stalk passing through. Its two halves have nothing in common but an address. The posterior lobe is brain: it grew down from the floor of the diencephalon, it is continuous with the hypothalamus through the stalk, and it is made of axon terminals and glia rather than gland cells. The anterior lobe is not brain at all: it climbed up from the roof of the primitive mouth as Rathke's pouch, lost its connection to the pharynx, and is true glandular epithelium. That single embryological fact predicts everything in the next beat, and it also explains craniopharyngioma — a tumour arising from remnants of Rathke's pouch along the stalk, which is why it sits above the sella and takes the visual fields early. The mesh here is one shape: the two lobes are named and not separately drawn, and the saddle is not drawn either, so the bone lights whole."
+      "narration": "The gland hangs from the tuber cinereum by the stalk and sits in a saddle of the sphenoid bone, with a shelf of dura, the diaphragma sellae, over it and only the stalk passing through. Its two halves have nothing in common but an address. The posterior lobe is brain: it grew down from the floor of the diencephalon, it is continuous with the hypothalamus through the stalk, and it is made of axon terminals and glia rather than gland cells. The anterior lobe is not brain at all: it climbed up from the roof of the primitive mouth as Rathke's pouch, lost its connection to the pharynx, and is true glandular epithelium. That single embryological fact predicts everything in the next beat, and it also explains craniopharyngioma — a tumour arising from remnants of Rathke's pouch along the stalk, which is why it sits above the sella and takes the visual fields early. The mesh here is one shape: the two lobes are named and not separately drawn. The saddle has no mesh either, but it is no longer faked by lighting the whole sphenoid — it is marked at the measured point where the gland rests on the bone, and the anchor card says how it was measured."
     },
     {
       "mode": "mechanism",
@@ -544,7 +575,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "mam",
-          "intensity": 1.0
+          "intensity": 1
         }
       ],
       "narration": "Sort the lesions by direction. Upwards out of the sella and you hit the chiasm: bitemporal hemianopia, the classic presentation of a pituitary adenoma or of a craniopharyngioma. Sideways and you are in the cavernous sinus: a third, fourth or sixth nerve palsy and facial numbness, with the visual fields intact. Bleeding into an adenoma is pituitary apoplexy — sudden headache, sudden field loss, ophthalmoplegia and an acute loss of cortisol that is the part which kills. Damage the stalk or the posterior lobe and vasopressin fails: cranial diabetes insipidus, litres of dilute urine and unquenchable thirst, with the sensor for that thirst sitting in the lamina terminalis at the other end of the box. Too much vasopressin is SIADH, the mirror image. Destroy the mammillary bodies lit here — thiamine deficiency does it first and fastest — and you get Wernicke's encephalopathy acutely and the dense amnesia of Korsakoff's syndrome after. And the diffuse functions belong to nuclei this catalog does not carry: the anterior hypothalamus loses heat and the posterior conserves it, so a lesion of the anterior region gives uncontrolled hyperthermia; the ventromedial nucleus signals satiety and the lateral hunger; the suprachiasmatic nucleus keeps the clock, set by the branch off the optic tract shown here. Every one of those nuclei is named and none is drawn."
@@ -555,12 +586,13 @@
     "NO INFUNDIBULUM AND NO MEDIAN EMINENCE as separate meshes. Searched infundib, stalk, median eminence, pars, neurohypophys, adenohypophys, hypophysial. The tuber cinereum mesh is the parent the funnel arises from and the pituitary mesh is what it ends on, so the stalk is authored as a described continuity between the two and both beat 3 and beat 4 say so. The median eminence carries the whole of beat 4's portal story and its absence is stated inside that beat rather than only here.",
     "THE PITUITARY IS ONE UNDIVIDED MESH. FMA13889 carries no anterior and no posterior lobe, and the two lobes are different organs with different embryology and opposite control mechanisms — which is the entire content of beats 3 and 4. Both beats and the structure card state that the lobes are named and not separately drawn. Searched anterior lobe, posterior lobe, pars distalis, pars nervosa, pars intermedia, adenohypophysis, neurohypophysis.",
     "NO HYPOPHYSIAL PORTAL SYSTEM AND NO HYPOTHALAMOHYPOPHYSIAL TRACT, so both of beat 4's mechanisms are concept traces walking between two real shapes rather than drawn vessels or drawn axons. Searched portal, hypophysial vein, hypophyseal, tract, hypothalamohypophysial, supraopticohypophysial. This is consistent with the course-wide absence: no intracranial vessel of any kind exists in this catalog — no cerebral artery, no circle of Willis, no dural venous sinus — which is also why the cavernous sinus and internal carotid artery of the sphenoid card and beat 5 are named and not drawn (searched cavernous, sinus, internal carotid, carotid — only the two COMMON carotid arteries exist, FMA3941 right and FMA4058 left, and they stop in the neck, so neither was used).",
-    "THE SELLA TURCICA HAS NO MESH, and is marked honestly rather than faked. The sphenoid bone (FMA52736) carries `approx: {shown_as: 'sphenoid bone', detail: 'sella turcica / hypophysial fossa'}` so the player shows it in amber and says which bone is really lit. It was NOT authored as an anchor, and the reason recorded here was a stale delivery claim: as of 2026-08-30 all fifteen meshes including FMA52736 the sphenoid and FMA13889 the pituitary are on disk, so the measurement is open work. Derive at this scene's audit — the fossa is a SURFACE rather than a point, so the right call is `--contact FMA13889 --area N` against the sphenoid, which averages the contact patch instead of taking the single nearest vertex. The diaphragma sellae is dura and absent for the same reason as every meningeal structure.",
+    "THE SELLA TURCICA HAS NO MESH AND IS NOW MEASURED RATHER THAN APPROXIMATED — DONE AT AUDIT 2026-09-08, WHICH IS WHAT THE PREVIOUS NOTE HERE INSTRUCTED. The authoring run left 'Derive at this scene's audit' as an open instruction with all fifteen meshes on disk. Ran: derive-landmark.mjs --parent FMA52736 --contact FMA13889 --area 3. The pituitary genuinely rests on the bone — contact gap 0.65 mm over 26 parent vertices, and u = 0.4985 puts it on the midline, which is the independent check that the patch landed on the saddle and not on a wing. Authored as structure 'sella', render:'anchor', status:'needs-review'. TWO HONEST WEAKNESSES, recorded because the SKILL says one witness is a measurement with no check on it: (1) the pituitary is the ONLY neighbour that touches the fossa, so there is no convergence between witnesses — the optic chiasm sits on the chiasmatic groove in FRONT of the saddle and would pull the point off the feature, so it was deliberately not used as a second witness; (2) the centroid drifts with the averaging radius, v = 0.682 / 0.749 / 0.787 at 3 / 5 / 8 mm, several millimetres on a 105 mm bone. The tightest patch was taken. The `approx` marker has been REMOVED from the sphenoid, which no longer pretends to be the fossa and is now plain context bone. The diaphragma sellae is dura and absent for the same reason as every meningeal structure.",
     "NO MENINGES ANYWHERE IN THE CATALOG. Searched mening, dura, dural, arachnoid, pia, falx, tentorium, diaphragma, cistern — zero hits across all 934 entries. This affects the diaphragma sellae named in beat 3 and is recorded here because the Meninges structure of the Ventricular System & CSF topic depends on the same finding.",
     "THE MAMMILLARY BODY IS A SINGLE UNPAIRED MESH. FMA74877 is 'mammillary body' with no left or right, although the structure is a pair in life and beats 1 and 5 both speak of two. Its card says so. The same mesh and the same caveat appear in the thalamus scene of this topic, worded consistently.",
     "NO MAMMILLOTHALAMIC TRACT and no tract of any kind (searched mammillothalamic, mamillothalamic, tract, fasciculus, bundle, Vicq d'Azyr). Both ends are drawn — the mammillary body here and the thalamus as context — and the connection is described in the mammillary body card, the thalamus card and beat 2. Stated identically in the thalamus scene.",
     "DELIVERY IS NO LONGER THE REASON — CHECKED 2026-08-30, FILE BY FILE. This scene previously said that none of its models was in meshes-lite/ and that every beat was therefore hollow. That is false now and the sentence had already been carried forward once: ALL of this scene's models are on disk and sync-state.mjs reports 75 of 75 scenes drawing complete. Every beat renders. The scene stays `candidate` for the authoring reasons recorded elsewhere in this list, not for a delivery one. The corollary matters more than the correction: derive-landmark.mjs CAN now measure against these parents, so the anchor work this note was suppressing is open work rather than impossible work.",
     "SIDES, STATED EXPLICITLY BECAUSE THE IDS DO NOT CARRY THEM. Right / left in this scene: optic nerve FMA50875 right and FMA50878 left; optic tract FMA62382 right and FMA67936 left — from different id ranges and the trap here, so each was read back off the catalog name rather than inferred; fornix of forebrain FMA72924 right and FMA72925 left; thalamus FMA258714 right and FMA258716 left, which is NOT consecutive and is the trap this topic shares with the thalamus and basal ganglia scenes. Four structures in this scene are genuinely unpaired midline meshes and are labelled without a side: tuber cinereum, lamina terminalis, optic chiasm and pituitary gland. The mammillary body is unpaired in the catalog but paired in life, which is a different thing and is recorded above.",
-    "THALAMUS IS DELIBERATELY NOT IN covers[]. It is a separate CURRICULUM.json structure in this same topic with its own scene, and appears here only as the upper storey of the wall the hypothalamic sulcus divides. The same is true of the fornix and hippocampus, which belong to the Limbic System topic. Claiming any of them would hide a gap that is currently visible."
+    "THALAMUS IS DELIBERATELY NOT IN covers[]. It is a separate CURRICULUM.json structure in this same topic with its own scene, and appears here only as the upper storey of the wall the hypothalamic sulcus divides. The same is true of the fornix and hippocampus, which belong to the Limbic System topic. Claiming any of them would hide a gap that is currently visible.",
+    "AUDITED 2026-09-08 BY A LATER RUN. Three things changed and one was an internal contradiction of the kind REPAIR-BACKLOG.md calls failure mode 2. The optic chiasm card called itself 'the front wall of the box' while beat 2, the learning goal and the lamina terminalis card all correctly give the front WALL to the lamina terminalis and the chiasm the front of the FLOOR. The corpus already held the right answer in four places, two of them in this file and one in `ventricular-system-csf__ventricles` ('its front wall is the lamina terminalis; its floor runs from the optic chiasm back'). The chiasm card now says front edge of the floor and names the wall explicitly. The other two changes are the sella anchor above and beat 3's sentence about the bone lighting whole, which was true before the anchor and false after it — fixed in the same pass rather than left as a stale half of the correction. ALL FIFTEEN structure meshes re-verified on disk this run by statting each file; no beat is hollow. All fifteen ids and names re-read against available-meshes.json character for character; all fifteen match. All absence claims in this list were re-run against the catalog rather than believed: hypothalam 0, infundib 0, hypophys 0, sella 0, preoptic 0, nucleus 2 (both caudate), tract 4 (two iliotibial, two optic), mammill 1. Every op target and anchor.on resolves to a real structure or group; view modes location/glands/mechanism cover the three the curriculum asks for."
   ]
 }

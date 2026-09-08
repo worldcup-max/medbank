@@ -1,0 +1,276 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__blood-supply-of-the-brain__anterior-circulation",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Blood Supply of the Brain",
+  "structure": "Anterior circulation",
+  "covers": [
+    "Anterior circulation"
+  ],
+  "learning_goal": "Turn the anterior circulation from two arteries into a map that predicts a deficit. The anterior cerebral artery runs over the medial surface and the middle cerebral over the lateral, so the homunculus decides the syndrome: a leg weaker than an arm is anterior cerebral, a face and arm weaker than a leg is middle cerebral, and adding language or neglect says which hemisphere. Then separate the two ways the middle cerebral fails, because they are different diseases with the same name — a cortical branch stroke takes a surface function and spares the internal capsule, while a lenticulostriate occlusion takes the capsule and gives a dense weakness of the whole opposite side with no cortical signs at all. Finally, place the watershed: the zones between territories fail in global hypoperfusion rather than in embolism, which is why the pattern of a cardiac arrest is not the pattern of a clot.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-03",
+    "audited_at": "2026-09-03",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "blood supply of the brain",
+      "anterior circulation",
+      "cerebral arterial territories",
+      "stroke syndromes"
+    ],
+    "terms": [
+      "anterior circulation",
+      "internal carotid artery",
+      "anterior cerebral artery",
+      "middle cerebral artery",
+      "lenticulostriate arteries",
+      "recurrent artery of Heubner",
+      "arterial territory",
+      "homunculus",
+      "contralateral hemiparesis",
+      "leg weakness",
+      "face and arm weakness",
+      "Broca's area",
+      "Wernicke's area",
+      "expressive aphasia",
+      "receptive aphasia",
+      "hemineglect",
+      "homonymous hemianopia",
+      "gaze deviation",
+      "internal capsule",
+      "lacunar infarct",
+      "pure motor stroke",
+      "watershed infarct",
+      "amaurosis fugax",
+      "ophthalmic artery"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "aca",
+      "label": "Anterior cerebral artery — the medial surface, so the leg",
+      "role": "primary",
+      "group": "The two territories",
+      "layer": "vessel",
+      "color": "#3d85c6",
+      "terms": [
+        "anterior cerebral artery",
+        "medial surface",
+        "paracentral lobule",
+        "corpus callosum",
+        "homunculus",
+        "leg weakness",
+        "urinary incontinence",
+        "abulia",
+        "recurrent artery of Heubner"
+      ],
+      "narration": "The anterior cerebral artery leaves the carotid, runs forward and medially above the optic nerve, joins its fellow at the anterior communicating artery, then turns UP and BACK over the corpus callosum. So its territory is the MEDIAL surface of the hemisphere, from the frontal pole back to about the parieto-occipital sulcus, plus a strip over the top edge onto the convexity. Now put the homunculus on that: the leg and foot hang over the medial edge in the paracentral lobule, and the face and hand are far out on the lateral surface. Therefore an anterior cerebral infarct gives a weak and numb LEG on the opposite side, with a comparatively spared face and arm — the reverse of the middle cerebral pattern, and the two are worth learning as a pair for exactly that reason. Two additions the medial position also explains: the paracentral lobule contains the cortical control of the bladder, so urinary incontinence is characteristic, and the medial frontal lobe governs initiation, so an abulic patient who is awake but does not start anything is an anterior cerebral sign rather than a psychiatric one. One deep branch is worth naming: the RECURRENT ARTERY OF HEUBNER doubles back to supply the head of the caudate and the anterior limb of the internal capsule, which is how a proximal anterior cerebral lesion can add a face and arm weakness that the cortical map alone would not predict."
+    },
+    {
+      "key": "mca",
+      "label": "Middle cerebral artery — the lateral surface, so face, arm and language",
+      "role": "primary",
+      "group": "The two territories",
+      "layer": "vessel",
+      "color": "#cc0000",
+      "terms": [
+        "middle cerebral artery",
+        "lateral sulcus",
+        "lateral surface",
+        "face and arm weakness",
+        "Broca's area",
+        "Wernicke's area",
+        "expressive aphasia",
+        "receptive aphasia",
+        "hemineglect",
+        "homonymous hemianopia",
+        "gaze deviation",
+        "optic radiation"
+      ],
+      "narration": "The middle cerebral is the direct continuation of the internal carotid and takes about eighty per cent of the anterior circulation's flow, which is why it receives most emboli — a clot travelling up the carotid goes where the flow goes. It runs laterally into the LATERAL SULCUS, fans out over the insula and supplies almost the whole LATERAL surface of the hemisphere. Put the homunculus on that and the syndrome inverts: FACE and ARM weak and numb on the opposite side, LEG relatively spared. Then the lateral surface carries functions the medial one does not, and those localise the SIDE. In the dominant hemisphere, usually the left, the inferior frontal gyrus is BROCA'S area — speech effortful and telegraphic with comprehension intact — and the superior temporal gyrus is WERNICKE'S — speech fluent but empty, with comprehension lost. In the non-dominant hemisphere the same territory gives NEGLECT of the opposite side. Add two more from the deep parts of the fan: the optic radiation passing through the territory gives a homonymous hemianopia, and the frontal eye field gives a gaze deviation TOWARDS the side of the lesion, since the intact hemisphere drives the eyes away from its own side unopposed. Face, arm, language or neglect, a field defect and eyes looking at the lesion is the complete picture, and each element is read off the map rather than remembered."
+    },
+    {
+      "key": "deep",
+      "label": "Lenticulostriates — the same artery, a completely different stroke",
+      "role": "part",
+      "group": "Cortical versus deep",
+      "layer": "vessel",
+      "color": "#f1c232",
+      "terms": [
+        "lenticulostriate arteries",
+        "internal capsule",
+        "basal ganglia",
+        "lacunar infarct",
+        "pure motor stroke",
+        "hypertension",
+        "end artery",
+        "corticospinal tract",
+        "intracerebral haemorrhage"
+      ],
+      "narration": "The most useful distinction in this whole scene is not between two arteries but between two parts of ONE artery. Before the middle cerebral reaches the cortex it gives off the LENTICULOSTRIATE branches, tiny vessels that go straight up into the basal ganglia and the INTERNAL CAPSULE. They are end arteries with no anastomosis, and they arise at right angles from a high-pressure trunk, which is why chronic hypertension damages them specifically and why they are also the classic site of hypertensive intracerebral haemorrhage. Occlude one and the infarct is a few millimetres across, but it sits where the entire corticospinal tract has been squeezed into the posterior limb of the capsule, so the result is a DENSE weakness of face, arm and leg equally on the opposite side — a PURE MOTOR lacunar stroke — with NO aphasia, NO neglect, NO field defect and no loss of awareness, because none of the cortex is involved. Set that beside a cortical branch occlusion of the same artery, which gives the opposite profile: a patchy deficit with prominent cortical signs and often a milder weakness. So 'middle cerebral stroke' names two diseases. A dense equal hemiparesis with an entirely clear mind is deep and small; a partial weakness with aphasia or neglect is superficial and large. `basal-ganglia-diencephalon__internal-capsule` derives why so little tissue does so much damage."
+    },
+    {
+      "key": "watershed",
+      "label": "Watershed zones and the carotid itself",
+      "role": "part",
+      "group": "Cortical versus deep",
+      "layer": "vessel",
+      "color": "#6aa84f",
+      "terms": [
+        "watershed infarct",
+        "borderzone infarct",
+        "global hypoperfusion",
+        "cardiac arrest",
+        "man in a barrel",
+        "carotid stenosis",
+        "ophthalmic artery",
+        "amaurosis fugax",
+        "transient ischaemic attack",
+        "carotid endarterectomy"
+      ],
+      "narration": "Territories meet at borders, and a border is the furthest point from both supplies. So when perfusion falls GLOBALLY — cardiac arrest, prolonged hypotension, severe carotid stenosis — the tissue that dies is not any one territory but the WATERSHED between them, and the pattern is bilateral and symmetrical rather than one-sided. The anterior-to-middle border runs over the shoulder of the convexity where the proximal arm and shoulder are represented, which produces the memorable 'man in a barrel': shoulders and hips weak, hands and feet working. That is the point of the concept, because a symmetrical proximal weakness after a collapse is otherwise very hard to place. Then the carotid itself, one step upstream of everything in this scene. It gives off the OPHTHALMIC artery before it reaches the ring, so an embolus from a carotid plaque can go to the eye instead of the brain and cause AMAUROSIS FUGAX — a painless curtain of monocular visual loss lasting minutes. Monocular blindness with contralateral limb symptoms, at any interval, points at one carotid and is the classic indication to image it, since a tight symptomatic stenosis is one of the few strokes with a surgical answer."
+    }
+  ],
+  "views": [
+    {
+      "mode": "vasculature",
+      "beat": 1,
+      "title": "Two surfaces, two arteries — put the homunculus on the map",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two territories"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "aca",
+            "mca"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "One hemisphere, drawn twice — medial surface beside lateral. The anterior cerebral artery sweeps up and back over the corpus callosum and owns the medial face; the middle cerebral fans out of the lateral sulcus and owns the lateral one. Lay the motor and sensory homunculus across both and the two stroke syndromes fall out with nothing memorised: the leg hangs over the medial edge, so anterior cerebral means a weak opposite LEG; the face and hand are low on the lateral surface, so middle cerebral means a weak opposite FACE AND ARM. Nothing in this beat is a mesh. The catalog holds NO cerebral artery of any kind — searched this run, not quoted — so both territories are drawn as shaded regions on a drawn hemisphere. The gyri themselves DO exist as meshes and are used by `cerebrum-gross-lobes__functional-cortical-areas`; they are not imported here because a territory is a region over many gyri and colouring a set of measured surfaces would assert a boundary that no mesh in the catalog defines."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "The lateral surface carries the side — language, neglect, fields and gaze",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two territories"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "mca",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "mca",
+          "to": "aca",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Stay on the lateral surface, because it is where the middle cerebral tells you WHICH hemisphere as well as which artery. Dominant side, usually left: Broca's area in the inferior frontal gyrus gives effortful speech with intact comprehension; Wernicke's in the superior temporal gyrus gives fluent speech that means nothing, with comprehension gone. Non-dominant side: the same territory gives neglect, the patient not attending to the opposite half of the world. Two more signs come from structures the fan passes over rather than from cortex directly — the optic radiation, giving a homonymous hemianopia to the opposite side, and the frontal eye field, so the eyes deviate TOWARDS the lesion because the healthy hemisphere pushes them away from itself with nothing opposing it. Face and arm weak, plus language or neglect, plus a field cut, plus eyes looking at the lesion: one artery, and every element of the picture is a position on this map."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Deep or superficial — one artery, two diseases",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Cortical versus deep"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "deep",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "mca",
+            "deep"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Follow the middle cerebral only as far as the lenticulostriate branches, which turn straight up into the internal capsule and the basal ganglia. They are end arteries off a high-pressure trunk, so hypertension picks them out — for occlusion, and for the commonest site of hypertensive brain haemorrhage. Occluding one damages a few millimetres of tissue where every descending motor fibre is packed together, so the deficit is a DENSE and EQUAL weakness of face, arm and leg with the mind entirely clear. Compare that with a cortical branch of the same artery: a weakness that is usually partial and uneven, and cortical signs — aphasia, neglect, a field defect — that the deep stroke never has. Ask two questions at the bedside and the level is settled: is the weakness equal across face, arm and leg, and is there any cortical sign at all? Equal and none means deep and small. Uneven with cortical signs means superficial and large."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Borders fail last and first — watershed, and the carotid upstream",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Cortical versus deep"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "watershed",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:watershed-zones",
+          "path": [
+            "aca",
+            "mca",
+            "watershed"
+          ],
+          "duration": 6000
+        }
+      ],
+      "narration": "Shade the strip where the two territories meet: furthest from both supplies, and therefore the first tissue to die when the pressure falls everywhere at once rather than when one vessel blocks. That distinction is the beat. An embolus gives a single territory on one side; a cardiac arrest gives symmetrical borderzones on both, and because the border passes over the shoulder region of the homunculus the survivor has weak shoulders and hips with working hands and feet. Then step upstream to the carotid, which supplies both these arteries and, before either of them, the ophthalmic artery to the eye. A plaque there can shed to the retina and give a painless monocular curtain lasting minutes, or to the brain and give any of the deficits above. Transient monocular blindness on one side with limb symptoms on the other side of the body names a single carotid as the source, and that is the one anterior circulation finding with a direct surgical answer."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS FIRST PREFERRED MODE, AND THE ROUTING WAS MEASURED THIS RUN AGAINST `available-meshes.json` RATHER THAN QUOTED FROM ITS SIBLING SCENE. All 934 entries were searched under: artery, arterial, carotid, internal carotid, cerebral, anterior cerebral, middle cerebral, lenticulostriate, striate, Heubner, choroidal, ophthalmic, communicating, basilar, vertebral, radiation, territory, watershed, insula, operculum, capsule, caudate, putamen, homunculus. FINDINGS: `artery` returns 26 entries, all thoracic, abdominal, pelvic or limb, the most cranial being FMA4058/FMA3941 the COMMON carotids, which end in the neck; `carotid` returns those two and no internal carotid; `cerebral` returns four entries and NOT ONE IS A VESSEL (cerebral aqueduct, the two choroid plexuses, a white matter structure); `lenticulostriate`, `striate`, `choroidal`, `ophthalmic`, `communicating`, `basilar`, `radiation`, `watershed` and `insula` return NOTHING. `vertebral` returns twenty-three intervertebral disks and vertebral bones and NO ARTERY — the trap REPAIR-BACKLOG.md records, and it is recorded here as well as in `circle-of-willis` because a run searching this topic will meet it in whichever file it opens first. NOT ONE INTRACRANIAL VESSEL EXISTS IN THE CATALOG.",
+    "THE ABSENCE IS ONLY THE SECOND REASON FOR `diagram`; THE CURRICULUM AND THE SUBJECT ARE THE FIRST. `diagram` is this structure's FIRST preferred mode, unlike `Circle of Willis` where it is the second, and the curriculum is right: an arterial TERRITORY is a region of cortex defined by what supplies it, not an object, and its boundary is a shaded area with a fuzzy edge that no segmentation in this catalog draws. Beat 3's subject is the CONTRAST between a deep and a superficial infarct of the same artery, which is an inference from a deficit; beat 4's is what fails under global hypoperfusion, which is a claim about a gradient. Even a complete segmented cerebral arterial tree would convert beats 1 and 2 only, and `deferred_modes` keeps `3d_anatomy` for that.",
+    "THE CORTEX THE TERRITORIES LIE ON IS IN THE CATALOG AND IS DELIBERATELY NOT SHOWN. The gyri exist as meshes and are already used by `cerebrum-gross-lobes__functional-cortical-areas` and `cerebrum-gross-lobes__gyri-sulci-landmarks` — the middle and inferior temporal gyri are present in `available-meshes.json`, and the superior temporal gyrus exists ONLY as its anterior and posterior parts (FMA72801/72800, FMA72805/72804) and not as a whole-gyrus mesh — re-verified against the catalog this run, not quoted. They are not imported because a territory crosses many gyri and stops in the middle of several, so shading a set of measured whole-gyrus surfaces would assert a boundary the catalog does not contain and would teach a false crispness — the same judgement `circle-of-willis` made about the base-of-brain meshes. If a later run wants 3D here, the correct fetch is a vessel tree, not more cortex.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: one hemisphere drawn twice, medial beside lateral, with the two territories shaded and the motor homunculus overlaid across both, since beat 1's entire argument is the coincidence of a territory boundary with a body map and it cannot be carried in prose; a coronal section at the level of the internal capsule with the lenticulostriates drawn arising at right angles from the middle cerebral trunk, because beat 3 turns on those vessels being small, deep and end-arterial; and a watershed figure showing the borderzone strip shaded on both hemispheres with the shoulder-and-hip distribution marked beside it, because the 'man in a barrel' picture is the one thing that makes the concept stick.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following every other `diagram` scene in this course. Beat 1 says out loud that nothing here is a mesh.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`. The features here are TERRITORY BOUNDARIES and a WATERSHED, which are regions on a surface rather than points or contacts, so neither `--contact` nor `--extreme` defines them even in principle — the same class of refusal as the axillary apex, for a different reason. Nothing was placed by eye.",
+    "CONSISTENCY WITH THE REST OF THE COURSE WAS CHECKED AGAINST THE FILES, NOT FROM MEMORY. The division of labour with `circle-of-willis` is deliberate and was set when that scene was written the same run: the ring scene owns the ANASTOMOSIS and states only the structural fact that the middle cerebral is not part of the circle, while this scene owns the TERRITORIES and the deficits, and neither restates the other. Both state that the middle cerebral is the largest branch of the carotid and takes most of its flow, and both were read against each other so the two statements match. The INTERNAL CAPSULE claim — that the whole corticospinal tract is compressed into the posterior limb, so a tiny lesion gives a dense equal hemiparesis — is owned by `basal-ganglia-diencephalon__internal-capsule` and is referred to here rather than re-derived. Broca's and Wernicke's areas and their gyri are owned by `cerebrum-gross-lobes__functional-cortical-areas`; this scene names them only as what a territory contains. GAZE DEVIATION TOWARDS the lesion in a hemispheric stroke is stated here with its mechanism, and is the opposite of the pontine rule (eyes look AWAY from a pontine lesion, towards the weak side) which `brainstem__pons` owns — the two were compared this run and do not contradict, but a later run auditing either should check the pair, since it is the commonest place in the course for the two directions to be conflated.",
+    "TWO STATEMENTS ARE DELIBERATELY BOUNDED. Language is placed in the LEFT hemisphere as 'usually' and 'dominant' rather than as a rule, since a minority of people, more of them left-handed, are right-dominant or bilateral. And the anterior cerebral pattern is given as leg weakness with the face and arm 'comparatively spared' rather than normal, because the recurrent artery of Heubner supplies the anterior limb of the internal capsule and a proximal occlusion can add exactly the deficit the cortical map excludes — that vessel is named in the `aca` card for this reason and not as a list item.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `vasculature` and `mechanism` for `Anterior circulation`. Beats 1 and 2 are `vasculature` — the territories themselves and what the lateral one contains — and beats 3 and 4 are `mechanism`, correctly, because their subjects are how a deficit is produced (deep versus superficial occlusion) and how a pattern of failure follows from a pressure gradient. Both required views are covered and neither is padded; no `location` beat was authored, although beat 1 places the territories, because `Circle of Willis` owns `location` for this topic and holds the base-of-brain view.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Anterior circulation`, spelled as CURRICULUM.json spells it. `Posterior circulation` is NOT claimed although beat 1's medial-versus-lateral framing invites it, because the vertebrobasilar territory, the brainstem syndromes and the occipital lobe belong to that structure and it remains unauthored and visible. `Circle of Willis` is not claimed either, although the carotid and the anterior communicating artery are named here; that scene was authored the same run and owns them.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch, and all four beats are hollow for want of ARTWORK. With this scene, two of Blood Supply of the Brain's four structures are authored, both `diagram`, both blocked on artwork alone; `Posterior circulation` and `Dural venous sinuses` remain. Note for whoever fetches next: `sinus` returns only FMA4706 `coronary sinus` in the catalog, so `Dural venous sinuses` will hit exactly the same wall and should be expected to route to `diagram` too rather than being discovered to be empty a run at a time."
+  ]
+}

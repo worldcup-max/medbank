@@ -12,10 +12,14 @@
     "Midbrain"
   ],
   "learning_goal": "Place the midbrain as the short segment between diencephalon and pons, divide it front to back into crus, tegmentum and tectum around the cerebral aqueduct, name the four colliculi on its back and what each one does, and use that arrangement to explain why a lesion here takes an eye and the opposite limbs together, and why a mass above it kills by blocking the aqueduct.",
-  "status": "candidate",
+  "status": "ready",
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "audited_at": "2026-09-08",
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
   },
   "provider": {
     "primary": "bodyparts3d",
@@ -242,7 +246,7 @@
         "auditory pathway",
         "medial geniculate body"
       ],
-      "narration": "The auditory output cable, carrying fibres from the inferior colliculus forwards to the medial geniculate body of the thalamus, from which the auditory radiation runs to the temporal lobe. Neither geniculate body exists as a mesh here, so the brachium ends on the thalamus rather than on a named nucleus."
+      "narration": "The auditory output cable, carrying fibres from the inferior colliculus forwards to the medial geniculate body of the thalamus, from which the auditory radiation runs to the temporal lobe. Neither geniculate body has been fetched — both are in the catalog and neither is on disk — so the brachium ends on the thalamus rather than on the nucleus it actually reaches."
     },
     {
       "key": "bic_l",
@@ -314,7 +318,7 @@
         "medial geniculate body",
         "lateral geniculate body"
       ],
-      "narration": "The upper boundary. The midbrain is the segment between this and the pons, and the geniculate bodies that both brachia run towards are the postero-inferior corner of the thalamus — present inside this mesh but not separable from it."
+      "narration": "The upper boundary. The midbrain is the segment between this and the pons, and the geniculate bodies that both brachia run towards are the postero-inferior corner of the thalamus — inside this mesh and not separable from it. They are separate meshes in the catalog (FMA73303/73304 lateral, FMA73309/73310 medial) and none of the four has been fetched, so on screen they are part of this shape rather than objects of their own."
     },
     {
       "key": "thal_l",
@@ -518,7 +522,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "Midbrain",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -545,7 +549,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "peduncle",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_STRUCTURE",
@@ -558,7 +562,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "Tectum",
-          "intensity": 1.0
+          "intensity": 1
         }
       ],
       "narration": "The midbrain looks completely different from the two sides, so learn both. From the front: two thick crura diverging upwards, the hollow between them the interpeduncular fossa with the mammillary bodies at its front edge, and the optic tracts curving round the outside of each crus. The oculomotor nerve emerges into that fossa — it has no mesh in this catalog and is named here, not drawn. Then the camera swings behind: four rounded swellings, the quadrigeminal plate, two above and two below, with the trochlear nerve appearing just beneath the inferior pair. No other part of the brainstem has anything on its back like these, so the colliculi are how you know you are looking at a midbrain."
@@ -585,7 +589,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "aqueduct",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -654,7 +658,7 @@
         {
           "op": "CROSS_SECTION",
           "axis": "x",
-          "offset": 0.0,
+          "offset": 0,
           "animate": true
         },
         {
@@ -696,7 +700,7 @@
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "peduncle",
-          "intensity": 1.0
+          "intensity": 1
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -713,10 +717,10 @@
     "NO CRANIAL NERVE III AND NO CRANIAL NERVE IV. Searched oculomotor, trochlear, third nerve, fourth nerve, nerve, cranial, and the whole `nerve` set: the catalog holds exactly two nerve meshes, the left and right optic nerves, neither used here. This is the same absence already recorded for the Cranial Nerves topic of this course. Beats 2 and 6 name both nerves and draw neither, and each says so where it says it. The interpeduncular fossa the third nerve emerges into is handled by the next gap.",
     "THE INTERPEDUNCULAR FOSSA HAS A CATALOG ENTRY THAT IS NOT ON DISK. FMA83740 `interpeduncular fossa` exists in available-meshes.json but is not in meshes-lite/, so it is not used as a model. It was NOT authored as an anchor either: it is a hollow bounded by two crura and the mammillary bodies, which is a space between structures rather than a point on one of them — the same shape of definition that made derive-landmark.mjs refuse the axillary apex. Beat 2 names it and the mammillary-body card describes it as the space between the two peduncles, which is what the student actually sees.",
     "THE EIGHT TECTAL MESHES ARRIVED DURING THIS RUN — READ THIS BEFORE BELIEVING ANY DELIVERY NOTE. When this scene was written, FMA73422/73423 superior colliculi, FMA73434/73435 inferior colliculi and FMA73461/73462/73463/73464 the four brachia were verified absent from meshes-lite/ (478 files), and this note said beat 2's posterior half and the whole of beat 4 were hollow. Re-checked at the end of the same run: 491 files, all eight present, and sync-state.mjs reports 75 of 75 scenes drawing complete. All twenty-three of this scene's models are on disk and every beat renders. The scene stays `candidate` for authoring reasons only — the undivided peduncle mesh and the absent cranial nerves below. The wider lesson is the one REPAIR-BACKLOG.md section 3 keeps making: a delivery claim is true only on the day it is measured, so check meshes-lite/ rather than quoting a note, including this one. The corollary: derive-landmark.mjs can now measure against the colliculi, and the brachium-to-colliculus contacts are worth attempting at this scene's audit.",
-    "NO GENICULATE BODY OF EITHER KIND. Searched geniculate, genicul, corpus geniculatum, metathalamus. Both are inside FMA258714 / FMA258716, the thalamic meshes, and are not separable from them, so the beat 4 auditory trace ends on `thal_r` and the narration states that the thalamus is standing for the medial geniculate body rather than pretending to be it.",
+    "CORRECTED AT AUDIT, 2026-09-08 — THIS ENTRY WAS FALSE AND IS THE CENTRAL FINDING OF THIS SCENE'S AUDIT. It read: `NO GENICULATE BODY OF EITHER KIND. Searched geniculate, genicul, corpus geniculatum, metathalamus.` The catalog holds ALL FOUR: FMA73303 right lateral, FMA73304 left lateral, FMA73309 right medial, FMA73310 left medial — returned by searching `genicul`, the very string the note claims was searched. The true statement is that all four EXIST IN THE CATALOG AND NONE IS IN meshes-lite/, verified by listing the directory this run rather than by quoting a note. They are therefore a FETCH job, not an absence: they belong in the human fetch queue, and this scene's beat 4 auditory trace ends on `thal_r` only because the medial geniculate mesh has not been delivered, not because it does not exist. Re-route the trace to FMA73309 the moment it is on disk. This is failure mode 1 from REPAIR-BACKLOG.md committed in the one place designed to prevent it, and the corpus already contained the correction on the day this was written: `cerebrum-gross-lobes__white-matter-tracts` gaps[9] names FMA73303/73304 and is dated 2026-08-30, the same day as this scene.",
     "NO SUPERIOR CEREBELLAR PEDUNCLE AND NO DECUSSATION. Searched peduncle, brachium conjunctivum, decussation, cerebellar — the only `peduncle` hit in the entire catalog is FMA62394, the midbrain's own. The cerebellum card names the peduncles entering the tegmentum and says no mesh shows them. The Cerebellum topic of this course will meet the same absence: verified today that `cerebellum` returns exactly one entry, FMA67944, the whole organ, with no lobe, vermis, tonsil, flocculus or deep nucleus.",
     "NO INTRACRANIAL VESSEL OF ANY KIND, so the posterior cerebral and basilar branches of beat 6 are named and not drawn. Searched basilar, posterior cerebral, vertebral, perforator, quadrigeminal artery, circle of Willis, sinus. Consistent with the blood-supply routing recorded for this course.",
-    "NO ANCHORS WERE AUTHORED. Every feature this scene names on a structure is either inside the undivided peduncle mesh, which cannot be measured into parts, or on a colliculus mesh that is not on disk — and derive-landmark.mjs cannot measure a parent it does not have. Two definitions were considered and rejected before measuring rather than after: the pontomesencephalic junction, which would be a `--contact` between peduncle and pons and is a transverse LINE rather than a point, and the interpeduncular fossa, covered above. Revisit the junction if the tool ever gains a line primitive; do not derive it as a point.",
+    "NO ANCHOR IS AUTHORED ON THE PEDUNCLE, WHICH IS ONE UNDIVIDED MESH AND CANNOT BE MEASURED INTO PARTS. Corrected 2026-09-08: this entry previously also blamed \"a colliculus mesh that is not on disk\", which was false and was contradicted by this scene’s own delivery note — FMA73422/73423/73434/73435 and the four brachia FMA73461-73464 are ALL in meshes-lite/, and all 23 of this scene’s models are on disk. The brachium-to-colliculus contacts are therefore measurable and remain worth attempting.",
     "SIDES, STATED EXPLICITLY BECAUSE THE IDS DO NOT CARRY THEM. Right / left in this scene: superior colliculus FMA73422 / FMA73423, inferior colliculus FMA73434 / FMA73435, brachium of superior colliculus FMA73461 / FMA73462, brachium of inferior colliculus FMA73463 / FMA73464, thalamus FMA258714 / FMA258716. The two colliculus pairs and the superior-brachium pair are consecutive and ascending right-then-left; the INFERIOR brachia are not — FMA73463 is RIGHT and FMA73464 is LEFT, while FMA73461/73462 are the SUPERIOR pair, so the four brachia interleave superior-right, superior-left, inferior-right, inferior-left across 73461-73464 rather than grouping by colliculus. Each was read off the catalog name individually. The pons, medulla, cerebellum, aqueduct, chiasm, pineal body, posterior commissure, mammillary body and both non-lateral ventricles are unpaired midline meshes with no side. The optic tracts break the pattern entirely: FMA62382 is RIGHT and FMA67936 is LEFT, not consecutive and not in the same numbering block.",
     "THE PONS, MEDULLA, CEREBELLUM AND THALAMUS ARE DELIBERATELY NOT IN covers[]. All four are separate CURRICULUM.json structures with their own scenes, and each appears here only as a boundary of the midbrain. `Cerebral aqueduct` is not a curriculum structure in its own right — it belongs to Ventricles under Ventricular System & CSF, which is already authored — so beat 5 teaches it as the midbrain's central tube without claiming the ventricular structure."
   ]

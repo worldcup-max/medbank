@@ -12,7 +12,7 @@
     "Ventricles"
   ],
   "learning_goal": "Name the four ventricles and the two channels between them in order, say what forms the walls of each so that a ventricle can be identified on any slice, and know where the system is narrow enough to block.",
-  "status": "candidate",
+  "status": "ready",
   "provider": {
     "primary": "bodyparts3d",
     "fallbacks": []
@@ -418,7 +418,26 @@
         "floor of third ventricle",
         "tuber cinereum"
       ],
-      "narration": "The back of the floor of the third ventricle. Between it and the chiasm lie the tuber cinereum and the infundibulum, which have no models here; the floor is therefore read between these two lit landmarks."
+      "narration": "The back of the floor of the third ventricle. Between it and the chiasm lies the tuber cinereum, which IS lit as of the 2026-09-08 audit, with the infundibulum hanging from it — the stalk is the only part of the floor still without a model. Chiasm, tuber, mammillary bodies: the floor now reads front to back as three lit landmarks rather than two with a gap."
+    },
+    {
+      "key": "tc",
+      "name": "tuber cinereum",
+      "label": "Tuber cinereum",
+      "role": "context",
+      "group": "Walls & neighbours",
+      "layer": "nucleus",
+      "color": "#d9b06a",
+      "refs": {
+        "bodyparts3d": "FMA62327"
+      },
+      "terms": [
+        "tuber cinereum",
+        "floor of third ventricle",
+        "infundibulum",
+        "median eminence"
+      ],
+      "narration": "The middle of the floor of the third ventricle, between the optic chiasm in front and the mammillary bodies behind, with the infundibulum hanging from its front part down to the pituitary. Added at the 2026-09-08 audit: the scene previously said this had no model and read the floor between the chiasm and the mammillary bodies, but FMA62327 is in the catalog and on disk, so the middle of the floor is now lit rather than inferred. The infundibulum itself still has no model, so the stalk is named and not drawn."
     },
     {
       "key": "pin",
@@ -649,7 +668,7 @@
           "intensity": 0.9
         }
       ],
-      "narration": "A slit you could post a card through, and every one of its walls is a structure worth knowing. Front, the lamina terminalis running up from the optic chiasm. Floor, chiasm to mammillary bodies, with the infundibulum between them. Sides, thalamus above and hypothalamus below. Back, the pineal body with the recess beneath it. Everything named here except the hypothalamus, the tuber cinereum and the infundibulum is lit on screen; those three have no model and are read from the lit landmarks around them."
+      "narration": "A slit you could post a card through, and every one of its walls is a structure worth knowing. Front, the lamina terminalis running up from the optic chiasm. Floor, chiasm to mammillary bodies, with the infundibulum between them. Sides, thalamus above and hypothalamus below. Back, the pineal body with the recess beneath it. Everything named here except the hypothalamus and the infundibulum is lit on screen — including the tuber cinereum, added at the 2026-09-08 audit; those two have no model and are read from the lit landmarks around them."
     },
     {
       "mode": "cross_section",
@@ -781,7 +800,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "audited_at": "2026-09-08",
+    "audited_by": "task"
   },
   "gaps": [
     "NO EXIT FROM THE FOURTH VENTRICLE HAS A MODEL. Searched median aperture, lateral aperture, aperture, Magendie, Luschka and foramen — the only foramen in the catalog is the interventricular one. The three holes are therefore named in the fourth ventricle card and in beats 6 and 8 and are explicitly not shown. This is the reason beat 8's trace stops at the central canal instead of leaving the system.",
@@ -790,9 +811,9 @@
     "Choroid plexus exists only as 'of left / right cerebral hemisphere' (FMA274029 / FMA274027) — that is the lateral ventricle plexus. Searched choroid, plexus, tela and glomus: there is no third or fourth ventricle plexus model. Beat 7 states the omission rather than implying the lateral ventricles make all of it. This scene covers 'Ventricles' only; the curriculum's separate 'Choroid plexus' structure needs the glands and mechanism views and has since been authored as neuroanatomy__ventricular-system-csf__choroid-plexus.",
     "The lateral ventricle is one model per side (FMA78450 left, FMA78449 right): frontal horn, body, atrium, occipital horn and temporal horn have no separate ids — searched all five under both the horn and the cornu spellings. They are named on the structure card and read off the C shape in beat 2.",
     "The fourth ventricle floor's named features have no models — no facial colliculus, no hypoglossal or vagal trigone, no striae medullares of the fourth ventricle, no obex. Beat 6 names the rhomboid fossa and says the cranial nerve nuclei lie under it; it does not mark any point on it. No anchor was authored for any of them, and the reason first given here — that the parent mesh was not in meshes-lite/ — was stale by 2026-08-30, when all twenty-three of this scene's meshes were verified on disk. The real obstacle is a definition one and it is per-feature: the facial colliculus, the hypoglossal and vagal trigones and the obex are elevations and a notch on the floor of the fourth ventricle, and FMA78469 is a mesh of the CAVITY, so its surface is the mould of that floor rather than the floor itself — a contact definition has no second structure to witness it. The obex is the one worth attempting at this scene's audit, as an --extreme on the caudal limit of FMA78469 cross-checked against the central canal FMA78497, since it is defined by position rather than by contact.",
-    "The hypothalamus, tuber cinereum and infundibulum have no models (searched hypothalam, tuber, infundib, pituitary stalk), so the floor and lower lateral wall of the third ventricle in beat 5 are read between the optic chiasm and the mammillary body, both of which do exist. The pituitary gland (FMA13889) exists but is outside the ventricle and is not carried here.",
+    "CORRECTED AT AUDIT 2026-09-08 — THIS ENTRY CONTRADICTED THE LAST ENTRY IN THIS SAME LIST FOR NINE DAYS. It said the tuber cinereum has no model; the last entry, written the same day, gives its id. Re-searched this run: `tuber` returns exactly one entry, FMA62327 `tuber cinereum`, and it IS in meshes-lite/. It has now been AUTHORED as the `tc` structure and lit in beat 5, so the correction is applied rather than only recorded. What remains genuinely absent is the HYPOTHALAMUS and the INFUNDIBULUM — `hypothalam` and `infundib` each return zero — so the lower lateral wall of the third ventricle and the stalk are still read from lit landmarks. The pituitary gland (FMA13889) exists but is outside the ventricle and is not carried here.",
     "SIDES: FMA78450 is the LEFT lateral ventricle and FMA78449 the RIGHT; FMA274029 is the LEFT choroid plexus and FMA274027 the RIGHT; FMA72827 is the LEFT caudate and FMA72826 the RIGHT; FMA258716 is the LEFT thalamus and FMA258714 the RIGHT. The third and fourth ventricles, the aqueduct, the interventricular foramen, the septum pellucidum, the central canal, the lamina terminalis, the chiasm, the mammillary body, the pineal body, the pons, the medulla and the cerebellum are unsided single models.",
-    "DELIVERY: 22 of this scene's 23 meshes are absent from meshes-lite/. The single exception is FMA78497, the central canal of the spinal cord, which was fetched for the Gross Anatomy spinal cord scene and is on disk — verified by listing the directory, not assumed. Every brain model proper is missing, so all nine beats are hollow and the status is 'candidate' on delivery grounds alone. Nothing in the anatomy, the ids or the ops is unresolved. No anchor is authored anywhere in this scene: derive-landmark.mjs needs the parent mesh on disk to measure against, and for every feature worth marking here it is not.",
-    "CORRECTED 2026-08-30: an earlier note here said the tuber cinereum has no model. It does — FMA62327, found by searching 'tuber'. It is the middle of the floor of the third ventricle and should be authored. The hypothalamus and the infundibulum are genuinely absent."
+    "DELIVERY, RE-MEASURED AT AUDIT 2026-09-08: ALL 24 OF THIS SCENE'S MESHES ARE ON DISK — verified by listing meshes-lite/ this run, not quoted. NO BEAT IS HOLLOW. This entry previously read `22 of this scene's 23 meshes are absent from meshes-lite/ ... all nine beats are hollow and the status is candidate on delivery grounds alone`, and it contradicted the fourth-ventricle-floor entry three places above it, which already said on 2026-08-30 that all twenty-three meshes were verified on disk. Two delivery claims of opposite sign sat in one list and the pessimistic one was the one that set the status, which is precisely how a finished scene stays invisible. The count is 24 rather than 23 because the tuber cinereum was authored at this audit. The scene is promoted to `ready` on this basis. No anchor is authored anywhere in this scene: the features worth marking are on the floor of the fourth ventricle, and FMA78469 is a mesh of the CAVITY, so its surface is the mould of that floor and no second structure witnesses a contact — the obex remains the one attemptable definition, as an --extreme on the caudal limit of FMA78469 cross-checked against FMA78497, and it was NOT attempted this run and NOT placed by eye.",
+    "CORRECTED 2026-08-30: an earlier note here said the tuber cinereum has no model. It does — FMA62327, found by searching 'tuber'. It is the middle of the floor of the third ventricle and should be authored. The hypothalamus and the infundibulum are genuinely absent. CLOSED 2026-09-08: authored as `tc`, mesh confirmed on disk, and the entry higher in this list that still denied it has been corrected. The lesson the audit records: writing the correction as a NEW note while leaving the old one in place is a half-applied fix, and for nine days this file said both things at once."
   ]
 }

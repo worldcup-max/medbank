@@ -684,7 +684,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-30"
+    "authored_at": "2026-08-30",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "human session"
   },
   "gaps": [
     "NO SULCUS HAS A MODEL, ANYWHERE IN THE CATALOG. Searched under sulcus, sulci, fissure and Sylvian: zero hits of any kind. This is not a coverage gap that will close — a sulcus is a cleft between two gyri, not an object, so BodyParts3D has nothing to represent. Every sulcus in this scene is therefore taught by lighting the two gyri that bank it, and each beat says which two. That is the honest form of the teaching rather than a workaround.",
@@ -693,6 +695,6 @@
     "The orbital gyri and the straight gyrus are one model (BP51), so the olfactory sulcus between them cannot be banked either; it is named on that structure card.",
     "No operculum of any kind exists as a model, so beat 9 can show the insula isolated but cannot lift the three lips off it. The frontal, parietal and temporal opercula are named on the insula and superior temporal gyrus cards.",
     "Right-side models exist for every gyrus used here except the ones already noted, but this scene carries the left side as its teaching set plus the right central-sulcus pair, to keep the surface readable. FMA72662 is the LEFT precentral gyrus and FMA72661 the RIGHT; FMA72666 is the LEFT postcentral and FMA72665 the RIGHT.",
-    "No mesh referenced by this scene is present in meshes-lite/ yet — the brain models have not been fetched. Every beat is hollow until they are, which is why the status is 'candidate'; nothing in the anatomy or the ops is unresolved."
+    "CORRECTED 2026-09-08: this entry read that no mesh referenced by the scene was present in meshes-lite/ and that every beat was hollow — and gave that as the reason the status is `candidate`. IT WAS FALSE. All 20 of this scene’s models are on disk and every beat renders; re-checked id by id on 2026-09-08. The scene is still `candidate` for the one honest reason: it carries no provenance.audited_at, and `ready` is what a signature buys. Nothing about delivery is holding it."
   ]
 }

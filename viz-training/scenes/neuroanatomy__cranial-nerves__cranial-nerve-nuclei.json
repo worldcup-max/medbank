@@ -1,0 +1,337 @@
+{
+  "schema": 2,
+  "id": "neuroanatomy__cranial-nerves__cranial-nerve-nuclei",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Neuroanatomy",
+  "topic": "Cranial Nerves",
+  "structure": "Cranial nerve nuclei",
+  "covers": [
+    "Cranial nerve nuclei"
+  ],
+  "learning_goal": "Stop memorising thirty nuclei as a list and derive their positions from one embryological fact: the neural tube opens out at the fourth ventricle, so the motor plate that lay ventrally is swung MEDIAL and the sensory plate that lay dorsally is swung LATERAL, with the sulcus limitans left as the boundary between them. Read the brainstem thereafter as six longitudinal columns — three motor medial, three sensory lateral — and place any nucleus by naming its column and its level. Then use that map twice: to know which nuclei sit at midbrain, pontine and medullary level, and to explain why a MEDIAL brainstem infarct gives one pattern of signs and a LATERAL one gives a completely different pattern from the same artery's neighbours.",
+  "status": "planned",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-03",
+    "audited_at": "2026-09-03",
+    "audited_by": "task"
+  },
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neuroanatomy",
+      "cranial nerves",
+      "cranial nerve nuclei",
+      "brainstem",
+      "brainstem syndromes"
+    ],
+    "terms": [
+      "cranial nerve nuclei",
+      "nuclear columns",
+      "sulcus limitans",
+      "alar plate",
+      "basal plate",
+      "fourth ventricle",
+      "rhomboid fossa",
+      "general somatic efferent",
+      "branchial efferent",
+      "special visceral efferent",
+      "general visceral efferent",
+      "general visceral afferent",
+      "special visceral afferent",
+      "general somatic afferent",
+      "special somatic afferent",
+      "oculomotor nucleus",
+      "trochlear nucleus",
+      "abducens nucleus",
+      "hypoglossal nucleus",
+      "trigeminal motor nucleus",
+      "facial nucleus",
+      "nucleus ambiguus",
+      "Edinger-Westphal nucleus",
+      "superior salivatory nucleus",
+      "inferior salivatory nucleus",
+      "dorsal motor nucleus of vagus",
+      "nucleus of the solitary tract",
+      "nucleus tractus solitarius",
+      "mesencephalic nucleus",
+      "principal sensory nucleus",
+      "spinal trigeminal nucleus",
+      "vestibular nuclei",
+      "cochlear nuclei",
+      "rule of four",
+      "medial medullary syndrome",
+      "lateral medullary syndrome",
+      "Wallenberg syndrome",
+      "crossed signs"
+    ]
+  },
+  "camera": {
+    "framing": "posterior"
+  },
+  "structures": [
+    {
+      "key": "plan",
+      "label": "The one rule — the tube opens, motor goes medial",
+      "role": "primary",
+      "group": "The organising rule",
+      "layer": "organ",
+      "color": "#f1c232",
+      "terms": [
+        "alar plate",
+        "basal plate",
+        "sulcus limitans",
+        "fourth ventricle",
+        "rhomboid fossa",
+        "nuclear columns",
+        "motor medial",
+        "sensory lateral"
+      ],
+      "narration": "In the spinal cord the arrangement is front-to-back: the basal plate is ventral and motor, the alar plate is dorsal and sensory, and the sulcus limitans is the groove between them. At the brainstem the roof of the tube thins and the walls swing outwards to open the fourth ventricle flat, like a book laid open. Nothing changes its relation to the sulcus limitans; the geometry changes around it. What was ventral is now MEDIAL and what was dorsal is now LATERAL. That single rotation is the whole organising rule of this scene, and every nucleus below obeys it: the motor columns lie near the midline, the sensory columns lie out towards the lateral edge, and the sulcus limitans still separates them, visible on the floor of the fourth ventricle. Learn the rotation once and you never memorise a position again — you reconstruct it."
+    },
+    {
+      "key": "motor",
+      "label": "Three motor columns, medial to lateral",
+      "role": "primary",
+      "group": "The six columns",
+      "layer": "organ",
+      "color": "#cc0000",
+      "terms": [
+        "general somatic efferent",
+        "special visceral efferent",
+        "branchial efferent",
+        "general visceral efferent",
+        "oculomotor nucleus",
+        "trochlear nucleus",
+        "abducens nucleus",
+        "hypoglossal nucleus",
+        "trigeminal motor nucleus",
+        "facial nucleus",
+        "nucleus ambiguus",
+        "Edinger-Westphal nucleus",
+        "superior salivatory nucleus",
+        "inferior salivatory nucleus",
+        "dorsal motor nucleus of vagus"
+      ],
+      "narration": "Three columns, and their order from the midline outwards is itself derivable — somatic first, then branchial, then visceral. GENERAL SOMATIC EFFERENT, hard against the midline, supplying muscle of somite origin: oculomotor and trochlear in the midbrain, abducens in the pons, hypoglossal in the medulla. Those four are the ones that keep the eyes and the tongue moving, and their nuclei are the closest of all to the median plane. BRANCHIAL EFFERENT, just lateral to them, supplying muscle of pharyngeal-arch origin: the trigeminal motor nucleus for the muscles of mastication (first arch), the facial nucleus for the muscles of facial expression (second arch), and the nucleus ambiguus for pharynx and larynx (third, fourth and sixth arches, through IX, X and the cranial part of XI). Note that this column has migrated ventrolaterally away from the ventricular floor during development, which is why the nucleus ambiguus is 'ambiguous' — it is hard to find. GENERAL VISCERAL EFFERENT, the parasympathetic outflow, lateral again: Edinger-Westphal with III for the sphincter pupillae and ciliary muscle, superior salivatory with VII for the lacrimal, submandibular and sublingual glands, inferior salivatory with IX for the parotid, and the dorsal motor nucleus of the vagus, by far the largest, for the thoracic and abdominal viscera as far as the splenic flexure."
+    },
+    {
+      "key": "sensory",
+      "label": "Three sensory columns, lateral to medial",
+      "role": "primary",
+      "group": "The six columns",
+      "layer": "organ",
+      "color": "#45818e",
+      "terms": [
+        "general visceral afferent",
+        "special visceral afferent",
+        "general somatic afferent",
+        "special somatic afferent",
+        "nucleus of the solitary tract",
+        "nucleus tractus solitarius",
+        "taste",
+        "mesencephalic nucleus",
+        "principal sensory nucleus",
+        "spinal trigeminal nucleus",
+        "vestibular nuclei",
+        "cochlear nuclei"
+      ],
+      "narration": "Three sensory columns, mirroring the motor ones across the sulcus limitans. VISCERAL AFFERENT, the most medial of the sensory group and therefore nearest the boundary: one nucleus does both jobs, the NUCLEUS OF THE SOLITARY TRACT. Its rostral part takes TASTE from VII, IX and X — the special visceral afferent — and its caudal part takes general visceral sensation, including the baroreceptors of the carotid sinus and aortic arch and the chemoreceptors, which is why it is the afferent end of every cardiovascular and respiratory reflex the medulla runs. One nucleus, two halves, and the rostral-caudal split is the fact to keep. GENERAL SOMATIC AFFERENT, lateral to it: the trigeminal sensory complex, remarkable for running the entire height of the brainstem in three parts — the MESENCEPHALIC nucleus in the midbrain for proprioception from the muscles of mastication, which is the only primary sensory cell body inside the central nervous system rather than in a ganglion; the PRINCIPAL (chief) nucleus in the pons for discriminative touch; and the SPINAL trigeminal nucleus running down through the medulla into the upper cervical cord for pain and temperature. That descent is why a MEDULLARY lesion causes facial pain loss, and it is the single most useful positional fact in this scene. SPECIAL SOMATIC AFFERENT, the most lateral of all, at the pontomedullary junction: the vestibular and cochlear nuclei of VIII, sitting in the lateral recess of the fourth ventricle."
+    },
+    {
+      "key": "levels",
+      "label": "Which nucleus at which level — the rule of four",
+      "role": "part",
+      "group": "Reading the brainstem",
+      "layer": "organ",
+      "color": "#8e7cc3",
+      "terms": [
+        "rule of four",
+        "midbrain",
+        "pons",
+        "medulla oblongata",
+        "cranial nerve levels",
+        "sulcus limitans",
+        "facial colliculus",
+        "trochlear nucleus"
+      ],
+      "narration": "Having placed the columns across the brainstem, place the nuclei along it, and there is a counting rule that makes it almost free. FOUR nuclei sit in the MIDLINE motor column — III, IV, VI and XII, which are exactly the numbers that divide into twelve, once I and II are set aside as not being brainstem nerves at all. FOUR cranial nerves arise at each of the three levels: I and II above the brainstem entirely, III and IV in the MIDBRAIN, V, VI, VII and VIII in the PONS, and IX, X, XI and XII in the MEDULLA. Add the trigeminal complex as the exception that spans all three, and the map is complete. Two positional oddities are worth stating rather than deriving, because the rotation rule does not predict them: the trochlear nucleus supplies the CONTRALATERAL superior oblique and its nerve is the only one to leave the brainstem DORSALLY, so a trochlear lesion in the brainstem and a trochlear lesion in the nerve affect opposite eyes; and the facial nerve's fibres loop around the abducens nucleus to raise the facial colliculus on the floor of the fourth ventricle, so one small pontine lesion there takes an ipsilateral lateral rectus and an ipsilateral whole face together."
+    },
+    {
+      "key": "syndromes",
+      "label": "Medial versus lateral — reading a lesion off the map",
+      "role": "part",
+      "group": "Reading the brainstem",
+      "layer": "organ",
+      "color": "#a64d79",
+      "terms": [
+        "medial medullary syndrome",
+        "lateral medullary syndrome",
+        "Wallenberg syndrome",
+        "crossed signs",
+        "spinal trigeminal nucleus",
+        "nucleus ambiguus",
+        "vestibular nuclei",
+        "paramedian branches",
+        "circumferential branches"
+      ],
+      "narration": "This is what the map is for. The brainstem's blood supply runs as short PARAMEDIAN branches straight in from the basilar and vertebral arteries and as long CIRCUMFERENTIAL branches around the outside, so an infarct is characteristically medial or lateral rather than segmental — which is precisely the division the column rule already gave you. A MEDIAL infarct catches the somatic motor column and the two great longitudinal tracts beside it: at medullary level, the hypoglossal nucleus, the pyramid and the medial lemniscus. A LATERAL infarct catches none of those and instead takes the sensory columns and the structures out at the edge: the spinal trigeminal nucleus, the nucleus ambiguus, the vestibular nuclei, the spinothalamic tract, the descending sympathetic fibres and the inferior cerebellar peduncle. Hence the two facts worth carrying away. First, a CRANIAL NERVE SIGN ON ONE SIDE WITH A LONG-TRACT SIGN ON THE OTHER LOCALISES TO THE BRAINSTEM and to almost nowhere else, because that is what a nucleus and a not-yet-crossed tract sitting side by side must produce. Second, the level is given by WHICH cranial nerve is involved and the medial-or-lateral by WHICH column. The two named medullary syndromes are worked through as vascular territories by `neuroanatomy__brainstem__medulla-oblongata`, which owns them; this scene derives their ingredients from the columns and points there rather than restating the territory."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Open the tube and the map falls out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The organising rule"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "plan",
+          "intensity": 1.0
+        }
+      ],
+      "narration": "Start with the cord, where motor is ventral and sensory dorsal with the sulcus limitans between them. Now open the roof of the fourth ventricle and lay the walls flat. Ventral becomes MEDIAL, dorsal becomes LATERAL, and the sulcus limitans is still the border — now a groove you could point to on the floor of the ventricle. Everything else in this scene is a consequence of that one movement. Nothing here is a mesh: this is a drawn map. The catalog holds no cranial nerve nucleus of any kind, no sulcus limitans and no fourth-ventricle floor; its only nerve meshes are the two optic nerves, and CN II is the one nerve in the set that has no brainstem nucleus to draw, which makes the single available mesh precisely the exception. So this beat is drawn rather than shown, and that is said first so no beat sends a student looking for something absent."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The three motor columns",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The six columns"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "motor",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "motor",
+          "to": "plan",
+          "kind": "continuity"
+        }
+      ],
+      "narration": "Work outwards from the midline. Somatic efferent, hard against it, for muscle of somite origin — III and IV in the midbrain, VI in the pons, XII in the medulla; eyes and tongue. Branchial efferent next, for muscle of pharyngeal-arch origin — trigeminal motor for chewing, facial for expression, nucleus ambiguus for swallowing and phonation through IX, X and cranial XI. This column migrates ventrolaterally away from the ventricular floor as it develops, which is the reason the nucleus ambiguus has the name it has. Visceral efferent last, the parasympathetic outflow — Edinger-Westphal for the pupil, superior salivatory for lacrimal and the two lower salivary glands, inferior salivatory for parotid, dorsal motor of the vagus for the viscera. Three columns, three tissue origins, and the order is the order of the embryology rather than a list to learn."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The three sensory columns, and the one that runs the whole height",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The six columns"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sensory",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "motor",
+            "sensory"
+          ],
+          "layout": "row"
+        }
+      ],
+      "narration": "Hold the two halves of the map together across the sulcus limitans. Nearest the boundary on the sensory side is the nucleus of the solitary tract, taste in its rostral part from VII, IX and X, and general visceral sensation in its caudal part — baroreceptors, chemoreceptors, the afferent arm of the medulla's reflexes. Lateral to it, the trigeminal sensory complex, which is the exception to the whole level scheme because it runs from midbrain to upper cervical cord in three parts: mesencephalic for proprioception, principal for touch, and spinal for pain and temperature, that last descending far enough that a MEDULLARY lesion can numb a face. Most lateral of all, at the pontomedullary junction in the lateral recess, the vestibular and cochlear nuclei. Six columns now, three each side of one groove, and every nucleus in the brainstem has a column and a level."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "On the section — four in the midline, four at each level",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Reading the brainstem"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "levels",
+          "intensity": 1.0
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.0,
+          "animate": true
+        }
+      ],
+      "narration": "Cut across the brainstem and count. The cut here is transverse, on the vertical z axis, the same convention this course uses for every axial cut. Four nuclei in the midline motor column — III, IV, VI, XII, the numbers that divide into twelve once I and II are set aside as not being brainstem nerves. Be clear which half of this is which: that the nerves come four to a level IS an anatomical fact, a consequence of how the columns are broken up along the tube, whereas the divides-into-twelve test for the midline four is ARITHMETIC that happens to land correctly and explains nothing. Use the second as a retrieval hook and never as a reason. Four nerves at each level — III and IV midbrain, V to VIII pons, IX to XII medulla — with the trigeminal complex spanning all three. Then two things the rotation rule does not predict and which must simply be known. The trochlear nucleus supplies the CONTRALATERAL superior oblique and its nerve alone leaves dorsally, so a nuclear lesion and a nerve lesion hit opposite eyes. And the facial fibres loop over the abducens nucleus to raise the facial colliculus, so a single small lesion there takes an ipsilateral lateral rectus and an ipsilateral whole face at once — the anatomical basis of the pontine syndromes that `neuroanatomy__brainstem__pons` works through in its own territory."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Medial or lateral — one section, two syndromes",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Reading the brainstem"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "levels",
+            "syndromes"
+          ],
+          "layout": "row"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.0,
+          "animate": true
+        }
+      ],
+      "narration": "Shade the same transverse section two ways. MEDIAL, the territory of the short paramedian branches: the somatic motor nucleus of that level, the pyramid and the medial lemniscus — at the medulla, a tongue, a hemiplegia and a loss of vibration and position sense. LATERAL, the territory of the long circumferential branches: the spinal trigeminal nucleus, the nucleus ambiguus, the vestibular nuclei, the spinothalamic tract, the descending sympathetic fibres and the inferior cerebellar peduncle — a numb face, a hoarse voice, vertigo, a Horner's, ataxia, and pain and temperature lost on the opposite body. Nothing in either list has been memorised: both were read off the columns. And the rule that outlives the detail — a cranial nerve sign on one side with a long-tract sign on the other means the brainstem, because that is what a nucleus sitting beside a tract that has not yet crossed must produce. The vascular territories themselves belong to `neuroanatomy__brainstem__medulla-oblongata`, which owns both named syndromes; this scene supplies their ingredients and defers on the territory."
+    }
+  ],
+  "gaps": [
+    "ROUTED TO `diagram`, ITS SECOND PREFERRED MODE, BECAUSE THE FIRST — `3d_anatomy` — IS UNAUTHORABLE, AND THE ROUTING WAS MEASURED THIS RUN AGAINST `available-meshes.json` RATHER THAN QUOTED FROM THE PROMPT'S COVERAGE TABLE OR FROM THE BRAINSTEM SCENES THAT REACHED THE SAME CONCLUSION. All 934 entries were searched under: cranial, nerve, nervus, nucleus, nucle, olfactory, optic, oculomotor, trochlear, trigeminal, abducens, facial, vestibulocochlear, cochlear, vestibular, glossopharyngeal, vagus, vagal, accessory, hypoglossal, ambiguus, ambigu, solitary, solitarius, salivatory, mesencephalic, Edinger, ganglion, root, rootlet, sulcus, limitans, alar, basal plate, fourth ventricle, rhomboid, colliculus, trapezoid, olive, oliv, lemniscus. Findings: `nucle` returns ONLY the two caudate nuclei in the entire catalog, so there is no cranial nerve nucleus of any description; `nerve` returns ONLY FMA50875 and FMA50878, the two optic nerves; `cranial`, `oculomotor`, `trochlear`, `trigeminal`, `abducens`, `facial`, `vestibulocochlear`, `cochlear`, `glossopharyngeal`, `vagus`, `hypoglossal`, `ambiguus`, `solitary`, `salivatory`, `mesencephalic`, `Edinger`, `ganglion`, `root`, `olfactory`, `sulcus` and `limitans` return NOTHING AT ALL; `accessory` returns two accessory short gyri of the insula, which is a different word and not the eleventh nerve — a trap worth naming, because it is exactly the kind of hit a run in a hurry records as a find. `trapezoid` returns the two carpal trapezoids, not the trapezoid body of the pons, and is the same trap. This confirms the prompt's DEAD verdict for the Cranial Nerves topic, but it is recorded here as a measurement rather than a quotation.",
+    "AUDIT 2026-09-03 — TWO SEARCH TERMS IN THE LIST ABOVE DO RETURN MESHES AND THE ORIGINAL NOTE DID NOT SAY SO. Re-run independently this run against all 934 entries: `colliculus` returns EIGHT — FMA73422/73423 superior colliculi, FMA73434/73435 inferior colliculi, and FMA73461-73464 their four brachia — and `ventricle` returns FMA78469 `fourth ventricle` (with FMA78449/78450 lateral and FMA78454 third). Neither changes the routing and neither is imported, for reasons that are now stated instead of implied: the colliculi are midbrain ROOF structures owned by `brainstem__midbrain`, and the colliculus this scene names is the FACIAL colliculus, a different structure entirely that has no mesh — precisely the trap the note flags for `accessory` and `trapezoid`, and one the note itself walked into by omission. The fourth-ventricle mesh is the CAVITY as a volume, and what beats 1 to 3 need is the sulcus limitans as a groove ON its floor, which no mesh carries; beat 1's wording, 'no fourth-ventricle floor', is therefore accurate as written and was left alone. The correction here is to the EVIDENCE, not to the teaching: a later run reading the original note would have concluded there is no fourth ventricle in the catalog, which is false, and that is exactly the failure mode REPAIR-BACKLOG.md records as having cost nine meshes.",
+    "THE TWO MESHES THAT DO EXIST ARE THE EXCEPTION THAT PROVES THE SUBJECT ABSENT, AND WERE DELIBERATELY NOT IMPORTED. FMA50875 and FMA50878 are the optic nerves; the optic chiasm and both optic tracts also exist, as do the four geniculate bodies, of which the lateral pair is the thalamic relay of the visual pathway. CN II is a tract of the central nervous system rather than a peripheral nerve and has NO brainstem nucleus, so the one nerve this catalog can draw is the one nerve this scene has nothing to say about. Importing it would put a measured surface into a drawn map and imply the other thirty nuclei were equally measured — the same judgement `brainstem__midbrain` made about FMA62394 and `spinal-cord__descending-tracts` made about the same mesh. `Cranial nerve courses`, the next structure in this topic, is where those meshes belong if any scene claims them.",
+    "THE SUBJECT IS A DEVELOPMENTAL RULE APPLIED TO A MAP, WHICH IS AN INDEPENDENT AND STRONGER REASON FOR `diagram` THAN THE CATALOG GAP. Beat 1 is a ROTATION — a change of relation, not a shape — and beats 2 and 3 place columns by their relation to a groove. Even a fully segmented brainstem with every nucleus delivered as its own mesh would show the positions and not the reason for them, and the reason is what CURRICULUM.json asks for. `deferred_modes` keeps `3d_anatomy` against the day nuclei exist as separate geometry, which would genuinely improve beats 2 to 5 and is the single most valuable fetch this topic could receive.",
+    "STATUS IS `planned`, NOT `ready`, AND NO ARTWORK EXISTS. Promote it when three drawings exist: a two-panel figure showing the cord in cross-section beside the opened fourth ventricle with the sulcus limitans marked in both and the rotation drawn as an arrow between them — load-bearing, because beat 1 IS that arrow and a sentence describing a rotation is the weakest form the fact can take; a dorsal view of the brainstem with the roof removed and all six columns laid on it as coloured strips, each broken into its constituent nuclei at the right heights, which is the single image that would replace most of beats 2, 3 and 4; and one transverse section at medullary level with the medial and lateral territories shaded differently, reusing whatever outline `brainstem__medulla-oblongata` is drawn from so a student reading the two consecutively sees the same section twice.",
+    "THIS SCENE CONTAINS NO MODEL IDS AND NO `refs` ON ANY STRUCTURE, following every other `diagram` scene in this course. Beat 1 says out loud that nothing here is a mesh.",
+    "NO ANCHORS WERE AUTHORED AND NONE IS POSSIBLE. `tools/derive-landmark.mjs` measures a feature against a parent mesh in `meshes-lite/`. This scene has no parent mesh; the medulla, pons and midbrain meshes that DO exist belong to the Brainstem topic's scenes, and in any case the sulcus limitans is a groove on a ventricular floor no mesh models, while a nuclear column is an interior volume rather than a contact or an extreme, so neither of the tool's definitions applies. Nothing was placed by eye.",
+    "CONSISTENCY WITH THE BRAINSTEM TOPIC WAS CHECKED AGAINST THOSE FILES, NOT FROM MEMORY, BECAUSE THIS SCENE OVERLAPS ALL FOUR OF THEM. Division of labour: `medulla-oblongata` OWNS both medullary syndromes as vascular territories and states Wallenberg's ingredients — ipsilateral face and contralateral body pain and temperature loss, Horner's, ataxia from the inferior cerebellar peduncle, vertigo and nystagmus from the vestibular nuclei, hoarseness and dysphagia from the nucleus ambiguus — and the medial syndrome as contralateral hemiplegia sparing the face, contralateral loss of vibration and proprioception, and the tongue deviating TOWARDS the lesion. This scene lists the same structures, derives them from the columns instead of from the artery, and points at that scene rather than restating the territory; nothing is claimed here that is not stated identically there. The tongue deviating towards a nuclear or nerve lesion and away from a cortical one is stated the same way in `spinal-cord__descending-tracts`, checked against that file. `cerebellar-peduncles` names Wallenberg only as the inferior-peduncle lesion and is likewise not contradicted. No scene claims `Cranial nerve nuclei` in `covers[]` except this one.",
+    "THREE STATEMENTS ARE DELIBERATELY BOUNDED. The mesencephalic nucleus is described as the only primary sensory cell body inside the central nervous system rather than in a peripheral ganglion, which is the standard claim and is stated once. The rule-of-four counting device is offered as a mnemonic that happens to be true rather than as an anatomical principle, and beat 4 says which of its two clauses is a real developmental fact (four nerves per level) and which is arithmetic (the midline four). And the branchial efferent column's ventrolateral migration is stated as the reason for the nucleus ambiguus's name; that is the conventional account and the scene does not lean on it for anything clinical.",
+    "CURRICULUM VIEWS: CURRICULUM.json requires `location` and `cross_section` for `Cranial nerve nuclei`. Beats 1 to 3 are `location` and beats 4 and 5 are `cross_section`, so both are covered and neither is padded. Beats 4 and 5 use `axis:\"z\"`, the vertical axis of these meshes and therefore the transverse cut their narration names, consistent with `brainstem__pons`, `brainstem__midbrain`, `spinal-cord-cross-section` beat 4 and both tract scenes; coronal cuts in this course use `axis:\"y\"`.",
+    "`covers[]` HOLDS EXACTLY ONE ENTRY, `Cranial nerve nuclei`, spelled as CURRICULUM.json spells it. `Cranial nerve courses` is NOT claimed although every nerve is named here, because a nucleus is not a course and that scene must own the exits, foramina and peripheral distributions — including the optic meshes this scene declined. `CN function testing` is NOT claimed although beat 5 reads signs off the map, because testing is a procedure and this scene teaches the substrate. `Medulla oblongata`, `Pons` and `Midbrain` are not claimed and are owned by the Brainstem topic. Both remaining Cranial Nerves structures stay visible as unauthored work.",
+    "DRAWABILITY: ZERO models referenced, so nothing to deliver and nothing to fetch TODAY. Unlike the Spinal Cord topic, however, this scene is NOT purely an artwork request: a segmented set of brainstem nuclei would make beats 2, 3, 4 and 5 genuinely showable, and beats 4 and 5 in particular are asking for a real transverse section. Whoever prioritises fetches should read this as the strongest mesh request in the Neuroanatomy course, ahead of the segmented cerebellum that `medulla-oblongata` names — nothing else would convert five hollow beats at once. All five beats are hollow today."
+  ]
+}
