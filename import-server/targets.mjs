@@ -167,6 +167,14 @@ export function candidateFilter(proposed, targets){
    tagged with `_tier` so the caller can record matchedVia. Statement overlap on the KNOWLEDGE STATEMENT (the
    target representation), not the question stem (surface form). Token-overlap is v1; embeddings are the scale path. */
 export const RETRIEVAL = { floor:0.40, K:8, reserveT3:3 };
+/* 01.5b — WHAT THE PERSISTED CANDIDATE FIELDS MEAN (this tripped up the 8 Sep audit; do not re-conflate):
+     candidates[].ret   = `_retScore` below — the T3 LEXICAL Jaccard overlap of the knowledge statements.
+                          NULL for T1/T2 candidates by design: those are retrieved on topic/skill, not similarity.
+     candidates[].score = the MODEL's confidence, but only for the candidate it actually adjudicated
+                          (and the runner-up). NULL for every candidate the model did not pick — which is
+                          "not chosen", NOT "scoring failed".
+   Neither field is a general similarity score across all candidates. For a decision's own evidence use
+   map_confidence and decision.{nearest_candidate_score, candidate_count, matched_via}. */
 function normStatement(x){ return String(x||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim(); }
 function stmtTokens(x){ return new Set(normStatement(x).split(" ").filter(w=>w.length>3)); }
 function jaccard(a,b){ let i=0; a.forEach(w=>{ if(b.has(w)) i++; }); const u=a.size+b.size-i; return u?i/u:0; }
@@ -207,17 +215,19 @@ export function excludesConflict(proposed, target){
  */
 export function decide(proposed, candidates, adj, cfg){
   const T = Object.assign({}, RECON, cfg||{});
-  if(!candidates || !candidates.length) return { state:"NEW", target_id:null, confidence:1, note:"no candidate in this topic+skill" };
+  if(!candidates || !candidates.length) return { state:"NEW", target_id:null, confidence:1, note:"no candidate in this topic+skill",
+    candidate_count:0, nearest_candidate_id:null, nearest_candidate_score:null, model_decision:null, matched_via:null };   // 01.5b: RETRIEVAL returned nothing — distinct from "rejected"
   const byId = {}; candidates.forEach(c=>{ byId[c.target_id]=c; });
 
   let id = adj && adj.target_id, conf = (adj && typeof adj.confidence==="number") ? adj.confidence : 0;
   // the model may only choose among the candidates it was given
   if(id && !byId[id]){ id=null; conf=0; }
   // excludes guard: if the chosen candidate excludes this proposal, it cannot be a match
-  if(id && excludesConflict(proposed, byId[id])) return { state:"AMBIGUOUS", target_id:null, confidence:conf, note:"chosen candidate excludes this proposal" };
+  if(id && excludesConflict(proposed, byId[id])) return { state:"AMBIGUOUS", target_id:null, confidence:conf, note:"chosen candidate excludes this proposal", candidate_count:candidates.length };
   // near-tie between the top two → not safe to merge
   const second = adj && typeof adj.second_confidence==="number" ? adj.second_confidence : 0;
-  if(id && second>0 && (conf-second) < T.tieGap) return { state:"AMBIGUOUS", target_id:null, confidence:conf, note:"top two candidates near-tie" };
+  if(id && second>0 && (conf-second) < T.tieGap) return { state:"AMBIGUOUS", target_id:null, confidence:conf, note:"top two candidates near-tie", candidate_count:candidates.length,
+      nearest_candidate_id:id, nearest_candidate_score:conf, matched_via:(byId[id]&&byId[id]._tier)||null };
 
   if(!id || conf < T.T_new){
     // NEAR-MISS SAFETY NET (observability-preserving): the model did NOT confirm a same-target (target_id was null,
@@ -230,12 +240,19 @@ export function decide(proposed, candidates, adj, cfg){
     if(nearId && nearScore >= T.nearMiss){
       return { state:"AMBIGUOUS", target_id:null, confidence:0, note:"near-miss ≥ "+T.nearMiss+" (model said not-same)",
                model_decision:"NOT_SAME", nearest_candidate_id:nearId, nearest_candidate_score:nearScore, near_miss:true,
-               matched_via:(byId[nearId]&&byId[nearId]._tier)||null };
+               matched_via:(byId[nearId]&&byId[nearId]._tier)||null, candidate_count:candidates.length };
     }
-    return { state:"NEW", target_id:null, confidence:(id?conf:0), note:"no candidate close enough" };
+    // 01.5b: preserve the evidence for a NEGATIVE decision. Previously nearId/nearScore were computed
+    // immediately above and thrown away, so every rejected-NEW looked identical to every other one and
+    // "probably novel" could not be told apart from "resolver probably missed an existing target".
+    return { state:"NEW", target_id:null, confidence:(id?conf:0), note:"no candidate close enough",
+             candidate_count:candidates.length, nearest_candidate_id:nearId, nearest_candidate_score:nearScore,
+             model_decision:(nearId?"NOT_SAME":null), matched_via:(nearId&&byId[nearId]&&byId[nearId]._tier)||null };
   }
-  if(conf < T.T_match)       return { state:"AMBIGUOUS", target_id:null, confidence:conf, note:"in the uncertainty band", matched_via:(byId[id]&&byId[id]._tier)||null };
-  return { state:"MATCH", target_id:id, confidence:conf, note:"statement-equivalent to existing target", matched_via:(byId[id]&&byId[id]._tier)||null };
+  if(conf < T.T_match)       return { state:"AMBIGUOUS", target_id:null, confidence:conf, note:"in the uncertainty band", matched_via:(byId[id]&&byId[id]._tier)||null,
+    candidate_count:candidates.length, nearest_candidate_id:id, nearest_candidate_score:conf };
+  return { state:"MATCH", target_id:id, confidence:conf, note:"statement-equivalent to existing target", matched_via:(byId[id]&&byId[id]._tier)||null,
+    candidate_count:candidates.length, nearest_candidate_id:id, nearest_candidate_score:conf };
 }
 
 /* ---- reconciliation prompt: adjudicate a proposal AGAINST a bounded candidate set only ---- */

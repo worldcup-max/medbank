@@ -593,7 +593,13 @@ async function annotateTargets(questions, ctx){
         score: adj&&adj.target_id===c.target_id?adj.confidence : (adj&&adj.second_id===c.target_id?adj.second_confidence:null) }));
       const decision={ model_decision: dec.model_decision||null, nearest_candidate_id: dec.nearest_candidate_id||null,
         nearest_candidate_score: (dec.nearest_candidate_score!=null?dec.nearest_candidate_score:null),
-        near_miss: !!dec.near_miss, matched_via: dec.matched_via||null, final_state: dec.state, note: dec.note||null };
+        near_miss: !!dec.near_miss, matched_via: dec.matched_via||null, final_state: dec.state, note: dec.note||null,
+        /* 01.5b — evidence recorded for EVERY decision, including NEW, so a later audit can tell
+           "retrieval found nothing" (candidate_count 0) from "candidates rejected" (count > 0 with a
+           nearest score). retrieval_tiers is which tiers actually produced candidates. */
+        candidate_count: (dec.candidate_count!=null ? dec.candidate_count : (cands?cands.length:0)),
+        retrieval_tiers: (cands&&cands.length ? Array.from(new Set(cands.map(c=>c._tier||"?"))).sort().join(",") : null),
+        evidence_version: "01.5b" };
       await admin.from("question_targets").upsert({ qh, target_id, map_state:dec.state, map_confidence:dec.confidence,
         proposed, candidates:candScores, decision, mapping_source:"ai", mapping_status:"active", topic_id:(ctx&&ctx.topic_id)||null, account_id:(ctx&&ctx.account_id)||null,
         updated_at:new Date().toISOString() }, { onConflict:"qh" });
