@@ -1,5 +1,5 @@
 /* MedBank service worker — offline caching + best-effort daily reminder */
-const CACHE = 'medbank-v224';   // v224: build 01 — durable learning_events ledger (dark, FEATURES.LEARNING_EVENTS=false)   // v223: dark mode (Light/Dark/Auto switch in the sidebar) + the account
+const CACHE = 'medbank-v225';   // v225: build 01 patch — qbank event now guards on result/item alignment (fixes shared response_ms) and carries the real topic_id   // v224: build 01 — durable learning_events ledger (dark, FEATURES.LEARNING_EVENTS=false)   // v223: dark mode (Light/Dark/Auto switch in the sidebar) + the account
 // chip moved out of the top-right corner into a sticky card at the bottom of the left panel (name, email,
 // school, level, sync state, Settings). MUST be bumped on every deploy: the fetch handler is CACHE-FIRST,
 // so a returning student keeps the OLD app.html/auth-ui.js until this string changes.   // v222: selecting a part no longer fades the rest of the model — fading is what "Ghost others" is for. The fetch handler is CACHE-FIRST, so viz3d.js changes are invisible to a device that already cached them until this string changes.
@@ -33,7 +33,7 @@ const CACHE = 'medbank-v224';   // v224: build 01 — durable learning_events le
 // v183: Organic Chemistry — the curly-arrow mechanism renderer (typed arrows, step rail, named intermediate frames, charge ledger), 14 Organic exemplars, the organic detection gate + routing, and the Organic teaser demo
 const ASSETS = ['./', './index.html', './app.html', './content.js', './icon.svg', './manifest.webmanifest',
   './site.css', './config.js', './sync.js', './level-switcher.js', './paywall.js', './import-tab.js',
-  './lecture-record.js', './study-timer.js', './study-dock.js?v=20260908', './content-loader.js', './auth-ui.js?v=20260908', './learning-events.js?v=20260908',
+  './lecture-record.js', './study-timer.js', './study-dock.js?v=20260908', './content-loader.js', './auth-ui.js?v=20260908', './learning-events.js?v=20260908b',
   './restore.js', './mb-personal-restore.js', './viz3d.js?v=20260828', './404.html'];
 
 const FLAGS = 'medbank-flags';                                   // SW-02: unversioned — survives deploys

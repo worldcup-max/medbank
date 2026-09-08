@@ -3389,10 +3389,16 @@ function qbNext(){ QB._confDone=false;
     if(_r && _it){ var _qh=_it._qh || qbHash((_it.stem||'')+'|'+((_it.options||[]).join('|')));
       qbSchedApply(_qh, !!_r.ok, (_r.conf==null?null:_r.conf));
       try{ ivEmit(_it, _qh, (qbStore()._qmeta[_qh]||{}).target_id, !!_r.ok, (_r.conf==null?null:_r.conf)); }catch(_e){}   /* V1.6 Phase-1 telemetry — observe only */
-      try{ if(window.MB_EVENTS) MB_EVENTS.emit({ event_type:'question_answered', surface:(QB&&QB.smart?'retest':'qbank'),
+      /* build 01: durable ledger — observe only.
+         GUARD (_r.i === QB.i): qbNext also runs when the current question was NOT answered (skip,
+         auto-advance, timer). Without this the emit pairs the NEXT question's identity with the
+         PREVIOUS question's result — which is what made two events share one response_ms in the
+         8 Sep click-through. topic_id and ms come from exactly where qbRecord puts them. */
+      try{ if(window.MB_EVENTS && _r.i === QB.i) MB_EVENTS.emit({ event_type:'question_answered', surface:(QB&&QB.smart?'retest':'qbank'),
              target_id:(qbStore()._qmeta[_qh]||{}).target_id||null, object_id:_qh,
              correct:!!_r.ok, confidence:(_r.conf==null?null:_r.conf), response_ms:(_r.ms==null?null:_r.ms),
-             metadata:{ topic_id:_it.topicId||null, mode:QB.mode||null, session_type:QB.smart?'smart':'standard', skill:_it.skill||null, level:_it.level||null } }); }catch(_e){}   /* build 01: durable ledger — observe only */ } }catch(e){}
+             metadata:{ topic_id:(_it._topicId||QB.topicId||null), mode:QB.mode||null, session_type:QB.smart?'smart':'standard',
+                        kind:QB.kind||null, skill:_it.skill||null, level:qbCogOf(_it)||null } }); }catch(_e){} } }catch(e){}
   if(QB.adaptive){
     var last=QB.results[QB.results.length-1]; if(last) adaptAdjust(last);
     if(QB.items.length < QB.adaptTarget){ var nx=adaptPick(); if(nx){ QB.items.push(nx); QB.adaptSeen[nx._qh]=1; } }
@@ -7824,7 +7830,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 <script src="study-timer.js"></script>
 <script src="study-dock.js?v=20260908"></script>
 <script src="content-loader.js"></script>
-<script src="learning-events.js?v=20260908"></script>   <!-- build 01: durable learning ledger (FEATURES.LEARNING_EVENTS); inert while the flag is off -->
+<script src="learning-events.js?v=20260908b"></script>   <!-- build 01: durable learning ledger (FEATURES.LEARNING_EVENTS); inert while the flag is off -->
 <script src="auth-ui.js?v=20260908"></script>
 <script src="viz3d.js?v=20260828"></script>   <!-- 3D anatomy player (FEATURES.MODEL3D); inert while the flag is off -->
 
