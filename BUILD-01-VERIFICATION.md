@@ -291,3 +291,172 @@ volume by surface/type                 verification / note_read           1
 1. Push the code (still unpushed): `app.html`, `config.js`, `sw.js`, `learning-events.js`, `import-server/sql/learning_events.sql`.
 2. Click through one real Q-bank question and one real flashcard on the deployed build — the
    only thing still verified by payload replay rather than by a genuine click.
+
+---
+
+# CLICK-THROUGH ON THE DEPLOYED BUILD — 8 Sep 2026
+
+Deploy confirmed live before testing: `sw.js` = `medbank-v224`, `learning-events.js` served
+(9,353 bytes), `app.html` requesting `learning-events.js?v=20260908`, 4 `MB_EVENTS.emit` call
+sites present, `config.js` shipping `LEARNING_EVENTS: false`.
+
+The service worker had v224 **installed but waiting** — the old v223 was still serving
+`config.js`, so the flag key read as `undefined` until `postMessage({type:'skipWaiting'})`
+activated it. This is the banner-driven upgrade working as designed (SW-08), and it is what a
+returning student will experience: they get the update banner, not the new code, until they
+accept it.
+
+During the click-through every emitted event was wrapped to add
+`metadata.verification = 'build01-clickthrough'`, so these rows are excludable from real
+analysis without violating the ledger's immutability.
+
+## Real flashcard — genuine click, real SRS mutation
+
+Card: `c78ecd9e…|r|8lvxrc` — "What is the definition of neonatal jaundice?" (Paediatrics),
+answered correctly through the real MCQ path (`pickOpt`).
+
+```
+SRS before : {box:0, due:20695, lapses:1, seen:20694}
+SRS after  : {box:1, due:20707, lapses:1, seen:20704}
+event      : card_reviewed / flashcard / correct:true / response_ms:50597 / target_id:null
+```
+
+The scheduler behaved exactly as it does without the ledger — box advanced, due pushed out by
+the ladder. The event is an observer, not a participant.
+
+## Real Q-bank — genuine click
+
+A live 20-question Mega session (`mgStart(true)` → Quick Exam, timed/blind). Two questions were
+finalised (`jbc7ve`, `3khk1z`), both emitted, both persisted. Session ended early via
+`qbEndEarly()`.
+
+```
+question_answered / qbank / correct:true / skill:diagnosis  / target_id:null
+question_answered / qbank / correct:true / skill:next_step  / target_id:null
+```
+
+## THREE FINDINGS FROM THE CLICK-THROUGH
+
+**1. `target_id` is almost never present in production. This is the important one.**
+
+```
+questions in this account's _qmeta : 72
+of those carrying a target_id      : 2      (2.8%)
+example that does have one         : BRONCH-NEXT-004
+```
+
+The ledger is therefore recording `target_id: null` for roughly 97% of question events today.
+This is consistent with the audit's note that server-side target annotation is env-gated
+(`MEDBANK_TARGETS` = off | shadow) — but its consequence is much bigger than a null column:
+
+> **Roadmap items 05 (target edges), 06 (targets → notes), 07 (unified memory) and 08 (learner
+> model) all assume the concept identity flows through to student events. Today it does not.**
+
+The event rail is correct and will carry `target_id` the moment questions carry one. But
+turning on target stamping is now a prerequisite for the personalisation half of the roadmap,
+and it is not currently on the list.
+
+**2. `topic_id` is null in Q-bank event metadata.**
+The call site reads `_it.topicId`, which is undefined for Mega items (they carry topic
+association differently). Cosmetic — `object_id` (the qh) still identifies the question — but
+the metadata is less useful than intended and should be fixed before the flag goes on.
+
+**3. `response_ms` was identical (16448) for both Q-bank events.**
+`_r.ms` appears to be a session-level rather than per-question measure on this path. Also
+cosmetic, also worth fixing before enabling, since response time is a real signal for the
+learner model later.
+
+## One behaviour worth knowing, not a bug
+
+An explicit `MB_EVENTS.flush()` called while a debounced flush is already in flight returns
+immediately (the `_flushing` guard) and reports `sent: 0`. The queue drains on the next tick.
+Correct behaviour — it prevents double-sending — but it means `flush()` is not a synchronous
+"send everything now" and should not be treated as one in tests.
+
+## State left behind
+
+- 3 rows tagged `metadata.verification = 'build01-clickthrough'` (1 flashcard, 2 qbank), plus
+  the 5 earlier `surface = 'verification'` rows.
+- One real SRS change: card `c78ecd9e…|r|8lvxrc` advanced box 0 → 1. Reversible via the topic's
+  "Reset progress" if you want it back.
+- Two Q-bank questions have schedule records they did not have before.
+- Flag returned to false in the live session; `config.js` still ships false.
+
+## Verdict
+
+The rail works end to end on the deployed build, under real auth, through real user clicks,
+without touching the schedulers. **It is ready to enable — but findings 2 and 3 are worth a
+small follow-up patch first, and finding 1 is a roadmap question, not a code question.**
+
+---
+
+# PATCH RE-CHECK — v225, deployed, 8 Sep 2026
+
+Live before testing: `sw.js` = `medbank-v225`, guard `_r.i === QB.i` present in the served
+`app.html`, writer at `?v=20260908b`.
+
+## Correction to the earlier diagnosis
+
+The report above blamed `response_ms` on "session-level timing". **That was wrong.**
+`qbRecord` (`app.html:3205`) already computes it per question as `Date.now() - QB.qStart`, and
+`QB.qStart` resets on every advance (`:3399`, `:3403`). The timing was correct all along.
+
+The real defect was **result/item misalignment in the build-01 call site**. `qbNext()` also runs
+when the current question was NOT answered — a skip, an auto-advance, the exam timer. In that
+case `QB.results[length-1]` is still the PREVIOUS question's result while `QB.items[QB.i]` has
+already moved on, so the event paired the next question's identity with the previous question's
+result — wrong `object_id`, wrong `correct`, duplicated `ms`.
+
+That is worse than weak metadata: unfixed, the permanent ledger would have recorded confident
+wrong answers for questions the student never answered.
+
+Fix: emit only when the result belongs to the question on screen.
+
+```js
+if (window.MB_EVENTS && _r.i === QB.i) MB_EVENTS.emit({ ... })
+```
+
+`topic_id` now reads `_it._topicId || QB.topicId` — the same expression `qbRecord` uses for its
+own attempt log, so the ledger and the attempt store agree by construction. `level` now uses
+`qbCogOf(_it)`; `kind` (quick_exam / smart_drill / concept_retest…) added.
+
+**NOT FIXED, flagged only:** the pre-existing `ivEmit` on the line above has the same
+misalignment and has been mispairing `intervention_events` rows since V1.6. Left untouched — it
+is telemetry-only rather than the permanent ledger, and it is a separate decision.
+
+## Re-run: answer / skip / answer, on the deployed build
+
+Live 20-question Quick Exam. Q1 answered, **Q2 advanced without answering**, Q3 answered.
+
+```
+QB.results : [ {i:0, ok:true, ms:61258}, {i:2, ok:true, ms:75022} ]     ← index 1 absent
+events     : 2                                                          ← not 3
+```
+
+The skipped question produced **no event at all**. Before the patch it would have produced a
+phantom row carrying Q2's id and Q1's result.
+
+## Persisted rows — old and new, side by side in the ledger
+
+```
+obj       ok    ms      topic_id                                kind        tag
+i2aeao    true  75022   5d8cf4d8-c86b-4703-988e-284b7fbcb4f0    quick_exam  build01-patch-recheck
+104xbbk   true  61258   fc0a940d-b84e-45e4-81e9-339f52546ca4    quick_exam  build01-patch-recheck
+3khk1z    true  16448   null                                    -           build01-clickthrough
+jbc7ve    true  16448   null                                    -           build01-clickthrough
+```
+
+The two older rows show the defect (null topic, identical ms); the two new rows show it fixed
+(real topic UUIDs, distinct per-question times). The ledger's own immutability is what let us
+compare them.
+
+## Still true after the patch
+
+`target_id` is `null` on both new Q-bank rows. Nothing about this patch changes that — it is the
+identity-propagation problem, and it is the subject of the next report.
+
+## State
+
+- 2 rows tagged `build01-patch-recheck`; Q-bank session ended via `qbEndEarly()`.
+- Flag returned to false in the live session. `config.js` still ships `LEARNING_EVENTS: false`.
+- **The flag has NOT been enabled.** Awaiting the Target Identity Audit.
