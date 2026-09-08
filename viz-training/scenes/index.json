@@ -2,7 +2,7 @@
   "generated_by": "viz-training/tools/build-scene-index.mjs",
   "schema": 2,
   "count": 142,
-  "ready": 69,
+  "ready": 71,
   "scenes": [
     {
       "id": "embryology__cardiovascular-development__cardiac-looping",
@@ -33273,8 +33273,8 @@
       "schema": 2,
       "mode": "3d_anatomy",
       "provider": "bodyparts3d",
-      "status": "candidate",
-      "student_ready": false,
+      "status": "ready",
+      "student_ready": true,
       "authored_by": "task",
       "approved_by": null,
       "degrades": [],
@@ -33282,7 +33282,7 @@
       "topic": "Cerebrum — Gross & Lobes",
       "structure": "Functional cortical areas",
       "learning_goal": "Place the primary motor, somatosensory, auditory and visual cortices on named gyri, state the homuncular order and use it to predict which artery a given deficit implicates, and distinguish the fluent and non-fluent aphasias by the part of the language network destroyed.",
-      "gaps": 8,
+      "gaps": 9,
       "match": {
         "topics": [
           "neuroanatomy",
@@ -33516,8 +33516,8 @@
       "schema": 2,
       "mode": "3d_anatomy",
       "provider": "bodyparts3d",
-      "status": "candidate",
-      "student_ready": false,
+      "status": "ready",
+      "student_ready": true,
       "authored_by": "task",
       "approved_by": null,
       "degrades": [],
@@ -33525,7 +33525,7 @@
       "topic": "Cerebrum — Gross & Lobes",
       "structure": "Gyri & sulci landmarks",
       "learning_goal": "Find the central and lateral sulci on any brain or scan by the gyri that bracket them, name the gyri each sulcus separates on the lateral, medial and inferior surfaces, and use those landmarks to say which lobe a given piece of cortex belongs to.",
-      "gaps": 7,
+      "gaps": 8,
       "match": {
         "topics": [
           "neuroanatomy",
@@ -37079,26 +37079,6 @@
         "3d_anatomy"
       ],
       "term": "digit formation"
-    },
-    {
-      "name": "Gyri & sulci landmarks",
-      "course": "neuroanatomy",
-      "topic": "Cerebrum — Gross & Lobes",
-      "modes": [
-        "3d_anatomy",
-        "diagram"
-      ],
-      "term": "gyri sulci landmarks"
-    },
-    {
-      "name": "Functional cortical areas",
-      "course": "neuroanatomy",
-      "topic": "Cerebrum — Gross & Lobes",
-      "modes": [
-        "3d_anatomy",
-        "diagram"
-      ],
-      "term": "functional cortical areas"
     },
     {
       "name": "CSF circulation",

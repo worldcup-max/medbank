@@ -2,7 +2,8 @@
   "cursor": {
     "courseKey": "histology",
     "topicIndex": 1,
-    "structureIndex": 0
+    "structureIndex": 0,
+    "done": true
   },
   "coveredStructures": {
     "gross": [
@@ -68,6 +69,8 @@
     ],
     "neuroanatomy": [
       "Cerebral hemispheres & lobes",
+      "Gyri & sulci landmarks",
+      "Functional cortical areas",
       "White matter tracts",
       "Ventricles",
       "Choroid plexus",
@@ -84,15 +87,15 @@
       "Fornix & Papez circuit"
     ]
   },
-  "done": false,
+  "done": true,
   "runs": 0,
   "lastRunAt": null,
   "note": "coveredStructures and cursor are DERIVED from viz-training/scenes/ by tools/sync-state.mjs. Do not hand-edit them: the scenes directory is the source of truth, and a second one always drifts. The authoring task runs this tool first, every run, before choosing what to author.",
-  "syncedAt": "2026-09-08T12:15:16.979Z",
+  "syncedAt": "2026-09-08T14:37:29.709Z",
   "meshGaps": {
     "scenesEmpty": 0,
     "scenesWithHoles": 0,
     "modelsMissing": 0,
-    "checkedAt": "2026-09-08T12:15:16.973Z"
+    "checkedAt": "2026-09-08T14:37:29.702Z"
   }
 }

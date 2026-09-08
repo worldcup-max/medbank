@@ -12091,3 +12091,184 @@ file — *"promote to `ready` the moment FMA72940 and FMA72939 land; nothing els
 outstanding."* They landed. Executing a condition the audit stated is the opposite of second-guessing it.
 
 **69 of 142 scenes ready, 15 of them neuroanatomy.**
+
+---
+
+## 2026-09-08 (hourly run) — 0 AUTHORED, 2 AUDITED
+
+### AUTHORING: NONE, AND THAT IS A BLOCK A HUMAN HAS TO CLEAR
+
+**THE AUTHOR CURSOR POINTS AT `histology / Connective Tissue / Loose vs dense CT`. THIS RUN AUTHORED
+NOTHING AND THAT WAS DELIBERATE.** The task prompt authorises authoring in NEUROANATOMY. All 34
+Neuroanatomy structures are authored, so there is no permitted authoring work left, and the cursor has
+rolled on into Histology — whose every structure's `preferred_modes` are `["microscopic","diagram"]`,
+both of which route to the SVG engine, and `CAPABILITIES.svg` is still `{ native: [], degraded: [] }`.
+Authoring there produces scenes as undrawable as the 28 idle Embryology ones. This is the fourth run to
+say so (first raised 2026-09-04, §9 of `REPAIR-BACKLOG.md`) and nothing has changed. **A human decision
+is needed: build `CAPABILITIES.svg` and commission artwork, or mark `histology` `suspended` so the
+cursor skips it honestly, or declare authoring finished and re-point this task at audit and repair.**
+Audit work remains either way, so the task is not idle — but it must author nothing until this is
+settled. Per the run rule, the dropped slots are authoring slots, never audit slots.
+
+Backlog sections 1 and 2 re-read this run and both remain clear, so the cursor governs. Fell through to
+the audit walk as instructed.
+
+### AUDIT 1 — `neuroanatomy__cerebrum-gross-lobes__functional-cortical-areas` · candidate → **ready**
+
+Checks performed: ids, names, sides, ops/targets, scene-against-itself, curriculum views, narration
+against geometry, covers, drawability, gaps-are-claims. No anchors exist in this scene so check 12 was
+not applicable; nothing here is a feature ON a bone.
+
+- **IDS / NAMES.** 18 of 18 ids in `available-meshes.json`; all 18 `name` fields character-identical to
+  the catalog. `BP50` is a real id and is genuinely `right superior parietal lobule precuneus`.
+- **SIDES.** Five L/R pairs, all correct and said out loud: FMA72662 LEFT precentral / FMA72661 RIGHT;
+  FMA72666 LEFT postcentral / FMA72665 RIGHT; FMA72805 LEFT posterior superior temporal / FMA72804
+  RIGHT; FMA72976 LEFT occipital lobe / FMA72975 RIGHT; FMA72690 LEFT fusiform / FMA72689 RIGHT. The
+  visual-field teaching is consistent with the sides it is authored on — left occipital lobe carries the
+  RIGHT hemifield, and the right lobe's card gives a LEFT homonymous hemianopia.
+- **OPS.** All eight op types are in the vocabulary; every target, `targets[]`, `from`/`to` and trace
+  waypoint resolves to a structure key or a real group.
+- **VIEWS.** Curriculum requires `location` + `mechanism`; beats 1–5 and 10 are `location`, 6–9
+  `mechanism`. Satisfied.
+- **WRONG, AND FIXED — narration against geometry, beat 3.** The homunculus trace ran
+  `sma_l → m1_l → s1_l` while the narration walked the motor map in order and finished at "the face just
+  above the lateral sulcus". The last waypoint is the POSTCENTRAL gyrus, so the student watching the
+  animation is shown the face area landing on the sensory strip — the scene teaching the opposite of what
+  its own beat 2 correctly establishes, that the two strips face each other across the sulcus. Path
+  trimmed to end at `m1_l`. Two connected repairs in the same beat: the narration now states that the
+  trace deliberately stays on one strip and that S1 carries the identical order, and it names the first
+  waypoint as a stand-in — the leg area is in the paracentral lobule, which has no model and is inside
+  FMA72654, a card labelled "Supplementary motor area". Without that sentence the beat began the body map
+  on a motor-planning area. Recorded in `gaps[]`.
+- **CROSS_SECTION axis (the §9 class).** Beat 10 is `axis:"z"` and narrates "Cut across", naming no
+  plane. z is axial by this course's convention, so there is no contradiction — checked, not assumed.
+- **ISOLATE_REGION reach (the other §9 class).** Beats 3, 4 and 9 each name a structure outside the
+  isolated group, and each does so via an explicit `SHOW_STRUCTURE` with the narration explaining why.
+  Legal and intended; not trimmed.
+- **GAPS ARE CLAIMS — every absence re-searched, none stale.** `opercul`, `triangul`, `sulc`, `fissur`,
+  `transverse temporal`, `heschl`, `lingual`, `paracentral`, `arcuate`, `fascicul`, `longitudinal`,
+  `cerebral artery`, `circle` all return ZERO hits in the 934-entry catalog; `frontal` returns seven and
+  not one is an inferior frontal gyrus. Every claim in this scene's `gaps[]` holds. Two independent
+  spellings minimum per structure, per the standing rule.
+- **DRAWABILITY: 18 of 18 on disk. NO BEAT IS HOLLOW.**
+- **AGREEMENT WITH THE PREVIOUS ACCOUNT — mostly, with one correction that outlives the scene.** The
+  2026-09-08 human session's `gaps[]` entry claimed the old "nothing is in meshes-lite/" note was false
+  and all 18 models were present. Verified independently, id by id, before reading that entry: it is
+  right. But the same false sentence was still alive in **`CORPUS.md`**, on this scene's line, on the
+  gyri scene's line, AND on `white-matter-tracts` — which is already `ready`. That is failure mode
+  "fix the instance, not the fact" in its purest form: the scene files were corrected and the document
+  that describes them was not. All three `CORPUS.md` lines corrected this run, including the one for a
+  scene that was not among this run's two audits.
+
+### AUDIT 2 — `neuroanatomy__cerebrum-gross-lobes__gyri-sulci-landmarks` · candidate → **ready**
+
+Same eight checks. **Nothing anatomically wrong was found**, and here is what was actually checked so
+that is evidence rather than a shrug:
+
+- 20 of 20 ids in the catalog, 20 of 20 names character-identical, including the two `BP` ids (`BP49`
+  left superior parietal lobule precuneus, `BP51` orbital gyri straight gyrus).
+- Sides: the only pairs are the central-sulcus bank, correct in both directions (FMA72662/72661,
+  FMA72666/72665); every other structure is left, as the scene's `gaps[]` states.
+- Every op target resolves. Beats 5 and 8 reach outside their `ISOLATE_REGION` and both explain why in
+  narration — the pairing of a capping gyrus with the sulcus it caps is the beat's whole argument.
+- Curriculum requires `location` only; all nine beats are `location`.
+- Scene against itself: the sulcal facts are stated repeatedly and agree every time — the two
+  inferior-parietal caps (supramarginal on the lateral sulcus, angular on the superior temporal sulcus)
+  are consistent between the structure cards and beat 5; the parieto-occipital/calcarine Y is consistent
+  between the `occ_l` card and beat 7; the undersurface order (parahippocampal · collateral sulcus ·
+  fusiform · occipitotemporal sulcus · inferior temporal) is consistent between three cards and beat 8.
+- Against the sibling scenes in the same topic: `cerebral-hemispheres-lobes` says the parieto-occipital
+  sulcus is the occipital lobe's only sharp boundary and that its lateral boundary is an agreed line;
+  this scene says "the only sharp boundary the occipital lobe has anywhere". Consistent. The Broca's-area
+  absence and the ~95% left-dominance figure are stated identically across all three cerebrum scenes.
+- Absences re-searched, all confirmed genuine. `cuneus` was the one query that returned anything — BP49
+  and BP50, the combined lobule+precuneus models this scene already uses, not a separate cuneus.
+- No landmark anchor derived and none derivable: every feature this scene teaches is a SULCUS, which is
+  the gap between two meshes rather than a point on one, so neither `--contact` nor `--extreme` has a
+  subject. Stated in `gaps[]` so no later run re-attempts it.
+- **DRAWABILITY: 20 of 20 on disk. NO BEAT IS HOLLOW.** The one edit made was retiring the stale delivery
+  note, exactly as in audit 1.
+
+### Results
+
+- `validate-scenes.mjs --mark`: **142/142 valid.** Both audited scenes pass; no scene left `blocked`.
+- `build-scene-index.mjs`: **142 scenes (71 ready) · 14740 term mappings.**
+- `sync-state.mjs`: STATE.json reconciled. Audit cursor advanced to
+  `neuroanatomy__ventricular-system-csf__csf-circulation`. **71 of 142 ready, 17 of them neuroanatomy.**
+- `CORPUS.md`: three lines amended (two audited scenes, plus `white-matter-tracts` for the shared false
+  fact). No new lines added.
+
+---
+
+## 2026-09-08 — human session · rev 6 verified on its first run · CORPUS.md swept
+
+The 14:04 run is the first under rev 6 and both new rules took. It audited
+`functional-cortical-areas` and `gyri-sulci-landmarks` — the two scenes that had been held at
+`candidate` by a delivery note that had stopped being true — promoted both to `ready`, and stamped
+`corrected_at` alongside `audited_at` on each, which no neuro scene had carried before today.
+**71 of 142 ready, 17 of them neuroanatomy, and Neuroanatomy now has no `candidate` scenes at all.**
+
+It also found something in the scene I had corrected: **beat 3's homunculus trace ran
+`sma_l → m1_l → s1_l` while the narration walked the motor map and finished "at the face just above the
+lateral sulcus" — so the animation put the face area on the SENSORY strip**, contradicting the scene's
+own beat 2. Trimmed to end at `m1_l`. That is a genuine catch on a file this session had already been
+through, and worth recording as such.
+
+### Its own headline finding recurred inside it
+
+The run's best observation was that the false "every beat is hollow" sentence had been corrected in the
+scene files and left alive in `CORPUS.md` — "fix the instance, not the fact, in its purest form". It then
+corrected three `CORPUS.md` lines and stopped. **Four more were still false**, and a fifth went stale the
+moment the meshes landed:
+
+- `cerebral-hemispheres-lobes` — "0 of 38 models are in meshes-lite/. Every beat is hollow." All 38 on
+  disk; the scene is `ready`.
+- `hypothalamus-pituitary` — "candidate, not ready: 15 of 15 models missing." All 15 on disk; `ready`.
+- `choroid-plexus` — "14/15 models missing ... without them this scene has no subject." All 15 on disk.
+- `hippocampus` and `amygdala` — both delivery lines, and the amygdala's "signed but deliberately NOT
+  promoted", overtaken by the 12:13 fetch. Corrected, with the release condition and its discharge
+  recorded rather than silently dropped.
+
+All 27 delivery lines in `CORPUS.md` are now checked against disk id by id, and none is contradicted.
+
+**A caution on the sweep that found them.** The first pass flagged eighteen lines. Almost all were false
+positives: a beat can be hollow because a structure has no mesh IN THE CATALOG, which is not a delivery
+claim at all, and one hit was the femoral triangle's anatomical *hollow*. Reading the lines before
+editing them is what kept the count at five. A grep is a way of finding candidates, never a verdict —
+which is the same lesson as rule 14 pointed the other way.
+
+### The task is now blocked on a decision only Frank can make
+
+All 34 Neuroanatomy structures are authored. The author cursor has rolled into **Histology**, whose every
+structure's `preferred_modes` are `["microscopic","diagram"]` — both route to the SVG engine, and
+`CAPABILITIES.svg` is still `{ native: [], degraded: [] }`. Authoring there produces scenes as
+undrawable as the 28 idle Embryology ones. The run refused, said so in capitals, and did its two audits
+anyway — which is rev 4's no-work rule and rev 5's drop-authoring-never-audits rule both working exactly
+as written. This is the fourth run to raise it, first on 2026-09-04.
+
+Three ways out, and it is a product decision, not a tooling one:
+  1. Build `CAPABILITIES.svg` and commission artwork — unblocks Histology AND the 28 Embryology scenes.
+  2. Mark `histology` `suspended` in CURRICULUM.json, as Embryology is, so the cursor skips it honestly.
+  3. Declare authoring finished and re-point the task at audit and repair only.
+
+Audit work remains either way — 4 neuro scenes unsigned, 22 gross structures held — so the task is not
+idle. But it will author nothing until this is settled, and it is right not to.
+
+### Settled the same day — histology suspended, and authoring is finished
+
+Frank took option 2. `histology` now carries a `suspended` string in `CURRICULUM.json` alongside
+Embryology's, naming the real blocker — every structure `preferred_modes` to `["microscopic","diagram"]`,
+both of which route to the SVG adapter, and `CAPABILITIES.svg` is still `{ native: [], degraded: [] }` —
+and recording that the task raised it on 2026-09-04 and refused on four runs before a human settled it.
+Both cursors skip it; both courses are still counted and printed under `SUSPENDED:` every run, because a
+course that vanishes from the report is a course nobody returns to. Lifting either is the same unblock:
+build the SVG capability and commission artwork, and 32 waiting scenes become drawable at once.
+
+The cursor now reads **`next to author: nothing — the curriculum is covered`**, which is the honest
+state: every structure in every unsuspended course is authored. So the prompt gains one paragraph saying
+that an empty authoring half is a COMPLETE run rather than a degraded one — spend the whole hour on the
+audit walk, say so in RUNLOG, and do not go looking for something to author. Without it the task would
+have read its own run rule as half-failed every hour and reported it as a problem.
+
+What remains is audit and repair: 2 neuroanatomy scenes unsigned, 22 gross structures still held at
+`candidate` or `planned`. `142/142 valid`, `81 of 81 drawable`, 71 ready.

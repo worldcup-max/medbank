@@ -2778,7 +2778,7 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
 - **Frontal, parietal and temporal lobes have no whole-lobe mesh** and are built from their gyri —
   `gaps[0]`. **No inferior frontal gyrus, so no Broca's area** (`gaps[1]`); Wernicke's area is present and
   lit. No sulci, no auditory or visual cortex, no cerebral arteries.
-- **0 of 38 models are in `meshes-lite/`.** Every beat is hollow until they are fetched; this is the sole
+- **38/38 models in `meshes-lite/`; no beat is hollow.** (This line read "0 of 38 ... every beat is hollow" until 2026-09-08, when every id was stat'd and all 38 were on disk. The scene is `ready`.) This was the sole
   reason for `candidate`.
 
 ### `neuroanatomy__cerebrum-gross-lobes__gyri-sulci-landmarks` (new)
@@ -2798,7 +2798,15 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   the two upturned sulcal ends capped by supramarginal and angular gyri; the three temporal gyri; the
   parieto-occipital/calcarine Y on the medial face; the three strips and two clefts of the undersurface; the
   sulci that cannot be seen at all, inside the insula.
-- 0/20 models in meshes-lite. Every beat is hollow until the brain meshes are fetched.
+- **20/20 models in meshes-lite; no beat is hollow.** (This line read "0/20 ... every beat is hollow"
+  until the 2026-09-08 audit re-checked it id by id. It was false and had been for days.)
+- **AUDITED AND SIGNED 2026-09-08 — `ready`.** Read back end to end against `available-meshes.json` and
+  `CURRICULUM.json`: all 20 ids in the catalog, all 20 `name` fields character-identical to the catalog,
+  the left/right central-sulcus pairs correctly assigned (FMA72662 L / FMA72661 R precentral, FMA72666 L /
+  FMA72665 R postcentral), every op target resolving, the single required `location` view satisfied. Every
+  absence in `gaps[]` was re-searched rather than trusted — sulcus, fissure, operculum, pars triangularis,
+  inferior frontal gyrus, cuneus, lingual, paracentral all return zero — and all held. No anatomical
+  correction was needed; the only edit was retiring the stale delivery note above.
 
 ### `neuroanatomy__cerebrum-gross-lobes__functional-cortical-areas` (new)
 - id `neuroanatomy__cerebrum-gross-lobes__functional-cortical-areas` · Neuroanatomy · Cerebrum — Gross &
@@ -2816,7 +2824,14 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
 - **Broca's area is absent from the catalog and is never faked.** Beats 5, 6 and 7 each state that the
   inferior frontal gyrus does not exist as a model and say where to picture it. Beat 8 teaches arterial
   territory by reasoning and states in capitals that no cerebral artery is on screen.
-- 0/18 models in meshes-lite. Every beat is hollow until the brain meshes are fetched.
+- **18/18 models in meshes-lite; no beat is hollow.** (This line read "0/18 ... every beat is hollow"
+  until the 2026-09-08 audit re-checked it id by id. It was false.)
+- **AUDITED, CORRECTED AND SIGNED 2026-09-08 — `ready`.** All 18 ids and names verified against the
+  catalog; sides correct on all five L/R pairs; both required views present. **One real defect found and
+  fixed:** beat 3's homunculus trace ran `sma_l → m1_l → s1_l` while the narration recited the motor map
+  and ended on "the face", putting the face area on the POSTCENTRAL gyrus for anyone reading the geometry.
+  Path trimmed to end on `m1_l`, and the narration now says it stays on one strip, and that the first
+  waypoint is the superior frontal gyrus standing in for the unmodelled paracentral leg area.
 
 ### `neuroanatomy__cerebrum-gross-lobes__white-matter-tracts` (new)
 - id `neuroanatomy__cerebrum-gross-lobes__white-matter-tracts` · Neuroanatomy · Cerebrum — Gross & Lobes ·
@@ -2837,7 +2852,10 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   motor fibres, and points at the gap between thalamus and lentiform where the posterior limb runs.
 - Descending trace (beat 6) is `concept:corticospinal-fibres` stepping white matter → capsule → peduncle,
   which is the last drawable station: no decussation, lemniscus or brainstem tract exists.
-- 0/25 models in meshes-lite. Every beat is hollow until the brain meshes are fetched. No anchors authored —
+- **25/25 models in meshes-lite; no beat is hollow.** (Read "0/25 ... every beat is hollow" until
+  2026-09-08. This scene was NOT one of that run's two audits — the sentence was corrected here anyway
+  because it is the same false fact in a third place, and leaving it would have left a `ready` scene
+  described as undrawable.) No anchors authored —
   no parent mesh on disk to measure against.
 
 ### `neuroanatomy__ventricular-system-csf__ventricles` (new)
@@ -2884,8 +2902,10 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   barrier — leaky capillary, tight-junctioned epithelium; rate versus pressure).
 - The layer histology is described, not drawn: no ependyma, epithelium or capillary exists at any scale in
   this catalog, and beat 5 says so in the beat itself rather than implying a labelled section.
-- 14/15 models missing from meshes-lite. The one present is FMA78497. **FMA274029 and FMA274027 are the two
-  meshes to fetch first — without them this scene has no subject.** No anchors authored (no parent on disk).
+- **15/15 models in `meshes-lite/`; no beat is hollow, and the scene is `ready`.** (This line read "14/15
+  models missing from meshes-lite ... FMA274029 and FMA274027 are the two meshes to fetch first — without
+  them this scene has no subject" until 2026-09-08, when every id was stat'd and all 15 were on disk,
+  both choroid plexus models included.) No anchors authored.
 
 ### `neuroanatomy__ventricular-system-csf__csf-circulation` (new)
 - id `neuroanatomy__ventricular-system-csf__csf-circulation` · Neuroanatomy · Ventricular System & CSF ·
@@ -3031,7 +3051,7 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
 - Sides: optic nerve FMA50875 R / FMA50878 L; optic tract **FMA62382 right, FMA67936 left**; fornix
   FMA72924 R / FMA72925 L; thalamus **FMA258714 right, FMA258716 left**. Four true midline meshes carry no
   side: tuber cinereum, lamina terminalis, optic chiasm, pituitary gland.
-- `candidate`, not `ready`: 15 of 15 models missing from `meshes-lite/`. Every beat is hollow.
+- **15/15 models in `meshes-lite/`; no beat is hollow, and the scene is `ready`.** (This line read "`candidate`, not `ready`: 15 of 15 models missing ... every beat is hollow" until 2026-09-08, when every id was stat'd and all 15 were on disk.)
 - Absences stated in the beat that needs them: no hypothalamic nucleus of any kind, no infundibulum and no
   median eminence, pituitary undivided (no anterior/posterior lobe), no hypophysial portal system and no
   hypothalamohypophysial tract (beat 4's two mechanisms are concept traces), **no meninges anywhere in the
@@ -3546,9 +3566,9 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
 - Position-first: hippocampus in the floor of the inferior horn, so it is curved, paired, and its
   output takes the long arch. Fornix traced whole to the mammillary body; Papez closed as two
   concentric arches around the corpus callosum.
-- DELIVERY: 14/15 meshes in `meshes-lite/`. Missing: FMA72713 RIGHT HIPPOCAMPUS — in the catalog,
-  not on disk. Highest-value single fetch in this topic; without it every bilateral argument is
-  drawn against one visible hippocampus.
+- **DELIVERY, CLOSED 2026-09-08: 15/15 meshes in `meshes-lite/` and in the bucket; no beat is hollow.**
+  (This read "14/15 ... missing FMA72713 RIGHT HIPPOCAMPUS", which left every bilateral argument drawn
+  against one visible hippocampus. Fetched, decimated and uploaded on 2026-09-08.)
 - Described-not-drawn and recorded: dentate gyrus, Ammon's horn, CA1, subiculum, fimbria (none in
   catalog under any spelling), mammillothalamic tract and cingulum (`tract` = 4 entries total),
   anterior thalamic nucleus (whole thalamus lit instead, said out loud).
@@ -3578,8 +3598,9 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   `septum` returns FMA61844 SEPTUM PELLUCIDUM, which fixes the body of the fornix on any image. Both
   on disk. Textbook instance of failure mode 1 avoided.
 - DELIVERY: **14/14 meshes on disk — the scene draws complete and no beat is hollow.** Built to trace
-  Papez on the LEFT side only, deliberately avoiding FMA72713 (right hippocampus, catalog but not
-  disk), so the topic's known delivery gap costs this scene nothing.
+  Papez on the LEFT side only, which at the time deliberately avoided FMA72713 (right hippocampus, then
+  in the catalog but not on disk). That gap closed on 2026-09-08; the left-only construction stands on
+  its own merits and needs no change.
 - Described-not-drawn and recorded: mammillothalamic tract, cingulum, anterior thalamic nucleus,
   fimbria, the pre/postcommissural split (a division of fibres within one mesh), septal nuclei and
   preoptic area (none in catalog).
@@ -3610,12 +3631,13 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   and the sibling `hippocampus` scene written the same hour names the tuber cinereum as real.
   Failure modes 1 and 6 together, in a `gaps[]` whose first entry congratulates the run for avoiding
   failure mode 1. Both notes left standing side by side as the corpus's clearest example.
-- DELIVERY: 10/12 meshes in `meshes-lite/` (re-verified by statting each file). Missing: both striae
-  terminales, so beat 3 is hollow IN ITS MIDDLE — since the audit both ENDS of the output argument
-  draw, so what is lost is the road rather than the destination. Second priority after FMA72713.
-- Signed but deliberately NOT promoted to `ready`: beat 3's *subject* mesh is undeliverable, which is
-  different in kind from the hippocampus scene's missing mirror-image. Promote when FMA72940/72939
-  land; nothing else is outstanding.
+- **DELIVERY, CLOSED 2026-09-08: 12/12 meshes in `meshes-lite/` and in the bucket; no beat is hollow.**
+  (This read "10/12 ... beat 3 is hollow IN ITS MIDDLE", the two absentees being FMA72939/72940, the
+  striae terminales. Both were fetched, decimated and uploaded on 2026-09-08; beat 3 now traces the
+  structure itself rather than a route between its endpoints.)
+- **`ready` as of 2026-09-08.** The audit signed this scene and held it for delivery alone, recording the
+  release condition — "promote when FMA72940/72939 land; nothing else is outstanding." They landed, and
+  the scene was promoted on that stated condition rather than on a fresh judgement.
 - BP51 `orbital gyri straight gyrus` used deliberately for orbitofrontal cortex; non-FMA id, flagged
   in `gaps[]` so it does not read as a fabrication.
 

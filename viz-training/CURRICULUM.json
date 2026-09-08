@@ -2849,7 +2849,8 @@
       "defaultModes": [
         "microscopic",
         "diagram"
-      ]
+      ],
+      "suspended": "Blocked on the SVG engine, not on authoring. Every Histology structure preferred_modes to [\"microscopic\",\"diagram\"], both of which route to the SVG adapter, and CAPABILITIES.svg is still { native: [], degraded: [] } — so a scene authored here would be as undrawable as the 28 idle Embryology ones. 4 stub scenes exist and draw nothing. The task raised this on 2026-09-04 and refused to author into it on four separate runs before a human settled it on 2026-09-08; suspending is what makes that refusal legible to the tool instead of leaving the cursor pointing at forbidden work. Lift this the moment CAPABILITIES.svg is built and artwork exists — the same unblock frees Embryology."
     }
   }
 }

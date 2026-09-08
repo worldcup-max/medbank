@@ -53,6 +53,14 @@ THE GROSS AUDIT IS COMPLETE — all 76 scenes carry provenance.audited_at. NEURO
            unaudited scene rather than the first in curriculum order. In practice that is the two
            scenes the PREVIOUS run authored, an hour before you.
 
+  WHEN `next to author` SAYS "nothing — the curriculum is covered", THE RUN IS 2 AUDITS AND THAT IS A
+  COMPLETE RUN, NOT A DEGRADED ONE. As of 2026-09-08 every structure in every course that is not
+  suspended is authored: Gross and Neuroanatomy in full, Embryology and Histology both `suspended` and
+  waiting on the SVG engine rather than on you. Do not go looking for something to author, do not author
+  into a suspended course, and do not treat the empty authoring half as a failure to report as one — say
+  in RUNLOG that authoring is complete and spend the whole run on the audit walk. If a cursor ever hands
+  you a structure in a suspended course, that is a bug in the tool: say so in capitals that hour.
+
   Do the AUDITS FIRST. If a run turns out to have room for only three of the four, drop an authoring
   slot, never an audit: authoring adds a scene nobody can see yet, auditing is the only thing that
   turns a scene into one a student is shown. Say in RUNLOG which you dropped and why.
