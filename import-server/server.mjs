@@ -493,6 +493,11 @@ function validateQbankItems(rawArr){
   if(kept.length<before) console.log("[build-extra] qbank de-duped "+(before-kept.length)+" repeat(s) → "+kept.length+" distinct");
   if(ratDropped) console.warn("[build-extra] qbank dropped misaligned rationales on "+ratDropped+" item(s) (short array — kept the question, hid the explanations rather than risk mis-attributing them)");
   console.log("[build-extra] qbank yield raw="+before+" removed="+(before-kept.length)+" final="+kept.length);   // QB-12: one parseable line to monitor the raw→distinct collapse across builds
+  /* 01.5a — mint the stable question identity ONCE, here, at creation. Never recomputed and never derived
+     from content: two questions with byte-identical stems get DIFFERENT qids, because qid is the identity
+     of the question, not of its text (that is what qh is for). Idempotent: an item that already carries a
+     qid keeps it, so re-running validation can never re-mint. */
+  kept.forEach(it => { if(it && !it.qid) it.qid = crypto.randomUUID(); });
   return kept;
 }
 /* qbank: fire several small FOCUSED calls in PARALLEL, then merge + validate + dedup.
@@ -550,6 +555,9 @@ const RETRIEVAL_CFG = (()=>{ const c={}; const f=Number(process.env.RETRIEVAL_FL
 /* replicate the CLIENT's qbHash EXACTLY so question_targets.qh matches the scheduler's key when A6 arrives */
 function qbHashServer(str){ let h=5381,i=(str||"").length; while(i){ h=(h*33)^(str||"").charCodeAt(--i); } return (h>>>0).toString(36); }
 function qhOf(q){ return qbHashServer((q.stem||"")+"|"+((q.options||[]).join("|"))); }
+/* 01.5a: the question's stable identity, if it has one yet. Null for questions built before 01.5a
+   until the backfill runs. Callers must fall back to qhOf() — the order is always qid → qh. */
+function qidOf(q){ return (q && typeof q.qid==="string" && q.qid) ? q.qid : null; }
 async function loadTargets(){ try{ const r=await admin.from("knowledge_targets").select("*").neq("status","deprecated").neq("status","merged"); return r.data||[]; }catch(e){ return []; } }
 async function tExtractBatch(questions){
   try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:buildExtractBatchPrompt(questions), parts:[], images:[], max_tokens:6000, temperature:0.2, json:true });
@@ -569,9 +577,20 @@ async function annotateTargets(questions, ctx){
     const qs=(questions||[]).filter(q=>q&&q.stem&&Array.isArray(q.options)&&q.options.length);
     if(!qs.length) return;
     const hs=qs.map(qhOf);
+    /* 01.5a — skip by IDENTITY as well as by content hash.
+       Without the qid check, editing a question's wording produced a NEW qh, which looked unseen, so the
+       question was re-extracted and given a SECOND mapping row — same qid, two rows, possibly two different
+       targets. That is exactly the outcome qid exists to prevent: after an edit we want the same qid, a new
+       qh, and the SAME question-target relationship.
+       NOTE (deliberately out of scope): this means a heavily rewritten question keeps its original target
+       rather than being re-resolved. Whether a substantive edit should force re-resolution is a resolver
+       policy question, not an identity one, and is not decided here. */
+    const ids=qs.map(qidOf).filter(Boolean);
     const seen=await admin.from("question_targets").select("qh").in("qh",hs);
+    const seenById = ids.length ? await admin.from("question_targets").select("qid").in("qid",ids) : { data:[] };
     const done=new Set((seen.data||[]).map(r=>r.qh));
-    const todo=qs.filter((q,i)=>!done.has(hs[i]));
+    const doneIds=new Set((seenById.data||[]).map(r=>r.qid).filter(Boolean));
+    const todo=qs.filter((q,i)=>!done.has(hs[i]) && !(qidOf(q) && doneIds.has(qidOf(q))));
     if(!todo.length) return;
     const proposals=await tExtractBatch(todo);
     let targets=await loadTargets();
@@ -600,7 +619,7 @@ async function annotateTargets(questions, ctx){
         candidate_count: (dec.candidate_count!=null ? dec.candidate_count : (cands?cands.length:0)),
         retrieval_tiers: (cands&&cands.length ? Array.from(new Set(cands.map(c=>c._tier||"?"))).sort().join(",") : null),
         evidence_version: "01.5b" };
-      await admin.from("question_targets").upsert({ qh, target_id, map_state:dec.state, map_confidence:dec.confidence,
+      await admin.from("question_targets").upsert({ qh, qid:qidOf(q), target_id, map_state:dec.state, map_confidence:dec.confidence,
         proposed, candidates:candScores, decision, mapping_source:"ai", mapping_status:"active", topic_id:(ctx&&ctx.topic_id)||null, account_id:(ctx&&ctx.account_id)||null,
         updated_at:new Date().toISOString() }, { onConflict:"qh" });
     }
@@ -622,12 +641,30 @@ async function stampTargetIds(topic_id){
     const t=await admin.from("topics").select("id,extras").eq("id",topic_id).maybeSingle();
     if(!t.data||!t.data.extras||!Array.isArray(t.data.extras.qbank)) return acc;
     const qs=t.data.extras.qbank, hs=qs.map(qhOf); acc.total=qs.length;
-    const qt=await admin.from("question_targets").select("qh,target_id,map_state,mapping_source,mapping_status").in("qh",hs);
-    const rowByQh={};
+    /* 01.5a — look the mapping up by the STABLE identity first, falling back to the content hash.
+       A question whose wording was edited keeps its qid, so its mapping survives the edit; before this,
+       the recomputed qh missed and the question silently lost its target. */
+    const ids=qs.map(qidOf).filter(Boolean);
+    const qt=await admin.from("question_targets").select("qh,qid,target_id,map_state,mapping_source,mapping_status").in("qh",hs);
+    const qtById = ids.length
+      ? await admin.from("question_targets").select("qh,qid,target_id,map_state,mapping_source,mapping_status,updated_at").in("qid",ids)
+      : { data:[] };
+    const rowByQh={}, rowByQid={};
     (qt.data||[]).forEach(r=>{ if(r.mapping_status && r.mapping_status!=="active") return; rowByQh[r.qh]=r; });
+    /* Deterministic pick if a qid ever carries more than one active row (possible for rows written before
+       the skip-by-qid guard above): a human resolution outranks an ai one, then the most recently updated.
+       Never arbitrary — the same input must always produce the same stamp. */
+    const rank=r=>(r.mapping_source==="human"?2:1);
+    (qtById.data||[]).forEach(r=>{ if(r.mapping_status && r.mapping_status!=="active") return; if(!r.qid) return;
+      const cur=rowByQid[r.qid];
+      if(!cur || rank(r)>rank(cur) || (rank(r)===rank(cur) && String(r.updated_at||"")>String(cur.updated_at||""))) rowByQid[r.qid]=r; });
+    acc.viaQid=0; acc.viaQh=0;
     const isAuth=(r)=> !!(r && r.target_id && (r.map_state==="MATCH" || r.mapping_source==="human"));
     qs.forEach((q,i)=>{
-      const r=rowByQh[hs[i]], want = isAuth(r) ? r.target_id : null;
+      const qid=qidOf(q);
+      const r = (qid && rowByQid[qid]) || rowByQh[hs[i]];          // 01.5a: qid → qh
+      if(r){ if(qid && rowByQid[qid]) acc.viaQid++; else acc.viaQh++; }
+      const want = isAuth(r) ? r.target_id : null;
       if(want){                                                       // AUTHORITATIVE mapping (MATCH ai OR any human resolution)
         if(q.target_id===want) acc.already++;
         else { q.target_id=want; acc.stamped++; acc.changed=true; }
@@ -639,7 +676,7 @@ async function stampTargetIds(topic_id){
       }
     });
     // INVARIANT audit: after stamping, no AMBIGUOUS/unresolved question may hold a target_id (must be 0)
-    qs.forEach((q,i)=>{ const r=rowByQh[hs[i]]; if(q.target_id!=null && !isAuth(r)) acc.ambiguousReceivedId++; });
+    qs.forEach((q,i)=>{ const qid=qidOf(q); const r=(qid&&rowByQid[qid])||rowByQh[hs[i]]; if(q.target_id!=null && !isAuth(r)) acc.ambiguousReceivedId++; });
     if(acc.changed) await admin.from("topics").update({ extras:t.data.extras }).eq("id",topic_id);
     return acc;
   }catch(e){ console.warn("[targets] stamp failed (non-blocking):", e.message); acc.error=e.message; return acc; }
@@ -2084,6 +2121,48 @@ app.post("/admin/targets/backfill", async (req,res)=>{
     res.json({ ok:true, topicsScanned:topics.length, topicsDone, questionsSeen:processed, note:"idempotent — already-mapped questions were skipped" });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
+/* 01.5a — QID BACKFILL. Mints the stable identity onto every existing question that lacks one, and
+   copies it onto that question's EXISTING mapping row (matched by the current qh).
+   GUARANTEES:
+     • idempotent — an item that already has a qid is never re-minted, so re-running is a no-op;
+     • identity, not content — two byte-identical questions get two different qids;
+     • it creates, deletes, merges and reinterprets NO target mapping. Only the qid column is written
+       on question_targets; target_id, map_state, decision and confidence are never touched.
+     • the 100 pre-existing orphans (43 deleted topics, 57 content edits) stay orphaned. A stale qh has
+       no surviving question to point at, and inventing one would be fabricating history.
+   DRY RUN BY DEFAULT: pass {"apply":true} to write. Admin-only. */
+app.post("/admin/qid/backfill", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const apply = !!(req.body && req.body.apply);
+    const limit = Math.min(500, Number(req.body && req.body.limitTopics) || 500);
+    const tr = await admin.from("topics").select("id,extras").not("extras","is",null).limit(limit);
+    const topics = (tr.data||[]).filter(t=>t.extras && Array.isArray(t.extras.qbank) && t.extras.qbank.length);
+    const acc = { topics:0, questions:0, alreadyHadQid:0, minted:0, mappingsLinked:0, mappingsNotFound:0, topicsWritten:0, apply };
+    for(const t of topics){
+      acc.topics++;
+      const qs = t.extras.qbank; let changed = false;
+      const pairs = [];                                    // [{qh, qid}] for rows we can link
+      qs.forEach(q=>{
+        if(!q || !q.stem) return;
+        acc.questions++;
+        if(qidOf(q)) { acc.alreadyHadQid++; }
+        else { const id = crypto.randomUUID(); if(apply) q.qid = id; acc.minted++; changed = true;
+               pairs.push({ qh: qhOf(q), qid: id }); return; }
+        pairs.push({ qh: qhOf(q), qid: q.qid });
+      });
+      if(apply && changed) { await admin.from("topics").update({ extras:t.extras }).eq("id", t.id); acc.topicsWritten++; }
+      for(const pr of pairs){
+        const ex = await admin.from("question_targets").select("qh,qid").eq("qh", pr.qh).maybeSingle();
+        if(!ex.data) { acc.mappingsNotFound++; continue; }        // question has no mapping (or its mapping was orphaned) — leave it
+        if(ex.data.qid) continue;                                  // already linked
+        if(apply) await admin.from("question_targets").update({ qid: pr.qid }).eq("qh", pr.qh);
+        acc.mappingsLinked++;
+      }
+    }
+    res.json({ ok:true, ...acc, note: apply ? "written" : "DRY RUN — nothing written; POST {\"apply\":true} to commit" });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
 app.get("/admin/targets/stats", async (req,res)=>{
   try{
     if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
@@ -2658,6 +2737,56 @@ app.get("/admin/targets/health", async (req,res)=>{
       orphans:{ count:orphans.length, items:orphans.slice(0,50) },
       overBroad:{ threshold:overBroadMin, count:overBroad.length, items:overBroad.slice(0,50) },
       calibration:{ matchConfidence:conf, matches, ambiguous, ambiguousRate: (matches+ambiguous)? Math.round(ambiguous/(matches+ambiguous)*100):0 } });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/admin/targets/qh-orphan-audit", async (req,res)=>{
+  /* STEP 4 — READ-ONLY, single purpose, NO mutation. Splits the "orphan" targets (no authoritative MATCH/human
+     mapping) by the fate of their stored qh vs the CURRENT live question hashes, so "455 orphans" becomes an
+     actionable cause breakdown. Writes nothing, changes no resolver/threshold/candidate behaviour.
+     Classes: LIVE_HASH_MATCH · HASH_CHURN · QUESTION_DELETED · DISCONNECTED · MIGRATION_ARTIFACT. */
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const sample=Math.min(50, Number(req.query.sample)||20);
+    // 1) current live question hashes (and qid->qh where a stable qid exists) from topics.extras.qbank
+    const tr=await admin.from("topics").select("id,title,extras").not("extras","is",null).limit(5000);
+    const liveQh=new Set(); const liveByQid=new Map();
+    (tr.data||[]).forEach(t=>{ ((t.extras&&t.extras.qbank)||[]).forEach(q=>{ if(!q||!q.stem) return; const h=qhOf(q); liveQh.add(h); if(q.qid!=null) liveByQid.set(String(q.qid), h); }); });
+    // 2) targets + active mappings; orphan = no authoritative (MATCH/human) active mapping (same rule as /health)
+    const kt=await admin.from("knowledge_targets").select("target_id,topic,skill,status");
+    const qt=await admin.from("question_targets").select("*");
+    const targets=(kt.data||[]).filter(t=>t.status!=="deprecated"&&t.status!=="merged");
+    const active=(qt.data||[]).filter(r=>(r.mapping_status||"active")==="active");
+    const auth={}; active.forEach(r=>{ if(r.target_id && (r.map_state==="MATCH"||r.mapping_source==="human")) auth[r.target_id]=1; });
+    const orphanIds=new Set(targets.filter(t=>!auth[t.target_id]).map(t=>t.target_id));
+    const targMeta={}; targets.forEach(t=>targMeta[t.target_id]=t);
+    const byTarget={}; active.forEach(r=>{ if(orphanIds.has(r.target_id)){ (byTarget[r.target_id]=byTarget[r.target_id]||[]).push(r); } });
+    const CLASSES=["LIVE_HASH_MATCH","HASH_CHURN","QUESTION_DELETED","DISCONNECTED","MIGRATION_ARTIFACT"];
+    const counts={}, samples={}; CLASSES.forEach(c=>{ counts[c]=0; samples[c]=[]; });
+    let mappingsSeen=0, withQid=0;
+    orphanIds.forEach(tid=>{
+      const maps=byTarget[tid]||[];
+      let best=null;
+      if(!maps.length){ best={ rank:CLASSES.indexOf("DISCONNECTED"), c:"DISCONNECTED", qh:null, qid:null, curr:null, m:{} }; }
+      else for(const m of maps){ mappingsSeen++; const qh=m.qh||null; const qid=(m.qid!=null)?String(m.qid):null; if(qid) withQid++;
+        let c;
+        if(qh && liveQh.has(qh)) c="LIVE_HASH_MATCH";
+        else if(qid && liveByQid.has(qid)) c=(liveByQid.get(qid)===qh)?"LIVE_HASH_MATCH":"HASH_CHURN";
+        else if(qid && !liveByQid.has(qid)) c="QUESTION_DELETED";
+        else if(qh && !liveQh.has(qh)) c="MIGRATION_ARTIFACT";   // qh present, not live, no qid to adjudicate churn-vs-deleted
+        else c="DISCONNECTED";
+        const rank=CLASSES.indexOf(c);
+        if(best===null || rank<best.rank) best={ rank, c, qh, qid, curr:(qid&&liveByQid.has(qid))?liveByQid.get(qid):null, m };
+      }
+      counts[best.c]++;
+      if(samples[best.c].length<sample) samples[best.c].push({
+        target_id:tid, topic:(targMeta[tid]||{}).topic||null, mapping_status:(best.m.mapping_status||"active"),
+        stored_qh:best.qh, current_qh:best.curr, qid:best.qid,
+        question_exists: !!((best.qh&&liveQh.has(best.qh))||(best.qid&&liveByQid.has(best.qid))),
+        hash_matches: !!(best.qh&&liveQh.has(best.qh)) });
+    });
+    res.json({ ok:true, orphanTargets:orphanIds.size, liveQuestions:liveQh.size,
+      qidCoverage:{ mappingsSeen, withQid, note:"HASH_CHURN vs QUESTION_DELETED can only be told apart where a stored qid exists; without qid, a non-live qh is reported as MIGRATION_ARTIFACT (cause indeterminate)." },
+      classification:counts, evidence:samples });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 app.post("/admin/targets/deprecate-orphans", async (req,res)=>{
