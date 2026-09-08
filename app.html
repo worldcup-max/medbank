@@ -2745,9 +2745,13 @@ function playTopicPreview(tid){
   try{ if(window.smartLog) smartLog({t:'preview_shown', topic_id:tid}); }catch(e){}
   if(window.MB_playPreview) window.MB_playPreview(pv.scenes, tid);
 }
+var _leSeen={};   /* build 01: one note_read per topic+tab per session */
 function pageTopic(id){
   const t=topById(id); if(!t) return pageHome();
   IMGBASE = t.imgBase || '';
+  try{ if(window.MB_EVENTS && _leSeen[id]!==topicTab){ _leSeen[id]=topicTab;
+        MB_EVENTS.emit({ event_type:'note_read', surface:'note', target_id:null, object_id:id,
+          metadata:{ tab:topicTab||null, subject:(t.subject&&t.subject.id)||null, ready:!!t.ready } }); } }catch(_e){}   /* build 01 */
   if(topicTabFor!==id){ topicTab = t.ready?'note':'cards'; topicTabFor=id; }
   const T=(k,l)=>`<div class="tab ${topicTab===k?'active':''}" onclick="topicTab='${k}';render()">${l}</div>`;
   const lecId = DB.lecturers.find(x=>x.subjectId===t.subject.id && x.name===t.lecturer)?.id;
@@ -3384,7 +3388,11 @@ function qbNext(){ QB._confDone=false;
   try{ var _r=QB.results[QB.results.length-1], _it=QB.items[QB.i];
     if(_r && _it){ var _qh=_it._qh || qbHash((_it.stem||'')+'|'+((_it.options||[]).join('|')));
       qbSchedApply(_qh, !!_r.ok, (_r.conf==null?null:_r.conf));
-      try{ ivEmit(_it, _qh, (qbStore()._qmeta[_qh]||{}).target_id, !!_r.ok, (_r.conf==null?null:_r.conf)); }catch(_e){}   /* V1.6 Phase-1 telemetry — observe only */ } }catch(e){}
+      try{ ivEmit(_it, _qh, (qbStore()._qmeta[_qh]||{}).target_id, !!_r.ok, (_r.conf==null?null:_r.conf)); }catch(_e){}   /* V1.6 Phase-1 telemetry — observe only */
+      try{ if(window.MB_EVENTS) MB_EVENTS.emit({ event_type:'question_answered', surface:(QB&&QB.smart?'retest':'qbank'),
+             target_id:(qbStore()._qmeta[_qh]||{}).target_id||null, object_id:_qh,
+             correct:!!_r.ok, confidence:(_r.conf==null?null:_r.conf), response_ms:(_r.ms==null?null:_r.ms),
+             metadata:{ topic_id:_it.topicId||null, mode:QB.mode||null, session_type:QB.smart?'smart':'standard', skill:_it.skill||null, level:_it.level||null } }); }catch(_e){}   /* build 01: durable ledger — observe only */ } }catch(e){}
   if(QB.adaptive){
     var last=QB.results[QB.results.length-1]; if(last) adaptAdjust(last);
     if(QB.items.length < QB.adaptTarget){ var nx=adaptPick(); if(nx){ QB.items.push(nx); QB.adaptSeen[nx._qh]=1; } }
@@ -6238,6 +6246,9 @@ function pickOpt(i){
   if(it.conf){ if(!ok) rateSRS(it.id,false); }          // confidence check: miss re-enters pipeline
   else rateSRS(it.id,ok);
   if(_ms>=1200) recordAnswerMs(it.id,_pt,_ms);           // measure real answer time → rolling median
+  try{ if(window.MB_EVENTS) MB_EVENTS.emit({ event_type:'card_reviewed', surface:'flashcard',
+        target_id:null, object_id:it.id, correct:!!ok, response_ms:(_ms||null),
+        metadata:{ topic_id:(it.t&&it.t.id)||null, deck:it.deck||null, prior_state:_pt||null, mcq:true, chosen:i } }); }catch(_e){}   /* build 01 */
   // a first-ever exposure is a NEW card whichever pool served it — only planNew tags isNew, so a topic-deck /
   // weak / cram card would otherwise be logged as a *review* and never count toward the new-card total or streak.
   // (_pt was computed BEFORE rateSRS, so 'new' here means "had no SRS state a moment ago". Primer is excluded:
@@ -6356,6 +6367,9 @@ function rateCard(ok){
   if(it.conf){ if(!ok) rateSRS(it.id,false); }   // confidence check: correct = no change, miss = re-enter pipeline
   else rateSRS(it.id,ok);
   if(_ms>=1200) recordAnswerMs(it.id,_pt,_ms);
+  try{ if(window.MB_EVENTS) MB_EVENTS.emit({ event_type:'card_reviewed', surface:'flashcard',
+        target_id:null, object_id:it.id, correct:!!ok, response_ms:(_ms||null),
+        metadata:{ topic_id:(it.t&&it.t.id)||null, deck:it.deck||null, prior_state:_pt||null, conf_card:!!it.conf } }); }catch(_e){}   /* build 01: target_id null until cards gain target identity */
   logRate(ok); logDaily(!!it.isNew || (_pt==='new' && it.deck!=='primer'), it.t.subject.id); touchTopic(it.t.id);   // see :4877 — first exposure counts as new whichever pool served it
   S.session.done++; if(ok)S.session.correct++;
   if(!ok && !it.conf){ DATA.starred[it.id]=1; logMiss(it.id); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} }  // failed → hard card + mistakes log
@@ -7810,6 +7824,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 <script src="study-timer.js"></script>
 <script src="study-dock.js?v=20260908"></script>
 <script src="content-loader.js"></script>
+<script src="learning-events.js?v=20260908"></script>   <!-- build 01: durable learning ledger (FEATURES.LEARNING_EVENTS); inert while the flag is off -->
 <script src="auth-ui.js?v=20260908"></script>
 <script src="viz3d.js?v=20260828"></script>   <!-- 3D anatomy player (FEATURES.MODEL3D); inert while the flag is off -->
 
