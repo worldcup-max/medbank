@@ -1,0 +1,243 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>MedBank · neurulation — GPU baseline</title>
+<style>
+  :root{--bg:#070d1a;--ink:#eaf0ff;--dim:#8ea0c4;--line:#22304d;--acc:#5eead4}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px system-ui,-apple-system,sans-serif;overflow:hidden}
+  canvas{display:block;width:100vw;height:100vh;cursor:grab}
+  canvas:active{cursor:grabbing}
+  .panel{position:fixed;background:rgba(16,26,46,.88);border:1px solid var(--line);border-radius:14px;
+         padding:14px 16px;backdrop-filter:blur(10px)}
+  #layers{top:18px;right:18px;width:214px}
+  #layers h3,#hud h3{margin:0 0 10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:600}
+  #layers label{display:flex;align-items:center;gap:9px;padding:4px 0;font-size:13px;cursor:pointer}
+  #layers .sw{width:12px;height:12px;border-radius:50%;flex:none}
+  #hud{top:18px;left:18px;width:340px}
+  #hud h2{margin:0 0 6px;font-size:19px;font-weight:650}
+  #hud p{margin:0;color:var(--dim);font-size:13px;line-height:1.5;min-height:54px}
+  #scrub{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;width:min(780px,92vw);text-align:center}
+  input[type=range]{width:100%;accent-color:var(--acc);height:26px}
+  .stages{display:flex;justify-content:space-between;margin-top:2px}
+  .stages button{background:none;border:0;color:var(--dim);font:inherit;font-size:11.5px;cursor:pointer;padding:4px 6px;border-radius:6px}
+  .stages button.on{color:var(--acc);background:rgba(94,234,212,.10)}
+  #err{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:48px;
+       text-align:center;color:#ffc0c0;font:15px/1.6 ui-monospace,monospace;background:rgba(7,13,26,.95);white-space:pre-wrap}
+</style>
+
+<canvas id="c"></canvas>
+<div class="panel" id="hud"><h3>Neurulation</h3><h2 id="ttl">…</h2><p id="sub"></p></div>
+<div class="panel" id="layers"><h3>Layers</h3><div id="layerList"></div></div>
+<div class="panel" id="scrub">
+  <input id="t" type="range" min="0" max="1000" value="0">
+  <div class="stages" id="stages"></div>
+</div>
+<div id="err"></div>
+
+<!-- everything local: nothing is fetched at runtime, so nothing can fail to arrive -->
+<script src="three.min.js"></script>
+<script src="render-kit.js"></script>
+<script src="neurulation.js"></script>
+<script>
+(function () {
+  var E = document.getElementById('err');
+  function die(m){ E.style.display='flex'; E.textContent = m; }
+  window.addEventListener('error', function(e){ die('JS error\n\n' + (e.message||e) + '\n' + (e.filename||'') + ':' + (e.lineno||'')); });
+
+  if (!window.THREE) return die('three.min.js did not load.\nIs it beside index.html in the spike folder?');
+  if (!window.buildEmbryo || !window.LAYERS) return die('neurulation.js did not load.\nbuildEmbryo=' + typeof window.buildEmbryo + '  LAYERS=' + typeof window.LAYERS);
+
+  try {
+    var STAGES = [
+      [0.00,'Neural plate begins','The notochord induces the overlying ectoderm to thicken into neuroectoderm — the neural plate.'],
+      [0.22,'Neural plate forms','The neuroectoderm is now visibly thicker than the surface ectoderm on either side of it.'],
+      [0.42,'Neural groove deepens','The midline sinks. Arc length is conserved, so the plate bends — it does not stretch.'],
+      [0.62,'Neural folds elevate','The lateral edges rise and converge. Drag to rotate: these are two long folds running the length of the embryo.'],
+      [0.86,'Neural folds fuse','The folds meet at the dorsal midline and surface ectoderm reconnects above.'],
+      [0.94,'Neural tube separates','The tube detaches from the surface ectoderm and sinks beneath it.'],
+      [1.00,'Neural crest migrates','Crest cells leave the dorsolateral margins and migrate laterally.']
+    ];
+
+    var cvs = document.getElementById('c');
+    var renderer = new THREE.WebGLRenderer({ canvas: cvs, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    /* ACES is a film curve: it rolls off highlights and desaturates as it goes, which is exactly
+       wrong for flat teaching colours and was the other half of the pastel wash. RENDER-STANDARD 2.3. */
+    renderer.toneMapping = THREE.LinearToneMapping;
+    renderer.toneMappingExposure = 0.98;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x070d1a);
+
+    // environment map from a tiny gradient canvas — this is what stops translucent tissue looking like plastic
+    var pm = new THREE.PMREMGenerator(renderer); pm.compileEquirectangularShader();
+    var gc = document.createElement('canvas'); gc.width = 16; gc.height = 128;
+    var gx = gc.getContext('2d'), gr = gx.createLinearGradient(0,0,0,128);
+    gr.addColorStop(0,'#e6f0ff'); gr.addColorStop(0.45,'#5b7ba6'); gr.addColorStop(1,'#241a12');
+    gx.fillStyle = gr; gx.fillRect(0,0,16,128);
+    var et = new THREE.CanvasTexture(gc); et.mapping = THREE.EquirectangularReflectionMapping;
+    scene.environment = pm.fromEquirectangular(et).texture;
+
+    var key = new THREE.DirectionalLight(0xfff4e8, 2.3);
+    key.position.set(6,9,7); key.castShadow = true;
+    key.shadow.mapSize.set(2048,2048); key.shadow.bias = -0.0009;
+    key.shadow.camera.near=1; key.shadow.camera.far=44;
+    key.shadow.camera.left=-11; key.shadow.camera.right=11; key.shadow.camera.top=11; key.shadow.camera.bottom=-11;
+    scene.add(key);
+    var fill = new THREE.DirectionalLight(0xffcb96, 0.55); fill.position.set(-6,-4,4); scene.add(fill);
+    var rim  = new THREE.DirectionalLight(0x8ec2ff, 0.85); rim.position.set(-5,4,-8);  scene.add(rim);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.14));
+
+    var camera = new THREE.PerspectiveCamera(32, 1, 0.1, 300);
+
+    /* Own orbit: no controls library, so there is nothing left to fail to load. */
+    var yaw = -0.52, pitch = 0.34, dist = 11.0, dragging = false, lx = 0, ly = 0;
+    function place() {
+      camera.position.set(
+        dist * Math.cos(pitch) * Math.sin(yaw),
+        dist * Math.sin(pitch),
+        dist * Math.cos(pitch) * Math.cos(yaw)
+      );
+      camera.lookAt(0, -0.35, 0);
+    }
+    cvs.addEventListener('pointerdown', function(e){ dragging = true; lx = e.clientX; ly = e.clientY; cvs.setPointerCapture(e.pointerId); });
+    cvs.addEventListener('pointerup',   function(e){ dragging = false; });
+    cvs.addEventListener('pointermove', function(e){
+      if (!dragging) return;
+      yaw   -= (e.clientX - lx) * 0.006;
+      pitch += (e.clientY - ly) * 0.005;
+      pitch = Math.max(-1.45, Math.min(1.45, pitch));  // free: under, over, either side
+      lx = e.clientX; ly = e.clientY; place();
+    });
+    cvs.addEventListener('wheel', function(e){
+      e.preventDefault();
+      dist = Math.max(4.5, Math.min(30, dist * (1 + Math.sign(e.deltaY) * 0.09)));
+      place();
+    }, { passive: false });
+
+    /* SILHOUETTE OUTLINES, not wireframe.
+       v1 of this used EdgesGeometry with a 24 degree threshold. On an extruded box that traces the
+       corners; on a LOFTED SHEET every quad boundary clears the threshold, so it drew a grid over the
+       whole neural plate. The right technique for smooth organic surfaces is a back-face shell: clone
+       the geometry, push every vertex a little way along its own normal, and render the INSIDE of that
+       shell in near-black. Front faces are culled, so all that survives is a clean dark contour exactly
+       where the structure meets whatever is behind it — a drawn outline, with no interior lines. */
+    /* Both the shell geometry and its material come from render-kit.js, so this viewer cannot drift
+       away from the rule that found the bug. A near-black outline also disappeared against the dark
+       ground; the kit tints each silhouette with a deep version of its own structure's colour, which
+       reads as a drawn edge at any background value. */
+    var outlineGeometry = VizKit.outlineOf;
+
+    /* DEPTH PRIORITY — the fix for the mottling.
+       Where two surfaces sit at the same depth the GPU has no way to choose between them and flickers
+       pixel by pixel: that is the speckling where the neural plate meets the surface ectoderm and
+       around the notochord. polygonOffset biases each structure's depth by a fixed amount, so the
+       order is decided once, deterministically, instead of per pixel. The order below is anatomical,
+       innermost first — the notochord is under the plate, the plate is set into the ectoderm. */
+    var DEPTH_ORDER = { yolk: 0, endo: 1, meso: 2, noto: 3, neuro: 4, surface: 5, crest: 6, amnion: 7 };
+
+    function upgrade(o) {
+      var add = [];
+      o.traverse(function (n) {
+        if (!n.isMesh) return;
+        var k = n.userData.key, m = n.material, hex = m.color.getHex();
+        var cavity = (k === 'amnion' || k === 'yolk');
+        var rank = DEPTH_ORDER[k] !== undefined ? DEPTH_ORDER[k] : 3;
+
+        if (cavity) {
+          n.material = new THREE.MeshPhysicalMaterial({
+            color: hex, roughness: 0.35, metalness: 0, transparent: true, opacity: 0.11,
+            depthWrite: false, side: THREE.BackSide, envMapIntensity: 0.4
+          });
+          n.renderOrder = 20;
+          n.castShadow = n.receiveShadow = false;
+          return;
+        }
+
+        n.material = new THREE.MeshPhysicalMaterial({
+          color: hex, roughness: (m.roughness !== undefined ? m.roughness : 0.62), metalness: 0,
+          clearcoat: 0.22, clearcoatRoughness: 0.5, envMapIntensity: 0.85,
+          side: THREE.DoubleSide, transparent: false, opacity: 1, depthWrite: true,
+          /* each structure gets its OWN bias, so no two ever tie */
+          polygonOffset: true,
+          polygonOffsetFactor: -rank * 1.5,
+          polygonOffsetUnits:  -rank * 1.5
+        });
+        n.renderOrder = rank;
+        n.castShadow = n.receiveShadow = true;
+
+        /* Outline: thin, and only where the structure has room for one. The neural plate is sandwiched
+           into the ectoderm along its whole length, so a shell there is guaranteed to intersect its
+           neighbour — it gets a much thinner one. */
+        if (n.geometry && n.geometry.attributes && n.geometry.attributes.position.count < 90000) {
+          var thick = (k === 'neuro' || k === 'surface') ? 0.006 : 0.013;
+          var shell = new THREE.Mesh(outlineGeometry(n.geometry, thick),
+            VizKit.outlineMaterial(LAYERS[k] ? LAYERS[k].color : 0x334155));
+          shell.renderOrder = -1;
+          shell.userData.key = k;
+          shell.castShadow = shell.receiveShadow = false;
+          add.push([n, shell]);
+        }
+      });
+      for (var i = 0; i < add.length; i++) add[i][0].add(add[i][1]);
+    }
+
+    var group = null, visible = {};
+    Object.keys(LAYERS).forEach(function (k) { visible[k] = true; });
+
+    function rebuild(t) {
+      if (group) { scene.remove(group); group.traverse(function(n){ if (n.geometry) n.geometry.dispose(); }); }
+      group = buildEmbryo(t);
+      upgrade(group);
+      group.traverse(function (n) { if (n.userData.key && !visible[n.userData.key]) n.visible = false; });
+      scene.add(group);
+    }
+
+    var list = document.getElementById('layerList');
+    Object.keys(LAYERS).forEach(function (k) {
+      var L = LAYERS[k], lab = document.createElement('label');
+      var hex = ('000000' + L.color.toString(16)).slice(-6);
+      lab.innerHTML = '<input type="checkbox" checked><span class="sw" style="background:#' + hex + '"></span>' + L.name;
+      lab.querySelector('input').addEventListener('change', function (e) {
+        visible[k] = e.target.checked;
+        group.traverse(function (n) { if (n.userData.key === k) n.visible = e.target.checked; });
+      });
+      list.appendChild(lab);
+    });
+
+    var slider = document.getElementById('t'), ttl = document.getElementById('ttl'), sub = document.getElementById('sub');
+    var stagesEl = document.getElementById('stages'), btns = [];
+    STAGES.forEach(function (s, i) {
+      var b = document.createElement('button'); b.textContent = (i+1);
+      b.title = s[1];
+      b.onclick = function () { slider.value = Math.round(s[0]*1000); apply(s[0]); };
+      stagesEl.appendChild(b); btns.push(b);
+    });
+
+    function apply(t) {
+      rebuild(t);
+      var best = 0;
+      for (var i = 0; i < STAGES.length; i++) if (t >= STAGES[i][0] - 0.001) best = i;
+      ttl.textContent = (best+1) + '. ' + STAGES[best][1];
+      sub.textContent = STAGES[best][2];
+      for (var j = 0; j < btns.length; j++) btns[j].className = (j === best) ? 'on' : '';
+    }
+    slider.addEventListener('input', function () { apply(slider.value / 1000); });
+
+    function resize() {
+      var w = window.innerWidth, h = window.innerHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h; camera.updateProjectionMatrix();
+    }
+    window.addEventListener('resize', resize);
+    resize(); place(); apply(0);
+
+    (function loop(){ requestAnimationFrame(loop); renderer.render(scene, camera); })();
+  } catch (err) {
+    die('Init failed\n\n' + (err && err.stack || err));
+  }
+})();
+</script>

@@ -152,14 +152,62 @@
         'CROSS_SECTION', 'COMPARE_STRUCTURES', 'SHOW_RELATIONSHIP', 'TRACE_STRUCTURE'],
       degraded: ['PEEL_LAYER']
     },
-    resolve: function (s) {
+    /* RESOLUTION FOLLOWS ROLE — MEASURED 2026-09-10, engine__mesh-resolution-by-role.
+       Frank said the vertebrae look incomplete. He was right, and it was not a missing mesh: it was
+       decimation. The BodyParts3D source for L2 (FMA13073) is 6,946 triangles and meshes-lite serves
+       3,000, so 57% of every bone in the corpus was thrown away — and on a vertebra the discarded
+       detail is exactly what a student is examined on, the spinous and transverse processes and the
+       articular facets.
+
+       The fix is NOT "serve the source to everyone". Measured across all 81 mesh scenes: all-lite is
+       272 MB, all-source is 2,633 MB. Nor is it the literal proposal on this item, "role 'part' gets
+       the full source mesh" — measured, that is 1,573 MB, because the corpus contains meshes the
+       vertebra case gave no warning of. FMA9756 is 816,056 triangles and 38.9 MB by itself, and
+       intercostal-muscles has 5 'part' structures whose sources total 112 MB against 8.5 MB lite. That
+       policy would have shipped a 112 MB scene to a student on Nigerian mobile data, which is the exact
+       harm the item was written to avoid.
+
+       So resolution follows role through a TIER, and the tier is budgeted when it is GENERATED, not when
+       it is fetched: the browser cannot know a mesh's triangle count until it has already paid for it, so
+       a fetch-time budget is impossible in principle. A 'full' tier built with
+       `decimate-meshes.mjs --target 20000` measures 599 MB across the corpus and leaves the vertebral
+       column at 14.0 MB against the 15.1 MB the source would cost — L2's 6,946 triangles are under the
+       budget, so a vertebra gets its whole source and Frank gets the detail he asked for — while
+       intercostal-muscles lands at 9.3 MB against 8.5 MB lite. The detail arrives where a student looks
+       and costs almost nothing where they do not, which is what the item asked for.
+
+       UNTIL A SECOND TIER IS PUBLISHED THIS CHANGES NOTHING. Both tiers default to MESH_BASE, so with no
+       MESH_TIERS in config.js every URL is byte-identical to the one this adapter built before today.
+       Setting MESH_TIERS.full is what turns it on, and it can be turned on for a partly-uploaded tier
+       because a 'full' miss falls back to 'lite' (see load) rather than greying the structure out.
+
+       'primary' counts as a taught structure here. It is used by 92 structures in 30 scenes and is NOT in
+       model3d-scene-spec-v2.md, which declares only 'part' and 'context' — logged as a finding, not fixed
+       on this item. But it plainly names something being taught, so tiering it as scaffolding would hand
+       the taught structure the worst resolution in the scene: the very bug this item exists to remove. */
+    tiers: function () {
+      var base = '';
+      try { base = (window.MEDBANK_CONFIG && window.MEDBANK_CONFIG.MESH_BASE) || ''; } catch (e) {}
+      base = base || this.stlBase;
+      var map = null;
+      try { map = (window.MEDBANK_CONFIG && window.MEDBANK_CONFIG.MESH_TIERS) || null; } catch (e) {}
+      return { lite: (map && map.lite) || base, full: (map && map.full) || base };
+    },
+    /* One structure's tier. `mesh_tier` on the structure wins, so a scene can pin a context bone to
+       'full' when the teaching genuinely depends on it — or pin a monster to 'lite' — without the
+       author having to lie about its role. */
+    tierFor: function (s) {
+      if (s && s.mesh_tier) return s.mesh_tier;
+      var r = s && s.role;
+      return (r === 'part' || r === 'primary') ? 'full' : 'lite';
+    },
+    resolve: function (s, tier) {
       var id = s && s.refs && s.refs.bodyparts3d;
       if (!id) return null;
       /* Self-hosting is a config line, not a code change: set MESH_BASE in config.js once the ingest has
          put meshes in our own store, and every scene follows without being touched. */
-      var base = '';
-      try { base = (window.MEDBANK_CONFIG && window.MEDBANK_CONFIG.MESH_BASE) || ''; } catch (e) {}
-      return (base || this.stlBase) + id + '.stl';
+      var t = this.tiers();
+      return (t[tier || this.tierFor(s)] || t.lite) + id + '.stl';
     },
     /* Resolves to a mesh, or to a REASON it has none. The two are not the same thing and the difference
        matters to a student: "there is no model of this structure" is a fact about the corpus, while "the
@@ -169,49 +217,106 @@
 
        Retries exist because a public CDN is not a guarantee. Measured 2026-08-25 against the mirror, two of
        the arm scene's nine meshes took over 40 seconds and one never arrived at all on the first attempt —
-       with a single try and no timeout, that is a permanently greyed-out muscle for no good reason. */
-    load: function (T, s) {
-      var url = this.resolve(s);
-      if (!url) return Promise.resolve({ mesh: null, reason: 'none' });
-      var ATTEMPTS = 3, TIMEOUT = 12000;
-      function attempt(n) {
-        return new Promise(function (res) {
-          var settled = false;
-          var timer = setTimeout(function () { if (!settled) { settled = true; res(null); } }, TIMEOUT);
-          try {
-            new T.STLLoader().load(url + (n ? (url.indexOf('?') < 0 ? '?' : '&') + 'retry=' + n : ''), function (geo) {
-              if (settled) return; settled = true; clearTimeout(timer);
-              try {
-                geo.computeVertexNormals();
-                /* Bone is chalk, not porcelain.
-                   At roughness 0.80 with a touch of metalness the scapula still carried a broad specular
-                   sheen, and a specular highlight is the enemy of surface detail: it is brightest exactly
-                   where the surface curves most, so the ridges and fossae a student is meant to read are
-                   the first thing it erases. A drawn atlas has no specular at all — the form is carried
-                   entirely by diffuse shading, which is why every crest is legible.
-                   So bone goes near-matte and fully non-metallic. Soft tissue keeps a little sheen,
-                   because a wet muscle belly genuinely has one and it helps tell muscle from bone. */
-                var isBone = (s.layer === 'bone') || (s.render === 'anchor');
-                var col = toLinear(boneSafe(new T.Color(s.color || (isBone ? '#d9cdb8' : '#c9c3d8'))));
-                var mat = new T.MeshStandardMaterial({
-                  color: col,
-                  roughness: isBone ? 0.96 : 0.78,
-                  metalness: isBone ? 0.0 : 0.03,
-                  transparent: true, opacity: 1, side: T.DoubleSide
-                });
-                var mesh = new T.Mesh(geo, mat);
-                mesh.userData = s;
-                res(mesh);
-              } catch (e) { res(null); }
-            }, null, function () { if (!settled) { settled = true; clearTimeout(timer); res(null); } });
-          } catch (e) { if (!settled) { settled = true; clearTimeout(timer); res(null); } }
-        }).then(function (m) {
-          if (m || n + 1 >= ATTEMPTS) return m;
-          /* back off before trying again — hammering a CDN that just refused makes it likelier to refuse */
-          return new Promise(function (r) { setTimeout(r, 400 * Math.pow(2, n)); }).then(function () { return attempt(n + 1); });
+       with a single try and no timeout, that is a permanently greyed-out muscle for no good reason.
+
+       `opts.tier` overrides the role-derived tier. That is the seam an on-demand upgrade uses — reload one
+       structure at 'full' when the student highlights it — and it is deliberately a parameter rather than
+       a second method, so the retry, timeout and material code below cannot drift into two copies. */
+    load: function (T, s, opts) {
+      var self = this;
+      if (!(s && s.refs && s.refs.bodyparts3d)) return Promise.resolve({ mesh: null, reason: 'none' });
+      var wanted = (opts && opts.tier) || this.tierFor(s);
+      /* A STALL TIMEOUT, NOT A TOTAL ONE — and the difference is a whole structure.
+
+         This was `TIMEOUT = 12000`: give up 12 seconds after the request starts, however well it is
+         going. That was a fair rule when every mesh was capped at 3,000 triangles and no file was
+         much over 1 MB. It stopped being fair the moment resolution became a per-scene budget
+         (RENDER-STANDARD §5.5): the external intercostal is now 4.5 MB, and MEASURED against the
+         live bucket on 2026-09-10 it took 47.8 s at 0.8 Mbit/s while a vertebra took 2.6 s.
+
+         The failure that produced was not a slow scene. It was the intercostal-muscles scene
+         mounting with 32 of its 35 structures — and the three it dropped were the external, internal
+         and innermost intercostals, i.e. every muscle the scene exists to teach, leaving a student
+         looking at a bare rib cage. A flat timeout does not drop meshes at random; it drops the
+         BIGGEST ones, and the biggest mesh in a scene is almost always its subject. That is the same
+         shape as the flat decimation cap it came from: a fixed number that silently punishes exactly
+         the structure being taught.
+
+         So the clock now measures SILENCE rather than elapsed time. Every progress event re-arms it,
+         which is the honest question — is data still arriving? — and a download that is merely slow
+         is allowed to finish. A connection that has genuinely died still fails in 15 seconds. */
+      var ATTEMPTS = 3, STALL_MS = 15000;
+
+      function makeMesh(geo) {
+        geo.computeVertexNormals();
+        /* Bone is chalk, not porcelain.
+           At roughness 0.80 with a touch of metalness the scapula still carried a broad specular
+           sheen, and a specular highlight is the enemy of surface detail: it is brightest exactly
+           where the surface curves most, so the ridges and fossae a student is meant to read are
+           the first thing it erases. A drawn atlas has no specular at all — the form is carried
+           entirely by diffuse shading, which is why every crest is legible.
+           So bone goes near-matte and fully non-metallic. Soft tissue keeps a little sheen,
+           because a wet muscle belly genuinely has one and it helps tell muscle from bone. */
+        var isBone = (s.layer === 'bone') || (s.render === 'anchor');
+        var col = toLinear(boneSafe(new T.Color(s.color || (isBone ? '#d9cdb8' : '#c9c3d8'))));
+        var mat = new T.MeshStandardMaterial({
+          color: col,
+          roughness: isBone ? 0.96 : 0.78,
+          metalness: isBone ? 0.0 : 0.03,
+          transparent: true, opacity: 1, side: T.DoubleSide
         });
+        var mesh = new T.Mesh(geo, mat);
+        mesh.userData = s;
+        return mesh;
       }
-      return attempt(0).then(function (m) { return { mesh: m, reason: m ? null : 'failed' }; });
+
+      function fetchTier(tier) {
+        var url = self.resolve(s, tier);
+        if (!url) return Promise.resolve(null);
+        function attempt(n) {
+          return new Promise(function (res) {
+            var settled = false;
+            var timer = null;
+            function giveUp() { if (!settled) { settled = true; res(null); } }
+            /* Re-arm on every byte that arrives. STLLoader passes XHR progress straight through as its
+               third callback, which was `null` here — so the loader already knew the download was alive
+               and nothing was listening. */
+            function arm() { if (timer) clearTimeout(timer); timer = setTimeout(giveUp, STALL_MS); }
+            arm();
+            try {
+              new T.STLLoader().load(url + (n ? (url.indexOf('?') < 0 ? '?' : '&') + 'retry=' + n : ''), function (geo) {
+                if (settled) return; settled = true; clearTimeout(timer);
+                try {
+                  var m = makeMesh(geo);
+                  /* ON THE MESH, NOT IN userData. makeMesh does `mesh.userData = s` — userData IS the
+                     scene structure object, by reference — so writing the tier there would quietly add a
+                     __meshTier field to the scene author's structure and carry it into anything that
+                     re-serialises or validates scene structures. The mesh is the thing that has a tier. */
+                  m.__meshTier = tier;
+                  res(m);
+                } catch (e) { res(null); }
+              }, arm, function () { if (!settled) { settled = true; clearTimeout(timer); res(null); } });
+            } catch (e) { if (!settled) { settled = true; clearTimeout(timer); res(null); } }
+          }).then(function (m) {
+            if (m || n + 1 >= ATTEMPTS) return m;
+            /* back off before trying again — hammering a CDN that just refused makes it likelier to refuse */
+            return new Promise(function (r) { setTimeout(r, 400 * Math.pow(2, n)); }).then(function () { return attempt(n + 1); });
+          });
+        }
+        return attempt(0);
+      }
+
+      return fetchTier(wanted).then(function (m) {
+        if (m) return m;
+        /* THE FULL TIER MAY BE INCOMPLETE, AND THAT MUST NOT COST A STUDENT A MESH. 494 meshes are
+           uploaded one at a time; a scene opened halfway through that would otherwise grey out every
+           'part' structure it names — the taught ones — while the scaffolding around them rendered
+           fine. If the two tiers resolve to the same URL there is nothing to fall back to, so this
+           only costs a second request when a distinct full tier is actually configured. */
+        var t = self.tiers();
+        if (wanted === 'lite' || t[wanted] === t.lite) return null;
+        return fetchTier('lite');
+      }).then(function (m) { return { mesh: m, reason: m ? null : 'failed' }; });
     }
   });
 

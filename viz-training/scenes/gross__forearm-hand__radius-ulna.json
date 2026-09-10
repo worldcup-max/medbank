@@ -301,15 +301,14 @@
       "anchor": {
         "on": "radius",
         "uvw": [
-          0.9608,
-          0.8709,
-          0.9902
+          0.7629,
+          0.7533,
+          1
         ],
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: nearest CONTACT point between the radius and the humerus within the proximal 15% of the radius — the radial head turning on the capitulum (gap 4.85 mm); see tools/derive-forearm-landmarks.mjs",
-      "calibration_gap_mm": 4.85,
+      "calibrated_by": "geometry: EXTREME +z — the topmost vertex of the radius, 120.1 mm from its surface centroid, 1404 vertices considered; derived with tools/derive-landmark.mjs on 2026-09-08. RE-DEFINED at that audit: the old definition was a CONTACT against the humerus restricted to the proximal 15%, which tools/derive-landmark.mjs REFUSES today at 4.85 mm — the two bones do not meet in these meshes because the joint space is not modelled. The humerus scene quotes the same 4.85 mm from the other side of the same joint and was re-defined in the same pass. The coordinate MOVED, unlike the capitulum's: from [0.9608, 0.8709, 0.9902] to [0.7629, 0.7533, 1.0]. Both points lie on the head, but the head is a disc, so its topmost point is a rim rather than a summit and the old refused contact had picked a different vertex of the same rim. Needs-review carries real weight here: a human should confirm the marker sits on the disc and not on the rim's edge.",
       "terms": [
         "head of radius",
         "radial head",
@@ -383,7 +382,7 @@
         "uvw": [
           0.0497,
           0.1432,
-          0.0
+          0
         ],
         "radius": 0.02
       },
@@ -410,7 +409,7 @@
         "uvw": [
           0.8137,
           0.8396,
-          1.0
+          1
         ],
         "radius": 0.02
       },
@@ -544,7 +543,7 @@
         "uvw": [
           0.2223,
           0.1379,
-          0.0
+          0
         ],
         "radius": 0.02
       },
@@ -909,6 +908,7 @@
   "gaps": [
     "The catalog's smallest unit is a whole radius and a whole ulna, so every named feature — olecranon, coronoid process, trochlear and radial notches, both styloid processes, the radial tuberosity, both heads — is a derived landmark anchor rather than its own model. Each was measured on the meshes by tools/derive-forearm-landmarks.mjs and carries the measurement that placed it; all TEN stay status:\"needs-review\" until a human clears them in-app. This note previously said eleven; the file has ten and always did.",
     "The obvious eleventh landmark is the neck of the radius, which the head-of-radius narration names. It is not authored because it cannot be measured honestly with the two definitions tools/derive-landmark.mjs offers. A neck is defined by being the NARROWEST part of a bone, which is neither a contact nor an extreme. Tried 2026-08-29: contact between the radius and supinator converges to a 0.21 mm gap, but on a single witness, and it lands at w=0.81 — below the radial tuberosity at w=0.83, so it is upper shaft and not neck. Placing the anchor by eye between the head and the tuberosity would look measured and would not be, so it stays unauthored until either a neck mesh exists or the tool learns a minimum-cross-section definition.",
+    "ADDED 2026-09-08 (pre-gate anchor sweep): the head-of-radius anchor was derived before tools/derive-landmark.mjs had a refusal gate, as a CONTACT against the humerus with a printed gap of 4.85 mm. Re-run today the tool REFUSES that definition, and correctly — the radius and humerus do not touch in these meshes, because the joint space is not modelled, so no articular surface at the elbow can be defined by contact. It has been re-derived as the topmost vertex of the radius (EXTREME +z) and its coordinate moved. The same 4.85 mm is quoted from the humerus side in gross__arm__humerus, whose capitulum anchor was re-defined in the same pass; if a later run finds 4.85 mm quoted anywhere else in the upper limb it is this same non-contact, and it must not be presented as a measurement.",
     "Measured on these meshes the ulna reaches 0.8 mm further distally than the radial styloid, so the roughly 1 cm step by which the radial styloid normally lies below the ulnar styloid is NOT visible on the model. The narration teaches the relationship because it is what a Colles fracture abolishes, but a student must not read the offset off this scene. The same is true in the full-resolution and lite mesh sets, so it is the source segmentation, not the decimation.",
     "There is no mesh for the annular ligament, the triangular fibrocartilage / articular disc of the distal radioulnar joint, the oblique cord or the elbow joint capsule, so the ligaments that actually hold these two pivots together are described rather than shown.",
     "Pronation and supination are taught as before-and-after positions with the muscles that drive them. The renderer cannot animate the radius crossing the ulna, because that needs an articulated skeleton and BodyParts3D delivers static meshes.",
@@ -918,6 +918,8 @@
     "author": "task",
     "authored_at": "2026-08-26",
     "audited_at": "2026-08-29",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "task"
   }
 }

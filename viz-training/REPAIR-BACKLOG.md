@@ -143,7 +143,8 @@ it is the only thing standing between the corpus and a silently incomplete scene
   `typical-vertebra` numbers two different beats "3". Every run reported the validator clean, because
   nothing checks beat ordinals. Renumber, and add the check.
 
-- **NEW (2026-08-29 audit) — "not in the local decimated set" is a false claim repeated across at least
+- DONE (2026-09-08 — swept corpus-wide and CLOSED; see the note appended at the end of this item)
+  **NEW (2026-08-29 audit) — "not in the local decimated set" is a false claim repeated across at least
   eleven scenes.** The biliary-tree scene said `FMA7202` was not in `meshes-lite/` and that therefore no
   anchor could be measured; it is there, and five anchors were measured from it at audit. The same sentence
   is still live in `liver`, `pancreas`, `spleen`, `portal-venous-system`, `lungs`, `bony-pelvis`, `stomach`,
@@ -198,7 +199,22 @@ it is the only thing standing between the corpus and a silently incomplete scene
   "right trapezoid" is in the catalog and is the CARPAL BONE**, not the trapezoid line — the exact shape of
   mistake a run searching for "trapezoid" would make. Named in `gaps[]`.
 
-- **NEW (2026-08-29 audit) — anchors derived by the bespoke per-topic scripts predate `derive-landmark.mjs`'s
+  **2026-09-08 — CLOSED, and the running "still live in ..." inventory in this item was itself the last
+  stale note.** All 20 scenes whose text matches any variant of the sentence ("local decimated set", "not
+  in the local mesh set", "not available locally", "not in the local set") were read this run. Every one
+  is now a *corrected* note that says the meshes ARE present and names the anchors measured as a result —
+  including all ten that the paragraphs above still list as "still live": `biliary-tree-gallbladder`,
+  `portal-venous-system`, `bony-pelvis`, `stomach`, `small-intestine`, `large-intestine`, `ureters`,
+  `kidney`, `suprarenal-adrenal-gland`, `abdominal-aorta-ivc`. **Do not re-work them.** The sweep also
+  reached four scenes this item never listed — `carpal-tunnel`, `femoral-triangle`,
+  `pelvic-diaphragm-levator-ani` and the Neuroanatomy `white-matter-tracts` — confirming the item's own
+  warning that the list was a lower bound. Exactly **one** live absence claim remains and it is TRUE:
+  `pelvic-diaphragm-levator-ani` says the left piriformis `FMA22341` is in the catalog but not in
+  `meshes-lite/`. Checked file by file: `FMA22340.stl` (right) is on disk, `FMA22341.stl` is not. That is
+  a real delivery gap and the note stays.
+
+- DONE (2026-09-08 — swept mechanically over all 142 scenes; see the note at the end of this item)
+  **NEW (2026-08-29 audit) — anchors derived by the bespoke per-topic scripts predate `derive-landmark.mjs`'s
   refusal gate, and some of them would not pass it.** `mediastinum`'s `ludwig_posterior` was a 3.72 mm
   contact, above the 3 mm limit, and its `calibrated_by` defended the gap as anatomically correct instead of
   treating it as a wrong definition. It was: re-defined against the T4/T5 disc it names, it measures 0.07 mm.
@@ -210,6 +226,26 @@ it is the only thing standing between the corpus and a silently incomplete scene
   was the wrong parent for a vertebral level. Re-derived as the lowest vertex of T4 itself — its lower border
   — which cross-checks against the carina anchor to 1.4 mm in the vertical. Two for two: assume every
   pre-gate anchor is suspect until its printed gap has been read.
+  **DONE 2026-09-08 — the sweep this item asked for has now been RUN MECHANICALLY over all 142 scenes**,
+  parsing every `calibrated_by` for a printed contact gap and flagging anything above the 3 mm gate. That
+  is the whole population, not a sample, so the item is closed rather than advanced. **Three offenders,
+  all fixed this run** (details in `CORPUS.md`):
+  - `arm__humerus` `capitulum` — 4.85 mm contact against the radius. Re-derived as EXTREME -z within the
+    lateral quarter of the bone. Coordinate essentially unchanged, `[0.223, 0.635, 0.023]` →
+    `[0.2228, 0.6352, 0.0228]`: **the definition was wrong and the point was right**, which is exactly why
+    nobody had spotted it. Only the printed gap gives this class away.
+  - `forearm-hand__radius-ulna` `head_of_radius` — the SAME 4.85 mm, read from the other bone of the same
+    joint. Re-derived as EXTREME +z; **here the coordinate did move**, so the two cases together show the
+    class can be either harmless or not, and you cannot tell without re-deriving.
+  - `lungs-mediastinum__great-vessels` `brachiocephalic_trunk_origin` — 17.84 mm, and its note argued that
+    the gap *was* the length of the absent vessel. It is — which is precisely what makes it not a contact.
+    It cannot be re-defined, because the trunk has no mesh, so the anchor is kept, marked `approx`, and its
+    `calibrated_by` now records the refusal and the two-witness convergence instead of excusing the gap.
+  The lesson for later runs is narrower than "assume every pre-gate anchor is suspect": **all three
+  offenders, and both 2026-08-29 instances, were joint or vessel-junction anchors defined by contact across
+  a space that is not modelled.** Cartilage in a joint and a missing branch vessel both open a gap no mesh
+  can close. Define an articular surface positionally, never by contact. Muscle-attachment contacts, which
+  are the large majority of the corpus's anchors, all came through well under 1 mm.
 
 ## 4 · Embryology — twenty-four scenes that will ship the day the SVG engine exists
 
@@ -312,7 +348,7 @@ anchors to students today and says so in its own `gaps[]`.
 - **`CAPABILITIES.svg` is `{ native: [], degraded: [] }`.** Every op in every diagram or sequence
   scene therefore warns "unknown to the svg adapter" — 1209 warnings across the corpus, which is
   precisely the volume that trains people to stop reading warnings. Raised in a dozen consecutive runs.
-- **No beat-ordinal check** in the validator (see §3). *Confirmed beyond Back & Vertebral Column on
+- DONE (2026-09-08) **No beat-ordinal check** in the validator (see §3). *Written 2026-09-08 as a WARNING; corpus-wide result is ZERO warnings, so the earlier renumberings held.* *Confirmed beyond Back & Vertebral Column on
   2026-08-29: `gross__heart-pericardium__heart` had views numbered 1, 2, (none), 3, (none) and had been
   reported clean by every run since it was authored. Renumbered. Assume other scenes are affected.*
 - **No curriculum-view-coverage check** in the validator (see §2). *This is now the second and third scene
@@ -325,6 +361,17 @@ anchors to students today and says so in its own `gaps[]`.
 - **Run 32 is undocumented.** `spleen.json` and `portal-venous-system.json` exist and validate; no run
   block records authoring them.
 
+- **NEW (2026-09-10) — ten catalog entries have `"name": null`, and the validator's existence stage
+  will pass an id that the name check then cannot check.** `available-meshes.json` holds 934 entries;
+  only 924 have a name string. The ten are `FMA14543nsn`, `FMA19617nsn`, `FMA3840nsn`, `FMA3862nsn`,
+  `FMA3932nsn`, `FMA59815nsn`, `FMA61993nsn`, `FMA62008nsn`, `FMA7198nsn`, `FMA9352nsn` — all with the
+  `nsn` suffix, all nameless, and **none referenced by any scene today** (grepped, 2026-09-10). So this
+  is a trap, not a live defect: audit check 2 says compare the structure's `name` to the catalog's
+  `name` character for character, and for these ten there is nothing to compare against. Any future run
+  that picks one gets an id which clears the existence stage and is unverifiable by name — the exact
+  shape of error checks 1–3 exist to catch. Fix is either to give them names or to have
+  `validate-scenes.mjs` reject a ref to a nameless catalog entry outright.
+
 - **NEW (2026-09-02 audit) — a CROSS_SECTION axis can contradict the plane its own narration names,
   and nothing checks it.** `neuroanatomy__cerebellum__deep-cerebellar-nuclei` beat 1 narrated a
   CORONAL cut with `axis:"z"`; fixed to `y` at audit. The convention across this course is
@@ -336,6 +383,32 @@ anchors to students today and says so in its own `gaps[]`.
   `model3d-scene-spec-v2.md` so it is evidence rather than a pattern, then (b) fix the kidney scene and
   add a validator check comparing a CROSS_SECTION axis to any plane word in the beat's narration.
 
+  **DONE 2026-09-09 — both jobs, and the kidney was not the only offender.** (a) The convention is now
+  written into `model3d-scene-spec-v2.md` under "`CROSS_SECTION.axis` — the anatomical plane convention",
+  and it is stated as EVIDENCE rather than a pattern: `axis` is the normal of the cut plane, and the LPS
+  orientation (+X left, +Y posterior, +Z superior) is printed in the `calibrated_by` of every anchor
+  `derive-landmark.mjs` has emitted — so sagittal=x, coronal=y, axial/transverse=z. That is a fact about
+  the meshes, not an inference from sibling scenes, which is what the 2026-09-02 note was waiting for.
+  (b) The check is written (warning, 3d_anatomy scenes only, with a blocklist for "transverse process",
+  "median sulcus", "frontal lobe", "sagittal sinus" and "the widest diameter is transverse", each of
+  which it flagged before the blocklist and none of which is a cut plane). Corpus-wide it fires **four**
+  times and all four are real:
+  - `gross__kidney-posterior-abdominal-wall__kidney` beat 3 — narrates coronal, cut `z`. The known one.
+  - `gross__leg-foot__popliteal-fossa` beat 6 — "a transverse section through the fossa", cut `y`.
+  - `gross__liver-biliary-tract-pancreas-spleen__liver` beat 7 — "any axial liver image", cut `y`.
+  - `gross__liver-biliary-tract-pancreas-spleen__pancreas` beat 5 — the transpyloric plane, cut `y`.
+  All four fixed and stamped `corrected_at`. **The finding worth carrying is that three of the four were
+  outside Neuroanatomy and outside the scene the 2026-09-02 note named.** That note assumed the kidney was
+  a straggler; it was a sample. Three signed gross scenes had been showing a student a cut at ninety
+  degrees to the one the voice was describing, on beats whose entire teaching point is reading a slice,
+  and every run since 2026-08-29 reported them clean — because the check did not exist, exactly as the
+  note said. This is now the third of the three one-line comparisons (beat ordinals, isolate-region reach,
+  section axes) to be written, and the second of the three to find live defects the moment it ran.
+
+- DONE in part (2026-09-08: job (a), the validator warning, is WRITTEN — scoped to beats that isolate a
+  GROUP and to HIGHLIGHT/TRACE/COMPARE only; it surfaces 157 warnings corpus-wide, which is job (b), the
+  sweep, now reduced to a printed queue nobody has walked yet. A second live instance was found by hand the
+  same day in `neuroanatomy__brainstem__pons` beat 4 and fixed.)
 - **NEW (2026-09-03 audit) — a third class of defect that passes all eight validator stages: an op
   that reaches out of its own beat's `ISOLATE_REGION`.** `ISOLATE_REGION` ghosts everything outside
   its group, while `TRACE_STRUCTURE` and `SHOW_RELATIONSHIP` light whatever they name. The validator
@@ -438,3 +511,47 @@ claims were re-searched in `available-meshes.json` under multiple spellings and 
 
 These four holds are correct and should not be re-litigated; they are mesh-ingestion work, not authoring
 work. What is still open in section 3 is listed above it.
+
+## 2026-09-08 (later run) — curriculum-view coverage checked corpus-wide for the first time
+
+§9 lists "No curriculum-view-coverage check in the validator" as open, and notes it as "the second and
+third scene" found missing a required mode. That check has now been run by hand over all 142 scenes
+against all 206 curriculum entries carrying a `views` field.
+
+- **One gap, already closed.** `back-vertebral-column__spinal-cord-in-vertebral-canal` lacks
+  `vasculature`; that is §2 item 1, unauthorable, gap note present and re-verified. **There is no second
+  or third scene.** Do not spend a run looking for one.
+- **`covers[]` spelling: zero entries matching nothing**, 142 scenes.
+- **ids: zero fabrications**; **names: zero mismatches** against the 934-entry catalog.
+
+The validator check is still worth writing — this pass proves it would pass today, not that it will
+after the next authoring run. §9's tooling item stays open.
+
+## 2026-09-09 — the §9 "157-warning isolate/highlight queue" is NOT a defect queue
+
+The previous run left this as "real work a run can do while the cursors are dry". It has now been walked
+mechanically over all 142 scenes and the result is a **negative** one, which is worth more than a partial
+walk: the warning class does not describe a rendering defect, and no scene should be edited for it.
+
+The queue narrows to **70 out-of-isolate op targets in `3d_anatomy` scenes**, in two classes:
+
+- **CLASS A — 24 targets in 8 scenes.** The target is a measured landmark ANCHOR whose parent structure IS
+  inside the isolated group, but the anchor's own `group` is a separate `Landmarks` / `Surfaces & landmarks`
+  / `Parts of the ulna` bucket, so it falls outside the `ISOLATE_REGION` target and the validator warns.
+  Scenes: `flat-abdominal-muscles`, `rectus-abdominis`, `radius-ulna`, `hip-joint`, `ankle-joint`,
+  `popliteal-fossa`, `great-vessels`, `lungs`. All eight are signed.
+- **CLASS B — 46 targets.** The target's parent is genuinely outside the isolate (a neighbouring column, a
+  vessel, a bone in another group).
+
+**Neither class is broken, and the reason is in the spec, not in the scenes.** `model3d-scene-spec-v2.md`
+line 120 defines `ISOLATE_REGION` as "show only this; **ghost** everything else" — ghosted, not hidden. A
+subsequent `HIGHLIGHT_STRUCTURE` / `COMPARE_STRUCTURES` / `TRACE_STRUCTURE` on a ghosted structure lights
+it; in Class A the anchor's parent is lit at full opacity underneath it as well. The warning's own wording
+is honest about this — "legal, but check the narration asks for them" — and it is a **narration-relevance
+prompt, not a visibility bug**. It cannot be discharged mechanically at all, which is what made it look
+like a 157-item queue.
+
+**Recommendation: retire the queue as an item and keep the warning.** What is left is one small optional
+tidy with no student-visible effect — Class A's anchors could be grouped with their parents so the warning
+stops firing on them and the remaining 46 stand out — and that is a cosmetic change to eight signed scenes,
+so it is a human's call and not this task's. Do NOT let a later run read "157 warnings" as 157 defects.

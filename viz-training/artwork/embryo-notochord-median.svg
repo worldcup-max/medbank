@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img">
+  <title>Week-3 embryo, median section — cranial left, caudal right</title>
+  <!-- PLATE LOG
+       drawn from: standard week-3 median-section figures (trilaminar disc, amnion above, yolk sac below);
+                   notochord development stages in the Langman/Moore sequence.
+       geometry:   disc x 90-810. layers: ectoderm y252-278, mesoderm y278-306, endoderm y306-332.
+                   prechordal plate x=190 (cranial end). primitive node/pit x=580 (68% of disc length),
+                   primitive streak occupying the caudal third behind it. notochord spans 190-580.
+       v3 2026-09-09 — rebuilt after an independent review found 16 defects in v2.
+       independent review of v3: PENDING.
+  -->
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5b3a86"/>
+    </marker>
+    <marker id="arT" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1f6f8b"/>
+    </marker>
+    <marker id="arG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2e7d6b"/>
+    </marker>
+    <marker id="arP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7c2547"/>
+    </marker>
+    <marker id="arS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5d7590"/>
+    </marker>
+  </defs>
+
+  <!-- ============ background: the disc, and the primitive streak behind the node ============ -->
+  <g data-key="disc_context" data-layer="10">
+    <path d="M90 252 C120 132 300 92 450 92 C600 92 780 132 810 252 Z" fill="#e7f0fa" stroke="#7f9cbb" stroke-width="2.5"/>
+    <path d="M90 332 C120 452 300 492 450 492 C600 492 780 452 810 332 Z" fill="#fbf1cf" stroke="#c4a95e" stroke-width="2.5"/>
+    <rect x="90" y="252" width="720" height="26" fill="#a8c4e4"/>
+    <rect x="90" y="278" width="720" height="28" fill="#e8a7a7"/>
+    <rect x="90" y="306" width="720" height="26" fill="#cfdb9c"/>
+    <rect x="90" y="252" width="720" height="80" fill="none" stroke="#4d5f75" stroke-width="2.4"/>
+    <line x1="90" y1="278" x2="810" y2="278" stroke="#4d5f75" stroke-width="1.3"/>
+    <line x1="90" y1="306" x2="810" y2="306" stroke="#4d5f75" stroke-width="1.3"/>
+
+    <!-- The primitive STREAK and its groove, caudal to the node. Beat 1's whole contrast is
+         groove-cells versus pit-cells, so the groove must be on screen whenever the pit is. -->
+    <path d="M598 252 q11 12 22 0 q11 12 22 0 q11 12 22 0 q11 12 22 0 q11 12 22 0 q11 12 22 0 q11 12 22 0"
+          fill="#c9d9ec" stroke="#5d7590" stroke-width="2"/>
+    <path d="M620 268 L620 298" stroke="#5d7590" stroke-width="2.2" stroke-dasharray="5 4" marker-end="url(#arS)"/>
+    <path d="M664 268 L664 298" stroke="#5d7590" stroke-width="2.2" stroke-dasharray="5 4" marker-end="url(#arS)"/>
+    <path d="M708 268 L708 298" stroke="#5d7590" stroke-width="2.2" stroke-dasharray="5 4" marker-end="url(#arS)"/>
+    <path d="M752 268 L752 298" stroke="#5d7590" stroke-width="2.2" stroke-dasharray="5 4" marker-end="url(#arS)"/>
+
+    <text x="104" y="270" font-family="system-ui,sans-serif" font-size="14" fill="#2b3a4d">ectoderm</text>
+    <text x="104" y="298" font-family="system-ui,sans-serif" font-size="14" fill="#6d2b2b">mesoderm</text>
+    <text x="104" y="325" font-family="system-ui,sans-serif" font-size="14" fill="#4a5722">endoderm</text>
+    <text x="360" y="150" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" fill="#54718f">amniotic cavity</text>
+    <text x="360" y="450" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" fill="#8a7434">yolk sac</text>
+    <text x="96"  y="536" font-family="system-ui,sans-serif" font-size="14" fill="#5a6572">← cranial</text>
+    <text x="804" y="536" text-anchor="end" font-family="system-ui,sans-serif" font-size="14" fill="#5a6572">caudal →</text>
+  </g>
+
+  <!-- ============ the primitive pit, at the CRANIAL end of the streak ============ -->
+  <g data-key="pit_origin" data-layer="20">
+    <path d="M560 252 q20 34 40 0" fill="#f4dce6" stroke="#7c2547" stroke-width="2.6"/>
+    <circle cx="580" cy="264" r="8" fill="#b23c6b" stroke="#7c2547" stroke-width="2.4"/>
+    <path d="M566 288 C520 296 460 296 412 293" fill="none" stroke="#b23c6b" stroke-width="3.4" stroke-dasharray="9 7" marker-end="url(#arP)"/>
+  </g>
+
+  <!-- ============ stage 1 — the notochordal process, a HOLLOW tube open behind ============ -->
+  <g data-key="process" data-layer="30">
+    <path d="M190 280 L580 280 L580 304 L190 304 Z" fill="#d9bff0" stroke="#5b3a86" stroke-width="2.6"/>
+    <path d="M190 292 m0 -12 a12 12 0 0 0 0 24" fill="#d9bff0" stroke="#5b3a86" stroke-width="2.6"/>
+    <!-- the lumen: the narration says "say hollow out loud", so it is hollow from this panel on -->
+    <path d="M204 287 L566 287 C576 287 582 283 582 275 L582 268 L592 268 L592 277
+             C592 289 584 297 568 297 L204 297 Z" fill="#ffffff" stroke="#5b3a86" stroke-width="2"/>
+  </g>
+
+  <!-- ============ stage 2 — the canal, enlarged, one cavity continuous with the pit ============ -->
+  <!-- (kept a separate key because the scene names it separately; same cavity, wider) -->
+  <g data-key="canal" data-layer="31">
+    <path d="M190 280 L580 280 L580 304 L190 304 Z" fill="#efe4f8" stroke="#5b3a86" stroke-width="2.6"/>
+    <path d="M202 284 L566 284 C578 284 586 279 586 270 L586 258 L598 258 L598 272
+             C598 288 588 300 568 300 L202 300 Z" fill="#ffffff" stroke="#5b3a86" stroke-width="2.2"/>
+  </g>
+
+  <!-- ============ stage 3 — the floor breaks down; the plate BECOMES the yolk-sac roof ============ -->
+  <g data-key="plate" data-layer="32">
+    <!-- the endoderm is INTERRUPTED across the notochord's span: the plate replaces it, so the plate's
+         lower surface faces the yolk sac. Painted over the background endoderm band. -->
+    <rect x="190" y="303" width="390" height="31" fill="#fbf1cf"/>
+    <!-- ONE CONTINUOUS strip. What breaks down is the floor of the canal, not the notochord — the
+         notochord is the type example of an UNSEGMENTED axial structure. -->
+    <path d="M190 303 L580 303 L580 317 L190 317 Z" fill="#8e5fc0" stroke="#4a2d70" stroke-width="2.6"/>
+    <!-- the cut ends of the endoderm the plate has replaced -->
+    <rect x="182" y="306" width="10" height="26" fill="#cfdb9c" stroke="#4a5722" stroke-width="1.6"/>
+    <rect x="578" y="306" width="10" height="26" fill="#cfdb9c" stroke="#4a5722" stroke-width="1.6"/>
+    <!-- the floor breaking down — one path per arrow, or only the last one gets a head -->
+    <path d="M240 288 L240 300" stroke="#5b3a86" stroke-width="2.4" marker-end="url(#ar)"/>
+    <path d="M318 288 L318 300" stroke="#5b3a86" stroke-width="2.4" marker-end="url(#ar)"/>
+    <path d="M396 288 L396 300" stroke="#5b3a86" stroke-width="2.4" marker-end="url(#ar)"/>
+    <path d="M474 288 L474 300" stroke="#5b3a86" stroke-width="2.4" marker-end="url(#ar)"/>
+    <path d="M550 288 L550 300" stroke="#5b3a86" stroke-width="2.4" marker-end="url(#ar)"/>
+  </g>
+
+  <!-- ============ the neurenteric canal: a break through all three layers, ON the pit ============ -->
+  <g data-key="neurenteric" data-layer="33">
+    <rect x="571" y="250" width="18" height="84" fill="#fbf1cf"/>
+    <line x1="571" y1="250" x2="571" y2="334" stroke="#2e7d6b" stroke-width="3"/>
+    <line x1="589" y1="250" x2="589" y2="334" stroke="#2e7d6b" stroke-width="3"/>
+    <!-- one arrow, all the way through: the amniotic cavity drains into the yolk sac -->
+    <path d="M580 210 L580 378" stroke="#2e7d6b" stroke-width="3.6" marker-end="url(#arG)"/>
+  </g>
+
+  <!-- ============ stage 4 — the definitive notochord, back inside mesoderm ============ -->
+  <g data-key="definitive" data-layer="34">
+    <rect x="190" y="279" width="390" height="26" rx="13" fill="#8e5fc0" stroke="#4a2d70" stroke-width="2.8"/>
+  </g>
+
+  <!-- ============ its two ends — drawn DIFFERENTLY so they can be told apart ============ -->
+  <g data-key="extent" data-layer="40">
+    <!-- cranial: the prechordal plate, a thickened patch where ectoderm and endoderm meet -->
+    <path d="M172 278 q18 -15 36 0 q-18 15 -36 0" fill="#1f6f8b" stroke="#12505f" stroke-width="2.4"/>
+    <line x1="190" y1="236" x2="190" y2="352" stroke="#1f6f8b" stroke-width="2.2" stroke-dasharray="6 5"/>
+    <!-- caudal: the node, ringed -->
+    <circle cx="580" cy="264" r="16" fill="none" stroke="#1f6f8b" stroke-width="3"/>
+    <line x1="580" y1="236" x2="580" y2="352" stroke="#1f6f8b" stroke-width="2.2" stroke-dasharray="6 5"/>
+    <path d="M190 366 L580 366" stroke="#1f6f8b" stroke-width="2.4" marker-start="url(#arT)" marker-end="url(#arT)"/>
+  </g>
+
+  <!-- ============ the primitive axis — and it STOPS where the notochord stops ============ -->
+  <g data-key="axis" data-layer="41">
+    <line x1="190" y1="292" x2="580" y2="292" stroke="#111" stroke-width="2.4" stroke-dasharray="18 8 4 8"/>
+    <!-- Everything cranial to the prechordal plate is head, patterned with no notochord beneath it.
+         Marked by the axis simply STOPPING at x=190 rather than by a box, which collided with the
+         layer labels — plates must keep overlays clear of the structural text (ARTWORK-STANDARD §2). -->
+  </g>
+
+  <!-- ============ what it induces: thickened ectoderm, running the whole length of the rod ============ -->
+  <g data-key="induce_neural" data-layer="50">
+    <!-- a modest thickening — thickest cranially, tapering caudally. A plate is flat; a dome would be folds. -->
+    <path d="M184 278 L184 238 C300 230 460 236 584 250 L584 278 Z"
+          fill="#2f6fd0" fill-opacity="0.32" stroke="#2f6fd0" stroke-width="3"/>
+    <!-- signal arrows start ON the notochord's dorsal surface (y=279) -->
+    <path d="M250 279 L250 252" stroke="#5b3a86" stroke-width="2.6" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+    <path d="M330 279 L330 251" stroke="#5b3a86" stroke-width="2.6" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+    <path d="M410 279 L410 252" stroke="#5b3a86" stroke-width="2.6" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+    <path d="M490 279 L490 254" stroke="#5b3a86" stroke-width="2.6" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+    <path d="M556 279 L556 257" stroke="#5b3a86" stroke-width="2.6" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+  </g>
+
+  <!-- induce_sclerotome is NOT on this plate: somites are paramedian and do not appear in a true median
+       section. It resolves on embryo-notochord-transverse.svg. -->
+</svg>

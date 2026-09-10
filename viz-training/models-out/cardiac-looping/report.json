@@ -1,0 +1,779 @@
+{
+ "stages": [
+  {
+   "name": "t000",
+   "t": 0,
+   "opts": {},
+   "label": "day 23 — the straight heart tube",
+   "file": "viz-training/models-out/cardiac-looping/t000.png",
+   "yaw": -0.28
+  },
+  {
+   "name": "t025",
+   "t": 0.25,
+   "opts": {},
+   "label": "t = 0.25",
+   "file": "viz-training/models-out/cardiac-looping/t025.png",
+   "yaw": -0.28
+  },
+  {
+   "name": "t045",
+   "t": 0.45,
+   "opts": {},
+   "label": "t = 0.45",
+   "file": "viz-training/models-out/cardiac-looping/t045.png",
+   "yaw": -0.28
+  },
+  {
+   "name": "t060",
+   "t": 0.6,
+   "opts": {},
+   "label": "t = 0.60 — mid-loop",
+   "file": "viz-training/models-out/cardiac-looping/t060.png",
+   "yaw": -0.28
+  },
+  {
+   "name": "t080",
+   "t": 0.8,
+   "opts": {},
+   "label": "t = 0.80",
+   "file": "viz-training/models-out/cardiac-looping/t080.png",
+   "yaw": -0.28
+  },
+  {
+   "name": "t100",
+   "t": 1,
+   "opts": {},
+   "label": "day 28 — the looped heart",
+   "file": "viz-training/models-out/cardiac-looping/t100.png",
+   "yaw": -0.28
+  },
+  {
+   "name": "t100-meso",
+   "t": 1,
+   "opts": {
+    "mesocardium": true,
+    "midline": true
+   },
+   "label": "day 28 with the mesocardium and midline",
+   "file": "viz-training/models-out/cardiac-looping/t100-meso.png",
+   "yaw": -1.35
+  },
+  {
+   "name": "t045-meso",
+   "t": 0.45,
+   "opts": {
+    "mesocardium": true
+   },
+   "label": "mid-loop — the mesocardium has broken",
+   "file": "viz-training/models-out/cardiac-looping/t045-meso.png",
+   "yaw": -1.35
+  },
+  {
+   "name": "t000-meso",
+   "t": 0,
+   "opts": {
+    "mesocardium": true
+   },
+   "label": "day 23 — the mesocardium intact",
+   "file": "viz-training/models-out/cardiac-looping/t000-meso.png",
+   "yaw": -1.35
+  },
+  {
+   "name": "t000-peri",
+   "t": 0,
+   "opts": {
+    "pericardium": true
+   },
+   "label": "day 23 in the pericardial cavity",
+   "file": "viz-training/models-out/cardiac-looping/t000-peri.png",
+   "yaw": -0.28
+  },
+  {
+   "name": "t100-peri",
+   "t": 1,
+   "opts": {
+    "pericardium": true
+   },
+   "label": "day 28 in the pericardial cavity",
+   "file": "viz-training/models-out/cardiac-looping/t100-peri.png",
+   "yaw": -0.28
+  },
+  {
+   "name": "t100-cut",
+   "t": 1,
+   "opts": {
+    "cutaway": true
+   },
+   "label": "cutaway — wall, jelly, endocardial tube",
+   "file": "viz-training/models-out/cardiac-looping/t100-cut.png",
+   "yaw": -0.28
+  },
+  {
+   "name": "t100-mir",
+   "t": 1,
+   "opts": {
+    "mirror": true,
+    "midline": true
+   },
+   "label": "the L-loop",
+   "file": "viz-training/models-out/cardiac-looping/t100-mir.png",
+   "yaw": -1.35
+  }
+ ],
+ "console": [
+  {
+   "type": "warning",
+   "text": "[.WebGL-0xfbc00151a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0xfbc00151a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0xfbc00151a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0xfbc00151a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  }
+ ],
+ "normals": [
+  {
+   "key": "sinus",
+   "verts": 21216,
+   "outward": 0.5161199095022625,
+   "hullVerts": 10404,
+   "outwardHull": 0.9746251441753172,
+   "tris": 7072,
+   "winding": 0.9903846153846154
+  },
+  {
+   "key": "atrium",
+   "verts": 30600,
+   "outward": 0.5159803921568628,
+   "hullVerts": 15096,
+   "outwardHull": 0.9787360890302067,
+   "tris": 10200,
+   "winding": 0.9933333333333333
+  },
+  {
+   "key": "ventricle",
+   "verts": 33864,
+   "outward": 0.5139971651311127,
+   "hullVerts": 16728,
+   "outwardHull": 0.9677187948350072,
+   "tris": 11288,
+   "winding": 0.9916725726435153
+  },
+  {
+   "key": "bulbus",
+   "verts": 27744,
+   "outward": 0.5168685121107266,
+   "hullVerts": 13668,
+   "outwardHull": 0.9703687445127305,
+   "tris": 9248,
+   "winding": 0.9926470588235294
+  },
+  {
+   "key": "truncus",
+   "verts": 17136,
+   "outward": 0.5119047619047619,
+   "hullVerts": 8364,
+   "outwardHull": 1,
+   "tris": 5712,
+   "winding": 0.9880952380952381
+  },
+  {
+   "key": "endocardium",
+   "verts": 18120,
+   "outward": 0.6711920529801324,
+   "hullVerts": 18000,
+   "outwardHull": 0.669,
+   "tris": 6040,
+   "winding": 0.9933774834437086
+  },
+  {
+   "key": "veins",
+   "verts": 1440,
+   "outward": 0.9416666666666667,
+   "hullVerts": 1344,
+   "outwardHull": 0.9375,
+   "tris": 480,
+   "winding": 0.9333333333333333
+  },
+  {
+   "key": "veins",
+   "verts": 1440,
+   "outward": 1,
+   "hullVerts": 1344,
+   "outwardHull": 1,
+   "tris": 480,
+   "winding": 0.9333333333333333
+  },
+  {
+   "key": "veins",
+   "verts": 1440,
+   "outward": 0.9416666666666667,
+   "hullVerts": 1344,
+   "outwardHull": 0.9375,
+   "tris": 480,
+   "winding": 0.9333333333333333
+  },
+  {
+   "key": "veins",
+   "verts": 1440,
+   "outward": 1,
+   "hullVerts": 1344,
+   "outwardHull": 1,
+   "tris": 480,
+   "winding": 0.9333333333333333
+  },
+  {
+   "key": "arches",
+   "verts": 1932,
+   "outward": 0.6242236024844721,
+   "hullVerts": 1848,
+   "outwardHull": 0.6071428571428571,
+   "tris": 644,
+   "winding": 0.9565217391304348
+  },
+  {
+   "key": "arches",
+   "verts": 1932,
+   "outward": 0.6149068322981367,
+   "hullVerts": 1848,
+   "outwardHull": 0.5974025974025974,
+   "tris": 644,
+   "winding": 0.9565217391304348
+  },
+  {
+   "key": "arches",
+   "verts": 936,
+   "outward": 1,
+   "hullVerts": 864,
+   "outwardHull": 1,
+   "tris": 312,
+   "winding": 0.9230769230769231
+  },
+  {
+   "key": "arches",
+   "verts": 1932,
+   "outward": 0.6133540372670807,
+   "hullVerts": 1848,
+   "outwardHull": 0.5957792207792207,
+   "tris": 644,
+   "winding": 0.9565217391304348
+  },
+  {
+   "key": "arches",
+   "verts": 1932,
+   "outward": 0.6118012422360248,
+   "hullVerts": 1848,
+   "outwardHull": 0.5941558441558441,
+   "tris": 644,
+   "winding": 0.9565217391304348
+  },
+  {
+   "key": "arches",
+   "verts": 936,
+   "outward": 1,
+   "hullVerts": 864,
+   "outwardHull": 1,
+   "tris": 312,
+   "winding": 0.9230769230769231
+  },
+  {
+   "key": "arches",
+   "verts": 2652,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 884,
+   "winding": 1
+  },
+  {
+   "key": "mesocardium",
+   "verts": 174,
+   "outward": 0.10344827586206896,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 58,
+   "winding": 1
+  },
+  {
+   "key": "mesocardium",
+   "verts": 174,
+   "outward": 0.6551724137931034,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 58,
+   "winding": 1
+  },
+  {
+   "key": "midline",
+   "verts": 528,
+   "outward": 1,
+   "hullVerts": 480,
+   "outwardHull": 1,
+   "tris": 176,
+   "winding": 0.9090909090909091
+  },
+  {
+   "key": "midline",
+   "verts": 336,
+   "outward": 1,
+   "hullVerts": 288,
+   "outwardHull": 1,
+   "tris": 112,
+   "winding": 0.8571428571428571
+  },
+  {
+   "key": "midline",
+   "verts": 336,
+   "outward": 1,
+   "hullVerts": 288,
+   "outwardHull": 1,
+   "tris": 112,
+   "winding": 0.8571428571428571
+  },
+  {
+   "key": "midline",
+   "verts": 336,
+   "outward": 1,
+   "hullVerts": 288,
+   "outwardHull": 1,
+   "tris": 112,
+   "winding": 0.8571428571428571
+  }
+ ],
+ "acceptance": {
+  "measured": {
+   "A": 0.6317561239500323,
+   "Bp": -0.5982187324106082,
+   "bvx": -0.7146770729072295,
+   "C": -0.796536444475034,
+   "D": 0.4084340207308119,
+   "E": 0.35632509815188695,
+   "F": -0.6702158357573987,
+   "H": 0.3138907376055118,
+   "I": 0.07199710334679055,
+   "G": 0.5806351325029647,
+   "centroids": {
+    "sinus": {
+     "x": 0.65547803619494,
+     "y": -2.7291823879300616,
+     "z": -0.13922331000486102
+    },
+    "atrium": {
+     "x": 1.14016585542579,
+     "y": -1.4963645132316914,
+     "z": -0.16478032052500166
+    },
+    "ventricle": {
+     "x": 0.07199710334679055,
+     "y": -1.9047985339625033,
+     "z": 0.6317561239500323
+    },
+    "bulbus": {
+     "x": -0.5982187324106082,
+     "y": -1.9943792372169373,
+     "z": 0.9880812221019193
+    },
+    "truncus": {
+     "x": -0.19237493314043863,
+     "y": -0.7130181446595544,
+     "z": 0.17808124140637174
+    }
+   },
+   "H65": 0.18323798000695157
+  },
+  "pass": {
+   "A": true,
+   "B'": true,
+   "C": true,
+   "D": true,
+   "E": true,
+   "F": true,
+   "G": true,
+   "H": true,
+   "I": true
+  },
+  "allPass": true,
+  "spec": {
+   "axes": "+x = embryo LEFT, -x = RIGHT, +y = CRANIAL, +z = VENTRAL",
+   "at_t": 1,
+   "tests": [
+    {
+     "id": "A",
+     "says": "the bulboventricular limb is convex VENTRALLY",
+     "must": "ventricle centroid z > 0"
+    },
+    {
+     "id": "B'",
+     "says": "the loop is DEXTRAL — a property of the CONVEXITY, not of the ventricle side",
+     "must": "bulbus centroid x < 0 AND the max |x| of the bulboventricular centreline is on the -x side"
+    },
+    {
+     "id": "C",
+     "says": "the atrium lies BEHIND the ventricle",
+     "must": "atrium z - ventricle z < 0"
+    },
+    {
+     "id": "D",
+     "says": "the atrium lies ABOVE the ventricle",
+     "must": "atrium y - ventricle y > 0"
+    },
+    {
+     "id": "E",
+     "says": "the bulbus lies VENTRAL to the ventricle",
+     "must": "bulbus z - ventricle z > 0"
+    },
+    {
+     "id": "F",
+     "says": "the bulbus lies to the RIGHT of the ventricle",
+     "must": "bulbus x - ventricle x < 0"
+    },
+    {
+     "id": "G",
+     "says": "the two sit SIDE BY SIDE, not one ABOVE the other",
+     "must": "|dx| > |dy| for bulbus minus ventricle"
+    },
+    {
+     "id": "H",
+     "says": "the two sit SIDE BY SIDE, not one BEHIND the other",
+     "must": "|dx| > |dz| for bulbus minus ventricle, at t = 1 AND at the t view 4 renders (0.65)"
+    },
+    {
+     "id": "I",
+     "says": "the primitive ventricle finishes LEFT of the median plane",
+     "must": "ventricle centroid x > 0"
+    },
+    {
+     "id": "M",
+     "says": "the mirror variant is a REFLECTION, not a rotation",
+     "must": "the signed volume of the sinus-atrium-ventricle-bulbus centroid tetrahedron NEGATES (ratio -1)"
+    }
+   ]
+  }
+ },
+ "refs": [
+  {
+   "key": "sinus_a",
+   "ref": "cardiac-looping#sinus@0",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 7072
+  },
+  {
+   "key": "atrium_a",
+   "ref": "cardiac-looping#atrium@0",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 10200
+  },
+  {
+   "key": "ventricle_a",
+   "ref": "cardiac-looping#ventricle@0",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 11288
+  },
+  {
+   "key": "bulbus_a",
+   "ref": "cardiac-looping#bulbus@0",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 9248
+  },
+  {
+   "key": "truncus_a",
+   "ref": "cardiac-looping#truncus@0",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5712
+  },
+  {
+   "key": "meso_a",
+   "ref": "cardiac-looping#mesocardium@0",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 116
+  },
+  {
+   "key": "sinus_b",
+   "ref": "cardiac-looping#sinus@0.65",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 7072
+  },
+  {
+   "key": "atrium_b",
+   "ref": "cardiac-looping#atrium@0.65",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 10200
+  },
+  {
+   "key": "ventricle_b",
+   "ref": "cardiac-looping#ventricle@0.65",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 11288
+  },
+  {
+   "key": "bulbus_b",
+   "ref": "cardiac-looping#bulbus@0.65",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 9248
+  },
+  {
+   "key": "truncus_b",
+   "ref": "cardiac-looping#truncus@0.65",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5712
+  },
+  {
+   "key": "sinus_c",
+   "ref": "cardiac-looping#sinus@1",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 7072
+  },
+  {
+   "key": "atrium_c",
+   "ref": "cardiac-looping#atrium@1",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 10200
+  },
+  {
+   "key": "ventricle_c",
+   "ref": "cardiac-looping#ventricle@1",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 11288
+  },
+  {
+   "key": "bulbus_c",
+   "ref": "cardiac-looping#bulbus@1",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 9248
+  },
+  {
+   "key": "truncus_c",
+   "ref": "cardiac-looping#truncus@1",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5712
+  },
+  {
+   "key": "veins_c",
+   "ref": "cardiac-looping#veins@1",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1920
+  },
+  {
+   "key": "arches_a",
+   "ref": "cardiac-looping#arches@0",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4084
+  },
+  {
+   "key": "arches_b",
+   "ref": "cardiac-looping#arches@0.65",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4084
+  },
+  {
+   "key": "arches_c",
+   "ref": "cardiac-looping#arches@1",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4084
+  },
+  {
+   "key": "endo_c",
+   "ref": "cardiac-looping#endocardium@1",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 6040
+  },
+  {
+   "key": "ventricle_l",
+   "ref": "cardiac-looping#ventricle@1+mirror",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 11288
+  },
+  {
+   "key": "bulbus_l",
+   "ref": "cardiac-looping#bulbus@1+mirror",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 9248
+  },
+  {
+   "key": "peri_a",
+   "ref": "cardiac-looping#pericardium@0",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5952
+  },
+  {
+   "key": "peri_c",
+   "ref": "cardiac-looping#pericardium@1",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5952
+  },
+  {
+   "key": "midline_c",
+   "ref": "cardiac-looping#midline@1",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 512
+  },
+  {
+   "key": "sinus_l",
+   "ref": "cardiac-looping#sinus@1+mirror",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 7072
+  },
+  {
+   "key": "atrium_l",
+   "ref": "cardiac-looping#atrium@1+mirror",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 10200
+  },
+  {
+   "key": "truncus_l",
+   "ref": "cardiac-looping#truncus@1+mirror",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5712
+  },
+  {
+   "key": "d_sinus",
+   "ref": "cardiac-looping#sinus@1+apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 7072
+  },
+  {
+   "key": "l_sinus",
+   "ref": "cardiac-looping#sinus@1+mirror,apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 7072
+  },
+  {
+   "key": "d_atrium",
+   "ref": "cardiac-looping#atrium@1+apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 10200
+  },
+  {
+   "key": "l_atrium",
+   "ref": "cardiac-looping#atrium@1+mirror,apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 10200
+  },
+  {
+   "key": "d_ventricle",
+   "ref": "cardiac-looping#ventricle@1+apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 11288
+  },
+  {
+   "key": "l_ventricle",
+   "ref": "cardiac-looping#ventricle@1+mirror,apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 11288
+  },
+  {
+   "key": "d_bulbus",
+   "ref": "cardiac-looping#bulbus@1+apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 9248
+  },
+  {
+   "key": "l_bulbus",
+   "ref": "cardiac-looping#bulbus@1+mirror,apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 9248
+  },
+  {
+   "key": "d_truncus",
+   "ref": "cardiac-looping#truncus@1+apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5712
+  },
+  {
+   "key": "l_truncus",
+   "ref": "cardiac-looping#truncus@1+mirror,apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5712
+  },
+  {
+   "key": "d_veins",
+   "ref": "cardiac-looping#veins@1+apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1920
+  },
+  {
+   "key": "l_veins",
+   "ref": "cardiac-looping#veins@1+mirror,apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1920
+  },
+  {
+   "key": "d_arches",
+   "ref": "cardiac-looping#arches@1+apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4084
+  },
+  {
+   "key": "l_arches",
+   "ref": "cardiac-looping#arches@1+mirror,apart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4084
+  },
+  {
+   "key": "veins_l",
+   "ref": "cardiac-looping#veins@1+mirror",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1920
+  },
+  {
+   "key": "arches_l",
+   "ref": "cardiac-looping#arches@1+mirror",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4084
+  }
+ ],
+ "adapterConsole": []
+}

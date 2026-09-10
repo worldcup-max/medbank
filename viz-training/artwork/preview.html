@@ -1,0 +1,26 @@
+<!doctype html><meta charset=utf8>
+<body style="margin:0;background:#141225;font:13px system-ui;color:#f3f0ff">
+<div id=out></div>
+<script>
+const KEYS=["disc_context","pit_origin","process","canal","plate","neurenteric","definitive","extent","axis","induce_neural","induce_sclerotome"];
+// beat-like combinations to eyeball
+const SHOTS=[
+ ["1 · the disc and the pit",["disc_context","pit_origin"]],
+ ["2 · stage 1 process",["disc_context","pit_origin","process"]],
+ ["3 · stage 2 canal",["disc_context","canal"]],
+ ["4 · stage 3 plate + neurenteric",["disc_context","plate","neurenteric"]],
+ ["5 · stage 4 definitive",["disc_context","definitive"]],
+ ["6 · extent and axis",["disc_context","definitive","extent","axis"]],
+ ["7 · what it induces",["disc_context","definitive","induce_neural","induce_sclerotome"]],
+ ["8 · everything",KEYS]
+];
+fetch("embryo-notochord-median.svg").then(r=>r.text()).then(src=>{
+ out.innerHTML=SHOTS.map(([t,on])=>
+  `<div style="padding:10px 14px"><div style="opacity:.7;margin-bottom:4px">${t}</div>
+   <div class=box style="background:#fff;border-radius:10px;overflow:hidden">${src}</div></div>`).join("");
+ document.querySelectorAll(".box").forEach((b,i)=>{
+   const on=new Set(SHOTS[i][1]);
+   b.querySelectorAll("[data-key]").forEach(g=>{ if(!on.has(g.getAttribute("data-key"))) g.style.display="none"; });
+ });
+});
+</script>

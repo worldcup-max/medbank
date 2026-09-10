@@ -1,0 +1,2477 @@
+{
+  "budget": 450000,
+  "floor": 6000,
+  "generated": "2026-09-10T16:23:13Z",
+  "meshes": {
+    "BP24": {
+      "source": 18942,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "BP28": {
+      "source": 19156,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "BP45": {
+      "source": 31644,
+      "allocated": 31644,
+      "atSourceResolution": true
+    },
+    "BP47": {
+      "source": 17208,
+      "allocated": 17208,
+      "atSourceResolution": true
+    },
+    "BP49": {
+      "source": 19906,
+      "allocated": 10701,
+      "atSourceResolution": false
+    },
+    "BP50": {
+      "source": 19926,
+      "allocated": 10711,
+      "atSourceResolution": false
+    },
+    "BP51": {
+      "source": 21388,
+      "allocated": 11497,
+      "atSourceResolution": false
+    },
+    "FMA10014": {
+      "source": 11286,
+      "allocated": 11286,
+      "atSourceResolution": true
+    },
+    "FMA10037": {
+      "source": 11928,
+      "allocated": 11928,
+      "atSourceResolution": true
+    },
+    "FMA10059": {
+      "source": 5652,
+      "allocated": 5652,
+      "atSourceResolution": true
+    },
+    "FMA10081": {
+      "source": 6038,
+      "allocated": 6038,
+      "atSourceResolution": true
+    },
+    "FMA10419": {
+      "source": 4128,
+      "allocated": 4128,
+      "atSourceResolution": true
+    },
+    "FMA10458": {
+      "source": 4280,
+      "allocated": 4280,
+      "atSourceResolution": true
+    },
+    "FMA10951": {
+      "source": 7686,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA11336": {
+      "source": 9516,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA12519": {
+      "source": 6172,
+      "allocated": 6172,
+      "atSourceResolution": true
+    },
+    "FMA12520": {
+      "source": 6870,
+      "allocated": 6870,
+      "atSourceResolution": true
+    },
+    "FMA12521": {
+      "source": 5278,
+      "allocated": 5278,
+      "atSourceResolution": true
+    },
+    "FMA12522": {
+      "source": 4224,
+      "allocated": 4224,
+      "atSourceResolution": true
+    },
+    "FMA12523": {
+      "source": 4754,
+      "allocated": 4754,
+      "atSourceResolution": true
+    },
+    "FMA12524": {
+      "source": 6350,
+      "allocated": 6350,
+      "atSourceResolution": true
+    },
+    "FMA12525": {
+      "source": 5222,
+      "allocated": 5222,
+      "atSourceResolution": true
+    },
+    "FMA13072": {
+      "source": 12946,
+      "allocated": 12946,
+      "atSourceResolution": true
+    },
+    "FMA13073": {
+      "source": 6946,
+      "allocated": 6946,
+      "atSourceResolution": true
+    },
+    "FMA13074": {
+      "source": 14750,
+      "allocated": 14750,
+      "atSourceResolution": true
+    },
+    "FMA13075": {
+      "source": 15426,
+      "allocated": 15426,
+      "atSourceResolution": true
+    },
+    "FMA13076": {
+      "source": 17282,
+      "allocated": 17282,
+      "atSourceResolution": true
+    },
+    "FMA13295": {
+      "source": 210666,
+      "allocated": 70572,
+      "atSourceResolution": false
+    },
+    "FMA13322": {
+      "source": 5112,
+      "allocated": 5112,
+      "atSourceResolution": true
+    },
+    "FMA13323": {
+      "source": 5140,
+      "allocated": 5140,
+      "atSourceResolution": true
+    },
+    "FMA13336": {
+      "source": 549294,
+      "allocated": 82993,
+      "atSourceResolution": false
+    },
+    "FMA13337": {
+      "source": 546370,
+      "allocated": 82551,
+      "atSourceResolution": false
+    },
+    "FMA13346": {
+      "source": 13946,
+      "allocated": 13946,
+      "atSourceResolution": true
+    },
+    "FMA13358": {
+      "source": 227978,
+      "allocated": 60200,
+      "atSourceResolution": false
+    },
+    "FMA13375": {
+      "source": 45360,
+      "allocated": 13303,
+      "atSourceResolution": false
+    },
+    "FMA13377": {
+      "source": 191206,
+      "allocated": 28889,
+      "atSourceResolution": false
+    },
+    "FMA13378": {
+      "source": 188862,
+      "allocated": 28535,
+      "atSourceResolution": false
+    },
+    "FMA13381": {
+      "source": 48254,
+      "allocated": 12742,
+      "atSourceResolution": false
+    },
+    "FMA13383": {
+      "source": 15092,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA13392": {
+      "source": 13984,
+      "allocated": 13984,
+      "atSourceResolution": true
+    },
+    "FMA13395": {
+      "source": 113256,
+      "allocated": 65538,
+      "atSourceResolution": false
+    },
+    "FMA13398": {
+      "source": 248640,
+      "allocated": 72919,
+      "atSourceResolution": false
+    },
+    "FMA13403": {
+      "source": 58938,
+      "allocated": 15563,
+      "atSourceResolution": false
+    },
+    "FMA13405": {
+      "source": 90336,
+      "allocated": 23854,
+      "atSourceResolution": false
+    },
+    "FMA13408": {
+      "source": 51314,
+      "allocated": 51314,
+      "atSourceResolution": true
+    },
+    "FMA13412": {
+      "source": 8154,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA13414": {
+      "source": 30620,
+      "allocated": 17719,
+      "atSourceResolution": false
+    },
+    "FMA13495": {
+      "source": 4970,
+      "allocated": 4970,
+      "atSourceResolution": true
+    },
+    "FMA13500": {
+      "source": 5174,
+      "allocated": 5174,
+      "atSourceResolution": true
+    },
+    "FMA13501": {
+      "source": 6308,
+      "allocated": 6308,
+      "atSourceResolution": true
+    },
+    "FMA13502": {
+      "source": 7336,
+      "allocated": 7336,
+      "atSourceResolution": true
+    },
+    "FMA13503": {
+      "source": 9058,
+      "allocated": 9058,
+      "atSourceResolution": true
+    },
+    "FMA13504": {
+      "source": 10386,
+      "allocated": 10386,
+      "atSourceResolution": true
+    },
+    "FMA13505": {
+      "source": 10202,
+      "allocated": 10202,
+      "atSourceResolution": true
+    },
+    "FMA13506": {
+      "source": 5040,
+      "allocated": 5040,
+      "atSourceResolution": true
+    },
+    "FMA13507": {
+      "source": 11534,
+      "allocated": 11534,
+      "atSourceResolution": true
+    },
+    "FMA13508": {
+      "source": 14280,
+      "allocated": 14280,
+      "atSourceResolution": true
+    },
+    "FMA13509": {
+      "source": 14538,
+      "allocated": 14538,
+      "atSourceResolution": true
+    },
+    "FMA13889": {
+      "source": 5052,
+      "allocated": 5052,
+      "atSourceResolution": true
+    },
+    "FMA13892": {
+      "source": 266412,
+      "allocated": 40252,
+      "atSourceResolution": false
+    },
+    "FMA13893": {
+      "source": 264182,
+      "allocated": 39915,
+      "atSourceResolution": false
+    },
+    "FMA13896": {
+      "source": 3032,
+      "allocated": 3032,
+      "atSourceResolution": true
+    },
+    "FMA13897": {
+      "source": 3516,
+      "allocated": 3516,
+      "atSourceResolution": true
+    },
+    "FMA13898": {
+      "source": 3444,
+      "allocated": 3444,
+      "atSourceResolution": true
+    },
+    "FMA13899": {
+      "source": 3238,
+      "allocated": 3238,
+      "atSourceResolution": true
+    },
+    "FMA13900": {
+      "source": 3912,
+      "allocated": 3912,
+      "atSourceResolution": true
+    },
+    "FMA14331": {
+      "source": 1352,
+      "allocated": 1352,
+      "atSourceResolution": true
+    },
+    "FMA14332": {
+      "source": 202,
+      "allocated": 202,
+      "atSourceResolution": true
+    },
+    "FMA14335": {
+      "source": 1538,
+      "allocated": 1538,
+      "atSourceResolution": true
+    },
+    "FMA14336": {
+      "source": 574,
+      "allocated": 574,
+      "atSourceResolution": true
+    },
+    "FMA14542": {
+      "source": 690,
+      "allocated": 690,
+      "atSourceResolution": true
+    },
+    "FMA14544": {
+      "source": 8824,
+      "allocated": 8824,
+      "atSourceResolution": true
+    },
+    "FMA14749": {
+      "source": 350,
+      "allocated": 350,
+      "atSourceResolution": true
+    },
+    "FMA14750": {
+      "source": 602,
+      "allocated": 602,
+      "atSourceResolution": true
+    },
+    "FMA14752": {
+      "source": 1754,
+      "allocated": 1754,
+      "atSourceResolution": true
+    },
+    "FMA14753": {
+      "source": 1308,
+      "allocated": 1308,
+      "atSourceResolution": true
+    },
+    "FMA14765": {
+      "source": 896,
+      "allocated": 896,
+      "atSourceResolution": true
+    },
+    "FMA14766": {
+      "source": 806,
+      "allocated": 806,
+      "atSourceResolution": true
+    },
+    "FMA14768": {
+      "source": 232,
+      "allocated": 232,
+      "atSourceResolution": true
+    },
+    "FMA14771": {
+      "source": 808,
+      "allocated": 808,
+      "atSourceResolution": true
+    },
+    "FMA14773": {
+      "source": 3326,
+      "allocated": 3326,
+      "atSourceResolution": true
+    },
+    "FMA15571": {
+      "source": 2210,
+      "allocated": 2210,
+      "atSourceResolution": true
+    },
+    "FMA15572": {
+      "source": 2226,
+      "allocated": 2226,
+      "atSourceResolution": true
+    },
+    "FMA15629": {
+      "source": 9874,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA15630": {
+      "source": 19788,
+      "allocated": 9757,
+      "atSourceResolution": false
+    },
+    "FMA15900": {
+      "source": 4016,
+      "allocated": 4016,
+      "atSourceResolution": true
+    },
+    "FMA16033": {
+      "source": 14152,
+      "allocated": 14152,
+      "atSourceResolution": true
+    },
+    "FMA16034": {
+      "source": 13602,
+      "allocated": 13602,
+      "atSourceResolution": true
+    },
+    "FMA16035": {
+      "source": 14270,
+      "allocated": 14270,
+      "atSourceResolution": true
+    },
+    "FMA16036": {
+      "source": 14490,
+      "allocated": 14490,
+      "atSourceResolution": true
+    },
+    "FMA16037": {
+      "source": 16178,
+      "allocated": 16178,
+      "atSourceResolution": true
+    },
+    "FMA16202": {
+      "source": 44416,
+      "allocated": 20000,
+      "atSourceResolution": false
+    },
+    "FMA16586": {
+      "source": 9716,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA16587": {
+      "source": 9470,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA18247": {
+      "source": 5252,
+      "allocated": 5252,
+      "atSourceResolution": true
+    },
+    "FMA18256": {
+      "source": 120,
+      "allocated": 120,
+      "atSourceResolution": true
+    },
+    "FMA18257": {
+      "source": 484,
+      "allocated": 484,
+      "atSourceResolution": true
+    },
+    "FMA18806": {
+      "source": 1344,
+      "allocated": 1344,
+      "atSourceResolution": true
+    },
+    "FMA18807": {
+      "source": 1288,
+      "allocated": 1288,
+      "atSourceResolution": true
+    },
+    "FMA18809": {
+      "source": 458,
+      "allocated": 458,
+      "atSourceResolution": true
+    },
+    "FMA18810": {
+      "source": 500,
+      "allocated": 500,
+      "atSourceResolution": true
+    },
+    "FMA18885": {
+      "source": 1326,
+      "allocated": 1326,
+      "atSourceResolution": true
+    },
+    "FMA18886": {
+      "source": 1448,
+      "allocated": 1448,
+      "atSourceResolution": true
+    },
+    "FMA18887": {
+      "source": 530,
+      "allocated": 530,
+      "atSourceResolution": true
+    },
+    "FMA18888": {
+      "source": 478,
+      "allocated": 478,
+      "atSourceResolution": true
+    },
+    "FMA19235": {
+      "source": 1504,
+      "allocated": 1504,
+      "atSourceResolution": true
+    },
+    "FMA19236": {
+      "source": 1498,
+      "allocated": 1498,
+      "atSourceResolution": true
+    },
+    "FMA19387": {
+      "source": 1084,
+      "allocated": 1084,
+      "atSourceResolution": true
+    },
+    "FMA19388": {
+      "source": 1080,
+      "allocated": 1080,
+      "atSourceResolution": true
+    },
+    "FMA19618": {
+      "source": 4860,
+      "allocated": 4860,
+      "atSourceResolution": true
+    },
+    "FMA19667": {
+      "source": 1186,
+      "allocated": 1186,
+      "atSourceResolution": true
+    },
+    "FMA21387": {
+      "source": 886,
+      "allocated": 886,
+      "atSourceResolution": true
+    },
+    "FMA21388": {
+      "source": 992,
+      "allocated": 992,
+      "atSourceResolution": true
+    },
+    "FMA21930": {
+      "source": 3668,
+      "allocated": 3668,
+      "atSourceResolution": true
+    },
+    "FMA21964": {
+      "source": 12068,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA21965": {
+      "source": 11704,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA22322": {
+      "source": 44402,
+      "allocated": 12089,
+      "atSourceResolution": false
+    },
+    "FMA22323": {
+      "source": 44306,
+      "allocated": 14842,
+      "atSourceResolution": false
+    },
+    "FMA22324": {
+      "source": 37770,
+      "allocated": 16319,
+      "atSourceResolution": false
+    },
+    "FMA22325": {
+      "source": 35424,
+      "allocated": 35424,
+      "atSourceResolution": true
+    },
+    "FMA22326": {
+      "source": 11760,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA22328": {
+      "source": 34226,
+      "allocated": 14788,
+      "atSourceResolution": false
+    },
+    "FMA22330": {
+      "source": 51818,
+      "allocated": 22389,
+      "atSourceResolution": false
+    },
+    "FMA22332": {
+      "source": 63110,
+      "allocated": 28512,
+      "atSourceResolution": false
+    },
+    "FMA22334": {
+      "source": 4512,
+      "allocated": 4512,
+      "atSourceResolution": true
+    },
+    "FMA22336": {
+      "source": 9778,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA22338": {
+      "source": 16770,
+      "allocated": 7246,
+      "atSourceResolution": false
+    },
+    "FMA22340": {
+      "source": 15100,
+      "allocated": 6524,
+      "atSourceResolution": false
+    },
+    "FMA22342": {
+      "source": 56614,
+      "allocated": 15414,
+      "atSourceResolution": false
+    },
+    "FMA22343": {
+      "source": 55766,
+      "allocated": 18681,
+      "atSourceResolution": false
+    },
+    "FMA22344": {
+      "source": 313270,
+      "allocated": 47332,
+      "atSourceResolution": false
+    },
+    "FMA22345": {
+      "source": 312862,
+      "allocated": 47271,
+      "atSourceResolution": false
+    },
+    "FMA22346": {
+      "source": 11214,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA22347": {
+      "source": 11044,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA22348": {
+      "source": 25896,
+      "allocated": 8675,
+      "atSourceResolution": false
+    },
+    "FMA22349": {
+      "source": 25602,
+      "allocated": 8576,
+      "atSourceResolution": false
+    },
+    "FMA22354": {
+      "source": 52418,
+      "allocated": 14272,
+      "atSourceResolution": false
+    },
+    "FMA22358": {
+      "source": 43550,
+      "allocated": 18816,
+      "atSourceResolution": false
+    },
+    "FMA22425": {
+      "source": 18688,
+      "allocated": 8443,
+      "atSourceResolution": false
+    },
+    "FMA22448": {
+      "source": 74564,
+      "allocated": 32217,
+      "atSourceResolution": false
+    },
+    "FMA22450": {
+      "source": 20150,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA22452": {
+      "source": 21608,
+      "allocated": 9762,
+      "atSourceResolution": false
+    },
+    "FMA22456": {
+      "source": 37142,
+      "allocated": 10113,
+      "atSourceResolution": false
+    },
+    "FMA22459": {
+      "source": 81974,
+      "allocated": 35418,
+      "atSourceResolution": false
+    },
+    "FMA22544": {
+      "source": 35914,
+      "allocated": 15517,
+      "atSourceResolution": false
+    },
+    "FMA22546": {
+      "source": 23802,
+      "allocated": 10284,
+      "atSourceResolution": false
+    },
+    "FMA22548": {
+      "source": 62574,
+      "allocated": 27036,
+      "atSourceResolution": false
+    },
+    "FMA22552": {
+      "source": 58214,
+      "allocated": 25152,
+      "atSourceResolution": false
+    },
+    "FMA22554": {
+      "source": 35734,
+      "allocated": 15439,
+      "atSourceResolution": false
+    },
+    "FMA22558": {
+      "source": 68566,
+      "allocated": 29625,
+      "atSourceResolution": false
+    },
+    "FMA22560": {
+      "source": 47020,
+      "allocated": 31051,
+      "atSourceResolution": false
+    },
+    "FMA22591": {
+      "source": 11446,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA22726": {
+      "source": 44544,
+      "allocated": 11762,
+      "atSourceResolution": false
+    },
+    "FMA22728": {
+      "source": 53260,
+      "allocated": 14064,
+      "atSourceResolution": false
+    },
+    "FMA22740": {
+      "source": 107548,
+      "allocated": 28399,
+      "atSourceResolution": false
+    },
+    "FMA22742": {
+      "source": 57922,
+      "allocated": 15295,
+      "atSourceResolution": false
+    },
+    "FMA22744": {
+      "source": 20728,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA22751": {
+      "source": 107160,
+      "allocated": 28297,
+      "atSourceResolution": false
+    },
+    "FMA22754": {
+      "source": 15852,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA22757": {
+      "source": 18764,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA22779": {
+      "source": 55980,
+      "allocated": 14782,
+      "atSourceResolution": false
+    },
+    "FMA22781": {
+      "source": 6016,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA22872": {
+      "source": 50598,
+      "allocated": 13361,
+      "atSourceResolution": false
+    },
+    "FMA22874": {
+      "source": 26166,
+      "allocated": 6909,
+      "atSourceResolution": false
+    },
+    "FMA22876": {
+      "source": 27454,
+      "allocated": 7250,
+      "atSourceResolution": false
+    },
+    "FMA22878": {
+      "source": 73986,
+      "allocated": 19537,
+      "atSourceResolution": false
+    },
+    "FMA23083": {
+      "source": 88394,
+      "allocated": 23341,
+      "atSourceResolution": false
+    },
+    "FMA23089": {
+      "source": 28990,
+      "allocated": 7655,
+      "atSourceResolution": false
+    },
+    "FMA23130": {
+      "source": 16268,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA23464": {
+      "source": 2804,
+      "allocated": 2804,
+      "atSourceResolution": true
+    },
+    "FMA23467": {
+      "source": 3592,
+      "allocated": 3592,
+      "atSourceResolution": true
+    },
+    "FMA23707": {
+      "source": 14414,
+      "allocated": 14051,
+      "atSourceResolution": false
+    },
+    "FMA23725": {
+      "source": 616,
+      "allocated": 616,
+      "atSourceResolution": true
+    },
+    "FMA24435": {
+      "source": 1074,
+      "allocated": 1074,
+      "atSourceResolution": true
+    },
+    "FMA24437": {
+      "source": 864,
+      "allocated": 864,
+      "atSourceResolution": true
+    },
+    "FMA24439": {
+      "source": 704,
+      "allocated": 704,
+      "atSourceResolution": true
+    },
+    "FMA24441": {
+      "source": 396,
+      "allocated": 396,
+      "atSourceResolution": true
+    },
+    "FMA24443": {
+      "source": 1026,
+      "allocated": 1026,
+      "atSourceResolution": true
+    },
+    "FMA24446": {
+      "source": 1284,
+      "allocated": 1284,
+      "atSourceResolution": true
+    },
+    "FMA24448": {
+      "source": 1150,
+      "allocated": 1150,
+      "atSourceResolution": true
+    },
+    "FMA24450": {
+      "source": 1368,
+      "allocated": 1368,
+      "atSourceResolution": true
+    },
+    "FMA24451": {
+      "source": 1664,
+      "allocated": 1664,
+      "atSourceResolution": true
+    },
+    "FMA24452": {
+      "source": 1968,
+      "allocated": 1968,
+      "atSourceResolution": true
+    },
+    "FMA24453": {
+      "source": 1620,
+      "allocated": 1620,
+      "atSourceResolution": true
+    },
+    "FMA24454": {
+      "source": 1208,
+      "allocated": 1208,
+      "atSourceResolution": true
+    },
+    "FMA24455": {
+      "source": 1140,
+      "allocated": 1140,
+      "atSourceResolution": true
+    },
+    "FMA24456": {
+      "source": 1476,
+      "allocated": 1476,
+      "atSourceResolution": true
+    },
+    "FMA24457": {
+      "source": 1350,
+      "allocated": 1350,
+      "atSourceResolution": true
+    },
+    "FMA24458": {
+      "source": 900,
+      "allocated": 900,
+      "atSourceResolution": true
+    },
+    "FMA24460": {
+      "source": 656,
+      "allocated": 656,
+      "atSourceResolution": true
+    },
+    "FMA24461": {
+      "source": 640,
+      "allocated": 640,
+      "atSourceResolution": true
+    },
+    "FMA24462": {
+      "source": 452,
+      "allocated": 452,
+      "atSourceResolution": true
+    },
+    "FMA24463": {
+      "source": 466,
+      "allocated": 466,
+      "atSourceResolution": true
+    },
+    "FMA24464": {
+      "source": 2434,
+      "allocated": 2434,
+      "atSourceResolution": true
+    },
+    "FMA24466": {
+      "source": 3218,
+      "allocated": 3218,
+      "atSourceResolution": true
+    },
+    "FMA24468": {
+      "source": 3018,
+      "allocated": 3018,
+      "atSourceResolution": true
+    },
+    "FMA24470": {
+      "source": 2306,
+      "allocated": 2306,
+      "atSourceResolution": true
+    },
+    "FMA24472": {
+      "source": 2178,
+      "allocated": 2178,
+      "atSourceResolution": true
+    },
+    "FMA24474": {
+      "source": 12990,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA24475": {
+      "source": 13202,
+      "allocated": 13202,
+      "atSourceResolution": true
+    },
+    "FMA24477": {
+      "source": 6850,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA24480": {
+      "source": 4622,
+      "allocated": 4622,
+      "atSourceResolution": true
+    },
+    "FMA24482": {
+      "source": 5962,
+      "allocated": 5962,
+      "atSourceResolution": true
+    },
+    "FMA24486": {
+      "source": 1334,
+      "allocated": 1334,
+      "atSourceResolution": true
+    },
+    "FMA24497": {
+      "source": 5448,
+      "allocated": 5448,
+      "atSourceResolution": true
+    },
+    "FMA24500": {
+      "source": 3022,
+      "allocated": 3022,
+      "atSourceResolution": true
+    },
+    "FMA24507": {
+      "source": 4886,
+      "allocated": 4886,
+      "atSourceResolution": true
+    },
+    "FMA24509": {
+      "source": 3258,
+      "allocated": 3258,
+      "atSourceResolution": true
+    },
+    "FMA24511": {
+      "source": 3030,
+      "allocated": 3030,
+      "atSourceResolution": true
+    },
+    "FMA24513": {
+      "source": 2918,
+      "allocated": 2918,
+      "atSourceResolution": true
+    },
+    "FMA24515": {
+      "source": 3432,
+      "allocated": 3432,
+      "atSourceResolution": true
+    },
+    "FMA24521": {
+      "source": 4114,
+      "allocated": 4114,
+      "atSourceResolution": true
+    },
+    "FMA24523": {
+      "source": 1948,
+      "allocated": 1948,
+      "atSourceResolution": true
+    },
+    "FMA24525": {
+      "source": 2702,
+      "allocated": 2702,
+      "atSourceResolution": true
+    },
+    "FMA24528": {
+      "source": 3634,
+      "allocated": 3634,
+      "atSourceResolution": true
+    },
+    "FMA25058": {
+      "source": 3014,
+      "allocated": 3014,
+      "atSourceResolution": true
+    },
+    "FMA258714": {
+      "source": 3298,
+      "allocated": 3298,
+      "atSourceResolution": true
+    },
+    "FMA258716": {
+      "source": 7396,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA258847": {
+      "source": 46410,
+      "allocated": 30648,
+      "atSourceResolution": false
+    },
+    "FMA274027": {
+      "source": 21558,
+      "allocated": 10587,
+      "atSourceResolution": false
+    },
+    "FMA274029": {
+      "source": 21508,
+      "allocated": 10562,
+      "atSourceResolution": false
+    },
+    "FMA32544": {
+      "source": 14318,
+      "allocated": 14318,
+      "atSourceResolution": true
+    },
+    "FMA32547": {
+      "source": 31680,
+      "allocated": 31680,
+      "atSourceResolution": true
+    },
+    "FMA32551": {
+      "source": 17148,
+      "allocated": 9923,
+      "atSourceResolution": false
+    },
+    "FMA32553": {
+      "source": 15224,
+      "allocated": 15224,
+      "atSourceResolution": true
+    },
+    "FMA33581": {
+      "source": 69632,
+      "allocated": 18387,
+      "atSourceResolution": false
+    },
+    "FMA33584": {
+      "source": 30584,
+      "allocated": 8076,
+      "atSourceResolution": false
+    },
+    "FMA33586": {
+      "source": 46450,
+      "allocated": 12266,
+      "atSourceResolution": false
+    },
+    "FMA34680": {
+      "source": 29082,
+      "allocated": 8529,
+      "atSourceResolution": false
+    },
+    "FMA34682": {
+      "source": 29682,
+      "allocated": 29682,
+      "atSourceResolution": true
+    },
+    "FMA34684": {
+      "source": 44010,
+      "allocated": 44010,
+      "atSourceResolution": true
+    },
+    "FMA34690": {
+      "source": 9330,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA35192": {
+      "source": 64356,
+      "allocated": 42499,
+      "atSourceResolution": false
+    },
+    "FMA3736": {
+      "source": 2156,
+      "allocated": 2156,
+      "atSourceResolution": true
+    },
+    "FMA37386": {
+      "source": 6352,
+      "allocated": 6352,
+      "atSourceResolution": true
+    },
+    "FMA37390": {
+      "source": 7904,
+      "allocated": 7904,
+      "atSourceResolution": true
+    },
+    "FMA37396": {
+      "source": 7074,
+      "allocated": 7074,
+      "atSourceResolution": true
+    },
+    "FMA37398": {
+      "source": 3144,
+      "allocated": 3144,
+      "atSourceResolution": true
+    },
+    "FMA37400": {
+      "source": 4664,
+      "allocated": 4664,
+      "atSourceResolution": true
+    },
+    "FMA37459": {
+      "source": 17158,
+      "allocated": 17158,
+      "atSourceResolution": true
+    },
+    "FMA37461": {
+      "source": 32548,
+      "allocated": 32548,
+      "atSourceResolution": true
+    },
+    "FMA37463": {
+      "source": 13230,
+      "allocated": 13230,
+      "atSourceResolution": true
+    },
+    "FMA37665": {
+      "source": 11648,
+      "allocated": 7641,
+      "atSourceResolution": false
+    },
+    "FMA3768": {
+      "source": 3282,
+      "allocated": 3282,
+      "atSourceResolution": true
+    },
+    "FMA37684": {
+      "source": 27840,
+      "allocated": 18263,
+      "atSourceResolution": false
+    },
+    "FMA37686": {
+      "source": 32266,
+      "allocated": 32266,
+      "atSourceResolution": true
+    },
+    "FMA37695": {
+      "source": 26880,
+      "allocated": 26880,
+      "atSourceResolution": true
+    },
+    "FMA37697": {
+      "source": 36312,
+      "allocated": 36312,
+      "atSourceResolution": true
+    },
+    "FMA37699": {
+      "source": 39514,
+      "allocated": 39514,
+      "atSourceResolution": true
+    },
+    "FMA37705": {
+      "source": 14436,
+      "allocated": 14436,
+      "atSourceResolution": true
+    },
+    "FMA37741": {
+      "source": 3946,
+      "allocated": 3946,
+      "atSourceResolution": true
+    },
+    "FMA37743": {
+      "source": 4322,
+      "allocated": 4322,
+      "atSourceResolution": true
+    },
+    "FMA37745": {
+      "source": 4442,
+      "allocated": 4442,
+      "atSourceResolution": true
+    },
+    "FMA3784": {
+      "source": 23808,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA3802": {
+      "source": 5154,
+      "allocated": 5154,
+      "atSourceResolution": true
+    },
+    "FMA3818": {
+      "source": 4908,
+      "allocated": 4908,
+      "atSourceResolution": true
+    },
+    "FMA38454": {
+      "source": 14666,
+      "allocated": 14297,
+      "atSourceResolution": false
+    },
+    "FMA38460": {
+      "source": 16722,
+      "allocated": 16301,
+      "atSourceResolution": false
+    },
+    "FMA38463": {
+      "source": 44410,
+      "allocated": 43293,
+      "atSourceResolution": false
+    },
+    "FMA38479": {
+      "source": 71294,
+      "allocated": 69500,
+      "atSourceResolution": false
+    },
+    "FMA38482": {
+      "source": 19048,
+      "allocated": 18569,
+      "atSourceResolution": false
+    },
+    "FMA38486": {
+      "source": 73160,
+      "allocated": 73160,
+      "atSourceResolution": true
+    },
+    "FMA38495": {
+      "source": 37140,
+      "allocated": 37140,
+      "atSourceResolution": true
+    },
+    "FMA38498": {
+      "source": 31496,
+      "allocated": 31496,
+      "atSourceResolution": true
+    },
+    "FMA38501": {
+      "source": 64444,
+      "allocated": 64444,
+      "atSourceResolution": true
+    },
+    "FMA38504": {
+      "source": 21540,
+      "allocated": 21540,
+      "atSourceResolution": true
+    },
+    "FMA38513": {
+      "source": 27650,
+      "allocated": 27650,
+      "atSourceResolution": true
+    },
+    "FMA38516": {
+      "source": 24766,
+      "allocated": 24766,
+      "atSourceResolution": true
+    },
+    "FMA38519": {
+      "source": 11732,
+      "allocated": 11732,
+      "atSourceResolution": true
+    },
+    "FMA38522": {
+      "source": 16234,
+      "allocated": 16234,
+      "atSourceResolution": true
+    },
+    "FMA38525": {
+      "source": 11670,
+      "allocated": 11670,
+      "atSourceResolution": true
+    },
+    "FMA38560": {
+      "source": 25978,
+      "allocated": 25324,
+      "atSourceResolution": false
+    },
+    "FMA38562": {
+      "source": 11374,
+      "allocated": 11088,
+      "atSourceResolution": false
+    },
+    "FMA38617": {
+      "source": 39130,
+      "allocated": 38146,
+      "atSourceResolution": false
+    },
+    "FMA38619": {
+      "source": 15216,
+      "allocated": 14833,
+      "atSourceResolution": false
+    },
+    "FMA38638": {
+      "source": 128150,
+      "allocated": 124926,
+      "atSourceResolution": false
+    },
+    "FMA38640": {
+      "source": 12768,
+      "allocated": 12447,
+      "atSourceResolution": false
+    },
+    "FMA38928": {
+      "source": 82990,
+      "allocated": 37493,
+      "atSourceResolution": false
+    },
+    "FMA38930": {
+      "source": 95564,
+      "allocated": 46765,
+      "atSourceResolution": false
+    },
+    "FMA38932": {
+      "source": 65814,
+      "allocated": 32207,
+      "atSourceResolution": false
+    },
+    "FMA38934": {
+      "source": 61866,
+      "allocated": 30275,
+      "atSourceResolution": false
+    },
+    "FMA3895": {
+      "source": 3542,
+      "allocated": 3542,
+      "atSourceResolution": true
+    },
+    "FMA3941": {
+      "source": 4424,
+      "allocated": 4424,
+      "atSourceResolution": true
+    },
+    "FMA3953": {
+      "source": 2260,
+      "allocated": 2260,
+      "atSourceResolution": true
+    },
+    "FMA40120": {
+      "source": 10648,
+      "allocated": 10380,
+      "atSourceResolution": false
+    },
+    "FMA4058": {
+      "source": 698,
+      "allocated": 698,
+      "atSourceResolution": true
+    },
+    "FMA42398": {
+      "source": 15236,
+      "allocated": 15236,
+      "atSourceResolution": true
+    },
+    "FMA42402": {
+      "source": 5564,
+      "allocated": 5564,
+      "atSourceResolution": true
+    },
+    "FMA42404": {
+      "source": 17328,
+      "allocated": 17328,
+      "atSourceResolution": true
+    },
+    "FMA43883": {
+      "source": 49262,
+      "allocated": 24000,
+      "atSourceResolution": false
+    },
+    "FMA44249": {
+      "source": 35464,
+      "allocated": 35464,
+      "atSourceResolution": true
+    },
+    "FMA45097": {
+      "source": 576,
+      "allocated": 576,
+      "atSourceResolution": true
+    },
+    "FMA45854": {
+      "source": 23080,
+      "allocated": 23080,
+      "atSourceResolution": true
+    },
+    "FMA45855": {
+      "source": 23362,
+      "allocated": 23362,
+      "atSourceResolution": true
+    },
+    "FMA45856": {
+      "source": 17924,
+      "allocated": 17924,
+      "atSourceResolution": true
+    },
+    "FMA45857": {
+      "source": 17838,
+      "allocated": 17838,
+      "atSourceResolution": true
+    },
+    "FMA45858": {
+      "source": 18478,
+      "allocated": 18478,
+      "atSourceResolution": true
+    },
+    "FMA45859": {
+      "source": 18342,
+      "allocated": 18342,
+      "atSourceResolution": true
+    },
+    "FMA45874": {
+      "source": 7546,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA45888": {
+      "source": 73098,
+      "allocated": 31583,
+      "atSourceResolution": false
+    },
+    "FMA45891": {
+      "source": 25478,
+      "allocated": 11008,
+      "atSourceResolution": false
+    },
+    "FMA45957": {
+      "source": 64772,
+      "allocated": 27986,
+      "atSourceResolution": false
+    },
+    "FMA45960": {
+      "source": 49104,
+      "allocated": 24030,
+      "atSourceResolution": false
+    },
+    "FMA46110": {
+      "source": 3952,
+      "allocated": 3952,
+      "atSourceResolution": true
+    },
+    "FMA46121": {
+      "source": 4692,
+      "allocated": 4692,
+      "atSourceResolution": true
+    },
+    "FMA46123": {
+      "source": 10192,
+      "allocated": 10192,
+      "atSourceResolution": true
+    },
+    "FMA46442": {
+      "source": 6844,
+      "allocated": 6844,
+      "atSourceResolution": true
+    },
+    "FMA46443": {
+      "source": 9736,
+      "allocated": 9736,
+      "atSourceResolution": true
+    },
+    "FMA46444": {
+      "source": 9702,
+      "allocated": 9702,
+      "atSourceResolution": true
+    },
+    "FMA4685": {
+      "source": 252,
+      "allocated": 252,
+      "atSourceResolution": true
+    },
+    "FMA4694": {
+      "source": 3234,
+      "allocated": 3234,
+      "atSourceResolution": true
+    },
+    "FMA4706": {
+      "source": 1922,
+      "allocated": 1922,
+      "atSourceResolution": true
+    },
+    "FMA4707": {
+      "source": 7476,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA4720": {
+      "source": 1532,
+      "allocated": 1532,
+      "atSourceResolution": true
+    },
+    "FMA4751": {
+      "source": 1400,
+      "allocated": 1400,
+      "atSourceResolution": true
+    },
+    "FMA4754": {
+      "source": 580,
+      "allocated": 580,
+      "atSourceResolution": true
+    },
+    "FMA4755": {
+      "source": 946,
+      "allocated": 946,
+      "atSourceResolution": true
+    },
+    "FMA4761": {
+      "source": 1918,
+      "allocated": 1918,
+      "atSourceResolution": true
+    },
+    "FMA50737": {
+      "source": 454,
+      "allocated": 454,
+      "atSourceResolution": true
+    },
+    "FMA50875": {
+      "source": 10310,
+      "allocated": 10310,
+      "atSourceResolution": true
+    },
+    "FMA50878": {
+      "source": 10302,
+      "allocated": 10302,
+      "atSourceResolution": true
+    },
+    "FMA51142": {
+      "source": 32216,
+      "allocated": 32216,
+      "atSourceResolution": true
+    },
+    "FMA52735": {
+      "source": 27812,
+      "allocated": 7344,
+      "atSourceResolution": false
+    },
+    "FMA52736": {
+      "source": 15322,
+      "allocated": 15322,
+      "atSourceResolution": true
+    },
+    "FMA52738": {
+      "source": 11274,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA58776": {
+      "source": 243308,
+      "allocated": 119066,
+      "atSourceResolution": false
+    },
+    "FMA61822": {
+      "source": 176564,
+      "allocated": 94914,
+      "atSourceResolution": false
+    },
+    "FMA61844": {
+      "source": 25012,
+      "allocated": 12283,
+      "atSourceResolution": false
+    },
+    "FMA61961": {
+      "source": 3690,
+      "allocated": 3690,
+      "atSourceResolution": true
+    },
+    "FMA61970": {
+      "source": 46164,
+      "allocated": 26020,
+      "atSourceResolution": false
+    },
+    "FMA61975": {
+      "source": 2448,
+      "allocated": 2448,
+      "atSourceResolution": true
+    },
+    "FMA62004": {
+      "source": 52760,
+      "allocated": 25910,
+      "atSourceResolution": false
+    },
+    "FMA62032": {
+      "source": 384,
+      "allocated": 384,
+      "atSourceResolution": true
+    },
+    "FMA62033": {
+      "source": 2536,
+      "allocated": 2536,
+      "atSourceResolution": true
+    },
+    "FMA62045": {
+      "source": 7752,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA62072": {
+      "source": 3786,
+      "allocated": 3786,
+      "atSourceResolution": true
+    },
+    "FMA62327": {
+      "source": 6974,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA62382": {
+      "source": 10110,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA62394": {
+      "source": 46834,
+      "allocated": 26398,
+      "atSourceResolution": false
+    },
+    "FMA65014": {
+      "source": 58876,
+      "allocated": 40766,
+      "atSourceResolution": false
+    },
+    "FMA65016": {
+      "source": 69914,
+      "allocated": 30207,
+      "atSourceResolution": false
+    },
+    "FMA65018": {
+      "source": 60452,
+      "allocated": 26119,
+      "atSourceResolution": false
+    },
+    "FMA65198": {
+      "source": 4262,
+      "allocated": 4262,
+      "atSourceResolution": true
+    },
+    "FMA66326": {
+      "source": 116948,
+      "allocated": 44951,
+      "atSourceResolution": false
+    },
+    "FMA66643": {
+      "source": 72548,
+      "allocated": 27885,
+      "atSourceResolution": false
+    },
+    "FMA67936": {
+      "source": 10122,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA67943": {
+      "source": 90072,
+      "allocated": 44233,
+      "atSourceResolution": false
+    },
+    "FMA67944": {
+      "source": 238506,
+      "allocated": 117127,
+      "atSourceResolution": false
+    },
+    "FMA7131": {
+      "source": 2642,
+      "allocated": 2642,
+      "atSourceResolution": true
+    },
+    "FMA7148": {
+      "source": 9384,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA7196": {
+      "source": 9016,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA7197": {
+      "source": 19416,
+      "allocated": 8035,
+      "atSourceResolution": false
+    },
+    "FMA7202": {
+      "source": 13846,
+      "allocated": 13846,
+      "atSourceResolution": true
+    },
+    "FMA7204": {
+      "source": 12394,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA7205": {
+      "source": 15358,
+      "allocated": 7573,
+      "atSourceResolution": false
+    },
+    "FMA7206": {
+      "source": 11950,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA7207": {
+      "source": 31468,
+      "allocated": 31468,
+      "atSourceResolution": true
+    },
+    "FMA7208": {
+      "source": 31250,
+      "allocated": 31250,
+      "atSourceResolution": true
+    },
+    "FMA7211": {
+      "source": 278,
+      "allocated": 278,
+      "atSourceResolution": true
+    },
+    "FMA7212": {
+      "source": 280,
+      "allocated": 280,
+      "atSourceResolution": true
+    },
+    "FMA7234": {
+      "source": 47268,
+      "allocated": 18168,
+      "atSourceResolution": false
+    },
+    "FMA7235": {
+      "source": 19102,
+      "allocated": 7342,
+      "atSourceResolution": false
+    },
+    "FMA7246": {
+      "source": 18202,
+      "allocated": 6996,
+      "atSourceResolution": false
+    },
+    "FMA7260": {
+      "source": 3860,
+      "allocated": 3860,
+      "atSourceResolution": true
+    },
+    "FMA72653": {
+      "source": 30448,
+      "allocated": 16368,
+      "atSourceResolution": false
+    },
+    "FMA72654": {
+      "source": 30450,
+      "allocated": 16369,
+      "atSourceResolution": false
+    },
+    "FMA72655": {
+      "source": 15558,
+      "allocated": 8363,
+      "atSourceResolution": false
+    },
+    "FMA72656": {
+      "source": 15544,
+      "allocated": 8356,
+      "atSourceResolution": false
+    },
+    "FMA7266": {
+      "source": 3902,
+      "allocated": 3902,
+      "atSourceResolution": true
+    },
+    "FMA72661": {
+      "source": 18838,
+      "allocated": 10127,
+      "atSourceResolution": false
+    },
+    "FMA72662": {
+      "source": 18836,
+      "allocated": 10125,
+      "atSourceResolution": false
+    },
+    "FMA72665": {
+      "source": 16862,
+      "allocated": 9064,
+      "atSourceResolution": false
+    },
+    "FMA72666": {
+      "source": 16858,
+      "allocated": 9062,
+      "atSourceResolution": false
+    },
+    "FMA72667": {
+      "source": 9782,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA72668": {
+      "source": 9778,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA72669": {
+      "source": 13172,
+      "allocated": 7081,
+      "atSourceResolution": false
+    },
+    "FMA72670": {
+      "source": 13164,
+      "allocated": 7076,
+      "atSourceResolution": false
+    },
+    "FMA72685": {
+      "source": 12926,
+      "allocated": 6949,
+      "atSourceResolution": false
+    },
+    "FMA72686": {
+      "source": 12918,
+      "allocated": 6944,
+      "atSourceResolution": false
+    },
+    "FMA72687": {
+      "source": 13056,
+      "allocated": 7018,
+      "atSourceResolution": false
+    },
+    "FMA72688": {
+      "source": 13040,
+      "allocated": 7010,
+      "atSourceResolution": false
+    },
+    "FMA72689": {
+      "source": 6150,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA72690": {
+      "source": 6148,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA72701": {
+      "source": 15346,
+      "allocated": 8249,
+      "atSourceResolution": false
+    },
+    "FMA72702": {
+      "source": 15330,
+      "allocated": 8241,
+      "atSourceResolution": false
+    },
+    "FMA72705": {
+      "source": 3454,
+      "allocated": 3454,
+      "atSourceResolution": true
+    },
+    "FMA72706": {
+      "source": 3452,
+      "allocated": 3452,
+      "atSourceResolution": true
+    },
+    "FMA72713": {
+      "source": 4452,
+      "allocated": 4452,
+      "atSourceResolution": true
+    },
+    "FMA72714": {
+      "source": 4280,
+      "allocated": 4280,
+      "atSourceResolution": true
+    },
+    "FMA72717": {
+      "source": 11716,
+      "allocated": 6298,
+      "atSourceResolution": false
+    },
+    "FMA72718": {
+      "source": 11724,
+      "allocated": 6302,
+      "atSourceResolution": false
+    },
+    "FMA7274": {
+      "source": 331592,
+      "allocated": 127454,
+      "atSourceResolution": false
+    },
+    "FMA72800": {
+      "source": 8348,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA72801": {
+      "source": 8338,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA72804": {
+      "source": 10472,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA72805": {
+      "source": 10472,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA72826": {
+      "source": 11272,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA72827": {
+      "source": 11160,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA72828": {
+      "source": 30670,
+      "allocated": 20202,
+      "atSourceResolution": false
+    },
+    "FMA72829": {
+      "source": 30636,
+      "allocated": 17268,
+      "atSourceResolution": false
+    },
+    "FMA72830": {
+      "source": 23206,
+      "allocated": 15286,
+      "atSourceResolution": false
+    },
+    "FMA72831": {
+      "source": 30738,
+      "allocated": 17325,
+      "atSourceResolution": false
+    },
+    "FMA72832": {
+      "source": 1744,
+      "allocated": 1744,
+      "atSourceResolution": true
+    },
+    "FMA72833": {
+      "source": 1736,
+      "allocated": 1736,
+      "atSourceResolution": true
+    },
+    "FMA72908": {
+      "source": 48722,
+      "allocated": 27462,
+      "atSourceResolution": false
+    },
+    "FMA72909": {
+      "source": 48712,
+      "allocated": 27456,
+      "atSourceResolution": false
+    },
+    "FMA72924": {
+      "source": 29300,
+      "allocated": 16515,
+      "atSourceResolution": false
+    },
+    "FMA72925": {
+      "source": 29372,
+      "allocated": 14424,
+      "atSourceResolution": false
+    },
+    "FMA72939": {
+      "source": 3078,
+      "allocated": 3078,
+      "atSourceResolution": true
+    },
+    "FMA72940": {
+      "source": 3026,
+      "allocated": 3026,
+      "atSourceResolution": true
+    },
+    "FMA72975": {
+      "source": 18762,
+      "allocated": 10086,
+      "atSourceResolution": false
+    },
+    "FMA72976": {
+      "source": 18746,
+      "allocated": 10077,
+      "atSourceResolution": false
+    },
+    "FMA72977": {
+      "source": 12240,
+      "allocated": 6580,
+      "atSourceResolution": false
+    },
+    "FMA72978": {
+      "source": 12242,
+      "allocated": 6581,
+      "atSourceResolution": false
+    },
+    "FMA7333": {
+      "source": 30398,
+      "allocated": 11684,
+      "atSourceResolution": false
+    },
+    "FMA7337": {
+      "source": 65592,
+      "allocated": 25212,
+      "atSourceResolution": false
+    },
+    "FMA73413": {
+      "source": 3852,
+      "allocated": 3852,
+      "atSourceResolution": true
+    },
+    "FMA73414": {
+      "source": 3870,
+      "allocated": 3870,
+      "atSourceResolution": true
+    },
+    "FMA73422": {
+      "source": 204,
+      "allocated": 204,
+      "atSourceResolution": true
+    },
+    "FMA73423": {
+      "source": 204,
+      "allocated": 204,
+      "atSourceResolution": true
+    },
+    "FMA73434": {
+      "source": 270,
+      "allocated": 270,
+      "atSourceResolution": true
+    },
+    "FMA73435": {
+      "source": 270,
+      "allocated": 270,
+      "atSourceResolution": true
+    },
+    "FMA73461": {
+      "source": 730,
+      "allocated": 730,
+      "atSourceResolution": true
+    },
+    "FMA73462": {
+      "source": 714,
+      "allocated": 714,
+      "atSourceResolution": true
+    },
+    "FMA73463": {
+      "source": 686,
+      "allocated": 686,
+      "atSourceResolution": true
+    },
+    "FMA73464": {
+      "source": 672,
+      "allocated": 672,
+      "atSourceResolution": true
+    },
+    "FMA7370": {
+      "source": 40652,
+      "allocated": 15625,
+      "atSourceResolution": false
+    },
+    "FMA7371": {
+      "source": 44288,
+      "allocated": 17023,
+      "atSourceResolution": false
+    },
+    "FMA7383": {
+      "source": 23478,
+      "allocated": 9024,
+      "atSourceResolution": false
+    },
+    "FMA7394": {
+      "source": 13870,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA74075": {
+      "source": 58924,
+      "allocated": 8000,
+      "atSourceResolution": false
+    },
+    "FMA74077": {
+      "source": 29694,
+      "allocated": 8000,
+      "atSourceResolution": false
+    },
+    "FMA7409": {
+      "source": 115630,
+      "allocated": 48521,
+      "atSourceResolution": false
+    },
+    "FMA7486": {
+      "source": 11882,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA7487": {
+      "source": 19916,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA74877": {
+      "source": 1666,
+      "allocated": 1666,
+      "atSourceResolution": true
+    },
+    "FMA7488": {
+      "source": 4086,
+      "allocated": 4086,
+      "atSourceResolution": true
+    },
+    "FMA75351": {
+      "source": 4642,
+      "allocated": 4642,
+      "atSourceResolution": true
+    },
+    "FMA76891": {
+      "source": 31524,
+      "allocated": 31524,
+      "atSourceResolution": true
+    },
+    "FMA76892": {
+      "source": 37118,
+      "allocated": 37118,
+      "atSourceResolution": true
+    },
+    "FMA76893": {
+      "source": 49028,
+      "allocated": 49028,
+      "atSourceResolution": true
+    },
+    "FMA78449": {
+      "source": 78218,
+      "allocated": 38412,
+      "atSourceResolution": false
+    },
+    "FMA78450": {
+      "source": 78010,
+      "allocated": 38310,
+      "atSourceResolution": false
+    },
+    "FMA78454": {
+      "source": 16808,
+      "allocated": 8254,
+      "atSourceResolution": false
+    },
+    "FMA78467": {
+      "source": 2252,
+      "allocated": 2252,
+      "atSourceResolution": true
+    },
+    "FMA78469": {
+      "source": 30134,
+      "allocated": 14798,
+      "atSourceResolution": false
+    },
+    "FMA78497": {
+      "source": 3162,
+      "allocated": 3162,
+      "atSourceResolution": true
+    },
+    "FMA7857": {
+      "source": 14194,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA7882": {
+      "source": 23694,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA7886": {
+      "source": 2540,
+      "allocated": 2540,
+      "atSourceResolution": true
+    },
+    "FMA7909": {
+      "source": 30860,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA7913": {
+      "source": 2694,
+      "allocated": 2694,
+      "atSourceResolution": true
+    },
+    "FMA7957": {
+      "source": 38488,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA7976": {
+      "source": 3486,
+      "allocated": 3486,
+      "atSourceResolution": true
+    },
+    "FMA7987": {
+      "source": 15464,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA79979": {
+      "source": 36014,
+      "allocated": 10562,
+      "atSourceResolution": false
+    },
+    "FMA8012": {
+      "source": 25304,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8039": {
+      "source": 31212,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8066": {
+      "source": 41634,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8070": {
+      "source": 4830,
+      "allocated": 4830,
+      "atSourceResolution": true
+    },
+    "FMA8093": {
+      "source": 41568,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8148": {
+      "source": 37922,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8175": {
+      "source": 44634,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA81752": {
+      "source": 15462,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8194": {
+      "source": 6078,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8202": {
+      "source": 44434,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8229": {
+      "source": 43146,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8248": {
+      "source": 10492,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8256": {
+      "source": 44062,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8283": {
+      "source": 36646,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8310": {
+      "source": 37134,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8364": {
+      "source": 34278,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8391": {
+      "source": 36020,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8445": {
+      "source": 31010,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8472": {
+      "source": 31758,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8531": {
+      "source": 22428,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8532": {
+      "source": 22826,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8533": {
+      "source": 13262,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA8534": {
+      "source": 13726,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA86464": {
+      "source": 132552,
+      "allocated": 65095,
+      "atSourceResolution": false
+    },
+    "FMA9165": {
+      "source": 5614,
+      "allocated": 5614,
+      "atSourceResolution": true
+    },
+    "FMA9187": {
+      "source": 8360,
+      "allocated": 8360,
+      "atSourceResolution": true
+    },
+    "FMA9209": {
+      "source": 8910,
+      "allocated": 8910,
+      "atSourceResolution": true
+    },
+    "FMA9248": {
+      "source": 8930,
+      "allocated": 8930,
+      "atSourceResolution": true
+    },
+    "FMA9600": {
+      "source": 1754,
+      "allocated": 1754,
+      "atSourceResolution": true
+    },
+    "FMA9756": {
+      "source": 816056,
+      "allocated": 94651,
+      "atSourceResolution": false
+    },
+    "FMA9757": {
+      "source": 723154,
+      "allocated": 83875,
+      "atSourceResolution": false
+    },
+    "FMA9758": {
+      "source": 678014,
+      "allocated": 78640,
+      "atSourceResolution": false
+    },
+    "FMA9761": {
+      "source": 17528,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA9762": {
+      "source": 17396,
+      "allocated": 6000,
+      "atSourceResolution": false
+    },
+    "FMA9922": {
+      "source": 9834,
+      "allocated": 9834,
+      "atSourceResolution": true
+    },
+    "FMA9945": {
+      "source": 4896,
+      "allocated": 4896,
+      "atSourceResolution": true
+    },
+    "FMA9968": {
+      "source": 10740,
+      "allocated": 10740,
+      "atSourceResolution": true
+    },
+    "FMA9991": {
+      "source": 5206,
+      "allocated": 5206,
+      "atSourceResolution": true
+    }
+  }
+}

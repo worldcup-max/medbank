@@ -796,7 +796,7 @@
         },
         {
           "op": "CROSS_SECTION",
-          "axis": "y",
+          "axis": "z",
           "offset": 0.0,
           "animate": true
         },
@@ -870,7 +870,9 @@
     "author": "task",
     "authored_at": "2026-08-27",
     "audited_at": "2026-08-29",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-09-09",
+    "corrected_by": "task"
   },
   "gaps": [
     "There is no pancreas in the catalog. Searching all 934 entries for pancreas, pancreatic, islet, acinus, uncinate, head, neck, body and tail returns the pancreatic duct alone. So the gland itself - the organ this scene is about - has no surface a student can click, and the scene is status:\"candidate\" for that reason. The duct is used as the gland's stand-in because it runs the full length of the pancreas and therefore occupies its exact position and axis: option (a), the most specific part that does exist. Every label and narration says openly that this is the duct standing for the gland. The head, neck, body, tail and uncinate process are read off the duct's course and named in narration, and all five are in terms[] so a note that says 'uncinate process' still opens this scene.",

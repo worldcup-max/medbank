@@ -624,7 +624,7 @@
         },
         {
           "op": "CROSS_SECTION",
-          "axis": "y",
+          "axis": "z",
           "offset": 0,
           "animate": true
         },
@@ -763,6 +763,8 @@
     "author": "task",
     "authored_at": "2026-08-27",
     "audited_at": "2026-08-29",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-09-09",
+    "corrected_by": "task"
   }
 }

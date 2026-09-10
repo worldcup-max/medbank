@@ -22,8 +22,14 @@ honest about what you cannot.
 
 ## 1 · Find the item
 
-Open `viz-training/BUILD-QUEUE.json`. Review the item with status `built` — the message that fired you
-names it. If several are `built`, take the oldest `built_at`. If none is, there is nothing to review:
+You run on your own schedule, hourly at :35. Nothing pokes you and nothing tells you what to review —
+open `viz-training/BUILD-QUEUE.json` and take the item with status `built`. If several are `built`,
+take the **oldest `built_at`**; builds have run ahead of reviews before and the queue can hold three.
+
+(An earlier version of this task was fired by the build run instead. That is now forbidden, because a
+run fired from another cloud session inherits no device binding — it woke with no `$HOME/mnt`, no repo
+and no remote-devices tools, and could do nothing but report the failure. If you ever find yourself
+with a detailed description of an item and no repo, that is what has happened: refuse, and say so.) If none is, there is nothing to review:
 say so and stop. That is a complete run.
 
 Read `viz-training/BUILD-LOG.md` for what the builder said they did, and what they admitted to being
@@ -58,6 +64,22 @@ Two identical reviews catch the same things twice.
   view's clothes. Report it — the fix is `deferred_beats[]`, never deletion of the narration.
 - Nothing imported from a CDN; nothing reimplementing winding, normals, colour or silhouettes locally
   instead of using `render-kit.js`.
+
+### FIRST, BEFORE YOU READ THE BUILDER'S NOTES — decide your own order.
+
+Write down, from the scene and the curriculum entry alone, the three things you would check if nobody
+had told you anything. Then read `BUILD-LOG.md` and the item's `built_notes` as a CHECKLIST against
+that list, not as your itinerary.
+
+This is not ceremony. A review run observed it from the outside and it is the sharpest thing anyone
+has said about this loop: *the builder's write-up tells the reviewer where to look, in what order, and
+pre-argues the defence of each risky decision before the reviewer has formed a view. Even on a healthy
+run that ordering imports the builder's blind spots — the unlisted place is the one nobody checks.*
+
+A builder who is honest about their risky decisions is doing the right thing, and their notes are
+worth reading. But a defect the builder did not notice is by definition not in the notes, and that is
+the defect you exist to find. So: your order first, their list second, and give particular attention
+to anything their notes do **not** mention at all.
 
 ### Review 2 — anatomical. By you, in this order, and the order matters.
 
@@ -122,7 +144,9 @@ problems; it should keep growing that way. Do not silently work around a gap.
 ## 5 · Boundaries
 
 - Never modify the frozen Smart-Drill engine. Never touch `frankthewiz1@gmail.com`'s account data.
-- Do not `git commit`, `git push`, or deploy. Frank does those.
+- Do not `git commit`, `git push`, or deploy. Frank does those. **Do not run git at all**, not even
+  `git status`: this mount forbids deletion, so every git command leaves a `.git/*.lock` it cannot
+  remove and the next one fails. Ask in your reply if you need history.
 - Do not build the next item. You review; the build task builds. Two sessions on one file loses work.
 - If you change `sw.js`, read its current CACHE version first — another session moves it.
 

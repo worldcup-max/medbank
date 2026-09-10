@@ -193,12 +193,61 @@ not exist is a scene that teaches nobody, and "it should be a mesh" is only a re
 is a mesh to have. Where there is not, build it, and escalate honestly if it cannot reach the standard —
 that is what `ESCALATIONS.md` is for.
 
+## 5.5 · How much mesh a structure gets, and why a flat cap is always wrong
+
+Added 2026-09-10. This is a gap the standard had: §5 said where procedural belongs and where meshes
+belong, and nothing at all about how much mesh.
+
+Every mesh in the corpus had been decimated to the same flat cap — 3,000 triangles, a handful
+hand-raised. A flat cap is the wrong shape for the problem twice over. It spends the same budget on
+the femur a scene is ABOUT as on the twelfth rib sitting behind it for context. And it is blind to
+how many meshes a scene loads: the femur scene loads nineteen, the intercostal scene thirty-five, and
+a number that is generous for one is ruinous for the other.
+
+**What the cap was costing was not polish, and not the thing we expected.** A lumbar vertebra at
+3,000 triangles still has every process and every facet — the before/after is nearly identical, and
+the worry that started this was, on bone, unfounded. The damage was on muscle. The external oblique
+at 8,000 is a smooth slab; at 76,733 its fibres are legible across the whole belly, running
+inferomedially. Rectus abdominis gets its tendinous intersections back. **Fibre direction is how a
+student tells external oblique from internal, and external intercostal from internal** — it is
+examined. The cap was deleting the one feature that identifies the muscle.
+
+> **RULE.** Resolution is a PER-SCENE budget, never a per-mesh cap, and the budget is measured rather
+> than chosen: the heaviest scene already known to load. A scene under budget at full scan resolution
+> is left alone entirely. A scene over it shares the budget in proportion to source complexity —
+> which recovers "detail where the teaching is" from the geometry itself, without needing the `role`
+> field, because the subject of a scene is nearly always its most complex mesh. Floor at 6,000; a rib
+> at 6,000 is indistinguishable from its 44,634-triangle scan. Never give a mesh less than it already
+> ships. `tools/apply-mesh-budget.mjs` implements this. Do not decimate by hand.
+
+> **RULE.** Always decimate with `--verify`. It measures how far the surface actually moved, in mm,
+> and refuses any file whose bounding box shifted — landmark anchors are `uvw` fractions of that box,
+> so a box that moves silently moves every landmark on the bone. Across the whole corpus the worst
+> surface deviation is 0.489 mm and no box moved at all.
+
+> **RULE.** A loader's give-up clock measures SILENCE, never elapsed time. Raising resolution broke
+> the intercostal scene the same day it shipped: the adapter gave up 12 seconds after each request
+> started, so the scene mounted with 32 of its 35 structures and the three it dropped were the
+> external, internal and innermost intercostals — every muscle the scene exists to teach, leaving a
+> bare rib cage. Measured side by side against the live bucket: a flat 12-second timeout killed a
+> download at 12.5 s with 2,368,058 of 3,931,984 bytes already in hand and sixty progress events
+> received, while a 15-second stall timer re-armed on progress finished the same file in 15.7 s. A
+> flat timeout does not drop meshes at random. It drops the biggest, and the biggest mesh in a scene
+> is nearly always its subject — the same shape of bug as the flat decimation cap above.
+
+**A budget derived from a scene must leave that scene alone.** The first version of this rule used
+the vertebral column's current weight, 419,568 triangles. That scene ships 47 of its 48 meshes at
+full source and the sacrum capped, so its SOURCE total is 443,984 — over its own budget. The rule
+promptly reallocated it and cut T5 from 9,834 back to 6,000. If the scene you measured is not a fixed
+point of the rule you derived, the rule is measuring something other than what it claims.
+
 ## 6 · Log
 
 | date | what | outcome |
 |---|---|---|
 | 2026-09-09 | neurulation, procedural, v1–v2 | shipped; layered sheets in contact still unresolved |
 | 2026-09-10 | cardiac looping, procedural, v1 | six passes; four machinery bugs found and fixed in `render-kit.js` |
+| 2026-09-10 | mesh resolution, whole corpus | flat 3,000 cap replaced by a per-scene budget; 254 of 494 meshes now at full scan resolution; muscle fibre direction recovered |
 
 Every structure built after this date uses `render-kit.js`. A structure that reimplements winding,
 normals, silhouettes or colour conversion locally is a bug, not a style choice.

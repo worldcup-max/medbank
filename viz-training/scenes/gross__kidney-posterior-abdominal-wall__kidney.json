@@ -1098,7 +1098,7 @@
         },
         {
           "op": "CROSS_SECTION",
-          "axis": "z",
+          "axis": "y",
           "offset": 0,
           "animate": true
         },
@@ -1271,7 +1271,9 @@
     "author": "task",
     "authored_at": "2026-08-27",
     "audited_at": "2026-08-29",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-09-09",
+    "corrected_by": "task"
   },
   "gaps": [
     "The kidney is one solid model. The catalog holds no renal cortex, medulla, pyramid, papilla, column of Bertin, minor calyx, major calyx or renal pelvis, so beat three teaches the internal architecture entirely by narration over a CROSS_SECTION cut of the whole organ. A student can see that the organ has an inside but cannot click a pyramid or a calyx. Every internal name is carried in match.terms and in the kidney structures' own terms[], so a note that says 'column of Bertin' still opens this scene at the right subject. An internal-structure model, or a companion diagram-mode scene of the coronal section, is the single highest-value addition for this topic.",

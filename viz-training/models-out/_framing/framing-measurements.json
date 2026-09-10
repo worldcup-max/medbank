@@ -1,0 +1,284 @@
+{
+  "item": "engine__refit-camera-on-isolate",
+  "measured_at": "2026-09-10T12:5xZ",
+  "embryology__cardiovascular-development__cardiac-looping": {
+    "canvas": {
+      "w": 1008,
+      "h": 440
+    },
+    "views": [
+      {
+        "view": 1,
+        "title": "Why a straight tube cannot stay straight",
+        "before": {
+          "fillH": 77.7,
+          "fillW": 10.5
+        },
+        "after": {
+          "fillH": 89.4,
+          "fillW": 12.1
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 2,
+        "title": "The dorsal mesocardium has already broken down",
+        "before": {
+          "fillH": 78.1,
+          "fillW": 10.3
+        },
+        "after": {
+          "fillH": 93.6,
+          "fillW": 11.7
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 3,
+        "title": "Movement one \u2014 the bulbus swings ventrally, caudally and to the RIGHT",
+        "before": {
+          "fillH": 56.2,
+          "fillW": 10.9
+        },
+        "after": {
+          "fillH": 81.7,
+          "fillW": 15.4
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 4,
+        "title": "Movement two \u2014 the ventricle swings dorsally and to the LEFT",
+        "before": {
+          "fillH": 56.2,
+          "fillW": 10.9
+        },
+        "after": {
+          "fillH": 81.7,
+          "fillW": 15.4
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 5,
+        "title": "Movement three \u2014 the atria climb up behind",
+        "before": {
+          "fillH": 45.2,
+          "fillW": 15.8
+        },
+        "after": {
+          "fillH": 92.2,
+          "fillW": 30
+        },
+        "clippedUnderSpin": true
+      },
+      {
+        "view": 6,
+        "title": "What the loop leaves you with",
+        "before": {
+          "fillH": 44.9,
+          "fillW": 10.6
+        },
+        "after": {
+          "fillH": 77,
+          "fillW": 17.5
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 7,
+        "title": "Looping is the setup for septation",
+        "before": {
+          "fillH": 44.9,
+          "fillW": 14
+        },
+        "after": {
+          "fillH": 77,
+          "fillW": 23.1
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 8,
+        "title": "L-loop \u2014 the tube turns the wrong way",
+        "before": {
+          "fillH": 35.1,
+          "fillW": 26.4
+        },
+        "after": {
+          "fillH": 76.4,
+          "fillW": 53.8
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 9,
+        "title": "Mirror-image anatomy \u2014 and the difference from dextroposition",
+        "before": {
+          "fillH": 44.9,
+          "fillW": 11.7
+        },
+        "after": {
+          "fillH": 82.8,
+          "fillW": 20.6
+        },
+        "clippedUnderSpin": false
+      }
+    ],
+    "console_before": [],
+    "console_after": []
+  },
+  "gross__thigh__quadriceps-femoris": {
+    "canvas": {
+      "w": 1008,
+      "h": 440
+    },
+    "views": [
+      {
+        "view": 1,
+        "title": "The front of the thigh",
+        "before": {
+          "fillH": 11,
+          "fillW": 30.3
+        },
+        "after": {
+          "fillH": 29.7,
+          "fillW": 62.9
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 2,
+        "title": "Naming the four heads",
+        "before": {
+          "fillH": 5.2,
+          "fillW": 16
+        },
+        "after": {
+          "fillH": 31.2,
+          "fillW": 59.9
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 3,
+        "title": "Where each head starts",
+        "before": {
+          "fillH": 12.3,
+          "fillW": 10.8
+        },
+        "after": {
+          "fillH": 49.1,
+          "fillW": 47.2
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 4,
+        "title": "The head that crosses two joints",
+        "before": {
+          "fillH": 19.8,
+          "fillW": 13.2
+        },
+        "after": {
+          "fillH": 19.8,
+          "fillW": 18.3
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 5,
+        "title": "Four heads, one tendon",
+        "before": {
+          "fillH": 15.8,
+          "fillW": 38.6
+        },
+        "after": {
+          "fillH": 37,
+          "fillW": 58.6
+        },
+        "clippedUnderSpin": true
+      },
+      {
+        "view": 6,
+        "title": "A cut across the mid-thigh",
+        "before": {
+          "fillH": 15.8,
+          "fillW": 38.6
+        },
+        "after": {
+          "fillH": 37,
+          "fillW": 58.6
+        },
+        "clippedUnderSpin": true
+      },
+      {
+        "view": 7,
+        "title": "What contraction does",
+        "before": {
+          "fillH": 19.6,
+          "fillW": 22.9
+        },
+        "after": {
+          "fillH": 34.6,
+          "fillW": 55.7
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 8,
+        "title": "Why the patella does not slip sideways",
+        "before": {
+          "fillH": 8.7,
+          "fillW": 20.3
+        },
+        "after": {
+          "fillH": 42.1,
+          "fillW": 59.4
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 9,
+        "title": "One nerve for the whole compartment",
+        "before": {
+          "fillH": 6.5,
+          "fillW": 13.5
+        },
+        "after": {
+          "fillH": 6.9,
+          "fillW": 12.6
+        },
+        "clippedUnderSpin": false
+      },
+      {
+        "view": 10,
+        "title": "When the nerve fails",
+        "before": {
+          "fillH": 8.5,
+          "fillW": 27.3
+        },
+        "after": {
+          "fillH": 27.6,
+          "fillW": 62.5
+        },
+        "clippedUnderSpin": true
+      },
+      {
+        "view": 11,
+        "title": "Peel the thigh open",
+        "before": {
+          "fillH": 12,
+          "fillW": 30.8
+        },
+        "after": {
+          "fillH": 38,
+          "fillW": 59.7
+        },
+        "clippedUnderSpin": true
+      }
+    ],
+    "console_before": [],
+    "console_after": []
+  }
+}

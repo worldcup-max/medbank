@@ -1,0 +1,1258 @@
+{
+ "schema": 2,
+ "id": "embryology__cardiovascular-development__cardiac-looping",
+ "mode": "3d_anatomy",
+ "deferred_modes": [
+  "sequence",
+  "diagram"
+ ],
+ "course": "Embryology",
+ "topic": "Cardiovascular Development",
+ "structure": "Cardiac looping",
+ "covers": [
+  "Cardiac looping"
+ ],
+ "learning_goal": "Explain why the straight heart tube must bend, describe the normal D-loop as a set of three movements, say where each of the five segments finishes after looping and why that arrangement is what septation needs, and use left-right patterning to account for L-loop, dextrocardia and the heterotaxy syndromes.",
+ "status": "candidate",
+ "provider": {
+  "primary": "procedural",
+  "fallbacks": []
+ },
+ "match": {
+  "topics": [
+   "cardiac looping",
+   "heart looping",
+   "heart development",
+   "cardiovascular development",
+   "week 4",
+   "laterality",
+   "left-right axis",
+   "congenital heart disease",
+   "dextrocardia"
+  ],
+  "terms": [
+   "cardiac looping",
+   "heart looping",
+   "D-loop",
+   "dextro-loop",
+   "L-loop",
+   "levo-loop",
+   "bulboventricular loop",
+   "day 23",
+   "day 28",
+   "secondary heart field",
+   "second heart field",
+   "anterior heart field",
+   "elongation",
+   "pericardial cavity",
+   "dorsal mesocardium",
+   "transverse pericardial sinus",
+   "bulbus cordis",
+   "conus cordis",
+   "truncus arteriosus",
+   "primitive ventricle",
+   "primitive atrium",
+   "sinus venosus",
+   "bulboventricular sulcus",
+   "primary interventricular foramen",
+   "atrioventricular canal",
+   "endocardial cushions",
+   "sinuatrial orifice",
+   "atria move dorsally and cranially",
+   "ventricles move ventrally and caudally",
+   "side by side ventricles",
+   "atria above ventricles",
+   "nodal",
+   "Pitx2",
+   "Nkx2-5",
+   "left-right patterning",
+   "primitive node",
+   "nodal cilia",
+   "situs solitus",
+   "situs inversus",
+   "situs ambiguus",
+   "dextrocardia",
+   "dextroposition",
+   "isolated dextrocardia",
+   "dextrocardia with situs inversus",
+   "Kartagener syndrome",
+   "primary ciliary dyskinesia",
+   "bronchiectasis",
+   "heterotaxy",
+   "asplenia",
+   "polysplenia",
+   "right isomerism",
+   "left isomerism",
+   "congenitally corrected transposition",
+   "ventricular inversion",
+   "looping defect"
+  ]
+ },
+ "camera": {
+  "framing": "anterior"
+ },
+ "structures": [
+  {
+   "key": "sinus_a",
+   "name": "Sinus venosus",
+   "label": "Sinus venosus",
+   "role": "part",
+   "group": "Day 21 — the straight tube",
+   "color": "#3f6ea8",
+   "refs": {
+    "procedural": "cardiac-looping#sinus@0"
+   },
+   "terms": [
+    "sinus venosus"
+   ]
+  },
+  {
+   "key": "atrium_a",
+   "name": "Primitive atrium",
+   "label": "Primitive atrium",
+   "role": "part",
+   "group": "Day 21 — the straight tube",
+   "color": "#5b8fd0",
+   "refs": {
+    "procedural": "cardiac-looping#atrium@0"
+   },
+   "terms": [
+    "primitive atrium"
+   ]
+  },
+  {
+   "key": "ventricle_a",
+   "name": "Primitive ventricle",
+   "label": "Primitive ventricle",
+   "role": "part",
+   "group": "Day 21 — the straight tube",
+   "color": "#d94f5c",
+   "refs": {
+    "procedural": "cardiac-looping#ventricle@0"
+   },
+   "terms": [
+    "primitive ventricle"
+   ]
+  },
+  {
+   "key": "bulbus_a",
+   "name": "Bulbus cordis",
+   "label": "Bulbus cordis",
+   "role": "part",
+   "group": "Day 21 — the straight tube",
+   "color": "#e4784a",
+   "refs": {
+    "procedural": "cardiac-looping#bulbus@0"
+   },
+   "terms": [
+    "bulbus cordis"
+   ]
+  },
+  {
+   "key": "truncus_a",
+   "name": "Truncus arteriosus",
+   "label": "Truncus arteriosus",
+   "role": "part",
+   "group": "Day 21 — the straight tube",
+   "color": "#e0a94f",
+   "refs": {
+    "procedural": "cardiac-looping#truncus@0"
+   },
+   "terms": [
+    "truncus arteriosus"
+   ]
+  },
+  {
+   "key": "meso_a",
+   "name": "Dorsal mesocardium",
+   "label": "Dorsal mesocardium, still intact",
+   "role": "part",
+   "group": "Day 21 — the straight tube",
+   "color": "#7fc9b4",
+   "refs": {
+    "procedural": "cardiac-looping#mesocardium@0"
+   },
+   "terms": [
+    "dorsal mesocardium"
+   ]
+  },
+  {
+   "key": "sinus_b",
+   "name": "Sinus venosus",
+   "label": "Sinus venosus",
+   "role": "part",
+   "group": "Mid-loop — the C",
+   "color": "#3f6ea8",
+   "refs": {
+    "procedural": "cardiac-looping#sinus@0.65"
+   },
+   "terms": [
+    "sinus venosus"
+   ]
+  },
+  {
+   "key": "atrium_b",
+   "name": "Primitive atrium",
+   "label": "Primitive atrium",
+   "role": "part",
+   "group": "Mid-loop — the C",
+   "color": "#5b8fd0",
+   "refs": {
+    "procedural": "cardiac-looping#atrium@0.65"
+   },
+   "terms": [
+    "primitive atrium"
+   ]
+  },
+  {
+   "key": "ventricle_b",
+   "name": "Primitive ventricle",
+   "label": "Primitive ventricle",
+   "role": "part",
+   "group": "Mid-loop — the C",
+   "color": "#d94f5c",
+   "refs": {
+    "procedural": "cardiac-looping#ventricle@0.65"
+   },
+   "terms": [
+    "primitive ventricle"
+   ]
+  },
+  {
+   "key": "bulbus_b",
+   "name": "Bulbus cordis",
+   "label": "Bulbus cordis",
+   "role": "part",
+   "group": "Mid-loop — the C",
+   "color": "#e4784a",
+   "refs": {
+    "procedural": "cardiac-looping#bulbus@0.65"
+   },
+   "terms": [
+    "bulbus cordis"
+   ]
+  },
+  {
+   "key": "truncus_b",
+   "name": "Truncus arteriosus",
+   "label": "Truncus arteriosus",
+   "role": "part",
+   "group": "Mid-loop — the C",
+   "color": "#e0a94f",
+   "refs": {
+    "procedural": "cardiac-looping#truncus@0.65"
+   },
+   "terms": [
+    "truncus arteriosus"
+   ]
+  },
+  {
+   "key": "sinus_c",
+   "name": "Sinus venosus",
+   "label": "Sinus venosus",
+   "role": "part",
+   "group": "Day 28 — the looped heart",
+   "color": "#3f6ea8",
+   "refs": {
+    "procedural": "cardiac-looping#sinus@1"
+   },
+   "terms": [
+    "sinus venosus"
+   ]
+  },
+  {
+   "key": "atrium_c",
+   "name": "Primitive atrium",
+   "label": "Primitive atrium",
+   "role": "part",
+   "group": "Day 28 — the looped heart",
+   "color": "#5b8fd0",
+   "refs": {
+    "procedural": "cardiac-looping#atrium@1"
+   },
+   "terms": [
+    "primitive atrium"
+   ]
+  },
+  {
+   "key": "ventricle_c",
+   "name": "Primitive ventricle",
+   "label": "Primitive ventricle",
+   "role": "part",
+   "group": "Day 28 — the looped heart",
+   "color": "#d94f5c",
+   "refs": {
+    "procedural": "cardiac-looping#ventricle@1"
+   },
+   "terms": [
+    "primitive ventricle"
+   ]
+  },
+  {
+   "key": "bulbus_c",
+   "name": "Bulbus cordis",
+   "label": "Bulbus cordis",
+   "role": "part",
+   "group": "Day 28 — the looped heart",
+   "color": "#e4784a",
+   "refs": {
+    "procedural": "cardiac-looping#bulbus@1"
+   },
+   "terms": [
+    "bulbus cordis"
+   ]
+  },
+  {
+   "key": "truncus_c",
+   "name": "Truncus arteriosus",
+   "label": "Truncus arteriosus",
+   "role": "part",
+   "group": "Day 28 — the looped heart",
+   "color": "#e0a94f",
+   "refs": {
+    "procedural": "cardiac-looping#truncus@1"
+   },
+   "terms": [
+    "truncus arteriosus"
+   ]
+  },
+  {
+   "key": "veins_c",
+   "name": "Vitelline & cardinal veins",
+   "label": "Veins at the fixed venous pole",
+   "role": "context",
+   "group": "Day 28 — the looped heart",
+   "color": "#2f5d94",
+   "refs": {
+    "procedural": "cardiac-looping#veins@1"
+   },
+   "terms": [
+    "vitelline & cardinal veins"
+   ]
+  },
+  {
+   "key": "arches_a",
+   "name": "Aortic arches",
+   "label": "Arches at the fixed arterial pole",
+   "role": "context",
+   "group": "Day 28 — the looped heart",
+   "color": "#c2464f",
+   "refs": {
+    "procedural": "cardiac-looping#arches@0"
+   },
+   "terms": [
+    "aortic arches"
+   ]
+  },
+  {
+   "key": "arches_b",
+   "name": "Aortic arches",
+   "label": "Arches at the fixed arterial pole",
+   "role": "context",
+   "group": "Day 28 — the looped heart",
+   "color": "#c2464f",
+   "refs": {
+    "procedural": "cardiac-looping#arches@0.65"
+   },
+   "terms": [
+    "aortic arches"
+   ]
+  },
+  {
+   "key": "arches_c",
+   "name": "Aortic arches",
+   "label": "Arches at the fixed arterial pole",
+   "role": "context",
+   "group": "Day 28 — the looped heart",
+   "color": "#c2464f",
+   "refs": {
+    "procedural": "cardiac-looping#arches@1"
+   },
+   "terms": [
+    "aortic arches"
+   ]
+  },
+  {
+   "key": "endo_c",
+   "name": "Endocardial tube",
+   "label": "Endocardial tube inside the myocardium",
+   "role": "part",
+   "group": "Day 28 — the looped heart",
+   "color": "#f2d3dd",
+   "refs": {
+    "procedural": "cardiac-looping#endocardium@1"
+   },
+   "terms": [
+    "endocardial tube"
+   ]
+  },
+  {
+   "key": "ventricle_l",
+   "name": "Primitive ventricle",
+   "label": "Primitive ventricle, L-loop",
+   "role": "part",
+   "group": "L-loop — the abnormal mirror",
+   "color": "#d94f5c",
+   "refs": {
+    "procedural": "cardiac-looping#ventricle@1+mirror"
+   },
+   "terms": [
+    "primitive ventricle"
+   ]
+  },
+  {
+   "key": "bulbus_l",
+   "name": "Bulbus cordis",
+   "label": "Bulbus cordis, L-loop",
+   "role": "part",
+   "group": "L-loop — the abnormal mirror",
+   "color": "#e4784a",
+   "refs": {
+    "procedural": "cardiac-looping#bulbus@1+mirror"
+   },
+   "terms": [
+    "bulbus cordis"
+   ]
+  },
+  {
+   "key": "peri_a",
+   "name": "Pericardial cavity",
+   "refs": {
+    "procedural": "cardiac-looping#pericardium@0"
+   },
+   "opacity": 0.13,
+   "label": "Pericardial cavity, day 23",
+   "role": "part",
+   "group": "Day 23 — the straight tube",
+   "terms": [
+    "pericardial cavity"
+   ]
+  },
+  {
+   "key": "midline_c",
+   "name": "Median plane",
+   "refs": {
+    "procedural": "cardiac-looping#midline@1"
+   },
+   "label": "Median plane (reference)",
+   "role": "part",
+   "group": "Reference",
+   "terms": []
+  },
+  {
+   "key": "sinus_l",
+   "name": "Sinus venosus",
+   "refs": {
+    "procedural": "cardiac-looping#sinus@1+mirror"
+   },
+   "label": "Sinus venosus, L-loop",
+   "role": "part",
+   "group": "L-loop — the abnormal mirror",
+   "color": "#3f6ea8",
+   "terms": [
+    "sinus venosus"
+   ]
+  },
+  {
+   "key": "atrium_l",
+   "name": "Primitive atrium",
+   "refs": {
+    "procedural": "cardiac-looping#atrium@1+mirror"
+   },
+   "label": "Primitive atrium, L-loop",
+   "role": "part",
+   "group": "L-loop — the abnormal mirror",
+   "color": "#5b8fd0",
+   "terms": [
+    "primitive atrium"
+   ]
+  },
+  {
+   "key": "truncus_l",
+   "name": "Truncus arteriosus",
+   "refs": {
+    "procedural": "cardiac-looping#truncus@1+mirror"
+   },
+   "label": "Truncus arteriosus, L-loop",
+   "role": "part",
+   "group": "L-loop — the abnormal mirror",
+   "color": "#e0a94f",
+   "terms": [
+    "truncus arteriosus"
+   ]
+  },
+  {
+   "key": "d_sinus",
+   "name": "Sinus venosus",
+   "refs": {
+    "procedural": "cardiac-looping#sinus@1+apart"
+   },
+   "label": "Sinus venosus, D-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#3f6ea8",
+   "terms": [
+    "sinus venosus"
+   ]
+  },
+  {
+   "key": "l_sinus",
+   "name": "Sinus venosus",
+   "refs": {
+    "procedural": "cardiac-looping#sinus@1+mirror,apart"
+   },
+   "label": "Sinus venosus, L-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#3f6ea8",
+   "terms": [
+    "sinus venosus"
+   ]
+  },
+  {
+   "key": "d_atrium",
+   "name": "Primitive atrium",
+   "refs": {
+    "procedural": "cardiac-looping#atrium@1+apart"
+   },
+   "label": "Primitive atrium, D-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#5b8fd0",
+   "terms": [
+    "primitive atrium"
+   ]
+  },
+  {
+   "key": "l_atrium",
+   "name": "Primitive atrium",
+   "refs": {
+    "procedural": "cardiac-looping#atrium@1+mirror,apart"
+   },
+   "label": "Primitive atrium, L-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#5b8fd0",
+   "terms": [
+    "primitive atrium"
+   ]
+  },
+  {
+   "key": "d_ventricle",
+   "name": "Primitive ventricle",
+   "refs": {
+    "procedural": "cardiac-looping#ventricle@1+apart"
+   },
+   "label": "Primitive ventricle, D-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#d94f5c",
+   "terms": [
+    "primitive ventricle"
+   ]
+  },
+  {
+   "key": "l_ventricle",
+   "name": "Primitive ventricle",
+   "refs": {
+    "procedural": "cardiac-looping#ventricle@1+mirror,apart"
+   },
+   "label": "Primitive ventricle, L-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#d94f5c",
+   "terms": [
+    "primitive ventricle"
+   ]
+  },
+  {
+   "key": "d_bulbus",
+   "name": "Bulbus cordis",
+   "refs": {
+    "procedural": "cardiac-looping#bulbus@1+apart"
+   },
+   "label": "Bulbus cordis, D-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#e4784a",
+   "terms": [
+    "bulbus cordis"
+   ]
+  },
+  {
+   "key": "l_bulbus",
+   "name": "Bulbus cordis",
+   "refs": {
+    "procedural": "cardiac-looping#bulbus@1+mirror,apart"
+   },
+   "label": "Bulbus cordis, L-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#e4784a",
+   "terms": [
+    "bulbus cordis"
+   ]
+  },
+  {
+   "key": "d_truncus",
+   "name": "Truncus arteriosus",
+   "refs": {
+    "procedural": "cardiac-looping#truncus@1+apart"
+   },
+   "label": "Truncus arteriosus, D-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#e0a94f",
+   "terms": [
+    "truncus arteriosus"
+   ]
+  },
+  {
+   "key": "l_truncus",
+   "name": "Truncus arteriosus",
+   "refs": {
+    "procedural": "cardiac-looping#truncus@1+mirror,apart"
+   },
+   "label": "Truncus arteriosus, L-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#e0a94f",
+   "terms": [
+    "truncus arteriosus"
+   ]
+  },
+  {
+   "key": "d_veins",
+   "name": "Vitelline & cardinal veins",
+   "refs": {
+    "procedural": "cardiac-looping#veins@1+apart"
+   },
+   "label": "Vitelline & cardinal veins, D-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#2f5d94",
+   "terms": [
+    "vitelline & cardinal veins"
+   ]
+  },
+  {
+   "key": "l_veins",
+   "name": "Vitelline & cardinal veins",
+   "refs": {
+    "procedural": "cardiac-looping#veins@1+mirror,apart"
+   },
+   "label": "Vitelline & cardinal veins, L-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#2f5d94",
+   "terms": [
+    "vitelline & cardinal veins"
+   ]
+  },
+  {
+   "key": "d_arches",
+   "name": "Aortic arches",
+   "refs": {
+    "procedural": "cardiac-looping#arches@1+apart"
+   },
+   "label": "Aortic arches, D-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#c2464f",
+   "terms": [
+    "aortic arches"
+   ]
+  },
+  {
+   "key": "l_arches",
+   "name": "Aortic arches",
+   "refs": {
+    "procedural": "cardiac-looping#arches@1+mirror,apart"
+   },
+   "label": "Aortic arches, L-loop",
+   "role": "part",
+   "group": "D-loop against L-loop, side by side",
+   "color": "#c2464f",
+   "terms": [
+    "aortic arches"
+   ]
+  },
+  {
+   "key": "veins_l",
+   "name": "Vitelline & cardinal veins",
+   "refs": {
+    "procedural": "cardiac-looping#veins@1+mirror"
+   },
+   "label": "Vitelline & cardinal veins, L-loop",
+   "role": "part",
+   "group": "L-loop — the abnormal mirror",
+   "color": "#2f5d94",
+   "terms": []
+  },
+  {
+   "key": "arches_l",
+   "name": "Aortic arches",
+   "refs": {
+    "procedural": "cardiac-looping#arches@1+mirror"
+   },
+   "label": "Aortic arches, L-loop",
+   "role": "part",
+   "group": "L-loop — the abnormal mirror",
+   "color": "#c2464f",
+   "terms": []
+  }
+ ],
+ "views": [
+  {
+   "mode": "process",
+   "beat": 1,
+   "title": "Why a straight tube cannot stay straight",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sinus_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "atrium_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ventricle_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "bulbus_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "truncus_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "meso_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "veins_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "arches_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "peri_a"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "By day twenty-three the heart tube is tied at both ends — arteries above, veins below — and it is elongating faster than the pericardial cavity around it. Cells added at both poles from the secondary heart field keep lengthening it. A tube that is growing, held at both ends and running out of room can only do one thing, and it bends. Looping is mechanics before it is genetics; the genes decide which way, not whether.\n\nStart with the straight tube at day twenty-three. It is anchored above by the arch arteries and below by the veins, its dorsal mesocardium has broken down in the middle, and the secondary heart field keeps adding cells at both poles so it lengthens inside a pericardial cavity that does not lengthen with it. Held at both ends, free in the middle, growing. It bends."
+  },
+  {
+   "mode": "process",
+   "beat": 2,
+   "title": "The dorsal mesocardium has already broken down",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sinus_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "atrium_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ventricle_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "bulbus_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "truncus_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "veins_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "arches_a"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "meso_a"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "meso_a",
+     "intensity": 0.7
+    }
+   ],
+   "narration": "The middle of the dorsal mesocardium has already given way, so the tube hangs free between its two fixed ends. That is what makes bending possible at all. The gap it leaves behind is the transverse pericardial sinus, which is why in the adult you can pass a finger behind the aorta and pulmonary trunk and in front of the atria."
+  },
+  {
+   "mode": "process",
+   "beat": 3,
+   "title": "Movement one — the bulbus swings ventrally, caudally and to the RIGHT",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sinus_b"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "atrium_b"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ventricle_b"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "bulbus_b"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "truncus_b"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "veins_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "arches_b"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "bulbus_b",
+     "intensity": 0.85
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "The first movement is the one that names the loop. The bulbus cordis, the cranial half of the tube, swings forwards, downwards and to the right. That is the D-loop, D for dextro, and it is the normal direction in every healthy human heart. Say it as one sentence you can repeat under exam pressure: the bulbus goes ventral, caudal and right."
+  },
+  {
+   "mode": "process",
+   "beat": 4,
+   "title": "Movement two — the ventricle swings dorsally and to the LEFT",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sinus_b"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "atrium_b"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ventricle_b"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "bulbus_b"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "truncus_b"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "veins_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "arches_b"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "ventricle_b",
+     "intensity": 0.85
+    }
+   ],
+   "narration": "The second movement is the mirror of the first. The primitive ventricle moves backwards and to the left. Bulbus to the right, ventricle to the left, and the two now sit side by side rather than one behind the other. The groove between them outside is the bulboventricular sulcus, and the opening between them inside is the primary interventricular foramen — the hole the muscular septum will later grow up towards."
+  },
+  {
+   "mode": "process",
+   "beat": 5,
+   "title": "Movement three — the atria climb up behind",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sinus_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "atrium_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ventricle_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "bulbus_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "truncus_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "veins_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "arches_c"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "atrium_c",
+     "intensity": 0.85
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "sinus_c",
+     "intensity": 0.85
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    }
+   ],
+   "narration": "The third movement carries the atrium and the sinus venosus backwards and upwards, so the inflow end comes to lie behind and above the ventricles instead of below them. This is the movement that produces the adult arrangement: atria posterior and superior, ventricles anterior and inferior, and the great vessels rising between the two atria in front. Every relation you learn in the adult mediastinum was set here."
+  },
+  {
+   "mode": "process",
+   "beat": 6,
+   "title": "What the loop leaves you with",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sinus_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "atrium_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ventricle_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "bulbus_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "truncus_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "veins_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "arches_c"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "By about day twenty-eight the tube has become an S. The two future ventricles lie side by side, the two future atria lie side by side behind and above them, the atrioventricular canal joins the atrial half to the ventricular half, and the outflow tract runs up in the midline between the atria. Nothing has been divided yet — this is one continuous lumen. But the pieces are now in the right places relative to each other.\n\nThree sentences, in this order. One: the bulbus cordis swings ventrally, caudally and to the right — that is the D-loop. Two: the primitive ventricle moves dorsally and to the left, so the two future ventricles now lie side by side. Three: the atrium and sinus venosus move dorsally and cranially, so the inflow ends up behind and above the outflow. If you can say those three lines you can draw the loop from memory."
+  },
+  {
+   "mode": "process",
+   "beat": 7,
+   "title": "Looping is the setup for septation",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sinus_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "atrium_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ventricle_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "bulbus_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "truncus_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "veins_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "arches_c"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "endo_c"
+    },
+    {
+     "op": "CROSS_SECTION",
+     "target": "ventricle_c",
+     "axis": "x"
+    }
+   ],
+   "narration": "Understand looping as the step that brings each part alongside the part it must be joined to. The septa built next are all short walls between structures that looping has already parked next to one another. That is why a looping or alignment error shows up later as a connection fault rather than a hole: the great arteries coming off the wrong ventricle, or both off the right. If the pieces are put in the wrong place, no amount of correct wall-building fixes it.\n\nBy day twenty-eight it is an S-shaped heart with a single continuous lumen. Ventricles side by side in front and below, atria side by side behind and above, joined through the atrioventricular canal, with the outflow tract climbing between the two atria. Cut it across and check yourself against the segment colours from the tube scene — nothing has been added or lost, the same five segments have simply been repositioned. That repositioning is the whole purpose of the step, because septation is only short walls between parts that are already correctly parked."
+  },
+  {
+   "mode": "process",
+   "beat": 8,
+   "title": "L-loop — the tube turns the wrong way",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "d_sinus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "d_atrium"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "d_ventricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "d_bulbus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "d_truncus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "d_veins"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "d_arches"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_sinus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_atrium"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_ventricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_bulbus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_truncus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_veins"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_arches"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "d_sinus",
+      "d_atrium",
+      "d_ventricle",
+      "d_bulbus",
+      "d_truncus",
+      "l_sinus",
+      "l_atrium",
+      "l_ventricle",
+      "l_bulbus",
+      "l_truncus"
+     ]
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "If the tube loops to the left instead of the right, the ventricles end up inverted — the morphological right ventricle on the left and the left ventricle on the right. When the great arteries are also transposed, the two errors cancel each other for flow and the child is pink: congenitally corrected transposition. Do not read 'corrected' as 'normal'. The right ventricle is pumping to the body for a lifetime, and it fails eventually, with conduction tissue that is abnormally placed and prone to block."
+  },
+  {
+   "mode": "process",
+   "beat": 9,
+   "title": "Mirror-image anatomy — and the difference from dextroposition",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sinus_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "atrium_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ventricle_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "bulbus_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "truncus_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "veins_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "arches_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "midline_c"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "midline_c",
+     "intensity": 0.6
+    }
+   ],
+   "narration": "Dextrocardia means the heart is built pointing to the right; dextroposition means a normal heart has been pushed to the right by something else, such as a right lung agenesis or a left tension pneumothorax. The distinction is the first thing to make on the film. When dextrocardia comes with full situs inversus the internal relations are a clean mirror image and the heart is usually otherwise normal. Isolated dextrocardia, with the abdominal organs in the usual place, carries a high rate of associated defects. About a quarter of situs inversus cases are Kartagener syndrome, where immotile cilia give bronchiectasis, chronic sinusitis and infertility alongside the mirrored anatomy — one ciliary defect, four findings.\n\nThree ways this goes wrong. Loop the other way and the ventricles are inverted: congenitally corrected transposition, pink at birth but with a right ventricle doing systemic work for life. Reverse the whole plan and you get situs inversus with dextrocardia, usually a normal heart, and about a quarter of the time Kartagener syndrome. Fail to choose a side at all and you get isomerism — two right sides with asplenia and severe cardiac disease, or two left sides with polysplenia and conduction problems. Then answer any case in the same three steps: situs, loop, connections."
+  }
+ ],
+ "provenance": {
+  "author": "task",
+  "authored_at": "2026-08-28",
+  "reauthored_at": "2026-09-10",
+  "reauthored_by": "session with Frank",
+  "reauthor_note": "first scene on the procedural provider; narration carried across verbatim from the sequence version",
+  "corrected_at": "2026-09-10T14:52:00Z",
+  "corrected_by": "model3d REVIEW task, round 2 — did not build this scene",
+  "correction_note": "arches re-pointed to stage-matched t; pericardium declared in gaps. Anatomical defects found in the MODEL are listed as findings on the queue item and were not patched from the scene.",
+  "rebuilt_at": "2026-09-10",
+  "rebuilt_by": "model3d BUILD task — round 1 rework",
+  "correction_note_round_2": "Corrected two false claims in gaps[] (the t=0.65 justification, which was derived from a mis-implemented acceptance test, and a stale arches_b @0.4 reference). No geometry or narration changed. The anatomical defects found this round are in the MODEL and are listed as findings on the queue item."
+ },
+ "gaps": [
+  "THREE BEATS WERE MOVED OUT, NOT DELETED — see deferred_beats[]. They rendered pixel-identical to the view before them because they were never 3D beats: they are narration that survived the conversion from the sequence engine. Each carries its full text, why it is not a view, and where it belongs. A view must change the picture; text has its own home in this app.",
+  "RE-AUTHORED from sequence to model3d on 2026-09-10. The scene previously had teaching BEATS as its structures (why_it_bends, laterality_genes, exam_frame) because it was written for the SVG panel engine. Structures are now anatomical parts with geometry; every beat's narration is preserved verbatim on the view that replaced it. Nothing taught was dropped.",
+  "t is per structure, not per view — the engine has no per-view t yet (queued as engine__per-view-t). So each developmental stage is a SET of structures at a fixed t (suffix _a = day 21, _b = mid-loop, _c = day 28) and the views switch between the sets. When per-view t lands this collapses to five structures and a t on each view.",
+  "Heterotaxy and the isomerisms are described, not shown: the model builds one heart, not a whole body situs. Two trilobed lungs and a midline liver are not in this model and should not be faked.",
+  "Septation is named as the consequence of looping but not built; it is its own scene (septation-of-heart).",
+  "REVIEW 2026-09-10: the aortic arches move with t (their cranial end follows the arterial pole down as the tube shortens its chord). Stages _a and _b were showing arches@1, which put the arch roots on the bulbus at day 21 and left them floating free of the truncus at mid-loop. Corrected by adding arches_a (@0) and arches_b (@0.65, re-pointed with stage _b). The veins are genuinely t-invariant, so veins_c is correct at every stage despite the suffix.",
+  "BUILD 2026-09-10: the model was rebuilt for review findings 1-5, 7, 10, 11 and 12. The torsion is now SOLVED against seven stated measurements at t=1 rather than hand-tuned (see the model's ACCEPTANCE block and BUILD-LOG), and the model asserts them on every build.",
+  "BUILD 2026-09-10: stage _b moved from t = 0.4 to t = 0.65 (day 26.3 on the day-23-to-day-28 mapping). REVIEW 2026-09-10 round 2 — THE JUSTIFICATION GIVEN HERE WAS WRONG AND IS CORRECTED. It read: \"their transverse separation first exceeds their cranio-caudal separation at t = 0.58; at t = 0.65 the margin is +0.11\". That +0.11 came from acceptance test G, whose implementation folded the ANTERO-POSTERIOR separation in with the transverse one. Measured honestly on real centroids, bulbus-vs-ventricle at t = 0.65 is dx 0.319 transverse, dy 0.675 cranio-caudal, dz 0.714 antero-posterior: the dominant relation is one BEHIND the other, which is the single arrangement view 4's narration denies. Transverse does not exceed cranio-caudal at any t below 0.8. t = 0.65 is not defended by this argument; see the item's findings.",
+  "BUILD 2026-09-10: the pericardial cavity is now used, on view 1. Its height is set by the pole-to-pole tether and its width grows on its own slower schedule, so at day 23 the tube fills the sac's height with clear room at its sides and by day 28 the loop has come out to meet the wall. Opacity 0.10 in the model. That was not enough on its own: the procedural ADAPTER rebuilds every part with its own material at opacity 1, so through the player the cavity came back as an opaque white egg with the whole heart hidden inside it — seen, not guessed, in the first scene-view render. viz3d.js now honours a structure's authored `opacity` field (default 1, so no other scene changes) and peri_a declares 0.13.",
+  "BUILD 2026-09-10: the dorsal mesocardium is two cuffs with a real gap at every t, and the gap is the transverse pericardial sinus. It is open ALREADY at day 23, which is what both view 2 (\"has already given way\") and the recovered original view 1 (\"its dorsal mesocardium has broken down in the middle\") say. View 2 is rotated to lateral, because a median-plane sheet is edge-on and invisible in the anterior view — which is why view 2 used to render pixel-identical to view 1.",
+  "BUILD 2026-09-10, DEXTROCARDIA (review finding 12): this model has no thorax and no body wall, so it cannot make a claim about where a heart sits in a chest. It has been given a MEDIAN PLANE reference instead, which is enough to show mirror-image anatomy honestly and not enough to show dextroversion. View 9 is retitled accordingly and shows the whole mirrored loop, anterior, against that plane. It was tried from ABOVE first, which looks straight down the truncus and shows its open lumen — the one thing RENDER-STANDARD says must never be visible — so the anterior view stands. The narration is unchanged and still carries the dextrocardia/dextroposition distinction in words. Dextroversion — a D-looped heart rotated into the right chest — is still not shown and should not be faked here; it needs a scene with a thorax.",
+  "BUILD 2026-09-10, RECOVERED NARRATION (review finding 10): all five dropped original view narrations are back, verbatim. Original view 1 is appended to view 1, original view 2 (the three-movement drill) to view 6, original view 3 to view 7, original view 5 (the three-way differential closing on \"situs, loop, connections\") to view 9. Original view 4 is about the primitive node and went to deferred_beats. Nothing was added as a new view, because this scene's problem was never too few words.",
+  "BUILD 2026-09-10: viz3d.js needed a one-line fix to make any of this load. Its srgbColor() is defined at module scope and used a free variable T that this file never declares — it was resolving to the global `const T` that the OLD cardiac-looping.js leaked by not being wrapped in an IIFE. Wrapping the model (review finding 5) took that global away and all 23 refs started returning reason:\"failed\" with \"T is not defined\". Reproduced in the headless harness before the line was touched.",
+  "BUILD 2026-09-10: the model also builds mesocardium@1 and pericardium@1, and neither is in structures[] — at day 28 the mesocardium is two small reflections almost entirely hidden behind the heart, and no view's narration asks for the cavity a second time. Declared here so the keys are accounted for; they are one line away if a later view wants them.",
+  "BUILD 2026-09-10: view 8 compares the WHOLE D loop with the WHOLE L loop, five segments each, rather than ventricle+bulbus alone — two segments shown without their neighbours expose the waist end caps and read as hollow pipes cut in mid-air (review finding 7). Both loops carry the new 'apart' flag, which offsets each clear of the median plane: mirror images drawn in one space interpenetrate, and the first attempt at this fix produced one unreadable mass. 'apart' is a presentation flag for this view only; no view that shows a single heart uses it. The veins and arches are shown on both sides too, because without them the tube's two POLE ends are bare and read as cut pipes — the same objection the finding makes about the waist caps.",
+  "REVIEW 2026-09-10 round 2: `mirror` DOES NOT BUILD AN L-LOOP. Measured on real geometry, the mirrored build is diag(-1, +1, -1) applied to the normal one — a 180 degree rotation about the cranio-caudal axis, not a reflection in the median plane. The chirality is unchanged (signed volume of the sinus-atrium-ventricle-bulbus tetrahedron, ratio 1.0000, where a mirror image must negate it). Views 8 and 9 therefore show the normal D-looped heart seen from behind, not an L-loop and not mirror-image anatomy. Not corrected here: the fix is in the model's sweep emitter and belongs to the build task. Neither view should go in front of a student until it is done."
+ ],
+ "deferred_beats": [
+  {
+   "title": "What decides right rather than left",
+   "narration": "The direction of the loop is decided before the loop happens. Motile cilia at the primitive node sweep fluid to the left, that leftward flow switches on Nodal and then Pitx2 in the left lateral plate mesoderm, and the two sides of the embryo stop being equivalent. The heart tube reads that asymmetry and turns to the right. So laterality is a week-three event with a week-four consequence, and a cilia defect explains a heart defect.",
+   "why_not_a_view": "The mechanism is at the PRIMITIVE NODE, days before the loop and in a different structure: motile cilia sweeping fluid leftward, Nodal, then Pitx2. A model of the heart tube cannot show any of it.",
+   "belongs_in": "embryology__week-3-gastrulation__primitive-streak — the node is actually built there",
+   "moved_at": "2026-09-10",
+   "moved_by": "session with Frank"
+  },
+  {
+   "title": "Heterotaxy — when the body cannot decide",
+   "narration": "Worse than a mirror image is no decision at all. In right isomerism the embryo builds two right sides: two trilobed lungs, a midline liver, no spleen, and severe cardiac defects — the asplenia or Ivemark syndrome. In left isomerism it builds two left sides: two bilobed lungs and several small spleens, with milder cardiac lesions but conduction problems. The clinical hook is the spleen. An asplenic child needs pneumococcal, meningococcal and Haemophilus cover and prophylactic penicillin, and Howell-Jolly bodies on the film are the clue that the spleen is not working.",
+   "why_not_a_view": "Isomerism is a WHOLE-BODY finding: two trilobed lungs, a midline liver, absent spleen. This model builds one heart and nothing else, so the scene can only assert it, never show it.",
+   "belongs_in": "a situs / laterality scene covering the thoracoabdominal organs, which does not exist yet",
+   "moved_at": "2026-09-10",
+   "moved_by": "session with Frank"
+  },
+  {
+   "title": "How to answer a laterality question in three steps",
+   "narration": "Answer these questions in a fixed order and they stop being confusing. First, where are the atria — normal, mirrored, or ambiguous. Second, which way did the ventricles loop, D or L. Third, where do the great arteries come off. Situs, loop, connections. A child can be abnormal at any one of the three, and naming which one is abnormal is most of the diagnosis.",
+   "why_not_a_view": "Situs, loop, connections is a DRILL — a fixed order to answer in, not a thing to look at. It is the best revision content in this scene and it does not belong in a 3D view.",
+   "belongs_in": "the recall / drill layer, where a fixed-order checklist is the native form",
+   "moved_at": "2026-09-10",
+   "moved_by": "session with Frank"
+  },
+  {
+   "title": "Cilia at the node decide which way",
+   "narration": "Go back to week three for the answer. Motile cilia at the primitive node drive fluid to the left, Nodal and then Pitx2 switch on in the left lateral plate mesoderm, and the embryo acquires a left and a right. The heart reads that signal and loops rightwards. This is why a defect in ciliary motility produces a heart that is a mirror image, and why the same patient has sinusitis and bronchiectasis — the cilia in the airway are the same cilia.",
+   "why_not_a_view": "Recovered from the dropped original view 4 (review finding 10). Same reason as the beat already deferred above: the mechanism is at the primitive node, days earlier and in another structure, and a model of the heart tube cannot show any of it. Kept separately from that beat because the words are not the same words.",
+   "belongs_in": "embryology__week-3-gastrulation__primitive-streak — the node is actually built there",
+   "moved_at": "2026-09-10",
+   "moved_by": "model3d BUILD task"
+  }
+ ]
+}

@@ -729,7 +729,7 @@ relations, and the relations resolve. Both are `candidate`, not `ready` — see 
 - id `gross__leg-foot__popliteal-fossa` · Gross Anatomy · Leg & Foot · **Popliteal fossa** · mode
   `3d_anatomy` (deferred: `diagram`) · 19 structures (14 parts) · 10 views · 40 ops · **ready** ·
   degrades `PEEL_LAYER`. Audited 2026-08-29: `fibula` was labelled "Fibula — head & neck", lighting a
-  351 mm bone for a palpable point, so the head is now a measured anchor `fibular_head`
+  351 mm bone for a palpable point, so the head is now a measured anchor `fibular_head`. **Corrected 2026-09-09:** the CROSS_SECTION axis contradicted the plane its own narration names — beat 6 "Cut across the fossa" narrates a transverse section and cut `y`, now `z`. LPS meshes are +Z superior, so sagittal=x, coronal=y, axial=z; the convention is now written into `model3d-scene-spec-v2.md` and checked by the validator.
   (biceps femoris 0.30 mm, tibia at the superior tibiofibular joint 0.95 mm, agreeing to 17.7 mm),
   `status:"needs-review"`; the neck is recorded in `gaps[]` as unmeasurable. The two exit sentences
   naming the popliteal artery under the arch of soleus were corrected to the posterior tibial, and the
@@ -1543,7 +1543,7 @@ covers `["Gut blood supply (coeliac/SMA/IMA)"]` · audited 2026-08-29
 ### `gross__liver-biliary-tract-pancreas-spleen__liver`
 `gross` · Liver, Biliary Tract, Pancreas & Spleen · **Liver** · mode `3d_anatomy`
 (deferred: `diagram`) · 23 structures (13 parts) · 8 views · 62 ops · **ready** · audited 2026-08-29 ·
-covers `["Liver"]`
+covers `["Liver"]`. **Corrected 2026-09-09:** the CROSS_SECTION axis contradicted the plane its own narration names — beat 7 "The liver on an axial slice" cut `y`, now `z`. LPS meshes are +Z superior, so sagittal=x, coronal=y, axial=z; the convention is now written into `model3d-scene-spec-v2.md` and checked by the validator.
 
 - **First scene of a new topic, and it is `ready`.** `FMA7197` liver, `FMA7202` gallbladder, `FMA10951`
   inferior vena cava, `FMA14771` common hepatic artery, `FMA50737` coeliac, `FMA14331`/`FMA14332` splenic
@@ -1620,7 +1620,7 @@ covers `["Biliary tree & gallbladder"]` · audited 2026-08-29
 ### `gross__liver-biliary-tract-pancreas-spleen__pancreas`
 `gross` · Liver, Biliary Tract, Pancreas & Spleen · **Pancreas** · mode `3d_anatomy`
 (deferred: `diagram`) · 18 structures (10 parts) · 6 views · 44 ops · **candidate** · audited 2026-08-29 ·
-covers `["Pancreas"]`
+covers `["Pancreas"]`. **Corrected 2026-09-09:** the CROSS_SECTION axis contradicted the plane its own narration names — beat 5 "The transpyloric slice" cut `y`, now `z` — the transpyloric plane is transverse. LPS meshes are +Z superior, so sagittal=x, coronal=y, axial=z; the convention is now written into `model3d-scene-spec-v2.md` and checked by the validator.
 
 - **The gland has no mesh; its duct does.** `FMA10419` runs the full length of the pancreas, so it
   occupies the organ's exact position and axis — rule 2(a), the most specific part that exists. Head,
@@ -1655,7 +1655,7 @@ covers `["Pancreas"]`
 
 | course | topic | structure | mode | mesh parts | status | scene |
 |---|---|---|---|---|---|---|
-| Gross Anatomy | Kidney & Posterior Abdominal Wall | Kidney | 3d_anatomy | 35 structures, 21 parts (both kidneys, both renal arteries and veins, both ureters, psoas, quadratus lumborum, transversus abdominis, diaphragm, 12th rib; 8 measured anchors — both poles and both hila, the PUJ and the renal angle) | ✅ ready · audited 2026-08-29 | `scenes/gross__kidney-posterior-abdominal-wall__kidney.json` |
+| Gross Anatomy | Kidney & Posterior Abdominal Wall | Kidney | 3d_anatomy | 35 structures, 21 parts (both kidneys, both renal arteries and veins, both ureters, psoas, quadratus lumborum, transversus abdominis, diaphragm, 12th rib; 8 measured anchors — both poles and both hila, the PUJ and the renal angle) | ✅ ready · audited 2026-08-29 · corrected 2026-09-09: beat 3 narrates a coronal cut and the axis was `z` (axial), now `y` | `scenes/gross__kidney-posterior-abdominal-wall__kidney.json` |
 | Gross Anatomy | Kidney & Posterior Abdominal Wall | Suprarenal (adrenal) gland | 3d_anatomy | 17 structures, 11 parts (both glands, both kidneys, IVC, left renal vein, aorta, renal artery, diaphragm; 2 measured anchors on the gland-kidney fascial septum) | ✅ ready · audited 2026-08-29 | `scenes/gross__kidney-posterior-abdominal-wall__suprarenal-adrenal-gland.json` |
 
 - **Kidney** — resolved outright and generously. `right kidney`, `left kidney`, both renal arteries, both
@@ -3566,6 +3566,16 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
 - Position-first: hippocampus in the floor of the inferior horn, so it is curved, paired, and its
   output takes the long arch. Fornix traced whole to the mammillary body; Papez closed as two
   concentric arches around the corpus callosum.
+- **THIRD-READER AUDIT 2026-09-09 — CORRECTED AGAINST ITS SIBLING, NOT AGAINST THE CATALOG.** The
+  scene taught "the column of the fornix ends in the mammillary body" flat, in three places
+  (`fornix_l` card, `mamm` card, beat 5), while `limbic-system__fornix-papez-circuit` — same topic,
+  read consecutively — calls that exact sentence a half-truth and teaches the precommissural /
+  postcommissural split at the anterior commissure as "the split most students never learn". `grep
+  postcommissural` over all 142 scenes returned the fornix scene alone. All three places now carry
+  the qualifier and point to the owning scene; the split is described, not drawn (no new structure
+  added). Every mechanical check re-run independently first: 15/15 ids present, 15/15 names exact,
+  the FMA258716-L/FMA258714-R thalamus inversion re-derived, all op targets resolve, all three
+  required views present, 15/15 meshes on disk. `corrected_at` 2026-09-09.
 - **DELIVERY, CLOSED 2026-09-08: 15/15 meshes in `meshes-lite/` and in the bucket; no beat is hollow.**
   (This read "14/15 ... missing FMA72713 RIGHT HIPPOCAMPUS", which left every bilateral argument drawn
   against one visible hippocampus. Fetched, decimated and uploaded on 2026-09-08.)
@@ -3577,10 +3587,33 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   repeat; curriculum views all present; `concept:papez` is the spec's documented form. The sides
   claim was re-derived rather than read, including the FMA258716-L / FMA258714-R inversion. The
   authoring run's account of this file was accurate in every particular checked. Promoted to `ready`.
+- **SECOND-READER AUDIT 2026-09-09 — ONE DEFECT, AND IT WAS A STALE NOTE RATHER THAN AN ERROR OF
+  ANATOMY.** `gaps[0]` still read, in the present tense, "14 of 15 ... the exception is FMA72713, the
+  RIGHT HIPPOCAMPUS ... beat 2 and beat 3 are half-drawn", and named that fetch as the highest-value
+  one in the Limbic System topic — while the LAST entry of the same list recorded the fetch, the
+  decimation and the 0.019 mm surface movement on 2026-09-08. The file carried a claim and its own
+  refutation, with the false one first in reading order. `FMA72713.stl` was statted this run: present.
+  Entry retired in place; 15/15 on disk; no beat hollow. Re-signed `audited_at`/`corrected_at`
+  2026-09-09. Anatomy re-checked on all eight checks and unchanged.
 
 ### `neuroanatomy__limbic-system__fornix-papez-circuit` (new — third and LAST Limbic System scene)
 - id `neuroanatomy__limbic-system__fornix-papez-circuit` · Neuroanatomy · Limbic System ·
   `3d_anatomy` · 14 structures · 5 views (location ×2, mechanism ×3) · **ready** (audited 2026-09-08).
+- **THIRD-READER AUDIT 2026-09-09 — RECONCILED AS THE OWNER OF THE PRECOMMISSURAL/POSTCOMMISSURAL
+  SPLIT.** Nothing wrong found in this scene; the correction landed next door in
+  `limbic-system__hippocampus`, which stated the flat form three times. A gaps entry here records the
+  ownership and the judgement that the qualifier is owed wherever the fornix is *taught* and not
+  wherever it is *mentioned* — so `thalamus`, `hypothalamus-pituitary`, `white-matter-tracts` and
+  `ventricles`, which name the fornix only as a passing landmark, were deliberately left alone.
+  `corrected_at` 2026-09-09.
+- **SECOND-READER AUDIT 2026-09-09 — THE SAME STALE FACT, IN TWO PLACES, INCLUDING THE AUDIT
+  SIGNATURE ITSELF.** `gaps[1]` gave FMA72713 (right hippocampus) as "in the catalog but NOT on disk
+  and the known delivery gap of this topic", and the 2026-09-08 audit line repeated it as "correctly
+  absent from the scene as well as from the disk". FMA72713 was fetched on 2026-09-08 and the sibling
+  `hippocampus` scene recorded that fetch the same day, so the signature was wrong on the day it was
+  written. Both corrected; the left-side-only trace is restated as the authoring choice it actually
+  is, not a consequence of delivery. 14/14 on disk, no hollow beat, ids/names/sides/ops/views/covers
+  all re-checked. `corrected_at`/`audited_at` 2026-09-09.
 - AUDITED AND CHANGED 2026-09-08 by the following run, as its own gaps[] asked. One error: the fornix
   card counted the COMMISSURE among the segments "visible on this mesh", but the commissure is FMA61970,
   a separate mesh with its own card two entries below — the card both miscounted the object and
@@ -3808,3 +3841,38 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   FMA73461/73462/73463/73464, which are midbrain and not cerebellar. Conclusion unchanged, note corrected so
   a later re-run does not read four-against-one as a stale note. `corrected_at` / `corrected_by` added;
   `audited_at` re-stamped 2026-09-08. Still `ready`, 9/9 models on disk.
+
+### 2026-09-08 (pre-gate anchor sweep) — three scenes amended
+
+- `gross__arm__humerus` — `capitulum` re-derived. Its old `calibrated_by` gave a CONTACT against the
+  radius at 4.85 mm, which `derive-landmark.mjs` refuses today; the humerus and radius do not meet in
+  these meshes. Re-derived as EXTREME -z within `x:0,0.25` (lowest vertex of the lateral quarter),
+  landing at `[0.2228, 0.6352, 0.0228]` against the old `[0.223, 0.635, 0.023]` — the point was right,
+  the justification was not. Stable at `x:0,0.30`. `gaps[1]` rewritten; `corrected_at` set.
+- `gross__forearm-hand__radius-ulna` — `head_of_radius` re-derived, same refused 4.85 mm read from the
+  other side of the same joint. Now EXTREME +z (topmost vertex of the radius). **The coordinate moved**,
+  `[0.9608, 0.8709, 0.9902]` → `[0.7629, 0.7533, 1.0]`; both lie on the head, but the head is a disc so
+  its top is a rim. `calibration_gap_mm` removed, new `gaps[2]`, `corrected_at`/`corrected_by` set.
+- `gross__lungs-mediastinum__great-vessels` — `brachiocephalic_trunk_origin` was a 17.84 mm "contact"
+  whose note presented the gap as the finding. Re-run it refuses (17.84 mm to the right subclavian,
+  15.68 mm to the right common carotid). It cannot be re-defined — the trunk has no mesh — so the anchor
+  is kept, marked `approx {shown_as: "arch of aorta", detail: "origin of the brachiocephalic trunk"}`,
+  its `calibrated_by` now states the refusal and the two-witness convergence (1.69 mm on an 83 mm arch),
+  and the narration says openly that the trunk is not modelled. New `gaps[0]`; `corrected_at` set.
+
+### 2026-09-08 (independent re-audit) — `neuroanatomy__brainstem__pons`
+- CORRECTED, one op. Beat 4 ended with `COMPARE_STRUCTURES [pons, medulla]` placed after
+  `ISOLATE_REGION Pons` and after `HIGHLIGHT_STRUCTURE v4`. Per the spec that op lights its two targets and
+  GHOSTS everything else, so the last thing beat 4 did was extinguish the fourth ventricle — the only
+  surface the beat is a map over, and the thing the beat's own narration and the scene's DRAWABILITY note
+  both say is the one thing lit. It also reached out of the beat's own isolated group to light the medulla,
+  which the narration never asks the student to compare. Op removed; gap note added recording the reasoning
+  and pointing at `medulla-oblongata` beat 3 as the correct use of the same op. Still `ready`, 9/9 models on
+  disk, `corrected_at` 2026-09-08.
+
+### 2026-09-09 amendment — three Basal Ganglia & Diencephalon scenes
+- `neuroanatomy__basal-ganglia-diencephalon__basal-ganglia`, `...__thalamus`, `...__hypothalamus-pituitary`:
+  each carried a `gaps[]` sentence asserting the scene "stays `candidate`" while the `status` field beside
+  it read `ready`. Sentences retired and dated; ids re-verified (17/17, 21/21, 15/15 in catalog and on
+  disk). No anatomical content changed. `corrected_at` 2026-09-09 added to all three; `hypothalamus-
+  pituitary` had been promoted on 2026-09-08 with no `corrected_at` at all, which is now fixed.

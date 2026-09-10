@@ -29,6 +29,28 @@ window.MEDBANK_CONFIG = {
   // No scene file changes — only the adapter reads this.
   MESH_BASE: "https://tytbrhuzikqkscxdnkmr.supabase.co/storage/v1/object/public/viz-meshes/",
 
+  // RESOLUTION FOLLOWS ROLE (engine__mesh-resolution-by-role, 2026-09-10).
+  // Two tiers of the same mesh set. The adapter picks per structure: role 'part'/'primary' -> full,
+  // role 'context' -> lite. A 'full' miss falls back to 'lite', so the full tier may be uploaded
+  // incrementally without greying out the structures a scene is actually teaching.
+  //
+  // LEAVE THIS COMMENTED OUT UNTIL THE FULL TIER IS ACTUALLY PUBLISHED. With no MESH_TIERS both tiers
+  // resolve to MESH_BASE and every URL is byte-identical to what shipped before this existed.
+  //
+  // The full tier is BUDGETED AT GENERATION, because a browser cannot know a mesh's triangle count
+  // until it has already paid to download it. Build it with:
+  //   node viz-training/tools/decimate-meshes.mjs viz-training/meshes --target 20000 \
+  //        --out viz-training/meshes-part --verify
+  // Measured over all 81 mesh scenes: all-lite 272MB, budgeted-at-20k 599MB, role->raw-source 1573MB,
+  // all-source 2633MB. The vertebral column scene is 7.1MB lite / 14.0MB budgeted / 15.1MB raw-source —
+  // L2 is 6,946 triangles so it is under the budget and arrives whole, which is the detail Frank asked
+  // for. intercostal-muscles is 8.5MB lite / 9.3MB budgeted / 112MB raw-source, which is why the raw
+  // source is not what role 'part' gets.
+  // MESH_TIERS: {
+  //   lite: "https://tytbrhuzikqkscxdnkmr.supabase.co/storage/v1/object/public/viz-meshes/",
+  //   full: "https://tytbrhuzikqkscxdnkmr.supabase.co/storage/v1/object/public/viz-meshes-part/"
+  // },
+
   // The import server URL (Phase 5) — used by the app's Import tab. e.g. https://medbank-api.onrender.com
   IMPORT_API: "https://medbank-import.onrender.com",
   // Your website URL — paywall nudges link here for subscribing.

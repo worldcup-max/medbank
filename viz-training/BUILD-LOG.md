@@ -930,3 +930,1034 @@ the prompt's first suggested fix, and it makes it the cheaper of the two:
 That is now **three** items sitting at `built` behind the same broken link: `cardiac-looping`,
 `refit-camera-on-isolate`, and this one. The build task will keep producing one an hour and none of them
 will be reviewed until the binding is fixed, so the backlog grows by one per hour from here.
+
+---
+
+## 2026-09-10T14:12Z · BUILD · `engine__mesh-resolution-by-role` — resolution follows role, budgeted at generation
+
+Frank said the vertebrae look incomplete. He is right, and this item's diagnosis is right: it is not a
+missing mesh, it is decimation. **Everything the item claims, I re-measured and it holds exactly** —
+`meshes/FMA13073.stl` (L2) is 6,946 triangles / 347,384 bytes, `meshes-lite/FMA13073.stl` is 3,000 /
+150,084, so 56.8% of the geometry is discarded, and the vertebral column scene really does carry 48 mesh
+refs at 7.1 MB lite against 15.1 MB if every `part` took its source. The item said "about 17MB instead of
+7MB". Close enough that whoever wrote it measured rather than guessed.
+
+**But the fix it proposes is wrong, and the way it is wrong is the one this repo keeps warning about.**
+The item generalised from one vertebra. I measured its literal policy — role `part` gets the full source
+mesh — across all 81 mesh scenes:
+
+| policy | corpus total | worst single scene |
+|---|---|---|
+| all-lite (today) | 272 MB | — |
+| **role `part` → raw source (this item's proposal)** | **1,573 MB** | **intercostal-muscles: 8.5 → 112.2 MB** |
+| role `part` → `min(source, 20k triangles)` | 599 MB | intercostal-muscles: 8.5 → 9.3 MB |
+| all-source | 2,633 MB | — |
+
+A vertebra is 347 KB. `FMA9756` is **816,056 triangles and 38.9 MB by itself**, and
+`intercostal-muscles` has five `part` structures whose sources total 112 MB. The proposal, implemented
+literally, would have shipped a 112 MB scene to a student on Nigerian mobile data — the exact harm the
+item's own note was written to prevent. The item also assumed `part` means "the one being taught": in
+`vertebral-column.json` **25 of 48** refs are `role: "part"`, and in `ribs-sternum` it is 29 of 43.
+
+So resolution follows role through a **tier**, and the tier is **budgeted when it is generated, not when
+it is fetched.** A fetch-time budget is impossible in principle — a browser cannot know a mesh's triangle
+count until it has already paid to download it. At `--target 20000` the vertebral column lands at 14.0 MB
+against the 15.1 MB the raw source would cost (L2's 6,946 is *under* the budget, so a vertebra arrives
+whole and Frank gets the detail he asked for) while intercostal-muscles lands at 9.3 MB against 8.5 MB
+lite. Detail where a student looks, ~nothing where they do not. That is what the item actually wanted.
+
+### What I changed
+
+- **`viz3d.js`, the bodyparts3d adapter.** `tiers()` reads `MEDBANK_CONFIG.MESH_TIERS`, both tiers
+  defaulting to `MESH_BASE`. `tierFor(s)` maps role → tier. `resolve(s, tier)` is still the ONE place a
+  delivery URL is constructed. `load(T, s, opts)` takes an `opts.tier` override — deliberately a
+  parameter, not a second method, so the retry/timeout/material code cannot drift into two copies.
+- **A `full` miss falls back to `lite`** rather than returning `reason:'failed'`. 494 meshes upload one
+  at a time; without this, a scene opened mid-upload greys out precisely its *taught* structures while
+  the scaffolding around them renders fine. Costs an extra request only when a distinct full tier is
+  actually configured.
+- **`config.js`** — `MESH_TIERS` added **commented out**, with the measurements and the generation
+  command. With it absent both tiers collapse to `MESH_BASE` and every URL is byte-identical to before.
+- **`role: "primary"` counts as taught.** See findings below.
+
+### What I PROVED — `viz-training/tools/prove-mesh-tiers.mjs`, 21/21, `models-out/mesh-resolution-by-role/`
+
+Against the real adapter in `viz3d.js` and real BodyParts3D STLs at two real resolutions, all 48 refs of
+`gross__back-vertebral-column__vertebral-column.json`:
+
+1. **Baseline is byte-identical.** With no `MESH_TIERS`, a `part` and a `context` structure both resolve
+   to exactly `MESH_BASE + id + '.stl'`, and `tiers()` collapses both entries to `MESH_BASE`.
+2. **Tier selection**: `part` → full, `context` → lite, `primary` → full, `mesh_tier` overrides role.
+3. **It loads, at the right resolution** — the decisive check, and the one that cannot be faked: all
+   48/48 resolve through `adapter.load` with geometry, and **the triangle count that ARRIVES in the
+   browser equals that tier's file on disk** for every one — 25 `part` at full, 23 `context` at lite.
+   **L2 arrives at 6,946 triangles, not 3,000.**
+4. **The incomplete-tier fallback works**: a deliberate 404 on a `role:"part"` mesh in a partly-uploaded
+   full tier comes back with geometry, `reason: null`, `tier: 'lite'`, 3,000 triangles.
+5. **The tier tag does not pollute the scene.** My first version wrote `mesh.userData.__meshTier` — and
+   `makeMesh` does `mesh.userData = s`, so **userData IS the scene structure object by reference** and I
+   was quietly adding a field to the author's structure. Moved to `mesh.__meshTier` and added a check
+   that asserts no structure carries it. Found by writing the test, not by reading the code.
+6. **Normals.** Console clean, no degenerate normals, and **signed volume positive on all 48** with face
+   normals agreeing with vertex normals on every triangle.
+7. **Renders at both tier configs**, and an isolated L2 at each resolution for eyeball comparison.
+
+### The normals probe told me something, and it nearly told me a lie
+
+The centroid probe **failed** first time: cervical vertebrae read 64.5–89.5% outward, well under the 90%
+a closed solid should give. `RENDER-STANDARD` says to understand which kind of surface you have before
+accepting a low number, so instead of lowering the threshold I **calibrated the probe against known
+shapes**: a sphere (closed, convex) reads **100%**; a torus (closed, holed, concave) reads **66.7%** with
+positive signed volume. The vertebrae sit squarely in the torus regime — and they should, because a
+vertebra is a ring: its centroid is inside the vertebral foramen, so the canal wall, the concave facets
+and the interlaminar gap all legitimately face *toward* it. Signed volume, which does not care about
+concavity, is positive on all 48. **The winding is fine; the centroid probe is the wrong instrument for
+a holed solid.** Worth adding to the standard: pair it with signed volume, or it will cry wolf on every
+vertebra, every ventricle and every vessel in the corpus.
+
+### Did it fix what Frank saw? Honestly: partly
+
+`L2-side-by-side.png` — lite left, full right. The superior articular processes gain a distinct concave
+facet surface and the mamillary process separates into its own bump; the lamina/transverse-process notch
+reopens; the foramen outline stops being visibly polygonal. Those are the examinable features, and on
+the left they are eroded. **But 6,946 triangles is still visibly faceted** — the item said it and it is
+true: the source IS the ceiling, there is nothing better to fetch. A student would recognise L2 either
+way; they could read the facet *orientation* off the right one. Real improvement, not a transformation.
+
+At whole-column scale the two renders are near-indistinguishable — which is the argument for tiering
+working exactly as intended, not a failure.
+
+### What I did NOT do, and what I am unsure of
+
+- **The full tier does not exist yet.** I did not generate it — 494 meshes through a JS quadric decimator,
+  several of them over 800k triangles, is not a job to start unproven inside a one-item run, and the
+  engine change is the item. `MESH_TIERS` stays commented out; nothing is live. **The next run's most
+  useful job is generating `meshes-part` at `--target 20000 --verify` and uploading it.**
+- **I could not see what the CDN actually serves.** `MESH_BASE` (Supabase) is blocked by the egress
+  allowlist from both the container *and* `device_bash` — `X-Proxy-Error: blocked-by-allowlist`. So I do
+  not know whether the live bucket holds source or lite meshes. Note that `ingest-full-archive.mjs
+  --upload` pushes `viz-training/meshes/` — the **full** directory — to the bucket root, which suggests
+  the CDN may already be serving source-resolution meshes and that `meshes-lite/` was never uploaded at
+  all. **If so, this item's premise about what students actually receive is wrong**, the payload problem
+  is worse than anyone thinks, and the tier map should be inverted (point `lite` at a new decimated
+  prefix rather than `full` at a new one). **Someone with dashboard access must check this before the
+  full tier is generated.** It is the single most load-bearing unknown here and I could not close it.
+- **On-demand upgrade is not built.** The item says "and anything highlighted" gets full resolution. That
+  needs a re-fetch and swap when a structure is highlighted or isolated, and it is the mechanism that
+  would bound payload properly rather than approximately. `load(T, s, {tier:'full'})` is the seam and it
+  is tested; the player wiring is not written. Its own item.
+- **I proved the adapter, not the player.** The harness calls `adapter.load` and renders the meshes
+  directly; it never goes through `MB3D.mount`, so `fit()`, views, chips and the highlight path are
+  unexercised by me. Whole-column framing in my screenshots is my harness's naive fit, not the app's.
+- **No load-time or memory measurement.** 25 higher-resolution meshes in one scene is more decode and
+  more GPU memory and I did not measure either. On a low-end Android this could matter more than bytes.
+- **The harness has never run on Frank's machine.** The repo has `three` but no `playwright`, and there is
+  no chromium on the device, so it ran in the cloud container against staged copies. Given how loudly
+  §3 of the standing instructions warns about green tests on the wrong substrate, I am flagging rather
+  than burying it: the *mesh data and the adapter code* were real and identical, but the *browser* was
+  not the one a student uses. `viz-training/tools/prove-mesh-tiers.mjs` takes `MB_ROOT` so it can be run
+  properly the moment playwright is installed there.
+
+### Three findings that are NOT this item
+
+1. **`role: "primary"` is off-spec and the player silently mistreats it.**
+   `model3d-scene-spec-v2.md` declares only `"part"` and `"context"`. **92 structures across 30 scenes
+   use `"primary"`** — every brainstem, cerebellum, limbic and histology scene. `viz3d.js` tests
+   `role === 'part'` in four places, so all 92 are excluded from the student's part list (line ~1138),
+   get a pin as though they were scaffolding (~1581), and are **clipped away in cross-sections**
+   (~2282) — the taught structure is the one that vanishes when you section. I treated `primary` as
+   taught for tiering, because tiering it as scaffolding would have handed the taught structure the worst
+   resolution in the scene, which is the bug this item exists to remove. **I did not fix the other four
+   sites — that is a separate item and it is bigger than it looks.** Either the spec gains a third role
+   or 92 structures need rewriting; that is a call for a person.
+2. **346 of 494 lite meshes sit exactly on the 3,000 cap**, and `decimate-meshes.mjs` defaults to
+   `--target 20000`. Someone ran it at 3000 and the loss is far worse than the L2 case implies:
+   `BP45.stl` goes 31,644 → 3,000, **90.5% discarded**. Meanwhile **94 of 494** lite files are at or
+   above their source size, so decimation bought nothing for those and they may as well serve source.
+3. **`BUILD-TASK-PROMPT.md` §1 still says `tools/queue-set.mjs`.** It is
+   `viz-training/tools/queue-set.mjs`; from the repo root the documented command dies with
+   MODULE_NOT_FOUND. **This is now the third build run to hit it** — the last two logged it too. §6 says
+   a note in a file is a claim; this claim has been false all day and it is a one-line edit.
+   Also §1b describes only `kind: "model3d"` and `kind: "scene"`. **This item is `kind: "capability"`,
+   which the standing instructions do not describe at all** — seven queue items are, and four have now
+   been worked. Whatever convention those runs invented is unwritten.
+
+### Files
+
+- `viz3d.js` — `tiers()`, `tierFor()`, tier-aware `resolve()`, `load(T, s, opts)` with `makeMesh`/
+  `fetchTier` split and the lite fallback.
+- `config.js` — `MESH_TIERS`, commented out, with the measurements and the generation command.
+- `viz-training/tools/prove-mesh-tiers.mjs` — new; the 21 checks above.
+- `viz-training/models-out/mesh-resolution-by-role/` — `proof.json`, four renders, two side-by-sides.
+- **No scene file was touched.** No git command was run.
+
+### Postscript — the chain is fixed, and this item will be reviewed at 15:35Z
+
+**The review task now has a cron: `35 * * * *`.** `list_triggers` shows
+`trig_01WDYyWaeB4uzeXjfVfvtDTN` with `updated_at: 2026-09-10T14:29:47Z` — *during this run* — and
+`next_run_at: 2026-09-10T15:35:00Z`. Somebody applied the fix the last two build runs asked for. That
+was the cheaper of the two options §4 lists, and it is the right one: **a scheduled firing carries the
+device binding**, which is exactly how this build run got its folders.
+
+So the honest status of the handover is a three-part answer rather than the flat failure the last three
+runs reported:
+
+1. **I fired it, and firing still does not work.** `fire_trigger` at 14:37:23Z, session
+   `cse_01DpG52R7j1BFHSDwqE2VBZ6`, returned **`no_signed_approval` — "run not approved for Claude
+   Desktop (Windows) — this run uses the cloud only"**, precisely as §4 predicts. A task cannot re-sign
+   another task's device binding, and that has not changed. I verified the id against `list_triggers`
+   rather than trusting this document; the id and name are both right.
+2. **But the 15:35Z scheduled firing should reach the repo**, because it is scheduled rather than fired,
+   and `derived_state.folders_state` is `FOLDERS_STATE_PRESENT` with the medbank folder listed. The
+   backlog should start draining on its own from 15:35 onward. **This is a prediction, not a proof — I
+   have not seen a scheduled review run succeed yet.** The next build run should check whether it did,
+   and if 15:35 came and went with the queue unmoved, say so loudly: that would mean the cron is not
+   sufficient either and the second option in §4 (fire it from the desktop) is the only one left.
+3. **One timing detail worth knowing.** The scheduled 14:35:58Z firing happened **eleven seconds
+   before** I set this item to `built` at 14:36:09Z, so that run cannot have seen it. If it reviewed
+   anything it reviewed one of the three older `built` items. Not a fault — the build task fires at
+   `5 * * * *` and the review at `35 * * * *`, which is thirty minutes of headroom; this run simply took
+   twenty-four minutes and crossed the boundary. Worth noting only because it means a *slow* build run
+   can miss its own review window by seconds and wait an hour.
+
+**REVIEW FIRED AND REFUSED (`no_signed_approval`) — `engine__mesh-resolution-by-role` IS BUILT, NOT
+REVIEWED.** Four items now sit at `built`: `cardiac-looping`, `refit-camera-on-isolate`, `per-view-t`,
+and this one. Unlike the last three runs, though, there is now a plausible mechanism for that queue to
+clear without Frank doing anything further.
+
+**Nothing here is live.** `MESH_TIERS` is commented out in `config.js`, so with or without review this
+change cannot alter a single byte a student downloads until someone generates the second tier and
+uncomments it. That was deliberate: it means the review can take its time.
+
+---
+
+## 2026-09-10 · REVIEW round 2 · embryology__cardiovascular-development__cardiac-looping
+
+Reviewer: model3d REVIEW task, cloud run with folders attached. **I did not build this scene.**
+Artefacts: `viz-training/_review-2026-09-10-r2/` (MEASUREMENTS.md and the diagnostic renders).
+
+### My own three checks, chosen before reading the build notes as a checklist
+1. Whether the "solved" torsion satisfies the round-1 acceptance tests A–D, or a different set of
+   seven the builder wrote for themselves.
+2. Stage-set `t` consistency across the `_b` structures.
+3. Key coverage — orphan structures, and view-to-view distinctness.
+
+Check 1 is what found the two biggest things. The build notes are dense, honest and specific, and
+they name eleven risky decisions — but the mirror is described as *proven correct* and is therefore
+in none of them, which is exactly the shape the standing instructions warn about.
+
+### Review 1 — mechanical: PASSES
+44/44 refs resolve through the real adapter with geometry · console clean · **0 pixel-identical view
+pairs across all 9 views** (hashed) · builds at t = 0, 0.2, 0.4, 0.6, 0.65, 0.8, 1.0 without throwing ·
+frame fill 71–79 % of height on 8 of 9 views · no CDN imports · winding/normals/colour/silhouettes all
+through `render-kit.js` · IIFE confirmed at source.
+
+### Round-1 findings that are genuinely fixed (verified, not taken from the log)
+- **1 and 2, the loop bending dorsally and the atrium finishing below and ventral to the ventricle.**
+  Re-measured on mesh centroids: A +0.554, B −0.548, C −1.319, D +0.446 — all four pass. The atrium
+  starts 1.48 below the ventricle and now finishes 0.45 above it. This was the biggest thing wrong
+  with the scene and it is fixed.
+- **3** mesocardium is two cuffs with a real gap; view 2 rotated lateral and no longer duplicates view 1.
+- **5** IIFE. **6** no duplicate frames. **7** view 8 shows whole loops, no bare end caps. **8** filed
+  correctly as a player bug. **9, 10** narration restored.
+
+### What I found (4 open, full text on the queue item)
+1. **CRITICAL — `mirror` is a 180° rotation, not a reflection, so views 8 and 9 do not show an
+   L-loop.** Vertex-level: all five chambers match rot-Y-180 at 100.0 % and a true reflect-X at 0.0 %.
+   Chirality unchanged (signed volume ratio 1.0000). The mirror build seen from the front is
+   *pixel-identical* to the normal heart turned 180°. The veins ARE properly reflected and the arches
+   are neither, so the transform is not even internally consistent.
+2. Acceptance **test G did not test what its own `must` string said** — it folded the antero-posterior
+   separation into "transverse", letting *one behind the other* count as evidence for *side by side*.
+   **CORRECTED this round**; it still passes. The geometry finding it was hiding is finding 3.
+3. **View 4's "side by side" is false at the t it renders** (t = 0.65: transverse 0.319 vs
+   cranio-caudal 0.675 vs antero-posterior 0.714). Not fixable by re-pointing t.
+4. **The primitive ventricle finishes on the embryo's RIGHT** (x −0.548), and round-1 acceptance test
+   B actively enforces that. Do not solve against B as written.
+5. The pericardial sac still appears at one stage only, so the crowding cannot be seen.
+
+### Corrected this round
+- **MODEL** `acceptance()` test G: `Math.hypot(dx, dz) − |dy|` → `|dx| − |dy|`. Still passes (+0.273).
+- **MODEL** the MIRRORING comment block, which asserted "the L-loop is as correct a solid as the
+  D-loop… no rendering consequences at all". Replaced with the measurement and the recommended fix.
+  The geometry itself is NOT changed — that is a change to the sweep emitter and belongs to the build
+  task, per RENDER-STANDARD 2.1.
+- **SCENE** two false claims in `gaps[]`: the t = 0.65 justification (its "+0.11 margin" came from the
+  mis-implemented test G) and a stale `arches_b (@0.4)` reference. Validator re-run: 142/142.
+  Views re-rendered after every edit: hashes byte-identical, so nothing I touched changed the picture.
+
+### Standards gap
+`RENDER-STANDARD.md` would not have caught finding 1. Two rules proposed, on the queue item:
+**A MIRRORED VARIANT MUST BE PROVED TO BE A REFLECTION** (chirality assertion — a rotation passes
+every check the builder ran: triangle count, outward-normal fraction, negated mean x, untouched
+winding), and **AN ACCEPTANCE TEST MUST BE TESTED AGAINST ITS OWN PROSE**.
+
+### Status
+`changes-requested`, round 2. Open findings 13 → 4: converging, so not escalated. Views 8 and 9
+must not go in front of a student until finding 1 is fixed.
+
+---
+
+## 2026-09-10 · BUILD (round-2 rework) — `embryology__cardiovascular-development__cardiac-looping`
+
+Item taken: the only `changes-requested` item, ahead of 123 `todo`. Claimed `building` at 15:13:30Z
+before any work; no other item was `building`. One item, as instructed.
+
+### What I PROVED, as against what I assumed
+
+**Finding 1 — the mirror. FIXED, and proved the same three ways the review disproved it.**
+`VizKit.reflectGroupX` added to `render-kit.js`: positions and normals negate x, and every triangle
+reverses its winding. The curve is now built once, always right-handed, and the FINISHED GROUP is
+reflected; the per-side flips in the veins and the arches are gone, which is what had the parts
+disagreeing about what mirroring meant. The reflection lives in the kit rather than in the model
+because RENDER-STANDARD §2.1 is explicit that winding is not hand-rolled twice.
+- **chirality** signed volume of the sinus–atrium–ventricle–bulbus centroid tetrahedron:
+  D −0.05005, L +0.05005, **ratio exactly −1.0000**. It was +1.0000.
+- **vertex level** all **eleven** parts match a true reflect-X at **1.000** and rot-Y-180 at
+  0.000–0.004, with identical vertex counts. (`midline` and `pericardium` match both — they are
+  symmetric about x. Stated so nobody reads it as a failure.)
+- **winding** face-normal-vs-vertex-normal agreement is 0.99 on BOTH builds. That is the proof the
+  triangle order actually reversed: reflecting positions without reversing winding would have driven
+  it to 0.01. "The winding is untouched" was the old note's tell, not its proof.
+- **picture** in view 8 the two hearts now render at **366 px wide × 522 px high each, silhouette
+  areas 100237 vs 100234** — the review measured 79 % of width and 81 % of area. This also settles
+  cross-item finding 6: nothing about view 8 needs a player change.
+- The model asserts it on every mirror build (`acceptance` test M / `mirrorProof()`), measured on the
+  real vertices immediately before and after the transform — the mirror build is the one the old
+  `acceptance()` never touched.
+
+**Findings 3 and 4 — the geometry. FIXED by re-solving, not by tuning.**
+`solve-cardiac-torsion.mjs` now solves against the round-2 amendments: **B′** replaces B (dextrality
+read off the bulboventricular CONVEXITY, not the ventricle's final side), **H** added (|dx| > |dz|,
+asserted at t = 1 *and* at t = 0.65, the t view 4 actually draws), **I** added (ventricle finishes
+LEFT). The trajectory penalty no longer pushes the ventricle's x negative at every t — that was
+round-1 test B applied to the whole trajectory, and it is what locked the defect in.
+New `SOLVED`: `amp [1.1662, 1.2171, 1.8362, 0.2518] · psi [2.8932, 2.5564, −0.6181, 1.5845] ·
+chordFrac 0.5756`. Measured at t = 1, all nine pass on the model's own centreline and through the
+real adapter: **A +0.635 · B′ bulbus x −0.607, limb excursion −0.715 · C −0.801 · D +0.416 ·
+E +0.352 · F −0.678 · G +0.599 · H +0.326 (H at t = 0.65: +0.188) · I +0.070**.
+The ventricle was x −0.548 and is now +0.070, so the future left and right ventricles are on the
+sides a student is examined on; bulbus-to-ventricle separation is now predominantly transverse
+(|dx| 0.678 vs |dz| 0.352) where round 2 measured it predominantly antero-posterior at every t.
+
+**The new tests are not vacuous — negative case run.** Built a copy of the model carrying the OLD
+nine numbers: `acceptance()` fails, in the console, on exactly **H and I**. That is round 2's
+`standards_gap` request ("every id needs a negative case the test must reject") satisfied by
+demonstration rather than by assertion.
+
+**Finding 5 — the pericardium. FIXED.** `peri_c` = `cardiac-looping#pericardium@1`, shown on view 6,
+which is view 1's day-28 counterpart (same anterior camera, same whole heart), so the crowding is a
+comparison between two frames instead of a claim made over one. **Measured** heart box as a fraction
+of the sac: width 39 % → 75 %, depth 31 % → 57 %, height 77 % → 72 %.
+
+**Finding 2** — the reviewer's corrected test G is kept as-is, and H is the further test their note
+asked for once the geometry could satisfy it. It can.
+
+### The four proofs, on the real substrate
+13 stages rendered headless and **looked at** · console **clean** (4 swiftshader harness lines
+listed in `report.json`) · outer-surface outward normals 0.968–1.000 on all five myocardial segments
+(whole-buffer ~0.515 is the documented thick-walled-shell figure) · face-winding 0.923–1.000 ·
+**45/45 refs resolve through `MB3D.adapters.procedural` with geometry**, 311 876 triangles ·
+all 9 views rendered with their ops applied and hashed, **0 pixel-identical pairs** ·
+`validate-scenes` **142/142**.
+
+### What I did NOT do, and what I am unsure of — for the review
+
+1. **THE ATRIUM HANGS OFF THE EMBRYO'S LEFT, AND I COULD NOT SOLVE IT OUT. New defect, mine, and
+   visible in the render before it was visible in any number.** Atrium centroid x **+1.14** at t = 1
+   (the previous solve had +0.30); sinus +0.66. The common atrium at day 28 straddles the median
+   plane — a centroid a whole chamber-radius off it is not that. Nothing in the review's test set
+   constrains it, which is RENDER-STANDARD's "the unlisted place is the one nobody checks" arriving
+   one solve after it was written. I added the constraints as **J** (|atrium x| small) and **K**
+   (|sinus x| small) and re-solved **twice**: at J ≤ 0.35 the best candidate fails H65, I and J and
+   is unstable (see 2); relaxed to J ≤ 0.55 it converges to I −0.012 / J 0.823 — it will not hold the
+   ventricle left and the atrium midline at the same time. My reading: with four Gaussian bends each
+   carrying ONE plane, the atrium lies between the sinoatrial and AV bends and its lateral position
+   is not independently controllable — this needs a degree of freedom the curvature model does not
+   have, not a better search. **I shipped the candidate that satisfies every condition the review
+   asked for and left J and K failing, rather than sacrificing I, H or C to a constraint I invented
+   this run.** That is the call I am least sure of and the first thing a reviewer should overturn if
+   they disagree.
+2. **THE SOLVER'S ROBUSTNESS CHECK HAD A HOLE, AND THIS FILE'S HEADER CLAIMED OTHERWISE.** The header
+   says the solver "rejects any candidate whose measurements move between NSEG = 140 and NSEG = 300".
+   It does — and that is not enough. The J ≤ 0.35 run produced a candidate that agreed with itself at
+   140 and 300 and **collapsed at 600** (lambda pinned at its cap, chordErr up four orders of
+   magnitude, I −0.111 → −0.726) — the exact bifurcation failure the header records from an earlier
+   candidate and believes is now prevented. Added: a **stability verdict at N = 600** printed before
+   anything can be pasted, and a **`--check '<json>'` mode** so a review can re-measure the nine
+   numbers actually in the model without re-running the search. The shipped candidate: worst drift
+   300→600 = **0.0052, stable**.
+3. **Near-contact between non-adjacent segments at t = 1.** Minimum surface distance, sampled every
+   17th vertex: sinus/ventricle **0.012**, ventricle/truncus **0.006** (the previous solve: 0.291 and
+   0.012). Positive, so no interpenetration was detected — but the sampling is coarse and this is
+   tight. Worth a reviewer looking at t = 1 for a seam.
+4. **The mesocardium's whole-buffer outward-normal fraction reads 0.103 on one of the two cuffs**
+   (was 0.471). For a thin curved sheet that number is not a defect signal — the normal is roughly
+   perpendicular to the vector from its own centroid, so it can land anywhere; the meaningful check
+   is winding, which is **1.000** on both cuffs. Stated because a probe reading 0.103 looks alarming
+   and will be read by someone who did not build it. The free-edge length 1.35 is still a tuned
+   constant, unchanged from round 1.
+5. **Peak crowding is at MID-LOOP, not day 28** — t = 0.65 measures 84 % width / 69 % depth against
+   75 % / 57 % at t = 1, because the sac keeps widening after the loop has stopped bulging. If day 28
+   is meant to be the tightest moment, the sac's width schedule needs re-examining. Recorded in the
+   scene's `gaps[]`; not changed, because it is a teaching decision.
+6. **Never opened in the real player this run** — no camera fit, no trackball, no per-view frame fill.
+   Views 6 and 8 changed most. Round 1's framing findings are unaffected by anything here.
+7. `CROSS_SECTION` on view 7 is still not exercised by `render-scene-views.mjs`, so view 7's cutaway
+   remains unproven — round 2 flagged this and it is still true. The `t100-cut` stage render shows the
+   cutaway working in the harness, which is not the same thing.
+
+### Two disagreements between the instructions and the repo, per §6
+- **`tools/queue-set.mjs` does not exist.** `BUILD-TASK-PROMPT.md` §1 gives repo-root-relative paths
+  for the tools and repo-root-relative paths for `models3d/`, but every tool actually lives in
+  **`viz-training/tools/`**. A run that trusted the prompt would have died on its first queue write.
+  The `models3d/` half of the prompt is right; only the tools half is wrong.
+- **The scheduled task's own prompt says "then fire the review task".** §4 of this file says, in
+  capitals and with the reason, **DO NOT** — a session-fired review inherits no device binding and
+  wakes with no repo. I followed this file. The stored scheduled-task prompt should be corrected, and
+  that needs Frank, since it is outside the repo.
+
+### Status
+`built`, awaiting the :35 review. Findings 1, 3, 4 and 5 addressed and proved; finding 2 was the
+reviewer's own correction and is preserved. One new open item (the atrium, above) that I could not
+solve and did not paper over.
+
+**Tools added this run** — `viz-training/tools/prove-mirror-chirality.mjs` (the three mirror tests)
+and `viz-training/tools/measure-loop-fit.mjs` (pericardial fill, and near-contact between
+non-adjacent segments). `solve-cardiac-torsion.mjs` gained the N = 600 stability verdict and
+`--check '<json>'`. Backups of the four files I edited are in `viz-training/_to_delete/*.round2`;
+this mount forbids deletion, so they are moved aside rather than removed.
+
+
+---
+
+## 2026-09-10 16:07 UTC · gross__back-vertebral-column__coccyx · ESCALATED, nothing built
+
+**Item taken:** `--next` offered it as the first `todo` (no `changes-requested` item existed; counts
+at claim time were done 1, built 3, in-review 1, todo 123). Claimed `building` at 2026-09-10T16:07:58Z
+before any work, released to `escalated` at the end. One item only.
+
+### What I did NOT build, and why
+
+The item asks for a procedural coccyx on the premise that "BodyParts3D HAS NO COCCYX BONE ... there
+is nothing to fetch, ever." **That premise is false**, and §6 of the task prompt is the reason I
+checked it instead of building on it. Full write-up in `ESCALATIONS.md`; the short version:
+
+`viz-training/meshes/FMA16202.stl` — the sacrum mesh this scene already loads — is a single connected
+solid 145.3 mm tall. A sacrum is 100–115 mm. The extra 35 mm is the coccyx, segmented into the same
+mesh, and it renders as a recognisable four-segment tapering tail with cornua, curving ventrally.
+Writing a procedural coccyx would have put a hand-made second tailbone inside a real scanned one.
+
+### What I PROVED (measured, reproducible)
+
+| claim | how | result |
+|---|---|---|
+| FMA16202 is one piece | union-find over 22,194 welded vertices | 1 component, no second shell |
+| it is sacrum + coccyx, not sacrum | bbox | 145.3 mm tall (Z 790.7–936.0) |
+| where the joint is | convex-hull area per 1 mm slab | waist at **Z 825.5, 147 mm²**, between the sacral flare (440 mm² by Z 831) and the Co1 bulge (320 mm² at Z 817) |
+| the split is anatomical | that cut | sacrum 110.5 mm, coccyx 34.8 mm — both textbook adult |
+| it is a midline ventrally-curved tail | per-slab centroid | X centre −0.2 mm; ~10 mm ventral deviation over its length |
+| it looks like the thing | headless chromium, 4 view directions, through `render-kit.js` (`C()`, `bg()`, `standardLights`, `configureRenderer`) | `models-out/coccyx/cut-lateral.png` — four segments, cornua, ventral concavity |
+| console is clean | page `console` + `pageerror` hooks | zero errors, zero page errors; only SwiftShader's `ReadPixels` GPU-stall performance notices, which are the software rasteriser, not the scene |
+| what a student sees today | reproduced `placeAnchors()` and `paintPatches()` arithmetic exactly | marker sphere **14.5 mm diameter, `depthTest:false`**, sitting over the coccyx and drawn through it (`anchor-lateral.png`); patch radius 21.8 mm covers ~96% of the coccyx, spills onto ~9% of the sacral apex |
+| the scene's anchor is correctly calibrated | uvw [0.4908, 0.8217, 0.1471] → world | (−0.16, −21.48, 812.07), matching the tail centroid I measured independently |
+
+### What I ASSUMED, or could not prove
+
+- **The exact sacrococcygeal joint line.** I solved for the minimum cross-section (Z 825.5). The
+  scene's existing `calibrated_by` note picked Z 832 by a width threshold — 7 mm higher. Both yield
+  textbook proportions; the disagreement is whether the sacral apex tip is sacrum or coccyx. I did
+  not resolve it and would not want an asset cut before a human looks at `cut-lateral.png`.
+- **That the derived-asset route is cheap.** I read `viz3d.js`'s bodyparts3d adapter and found
+  `resolve()` builds a URL from an id and nothing else, and grepped the whole engine for any
+  mesh-subset/clip/submesh capability — there is none. So a split needs no engine change. I did not
+  build it, so that is inference from reading, not a proven pipeline.
+- **Whether this is what Frank actually saw.** The item's `found_by` is "Frank noticing the column
+  looked unfinished". The opaque yellow ball over the tailbone is my best candidate for what he saw,
+  but I did not render the whole 60-structure column scene to confirm it in context — I rendered
+  FMA16202 alone. Worth one look before anyone acts on that reading.
+
+### Disagreements between notes and the repo, per §6
+
+- **The queue item contradicts the scene file, and the scene file is right.** The item's `why` says
+  the catalog has no coccyx; the scene's `coccyx.calibrated_by` says the sacrum and coccyx are
+  segmented as one mesh. Measured: the scene is correct. A queue item written from a catalog search
+  outlived a later, better measurement sitting in the scene it refers to.
+- **Confirmed, not assumed:** the catalog really does have no coccyx entry — all six `coccy` matches
+  in `available-meshes.json` are pelvic-floor muscles (coccygeus, iliococcygeus, pubococcygeus, L+R).
+  The item's search was right; its conclusion from it was not.
+- **`engine__unit-reconciliation` is still `todo`,** and the item note says to escalate rather than
+  eyeball scale if it has not landed. It has not. That would have been a second, independent reason
+  to stop — but it is now moot, since the right answer needs no procedural geometry and therefore no
+  unit reconciliation at all.
+
+### Substrate notes
+
+The device has **no network and no playwright** (`registry.npmjs.org` → `EAI_AGAIN`), so the repo's
+own `render-scene-views.mjs` cannot run there. I staged `viz3d.js`, `render-kit.js`, three.js, the
+scene JSON and the STL into the cloud container and rendered against **the real repo files**, not a
+substitute — the pre-installed chromium is at `/opt/pw-browsers/chromium-1194/`, which the installed
+playwright does not find by default (it wants build 1243), so `executablePath` must be set. The probe
+is checked in at `models-out/coccyx/probe-coccyx-mesh.mjs` so the next run does not rediscover any of
+this.
+
+`queue-set.mjs`'s rename-based lock works on this mount — verified by using it twice, once to claim
+and once to escalate. No stale `.lock` left; `BUILD-QUEUE.json.lock.released` is the expected residue.
+
+### Status
+`escalated`. Two yes/no questions in `ESCALATIONS.md`. Nothing was written to `models3d/`, no scene
+was edited, no git command was run.
+
+---
+
+## 2026-09-10 · engine__mesh-resolution-by-role — applied to the whole corpus
+
+**Who:** the model3d session, with Frank watching. Not the scheduled build task.
+
+**What triggered it.** Frank saw the restored vertebral column and asked for that level of detail on
+everything, muscles specifically.
+
+**What I found before doing anything, and it contradicts the item's premise.** The item says the
+flat 3,000-triangle cap was hiding the vertebral processes and facets. It was not. I regenerated the
+old 3,000-tri L2 (it came out at exactly 150,084 bytes — the old bucket file, so it is the real
+"before") and rendered it against the 6,946 source. Every process, every facet, the foramen: all
+present in both. The higher resolution is smoother, not more complete.
+
+**Where the cap really was doing damage: muscle.** External oblique at 8,000 is a featureless slab.
+At 76,733 the fibres are legible across the whole belly, running inferomedially. Rectus abdominis at
+28,887 shows its tendinous intersections; at 8,000 it did not. Fibre direction is examinable — it is
+how you tell external oblique from internal, external intercostal from internal. So the cap was not
+trimming polish off a muscle, it was removing the feature that identifies it.
+
+**The rule.** `tools/apply-mesh-budget.mjs`. A per-scene triangle budget rather than a per-mesh cap.
+Budget = 450,000 tri (21.5 MB) = the vertebral column at full scan resolution, the heaviest scene we
+have evidence loads. A scene under budget at source is untouched (40 of 81). A scene over it shares
+the budget in proportion to source complexity, which recovers "by role" from the geometry — the
+subject of a scene is nearly always its most complex mesh, so nobody has to annotate which is which.
+Floor 6,000. A mesh in several scenes takes the tightest allocation. Never below what it already
+ships. Written up as RENDER-STANDARD §5.5.
+
+**Why this and not the two-tier MESH_TIERS scheme the previous run built.** One file per mesh means
+no tier map, no on-demand upgrade on highlight, and no 404-fallback path — and it sidesteps the
+objection that killed the earlier proposal, that a browser cannot know a mesh's triangle count until
+it has already paid for it. The budget is applied at generation, where the information is.
+
+**Proved.**
+- 333 meshes re-decimated, 0 failed. `--verify` on every one: worst surface deviation across the
+  whole corpus 0.489 mm, and the bounding box was bit-identical on every single file, so no landmark
+  anchor moved.
+- 254 of 494 meshes now ship at full scan resolution (was 142).
+- Corpus 2,049,168 -> 6,640,572 tri; 97.7 MB -> 316.6 MB in the bucket. No scene over 21.6 MB.
+- Rendered scan-vs-shipped for a rib at the 6,000 floor (indistinguishable from its 44,634 scan),
+  rectus abdominis, and the external intercostals. `models-out/mesh-budget/`.
+
+**A bug I wrote and caught before applying it.** The first budget was the vertebral column's current
+weight, 419,568. That scene's *source* total is 443,984, so the rule called the scene it was derived
+from over budget and reallocated it — cutting T5 from 9,834 to 6,000, undoing the restore Frank had
+just approved. Fixed by budgeting 450,000 and adding a never-go-backwards clamp. Recorded in
+RENDER-STANDARD §5.5 because the general lesson is not specific to meshes: if the case you measured
+is not a fixed point of the rule you derived from it, the rule measures something else.
+
+**Not done, and load-bearing:**
+1. **Not uploaded.** Frank runs `upload-meshes.mjs`; the service key is his and must stay in his
+   environment. Until he does, students still receive the old files. Verify from the CDN afterwards
+   rather than trusting the uploader — this is the tool whose own header warns a silent skip is the
+   worst failure.
+2. **No timing measurement on a real phone on Nigerian mobile data.** The budget is justified by one
+   scene that is known to load, not by a load-time study. That is the weakest joint in this work.
+3. `MESH_TIERS` in `config.js` and the `load(T,s,{tier})` seam are now dead weight and should be
+   deleted rather than enabled.
+4. The `role:'primary'` off-spec problem the previous run found — 92 structures in 30 scenes, which
+   viz3d.js excludes from the student's part list and clips away in cross-sections — is untouched and
+   still needs a human call.
+
+---
+
+## 2026-09-10 · REVIEW · `engine__refit-camera-on-isolate` → `changes-requested`
+
+Review run, cloud session, folders attached. `ls viz-training/BUILD-QUEUE.json` first, as instructed —
+it was there. This is the first review run in this chain that could reach the repo at all; the two
+before it woke with no `$HOME/mnt` and said so. Claimed `in-review` at 15:38Z through `queue-set.mjs`.
+
+Three items sat at `built`. Took the oldest `built_at`: this one, 13:03:57Z.
+
+### My three checks, written before I read BUILD-LOG.md
+
+From the `why` and `note` alone: (1) does the refit fire on the VISIBLE subject after the ops, and does
+the clamp the note asked for exist and mean anything; (2) does it survive being composed with
+`initialYaw`, the opening spin, a straggler mesh landing and a revisit; (3) does it regress the views
+it was not aimed at — whole-scene views, and the 71 BodyParts3D scenes it claims to repair.
+
+The builder's notes cover (1) and (2) thoroughly and honestly. (3) is where the defect is, and it is
+the one their notes do not reach: **the item was measured on two scenes out of 142.**
+
+### Review 1 — mechanical
+
+Run on the device against the committed file: `node --check` ok; `tools/lint-viz3d.mjs` — every name
+resolves; `tools/validate-scenes.mjs` — 142/142 valid; `tools/test-fit-idempotent.mjs` — 8/8.
+Run in a container with the chromium the tools want: `tools/test-view-framing.mjs` — 197 checks, 0
+failures, fill 95.2% every time. Console clean on every scene I measured serially (0 entries).
+
+`sha256(viz3d.js)` on the device is `a8d3982130…` before and after this run: **I changed no product
+code.** More on that below.
+
+### Review 2 — the picture first
+
+I measured framing in the real player with the builder's own `measure-view-framing.mjs`, unmodified
+except for a `--before` flag that loads a copy of `viz3d.js` with `frameView()` disabled and
+`ROTATE_TO_VIEW` flying on its own — the player as it was before this item. Ten scenes beyond the
+builder's two. Full per-view numbers: `viz-training/_review-2026-09-10-r3/review-framing-measurements.json`.
+
+**The item's central claim holds and it is a large win.** Nearly every view improves, several by an
+order of magnitude of lit area: carpal-tunnel view 3 1.7% → 24.8% of the canvas, kidney view 1
+2.8% → 15.8%, intervertebral-disc view 1 1.05% → 9.84%, vertebral-column view 6 blank → 41.5%. On the
+scenes where students actually are, this fixes what it says it fixes.
+
+**And it introduces a regression the two measured scenes could not show.** `frameView` frames on
+`state.only`, which is what ISOLATE_REGION and COMPARE_STRUCTURES singled out. That is not what a view
+is about. A view routinely isolates one group and then NAMES more: `SHOW_STRUCTURE` after the isolate,
+`HIGHLIGHT_STRUCTURE`, and `SHOW_RELATIONSHIP from → to` — which draws a leader line to a structure
+that framing has just pushed off the stage.
+
+Measured, at rest, canvas 1008×440:
+
+| scene · view | before | after |
+|---|---|---|
+| kidney v6 "Reading the clinic off the anatomy" | 58.0% h / 18.6% area | **100.0 h × 94.1 w, 72.9% area, clipped, geometric fill 2765%** |
+| cerebral-hemispheres-lobes v10 "Cortex outside, white matter inside" | blank | **100.0 h, clipped, geometric fill 87005%** |
+| vertebral-column v4 "Body in front, canal behind" | 28.6% h | **100.0 h × 100.0 w** |
+| intervertebral-disc v2 "One joint, two bones" | 12.3% h | 66.6 h, **clipped — L5 cut off at NDC y = 1.03** |
+
+A geometric fill in the thousands of percent is a corner of the subject projecting from BEHIND the
+camera: the student is inside the model. Six views across three scenes land at exactly 100.0% of frame
+height after this change; none did before.
+
+**Look at `_review-2026-09-10-r3/kidney-view06-after.png`.** The narration follows a stone from the
+pelviureteric junction down the ureter to the bladder, and names the left renal vein into the cava.
+The view isolates `Kidneys`, then shows `Outflow` and `Bony landmarks` and draws two relationship
+lines. The camera frames the two kidneys. The ureter runs off the bottom edge, the left kidney is
+gone, the frame is filled with foreground slabs of structures the camera is now inside, and five
+labels are stacked against the left margin with leaders crossing the whole stage. Before this item
+that view was legible at 58% of frame height. It would lose marks now.
+
+`intervertebral-disc` v2 is the same shape in miniature and worth reading because the picture is
+otherwise excellent: ISOLATE_REGION `disc_l45`, then SHOW_STRUCTURE `l4` and `l5`, narration "two
+vertebral bodies with one pad between them — bone, cartilage, bone". The framing subject is the disc.
+L4 and L5, which are the sentence, are held in frame only because the `minDistance` floor happened to
+stop the dive, and L5 is clipped anyway.
+
+### On the clamp
+
+The builder wrote that the floor at `controls.minDistance` is not the ratio clamp the queue note asked
+for, and that this is fair grounds for changes-requested. It is, and here is the mechanism: the floor
+is a distance from the SUBJECT'S CENTRE, so it cannot prevent the camera being inside a structure —
+only inside a small one. On intervertebral-disc views 2 and 3 the camera sits exactly at the floor
+(1.200), i.e. `distanceForBox` asked to go closer still. The builder's objection to a ratio-to-whole-
+scene clamp is also sound: on cardiac-looping the whole-scene box is two side-by-side hearts.
+
+I think both are right and the clamp is the wrong shape. The rule that fits the evidence is not
+"do not travel too far from the whole-scene fit" but **"every structure this view names stays in
+frame"** — which is a bound computed from the view itself and needs no tuned constant.
+
+### I tried the fix and I am not shipping it
+
+I patched `subjectBox()` to frame on `state.only` ∪ every key the view's ops name after it isolates,
+and measured it. It fixes the case it was aimed at — kidney v6 goes 100.0 h / clipped → 66.4 h /
+not clipped — and it fixes intervertebral-disc v2's clipping. It also makes kidney v3 worse
+(44.8 h → 100.0 h, 82.9% area) and newly clips kidney v2 and intervertebral-disc v1. It is the right
+direction and it is not right yet, and proving a framing rule belongs on the corpus, not on the two
+or three scenes that motivated it. **So I reverted it. `viz3d.js` on the device is byte-for-byte the
+builder's file.** The patch is described here rather than left half-applied; the build task should
+implement it with the corpus-wide measurement below as its gate.
+
+### `test-view-framing-player.mjs` is not a gate
+
+It has no assertions and exits 0 whatever it finds. Run as committed, today, it prints
+`showAll: {dist: 2.089, pulledBack: false}` on three consecutive runs — where BUILD-LOG says it proved
+"Show all pulls back out (→ 7.24)".
+
+Down the ladder, and it is NOT the product. With a single `waitForTimeout(1200)` and no intervening
+`page.evaluate`, requestAnimationFrame is throttled in this headless setup and the ease never
+advances; sampling the camera every 150 ms shows the pull-back completing inside 300 ms and landing at
+6.774, and a 3000 ms wait lands at 6.798. The player is fine. The harness measures a page it has
+stopped touching. But a regression test that cannot fail, and that today prints the opposite of the
+claim it was written to support, is not evidence — and it is the only thing standing behind most of
+this item's proof section. It needs to settle by polling, then assert, then exit non-zero.
+
+### Two tool defects found by using them
+
+1. **`measure-view-framing.mjs` writes its harness page to a fixed path** —
+   `models-out/_framing/_player.html`. Two runs at once overwrite each other's `MEDBANK_CONFIG`, every
+   mesh fetch then fails CORS from the other run's port, and the scene reports 0 views and ~400
+   console errors. It cost me two false findings ("vertebral-column and ribs-sternum render nothing")
+   before I re-ran serially. Give the page a per-scene name. Under CPU contention the same tool also
+   returns `lit: 0` for views that are fine, so a blank reading is only real if it survives a serial
+   re-run — kidney v2 read blank once and measures 44.5% h alone.
+2. **`extent()`'s clip detector is blind exactly where it matters.** It ignores meshes below 0.5
+   opacity, so on a view where everything ends up ghosted it returns null and `clippedAtRest` reads
+   false. Three of intervertebral-disc's seven views are invisible to it. The framebuffer read is the
+   truthful one; when the two disagree, believe the pixels.
+
+### The standard has a gap (REVIEW-TASK-PROMPT §4)
+
+RENDER-STANDARD's first standing rule is THE SUBJECT FILLS THE FRAME. Every number in this item's
+build note satisfies it, and the kidney view above satisfies it too — the subject fills 73% of the
+canvas. Proposed second half:
+
+> **THE SUBJECT FILLS THE FRAME — AND EVERYTHING THE VIEW NAMES IS STILL IN IT.** A view's subject for
+> framing is every key its ops name: the isolate or compare target, plus anything shown after it,
+> highlighted, or joined by a relationship line. A structure the narration names and the picture
+> cannot show is the same defect as a structure drawn wrong.
+
+And a rule about evidence, which is what actually let this through:
+
+> **A change to the PLAYER is measured on the corpus, not on the scene that motivated it.** A model
+> bug is one scene; a player bug is 142. `measure-view-framing.mjs` needs an `--all` mode and a
+> pass/fail threshold so this is one command, not a judgement call about which scenes to sample.
+
+### Not investigated
+
+Pins and leader lines at the closer distances (`check-anchors.mjs` still not run, by the builder or by
+me — though the kidney screenshot suggests it would find something). The trace-vs-`ROTATE_TO_VIEW`
+camera fight, which the builder correctly left alone and correctly says needs its own item; it is
+still unfiled. `PEEL_LAYER` and `SHOW_RELATIONSHIP` under the new framing. Phone-shaped canvases —
+still only the unit test's four aspect ratios, no render.
+
+### Not this item, found while measuring
+
+- `intervertebral-disc` v3 "Soft centre, tough ring" narrates the annulus and the nucleus over a
+  picture in which every structure is ghosted and nothing is highlighted — no annulus, no nucleus,
+  no isolated disc. Blank-looking views also occur in `vertebral-column` v2/v3 and `ribs-sternum` v5,
+  before AND after this item, so they are not framing. Scene-side; worth an item.
+- The builder's separate finding — that in cardiac-looping view 8 the d- and l-hearts sit 1.79 apart
+  along the view axis and now render at visibly different sizes in the one view that compares them —
+  I did not verify. The scene has changed since they measured it (`sizeOf('d_')` and `sizeOf('l_')`
+  no longer return the identical dimensions their note quotes), so someone has been in it. It needs
+  its own look, against the current file.
+
+---
+
+## 2026-09-10 · REVIEW · `engine__per-view-t` → **done**
+
+Review run, fired 16:35Z. Repo reachable (`BUILD-QUEUE.json` stat'd first). Three items sat at `built`;
+took the oldest `built_at`, which is this one at 13:45:11Z — not cardiac-looping, and not
+mesh-resolution-by-role. Claimed `in-review` at 16:36Z through `tools/queue-set.mjs`, never by hand.
+
+**My own three checks, written down before I read the builder's notes**, from the item's `why` and the
+code: (1) non-stickiness — does leaving a staged view really restore the prior geometry, or does `t`
+leak forward; (2) precedence — a ref-pinned `t` must beat the view's, and a view with no `t` must
+disturb nothing; (3) **stale geometry-derived state** — the engine reads `m.geometry` directly for
+highlight patches, anchors and bounding boxes, so if a restage swaps geometry, do those caches follow
+or do they point at vertices that no longer exist. (3) is the one the builder's notes never mention,
+and it is the one I went at hardest. It holds: `restage()` calls `fit()` then `placeAnchors()`, and the
+picture confirms it — see the HIGHLIGHT run below, where the pin, the leader line and the label land
+correctly on a mesh that was rebuilt a moment earlier.
+
+### What I re-ran rather than believed
+
+| gate | result |
+|---|---|
+| `validate-scenes.mjs` | **142/142 valid** with `SET_STAGE` in the table |
+| `lint-viz3d.mjs` (repo's real eslint) | **every name resolves** |
+| `test-fit-idempotent.mjs` | **8/8**, including the three yaw cases |
+| `test-per-view-t.mjs` | **71 passed, 1 FAILED** — not 72/0 |
+
+### The disagreement, which is the finding (REVIEW-TASK-PROMPT §6)
+
+`built_notes` and the build log both say *"72 checks 0 fail … console clean"*. Today the harness
+reports **71 passed, 1 failed**. Every substantive check — [1] through [10], resolution, geometry
+genuinely changing, pinning, no-`SET_STAGE`-means-t=1, restage-identical-to-fresh, flags surviving,
+parts staying clickable, revisit identical, chip-mash settling, normals — passes. The one failure is
+check [11], console clean:
+
+```
+[cardiac-looping] MIRROR IS NOT A REFLECTION — … {tetraBefore: 0, tetraAfter: 0, ratio: null, t: 0}
+```
+
+**It is not this item's defect, and I proved that rather than asserting it.** I built a page carrying
+`three.js` + `render-kit.js` + `cardiac-looping.js` and **no `viz3d.js` at all**, called
+`build(t, {…FULL, mirror:true})` directly, and the warning appears. It is `cardiac-looping.js`'s own
+chirality guard firing on its degenerate case: at `t = 0` the tube is straight, the four part centroids
+are coplanar, `tetraVolume()` is exactly `0`, `ratio` comes out `null`, and the guard treats *cannot
+measure* as *measured and wrong*. Measured across `t = 0, 0.02, 0.05, 0.1, 0.15, 0.3, 0.65, 1`: `ratio`
+is `null` only at `t = 0` and is **exactly −1.000 everywhere else**. Round 2's finding 1 on that item —
+that the mirror was a rotation, ratio `+1` — is genuinely fixed; this is only the residue.
+
+Filed as a finding on `embryology__cardiovascular-development__cardiac-looping` via
+`queue-set.mjs --append findings`, clearly attributed, **status not changed** — that item is not mine.
+
+And the reason the proof went stale: **`models3d/cardiac-looping.js` was modified at 15:31:46Z, after
+this item was built at 13:45:11Z.** The substrate moved under the item. (`render-kit.js` moved at
+15:22:01Z too.) This is the second time in two days a note has been true when written and false when
+read; it is why §6 exists.
+
+### Picture first, source last
+
+Canvas region only, chips and narration masked out:
+
+- **`t = 1` and "no `SET_STAGE`" are pixel-identical — 0 px differ.** The third rule of the op, the one
+  that makes the change safe for 142 already-written scenes, holds *in the framebuffer*, not just in a
+  vertex comparison.
+- **Revisiting the `t = 0` view** differs only along antialiased edges — the interior of every part is
+  identical, and the lit-pixel centroid moves 0.51 × 0.75 px. Sub-pixel. Not sticky, and it comes back
+  to the same place at the same size.
+- The eight-chip mash settles on the stage the last chip asked for, with the matching chip lit.
+
+### Gaps the builder listed as unproven — now proven
+
+`built_notes` item (3): *"SET_STAGE untested in combination with TRACE_STRUCTURE, CROSS_SECTION,
+PEEL_LAYER, ISOLATE_REGION."* I built a second fixture with combined-op views and rendered them:
+
+- `SET_STAGE` + `ISOLATE_REGION`, **in both op orders** — no error, no warning, correct stage geometry.
+- `SET_STAGE` + `CROSS_SECTION` — the cut-plane row appears, the model is at `t = 1`, coherent.
+- `SET_STAGE` + `HIGHLIGHT_STRUCTURE` + `PEEL_LAYER` — the bulbus is lit at `t = 0.3` and **the pin,
+  the leader line and the label sit correctly on the rebuilt mesh**. This is check (3) of my own list
+  answered in the picture.
+- Console clean across all of it (only swiftshader's own `ReadPixels` performance note, caused by my
+  screenshotting).
+
+**Still unproven, honestly:** `SET_STAGE` × `TRACE_STRUCTURE` — my fixture carries no landmarks, so a
+trace has nothing to walk; and GPU memory across many stage changes, which I did not measure either.
+
+### An isolate view is a wreck, and it is NOT this item
+
+`SET_STAGE 0.65` + `ISOLATE_REGION` renders the camera inside the model: translucent foreground slabs,
+nothing legible, no identifiable ventricle. That is the kidney-view-6 shape from the
+`engine__refit-camera-on-isolate` review. **Control run, and it is decisive: the identical wreck
+appears with no `SET_STAGE` in the view at all.** `ISOLATE_REGION` alone does it. `SET_STAGE` is
+exonerated — with the stage op present at the default `t` the canvas differs from the stage-op-free
+version by a max channel delta of 50, i.e. the ghost blend and nothing structural.
+
+Worth passing to that item, which is already `changes-requested` with 6 open findings: **the failure
+reproduces on a procedural scene with 7 structures**, not only on the 44-structure BodyParts3D kidney.
+Whatever the fix is, it can be measured on something small.
+
+### Two findings I raised and then killed, recorded so nobody pays for them twice
+
+1. *"The parts list shows 5 of 7 structures while the badge says 'Loaded 7 of 7'."* From the screenshot
+   this looks like a real mismatch. It is not: all seven buttons are in the DOM, `.mb3d-list` is
+   `overflow:auto; flex:1; min-height:0`, and the last two are below the fold. Scenes carry 24–44
+   structures; the list must scroll.
+2. *"A straggler landing mid-restage has its `stageDirty` erased."* The mechanism looks airtight —
+   `restage()` snapshots `todo`, and `fin()` clears `stageDirty` at the end, so anything that sets the
+   flag in between is lost, and the 250 ms debounced `applyView` then finds `wantT === stageT` and does
+   nothing, stranding the late part at `t = 1` for exactly the reason the flag's own comment gives.
+   **It cannot happen.** `restage()` only touches structures already in `meshes[]`, so their model
+   module is a *cached resolved promise*; the entire rebuild completes in microtasks with no macrotask
+   boundary, and `scheduleLate()` fires from a script `onload`, which is a macrotask. It always lands
+   strictly before or strictly after — never inside. I nearly shipped a one-line "fix" for a race the
+   task model forbids. This is RENDER-STANDARD §4's warning in a different costume: the elegant
+   explanation was wrong, and the ladder is what killed it.
+
+### The `fit()` change, which touches all 142 scenes
+
+The previous review's proposed rule — *a change to the PLAYER is measured on the corpus, not on the
+scene that motivated it* — points straight at this, and I started to file it. It dissolves on reading:
+`fit()` now zeroes `holder.rotation` for the measurement and restores it. **When the rotation is
+already identity those two lines are a strict no-op**, and `mount()` fits *before* it applies
+`initialYaw`. So no scene's opening framing moved. It changes only the straggler, retry and
+stage-change re-fits — every one of which was measuring a world box against local positions and was
+wrong. The direction is unambiguous and the blast radius is not what it first looks like.
+
+**Not verifiable in this run:** the claim that the three new yaw cases *fail* on the previous
+`viz3d.js`. That needs git history, which §5 forbids me to run. Frank, if you want that link closed,
+it is one `git stash`/diff on your side.
+
+### The standard has a gap (REVIEW-TASK-PROMPT §4)
+
+This run spent most of its time on one warning, and the cost was not finding it — it was establishing
+*whose* it was. Two rules, both earned here:
+
+> **A PROBE THAT CANNOT ANSWER MUST SAY SO, NOT SAY "FAILED".** `cardiac-looping.js` reports "cannot
+> measure" (`ratio: null`, a degenerate shape) through the same `console.warn` as "measured, and
+> wrong" (`ratio: +1`, an actual rotation). A guard that cries wolf on its own degenerate case gets
+> muted, and the real failure it exists to catch is muted with it. Any guard whose input can be
+> degenerate must report three states, not two. This is the same shape as the note already in the
+> task prompt about a tube read at its own centreline — generalise it.
+
+> **"CONSOLE CLEAN" MUST NAME WHOSE CONSOLE.** Review 1 says a warning fails the item. A warning in
+> item X's harness can come from item Y's file, and the reviewer must attribute it before reporting
+> it — cheaply, by removing the item under review from the page and seeing whether the warning
+> survives. Reporting it unattributed sends a build run to rewrite the wrong file.
+
+### Verdict
+
+**`done`.** Both reviews pass on this item's own work; I attacked it three ways and it held, including
+the one place its notes never mention. `open_findings_by_round: [0]`. Nothing survives that belongs to
+this item. **I changed no code** — my one candidate correction was retracted on evidence, and a review
+that finds the work sound and says so plainly is not the same as one that passes it out of momentum.
+
+**One thing anybody re-running this must know:** `test-per-view-t.mjs` **fails today**, 71/72, on a
+`cardiac-looping.js` warning. That is recorded on the item as `review_notes` and filed against
+cardiac-looping. It is not a reason to reopen this item.
+
+Did not build the next item. No `git` of any kind. No commit, no push, no deploy.
+
+---
+
+## 2026-09-10 17:56 UTC · REVIEW round 3 · embryology__cardiovascular-development__cardiac-looping
+
+Run by the model3d REVIEW task, cloud session with the medbank folder attached. **Did not build this
+scene, and did not use the build task's provers** — the build task asked for exactly that ("I wrote
+both the fix and its prover, so prove-mirror-chirality.mjs is not independent evidence"), and it was
+the right thing to ask for.
+
+**Verdict: `changes-requested`. review_rounds 2 → 3. open_findings_by_round [13, 4, 6].**
+
+### Round 2's four findings are all closed, verified independently
+
+The critical one first. **The mirror is now a true reflection.** Re-measured in a harness written for
+this review: every vertex of all **eleven** parts matches reflect-X at **1.0000** and rot-Y-180 at
+0.0000–0.0020, vertex counts identical part for part; and the signed volume of the
+sinus-atrium-ventricle-bulbus tetrahedron, recomputed here from **mesh centroids** rather than the
+centreline tetrahedron `mirrorProof()` uses, is D −0.05029 / L +0.05029 — **ratio exactly −1.0000**,
+where round 2 measured +1.0000. In the picture, view 9's mirror against view 6's D-loop is a clean
+left–right flip at the same size, against round 2's measured 79% of width. Findings 3 and 4: all nine
+acceptance tests pass and are **stable across integration density** (nseg 140/300/600 agree to 0.003),
+and the builder's shipped numbers reproduce exactly. Finding 5: `peri_a` on view 1, `peri_c` on view 6.
+
+That is a good round of building and it should be said plainly before the rest.
+
+### Four corrections made by the review
+
+- **The mirror probe warned on its own degenerate case.** At `t = 0` the tube is straight, the four
+  centroids are coplanar, the signed volume is exactly 0 and the ratio is 0/0 — and the guard treated
+  *cannot measure* as *measured and wrong*. It fired on every `t=0` mirror build and is what cost
+  `tools/test-per-view-t.mjs` its console-clean check while testing an unrelated item. Now reports
+  not-measurable. **The console is clean at every `t` for the first time.**
+- **The dorsal mesocardium ignored its own layer flag** — `opts.mesocardium !== false` made it the one
+  optional layer that was on unless switched off, while its three siblings are opt-in and `FULL`
+  declares all four alike. Invisible in the player, because the provider builds with `FULL` and slices
+  by key. But every *direct* render carried it, **including the build task's own stage proofs**: in
+  `render-cardiac-looping.mjs` the plain stages pass `{}` and the `-meso` stages pass
+  `{mesocardium:true}`, so the pair meant to show the sheet against its absence differed only by the
+  midline rod. Now opt-in.
+- **`acceptance(nseg)` took the segment count, and a reviewer following the built_notes calls
+  `acceptance(1)`.** That integrates the centreline with one segment and returns confident-looking
+  numbers at 1e-16 reporting D, G and I *failing*. This review nearly filed a fabricated CRITICAL
+  finding on it. Now throws a message naming the parameter.
+- **A false measurement claim in the scene's `gaps[]`** — that at day 28 the mesocardium is "two small
+  reflections almost entirely hidden behind the heart". Measured, the two cuffs span 2.10 × 2.29 on a
+  heart 3.27 × 3.19 × 2.49 and stand 0.74 clear behind the atrium; in the lateral camera, which is view
+  5's camera, it is a conspicuous wing. It stays out of the player because every view from 3 onwards
+  opens with `HIDE_STRUCTURE *`, not because it is small.
+
+No geometry and no narration were changed. All nine tests still pass; validate-scenes 142/142.
+
+### Six open findings — full text on the queue item
+
+1. The atrium and sinus venosus finish **entirely** on the embryo's left (atrium x +0.151…+2.017 —
+   it never reaches the median plane; sinus 95.3% left). The builder declared this and could not solve
+   it out; the bounding box is worse than the centroid they reported.
+2. **The atria are not above the ventricles** — 97.8% of the atrium's vertical extent overlaps the
+   ventricle's, D = +0.351 against 2.2 of atrium height. New. Nothing in the test set constrains it.
+3. The ventricle finishes **on** the median plane, not left — x = +0.070 on a chamber 1.329 wide.
+4. **The sinus venosus is an open pipe at its caudal end**, visible from the anterior camera at stage
+   `_b`, which is views 3 and 4. `gaps[10]` records dodging exactly this defect at the *truncus* end by
+   choosing a camera. The same cap at the other end of the same tube was never looked at.
+5. The median-plane reference is **96.5% occluded** in the only view that uses it — 125 visible pixels
+   of 154,711.
+6. Views 3 and 4 narrate two sequential movements over one frozen stage; all four bends grow together
+   with `t`, so no `t` separates movement one from movement two.
+
+Findings 1, 2 and 3 are **one solve, not three pieces of work**.
+
+### Answering the question the build task escalated to the review
+
+It asked whether the fix is a richer curvature model or whether test I should be weakened. **Do not
+weaken I. Enrich the model.** The anatomy is determinate, and weakening a test to fit a curvature model
+is the standard lowering itself to let the item pass. The builder's own diagnosis is almost certainly
+right: four Gaussian bends each carrying one plane cannot control the atrium's lateral position
+independently of the ventricle's, and that is a missing degree of freedom, not a failed search.
+
+### §4 — the standard has a gap, and this is the third round running that it has cost something
+
+Round 2 finding 2 was a test whose implementation did not match its own `must` string. Round 2 finding
+4 was a test that asserted a defect and locked it in. Round 3 finding 3 is a test that is **correct**,
+asserts the right relation, and is satisfied by a value so small the claim is invisible. Finding 2 is
+the same shape.
+
+> **Proposed rule: a sign test on a spatial relation is not a test.** Every acceptance assertion of the
+> form "A is left of / above / behind B" must carry a **magnitude floor expressed as a fraction of the
+> structures' own extent along that axis** — as a starting figure, ≥ 35% of the mean extent. Write
+> `> 0.35 * meanExtent`, not `> 0`, and read any existing sign-only test as **unproven** until it
+> carries a floor.
+
+The deeper version, which is what three rounds actually demonstrate: **a test that can be satisfied
+without the picture changing is not measuring what the narration claims.** The narration is about what
+a student can see; the tests should be too.
+
+Second, smaller gap: the review standard requires a clean console but nothing requires a self-check to
+distinguish *cannot measure* from *measured and wrong*. A warning that is a known false alarm trains
+every future run to ignore the channel it is printed on.
+
+### Escalation
+
+**Not escalated. This is the first non-converging round**, and round 2 predicted this bar exactly:
+4 → 6 is a rise, the rule needs as-many-or-more *twice in a row*, so **round 4 is the decision point —
+if it closes with 6 or more, escalate.** Context the next run needs, stated without softening the rule:
+all four of round 2's findings are closed and all six open findings are new, because round 3 looked at
+the poles, the median-plane reference, the vertical distribution and the layer flags, which nobody had
+looked at before. That is thoroughness, not a loop. It is also exactly what the flat-round rule exists
+to catch if it repeats, so apply the rule as written and do not re-argue this paragraph.
+
+No finding this round is a decision rather than a defect. **One decision-shaped item exists and is
+deliberately not a finding** — recorded as `decision_for_frank` on the queue item and raised in the
+review's reply: peak crowding of the heart in the pericardial sac is at **mid-loop, not day 28**
+(84%/69% at t=0.65 against 75%/57% at t=1), so views 1 and 6 do not bracket the tightest moment. It
+blocks nothing and falsifies no narration, so it is not allowed to stop the loop.
+
+Item left at `changes-requested`; neither task should touch the other `built` item
+(`engine__mesh-resolution-by-role`, built 16:25:48Z) on this run — it is newer and belongs to the next
+review. Artefacts: `viz-training/_review-2026-09-10-r3-cardiac-looping/`.
+
+---
+
+## 2026-09-10 · REGRESSION FOUND AND FIXED THE SAME HOUR — mesh loader timeout
+
+**Found by** verifying the deploy after Frank pushed a38bd2f, not by a review run.
+
+**The bug my own change caused.** Raising resolution made the three intercostal sheets 3.9-4.7 MB
+each. `viz3d.js`'s bodyparts3d adapter gave up 12 seconds after a request started, regardless of
+whether data was still arriving. So `gross__thoracic-wall-diaphragm__intercostal-muscles` mounted
+with **32 of its 35 structures**, and the three it dropped were the external, internal and innermost
+intercostals — every muscle the scene exists to teach. A student would have seen a bare rib cage.
+
+**A flat timeout is not a random cull. It drops the biggest files, and the biggest mesh in a scene is
+nearly always its subject.** That is the same shape as the flat decimation cap this whole item was
+about: a fixed number that silently punishes exactly the structure being taught.
+
+**Measured, side by side, against the live bucket, same file, same connection** (`FMA9758`, 3,931,984
+bytes):
+
+| clock | result |
+|---|---|
+| flat 12 s (old) | **killed at 12.5 s** holding 2,368,058 of 3,931,984 bytes, after 60 progress events |
+| 15 s stall, re-armed on progress (new) | **succeeded at 15.7 s**, 78,638 triangles |
+
+The old code was throwing away a download that was 60% complete and still flowing.
+
+**Fix.** `ATTEMPTS = 3, TIMEOUT = 12000` becomes `ATTEMPTS = 3, STALL_MS = 15000`, and the timer is
+re-armed by STLLoader's progress callback — which was being passed `null`, so the loader already knew
+the transfer was alive and nothing was listening. The clock now asks "is data still arriving?" rather
+than "has it been long?". A genuinely dead connection still fails in 15 seconds.
+
+**Also measured, and this is the load-time number that was missing.** From this machine to the bucket,
+uncached: `FMA9756` 4.51 MB in 47.8 s (0.8 Mbit/s), `FMA9757` 4.00 MB in 10.6 s (3.2 Mbit/s),
+`FMA13073` 0.33 MB in 2.6 s. Warm, the whole vertebral column scene (49 meshes, 419,687 tri) mounts in
+1.6 s. So the budget is survivable but the biggest single meshes are genuinely slow on a poor link.
+Still no phone-on-mobile-data measurement.
+
+**Recorded as a standing rule** in RENDER-STANDARD §5.5: a loader's give-up clock measures silence,
+never elapsed time.
+
+**Not done:** the fix is committed to the working tree but NOT pushed, so the live site still has the
+12-second timeout. Also unpushed: the round-2 cardiac-looping rework and the MESH_TIERS seam from the
+earlier build run, both of which are in the same working tree.
+
+**A correction to my own reporting, worth recording because it nearly became a false alarm.** On
+first checking the deploy I called `MB3D.adapters.procedural.load()` directly and got `reason:'failed'`
+on all 44 parts, and was one step from reporting the procedural provider as broken in production. It
+was not: `viz3d.js` loads three.js lazily and its own comment says load() is never called before
+loadThree() resolves. My harness skipped that. Through the real path — `MB3D.mountScene` — the scene
+mounts 44/44 with a clean console. The engine was right and the test was wrong.

@@ -23,16 +23,22 @@ Read, in this order:
 
 Open `viz-training/BUILD-QUEUE.json`.
 
-**NEVER EDIT `BUILD-QUEUE.json` BY HAND.** Every write goes through `tools/queue-set.mjs`, which takes
+**PATHS, CORRECTED 2026-09-10 by the round-2 build run.** Every tool lives in
+**`viz-training/tools/`**, not in a repo-root `tools/`. This file used to give repo-root paths for
+them, and a run that trusted it died on its first queue write — `MODULE_NOT_FOUND`, before it had
+claimed anything. The `models3d/` paths in section 2 ARE repo-root-relative and are correct; it was
+only the tools half that was wrong. Commands below are written to run from the repo root.
+
+**NEVER EDIT `BUILD-QUEUE.json` BY HAND.** Every write goes through `viz-training/tools/queue-set.mjs`, which takes
 a lock, re-reads the file, changes only your fields and renames the result into place. You and the
 review task can be alive at the same time, and two hand-edits of the same JSON silently erase one
 another — the file stays valid, the run reports success, and a review's findings just vanish. Proven:
 eight concurrent writers through the tool kept all eight changes.
 
 ```
-node tools/queue-set.mjs --next                          # what to take, rework-first, with its findings
-node tools/queue-set.mjs <item> --status building --set claimed_at=<utc>
-node tools/queue-set.mjs <item> --status built --set built_at=<utc> --append built_notes="…"
+node viz-training/tools/queue-set.mjs --next                          # what to take, rework-first, with its findings
+node viz-training/tools/queue-set.mjs <item> --status building --set claimed_at=<utc>
+node viz-training/tools/queue-set.mjs <item> --status built --set built_at=<utc> --append built_notes="…"
 ```
 
 - `--next` tells you what to take and why. It puts any **`changes-requested`** item ahead of every
@@ -53,7 +59,7 @@ The queue holds two kinds and they are different jobs. `--next` tells you which.
 write a procedural model, wire the scene's refs to it. This is the work the queue started with.
 
 **`kind: "scene"` — NOTHING exists.** These are the 71 curriculum structures that have never been
-authored, found by `tools/coverage.mjs` on 2026-09-10. The job is to AUTHOR the VisualScene first, and
+authored, found by `viz-training/tools/coverage.mjs` on 2026-09-10. The job is to AUTHOR the VisualScene first, and
 only then build whatever it needs. Do not skip to geometry.
 
 For a `kind: "scene"` item:
@@ -77,8 +83,8 @@ For a `kind: "scene"` item:
 5. **Then build** whatever the scene needs, and prove it with section 3.
 6. `status: "candidate"`, never `"ready"`. Only a review promotes a scene, and only after seeing it.
 
-Validate with `node tools/validate-scenes.mjs`, rebuild the index with `tools/build-scene-index.mjs`,
-and rerun `tools/coverage.mjs` so the report reflects what you did.
+Validate with `node viz-training/tools/validate-scenes.mjs`, rebuild the index with `viz-training/tools/build-scene-index.mjs`,
+and rerun `viz-training/tools/coverage.mjs` so the report reflects what you did.
 
 **One scene, done properly, beats three sketched.** There are 71 of these; the queue is not a race.
 
@@ -179,30 +185,12 @@ Then set status `built`, record `built_at`, and list in `built_notes` what you d
 Append to `viz-training/BUILD-LOG.md`: the item, what you did, what you proved, what you could not do.
 Be specific about what you are unsure of — the review task reads this and a vague note wastes its run.
 
-**Then fire the review task.** Use the scheduled-task tool `fire_trigger` with trigger id
-`trig_01WDYyWaeB4uzeXjfVfvtDTN` — "MedBank · model3d review + correct (v2, folders attached)" —
-passing the item id in `text`. This is the last thing you do.
-
-> **CORRECTED 2026-09-10T12:15Z by the build run.** This line used to name
-> `trig_01H67xqRQM5S1TeRSk6PK8N9`, which does not exist: firing it returns "the requested resource was
-> not found". The three tasks were recreated as the "(v2, folders attached)" set at 10:27-10:29 that
-> morning and every id changed; this file kept the old one. **Do not trust an id in a document over
-> `list_triggers`** — if the fire fails with not-found, list the triggers, use the one whose name says
-> review, and correct this line, exactly as happened here.
->
-> **AND KNOW WHAT FIRING IT ACTUALLY BUYS YOU.** A fire from inside a build run comes back
-> `no_signed_approval` — *"run not approved for Claude Desktop (Windows) — this run uses the cloud
-> only"*. The review task is bound to Frank's computer, and that binding is re-signed by a PERSON
-> approving the run; a task firing another task cannot re-sign it. So the review session starts with
-> **no connected folders and cannot see the repo at all.** It will say so as its first line, because
-> its prompt tells it to, and then it will stop. Firing is still worth doing — it leaves an auditable
-> record and the run reports the failure honestly rather than silently — but **a fired review is not a
-> completed review.** Say so in your reply and in the log, every time, until this is fixed. The fix is
-> Frank's: either give the review task its own cron (a scheduled firing carries the binding) or fire
-> it from the desktop.
-
-If you cannot fire it, write **`REVIEW NOT FIRED`** on its own line at the end of your log entry and
-say so in your reply, loudly. A silent break in the chain means work piles up unreviewed.
+**DO NOT FIRE THE REVIEW TASK.** It runs on its own schedule, hourly at :35, and it picks up whatever
+is marked `built`. It used to be poked from here, and that was broken in a way worth recording: a run
+fired from another cloud session inherits no device binding, so the review woke with no `$HOME/mnt`,
+no repo, and no remote-devices tools at all. It correctly refused to review from the builder's own
+write-up and reported RUN FAILED — twice — which is the right behaviour and a useless outcome. A
+scheduler-fired run carries the binding; a session-fired one does not. Just finish, log, and stop.
 
 ## 5 · Boundaries
 
@@ -213,7 +201,11 @@ say so in your reply, loudly. A silent break in the chain means work piles up un
 - Meshes stay attributed: `BodyParts3D, © DBCLS, licensed CC-BY-SA 2.1 JP.`
 - If you change `sw.js`, **read its current CACHE version first** — another session moves it, and it
   has jumped several versions in a single morning.
-- Do not `git commit` or `git push`, and do not deploy. Frank does those.
+- Do not `git commit` or `git push`, and do not deploy. Frank does those. **And do not run git at all**
+  — not even `git status`. This repo is reached through a mount that forbids deletion, so every git
+  command leaves a `.git/*.lock` it cannot clean up, and the NEXT git command fails with "Another git
+  process seems to be running". Two such locks, three hours stale, blocked a commit today. If you
+  genuinely need repo history, ask for it in your reply instead.
 - Do not edit `viz-training/spike/` — those are the reference spikes.
 
 ## 6 · One thing worth more than the rest

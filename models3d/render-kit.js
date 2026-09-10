@@ -302,6 +302,63 @@
     return g;
   }
 
+  /* --------------------------------------------------------------- reflection
+
+     A MIRRORED VARIANT MUST ACTUALLY BE A REFLECTION. Added 2026-09-10 after a review found that the
+     cardiac-looping L-loop was a 180-degree ROTATION wearing a mirror's clothes: the model seeded its
+     transported frame with n = -x, which negates BOTH n and b (b is derived as d x n) and so turns
+     the solid about its own long axis instead of reflecting it. The two builds had the SAME
+     handedness, so no camera angle could ever have made one the enantiomer of the other.
+
+     It survived because every check that was run passes on a rotation: identical triangle count,
+     identical outward-normal fraction, negated mean x, and — the tell that was mistaken for the
+     proof — UNTOUCHED WINDING. A genuine enantiomer must REVERSE winding. Rule 1 above makes
+     reversed winding the cardinal sin, which is precisely what pushes an author towards the
+     construction trick; so the reflection lives here, once, done right, rather than being
+     hand-rolled per model as rule 1 warns against.
+
+     Positions and normals negate x; every triangle's winding reverses, which keeps faces pointing
+     outward after the handedness flip. Vertex attributes are permuted together, so uv and anything
+     else stays with its vertex. An indexed geometry reverses its index instead.                    */
+
+  function reflectX(geo, seen) {
+    if (!geo || (seen && seen.has(geo))) return geo;
+    if (seen) seen.add(geo);
+    const attrs = [];
+    for (const name in geo.attributes) attrs.push(geo.attributes[name]);
+    // negate x on positions and normals (the only attributes with a direction in model space)
+    for (const name of ['position', 'normal']) {
+      const a = geo.attributes[name];
+      if (!a) continue;
+      for (let i = 0; i < a.count; i++) a.array[i * a.itemSize] = -a.array[i * a.itemSize];
+      a.needsUpdate = true;
+    }
+    if (geo.index) {
+      const ix = geo.index.array;
+      for (let t = 0; t + 2 < ix.length; t += 3) { const s1 = ix[t + 1]; ix[t + 1] = ix[t + 2]; ix[t + 2] = s1; }
+      geo.index.needsUpdate = true;
+    } else {
+      // swap vertices 1 and 2 of every triangle, across EVERY attribute, so nothing desynchronises
+      for (const a of attrs) {
+        const n = a.itemSize, arr = a.array;
+        for (let t = 0; t + 2 < a.count; t += 3) {
+          const i1 = (t + 1) * n, i2 = (t + 2) * n;
+          for (let c = 0; c < n; c++) { const tmp = arr[i1 + c]; arr[i1 + c] = arr[i2 + c]; arr[i2 + c] = tmp; }
+        }
+        a.needsUpdate = true;
+      }
+    }
+    geo.boundingBox = null; geo.boundingSphere = null;
+    return geo;
+  }
+
+  /** Reflect every mesh in a group, each geometry exactly once even if two meshes share one. */
+  function reflectGroupX(group) {
+    const seen = new Set();
+    group.traverse(o => { if (o.isMesh && o.geometry) reflectX(o.geometry, seen); });
+    return group;
+  }
+
   /* ---------------------------------------------------------------- materials */
 
   const _outlineCache = {};
@@ -386,6 +443,7 @@
 
   global.VizKit = {
     C, bg, emitter, parallelFrame, sweptShell, tubeAlong,
+    reflectX, reflectGroupX,
     outlineOf, outlineMaterial, tissueMaterial, addSolid,
     fitCamera, standardLights, configureRenderer,
     DEFAULT_SECTION,

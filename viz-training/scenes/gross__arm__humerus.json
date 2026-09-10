@@ -444,7 +444,7 @@
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: nearest CONTACT point between the humerus and the radius, within the distal 15% — the radiocapitellar joint (gap 4.85 mm, the widest of the set); see tools/derive-humerus-landmarks.mjs",
+      "calibrated_by": "geometry: EXTREME -z within x:0,0.25 — the lowest vertex of the lateral quarter of the humerus, 153.0 mm from its surface centroid, 240 vertices considered; derived with tools/derive-landmark.mjs on 2026-09-08. RE-DEFINED at that audit: the old definition was a CONTACT against the radius, and tools/derive-landmark.mjs REFUSES it today at 4.85 mm — the humerus and radius do not meet in these meshes, because the joint space is not modelled, so a contact was never the right definition for an articular surface. The re-derivation lands at uvw [0.2228, 0.6352, 0.0228] against the old [0.223, 0.635, 0.023]: the point was right and only its justification was wrong. It is stable — widening the slab to x:0,0.30 returns the same vertex — and it is distinct from the trochlea, which is the lower of the two condyles and takes the lowest-point definition at x:0,0.35 and wider.",
       "terms": [
         "capitulum",
         "head of radius",
@@ -637,11 +637,11 @@
     "audited_at": "2026-08-28",
     "audited_by": "task",
     "corrected_at": "2026-09-08",
-    "corrected_by": "human session"
+    "corrected_by": "human session; task (pre-gate anchor sweep)"
   },
   "gaps": [
     "Every named part of the humerus is a landmark anchor, because the catalog's smallest unit is the whole bone — there is no separate mesh for a tubercle, a groove or an epicondyle. Each anchor was measured on the mesh by tools/derive-humerus-landmarks.mjs and carries its definition and its measurement in calibrated_by. All stay status:\"needs-review\" until a human has looked at them once.",
-    "The capitulum anchor has the largest contact gap of the set (4.85 mm to the radial head) because the joint space is wide there on the decimated meshes. It is the one anchor most worth a human eye.",
+    "CORRECTED 2026-09-08: this entry previously said the capitulum anchor merely 'has the largest contact gap of the set (4.85 mm to the radial head) because the joint space is wide there'. That excused a refusal instead of treating it as one. tools/derive-landmark.mjs gates contacts at 3 mm, so 4.85 mm is not a wide-but-acceptable measurement, it is a REFUSAL: the humerus and radius never touch in these meshes and a contact is the wrong definition for an articular surface. The anchor was re-derived on 2026-09-08 as a positional extreme (lowest vertex of the lateral quarter) and now carries an accepted derivation. Its coordinate barely moved, which is the reason this went unnoticed for so long — a correct point can sit on a definition the tool would reject, and only the printed gap shows it. The same 4.85 mm gap is quoted from the radius side in gross__forearm-hand__radius-ulna and was re-defined in the same pass.",
     "The surgical neck is a short region rather than a point, and the anatomical neck is a line round the head that no measurement here isolates; both are taught in narration on the nearest measured anchor.",
     "No nerve meshes exist in the catalog, so the radial nerve is traced as a concept along bony waypoints rather than shown as a structure. The axillary, median and ulnar nerves are named in narration only. Re-searched 2026-08-28 under nerve, nervus, median, ulnar, radial and axillary: nothing.",
     "The brachial artery is named in the supracondylar narration and is not on screen: the catalog holds no upper-limb artery distal to the subclavian (re-searched 2026-08-28 for brachial, profunda, collateral, recurrent, radial artery and ulnar artery — the whole limb returns nothing). The vessel is described rather than shown, and gross__arm__brachial-artery teaches it as a diagram for the same reason.",

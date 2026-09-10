@@ -459,7 +459,7 @@
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: nearest CONTACT point between the arch of the aorta and the right subclavian artery — the arch end of the missing brachiocephalic trunk, so the printed gap of 17.84 mm IS the length of the vessel the catalog does not carry; see tools/derive-great-vessel-landmarks.mjs",
+      "calibrated_by": "geometry: DERIVATION REFUSED, and the anchor is kept only because it is honestly labelled as an approximation. tools/derive-landmark.mjs --parent FMA3768 --contact FMA3953,FMA3941 on 2026-09-08 returns gaps of 17.84 mm to the right subclavian artery and 15.68 mm to the right common carotid, both far above the tool 3 mm gate, so it REFUSES to emit. The two witnesses nevertheless converge to 1.69 mm on the surface of an 83 mm arch, which is why the position along the arch is trustworthy even though the point is not a contact: the gap is not error, it is the length of the brachiocephalic trunk, which the catalog does not carry. So this marks where on the arch the missing vessel would leave, not a place where anything touches. The earlier note here presented the 17.84 mm AS the measurement rather than as a refusal - the same excuse that was found on mediastinum ludwig_posterior and tracheobronchial-tree t4_level - and has been rewritten.",
       "terms": [
         "brachiocephalic trunk",
         "innominate artery",
@@ -468,7 +468,11 @@
         "right common carotid",
         "right subclavian"
       ],
-      "narration": "The first and largest branch of the arch starts here and runs up and to the right for about four centimetres before dividing into the right common carotid and right subclavian arteries. There is no left equivalent — on the left those two vessels come off the arch separately. That is the single asymmetry that explains most of the differences between the two sides of the neck and the two recurrent laryngeal nerves."
+      "narration": "The first and largest branch of the arch starts here. The trunk itself is not modelled — the catalog has no mesh for it — so what you see are two lines leaving this point for the vessels it becomes. It runs up and to the right for about four centimetres before dividing into the right common carotid and the right subclavian arteries. There is no left equivalent: on the left those two vessels come off the arch separately. That is the single asymmetry that explains most of the differences between the two sides of the neck and the two recurrent laryngeal nerves.",
+      "approx": {
+        "shown_as": "arch of aorta",
+        "detail": "origin of the brachiocephalic trunk"
+      }
     },
     {
       "key": "aortic_isthmus",
@@ -1229,9 +1233,12 @@
     "author": "task",
     "authored_at": "2026-08-27",
     "audited_at": "2026-08-29",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-09-08",
+    "corrected_by": "task"
   },
   "gaps": [
+    "ADDED 2026-09-08 (pre-gate anchor sweep): the brachiocephalic trunk itself has no mesh in the catalog, and this is the third pre-gate anchor found excusing a refused contact rather than treating it as one. The origin anchor on the arch is now marked approx (shown_as the arch of the aorta, detail the trunk origin), so the player draws it amber with a dashed leader and MESH-GAPS.md lists it as open. The two relationship lines drawn from it to the right common carotid and the right subclavian are the trunk: beat 3 teaches that the right side gets its two arteries second-hand, and with no trunk mesh those two lines are the only way to show it. That is legitimate, but the student is seeing a schematic of a vessel and not the vessel, and the narration should not imply otherwise. Fetching a brachiocephalic trunk mesh, if one is ever catalogued, retires this entry and the approx with it.",
     "There is no brachiocephalic trunk in the catalog — the largest branch of the arch, and the one the whole left-versus-right asymmetry depends on. It is taught here through the two vessels it divides into, which do exist (right common carotid and right subclavian), plus a measured anchor at its origin on the arch. That anchor is a nearest-contact between the arch and the right subclavian artery, so the 17.84 mm it prints is literally the length of the missing vessel. Ingesting a brachiocephalic trunk mesh would upgrade beat 3 from an inference to a sight.",
     "There is no pulmonary trunk of its own: the catalog carries one generic 'pulmonary artery' mesh covering the trunk and both branches together. The scene therefore cannot isolate the trunk from the right and left pulmonary arteries, and the right pulmonary artery's course behind the ascending aorta and the superior vena cava — a favourite viva question — is narrated rather than shown. The bifurcation is a measured anchor, so the division itself is at least located correctly.",
     "The four pulmonary veins are a single generic 'pulmonary vein' mesh. The scene can show where pulmonary venous blood re-enters the left atrium but cannot count the veins, name them superior and inferior, or show that the right ones cross behind the left atrium. The count of four, two from each lung, is narration only.",

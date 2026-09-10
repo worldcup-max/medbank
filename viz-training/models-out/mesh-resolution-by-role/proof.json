@@ -1,0 +1,1129 @@
+{
+  "checks": [
+    {
+      "name": "baseline: role=part URL unchanged with no MESH_TIERS",
+      "pass": true,
+      "detail": "https://tytbrhuzikqkscxdnkmr.supabase.co/storage/v1/object/public/viz-meshes/FMA12519.stl"
+    },
+    {
+      "name": "baseline: role=context URL unchanged with no MESH_TIERS",
+      "pass": true,
+      "detail": "https://tytbrhuzikqkscxdnkmr.supabase.co/storage/v1/object/public/viz-meshes/FMA16033.stl"
+    },
+    {
+      "name": "baseline: both tiers collapse to MESH_BASE",
+      "pass": true,
+      "detail": "{\"lite\":\"https://tytbrhuzikqkscxdnkmr.supabase.co/storage/v1/object/public/viz-meshes/\",\"full\":\"https://tytbrhuzikqkscxdnkmr.supabase.co/storage/v1/object/public/viz-meshes/\"}"
+    },
+    {
+      "name": "role=part -> full tier",
+      "pass": true,
+      "detail": "http://127.0.0.1:38111/tiers/full/FMA12519.stl"
+    },
+    {
+      "name": "role=context -> lite tier",
+      "pass": true,
+      "detail": "http://127.0.0.1:38111/tiers/lite/FMA16033.stl"
+    },
+    {
+      "name": "role=primary -> full tier (taught, not scaffolding)",
+      "pass": true,
+      "detail": "http://127.0.0.1:38111/tiers/full/FMA13073.stl"
+    },
+    {
+      "name": "mesh_tier on the structure overrides role",
+      "pass": true,
+      "detail": "http://127.0.0.1:38111/tiers/full/FMA13073.stl"
+    },
+    {
+      "name": "all 48 refs resolve through the real adapter with geometry",
+      "pass": true,
+      "detail": "48/48"
+    },
+    {
+      "name": "every mesh arrived at the resolution its role asks for",
+      "pass": true,
+      "detail": "25 part at full, 23 context at lite"
+    },
+    {
+      "name": "L2 (FMA13073) — the mesh Frank called incomplete — arrives at 6946 triangles, not 3000",
+      "pass": true,
+      "detail": "l2 role=part tris=6946 tier=full"
+    },
+    {
+      "name": "probe calibration: a known-good closed convex solid reads ~100% outward",
+      "pass": true,
+      "detail": "100%"
+    },
+    {
+      "name": "probe calibration: a known-good HOLED solid reads far lower, so a low pctOut is not by itself a bug",
+      "pass": true,
+      "detail": "torus 66.7% outward but signedVolume 3.93 > 0"
+    },
+    {
+      "name": "winding faces outward on every mesh (signed volume > 0)",
+      "pass": true,
+      "detail": "all 48 meshes positive"
+    },
+    {
+      "name": "face normal agrees with vertex normals on every triangle (the winding bug of RENDER-STANDARD 2.1)",
+      "pass": true,
+      "detail": "no disagreement"
+    },
+    {
+      "name": "no degenerate/zero normals",
+      "pass": true,
+      "detail": "none"
+    },
+    {
+      "name": "the tier tag lives on the mesh, not on the scene structure (userData is the structure by reference)",
+      "pass": true,
+      "detail": "no structure carries __meshTier"
+    },
+    {
+      "name": "a 404 in a partly-uploaded full tier falls back to lite, not reason:failed",
+      "pass": true,
+      "detail": "c1 role=part reason=null tier=lite tris=3000"
+    },
+    {
+      "name": "renders at tier config \"lite-all\"",
+      "pass": true,
+      "detail": "bbox -60,-117,791,62,-0,1491"
+    },
+    {
+      "name": "renders at tier config \"by-role\"",
+      "pass": true,
+      "detail": "bbox -60,-117,791,62,-0,1491"
+    },
+    {
+      "name": "isolated L2 rendered at both resolutions for visual comparison",
+      "pass": true,
+      "detail": "L2-lite-3000.png / L2-full-6946.png"
+    },
+    {
+      "name": "console clean — no application errors, warnings or throws",
+      "pass": true,
+      "detail": "clean"
+    }
+  ],
+  "scene": "gross__back-vertebral-column__vertebral-column",
+  "calibration": {
+    "sphere": {
+      "verts": 4416,
+      "out": 4416,
+      "inn": 0,
+      "degenerate": 0,
+      "pctOut": 100,
+      "signedVolume": 4.144123841609402,
+      "windingOutward": true,
+      "faceAgree": 1472,
+      "faceDisagree": 0
+    },
+    "torus": {
+      "verts": 4608,
+      "out": 3072,
+      "inn": 1536,
+      "degenerate": 0,
+      "pctOut": 66.7,
+      "signedVolume": 3.926342719913079,
+      "windingOutward": true,
+      "faceAgree": 1536,
+      "faceDisagree": 0
+    }
+  },
+  "normals": {
+    "minPct": 64.5,
+    "maxPct": 89.5,
+    "count": 48,
+    "invertedCount": 0
+  },
+  "fallback": {
+    "key": "c1",
+    "role": "part",
+    "id": "FMA12519",
+    "reason": null,
+    "tier": "lite",
+    "triangles": 3000,
+    "hasGeometry": true,
+    "probe": {
+      "verts": 9000,
+      "out": 5697,
+      "inn": 3303,
+      "degenerate": 0,
+      "pctOut": 63.3,
+      "signedVolume": 9957.059653757311,
+      "windingOutward": true,
+      "faceAgree": 3000,
+      "faceDisagree": 0
+    }
+  },
+  "noise": {
+    "appNoise": [],
+    "excludedIntended404": 6,
+    "excludedSwiftshader": 4
+  },
+  "loaded": [
+    {
+      "key": "c1",
+      "role": "part",
+      "id": "FMA12519",
+      "reason": null,
+      "tier": "full",
+      "triangles": 6172,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 18516,
+        "out": 12039,
+        "inn": 6477,
+        "degenerate": 0,
+        "pctOut": 65,
+        "signedVolume": 9995.939856976265,
+        "windingOutward": true,
+        "faceAgree": 6172,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "c2",
+      "role": "part",
+      "id": "FMA12520",
+      "reason": null,
+      "tier": "full",
+      "triangles": 6870,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 20610,
+        "out": 14802,
+        "inn": 5808,
+        "degenerate": 0,
+        "pctOut": 71.8,
+        "signedVolume": 12923.114044003694,
+        "windingOutward": true,
+        "faceAgree": 6870,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "c3",
+      "role": "part",
+      "id": "FMA12521",
+      "reason": null,
+      "tier": "full",
+      "triangles": 5278,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 15834,
+        "out": 12006,
+        "inn": 3828,
+        "degenerate": 0,
+        "pctOut": 75.8,
+        "signedVolume": 8453.02158442951,
+        "windingOutward": true,
+        "faceAgree": 5278,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "c4",
+      "role": "part",
+      "id": "FMA12522",
+      "reason": null,
+      "tier": "full",
+      "triangles": 4224,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 12672,
+        "out": 9288,
+        "inn": 3384,
+        "degenerate": 0,
+        "pctOut": 73.3,
+        "signedVolume": 8706.106023134162,
+        "windingOutward": true,
+        "faceAgree": 4224,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "c5",
+      "role": "part",
+      "id": "FMA12523",
+      "reason": null,
+      "tier": "full",
+      "triangles": 4754,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 14262,
+        "out": 10467,
+        "inn": 3795,
+        "degenerate": 0,
+        "pctOut": 73.4,
+        "signedVolume": 9157.831852741097,
+        "windingOutward": true,
+        "faceAgree": 4754,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "c6",
+      "role": "part",
+      "id": "FMA12524",
+      "reason": null,
+      "tier": "full",
+      "triangles": 6350,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 19050,
+        "out": 14517,
+        "inn": 4533,
+        "degenerate": 0,
+        "pctOut": 76.2,
+        "signedVolume": 9312.62312909399,
+        "windingOutward": true,
+        "faceAgree": 6350,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "c7",
+      "role": "part",
+      "id": "FMA12525",
+      "reason": null,
+      "tier": "full",
+      "triangles": 5222,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 15666,
+        "out": 11943,
+        "inn": 3723,
+        "degenerate": 0,
+        "pctOut": 76.2,
+        "signedVolume": 11720.796785373339,
+        "windingOutward": true,
+        "faceAgree": 5222,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "t1",
+      "role": "part",
+      "id": "FMA9165",
+      "reason": null,
+      "tier": "full",
+      "triangles": 5614,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 16842,
+        "out": 13431,
+        "inn": 3411,
+        "degenerate": 0,
+        "pctOut": 79.7,
+        "signedVolume": 14337.911976408843,
+        "windingOutward": true,
+        "faceAgree": 5614,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "t2",
+      "role": "part",
+      "id": "FMA9187",
+      "reason": null,
+      "tier": "full",
+      "triangles": 8360,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 25080,
+        "out": 19692,
+        "inn": 5388,
+        "degenerate": 0,
+        "pctOut": 78.5,
+        "signedVolume": 17238.215190040588,
+        "windingOutward": true,
+        "faceAgree": 8360,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "t3",
+      "role": "part",
+      "id": "FMA9209",
+      "reason": null,
+      "tier": "full",
+      "triangles": 8910,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 26730,
+        "out": 21618,
+        "inn": 5112,
+        "degenerate": 0,
+        "pctOut": 80.9,
+        "signedVolume": 18836.639444179058,
+        "windingOutward": true,
+        "faceAgree": 8910,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "t4",
+      "role": "part",
+      "id": "FMA9248",
+      "reason": null,
+      "tier": "full",
+      "triangles": 8930,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 26790,
+        "out": 20832,
+        "inn": 5958,
+        "degenerate": 0,
+        "pctOut": 77.8,
+        "signedVolume": 18770.653112954496,
+        "windingOutward": true,
+        "faceAgree": 8930,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "t5",
+      "role": "part",
+      "id": "FMA9922",
+      "reason": null,
+      "tier": "full",
+      "triangles": 9834,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 29502,
+        "out": 22545,
+        "inn": 6957,
+        "degenerate": 0,
+        "pctOut": 76.4,
+        "signedVolume": 21121.312689585422,
+        "windingOutward": true,
+        "faceAgree": 9834,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "t6",
+      "role": "part",
+      "id": "FMA9945",
+      "reason": null,
+      "tier": "full",
+      "triangles": 4896,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 14688,
+        "out": 11130,
+        "inn": 3558,
+        "degenerate": 0,
+        "pctOut": 75.8,
+        "signedVolume": 24289.090584012603,
+        "windingOutward": true,
+        "faceAgree": 4896,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "t7",
+      "role": "part",
+      "id": "FMA9968",
+      "reason": null,
+      "tier": "full",
+      "triangles": 10740,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 32220,
+        "out": 25137,
+        "inn": 7083,
+        "degenerate": 0,
+        "pctOut": 78,
+        "signedVolume": 27044.813489726625,
+        "windingOutward": true,
+        "faceAgree": 10740,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "t8",
+      "role": "part",
+      "id": "FMA9991",
+      "reason": null,
+      "tier": "full",
+      "triangles": 5206,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 15618,
+        "out": 12258,
+        "inn": 3360,
+        "degenerate": 0,
+        "pctOut": 78.5,
+        "signedVolume": 27977.327183726167,
+        "windingOutward": true,
+        "faceAgree": 5206,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "t9",
+      "role": "part",
+      "id": "FMA10014",
+      "reason": null,
+      "tier": "full",
+      "triangles": 11286,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 33858,
+        "out": 27465,
+        "inn": 6393,
+        "degenerate": 0,
+        "pctOut": 81.1,
+        "signedVolume": 32722.899192109704,
+        "windingOutward": true,
+        "faceAgree": 11286,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "t10",
+      "role": "part",
+      "id": "FMA10037",
+      "reason": null,
+      "tier": "full",
+      "triangles": 11928,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 35784,
+        "out": 29475,
+        "inn": 6309,
+        "degenerate": 0,
+        "pctOut": 82.4,
+        "signedVolume": 35590.1205197194,
+        "windingOutward": true,
+        "faceAgree": 11928,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "t11",
+      "role": "part",
+      "id": "FMA10059",
+      "reason": null,
+      "tier": "full",
+      "triangles": 5652,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 16956,
+        "out": 14103,
+        "inn": 2853,
+        "degenerate": 0,
+        "pctOut": 83.2,
+        "signedVolume": 36514.891800853264,
+        "windingOutward": true,
+        "faceAgree": 5652,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "t12",
+      "role": "part",
+      "id": "FMA10081",
+      "reason": null,
+      "tier": "full",
+      "triangles": 6038,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 18114,
+        "out": 15156,
+        "inn": 2958,
+        "degenerate": 0,
+        "pctOut": 83.7,
+        "signedVolume": 40003.53603497686,
+        "windingOutward": true,
+        "faceAgree": 6038,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "l1",
+      "role": "part",
+      "id": "FMA13072",
+      "reason": null,
+      "tier": "full",
+      "triangles": 12946,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 38838,
+        "out": 32292,
+        "inn": 6546,
+        "degenerate": 0,
+        "pctOut": 83.1,
+        "signedVolume": 42201.260430626535,
+        "windingOutward": true,
+        "faceAgree": 12946,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "l2",
+      "role": "part",
+      "id": "FMA13073",
+      "reason": null,
+      "tier": "full",
+      "triangles": 6946,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 20838,
+        "out": 16587,
+        "inn": 4251,
+        "degenerate": 0,
+        "pctOut": 79.6,
+        "signedVolume": 45493.704677382,
+        "windingOutward": true,
+        "faceAgree": 6946,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "l3",
+      "role": "part",
+      "id": "FMA13074",
+      "reason": null,
+      "tier": "full",
+      "triangles": 14750,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 44250,
+        "out": 34467,
+        "inn": 9783,
+        "degenerate": 0,
+        "pctOut": 77.9,
+        "signedVolume": 49497.27961858897,
+        "windingOutward": true,
+        "faceAgree": 14750,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "l4",
+      "role": "part",
+      "id": "FMA13075",
+      "reason": null,
+      "tier": "full",
+      "triangles": 15426,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 46278,
+        "out": 35601,
+        "inn": 10677,
+        "degenerate": 0,
+        "pctOut": 76.9,
+        "signedVolume": 47926.41110126665,
+        "windingOutward": true,
+        "faceAgree": 15426,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "l5",
+      "role": "part",
+      "id": "FMA13076",
+      "reason": null,
+      "tier": "full",
+      "triangles": 17282,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 51846,
+        "out": 39798,
+        "inn": 12048,
+        "degenerate": 0,
+        "pctOut": 76.8,
+        "signedVolume": 55293.225205967836,
+        "windingOutward": true,
+        "faceAgree": 17282,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "sacrum",
+      "role": "part",
+      "id": "FMA16202",
+      "reason": null,
+      "tier": "full",
+      "triangles": 44416,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 133248,
+        "out": 100278,
+        "inn": 32970,
+        "degenerate": 0,
+        "pctOut": 75.3,
+        "signedVolume": 194116.90696961517,
+        "windingOutward": true,
+        "faceAgree": 44416,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_l1",
+      "role": "context",
+      "id": "FMA16033",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 6876,
+        "inn": 2124,
+        "degenerate": 0,
+        "pctOut": 76.4,
+        "signedVolume": 8281.735609811083,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_l2",
+      "role": "context",
+      "id": "FMA16034",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7350,
+        "inn": 1650,
+        "degenerate": 0,
+        "pctOut": 81.7,
+        "signedVolume": 8410.143353337553,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_l3",
+      "role": "context",
+      "id": "FMA16035",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 6825,
+        "inn": 2175,
+        "degenerate": 0,
+        "pctOut": 75.8,
+        "signedVolume": 8826.395842920227,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_l4",
+      "role": "context",
+      "id": "FMA16036",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7581,
+        "inn": 1419,
+        "degenerate": 0,
+        "pctOut": 84.2,
+        "signedVolume": 12283.106787462355,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_l5",
+      "role": "context",
+      "id": "FMA16037",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7620,
+        "inn": 1380,
+        "degenerate": 0,
+        "pctOut": 84.7,
+        "signedVolume": 16893.592885326405,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_c2",
+      "role": "context",
+      "id": "FMA25058",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 6861,
+        "inn": 2139,
+        "degenerate": 0,
+        "pctOut": 76.2,
+        "signedVolume": 1040.4149676930567,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_c3",
+      "role": "context",
+      "id": "FMA13896",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 6699,
+        "inn": 2301,
+        "degenerate": 0,
+        "pctOut": 74.4,
+        "signedVolume": 805.5675488571386,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_c4",
+      "role": "context",
+      "id": "FMA13897",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 6663,
+        "inn": 2337,
+        "degenerate": 0,
+        "pctOut": 74,
+        "signedVolume": 1022.4191803770902,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_c5",
+      "role": "context",
+      "id": "FMA13898",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7146,
+        "inn": 1854,
+        "degenerate": 0,
+        "pctOut": 79.4,
+        "signedVolume": 1296.4404293553503,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_c6",
+      "role": "context",
+      "id": "FMA13899",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 6480,
+        "inn": 2520,
+        "degenerate": 0,
+        "pctOut": 72,
+        "signedVolume": 1061.9174711886715,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_c7",
+      "role": "context",
+      "id": "FMA13900",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 5808,
+        "inn": 3192,
+        "degenerate": 0,
+        "pctOut": 64.5,
+        "signedVolume": 1048.1065380962557,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_t1",
+      "role": "context",
+      "id": "FMA10458",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 6705,
+        "inn": 2295,
+        "degenerate": 0,
+        "pctOut": 74.5,
+        "signedVolume": 1588.3026090155677,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_t2",
+      "role": "context",
+      "id": "FMA13495",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7098,
+        "inn": 1902,
+        "degenerate": 0,
+        "pctOut": 78.9,
+        "signedVolume": 2446.4934396547437,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_t3",
+      "role": "context",
+      "id": "FMA13500",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7056,
+        "inn": 1944,
+        "degenerate": 0,
+        "pctOut": 78.4,
+        "signedVolume": 2231.275605543051,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_t4",
+      "role": "context",
+      "id": "FMA13501",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7809,
+        "inn": 1191,
+        "degenerate": 0,
+        "pctOut": 86.8,
+        "signedVolume": 3456.9951248993534,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_t5",
+      "role": "context",
+      "id": "FMA13502",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7323,
+        "inn": 1677,
+        "degenerate": 0,
+        "pctOut": 81.4,
+        "signedVolume": 3646.61316003048,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_t6",
+      "role": "context",
+      "id": "FMA13503",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7659,
+        "inn": 1341,
+        "degenerate": 0,
+        "pctOut": 85.1,
+        "signedVolume": 5009.858457913299,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_t7",
+      "role": "context",
+      "id": "FMA13504",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7542,
+        "inn": 1458,
+        "degenerate": 0,
+        "pctOut": 83.8,
+        "signedVolume": 6375.099647023173,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_t8",
+      "role": "context",
+      "id": "FMA13505",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 8058,
+        "inn": 942,
+        "degenerate": 0,
+        "pctOut": 89.5,
+        "signedVolume": 6173.012043666472,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_t9",
+      "role": "context",
+      "id": "FMA13506",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7134,
+        "inn": 1866,
+        "degenerate": 0,
+        "pctOut": 79.3,
+        "signedVolume": 6351.023373840966,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_t10",
+      "role": "context",
+      "id": "FMA13507",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7872,
+        "inn": 1128,
+        "degenerate": 0,
+        "pctOut": 87.5,
+        "signedVolume": 7893.319255490704,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_t11",
+      "role": "context",
+      "id": "FMA13508",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7749,
+        "inn": 1251,
+        "degenerate": 0,
+        "pctOut": 86.1,
+        "signedVolume": 9458.85224329547,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    },
+    {
+      "key": "d_t12",
+      "role": "context",
+      "id": "FMA13509",
+      "reason": null,
+      "tier": "lite",
+      "triangles": 3000,
+      "hasGeometry": true,
+      "probe": {
+        "verts": 9000,
+        "out": 7767,
+        "inn": 1233,
+        "degenerate": 0,
+        "pctOut": 86.3,
+        "signedVolume": 9842.08862079551,
+        "windingOutward": true,
+        "faceAgree": 3000,
+        "faceDisagree": 0
+      }
+    }
+  ],
+  "passed": 21,
+  "failed": 0
+}

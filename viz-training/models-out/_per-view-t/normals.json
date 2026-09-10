@@ -1,0 +1,338 @@
+{
+ "t=0": {
+  "sinus": {
+   "tris": 7072,
+   "agree": 7004,
+   "degen": 0,
+   "hull": 10404,
+   "hout": 10404,
+   "verts": 21216,
+   "wind": 0.9904,
+   "hullOut": 1
+  },
+  "atrium": {
+   "tris": 10200,
+   "agree": 10132,
+   "degen": 0,
+   "hull": 15096,
+   "hout": 15096,
+   "verts": 30600,
+   "wind": 0.9933,
+   "hullOut": 1
+  },
+  "ventricle": {
+   "tris": 11288,
+   "agree": 11220,
+   "degen": 0,
+   "hull": 16728,
+   "hout": 16728,
+   "verts": 33864,
+   "wind": 0.994,
+   "hullOut": 1
+  },
+  "bulbus": {
+   "tris": 9248,
+   "agree": 9180,
+   "degen": 0,
+   "hull": 13668,
+   "hout": 13668,
+   "verts": 27744,
+   "wind": 0.9926,
+   "hullOut": 1
+  },
+  "truncus": {
+   "tris": 5712,
+   "agree": 5644,
+   "degen": 0,
+   "hull": 8364,
+   "hout": 8364,
+   "verts": 17136,
+   "wind": 0.9881,
+   "hullOut": 1
+  },
+  "endocardium": {
+   "tris": 6040,
+   "agree": 6000,
+   "degen": 0,
+   "hull": 18000,
+   "hout": 13200,
+   "verts": 18120,
+   "wind": 0.9934,
+   "hullOut": 0.7333
+  },
+  "veins": {
+   "tris": 1920,
+   "agree": 1792,
+   "degen": 0,
+   "hull": 5376,
+   "hout": 5220,
+   "verts": 5760,
+   "wind": 0.9333,
+   "hullOut": 0.971
+  },
+  "arches": {
+   "tris": 3371,
+   "agree": 3121,
+   "degen": 18,
+   "hull": 9120,
+   "hout": 6162,
+   "verts": 10113,
+   "wind": 0.9308,
+   "hullOut": 0.6757
+  },
+  "mesocardium": {
+   "tris": 116,
+   "agree": 116,
+   "degen": 0,
+   "hull": 0,
+   "hout": 0,
+   "verts": 348,
+   "wind": 1,
+   "hullOut": null
+  },
+  "midline": {
+   "tris": 512,
+   "agree": 448,
+   "degen": 0,
+   "hull": 1344,
+   "hout": 1344,
+   "verts": 1536,
+   "wind": 0.875,
+   "hullOut": 1
+  },
+  "pericardium": {
+   "tris": 1078,
+   "agree": 522,
+   "degen": 64,
+   "hull": 0,
+   "hout": 0,
+   "verts": 3234,
+   "wind": 0.5148,
+   "hullOut": null
+  }
+ },
+ "t=0.65": {
+  "sinus": {
+   "tris": 7072,
+   "agree": 7004,
+   "degen": 0,
+   "hull": 10404,
+   "hout": 10191,
+   "verts": 21216,
+   "wind": 0.9904,
+   "hullOut": 0.9795
+  },
+  "atrium": {
+   "tris": 10200,
+   "agree": 10132,
+   "degen": 0,
+   "hull": 15096,
+   "hout": 14760,
+   "verts": 30600,
+   "wind": 0.9933,
+   "hullOut": 0.9777
+  },
+  "ventricle": {
+   "tris": 11288,
+   "agree": 11220,
+   "degen": 0,
+   "hull": 16728,
+   "hout": 16299,
+   "verts": 33864,
+   "wind": 0.994,
+   "hullOut": 0.9744
+  },
+  "bulbus": {
+   "tris": 9248,
+   "agree": 9180,
+   "degen": 0,
+   "hull": 13668,
+   "hout": 13293,
+   "verts": 27744,
+   "wind": 0.9926,
+   "hullOut": 0.9726
+  },
+  "truncus": {
+   "tris": 5712,
+   "agree": 5644,
+   "degen": 0,
+   "hull": 8364,
+   "hout": 8364,
+   "verts": 17136,
+   "wind": 0.9881,
+   "hullOut": 1
+  },
+  "endocardium": {
+   "tris": 6040,
+   "agree": 6000,
+   "degen": 0,
+   "hull": 18000,
+   "hout": 11784,
+   "verts": 18120,
+   "wind": 0.9934,
+   "hullOut": 0.6547
+  },
+  "veins": {
+   "tris": 1920,
+   "agree": 1792,
+   "degen": 0,
+   "hull": 5376,
+   "hout": 5220,
+   "verts": 5760,
+   "wind": 0.9333,
+   "hullOut": 0.971
+  },
+  "arches": {
+   "tris": 3371,
+   "agree": 3121,
+   "degen": 18,
+   "hull": 9120,
+   "hout": 6198,
+   "verts": 10113,
+   "wind": 0.9308,
+   "hullOut": 0.6796
+  },
+  "mesocardium": {
+   "tris": 116,
+   "agree": 116,
+   "degen": 0,
+   "hull": 0,
+   "hout": 0,
+   "verts": 348,
+   "wind": 1,
+   "hullOut": null
+  },
+  "midline": {
+   "tris": 512,
+   "agree": 448,
+   "degen": 0,
+   "hull": 1344,
+   "hout": 1344,
+   "verts": 1536,
+   "wind": 0.875,
+   "hullOut": 1
+  },
+  "pericardium": {
+   "tris": 1078,
+   "agree": 522,
+   "degen": 64,
+   "hull": 0,
+   "hout": 0,
+   "verts": 3234,
+   "wind": 0.5148,
+   "hullOut": null
+  }
+ },
+ "t=1": {
+  "sinus": {
+   "tris": 7072,
+   "agree": 7004,
+   "degen": 0,
+   "hull": 10404,
+   "hout": 10041,
+   "verts": 21216,
+   "wind": 0.9904,
+   "hullOut": 0.9651
+  },
+  "atrium": {
+   "tris": 10200,
+   "agree": 10132,
+   "degen": 0,
+   "hull": 15096,
+   "hout": 14643,
+   "verts": 30600,
+   "wind": 0.9933,
+   "hullOut": 0.97
+  },
+  "ventricle": {
+   "tris": 11288,
+   "agree": 11220,
+   "degen": 0,
+   "hull": 16728,
+   "hout": 16239,
+   "verts": 33864,
+   "wind": 0.994,
+   "hullOut": 0.9708
+  },
+  "bulbus": {
+   "tris": 9248,
+   "agree": 9180,
+   "degen": 0,
+   "hull": 13668,
+   "hout": 13197,
+   "verts": 27744,
+   "wind": 0.9926,
+   "hullOut": 0.9655
+  },
+  "truncus": {
+   "tris": 5712,
+   "agree": 5644,
+   "degen": 0,
+   "hull": 8364,
+   "hout": 8364,
+   "verts": 17136,
+   "wind": 0.9881,
+   "hullOut": 1
+  },
+  "endocardium": {
+   "tris": 6040,
+   "agree": 6000,
+   "degen": 0,
+   "hull": 18000,
+   "hout": 12093,
+   "verts": 18120,
+   "wind": 0.9934,
+   "hullOut": 0.6718
+  },
+  "veins": {
+   "tris": 1920,
+   "agree": 1792,
+   "degen": 0,
+   "hull": 5376,
+   "hout": 5220,
+   "verts": 5760,
+   "wind": 0.9333,
+   "hullOut": 0.971
+  },
+  "arches": {
+   "tris": 3371,
+   "agree": 3121,
+   "degen": 18,
+   "hull": 9120,
+   "hout": 6204,
+   "verts": 10113,
+   "wind": 0.9308,
+   "hullOut": 0.6803
+  },
+  "mesocardium": {
+   "tris": 116,
+   "agree": 116,
+   "degen": 0,
+   "hull": 0,
+   "hout": 0,
+   "verts": 348,
+   "wind": 1,
+   "hullOut": null
+  },
+  "midline": {
+   "tris": 512,
+   "agree": 448,
+   "degen": 0,
+   "hull": 1344,
+   "hout": 1344,
+   "verts": 1536,
+   "wind": 0.875,
+   "hullOut": 1
+  },
+  "pericardium": {
+   "tris": 1078,
+   "agree": 522,
+   "degen": 64,
+   "hull": 0,
+   "hout": 0,
+   "verts": 3234,
+   "wind": 0.5148,
+   "hullOut": null
+  }
+ }
+}
