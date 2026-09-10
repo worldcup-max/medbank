@@ -11,6 +11,7 @@
  * guards. The model call (generate) and the DB (admin/supabase) stay in server.mjs, which
  * passes their results in. Nothing here touches the live build until server.mjs wires it.
  * ========================================================================== */
+import { canonicalTopicKey } from "./topic-canon.mjs";   // Section-A canonical topic map (retrieval key only)
 
 /* ---- vocabulary (mirrors the client's QB_SKILLS / cognitive levels) ---- */
 export const TARGET_SKILLS = ["diagnosis","investigation","management","complications","differential","next_step"];
@@ -150,6 +151,13 @@ export function stripAcronym(raw){
 }
 function tkey(s){ return nkey(stripAcronym(s)); }
 
+/* T2-only topic canonicalization (Section A). RETRIEVAL KEY ONLY — used solely to widen the T2 "same topic" candidate
+   set in retrieveCandidates(); it NEVER touches T1's exact match, T3, identity (decide), scoring, minting, or persistence.
+   EXTENDS tkey (does not replace it), so all current T2 matches (e.g. Cushing's↔Cushing via nkey) are preserved and the
+   Section-A aliases are ADDED on top. Reversible: MEDBANK_TOPIC_CANON!=="on" ⇒ t2TopicKey === tkey, byte-for-byte. */
+export function topicCanonOn(){ return String(process.env.MEDBANK_TOPIC_CANON||"off").toLowerCase()==="on"; }
+export function t2TopicKey(s){ return topicCanonOn() ? canonicalTopicKey(tkey(s)) : tkey(s); }
+
 /* DETERMINISTIC pre-filter: a candidate target is only eligible if it shares the topic AND skill.
    A different skill or topic is never a match, no matter how similar the wording. */
 export function candidateFilter(proposed, targets){
@@ -182,10 +190,11 @@ export function retrieveCandidates(proposed, targets, cfg){
   const R = Object.assign({}, RETRIEVAL, cfg||{});
   const active=(targets||[]).filter(t=> t && t.status!=="deprecated" && t.status!=="merged");
   const pt=tkey(proposed.topic), ps=nkey(proposed.skill), pTok=stmtTokens(proposed.knowledge_statement);
+  const pt2=t2TopicKey(proposed.topic);   // Section-A canonical key (== tkey when the flag is off)
   const seen={}, ranked=[];
   const add=(t,tier,score)=>{ if(seen[t.target_id]) return; seen[t.target_id]=1; ranked.push(Object.assign({}, t, { _tier:tier, _retScore:(score==null?null:+score.toFixed(2)) })); };
-  active.forEach(t=>{ if(tkey(t.topic)===pt && (!ps || !nkey(t.skill) || nkey(t.skill)===ps)) add(t,"T1",null); });   // T1
-  active.forEach(t=>{ if(tkey(t.topic)===pt) add(t,"T2",null); });                                                    // T2
+  active.forEach(t=>{ if(tkey(t.topic)===pt && (!ps || !nkey(t.skill) || nkey(t.skill)===ps)) add(t,"T1",null); });   // T1 (raw tkey — unchanged)
+  active.forEach(t=>{ if(t2TopicKey(t.topic)===pt2) add(t,"T2",null); });                                             // T2 (canonicalized topic key)
   const t3=active.map(t=>({t, ov:jaccard(pTok, stmtTokens(t.canonical_statement))}))
     .filter(x=>x.ov>=R.floor).sort((a,b)=>b.ov-a.ov);                                                                 // T3 (overlap desc)
   t3.forEach(x=> add(x.t,"T3",x.ov));
