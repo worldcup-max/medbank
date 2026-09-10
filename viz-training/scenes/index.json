@@ -8,9 +8,9 @@
       "id": "embryology__cardiovascular-development__cardiac-looping",
       "file": "viz-training/scenes/embryology__cardiovascular-development__cardiac-looping.json",
       "schema": 2,
-      "mode": "sequence",
-      "provider": "svg",
-      "status": "planned",
+      "mode": "3d_anatomy",
+      "provider": "procedural",
+      "status": "candidate",
       "student_ready": false,
       "authored_by": "task",
       "approved_by": null,
@@ -19,7 +19,7 @@
       "topic": "Cardiovascular Development",
       "structure": "Cardiac looping",
       "learning_goal": "Explain why the straight heart tube must bend, describe the normal D-loop as a set of three movements, say where each of the five segments finishes after looping and why that arrangement is what septation needs, and use left-right patterning to account for L-loop, dextrocardia and the heterotaxy syndromes.",
-      "gaps": 11,
+      "gaps": 10,
       "match": {
         "topics": [
           "cardiac looping",
@@ -92,185 +92,122 @@
       },
       "parts": [
         {
-          "key": "free_middle",
-          "label": "The dorsal mesocardium has already broken down",
-          "group": "The reason"
+          "key": "sinus_a",
+          "label": "Sinus venosus",
+          "group": "Day 21 — the straight tube"
         },
         {
-          "key": "move_ventral_right",
-          "label": "Movement one — the bulbus swings ventrally, caudally and to the RIGHT",
-          "group": "The three movements"
+          "key": "atrium_a",
+          "label": "Primitive atrium",
+          "group": "Day 21 — the straight tube"
         },
         {
-          "key": "move_dorsal_left",
-          "label": "Movement two — the ventricle swings dorsally and to the LEFT",
-          "group": "The three movements"
+          "key": "ventricle_a",
+          "label": "Primitive ventricle",
+          "group": "Day 21 — the straight tube"
         },
         {
-          "key": "move_atria_up",
-          "label": "Movement three — the atria climb up behind",
-          "group": "The three movements"
+          "key": "bulbus_a",
+          "label": "Bulbus cordis",
+          "group": "Day 21 — the straight tube"
         },
         {
-          "key": "result_geometry",
-          "label": "What the loop leaves you with",
-          "group": "The result"
+          "key": "truncus_a",
+          "label": "Truncus arteriosus",
+          "group": "Day 21 — the straight tube"
         },
         {
-          "key": "why_it_matters",
-          "label": "Looping is the setup for septation",
-          "group": "The result"
+          "key": "meso_a",
+          "label": "Dorsal mesocardium, still intact",
+          "group": "Day 21 — the straight tube"
         },
         {
-          "key": "laterality_genes",
-          "label": "What decides right rather than left",
-          "group": "Laterality"
+          "key": "sinus_b",
+          "label": "Sinus venosus",
+          "group": "Mid-loop — the C"
         },
         {
-          "key": "l_loop",
-          "label": "L-loop — the tube turns the wrong way",
-          "group": "Laterality"
+          "key": "atrium_b",
+          "label": "Primitive atrium",
+          "group": "Mid-loop — the C"
         },
         {
-          "key": "dextrocardia",
-          "label": "Dextrocardia — and the difference from dextroposition",
-          "group": "Laterality"
+          "key": "ventricle_b",
+          "label": "Primitive ventricle",
+          "group": "Mid-loop — the C"
         },
         {
-          "key": "heterotaxy",
-          "label": "Heterotaxy — when the body cannot decide",
-          "group": "Laterality"
+          "key": "bulbus_b",
+          "label": "Bulbus cordis",
+          "group": "Mid-loop — the C"
         },
         {
-          "key": "exam_frame",
-          "label": "How to answer a laterality question in three steps",
-          "group": "Laterality"
+          "key": "truncus_b",
+          "label": "Truncus arteriosus",
+          "group": "Mid-loop — the C"
+        },
+        {
+          "key": "sinus_c",
+          "label": "Sinus venosus",
+          "group": "Day 28 — the looped heart"
+        },
+        {
+          "key": "atrium_c",
+          "label": "Primitive atrium",
+          "group": "Day 28 — the looped heart"
+        },
+        {
+          "key": "ventricle_c",
+          "label": "Primitive ventricle",
+          "group": "Day 28 — the looped heart"
+        },
+        {
+          "key": "bulbus_c",
+          "label": "Bulbus cordis",
+          "group": "Day 28 — the looped heart"
+        },
+        {
+          "key": "truncus_c",
+          "label": "Truncus arteriosus",
+          "group": "Day 28 — the looped heart"
+        },
+        {
+          "key": "endo_c",
+          "label": "Endocardial tube inside the myocardium",
+          "group": "Day 28 — the looped heart"
+        },
+        {
+          "key": "ventricle_l",
+          "label": "Primitive ventricle, L-loop",
+          "group": "L-loop — the abnormal mirror"
+        },
+        {
+          "key": "bulbus_l",
+          "label": "Bulbus cordis, L-loop",
+          "group": "L-loop — the abnormal mirror"
         }
       ],
       "terms": {
-        "elongation": "why_it_bends",
-        "grows faster than the pericardial cavity": "why_it_bends",
-        "fixed at both ends": "why_it_bends",
-        "arterial pole": "why_it_bends",
-        "venous pole": "why_it_bends",
-        "secondary heart field": "why_it_bends",
-        "second heart field": "why_it_bends",
-        "day 23": "why_it_bends",
-        "day 28": "result_geometry",
-        "why a straight tube cannot stay straight": "why_it_bends",
-        "dorsal mesocardium": "free_middle",
-        "breakdown": "free_middle",
-        "transverse pericardial sinus": "free_middle",
-        "free in the pericardial cavity": "free_middle",
-        "attached at both ends only": "free_middle",
-        "the dorsal mesocardium has already broken down": "free_middle",
-        "d loop": "move_ventral_right",
-        "dextro loop": "move_ventral_right",
-        "bulbus cordis": "move_ventral_right",
-        "ventral": "move_ventral_right",
-        "caudal": "move_ventral_right",
-        "to the right": "move_ventral_right",
-        "bulboventricular loop": "move_ventral_right",
-        "c shaped loop": "move_ventral_right",
-        "movement one the bulbus swings ventrally caudally and to the right": "move_ventral_right",
-        "primitive ventricle": "move_dorsal_left",
-        "dorsal": "move_dorsal_left",
-        "to the left": "move_dorsal_left",
-        "left ventricle": "move_dorsal_left",
-        "bulboventricular sulcus": "move_dorsal_left",
-        "primary interventricular foramen": "move_dorsal_left",
-        "movement two the ventricle swings dorsally and to the left": "move_dorsal_left",
-        "primitive atrium": "move_atria_up",
-        "sinus venosus": "move_atria_up",
-        "cranial": "move_atria_up",
-        "atria above the ventricles": "move_atria_up",
-        "atrioventricular canal": "move_atria_up",
-        "sinuatrial orifice": "move_atria_up",
-        "atria behind the outflow": "move_atria_up",
-        "movement three the atria climb up behind": "move_atria_up",
-        "s shaped heart": "result_geometry",
-        "side by side ventricles": "result_geometry",
-        "outflow between the atria": "result_geometry",
-        "four chamber arrangement": "result_geometry",
-        "what the loop leaves you with": "result_geometry",
-        "septation of heart": "why_it_matters",
-        "endocardial cushions": "why_it_matters",
-        "interventricular septum": "why_it_matters",
-        "aorticopulmonary septum": "why_it_matters",
-        "alignment": "why_it_matters",
-        "conotruncal defect": "why_it_matters",
-        "double outlet right ventricle": "why_it_matters",
-        "transposition of the great arteries": "why_it_matters",
-        "looping is the setup for septation": "why_it_matters",
-        "left right patterning": "laterality_genes",
-        "primitive node": "laterality_genes",
-        "nodal cilia": "laterality_genes",
-        "nodal flow": "laterality_genes",
-        "nodal": "laterality_genes",
-        "lefty": "laterality_genes",
-        "pitx2": "laterality_genes",
-        "nkx2 5": "laterality_genes",
-        "left sided expression": "laterality_genes",
-        "week 3": "laterality_genes",
-        "gastrulation": "laterality_genes",
-        "what decides right rather than left": "laterality_genes",
-        "l loop": "l_loop",
-        "levo loop": "l_loop",
-        "ventricular inversion": "l_loop",
-        "congenitally corrected transposition": "l_loop",
-        "atrioventricular discordance": "l_loop",
-        "ventriculoarterial discordance": "l_loop",
-        "double discordance": "l_loop",
-        "systemic right ventricle": "l_loop",
-        "heart block": "l_loop",
-        "l loop the tube turns the wrong way": "l_loop",
-        "dextrocardia": "dextrocardia",
-        "situs solitus": "dextrocardia",
-        "situs inversus": "dextrocardia",
-        "situs inversus totalis": "dextrocardia",
-        "isolated dextrocardia": "dextrocardia",
-        "dextroposition": "dextrocardia",
-        "apex to the right": "dextrocardia",
-        "mirror image": "dextrocardia",
-        "chest x ray": "dextrocardia",
-        "ecg lead placement": "dextrocardia",
-        "kartagener syndrome": "dextrocardia",
-        "primary ciliary dyskinesia": "dextrocardia",
-        "bronchiectasis": "dextrocardia",
-        "sinusitis": "dextrocardia",
-        "infertility": "dextrocardia",
-        "dextrocardia and the difference from dextroposition": "dextrocardia",
-        "heterotaxy": "heterotaxy",
-        "situs ambiguus": "heterotaxy",
-        "right isomerism": "heterotaxy",
-        "left isomerism": "heterotaxy",
-        "asplenia": "heterotaxy",
-        "polysplenia": "heterotaxy",
-        "ivemark syndrome": "heterotaxy",
-        "bilateral right sidedness": "heterotaxy",
-        "bilateral left sidedness": "heterotaxy",
-        "trilobed lungs": "heterotaxy",
-        "bilobed lungs": "heterotaxy",
-        "complex congenital heart disease": "heterotaxy",
-        "midline liver": "heterotaxy",
-        "howell jolly bodies": "heterotaxy",
-        "encapsulated organisms": "heterotaxy",
-        "heterotaxy when the body cannot decide": "heterotaxy",
-        "segmental approach": "exam_frame",
-        "situs": "exam_frame",
-        "loop": "exam_frame",
-        "great artery relationship": "exam_frame",
-        "atrial situs": "exam_frame",
-        "ventricular loop": "exam_frame",
-        "connections": "exam_frame",
-        "discordance": "exam_frame",
-        "concordance": "exam_frame",
-        "how to answer a laterality question in three steps": "exam_frame"
+        "sinus venosus": "sinus_a",
+        "primitive atrium": "atrium_a",
+        "primitive ventricle": "ventricle_a",
+        "bulbus cordis": "bulbus_a",
+        "truncus arteriosus": "truncus_a",
+        "dorsal mesocardium": "meso_a",
+        "dorsal mesocardium still intact": "meso_a",
+        "vitelline cardinal veins": "veins_c",
+        "veins at the fixed venous pole": "veins_c",
+        "aortic arches": "arches_a",
+        "arches at the fixed arterial pole": "arches_a",
+        "endocardial tube": "endo_c",
+        "endocardial tube inside the myocardium": "endo_c",
+        "primitive ventricle l loop": "ventricle_l",
+        "bulbus cordis l loop": "bulbus_l"
       },
       "counts": {
-        "structures": 12,
-        "parts": 11,
-        "views": 5
+        "structures": 23,
+        "parts": 19,
+        "views": 9
       }
     },
     {
@@ -14661,7 +14598,7 @@
       "topic": "Forearm & Hand",
       "structure": "Radius & ulna",
       "learning_goal": "Tell the radius from the ulna at either end, name the parts of each, and explain how the radius turns over the ulna at two joints to pronate and supinate the hand.",
-      "gaps": 6,
+      "gaps": 7,
       "match": {
         "topics": [
           "forearm",
@@ -21723,7 +21660,7 @@
       "topic": "Lungs & Mediastinum",
       "structure": "Great vessels",
       "learning_goal": "Name each great vessel, say where it begins, where it ends and at what vertebral level, recite the three branches of the arch in order, and follow one drop of blood from the venae cavae out to the body and back — then use that circuit to explain SVC obstruction, aortic transection and a saddle embolus.",
-      "gaps": 12,
+      "gaps": 13,
       "match": {
         "topics": [
           "great vessels",
@@ -31989,7 +31926,7 @@
       "topic": "Brainstem",
       "structure": "Pons",
       "learning_goal": "Recognise the pons as the middle brainstem segment by its bulging front and its middle cerebellar peduncles, divide it into a basilar part in front and a tegmentum behind with the floor of the fourth ventricle as its back wall, place the four cranial nerve nuclei it contains — trigeminal, abducens, facial, vestibulocochlear — in the columns that the fourth ventricle's floor lays out, and use that arrangement to explain the crossed syndromes of the pons and the locked-in state.",
-      "gaps": 9,
+      "gaps": 10,
       "match": {
         "topics": [
           "neuroanatomy",
@@ -34429,7 +34366,7 @@
       "topic": "Limbic System",
       "structure": "Amygdala",
       "learning_goal": "Learn the amygdala by its POSITION and its TWO EXITS, not as 'the fear centre'. It is a grey nucleus in the roof of the temporal horn, immediately in FRONT of the head of the hippocampus, so the two are hit together by the same lesions and are separated only by which symptom appears. Its short route out is the STRIA TERMINALIS, which follows the tail of the caudate all the way round the ventricle to the hypothalamus; its direct route is the ventral amygdalofugal path. From that: why an amygdala output is autonomic and endocrine rather than motor, why stimulating it produces fear and dread rather than movement, and why the bilateral lesion syndrome — Kluver-Bucy — is a failure to ATTACH MEANING to what is seen rather than a failure to see it.",
-      "gaps": 11,
+      "gaps": 12,
       "match": {
         "topics": [
           "neuroanatomy",
@@ -34560,7 +34497,7 @@
       "topic": "Limbic System",
       "structure": "Fornix & Papez circuit",
       "learning_goal": "Learn the fornix as a SHAPE WITH A REASON and Papez as a LOOP YOU CAN SEE, not as two lists. The fornix is the hippocampus's output cable, and it takes an absurdly long C-shaped route — back, up, over, forward, down — to reach a target a few centimetres from where it started, because it has to climb out of a ventricle and get over the thalamus to do it. Everything clinical follows from where that arch passes: it is slung under the corpus callosum with the septum pellucidum hanging from it, its body roofs the THIRD VENTRICLE, and its columns form the front wall of the INTERVENTRICULAR FORAMEN — so a cyst at that foramen, or a surgeon entering the third ventricle, is working in the middle of the memory circuit. Then the split most students never learn: at the ANTERIOR COMMISSURE the column divides, precommissural to the septal region and postcommissural to the mammillary body, and it is the postcommissural half that carries Papez. Close the loop from there and Korsakoff, colloid cyst and forniceal amnesia stop being three facts and become three points on one ring.",
-      "gaps": 12,
+      "gaps": 14,
       "match": {
         "topics": [
           "neuroanatomy",
@@ -34699,7 +34636,7 @@
       "topic": "Limbic System",
       "structure": "Hippocampus",
       "learning_goal": "Place the hippocampus in the floor of the INFERIOR HORN of the lateral ventricle and let everything else follow from that one position. Because it lies in a ventricle it is curved, paired, and has an output that has to travel a long way round to reach the front of the brain — the FORNIX, arching under the corpus callosum to the mammillary body. Because it is deep in the medial temporal lobe it is the first thing a temporal mass, a herniation or a hypoxic insult reaches. And because its job is CONSOLIDATION rather than storage, a bilateral lesion gives dense anterograde amnesia with old memories and skills intact — the single most examined fact in this topic, and one the geometry explains rather than decorates.",
-      "gaps": 9,
+      "gaps": 11,
       "match": {
         "topics": [
           "neuroanatomy",
@@ -34723,6 +34660,10 @@
           "body of fornix",
           "column of fornix",
           "commissure of fornix",
+          "precommissural fornix",
+          "postcommissural fornix",
+          "anterior commissure",
+          "septal region",
           "mammillary body",
           "papez circuit",
           "inferior horn",
@@ -34796,6 +34737,9 @@
         "crus of fornix": "fornix_comm",
         "body of fornix": "fornix_l",
         "column of fornix": "fornix_l",
+        "precommissural fornix": "fornix_l",
+        "postcommissural fornix": "fornix_l",
+        "anterior commissure": "fornix_l",
         "mammillary body": "mamm",
         "papez circuit": "fornix_l",
         "fornix l": "fornix_l",

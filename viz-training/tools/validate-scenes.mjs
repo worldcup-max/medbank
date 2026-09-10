@@ -53,7 +53,17 @@ const CAPABILITIES = {
     degraded: ['PEEL_LAYER'],
     catalog: 'available-meshes.json'
   },
-  svg: { native: [], degraded: [], catalog: null }
+  svg: { native: [], degraded: [], catalog: null },
+  /* Procedural geometry: the structure is built by a function of t rather than fetched as a mesh, so
+     there is no catalog to check a ref against — the check that matters is whether the model actually
+     builds that part key, and only the model can answer it. TRACE_STRUCTURE degrades because a
+     procedural model has no centreline to walk yet. Mirrors viz3d.js; when one changes, change both. */
+  procedural: {
+    native: ['SHOW_STRUCTURE', 'HIDE_STRUCTURE', 'HIGHLIGHT_STRUCTURE', 'ISOLATE_REGION', 'ROTATE_TO_VIEW',
+      'CROSS_SECTION', 'COMPARE_STRUCTURES', 'SHOW_RELATIONSHIP', 'PEEL_LAYER'],
+    degraded: ['TRACE_STRUCTURE'],
+    catalog: null
+  }
 };
 
 /* Delivery mechanics belong BELOW the abstraction boundary. A scene says "the median nerve, highlighted and
@@ -144,16 +154,69 @@ function validate(scene) {
      left a real typo indistinguishable from a deliberate one. */
   const CONCEPT = /^concept:[a-z][a-z0-9_-]*$/;
   const resolves = t => t === '*' || CONCEPT.test(t) || keys.has(t) || groups.has(t);
+  /* Beat ordinals. Warning only. Eight views across the Back scenes carried no beat number and one scene
+     numbered two different beats "3"; every run reported those scenes clean because nothing compared the
+     ordinals to 1..n. (REPAIR-BACKLOG.md §3, §9.) */
+  const beats = (scene.views || []).map(v => v.beat);
+  if (beats.length && beats.some(b => b !== undefined)) {
+    if (beats.some(b => b === undefined)) W('ops', `some views carry no beat number: [${beats.map(b => b === undefined ? '—' : b).join(', ')}]`);
+    else {
+      const want = beats.map((_, i) => i + 1).join(',');
+      if (beats.join(',') !== want) W('ops', `beat numbers are [${beats.join(', ')}] — expected 1..${beats.length} in order`);
+    }
+  }
+
+  /* An op that reaches out of its own beat's ISOLATE_REGION. Warning, never a rejection: it is sometimes
+     exactly right (a connector into a card that is the beat's argument) and sometimes a trace that walks
+     the student into a ghosted group for no stated reason. The validator cannot tell which — a human can,
+     which is why this prints rather than blocks. (REPAIR-BACKLOG.md §9, third defect class.) */
+  const groupOf = new Map(structures.map(s => [s.key, s.group]));
+  /* SHOW_RELATIONSHIP and SHOW_STRUCTURE exist precisely to connect groups or restore context, so flagging
+     them here produced 407 of 565 warnings and would have trained readers to skip the other 158. The three
+     ops below are the ones where reaching out of the isolated group is a claim about what the student is
+     being shown, and therefore worth a human's eye. */
+  const REACH_OUT_OPS = new Set(['HIGHLIGHT_STRUCTURE', 'TRACE_STRUCTURE', 'COMPARE_STRUCTURES']);
+
   for (const v of (scene.views || [])) {
     const where = JSON.stringify(v.title || v.mode);
     if (!v.narration) W('ops', `view ${where}: no narration`);
     if (!(v.ops || []).length) W('ops', `view ${where}: no ops — nothing will happen on screen`);
+    let isolated = null;
+    for (const o of (v.ops || [])) {
+      /* Only when the beat isolates a GROUP. An ISOLATE_REGION naming a single structure key leaves no
+         group to be outside of, and comparing against it flags the isolated structure itself. */
+      if (o.op === 'ISOLATE_REGION') isolated = groups.has(o.target) && !keys.has(o.target) ? o.target : null;
+      else if (isolated && REACH_OUT_OPS.has(o.op)) {
+        const reach = [].concat(o.target || [], o.targets || [], o.from || [], o.to || [], o.path || [])
+          .filter(t => keys.has(t) && groupOf.get(t) !== isolated);
+        if (reach.length) W('ops', `view ${where} · ${o.op}: target(s) ${reach.map(t => JSON.stringify(t)).join(', ')} sit outside this beat's ISOLATE_REGION ${JSON.stringify(isolated)} — legal, but check the narration asks for them`);
+      }
+    }
     for (const o of (v.ops || [])) {
       if (!OPS.has(o.op)) { E('ops', `view ${where}: unknown op ${JSON.stringify(o.op)}`); continue; }
       const targets = [].concat(o.target || [], o.targets || [], o.from || [], o.to || [], o.path || []);
       for (const t of targets) if (!resolves(t)) E('ops', `view ${where} · ${o.op}: target ${JSON.stringify(t)} matches no structure key or group`);
       if (o.op === 'ROTATE_TO_VIEW' && !VIEWS.has(o.view)) E('ops', `${where} · ROTATE_TO_VIEW: view ${JSON.stringify(o.view)} is not one of ${[...VIEWS].join(', ')}`);
       if (o.op === 'CROSS_SECTION' && !['x', 'y', 'z'].includes(o.axis)) E('ops', `${where} · CROSS_SECTION: axis must be x, y or z`);
+      /* CROSS_SECTION.axis is the NORMAL of the cut plane, and the meshes are LPS (+X left, +Y posterior,
+         +Z superior) — see model3d-scene-spec-v2.md. So sagittal=x, coronal=y, axial/transverse=z. If the
+         beat's narration names a plane, it must be the one being cut. Warning, not error: the plane word is
+         often part of a structure name (transverse process, sagittal sinus, frontal lobe), so the blocklist
+         below strips the commonest of those and anything left is checked. Pre-folding embryo scenes are
+         exempt — the disc's cranio-caudal axis is not the mesh's z. Found four live mismatches on 2026-09-08,
+         all on signed scenes that every previous run had reported clean. */
+      if (o.op === 'CROSS_SECTION' && ['x', 'y', 'z'].includes(o.axis) && scene.mode === '3d_anatomy') {
+        const PLANE_AXIS = { sagittal: 'x', median: 'x', coronal: 'y', frontal: 'y', axial: 'z', transverse: 'z', horizontal: 'z' };
+        const NOT_A_PLANE = /\b(sagittal|median|coronal|frontal|axial|transverse|horizontal)\s+(process|processes|sinus|sinuses|lobe|lobes|colon|nerve|ligament|diameter|fissure|abdominis|cervical|foramen|facet|arch|band|ridge|line|skeleton|crest|artery|vein|suture|bone|plate|septum|nucleus|gyrus|pontine|temporal|sulcus|lobe|raphe)\b|\btransversus\b|\bfronto\w+|\bprefrontal\b|\bmedian\s+(cubital|umbilical|sacral|raphe)\b/gi;
+        const prose = String(v.narration || '')
+          .split(/(?<=[.;])\s+/)
+          .filter(sent => !/\bdiameters?\b/i.test(sent))   // "the widest diameter is transverse" is a shape, not a cut
+          .join(' ')
+          .replace(NOT_A_PLANE, ' ');
+        const named = Object.keys(PLANE_AXIS).filter(p => new RegExp(`\\b${p}(ly)?\\b`, 'i').test(prose));
+        if (named.length && named.every(p => PLANE_AXIS[p] !== o.axis))
+          W('ops', `view ${where} · CROSS_SECTION: narration names the ${named.join('/')} plane but axis is ${JSON.stringify(o.axis)} — expected ${JSON.stringify(PLANE_AXIS[named[0]])} (LPS: sagittal=x, coronal=y, axial=z)`);
+      }
       if (caps && caps.degraded.indexOf(o.op) >= 0) degrades.add(o.op);
       else if (caps && caps.native.indexOf(o.op) < 0 && OPS.has(o.op)) W('capability', `${o.op} is unknown to the ${provider} adapter — it will be ignored, not degraded`);
     }

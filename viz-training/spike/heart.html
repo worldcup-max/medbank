@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MedBank · cardiac looping</title>
+<!--
+  Local 3D scene. Nothing is fetched at runtime: three.min.js, render-kit.js and heart-loop.js all
+  sit next to this file. Open it straight off disk.
+
+  Drag to orbit (freely — you can look underneath and at the back). Wheel to zoom. The slider is the
+  model's t: the whole sequence is ONE continuous function, so scrubbing it shows the real motion
+  rather than seven pictures that happen to be next to each other.
+-->
+<style>
+  :root {
+    --ink: #e8eef8; --dim: #8fa0bd; --line: #21304a;
+    --panel: rgba(12,20,34,.86); --ground: #0e1626;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; background: var(--ground); color: var(--ink);
+    font: 13px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  #stage { position: fixed; inset: 0; }
+  canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  canvas:active { cursor: grabbing; }
+
+  .panel { position: fixed; background: var(--panel); border: 1px solid var(--line);
+    border-radius: 12px; padding: 12px 14px; backdrop-filter: blur(8px); }
+  #layers { top: 16px; left: 16px; width: 232px; max-height: calc(100% - 32px); overflow: auto; }
+  #controls { bottom: 16px; left: 50%; transform: translateX(-50%); width: min(680px, calc(100% - 32px)); }
+  #title { top: 16px; right: 16px; max-width: 300px; text-align: right; }
+
+  h1 { font-size: 14px; margin: 0 0 2px; letter-spacing: .01em; }
+  .sub { color: var(--dim); font-size: 11.5px; margin: 0; }
+  .head { color: var(--dim); font-size: 10.5px; letter-spacing: .10em; text-transform: uppercase;
+    margin: 0 0 8px; }
+
+  label.row { display: flex; align-items: center; gap: 9px; padding: 3px 0; cursor: pointer; }
+  label.row input { accent-color: #6ea8ff; margin: 0; }
+  .sw { width: 11px; height: 11px; border-radius: 3px; flex: none; box-shadow: 0 0 0 1px rgba(0,0,0,.5) inset; }
+  .nm { flex: 1; }
+  .rule { height: 1px; background: var(--line); margin: 10px 0 9px; }
+
+  #t { width: 100%; accent-color: #6ea8ff; }
+  .stages { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 9px; }
+  .stages button, .btn { white-space: nowrap; background: #16233a; color: var(--ink); border: 1px solid var(--line);
+    border-radius: 8px; padding: 5px 9px; font: inherit; font-size: 11.5px; cursor: pointer; }
+  .stages button:hover, .btn:hover { background: #1e3050; }
+  .stages button[aria-pressed="true"] { background: #2b4a7d; border-color: #3f6ba8; }
+  .bar { display: flex; align-items: center; gap: 10px; }
+  .tv { color: var(--dim); font-variant-numeric: tabular-nums; min-width: 108px; }
+
+  #err { position: fixed; left: 16px; bottom: 16px; max-width: 60%; color: #ffbfc6;
+    background: rgba(60,10,18,.94); border: 1px solid #7a2436; border-radius: 10px;
+    padding: 10px 12px; white-space: pre-wrap; font-family: ui-monospace, monospace; font-size: 11.5px;
+    display: none; z-index: 9; }
+  @media (max-width: 720px) {
+    #layers { width: 190px; } #title { display: none; }
+  }
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="c"></canvas></div>
+
+<div class="panel" id="title">
+  <h1>Cardiac looping</h1>
+  <p class="sub">The heart tube grows about half again in length while both poles stay tethered. The
+  extra length has nowhere to go but sideways — the loop is what buckling looks like.</p>
+</div>
+
+<div class="panel" id="layers">
+  <p class="head">Structures</p>
+  <div id="layerList"></div>
+  <div class="rule"></div>
+  <p class="head">Show</p>
+  <div id="optList"></div>
+</div>
+
+<div class="panel" id="controls">
+  <div class="bar">
+    <button class="btn" id="play">▶ Play</button>
+    <button class="btn" id="reset">Reset view</button>
+    <input id="t" type="range" min="0" max="1000" value="1000">
+    <span class="tv" id="tv">t = 1.00</span>
+  </div>
+  <div class="stages" id="stages"></div>
+</div>
+
+<div id="err"></div>
+
+<script src="three.min.js"></script>
+<script src="render-kit.js"></script>
+<script>
+/* Surface every failure. The first version of the neurulation viewer showed empty panels and a black
+   canvas because a script threw before the UI was built, and nothing said so. */
+(function () {
+  const box = document.getElementById('err');
+  function show(msg) { box.style.display = 'block'; box.textContent += (box.textContent ? '\n' : '') + msg; }
+  window.addEventListener('error', e => show('ERROR  ' + (e.message || e.error) +
+    (e.filename ? '\n  at ' + e.filename.split('/').pop() + ':' + e.lineno : '')));
+  window.addEventListener('unhandledrejection', e => show('UNHANDLED  ' + e.reason));
+  window.__show = show;
+  if (!window.THREE) show('three.min.js did not load — it must sit next to this file.');
+  if (!window.VizKit) show('render-kit.js did not load — it must sit next to this file.');
+})();
+</script>
+<script src="heart-loop.js"></script>
+<script>
+(function () {
+  if (!window.THREE || !window.VizKit || !window.buildHeart) return;
+  const T = THREE, K = VizKit;
+
+  const canvas = document.getElementById('c');
+  const renderer = K.configureRenderer(new T.WebGLRenderer({ canvas, antialias: true }));
+  const scene = new T.Scene();
+  scene.background = K.bg(0x0e1626);
+  K.standardLights(scene);
+  const camera = new T.PerspectiveCamera(32, 1, 0.1, 400);
+
+  /* ---- state ---------------------------------------------------------- */
+  const hidden = new Set();
+  const opts = { pericardium: false, endocardium: false, cutaway: false, mesocardium: true };
+  let t = 1.0, group = null, target = new T.Vector3(), dist = 20;
+  let yaw = -0.28, pitch = 0.05, needsBuild = true, playing = false;
+
+  /* ---- UI ------------------------------------------------------------- */
+  const swatch = hex => '#' + hex.toString(16).padStart(6, '0');
+  const list = document.getElementById('layerList');
+  Object.keys(LAYERS).forEach(key => {
+    const L = LAYERS[key];
+    const row = document.createElement('label');
+    row.className = 'row';
+    row.innerHTML = '<input type="checkbox" checked>' +
+      '<span class="sw" style="background:' + swatch(L.color) + '"></span>' +
+      '<span class="nm"></span>';
+    row.querySelector('.nm').textContent = L.name;
+    row.querySelector('input').addEventListener('change', e => {
+      if (e.target.checked) hidden.delete(key); else hidden.add(key);
+      applyVisibility();
+    });
+    list.appendChild(row);
+  });
+
+  const OPTIONS = [
+    ['mesocardium', 'Dorsal mesocardium'],
+    ['pericardium', 'Pericardial cavity'],
+    ['endocardium', 'Endocardial tube'],
+    ['cutaway', 'Cut the ventricle open'],
+  ];
+  const optList = document.getElementById('optList');
+  OPTIONS.forEach(([k, label]) => {
+    const row = document.createElement('label');
+    row.className = 'row';
+    row.innerHTML = '<input type="checkbox"' + (opts[k] ? ' checked' : '') + '><span class="nm"></span>';
+    row.querySelector('.nm').textContent = label;
+    row.querySelector('input').addEventListener('change', e => { opts[k] = e.target.checked; needsBuild = true; });
+    optList.appendChild(row);
+  });
+
+  const STAGES = [
+    [0.00, '1 · straight tube'],
+    [0.20, '2 · outgrowing'],
+    [0.40, '3 · C-loop'],
+    [0.60, '4 · free in cavity'],
+    [0.80, '5 · S-loop'],
+    [1.00, '6 · day 28'],
+  ];
+  const slider = document.getElementById('t'), tv = document.getElementById('tv');
+  const stageBar = document.getElementById('stages');
+  STAGES.forEach(([v, label]) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.addEventListener('click', () => { setT(v); playing = false; playBtn.textContent = '▶ Play'; });
+    stageBar.appendChild(b);
+  });
+  function setT(v) {
+    t = Math.max(0, Math.min(1, v));
+    slider.value = Math.round(t * 1000);
+    tv.textContent = 't = ' + t.toFixed(2);
+    [...stageBar.children].forEach((b, i) =>
+      b.setAttribute('aria-pressed', Math.abs(STAGES[i][0] - t) < 0.005 ? 'true' : 'false'));
+    needsBuild = true;
+  }
+  slider.addEventListener('input', () => { setT(slider.value / 1000); playing = false; playBtn.textContent = '▶ Play'; });
+
+  document.getElementById('reset').addEventListener('click', () => {
+    yaw = -0.28; pitch = 0.05; framedOnce = false; needsBuild = true;
+  });
+
+  const playBtn = document.getElementById('play');
+  playBtn.addEventListener('click', () => {
+    playing = !playing;
+    if (playing && t >= 0.999) setT(0);
+    playBtn.textContent = playing ? '❚❚ Pause' : '▶ Play';
+  });
+
+  /* ---- orbit: free, so you can look underneath and at the back ---------- */
+  let drag = null;
+  canvas.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY }; canvas.setPointerCapture(e.pointerId); });
+  canvas.addEventListener('pointerup', e => { drag = null; canvas.releasePointerCapture(e.pointerId); });
+  canvas.addEventListener('pointercancel', () => { drag = null; });
+  canvas.addEventListener('pointermove', e => {
+    if (!drag) return;
+    yaw -= (e.clientX - drag.x) * 0.008;
+    pitch += (e.clientY - drag.y) * 0.006;
+    pitch = Math.max(-1.45, Math.min(1.45, pitch));   // NOT clamped to a polite range: under and behind are anatomy
+    drag = { x: e.clientX, y: e.clientY };
+  }, { passive: true });
+  canvas.addEventListener('wheel', e => {
+    e.preventDefault();
+    dist *= Math.exp(e.deltaY * 0.0012);
+    dist = Math.max(3, Math.min(140, dist));
+  }, { passive: false });
+
+  /* ---- build ----------------------------------------------------------- */
+  function dispose(obj) {
+    obj.traverse(o => { if (o.geometry) o.geometry.dispose(); });
+  }
+  function applyVisibility() {
+    if (!group) return;
+    group.traverse(o => { if (o.userData && o.userData.key) o.visible = !hidden.has(o.userData.key); });
+  }
+  let framedOnce = false;
+  function build() {
+    if (group) { scene.remove(group); dispose(group); }
+    group = buildHeart(t, opts);
+    scene.add(group);
+    applyVisibility();
+    const f = K.fitCamera(camera, group, 1.22);
+    target.copy(f.centre);
+    target.y -= f.size.y * 0.07;   // clear of the control panel along the bottom edge
+    if (!framedOnce) { dist = f.distance; framedOnce = true; }
+    needsBuild = false;
+  }
+
+  function resize() {
+    const w = canvas.clientWidth || 1, h = canvas.clientHeight || 1;
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', resize);
+
+  let lastFrame = performance.now();
+  function loop(now) {
+    const dt = Math.min((now - lastFrame) / 1000, 0.1); lastFrame = now;
+    if (playing) {
+      let v = t + dt * 0.22;
+      if (v >= 1) { v = 1; playing = false; playBtn.textContent = '▶ Play'; }
+      setT(v);
+    }
+    if (needsBuild) build();
+    resize();
+    camera.position.set(
+      target.x + dist * Math.cos(pitch) * Math.sin(yaw),
+      target.y + dist * Math.sin(pitch),
+      target.z + dist * Math.cos(pitch) * Math.cos(yaw));
+    camera.lookAt(target);
+    camera.near = Math.max(0.05, dist * 0.05);
+    camera.far = dist * 6 + 60;
+    camera.updateProjectionMatrix();
+    renderer.render(scene, camera);
+    requestAnimationFrame(loop);
+  }
+
+  setT(1.0);
+  resize();
+  requestAnimationFrame(loop);
+  window.__scene = { setT, opts, hidden };   // for the headless checker
+})();
+</script>
+</body>
+</html>

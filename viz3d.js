@@ -114,6 +114,22 @@
     return col;
   }
 
+  /* COLOUR SPACE. three treats a Color built from a hex or CSS string as ALREADY LINEAR, and the
+     renderer then encodes linear -> sRGB on the way out. Every colour that reached a material here
+     was therefore being lightened and desaturated before anyone saw it: bone specified as the warm
+     ivory #d9cdb8 arrived as cold near-white porcelain, which is the exact thing BONE_CEILING and the
+     0.96 roughness were introduced to fight. Convert once, at the boundary, and a hex means what it
+     means in a colour picker — which also makes the legend dot and the model agree, since the dot is
+     plain CSS and was never wrong.
+
+     Two things must NOT go through here:
+       · scene.background — the clear colour is written raw, not output-encoded
+       · anything read back off a material (userData.__baseCol) — that value is already linear
+     Order matters against boneSafe: the ceiling expresses how bright bone should LOOK, so it clamps
+     in sRGB and the conversion comes after. */
+  function toLinear(col) { return col.convertSRGBToLinear(); }
+  function srgbColor(v, fallback) { return new T.Color(v || fallback).convertSRGBToLinear(); }
+
   register('bodyparts3d', {
     label: 'BodyParts3D',
     /* The adapter delivers the model, so the adapter owns the credit. Scene files never carry an
@@ -166,7 +182,7 @@
                    So bone goes near-matte and fully non-metallic. Soft tissue keeps a little sheen,
                    because a wet muscle belly genuinely has one and it helps tell muscle from bone. */
                 var isBone = (s.layer === 'bone') || (s.render === 'anchor');
-                var col = boneSafe(new T.Color(s.color || (isBone ? '#d9cdb8' : '#c9c3d8')));
+                var col = toLinear(boneSafe(new T.Color(s.color || (isBone ? '#d9cdb8' : '#c9c3d8'))));
                 var mat = new T.MeshStandardMaterial({
                   color: col,
                   roughness: isBone ? 0.96 : 0.78,
@@ -186,6 +202,216 @@
         });
       }
       return attempt(0).then(function (m) { return { mesh: m, reason: m ? null : 'failed' }; });
+    }
+  });
+
+  /* ======================= procedural provider =======================
+
+     The third way a structure can become geometry. `bodyparts3d` resolves a key to a scan-derived STL;
+     `svg` resolves it to a drawing; this one resolves it to a FUNCTION — a small module that returns the
+     structure built at a given point in its development.
+
+     It exists because 32 scenes in this corpus are processes, not objects. A neural plate folding, a
+     heart tube looping, a bronchial tree branching: there is no single mesh to scan, because the thing a
+     student has to learn is the CHANGE. A procedural model is one continuous function of t, so its stages
+     cannot drift out of agreement with each other the way a folder of hand-made models can.
+
+     THE REF. `refs.procedural` is "<model>#<part>", optionally "<model>#<part>@<t>" — the same shape as a
+     bodyparts3d ref, a plain string, so a scene author never writes an object literal. The model is a file
+     under MODEL_BASE; the part is a `userData.key` inside the group it builds; t defaults to the fully
+     developed form.
+
+     ONE STRUCTURE, ONE MESH. A procedural builder returns a whole GROUP — every layer of the embryo at
+     once, plus silhouette shells. The engine, however, is built on one mesh per structure: it reads
+     `m.geometry` directly for highlight patches, anchors and bounding boxes, and a Group has no geometry.
+     So this adapter merges the meshes carrying the requested key into a single geometry and hands back one
+     mesh, exactly as the STL path does. Silhouette shells are deliberately dropped — the player has its own
+     lighting and its own look, and a spike's presentation is not the app's.
+
+     WHAT THIS DOES NOT DO YET, stated so nobody has to discover it: t is per scene or per structure, not
+     per VIEW, so a scene cannot yet animate through its own stages with an op. That is the next step and it
+     belongs in the op dispatcher, not here. And procedural models are in their own units while BodyParts3D
+     meshes are anatomical millimetres, so a scene must not mix the two providers until something reconciles
+     scale. Both are gaps, not bugs. */
+
+  var MODEL_MODULES = {};    // model id -> Promise of the registered module
+  var MODEL_GROUPS = {};     // "model@t" -> the built group, so 15 structures build the embryo ONCE
+
+  function modelBase() {
+    try { return (window.MEDBANK_CONFIG && window.MEDBANK_CONFIG.MODEL_BASE) || './models3d/'; }
+    catch (e) { return './models3d/'; }
+  }
+
+  function loadScriptOnce(url) {
+    return new Promise(function (res, rej) {
+      var el = document.createElement('script');
+      el.src = url;
+      el.onload = function () { res(true); };
+      el.onerror = function () { rej(new Error('could not load ' + url)); };
+      document.head.appendChild(el);
+    });
+  }
+
+  /* render-kit.js owns winding, normals, colour conversion and silhouettes for every procedural model.
+     It reads window.THREE when it evaluates, so it can only be loaded once three.js is present — which is
+     guaranteed here, because load() is never called before loadThree() has resolved. */
+  var _kit = null;
+  function loadKit() {
+    if (window.VizKit) return Promise.resolve(window.VizKit);
+    if (!_kit) _kit = loadScriptOnce(modelBase() + 'render-kit.js').then(function () {
+      if (!window.VizKit) throw new Error('render-kit.js loaded but did not define VizKit');
+      return window.VizKit;
+    }).catch(function (e) { _kit = null; throw e; });
+    return _kit;
+  }
+
+  function loadModelModule(id) {
+    if (MODEL_MODULES[id]) return MODEL_MODULES[id];
+    MODEL_MODULES[id] = loadKit()
+      .then(function () { return loadScriptOnce(modelBase() + id + '.js'); })
+      .then(function () {
+        var m = window.MB3D_MODELS && window.MB3D_MODELS[id];
+        if (!m || typeof m.build !== 'function') {
+          throw new Error('model "' + id + '" loaded but did not register MB3D_MODELS["' + id + '"].build');
+        }
+        return m;
+      })
+      .catch(function (e) { delete MODEL_MODULES[id]; throw e; });
+    return MODEL_MODULES[id];
+  }
+
+  /* "<model>#<part>", optionally "@<t>", optionally "+flag,flag".
+
+     The flags exist because of a mistake worth recording. The L-loop — the heart tube looping the wrong
+     way, which is the one thing an exam actually asks about laterality — was first added by registering a
+     second model, `cardiac-looping-l`, inside the same file. It resolved to nothing: this adapter maps a
+     model id to a FILE, so a model registered inside another file can never be found. The choice was a
+     stub file per variant, or a way for one model to expose variants. Variants win — a mirrored heart is
+     the same model with one sign changed, not a different model, and a file per variant would multiply
+     with every future one.
+
+     So: "cardiac-looping#ventricle@1+mirror" builds with { mirror: true } merged over the model's FULL
+     set. Flags are booleans only, deliberately — anything needing a value belongs in the model, where it
+     can be documented, not smuggled through a ref string. */
+  function parseProceduralRef(ref) {
+    if (!ref) return null;
+    if (typeof ref === 'object') {
+      if (!ref.model || !ref.part) return null;
+      return { model: ref.model, part: ref.part, t: (ref.t == null ? 1 : +ref.t), flags: ref.flags || {} };
+    }
+    var str = String(ref);
+    var flags = {}, plus = str.indexOf('+');
+    if (plus >= 0) {
+      str.slice(plus + 1).split(',').forEach(function (f) { f = f.trim(); if (f) flags[f] = true; });
+      str = str.slice(0, plus);
+    }
+    var at = str.split('@');
+    var t = at.length > 1 ? parseFloat(at[1]) : 1;
+    var hash = at[0].split('#');
+    if (hash.length !== 2 || !hash[0] || !hash[1]) return null;
+    return { model: hash[0], part: hash[1], t: (isFinite(t) ? t : 1), flags: flags };
+  }
+
+  /* Merge every mesh carrying this key into one geometry, in the group's own space.
+     Non-indexed is the render-kit's native form; anything indexed (a three primitive such as a sphere)
+     is de-indexed first, because concatenating two index buffers with different vertex offsets silently
+     produces triangle soup. */
+  function mergeByKey(T, group, partKey) {
+    var parts = [];
+    group.updateMatrixWorld(true);
+    group.traverse(function (o) {
+      if (!o.isMesh || !o.geometry) return;
+      var u = o.userData || {};
+      if (u.key !== partKey) return;
+      if (u.outline) return;                       // silhouette shells are presentation, not anatomy
+      parts.push(o);
+    });
+    if (!parts.length) return null;
+
+    var total = 0, i, g;
+    var geos = parts.map(function (o) {
+      var gg = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone();
+      gg.applyMatrix4 ? gg.applyMatrix4(o.matrixWorld) : gg.applyMatrix(o.matrixWorld);
+      if (!gg.attributes.normal) gg.computeVertexNormals();
+      total += gg.attributes.position.count;
+      return gg;
+    });
+
+    var pos = new Float32Array(total * 3), nrm = new Float32Array(total * 3), off = 0;
+    for (i = 0; i < geos.length; i++) {
+      g = geos[i];
+      pos.set(g.attributes.position.array, off * 3);
+      nrm.set(g.attributes.normal.array, off * 3);
+      off += g.attributes.position.count;
+      g.dispose();
+    }
+    var out = new T.BufferGeometry();
+    out.setAttribute('position', new T.BufferAttribute(pos, 3));
+    out.setAttribute('normal', new T.BufferAttribute(nrm, 3));
+    out.computeBoundingBox();
+    out.computeBoundingSphere();
+    return out;
+  }
+
+  register('procedural', {
+    label: 'MedBank procedural geometry',
+    /* No third-party credit: this geometry is ours, generated from anatomy, not derived from a scan. */
+    capabilities: {
+      native: ['SHOW_STRUCTURE', 'HIDE_STRUCTURE', 'HIGHLIGHT_STRUCTURE', 'ISOLATE_REGION', 'ROTATE_TO_VIEW',
+        'CROSS_SECTION', 'COMPARE_STRUCTURES', 'SHOW_RELATIONSHIP', 'PEEL_LAYER'],
+      /* a procedural model has no centreline to walk yet, so tracing degrades to highlighting */
+      degraded: ['TRACE_STRUCTURE']
+    },
+    resolve: function (s) {
+      var r = parseProceduralRef(s && s.refs && s.refs.procedural);
+      return r ? (modelBase() + r.model + '.js') : null;
+    },
+    /* Same contract as the STL path, and the same care about the difference between the two failures a
+       student can be shown: 'none' means the corpus has no model of this structure, which is a fact about
+       the corpus; 'failed' means we could not get it just now, which is a fact about the last few seconds.
+       Reporting the second as the first tells the student a lie. */
+    load: function (T, s) {
+      var r = parseProceduralRef(s && s.refs && s.refs.procedural);
+      if (!r) return Promise.resolve({ mesh: null, reason: 'none' });
+
+      var flagKey = Object.keys(r.flags).sort().join(',');
+      var cacheKey = r.model + '@' + r.t + (flagKey ? '+' + flagKey : '');
+      return loadModelModule(r.model).then(function (mod) {
+        var group = MODEL_GROUPS[cacheKey];
+        if (!group) {
+          /* BUILD EVERYTHING THE MODEL CAN BUILD. A builder hides optional layers behind flags — the
+             heart's endocardial tube only appears with {endocardium:true} — and the first version of this
+             adapter passed {}, so those structures came back as 'none': "the corpus has no model of this",
+             which was a lie about a model sitting right there. The adapter slices the group by key anyway,
+             so the honest default is to build the full set once and let the key select. A model declares
+             that set as FULL; without one, the plain build is all there is. */
+          var opts = {};
+          var base = mod.FULL || {};
+          Object.keys(base).forEach(function (k) { opts[k] = base[k]; });
+          Object.keys(r.flags).forEach(function (k) { opts[k] = r.flags[k]; });
+          group = mod.build(r.t, opts);
+          MODEL_GROUPS[cacheKey] = group;
+        }
+
+        var geo = mergeByKey(T, group, r.part);
+        if (!geo) return { mesh: null, reason: 'none' };   // the model has no such part — a corpus fact
+
+        /* Colour follows the scene, then the model's own palette, then a neutral. Through the same
+           conversion every other material in this file uses — see the COLOUR SPACE note above. */
+        var pal = (mod.LAYERS && mod.LAYERS[r.part]) || null;
+        var hex = s.color || (pal && pal.color != null ? '#' + Number(pal.color).toString(16).padStart(6, '0') : null);
+        var mat = new T.MeshStandardMaterial({
+          color: srgbColor(hex, '#c9c3d8'),
+          roughness: 0.62, metalness: 0.02,
+          transparent: true, opacity: 1, side: T.DoubleSide
+        });
+        var mesh = new T.Mesh(geo, mat);
+        mesh.userData = s;
+        return { mesh: mesh, reason: null };
+      }).catch(function (e) {
+        try { console.warn('[MB3D] procedural load failed for', s && s.key, e && e.message); } catch (e2) {}
+        return { mesh: null, reason: 'failed' };
+      });
     }
   });
 
@@ -1059,7 +1285,7 @@
       });
       anchorStructs.forEach(function (s) {
         var a = s.anchor || {}, parent = meshes[a.on];
-        var col = new T.Color(s.color || '#ffcf5c');
+        var col = srgbColor(s.color, '#ffcf5c');
         var r = a.radius || 0.05;
         var g = new T.Mesh(new T.SphereGeometry(1, 20, 16),
           new T.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.65, transparent: true, depthTest: false }));
@@ -1642,7 +1868,7 @@
                the patch is the attachment area a student is asked to recognise, and an area the size of
                a pinhead teaches nothing. */
             var R = Math.max(span * (a.radius || 0.05) * 3.0, span * 0.045);
-            var R2 = R * R, col = new T.Color(s.color || '#ffcf5c');
+            var R2 = R * R, col = srgbColor(s.color, '#ffcf5c');
             for (i = 0; i < n; i++) {
               var dx = pos.getX(i) - cx, dy = pos.getY(i) - cy, dz = pos.getZ(i) - cz;
               var d2 = dx * dx + dy * dy + dz * dz;
@@ -1700,12 +1926,12 @@
            and the pin on the model take the same colour, so list and model always agree. */
         var approx = !!(s.approx && s.approx.detail);
         var glow = approx ? APPROX_COL : (isSel ? HILITE[selIdx % HILITE.length] : (s.color || '#7c5cff'));
-        m.material.color.set(isSel ? glow : (s.color || '#c9c3d8'));
+        m.material.color.copy(srgbColor(isSel ? glow : s.color, '#c9c3d8'));
         /* Remember what this structure's colour SHOULD be. paintPatches() blanks material.color to white
            and moves the colour into the vertices, so on the next paint the material is no longer a
            record of anything — reading it back would make the bone white, then white again, for ever. */
         m.userData.__baseCol = m.material.color.getHex();
-        m.material.emissive.set(isHi ? new T.Color(glow) : 0x000000);
+        m.material.emissive.copy(isHi ? srgbColor(glow, '#7c5cff') : new T.Color(0x000000));
         /* dimmer glow for an approximation: it is a region on a bone, not an outlined structure */
         m.material.emissiveIntensity = isSel ? (approx ? 0.22 : 0.42) : (state.hi && state.hi[s.key]) || 0;
         var btn = host.querySelector('.mb3d-part[data-key="' + s.key + '"]');

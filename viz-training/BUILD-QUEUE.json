@@ -1,0 +1,477 @@
+{
+  "version": 1,
+  "owner": "the model3d build + review scheduled tasks",
+  "read_this_first": "viz-training/BUILD-TASK-PROMPT.md and viz-training/REVIEW-TASK-PROMPT.md",
+  "statuses": {
+    "todo": "not started",
+    "building": "a build run has claimed it — if this is stale by more than one run, reclaim it",
+    "built": "a model exists and rendered clean; NOT yet reviewed by anyone else",
+    "changes-requested": "a review found defects. Build takes these BEFORE any todo item",
+    "escalated": "three review rounds without converging. A human looks at it. Neither task touches it again",
+    "done": "reviewed by a session that did not build it, and passed"
+  },
+  "order": "Strictly top to bottom, except that every changes-requested item is taken before any todo item.",
+  "items": [
+    {
+      "id": "engine__procedural-provider",
+      "kind": "capability",
+      "status": "done",
+      "blocks": "every model3d item below",
+      "why": "viz3d.js registers exactly two providers, bodyparts3d and svg. There is NO procedural provider, so a model built by this task has nothing to plug into and cannot reach a student. This must be built before any scene can move past 'planned'. Build it as a third provider that resolves a structure key to a builder module under viz-training/models/, mirroring how bodyparts3d resolves a key to an STL. Do not change the two existing providers. Do not touch the frozen Smart-Drill engine. Bump the sw.js CACHE version, reading its CURRENT value first — another session moves it.",
+      "built_at": "2026-09-10T09:20:00Z",
+      "reviewed_at": "2026-09-10T09:20:00Z",
+      "reviewed_by": "Frank + session (built by hand, not by the build task — an unproven task should not make its first-ever run an engine change)",
+      "built_notes": [
+        "viz3d.js registers 'procedural' beside bodyparts3d and svg. Same adapter contract: resolve(s) and load(T,s) -> {mesh, reason}. The two existing providers are untouched.",
+        "Ref shape is a plain string like bodyparts3d's: refs.procedural = \"<model>#<part>\", optionally \"...@<t>\". An object {model,part,t} also parses.",
+        "Models live under MEDBANK_CONFIG.MODEL_BASE (default ./models3d/) and register window.MB3D_MODELS[id] = {LAYERS, build, FULL}. render-kit.js is loaded once, before any model, because it reads window.THREE at evaluation.",
+        "ONE STRUCTURE, ONE MESH: the engine reads m.geometry directly for highlight patches, anchors and bounding boxes, so a Group would break it. The adapter merges every mesh carrying the key into one geometry and drops silhouette shells.",
+        "PROVEN, not assumed: all 8 parts of cardiac-looping resolve with correct triangle counts; unknown part -> 'none'; absent ref -> 'none'; missing model file -> 'failed'; t=0 and t=1 give different geometry; rendered through the app's own lighting rig.",
+        "A bug this testing caught: the adapter first built with {}, so any layer behind an option flag (the endocardial tube) came back as 'none' — 'the corpus has no model of this' — which was a lie about a model sitting right there. Models now declare FULL and the adapter builds the complete set."
+      ],
+      "known_gaps": [
+        "t is per scene or per structure, NOT per view. A scene cannot yet animate through its own stages with an op — that belongs in the op dispatcher, not the adapter.",
+        "Procedural models are in their own units; BodyParts3D meshes are anatomical millimetres. A scene must not mix the two providers until something reconciles scale."
+      ]
+    },
+    {
+      "id": "embryology__cardiovascular-development__cardiac-looping",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "changes-requested",
+      "note": "MODEL IS ALREADY PORTED to models3d/cardiac-looping.js and renders through the provider. What remains is the SCENE: give each structures[] entry a refs.procedural of \"cardiac-looping#<part>\", set provider.primary to 'procedural', and check every key in the scene against the keys the model actually builds (sinus, atrium, ventricle, bulbus, truncus, veins, arches, endocardium, mesocardium, pericardium). Do not rebuild the model.",
+      "built_at": "2026-09-10T09:45:00Z",
+      "built_by": "session with Frank (not the build task)",
+      "built_notes": [
+        "RE-AUTHORED, not wired. The scene's structures were teaching BEATS (why_it_bends, laterality_genes, exam_frame) because it was authored for the SVG panel engine. Structures are now 21 anatomical parts with geometry; all 12 beats' narration is preserved verbatim on the view that replaced each one.",
+        "Stages are structure SETS at fixed t (_a day 21, _b mid-loop, _c day 28) because per-view t does not exist yet. Collapses to 5 structures when engine__per-view-t lands.",
+        "L-loop is BUILT, not just described: cardiac-looping#ventricle@1+mirror. Mirrored in construction (frame seeded -x), not by negative scale, so winding is untouched — proven: meanX exactly negated, identical triangle count, identical outward-normal fraction.",
+        "PROVEN: validator 142/142; all 21 refs resolve through MB3D.adapters.procedural with geometry; 163208 triangles; console clean; three stages plus the D-vs-L comparison rendered and looked at.",
+        "NOT proven: how it frames inside the real player's camera, and whether 12 views is too many for one scene. Both are review-2 questions."
+      ],
+      "findings_for_review": [
+        "Check the beat-to-view mapping against the ORIGINAL sequence scene in git history — narration was moved programmatically, so verify nothing landed on the wrong view.",
+        "View 10 (dextrocardia) shows the L-loop build. Is that honest, or does it teach that dextrocardia always means L-loop? The narration distinguishes dextrocardia from dextroposition; the geometry cannot.",
+        "Stage _b is t=0.4. Is that the mid-loop a textbook would recognise, or an arbitrary point?",
+        "LIVE-PLAYER CHECK DONE 2026-09-10: opened in the real app, all 21 parts load, 163208 triangles, no errors from the scene. Framing measured per view. Views 9 and 10 are under-filled, but that is the PLAYER not refitting on isolate — filed as engine__refit-camera-on-isolate. Do not 'fix' it in the scene by deleting views."
+      ],
+      "live_check": {
+        "opened_in_app": true,
+        "parts_loaded": "21/21",
+        "triangles": 163208,
+        "lit_pct_by_view": {
+          "9": 5,
+          "10": 3,
+          "1-2": 3.6,
+          "3-4": 4.4,
+          "5-6": 5.4,
+          "7-8": 4.8,
+          "11-12": 5.4
+        },
+        "checked_at": "2026-09-10T10:55:00Z"
+      },
+      "review_rounds": 1,
+      "reviewed_at": "2026-09-10T11:20:00Z",
+      "reviewed_by": "model3d REVIEW task, round 1 — did not build this scene",
+      "review_method": [
+        "Review 1 mechanical: built at t=0,0.2,0.4,0.6,0.8,1.0 plus the mirror variant in headless chromium; console clean; per-mesh face-winding agreement (face normal vs supplied vertex normals) 0.92-0.99 on every tube segment, so RENDER-STANDARD bug 1 is NOT present; all 21 (now 23) scene refs resolve with geometry; frame fill measured per view by reading the framebuffer.",
+        "Review 2 anatomical: all 12 views rendered and looked at BEFORE opening the model source, then the scene JSON, then the source. Loop direction settled by measurement, not by reading the model's own comment."
+      ],
+      "corrected_this_round": [
+        "SCENE: the aortic arches move with t — their cranial end follows the arterial pole down as the chord shortens. Stages _a and _b were drawing arches@1. At day 21 that put the arch roots on the BULBUS with one limb buried inside it, and at mid-loop it left the whole arch complex floating free in space with the truncus's lumen gaping open. Added arches_a (@0) and arches_b (@0.4); views 1-2 and 3-4 re-pointed. Re-rendered: arches now spring from the truncus at every stage. The veins are genuinely t-invariant, so veins_c was already correct everywhere.",
+        "SCENE: 'pericardium' is built by the model but appeared in neither structures[] nor gaps[] — a review-1 key-coverage failure. Declared in gaps[], with the reason it is not usable (see finding 4).",
+        "MODEL: the header said \"+x = embryo's RIGHT\". It is the embryo's LEFT. Measured against six BodyParts3D right/left pairs in meshes-lite (tenth rib, hip bone, epididymis, upper and lower lung lobes, pyramidalis): RIGHT is at negative x in every one, and viz3d.js puts the anterior camera at +z. The geometry was already correct — the default build swings the limb to -x, the embryo's right, which is the D-loop — but the note is the stated axis convention for every procedural model that follows, and the next one built to it would come out mirrored. Comment corrected with the evidence.",
+        "MODEL: deleted the dead DEPTH_ORDER table. It was never read, and its comment claimed the model avoids z-fighting by polygonOffset ranking — which RENDER-STANDARD 2.5 says does active harm on separated solids, which is what this model is. Deleted rather than wired up.",
+        "Validator re-run after all edits: 142/142."
+      ],
+      "findings": [
+        "1. THE LOOP BENDS DORSALLY, NOT VENTRALLY. This is the biggest one and it is invisible in the anterior view, which is why it survived the build. Measured in world space at t=1, centroid z (model's own +z = ventral): ventricle 0 -> -1.12, bulbus 0 -> -0.82, atrium 0 -> -0.93. Every segment goes backwards. Confirmed by rendering a lateral view with axis rods drawn in: the whole heart sits on the -z side of the original tube axis (viz-training/_review-2026-09-10/diag-t1-lateral.png). View 3 is TITLED 'Movement one - the bulbus swings ventrally, caudally and to the RIGHT' and its narration says 'swings forwards, downwards and to the right'. Ventral and right are the two halves of the D-loop and only the right half is built. A student who rotates the model learns the convexity points backwards. NOT a sign flip: negating z would send the atrium ventral, which is equally wrong. It is the torsion — PSI0 = 0.26 and TAU = 1.60, the two hand-tuned constants in psi(u,t) — that has to carry the cranial limb ventral and the caudal limb dorsal. RENDER-STANDARD's own rule 'PREFER A SOLVED PARAMETER TO A TUNED ONE' applies: the amplitude is solved by bisection, but the torsion, which decides the examinable relation, is guessed. SHARPENED ON RE-CHECK, and correcting my own overstatement: it is NOT true that all three segments are wrong. Beat 4's narration wants the ventricle DORSAL and beat 5 wants the atrium dorsal and cranial, and both of those the model gets right. The relative order of the two limbs is right too — the bulbus is ventral to the ventricle at t = 1 (z -0.82 vs -1.12). Two things are wrong. The BULBUS moves dorsally from its own start (z 0 -> -0.82) while view 3 says it swings forwards, and the whole loop is displaced backwards, which is what puts the ventricle behind the atrium in finding 2. The target for the rebuild is therefore not 'flip z' but 'separate the limbs in the AP axis about an axis that does not itself travel dorsally'.",
+        "2. AT DAY 28 THE ATRIUM IS STILL BELOW THE VENTRICLE, AND IS VENTRAL TO IT. Measured at t=1: atrium y centre -0.68 vs ventricle y centre +0.51, so the inflow end is still caudal; atrium z centre -0.93 vs ventricle -1.12, so the ventricle is the more DORSAL of the two. View 5's narration says 'the inflow end comes to lie behind and above the ventricles instead of below them' and view 6 says the atria 'lie side by side behind and above them'. Both are contradicted by the geometry, and view 5 is a LATERAL view, so the student is looking straight at the contradiction while being told the opposite. This is the relation the whole adult mediastinum hangs on. Same root cause as finding 1. QUANTIFIED ON RE-CHECK: the atrium starts 1.48 units below the ventricle at t = 0 and ends 1.19 below at t = 1. The third movement closes 20% of a gap it is supposed to cross. And the AP relation is inverted at every t, worst in mid-loop: ventricle-minus-atrium z is 0.00 at t = 0, -0.33 at t = 0.4, -0.20 at t = 1, where it needs to be positive throughout.",
+        "3. THE DORSAL MESOCARDIUM NEVER BREAKS DOWN — IT JUST FADES. mesoAlpha = 1 below t=0.34 then ramps to 0 by t=0.58, and the sheet is one continuous quad strip at every t. There is no version of it with a central gap. View 2's whole teaching payoff is that gap: 'The middle of the dorsal mesocardium has already given way... The gap it leaves behind is the transverse pericardial sinus, which is why in the adult you can pass a finger behind the aorta and pulmonary trunk and in front of the atria.' Nothing in the model can show that. Worse, view 2 shows meso_a, which is 'cardiac-looping#mesocardium@0' and is LABELLED 'Dorsal mesocardium, still intact' — so the picture asserts intact while the narration says broken. And it is worse again than that: the sheet is a median-plane membrane and view 2 does not rotate, so in the anterior view it is edge-on behind the tube and invisible. View 2 renders PIXEL-IDENTICAL to view 1. FIX: build the mesocardium as two cuffs with a real gap between them once t passes the breakdown threshold, give the scene a meso_b at that t, and rotate view 2 to lateral. I did not rotate view 2 on its own — showing an intact sheet clearly under narration that says it has broken down is a worse error than showing nothing, and rotating without the model change would have shipped exactly that.",
+        "4. THE PERICARDIUM CANNOT SHOW THE ONE THING IT IS THERE FOR. It is sized from the bounding box of the heart at that same t (box = Box3().setFromObject(heartOnly), then scaled from sz), so the cavity grows with the tube. View 1's narration - the mechanical premise of the entire scene - is 'it is elongating faster than the pericardial cavity around it'. A cavity scaled to the tube can never show a tube outgrowing it. It is also drawn at opacity 0.022, which is invisible. FIX: size the cavity from the day-21 tube and hold it, or grow it on its own slower schedule, so the crowding is visible; then put it on view 1.",
+        "5. THE MODEL WILL BREAK THE PAGE WHEN A SECOND PROCEDURAL MODEL LOADS. models3d/cardiac-looping.js is not wrapped in an IIFE, so const T, const K, const C, LAYERS, L0, GROW, NSEG, NRING, WALL, JELLY, K_LOOP, K_ATRIAL, PSI0, TAU, MIRROR, POLE, SEGS, OVERLAP and every function land in the global lexical scope. neurulation.js is next in the queue and the obvious way to write it is 'const T = window.THREE' at the top, which throws SyntaxError: Identifier 'T' has already been declared and kills the whole script. REPRODUCED, not predicted - I hit exactly this error when my own harness declared a K. Wrap the model in an IIFE that ends with the window.MB3D_MODELS registration. Cheap now, and it stops the second model's first run being spent on a mystery.",
+        "6. VIEWS 8, 11 AND 12 RENDER PIXEL-IDENTICAL TO VIEW 6. Same structure set, no highlight, no rotation, no cross-section. Three consecutive beats where the picture does not change. The narration on them is good (laterality, heterotaxy, the situs-loop-connections drill) but it is narration over a still, which is what the sequence engine already did. Either give them something to look at or accept that this scene is 9 model3d views and 3 that belong somewhere else. This is the 'is 12 views too many' question from the build notes, answered: it is not the count, it is that four of them are the same frame.",
+        "7. VIEW 9's COMPARISON SHOWS TWO OPEN LUMENS. ventricle_c/bulbus_c and ventricle_l/bulbus_l are shown without their neighbouring segments, so the waist end caps that OVERLAP normally hides are exposed - both halves are visibly hollow pipes cut off in mid-air. RENDER-STANDARD says no end cap should ever be visible. The mirror itself is correct: identical triangle counts, identical outward-normal fraction, mean x negated, and the two read as clean mirror images.",
+        "8. NOT A DEFECT, CONFIRMED: the under-filled frames on views 9 and 10 are the player's, not the scene's. With a refit per view the same views fill 84% and 76% of the frame width. engine__refit-camera-on-isolate is correctly filed and should NOT be worked around by editing this scene.",
+        "9. THE BEAT-TO-VIEW MAPPING IS CLEAN — checked, and it passes. All 12 beats from the sequence version at HEAD land on views 1-12 in order, titles identical and narration byte-for-byte verbatim. The programmatic move did exactly what the build log said. This is stated positively because it was the thing most likely to have gone silently wrong.",
+        "10. BUT THE FIVE ORIGINAL VIEW NARRATIONS WERE DROPPED, AND THE LOG SAYS THEY WERE NOT. The sequence scene had 12 beats AND 5 views, and each of those 5 views carried its own narration. The re-authoring moved the beats and left the views behind. 2,367 characters, and it is not restatement — it is the synthesis layer: 'Three sentences, in this order... If you can say those three lines you can draw the loop from memory'; the cross-link back to the heart-tube scene ('nothing has been added or lost, the same five segments have simply been repositioned'); the compact three-way differential closing on 'situs, loop, connections'; and 'Held at both ends, free in the middle, growing. It bends.' The scene's gaps[] and BUILD-LOG both assert 'Nothing taught was dropped'. RECOVERED VERBATIM to viz-training/_review-2026-09-10/dropped-narration.md so it no longer depends on git archaeology. Where it lands is the build task's call — but note finding 6: this scene already has four views that render as the same frame, so five more views is probably the wrong shape.",
+        "11. t = 0.4 IS NOT A MID-LOOP A TEXTBOOK WOULD RECOGNISE, AND THE DAY MAPPING IT WOULD BE JUDGED AGAINST IS ITSELF INCONSISTENT. Rendered t = 0.2/0.3/0.4/0.5/0.6/0.8 and looked at all of them. At t = 0.4 the tube is a shallow wave: it has bent, but the bulboventricular limbs have not folded alongside one another and there is no C. The recognisable C-loop — ventricle and bulbus folded with a distinct sulcus between them, atrium still caudal — appears at about t = 0.6. Worse for views 3 and 4 specifically: view 4's narration says 'the two now sit side by side rather than one behind the other', and MEASURED, the ventricle-to-bulbus vector is predominantly cranio-caudal at EVERY t — (0.28, 1.25, 0.20) at t = 0.6 and (0.45, 1.09, 0.30) at t = 1. They never come to sit side by side at all, so this is not fixable by choosing a better t. Separately, the model's header defines t = 0 as day 21 while view 1's narration (and the original view 1) call the straight tube day 23; with t = 1 as day 28 those give day 23.8 and day 25 for the same t = 0.4. I did NOT re-point stage _b to 0.6. The torsion has to be rebuilt for findings 1 and 2 regardless, and the legible mid-loop will move when it is; picking a number off a model that is about to change would lock in a value derived from the broken version.",
+        "12. VIEW 10 DOES TEACH THAT DEXTROCARDIA MEANS L-LOOP, AND THAT IS WRONG. The answer to the queue's own question is yes. The view shows ventricle_l and bulbus_l alone — two mirrored chambers, no atrium, no outflow, no midline, no thorax — immediately after view 9 has established that exact shape as 'the L-loop'. Dextrocardia is a claim about where the heart sits in the chest and which way the apex points, and a model with no body midline cannot make that claim at all: nothing in the frame says right or left. The narration is careful and the geometry contradicts the sentence in it that matters most clinically — 'isolated dextrocardia, with the abdominal organs in the usual place, carries a high rate of associated defects' is describing dextroversion, a D-LOOPED heart rotated into the right chest. Mirror-image dextrocardia with situs inversus is L-looped; dextroversion is not. Showing only the mirrored loop collapses the distinction the view exists to make. The existing gaps[] entry covers dextroposition but not this. FIX: either give the model a body midline / chest reference so position can be shown, or accept that this beat is not a 3D claim and let it run on the same picture as view 9 with the distinction carried in narration. Do not leave it as a mirrored loop captioned 'dextrocardia'."
+      ],
+      "standards_gap": "RENDER-STANDARD has rules for winding, normals, colour, hulls and frame fill, and every one of them passed here. It has NOTHING that would have caught findings 1 or 2, because both are about whether the model is oriented and posed the way the anatomy says. Two rules proposed. (a) DECLARE THE AXES AND PROVE THEM. A model states its axis convention in a machine-readable field, and the check asserts it against the corpus: RIGHT is -x, LEFT is +x, CRANIAL +y, VENTRAL +z, measured from BodyParts3D right/left pairs, not from a comment. This model's comment had the sign backwards and nothing noticed. (b) A SPATIAL CLAIM IN NARRATION IS A TESTABLE ASSERTION. When a view says one part ends up behind, above, right of or inside another, that is a check against the two bounding boxes at that view's t. 'The inflow end comes to lie behind and above the ventricles' is one line of arithmetic, and it fails.",
+      "review_artifacts": "viz-training/_review-2026-09-10/ — all 12 views as a student sees them (before and after the arch correction) plus the axis-marked diagnostics that settle the loop direction.",
+      "review_note_round_1_continued": "Second sitting of ROUND 1, not a new round — same reviewer, same session, re-fired manually to answer the three questions the queue itself had left open (beat-to-view mapping, whether t=0.4 is a recognisable mid-loop, and whether view 10 teaches that dextrocardia means L-loop). review_rounds deliberately NOT incremented: burning a round on the same reviewer continuing their own work would push this toward escalation without a build run having answered anything."
+    },
+    {
+      "id": "engine__refit-camera-on-isolate",
+      "kind": "capability",
+      "status": "todo",
+      "shape": "engine",
+      "why": "MEASURED IN THE LIVE PLAYER, 2026-09-10, by reading the canvas pixels view by view. The camera is fitted ONCE to every structure the scene loads, and never refits when a view shows only a subset. So a view that isolates parts leaves the subject at roughly half the linear size it should be. On the cardiac-looping scene: views showing the whole embryo fill 67-74% of the canvas height, but view 9 (D-loop vs L-loop, 4 parts) fills 30% and view 10 (dextrocardia, 2 parts) fills 30% x 16% — 3.0% of the canvas lit. This is RENDER-STANDARD's first standing rule, THE SUBJECT FILLS THE FRAME, failing inside the player rather than in a model.",
+      "note": "MOVED AHEAD OF engine__per-view-t on 2026-09-10. Per-view-t makes FUTURE process scenes tidier; this fixes framing in the 71 scenes already in front of students. Measured by the review task: with a per-view refit, cardiac-looping views 9 and 10 go from 30% to 84% and 76% of frame width. Bigger payoff, smaller change, and it repairs shipped work rather than unshipped work. Not a cardiac-looping bug — it is the player's framing, so it affects EVERY scene that isolates, including the 71 ready BodyParts3D ones. Fit to the bounding box of the VISIBLE meshes after each view's ops have run, and ease the camera rather than jumping. Beware the opposite failure: refitting on a single small part will zoom so far in that the student loses all context, so clamp how far a refit may travel from the whole-scene fit.",
+      "found_by": "driving Frank's browser and reading the framebuffer per view — no screenshot needed"
+    },
+    {
+      "id": "engine__per-view-t",
+      "kind": "capability",
+      "status": "todo",
+      "shape": "engine",
+      "why": "t is currently per scene or per structure, so a PROCESS scene cannot walk through its own stages. That is most of what these scenes are for — the student's question is 'what happens next', and right now the answer is a still. The op dispatcher needs a t on the view, and SHOW_STRUCTURE/HIGHLIGHT need to rebuild the affected structures when it changes. Do it AFTER cardiac-looping is wired and reviewed: that scene is the first real consumer and will show what the op actually needs, which guessing will not.",
+      "blocks": "nothing outright — every process scene works as stills until this lands, then gets better",
+      "updated_at": "2026-09-10T10:57:44Z"
+    },
+    {
+      "id": "embryology__cardiovascular-development__heart-tube-formation",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. fusion of paired endocardial tubes into one — reuses the heart-loop centreline at t<0"
+    },
+    {
+      "id": "embryology__cardiovascular-development__septation-of-heart",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. septum primum/secundum and the AV cushions: sheets growing into a lumen"
+    },
+    {
+      "id": "embryology__cardiovascular-development__fetal-circulation",
+      "kind": "model3d",
+      "shape": "flow",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. three shunts. Needs flow arrows along vessel centrelines, not new tissue"
+    },
+    {
+      "id": "embryology__folding-of-the-embryo__lateral-folding",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. the disc curls ventrally into a tube. Arc-length conserving, like neurulation"
+    },
+    {
+      "id": "embryology__folding-of-the-embryo__cranio-caudal-folding",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. same mechanism, orthogonal plane. Build it as the same function on another axis"
+    },
+    {
+      "id": "embryology__folding-of-the-embryo__body-cavity-coelom",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. intraembryonic coelom splits somatic from splanchnic mesoderm"
+    },
+    {
+      "id": "embryology__folding-of-the-embryo__primitive-gut-tube",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. fore/mid/hindgut as one tube with the vitelline duct at the midgut"
+    },
+    {
+      "id": "embryology__gametogenesis-fertilization__fertilization",
+      "kind": "model3d",
+      "shape": "event",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. sperm-oocyte: spheres and a zona pellucida. Simple solids, good early win"
+    },
+    {
+      "id": "embryology__gametogenesis-fertilization__cleavage-morula",
+      "kind": "model3d",
+      "shape": "series",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. 2/4/8-cell to morula. Sphere packing inside a fixed zona — t is cell count"
+    },
+    {
+      "id": "embryology__gametogenesis-fertilization__blastocyst",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. cavitation: inner cell mass, trophoblast, blastocoele appearing"
+    },
+    {
+      "id": "embryology__gametogenesis-fertilization__spermatogenesis-oogenesis",
+      "kind": "model3d",
+      "shape": "series",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. cell lineages. Consider whether this is honestly a 3D scene at all"
+    },
+    {
+      "id": "embryology__week-3-gastrulation__primitive-streak",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. cells ingressing through the streak. Particle paths over the disc"
+    },
+    {
+      "id": "embryology__week-3-gastrulation__trilaminar-disc-3-germ-layers",
+      "kind": "model3d",
+      "shape": "structure",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. three lofted sheets. neurulation.js already builds this exact disc"
+    },
+    {
+      "id": "embryology__week-3-gastrulation__notochord",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. process to canal to plate to definitive rod. SVG plate exists: viz-training/artwork/"
+    },
+    {
+      "id": "embryology__week-3-gastrulation__neurulation-neural-plate-tube",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. BUILT: viz-training/spike/neurulation.js. Port and finish it"
+    },
+    {
+      "id": "embryology__weeks-1-2-implantation-bilaminar-disc__implantation",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. blastocyst eroding into endometrium"
+    },
+    {
+      "id": "embryology__weeks-1-2-implantation-bilaminar-disc__bilaminar-embryonic-disc",
+      "kind": "model3d",
+      "shape": "structure",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. epiblast and hypoblast: two sheets, the simplest case"
+    },
+    {
+      "id": "embryology__weeks-1-2-implantation-bilaminar-disc__amniotic-cavity-yolk-sac",
+      "kind": "model3d",
+      "shape": "structure",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. two cavities. neurulation.js dome() already does these"
+    },
+    {
+      "id": "embryology__weeks-1-2-implantation-bilaminar-disc__chorion-placenta-early",
+      "kind": "model3d",
+      "shape": "structure",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. villi branching into the intervillous space"
+    },
+    {
+      "id": "embryology__pharyngeal-apparatus__pharyngeal-arches",
+      "kind": "model3d",
+      "shape": "series",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. six arches as bars. Separated solids — should be a clean one"
+    },
+    {
+      "id": "embryology__pharyngeal-apparatus__pharyngeal-pouches",
+      "kind": "model3d",
+      "shape": "series",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. endodermal outpocketings between the arches"
+    },
+    {
+      "id": "embryology__pharyngeal-apparatus__pharyngeal-clefts-membranes",
+      "kind": "model3d",
+      "shape": "series",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. ectodermal clefts and the membranes between"
+    },
+    {
+      "id": "embryology__pharyngeal-apparatus__thyroid-gland-development",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. descent from foramen caecum along the thyroglossal duct. A path over time"
+    },
+    {
+      "id": "embryology__respiratory-system-development__respiratory-diverticulum",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. a bud off the foregut"
+    },
+    {
+      "id": "embryology__respiratory-system-development__tracheoesophageal-septum",
+      "kind": "model3d",
+      "shape": "process",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. the septum dividing one tube into two"
+    },
+    {
+      "id": "embryology__respiratory-system-development__bronchial-tree-branching",
+      "kind": "model3d",
+      "shape": "branching",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. recursive branching. t is generation number"
+    },
+    {
+      "id": "embryology__respiratory-system-development__alveolar-development",
+      "kind": "model3d",
+      "shape": "series",
+      "status": "todo",
+      "note": "RE-AUTHORING, NOT WIRING. Confirmed 2026-09-10 on cardiac-looping: these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. Converting means: structures become the parts the model builds, and each beat's narration moves verbatim onto the view that replaces it. Do not discard narration — it is the best content in the corpus. See the cardiac-looping scene as the worked example. four stages of alveolar maturation"
+    },
+    {
+      "id": "engine__epithelium-renderer",
+      "kind": "capability",
+      "status": "todo",
+      "blocks": "the four histology items below",
+      "why": "Frank's call, 2026-09-10: histology moves from the unbuilt SVG/microscopy path onto procedural 3D. The honest version of this is NOT a flat picture of a slide. Build a block of tissue whose CUT FACE reads like a section, and which can be rotated. That earns its place because it settles the single most-examined point in the topic: pseudostratified epithelium LOOKS stratified in section, and rotating the block shows every cell still touching the basement membrane. A micrograph cannot show that. Also flip the four histology structures' preferred_modes to model3d and lift the course suspension in CURRICULUM.json, but ONLY once this renderer actually renders."
+    },
+    {
+      "id": "histology__epithelium__simple-epithelia",
+      "kind": "model3d",
+      "shape": "tissue",
+      "status": "todo",
+      "note": "squamous/cuboidal/columnar on a basement membrane"
+    },
+    {
+      "id": "histology__epithelium__stratified-epithelia",
+      "kind": "model3d",
+      "shape": "tissue",
+      "status": "todo",
+      "note": "layers, and why pseudostratified is NOT one of them"
+    },
+    {
+      "id": "histology__epithelium__glandular-epithelium",
+      "kind": "model3d",
+      "shape": "tissue",
+      "status": "todo",
+      "note": "exocrine acini and ducts, endocrine cords"
+    },
+    {
+      "id": "histology__epithelium__cell-junctions",
+      "kind": "model3d",
+      "shape": "structure",
+      "status": "todo",
+      "note": "tight/adherens/desmosome/gap, in the lateral membrane"
+    },
+    {
+      "id": "neuroanatomy__blood-supply-of-the-brain__circle-of-willis",
+      "kind": "model3d",
+      "shape": "network",
+      "status": "todo",
+      "note": "the strongest procedural candidate in the corpus: a named-branch tube ring. Build the ring first, then hang the branches on it"
+    },
+    {
+      "id": "neuroanatomy__blood-supply-of-the-brain__anterior-circulation",
+      "kind": "model3d",
+      "shape": "network",
+      "status": "todo",
+      "note": "ICA to ACA/MCA. Shares the Willis centreline — reuse it, do not redraw it"
+    },
+    {
+      "id": "neuroanatomy__blood-supply-of-the-brain__posterior-circulation",
+      "kind": "model3d",
+      "shape": "network",
+      "status": "todo",
+      "note": "vertebrals to basilar to PCA. Same ring, other half"
+    },
+    {
+      "id": "neuroanatomy__blood-supply-of-the-brain__dural-venous-sinuses",
+      "kind": "model3d",
+      "shape": "network",
+      "status": "todo",
+      "note": "sinuses are triangular in section, not round — the section function is the whole difference from an artery"
+    },
+    {
+      "id": "neuroanatomy__ventricular-system-csf__csf-circulation",
+      "kind": "model3d",
+      "shape": "flow",
+      "status": "todo",
+      "note": "the ventricles as a CAST — a swept shell is exactly this shape. Flow arrows along the centreline"
+    },
+    {
+      "id": "neuroanatomy__ventricular-system-csf__meninges",
+      "kind": "model3d",
+      "shape": "structure",
+      "status": "todo",
+      "note": "three layers with real gaps between them: subdural and subarachnoid are the point"
+    },
+    {
+      "id": "neuroanatomy__spinal-cord__spinal-cord-cross-section",
+      "kind": "model3d",
+      "shape": "structure",
+      "status": "todo",
+      "note": "grey matter butterfly inside white matter, as a section function swept along the cord"
+    },
+    {
+      "id": "neuroanatomy__spinal-cord__ascending-tracts",
+      "kind": "model3d",
+      "shape": "path",
+      "status": "todo",
+      "note": "tracts are positioned bundles inside the cord. Same cord, coloured columns"
+    },
+    {
+      "id": "neuroanatomy__spinal-cord__descending-tracts",
+      "kind": "model3d",
+      "shape": "path",
+      "status": "todo",
+      "note": "same cord again, and the decussation is the fact students are examined on"
+    },
+    {
+      "id": "neuroanatomy__spinal-cord__reflex-arc",
+      "kind": "model3d",
+      "shape": "path",
+      "status": "todo",
+      "note": "two neurons and a synapse, drawn on the cord section that already exists"
+    },
+    {
+      "id": "neuroanatomy__cranial-nerves__cranial-nerve-courses",
+      "kind": "model3d",
+      "shape": "path",
+      "status": "todo",
+      "note": "twelve cords leaving the brainstem by named foramina"
+    },
+    {
+      "id": "neuroanatomy__cranial-nerves__cranial-nerve-nuclei",
+      "kind": "model3d",
+      "shape": "structure",
+      "status": "todo",
+      "note": "columns in the brainstem. Check honestly whether this needs a brainstem mesh underneath it first"
+    },
+    {
+      "id": "neuroanatomy__cranial-nerves__cn-function-testing",
+      "kind": "model3d",
+      "shape": "diagram",
+      "status": "todo",
+      "note": "probably NOT a 3D scene at all. Read it before building and escalate if it is a table pretending to be anatomy"
+    },
+    {
+      "id": "neuroanatomy__cerebellum__cerebellar-peduncles",
+      "kind": "model3d",
+      "shape": "path",
+      "status": "todo",
+      "note": "three paired fibre bundles entering the cerebellum — tracts are bundles, which the swept shell does. ZERO mesh refs exist for this scene: procedural is not a fallback here, it is the only path."
+    },
+    {
+      "id": "neuroanatomy__cerebellum__deep-cerebellar-nuclei",
+      "kind": "model3d",
+      "shape": "structure",
+      "status": "todo",
+      "note": "dentate, emboliform, globose, fastigial — placed bodies in a known arrangement. The dentate's crumpled bag shape is the hard part; build it as a folded shell, and escalate honestly if it will not read."
+    },
+    {
+      "id": "neuroanatomy__cerebellum__cerebellar-function",
+      "kind": "model3d",
+      "shape": "diagram",
+      "status": "todo",
+      "note": "READ THE SCENE BEFORE BUILDING. If it is a functional table — vestibulo/spino/cerebro-cerebellum and what each does — then it is not anatomy in space and should escalate, not be forced into 3D."
+    },
+    {
+      "id": "neuroanatomy__brainstem__reticular-formation",
+      "kind": "model3d",
+      "shape": "structure",
+      "status": "todo",
+      "note": "a diffuse column running the length of the brainstem. Honest as a translucent volume with named nuclei placed in it; dishonest as a solid organ with a crisp edge, because it has neither."
+    },
+    {
+      "id": "engine__unit-reconciliation",
+      "kind": "capability",
+      "status": "todo",
+      "shape": "engine",
+      "why": "Procedural models are in their own units; BodyParts3D meshes are anatomical millimetres. A scene mixing both providers renders one of them as a speck. NOT urgent — every scene queued here is wholly procedural, including the four cerebellum/brainstem ones, which carry zero mesh refs. It becomes blocking the first time a scene wants procedural detail INSIDE a scanned mesh — a circle of Willis inside a brain. Fix by declaring a model's real-world extent in its module (say, the mm the model's unit box spans) and scaling in the adapter, so scenes and scene authors never see units at all.",
+      "blocks": "any future scene that mixes procedural geometry with a BodyParts3D mesh"
+    }
+  ],
+  "note_neuro": "The 13 neuroanatomy items were added 2026-09-10 once the old 'MedBank 3D scene author (v2)' task was confirmed to have stopped (last run 07:07 UTC, missed the two slots after it), so there is no second writer on this course. These 13 were held on MESHES that BodyParts3D does not have at the needed granularity — but they are tubes, cords and cavity casts, which is what render-kit's swept shell already does. The other 4 planned neuro scenes (cerebellum x3, brainstem x1) are foliated and nuclear, genuinely irregular, and stay a mesh problem.",
+  "policy_no_mesh_means_procedural": "Frank, 2026-09-10: WHERE NO MESH EXISTS, GO PROCEDURAL IMMEDIATELY — do not leave a scene planned waiting for a mesh that is not coming. Checked against the corpus before adopting: the four cerebellum/brainstem scenes held back as 'needs a mesh' carry ZERO bodyparts3d refs between them, across 35 structures. There was nothing to wait for. The judgement that still stands is RENDER-STANDARD §5 — if the form is irregular and a student is examined on recognising it EXACTLY, say so and escalate rather than shipping a plausible fake. The rule is 'no mesh means build it', not 'no mesh means pretend'."
+}
