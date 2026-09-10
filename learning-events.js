@@ -45,8 +45,8 @@
   /* ---- tiny persistence helpers (never throw; storage can be full or blocked) ---- */
   function readQ(){ try{ var r=localStorage.getItem(QKEY); var a=r?JSON.parse(r):[]; return Array.isArray(a)?a:[]; }catch(e){ return []; } }
   function writeQ(a){ try{ localStorage.setItem(QKEY, JSON.stringify(a)); return true; }catch(e){ return false; } }
-  function readS(){ try{ var r=localStorage.getItem(SKEY); var o=r?JSON.parse(r):null; return (o&&typeof o==='object')?o:{queued:0,sent:0,dup:0,retried:0,dropped:0,failed:0}; }
-                    catch(e){ return {queued:0,sent:0,dup:0,retried:0,dropped:0,failed:0}; } }
+  function readS(){ try{ var r=localStorage.getItem(SKEY); var o=r?JSON.parse(r):null; return (o&&typeof o==='object')?o:{queued:0,sent:0,dup:0,retried:0,dropped:0,failed:0,refused:0}; }
+                    catch(e){ return {queued:0,sent:0,dup:0,retried:0,dropped:0,failed:0,refused:0}; } }
   function bump(k,n){ try{ var s=readS(); s[k]=(s[k]||0)+(n||1); localStorage.setItem(SKEY, JSON.stringify(s)); }catch(e){} }
 
   function uuid(){
@@ -64,12 +64,37 @@
          return st.profileId || null; }catch(e){ return null; }
   }
 
+  /* ---- 02.3 REPLAY CONTRACT ---------------------------------------------
+     A scheduler-relevant event MUST carry the temporal context and the exact
+     algorithm identity that produced it, because an immutable ledger can never
+     be corrected afterwards — there is no UPDATE policy, by design.
+
+       scheduler-relevant  ->  local_day + tz_offset + scheduler_version REQUIRED
+       non-scheduler       ->  all three stay null (a note_read has no scheduler)
+
+     Nullable in the database (the 14 pre-02.3 verification rows predate this
+     contract and are left honestly NULL); MANDATORY here at the application
+     layer. An event that cannot be replayed is worse than an absent one, so a
+     scheduler event without a version is REFUSED rather than stored unusable.  */
+  var SCHED_EVENTS = { question_answered:1, card_reviewed:1 };
+  function isSched(t){ return !!SCHED_EVENTS[t]; }
+  function localDay(){
+    try{ if(typeof window.dayNum === 'function') return window.dayNum(); }catch(e){}
+    try{ var d=new Date(); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())/864e5); }catch(e){}
+    return null;
+  }
+  function tzOffset(){ try{ return new Date().getTimezoneOffset(); }catch(e){ return null; } }
+
   /* ---- the one entry point --------------------------------------------- */
   /* emit({event_type, surface, target_id, object_id, correct, confidence, response_ms, metadata})
      Returns true if the event was durably queued, false if it was ignored.  */
   function emit(ev){
     try{
       if(!on() || !ev || !ev.event_type || !ev.surface) return false;
+
+      // 02.3 contract: refuse a scheduler event that cannot be replayed.
+      var sched = isSched(ev.event_type);
+      if(sched && !ev.scheduler_version){ bump('refused'); return false; }
 
       var row = {
         level_profile_id: profileId(),           // account_id is NEVER sent — RLS establishes it
@@ -81,6 +106,9 @@
         confidence:  (ev.confidence == null || isNaN(ev.confidence)) ? null : Math.max(0, Math.min(3, Math.round(ev.confidence))),
         response_ms: (ev.response_ms == null || isNaN(ev.response_ms)) ? null : Math.max(0, Math.round(ev.response_ms)),
         occurred_at: new Date(ev.occurred_at || Date.now()).toISOString(),
+        local_day:         sched ? localDay() : null,      // the CLIENT's own day index
+        tz_offset:         sched ? tzOffset() : null,      // minutes, so local_day is interpretable
+        scheduler_version: sched ? String(ev.scheduler_version) : null,
         client_event_id: uuid(),
         metadata:    (ev.metadata && typeof ev.metadata === 'object') ? ev.metadata : {}
       };

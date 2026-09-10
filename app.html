@@ -3242,6 +3242,50 @@ function qbFinalize(){ if(!QB||QB._saved) return; QB._saved=true; var s=qbStore(
  *   correct+confident/unknown → secure: never newly scheduled; advances a schedule if one exists
  * ============================================================== */
 var QB_LADDER=[1,3,7,14];
+
+/* ===== 02.3 — REPLAY CONTRACT (DESCRIPTIVE, NOT CONFIGURATION) ==============
+ * These declarations DESCRIBE the parameters the production schedulers really
+ * use. They DO NOT control them. `rateSRS` and `qbSchedApply` are the sole
+ * authority for behaviour; this block is a mirror, stamped onto every
+ * scheduler-relevant learning event so a future replay knows exactly which
+ * algorithm produced that event.
+ *
+ *      qbSchedApply / rateSRS
+ *              |
+ *              +-- actual behaviour
+ *                      ^
+ *                      |  qa/v18-replay-contract.mjs asserts they agree
+ *                      |
+ *              declared parameters (this block)
+ *
+ * DO NOT "fix" a scheduler by editing this block. Editing it changes nothing
+ * except the recorded version string — which would then be a lie about what
+ * the code did. Change the scheduler first, then update this block; the
+ * contract test will confirm the two still agree.
+ *
+ * PREFIX = semantic algorithm version. Bumped BY HAND when LOGIC changes
+ *          (control flow, new actions, different state transitions). A
+ *          fingerprint cannot detect those, so the prefix is the only guard.
+ * SUFFIX = deterministic fingerprint of EVERY constant that changes scheduler
+ *          OUTPUT — not merely the ladder. Computed at emit time, so a
+ *          parameter edit can never silently masquerade as the old algorithm.
+ *
+ * TECHNICAL DEBT (recorded 02.3): the Q-bank confidence thresholds and
+ * interval sentinels are inline literals inside qbSchedApply. They are
+ * fingerprinted here via a declaration verified by contract test rather than
+ * read from authoritative constants. Extracting them into real constants is
+ * deferred to a legitimate scheduler-change phase — 02.3 is replay metadata
+ * work and must not refactor the scheduler.
+ * ========================================================================== */
+var MB_SRS_ALGO  = 'srs-box-v1';        // rateSRS: box ladder + lapse reset
+var MB_QB_ALGO   = 'qb-retention-v1';   // qbSchedApply: reset / hold / advance
+/* Mirrors the inline literals in qbSchedApply. Verified, never authoritative. */
+var MB_QB_PARAMS = { confHi:2, confLo:1, resetInterval:1, graduate:99 };
+
+function mbFp(a){ return (a||[]).join('.'); }
+function mbSchedVerCard(){ return MB_SRS_ALGO + '@' + mbFp(LADDER); }
+function mbSchedVerQbank(){ var p = MB_QB_PARAMS;
+  return MB_QB_ALGO + '@' + mbFp(QB_LADDER) + '~' + mbFp([p.confHi, p.confLo, p.resetInterval, p.graduate]); }
 function qbSched(){ var s=qbStore(); return s._sched=s._sched||{}; }        // retentionKey -> { key,n,streak,interval,dueAt,lastOk,conf,miscon,prio,lastSeen,firstAt,_day,servedQhs,noFresh }
 function qbLadderNext(iv){ for(var i=0;i<QB_LADDER.length;i++){ if(QB_LADDER[i]>iv) return QB_LADDER[i]; } return 99; }   // 99 = past 14 → graduate
 function qbUniq(a){ var seen={},o=[]; (a||[]).forEach(function(x){ if(x==null)return; var k=String(x); if(!seen[k]){seen[k]=1;o.push(x);} }); return o; }
@@ -3397,6 +3441,7 @@ function qbNext(){ QB._confDone=false;
       try{ if(window.MB_EVENTS && _r.i === QB.i) MB_EVENTS.emit({ event_type:'question_answered', surface:(QB&&QB.smart?'retest':'qbank'),
              target_id:(qbStore()._qmeta[_qh]||{}).target_id||null, object_id:_qh,
              correct:!!_r.ok, confidence:(_r.conf==null?null:_r.conf), response_ms:(_r.ms==null?null:_r.ms),
+             scheduler_version:mbSchedVerQbank(),
              metadata:{ topic_id:(_it._topicId||QB.topicId||null), mode:QB.mode||null, session_type:QB.smart?'smart':'standard',
                         kind:QB.kind||null, skill:_it.skill||null, level:qbCogOf(_it)||null } }); }catch(_e){} } }catch(e){}
   if(QB.adaptive){
@@ -6254,6 +6299,7 @@ function pickOpt(i){
   if(_ms>=1200) recordAnswerMs(it.id,_pt,_ms);           // measure real answer time → rolling median
   try{ if(window.MB_EVENTS) MB_EVENTS.emit({ event_type:'card_reviewed', surface:'flashcard',
         target_id:null, object_id:it.id, correct:!!ok, response_ms:(_ms||null),
+        scheduler_version:mbSchedVerCard(),
         metadata:{ topic_id:(it.t&&it.t.id)||null, deck:it.deck||null, prior_state:_pt||null, mcq:true, chosen:i } }); }catch(_e){}   /* build 01 */
   // a first-ever exposure is a NEW card whichever pool served it — only planNew tags isNew, so a topic-deck /
   // weak / cram card would otherwise be logged as a *review* and never count toward the new-card total or streak.
@@ -6375,6 +6421,7 @@ function rateCard(ok){
   if(_ms>=1200) recordAnswerMs(it.id,_pt,_ms);
   try{ if(window.MB_EVENTS) MB_EVENTS.emit({ event_type:'card_reviewed', surface:'flashcard',
         target_id:null, object_id:it.id, correct:!!ok, response_ms:(_ms||null),
+        scheduler_version:mbSchedVerCard(),
         metadata:{ topic_id:(it.t&&it.t.id)||null, deck:it.deck||null, prior_state:_pt||null, conf_card:!!it.conf } }); }catch(_e){}   /* build 01: target_id null until cards gain target identity */
   logRate(ok); logDaily(!!it.isNew || (_pt==='new' && it.deck!=='primer'), it.t.subject.id); touchTopic(it.t.id);   // see :4877 — first exposure counts as new whichever pool served it
   S.session.done++; if(ok)S.session.correct++;
