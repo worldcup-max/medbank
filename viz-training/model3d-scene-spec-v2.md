@@ -108,9 +108,12 @@ where the same model appeared in both arrays with different labels.
 
 ## The op vocabulary
 
-Ten ops — a teaching language, not a rendering API. Scenes are authored against **all ten**; each adapter
-declares which it supports and degrades the rest. A scene is never rejected for using an op its current
-renderer lacks, because the day a better renderer arrives the teaching is already authored.
+Eleven ops — a teaching language, not a rendering API. Scenes are authored against **all eleven**; each
+adapter declares which it supports and degrades the rest. A scene is never rejected for using an op its
+current renderer lacks, because the day a better renderer arrives the teaching is already authored.
+
+*(This section said "ten" and listed nine: `PEEL_LAYER` was in the validator and in the player but never
+in this table. Both missing rows are below. Corrected 2026-09-10 by the build run that added `SET_STAGE`.)*
 
 | op | arguments | meaning | bodyparts3d today |
 |---|---|---|---|
@@ -123,6 +126,45 @@ renderer lacks, because the day a better renderer arrives the teaching is alread
 | `COMPARE_STRUCTURES` | `targets[]`, `layout?` | two structures lit, others ghosted | native |
 | `SHOW_RELATIONSHIP` | `from`, `to`, `kind` | light both, draw a connector | native |
 | `TRACE_STRUCTURE` | `target`, `path[]`, `duration?` | follow a structure along its course | **degrades** → timed sequential highlight along `path` |
+| `PEEL_LAYER` | `layer` | hide every structure in that layer | **degrades** → plain hide, with no peeling animation |
+| `SET_STAGE` | `t` (0–1) | move the whole picture to that point in the process | **unsupported** — a scanned mesh has no stages |
+
+### `SET_STAGE` — a process scene that can actually walk its stages
+
+Thirty-two scenes in this corpus are processes. Until 2026-09-10 the player could not walk one: `t` lived
+on the structure's ref, so a scene showing three stages of the heart tube had to declare the ventricle
+three times — `ventricle_a@0`, `ventricle_b@0.65`, `ventricle_c@1` — and hide two of them per view. The
+live cardiac-looping scene still carries 44 structures for about fifteen distinct organs because of it.
+
+With `SET_STAGE`, one ventricle is declared and every view says where it stands.
+
+```json
+{ "key": "ventricle", "label": "Primitive ventricle", "refs": { "procedural": "cardiac-looping#ventricle" } }
+```
+```json
+{ "title": "Movement one — the bulbus swings right",
+  "ops": [ { "op": "SET_STAGE", "t": 0.65 }, { "op": "SHOW_STRUCTURE", "target": "*" } ] }
+```
+
+Three rules, and they are all one rule seen from three sides — **a written `t` is a promise, and nothing
+overrides it**:
+
+- **A ref that writes `@t` is PINNED and never follows a view.** `"cardiac-looping#ventricle@1"` stands at
+  1 in every view of the scene. This is what lets one view compare the finished D-loop with the finished
+  mirror loop while its neighbours walk the stages; if `SET_STAGE` dragged those to 0.65 the comparison
+  the view exists to make would quietly stop being true.
+- **A ref with no `@t` FOLLOWS the view.** `"cardiac-looping#ventricle"` is rebuilt wherever the view says.
+- **A view with no `SET_STAGE` is at `t = 1`** — the fully developed form, exactly what a bare ref has
+  always meant. It is deliberately NOT sticky: a view that rendered differently depending on which chip
+  the student pressed before it would not be a view. It also means every scene written before this op
+  existed renders exactly as it did, because with no `SET_STAGE` anywhere nothing moves.
+
+`t` must be a number in 0–1; the validator rejects anything else, and warns when a scene uses `SET_STAGE`
+while every one of its procedural refs is pinned — the op is then decoration, and almost always the scene
+is still authored the old way and was never collapsed.
+
+Only the `procedural` provider has stages. A BodyParts3D scene carrying `SET_STAGE` gets a capability
+warning and the op does nothing: a scanned scapula is not a function of anything.
 
 **`covers[]` — what curriculum structures this scene actually teaches.** An array of CURRICULUM.json
 structure names, spelled exactly as the curriculum spells them. `tools/sync-state.mjs` reads it to work out
@@ -146,6 +188,29 @@ accept the typo too.
 
 The player shows a "≈ simplified" note whenever it degrades an op, and `index.json` records it per scene, so
 corpus review can see what is waiting on a better renderer instead of silently under-delivering.
+
+### `CROSS_SECTION.axis` — the anatomical plane convention
+
+`axis` is the **normal of the cut plane**, not a direction the plane runs along. The meshes are LPS
+(+X left, +Y posterior, +Z superior) — this is not inferred from sibling scenes, it is stated in the
+`calibrated_by` string of every anchor `derive-landmark.mjs` has ever emitted. So:
+
+| plane the narration names | `axis` | because the plane's normal is |
+|---|---|---|
+| sagittal / median | `x` | left–right |
+| coronal / frontal | `y` | anterior–posterior |
+| axial / transverse / horizontal | `z` | superior–inferior |
+
+This holds for a limb as much as for a trunk: a "transverse section through the popliteal fossa" is
+still cut normal to the superior–inferior axis of the mesh, which is `z`, because the femur and tibia
+lie along `z`. The one place the table does not apply is a **pre-folding embryo**, where the disc is
+flat and its cranio-caudal axis is not the mesh's `z`; those scenes must state their axis in the beat.
+
+**Write the plane word in the narration and the `axis` that matches it, or write neither.** Four scenes
+were found narrating one plane and cutting another — kidney, liver, pancreas and popliteal fossa, all
+signed and all reported clean by every run — because nothing compared the two. `validate-scenes.mjs`
+now warns on the mismatch, but the warning only fires when the narration names a plane, so a beat that
+cuts silently is still unchecked.
 
 ## Mode is a property of the concept, not the subject
 

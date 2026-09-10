@@ -101,9 +101,36 @@ const grownBox = new T.Box3().setFromObject(grown);
 const grownSize = grownBox.getSize(new T.Vector3());
 const grownCentre = grownBox.getCenter(new T.Vector3());
 
+/* ---- and the same, with a YAW on the holder ----
+   Every case above fits a holder whose rotation is identity, which is the state mount() fits in and the
+   only state this file ever tested. It is not the state the other three callers are in: a straggler
+   landing, a retry, and a SET_STAGE all run after initialYaw is applied and after the opening spin has
+   moved it. fit() measured a WORLD bounding box and subtracted its centre from LOCAL positions — two
+   spaces that agree only at identity — so with any yaw on, fitting twice landed the model somewhere
+   else, and the model visibly slid sideways when a view was revisited. The green above is exactly the
+   "test on something that resembles the substrate" failure: idempotent under the one rotation nobody
+   was worried about. Every case is therefore run again at a yaw, and at two different yaws, which must
+   agree with each other and with the unrotated answer. */
+const YAW = 0.7425;                                    // where the opening spin happens to leave it
+function runFitYaw(holder, times, yaw) {
+  holder.rotation.y = yaw;
+  const fit = new Function('T', 'holder', `${fitSrc}; return fit;`)(T, holder);
+  for (let i = 0; i < times; i++) fit();
+  return snapshot(holder);
+}
+const yawOnce = runFitYaw(buildHolder(), 1, YAW);
+const yawTwice = runFitYaw(buildHolder(), 2, YAW);
+const yawOther = runFitYaw(buildHolder(), 1, 2.31);
+
 const checks = [
   ['fit() once then twice lands in the same place', JSON.stringify(once) === JSON.stringify(twice),
    `scale ${once.scale} → ${twice.scale}`],
+  ['with a yaw on, fit() once then twice still agrees', JSON.stringify(yawOnce) === JSON.stringify(yawTwice),
+   `scale ${yawOnce.scale} → ${yawTwice.scale}`],
+  ['the yaw does not change where the model lands', JSON.stringify(once) === JSON.stringify(yawOnce),
+   `unrotated scale ${once.scale} vs yawed ${yawOnce.scale}`],
+  ['nor does a different yaw', JSON.stringify(yawOnce) === JSON.stringify(yawOther),
+   `yaw ${YAW} vs yaw 2.31`],
   ['fit() five times still lands in the same place', JSON.stringify(once) === JSON.stringify(five),
    `scale ${once.scale} → ${five.scale}`],
   ['a single fit() scales the model to ~4.2 units', Math.abs(4.2 - Math.max(

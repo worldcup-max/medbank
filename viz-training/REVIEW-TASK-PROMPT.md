@@ -83,7 +83,21 @@ Then set the item's status:
 - **`changes-requested`** — anything survives that you could not fix. Write `findings` as a specific
   list: what is wrong, where, and how you know. "The ventricle looks off" wastes the next run.
   Increment `review_rounds`.
-- **`escalated`** — `review_rounds` has reached **3**. Stop. "Until everything is perfect" needs a
+- **`escalated`** — the item has stopped CONVERGING. Not "three rounds have happened" — three rounds
+  that each fixed things is a scene being repaired, and cutting it off would be throwing away work
+  that was going fine. The rule that matters is progress:
+
+  > Escalate when a round ends with **as many or more open findings than it started with**, twice in
+  > a row. Record `open_findings_by_round` on the item — a falling count is convergence, however many
+  > rounds it takes; a flat or rising count is a loop, however few.
+
+  Also escalate immediately, whatever the round, when a finding is a **decision rather than a defect**
+  — a curriculum question, a clinical distinction the geometry cannot make, a conflict between what
+  the narration teaches and what any model could show. Those never converge by iteration, because
+  nobody in the loop is allowed to make the call. Do not spend three rounds discovering that.
+
+  The first scene through this loop came back with twelve findings. Under a flat three-round cap it
+  would have escalated while still improving, purely because it was reviewed thoroughly. Stop. "Until everything is perfect" needs a
   stopping condition or it becomes a loop that burns runs forever; this is it.
 
   **An escalation must reach a person, and a status field in a JSON file does not reach anybody.**

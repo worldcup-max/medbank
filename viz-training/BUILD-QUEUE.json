@@ -38,16 +38,21 @@
       "id": "embryology__cardiovascular-development__cardiac-looping",
       "kind": "model3d",
       "shape": "process",
-      "status": "changes-requested",
+      "status": "built",
       "note": "MODEL IS ALREADY PORTED to models3d/cardiac-looping.js and renders through the provider. What remains is the SCENE: give each structures[] entry a refs.procedural of \"cardiac-looping#<part>\", set provider.primary to 'procedural', and check every key in the scene against the keys the model actually builds (sinus, atrium, ventricle, bulbus, truncus, veins, arches, endocardium, mesocardium, pericardium). Do not rebuild the model.",
-      "built_at": "2026-09-10T09:45:00Z",
-      "built_by": "session with Frank (not the build task)",
+      "built_at": "2026-09-10T12:11:08Z",
+      "built_by": "model3d BUILD task, round-1 rework",
       "built_notes": [
         "RE-AUTHORED, not wired. The scene's structures were teaching BEATS (why_it_bends, laterality_genes, exam_frame) because it was authored for the SVG panel engine. Structures are now 21 anatomical parts with geometry; all 12 beats' narration is preserved verbatim on the view that replaced each one.",
         "Stages are structure SETS at fixed t (_a day 21, _b mid-loop, _c day 28) because per-view t does not exist yet. Collapses to 5 structures when engine__per-view-t lands.",
         "L-loop is BUILT, not just described: cardiac-looping#ventricle@1+mirror. Mirrored in construction (frame seeded -x), not by negative scale, so winding is untouched — proven: meanX exactly negated, identical triangle count, identical outward-normal fraction.",
         "PROVEN: validator 142/142; all 21 refs resolve through MB3D.adapters.procedural with geometry; 163208 triangles; console clean; three stages plus the D-vs-L comparison rendered and looked at.",
-        "NOT proven: how it frames inside the real player's camera, and whether 12 views is too many for one scene. Both are review-2 questions."
+        "NOT proven: how it frames inside the real player's camera, and whether 12 views is too many for one scene. Both are review-2 questions.",
+        "TORSION SOLVED, NOT TUNED. PSI0/TAU are gone; four bends at the four named waists, each with its own amplitude and plane, solved by viz-training/tools/solve-cardiac-torsion.mjs against seven stated measurements and asserted by the model on every build via acceptance(). All seven PASS on real mesh centroids at t=1: A ventricle z +0.554, B ventricle x -0.548, C atrium-ventricle z -1.319, D atrium-ventricle y +0.446, E bulbus-ventricle z +0.691, F bulbus-ventricle x -0.305, G side-by-side +0.619. Reproduced the review's own before-numbers first.",
+        "ALL 13 FINDINGS ADDRESSED. Mesocardium is two cuffs with a real gap, open already at day 23, aimed at world-dorsal instead of the transported frame (it used to drape across the FRONT of the ventricle at t=1); view 2 rotated lateral. Pericardium sized from the tether not from the heart's own box, on view 1, and viz3d.js now honours an authored opacity so it is not an opaque white egg. IIFE done. View 8 compares the WHOLE D and L loops (plus an 'apart' offset flag, because two mirror loops in one space interpenetrate) so no end cap is bare. Stage _b 0.4 -> 0.65 (day 26.3), the first t at which view 4's 'side by side' is true. t=0 relabelled day 23 to agree with the scene. All five dropped view narrations restored verbatim onto views 1/6/7/9 and deferred_beats, no new views. Dextrocardia: median-plane reference added, view 9 retitled; dextroversion NOT faked and stays in gaps[].",
+        "viz3d.js CHANGED, TWICE, AND BOTH WERE FORCED BY EVIDENCE. (1) srgbColor() uses a free variable T that viz3d.js never declares — it was resolving to the global const T leaked by the un-IIFE'd model. Wrapping the model made all 23 refs fail with 'T is not defined'; reproduced in the harness before the fix. (2) The adapter rebuilds parts at opacity 1 and paint() holds them there, so a translucent envelope was impossible. Both are the review's highest-risk surface in this run: paint() is on the path of every 3D scene, default opacity is 1 and no other scene declares the field, but that should be spot-checked on a bodyparts3d scene.",
+        "PROVEN: validator 142/142 (this scene 44 structures/40 parts/9 views/99 ops); 44/44 refs resolve through the real adapter with geometry, 200872 triangles; console clean apart from 4 swiftshader harness lines listed in report.json; outer-surface outward normals 0.965-1.000 on all five myocardial segments (whole-buffer ~0.515 is expected on a thick-walled shell); face-winding agreement 0.923-1.000 on every mesh; all 9 views rendered through the adapter with their ops applied and hashed — ZERO pixel-identical pairs; solve-cardiac-torsion.mjs re-run end to end reproduces the shipped nine numbers exactly. Two new tools: viz-training/tools/render-cardiac-looping.mjs and render-scene-views.mjs.",
+        "NOT PROVEN, deliberately listed: never opened in the REAL app this run — no camera fit, no trackball, no per-view frame fill, and views 8 and 9 changed shape most, so their framing is unmeasured; that is review 2's first job. chordFrac solved to 0.60 (poles finish 40% apart, was 0.26) — chosen against the anatomy conditions, NOT checked against a source for how far the poles actually converge day 23 to 28, and if a reviewer has one it may move the whole solution. The 'apart' flag is presentation living inside an anatomy model and belongs in the player as a compare-layout op. The mesocardium's free-edge length 1.35 is still a tuned constant. Judgement calls to second-guess: atrium finishing slightly LEFT (x +0.30), and bulbus finishing 0.14 cranial to the ventricle against 0.75 of transverse separation still counting as 'side by side'."
       ],
       "findings_for_review": [
         "Check the beat-to-view mapping against the ORIGINAL sequence scene in git history — narration was moved programmatically, so verify nothing landed on the wrong view.",
@@ -96,29 +101,129 @@
         "9. THE BEAT-TO-VIEW MAPPING IS CLEAN — checked, and it passes. All 12 beats from the sequence version at HEAD land on views 1-12 in order, titles identical and narration byte-for-byte verbatim. The programmatic move did exactly what the build log said. This is stated positively because it was the thing most likely to have gone silently wrong.",
         "10. BUT THE FIVE ORIGINAL VIEW NARRATIONS WERE DROPPED, AND THE LOG SAYS THEY WERE NOT. The sequence scene had 12 beats AND 5 views, and each of those 5 views carried its own narration. The re-authoring moved the beats and left the views behind. 2,367 characters, and it is not restatement — it is the synthesis layer: 'Three sentences, in this order... If you can say those three lines you can draw the loop from memory'; the cross-link back to the heart-tube scene ('nothing has been added or lost, the same five segments have simply been repositioned'); the compact three-way differential closing on 'situs, loop, connections'; and 'Held at both ends, free in the middle, growing. It bends.' The scene's gaps[] and BUILD-LOG both assert 'Nothing taught was dropped'. RECOVERED VERBATIM to viz-training/_review-2026-09-10/dropped-narration.md so it no longer depends on git archaeology. Where it lands is the build task's call — but note finding 6: this scene already has four views that render as the same frame, so five more views is probably the wrong shape.",
         "11. t = 0.4 IS NOT A MID-LOOP A TEXTBOOK WOULD RECOGNISE, AND THE DAY MAPPING IT WOULD BE JUDGED AGAINST IS ITSELF INCONSISTENT. Rendered t = 0.2/0.3/0.4/0.5/0.6/0.8 and looked at all of them. At t = 0.4 the tube is a shallow wave: it has bent, but the bulboventricular limbs have not folded alongside one another and there is no C. The recognisable C-loop — ventricle and bulbus folded with a distinct sulcus between them, atrium still caudal — appears at about t = 0.6. Worse for views 3 and 4 specifically: view 4's narration says 'the two now sit side by side rather than one behind the other', and MEASURED, the ventricle-to-bulbus vector is predominantly cranio-caudal at EVERY t — (0.28, 1.25, 0.20) at t = 0.6 and (0.45, 1.09, 0.30) at t = 1. They never come to sit side by side at all, so this is not fixable by choosing a better t. Separately, the model's header defines t = 0 as day 21 while view 1's narration (and the original view 1) call the straight tube day 23; with t = 1 as day 28 those give day 23.8 and day 25 for the same t = 0.4. I did NOT re-point stage _b to 0.6. The torsion has to be rebuilt for findings 1 and 2 regardless, and the legible mid-loop will move when it is; picking a number off a model that is about to change would lock in a value derived from the broken version.",
-        "12. VIEW 10 DOES TEACH THAT DEXTROCARDIA MEANS L-LOOP, AND THAT IS WRONG. The answer to the queue's own question is yes. The view shows ventricle_l and bulbus_l alone — two mirrored chambers, no atrium, no outflow, no midline, no thorax — immediately after view 9 has established that exact shape as 'the L-loop'. Dextrocardia is a claim about where the heart sits in the chest and which way the apex points, and a model with no body midline cannot make that claim at all: nothing in the frame says right or left. The narration is careful and the geometry contradicts the sentence in it that matters most clinically — 'isolated dextrocardia, with the abdominal organs in the usual place, carries a high rate of associated defects' is describing dextroversion, a D-LOOPED heart rotated into the right chest. Mirror-image dextrocardia with situs inversus is L-looped; dextroversion is not. Showing only the mirrored loop collapses the distinction the view exists to make. The existing gaps[] entry covers dextroposition but not this. FIX: either give the model a body midline / chest reference so position can be shown, or accept that this beat is not a 3D claim and let it run on the same picture as view 9 with the distinction carried in narration. Do not leave it as a mirrored loop captioned 'dextrocardia'."
+        "12. VIEW 10 DOES TEACH THAT DEXTROCARDIA MEANS L-LOOP, AND THAT IS WRONG. The answer to the queue's own question is yes. The view shows ventricle_l and bulbus_l alone — two mirrored chambers, no atrium, no outflow, no midline, no thorax — immediately after view 9 has established that exact shape as 'the L-loop'. Dextrocardia is a claim about where the heart sits in the chest and which way the apex points, and a model with no body midline cannot make that claim at all: nothing in the frame says right or left. The narration is careful and the geometry contradicts the sentence in it that matters most clinically — 'isolated dextrocardia, with the abdominal organs in the usual place, carries a high rate of associated defects' is describing dextroversion, a D-LOOPED heart rotated into the right chest. Mirror-image dextrocardia with situs inversus is L-looped; dextroversion is not. Showing only the mirrored loop collapses the distinction the view exists to make. The existing gaps[] entry covers dextroposition but not this. FIX: either give the model a body midline / chest reference so position can be shown, or accept that this beat is not a 3D claim and let it run on the same picture as view 9 with the distinction carried in narration. Do not leave it as a mirrored loop captioned 'dextrocardia'.",
+        "9. ACCEPTANCE TESTS ADDED for findings 1 and 2 — see the item's acceptance field. Four measurable conditions at t=1 (A ventral convexity, B dextral, C atrium dorsal to ventricle, D atrium cranial to ventricle). B passes today; A, C and D fail with the numbers given. Solve PSI0/TAU against these rather than tuning by eye."
       ],
       "standards_gap": "RENDER-STANDARD has rules for winding, normals, colour, hulls and frame fill, and every one of them passed here. It has NOTHING that would have caught findings 1 or 2, because both are about whether the model is oriented and posed the way the anatomy says. Two rules proposed. (a) DECLARE THE AXES AND PROVE THEM. A model states its axis convention in a machine-readable field, and the check asserts it against the corpus: RIGHT is -x, LEFT is +x, CRANIAL +y, VENTRAL +z, measured from BodyParts3D right/left pairs, not from a comment. This model's comment had the sign backwards and nothing noticed. (b) A SPATIAL CLAIM IN NARRATION IS A TESTABLE ASSERTION. When a view says one part ends up behind, above, right of or inside another, that is a check against the two bounding boxes at that view's t. 'The inflow end comes to lie behind and above the ventricles' is one line of arithmetic, and it fails.",
       "review_artifacts": "viz-training/_review-2026-09-10/ — all 12 views as a student sees them (before and after the arch correction) plus the axis-marked diagnostics that settle the loop direction.",
-      "review_note_round_1_continued": "Second sitting of ROUND 1, not a new round — same reviewer, same session, re-fired manually to answer the three questions the queue itself had left open (beat-to-view mapping, whether t=0.4 is a recognisable mid-loop, and whether view 10 teaches that dextrocardia means L-loop). review_rounds deliberately NOT incremented: burning a round on the same reviewer continuing their own work would push this toward escalation without a build run having answered anything."
+      "review_note_round_1_continued": "Second sitting of ROUND 1, not a new round — same reviewer, same session, re-fired manually to answer the three questions the queue itself had left open (beat-to-view mapping, whether t=0.4 is a recognisable mid-loop, and whether view 10 teaches that dextrocardia means L-loop). review_rounds deliberately NOT incremented: burning a round on the same reviewer continuing their own work would push this toward escalation without a build run having answered anything.",
+      "acceptance": {
+        "why": "Findings 1 and 2 describe what is wrong but not what correct would BE, and a build run cannot solve against a description. RENDER-STANDARD now says: solve the parameter that decides the examinable relation. These are that relation, written as measurements a run can compute and a review can re-check. Do not hand-tune PSI0/TAU until these pass by eye — solve them, the way the bend amplitude is already solved by bisection.",
+        "axes": "+x = embryo LEFT, -x = RIGHT, +y = CRANIAL, +z = VENTRAL (measured against six BodyParts3D left/right pairs, 2026-09-10)",
+        "tests_at_t_1": [
+          {
+            "id": "A",
+            "says": "the bulboventricular limb is convex VENTRALLY",
+            "measure": "max over the bulbus+ventricle centreline of z, minus z of the straight-tube axis at the same u",
+            "must": "> 0, and the ventricle centroid z must be > 0",
+            "currently": "ventricle centroid z = -1.12, bulbus -0.82 — both dorsal. FAILS."
+          },
+          {
+            "id": "B",
+            "says": "the loop is DEXTRAL",
+            "measure": "ventricle centroid x",
+            "must": "< 0 (embryo right)",
+            "currently": "passes — this half of the D-loop is already built"
+          },
+          {
+            "id": "C",
+            "says": "at day 28 the atrium lies BEHIND the ventricle",
+            "measure": "atrium centroid z minus ventricle centroid z",
+            "must": "< 0 (atrium more dorsal)",
+            "currently": "-0.93 - (-1.12) = +0.19, atrium is VENTRAL of the ventricle. FAILS."
+          },
+          {
+            "id": "D",
+            "says": "at day 28 the atrium lies ABOVE the ventricle",
+            "measure": "atrium centroid y minus ventricle centroid y",
+            "must": "> 0 (atrium more cranial)",
+            "currently": "-0.68 - 0.51 = -1.19, the inflow end is still caudal. FAILS."
+          }
+        ],
+        "note": "A and B together are the D-loop. C and D together are the third movement, and they are what the whole adult mediastinum hangs on — atria posterior and superior, ventricles anterior and inferior. Print all four with their numbers in the build log, pass or fail, so the review can check the arithmetic and not just the conclusion."
+      },
+      "updated_at": "2026-09-10T12:11:32Z",
+      "open_findings_by_round": [
+        13
+      ],
+      "escalation_basis": "progress, not round count — see REVIEW-TASK-PROMPT.md section 3",
+      "claimed_at": "2026-09-10T11:15:12Z"
     },
     {
       "id": "engine__refit-camera-on-isolate",
       "kind": "capability",
-      "status": "todo",
+      "status": "built",
       "shape": "engine",
       "why": "MEASURED IN THE LIVE PLAYER, 2026-09-10, by reading the canvas pixels view by view. The camera is fitted ONCE to every structure the scene loads, and never refits when a view shows only a subset. So a view that isolates parts leaves the subject at roughly half the linear size it should be. On the cardiac-looping scene: views showing the whole embryo fill 67-74% of the canvas height, but view 9 (D-loop vs L-loop, 4 parts) fills 30% and view 10 (dextrocardia, 2 parts) fills 30% x 16% — 3.0% of the canvas lit. This is RENDER-STANDARD's first standing rule, THE SUBJECT FILLS THE FRAME, failing inside the player rather than in a model.",
       "note": "MOVED AHEAD OF engine__per-view-t on 2026-09-10. Per-view-t makes FUTURE process scenes tidier; this fixes framing in the 71 scenes already in front of students. Measured by the review task: with a per-view refit, cardiac-looping views 9 and 10 go from 30% to 84% and 76% of frame width. Bigger payoff, smaller change, and it repairs shipped work rather than unshipped work. Not a cardiac-looping bug — it is the player's framing, so it affects EVERY scene that isolates, including the 71 ready BodyParts3D ones. Fit to the bounding box of the VISIBLE meshes after each view's ops have run, and ease the camera rather than jumping. Beware the opposite failure: refitting on a single small part will zoom so far in that the student loses all context, so clamp how far a refit may travel from the whole-scene fit.",
-      "found_by": "driving Frank's browser and reading the framebuffer per view — no screenshot needed"
+      "found_by": "driving Frank's browser and reading the framebuffer per view — no screenshot needed",
+      "claimed_at": "2026-09-10T12:21:01Z",
+      "updated_at": "2026-09-10T13:03:57Z",
+      "built_at": "2026-09-10T13:03:57Z",
+      "built_by": "the build task (cloud run, folders attached)",
+      "built_notes": [
+        "Per-view camera refit in viz3d.js. Subject fill measured in the REAL player, both providers: cardiac-looping 35-78% -> 76-94% of frame height; quadriceps-femoris (BodyParts3D) 5-20% -> 28-49%. Console clean before and after. 197-check unit test asserts the fit formula agrees with VizKit.fitCamera (written out, not called, because VizKit is a model-side global a mesh scene never loads). Player regression test: 44/44 structures resolve through the real adapter, isolate moves in, Show all pulls back, trace still flies, 11 chips hammered 90ms apart settle identically to a calm approach. LEFT OUT DELIBERATELY: (1) traced views are unchanged and still badly framed - routing flyTo through the shared easer made view 9 of quadriceps go from 7% to 269% of frame, i.e. camera inside the model, so the trace keeps its own loop; the trace-vs-ROTATE_TO_VIEW camera fight is pre-existing and needs its own item. (2) The clamp is a floor at controls.minDistance, NOT the ratio-to-whole-scene-fit clamp the note asked for - on this scene the whole-scene box is two side-by-side hearts and a ratio clamp generous enough to be useful is not a clamp; fair grounds for changes-requested if review disagrees. (3) One view of nine clips by 0.5% under a large yaw, a consequence of matching the kit's silhouette fit. NOT PROVED: no real browser, one canvas size (1008x440), pin/leader layout at closer distances not measured. SEPARATE FINDING: in cardiac-looping view 8 the d_ and l_ hearts are the same size but sit 1.79 apart along the view axis, so the L-loop now renders visibly smaller than the D-loop in the one view that exists to compare them."
+      ]
     },
     {
       "id": "engine__per-view-t",
       "kind": "capability",
-      "status": "todo",
+      "status": "built",
       "shape": "engine",
       "why": "t is currently per scene or per structure, so a PROCESS scene cannot walk through its own stages. That is most of what these scenes are for — the student's question is 'what happens next', and right now the answer is a still. The op dispatcher needs a t on the view, and SHOW_STRUCTURE/HIGHLIGHT need to rebuild the affected structures when it changes. Do it AFTER cardiac-looping is wired and reviewed: that scene is the first real consumer and will show what the op actually needs, which guessing will not.",
       "blocks": "nothing outright — every process scene works as stills until this lands, then gets better",
-      "updated_at": "2026-09-10T10:57:44Z"
+      "updated_at": "2026-09-10T13:45:11Z",
+      "claimed_at": "2026-09-10T13:17:26Z",
+      "built_at": "2026-09-10T13:45:11Z",
+      "built_notes": [
+        "SET_STAGE op: a view names its t, the player rebuilds every structure whose ref does not pin one. Ref pins > view t > default 1; not sticky. Adapter exposes stageable()/atStage(); the dispatcher never parses a ref string. PROVED: tools/test-per-view-t.mjs, 72 checks 0 fail, real player + real adapter + real cardiac-looping (geometry compared by vertex/bbox/position+normal sums, not by a flag); every ref resolves with geometry; pinned refs immobile; flags survive; parts stay clickable; revisit identical in geometry AND placement; 8 chips 60ms apart settle correctly; console clean, 107 frames. lint-viz3d clean on real eslint; validate-scenes 142/142; new validator checks negative-tested. ALSO FIXED, bigger than this item: fit() measured a WORLD box and subtracted its centre from LOCAL positions, so any call made after initialYaw was on (straggler, retry, and now stage change) slid the model sideways and normalised it ~22% too small; three yaw cases added to test-fit-idempotent.mjs FAIL on the old viz3d.js and pass on the new. DELIBERATELY LEFT OUT: (1) cardiac-looping.json NOT re-authored onto the op - it is a content change to a scene awaiting review, so the op is proven but has no corpus consumer yet; recommend a follow-up item. (2) only structures that already loaded are restaged, so a part present at one t and missing at another will not appear - keeps the 'Loaded N of M' line honest. (3) SET_STAGE untested in combination with TRACE_STRUCTURE, CROSS_SECTION, PEEL_LAYER, ISOLATE_REGION. (4) GPU memory across many stage changes not measured. NOTE: the item's own why says 'do it after cardiac-looping is reviewed'; it is built, not reviewed, and the review chain is broken - taken anyway, see BUILD-LOG."
+      ]
+    },
+    {
+      "id": "engine__mesh-resolution-by-role",
+      "kind": "capability",
+      "status": "todo",
+      "shape": "engine",
+      "why": "MEASURED 2026-09-10 after Frank said the vertebrae look incomplete. He is right, and it is not a missing mesh — it is decimation. The BodyParts3D source for L2 (FMA13073) is 6,946 triangles; viz-training/meshes-lite serves 3,000. We throw away 57% of the geometry of every bone in the corpus. On a vertebra the discarded detail is exactly what a student is examined on: the spinous and transverse processes and the articular facets. decimate-meshes.mjs defaults to --target 20000; someone ran it at 3000.",
+      "note": "THE TRADE-OFF IS REAL, SO DO NOT JUST RAISE THE NUMBER. Full resolution is 347KB per mesh against 150KB. The vertebral column scene loads 48 meshes: about 17MB instead of 7MB, on Nigerian mobile data, for students who are the whole point of this product. PROPOSED FIX — resolution follows ROLE, which the scene schema already carries: role 'part' (the structure being taught, and anything highlighted) gets the full source mesh; role 'context' (the other 23 vertebrae you are not studying) stays lite. That buys the detail exactly where a student looks and pays for it nowhere else. Note the ceiling: 6,946 triangles IS the source, so full res is the most that exists — there is nothing better to fetch.",
+      "found_by": "Frank's eye, then stat on meshes/ vs meshes-lite/"
+    },
+    {
+      "id": "gross__back-vertebral-column__coccyx",
+      "kind": "model3d",
+      "status": "todo",
+      "shape": "structure",
+      "why": "The vertebral column scene ends at the sacrum. Its coccyx entry is an ANCHOR — a marker dot, not a model — because BodyParts3D HAS NO COCCYX BONE. Searched the catalog: the only 'coccy' entries are the coccygeus, iliococcygeus and pubococcygeus MUSCLES. So this is not a fetch that failed; there is nothing to fetch, ever.",
+      "note": "By RENDER-STANDARD's no-mesh-means-build-it rule this is procedural. It is a small fused wedge of three to five rudimentary vertebrae, and unlike a scapula its form is simple enough to state: tapering, curved ventrally, articulating with the sacral apex. Build it to sit correctly against FMA16202 (the sacrum mesh) — which means engine__unit-reconciliation matters here, because this is the first scene to mix a procedural part with scanned meshes. If that has not landed, say so and escalate rather than eyeballing the scale.",
+      "found_by": "Frank noticing the column looked unfinished"
+    },
+    {
+      "id": "gross__heart-pericardium__heart-external",
+      "kind": "scene",
+      "status": "todo",
+      "note": "PILOT for the author-and-build kind — Frank, 2026-09-10. Chosen because the cardiac mesh catalog is the richest of the gaps. Do this one carefully: it sets the pattern for the other 67. NO SCENE EXISTS. Curriculum declares views: location, associated_organs; preferred modes: 3d_anatomy, diagram. This is authoring plus building, not building alone. Catalog check: 9 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 9
+    },
+    {
+      "id": "gross__heart-pericardium__cardiac-cycle-pumping",
+      "kind": "scene",
+      "status": "todo",
+      "note": "PILOT for the author-and-build kind — Frank, 2026-09-10. Chosen because the cardiac mesh catalog is the richest of the gaps. Do this one carefully: it sets the pattern for the other 67. NO SCENE EXISTS. Curriculum declares views: mechanism; preferred modes: diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 3 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 3
+    },
+    {
+      "id": "gross__heart-pericardium__coronary-arteries-cardiac-veins",
+      "kind": "scene",
+      "status": "todo",
+      "note": "PILOT for the author-and-build kind — Frank, 2026-09-10. Chosen because the cardiac mesh catalog is the richest of the gaps. Do this one carefully: it sets the pattern for the other 67. NO SCENE EXISTS. Curriculum declares views: vasculature, location; preferred modes: 3d_anatomy, diagram. This is authoring plus building, not building alone. Catalog check: 12 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 12
+    },
+    {
+      "id": "gross__heart-pericardium__heart-valves",
+      "kind": "scene",
+      "status": "todo",
+      "note": "PILOT for the author-and-build kind — Frank, 2026-09-10. Chosen because the cardiac mesh catalog is the richest of the gaps. Do this one carefully: it sets the pattern for the other 67. NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: 3d_anatomy, diagram. This is authoring plus building, not building alone. Catalog check: 1 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 1
     },
     {
       "id": "embryology__cardiovascular-development__heart-tube-formation",
@@ -470,8 +575,487 @@
       "shape": "engine",
       "why": "Procedural models are in their own units; BodyParts3D meshes are anatomical millimetres. A scene mixing both providers renders one of them as a speck. NOT urgent — every scene queued here is wholly procedural, including the four cerebellum/brainstem ones, which carry zero mesh refs. It becomes blocking the first time a scene wants procedural detail INSIDE a scanned mesh — a circle of Willis inside a brain. Fix by declaring a model's real-world extent in its module (say, the mm the model's unit box spans) and scaling in the adapter, so scenes and scene authors never see units at all.",
       "blocks": "any future scene that mixes procedural geometry with a BodyParts3D mesh"
+    },
+    {
+      "id": "engine__bone-ceiling-is-dead-code",
+      "kind": "capability",
+      "status": "todo",
+      "shape": "engine",
+      "why": "MEASURED IN THE LIVE APP 2026-09-10 while verifying the colour fix on a real 20-part scene. BONE_CEILING (0.78) is applied in the bodyparts3d LOAD path, but applyStyles() later does m.material.color.copy(srgbColor(s.color, ...)) on every structure, which OVERWRITES the clamped colour with the raw authored one. Proof: l2 is authored #f0dfa8, whose brightest channel is 0.94 and should clamp to 0.78 — it renders as exactly #f0dfa8. So the ceiling has never reached a student's screen.",
+      "note": "PRE-EXISTING, NOT A REGRESSION — the same overwrite happened before the colour-space fix, so this is not something the fix introduced and it does NOT block deploying. Deliberately not changed before a deploy: fixing it would darken every bone in all 71 ready scenes, and that is a change to verify on its own, not to smuggle in alongside another one. Decide first whether the ceiling is still wanted at all: it was introduced to stop near-white bone clipping under the lights, and correct colour handling already makes bone darker than it was, so the problem it guarded against may simply be gone.",
+      "found_by": "reading material colours out of the live player and converting them back to sRGB"
+    },
+    {
+      "id": "gross__arm-brachium__biceps-brachii",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: location, contraction_filter, associated_organs; preferred modes: 3d_anatomy, diagram. This is authoring plus building, not building alone. Catalog check: 14 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 14
+    },
+    {
+      "id": "gross__arm-brachium__triceps-brachii",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: location, contraction_filter; preferred modes: 3d_anatomy, diagram. This is authoring plus building, not building alone. Catalog check: 10 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 10
+    },
+    {
+      "id": "gross__forearm-hand__flexor-compartment-of-forearm",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: location, contraction_filter; preferred modes: 3d_anatomy, diagram. This is authoring plus building, not building alone. Catalog check: 38 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 38
+    },
+    {
+      "id": "gross__forearm-hand__extensor-compartment-of-forearm",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: location, contraction_filter; preferred modes: 3d_anatomy, diagram. This is authoring plus building, not building alone. Catalog check: 28 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 28
+    },
+    {
+      "id": "gross__thoracic-wall-diaphragm__ribs-sternum-thoracic-cage",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: location, mechanism; preferred modes: 3d_anatomy, diagram. This is authoring plus building, not building alone. Catalog check: 26 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 26
+    },
+    {
+      "id": "gross__lungs-mediastinum__trachea",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: location, cross_section; preferred modes: 3d_anatomy, diagram. This is authoring plus building, not building alone. Catalog check: 1 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 1
+    },
+    {
+      "id": "gross__stomach-intestines__gut-blood-supply-coeliac-sma-ima",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: vasculature; preferred modes: diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "embryology__git-development__foregut-derivatives",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: location, associated_organs; preferred modes: sequence, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "embryology__git-development__midgut-rotation",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism; preferred modes: sequence, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "embryology__git-development__hindgut-cloaca",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: sequence, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "embryology__git-development__liver-pancreas-buds",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism, glands; preferred modes: sequence, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 1 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 1
+    },
+    {
+      "id": "embryology__urogenital-development__kidney-development-pro-meso-metanephros",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism, location; preferred modes: sequence, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 3 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 3
+    },
+    {
+      "id": "embryology__urogenital-development__bladder-urethra",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: sequence, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 3 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 3
+    },
+    {
+      "id": "embryology__urogenital-development__gonad-development",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism, cross_section; preferred modes: sequence, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "embryology__urogenital-development__genital-duct-systems",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism; preferred modes: sequence, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 30 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 30
+    },
+    {
+      "id": "embryology__nervous-system-development__neural-tube",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: sequence, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 1 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 1
+    },
+    {
+      "id": "embryology__nervous-system-development__brain-vesicles",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism, location; preferred modes: sequence, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 4 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 4
+    },
+    {
+      "id": "embryology__nervous-system-development__neural-crest",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism, associated_organs; preferred modes: sequence, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "embryology__nervous-system-development__neural-tube-defects",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section; preferred modes: sequence, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 1 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 1
+    },
+    {
+      "id": "embryology__head-face-palate-development__facial-prominences",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism, location; preferred modes: sequence, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "embryology__head-face-palate-development__palate-formation",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism, cross_section; preferred modes: sequence, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "embryology__head-face-palate-development__eye-ear-development",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: sequence, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "embryology__limb-development__limb-buds",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism, location; preferred modes: sequence, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 2 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 2
+    },
+    {
+      "id": "embryology__limb-development__limb-rotation",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism; preferred modes: sequence, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 2 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 2
+    },
+    {
+      "id": "embryology__limb-development__digit-formation",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism; preferred modes: sequence, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 30 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 30
+    },
+    {
+      "id": "histology__connective-tissue__loose-vs-dense-ct",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__connective-tissue__cells-of-ct",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__connective-tissue__adipose-tissue",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__connective-tissue__extracellular-matrix",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__muscle-tissue__skeletal-muscle",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism, contraction_filter; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 11 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 11
+    },
+    {
+      "id": "histology__muscle-tissue__cardiac-muscle",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 14 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 14
+    },
+    {
+      "id": "histology__muscle-tissue__smooth-muscle",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 11 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 11
+    },
+    {
+      "id": "histology__nervous-tissue__neuron",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__nervous-tissue__synapse",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__nervous-tissue__glial-cells",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__nervous-tissue__myelination",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__blood-haemopoiesis__blood-cells",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__blood-haemopoiesis__haemopoiesis",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__blood-haemopoiesis__blood-smear",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__cartilage-bone__cartilage-types",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 18 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 18
+    },
+    {
+      "id": "histology__cartilage-bone__compact-bone-osteon",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 50 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 50
+    },
+    {
+      "id": "histology__cartilage-bone__ossification",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__cardiovascular-histology__artery-vs-vein-wall",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 48 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 48
+    },
+    {
+      "id": "histology__cardiovascular-histology__capillaries",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__cardiovascular-histology__heart-wall-layers",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 1 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 1
+    },
+    {
+      "id": "histology__lymphoid-organs__lymph-node",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__lymphoid-organs__spleen",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 1 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 1
+    },
+    {
+      "id": "histology__lymphoid-organs__thymus",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, glands; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 2 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 2
+    },
+    {
+      "id": "histology__skin-integument__epidermis-layers",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__skin-integument__dermis-appendages",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, glands; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__skin-integument__hair-follicle",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 2 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 2
+    },
+    {
+      "id": "histology__git-histology__general-gut-wall-4-layers",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 1 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 1
+    },
+    {
+      "id": "histology__git-histology__stomach-mucosa",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, glands, mechanism; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 1 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 1
+    },
+    {
+      "id": "histology__git-histology__small-intestine-mucosa",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__git-histology__liver-lobule",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 3 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 3
+    },
+    {
+      "id": "histology__respiratory-histology__conducting-airway-epithelium",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__respiratory-histology__alveolus",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__urinary-histology__nephron",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__urinary-histology__renal-corpuscle",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 6 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 6
+    },
+    {
+      "id": "histology__urinary-histology__juxtaglomerular-apparatus",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: mechanism, glands; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__endocrine-histology__pituitary-gland",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, glands, mechanism; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 3 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 3
+    },
+    {
+      "id": "histology__endocrine-histology__thyroid-parathyroid",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, glands, mechanism; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 3 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 3
+    },
+    {
+      "id": "histology__endocrine-histology__adrenal-gland",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, glands; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 3 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 3
+    },
+    {
+      "id": "histology__endocrine-histology__pancreatic-islets",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, glands, mechanism; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 1 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 1
+    },
+    {
+      "id": "histology__reproductive-histology__testis-seminiferous-tubule",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram, 3d_anatomy. This is authoring plus building, not building alone. Catalog check: 2 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 2
+    },
+    {
+      "id": "histology__reproductive-histology__ovary-follicles",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
+    },
+    {
+      "id": "histology__reproductive-histology__uterus-endometrium",
+      "kind": "scene",
+      "status": "todo",
+      "note": "NO SCENE EXISTS. Curriculum declares views: cross_section, mechanism; preferred modes: microscopic, diagram. This is authoring plus building, not building alone. Catalog check: 0 BodyParts3D meshes name-match this structure. If that is 0 the answer is procedural, not waiting — RENDER-STANDARD, no mesh means build it.",
+      "candidate_meshes": 0
     }
   ],
   "note_neuro": "The 13 neuroanatomy items were added 2026-09-10 once the old 'MedBank 3D scene author (v2)' task was confirmed to have stopped (last run 07:07 UTC, missed the two slots after it), so there is no second writer on this course. These 13 were held on MESHES that BodyParts3D does not have at the needed granularity — but they are tubes, cords and cavity casts, which is what render-kit's swept shell already does. The other 4 planned neuro scenes (cerebellum x3, brainstem x1) are foliated and nuclear, genuinely irregular, and stay a mesh problem.",
-  "policy_no_mesh_means_procedural": "Frank, 2026-09-10: WHERE NO MESH EXISTS, GO PROCEDURAL IMMEDIATELY — do not leave a scene planned waiting for a mesh that is not coming. Checked against the corpus before adopting: the four cerebellum/brainstem scenes held back as 'needs a mesh' carry ZERO bodyparts3d refs between them, across 35 structures. There was nothing to wait for. The judgement that still stands is RENDER-STANDARD §5 — if the form is irregular and a student is examined on recognising it EXACTLY, say so and escalate rather than shipping a plausible fake. The rule is 'no mesh means build it', not 'no mesh means pretend'."
+  "policy_no_mesh_means_procedural": "Frank, 2026-09-10: WHERE NO MESH EXISTS, GO PROCEDURAL IMMEDIATELY — do not leave a scene planned waiting for a mesh that is not coming. Checked against the corpus before adopting: the four cerebellum/brainstem scenes held back as 'needs a mesh' carry ZERO bodyparts3d refs between them, across 35 structures. There was nothing to wait for. The judgement that still stands is RENDER-STANDARD §5 — if the form is irregular and a student is examined on recognising it EXACTLY, say so and escalate rather than shipping a plausible fake. The rule is 'no mesh means build it', not 'no mesh means pretend'.",
+  "coverage_note": "The 71 structures with NO scene were queued 2026-09-10 from tools/coverage.mjs. They are kind:'scene' — AUTHOR the VisualScene, then build whatever it needs — unlike the kind:'model3d' items above, where a scene exists and only geometry is missing. Measured basis: 207 curriculum structures declaring 397 view-slots; 136 had a scene carrying 958 views between them, 7.0 each on average, and only 2 existing scenes missed a declared view type. The corpus was never short of diagrams per topic — it was short of 71 whole structures."
 }

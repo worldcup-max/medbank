@@ -39,7 +39,7 @@ const QUIET = process.argv.includes('--quiet');
 
 const OPS = new Set(['SHOW_STRUCTURE', 'HIDE_STRUCTURE', 'HIGHLIGHT_STRUCTURE', 'ISOLATE_REGION',
   'ROTATE_TO_VIEW', 'CROSS_SECTION', 'COMPARE_STRUCTURES', 'SHOW_RELATIONSHIP',
-  'TRACE_STRUCTURE', 'PEEL_LAYER']);
+  'TRACE_STRUCTURE', 'PEEL_LAYER', 'SET_STAGE']);
 const MODES = new Set(['3d_anatomy', 'microscopic', 'diagram', 'sequence', 'comparison', 'imaging']);
 const VIEWS = new Set(['anterior', 'posterior', 'lateral', 'medial', 'superior', 'inferior']);
 const STATUSES = new Set(['ready', 'candidate', 'planned', 'blocked']);
@@ -60,7 +60,7 @@ const CAPABILITIES = {
      procedural model has no centreline to walk yet. Mirrors viz3d.js; when one changes, change both. */
   procedural: {
     native: ['SHOW_STRUCTURE', 'HIDE_STRUCTURE', 'HIGHLIGHT_STRUCTURE', 'ISOLATE_REGION', 'ROTATE_TO_VIEW',
-      'CROSS_SECTION', 'COMPARE_STRUCTURES', 'SHOW_RELATIONSHIP', 'PEEL_LAYER'],
+      'CROSS_SECTION', 'COMPARE_STRUCTURES', 'SHOW_RELATIONSHIP', 'PEEL_LAYER', 'SET_STAGE'],
     degraded: ['TRACE_STRUCTURE'],
     catalog: null
   }
@@ -177,6 +177,15 @@ function validate(scene) {
      being shown, and therefore worth a human's eye. */
   const REACH_OUT_OPS = new Set(['HIGHLIGHT_STRUCTURE', 'TRACE_STRUCTURE', 'COMPARE_STRUCTURES']);
 
+  /* Which structures a SET_STAGE would actually move. Mirrors the rule in viz3d.js's procedural adapter:
+     a ref that writes "@<number>" is pinned to that t for ever; anything else follows the view. Kept as
+     a regexp here rather than importing the parser because this file must run with no browser and no
+     three.js — but the two must agree, and viz-training/tools/test-per-view-t.mjs asserts that they do
+     by driving the real adapter over the same refs. */
+  const unpinned = new Set(structures
+    .filter(s => s.refs && typeof s.refs.procedural === 'string' && !/@-?\d*\.?\d+(?=$|\+)/.test(s.refs.procedural))
+    .map(s => s.key));
+
   for (const v of (scene.views || [])) {
     const where = JSON.stringify(v.title || v.mode);
     if (!v.narration) W('ops', `view ${where}: no narration`);
@@ -198,6 +207,20 @@ function validate(scene) {
       for (const t of targets) if (!resolves(t)) E('ops', `view ${where} · ${o.op}: target ${JSON.stringify(t)} matches no structure key or group`);
       if (o.op === 'ROTATE_TO_VIEW' && !VIEWS.has(o.view)) E('ops', `${where} · ROTATE_TO_VIEW: view ${JSON.stringify(o.view)} is not one of ${[...VIEWS].join(', ')}`);
       if (o.op === 'CROSS_SECTION' && !['x', 'y', 'z'].includes(o.axis)) E('ops', `${where} · CROSS_SECTION: axis must be x, y or z`);
+      /* SET_STAGE. t is the model's own developmental parameter and every model in this corpus takes it
+         over 0..1; the player passes whatever finite number it is given straight into build(t), so a 3
+         here does not fail, it silently extrapolates the anatomy past the end of the process it models.
+         That is a lie a student cannot see, so it is caught in the document rather than in the picture. */
+      if (o.op === 'SET_STAGE') {
+        const t = typeof o.t === 'number' ? o.t : NaN;
+        if (!Number.isFinite(t)) E('ops', `view ${where} · SET_STAGE: t must be a number, got ${JSON.stringify(o.t)}`);
+        else if (t < 0 || t > 1) E('ops', `view ${where} · SET_STAGE: t is ${t} — models take t over 0..1`);
+        /* A SET_STAGE that moves nothing. Every procedural ref in this scene writes its own @t, so all of
+           them are pinned and the op is decoration: the view renders the same picture as if it were not
+           there. Almost always the scene is still authored the old way — one structure per stage — and
+           SET_STAGE was added without collapsing them. */
+        else if (!unpinned.size) W('ops', `view ${where} · SET_STAGE: no structure follows the view — every procedural ref pins its own @t, so this op changes nothing`);
+      }
       /* CROSS_SECTION.axis is the NORMAL of the cut plane, and the meshes are LPS (+X left, +Y posterior,
          +Z superior) — see model3d-scene-spec-v2.md. So sagittal=x, coronal=y, axial/transverse=z. If the
          beat's narration names a plane, it must be the one being cut. Warning, not error: the plane word is

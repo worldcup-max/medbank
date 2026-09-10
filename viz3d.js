@@ -128,7 +128,17 @@
      Order matters against boneSafe: the ceiling expresses how bright bone should LOOK, so it clamps
      in sRGB and the conversion comes after. */
   function toLinear(col) { return col.convertSRGBToLinear(); }
-  function srgbColor(v, fallback) { return new T.Color(v || fallback).convertSRGBToLinear(); }
+  /* `T` is a PARAMETER of load(), mergeByKey() and build(); it is not a variable of this file. This
+     helper is defined at module scope, so its `T` resolved to a GLOBAL — and the only thing defining
+     one was models3d/cardiac-looping.js, which declared `const T = window.THREE` at top level and
+     leaked it into script scope. Wrapping that model in an IIFE (RENDER-STANDARD, review finding 5)
+     took the global away and every procedural ref started coming back reason:'failed' with
+     "T is not defined" — all 23 of them, reproduced in the headless harness before this line was
+     touched. Read three off the window here instead of depending on a model's leak. */
+  function srgbColor(v, fallback) {
+    var TT = window.THREE;
+    return new TT.Color(v || fallback).convertSRGBToLinear();
+  }
 
   register('bodyparts3d', {
     label: 'BodyParts3D',
@@ -228,11 +238,24 @@
      mesh, exactly as the STL path does. Silhouette shells are deliberately dropped — the player has its own
      lighting and its own look, and a spike's presentation is not the app's.
 
-     WHAT THIS DOES NOT DO YET, stated so nobody has to discover it: t is per scene or per structure, not
-     per VIEW, so a scene cannot yet animate through its own stages with an op. That is the next step and it
-     belongs in the op dispatcher, not here. And procedural models are in their own units while BodyParts3D
-     meshes are anatomical millimetres, so a scene must not mix the two providers until something reconciles
-     scale. Both are gaps, not bugs. */
+     t PER VIEW. A view can now name the stage it is about — `{op:'SET_STAGE', t:0.65}` — and the player
+     rebuilds every structure that has not pinned its own t. The rule that decides which is a property of
+     the REF, not a flag on the op: `"cardiac-looping#ventricle@0.65"` is PINNED and never moves, because
+     an author who wrote a t meant that t — the L-loop comparison shows the finished loop beside the
+     finished mirror loop and must not slide when a neighbouring view walks the stages. A ref with no `@t`
+     — `"cardiac-looping#ventricle"` — FOLLOWS THE VIEW, and stands at t = 1 when no view says otherwise,
+     which is exactly where it stood before this existed. So every scene written before today keeps the
+     picture it had.
+
+     The adapter exposes that rule through `stageable(s)` and `atStage(s, t)` rather than letting the
+     dispatcher parse a ref string. Ref syntax is delivery mechanics and belongs below this boundary; a
+     dispatcher that knew about '@' would have to learn it again for the next provider that has stages.
+     An adapter without the pair — bodyparts3d, svg — reports no structure as stageable, and SET_STAGE
+     on such a scene changes nothing rather than throwing. A scanned scapula has no stages.
+
+     WHAT THIS DOES NOT DO YET, stated so nobody has to discover it: procedural models are in their own
+     units while BodyParts3D meshes are anatomical millimetres, so a scene must not mix the two providers
+     until something reconciles scale. A gap, not a bug — and it is its own queue item. */
 
   var MODEL_MODULES = {};    // model id -> Promise of the registered module
   var MODEL_GROUPS = {};     // "model@t" -> the built group, so 15 structures build the embryo ONCE
@@ -297,7 +320,8 @@
     if (!ref) return null;
     if (typeof ref === 'object') {
       if (!ref.model || !ref.part) return null;
-      return { model: ref.model, part: ref.part, t: (ref.t == null ? 1 : +ref.t), flags: ref.flags || {} };
+      return { model: ref.model, part: ref.part, t: (ref.t == null ? 1 : +ref.t),
+               tPinned: ref.t != null, flags: ref.flags || {} };
     }
     var str = String(ref);
     var flags = {}, plus = str.indexOf('+');
@@ -309,7 +333,11 @@
     var t = at.length > 1 ? parseFloat(at[1]) : 1;
     var hash = at[0].split('#');
     if (hash.length !== 2 || !hash[0] || !hash[1]) return null;
-    return { model: hash[0], part: hash[1], t: (isFinite(t) ? t : 1), flags: flags };
+    /* An unparseable @t is NOT a pin. "…@banana" falls back to 1, and if it also counted as pinned the
+       structure would sit at 1 for ever while every neighbour walked the stages — a typo that freezes one
+       part of the picture and reports nothing. Unpinned, it follows the view like any ref with no t. */
+    return { model: hash[0], part: hash[1], t: (isFinite(t) ? t : 1),
+             tPinned: at.length > 1 && isFinite(t), flags: flags };
   }
 
   /* Merge every mesh carrying this key into one geometry, in the group's own space.
@@ -358,13 +386,40 @@
     /* No third-party credit: this geometry is ours, generated from anatomy, not derived from a scan. */
     capabilities: {
       native: ['SHOW_STRUCTURE', 'HIDE_STRUCTURE', 'HIGHLIGHT_STRUCTURE', 'ISOLATE_REGION', 'ROTATE_TO_VIEW',
-        'CROSS_SECTION', 'COMPARE_STRUCTURES', 'SHOW_RELATIONSHIP', 'PEEL_LAYER'],
+        'CROSS_SECTION', 'COMPARE_STRUCTURES', 'SHOW_RELATIONSHIP', 'PEEL_LAYER', 'SET_STAGE'],
       /* a procedural model has no centreline to walk yet, so tracing degrades to highlighting */
       degraded: ['TRACE_STRUCTURE']
     },
     resolve: function (s) {
       var r = parseProceduralRef(s && s.refs && s.refs.procedural);
       return r ? (modelBase() + r.model + '.js') : null;
+    },
+
+    /* ---- stages: the two calls the op dispatcher uses to move a scene through t ----
+
+       Kept as a PAIR rather than one call that returns null, because the dispatcher has to distinguish
+       "this structure does not follow the view" from "this structure follows the view and t happens to
+       be the one it already stands at". The first must be left alone; the second must still be counted
+       as staged, or a scene whose first view is at t = 1 would report zero staged structures and the
+       framing pass would be skipped. */
+    stageable: function (s) {
+      var r = parseProceduralRef(s && s.refs && s.refs.procedural);
+      return !!(r && !r.tPinned);
+    },
+    /* A structure record standing at t, for load(). A SHALLOW copy with only refs replaced: the caller
+       still owns the original, and the mesh's userData must end up being the original object, not this
+       one — the parts list, the pins and the picker all compare against the structures array by identity. */
+    atStage: function (s, t) {
+      var r = parseProceduralRef(s && s.refs && s.refs.procedural);
+      if (!r || r.tPinned) return null;
+      var flagKey = Object.keys(r.flags).sort().join(',');
+      var out = {}, k;
+      for (k in s) if (Object.prototype.hasOwnProperty.call(s, k)) out[k] = s[k];
+      var refs = {};
+      for (k in (s.refs || {})) if (Object.prototype.hasOwnProperty.call(s.refs, k)) refs[k] = s.refs[k];
+      refs.procedural = r.model + '#' + r.part + '@' + t + (flagKey ? '+' + flagKey : '');
+      out.refs = refs;
+      return out;
     },
     /* Same contract as the STL path, and the same care about the difference between the two failures a
        student can be shown: 'none' means the corpus has no model of this structure, which is a fact about
@@ -400,10 +455,12 @@
            conversion every other material in this file uses — see the COLOUR SPACE note above. */
         var pal = (mod.LAYERS && mod.LAYERS[r.part]) || null;
         var hex = s.color || (pal && pal.color != null ? '#' + Number(pal.color).toString(16).padStart(6, '0') : null);
+        var op = (typeof s.opacity === 'number') ? Math.max(0.02, Math.min(1, s.opacity)) : 1;
         var mat = new T.MeshStandardMaterial({
           color: srgbColor(hex, '#c9c3d8'),
           roughness: 0.62, metalness: 0.02,
-          transparent: true, opacity: 1, side: T.DoubleSide
+          transparent: true, opacity: op, side: T.DoubleSide,
+          depthWrite: op >= 0.98
         });
         var mesh = new T.Mesh(geo, mat);
         mesh.userData = s;
@@ -1339,6 +1396,7 @@
 
     function scheduleLate() {                              // debounced: several may land together
       if (lateTimer) return;
+      stageDirty = true;                                   // it arrived at t = 1; the scene may not be there
       lateTimer = setTimeout(function () {
         lateTimer = null;
         if (!LIVE || LIVE !== player) return;              // the student navigated away; do nothing
@@ -1416,6 +1474,7 @@
       emit('retry', { scene: scene.id, parts: again.length });
       Promise.all(again.map(loadOne)).then(function () {
         retrying = false;
+        stageDirty = true;                                 // same as a straggler: rebuilt from its own ref
         fit(); placeAnchors(); buildList(); buildChips(); applyView(currentView || 0);
         showLoadStatus();
       });
@@ -1454,7 +1513,19 @@
         if (m.__mb3dHome) m.position.copy(m.__mb3dHome);
         else m.__mb3dHome = m.position.clone();          // where the provider actually put it
       });
+      /* MEASURE IN THE HOLDER'S OWN FRAME. Box3.setFromObject reports a WORLD box, and the line below
+         subtracts its centre from each child's LOCAL position — two different spaces, which agree only
+         while the holder's rotation is identity. It is identity for the one call this function was
+         written for: mount() fits before it applies initialYaw. Every call since added — a straggler
+         landing, a retry, and now a stage change — happens after the yaw is on and after the opening
+         spin has moved it, so the centre being subtracted is the world centre of a ROTATED model and
+         the whole scene slides sideways. Rotation about y leaves y alone and mixes x and z, which is
+         exactly the signature it left: revisiting one view gave a model with the same height, in a
+         different place. Zero the rotation for the measurement, put it back after. */
+      var rot = holder.rotation.clone ? holder.rotation.clone() : { x: holder.rotation.x, y: holder.rotation.y, z: holder.rotation.z };
+      holder.rotation.set(0, 0, 0);
       var box = new T.Box3().setFromObject(holder), c = new T.Vector3(), s = new T.Vector3();
+      holder.rotation.set(rot.x, rot.y, rot.z);
       box.getCenter(c); box.getSize(s);
       holder.children.forEach(function (m) { m.position.sub(c); });
       var mx = Math.max(s.x, s.y, s.z) || 1;
@@ -1561,12 +1632,115 @@
 
     var state = {};
     function resetState() {
-      state = { visible: {}, hi: {}, ghosted: false, only: null, clip: null, pairs: [] };
+      state = { visible: {}, hi: {}, ghosted: false, only: null, clip: null, pairs: [], dir: null, t: null };
       structures.forEach(function (s) { state.visible[s.key] = true; });
+    }
+
+    /* ================= SET_STAGE — the stage a view is about =================
+
+       32 scenes in this corpus are PROCESSES. Until now the player could not walk one: t lived on the
+       structure's ref, so a scene that wanted to show three stages of the heart tube had to declare the
+       ventricle THREE TIMES — ventricle_a at t=0, ventricle_b at 0.65, ventricle_c at 1 — and each view
+       hid two of them. cardiac-looping carries 44 structures that way and about fifteen of them are the
+       same five organs said over again. The student's question in a process scene is "what happens next",
+       and the answer was a set of stills that had to be kept in agreement by hand.
+
+       `{op:'SET_STAGE', t:0.65}` moves the whole picture instead. Three decisions worth stating, because
+       each of them was a choice between two defensible things:
+
+       THE REF DECIDES WHAT MOVES, NOT THE OP. A structure whose ref names a t — "…#ventricle@1" — is
+       PINNED and never follows a view. An author who wrote a t meant it: view 7 shows the finished D-loop
+       beside the finished mirror loop, and if SET_STAGE dragged those to 0.65 the comparison the view
+       exists to make would quietly stop being true. A ref with no @t follows the view. This is also what
+       makes the change safe for every scene already written: with no SET_STAGE anywhere, an unpinned ref
+       stands at t = 1, which is exactly where it stood yesterday.
+
+       NO SET_STAGE MEANS t = 1, NOT "whatever the last view left". Sticky state would make view 5 render
+       differently depending on which chip the student pressed before it, and a view that renders two
+       different pictures is not a view. The same rule already governs a bare ref, so there is one rule
+       for both: no t written anywhere means the fully developed form.
+
+       AND THE STAGE IS ONE OP, NOT A `t:` ON THE VIEW. Every other thing a view does to the picture —
+       rotate, section, isolate — is an op, and ops are what the capability table and the scene validator
+       can see. A bare `t:` property would be invisible to both: a bodyparts3d scene could carry one and
+       nobody would ever say that a scanned scapula has no stages. */
+
+    var stageT = 1;                        // where every UNPINNED structure currently stands
+    var stageTurn = 0;                     // the newest restage wins; older ones stand down
+    /* A straggler and a retry both arrive built from their own ref — that is, at t = 1 — however far
+       through the stages the scene has walked. Without this the late part would stand alone at the
+       finished form in the middle of a day-21 tube, and nothing would ever correct it, because the
+       stage the view wants is the stage the scene is already on. It is set where a mesh arrives, and
+       cleared by the next restage. */
+    var stageDirty = false;
+
+    function disposeMesh(m) {
+      if (!m) return;
+      try {
+        if (m.geometry && m.geometry.dispose) m.geometry.dispose();
+        [].concat(m.material || []).forEach(function (x) { if (x && x.dispose) x.dispose(); });
+      } catch (e) {}
+    }
+
+    /* Rebuild every structure that follows the view, at t, and swap it in. `done` is called exactly once
+       whatever happens — including when there is nothing to rebuild — because the caller's framing and
+       repaint hang off it, and a view that silently never frames is the bug this is most likely to cause.
+
+       Chip-mashing is the hazard: eleven views 90ms apart start eleven rebuilds, and the promises can
+       land in any order. The ticket makes the newest one the only one that may touch the scene; the
+       losers dispose what they built rather than leaving it on the GPU. */
+    function restage(t, done) {
+      var mine = ++stageTurn;
+      var called = false;
+      function fin(n) { stageT = t; stageDirty = false; if (called) return; called = true; if (done) done(n); }
+      /* Only structures that ARRIVED are restaged. One that is `missing` or `failed` stays that way, so
+         the "Loaded 41 of 44" line keeps meaning what it says; a part that exists at one t and not at
+         another would otherwise appear and disappear with no entry anywhere explaining it. */
+      var todo = !adapter.stageable ? [] : meshStructs.filter(function (s) {
+        return meshes[s.key] && adapter.stageable(s);
+      });
+      if (!todo.length) return fin(0);
+      Promise.all(todo.map(function (s) {
+        var at = adapter.atStage(s, t);
+        if (!at) return Promise.resolve(null);
+        return Promise.resolve(adapter.load(T, at)).then(function (r) {
+          if (!r || r.isObject3D) r = { mesh: r || null };
+          return r.mesh ? { s: s, mesh: r.mesh } : null;
+        }).catch(function () { return null; });
+      })).then(function (built) {
+        if (mine !== stageTurn || !LIVE || LIVE !== player) {
+          built.forEach(function (b) { if (b) disposeMesh(b.mesh); });
+          return;                                   // a newer stage owns the scene; done() is its job
+        }
+        var n = 0;
+        built.forEach(function (b) {
+          if (!b) return;
+          var old = meshes[b.s.key];
+          /* The mesh must carry the ORIGINAL structure object. atStage() hands back a shallow copy with
+             one ref rewritten, and the parts list, the pins and the click picker all compare userData
+             against the structures array by identity — a copy makes every part on screen unclickable. */
+          b.mesh.userData = b.s;
+          if (old) { b.mesh.visible = old.visible; if (old.parent) old.parent.remove(old); }
+          holder.add(b.mesh); meshes[b.s.key] = b.mesh;
+          disposeMesh(old);
+          n++;
+        });
+        /* A model is a different SIZE at every t — that is what a process is — so the normalisation has
+           to run again, and the landmarks that ride on these meshes have to be put back on the new ones.
+           RENDER-STANDARD §3, THE SUBJECT FILLS THE FRAME AT EVERY t, failing in the player. */
+        if (n) { fit(); placeAnchors(); }
+        fin(n);
+      });
     }
 
     function runOps(ops) {
       resetState();
+      /* A traced view travels under its own steam, one landmark at a time, and it starts INSIDE this
+         function. Its rotation therefore has to happen here, in op order, exactly as it always has —
+         hoisting it out to the end changes which of the two camera moves lands last and drops the
+         student into a close-up of whichever structure the trace had reached. Traced views are left
+         alone by this change; the trace's own framing is a separate problem, and it is in the log. */
+      var tracing = (ops || []).some(function (o) { return o.op === 'TRACE_STRUCTURE'; });
       overlay.clear ? overlay.clear() : (function () { while (overlay.children.length) overlay.remove(overlay.children[0]); })();
       (ops || []).forEach(function (o) {
         switch (o.op) {
@@ -1574,7 +1748,11 @@
           case 'HIDE_STRUCTURE': keysFor(o.target).forEach(function (k) { state.visible[k] = false; }); break;
           case 'HIGHLIGHT_STRUCTURE': keysFor(o.target).forEach(function (k) { state.hi[k] = o.intensity || 0.45; }); break;
           case 'ISOLATE_REGION': state.only = keysFor(o.target); state.ghosted = true; break;
-          case 'ROTATE_TO_VIEW': rotateTo(o.view); break;
+          /* On an ordinary view, record the direction rather than flying to it here: the view's framing
+             (frameView, below) has to move the camera anyway, and two animations lerping
+             camera.position in the same frames fight each other — the picture judders and the loser's
+             destination is never reached. One op, one animation. */
+          case 'ROTATE_TO_VIEW': if (tracing) rotateTo(o.view); else state.dir = o.view; break;
           case 'CROSS_SECTION': state.clip = { axis: o.axis || 'z', offset: o.offset || 0 }; break;
           case 'COMPARE_STRUCTURES':
             state.only = (o.targets || []).reduce(function (a, t) { return a.concat(keysFor(t)); }, []);
@@ -1586,6 +1764,15 @@
           case 'PEEL_LAYER':
             degraded.PEEL_LAYER = 1;
             structures.forEach(function (s) { if (s.layer === o.layer) state.visible[s.key] = false; });
+            break;
+          /* Recorded, not acted on. The rebuild is asynchronous and the framing has to wait for it, so it
+             belongs to applyView, which is the only thing that knows whether this view also traces.
+             A non-finite t is ignored rather than passed on: NaN reaches the model's own arithmetic and
+             comes back as a group of NaN vertices, which renders as nothing at all and reports nothing. */
+          case 'SET_STAGE':
+            var st = parseFloat(o.t);
+            if (isFinite(st)) state.t = st;
+            else try { console.warn('[MB3D] SET_STAGE ignored — t is not a number:', o.t); } catch (e2) {}
             break;
         }
       });
@@ -1689,7 +1876,26 @@
       row.style.display = state.clip ? 'flex' : 'none';
       if (state.clip) { $('clip').value = state.clip.offset; setClip(state.clip.axis, state.clip.offset); }
       else { clipping = false; }
-      note();
+      /* Frame what this view is about — AFTER the ops, because until they have run there is no subject
+         to frame. A TRACED view is the exception: it walks the camera from landmark to landmark itself,
+         and a framing move on top of that is two hands on the same camera. It has already had its
+         rotation, inside runOps, where it has always had it. */
+      var traced = (v.ops || []).some(function (o) { return o.op === 'TRACE_STRUCTURE'; });
+      /* A view with no SET_STAGE is at t = 1 — the same rule a ref with no @t follows. See the SET_STAGE
+         block above for why this is not sticky.
+
+         When the stage moves, EVERYTHING below waits for the rebuild. Framing on the geometry the view is
+         replacing would measure the old stage and fly the camera to a bounding box that is about to stop
+         existing — and then not move again, because the second frameView would be the one that lost the
+         camera ticket. One picture, one framing, after the geometry it is framing exists. */
+      var wantT = (state.t == null ? 1 : state.t);
+      function settle() {
+        paint(); drawPairs();
+        if (!traced) frameView(700);
+        note();
+      }
+      if (wantT !== stageT || stageDirty) restage(wantT, settle);
+      else { if (!traced) frameView(700); note(); }
     }
 
     $('clip').addEventListener('input', function () { if (state.clip) setClip(state.clip.axis, parseFloat(this.value)); });
@@ -1700,16 +1906,133 @@
       clipping = true; paint();
     }
 
-    function rotateTo(view) {
-      var d = camera.position.length() || 7, p = { anterior: [0, 0, d], posterior: [0, 0, -d], lateral: [d, 0, 0], medial: [-d, 0, 0], superior: [0, d, 0.001], inferior: [0, -d, 0.001] }[view];
-      if (!p) return;
+    /* ================= framing a VIEW, not just the scene =================
+       fit() normalises the whole model once, when the scene opens, and until now that was the only
+       framing there was. Right for the scene, wrong for a view: a view that shows eight of a scene's
+       forty-four structures was left showing them at whatever size they happen to be INSIDE the whole,
+       so the subject of a view arrived at a fraction of the size it should be. Measured in the player,
+       view by view, by reading the framebuffer — every view of cardiac-looping filled 9-25% of the
+       canvas width, and four of them lit under 2% of its area. The student is looking at a stage with
+       something small in the middle of it.
+
+       This is RENDER-STANDARD's first standing rule — THE SUBJECT FILLS THE FRAME — failing in the
+       PLAYER rather than in a model, which is why it degrades every scene that isolates at once,
+       including the BodyParts3D ones where no model code runs at all.
+
+       Three things make it safe rather than merely closer:
+
+       ONE ANIMATION OWNS THE CAMERA. Every camera move goes through easeCamera and takes a ticket.
+       Two lerps of camera.position running in the same frames fight, and the picture judders. This
+       was already latent — a ROTATE_TO_VIEW and a trace's flyTo could overlap — and it becomes certain
+       the moment a view both rotates and reframes.
+
+       THE SUBJECT IS NOT "WHAT IS VISIBLE". ISOLATE_REGION and COMPARE_STRUCTURES leave every other
+       structure on screen, ghosted to 10%. Framing on visibility there measures the whole scene and
+       changes nothing, which is exactly the view that needed this most.
+
+       AND IT MAY NOT GO CLOSER THAN THE STUDENT MAY. The obvious failure in the other direction is a
+       view naming one small structure and the camera diving into it until there is no context left.
+       The floor is controls.minDistance — the closest the scroll wheel itself is allowed to get. Not
+       a new tuned constant: fit() normalises every scene to the same 4.2 units across, so one distance
+       means the same thing in every scene, and the viewer already declares what "too close" is. */
+
+    var VIEW_DIR = {
+      anterior: [0, 0, 1], posterior: [0, 0, -1], lateral: [1, 0, 0], medial: [-1, 0, 0],
+      /* the 0.001 keeps a straight-down view off the pole, where the up-vector is undefined */
+      superior: [0, 1, 0.001], inferior: [0, -1, 0.001]
+    };
+
+    /* The same margin VizKit.fitCamera defaults to. Deliberately not a second number: the kit's
+       framing and the player's framing now agree, and viz-training/tools/test-view-framing.mjs asserts
+       they still agree, so they cannot quietly drift apart. */
+    var FRAME_PAD = 1.05;
+
+    var camTurn = 0;                       // the newest camera move wins; older ones stand down
+
+    function easeCamera(pos, target, ms) {
+      var mine = ++camTurn;
+      var pFrom = camera.position.clone();
+      var tFrom = (controls.target || new T.Vector3()).clone();
+      var t0 = (window.performance || Date).now();
       controls.autoRotate = false;
-      var from = camera.position.clone(), to = new T.Vector3(p[0], p[1], p[2]), t0 = performance.now();
       (function step() {
-        var t = Math.min(1, (performance.now() - t0) / 700), e = t * t * (3 - 2 * t);
-        camera.position.lerpVectors(from, to, e); camera.lookAt(0, 0, 0);
-        if (t < 1 && running) requestAnimationFrame(step); else controls.autoRotate = true;
+        if (mine !== camTurn || !running) return;
+        var t = Math.min(1, ((window.performance || Date).now() - t0) / (ms || 700));
+        var e = t * t * (3 - 2 * t);
+        camera.position.lerpVectors(pFrom, pos, e);
+        if (controls.target) controls.target.lerpVectors(tFrom, target, e);
+        if (t < 1) requestAnimationFrame(step);
       })();
+    }
+
+    /* World-space bounds of what this view is ABOUT. `state.only` is the subject when a view isolates
+       or compares; otherwise it is everything the view left showing. Ghosted context is deliberately
+       not counted — it is context, and it is allowed to run off the edges. */
+    function subjectBox() {
+      holder.updateMatrixWorld(true);
+      var keys = (state.only && state.only.length) ? state.only
+               : structures.map(function (s) { return s.key; })
+                           .filter(function (k) { return !state.visible || state.visible[k] !== false; });
+      var box = new T.Box3(), any = false;
+      keys.forEach(function (k) {
+        var m = meshes[k];
+        if (!m || !m.visible) return;
+        box.expandByObject(m); any = true;
+      });
+      return any ? box : null;
+    }
+
+    /* How far back to stand. This is VizKit.fitCamera's formula, generalised to an arbitrary viewing
+       direction — same two half-angles, same near-face term — and for a world-axis direction it
+       returns exactly what the kit returns, which a test asserts.
+
+       It is written out here rather than called because VizKit is a MODEL-side global: it arrives with
+       models3d/<model>.js, and a BodyParts3D scene loads no model at all, so a player that called
+       VizKit.fitCamera would frame procedural scenes and throw on the 71 mesh scenes — which are most
+       of the corpus and exactly the ones this fix is for. Reimplementing kit geometry is otherwise a
+       bug (RENDER-STANDARD §6); the test is what keeps this from becoming one.
+
+       BOTH half-angles matter: the stage is wider than it is tall on a desktop and taller than it is
+       wide on a phone, and fitting the vertical one alone crops the subject sideways on the other.
+       `ez` is the near-face term — the front of the subject is nearer than its centre, so a fit
+       computed to the centre alone crops whatever is closest to the camera. */
+    function distanceForBox(size, dir) {
+      var vHalf = camera.fov * Math.PI / 360;
+      var hHalf = Math.atan(Math.tan(vHalf) * (camera.aspect || 1));
+      /* screen axes for this direction; near the poles the world up is parallel to the view and
+         useless as a reference, which is the same degeneracy VIEW_DIR's 0.001 tilt dodges */
+      var up = Math.abs(dir.y) > 0.99 ? new T.Vector3(0, 0, -1) : new T.Vector3(0, 1, 0);
+      var right = new T.Vector3().crossVectors(up, dir).normalize();
+      up = new T.Vector3().crossVectors(dir, right).normalize();
+      var hx = size.x / 2, hy = size.y / 2, hz = size.z / 2;
+      /* the box's half-extent along each screen axis — exact for a box at any orientation */
+      function ext(a) { return Math.abs(a.x) * hx + Math.abs(a.y) * hy + Math.abs(a.z) * hz; }
+      return Math.max(ext(up) / Math.tan(Math.max(0.05, vHalf)),
+                      ext(right) / Math.tan(Math.max(0.05, hHalf))) * FRAME_PAD + ext(dir);
+    }
+
+    function frameView(ms) {
+      var box = subjectBox(); if (!box) return;
+      var c = box.getCenter(new T.Vector3()), sz = box.getSize(new T.Vector3());
+      var dir;
+      if (state.dir && VIEW_DIR[state.dir]) dir = new T.Vector3().fromArray(VIEW_DIR[state.dir]).normalize();
+      else {
+        dir = camera.position.clone().sub(controls.target || new T.Vector3());
+        dir = dir.lengthSq() > 1e-9 ? dir.normalize() : new T.Vector3(0, 0, 1);
+      }
+      var dist = Math.max(distanceForBox(sz, dir), controls.minDistance || 1.2);
+      easeCamera(c.clone().add(dir.multiplyScalar(dist)), c, ms == null ? 700 : ms);
+    }
+
+    /* Kept for the traced views, which travel under their own steam. Now measured from the CONTROLS'
+       target rather than from the origin: once a view can leave the camera looking at something other
+       than the centre of the scene, "distance from the origin" is not the distance to what is on
+       screen, and rotating would have thrown the subject out of frame. */
+    function rotateTo(view) {
+      var p = VIEW_DIR[view]; if (!p) return;
+      var tgt = (controls.target || new T.Vector3()).clone();
+      var d = camera.position.distanceTo(tgt) || 7;
+      easeCamera(new T.Vector3(p[0], p[1], p[2]).normalize().multiplyScalar(d).add(tgt), tgt, 700);
     }
 
     /* TRACE: walk the authored path one waypoint at a time — the structure stays on screen, the camera
@@ -1717,13 +2040,23 @@
        the supraglenoid tubercle and passes through the intertubercular groove" is three stops on a
        journey, not three bones lighting up. */
     var traceTimer = null, traceTurn = 0, traceLive = false;
-    function flyTo(pos, dist, ms) {
+    /* Deliberately NOT routed through easeCamera. Doing that was tried and measured: taking a ticket
+       makes a trace's flight cancel the ROTATE_TO_VIEW that the same view asks for, and on
+       gross__thigh__quadriceps-femoris view 9 it left the student inside the model — the traced
+       subject went from 7% of the frame to 269% of it. The trace's flights and that rotation have
+       always overlapped, and untangling them is its own piece of work, in the log and not in this one.
+
+       `turn` is the trace's own turn counter, so a flight stops the moment the student leaves the view
+       that started it — without which it would go on lerping the camera underneath the next view's
+       framing and land last. Within one trace nothing is cancelled, which is the point. */
+    function flyTo(pos, dist, ms, turn) {
       var from = camera.position.clone();
       var tgtFrom = (controls.target || new T.Vector3()).clone();
       var dir = camera.position.clone().sub(tgtFrom).normalize();
       var to = pos.clone().add(dir.multiplyScalar(dist || camera.position.distanceTo(tgtFrom)));
       var t0 = (window.performance || Date).now(); ms = ms || 700;
       (function step() {
+        if (turn != null && turn !== traceTurn) return;
         var t = Math.min(1, ((window.performance || Date).now() - t0) / ms), e = t * t * (3 - 2 * t);
         camera.position.lerpVectors(from, to, e);
         if (controls.target) controls.target.lerpVectors(tgtFrom, pos, e);
@@ -1754,7 +2087,7 @@
         state.only = subject ? [k, subject] : [k];
         state.ghosted = true;
         paint();
-        flyTo(center(m), frameDist(m), 900);
+        flyTo(center(m), frameDist(m), 900, myTrace);
         var s = structures.filter(function (x) { return x.key === k; })[0];
         if (s) {
           $('narr').innerHTML = '<b>' + esc(s.label) + '</b>' + (s.narration ? ' — ' + esc(s.narration) : '') +
@@ -1918,7 +2251,16 @@
            "Ghost others". A tap now only recolours; fading is something the student turns on, or that a
            view/trace explicitly asks for with `ghosted`. */
         var ghosting = (ghost && anySel) || state.ghosted;
-        m.material.opacity = (isSel || isHi) ? 1 : (ghosting ? 0.10 : 1);
+        /* AUTHORED OPACITY. A structure may declare its own `opacity` — an envelope you have to see
+           THROUGH is a real thing to author (the pericardial cavity here; pleura, dura, peritoneum
+           next), and until now it was impossible: the adapters build every part at opacity 1 and this
+           line then held it there, so the cardiac-looping scene's cavity came back as an opaque white
+           egg with the whole heart inside it. Default is 1, so no existing scene changes. A part the
+           student has selected still comes forward, but never past its authored ceiling — otherwise
+           tapping the cavity would black out everything it contains. */
+        var baseOp = (s && typeof s.opacity === 'number') ? Math.max(0.02, Math.min(1, s.opacity)) : 1;
+        m.material.opacity = (isSel || isHi) ? baseOp : (ghosting ? Math.min(0.10, baseOp) : baseOp);
+        m.material.depthWrite = baseOp >= 0.98;
         /* A selected part takes a colour of its own, not a brighter version of the colour it already had.
            Lighting up a cream bone in cream told a student nothing, and picking three parts lit three
            things in three shades of the same cream. Each selection now gets the next colour from a fixed
@@ -1962,6 +2304,10 @@
       Array.prototype.forEach.call(host.querySelectorAll('.mb3d-part'), function (b) { b.classList.remove('on'); });
       $('ghost').classList.remove('pri'); $('solo').classList.remove('pri');
       paint();
+      /* and pull the camera back out. Without this, "Show all" pressed on an isolated view would put
+         every structure back on screen while leaving the camera parked in close on the two the view
+         had been about — the button would have restored the model and hidden it at the same time. */
+      state.dir = null; frameView(600);
     });
     $('ghost').addEventListener('click', function () {
       ghost = !ghost; if (ghost) { useCount.ghost++; solo = false; $('solo').classList.remove('pri'); }

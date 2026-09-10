@@ -45,6 +45,43 @@ node tools/queue-set.mjs <item> --status built --set built_at=<utc> --append bui
 If every item is `done` or `escalated`, do not invent work. Write that in the log, fire the review
 task, and stop. A run with nothing to build is a complete run, not a failed one.
 
+## 1b · Which KIND of item is it?
+
+The queue holds two kinds and they are different jobs. `--next` tells you which.
+
+**`kind: "model3d"` — a scene already exists, geometry is missing.** Everything in section 2 applies:
+write a procedural model, wire the scene's refs to it. This is the work the queue started with.
+
+**`kind: "scene"` — NOTHING exists.** These are the 71 curriculum structures that have never been
+authored, found by `tools/coverage.mjs` on 2026-09-10. The job is to AUTHOR the VisualScene first, and
+only then build whatever it needs. Do not skip to geometry.
+
+For a `kind: "scene"` item:
+
+1. **Read the curriculum entry.** `CURRICULUM.json` gives the structure its `views` list — the view
+   TYPES it must have (`location`, `cross_section`, `mechanism`, `vasculature`, …) — plus a `note`
+   saying what the topic is actually about, and `preferred_modes`. **That `views` list is the
+   contract.** A scene is not finished until it has a view of every declared type. `COVERAGE.md`
+   reports exactly this, so anything you leave out will show up there by name.
+2. **Decide the provider from the catalog, not from habit.** The item carries `candidate_meshes`: how
+   many BodyParts3D meshes name-match this structure. Confirm it yourself against
+   `available-meshes.json` — the count is a hint, not a fact, and a name match is not an anatomical
+   match. Meshes exist → `bodyparts3d`. None → procedural, per NO MESH MEANS BUILD IT. A **process**
+   (a cycle, a flow, a sequence) has no mesh by its nature and is procedural however rich the catalog
+   looks: there is no STL of "the cardiac cycle".
+3. **Author the scene** to `model3d-scene-spec-v2.md`: `structures[]` with real anatomical parts,
+   `views[]` of the declared types, each a beat with `ops` and narration. Seven views per structure is
+   the corpus average — that is the bar, not a ceiling.
+4. **Every view must change the picture** (RENDER-STANDARD). A beat that shows the same frame as the
+   one before it is text, and belongs in `deferred_beats[]`, not in `views[]`.
+5. **Then build** whatever the scene needs, and prove it with section 3.
+6. `status: "candidate"`, never `"ready"`. Only a review promotes a scene, and only after seeing it.
+
+Validate with `node tools/validate-scenes.mjs`, rebuild the index with `tools/build-scene-index.mjs`,
+and rerun `tools/coverage.mjs` so the report reflects what you did.
+
+**One scene, done properly, beats three sketched.** There are 71 of these; the queue is not a race.
+
 ## 2 · Build it
 
 **WHERE THINGS LIVE.** `models3d/` at the repo root is the LIVE home — it is what the player loads,
@@ -143,7 +180,26 @@ Append to `viz-training/BUILD-LOG.md`: the item, what you did, what you proved, 
 Be specific about what you are unsure of — the review task reads this and a vague note wastes its run.
 
 **Then fire the review task.** Use the scheduled-task tool `fire_trigger` with trigger id
-`trig_01H67xqRQM5S1TeRSk6PK8N9`, passing the item id in `text`. This is the last thing you do.
+`trig_01WDYyWaeB4uzeXjfVfvtDTN` — "MedBank · model3d review + correct (v2, folders attached)" —
+passing the item id in `text`. This is the last thing you do.
+
+> **CORRECTED 2026-09-10T12:15Z by the build run.** This line used to name
+> `trig_01H67xqRQM5S1TeRSk6PK8N9`, which does not exist: firing it returns "the requested resource was
+> not found". The three tasks were recreated as the "(v2, folders attached)" set at 10:27-10:29 that
+> morning and every id changed; this file kept the old one. **Do not trust an id in a document over
+> `list_triggers`** — if the fire fails with not-found, list the triggers, use the one whose name says
+> review, and correct this line, exactly as happened here.
+>
+> **AND KNOW WHAT FIRING IT ACTUALLY BUYS YOU.** A fire from inside a build run comes back
+> `no_signed_approval` — *"run not approved for Claude Desktop (Windows) — this run uses the cloud
+> only"*. The review task is bound to Frank's computer, and that binding is re-signed by a PERSON
+> approving the run; a task firing another task cannot re-sign it. So the review session starts with
+> **no connected folders and cannot see the repo at all.** It will say so as its first line, because
+> its prompt tells it to, and then it will stop. Firing is still worth doing — it leaves an auditable
+> record and the run reports the failure honestly rather than silently — but **a fired review is not a
+> completed review.** Say so in your reply and in the log, every time, until this is fixed. The fix is
+> Frank's: either give the review task its own cron (a scheduled firing carries the binding) or fire
+> it from the desktop.
 
 If you cannot fire it, write **`REVIEW NOT FIRED`** on its own line at the end of your log entry and
 say so in your reply, loudly. A silent break in the chain means work piles up unreviewed.
