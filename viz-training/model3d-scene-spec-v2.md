@@ -119,15 +119,30 @@ where the same model appeared in both arrays with different labels.
 structure an author bothered to name and colour is more safely shown and tappable than silently
 clipped out of the picture.
 
-This section exists because the spec used to declare only `part` and `context` while 92 structures in
-25 scenes were already using `primary`, and four separate places in the engine tested the role inline —
-three as `role === 'part'` and a fourth, easy to miss, as `role !== 'part'` where it was partitioning
+This section exists because the spec used to declare only `part` and `context` while the corpus was
+already using `primary`, and four separate places in the engine tested the role inline — three as
+`role === 'part'` and a fourth, easy to miss, as `role !== 'part'` where it was partitioning
 structures into taught and scaffolding, which would have double-counted every `primary` once the first
-three were fixed. Every one of those 92 was therefore treated as scaffolding — dropped from the part list, given
-a context pin, and clipped away in cross-sections. Measured across the corpus: 25 scenes, 92
-structures. Three of those scenes carry no `role: "part"` at all — `histology__epithelium__cell-junctions`,
-`histology__epithelium__simple-epithelia` and `neuroanatomy__limbic-system__amygdala` — so their part
-lists were empty. The scene loaded, the console was clean, and there was nothing for a student to tap.
+three were fixed. Such a structure was treated as scaffolding: dropped from the part list, given a
+context pin, and clipped away in cross-sections.
+
+**How big it actually was, which is smaller than first written here.** 28 scenes carry `primary`, 111
+structures between them — but that number counts scenes `viz3d.js` never touches. Only `3d_anatomy`
+scenes reach this engine (the svg adapter does not filter by role), and only `ready` ones reach a
+student:
+
+| | scenes | |
+|---|---|---|
+| `3d_anatomy` / `ready` | 6 | **20 structures actually broken** |
+| `3d_anatomy` / `candidate` | 3 | fixed before they ship |
+| `diagram` / `planned` | 15 | svg engine — never affected |
+| `microscopic` / `planned` | 4 | svg engine — never affected |
+
+One live scene carried no `role: "part"` at all and so showed an empty part list with nothing to tap:
+`neuroanatomy__limbic-system__amygdala`, 0 part against 5 primary. An earlier draft of this section
+also named two histology scenes; both are `microscopic` and `planned`, drawn by the svg engine, and
+were never affected. Corpus-wide counts are the wrong unit for an engine bug — the unit is scenes the
+engine renders, in a status a student can reach.
 
 **The lesson is not "document your roles".** It is that a vocabulary check belongs in one function
 rather than at each call site, because the failure of an inline `=== 'part'` is invisible — it does
