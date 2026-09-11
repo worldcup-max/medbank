@@ -1961,3 +1961,1985 @@ on all 44 parts, and was one step from reporting the procedural provider as brok
 was not: `viz3d.js` loads three.js lazily and its own comment says load() is never called before
 loadThree() resolves. My harness skipped that. Through the real path — `MB3D.mountScene` — the scene
 mounts 44/44 with a clean console. The engine was right and the test was wrong.
+
+---
+
+## 2026-09-10 18:35 UTC · REVIEW of `engine__mesh-resolution-by-role` (review task, did not build it)
+
+**The corpus is sound. One claim in the build notes is not, and the tool that produced that claim is
+blind in exactly the place it was built to watch.**
+
+**THE FALSE CLAIM.** The build recorded "bbox bit-identical on every one so no landmark anchor moved."
+Measured independently, over all 244 re-decimated meshes, comparing `meshes/` against `meshes-lite/`:
+**33 have a moved bounding box.** Worst three, and they are not small:
+
+| mesh | structure | box moved | as % of its own extent |
+|---|---|---|---|
+| `FMA8248`  | seventh costal cartilage   | **111.36 mm** | 51.7% |
+| `FMA22349` | quadratus lumborum (left)  | **61.80 mm**  | 30.9% |
+| `FMA7333`  | right lung, upper lobe     | **53.83 mm**  | 28.5% |
+
+**WHY IT IS NOT DAMAGE, which took a component analysis to establish and is the more useful half.**
+Union-find over the welded source of each one says the lost extent was never anatomy. `FMA8248` is
+14 components: the cartilage (10,404 tri, X −110.74…−6.76) and thirteen specks, and **a 0.021 mm,
+8-triangle speck sitting at X = +104.58 was defining the box face.** Same shape for the others —
+`FMA22349`'s box was set by a 0.015 mm speck, `FMA7333`'s by a 0.076 mm speck 54 mm below the lobe.
+Decimation deletes the dust, correctly, and the box then snaps to the anatomy. The new files are
+better than their sources, not worse. `check-anchors.mjs`: 230 anchors, 2 marginal candidates, and
+**none of the 33 carries an anchor** — nothing in the corpus is broken today.
+
+**THE ACTUAL DEFECT — the bbox gate in `decimate-meshes.mjs` could not fire.** It compared
+`bbox(res.verts, null)` against `bbox(verts, null)`. `simplify()` compacts dead vertices but keeps
+every vertex it left *live*, including ones whose incident triangles all vanished as degenerate;
+those are in `res.verts` and can never be in the STL, because `writeBinarySTL` emits triangles. So
+the gate compared two boxes that are equal by construction. Reproduced from the outside:
+
+```
+node viz-training/tools/decimate-meshes.mjs viz-training/meshes/FMA8248.stl --target 6000 --verify
+  → bbox: none · surface moved 0.032 mm     …and writes a file 111.36 mm shorter in X.
+```
+
+This is the guarantee `apply-mesh-budget.mjs` says it "delegates to and inherits". It inherited
+nothing. 333 meshes were re-decimated behind it.
+
+**CORRECTED, this run** (`tools/decimate-meshes.mjs`, `corrected_by: the review task`):
+
+1. The gate now measures the box of the vertices some surviving triangle actually **references** —
+   the box the file will have.
+2. Specks are identified **always**, not only under `--verify`, because the gate now depends on them.
+3. The comparison is speck-to-speck: source box *without* its specks against the written box. Dust
+   shrinkage passes and is reported loudly; anything the dust does not explain still refuses.
+4. The ceiling is `MAX_DEV` (0.5 mm), not zero. Exact equality was only ever achievable because the
+   old gate compared an array with itself; a real box moves a little when a boundary vertex is
+   collapsed. `FMA8248` moves 0.019 mm once its dust is accounted for.
+
+New output on the same command — the truth, in one line:
+
+```
+FMA8248.stl  10492 → 6000  1.9e-2  0.032/0.002 mm · dropped 13 stray fragments (≤0.41 mm)
+             · box face moved 0.019 mm
+             · BOX SHRANK 111.36 mm — dust was defining a face; re-derive any anchor on this mesh
+```
+
+`FMA13073` (clean, no specks) still prints `none` — no false positives. A mesh at or under target,
+where nothing is collapsed and its specks survive, prints `none · unchanged`: the comparison is
+one-sided, because only SHRINKAGE is damage and a two-sided one would have refused every untouched
+passthrough mesh in the corpus.
+
+**AND IT IMMEDIATELY EARNED ITS KEEP.** Re-run over the eight worst of the 33 at their allocated
+targets: six pass with the dust reported, and **two refuse**, on geometry that is shipped right now —
+
+```
+FMA22354.stl  REFUSED — bounding box moved 0.807 mm beyond what dropped fragments explain   (sartorius)
+FMA13377.stl  REFUSED — bounding box moved 0.710 mm beyond what dropped fragments explain   (rectus abdominis, right)
+```
+
+Both are real surface lost at a box face, above this tool's own 0.5 mm ceiling, and **the deviation
+sampler did not catch either** — it takes 4,000 samples over the whole mesh and an extremity is one
+point. That is the argument for having a box gate at all, and for eleven months it was not making it.
+Sub-millimetre on a 581 mm sartorius is not something a student would be marked on, so I have not
+re-decimated them: the item is escalated and nothing is uploaded, and whoever takes the upload
+decision should take these two with it. Raising their target by a few thousand triangles is the fix,
+and `MESH-BUDGET.json` has room in both scenes.
+
+**THE CORPUS DOES NOT NEED RE-RUNNING.** The change is diagnostic only. Re-decimating `FMA8248`
+under the fixed tool gives a file **byte-identical** to the one the old tool wrote
+(`md5 4033524efad8be289ca21881fb9365c0`, both). Nobody should spend another hour on it.
+
+**A GAP IN THE STANDARD (§4 of the review prompt).** RENDER-STANDARD §5.5 and the header of
+`decimate-meshes.mjs` both call the bounding box sacred because anchors are uvw fractions of it.
+Neither says the box may legitimately change when scanner dust is dropped, and neither requires the
+gate to be tested against a mesh that is *known* to move. Proposed rule, for §5.5:
+
+> A guarantee that has never been observed to fail is not known to work. Any gate that refuses
+> damage must ship with a fixture that it does refuse, and one it must not. The bbox gate ran on
+> hundreds of meshes reporting `none` every time, and `none` was the only value it could return.
+
+**WHAT I VERIFIED AND FOUND CLEAN.** Every `bodyparts3d` ref in all 81 mesh-bearing scenes resolves
+to a file; on-disk triangle counts match `MESH-BUDGET.json` for all 494 (0 mismatches >2%);
+never-go-backwards holds (0 regressions against the 49 in `meshes-hi/`); 250 meshes at full scan
+resolution (the note says 254 — it counted allocations, the decimator lands slightly under); the
+only meshes under the 6,000 floor are three at 5,996–5,998 and four whose sources are ~3,020;
+heaviest scenes 21.6 MB and 21.5 MB against a 450,000-tri budget, i.e. 0.7% and 0.2% over, which is
+decimator overshoot and not worth chasing. The external-oblique and rib-at-the-floor renders support
+their claims — fibre direction is legible at 76,733 and absent at 8,000, and the rib at 6,000 is
+indistinguishable from its 44,634 scan.
+
+**Small thing, since the figure is evidence.** `models-out/mesh-budget/external-oblique-8000-vs-76733.png`
+has one caption bar between two rows, so which row it labels is ambiguous —
+`rib-at-the-6000-floor-vs-scan.png` captions every panel and is unambiguous. Match it.
+
+**ESCALATED, and not for any of the above.** See `ESCALATIONS.md`. The item is now waiting on a
+human and neither task will touch it.
+
+---
+
+## 2026-09-10 · build run · `engine__refit-camera-on-isolate` — ROUND 2 (rework)
+
+Took the item back as `changes-requested`, claimed `building` at `2026-09-10T17:07:30Z`. Seven findings
+from round 2. What follows is what I **proved**, then what I **assumed**, then what I found that nobody
+had asked about — in that order, because the third part is the largest.
+
+**Files changed:** `viz3d.js`, `viz-training/tools/measure-view-framing.mjs`,
+`viz-training/tools/test-view-framing-player.mjs`. No scene was touched. No `git` of any kind.
+
+`viz3d.js` when I claimed the item: `a8d39821304aea5393728a5192f48f8900081714d03eefcef554311fb513fc59`
+— byte-identical to what the reviewer measured, checked rather than assumed. All measurement below is
+against that file and my edits to it (`733887e0…`).
+
+**ANOTHER SESSION MOVED `viz3d.js` WHILE I WORKED, AND I MERGED RATHER THAN OVERWROTE.** At commit time
+the file on disk was `f4d5753c718b8a19b9ebc8fc9aa17f042c0fedac9dab8a262e6f7c781c660ae0`, not what I
+started from. Three changes had landed that are not mine: `isTaught()` recognising role `primary`; the
+mesh loader's total timeout becoming a stall timeout; and the landmark marker material getting a real
+`opacity`. **None of them touch `subjectBox`, `frameView`, `runOps` or `paint`.** So I applied my five
+edits onto their file — every anchor matched exactly once, no hunk overlapped theirs — giving
+`74eebc2505e7d3c7d0f2df8760faeda25225bc70168be7591f52fe041e26761a`, which is what is committed.
+
+I did not take that on faith. On the merged file: `node --check`, `lint-viz3d` clean,
+`test-view-framing` 197/0, `test-fit-idempotent` 8/8, `test-view-framing-player` **17/17**, and the two
+headline views re-measured — disc v2 unclipped, kidney v6 unclipped at 41.6% of frame height, console
+clean (`models-out/_framing/round2-merged-recheck-*.json`). **The full 94-view table was NOT re-run on
+the merged file**; it is the `733887e0` numbers, and a reviewer should know that. If the loader or role
+changes turn out to move framing, the two spot re-checks would not necessarily have caught it.
+
+Had I overwritten instead of merged, I would have silently reverted three other fixes — which is the
+`BUILD-QUEUE.json` hazard the task prompt describes, in a different file and with no lock to save you.
+**Stat the file you are about to write before you write it, even when you have been editing a copy of
+it for three hours.**
+
+### Finding 1 — the blocker. FIXED, and it now has a test that fails without the fix.
+
+`subjectBox()` framed on `state.only`, which is only what `ISOLATE_REGION` / `COMPARE_STRUCTURES`
+singled out. A view that isolates and then goes on to NAME more — `SHOW_STRUCTURE` after the isolate,
+`HIGHLIGHT_STRUCTURE`, either end of a `SHOW_RELATIONSHIP`, the stops of a trace — was framed on a
+fraction of its own subject and pushed the rest off the stage.
+
+The rule is the reviewer's, with the gate the reviewer's own measurements showed it needed: **frame on
+`state.only` UNION every key the view names AFTER it isolates, and change nothing on a view that never
+isolates.** Order is the whole rule, so it is collected in `runOps` (`noteNamed`) rather than read off
+the view afterwards: a key named *before* the isolate is what the isolate is deliberately narrowing away
+from — kidney view 6 opens with `SHOW_STRUCTURE '*'` — and counting it would undo the isolate. A
+wildcard target is never a named subject, for the same reason.
+
+**That gating is the difference between this and the version the review tried and reverted.** Applied to
+every view, the named set REPLACES the whole-scene box on ordinary views with a handful of keys and
+dives the camera into views that were already framed correctly. That is what put kidney v3 at 100.0%h
+and newly clipped kidney v2 and disc v1 in the reviewer's trial.
+
+Measured, both sides, same tool, serial, canvas 1008×440 — full table in
+`viz-training/models-out/_framing/round2-framing-measurements.json`:
+
+| | before | after |
+|---|---|---|
+| views measured | 94 across 11 scenes | 94 across 11 scenes |
+| framing failures | 11 | 9 |
+| clipped at rest, fixed | — | 2 |
+| clipped at rest, newly | — | 1, and it is a scene defect (below) |
+| console entries across all 94 views | 0 | 0 |
+
+- `gross__back-vertebral-column__intervertebral-disc` v2 *One joint, two bones* — clipped → **not
+  clipped**; subject 70.9%h → 51.0%h; lit canvas 35.3% → 10.7%. L5 was cut off at the bottom edge while
+  the narration said "two vertebral bodies with one pad between them". Both bodies are now whole and in
+  frame: `models-out/_framing/shots/disc-view02-before-fix.png` and `…-after-fix.png`.
+- `gross__kidney-posterior-abdominal-wall__kidney` v6 *Reading the clinic off the anatomy* — clipped →
+  **not clipped**; 1651%h → 42.7%h; lit canvas 71.0% → 27.9%. The ureter the narration follows to the
+  bladder is on screen end to end: `models-out/_framing/shots/kidney-view06-after-fix.png`.
+
+The other two cases finding 1 names, `hip-joint` v10 and v12, also went clipped → unclipped on the
+faster parallel pass; on the serial pass they are unclipped on both sides. **Do not read that as me
+disputing the finding** — see the reproducibility note under finding 5, which is why I stopped believing
+the parallel numbers, including the ones in my own favour.
+
+**The cost, stated plainly rather than buried.** Framing a bigger box pulls the camera back, so views
+that name a large context structure lose scale. Worst case measured:
+`gross__gluteal-region-hip-joint__hip-joint` v9 *Rotation, and the muscle that goes under the neck*,
+lit canvas 43.3% → 12.7%, because `ISOLATE_REGION: Lateral rotators` is followed by
+`SHOW_STRUCTURE: Bones of the joint`. I think that is correct — you cannot see a muscle "go under the
+neck" with the neck off screen — but it is a real trade and a reviewer should look at that view and say
+whether it is the right one. Nine views lost more than one point of canvas; seven gained more than one.
+
+**The regression test.** `test-view-framing-player.mjs` now drives a `FIXTURE isolate + name` view and
+asserts the subject box grows and the camera stands further back. On the pre-fix build it reads
+`isolate 2.074 -> isolate+name 2.074` and **fails, exit 1**; on the fixed build `2.077 -> 2.443` and
+passes. That is the check this item shipped without.
+
+### Finding 2 — done as above. Finding 3 — TRIED, MEASURED, REMOVED.
+
+Finding 3 is right that `controls.minDistance` cannot be the clamp: it is a distance from the subject's
+CENTRE, so it stops the camera entering a small structure and does nothing about a big one. So I built
+the bound it asked for, measured off the scene rather than tuned — stand no nearer than the frontmost
+corner of anything being drawn, plus `camera.near`.
+
+**It made things worse, and the reason is worth more than the code.** Standing just past the frontmost
+corner puts the nearest geometry at almost exactly the near plane, and a vertex at the near plane
+projects to enormous NDC. On `hip-joint` v8 *Abduction and adduction* — a view the named-set rule does
+not touch at all — it took the subject from 84.4% of frame height, unclipped, to 20,258%, clipped, and
+cut the lit canvas from 19.5% to 8.0%. The clamp manufactured the exact pathology it existed to prevent.
+
+Removed, with the measurement written into the comment where it was. Finding 3's own second sentence is
+the answer: bound the fit by the view's own named set. On the eleven-scene run that fixed both clipping
+failures on its own, with no clamp at all.
+
+### Finding 4 — `--all` mode and a threshold. DONE, and run.
+
+`measure-view-framing.mjs --all` walks every scene it can load, applies one gate, prints one summary and
+**exits non-zero**. `--resume` plus one JSON per scene under `--out` means a run that dies is continued,
+not restarted, which is what makes a corpus pass affordable at ~100s a scene. `--jobs` exists and is
+**not** what I proved on; see finding 5.
+
+The gate has three verdicts, deliberately kept apart, because lumping them is how a corpus bug gets
+filed against the engine and vice versa: **framing** (the camera is wrong — this alone sets the exit
+code, so the gate stays usable for the thing it is a gate for); **the view hides its own subject**
+(scene defect); **`ISOLATE_REGION` ghosts its own subject** (engine defect, not this item — below).
+Thresholds: not clipped at rest, `fillH`/`fillW` < 100, `lit` > 0 after a confirming re-read.
+
+**Coverage, honestly: 11 scenes of 142, not 142.** The measurement has to run in the build container
+(the device has no chromium), the mesh corpus is 318 MB over the device bridge, and I staged the 225
+meshes for the reviewer's own eleven scenes rather than all 494. `--all` is real and is what produced
+both tables here; running it corpus-wide is now a matter of machine time and one more staging pass, not
+of a judgement about which scenes to sample. **That is progress on finding 4 and not the end of it.**
+
+### Finding 5 — `test-view-framing-player.mjs` is now a gate, and the diagnosis was right.
+
+Rewritten: it asserts, prints one line per check, and exits non-zero. 17 checks; 17/17 on the fixed
+build, 13/15 and exit 1 on the old one.
+
+The reviewer's diagnosis is confirmed on the substrate. Nothing in it sleeps any more — `settle()` polls
+the camera every 150 ms until it holds still, and each poll is a `page.evaluate`, which is what keeps
+`requestAnimationFrame` running in headless. `"Show all" pulls the camera back out` now reads **6.749**
+on the fixed build and **6.723 on the pre-fix build** — the product was always fine, and the old
+harness was reporting a paused animation as a result. BUILD-LOG's "-> 7.24" was read off that blob.
+
+**And the same defect was in `measure-view-framing.mjs`, which nobody had said.** It waited a fixed
+2200 ms after each chip and read. Under `--jobs 2` on two cores that is a coin toss on whether the ease
+advanced: **the set of views reported as newly clipped changed between two runs of the same code on the
+same scenes** — hip-joint v7, v8 and v11 took turns, and kidney v6's "before" fill read 53,620% on one
+pass and 1,651% on another. Every number in this entry comes from serial runs of the settling tool. A
+gate whose answer moves between runs is not a gate, and I nearly wrote up the parallel numbers.
+
+### Finding 6 — both tool defects fixed, both confirmed real by using them.
+
+(a) The harness page is now named per scene, so two runs cannot overwrite each other's
+`MEDBANK_CONFIG`. (b) `extent()` ignored every mesh below 0.5 opacity and returned `null` when nothing
+was above it, and `clippedAtRest` then read `false` — **blind scored as clean**. It now falls back to
+the visible set and reports `subjectFrom`, so an unmeasured view can never pass as a good one. On
+kidney v3 the old reading was `fillH: null, clipped: false`; the same view with the fix reads
+`fillH: 7601%, clipped: true`. Blank reads are re-read before they are believed: kidney v2 reported
+`lit: 0` on two separate serial runs of the old tool and is a perfectly normal 53,118-pixel view.
+
+Finding 7 — agreed, not treated as a blocker.
+
+### What I found that nobody asked about, and did NOT fix
+
+**1 · `ISOLATE_REGION` ghosts its own subject. Engine defect, one line, not mine to smuggle in.**
+`paint()` computes `ghosting = (ghost && anySel) || state.ghosted` and gives full opacity only to what
+is selected or in `state.hi`. `COMPARE_STRUCTURES` sets `state.hi` on its targets; `ISOLATE_REGION`,
+eleven lines away, sets `state.only` and `state.ghosted` and **never sets `state.hi`**. So on an
+isolating view with no separate `HIGHLIGHT_STRUCTURE`, the isolated structure is drawn at 10% opacity
+along with everything it was isolated from, and the isolate changes nothing a student can see.
+
+**9 of the 94 views measured** — `cerebral-hemispheres-lobes` v3 *Frontal lobe*, v4 *Parietal lobe*,
+v6 *Occipital lobe*; `intervertebral-disc` v3, v5, v7; `vertebral-column` v6; `carpal-tunnel` v6;
+`heart` v1. Every one of them is also a framing failure in both tables above, and I believe that is
+downstream: with no opaque subject the measurement falls back to the whole visible set, so the fill
+numbers describe the ghosted context. The three cerebral lobe views are the clearest case — the whole
+point of the view is to show one lobe, and the lobe is at the same 10% as the rest of the brain.
+
+I did not fix it. It is `paint()`, not framing; it changes the appearance of a large fraction of the
+corpus; and round 2 was sent back with "Round 2 is about finding 1, not about redoing the work". Filed
+in `REPAIR-BACKLOG.md`. The likely fix is one clause — exempt `state.only` from ghosting — but it needs
+its own build and its own review, and a reviewer looking at the pictures, not a builder asserting it.
+
+**2 · 21 views peel away their own subject. Scene defect, corpus-wide.** A view isolates something and
+then runs `PEEL_LAYER` on the layer that thing lives in. `gross__kidney-posterior-abdominal-wall__kidney`
+v3 *"Coverings, then cortex to pelvis"* peels layer `organ`, which is where the kidneys are, and the
+picture the student gets has no kidney in it. Twenty-one such views in the 58 scenes I had loaded;
+listed in `REPAIR-BACKLOG.md`, and the scan that finds them is four lines of node over `scenes/`.
+
+**This is why kidney v3 shows as newly clipped.** Before, `subjectBox()` returned `null` for it and
+`frameView` bailed out — so the student saw the PREVIOUS view's camera over this view's geometry, and
+the tool measured that as a clean 56.2% and passed it. The new fallback frames what is actually drawn,
+and the defect becomes visible. Turning a silent wrong picture into a loud one is not a regression, and
+I would rather be argued out of that than have it pass quietly again.
+
+### Proved vs assumed
+
+**Proved.** The two clipping fixes, by before/after measurement on the real player with the same tool on
+both sides, serially, with screenshots I looked at. Console clean across all 94 views, both sides, zero
+entries. Every structure in cardiac-looping resolving through the real adapter with geometry (45/45,
+asserted). `node --check`, `lint-viz3d` (every name resolves), `test-fit-idempotent` 8/8,
+`test-view-framing` 197 checks 0 failures, `test-view-framing-player` 17/17 — and 13/15 with exit 1 when
+the fix is reverted, which is the only one of these that proves anything about the change itself. The
+clamp's harm, measured on hip-joint v8. The `--all` gate, run end to end on 11 scenes both sides.
+
+**Assumed, and a reviewer should not take my word for any of it.**
+1. **That the 11 scenes generalise to 142.** They are the reviewer's own sample plus cardiac-looping,
+   and they are not a random one. The corpus-wide run has not happened.
+2. **That "after the isolate" is the right gate, rather than "any attention op wherever it appears".**
+   I measured the order-gated rule and it works; I did not measure the alternative. No scene in the 11
+   puts a `HIGHLIGHT_STRUCTURE` before its `ISOLATE_REGION`, so I have no evidence either way.
+3. **That hip-joint v9 losing 43%→13% of canvas is acceptable.** That is a judgement about teaching, and
+   it is a reviewer's to make, not mine. Same for `heart` v5 (95%→75%) and `great-vessels` v3 and v5
+   (~14 points each).
+4. **That the ghosting defect is upstream of those 9 framing failures** rather than co-incident with
+   them. The reasoning is in the tool's comment; I did not prove it by fixing the ghosting and
+   re-measuring, because fixing it was out of scope.
+5. ~~`validate-scenes.mjs` did not run.~~ **Closed after the merge commit:** run on the device against
+   the real repo with the merged `viz3d.js`, **142/142 scenes valid**. It could not run in the build
+   container because `available-meshes.json` was not staged there; on the device it has everything.
+6. **Nothing here was measured at phone width.** The fit uses both half-angles, so the aspect ratio
+   matters, and 1008×440 is one aspect ratio.
+
+Did not build a second item. Did not fire the review task — `BUILD-TASK-PROMPT.md` §4 says not to, and
+gives the reason (a session-fired run inherits no device binding and wakes with no repo). **The task
+prompt that fired this run says to fire it; the repo file says not to. I followed the repo file**, which
+is the one the prompt itself calls "the full method", and this sentence is here so the disagreement is
+on the record rather than in my head. No commit, no push, no deploy. No `git` of any kind.
+
+---
+
+## 2026-09-10 19:05 UTC · BUILD · `gross__heart-pericardium__heart-external` — the first `kind:"scene"` item: authored, then built
+
+The pilot for the 71 author-and-build items. Nothing existed: no scene, no model. Now there is a
+VisualScene (`viz-training/scenes/gross__heart-pericardium__heart-external.json`, 42 structures,
+14 views, status `candidate`) and a procedural model (`models3d/heart-external.js`, 42 part keys) that
+the real adapter resolves every one of.
+
+### First: two disagreements between the notes and the repo
+
+**1 · The queue says "NO SCENE EXISTS". A scene for this structure arguably does.**
+`gross__heart-pericardium__heart.json` is `status:"ready"`, carries `structure:"Heart"`, and already has
+`location` and `associated_organs` views — the two types the curriculum declares for **Heart (external)**.
+`coverage.mjs` did not find it because it matches on the structure slug (`__heart-external`) and that
+file's tail is `__heart`, and CURRICULUM.json has no plain "Heart" structure at all. So the id and the
+curriculum name have drifted apart, and the "absent" flag is partly a naming artefact.
+
+I did NOT resolve it by renaming a `ready` scene, and I did not treat the item as a false gap either,
+because on inspection the existing scene cannot teach what this one is for: its 26 structures are
+`heart_wall`, valves, papillary muscles, great vessels, coronaries, lungs, diaphragm, trachea. **There is
+no surface, no border, no sulcus, no auricle, no apex, no base and no pericardium in it** — and
+"position in mediastinum; surfaces/borders" is exactly what CURRICULUM.json's note for this structure
+asks for. The two scenes are complementary: that one is the mesh view of the heart, this one is the
+attribution of its exterior to its parts. **The id drift is still a real defect and it is not mine to
+fix in a scene item** — a reviewer or an engine item should decide whether `__heart` is renamed, whether
+`covers[]` should drive coverage matching instead of the filename, or whether CURRICULUM.json should
+carry "Heart" as its own structure.
+
+**2 · `candidate_meshes: 9` is wrong for this structure, and I counted it myself.**
+`available-meshes.json` holds 934 ids, 924 named. Exactly **one** name-matches: `wall of heart`
+(FMA7274). Not one atrium, ventricle, auricle, pericardium, sulcus, apex, border or surface exists at
+any granularity. The 9 is a looser match than the structure's own parts. Per the standing policy the
+answer is procedural — and per RENDER-STANDARD §5 it is "build it", not "fake it", because everything
+this scene teaches is a RELATION on one continuous outer form and a scan mesh nobody has segmented
+cannot carry a single one of those relations. Recorded in the scene's `gaps[]` too.
+
+### What was built
+
+**One point function.** `surfPoint(zeta, theta)` generates the whole external form, and every named
+thing on it is a patch of the SAME function: four chamber territories, three surfaces, four borders,
+apex, base, three sulci. That is what stops the sternocostal surface drifting away from the right
+ventricle that forms it. The sulci are REAL FURROWS — a circumferential pinch in the radius function
+for the coronary sulcus (interrupted in front, where the aorta and pulmonary trunk leave, exactly as
+on a real heart) and two longitudinal pinches for the interventricular sulci; the named sulcus
+structures are narrow bands lying in the floor of those furrows.
+
+**SOLVED, on the parameters that decide the examinable relations.**
+- STATED: apex in the left 5th intercostal space 8.7 cm from the median plane; base at the 3rd costal
+  cartilage; long axis 12.0 cm; greatest transverse diameter perpendicular to the long axis 8.5 cm;
+  the heart reaches 2.0 cm right of the median plane; section flattening = 6.0/8.5, a ratio of the two
+  textbook specimen dimensions rather than a dial.
+- SOLVED by bisection: `W` = 4.1316 against the 8.5 cm diameter (a 2-D maximum over the whole grid once
+  the bulges and furrows are on it — no closed form); `X_BASE` = -1.2386 against the 2.0 cm right reach.
+- SOLVED closed form and GUARDED: `Z_BASE` = 5.1166 from the 12.0 cm long axis; the model **throws** if
+  the stated landmarks cannot be 12 cm apart rather than quietly shortening the heart.
+- PREDICTED and then measured, not tuned to: base centre lands **1.24 cm** right of the median plane
+  (expected 1.0-2.5); AP thickness **5.998 cm** (expected ~6.0); leftward reach **8.712 cm** against an
+  apex at 8.700, i.e. the form bulges 0.012 cm past the apex.
+
+**The examinable attributions are MEASURED off the geometry, not asserted in a comment.** Each named
+region's area is integrated from the point function and attributed through `chamberAt()`, whose sulcal
+boundaries are the same functions the furrows are cut with. All eight came out right, first time:
+
+| region | measured | asserted |
+|---|---|---|
+| sternocostal surface | rv .41, lv .27, ra .19, la .13 | mainly RV ✓ |
+| diaphragmatic surface | lv .59, rv .42 | mainly LV ✓ |
+| left pulmonary surface | lv .71, la .29 | LV ✓ |
+| apex | **lv 1.000** | LV *alone* ✓ |
+| base | la .63, ra .37 | mainly LA ✓ |
+| right border | ra .81, rv .19 | RA ✓ |
+| left border | lv .70, la .30 | LV (auricle above) ✓ |
+| inferior border | rv .90, lv .10 | RV ✓ |
+
+The borders are **derived, not picked**: a border of the heart is the silhouette seen from the front, so
+`silhouetteTheta()` finds where the surface normal is perpendicular to the view direction and the band
+follows that. They cannot drift out of agreement with the form.
+
+### Three things the machinery got wrong, all found by looking at renders
+
+**a · The cross-section basis is not what "theta" suggests, and the first draft placed everything by a
+raw angle.** `eLft` comes out (0.46, 0.89, 0.00) — mostly **superior**, because the long axis descends
+steeply to the left and the plane perpendicular to it contains "anterior" and "up-left", not "left".
+So theta = 0 faces nearly straight UP. Every hand-picked angle for a vessel root and an auricle landed
+somewhere else: the left auricle came off the top of the atrial mass, the aortic root 2 cm too low. Fixed
+the way RENDER-STANDARD already says to fix it — **aim at a world direction, not an angle**:
+`thetaFacing(zeta, dir)` finds the theta whose surface normal best matches a world direction, the
+anchors are sampled once and interpolated, and every root, orifice and appendage is now placed by
+naming a direction. The measured map is in the model header: 8 = superior, 90 = anterior, 157 = right,
+190 = inferior, 270 = posterior, 335 = the patient's left.
+
+**b · A tube begun ON the surface shows its start cap as a hard rim.** `K.tubeAlong` caps both ends, so
+every vessel root and both auricles had a visible elliptical rim where they met the heart — in the
+anterior frame this scene exists for. Every root now starts at a fraction of the radius INSIDE the form.
+Same class of error at the pulmonary bifurcation: the trunk's terminal cap sat in the open. Fixed per
+RENDER-STANDARD's overlap rule — each branch starts 1.1 cm inside the trunk with the trunk's own end as
+its first control point, so the branches bury the cap. **My first attempt at that fix put the branches on
+the wrong side of the cap and did nothing**, which the next render showed.
+
+**c · An inverted-hull silhouette on a TRANSLUCENT object shows straight through it.** The sternum
+rendered as a solid grey slab covering the heart: the dark `BackSide` shell was visible through the
+transparent box it was meant to sit behind. `noOutline` on every translucent context blob and on the
+fibrous pericardium. RENDER-STANDARD documents hulls for opaque solids; that they are wrong for
+transparent ones is not written down anywhere and probably should be.
+
+### Findings for the engine queue — not fixed here, because render-kit is shared machinery
+
+**1 · `K.sweptShell`'s end caps are wound OPPOSITE to their supplied normals. Proven, not suspected.**
+A 3-segment, 18-ring `tubeAlong` produces 144 triangles with `hullCount` = 324 (108 hull triangles).
+Exactly **36** triangles disagree — indices 108 to 143, i.e. every cap triangle and nothing else, all
+beyond the hull boundary. Impact today is nil (the material is `DoubleSide` and `outlineOf` only
+inflates the hull) but this is precisely the latent shape of RENDER-STANDARD §2.1, and it applies to
+**cardiac-looping's shells as well** since they take the same code path. It is why this model's tubes
+report winding 0.75-0.95 while its own patches report 1.000.
+
+**2 · `K.sweptShell` is SEPARABLE and cannot express any sulcus.** `outerR` is a function of the station
+and `section` a function of theta alone, so a radius that COUPLES the two is out of reach — and every
+sulcus and every chamber bulge is exactly such a coupling. This model therefore carries its own
+(zeta, theta) surface builder, deliberately local: promoting a general `surfaceOf(radFn)` into
+render-kit.js changes machinery every other model shares and belongs in the engine queue. **Proposing
+it**, because the remaining 67 author-and-build items will each want it.
+
+**3 · The scene spec's plane→axis table is stated for LPS meshes and is WRONG for procedural models.**
+`model3d-scene-spec-v2.md` gives sagittal=x, coronal=y, axial=z for meshes where +Y is posterior and +Z
+superior. Procedural models use +y superior, +z anterior (cardiac-looping's frame, and the frame
+`viz3d.js`'s `VIEW_DIR` assumes), where a **coronal cut is normal to z and an axial cut normal to y**.
+Only the sagittal/median case agrees in both frames. `validate-scenes.mjs` hardcodes the LPS table, so a
+correctly-authored procedural coronal cut would draw a spurious warning. This scene's single cut is a
+median one, so nothing was tripped and nothing was worked around — but the next procedural scene that
+wants a coronal section will hit it.
+
+**4 · `render-cardiac-looping.mjs` hardcodes `/opt/pw-browsers/chromium-1194/...`** and that broke this
+run the moment the installed playwright wanted build 1243. `render-heart-external.mjs` scans for
+whatever chromium is actually present and falls back to playwright's own resolution, so a version bump
+is not reported as a model failure. Worth back-porting.
+
+### Proved
+
+1. **It renders.** 19 frames at 1040x1040 to `viz-training/models-out/heart-external/`, covering the
+   plain form from four directions and each overlay family from the directions it is taught from.
+   **I opened them** — that is what found all three machinery faults above.
+2. **The console is clean.** Zero errors, zero warnings, zero throws, across all 19 builds. Four
+   swiftshader messages listed separately as harness noise rather than silently dropped.
+3. **Normals point outward.** Every patch and every closed shell: outer-surface **1.000**, winding
+   **1.000**. The low numbers are all tubes read against their own centroid — worst 0.569 on the left
+   phrenic nerve, which is a 14 cm curve of 1.5 mm radius whose centroid is nowhere near it. Tube
+   winding 0.75-0.95 is finding 1 above, and its cause is proven.
+4. **Every ref resolves through the REAL adapter.** `MB3D.adapters.procedural.load()` in a page that
+   loads `viz3d.js` for real: **42/42 with geometry**, adapter console clean, 164,884 triangles.
+5. **Acceptance: 15/15 pass**, including all eight measured chamber attributions and `apex = lv 1.000`.
+   Exposed as `MB3D_MODELS['heart-external'].acceptance()` so a review can re-run it without reading
+   the source. `anchorTable(z)` and `facingPoint(z, dir)` are exposed for the same reason.
+6. **On the device, against the real repo:** `node --check` clean; `validate-scenes.mjs`
+   **143/143 valid**, this scene clean with **zero warnings**; `build-scene-index.mjs` rebuilt (143
+   scenes, 14,745 term mappings); `coverage.mjs` rerun — **Heart (external) now reads "14 views ·
+   candidate · missing —"**, and the corpus moved 136→137 structures with a scene, 269→271 declared
+   view-slots covered.
+7. **The kit's cap-winding fault** (finding 1), by counting the disagreeing triangles against
+   `hullCount` on a minimal tube.
+
+### Assumed — a reviewer should not take my word for any of it
+
+1. **That a t-INVARIANT procedural model is acceptable at all.** RENDER-STANDARD §5 says procedural
+   belongs where the form is a function of something, and the adult heart's exterior is not a function
+   of anything. `build(t)` ignores t and the scene carries no `SET_STAGE`. This is the first such model
+   in the corpus and it is here because the no-mesh policy plus the absence of any dividable mesh leave
+   no other way to teach surfaces, borders and sulci. **If a reviewer disagrees, the honest outcome is
+   escalation, not a workaround** — and I would rather be argued out of this than have it become
+   precedent for 67 more items by nobody objecting.
+2. **The atrial mass is a coaxial continuation of the ventricular spindle.** A real heart's atria are
+   offset dorsally from the ventricular long axis; these are somewhat more superior and less posterior.
+   Consequence: the coronary sulcus is less visible on the anterior aspect than on a real heart, and the
+   great-vessel roots sit where THIS form's surface is rather than at measured thoracic positions.
+   The attributions the scene teaches are unaffected and are measured — but the proportions are a
+   judgement and they are a reviewer's to make.
+3. **The proof frames were rendered in the cloud container, not on this machine.** There is no playwright
+   and no chromium on the device VM, and the existing `models-out/cardiac-looping` frames were evidently
+   produced the same way. The repo files served were the real ones (staged from the device, byte for
+   byte) and the screenshots were committed back — but the run that made them was not on the substrate
+   the player runs on. **This is the same class of error §3 warns about** and I am flagging it rather
+   than calling the check substrate-correct. Everything that COULD run on the device did: syntax,
+   validation, index, coverage.
+4. **Nothing was rendered through the player.** I proved 42/42 refs resolve through the procedural
+   adapter, which is what §3.5 asks for; I did not load the scene into `viz3d.js` and walk its 14 beats.
+   So the ops, the framing per view, and whether `PEEL_LAYER fascia` leaves the picture the beat 14
+   narration promises, are all unverified. `ISOLATE_REGION`/`HIDE_STRUCTURE` sequencing across 163 ops
+   is the most likely place for a defect.
+5. **The narration is unreviewed anatomy.** Fourteen beats of it, written by the same run that built the
+   geometry. ARTWORK-STANDARD's ratio was 3 self-found defects to 16 found by an independent reader on
+   one plate. Assume this is worse.
+6. **The pericardial cavity is a shell, not a cavity**, and the transverse and oblique sinuses are not
+   built. Both sinuses are examined. In `gaps[]`, and they should be added before promotion past
+   `candidate`.
+7. **No coronary vessels**, deliberately: they are the next queue item and building half of them here
+   would collide with it. The sulci they run in are built and they are named in the narration.
+8. **The textbook "about two thirds of the heart lies left of the median plane" is not claimed.** This
+   form measures 0.88 by volume and 0.81 by transverse extent; neither is two thirds, and the textbook
+   statement gives no measurement basis, so beat 1 states the two extents instead. **Solving against a
+   number whose definition is unknown is worse than tuning, because it looks solved.** If a reviewer
+   knows the intended basis that is a real finding and it should become one of the solves.
+9. **The context organs are coarse** and `role:"context"`. The lungs' medial faces recede from the heart
+   rather than overlapping its front as real anterior borders do.
+
+Did not build a second item. Did not `git` anything — no commit, no push, no deploy, and no `git
+status`, per §5. **Did not fire the review task**: `BUILD-TASK-PROMPT.md` §4 says not to and gives the
+reason (a session-fired run inherits no device binding and wakes with no repo). The scheduled prompt that
+fired this run says to fire it. **I followed the repo file**, which the prompt itself calls "the full
+method" — the same disagreement the previous run recorded, still unresolved, still on the record.
+
+---
+
+## 2026-09-10 · `embryology__cardiovascular-development__cardiac-looping` · round-3 rework, plus round-4 finding 9
+
+Round 3 returned eight findings; a ninth arrived from round 4 **while this run was building**, reset
+my `building` claim to `changes-requested` at 19:29Z, and I re-claimed at 19:39Z. All nine are
+addressed. Findings 1, 2, 3 and 8 were one solve, as the review said. Finding 7 was positive.
+
+**All twelve acceptance tests now pass, on real mesh vertices, with a clean console.** The four proofs
+in the task prompt plus three new ones are below.
+
+### The headline: the model was short a degree of freedom, and the tests were short of the truth
+
+The review's finding 8 answered the previous run's question — *enrich the model, do not weaken the
+tests* — and it was right. But the enrichment was only half the work. **Five of the twelve tests were
+measuring something other than what their prose says, and three of those five I introduced this round
+while fixing the first two.** That pattern is now four rounds old on this item and deserves its name:
+here, the tests fail more often than the geometry does.
+
+**THE MODEL GAINED TWO FREEDOMS.**
+1. *Each bend's plane varies along its own width* — `psi_j(u) = psi[j] + tw[j]·z`, z the bend's own
+   Gaussian coordinate. Physically, torsion distributed through the bend rather than lumped at its
+   centre; a bend can now enter in one plane and leave in another.
+2. *A fifth bend, at u = 0.055* — the confluence where the two horns join the sinus venosus. It is
+   **not** a segment boundary; the five segments still divide at the four named waists. The sinus is a
+   transverse structure whose horns sweep laterally to both sides, and a tube running straight through
+   that confluence cannot straddle the median plane however its planes turn downstream.
+
+How I knew four bends were not enough, rather than assuming it: J and K were **already** in the solver
+with |x| ceilings of 0.55, and the shipped parameters measured 1.10 and 0.73. They were not forgotten,
+they were unaffordable. Two independent searches from different seeds landed on the *same* trade —
+buy the atrium's straddle, pay with the ventricle's side. **A penalty term still large at the optimum
+after a global search is a missing degree of freedom, not a bad seed.**
+
+### The five tests that were wrong, and how each was caught
+
+| test | what it said | what it did | how it surfaced |
+|---|---|---|---|
+| **D** (mine) | atrium above ventricle, ≤62% overlap | the 0.62 ceiling silently demanded a centroid floor of ~0.55, far stricter than the 0.35 the standard sets — two conditions written separately were one condition written twice, the tighter hidden | the search could satisfy either half but never both |
+| **B′** | "the max \|x\| of the bulboventricular centreline is on the -x side" | an **argmax** — discontinuous. Once I puts the ventricle firmly left and F the bulbus firmly right, the two reach comparable \|x\| and the sign flips between integration densities: **-0.619 at NSEG 140 and 300, +0.619 at 600**, on a curve whose every other measure moved by <0.003 | **five candidates were rejected as "on a bifurcation" on the strength of that flip.** The curve was stable; the statistic was not |
+| **B′** (again) | dextrality | measured across ventricle+bulbus *together*. The bulbus bows right (-0.055), the ventricle bows left (+0.159), so the average reports the loop **sinistral** (+0.319) | that is the round-4 anatomy, not a contradiction: the two limbs are on opposite sides, so a statistic averaging both measures the wrong thing |
+| **L** (round-4 finding 9), literal reading | ventricle box clear of bulbus box in x | **impossible for any curve.** The segments are contiguous — they share the station at the bulboventricular sulcus — so the boxes must overlap by ≥2r in every axis, always. r(0.660) = 0.3931 at t=1; a candidate whose limbs are otherwise completely clear measures an x-overlap of **0.786 = 2r to three decimals** | the review's "1.05 units of overlap on chambers ~1.56 wide" is very largely that shared waist — the one place the two limbs are *required* to touch, because it is the groove between them |
+| **L** on *bodies*, which is what the review's own words ask for | the two bodies substantially clear | **also impossible.** The ventricle body ends at u=0.593, the bulbus body begins at u=0.683: **0.808 units of arc**, while their peak radii sum to **1.156**. No path of length 0.808 separates two points by 1.156. Bound: gap ≤ -0.348 at t=1, and that assumes every unit of arc goes into pure x displacement | the chambers are larger than the gap between them, and that *is* the anatomy — the chambers are dilated and the sulcus is short |
+
+**What L became.** The transverse separation of the two limbs' centres, over the distance at which the
+two chambers would be exactly tangent. 1.0 means they just touch. **Measured 0.919 at t = 1.** It is
+the strongest form of finding 9 that does not require a curve which cannot exist. Gated at t = 1 only,
+because finding 9's own source says "*after* looping"; what view 4 claims at t = 0.65 is the weaker
+"side by side rather than one behind the other", which is test H65, and H65 **is** gated. L65 = 0.698 is
+reported so the separation can be watched growing rather than taken on trust.
+
+### The other findings
+
+**4 — the sinus's open caudal end.** Fixed in the **kit**, not the model, and it turned up a second
+bug on the way. `sweptShell` closes a terminal span with an annular cap, which is right at an internal
+waist and reads as an open pipe where nothing is behind it. `VizKit.domeCap` now closes a terminal
+ring with a rounded dome sharing the tube's exact cross-section. Both ends of the tube are domed — the
+cranial one had been "fixed" a round earlier by pointing view 9 away from it, which closed no hole.
+**A camera is not a fix; it only moves the unlisted place.**
+
+**A NEW KIT BUG, found by the probe written for finding 4 and affecting every model in the corpus.**
+`sweptShell`'s flat end caps for a SOLID tube (every `tubeAlong` — every vein, artery, rod and tick we
+draw) were emitted through `emitter().tri`, which corrects nothing. Both branches were written by
+reasoning about which way the ring runs and both were backwards: **24 of 24 cap triangles on a plain
+`tubeAlong` were wound against their own supplied normal.** It never showed — caps sit inside the hull
+count, materials are DoubleSide, shading was right because normals were supplied. That is
+RENDER-STANDARD §2.1's own description of itself, arriving again in the one code path that had
+bypassed the fix. Now `emitter().triN(p1,p2,p3,n)` decides the order from the geometry. The model's
+local `emitTri` is gone with it (§6: a model that reimplements winding is a bug). **New rule and new
+check both written into RENDER-STANDARD as §2.4b.**
+
+**5 — the median-plane reference, 96.5% occluded.** Rebuilt. Note why the obvious fix is wrong: a
+translucent quad *in* the median plane is seen exactly edge-on by an anterior camera, because the
+plane contains that camera's view direction. What a plane gives such a camera is its **trace**, and
+the old rod's fault was never that it was a line — it was that the line sat at z = 0, buried inside
+the loop. So: a translucent quad (which carries it in oblique and lateral views) plus its ventral edge
+as a solid rod standing clear **in front** of the loop, with the forward reach measured off the built
+curve at each t. **84,024 px visible at t = 1, 29.2% of the subject** (was 125 px, 0.081%).
+
+**6 — views 3 and 4 narrating two movements over one frozen stage.** The four bends now have staggered
+onsets: the bulboventricular bend leads, then bulbotruncal, atrioventricular, and the sinoatrial bend
+last — which is why the inflow limb's climb is the *third* movement. At t = 0.42 the bulboventricular
+bend has done **59%** of its turn and the sinoatrial climb **1%**. A new scene stage `_ab` at t = 0.42
+was added and view 3 re-pointed to it; view 4 keeps `_b`, so the two views are now two different
+pictures of two different moments.
+
+*The stagger took three attempts and the first two are worth recording.* Scaling every bend's
+amplitude by its ramp does **nothing** — lambda is solved against the tether, so a common factor is
+exactly what lambda cancels, and where it could not cancel it (t = 0.25, one bend awake) it pinned at
+its cap, which is the bifurcation this model's own notes warn about arriving as a side effect of an
+unrelated fix. Scaling the *tether* instead made the early loop a slack tube rather than a buckling
+one — the wrong mechanism. What works: the ramps set only the **share** of curvature each bend carries,
+renormalised against what those shares sum to at t = 1. Every ramp is 1 at t = 1, so the day-28 loop is
+untouched by the stagger.
+
+*And the stagger's own test was wrong first time*, in the way this item keeps finding: it divided by
+the day-28 value alone, and on a straight tube the atrium starts **below** the ventricle, so "how much
+of the climb is done" read -0.8 for a heart that had simply not climbed yet. Both figures are now
+fractions of the total change, 0 at t = 0 and 1 at t = 1 by construction, and two-sided — a one-sided
+floor is satisfied by a loop that *overshoots* mid-process and comes back, which is a defect this file
+already records rejecting a candidate for.
+
+**A DISAGREEMENT I FOUND RATHER THAN WAS TOLD ABOUT.** The scene carried **two groups for the same
+instant**: six t = 0 structures labelled "Day 21 — the straight tube" and `peri_a`, added in round 1,
+labelled "Day 23". Round 2 corrected the model header from day 21 to day 23 (its finding 11) and
+relabelled exactly one structure. All seven now say Day 23.
+
+**A TOOL BUG IN THE SOLVER, and the file warns about it in its own header.** `solve-cardiac-torsion`
+rounded the winning parameters to four decimals and handed them straight on. Round 3 hit exactly what
+the header describes: a candidate refined to a robust penalty of **16.8** came out of the rounding
+with a 140-vs-300 drift of **12.57** — A = +0.962 at NSEG 140 and -0.037 at 300, the loop inverted —
+and printed as an answer. It was caught only because the MUSTS line disagreed with the penalty, which
+is luck. The tool now rounds, **re-scores**, and backs off to more decimals, rejecting outright
+anything that needs more than six. Two candidates this round genuinely needed six; one needed eight
+and was rejected. And the stability verdict compared only **300 vs 600** while claiming to catch
+bifurcations — it now compares 140/300/600 and reports whichever pair disagrees.
+
+### What I proved, as against what I assumed
+
+**PROVED.**
+- 17 stages rendered headless and looked at; **console clean**, model and adapter.
+- `acceptance()` all twelve pass: A, B′, C, D, E, F, G, H, L, I, J, K.
+- **Every floored relation re-measured on REAL MESH VERTICES**, not on the centreline proxy the model
+  asserts with: Ifrac 0.399 (≥0.35), Dfrac 0.420 (≥0.35), Dov 0.719 (≤0.75), Jside 0.284 (≥0.28),
+  Jc 0.188 (≤0.30), Kright 0.512 (≥0.22), Kc 0.006 (≤0.38). **Proxy-vs-mesh worst disagreement 0.032.**
+  Boxes: atrium x −0.648..+1.637 (was +0.02..+1.99, never reaching the median plane); sinus
+  −0.595..+0.568 (was −0.38..+1.71, 95% left); ventricle −0.176..+1.638; bulbus −0.834..+0.247.
+- **No open lumen from five cameras** — anterior at t = 0.42/0.65/1.00, from above, from below — by
+  ray-cast: 0 of 8,661 first hits face away from the camera. Before the fix the same probe found
+  16/29/5/86/14. The "from below" hits were the dorsal aortae, which nobody had named.
+- Normals outward: outer surface 0.906–1.000 across the chambers; winding 0.950–1.000 everywhere (the
+  caudal dome read **0.000** before the handedness fix, and arches/veins 0.92–0.93 before `triN`).
+- **All 51 scene refs resolve through the real adapter in `viz3d.js`** with geometry; 366,666 triangles.
+- Stability: worst drift across NSEG 140/300/600 is G at 0.0098. Survives 4-decimal rounding
+  (drift 0.0004).
+- `validate-scenes` 143/143 on the real repo; scene index rebuilt (143 scenes, 71 ready).
+
+**NOT PROVED, and the review should look at these.**
+1. **The day-28 anterior view is a compact mass rather than a legible loop.** Every relation passes and
+   the *lateral* view (`t100-meso.png`) reads clearly — atria behind and above, ventricle in front and
+   below, outflow rising between — but in `t100.png` the ballooned chambers merge into a bilobed blob
+   and the tube's continuity is hard to follow. `t065.png` is an excellent picture of a looping tube.
+   I do not know whether this is right (the real day-28 heart *is* a compact mass) or whether the
+   calibre profile now over-balloons. **It is the thing I am least sure of.**
+2. **`chordFrac` landed exactly on its upper bound (0.64).** A pinned parameter is usually the box
+   constraining the answer rather than the anatomy. I widened it twice already (0.60 → 0.70 → back to
+   0.64 when the looser bound made the vertical overlap worse) and stopped; someone should decide what
+   pole convergence day 28 actually has, rather than letting a search discover it.
+3. **`FLOORS.DOV = 0.75` and `FLOORS.L = 0.85` are figures I chose, not figures anyone stated.** Both
+   are new tests with no prior value. I set them from what the enriched geometry reaches and I am
+   saying so rather than presenting them as targets that were aimed at — which is honest for a new
+   test and would **not** have been for test I, where the review had ruled. Rule on them.
+4. **`Iside` (how much of the ventricle's width is left of the median plane, 0.829) is reported, not
+   gated.** It is a bar this run invented over and above the one the review set. Gating on it is one
+   word away if a review wants it.
+5. **The headless proof does not run on the mount.** The repo is reached through a Windows mount with
+   no chromium and no playwright, so the render runs in a Linux container against byte-identical
+   copies. That has been true of every round; it is written down now because RENDER-STANDARD says to
+   test on the substrate, and for the *render* this is not it. The queue lock, which is the thing the
+   mount genuinely changes, is tested there.
+6. **The `_ab` stage is drawn but its framing inside the real player is untested**, like the rest.
+
+---
+
+## 2026-09-10 · `gross__heart-pericardium__cardiac-cycle-pumping` · kind: scene · → `built`
+
+Authored the scene and built the model. One item. No git, no commit, no push, no deploy.
+
+**Files:** `models3d/cardiac-cycle-pumping.js` (new, ~1400 lines),
+`viz-training/scenes/gross__heart-pericardium__cardiac-cycle-pumping.json` (new, 24 structures /
+10 views / 56 ops / `candidate`), `viz-training/tools/solve-cardiac-cycle.mjs` (new),
+`viz-training/tools/render-cardiac-cycle.mjs` (new), `viz-training/models-out/cardiac-cycle-pumping/`
+(13 frames + `report.json`). Index rebuilt, coverage rerun.
+
+### The catalog check, first, because the queue item was wrong
+
+`candidate_meshes: 3`. The three name-matching entries in `available-meshes.json` are
+`great cardiac vein` (FMA4707), `middle cardiac vein` (FMA4713) and `set of anterior cardiac veins`
+(FMA71567). **They are veins.** They match on the word "cardiac". There is no mesh of the cardiac
+cycle and there cannot be one — the subject is not an object. Procedural, per RENDER-STANDARD §5,
+and the item's own warning that "a name match is not an anatomical match" was exactly right.
+
+### What I PROVED
+
+Everything below was measured by a tool that is in the repo and can be re-run.
+
+1. **The circulation hits every stated target.** `tools/solve-cardiac-cycle.mjs` bisects four numbers
+   per side against four textbook figures each. LV 120.0 / 50.0 ml, aorta 120.0/80.0; RV 130.1 /
+   60.1 ml, PA 25.0/10.0. All eight, to within the tolerances in the acceptance table.
+2. **The predictions that were NOT solved against all land.** Stroke volume 70.1 ml left and 70.0 ml
+   right — the two sides match to 0.07 ml, and nothing imposes that. EF 0.584. Systole 0.271 s,
+   diastole 0.529 s. Isovolumetric contraction 0.057 s, ejection 0.214 s, isovolumetric relaxation
+   0.044 s. Atrial kick 0.195 of filling. Peak ejection flow 564 ml/s left, 449 right. The solve
+   also lands on textbook values it never aimed at: arterial compliance 1.55 ml/mmHg and systemic
+   resistance 1.09 mmHg·s/ml.
+3. **The isovolumetric phases move no blood** — 0.0003 ml and 0.0000 ml of volume excursion. True by
+   construction (both valves shut ⇒ dV/dt = 0) and measured anyway.
+4. **Valve events are in Wiggers order**, and each is located by root-solve on the integrated trace,
+   never scheduled.
+5. **Geometry predictions.** Minor-axis shortening 0.30 is STATED for the left ventricle; long-axis
+   shortening comes out 0.150 (textbook 13–15%). TAPSE 2.0 cm is STATED for the right; its calibre
+   shortening comes out 0.206. LV wall 10.0 → 14.0 mm and RV wall 3.5 → 5.7 mm, from conservation of
+   myocardial volume alone — no wall thickness is typed in after end-diastole. LVIDd 5.33 cm, LVIDs
+   3.73 cm, LV mass 142 g, RV mass 37 g (0.26 of the left), MAPSE 1.20 cm. Every one of those is in
+   its normal range and none was solved against.
+6. **It renders, and the console is clean** — 13 frames, no error, no warning, no throw, in the model
+   harness and in the adapter page.
+7. **Normals.** Every closed solid reads 1.000 outward on its hull. Winding agreement is 1.000
+   everywhere except the thick-walled shells (0.972 left, 0.961 right) — see the finding below.
+8. **All 24 refs resolve through the real `viz3d.js` procedural adapter**, at the default t and again
+   at t = 0.33, each with geometry. All 24 report `stageable`, so every one follows `SET_STAGE`.
+9. **The mesh encloses the volume the circulation solved for.** New check, by integrating the actual
+   triangles: −1.5% at every t, constant. That is 1.0% from the deliberate half-percent radial inset
+   that stops two surfaces being coincident, plus 0.4% from a 40-sided ring inscribed in a circle. A
+   systematic offset, not a drift.
+10. **The two ventricular cavities do not interpenetrate** — 0.0%, by grid sampling and parity
+    ray-casting. This was 19.6% before the right ventricle was rebuilt; see below.
+
+### What I ASSUMED, or could not prove
+
+- **Nothing was rendered through the player.** 24/24 refs resolve, which is what §3.5 asks — but the
+  scene has not been loaded into `viz3d.js` and walked. Its 56 ops, its per-view framing, and whether
+  `ISOLATE_REGION Valves` in beat 10 leaves the picture the narration promises are all unverified.
+- **The proof frames are the model, not the player.** The harness renders every layer at full
+  opacity; the scene sets walls to 0.55 and hides most structures in most beats.
+- **The narration is unreviewed anatomy**, ten beats of it, written by the same run that built the
+  geometry. ARTWORK-STANDARD's ratio was 3 self-found to 16 found by an independent reader.
+- **The proof was rendered in a cloud container, not on the device.** There is still no chromium and
+  no playwright on the device VM — checked, `npm view` has no network there either. The files served
+  were the repo's own, staged byte for byte, and the adapter is the real `viz3d.js`; but this is the
+  same substrate caveat the round-3 heart-external run raised, still unresolved.
+- **Whether the picture teaches** is a reviewer's call. My own read of the frames: it is recognisable
+  as a heart, the apex is pointed, the cavity and wall are legible through the cutaway, and the
+  difference between end-diastole and end-systole is obvious at a glance — which is the thing a
+  mechanism scene has to do. The great vessels are stubby, the atria are plain sacs, and the cutaway
+  rim is ragged where it crosses the right ventricle.
+
+### Findings
+
+**1. `render-kit.js` emits its base-end annular cap with the winding reversed.** In `sweptShell`,
+`cap(rows-1, +1)` uses `quadFlip` and `cap(0, -1)` uses `quad`. For corner order
+`(OP[a], IP[a], IP[d], OP[d])` the emitter's `quad` produces `tri(a,d,c)` whose face normal works out
+to `+w·D̂`, while the cap supplies `axis = −D̂`. Derived, then measured: a thick-walled shell reads
+0.989 winding agreement with no cutaway where every other surface reads 1.000, and 80 of 7520
+triangles is 1.06% against a measured 1.1%. The one-word fix is `quad` → `quadFlip` there.
+**Not applied.** It is shared machinery; `cardiac-looping` was `building` under another run for the
+whole of this one and `heart-external` is `built` awaiting review, and moving `render-kit.js` under
+either would invalidate proofs I cannot see. It is invisible today — caps are excluded from the
+silhouette hull and the material is `DoubleSide` — but it is latent in every thick-walled model in
+the corpus, and it belongs to whoever can change it in one place with all three models in hand.
+
+**2. `render-kit.js` has no sheet primitive, and three models now want one.** Valve leaflets here,
+the dorsal mesocardium in `cardiac-looping`, the pericardial reflections in `heart-external`. This
+model has a local `sheet()` — through `K.emitter()`, with normals from a finite difference of the
+same point function, hull recorded — which is the way §6 permits and not the way it forbids. It
+should probably move into the kit. Note that writing it also reproduced §6's own warning: the rim
+quads went out through `quad` where the corner order needed `quadFlip`, and the probe read 0.873
+winding, 128 of 1008 triangles, before it was fixed.
+
+**3. The queue item's `candidate_meshes` count was misleading in the way the prompt warns about.**
+Three matches, all of them veins. The count is a hint; it was checked and it was wrong.
+
+**4. A lumped 0-D circulation cannot get ejection duration and isovolumetric relaxation right at the
+same time.** Measured trade-off through the outflow inertance (left side): `l_out` 0.0050 → ejection
+0.183 s, IVR 0.078 s; 0.0075 → 0.214 / 0.044; 0.0100 → 0.235 / 0.023. Structural, not a tuning
+failure — a longer coast IS a later valve closure and a lower ventricular pressure left to dissipate.
+0.0075 was chosen as the point where both sit inside their textbook ranges rather than the point that
+optimises either, and the whole curve is in the model's header so the choice can be argued with.
+
+**5. The ventricular pressure peak exceeds the recorded arterial peak by 32 mmHg**, where a real pair
+of curves nearly coincide. Artifact of one lumped inertance. Measured by acceptance row O rather than
+hidden, and it is why this scene draws no pressure trace.
+
+### Two things I got wrong and fixed, recorded because the checks that caught them are cheap
+
+- **The right ventricle was a second lozenge.** Built as a body of revolution beside the left, it put
+  **19.6% of the left ventricular cavity inside the right ventricular cavity** and made the heart
+  11.7 cm across. Neither volume arithmetic nor the normals probe nor the adapter check notices that
+  — each chamber integrates to exactly the right volume on its own. It took a containment test and a
+  look at a rendered frame. It is now a swept tube wrapping the left ventricle, its calibre solved
+  from the volume integrated along the actual path, its wall from the same conserved myocardial
+  volume. 0.0% afterwards.
+- **The epicardial apex was truncated flat.** The wall was swept only as far as the cavity apex and
+  closed off there by its own annular cap, so the heart ended in a ring instead of a point and read
+  as a capsule. It also disagreed with the myocardial volume it was solved for. Both were invisible
+  to every automated check and obvious in the first frame anyone looked at — which is check 4 of §3
+  doing exactly the job it is there for.
+
+Did not build a second item. Did not run `git` at all. **Did not fire the review task**: §4 of
+`BUILD-TASK-PROMPT.md` says not to, and gives the reason. The scheduled prompt that fired this run
+says to fire it. I followed the repo file, which the scheduled prompt itself calls "the full method".
+This is the third run to record the same unresolved disagreement between the two.
+
+---
+
+## 2026-09-10 · `gross__heart-pericardium__coronary-arteries-cardiac-veins` — AUTHORED AND BUILT
+
+`kind: "scene"` — nothing existed. Authored `viz-training/scenes/gross__heart-pericardium__coronary-arteries-cardiac-veins.json`
+(35 structures, 12 views, 67 ops, `status: "candidate"`) and built
+`models3d/coronary-arteries-cardiac-veins.js` on `render-kit.js`. Proof tool committed as
+`viz-training/tools/render-coronary-arteries.mjs`; eleven frames in
+`viz-training/models-out/coronary-arteries-cardiac-veins/`.
+
+Curriculum declares `vasculature` and `location`; both are present, and `COVERAGE.md` now reports the
+structure with no missing views.
+
+### The provider decision, and why the queue item's number was not the number
+
+`candidate_meshes: 12` is a NAME-match count. Checked file by file against `viz-training/meshes/`,
+`meshes-lite/`, `meshes-hi/` and `meshes-big/`:
+
+| name-matched in `available-meshes.json` | STL on disk |
+|---|---|
+| FMA4685 stem of left coronary artery | yes |
+| FMA3895 circumflex branch of LCA | yes |
+| FMA3802 trunk of right coronary artery | yes |
+| FMA3818 marginal branch of RCA | yes |
+| FMA4706 coronary sinus | yes |
+| FMA4707 great cardiac vein | yes |
+| FMA4713 middle cardiac vein | **no file, any tier** |
+| FMA76994 right posterolateral branch of RCA | **no file** |
+| FMA71567 set of anterior cardiac veins | **no file** |
+| FMA76751 set of posterior veins of the LV | **no file** |
+| FMA71669 / FMA71670 IV septal branches | **no file** |
+
+Six of twelve. (Three further name matches were discarded as false: two supramarginal GYRI and the
+interventricular FORAMEN.) And the catalog has **no entry at all**, at any granularity, for the
+anterior interventricular branch — the LAD — nor for the posterior interventricular branch, the small
+cardiac vein, the oblique vein of the left atrium, the diagonal branches, the left marginal branch,
+or either nodal branch. A scene assembled from the six available meshes shows a left main that stops
+dead where its principal branch should begin and a right coronary ending in mid-air at the crux. That
+is not a reduced scene, it is a scene teaching the wrong anatomy, and RENDER-STANDARD §5's test
+("would a student be marked wrong for the difference?") answers cleanly: what is examined about a
+coronary vessel is which groove it lies in, what it branches into, where it ends and what it supplies.
+
+The second reason is the stronger one and is the one worth carrying to the other 67 scene items: these
+vessels are DEFINED BY the grooves they lie in. A scan mesh of the RCA comes from a different specimen
+than any heart form we could put it on, so "the right coronary lies in the right atrioventricular
+groove" would be true only by luck and checked by nothing. Built on the same surface function that
+CUTS the groove, it is true by construction and is asserted in `acceptance()`. The mesh route cannot
+make the claim at all.
+
+### What I PROVED, as against what I assumed
+
+**Proved by measurement:**
+
+- **Renders.** Eleven frames, five cameras plus isolated arterial, venous, territorial, myocardium-off
+  and left-dominant builds. Looked at, one by one; four defects found that way and fixed (below).
+- **Console clean.** No errors, no page errors, no failed requests, no HTTP ≥ 400 on either the model
+  page or the adapter page. One caveat stated rather than buried: the run reports four SwiftShader
+  "GPU stall due to ReadPixels" performance warnings, which come from the software rasteriser during
+  `toDataURL` and not from the model. Also: a browser requests `/favicon.ico` unprompted and the 404
+  it gets is reported as a console error indistinguishable from a missing model file. The first run of
+  this harness reported exactly that and I nearly wrote it up as clean-with-one-404. The harness now
+  serves a favicon, so a 404 in this tool means a real missing file.
+- **Outward normals, by RAY-CAST, which is the probe that means anything here.** The centroid probe is
+  close to useless on this model — nearly every structure is a long curved tube, and a correctly built
+  tube read against its own centroid scores 55–60%, exactly as RENDER-STANDARD warns. 5,787 rays from
+  eleven cameras: **3 met a surface facing away.** Two of those are one-sided overlay BANDS
+  (`ant_iv_sulcus`, `post_iv_sulcus`) seen from behind in the myocardium-off view, and the probe
+  identifies them as sheets rather than solids by finding no second intersection at all. The third is
+  the coronary sinus at a silhouette edge, and the probe measures the gap to the second hit at
+  **1.5 mm on a 10.4 mm vessel** — a graze, not a hole. That discriminator is the part worth keeping:
+  the alternative was a threshold on the ANGLE, which would have been a number picked to make the run
+  pass. Measuring how far the ray travels before it meets anything else answers the actual question.
+- **Every ref through the real adapter.** All 35 structure refs resolved through
+  `MB3D.adapters.procedural.load` in `viz3d.js`, loaded over HTTP by `<script src>` the way the player
+  loads it, each returning a mesh with non-zero geometry. Not one `reason:'none'`.
+- **Eleven acceptance checks, each with a magnitude floor and each with a negative case it rejects.**
+  All pass, all negatives rejected. The floors are fractions of the extents of the structures actually
+  compared, not of whatever extent happened to be largest — see the axes check below for why that
+  distinction did real work.
+- **A narration claim, counted in pixels.** The scene says the pulmonary trunk hides the left main and
+  the next beat takes the trunk away to reveal it. Measured from one camera fitted on the with-trunk
+  build so removing the trunk cannot move it: **14 pixels with the trunk, 229 without, 93.9% occluded,
+  and the pulmonary trunk alone accounts for all of it.** The left auricle contributes zero, so I
+  removed `HIDE_STRUCTURE la_auricle` from that beat — hiding a structure that measurably does not
+  occlude anything, in the beat whose whole point is the occlusion, is a small lie in a teaching file.
+- **Dominance reverses.** The `left_dominant` flag is geometry, not a relabelling: in the default
+  build the RCA's terminus is 0.011 cm from the origin of the posterior interventricular branch and
+  the circumflex's is 3.91 cm away; with the flag, 3.33 cm and 0.020 cm. The negative case for this
+  check is the other build, which is the only kind of negative case a rotation or a rename cannot
+  satisfy — the lesson RENDER-STANDARD draws from the L-loop that was a rotation.
+
+**Assumed, and stated as assumed:**
+
+- The **common** branching pattern. Coronary branching varies between people more than almost anything
+  else in gross anatomy. Numbers of diagonals and perforators, and the origin of the SA nodal branch
+  (RCA in ~60%, circumflex in the rest), are each shown in one arrangement only. Dominance is the one
+  variation built as a genuine alternative, because it is the one that is examined.
+- That putting the **veins on the atrial side of the coronary groove and the arteries on the
+  ventricular side** (2 mm of zeta) is an acceptable simplification. In a real groove both lie in
+  epicardial fat at slightly different depths and the relation is not clean. It is in `gaps[]`.
+- That **t means nothing** here. Same as `heart-external`: the adult coronary tree is not a process.
+  This is now the SECOND t-invariant procedural model in the corpus and a reviewer should decide the
+  policy rather than let it accrete by precedent. Declared in `T_MEANING`.
+- The **narration's clinical framings** (territories as infarct patterns, block with inferior infarct)
+  are textbook and were not verified against a source in this run.
+
+### Findings
+
+**1. The coronary sulcus in the shared heart form is a plane perpendicular to the long axis, and a
+real one is not.** Measured on this build: the heart's right border reaches x = −2.00 cm — which is
+the stated landmark `heart-external.js` solves against and hits exactly — but the coronary sulcus
+reaches only **x = −0.37**, and the right coronary artery lying in it only **−0.39**. So the right
+atrioventricular groove sits **1.63 cm to the LEFT of the heart's own right border**, where a real one
+runs close to it, and the right coronary barely crosses the median plane at all. The cause is in
+`models3d/heart-external.js`, whose `pinch()` cuts the sulcus as a ring at constant zeta: because the
+long axis runs down and to the left, a ring perpendicular to it slides left as it descends. **Not
+worked around here** — moving the artery out of the groove to fix its absolute position would break
+the one relation this scene exists to teach, and RENDER-STANDARD is explicit that a camera (or here, a
+fudge) is not a fix. The vessels are in the groove; the groove is where the shared form puts it.
+Fixing it means making the sulcus an oblique surface in `heart-external.js`, which is another item's
+file and another item's review.
+
+**2. Corroborating that, and already in `heart-external`'s own output: it reports 88.4% of the heart's
+volume left of the median plane**, against a textbook "about two thirds". Its header says, correctly,
+that the textbook figure has no stated measurement basis and so was deliberately not used as a solve
+constraint — that reasoning is sound. But 88% against 67% is large, it points the same way as finding
+1, and it is currently reported rather than asserted on. Worth a look rather than a note.
+
+**3. A claim in `heart-external.js`'s header that is not true of its own build, and that its
+`acceptance()` does not check.** The header lists as PREDICTED that "the apex should be the leftmost
+point of the heart and the inferior-most point of the ventricular mass". The leftmost half is true and
+IS asserted (`form_stays_within_1cm_left_of_apex`). The inferior half is false: the apex is at
+y = −7.30 and the built form reaches **y = −9.07**, so 1.77 cm of ventricular mass hangs below the
+apex. There is no check of it in that file at all, so the prediction has never been falsifiable in
+practice. Reported, not fixed — another item's file.
+
+**4. The theta-to-world-direction anchor table is unreliable AT the coronary sulcus, and this is the
+first item that ever had to place anything there.** `pinch()` cuts a furrow up to 8.5% deep, and
+inside a furrow the surface normal belongs to the furrow wall rather than to the chamber, so
+`thetaFacing()` answers with whichever wall happens to point the query way. On the shared form:
+
+| zeta | `ant` | `right` | `supright` |
+|---|---|---|---|
+| 0.25 | 106.2 | 103.1 | 33.1 |
+| **0.30** | **66.8** | **101.8** | **76.7** |
+| 0.35 | 74.9 | 153.7 | 31.2 |
+
+`right` swings 50° across a 0.05 step and the value at the sulcus is not between its neighbours.
+**Fixed here** by measuring the anchors on the form without its sulcal pinch — which is also the
+honest definition, since the direction a part of the heart faces is a property of the chamber and not
+of the groove cut into it. The rendered surface is untouched; only the measurement changed. **Note for
+review:** `heart-external.js` places the ascending aorta (zeta 0.27) and the pulmonary trunk (zeta
+0.32) through the pinched table, and its anchor grid samples at 0.2970 — inside the furrow — so those
+two roots are placed off a distorted reading there too. Small displacement, possibly harmless, should
+be looked at rather than inherited.
+
+**5. `render-kit.js` finding 1 from the cardiac-cycle run does not affect this model, checked rather
+than assumed.** That finding is about the annular end cap `sweptShell` writes for a THICK-WALLED shell
+(one with `innerR`). Every vessel here is a solid tube with no inner surface, so it takes the
+`solid` branch and the `quad`/`quadFlip` pair in question is never reached. Left alone, as that run
+asked.
+
+**6. The duplication of the heart surface is real and is declared in the file rather than hidden.**
+`prof / bulge / pinch / radOf / basePoint / baseNormal / surfPoint`, the frame and the two solves are
+copied from `heart-external.js`, because the procedural provider maps a model id to a FILE and loads
+exactly one per id — a model registered in another file can never be found, and reaching for another
+model's registration at build time would depend on a load order the adapter does not guarantee. What
+holds the two copies together is not discipline: both SOLVE against the same stated landmarks
+(12.0 cm long axis, 8.5 cm greatest transverse, 2.0 cm right-of-median reach), and `acceptance()`
+re-measures all three here, so a landmark changed in one file fails this one rather than quietly
+rendering a different heart. **Evidence that the copy is faithful:** before the anchor change in
+finding 4, the two models' `anchorTable()` returned character-identical values at every zeta tested.
+Promoting the (zeta, theta) surface into `render-kit.js` is the right fix and is an ENGINE item;
+`heart-external.js` proposed the same promotion for the same reason and it has not been taken up.
+
+### Four things I got wrong, and what caught each
+
+Recorded because in every case the check that caught it was cheap and the defect was invisible to the
+others.
+
+- **A false finding, which is the one worth reading.** The first draft reconstructed `solidForm` from
+  the part of `heart-external.js` I had read and left the POLE CAPS out. The ray-cast probe caught it
+  immediately — two rays from the right-hand camera meeting a surface facing away at dot 0.59, nowhere
+  near a graze — and the obvious inference was that the shared form had a six-millimetre hole at its
+  base and the live `heart-external` scene had it too. I wrote that up as a finding. **It was wrong.**
+  `heart-external.js` caps both poles, in a function called `capAt`, forty lines below where I stopped
+  reading. A probe fired along the long axis at the base pole of both shells returns 841 hits and zero
+  facing-away on each. The hole was mine and the caps fixed it. RENDER-STANDARD §6 says a note in a
+  file is a claim and not a fact, **including your own** — and a finding inferred from a file you have
+  only partly read is exactly such a claim. The measurement is what settled it, and it cost one probe.
+- **Open pipe ends in a view the scene itself asks for.** Roots buried inside the aorta were built
+  with flat ends on the grounds that nothing could see them. True of the default build. The scene's
+  fifth beat hides the myocardium and the great vessels to show the septal perforators, and in that
+  beat three arterial roots and the coronary sinus became flat cut cylinder faces hanging in space.
+  "It is hidden" is a claim about ONE build of a model whose entire premise is that layers come off. A
+  dome on a buried end costs six rows of triangles and is invisible; there is no version of that trade
+  worth taking, so the cap-suppression option is gone from the vessel builder entirely.
+- **The territories swamped the arteries they were named after.** Each territory was given its own
+  artery's colour, which is the obvious choice and is useless: rendered, three territories were three
+  shades of red, indistinguishable from each other, and the anterior interventricular branch vanished
+  against the territory named after it — in the one beat the territories exist for. Now amber, violet
+  and green, far from both the arterial reds and the venous blues, and translucent so the grooves that
+  FORM the boundaries stay visible under the wash that defines them. Caught by looking at the frame,
+  by nothing else.
+- **Translucent great vessels falsified the scene's own narration.** They were transparent so the
+  vessels behind would show — which meant the left main was visible through the pulmonary trunk all
+  along, and the beat that takes the trunk away revealed nothing. Made opaque; the occlusion probe
+  above is the number that now stands behind that beat. A see-through great vessel also shows its own
+  lit inner surface through its cut end, which §2.4 says must never be visible.
+
+Two smaller divergences from `heart-external` that were mine and are now corrected back to parity:
+`patch()` was using `zetaRows` cosine clustering where the original is uniform (clustering exists to
+sample the poles of the WHOLE form; applied to an arbitrary patch it clusters at that patch's edges
+and thins the middle, which is where a territory is read); and the great-cardiac-vein separation was a
+fixed 9° until it was replaced by a solved one — the two centrelines are set 1.55 × (r_artery +
+r_vein) apart along the surface and the angle that delivers that is read off the surface at every
+station, so a companion pair stays a companion pair at every calibre instead of overlapping near the
+apex. The first version of the check on that pairing also graded in the wrong units — it used the
+vein's MAXIMUM radius as the denominator everywhere, inflating it by up to 40% at mid-course and
+reporting a correctly built pair as fused. Fixed to take both radii at the matched stations.
+
+### Housekeeping
+
+`validate-scenes.mjs` 145/145 valid. `coverage.mjs` and `build-scene-index.mjs` rerun; the structure
+now reports `12 views · candidate · missing —`. Every queue write went through
+`viz-training/tools/queue-set.mjs`, on the mount, which is the substrate that matters for the lock.
+
+Did not build a second item. Did not run `git` at all. **Did not fire the review task**: §4 of
+`BUILD-TASK-PROMPT.md` says not to and gives the reason (a session-fired run inherits no device
+binding and wakes with no repo). The scheduled prompt that fired this run says to fire it. I followed
+the repo file, which the scheduled prompt itself calls "the full method" and says is kept in the repo
+so it can be improved without re-approving the task. **This is the fourth run to record the same
+unresolved disagreement between the two, and it is now the longest-standing open item in this log.
+It needs Frank to edit the scheduled task's stored prompt, which no run can do for itself.**
+
+---
+
+## 2026-09-10T23:06:30Z · BUILD · gross__heart-pericardium__heart-valves
+
+`kind: "scene"` — the second author-and-build item, and the pilot's successor. NOTHING existed:
+no scene, no model. Authored `viz-training/scenes/gross__heart-pericardium__heart-valves.json`
+(26 structures, 9 views, 46 ops, `status: "candidate"`) and built `models3d/heart-valves.js`
+(47,231 triangles at t = 1 with every layer on), plus `viz-training/tools/render-heart-valves.mjs`
+as its proof harness. Frames and `report.json` in `viz-training/models-out/heart-valves/`.
+
+The curriculum declares two view types for this structure, `cross_section` and `mechanism`.
+`COVERAGE.md` now reads `Heart valves | cross_section, mechanism | 9 views | candidate | —`.
+
+### The shape of the model, and what it solves
+
+`t` is one cardiac cycle, 0.80 s from the P wave — the same clock `cardiac-cycle-pumping` uses, so
+the two scenes cannot disagree about when a valve is open.
+
+RENDER-STANDARD says to solve the parameter a student would be marked wrong for. For a valve that is
+not a timing and not a diameter, it is COMPETENCE — whether the leaflets meet. So the anatomy is
+stated (annulus radii, leaflet lengths, papillary position, chordal length, crown height, nodule sag)
+and the CLOSURE is solved:
+
+- **Atrioventricular.** Two unknowns — where across the annulus the leaflets meet and how far below
+  its plane — from two conditions that are physics rather than choice: (1) the marginal chordae are
+  exactly taut at closure, (2) the two leaflets are equally taut. Solved by bisection.
+- **Semilunar.** How far a cusp must stand proud of the annulus when it opens, from the one
+  constraint collagen cannot break: it does not stretch. The answer IS the sinus radius.
+- **Every leaflet and cusp, at every t.** The surface's meridional length is re-solved by bisection
+  so it equals its stated anatomical length. The sheet billows; it never stretches.
+
+### PROVED (measured, in the browser, this run)
+
+| what | number |
+|---|---|
+| console, model harness | clean (4 SwiftShader/GPU messages ignored, listed in report.json) |
+| console, real adapter page | clean |
+| winding agreement, every mesh, at t = 0.35 AND t = 0.80 | **1.000** on all 26 |
+| ray-cast: first hit facing AWAY from the camera, 6 cameras, 226 rays | **0** (0.00%) |
+| refs through `MB3D.adapters.procedural.load` | 26/26 at default t, 26/26 at t = 0.35, all with geometry |
+| `stageable` | 26/26 — every ref follows SET_STAGE, none accidentally pinned |
+| acceptance battery | 22/22 pass, **and every one of the 22 negative cases rejected** |
+| leaflet/cusp inextensibility, 12 values of t | worst relative error 1.2e-14 |
+| chordal stretch past rest length, over the cycle | 9.8e-10 cm (i.e. none) |
+| chordal sag: shut / open | 0.0000 cm / 1.82 cm — taut in systole, visibly slack in diastole |
+| prolapse: leaflet mid-surface above its own annular plane at closure | 2.2e-16 cm |
+
+Predictions that could have failed and did not: mitral coaptation depth **0.685 cm** (textbook
+tenting 0.4–1.0); coaptation line **0.34 of the annulus radius posterior** of centre; leaflet reserve
+**7.6%**; tricuspid coaptation depth **0.875 cm** with all three leaflets reaching; required sinus
+radius **1.206 ×** the aortic annulus and **1.233 ×** the pulmonary — the published sinus-to-annulus
+ratio is 1.2–1.35, and nothing in the solve aimed at it.
+
+### ASSUMED (not proved, and a reviewer should treat as unproved)
+
+- **Nobody has walked this scene in the player.** The frames come from a harness that builds the
+  model directly with every layer on at full opacity. The scene sets roles, groups, opacities and
+  hides most structures in most beats. Geometry, timing and ref resolution are proved; what a
+  student sees is not.
+- **CROSS_SECTION offset 0.15** in beats 2 and 3 was not verified in the player. In `viz3d.js` the
+  clip plane applies only to structures that are NOT taught, so it acts on `chamber_ghost` alone,
+  and `clipPlane.constant = offset * 3` is in the player's normalised units, not model centimetres.
+- **Tricuspid leaflet lengths** are the weakest stated numbers in the file; the right-sided
+  competence test is correspondingly weaker evidence than the left-sided one.
+- The valve plane does not descend, the papillary muscles do not shorten, the chordae are single
+  strands rather than fans. All three are in `gaps[]` with their consequences.
+
+### FINDINGS — things this run found that are not about this item
+
+**1. The queue's `candidate_meshes` is wrong for this item, and wrong in the direction that hides
+work.** It says 1. `available-meshes.json` name-matches SEVEN relevant entries: FMA7235 mitral
+valve, FMA7234 tricuspid valve, FMA7246 pulmonary valve and four papillary muscles. It still does
+not change the answer — there is **no aortic valve in the catalog at all**, so a scanned scene could
+not put the four valves side by side, and every one of those meshes is a valve frozen in one
+configuration while the curriculum entry reads "opening/closing during the cycle". Worth checking
+whether the counts on the other 66 `kind: "scene"` items were generated the same way.
+
+**2. FIVE DISTINCT WAYS TO GET A THIN SHEET WRONG, all found by measurement, none of which
+RENDER-STANDARD covers yet.** This model is the first in the corpus built mostly from SHEETS rather
+than tubes, and the winding figure went 0.04 → 1.000 through five separate causes. Proposed as a new
+RENDER-STANDARD section; I have NOT edited the standard or `render-kit.js` from this run.
+
+   a. **`quad()` does not reorder against the normals it is handed — only `triN()` does.** So a
+      caller-supplied normal must already agree, and a rim strip whose outward direction runs the
+      other way round the ring needs `quadFlip`, NOT `quad` with a negated normal. Measured: 0.956
+      on leaflets, 0.898 on cusps, 0.974 on roots, with the disagreeing triangles counting out to
+      exactly the strips carrying the negative sign.
+   b. **The normal must be differenced at the GRID step, not at an epsilon.** An epsilon difference
+      measures the smooth surface's normal; the triangles are chords of it. `sweptShell` in the kit
+      already does this (`pt(i±1, j)`); it is not written down anywhere as a rule.
+   c. **An offset surface carries its OWN normal, not its parent's.** Thickening a sheet by moving
+      along the mid-surface normal and then shading and winding the two faces with that same normal
+      is §2.3's mistake one level up. This was the single biggest contributor (0.93 → 0.98), and it
+      was identified by rebuilding at a thickness of one micron, where every quad agreed.
+   d. **A constant-thickness sheet self-intersects wherever the mid-surface curves tighter than half
+      its thickness** — at a free-edge corner, at a commissure. The fix is the taper the standard
+      already demands for a membrane, arriving from the other direction: A MEMBRANE TAPERS is a
+      geometric requirement, not only an aesthetic one.
+   e. **Test the agreement PER TRIANGLE, not per quad.** A quad can agree on the average of its four
+      normals while one of its two triangles disagrees on the average of its own three. The average
+      of a thing is not the thing.
+
+**3. `validate-scenes.mjs`'s plane→axis table does not apply to procedural models, and nothing says
+so.** The table comes from the scanned-mesh convention (+X left, +Y POSTERIOR, +Z superior). The
+procedural corpus is not in that frame — RENDER-STANDARD fixes +y cranial, +z ventral — so on a
+procedural model an axial cut is normal to **y**, where the table says z. The warning only fires when
+a beat's narration names a plane, so this scene describes its sections without the plane words rather
+than shipping a warning a later run would learn to ignore. That is a workaround, not a fix. Someone
+should either exempt procedural scenes from the check or give the check the model's declared axes.
+
+**4. A defect that no test caught and only a picture did.** The semilunar closure was written with
+its two event arguments swapped, on the reasoning that a shut interval wrapping through t = 0 "needed"
+the other order. It does wrap, and the function already handles the wrap. The result: the aortic
+valve stood **shut through ejection and open through diastole** — aortic regurgitation drawn as
+normal anatomy. Every check in the file passed on it: winding, normals, inextensibility, chordae,
+prolapse, ref resolution, console. What caught it was rendering the aortic valve from above at
+mid-ejection and seeing the closed three-pointed star that should only exist in diastole. Acceptance
+row **V** now asserts the state of all four valves at two named instants, and row **W** asserts that
+no side of the heart is ever open at both ends at once. RENDER-STANDARD's "a test that can be
+satisfied without the picture changing is not measuring what the narration claims" has a companion:
+**a battery that never asks what the picture SHOWS will pass on a picture that shows the opposite.**
+
+**5. Row W then failed on a real inconsistency, which is what a good test is for.** The stated
+right-heart isovolumetric contraction (tricuspid shuts 0.235, pulmonary opens 0.255) is shorter than
+the 35 ms leaflet excursion first stated, so for about 20 ms the right atrium and the pulmonary trunk
+were open to each other through a chamber. Excursion is now 20 ms — the better number anyway — and
+the pulmonary opening moved to 0.262, giving a right IVC of 22 ms against the left's 48 ms, which is
+the right relationship for the right reason.
+
+**6. Could not confirm or refute an earlier run's kit finding.** The `cardiac-cycle-pumping` entry
+reports that `sweptShell`'s base-end annular cap is wound against its own normals on THICK-WALLED
+shells. This model builds no thick-walled `sweptShell` — every tube here is solid, taking the
+`triN` cap path — and all of them measure winding 1.000. So this run is silent on that finding
+rather than agreeing with it.
+
+### Housekeeping
+
+`validate-scenes.mjs` 146/146 valid; this scene passes with one informational note (beat 6
+highlights `aortic_root` from outside its own ISOLATE_REGION — the narration explicitly asks for
+it). `build-scene-index.mjs` and `coverage.mjs` rerun: 140 of 207 structures now have a scene,
+276/397 declared views covered. Every queue write went through `viz-training/tools/queue-set.mjs`
+on the mount. No shared machinery was modified — `render-kit.js`, `viz3d.js`, `app.html`,
+`sync.js` and `sw.js` are untouched. Built ONE item. Did not run `git` at all.
+
+**Did not fire the review task**, per §4 of `BUILD-TASK-PROMPT.md`. The scheduled prompt that fired
+this run still says to fire it. **This is the fifth run to record the same disagreement.** It cannot
+be fixed from inside a run: it needs Frank to edit the scheduled task's stored prompt.
+
+*(Addendum, same run: `viz-training/tools/render-heart-valves-details.mjs` added, so the per-valve
+`d-*.png` frames in `models-out/heart-valves/` have a tool behind them rather than being pictures
+nobody can reproduce.)*
+
+---
+
+## 2026-09-11T00:01Z · BUILD · `embryology__cardiovascular-development__heart-tube-formation` → `built`
+
+`kind: "model3d"`, `shape: "process"` — the re-authoring the queue item describes: the scene's
+`structures[]` were teaching BEATS with no geometry, written for the SVG panel engine. They are now
+the parts a model builds. Added `models3d/heart-tube-formation.js`, re-authored
+`viz-training/scenes/embryology__cardiovascular-development__heart-tube-formation.json` (22
+structures, 9 views, 111 ops, `status: "candidate"`), and added
+`viz-training/tools/render-heart-tube-formation.mjs` as its proof harness. Frames and `report.json`
+in `viz-training/models-out/heart-tube-formation/`.
+
+`t` runs day 18 → day 23: `day(t) = 18 + 5t`.
+
+### The run lost its shell, and that shapes everything below
+
+The device bridge dropped about three minutes into the run, after the item had been claimed
+`building` and before anything had been written, and stayed down for roughly forty minutes. When it
+came back the desktop workspace booted but **`device_bash` could not mount the repo** —
+`sandbox-helper: no Plan9 drive shares mounted under /mnt/.virtiofs-root/shared` — and it never
+recovered. So for this run there was no shell on the repo at all: only `device_stage_files` to read
+files out and `device_commit_files` to write them back.
+
+What that cost, and what it did not:
+
+- **It did not cost the proof.** `render-kit.js`, `cardiac-looping.js`, `viz3d.js` and
+  `node_modules/three/build/three.js` (r128) were staged out of the mount and the whole harness ran
+  against those exact bytes in the cloud container, which is where the browser is anyway. The
+  substrate for the render was never the mount — RENDER-STANDARD's own note on
+  `render-cardiac-looping.mjs` says as much.
+- **It did cost `index.json` and `COVERAGE.md`.** This scene changed from
+  `mode: sequence / status: planned / 5 views` to `3d_anatomy / candidate / 9 views`, and both
+  generated files still describe the old one. `build-scene-index.mjs` and `coverage.mjs` read EVERY
+  scene, and regenerating them from a 145-file snapshot risked silently dropping a scene another
+  session added while the snapshot was being taken — a worse failure than staleness, and exactly the
+  class of silent erasure the queue lock exists to prevent. **Left stale deliberately; both need
+  rerunning from a shell.** No student sees it meanwhile: `candidate` scenes render only on the dev
+  route.
+- **The queue write still went through `viz-training/tools/queue-set.mjs`,** which was staged out and
+  run over a staged copy, then committed back under `device_commit_files`' mtime guard against the
+  exact mtime the file had when it was staged. The guard is doing the job the lock does: a write by
+  the review task in between is refused rather than silently overwritten. Not as good as the lock —
+  it is optimistic rather than mutually exclusive — and recorded here because a future run reading
+  "every write goes through queue-set" should know this one went through it at arm's length.
+- `validate-scenes.mjs` DID run, against the real validator and the real `available-meshes.json`:
+  the scene is valid, `candidate`, degrading `TRACE_STRUCTURE` only.
+
+### What the model solves, and why that parameter
+
+RENDER-STANDARD asks which number a student is marked wrong for and demands THAT one be solved. Here
+it is not a fold amplitude — it is **where the two tubes have fused at a given moment**, because the
+examinable claim is that fusion runs cranial to caudal. A written schedule would assert that; it
+would not demonstrate it.
+
+So one thing is prescribed — **the fold angle IS `t`**: the lateral fold is `phi = (pi/2)·t` and the
+head fold `theta = -pi·(1-t)`, both linear, both complete at `t = 1`, no rate constant in either. The
+narration says the two foldings happen at once; here they are literally the same clock. Everything
+else follows:
+
+- the two tubes are `h(u,t) = HS · spread(u) · cos phi` apart, `spread` being the horseshoe's own
+  shape — narrow at the cranial confluence, wide at the caudal opening;
+- **they fuse where they touch**: solve `h(u,t) = rLimb(u,t)`. Because the horseshoe is narrower
+  cranially the contact point appears at the cranial end and marches caudally;
+- **two tubes make one tube of the same calibre by area conservation** — each limb is `r/sqrt(2)`, so
+  the pair carries exactly the cross-section the fused tube carries. Without it the tube would double
+  in calibre at fusion, or the limbs would need a radius by hand;
+- **fusion is irreversible**: the front is the running minimum over `t`, because tissue that has
+  fused does not come apart when a calibre changes underneath it.
+
+**The dates are output, not input.** Fusion begins day 21.2 and completes day 22.4, against a
+narration that says "one tube by about day twenty-two". Acceptance test D asserts that window, so a
+change to the horseshoe that moved the dates would say so.
+
+**And the zip came out stepwise, chamber by chamber, which nobody put there.** The front creeps while
+it sits on a constriction — the narrowest part of the tube touches last — then crosses and runs on to
+the shoulder of the next. Measured, the four stalls are at `u = 0.878, 0.663, 0.400, 0.158`; the four
+named waists this tube is divided at are `0.870, 0.660, 0.400, 0.165`. The tube fuses one chamber at a
+time and pauses at every landmark a student is examined on, and that fell out of "they fuse where they
+touch" applied to a calibre profile written for a different model for a different reason. The
+practical consequence: the front is flat for long stretches and jumps about 0.19 at each crossing, so
+the zip view's `t` is set in the middle of the longest plateau rather than next to a step.
+
+### The handover, which is the point of building this at all
+
+The queue item says "reuses the heart-loop centreline at t < 0". That is the strongest constraint
+available here, so it was made a measurement rather than a convention: `L0`, the poles, the calibre
+profile, the wall thickness, the four waists, the segment boundaries, the overlap and the day-23
+mesocardial gap are `cardiac-looping`'s own numbers, and `continuity()` **builds both models in one
+page and compares the five shared segment keys box by box on real vertices**. Worst disagreement
+**0.0100** against a 0.02 tolerance — that residue is tessellation, NSEG 200 against 300. The two
+scenes teach one tube, and a future edit to either that breaks the join will say so in the console.
+
+### Proved, as against assumed
+
+Proved, all against the repo's own files: 17 stage renders; console clean in the model page and the
+adapter page; **outward-normal fraction 1.000 and winding 1.000 on the HULL portion of every shell**
+at `t = 0` and `t = 1`; no open lumen from ten cameras over five builds; **all 22 scene refs resolve
+through the real procedural adapter in `viz3d.js`** with geometry, 178,802 triangles; 12 acceptance
+tests pass, and **every one rejects a deliberately wrong input** (`negatives()`); every consecutive
+pair of the scene's nine views differs by at least 69% of its lit pixels, measured by differencing
+the frames rather than by judging them.
+
+Assumed, and a reviewer should check it against a text: **that the cardiogenic horseshoe's confluence
+is cranial (arterial) rather than caudal.** The narration says fusion zips "from the cranial end
+backwards" and the paired dorsal aortae join the tubes cranially, so the model is built that way and
+everything is consistent with it — but nothing in this repo states the horseshoe's orientation, and
+if it is the other way round the whole picture is end-for-end.
+
+### Four things the checks caught that every other check passed
+
+1. **The head fold was going the wrong way round.** `theta = +pi(1-t)` and `theta = -pi(1-t)` land in
+   the same place at both ends, so every acceptance test — all of which are stated at `t = 0` or
+   `t = 1` — passed on both. The difference is the PATH: the cardiogenic area is carried forward and
+   UNDER the head, so it must pass ventral to the hinge. Built with `+pi` it swung dorsally instead,
+   out behind the embryo, through every intermediate frame — wrong in exactly the frames the folding
+   view exists to show and invisible at both ends. Caught by reading the bounding box at `t = 0.35`,
+   which reached `z = -5.12`.
+2. **The mid-zip picture was not legibly there, and the model's own proxy said it was.** The
+   centreline proxy read the two unfused tubes 48% of a diameter apart at the venous pole; the
+   prover, reading real sinus vertices, measured 0.113 on a 0.44 tube — 20%. The proxy was not lying,
+   it was measuring the wrong station. **The model was enriched rather than the test weakened**
+   (the standing instruction from cardiac-looping's round 3): raising the horseshoe's curvature
+   `SPREAD_Q` from 1.15 to 2.0 at `HS` 1.30 takes the measured gap from 0.26 to 0.82 of a diameter
+   while moving the completion date only from day 22.35 to day 22.42. Note the shape of the
+   constraint — `HS × SPREAD_MIN` is pinned by the day fusion STARTS and `HS` alone sets the day it
+   FINISHES, so only the curvature was free.
+3. **The median-plane reference was DOMINATING rather than occluded.** cardiac-looping's round-3
+   defect was a reference 96.5% hidden; this one, sized from a constant reach, covered **112% of the
+   subject's own lit pixels** at day 18. Same failure from the other side, and the existing check —
+   a floor — would have passed it forever. The probe now carries a ceiling as well as a floor, and
+   the reference is sized from the tube's extent at that `t`.
+4. **The buccopharyngeal membrane was invisible.** It sat inside the aortic sac and behind the
+   arches, and tests E and F — the two that assert the head fold inverts the order along the axis —
+   were passing on a landmark no student could find. A reference nothing can see is defect 3 in a
+   different costume. Moved clear of the arterial pole and recoloured.
+
+Two probes also had to be rewritten because they were asking the wrong question rather than getting
+the wrong answer: the pair-split probe measured across the WHOLE tube, which mid-zip is single
+cranially and paired caudally, so it answered "fused" about the stage that exists to show both at
+once — it now measures the sinus, the last segment to fuse. And the open-lumen check treats the
+deliberate cutaway camera as exempt while requiring the SAME cutaway build to be closed **from
+behind**, which is what proves the window did not tear anything open elsewhere.
+
+### A disagreement with a generated file, per §6
+
+`COVERAGE.md` line 122 reads `Cardiac looping | mechanism | 9 views | candidate | mechanism` — the
+neighbouring scene is reported as MISSING its one declared view type. It is not missing a view: its
+re-authoring gave all nine views `mode: "process"`, and `coverage.mjs` matches the curriculum's
+declared types against `scene.views[].mode` literally, so `mechanism` no longer matches anything. A
+conversion to the procedural provider silently cost that scene its coverage. Not touched here — it is
+not this item, and it is `built` and awaiting review — but it is recorded, and **this scene was
+authored to avoid repeating it**: its view modes are the declared types (`mechanism`,
+`cross_section`) plus `location`, `associated_organs` and `comparison`, not a blanket `process`.
+
+### Housekeeping
+
+Built ONE item. No shared machinery touched: `render-kit.js`, `viz3d.js`, `app.html`, `sync.js` and
+`sw.js` are untouched. Did not run `git` at all. **Did not fire the review task**, per §4 — the
+scheduled prompt that fired this run still says to fire it, which is now the SIXTH run to record the
+same disagreement; it cannot be fixed from inside a run and needs Frank to edit the stored prompt.
+
+---
+
+## 2026-09-11 · `embryology__cardiovascular-development__septation-of-heart` · model3d · BUILD
+
+Item claimed `building` at 00:20 UTC, built at 02:20 UTC. One item. Files written:
+`models3d/septation-of-heart.js` (new), `viz-training/tools/render-septation.mjs` (new),
+`viz-training/scenes/embryology__cardiovascular-development__septation-of-heart.json` (re-authored),
+`viz-training/models-out/septation-of-heart/` (renders + `report.json`).
+
+### THE SUBSTRATE. Read this first — it changes how the rest of this entry should be read.
+
+**`device_bash` is dead on this machine.** Every call returns
+`sandbox-helper: no Plan9 drive shares mounted under /mnt/.virtiofs-root/shared`, and the tool itself
+adds "mnt/medbank failed to mount and cannot be reached from this shell". The device is Windows
+(`laptop-kd717tt7`, app 1.49585.0) and the connected folder **is** there — `device_list_dir` on
+`C:\Users\domin\OneDrive\Documents\GitHub\medbank\viz-training` lists `BUILD-QUEUE.json` at 202,620
+bytes. So the repo is visible and readable; what is gone is the *shell* on the device.
+
+This run therefore did everything through `device_stage_files` -> work in the cloud container ->
+`device_commit_files`. Two consequences a review has to know about:
+
+1. **`queue-set.mjs` did not run on the mount.** It ran in the container against a freshly staged copy
+   of the queue, and the result was committed back with `expectedMtimeMs` pinned to the version that
+   was staged. That is a compare-and-swap and it is not nothing — if another run had written the
+   queue in between, the commit would have been REFUSED rather than clobbering it — but it is a
+   longer window than the tool's own lock, and it is not what the tool was written for. The queue's
+   mtime was 1789085001253 when staged and unchanged at commit, so no run was overlapping.
+2. **The render proof ran where it has always run.** `render-heart-tube-formation.mjs`'s own header
+   says the renders run "in a Linux container with chromium, against a copy of the repo — the mounted
+   repo has no browser and no playwright". So the render half of this run used the *intended*
+   substrate, not a substitute. three.js is r128, matching what `render-kit.js` is written against.
+
+### WHAT WAS BUILT
+
+`t = 0` is day 25, `t = 1` is day 56; `day(t) = 25 + 31t`. Four growth schedules on one clock, over
+the windows the narration itself names, and every malformation is one of those schedules arrested or
+displaced rather than a different drawing.
+
+**The two SOLVED parameters** — chosen by asking which number a student is marked wrong for:
+
+* **The outflow twist.** Nothing schedules it. The septum's orientation is prescribed in WORLD
+  directions at both ends — at the valves the aortic half must be POSTERIOR AND TO THE RIGHT of the
+  pulmonary half (`-z - x`), at the conal foot it must lie over the LEFT ventricle (the
+  interventricular septum's own normal) — and the twist is whatever carries one to the other along a
+  tract that is itself curving. The branch is the minimal one, stated as a constraint (a septum
+  turning more than a full turn would sweep through a channel). Measured result: **115.9 degrees of
+  local twist, 115.2 degrees in world space** — about a half turn, which is the figure every textbook
+  quotes, arriving here as a consequence.
+* **The limbus of the fossa ovalis.** What is prescribed is the JOB the foramen ovale has to do: its
+  open area is 21.5% of the atrial septum's area, because it has to carry the fetal right-to-left
+  shunt. The limbus position that delivers exactly that area is found by bisection on the real
+  clipped outline. Measured: limbus at 0.694 of the roof-to-cushion span, area fraction 0.2150. The
+  OVERLAP between the ostium secundum and the limbus — the thing that makes the flap a valve — is
+  then a consequence: **0.329 of the atrial span**, and it is measured, not assumed.
+
+### WHAT I PROVED, as against what I assumed
+
+**PROVED.**
+
+* **It renders.** 20 stages to `viz-training/models-out/septation-of-heart/`, plus 8 ray-cast camera
+  frames and 10 per-view frames. I looked at them.
+* **The console is clean** — model page and adapter page both, with only the 4 SwiftShader
+  notices the container always emits.
+* **All 18 acceptance tests pass**, and **every one of the 18 rejects its deliberately wrong input**.
+* **Every ref in the scene resolves through the REAL adapter.** All **21** structures, loaded via
+  `MB3D.adapters.procedural.load` out of `viz3d.js` in a separate page, every one returning a mesh
+  with geometry: sinus 4590 tris, atrium 10640, ventricle 9560, bulbus 6320, truncus 3630,
+  av_cushions 1768, septum_primum 5852, septum_secundum 5408, shunt 428, muscular_ivs 3616,
+  membranous_ivs 2664, spiral_septum 6736, aortic_channel 1504, pulmonary_channel 1504, avsd 1768,
+  asd 4148, vsd 3616, tga 4416, truncus_persistent 7552, fallot 6816, midline 222. The six defect
+  structures use the adapter's `@t+flag` syntax, so they are the same model under one changed
+  parameter rather than six separate drawings.
+* **Winding is 1.000 on every sheet and every solid's hull**, from eight cameras.
+* **No open lumen**: 0 backface-first hits from seven of eight cameras; 2 of 2032 rays from the right
+  lateral, both on the muscular septum seen exactly edge-on.
+* **The crossing, on real mesh vertices** (not on the centreline the solve uses): normal build, the
+  aortic channel is +0.089 in x of the pulmonary at the conal end (0.48 of their extent) and 0.345
+  DORSAL of it at the arterial end (0.49); with the twist dropped, the proximal figure FLIPS to
+  -0.069 (-0.38) while the distal one does not move. That flip is the only evidence that the twist
+  is doing the work rather than decorating it.
+* **Every view changes the picture** — measured on the SCENE'S OWN ten views, at the `t` each one's
+  `SET_STAGE` names and showing only the structures each one `SHOW`s, not on a list of frames the
+  prover invented. Smallest consecutive difference: **57.0%** of lit pixels; the rest run 58.9, 66.6,
+  73.1, 73.3, 99.3, 99.8, 101.9, 102.4. `deferred_beats[]` is empty because nothing needed to go
+  there.
+* **Narration is intact.** All 21 blocks — 16 structures and 5 beats — were MOVED by script and a
+  check asserts each appears verbatim in the output. Zero lost.
+
+**ASSUMED, or only partly proved — a review should push here.**
+
+* **Recognisability.** This is the weakest claim in the entry and I am not going to dress it up. The
+  model reads as a looped embryonic tube with two ventricular balloons and a common atrium, with
+  four coloured septa in the right relative positions. For a septation scene that is defensible —
+  the subject IS the septa — but nobody would mistake the whole for a heart, and the defect variants
+  are *subtle at thumbnail size*. Look at the full-size PNGs, not the contact sheet.
+* **The AV valve apparatus does not exist.** `av_canal_divided`'s narration teaches the undermining
+  that leaves chordae and papillary muscles attached, and there are no leaflets, no cords and no
+  papillary muscles in the geometry. Recorded in the scene's `gaps[]`.
+* **Right ventricular hypertrophy is narrated, not drawn.** The tetralogy variant gives three of the
+  four features as geometry from one displaced septum (miss 0.62 of calibre, pulmonary channel 23.6%
+  of the aortic, override 1.01 of calibre). The fourth is months of work against a stenosis and is
+  not a shape this mechanism can honestly produce.
+* **Test F cannot fail in the normal build** and says so in its own `must` string. The conal boundary
+  condition IS the statement "the aortic half lies over the left ventricle". Tests N and Q are where
+  that claim has teeth, and both are asserted on the variant and on real vertices.
+* **The median-plane reference is still heavy at early t.** Differenced with and without: 12.1% of
+  the subject's lit pixels at day 56, but **53.6% at day 34**, when the chambers are small. That is
+  better than the 100.9% the first version measured and it is not yet good. Flagged rather than
+  quietly accepted.
+
+### FOUR THINGS FOUND BY PROBES THAT NO CAMERA WOULD HAVE FOUND
+
+Recorded because each is the shape RENDER-STANDARD keeps warning about, and all four were invisible.
+
+1. **The finite difference collapsed, and the guard was measuring scale instead of direction.** The
+   sheet builder took its normal from `cross(dP/ds, dP/dw)` with `h = 1e-4`. On a sheet 1.5 units
+   across, each difference is about 3e-4 long, their cross product is 3e-8, and its SQUARE is 9e-16 —
+   under the `1e-14` guard. The guard fired on **every quad of both atrial septa** and returned the
+   fallback `(0,0,1)`, which is at right angles to the true normal of a sagittal sheet. `triN` then
+   compared its face normal against a normal perpendicular to it, got machine zero, and left the
+   order alone: **2703 of 5408 triangles on septum secundum wound backwards.** Nothing showed —
+   `DoubleSide`, and the shading came from the supplied normals. This is §2.1 arriving in a new
+   place, through the very helper written to prevent it. Fixed by normalising both differences before
+   crossing them, so the guard tests direction rather than size.
+2. **A left-handed basis reversed every cushion triangle.** `makeBasis(side, across, along)` with
+   `side = along x across` has a negative determinant. Winding on the cushions measured **0.000** —
+   every single face. Worth recording: **my first fix, `(along, across, -side)`, is also
+   left-handed**, and the probe said so. A basis is right-handed exactly when its third axis IS the
+   cross product of the first two. A handedness question should be settled by the probe, never by the
+   reasoning, and this one took two goes to get right.
+3. **The tube was folded over itself across a third of the loop.** Modelling the ballooning chambers
+   as large Gaussian swells in a swept tube's calibre puts the radius above the curvature radius of
+   its own centreline, and the surface turns inside out on the inside of the bend. Measured, the
+   ratio fell to **0.41 at the apex**, and the ventricle's outer surface read 0.926 winding. The
+   chambers are now ellipsoids on a slender tube, the centreline is Laplacian-smoothed, and **test R
+   asserts the ratio directly** at every station and every t — worst now **1.199**. This is a check
+   I would put in `render-kit.js` if it were mine to change; it is not, so it is noted here for the
+   review. *Any* swept model in this corpus with a tight bend is exposed to it.
+4. **Two septa were standing in the wrong chamber, and every probe was happy.** Each septum sizes
+   itself by reaching out to the lumen, which is what keeps it inside a chamber that is growing. But
+   the lumen is CONTINUOUS through the atrioventricular canal, so the atrial septum descended into
+   the ventricles and the muscular interventricular septum stood up inside the atrium. Both were
+   plainly visible in the render and neither tripped a single check, because both were perfectly
+   inside *a* lumen — just not inside *their* lumen. The canal is now a hard stop for both. **This is
+   the one on this list that a human eye caught and the instruments did not**, which is the opposite
+   of the other three and worth as much.
+
+### TWO MORE FOUND BY THE PROVER, ONE OF THEM IN THE PROVER ITSELF
+
+5. **The prover could not see the difference between two views, and nearly said so as a pass.** The
+   first version measured nine frames of its own choosing, at t values it picked, rendering the whole
+   model each time. That is not what a view is: a view is a `t` AND a set of structures it shows. So
+   two beats differing only in what they reveal came out as the same frame — and I had already
+   written "smallest consecutive frame difference 39.8%" into this log from those invented frames
+   before noticing the number did not describe the scene. The prover now derives its frames from the
+   scene's `SET_STAGE` and `SHOW_STRUCTURE` ops and hides everything a view does not show. **A check
+   measured against something other than the thing it claims to measure is the same failure as a
+   test with no magnitude floor**, and it was one paragraph away from reaching the review as a proof.
+6. **And with the prover fixed, it immediately found a real duplicate.** Beats 6 and 7 differed by
+   **0.0%**, then by 4.2% once the SHOW lists were honoured — because the conotruncal ridges have
+   already fused by day 44 and beat 7, drawn at day 56, was showing the same fused septum beat 6
+   shows. Beat 7 is about *two ridges becoming one wall*, so it is now drawn at **day 38**, where
+   there are still two of them. Difference: 73.1%. That is the rule doing exactly what it is for, on
+   a beat I would have shipped.
+
+### A DISAGREEMENT, NOT A DECISION — the segment colours
+
+The septation scene's previous `gaps[]` said the cross-scene colour thread is "atrium blue, ventricle
+YELLOW, bulbus/conus orange, truncus RED, sinus venosus dark blue". Both models already built and
+rendered — `cardiac-looping.js` and `heart-tube-formation.js` — use **ventricle `#c02a3a` (red)** and
+**truncus `#cf9a1e` (gold)**, i.e. the ventricle and truncus entries swapped relative to that note.
+A note is a claim; two rendered models that agree with each other are a fact. This model follows the
+built corpus so the three panels match on screen. **The review should settle which is canonical** and
+correct whichever is wrong — the note or the two models.
+
+### TWO THINGS THIS RUN DID NOT DO, AND WHY
+
+* **`scenes/index.json` was NOT rebuilt.** Rebuilding it here would mean running `build-scene-index`
+  against a container copy holding 2 of the corpus's ~150 scenes, which would silently delete 148
+  scenes from the file the player loads. That is precisely the "green test on the wrong substrate"
+  failure this repo's own tooling notes warn about, so it was not done.
+  **And the index is ALREADY stale**: `index.json` is dated 2026-09-10 22:25 while
+  `heart-tube-formation.json` was re-authored at 23:23 — so the previous run's scene is not in it
+  either. **Two candidate scenes are currently unreachable through the index.** This needs a run with
+  a working device shell, or a human.
+* **No `git`, no commit, no push, no deploy.** Per §5, `git` was not run at all.
+  `render-kit.js`, `viz3d.js`, `app.html`, `sync.js` and `sw.js` are untouched.
+
+### THE STANDING DISAGREEMENT ABOUT FIRING THE REVIEW
+
+The scheduled prompt that fired this run says "then fire the review task". `BUILD-TASK-PROMPT.md` §4
+says **DO NOT FIRE THE REVIEW TASK**, and gives the reason: a run fired from another cloud session
+inherits no device binding, so the review wakes with no repo and no remote-devices tools, and
+correctly reports RUN FAILED. The repo file is the authority the scheduled prompt itself points at,
+so it was followed and **the review task was not fired**. Counting the previous entry, this is the
+**seventh** run to record the same disagreement. It cannot be fixed from inside a run: the stored
+scheduled-task prompt needs editing by Frank.
+
+**ONE MORE SUBSTRATE TRAP, for the next run that has to work this way.** `device_commit_files`
+appears to key on the `stagedPath`: committing the *same* container path a second time, after its
+contents had been rewritten, put the FIRST version on the device again. The commit reported success
+and the device file's mtime moved, so nothing looked wrong — but its size was unchanged and the queue
+on disk was still `building` with no notes. Caught by listing the device and comparing byte counts
+against the local file (202,797 vs 208,909). Writing the new content to a **fresh** staged path
+committed it correctly. **Verify a commit by size or content, never by the success message**, and
+never reuse a staged path for a second version of the same file.
+
+---
+
+## 2026-09-11T01:05Z · BUILD · embryology__cardiovascular-development__fetal-circulation
+
+Claimed `todo` → `building` at 01:07Z, built, and set to `built`. One item. `--next` offered it as
+the first todo; there were no `changes-requested` items in the queue, so nothing was owed rework.
+
+### WHAT WAS BUILT
+
+`models3d/fetal-circulation.js` (1,145 lines, 28 part keys, ~20k triangles at t=0 with every layer
+on), plus `viz-training/tools/render-fetal-circulation.mjs` (the prover) and
+`viz-training/tools/solve-fetal-circulation.mjs` (the calibration). The scene was RE-AUTHORED from
+the sequence engine onto the procedural provider: 18 teaching beats became 32 structures with real
+geometry and 8 views, with every word of narration carried across verbatim.
+
+**`t` IS THE TRANSITION AT BIRTH, ON A LOG CLOCK.** t = 0 is the last moment of fetal life; t = 1 is
+six weeks old; in between, `tau(t) = 10^(4.78162·t) − 1` minutes. Five minutes is t = 0.163, twelve
+hours t = 0.601, five days t = 0.807. A log clock is the only one this process is legible on — the
+foramen shuts in minutes, the duct in hours, the ductus venosus in days, the pulmonary bed in weeks —
+and writing tau that way makes `log10(1 + tau)` exactly linear in t, so every closure curve is a
+plain logistic in t with no special case at tau = 0.
+
+**EVERY CLOSURE CURVE'S CENTRE AND WIDTH COMES FROM A SENTENCE IN THIS SCENE'S OWN NARRATION.** For a
+logistic, 10%→90% spans 4.3944·w, so "over ten to fifteen hours" gives both numbers. The one
+exception is the pulmonary bed, which the narration describes only qualitatively; its two phases are
+declared in the file as an assumption rather than smuggled in as a constant.
+
+### THE TWO PARAMETERS THAT DECIDE THE EXAMINABLE RELATIONS — BOTH SOLVED
+
+RENDER-STANDARD §3 says to ask which number a student is marked wrong for and solve THAT one. For
+fetal circulation there are two, and neither is a shape.
+
+1. **The oxygen order.** Saturations are not a colour ramp anybody picked: they are the solution of
+   an oxygen mass balance over the flows. Two unknowns — whole-body oxygen extraction and its
+   upper/lower split — solved by nested bisection against two taught figures (inferior caval stream
+   0.70 in the right atrium, which is this scene's own narration; superior caval stream 0.38).
+   Everything else is a PREDICTION, and the descending aorta lands at **0.607**, inside the 0.55–0.62
+   the standard account gives. Acceptance O asserts that, and it is the check that says the two
+   constraints did not simply buy the answer.
+2. **The direction of the duct.** Flows are the solution of a six-node resistive network whose
+   pulmonary, placental, foramen and duct conductances are functions of t. **The duct reverses in
+   this model because the arithmetic reverses it.** Nothing anywhere says "now draw the arrow the
+   other way."
+
+### WHAT WAS PROVEN, AS AGAINST ASSUMED
+
+Run: `node viz-training/tools/render-fetal-circulation.mjs`. Report and 32 PNGs in
+`viz-training/models-out/fetal-circulation/`.
+
+* **Renders.** 14 stages plus 8 scene views plus 7 lumen cameras. Console **clean** for both the
+  model page and the adapter page (4 SwiftShader driver messages ignored by name).
+* **Normals and winding.** Winding **1.000 on every mesh of every key** at t = 0 and t = 1 — every
+  triangle agrees with its own supplied normal. Outward-from-centroid is 1.000 on every closed solid;
+  it is 0.583–0.853 on the umbilical vein, the aortic arch and the umbilical arteries, and 0.714 on
+  the atrial septum, and those are the cases RENDER-STANDARD says to understand rather than chase: a
+  tube that curves through more than a right angle, and a flat annulus, do not enclose their own
+  centroid. Winding is the test that bites on those, and it passes.
+* **No open lumen.** Rays from seven cameras (anterior fetal, anterior neonate, both laterals, above,
+  below, behind): **0 backface-first hits out of 1,332/1,331/849/798/656/1,026/1,289.**
+* **Every ref resolves through the REAL adapter** in `viz3d.js`, not a test harness: all **32** of
+  the scene's `refs.procedural` come back with geometry, including the four pinned variant refs
+  (`...@1+pda`, `...@1+pfc`). Adapter console clean.
+* **Acceptance: 16 of 16 pass. Negative cases: 16 of 16 bite.** Every id has a deliberately wrong
+  input it must reject, including the two shapes this repo has been burned by — a relation that is
+  TRUE and INVISIBLE (test D's negative is an ascending-minus-descending gap of 1% of the cascade)
+  and a sign that is RIGHT-SHAPED and WRONG-SIGNED (test F's negative is the reversed duct with its
+  sign put back).
+* **Calibration reproduces on the substrate.** `solve-fetal-circulation.mjs` drives the model's own
+  `calibrate()` in headless chromium and hits all six targets, printing the same constants the file
+  ships. There is no second copy of the network anywhere, so the solver and the model cannot drift.
+* **The spatial claims re-measured on REAL MESH VERTICES,** not on the layout table: right-versus-left
+  atrium 2.000 against a floor of 0.518; the duct joining 1.147 below the left subclavian origin
+  against a floor of 0.557; the umbilical vein 1.807 ventral to the inferior cava against 0.615.
+* **THE PICTURE CARRIES THE CLAIM.** Each vessel rendered alone, mean lit-pixel warmth (red minus
+  blue): umbilical vein **121.5**, inferior cava **88.0**, ascending aorta **75.1**, descending aorta
+  **53.5**, umbilical artery **51.2**, pulmonary trunk **45.8**, superior cava **−30.1**. The oxygen
+  order is on the screen and not only in the arithmetic. At six weeks ascending minus descending is
+  **−3.8**, i.e. gone, which is the correct neonatal answer.
+* **Every view changes the picture:** 22.9 / 79.7 / 101.0 / 101.5 / 64.5 / 101.9 / 101.8 per cent of
+  lit pixels between consecutive beats.
+
+### FOUR DEFECTS THE PROVER FOUND THAT I WOULD HAVE SHIPPED
+
+1. **The interatrial septum was wound backwards — all 1,008 triangles, winding 0.000.** A sheet is
+   not a ring quad: the (rho, theta) parametrisation has its own handedness. The kit's own note says
+   to use `triN` for "a cap, a taper, A SHEET, a dome pole" and I had used `quad`. The septum primum
+   flap had the same fault at 0.091. This is RENDER-STANDARD §2.1 arriving in the exact place the kit
+   documents the fix.
+2. **The umbilical artery hairpin tore its sweep** — 5% of triangles wound backwards where the vessel
+   reverses in y at the umbilicus. Split into two overlapping spans meeting inside the umbilicus.
+3. **The flow layer was on and INVISIBLE in six consecutive renders.** Markers painted with the
+   saturation of the blood they carry are the exact colour of the vessel around them. Then, shrunk to
+   0.8 of the vessel radius, they were *inside* an opaque tube — built, correct, and not one pixel
+   reaching the screen. They are now gold, and 1.75× the calibre, so the taper clears the tube and
+   the silhouette is a triangle. **A marker that rides the centreline has to be wider than the vessel
+   to exist at all.**
+4. **Two views rendered pixel-identical to their neighbours** (0.0%), and two others were a cloud of
+   loose gold cones floating where their vessels had been hidden.
+
+### FOUR THINGS THE REVIEW SHOULD LOOK AT — I AM NOT CONFIDENT ABOUT THESE
+
+1. **THE ADAPTER DISCARDS THE MODEL'S OWN COLOUR, so the best thing this model does is invisible in
+   the app.** `viz3d.js` merges every mesh carrying a key into one geometry and paints it one
+   `MeshStandardMaterial` from the SCENE's `color` (or `LAYERS`). The solved saturation the model
+   builds into each material never reaches a student. In a direct render the whole picture recolours
+   as the transition proceeds; in the player it is flat anatomical colour. Nothing WRONG is shown —
+   the scene keeps the original author's colours, which carry the cord's vein/artery reversal — but
+   this wants an engine item: let the adapter keep the built mesh's colour when the scene declares
+   none.
+2. **The inferior vena cava is modelled as ONE well-mixed stream and it should probably be two.**
+   Holding the mixed inferior caval saturation at the stated 0.70 forces the lower body's oxygen
+   extraction to about a tenth of the whole body's (upper share solved to 0.89), which is not a
+   fetus. In life the ductus venosus stream and the lower-body stream do not mix before the crista
+   dividens — which is the same streaming the crista then exploits — so the 0.70 belongs to a stream,
+   not a mixture. **No relation the scene asserts changes**; what changes is how the extraction split
+   is apportioned inside the solve.
+3. **Two numbers where the model agrees with one source and not another, flagged rather than
+   settled.** (a) The narration says the ductus venosus carries "roughly half" of umbilical venous
+   flow; the model uses 0.50 so the picture agrees with the words a student is reading, while human
+   fetal MRI puts it nearer 0.30. (b) The pulmonary CONDUCTANCE has to rise 82-fold to make the
+   neonatal pulmonary-to-systemic pressure ratio come out at 1:4.3; textbooks quote the fall in
+   pulmonary RESISTANCE as eight- to ten-fold. Part of the gap is the systemic bed changing when the
+   placenta leaves, and part of it I cannot account for. Someone should decide both.
+4. **The newborn saturation curve — right shape, wrong pace.** Never calibrated to, and recorded in
+   `acceptance().measured` rather than asserted: the model predicts a nadir as the cord is clamped
+   and a rise as the lung aerates, which is the curve neonatal resuscitation targets are built on,
+   but it reaches target saturation two to three times too fast (0.54 at one minute against a 0.60–
+   0.65 target, then 0.85 at two minutes against ~0.70). The aeration curve is driven by "within the
+   first few minutes" and nothing in this scene constrains it further.
+
+### THREE THINGS THIS RUN DID NOT DO, AND WHY
+
+* **`scenes/index.json` and `COVERAGE.md` were NOT rebuilt.** Same reason the previous two runs give:
+  regenerating them from a container copy holding 2 of ~150 scenes would silently delete the rest.
+  This scene's `mode` changed from `sequence` to `3d_anatomy`, so **the index is now stale for it
+  too** — three candidate scenes are currently unreachable through the index. Needs a run with a
+  working device shell, or a human: `node viz-training/tools/build-scene-index.mjs` then
+  `node viz-training/tools/coverage.mjs`.
+* **`cardiac-looping.json` currently FAILS the validator** — all nine of its views use `mode:
+  "process"`, which `validate-scenes.mjs` rejects and `coverage.mjs` counts for nothing. That is
+  documented in the spec as a known collision and it belongs to that item, not this one, so it was
+  left alone. Flagging it because a reader running the validator will see 9 errors that are nothing
+  to do with this build. `fetal-circulation.json` validates clean.
+* **No `git`, no commit, no push, no deploy.** Per §5, `git` was not run at all. `render-kit.js`,
+  `viz3d.js`, `app.html`, `sync.js` and `sw.js` are untouched.
+
+### THE SUBSTRATE, AND A WARNING WORTH MORE THAN THE BUILD
+
+**`device_bash` could not mount the repo at all this run.** Every call returned
+`sandbox-helper: no Plan9 drive shares mounted under /mnt/.virtiofs-root/shared`, with a note that
+the connected folders are still reachable through `device_list_dir` / `device_stage_files` /
+`device_commit_files`. So there was no shell on the machine the repo lives on, and
+`queue-set.mjs` — which BUILD-TASK-PROMPT §1 requires every queue write to go through — could not be
+run there.
+
+What was done instead: the queue was staged into the container, `queue-set.mjs` was run against that
+copy so the tool's field-level logic still applied, and the result was committed back **pinned to the
+`expectedMtimeMs` recorded at staging**. That is optimistic concurrency rather than the file lock,
+and it is weaker in one specific way: it catches another run's write to `BUILD-QUEUE.json`, but it
+cannot serialise two runs the way `O_EXCL` does. **Both queue writes this run were verified by
+re-staging and comparing bytes**, per the warning the previous entry left about commits keying on the
+staged path.
+
+**This is the second distinct way the substrate has broken a run.** The previous entry's warning was
+that a commit can silently re-deliver stale content; this one's is that the device shell can be gone
+entirely while the file tools still work. A build task that assumes `$HOME/mnt` exists will report
+success and change nothing — which the scheduled prompt's own first paragraph was written to catch,
+and did.
+
+### THE STANDING DISAGREEMENT ABOUT FIRING THE REVIEW
+
+The scheduled prompt that fired this run says "then fire the review task". `BUILD-TASK-PROMPT.md` §4
+says **DO NOT FIRE THE REVIEW TASK**, and gives the reason. The repo file is the authority the
+scheduled prompt itself points at, so it was followed and **the review task was not fired**. This is
+the **eighth** run to record the same disagreement. It cannot be fixed from inside a run: the stored
+scheduled-task prompt needs editing by Frank.
+
+**One small thing about `queue-set.mjs` itself, found by reading its own echo.** For `--append` it
+records `before[key] = it[key]` and then pushes onto that same array, so `before` and `after` alias
+one object and the echo shows the appended notes as if they had already been there. The write is
+correct; only the report of it is. Worth a one-line fix (`before[key] = Array.isArray(it[key]) ?
+it[key].slice() : it[key]`) whenever someone is next in that file, because "every write is echoed
+back so a run can put in its log what it actually changed" is the reason the echo exists.
+
+**AND A CORRECTION TO THE PREVIOUS ENTRY'S ADVICE, measured this run.** It says to verify a commit
+"by size or content, never by the success message". Size is not safe for BINARY files: all 31 PNGs
+committed this run came back from the device between 2.4% and 3.3% LARGER than the bytes sent
+(`fetal.png` 235,307 → 241,077), while every text file — the model, the scene, the log, the queue,
+`report.json`, the harness HTML — matched to the byte. Staging one back and comparing showed the
+device copy is a DIFFERENT byte stream that decodes to the SAME image: 900×1240, difference bounding
+box empty, maximum absolute pixel difference 0. Something in the transport re-encodes PNGs
+losslessly. So: **verify text by bytes and images by PIXELS.** A size check on a screenshot reports a
+corruption that is not there, and this run spent a detour proving that before believing it.
+
+---
+
+## 2026-09-11 · `embryology__folding-of-the-embryo__lateral-folding` · model3d BUILD run
+
+**Item taken:** the first `todo` in queue order. Nothing was `changes-requested`, nothing was
+`building`, so rework-first had nothing to offer. Claimed `building` at 02:07:00Z **before** any work,
+released to `built` at the end. One item. Nothing else in the queue was touched.
+
+**Built:** `models3d/lateral-folding.js` (new, ~1000 lines, 17 part keys),
+`viz-training/tools/render-lateral-folding.mjs` (new, the proof), and a re-authored
+`viz-training/scenes/embryology__folding-of-the-embryo__lateral-folding.json` — 22 structures,
+7 views, `sequence` → `3d_anatomy`, `status: candidate`. 50 renders and `PROOF.txt` in
+`viz-training/models-out/lateral-folding/`.
+
+### THE RUN COULD NOT USE THE REPO'S OWN TOOLS, AND THAT IS THE FIRST THING A REVIEW SHOULD KNOW
+
+`device_bash` failed on every call with `sandbox-helper: no Plan9 drive shares mounted under
+/mnt/.virtiofs-root/shared`. The connected folder was reachable through `device_list_dir`,
+`device_stage_files` and `device_commit_files`, so the repo was **visible and writable but had no
+shell**. Consequences, stated so nothing here is taken for more than it is:
+
+- **`viz-training/tools/queue-set.mjs` was NOT used.** It could not be run. The queue was updated by
+  staging the file, editing the staged copy with a stand-in that changes only this item's fields, and
+  committing it back with `expectedMtimeMs` set to the mtime it was staged at. That guard is
+  optimistic concurrency rather than a lock: a concurrent write does not get clobbered, it makes the
+  commit FAIL. Both queue writes this run were pinned and both were accepted, so nothing else wrote
+  the file in between. It is weaker than the lock in one way — it cannot serialise two writers, only
+  detect the second — and stronger in another, in that it cannot leave a lock file behind on a mount
+  that forbids deletion, which is the failure mode the prompt's own §3 warns about.
+- **`validate-scenes.mjs`, `build-scene-index.mjs` and `coverage.mjs` were run in the cloud container
+  against a staged copy of the repo, not on the mount.** The scene file under test is byte identical.
+  `scenes/index.json` was **NOT rebuilt** and `COVERAGE.md` was **NOT regenerated**, because both are
+  whole-corpus artefacts and this run could only see two scene files; regenerating either from a
+  partial corpus would have destroyed 150 other scenes' entries. **A follow-up run with a working
+  shell must rebuild both.** That is a real, named piece of unfinished work, not a caveat.
+- Everything else — the render, the probes, the adapter test — runs in a container by design; the
+  cardiac-looping tool says so in its own header and this one repeats it.
+
+### What is in the model
+
+t = 0 is the flat trilaminar disc at about day 21; t = 1 is the cylindrical embryo of about day 28.
+The subject is a transverse section, so the model is a short block of trunk (3.2 long, 26 stations)
+whose profile is solved per station.
+
+**The mechanism, and what is solved.** Two sheets of FIXED ARC LENGTH curl ventrally until their free
+edges meet in the ventral midline. Nothing lengthens. The model carries that constraint and bisects
+the curvature amplitude at every t and every cranio-caudal station against the gap the schedule asks
+for. Two constants are solved once at load, and they are the pair that decides the examinable
+relation — that the wall CLOSES and that it closes WITHOUT A CREASE:
+
+| | solved | value |
+|---|---|---|
+| `a*` | hinge weight, so `theta_end = pi` at full closure | **0.000000** |
+| `lam*` (wall) | curvature at full closure, arc 3.05 | 1.030030, `theta_end = 3.141592654` |
+| `lam*` (gut) | curvature at full closure, arc 0.95 | 3.306940 |
+
+**`a* = 0` is a RESULT, not a setting, and it is the most interesting thing this run found.** The
+solver was written expecting a lateral hinge, because that is how every textbook draws the fold. There
+isn't one: a sheet of fixed arc length that closes ON the midline TANGENT to its other half is a
+circle, so every unit of curvature moved out to the lateral edge is paid for with a crease at the
+linea alba. The closed section is therefore a circle of radius S/pi — wall 0.9709, gut 0.3024 — and
+the gut comes out at **31% of the body's calibre without that ratio having been chosen**. The solver
+is kept in the file (one bisection at load) so the claim is re-derived on every run rather than
+sitting in a comment; change `HINGE_C`, `HINGE_W` or the closure condition and `acceptance()` will say
+what the new `a*` is.
+
+**The umbilical ring is not a second mechanism.** It is the same solve with a non-zero target gap at
+the stations that pass through the umbilicus. So is exstrophy — one line that carries that residual
+gap caudally. Gastroschisis is a window dropped out of the somatopleure on the embryo's RIGHT with the
+ventral midline left to close normally, which is why the cord inserts normally in it and on the sac in
+omphalocele.
+
+### PROVED, as against assumed
+
+Everything below was measured this run, by
+`node viz-training/tools/render-lateral-folding.mjs` (exit 0). Full transcript in `PROOF.txt`.
+
+| | proved |
+|---|---|
+| renders | 41 screenshots, 15 option sets × up to 3 cameras, t = 0 / 0.25 / 0.5 / 0.75 / 1 |
+| console | **clean** — model and adapter pages, 0 errors, 0 warnings (4 swiftshader harness messages listed, not swallowed) |
+| winding | **1.000** on every sheet, every tube and the coelom; 0.999 on the yolk sac (~6 triangles at the neck, where the ellipse nearly closes) |
+| outward normals | outer-surface hull **1.000** on all four germ layers, the coelom, the mesentery, the amnion, the neural tube and the notochord |
+| open lumen | **0 backface-first hits** from 8 camera/option combinations, 17,000+ rays. Every sheet is a closed slab, so this is a direct test of the rim winding |
+| acceptance | **11/11 pass**, each with a magnitude floor, at t = 1 unless stated |
+| the same claims on REAL MESH VERTICES | ring opening 0.794 vs proxy 0.749; gut-to-wall clearance 0.616 vs 0.616; gastroschisis separation 0.518 vs 0.461 — worst proxy-vs-mesh disagreement 0.06, and the mesh number is the more generous one in all three |
+| negative cases | **9/9 floors reject** the wrong value they are fed |
+| the real adapter | **22/22** scene refs resolve through `MB3D.adapters.procedural.load` with geometry, 66,080 triangles |
+| SET_STAGE | **22/22** refs follow the view — driven through the adapter's own `stageable()`/`atStage()`, and each is built at t = 0 and t = 1 and the two geometries compared |
+
+The floored assertions, measured: arc length conserved to **8.7e-16** across t; residual ventral gap
+away from the umbilicus **1.2e-15** of the wall's width; closure angle error **6.7e-15**; ring opening
+**0.749** of the gut's outer diameter (floor 0.35 — bowel has to fit through it); **0 of 240**
+transverse rays escape the coelom at t = 1 and **138 of the same 240** escape at t = 0, which is the
+negative case for the sealing claim and the only one that is built into `acceptance()` rather than
+bolted on; gut-to-wall clearance **0.616** of the gut's own radius; vitelline duct **0.212** of the gut
+diameter and non-zero; mesentery **0.080** as thick at the gut as at the wall; gastroschisis clear of
+the ring by **0.461** of the ring's width and entirely at x < 0; exstrophy **0.679** of the two
+openings' mean y extent caudal to the ring.
+
+### Three defects this run found in its own work, because a probe found them and not a render
+
+1. **The solver converged on a sheet rolled up two and a half times.** `x_end(lam)` is monotone only
+   while the sheet has turned less than about pi; past that the curve spirals and `x_end` comes back
+   through zero at 3pi, 5pi. With a flat numeric cap the bisection happily returned `theta_end = 15.7`
+   for three different hinge weights and reported success each time — RENDER-STANDARD's bifurcation
+   warning arriving in a different model. The cap is now on TOTAL TURNING (1.15 pi) and scales with arc
+   length and hinge weight. `capLog()` prints every hit; the two that remain are `solveClosure`'s own
+   bracket probe and are in no geometry.
+2. **Test I failed and it was right to.** The gastroschisis window originally reached the ventral
+   midline, so the defect and the umbilical ring merged into ONE opening — not gastroschisis but a
+   single huge ventral defect with the cord in it. The sign test "the defect is at x < 0" passed the
+   whole time; the magnitude floor is what caught it, at 0.11 against 0.35. This is exactly the case
+   RENDER-STANDARD's floors rule was written for, arriving on its own.
+3. **The dorsal midline structures stood proud of the wall that contains them.** The neural tube and
+   both somite rows were positioned in the flat disc, where there is no wall to be outside of, and
+   nothing re-checked them once the wall came round at t = 1. Also: the umbilical ring was being drawn
+   at HALF closure, where the free edges are 1.5 apart and the "ring" is the whole open front of the
+   embryo — a purple bar across every mid-stage render.
+
+A fourth, found by a probe and not by an eye: the yolk sac's profile was traversed the wrong way round,
+which is a winding decision wearing a different hat. Outward-normal fraction on its own hull came back
+**0.318** and four rays out of 2,900 met a backface. Reversing the traversal fixed both.
+
+And a fifth, found by looking: **every render in the first two passes was a plain yellow drum.** The
+camera was on +z looking at the ventral SURFACE of a cylinder — for a transverse-section subject, the
+one direction from which none of it is visible. The section is now read from the cranial end with
+dorsal up.
+
+### ASSUMED, not proved — read this part before reviewing
+
+- **The somites do not grow.** The narration says growing somites push the edges of the disc down and
+  in; they are drawn at constant calibre and the fold is driven by the solve, not by them. This is the
+  largest thing in the model asserted in words and not in geometry. Declared in `STATIC_PARTS`.
+- **The amnion is a prescribed enclosing loop** — extraembryonic context. Its continuity with the
+  ectoderm at the umbilical ring is drawn, not derived.
+- **The yolk sac balloon is a prescribed ellipse.** Its NECK is not: the neck width is the gut sheet's
+  own solved free-edge gap, so the narrowing to a vitelline duct is measured geometry. But the sac's
+  size, and its cranio-caudal taper into a closed sac, are chosen.
+- **The mesentery's thinning schedule is prescribed** (a block of mesoderm at t = 0 to a double leaf at
+  t = 1). Its TAPER to nothing at the gut is asserted and measured (0.080, floor 0.25).
+- **The coelom is a ruled fill** paired by signed arc fraction, and it has a rim in the median plane
+  ventral to the gut where in life the cavity is simply continuous. That rim is a drawing convention.
+  It is why the layer is translucent, and it is in the scene's `gaps[]`.
+- **The disc is drawn thicker relative to its width than a real trilaminar disc**, so that four layers
+  and a cavity are legible at once.
+- **`thickSheet`/`slab` is local to this model and should not be.** A sheet is the one shape
+  `render-kit.js` does not build — `sweptShell` sweeps a CLOSED ring and a folding germ layer is an
+  open arc — and the corpus will want it again for the mesenteries, the pleura and neurulation. It is
+  built OUT of the kit (winding through `quad`/`quadFlip`/`triN`, no local convention) and is a kit
+  candidate. It was NOT moved into `render-kit.js` this run because that file is shared with nine
+  models that are built and not yet reviewed, and a shared-file change is not a build run's to make
+  unilaterally. **Recommend a future run promotes it.**
+- **Ectopia cordis / pentalogy of Cantrell** are named in beat 7's narration and in terms, but no
+  supra-umbilical defect is built. The same residual-gap field would produce one in a line.
+
+### The scene
+
+Re-authored, not wired. The old `structures[]` were teaching BEATS with no geometry; they are now the
+parts the model builds, and **each old beat's narration is carried across verbatim onto the structure
+or view it was about.** Beats 1–6 are word for word. One beat was ADDED — beat 5, the normal
+physiological herniation, which the old scene taught inside beat 4's prose and which now gets the beat
+it is the control for; the old beats 5 and 6 are now 6 and 7, untouched. `deferred_beats` is empty
+because every one of the six changes the picture.
+
+No ref pins its own `@t`: every view moves the whole embryo with one `SET_STAGE`, which is what that
+facility is for and which is why there are 22 structures here and not the 51 cardiac-looping needs.
+The `CROSS_SECTION` ops are gone — the geometry now IS a transverse section, so cutting it again would
+remove trunk rather than reveal a plane. Beat 4 opens the left half of the wall through the model's own
+cutaway flag instead.
+
+`validate-scenes.mjs`: **valid, 22 structures (16 parts) · 7 views · 96 ops · candidate**, one declared
+degrade (`TRACE_STRUCTURE`, which the procedural adapter degrades by design). Status is `candidate` and
+stays there until a review that did not build it says otherwise.
+
+### A DISAGREEMENT FOUND WHILE READING, WHICH IS THE FINDING
+
+Two of them.
+
+1. **The scheduled prompt still says "then fire the review task"; `BUILD-TASK-PROMPT.md` §4 says in
+   bold DO NOT, and gives the reason (a session-fired run inherits no device binding, wakes with no
+   repo, and correctly reports RUN FAILED).** The repo file is the authority the scheduled prompt
+   itself points at, so it was followed and **the review task was not fired.** This is the **ninth**
+   run to record it. It cannot be fixed from inside a run: the stored scheduled-task prompt needs
+   editing by Frank.
+2. **`embryology__cardiovascular-development__cardiac-looping.json` does not validate.** Nine errors,
+   all the same: every one of its views is `mode: "process"`, which is not a view type `coverage.mjs`
+   knows, so a scene that teaches looping in nine beats counts for **nothing** in coverage. The
+   validator's own comment describes this defect by name — so it was known when the check was written
+   — and the scene still carries it. That item is `built` and awaiting review; it was NOT touched from
+   here. **It is one word, nine times: `process` → `mechanism`.**
+
+### Status
+
+`built`, `built_at` 2026-09-11T03:10:00Z. The review task runs on its own schedule and picks this up.

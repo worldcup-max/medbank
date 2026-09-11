@@ -1,0 +1,270 @@
+<!doctype html><meta charset=utf8>
+<link rel="icon" href="data:,">
+<body style="margin:0;background:#0e1626">
+<canvas id=c width=1000 height=1180></canvas>
+<script src="http://127.0.0.1:39873/node_modules/three/build/three.js"></script>
+<script src="http://127.0.0.1:39873/models3d/render-kit.js"></script>
+<script src="http://127.0.0.1:39873/models3d/cardiac-looping.js"></script>
+<script src="http://127.0.0.1:39873/models3d/heart-tube-formation.js"></script>
+<script>
+window.MEDBANK_CONFIG = { MODEL_BASE: 'http://127.0.0.1:39873/models3d/' };
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true });
+renderer.setSize(1000, 1180, false); renderer.setPixelRatio(1);
+VizKit.configureRenderer(renderer);
+const scene = new THREE.Scene();
+scene.background = VizKit.bg(0x0e1626);
+const L = VizKit.standardLights(scene);
+const camera = new THREE.PerspectiveCamera(32, 1000/1180, 0.1, 200);
+let group = null;
+const MOD = window.MB3D_MODELS['heart-tube-formation'];
+window.setStage = function (t, opts, yaw, pitch) {
+  if (group) scene.remove(group);
+  const holder = new THREE.Group();
+  holder.add(MOD.build(t, Object.assign({}, opts || {})));
+  group = holder;
+  group.rotation.y = yaw == null ? -0.26 : yaw;
+  group.rotation.x = pitch == null ? 0.04 : pitch;
+  group.updateMatrixWorld(true);
+  scene.add(group);
+  /* THE SUBJECT FILLS THE FRAME AT EVERY t. This model changes size by a factor of three between
+     day 18 and day 23 and swings through 180 degrees on the way, so a camera parked at one distance
+     would crop half the stages. */
+  const f = VizKit.fitCamera(camera, group, 1.04);
+  camera.position.set(f.centre.x, f.centre.y, f.centre.z + f.distance);
+  camera.lookAt(f.centre);
+  L.key.position.set(camera.position.x + 6, camera.position.y + 8, camera.position.z + 4);
+  renderer.render(scene, camera);
+  return true;
+};
+
+/* OUTWARD NORMALS + WINDING. Per mesh, against that mesh's own centroid, in world space. A closed
+   solid is strongly majority-outward on its HULL portion; the inner wall and the annular caps of a
+   thick shell point inward by construction, so the whole-buffer number on a three-coat tube lands
+   near 0.5 and says nothing. Both are reported, and so is the winding of every triangle against its
+   own supplied normal — the check that caught RENDER-STANDARD's cardinal bug. */
+window.normalProbe = function (t, opts) {
+  const g = MOD.build(t, Object.assign({}, opts || {}));
+  g.updateMatrixWorld(true);
+  const rows = [];
+  const nm = new THREE.Matrix3();
+  g.traverse(function (o) {
+    if (!o.isMesh || !o.geometry) return;
+    const u = o.userData || {};
+    if (u.outline) return;
+    const geo = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry;
+    const p = geo.attributes.position, n = geo.attributes.normal;
+    if (!n) return;
+    const hull = (o.geometry.userData && o.geometry.userData.hullCount) || 0;
+    nm.getNormalMatrix(o.matrixWorld);
+    const c = new THREE.Vector3(), v = new THREE.Vector3(), w = new THREE.Vector3();
+    for (let i = 0; i < p.count; i++) c.add(v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld));
+    c.divideScalar(p.count);
+    let out = 0, outHull = 0;
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld).sub(c);
+      w.fromBufferAttribute(n, i).applyMatrix3(nm).normalize();
+      if (v.dot(w) > 0) { out++; if (i < hull) outHull++; }
+    }
+    let agree = 0, tris = 0;
+    const a1 = new THREE.Vector3(), b1 = new THREE.Vector3(), c1 = new THREE.Vector3();
+    const e1 = new THREE.Vector3(), e2 = new THREE.Vector3(), fn = new THREE.Vector3(), vn = new THREE.Vector3();
+    for (let i = 0; i + 2 < p.count; i += 3) {
+      a1.fromBufferAttribute(p, i); b1.fromBufferAttribute(p, i+1); c1.fromBufferAttribute(p, i+2);
+      fn.copy(e1.subVectors(b1, a1).cross(e2.subVectors(c1, a1)));
+      if (fn.lengthSq() < 1e-16) continue;
+      fn.normalize(); vn.set(0,0,0);
+      for (let k = 0; k < 3; k++) vn.add(new THREE.Vector3().fromBufferAttribute(n, i+k));
+      if (vn.lengthSq() < 1e-16) continue;
+      vn.normalize(); tris++; if (fn.dot(vn) > 0) agree++;
+    }
+    /* WINDING ON THE HULL PORTION ALONE. The whole-buffer figure mixes the outer surface with the
+       inner wall and the annular caps, and RENDER-STANDARD's winding bug is specifically about the
+       surface a SILHOUETTE is inflated from — which render-kit records as hullCount. A shell can read
+       0.98 over its whole buffer and still be perfect where it matters, or the reverse. */
+    let hAgree = 0, hTris = 0;
+    for (let i = 0; i + 2 < hull; i += 3) {
+      a1.fromBufferAttribute(p, i); b1.fromBufferAttribute(p, i+1); c1.fromBufferAttribute(p, i+2);
+      fn.copy(e1.subVectors(b1, a1).cross(e2.subVectors(c1, a1)));
+      if (fn.lengthSq() < 1e-16) continue;
+      fn.normalize(); vn.set(0,0,0);
+      for (let k = 0; k < 3; k++) vn.add(new THREE.Vector3().fromBufferAttribute(n, i+k));
+      if (vn.lengthSq() < 1e-16) continue;
+      vn.normalize(); hTris++; if (fn.dot(vn) > 0) hAgree++;
+    }
+    rows.push({ key: u.key, verts: p.count, outward: out / p.count,
+                hullVerts: hull, outwardHull: hull ? outHull / hull : null,
+                tris: tris, winding: tris ? agree / tris : null,
+                hullTris: hTris, hullWinding: hTris ? hAgree / hTris : null });
+  });
+  return rows;
+};
+
+/* REAL MESH BOXES. acceptance() measures its floored relations off the centreline and the calibre
+   profile, which is cheap enough to assert on every build. This measures them on the ACTUAL
+   VERTICES, so the proxy is checked against the thing it stands for. It also measures the one claim
+   acceptance() deliberately refuses to make about itself — that the day-23 tube STRADDLES the median
+   plane — because on real vertices that claim is capable of being wrong. */
+window.boxProbe = function (t, opts) {
+  const g = MOD.build(t, Object.assign({}, opts || {}));
+  g.updateMatrixWorld(true);
+  const boxes = {};
+  const v = new THREE.Vector3();
+  g.traverse(function (o) {
+    if (!o.isMesh || !o.geometry || (o.userData && o.userData.outline)) return;
+    const k = o.userData && o.userData.key; if (!k) return;
+    const p = o.geometry.attributes.position; if (!p) return;
+    const bx = boxes[k] || (boxes[k] = { minx: 1e9, maxx: -1e9, miny: 1e9, maxy: -1e9, minz: 1e9, maxz: -1e9,
+                                         cx: 0, cy: 0, cz: 0, n: 0 });
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld);
+      if (v.x < bx.minx) bx.minx = v.x; if (v.x > bx.maxx) bx.maxx = v.x;
+      if (v.y < bx.miny) bx.miny = v.y; if (v.y > bx.maxy) bx.maxy = v.y;
+      if (v.z < bx.minz) bx.minz = v.z; if (v.z > bx.maxz) bx.maxz = v.z;
+      bx.cx += v.x; bx.cy += v.y; bx.cz += v.z; bx.n++;
+    }
+  });
+  for (const k in boxes) {
+    const b = boxes[k];
+    b.ex = b.maxx - b.minx; b.ey = b.maxy - b.miny; b.ez = b.maxz - b.minz;
+    b.cx /= b.n; b.cy /= b.n; b.cz /= b.n;
+  }
+  /* the whole myocardial tube, as one body */
+  const SEG = ['sinus','atrium','ventricle','bulbus','truncus'];
+  const tube = { minx: 1e9, maxx: -1e9, miny: 1e9, maxy: -1e9, cx: 0, n: 0 };
+  for (const k of SEG) { const b = boxes[k]; if (!b) continue;
+    tube.minx = Math.min(tube.minx, b.minx); tube.maxx = Math.max(tube.maxx, b.maxx);
+    tube.miny = Math.min(tube.miny, b.miny); tube.maxy = Math.max(tube.maxy, b.maxy);
+    tube.cx += b.cx * b.n; tube.n += b.n; }
+  tube.cx /= Math.max(1, tube.n); tube.ex = tube.maxx - tube.minx; tube.ey = tube.maxy - tube.miny;
+  const rel = {
+    straddleSide: Math.min(tube.maxx, -tube.minx) / tube.ex,   // >= 0.45 at day 23
+    straddleCentre: Math.abs(tube.cx) / tube.ex,               // <= 0.03 at day 23
+    tubeCy: (tube.miny + tube.maxy) / 2,
+  };
+  if (boxes.septum) rel.stMinusHeart = (boxes.septum.cy - (tube.miny + tube.maxy) / 2) /
+                                       (0.5 * (tube.ey + boxes.septum.ey));
+  if (boxes.membrane) rel.heartMinusBpm = ((tube.miny + tube.maxy) / 2 - boxes.membrane.cy) /
+                                          (0.5 * (tube.ey + boxes.membrane.ey));
+  return { boxes: boxes, tube: tube, rel: rel };
+};
+
+/* THE TWO TUBES ARE APART, MEASURED ON MESH VERTICES AND NOT ON THE CENTRELINE.
+
+   ON THE SINUS, not on the whole tube, and that is the point rather than a convenience. Mid-zip the
+   tube is single cranially and paired caudally IN THE SAME FRAME, so a split test over all five
+   segments answers "no" — the cranial half straddles x = 0 — and says nothing about the caudal half.
+   The first version of this probe did exactly that and reported the mid-zip stage as fused. The sinus
+   venosus is the most caudal segment and therefore the last to fuse, so it is where the question
+   "have they met yet" is actually being asked. */
+window.pairProbe = function (t, opts) {
+  const g = MOD.build(t, Object.assign({}, opts || {}));
+  g.updateMatrixWorld(true);
+  const SEG = { sinus:1 };
+  let lMin = 1e9, lMax = -1e9, rMin = 1e9, rMax = -1e9, nL = 0, nR = 0;
+  const v = new THREE.Vector3();
+  g.traverse(function (o) {
+    if (!o.isMesh || !o.geometry || (o.userData && o.userData.outline)) return;
+    if (!SEG[o.userData && o.userData.key]) return;
+    const p = o.geometry.attributes.position; if (!p) return;
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld);
+      if (v.x >= 0) { nR++; rMin = Math.min(rMin, v.x); rMax = Math.max(rMax, v.x); }
+      else          { nL++; lMin = Math.min(lMin, v.x); lMax = Math.max(lMax, v.x); }
+    }
+  });
+  if (!nL || !nR) return { split: false };
+  const gap = rMin - lMax;                    // > 0 only if the two bodies are genuinely disjoint
+  const meanW = 0.5 * ((rMax - rMin) + (lMax - lMin));
+  return { split: true, gap: gap, meanWidth: meanW, gapFrac: gap / meanW,
+           left: [lMin, lMax], right: [rMin, rMax], nL: nL, nR: nR };
+};
+
+/* NO OPEN LUMEN. A grid of rays from the current camera; for each, the FIRST surface hit is examined
+   and its face normal compared with the ray direction. A normal pointing the SAME way as the ray
+   means the nearest thing to the camera is a surface facing away — which is what looking into an open
+   pipe is. Genuinely two-sided sheets are excluded by key, not by guesswork. */
+const SOLID_KEYS = { sinus:1, atrium:1, ventricle:1, bulbus:1, truncus:1, veins:1, arches:1,
+                     endocardium:1, jelly:1, septum:1, membrane:1 };
+window.lumenProbe = function (grid) {
+  const G = grid || 96;
+  const rc = new THREE.Raycaster();
+  const targets = [];
+  group.traverse(function (o) {
+    if (!o.isMesh || !o.geometry) return;
+    const u = o.userData || {};
+    if (u.outline || !SOLID_KEYS[u.key]) return;
+    targets.push(o);
+  });
+  const nm = new THREE.Matrix3();
+  const a1 = new THREE.Vector3(), b1 = new THREE.Vector3(), c1 = new THREE.Vector3();
+  const e1 = new THREE.Vector3(), e2 = new THREE.Vector3(), fn = new THREE.Vector3();
+  let hits = 0, back = 0; const offenders = {};
+  for (let iy = 0; iy < G; iy++) for (let ix = 0; ix < G; ix++) {
+    const ndc = new THREE.Vector2((ix + 0.5) / G * 2 - 1, 1 - (iy + 0.5) / G * 2);
+    rc.setFromCamera(ndc, camera);
+    const hit = rc.intersectObjects(targets, false)[0];
+    if (!hit) continue;
+    hits++;
+    const p = hit.object.geometry.attributes.position, f = hit.face;
+    a1.fromBufferAttribute(p, f.a); b1.fromBufferAttribute(p, f.b); c1.fromBufferAttribute(p, f.c);
+    fn.copy(e1.subVectors(b1, a1).cross(e2.subVectors(c1, a1)));
+    if (fn.lengthSq() < 1e-16) continue;
+    nm.getNormalMatrix(hit.object.matrixWorld);
+    fn.normalize().applyMatrix3(nm).normalize();
+    if (fn.dot(rc.ray.direction) > 0.02) {
+      back++;
+      const k = hit.object.userData.key;
+      offenders[k] = (offenders[k] || 0) + 1;
+    }
+  }
+  return { rays: G * G, hits: hits, backfaceFirst: back, frac: hits ? back / hits : 0, offenders: offenders };
+};
+
+function readPixels() {
+  const gl = renderer.getContext();
+  const w = renderer.domElement.width, h = renderer.domElement.height;
+  const buf = new Uint8Array(w * h * 4);
+  gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, buf);
+  return buf;
+}
+/* THE MEDIAN PLANE MUST SURVIVE THE VIEW THAT USES IT. Rendered with and without, differenced. */
+window.midlinePixels = function (t, opts, yaw, pitch) {
+  window.setStage(t, Object.assign({}, opts || {}, { midline: true }), yaw, pitch);
+  const withPix = readPixels();
+  window.setStage(t, Object.assign({}, opts || {}, { midline: false }), yaw, pitch);
+  const withoutPix = readPixels();
+  let diff = 0, subject = 0;
+  for (let i = 0; i < withPix.length; i += 4) {
+    const dr = Math.abs(withPix[i] - withoutPix[i]) + Math.abs(withPix[i+1] - withoutPix[i+1]) +
+               Math.abs(withPix[i+2] - withoutPix[i+2]);
+    if (dr > 12) diff++;
+    if (withoutPix[i] + withoutPix[i+1] + withoutPix[i+2] > 90) subject++;
+  }
+  return { visible: diff, subjectPixels: subject, fracOfSubject: subject ? diff / subject : 0 };
+};
+
+/* EVERY VIEW MUST CHANGE THE PICTURE. Renders the t and options each view of the scene uses and
+   differences consecutive frames, so "this beat is text, not a view" is measured rather than judged. */
+window.frameDiff = function (a, b) {
+  window.setStage(a.t, a.opts || {}, a.yaw, a.pitch);
+  const pa = readPixels();
+  window.setStage(b.t, b.opts || {}, b.yaw, b.pitch);
+  const pb = readPixels();
+  let d = 0, lit = 0;
+  for (let i = 0; i < pa.length; i += 4) {
+    const dr = Math.abs(pa[i] - pb[i]) + Math.abs(pa[i+1] - pb[i+1]) + Math.abs(pa[i+2] - pb[i+2]);
+    if (dr > 16) d++;
+    if (pa[i] + pa[i+1] + pa[i+2] > 90 || pb[i] + pb[i+1] + pb[i+2] > 90) lit++;
+  }
+  return { changed: d, lit: lit, frac: lit ? d / lit : 0 };
+};
+
+window.acceptance = function () { return MOD.acceptance(); };
+window.negatives  = function () { return MOD.negatives(); };
+window.continuity = function () { return MOD.continuity(); };
+window.fusionTable = function () {
+  const out = [];
+  for (let i = 0; i <= 40; i++) { const t = i / 40; out.push([t, MOD.fusionFront(t)]); }
+  return { table: out, dates: MOD.fusionDates() };
+};
+</script>

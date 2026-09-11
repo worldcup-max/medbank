@@ -1,0 +1,822 @@
+{
+ "schema": 2,
+ "id": "gross__heart-pericardium__heart-valves",
+ "mode": "3d_anatomy",
+ "course": "Gross Anatomy",
+ "topic": "Heart & Pericardium",
+ "structure": "Heart valves",
+ "covers": [
+  "Heart valves"
+ ],
+ "learning_goal": "Name every leaflet and cusp of the four valves, say where each valve sits in the fibrous skeleton relative to the other three, and explain what opens and shuts each one at every instant of the beat - including why a valve leaks when its chordae are too long and why a cusp cannot open at all without a sinus behind it.",
+ "status": "candidate",
+ "provenance": {
+  "author": "task",
+  "authored_at": "2026-09-10"
+ },
+ "provider": {
+  "primary": "procedural",
+  "fallbacks": []
+ },
+ "match": {
+  "topics": [
+   "heart",
+   "heart valves",
+   "valves",
+   "cardiovascular",
+   "pericardium",
+   "cardiac anatomy",
+   "auscultation",
+   "valvular heart disease"
+  ],
+  "terms": [
+   "heart valve",
+   "mitral valve",
+   "bicuspid valve",
+   "anterior mitral leaflet",
+   "posterior mitral leaflet",
+   "tricuspid valve",
+   "septal leaflet",
+   "aortic valve",
+   "pulmonary valve",
+   "semilunar valve",
+   "cusp",
+   "leaflet",
+   "annulus",
+   "fibrous skeleton",
+   "fibrous trigone",
+   "central fibrous body",
+   "aortomitral continuity",
+   "chordae tendineae",
+   "papillary muscle",
+   "anterolateral papillary muscle",
+   "posteromedial papillary muscle",
+   "moderator band",
+   "sinus of Valsalva",
+   "sinotubular junction",
+   "nodule of Arantius",
+   "lunula",
+   "coronary ostium",
+   "right coronary cusp",
+   "left coronary cusp",
+   "non-coronary cusp",
+   "coaptation",
+   "mitral regurgitation",
+   "mitral prolapse",
+   "aortic stenosis",
+   "first heart sound",
+   "second heart sound",
+   "S1",
+   "S2",
+   "splitting of S2",
+   "Ebstein anomaly",
+   "atrioventricular septal defect",
+   "tenting"
+  ]
+ },
+ "camera": {
+  "framing": "anterior",
+  "autoRotate": 0,
+  "initialYaw": 0
+ },
+ "structures": [
+  {
+   "key": "mitral_anterior",
+   "name": "Anterior (aortic) leaflet of mitral valve",
+   "label": "Mitral - anterior leaflet",
+   "role": "primary",
+   "group": "Mitral valve",
+   "layer": "fascia",
+   "color": "#efe6d2",
+   "refs": {
+    "procedural": "heart-valves#mitral_anterior"
+   },
+   "terms": [
+    "anterior mitral leaflet",
+    "aortic leaflet",
+    "AMVL",
+    "A2"
+   ],
+   "narration": "The long one. It hangs from only about a third of the annulus but reaches more than twice as far into the ventricle as its partner, and its base is continuous with the aortic valve - so it forms part of the wall of the outflow tract as well as part of the inlet. That is why it swings almost flat against the outflow tract when the valve opens, and why disease of the aortic root reaches this leaflet directly."
+  },
+  {
+   "key": "mitral_posterior",
+   "name": "Posterior (mural) leaflet of mitral valve",
+   "label": "Mitral - posterior leaflet",
+   "role": "primary",
+   "group": "Mitral valve",
+   "layer": "fascia",
+   "color": "#e7dcc2",
+   "refs": {
+    "procedural": "heart-valves#mitral_posterior"
+   },
+   "terms": [
+    "posterior mitral leaflet",
+    "mural leaflet",
+    "P1",
+    "P2",
+    "P3",
+    "scallops"
+   ],
+   "narration": "Short, wide, and scalloped into three - P1, P2, P3 from the anterolateral commissure round. It takes two thirds of the annulus and moves very little: watch it against the anterior leaflet as the valve opens and you will see that almost all of the excursion belongs to the other one. Its middle scallop is the commonest site of prolapse."
+  },
+  {
+   "key": "tricuspid_anterior",
+   "name": "Anterior leaflet of tricuspid valve",
+   "label": "Tricuspid - anterior leaflet",
+   "role": "primary",
+   "group": "Tricuspid valve",
+   "layer": "fascia",
+   "color": "#e9dfc8",
+   "refs": {
+    "procedural": "heart-valves#tricuspid_anterior"
+   },
+   "terms": [
+    "anterior tricuspid leaflet",
+    "anterosuperior leaflet"
+   ],
+   "narration": "The largest of the three, and the one whose chordae come mainly from the anterior papillary muscle - the muscle the moderator band runs to."
+  },
+  {
+   "key": "tricuspid_posterior",
+   "name": "Posterior leaflet of tricuspid valve",
+   "label": "Tricuspid - posterior leaflet",
+   "role": "primary",
+   "group": "Tricuspid valve",
+   "layer": "fascia",
+   "color": "#ded2b6",
+   "refs": {
+    "procedural": "heart-valves#tricuspid_posterior"
+   },
+   "terms": [
+    "posterior tricuspid leaflet",
+    "inferior leaflet"
+   ],
+   "narration": "Often scalloped, sometimes barely separate from the anterior leaflet. The tricuspid is the most variable valve in the heart."
+  },
+  {
+   "key": "tricuspid_septal",
+   "name": "Septal leaflet of tricuspid valve",
+   "label": "Tricuspid - septal leaflet",
+   "role": "primary",
+   "group": "Tricuspid valve",
+   "layer": "fascia",
+   "color": "#f1e8d4",
+   "refs": {
+    "procedural": "heart-valves#tricuspid_septal"
+   },
+   "terms": [
+    "septal tricuspid leaflet",
+    "offsetting",
+    "Ebstein anomaly",
+    "atrioventricular septal defect"
+   ],
+   "narration": "Attached directly to the septum, and attached LOWER than the mitral leaflet opposite it - the two atrioventricular valves are offset by about half a centimetre. That offset is the piece of anatomy behind two diagnoses: lose it and you have an atrioventricular septal defect, exaggerate it and you have Ebstein anomaly. It is also the leaflet the atrioventricular bundle passes beneath."
+  },
+  {
+   "key": "aortic_right",
+   "name": "Right coronary cusp of aortic valve",
+   "label": "Aortic - right coronary cusp",
+   "role": "primary",
+   "group": "Aortic valve",
+   "layer": "fascia",
+   "color": "#f4eede",
+   "refs": {
+    "procedural": "heart-valves#aortic_right"
+   },
+   "terms": [
+    "right coronary cusp",
+    "RCC"
+   ],
+   "narration": "Named for the artery that leaves the sinus behind it. Anterior of the three, and the one that lies against the right ventricular outflow tract."
+  },
+  {
+   "key": "aortic_left",
+   "name": "Left coronary cusp of aortic valve",
+   "label": "Aortic - left coronary cusp",
+   "role": "primary",
+   "group": "Aortic valve",
+   "layer": "fascia",
+   "color": "#eae2ce",
+   "refs": {
+    "procedural": "heart-valves#aortic_left"
+   },
+   "terms": [
+    "left coronary cusp",
+    "LCC"
+   ],
+   "narration": "The left coronary artery arises from the sinus behind this cusp. Its base is in fibrous continuity with the anterior mitral leaflet."
+  },
+  {
+   "key": "aortic_noncoronary",
+   "name": "Non-coronary cusp of aortic valve",
+   "label": "Aortic - non-coronary cusp",
+   "role": "primary",
+   "group": "Aortic valve",
+   "layer": "fascia",
+   "color": "#dfd6bd",
+   "refs": {
+    "procedural": "heart-valves#aortic_noncoronary"
+   },
+   "terms": [
+    "non-coronary cusp",
+    "posterior cusp",
+    "NCC"
+   ],
+   "narration": "The posterior one, and the only sinus with no artery leaving it. It sits directly above the atrioventricular node, which is why infective endocarditis here produces heart block."
+  },
+  {
+   "key": "pulmonary_anterior",
+   "name": "Anterior cusp of pulmonary valve",
+   "label": "Pulmonary - anterior cusp",
+   "role": "primary",
+   "group": "Pulmonary valve",
+   "layer": "fascia",
+   "color": "#eee7d6",
+   "refs": {
+    "procedural": "heart-valves#pulmonary_anterior"
+   },
+   "terms": [
+    "anterior pulmonary cusp"
+   ],
+   "narration": "The pulmonary valve is the most anterior and the most superior of the four, and it is the only one with no fibrous continuity with anything - it stands on a complete muscular infundibulum, which is what makes it removable in the Ross procedure."
+  },
+  {
+   "key": "pulmonary_right",
+   "name": "Right cusp of pulmonary valve",
+   "label": "Pulmonary - right cusp",
+   "role": "primary",
+   "group": "Pulmonary valve",
+   "layer": "fascia",
+   "color": "#e3dac4",
+   "refs": {
+    "procedural": "heart-valves#pulmonary_right"
+   },
+   "terms": [
+    "right pulmonary cusp"
+   ],
+   "narration": "Three cusps again, built exactly like the aortic ones and working the same way, against a quarter of the pressure."
+  },
+  {
+   "key": "pulmonary_left",
+   "name": "Left cusp of pulmonary valve",
+   "label": "Pulmonary - left cusp",
+   "role": "primary",
+   "group": "Pulmonary valve",
+   "layer": "fascia",
+   "color": "#d9d0b8",
+   "refs": {
+    "procedural": "heart-valves#pulmonary_left"
+   },
+   "terms": [
+    "left pulmonary cusp"
+   ],
+   "narration": "Its sinus has no artery either. All three pulmonary sinuses are blind."
+  },
+  {
+   "key": "annulus_mitral",
+   "name": "Mitral annulus",
+   "label": "Mitral annulus",
+   "role": "part",
+   "group": "Fibrous skeleton",
+   "layer": "fascia",
+   "color": "#d8c893",
+   "refs": {
+    "procedural": "heart-valves#annulus_mitral"
+   },
+   "terms": [
+    "mitral annulus",
+    "annular dilatation",
+    "functional mitral regurgitation"
+   ],
+   "narration": "A D-shaped ring about 3 cm across, and only its anterior third is properly fibrous. Dilate it - which a dilated left ventricle does - and the leaflets have further to travel to meet: the valve leaks without a single thing wrong with the leaflets themselves."
+  },
+  {
+   "key": "annulus_tricuspid",
+   "name": "Tricuspid annulus",
+   "label": "Tricuspid annulus",
+   "role": "part",
+   "group": "Fibrous skeleton",
+   "layer": "fascia",
+   "color": "#cfbe86",
+   "refs": {
+    "procedural": "heart-valves#annulus_tricuspid"
+   },
+   "terms": [
+    "tricuspid annulus"
+   ],
+   "narration": "The largest of the four rings. Size order, and it is asked: tricuspid, then mitral, then pulmonary, then aortic."
+  },
+  {
+   "key": "annulus_aortic",
+   "name": "Aortic annulus (the crown)",
+   "label": "Aortic annulus - the crown",
+   "role": "part",
+   "group": "Fibrous skeleton",
+   "layer": "fascia",
+   "color": "#e2d29c",
+   "refs": {
+    "procedural": "heart-valves#annulus_aortic"
+   },
+   "terms": [
+    "aortic annulus",
+    "crown",
+    "coronet",
+    "ventriculo-arterial junction"
+   ],
+   "narration": "Not a ring. The attachment of the three cusps is a crown - lowest in the middle of each cusp, highest at the commissures - so it crosses the junction between ventricle and artery three times in each direction. Draw it as a circle and you have drawn the one thing about it that is not true."
+  },
+  {
+   "key": "annulus_pulmonary",
+   "name": "Pulmonary annulus (the crown)",
+   "label": "Pulmonary annulus - the crown",
+   "role": "part",
+   "group": "Fibrous skeleton",
+   "layer": "fascia",
+   "color": "#d3c48f",
+   "refs": {
+    "procedural": "heart-valves#annulus_pulmonary"
+   },
+   "terms": [
+    "pulmonary annulus"
+   ],
+   "narration": "The same crown on the right, standing on muscle rather than on the fibrous skeleton."
+  },
+  {
+   "key": "trigones",
+   "name": "Fibrous trigones & central fibrous body",
+   "label": "Fibrous trigones",
+   "role": "part",
+   "group": "Fibrous skeleton",
+   "layer": "fascia",
+   "color": "#c9b878",
+   "refs": {
+    "procedural": "heart-valves#trigones"
+   },
+   "terms": [
+    "right fibrous trigone",
+    "left fibrous trigone",
+    "central fibrous body",
+    "aortomitral continuity",
+    "membranous septum"
+   ],
+   "narration": "The collagen that ties the aortic root to the mitral annulus on one side and to the tricuspid annulus on the other. The right trigone plus the membranous septum is the central fibrous body, and the atrioventricular bundle runs through it - the only muscular connection between atria and ventricles passes through the one place the skeleton lets it."
+  },
+  {
+   "key": "chordae_mitral",
+   "name": "Chordae tendineae of mitral valve",
+   "label": "Chordae - mitral",
+   "role": "part",
+   "group": "Tension apparatus",
+   "layer": "fascia",
+   "color": "#f3edda",
+   "refs": {
+    "procedural": "heart-valves#chordae_mitral"
+   },
+   "terms": [
+    "chordae tendineae",
+    "marginal chordae",
+    "chordal rupture",
+    "flail leaflet"
+   ],
+   "narration": "They do not shut the valve and they do not open it. They stop it turning inside out - and because they cannot stretch, they also limit how far it opens. Watch them across the beat: slack and looping while the valve is open, dead straight the instant it shuts. Lengthen them and the leaflet billows past the annulus, which is prolapse; rupture one and that segment flails."
+  },
+  {
+   "key": "chordae_tricuspid",
+   "name": "Chordae tendineae of tricuspid valve",
+   "label": "Chordae - tricuspid",
+   "role": "part",
+   "group": "Tension apparatus",
+   "layer": "fascia",
+   "color": "#ece5d0",
+   "refs": {
+    "procedural": "heart-valves#chordae_tricuspid"
+   },
+   "terms": [
+    "tricuspid chordae"
+   ],
+   "narration": "The same apparatus on the right, with chordae running to the septum directly as well as to papillary muscles - a tricuspid feature the mitral valve does not share."
+  },
+  {
+   "key": "pap_anterolateral",
+   "name": "Anterolateral papillary muscle",
+   "label": "Papillary - anterolateral",
+   "role": "part",
+   "group": "Tension apparatus",
+   "layer": "muscle",
+   "color": "#9c2731",
+   "refs": {
+    "procedural": "heart-valves#pap_anterolateral"
+   },
+   "terms": [
+    "anterolateral papillary muscle",
+    "dual blood supply"
+   ],
+   "narration": "Usually supplied by two arteries. It survives an infarct that kills its partner."
+  },
+  {
+   "key": "pap_posteromedial",
+   "name": "Posteromedial papillary muscle",
+   "label": "Papillary - posteromedial",
+   "role": "part",
+   "group": "Tension apparatus",
+   "layer": "muscle",
+   "color": "#8a1f28",
+   "refs": {
+    "procedural": "heart-valves#pap_posteromedial"
+   },
+   "terms": [
+    "posteromedial papillary muscle",
+    "papillary muscle rupture",
+    "inferior myocardial infarction"
+   ],
+   "narration": "Single blood supply, and therefore the one that ruptures - classically a few days after an inferior infarct, with sudden torrential mitral regurgitation. Note where its chordae go: to BOTH leaflets, not to one. That is why losing one muscle floods the atrium instead of leaking half of it."
+  },
+  {
+   "key": "papillary_rv",
+   "name": "Papillary muscles of the right ventricle",
+   "label": "Papillary muscles - right",
+   "role": "part",
+   "group": "Tension apparatus",
+   "layer": "muscle",
+   "color": "#93242e",
+   "refs": {
+    "procedural": "heart-valves#papillary_rv"
+   },
+   "terms": [
+    "anterior papillary muscle",
+    "moderator band",
+    "septal papillary muscle",
+    "muscle of Lancisi"
+   ],
+   "narration": "Three, and unequal: a large anterior one that the moderator band runs to, a smaller posterior one, and a small septal one. The right ventricle also anchors chordae straight to the septum, which the left does not."
+  },
+  {
+   "key": "aortic_root",
+   "name": "Aortic root & sinuses of Valsalva",
+   "label": "Aortic root & sinuses",
+   "role": "part",
+   "group": "Arterial roots",
+   "layer": "vessel",
+   "color": "#b0342f",
+   "refs": {
+    "procedural": "heart-valves#aortic_root"
+   },
+   "terms": [
+    "sinus of Valsalva",
+    "aortic root",
+    "sinotubular junction",
+    "aortic root dilatation"
+   ],
+   "narration": "Three pouches between the crown and the sinotubular junction. They are not decoration and they are not spare room: an opening cusp is a sheet of fixed length spanning a shorter distance, so it MUST bulge outward, and the sinus is exactly the space it bulges into. Put the same valve in a plain tube and it cannot open properly - which is the reason a stented valve is built with a flared sinus segment."
+  },
+  {
+   "key": "pulmonary_root",
+   "name": "Pulmonary root & sinuses",
+   "label": "Pulmonary root & sinuses",
+   "role": "part",
+   "group": "Arterial roots",
+   "layer": "vessel",
+   "color": "#35659f",
+   "refs": {
+    "procedural": "heart-valves#pulmonary_root"
+   },
+   "terms": [
+    "pulmonary sinuses",
+    "pulmonary root"
+   ],
+   "narration": "The same three pouches at a quarter of the pressure. Its wall is thinner and its sinuses are shallower, but the geometry is identical."
+  },
+  {
+   "key": "ostium_left",
+   "name": "Left coronary ostium",
+   "label": "Left coronary ostium",
+   "role": "part",
+   "group": "Arterial roots",
+   "layer": "vessel",
+   "color": "#d8452f",
+   "refs": {
+    "procedural": "heart-valves#ostium_left"
+   },
+   "terms": [
+    "left coronary ostium",
+    "left main stem"
+   ],
+   "narration": "It opens into the sinus, not into the tube above it - so the open cusp lies BESIDE it rather than over it. A valve without sinuses would cover its own coronary arteries every time it opened."
+  },
+  {
+   "key": "ostium_right",
+   "name": "Right coronary ostium",
+   "label": "Right coronary ostium",
+   "role": "part",
+   "group": "Arterial roots",
+   "layer": "vessel",
+   "color": "#d8452f",
+   "refs": {
+    "procedural": "heart-valves#ostium_right"
+   },
+   "terms": [
+    "right coronary ostium"
+   ],
+   "narration": "The same, in the right sinus. Both usually sit below the sinotubular junction; an ostium above it is a variant that matters to anyone operating on the root."
+  },
+  {
+   "key": "chamber_ghost",
+   "name": "Ventricular walls (context)",
+   "label": "Ventricular walls",
+   "role": "context",
+   "group": "Context",
+   "layer": "muscle",
+   "color": "#7c3b44",
+   "refs": {
+    "procedural": "heart-valves#chamber_ghost"
+   },
+   "terms": [
+    "left ventricle",
+    "right ventricle"
+   ],
+   "narration": "Drawn only so the valves have somewhere to be. This scene is about what hangs in these chambers, not about the chambers."
+  }
+ ],
+ "views": [
+  {
+   "mode": "location",
+   "beat": 1,
+   "title": "Four valves, one plane",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.8
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "All four valves lie in one oblique plane at the base of the ventricles - the plane of the fibrous skeleton. Everything above it is atrium or great artery; everything below it is ventricle. The two atrioventricular valves hang down into the ventricles on cords; the two arterial valves stand up into their roots on nothing at all. That difference in construction is the whole difference in how they work, and it is the first thing to fix before any of the names go in."
+  },
+  {
+   "mode": "cross_section",
+   "beat": 2,
+   "title": "The base of the heart, in diastole",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.8
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "y",
+     "offset": 0.15
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Context"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Arterial roots"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "superior"
+    }
+   ],
+   "narration": "Now look straight down on that plane with the atria taken off - the view every question about valve relations is really asking about. The aortic valve is the keystone: it sits in the middle, wedged against all three of the others. The pulmonary valve is furthest forward and highest, separated from the aortic by muscle. The mitral is furthest back, the tricuspid to the right. At this instant the heart is filling, so the two atrioventricular valves are open and the two arterial valves are shut, each showing the three-pointed line where its cusps meet."
+  },
+  {
+   "mode": "cross_section",
+   "beat": 3,
+   "title": "The same section, in systole - everything has swapped",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.4
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "y",
+     "offset": 0.15
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Context"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Arterial roots"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "superior"
+    }
+   ],
+   "narration": "The same section a fifth of a second later, mid-ejection. Every one of the four has reversed: the arterial valves stand wide open and the atrioventricular valves are shut lids. Nothing pulled them. There is no muscle in a valve leaflet and no nerve to one; each of the four is driven entirely by the pressure difference across it, and every murmur in the syllabus is a valve that has stopped obeying that."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 4,
+   "title": "The mitral valve open - and the cords hanging slack",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.8
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Mitral valve"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "Tension apparatus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "annulus_mitral"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    }
+   ],
+   "narration": "Filling. The two leaflets have swung apart into a funnel, and the chordae are looped and slack - they are carrying nothing. Notice how unequal the movement is: the long anterior leaflet does nearly all of it and the short posterior one barely leaves the annulus. Notice too where the leaflets stop. They are not stopped by muscle; they are stopped by the cords going tight, and a valve whose cords were longer would open further and shut worse."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 5,
+   "title": "The mitral valve shut - the cords go straight",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.35
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Mitral valve"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "Tension apparatus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "annulus_mitral"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    }
+   ],
+   "narration": "The same valve at mid-systole, holding back 120 mmHg. Every cord is now dead straight, and the two leaflets meet along a line that sits a few millimetres BELOW the annulus and well towards the posterior side - both leaflets have used up the same fraction of their length getting there. That depth is measurable in a real patient, and it is diagnostic: about half a centimetre is normal, and much more than a centimetre means the leaflets are being tethered down by a dilated ventricle. Give the cords a few extra millimetres instead and the leaflet rides up past the annulus into the atrium, which is prolapse."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 6,
+   "title": "Why a cusp cannot open without a sinus",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.4
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Aortic valve"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "Arterial roots"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "annulus_aortic"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "superior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "aortic_root"
+    }
+   ],
+   "narration": "Down the open aortic valve at peak ejection. The three cusps have laid back against the wall, and where they have gone is into the three pouches of the root. This is not a detail of shape: a cusp is a sheet of collagen of fixed area, and folding it out of the way of a wide orifice requires more room than a straight tube has - about a fifth more radius, which is what the sinuses provide. Two of the three have a coronary artery leaving them, and the open cusp lies beside the opening rather than across it. Both facts come from the same piece of geometry."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 7,
+   "title": "The first heart sound, and why it can be split",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.222
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Context"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Arterial roots"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "mitral_anterior",
+      "tricuspid_anterior"
+     ]
+    }
+   ],
+   "narration": "Caught between the two components of the first heart sound. The mitral has already shut; the tricuspid, twenty milliseconds behind it, has not. The order is not arbitrary - the left ventricle reaches its atrial pressure first because it starts from a higher one - and that gap is what you are hearing when S1 sounds split. The arterial valves are both still closed: for these few hundredths of a second the ventricle is a sealed box, building pressure and moving nothing."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 8,
+   "title": "The second heart sound, and its splitting",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.565
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Context"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "aortic_right",
+      "pulmonary_anterior"
+     ]
+    }
+   ],
+   "narration": "The mirror of the last beat, at the other end of systole. The aortic valve has shut - slammed by the recoil of the stretched aorta rather than by anything the ventricle did - and the pulmonary valve, thirty milliseconds later, is still closing. That is the physiological splitting of the second sound, and inspiration widens it by holding more blood in the right ventricle for a moment longer. A split that does not move with breathing is the abnormal one."
+  },
+  {
+   "mode": "comparison",
+   "beat": 9,
+   "title": "Four rings, four sizes",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.4
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Fibrous skeleton"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "superior"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "annulus_tricuspid",
+      "annulus_aortic"
+     ]
+    }
+   ],
+   "narration": "The skeleton alone. Tricuspid largest, then mitral, then pulmonary, then aortic - the order runs opposite to the pressure each valve holds, because a ring that has to seal against a high pressure is better off small. Two of the four are proper rings; the two arterial ones are crowns, dipping to the floor of each sinus and rising to each commissure. The collagen tying them together carries the only conducting bridge between atria and ventricles, so this small block of tissue is where valve surgery, aortic root disease and complete heart block all meet."
+  }
+ ],
+ "gaps": [
+  "PROCEDURAL BY NECESSITY, AND THE QUEUE COUNT WAS CHECKED RATHER THAN TRUSTED. The queue item carries candidate_meshes:1. The catalog actually name-matches SEVEN entries relevant to this structure - mitral valve, tricuspid valve, pulmonary valve and four papillary muscles - so the queue under-reports. It is still not the answer. There is NO aortic valve in the catalog at all, so a scanned scene could not put the four valves side by side; and every one of those scans is a valve frozen in one configuration, while the curriculum entry for this structure reads \"opening/closing during the cycle\". RENDER-STANDARD section 5: procedural belongs where the form is a function of something, and here it is a function of time. The catalog discrepancy is recorded in BUILD-LOG.md rather than left in a comment.",
+  "THE CLOCK IS SHARED WITH THE CARDIAC CYCLE SCENE BUT THE PHYSIOLOGY IS NOT SOLVED HERE. t is one 0.80 s cycle beginning at the P wave, the same parameter the cardiac-cycle-pumping model uses, and the valve event times are STATED textbook figures rather than integrated from a circulation. The sibling scene solves an ODE for those instants; this one takes them as given and spends its solving on the geometry of competence instead. The two agree to within about 5 ms at every event, which is a check rather than a coincidence - but if the sibling model is re-solved, these numbers should be compared again rather than assumed to have followed.",
+  "THE VALVE PLANE IS RIGID. In life the whole fibrous skeleton descends about 12 mm towards a nearly stationary apex during systole, which is what fills the atria while the ventricles empty and what you feel as the apex beat. It is modelled in the cardiac-cycle scene and it is NOT modelled here: these four rings do not move. A student who watches this scene alone will come away thinking the valve plane is fixed, and it is not.",
+  "THE PAPILLARY MUSCLES DO NOT SHORTEN. They are drawn in one position for the whole cycle, so what the chordae show is the LEAFLET moving relative to a fixed muscle, not the true relative motion. The teaching the beats actually rest on - slack in diastole, taut at closure - survives that simplification, and the direction of the error is conservative: real papillary shortening takes up slack, so the model shows slightly more slack than there is.",
+  "THE ATRIA, THE VENTRICULAR CAVITIES AND THE BLOOD ARE ABSENT. The ventricular walls are drawn as two translucent cones behind a flag, purely so the valves have somewhere to hang. There is no flow, no pressure trace, no heart sound. Where the narration names a pressure or a sound it is naming a fact, not something drawn - the drawn claim is always the geometry.",
+  "CROSS_SECTION IN THE PLAYER CLIPS ONLY CONTEXT STRUCTURES, and its offset is in the normalised units the player fits the scene into rather than in the model centimetres. Beats 2 and 3 therefore use it to take the ventricular walls off a view that is already looking down the valve plane; the offset 0.15 was NOT verified in the player by this run, only in the model harness, and a reviewer with the player open should check it lands where the narration says it does.",
+  "THE PLANE-WORD CHECK AND THIS MODEL DISAGREE ABOUT AXES, AND THE SCENE STEPS ROUND IT RATHER THAN TRIPPING IT. model3d-scene-spec-v2 maps a named plane to a CROSS_SECTION axis using the scanned-mesh convention (+X left, +Y posterior, +Z superior). Procedural models are not in that frame - RENDER-STANDARD fixes +y cranial and +z ventral - so on this model a cut level with the valves is normal to y, where the spec table would say z. The two cutting beats therefore describe the section in words (\"look straight down on that plane\") without naming a plane, which keeps a warning that would be a false alarm out of the validator. The disagreement itself is real, is not this scene to fix, and is written up in BUILD-LOG.md.",
+  "THE TRICUSPID LEAFLET LENGTHS ARE THE WEAKEST STATED NUMBERS IN THE MODEL. The mitral figures (2.3 cm anterior, 1.3 cm posterior) are quoted consistently; the tricuspid ones are not, and the three used here were chosen to keep the published ORDER (anterior largest) and to give a competent valve. The competence test on the right side is therefore weaker evidence than the one on the left, and it is fair to read the tricuspid closure as qualitative.",
+  "THE CHORDAE ARE SINGLE STRANDS, NOT FANS. A real marginal chord branches two or three times before it reaches the free edge, and basal and strut chordae insert into the leaflet body as well as its edge. Only marginal chordae are drawn, one strand each, five per leaflet per muscle. The consequence for the teaching is small - the strand that matters is the marginal one - but a student should not count them.",
+  "NOBODY HAS WALKED THIS SCENE IN THE PLAYER. The proof frames come from a harness that builds the model directly with every layer on at full opacity; the scene sets roles, groups, opacities and hides most structures in most beats. The frames prove the geometry, the timing and that every ref resolves through the real adapter. They are not a preview of what a student sees."
+ ]
+}

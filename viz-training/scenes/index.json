@@ -1,7 +1,7 @@
 {
   "generated_by": "viz-training/tools/build-scene-index.mjs",
   "schema": 2,
-  "count": 142,
+  "count": 146,
   "ready": 71,
   "scenes": [
     {
@@ -19,7 +19,7 @@
       "topic": "Cardiovascular Development",
       "structure": "Cardiac looping",
       "learning_goal": "Explain why the straight heart tube must bend, describe the normal D-loop as a set of three movements, say where each of the five segments finishes after looping and why that arrangement is what septation needs, and use left-right patterning to account for L-loop, dextrocardia and the heterotaxy syndromes.",
-      "gaps": 10,
+      "gaps": 17,
       "match": {
         "topics": [
           "cardiac looping",
@@ -94,32 +94,57 @@
         {
           "key": "sinus_a",
           "label": "Sinus venosus",
-          "group": "Day 21 — the straight tube"
+          "group": "Day 23 — the straight tube"
         },
         {
           "key": "atrium_a",
           "label": "Primitive atrium",
-          "group": "Day 21 — the straight tube"
+          "group": "Day 23 — the straight tube"
         },
         {
           "key": "ventricle_a",
           "label": "Primitive ventricle",
-          "group": "Day 21 — the straight tube"
+          "group": "Day 23 — the straight tube"
         },
         {
           "key": "bulbus_a",
           "label": "Bulbus cordis",
-          "group": "Day 21 — the straight tube"
+          "group": "Day 23 — the straight tube"
         },
         {
           "key": "truncus_a",
           "label": "Truncus arteriosus",
-          "group": "Day 21 — the straight tube"
+          "group": "Day 23 — the straight tube"
         },
         {
           "key": "meso_a",
           "label": "Dorsal mesocardium, still intact",
-          "group": "Day 21 — the straight tube"
+          "group": "Day 23 — the straight tube"
+        },
+        {
+          "key": "sinus_ab",
+          "label": "Sinus venosus",
+          "group": "Early loop — movement one alone"
+        },
+        {
+          "key": "atrium_ab",
+          "label": "Primitive atrium",
+          "group": "Early loop — movement one alone"
+        },
+        {
+          "key": "ventricle_ab",
+          "label": "Primitive ventricle",
+          "group": "Early loop — movement one alone"
+        },
+        {
+          "key": "bulbus_ab",
+          "label": "Bulbus cordis",
+          "group": "Early loop — movement one alone"
+        },
+        {
+          "key": "truncus_ab",
+          "label": "Truncus arteriosus",
+          "group": "Early loop — movement one alone"
         },
         {
           "key": "sinus_b",
@@ -185,6 +210,116 @@
           "key": "bulbus_l",
           "label": "Bulbus cordis, L-loop",
           "group": "L-loop — the abnormal mirror"
+        },
+        {
+          "key": "peri_a",
+          "label": "Pericardial cavity, day 23",
+          "group": "Day 23 — the straight tube"
+        },
+        {
+          "key": "peri_c",
+          "label": "Pericardial cavity, day 28",
+          "group": "Day 28 — the looped heart"
+        },
+        {
+          "key": "midline_c",
+          "label": "Median plane (reference)",
+          "group": "Reference"
+        },
+        {
+          "key": "sinus_l",
+          "label": "Sinus venosus, L-loop",
+          "group": "L-loop — the abnormal mirror"
+        },
+        {
+          "key": "atrium_l",
+          "label": "Primitive atrium, L-loop",
+          "group": "L-loop — the abnormal mirror"
+        },
+        {
+          "key": "truncus_l",
+          "label": "Truncus arteriosus, L-loop",
+          "group": "L-loop — the abnormal mirror"
+        },
+        {
+          "key": "d_sinus",
+          "label": "Sinus venosus, D-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "l_sinus",
+          "label": "Sinus venosus, L-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "d_atrium",
+          "label": "Primitive atrium, D-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "l_atrium",
+          "label": "Primitive atrium, L-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "d_ventricle",
+          "label": "Primitive ventricle, D-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "l_ventricle",
+          "label": "Primitive ventricle, L-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "d_bulbus",
+          "label": "Bulbus cordis, D-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "l_bulbus",
+          "label": "Bulbus cordis, L-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "d_truncus",
+          "label": "Truncus arteriosus, D-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "l_truncus",
+          "label": "Truncus arteriosus, L-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "d_veins",
+          "label": "Vitelline & cardinal veins, D-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "l_veins",
+          "label": "Vitelline & cardinal veins, L-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "d_arches",
+          "label": "Aortic arches, D-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "l_arches",
+          "label": "Aortic arches, L-loop",
+          "group": "D-loop against L-loop, side by side"
+        },
+        {
+          "key": "veins_l",
+          "label": "Vitelline & cardinal veins, L-loop",
+          "group": "L-loop — the abnormal mirror"
+        },
+        {
+          "key": "arches_l",
+          "label": "Aortic arches, L-loop",
+          "group": "L-loop — the abnormal mirror"
         }
       ],
       "terms": {
@@ -195,18 +330,35 @@
         "truncus arteriosus": "truncus_a",
         "dorsal mesocardium": "meso_a",
         "dorsal mesocardium still intact": "meso_a",
-        "vitelline cardinal veins": "veins_c",
+        "aortic arches": "d_arches",
+        "arches at the fixed arterial pole": "arches_ab",
+        "vitelline cardinal veins": "d_veins",
         "veins at the fixed venous pole": "veins_c",
-        "aortic arches": "arches_a",
-        "arches at the fixed arterial pole": "arches_a",
         "endocardial tube": "endo_c",
         "endocardial tube inside the myocardium": "endo_c",
         "primitive ventricle l loop": "ventricle_l",
-        "bulbus cordis l loop": "bulbus_l"
+        "bulbus cordis l loop": "bulbus_l",
+        "pericardial cavity": "peri_a",
+        "pericardial cavity day 23": "peri_a",
+        "pericardial cavity day 28": "peri_c",
+        "median plane reference": "midline_c",
+        "median plane": "midline_c",
+        "sinus venosus l loop": "sinus_l",
+        "primitive atrium l loop": "atrium_l",
+        "truncus arteriosus l loop": "truncus_l",
+        "sinus venosus d loop": "d_sinus",
+        "primitive atrium d loop": "d_atrium",
+        "primitive ventricle d loop": "d_ventricle",
+        "bulbus cordis d loop": "d_bulbus",
+        "truncus arteriosus d loop": "d_truncus",
+        "vitelline cardinal veins d loop": "d_veins",
+        "vitelline cardinal veins l loop": "l_veins",
+        "aortic arches d loop": "d_arches",
+        "aortic arches l loop": "l_arches"
       },
       "counts": {
-        "structures": 23,
-        "parts": 19,
+        "structures": 51,
+        "parts": 46,
         "views": 9
       }
     },
@@ -16246,6 +16398,260 @@
       }
     },
     {
+      "id": "gross__heart-pericardium__cardiac-cycle-pumping",
+      "file": "viz-training/scenes/gross__heart-pericardium__cardiac-cycle-pumping.json",
+      "schema": 2,
+      "mode": "3d_anatomy",
+      "provider": "procedural",
+      "status": "candidate",
+      "student_ready": false,
+      "authored_by": "task",
+      "approved_by": null,
+      "degrades": [],
+      "course": "Gross Anatomy",
+      "topic": "Heart & Pericardium",
+      "structure": "Cardiac cycle (pumping)",
+      "learning_goal": "Walk one heartbeat and be able to say, at any instant, which valves are open, which are shut, whether blood is moving, and what is making it move - and to state the volumes, the pressures and the durations of the five phases.",
+      "gaps": 12,
+      "match": {
+        "topics": [
+          "heart",
+          "cardiac cycle",
+          "cardiovascular",
+          "cardiac physiology",
+          "heart sounds",
+          "pericardium",
+          "heart pericardium",
+          "cardiac cycle pumping"
+        ],
+        "terms": [
+          "cardiac cycle",
+          "systole",
+          "diastole",
+          "ventricular systole",
+          "atrial systole",
+          "isovolumetric contraction",
+          "isovolumetric relaxation",
+          "ventricular ejection",
+          "ventricular filling",
+          "diastasis",
+          "stroke volume",
+          "ejection fraction",
+          "end diastolic volume",
+          "end systolic volume",
+          "preload",
+          "afterload",
+          "wiggers diagram",
+          "first heart sound",
+          "second heart sound",
+          "s1",
+          "s2",
+          "dicrotic notch",
+          "atrial kick",
+          "e wave",
+          "a wave",
+          "mitral valve",
+          "aortic valve",
+          "tricuspid valve",
+          "pulmonary valve",
+          "papillary muscle",
+          "chordae tendineae",
+          "cardiac output",
+          "av plane descent",
+          "apex beat"
+        ]
+      },
+      "parts": [
+        {
+          "key": "lv",
+          "label": "Left ventricle (wall)",
+          "group": "Myocardium"
+        },
+        {
+          "key": "rv",
+          "label": "Right ventricle (wall)",
+          "group": "Myocardium"
+        },
+        {
+          "key": "septum",
+          "label": "Interventricular septum",
+          "group": "Myocardium"
+        },
+        {
+          "key": "la",
+          "label": "Left atrium (wall)",
+          "group": "Myocardium"
+        },
+        {
+          "key": "ra",
+          "label": "Right atrium (wall)",
+          "group": "Myocardium"
+        },
+        {
+          "key": "lv_blood",
+          "label": "LV cavity",
+          "group": "Chambers"
+        },
+        {
+          "key": "rv_blood",
+          "label": "RV cavity",
+          "group": "Chambers"
+        },
+        {
+          "key": "la_blood",
+          "label": "LA cavity",
+          "group": "Chambers"
+        },
+        {
+          "key": "ra_blood",
+          "label": "RA cavity",
+          "group": "Chambers"
+        },
+        {
+          "key": "mitral",
+          "label": "Mitral valve",
+          "group": "Valves"
+        },
+        {
+          "key": "tricuspid",
+          "label": "Tricuspid valve",
+          "group": "Valves"
+        },
+        {
+          "key": "aortic",
+          "label": "Aortic valve",
+          "group": "Valves"
+        },
+        {
+          "key": "pulmonary",
+          "label": "Pulmonary valve",
+          "group": "Valves"
+        },
+        {
+          "key": "papillary",
+          "label": "Papillary muscles & chordae",
+          "group": "Valves"
+        },
+        {
+          "key": "av_plane",
+          "label": "AV plane",
+          "group": "Myocardium"
+        },
+        {
+          "key": "aorta",
+          "label": "Aorta",
+          "group": "Great vessels"
+        },
+        {
+          "key": "pulm_trunk",
+          "label": "Pulmonary trunk",
+          "group": "Great vessels"
+        },
+        {
+          "key": "flow_left_in",
+          "label": "Inflow, left",
+          "group": "Blood flow"
+        },
+        {
+          "key": "flow_left_out",
+          "label": "Outflow, left",
+          "group": "Blood flow"
+        }
+      ],
+      "terms": {
+        "left ventricle": "lv",
+        "myocardium": "lv",
+        "wall thickness": "lv",
+        "ventricular systole": "lv",
+        "left ventricle wall": "lv",
+        "left ventricular myocardium": "lv",
+        "right ventricle": "rv",
+        "thin wall": "rv",
+        "right ventricle wall": "rv",
+        "right ventricular myocardium": "rv",
+        "interventricular septum": "septum",
+        "septum": "septum",
+        "septal motion": "septum",
+        "left atrium": "la",
+        "atrial systole": "la",
+        "atrial kick": "la",
+        "left atrium wall": "la",
+        "right atrium": "ra",
+        "right atrium wall": "ra",
+        "end diastolic volume": "lv_blood",
+        "edv": "lv_blood",
+        "end systolic volume": "lv_blood",
+        "esv": "lv_blood",
+        "stroke volume": "lv_blood",
+        "ejection fraction": "lv_blood",
+        "lv cavity": "lv_blood",
+        "blood in the left ventricle": "lv_blood",
+        "right ventricular volume": "rv_blood",
+        "rv stroke volume": "rv_blood",
+        "rv cavity": "rv_blood",
+        "blood in the right ventricle": "rv_blood",
+        "left atrial pressure": "la_blood",
+        "v wave": "la_blood",
+        "la cavity": "la_blood",
+        "blood in the left atrium": "la_blood",
+        "right atrial pressure": "ra_blood",
+        "jvp": "ra_blood",
+        "jugular venous pressure": "ra_blood",
+        "ra cavity": "ra_blood",
+        "blood in the right atrium": "ra_blood",
+        "mitral valve": "mitral",
+        "bicuspid valve": "mitral",
+        "anterior leaflet": "mitral",
+        "first heart sound": "mitral",
+        "tricuspid valve": "tricuspid",
+        "s1 splitting": "tricuspid",
+        "aortic valve": "aortic",
+        "semilunar valve": "aortic",
+        "second heart sound": "aortic",
+        "dicrotic notch": "aortic",
+        "pulmonary valve": "pulmonary",
+        "splitting of s2": "pulmonary",
+        "papillary muscle": "papillary",
+        "chordae tendineae": "papillary",
+        "prolapse": "papillary",
+        "mitral regurgitation": "papillary",
+        "papillary muscles chordae": "papillary",
+        "papillary muscles and chordae tendineae": "papillary",
+        "atrioventricular plane": "av_plane",
+        "av plane descent": "av_plane",
+        "mapse": "av_plane",
+        "apex beat": "av_plane",
+        "av plane": "av_plane",
+        "aorta": "aorta",
+        "windkessel": "aorta",
+        "aortic pressure": "aorta",
+        "pulse pressure": "aorta",
+        "pulmonary trunk": "pulm_trunk",
+        "pulmonary artery pressure": "pulm_trunk",
+        "superior vena cava": "svc",
+        "inferior vena cava": "ivc",
+        "pulmonary veins": "pulm_veins",
+        "ventricular filling": "flow_left_in",
+        "e wave": "flow_left_in",
+        "a wave": "flow_left_in",
+        "inflow left": "flow_left_in",
+        "blood crossing the mitral valve": "flow_left_in",
+        "ejection": "flow_left_out",
+        "peak aortic flow": "flow_left_out",
+        "outflow left": "flow_left_out",
+        "blood crossing the aortic valve": "flow_left_out",
+        "inflow right": "flow_right_in",
+        "blood crossing the tricuspid valve": "flow_right_in",
+        "outflow right": "flow_right_out",
+        "blood crossing the pulmonary valve": "flow_right_out"
+      },
+      "counts": {
+        "structures": 24,
+        "parts": 19,
+        "views": 10
+      }
+    },
+    {
       "id": "gross__heart-pericardium__conducting-system",
       "file": "viz-training/scenes/gross__heart-pericardium__conducting-system.json",
       "schema": 2,
@@ -16508,6 +16914,326 @@
       }
     },
     {
+      "id": "gross__heart-pericardium__coronary-arteries-cardiac-veins",
+      "file": "viz-training/scenes/gross__heart-pericardium__coronary-arteries-cardiac-veins.json",
+      "schema": 2,
+      "mode": "3d_anatomy",
+      "provider": "procedural",
+      "status": "candidate",
+      "student_ready": false,
+      "authored_by": "task",
+      "approved_by": null,
+      "degrades": [],
+      "course": "Gross Anatomy",
+      "topic": "Heart & Pericardium",
+      "structure": "Coronary arteries & cardiac veins",
+      "learning_goal": "Know where each coronary artery runs, what it branches into and which part of the myocardium it supplies — and know the venous half too: which vein accompanies which artery, where the coronary sinus lies, and which veins bypass it altogether.",
+      "gaps": 11,
+      "match": {
+        "topics": [
+          "heart",
+          "pericardium",
+          "cardiovascular",
+          "thorax",
+          "coronary circulation",
+          "heart pericardium",
+          "coronary arteries cardiac veins"
+        ],
+        "terms": [
+          "coronary artery",
+          "coronary arteries",
+          "left coronary artery",
+          "left main",
+          "lad",
+          "anterior interventricular artery",
+          "circumflex artery",
+          "right coronary artery",
+          "rca",
+          "marginal branch",
+          "posterior interventricular artery",
+          "posterior descending artery",
+          "pda",
+          "dominance",
+          "right dominant",
+          "left dominant",
+          "crux of the heart",
+          "septal perforators",
+          "diagonal branch",
+          "sa nodal branch",
+          "av nodal branch",
+          "coronary sinus",
+          "great cardiac vein",
+          "middle cardiac vein",
+          "small cardiac vein",
+          "anterior cardiac veins",
+          "oblique vein of the left atrium",
+          "cardiac veins",
+          "myocardial blood supply",
+          "coronary circulation",
+          "myocardial infarction territory"
+        ]
+      },
+      "parts": [
+        {
+          "key": "coronary_sulcus",
+          "label": "Coronary sulcus",
+          "group": "The grooves"
+        },
+        {
+          "key": "ant_iv_sulcus",
+          "label": "Anterior IV sulcus",
+          "group": "The grooves"
+        },
+        {
+          "key": "post_iv_sulcus",
+          "label": "Posterior IV sulcus",
+          "group": "The grooves"
+        },
+        {
+          "key": "crux",
+          "label": "Crux",
+          "group": "The grooves"
+        },
+        {
+          "key": "lca_stem",
+          "label": "Left coronary artery",
+          "group": "Left coronary artery"
+        },
+        {
+          "key": "lad",
+          "label": "Anterior interventricular br. (LAD)",
+          "group": "Left coronary artery"
+        },
+        {
+          "key": "diagonal",
+          "label": "Diagonal branches",
+          "group": "Left coronary artery"
+        },
+        {
+          "key": "septal_branches",
+          "label": "Septal perforators",
+          "group": "Left coronary artery"
+        },
+        {
+          "key": "circumflex",
+          "label": "Circumflex branch",
+          "group": "Left coronary artery"
+        },
+        {
+          "key": "left_marginal",
+          "label": "Left marginal branch",
+          "group": "Left coronary artery"
+        },
+        {
+          "key": "rca",
+          "label": "Right coronary artery",
+          "group": "Right coronary artery"
+        },
+        {
+          "key": "right_marginal",
+          "label": "Right marginal branch",
+          "group": "Right coronary artery"
+        },
+        {
+          "key": "pda",
+          "label": "Posterior interventricular br. (PDA)",
+          "group": "Right coronary artery"
+        },
+        {
+          "key": "posterolateral",
+          "label": "Posterolateral branch",
+          "group": "Right coronary artery"
+        },
+        {
+          "key": "sa_nodal",
+          "label": "SA nodal branch",
+          "group": "Right coronary artery"
+        },
+        {
+          "key": "av_nodal",
+          "label": "AV nodal branch",
+          "group": "Right coronary artery"
+        },
+        {
+          "key": "coronary_sinus",
+          "label": "Coronary sinus",
+          "group": "Cardiac veins"
+        },
+        {
+          "key": "great_cardiac_vein",
+          "label": "Great cardiac vein",
+          "group": "Cardiac veins"
+        },
+        {
+          "key": "middle_cardiac_vein",
+          "label": "Middle cardiac vein",
+          "group": "Cardiac veins"
+        },
+        {
+          "key": "small_cardiac_vein",
+          "label": "Small cardiac vein",
+          "group": "Cardiac veins"
+        },
+        {
+          "key": "post_veins_lv",
+          "label": "Posterior veins of the LV",
+          "group": "Cardiac veins"
+        },
+        {
+          "key": "oblique_vein_la",
+          "label": "Oblique vein of the LA",
+          "group": "Cardiac veins"
+        },
+        {
+          "key": "anterior_cardiac_veins",
+          "label": "Anterior cardiac veins",
+          "group": "Cardiac veins"
+        },
+        {
+          "key": "sa_node",
+          "label": "SA node",
+          "group": "What the nodal branches supply"
+        },
+        {
+          "key": "av_node",
+          "label": "AV node",
+          "group": "What the nodal branches supply"
+        },
+        {
+          "key": "terr_lad",
+          "label": "LAD territory",
+          "group": "Myocardial territories"
+        },
+        {
+          "key": "terr_cx",
+          "label": "Circumflex territory",
+          "group": "Myocardial territories"
+        },
+        {
+          "key": "terr_rca",
+          "label": "RCA territory",
+          "group": "Myocardial territories"
+        }
+      ],
+      "terms": {
+        "myocardium": "heart",
+        "heart muscle": "heart",
+        "cardiac muscle": "heart",
+        "myocardium external form": "heart",
+        "coronary sulcus": "coronary_sulcus",
+        "atrioventricular groove": "coronary_sulcus",
+        "av groove": "coronary_sulcus",
+        "coronary atrioventricular sulcus": "coronary_sulcus",
+        "anterior interventricular sulcus": "ant_iv_sulcus",
+        "anterior interventricular groove": "ant_iv_sulcus",
+        "anterior iv sulcus": "ant_iv_sulcus",
+        "posterior interventricular sulcus": "post_iv_sulcus",
+        "inferior interventricular groove": "post_iv_sulcus",
+        "posterior iv sulcus": "post_iv_sulcus",
+        "crux": "crux",
+        "crux of the heart": "crux",
+        "cardiac crux": "crux",
+        "left coronary artery": "lca_stem",
+        "left main": "lca_stem",
+        "lca": "lca_stem",
+        "left main stem": "lca_stem",
+        "left coronary artery stem": "lca_stem",
+        "anterior interventricular branch": "lad",
+        "lad": "lad",
+        "left anterior descending": "lad",
+        "widow maker": "lad",
+        "anterior interventricular br lad": "lad",
+        "anterior interventricular branch lad": "lad",
+        "diagonal branch": "diagonal",
+        "diagonal arteries": "diagonal",
+        "diagonal branches": "diagonal",
+        "septal branches": "septal_branches",
+        "septal perforators": "septal_branches",
+        "interventricular septal arteries": "septal_branches",
+        "interventricular septal branches": "septal_branches",
+        "circumflex artery": "circumflex",
+        "circumflex branch": "circumflex",
+        "lcx": "circumflex",
+        "left marginal artery": "left_marginal",
+        "obtuse marginal": "left_marginal",
+        "om branch": "left_marginal",
+        "left marginal branch": "left_marginal",
+        "left obtuse marginal branch": "left_marginal",
+        "right coronary artery": "rca",
+        "rca": "rca",
+        "right marginal artery": "right_marginal",
+        "acute marginal branch": "right_marginal",
+        "right marginal branch": "right_marginal",
+        "right acute marginal branch": "right_marginal",
+        "posterior interventricular branch": "pda",
+        "posterior descending artery": "pda",
+        "pda": "pda",
+        "posterior interventricular br pda": "pda",
+        "posterior interventricular branch pda": "pda",
+        "posterolateral branch": "posterolateral",
+        "right posterolateral artery": "posterolateral",
+        "right posterolateral branch": "posterolateral",
+        "sinuatrial nodal artery": "sa_nodal",
+        "sa nodal branch": "sa_nodal",
+        "sinus node artery": "sa_nodal",
+        "sinuatrial nodal branch": "sa_nodal",
+        "atrioventricular nodal artery": "av_nodal",
+        "av nodal branch": "av_nodal",
+        "atrioventricular nodal branch": "av_nodal",
+        "coronary sinus": "coronary_sinus",
+        "coronary sinus ostium": "coronary_sinus",
+        "valve of thebesius": "coronary_sinus",
+        "great cardiac vein": "great_cardiac_vein",
+        "middle cardiac vein": "middle_cardiac_vein",
+        "small cardiac vein": "small_cardiac_vein",
+        "posterior vein of the left ventricle": "post_veins_lv",
+        "posterior cardiac veins": "post_veins_lv",
+        "posterior veins of the lv": "post_veins_lv",
+        "posterior veins of the left ventricle": "post_veins_lv",
+        "oblique vein of the left atrium": "oblique_vein_la",
+        "vein of marshall": "oblique_vein_la",
+        "oblique vein of the la": "oblique_vein_la",
+        "anterior cardiac veins": "anterior_cardiac_veins",
+        "anterior veins of the right ventricle": "anterior_cardiac_veins",
+        "sinuatrial node": "sa_node",
+        "sa node": "sa_node",
+        "sinus node": "sa_node",
+        "pacemaker": "sa_node",
+        "atrioventricular node": "av_node",
+        "av node": "av_node",
+        "lad territory": "terr_lad",
+        "anterior myocardial infarction": "terr_lad",
+        "anterior wall": "terr_lad",
+        "territory of the anterior interventricular branch": "terr_lad",
+        "circumflex territory": "terr_cx",
+        "lateral myocardial infarction": "terr_cx",
+        "lateral wall": "terr_cx",
+        "territory of the circumflex branch": "terr_cx",
+        "rca territory": "terr_rca",
+        "inferior myocardial infarction": "terr_rca",
+        "inferior wall": "terr_rca",
+        "territory of the right coronary artery": "terr_rca",
+        "ascending aorta": "asc_aorta",
+        "aortic sinus": "asc_aorta",
+        "sinus of valsalva": "asc_aorta",
+        "coronary ostia": "asc_aorta",
+        "pulmonary trunk": "pulm_trunk",
+        "right auricle": "ra_auricle",
+        "right atrial appendage": "ra_auricle",
+        "left auricle": "la_auricle",
+        "left atrial appendage": "la_auricle",
+        "superior vena cava": "svc",
+        "svc": "svc",
+        "inferior vena cava": "ivc",
+        "ivc": "ivc"
+      },
+      "counts": {
+        "structures": 35,
+        "parts": 28,
+        "views": 12
+      }
+    },
+    {
       "id": "gross__heart-pericardium__heart-chambers",
       "file": "viz-training/scenes/gross__heart-pericardium__heart-chambers.json",
       "schema": 2,
@@ -16764,6 +17490,635 @@
         "structures": 23,
         "parts": 16,
         "views": 7
+      }
+    },
+    {
+      "id": "gross__heart-pericardium__heart-external",
+      "file": "viz-training/scenes/gross__heart-pericardium__heart-external.json",
+      "schema": 2,
+      "mode": "3d_anatomy",
+      "provider": "procedural",
+      "status": "candidate",
+      "student_ready": false,
+      "authored_by": "task",
+      "approved_by": null,
+      "degrades": [],
+      "course": "Gross Anatomy",
+      "topic": "Heart & Pericardium",
+      "structure": "Heart (external)",
+      "learning_goal": "Place the heart in the mediastinum, and be able to say which chamber forms each surface, each border, the apex and the base — and where the three sulci run, and what the sac around it is made of.",
+      "gaps": 7,
+      "match": {
+        "topics": [
+          "heart",
+          "pericardium",
+          "mediastinum",
+          "thorax",
+          "cardiovascular",
+          "heart pericardium",
+          "heart external"
+        ],
+        "terms": [
+          "heart",
+          "external heart",
+          "surfaces of the heart",
+          "borders of the heart",
+          "apex of the heart",
+          "apex beat",
+          "base of the heart",
+          "coronary sulcus",
+          "interventricular sulcus",
+          "crux of the heart",
+          "sternocostal surface",
+          "diaphragmatic surface",
+          "pericardium",
+          "pericardial cavity",
+          "auricle",
+          "cardiac silhouette",
+          "middle mediastinum"
+        ]
+      },
+      "parts": [
+        {
+          "key": "heart",
+          "label": "Heart",
+          "group": "The heart"
+        },
+        {
+          "key": "ra",
+          "label": "Right atrium",
+          "group": "Chamber territories"
+        },
+        {
+          "key": "rv",
+          "label": "Right ventricle",
+          "group": "Chamber territories"
+        },
+        {
+          "key": "la",
+          "label": "Left atrium",
+          "group": "Chamber territories"
+        },
+        {
+          "key": "lv",
+          "label": "Left ventricle",
+          "group": "Chamber territories"
+        },
+        {
+          "key": "ra_auricle",
+          "label": "Right auricle",
+          "group": "Chamber territories"
+        },
+        {
+          "key": "la_auricle",
+          "label": "Left auricle",
+          "group": "Chamber territories"
+        },
+        {
+          "key": "coronary_sulcus",
+          "label": "Coronary sulcus",
+          "group": "Sulci"
+        },
+        {
+          "key": "ant_iv_sulcus",
+          "label": "Anterior interventricular sulcus",
+          "group": "Sulci"
+        },
+        {
+          "key": "post_iv_sulcus",
+          "label": "Posterior interventricular sulcus",
+          "group": "Sulci"
+        },
+        {
+          "key": "apex",
+          "label": "Apex",
+          "group": "The heart"
+        },
+        {
+          "key": "base",
+          "label": "Base",
+          "group": "The heart"
+        },
+        {
+          "key": "surf_sternocostal",
+          "label": "Sternocostal surface",
+          "group": "Surfaces"
+        },
+        {
+          "key": "surf_diaphragmatic",
+          "label": "Diaphragmatic surface",
+          "group": "Surfaces"
+        },
+        {
+          "key": "surf_left_pulmonary",
+          "label": "Left pulmonary surface",
+          "group": "Surfaces"
+        },
+        {
+          "key": "border_right",
+          "label": "Right border",
+          "group": "Borders"
+        },
+        {
+          "key": "border_left",
+          "label": "Left border",
+          "group": "Borders"
+        },
+        {
+          "key": "border_inferior",
+          "label": "Inferior border",
+          "group": "Borders"
+        },
+        {
+          "key": "border_superior",
+          "label": "Superior border",
+          "group": "Borders"
+        },
+        {
+          "key": "asc_aorta",
+          "label": "Ascending aorta",
+          "group": "Great vessels"
+        },
+        {
+          "key": "aortic_arch",
+          "label": "Aortic arch",
+          "group": "Great vessels"
+        },
+        {
+          "key": "pulm_trunk",
+          "label": "Pulmonary trunk",
+          "group": "Great vessels"
+        },
+        {
+          "key": "r_pa",
+          "label": "Right pulmonary artery",
+          "group": "Great vessels"
+        },
+        {
+          "key": "l_pa",
+          "label": "Left pulmonary artery",
+          "group": "Great vessels"
+        },
+        {
+          "key": "svc",
+          "label": "Superior vena cava",
+          "group": "Great vessels"
+        },
+        {
+          "key": "ivc",
+          "label": "Inferior vena cava",
+          "group": "Great vessels"
+        },
+        {
+          "key": "pulm_veins_r",
+          "label": "Right pulmonary veins",
+          "group": "Great vessels"
+        },
+        {
+          "key": "pulm_veins_l",
+          "label": "Left pulmonary veins",
+          "group": "Great vessels"
+        },
+        {
+          "key": "lig_arteriosum",
+          "label": "Ligamentum arteriosum",
+          "group": "Great vessels"
+        },
+        {
+          "key": "pericardium_fibrous",
+          "label": "Fibrous pericardium",
+          "group": "Pericardium"
+        },
+        {
+          "key": "pericardium_parietal_serous",
+          "label": "Parietal serous layer",
+          "group": "Pericardium"
+        },
+        {
+          "key": "pericardium_visceral_serous",
+          "label": "Visceral serous layer (epicardium)",
+          "group": "Pericardium"
+        },
+        {
+          "key": "pericardial_cavity",
+          "label": "Pericardial cavity",
+          "group": "Pericardium"
+        },
+        {
+          "key": "phrenic_r",
+          "label": "Right phrenic nerve",
+          "group": "Mediastinum"
+        },
+        {
+          "key": "phrenic_l",
+          "label": "Left phrenic nerve",
+          "group": "Mediastinum"
+        }
+      ],
+      "terms": {
+        "heart": "heart",
+        "external heart": "heart",
+        "surfaces of the heart": "heart",
+        "borders of the heart": "heart",
+        "heart external form": "heart",
+        "right atrium": "ra",
+        "right border": "border_right",
+        "right ventricle": "rv",
+        "sternocostal surface": "surf_sternocostal",
+        "acute border": "rv",
+        "left atrium": "la",
+        "base of the heart": "base",
+        "left ventricle": "lv",
+        "apex": "apex",
+        "left border": "border_left",
+        "right auricle": "ra_auricle",
+        "right atrial appendage": "ra_auricle",
+        "left auricle": "la_auricle",
+        "left atrial appendage": "la_auricle",
+        "coronary sulcus": "coronary_sulcus",
+        "atrioventricular groove": "coronary_sulcus",
+        "av groove": "coronary_sulcus",
+        "coronary atrioventricular sulcus": "coronary_sulcus",
+        "anterior interventricular sulcus": "ant_iv_sulcus",
+        "anterior interventricular groove": "ant_iv_sulcus",
+        "posterior interventricular sulcus": "post_iv_sulcus",
+        "inferior interventricular groove": "post_iv_sulcus",
+        "crux of the heart": "post_iv_sulcus",
+        "apex of the heart": "apex",
+        "apex beat": "apex",
+        "fifth intercostal space": "apex",
+        "midclavicular line": "apex",
+        "posterior surface of the heart": "base",
+        "base": "base",
+        "anterior surface of the heart": "surf_sternocostal",
+        "sternocostal anterior surface": "surf_sternocostal",
+        "diaphragmatic surface": "surf_diaphragmatic",
+        "inferior surface of the heart": "surf_diaphragmatic",
+        "diaphragmatic inferior surface": "surf_diaphragmatic",
+        "left pulmonary surface": "surf_left_pulmonary",
+        "cardiac impression": "surf_left_pulmonary",
+        "right border of the heart": "border_right",
+        "left border of the heart": "border_left",
+        "inferior border of the heart": "border_inferior",
+        "inferior border": "border_inferior",
+        "inferior acute border": "border_inferior",
+        "superior border of the heart": "border_superior",
+        "superior border": "border_superior",
+        "ascending aorta": "asc_aorta",
+        "aortic root": "asc_aorta",
+        "arch of the aorta": "aortic_arch",
+        "aortic arch": "aortic_arch",
+        "sternal angle": "aortic_arch",
+        "pulmonary trunk": "pulm_trunk",
+        "pulmonary artery": "pulm_trunk",
+        "right pulmonary artery": "r_pa",
+        "left pulmonary artery": "l_pa",
+        "superior vena cava": "svc",
+        "svc": "svc",
+        "inferior vena cava": "ivc",
+        "ivc": "ivc",
+        "right pulmonary veins": "pulm_veins_r",
+        "pulmonary veins": "pulm_veins_r",
+        "left pulmonary veins": "pulm_veins_l",
+        "ligamentum arteriosum": "lig_arteriosum",
+        "ductus arteriosus": "lig_arteriosum",
+        "fibrous pericardium": "pericardium_fibrous",
+        "pericardial sac": "pericardium_fibrous",
+        "parietal serous pericardium": "pericardium_parietal_serous",
+        "parietal serous layer": "pericardium_parietal_serous",
+        "parietal layer of serous pericardium": "pericardium_parietal_serous",
+        "visceral serous pericardium": "pericardium_visceral_serous",
+        "epicardium": "pericardium_visceral_serous",
+        "visceral serous layer epicardium": "pericardium_visceral_serous",
+        "visceral layer of serous pericardium epicardium": "pericardium_visceral_serous",
+        "pericardial cavity": "pericardial_cavity",
+        "pericardial fluid": "pericardial_cavity",
+        "right lung": "lung_r",
+        "left lung": "lung_l",
+        "diaphragm": "diaphragm",
+        "sternum": "sternum",
+        "trachea and main bronchi": "trachea_bronchi",
+        "oesophagus": "oesophagus",
+        "descending thoracic aorta": "desc_aorta",
+        "right phrenic nerve": "phrenic_r",
+        "phrenic nerve": "phrenic_r",
+        "referred pain": "phrenic_r",
+        "left phrenic nerve": "phrenic_l"
+      },
+      "counts": {
+        "structures": 42,
+        "parts": 35,
+        "views": 14
+      }
+    },
+    {
+      "id": "gross__heart-pericardium__heart-valves",
+      "file": "viz-training/scenes/gross__heart-pericardium__heart-valves.json",
+      "schema": 2,
+      "mode": "3d_anatomy",
+      "provider": "procedural",
+      "status": "candidate",
+      "student_ready": false,
+      "authored_by": "task",
+      "approved_by": null,
+      "degrades": [],
+      "course": "Gross Anatomy",
+      "topic": "Heart & Pericardium",
+      "structure": "Heart valves",
+      "learning_goal": "Name every leaflet and cusp of the four valves, say where each valve sits in the fibrous skeleton relative to the other three, and explain what opens and shuts each one at every instant of the beat - including why a valve leaks when its chordae are too long and why a cusp cannot open at all without a sinus behind it.",
+      "gaps": 10,
+      "match": {
+        "topics": [
+          "heart",
+          "heart valves",
+          "valves",
+          "cardiovascular",
+          "pericardium",
+          "cardiac anatomy",
+          "auscultation",
+          "valvular heart disease",
+          "heart pericardium"
+        ],
+        "terms": [
+          "heart valve",
+          "mitral valve",
+          "bicuspid valve",
+          "anterior mitral leaflet",
+          "posterior mitral leaflet",
+          "tricuspid valve",
+          "septal leaflet",
+          "aortic valve",
+          "pulmonary valve",
+          "semilunar valve",
+          "cusp",
+          "leaflet",
+          "annulus",
+          "fibrous skeleton",
+          "fibrous trigone",
+          "central fibrous body",
+          "aortomitral continuity",
+          "chordae tendineae",
+          "papillary muscle",
+          "anterolateral papillary muscle",
+          "posteromedial papillary muscle",
+          "moderator band",
+          "sinus of valsalva",
+          "sinotubular junction",
+          "nodule of arantius",
+          "lunula",
+          "coronary ostium",
+          "right coronary cusp",
+          "left coronary cusp",
+          "non coronary cusp",
+          "coaptation",
+          "mitral regurgitation",
+          "mitral prolapse",
+          "aortic stenosis",
+          "first heart sound",
+          "second heart sound",
+          "s1",
+          "s2",
+          "splitting of s2",
+          "ebstein anomaly",
+          "atrioventricular septal defect",
+          "tenting"
+        ]
+      },
+      "parts": [
+        {
+          "key": "mitral_anterior",
+          "label": "Mitral - anterior leaflet",
+          "group": "Mitral valve"
+        },
+        {
+          "key": "mitral_posterior",
+          "label": "Mitral - posterior leaflet",
+          "group": "Mitral valve"
+        },
+        {
+          "key": "tricuspid_anterior",
+          "label": "Tricuspid - anterior leaflet",
+          "group": "Tricuspid valve"
+        },
+        {
+          "key": "tricuspid_posterior",
+          "label": "Tricuspid - posterior leaflet",
+          "group": "Tricuspid valve"
+        },
+        {
+          "key": "tricuspid_septal",
+          "label": "Tricuspid - septal leaflet",
+          "group": "Tricuspid valve"
+        },
+        {
+          "key": "aortic_right",
+          "label": "Aortic - right coronary cusp",
+          "group": "Aortic valve"
+        },
+        {
+          "key": "aortic_left",
+          "label": "Aortic - left coronary cusp",
+          "group": "Aortic valve"
+        },
+        {
+          "key": "aortic_noncoronary",
+          "label": "Aortic - non-coronary cusp",
+          "group": "Aortic valve"
+        },
+        {
+          "key": "pulmonary_anterior",
+          "label": "Pulmonary - anterior cusp",
+          "group": "Pulmonary valve"
+        },
+        {
+          "key": "pulmonary_right",
+          "label": "Pulmonary - right cusp",
+          "group": "Pulmonary valve"
+        },
+        {
+          "key": "pulmonary_left",
+          "label": "Pulmonary - left cusp",
+          "group": "Pulmonary valve"
+        },
+        {
+          "key": "annulus_mitral",
+          "label": "Mitral annulus",
+          "group": "Fibrous skeleton"
+        },
+        {
+          "key": "annulus_tricuspid",
+          "label": "Tricuspid annulus",
+          "group": "Fibrous skeleton"
+        },
+        {
+          "key": "annulus_aortic",
+          "label": "Aortic annulus - the crown",
+          "group": "Fibrous skeleton"
+        },
+        {
+          "key": "annulus_pulmonary",
+          "label": "Pulmonary annulus - the crown",
+          "group": "Fibrous skeleton"
+        },
+        {
+          "key": "trigones",
+          "label": "Fibrous trigones",
+          "group": "Fibrous skeleton"
+        },
+        {
+          "key": "chordae_mitral",
+          "label": "Chordae - mitral",
+          "group": "Tension apparatus"
+        },
+        {
+          "key": "chordae_tricuspid",
+          "label": "Chordae - tricuspid",
+          "group": "Tension apparatus"
+        },
+        {
+          "key": "pap_anterolateral",
+          "label": "Papillary - anterolateral",
+          "group": "Tension apparatus"
+        },
+        {
+          "key": "pap_posteromedial",
+          "label": "Papillary - posteromedial",
+          "group": "Tension apparatus"
+        },
+        {
+          "key": "papillary_rv",
+          "label": "Papillary muscles - right",
+          "group": "Tension apparatus"
+        },
+        {
+          "key": "aortic_root",
+          "label": "Aortic root & sinuses",
+          "group": "Arterial roots"
+        },
+        {
+          "key": "pulmonary_root",
+          "label": "Pulmonary root & sinuses",
+          "group": "Arterial roots"
+        },
+        {
+          "key": "ostium_left",
+          "label": "Left coronary ostium",
+          "group": "Arterial roots"
+        },
+        {
+          "key": "ostium_right",
+          "label": "Right coronary ostium",
+          "group": "Arterial roots"
+        }
+      ],
+      "terms": {
+        "anterior mitral leaflet": "mitral_anterior",
+        "aortic leaflet": "mitral_anterior",
+        "amvl": "mitral_anterior",
+        "mitral anterior leaflet": "mitral_anterior",
+        "anterior aortic leaflet of mitral valve": "mitral_anterior",
+        "posterior mitral leaflet": "mitral_posterior",
+        "mural leaflet": "mitral_posterior",
+        "scallops": "mitral_posterior",
+        "mitral posterior leaflet": "mitral_posterior",
+        "posterior mural leaflet of mitral valve": "mitral_posterior",
+        "anterior tricuspid leaflet": "tricuspid_anterior",
+        "anterosuperior leaflet": "tricuspid_anterior",
+        "tricuspid anterior leaflet": "tricuspid_anterior",
+        "anterior leaflet of tricuspid valve": "tricuspid_anterior",
+        "posterior tricuspid leaflet": "tricuspid_posterior",
+        "inferior leaflet": "tricuspid_posterior",
+        "tricuspid posterior leaflet": "tricuspid_posterior",
+        "posterior leaflet of tricuspid valve": "tricuspid_posterior",
+        "septal tricuspid leaflet": "tricuspid_septal",
+        "offsetting": "tricuspid_septal",
+        "ebstein anomaly": "tricuspid_septal",
+        "atrioventricular septal defect": "tricuspid_septal",
+        "tricuspid septal leaflet": "tricuspid_septal",
+        "septal leaflet of tricuspid valve": "tricuspid_septal",
+        "right coronary cusp": "aortic_right",
+        "rcc": "aortic_right",
+        "aortic right coronary cusp": "aortic_right",
+        "right coronary cusp of aortic valve": "aortic_right",
+        "left coronary cusp": "aortic_left",
+        "lcc": "aortic_left",
+        "aortic left coronary cusp": "aortic_left",
+        "left coronary cusp of aortic valve": "aortic_left",
+        "non coronary cusp": "aortic_noncoronary",
+        "posterior cusp": "aortic_noncoronary",
+        "ncc": "aortic_noncoronary",
+        "aortic non coronary cusp": "aortic_noncoronary",
+        "non coronary cusp of aortic valve": "aortic_noncoronary",
+        "anterior pulmonary cusp": "pulmonary_anterior",
+        "pulmonary anterior cusp": "pulmonary_anterior",
+        "anterior cusp of pulmonary valve": "pulmonary_anterior",
+        "right pulmonary cusp": "pulmonary_right",
+        "pulmonary right cusp": "pulmonary_right",
+        "right cusp of pulmonary valve": "pulmonary_right",
+        "left pulmonary cusp": "pulmonary_left",
+        "pulmonary left cusp": "pulmonary_left",
+        "left cusp of pulmonary valve": "pulmonary_left",
+        "mitral annulus": "annulus_mitral",
+        "annular dilatation": "annulus_mitral",
+        "functional mitral regurgitation": "annulus_mitral",
+        "tricuspid annulus": "annulus_tricuspid",
+        "aortic annulus": "annulus_aortic",
+        "crown": "annulus_aortic",
+        "coronet": "annulus_aortic",
+        "ventriculo arterial junction": "annulus_aortic",
+        "aortic annulus the crown": "annulus_aortic",
+        "pulmonary annulus": "annulus_pulmonary",
+        "pulmonary annulus the crown": "annulus_pulmonary",
+        "right fibrous trigone": "trigones",
+        "left fibrous trigone": "trigones",
+        "central fibrous body": "trigones",
+        "aortomitral continuity": "trigones",
+        "membranous septum": "trigones",
+        "fibrous trigones": "trigones",
+        "fibrous trigones central fibrous body": "trigones",
+        "chordae tendineae": "chordae_mitral",
+        "marginal chordae": "chordae_mitral",
+        "chordal rupture": "chordae_mitral",
+        "flail leaflet": "chordae_mitral",
+        "chordae mitral": "chordae_mitral",
+        "chordae tendineae of mitral valve": "chordae_mitral",
+        "tricuspid chordae": "chordae_tricuspid",
+        "chordae tricuspid": "chordae_tricuspid",
+        "chordae tendineae of tricuspid valve": "chordae_tricuspid",
+        "anterolateral papillary muscle": "pap_anterolateral",
+        "dual blood supply": "pap_anterolateral",
+        "papillary anterolateral": "pap_anterolateral",
+        "posteromedial papillary muscle": "pap_posteromedial",
+        "papillary muscle rupture": "pap_posteromedial",
+        "inferior myocardial infarction": "pap_posteromedial",
+        "papillary posteromedial": "pap_posteromedial",
+        "anterior papillary muscle": "papillary_rv",
+        "moderator band": "papillary_rv",
+        "septal papillary muscle": "papillary_rv",
+        "muscle of lancisi": "papillary_rv",
+        "papillary muscles right": "papillary_rv",
+        "papillary muscles of the right ventricle": "papillary_rv",
+        "sinus of valsalva": "aortic_root",
+        "aortic root": "aortic_root",
+        "sinotubular junction": "aortic_root",
+        "aortic root dilatation": "aortic_root",
+        "aortic root sinuses": "aortic_root",
+        "aortic root sinuses of valsalva": "aortic_root",
+        "pulmonary sinuses": "pulmonary_root",
+        "pulmonary root": "pulmonary_root",
+        "pulmonary root sinuses": "pulmonary_root",
+        "left coronary ostium": "ostium_left",
+        "left main stem": "ostium_left",
+        "right coronary ostium": "ostium_right",
+        "left ventricle": "chamber_ghost",
+        "right ventricle": "chamber_ghost",
+        "ventricular walls": "chamber_ghost",
+        "ventricular walls context": "chamber_ghost"
+      },
+      "counts": {
+        "structures": 26,
+        "parts": 25,
+        "views": 9
       }
     },
     {
@@ -29752,7 +31107,43 @@
           "intercalated disc"
         ]
       },
-      "parts": [],
+      "parts": [
+        {
+          "key": "the_stack",
+          "label": "The stack — and why the order is not arbitrary",
+          "group": "The junctional complex"
+        },
+        {
+          "key": "tight",
+          "label": "Tight junction (zonula occludens) — the seal and the fence",
+          "group": "The junctional complex"
+        },
+        {
+          "key": "adherens",
+          "label": "Adherens junction (zonula adherens) — cadherin to actin",
+          "group": "The junctional complex"
+        },
+        {
+          "key": "desmosome",
+          "label": "Desmosome (macula adherens) — a spot weld to keratin",
+          "group": "The junctional complex"
+        },
+        {
+          "key": "gap",
+          "label": "Gap junction (nexus) — a shared pore, not an adhesion",
+          "group": "Communication and anchorage"
+        },
+        {
+          "key": "hemidesmosome",
+          "label": "Hemidesmosome — the sheet to its floor",
+          "group": "Communication and anchorage"
+        },
+        {
+          "key": "blister_level",
+          "label": "The blister is at the level of the junction attacked",
+          "group": "Reading the level"
+        }
+      ],
       "terms": {
         "junctional complex": "the_stack",
         "terminal bar": "the_stack",
@@ -29844,7 +31235,7 @@
       },
       "counts": {
         "structures": 8,
-        "parts": 0,
+        "parts": 7,
         "views": 5
       }
     },
@@ -29919,9 +31310,59 @@
       },
       "parts": [
         {
+          "key": "downgrowth",
+          "label": "Every gland is an epithelium that grew down",
+          "group": "How a gland is made"
+        },
+        {
+          "key": "exo_vs_endo",
+          "label": "Question 1 — did it keep its duct?",
+          "group": "How a gland is made"
+        },
+        {
+          "key": "goblet",
+          "label": "The one-cell gland — goblet cell",
+          "group": "How a gland is made"
+        },
+        {
+          "key": "acinus_shape",
+          "label": "Question 2 — the shape of the end piece",
+          "group": "The exocrine tree"
+        },
+        {
+          "key": "ducts",
+          "label": "The duct is not a pipe — intercalated and striated",
+          "group": "The exocrine tree"
+        },
+        {
           "key": "myoepithelial",
           "label": "Myoepithelial cells — the squeeze",
           "group": "The exocrine tree"
+        },
+        {
+          "key": "merocrine",
+          "label": "Question 3a — merocrine: nothing is lost",
+          "group": "Three ways out of a cell"
+        },
+        {
+          "key": "apocrine",
+          "label": "Question 3b — apocrine: the apex goes with it",
+          "group": "Three ways out of a cell"
+        },
+        {
+          "key": "holocrine",
+          "label": "Question 3c — holocrine: the cell is the secretion",
+          "group": "Three ways out of a cell"
+        },
+        {
+          "key": "serous",
+          "label": "Question 4a — serous: dark, round, protein",
+          "group": "What is in the product"
+        },
+        {
+          "key": "mucous",
+          "label": "Question 4b — mucous: pale, flat nucleus, glycoprotein",
+          "group": "What is in the product"
         },
         {
           "key": "demilune",
@@ -29935,7 +31376,7 @@
         "invagination": "downgrowth",
         "surface epithelium": "downgrowth",
         "duct": "downgrowth",
-        "basement membrane": "myoepithelial",
+        "basement membrane": "downgrowth",
         "connective tissue": "downgrowth",
         "every gland is an epithelium that grew down": "downgrowth",
         "exocrine gland": "exo_vs_endo",
@@ -29968,8 +31409,8 @@
         "compound gland": "acinus_shape",
         "branched gland": "acinus_shape",
         "gastric gland": "acinus_shape",
-        "sweat gland": "myoepithelial",
-        "salivary gland": "myoepithelial",
+        "sweat gland": "acinus_shape",
+        "salivary gland": "acinus_shape",
         "question 2 the shape of the end piece": "acinus_shape",
         "intercalated duct": "ducts",
         "striated duct": "ducts",
@@ -30028,7 +31469,7 @@
         "serous acinus": "serous",
         "basophilia": "serous",
         "amylase": "serous",
-        "parotid gland": "demilune",
+        "parotid gland": "serous",
         "round nucleus": "serous",
         "narrow lumen": "serous",
         "question 4a serous dark round protein": "serous",
@@ -30038,7 +31479,7 @@
         "mucicarmine": "mucous",
         "flattened nucleus": "mucous",
         "basal nucleus": "mucous",
-        "sublingual gland": "demilune",
+        "sublingual gland": "mucous",
         "wide lumen": "mucous",
         "question 4b mucous pale flat nucleus glycoprotein": "mucous",
         "serous demilune": "demilune",
@@ -30052,7 +31493,7 @@
       },
       "counts": {
         "structures": 12,
-        "parts": 2,
+        "parts": 12,
         "views": 5
       }
     },
@@ -30119,14 +31560,50 @@
           "kartagener syndrome"
         ]
       },
-      "parts": [],
+      "parts": [
+        {
+          "key": "basement_membrane",
+          "label": "The basement membrane — where counting starts",
+          "group": "How to classify"
+        },
+        {
+          "key": "polarity",
+          "label": "Polarity — three surfaces, three different memberships",
+          "group": "How to classify"
+        },
+        {
+          "key": "simple_squamous",
+          "label": "Simple squamous — one flat layer, built for exchange",
+          "group": "The three simple types"
+        },
+        {
+          "key": "simple_cuboidal",
+          "label": "Simple cuboidal — one layer, as tall as it is wide",
+          "group": "The three simple types"
+        },
+        {
+          "key": "simple_columnar",
+          "label": "Simple columnar — one layer, taller than wide",
+          "group": "The three simple types"
+        },
+        {
+          "key": "pseudostratified",
+          "label": "Pseudostratified — the one that lies about its layers",
+          "group": "The traps"
+        },
+        {
+          "key": "tangential",
+          "label": "The tangential cut — the commonest reason for a wrong answer",
+          "group": "The traps"
+        }
+      ],
       "terms": {
         "epithelium": "the_question",
-        "simple epithelium": "the_question",
-        "stratified epithelium": "the_question",
+        "simple epithelium": "tangential",
+        "stratified epithelium": "tangential",
         "classification": "the_question",
-        "apical surface": "the_question",
-        "basement membrane": "the_question",
+        "apical surface": "polarity",
+        "basement membrane": "basement_membrane",
         "the two questions asked in this order": "the_question",
         "basal lamina": "basement_membrane",
         "lamina densa": "basement_membrane",
@@ -30203,7 +31680,7 @@
       },
       "counts": {
         "structures": 8,
-        "parts": 0,
+        "parts": 7,
         "views": 5
       }
     },
@@ -30275,9 +31752,39 @@
       },
       "parts": [
         {
+          "key": "why_layers",
+          "label": "Why layers at all — the trade against exchange",
+          "group": "How to classify"
+        },
+        {
+          "key": "non_keratinised",
+          "label": "Stratified squamous, non-keratinised — wet surfaces",
+          "group": "The stratified squamous pair"
+        },
+        {
+          "key": "keratinised",
+          "label": "Stratified squamous, keratinised — the epidermis",
+          "group": "The stratified squamous pair"
+        },
+        {
+          "key": "epidermal_layers",
+          "label": "The five layers as one cell's life",
+          "group": "The stratified squamous pair"
+        },
+        {
           "key": "cuboidal_columnar",
           "label": "Stratified cuboidal and columnar — rare, and mostly ducts",
           "group": "The rarer two"
+        },
+        {
+          "key": "transitional",
+          "label": "Transitional epithelium — shaped by how full the organ is",
+          "group": "The rarer two"
+        },
+        {
+          "key": "metaplasia",
+          "label": "Metaplasia — when a surface changes its class",
+          "group": "Reading the change"
         }
       ],
       "terms": {
@@ -30286,7 +31793,7 @@
         "surface cells": "surface_rule",
         "basal cells": "surface_rule",
         "apical surface": "surface_rule",
-        "basement membrane": "surface_rule",
+        "basement membrane": "why_layers",
         "the naming rule the surface cells decide": "surface_rule",
         "abrasion": "why_layers",
         "mechanical protection": "why_layers",
@@ -30370,7 +31877,7 @@
       },
       "counts": {
         "structures": 8,
-        "parts": 1,
+        "parts": 7,
         "views": 5
       }
     },
@@ -31176,6 +32683,16 @@
       },
       "parts": [
         {
+          "key": "aca",
+          "label": "Anterior cerebral artery — the medial surface, so the leg",
+          "group": "The two territories"
+        },
+        {
+          "key": "mca",
+          "label": "Middle cerebral artery — the lateral surface, so face, arm and language",
+          "group": "The two territories"
+        },
+        {
           "key": "deep",
           "label": "Lenticulostriates — the same artery, a completely different stroke",
           "group": "Cortical versus deep"
@@ -31234,7 +32751,7 @@
       },
       "counts": {
         "structures": 4,
-        "parts": 2,
+        "parts": 4,
         "views": 4
       }
     },
@@ -31288,6 +32805,16 @@
       },
       "parts": [
         {
+          "key": "inflow",
+          "label": "Two inflows — the carotids in front, the basilar behind",
+          "group": "Getting blood to the ring"
+        },
+        {
+          "key": "ring",
+          "label": "The ring — six arteries and three joins",
+          "group": "The ring itself"
+        },
+        {
           "key": "collateral",
           "label": "Why a ring at all — collateral flow and the incomplete circle",
           "group": "What the ring is for"
@@ -31310,11 +32837,11 @@
         "two inflows the carotids in front the basilar behind": "inflow",
         "cerebral arterial circle": "ring",
         "anterior cerebral artery": "ring",
-        "anterior communicating artery": "aneurysm",
+        "anterior communicating artery": "ring",
         "posterior cerebral artery": "ring",
-        "posterior communicating artery": "aneurysm",
+        "posterior communicating artery": "ring",
         "middle cerebral artery": "ring",
-        "anastomosis": "collateral",
+        "anastomosis": "ring",
         "interpeduncular fossa": "ring",
         "the ring six arteries and three joins": "ring",
         "collateral circulation": "collateral",
@@ -31337,7 +32864,7 @@
       },
       "counts": {
         "structures": 4,
-        "parts": 2,
+        "parts": 4,
         "views": 4
       }
     },
@@ -31390,6 +32917,16 @@
       },
       "parts": [
         {
+          "key": "wall",
+          "label": "A space between two layers of dura — not a vein",
+          "group": "What a sinus is"
+        },
+        {
+          "key": "route",
+          "label": "The route out — sagittal to straight to transverse to jugular",
+          "group": "The drainage route"
+        },
+        {
           "key": "thrombosis",
           "label": "Sinus thrombosis and the bridging veins — two ways this system fails",
           "group": "When it fails"
@@ -31407,7 +32944,7 @@
         "meningeal layer": "wall",
         "falx cerebri": "wall",
         "tentorium cerebelli": "wall",
-        "valveless": "cavernous",
+        "valveless": "wall",
         "endothelium": "wall",
         "emissary vein": "wall",
         "a space between two layers of dura not a vein": "wall",
@@ -31452,7 +32989,7 @@
       },
       "counts": {
         "structures": 4,
-        "parts": 2,
+        "parts": 4,
         "views": 4
       }
     },
@@ -31506,6 +33043,16 @@
       },
       "parts": [
         {
+          "key": "trunk",
+          "label": "Vertebrals to basilar — one vessel for two sides",
+          "group": "The vertebrobasilar trunk"
+        },
+        {
+          "key": "branches",
+          "label": "Three cerebellar arteries — and why PICA is the one that is named",
+          "group": "Branches and what each takes"
+        },
+        {
           "key": "pons",
           "label": "Basilar perforators — the base of the pons and locked-in syndrome",
           "group": "Branches and what each takes"
@@ -31518,7 +33065,7 @@
       ],
       "terms": {
         "vertebral artery": "trunk",
-        "basilar artery": "pons",
+        "basilar artery": "trunk",
         "foramen magnum": "trunk",
         "transverse foramen": "trunk",
         "vertebral artery dissection": "trunk",
@@ -31562,7 +33109,7 @@
       },
       "counts": {
         "structures": 4,
-        "parts": 2,
+        "parts": 4,
         "views": 4
       }
     },
@@ -31646,6 +33193,11 @@
       },
       "parts": [
         {
+          "key": "medulla",
+          "label": "Medulla oblongata",
+          "group": "Medulla"
+        },
+        {
           "key": "v4",
           "label": "Fourth ventricle",
           "group": "Medulla"
@@ -31704,7 +33256,7 @@
       },
       "counts": {
         "structures": 9,
-        "parts": 2,
+        "parts": 3,
         "views": 6
       }
     },
@@ -31983,6 +33535,11 @@
       },
       "parts": [
         {
+          "key": "pons",
+          "label": "Pons",
+          "group": "Pons"
+        },
+        {
           "key": "v4",
           "label": "Fourth ventricle",
           "group": "Pons"
@@ -32030,7 +33587,7 @@
       },
       "counts": {
         "structures": 9,
-        "parts": 1,
+        "parts": 2,
         "views": 6
       }
     },
@@ -32113,6 +33670,11 @@
         ]
       },
       "parts": [
+        {
+          "key": "core",
+          "label": "Reticular formation — the diffuse core",
+          "group": "Where it lies"
+        },
         {
           "key": "col_median",
           "label": "Median column — raphe nuclei",
@@ -32250,7 +33812,7 @@
       },
       "counts": {
         "structures": 12,
-        "parts": 9,
+        "parts": 10,
         "views": 5
       }
     },
@@ -32324,9 +33886,29 @@
       },
       "parts": [
         {
+          "key": "loop",
+          "label": "The comparator — the one idea the scene is built on",
+          "group": "How the machine works"
+        },
+        {
           "key": "feedforward",
           "label": "Why it must predict rather than react",
           "group": "How the machine works"
+        },
+        {
+          "key": "vestibulocerebellum",
+          "label": "Vestibulocerebellum — balance and the eyes",
+          "group": "Three divisions, three jobs"
+        },
+        {
+          "key": "spinocerebellum",
+          "label": "Spinocerebellum — the movement while it happens",
+          "group": "Three divisions, three jobs"
+        },
+        {
+          "key": "cerebrocerebellum",
+          "label": "Cerebrocerebellum — the movement before it starts",
+          "group": "Three divisions, three jobs"
         },
         {
           "key": "learning",
@@ -32348,7 +33930,7 @@
         "comparator": "loop",
         "efference copy": "loop",
         "corollary discharge": "loop",
-        "feedforward control": "feedforward",
+        "feedforward control": "loop",
         "mossy fibre": "loop",
         "pontine nuclei": "loop",
         "spinocerebellar tract": "loop",
@@ -32364,10 +33946,10 @@
         "flocculonodular lobe": "vestibulocerebellum",
         "vestibular nuclei": "vestibulocerebellum",
         "vestibulo ocular reflex": "vestibulocerebellum",
-        "nystagmus": "signs",
-        "truncal ataxia": "signs",
-        "gait ataxia": "signs",
-        "romberg test": "tests",
+        "nystagmus": "vestibulocerebellum",
+        "truncal ataxia": "vestibulocerebellum",
+        "gait ataxia": "vestibulocerebellum",
+        "romberg test": "vestibulocerebellum",
         "vestibulocerebellum balance and the eyes": "vestibulocerebellum",
         "spinocerebellum": "spinocerebellum",
         "vermis": "spinocerebellum",
@@ -32379,9 +33961,9 @@
         "fastigial nucleus": "spinocerebellum",
         "interposed nucleus": "spinocerebellum",
         "red nucleus": "spinocerebellum",
-        "hypotonia": "signs",
-        "dysarthria": "signs",
-        "scanning speech": "signs",
+        "hypotonia": "spinocerebellum",
+        "dysarthria": "spinocerebellum",
+        "scanning speech": "spinocerebellum",
         "spinocerebellum the movement while it happens": "spinocerebellum",
         "cerebrocerebellum": "cerebrocerebellum",
         "lateral hemisphere": "cerebrocerebellum",
@@ -32390,7 +33972,7 @@
         "dentatothalamic tract": "cerebrocerebellum",
         "ventral lateral nucleus of thalamus": "cerebrocerebellum",
         "premotor cortex": "cerebrocerebellum",
-        "dysdiadochokinesia": "signs",
+        "dysdiadochokinesia": "cerebrocerebellum",
         "cerebrocerebellum the movement before it starts": "cerebrocerebellum",
         "climbing fibre": "learning",
         "inferior olivary nucleus": "learning",
@@ -32413,7 +33995,7 @@
       },
       "counts": {
         "structures": 8,
-        "parts": 4,
+        "parts": 8,
         "views": 5
       }
     },
@@ -32489,6 +34071,11 @@
       },
       "parts": [
         {
+          "key": "cerebellum",
+          "label": "Cerebellum",
+          "group": "Cerebellum"
+        },
+        {
           "key": "v4",
           "label": "Fourth ventricle",
           "group": "Cerebellum"
@@ -32497,7 +34084,7 @@
       "terms": {
         "cerebellum": "cerebellum",
         "cerebellar hemisphere": "cerebellum",
-        "vermis": "v4",
+        "vermis": "cerebellum",
         "anterior lobe": "cerebellum",
         "posterior lobe": "cerebellum",
         "flocculonodular lobe": "cerebellum",
@@ -32537,7 +34124,7 @@
       },
       "counts": {
         "structures": 9,
-        "parts": 1,
+        "parts": 2,
         "views": 5
       }
     },
@@ -32606,6 +34193,21 @@
       },
       "parts": [
         {
+          "key": "icp",
+          "label": "Inferior cerebellar peduncle — from the medulla",
+          "group": "The three peduncles"
+        },
+        {
+          "key": "mcp",
+          "label": "Middle cerebellar peduncle — from the pons",
+          "group": "The three peduncles"
+        },
+        {
+          "key": "scp",
+          "label": "Superior cerebellar peduncle — to the midbrain",
+          "group": "The three peduncles"
+        },
+        {
           "key": "crossings",
           "label": "The two crossings, and why signs are ipsilateral",
           "group": "Why it matters clinically"
@@ -32640,17 +34242,17 @@
         "inferior cerebellar peduncle from the medulla": "icp",
         "middle cerebellar peduncle": "mcp",
         "brachium pontis": "mcp",
-        "pontocerebellar fibres": "crossings",
+        "pontocerebellar fibres": "mcp",
         "pontine nuclei": "mcp",
         "corticopontine fibres": "mcp",
         "mossy fibres": "mcp",
-        "cerebellopontine angle": "lesions",
+        "cerebellopontine angle": "mcp",
         "middle cerebellar peduncle from the pons": "mcp",
         "superior cerebellar peduncle": "scp",
         "brachium conjunctivum": "scp",
         "dentate nucleus": "scp",
-        "dentatothalamic tract": "crossings",
-        "decussation of superior cerebellar peduncle": "crossings",
+        "dentatothalamic tract": "scp",
+        "decussation of superior cerebellar peduncle": "scp",
         "ventral lateral nucleus of thalamus": "scp",
         "anterior spinocerebellar tract": "scp",
         "superior medullary velum": "scp",
@@ -32674,7 +34276,7 @@
       },
       "counts": {
         "structures": 8,
-        "parts": 2,
+        "parts": 5,
         "views": 5
       }
     },
@@ -32743,6 +34345,21 @@
       },
       "parts": [
         {
+          "key": "fastigial",
+          "label": "Fastigial nucleus — the midline one",
+          "group": "The four nuclei, midline outwards"
+        },
+        {
+          "key": "interposed",
+          "label": "Interposed nuclei — globose and emboliform",
+          "group": "The four nuclei, midline outwards"
+        },
+        {
+          "key": "dentate",
+          "label": "Dentate nucleus — the large lateral one",
+          "group": "The four nuclei, midline outwards"
+        },
+        {
           "key": "circuit",
           "label": "The circuit — cortex inhibits, nuclei speak",
           "group": "How the circuit works"
@@ -32765,8 +34382,8 @@
         "vermis": "fastigial",
         "vestibular nuclei": "fastigial",
         "juxtarestiform body": "fastigial",
-        "truncal ataxia": "syndromes",
-        "gait ataxia": "syndromes",
+        "truncal ataxia": "fastigial",
+        "gait ataxia": "fastigial",
         "fastigial nucleus the midline one": "fastigial",
         "globose nucleus": "interposed",
         "emboliform nucleus": "interposed",
@@ -32783,8 +34400,8 @@
         "cerebrocerebellum": "dentate",
         "dentatothalamic tract": "dentate",
         "ventral lateral nucleus of thalamus": "dentate",
-        "dysmetria": "syndromes",
-        "intention tremor": "syndromes",
+        "dysmetria": "dentate",
+        "intention tremor": "dentate",
         "dentate nucleus the large lateral one": "dentate",
         "flocculonodular lobe": "vestibular",
         "vestibulocerebellum": "vestibular",
@@ -32808,7 +34425,7 @@
       },
       "counts": {
         "structures": 7,
-        "parts": 2,
+        "parts": 5,
         "views": 5
       }
     },
@@ -33995,6 +35612,21 @@
       },
       "parts": [
         {
+          "key": "principle",
+          "label": "Every test is a circuit — ask which limb failed",
+          "group": "The method"
+        },
+        {
+          "key": "vision",
+          "label": "I and II — smell, acuity, fields, and the pupil as a two-nerve circuit",
+          "group": "Sensation in"
+        },
+        {
+          "key": "eyes",
+          "label": "III, IV and VI — three nerves, one movement, and where the pupil points",
+          "group": "Movement out"
+        },
+        {
           "key": "facesense",
           "label": "V and VII — the reflex that separates them, and the sign that levels them",
           "group": "The face"
@@ -34033,7 +35665,7 @@
         "ptosis": "eyes",
         "mydriasis": "eyes",
         "down and out": "eyes",
-        "nystagmus": "lower",
+        "nystagmus": "eyes",
         "cavernous sinus syndrome": "eyes",
         "false localising sign": "eyes",
         "iii iv and vi three nerves one movement and where the pupil points": "eyes",
@@ -34064,7 +35696,7 @@
       },
       "counts": {
         "structures": 5,
-        "parts": 2,
+        "parts": 5,
         "views": 5
       }
     },
@@ -34133,6 +35765,16 @@
       },
       "parts": [
         {
+          "key": "exits",
+          "label": "Where each nerve leaves the brain — the first of three journeys",
+          "group": "Out of the brain"
+        },
+        {
+          "key": "foramina",
+          "label": "Through the skull base — the foramina in fossa order",
+          "group": "Through the skull"
+        },
+        {
           "key": "cavernous",
           "label": "The cavernous sinus — five nerves in one small room",
           "group": "Through the skull"
@@ -34167,8 +35809,8 @@
         "foramen rotundum": "foramina",
         "foramen ovale": "foramina",
         "internal acoustic meatus": "foramina",
-        "jugular foramen": "lowerfour",
-        "hypoglossal canal": "lowerfour",
+        "jugular foramen": "foramina",
+        "hypoglossal canal": "foramina",
         "foramen magnum": "foramina",
         "anterior cranial fossa": "foramina",
         "middle cranial fossa": "foramina",
@@ -34210,7 +35852,7 @@
       },
       "counts": {
         "structures": 5,
-        "parts": 3,
+        "parts": 5,
         "views": 5
       }
     },
@@ -34281,6 +35923,21 @@
       },
       "parts": [
         {
+          "key": "plan",
+          "label": "The one rule — the tube opens, motor goes medial",
+          "group": "The organising rule"
+        },
+        {
+          "key": "motor",
+          "label": "Three motor columns, medial to lateral",
+          "group": "The six columns"
+        },
+        {
+          "key": "sensory",
+          "label": "Three sensory columns, lateral to medial",
+          "group": "The six columns"
+        },
+        {
           "key": "levels",
           "label": "Which nucleus at which level — the rule of four",
           "group": "Reading the brainstem"
@@ -34294,7 +35951,7 @@
       "terms": {
         "alar plate": "plan",
         "basal plate": "plan",
-        "sulcus limitans": "levels",
+        "sulcus limitans": "plan",
         "fourth ventricle": "plan",
         "rhomboid fossa": "plan",
         "nuclear columns": "plan",
@@ -34306,12 +35963,12 @@
         "branchial efferent": "motor",
         "general visceral efferent": "motor",
         "oculomotor nucleus": "motor",
-        "trochlear nucleus": "levels",
+        "trochlear nucleus": "motor",
         "abducens nucleus": "motor",
         "hypoglossal nucleus": "motor",
         "trigeminal motor nucleus": "motor",
         "facial nucleus": "motor",
-        "nucleus ambiguus": "syndromes",
+        "nucleus ambiguus": "motor",
         "edinger westphal nucleus": "motor",
         "superior salivatory nucleus": "motor",
         "inferior salivatory nucleus": "motor",
@@ -34326,8 +35983,8 @@
         "taste": "sensory",
         "mesencephalic nucleus": "sensory",
         "principal sensory nucleus": "sensory",
-        "spinal trigeminal nucleus": "syndromes",
-        "vestibular nuclei": "syndromes",
+        "spinal trigeminal nucleus": "sensory",
+        "vestibular nuclei": "sensory",
         "cochlear nuclei": "sensory",
         "three sensory columns lateral to medial": "sensory",
         "rule of four": "levels",
@@ -34347,7 +36004,7 @@
       },
       "counts": {
         "structures": 5,
-        "parts": 2,
+        "parts": 5,
         "views": 5
       }
     },
@@ -34401,7 +36058,33 @@
           "urbach wiethe"
         ]
       },
-      "parts": [],
+      "parts": [
+        {
+          "key": "amyg_l",
+          "label": "Amygdala (L)",
+          "group": "The nucleus"
+        },
+        {
+          "key": "amyg_r",
+          "label": "Amygdala (R)",
+          "group": "The nucleus"
+        },
+        {
+          "key": "stria_l",
+          "label": "Stria terminalis (L)",
+          "group": "The road out"
+        },
+        {
+          "key": "stria_r",
+          "label": "Stria terminalis (R)",
+          "group": "The road out"
+        },
+        {
+          "key": "tuber",
+          "label": "Tuber cinereum — the floor of the hypothalamus",
+          "group": "The road out"
+        }
+      ],
       "terms": {
         "amygdala": "amyg_l",
         "amygdaloid body": "amyg_l",
@@ -34430,8 +36113,8 @@
         "parahippocampal gyrus l": "phg_l",
         "left parahippocampal gyrus": "phg_l",
         "caudate nucleus": "caud_l",
-        "tail of caudate": "caud_l",
-        "stria terminalis": "caud_l",
+        "tail of caudate": "stria_l",
+        "stria terminalis": "stria_l",
         "lateral ventricle": "caud_l",
         "c shape": "caud_l",
         "caudate nucleus l": "caud_l",
@@ -34478,7 +36161,7 @@
       },
       "counts": {
         "structures": 12,
-        "parts": 0,
+        "parts": 5,
         "views": 4
       }
     },
@@ -34541,15 +36224,50 @@
       },
       "parts": [
         {
+          "key": "fornix_l",
+          "label": "Fornix (L)",
+          "group": "The arch"
+        },
+        {
+          "key": "fornix_r",
+          "label": "Fornix (R)",
+          "group": "The arch"
+        },
+        {
           "key": "fornix_comm",
           "label": "Commissure of the fornix (psalterium)",
           "group": "The arch"
+        },
+        {
+          "key": "hipp_l",
+          "label": "Hippocampus (L)",
+          "group": "Papez — the stations"
+        },
+        {
+          "key": "phg_l",
+          "label": "Parahippocampal gyrus (L)",
+          "group": "Papez — the stations"
+        },
+        {
+          "key": "mamm",
+          "label": "Mammillary body",
+          "group": "Papez — the stations"
+        },
+        {
+          "key": "ac",
+          "label": "Anterior commissure — where the column divides",
+          "group": "What the arch passes"
+        },
+        {
+          "key": "ivf",
+          "label": "Interventricular foramen (of Monro)",
+          "group": "What the arch passes"
         }
       ],
       "terms": {
         "fornix": "fornix_l",
         "fimbria": "fornix_l",
-        "crus of fornix": "fornix_comm",
+        "crus of fornix": "fornix_l",
         "body of fornix": "fornix_l",
         "column of fornix": "fornix_l",
         "precommissural fornix": "fornix_l",
@@ -34585,7 +36303,7 @@
         "korsakoff syndrome": "mamm",
         "wernicke encephalopathy": "mamm",
         "thiamine": "mamm",
-        "thalamus": "thal_l",
+        "thalamus": "ivf",
         "interventricular foramen": "ivf",
         "thalamus l": "thal_l",
         "left thalamus": "thal_l",
@@ -34609,7 +36327,7 @@
         "cavum septi pellucidi": "sp",
         "third ventricle": "v3",
         "roof of third ventricle": "v3",
-        "colloid cyst": "v3",
+        "colloid cyst": "ivf",
         "foramen of monro": "ivf",
         "obstructive hydrocephalus": "ivf",
         "csf": "ivf",
@@ -34617,7 +36335,7 @@
       },
       "counts": {
         "structures": 14,
-        "parts": 1,
+        "parts": 8,
         "views": 5
       }
     },
@@ -34682,6 +36400,16 @@
       },
       "parts": [
         {
+          "key": "hipp_l",
+          "label": "Hippocampus (L)",
+          "group": "The hippocampal formation"
+        },
+        {
+          "key": "hipp_r",
+          "label": "Hippocampus (R)",
+          "group": "The hippocampal formation"
+        },
+        {
           "key": "phg_l",
           "label": "Parahippocampal gyrus (L)",
           "group": "The hippocampal formation"
@@ -34692,8 +36420,23 @@
           "group": "The hippocampal formation"
         },
         {
+          "key": "fornix_l",
+          "label": "Fornix (L)",
+          "group": "The output road"
+        },
+        {
+          "key": "fornix_r",
+          "label": "Fornix (R)",
+          "group": "The output road"
+        },
+        {
           "key": "fornix_comm",
           "label": "Commissure of the fornix",
+          "group": "The output road"
+        },
+        {
+          "key": "mamm",
+          "label": "Mammillary body",
           "group": "The output road"
         }
       ],
@@ -34734,7 +36477,7 @@
         "right lateral ventricle": "vent_r",
         "fornix": "fornix_l",
         "fimbria": "fornix_l",
-        "crus of fornix": "fornix_comm",
+        "crus of fornix": "fornix_l",
         "body of fornix": "fornix_l",
         "column of fornix": "fornix_l",
         "precommissural fornix": "fornix_l",
@@ -34776,7 +36519,7 @@
       },
       "counts": {
         "structures": 15,
-        "parts": 3,
+        "parts": 8,
         "views": 7
       }
     },
@@ -34849,6 +36592,26 @@
       },
       "parts": [
         {
+          "key": "plan",
+          "label": "The common plan — three neurons, one crossing",
+          "group": "The shared plan"
+        },
+        {
+          "key": "dcml",
+          "label": "Dorsal column-medial lemniscus — fine touch, vibration, proprioception",
+          "group": "The two conscious systems"
+        },
+        {
+          "key": "spinothalamic",
+          "label": "Spinothalamic / anterolateral — pain, temperature, crude touch",
+          "group": "The two conscious systems"
+        },
+        {
+          "key": "spinocerebellar",
+          "label": "Spinocerebellar — proprioception that never reaches consciousness",
+          "group": "The unconscious system"
+        },
+        {
           "key": "somatotopy",
           "label": "Somatotopy — the layering inside each tract",
           "group": "Reading the tracts"
@@ -34871,8 +36634,8 @@
         "dorsal column": "dcml",
         "posterior column": "dcml",
         "dcml": "dcml",
-        "gracile fasciculus": "somatotopy",
-        "cuneate fasciculus": "somatotopy",
+        "gracile fasciculus": "dcml",
+        "cuneate fasciculus": "dcml",
         "gracile nucleus": "dcml",
         "cuneate nucleus": "dcml",
         "internal arcuate fibres": "dcml",
@@ -34880,8 +36643,8 @@
         "medial lemniscus": "dcml",
         "uncrossed": "dcml",
         "two point discrimination": "dcml",
-        "subacute combined degeneration": "lesions",
-        "tabes dorsalis": "lesions",
+        "subacute combined degeneration": "dcml",
+        "tabes dorsalis": "dcml",
         "dorsal column medial lemniscus fine touch vibration proprioception": "dcml",
         "spinothalamic tract": "spinothalamic",
         "lateral spinothalamic tract": "spinothalamic",
@@ -34891,7 +36654,7 @@
         "substantia gelatinosa": "spinothalamic",
         "anterior white commissure": "spinothalamic",
         "crossed": "spinothalamic",
-        "syringomyelia": "lesions",
+        "syringomyelia": "spinothalamic",
         "cordotomy": "spinothalamic",
         "spinothalamic anterolateral pain temperature crude touch": "spinothalamic",
         "posterior spinocerebellar tract": "spinocerebellar",
@@ -34921,7 +36684,7 @@
       },
       "counts": {
         "structures": 6,
-        "parts": 2,
+        "parts": 6,
         "views": 5
       }
     },
@@ -34989,9 +36752,24 @@
       },
       "parts": [
         {
+          "key": "corticospinal",
+          "label": "Corticospinal tract — the direct route, and where it crosses",
+          "group": "The pyramidal system"
+        },
+        {
+          "key": "corticobulbar",
+          "label": "Corticobulbar — the same tract for the head, mostly bilateral",
+          "group": "The pyramidal system"
+        },
+        {
           "key": "levels",
           "label": "Six places one tract can be cut",
           "group": "The pyramidal system"
+        },
+        {
+          "key": "extrapyramidal",
+          "label": "The four extrapyramidal tracts — tone, posture and the head",
+          "group": "The extrapyramidal system"
         },
         {
           "key": "umn",
@@ -35012,10 +36790,10 @@
         "motor homunculus": "corticospinal",
         "corona radiata": "corticospinal",
         "posterior limb of internal capsule": "corticospinal",
-        "crus cerebri": "levels",
+        "crus cerebri": "corticospinal",
         "basilar pons": "corticospinal",
-        "medullary pyramid": "levels",
-        "pyramidal decussation": "levels",
+        "medullary pyramid": "corticospinal",
+        "pyramidal decussation": "corticospinal",
         "lateral corticospinal tract": "corticospinal",
         "anterior corticospinal tract": "corticospinal",
         "corticospinal tract the direct route and where it crosses": "corticospinal",
@@ -35037,10 +36815,10 @@
         "contralateral": "levels",
         "six places one tract can be cut": "levels",
         "extrapyramidal": "extrapyramidal",
-        "rubrospinal tract": "posturing",
-        "red nucleus": "posturing",
+        "rubrospinal tract": "extrapyramidal",
+        "red nucleus": "extrapyramidal",
         "ventral tegmental decussation": "extrapyramidal",
-        "vestibulospinal tract": "posturing",
+        "vestibulospinal tract": "extrapyramidal",
         "lateral vestibulospinal tract": "extrapyramidal",
         "medial vestibulospinal tract": "extrapyramidal",
         "reticulospinal tract": "extrapyramidal",
@@ -35069,7 +36847,7 @@
       },
       "counts": {
         "structures": 6,
-        "parts": 3,
+        "parts": 6,
         "views": 5
       }
     },
@@ -35144,6 +36922,21 @@
       },
       "parts": [
         {
+          "key": "arc",
+          "label": "The five components every reflex has",
+          "group": "The circuit"
+        },
+        {
+          "key": "stretch",
+          "label": "The stretch reflex — the only monosynaptic one",
+          "group": "The two reflexes"
+        },
+        {
+          "key": "withdrawal",
+          "label": "Withdrawal and crossed extension — polysynaptic and multisegmental",
+          "group": "The two reflexes"
+        },
+        {
           "key": "gain",
           "label": "The gamma loop — what sets how brisk a reflex is",
           "group": "Tuning the circuit"
@@ -35169,8 +36962,8 @@
         "myotatic reflex": "stretch",
         "deep tendon reflex": "stretch",
         "monosynaptic": "stretch",
-        "muscle spindle": "gain",
-        "intrafusal fibre": "gain",
+        "muscle spindle": "stretch",
+        "intrafusal fibre": "stretch",
         "ia afferent": "stretch",
         "annulospiral ending": "stretch",
         "reciprocal inhibition": "stretch",
@@ -35210,7 +37003,7 @@
       },
       "counts": {
         "structures": 5,
-        "parts": 2,
+        "parts": 5,
         "views": 5
       }
     },
@@ -35281,6 +37074,31 @@
       },
       "parts": [
         {
+          "key": "anterior_horn",
+          "label": "Anterior horn — the motor output",
+          "group": "The grey matter"
+        },
+        {
+          "key": "posterior_horn",
+          "label": "Posterior horn — the sensory input",
+          "group": "The grey matter"
+        },
+        {
+          "key": "lateral_horn",
+          "label": "Lateral horn — autonomic, and only at some levels",
+          "group": "The grey matter"
+        },
+        {
+          "key": "posterior_columns",
+          "label": "Posterior funiculus — fine touch, vibration, proprioception",
+          "group": "The white matter"
+        },
+        {
+          "key": "lateral_funiculus",
+          "label": "Lateral funiculus — the crowded one",
+          "group": "The white matter"
+        },
+        {
           "key": "anterior_funiculus",
           "label": "Anterior funiculus and the white commissure",
           "group": "The white matter"
@@ -35326,7 +37144,7 @@
         "pain": "posterior_horn",
         "temperature": "posterior_horn",
         "posterior horn the sensory input": "posterior_horn",
-        "lateral horn": "levels",
+        "lateral horn": "lateral_horn",
         "intermediolateral cell column": "lateral_horn",
         "rexed lamina vii": "lateral_horn",
         "sympathetic": "lateral_horn",
@@ -35340,12 +37158,12 @@
         "posterior column": "posterior_columns",
         "dorsal column": "posterior_columns",
         "gracile fasciculus": "posterior_columns",
-        "cuneate fasciculus": "levels",
+        "cuneate fasciculus": "posterior_columns",
         "dcml": "posterior_columns",
         "uncrossed": "posterior_columns",
         "gracile nucleus": "posterior_columns",
         "cuneate nucleus": "posterior_columns",
-        "subacute combined degeneration": "syndromes",
+        "subacute combined degeneration": "posterior_columns",
         "posterior funiculus fine touch vibration proprioception": "posterior_columns",
         "lateral funiculus": "lateral_funiculus",
         "lateral corticospinal tract": "lateral_funiculus",
@@ -35353,7 +37171,7 @@
         "anterior spinocerebellar tract": "lateral_funiculus",
         "rubrospinal tract": "lateral_funiculus",
         "somatotopy": "lateral_funiculus",
-        "brown sequard syndrome": "syndromes",
+        "brown sequard syndrome": "lateral_funiculus",
         "lateral funiculus the crowded one": "lateral_funiculus",
         "anterior funiculus": "anterior_funiculus",
         "anterior corticospinal tract": "anterior_funiculus",
@@ -35379,7 +37197,7 @@
       },
       "counts": {
         "structures": 9,
-        "parts": 3,
+        "parts": 8,
         "views": 5
       }
     },

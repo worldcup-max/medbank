@@ -128,6 +128,35 @@
      Order matters against boneSafe: the ceiling expresses how bright bone should LOOK, so it clamps
      in sRGB and the conversion comes after. */
   function toLinear(col) { return col.convertSRGBToLinear(); }
+
+  /* IS THIS STRUCTURE BEING TAUGHT, OR IS IT SCAFFOLDING?
+
+     Four places used to ask that inline — three as `s.role === 'part'`, and a fourth as
+     `s.role !== 'part'` where it was partitioning structures into taught and scaffolding. All four
+     were wrong the same way: `model3d-scene-spec-v2.md` declared exactly two roles, part and context, but 92
+     structures across 25 scenes carry role 'primary' — the headline subject, distinguished from the
+     other taught parts around it. The medulla in the medulla scene. The ACA and MCA in anterior
+     circulation. Every epithelium type in the epithelium scenes.
+
+     Because none of the three tests knew the word, every one of those 92 structures was treated as
+     scaffolding: dropped from the student's tappable part list, given a context pin instead of a
+     button, and CLIPPED AWAY whenever a cross-section was open. Measured: 25 scenes, 92 structures.
+     Three of them carry NO role 'part' at all — histology cell-junctions, histology simple-epithelia
+     and neuroanatomy amygdala — so their part list was empty. The scene loaded, the console was
+     clean, and there was nothing to tap.
+
+     The value was never wrong; the engine's vocabulary was too small. So the question is asked in one
+     place, and 'primary' is what it plainly says it is. Emphasis is preserved for anything that wants
+     to read it — nothing here flattens 'primary' into 'part'.
+
+     Anything unrecognised counts as taught. A structure an author bothered to name is more safely
+     shown and tappable than silently clipped out of the picture. */
+  function isTaught(s) {
+    var r = s && s.role;
+    if (!r) return false;          // absent role stays scaffolding, exactly as it did before
+    return r !== 'context';        // 'part', 'primary', or anything an author adds later
+  }
+
   /* `T` is a PARAMETER of load(), mergeByKey() and build(); it is not a variable of this file. This
      helper is defined at module scope, so its `T` resolved to a GLOBAL — and the only thing defining
      one was models3d/cardiac-looping.js, which declared `const T = window.THREE` at top level and
@@ -1240,7 +1269,7 @@
     /* Superseded while three.js was loading — do not touch the DOM the newer mount now owns. */
     if (seq !== undefined && seq !== MOUNT_SEQ) return null;
     var structures = (scene.structures || []).filter(function (s) { return s.key; });
-    var parts = structures.filter(function (s) { return s.role === 'part'; });
+    var parts = structures.filter(isTaught);
     var views = scene.views || [];
 
     host.innerHTML =
@@ -1450,7 +1479,16 @@
         var col = srgbColor(s.color, '#ffcf5c');
         var r = a.radius || 0.05;
         var g = new T.Mesh(new T.SphereGeometry(1, 20, 16),
-          new T.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.65, transparent: true, depthTest: false }));
+          /* `transparent: true` with no `opacity` is fully opaque — three defaults opacity to 1, so the
+             flag was set and never took effect. Combined with depthTest:false that made every landmark
+             marker a solid ball drawn IN FRONT of everything from every angle, hiding whatever it was
+             pointing at. Worst where the anchored thing is large: the coccyx rides FMA16202, whose span
+             is the sacrum's 145.3 mm, so 0.05 of it is a 14.5 mm opaque sphere sitting over a 34.8 mm
+             bone and blanking the segments and cornua a student is meant to count.
+             depthTest stays off deliberately — a landmark on the far side of a bone must still be
+             findable — but the marker now reads as a glowing marker rather than as geometry. */
+          new T.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.65,
+            transparent: true, opacity: 0.5, depthWrite: false, depthTest: false }));
         g.renderOrder = 5; g.userData = s;
         if (parent) {
           if (!parent.geometry.boundingBox) parent.geometry.computeBoundingBox();
@@ -1481,6 +1519,22 @@
          from the loop never being scheduled at all, and indistinguishable from outside without this. */
       stats: function () { return { ticks: ticks, frames: frames, skippedHidden: skippedHidden, hidden: document.hidden, spinning: spinning }; },
       setLighting: setLighting,
+      /* What the CURRENT view is being framed on, and where each key came from. The framing rule was
+         previously invisible from outside the player — a test could see where the camera ended up but
+         not what it had been asked to fit — which is how a rule that framed on a fraction of its
+         subject shipped without anything going red. */
+      viewSubject: function () {
+        var only = (state.only || []).slice(), named = (state.named || []).slice();
+        var keys = only.concat(named.filter(function (k) { return only.indexOf(k) < 0; }));
+        var box = subjectBox(), sz = box && box.getSize(new T.Vector3());
+        return { only: only, named: named, keys: keys,
+                 visibleKeys: keys.filter(function (k) { return meshes[k] && meshes[k].visible; }),
+                 /* how much of what the view ISOLATED is still on screen. Zero means the view hid its
+                    own subject — a PEEL_LAYER peeling the layer the subject lives in — and no camera
+                    position is going to rescue that picture. */
+                 onlyVisible: only.filter(function (k) { return meshes[k] && meshes[k].visible; }).length,
+                 size: sz ? sz.toArray().map(function (x) { return +x.toFixed(4); }) : null };
+      },
       dispose: function () { teardown(); }
     };
     /* One more chance to have been overtaken: three.js and the scene JSON are loaded, the renderer exists,
@@ -1683,7 +1737,7 @@
         if (ok) addPin(p);
       });
       // context structures get a pin too — no button, but when a view highlights one it must be named
-      structures.forEach(function (s) { if (s.role !== 'part' && meshes[s.key]) addPin(s); });
+      structures.forEach(function (s) { if (!isTaught(s) && meshes[s.key]) addPin(s); });
     }
     function addPin(s) {
       if (pins[s.key]) return;
@@ -1737,7 +1791,7 @@
 
     var state = {};
     function resetState() {
-      state = { visible: {}, hi: {}, ghosted: false, only: null, clip: null, pairs: [], dir: null, t: null };
+      state = { visible: {}, hi: {}, ghosted: false, only: null, named: [], clip: null, pairs: [], dir: null, t: null };
       structures.forEach(function (s) { state.visible[s.key] = true; });
     }
 
@@ -1838,6 +1892,27 @@
       });
     }
 
+    /* Keys this view NAMES once it has already isolated. `state.only` is what an ISOLATE_REGION or
+       COMPARE_STRUCTURES singled out; it is NOT the same thing as what the view is about. A view that
+       isolates one group and then goes on to name more — SHOW_STRUCTURE after the isolate,
+       HIGHLIGHT_STRUCTURE, the two ends of a SHOW_RELATIONSHIP, the stops of a trace — has told us in
+       its own ops that those belong in the picture too, and framing on the isolate alone pushes them
+       off the stage. Measured before this existed: kidney view 6 'Reading the clinic off the anatomy'
+       framed on the two kidneys and ran the ureter the narration follows to the bladder off the bottom
+       edge, at 100.0% of frame height with a corner projecting from behind the camera.
+
+       ORDER IS THE WHOLE RULE, so this is collected in runOps rather than read off the view later.
+       A key named BEFORE the isolate is what the isolate is deliberately narrowing away from — kidney
+       view 6 opens with SHOW_STRUCTURE '*' — and counting it would undo the isolate. A key named AFTER
+       it is the author putting it back.
+
+       A wildcard target is never a named subject for the same reason: 'show everything' is context, and
+       taking it as the subject would make the isolate mean nothing at all. */
+    function noteNamed(keys) {
+      if (!state.only || !state.only.length) return;      // nothing has isolated yet — ordinary view
+      keys.forEach(function (k) { if (k && state.named.indexOf(k) < 0) state.named.push(k); });
+    }
+
     function runOps(ops) {
       resetState();
       /* A traced view travels under its own steam, one landmark at a time, and it starts INSIDE this
@@ -1849,9 +1924,15 @@
       overlay.clear ? overlay.clear() : (function () { while (overlay.children.length) overlay.remove(overlay.children[0]); })();
       (ops || []).forEach(function (o) {
         switch (o.op) {
-          case 'SHOW_STRUCTURE': keysFor(o.target).forEach(function (k) { state.visible[k] = true; }); break;
+          case 'SHOW_STRUCTURE':
+            keysFor(o.target).forEach(function (k) { state.visible[k] = true; });
+            if (o.target && o.target !== '*') noteNamed(keysFor(o.target));
+            break;
           case 'HIDE_STRUCTURE': keysFor(o.target).forEach(function (k) { state.visible[k] = false; }); break;
-          case 'HIGHLIGHT_STRUCTURE': keysFor(o.target).forEach(function (k) { state.hi[k] = o.intensity || 0.45; }); break;
+          case 'HIGHLIGHT_STRUCTURE':
+            keysFor(o.target).forEach(function (k) { state.hi[k] = o.intensity || 0.45; });
+            if (o.target && o.target !== '*') noteNamed(keysFor(o.target));
+            break;
           case 'ISOLATE_REGION': state.only = keysFor(o.target); state.ghosted = true; break;
           /* On an ordinary view, record the direction rather than flying to it here: the view's framing
              (frameView, below) has to move the camera anyway, and two animations lerping
@@ -1864,8 +1945,15 @@
             state.ghosted = true;
             state.only.forEach(function (k) { state.hi[k] = 0.5; });
             break;
-          case 'SHOW_RELATIONSHIP': state.pairs.push(o); state.hi[o.from] = 0.5; state.hi[o.to] = 0.5; break;
-          case 'TRACE_STRUCTURE': degraded.TRACE_STRUCTURE = 1; trace(o); break;
+          case 'SHOW_RELATIONSHIP':
+            state.pairs.push(o); state.hi[o.from] = 0.5; state.hi[o.to] = 0.5;
+            noteNamed(keysFor(o.from).concat(keysFor(o.to)));
+            break;
+          case 'TRACE_STRUCTURE':
+            degraded.TRACE_STRUCTURE = 1;
+            noteNamed((o.path || []).concat(o.target && o.target !== '*' ? keysFor(o.target) : []));
+            trace(o);
+            break;
           case 'PEEL_LAYER':
             degraded.PEEL_LAYER = 1;
             structures.forEach(function (s) { if (s.layer === o.layer) state.visible[s.key] = false; });
@@ -2070,21 +2158,47 @@
       })();
     }
 
-    /* World-space bounds of what this view is ABOUT. `state.only` is the subject when a view isolates
-       or compares; otherwise it is everything the view left showing. Ghosted context is deliberately
-       not counted — it is context, and it is allowed to run off the edges. */
+    /* World-space bounds of what this view is ABOUT.
+
+       On an isolating view that is `state.only` UNION `state.named` — what the isolate singled out,
+       plus everything the view went on to name afterwards (see noteNamed). `state.only` alone is what
+       this used to be, and it is not the subject: it is only what ISOLATE_REGION / COMPARE_STRUCTURES
+       narrowed to, so a view that isolates one group and then names more framed on a fraction of its
+       own subject and pushed the rest off the stage.
+
+       On a view that never isolates, nothing here changes: the subject is everything left showing, as
+       before. That gating is deliberate and is the difference between this and the version the review
+       tried — applying the named set to every view REPLACES the whole-scene box on ordinary views with
+       a handful of keys, and dives the camera in on views that were framed correctly already.
+
+       Ghosted context stays uncounted — it is context, and it is allowed to run off the edges. But a
+       key the view NAMED is not context, even while it is ghosted; ghosting is how it is drawn, naming
+       is what it is for.
+
+       THE FALLBACK IS NOT COSMETIC. If nothing in the subject set is visible — an isolate followed by a
+       PEEL_LAYER that hides the isolated layer, which is kidney view 3 and vertebral-column view 6 —
+       this used to return null and frameView bailed out, leaving the camera wherever the PREVIOUS view
+       had parked it. That is not "no change", it is the last view's framing shown over this view's
+       geometry. Fall back to what is actually on screen and frame that. */
     function subjectBox() {
       holder.updateMatrixWorld(true);
-      var keys = (state.only && state.only.length) ? state.only
-               : structures.map(function (s) { return s.key; })
-                           .filter(function (k) { return !state.visible || state.visible[k] !== false; });
-      var box = new T.Box3(), any = false;
-      keys.forEach(function (k) {
-        var m = meshes[k];
-        if (!m || !m.visible) return;
-        box.expandByObject(m); any = true;
-      });
-      return any ? box : null;
+      function visibleKeys() {
+        return structures.map(function (s) { return s.key; })
+                         .filter(function (k) { return !state.visible || state.visible[k] !== false; });
+      }
+      var keys = (state.only && state.only.length)
+               ? state.only.concat((state.named || []).filter(function (k) { return state.only.indexOf(k) < 0; }))
+               : visibleKeys();
+      function boxOf(ks) {
+        var box = new T.Box3(), any = false;
+        ks.forEach(function (k) {
+          var m = meshes[k];
+          if (!m || !m.visible) return;
+          box.expandByObject(m); any = true;
+        });
+        return any ? box : null;
+      }
+      return boxOf(keys) || boxOf(visibleKeys());
     }
 
     /* How far back to stand. This is VizKit.fitCamera's formula, generalised to an arbitrary viewing
@@ -2115,6 +2229,27 @@
       return Math.max(ext(up) / Math.tan(Math.max(0.05, vHalf)),
                       ext(right) / Math.tan(Math.max(0.05, hHalf))) * FRAME_PAD + ext(dir);
     }
+
+    /* THE CLAMP FINDING 3 ASKED FOR, TRIED AND REMOVED — the measurement is in BUILD-LOG, and this
+       note is here so the next run does not spend an afternoon re-deriving it.
+
+       Finding 3 is right that controls.minDistance cannot be the clamp: it is a distance from the
+       SUBJECT'S CENTRE, so it stops the camera entering a small structure and does nothing about a big
+       one. So a bound measured off the scene was tried instead — stand no nearer than the frontmost
+       corner of anything being drawn, plus camera.near — which is derived rather than tuned and only
+       ever pulls back.
+
+       IT MADE THINGS WORSE, AND FOR AN INSTRUCTIVE REASON. Standing just past the frontmost corner puts
+       the nearest geometry at almost exactly the near plane, and a vertex at the near plane projects to
+       enormous NDC. On gross__gluteal-region-hip-joint__hip-joint view 8 "Abduction and adduction" —
+       a view the named-set rule does not touch at all, COMPARE_STRUCTURES with nothing named after it —
+       it took the subject from 84.4% of frame height, unclipped, to 20,258%, clipped, and cut the lit
+       canvas from 19.54% to 7.95%. The clamp manufactured the exact pathology it was meant to prevent.
+
+       Finding 3's own second sentence is the answer and it needs no clamp at all: bound the fit by the
+       view's own named set. That is subjectBox() above, and on the eleven-scene measurement it fixed
+       all four clipping failures on its own. A camera that has been given the whole of its subject to
+       fit does not dive into the middle of it. */
 
     function frameView(ms) {
       var box = subjectBox(); if (!box) return;
@@ -2384,7 +2519,7 @@
         var btn = host.querySelector('.mb3d-part[data-key="' + s.key + '"]');
         if (btn) { var d = btn.querySelector('.mb3d-dot'); if (d) d.style.background = isSel ? glow : (s.color || '#7c5cff'); }
         if (pins[s.key]) pins[s.key].dot.style.background = glow;
-        m.material.clippingPlanes = (clipping && s.role !== 'part') ? [clipPlane] : null;
+        m.material.clippingPlanes = (clipping && !isTaught(s)) ? [clipPlane] : null;
         m.material.needsUpdate = true;
       });
       paintPatches();
@@ -2581,7 +2716,10 @@
       var me = structures.filter(function (x) { return x.key === key; })[0];
       var out = [];
       if (sentence) {
-        parts.concat(structures.filter(function (x) { return x.role !== 'part'; })).forEach(function (st2) {
+        /* taught first, then scaffolding — the two halves must PARTITION `structures`. Written as
+           `x.role !== 'part'` this double-counted every 'primary' the moment parts stopped meaning
+           exactly role==='part'; the dedup below hid it, which is how it would have stayed hidden. */
+        parts.concat(structures.filter(function (x) { return !isTaught(x); })).forEach(function (st2) {
           /* An anchored landmark has no mesh of its own — its geometry rides the parent bone under
              `anchor.on`, which is how focusPart and paintPatches already reach it. Testing only its own
              key would drop it from the tour while the sidebar happily lists it. */

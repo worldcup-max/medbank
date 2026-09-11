@@ -1,0 +1,1807 @@
+{
+ "chromium": "/opt/pw-browsers/chromium-1194/chrome-linux/chrome",
+ "scene_t": [
+  0.222,
+  0.35,
+  0.4,
+  0.565,
+  0.8
+ ],
+ "views": [
+  {
+   "title": "Four valves, one plane",
+   "mode": "location",
+   "t": 0.8,
+   "view": "anterior"
+  },
+  {
+   "title": "The base of the heart, in diastole",
+   "mode": "cross_section",
+   "t": 0.8,
+   "view": "superior"
+  },
+  {
+   "title": "The same section, in systole - everything has swapped",
+   "mode": "cross_section",
+   "t": 0.4,
+   "view": "superior"
+  },
+  {
+   "title": "The mitral valve open - and the cords hanging slack",
+   "mode": "mechanism",
+   "t": 0.8,
+   "view": "lateral"
+  },
+  {
+   "title": "The mitral valve shut - the cords go straight",
+   "mode": "mechanism",
+   "t": 0.35,
+   "view": "lateral"
+  },
+  {
+   "title": "Why a cusp cannot open without a sinus",
+   "mode": "mechanism",
+   "t": 0.4,
+   "view": "superior"
+  },
+  {
+   "title": "The first heart sound, and why it can be split",
+   "mode": "mechanism",
+   "t": 0.222,
+   "view": "anterior"
+  },
+  {
+   "title": "The second heart sound, and its splitting",
+   "mode": "mechanism",
+   "t": 0.565,
+   "view": "anterior"
+  },
+  {
+   "title": "Four rings, four sizes",
+   "mode": "comparison",
+   "t": 0.4,
+   "view": "superior"
+  }
+ ],
+ "stages": [
+  {
+   "name": "b01-anterior-t800",
+   "t": 0.8,
+   "eye": [
+    0,
+    0.2,
+    1
+   ],
+   "opts": {},
+   "label": "Four valves, one plane",
+   "phase": "diastasis",
+   "closure": {
+    "mitral": 0,
+    "tricuspid": 0,
+    "aortic": 1,
+    "pulmonary": 1
+   }
+  },
+  {
+   "name": "b02-superior-t800",
+   "t": 0.8,
+   "eye": [
+    0,
+    1,
+    0.001
+   ],
+   "opts": {},
+   "label": "The base of the heart, in diastole",
+   "phase": "diastasis",
+   "closure": {
+    "mitral": 0,
+    "tricuspid": 0,
+    "aortic": 1,
+    "pulmonary": 1
+   }
+  },
+  {
+   "name": "b03-superior-t400",
+   "t": 0.4,
+   "eye": [
+    0,
+    1,
+    0.001
+   ],
+   "opts": {},
+   "label": "The same section, in systole - everything has swapped",
+   "phase": "ventricular ejection",
+   "closure": {
+    "mitral": 1,
+    "tricuspid": 1,
+    "aortic": 0,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "b04-lateral-t800",
+   "t": 0.8,
+   "eye": [
+    1,
+    0.15,
+    0.25
+   ],
+   "opts": {},
+   "label": "The mitral valve open - and the cords hanging slack",
+   "phase": "diastasis",
+   "closure": {
+    "mitral": 0,
+    "tricuspid": 0,
+    "aortic": 1,
+    "pulmonary": 1
+   }
+  },
+  {
+   "name": "b05-lateral-t350",
+   "t": 0.35,
+   "eye": [
+    1,
+    0.15,
+    0.25
+   ],
+   "opts": {},
+   "label": "The mitral valve shut - the cords go straight",
+   "phase": "ventricular ejection",
+   "closure": {
+    "mitral": 1,
+    "tricuspid": 1,
+    "aortic": 0,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "b06-superior-t400",
+   "t": 0.4,
+   "eye": [
+    0,
+    1,
+    0.001
+   ],
+   "opts": {},
+   "label": "Why a cusp cannot open without a sinus",
+   "phase": "ventricular ejection",
+   "closure": {
+    "mitral": 1,
+    "tricuspid": 1,
+    "aortic": 0,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "b07-anterior-t222",
+   "t": 0.222,
+   "eye": [
+    0,
+    0.2,
+    1
+   ],
+   "opts": {},
+   "label": "The first heart sound, and why it can be split",
+   "phase": "isovolumetric contraction",
+   "closure": {
+    "mitral": 0.47001600000000077,
+    "tricuspid": 0,
+    "aortic": 1,
+    "pulmonary": 1
+   }
+  },
+  {
+   "name": "b08-anterior-t565",
+   "t": 0.565,
+   "eye": [
+    0,
+    0.2,
+    1
+   ],
+   "opts": {},
+   "label": "The second heart sound, and its splitting",
+   "phase": "isovolumetric relaxation",
+   "closure": {
+    "mitral": 1,
+    "tricuspid": 1,
+    "aortic": 0.6479999999999944,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "b09-superior-t400",
+   "t": 0.4,
+   "eye": [
+    0,
+    1,
+    0.001
+   ],
+   "opts": {},
+   "label": "Four rings, four sizes",
+   "phase": "ventricular ejection",
+   "closure": {
+    "mitral": 1,
+    "tricuspid": 1,
+    "aortic": 0,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "x1-superior-shut",
+   "t": 0.35,
+   "eye": [
+    0,
+    1,
+    0.001
+   ],
+   "opts": {
+    "roots": false,
+    "ghost": false
+   },
+   "label": "AV shut / SL open, from above, roots off",
+   "phase": "ventricular ejection",
+   "closure": {
+    "mitral": 1,
+    "tricuspid": 1,
+    "aortic": 0,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "x2-superior-open",
+   "t": 0.8,
+   "eye": [
+    0,
+    1,
+    0.001
+   ],
+   "opts": {
+    "roots": false,
+    "ghost": false
+   },
+   "label": "AV open / SL shut, from above, roots off",
+   "phase": "diastasis",
+   "closure": {
+    "mitral": 0,
+    "tricuspid": 0,
+    "aortic": 1,
+    "pulmonary": 1
+   }
+  },
+  {
+   "name": "x3-anterior-open",
+   "t": 0.8,
+   "eye": [
+    0,
+    0.2,
+    1
+   ],
+   "opts": {
+    "roots": false
+   },
+   "label": "diastole, anterior",
+   "phase": "diastasis",
+   "closure": {
+    "mitral": 0,
+    "tricuspid": 0,
+    "aortic": 1,
+    "pulmonary": 1
+   }
+  },
+  {
+   "name": "x4-anterior-shut",
+   "t": 0.35,
+   "eye": [
+    0,
+    0.2,
+    1
+   ],
+   "opts": {
+    "roots": false
+   },
+   "label": "systole, anterior",
+   "phase": "ventricular ejection",
+   "closure": {
+    "mitral": 1,
+    "tricuspid": 1,
+    "aortic": 0,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "x5-ghost",
+   "t": 0.8,
+   "eye": [
+    0,
+    0.2,
+    1
+   ],
+   "opts": {
+    "ghost": true
+   },
+   "label": "with the ventricular walls",
+   "phase": "diastasis",
+   "closure": {
+    "mitral": 0,
+    "tricuspid": 0,
+    "aortic": 1,
+    "pulmonary": 1
+   }
+  }
+ ],
+ "console": [
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x67400114e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x67400114e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x67400114e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x67400114e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  }
+ ],
+ "normals": [
+  {
+   "key": "mitral_anterior",
+   "verts": 4824,
+   "outward": 0.537106135986733,
+   "hullVerts": 4320,
+   "outwardHull": 0.5386574074074074,
+   "tris": 1556,
+   "degenerate": 52,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1440
+  },
+  {
+   "key": "mitral_posterior",
+   "verts": 4824,
+   "outward": 0.5035240464344942,
+   "hullVerts": 4320,
+   "outwardHull": 0.4997685185185185,
+   "tris": 1556,
+   "degenerate": 52,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1440
+  },
+  {
+   "key": "tricuspid_septal",
+   "verts": 4824,
+   "outward": 0.5379353233830846,
+   "hullVerts": 4320,
+   "outwardHull": 0.5298611111111111,
+   "tris": 1556,
+   "degenerate": 52,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1440
+  },
+  {
+   "key": "tricuspid_anterior",
+   "verts": 4824,
+   "outward": 0.5346185737976783,
+   "hullVerts": 4320,
+   "outwardHull": 0.5261574074074075,
+   "tris": 1556,
+   "degenerate": 52,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1440
+  },
+  {
+   "key": "tricuspid_posterior",
+   "verts": 4824,
+   "outward": 0.5335820895522388,
+   "hullVerts": 4320,
+   "outwardHull": 0.5236111111111111,
+   "tris": 1556,
+   "degenerate": 52,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1440
+  },
+  {
+   "key": "aortic_right",
+   "verts": 3024,
+   "outward": 0.5783730158730159,
+   "hullVerts": 2640,
+   "outwardHull": 0.5261363636363636,
+   "tris": 964,
+   "degenerate": 44,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 880
+  },
+  {
+   "key": "aortic_left",
+   "verts": 3024,
+   "outward": 0.5783730158730159,
+   "hullVerts": 2640,
+   "outwardHull": 0.5261363636363636,
+   "tris": 964,
+   "degenerate": 44,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 880
+  },
+  {
+   "key": "aortic_noncoronary",
+   "verts": 3024,
+   "outward": 0.5783730158730159,
+   "hullVerts": 2640,
+   "outwardHull": 0.5261363636363636,
+   "tris": 964,
+   "degenerate": 44,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 880
+  },
+  {
+   "key": "pulmonary_anterior",
+   "verts": 3024,
+   "outward": 0.5701058201058201,
+   "hullVerts": 2640,
+   "outwardHull": 0.5166666666666667,
+   "tris": 964,
+   "degenerate": 44,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 880
+  },
+  {
+   "key": "pulmonary_right",
+   "verts": 3024,
+   "outward": 0.5701058201058201,
+   "hullVerts": 2640,
+   "outwardHull": 0.5166666666666667,
+   "tris": 964,
+   "degenerate": 44,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 880
+  },
+  {
+   "key": "pulmonary_left",
+   "verts": 3024,
+   "outward": 0.5701058201058201,
+   "hullVerts": 2640,
+   "outwardHull": 0.5166666666666667,
+   "tris": 964,
+   "degenerate": 44,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 880
+  },
+  {
+   "key": "annulus_mitral",
+   "verts": 4260,
+   "outward": 0.5288732394366197,
+   "hullVerts": 4200,
+   "outwardHull": 0.5221428571428571,
+   "tris": 1420,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1400
+  },
+  {
+   "key": "annulus_tricuspid",
+   "verts": 4260,
+   "outward": 0.5070422535211268,
+   "hullVerts": 4200,
+   "outwardHull": 0.5,
+   "tris": 1420,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1400
+  },
+  {
+   "key": "annulus_aortic",
+   "verts": 4260,
+   "outward": 0.5197183098591549,
+   "hullVerts": 4200,
+   "outwardHull": 0.5271428571428571,
+   "tris": 1420,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1400
+  },
+  {
+   "key": "annulus_pulmonary",
+   "verts": 4260,
+   "outward": 0.5049295774647887,
+   "hullVerts": 4200,
+   "outwardHull": 0.5121428571428571,
+   "tris": 1420,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1400
+  },
+  {
+   "key": "trigones",
+   "verts": 3120,
+   "outward": 0.6259615384615385,
+   "hullVerts": 2880,
+   "outwardHull": 0.6364583333333333,
+   "tris": 1040,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 960
+  },
+  {
+   "key": "pap_anterolateral",
+   "verts": 1248,
+   "outward": 1,
+   "hullVerts": 1152,
+   "outwardHull": 1,
+   "tris": 416,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 384
+  },
+  {
+   "key": "pap_posteromedial",
+   "verts": 1248,
+   "outward": 1,
+   "hullVerts": 1152,
+   "outwardHull": 1,
+   "tris": 416,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 384
+  },
+  {
+   "key": "papillary_rv",
+   "verts": 3744,
+   "outward": 0.8229166666666666,
+   "hullVerts": 3456,
+   "outwardHull": 0.8081597222222222,
+   "tris": 1248,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1152
+  },
+  {
+   "key": "chordae_mitral",
+   "verts": 12240,
+   "outward": 0.7377450980392157,
+   "hullVerts": 11520,
+   "outwardHull": 0.7213541666666666,
+   "tris": 4080,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 3840
+  },
+  {
+   "key": "chordae_tricuspid",
+   "verts": 27540,
+   "outward": 0.6945533769063181,
+   "hullVerts": 25920,
+   "outwardHull": 0.6817129629629629,
+   "tris": 9180,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 8640
+  },
+  {
+   "key": "aortic_root",
+   "verts": 13680,
+   "outward": 0.5263157894736842,
+   "hullVerts": 12960,
+   "outwardHull": 0.5,
+   "tris": 4560,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 4320
+  },
+  {
+   "key": "pulmonary_root",
+   "verts": 13680,
+   "outward": 0.5263157894736842,
+   "hullVerts": 12960,
+   "outwardHull": 0.5,
+   "tris": 4560,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 4320
+  },
+  {
+   "key": "ostium_left",
+   "verts": 792,
+   "outward": 1,
+   "hullVerts": 720,
+   "outwardHull": 1,
+   "tris": 264,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 240
+  },
+  {
+   "key": "ostium_right",
+   "verts": 792,
+   "outward": 1,
+   "hullVerts": 720,
+   "outwardHull": 1,
+   "tris": 264,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 240
+  },
+  {
+   "key": "chamber_ghost",
+   "verts": 4320,
+   "outward": 0.8166666666666667,
+   "hullVerts": 4080,
+   "outwardHull": 0.8058823529411765,
+   "tris": 1440,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1360
+  }
+ ],
+ "acceptance": {
+  "pass": {
+   "A": {
+    "kind": "predicted",
+    "what": "mitral coaptation depth below the annular plane, 0.40-1.00 cm (tenting)",
+    "ok": true,
+    "value": 0.6853640397626117,
+    "negativeRejected": true
+   },
+   "B": {
+    "kind": "predicted",
+    "what": "the mitral coaptation line lies POSTERIOR of the annular centre by >= 0.25 of the annulus radius",
+    "ok": true,
+    "value": 0.3418528967002968,
+    "negativeRejected": true
+   },
+   "C": {
+    "kind": "predicted",
+    "what": "mitral leaflet reserve (spare length at closure) 0.03-0.30 of leaflet length",
+    "ok": true,
+    "value": 0.07553678182918377,
+    "negativeRejected": true
+   },
+   "D": {
+    "kind": "predicted",
+    "what": "tricuspid coaptation depth 0.40-1.00 cm",
+    "ok": true,
+    "value": 0.8752551286084109,
+    "negativeRejected": true
+   },
+   "E": {
+    "kind": "predicted",
+    "what": "all three tricuspid leaflets reach the coaptation point with spare length",
+    "ok": true,
+    "value": 0.03255075288648046,
+    "negativeRejected": true
+   },
+   "F": {
+    "kind": "predicted",
+    "what": "the aortic cusp needs a sinus 1.15-1.40 x the annulus radius to open into",
+    "ok": true,
+    "value": 1.2061731806952973,
+    "negativeRejected": true
+   },
+   "G": {
+    "kind": "predicted",
+    "what": "the pulmonary cusp needs a sinus 1.15-1.40 x the annulus radius",
+    "ok": true,
+    "value": 1.2328885068428996,
+    "negativeRejected": true
+   },
+   "H": {
+    "kind": "predicted",
+    "what": "derived chordal reach 1.0-2.5 cm on both AV valves",
+    "ok": true,
+    "value": [
+     2.1262654017928773,
+     1.2018021836220614,
+     1.9566735906009785,
+     1.7897811071600112
+    ],
+    "negativeRejected": true
+   },
+   "I": {
+    "kind": "stated",
+    "what": "annulus size order: tricuspid > mitral > pulmonary > aortic, each by >= 8%",
+    "ok": true,
+    "value": [
+     1.1666666666666667,
+     1.2,
+     1.0869565217391306
+    ],
+    "negativeRejected": true
+   },
+   "J": {
+    "kind": "stated",
+    "what": "systole 0.26-0.32 s, isovolumetric contraction 0.03-0.09 s, relaxation 0.04-0.10 s",
+    "ok": true,
+    "value": [
+     0.2720000000000001,
+     0.04800000000000002,
+     0.06799999999999998
+    ],
+    "negativeRejected": true
+   },
+   "K": {
+    "kind": "stated",
+    "what": "S1 splits (tricuspid shuts 10-40 ms after mitral) and S2 splits (pulmonary 20-50 ms after aortic)",
+    "ok": true,
+    "value": [
+     0.019999999999999997,
+     0.029999999999999985
+    ],
+    "negativeRejected": true
+   },
+   "L": {
+    "kind": "structural",
+    "what": "every leaflet and cusp keeps its own length at every t (inextensible, <1e-4 relative)",
+    "ok": true,
+    "value": 1.2039552666100953e-14,
+    "negativeRejected": true
+   },
+   "M": {
+    "kind": "structural",
+    "what": "no chord is ever stretched past its rest length",
+    "ok": true,
+    "value": 9.831366831747346e-10,
+    "negativeRejected": true
+   },
+   "N": {
+    "kind": "structural",
+    "what": "chordae are taut when the valve is shut (<0.02 cm sag) and slack when it is open (>0.10 cm)",
+    "ok": true,
+    "value": [
+     0,
+     1.8207812618693606
+    ],
+    "negativeRejected": true
+   },
+   "O": {
+    "kind": "structural",
+    "what": "NO PROLAPSE: with the valve shut no point of a leaflet stands above its own annular plane",
+    "ok": true,
+    "value": 2.220446049250313e-16,
+    "negativeRejected": true
+   },
+   "P": {
+    "kind": "structural",
+    "what": "AXES, measured not commented: the right-sided (tricuspid) valve sits at lower x than the left-sided (mitral) one, by >= 0.35 of their mean width",
+    "ok": true,
+    "value": [
+     5.630000000000001,
+     1.1375
+    ],
+    "negativeRejected": true
+   },
+   "Q": {
+    "kind": "structural",
+    "what": "the pulmonary valve is the most VENTRAL (+z) of the four, by >= 0.35 of the mean annulus width",
+    "ok": true,
+    "value": [
+     3.9895926464902924,
+     0.9624999999999999
+    ],
+    "negativeRejected": true
+   },
+   "R": {
+    "kind": "structural",
+    "what": "the pulmonary valve is the most CRANIAL (+y) of the four, by >= 0.35 of the mean annulus width",
+    "ok": true,
+    "value": [
+     1.2754976735168473,
+     1.0499999999999998
+    ],
+    "negativeRejected": true
+   },
+   "S": {
+    "kind": "structural",
+    "what": "every part key the model declares is actually built by build(1, FULL)",
+    "ok": true,
+    "value": [],
+    "negativeRejected": true
+   },
+   "V": {
+    "kind": "structural",
+    "what": "the four valves are in the right STATE at the right time: at mid-ejection the semilunar valves are open and the AV valves shut, and at mid-diastole the reverse",
+    "ok": true,
+    "value": [
+     0,
+     0,
+     1,
+     1,
+     1,
+     1,
+     0,
+     0
+    ],
+    "negativeRejected": true
+   },
+   "W": {
+    "kind": "structural",
+    "what": "no side of the heart is ever open at both ends at once — an inflow and an outflow valve open together is a shunt, not a heart",
+    "ok": true,
+    "value": 0,
+    "negativeRejected": true
+   },
+   "U": {
+    "kind": "structural",
+    "what": "every solved quantity is finite — an infeasible stated set must not build silently",
+    "ok": true,
+    "value": [
+     -0.5127793450504452,
+     0.6853640397626117,
+     0.07553678182918377,
+     0.8752551286084109,
+     0.23709915779959195,
+     0.2911106335536243
+    ],
+    "negativeRejected": true
+   }
+  },
+  "allPass": true,
+  "negativesAllRejected": true,
+  "axes": {
+   "right": "-x",
+   "left": "+x",
+   "cranial": "+y",
+   "caudal": "-y",
+   "ventral": "+z",
+   "dorsal": "-z",
+   "units": "cm",
+   "t": "one cardiac cycle, 0.80 s, t=0 at the P wave"
+  },
+  "solved": {
+   "mitral": {
+    "xc": -0.5127793450504452,
+    "hc": 0.6853640397626117,
+    "chordA": 2.1262654017928773,
+    "chordP": 1.2018021836220614,
+    "reserveA": 0.07553678182918377,
+    "reserveP": 0.07553678182918355,
+    "commissureDeg": 60,
+    "papAzimuth": 1.0471975511965976
+   },
+   "tricuspid": {
+    "xc": 0,
+    "hc": 0.8752551286084109,
+    "reserveA": 0.149272351912618,
+    "reserveP": 0.0455250777556202,
+    "reserveS": 0.03255075288648046,
+    "chordA": 1.9566735906009785,
+    "chordP": 1.9566735906009785,
+    "chordS": 1.7897811071600112
+   },
+   "aortic": {
+    "annulus": 1.15,
+    "meridianClosed": 1.4124092891226678,
+    "chordOpen": 1.3,
+    "standProud": 0.23709915779959195,
+    "sinusRadius": 1.387099157799592,
+    "sinusRatio": 1.2061731806952973,
+    "freeEdgeLength": 2.492308167141455,
+    "annularArcShare": 2.4085543677521746,
+    "freeEdgeLengthDrawn": 2.52875805298348
+   },
+   "pulmonary": {
+    "annulus": 1.25,
+    "meridianClosed": 1.5116216457830975,
+    "chordOpen": 1.35,
+    "standProud": 0.2911106335536243,
+    "sinusRadius": 1.5411106335536244,
+    "sinusRatio": 1.2328885068428996,
+    "freeEdgeLength": 2.6925824035672523,
+    "annularArcShare": 2.6179938779914944,
+    "freeEdgeLengthDrawn": 2.7296185446369785
+   },
+   "proudEdge": {
+    "aortic": 0.08504089496054724,
+    "pulmonary": 0.07963848910410853
+   }
+  },
+  "probes": {
+   "inextensible": {
+    "worst": 1.2039552666100953e-14,
+    "where": "aortic_right@u0.75,t0.3"
+   },
+   "chordae": {
+    "maxStretch": 9.831366831747346e-10,
+    "sagShut": 0,
+    "sagOpen": 1.8207812618693606
+   },
+   "prolapse": {
+    "maxAbovePlane": 2.220446049250313e-16,
+    "where": "tricuspid_posterior"
+   }
+  },
+  "centres": {
+   "mitral": {
+    "x": 2.68,
+    "y": 0.24709105007638776,
+    "z": -1.1231411367108535,
+    "r": 1.5
+   },
+   "tricuspid": {
+    "x": -2.95,
+    "y": -0.1142674026044955,
+    "z": -0.17872593740703147,
+    "r": 1.75
+   },
+   "aortic": {
+    "x": 0,
+    "y": 0.34182556334678144,
+    "z": 0.07520162393629191,
+    "r": 1.15
+   },
+   "pulmonary": {
+    "x": 0.55,
+    "y": 1.1612302709123519,
+    "z": 2.866451509779439,
+    "r": 1.25
+   }
+  },
+  "keys": [
+   "annulus_aortic",
+   "annulus_mitral",
+   "annulus_pulmonary",
+   "annulus_tricuspid",
+   "aortic_left",
+   "aortic_noncoronary",
+   "aortic_right",
+   "aortic_root",
+   "chamber_ghost",
+   "chordae_mitral",
+   "chordae_tricuspid",
+   "mitral_anterior",
+   "mitral_posterior",
+   "ostium_left",
+   "ostium_right",
+   "pap_anterolateral",
+   "pap_posteromedial",
+   "papillary_rv",
+   "pulmonary_anterior",
+   "pulmonary_left",
+   "pulmonary_right",
+   "pulmonary_root",
+   "tricuspid_anterior",
+   "tricuspid_posterior",
+   "tricuspid_septal",
+   "trigones"
+  ],
+  "timing": {
+   "cycle_s": 0.8,
+   "systole_s": 0.2720000000000001,
+   "diastole_s": 0.528,
+   "ivc_s": 0.04800000000000002,
+   "ivr_s": 0.06799999999999998,
+   "events": {
+    "mitralClose": 0.21,
+    "tricuspidClose": 0.235,
+    "pulmonaryOpen": 0.262,
+    "aorticOpen": 0.27,
+    "aorticClose": 0.55,
+    "pulmonaryClose": 0.5875,
+    "tricuspidOpen": 0.616,
+    "mitralOpen": 0.635
+   }
+  }
+ },
+ "refs": [
+  {
+   "key": "mitral_anterior",
+   "ref": "heart-valves#mitral_anterior",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1608
+  },
+  {
+   "key": "mitral_posterior",
+   "ref": "heart-valves#mitral_posterior",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1607
+  },
+  {
+   "key": "tricuspid_anterior",
+   "ref": "heart-valves#tricuspid_anterior",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1607
+  },
+  {
+   "key": "tricuspid_posterior",
+   "ref": "heart-valves#tricuspid_posterior",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1606
+  },
+  {
+   "key": "tricuspid_septal",
+   "ref": "heart-valves#tricuspid_septal",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1607
+  },
+  {
+   "key": "aortic_right",
+   "ref": "heart-valves#aortic_right",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "aortic_left",
+   "ref": "heart-valves#aortic_left",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "aortic_noncoronary",
+   "ref": "heart-valves#aortic_noncoronary",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "pulmonary_anterior",
+   "ref": "heart-valves#pulmonary_anterior",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "pulmonary_right",
+   "ref": "heart-valves#pulmonary_right",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "pulmonary_left",
+   "ref": "heart-valves#pulmonary_left",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "annulus_mitral",
+   "ref": "heart-valves#annulus_mitral",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1420
+  },
+  {
+   "key": "annulus_tricuspid",
+   "ref": "heart-valves#annulus_tricuspid",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1420
+  },
+  {
+   "key": "annulus_aortic",
+   "ref": "heart-valves#annulus_aortic",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1420
+  },
+  {
+   "key": "annulus_pulmonary",
+   "ref": "heart-valves#annulus_pulmonary",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1420
+  },
+  {
+   "key": "trigones",
+   "ref": "heart-valves#trigones",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1040
+  },
+  {
+   "key": "chordae_mitral",
+   "ref": "heart-valves#chordae_mitral",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4080
+  },
+  {
+   "key": "chordae_tricuspid",
+   "ref": "heart-valves#chordae_tricuspid",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 9180
+  },
+  {
+   "key": "pap_anterolateral",
+   "ref": "heart-valves#pap_anterolateral",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 416
+  },
+  {
+   "key": "pap_posteromedial",
+   "ref": "heart-valves#pap_posteromedial",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 416
+  },
+  {
+   "key": "papillary_rv",
+   "ref": "heart-valves#papillary_rv",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1248
+  },
+  {
+   "key": "aortic_root",
+   "ref": "heart-valves#aortic_root",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4560
+  },
+  {
+   "key": "pulmonary_root",
+   "ref": "heart-valves#pulmonary_root",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4560
+  },
+  {
+   "key": "ostium_left",
+   "ref": "heart-valves#ostium_left",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 264
+  },
+  {
+   "key": "ostium_right",
+   "ref": "heart-valves#ostium_right",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 264
+  },
+  {
+   "key": "chamber_ghost",
+   "ref": "heart-valves#chamber_ghost",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1440
+  }
+ ],
+ "triangles": 47231,
+ "normals_open": [
+  {
+   "key": "mitral_anterior",
+   "verts": 4824,
+   "outward": 0.5559701492537313,
+   "hullVerts": 4320,
+   "outwardHull": 0.5083333333333333,
+   "tris": 1556,
+   "degenerate": 52,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1440
+  },
+  {
+   "key": "mitral_posterior",
+   "verts": 4821,
+   "outward": 0.5374403650694877,
+   "hullVerts": 4320,
+   "outwardHull": 0.500462962962963,
+   "tris": 1556,
+   "degenerate": 51,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1440
+  },
+  {
+   "key": "tricuspid_septal",
+   "verts": 4821,
+   "outward": 0.5500933416303672,
+   "hullVerts": 4320,
+   "outwardHull": 0.5076388888888889,
+   "tris": 1556,
+   "degenerate": 51,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1440
+  },
+  {
+   "key": "tricuspid_anterior",
+   "verts": 4821,
+   "outward": 0.5500933416303672,
+   "hullVerts": 4320,
+   "outwardHull": 0.5076388888888889,
+   "tris": 1556,
+   "degenerate": 51,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1440
+  },
+  {
+   "key": "tricuspid_posterior",
+   "verts": 4818,
+   "outward": 0.5529265255292652,
+   "hullVerts": 4320,
+   "outwardHull": 0.5090277777777777,
+   "tris": 1556,
+   "degenerate": 50,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1440
+  },
+  {
+   "key": "aortic_right",
+   "verts": 3024,
+   "outward": 0.5773809523809523,
+   "hullVerts": 2640,
+   "outwardHull": 0.5613636363636364,
+   "tris": 964,
+   "degenerate": 44,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 880
+  },
+  {
+   "key": "aortic_left",
+   "verts": 3024,
+   "outward": 0.5773809523809523,
+   "hullVerts": 2640,
+   "outwardHull": 0.5613636363636364,
+   "tris": 964,
+   "degenerate": 44,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 880
+  },
+  {
+   "key": "aortic_noncoronary",
+   "verts": 3024,
+   "outward": 0.5773809523809523,
+   "hullVerts": 2640,
+   "outwardHull": 0.5613636363636364,
+   "tris": 964,
+   "degenerate": 44,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 880
+  },
+  {
+   "key": "pulmonary_anterior",
+   "verts": 3024,
+   "outward": 0.5836640211640212,
+   "hullVerts": 2640,
+   "outwardHull": 0.5640151515151515,
+   "tris": 964,
+   "degenerate": 44,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 880
+  },
+  {
+   "key": "pulmonary_right",
+   "verts": 3024,
+   "outward": 0.5836640211640212,
+   "hullVerts": 2640,
+   "outwardHull": 0.5640151515151515,
+   "tris": 964,
+   "degenerate": 44,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 880
+  },
+  {
+   "key": "pulmonary_left",
+   "verts": 3024,
+   "outward": 0.5836640211640212,
+   "hullVerts": 2640,
+   "outwardHull": 0.5640151515151515,
+   "tris": 964,
+   "degenerate": 44,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 880
+  },
+  {
+   "key": "annulus_mitral",
+   "verts": 4260,
+   "outward": 0.5288732394366197,
+   "hullVerts": 4200,
+   "outwardHull": 0.5221428571428571,
+   "tris": 1420,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1400
+  },
+  {
+   "key": "annulus_tricuspid",
+   "verts": 4260,
+   "outward": 0.5070422535211268,
+   "hullVerts": 4200,
+   "outwardHull": 0.5,
+   "tris": 1420,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1400
+  },
+  {
+   "key": "annulus_aortic",
+   "verts": 4260,
+   "outward": 0.5197183098591549,
+   "hullVerts": 4200,
+   "outwardHull": 0.5271428571428571,
+   "tris": 1420,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1400
+  },
+  {
+   "key": "annulus_pulmonary",
+   "verts": 4260,
+   "outward": 0.5049295774647887,
+   "hullVerts": 4200,
+   "outwardHull": 0.5121428571428571,
+   "tris": 1420,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1400
+  },
+  {
+   "key": "trigones",
+   "verts": 3120,
+   "outward": 0.6259615384615385,
+   "hullVerts": 2880,
+   "outwardHull": 0.6364583333333333,
+   "tris": 1040,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 960
+  },
+  {
+   "key": "pap_anterolateral",
+   "verts": 1248,
+   "outward": 1,
+   "hullVerts": 1152,
+   "outwardHull": 1,
+   "tris": 416,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 384
+  },
+  {
+   "key": "pap_posteromedial",
+   "verts": 1248,
+   "outward": 1,
+   "hullVerts": 1152,
+   "outwardHull": 1,
+   "tris": 416,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 384
+  },
+  {
+   "key": "papillary_rv",
+   "verts": 3744,
+   "outward": 0.8229166666666666,
+   "hullVerts": 3456,
+   "outwardHull": 0.8081597222222222,
+   "tris": 1248,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1152
+  },
+  {
+   "key": "chordae_mitral",
+   "verts": 12240,
+   "outward": 0.5186274509803922,
+   "hullVerts": 11520,
+   "outwardHull": 0.5197916666666667,
+   "tris": 4080,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 3840
+  },
+  {
+   "key": "chordae_tricuspid",
+   "verts": 27540,
+   "outward": 0.6288671023965141,
+   "hullVerts": 25920,
+   "outwardHull": 0.6195601851851852,
+   "tris": 9180,
+   "degenerate": 0,
+   "winding": 0.9996732026143791,
+   "windingHull": 0.9996527777777777,
+   "hullTris": 8640
+  },
+  {
+   "key": "aortic_root",
+   "verts": 13680,
+   "outward": 0.5263157894736842,
+   "hullVerts": 12960,
+   "outwardHull": 0.5,
+   "tris": 4560,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 4320
+  },
+  {
+   "key": "pulmonary_root",
+   "verts": 13680,
+   "outward": 0.5263157894736842,
+   "hullVerts": 12960,
+   "outwardHull": 0.5,
+   "tris": 4560,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 4320
+  },
+  {
+   "key": "ostium_left",
+   "verts": 792,
+   "outward": 1,
+   "hullVerts": 720,
+   "outwardHull": 1,
+   "tris": 264,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 240
+  },
+  {
+   "key": "ostium_right",
+   "verts": 792,
+   "outward": 1,
+   "hullVerts": 720,
+   "outwardHull": 1,
+   "tris": 264,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 240
+  },
+  {
+   "key": "chamber_ghost",
+   "verts": 4320,
+   "outward": 0.8166666666666667,
+   "hullVerts": 4080,
+   "outwardHull": 0.8058823529411765,
+   "tris": 1440,
+   "degenerate": 0,
+   "winding": 1,
+   "windingHull": 1,
+   "hullTris": 1360
+  }
+ ],
+ "frontFace": {
+  "rays": 226,
+  "facingAway": 0,
+  "fraction": 0
+ },
+ "refs_mid": [
+  {
+   "key": "mitral_anterior",
+   "ref": "heart-valves#mitral_anterior@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1608
+  },
+  {
+   "key": "mitral_posterior",
+   "ref": "heart-valves#mitral_posterior@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1608
+  },
+  {
+   "key": "tricuspid_anterior",
+   "ref": "heart-valves#tricuspid_anterior@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1608
+  },
+  {
+   "key": "tricuspid_posterior",
+   "ref": "heart-valves#tricuspid_posterior@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1608
+  },
+  {
+   "key": "tricuspid_septal",
+   "ref": "heart-valves#tricuspid_septal@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1608
+  },
+  {
+   "key": "aortic_right",
+   "ref": "heart-valves#aortic_right@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "aortic_left",
+   "ref": "heart-valves#aortic_left@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "aortic_noncoronary",
+   "ref": "heart-valves#aortic_noncoronary@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "pulmonary_anterior",
+   "ref": "heart-valves#pulmonary_anterior@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "pulmonary_right",
+   "ref": "heart-valves#pulmonary_right@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "pulmonary_left",
+   "ref": "heart-valves#pulmonary_left@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "annulus_mitral",
+   "ref": "heart-valves#annulus_mitral@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1420
+  },
+  {
+   "key": "annulus_tricuspid",
+   "ref": "heart-valves#annulus_tricuspid@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1420
+  },
+  {
+   "key": "annulus_aortic",
+   "ref": "heart-valves#annulus_aortic@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1420
+  },
+  {
+   "key": "annulus_pulmonary",
+   "ref": "heart-valves#annulus_pulmonary@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1420
+  },
+  {
+   "key": "trigones",
+   "ref": "heart-valves#trigones@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1040
+  },
+  {
+   "key": "chordae_mitral",
+   "ref": "heart-valves#chordae_mitral@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4080
+  },
+  {
+   "key": "chordae_tricuspid",
+   "ref": "heart-valves#chordae_tricuspid@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 9180
+  },
+  {
+   "key": "pap_anterolateral",
+   "ref": "heart-valves#pap_anterolateral@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 416
+  },
+  {
+   "key": "pap_posteromedial",
+   "ref": "heart-valves#pap_posteromedial@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 416
+  },
+  {
+   "key": "papillary_rv",
+   "ref": "heart-valves#papillary_rv@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1248
+  },
+  {
+   "key": "aortic_root",
+   "ref": "heart-valves#aortic_root@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4560
+  },
+  {
+   "key": "pulmonary_root",
+   "ref": "heart-valves#pulmonary_root@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4560
+  },
+  {
+   "key": "ostium_left",
+   "ref": "heart-valves#ostium_left@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 264
+  },
+  {
+   "key": "ostium_right",
+   "ref": "heart-valves#ostium_right@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 264
+  },
+  {
+   "key": "chamber_ghost",
+   "ref": "heart-valves#chamber_ghost@0.35",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1440
+  }
+ ],
+ "stageable": [
+  {
+   "key": "mitral_anterior",
+   "stageable": true
+  },
+  {
+   "key": "mitral_posterior",
+   "stageable": true
+  },
+  {
+   "key": "tricuspid_anterior",
+   "stageable": true
+  },
+  {
+   "key": "tricuspid_posterior",
+   "stageable": true
+  },
+  {
+   "key": "tricuspid_septal",
+   "stageable": true
+  },
+  {
+   "key": "aortic_right",
+   "stageable": true
+  },
+  {
+   "key": "aortic_left",
+   "stageable": true
+  },
+  {
+   "key": "aortic_noncoronary",
+   "stageable": true
+  },
+  {
+   "key": "pulmonary_anterior",
+   "stageable": true
+  },
+  {
+   "key": "pulmonary_right",
+   "stageable": true
+  },
+  {
+   "key": "pulmonary_left",
+   "stageable": true
+  },
+  {
+   "key": "annulus_mitral",
+   "stageable": true
+  },
+  {
+   "key": "annulus_tricuspid",
+   "stageable": true
+  },
+  {
+   "key": "annulus_aortic",
+   "stageable": true
+  },
+  {
+   "key": "annulus_pulmonary",
+   "stageable": true
+  },
+  {
+   "key": "trigones",
+   "stageable": true
+  },
+  {
+   "key": "chordae_mitral",
+   "stageable": true
+  },
+  {
+   "key": "chordae_tricuspid",
+   "stageable": true
+  },
+  {
+   "key": "pap_anterolateral",
+   "stageable": true
+  },
+  {
+   "key": "pap_posteromedial",
+   "stageable": true
+  },
+  {
+   "key": "papillary_rv",
+   "stageable": true
+  },
+  {
+   "key": "aortic_root",
+   "stageable": true
+  },
+  {
+   "key": "pulmonary_root",
+   "stageable": true
+  },
+  {
+   "key": "ostium_left",
+   "stageable": true
+  },
+  {
+   "key": "ostium_right",
+   "stageable": true
+  },
+  {
+   "key": "chamber_ghost",
+   "stageable": true
+  }
+ ],
+ "adapterConsole": []
+}

@@ -1,0 +1,358 @@
+{
+  "scene": "gross__back-vertebral-column__intervertebral-disc",
+  "canvas": {
+    "w": 1008,
+    "h": 440
+  },
+  "views": [
+    {
+      "view": 1,
+      "title": "Where the discs sit",
+      "lit": 41742,
+      "litFaint": 41742,
+      "w": 1008,
+      "h": 440,
+      "wpct": 48.4,
+      "hpct": 43,
+      "areapct": 9.41,
+      "edgeTouch": false,
+      "fillW": 52,
+      "fillH": 49,
+      "subjectFrom": "opaque",
+      "noOpaqueSubject": false,
+      "subject": {
+        "only": [],
+        "named": [],
+        "onlyVisible": 0,
+        "visible": 0,
+        "size": [
+          4.146,
+          0.6998,
+          2.069
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 4773,
+      "yaw": 1.21,
+      "dist": 3.2177,
+      "clippedAtRest": false,
+      "clippedUnderSpin": false,
+      "worstFillUnderSpin": 76.5,
+      "fails": [],
+      "framingFails": [],
+      "sceneFails": [],
+      "engineFails": []
+    },
+    {
+      "view": 2,
+      "title": "One joint, two bones",
+      "lit": 161281,
+      "litFaint": 161923,
+      "w": 1008,
+      "h": 440,
+      "wpct": 81.8,
+      "hpct": 77.3,
+      "areapct": 36.36,
+      "edgeTouch": true,
+      "fillW": 29.7,
+      "fillH": 72.2,
+      "subjectFrom": "opaque",
+      "noOpaqueSubject": false,
+      "subject": {
+        "only": [
+          "disc_l45"
+        ],
+        "named": [
+          "l4",
+          "l5",
+          "disc_l45"
+        ],
+        "onlyVisible": 1,
+        "visible": 3,
+        "size": [
+          0.6372,
+          0.5171,
+          0.6846
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 3912,
+      "yaw": 1.21,
+      "dist": 1.2,
+      "clippedAtRest": false,
+      "clippedUnderSpin": true,
+      "worstFillUnderSpin": 7374.9,
+      "fails": [],
+      "framingFails": [],
+      "sceneFails": [],
+      "engineFails": []
+    },
+    {
+      "view": 3,
+      "title": "Soft centre, tough ring",
+      "lit": 148444,
+      "litFaint": 148972,
+      "w": 1008,
+      "h": 440,
+      "wpct": 78.2,
+      "hpct": 100,
+      "areapct": 33.47,
+      "edgeTouch": true,
+      "fillW": 272.3,
+      "fillH": 319.9,
+      "subjectFrom": "visible",
+      "noOpaqueSubject": true,
+      "subject": {
+        "only": [
+          "disc_l45"
+        ],
+        "named": [],
+        "onlyVisible": 1,
+        "visible": 1,
+        "size": [
+          0.2148,
+          0.2287,
+          0.3228
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 4402,
+      "yaw": 1.21,
+      "dist": 1.2,
+      "clippedAtRest": true,
+      "clippedUnderSpin": true,
+      "worstFillUnderSpin": 671.5,
+      "fails": [
+        "clipped at rest",
+        "fillH 319.9% — subject does not fit",
+        "fillW 272.3% — subject does not fit",
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ],
+      "framingFails": [
+        "clipped at rest",
+        "fillH 319.9% — subject does not fit",
+        "fillW 272.3% — subject does not fit"
+      ],
+      "sceneFails": [],
+      "engineFails": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "view": 4,
+      "title": "Why a prolapse goes backwards and sideways",
+      "lit": 131534,
+      "litFaint": 131929,
+      "w": 1008,
+      "h": 440,
+      "wpct": 94.2,
+      "hpct": 63.6,
+      "areapct": 29.66,
+      "edgeTouch": true,
+      "fillW": 4.2,
+      "fillH": 13.9,
+      "subjectFrom": "opaque",
+      "noOpaqueSubject": false,
+      "subject": {
+        "only": [
+          "l4"
+        ],
+        "named": [],
+        "onlyVisible": 1,
+        "visible": 1,
+        "size": [
+          0.4235,
+          0.4912,
+          0.5724
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 5472,
+      "yaw": 1.21,
+      "dist": 1.2,
+      "clippedAtRest": false,
+      "clippedUnderSpin": false,
+      "worstFillUnderSpin": 29.2,
+      "fails": [],
+      "framingFails": [],
+      "sceneFails": [],
+      "engineFails": []
+    },
+    {
+      "view": 5,
+      "title": "The nerve next door",
+      "lit": 146496,
+      "litFaint": 146943,
+      "w": 1008,
+      "h": 440,
+      "wpct": 60.3,
+      "hpct": 85.2,
+      "areapct": 33.03,
+      "edgeTouch": true,
+      "fillW": 9978,
+      "fillH": 10446.5,
+      "subjectFrom": "visible",
+      "noOpaqueSubject": true,
+      "subject": {
+        "only": [
+          "l1",
+          "l2",
+          "l3",
+          "l4",
+          "l5",
+          "sacrum"
+        ],
+        "named": [
+          "disc_l45",
+          "disc_l5s1"
+        ],
+        "onlyVisible": 6,
+        "visible": 8,
+        "size": [
+          1.8461,
+          0.6664,
+          1.177
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 4035,
+      "yaw": 1.21,
+      "dist": 1.7678,
+      "clippedAtRest": true,
+      "clippedUnderSpin": true,
+      "worstFillUnderSpin": 51282.2,
+      "fails": [
+        "clipped at rest",
+        "fillH 10446.5% — subject does not fit",
+        "fillW 9978% — subject does not fit",
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ],
+      "framingFails": [
+        "clipped at rest",
+        "fillH 10446.5% — subject does not fit",
+        "fillW 9978% — subject does not fit"
+      ],
+      "sceneFails": [],
+      "engineFails": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "view": 6,
+      "title": "Thicker where you bend",
+      "lit": 110722,
+      "litFaint": 111119,
+      "w": 1008,
+      "h": 440,
+      "wpct": 63.9,
+      "hpct": 73.9,
+      "areapct": 24.96,
+      "edgeTouch": true,
+      "fillW": 53.7,
+      "fillH": 43.4,
+      "subjectFrom": "opaque",
+      "noOpaqueSubject": false,
+      "subject": {
+        "only": [
+          "disc_c56",
+          "disc_t67",
+          "disc_l45"
+        ],
+        "named": [
+          "disc_l45"
+        ],
+        "onlyVisible": 3,
+        "visible": 3,
+        "size": [
+          2.7428,
+          0.4804,
+          1.2342
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 4642,
+      "yaw": 1.21,
+      "dist": 2.0542,
+      "clippedAtRest": false,
+      "clippedUnderSpin": true,
+      "worstFillUnderSpin": 73.2,
+      "fails": [],
+      "framingFails": [],
+      "sceneFails": [],
+      "engineFails": []
+    },
+    {
+      "view": 7,
+      "title": "Take the discs away",
+      "lit": 146466,
+      "litFaint": 146809,
+      "w": 1008,
+      "h": 440,
+      "wpct": 60.3,
+      "hpct": 85.2,
+      "areapct": 33.02,
+      "edgeTouch": true,
+      "fillW": 9978,
+      "fillH": 10446.5,
+      "subjectFrom": "visible",
+      "noOpaqueSubject": true,
+      "subject": {
+        "only": [
+          "l1",
+          "l2",
+          "l3",
+          "l4",
+          "l5",
+          "sacrum"
+        ],
+        "named": [
+          "disc_l45",
+          "disc_l5s1",
+          "disc_l12",
+          "disc_l23",
+          "disc_l34"
+        ],
+        "onlyVisible": 6,
+        "visible": 6,
+        "size": [
+          1.8461,
+          0.6664,
+          1.177
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 3183,
+      "yaw": 1.21,
+      "dist": 1.7678,
+      "clippedAtRest": true,
+      "clippedUnderSpin": true,
+      "worstFillUnderSpin": 17705.4,
+      "fails": [
+        "clipped at rest",
+        "fillH 10446.5% — subject does not fit",
+        "fillW 9978% — subject does not fit",
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ],
+      "framingFails": [
+        "clipped at rest",
+        "fillH 10446.5% — subject does not fit",
+        "fillW 9978% — subject does not fit"
+      ],
+      "sceneFails": [],
+      "engineFails": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    }
+  ],
+  "console": [],
+  "failingViews": 3,
+  "sceneDefectViews": 0,
+  "engineDefectViews": 3
+}

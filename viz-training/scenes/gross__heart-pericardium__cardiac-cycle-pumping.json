@@ -1,0 +1,825 @@
+{
+ "schema": 2,
+ "id": "gross__heart-pericardium__cardiac-cycle-pumping",
+ "mode": "3d_anatomy",
+ "course": "Gross Anatomy",
+ "topic": "Heart & Pericardium",
+ "structure": "Cardiac cycle (pumping)",
+ "covers": [
+  "Cardiac cycle (pumping)"
+ ],
+ "learning_goal": "Walk one heartbeat and be able to say, at any instant, which valves are open, which are shut, whether blood is moving, and what is making it move - and to state the volumes, the pressures and the durations of the five phases.",
+ "status": "candidate",
+ "provenance": {
+  "author": "task",
+  "authored_at": "2026-09-10"
+ },
+ "provider": {
+  "primary": "procedural",
+  "fallbacks": []
+ },
+ "match": {
+  "topics": [
+   "heart",
+   "cardiac cycle",
+   "cardiovascular",
+   "cardiac physiology",
+   "heart sounds",
+   "pericardium"
+  ],
+  "terms": [
+   "cardiac cycle",
+   "systole",
+   "diastole",
+   "ventricular systole",
+   "atrial systole",
+   "isovolumetric contraction",
+   "isovolumetric relaxation",
+   "ventricular ejection",
+   "ventricular filling",
+   "diastasis",
+   "stroke volume",
+   "ejection fraction",
+   "end-diastolic volume",
+   "end-systolic volume",
+   "preload",
+   "afterload",
+   "Wiggers diagram",
+   "first heart sound",
+   "second heart sound",
+   "S1",
+   "S2",
+   "dicrotic notch",
+   "atrial kick",
+   "E wave",
+   "A wave",
+   "mitral valve",
+   "aortic valve",
+   "tricuspid valve",
+   "pulmonary valve",
+   "papillary muscle",
+   "chordae tendineae",
+   "cardiac output",
+   "AV plane descent",
+   "apex beat"
+  ]
+ },
+ "camera": {
+  "framing": "anterior",
+  "autoRotate": 0.0,
+  "initialYaw": 0.0
+ },
+ "structures": [
+  {
+   "key": "lv",
+   "name": "Left ventricular myocardium",
+   "label": "Left ventricle (wall)",
+   "role": "part",
+   "group": "Myocardium",
+   "layer": "muscle",
+   "color": "#9e2b33",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#lv"
+   },
+   "opacity": 0.55,
+   "terms": [
+    "left ventricle",
+    "LV",
+    "myocardium",
+    "wall thickness",
+    "ventricular systole"
+   ],
+   "narration": "The thick-walled pump of the systemic circuit. Its wall is about 10 mm at end-diastole and about 14 mm at end-systole — it does not gain muscle, it gets shorter and fatter, because muscle cannot be compressed. Watch the wall, not just the cavity."
+  },
+  {
+   "key": "rv",
+   "name": "Right ventricular myocardium",
+   "label": "Right ventricle (wall)",
+   "role": "part",
+   "group": "Myocardium",
+   "layer": "muscle",
+   "color": "#b5555c",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#rv"
+   },
+   "opacity": 0.55,
+   "terms": [
+    "right ventricle",
+    "RV",
+    "thin wall"
+   ],
+   "narration": "A third the wall thickness of the left, because it pumps the same stroke volume against a fifth of the pressure. Same output, different load — that is the whole reason for the difference."
+  },
+  {
+   "key": "septum",
+   "name": "Interventricular septum",
+   "label": "Interventricular septum",
+   "role": "part",
+   "group": "Myocardium",
+   "layer": "muscle",
+   "color": "#8f2028",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#septum"
+   },
+   "terms": [
+    "interventricular septum",
+    "septum",
+    "septal motion"
+   ],
+   "narration": "Left ventricular muscle, and it thickens with the left ventricle rather than the right. In systole it moves TOWARDS the left ventricular cavity; if it moves the other way, the right ventricle is overloaded."
+  },
+  {
+   "key": "la",
+   "name": "Left atrium",
+   "label": "Left atrium (wall)",
+   "role": "part",
+   "group": "Myocardium",
+   "layer": "muscle",
+   "color": "#c98a92",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#la"
+   },
+   "opacity": 0.5,
+   "terms": [
+    "left atrium",
+    "LA",
+    "atrial systole",
+    "atrial kick"
+   ],
+   "narration": "A thin-walled reservoir, not a pump of consequence. Its contraction adds the last fifth of ventricular filling. Lose it — in atrial fibrillation — and a healthy ventricle barely notices, while a stiff one may not cope."
+  },
+  {
+   "key": "ra",
+   "name": "Right atrium",
+   "label": "Right atrium (wall)",
+   "role": "part",
+   "group": "Myocardium",
+   "layer": "muscle",
+   "color": "#b98890",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#ra"
+   },
+   "opacity": 0.5,
+   "terms": [
+    "right atrium",
+    "RA"
+   ],
+   "narration": "The same, on the venous side. It receives the superior and inferior venae cavae continuously, throughout the cycle, whatever the ventricles are doing."
+  },
+  {
+   "key": "lv_blood",
+   "name": "Blood in the left ventricle",
+   "label": "LV cavity",
+   "role": "primary",
+   "group": "Chambers",
+   "layer": "organ",
+   "color": "#c0392b",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#lv_blood"
+   },
+   "terms": [
+    "end-diastolic volume",
+    "EDV",
+    "end-systolic volume",
+    "ESV",
+    "stroke volume",
+    "ejection fraction"
+   ],
+   "narration": "120 ml at end-diastole, 50 ml at end-systole. The difference, 70 ml, is the stroke volume, and 70 of 120 is an ejection fraction of 58%. The ventricle never empties — that is normal, and it is the reserve a failing heart has already spent."
+  },
+  {
+   "key": "rv_blood",
+   "name": "Blood in the right ventricle",
+   "label": "RV cavity",
+   "role": "primary",
+   "group": "Chambers",
+   "layer": "organ",
+   "color": "#2f5fa8",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#rv_blood"
+   },
+   "terms": [
+    "right ventricular volume",
+    "RV stroke volume"
+   ],
+   "narration": "130 ml to 60 ml — a slightly larger chamber, a slightly lower ejection fraction, and exactly the same 70 ml stroke volume. The two sides must match beat for beat or blood piles up behind one of them."
+  },
+  {
+   "key": "la_blood",
+   "name": "Blood in the left atrium",
+   "label": "LA cavity",
+   "role": "part",
+   "group": "Chambers",
+   "layer": "organ",
+   "color": "#d0453a",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#la_blood"
+   },
+   "terms": [
+    "left atrial pressure",
+    "v wave"
+   ],
+   "narration": "Fills all through ventricular systole, while the mitral valve is shut and the pulmonary veins keep delivering. That is where the v wave of the atrial pressure trace comes from."
+  },
+  {
+   "key": "ra_blood",
+   "name": "Blood in the right atrium",
+   "label": "RA cavity",
+   "role": "part",
+   "group": "Chambers",
+   "layer": "organ",
+   "color": "#2a559a",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#ra_blood"
+   },
+   "terms": [
+    "right atrial pressure",
+    "JVP",
+    "jugular venous pressure"
+   ],
+   "narration": "The same on the right, and its pressure is the jugular venous pressure you can see in the neck."
+  },
+  {
+   "key": "mitral",
+   "name": "Mitral valve",
+   "label": "Mitral valve",
+   "role": "part",
+   "group": "Valves",
+   "layer": "fascia",
+   "color": "#efe6d2",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#mitral"
+   },
+   "terms": [
+    "mitral valve",
+    "bicuspid valve",
+    "anterior leaflet",
+    "first heart sound",
+    "S1"
+   ],
+   "narration": "Two leaflets, an anterior and a posterior. It is held shut against 120 mmHg by the chordae, and it opens and closes for one reason only: the pressure on either side of it. No muscle pulls a valve open."
+  },
+  {
+   "key": "tricuspid",
+   "name": "Tricuspid valve",
+   "label": "Tricuspid valve",
+   "role": "part",
+   "group": "Valves",
+   "layer": "fascia",
+   "color": "#e6dcc6",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#tricuspid"
+   },
+   "terms": [
+    "tricuspid valve",
+    "S1 splitting"
+   ],
+   "narration": "Three leaflets, and the largest annulus of the four valves. It shuts a fraction after the mitral, which is why S1 can be split."
+  },
+  {
+   "key": "aortic",
+   "name": "Aortic valve",
+   "label": "Aortic valve",
+   "role": "part",
+   "group": "Valves",
+   "layer": "fascia",
+   "color": "#f2ecdc",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#aortic"
+   },
+   "terms": [
+    "aortic valve",
+    "semilunar valve",
+    "second heart sound",
+    "S2",
+    "dicrotic notch"
+   ],
+   "narration": "Three semilunar cusps whose attachment is a crown, not a ring — low in the middle of each cusp, high at the commissures. They are pushed open by the ventricle and slammed shut by the aorta's own recoil, which is the second heart sound."
+  },
+  {
+   "key": "pulmonary",
+   "name": "Pulmonary valve",
+   "label": "Pulmonary valve",
+   "role": "part",
+   "group": "Valves",
+   "layer": "fascia",
+   "color": "#e8e0cc",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#pulmonary"
+   },
+   "terms": [
+    "pulmonary valve",
+    "splitting of S2"
+   ],
+   "narration": "The same three cusps on the right. It closes slightly later than the aortic, and inspiration delays it further — which is the physiological splitting of S2."
+  },
+  {
+   "key": "papillary",
+   "name": "Papillary muscles and chordae tendineae",
+   "label": "Papillary muscles & chordae",
+   "role": "part",
+   "group": "Valves",
+   "layer": "muscle",
+   "color": "#8f2028",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#papillary"
+   },
+   "terms": [
+    "papillary muscle",
+    "chordae tendineae",
+    "prolapse",
+    "mitral regurgitation"
+   ],
+   "narration": "They do not open or shut the valve. They contract WITH the ventricle to stop the leaflets being blown back into the atrium when the pressure hits 120 mmHg. Rupture one and the mitral valve prolapses that instant."
+  },
+  {
+   "key": "av_plane",
+   "name": "Atrioventricular plane",
+   "label": "AV plane",
+   "role": "part",
+   "group": "Myocardium",
+   "layer": "fascia",
+   "color": "#e0c060",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#av_plane"
+   },
+   "opacity": 0.35,
+   "terms": [
+    "atrioventricular plane",
+    "AV plane descent",
+    "MAPSE",
+    "apex beat"
+   ],
+   "narration": "The floor of the atria and the roof of the ventricles, carrying all four valve rings. In systole it descends about 12 mm towards a nearly stationary apex — which is why the apex beat stays in one intercostal space, and why the atria fill while the ventricles empty."
+  },
+  {
+   "key": "aorta",
+   "name": "Aorta",
+   "label": "Aorta",
+   "role": "part",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#b02a2a",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#aorta"
+   },
+   "terms": [
+    "aorta",
+    "windkessel",
+    "aortic pressure",
+    "pulse pressure"
+   ],
+   "narration": "It does not just carry the stroke volume away, it stores it. About half of each stroke volume distends the aorta in systole and is squeezed onward in diastole, which is what turns an intermittent pump into a continuous flow."
+  },
+  {
+   "key": "pulm_trunk",
+   "name": "Pulmonary trunk",
+   "label": "Pulmonary trunk",
+   "role": "part",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#2f5fa8",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#pulm_trunk"
+   },
+   "terms": [
+    "pulmonary trunk",
+    "pulmonary artery pressure"
+   ],
+   "narration": "Carries the same 70 ml at a quarter of the pressure, because the pulmonary circulation's resistance is about a seventh of the systemic."
+  },
+  {
+   "key": "svc",
+   "name": "Superior vena cava",
+   "label": "Superior vena cava",
+   "role": "context",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#1f4272",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#svc"
+   },
+   "narration": "Venous return is continuous. It does not stop because the ventricles are contracting."
+  },
+  {
+   "key": "ivc",
+   "name": "Inferior vena cava",
+   "label": "Inferior vena cava",
+   "role": "context",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#1a3a66",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#ivc"
+   },
+   "narration": "The larger of the two, and the one that carries the effect of a change in posture straight to the right atrium."
+  },
+  {
+   "key": "pulm_veins",
+   "name": "Pulmonary veins",
+   "label": "Pulmonary veins",
+   "role": "context",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#9e3540",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#pulm_veins"
+   },
+   "narration": "They deliver into the left atrium continuously, which is what fills it during ventricular systole while the mitral valve is shut."
+  },
+  {
+   "key": "flow_left_in",
+   "name": "Blood crossing the mitral valve",
+   "label": "Inflow, left",
+   "role": "part",
+   "group": "Blood flow",
+   "layer": "organ",
+   "color": "#ff7a66",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#flow_left_in"
+   },
+   "terms": [
+    "ventricular filling",
+    "E wave",
+    "A wave"
+   ],
+   "narration": "These markers move at the speed of the flow through the valve, not at the speed of the clock. When they stop, no blood is crossing — and during both isovolumetric phases they stop dead."
+  },
+  {
+   "key": "flow_left_out",
+   "name": "Blood crossing the aortic valve",
+   "label": "Outflow, left",
+   "role": "part",
+   "group": "Blood flow",
+   "layer": "organ",
+   "color": "#e03a28",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#flow_left_out"
+   },
+   "terms": [
+    "ejection",
+    "peak aortic flow",
+    "stroke volume"
+   ],
+   "narration": "Peak flow out of the left ventricle is about 560 ml every second — for about a fifth of a second, four times a minute per beat. Nothing crosses at any other time."
+  },
+  {
+   "key": "flow_right_in",
+   "name": "Blood crossing the tricuspid valve",
+   "label": "Inflow, right",
+   "role": "context",
+   "group": "Blood flow",
+   "layer": "organ",
+   "color": "#6aa6e6",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#flow_right_in"
+   },
+   "narration": "The right side does everything the left does, a moment earlier at the start and a moment later at the end."
+  },
+  {
+   "key": "flow_right_out",
+   "name": "Blood crossing the pulmonary valve",
+   "label": "Outflow, right",
+   "role": "context",
+   "group": "Blood flow",
+   "layer": "organ",
+   "color": "#2f6fae",
+   "refs": {
+    "procedural": "cardiac-cycle-pumping#flow_right_out"
+   },
+   "narration": "The same 70 ml, into a low-pressure circuit."
+  }
+ ],
+ "views": [
+  {
+   "mode": "mechanism",
+   "beat": 1,
+   "title": "Atrial systole — the last fifth of filling",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.04
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "av_plane"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "la"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "la",
+     "to": "lv",
+     "kind": "flow"
+    }
+   ],
+   "narration": "The P wave has just passed and the atria are contracting. The atrioventricular valves are already open — they have been open through the whole of diastole — so this squeeze does not open anything, it simply tops the ventricle up. It supplies about a fifth of the filling. That is why losing atrial contraction in atrial fibrillation is survivable in a normal heart and dangerous in a stiff one."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 2,
+   "title": "End-diastole — the ventricle at its fullest",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.208
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Blood flow"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "av_plane"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "lv_blood",
+      "rv_blood"
+     ]
+    }
+   ],
+   "narration": "120 ml on the left, 130 ml on the right. This is end-diastolic volume, and it is the preload every Frank-Starling curve is drawn against. Note the atrioventricular plane, high up: it has the whole of systole to descend. Every valve in the heart is now shut, or about to be."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 3,
+   "title": "Isovolumetric contraction — all four valves shut",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.24
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "Valves"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "Blood flow"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Great vessels"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "Valves"
+    }
+   ],
+   "narration": "The ventricle is contracting hard and not one millilitre is leaving it. The mitral shut the moment ventricular pressure passed atrial — that is the first heart sound — and the aortic cannot open until ventricular pressure passes aortic. Between those two instants the chamber is a sealed box: pressure climbs about 1600 mmHg every second, volume does not change at all, and the flow markers do not move. This phase lasts about 0.06 seconds and it is where most of the heart's oxygen goes."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 4,
+   "title": "Rapid ejection",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.33
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "av_plane"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "flow_left_out"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "lv",
+     "to": "aorta",
+     "kind": "flow"
+    }
+   ],
+   "narration": "The aortic valve is open and the cusps are lying back against the sinus wall. Flow peaks here at around 560 millilitres a second. Watch two things at once: the cavity collapsing, and the wall getting thicker as it does — the muscle is not disappearing, it is being redistributed. And watch the atria: they are filling while the ventricles empty, because the plane between them is being pulled down."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 5,
+   "title": "Reduced ejection",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.48
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "av_plane"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "aorta"
+    }
+   ],
+   "narration": "Ejection continues even though the ventricle has begun to relax and the pressure gradient has already reversed, because the blood that is moving has momentum. Meanwhile the aorta has swallowed about half the stroke volume by stretching. It gives it back in diastole, and that stored-and-returned volume is what keeps blood moving between beats."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 6,
+   "title": "End-systole — the wall at its thickest, the plane at its lowest",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.546
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "av_plane"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Blood flow"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "av_plane"
+    }
+   ],
+   "narration": "50 ml left in the left ventricle. The wall has gone from 10 mm to 14 mm, the minor axis has shortened by 30% and the long axis by 15%, and the atrioventricular plane has descended about 12 mm towards an apex that has barely moved. That descent is what you feel as the apex beat, and it is why the apex beat does not wander between ribs."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 7,
+   "title": "Isovolumetric relaxation — the second sealed box",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.575
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "Valves"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "Blood flow"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "av_plane"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "aortic"
+    }
+   ],
+   "narration": "The aortic valve has shut — that is the second heart sound, and the aorta's recoil against the closed cusps is what makes the notch on the arterial pressure trace. All four valves are shut again and the volume is again fixed, this time at 50 ml, while the pressure falls away. Nothing moves. The mitral will not open until ventricular pressure has fallen below atrial, and relaxation is an active, energy-consuming process — which is why it fails early in ischaemia."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 8,
+   "title": "Rapid filling — the valve opens on its own",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.66
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "av_plane"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "flow_left_in"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "la",
+     "to": "lv",
+     "kind": "flow"
+    }
+   ],
+   "narration": "Ventricular pressure has fallen below atrial and the mitral valve swings open with nothing pulling on it. Most of the filling happens right here, in the first third of diastole, driven by the pressure the atrium has accumulated while it was shut out. This is the E wave on a Doppler trace, and the atrial contraction later is the A wave."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 9,
+   "title": "Diastasis — and why the heart hates a fast rate",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.88
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "av_plane"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "lv_blood"
+    }
+   ],
+   "narration": "Filling has almost stopped: the ventricle is nearly full and the gradient across the open valve is almost nothing. This quiet stretch is diastole's slack, and it is the part that disappears first when the heart rate rises. Diastole is also when the left coronary artery fills, because during systole the ventricle squeezes its own arteries shut — so a fast rate cuts filling and coronary supply together."
+  },
+  {
+   "mode": "mechanism",
+   "beat": 10,
+   "title": "The valves alone: nothing but pressure moves them",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.33
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Valves"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "superior"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "mitral",
+      "aortic"
+     ]
+    }
+   ],
+   "narration": "The same instant as rapid ejection, with everything but the valves taken away. The aortic and pulmonary cusps are lying open; the mitral and tricuspid are pressed shut, held by their chordae against a pressure that would otherwise blow them inside out. There is no muscle in a heart valve and no nerve to it. Every one of the four opens and shuts because of the pressure difference across it, and every murmur is a valve that has stopped obeying that rule."
+  }
+ ],
+ "gaps": [
+  "PROCEDURAL BY NECESSITY, AND THE CATALOG WAS CHECKED RATHER THAN TRUSTED. The queue item carries candidate_meshes:3. The three meshes in available-meshes.json whose names match are 'great cardiac vein' (FMA4707), 'middle cardiac vein' (FMA4713) and 'set of anterior cardiac veins' (FMA71567). They are VEINS; they match on the word 'cardiac' and have nothing to do with this structure. There is no mesh of the cardiac cycle and there cannot be one - the subject is not an object, it is what the object does over time. This is RENDER-STANDARD 5 'procedural belongs where the form is a function of something', and here the form is a function of time and of nothing else.",
+  "THE RIGHT VENTRICLE IS A WRAPPED TUBE, WHICH IS RIGHT IN KIND AND SCHEMATIC IN DETAIL. It was first built as a body of revolution standing beside the left ventricle, and measurement killed that: 19.6% of the LEFT ventricular cavity was also inside the RIGHT ventricular cavity - a fifth of the blood in both chambers at once - and the heart came out 11.7 cm across. Both follow from the same mistake, that two convex bodies of 120 and 130 ml side by side cannot be anything else. It is now a swept tube of flattened section running from the tricuspid annulus down towards the apex and up in front to the pulmonary valve, riding on the left ventricle's own axis, which is the shape it actually is. Interpenetration measured again afterwards: 0.0%. What remains schematic is the section - a flattened ellipse rather than a true crescent with a concave septal face - and the extent of the wrap (115 degrees, where a real right ventricle reaches further round).",
+  "THE SEPTUM IS DRAWN AS A DISCRETE PLATE between the two cavities, of left ventricular thickness. It is really the shared wall of both ventricles, not a third structure sitting between them. Drawn this way it can be shown, hidden and highlighted on its own, which is what the scene needs; a reviewer should decide whether the simplification costs more than it buys.",
+  "THE VENTRICULAR PRESSURE PEAK EXCEEDS THE RECORDED ARTERIAL PEAK BY ABOUT 32 mmHg, where a real pair of curves very nearly coincide through ejection. This is an artifact of representing the whole aorta as one lumped inertance, it is measured by acceptance test O rather than hidden, and it is not correctable by tuning. It is also the reason this scene does NOT draw a pressure trace: the geometry, the volumes, the valve timings and the flow are all trustworthy, and a Wiggers pressure curve drawn from this model would not be. A pressure trace belongs in a diagram-engine scene fed by the model's own numbers.",
+  "SYSTOLE COMES OUT AT 0.271 s AND ISOVOLUMETRIC RELAXATION AT 0.044 s, against textbook figures of about 0.30 and about 0.08. These two trade against one another through the single outflow inertance and there is no value that makes both exact; the model's header records the measured trade-off curve and the point chosen. Both land inside the acceptance bands, but a reviewer who thinks the balance should sit elsewhere is making a legitimate judgement about which phase is more examined.",
+  "NO CORONARY CIRCULATION. That the left coronary artery fills in DIASTOLE, because systolic compression shuts its own vessels, is a consequence of this very cycle and is examined. It is narrated in the diastasis beat and it is not drawn. The coronary vessels are their own queue item.",
+  "NO ECG, NO PRESSURE TRACE, NO HEART SOUNDS. S1 and S2 are named in the narration at the instants the model actually places them, and the PR interval enters the model as a number, but there is no conducting system, no waveform and no audio. A student who needs the Wiggers diagram itself needs a diagram-engine companion scene, and the numbers for it can be read straight off this model's cycle() report.",
+  "THE ATRIA ARE ROUNDED SACS with no auricles, no pectinate muscles and no pulmonary vein orifices beyond two stubs. Their VOLUMES are solved and correct; their shape is a container.",
+  "VALVE LEAFLETS HAVE NO MASS. Their opening fraction follows the flow through their own orifice, so they are never open against a backward gradient - which is the thing the scene exists to teach - but they do not flutter, and they drift shut slightly early in late ejection because the flow itself is falling.",
+  "FINDING, NOT IN THIS MODEL: render-kit.js sweptShell emits its BASE-END annular cap with a winding that disagrees with the normals it supplies for that cap. Measured on this model's thick-walled chambers: winding agreement 0.989 with no cutaway and 0.972 with one, where every other surface reads 1.000. Derived as well as measured - cap(0,-1) calls quad() where the corner order it passes needs quadFlip(). It is invisible today because caps are excluded from the silhouette hull and the material is DoubleSide, but it is in the shared machinery and it affects every thick-walled model in the corpus. NOT changed here: cardiac-looping was claimed by another run while this one was building, and shared machinery should not move under it. Full derivation in BUILD-LOG.md.",
+  "THE CUTAWAY RIM IS RAGGED WHERE IT CROSSES THE RIGHT VENTRICLE'S FLATTENED SECTION. render-kit's window test keeps or drops a quad by its angle about the section, and on a strongly flattened ellipse equal angles are very unequal arc lengths, so the opening's edge steps rather than runs smooth. Visible as a zig-zag along the lower edge of the right ventricle in the proof frames. Cosmetic, in shared machinery rather than in this model, and not corrected here for the same reason as the cap winding finding.",
+  "THE PROOF FRAMES SHOW THE MODEL, NOT THE PLAYER. The harness renders build(t) with every layer on and at full opacity; the scene sets per-structure opacity - the ventricular walls at 0.55, the AV plane at 0.35 - and hides most structures in most beats. So the frames prove the geometry and the timing; they are not a preview of what a student sees. Nobody has yet loaded this scene into viz3d.js and walked its ten beats."
+ ]
+}

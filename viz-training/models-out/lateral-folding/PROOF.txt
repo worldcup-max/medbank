@@ -1,0 +1,57 @@
+lam cap hits    : {"hits":2,"log":[{"S":3.05,"a":1.6,"sgn":1,"xTarget":0,"reach":0.06034556339557636},{"S":0.95,"a":1.6,"sgn":1,"xTarget":0,"reach":0.018460328923062104}]}
+stages rendered  : 41
+console (model)  : clean    [4 swiftshader harness messages ignored]
+console (adapter): clean 
+solved           : outer a*=0.000000 lam*=1.030030 theta=3.141592654   gut a*=0.000000 lam*=3.306940
+acceptance       : {"A":true,"B":true,"C":true,"D":true,"E":true,"E-neg":true,"F":true,"G":true,"H":true,"I":true,"J":true} allPass=true
+   A                 8.74e-16
+   B                 1.21e-15
+   C                 6.66e-15
+   C_a               1.63e-14
+   C_lam             1.03003
+   D                 0.74926
+   E                 0.00000
+   E_neg             138.00000
+   F                 0.61553
+   F_abs             0.24646
+   G                 0.21229
+   H                 0.08000
+   I                 0.46103
+   J                 0.67925
+   lamCapHits        2.00000
+   R_WALL            0.97085
+   R_GUT             0.30239
+   gutOuterRadius    0.40039
+   wallWidth         1.94191
+  normals ectoderm      outer-surface 1.000-1.000  whole-buffer 0.522-0.522  winding 1.000-1.000  (1 meshes)
+  normals somatic       outer-surface 1.000-1.000  whole-buffer 0.526-0.526  winding 1.000-1.000  (1 meshes)
+  normals splanchnic    outer-surface 1.000-1.000  whole-buffer 0.539-0.539  winding 1.000-1.000  (1 meshes)
+  normals endoderm      outer-surface 1.000-1.000  whole-buffer 0.528-0.528  winding 1.000-1.000  (1 meshes)
+  normals coelom        outer-surface 1.000-1.000  whole-buffer 0.573-0.573  winding 1.000-1.000  (1 meshes)
+  normals mesentery     outer-surface 1.000-1.000  whole-buffer 1.000-1.000  winding 1.000-1.000  (1 meshes)
+  normals neural        outer-surface 1.000-1.000  whole-buffer 1.000-1.000  winding 1.000-1.000  (1 meshes)
+  normals notochord     outer-surface 1.000-1.000  whole-buffer 1.000-1.000  winding 1.000-1.000  (1 meshes)
+  normals somite        outer-surface 0.650-0.650  whole-buffer 0.656-0.656  winding 1.000-1.000  (2 meshes)
+  normals vitelline     outer-surface 0.967-0.967  whole-buffer 0.681-0.681  winding 1.000-1.000  (1 meshes)
+  normals yolksac       outer-surface 0.629-0.629  whole-buffer 0.514-0.514  winding 0.999-0.999  (1 meshes)
+  normals amnion        outer-surface 1.000-1.000  whole-buffer 0.524-0.524  winding 1.000-1.000  (1 meshes)
+  normals umbilicalring outer-surface 0.548-0.548  whole-buffer 0.579-0.579  winding 1.000-1.000  (1 meshes)
+the same claims, on REAL MESH VERTICES:
+  D    mesh 0.7945  proxy 0.7493  >= 0.350  pass   (ring opening 0.630 at x=0.000)
+  F    mesh 0.6220  proxy 0.6155  >= 0.350  pass   (least clearance 0.247)
+  I    mesh 0.5175  proxy 0.4610  >= 0.350  pass   (defect medial edge x=-0.641, right of cord=true)
+  exstrophy y     : {"min":-1.1800000667572021,"max":-0.25999999046325684,"c":-0.7200000091739323,"extent":0.9200000762939453}
+negative cases   : 9/9 rejected 
+open lumen  section t=0.00        0/1292 first hits face away   closed
+open lumen  section t=0.50        0/2630 first hits face away   closed
+open lumen  section t=1.00        0/1676 first hits face away   closed
+open lumen  oblique t=1.00        0/1278 first hits face away   closed
+open lumen  ventral t=1.00        0/2536 first hits face away   closed
+open lumen  oblique t=1.00 cut    0/1144 first hits face away   closed
+open lumen  ventral t=1.00 gastro 0/2551 first hits face away   closed
+open lumen  section t=1.00 bare   0/4944 first hits face away   closed
+refs resolved    : 22/22 
+SET_STAGE        : 22/22 follow the view 
+  undeclared static  : none    [declared static and confirmed still: neural, notochord, somite, herniation, omphalocele_gut, omphalocele_sac, gastroschisis_bowel, exstrophy_plate]
+  undeclared absence : none    [declared stage-limited and confirmed absent: umbilicalring]
+total triangles  : 66080

@@ -1,0 +1,24 @@
+<!doctype html><meta charset=utf8><link rel="icon" href="data:,"><body>
+<script src="http://127.0.0.1:45039/node_modules/three/build/three.js"></script>
+<script>window.MEDBANK_CONFIG = { MODEL_BASE: 'http://127.0.0.1:45039/models3d/' };</script>
+<script src="http://127.0.0.1:45039/viz3d.js"></script>
+<script>
+window.resolveAll = function (refs, t) {
+  const ad = window.MB3D.adapters.procedural;
+  return Promise.all(refs.map(function (r) {
+    const ref = t == null ? r.ref : r.ref + '@' + t;
+    return ad.load(window.THREE, { key: r.key, refs: { procedural: ref } })
+      .then(function (res) {
+        const m = res && res.mesh;
+        return { key: r.key, ref: ref, reason: res && res.reason, hasMesh: !!m,
+                 tris: m && m.geometry ? m.geometry.attributes.position.count / 3 : 0 };
+      }, function (e) { return { key: r.key, ref: ref, error: String(e && e.message || e) }; });
+  }));
+};
+window.stageable = function (refs) {
+  const ad = window.MB3D.adapters.procedural;
+  return refs.map(function (r) {
+    return { key: r.key, stageable: ad.stageable({ refs: { procedural: r.ref } }) };
+  });
+};
+</script>

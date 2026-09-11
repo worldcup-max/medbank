@@ -483,7 +483,7 @@ for (const f of files) {
 
     /* mark triangles belonging to stray specks so the gate is not judged on scanner dust */
     let speckTri = null, specks = 0, speckBiggest = 0;
-    if (VERIFY) {
+    {
       const modelSpan = Math.hypot(before.hi[0] - before.lo[0], before.hi[1] - before.lo[1], before.hi[2] - before.lo[2]);
       const cmp = components(verts, tris);
       const SPECK = modelSpan * 0.01;                    // 1% of the model's diagonal, and no bigger
@@ -504,16 +504,58 @@ for (const f of files) {
     if (srcTris <= want) res = { verts, tris };
     else res = simplify(verts, tris, want);
 
-    const after = bbox(res.verts, null);
-    let drift = 0;
-    for (let k = 0; k < 3; k++) drift = Math.max(drift, Math.abs(after.lo[k] - before.lo[k]), Math.abs(after.hi[k] - before.hi[k]));
+    /* THE BOUNDING BOX GATE. Measure the box the FILE will have, which is not the box of
+       res.verts. simplify() compacts away dead vertices but keeps every vertex it left LIVE —
+       including ones whose incident triangles all vanished as degenerate. Those vertices are in
+       res.verts and can never be in the STL, because writeBinarySTL emits triangles. Comparing
+       bbox(res.verts) against bbox(verts) therefore compared two boxes that are equal by
+       construction, and this gate — the one guarding every landmark anchor in the corpus — could
+       not fire. It did not fire on 2026-09-10, when 33 of 244 meshes were written with a moved
+       box and the run reported "none" on every one of them. FMA8248 reproduces it: --target 6000
+       --verify prints bbox "none" and 0.032 mm of surface movement, and writes a file 111.36 mm
+       shorter in X than its source.
+
+       What moved those 33 was scanner dust, and dropping it is right — but the box still moves,
+       and an anchor is a uvw FRACTION of the box. So the comparison is made speck-to-speck: the
+       source box WITHOUT its specks against the written box. Dust-driven shrinkage passes and is
+       reported loudly; anything the specks do not account for is real damage and still refuses. */
+    const refd = new Uint8Array(res.verts.length / 3);
+    for (let i = 0; i < res.tris.length; i++) refd[res.tris[i]] = 1;
+    const after = bbox(res.verts, refd);
+
+    let solid = before;
+    if (speckTri) {
+      const keep = new Uint8Array(verts.length / 3);
+      for (let t = 0; t < tris.length / 3; t++) {
+        if (speckTri[t]) continue;
+        keep[tris[t * 3]] = 1; keep[tris[t * 3 + 1]] = 1; keep[tris[t * 3 + 2]] = 1;
+      }
+      solid = bbox(verts, keep);
+    }
+
+    /* One-sided, and that is not a shortcut. Only SHRINKAGE is damage: real surface that the file
+       no longer reaches. A written box that extends past the speck-free box just means a speck
+       survived — which happens whenever srcTris <= target and nothing is collapsed at all — and a
+       two-sided comparison would have refused every one of those untouched passthrough meshes. */
+    let drift = 0, boxShrank = 0;
+    for (let k = 0; k < 3; k++) {
+      drift = Math.max(drift, after.lo[k] - solid.lo[k], solid.hi[k] - after.hi[k]);
+      boxShrank = Math.max(boxShrank, after.lo[k] - before.lo[k], before.hi[k] - after.hi[k]);
+    }
+    drift = Math.max(0, drift);
+    const speckDrift = Math.max(0, boxShrank - drift);
 
     const outTris = res.tris.length / 3;
     const estBytes = 84 + outTris * 50;
 
-    if (drift > 1e-6) {
+    /* Not zero. The old gate demanded exact equality and got it for free, because it was comparing
+       an array with itself. A real box, measured on the triangles that survive, moves a little when
+       a boundary vertex is collapsed — FMA8248 moves 0.019 mm once its dust is accounted for. The
+       honest ceiling is the one this tool already enforces on the surface: if the surface may move
+       MAX_DEV, so may the face of the box. Beyond that is damage, not decimation. */
+    if (drift > MAX_DEV) {
       refused++;
-      rows.push({ name, srcTris, outTris, srcBytes, outBytes: 0, drift, note: 'REFUSED — bounding box moved' });
+      rows.push({ name, srcTris, outTris, srcBytes, outBytes: 0, drift, speckDrift, note: `REFUSED — bounding box moved ${drift.toFixed(3)} mm beyond what dropped fragments explain` });
       continue;
     }
 
@@ -523,7 +565,7 @@ for (const f of files) {
       dev.specks = specks; dev.speckBiggest = speckBiggest;
       if (dev.max > MAX_DEV) {
         refused++;
-        rows.push({ name, srcTris, outTris, srcBytes, outBytes: 0, drift, dev, note: `REFUSED — surface moved ${dev.max.toFixed(3)} mm (ceiling ${MAX_DEV} mm)` });
+        rows.push({ name, srcTris, outTris, srcBytes, outBytes: 0, drift, speckDrift, dev, note: `REFUSED — surface moved ${dev.max.toFixed(3)} mm (ceiling ${MAX_DEV} mm)` });
         continue;
       }
     }
@@ -535,7 +577,7 @@ for (const f of files) {
       wrote = writeBinarySTL(join(dir, name), res.verts, res.tris);
     }
     outBytes += wrote;
-    rows.push({ name, srcTris, outTris, srcBytes, outBytes: wrote, drift, dev, note: '' });
+    rows.push({ name, srcTris, outTris, srcBytes, outBytes: wrote, drift, speckDrift, dev, note: '' });
   } catch (e) {
     refused++;
     rows.push({ name, srcTris: 0, outTris: 0, srcBytes: 0, outBytes: 0, drift: 0, note: 'FAILED — ' + e.message });
@@ -551,6 +593,8 @@ for (const r of rows) {
   if (r.note) { console.log(`${r.name.padEnd(pad)}  ${r.note}`); continue; }
   let d = r.dev ? `   ${r.dev.max.toFixed(3)} / ${r.dev.mean.toFixed(3)} mm  (${(r.dev.max / r.dev.span * 100).toFixed(2)}% of span)` : (VERIFY ? '   unchanged' : '');
   if (r.dev && r.dev.specks) d += `  · dropped ${r.dev.specks} stray fragment${r.dev.specks === 1 ? '' : 's'} (≤${r.dev.speckBiggest.toFixed(2)} mm)`;
+  if (r.drift > 1e-6) d += `  · box face moved ${r.drift.toFixed(3)} mm`;
+  if (r.speckDrift > 1e-6) d += `  · BOX SHRANK ${(r.speckDrift + r.drift).toFixed(2)} mm — dust was defining a face; re-derive any anchor on this mesh`;
   console.log(`${r.name.padEnd(pad)}  ${String(r.srcTris).padStart(7)} → ${String(r.outTris).padStart(7)}    ${mb(r.srcBytes).padStart(8)} → ${mb(r.outBytes).padStart(8)}   ${r.drift === 0 ? 'none' : r.drift.toExponential(1)}${d}`);
 }
 console.log('-'.repeat(W));

@@ -1,0 +1,84 @@
+<!doctype html><meta charset=utf8>
+<link rel="icon" href="data:,">
+<body style="margin:0;background:#0e1626">
+<canvas id=c width=1040 height=1040></canvas>
+<script src="http://127.0.0.1:41037/node_modules/three/build/three.js"></script>
+<script src="http://127.0.0.1:41037/models3d/render-kit.js"></script>
+<script src="http://127.0.0.1:41037/models3d/heart-external.js"></script>
+<script>
+window.MEDBANK_CONFIG = { MODEL_BASE: 'http://127.0.0.1:41037/models3d/' };
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true });
+renderer.setSize(1040, 1040, false); renderer.setPixelRatio(1);
+VizKit.configureRenderer(renderer);
+const scene = new THREE.Scene();
+scene.background = VizKit.bg(0x0e1626);
+const L = VizKit.standardLights(scene);
+const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 400);
+let group = null;
+const MOD = window.MB3D_MODELS['heart-external'];
+/* the same directions viz3d.js's VIEW_DIR uses, so what these frames show is what the player shows */
+const VIEW_DIR = {
+  anterior: [0,0,1], posterior: [0,0,-1], lateral: [1,0,0], medial: [-1,0,0],
+  superior: [0,1,0.001], inferior: [0,-1,0.001]
+};
+window.setStage = function (view, opts) {
+  if (group) scene.remove(group);
+  group = MOD.build(1, Object.assign({}, opts || {}));
+  group.updateMatrixWorld(true);
+  scene.add(group);
+  const f = VizKit.fitCamera(camera, group, 1.06);
+  const d = new THREE.Vector3().fromArray(VIEW_DIR[view] || [0,0,1]).normalize();
+  camera.position.copy(f.centre).addScaledVector(d, f.distance);
+  camera.up.set(0, 1, 0);
+  camera.lookAt(f.centre);
+  L.key.position.copy(camera.position).add(new THREE.Vector3(3, 6, 2));
+  renderer.render(scene, camera);
+  return true;
+};
+/* OUTWARD NORMALS. Per mesh, against that mesh's OWN centroid, in world space, plus the face-winding
+   agreement that caught RENDER-STANDARD bug 1. */
+window.normalProbe = function (opts) {
+  const g = MOD.build(1, Object.assign({}, opts || {}));
+  g.updateMatrixWorld(true);
+  const rows = [];
+  const nm = new THREE.Matrix3();
+  g.traverse(function (o) {
+    if (!o.isMesh || !o.geometry) return;
+    const u = o.userData || {};
+    if (u.outline) return;
+    const geo = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry;
+    const p = geo.attributes.position, n = geo.attributes.normal;
+    if (!n) return;
+    const hull = (o.geometry.userData && o.geometry.userData.hullCount) || 0;
+    nm.getNormalMatrix(o.matrixWorld);
+    const c = new THREE.Vector3(), v = new THREE.Vector3(), w = new THREE.Vector3();
+    for (let i = 0; i < p.count; i++) c.add(v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld));
+    c.divideScalar(p.count);
+    let out = 0, outHull = 0;
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld).sub(c);
+      w.fromBufferAttribute(n, i).applyMatrix3(nm).normalize();
+      if (v.dot(w) > 0) { out++; if (i < hull) outHull++; }
+    }
+    let agree = 0, tris = 0;
+    const a1 = new THREE.Vector3(), b1 = new THREE.Vector3(), c1 = new THREE.Vector3();
+    const e1 = new THREE.Vector3(), e2 = new THREE.Vector3(), fn = new THREE.Vector3(), vn = new THREE.Vector3();
+    for (let i = 0; i + 2 < p.count; i += 3) {
+      a1.fromBufferAttribute(p, i); b1.fromBufferAttribute(p, i+1); c1.fromBufferAttribute(p, i+2);
+      fn.copy(e1.subVectors(b1, a1).cross(e2.subVectors(c1, a1)));
+      if (fn.lengthSq() < 1e-16) continue;
+      fn.normalize();
+      vn.set(0,0,0);
+      for (let k = 0; k < 3; k++) { const q = new THREE.Vector3().fromBufferAttribute(n, i+k); vn.add(q); }
+      if (vn.lengthSq() < 1e-16) continue;
+      vn.normalize(); tris++; if (fn.dot(vn) > 0) agree++;
+    }
+    rows.push({ key: u.key, verts: p.count, outward: out / p.count,
+                hullVerts: hull, outwardHull: hull ? outHull / hull : null,
+                tris: tris, winding: tris ? agree / tris : null });
+  });
+  return rows;
+};
+window.acceptance = function () { return MOD.acceptance(); };
+window.modelKeys = function () { return Object.keys(MOD.LAYERS); };
+</script>

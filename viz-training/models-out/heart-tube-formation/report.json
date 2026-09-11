@@ -1,0 +1,2512 @@
+{
+ "stages": [
+  {
+   "name": "t000",
+   "t": 0,
+   "opts": {},
+   "label": "day 18 — the cardiogenic horseshoe",
+   "file": "viz-training/models-out/heart-tube-formation/t000.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t020",
+   "t": 0.2,
+   "opts": {},
+   "label": "day 19",
+   "file": "viz-training/models-out/heart-tube-formation/t020.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t035",
+   "t": 0.35,
+   "opts": {},
+   "label": "day 19.75 — mid head-fold",
+   "file": "viz-training/models-out/heart-tube-formation/t035.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t050",
+   "t": 0.5,
+   "opts": {},
+   "label": "day 20.5",
+   "file": "viz-training/models-out/heart-tube-formation/t050.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t065",
+   "t": 0.65,
+   "opts": {},
+   "label": "day 21.25 — the zip has just started",
+   "file": "viz-training/models-out/heart-tube-formation/t065.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t076",
+   "t": 0.76,
+   "opts": {},
+   "label": "day 21.8 — mid-zip",
+   "file": "viz-training/models-out/heart-tube-formation/t076.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t085",
+   "t": 0.85,
+   "opts": {},
+   "label": "day 22.25",
+   "file": "viz-training/models-out/heart-tube-formation/t085.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t100",
+   "t": 1,
+   "opts": {},
+   "label": "day 23 — one tube",
+   "file": "viz-training/models-out/heart-tube-formation/t100.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t000-full",
+   "t": 0,
+   "opts": {
+    "pericardium": true,
+    "midline": true
+   },
+   "label": "day 18 in its cavity",
+   "file": "viz-training/models-out/heart-tube-formation/t000-full.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t076-full",
+   "t": 0.76,
+   "opts": {
+    "pericardium": true,
+    "midline": true
+   },
+   "label": "mid-zip in its cavity",
+   "file": "viz-training/models-out/heart-tube-formation/t076-full.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t100-full",
+   "t": 1,
+   "opts": {
+    "pericardium": true,
+    "midline": true
+   },
+   "label": "day 23 in its cavity — crowded",
+   "file": "viz-training/models-out/heart-tube-formation/t100-full.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t100-cut",
+   "t": 1,
+   "opts": {
+    "cutaway": true
+   },
+   "label": "the three coats and the lumen",
+   "file": "viz-training/models-out/heart-tube-formation/t100-cut.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t090-meso",
+   "t": 0.9,
+   "opts": {
+    "mesocardium": true
+   },
+   "label": "the mesocardium, still whole",
+   "file": "viz-training/models-out/heart-tube-formation/t090-meso.png",
+   "yaw": -1.35
+  },
+  {
+   "name": "t100-meso",
+   "t": 1,
+   "opts": {
+    "mesocardium": true,
+    "midline": true
+   },
+   "label": "day 23 — the mesocardium has broken",
+   "file": "viz-training/models-out/heart-tube-formation/t100-meso.png",
+   "yaw": -1.35
+  },
+  {
+   "name": "t100-bifida",
+   "t": 1,
+   "opts": {
+    "bifida": true
+   },
+   "label": "cardia bifida",
+   "file": "viz-training/models-out/heart-tube-formation/t100-bifida.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t100-mid",
+   "t": 1,
+   "opts": {
+    "midline": true
+   },
+   "label": "day 23 with the median-plane reference",
+   "file": "viz-training/models-out/heart-tube-formation/t100-mid.png",
+   "yaw": -0.26
+  },
+  {
+   "name": "t000-mid",
+   "t": 0,
+   "opts": {
+    "midline": true
+   },
+   "label": "day 18 with the median-plane reference",
+   "file": "viz-training/models-out/heart-tube-formation/t000-mid.png",
+   "yaw": -0.26
+  }
+ ],
+ "console": [
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x1a4c00113c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x1a4c00113c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x1a4c00113c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x1a4c00113c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  }
+ ],
+ "acceptance": {
+  "measured": {
+   "frontAt0": 1,
+   "frontAt1": 0,
+   "frontWorstRise": 0,
+   "frontWorstStep": 0.18866213331619874,
+   "frontWorstStepAt": 0.7225,
+   "contactErr": 2.9087394313725403e-10,
+   "zipFront": 0.44893979395429295,
+   "zipSingleFraction": 0.551060206045707,
+   "zipGapAtVenous": 0.9944270064503361,
+   "stMinusHeart0": 1.0484988452655892,
+   "heartMinusBpm0": 1.247002398081534,
+   "stMinusHeart1": -0.9758758757189272,
+   "heartMinusBpm1": -1.1851688580569772,
+   "pairGap0": 2.0254245929083377,
+   "front1": 0,
+   "offset1": 7.960204194457797e-17,
+   "coatMyo": 0.41666666666666674,
+   "coatJelly": 0.3026315789473684,
+   "coatEndo": 0.2105263157894736,
+   "coatClearMin": 0.00565685424949236,
+   "endoOuterAt1": 0.2565492650620103,
+   "endoOuterWanted": 0.2565492650620103,
+   "worstWaist": 0.01100000000000012,
+   "mesoGapBeforeFusion": 0,
+   "mesoGapAt1": 0.055,
+   "clear0": 0.3537637896117404,
+   "clear1": 0.05660377358490565,
+   "clearRiseAfterFusion": 0,
+   "clearStepAtFusion": 0.07082317940797178,
+   "bifidaFront": 1,
+   "bifidaGap": 0.7983849970382537,
+   "dates": {
+    "tStart": 0.645,
+    "tEnd": 0.885,
+    "dayStart": 21.225,
+    "dayEnd": 22.425
+   }
+  },
+  "pass": {
+   "A": true,
+   "B": true,
+   "C": true,
+   "D": true,
+   "E": true,
+   "F": true,
+   "G": true,
+   "H": true,
+   "I": true,
+   "J": true,
+   "K": true,
+   "L": true
+  },
+  "allPass": true,
+  "spec": {
+   "axes": "+x = embryo LEFT, -x = RIGHT, +y = CRANIAL, +z = VENTRAL",
+   "t_means": "day 18 at t = 0, day 23 at t = 1; day(t) = 18 + 5t",
+   "handover": "at t = 1 this model's tube IS cardiac-looping's tube at ITS t = 0 — measured by continuity()",
+   "tests": [
+    {
+     "id": "A",
+     "says": "fusion runs CRANIAL to CAUDAL and never runs backwards",
+     "must": "the fusion front is 1 at t = 0, 0 at t = 1, and non-increasing at every step between"
+    },
+    {
+     "id": "B",
+     "says": "the front is SOLVED from contact, not scheduled",
+     "must": "at the front the two tubes touch to within 1e-3 of their own radius"
+    },
+    {
+     "id": "C",
+     "says": "mid-zip the picture shows BOTH states at once — one tube cranially, two caudally",
+     "must": "at t = 0.76, the t the zip view is drawn at: the tube is single over at least 40% of its length, and at the venous end the two tubes' surfaces are at least 35% of a diameter apart"
+    },
+    {
+     "id": "D",
+     "says": "the dates are a RESULT of the horseshoe, and they land where the narration says",
+     "must": "fusion begins after day 20.5 and is complete between day 21.5 and day 22.5"
+    },
+    {
+     "id": "E",
+     "says": "the head fold INVERTS the order — the septum transversum crosses the heart",
+     "must": "at day 18 the septum transversum is cranial to the heart, at day 23 caudal, each by at least 35% of their mean cranio-caudal extent"
+    },
+    {
+     "id": "F",
+     "says": "and the buccopharyngeal membrane crosses it the other way",
+     "must": "at day 18 the heart lies cranial to the membrane, at day 23 caudal, by the same floor"
+    },
+    {
+     "id": "G",
+     "says": "two tubes at day 18, ONE tube straddling the median plane at day 23",
+     "must": "at t = 0 the two tubes are disjoint in x by at least 35% of their mean width; at t = 1 the tube puts at least 45% of its width on each side of x = 0 and is centred within 3%"
+    },
+    {
+     "id": "H",
+     "says": "three coats, in order, each of them legible",
+     "must": "myocardium, jelly and endocardium each occupy at least 18% of the wall depth at the ventricle body at day 23, and no two of them share a surface"
+    },
+    {
+     "id": "I",
+     "says": "the segment boundaries sit at the named WAISTS",
+     "must": "each of the four internal boundaries is within 0.015 of a local minimum of the day-23 calibre"
+    },
+    {
+     "id": "J",
+     "says": "the dorsal mesocardium is intact while the tube is still fusing and broken by day 23",
+     "must": "the central gap is zero before fusion completes and 0.055 at day 23 — cardiac-looping's own day-23 gap"
+    },
+    {
+     "id": "K",
+     "says": "the tube outgrows the cavity that holds it",
+     "must": "the clearance around the tube falls from at least 30% at day 18 to at most 14% at day 23, and never rises once fusion is complete. It DOES rise once, by about 0.08, at the moment fusion completes: two tubes side by side are wider than the one tube they become"
+    },
+    {
+     "id": "L",
+     "says": "cardia bifida is an ARREST of this mechanism, not a different drawing",
+     "must": "with the lateral folds arrested the front never leaves the cranial end and the two tubes stay disjoint by at least 35% of their mean width at day 23"
+    }
+   ]
+  },
+  "floors": {
+   "ORDER": 0.35,
+   "GAP": 0.35,
+   "STRADDLE": 0.45,
+   "CENTRED": 0.03,
+   "COAT": 0.18,
+   "WAIST": 0.015,
+   "CLEAR0": 0.3,
+   "CLEAR1": 0.14
+  }
+ },
+ "negatives": {
+  "cases": {
+   "A": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "B": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "C": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "D": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "E": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "F": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "G": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "H": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "I": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "J": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "K": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "L": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   }
+  },
+  "allGood": true
+ },
+ "fusion": {
+  "table": [
+   [
+    0,
+    1
+   ],
+   [
+    0.025,
+    1
+   ],
+   [
+    0.05,
+    1
+   ],
+   [
+    0.075,
+    1
+   ],
+   [
+    0.1,
+    1
+   ],
+   [
+    0.125,
+    1
+   ],
+   [
+    0.15,
+    1
+   ],
+   [
+    0.175,
+    1
+   ],
+   [
+    0.2,
+    1
+   ],
+   [
+    0.225,
+    1
+   ],
+   [
+    0.25,
+    1
+   ],
+   [
+    0.275,
+    1
+   ],
+   [
+    0.3,
+    1
+   ],
+   [
+    0.325,
+    1
+   ],
+   [
+    0.35,
+    1
+   ],
+   [
+    0.375,
+    1
+   ],
+   [
+    0.4,
+    1
+   ],
+   [
+    0.425,
+    1
+   ],
+   [
+    0.45,
+    1
+   ],
+   [
+    0.475,
+    1
+   ],
+   [
+    0.5,
+    1
+   ],
+   [
+    0.525,
+    1
+   ],
+   [
+    0.55,
+    1
+   ],
+   [
+    0.575,
+    1
+   ],
+   [
+    0.6,
+    1
+   ],
+   [
+    0.625,
+    1
+   ],
+   [
+    0.65,
+    0.938046031445265
+   ],
+   [
+    0.675,
+    0.8964186736444633
+   ],
+   [
+    0.7,
+    0.6813625347117582
+   ],
+   [
+    0.725,
+    0.47198152735829363
+   ],
+   [
+    0.75,
+    0.45486292496323594
+   ],
+   [
+    0.775,
+    0.44051000967621795
+   ],
+   [
+    0.8,
+    0.4262930139402549
+   ],
+   [
+    0.825,
+    0.4054500957826773
+   ],
+   [
+    0.85,
+    0.2018639367322127
+   ],
+   [
+    0.875,
+    0.176362189402183
+   ],
+   [
+    0.9,
+    0
+   ],
+   [
+    0.925,
+    0
+   ],
+   [
+    0.95,
+    0
+   ],
+   [
+    0.975,
+    0
+   ],
+   [
+    1,
+    0
+   ]
+  ],
+  "dates": {
+   "tStart": 0.645,
+   "tEnd": 0.885,
+   "dayStart": 21.225,
+   "dayEnd": 22.425
+  }
+ },
+ "continuity": {
+  "measurable": true,
+  "worst": 0.010000020265579224,
+  "per": {
+   "sinus": {
+    "worst": 0.00013825297355651855,
+    "mine": {
+     "minx": -0.42768925428390503,
+     "maxx": 0.4040382206439972,
+     "miny": -3.056281805038452,
+     "maxy": -1.7400000095367432,
+     "minz": -0.33525317907333374,
+     "maxz": 0.33525317907333374
+    },
+    "theirs": {
+     "minx": -0.42766785621643066,
+     "maxx": 0.40401801466941833,
+     "miny": -3.056281805038452,
+     "maxy": -1.7400000095367432,
+     "minz": -0.3351149260997772,
+     "maxz": 0.3351149260997772
+    }
+   },
+   "atrium": {
+    "worst": 0.010000020265579224,
+    "mine": {
+     "minx": -0.4566676616668701,
+     "maxx": 0.4314141571521759,
+     "miny": -1.7999999523162842,
+     "maxy": -0.33000001311302185,
+     "minz": -0.3579685389995575,
+     "maxz": 0.3579685389995575
+    },
+    "theirs": {
+     "minx": -0.45668134093284607,
+     "maxx": 0.4314270615577698,
+     "miny": -1.7999999523162842,
+     "maxy": -0.3199999928474426,
+     "minz": -0.35784950852394104,
+     "maxz": 0.35784950852394104
+    }
+   },
+   "ventricle": {
+    "worst": 0.010000020265579224,
+    "mine": {
+     "minx": -0.47365593910217285,
+     "maxx": 0.4474630057811737,
+     "miny": -0.38999998569488525,
+     "maxy": 1.2300000190734863,
+     "minz": -0.3712851405143738,
+     "maxz": 0.3712851405143738
+    },
+    "theirs": {
+     "minx": -0.47365593910217285,
+     "maxx": 0.4474630057811737,
+     "miny": -0.4000000059604645,
+     "maxy": 1.2400000095367432,
+     "minz": -0.37115058302879333,
+     "maxz": 0.37115058302879333
+    }
+   },
+   "bulbus": {
+    "worst": 0.009999990463256836,
+    "mine": {
+     "minx": -0.42313671112060547,
+     "maxx": 0.3997374475002289,
+     "miny": 1.1699999570846558,
+     "maxy": 2.490000009536743,
+     "minz": -0.33168458938598633,
+     "maxz": 0.33168458938598633
+    },
+    "theirs": {
+     "minx": -0.4231424033641815,
+     "maxx": 0.39974281191825867,
+     "miny": 1.159999966621399,
+     "maxy": 2.5,
+     "minz": -0.3315688371658325,
+     "maxz": 0.3315688371658325
+    }
+   },
+   "truncus": {
+    "worst": 0.009999990463256836,
+    "mine": {
+     "minx": -0.3093229830265045,
+     "maxx": 0.29221758246421814,
+     "miny": 2.430000066757202,
+     "maxy": 3.4822940826416016,
+     "minz": -0.24246931076049805,
+     "maxz": 0.24246931076049805
+    },
+    "theirs": {
+     "minx": -0.3093229830265045,
+     "maxx": 0.29221758246421814,
+     "miny": 2.4200000762939453,
+     "maxy": 3.4822940826416016,
+     "minz": -0.24238143861293793,
+     "maxz": 0.24238143861293793
+    }
+   }
+  },
+  "tolerance": 0.02,
+  "pass": true
+ },
+ "normals": [
+  {
+   "key": "sinus",
+   "verts": 13440,
+   "outward": 0.5142857142857142,
+   "hullVerts": 6528,
+   "outwardHull": 1,
+   "tris": 4480,
+   "winding": 0.9857142857142858,
+   "hullTris": 2176,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 9240,
+   "outward": 0.5142857142857142,
+   "hullVerts": 4488,
+   "outwardHull": 1,
+   "tris": 3080,
+   "winding": 0.9857142857142858,
+   "hullTris": 1496,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 9240,
+   "outward": 0.5214285714285715,
+   "hullVerts": 4488,
+   "outwardHull": 1,
+   "tris": 3080,
+   "winding": 0.9857142857142858,
+   "hullTris": 1496,
+   "hullWinding": 1
+  },
+  {
+   "key": "atrium",
+   "verts": 19200,
+   "outward": 0.51,
+   "hullVerts": 9408,
+   "outwardHull": 1,
+   "tris": 6400,
+   "winding": 0.99,
+   "hullTris": 3136,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 13200,
+   "outward": 0.51,
+   "hullVerts": 6468,
+   "outwardHull": 1,
+   "tris": 4400,
+   "winding": 0.99,
+   "hullTris": 2156,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 13200,
+   "outward": 0.515,
+   "hullVerts": 6468,
+   "outwardHull": 1,
+   "tris": 4400,
+   "winding": 0.99,
+   "hullTris": 2156,
+   "hullWinding": 1
+  },
+  {
+   "key": "ventricle",
+   "verts": 21120,
+   "outward": 0.509090909090909,
+   "hullVerts": 10368,
+   "outwardHull": 1,
+   "tris": 7040,
+   "winding": 0.990909090909091,
+   "hullTris": 3456,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 14520,
+   "outward": 0.509090909090909,
+   "hullVerts": 7128,
+   "outwardHull": 1,
+   "tris": 4840,
+   "winding": 0.990909090909091,
+   "hullTris": 2376,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 14520,
+   "outward": 0.5136363636363637,
+   "hullVerts": 7128,
+   "outwardHull": 1,
+   "tris": 4840,
+   "winding": 0.990909090909091,
+   "hullTris": 2376,
+   "hullWinding": 1
+  },
+  {
+   "key": "bulbus",
+   "verts": 17280,
+   "outward": 0.5111111111111111,
+   "hullVerts": 8448,
+   "outwardHull": 1,
+   "tris": 5760,
+   "winding": 0.9888888888888889,
+   "hullTris": 2816,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 11880,
+   "outward": 0.5111111111111111,
+   "hullVerts": 5808,
+   "outwardHull": 1,
+   "tris": 3960,
+   "winding": 0.9888888888888889,
+   "hullTris": 1936,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 11880,
+   "outward": 0.5111111111111111,
+   "hullVerts": 5808,
+   "outwardHull": 1,
+   "tris": 3960,
+   "winding": 0.9888888888888889,
+   "hullTris": 1936,
+   "hullWinding": 1
+  },
+  {
+   "key": "truncus",
+   "verts": 10752,
+   "outward": 0.5178571428571429,
+   "hullVerts": 5184,
+   "outwardHull": 1,
+   "tris": 3584,
+   "winding": 0.9821428571428571,
+   "hullTris": 1728,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 7392,
+   "outward": 0.5178571428571429,
+   "hullVerts": 3564,
+   "outwardHull": 1,
+   "tris": 2464,
+   "winding": 0.9821428571428571,
+   "hullTris": 1188,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 7392,
+   "outward": 0.538961038961039,
+   "hullVerts": 3564,
+   "outwardHull": 1,
+   "tris": 2464,
+   "winding": 0.9821428571428571,
+   "hullTris": 1188,
+   "hullWinding": 1
+  },
+  {
+   "key": "truncus",
+   "verts": 1248,
+   "outward": 1,
+   "hullVerts": 1248,
+   "outwardHull": 1,
+   "tris": 416,
+   "winding": 1,
+   "hullTris": 416,
+   "hullWinding": 1
+  },
+  {
+   "key": "sinus",
+   "verts": 1248,
+   "outward": 1,
+   "hullVerts": 1248,
+   "outwardHull": 1,
+   "tris": 416,
+   "winding": 1,
+   "hullTris": 416,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 858,
+   "outward": 1,
+   "hullVerts": 858,
+   "outwardHull": 1,
+   "tris": 286,
+   "winding": 1,
+   "hullTris": 286,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 858,
+   "outward": 1,
+   "hullVerts": 858,
+   "outwardHull": 1,
+   "tris": 286,
+   "winding": 1,
+   "hullTris": 286,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 858,
+   "outward": 1,
+   "hullVerts": 858,
+   "outwardHull": 1,
+   "tris": 286,
+   "winding": 1,
+   "hullTris": 286,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 858,
+   "outward": 1,
+   "hullVerts": 858,
+   "outwardHull": 1,
+   "tris": 286,
+   "winding": 1,
+   "hullTris": 286,
+   "hullWinding": 1
+  },
+  {
+   "key": "veins",
+   "verts": 1260,
+   "outward": 0.9095238095238095,
+   "hullVerts": 1176,
+   "outwardHull": 0.9030612244897959,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "veins",
+   "verts": 1260,
+   "outward": 1,
+   "hullVerts": 1176,
+   "outwardHull": 1,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "veins",
+   "verts": 1260,
+   "outward": 0.9761904761904762,
+   "hullVerts": 1176,
+   "outwardHull": 0.9744897959183674,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "veins",
+   "verts": 1260,
+   "outward": 0.9095238095238095,
+   "hullVerts": 1176,
+   "outwardHull": 0.9030612244897959,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "veins",
+   "verts": 1260,
+   "outward": 1,
+   "hullVerts": 1176,
+   "outwardHull": 1,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "veins",
+   "verts": 1260,
+   "outward": 0.9761904761904762,
+   "hullVerts": 1176,
+   "outwardHull": 0.9744897959183674,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 1512,
+   "outward": 0.6011904761904762,
+   "hullVerts": 1440,
+   "outwardHull": 0.58125,
+   "tris": 504,
+   "winding": 1,
+   "hullTris": 480,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 1512,
+   "outward": 0.6349206349206349,
+   "hullVerts": 1440,
+   "outwardHull": 0.6166666666666667,
+   "tris": 504,
+   "winding": 1,
+   "hullTris": 480,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 936,
+   "outward": 1,
+   "hullVerts": 864,
+   "outwardHull": 1,
+   "tris": 312,
+   "winding": 1,
+   "hullTris": 288,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 1512,
+   "outward": 0.6011904761904762,
+   "hullVerts": 1440,
+   "outwardHull": 0.58125,
+   "tris": 504,
+   "winding": 1,
+   "hullTris": 480,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 1512,
+   "outward": 0.6349206349206349,
+   "hullVerts": 1440,
+   "outwardHull": 0.6166666666666667,
+   "tris": 504,
+   "winding": 1,
+   "hullTris": 480,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 936,
+   "outward": 1,
+   "hullVerts": 864,
+   "outwardHull": 1,
+   "tris": 312,
+   "winding": 1,
+   "hullTris": 288,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 2652,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 884,
+   "winding": 1,
+   "hullTris": 0,
+   "hullWinding": null
+  },
+  {
+   "key": "septum",
+   "verts": 3060,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 1020,
+   "winding": 1,
+   "hullTris": 0,
+   "hullWinding": null
+  },
+  {
+   "key": "membrane",
+   "verts": 2520,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 840,
+   "winding": 1,
+   "hullTris": 0,
+   "hullWinding": null
+  },
+  {
+   "key": "mesocardium",
+   "verts": 174,
+   "outward": 0,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 58,
+   "winding": 1,
+   "hullTris": 0,
+   "hullWinding": null
+  },
+  {
+   "key": "mesocardium",
+   "verts": 174,
+   "outward": 0,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 58,
+   "winding": 1,
+   "hullTris": 0,
+   "hullWinding": null
+  },
+  {
+   "key": "midline",
+   "verts": 6,
+   "outward": 0,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 2,
+   "winding": 1,
+   "hullTris": 0,
+   "hullWinding": null
+  },
+  {
+   "key": "midline",
+   "verts": 660,
+   "outward": 1,
+   "hullVerts": 600,
+   "outwardHull": 1,
+   "tris": 220,
+   "winding": 1,
+   "hullTris": 200,
+   "hullWinding": 1
+  },
+  {
+   "key": "midline",
+   "verts": 336,
+   "outward": 1,
+   "hullVerts": 288,
+   "outwardHull": 1,
+   "tris": 112,
+   "winding": 1,
+   "hullTris": 96,
+   "hullWinding": 1
+  },
+  {
+   "key": "midline",
+   "verts": 336,
+   "outward": 1,
+   "hullVerts": 288,
+   "outwardHull": 1,
+   "tris": 112,
+   "winding": 1,
+   "hullTris": 96,
+   "hullWinding": 1
+  },
+  {
+   "key": "midline",
+   "verts": 336,
+   "outward": 1,
+   "hullVerts": 288,
+   "outwardHull": 1,
+   "tris": 112,
+   "winding": 1,
+   "hullTris": 96,
+   "hullWinding": 1
+  }
+ ],
+ "normals0": [
+  {
+   "key": "sinus",
+   "verts": 13440,
+   "outward": 0.5142857142857142,
+   "hullVerts": 6528,
+   "outwardHull": 1,
+   "tris": 4480,
+   "winding": 0.9857142857142858,
+   "hullTris": 2176,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 9240,
+   "outward": 0.5142857142857142,
+   "hullVerts": 4488,
+   "outwardHull": 1,
+   "tris": 3080,
+   "winding": 0.9857142857142858,
+   "hullTris": 1496,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 9240,
+   "outward": 0.5142857142857142,
+   "hullVerts": 4488,
+   "outwardHull": 1,
+   "tris": 3080,
+   "winding": 0.9857142857142858,
+   "hullTris": 1496,
+   "hullWinding": 1
+  },
+  {
+   "key": "atrium",
+   "verts": 19200,
+   "outward": 0.51,
+   "hullVerts": 9408,
+   "outwardHull": 1,
+   "tris": 6400,
+   "winding": 0.99,
+   "hullTris": 3136,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 13200,
+   "outward": 0.51,
+   "hullVerts": 6468,
+   "outwardHull": 1,
+   "tris": 4400,
+   "winding": 0.99,
+   "hullTris": 2156,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 13200,
+   "outward": 0.51,
+   "hullVerts": 6468,
+   "outwardHull": 1,
+   "tris": 4400,
+   "winding": 0.99,
+   "hullTris": 2156,
+   "hullWinding": 1
+  },
+  {
+   "key": "ventricle",
+   "verts": 21120,
+   "outward": 0.509090909090909,
+   "hullVerts": 10368,
+   "outwardHull": 1,
+   "tris": 7040,
+   "winding": 0.990909090909091,
+   "hullTris": 3456,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 14520,
+   "outward": 0.509090909090909,
+   "hullVerts": 7128,
+   "outwardHull": 1,
+   "tris": 4840,
+   "winding": 0.990909090909091,
+   "hullTris": 2376,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 14520,
+   "outward": 0.509090909090909,
+   "hullVerts": 7128,
+   "outwardHull": 1,
+   "tris": 4840,
+   "winding": 0.990909090909091,
+   "hullTris": 2376,
+   "hullWinding": 1
+  },
+  {
+   "key": "bulbus",
+   "verts": 17280,
+   "outward": 0.5111111111111111,
+   "hullVerts": 8448,
+   "outwardHull": 1,
+   "tris": 5760,
+   "winding": 0.9888888888888889,
+   "hullTris": 2816,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 11880,
+   "outward": 0.5111111111111111,
+   "hullVerts": 5808,
+   "outwardHull": 1,
+   "tris": 3960,
+   "winding": 0.9888888888888889,
+   "hullTris": 1936,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 11880,
+   "outward": 0.5111111111111111,
+   "hullVerts": 5808,
+   "outwardHull": 1,
+   "tris": 3960,
+   "winding": 0.9888888888888889,
+   "hullTris": 1936,
+   "hullWinding": 1
+  },
+  {
+   "key": "truncus",
+   "verts": 10752,
+   "outward": 0.5178571428571429,
+   "hullVerts": 5184,
+   "outwardHull": 1,
+   "tris": 3584,
+   "winding": 0.9821428571428571,
+   "hullTris": 1728,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 7392,
+   "outward": 0.5178571428571429,
+   "hullVerts": 3564,
+   "outwardHull": 1,
+   "tris": 2464,
+   "winding": 0.9821428571428571,
+   "hullTris": 1188,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 7392,
+   "outward": 0.5178571428571429,
+   "hullVerts": 3564,
+   "outwardHull": 1,
+   "tris": 2464,
+   "winding": 0.9821428571428571,
+   "hullTris": 1188,
+   "hullWinding": 1
+  },
+  {
+   "key": "sinus",
+   "verts": 1248,
+   "outward": 1,
+   "hullVerts": 1248,
+   "outwardHull": 1,
+   "tris": 416,
+   "winding": 1,
+   "hullTris": 416,
+   "hullWinding": 1
+  },
+  {
+   "key": "truncus",
+   "verts": 1248,
+   "outward": 1,
+   "hullVerts": 1248,
+   "outwardHull": 1,
+   "tris": 416,
+   "winding": 1,
+   "hullTris": 416,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 858,
+   "outward": 1,
+   "hullVerts": 858,
+   "outwardHull": 1,
+   "tris": 286,
+   "winding": 1,
+   "hullTris": 286,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 858,
+   "outward": 1,
+   "hullVerts": 858,
+   "outwardHull": 1,
+   "tris": 286,
+   "winding": 1,
+   "hullTris": 286,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 858,
+   "outward": 1,
+   "hullVerts": 858,
+   "outwardHull": 1,
+   "tris": 286,
+   "winding": 1,
+   "hullTris": 286,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 858,
+   "outward": 1,
+   "hullVerts": 858,
+   "outwardHull": 1,
+   "tris": 286,
+   "winding": 1,
+   "hullTris": 286,
+   "hullWinding": 1
+  },
+  {
+   "key": "sinus",
+   "verts": 13440,
+   "outward": 0.5142857142857142,
+   "hullVerts": 6528,
+   "outwardHull": 1,
+   "tris": 4480,
+   "winding": 0.9857142857142858,
+   "hullTris": 2176,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 9240,
+   "outward": 0.5142857142857142,
+   "hullVerts": 4488,
+   "outwardHull": 1,
+   "tris": 3080,
+   "winding": 0.9857142857142858,
+   "hullTris": 1496,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 9240,
+   "outward": 0.5142857142857142,
+   "hullVerts": 4488,
+   "outwardHull": 1,
+   "tris": 3080,
+   "winding": 0.9857142857142858,
+   "hullTris": 1496,
+   "hullWinding": 1
+  },
+  {
+   "key": "atrium",
+   "verts": 19200,
+   "outward": 0.51,
+   "hullVerts": 9408,
+   "outwardHull": 1,
+   "tris": 6400,
+   "winding": 0.99,
+   "hullTris": 3136,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 13200,
+   "outward": 0.51,
+   "hullVerts": 6468,
+   "outwardHull": 1,
+   "tris": 4400,
+   "winding": 0.99,
+   "hullTris": 2156,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 13200,
+   "outward": 0.51,
+   "hullVerts": 6468,
+   "outwardHull": 1,
+   "tris": 4400,
+   "winding": 0.99,
+   "hullTris": 2156,
+   "hullWinding": 1
+  },
+  {
+   "key": "ventricle",
+   "verts": 21120,
+   "outward": 0.509090909090909,
+   "hullVerts": 10368,
+   "outwardHull": 1,
+   "tris": 7040,
+   "winding": 0.990909090909091,
+   "hullTris": 3456,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 14520,
+   "outward": 0.509090909090909,
+   "hullVerts": 7128,
+   "outwardHull": 1,
+   "tris": 4840,
+   "winding": 0.990909090909091,
+   "hullTris": 2376,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 14520,
+   "outward": 0.509090909090909,
+   "hullVerts": 7128,
+   "outwardHull": 1,
+   "tris": 4840,
+   "winding": 0.990909090909091,
+   "hullTris": 2376,
+   "hullWinding": 1
+  },
+  {
+   "key": "bulbus",
+   "verts": 17280,
+   "outward": 0.5111111111111111,
+   "hullVerts": 8448,
+   "outwardHull": 1,
+   "tris": 5760,
+   "winding": 0.9888888888888889,
+   "hullTris": 2816,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 11880,
+   "outward": 0.5111111111111111,
+   "hullVerts": 5808,
+   "outwardHull": 1,
+   "tris": 3960,
+   "winding": 0.9888888888888889,
+   "hullTris": 1936,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 11880,
+   "outward": 0.5111111111111111,
+   "hullVerts": 5808,
+   "outwardHull": 1,
+   "tris": 3960,
+   "winding": 0.9888888888888889,
+   "hullTris": 1936,
+   "hullWinding": 1
+  },
+  {
+   "key": "truncus",
+   "verts": 10752,
+   "outward": 0.5178571428571429,
+   "hullVerts": 5184,
+   "outwardHull": 1,
+   "tris": 3584,
+   "winding": 0.9821428571428571,
+   "hullTris": 1728,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 7392,
+   "outward": 0.5178571428571429,
+   "hullVerts": 3564,
+   "outwardHull": 1,
+   "tris": 2464,
+   "winding": 0.9821428571428571,
+   "hullTris": 1188,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 7392,
+   "outward": 0.5178571428571429,
+   "hullVerts": 3564,
+   "outwardHull": 1,
+   "tris": 2464,
+   "winding": 0.9821428571428571,
+   "hullTris": 1188,
+   "hullWinding": 1
+  },
+  {
+   "key": "sinus",
+   "verts": 1248,
+   "outward": 1,
+   "hullVerts": 1248,
+   "outwardHull": 1,
+   "tris": 416,
+   "winding": 1,
+   "hullTris": 416,
+   "hullWinding": 1
+  },
+  {
+   "key": "truncus",
+   "verts": 1248,
+   "outward": 1,
+   "hullVerts": 1248,
+   "outwardHull": 1,
+   "tris": 416,
+   "winding": 1,
+   "hullTris": 416,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 858,
+   "outward": 1,
+   "hullVerts": 858,
+   "outwardHull": 1,
+   "tris": 286,
+   "winding": 1,
+   "hullTris": 286,
+   "hullWinding": 1
+  },
+  {
+   "key": "jelly",
+   "verts": 858,
+   "outward": 1,
+   "hullVerts": 858,
+   "outwardHull": 1,
+   "tris": 286,
+   "winding": 1,
+   "hullTris": 286,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 858,
+   "outward": 1,
+   "hullVerts": 858,
+   "outwardHull": 1,
+   "tris": 286,
+   "winding": 1,
+   "hullTris": 286,
+   "hullWinding": 1
+  },
+  {
+   "key": "endocardium",
+   "verts": 858,
+   "outward": 1,
+   "hullVerts": 858,
+   "outwardHull": 1,
+   "tris": 286,
+   "winding": 1,
+   "hullTris": 286,
+   "hullWinding": 1
+  },
+  {
+   "key": "veins",
+   "verts": 1260,
+   "outward": 0.9095238095238095,
+   "hullVerts": 1176,
+   "outwardHull": 0.9030612244897959,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "veins",
+   "verts": 1260,
+   "outward": 1,
+   "hullVerts": 1176,
+   "outwardHull": 1,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "veins",
+   "verts": 1260,
+   "outward": 0.9761904761904762,
+   "hullVerts": 1176,
+   "outwardHull": 0.9744897959183674,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "veins",
+   "verts": 1260,
+   "outward": 0.9095238095238095,
+   "hullVerts": 1176,
+   "outwardHull": 0.9030612244897959,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "veins",
+   "verts": 1260,
+   "outward": 1,
+   "hullVerts": 1176,
+   "outwardHull": 1,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "veins",
+   "verts": 1260,
+   "outward": 0.9761904761904762,
+   "hullVerts": 1176,
+   "outwardHull": 0.9744897959183674,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 1092,
+   "outward": 1,
+   "hullVerts": 1008,
+   "outwardHull": 1,
+   "tris": 364,
+   "winding": 1,
+   "hullTris": 336,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 1092,
+   "outward": 1,
+   "hullVerts": 1008,
+   "outwardHull": 1,
+   "tris": 364,
+   "winding": 1,
+   "hullTris": 336,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 1512,
+   "outward": 0.6011904761904762,
+   "hullVerts": 1440,
+   "outwardHull": 0.58125,
+   "tris": 504,
+   "winding": 1,
+   "hullTris": 480,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 1512,
+   "outward": 0.6349206349206349,
+   "hullVerts": 1440,
+   "outwardHull": 0.6166666666666667,
+   "tris": 504,
+   "winding": 1,
+   "hullTris": 480,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 936,
+   "outward": 1,
+   "hullVerts": 864,
+   "outwardHull": 1,
+   "tris": 312,
+   "winding": 1,
+   "hullTris": 288,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 1512,
+   "outward": 0.6011904761904762,
+   "hullVerts": 1440,
+   "outwardHull": 0.58125,
+   "tris": 504,
+   "winding": 1,
+   "hullTris": 480,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 1512,
+   "outward": 0.6349206349206349,
+   "hullVerts": 1440,
+   "outwardHull": 0.6166666666666667,
+   "tris": 504,
+   "winding": 1,
+   "hullTris": 480,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 936,
+   "outward": 1,
+   "hullVerts": 864,
+   "outwardHull": 1,
+   "tris": 312,
+   "winding": 1,
+   "hullTris": 288,
+   "hullWinding": 1
+  },
+  {
+   "key": "arches",
+   "verts": 2652,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 884,
+   "winding": 1,
+   "hullTris": 0,
+   "hullWinding": null
+  },
+  {
+   "key": "septum",
+   "verts": 3060,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 1020,
+   "winding": 1,
+   "hullTris": 0,
+   "hullWinding": null
+  },
+  {
+   "key": "membrane",
+   "verts": 2520,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 840,
+   "winding": 1,
+   "hullTris": 0,
+   "hullWinding": null
+  }
+ ],
+ "boxes1": {
+  "boxes": {
+   "sinus": {
+    "minx": -0.42768925428390503,
+    "maxx": 0.4040382206439972,
+    "miny": -3.056281805038452,
+    "maxy": -1.7400000095367432,
+    "minz": -0.33525317907333374,
+    "maxz": 0.33525317907333374,
+    "cx": -0.0043608351347588555,
+    "cy": -2.308599790976198,
+    "cz": -5.705540561424206e-21,
+    "n": 14688,
+    "ex": 0.8317274749279022,
+    "ey": 1.316281795501709,
+    "ez": 0.6705063581466675
+   },
+   "atrium": {
+    "minx": -0.4566676616668701,
+    "maxx": 0.4314141571521759,
+    "miny": -1.7999999523162842,
+    "maxy": -0.33000001311302185,
+    "minz": -0.3579685389995575,
+    "maxz": 0.3579685389995575,
+    "cx": -0.004558040017727762,
+    "cy": -1.0649999982118608,
+    "cz": 0,
+    "n": 19200,
+    "ex": 0.888081818819046,
+    "ey": 1.4699999392032623,
+    "ez": 0.715937077999115
+   },
+   "ventricle": {
+    "minx": -0.47365593910217285,
+    "maxx": 0.4474630057811737,
+    "miny": -0.38999998569488525,
+    "maxy": 1.2300000190734863,
+    "minz": -0.3712851405143738,
+    "maxz": 0.3712851405143738,
+    "cx": -0.004816146211867983,
+    "cy": 0.4199999993497675,
+    "cz": 0,
+    "n": 21120,
+    "ex": 0.9211189448833466,
+    "ey": 1.6200000047683716,
+    "ez": 0.7425702810287476
+   },
+   "bulbus": {
+    "minx": -0.42313671112060547,
+    "maxx": 0.3997374475002289,
+    "miny": 1.1699999570846558,
+    "maxy": 2.490000009536743,
+    "minz": -0.33168458938598633,
+    "maxz": 0.33168458938598633,
+    "cx": -0.004346271817727635,
+    "cy": 1.8300000005298191,
+    "cz": 0,
+    "n": 17280,
+    "ex": 0.8228741586208344,
+    "ey": 1.3200000524520874,
+    "ez": 0.6633691787719727
+   },
+   "truncus": {
+    "minx": -0.3093229830265045,
+    "maxx": 0.29221758246421814,
+    "miny": 2.430000066757202,
+    "maxy": 3.4822940826416016,
+    "minz": -0.24246931076049805,
+    "maxz": 0.24246931076049805,
+    "cx": -0.0033734737797640264,
+    "cy": 2.8924011999766033,
+    "cz": 3.76813561559313e-21,
+    "n": 12000,
+    "ex": 0.6015405654907227,
+    "ey": 1.0522940158843994,
+    "ez": 0.4849386215209961
+   },
+   "veins": {
+    "minx": -1.1338673830032349,
+    "maxx": 1.1338673830032349,
+    "miny": -3.859650135040283,
+    "maxy": -1.888805627822876,
+    "minz": -1.0771772861480713,
+    "maxz": 0.8781283497810364,
+    "cx": 0,
+    "cy": -2.970277776352312,
+    "cz": 0.05206349170452634,
+    "n": 7560,
+    "ex": 2.2677347660064697,
+    "ey": 1.9708445072174072,
+    "ez": 1.9553056359291077
+   },
+   "arches": {
+    "minx": -0.7916939854621887,
+    "maxx": 0.7916939854621887,
+    "miny": 3.163334369659424,
+    "maxy": 4.5956196784973145,
+    "minz": -1.3798023462295532,
+    "maxz": 0.3077397346496582,
+    "cx": -0.0004608345568201288,
+    "cy": 3.9447907776393234,
+    "cz": -0.6525229435531085,
+    "n": 8433,
+    "ex": 1.5833879709243774,
+    "ey": 1.4322853088378906,
+    "ez": 1.6875420808792114
+   },
+   "septum": {
+    "minx": -1.149999976158142,
+    "maxx": 1.149999976158142,
+    "miny": -3.609999895095825,
+    "maxy": -3.1500000953674316,
+    "minz": -0.36698704957962036,
+    "maxz": 0.7269870638847351,
+    "cx": -0.022316740405174992,
+    "cy": -3.380000014054148,
+    "cz": 0.18000000217417175,
+    "n": 589,
+    "ex": 2.299999952316284,
+    "ey": 0.45999979972839355,
+    "ez": 1.0939741134643555
+   },
+   "membrane": {
+    "minx": -0.6000000238418579,
+    "maxx": 0.6000000238418579,
+    "miny": 4.105000019073486,
+    "maxy": 4.275000095367432,
+    "minz": -1.100000023841858,
+    "maxz": -0.14000001549720764,
+    "cx": -0.012356799707935016,
+    "cy": 4.19000000112197,
+    "cz": -0.6200000004763535,
+    "n": 493,
+    "ex": 1.2000000476837158,
+    "ey": 0.1700000762939453,
+    "ez": 0.9600000083446503
+   }
+  },
+  "tube": {
+   "minx": -0.47365593910217285,
+   "maxx": 0.4474630057811737,
+   "miny": -3.056281805038452,
+   "maxy": 3.4822940826416016,
+   "cx": -0.004376288263594637,
+   "n": 84288,
+   "ex": 0.9211189448833466,
+   "ey": 6.538575887680054
+  },
+  "rel": {
+   "straddleSide": 0.4857820027117582,
+   "straddleCentre": 0.004751056622930347,
+   "tubeCy": 0.2130061388015747,
+   "stMinusHeart": -1.0267821091997658,
+   "heartMinusBpm": -1.1856447280845932
+  }
+ },
+ "boxes0": {
+  "boxes": {
+   "sinus": {
+    "minx": -1.5082842111587524,
+    "maxx": 1.4987645149230957,
+    "miny": 5.887133579254151,
+    "maxy": 6.723314772844315,
+    "minz": -0.17139737308025327,
+    "maxz": 0.171397373080254,
+    "cx": -0.002485719925372949,
+    "cy": 6.29104612417103,
+    "cz": 1.8796335580583033e-16,
+    "n": 29376,
+    "ex": 3.007048726081848,
+    "ey": 0.8361811935901642,
+    "ez": 0.34279474616050726
+   },
+   "atrium": {
+    "minx": -1.2270313501358032,
+    "maxx": 1.216082215309143,
+    "miny": 5.134622554779053,
+    "maxy": 6.104774962663651,
+    "minz": -0.17139737308025338,
+    "maxz": 0.17139737308025393,
+    "cx": -0.002657652273774147,
+    "cy": 5.607749999085059,
+    "cz": 1.4591590378106496e-16,
+    "n": 38400,
+    "ex": 2.4431135654449463,
+    "ey": 0.9701524078845978,
+    "ez": 0.3427947461605073
+   },
+   "ventricle": {
+    "minx": -0.9236646890640259,
+    "maxx": 0.9122079610824585,
+    "miny": 4.305335264205933,
+    "maxy": 5.306417565345765,
+    "minz": -0.17139737308025346,
+    "maxz": 0.17139737308025385,
+    "cx": -0.002768112075599757,
+    "cy": 4.791000000671413,
+    "cz": 6.344094021159423e-17,
+    "n": 42240,
+    "ex": 1.8358726501464844,
+    "ey": 1.0010823011398315,
+    "ez": 0.3427947461605073
+   },
+   "bulbus": {
+    "minx": -0.7038657665252686,
+    "maxx": 0.6919921040534973,
+    "miny": 3.6372906970977787,
+    "maxy": 4.419821243286133,
+    "minz": -0.17139737308025355,
+    "maxz": 0.17139737308025374,
+    "cx": -0.00283775350285901,
+    "cy": 4.0155000002924215,
+    "cz": 2.8960445474348453e-17,
+    "n": 34560,
+    "ex": 1.3958578705787659,
+    "ey": 0.7825305461883545,
+    "ez": 0.3427947461605073
+   },
+   "truncus": {
+    "minx": -0.6144120097160339,
+    "maxx": 0.6023546457290649,
+    "miny": 3.0687036323547368,
+    "maxy": 3.7019195365905766,
+    "minz": -0.1713973730802536,
+    "maxz": 0.17139737308025366,
+    "cx": -0.002776321968684594,
+    "cy": 3.4287805279992742,
+    "cz": 4.713098861913383e-18,
+    "n": 24000,
+    "ex": 1.2167666554450989,
+    "ey": 0.6332159042358398,
+    "ez": 0.34279474616050726
+   },
+   "veins": {
+    "minx": -2.4338674545288086,
+    "maxx": 2.4338674545288086,
+    "miny": 5.668805639743805,
+    "maxy": 7.639650087356568,
+    "minz": -0.8781283497810358,
+    "maxz": 1.0771772861480717,
+    "cx": 0,
+    "cy": 6.7502777783563115,
+    "cz": -0.052063491704526316,
+    "n": 7560,
+    "ex": 4.867734909057617,
+    "ey": 1.9708444476127625,
+    "ez": 1.9553056359291077
+   },
+   "arches": {
+    "minx": -0.7916939854621887,
+    "maxx": 0.7916939854621887,
+    "miny": 1.884380321502686,
+    "maxy": 3.3166656303405766,
+    "minz": -0.30773973464965826,
+    "maxz": 1.379802346229553,
+    "cx": -0.00036603728149798876,
+    "cy": 2.646191269383837,
+    "cz": 0.5182938667216128,
+    "n": 10617,
+    "ex": 1.5833879709243774,
+    "ey": 1.4322853088378906,
+    "ez": 1.6875420808792112
+   },
+   "septum": {
+    "minx": -1.149999976158142,
+    "maxx": 1.149999976158142,
+    "miny": 6.9299999880790715,
+    "maxy": 7.390000026226044,
+    "minz": -0.7269870638847346,
+    "maxz": 0.36698704957962086,
+    "cx": -0.022316740405174992,
+    "cy": 7.159999999309845,
+    "cz": -0.18000000217417172,
+    "n": 589,
+    "ex": 2.299999952316284,
+    "ey": 0.46000003814697266,
+    "ez": 1.0939741134643555
+   },
+   "membrane": {
+    "minx": -0.6000000238418579,
+    "maxx": 0.6000000238418579,
+    "miny": 2.204999904632569,
+    "maxy": 2.374999980926514,
+    "minz": 0.14000001549720753,
+    "maxz": 1.100000023841858,
+    "cx": -0.012356799707935016,
+    "cy": 2.2899999988780433,
+    "cz": 0.6200000004763534,
+    "n": 493,
+    "ex": 1.2000000476837158,
+    "ey": 0.1700000762939453,
+    "ez": 0.9600000083446504
+   }
+  },
+  "tube": {
+   "minx": -1.5082842111587524,
+   "maxx": 1.4987645149230957,
+   "miny": 3.0687036323547368,
+   "maxy": 6.723314772844315,
+   "cx": -0.0027091869437004933,
+   "n": 168576,
+   "ex": 3.007048726081848,
+   "ey": 3.6546111404895782
+  },
+  "rel": {
+   "straddleSide": 0.49841710309628723,
+   "straddleCentre": 0.000900945475276862,
+   "tubeCy": 4.896009202599526,
+   "stMinusHeart": 1.1004640285163139,
+   "heartMinusBpm": 1.3627577058214673
+  }
+ },
+ "pair0": {
+  "split": true,
+  "gap": 1.6414591073989868,
+  "meanWidth": 0.6827948093414307,
+  "gapFrac": 2.4040298563227323,
+  "left": [
+   -1.5082842111587524,
+   -0.8262158036231995
+  ],
+  "right": [
+   0.8152433037757874,
+   1.4987645149230957
+  ],
+  "nL": 14688,
+  "nR": 14688
+ },
+ "pair76": {
+  "split": true,
+  "gap": 0.31006187200546265,
+  "meanWidth": 0.5766760408878326,
+  "gapFrac": 0.5376708065209385,
+  "left": [
+   -0.7393543720245361,
+   -0.16277346014976501
+  ],
+  "right": [
+   0.14728841185569763,
+   0.7240595817565918
+  ],
+  "nL": 14688,
+  "nR": 14688
+ },
+ "pairBifida": {
+  "split": true,
+  "gap": 1.4125829339027405,
+  "meanWidth": 0.7088620364665985,
+  "gapFrac": 1.9927473347901616,
+  "left": [
+   -1.4221084117889404,
+   -0.7118902206420898
+  ],
+  "right": [
+   0.7006927132606506,
+   1.408198595046997
+  ],
+  "nL": 14688,
+  "nR": 14688
+ },
+ "pair1": {
+  "split": true,
+  "gap": 4.940142936176811e-33,
+  "meanWidth": 0.4158637374639511,
+  "gapFrac": 1.1879234689475767e-32,
+  "left": [
+   -0.42768925428390503,
+   -3.7051071332559864e-33
+  ],
+  "right": [
+   1.235035802920825e-33,
+   0.4040382206439972
+  ],
+  "nL": 7344,
+  "nR": 7344
+ },
+ "lumen": [
+  {
+   "camera": "anterior day 18",
+   "t": 0,
+   "rays": 9216,
+   "hits": 1389,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "anterior mid-fold",
+   "t": 0.35,
+   "rays": 9216,
+   "hits": 1455,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "anterior mid-zip",
+   "t": 0.76,
+   "rays": 9216,
+   "hits": 1152,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "anterior day 23",
+   "t": 1,
+   "rays": 9216,
+   "hits": 890,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "from above day 23",
+   "t": 1,
+   "rays": 9216,
+   "hits": 1216,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "from below day 23",
+   "t": 1,
+   "rays": 9216,
+   "hits": 997,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "from below mid-zip",
+   "t": 0.76,
+   "rays": 9216,
+   "hits": 916,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "lateral day 23",
+   "t": 1,
+   "rays": 9216,
+   "hits": 755,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "cutaway day 23",
+   "t": 1,
+   "rays": 9216,
+   "hits": 890,
+   "backfaceFirst": 64,
+   "frac": 0.07191011235955057,
+   "offenders": {
+    "ventricle": 25,
+    "jelly": 19,
+    "endocardium": 20
+   }
+  },
+  {
+   "camera": "cutaway from behind",
+   "t": 1,
+   "rays": 9216,
+   "hits": 844,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "bifida day 23",
+   "t": 1,
+   "rays": 9216,
+   "hits": 1165,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  }
+ ],
+ "midline": [
+  {
+   "camera": "anterior day 23",
+   "t": 1,
+   "visible": 19762,
+   "subjectPixels": 118946,
+   "fracOfSubject": 0.1661426193398685
+  },
+  {
+   "camera": "anterior day 18",
+   "t": 0,
+   "visible": 37419,
+   "subjectPixels": 186157,
+   "fracOfSubject": 0.20100775152156514
+  },
+  {
+   "camera": "anterior mid-zip",
+   "t": 0.76,
+   "visible": 27560,
+   "subjectPixels": 152877,
+   "fracOfSubject": 0.1802756464347155
+  }
+ ],
+ "viewDiffs": [
+  {
+   "from": "1 horseshoe",
+   "to": "2 head fold",
+   "changed": 287294,
+   "lit": 273894,
+   "frac": 1.0489240363060162
+  },
+  {
+   "from": "2 head fold",
+   "to": "3 the zip",
+   "changed": 233906,
+   "lit": 225846,
+   "frac": 1.0356880352098332
+  },
+  {
+   "from": "3 the zip",
+   "to": "4 one tube",
+   "changed": 225162,
+   "lit": 220730,
+   "frac": 1.0200788293390115
+  },
+  {
+   "from": "4 one tube",
+   "to": "5 three coats",
+   "changed": 89601,
+   "lit": 129604,
+   "frac": 0.6913444029505262
+  },
+  {
+   "from": "5 three coats",
+   "to": "6 mesocardium",
+   "changed": 155400,
+   "lit": 156188,
+   "frac": 0.9949547980638718
+  },
+  {
+   "from": "6 mesocardium",
+   "to": "7 five segments",
+   "changed": 143423,
+   "lit": 146696,
+   "frac": 0.9776885531984513
+  },
+  {
+   "from": "7 five segments",
+   "to": "8 the tethers",
+   "changed": 137991,
+   "lit": 142386,
+   "frac": 0.9691332012978804
+  },
+  {
+   "from": "8 the tethers",
+   "to": "9 cardia bifida",
+   "changed": 221406,
+   "lit": 218086,
+   "frac": 1.0152233522555323
+  }
+ ],
+ "refs": [
+  {
+   "key": "sinus",
+   "ref": "heart-tube-formation#sinus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4896
+  },
+  {
+   "key": "atrium",
+   "ref": "heart-tube-formation#atrium",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 6400
+  },
+  {
+   "key": "ventricle",
+   "ref": "heart-tube-formation#ventricle",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 7040
+  },
+  {
+   "key": "bulbus",
+   "ref": "heart-tube-formation#bulbus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5760
+  },
+  {
+   "key": "truncus",
+   "ref": "heart-tube-formation#truncus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4000
+  },
+  {
+   "key": "endocardium",
+   "ref": "heart-tube-formation#endocardium",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 19316
+  },
+  {
+   "key": "jelly",
+   "ref": "heart-tube-formation#jelly",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 19316
+  },
+  {
+   "key": "mesocardium",
+   "ref": "heart-tube-formation#mesocardium",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 116
+  },
+  {
+   "key": "pericardium",
+   "ref": "heart-tube-formation#pericardium",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5952
+  },
+  {
+   "key": "veins",
+   "ref": "heart-tube-formation#veins",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2520
+  },
+  {
+   "key": "arches",
+   "ref": "heart-tube-formation#arches",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3524
+  },
+  {
+   "key": "septum",
+   "ref": "heart-tube-formation#septum",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1020
+  },
+  {
+   "key": "membrane",
+   "ref": "heart-tube-formation#membrane",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 840
+  },
+  {
+   "key": "midline",
+   "ref": "heart-tube-formation#midline",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 558
+  },
+  {
+   "key": "cut_myocardium",
+   "ref": "heart-tube-formation#ventricle@1+cutaway",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4880
+  },
+  {
+   "key": "cut_jelly",
+   "ref": "heart-tube-formation#jelly@1+cutaway",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 18056
+  },
+  {
+   "key": "cut_endocardium",
+   "ref": "heart-tube-formation#endocardium@1+cutaway",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 18416
+  },
+  {
+   "key": "bifid_left",
+   "ref": "heart-tube-formation#ventricle@1+bifida",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 14080
+  },
+  {
+   "key": "bifid_atria",
+   "ref": "heart-tube-formation#atrium@1+bifida",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 12800
+  },
+  {
+   "key": "bifid_out",
+   "ref": "heart-tube-formation#truncus@1+bifida",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 8000
+  },
+  {
+   "key": "bifid_bulbus",
+   "ref": "heart-tube-formation#bulbus@1+bifida",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 11520
+  },
+  {
+   "key": "bifid_sinus",
+   "ref": "heart-tube-formation#sinus@1+bifida",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 9792
+  }
+ ],
+ "adapterConsole": [],
+ "harness_noise": [
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x1a4c00113c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x1a4c00113c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x1a4c00113c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x1a4c00113c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  }
+ ],
+ "flooredPass": true,
+ "proxyDrift": 0.11575530773993337,
+ "pairPass": true,
+ "lumenPass": true,
+ "midlinePass": true,
+ "viewsChange": true
+}

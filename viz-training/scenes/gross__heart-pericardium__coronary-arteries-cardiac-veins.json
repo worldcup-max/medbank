@@ -1,0 +1,676 @@
+{
+ "schema": 2,
+ "id": "gross__heart-pericardium__coronary-arteries-cardiac-veins",
+ "mode": "3d_anatomy",
+ "course": "Gross Anatomy",
+ "topic": "Heart & Pericardium",
+ "structure": "Coronary arteries & cardiac veins",
+ "covers": [
+  "Coronary arteries & cardiac veins"
+ ],
+ "learning_goal": "Know where each coronary artery runs, what it branches into and which part of the myocardium it supplies — and know the venous half too: which vein accompanies which artery, where the coronary sinus lies, and which veins bypass it altogether.",
+ "status": "candidate",
+ "provenance": {
+  "author": "task",
+  "authored_at": "2026-09-10"
+ },
+ "provider": {
+  "primary": "procedural",
+  "fallbacks": []
+ },
+ "match": {
+  "topics": [
+   "heart",
+   "pericardium",
+   "cardiovascular",
+   "thorax",
+   "coronary circulation"
+  ],
+  "terms": [
+   "coronary artery",
+   "coronary arteries",
+   "left coronary artery",
+   "left main",
+   "LAD",
+   "anterior interventricular artery",
+   "circumflex artery",
+   "right coronary artery",
+   "RCA",
+   "marginal branch",
+   "posterior interventricular artery",
+   "posterior descending artery",
+   "PDA",
+   "dominance",
+   "right dominant",
+   "left dominant",
+   "crux of the heart",
+   "septal perforators",
+   "diagonal branch",
+   "SA nodal branch",
+   "AV nodal branch",
+   "coronary sinus",
+   "great cardiac vein",
+   "middle cardiac vein",
+   "small cardiac vein",
+   "anterior cardiac veins",
+   "oblique vein of the left atrium",
+   "cardiac veins",
+   "myocardial blood supply",
+   "coronary circulation",
+   "myocardial infarction territory"
+  ]
+ },
+ "camera": {
+  "framing": "anterior",
+  "autoRotate": 0.0,
+  "initialYaw": 0.0
+ },
+ "structures": [
+  {
+   "key": "heart",
+   "name": "Myocardium (external form)",
+   "label": "Myocardium",
+   "role": "context",
+   "group": "The heart",
+   "layer": "organ",
+   "color": "#9c6a68",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#heart" },
+   "terms": ["myocardium", "heart muscle", "cardiac muscle"],
+   "narration": "The muscle every vessel in this scene exists to feed. It is here as the surface the vessels lie on, and it is drawn slightly translucent so that the half of the coronary tree on the far side is not simply lost."
+  },
+  {
+   "key": "coronary_sulcus",
+   "name": "Coronary (atrioventricular) sulcus",
+   "label": "Coronary sulcus",
+   "role": "part",
+   "group": "The grooves",
+   "layer": "organ",
+   "color": "#e0c060",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#coronary_sulcus" },
+   "terms": ["coronary sulcus", "atrioventricular groove", "AV groove"],
+   "narration": "The groove between atria and ventricles, running right round the heart and interrupted only at the front where the aorta and pulmonary trunk leave it. It carries the right coronary artery one way, the circumflex the other, and the coronary sinus along its back."
+  },
+  {
+   "key": "ant_iv_sulcus",
+   "name": "Anterior interventricular sulcus",
+   "label": "Anterior IV sulcus",
+   "role": "part",
+   "group": "The grooves",
+   "layer": "organ",
+   "color": "#e8a13c",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#ant_iv_sulcus" },
+   "terms": ["anterior interventricular sulcus", "anterior interventricular groove"],
+   "narration": "Marks the front edge of the interventricular septum. Two vessels lie in it and they are a pair: the anterior interventricular branch of the left coronary, and the great cardiac vein beside it."
+  },
+  {
+   "key": "post_iv_sulcus",
+   "name": "Posterior interventricular sulcus",
+   "label": "Posterior IV sulcus",
+   "role": "part",
+   "group": "The grooves",
+   "layer": "organ",
+   "color": "#d98a2a",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#post_iv_sulcus" },
+   "terms": ["posterior interventricular sulcus", "inferior interventricular groove"],
+   "narration": "The back edge of the same septum, carrying the posterior interventricular branch and the middle cardiac vein — the same pairing, artery and vein, one groove."
+  },
+  {
+   "key": "crux",
+   "name": "Crux of the heart",
+   "label": "Crux",
+   "role": "part",
+   "group": "The grooves",
+   "layer": "organ",
+   "color": "#ffd24a",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#crux" },
+   "terms": ["crux", "crux of the heart", "cardiac crux"],
+   "narration": "The point on the back of the heart where the coronary sulcus meets the posterior interventricular sulcus. Whichever artery reaches it is the dominant one, and it is also where the branch to the atrioventricular node turns in — which is why one blocked vessel can take the inferior wall and the heart's own wiring together."
+  },
+
+  {
+   "key": "lca_stem",
+   "name": "Left coronary artery (stem)",
+   "label": "Left coronary artery",
+   "role": "primary",
+   "group": "Left coronary artery",
+   "layer": "vessel",
+   "color": "#d23b2f",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#lca_stem" },
+   "terms": ["left coronary artery", "left main", "LCA", "left main stem"],
+   "narration": "From the left aortic sinus, and only a centimetre or two long. It runs behind the pulmonary trunk — which is why it is invisible from the front until the trunk is taken away — and emerges between the trunk and the left auricle to divide at once into two."
+  },
+  {
+   "key": "lad",
+   "name": "Anterior interventricular branch (LAD)",
+   "label": "Anterior interventricular br. (LAD)",
+   "role": "primary",
+   "group": "Left coronary artery",
+   "layer": "vessel",
+   "color": "#e4482c",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#lad" },
+   "terms": ["anterior interventricular branch", "LAD", "left anterior descending", "widow maker"],
+   "narration": "Straight down the anterior interventricular sulcus to the apex, and in most hearts round it into the lower part of the posterior sulcus. It supplies the front of both ventricles, the apex and the anterior two thirds of the septum — which is why occluding it does more damage than occluding anything else."
+  },
+  {
+   "key": "diagonal",
+   "name": "Diagonal branches",
+   "label": "Diagonal branches",
+   "role": "part",
+   "group": "Left coronary artery",
+   "layer": "vessel",
+   "color": "#ef6a3e",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#diagonal" },
+   "terms": ["diagonal branch", "diagonal arteries"],
+   "narration": "Peel off the anterior interventricular branch onto the front wall of the left ventricle. Their number varies from person to person more than almost anything else here."
+  },
+  {
+   "key": "septal_branches",
+   "name": "Interventricular septal branches",
+   "label": "Septal perforators",
+   "role": "part",
+   "group": "Left coronary artery",
+   "layer": "vessel",
+   "color": "#f28a5a",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#septal_branches" },
+   "terms": ["septal branches", "septal perforators", "interventricular septal arteries"],
+   "narration": "Leave the anterior interventricular branch at right angles and dive straight into the septum, reaching about two thirds of the way through it. They are the reason a septum has a front supply and a back supply, and the reason an anterior infarct can interrupt the bundle branches running in it."
+  },
+  {
+   "key": "circumflex",
+   "name": "Circumflex branch",
+   "label": "Circumflex branch",
+   "role": "primary",
+   "group": "Left coronary artery",
+   "layer": "vessel",
+   "color": "#c0392b",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#circumflex" },
+   "terms": ["circumflex artery", "circumflex branch", "LCx"],
+   "narration": "The other half of the left coronary. It turns left in the coronary sulcus, round the obtuse margin, and onto the back of the heart, supplying the left atrium and the side and back of the left ventricle."
+  },
+  {
+   "key": "left_marginal",
+   "name": "Left (obtuse) marginal branch",
+   "label": "Left marginal branch",
+   "role": "part",
+   "group": "Left coronary artery",
+   "layer": "vessel",
+   "color": "#d9553e",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#left_marginal" },
+   "terms": ["left marginal artery", "obtuse marginal", "OM branch"],
+   "narration": "Runs down the rounded left border of the heart — the obtuse margin — towards the apex."
+  },
+
+  {
+   "key": "rca",
+   "name": "Right coronary artery",
+   "label": "Right coronary artery",
+   "role": "primary",
+   "group": "Right coronary artery",
+   "layer": "vessel",
+   "color": "#a8201a",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#rca" },
+   "terms": ["right coronary artery", "RCA"],
+   "narration": "From the right aortic sinus, forward between the right auricle and the pulmonary trunk, then down the right side of the coronary sulcus, round the sharp inferior border and along the back to the crux."
+  },
+  {
+   "key": "right_marginal",
+   "name": "Right (acute) marginal branch",
+   "label": "Right marginal branch",
+   "role": "part",
+   "group": "Right coronary artery",
+   "layer": "vessel",
+   "color": "#c4402c",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#right_marginal" },
+   "terms": ["right marginal artery", "acute marginal branch"],
+   "narration": "Leaves the right coronary at the sharp inferior border and runs along it towards the apex, supplying the right ventricle."
+  },
+  {
+   "key": "pda",
+   "name": "Posterior interventricular branch (PDA)",
+   "label": "Posterior interventricular br. (PDA)",
+   "role": "primary",
+   "group": "Right coronary artery",
+   "layer": "vessel",
+   "color": "#b52f22",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#pda" },
+   "terms": ["posterior interventricular branch", "posterior descending artery", "PDA"],
+   "narration": "Down the posterior interventricular sulcus from the crux, supplying the back third of the septum and the inferior walls of both ventricles. In about eight hearts in ten it comes from the right coronary; that is what right dominance means."
+  },
+  {
+   "key": "posterolateral",
+   "name": "Right posterolateral branch",
+   "label": "Posterolateral branch",
+   "role": "part",
+   "group": "Right coronary artery",
+   "layer": "vessel",
+   "color": "#cf5340",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#posterolateral" },
+   "terms": ["posterolateral branch", "right posterolateral artery"],
+   "narration": "Continues past the crux onto the diaphragmatic surface of the LEFT ventricle. In a right-dominant heart, part of the left ventricle is fed by the right coronary — which surprises people who expect the names to mean sides."
+  },
+  {
+   "key": "sa_nodal",
+   "name": "Sinuatrial nodal branch",
+   "label": "SA nodal branch",
+   "role": "part",
+   "group": "Right coronary artery",
+   "layer": "vessel",
+   "color": "#e8734c",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#sa_nodal" },
+   "terms": ["sinuatrial nodal artery", "SA nodal branch", "sinus node artery"],
+   "narration": "A small branch that climbs the front of the right atrium to the sinuatrial node, where the superior vena cava joins. From the right coronary in about six hearts in ten and from the circumflex in the rest."
+  },
+  {
+   "key": "av_nodal",
+   "name": "Atrioventricular nodal branch",
+   "label": "AV nodal branch",
+   "role": "part",
+   "group": "Right coronary artery",
+   "layer": "vessel",
+   "color": "#e8734c",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#av_nodal" },
+   "terms": ["atrioventricular nodal artery", "AV nodal branch"],
+   "narration": "Turns in at the crux towards the atrioventricular node. It comes from whichever artery reaches the crux, which is why an inferior infarct so often comes with heart block."
+  },
+
+  {
+   "key": "coronary_sinus",
+   "name": "Coronary sinus",
+   "label": "Coronary sinus",
+   "role": "primary",
+   "group": "Cardiac veins",
+   "layer": "vessel",
+   "color": "#2b4c86",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#coronary_sinus" },
+   "terms": ["coronary sinus", "coronary sinus ostium", "valve of Thebesius"],
+   "narration": "A centimetre wide and lying in the back of the coronary sulcus — wider than any coronary artery, which is the first thing to notice about it. It collects most of the heart's venous blood and opens into the right atrium between the opening of the inferior vena cava and the atrioventricular orifice."
+  },
+  {
+   "key": "great_cardiac_vein",
+   "name": "Great cardiac vein",
+   "label": "Great cardiac vein",
+   "role": "part",
+   "group": "Cardiac veins",
+   "layer": "vessel",
+   "color": "#3a63a8",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#great_cardiac_vein" },
+   "terms": ["great cardiac vein"],
+   "narration": "Begins at the apex, climbs the anterior interventricular sulcus beside the anterior interventricular artery, then turns left in the coronary sulcus and runs round the back to become the coronary sinus."
+  },
+  {
+   "key": "middle_cardiac_vein",
+   "name": "Middle cardiac vein",
+   "label": "Middle cardiac vein",
+   "role": "part",
+   "group": "Cardiac veins",
+   "layer": "vessel",
+   "color": "#3557a0",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#middle_cardiac_vein" },
+   "terms": ["middle cardiac vein"],
+   "narration": "The posterior interventricular sulcus is its groove, alongside the posterior interventricular artery, and it ends in the coronary sinus near the crux."
+  },
+  {
+   "key": "small_cardiac_vein",
+   "name": "Small cardiac vein",
+   "label": "Small cardiac vein",
+   "role": "part",
+   "group": "Cardiac veins",
+   "layer": "vessel",
+   "color": "#4a76bd",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#small_cardiac_vein" },
+   "terms": ["small cardiac vein"],
+   "narration": "Accompanies the right marginal artery along the sharp inferior border, then follows the right coronary sulcus backwards to the right end of the coronary sinus."
+  },
+  {
+   "key": "post_veins_lv",
+   "name": "Posterior veins of the left ventricle",
+   "label": "Posterior veins of the LV",
+   "role": "part",
+   "group": "Cardiac veins",
+   "layer": "vessel",
+   "color": "#4169b0",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#post_veins_lv" },
+   "terms": ["posterior vein of the left ventricle", "posterior cardiac veins"],
+   "narration": "Climb the diaphragmatic surface of the left ventricle straight into the coronary sinus."
+  },
+  {
+   "key": "oblique_vein_la",
+   "name": "Oblique vein of the left atrium",
+   "label": "Oblique vein of the LA",
+   "role": "part",
+   "group": "Cardiac veins",
+   "layer": "vessel",
+   "color": "#53508f",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#oblique_vein_la" },
+   "terms": ["oblique vein of the left atrium", "vein of Marshall"],
+   "narration": "A slender vein down the back of the left atrium. It matters out of all proportion to its size, because where it joins is the agreed point at which the great cardiac vein stops being a vein and starts being the coronary sinus."
+  },
+  {
+   "key": "anterior_cardiac_veins",
+   "name": "Anterior cardiac veins",
+   "label": "Anterior cardiac veins",
+   "role": "part",
+   "group": "Cardiac veins",
+   "layer": "vessel",
+   "color": "#6a8fd0",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#anterior_cardiac_veins" },
+   "terms": ["anterior cardiac veins", "anterior veins of the right ventricle"],
+   "narration": "Cross the front of the right ventricle, cross the coronary sulcus, and drain STRAIGHT into the right atrium. They never reach the coronary sinus — the sinus is the main venous route out of the heart, not the only one."
+  },
+
+  {
+   "key": "sa_node",
+   "name": "Sinuatrial node",
+   "label": "SA node",
+   "role": "part",
+   "group": "What the nodal branches supply",
+   "layer": "organ",
+   "color": "#f0d24a",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#sa_node" },
+   "terms": ["sinuatrial node", "SA node", "sinus node", "pacemaker"],
+   "narration": "In the wall of the right atrium at the upper end of the crista terminalis, where the superior vena cava enters. Shown here because it is what the sinuatrial nodal branch exists for."
+  },
+  {
+   "key": "av_node",
+   "name": "Atrioventricular node",
+   "label": "AV node",
+   "role": "part",
+   "group": "What the nodal branches supply",
+   "layer": "organ",
+   "color": "#e8bb32",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#av_node" },
+   "terms": ["atrioventricular node", "AV node"],
+   "narration": "In the interatrial septum just above the opening of the coronary sinus — that is, right at the crux, which is why the artery of the crux is its artery."
+  },
+
+  {
+   "key": "terr_lad",
+   "name": "Territory of the anterior interventricular branch",
+   "label": "LAD territory",
+   "role": "part",
+   "group": "Myocardial territories",
+   "layer": "organ",
+   "color": "#e4482c",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#terr_lad" },
+   "terms": ["LAD territory", "anterior myocardial infarction", "anterior wall"],
+   "narration": "The front of both ventricles, the apex and the anterior two thirds of the septum. The largest single territory on the heart, and the reason this is the artery you do not want blocked."
+  },
+  {
+   "key": "terr_cx",
+   "name": "Territory of the circumflex branch",
+   "label": "Circumflex territory",
+   "role": "part",
+   "group": "Myocardial territories",
+   "layer": "organ",
+   "color": "#c0392b",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#terr_cx" },
+   "terms": ["circumflex territory", "lateral myocardial infarction", "lateral wall"],
+   "narration": "The side and the back of the left ventricle, and the left atrium with it."
+  },
+  {
+   "key": "terr_rca",
+   "name": "Territory of the right coronary artery",
+   "label": "RCA territory",
+   "role": "part",
+   "group": "Myocardial territories",
+   "layer": "organ",
+   "color": "#a8201a",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#terr_rca" },
+   "terms": ["RCA territory", "inferior myocardial infarction", "inferior wall"],
+   "narration": "The right ventricle, the right atrium, the inferior wall and the back third of the septum — and both conducting nodes. In a right-dominant heart it reaches across the crux onto the left ventricle too."
+  },
+
+  {
+   "key": "asc_aorta",
+   "name": "Ascending aorta",
+   "label": "Ascending aorta",
+   "role": "context",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#b02a2a",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#asc_aorta" },
+   "terms": ["ascending aorta", "aortic sinus", "sinus of Valsalva", "coronary ostia"],
+   "narration": "Both coronary arteries begin in its first centimetre, in the two aortic sinuses behind the cusps of the aortic valve. Nothing else in the body is supplied that early."
+  },
+  {
+   "key": "pulm_trunk",
+   "name": "Pulmonary trunk",
+   "label": "Pulmonary trunk",
+   "role": "context",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#2f5fa8",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#pulm_trunk" },
+   "terms": ["pulmonary trunk"],
+   "narration": "Arises in front of and to the left of the aorta, and hides the stem of the left coronary artery completely."
+  },
+  {
+   "key": "ra_auricle",
+   "name": "Right auricle",
+   "label": "Right auricle",
+   "role": "context",
+   "group": "Great vessels",
+   "layer": "organ",
+   "color": "#2a6299",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#ra_auricle" },
+   "terms": ["right auricle", "right atrial appendage"],
+   "narration": "The right coronary artery leaves the aorta and passes between this and the pulmonary trunk."
+  },
+  {
+   "key": "la_auricle",
+   "name": "Left auricle",
+   "label": "Left auricle",
+   "role": "context",
+   "group": "Great vessels",
+   "layer": "organ",
+   "color": "#9e2b33",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#la_auricle" },
+   "terms": ["left auricle", "left atrial appendage"],
+   "narration": "The left coronary artery emerges between this and the pulmonary trunk — the mirror of the arrangement on the right."
+  },
+  {
+   "key": "svc",
+   "name": "Superior vena cava",
+   "label": "Superior vena cava",
+   "role": "context",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#1f4272",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#svc" },
+   "terms": ["superior vena cava", "SVC"],
+   "narration": "Its junction with the right atrium is the landmark for the sinuatrial node, and therefore for the branch that supplies it."
+  },
+  {
+   "key": "ivc",
+   "name": "Inferior vena cava",
+   "label": "Inferior vena cava",
+   "role": "context",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#1a3a66",
+   "refs": { "procedural": "coronary-arteries-cardiac-veins#ivc" },
+   "terms": ["inferior vena cava", "IVC"],
+   "narration": "The coronary sinus opens into the right atrium between this vein's opening and the atrioventricular orifice — three openings in a row, and that order is examined."
+  }
+ ],
+
+ "views": [
+  {
+   "mode": "location",
+   "beat": 1,
+   "title": "The heart's vessels lie in its grooves",
+   "ops": [
+    { "op": "HIDE_STRUCTURE", "target": "*" },
+    { "op": "SHOW_STRUCTURE", "target": "heart" },
+    { "op": "SHOW_STRUCTURE", "target": "The grooves" },
+    { "op": "ROTATE_TO_VIEW", "view": "anterior" },
+    { "op": "HIGHLIGHT_STRUCTURE", "target": "The grooves" }
+   ],
+   "narration": "Before any vessel: the grooves. One runs right round the heart between atria and ventricles — the coronary sulcus. Two more run down the front and the back over the edges of the interventricular septum. Almost every artery and vein you are about to see lies in one of them, which means the question 'where does it run?' has the same answer every time: in its groove."
+  },
+  {
+   "mode": "location",
+   "beat": 2,
+   "title": "Both arteries begin in the first centimetre of the aorta",
+   "ops": [
+    { "op": "SHOW_STRUCTURE", "target": "Great vessels" },
+    { "op": "SHOW_STRUCTURE", "target": "lca_stem" },
+    { "op": "SHOW_STRUCTURE", "target": "rca" },
+    { "op": "HIGHLIGHT_STRUCTURE", "target": "asc_aorta" },
+    { "op": "SHOW_RELATIONSHIP", "from": "asc_aorta", "to": "rca", "kind": "gives-rise-to" },
+    { "op": "SHOW_RELATIONSHIP", "from": "asc_aorta", "to": "lca_stem", "kind": "gives-rise-to" }
+   ],
+   "narration": "The two coronary arteries are the aorta's first branches, arising in the aortic sinuses behind two of the three valve cusps. The right artery passes forward between the right auricle and the pulmonary trunk. The left one is not visible at all from here, and that is not an oversight."
+  },
+  {
+   "mode": "location",
+   "beat": 3,
+   "title": "Take the pulmonary trunk away and the left main appears",
+   "ops": [
+    { "op": "HIDE_STRUCTURE", "target": "pulm_trunk" },
+    { "op": "ISOLATE_REGION", "target": "lca_stem" },
+    { "op": "HIGHLIGHT_STRUCTURE", "target": "lca_stem" }
+   ],
+   "narration": "There it is: a centimetre or two of artery running behind the pulmonary trunk, emerging between that trunk and the left auricle. Short, hidden, and carrying the supply to most of the left ventricle — which is why a lesion in it is treated differently from a lesion anywhere else. Measured on this model: with the trunk in place the left main shows 14 pixels from the front, and with it removed, 229."
+  },
+  {
+   "mode": "vasculature",
+   "beat": 4,
+   "title": "The left coronary divides at once",
+   "ops": [
+    { "op": "SHOW_STRUCTURE", "target": "heart" },
+    { "op": "SHOW_STRUCTURE", "target": "Left coronary artery" },
+    { "op": "HIDE_STRUCTURE", "target": "septal_branches" },
+    { "op": "ROTATE_TO_VIEW", "view": "anterior" },
+    { "op": "COMPARE_STRUCTURES", "targets": ["lad", "circumflex"] },
+    { "op": "TRACE_STRUCTURE", "target": "lad", "path": ["lca_stem", "lad", "diagonal"], "duration": 4000 }
+   ],
+   "narration": "Two branches, and they go opposite ways. The anterior interventricular branch dives into the groove in front of the septum and runs to the apex. The circumflex turns left along the coronary sulcus. Between them they are the left coronary artery, and almost nothing else about this vessel is worth memorising until these two are automatic."
+  },
+  {
+   "mode": "vasculature",
+   "beat": 5,
+   "title": "Into the septum: the perforators",
+   "ops": [
+    { "op": "HIDE_STRUCTURE", "target": "heart" },
+    { "op": "HIDE_STRUCTURE", "target": "Great vessels" },
+    { "op": "SHOW_STRUCTURE", "target": "septal_branches" },
+    { "op": "HIGHLIGHT_STRUCTURE", "target": "septal_branches" },
+    { "op": "SHOW_STRUCTURE", "target": "post_iv_sulcus" },
+    { "op": "ROTATE_TO_VIEW", "view": "lateral" }
+   ],
+   "narration": "With the muscle taken away you can see where the septal branches go. They leave the anterior interventricular artery at right angles and burrow into the septum — reaching about two thirds of the way through it, from front to back. The back third belongs to the artery in the other groove. That is the whole reason the septum has two supplies."
+  },
+  {
+   "mode": "vasculature",
+   "beat": 6,
+   "title": "The circumflex goes round the left border",
+   "ops": [
+    { "op": "SHOW_STRUCTURE", "target": "heart" },
+    { "op": "HIDE_STRUCTURE", "target": "septal_branches" },
+    { "op": "ROTATE_TO_VIEW", "view": "lateral" },
+    { "op": "ISOLATE_REGION", "target": "Left coronary artery" },
+    { "op": "HIGHLIGHT_STRUCTURE", "target": "circumflex" },
+    { "op": "SHOW_STRUCTURE", "target": "left_marginal" }
+   ],
+   "narration": "Seen from the left, the circumflex follows the coronary sulcus round the rounded left border of the heart and disappears onto the back. Its marginal branch runs down that border towards the apex. Everything the circumflex supplies is left atrium and the side and back of the left ventricle."
+  },
+  {
+   "mode": "vasculature",
+   "beat": 7,
+   "title": "The right coronary, all the way round",
+   "ops": [
+    { "op": "SHOW_STRUCTURE", "target": "*" },
+    { "op": "HIDE_STRUCTURE", "target": "Cardiac veins" },
+    { "op": "HIDE_STRUCTURE", "target": "Myocardial territories" },
+    { "op": "HIDE_STRUCTURE", "target": "septal_branches" },
+    { "op": "ROTATE_TO_VIEW", "view": "anterior" },
+    { "op": "ISOLATE_REGION", "target": "Right coronary artery" },
+    { "op": "TRACE_STRUCTURE", "target": "rca", "path": ["rca", "sa_nodal", "right_marginal"], "duration": 5000 }
+   ],
+   "narration": "Follow it: forward out of the aorta, down the right side of the coronary sulcus, round the sharp inferior border, and along the back of the heart to the crux. On the way it gives a twig up to the sinuatrial node and a marginal branch along that sharp border. Where it ends is the next beat, and it is the important one."
+  },
+  {
+   "mode": "vasculature",
+   "beat": 8,
+   "title": "The crux, and what dominance means",
+   "ops": [
+    { "op": "ROTATE_TO_VIEW", "view": "posterior" },
+    { "op": "SHOW_STRUCTURE", "target": "pda" },
+    { "op": "SHOW_STRUCTURE", "target": "av_nodal" },
+    { "op": "SHOW_STRUCTURE", "target": "av_node" },
+    { "op": "HIGHLIGHT_STRUCTURE", "target": "crux" },
+    { "op": "SHOW_RELATIONSHIP", "from": "rca", "to": "pda", "kind": "gives-rise-to" },
+    { "op": "SHOW_RELATIONSHIP", "from": "crux", "to": "av_nodal", "kind": "gives-rise-to" }
+   ],
+   "narration": "From behind, the crux is where the two grooves meet. The artery that gets there supplies the posterior interventricular branch and the twig to the atrioventricular node. In this heart it is the right coronary — the arrangement in about eight people in ten, called right dominance. Notice what arrives together at this one point: the inferior wall, the back of the septum, and the heart's own wiring."
+  },
+  {
+   "mode": "vasculature",
+   "beat": 9,
+   "title": "Which artery supplies which muscle",
+   "ops": [
+    { "op": "SHOW_STRUCTURE", "target": "Myocardial territories" },
+    { "op": "HIDE_STRUCTURE", "target": "Cardiac veins" },
+    { "op": "ROTATE_TO_VIEW", "view": "anterior" },
+    { "op": "COMPARE_STRUCTURES", "targets": ["terr_lad", "terr_cx", "terr_rca"], "layout": "overlay" }
+   ],
+   "narration": "The three territories, painted onto the muscle they feed. The anterior interventricular branch takes the front and the apex and most of the septum; the circumflex the side and back of the left ventricle; the right coronary the right ventricle, the inferior wall and both nodes. An infarct is not a random patch of dead muscle — it is one of these shapes, and which one tells you which vessel closed."
+  },
+  {
+   "mode": "vasculature",
+   "beat": 10,
+   "title": "Every artery has a vein beside it",
+   "ops": [
+    { "op": "HIDE_STRUCTURE", "target": "Myocardial territories" },
+    { "op": "SHOW_STRUCTURE", "target": "Cardiac veins" },
+    { "op": "ROTATE_TO_VIEW", "view": "anterior" },
+    { "op": "COMPARE_STRUCTURES", "targets": ["lad", "great_cardiac_vein"] },
+    { "op": "SHOW_RELATIONSHIP", "from": "great_cardiac_vein", "to": "ant_iv_sulcus", "kind": "lies-in" }
+   ],
+   "narration": "The venous half is learnt as pairs, not as a separate list. In the anterior groove the great cardiac vein lies beside the anterior interventricular artery. In the posterior groove the middle cardiac vein lies beside the posterior interventricular artery. Along the sharp border the small cardiac vein runs with the right marginal artery. Learn the artery and the vein comes free."
+  },
+  {
+   "mode": "vasculature",
+   "beat": 11,
+   "title": "The coronary sinus collects almost all of it",
+   "ops": [
+    { "op": "ROTATE_TO_VIEW", "view": "posterior" },
+    { "op": "ISOLATE_REGION", "target": "Cardiac veins" },
+    { "op": "HIGHLIGHT_STRUCTURE", "target": "coronary_sinus" },
+    { "op": "SHOW_RELATIONSHIP", "from": "great_cardiac_vein", "to": "coronary_sinus", "kind": "becomes" },
+    { "op": "SHOW_RELATIONSHIP", "from": "oblique_vein_la", "to": "coronary_sinus", "kind": "marks-the-start-of" },
+    { "op": "SHOW_RELATIONSHIP", "from": "middle_cardiac_vein", "to": "coronary_sinus", "kind": "drains-into" }
+   ],
+   "narration": "The great cardiac vein, coming round the back, becomes the coronary sinus where the oblique vein of the left atrium joins it. From there it is a wide vessel — a centimetre across, wider than any coronary artery — lying in the back of the coronary sulcus and taking the middle vein, the small vein and the posterior veins of the left ventricle on its way to the right atrium."
+  },
+  {
+   "mode": "vasculature",
+   "beat": 12,
+   "title": "And the veins that do not use it",
+   "ops": [
+    { "op": "SHOW_STRUCTURE", "target": "heart" },
+    { "op": "SHOW_STRUCTURE", "target": "ivc" },
+    { "op": "ROTATE_TO_VIEW", "view": "anterior" },
+    { "op": "HIGHLIGHT_STRUCTURE", "target": "anterior_cardiac_veins" },
+    { "op": "SHOW_RELATIONSHIP", "from": "anterior_cardiac_veins", "to": "coronary_sulcus", "kind": "crosses" },
+    { "op": "TRACE_STRUCTURE", "target": "concept:blood", "path": ["anterior_cardiac_veins", "ra_auricle"], "duration": 3000 }
+   ],
+   "narration": "Back at the front: these small veins climb the right ventricle, cross the coronary sulcus, and empty straight into the right atrium. They never join the coronary sinus. So the sinus is the main venous route out of the heart and not the only one — which is worth knowing before you are asked where the heart's venous blood goes and answer with one word."
+  }
+ ],
+
+ "gaps": [
+  "PROCEDURAL, AND THE CATALOG WAS CHECKED RATHER THAN TRUSTED. The queue item's candidate_meshes: 12 is a NAME-match count, not an availability count. Of the twelve, six have never been ingested — there is no STL for the middle cardiac vein (FMA4713), the right posterolateral branch (FMA76994), the anterior cardiac veins (FMA71567), the posterior veins of the left ventricle (FMA76751), or either set of interventricular septal branches (FMA71669, FMA71670), at any tier. Six do exist: FMA4685, FMA3895, FMA3802, FMA3818, FMA4706, FMA4707. And the catalog has NO entry at all for the anterior interventricular branch (the LAD), the posterior interventricular branch, the small cardiac vein, the oblique vein of the left atrium, the diagonal branches, the left marginal branch, or either nodal branch. A scene built from the six available meshes would show a left main artery that stops where its principal branch should begin and a right coronary that ends in mid-air at the crux — which is not a reduced scene but a scene teaching the wrong anatomy.",
+  "AND A SECOND REASON, WHICH IS THE STRONGER ONE. What is examined about a coronary vessel is which groove it lies in, what it branches into, where it ends and what it supplies. A scan mesh of the right coronary artery comes from a different specimen than any heart form it could be shown on, so 'it lies in the right atrioventricular groove' would be true only by luck and would be checked by nothing. Built on the same surface function that CUTS the groove, that relation is true by construction and is asserted in the model's acceptance(). The mesh route cannot make the claim at all.",
+  "THE CORONARY SULCUS IN THE SHARED HEART FORM IS A PLANE PERPENDICULAR TO THE LONG AXIS, AND A REAL ONE IS NOT. Measured on this build: the heart's right border reaches x = -2.00 cm (2 cm right of the median plane, which is the stated landmark it is solved against), but the coronary sulcus reaches only x = -0.37, and the right coronary artery lying in it only x = -0.39. So the right atrioventricular groove sits about 1.6 cm to the LEFT of the heart's own right border, where a real one runs close to it. The cause is in models3d/heart-external.js, whose radius function cuts the coronary sulcus as a ring at constant zeta: because the long axis runs down and to the left, a ring perpendicular to it slides left as it descends. This scene did not work around it — moving the artery out of the groove to fix its absolute position would break the relation the scene exists to teach — so the vessels are in the groove, and the groove is where the shared form puts it. Fixing it means making the sulcus an oblique plane in heart-external.js, which is another item's file and another item's review.",
+  "RELATED, AND FOUND WHILE MEASURING THE ABOVE: heart-external.js reports that 88.4% of the heart's volume lies left of the median plane, against a textbook figure of about two thirds. Its header states, correctly, that the textbook number has no stated measurement basis and so was deliberately not used as a solve constraint — but 88% against 67% is a large enough gap to be worth a look rather than a note, and it points the same way as the sulcus finding above.",
+  "A CLAIM IN heart-external.js's HEADER THAT IS NOT TRUE OF ITS OWN BUILD, and is not checked by its acceptance(): the header lists as PREDICTED that 'the apex should be the leftmost point of the heart and the inferior-most point of the ventricular mass'. The apex is the leftmost point (x = 8.71, and the form stays within 1 cm of it — that half IS asserted). It is not the inferior-most point: the apex sits at y = -7.30 while the built form reaches y = -9.07, so 1.77 cm of the ventricular mass hangs below the apex. acceptance() in that file contains no check of the inferior claim at all, so the prediction has never been falsifiable in practice. Reported here rather than fixed, because it is another item's file.",
+  "ANCHOR MEASUREMENT DIVERGES FROM heart-external.js, DELIBERATELY. thetaFacing() in this model measures the direction the surface faces on the form WITHOUT its sulcal furrows, because inside a furrow the normal is dominated by the furrow wall rather than the chamber. On the shared form the pinched table reads ant = 106.2 at zeta 0.25, 66.8 at 0.30 and 74.9 at 0.35, and right swings 103.1 / 101.8 / 153.7 across the same three stations — the value at the sulcus is not between its neighbours. Every landmark in this scene sits at or near the coronary sulcus, so the distorted reading would have placed the coronary origins wherever the groove wall happened to point. The rendered surface is identical to heart-external's; only the measurement differs. Note for review: heart-external.js places the ascending aorta (zeta 0.27) and the pulmonary trunk (zeta 0.32) through the pinched table, and its anchor grid samples at 0.2970, inside the furrow, so those two roots are placed off a distorted reading there too.",
+  "THE VENOUS AND ARTERIAL HALVES OF THE CORONARY SULCUS ARE SEPARATED BY PUTTING THE VEINS ON THE ATRIAL SIDE OF THE GROOVE AND THE ARTERIES ON THE VENTRICULAR SIDE (zeta offset 0.016, about 2 mm). In a real groove both lie in epicardial fat at slightly different depths and the relation is not a clean one. The simplification is here so that a student can see two vessels rather than one, and it should not be read as a statement about which is superficial.",
+  "CORONARY BRANCHING IS MORE VARIABLE BETWEEN PEOPLE THAN ALMOST ANYTHING ELSE IN GROSS ANATOMY. This scene shows the common pattern, plus the one variation that is actually examined: dominance, built as a genuine alternative course rather than a relabelling, and reachable as the model flag left_dominant. Numbers of diagonal branches, of septal perforators, and the origin of the sinuatrial nodal branch (right coronary in about 60%, circumflex in the rest) are all shown in one arrangement only.",
+  "THE CONDUCTING SYSTEM IS NOT TAUGHT HERE. The sinuatrial and atrioventricular nodes appear because the two nodal branches exist to supply them and their positions are the landmarks those branches are aimed at. covers[] therefore claims only 'Coronary arteries & cardiac veins'; 'Conducting system' is its own curriculum structure and its own scene, and claiming it from here would hide the gap.",
+  "THE AORTIC VALVE CUSPS AND THE CORONARY OSTIA THEMSELVES ARE NOT DRAWN. Both arteries begin inside the ascending aorta, and their first stations are placed inside the aortic root so that no cut end shows on its surface; but the sinuses of Valsalva, the cusps, and the two ostia in them are internal to a vessel this scene renders as an opaque tube. That belongs to a cross-sectional scene of the aortic root.",
+  "NO CROSS-SECTION VIEW. The curriculum declares vasculature and location for this structure and both are present. A transverse cut at the level of the coronary sulcus would show the vessels in their grooves in section and would be a good addition; it is not part of the declared contract and was not authored rather than authored badly."
+ ]
+}

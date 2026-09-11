@@ -1,0 +1,197 @@
+{
+  "measured": 11,
+  "scenesSkippedForMissingMeshes": 0,
+  "views": 94,
+  "toolErrors": 0,
+  "framingFailures": 11,
+  "sceneDefects": 0,
+  "engineDefectsNotThisItem": 10,
+  "failures": [
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 2,
+      "title": "One joint, two bones",
+      "why": [
+        "clipped at rest"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 3,
+      "title": "Soft centre, tough ring",
+      "why": [
+        "clipped at rest",
+        "fillH 349.8% — subject does not fit",
+        "fillW 268.8% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 5,
+      "title": "The nerve next door",
+      "why": [
+        "clipped at rest",
+        "fillH 4283.8% — subject does not fit",
+        "fillW 9225.5% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 7,
+      "title": "Take the discs away",
+      "why": [
+        "clipped at rest",
+        "fillH 2404.1% — subject does not fit",
+        "fillW 3138.9% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__vertebral-column",
+      "view": 6,
+      "title": "Take the discs away",
+      "why": [
+        "clipped at rest",
+        "fillH 3797.1% — subject does not fit",
+        "fillW 1019.1% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "gross__forearm-hand__carpal-tunnel",
+      "view": 6,
+      "title": "Nine tendons",
+      "why": [
+        "clipped at rest"
+      ]
+    },
+    {
+      "scene": "gross__heart-pericardium__heart",
+      "view": 1,
+      "title": "See it in the body",
+      "why": [
+        "clipped at rest",
+        "fillH 500.5% — subject does not fit",
+        "fillW 211.1% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "gross__kidney-posterior-abdominal-wall__kidney",
+      "view": 6,
+      "title": "Reading the clinic off the anatomy",
+      "why": [
+        "clipped at rest",
+        "fillH 1651.2% — subject does not fit",
+        "fillW 1459.2% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+      "view": 3,
+      "title": "Frontal lobe",
+      "why": [
+        "clipped at rest",
+        "fillH 129.1% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+      "view": 4,
+      "title": "Parietal lobe",
+      "why": [
+        "clipped at rest",
+        "fillH 172.7% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+      "view": 6,
+      "title": "Occipital lobe",
+      "why": [
+        "clipped at rest",
+        "fillH 431.8% — subject does not fit"
+      ]
+    }
+  ],
+  "sceneDefectViews": [],
+  "engineDefectViews": [
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 3,
+      "title": "Soft centre, tough ring",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 5,
+      "title": "The nerve next door",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 7,
+      "title": "Take the discs away",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__vertebral-column",
+      "view": 6,
+      "title": "Take the discs away",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "gross__forearm-hand__carpal-tunnel",
+      "view": 6,
+      "title": "Nine tendons",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "gross__heart-pericardium__heart",
+      "view": 1,
+      "title": "See it in the body",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "gross__kidney-posterior-abdominal-wall__kidney",
+      "view": 3,
+      "title": "Coverings, then cortex to pelvis",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+      "view": 3,
+      "title": "Frontal lobe",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+      "view": 4,
+      "title": "Parietal lobe",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+      "view": 6,
+      "title": "Occipital lobe",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    }
+  ]
+}

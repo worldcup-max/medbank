@@ -55,12 +55,12 @@ and a structure is covered when a scene exists for it carrying a view of each de
 | Thoracic Wall & Diaphragm | Diaphragm | location, mechanism, associated_organs | 9 views | ready | — |
 | Thoracic Wall & Diaphragm | Intercostal neurovascular bundle | cross_section, vasculature | 7 views | candidate | — |
 | Thoracic Wall & Diaphragm | Pleura & pleural cavity | cross_section, mechanism | 7 views | planned | — |
-| Heart & Pericardium | Heart (external) | location, associated_organs | **none** | — | all 2 |
+| Heart & Pericardium | Heart (external) | location, associated_organs | 14 views | candidate | — |
 | Heart & Pericardium | Heart chambers | cross_section, mechanism | 7 views | planned | — |
-| Heart & Pericardium | Cardiac cycle (pumping) | mechanism | **none** | — | all 1 |
-| Heart & Pericardium | Coronary arteries & cardiac veins | vasculature, location | **none** | — | all 2 |
+| Heart & Pericardium | Cardiac cycle (pumping) | mechanism | 10 views | candidate | — |
+| Heart & Pericardium | Coronary arteries & cardiac veins | vasculature, location | 12 views | candidate | — |
 | Heart & Pericardium | Conducting system | mechanism, location | 7 views | planned | — |
-| Heart & Pericardium | Heart valves | cross_section, mechanism | **none** | — | all 2 |
+| Heart & Pericardium | Heart valves | cross_section, mechanism | 9 views | candidate | — |
 | Lungs & Mediastinum | Lungs | location, cross_section, associated_organs | 7 views | ready | — |
 | Lungs & Mediastinum | Tracheobronchial tree | mechanism, location | 7 views | ready | — |
 | Lungs & Mediastinum | Mediastinum | location, associated_organs, cross_section | 8 views | ready | — |
@@ -240,9 +240,9 @@ and a structure is covered when a scene exists for it carrying a view of each de
 ## Where the gap actually is
 
 - **207** structures in the curriculum, declaring **397** view-slots between them.
-- **136** have a scene. Those scenes carry **958** authored views — an average of **7.0 per structure**.
-- **269/397** declared view-slots are covered.
-- **71** structures have no scene at all. That is the whole gap.
+- **140** have a scene. Those scenes carry **1003** authored views — an average of **7.2 per structure**.
+- **276/397** declared view-slots are covered.
+- **67** structures have no scene at all. That is the whole gap.
 
 The corpus is not thin inside the scenes it has — seven views per structure is already more than
 most atlases give a topic. It is missing whole structures. So the useful question is never "should
@@ -250,12 +250,11 @@ we add more diagrams to this scene", it is "which structures still have nothing"
 
 ### Structures with no scene
 
-**gross — 11**
+**gross — 7**
 
 - Arm (Brachium): Biceps brachii, Triceps brachii
 - Forearm & Hand: Flexor compartment of forearm, Extensor compartment of forearm
 - Thoracic Wall & Diaphragm: Ribs & sternum (thoracic cage)
-- Heart & Pericardium: Heart (external), Cardiac cycle (pumping), Coronary arteries & cardiac veins, Heart valves
 - Lungs & Mediastinum: Trachea
 - Stomach & Intestines: Gut blood supply (coeliac/SMA/IMA)
 

@@ -1,0 +1,1555 @@
+{
+ "schema": 2,
+ "id": "gross__heart-pericardium__heart-external",
+ "mode": "3d_anatomy",
+ "course": "Gross Anatomy",
+ "topic": "Heart & Pericardium",
+ "structure": "Heart (external)",
+ "covers": [
+  "Heart (external)"
+ ],
+ "learning_goal": "Place the heart in the mediastinum, and be able to say which chamber forms each surface, each border, the apex and the base — and where the three sulci run, and what the sac around it is made of.",
+ "status": "candidate",
+ "provenance": {
+  "author": "task",
+  "authored_at": "2026-09-10"
+ },
+ "provider": {
+  "primary": "procedural",
+  "fallbacks": []
+ },
+ "match": {
+  "topics": [
+   "heart",
+   "pericardium",
+   "mediastinum",
+   "thorax",
+   "cardiovascular"
+  ],
+  "terms": [
+   "heart",
+   "external heart",
+   "surfaces of the heart",
+   "borders of the heart",
+   "apex of the heart",
+   "apex beat",
+   "base of the heart",
+   "coronary sulcus",
+   "interventricular sulcus",
+   "crux of the heart",
+   "sternocostal surface",
+   "diaphragmatic surface",
+   "pericardium",
+   "pericardial cavity",
+   "auricle",
+   "cardiac silhouette",
+   "middle mediastinum"
+  ]
+ },
+ "camera": {
+  "framing": "anterior",
+  "autoRotate": 0.0,
+  "initialYaw": 0.0
+ },
+ "structures": [
+  {
+   "key": "heart",
+   "name": "Heart — external form",
+   "label": "Heart",
+   "role": "part",
+   "group": "The heart",
+   "layer": "organ",
+   "color": "#a8323c",
+   "refs": {
+    "procedural": "heart-external#heart"
+   },
+   "terms": [
+    "heart",
+    "external heart",
+    "surfaces of the heart",
+    "borders of the heart"
+   ],
+   "narration": "A cone lying on its side: the base points backwards, upwards and to the right; the apex forwards, downwards and to the left. Twelve centimetres from base to apex, eight and a half across at its widest."
+  },
+  {
+   "key": "ra",
+   "name": "Right atrium",
+   "label": "Right atrium",
+   "role": "part",
+   "group": "Chamber territories",
+   "layer": "organ",
+   "color": "#7fb2dd",
+   "refs": {
+    "procedural": "heart-external#ra"
+   },
+   "terms": [
+    "right atrium",
+    "RA",
+    "right border"
+   ],
+   "narration": "Forms the whole right border of the heart and a strip of the front. It receives the superior vena cava above and the inferior vena cava below, and its ear-like auricle reaches left across the aortic root."
+  },
+  {
+   "key": "rv",
+   "name": "Right ventricle",
+   "label": "Right ventricle",
+   "role": "part",
+   "group": "Chamber territories",
+   "layer": "organ",
+   "color": "#2f6fae",
+   "refs": {
+    "procedural": "heart-external#rv"
+   },
+   "terms": [
+    "right ventricle",
+    "RV",
+    "sternocostal surface",
+    "acute border"
+   ],
+   "narration": "Most of what faces the sternum is right ventricle, and so is the sharp inferior border. It does NOT reach the apex — it stops short of it, and that is the attribution most often got wrong."
+  },
+  {
+   "key": "la",
+   "name": "Left atrium",
+   "label": "Left atrium",
+   "role": "part",
+   "group": "Chamber territories",
+   "layer": "organ",
+   "color": "#e08a95",
+   "refs": {
+    "procedural": "heart-external#la"
+   },
+   "terms": [
+    "left atrium",
+    "LA",
+    "base of the heart"
+   ],
+   "narration": "The most posterior chamber, and therefore most of the base. Four pulmonary veins enter it from behind, and the oesophagus lies directly against it — which is why a probe in the oesophagus looks straight at the left atrium."
+  },
+  {
+   "key": "lv",
+   "name": "Left ventricle",
+   "label": "Left ventricle",
+   "role": "part",
+   "group": "Chamber territories",
+   "layer": "organ",
+   "color": "#b02a38",
+   "refs": {
+    "procedural": "heart-external#lv"
+   },
+   "terms": [
+    "left ventricle",
+    "LV",
+    "apex",
+    "left border"
+   ],
+   "narration": "Forms the left border, the apex, the left pulmonary surface and the greater part of the diaphragmatic surface. Its wall is three times the thickness of the right ventricle's, which is why it dominates the outline."
+  },
+  {
+   "key": "ra_auricle",
+   "name": "Right auricle",
+   "label": "Right auricle",
+   "role": "part",
+   "group": "Chamber territories",
+   "layer": "organ",
+   "color": "#2a6299",
+   "refs": {
+    "procedural": "heart-external#ra_auricle"
+   },
+   "terms": [
+    "right auricle",
+    "right atrial appendage"
+   ],
+   "narration": "A broad triangular ear from the front of the right atrium, overlapping the root of the aorta. Broad and blunt — the shape is how it is told from the left one."
+  },
+  {
+   "key": "la_auricle",
+   "name": "Left auricle",
+   "label": "Left auricle",
+   "role": "part",
+   "group": "Chamber territories",
+   "layer": "organ",
+   "color": "#9e2b33",
+   "refs": {
+    "procedural": "heart-external#la_auricle"
+   },
+   "terms": [
+    "left auricle",
+    "left atrial appendage"
+   ],
+   "narration": "Narrow, hooked and finger-like, curling forwards round the left side of the pulmonary trunk. It contributes to the upper part of the left border, and it is where thrombus forms in atrial fibrillation."
+  },
+  {
+   "key": "coronary_sulcus",
+   "name": "Coronary (atrioventricular) sulcus",
+   "label": "Coronary sulcus",
+   "role": "part",
+   "group": "Sulci",
+   "layer": "organ",
+   "color": "#e0c060",
+   "refs": {
+    "procedural": "heart-external#coronary_sulcus"
+   },
+   "terms": [
+    "coronary sulcus",
+    "atrioventricular groove",
+    "AV groove"
+   ],
+   "narration": "The groove that encircles the heart between atria and ventricles, marking the atrioventricular junction. It is interrupted in front, where the aorta and the pulmonary trunk leave — the only stretch of it you cannot follow on a real heart."
+  },
+  {
+   "key": "ant_iv_sulcus",
+   "name": "Anterior interventricular sulcus",
+   "label": "Anterior interventricular sulcus",
+   "role": "part",
+   "group": "Sulci",
+   "layer": "organ",
+   "color": "#e8a13c",
+   "refs": {
+    "procedural": "heart-external#ant_iv_sulcus"
+   },
+   "terms": [
+    "anterior interventricular sulcus",
+    "anterior interventricular groove"
+   ],
+   "narration": "Runs down the sternocostal surface from the coronary sulcus to the notch just to the RIGHT of the apex. It marks the front edge of the interventricular septum, so it tells you where one ventricle ends and the other begins from the outside."
+  },
+  {
+   "key": "post_iv_sulcus",
+   "name": "Posterior interventricular sulcus",
+   "label": "Posterior interventricular sulcus",
+   "role": "part",
+   "group": "Sulci",
+   "layer": "organ",
+   "color": "#d98a2a",
+   "refs": {
+    "procedural": "heart-external#post_iv_sulcus"
+   },
+   "terms": [
+    "posterior interventricular sulcus",
+    "inferior interventricular groove",
+    "crux of the heart"
+   ],
+   "narration": "The same septal edge seen on the diaphragmatic surface. Where it meets the coronary sulcus behind is the CRUX of the heart, the point where all four chambers come closest together."
+  },
+  {
+   "key": "apex",
+   "name": "Apex of the heart",
+   "label": "Apex",
+   "role": "part",
+   "group": "The heart",
+   "layer": "organ",
+   "color": "#f0d060",
+   "refs": {
+    "procedural": "heart-external#apex"
+   },
+   "terms": [
+    "apex of the heart",
+    "apex beat",
+    "fifth intercostal space",
+    "midclavicular line"
+   ],
+   "narration": "Left ventricle, and left ventricle only. It lies in the left fifth intercostal space about 8-9 cm from the median plane, and that is where the apex beat is felt."
+  },
+  {
+   "key": "base",
+   "name": "Base of the heart",
+   "label": "Base",
+   "role": "part",
+   "group": "The heart",
+   "layer": "organ",
+   "color": "#8f7fc0",
+   "refs": {
+    "procedural": "heart-external#base"
+   },
+   "terms": [
+    "base of the heart",
+    "posterior surface of the heart"
+   ],
+   "narration": "Faces backwards, upwards and slightly to the right, and is mainly left atrium. Note that the base is NOT the bottom: the heart's base is its posterior surface, opposite the apex."
+  },
+  {
+   "key": "surf_sternocostal",
+   "name": "Sternocostal (anterior) surface",
+   "label": "Sternocostal surface",
+   "role": "part",
+   "group": "Surfaces",
+   "layer": "organ",
+   "color": "#4fa3a0",
+   "refs": {
+    "procedural": "heart-external#surf_sternocostal"
+   },
+   "terms": [
+    "sternocostal surface",
+    "anterior surface of the heart"
+   ],
+   "narration": "The surface against the sternum and costal cartilages. Mainly right ventricle, with the right atrium along its right edge and a strip of left ventricle along its left."
+  },
+  {
+   "key": "surf_diaphragmatic",
+   "name": "Diaphragmatic (inferior) surface",
+   "label": "Diaphragmatic surface",
+   "role": "part",
+   "group": "Surfaces",
+   "layer": "organ",
+   "color": "#6f8f4f",
+   "refs": {
+    "procedural": "heart-external#surf_diaphragmatic"
+   },
+   "terms": [
+    "diaphragmatic surface",
+    "inferior surface of the heart"
+   ],
+   "narration": "The surface resting on the central tendon of the diaphragm. Mainly left ventricle, with the right ventricle to the right of the posterior interventricular sulcus."
+  },
+  {
+   "key": "surf_left_pulmonary",
+   "name": "Left pulmonary surface",
+   "label": "Left pulmonary surface",
+   "role": "part",
+   "group": "Surfaces",
+   "layer": "organ",
+   "color": "#8f6fa8",
+   "refs": {
+    "procedural": "heart-external#surf_left_pulmonary"
+   },
+   "terms": [
+    "left pulmonary surface",
+    "cardiac impression"
+   ],
+   "narration": "Left ventricle, facing the left lung. It is the surface that makes the cardiac impression in the left lung, and the reason that lung has a notch and one lobe fewer."
+  },
+  {
+   "key": "border_right",
+   "name": "Right border",
+   "label": "Right border",
+   "role": "part",
+   "group": "Borders",
+   "layer": "organ",
+   "color": "#3fa0d8",
+   "refs": {
+    "procedural": "heart-external#border_right"
+   },
+   "terms": [
+    "right border of the heart"
+   ],
+   "narration": "Right atrium throughout, running from the third to the sixth right costal cartilage about 1-2 cm from the median plane. Slightly convex to the right."
+  },
+  {
+   "key": "border_left",
+   "name": "Left border",
+   "label": "Left border",
+   "role": "part",
+   "group": "Borders",
+   "layer": "organ",
+   "color": "#d85c4c",
+   "refs": {
+    "procedural": "heart-external#border_left"
+   },
+   "terms": [
+    "left border of the heart"
+   ],
+   "narration": "Left ventricle, with the left auricle at its upper end. It curves from the second left costal cartilage down to the apex."
+  },
+  {
+   "key": "border_inferior",
+   "name": "Inferior (acute) border",
+   "label": "Inferior border",
+   "role": "part",
+   "group": "Borders",
+   "layer": "organ",
+   "color": "#4fc0a8",
+   "refs": {
+    "procedural": "heart-external#border_inferior"
+   },
+   "terms": [
+    "inferior border of the heart",
+    "acute border"
+   ],
+   "narration": "Right ventricle, running almost horizontally from the sixth right costal cartilage to the apex. Sharp rather than rounded, which is why it is also called the acute border."
+  },
+  {
+   "key": "border_superior",
+   "name": "Superior border",
+   "label": "Superior border",
+   "role": "part",
+   "group": "Borders",
+   "layer": "organ",
+   "color": "#c0a040",
+   "refs": {
+    "procedural": "heart-external#border_superior"
+   },
+   "terms": [
+    "superior border of the heart"
+   ],
+   "narration": "The two atria and their auricles, with the great vessels emerging between them. It slopes from the second left to the third right costal cartilage."
+  },
+  {
+   "key": "asc_aorta",
+   "name": "Ascending aorta",
+   "label": "Ascending aorta",
+   "role": "part",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#b02a2a",
+   "refs": {
+    "procedural": "heart-external#asc_aorta"
+   },
+   "terms": [
+    "ascending aorta",
+    "aortic root"
+   ],
+   "narration": "Leaves the left ventricle BEHIND and to the right of the pulmonary trunk, and ascends about 5 cm inside the pericardial sac."
+  },
+  {
+   "key": "aortic_arch",
+   "name": "Arch of the aorta",
+   "label": "Aortic arch",
+   "role": "part",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#a82626",
+   "refs": {
+    "procedural": "heart-external#aortic_arch"
+   },
+   "terms": [
+    "arch of the aorta",
+    "aortic arch",
+    "sternal angle"
+   ],
+   "narration": "Arches backwards and to the left at the level of the sternal angle, passing OVER the left main bronchus."
+  },
+  {
+   "key": "pulm_trunk",
+   "name": "Pulmonary trunk",
+   "label": "Pulmonary trunk",
+   "role": "part",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#2f5fa8",
+   "refs": {
+    "procedural": "heart-external#pulm_trunk"
+   },
+   "terms": [
+    "pulmonary trunk",
+    "pulmonary artery"
+   ],
+   "narration": "The most anterior of the great vessels: it arises in FRONT of the aorta, from the right ventricle, and crosses to the left as it climbs. The two spiral round one another, which is what the outflow tracts do in development."
+  },
+  {
+   "key": "r_pa",
+   "name": "Right pulmonary artery",
+   "label": "Right pulmonary artery",
+   "role": "part",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#2a559a",
+   "refs": {
+    "procedural": "heart-external#r_pa"
+   },
+   "terms": [
+    "right pulmonary artery"
+   ],
+   "narration": "Longer than the left, and it passes behind the ascending aorta and the superior vena cava to reach the right hilum."
+  },
+  {
+   "key": "l_pa",
+   "name": "Left pulmonary artery",
+   "label": "Left pulmonary artery",
+   "role": "part",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#2a559a",
+   "refs": {
+    "procedural": "heart-external#l_pa"
+   },
+   "terms": [
+    "left pulmonary artery"
+   ],
+   "narration": "Shorter, and tied to the underside of the aortic arch by the ligamentum arteriosum."
+  },
+  {
+   "key": "svc",
+   "name": "Superior vena cava",
+   "label": "Superior vena cava",
+   "role": "part",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#1f4272",
+   "refs": {
+    "procedural": "heart-external#svc"
+   },
+   "terms": [
+    "superior vena cava",
+    "SVC"
+   ],
+   "narration": "Descends on the right of the ascending aorta and enters the upper part of the right atrium. Its lower half is inside the pericardium."
+  },
+  {
+   "key": "ivc",
+   "name": "Inferior vena cava",
+   "label": "Inferior vena cava",
+   "role": "part",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#1a3a66",
+   "refs": {
+    "procedural": "heart-external#ivc"
+   },
+   "terms": [
+    "inferior vena cava",
+    "IVC"
+   ],
+   "narration": "Barely a vessel inside the chest at all: it pierces the diaphragm and is immediately in the right atrium. That is why an inferior caval injury in the chest is a surgical emergency measured in centimetres."
+  },
+  {
+   "key": "pulm_veins_r",
+   "name": "Right pulmonary veins",
+   "label": "Right pulmonary veins",
+   "role": "part",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#9e3540",
+   "refs": {
+    "procedural": "heart-external#pulm_veins_r"
+   },
+   "terms": [
+    "right pulmonary veins",
+    "pulmonary veins"
+   ],
+   "narration": "Two of the four, entering the left atrium from behind. Drawn red because they carry oxygenated blood — the pulmonary vessels are the exception to the usual colour rule."
+  },
+  {
+   "key": "pulm_veins_l",
+   "name": "Left pulmonary veins",
+   "label": "Left pulmonary veins",
+   "role": "part",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#9e3540",
+   "refs": {
+    "procedural": "heart-external#pulm_veins_l"
+   },
+   "terms": [
+    "left pulmonary veins"
+   ],
+   "narration": "The other two. Four pulmonary veins entering behind are what make the base of the heart left atrium."
+  },
+  {
+   "key": "lig_arteriosum",
+   "name": "Ligamentum arteriosum",
+   "label": "Ligamentum arteriosum",
+   "role": "part",
+   "group": "Great vessels",
+   "layer": "vessel",
+   "color": "#d8d0c0",
+   "refs": {
+    "procedural": "heart-external#lig_arteriosum"
+   },
+   "terms": [
+    "ligamentum arteriosum",
+    "ductus arteriosus"
+   ],
+   "narration": "The remnant of the ductus arteriosus, from the left pulmonary artery to the underside of the arch. The left recurrent laryngeal nerve hooks under the arch just behind it."
+  },
+  {
+   "key": "pericardium_fibrous",
+   "name": "Fibrous pericardium",
+   "label": "Fibrous pericardium",
+   "role": "part",
+   "group": "Pericardium",
+   "layer": "fascia",
+   "color": "#cfd6e0",
+   "refs": {
+    "procedural": "heart-external#pericardium_fibrous"
+   },
+   "opacity": 0.22,
+   "terms": [
+    "fibrous pericardium",
+    "pericardial sac"
+   ],
+   "narration": "A tough, inelastic bag, fused below with the central tendon of the diaphragm and above with the outer coats of the great vessels. Because it will not stretch, fluid collecting inside it compresses the heart rather than expanding the sac."
+  },
+  {
+   "key": "pericardium_parietal_serous",
+   "name": "Parietal layer of serous pericardium",
+   "label": "Parietal serous layer",
+   "role": "part",
+   "group": "Pericardium",
+   "layer": "fascia",
+   "color": "#a8c4e0",
+   "refs": {
+    "procedural": "heart-external#pericardium_parietal_serous"
+   },
+   "opacity": 0.3,
+   "terms": [
+    "parietal serous pericardium"
+   ],
+   "narration": "Lines the fibrous bag on the inside."
+  },
+  {
+   "key": "pericardium_visceral_serous",
+   "name": "Visceral layer of serous pericardium (epicardium)",
+   "label": "Visceral serous layer (epicardium)",
+   "role": "part",
+   "group": "Pericardium",
+   "layer": "fascia",
+   "color": "#c8b0d8",
+   "refs": {
+    "procedural": "heart-external#pericardium_visceral_serous"
+   },
+   "opacity": 0.45,
+   "terms": [
+    "visceral serous pericardium",
+    "epicardium"
+   ],
+   "narration": "The same membrane turned back onto the heart itself, where it is called the epicardium. The two serous layers are one continuous sheet reflected around the great vessels."
+  },
+  {
+   "key": "pericardial_cavity",
+   "name": "Pericardial cavity",
+   "label": "Pericardial cavity",
+   "role": "part",
+   "group": "Pericardium",
+   "layer": "fascia",
+   "color": "#8fb8e8",
+   "refs": {
+    "procedural": "heart-external#pericardial_cavity"
+   },
+   "opacity": 0.18,
+   "terms": [
+    "pericardial cavity",
+    "pericardial fluid"
+   ],
+   "narration": "Not a space in life — a film of fluid between the two serous layers, just enough to let the heart move inside its bag."
+  },
+  {
+   "key": "lung_r",
+   "name": "Right lung",
+   "label": "Right lung",
+   "role": "context",
+   "group": "Mediastinum",
+   "layer": "organ",
+   "color": "#d8b8b0",
+   "refs": {
+    "procedural": "heart-external#lung_r"
+   },
+   "opacity": 0.32,
+   "narration": "To the right of the heart, with a shallow cardiac impression."
+  },
+  {
+   "key": "lung_l",
+   "name": "Left lung",
+   "label": "Left lung",
+   "role": "context",
+   "group": "Mediastinum",
+   "layer": "organ",
+   "color": "#d8b8b0",
+   "refs": {
+    "procedural": "heart-external#lung_l"
+   },
+   "opacity": 0.32,
+   "narration": "To the left, and more deeply hollowed: the heart's leftward bulk gives this lung its cardiac notch."
+  },
+  {
+   "key": "diaphragm",
+   "name": "Diaphragm",
+   "label": "Diaphragm",
+   "role": "context",
+   "group": "Mediastinum",
+   "layer": "organ",
+   "color": "#c07a6a",
+   "refs": {
+    "procedural": "heart-external#diaphragm"
+   },
+   "opacity": 0.4,
+   "narration": "The floor the heart rests on. Its central tendon is fused to the fibrous pericardium."
+  },
+  {
+   "key": "sternum",
+   "name": "Sternum",
+   "label": "Sternum",
+   "role": "context",
+   "group": "Mediastinum",
+   "layer": "bone",
+   "color": "#e6ded0",
+   "refs": {
+    "procedural": "heart-external#sternum"
+   },
+   "opacity": 0.24,
+   "narration": "The heart lies behind its lower half. The apex is NOT behind the sternum — it is a hand's breadth to the left of it."
+  },
+  {
+   "key": "trachea_bronchi",
+   "name": "Trachea and main bronchi",
+   "label": "Trachea and main bronchi",
+   "role": "context",
+   "group": "Mediastinum",
+   "layer": "organ",
+   "color": "#d8ccb8",
+   "refs": {
+    "procedural": "heart-external#trachea_bronchi"
+   },
+   "opacity": 0.55,
+   "narration": "Divides at the level of the sternal angle, just above and behind the heart. The aortic arch crosses over the left main bronchus."
+  },
+  {
+   "key": "oesophagus",
+   "name": "Oesophagus",
+   "label": "Oesophagus",
+   "role": "context",
+   "group": "Mediastinum",
+   "layer": "organ",
+   "color": "#c0a890",
+   "refs": {
+    "procedural": "heart-external#oesophagus"
+   },
+   "opacity": 0.5,
+   "narration": "Runs down immediately behind the left atrium."
+  },
+  {
+   "key": "desc_aorta",
+   "name": "Descending thoracic aorta",
+   "label": "Descending thoracic aorta",
+   "role": "context",
+   "group": "Mediastinum",
+   "layer": "vessel",
+   "color": "#8f2020",
+   "refs": {
+    "procedural": "heart-external#desc_aorta"
+   },
+   "opacity": 0.6,
+   "narration": "Continues the arch downwards behind the heart and to the left of the oesophagus."
+  },
+  {
+   "key": "phrenic_r",
+   "name": "Right phrenic nerve",
+   "label": "Right phrenic nerve",
+   "role": "part",
+   "group": "Mediastinum",
+   "layer": "fascia",
+   "color": "#f0e08a",
+   "refs": {
+    "procedural": "heart-external#phrenic_r"
+   },
+   "terms": [
+    "right phrenic nerve",
+    "phrenic nerve",
+    "referred pain"
+   ],
+   "narration": "Descends ON the fibrous pericardium to the diaphragm. It carries the sac's sensation, which is why pericardial pain is felt in the shoulder tip."
+  },
+  {
+   "key": "phrenic_l",
+   "name": "Left phrenic nerve",
+   "label": "Left phrenic nerve",
+   "role": "part",
+   "group": "Mediastinum",
+   "layer": "fascia",
+   "color": "#f0e08a",
+   "refs": {
+    "procedural": "heart-external#phrenic_l"
+   },
+   "terms": [
+    "left phrenic nerve"
+   ],
+   "narration": "The same on the left, and the longer course, because the heart bulges that way."
+  }
+ ],
+ "views": [
+  {
+   "mode": "location",
+   "beat": 1,
+   "title": "Where the heart actually sits",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "ra"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "rv"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "la"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "lv"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "coronary_sulcus"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "ant_iv_sulcus"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "post_iv_sulcus"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "surf_sternocostal"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "surf_diaphragmatic"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "surf_left_pulmonary"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "border_right"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "border_left"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "border_inferior"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "border_superior"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "apex"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "base"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "pericardium_fibrous"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "pericardium_parietal_serous"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "pericardium_visceral_serous"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "pericardial_cavity"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "asc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "aortic_arch"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_trunk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "r_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "svc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ivc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lig_arteriosum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lung_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lung_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "diaphragm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sternum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "trachea_bronchi"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oesophagus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "desc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic_l"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "The heart"
+    }
+   ],
+   "narration": "In the middle mediastinum, behind the lower half of the sternum, between the two lungs and resting on the diaphragm. It reaches about 2 cm to the right of the median plane and about 9 cm to the left, so the greater part of it is on the left — and the apex sits in the left fifth intercostal space, a hand's breadth from the midline, where you feel the apex beat."
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 2,
+   "title": "The neighbours that shape it",
+   "ops": [
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lung_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lung_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "diaphragm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sternum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "trachea_bronchi"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oesophagus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "desc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic_l"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "Mediastinum"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "la",
+     "to": "oesophagus",
+     "kind": "contact"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    }
+   ],
+   "narration": "Lungs on both sides, more deeply hollowed on the left. Diaphragm below, fused to the pericardium. Trachea dividing just above. And directly behind the left atrium, the oesophagus — which is why a probe swallowed into the oesophagus looks straight at the left atrium, and why an enlarged one can be seen to push the oesophagus back."
+  },
+  {
+   "mode": "location",
+   "beat": 3,
+   "title": "Which chamber you are looking at, from the front",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "lung_r"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "lung_l"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "diaphragm"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "sternum"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "trachea_bronchi"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "oesophagus"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "desc_aorta"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "phrenic_r"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "phrenic_l"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "coronary_sulcus"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "ant_iv_sulcus"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "post_iv_sulcus"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "surf_sternocostal"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "surf_diaphragmatic"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "surf_left_pulmonary"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "border_right"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "border_left"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "border_inferior"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "border_superior"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "apex"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "base"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "pericardium_fibrous"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "pericardium_parietal_serous"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "pericardium_visceral_serous"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "pericardial_cavity"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "rv"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lv"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "rv"
+    }
+   ],
+   "narration": "Almost everything facing you is RIGHT ventricle. The right atrium runs down the right edge, and only a strip of left ventricle shows along the left. The chamber you can see most of from the front is not the one that does most of the work."
+  },
+  {
+   "mode": "location",
+   "beat": 4,
+   "title": "From behind: the base is the left atrium",
+   "ops": [
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "rv"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lv"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "la",
+      "ra"
+     ]
+    }
+   ],
+   "narration": "Turn it round and the picture inverts: the back of the heart is almost all LEFT atrium, with the four pulmonary veins entering it. The base faces backwards, upwards and a little to the right — it is the posterior surface, not the bottom, and calling it the bottom is the commonest slip on this structure."
+  },
+  {
+   "mode": "location",
+   "beat": 5,
+   "title": "The sternocostal surface",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "ra"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "rv"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "la"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "lv"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surf_sternocostal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surf_diaphragmatic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surf_left_pulmonary"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "surf_sternocostal"
+    }
+   ],
+   "narration": "The surface against the sternum and the costal cartilages. Mainly right ventricle, with the right atrium along its right margin and a narrow band of left ventricle on the left. This is the surface a blow to the chest transmits to, and the chamber it reaches first is the right ventricle."
+  },
+  {
+   "mode": "location",
+   "beat": 6,
+   "title": "The diaphragmatic surface",
+   "ops": [
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "inferior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "surf_diaphragmatic"
+    }
+   ],
+   "narration": "Looking up from below at the surface that rests on the central tendon of the diaphragm. Mainly LEFT ventricle, with the right ventricle taking the strip to the right of the posterior interventricular sulcus."
+  },
+  {
+   "mode": "location",
+   "beat": 7,
+   "title": "The left pulmonary surface",
+   "ops": [
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "surf_left_pulmonary"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lung_l"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "surf_left_pulmonary",
+     "to": "lung_l",
+     "kind": "contact"
+    }
+   ],
+   "narration": "Left ventricle, facing the left lung. This bulge is what presses the cardiac impression and the cardiac notch into the left lung, and it is the reason the left lung has two lobes where the right has three."
+  },
+  {
+   "mode": "location",
+   "beat": 8,
+   "title": "The four borders — the outline on a chest film",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "surf_sternocostal"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "surf_diaphragmatic"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "surf_left_pulmonary"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "lung_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "border_right"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "border_left"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "border_inferior"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "border_superior"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "border_right",
+      "border_left",
+      "border_inferior",
+      "border_superior"
+     ]
+    }
+   ],
+   "narration": "Right border: right atrium, from the third to the sixth right costal cartilage. Left border: left ventricle, with the left auricle at its top. Inferior border: right ventricle, running almost horizontally to the apex, sharp enough to be called the acute border. Superior border: the two atria and the great vessels between them. These four lines are the cardiac silhouette a chest radiograph shows you."
+  },
+  {
+   "mode": "location",
+   "beat": 9,
+   "title": "The sulci: reading the septa from the outside",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "border_right"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "border_left"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "border_inferior"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "border_superior"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "coronary_sulcus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ant_iv_sulcus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "post_iv_sulcus"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "ant_iv_sulcus"
+    }
+   ],
+   "narration": "The coronary sulcus rings the heart between atria and ventricles, interrupted in front where the aorta and pulmonary trunk leave. The anterior interventricular sulcus runs from it down to a notch just to the RIGHT of the apex — and because it lies over the front edge of the septum, it tells you from the outside exactly where one ventricle stops and the other starts."
+  },
+  {
+   "mode": "location",
+   "beat": 10,
+   "title": "Behind: the posterior sulcus and the crux",
+   "ops": [
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "post_iv_sulcus"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "post_iv_sulcus",
+     "to": "coronary_sulcus",
+     "kind": "junction"
+    }
+   ],
+   "narration": "The same septal edge on the diaphragmatic surface. Where it meets the coronary sulcus is the CRUX of the heart — the one point where all four chambers come closest together, and the landmark every posterior descending artery is described against."
+  },
+  {
+   "mode": "location",
+   "beat": 11,
+   "title": "Apex and base — the two ends",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "coronary_sulcus"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "ant_iv_sulcus"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "post_iv_sulcus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "apex"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "base"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "apex",
+      "base"
+     ]
+    }
+   ],
+   "narration": "The apex is left ventricle and nothing else: the right ventricle stops short of it. It points forwards, downwards and to the left, into the left fifth intercostal space at the midclavicular line. The base is at the opposite end, facing backwards and upwards, and is mainly left atrium."
+  },
+  {
+   "mode": "vasculature",
+   "beat": 12,
+   "title": "The great vessels at the base",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "apex"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "base"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "asc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "aortic_arch"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_trunk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "r_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "svc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ivc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lig_arteriosum"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "Great vessels"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "lig_arteriosum",
+     "to": "aortic_arch",
+     "kind": "attachment"
+    }
+   ],
+   "narration": "The pulmonary trunk arises in FRONT of the aorta and crosses to the left; the aorta arises behind and to its right, ascends, and arches back over the left main bronchus. The two spiral round each other. Superior vena cava enters the right atrium from above; the inferior vena cava has barely a centimetre inside the chest before it does the same. Four pulmonary veins enter the left atrium behind. The ligamentum arteriosum ties the left pulmonary artery to the underside of the arch."
+  },
+  {
+   "mode": "cross_section",
+   "beat": 13,
+   "title": "Inside the sac: a median section",
+   "ops": [
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardium_fibrous"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardium_parietal_serous"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardium_visceral_serous"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardial_cavity"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "x",
+     "offset": 0.0,
+     "animate": true
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "Pericardium"
+    }
+   ],
+   "narration": "Cut in the median plane. Outside is the fibrous pericardium, a bag that will not stretch. Inside it the serous pericardium is ONE continuous membrane folded on itself: the parietal layer lining the bag, the visceral layer — the epicardium — clothing the heart, and between them the pericardial cavity, which in life is only a film of fluid. Because the outer bag is inelastic, blood or fluid collecting in that cavity squeezes the heart instead of stretching the sac."
+  },
+  {
+   "mode": "location",
+   "beat": 14,
+   "title": "Take the sac off",
+   "ops": [
+    {
+     "op": "PEEL_LAYER",
+     "layer": "fascia"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "The heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "Great vessels"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "With the pericardium and the phrenic nerves removed you are back to the heart itself, which is what a surgeon sees on opening the sac: right ventricle facing you, the right auricle over the aortic root, the pulmonary trunk crossing to the left, and the apex pointing down and left."
+  }
+ ],
+ "gaps": [
+  "PROCEDURAL BY NECESSITY, AND THE CATALOG WAS CHECKED RATHER THAN TRUSTED. available-meshes.json holds 934 mesh ids, 924 named; exactly ONE name-matches this structure - 'wall of heart' (FMA7274). There is no mesh of the pericardium, an atrium, a ventricle, an auricle, a sulcus, the apex, or any named surface or border, at any granularity. The queue item's candidate_meshes:9 is a looser name match than the structure's own parts. Since every fact this scene teaches is an attribution of one continuous outer form to its parts, and nobody has segmented that one mesh into surfaces, a scan mesh cannot carry any of it - so this is 'no mesh means build it', not 'no mesh means fake it'. A student who needs the exact cadaveric contour should be shown the bodyparts3d scene gross__heart-pericardium__heart, which loads 'wall of heart' as real scan data.",
+  "THE ATRIAL MASS IS MODELLED AS A COAXIAL CONTINUATION OF THE VENTRICULAR SPINDLE, so the atria sit somewhat more superiorly and less dorsally than a real heart's, where they are offset backwards from the ventricular long axis. Consequence: the great-vessel roots are placed on THIS model's surface (by the world direction each part of it faces) rather than at their measured thoracic positions, and the coronary sulcus is less visible on the anterior aspect than it is on a real heart. The chamber, surface, border, apex and base attributions - which is what the scene teaches - are unaffected and are measured, not asserted; see the model's acceptance report.",
+  "NO CORONARY VESSELS. The coronary arteries and cardiac veins are the next queue item (gross__heart-pericardium__coronary-arteries-cardiac-veins) and are deliberately left to it, so the two scenes do not each build half of them. This scene shows the sulci they run in and names them in the narration; it does not draw them.",
+  "NO PERICARDIAL SINUSES. The transverse and oblique sinuses need the serous reflections around the great vessels, which this version does not build. Both are examined; they are named in the narration of the median-section beat and should be added before this scene is promoted past candidate.",
+  "AURICLE SHAPE IS SCHEMATIC. The right auricle is broad and the left narrow and hooked - which is the distinction that is examined - but neither carries its crenated margin.",
+  "THE TEXTBOOK 'ABOUT TWO THIRDS OF THE HEART LIES TO THE LEFT OF THE MEDIAN PLANE' IS NOT CLAIMED HERE. The model measures the fraction of its own volume left of the median plane at 0.88, and its transverse extent at 2.0 cm right against 8.7 cm left, which is 0.81. Neither is two thirds, and the textbook statement gives no measurement basis, so the first beat states the two extents instead. If a reviewer knows the intended basis, that is a real finding and the constraint should become one of the solves.",
+  "t IS NOT A PARAMETER OF THIS FORM. The adult heart's exterior is not a process, so build(t) returns the same geometry at every t and this scene carries no SET_STAGE. It is the first t-invariant procedural model in the corpus; a reviewer should decide whether that is acceptable rather than inherit it."
+ ]
+}

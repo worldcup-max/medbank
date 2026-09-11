@@ -88,6 +88,28 @@ every seam where one position carries two different normals, and the torn interi
 > (anything from a three primitive such as `SphereGeometry`) must be de-indexed first, or inflating
 > it walks the vertex list and produces triangle soup.
 
+### 2.4b Winding, again — the place the emitter was not used
+
+Found 2026-09-10, and it had been there since the file was written. `sweptShell` closes a SOLID tube
+(one with no inner surface — every `tubeAlong`, so every vein, artery, rod and tick in the corpus)
+with a flat end cap emitted through `emitter().tri`, which pushes the three vertices in the order it
+is handed and corrects nothing. Both branches had been written by reasoning about which way the ring
+runs, and both were backwards: measured on a plain `tubeAlong`, **24 of 24** cap triangles were wound
+against their own supplied normal.
+
+It never showed. The caps sit inside the hull count, the materials are `DoubleSide`, and the shading
+was right because the normals were supplied — which is §2.1's description of itself, arriving again in
+the one code path that had bypassed the fix. It surfaced only when a ray-cast probe asked what surface
+faces the camera FIRST, and the caps of every vein and dorsal aorta answered "the far one".
+
+> **RULE.** `tri` is the raw primitive and corrects nothing. Any triangle that is not part of a ring
+> quad — a cap, a taper, a sheet, a dome pole — goes through `emitter().triN(p1, p2, p3, n)`, which
+> decides the vertex order from the geometry rather than from a comment. The corollary is the one
+> §2.1 already implies and this proves: **a winding convention that has to be reasoned about at the
+> call site will be got wrong at some call site.** The check is a ray-cast, and it is cheap: cast a
+> grid of rays from the camera and count how many first hits face AWAY from it. On closed solids the
+> answer is zero, and on this model it now is, from five cameras.
+
 ### 2.5 A fifth thing, which is a decision rather than a bug
 
 Depth-rank `polygonOffset` was introduced for neurulation, where sheets genuinely share surfaces and
@@ -147,6 +169,76 @@ from the camera entirely. Resolve the angle per row from the direction you actua
 **A MEMBRANE TAPERS.** Any suspending sheet — mesocardium, mesentery, meningeal fold — must narrow to
 nothing where it meets the structure it suspends. Drawn with a constant free edge it reads as a slab
 of card standing behind the subject, which is exactly what the first dorsal mesocardium looked like.
+
+**A SIGN TEST ON A SPATIAL RELATION IS NOT A TEST.** Added 2026-09-10 after three consecutive review
+rounds each cost something to the same shape of mistake. Round 2 found a test whose implementation did
+not match its own `must` string. Round 2 found a second that asserted a defect and so locked it in.
+Round 3 found a test that was CORRECT, asserted the right relation, and was satisfied by a value so
+small the claim was invisible — `ventricle centroid x > 0` passing at x = +0.070 on a chamber 1.329
+wide, five per cent of its own width. Its neighbour was the same: `atrium y - ventricle y > 0` passing
+at +0.351 while 97.8% of the atrium's vertical extent still overlapped the ventricle's.
+
+> **RULE.** Every acceptance assertion of the form "A is left of / above / behind B" carries a
+> MAGNITUDE FLOOR expressed as a fraction of the relevant extent of the structures compared. As a
+> starting figure, a separation of at least 35% of the mean of the two extents along that axis. Write
+> them as `>= 0.35 * meanExtent`, never `> 0`, and read any existing sign test as UNPROVEN until it
+> carries a floor. And where the claim is about a structure's EDGES — "straddles the median plane",
+> "reaches as far as" — measure the BOUNDING BOX, not the centroid: a centroid near zero can be had by
+> a chamber lying entirely on one side of a curve that crosses.
+>
+> The deeper rule, which is what the three rounds actually demonstrate: **A TEST THAT CAN BE SATISFIED
+> WITHOUT THE PICTURE CHANGING IS NOT MEASURING WHAT THE NARRATION CLAIMS.** The narration is about
+> what a student can SEE. The tests should be too.
+
+**DECLARE THE AXES AND PROVE THEM.** Proposed by review round 1 and unwritten until now. A model states
+its axis convention in a machine-readable field and the check asserts it against the corpus: RIGHT is
+-x, LEFT is +x, CRANIAL +y, VENTRAL +z, measured from BodyParts3D right/left pairs rather than from a
+comment. The cardiac-looping model's comment had the sign backwards and nothing noticed, because a
+comment is not checked by anything.
+
+**A SPATIAL CLAIM IN NARRATION IS A TESTABLE ASSERTION.** Also round 1. When a view says one part ends
+up behind, above, right of or inside another, that is one line of arithmetic against the two bounding
+boxes at that view's `t` — and it must be evaluated at the `t` THE VIEW IS DRAWN AT, not only at the
+end. "The inflow end comes to lie behind and above the ventricles" is a check, not a caption.
+
+**A MIRRORED VARIANT MUST BE PROVED TO BE A REFLECTION.** Round 2. Chirality is implied by none of the
+checks here: triangle count, outward-normal fraction, negated mean x and untouched winding ALL pass on
+a 180-degree rotation, and all four were cited as proof of an "L-loop" that was a rotation. The test is
+one line — the signed volume of four named landmark centroids must be NEGATED, not preserved — and it
+belongs in the model's `acceptance()`, asserted on the MIRROR build, which is the build `acceptance()`
+otherwise never touches. Note the corollary, because §2.1 above actively pushes an author the wrong
+way: §2.1 makes reversed winding the cardinal sin, so a mirror written to leave winding untouched
+feels like the careful choice. It is the opposite. **A genuine enantiomer MUST reverse winding.** If a
+mirror needed no rendering change at all, it is not a mirror.
+
+**EVERY ACCEPTANCE TEST NEEDS A NEGATIVE CASE.** Round 2. A test that grades its own homework in the
+wrong units is worse than no test: it launders a defect into a proof. Every id in an ACCEPTANCE block
+gets a deliberately wrong input it must reject, the way `validate-scenes` negative-tests its checks.
+
+**A PROBE WITH A DEGENERATE CASE MUST REPORT THE DEGENERACY.** Round 3. The mirror chirality probe
+divided by a signed volume that is exactly zero at `t = 0`, where a straight tube has no handedness to
+reverse, and reported CANNOT MEASURE as MEASURED AND WRONG — firing a warning on every `t = 0` mirror
+build. A warning that is a known false alarm trains every future run to ignore the channel it prints
+on, and it did: it cost an unrelated item its console-clean check.
+
+**A TUBE THAT ENDS IN MID-AIR NEEDS A ROUNDED END, NOT AN ANNULUS.** Added 2026-09-10 by the round-3
+build run. `sweptShell` closes every span with an annular end cap, which is right at an internal waist
+where the neighbouring segment overlaps it and wrong at a TERMINAL end, where the annulus reads as an
+open pipe — a wall ring with a lit inner surface, the one thing this document says must never be
+visible. Found at the caudal end of the sinus venosus; the same defect at the cranial end of the same
+tube had been found a round earlier and "fixed" by re-pointing the camera away from it, which closed no
+hole and only moved it to the next view. Use `VizKit.domeCap`. And note the general form, which is
+worth more than the fix: **a camera is not a fix.** If the answer to a visible defect is a different
+viewpoint, the defect is still there, in the unlisted place.
+
+**A REFERENCE MUST SURVIVE THE VIEW THAT USES IT.** Round 3. The median-plane reference was added so
+that "mirror image about the median plane" would be a visible claim rather than a caption, and the only
+view that HIGHLIGHTs it showed 125 of its 3,525 pixels — 96.5% occluded, because the rod lay at z = 0,
+behind a loop whose ventral surface reaches z = +1.68. Nothing measured it. Render the view with and
+without, difference the frames, and count. Note also what the obvious fix would have been and why it is
+wrong: a translucent quad IN the median plane is seen exactly edge-on by an anterior camera, because
+the median plane contains that camera's view direction. What a plane gives a camera looking along it is
+its TRACE, and the fault was never that the reference was a line — it was that the line was buried.
 
 ## 4 · The diagnostic ladder
 
@@ -248,6 +340,7 @@ point of the rule you derived, the rule is measuring something other than what i
 | 2026-09-09 | neurulation, procedural, v1–v2 | shipped; layered sheets in contact still unresolved |
 | 2026-09-10 | cardiac looping, procedural, v1 | six passes; four machinery bugs found and fixed in `render-kit.js` |
 | 2026-09-10 | mesh resolution, whole corpus | flat 3,000 cap replaced by a per-scene budget; 254 of 494 meshes now at full scan resolution; muscle fibre direction recovered |
+| 2026-09-10 | cardiac looping, round-3 rework | curvature model enriched (per-bend plane twist, a fifth bend); every spatial test given a magnitude floor; `triN` and `domeCap` added to the kit |
 
 Every structure built after this date uses `render-kit.js`. A structure that reimplements winding,
 normals, silhouettes or colour conversion locally is a bug, not a style choice.

@@ -1,0 +1,2591 @@
+{
+ "acceptance": {
+  "measured": {
+   "targets": {
+    "plac": 0.4000005642628037,
+    "lung": 0.07999912886641951,
+    "up": 0.22000024923365694,
+    "low": 0.3000000576371197,
+    "fo": 0.2600008058850608,
+    "predicted_rv": 0.6600000652485195,
+    "predicted_da": 0.5800009363820996,
+    "want": {
+     "plac": 0.4,
+     "lung": 0.08,
+     "up": 0.22,
+     "low": 0.3,
+     "fo": 0.26,
+     "pressureRatio": 4.3
+    },
+    "predictions_wanted": {
+     "rv": 0.66,
+     "lv": 0.34,
+     "da": 0.58
+    }
+   },
+   "saturations_fetal": {
+    "uv": 0.8,
+    "dv": 0.8,
+    "hepatic": 0.7783012312288436,
+    "ivc": 0.7,
+    "svc": 0.3799999999999999,
+    "ra": 0.6234782466368465,
+    "la": 0.6734121377419597,
+    "rv": 0.5933332230379985,
+    "lv": 0.6734121377419597,
+    "pv": 0.5870003766164812,
+    "ascending_aorta": 0.6734121377419597,
+    "descending_aorta": 0.6070609888148377,
+    "umbilical_artery": 0.6070609888148377
+   },
+   "saturations_neonate": {
+    "aoa": 0.9799999999974252,
+    "aod": 0.9799999999974252,
+    "svc": 0.7108417857807079,
+    "pv": 0.9799999999974252
+   },
+   "order_gap": 0.06635114892712202,
+   "order_floor": 0.04823475279629058,
+   "duct_fetal": 0.5800009363820996,
+   "duct_pda_neonate": -0.2535427187618434,
+   "duct_pfc_neonate": 0.5570882482627761,
+   "reversal_ratio": -0.43714191281031256,
+   "flows_fetal": {
+    "rv": 0.6600000652485195,
+    "lv": 0.3399999347514804,
+    "fo": 0.2600008058850608,
+    "lung": 0.07999912886641951,
+    "plac": 0.4000005642628037,
+    "up": 0.22000024923365694,
+    "low": 0.3000000576371197,
+    "isth": 0.11999968551782313
+   },
+   "flows_neonate": {
+    "rv": 0.4999999999999998,
+    "lv": 0.5000000000000002,
+    "fo": 0,
+    "lung": 0.5000000000000001,
+    "plac": 1.68185322112747e-30
+   },
+   "spatial": {
+    "chamber_separation": 2,
+    "chamber_floor": 0.518,
+    "duct_below_subclavian": 1.0199999999999996,
+    "duct_floor": 0.4549999999999999,
+    "uv_ventral_to_ivc": 1.8074285714285714,
+    "depth_floor": 0.4235
+   },
+   "flap": {
+    "open_fetal": 1,
+    "open_neonate": 0
+   },
+   "remnant_calibre": {
+    "keys": [
+     "ductus_arteriosus",
+     "ductus_venosus",
+     "umbilical_vein",
+     "umbilical_arteries"
+    ],
+    "fetal": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "neonate": [
+     0.3058992097619895,
+     0.3000071554647284,
+     0.3048273696049809,
+     0.3048273696049809
+    ]
+   },
+   "extraction": 0.07232933126892213,
+   "upper_share": 0.8924559690905849,
+   "residual": 7.771561172376096e-16,
+   "newborn_preductal_saturation": {
+    "at_1_min": 0.5433432051879635,
+    "at_2_min": 0.8503084909455693,
+    "at_5_min": 0.9622364002406095,
+    "at_10_min": 0.9755841983509278,
+    "published_targets": {
+     "at_1_min": "0.60-0.65",
+     "at_5_min": "0.80-0.85",
+     "at_10_min": "0.85-0.95"
+    }
+   },
+   "clock": {
+    "five_minutes": 0.1627380300203169,
+    "one_hour": 0.3733735056557543,
+    "twelve_hours": 0.6013946236867002,
+    "five_days": 0.8067127139541446,
+    "six_weeks": 1
+   }
+  },
+  "pass": {
+   "A": true,
+   "B": true,
+   "C": true,
+   "D": true,
+   "E": true,
+   "F": true,
+   "G": true,
+   "H": true,
+   "I": true,
+   "J": true,
+   "K": true,
+   "L": true,
+   "M": true,
+   "N": true,
+   "O": true,
+   "P": true
+  },
+  "allPass": true,
+  "spec": {
+   "axes": "+x = fetus LEFT, -x = RIGHT, +y = CRANIAL, +z = VENTRAL",
+   "A": "at t=0 the network reproduces the five calibrated fetal flows - placenta 40%, lungs 8%, upper body 22%, lower body 30%, foramen ovale 26% of combined output - AND PREDICTS the two that were never calibrated: a right ventricle doing 66% of the work and a duct carrying 58%",
+   "B": "at t=0 the umbilical vein is at 0.80 saturation — \"about eighty percent, the highest anywhere in the fetus\"",
+   "C": "at t=0 the inferior caval stream reaches the right atrium at 0.70 — \"at about seventy percent\". This is the SOLVED constraint: whole-body oxygen extraction is bisected until it holds",
+   "D": "at t=0 the ascending aorta is better oxygenated than the descending aorta by at least 0.25 of the whole oxygen cascade (umbilical vein minus umbilical artery) - the relation the entire scene turns on",
+   "E": "at t=0 the duct carries blood RIGHT TO LEFT, at least 0.35 of right ventricular output",
+   "F": "with the duct held open, at t=1 it carries blood LEFT TO RIGHT — the sign NEGATED, not merely small — at least 0.15 of combined output. A duct that simply shrank would pass a sign test and fail this one",
+   "G": "at t=1 the normal circulation is in series: foramen and duct both shut, no placental flow, pulmonary flow at least 0.45 of combined output",
+   "H": "the built geometry puts the right atrium on -x and the left on +x, separated by at least 0.35 of their mean width — the axis convention asserted rather than commented",
+   "I": "the duct joins the descending aorta CAUDAL to the origin of the left subclavian — \"beyond the head and arm vessels\" — by at least 0.35 of the mean vertical extent of the arch and its branches",
+   "J": "the umbilical vein runs VENTRAL to the inferior vena cava — \"up in the free edge of the falciform ligament\" — by at least 0.35 of their mean depth",
+   "K": "two umbilical arteries and one umbilical vein — \"two arteries one vein\"",
+   "L": "in persistent fetal circulation at t=1 the shunts still run right to left and the systemic arterial saturation stays low — \"the newborn stays blue\"",
+   "M": "the flap angle is driven by the solved interatrial gradient: fully open at t=0, flat on the septum once left atrial pressure has overtaken right",
+   "N": "conservation holds: every node balances to better than 1e-6 at every t measured",
+   "P": "at t=1 the three ducts and the umbilical vein have lost at least 60% of their fetal calibre - the ligamentum arteriosum, venosum and teres are cords and not vessels - while at t=0 all four are at full calibre",
+   "O": "the descending aorta lands between 0.55 and 0.62 - PREDICTED, never calibrated to, and the check that says the two mixing constraints did not simply buy the answer"
+  }
+ },
+ "negatives": {
+  "cases": {
+   "A": {
+    "rejected": true
+   },
+   "B": {
+    "rejected": true
+   },
+   "C": {
+    "rejected": true
+   },
+   "D": {
+    "rejected": true
+   },
+   "E": {
+    "rejected": true
+   },
+   "F": {
+    "rejected": true
+   },
+   "G": {
+    "rejected": true
+   },
+   "H": {
+    "rejected": true
+   },
+   "I": {
+    "rejected": true
+   },
+   "J": {
+    "rejected": true
+   },
+   "K": {
+    "rejected": true
+   },
+   "L": {
+    "rejected": true
+   },
+   "M": {
+    "rejected": true
+   },
+   "N": {
+    "rejected": true
+   },
+   "O": {
+    "rejected": true
+   },
+   "P": {
+    "rejected": true
+   }
+  },
+  "allGood": true,
+  "missingNegatives": []
+ },
+ "keysFull": {
+  "placenta": 1680,
+  "liver": 1292,
+  "lungs": 2128,
+  "right_atrium": 952,
+  "left_atrium": 952,
+  "right_ventricle": 952,
+  "left_ventricle": 952,
+  "umbilical_vein": 252,
+  "ductus_venosus": 108,
+  "portal_sinus": 108,
+  "hepatic_veins": 216,
+  "ivc": 180,
+  "svc": 144,
+  "pulmonary_trunk": 108,
+  "pulmonary_arteries": 216,
+  "pulmonary_veins": 216,
+  "ductus_arteriosus": 108,
+  "ascending_aorta": 108,
+  "aortic_arch": 144,
+  "head_neck_vessels": 918,
+  "descending_aorta": 144,
+  "common_iliacs": 216,
+  "umbilical_arteries": 720,
+  "atrial_septum": 1008,
+  "crista_dividens": 420,
+  "foramen_ovale": 660,
+  "flow": 3888,
+  "midline": 60
+ },
+ "stages": [
+  {
+   "name": "fetal",
+   "t": 0,
+   "label": "the fetal circulation, before the first breath"
+  },
+  {
+   "name": "fetal-plain",
+   "t": 0,
+   "label": "the same, in anatomical colours"
+  },
+  {
+   "name": "fetal-nomark",
+   "t": 0,
+   "label": "the same, without the flow markers"
+  },
+  {
+   "name": "t-40s",
+   "t": 0.05,
+   "label": "40 seconds — the cord is clamped, the lung is opening"
+  },
+  {
+   "name": "t-1min",
+   "t": 0.063,
+   "label": "one minute — the nadir, placenta gone and lung not yet up"
+  },
+  {
+   "name": "t-2min",
+   "t": 0.0998,
+   "label": "two minutes — the foramen is closing"
+  },
+  {
+   "name": "t-5min",
+   "t": 0.1627,
+   "label": "five minutes — the foramen is shut, the duct has reversed"
+  },
+  {
+   "name": "t-15min",
+   "t": 0.25,
+   "label": "fifteen minutes — a transient left-to-right ductal shunt"
+  },
+  {
+   "name": "t-12h",
+   "t": 0.6014,
+   "label": "twelve hours — the duct constricting"
+  },
+  {
+   "name": "t-5d",
+   "t": 0.8067,
+   "label": "five days — the ductus venosus closing"
+  },
+  {
+   "name": "neonate",
+   "t": 1,
+   "label": "six weeks — two circulations in series"
+  },
+  {
+   "name": "v-pda",
+   "t": 1,
+   "label": "persistent ductus arteriosus — the shunt reversed"
+  },
+  {
+   "name": "v-pfc",
+   "t": 1,
+   "label": "persistent fetal circulation — still right to left"
+  },
+  {
+   "name": "midline",
+   "t": 0,
+   "label": "with the median-plane trace"
+  }
+ ],
+ "normals0": [
+  {
+   "key": "placenta",
+   "verts": 5040,
+   "outward": 1,
+   "hullVerts": 5040,
+   "outwardHull": 1,
+   "tris": 1680,
+   "winding": 1,
+   "hullTris": 1680,
+   "hullWinding": 1
+  },
+  {
+   "key": "liver",
+   "verts": 3876,
+   "outward": 1,
+   "hullVerts": 3876,
+   "outwardHull": 1,
+   "tris": 1292,
+   "winding": 1,
+   "hullTris": 1292,
+   "hullWinding": 1
+  },
+  {
+   "key": "lungs",
+   "verts": 3192,
+   "outward": 1,
+   "hullVerts": 3192,
+   "outwardHull": 1,
+   "tris": 1064,
+   "winding": 1,
+   "hullTris": 1064,
+   "hullWinding": 1
+  },
+  {
+   "key": "lungs",
+   "verts": 3192,
+   "outward": 1,
+   "hullVerts": 3192,
+   "outwardHull": 1,
+   "tris": 1064,
+   "winding": 1,
+   "hullTris": 1064,
+   "hullWinding": 1
+  },
+  {
+   "key": "right_atrium",
+   "verts": 2856,
+   "outward": 1,
+   "hullVerts": 2856,
+   "outwardHull": 1,
+   "tris": 952,
+   "winding": 1,
+   "hullTris": 952,
+   "hullWinding": 1
+  },
+  {
+   "key": "left_atrium",
+   "verts": 2856,
+   "outward": 1,
+   "hullVerts": 2856,
+   "outwardHull": 1,
+   "tris": 952,
+   "winding": 1,
+   "hullTris": 952,
+   "hullWinding": 1
+  },
+  {
+   "key": "right_ventricle",
+   "verts": 2856,
+   "outward": 1,
+   "hullVerts": 2856,
+   "outwardHull": 1,
+   "tris": 952,
+   "winding": 1,
+   "hullTris": 952,
+   "hullWinding": 1
+  },
+  {
+   "key": "left_ventricle",
+   "verts": 2856,
+   "outward": 1,
+   "hullVerts": 2856,
+   "outwardHull": 1,
+   "tris": 952,
+   "winding": 1,
+   "hullTris": 952,
+   "hullWinding": 1
+  },
+  {
+   "key": "umbilical_vein",
+   "verts": 756,
+   "outward": 0.873015873015873,
+   "hullVerts": 648,
+   "outwardHull": 0.8518518518518519,
+   "tris": 252,
+   "winding": 1,
+   "hullTris": 216,
+   "hullWinding": 1
+  },
+  {
+   "key": "ductus_venosus",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "portal_sinus",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "hepatic_veins",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "hepatic_veins",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "ivc",
+   "verts": 540,
+   "outward": 1,
+   "hullVerts": 432,
+   "outwardHull": 1,
+   "tris": 180,
+   "winding": 1,
+   "hullTris": 144,
+   "hullWinding": 1
+  },
+  {
+   "key": "svc",
+   "verts": 432,
+   "outward": 1,
+   "hullVerts": 324,
+   "outwardHull": 1,
+   "tris": 144,
+   "winding": 1,
+   "hullTris": 108,
+   "hullWinding": 1
+  },
+  {
+   "key": "pulmonary_trunk",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "pulmonary_arteries",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "pulmonary_arteries",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "pulmonary_veins",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "pulmonary_veins",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "ductus_arteriosus",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "ascending_aorta",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "aortic_arch",
+   "verts": 432,
+   "outward": 0.8402777777777778,
+   "hullVerts": 324,
+   "outwardHull": 0.7870370370370371,
+   "tris": 144,
+   "winding": 1,
+   "hullTris": 108,
+   "hullWinding": 1
+  },
+  {
+   "key": "head_neck_vessels",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "head_neck_vessels",
+   "verts": 594,
+   "outward": 1,
+   "hullVerts": 594,
+   "outwardHull": 1,
+   "tris": 198,
+   "winding": 1,
+   "hullTris": 198,
+   "hullWinding": 1
+  },
+  {
+   "key": "head_neck_vessels",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "head_neck_vessels",
+   "verts": 594,
+   "outward": 1,
+   "hullVerts": 594,
+   "outwardHull": 1,
+   "tris": 198,
+   "winding": 1,
+   "hullTris": 198,
+   "hullWinding": 1
+  },
+  {
+   "key": "head_neck_vessels",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "head_neck_vessels",
+   "verts": 594,
+   "outward": 1,
+   "hullVerts": 594,
+   "outwardHull": 1,
+   "tris": 198,
+   "winding": 1,
+   "hullTris": 198,
+   "hullWinding": 1
+  },
+  {
+   "key": "descending_aorta",
+   "verts": 432,
+   "outward": 1,
+   "hullVerts": 324,
+   "outwardHull": 1,
+   "tris": 144,
+   "winding": 1,
+   "hullTris": 108,
+   "hullWinding": 1
+  },
+  {
+   "key": "common_iliacs",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "common_iliacs",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "umbilical_arteries",
+   "verts": 540,
+   "outward": 0.6722222222222223,
+   "hullVerts": 432,
+   "outwardHull": 0.5902777777777778,
+   "tris": 180,
+   "winding": 1,
+   "hullTris": 144,
+   "hullWinding": 1
+  },
+  {
+   "key": "umbilical_arteries",
+   "verts": 540,
+   "outward": 0.6666666666666666,
+   "hullVerts": 432,
+   "outwardHull": 0.5833333333333334,
+   "tris": 180,
+   "winding": 1,
+   "hullTris": 144,
+   "hullWinding": 1
+  },
+  {
+   "key": "umbilical_arteries",
+   "verts": 540,
+   "outward": 0.7222222222222222,
+   "hullVerts": 432,
+   "outwardHull": 0.6527777777777778,
+   "tris": 180,
+   "winding": 1,
+   "hullTris": 144,
+   "hullWinding": 1
+  },
+  {
+   "key": "umbilical_arteries",
+   "verts": 540,
+   "outward": 0.7222222222222222,
+   "hullVerts": 432,
+   "outwardHull": 0.6527777777777778,
+   "tris": 180,
+   "winding": 1,
+   "hullTris": 144,
+   "hullWinding": 1
+  },
+  {
+   "key": "atrial_septum",
+   "verts": 3024,
+   "outward": 0.7142857142857143,
+   "hullVerts": 3024,
+   "outwardHull": 0.7142857142857143,
+   "tris": 1008,
+   "winding": 1,
+   "hullTris": 1008,
+   "hullWinding": 1
+  },
+  {
+   "key": "crista_dividens",
+   "verts": 1260,
+   "outward": 0.9,
+   "hullVerts": 1176,
+   "outwardHull": 0.8928571428571429,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "foramen_ovale",
+   "verts": 1980,
+   "outward": 1,
+   "hullVerts": 1980,
+   "outwardHull": 1,
+   "tris": 660,
+   "winding": 1,
+   "hullTris": 660,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "midline",
+   "verts": 180,
+   "outward": 1,
+   "hullVerts": 120,
+   "outwardHull": 1,
+   "tris": 60,
+   "winding": 1,
+   "hullTris": 40,
+   "hullWinding": 1
+  }
+ ],
+ "normals1": [
+  {
+   "key": "placenta",
+   "verts": 5040,
+   "outward": 1,
+   "hullVerts": 5040,
+   "outwardHull": 1,
+   "tris": 1680,
+   "winding": 1,
+   "hullTris": 1680,
+   "hullWinding": 1
+  },
+  {
+   "key": "liver",
+   "verts": 3876,
+   "outward": 1,
+   "hullVerts": 3876,
+   "outwardHull": 1,
+   "tris": 1292,
+   "winding": 1,
+   "hullTris": 1292,
+   "hullWinding": 1
+  },
+  {
+   "key": "lungs",
+   "verts": 3192,
+   "outward": 1,
+   "hullVerts": 3192,
+   "outwardHull": 1,
+   "tris": 1064,
+   "winding": 1,
+   "hullTris": 1064,
+   "hullWinding": 1
+  },
+  {
+   "key": "lungs",
+   "verts": 3192,
+   "outward": 1,
+   "hullVerts": 3192,
+   "outwardHull": 1,
+   "tris": 1064,
+   "winding": 1,
+   "hullTris": 1064,
+   "hullWinding": 1
+  },
+  {
+   "key": "right_atrium",
+   "verts": 2856,
+   "outward": 1,
+   "hullVerts": 2856,
+   "outwardHull": 1,
+   "tris": 952,
+   "winding": 1,
+   "hullTris": 952,
+   "hullWinding": 1
+  },
+  {
+   "key": "left_atrium",
+   "verts": 2856,
+   "outward": 1,
+   "hullVerts": 2856,
+   "outwardHull": 1,
+   "tris": 952,
+   "winding": 1,
+   "hullTris": 952,
+   "hullWinding": 1
+  },
+  {
+   "key": "right_ventricle",
+   "verts": 2856,
+   "outward": 1,
+   "hullVerts": 2856,
+   "outwardHull": 1,
+   "tris": 952,
+   "winding": 1,
+   "hullTris": 952,
+   "hullWinding": 1
+  },
+  {
+   "key": "left_ventricle",
+   "verts": 2856,
+   "outward": 1,
+   "hullVerts": 2856,
+   "outwardHull": 1,
+   "tris": 952,
+   "winding": 1,
+   "hullTris": 952,
+   "hullWinding": 1
+  },
+  {
+   "key": "umbilical_vein",
+   "verts": 756,
+   "outward": 0.6309523809523809,
+   "hullVerts": 648,
+   "outwardHull": 0.5694444444444444,
+   "tris": 252,
+   "winding": 1,
+   "hullTris": 216,
+   "hullWinding": 1
+  },
+  {
+   "key": "ductus_venosus",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "portal_sinus",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "hepatic_veins",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "hepatic_veins",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "ivc",
+   "verts": 540,
+   "outward": 1,
+   "hullVerts": 432,
+   "outwardHull": 1,
+   "tris": 180,
+   "winding": 1,
+   "hullTris": 144,
+   "hullWinding": 1
+  },
+  {
+   "key": "svc",
+   "verts": 432,
+   "outward": 1,
+   "hullVerts": 324,
+   "outwardHull": 1,
+   "tris": 144,
+   "winding": 1,
+   "hullTris": 108,
+   "hullWinding": 1
+  },
+  {
+   "key": "pulmonary_trunk",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "pulmonary_arteries",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "pulmonary_arteries",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "pulmonary_veins",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "pulmonary_veins",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "ductus_arteriosus",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "ascending_aorta",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "aortic_arch",
+   "verts": 432,
+   "outward": 0.8402777777777778,
+   "hullVerts": 324,
+   "outwardHull": 0.7870370370370371,
+   "tris": 144,
+   "winding": 1,
+   "hullTris": 108,
+   "hullWinding": 1
+  },
+  {
+   "key": "head_neck_vessels",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "head_neck_vessels",
+   "verts": 594,
+   "outward": 1,
+   "hullVerts": 594,
+   "outwardHull": 1,
+   "tris": 198,
+   "winding": 1,
+   "hullTris": 198,
+   "hullWinding": 1
+  },
+  {
+   "key": "head_neck_vessels",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "head_neck_vessels",
+   "verts": 594,
+   "outward": 1,
+   "hullVerts": 594,
+   "outwardHull": 1,
+   "tris": 198,
+   "winding": 1,
+   "hullTris": 198,
+   "hullWinding": 1
+  },
+  {
+   "key": "head_neck_vessels",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "head_neck_vessels",
+   "verts": 594,
+   "outward": 1,
+   "hullVerts": 594,
+   "outwardHull": 1,
+   "tris": 198,
+   "winding": 1,
+   "hullTris": 198,
+   "hullWinding": 1
+  },
+  {
+   "key": "descending_aorta",
+   "verts": 432,
+   "outward": 1,
+   "hullVerts": 324,
+   "outwardHull": 1,
+   "tris": 144,
+   "winding": 1,
+   "hullTris": 108,
+   "hullWinding": 1
+  },
+  {
+   "key": "common_iliacs",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "common_iliacs",
+   "verts": 324,
+   "outward": 1,
+   "hullVerts": 216,
+   "outwardHull": 1,
+   "tris": 108,
+   "winding": 1,
+   "hullTris": 72,
+   "hullWinding": 1
+  },
+  {
+   "key": "umbilical_arteries",
+   "verts": 540,
+   "outward": 0.6166666666666667,
+   "hullVerts": 432,
+   "outwardHull": 0.5208333333333334,
+   "tris": 180,
+   "winding": 1,
+   "hullTris": 144,
+   "hullWinding": 1
+  },
+  {
+   "key": "umbilical_arteries",
+   "verts": 540,
+   "outward": 0.6277777777777778,
+   "hullVerts": 432,
+   "outwardHull": 0.5347222222222222,
+   "tris": 180,
+   "winding": 1,
+   "hullTris": 144,
+   "hullWinding": 1
+  },
+  {
+   "key": "umbilical_arteries",
+   "verts": 540,
+   "outward": 0.6388888888888888,
+   "hullVerts": 432,
+   "outwardHull": 0.5486111111111112,
+   "tris": 180,
+   "winding": 1,
+   "hullTris": 144,
+   "hullWinding": 1
+  },
+  {
+   "key": "umbilical_arteries",
+   "verts": 540,
+   "outward": 0.6388888888888888,
+   "hullVerts": 432,
+   "outwardHull": 0.5486111111111112,
+   "tris": 180,
+   "winding": 1,
+   "hullTris": 144,
+   "hullWinding": 1
+  },
+  {
+   "key": "atrial_septum",
+   "verts": 3024,
+   "outward": 0.7142857142857143,
+   "hullVerts": 3024,
+   "outwardHull": 0.7142857142857143,
+   "tris": 1008,
+   "winding": 1,
+   "hullTris": 1008,
+   "hullWinding": 1
+  },
+  {
+   "key": "crista_dividens",
+   "verts": 1260,
+   "outward": 0.9,
+   "hullVerts": 1176,
+   "outwardHull": 0.8928571428571429,
+   "tris": 420,
+   "winding": 1,
+   "hullTris": 392,
+   "hullWinding": 1
+  },
+  {
+   "key": "foramen_ovale",
+   "verts": 1980,
+   "outward": 1,
+   "hullVerts": 1980,
+   "outwardHull": 1,
+   "tris": 660,
+   "winding": 1,
+   "hullTris": 660,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "flow",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1,
+   "hullTris": 48,
+   "hullWinding": 1
+  },
+  {
+   "key": "midline",
+   "verts": 180,
+   "outward": 1,
+   "hullVerts": 120,
+   "outwardHull": 1,
+   "tris": 60,
+   "winding": 1,
+   "hullTris": 40,
+   "hullWinding": 1
+  }
+ ],
+ "lumen": [
+  {
+   "camera": "anterior fetal",
+   "t": 0,
+   "rays": 7744,
+   "hits": 1332,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "anterior neonate",
+   "t": 1,
+   "rays": 7744,
+   "hits": 1298,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "left lateral",
+   "t": 0,
+   "rays": 7744,
+   "hits": 849,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "right lateral",
+   "t": 0,
+   "rays": 7744,
+   "hits": 798,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "from above",
+   "t": 0,
+   "rays": 7744,
+   "hits": 656,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "from below",
+   "t": 0,
+   "rays": 7744,
+   "hits": 1026,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "from behind",
+   "t": 0,
+   "rays": 7744,
+   "hits": 1289,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  }
+ ],
+ "boxes": {
+  "chambers": {
+   "ra_cx": -1.0499999962475788,
+   "la_cx": 0.949999997637519,
+   "separation": 1.9999999938850976,
+   "floor": 0.5180000014603138
+  },
+  "duct_below_branches": {
+   "duct_min_y": 2.7601375579833984,
+   "branch_min_y": 3.906805992126465,
+   "separation": 1.1466684341430664,
+   "floor": 0.5571760118007659
+  },
+  "uv_ventral_to_ivc": {
+   "uv_cz": 1.6514285813484872,
+   "ivc_cz": -0.15600000013666296,
+   "separation": 1.8074285814851503,
+   "floor": 0.614972723275423
+  }
+ },
+ "colour": {
+  "umbilical_vein": {
+   "r": 204.44527697395617,
+   "g": 68.3852315006201,
+   "b": 82.9364406779661,
+   "pixels": 19352,
+   "warmth": 121.50883629599006
+  },
+  "ivc": {
+   "r": 181.27435019887153,
+   "g": 72.11266302839701,
+   "b": 93.22916473961706,
+   "pixels": 21622,
+   "warmth": 88.04518545925447
+  },
+  "svc": {
+   "r": 106.6332462813671,
+   "g": 87.92358351311456,
+   "b": 136.69535596684455,
+   "pixels": 8807,
+   "warmth": -30.062109685477452
+  },
+  "ascending_aorta": {
+   "r": 171.43370302929978,
+   "g": 72.27992054295646,
+   "b": 96.29912266181096,
+   "pixels": 6041,
+   "warmth": 75.13458036748882
+  },
+  "descending_aorta": {
+   "r": 160.61270729903876,
+   "g": 78.09078905672335,
+   "b": 107.13890355973382,
+   "pixels": 18934,
+   "warmth": 53.47380373930494
+  },
+  "umbilical_arteries": {
+   "r": 150.88207427993936,
+   "g": 70.61577817079333,
+   "b": 99.69536382011117,
+   "pixels": 15832,
+   "warmth": 51.18671045982819
+  },
+  "pulmonary_trunk": {
+   "r": 156.9637702078522,
+   "g": 80.67653002309468,
+   "b": 111.16902424942263,
+   "pixels": 6928,
+   "warmth": 45.79474595842957
+  }
+ },
+ "colourNeonate": {
+  "ascending_aorta": {
+   "r": 231.44380069524914,
+   "g": 62.92915080284721,
+   "b": 65.23886773712961,
+   "pixels": 6041,
+   "warmth": 166.2049329581195
+  },
+  "descending_aorta": {
+   "r": 237.76909263758319,
+   "g": 65.6797824020281,
+   "b": 67.75435724094223,
+   "pixels": 18934,
+   "warmth": 170.01473539664096
+  }
+ },
+ "ductFrames": {
+  "changed": 50241,
+  "lit": 71293,
+  "frac": 0.7047115425076795
+ },
+ "viewDiffs": [
+  {
+   "from": "1 Two resistances decide everything",
+   "to": "2 Follow one red cell from the placenta",
+   "changed": 60043,
+   "lit": 262473,
+   "frac": 0.22875876756847371
+  },
+  {
+   "from": "2 Follow one red cell from the placenta",
+   "to": "3 Streaming — why the fetus is not just mixed blood",
+   "changed": 209301,
+   "lit": 262509,
+   "frac": 0.7973098065209193
+  },
+  {
+   "from": "3 Streaming — why the fetus is not just mixed blood",
+   "to": "4 Why the brain gets the best blood",
+   "changed": 176656,
+   "lit": 174883,
+   "frac": 1.0101382066867564
+  },
+  {
+   "from": "4 Why the brain gets the best blood",
+   "to": "5 Two events at birth, every closure follows",
+   "changed": 322869,
+   "lit": 318109,
+   "frac": 1.0149634244865753
+  },
+  {
+   "from": "5 Two events at birth, every closure follows",
+   "to": "6 Fifteen minutes old — the duct turns round",
+   "changed": 168508,
+   "lit": 261338,
+   "frac": 0.6447895063098363
+  },
+  {
+   "from": "6 Fifteen minutes old — the duct turns round",
+   "to": "7 What each one becomes",
+   "changed": 300226,
+   "lit": 294637,
+   "frac": 1.018969104355529
+  },
+  {
+   "from": "7 What each one becomes",
+   "to": "8 When the transition fails — in both directions",
+   "changed": 240144,
+   "lit": 235816,
+   "frac": 1.0183532923974625
+  }
+ ],
+ "console": [
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x273400104e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x273400104e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x273400104e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x273400104e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  }
+ ],
+ "refs": [
+  {
+   "key": "placenta",
+   "ref": "fetal-circulation#placenta",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1680
+  },
+  {
+   "key": "umbilical_vein",
+   "ref": "fetal-circulation#umbilical_vein",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 252
+  },
+  {
+   "key": "ductus_venosus",
+   "ref": "fetal-circulation#ductus_venosus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 108
+  },
+  {
+   "key": "portal_sinus",
+   "ref": "fetal-circulation#portal_sinus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 108
+  },
+  {
+   "key": "liver",
+   "ref": "fetal-circulation#liver",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1292
+  },
+  {
+   "key": "hepatic_veins",
+   "ref": "fetal-circulation#hepatic_veins",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 216
+  },
+  {
+   "key": "ivc",
+   "ref": "fetal-circulation#ivc",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 180
+  },
+  {
+   "key": "svc",
+   "ref": "fetal-circulation#svc",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 144
+  },
+  {
+   "key": "right_atrium",
+   "ref": "fetal-circulation#right_atrium",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 952
+  },
+  {
+   "key": "atrial_septum",
+   "ref": "fetal-circulation#atrial_septum",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1008
+  },
+  {
+   "key": "crista_dividens",
+   "ref": "fetal-circulation#crista_dividens",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 420
+  },
+  {
+   "key": "foramen_ovale",
+   "ref": "fetal-circulation#foramen_ovale",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 660
+  },
+  {
+   "key": "left_atrium",
+   "ref": "fetal-circulation#left_atrium",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 952
+  },
+  {
+   "key": "left_ventricle",
+   "ref": "fetal-circulation#left_ventricle",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 952
+  },
+  {
+   "key": "ascending_aorta",
+   "ref": "fetal-circulation#ascending_aorta",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 108
+  },
+  {
+   "key": "aortic_arch",
+   "ref": "fetal-circulation#aortic_arch",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 144
+  },
+  {
+   "key": "head_neck_vessels",
+   "ref": "fetal-circulation#head_neck_vessels",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 918
+  },
+  {
+   "key": "right_ventricle",
+   "ref": "fetal-circulation#right_ventricle",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 952
+  },
+  {
+   "key": "pulmonary_trunk",
+   "ref": "fetal-circulation#pulmonary_trunk",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 108
+  },
+  {
+   "key": "pulmonary_arteries",
+   "ref": "fetal-circulation#pulmonary_arteries",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 216
+  },
+  {
+   "key": "lungs",
+   "ref": "fetal-circulation#lungs",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2128
+  },
+  {
+   "key": "pulmonary_veins",
+   "ref": "fetal-circulation#pulmonary_veins",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 216
+  },
+  {
+   "key": "ductus_arteriosus",
+   "ref": "fetal-circulation#ductus_arteriosus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 108
+  },
+  {
+   "key": "descending_aorta",
+   "ref": "fetal-circulation#descending_aorta",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 144
+  },
+  {
+   "key": "common_iliacs",
+   "ref": "fetal-circulation#common_iliacs",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 216
+  },
+  {
+   "key": "umbilical_arteries",
+   "ref": "fetal-circulation#umbilical_arteries",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 720
+  },
+  {
+   "key": "flow",
+   "ref": "fetal-circulation#flow",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2232
+  },
+  {
+   "key": "midline",
+   "ref": "fetal-circulation#midline",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 60
+  },
+  {
+   "key": "pda_duct",
+   "ref": "fetal-circulation#ductus_arteriosus@1+pda",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 108
+  },
+  {
+   "key": "pda_flow",
+   "ref": "fetal-circulation#flow@1+pda",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2304
+  },
+  {
+   "key": "pfc_duct",
+   "ref": "fetal-circulation#ductus_arteriosus@1+pfc",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 108
+  },
+  {
+   "key": "pfc_flow",
+   "ref": "fetal-circulation#flow@1+pfc",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2364
+  }
+ ],
+ "adapterConsole": []
+}

@@ -555,3 +555,93 @@ like a 157-item queue.
 tidy with no student-visible effect — Class A's anchors could be grouped with their parents so the warning
 stops firing on them and the remaining 46 stand out — and that is a cosmetic change to eight signed scenes,
 so it is a human's call and not this task's. Do NOT let a later run read "157 warnings" as 157 defects.
+
+---
+
+## Found 2026-09-10 by the `engine__refit-camera-on-isolate` round-2 build run
+
+Both of these were found by measuring the corpus in the real player, not by reading it. Neither was
+fixed in that run: the first is a different file from the item under rework, and the second is 21 scene
+edits. Both are cheap to reproduce — the commands are given.
+
+### A · `ISOLATE_REGION` ghosts its own subject — ENGINE, `viz3d.js`, `paint()`
+
+`paint()` gives full opacity only to what is selected or carries an entry in `state.hi`:
+
+```js
+var ghosting = (ghost && anySel) || state.ghosted;
+m.material.opacity = (isSel || isHi) ? baseOp : (ghosting ? Math.min(0.10, baseOp) : baseOp);
+```
+
+`COMPARE_STRUCTURES` sets `state.hi` on its targets. `ISOLATE_REGION`, eleven lines above it in
+`runOps`, sets `state.only` and `state.ghosted` and **never sets `state.hi`**. So on an isolating view
+with no separate `HIGHLIGHT_STRUCTURE`, the structure the view isolates is drawn at 10% opacity along
+with everything it was isolated from. The isolate changes nothing a student can see.
+
+**Measured on 9 of 94 views across the 11 scenes that run loaded** — the count over all 142 will be
+larger. `neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes` v3 *Frontal lobe*, v4
+*Parietal lobe*, v6 *Occipital lobe*; `gross__back-vertebral-column__intervertebral-disc` v3, v5, v7;
+`gross__back-vertebral-column__vertebral-column` v6; `gross__forearm-hand__carpal-tunnel` v6;
+`gross__heart-pericardium__heart` v1. The three lobe views are the clearest: the entire point is to show
+one lobe, and the lobe is at the same 10% as the rest of the brain.
+
+`viz-training/tools/measure-view-framing.mjs --all` names these as `engineDefectsNotThisItem` and does
+not fail the build on them, so it stays usable as a framing gate until this is done.
+
+**Why it matters beyond the picture:** every one of those 9 views also reports a framing failure, and
+that is probably downstream — with no opaque subject, the measurement falls back to the whole visible
+set and the fill numbers describe the ghosted context rather than the subject. **Fix this before
+concluding anything about those 9 framing numbers.** Whoever takes it should re-run the gate afterwards
+and expect the framing failure count to fall on its own.
+
+Likely fix is one clause — exempt `state.only` from ghosting rather than setting `hi`, since `hi` also
+drives the emissive glow and would light the subject up as well as un-fade it. It needs its own build
+and its own review looking at the pictures; it changes the appearance of a large fraction of the corpus,
+which is exactly the kind of change a builder should not slip into a rework item.
+
+### B · 21 views peel away their own subject — SCENES
+
+A view isolates something and then runs `PEEL_LAYER` on the layer that thing lives in, so the picture
+the student is shown does not contain the structure the narration is about.
+`gross__kidney-posterior-abdominal-wall__kidney` v3 *"Coverings, then cortex to pelvis"* peels layer
+`organ`, which is where the kidneys are.
+
+Until 2026-09-10 this was invisible: `subjectBox()` returned `null` for such a view and `frameView`
+bailed out, so the student got the PREVIOUS view's camera over this view's geometry and every check
+passed. The framing fallback added that day frames what is actually drawn, which is what made these
+findable.
+
+Found by this, over `viz-training/scenes/`, in 58 scenes — rerun it over all 142:
+
+```
+for each view with a PEEL_LAYER: collect the structures its ISOLATE_REGION / COMPARE_STRUCTURES
+single out; flag the view if EVERY one of them has a `layer` the view peels.
+```
+
+| `embryology__cardiovascular-development__heart-tube-formation` | v3 | Cut the tube across | peels `organ`, which is where all 2 isolated structure(s) live |
+| `embryology__cardiovascular-development__septation-of-heart` | v5 | One spiral wall, three famous failures | peels `organ`, which is where all 5 isolated structure(s) live |
+| `embryology__folding-of-the-embryo__cranio-caudal-folding` | v6 | When a fold does not finish | peels `organ`, which is where all 3 isolated structure(s) live |
+| `embryology__folding-of-the-embryo__lateral-folding` | v6 | The rest of the ventral wall, and a duct that lingers | peels `organ`, which is where all 4 isolated structure(s) live |
+| `embryology__gametogenesis-fertilization__blastocyst` | v5 | Hatching must come first | peels `organ`, which is where all 3 isolated structure(s) live |
+| `embryology__gametogenesis-fertilization__cleavage-morula` | v6 | What the zona is for | peels `organ`, which is where all 3 isolated structure(s) live |
+| `embryology__gametogenesis-fertilization__fertilization` | v4 | The acrosome reaction and fusion | peels `organ`, which is where all 2 isolated structure(s) live |
+| `embryology__gametogenesis-fertilization__spermatogenesis-oogenesis` | v4 | Spermiogenesis — remodelling, not division | peels `organ`, which is where all 6 isolated structure(s) live |
+| `embryology__pharyngeal-apparatus__pharyngeal-clefts-membranes` | v5 | When the cervical sinus does not close | peels `organ`, which is where all 6 isolated structure(s) live |
+| `embryology__pharyngeal-apparatus__pharyngeal-pouches` | v5 | When the pouches do not form | peels `organ`, which is where all 3 isolated structure(s) live |
+| `embryology__pharyngeal-apparatus__thyroid-gland-development` | v5 | Descent gone wrong, and the baby who looks well | peels `organ`, which is where all 7 isolated structure(s) live |
+| `embryology__respiratory-system-development__bronchial-tree-branching` | v3 | Mesenchyme instructs, endoderm obeys | peels `organ`, which is where all 5 isolated structure(s) live |
+| `embryology__respiratory-system-development__tracheoesophageal-septum` | v5 | The rare end, and why it belongs to the same story | peels `organ`, which is where all 5 isolated structure(s) live |
+| `embryology__week-3-gastrulation__neurulation-neural-plate-tube` | v8 | Finding them, and preventing them | peels `organ`, which is where all 2 isolated structure(s) live |
+| `embryology__week-3-gastrulation__notochord` | v7 | What is left of it when you are grown | peels `organ`, which is where all 1 isolated structure(s) live |
+| `embryology__week-3-gastrulation__trilaminar-disc-3-germ-layers` | v7 | Where the disc stays two layers thick | peels `organ`, which is where all 2 isolated structure(s) live |
+| `embryology__weeks-1-2-implantation-bilaminar-disc__amniotic-cavity-yolk-sac` | v4 | The amnion grows until there is nowhere left to grow | peels `organ`, which is where all 4 isolated structure(s) live |
+| `embryology__weeks-1-2-implantation-bilaminar-disc__bilaminar-embryonic-disc` | v4 | A new tissue fills the gap, then splits | peels `organ`, which is where all 4 isolated structure(s) live |
+| `embryology__weeks-1-2-implantation-bilaminar-disc__chorion-placenta-early` | v8 | The layers between the two bloods | peels `organ`, which is where all 3 isolated structure(s) live |
+| `embryology__weeks-1-2-implantation-bilaminar-disc__implantation` | v6 | Buried, plugged, and healed over | peels `organ`, which is where all 2 isolated structure(s) live |
+| `gross__kidney-posterior-abdominal-wall__kidney` | v3 | Coverings, then cortex to pelvis | peels `organ`, which is where all 2 isolated structure(s) live |
+Twenty of the twenty-one are embryology scenes converted from SEQUENCE panels, and all twenty peel
+`organ` — which suggests one conversion habit rather than twenty independent mistakes, and that the fix
+is probably one decision applied twenty times. The kidney one is a hand-authored gross scene and may
+need its own answer.
+
+**Do not fix these by changing the framing.** The picture is wrong before the camera is involved.

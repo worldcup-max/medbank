@@ -1,0 +1,304 @@
+{
+  "scene": "gross__kidney-posterior-abdominal-wall__kidney",
+  "canvas": {
+    "w": 1008,
+    "h": 440
+  },
+  "views": [
+    {
+      "view": 1,
+      "title": "Where they are, and why they are not level",
+      "lit": 77563,
+      "litFaint": 77594,
+      "w": 1008,
+      "h": 440,
+      "wpct": 53.8,
+      "hpct": 64.1,
+      "areapct": 17.49,
+      "edgeTouch": false,
+      "fillW": 57.2,
+      "fillH": 81,
+      "subjectFrom": "opaque",
+      "noOpaqueSubject": false,
+      "subject": {
+        "only": [],
+        "named": [],
+        "onlyVisible": 0,
+        "visible": 0,
+        "size": [
+          2.5663,
+          1.1882,
+          3.3997
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 2492,
+      "yaw": 0.5475,
+      "dist": 3.2058,
+      "clippedAtRest": false,
+      "clippedUnderSpin": false,
+      "worstFillUnderSpin": 87.4,
+      "fails": [],
+      "framingFails": [],
+      "sceneFails": [],
+      "engineFails": []
+    },
+    {
+      "view": 2,
+      "title": "The bed behind, and the ribs across",
+      "lit": 53481,
+      "litFaint": 53481,
+      "w": 1008,
+      "h": 440,
+      "wpct": 49.2,
+      "hpct": 44.5,
+      "areapct": 12.06,
+      "edgeTouch": false,
+      "fillW": 51,
+      "fillH": 56.2,
+      "subjectFrom": "opaque",
+      "noOpaqueSubject": false,
+      "subject": {
+        "only": [],
+        "named": [],
+        "onlyVisible": 0,
+        "visible": 0,
+        "size": [
+          3.256,
+          1.3112,
+          3.9915
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 5029,
+      "yaw": 0.5475,
+      "dist": 3.7972,
+      "clippedAtRest": false,
+      "clippedUnderSpin": false,
+      "worstFillUnderSpin": 67,
+      "fails": [],
+      "framingFails": [],
+      "sceneFails": [],
+      "engineFails": []
+    },
+    {
+      "view": 3,
+      "title": "Coverings, then cortex to pelvis",
+      "lit": 432533,
+      "litFaint": 441636,
+      "w": 1008,
+      "h": 440,
+      "wpct": 100,
+      "hpct": 100,
+      "areapct": 97.52,
+      "edgeTouch": true,
+      "fillW": 4986.9,
+      "fillH": 35344.1,
+      "subjectFrom": "visible",
+      "noOpaqueSubject": true,
+      "subject": {
+        "only": [
+          "right_kidney",
+          "left_kidney"
+        ],
+        "named": [
+          "right_ureter",
+          "left_ureter",
+          "bladder",
+          "right_renal_artery",
+          "left_renal_artery",
+          "right_renal_vein",
+          "left_renal_vein",
+          "right_kidney",
+          "right_upper_pole",
+          "right_lower_pole",
+          "right_hilum",
+          "left_upper_pole",
+          "left_lower_pole",
+          "left_hilum",
+          "right_puj",
+          "renal_angle"
+        ],
+        "onlyVisible": 0,
+        "visible": 12,
+        "size": [
+          1.2205,
+          0.7487,
+          1.0186
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 5523,
+      "yaw": 0.5475,
+      "dist": 1.4582,
+      "clippedAtRest": true,
+      "clippedUnderSpin": true,
+      "worstFillUnderSpin": 3233.5,
+      "fails": [
+        "the view hides its own subject — all 2 structure(s) it isolates are hidden by its own ops (check PEEL_LAYER)"
+      ],
+      "framingFails": [],
+      "sceneFails": [
+        "the view hides its own subject — all 2 structure(s) it isolates are hidden by its own ops (check PEEL_LAYER)"
+      ],
+      "engineFails": []
+    },
+    {
+      "view": 4,
+      "title": "In at the hilum, out at the hilum",
+      "lit": 7893,
+      "litFaint": 8065,
+      "w": 1008,
+      "h": 440,
+      "wpct": 15.1,
+      "hpct": 17.3,
+      "areapct": 1.78,
+      "edgeTouch": false,
+      "fillW": 9.9,
+      "fillH": 10.7,
+      "subjectFrom": "opaque",
+      "noOpaqueSubject": false,
+      "subject": {
+        "only": [
+          "right_renal_vein",
+          "left_renal_vein"
+        ],
+        "named": [
+          "sma",
+          "left_renal_vein"
+        ],
+        "onlyVisible": 2,
+        "visible": 3,
+        "size": [
+          0.8287,
+          0.5355,
+          0.5439
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 5179,
+      "yaw": 0.5475,
+      "dist": 9,
+      "clippedAtRest": false,
+      "clippedUnderSpin": false,
+      "worstFillUnderSpin": 14.7,
+      "fails": [],
+      "framingFails": [],
+      "sceneFails": [],
+      "engineFails": []
+    },
+    {
+      "view": 5,
+      "title": "From glomerulus to bladder",
+      "lit": 54132,
+      "litFaint": 60632,
+      "w": 1008,
+      "h": 440,
+      "wpct": 48.6,
+      "hpct": 50.9,
+      "areapct": 12.21,
+      "edgeTouch": false,
+      "fillW": 24.7,
+      "fillH": 22.2,
+      "subjectFrom": "opaque",
+      "noOpaqueSubject": false,
+      "subject": {
+        "only": [
+          "right_kidney"
+        ],
+        "named": [
+          "right_ureter",
+          "left_ureter",
+          "bladder"
+        ],
+        "onlyVisible": 1,
+        "visible": 4,
+        "size": [
+          2.0386,
+          0.6976,
+          2.4877
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 4355,
+      "yaw": 0.5475,
+      "dist": 3.6298,
+      "clippedAtRest": false,
+      "clippedUnderSpin": false,
+      "worstFillUnderSpin": 36.3,
+      "fails": [],
+      "framingFails": [],
+      "sceneFails": [],
+      "engineFails": []
+    },
+    {
+      "view": 6,
+      "title": "Reading the clinic off the anatomy",
+      "lit": 120970,
+      "litFaint": 123138,
+      "w": 1008,
+      "h": 440,
+      "wpct": 73.6,
+      "hpct": 68.6,
+      "areapct": 27.27,
+      "edgeTouch": true,
+      "fillW": 44.3,
+      "fillH": 41.6,
+      "subjectFrom": "opaque",
+      "noOpaqueSubject": false,
+      "subject": {
+        "only": [
+          "right_kidney",
+          "left_kidney"
+        ],
+        "named": [
+          "rib11",
+          "rib12",
+          "l1",
+          "right_ureter",
+          "left_ureter",
+          "bladder",
+          "right_kidney",
+          "left_renal_vein",
+          "ivc",
+          "right_upper_pole",
+          "right_lower_pole",
+          "right_hilum",
+          "left_upper_pole",
+          "left_lower_pole",
+          "left_hilum",
+          "right_puj",
+          "renal_angle"
+        ],
+        "onlyVisible": 2,
+        "visible": 18,
+        "size": [
+          2.1985,
+          0.8662,
+          2.8504
+        ]
+      },
+      "blankConfirmed": false,
+      "settled": true,
+      "settleMs": 4706,
+      "yaw": 0.5475,
+      "dist": 2.6415,
+      "clippedAtRest": false,
+      "clippedUnderSpin": false,
+      "worstFillUnderSpin": 61.1,
+      "fails": [],
+      "framingFails": [],
+      "sceneFails": [],
+      "engineFails": []
+    }
+  ],
+  "console": [],
+  "failingViews": 0,
+  "sceneDefectViews": 1,
+  "engineDefectViews": 0
+}

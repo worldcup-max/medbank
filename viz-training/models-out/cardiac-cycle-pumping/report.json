@@ -1,0 +1,1456 @@
+{
+ "chromium": "/opt/pw-browsers/chromium-1194/chrome-linux/chrome",
+ "scene_t": [
+  0.04,
+  0.208,
+  0.24,
+  0.33,
+  0.48,
+  0.546,
+  0.575,
+  0.66,
+  0.88
+ ],
+ "stages": [
+  {
+   "name": "t040",
+   "t": 0.04,
+   "opts": {},
+   "yaw": -0.32,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t040.png",
+   "phase": "Atrial systole",
+   "lv_volume": 113.20723021141558,
+   "valves": {
+    "mitral": 1,
+    "aortic": 0,
+    "tricuspid": 1,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "t208",
+   "t": 0.208,
+   "opts": {},
+   "yaw": -0.32,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t208.png",
+   "phase": "Isovolumetric contraction",
+   "lv_volume": 119.985356058354,
+   "valves": {
+    "mitral": 0,
+    "aortic": 0,
+    "tricuspid": 0,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "t240",
+   "t": 0.24,
+   "opts": {},
+   "yaw": -0.32,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t240.png",
+   "phase": "Isovolumetric contraction",
+   "lv_volume": 119.985356058354,
+   "valves": {
+    "mitral": 0,
+    "aortic": 0,
+    "tricuspid": 0,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "t330",
+   "t": 0.33,
+   "opts": {},
+   "yaw": -0.32,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t330.png",
+   "phase": "Ventricular ejection",
+   "lv_volume": 116.94886694439336,
+   "valves": {
+    "mitral": 0,
+    "aortic": 1,
+    "tricuspid": 0,
+    "pulmonary": 1
+   }
+  },
+  {
+   "name": "t480",
+   "t": 0.48,
+   "opts": {},
+   "yaw": -0.32,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t480.png",
+   "phase": "Ventricular ejection",
+   "lv_volume": 61.11764259699895,
+   "valves": {
+    "mitral": 0,
+    "aortic": 1,
+    "tricuspid": 0,
+    "pulmonary": 1
+   }
+  },
+  {
+   "name": "t546",
+   "t": 0.546,
+   "opts": {},
+   "yaw": -0.32,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t546.png",
+   "phase": "Ventricular ejection",
+   "lv_volume": 49.90701474365023,
+   "valves": {
+    "mitral": 0,
+    "aortic": 0,
+    "tricuspid": 0,
+    "pulmonary": 1
+   }
+  },
+  {
+   "name": "t575",
+   "t": 0.575,
+   "opts": {},
+   "yaw": -0.32,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t575.png",
+   "phase": "Isovolumetric relaxation",
+   "lv_volume": 49.90701474365023,
+   "valves": {
+    "mitral": 0,
+    "aortic": 0,
+    "tricuspid": 0,
+    "pulmonary": 0.8195604176074409
+   }
+  },
+  {
+   "name": "t660",
+   "t": 0.66,
+   "opts": {},
+   "yaw": -0.32,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t660.png",
+   "phase": "Ventricular filling",
+   "lv_volume": 61.44375592558567,
+   "valves": {
+    "mitral": 1,
+    "aortic": 0,
+    "tricuspid": 1,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "t880",
+   "t": 0.88,
+   "opts": {},
+   "yaw": -0.32,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t880.png",
+   "phase": "Ventricular filling",
+   "lv_volume": 94.67932962914131,
+   "valves": {
+    "mitral": 1,
+    "aortic": 0,
+    "tricuspid": 1,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "t208-side",
+   "t": 0.208,
+   "opts": {},
+   "yaw": -1.45,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t208-side.png",
+   "phase": "Isovolumetric contraction",
+   "lv_volume": 119.985356058354,
+   "valves": {
+    "mitral": 0,
+    "aortic": 0,
+    "tricuspid": 0,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "t546-side",
+   "t": 0.546,
+   "opts": {},
+   "yaw": -1.45,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t546-side.png",
+   "phase": "Ventricular ejection",
+   "lv_volume": 49.90701474365023,
+   "valves": {
+    "mitral": 0,
+    "aortic": 0,
+    "tricuspid": 0,
+    "pulmonary": 1
+   }
+  },
+  {
+   "name": "t208-intact",
+   "t": 0.208,
+   "opts": {
+    "intact": true
+   },
+   "yaw": -0.32,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t208-intact.png",
+   "phase": "Isovolumetric contraction",
+   "lv_volume": 119.985356058354,
+   "valves": {
+    "mitral": 0,
+    "aortic": 0,
+    "tricuspid": 0,
+    "pulmonary": 0
+   }
+  },
+  {
+   "name": "t546-intact",
+   "t": 0.546,
+   "opts": {
+    "intact": true
+   },
+   "yaw": -0.32,
+   "file": "viz-training/models-out/cardiac-cycle-pumping/t546-intact.png",
+   "phase": "Ventricular ejection",
+   "lv_volume": 49.90701474365023,
+   "valves": {
+    "mitral": 0,
+    "aortic": 0,
+    "tricuspid": 0,
+    "pulmonary": 1
+   }
+  }
+ ],
+ "console": [
+  {
+   "type": "warning",
+   "text": "[.WebGL-0xadc0010fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0xadc0010fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0xadc0010fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0xadc0010fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  }
+ ],
+ "normals": [
+  {
+   "key": "lv",
+   "verts": 15360,
+   "outward": 0.5591796875,
+   "hullVerts": 7104,
+   "outwardHull": 1,
+   "tris": 5120,
+   "winding": 0.9625
+  },
+  {
+   "key": "lv_blood",
+   "verts": 11280,
+   "outward": 1,
+   "hullVerts": 11040,
+   "outwardHull": 1,
+   "tris": 3760,
+   "winding": 1
+  },
+  {
+   "key": "rv",
+   "verts": 15972,
+   "outward": 0.5175306786877035,
+   "hullVerts": 7362,
+   "outwardHull": 0.8285791904373812,
+   "tris": 5324,
+   "winding": 0.9609316303531179
+  },
+  {
+   "key": "rv_blood",
+   "verts": 10800,
+   "outward": 0.7366666666666667,
+   "hullVerts": 10560,
+   "outwardHull": 0.7306818181818182,
+   "tris": 3600,
+   "winding": 1
+  },
+  {
+   "key": "septum",
+   "verts": 11280,
+   "outward": 1,
+   "hullVerts": 11040,
+   "outwardHull": 1,
+   "tris": 3760,
+   "winding": 1
+  },
+  {
+   "key": "la",
+   "verts": 16680,
+   "outward": 0.5223021582733813,
+   "hullVerts": 7800,
+   "outwardHull": 1,
+   "tris": 5560,
+   "winding": 0.9676258992805755
+  },
+  {
+   "key": "ra",
+   "verts": 16680,
+   "outward": 0.5223021582733813,
+   "hullVerts": 7800,
+   "outwardHull": 1,
+   "tris": 5560,
+   "winding": 0.9676258992805755
+  },
+  {
+   "key": "la_blood",
+   "verts": 11280,
+   "outward": 1,
+   "hullVerts": 11040,
+   "outwardHull": 1,
+   "tris": 3760,
+   "winding": 1
+  },
+  {
+   "key": "ra_blood",
+   "verts": 11280,
+   "outward": 1,
+   "hullVerts": 11040,
+   "outwardHull": 1,
+   "tris": 3760,
+   "winding": 1
+  },
+  {
+   "key": "mitral",
+   "verts": 3024,
+   "outward": 0.4365079365079365,
+   "hullVerts": 1320,
+   "outwardHull": 1,
+   "tris": 1008,
+   "winding": 1
+  },
+  {
+   "key": "mitral",
+   "verts": 3024,
+   "outward": 0.4444444444444444,
+   "hullVerts": 1320,
+   "outwardHull": 1,
+   "tris": 1008,
+   "winding": 1
+  },
+  {
+   "key": "tricuspid",
+   "verts": 3024,
+   "outward": 0.4365079365079365,
+   "hullVerts": 1320,
+   "outwardHull": 1,
+   "tris": 1008,
+   "winding": 1
+  },
+  {
+   "key": "tricuspid",
+   "verts": 3024,
+   "outward": 0.4365079365079365,
+   "hullVerts": 1320,
+   "outwardHull": 1,
+   "tris": 1008,
+   "winding": 1
+  },
+  {
+   "key": "tricuspid",
+   "verts": 3024,
+   "outward": 0.4365079365079365,
+   "hullVerts": 1320,
+   "outwardHull": 1,
+   "tris": 1008,
+   "winding": 1
+  },
+  {
+   "key": "aortic",
+   "verts": 2760,
+   "outward": 0.4369565217391304,
+   "hullVerts": 1200,
+   "outwardHull": 0.0375,
+   "tris": 920,
+   "winding": 1
+  },
+  {
+   "key": "pulmonary",
+   "verts": 2760,
+   "outward": 0.4369565217391304,
+   "hullVerts": 1200,
+   "outwardHull": 0.0375,
+   "tris": 920,
+   "winding": 1
+  },
+  {
+   "key": "aortic",
+   "verts": 2760,
+   "outward": 0.4369565217391304,
+   "hullVerts": 1200,
+   "outwardHull": 0.0375,
+   "tris": 920,
+   "winding": 1
+  },
+  {
+   "key": "pulmonary",
+   "verts": 2760,
+   "outward": 0.4369565217391304,
+   "hullVerts": 1200,
+   "outwardHull": 0.0375,
+   "tris": 920,
+   "winding": 1
+  },
+  {
+   "key": "aortic",
+   "verts": 2760,
+   "outward": 0.4369565217391304,
+   "hullVerts": 1200,
+   "outwardHull": 0.0375,
+   "tris": 920,
+   "winding": 1
+  },
+  {
+   "key": "pulmonary",
+   "verts": 2760,
+   "outward": 0.4369565217391304,
+   "hullVerts": 1200,
+   "outwardHull": 0.0375,
+   "tris": 920,
+   "winding": 1
+  },
+  {
+   "key": "papillary",
+   "verts": 252,
+   "outward": 1,
+   "hullVerts": 168,
+   "outwardHull": 1,
+   "tris": 84,
+   "winding": 1
+  },
+  {
+   "key": "papillary",
+   "verts": 126,
+   "outward": 1,
+   "hullVerts": 84,
+   "outwardHull": 1,
+   "tris": 42,
+   "winding": 1
+  },
+  {
+   "key": "papillary",
+   "verts": 126,
+   "outward": 1,
+   "hullVerts": 84,
+   "outwardHull": 1,
+   "tris": 42,
+   "winding": 1
+  },
+  {
+   "key": "papillary",
+   "verts": 126,
+   "outward": 1,
+   "hullVerts": 84,
+   "outwardHull": 1,
+   "tris": 42,
+   "winding": 1
+  },
+  {
+   "key": "papillary",
+   "verts": 252,
+   "outward": 1,
+   "hullVerts": 168,
+   "outwardHull": 1,
+   "tris": 84,
+   "winding": 1
+  },
+  {
+   "key": "papillary",
+   "verts": 126,
+   "outward": 1,
+   "hullVerts": 84,
+   "outwardHull": 1,
+   "tris": 42,
+   "winding": 1
+  },
+  {
+   "key": "papillary",
+   "verts": 126,
+   "outward": 1,
+   "hullVerts": 84,
+   "outwardHull": 1,
+   "tris": 42,
+   "winding": 1
+  },
+  {
+   "key": "papillary",
+   "verts": 126,
+   "outward": 1,
+   "hullVerts": 84,
+   "outwardHull": 1,
+   "tris": 42,
+   "winding": 1
+  },
+  {
+   "key": "av_plane",
+   "verts": 11280,
+   "outward": 1,
+   "hullVerts": 11040,
+   "outwardHull": 1,
+   "tris": 3760,
+   "winding": 1
+  },
+  {
+   "key": "aorta",
+   "verts": 600,
+   "outward": 0.815,
+   "hullVerts": 480,
+   "outwardHull": 0.76875,
+   "tris": 200,
+   "winding": 1
+  },
+  {
+   "key": "pulm_trunk",
+   "verts": 480,
+   "outward": 1,
+   "hullVerts": 360,
+   "outwardHull": 1,
+   "tris": 160,
+   "winding": 1
+  },
+  {
+   "key": "svc",
+   "verts": 288,
+   "outward": 1,
+   "hullVerts": 192,
+   "outwardHull": 1,
+   "tris": 96,
+   "winding": 1
+  },
+  {
+   "key": "ivc",
+   "verts": 288,
+   "outward": 1,
+   "hullVerts": 192,
+   "outwardHull": 1,
+   "tris": 96,
+   "winding": 1
+  },
+  {
+   "key": "pulm_veins",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1
+  },
+  {
+   "key": "pulm_veins",
+   "verts": 216,
+   "outward": 1,
+   "hullVerts": 144,
+   "outwardHull": 1,
+   "tris": 72,
+   "winding": 1
+  },
+  {
+   "key": "flow_left_in",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_left_in",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_left_in",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_left_in",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_left_in",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_left_out",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_left_out",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_left_out",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_left_out",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_left_out",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_right_in",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_right_in",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_right_in",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_right_in",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_right_in",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_right_out",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_right_out",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_right_out",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_right_out",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  },
+  {
+   "key": "flow_right_out",
+   "verts": 576,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 192,
+   "winding": 1
+  }
+ ],
+ "acceptance": {
+  "pass": {
+   "A": {
+    "kind": "solved",
+    "what": "LV end-diastolic volume 120 ml",
+    "ok": true,
+    "value": 119.985356058354
+   },
+   "B": {
+    "kind": "solved",
+    "what": "LV end-systolic volume 50 ml",
+    "ok": true,
+    "value": 49.90701474365023
+   },
+   "C": {
+    "kind": "solved",
+    "what": "aortic pressure 120/80 mmHg",
+    "ok": true,
+    "value": [
+     120.01448996233786,
+     80.00708784427049
+    ]
+   },
+   "D": {
+    "kind": "solved",
+    "what": "RV volumes 130 / 60 ml",
+    "ok": true,
+    "value": [
+     130.0677351475266,
+     60.05606209569701
+    ]
+   },
+   "E2": {
+    "kind": "predicted",
+    "what": "peak ejection flow 350-700 ml/s on both sides",
+    "ok": true,
+    "value": [
+     564.3043941242029,
+     448.9115151640393
+    ]
+   },
+   "E": {
+    "kind": "solved",
+    "what": "pulmonary artery 25/10 mmHg",
+    "ok": true,
+    "value": [
+     24.96269272058105,
+     9.961047001927748
+    ]
+   },
+   "F": {
+    "kind": "predicted",
+    "what": "the two sides eject the same stroke volume",
+    "ok": true,
+    "value": [
+     70.07834131470378,
+     70.0116730518296
+    ]
+   },
+   "G": {
+    "kind": "predicted",
+    "what": "systole lasts about 0.30 s",
+    "ok": true,
+    "value": 0.2706189385776104
+   },
+   "H": {
+    "kind": "predicted",
+    "what": "diastole lasts about 0.50 s",
+    "ok": true,
+    "value": 0.5293810614223896
+   },
+   "I": {
+    "kind": "predicted",
+    "what": "ejection fraction 0.55-0.62",
+    "ok": true,
+    "value": 0.5840574518162174
+   },
+   "J": {
+    "kind": "structural",
+    "what": "valve events in Wiggers order",
+    "ok": true,
+    "value": {
+     "avShut": 0.208,
+     "slOpen": 0.27922506962980526,
+     "slShut": 0.5462736732220129,
+     "avOpen": 0.601
+    }
+   },
+   "K": {
+    "kind": "structural",
+    "what": "isovolumetric phases move no blood (<0.5 ml)",
+    "ok": true,
+    "value": [
+     0.0002961737392439545,
+     0.00002816229359581257
+    ]
+   },
+   "L": {
+    "kind": "predicted",
+    "what": "isovolumetric contraction 0.03-0.09 s",
+    "ok": true,
+    "value": 0.056980055703844214
+   },
+   "M": {
+    "kind": "predicted",
+    "what": "isovolumetric relaxation 0.04-0.12 s",
+    "ok": true,
+    "value": 0.04378106142238965
+   },
+   "N": {
+    "kind": "predicted",
+    "what": "atrial systole supplies 0.15-0.30 of filling",
+    "ok": true,
+    "value": 0.19540746475852222
+   },
+   "O": {
+    "kind": "limitation",
+    "what": "peak LV exceeds recorded aortic systolic by the lumped inertial term (<= 45 mmHg)",
+    "ok": true,
+    "value": [
+     152.49077787247768,
+     120.01448996233786,
+     32.47628791013982
+    ]
+   },
+   "P": {
+    "kind": "structural",
+    "what": "the cycle is periodic: t=0 and t=1 agree",
+    "ok": true,
+    "value": 106.29152504756533
+   },
+   "Q": {
+    "kind": "predicted",
+    "what": "long axis shortens 0.12-0.18 while the minor axis shortens 0.30 (stated)",
+    "ok": true,
+    "value": 0.14965986394557806
+   },
+   "R": {
+    "kind": "predicted",
+    "what": "LV wall 9-11 mm at end-diastole, 13-18 mm at end-systole (myocardial volume conserved)",
+    "ok": true,
+    "value": [
+     9.999999999999993,
+     14.043949053935357
+    ]
+   }
+  },
+  "allPass": true,
+  "left": {
+   "edv": 119.985356058354,
+   "esv": 49.90701474365023,
+   "sv": 70.07834131470378,
+   "ef": 0.5840574518162174,
+   "q_peak": 564.3043941242029,
+   "systole_s": 0.2706189385776104,
+   "diastole_s": 0.5293810614223896,
+   "ivc_s": 0.056980055703844214,
+   "ejection_s": 0.21363888287376614,
+   "ivr_s": 0.04378106142238965,
+   "filling_s": 0.48560000000000003,
+   "kick_frac": 0.19540746475852222,
+   "art_sys": 120.01448996233786,
+   "art_dia": 80.00708784427049,
+   "pv_peak": 152.49077787247768,
+   "atr_peak": 14.058093456937396,
+   "events": {
+    "avShut": 0.208,
+    "slOpen": 0.27922506962980526,
+    "slShut": 0.5462736732220129,
+    "avOpen": 0.601
+   }
+  },
+  "right": {
+   "edv": 130.0677351475266,
+   "esv": 60.05606209569701,
+   "sv": 70.0116730518296,
+   "ef": 0.538270870730703,
+   "q_peak": 448.9115151640393,
+   "art_sys": 24.96269272058105,
+   "art_dia": 9.961047001927748,
+   "pv_peak": 30.947572495160074,
+   "events": {
+    "avShut": 0.1045,
+    "slOpen": 0.24623458503698253,
+    "slShut": 0.5840115385003001,
+    "avOpen": 0.584
+   }
+  },
+  "geometry": {
+   "stated": {
+    "fs_minor_lv": 0.3,
+    "tapse_rv": 2,
+    "wall_ed_lv_mm": 10,
+    "wall_ed_rv_mm": 3.5
+   },
+   "longShort": 0.14965986394557806,
+   "rv_minorShort": 0.2061031923029445,
+   "rv_tube_R_ed_cm": 3.0381273808955807,
+   "rv_tube_R_es_cm": 2.411959629070018,
+   "rv_path_length_cm": 15.356420149789994,
+   "rv_solve_converged_cm": 0.0000012147430763498335,
+   "wall_ed_mm": 9.999999999999993,
+   "wall_es_mm": 14.043949053935357,
+   "rv_wall_ed_mm": 3.4999999204425816,
+   "rv_wall_es_mm": 5.703795500857469,
+   "lvid_d_cm": 5.333358532242618,
+   "lvid_s_cm": 3.733350972569832,
+   "lv_myocardial_volume_ml": 135.23371722340943,
+   "lv_mass_g": 141.99540308457992,
+   "rv_myocardial_volume_ml": 34.769661095926004,
+   "rv_mass_g": 36.50814415072231,
+   "lv_long_ed_cm": 8,
+   "lv_long_es_cm": 6.8027210884353755,
+   "av_plane_descent_cm": 1.1972789115646245,
+   "tapse_cm": 2
+  }
+ },
+ "volumes": [
+  {
+   "t": 0.208,
+   "mesh": {
+    "lv_blood": 118.23605145352002,
+    "rv_blood": 128.13883765316587,
+    "la_blood": 57.141997546407296,
+    "ra_blood": 58.916653536865326
+   },
+   "solved": {
+    "lv_blood": 119.985356058354,
+    "rv_blood": 130.0677351475266,
+    "la_blood": 58.06023066344348,
+    "ra_blood": 59.86343137398735
+   }
+  },
+  {
+   "t": 0.33,
+   "mesh": {
+    "lv_blood": 115.24385580690823,
+    "rv_blood": 122.088874469376,
+    "la_blood": 60.39410975569785,
+    "ra_blood": 67.75306826268125
+   },
+   "solved": {
+    "lv_blood": 116.94886694439336,
+    "rv_blood": 123.92565344831425,
+    "la_blood": 61.36465170687857,
+    "ra_blood": 68.84198152884262
+   }
+  },
+  {
+   "t": 0.546,
+   "mesh": {
+    "lv_blood": 49.17980791979461,
+    "rv_blood": 61.447583636383165,
+    "la_blood": 60.49376477654375,
+    "ra_blood": 69.33161069478705
+   },
+   "solved": {
+    "lv_blood": 49.90701474365023,
+    "rv_blood": 62.3661640130931,
+    "la_blood": 61.46590944487397,
+    "ra_blood": 70.4459161742539
+   }
+  },
+  {
+   "t": 0.88,
+   "mesh": {
+    "lv_blood": 93.29914889865779,
+    "rv_blood": 101.17223277712573,
+    "la_blood": 56.29823477836487,
+    "ra_blood": 61.89371952489985
+   },
+   "solved": {
+    "lv_blood": 94.67932962914131,
+    "rv_blood": 102.69146192869786,
+    "la_blood": 57.202896904236006,
+    "ra_blood": 62.88838220534292
+   }
+  }
+ ],
+ "refs": [
+  {
+   "key": "lv",
+   "ref": "cardiac-cycle-pumping#lv",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5120
+  },
+  {
+   "key": "rv",
+   "ref": "cardiac-cycle-pumping#rv",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5336
+  },
+  {
+   "key": "septum",
+   "ref": "cardiac-cycle-pumping#septum",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3760
+  },
+  {
+   "key": "la",
+   "ref": "cardiac-cycle-pumping#la",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5560
+  },
+  {
+   "key": "ra",
+   "ref": "cardiac-cycle-pumping#ra",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5560
+  },
+  {
+   "key": "lv_blood",
+   "ref": "cardiac-cycle-pumping#lv_blood",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3760
+  },
+  {
+   "key": "rv_blood",
+   "ref": "cardiac-cycle-pumping#rv_blood",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3600
+  },
+  {
+   "key": "la_blood",
+   "ref": "cardiac-cycle-pumping#la_blood",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3760
+  },
+  {
+   "key": "ra_blood",
+   "ref": "cardiac-cycle-pumping#ra_blood",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3760
+  },
+  {
+   "key": "mitral",
+   "ref": "cardiac-cycle-pumping#mitral",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2016
+  },
+  {
+   "key": "tricuspid",
+   "ref": "cardiac-cycle-pumping#tricuspid",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3024
+  },
+  {
+   "key": "aortic",
+   "ref": "cardiac-cycle-pumping#aortic",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2760
+  },
+  {
+   "key": "pulmonary",
+   "ref": "cardiac-cycle-pumping#pulmonary",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2760
+  },
+  {
+   "key": "papillary",
+   "ref": "cardiac-cycle-pumping#papillary",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 420
+  },
+  {
+   "key": "av_plane",
+   "ref": "cardiac-cycle-pumping#av_plane",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3760
+  },
+  {
+   "key": "aorta",
+   "ref": "cardiac-cycle-pumping#aorta",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 200
+  },
+  {
+   "key": "pulm_trunk",
+   "ref": "cardiac-cycle-pumping#pulm_trunk",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 160
+  },
+  {
+   "key": "svc",
+   "ref": "cardiac-cycle-pumping#svc",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 96
+  },
+  {
+   "key": "ivc",
+   "ref": "cardiac-cycle-pumping#ivc",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 96
+  },
+  {
+   "key": "pulm_veins",
+   "ref": "cardiac-cycle-pumping#pulm_veins",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 144
+  },
+  {
+   "key": "flow_left_in",
+   "ref": "cardiac-cycle-pumping#flow_left_in",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 960
+  },
+  {
+   "key": "flow_left_out",
+   "ref": "cardiac-cycle-pumping#flow_left_out",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 960
+  },
+  {
+   "key": "flow_right_in",
+   "ref": "cardiac-cycle-pumping#flow_right_in",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 960
+  },
+  {
+   "key": "flow_right_out",
+   "ref": "cardiac-cycle-pumping#flow_right_out",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 960
+  }
+ ],
+ "fit": {
+  "size": [
+   15.30550765991211,
+   17.198049545288086,
+   14.4212646484375
+  ],
+  "distance": 38.998297310987255
+ },
+ "refs_mid": [
+  {
+   "key": "lv",
+   "ref": "cardiac-cycle-pumping#lv@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5120
+  },
+  {
+   "key": "rv",
+   "ref": "cardiac-cycle-pumping#rv@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5324
+  },
+  {
+   "key": "septum",
+   "ref": "cardiac-cycle-pumping#septum@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3760
+  },
+  {
+   "key": "la",
+   "ref": "cardiac-cycle-pumping#la@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5560
+  },
+  {
+   "key": "ra",
+   "ref": "cardiac-cycle-pumping#ra@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5560
+  },
+  {
+   "key": "lv_blood",
+   "ref": "cardiac-cycle-pumping#lv_blood@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3760
+  },
+  {
+   "key": "rv_blood",
+   "ref": "cardiac-cycle-pumping#rv_blood@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3600
+  },
+  {
+   "key": "la_blood",
+   "ref": "cardiac-cycle-pumping#la_blood@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3760
+  },
+  {
+   "key": "ra_blood",
+   "ref": "cardiac-cycle-pumping#ra_blood@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3760
+  },
+  {
+   "key": "mitral",
+   "ref": "cardiac-cycle-pumping#mitral@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2016
+  },
+  {
+   "key": "tricuspid",
+   "ref": "cardiac-cycle-pumping#tricuspid@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3024
+  },
+  {
+   "key": "aortic",
+   "ref": "cardiac-cycle-pumping#aortic@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2760
+  },
+  {
+   "key": "pulmonary",
+   "ref": "cardiac-cycle-pumping#pulmonary@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2760
+  },
+  {
+   "key": "papillary",
+   "ref": "cardiac-cycle-pumping#papillary@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 420
+  },
+  {
+   "key": "av_plane",
+   "ref": "cardiac-cycle-pumping#av_plane@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3760
+  },
+  {
+   "key": "aorta",
+   "ref": "cardiac-cycle-pumping#aorta@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 200
+  },
+  {
+   "key": "pulm_trunk",
+   "ref": "cardiac-cycle-pumping#pulm_trunk@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 160
+  },
+  {
+   "key": "svc",
+   "ref": "cardiac-cycle-pumping#svc@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 96
+  },
+  {
+   "key": "ivc",
+   "ref": "cardiac-cycle-pumping#ivc@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 96
+  },
+  {
+   "key": "pulm_veins",
+   "ref": "cardiac-cycle-pumping#pulm_veins@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 144
+  },
+  {
+   "key": "flow_left_in",
+   "ref": "cardiac-cycle-pumping#flow_left_in@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 960
+  },
+  {
+   "key": "flow_left_out",
+   "ref": "cardiac-cycle-pumping#flow_left_out@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 960
+  },
+  {
+   "key": "flow_right_in",
+   "ref": "cardiac-cycle-pumping#flow_right_in@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 960
+  },
+  {
+   "key": "flow_right_out",
+   "ref": "cardiac-cycle-pumping#flow_right_out@0.33",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 960
+  }
+ ],
+ "stageable": [
+  {
+   "key": "lv",
+   "stageable": true
+  },
+  {
+   "key": "rv",
+   "stageable": true
+  },
+  {
+   "key": "septum",
+   "stageable": true
+  },
+  {
+   "key": "la",
+   "stageable": true
+  },
+  {
+   "key": "ra",
+   "stageable": true
+  },
+  {
+   "key": "lv_blood",
+   "stageable": true
+  },
+  {
+   "key": "rv_blood",
+   "stageable": true
+  },
+  {
+   "key": "la_blood",
+   "stageable": true
+  },
+  {
+   "key": "ra_blood",
+   "stageable": true
+  },
+  {
+   "key": "mitral",
+   "stageable": true
+  },
+  {
+   "key": "tricuspid",
+   "stageable": true
+  },
+  {
+   "key": "aortic",
+   "stageable": true
+  },
+  {
+   "key": "pulmonary",
+   "stageable": true
+  },
+  {
+   "key": "papillary",
+   "stageable": true
+  },
+  {
+   "key": "av_plane",
+   "stageable": true
+  },
+  {
+   "key": "aorta",
+   "stageable": true
+  },
+  {
+   "key": "pulm_trunk",
+   "stageable": true
+  },
+  {
+   "key": "svc",
+   "stageable": true
+  },
+  {
+   "key": "ivc",
+   "stageable": true
+  },
+  {
+   "key": "pulm_veins",
+   "stageable": true
+  },
+  {
+   "key": "flow_left_in",
+   "stageable": true
+  },
+  {
+   "key": "flow_left_out",
+   "stageable": true
+  },
+  {
+   "key": "flow_right_in",
+   "stageable": true
+  },
+  {
+   "key": "flow_right_out",
+   "stageable": true
+  }
+ ],
+ "adapterConsole": []
+}

@@ -1,0 +1,204 @@
+<!doctype html><meta charset=utf8>
+<link rel="icon" href="data:,">
+<body style="margin:0;background:#0e1626">
+<canvas id=c width=900 height=1240></canvas>
+<script src="http://127.0.0.1:36013/node_modules/three/build/three.js"></script>
+<script src="http://127.0.0.1:36013/models3d/render-kit.js"></script>
+<script src="http://127.0.0.1:36013/models3d/fetal-circulation.js"></script>
+<script>
+window.MEDBANK_CONFIG = { MODEL_BASE: 'http://127.0.0.1:36013/models3d/' };
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true });
+renderer.setSize(900, 1240, false); renderer.setPixelRatio(1);
+VizKit.configureRenderer(renderer);
+const scene = new THREE.Scene();
+scene.background = VizKit.bg(0x0e1626);
+const L = VizKit.standardLights(scene);
+const camera = new THREE.PerspectiveCamera(32, 900/1240, 0.1, 400);
+let group = null;
+const MOD = window.MB3D_MODELS['fetal-circulation'];
+
+window.setStage = function (t, opts, yaw, pitch, show) {
+  if (group) scene.remove(group);
+  const holder = new THREE.Group();
+  holder.add(MOD.build(t, Object.assign({}, opts || {})));
+  group = holder;
+  /* A VIEW IS ALSO WHAT IT SHOWS. Ignoring each view's SHOW_STRUCTURE list would make two views that
+     differ only in what they reveal come out as the SAME FRAME, and the frame-difference check could
+     then not tell a real duplicate from its own blindness. */
+  if (show && show.length) {
+    const keep = {};
+    for (const k of show) keep[k] = 1;
+    group.traverse(function (o) {
+      if (!o.isMesh) return;
+      const k = o.userData && o.userData.key;
+      if (k && !keep[k]) o.visible = false;
+    });
+  }
+  group.rotation.y = yaw == null ? -0.18 : yaw;
+  group.rotation.x = pitch == null ? 0.04 : pitch;
+  group.updateMatrixWorld(true);
+  scene.add(group);
+  const f = VizKit.fitCamera(camera, group, 1.05);
+  camera.position.set(f.centre.x, f.centre.y, f.centre.z + f.distance);
+  camera.lookAt(f.centre);
+  L.key.position.set(camera.position.x + 6, camera.position.y + 9, camera.position.z + 5);
+  renderer.render(scene, camera);
+  return { size: f.size.toArray(), distance: f.distance };
+};
+
+window.normalProbe = function (t, opts) {
+  const g = MOD.build(t, Object.assign({}, opts || {}));
+  g.updateMatrixWorld(true);
+  const rows = [];
+  const nm = new THREE.Matrix3();
+  g.traverse(function (o) {
+    if (!o.isMesh || !o.geometry) return;
+    const u = o.userData || {};
+    if (u.outline) return;
+    const geo = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry;
+    const p = geo.attributes.position, n = geo.attributes.normal;
+    if (!n) return;
+    const hull = (o.geometry.userData && o.geometry.userData.hullCount) || 0;
+    nm.getNormalMatrix(o.matrixWorld);
+    const c = new THREE.Vector3(), v = new THREE.Vector3(), w = new THREE.Vector3();
+    for (let i = 0; i < p.count; i++) c.add(v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld));
+    c.divideScalar(p.count);
+    let out = 0, outHull = 0;
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld).sub(c);
+      w.fromBufferAttribute(n, i).applyMatrix3(nm).normalize();
+      if (v.dot(w) > 0) { out++; if (i < hull) outHull++; }
+    }
+    function wind(limit) {
+      let agree = 0, tris = 0;
+      const a1 = new THREE.Vector3(), b1 = new THREE.Vector3(), c1 = new THREE.Vector3();
+      const e1 = new THREE.Vector3(), e2 = new THREE.Vector3(), fn = new THREE.Vector3(), vn = new THREE.Vector3();
+      for (let i = 0; i + 2 < limit; i += 3) {
+        a1.fromBufferAttribute(p, i); b1.fromBufferAttribute(p, i+1); c1.fromBufferAttribute(p, i+2);
+        fn.copy(e1.subVectors(b1, a1).cross(e2.subVectors(c1, a1)));
+        if (fn.lengthSq() < 1e-16) continue;
+        fn.normalize(); vn.set(0,0,0);
+        for (let k = 0; k < 3; k++) vn.add(new THREE.Vector3().fromBufferAttribute(n, i+k));
+        if (vn.lengthSq() < 1e-16) continue;
+        vn.normalize(); tris++; if (fn.dot(vn) > 0) agree++;
+      }
+      return { tris: tris, frac: tris ? agree / tris : null };
+    }
+    const wAll = wind(p.count), wHull = wind(hull || p.count);
+    rows.push({ key: u.key, verts: p.count, outward: out / p.count,
+                hullVerts: hull, outwardHull: hull ? outHull / hull : null,
+                tris: wAll.tris, winding: wAll.frac,
+                hullTris: wHull.tris, hullWinding: wHull.frac });
+  });
+  return rows;
+};
+
+/* NO OPEN LUMEN — every closed solid in the model; the transparent lungs and the tiny flow cones
+   are excluded, the lungs because they are deliberately see-through. */
+const SKIP = { flow: 1, lungs: 1, midline: 1 };
+window.lumenProbe = function (grid) {
+  const N = grid || 88;
+  const rc = new THREE.Raycaster();
+  const targets = [];
+  group.traverse(function (o) {
+    if (!o.isMesh || !o.geometry) return;
+    const u = o.userData || {};
+    if (u.outline || SKIP[u.key] || !o.visible) return;
+    if (o.material && o.material.transparent) return;
+    targets.push(o);
+  });
+  const nm = new THREE.Matrix3();
+  const a1 = new THREE.Vector3(), b1 = new THREE.Vector3(), c1 = new THREE.Vector3();
+  const e1 = new THREE.Vector3(), e2 = new THREE.Vector3(), fn = new THREE.Vector3();
+  let hits = 0, back = 0; const offenders = {};
+  for (let iy = 0; iy < N; iy++) for (let ix = 0; ix < N; ix++) {
+    const ndc = new THREE.Vector2((ix + 0.5) / N * 2 - 1, 1 - (iy + 0.5) / N * 2);
+    rc.setFromCamera(ndc, camera);
+    const hit = rc.intersectObjects(targets, false)[0];
+    if (!hit) continue;
+    hits++;
+    const p = hit.object.geometry.attributes.position, f = hit.face;
+    a1.fromBufferAttribute(p, f.a); b1.fromBufferAttribute(p, f.b); c1.fromBufferAttribute(p, f.c);
+    fn.copy(e1.subVectors(b1, a1).cross(e2.subVectors(c1, a1)));
+    if (fn.lengthSq() < 1e-16) continue;
+    nm.getNormalMatrix(hit.object.matrixWorld);
+    fn.normalize().applyMatrix3(nm).normalize();
+    if (fn.dot(rc.ray.direction) > 0.02) {
+      back++;
+      const k = hit.object.userData.key;
+      offenders[k] = (offenders[k] || 0) + 1;
+    }
+  }
+  return { rays: N * N, hits: hits, backfaceFirst: back, frac: hits ? back / hits : 0, offenders: offenders };
+};
+
+/* THE BOXES ARE REAL — the spatial claims re-measured on the vertices actually drawn */
+window.boxProbe = function (t, opts) {
+  const g = MOD.build(t, Object.assign({}, opts || {}));
+  g.updateMatrixWorld(true);
+  const acc = {};
+  const v = new THREE.Vector3();
+  g.traverse(function (o) {
+    if (!o.isMesh || !o.geometry || (o.userData && o.userData.outline)) return;
+    const k = o.userData && o.userData.key; if (!k) return;
+    const p = o.geometry.attributes.position; if (!p) return;
+    const a = acc[k] || (acc[k] = { minx:1e9,maxx:-1e9,miny:1e9,maxy:-1e9,minz:1e9,maxz:-1e9,cx:0,cy:0,cz:0,n:0 });
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld);
+      a.minx=Math.min(a.minx,v.x); a.maxx=Math.max(a.maxx,v.x);
+      a.miny=Math.min(a.miny,v.y); a.maxy=Math.max(a.maxy,v.y);
+      a.minz=Math.min(a.minz,v.z); a.maxz=Math.max(a.maxz,v.z);
+      a.cx+=v.x; a.cy+=v.y; a.cz+=v.z; a.n++;
+    }
+  });
+  for (const k of Object.keys(acc)) { const a=acc[k]; a.cx/=a.n; a.cy/=a.n; a.cz/=a.n; }
+  return acc;
+};
+
+function readPixels() {
+  const gl = renderer.getContext();
+  const w = renderer.domElement.width, h = renderer.domElement.height;
+  const buf = new Uint8Array(w * h * 4);
+  gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, buf);
+  return buf;
+}
+window.frameDiff = function (a, b) {
+  window.setStage(a.t, a.opts || {}, a.yaw, a.pitch, a.show);
+  const pa = readPixels();
+  window.setStage(b.t, b.opts || {}, b.yaw, b.pitch, b.show);
+  const pb = readPixels();
+  let d = 0, lit = 0;
+  for (let i = 0; i < pa.length; i += 4) {
+    const dr = Math.abs(pa[i] - pb[i]) + Math.abs(pa[i+1] - pb[i+1]) + Math.abs(pa[i+2] - pb[i+2]);
+    if (dr > 16) d++;
+    if (pa[i] + pa[i+1] + pa[i+2] > 90 || pb[i] + pb[i+1] + pb[i+2] > 90) lit++;
+  }
+  return { changed: d, lit: lit, frac: lit ? d / lit : 0 };
+};
+
+/* THE PICTURE CARRIES THE CLAIM. Render one key alone and average the colour of its lit pixels.
+   A saturation ordering that does not survive to the screen is not being taught. */
+window.litColour = function (t, opts, key) {
+  window.setStage(t, opts || {}, -0.18, 0.04, [key]);
+  const px = readPixels();
+  let r = 0, g2 = 0, b = 0, n = 0;
+  for (let i = 0; i < px.length; i += 4) {
+    if (px[i] + px[i+1] + px[i+2] < 110) continue;
+    r += px[i]; g2 += px[i+1]; b += px[i+2]; n++;
+  }
+  return n ? { r: r/n, g: g2/n, b: b/n, pixels: n, warmth: (r/n - b/n) } : { pixels: 0, warmth: null };
+};
+window.acceptance = function () { return MOD.acceptance(); };
+window.negatives  = function () { return MOD.negatives(); };
+window.physiology = function (t, o) { const s = MOD.physiology(t, o);
+  return { flow: { fo: s.flow.fo, da: s.flow.da, lung: s.flow.lung, plac: s.flow.plac,
+                   rv: s.flow.rv, lv: s.flow.lv, residual: s.flow.residual },
+           sat: s.sat, flap: s.flow.dPatria }; };
+window.keysBuilt = function (t, opts) {
+  const g = MOD.build(t, Object.assign({}, opts || {}));
+  const s = {};
+  g.traverse(o => { if (o.isMesh && o.userData && o.userData.key && !o.userData.outline)
+    s[o.userData.key] = (s[o.userData.key] || 0) + o.geometry.attributes.position.count / 3; });
+  return s;
+};
+</script>

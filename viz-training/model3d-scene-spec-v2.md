@@ -71,7 +71,7 @@ is simply false.
       "key": "bic_long",              // stable id used by ops and by term→part links
       "name": "long head of right biceps brachii",   // MUST equal the catalog name, character for character
       "label": "Biceps — long head",  // what the student reads
-      "role": "part",                 // "part" (in the student's list) | "context" (scaffolding)
+      "role": "part",                 // "primary" | "part" (both in the student's list) | "context" (scaffolding)
       "group": "Biceps brachii",
       "layer": "muscle",              // for PEEL_LAYER: skin | fascia | muscle | vessel | organ | bone
       "color": "#c23a3a",
@@ -105,6 +105,59 @@ is simply false.
 
 v1's `meshes[]` + `parts[]` collapse into one `structures[]` separated by `role`, removing the ambiguity
 where the same model appeared in both arrays with different labels.
+
+### The three roles, and the rule the engine actually applies
+
+| role | in the student's tappable list | survives a cross-section | meaning |
+|---|---|---|---|
+| `primary` | yes | yes | the headline subject — the medulla in the medulla scene, the ACA and MCA in anterior circulation |
+| `part` | yes | yes | a taught structure alongside the subject |
+| `context` | no — it gets a pin, not a button | no, it is clipped away | scaffolding, there so the subject has somewhere to be |
+
+**The engine asks one question, in one place: is this taught?** `isTaught()` in `viz3d.js` answers
+`role !== 'context'`, so an unrecognised role counts as taught. That direction is deliberate: a
+structure an author bothered to name and colour is more safely shown and tappable than silently
+clipped out of the picture.
+
+This section exists because the spec used to declare only `part` and `context` while 92 structures in
+25 scenes were already using `primary`, and four separate places in the engine tested the role inline —
+three as `role === 'part'` and a fourth, easy to miss, as `role !== 'part'` where it was partitioning
+structures into taught and scaffolding, which would have double-counted every `primary` once the first
+three were fixed. Every one of those 92 was therefore treated as scaffolding — dropped from the part list, given
+a context pin, and clipped away in cross-sections. Measured across the corpus: 25 scenes, 92
+structures. Three of those scenes carry no `role: "part"` at all — `histology__epithelium__cell-junctions`,
+`histology__epithelium__simple-epithelia` and `neuroanatomy__limbic-system__amygdala` — so their part
+lists were empty. The scene loaded, the console was clean, and there was nothing for a student to tap.
+
+**The lesson is not "document your roles".** It is that a vocabulary check belongs in one function
+rather than at each call site, because the failure of an inline `=== 'part'` is invisible — it does
+not throw, it does not warn, it just quietly moves a structure into the other category.
+
+### `views[].mode` — a different vocabulary from the scene's `mode`, and the one coverage reads
+
+Two fields are called `mode` and they mean unrelated things. **The scene's `mode`** (below, "Mode is a
+property of the concept") says which engine can render the scene: `3d_anatomy`, `microscopic`,
+`diagram`, `sequence`, `comparison`, `imaging`. **A view's `mode`** says what that beat teaches, and
+must be one of the view types `CURRICULUM.json` uses:
+
+`location` · `cross_section` · `mechanism` · `vasculature` · `associated_organs` · `glands` ·
+`contraction_filter` · `comparison`
+
+**This is the field `tools/coverage.mjs` matches on, as an exact string.** Every structure in the
+curriculum declares the view types it needs, and a structure is covered when its scene carries a view
+of each. So a view whose mode is outside this list counts for nothing: the scene teaches the thing,
+the coverage report says it does not, and the gap is queued as work that is already done.
+
+That happened. `cardiac-looping` labels all nine of its views `process`, while its curriculum entry
+declares `mechanism` — a scene that teaches looping in nine careful beats reported **0 of 1** view
+slots covered. `comparison` also turns up, in eight scenes, and is the collision between the two
+vocabularies: it is a legitimate scene mode, so it looked legitimate on a view. It is allowed here,
+because in every one of those eight it sits alongside all the declared types rather than instead of
+one — an extra beat, costing nothing.
+
+`tools/validate-scenes.mjs` now rejects a view mode outside this list, for the same reason it rejects
+an unknown role: the failure is silent, and a silent failure in the coverage report is worse than a
+loud one, because it sends someone to build a scene that already exists.
 
 ## The op vocabulary
 

@@ -1,0 +1,180 @@
+{
+  "measured": 11,
+  "scenesSkippedForMissingMeshes": 0,
+  "views": 94,
+  "toolErrors": 0,
+  "framingFailures": 9,
+  "sceneDefects": 1,
+  "engineDefectsNotThisItem": 9,
+  "failures": [
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 3,
+      "title": "Soft centre, tough ring",
+      "why": [
+        "clipped at rest",
+        "fillH 319.9% — subject does not fit",
+        "fillW 272.3% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 5,
+      "title": "The nerve next door",
+      "why": [
+        "clipped at rest",
+        "fillH 10446.5% — subject does not fit",
+        "fillW 9978% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 7,
+      "title": "Take the discs away",
+      "why": [
+        "clipped at rest",
+        "fillH 10446.5% — subject does not fit",
+        "fillW 9978% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__vertebral-column",
+      "view": 6,
+      "title": "Take the discs away",
+      "why": [
+        "clipped at rest",
+        "fillH 3106.8% — subject does not fit",
+        "fillW 858.1% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "gross__forearm-hand__carpal-tunnel",
+      "view": 6,
+      "title": "Nine tendons",
+      "why": [
+        "clipped at rest"
+      ]
+    },
+    {
+      "scene": "gross__heart-pericardium__heart",
+      "view": 1,
+      "title": "See it in the body",
+      "why": [
+        "clipped at rest",
+        "fillH 500.5% — subject does not fit",
+        "fillW 211.1% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+      "view": 3,
+      "title": "Frontal lobe",
+      "why": [
+        "clipped at rest",
+        "fillH 129.1% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+      "view": 4,
+      "title": "Parietal lobe",
+      "why": [
+        "clipped at rest",
+        "fillH 172.7% — subject does not fit"
+      ]
+    },
+    {
+      "scene": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+      "view": 6,
+      "title": "Occipital lobe",
+      "why": [
+        "clipped at rest",
+        "fillH 431.8% — subject does not fit"
+      ]
+    }
+  ],
+  "sceneDefectViews": [
+    {
+      "scene": "gross__kidney-posterior-abdominal-wall__kidney",
+      "view": 3,
+      "title": "Coverings, then cortex to pelvis",
+      "why": [
+        "the view hides its own subject — all 2 structure(s) it isolates are hidden by its own ops (check PEEL_LAYER)"
+      ]
+    }
+  ],
+  "engineDefectViews": [
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 3,
+      "title": "Soft centre, tough ring",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 5,
+      "title": "The nerve next door",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__intervertebral-disc",
+      "view": 7,
+      "title": "Take the discs away",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "gross__back-vertebral-column__vertebral-column",
+      "view": 6,
+      "title": "Take the discs away",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "gross__forearm-hand__carpal-tunnel",
+      "view": 6,
+      "title": "Nine tendons",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "gross__heart-pericardium__heart",
+      "view": 1,
+      "title": "See it in the body",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+      "view": 3,
+      "title": "Frontal lobe",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+      "view": 4,
+      "title": "Parietal lobe",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    },
+    {
+      "scene": "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes",
+      "view": 6,
+      "title": "Occipital lobe",
+      "why": [
+        "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+      ]
+    }
+  ]
+}

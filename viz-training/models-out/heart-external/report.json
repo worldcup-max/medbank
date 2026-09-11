@@ -1,0 +1,1053 @@
+{
+ "stages": [
+  {
+   "name": "form-ant",
+   "view": "anterior",
+   "opts": {},
+   "file": "viz-training/models-out/heart-external/form-ant.png"
+  },
+  {
+   "name": "form-lat-left",
+   "view": "lateral",
+   "opts": {},
+   "file": "viz-training/models-out/heart-external/form-lat-left.png"
+  },
+  {
+   "name": "form-post",
+   "view": "posterior",
+   "opts": {},
+   "file": "viz-training/models-out/heart-external/form-post.png"
+  },
+  {
+   "name": "form-inf",
+   "view": "inferior",
+   "opts": {},
+   "file": "viz-training/models-out/heart-external/form-inf.png"
+  },
+  {
+   "name": "chambers-ant",
+   "view": "anterior",
+   "opts": {
+    "chambers": true
+   },
+   "file": "viz-training/models-out/heart-external/chambers-ant.png"
+  },
+  {
+   "name": "chambers-post",
+   "view": "posterior",
+   "opts": {
+    "chambers": true
+   },
+   "file": "viz-training/models-out/heart-external/chambers-post.png"
+  },
+  {
+   "name": "surfaces-ant",
+   "view": "anterior",
+   "opts": {
+    "surfaces": true
+   },
+   "file": "viz-training/models-out/heart-external/surfaces-ant.png"
+  },
+  {
+   "name": "surfaces-inf",
+   "view": "inferior",
+   "opts": {
+    "surfaces": true
+   },
+   "file": "viz-training/models-out/heart-external/surfaces-inf.png"
+  },
+  {
+   "name": "surfaces-lat",
+   "view": "lateral",
+   "opts": {
+    "surfaces": true
+   },
+   "file": "viz-training/models-out/heart-external/surfaces-lat.png"
+  },
+  {
+   "name": "borders-ant",
+   "view": "anterior",
+   "opts": {
+    "borders": true
+   },
+   "file": "viz-training/models-out/heart-external/borders-ant.png"
+  },
+  {
+   "name": "sulci-ant",
+   "view": "anterior",
+   "opts": {
+    "sulci": true
+   },
+   "file": "viz-training/models-out/heart-external/sulci-ant.png"
+  },
+  {
+   "name": "sulci-post",
+   "view": "posterior",
+   "opts": {
+    "sulci": true
+   },
+   "file": "viz-training/models-out/heart-external/sulci-post.png"
+  },
+  {
+   "name": "sulci-inf",
+   "view": "inferior",
+   "opts": {
+    "sulci": true
+   },
+   "file": "viz-training/models-out/heart-external/sulci-inf.png"
+  },
+  {
+   "name": "sulci-lat",
+   "view": "lateral",
+   "opts": {
+    "sulci": true
+   },
+   "file": "viz-training/models-out/heart-external/sulci-lat.png"
+  },
+  {
+   "name": "poles-lat",
+   "view": "lateral",
+   "opts": {
+    "poles": true
+   },
+   "file": "viz-training/models-out/heart-external/poles-lat.png"
+  },
+  {
+   "name": "peri-ant",
+   "view": "anterior",
+   "opts": {
+    "pericardium": true
+   },
+   "file": "viz-training/models-out/heart-external/peri-ant.png"
+  },
+  {
+   "name": "context-ant",
+   "view": "anterior",
+   "opts": {
+    "context": true
+   },
+   "file": "viz-training/models-out/heart-external/context-ant.png"
+  },
+  {
+   "name": "context-lat",
+   "view": "lateral",
+   "opts": {
+    "context": true
+   },
+   "file": "viz-training/models-out/heart-external/context-lat.png"
+  },
+  {
+   "name": "full-ant",
+   "view": "anterior",
+   "opts": {
+    "chambers": true,
+    "surfaces": true,
+    "borders": true,
+    "sulci": true,
+    "poles": true,
+    "pericardium": true,
+    "context": true
+   },
+   "file": "viz-training/models-out/heart-external/full-ant.png"
+  }
+ ],
+ "console": [
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x2edc0011e000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x2edc0011e000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x2edc0011e000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x2edc0011e000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  }
+ ],
+ "normals": [
+  {
+   "key": "heart",
+   "verts": 130032,
+   "outward": 1,
+   "hullVerts": 130032,
+   "outwardHull": 1,
+   "tris": 43344,
+   "winding": 1
+  },
+  {
+   "key": "rv",
+   "verts": 21504,
+   "outward": 1,
+   "hullVerts": 21504,
+   "outwardHull": 1,
+   "tris": 7168,
+   "winding": 1
+  },
+  {
+   "key": "lv",
+   "verts": 21504,
+   "outward": 1,
+   "hullVerts": 21504,
+   "outwardHull": 1,
+   "tris": 7168,
+   "winding": 1
+  },
+  {
+   "key": "ra",
+   "verts": 21504,
+   "outward": 1,
+   "hullVerts": 21504,
+   "outwardHull": 1,
+   "tris": 7168,
+   "winding": 1
+  },
+  {
+   "key": "la",
+   "verts": 21504,
+   "outward": 1,
+   "hullVerts": 21504,
+   "outwardHull": 1,
+   "tris": 7168,
+   "winding": 1
+  },
+  {
+   "key": "lv",
+   "verts": 8640,
+   "outward": 1,
+   "hullVerts": 8640,
+   "outwardHull": 1,
+   "tris": 2880,
+   "winding": 1
+  },
+  {
+   "key": "ra_auricle",
+   "verts": 2040,
+   "outward": 1,
+   "hullVerts": 1920,
+   "outwardHull": 1,
+   "tris": 680,
+   "winding": 0.9411764705882353
+  },
+  {
+   "key": "la_auricle",
+   "verts": 2268,
+   "outward": 0.8121693121693122,
+   "hullVerts": 2160,
+   "outwardHull": 0.8027777777777778,
+   "tris": 756,
+   "winding": 0.9523809523809523
+  },
+  {
+   "key": "coronary_sulcus",
+   "verts": 3360,
+   "outward": 1,
+   "hullVerts": 3360,
+   "outwardHull": 1,
+   "tris": 1120,
+   "winding": 1
+  },
+  {
+   "key": "ant_iv_sulcus",
+   "verts": 2160,
+   "outward": 1,
+   "hullVerts": 2160,
+   "outwardHull": 1,
+   "tris": 720,
+   "winding": 1
+  },
+  {
+   "key": "post_iv_sulcus",
+   "verts": 2160,
+   "outward": 1,
+   "hullVerts": 2160,
+   "outwardHull": 1,
+   "tris": 720,
+   "winding": 1
+  },
+  {
+   "key": "apex",
+   "verts": 6048,
+   "outward": 1,
+   "hullVerts": 6048,
+   "outwardHull": 1,
+   "tris": 2016,
+   "winding": 1
+  },
+  {
+   "key": "base",
+   "verts": 6048,
+   "outward": 1,
+   "hullVerts": 6048,
+   "outwardHull": 1,
+   "tris": 2016,
+   "winding": 1
+  },
+  {
+   "key": "surf_sternocostal",
+   "verts": 12144,
+   "outward": 0.982707509881423,
+   "hullVerts": 12144,
+   "outwardHull": 0.982707509881423,
+   "tris": 4048,
+   "winding": 1
+  },
+  {
+   "key": "surf_diaphragmatic",
+   "verts": 10080,
+   "outward": 1,
+   "hullVerts": 10080,
+   "outwardHull": 1,
+   "tris": 3360,
+   "winding": 1
+  },
+  {
+   "key": "surf_left_pulmonary",
+   "verts": 7200,
+   "outward": 0.97,
+   "hullVerts": 7200,
+   "outwardHull": 0.97,
+   "tris": 2400,
+   "winding": 1
+  },
+  {
+   "key": "border_right",
+   "verts": 1224,
+   "outward": 0.8823529411764706,
+   "hullVerts": 1224,
+   "outwardHull": 0.8823529411764706,
+   "tris": 408,
+   "winding": 0.9852941176470589
+  },
+  {
+   "key": "border_inferior",
+   "verts": 1224,
+   "outward": 1,
+   "hullVerts": 1224,
+   "outwardHull": 1,
+   "tris": 408,
+   "winding": 1
+  },
+  {
+   "key": "border_left",
+   "verts": 1224,
+   "outward": 0.9705882352941176,
+   "hullVerts": 1224,
+   "outwardHull": 0.9705882352941176,
+   "tris": 408,
+   "winding": 1
+  },
+  {
+   "key": "border_superior",
+   "verts": 2592,
+   "outward": 1,
+   "hullVerts": 2592,
+   "outwardHull": 1,
+   "tris": 864,
+   "winding": 1
+  },
+  {
+   "key": "pulm_trunk",
+   "verts": 2244,
+   "outward": 1,
+   "hullVerts": 2112,
+   "outwardHull": 1,
+   "tris": 748,
+   "winding": 0.9411764705882353
+  },
+  {
+   "key": "r_pa",
+   "verts": 2052,
+   "outward": 0.935672514619883,
+   "hullVerts": 1944,
+   "outwardHull": 0.9320987654320988,
+   "tris": 684,
+   "winding": 0.8947368421052632
+  },
+  {
+   "key": "l_pa",
+   "verts": 2052,
+   "outward": 0.9736842105263158,
+   "hullVerts": 1944,
+   "outwardHull": 0.9722222222222222,
+   "tris": 684,
+   "winding": 0.9473684210526315
+  },
+  {
+   "key": "asc_aorta",
+   "verts": 2244,
+   "outward": 1,
+   "hullVerts": 2112,
+   "outwardHull": 1,
+   "tris": 748,
+   "winding": 0.9411764705882353
+  },
+  {
+   "key": "aortic_arch",
+   "verts": 3036,
+   "outward": 0.9407114624505929,
+   "hullVerts": 2904,
+   "outwardHull": 0.9380165289256198,
+   "tris": 1012,
+   "winding": 0.9565217391304348
+  },
+  {
+   "key": "lig_arteriosum",
+   "verts": 792,
+   "outward": 1,
+   "hullVerts": 720,
+   "outwardHull": 1,
+   "tris": 264,
+   "winding": 0.9090909090909091
+  },
+  {
+   "key": "svc",
+   "verts": 1836,
+   "outward": 1,
+   "hullVerts": 1728,
+   "outwardHull": 1,
+   "tris": 612,
+   "winding": 0.9411764705882353
+  },
+  {
+   "key": "ivc",
+   "verts": 1404,
+   "outward": 1,
+   "hullVerts": 1296,
+   "outwardHull": 1,
+   "tris": 468,
+   "winding": 0.9230769230769231
+  },
+  {
+   "key": "pulm_veins_r",
+   "verts": 1092,
+   "outward": 1,
+   "hullVerts": 1008,
+   "outwardHull": 1,
+   "tris": 364,
+   "winding": 0.9230769230769231
+  },
+  {
+   "key": "pulm_veins_r",
+   "verts": 1092,
+   "outward": 1,
+   "hullVerts": 1008,
+   "outwardHull": 1,
+   "tris": 364,
+   "winding": 0.9230769230769231
+  },
+  {
+   "key": "pulm_veins_l",
+   "verts": 1092,
+   "outward": 1,
+   "hullVerts": 1008,
+   "outwardHull": 1,
+   "tris": 364,
+   "winding": 0.9230769230769231
+  },
+  {
+   "key": "pulm_veins_l",
+   "verts": 1092,
+   "outward": 1,
+   "hullVerts": 1008,
+   "outwardHull": 1,
+   "tris": 364,
+   "winding": 0.9230769230769231
+  },
+  {
+   "key": "pericardium_visceral_serous",
+   "verts": 42048,
+   "outward": 1,
+   "hullVerts": 42048,
+   "outwardHull": 1,
+   "tris": 14016,
+   "winding": 1
+  },
+  {
+   "key": "pericardial_cavity",
+   "verts": 34320,
+   "outward": 1,
+   "hullVerts": 34320,
+   "outwardHull": 1,
+   "tris": 11440,
+   "winding": 0.9998251748251749
+  },
+  {
+   "key": "pericardium_parietal_serous",
+   "verts": 34320,
+   "outward": 1,
+   "hullVerts": 34320,
+   "outwardHull": 1,
+   "tris": 11440,
+   "winding": 0.9994755244755245
+  },
+  {
+   "key": "pericardium_fibrous",
+   "verts": 42048,
+   "outward": 1,
+   "hullVerts": 42048,
+   "outwardHull": 1,
+   "tris": 14016,
+   "winding": 0.9994292237442922
+  },
+  {
+   "key": "lung_r",
+   "verts": 11616,
+   "outward": 1,
+   "hullVerts": 11616,
+   "outwardHull": 1,
+   "tris": 3872,
+   "winding": 1
+  },
+  {
+   "key": "lung_l",
+   "verts": 11616,
+   "outward": 1,
+   "hullVerts": 11616,
+   "outwardHull": 1,
+   "tris": 3872,
+   "winding": 1
+  },
+  {
+   "key": "diaphragm",
+   "verts": 8736,
+   "outward": 1,
+   "hullVerts": 8736,
+   "outwardHull": 1,
+   "tris": 2912,
+   "winding": 1
+  },
+  {
+   "key": "sternum",
+   "verts": 36,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 12,
+   "winding": 1
+  },
+  {
+   "key": "trachea_bronchi",
+   "verts": 384,
+   "outward": 1,
+   "hullVerts": 288,
+   "outwardHull": 1,
+   "tris": 128,
+   "winding": 0.75
+  },
+  {
+   "key": "trachea_bronchi",
+   "verts": 924,
+   "outward": 1,
+   "hullVerts": 840,
+   "outwardHull": 1,
+   "tris": 308,
+   "winding": 0.9090909090909091
+  },
+  {
+   "key": "trachea_bronchi",
+   "verts": 924,
+   "outward": 1,
+   "hullVerts": 840,
+   "outwardHull": 1,
+   "tris": 308,
+   "winding": 0.9090909090909091
+  },
+  {
+   "key": "oesophagus",
+   "verts": 480,
+   "outward": 1,
+   "hullVerts": 384,
+   "outwardHull": 1,
+   "tris": 160,
+   "winding": 0.8
+  },
+  {
+   "key": "desc_aorta",
+   "verts": 432,
+   "outward": 1,
+   "hullVerts": 324,
+   "outwardHull": 1,
+   "tris": 144,
+   "winding": 0.75
+  },
+  {
+   "key": "phrenic_r",
+   "verts": 1140,
+   "outward": 0.5947368421052631,
+   "hullVerts": 1080,
+   "outwardHull": 0.5722222222222222,
+   "tris": 380,
+   "winding": 0.9473684210526315
+  },
+  {
+   "key": "phrenic_l",
+   "verts": 1140,
+   "outward": 0.5921052631578947,
+   "hullVerts": 1080,
+   "outwardHull": 0.5694444444444444,
+   "tris": 380,
+   "winding": 0.9473684210526315
+  }
+ ],
+ "acceptance": {
+  "pass": {
+   "long_axis_12cm": true,
+   "greatest_width_8p5cm": true,
+   "right_reach_2cm": true,
+   "base_centre_1_to_2p5cm_right": true,
+   "ap_thickness_near_6cm": true,
+   "form_stays_within_1cm_left_of_apex": true,
+   "surf_sternocostal_is_mainly_rv": true,
+   "surf_diaphragmatic_is_mainly_lv": true,
+   "surf_left_pulmonary_is_mainly_lv": true,
+   "apex_is_mainly_lv": true,
+   "base_is_mainly_la": true,
+   "border_right_is_mainly_ra": true,
+   "border_left_is_mainly_lv": true,
+   "border_inferior_is_mainly_rv": true,
+   "apex_is_left_ventricle_alone": true
+  },
+  "allPass": true,
+  "solved": {
+   "W": 4.131576260722817,
+   "X_BASE": -1.2385803520695116,
+   "Z_BASE": 5.1165515190140685,
+   "iterations": 2,
+   "residual": {
+    "width": 1.4033219031261979e-13,
+    "rightReach": 1.554312234475219e-14
+   }
+  },
+  "measured": {
+   "long_axis": 12,
+   "greatest_width_perp_axis": 8.50000000000014,
+   "ap_thickness_perp_axis": 5.997660537664553,
+   "reaches_right_of_median": 2.0000000000000155,
+   "reaches_left_of_median": 8.712119327949162,
+   "base_centre_right_of_median": 1.2385803520695116,
+   "base_centre_depth_z": 5.1165515190140685,
+   "apex": [
+    8.7,
+    -7.3,
+    9.5
+   ],
+   "volume_fraction_left_of_median": 0.8841522757621709
+  },
+  "attribution": {
+   "surf_sternocostal": {
+    "fractions": {
+     "rv": 0.412,
+     "lv": 0.272,
+     "ra": 0.186,
+     "la": 0.13
+    },
+    "largest": "rv"
+   },
+   "surf_diaphragmatic": {
+    "fractions": {
+     "lv": 0.585,
+     "rv": 0.415
+    },
+    "largest": "lv"
+   },
+   "surf_left_pulmonary": {
+    "fractions": {
+     "lv": 0.714,
+     "la": 0.286
+    },
+    "largest": "lv"
+   },
+   "apex": {
+    "fractions": {
+     "lv": 1
+    },
+    "largest": "lv"
+   },
+   "base": {
+    "fractions": {
+     "la": 0.626,
+     "ra": 0.374
+    },
+    "largest": "la"
+   },
+   "border_right": {
+    "fractions": {
+     "ra": 0.805,
+     "rv": 0.195
+    },
+    "largest": "ra"
+   },
+   "border_inferior": {
+    "fractions": {
+     "rv": 0.895,
+     "lv": 0.105
+    },
+    "largest": "rv"
+   },
+   "border_left": {
+    "fractions": {
+     "lv": 0.697,
+     "la": 0.303
+    },
+    "largest": "lv"
+   },
+   "border_superior": {
+    "fractions": {
+     "la": 0.626,
+     "ra": 0.374
+    },
+    "largest": "la"
+   }
+  },
+  "reported_not_asserted": {
+   "volume_fraction_left_of_median": "measured, not solved against. The textbook \"about two thirds of the heart lies to the left of the median plane\" has no stated measurement basis, and volume, projected area and transverse extent give three different answers on the same heart.",
+   "apex_is_not_the_geometric_lowest_point": "the diaphragmatic surface dips below the level of the apex, because the apical cone is wider than its own tilt: for a 26-degree long axis and a 60-degree apical half-angle the lowest point of the surface is on the underside, proximal to the tip. \"The apex is the lowest part of the heart\" is a statement about the APEX BEAT in the 5th intercostal space, and this model puts the apex exactly there; it is not a statement about the lowest millimetre of myocardium, and asserting it as one failed against the geometry."
+  }
+ },
+ "refs": [
+  {
+   "key": "heart",
+   "ref": "heart-external#heart",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 43344
+  },
+  {
+   "key": "ra",
+   "ref": "heart-external#ra",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 7168
+  },
+  {
+   "key": "rv",
+   "ref": "heart-external#rv",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 7168
+  },
+  {
+   "key": "la",
+   "ref": "heart-external#la",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 7168
+  },
+  {
+   "key": "lv",
+   "ref": "heart-external#lv",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 10048
+  },
+  {
+   "key": "ra_auricle",
+   "ref": "heart-external#ra_auricle",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 680
+  },
+  {
+   "key": "la_auricle",
+   "ref": "heart-external#la_auricle",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 756
+  },
+  {
+   "key": "coronary_sulcus",
+   "ref": "heart-external#coronary_sulcus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1120
+  },
+  {
+   "key": "ant_iv_sulcus",
+   "ref": "heart-external#ant_iv_sulcus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 720
+  },
+  {
+   "key": "post_iv_sulcus",
+   "ref": "heart-external#post_iv_sulcus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 720
+  },
+  {
+   "key": "apex",
+   "ref": "heart-external#apex",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2016
+  },
+  {
+   "key": "base",
+   "ref": "heart-external#base",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2016
+  },
+  {
+   "key": "surf_sternocostal",
+   "ref": "heart-external#surf_sternocostal",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4048
+  },
+  {
+   "key": "surf_diaphragmatic",
+   "ref": "heart-external#surf_diaphragmatic",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3360
+  },
+  {
+   "key": "surf_left_pulmonary",
+   "ref": "heart-external#surf_left_pulmonary",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2400
+  },
+  {
+   "key": "border_right",
+   "ref": "heart-external#border_right",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 408
+  },
+  {
+   "key": "border_left",
+   "ref": "heart-external#border_left",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 408
+  },
+  {
+   "key": "border_inferior",
+   "ref": "heart-external#border_inferior",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 408
+  },
+  {
+   "key": "border_superior",
+   "ref": "heart-external#border_superior",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 864
+  },
+  {
+   "key": "asc_aorta",
+   "ref": "heart-external#asc_aorta",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 748
+  },
+  {
+   "key": "aortic_arch",
+   "ref": "heart-external#aortic_arch",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1012
+  },
+  {
+   "key": "pulm_trunk",
+   "ref": "heart-external#pulm_trunk",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 748
+  },
+  {
+   "key": "r_pa",
+   "ref": "heart-external#r_pa",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 684
+  },
+  {
+   "key": "l_pa",
+   "ref": "heart-external#l_pa",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 684
+  },
+  {
+   "key": "svc",
+   "ref": "heart-external#svc",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 612
+  },
+  {
+   "key": "ivc",
+   "ref": "heart-external#ivc",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 468
+  },
+  {
+   "key": "pulm_veins_r",
+   "ref": "heart-external#pulm_veins_r",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 728
+  },
+  {
+   "key": "pulm_veins_l",
+   "ref": "heart-external#pulm_veins_l",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 728
+  },
+  {
+   "key": "lig_arteriosum",
+   "ref": "heart-external#lig_arteriosum",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 264
+  },
+  {
+   "key": "pericardium_fibrous",
+   "ref": "heart-external#pericardium_fibrous",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 14016
+  },
+  {
+   "key": "pericardium_parietal_serous",
+   "ref": "heart-external#pericardium_parietal_serous",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 11440
+  },
+  {
+   "key": "pericardium_visceral_serous",
+   "ref": "heart-external#pericardium_visceral_serous",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 14016
+  },
+  {
+   "key": "pericardial_cavity",
+   "ref": "heart-external#pericardial_cavity",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 11440
+  },
+  {
+   "key": "lung_r",
+   "ref": "heart-external#lung_r",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3872
+  },
+  {
+   "key": "lung_l",
+   "ref": "heart-external#lung_l",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3872
+  },
+  {
+   "key": "diaphragm",
+   "ref": "heart-external#diaphragm",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2912
+  },
+  {
+   "key": "sternum",
+   "ref": "heart-external#sternum",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 12
+  },
+  {
+   "key": "trachea_bronchi",
+   "ref": "heart-external#trachea_bronchi",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 744
+  },
+  {
+   "key": "oesophagus",
+   "ref": "heart-external#oesophagus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 160
+  },
+  {
+   "key": "desc_aorta",
+   "ref": "heart-external#desc_aorta",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 144
+  },
+  {
+   "key": "phrenic_r",
+   "ref": "heart-external#phrenic_r",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 380
+  },
+  {
+   "key": "phrenic_l",
+   "ref": "heart-external#phrenic_l",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 380
+  }
+ ],
+ "modelKeys": [
+  "heart",
+  "ra",
+  "rv",
+  "la",
+  "lv",
+  "ra_auricle",
+  "la_auricle",
+  "coronary_sulcus",
+  "ant_iv_sulcus",
+  "post_iv_sulcus",
+  "apex",
+  "base",
+  "surf_sternocostal",
+  "surf_diaphragmatic",
+  "surf_left_pulmonary",
+  "border_right",
+  "border_left",
+  "border_inferior",
+  "border_superior",
+  "asc_aorta",
+  "aortic_arch",
+  "desc_aorta",
+  "pulm_trunk",
+  "r_pa",
+  "l_pa",
+  "svc",
+  "ivc",
+  "pulm_veins_r",
+  "pulm_veins_l",
+  "lig_arteriosum",
+  "pericardium_fibrous",
+  "pericardium_parietal_serous",
+  "pericardium_visceral_serous",
+  "pericardial_cavity",
+  "lung_r",
+  "lung_l",
+  "diaphragm",
+  "sternum",
+  "trachea_bronchi",
+  "oesophagus",
+  "phrenic_r",
+  "phrenic_l"
+ ],
+ "adapterConsole": []
+}

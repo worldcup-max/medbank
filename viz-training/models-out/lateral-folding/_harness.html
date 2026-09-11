@@ -1,0 +1,235 @@
+<!doctype html><meta charset=utf8>
+<link rel="icon" href="data:,">
+<body style="margin:0;background:#0e1626">
+<canvas id=c width=1000 height=1000></canvas>
+<script src="http://127.0.0.1:45067/node_modules/three/build/three.js"></script>
+<script src="http://127.0.0.1:45067/models3d/render-kit.js"></script>
+<script src="http://127.0.0.1:45067/models3d/lateral-folding.js"></script>
+<script>
+window.MEDBANK_CONFIG = { MODEL_BASE: 'http://127.0.0.1:45067/models3d/' };
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true });
+renderer.setSize(1000, 1000, false); renderer.setPixelRatio(1);
+VizKit.configureRenderer(renderer);
+const scene = new THREE.Scene();
+scene.background = VizKit.bg(0x0e1626);
+const L = VizKit.standardLights(scene);
+const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 200);
+let group = null;
+const MOD = window.MB3D_MODELS['lateral-folding'];
+window.setStage = function (t, opts, yaw, pitch) {
+  if (group) scene.remove(group);
+  group = MOD.build(t, Object.assign({}, opts || {}));
+  group.rotation.y = yaw || 0;
+  group.rotation.x = pitch || 0;
+  group.updateMatrixWorld(true);
+  scene.add(group);
+  const f = VizKit.fitCamera(camera, group, 1.04);
+  camera.position.set(f.centre.x, f.centre.y, f.centre.z + f.distance);
+  camera.lookAt(f.centre);
+  L.key.position.set(camera.position.x + 6, camera.position.y + 8, camera.position.z + 4);
+  renderer.render(scene, camera);
+  return { size: [f.size.x, f.size.y, f.size.z] };
+};
+window.normalProbe = function (t, opts) {
+  const g = MOD.build(t, Object.assign({}, opts || {}));
+  g.updateMatrixWorld(true);
+  const rows = [];
+  const nm = new THREE.Matrix3();
+  g.traverse(function (o) {
+    if (!o.isMesh || !o.geometry) return;
+    const u = o.userData || {};
+    if (u.outline) return;
+    const geo = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry;
+    const p = geo.attributes.position, n = geo.attributes.normal;
+    if (!n) return;
+    const hull = (o.geometry.userData && o.geometry.userData.hullCount) || 0;
+    nm.getNormalMatrix(o.matrixWorld);
+    const c = new THREE.Vector3(), v = new THREE.Vector3(), w = new THREE.Vector3();
+    for (let i = 0; i < p.count; i++) c.add(v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld));
+    c.divideScalar(p.count);
+    let out = 0, outHull = 0;
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld).sub(c);
+      w.fromBufferAttribute(n, i).applyMatrix3(nm).normalize();
+      if (v.dot(w) > 0) { out++; if (i < hull) outHull++; }
+    }
+    let agree = 0, tris = 0;
+    const a1 = new THREE.Vector3(), b1 = new THREE.Vector3(), c1 = new THREE.Vector3();
+    const e1 = new THREE.Vector3(), e2 = new THREE.Vector3(), fn = new THREE.Vector3(), vn = new THREE.Vector3();
+    for (let i = 0; i + 2 < p.count; i += 3) {
+      a1.fromBufferAttribute(p, i); b1.fromBufferAttribute(p, i+1); c1.fromBufferAttribute(p, i+2);
+      fn.copy(e1.subVectors(b1, a1).cross(e2.subVectors(c1, a1)));
+      if (fn.lengthSq() < 1e-16) continue;
+      fn.normalize(); vn.set(0,0,0);
+      for (let k = 0; k < 3; k++) { const q = new THREE.Vector3().fromBufferAttribute(n, i+k); vn.add(q); }
+      if (vn.lengthSq() < 1e-16) continue;
+      vn.normalize(); tris++; if (fn.dot(vn) > 0) agree++;
+    }
+    rows.push({ key: u.key, verts: p.count, outward: out / p.count,
+                hullVerts: hull, outwardHull: hull ? outHull / hull : null,
+                tris: tris, winding: tris ? agree / tris : null,
+                degenerate: (o.geometry.userData && o.geometry.userData.degenerateNormals) || 0,
+                gridFlipped: !!(o.geometry.userData && o.geometry.userData.gridFlipped) });
+  });
+  return rows;
+};
+/* REAL MESH BOXES, and the floored relations re-measured on them. The model measures off its own
+   profile rows; this measures the same claims on the vertices those rows produced. */
+window.boxProbe = function (t, opts) {
+  const g = MOD.build(t, Object.assign({}, opts || {}));
+  g.updateMatrixWorld(true);
+  const boxes = {}, v = new THREE.Vector3();
+  g.traverse(function (o) {
+    if (!o.isMesh || !o.geometry || (o.userData && o.userData.outline)) return;
+    const k = o.userData && o.userData.key; if (!k) return;
+    const p = o.geometry.attributes.position; if (!p) return;
+    const bx = boxes[k] || (boxes[k] = { minx:1e9,maxx:-1e9,miny:1e9,maxy:-1e9,minz:1e9,maxz:-1e9,cx:0,cy:0,cz:0,n:0 });
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld);
+      if (v.x<bx.minx)bx.minx=v.x; if (v.x>bx.maxx)bx.maxx=v.x;
+      if (v.y<bx.miny)bx.miny=v.y; if (v.y>bx.maxy)bx.maxy=v.y;
+      if (v.z<bx.minz)bx.minz=v.z; if (v.z>bx.maxz)bx.maxz=v.z;
+      bx.cx+=v.x; bx.cy+=v.y; bx.cz+=v.z; bx.n++;
+    }
+  });
+  for (const k in boxes) { const b=boxes[k]; b.ex=b.maxx-b.minx; b.ey=b.maxy-b.miny; b.ez=b.maxz-b.minz;
+    b.cx/=b.n; b.cy/=b.n; b.cz/=b.n; }
+  return boxes;
+};
+/* THE CLAIMS, ON VERTICES. Each is the same sentence acceptance() asserts, measured a second way. */
+window.meshClaims = function () {
+  const F = MOD.FLOORS, R = {};
+  // gut inside the wall, at a cranio-caudal station clear of the umbilicus
+  const g1 = MOD.build(1, { amnion:false, yolksac:false, coelom:false, herniation:false });
+  g1.updateMatrixWorld(true);
+  const slice = (g, keys, yLo, yHi) => {
+    const pts = []; const v = new THREE.Vector3();
+    g.traverse(function (o) {
+      if (!o.isMesh || !o.geometry || (o.userData && o.userData.outline)) return;
+      if (keys.indexOf(o.userData && o.userData.key) < 0) return;
+      const p = o.geometry.attributes.position;
+      for (let i = 0; i < p.count; i++) { v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld);
+        if (v.y >= yLo && v.y <= yHi) pts.push([v.x, v.z]); }
+    });
+    return pts;
+  };
+  const wall = slice(g1, ['ectoderm','somatic'], 1.05, 1.25);
+  const gut  = slice(g1, ['splanchnic','endoderm'], 1.05, 1.25);
+  const bb = a => { let mnx=1e9,mxx=-1e9,mnz=1e9,mxz=-1e9; for (const p of a){ if(p[0]<mnx)mnx=p[0]; if(p[0]>mxx)mxx=p[0]; if(p[1]<mnz)mnz=p[1]; if(p[1]>mxz)mxz=p[1];} return {mnx,mxx,mnz,mxz}; };
+  const wb = bb(wall), gb = bb(gut);
+  R.wallBox = wb; R.gutBox = gb;
+  R.gutOuterRadius = 0.25 * ((gb.mxx-gb.mnx) + (gb.mxz-gb.mnz));
+  // least distance from any gut vertex to any wall vertex (sampled)
+  let least = 1e9;
+  const stepG = Math.max(1, Math.floor(gut.length / 900)), stepW = Math.max(1, Math.floor(wall.length / 2200));
+  for (let i = 0; i < gut.length; i += stepG) for (let j = 0; j < wall.length; j += stepW) {
+    const dx = gut[i][0]-wall[j][0], dz = gut[i][1]-wall[j][1]; const d = dx*dx+dz*dz;
+    if (d < least) least = d;
+  }
+  R.clearanceAbs = Math.sqrt(least);
+  R.F = R.clearanceAbs / R.gutOuterRadius;
+  // B: the ventral gap away from the umbilicus, measured as the widest z-gap on the ventral midline
+  const ventral = wall.filter(p => Math.abs(p[0]) < 0.035);
+  R.ventralMidlinePts = ventral.length;
+  R.wallWidth = wb.mxx - wb.mnx;
+  // D: the ring, measured at the umbilicus
+  const wallU = slice(g1, ['ectoderm'], -0.10, 0.10);
+  let ringGapX = 0;
+  { const ventralZ = Math.max.apply(null, wallU.map(p => p[1]));
+    const near = wallU.filter(p => p[1] > ventralZ - 0.30);
+    let lo = 1e9, hi = -1e9; for (const p of near) { if (p[0] < lo) lo = p[0]; if (p[0] > hi) hi = p[0]; }
+    // the hole: the widest x-interval on the ventral strip with no vertex in it
+    const xs = near.map(p => p[0]).sort((a,b)=>a-b);
+    let best = 0, at = 0;
+    for (let i = 1; i < xs.length; i++) if (xs[i]-xs[i-1] > best) { best = xs[i]-xs[i-1]; at = 0.5*(xs[i]+xs[i-1]); }
+    ringGapX = best; R.ringGapCentreX = at;
+  }
+  R.ringGapAbs = ringGapX;
+  R.D = ringGapX / (2 * R.gutOuterRadius);
+  // I: gastroschisis, on real vertices
+  const gg = MOD.build(1, { gastroschisis:true, amnion:false, yolksac:false, coelom:false });
+  gg.updateMatrixWorld(true);
+  const wallG = slice(gg, ['ectoderm'], -0.10, 0.10);
+  { const ventralZ = Math.max.apply(null, wallG.map(p => p[1]));
+    const near = wallG.filter(p => p[1] > ventralZ - 0.55);
+    const xs = near.map(p => p[0]).sort((a,b)=>a-b);
+    const gaps = [];
+    for (let i = 1; i < xs.length; i++) if (xs[i]-xs[i-1] > 0.06) gaps.push({ w: xs[i]-xs[i-1], lo: xs[i-1], hi: xs[i] });
+    gaps.sort((a,b)=>b.w-a.w);
+    R.gastroGaps = gaps.slice(0, 3);
+    const ring = gaps.find(q => q.lo < 0 && q.hi > 0);
+    const defect = gaps.filter(q => q !== ring && q.hi < 0).sort((a,b)=>b.w-a.w)[0];
+    if (ring && defect) {
+      R.I_ringHalf = Math.abs(ring.lo);
+      R.I_defectMedialX = defect.hi;
+      R.I = (Math.abs(defect.hi) - Math.abs(ring.lo)) / (ring.hi - ring.lo);
+      R.I_rightOfCord = defect.hi < 0;
+    }
+  }
+  // J: exstrophy, on real vertices
+  const ge = MOD.build(1, { exstrophy:true, amnion:false, yolksac:false, coelom:false });
+  ge.updateMatrixWorld(true);
+  const bxe = window.boxProbe ? null : null;
+  { const v = new THREE.Vector3(); let mny=1e9,mxy=-1e9,cy=0,n=0;
+    ge.traverse(function(o){ if(!o.isMesh||!o.geometry||(o.userData&&o.userData.outline))return;
+      if((o.userData&&o.userData.key)!=='exstrophy')return;
+      const p=o.geometry.attributes.position;
+      for(let i=0;i<p.count;i++){v.fromBufferAttribute(p,i).applyMatrix4(o.matrixWorld);
+        if(v.y<mny)mny=v.y; if(v.y>mxy)mxy=v.y; cy+=v.y; n++;} });
+    R.exstrophyY = { min: mny, max: mxy, c: n?cy/n:null, extent: mxy-mny };
+  }
+  R.floors = F;
+  return R;
+};
+/* every floor, fed a value it MUST reject. A floor that cannot fail is decoration. */
+window.negativeCases = function () {
+  const F = MOD.FLOORS;
+  const cases = [
+    ['A', v => v <= F.ARC,    F.ARC * 3],
+    ['B', v => v <= F.CLOSE,  F.CLOSE * 4],
+    ['D', v => v >= F.RING,   F.RING * 0.4],
+    ['F', v => v >= F.CLEAR,  F.CLEAR * 0.4],
+    ['G', v => v > 0 && v <= F.DUCT, F.DUCT * 3],
+    ['G0', v => v > 0 && v <= F.DUCT, 0],
+    ['H', v => v <= F.MESO,   F.MESO * 3],
+    ['I', v => v >= F.GASTRO, F.GASTRO * 0.3],
+    ['J', v => v >= F.EXSTR,  F.EXSTR * 0.3],
+  ];
+  return cases.map(([id, pred, wrong]) => ({ id: id, wrong: wrong, rejected: !pred(wrong) }));
+};
+const SOLID = { ectoderm:1, somatic:1, splanchnic:1, endoderm:1, mesentery:1, neural:1, notochord:1,
+                somite:1, vitelline:1, yolksac:1, umbilicalring:1, herniation:1, gastroschisis:1, exstrophy:1 };
+window.lumenProbe = function (grid) {
+  const G = grid || 96;
+  const rc = new THREE.Raycaster();
+  const targets = [];
+  group.traverse(function (o) {
+    if (!o.isMesh || !o.geometry) return;
+    const u = o.userData || {};
+    if (u.outline || !SOLID[u.key]) return;
+    targets.push(o);
+  });
+  const nm = new THREE.Matrix3();
+  const a1=new THREE.Vector3(),b1=new THREE.Vector3(),c1=new THREE.Vector3();
+  const e1=new THREE.Vector3(),e2=new THREE.Vector3(),fn=new THREE.Vector3();
+  let hits=0, back=0; const offenders={};
+  for (let iy=0; iy<G; iy++) for (let ix=0; ix<G; ix++) {
+    const ndc = new THREE.Vector2((ix+0.5)/G*2-1, 1-(iy+0.5)/G*2);
+    rc.setFromCamera(ndc, camera);
+    const hit = rc.intersectObjects(targets, false)[0];
+    if (!hit) continue;
+    hits++;
+    const p = hit.object.geometry.attributes.position, f = hit.face;
+    a1.fromBufferAttribute(p, f.a); b1.fromBufferAttribute(p, f.b); c1.fromBufferAttribute(p, f.c);
+    fn.copy(e1.subVectors(b1,a1).cross(e2.subVectors(c1,a1)));
+    if (fn.lengthSq() < 1e-16) continue;
+    nm.getNormalMatrix(hit.object.matrixWorld);
+    fn.normalize().applyMatrix3(nm).normalize();
+    if (fn.dot(rc.ray.direction) > 0.02) { back++; const k = hit.object.userData.key; offenders[k]=(offenders[k]||0)+1; }
+  }
+  return { rays: G*G, hits: hits, backfaceFirst: back, frac: hits ? back/hits : 0, offenders: offenders };
+};
+window.acceptance = function () { return MOD.acceptance(); };
+window.solved = function () { return MOD.SOLVED; };
+window.capLog = function () { return MOD.capLog(); };
+</script>

@@ -112,6 +112,90 @@ Two questions, both yes/no:
     every anchored structure in the corpus, not just this one.
 
 
+## 2026-09-10 · engine__mesh-resolution-by-role · reason 3 (a decision no task is allowed to make)
+
+WHAT WAS ASKED FOR
+Stop shipping every bone in the corpus at a flat 3,000 triangles, on the measured premise that
+students receive `meshes-lite/` and that this discards 57% of a lumbar vertebra — the processes and
+facets they are examined on.
+
+WHAT WAS BUILT
+`viz-training/tools/apply-mesh-budget.mjs`, and it was APPLIED: 333 of 494 meshes re-decimated, one
+file per mesh, sized so every scene it appears in stays under 450,000 tri (21.5 MB — the vertebral
+column at full scan resolution, the heaviest scene known to load). `meshes-lite/` is now 6,640,242 tri
+/ 316.6 MB, up from 2,049,168 / 97.7 MB. 250 meshes at full scan resolution, up from 142. Renders in
+`models-out/mesh-budget/`. I reviewed it and it is good work: the allocation on disk matches
+`MESH-BUDGET.json` on all 494, every scene ref resolves, no scene is meaningfully over budget, and the
+external-oblique render earns the whole item — fibre direction is legible at 76,733 triangles and
+simply absent at 8,000, and fibre direction is how a student tells external oblique from internal.
+
+WHAT KEEPS FAILING
+Nothing is failing. Something is UNKNOWABLE from inside the loop, and it is the item's premise.
+
+**Nobody in this loop can see what the bucket actually serves, and two tools in this repo upload
+different directories to the same place.**
+
+  · `tools/upload-meshes.mjs`          → uploads `viz-training/meshes-lite/`  (this is what DEPLOY-3D.md documents)
+  · `tools/ingest-full-archive.mjs --upload` → uploads `viz-training/meshes/`  — the FULL directory —
+                                          to the SAME bucket root, with the same filenames.
+
+Whichever ran last wins, per file. `config.js` `MESH_BASE` points at that one bucket root, so the
+filename `FMA13073.stl` is served from whichever directory last wrote it, and nothing in the repo
+records which that was.
+
+WHY IT IS NOT CONVERGING
+This is not a defect a round can fix — it is a fact about the outside world that the loop is walled
+off from. The previous build run flagged it and could not close it. I retried it myself from both
+sides rather than take the note on trust, and both are blocked:
+
+  · device (`device_bash`):   `getaddrinfo EAI_AGAIN tytbrhuzikqkscxdnkmr.supabase.co`
+  · cloud container (curl):   `CONNECT tunnel failed, response 403` (egress allowlist)
+
+A fourth round would produce the same two error messages. The answer is thirty seconds of dashboard
+and cannot be reached from here.
+
+WHY IT MATTERS ENOUGH TO STOP FOR — the two cases point opposite ways:
+
+  · If the bucket holds the OLD LITE meshes, uploading is what this item is for, and it takes what
+    students download from **97.7 MB to 316.6 MB — 3.2x more**, on the Nigerian mobile data this
+    product exists to be usable on. That is the intended trade and someone should own it knowingly.
+  · If the bucket holds `meshes/` (the full archive), then the item's founding premise is WRONG:
+    students have been receiving **761.9 MB** all along, the vertebrae never were the 3,000-triangle
+    ones anyone was looking at, and uploading `meshes-lite/` is a 2.4x payload CUT that should happen
+    immediately and urgently. The real emergency would be the eight months of 762 MB, not the facets.
+
+Same upload command, same files, and the two readings differ by a factor of seven in what it means.
+
+WHAT I WOULD DO
+1. Open the Supabase dashboard, look at `viz-meshes/FMA13073.stl`, and read its size. 347,384 bytes
+   is the full source; 150,084 is the old 3,000-tri lite file. That single number settles it.
+   (`node viz-training/tools/upload-meshes.mjs --check` prints the whole comparison and uploads
+   nothing, if it is run from a machine that can reach the bucket. It needs no service key.)
+2. Record the answer in `DEPLOY-3D.md`, because it is not recorded anywhere and this is the second
+   run to be stopped by it.
+3. Delete the `--upload` path from `ingest-full-archive.mjs`, or point it at a different bucket
+   prefix. Two tools writing different resolutions to one filename is the trap underneath all of
+   this, and it will fire again. Cost: a few lines. I have not done it because which one is correct
+   depends on the answer to (1).
+
+Cost of NOT deciding: `meshes-lite/` sits re-decimated and unuploaded, and the item's benefit — the
+legible muscle fibres — reaches no student. Cost of deciding wrong: a 3.2x payload increase shipped
+to the exact users least able to absorb it.
+
+DECISION NEEDED
+1. Does `viz-meshes/FMA13073.stl` in the bucket read 347,384 bytes (full) or 150,084 (old lite)?
+2. Given the answer: upload the new `meshes-lite/` at 316.6 MB — yes or no?
+
+SECOND DECISION, same item, unrelated and much older. `role: 'primary'` is off-spec:
+`model3d-scene-spec-v2.md` declares only `part|context`, but **92 structures across 30 scenes** use
+`primary`, and `viz3d.js` tests `role === 'part'` in four places. Those 92 are excluded from the
+student's part list, pinned as scaffolding, AND CLIPPED AWAY IN CROSS-SECTIONS. Two build runs have
+now flagged it and neither was allowed to choose: either the spec gains a third role, or 92
+structures get rewritten. It is not blocking the upload and it deserves its own queue item, but it
+has been passed down three times now and should stop being passed down.
+   → Third role in the spec, or rewrite the 92 — which?
+
+
 ## Resolved
 
 *(none yet)*

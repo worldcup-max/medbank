@@ -1,0 +1,47 @@
+<!doctype html><meta charset=utf8><link rel="icon" href="data:,"><body>
+<script src="http://127.0.0.1:45067/node_modules/three/build/three.js"></script>
+<script>window.MEDBANK_CONFIG = { MODEL_BASE: 'http://127.0.0.1:45067/models3d/' };</script>
+<script src="http://127.0.0.1:45067/viz3d.js"></script>
+<script>
+/* THE SCENE MOVES BY SET_STAGE, so the thing to prove is not only that every ref resolves but that
+   every ref FOLLOWS THE VIEW and comes back with different geometry at a different t. A ref that
+   silently pinned itself would sit at t = 1 for ever while its neighbours walked the stages, and the
+   picture would look fine. Driven through the adapter's own stageable()/atStage() pair, not a regexp. */
+window.stageAll = function (refs) {
+  const ad = window.MB3D.adapters.procedural;
+  const MODEL = (window.MB3D_MODELS || {})['lateral-folding'] || {};
+  const STATIC = MODEL.STATIC_PARTS || {}, LIMITED = MODEL.STAGE_LIMITED || {};
+  return Promise.all(refs.map(function (r) {
+    const s = { key: r.key, refs: { procedural: r.ref } };
+    const able = ad.stageable(s);
+    if (!able) return Promise.resolve({ key: r.key, ref: r.ref, stageable: false });
+    const s0 = ad.atStage(s, 0), s1 = ad.atStage(s, 1);
+    return Promise.all([ad.load(window.THREE, s0), ad.load(window.THREE, s1)]).then(function (rs) {
+      const g0 = rs[0].mesh && rs[0].mesh.geometry, g1 = rs[1].mesh && rs[1].mesh.geometry;
+      let moved = false;
+      if (g0 && g1) {
+        const a = g0.attributes.position, b = g1.attributes.position;
+        if (a.count !== b.count) moved = true;
+        else for (let i = 0; i < a.count; i += Math.max(1, Math.floor(a.count / 400)))
+          if (Math.abs(a.getX(i) - b.getX(i)) + Math.abs(a.getZ(i) - b.getZ(i)) > 1e-4) { moved = true; break; }
+      }
+      const part = String(r.ref).split('#')[1].split(/[@+]/)[0];
+      return { key: r.key, ref: r.ref, part: part, stageable: true, ref0: s0.refs.procedural,
+               t0: !!g0, t1: !!g1, moved: moved,
+               declaredStatic: Object.prototype.hasOwnProperty.call(STATIC, part),
+               declaredLimited: Object.prototype.hasOwnProperty.call(LIMITED, part) };
+    });
+  }));
+};
+window.resolveAll = function (refs) {
+  const ad = window.MB3D.adapters.procedural;
+  return Promise.all(refs.map(function (r) {
+    return ad.load(window.THREE, { key: r.key, refs: { procedural: r.ref } })
+      .then(function (res) {
+        const m = res && res.mesh;
+        return { key: r.key, ref: r.ref, reason: res && res.reason, hasMesh: !!m,
+                 tris: m && m.geometry ? m.geometry.attributes.position.count / 3 : 0 };
+      }, function (e) { return { key: r.key, ref: r.ref, error: String(e && e.message || e) }; });
+  }));
+};
+</script>

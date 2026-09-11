@@ -1,0 +1,1166 @@
+{
+ "acceptance": {
+  "measured": {
+   "dayCushionsFuse": 35,
+   "dayPrimumDone": 34,
+   "dayMuscularStart": 28,
+   "dayRidgesStart": 35,
+   "dayMembranousDone": 50,
+   "orderOK": true,
+   "atZero": 0,
+   "cushionGapD28": 0.747599451303155,
+   "cushionGapD35": 0,
+   "cushionGapAVSD": 0.4,
+   "dayOstium2Opens": 31.05999999999987,
+   "dayOstium1Closes": 33.90000000000015,
+   "twistLocalDeg": -115.94841642826175,
+   "twistWorldDeg": 115.23308777249675,
+   "twistEndErrArt": 0,
+   "twistEndErrCon": 0,
+   "twistMinimalBranch": true,
+   "aortaSide": 0.9602663510588098,
+   "pulmSide": -0.9602663510588098,
+   "tgaAortaSide": -0.420175855871769,
+   "crossingDeg": 114.71379917403031,
+   "crossingDegTGA": 3.3587834340742546,
+   "aortaDorsalOfPulm": 0.3078414664873702,
+   "aortaRightOfPulm": 0.2916568687574098,
+   "limbus": 0.6935221433826383,
+   "overlap": 0.3285221433826383,
+   "overlapASD": -0.061477856617361715,
+   "foramenAreaFrac": 0.21500000000012545,
+   "ivForamenD40": 0.39629629629629637,
+   "ivForamenD44": 0.21294924554183825,
+   "ivForamenD50": 0,
+   "ivForamenVSD": 0.18500000000000005,
+   "membranousD44": 0,
+   "membranousD50": 1,
+   "ridgeGapTruncus": 0.4,
+   "ridgeGapNormal": 0,
+   "fallotMiss": 0.6185473190162,
+   "fallotPulmFrac": 0.23567595244336634,
+   "fallotOverride": 1.007425514589474,
+   "foldRatio": 1.1987138994151618,
+   "foldAt": 0.6909090909090909,
+   "foldT": 1
+  },
+  "pass": {
+   "A": true,
+   "B": true,
+   "C": true,
+   "D": true,
+   "E": true,
+   "F": true,
+   "G": true,
+   "Q": true,
+   "H": true,
+   "I": true,
+   "J": true,
+   "K": true,
+   "L": true,
+   "M": true,
+   "N": true,
+   "O": true,
+   "P": true,
+   "R": true
+  },
+  "allPass": true,
+  "spec": {
+   "axes": "+x = embryo LEFT, -x = RIGHT, +y = CRANIAL, +z = VENTRAL",
+   "t_means": "day 25 at t = 0, day 56 at t = 1; day(t) = 25 + 31t",
+   "solved": [
+    "the outflow twist, from two prescribed world directions and the conus's own curvature",
+    "the limbus of the fossa ovalis, from the area the fetal shunt has to carry"
+   ],
+   "tests": [
+    {
+     "id": "A",
+     "says": "four septa, four windows, in the order the narration states",
+     "must": "cushions fuse before the atrial septum is complete, the muscular septum is standing before the outflow ridges appear, and the membranous part closes last"
+    },
+    {
+     "id": "B",
+     "says": "at t = 0 there is ONE lumen — not one of the four septa exists",
+     "must": "every septum growth fraction is 0 at day 25"
+    },
+    {
+     "id": "C",
+     "says": "the cushions grow towards each other and MEET",
+     "must": "the gap between the two cushions is at least 30% of their mean size at day 28 and exactly 0 by day 35"
+    },
+    {
+     "id": "D",
+     "says": "the ostium secundum is open BEFORE the ostium primum shuts — the crossing is never interrupted",
+     "must": "the day the ostium secundum first opens is earlier than the day the ostium primum closes"
+    },
+    {
+     "id": "E",
+     "says": "the twist is SOLVED, not scheduled",
+     "must": "the septum normal at each end equals the prescribed world direction to within 1e-6, and the local twist is the minimal branch"
+    },
+    {
+     "id": "F",
+     "says": "the aortic half arrives over the LEFT ventricle, the pulmonary half over the right",
+     "must": "the direction cosine between the septum normal at its conal foot and the interventricular septum normal is at least 0.35. TRUE BY CONSTRUCTION in the normal build — the conal boundary condition IS this statement — and stated that way rather than dressed up. Tests N and Q are where the claim has teeth."
+    },
+    {
+     "id": "G",
+     "says": "at the arterial end the aortic channel lies POSTERIOR AND TO THE RIGHT of the pulmonary channel — the pair of words the valves are examined on",
+     "must": "its separation along -z and along -x are each at least 24% of the outflow calibre"
+    },
+    {
+     "id": "Q",
+     "says": "the two channels ROTATE about each other between the ventricles and the valves — that rotation is the crossing, and nothing prescribes it",
+     "must": "the angle between the aorta-minus-pulmonary vector at the conal end and at the arterial end is at least 60 degrees, and at least twice the rotation the curving tract produces on its own when the twist is dropped"
+    },
+    {
+     "id": "H",
+     "says": "the two atrial sheets OVERLAP, so the foramen ovale is a one-way valve",
+     "must": "the limbus lies caudal to the whole ostium secundum by at least 10% of the atrial span"
+    },
+    {
+     "id": "I",
+     "says": "the foramen ovale carries the shunt it is solved for",
+     "must": "the open area below the limbus is 21.5% of the atrial septal area, to within 1%"
+    },
+    {
+     "id": "J",
+     "says": "the muscular septum STOPS SHORT, leaving the interventricular foramen",
+     "must": "the gap above the muscular septum is at least 4% of the ventricular span at day 40 and at day 44, and is still that big at day 56 when the membranous part never forms"
+    },
+    {
+     "id": "K",
+     "says": "the membranous part closes that foramen, and it closes it LAST",
+     "must": "the membranous fraction is 0 at day 44 and 1 at day 50, and the foramen is shut by day 50"
+    },
+    {
+     "id": "L",
+     "says": "AVSD is the cushions not fusing — one mechanism, arrested",
+     "must": "with the cushions arrested the central gap is at least 30% of their mean size at day 56"
+    },
+    {
+     "id": "M",
+     "says": "a secundum ASD is the overlap gone",
+     "must": "with excessive resorption the overlap is negative at day 56"
+    },
+    {
+     "id": "N",
+     "says": "transposition is the twist dropped, and it FLIPS the connections",
+     "must": "with the conal boundary condition dropped the aortic half sits on the RV side by a direction cosine of at least 0.35, having moved at least 0.60 of its own offset"
+    },
+    {
+     "id": "O",
+     "says": "persistent truncus arteriosus is the ridges never fusing",
+     "must": "the two ridges leave a gap of at least 30% of the calibre at day 56"
+    },
+    {
+     "id": "R",
+     "says": "the swept tube never folds over itself",
+     "must": "the curvature radius of the centreline is at least 1.05 times the tube's outer radius at every station and every t — a tube fatter than its own bend turns inside out on the inside of the curve, and reads as a winding failure on the outer surface"
+    },
+    {
+     "id": "P",
+     "says": "tetralogy is the SAME septum displaced ventrally, and three of the four follow",
+     "must": "the displaced septum misses the muscular septum (a VSD), the pulmonary channel is narrower than the aortic by at least 20%, and the aortic channel straddles the IVS plane"
+    }
+   ]
+  },
+  "floors": {
+   "OVERLAP": 0.1,
+   "SIDE": 0.35,
+   "DORSAL": 0.24,
+   "GAP": 0.3,
+   "FORAMEN": 0.04,
+   "SWING": 0.6
+  }
+ },
+ "negatives": {
+  "cases": {
+   "A": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "B": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "C": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "D": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "E": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "F": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "G": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "Q": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "H": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "I": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "J": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "K": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "L": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "M": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "N": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "O": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "P": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   },
+   "R": {
+    "rejectsWrongInput": true,
+    "acceptsRealInput": true
+   }
+  },
+  "allGood": true
+ },
+ "twist": {
+  "localDeg": -115.94841642826175,
+  "worldDeg": 115.23308777249675
+ },
+ "keysFull": {
+  "sinus": 4590,
+  "atrium": 9009,
+  "ventricle": 7929,
+  "bulbus": 4689,
+  "truncus": 3630,
+  "av_cushions": 342,
+  "septum_primum": 5852,
+  "septum_secundum": 5408,
+  "muscular_ivs": 3616,
+  "membranous_ivs": 2664,
+  "spiral_septum": 6736,
+  "aortic_channel": 1504,
+  "pulmonary_channel": 1504,
+  "shunt": 402.3333333333333,
+  "midline": 222
+ },
+ "stages": [
+  {
+   "name": "d25",
+   "t": 0,
+   "label": "day 25 — one lumen, no septa",
+   "file": "viz-training/models-out/septation-of-heart/d25.png"
+  },
+  {
+   "name": "d28",
+   "t": 0.097,
+   "label": "day 28 — cushions appear, septum primum starts",
+   "file": "viz-training/models-out/septation-of-heart/d28.png"
+  },
+  {
+   "name": "d31",
+   "t": 0.194,
+   "label": "day 31 — ostium primum narrowing",
+   "file": "viz-training/models-out/septation-of-heart/d31.png"
+  },
+  {
+   "name": "d34",
+   "t": 0.29,
+   "label": "day 34 — ostium secundum open before the primum shuts",
+   "file": "viz-training/models-out/septation-of-heart/d34.png"
+  },
+  {
+   "name": "d38",
+   "t": 0.419,
+   "label": "day 38 — septum secundum descending",
+   "file": "viz-training/models-out/septation-of-heart/d38.png"
+  },
+  {
+   "name": "d42",
+   "t": 0.548,
+   "label": "day 42 — the outflow ridges",
+   "file": "viz-training/models-out/septation-of-heart/d42.png"
+  },
+  {
+   "name": "d46",
+   "t": 0.677,
+   "label": "day 46 — the interventricular foramen still open",
+   "file": "viz-training/models-out/septation-of-heart/d46.png"
+  },
+  {
+   "name": "d50",
+   "t": 0.806,
+   "label": "day 50 — the membranous part closes it",
+   "file": "viz-training/models-out/septation-of-heart/d50.png"
+  },
+  {
+   "name": "d56",
+   "t": 1,
+   "label": "day 56 — four chambers",
+   "file": "viz-training/models-out/septation-of-heart/d56.png"
+  },
+  {
+   "name": "d56-solid",
+   "t": 1,
+   "label": "day 56, walls solid",
+   "file": "viz-training/models-out/septation-of-heart/d56-solid.png"
+  },
+  {
+   "name": "d25-solid",
+   "t": 0,
+   "label": "day 25, walls solid",
+   "file": "viz-training/models-out/septation-of-heart/d25-solid.png"
+  },
+  {
+   "name": "d56-chan",
+   "t": 1,
+   "label": "day 56 with the two channels",
+   "file": "viz-training/models-out/septation-of-heart/d56-chan.png"
+  },
+  {
+   "name": "d56-mid",
+   "t": 1,
+   "label": "day 56 with the median-plane reference",
+   "file": "viz-training/models-out/septation-of-heart/d56-mid.png"
+  },
+  {
+   "name": "d40-shunt",
+   "t": 0.484,
+   "label": "the fetal right-to-left shunt",
+   "file": "viz-training/models-out/septation-of-heart/d40-shunt.png"
+  },
+  {
+   "name": "v-avsd",
+   "t": 1,
+   "label": "AVSD — the cushions never fused",
+   "file": "viz-training/models-out/septation-of-heart/v-avsd.png"
+  },
+  {
+   "name": "v-asd",
+   "t": 1,
+   "label": "secundum ASD — the overlap gone",
+   "file": "viz-training/models-out/septation-of-heart/v-asd.png"
+  },
+  {
+   "name": "v-vsd",
+   "t": 1,
+   "label": "membranous VSD",
+   "file": "viz-training/models-out/septation-of-heart/v-vsd.png"
+  },
+  {
+   "name": "v-tga",
+   "t": 1,
+   "label": "transposition — the twist dropped",
+   "file": "viz-training/models-out/septation-of-heart/v-tga.png"
+  },
+  {
+   "name": "v-truncus",
+   "t": 1,
+   "label": "persistent truncus arteriosus",
+   "file": "viz-training/models-out/septation-of-heart/v-truncus.png"
+  },
+  {
+   "name": "v-fallot",
+   "t": 1,
+   "label": "tetralogy — the septum displaced",
+   "file": "viz-training/models-out/septation-of-heart/v-fallot.png"
+  }
+ ],
+ "normals1": [
+  {
+   "key": "sinus",
+   "verts": 12600,
+   "outward": 0.5142857142857142,
+   "hullVerts": 6120,
+   "outwardHull": 1,
+   "tris": 4200,
+   "winding": 0.9857142857142858,
+   "hullTris": 2040,
+   "hullWinding": 1
+  },
+  {
+   "key": "atrium",
+   "verts": 25920,
+   "outward": 0.5100694444444445,
+   "hullVerts": 12780,
+   "outwardHull": 0.9971830985915493,
+   "tris": 8640,
+   "winding": 0.9930555555555556,
+   "hullTris": 4260,
+   "hullWinding": 1
+  },
+  {
+   "key": "ventricle",
+   "verts": 22680,
+   "outward": 0.5779100529100529,
+   "hullVerts": 11160,
+   "outwardHull": 0.8631720430107527,
+   "tris": 7560,
+   "winding": 0.9920634920634921,
+   "hullTris": 3720,
+   "hullWinding": 1
+  },
+  {
+   "key": "bulbus",
+   "verts": 12960,
+   "outward": 0.5354166666666667,
+   "hullVerts": 6300,
+   "outwardHull": 0.9942857142857143,
+   "tris": 4320,
+   "winding": 0.9861111111111112,
+   "hullTris": 2100,
+   "hullWinding": 1
+  },
+  {
+   "key": "truncus",
+   "verts": 9720,
+   "outward": 0.5209876543209877,
+   "hullVerts": 4680,
+   "outwardHull": 0.9974358974358974,
+   "tris": 3240,
+   "winding": 0.9814814814814815,
+   "hullTris": 1560,
+   "hullWinding": 1
+  },
+  {
+   "key": "atrium",
+   "verts": 6000,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 2000,
+   "winding": 1,
+   "hullTris": 2000,
+   "hullWinding": 1
+  },
+  {
+   "key": "ventricle",
+   "verts": 6000,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 2000,
+   "winding": 1,
+   "hullTris": 2000,
+   "hullWinding": 1
+  },
+  {
+   "key": "bulbus",
+   "verts": 6000,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 2000,
+   "winding": 1,
+   "hullTris": 2000,
+   "hullWinding": 1
+  },
+  {
+   "key": "sinus",
+   "verts": 1170,
+   "outward": 1,
+   "hullVerts": 1170,
+   "outwardHull": 1,
+   "tris": 390,
+   "winding": 1,
+   "hullTris": 390,
+   "hullWinding": 1
+  },
+  {
+   "key": "truncus",
+   "verts": 1170,
+   "outward": 1,
+   "hullVerts": 1170,
+   "outwardHull": 1,
+   "tris": 390,
+   "winding": 1,
+   "hullTris": 390,
+   "hullWinding": 1
+  },
+  {
+   "key": "av_cushions",
+   "verts": 2652,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 884,
+   "winding": 1,
+   "hullTris": 884,
+   "hullWinding": 1
+  },
+  {
+   "key": "av_cushions",
+   "verts": 2652,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 884,
+   "winding": 1,
+   "hullTris": 884,
+   "hullWinding": 1
+  },
+  {
+   "key": "septum_primum",
+   "verts": 17556,
+   "outward": 0.9755639097744361,
+   "hullVerts": 17556,
+   "outwardHull": 0.9755639097744361,
+   "tris": 5852,
+   "winding": 1,
+   "hullTris": 5852,
+   "hullWinding": 1
+  },
+  {
+   "key": "septum_secundum",
+   "verts": 16224,
+   "outward": 1,
+   "hullVerts": 16224,
+   "outwardHull": 1,
+   "tris": 5408,
+   "winding": 1,
+   "hullTris": 5408,
+   "hullWinding": 1
+  },
+  {
+   "key": "muscular_ivs",
+   "verts": 10848,
+   "outward": 0.956858407079646,
+   "hullVerts": 10848,
+   "outwardHull": 0.956858407079646,
+   "tris": 3560,
+   "winding": 1,
+   "hullTris": 3560,
+   "hullWinding": 1
+  },
+  {
+   "key": "membranous_ivs",
+   "verts": 7992,
+   "outward": 1,
+   "hullVerts": 7992,
+   "outwardHull": 1,
+   "tris": 2664,
+   "winding": 1,
+   "hullTris": 2664,
+   "hullWinding": 1
+  },
+  {
+   "key": "spiral_septum",
+   "verts": 20208,
+   "outward": 0.5344912905779889,
+   "hullVerts": 20208,
+   "outwardHull": 0.5344912905779889,
+   "tris": 6736,
+   "winding": 1,
+   "hullTris": 6736,
+   "hullWinding": 1
+  },
+  {
+   "key": "aortic_channel",
+   "verts": 4512,
+   "outward": 0.8118351063829787,
+   "hullVerts": 4416,
+   "outwardHull": 0.8077445652173914,
+   "tris": 1504,
+   "winding": 0.9833776595744681,
+   "hullTris": 1472,
+   "hullWinding": 0.983016304347826
+  },
+  {
+   "key": "pulmonary_channel",
+   "verts": 4512,
+   "outward": 0.8204787234042553,
+   "hullVerts": 4416,
+   "outwardHull": 0.8165760869565217,
+   "tris": 1504,
+   "winding": 0.9840425531914894,
+   "hullTris": 1472,
+   "hullWinding": 0.9836956521739131
+  },
+  {
+   "key": "shunt",
+   "verts": 1140,
+   "outward": 0.7157894736842105,
+   "hullVerts": 1080,
+   "outwardHull": 0.7,
+   "tris": 380,
+   "winding": 1,
+   "hullTris": 360,
+   "hullWinding": 1
+  },
+  {
+   "key": "shunt",
+   "verts": 144,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 32,
+   "winding": 1,
+   "hullTris": 32,
+   "hullWinding": 1
+  },
+  {
+   "key": "midline",
+   "verts": 6,
+   "outward": 0,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 2,
+   "winding": 1,
+   "hullTris": 2,
+   "hullWinding": 1
+  },
+  {
+   "key": "midline",
+   "verts": 660,
+   "outward": 1,
+   "hullVerts": 600,
+   "outwardHull": 1,
+   "tris": 220,
+   "winding": 1,
+   "hullTris": 200,
+   "hullWinding": 1
+  }
+ ],
+ "normals0": [
+  {
+   "key": "sinus",
+   "verts": 12600,
+   "outward": 0.5142857142857142,
+   "hullVerts": 6120,
+   "outwardHull": 1,
+   "tris": 4200,
+   "winding": 0.9857142857142858,
+   "hullTris": 2040,
+   "hullWinding": 1
+  },
+  {
+   "key": "atrium",
+   "verts": 25920,
+   "outward": 0.5101851851851852,
+   "hullVerts": 12780,
+   "outwardHull": 0.9967136150234742,
+   "tris": 8640,
+   "winding": 0.9930555555555556,
+   "hullTris": 4260,
+   "hullWinding": 1
+  },
+  {
+   "key": "ventricle",
+   "verts": 22680,
+   "outward": 0.5662698412698413,
+   "hullVerts": 11160,
+   "outwardHull": 0.8309139784946237,
+   "tris": 7560,
+   "winding": 0.9920634920634921,
+   "hullTris": 3720,
+   "hullWinding": 1
+  },
+  {
+   "key": "bulbus",
+   "verts": 12960,
+   "outward": 0.5333333333333333,
+   "hullVerts": 6300,
+   "outwardHull": 0.9838095238095238,
+   "tris": 4320,
+   "winding": 0.9861111111111112,
+   "hullTris": 2100,
+   "hullWinding": 1
+  },
+  {
+   "key": "truncus",
+   "verts": 9720,
+   "outward": 0.5209876543209877,
+   "hullVerts": 4680,
+   "outwardHull": 1,
+   "tris": 3240,
+   "winding": 0.9814814814814815,
+   "hullTris": 1560,
+   "hullWinding": 1
+  },
+  {
+   "key": "atrium",
+   "verts": 6000,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 2000,
+   "winding": 1,
+   "hullTris": 2000,
+   "hullWinding": 1
+  },
+  {
+   "key": "ventricle",
+   "verts": 6000,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 2000,
+   "winding": 1,
+   "hullTris": 2000,
+   "hullWinding": 1
+  },
+  {
+   "key": "bulbus",
+   "verts": 6000,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 2000,
+   "winding": 1,
+   "hullTris": 2000,
+   "hullWinding": 1
+  },
+  {
+   "key": "sinus",
+   "verts": 1170,
+   "outward": 1,
+   "hullVerts": 1170,
+   "outwardHull": 1,
+   "tris": 390,
+   "winding": 1,
+   "hullTris": 390,
+   "hullWinding": 1
+  },
+  {
+   "key": "truncus",
+   "verts": 1170,
+   "outward": 1,
+   "hullVerts": 1170,
+   "outwardHull": 1,
+   "tris": 390,
+   "winding": 1,
+   "hullTris": 390,
+   "hullWinding": 1
+  },
+  {
+   "key": "av_cushions",
+   "verts": 2652,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 884,
+   "winding": 1,
+   "hullTris": 884,
+   "hullWinding": 1
+  },
+  {
+   "key": "av_cushions",
+   "verts": 2652,
+   "outward": 1,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 884,
+   "winding": 1,
+   "hullTris": 884,
+   "hullWinding": 1
+  },
+  {
+   "key": "septum_primum",
+   "verts": 17760,
+   "outward": 0.9761824324324324,
+   "hullVerts": 17760,
+   "outwardHull": 0.9761824324324324,
+   "tris": 5920,
+   "winding": 1,
+   "hullTris": 5920,
+   "hullWinding": 1
+  },
+  {
+   "key": "septum_secundum",
+   "verts": 16224,
+   "outward": 0.9975961538461539,
+   "hullVerts": 16224,
+   "outwardHull": 0.9975961538461539,
+   "tris": 5408,
+   "winding": 1,
+   "hullTris": 5408,
+   "hullWinding": 1
+  },
+  {
+   "key": "muscular_ivs",
+   "verts": 0,
+   "outward": null,
+   "hullVerts": 0,
+   "outwardHull": null,
+   "tris": 0,
+   "winding": null,
+   "hullTris": 0,
+   "hullWinding": null
+  }
+ ],
+ "lumen": [
+  {
+   "camera": "anterior day 25",
+   "t": 0,
+   "rays": 9216,
+   "hits": 1618,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "anterior day 40",
+   "t": 0.484,
+   "rays": 9216,
+   "hits": 2028,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "anterior day 56",
+   "t": 1,
+   "rays": 9216,
+   "hits": 2250,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "left lateral",
+   "t": 1,
+   "rays": 9216,
+   "hits": 1910,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "right lateral",
+   "t": 1,
+   "rays": 9216,
+   "hits": 2032,
+   "backfaceFirst": 2,
+   "frac": 0.000984251968503937,
+   "offenders": {
+    "muscular_ivs": 2
+   }
+  },
+  {
+   "camera": "from above",
+   "t": 1,
+   "rays": 9216,
+   "hits": 1849,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "from below",
+   "t": 1,
+   "rays": 9216,
+   "hits": 1574,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "from behind",
+   "t": 1,
+   "rays": 9216,
+   "hits": 2099,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  }
+ ],
+ "crossing": {
+  "normal": {
+   "proxAortaX": -0.45823494341297477,
+   "proxPulmX": -0.5471409088110223,
+   "proxSepX": 0.08890596539804752,
+   "proxSepFrac": 0.4811797609146543,
+   "distAortaZ": 0.08047031039873567,
+   "distPulmZ": 0.425471828481951,
+   "distSepZ": 0.34500151808321533,
+   "distSepFrac": 0.49022712083782743
+  },
+  "transposition": {
+   "proxAortaX": -0.5367825137926083,
+   "proxPulmX": -0.4678872896760118,
+   "proxSepX": -0.06889522411659654,
+   "proxSepFrac": -0.3798717809551594,
+   "distAortaZ": 0.08021339375816344,
+   "distPulmZ": 0.4264068566870578,
+   "distSepZ": 0.34619346292889436,
+   "distSepFrac": 0.48595748341107203
+  }
+ },
+ "midline": [
+  {
+   "camera": "anterior day 56",
+   "t": 1,
+   "visible": 34737,
+   "subjectPixels": 287816,
+   "fracOfSubject": 0.12069169191427857
+  },
+  {
+   "camera": "anterior day 34",
+   "t": 0.29,
+   "visible": 122638,
+   "subjectPixels": 228646,
+   "fracOfSubject": 0.5363662605075095
+  }
+ ],
+ "viewDiffs": [
+  {
+   "from": "1 One lumen, four walls, four weeks",
+   "to": "2 The cushions — one fusion, four consequences",
+   "changed": 181911,
+   "lit": 248050,
+   "frac": 0.7333642410804273
+  },
+  {
+   "from": "2 The cushions — one fusion, four consequences",
+   "to": "3 Septum primum grows down, and is perforated before it arrives",
+   "changed": 496634,
+   "lit": 485125,
+   "frac": 1.0237237825302756
+  },
+  {
+   "from": "3 Septum primum grows down, and is perforated before it arrives",
+   "to": "4 Two sheets, two holes, and a shunt that is never closed",
+   "changed": 257850,
+   "lit": 438011,
+   "frac": 0.5886838458394881
+  },
+  {
+   "from": "4 Two sheets, two holes, and a shunt that is never closed",
+   "to": "5 The muscular septum is left standing, not pushed up",
+   "changed": 484860,
+   "lit": 475894,
+   "frac": 1.0188403299894515
+  },
+  {
+   "from": "5 The muscular septum is left standing, not pushed up",
+   "to": "6 The corner where three tissues meet",
+   "changed": 197629,
+   "lit": 296778,
+   "frac": 0.6659152632607538
+  },
+  {
+   "from": "6 The corner where three tissues meet",
+   "to": "7 Two neural crest ridges, before they become one wall",
+   "changed": 218178,
+   "lit": 298496,
+   "frac": 0.7309243674957119
+  },
+  {
+   "from": "7 Two neural crest ridges, before they become one wall",
+   "to": "8 The wall twists, so the vessels cross",
+   "changed": 351370,
+   "lit": 352014,
+   "frac": 0.9981705273085729
+  },
+  {
+   "from": "8 The wall twists, so the vessels cross",
+   "to": "9 When a wall does not arrive: the cushions, the flap, the corner",
+   "changed": 360441,
+   "lit": 363145,
+   "frac": 0.9925539385094109
+  },
+  {
+   "from": "9 When a wall does not arrive: the cushions, the flap, the corner",
+   "to": "10 Three ways the outflow septum fails, and four questions that sort them",
+   "changed": 175350,
+   "lit": 307456,
+   "frac": 0.5703255099916736
+  }
+ ],
+ "console": [
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x2fa400165400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x2fa400165400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x2fa400165400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x2fa400165400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  }
+ ],
+ "refs": [
+  {
+   "key": "sinus",
+   "ref": "septation-of-heart#sinus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4590
+  },
+  {
+   "key": "atrium",
+   "ref": "septation-of-heart#atrium",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 10640
+  },
+  {
+   "key": "ventricle",
+   "ref": "septation-of-heart#ventricle",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 9560
+  },
+  {
+   "key": "bulbus",
+   "ref": "septation-of-heart#bulbus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 6320
+  },
+  {
+   "key": "truncus",
+   "ref": "septation-of-heart#truncus",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3630
+  },
+  {
+   "key": "av_cushions",
+   "ref": "septation-of-heart#av_cushions",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1768
+  },
+  {
+   "key": "septum_primum",
+   "ref": "septation-of-heart#septum_primum",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5852
+  },
+  {
+   "key": "septum_secundum",
+   "ref": "septation-of-heart#septum_secundum",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5408
+  },
+  {
+   "key": "shunt",
+   "ref": "septation-of-heart#shunt",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 428
+  },
+  {
+   "key": "muscular_ivs",
+   "ref": "septation-of-heart#muscular_ivs",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3616
+  },
+  {
+   "key": "membranous_ivs",
+   "ref": "septation-of-heart#membranous_ivs",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2664
+  },
+  {
+   "key": "spiral_septum",
+   "ref": "septation-of-heart#spiral_septum",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 6736
+  },
+  {
+   "key": "aortic_channel",
+   "ref": "septation-of-heart#aortic_channel",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1504
+  },
+  {
+   "key": "pulmonary_channel",
+   "ref": "septation-of-heart#pulmonary_channel",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1504
+  },
+  {
+   "key": "avsd",
+   "ref": "septation-of-heart#av_cushions@1+avsd",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1768
+  },
+  {
+   "key": "asd",
+   "ref": "septation-of-heart#septum_primum@1+asd",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4148
+  },
+  {
+   "key": "vsd",
+   "ref": "septation-of-heart#muscular_ivs@1+vsd",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3616
+  },
+  {
+   "key": "tga",
+   "ref": "septation-of-heart#spiral_septum@1+transposition",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4416
+  },
+  {
+   "key": "truncus_persistent",
+   "ref": "septation-of-heart#spiral_septum@1+truncus_persistent",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 7552
+  },
+  {
+   "key": "fallot",
+   "ref": "septation-of-heart#spiral_septum@1+fallot",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 6816
+  },
+  {
+   "key": "midline",
+   "ref": "septation-of-heart#midline",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 222
+  }
+ ],
+ "adapterConsole": []
+}

@@ -1,0 +1,1522 @@
+{
+ "stages": [
+  {
+   "name": "t000",
+   "cam": "section",
+   "t": 0,
+   "opts": {},
+   "label": "the flat trilaminar disc — day 21",
+   "file": "viz-training/models-out/lateral-folding/t000-section.png"
+  },
+  {
+   "name": "t000",
+   "cam": "obliq",
+   "t": 0,
+   "opts": {},
+   "label": "the flat trilaminar disc — day 21",
+   "file": "viz-training/models-out/lateral-folding/t000-obliq.png"
+  },
+  {
+   "name": "t000",
+   "cam": "ventral",
+   "t": 0,
+   "opts": {},
+   "label": "the flat trilaminar disc — day 21",
+   "file": "viz-training/models-out/lateral-folding/t000-ventral.png"
+  },
+  {
+   "name": "t025",
+   "cam": "section",
+   "t": 0.25,
+   "opts": {},
+   "label": "t = 0.25",
+   "file": "viz-training/models-out/lateral-folding/t025-section.png"
+  },
+  {
+   "name": "t050",
+   "cam": "section",
+   "t": 0.5,
+   "opts": {},
+   "label": "t = 0.50 — the folds half closed",
+   "file": "viz-training/models-out/lateral-folding/t050-section.png"
+  },
+  {
+   "name": "t050",
+   "cam": "obliq",
+   "t": 0.5,
+   "opts": {},
+   "label": "t = 0.50 — the folds half closed",
+   "file": "viz-training/models-out/lateral-folding/t050-obliq.png"
+  },
+  {
+   "name": "t050",
+   "cam": "ventral",
+   "t": 0.5,
+   "opts": {},
+   "label": "t = 0.50 — the folds half closed",
+   "file": "viz-training/models-out/lateral-folding/t050-ventral.png"
+  },
+  {
+   "name": "t075",
+   "cam": "section",
+   "t": 0.75,
+   "opts": {},
+   "label": "t = 0.75",
+   "file": "viz-training/models-out/lateral-folding/t075-section.png"
+  },
+  {
+   "name": "t100",
+   "cam": "section",
+   "t": 1,
+   "opts": {},
+   "label": "the cylindrical embryo — day 28",
+   "file": "viz-training/models-out/lateral-folding/t100-section.png"
+  },
+  {
+   "name": "t100",
+   "cam": "obliq",
+   "t": 1,
+   "opts": {},
+   "label": "the cylindrical embryo — day 28",
+   "file": "viz-training/models-out/lateral-folding/t100-obliq.png"
+  },
+  {
+   "name": "t100",
+   "cam": "ventral",
+   "t": 1,
+   "opts": {},
+   "label": "the cylindrical embryo — day 28",
+   "file": "viz-training/models-out/lateral-folding/t100-ventral.png"
+  },
+  {
+   "name": "t000-bare",
+   "cam": "section",
+   "t": 0,
+   "opts": {
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "day 21, disc alone",
+   "file": "viz-training/models-out/lateral-folding/t000-bare-section.png"
+  },
+  {
+   "name": "t000-bare",
+   "cam": "obliq",
+   "t": 0,
+   "opts": {
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "day 21, disc alone",
+   "file": "viz-training/models-out/lateral-folding/t000-bare-obliq.png"
+  },
+  {
+   "name": "t000-bare",
+   "cam": "ventral",
+   "t": 0,
+   "opts": {
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "day 21, disc alone",
+   "file": "viz-training/models-out/lateral-folding/t000-bare-ventral.png"
+  },
+  {
+   "name": "t050-bare",
+   "cam": "section",
+   "t": 0.5,
+   "opts": {
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "half closed, disc alone",
+   "file": "viz-training/models-out/lateral-folding/t050-bare-section.png"
+  },
+  {
+   "name": "t050-bare",
+   "cam": "obliq",
+   "t": 0.5,
+   "opts": {
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "half closed, disc alone",
+   "file": "viz-training/models-out/lateral-folding/t050-bare-obliq.png"
+  },
+  {
+   "name": "t050-bare",
+   "cam": "ventral",
+   "t": 0.5,
+   "opts": {
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "half closed, disc alone",
+   "file": "viz-training/models-out/lateral-folding/t050-bare-ventral.png"
+  },
+  {
+   "name": "t100-bare",
+   "cam": "section",
+   "t": 1,
+   "opts": {
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "day 28, embryo alone",
+   "file": "viz-training/models-out/lateral-folding/t100-bare-section.png"
+  },
+  {
+   "name": "t100-bare",
+   "cam": "obliq",
+   "t": 1,
+   "opts": {
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "day 28, embryo alone",
+   "file": "viz-training/models-out/lateral-folding/t100-bare-obliq.png"
+  },
+  {
+   "name": "t100-bare",
+   "cam": "ventral",
+   "t": 1,
+   "opts": {
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "day 28, embryo alone",
+   "file": "viz-training/models-out/lateral-folding/t100-bare-ventral.png"
+  },
+  {
+   "name": "t100-coel",
+   "cam": "section",
+   "t": 1,
+   "opts": {
+    "amnion": false
+   },
+   "label": "the closed coelom",
+   "file": "viz-training/models-out/lateral-folding/t100-coel-section.png"
+  },
+  {
+   "name": "t100-coel",
+   "cam": "obliq",
+   "t": 1,
+   "opts": {
+    "amnion": false
+   },
+   "label": "the closed coelom",
+   "file": "viz-training/models-out/lateral-folding/t100-coel-obliq.png"
+  },
+  {
+   "name": "t100-coel",
+   "cam": "ventral",
+   "t": 1,
+   "opts": {
+    "amnion": false
+   },
+   "label": "the closed coelom",
+   "file": "viz-training/models-out/lateral-folding/t100-coel-ventral.png"
+  },
+  {
+   "name": "t100-cut",
+   "cam": "section",
+   "t": 1,
+   "opts": {
+    "cutaway": true,
+    "amnion": false
+   },
+   "label": "cutaway — tube within a tube",
+   "file": "viz-training/models-out/lateral-folding/t100-cut-section.png"
+  },
+  {
+   "name": "t100-cut",
+   "cam": "obliq",
+   "t": 1,
+   "opts": {
+    "cutaway": true,
+    "amnion": false
+   },
+   "label": "cutaway — tube within a tube",
+   "file": "viz-training/models-out/lateral-folding/t100-cut-obliq.png"
+  },
+  {
+   "name": "t100-cut",
+   "cam": "ventral",
+   "t": 1,
+   "opts": {
+    "cutaway": true,
+    "amnion": false
+   },
+   "label": "cutaway — tube within a tube",
+   "file": "viz-training/models-out/lateral-folding/t100-cut-ventral.png"
+  },
+  {
+   "name": "t050-cut",
+   "cam": "section",
+   "t": 0.5,
+   "opts": {
+    "cutaway": true,
+    "amnion": false
+   },
+   "label": "cutaway at half closure",
+   "file": "viz-training/models-out/lateral-folding/t050-cut-section.png"
+  },
+  {
+   "name": "t050-cut",
+   "cam": "obliq",
+   "t": 0.5,
+   "opts": {
+    "cutaway": true,
+    "amnion": false
+   },
+   "label": "cutaway at half closure",
+   "file": "viz-training/models-out/lateral-folding/t050-cut-obliq.png"
+  },
+  {
+   "name": "t050-cut",
+   "cam": "ventral",
+   "t": 0.5,
+   "opts": {
+    "cutaway": true,
+    "amnion": false
+   },
+   "label": "cutaway at half closure",
+   "file": "viz-training/models-out/lateral-folding/t050-cut-ventral.png"
+  },
+  {
+   "name": "t100-hern",
+   "cam": "section",
+   "t": 1,
+   "opts": {
+    "herniation": true,
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "physiological herniation",
+   "file": "viz-training/models-out/lateral-folding/t100-hern-section.png"
+  },
+  {
+   "name": "t100-hern",
+   "cam": "obliq",
+   "t": 1,
+   "opts": {
+    "herniation": true,
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "physiological herniation",
+   "file": "viz-training/models-out/lateral-folding/t100-hern-obliq.png"
+  },
+  {
+   "name": "t100-hern",
+   "cam": "ventral",
+   "t": 1,
+   "opts": {
+    "herniation": true,
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "physiological herniation",
+   "file": "viz-training/models-out/lateral-folding/t100-hern-ventral.png"
+  },
+  {
+   "name": "t100-omph",
+   "cam": "section",
+   "t": 1,
+   "opts": {
+    "omphalocele": true,
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "omphalocele — bowel inside a sac",
+   "file": "viz-training/models-out/lateral-folding/t100-omph-section.png"
+  },
+  {
+   "name": "t100-omph",
+   "cam": "obliq",
+   "t": 1,
+   "opts": {
+    "omphalocele": true,
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "omphalocele — bowel inside a sac",
+   "file": "viz-training/models-out/lateral-folding/t100-omph-obliq.png"
+  },
+  {
+   "name": "t100-omph",
+   "cam": "ventral",
+   "t": 1,
+   "opts": {
+    "omphalocele": true,
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "omphalocele — bowel inside a sac",
+   "file": "viz-training/models-out/lateral-folding/t100-omph-ventral.png"
+  },
+  {
+   "name": "t100-gast",
+   "cam": "section",
+   "t": 1,
+   "opts": {
+    "gastroschisis": true,
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "gastroschisis — a hole on the RIGHT, no sac",
+   "file": "viz-training/models-out/lateral-folding/t100-gast-section.png"
+  },
+  {
+   "name": "t100-gast",
+   "cam": "obliq",
+   "t": 1,
+   "opts": {
+    "gastroschisis": true,
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "gastroschisis — a hole on the RIGHT, no sac",
+   "file": "viz-training/models-out/lateral-folding/t100-gast-obliq.png"
+  },
+  {
+   "name": "t100-gast",
+   "cam": "ventral",
+   "t": 1,
+   "opts": {
+    "gastroschisis": true,
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "gastroschisis — a hole on the RIGHT, no sac",
+   "file": "viz-training/models-out/lateral-folding/t100-gast-ventral.png"
+  },
+  {
+   "name": "t100-exst",
+   "cam": "section",
+   "t": 1,
+   "opts": {
+    "exstrophy": true,
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "bladder exstrophy — failure below the umbilicus",
+   "file": "viz-training/models-out/lateral-folding/t100-exst-section.png"
+  },
+  {
+   "name": "t100-exst",
+   "cam": "obliq",
+   "t": 1,
+   "opts": {
+    "exstrophy": true,
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "bladder exstrophy — failure below the umbilicus",
+   "file": "viz-training/models-out/lateral-folding/t100-exst-obliq.png"
+  },
+  {
+   "name": "t100-exst",
+   "cam": "ventral",
+   "t": 1,
+   "opts": {
+    "exstrophy": true,
+    "amnion": false,
+    "yolksac": false
+   },
+   "label": "bladder exstrophy — failure below the umbilicus",
+   "file": "viz-training/models-out/lateral-folding/t100-exst-ventral.png"
+  }
+ ],
+ "console": [
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x348c0014fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x348c0014fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x348c0014fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x348c0014fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  }
+ ],
+ "normals": [
+  {
+   "key": "ectoderm",
+   "verts": 39192,
+   "outward": 0.5220453153704838,
+   "hullVerts": 18720,
+   "outwardHull": 1,
+   "tris": 13064,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "somatic",
+   "verts": 31728,
+   "outward": 0.5255295007564297,
+   "hullVerts": 14976,
+   "outwardHull": 1,
+   "tris": 10576,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "splanchnic",
+   "verts": 14232,
+   "outward": 0.5392074198988196,
+   "hullVerts": 6552,
+   "outwardHull": 1,
+   "tris": 4744,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "endoderm",
+   "verts": 15864,
+   "outward": 0.5276096822995462,
+   "hullVerts": 7488,
+   "outwardHull": 1,
+   "tris": 5288,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "coelom",
+   "verts": 37152,
+   "outward": 0.5727282515073213,
+   "hullVerts": 17784,
+   "outwardHull": 1,
+   "tris": 8848,
+   "winding": 1,
+   "degenerate": 675,
+   "gridFlipped": false
+  },
+  {
+   "key": "mesentery",
+   "verts": 4848,
+   "outward": 1,
+   "hullVerts": 2184,
+   "outwardHull": 1,
+   "tris": 1616,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "neural",
+   "verts": 3000,
+   "outward": 1,
+   "hullVerts": 2880,
+   "outwardHull": 1,
+   "tris": 1000,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "notochord",
+   "verts": 2100,
+   "outward": 1,
+   "hullVerts": 2016,
+   "outwardHull": 1,
+   "tris": 700,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "somite",
+   "verts": 5856,
+   "outward": 0.6557377049180327,
+   "hullVerts": 5760,
+   "outwardHull": 0.65,
+   "tris": 1952,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "somite",
+   "verts": 5856,
+   "outward": 0.6557377049180327,
+   "hullVerts": 5760,
+   "outwardHull": 0.65,
+   "tris": 1952,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "vitelline",
+   "verts": 1128,
+   "outward": 0.6808510638297872,
+   "hullVerts": 360,
+   "outwardHull": 0.9666666666666667,
+   "tris": 376,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "yolksac",
+   "verts": 19104,
+   "outward": 0.5135050251256281,
+   "hullVerts": 9048,
+   "outwardHull": 0.6286472148541115,
+   "tris": 6368,
+   "winding": 0.9990577889447236,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "amnion",
+   "verts": 27528,
+   "outward": 0.5239755884917175,
+   "hullVerts": 13104,
+   "outwardHull": 1,
+   "tris": 9176,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "umbilicalring",
+   "verts": 1260,
+   "outward": 0.5785714285714286,
+   "hullVerts": 1176,
+   "outwardHull": 0.548469387755102,
+   "tris": 420,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  }
+ ],
+ "acceptance": {
+  "measured": {
+   "A": 8.736181177378282e-16,
+   "B": 1.2113241388591063e-15,
+   "C": 6.661338147750939e-15,
+   "C_a": 1.6344842146409636e-14,
+   "C_lam": 1.0300303782261566,
+   "C_bracketed": true,
+   "D": 0.7492612436338905,
+   "E": 0,
+   "E_neg": 138,
+   "F": 0.6155329426065073,
+   "F_abs": 0.24645593823371623,
+   "G": 0.21229068569626963,
+   "H": 0.07999999999999996,
+   "I_defect_x": [
+    -0.9243723573023515,
+    -0.5766167765425636
+   ],
+   "I": 0.46102796090427894,
+   "J": 0.6792452830188679,
+   "lamCapHits": 2,
+   "R_WALL": 0.9708451528605615,
+   "R_GUT": 0.30239439187460115,
+   "gutOuterRadius": 0.40039439187460113,
+   "wallWidth": 1.9419121257172878
+  },
+  "pass": {
+   "A": true,
+   "B": true,
+   "C": true,
+   "D": true,
+   "E": true,
+   "E-neg": true,
+   "F": true,
+   "G": true,
+   "H": true,
+   "I": true,
+   "J": true
+  },
+  "allPass": true,
+  "spec": {
+   "axes": "+x = embryo LEFT, -x = RIGHT, +y = CRANIAL, +z = VENTRAL",
+   "t_meaning": "t = 0 flat trilaminar disc (about day 21); t = 1 cylindrical embryo (about day 28)",
+   "tests": [
+    {
+     "id": "A",
+     "says": "the sheets curl, they do not stretch: transverse arc length is conserved",
+     "must": "max |arc(t) - 2*SO| / (2*SO) <= FLOORS.ARC over t in 0..1"
+    },
+    {
+     "id": "B",
+     "says": "the two somatopleuric edges MEET in the ventral midline",
+     "must": "residual gap at t=1, away from the umbilicus, <= FLOORS.CLOSE * wall width"
+    },
+    {
+     "id": "C",
+     "says": "and they do not meet at a crease — the wall is continuous at the linea alba",
+     "must": "theta_end at full closure = pi within 1e-6 (this is what a* is solved for)"
+    },
+    {
+     "id": "D",
+     "says": "one hole is left, and it is big enough for the midgut to herniate through",
+     "must": "ring opening at t=1 >= FLOORS.RING * gut outer diameter"
+    },
+    {
+     "id": "E",
+     "says": "the body cavity is SEALED OFF from the outside",
+     "must": "0 of 240 transverse rays leaving the coelom escape at t=1 away from the umbilicus"
+    },
+    {
+     "id": "E-neg",
+     "says": "...and was not sealed before folding — the negative case for E",
+     "must": ">= 60 of the same 240 rays escape at t=0"
+    },
+    {
+     "id": "F",
+     "says": "a tube within a tube: the gut hangs clear inside the body wall",
+     "must": "least clearance at t=1 >= FLOORS.CLEAR * gut outer radius"
+    },
+    {
+     "id": "G",
+     "says": "the wide connection to the yolk sac narrows to the vitelline duct",
+     "must": "0 < duct calibre at t=1 <= FLOORS.DUCT * gut outer diameter"
+    },
+    {
+     "id": "H",
+     "says": "the dorsal mesentery TAPERS to nothing where it meets what it suspends",
+     "must": "mesentery thickness at the gut <= FLOORS.MESO * its thickness at the body wall"
+    },
+    {
+     "id": "I",
+     "says": "gastroschisis is to the embryo's RIGHT of a normally inserted cord",
+     "must": "defect entirely at x < 0, and clear of the ring by >= FLOORS.GASTRO * ring width"
+    },
+    {
+     "id": "J",
+     "says": "exstrophy is BELOW the umbilicus",
+     "must": "y separation of the two openings >= FLOORS.EXSTR * their mean y extent"
+    }
+   ]
+  },
+  "floors": {
+   "ARC": 0.005,
+   "CLOSE": 0.02,
+   "RING": 0.35,
+   "CLEAR": 0.35,
+   "DUCT": 0.25,
+   "MESO": 0.25,
+   "GASTRO": 0.35,
+   "EXSTR": 0.35
+  }
+ },
+ "refs": [
+  {
+   "key": "ectoderm",
+   "ref": "lateral-folding#ectoderm",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 13064
+  },
+  {
+   "key": "somatic",
+   "ref": "lateral-folding#somatic",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 10576
+  },
+  {
+   "key": "splanchnic",
+   "ref": "lateral-folding#splanchnic",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 4744
+  },
+  {
+   "key": "endoderm",
+   "ref": "lateral-folding#endoderm",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 5288
+  },
+  {
+   "key": "coelom",
+   "ref": "lateral-folding#coelom",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 12384
+  },
+  {
+   "key": "mesentery",
+   "ref": "lateral-folding#mesentery",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1616
+  },
+  {
+   "key": "neural",
+   "ref": "lateral-folding#neural",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1000
+  },
+  {
+   "key": "notochord",
+   "ref": "lateral-folding#notochord",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 700
+  },
+  {
+   "key": "somite",
+   "ref": "lateral-folding#somite",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 3904
+  },
+  {
+   "key": "amnion",
+   "ref": "lateral-folding#amnion",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 9176
+  },
+  {
+   "key": "yolksac",
+   "ref": "lateral-folding#yolksac",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 6368
+  },
+  {
+   "key": "vitelline",
+   "ref": "lateral-folding#vitelline",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 376
+  },
+  {
+   "key": "umbilicalring",
+   "ref": "lateral-folding#umbilicalring",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 420
+  },
+  {
+   "key": "herniation",
+   "ref": "lateral-folding#herniation+herniation",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1696
+  },
+  {
+   "key": "ectoderm_open",
+   "ref": "lateral-folding#ectoderm+cutaway",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 8528
+  },
+  {
+   "key": "somatic_open",
+   "ref": "lateral-folding#somatic+cutaway",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 6040
+  },
+  {
+   "key": "omphalocele_gut",
+   "ref": "lateral-folding#herniation+omphalocele",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1696
+  },
+  {
+   "key": "omphalocele_sac",
+   "ref": "lateral-folding#sac+omphalocele",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 2160
+  },
+  {
+   "key": "gastroschisis_bowel",
+   "ref": "lateral-folding#gastroschisis+gastroschisis",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1148
+  },
+  {
+   "key": "gastroschisis_wall",
+   "ref": "lateral-folding#ectoderm+gastroschisis",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 13032
+  },
+  {
+   "key": "exstrophy_plate",
+   "ref": "lateral-folding#exstrophy+exstrophy",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 1428
+  },
+  {
+   "key": "exstrophy_wall",
+   "ref": "lateral-folding#ectoderm+exstrophy",
+   "reason": null,
+   "hasMesh": true,
+   "tris": 13064
+  }
+ ],
+ "solved": {
+  "note": "a* is SOLVED and comes out 0: a sheet of fixed arc length that closes on the midline tangentially is a circle. lam* is the curvature at full closure, pi/S.",
+  "outer": {
+   "a": 1.6344842146409636e-14,
+   "lam": 1.0300303782261566,
+   "thetaEnd": 3.1415926535897998,
+   "bracketed": true
+  },
+  "gut": {
+   "a": 1.6344842146409636e-14,
+   "lam": 3.3069396353576606,
+   "thetaEnd": 3.1415926535898007,
+   "bracketed": true
+  },
+  "SO": 3.05,
+  "SG": 0.95,
+  "R_WALL": 0.9708451528605615,
+  "R_GUT": 0.30239439187460115
+ },
+ "capLog": {
+  "hits": 2,
+  "log": [
+   {
+    "S": 3.05,
+    "a": 1.6,
+    "sgn": 1,
+    "xTarget": 0,
+    "reach": 0.06034556339557636
+   },
+   {
+    "S": 0.95,
+    "a": 1.6,
+    "sgn": 1,
+    "xTarget": 0,
+    "reach": 0.018460328923062104
+   }
+  ]
+ },
+ "normals0": [
+  {
+   "key": "ectoderm",
+   "verts": 39192,
+   "outward": 1,
+   "hullVerts": 18720,
+   "outwardHull": 1,
+   "tris": 13064,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "somatic",
+   "verts": 31728,
+   "outward": 0.9901664145234493,
+   "hullVerts": 14976,
+   "outwardHull": 1,
+   "tris": 10576,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "splanchnic",
+   "verts": 15528,
+   "outward": 0.517774343122102,
+   "hullVerts": 7176,
+   "outwardHull": 1,
+   "tris": 5176,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "endoderm",
+   "verts": 15864,
+   "outward": 0.5279878971255674,
+   "hullVerts": 7488,
+   "outwardHull": 1,
+   "tris": 5288,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "coelom",
+   "verts": 30744,
+   "outward": 0.9898516783762685,
+   "hullVerts": 14664,
+   "outwardHull": 1,
+   "tris": 7336,
+   "winding": 1,
+   "degenerate": 675,
+   "gridFlipped": false
+  },
+  {
+   "key": "mesentery",
+   "verts": 4848,
+   "outward": 1,
+   "hullVerts": 2184,
+   "outwardHull": 1,
+   "tris": 1616,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "neural",
+   "verts": 3000,
+   "outward": 1,
+   "hullVerts": 2880,
+   "outwardHull": 1,
+   "tris": 1000,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "notochord",
+   "verts": 2100,
+   "outward": 1,
+   "hullVerts": 2016,
+   "outwardHull": 1,
+   "tris": 700,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "somite",
+   "verts": 5856,
+   "outward": 0.6557377049180327,
+   "hullVerts": 5760,
+   "outwardHull": 0.65,
+   "tris": 1952,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "somite",
+   "verts": 5856,
+   "outward": 0.6557377049180327,
+   "hullVerts": 5760,
+   "outwardHull": 0.65,
+   "tris": 1952,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "vitelline",
+   "verts": 1920,
+   "outward": 0.5125,
+   "hullVerts": 624,
+   "outwardHull": 1,
+   "tris": 640,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "yolksac",
+   "verts": 19104,
+   "outward": 0.5263819095477387,
+   "hullVerts": 9048,
+   "outwardHull": 1,
+   "tris": 6368,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  },
+  {
+   "key": "amnion",
+   "verts": 27528,
+   "outward": 0.5239755884917175,
+   "hullVerts": 13104,
+   "outwardHull": 1,
+   "tris": 9176,
+   "winding": 1,
+   "degenerate": 0,
+   "gridFlipped": false
+  }
+ ],
+ "meshClaims": {
+  "wallBox": {
+   "mnx": -1.0909560918807983,
+   "mxx": 1.0909560918807983,
+   "mnz": -0.41999998688697815,
+   "mxz": 1.7618709802627563
+  },
+  "gutBox": {
+   "mnx": -0.4043481647968292,
+   "mxx": 0.4043481647968292,
+   "mnz": 0.5120317339897156,
+   "mxz": 1.2900888919830322
+  },
+  "gutOuterRadius": 0.3966883718967438,
+  "clearanceAbs": 0.24672643955727566,
+  "F": 0.621965394088984,
+  "ventralMidlinePts": 120,
+  "wallWidth": 2.1819121837615967,
+  "ringGapCentreX": 0,
+  "ringGapAbs": 0.630373477935791,
+  "D": 0.7945449408079378,
+  "gastroGaps": [
+   {
+    "w": 0.630373477935791,
+    "lo": -0.3151867389678955,
+    "hi": 0.3151867389678955
+   },
+   {
+    "w": 0.38683897256851196,
+    "lo": -1.028260350227356,
+    "hi": -0.641421377658844
+   }
+  ],
+  "I_ringHalf": 0.3151867389678955,
+  "I_defectMedialX": -0.641421377658844,
+  "I": 0.5175259589905816,
+  "I_rightOfCord": true,
+  "exstrophyY": {
+   "min": -1.1800000667572021,
+   "max": -0.25999999046325684,
+   "c": -0.7200000091739323,
+   "extent": 0.9200000762939453
+  },
+  "floors": {
+   "ARC": 0.005,
+   "CLOSE": 0.02,
+   "RING": 0.35,
+   "CLEAR": 0.35,
+   "DUCT": 0.25,
+   "MESO": 0.25,
+   "GASTRO": 0.35,
+   "EXSTR": 0.35
+  }
+ },
+ "negatives": [
+  {
+   "id": "A",
+   "wrong": 0.015,
+   "rejected": true
+  },
+  {
+   "id": "B",
+   "wrong": 0.08,
+   "rejected": true
+  },
+  {
+   "id": "D",
+   "wrong": 0.13999999999999999,
+   "rejected": true
+  },
+  {
+   "id": "F",
+   "wrong": 0.13999999999999999,
+   "rejected": true
+  },
+  {
+   "id": "G",
+   "wrong": 0.75,
+   "rejected": true
+  },
+  {
+   "id": "G0",
+   "wrong": 0,
+   "rejected": true
+  },
+  {
+   "id": "H",
+   "wrong": 0.75,
+   "rejected": true
+  },
+  {
+   "id": "I",
+   "wrong": 0.105,
+   "rejected": true
+  },
+  {
+   "id": "J",
+   "wrong": 0.105,
+   "rejected": true
+  }
+ ],
+ "lumen": [
+  {
+   "camera": "section t=0.00",
+   "t": 0,
+   "rays": 9216,
+   "hits": 1292,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "section t=0.50",
+   "t": 0.5,
+   "rays": 9216,
+   "hits": 2630,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "section t=1.00",
+   "t": 1,
+   "rays": 9216,
+   "hits": 1676,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "oblique t=1.00",
+   "t": 1,
+   "rays": 9216,
+   "hits": 1278,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "ventral t=1.00",
+   "t": 1,
+   "rays": 9216,
+   "hits": 2536,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "oblique t=1.00 cut",
+   "t": 1,
+   "rays": 9216,
+   "hits": 1144,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "ventral t=1.00 gastro",
+   "t": 1,
+   "rays": 9216,
+   "hits": 2551,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  },
+  {
+   "camera": "section t=1.00 bare",
+   "t": 1,
+   "rays": 9216,
+   "hits": 4944,
+   "backfaceFirst": 0,
+   "frac": 0,
+   "offenders": {}
+  }
+ ],
+ "stages_t": [
+  {
+   "key": "ectoderm",
+   "ref": "lateral-folding#ectoderm",
+   "part": "ectoderm",
+   "stageable": true,
+   "ref0": "lateral-folding#ectoderm@0",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": false
+  },
+  {
+   "key": "somatic",
+   "ref": "lateral-folding#somatic",
+   "part": "somatic",
+   "stageable": true,
+   "ref0": "lateral-folding#somatic@0",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": false
+  },
+  {
+   "key": "splanchnic",
+   "ref": "lateral-folding#splanchnic",
+   "part": "splanchnic",
+   "stageable": true,
+   "ref0": "lateral-folding#splanchnic@0",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": false
+  },
+  {
+   "key": "endoderm",
+   "ref": "lateral-folding#endoderm",
+   "part": "endoderm",
+   "stageable": true,
+   "ref0": "lateral-folding#endoderm@0",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": false
+  },
+  {
+   "key": "coelom",
+   "ref": "lateral-folding#coelom",
+   "part": "coelom",
+   "stageable": true,
+   "ref0": "lateral-folding#coelom@0",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": false
+  },
+  {
+   "key": "mesentery",
+   "ref": "lateral-folding#mesentery",
+   "part": "mesentery",
+   "stageable": true,
+   "ref0": "lateral-folding#mesentery@0",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": false
+  },
+  {
+   "key": "neural",
+   "ref": "lateral-folding#neural",
+   "part": "neural",
+   "stageable": true,
+   "ref0": "lateral-folding#neural@0",
+   "t0": true,
+   "t1": true,
+   "moved": false,
+   "declaredStatic": true,
+   "declaredLimited": false
+  },
+  {
+   "key": "notochord",
+   "ref": "lateral-folding#notochord",
+   "part": "notochord",
+   "stageable": true,
+   "ref0": "lateral-folding#notochord@0",
+   "t0": true,
+   "t1": true,
+   "moved": false,
+   "declaredStatic": true,
+   "declaredLimited": false
+  },
+  {
+   "key": "somite",
+   "ref": "lateral-folding#somite",
+   "part": "somite",
+   "stageable": true,
+   "ref0": "lateral-folding#somite@0",
+   "t0": true,
+   "t1": true,
+   "moved": false,
+   "declaredStatic": true,
+   "declaredLimited": false
+  },
+  {
+   "key": "amnion",
+   "ref": "lateral-folding#amnion",
+   "part": "amnion",
+   "stageable": true,
+   "ref0": "lateral-folding#amnion@0",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": false
+  },
+  {
+   "key": "yolksac",
+   "ref": "lateral-folding#yolksac",
+   "part": "yolksac",
+   "stageable": true,
+   "ref0": "lateral-folding#yolksac@0",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": false
+  },
+  {
+   "key": "vitelline",
+   "ref": "lateral-folding#vitelline",
+   "part": "vitelline",
+   "stageable": true,
+   "ref0": "lateral-folding#vitelline@0",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": true
+  },
+  {
+   "key": "umbilicalring",
+   "ref": "lateral-folding#umbilicalring",
+   "part": "umbilicalring",
+   "stageable": true,
+   "ref0": "lateral-folding#umbilicalring@0",
+   "t0": false,
+   "t1": true,
+   "moved": false,
+   "declaredStatic": false,
+   "declaredLimited": true
+  },
+  {
+   "key": "herniation",
+   "ref": "lateral-folding#herniation+herniation",
+   "part": "herniation",
+   "stageable": true,
+   "ref0": "lateral-folding#herniation@0+herniation",
+   "t0": true,
+   "t1": true,
+   "moved": false,
+   "declaredStatic": true,
+   "declaredLimited": false
+  },
+  {
+   "key": "ectoderm_open",
+   "ref": "lateral-folding#ectoderm+cutaway",
+   "part": "ectoderm",
+   "stageable": true,
+   "ref0": "lateral-folding#ectoderm@0+cutaway",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": false
+  },
+  {
+   "key": "somatic_open",
+   "ref": "lateral-folding#somatic+cutaway",
+   "part": "somatic",
+   "stageable": true,
+   "ref0": "lateral-folding#somatic@0+cutaway",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": false
+  },
+  {
+   "key": "omphalocele_gut",
+   "ref": "lateral-folding#herniation+omphalocele",
+   "part": "herniation",
+   "stageable": true,
+   "ref0": "lateral-folding#herniation@0+omphalocele",
+   "t0": true,
+   "t1": true,
+   "moved": false,
+   "declaredStatic": true,
+   "declaredLimited": false
+  },
+  {
+   "key": "omphalocele_sac",
+   "ref": "lateral-folding#sac+omphalocele",
+   "part": "sac",
+   "stageable": true,
+   "ref0": "lateral-folding#sac@0+omphalocele",
+   "t0": true,
+   "t1": true,
+   "moved": false,
+   "declaredStatic": true,
+   "declaredLimited": false
+  },
+  {
+   "key": "gastroschisis_bowel",
+   "ref": "lateral-folding#gastroschisis+gastroschisis",
+   "part": "gastroschisis",
+   "stageable": true,
+   "ref0": "lateral-folding#gastroschisis@0+gastroschisis",
+   "t0": true,
+   "t1": true,
+   "moved": false,
+   "declaredStatic": true,
+   "declaredLimited": false
+  },
+  {
+   "key": "gastroschisis_wall",
+   "ref": "lateral-folding#ectoderm+gastroschisis",
+   "part": "ectoderm",
+   "stageable": true,
+   "ref0": "lateral-folding#ectoderm@0+gastroschisis",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": false
+  },
+  {
+   "key": "exstrophy_plate",
+   "ref": "lateral-folding#exstrophy+exstrophy",
+   "part": "exstrophy",
+   "stageable": true,
+   "ref0": "lateral-folding#exstrophy@0+exstrophy",
+   "t0": true,
+   "t1": true,
+   "moved": false,
+   "declaredStatic": true,
+   "declaredLimited": false
+  },
+  {
+   "key": "exstrophy_wall",
+   "ref": "lateral-folding#ectoderm+exstrophy",
+   "part": "ectoderm",
+   "stageable": true,
+   "ref0": "lateral-folding#ectoderm@0+exstrophy",
+   "t0": true,
+   "t1": true,
+   "moved": true,
+   "declaredStatic": false,
+   "declaredLimited": false
+  }
+ ],
+ "adapterConsole": [],
+ "harness_noise": [
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x348c0014fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x348c0014fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x348c0014fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+   "type": "warning",
+   "text": "[.WebGL-0x348c0014fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  }
+ ],
+ "lumenPass": true,
+ "stagePass": true,
+ "normalsOk": true,
+ "meshPass": true,
+ "negPass": true
+}

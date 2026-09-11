@@ -188,6 +188,21 @@ function validate(scene) {
 
   for (const v of (scene.views || [])) {
     const where = JSON.stringify(v.title || v.mode);
+    /* A VIEW MODE OUTSIDE THIS SET IS INVISIBLE TO COVERAGE, AND SILENTLY SO.
+       `tools/coverage.mjs` decides whether a structure is covered by matching the view types
+       CURRICULUM.json declares against `views[].mode`, as exact strings. A mode that is not in the
+       curriculum's vocabulary therefore counts for nothing: the scene teaches the thing, the report
+       says it does not, and the gap gets queued as work that is already done.
+       Measured across the corpus: `cardiac-looping` labels all NINE of its views "process" while its
+       curriculum entry declares "mechanism", so a scene that teaches looping in nine beats reported
+       0/1 covered. `comparison` also appears, in eight scenes, but always ALONGSIDE every declared
+       type — an extra beat, costing nothing — so it is allowed here rather than renamed.
+       Same failure as role:'primary': a legitimate-looking word nothing downstream knows. */
+    const VIEW_MODES = new Set(['location', 'cross_section', 'mechanism', 'vasculature',
+      'associated_organs', 'glands', 'contraction_filter', 'comparison']);
+    if (!v.mode) E('ops', `view ${where}: no mode — coverage cannot count it`);
+    else if (!VIEW_MODES.has(v.mode))
+      E('ops', `view ${where}: mode "${v.mode}" is not a view type coverage.mjs knows (${[...VIEW_MODES].join(', ')}). It will count for nothing. If this beat teaches a process, the word is "mechanism".`);
     if (!v.narration) W('ops', `view ${where}: no narration`);
     if (!(v.ops || []).length) W('ops', `view ${where}: no ops — nothing will happen on screen`);
     let isolated = null;
@@ -273,8 +288,23 @@ function validate(scene) {
   if (scene.mode === 'imaging' && scene.status === 'ready')
     E('lifecycle', 'no imaging engine exists yet — an imaging scene must be status:"planned"');
 
-  const parts = structures.filter(s => s.role === 'part');
-  if (!parts.length) W('ops', 'no structures with role:"part" — the student gets no parts list');
+  /* ONE VOCABULARY, CHECKED IN ONE PLACE — matching isTaught() in viz3d.js.
+     The engine's rule is `role !== 'context'`, so 'primary' and 'part' are both taught. This used to
+     read `role === 'part'` here and in three places in the engine, which silently demoted all 92
+     'primary' structures to scaffolding. */
+  const TAUGHT = new Set(['part', 'primary']);
+  const KNOWN = new Set(['part', 'primary', 'context']);
+  for (const s of structures) {
+    if (s.role && !KNOWN.has(s.role))
+      E('structures', `${s.key}: role "${s.role}" is not in the spec (primary | part | context). The engine treats an unknown role as taught, which may not be what you meant — say which one you want.`);
+    if (!s.role) W('structures', `${s.key}: no role — it will be treated as scaffolding, kept out of the student's list and clipped away in cross-sections`);
+  }
+  const parts = structures.filter(s => TAUGHT.has(s.role));
+  /* An ERROR, not a warning. This was a warning, and four histology scenes shipped with an empty
+     parts list underneath it — cell junctions, simple epithelia, stratified epithelia, glandular
+     epithelium — because they use 'primary' throughout and nothing here knew the word. A scene a
+     student cannot tap anything in is broken, not merely suspect. */
+  if (!parts.length) E('ops', 'no taught structures (role "primary" or "part") — the student gets an empty parts list and nothing to tap');
   return { errors, warnings, degrades: [...degrades] };
 }
 
@@ -336,7 +366,7 @@ for (const f of files) {
     }
   } else if (!QUIET) {
     const s = scene.structures || [];
-    const p = s.filter(x => x.role === 'part').length;
+    const p = s.filter(x => x.role === 'part' || x.role === 'primary').length;
     const ops = (scene.views || []).reduce((n, v) => n + (v.ops || []).length, 0);
     console.log(`✓ ${f}  ${s.length} structures (${p} parts) · ${(scene.views || []).length} views · ${ops} ops · ${scene.status || 'unknown'}` +
       (degrades.length ? `  [degrades: ${degrades.join(', ')}]` : ''));

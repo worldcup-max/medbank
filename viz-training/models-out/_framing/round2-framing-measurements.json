@@ -1,0 +1,4293 @@
+{
+  "measured_by": "build run 2026-09-10, engine__refit-camera-on-isolate round 2",
+  "item": "engine__refit-camera-on-isolate",
+  "how": "viz-training/tools/measure-view-framing.mjs --all --jobs 1, real player via MB3D.mountScene, canvas 1008x440 at rest. BEFORE = viz3d.js sha256 a8d39821304aea5393728a5192f48f8900081714d03eefcef554311fb513fc59 (the file the round-2 review measured). AFTER = sha256 733887e085c6c9eafe39821bb6f4b26043995794d2716343649cc663b2746baa. Same tool both sides; the tool settles the camera by polling rather than sleeping, which is what makes the two runs comparable at all.",
+  "warning": "fillH/fillW above ~100% are near-plane projections and are ordinal, not metric. On views flagged engineDefect the subject is ghosted to 10%, so these numbers describe the ghosted context, not the subject — see BUILD-LOG.",
+  "scenes": {
+    "embryology__cardiovascular-development__cardiac-looping": [
+      {
+        "view": 1,
+        "title": "Why a straight tube cannot stay straight",
+        "before": {
+          "lit": 29647,
+          "areapct": 6.68,
+          "hpct": 83,
+          "fillH": 88.8,
+          "fillW": 11.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 6.0692,
+          "settled": true
+        },
+        "after": {
+          "lit": 29097,
+          "areapct": 6.56,
+          "hpct": 83,
+          "fillH": 89,
+          "fillW": 12,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 6.1149,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              1.5326,
+              4.2,
+              1.5832
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 2,
+        "title": "The dorsal mesocardium has already broken down",
+        "before": {
+          "lit": 16455,
+          "areapct": 3.71,
+          "hpct": 89.3,
+          "fillH": 93.6,
+          "fillW": 10,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.9959,
+          "settled": true
+        },
+        "after": {
+          "lit": 15996,
+          "areapct": 3.61,
+          "hpct": 88.2,
+          "fillH": 93.5,
+          "fillW": 11,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 6.0308,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              1.415,
+              4.2,
+              1.2796
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 3,
+        "title": "Movement one — the bulbus swings ventrally, caudally and to the RIGHT",
+        "before": {
+          "lit": 23065,
+          "areapct": 5.2,
+          "hpct": 76.1,
+          "fillH": 82.8,
+          "fillW": 16.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.7445,
+          "settled": true
+        },
+        "after": {
+          "lit": 20350,
+          "areapct": 4.59,
+          "hpct": 76.4,
+          "fillH": 83.2,
+          "fillW": 16.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.7927,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              1.6205,
+              3.0848,
+              1.7658
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 4,
+        "title": "Movement two — the ventricle swings dorsally and to the LEFT",
+        "before": {
+          "lit": 23065,
+          "areapct": 5.2,
+          "hpct": 76.1,
+          "fillH": 82.8,
+          "fillW": 16.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.7445,
+          "settled": true
+        },
+        "after": {
+          "lit": 20350,
+          "areapct": 4.59,
+          "hpct": 76.4,
+          "fillH": 83.2,
+          "fillW": 16.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.7927,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              1.6205,
+              3.0848,
+              1.7658
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 5,
+        "title": "Movement three — the atria climb up behind",
+        "before": {
+          "lit": 32890,
+          "areapct": 7.42,
+          "hpct": 77.3,
+          "fillH": 83,
+          "fillW": 21.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0177,
+          "settled": true
+        },
+        "after": {
+          "lit": 35988,
+          "areapct": 8.11,
+          "hpct": 76.6,
+          "fillH": 83.4,
+          "fillW": 23.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0433,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              1.7667,
+              2.4931,
+              1.8048
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 6,
+        "title": "What the loop leaves you with",
+        "before": {
+          "lit": 55937,
+          "areapct": 12.61,
+          "hpct": 66.8,
+          "fillH": 73.2,
+          "fillW": 19.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.4152,
+          "settled": true
+        },
+        "after": {
+          "lit": 52621,
+          "areapct": 11.86,
+          "hpct": 65.9,
+          "fillH": 72.3,
+          "fillW": 19.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.5444,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.7689,
+              2.4931,
+              2.7689
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 7,
+        "title": "Looping is the setup for septation",
+        "before": {
+          "lit": 30648,
+          "areapct": 6.91,
+          "hpct": 72,
+          "fillH": 79.6,
+          "fillW": 23,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0142,
+          "settled": true
+        },
+        "after": {
+          "lit": 27379,
+          "areapct": 6.17,
+          "hpct": 72.3,
+          "fillH": 80,
+          "fillW": 24.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0624,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              1.8757,
+              2.4931,
+              1.8048
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 8,
+        "title": "L-loop — the tube turns the wrong way",
+        "before": {
+          "lit": 133757,
+          "areapct": 30.16,
+          "hpct": 98.2,
+          "fillH": 76.1,
+          "fillW": 77.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.9327,
+          "settled": true
+        },
+        "after": {
+          "lit": 114189,
+          "areapct": 25.75,
+          "hpct": 99.5,
+          "fillH": 77.4,
+          "fillW": 67.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.1186,
+          "settled": true,
+          "subject": {
+            "only": [
+              "d_sinus",
+              "d_atrium",
+              "d_ventricle",
+              "d_bulbus",
+              "d_truncus",
+              "l_sinus",
+              "l_atrium",
+              "l_ventricle",
+              "l_bulbus",
+              "l_truncus"
+            ],
+            "named": [],
+            "onlyVisible": 10,
+            "visible": 10,
+            "size": [
+              3.5911,
+              1.5475,
+              2.2635
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 9,
+        "title": "Mirror-image anatomy — and the difference from dextroposition",
+        "before": {
+          "lit": 40716,
+          "areapct": 9.18,
+          "hpct": 73.4,
+          "fillH": 81.2,
+          "fillW": 25.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.9759,
+          "settled": true
+        },
+        "after": {
+          "lit": 41555,
+          "areapct": 9.37,
+          "hpct": 74.3,
+          "fillH": 82.7,
+          "fillW": 27.1,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0007,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              1.9243,
+              2.4931,
+              1.6814
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      }
+    ],
+    "gross__back-vertebral-column__intervertebral-disc": [
+      {
+        "view": 1,
+        "title": "Where the discs sit",
+        "before": {
+          "lit": 39658,
+          "areapct": 8.94,
+          "hpct": 40.2,
+          "fillH": 45.5,
+          "fillW": 52.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.3006,
+          "settled": true
+        },
+        "after": {
+          "lit": 41742,
+          "areapct": 9.41,
+          "hpct": 43,
+          "fillH": 49,
+          "fillW": 52,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.2177,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              4.146,
+              0.6998,
+              2.069
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 2,
+        "title": "One joint, two bones",
+        "before": {
+          "lit": 156958,
+          "areapct": 35.39,
+          "hpct": 67,
+          "fillH": 70.9,
+          "fillW": 30.2,
+          "clippedAtRest": true,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true
+        },
+        "after": {
+          "lit": 161281,
+          "areapct": 36.36,
+          "hpct": 77.3,
+          "fillH": 72.2,
+          "fillW": 29.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true,
+          "subject": {
+            "only": [
+              "disc_l45"
+            ],
+            "named": [
+              "l4",
+              "l5",
+              "disc_l45"
+            ],
+            "onlyVisible": 1,
+            "visible": 3,
+            "size": [
+              0.6372,
+              0.5171,
+              0.6846
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 3,
+        "title": "Soft centre, tough ring",
+        "before": {
+          "lit": 144747,
+          "areapct": 32.64,
+          "hpct": 100,
+          "fillH": 349.8,
+          "fillW": 268.8,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 1.2,
+          "settled": true
+        },
+        "after": {
+          "lit": 148445,
+          "areapct": 33.47,
+          "hpct": 100,
+          "fillH": 319.9,
+          "fillW": 272.3,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 1.2,
+          "settled": true,
+          "subject": {
+            "only": [
+              "disc_l45"
+            ],
+            "named": [],
+            "onlyVisible": 1,
+            "visible": 1,
+            "size": [
+              0.2148,
+              0.2287,
+              0.3228
+            ]
+          },
+          "framingFails": [
+            "clipped at rest",
+            "fillH 319.9% — subject does not fit",
+            "fillW 272.3% — subject does not fit"
+          ],
+          "sceneFails": [],
+          "engineFails": [
+            "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+          ]
+        }
+      },
+      {
+        "view": 4,
+        "title": "Why a prolapse goes backwards and sideways",
+        "before": {
+          "lit": 93020,
+          "areapct": 20.97,
+          "hpct": 88.9,
+          "fillH": 27,
+          "fillW": 9.1,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.06,
+          "settled": true
+        },
+        "after": {
+          "lit": 94833,
+          "areapct": 21.38,
+          "hpct": 86.1,
+          "fillH": 26.6,
+          "fillW": 8.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.06,
+          "settled": true,
+          "subject": {
+            "only": [
+              "l4"
+            ],
+            "named": [],
+            "onlyVisible": 1,
+            "visible": 1,
+            "size": [
+              0.4235,
+              0.4912,
+              0.5724
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 5,
+        "title": "The nerve next door",
+        "before": {
+          "lit": 140920,
+          "areapct": 31.77,
+          "hpct": 84.5,
+          "fillH": 4283.8,
+          "fillW": 9225.5,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 1.7636,
+          "settled": true
+        },
+        "after": {
+          "lit": 146496,
+          "areapct": 33.03,
+          "hpct": 85.2,
+          "fillH": 10446.5,
+          "fillW": 9978,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 1.7678,
+          "settled": true,
+          "subject": {
+            "only": [
+              "l1",
+              "l2",
+              "l3",
+              "l4",
+              "l5",
+              "sacrum"
+            ],
+            "named": [
+              "disc_l45",
+              "disc_l5s1"
+            ],
+            "onlyVisible": 6,
+            "visible": 8,
+            "size": [
+              1.8461,
+              0.6664,
+              1.177
+            ]
+          },
+          "framingFails": [
+            "clipped at rest",
+            "fillH 10446.5% — subject does not fit",
+            "fillW 9978% — subject does not fit"
+          ],
+          "sceneFails": [],
+          "engineFails": [
+            "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+          ]
+        }
+      },
+      {
+        "view": 6,
+        "title": "Thicker where you bend",
+        "before": {
+          "lit": 100968,
+          "areapct": 22.77,
+          "hpct": 67.7,
+          "fillH": 40.2,
+          "fillW": 54.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.1076,
+          "settled": true
+        },
+        "after": {
+          "lit": 110727,
+          "areapct": 24.97,
+          "hpct": 73.9,
+          "fillH": 43.4,
+          "fillW": 53.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.0542,
+          "settled": true,
+          "subject": {
+            "only": [
+              "disc_c56",
+              "disc_t67",
+              "disc_l45"
+            ],
+            "named": [
+              "disc_l45"
+            ],
+            "onlyVisible": 3,
+            "visible": 3,
+            "size": [
+              2.7428,
+              0.4804,
+              1.2342
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 7,
+        "title": "Take the discs away",
+        "before": {
+          "lit": 140869,
+          "areapct": 31.76,
+          "hpct": 84.5,
+          "fillH": 2404.1,
+          "fillW": 3138.9,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 1.7636,
+          "settled": true
+        },
+        "after": {
+          "lit": 146466,
+          "areapct": 33.02,
+          "hpct": 85.2,
+          "fillH": 10446.5,
+          "fillW": 9978,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 1.7678,
+          "settled": true,
+          "subject": {
+            "only": [
+              "l1",
+              "l2",
+              "l3",
+              "l4",
+              "l5",
+              "sacrum"
+            ],
+            "named": [
+              "disc_l45",
+              "disc_l5s1",
+              "disc_l12",
+              "disc_l23",
+              "disc_l34"
+            ],
+            "onlyVisible": 6,
+            "visible": 6,
+            "size": [
+              1.8461,
+              0.6664,
+              1.177
+            ]
+          },
+          "framingFails": [
+            "clipped at rest",
+            "fillH 10446.5% — subject does not fit",
+            "fillW 9978% — subject does not fit"
+          ],
+          "sceneFails": [],
+          "engineFails": [
+            "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+          ]
+        }
+      }
+    ],
+    "gross__back-vertebral-column__vertebral-column": [
+      {
+        "view": 1,
+        "title": "See it in the body",
+        "before": {
+          "lit": 45619,
+          "areapct": 10.29,
+          "hpct": 48,
+          "fillH": 54.9,
+          "fillW": 51.1,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.0935,
+          "settled": true
+        },
+        "after": {
+          "lit": 47660,
+          "areapct": 10.75,
+          "hpct": 50.2,
+          "fillH": 57.6,
+          "fillW": 50.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.0422,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              4.216,
+              0.6998,
+              1.6884
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 2,
+        "title": "The five regions",
+        "before": {
+          "lit": 39813,
+          "areapct": 8.98,
+          "hpct": 28.2,
+          "fillH": 31.7,
+          "fillW": 73.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.2217,
+          "settled": true
+        },
+        "after": {
+          "lit": 41024,
+          "areapct": 9.25,
+          "hpct": 28.2,
+          "fillH": 31.8,
+          "fillW": 74.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.1768,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              4.216,
+              0.6998,
+              1.6884
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 3,
+        "title": "Atlas and axis",
+        "before": {
+          "lit": 86848,
+          "areapct": 19.58,
+          "hpct": 73.2,
+          "fillH": 58.2,
+          "fillW": 18.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true
+        },
+        "after": {
+          "lit": 87171,
+          "areapct": 19.65,
+          "hpct": 73.4,
+          "fillH": 58.3,
+          "fillW": 17.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true,
+          "subject": {
+            "only": [
+              "c1",
+              "c2"
+            ],
+            "named": [],
+            "onlyVisible": 2,
+            "visible": 2,
+            "size": [
+              0.355,
+              0.323,
+              0.5188
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 4,
+        "title": "Body in front, canal behind",
+        "before": {
+          "lit": 186088,
+          "areapct": 41.96,
+          "hpct": 100,
+          "fillH": 53.4,
+          "fillW": 42,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2559,
+          "settled": true
+        },
+        "after": {
+          "lit": 191176,
+          "areapct": 43.1,
+          "hpct": 100,
+          "fillH": 52.4,
+          "fillW": 43,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2264,
+          "settled": true,
+          "subject": {
+            "only": [
+              "l1",
+              "l2",
+              "l3",
+              "l4",
+              "l5"
+            ],
+            "named": [
+              "d_l1",
+              "d_l2",
+              "d_l3",
+              "d_l4",
+              "d_l5"
+            ],
+            "onlyVisible": 5,
+            "visible": 10,
+            "size": [
+              1.1365,
+              0.5241,
+              0.76
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 5,
+        "title": "How weight comes down",
+        "before": {
+          "lit": 34258,
+          "areapct": 7.72,
+          "hpct": 53.6,
+          "fillH": 23.4,
+          "fillW": 5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.8189,
+          "settled": true
+        },
+        "after": {
+          "lit": 34009,
+          "areapct": 7.67,
+          "hpct": 50.7,
+          "fillH": 23.4,
+          "fillW": 4.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.8189,
+          "settled": true,
+          "subject": {
+            "only": [
+              "c7"
+            ],
+            "named": [],
+            "onlyVisible": 1,
+            "visible": 1,
+            "size": [
+              0.2592,
+              0.4099,
+              0.4264
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 6,
+        "title": "Take the discs away",
+        "before": {
+          "lit": 185687,
+          "areapct": 41.87,
+          "hpct": 82.3,
+          "fillH": 3797.1,
+          "fillW": 1019.1,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 1.2266,
+          "settled": true
+        },
+        "after": {
+          "lit": 187259,
+          "areapct": 42.22,
+          "hpct": 82.5,
+          "fillH": 3106.8,
+          "fillW": 858.1,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 1.2237,
+          "settled": true,
+          "subject": {
+            "only": [
+              "l1",
+              "l2",
+              "l3",
+              "l4",
+              "l5"
+            ],
+            "named": [
+              "d_l1",
+              "d_l2",
+              "d_l3",
+              "d_l4",
+              "d_l5"
+            ],
+            "onlyVisible": 5,
+            "visible": 5,
+            "size": [
+              1.1189,
+              0.5241,
+              0.76
+            ]
+          },
+          "framingFails": [
+            "clipped at rest",
+            "fillH 3106.8% — subject does not fit",
+            "fillW 858.1% — subject does not fit"
+          ],
+          "sceneFails": [],
+          "engineFails": [
+            "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+          ]
+        }
+      }
+    ],
+    "gross__forearm-hand__carpal-tunnel": [
+      {
+        "view": 1,
+        "title": "Where the tunnel is",
+        "before": {
+          "lit": 32019,
+          "areapct": 7.22,
+          "hpct": 52.5,
+          "fillH": 82.8,
+          "fillW": 44.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0642,
+          "settled": true
+        },
+        "after": {
+          "lit": 31710,
+          "areapct": 7.15,
+          "hpct": 52.7,
+          "fillH": 83,
+          "fillW": 43.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0683,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.8308,
+              1.529,
+              4.2608
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 2,
+        "title": "The floor is an arch",
+        "before": {
+          "lit": 27497,
+          "areapct": 6.2,
+          "hpct": 56.8,
+          "fillH": 71.8,
+          "fillW": 51.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.1133,
+          "settled": true
+        },
+        "after": {
+          "lit": 26892,
+          "areapct": 6.06,
+          "hpct": 56.8,
+          "fillH": 71.6,
+          "fillW": 50.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.1306,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.2937,
+              1.1756,
+              3.2811
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 3,
+        "title": "Four pillars",
+        "before": {
+          "lit": 114337,
+          "areapct": 25.78,
+          "hpct": 84.1,
+          "fillH": 31.7,
+          "fillW": 24.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true
+        },
+        "after": {
+          "lit": 107858,
+          "areapct": 24.32,
+          "hpct": 84.3,
+          "fillH": 31.7,
+          "fillW": 24.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true,
+          "subject": {
+            "only": [
+              "scaphoid",
+              "trapezium",
+              "pisiform",
+              "hamate"
+            ],
+            "named": [
+              "scaphoid",
+              "pisiform",
+              "trapezium",
+              "hamate",
+              "scaphoid_tubercle",
+              "trapezium_tubercle",
+              "hamate_hook"
+            ],
+            "onlyVisible": 4,
+            "visible": 7,
+            "size": [
+              0.5615,
+              0.2844,
+              0.4534
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 4,
+        "title": "Put the lid on",
+        "before": {
+          "lit": 32019,
+          "areapct": 7.22,
+          "hpct": 52.5,
+          "fillH": 82.8,
+          "fillW": 44.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0642,
+          "settled": true
+        },
+        "after": {
+          "lit": 31710,
+          "areapct": 7.15,
+          "hpct": 52.7,
+          "fillH": 83,
+          "fillW": 43.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0683,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.8308,
+              1.529,
+              4.2608
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 5,
+        "title": "Cut across the tunnel",
+        "before": {
+          "lit": 28861,
+          "areapct": 6.51,
+          "hpct": 52.3,
+          "fillH": 79.5,
+          "fillW": 45.1,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0206,
+          "settled": true
+        },
+        "after": {
+          "lit": 28598,
+          "areapct": 6.45,
+          "hpct": 52.3,
+          "fillH": 79.7,
+          "fillW": 44,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0248,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.8308,
+              1.4946,
+              4.2608
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 6,
+        "title": "Nine tendons",
+        "before": {
+          "lit": 22549,
+          "areapct": 5.08,
+          "hpct": 56.6,
+          "fillH": 96.9,
+          "fillW": 49.8,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 3.7461,
+          "settled": true
+        },
+        "after": {
+          "lit": 22054,
+          "areapct": 4.97,
+          "hpct": 57.7,
+          "fillH": 97.3,
+          "fillW": 48.7,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 3.7503,
+          "settled": true,
+          "subject": {
+            "only": [
+              "fds_humeroulnar",
+              "fds_radial",
+              "fdp",
+              "fpl"
+            ],
+            "named": [
+              "flexor_retinaculum",
+              "lunate",
+              "capitate",
+              "triquetral",
+              "trapezoid",
+              "mc1",
+              "mc3",
+              "mc5"
+            ],
+            "onlyVisible": 4,
+            "visible": 12,
+            "size": [
+              2.8308,
+              1.278,
+              4.2608
+            ]
+          },
+          "framingFails": [
+            "clipped at rest"
+          ],
+          "sceneFails": [],
+          "engineFails": [
+            "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+          ]
+        }
+      },
+      {
+        "view": 7,
+        "title": "The tenth structure",
+        "before": {
+          "lit": 2750,
+          "areapct": 0.62,
+          "hpct": 17.3,
+          "fillH": 18.9,
+          "fillW": 17.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 9,
+          "settled": true
+        },
+        "after": {
+          "lit": 2669,
+          "areapct": 0.6,
+          "hpct": 15.7,
+          "fillH": 18.9,
+          "fillW": 16.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 9,
+          "settled": true,
+          "subject": {
+            "only": [
+              "fds_humeroulnar"
+            ],
+            "named": [
+              "abductor_pollicis_brevis",
+              "opponens_pollicis",
+              "fpb_superficial",
+              "fpb_deep"
+            ],
+            "onlyVisible": 1,
+            "visible": 5,
+            "size": [
+              2.7789,
+              1.0759,
+              4.2606
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 8,
+        "title": "What passes outside",
+        "before": {
+          "lit": 28763,
+          "areapct": 6.49,
+          "hpct": 52.3,
+          "fillH": 79.5,
+          "fillW": 45.1,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0206,
+          "settled": true
+        },
+        "after": {
+          "lit": 28558,
+          "areapct": 6.44,
+          "hpct": 52.3,
+          "fillH": 79.7,
+          "fillW": 44,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0248,
+          "settled": true,
+          "subject": {
+            "only": [
+              "palmaris_longus",
+              "fcr",
+              "fcu_ulnar",
+              "fds_humeroulnar",
+              "fds_radial",
+              "fdp",
+              "fpl"
+            ],
+            "named": [
+              "palmaris_longus"
+            ],
+            "onlyVisible": 7,
+            "visible": 7,
+            "size": [
+              2.8308,
+              1.4946,
+              4.2608
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 9,
+        "title": "Take the roof off",
+        "before": {
+          "lit": 28857,
+          "areapct": 6.51,
+          "hpct": 52.3,
+          "fillH": 79.5,
+          "fillW": 45.1,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0206,
+          "settled": true
+        },
+        "after": {
+          "lit": 28593,
+          "areapct": 6.45,
+          "hpct": 52.3,
+          "fillH": 79.7,
+          "fillW": 44,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0248,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.8308,
+              1.4946,
+              4.2608
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 10,
+        "title": "Why the palm is spared",
+        "before": {
+          "lit": 87285,
+          "areapct": 19.68,
+          "hpct": 73.4,
+          "fillH": 43.1,
+          "fillW": 24.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true
+        },
+        "after": {
+          "lit": 117499,
+          "areapct": 26.49,
+          "hpct": 80.9,
+          "fillH": 58.2,
+          "fillW": 29.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true,
+          "subject": {
+            "only": [
+              "abductor_pollicis_brevis",
+              "opponens_pollicis",
+              "fpb_superficial",
+              "fpb_deep"
+            ],
+            "named": [
+              "flexor_retinaculum",
+              "mc1",
+              "mc3",
+              "mc5",
+              "abductor_pollicis_brevis",
+              "fpb_deep"
+            ],
+            "onlyVisible": 4,
+            "visible": 8,
+            "size": [
+              0.9485,
+              0.4504,
+              1.0728
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      }
+    ],
+    "gross__gluteal-region-hip-joint__hip-joint": [
+      {
+        "view": 1,
+        "title": "Find the joint",
+        "before": {
+          "lit": 46649,
+          "areapct": 10.52,
+          "hpct": 43.9,
+          "fillH": 59.3,
+          "fillW": 52.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.2595,
+          "settled": true
+        },
+        "after": {
+          "lit": 46649,
+          "areapct": 10.52,
+          "hpct": 43.9,
+          "fillH": 59.3,
+          "fillW": 52.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.2595,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.1983,
+              0.8905,
+              4.0867
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 2,
+        "title": "Two bones, one socket",
+        "before": {
+          "lit": 83145,
+          "areapct": 18.75,
+          "hpct": 62.3,
+          "fillH": 28,
+          "fillW": 24.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6484,
+          "settled": true
+        },
+        "after": {
+          "lit": 83063,
+          "areapct": 18.73,
+          "hpct": 62.3,
+          "fillH": 28,
+          "fillW": 24.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6484,
+          "settled": true,
+          "subject": {
+            "only": [
+              "hip_bone",
+              "femur",
+              "sacrum"
+            ],
+            "named": [
+              "femur",
+              "acetabulum"
+            ],
+            "onlyVisible": 3,
+            "visible": 4,
+            "size": [
+              2.0866,
+              0.7829,
+              2.9878
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 3,
+        "title": "Cut through the ball and socket",
+        "before": {
+          "lit": 75241,
+          "areapct": 16.96,
+          "hpct": 61.6,
+          "fillH": 5.4,
+          "fillW": 3.1,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6484,
+          "settled": true
+        },
+        "after": {
+          "lit": 75241,
+          "areapct": 16.96,
+          "hpct": 61.6,
+          "fillH": 5.4,
+          "fillW": 3.1,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6484,
+          "settled": true,
+          "subject": {
+            "only": [
+              "hip_bone",
+              "femur",
+              "sacrum"
+            ],
+            "named": [
+              "femoral_head"
+            ],
+            "onlyVisible": 3,
+            "visible": 4,
+            "size": [
+              2.0866,
+              0.7829,
+              2.9878
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 4,
+        "title": "Where the capsule ends",
+        "before": {
+          "lit": 75242,
+          "areapct": 16.96,
+          "hpct": 61.6,
+          "fillH": 6.3,
+          "fillW": 10.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6484,
+          "settled": true
+        },
+        "after": {
+          "lit": 75242,
+          "areapct": 16.96,
+          "hpct": 61.6,
+          "fillH": 6.3,
+          "fillW": 10.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6484,
+          "settled": true,
+          "subject": {
+            "only": [
+              "hip_bone",
+              "femur",
+              "sacrum"
+            ],
+            "named": [
+              "femoral_head",
+              "lesser_trochanter"
+            ],
+            "onlyVisible": 3,
+            "visible": 5,
+            "size": [
+              2.0866,
+              0.7829,
+              2.9878
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 5,
+        "title": "The ligaments that stop you falling backwards",
+        "before": {
+          "lit": 75285,
+          "areapct": 16.97,
+          "hpct": 61.8,
+          "fillH": 77.3,
+          "fillW": 35.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6484,
+          "settled": true
+        },
+        "after": {
+          "lit": 75285,
+          "areapct": 16.97,
+          "hpct": 61.8,
+          "fillH": 77.3,
+          "fillW": 35.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6484,
+          "settled": true,
+          "subject": {
+            "only": [
+              "hip_bone",
+              "femur",
+              "sacrum"
+            ],
+            "named": [
+              "hip_bone",
+              "femoral_head"
+            ],
+            "onlyVisible": 3,
+            "visible": 4,
+            "size": [
+              2.0866,
+              0.7829,
+              2.9878
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 6,
+        "title": "Weight goes through here",
+        "before": {
+          "lit": 83152,
+          "areapct": 18.75,
+          "hpct": 62.3,
+          "fillH": 39.6,
+          "fillW": 28.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6484,
+          "settled": true
+        },
+        "after": {
+          "lit": 83071,
+          "areapct": 18.73,
+          "hpct": 62.3,
+          "fillH": 39.6,
+          "fillW": 28.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6484,
+          "settled": true,
+          "subject": {
+            "only": [
+              "acetabulum"
+            ],
+            "named": [
+              "sacrum",
+              "acetabulum",
+              "femoral_head"
+            ],
+            "onlyVisible": 1,
+            "visible": 3,
+            "size": [
+              0.9184,
+              0.4748,
+              0.9633
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 7,
+        "title": "Flexion and extension",
+        "before": {
+          "lit": 54573,
+          "areapct": 12.3,
+          "hpct": 35.9,
+          "fillH": 40.4,
+          "fillW": 70.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.3285,
+          "settled": true
+        },
+        "after": {
+          "lit": 54573,
+          "areapct": 12.3,
+          "hpct": 35.9,
+          "fillH": 40.4,
+          "fillW": 70.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.3285,
+          "settled": true,
+          "subject": {
+            "only": [
+              "psoas",
+              "iliacus",
+              "rectus_femoris",
+              "sartorius",
+              "pectineus",
+              "glut_max",
+              "biceps_femoris_long",
+              "semitendinosus",
+              "semimembranosus"
+            ],
+            "named": [],
+            "onlyVisible": 9,
+            "visible": 9,
+            "size": [
+              2.188,
+              0.8905,
+              4.0388
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 8,
+        "title": "Abduction and adduction",
+        "before": {
+          "lit": 88866,
+          "areapct": 20.04,
+          "hpct": 79.1,
+          "fillH": 84.4,
+          "fillW": 44,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.5072,
+          "settled": true
+        },
+        "after": {
+          "lit": 88866,
+          "areapct": 20.04,
+          "hpct": 79.1,
+          "fillH": 84.4,
+          "fillW": 44,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.5072,
+          "settled": true,
+          "subject": {
+            "only": [
+              "tfl",
+              "glut_med",
+              "glut_min",
+              "add_longus",
+              "add_brevis",
+              "add_magnus",
+              "gracilis"
+            ],
+            "named": [],
+            "onlyVisible": 7,
+            "visible": 7,
+            "size": [
+              1.2731,
+              0.6342,
+              3.4068
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 9,
+        "title": "Rotation, and the muscle that goes under the neck",
+        "before": {
+          "lit": 191955,
+          "areapct": 43.28,
+          "hpct": 90.5,
+          "fillH": 41.7,
+          "fillW": 27.1,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true
+        },
+        "after": {
+          "lit": 56149,
+          "areapct": 12.66,
+          "hpct": 40.9,
+          "fillH": 12.1,
+          "fillW": 9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6484,
+          "settled": true,
+          "subject": {
+            "only": [
+              "piriformis",
+              "gemellus_sup",
+              "obturator_internus",
+              "gemellus_inf",
+              "quadratus_femoris",
+              "obturator_externus"
+            ],
+            "named": [
+              "hip_bone",
+              "femur",
+              "sacrum",
+              "obturator_externus"
+            ],
+            "onlyVisible": 6,
+            "visible": 9,
+            "size": [
+              2.0866,
+              0.7829,
+              2.9878
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 10,
+        "title": "What lies against the capsule",
+        "before": {
+          "lit": 108120,
+          "areapct": 24.38,
+          "hpct": 57.7,
+          "fillH": 52.2,
+          "fillW": 67.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.7227,
+          "settled": true
+        },
+        "after": {
+          "lit": 108120,
+          "areapct": 24.38,
+          "hpct": 57.7,
+          "fillH": 52.2,
+          "fillW": 67.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.7227,
+          "settled": true,
+          "subject": {
+            "only": [
+              "psoas",
+              "piriformis"
+            ],
+            "named": [],
+            "onlyVisible": 2,
+            "visible": 2,
+            "size": [
+              1.2137,
+              0.5749,
+              2.0168
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 11,
+        "title": "Posterior dislocation",
+        "before": {
+          "lit": 171651,
+          "areapct": 38.7,
+          "hpct": 98.9,
+          "fillH": 32.7,
+          "fillW": 25.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.7227,
+          "settled": true
+        },
+        "after": {
+          "lit": 170932,
+          "areapct": 38.54,
+          "hpct": 98.9,
+          "fillH": 32.7,
+          "fillW": 25.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.7227,
+          "settled": true,
+          "subject": {
+            "only": [
+              "piriformis"
+            ],
+            "named": [],
+            "onlyVisible": 1,
+            "visible": 1,
+            "size": [
+              0.6491,
+              0.3062,
+              0.5148
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 12,
+        "title": "Why the hip hurts at the knee",
+        "before": {
+          "lit": 39716,
+          "areapct": 8.95,
+          "hpct": 27.5,
+          "fillH": 27.9,
+          "fillW": 67.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.355,
+          "settled": true
+        },
+        "after": {
+          "lit": 39741,
+          "areapct": 8.96,
+          "hpct": 27.5,
+          "fillH": 27.9,
+          "fillW": 67.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.355,
+          "settled": true,
+          "subject": {
+            "only": [
+              "add_longus",
+              "add_brevis",
+              "add_magnus",
+              "gracilis",
+              "psoas",
+              "iliacus",
+              "rectus_femoris",
+              "sartorius",
+              "pectineus"
+            ],
+            "named": [],
+            "onlyVisible": 9,
+            "visible": 9,
+            "size": [
+              2.188,
+              0.5604,
+              4.0867
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 13,
+        "title": "Peel down to the joint",
+        "before": {
+          "lit": 39825,
+          "areapct": 8.98,
+          "hpct": 43.2,
+          "fillH": 53.2,
+          "fillW": 58.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6964,
+          "settled": true
+        },
+        "after": {
+          "lit": 39825,
+          "areapct": 8.98,
+          "hpct": 43.2,
+          "fillH": 53.2,
+          "fillW": 58.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6964,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.0866,
+              0.7829,
+              2.9878
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      }
+    ],
+    "gross__heart-pericardium__heart": [
+      {
+        "view": 1,
+        "title": "See it in the body",
+        "before": {
+          "lit": 286538,
+          "areapct": 64.61,
+          "hpct": 89.8,
+          "fillH": 500.5,
+          "fillW": 211.1,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 1.8893,
+          "settled": true
+        },
+        "after": {
+          "lit": 286302,
+          "areapct": 64.55,
+          "hpct": 89.8,
+          "fillH": 500.5,
+          "fillW": 211.1,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 1.8893,
+          "settled": true,
+          "subject": {
+            "only": [
+              "heart_wall"
+            ],
+            "named": [],
+            "onlyVisible": 1,
+            "visible": 1,
+            "size": [
+              1.2896,
+              1.0071,
+              1.2258
+            ]
+          },
+          "framingFails": [
+            "clipped at rest",
+            "fillH 500.5% — subject does not fit",
+            "fillW 211.1% — subject does not fit"
+          ],
+          "sceneFails": [],
+          "engineFails": [
+            "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+          ]
+        }
+      },
+      {
+        "view": 2,
+        "title": "Among its neighbours",
+        "before": {
+          "lit": 64849,
+          "areapct": 14.62,
+          "hpct": 53.9,
+          "fillH": 80.8,
+          "fillW": 44,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.1814,
+          "settled": true
+        },
+        "after": {
+          "lit": 64849,
+          "areapct": 14.62,
+          "hpct": 53.9,
+          "fillH": 80.8,
+          "fillW": 44,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.1814,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              3.1353,
+              1.664,
+              4.1447
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 3,
+        "title": "Inside — the valves",
+        "before": {
+          "lit": 49863,
+          "areapct": 11.24,
+          "hpct": 53.2,
+          "fillH": 80.8,
+          "fillW": 44,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.1814,
+          "settled": true
+        },
+        "after": {
+          "lit": 49863,
+          "areapct": 11.24,
+          "hpct": 53.2,
+          "fillH": 80.8,
+          "fillW": 44,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.1814,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              3.1353,
+              1.664,
+              4.1447
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 4,
+        "title": "How it works — one beat",
+        "before": {
+          "lit": 114474,
+          "areapct": 25.81,
+          "hpct": 73.6,
+          "fillH": 15,
+          "fillW": 11.1,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.2333,
+          "settled": true
+        },
+        "after": {
+          "lit": 84063,
+          "areapct": 18.95,
+          "hpct": 72,
+          "fillH": 12.9,
+          "fillW": 9.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.2333,
+          "settled": true,
+          "subject": {
+            "only": [
+              "pulm_valve"
+            ],
+            "named": [],
+            "onlyVisible": 1,
+            "visible": 1,
+            "size": [
+              0.3372,
+              0.295,
+              0.2634
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 5,
+        "title": "Its own blood supply",
+        "before": {
+          "lit": 423489,
+          "areapct": 95.48,
+          "hpct": 100,
+          "fillH": 93.3,
+          "fillW": 30.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true
+        },
+        "after": {
+          "lit": 332961,
+          "areapct": 75.07,
+          "hpct": 96.8,
+          "fillH": 71.8,
+          "fillW": 23.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.552,
+          "settled": true,
+          "subject": {
+            "only": [
+              "lca",
+              "rca"
+            ],
+            "named": [
+              "great_cardiac_vein",
+              "coronary_sinus"
+            ],
+            "onlyVisible": 2,
+            "visible": 4,
+            "size": [
+              1.019,
+              0.844,
+              0.9645
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      }
+    ],
+    "gross__kidney-posterior-abdominal-wall__kidney": [
+      {
+        "view": 1,
+        "title": "Where they are, and why they are not level",
+        "before": {
+          "lit": 79304,
+          "areapct": 17.88,
+          "hpct": 64.3,
+          "fillH": 81.8,
+          "fillW": 59,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.181,
+          "settled": true
+        },
+        "after": {
+          "lit": 81146,
+          "areapct": 18.3,
+          "hpct": 64.5,
+          "fillH": 83.1,
+          "fillW": 60.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.155,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.7109,
+              1.1882,
+              3.2981
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 2,
+        "title": "The bed behind, and the ribs across",
+        "before": {
+          "lit": 53665,
+          "areapct": 12.1,
+          "hpct": 44.1,
+          "fillH": 55.2,
+          "fillW": 51.1,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.807,
+          "settled": true
+        },
+        "after": {
+          "lit": 53734,
+          "areapct": 12.12,
+          "hpct": 43.9,
+          "fillH": 54.4,
+          "fillW": 51.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.814,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              3.3674,
+              1.3112,
+              3.9019
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 3,
+        "title": "Coverings, then cortex to pelvis",
+        "before": {
+          "lit": 44518,
+          "areapct": 10.04,
+          "hpct": 42,
+          "fillH": 55.2,
+          "fillW": 51.1,
+          "clippedAtRest": false,
+          "subjectFrom": "visible",
+          "dist": 3.807,
+          "settled": true
+        },
+        "after": {
+          "lit": 378355,
+          "areapct": 85.31,
+          "hpct": 100,
+          "fillH": 23779,
+          "fillW": 2139.8,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 1.4676,
+          "settled": true,
+          "subject": {
+            "only": [
+              "right_kidney",
+              "left_kidney"
+            ],
+            "named": [
+              "right_ureter",
+              "left_ureter",
+              "bladder",
+              "right_renal_artery",
+              "left_renal_artery",
+              "right_renal_vein",
+              "left_renal_vein",
+              "right_kidney",
+              "right_upper_pole",
+              "right_lower_pole",
+              "right_hilum",
+              "left_upper_pole",
+              "left_lower_pole",
+              "left_hilum",
+              "right_puj",
+              "renal_angle"
+            ],
+            "onlyVisible": 0,
+            "visible": 12,
+            "size": [
+              1.2362,
+              0.7487,
+              1.0373
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [
+            "the view hides its own subject — all 2 structure(s) it isolates are hidden by its own ops (check PEEL_LAYER)"
+          ],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 4,
+        "title": "In at the hilum, out at the hilum",
+        "before": {
+          "lit": 10465,
+          "areapct": 2.36,
+          "hpct": 18.6,
+          "fillH": 11.3,
+          "fillW": 9.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 9,
+          "settled": true
+        },
+        "after": {
+          "lit": 8117,
+          "areapct": 1.83,
+          "hpct": 17,
+          "fillH": 10.7,
+          "fillW": 10.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 9,
+          "settled": true,
+          "subject": {
+            "only": [
+              "right_renal_vein",
+              "left_renal_vein"
+            ],
+            "named": [
+              "sma",
+              "left_renal_vein"
+            ],
+            "onlyVisible": 2,
+            "visible": 3,
+            "size": [
+              0.8127,
+              0.5355,
+              0.5794
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 5,
+        "title": "From glomerulus to bladder",
+        "before": {
+          "lit": 87621,
+          "areapct": 19.76,
+          "hpct": 57.7,
+          "fillH": 48.8,
+          "fillW": 40.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.6298,
+          "settled": true
+        },
+        "after": {
+          "lit": 53895,
+          "areapct": 12.15,
+          "hpct": 50.5,
+          "fillH": 22.2,
+          "fillW": 25.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.6298,
+          "settled": true,
+          "subject": {
+            "only": [
+              "right_kidney"
+            ],
+            "named": [
+              "right_ureter",
+              "left_ureter",
+              "bladder"
+            ],
+            "onlyVisible": 1,
+            "visible": 4,
+            "size": [
+              2.105,
+              0.6976,
+              2.4633
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 6,
+        "title": "Reading the clinic off the anatomy",
+        "before": {
+          "lit": 314686,
+          "areapct": 70.95,
+          "hpct": 100,
+          "fillH": 1651.2,
+          "fillW": 1459.2,
+          "clippedAtRest": true,
+          "subjectFrom": "opaque",
+          "dist": 1.5233,
+          "settled": true
+        },
+        "after": {
+          "lit": 123886,
+          "areapct": 27.93,
+          "hpct": 67.7,
+          "fillH": 40.8,
+          "fillW": 44.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.6474,
+          "settled": true,
+          "subject": {
+            "only": [
+              "right_kidney",
+              "left_kidney"
+            ],
+            "named": [
+              "rib11",
+              "rib12",
+              "l1",
+              "right_ureter",
+              "left_ureter",
+              "bladder",
+              "right_kidney",
+              "left_renal_vein",
+              "ivc",
+              "right_upper_pole",
+              "right_lower_pole",
+              "right_hilum",
+              "left_upper_pole",
+              "left_lower_pole",
+              "left_hilum",
+              "right_puj",
+              "renal_angle"
+            ],
+            "onlyVisible": 2,
+            "visible": 18,
+            "size": [
+              2.2672,
+              0.8662,
+              2.7862
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      }
+    ],
+    "gross__lungs-mediastinum__great-vessels": [
+      {
+        "view": 1,
+        "title": "Six vessels, and what makes them great",
+        "before": {
+          "lit": 41628,
+          "areapct": 9.39,
+          "hpct": 60.5,
+          "fillH": 74,
+          "fillW": 39.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.456,
+          "settled": true
+        },
+        "after": {
+          "lit": 41628,
+          "areapct": 9.39,
+          "hpct": 60.5,
+          "fillH": 74,
+          "fillW": 39.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.456,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.8567,
+              1.8982,
+              4.1002
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 2,
+        "title": "The aorta in three parts",
+        "before": {
+          "lit": 264074,
+          "areapct": 59.54,
+          "hpct": 95.7,
+          "fillH": 32.9,
+          "fillW": 16.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.6,
+          "settled": true
+        },
+        "after": {
+          "lit": 260872,
+          "areapct": 58.82,
+          "hpct": 95.7,
+          "fillH": 32.9,
+          "fillW": 16.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.6,
+          "settled": true,
+          "subject": {
+            "only": [
+              "aortic_root",
+              "asc"
+            ],
+            "named": [
+              "heart",
+              "manubrium",
+              "sternbody",
+              "sternal_angle",
+              "aortic_root",
+              "arch_begins",
+              "aortic_isthmus",
+              "aortic_hiatus",
+              "asc"
+            ],
+            "onlyVisible": 2,
+            "visible": 9,
+            "size": [
+              1.3197,
+              1.2824,
+              2.1869
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 3,
+        "title": "Three branches, always in this order",
+        "before": {
+          "lit": 217972,
+          "areapct": 49.15,
+          "hpct": 99.8,
+          "fillH": 31.1,
+          "fillW": 59.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true
+        },
+        "after": {
+          "lit": 155801,
+          "areapct": 35.13,
+          "hpct": 96.4,
+          "fillH": 21.3,
+          "fillW": 39.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.5384,
+          "settled": true,
+          "subject": {
+            "only": [
+              "carotid_l",
+              "carotid_r"
+            ],
+            "named": [
+              "arch",
+              "trachea",
+              "brachiocephalic_trunk_origin",
+              "carotid_r",
+              "subclav_r"
+            ],
+            "onlyVisible": 2,
+            "visible": 6,
+            "size": [
+              1.0465,
+              0.7663,
+              1.1342
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 4,
+        "title": "The pulmonary side — an artery full of blue blood",
+        "before": {
+          "lit": 78784,
+          "areapct": 17.76,
+          "hpct": 72.3,
+          "fillH": 94.8,
+          "fillW": 48.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.2716,
+          "settled": true
+        },
+        "after": {
+          "lit": 78734,
+          "areapct": 17.75,
+          "hpct": 72.3,
+          "fillH": 94.8,
+          "fillW": 48.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.2716,
+          "settled": true,
+          "subject": {
+            "only": [
+              "pa",
+              "pv"
+            ],
+            "named": [
+              "heart",
+              "arch",
+              "pulmonary_trunk_origin",
+              "pulmonary_bifurcation",
+              "pa"
+            ],
+            "onlyVisible": 2,
+            "visible": 6,
+            "size": [
+              2.8567,
+              1.484,
+              2.7814
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 5,
+        "title": "Everything drains to two veins",
+        "before": {
+          "lit": 237679,
+          "areapct": 53.59,
+          "hpct": 94.5,
+          "fillH": 27.1,
+          "fillW": 38.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.7074,
+          "settled": true
+        },
+        "after": {
+          "lit": 167735,
+          "areapct": 37.82,
+          "hpct": 84.1,
+          "fillH": 19.4,
+          "fillW": 27,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.0936,
+          "settled": true,
+          "subject": {
+            "only": [
+              "svc",
+              "ivc",
+              "bcv_r",
+              "bcv_l"
+            ],
+            "named": [
+              "heart",
+              "manubrium",
+              "bcv_l",
+              "bcv_r",
+              "svc_formation",
+              "svc_atrial_junction",
+              "ivc_atrial_junction"
+            ],
+            "onlyVisible": 4,
+            "visible": 9,
+            "size": [
+              1.9074,
+              1.0346,
+              3.5646
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 6,
+        "title": "Follow one drop of blood",
+        "before": {
+          "lit": 177227,
+          "areapct": 39.96,
+          "hpct": 90,
+          "fillH": 1,
+          "fillW": 0.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.6,
+          "settled": true
+        },
+        "after": {
+          "lit": 176458,
+          "areapct": 39.79,
+          "hpct": 90,
+          "fillH": 1,
+          "fillW": 0.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.6,
+          "settled": true,
+          "subject": {
+            "only": [
+              "svc_atrial_junction"
+            ],
+            "named": [],
+            "onlyVisible": 1,
+            "visible": 1,
+            "size": [
+              0.0164,
+              0.0129,
+              0.0164
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 7,
+        "title": "What lies against what",
+        "before": {
+          "lit": 62732,
+          "areapct": 14.14,
+          "hpct": 53.6,
+          "fillH": 84.8,
+          "fillW": 44.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0805,
+          "settled": true
+        },
+        "after": {
+          "lit": 62732,
+          "areapct": 14.14,
+          "hpct": 53.6,
+          "fillH": 84.8,
+          "fillW": 44.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0805,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.8567,
+              1.6019,
+              4.1002
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 8,
+        "title": "Cut across at the sternal angle",
+        "before": {
+          "lit": 230537,
+          "areapct": 51.98,
+          "hpct": 100,
+          "fillH": 65.7,
+          "fillW": 35.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true
+        },
+        "after": {
+          "lit": 230628,
+          "areapct": 52,
+          "hpct": 100,
+          "fillH": 65.7,
+          "fillW": 35.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.2,
+          "settled": true,
+          "subject": {
+            "only": [
+              "svc",
+              "arch"
+            ],
+            "named": [],
+            "onlyVisible": 2,
+            "visible": 2,
+            "size": [
+              0.6698,
+              0.7663,
+              0.4841
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      }
+    ],
+    "gross__thigh__quadriceps-femoris": [
+      {
+        "view": 1,
+        "title": "The front of the thigh",
+        "before": {
+          "lit": 30839,
+          "areapct": 6.95,
+          "hpct": 34.8,
+          "fillH": 40.5,
+          "fillW": 53.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.1576,
+          "settled": true
+        },
+        "after": {
+          "lit": 31325,
+          "areapct": 7.06,
+          "hpct": 35.5,
+          "fillH": 42,
+          "fillW": 52.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.1225,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.0668,
+              0.5715,
+              3.958
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 2,
+        "title": "Naming the four heads",
+        "before": {
+          "lit": 130508,
+          "areapct": 29.43,
+          "hpct": 84.5,
+          "fillH": 49.1,
+          "fillW": 51.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.693,
+          "settled": true
+        },
+        "after": {
+          "lit": 135500,
+          "areapct": 30.55,
+          "hpct": 86.4,
+          "fillH": 51.1,
+          "fillW": 51.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.6727,
+          "settled": true,
+          "subject": {
+            "only": [
+              "rect_fem",
+              "vast_lat",
+              "vast_med",
+              "vast_int"
+            ],
+            "named": [
+              "rect_fem"
+            ],
+            "onlyVisible": 4,
+            "visible": 4,
+            "size": [
+              1.1531,
+              0.3733,
+              2.0695
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 3,
+        "title": "Where each head starts",
+        "before": {
+          "lit": 43753,
+          "areapct": 9.86,
+          "hpct": 30.7,
+          "fillH": 35.1,
+          "fillW": 52.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.8856,
+          "settled": true
+        },
+        "after": {
+          "lit": 43843,
+          "areapct": 9.89,
+          "hpct": 30.5,
+          "fillH": 34.8,
+          "fillW": 53.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.8602,
+          "settled": true,
+          "subject": {
+            "only": [
+              "femur",
+              "hip_bone",
+              "tibia"
+            ],
+            "named": [
+              "rect_fem",
+              "vast_lat",
+              "vast_med",
+              "vast_int",
+              "hip_bone",
+              "femur"
+            ],
+            "onlyVisible": 3,
+            "visible": 7,
+            "size": [
+              1.8621,
+              0.5715,
+              3.4869
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 4,
+        "title": "The head that crosses two joints",
+        "before": {
+          "lit": 37349,
+          "areapct": 8.42,
+          "hpct": 30.7,
+          "fillH": 35.1,
+          "fillW": 52.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.8856,
+          "settled": true
+        },
+        "after": {
+          "lit": 37562,
+          "areapct": 8.47,
+          "hpct": 30.5,
+          "fillH": 34.8,
+          "fillW": 52.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.8602,
+          "settled": true,
+          "subject": {
+            "only": [
+              "hip_bone",
+              "rect_fem"
+            ],
+            "named": [],
+            "onlyVisible": 2,
+            "visible": 2,
+            "size": [
+              1.5117,
+              0.5715,
+              2.392
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 5,
+        "title": "Four heads, one tendon",
+        "before": {
+          "lit": 39734,
+          "areapct": 8.96,
+          "hpct": 49.1,
+          "fillH": 62.2,
+          "fillW": 51.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.8054,
+          "settled": true
+        },
+        "after": {
+          "lit": 39868,
+          "areapct": 8.99,
+          "hpct": 50.9,
+          "fillH": 65.1,
+          "fillW": 50.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.7737,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              1.8621,
+              0.5715,
+              3.4869
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 6,
+        "title": "A cut across the mid-thigh",
+        "before": {
+          "lit": 23261,
+          "areapct": 5.24,
+          "hpct": 29.3,
+          "fillH": 62.2,
+          "fillW": 51.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.8054,
+          "settled": true
+        },
+        "after": {
+          "lit": 23097,
+          "areapct": 5.21,
+          "hpct": 30.5,
+          "fillH": 65.1,
+          "fillW": 50.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.7737,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              1.8621,
+              0.5715,
+              3.4869
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 7,
+        "title": "What contraction does",
+        "before": {
+          "lit": 23109,
+          "areapct": 5.21,
+          "hpct": 17.7,
+          "fillH": 28.1,
+          "fillW": 69,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.2508,
+          "settled": true
+        },
+        "after": {
+          "lit": 23379,
+          "areapct": 5.27,
+          "hpct": 17.5,
+          "fillH": 28,
+          "fillW": 70.1,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.2232,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              2.0668,
+              0.5715,
+              3.958
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 8,
+        "title": "Why the patella does not slip sideways",
+        "before": {
+          "lit": 124271,
+          "areapct": 28.02,
+          "hpct": 77.7,
+          "fillH": 60.3,
+          "fillW": 45.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.5224,
+          "settled": true
+        },
+        "after": {
+          "lit": 127650,
+          "areapct": 28.78,
+          "hpct": 78.9,
+          "fillH": 62.3,
+          "fillW": 44.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 1.5073,
+          "settled": true,
+          "subject": {
+            "only": [
+              "vast_med",
+              "vast_lat"
+            ],
+            "named": [
+              "patella"
+            ],
+            "onlyVisible": 2,
+            "visible": 3,
+            "size": [
+              1.0802,
+              0.3294,
+              1.8194
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 9,
+        "title": "One nerve for the whole compartment",
+        "before": {
+          "lit": 2852,
+          "areapct": 0.64,
+          "hpct": 11.6,
+          "fillH": 7.1,
+          "fillW": 8.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.9285,
+          "settled": true
+        },
+        "after": {
+          "lit": 2680,
+          "areapct": 0.6,
+          "hpct": 11.6,
+          "fillH": 7.1,
+          "fillW": 8.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.9285,
+          "settled": true,
+          "subject": {
+            "only": [
+              "psoas_major"
+            ],
+            "named": [],
+            "onlyVisible": 1,
+            "visible": 1,
+            "size": [
+              0.9457,
+              0.3039,
+              1.5102
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 10,
+        "title": "When the nerve fails",
+        "before": {
+          "lit": 33957,
+          "areapct": 7.66,
+          "hpct": 38.2,
+          "fillH": 37.2,
+          "fillW": 53.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.4155,
+          "settled": true
+        },
+        "after": {
+          "lit": 34240,
+          "areapct": 7.72,
+          "hpct": 39.1,
+          "fillH": 38.3,
+          "fillW": 53.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.3909,
+          "settled": true,
+          "subject": {
+            "only": [
+              "rect_fem",
+              "vast_lat",
+              "vast_med",
+              "vast_int",
+              "psoas_major",
+              "iliacus"
+            ],
+            "named": [],
+            "onlyVisible": 6,
+            "visible": 6,
+            "size": [
+              1.7341,
+              0.3938,
+              2.8631
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 11,
+        "title": "Peel the thigh open",
+        "before": {
+          "lit": 30646,
+          "areapct": 6.91,
+          "hpct": 49.1,
+          "fillH": 62.2,
+          "fillW": 51.3,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.8054,
+          "settled": true
+        },
+        "after": {
+          "lit": 30952,
+          "areapct": 6.98,
+          "hpct": 50.9,
+          "fillH": 65.1,
+          "fillW": 50.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.7737,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              1.8621,
+              0.5555,
+              3.4869
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      }
+    ],
+    "gross__thoracic-wall-diaphragm__ribs-sternum": [
+      {
+        "view": 1,
+        "title": "See it in the body",
+        "before": {
+          "lit": 66804,
+          "areapct": 15.06,
+          "hpct": 61.4,
+          "fillH": 74.7,
+          "fillW": 44.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.2144,
+          "settled": true
+        },
+        "after": {
+          "lit": 67012,
+          "areapct": 15.11,
+          "hpct": 61.4,
+          "fillH": 74.7,
+          "fillW": 44.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.2105,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              4.2378,
+              2.257,
+              4.6997
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 2,
+        "title": "True, false, floating",
+        "before": {
+          "lit": 66804,
+          "areapct": 15.06,
+          "hpct": 61.4,
+          "fillH": 74.7,
+          "fillW": 44.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.2144,
+          "settled": true
+        },
+        "after": {
+          "lit": 67012,
+          "areapct": 15.11,
+          "hpct": 61.4,
+          "fillH": 74.7,
+          "fillW": 44.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.2105,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              4.2378,
+              2.257,
+              4.6997
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 3,
+        "title": "The three parts of the sternum",
+        "before": {
+          "lit": 139707,
+          "areapct": 31.5,
+          "hpct": 69.8,
+          "fillH": 81.1,
+          "fillW": 35.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.0549,
+          "settled": true
+        },
+        "after": {
+          "lit": 139890,
+          "areapct": 31.54,
+          "hpct": 69.8,
+          "fillH": 81.1,
+          "fillW": 35.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 2.0561,
+          "settled": true,
+          "subject": {
+            "only": [
+              "manubrium",
+              "sternal_body",
+              "xiphoid"
+            ],
+            "named": [
+              "manubrium",
+              "sternal_body",
+              "xiphoid"
+            ],
+            "onlyVisible": 3,
+            "visible": 3,
+            "size": [
+              1.1884,
+              0.8538,
+              1.9478
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 4,
+        "title": "Counting ribs from the sternal angle",
+        "before": {
+          "lit": 82663,
+          "areapct": 18.64,
+          "hpct": 60.9,
+          "fillH": 76.1,
+          "fillW": 51.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.9871,
+          "settled": true
+        },
+        "after": {
+          "lit": 83104,
+          "areapct": 18.74,
+          "hpct": 61.1,
+          "fillH": 76.2,
+          "fillW": 51.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.9795,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              4.2378,
+              2.257,
+              4.6997
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 5,
+        "title": "How a rib is fixed behind",
+        "before": {
+          "lit": 75155,
+          "areapct": 16.95,
+          "hpct": 95.2,
+          "fillH": 44,
+          "fillW": 24.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.0988,
+          "settled": true
+        },
+        "after": {
+          "lit": 74945,
+          "areapct": 16.9,
+          "hpct": 95,
+          "fillH": 43.8,
+          "fillW": 24.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.6269,
+          "settled": true,
+          "subject": {
+            "only": [
+              "t1",
+              "t2",
+              "t3",
+              "t4",
+              "t5",
+              "t6",
+              "t7",
+              "t8",
+              "t9",
+              "t10",
+              "t11",
+              "t12"
+            ],
+            "named": [
+              "r5",
+              "l5",
+              "t5"
+            ],
+            "onlyVisible": 12,
+            "visible": 14,
+            "size": [
+              3.0674,
+              2.149,
+              3.5882
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 6,
+        "title": "Pump handle — the upper ribs",
+        "before": {
+          "lit": 67241,
+          "areapct": 15.16,
+          "hpct": 64.8,
+          "fillH": 22.1,
+          "fillW": 13.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.7021,
+          "settled": true
+        },
+        "after": {
+          "lit": 67177,
+          "areapct": 15.15,
+          "hpct": 64.5,
+          "fillH": 21.9,
+          "fillW": 13.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.7021,
+          "settled": true,
+          "subject": {
+            "only": [
+              "t1"
+            ],
+            "named": [],
+            "onlyVisible": 1,
+            "visible": 1,
+            "size": [
+              0.8471,
+              0.7656,
+              0.6035
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 7,
+        "title": "Bucket handle — the lower ribs",
+        "before": {
+          "lit": 120144,
+          "areapct": 27.09,
+          "hpct": 100,
+          "fillH": 33,
+          "fillW": 15.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.7082,
+          "settled": true
+        },
+        "after": {
+          "lit": 120045,
+          "areapct": 27.07,
+          "hpct": 100,
+          "fillH": 32.8,
+          "fillW": 15.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.7082,
+          "settled": true,
+          "subject": {
+            "only": [
+              "r7"
+            ],
+            "named": [],
+            "onlyVisible": 1,
+            "visible": 1,
+            "size": [
+              1.8127,
+              1.9215,
+              1.9211
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 8,
+        "title": "Cut across a space",
+        "before": {
+          "lit": 40407,
+          "areapct": 9.11,
+          "hpct": 82.3,
+          "fillH": 89.4,
+          "fillW": 35.5,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 7.1004,
+          "settled": true
+        },
+        "after": {
+          "lit": 40537,
+          "areapct": 9.14,
+          "hpct": 78,
+          "fillH": 89.4,
+          "fillW": 35.4,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 7.0904,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              4.2378,
+              2.257,
+              4.6997
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 9,
+        "title": "Take the cartilage away",
+        "before": {
+          "lit": 56969,
+          "areapct": 12.84,
+          "hpct": 57.5,
+          "fillH": 74.7,
+          "fillW": 44.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.2098,
+          "settled": true
+        },
+        "after": {
+          "lit": 57007,
+          "areapct": 12.85,
+          "hpct": 57.5,
+          "fillH": 74.7,
+          "fillW": 44.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.2061,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              4.2327,
+              2.257,
+              4.6911
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      }
+    ],
+    "neuroanatomy__cerebrum-gross-lobes__cerebral-hemispheres-lobes": [
+      {
+        "view": 1,
+        "title": "Two hemispheres, one folded sheet",
+        "before": {
+          "lit": 54132,
+          "areapct": 12.21,
+          "hpct": 74.3,
+          "fillH": 86.1,
+          "fillW": 25.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 7.2313,
+          "settled": true
+        },
+        "after": {
+          "lit": 54132,
+          "areapct": 12.21,
+          "hpct": 74.3,
+          "fillH": 86.1,
+          "fillW": 25.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 7.2313,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              3.8159,
+              4.2,
+              3.4744
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 2,
+        "title": "The central sulcus divides the map",
+        "before": {
+          "lit": 168885,
+          "areapct": 38.08,
+          "hpct": 100,
+          "fillH": 93.9,
+          "fillW": 30.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.3648,
+          "settled": true
+        },
+        "after": {
+          "lit": 168885,
+          "areapct": 38.08,
+          "hpct": 100,
+          "fillH": 93.9,
+          "fillW": 30.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 3.3648,
+          "settled": true,
+          "subject": {
+            "only": [
+              "precg_l",
+              "postcg_l"
+            ],
+            "named": [
+              "precg_l",
+              "postcg_l"
+            ],
+            "onlyVisible": 2,
+            "visible": 2,
+            "size": [
+              1.9648,
+              1.8797,
+              1.9487
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 3,
+        "title": "Frontal lobe",
+        "before": {
+          "lit": 88649,
+          "areapct": 19.99,
+          "hpct": 86.1,
+          "fillH": 129.1,
+          "fillW": 34.6,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 5.5086,
+          "settled": true
+        },
+        "after": {
+          "lit": 88648,
+          "areapct": 19.99,
+          "hpct": 86.1,
+          "fillH": 129.1,
+          "fillW": 34.6,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 5.5086,
+          "settled": true,
+          "subject": {
+            "only": [
+              "sfg_r",
+              "sfg_l",
+              "mfg_r",
+              "mfg_l",
+              "orb",
+              "precg_r",
+              "precg_l"
+            ],
+            "named": [],
+            "onlyVisible": 7,
+            "visible": 7,
+            "size": [
+              3.3134,
+              3.0391,
+              2.8741
+            ]
+          },
+          "framingFails": [
+            "clipped at rest",
+            "fillH 129.1% — subject does not fit"
+          ],
+          "sceneFails": [],
+          "engineFails": [
+            "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+          ]
+        }
+      },
+      {
+        "view": 4,
+        "title": "Parietal lobe",
+        "before": {
+          "lit": 110527,
+          "areapct": 24.92,
+          "hpct": 86.4,
+          "fillH": 172.7,
+          "fillW": 42.4,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 4.5996,
+          "settled": true
+        },
+        "after": {
+          "lit": 110526,
+          "areapct": 24.92,
+          "hpct": 86.4,
+          "fillH": 172.7,
+          "fillW": 42.4,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 4.5996,
+          "settled": true,
+          "subject": {
+            "only": [
+              "postcg_r",
+              "postcg_l",
+              "spl_r",
+              "spl_l",
+              "smg_r",
+              "smg_l",
+              "ang_r",
+              "ang_l"
+            ],
+            "named": [],
+            "onlyVisible": 8,
+            "visible": 8,
+            "size": [
+              3.5871,
+              2.2139,
+              2.9023
+            ]
+          },
+          "framingFails": [
+            "clipped at rest",
+            "fillH 172.7% — subject does not fit"
+          ],
+          "sceneFails": [],
+          "engineFails": [
+            "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+          ]
+        }
+      },
+      {
+        "view": 5,
+        "title": "Temporal lobe and the lateral sulcus",
+        "before": {
+          "lit": 105514,
+          "areapct": 23.79,
+          "hpct": 98.6,
+          "fillH": 60.4,
+          "fillW": 15.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.114,
+          "settled": true
+        },
+        "after": {
+          "lit": 105514,
+          "areapct": 23.79,
+          "hpct": 98.6,
+          "fillH": 60.4,
+          "fillW": 15.7,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 5.114,
+          "settled": true,
+          "subject": {
+            "only": [
+              "stg_a_r",
+              "stg_a_l",
+              "stg_p_r",
+              "stg_p_l",
+              "mtg_r",
+              "mtg_l",
+              "itg_r",
+              "itg_l",
+              "fus_r",
+              "fus_l"
+            ],
+            "named": [
+              "stg_p_l"
+            ],
+            "onlyVisible": 10,
+            "visible": 10,
+            "size": [
+              3.4788,
+              2.6625,
+              2.3512
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 6,
+        "title": "Occipital lobe",
+        "before": {
+          "lit": 188848,
+          "areapct": 42.58,
+          "hpct": 83,
+          "fillH": 431.8,
+          "fillW": 99.1,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 3.0649,
+          "settled": true
+        },
+        "after": {
+          "lit": 188848,
+          "areapct": 42.58,
+          "hpct": 83,
+          "fillH": 431.8,
+          "fillW": 99.1,
+          "clippedAtRest": true,
+          "subjectFrom": "visible",
+          "dist": 3.0649,
+          "settled": true,
+          "subject": {
+            "only": [
+              "occ_r",
+              "occ_l"
+            ],
+            "named": [],
+            "onlyVisible": 2,
+            "visible": 2,
+            "size": [
+              2.3748,
+              1.4813,
+              1.8929
+            ]
+          },
+          "framingFails": [
+            "clipped at rest",
+            "fillH 431.8% — subject does not fit"
+          ],
+          "sceneFails": [],
+          "engineFails": [
+            "nothing on screen is above 10% opacity — ISOLATE_REGION ghosts its own subject (paint(); only COMPARE_STRUCTURES sets state.hi)"
+          ]
+        }
+      },
+      {
+        "view": 7,
+        "title": "The fifth lobe, hidden",
+        "before": {
+          "lit": 130410,
+          "areapct": 29.4,
+          "hpct": 93.9,
+          "fillH": 52.1,
+          "fillW": 18.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0317,
+          "settled": true
+        },
+        "after": {
+          "lit": 130379,
+          "areapct": 29.4,
+          "hpct": 93.9,
+          "fillH": 52.1,
+          "fillW": 18.8,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.0317,
+          "settled": true,
+          "subject": {
+            "only": [
+              "ins_r",
+              "ins_l",
+              "acsg_r",
+              "acsg_l"
+            ],
+            "named": [
+              "ins_l",
+              "ins_r"
+            ],
+            "onlyVisible": 4,
+            "visible": 4,
+            "size": [
+              3.1932,
+              1.9212,
+              2.313
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 8,
+        "title": "What joins the two halves",
+        "before": {
+          "lit": 67728,
+          "areapct": 15.27,
+          "hpct": 78.9,
+          "fillH": 43.3,
+          "fillW": 10.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 6.605,
+          "settled": true
+        },
+        "after": {
+          "lit": 67728,
+          "areapct": 15.27,
+          "hpct": 78.9,
+          "fillH": 43.3,
+          "fillW": 10.2,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 6.605,
+          "settled": true,
+          "subject": {
+            "only": [
+              "cc",
+              "ac",
+              "wm_hem"
+            ],
+            "named": [
+              "cc",
+              "ac"
+            ],
+            "onlyVisible": 3,
+            "visible": 3,
+            "size": [
+              3.5638,
+              3.8053,
+              3.2115
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 9,
+        "title": "The limbic border on the medial surface",
+        "before": {
+          "lit": 162431,
+          "areapct": 36.62,
+          "hpct": 100,
+          "fillH": 79.6,
+          "fillW": 20.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.2466,
+          "settled": true
+        },
+        "after": {
+          "lit": 162431,
+          "areapct": 36.62,
+          "hpct": 100,
+          "fillH": 79.6,
+          "fillW": 20.6,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 4.2466,
+          "settled": true,
+          "subject": {
+            "only": [
+              "cing_r",
+              "cing_l",
+              "phg_r",
+              "phg_l"
+            ],
+            "named": [
+              "cc",
+              "cing_l",
+              "phg_l"
+            ],
+            "onlyVisible": 4,
+            "visible": 5,
+            "size": [
+              1.9037,
+              2.5995,
+              2.1301
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      },
+      {
+        "view": 10,
+        "title": "Cortex outside, white matter inside",
+        "before": {
+          "lit": 59822,
+          "areapct": 13.49,
+          "hpct": 71.6,
+          "fillH": 88.6,
+          "fillW": 28.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 7.0606,
+          "settled": true
+        },
+        "after": {
+          "lit": 59822,
+          "areapct": 13.49,
+          "hpct": 71.6,
+          "fillH": 88.6,
+          "fillW": 28.9,
+          "clippedAtRest": false,
+          "subjectFrom": "opaque",
+          "dist": 7.0606,
+          "settled": true,
+          "subject": {
+            "only": [],
+            "named": [],
+            "onlyVisible": 0,
+            "visible": 0,
+            "size": [
+              3.8159,
+              4.2,
+              3.4744
+            ]
+          },
+          "framingFails": [],
+          "sceneFails": [],
+          "engineFails": []
+        }
+      }
+    ]
+  }
+}

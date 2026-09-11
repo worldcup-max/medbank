@@ -34,7 +34,9 @@ for (const f of files) {
   catch (e) { console.error(`skipped ${f}: ${e.message}`); continue; }
 
   const structures = s.structures || [];
-  const parts = structures.filter(x => x.role === 'part');
+  /* 'primary' is a taught role too — see isTaught() in viz3d.js and the roles table in
+     model3d-scene-spec-v2.md. Reading only 'part' here left 92 structures out of the index. */
+  const parts = structures.filter(x => x.role === 'part' || x.role === 'primary');
 
   /* term → structure key, resolved by SPECIFICITY, not by file order.
      This used to be first-come-wins over structures[], and the bones are listed first. So the scapula —
@@ -56,7 +58,7 @@ for (const f of files) {
     for (const t of [].concat(x.terms || [], x.label || [], x.name || [])) {
       const k = norm(t);
       if (k.length <= 2) continue;
-      const score = (own.has(k) ? 4 : 0) + (x.role === 'part' ? 2 : 0) + (x.render === 'anchor' ? 1 : 0);
+      const score = (own.has(k) ? 4 : 0) + (x.role === 'part' || x.role === 'primary' ? 2 : 0) + (x.render === 'anchor' ? 1 : 0);
       if (!(k in claim) || score > claim[k]) { claim[k] = score; terms[k] = x.key; }
     }
   }
