@@ -1,5 +1,5 @@
 {
- "count": 934,
+ "count": 936,
  "dir": "assets/BodyParts3D_data/stl",
  "meshes": [
   {
@@ -3737,6 +3737,14 @@
   {
    "id": "FMA9352nsn",
    "name": null
+  },
+  {
+   "id": "FMA16202-sacrum",
+   "name": "sacrum"
+  },
+  {
+   "id": "FMA16202-coccyx",
+   "name": "coccyx"
   }
  ]
 }

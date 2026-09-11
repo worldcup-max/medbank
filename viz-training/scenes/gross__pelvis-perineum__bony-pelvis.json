@@ -204,7 +204,7 @@
       "layer": "bone",
       "color": "#cacfd2",
       "refs": {
-        "bodyparts3d": "FMA16202"
+        "bodyparts3d": "FMA16202-sacrum"
       },
       "terms": [
         "sacrum",
@@ -398,12 +398,12 @@
         "uvw": [
           0.4908,
           0.0,
-          0.7786
+          0.7089
         ],
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: EXTREME -y within x:0.45,0.55 — the most anterior vertex of the sacrum inside a midline slab, 52.5 mm from its surface centroid. The midline restriction is what makes it the promontory rather than the ala: unrestricted, the most anterior vertex sits off to one side at u 0.69. It lands at u 0.4908, on the midline, in the upper quarter of the bone, which is the anterior lip of the S1 body.",
+      "calibrated_by": "geometry, re-derived 2026-09-11 when FMA16202 was split into sacrum and coccyx. anchor.uvw is a fraction of the parent mesh's bounding box, and the parent lost 34.8 mm of coccyx off its inferior end, so the same world point (z = 903.828) is now a different fraction: uvw z 0.7786 -> 0.7089. x and y are unchanged because the sacrum piece keeps the fused mesh's x and y extents exactly. geometry: EXTREME -y within x:0.45,0.55 — the most anterior vertex of the sacrum inside a midline slab, 52.5 mm from its surface centroid. The midline restriction is what makes it the promontory rather than the ala: unrestricted, the most anterior vertex sits off to one side at u 0.69. It lands at u 0.4908, on the midline, in the upper quarter of the bone, which is the anterior lip of the S1 body.",
       "terms": [
         "sacral promontory",
         "pelvic brim",

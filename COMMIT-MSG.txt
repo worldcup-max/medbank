@@ -1,0 +1,102 @@
+3D: a per-mesh ceiling, and the coccyx becomes a bone
+
+Two changes. The first came from a measurement on a phone; the second is
+the escalated item.
+
+A CEILING, BECAUSE A BUDGET IS BLIND TO CONCENTRATION
+-----------------------------------------------------
+Frank opened the intercostal scene on a phone on Nigerian mobile data: 25
+seconds, and 32 of 35 structures. The three it lost were the external,
+internal and innermost intercostals — every muscle the scene exists to
+teach. A bare rib cage.
+
+The per-scene budget did not prevent that and could not. Two scenes can
+weigh the same 21 MB and fail completely differently:
+
+    vertebral column   48 files under 1 MB   lose one -> you lose a vertebra
+    intercostals        3 files over 4 MB    lose one -> you lose the subject
+
+A big file on a flaky link does not fail at random. It fails FIRST, and the
+biggest mesh in a scene is almost always the thing the scene is about. So
+concentration is a separate risk from total weight and needs its own limit.
+
+40,000 triangles per mesh, measured against the two cases most likely to
+break rather than picked:
+
+    scapula      65,538 -> 40,000   surface moved 0.023 mm
+    cerebellum  117,127 -> 40,000   surface moved 0.041 mm
+
+The scapula is the bone RENDER-STANDARD section 5 singles out because an
+exam asks a student to recognise THAT shape; the cerebellum's folia are the
+finest texture in the corpus. Both come through intact. Across all 31 meshes
+over the ceiling the worst mover is the internal intercostal at 0.334 mm,
+and its fibre direction — the examinable fact — is still legible against the
+723,154-triangle scan.
+
+    31 meshes re-decimated from their SCANS, not from what we ship, so the
+    result is what apply-mesh-budget.mjs would regenerate
+    largest file in the corpus   6.08 MB -> 1.91 MB
+    corpus                        317 MB -> 274 MB
+    intercostal scene            21.6 MB -> ~13.4 MB
+
+The ceiling is applied AFTER the never-go-backwards clamp and overrides it.
+That is deliberate: "keeps the detail it already has" is worthless if the
+file never arrives.
+
+Not yet re-measured on a phone. One lever at a time — the per-scene budget
+is untouched so the next measurement attributes cleanly.
+
+Ruled out on the way: the slowness is not Render, which is not in the mesh
+path at all (it serves IMPORT_API only; meshes come from Supabase, the app
+from GitHub Pages). And it does not look like Supabase's tier either —
+racing the two hosts on the same connection, GitHub Pages gave 1.52 and
+4.27 Mbit/s against Supabase's 1.67 and 3.18. Same ballpark. What the
+numbers show is a link that swings by 3x on the same file seconds apart and
+degrades on long transfers. File size is the lever we control.
+
+THE COCCYX
+----------
+BodyParts3D segments the sacrum and coccyx as ONE object, FMA16202 — a
+single connected piece 145.3 mm tall where a sacrum is 100-115. The coccyx
+was already on screen as real scan data but had no id, so it could not be
+shown, hidden or isolated; scenes reached it only through an anchor, which
+drew a marker ON TOP of the bone instead of letting a student look at it.
+
+Cut at the minimum cross-section, z = 825.5 (147 mm^2), where the
+sacrococcygeal joint would be if the scan had not fused it:
+
+    FMA16202-sacrum   110.5 mm   188.8 cm3   (adult sacrum 100-115 mm)
+    FMA16202-coccyx    34.8 mm     5.3 cm3   (adult coccyx   30-45 mm)
+
+Both closed solids — triangles crossing the plane are split, the section is
+traced into loops and capped, the caps face opposite ways. Verified by
+signed volume: both positive, summing to exactly the source's 194,116.9.
+
+FMA16202 is left alone and stops being referenced. Rewriting that id's file
+would have been fifteen fewer edits, but the id names a BodyParts3D object
+and a re-ingest would have silently restored the fused mesh underneath us.
+
+THE ANCHORS HAD TO MOVE. anchor.uvw is a fraction of the PARENT's bounding
+box, so trimming 34.8 mm off the sacrum moves everything riding it. The
+sacrum piece keeps the fused mesh's x and y extents exactly; only z shrinks,
+145.309 -> 110.499. sacral_promontory in bony-pelvis is re-derived to the
+same world point, z = 903.828, uvw z 0.7786 -> 0.7089. The two coccyx
+anchors are deleted — the thing they pointed at is a mesh now.
+
+Sixteen scenes reference that mesh and all sixteen are updated. Fifteen came
+from grepping what happened to be staged; the sixteenth,
+gross__stomach-intestines__large-intestine, only appeared when the whole
+corpus was scanned.
+
+The validator caught a real mistake: the new coccyx structure carried a
+provenance block naming the provider, and a scene must not know who renders
+it — the adapter emits the CC-BY-SA credit, not the scene file. Removed.
+
+tools/split-mesh-at-plane.mjs does the cut and is reusable. Its first
+version wound both cut faces inside-out and the halves STILL summed to the
+source volume, because the caps cancel either way; it now checks both
+positive volumes and the sum, and records all four measured combinations in
+its header so nobody re-derives it by reasoning.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_018cYuhd9CR3gc7vu5onQQEh

@@ -509,7 +509,7 @@
       "layer": "bone",
       "color": "#cdc3a6",
       "refs": {
-        "bodyparts3d": "FMA16202"
+        "bodyparts3d": "FMA16202-sacrum"
       },
       "terms": [
         "sacrum",
@@ -523,30 +523,22 @@
     },
     {
       "key": "coccyx",
+      "name": "coccyx",
       "label": "Coccyx",
       "role": "part",
       "group": "Sacrum & coccyx",
-      "render": "anchor",
-      "color": "#ffcf5c",
-      "anchor": {
-        "on": "sacrum",
-        "uvw": [
-          0.4908,
-          0.8217,
-          0.1471
-        ],
-        "radius": 0.05
+      "layer": "bone",
+      "color": "#cdc3a6",
+      "refs": {
+        "bodyparts3d": "FMA16202-coccyx"
       },
-      "status": "needs-review",
-      "calibrated_by": "geometry: the sacrum and the coccyx are segmented as ONE mesh, which is why the catalog has no coccyx entry — there is no separate object, not a missing bone (all nine of its “coccy” entries are pelvic floor muscles). Measured on that mesh: a single connected piece 145.3 mm tall, narrowing past a third of its widest at Z 832, leaving 104.0 mm of sacrum above a 41.3 mm midline tail below (32.8 × 25.5 mm, centred 0.2 mm off the midline). An adult sacrum is 100–115 mm and an adult coccyx 30–45 mm. The anchor sits at the tail’s centroid, inside the bone, 4.6 mm from the surface.",
-      "calibration_gap_mm": 0,
       "terms": [
         "coccyx",
         "tailbone",
         "coccygeal",
         "sacrococcygeal joint"
       ],
-      "narration": "The tailbone. Three to five tiny vertebrae fused into one, hanging from the tip of the sacrum. It is the last of the 33, and here it is part of the same piece of bone as the sacrum."
+      "narration": "The tailbone. Three to five tiny vertebrae fused into one, hanging from the tip of the sacrum at the sacrococcygeal joint. It is the last of the thirty-three."
     },
     {
       "key": "d_l1",
@@ -1117,6 +1109,6 @@
     "All twenty-three intervertebral discs are included, C2/3 to L5/S1. An earlier version of this scene carried only the five lumbar ones and this note still said so after they were added.",
     "No calibrated landmark anchors were placed. Anchor coordinates must be measured on the source geometry, which was not available offline this run; guessed anchors would be worse than none.",
     "The column is complete from the atlas to the sacrum: all 24 vertebrae and all 23 intervertebral discs. Earlier versions of this scene showed only part of it, which left visible gaps in the stack and made two isolated vertebrae float on their own with nothing between them and the rest.",
-    "The COCCYX is present but not separately modelled: it is segmented together with the sacrum as a single mesh, which is why the catalog lists no coccyx. Measured on that mesh, 104.0 mm of sacrum sits above a 41.3 mm midline tail — textbook proportions for both — so the coccyx is labelled with a measured landmark anchor rather than declared missing."
+    "The coccyx IS separately modelled as of 2026-09-11. BodyParts3D ships it fused to the sacrum as FMA16202; that mesh was cut at its minimum cross-section (z = 825.5) into FMA16202-sacrum (110.5 mm) and FMA16202-coccyx (34.8 mm), both closed solids, so the coccyx can now be shown, hidden and isolated like any other bone."
   ]
 }

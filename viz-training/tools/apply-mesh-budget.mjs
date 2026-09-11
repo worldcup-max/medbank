@@ -65,6 +65,31 @@ const OUT = join(ROOT, 'meshes-lite');
 const BUDGET = 450000;   // 21.5 MB — the vertebral column at full scan resolution, sacrum included
 const FLOOR = 6000;      // a lumbar vertebra carries every process and facet at ~7,000
 
+/* A PER-MESH CEILING, BECAUSE A BUDGET IS BLIND TO CONCENTRATION.
+   Added 2026-09-11 after Frank measured the intercostal scene on a phone on Nigerian mobile data:
+   25 seconds, and 32 of 35 structures. The three it lost were the external, internal and innermost
+   intercostals — every muscle the scene exists to teach.
+
+   The per-scene budget above did not prevent that, and could not. Two scenes can weigh the same
+   21 MB and fail completely differently:
+
+     vertebral column   48 files under 1 MB     lose one -> you lose a vertebra
+     intercostals        3 files over 4 MB      lose one -> you lose the subject
+
+   A big file on a flaky link does not fail at random. It fails FIRST, and the biggest mesh in a
+   scene is almost always the thing the scene is about. So concentration is its own risk, separate
+   from total weight, and needs its own limit.
+
+   40,000 measured rather than chosen, against the two cases most likely to break. The scapula is
+   the bone RENDER-STANDARD section 5 singles out because an exam asks a student to recognise THAT
+   shape: 65,538 -> 40,000 moves its surface 0.023 mm. The cerebellum's folia are the finest texture
+   in the corpus: 117,127 -> 40,000 moves it 0.041 mm. Across all 31 meshes over the ceiling the
+   worst mover is the internal intercostal at 0.334 mm, and its fibre direction — the examinable
+   fact — is still legible against the 723,154-triangle scan.
+
+   Effect: largest file in the corpus 6.08 MB -> 1.91 MB, corpus 317 MB -> 274 MB. */
+const CEILING = 40000;
+
 const argv = process.argv.slice(2);
 const has = f => argv.includes(f);
 const val = f => { const i = argv.indexOf(f); return i < 0 ? null : argv[i + 1]; };
@@ -138,6 +163,19 @@ for (const id of Object.keys(alloc)) {
   }
 }
 
+/* THE CEILING IS APPLIED LAST, AND IT OVERRIDES NEVER-GO-BACKWARDS.
+   Order matters here. The clamp above exists so a mesh never loses detail it already has; the
+   ceiling exists so no single file is big enough to take a scene's subject down with it when it
+   fails. Where they disagree the ceiling wins, because "keeps the detail it has" is worthless if
+   the file never arrives. This is the one place the tool deliberately reduces a mesh. */
+const cappedByCeiling = [];
+for (const id of Object.keys(alloc)) {
+  if (alloc[id] > CEILING) {
+    cappedByCeiling.push({ id, from: alloc[id] });
+    alloc[id] = CEILING;
+  }
+}
+
 /* ----------------------------------------------------------------- report */
 const rows = Object.keys(source).sort().map(id => ({
   id, src: source[id], now: current[id], next: alloc[id],
@@ -150,7 +188,7 @@ const lowered = rows.filter(r => r.delta != null && r.delta < -50);
 const sum = a => a.reduce((x, y) => x + y, 0);
 const mb = t => (t * 50 / 1048576).toFixed(1);
 
-console.log(`budget ${BUDGET.toLocaleString()} tri/scene (${mb(BUDGET)} MB) · floor ${FLOOR.toLocaleString()} tri`);
+console.log(`budget ${BUDGET.toLocaleString()} tri/scene (${mb(BUDGET)} MB) · floor ${FLOOR.toLocaleString()} · ceiling ${CEILING.toLocaleString()} tri/mesh (${mb(CEILING)} MB)`);
 console.log(`meshes ${rows.length} · scenes ${scenes.length}`);
 console.log(`scenes already under budget at full scan resolution: ${untouchedScenes.length} — untouched`);
 console.log(`meshes that will ship at full scan resolution: ${rows.filter(r => r.atSource).length}`);
@@ -163,6 +201,12 @@ if (lowered.length) {
   console.log(`\nBUG — ${lowered.length} mesh(es) came out below what they carry today. The never-go-backwards`);
   console.log(`clamp should have caught these. Do not --apply until this is understood:`);
   for (const r of lowered) console.log(`  ${r.id.padEnd(10)} ${String(r.now).padStart(7)} -> ${String(r.next).padStart(7)}`);
+}
+if (cappedByCeiling.length) {
+  console.log(`\ncapped at the per-mesh ceiling (${cappedByCeiling.length}) — no single file may be big enough to`);
+  console.log(`take its scene's subject down with it:`);
+  for (const r of cappedByCeiling.slice(0, 12)) console.log(`  ${r.id.padEnd(10)} ${String(r.from).padStart(7)} -> ${CEILING}`);
+  if (cappedByCeiling.length > 12) console.log(`  … and ${cappedByCeiling.length - 12} more`);
 }
 if (raisedToCurrent.length) {
   console.log(`\nheld at today's resolution rather than the proportional share (${raisedToCurrent.length}):`);
