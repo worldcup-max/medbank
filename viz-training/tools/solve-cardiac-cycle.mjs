@@ -77,7 +77,7 @@ function solveSide(side, seed) {
     ? { emax: [0.80, 9], pven: [2, 30], rart: [0.20, 4.0], cart: [0.40, 8] }
     : { emax: [0.20, 0.80], pven: [3, 12], rart: [0.08, 0.40], cart: [1.50, 12] };
   for (let round = 0; round < 6; round++) {
-    k.p_ven  = bisect(v => A({ p_ven: v }).edv,     B.pven[0], B.pven[1], st.edv, 24);
+    k.p_src  = bisect(v => A({ p_src: v }).edv,     B.pven[0], B.pven[1], st.edv, 24);
     k.emax_v = bisect(v => -A({ emax_v: v }).esv,   B.emax[0], B.emax[1], -st.esv, 24);
     k.r_art  = bisect(v => A({ r_art: v }).art_dia, B.rart[0], B.rart[1], art.dia, 24);
     k.c_art  = bisect(v => { const a2 = A({ c_art: v }); return -(a2.art_sys - a2.art_dia); },
@@ -92,7 +92,7 @@ if (process.argv.includes('--solve')) {
     process.stderr.write('solving ' + side + ' ...\n');
     out[side] = solveSide(side, M.SOLVED[side]);
   }
-  const fmt = k => `{ emax_v: ${k.emax_v.toFixed(4)}, p_ven: ${k.p_ven.toFixed(4)}, ` +
+  const fmt = k => `{ emax_v: ${k.emax_v.toFixed(4)}, p_src: ${k.p_src.toFixed(4)}, ` +
                    `r_art: ${k.r_art.toFixed(4)}, c_art: ${k.c_art.toFixed(4)}` + ` }`;
   console.log('\nPaste into models3d/cardiac-cycle-pumping.js, replacing SOLVED.left / SOLVED.right:\n');
   console.log('  left:  ' + fmt(out.left) + ',');

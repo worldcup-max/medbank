@@ -1,0 +1,666 @@
+{
+  "schema": 2,
+  "id": "embryology__weeks-1-2-implantation-bilaminar-disc__implantation",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Weeks 1-2: Implantation & Bilaminar Disc",
+  "structure": "Implantation",
+  "covers": [
+    "Implantation"
+  ],
+  "learning_goal": "Date implantation day by day from apposition to full burial, name the two trophoblast layers and say which one invades, explain how the lacunae become the first uteroplacental circulation, and predict what goes wrong when the site or the depth is abnormal.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "implantation",
+      "week 1",
+      "week 2",
+      "early development",
+      "trophoblast",
+      "placenta",
+      "decidua",
+      "ectopic pregnancy",
+      "antenatal bleeding",
+      "pregnancy test"
+    ],
+    "terms": [
+      "implantation",
+      "apposition",
+      "adhesion",
+      "invasion",
+      "interstitial implantation",
+      "window of implantation",
+      "receptive endometrium",
+      "pinopodes",
+      "leukaemia inhibitory factor",
+      "LIF",
+      "integrins",
+      "selectin",
+      "day 6",
+      "day 7",
+      "day 8",
+      "day 9",
+      "day 11",
+      "day 12",
+      "day 13",
+      "trophoblast",
+      "cytotrophoblast",
+      "syncytiotrophoblast",
+      "syncytium",
+      "multinucleate",
+      "mitotically active",
+      "proteolytic enzymes",
+      "lacunae",
+      "lacunar stage",
+      "trophoblastic lacunae",
+      "sinusoid",
+      "maternal sinusoids",
+      "uteroplacental circulation",
+      "primary villi",
+      "decidua",
+      "decidual reaction",
+      "decidua basalis",
+      "decidua capsularis",
+      "decidua parietalis",
+      "glycogen",
+      "lipid",
+      "closing plug",
+      "fibrin coagulum",
+      "epithelial repair",
+      "posterior superior uterine wall",
+      "endometrium",
+      "secretory phase",
+      "corpus luteum rescue",
+      "human chorionic gonadotropin",
+      "hCG",
+      "progesterone",
+      "missed period",
+      "pregnancy test",
+      "implantation bleeding",
+      "ectopic pregnancy",
+      "tubal pregnancy",
+      "ampulla",
+      "ruptured ectopic",
+      "placenta praevia",
+      "placenta accreta",
+      "placenta increta",
+      "placenta percreta",
+      "Nitabuch layer",
+      "previous caesarean scar",
+      "hydatidiform mole",
+      "spiral arteries",
+      "pre-eclampsia",
+      "shallow invasion"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "receptive_window",
+      "label": "The window of implantation",
+      "role": "context",
+      "group": "Before it can happen",
+      "layer": "organ",
+      "color": "#b07aa1",
+      "terms": [
+        "window of implantation",
+        "receptive endometrium",
+        "secretory phase",
+        "progesterone",
+        "pinopodes",
+        "leukaemia inhibitory factor",
+        "LIF",
+        "integrins",
+        "day 20",
+        "day 24",
+        "luteal phase"
+      ],
+      "narration": "The endometrium is not receptive for most of the cycle. Progesterone from the corpus luteum opens a short window in the mid-secretory phase, roughly cycle days twenty to twenty-four, when the surface throws up pinopodes and expresses the adhesion molecules the blastocyst needs. Outside that window the same blastocyst will not stick. Two clocks must agree — the embryo must arrive hatched and ready at exactly the days the wall is willing."
+    },
+    {
+      "key": "apposition",
+      "label": "Apposition — day 6",
+      "role": "part",
+      "group": "The three steps",
+      "layer": "organ",
+      "color": "#f5b041",
+      "terms": [
+        "apposition",
+        "day 6",
+        "loose contact",
+        "embryonic pole",
+        "polar trophoblast",
+        "uterine fluid",
+        "selectin"
+      ],
+      "narration": "Step one is contact, not attachment. The hatched blastocyst settles against the endometrial surface, embryonic pole first, held only loosely as the last of the uterine fluid is absorbed. It could still be washed away at this point. Learn the order — apposition, adhesion, invasion — because it is asked as an order."
+    },
+    {
+      "key": "adhesion",
+      "label": "Adhesion — day 6 to 7",
+      "role": "part",
+      "group": "The three steps",
+      "layer": "organ",
+      "color": "#e67e22",
+      "terms": [
+        "adhesion",
+        "day 7",
+        "integrins",
+        "L-selectin",
+        "cadherin",
+        "firm attachment",
+        "trophoblast",
+        "endometrial epithelium"
+      ],
+      "narration": "Step two is a firm grip. Integrins on the trophoblast lock onto the extracellular matrix of the endometrial surface and the embryo can no longer be dislodged. Only now is a pregnancy in any real sense established. Most losses in human reproduction happen at or before this step and are never known to the woman."
+    },
+    {
+      "key": "invasion",
+      "label": "Invasion — day 7 to 9",
+      "role": "part",
+      "group": "The three steps",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "invasion",
+        "interstitial implantation",
+        "proteolytic enzymes",
+        "matrix metalloproteinases",
+        "day 7",
+        "day 8",
+        "day 9",
+        "burrowing",
+        "endometrial stroma"
+      ],
+      "narration": "Step three is digestion. The syncytiotrophoblast releases proteolytic enzymes, breaks through the surface epithelium and eats its way into the stroma, and the whole embryo sinks below the surface. In the human this is interstitial implantation — the embryo ends up buried inside the wall, not sitting on it, and that is a species difference examiners like."
+    },
+    {
+      "key": "cytotrophoblast",
+      "label": "Cytotrophoblast — the inner layer",
+      "role": "part",
+      "group": "Two trophoblast layers",
+      "layer": "organ",
+      "color": "#3498db",
+      "terms": [
+        "cytotrophoblast",
+        "inner layer",
+        "mononuclear",
+        "distinct cell borders",
+        "mitotically active",
+        "germinative layer",
+        "stem cells",
+        "primary villi"
+      ],
+      "narration": "The inner layer, sitting against the embryo. Its cells are single-nucleus, have clear borders, and keep dividing — this is the layer that supplies new cells. It does not invade. Think of it as the factory: every syncytiotrophoblast nucleus was once a cytotrophoblast cell that divided and then fused outward."
+    },
+    {
+      "key": "syncytiotrophoblast",
+      "label": "Syncytiotrophoblast — the outer layer",
+      "role": "part",
+      "group": "Two trophoblast layers",
+      "layer": "organ",
+      "color": "#a93226",
+      "terms": [
+        "syncytiotrophoblast",
+        "syncytium",
+        "multinucleate",
+        "no cell borders",
+        "invasive",
+        "proteolytic enzymes",
+        "hormone secreting",
+        "human chorionic gonadotropin",
+        "hCG",
+        "lacunae"
+      ],
+      "narration": "The outer layer, and the aggressive one. Its cells have fused into a single multinucleate mass with no borders between nuclei, which is exactly what a tissue built to burrow needs — no gaps for the mother's cells to get through. It does three jobs: it invades, it forms the lacunae, and it makes hCG. If a question asks which layer invades or which layer secretes, the answer to both is this one."
+    },
+    {
+      "key": "lacunae",
+      "label": "Lacunar stage — day 8 to 9",
+      "role": "part",
+      "group": "Making a circulation",
+      "layer": "organ",
+      "color": "#cb4335",
+      "terms": [
+        "lacunae",
+        "lacunar stage",
+        "trophoblastic lacunae",
+        "vacuoles",
+        "day 8",
+        "day 9",
+        "syncytiotrophoblast",
+        "spaces"
+      ],
+      "narration": "Around day eight vacuoles appear inside the syncytiotrophoblast and run together into larger spaces called lacunae. They are holes in a tissue, not vessels — nothing lines them. But they are the beginning of the intervillous space of the placenta, so the adult organ starts as gaps in an invading cell mass."
+    },
+    {
+      "key": "sinusoids",
+      "label": "Maternal sinusoids open — day 11 to 12",
+      "role": "part",
+      "group": "Making a circulation",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "maternal sinusoids",
+        "eroded capillaries",
+        "uteroplacental circulation",
+        "day 11",
+        "day 12",
+        "maternal blood",
+        "intervillous space",
+        "haemochorial"
+      ],
+      "narration": "By day eleven or twelve the syncytiotrophoblast has eroded the walls of maternal capillaries and their blood spills into the lacunae. That is the start of the uteroplacental circulation. Note what it means: maternal blood now bathes fetal tissue directly, with no vessel wall between them. The human placenta is haemochorial for the rest of the pregnancy because of what happens in these two days."
+    },
+    {
+      "key": "primary_villi",
+      "label": "Primary villi — day 13",
+      "role": "part",
+      "group": "Making a circulation",
+      "layer": "organ",
+      "color": "#d98880",
+      "terms": [
+        "primary villi",
+        "day 13",
+        "cytotrophoblast core",
+        "syncytiotrophoblast shell",
+        "chorionic villi",
+        "secondary villi",
+        "tertiary villi"
+      ],
+      "narration": "Late in week two, cytotrophoblast pushes finger-like columns into the syncytiotrophoblast and each one is a primary villus — a cytotrophoblast core in a syncytiotrophoblast cover. Mesoderm will move into the core to make it secondary, and vessels will grow inside that to make it tertiary. The naming series primary, secondary, tertiary is a standard one-mark question."
+    },
+    {
+      "key": "decidua",
+      "label": "The decidual reaction",
+      "role": "part",
+      "group": "The mother's response",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "terms": [
+        "decidua",
+        "decidual reaction",
+        "decidual cells",
+        "glycogen",
+        "lipid",
+        "endometrial stroma",
+        "nutrition",
+        "limits invasion",
+        "Nitabuch layer"
+      ],
+      "narration": "The mother is not passive. Stromal cells around the implantation site swell with glycogen and lipid and become decidual cells. They feed the embryo before there is any circulation, and they also fence it in — a decidua that forms properly is what stops the trophoblast digging deeper than it should. Where that barrier fails you get an abnormally adherent placenta."
+    },
+    {
+      "key": "decidua_parts",
+      "label": "Basalis, capsularis, parietalis",
+      "role": "part",
+      "group": "The mother's response",
+      "layer": "organ",
+      "color": "#c39bd3",
+      "terms": [
+        "decidua basalis",
+        "decidua capsularis",
+        "decidua parietalis",
+        "maternal placenta",
+        "over the embryo",
+        "rest of the uterus"
+      ],
+      "narration": "Three names for the same tissue in three positions. Basalis lies deep to the embryo and becomes the maternal side of the placenta. Capsularis is the thin layer stretched over it towards the uterine cavity. Parietalis lines the rest of the uterus. As the sac grows, capsularis and parietalis meet and fuse and the uterine cavity is obliterated by about week twelve."
+    },
+    {
+      "key": "closing_plug",
+      "label": "Closing plug and full burial — day 9 to 12",
+      "role": "part",
+      "group": "Buried and sealed",
+      "layer": "organ",
+      "color": "#7f8c8d",
+      "terms": [
+        "closing plug",
+        "fibrin coagulum",
+        "day 9",
+        "day 12",
+        "fully embedded",
+        "epithelial repair",
+        "surface healed",
+        "implantation bleeding"
+      ],
+      "narration": "By day nine the embryo is under the surface and the defect above it is filled by a fibrin plug. By day twelve the plug is replaced by regrown epithelium and the embryo is completely buried with the surface healed over. The small bleed some women notice at this point is implantation bleeding — lighter and earlier than a period, and a classic way a pregnancy gets its dates wrong."
+    },
+    {
+      "key": "hcg_luteum",
+      "label": "hCG rescues the corpus luteum",
+      "role": "part",
+      "group": "Buried and sealed",
+      "layer": "organ",
+      "color": "#16a085",
+      "terms": [
+        "human chorionic gonadotropin",
+        "hCG",
+        "corpus luteum rescue",
+        "LH receptor",
+        "progesterone",
+        "missed period",
+        "pregnancy test",
+        "day 8",
+        "luteal-placental shift",
+        "week 8"
+      ],
+      "narration": "From the moment it invades, the syncytiotrophoblast secretes hCG. It acts on the corpus luteum's LH receptor and keeps progesterone flowing, so the endometrium is not shed and the period is missed. It is detectable in blood about eight days after fertilization, which is why a test can be positive before a period is late. The placenta takes over progesterone production at about week eight and the corpus luteum is then dispensable."
+    },
+    {
+      "key": "wrong_site",
+      "label": "When the site is wrong",
+      "role": "part",
+      "group": "When it goes wrong",
+      "layer": "organ",
+      "color": "#922b21",
+      "terms": [
+        "ectopic pregnancy",
+        "tubal pregnancy",
+        "ampulla",
+        "ruptured ectopic",
+        "pelvic inflammatory disease",
+        "placenta praevia",
+        "low implantation",
+        "internal os",
+        "painless bleeding",
+        "abdominal pregnancy"
+      ],
+      "narration": "The trophoblast will implant into almost any surface it meets, which is the whole danger. Most ectopics are in the ampulla of the uterine tube, where the wall is thin and rupture with severe intraperitoneal bleeding is the emergency. Anything that slows tubal transport — previous pelvic infection, tubal surgery — raises the risk. At the other end, a blastocyst that implants low in the uterus places the placenta over or near the internal os, and that is a placenta praevia presenting later as painless bright red bleeding."
+    },
+    {
+      "key": "wrong_depth",
+      "label": "When the depth is wrong",
+      "role": "part",
+      "group": "When it goes wrong",
+      "layer": "organ",
+      "color": "#6c3483",
+      "terms": [
+        "placenta accreta",
+        "placenta increta",
+        "placenta percreta",
+        "Nitabuch layer",
+        "deficient decidua",
+        "previous caesarean scar",
+        "retained placenta",
+        "postpartum haemorrhage",
+        "hysterectomy",
+        "shallow invasion",
+        "spiral arteries",
+        "pre-eclampsia",
+        "fetal growth restriction"
+      ],
+      "narration": "Invasion has to be deep enough and no deeper. Too deep, usually where a caesarean scar has left no decidua to stop it, and the placenta grows into the myometrium — accreta into it, increta through the muscle, percreta out beyond the serosa — so it will not separate at delivery and the haemorrhage can cost the uterus. Too shallow, and the trophoblast fails to remodel the maternal spiral arteries into wide low-resistance channels; the placenta stays underperfused, and that is the accepted origin of pre-eclampsia and much fetal growth restriction. Both diseases are settled in these fourteen days."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "Nothing implants into an unready wall",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Before it can happen"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "receptive_window",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Start with the wall, not the embryo. Progesterone from the corpus luteum makes the endometrium receptive for only a few days in the middle of the secretory phase, and the surface grows pinopodes and adhesion molecules for that window alone. Arrive early or late and the same healthy blastocyst simply will not stick. This is why timing, in a natural cycle and in a transfer cycle, is half the problem."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Apposition, adhesion, invasion — in that order",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three steps"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "receptive_window"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:implantation-sequence",
+          "path": [
+            "apposition",
+            "adhesion",
+            "invasion"
+          ],
+          "duration": 6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "invasion",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Three steps over about three days. Day six, the blastocyst lies against the endometrium embryonic pole first — apposition, still loose. Day six to seven, integrins lock it on — adhesion, and now it cannot be washed away. Day seven to nine, the syncytiotrophoblast digests its way through the surface epithelium and the embryo sinks into the stroma — invasion. In humans the embryo ends up buried inside the wall, which is called interstitial implantation."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "One trophoblast becomes two",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Two trophoblast layers"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "invasion"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "cytotrophoblast",
+            "syncytiotrophoblast"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cytotrophoblast",
+          "to": "syncytiotrophoblast",
+          "kind": "divides and fuses outward to feed it"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        }
+      ],
+      "narration": "At contact the trophoblast splits into two layers and you must be able to tell them apart. The inner cytotrophoblast has single nuclei and visible cell borders and keeps dividing; it is the source of new cells and it does not invade. The outer syncytiotrophoblast is one fused multinucleate mass with no borders; it invades, it forms the lacunae, and it makes the hormones. Cells move one way only — cytotrophoblast divides and fuses outward into the syncytium."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Holes become a circulation",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Making a circulation"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Two trophoblast layers"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:maternal-blood",
+          "path": [
+            "lacunae",
+            "sinusoids",
+            "primary_villi"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sinusoids",
+          "intensity": 0.95
+        }
+      ],
+      "narration": "Day eight, vacuoles open inside the syncytiotrophoblast and merge into lacunae. Day eleven to twelve, the same tissue erodes maternal capillaries and their blood pours into those spaces — the uteroplacental circulation has begun, and from here on maternal blood is in direct contact with fetal tissue. Day thirteen, cytotrophoblast columns push out as primary villi. Lacunae become the intervillous space; the villi become the exchange surface. The whole placenta is visible in outline by the end of week two."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "The mother's half of the deal",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The mother's response"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "syncytiotrophoblast"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "decidua",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "decidua",
+          "to": "invasion",
+          "kind": "feeds it and limits how deep it goes"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "decidua_parts",
+          "to": "decidua",
+          "kind": "the same tissue named by position"
+        }
+      ],
+      "narration": "The stroma around the site swells with glycogen and lipid to become decidua. It feeds the embryo before any circulation exists and it also sets the limit on how far the trophoblast may dig. Learn the three positions: basalis deep to the embryo, which becomes the maternal side of the placenta; capsularis stretched over it; parietalis lining the rest of the uterus. Capsularis and parietalis meet by about week twelve and the uterine cavity disappears."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Buried, plugged, and healed over",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Buried and sealed"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The mother's response"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "closing_plug",
+          "intensity": 0.9
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Day nine, the embryo is under the surface and a fibrin plug fills the hole above it. Day twelve, the plug is replaced by new epithelium and the embryo is completely embedded with the surface intact. The small early bleed a woman may notice is implantation bleeding — lighter, shorter and earlier than a period, and one of the commonest reasons a pregnancy is dated a month wrong."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 7,
+      "title": "The pregnancy announces itself",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Buried and sealed"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "syncytiotrophoblast"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "hcg_luteum",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "syncytiotrophoblast",
+          "to": "hcg_luteum",
+          "kind": "secretes it from the first day of invasion"
+        }
+      ],
+      "narration": "The syncytiotrophoblast secretes hCG as soon as it starts invading. hCG acts on the LH receptor of the corpus luteum, progesterone keeps flowing, and the endometrium is not shed — so the first sign of implantation is a period that does not come. Blood levels are detectable about eight days after fertilization. Remember what a pregnancy test is measuring: a product of the future placenta, not of the embryo. By week eight the placenta itself makes the progesterone and the corpus luteum is no longer needed."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 8,
+      "title": "Wrong place, wrong depth",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "When it goes wrong"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "wrong_site",
+            "wrong_depth"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "wrong_depth",
+          "to": "decidua",
+          "kind": "no decidua, no brake"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "wrong_site",
+          "to": "invasion",
+          "kind": "the same invasion into the wrong wall"
+        }
+      ],
+      "narration": "Everything clinical here follows from one fact: the trophoblast invades whatever it lands on. Land in the ampulla of the tube and you get an ectopic pregnancy in a thin wall that ruptures and bleeds into the abdomen. Land low in the uterus and the placenta covers the internal os as a praevia. Land on a caesarean scar with no decidua to stop it and the placenta grows into the muscle — accreta, increta, percreta — and will not separate at delivery. And if invasion is too shallow to remodel the spiral arteries, the placenta is underperfused for the whole pregnancy, which is where pre-eclampsia and much growth restriction begin. Two weeks of embryology explains half of third-trimester obstetrics."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and no 3d option; implantation is a staged process at cell scale with no mesh that could represent it. Only diagram is deferred. The curriculum asks for mechanism and associated_organs views and both are authored — beats 1, 2, 3, 4 and 6 are mechanism, beats 5, 7 and 8 are associated_organs.",
+    "Status is 'planned'. Fifteen regions, eight beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a section of endometrium with the blastocyst shown at three depths (apposed on the surface, half sunk, fully buried under a plug), the trophoblast drawn as two distinguishable layers with the syncytium shown as a multinucleate mass without borders, lacunae shown first empty and then filled from an eroded maternal capillary, a primary villus, and the three decidual positions labelled on a whole-uterus inset.",
+    "Beats 2 and 4 trace concepts rather than objects — concept:implantation-sequence for the apposition-adhesion-invasion order, and concept:maternal-blood for the path from lacunae to filled sinusoids to villi. Neither subject is a drawn structure.",
+    "Cytotrophoblast and syncytiotrophoblast are given their own regions here, as the blastocyst scene's gaps[] anticipated. The blastocyst scene names them in one line of trophoblast narration and should not be expanded; this is where they are taught.",
+    "This scene stops where the embryo is buried and the placenta is sketched in outline. The bilaminar disc itself, the amniotic cavity, the yolk sac and the chorionic cavity are the other three entries in this topic and are NOT claimed in covers[], even though beats 4 and 5 touch the tissue they grow from.",
+    "Primary villi are named because day 13 falls inside implantation, but secondary and tertiary villi, the full villous tree and the placental barrier belong to 'Chorion & placenta (early)' and are only named in passing. That entry is not claimed.",
+    "Timings are the standard teaching ones — apposition about day 6, adhesion day 6 to 7, invasion day 7 to 9, lacunae day 8 to 9, maternal blood in the lacunae day 11 to 12, fully embedded day 12, primary villi day 13 — and are narrated as approximations. The receptive window is given in cycle days rather than embryonic days because that is how it is used clinically, and the two numbering systems should not be conflated in the artwork.",
+    "The placenta accreta spectrum, pre-eclampsia and ectopic pregnancy are narrated as consequences of abnormal implantation, not as diseases in their own right. They have no curriculum entry in Embryology and none is claimed; the terms are in match.terms so a highlighted 'accreta' or 'spiral arteries' in a note finds the mechanism that explains it."
+  ]
+}

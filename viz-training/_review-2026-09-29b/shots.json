@@ -1,0 +1,7 @@
+[
+ {"name":"r-b9-anterior","t":0.4,"keys":["annulus_mitral","annulus_tricuspid","annulus_aortic","annulus_pulmonary","trigones"],"eye":[0,0,1]},
+ {"name":"r-b9-lateral","t":0.4,"keys":["annulus_mitral","annulus_tricuspid","annulus_aortic","annulus_pulmonary","trigones"],"eye":[1,0,0]},
+ {"name":"r-b9-medial","t":0.4,"keys":["annulus_mitral","annulus_tricuspid","annulus_aortic","annulus_pulmonary","trigones"],"eye":[-1,0,0]},
+ {"name":"r-b9-posterior","t":0.4,"keys":["annulus_mitral","annulus_tricuspid","annulus_aortic","annulus_pulmonary","trigones"],"eye":[0,0,-1]},
+ {"name":"r-b9-inferior","t":0.4,"keys":["annulus_mitral","annulus_tricuspid","annulus_aortic","annulus_pulmonary","trigones"],"eye":[0,-1,0.001]}
+]

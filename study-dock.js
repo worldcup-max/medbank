@@ -9,7 +9,12 @@
  * ===================================================================== */
 (function () {
   if (typeof window === "undefined" || typeof document === "undefined") return;
-  var V = "#5b21b6", INK = "#1c1830", DIM = "var(--dim)", LINE = "var(--line)", TINT = "var(--panel2)";
+  // AUDIT-08: INK was hardcoded to the light-mode ink (#1c1830) while .bub.a's background is
+  // var(--panel2) — which is DARK in dark mode (#221c37). That made assistant chat bubbles
+  // (including the "Couldn't reach the AI" error) render near-black text on a near-black
+  // background in dark mode — readable in light mode only, invisible/illegible in dark mode,
+  // which is the app's default theme. var(--text) flips with the theme like everything else.
+  var V = "#5b21b6", INK = "var(--text)", DIM = "var(--dim)", LINE = "var(--line)", TINT = "var(--panel2)";
 
   var tab=null, drawer=null, scrim=null, injected=false;
   var active="ask";                 // ask | source | note
@@ -179,6 +184,10 @@
         d.ask(q, h.slice(0,-1), ctx).then(function(ans){
           h.push({role:"assistant",text:ans||"(no reply)"}); if(active==="ask") render();
         }).catch(function(e){
+          // AUDIT-08: this failure was previously silent from a devtools perspective — only the
+          // generic user-facing message existed, no trail for engineering to diagnose from a
+          // bug report. Log the real error (message + any status/code the provider attached).
+          try{ console.warn("[dock ask] AI request failed:", (e&&e.message)||e, e); }catch(_){}
           h.push({role:"assistant",text:"Couldn't reach the AI just now — check your internet"+((""+e).indexOf("sign in")>=0?" (and approve the one-time Puter sign-in)":"")+" and try again."});
           if(active==="ask") render();
         });

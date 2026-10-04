@@ -176,6 +176,7 @@
    "role": "part",
    "group": "The cavity",
    "color": "#e0873a",
+   "opacity": 0.2,
    "refs": {
     "procedural": "lateral-folding#coelom"
    },
@@ -272,6 +273,7 @@
    "role": "context",
    "group": "Outside the embryo",
    "color": "#9fb9d8",
+   "opacity": 0.16,
    "refs": {
     "procedural": "lateral-folding#amnion"
    },
@@ -425,6 +427,7 @@
    "role": "part",
    "group": "Clinical",
    "color": "#e8d9c0",
+   "opacity": 0.3,
    "refs": {
     "procedural": "lateral-folding#sac+omphalocele"
    },
@@ -435,6 +438,24 @@
     "cord inserts on the sac",
     "omphalocele"
    ]
+  },
+  {
+   "key": "omphalocele_cord",
+   "name": "Umbilical cord (stub)",
+   "label": "Umbilical cord — inserting ON THE SAC",
+   "role": "part",
+   "group": "Failures of closure",
+   "color": "#c8a08a",
+   "refs": {
+    "procedural": "lateral-folding#cord+omphalocele"
+   },
+   "terms": [
+    "umbilical cord",
+    "cord insertion",
+    "cord inserts on the sac",
+    "umbilical cord insertion"
+   ],
+   "narration": "In omphalocele the cord does not insert on skin: it inserts on the SAC, because the sac IS the expanded base of the cord — amnion outside, peritoneum inside. That is the second of the three checks, and it is the one that survives when the membrane has ruptured before delivery and the first check has been taken away from you. A STUB is drawn here, not a cord: what this scene teaches is where it inserts, and the spiralled vessel-carrying length that runs to the placenta is neither taught nor drawn."
   },
   {
    "key": "gastroschisis_bowel",
@@ -477,6 +498,39 @@
    ]
   },
   {
+   "key": "gastroschisis_somatic",
+   "name": "Somatic (parietal) mesoderm (gastroschisis)",
+   "label": "The inner layer of that same wall, open in the same window — the defect is full thickness",
+   "role": "part",
+   "group": "Clinical",
+   "color": "#2f5f9e",
+   "refs": {
+    "procedural": "lateral-folding#somatic+gastroschisis"
+   },
+   "terms": [
+    "full thickness defect",
+    "somatopleure"
+   ]
+  },
+  {
+   "key": "gastroschisis_cord",
+   "name": "Umbilical cord (stub)",
+   "label": "Umbilical cord — inserting NORMALLY, at the ring",
+   "role": "part",
+   "group": "Failures of closure",
+   "color": "#c8a08a",
+   "refs": {
+    "procedural": "lateral-folding#cord+gastroschisis"
+   },
+   "terms": [
+    "umbilical cord",
+    "normal cord insertion",
+    "cord to the left of the defect",
+    "umbilical ring"
+   ],
+   "narration": "In gastroschisis the cord inserts normally, in the midline, at the umbilical ring — and the defect lies beside it, to the embryo's right, separated from it by the bridge of intact wall the previous beat measured. That normal insertion is the third check, and it is what tells you the bowel beside it came through a hole in the wall and not through the cord's own ring. Drawn as a stub, for the same reason as its counterpart on the sac."
+  },
+  {
    "key": "exstrophy_plate",
    "name": "Exstrophic bladder plate",
    "label": "Bladder exstrophy — the defect below the umbilicus",
@@ -514,6 +568,21 @@
     "failure of closure",
     "ectopia cordis",
     "pentalogy of Cantrell"
+   ]
+  },
+  {
+   "key": "exstrophy_somatic",
+   "name": "Somatic (parietal) mesoderm (exstrophy)",
+   "label": "The inner layer of the infraumbilical wall, unclosed along with it",
+   "role": "part",
+   "group": "Clinical",
+   "color": "#2f5f9e",
+   "refs": {
+    "procedural": "lateral-folding#somatic+exstrophy"
+   },
+   "terms": [
+    "failure of infraumbilical closure",
+    "somatopleure"
    ]
   }
  ],
@@ -564,14 +633,6 @@
      "target": "somite"
     },
     {
-     "op": "SHOW_STRUCTURE",
-     "target": "amnion"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "yolksac"
-    },
-    {
      "op": "COMPARE_STRUCTURES",
      "targets": [
       "somatic",
@@ -589,7 +650,31 @@
      "view": "superior"
     }
    ],
-   "narration": "Cut across the trunk before folding. The lateral plate mesoderm on each side has already split around the intraembryonic coelom. The layer against the ectoderm is somatic and forms the somatopleure — future body wall. The layer against the endoderm is splanchnic and forms the splanchnopleure — future gut wall. Get those two names right now, because the whole of serous membrane anatomy follows from them."
+   "narration": "Cut across the trunk before folding. The lateral plate mesoderm on each side has already split around the intraembryonic coelom. The layer against the ectoderm is somatic and forms the somatopleure — future body wall. The layer against the endoderm is splanchnic and forms the splanchnopleure — future gut wall. Get those two names right now, because the whole of serous membrane anatomy follows from them.",
+   "claims": [
+    {
+     "id": "B1-flat",
+     "claim": "the disc is FLAT: the transverse profile has not turned at all",
+     "measure": "wall.turn_deg",
+     "op": "near",
+     "value": 0,
+     "tol": 1
+    },
+    {
+     "id": "B1-open",
+     "claim": "and the coelom is still wide open to the extraembryonic cavity on both sides",
+     "measure": "coelom.escapes_at_flank",
+     "op": "atLeast",
+     "value": 120
+    },
+    {
+     "id": "B1-edges",
+     "claim": "the two somatopleuric edges are a whole wall-width apart",
+     "measure": "wall.gap_at_flank_frac",
+     "op": "atLeast",
+     "value": 0.95
+    }
+   ]
   },
   {
    "mode": "mechanism",
@@ -670,7 +755,36 @@
      "view": "superior"
     }
    ],
-   "narration": "Growing somites push the edges of the disc down and in, and the expanding amnion draws them round. The two somatopleuric edges meet in the ventral midline and fuse, leaving one hole at the umbilicus. In the same movement the coelom loses its two openings into the extraembryonic cavity and becomes a closed body cavity, which is why every serous cavity has a parietal and a visceral layer."
+   "narration": "Growing somites push the edges of the disc down and in, and the expanding amnion draws them round. The two somatopleuric edges meet in the ventral midline and fuse, leaving one hole at the umbilicus. In the same movement the coelom loses its two openings into the extraembryonic cavity and becomes a closed body cavity, which is why every serous cavity has a parietal and a visceral layer.",
+   "claims": [
+    {
+     "id": "B2-half",
+     "claim": "the folds have swung about halfway under: the profile has turned ~215 degrees of its final 357",
+     "measure": "wall.turn_deg",
+     "op": "between",
+     "value": [
+      210,
+      221
+     ]
+    },
+    {
+     "id": "B2-notmet",
+     "claim": "and have NOT met yet — the ventral midline is still open at this instant",
+     "measure": "wall.gap_at_flank_frac",
+     "op": "atLeast",
+     "value": 0.5
+    },
+    {
+     "id": "B2-closing",
+     "claim": "the coelom is losing its openings but has not lost them",
+     "measure": "coelom.escapes_at_flank",
+     "op": "between",
+     "value": [
+      20,
+      100
+     ]
+    }
+   ]
   },
   {
    "mode": "cross_section",
@@ -687,11 +801,11 @@
     },
     {
      "op": "SHOW_STRUCTURE",
-     "target": "ectoderm"
+     "target": "ectoderm_open"
     },
     {
      "op": "SHOW_STRUCTURE",
-     "target": "somatic"
+     "target": "somatic_open"
     },
     {
      "op": "SHOW_STRUCTURE",
@@ -751,7 +865,33 @@
      "view": "superior"
     }
    ],
-   "narration": "Look at the endoderm in the same three sections. It is rolled from a flat sheet into a tube, and its wide mouth into the yolk sac narrows to the vitelline duct. Behind it the splanchnic mesoderm is drawn out into the dorsal mesentery, which suspends the gut and carries its vessels. A ventral mesentery forms only in the upper abdomen — remember that and the lesser omentum and falciform ligament stop being arbitrary."
+   "narration": "Look at the endoderm in the same three sections. It is rolled from a flat sheet into a tube, and its wide mouth into the yolk sac narrows to the vitelline duct. Behind it the splanchnic mesoderm is drawn out into the dorsal mesentery, which suspends the gut and carries its vessels. A ventral mesentery forms only in the upper abdomen — remember that and the lesser omentum and falciform ligament stop being arbitrary.",
+   "claims": [
+    {
+     "id": "B3-tube",
+     "claim": "the endoderm has rolled from a flat sheet into a TUBE: its free edges have met",
+     "measure": "gut.gap_at_flank_frac",
+     "op": "atMost",
+     "value": 0.05
+    },
+    {
+     "id": "B3-duct",
+     "claim": "and its wide mouth into the yolk sac has narrowed to a vitelline DUCT",
+     "measure": "gut.duct_over_gut_d",
+     "op": "between",
+     "value": [
+      0.05,
+      0.25
+     ]
+    },
+    {
+     "id": "B3-meso",
+     "claim": "the splanchnic mesoderm behind it is drawn out into a thin dorsal mesentery",
+     "measure": "mesentery.wall_thickness",
+     "op": "atMost",
+     "value": 0.1
+    }
+   ]
   },
   {
    "mode": "location",
@@ -813,7 +953,37 @@
      "view": "anterior"
     }
    ],
-   "narration": "The finished embryo is an outer tube of body wall around an inner tube of gut, with a sealed cavity between them and a mesentery holding the gut up. One hole remains, the umbilical ring, and it is deliberately left open: from about week six the midgut herniates through it because the abdomen is too small, and returns by about week ten. Knowing that this hernia is normal is what makes the next beat make sense."
+   "narration": "The finished embryo is an outer tube of body wall around an inner tube of gut, with a sealed cavity between them and a mesentery holding the gut up. One hole remains, the umbilical ring, and it is deliberately left open: from about week six the midgut herniates through it because the abdomen is too small, and returns by about week ten. Knowing that this hernia is normal is what makes the next beat make sense.",
+   "claims": [
+    {
+     "id": "B4-sealed",
+     "claim": "the body cavity is SEALED: no transverse ray leaves the coelom away from the umbilicus",
+     "measure": "coelom.escapes_at_flank",
+     "op": "equals",
+     "value": 0
+    },
+    {
+     "id": "B4-wall",
+     "claim": "an outer tube of body wall: the edges have fused in the ventral midline",
+     "measure": "wall.gap_at_flank_frac",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "B4-ring",
+     "claim": "ONE hole remains, and there is a ring to see it as — a ring is a hole in something",
+     "measure": "ring.built",
+     "op": "equals",
+     "value": true
+    },
+    {
+     "id": "B4-bigenough",
+     "claim": "and it is big enough for the midgut to herniate through",
+     "measure": "wall.ring_over_gut_d",
+     "op": "atLeast",
+     "value": 0.35
+    }
+   ]
   },
   {
    "mode": "mechanism",
@@ -864,7 +1034,30 @@
      "view": "anterior"
     }
    ],
-   "narration": "Before any of the lesions, the normal event they are measured against. From about week six the midgut is growing faster than the abdomen can hold it, so it leaves through the umbilical ring on purpose and lies in the proximal cord while the abdomen catches up, returning by about week ten. Nothing here has gone wrong: this is a hernia with a deadline. Hold that picture, because the next two beats are what happens when the deadline is missed and when the wall beside it never closed at all."
+   "narration": "Before any of the lesions, the normal event they are measured against. From about week six the midgut is growing faster than the abdomen can hold it, so it leaves through the umbilical ring on purpose and lies in the proximal cord while the abdomen catches up, returning by about week ten. Nothing here has gone wrong: this is a hernia with a deadline. Hold that picture, because the next two beats are what happens when the deadline is missed and when the wall beside it never closed at all.",
+   "claims": [
+    {
+     "id": "B5-ring",
+     "claim": "the midgut leaves through the umbilical ring, so there is a ring at this instant",
+     "measure": "ring.built",
+     "op": "equals",
+     "value": true
+    },
+    {
+     "id": "B5-fits",
+     "claim": "and the ring is wide enough for the loop to pass",
+     "measure": "wall.ring_over_gut_d",
+     "op": "atLeast",
+     "value": 0.35
+    },
+    {
+     "id": "B5-closed",
+     "claim": "the rest of the wall has closed — this is a hole, not an unclosed front",
+     "measure": "wall.gap_at_flank_frac",
+     "op": "atMost",
+     "value": 0.02
+    }
+   ]
   },
   {
    "mode": "associated_organs",
@@ -885,7 +1078,7 @@
     },
     {
      "op": "SHOW_STRUCTURE",
-     "target": "somatic"
+     "target": "gastroschisis_somatic"
     },
     {
      "op": "SHOW_STRUCTURE",
@@ -904,12 +1097,14 @@
      "target": "gastroschisis_bowel"
     },
     {
-     "op": "COMPARE_STRUCTURES",
-     "targets": [
-      "omphalocele_sac",
-      "gastroschisis_bowel"
-     ],
-     "layout": "side-by-side"
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "omphalocele_sac",
+     "intensity": 0.5
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "gastroschisis_bowel",
+     "intensity": 0.5
     },
     {
      "op": "SHOW_RELATIONSHIP",
@@ -928,11 +1123,132 @@
      "view": "anterior"
     }
    ],
-   "narration": "Two babies with bowel on the outside, and one question separates them. Is there a membrane? Omphalocele is midline, through the umbilical ring, covered by amnion and peritoneum, with the cord inserting on the sac, and it comes with chromosomal and cardiac anomalies. Gastroschisis is a hole in the wall itself, usually to the right of a normal cord, with no covering at all, and is usually isolated. Membrane, midline, cord insertion — three checks, in that order."
+   "narration": "Two babies with bowel on the outside, and one question separates them. Is there a membrane? Omphalocele is midline, through the umbilical ring, covered by amnion and peritoneum, with the cord inserting on the sac, and it comes with chromosomal and cardiac anomalies. Gastroschisis is a hole in the wall itself, usually to the right of a normal cord, with no covering at all, and is usually isolated. Membrane, midline, cord insertion — three checks, in that order.",
+   "claims": [
+    {
+     "id": "B6-ring",
+     "claim": "omphalocele is through the umbilical RING, so the ring exists at this instant",
+     "measure": "ring.built",
+     "op": "equals",
+     "value": true
+    },
+    {
+     "id": "B6-right",
+     "claim": "gastroschisis is to the embryo’s RIGHT: the defect lies entirely at x < 0",
+     "measure": "gastro.defect_medial_x",
+     "op": "atMost",
+     "value": -0.05
+    },
+    {
+     "id": "B6-clear",
+     "claim": "...of a NORMAL cord — the defect is clear of the ring by a bridge of intact wall",
+     "measure": "gastro.clear_of_ring_frac",
+     "op": "atLeast",
+     "value": 0.35
+    },
+    {
+     "id": "B6-membrane",
+     "claim": "the MEMBRANE is the diagnostic feature: the omphalocele loop is drawn under the sac and nothing else in this beat is drawn in front of it — first hit along this beat's own camera, over everything the beat draws",
+     "measure": "sac.covers_omphalocele_seen",
+     "op": "atLeast",
+     "value": 0.95
+    },
+    {
+     "id": "B6-bare",
+     "claim": "...and the gastroschisis loop beside it is not — no covering at all; the membrane is the nearest surface over only a sliver of it, and that sliver is the silhouette overlap gaps[9] records",
+     "measure": "sac.covers_gastroschisis_seen",
+     "op": "atMost",
+     "value": 0.2
+    },
+    {
+     "id": "B6-covered",
+     "claim": "and it is covered, not merely drawn in front of: the bare loop lies wholly OUTSIDE the membrane",
+     "measure": "sac.bare_outside_frac",
+     "op": "atLeast",
+     "value": 0.1
+    }
+   ]
   },
   {
    "mode": "associated_organs",
    "beat": 7,
+   "title": "The gastroschisis defect itself, with the bowel set aside",
+   "narration": "Take the bowel out of the picture and look at the wall. The defect is a window straight through it — ectoderm and somatic mesoderm both absent over the same patch, to the embryo's right, with a bridge of intact wall between it and the umbilical ring. That bridge is why the cord still inserts normally in gastroschisis. In the previous view the eviscerated bowel covered most of this window, which is what it does on a newborn; the hole is the same hole.",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 1
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "gastroschisis_wall"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "gastroschisis_somatic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "umbilicalring"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "gastroschisis_cord"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "gastroschisis_wall",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "umbilicalring",
+     "to": "gastroschisis_wall",
+     "kind": "is separated from the defect by intact wall, which is why the cord inserts normally in"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "claims": [
+    {
+     "id": "B7-clear",
+     "claim": "a bridge of intact wall separates the defect from the umbilical ring",
+     "measure": "gastro.clear_of_ring_frac",
+     "op": "atLeast",
+     "value": 0.35
+    },
+    {
+     "id": "B7-ring",
+     "claim": "and the ring itself is there to be separated from",
+     "measure": "ring.built",
+     "op": "equals",
+     "value": true
+    },
+    {
+     "id": "B7-right",
+     "claim": "the window is on the embryo’s right",
+     "measure": "gastro.defect_medial_x",
+     "op": "atMost",
+     "value": -0.05
+    },
+    {
+     "id": "B7-cord",
+     "claim": "“that bridge is why the cord still inserts normally” — the cord is at the ring, not on the defect",
+     "measure": "cord.gastroschisis_standoff",
+     "op": "atMost",
+     "value": 0.15
+    }
+   ]
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 8,
    "title": "The rest of the ventral wall, and a duct that lingers",
    "ops": [
     {
@@ -949,7 +1265,7 @@
     },
     {
      "op": "SHOW_STRUCTURE",
-     "target": "somatic"
+     "target": "exstrophy_somatic"
     },
     {
      "op": "SHOW_STRUCTURE",
@@ -961,11 +1277,11 @@
     },
     {
      "op": "SHOW_STRUCTURE",
-     "target": "vitelline"
+     "target": "endoderm"
     },
     {
      "op": "SHOW_STRUCTURE",
-     "target": "yolksac"
+     "target": "vitelline"
     },
     {
      "op": "HIGHLIGHT_STRUCTURE",
@@ -994,7 +1310,280 @@
      "view": "anterior"
     }
    ],
-   "narration": "Map the failures by level. Above the umbilicus and the heart is exposed. At the umbilicus, omphalocele. Beside it, gastroschisis. Below it, bladder exstrophy with epispadias and a wide pubic symphysis, and in its severe form cloacal exstrophy. Then one loose end: the vitelline duct should disappear, and when it does not you get a Meckel diverticulum, or a fistula at the umbilicus, or a cyst, or a fibrous band that later twists the bowel. One fold, one plane, and most of the newborn abdominal wall surgery in the syllabus."
+   "narration": "Map the failures by level. Above the umbilicus and the heart is exposed. At the umbilicus, omphalocele. Beside it, gastroschisis. Below it, bladder exstrophy with epispadias and a wide pubic symphysis, and in its severe form cloacal exstrophy. Then one loose end: the vitelline duct should disappear, and when it does not you get a Meckel diverticulum, or a fistula at the umbilicus, or a cyst, or a fibrous band that later twists the bowel. One fold, one plane, and most of the newborn abdominal wall surgery in the syllabus.",
+   "claims": [
+    {
+     "id": "B8-two",
+     "claim": "bladder exstrophy is a SECOND opening below the umbilicus — two holes, not one slot",
+     "measure": "exstrophy.open_bands",
+     "op": "equals",
+     "value": 2
+    },
+    {
+     "id": "B8-bridge",
+     "claim": "...separated by intact wall. Without that bridge the picture is cloacal exstrophy, which the narration lists as the SEVERE form",
+     "measure": "exstrophy.bridge_frac",
+     "op": "atLeast",
+     "value": 0.35
+    },
+    {
+     "id": "B8-duct",
+     "claim": "the vitelline duct has narrowed to a duct, which is the thing that should then disappear",
+     "measure": "gut.duct_over_gut_d",
+     "op": "between",
+     "value": [
+      0.05,
+      0.25
+     ]
+    },
+    {
+     "id": "B8-field",
+     "claim": "what a student sees in the infra-umbilical window is the bladder plate — which is what bladder exstrophy IS, the posterior bladder wall lying open on the abdomen",
+     "measure": "exstrophy.field_plate_frac",
+     "op": "atLeast",
+     "value": 0.95
+    },
+    {
+     "id": "B8-nogut",
+     "claim": "...and there is NO BOWEL in that same open field. This structure's own text makes that the discriminator — “The more severe cloacal exstrophy adds bowel to the same open field” — so bowel visible through this window makes the frame teach the severe form the narration is contrasting it with",
+     "measure": "exstrophy.field_gut_frac",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "B8-plate-in",
+     "claim": "...and the plate is seen THROUGH the opening, not lying across the intact wall beside it",
+     "measure": "exstrophy.plate_seen_in_aperture",
+     "op": "atLeast",
+     "value": 0.9
+    }
+   ]
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 9,
+   "title": "The gastroschisis insertion, in profile",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 1
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "gastroschisis_wall"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "gastroschisis_cord"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "gastroschisis_cord",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "gastroschisis_cord",
+     "to": "gastroschisis_wall",
+     "kind": "inserts on the intact body wall at the ring, which is what \"a normal insertion\" means"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    }
+   ],
+   "narration": "Turn the embryo side-on, because the third check cannot be made from the front. Looked at head-on, a cord leaving the belly points straight at you: you see a disc, and the two insertions look identical. From the side you see the cord's length, and the question answers itself. This beat is gastroschisis on its own. The cord is still on the body wall, at the ring — a normal insertion — with the defect itself out of sight behind the trunk, to the embryo's right. Hold this picture: the next beat puts the other diagnosis in the same camera, one at a time and deliberately never in one frame.",
+   "claims": [
+    {
+     "id": "B9-visible",
+     "claim": "this camera keeps the cord’s whole length, which is why the check can be made here",
+     "measure": "cord.across_lateral",
+     "op": "atLeast",
+     "value": 0.9
+    },
+    {
+     "id": "B9-front-cannot",
+     "claim": "and the front cannot: from `anterior` the cord is end-on and keeps none of its length",
+     "measure": "cord.across_anterior",
+     "op": "atMost",
+     "value": 0.1
+    },
+    {
+     "id": "B9-at-ring",
+     "claim": "this cord inserts at the ring itself",
+     "measure": "cord.gastroschisis_standoff",
+     "op": "atMost",
+     "value": 0.15
+    },
+    {
+     "id": "B9-ring",
+     "claim": "and there is a ring for it to insert at, at this instant",
+     "measure": "ring.built",
+     "op": "equals",
+     "value": true
+    }
+   ]
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 10,
+   "title": "The omphalocele insertion, in the same profile",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 1
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ectoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "omphalocele_gut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "omphalocele_sac"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "omphalocele_cord"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "omphalocele_cord",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "omphalocele_sac",
+     "to": "omphalocele_cord",
+     "kind": "is the expanded base of, which is why the cord inserts on"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    }
+   ],
+   "narration": "The same camera, and now only omphalocele. This cord never touches the wall. It starts out on the membrane, with the herniated bowel between it and the wall, and inserts on the sac — because the sac IS the expanded base of the cord. That is omphalocele. Membrane, midline, cord insertion — and these two beats are what show you the third one. They are shown one at a time for a reason worth saying out loud: these are two different babies, and they share one set of coordinates in this model, so a frame holding both would draw the normal insertion inside the other one's membrane and teach you the opposite of the check.",
+   "claims": [
+    {
+     "id": "B10-visible",
+     "claim": "this camera keeps the whole length of the cord on the membrane too",
+     "measure": "cord.across_lateral_sac",
+     "op": "atLeast",
+     "value": 0.9
+    },
+    {
+     "id": "B10-on-sac",
+     "claim": "and it inserts on the sac, a sac radius clear of the ring",
+     "measure": "cord.omphalocele_standoff",
+     "op": "atLeast",
+     "value": 1
+    },
+    {
+     "id": "B10-ring",
+     "claim": "the ring still exists at this instant, which is what the other insertion is measured against",
+     "measure": "ring.built",
+     "op": "equals",
+     "value": true
+    }
+   ]
+  },
+  {
+   "mode": "location",
+   "beat": 11,
+   "title": "The dorsal mesentery, in profile",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 1
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ectoderm_open"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "somatic_open"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "splanchnic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "endoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "mesentery"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "mesentery",
+     "intensity": 0.95
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "mesentery",
+     "to": "somatic_open",
+     "kind": "is rooted on the dorsal body wall at"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "mesentery",
+     "to": "splanchnic",
+     "kind": "runs down to, and suspends — the splanchnic layer being the gut's own wall"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    }
+   ],
+   "narration": "The same side-on camera as the last two beats, and for the same reason: some things cannot be seen from the front, and a sheet standing in the median plane is the clearest case of it. Both of the beats that NAME the dorsal mesentery look at it the wrong way — from above you see only its cut edge, and from in front the gut tube is between it and you. So here it is, face-on and on its own. As the gut tube pulls away from the back wall, the splanchnic mesoderm behind it is drawn out into a double sheet — the dorsal mesentery, which suspends the gut and carries its vessels and nerves. Follow it from the body wall behind to the gut in front: that is the whole of it, and it is thin, which is exactly why it reads as nothing in every other camera this scene owns. A ventral mesentery exists only in the upper abdomen, from the septum transversum, and that is why the lesser omentum and falciform ligament are there and nowhere lower. One thing to read correctly here: the gut tube is not drawn as itself. The splanchnic layer wraps it, so the surface the mesentery runs down to IS the gut's own wall — this beat is about the sheet and its two attachments, not about the gut.",
+   "claims": [
+    {
+     "id": "B11-share",
+     "claim": "the dorsal mesentery is a sheet a student can actually SEE here: of everything this beat draws, it is this share of the frame",
+     "measure": "mesentery.seen_share",
+     "op": "atLeast",
+     "value": 0.08
+    },
+    {
+     "id": "B11-unhidden",
+     "claim": "and nothing is drawn in front of it — which was already true in beat 3, where it was still a sliver, so this is the weaker half of the pair and is kept as such",
+     "measure": "mesentery.seen_visible",
+     "op": "atLeast",
+     "value": 0.95
+    },
+    {
+     "id": "B11-thin",
+     "claim": "it is a THIN double sheet at this instant, and it is this claim — true of the sheet, blind to the camera — that beats 3 and 4 were carrying alone",
+     "measure": "mesentery.wall_thickness",
+     "op": "atMost",
+     "value": 0.1
+    },
+    {
+     "id": "B11-taper",
+     "claim": "and it tapers where it meets what it suspends, rather than meeting the gut at full thickness",
+     "measure": "mesentery.taper",
+     "op": "atMost",
+     "value": 0.25
+    }
+   ]
   }
  ],
  "provenance": {
@@ -1002,7 +1591,19 @@
   "authored_at": "2026-08-28",
   "reauthored_at": "2026-09-11",
   "reauthored_by": "model3d BUILD task",
-  "reauthor_note": "Re-authored from the sequence version onto a procedural model built in the same run. Every line of narration in beats 1-6 is carried across VERBATIM; beat 5 here is a NEW beat (the normal physiological herniation) inserted before the two lesions, so the old beats 5 and 6 are now 6 and 7 with their text untouched. The old structures[] were teaching beats with no geometry; they are now the parts the model builds, and each old beat's narration sits on the structure it was about."
+  "reauthor_note": "Re-authored from the sequence version onto a procedural model built in the same run. Every line of narration in beats 1-6 is carried across VERBATIM; beat 5 here is a NEW beat (the normal physiological herniation) inserted before the two lesions, so the old beats 5 and 6 are now 6 and 7 with their text untouched. The old structures[] were teaching beats with no geometry; they are now the parts the model builds, and each old beat's narration sits on the structure it was about.",
+  "corrected_at": "2026-10-01T04:20:00Z",
+  "corrected_by": "the model3d REVIEW task, round 5 (did not build this item)",
+  "correction_note": "Declared opacity on coelom (0.20), amnion (0.16) and omphalocele_sac (0.30), copying the values models3d/lateral-folding.js already sets in its own matOver at lines 1239, 1385 and 1477. viz3d.js's procedural adapter reads s.opacity and otherwise defaults to 1, discarding the model's matOver entirely, so in the REAL PLAYER all three rendered opaque while every render-harness frame and every acceptance measure - which build the model group directly - showed them translucent. Measured in the player before this change: beat 1 showed 3 of 10 structures with 7 ghosted, the four germ layers it exists to teach totalling ~15% of the subject against 63% for the opaque amnion and yolk sac; beat 4 drew the dorsal mesentery at 0.000% of subject while narrating that it holds the gut up; beat 6, the discriminator beat, showed the covering sac as an opaque ball hiding the bowel it must be seen covering; beat 10 drew omphalocele_gut at 0.001%. This is the engine question Frank RULED on 2026-09-29 - 'model owns colour/opacity where the scene is silent: yes' - which is not yet implemented in viz3d.js; until it is, the scene must say what the model means.",
+  "review_corrected_at": "2026-10-01T12:49:44Z",
+  "review_corrected_by": "the model3d REVIEW task, round 8 (12:36Z slot; did not build this item; the device shell worked on its first call)",
+  "review_correction_note": "NOTHING GEOMETRIC OR COMPOSITIONAL WAS TOUCHED — no structure, claim, camera, opacity, colour, waiver or line of narration was changed, and models3d/lateral-folding.js was not modified. Two gaps[] entries were ADDED: the round-8 open finding (beat 6’s covering sac has no silhouette; the membrane is a dE2000 8.46 tint and B6-membrane measures occlusion order, not legibility), and the beat-11 colour-separation measurement the build run recorded as the one it owed and did not make (splanchnic vs mesentery as rendered, dE2000 6.12 against 5.97 as authored). The item is ESCALATED and neither task touches it again until a human resolves it; the full account is in ESCALATIONS.md.",
+  "build_reworked_at": "2026-10-01T05:52:00Z",
+  "build_reworked_by": "the model3d BUILD task, 2026-10-01 05:06Z slot (round-6 rework; did not review it)",
+  "build_rework_note": "Closed both findings round 5 left open, and changed nothing else. Beat 6: COMPARE_STRUCTURES replaced by the two equivalent HIGHLIGHT_STRUCTUREs so viz3d's per-view camera is fitted to everything the beat draws rather than to state.only alone — the clip was top-and-bottom on gastroschisis_wall, not the right-hand edge, and the stated cause (per-beat framing / the top-level superior camera) was wrong; see gaps. Beat 1: the amnion and the yolk sac are no longer shown, which takes the two named germ layers from 12.3% to 33.3% of the subject. No structure, claim, camera, opacity or narration was otherwise touched, and models3d/lateral-folding.js was NOT modified by this run. Re-proved from the FINAL geometry in one pass, which is what round 5's process finding asked for: walk-scene-in-player 10 beats 0 clipped, measure-scene-visibility 10/10 PASS, check-beat-claims 36/36 with 0 beats unpinned, render harness acceptance 22/22 allPass with 25/25 negative cases rejected and 22/22 perturbations moving, normals/winding/lumen/containment/shown-list all pass, console clean on both the model and the adapter page, and prove-corpus-axes PASS against the six scanned right/left pairs it tests (the provider is named in gaps, which the purity check exempts, and not here, which it does not).",
+  "rebuilt_at": "2026-10-01T11:26:11Z",
+  "rebuilt_by": "the model3d BUILD task, 2026-10-01 11:05Z slot (round-7 rework; did not review it)",
+  "rebuild_note": "ROUND-7 REWORK, one finding taken. ADDED BEAT 11, 'The dorsal mesentery, in profile' — `lateral`, t=1, ectoderm_open + somatic_open + splanchnic + endoderm + mesentery, HIGHLIGHT on the mesentery, mode `location`. This is the review's round-7 open finding: the dorsal mesentery is named by beats 3 and 4 and drew 0.676% and 0.000% of subject, and 'dorsal versus ventral mesentery' is examinable. Built on the precedent the review named, beats 9 and 10, which exist because the umbilical cord is end-on from `anterior` (gaps[20]; RENDER-STANDARD 3.y, 'where two claims want incompatible cameras, that is two beats'). NARRATION: beats 3 and 4 keep every word they had — nothing was moved or cut — and beat 11's narration carries the dorsal/ventral mesentery teaching that the `mesentery` structure entry already held, with its two middle sentences verbatim from it. AND THE CLAIM THE REVIEW ASKED FOR: B3-meso reads mesentery.wall_thickness, a true fact about the built sheet that reads 0.085 whether the sheet is visible or not, which is the same class as B6-membrane in round 4. The model now carries shareSeen() and two new measures, mesentery.seen_share and mesentery.seen_visible, computed by first hit along the beat's own camera axis over the beat's own shown list — and BOTH are floored, because seen_visible reads 1.0000 in beat 3 as well (nothing hides the sheet there; it is edge-on), so visibility alone would have certified the defect. seen_share is the number that separates them: 12.573% in beat 11 against 0.278% in beat 3's camera and 0.000% in beat 4's. WHERE BEAT 11 SITS: appended as beat 11 rather than inserted next to the mesentery narration at beat 5. Appending keeps every existing beat number, claim id, visibility_waiver 'view' field and the model's SEEN_BEATS/APERTURE_BEATS keys valid; inserting would have renumbered six beats and about twenty-five claim ids for a pedagogical gain, and the reviewer should overrule this if the jump from pathology back to normal anatomy reads worse than the renumbering costs."
  },
  "deferred_beats": [],
  "gaps": [
@@ -1012,6 +1613,10 @@
   "NO CROSS_SECTION OP. The old beats cut the model with CROSS_SECTION on y. The geometry now IS a transverse section - a short block of trunk - so cutting it again would remove trunk rather than reveal a plane. Beat 4 opens the left half of the wall instead, through the model's own cutaway flag, which is the move the narration actually asks for.",
   "THE COELOM IS DRAWN AS A RULED FILL between the somatic mesoderm's inner face and the splanchnic mesoderm's outer face. Where the cavity is genuinely continuous across the ventral midline below the gut, the fill has a rim in the median plane. That rim is a drawing convention and not a membrane, which is why the layer is translucent; a student should read it as \"the cavity is here\", not as a structure with an edge.",
   "DECLARED APPROXIMATIONS IN THE MODEL, in descending size. (1) The amnion is a prescribed enclosing loop, not solved geometry; its continuity with the ectoderm at the umbilical ring is drawn. (2) The yolk sac balloon is a prescribed ellipse - but its NECK is not: the neck width is the gut sheet's own solved free-edge gap, so the narrowing to a vitelline duct is measured. (3) The dorsal mesentery's thinning from a block of mesoderm to a double leaf is a prescribed schedule; its taper to nothing at the gut is asserted and measured. (4) The disc is drawn thicker relative to its width than a real trilaminar disc, so that four layers and a cavity are legible at once.",
+  "THE SOMITES DO NOT GROW, and this is the largest thing in this scene asserted in words and not in geometry. Beat 2 narrates \"Growing somites push the edges of the disc down and in\" and HIGHLIGHTs the somite, but the somites are drawn at constant calibre at every t - their x extent is identical at t = 0, 0.5 and 1 - and the fold is driven by the arc-length solve, not by them. The model records this in STATIC_PARTS and calls it the largest word-not-geometry gap; it belongs in this list, at the TOP of it, and was missing from the \"descending size\" entry above until the review run of 2026-09-30 added it. A student should read beat 2's somite as a label for where the push comes from, not as a structure they are watching grow.",
+  "A CORD IS NOW BUILT, AND IT IS A STUB. Until the build run of 2026-09-30 no geometry corresponded to the cord at all, although the scene names it 21 times and beat 6 makes cord insertion one of its three checks; the student was told to make three checks from a picture that supported two. Beats 6 and 7 now draw one, in the two variants that compare: in omphalocele it inserts ON THE SAC, in gastroschisis at the RING, and claims B6-cord-sac, B6-cord-normal and B7-cord measure which. WHAT IS STILL MISSING, said plainly: it is a STUB about three of its own radii long, not a cord - there is no spiralled length, no vessels, no Wharton's jelly and no placental end, none of which this scene teaches. AND NO CORD IS DRAWN IN BEAT 5, the normal physiological herniation, deliberately: in life that hernia lies INSIDE the proximal cord, so an honest cord there is a sleeve around the loop rather than a stub beside it, and a stub at the ring would pass through the bowel the beat is about. Beat 5's narration says the midgut 'lies in the proximal cord' and the picture does not show that; it shows the loop leaving through the ring.",
+  "THE SIDE OF THE GASTROSCHISIS IS NOW WITNESSED, BY SCAN DATA RATHER THAN BY A COMMENT. 'Gastroschisis is to the embryo's RIGHT' is the most examinable fact in beats 6 and 7. Review round 2 found it resting on nothing: the model declared -x = RIGHT in a comment, acceptance row I asserted the defect lay at x < 0 - the same statement, not a check on it - and measured voxel-wise every structure this scene draws is mirror-symmetric in x apart from the lesions, so there was no left/right landmark in the model to test the convention against. Flipping the sign left all 15 rows passing and taught LEFT-sided gastroschisis. The build run of 2026-09-30 took RENDER-STANDARD's route (b) - a corpus-level test - and made it stronger than the rule asks: viz-training/tools/prove-corpus-axes.mjs measures the handedness off SIX BodyParts3D right/left mesh pairs, from six regions, read through the same ids the bodyparts3d adapter resolves, and checks every procedural model's declared axes against it. It is non-circular because viz3d.js's adapter applies NO transform to a loaded STL, so the corpus frame IS the scan frame and 'which sign of x is the body's right' is a question about the files: all six answer -x, by 0.58 to 2.98 of the pair's own mean x extent. render-lateral-folding.mjs runs it and fails the build if the declaration and the meshes disagree. WHAT REMAINS: the model still carries no chiral content of its own, so the proof is that the DECLARATION is right, not that this model's geometry was built in the frame it declares. Those are the same thing only so long as nothing transforms the group between build() and the screen - and the REVIEW RUN OF 2026-09-30 FOUND THAT SENTENCE, AS ORIGINALLY WRITTEN, TO BE FALSE. viz3d.js does transform the holder: `holder.rotation.y = (scene.camera && scene.camera.initialYaw) || 0` at lines 1574 and 2736, and startSpin() then adds `holder.rotation.y += dt * 0.55` for the opening three-second glance. A yaw is a rotation and not a reflection, so handedness in space is preserved - but it decides WHICH SIDE OF THE SCREEN the embryo's right appears on, which is the whole of what beats 6 and 7 ask a student to read. This scene is unaffected TODAY only because its camera is {\"framing\":\"superior\"} and sets no initialYaw, and NOTHING ASSERTS THAT. Add `\"initialYaw\": 3.14159` in a later edit and the right-sided gastroschisis is drawn on the screen's right while all 21 acceptance rows, all 38 beat claims and prove-corpus-axes stay green - round 2's hole exactly, arriving through the PLAYER instead of through the model. The missing check is one line: a scene whose model declares `axes` and carries no chiral landmark must leave camera.initialYaw unset, or declare it here. Reported as an open finding rather than added, because check-beat-claims.mjs and validate-scenes.mjs are shared with nine other models.",
+  "THE TWO LOOPS IN BEAT 6 OVERLAP ON SCREEN BY 14.9%, AND THAT IS MEASURED RATHER THAN NOTICED. Beat 6 draws the omphalocele under its sac and the gastroschisis loop beside it, from `anterior`, and COMPARE_STRUCTURES ghosts the rest of the model without moving anything - its 'side-by-side' layout is not implemented as a translation in viz3d.js. So the sac's projected disc (x -0.72 to 0.83) and the bare loop (x -1.65 to -0.47) share a quarter of a unit of screen, and 14.9% of the bare loop's projected area is drawn across a membrane at 0.30 opacity. In THREE dimensions they are well apart - the nearest point of the bare loop is 1.040 from the sac's centre against a radius of 0.774 - so this is silhouettes overlapping and not solids, and claim B6-covered measures exactly that. Claim B6-bare pins the screen overlap at 0.20, a little above its measured 0.149, so it cannot grow unnoticed. A student comparing the two loops sees it, which is why it is here and not only in the model's comments.",
   "WHAT IS SOLVED: the curvature amplitude of both sheets, at every t and every cranio-caudal station, by bisection against conserved arc length - the sheets curl, they do not stretch - plus the hinge weight that makes the two edges meet TANGENTIALLY rather than at a crease. That second constant comes out zero, which is a result and not a setting: a sheet of fixed arc length closing on the midline tangentially is a circle. models3d/lateral-folding.js carries the derivation and acceptance() returns all of it measured.",
   "Beat 5 is NEW. The old scene taught the normal physiological herniation inside beat 4's narration and then moved straight to omphalocele. With a model that can show bowel outside the ring, the normal event deserves the beat it is the control for. No existing narration was altered to make room; the old beats 5 and 6 are now 6 and 7, word for word.",
   "'Body cavity (coelom)' is NOT claimed in covers[]. The split of lateral plate mesoderm and the closing of the coelom are named here because lateral folding is what closes it, but the partitioning of the coelom into pericardial, pleural and peritoneal cavities, the pleuropericardial and pleuroperitoneal membranes and the mesenteries in detail are that entry's work and are authored separately.",
@@ -1021,6 +1626,53 @@
   "Week numbers are the standard teaching approximations - folding through week 4, physiological herniation from about week 6 returning by about week 10. Texts differ by a few days and the narration gives them as approximations.",
   "The Meckel rule of twos is given in its conventional teaching form. It is a mnemonic rather than an epidemiological statement, and the narration presents it as such.",
   "Ectopia cordis and the pentalogy of Cantrell are named in beat 7's narration and in exstrophy_wall's terms, but no supra-umbilical defect is BUILT. The same residual-gap field would produce one in a line; it is left out because nothing in covers[] asks for it and an unexamined lesion on screen is a distraction.",
-  "MIXING PROVIDERS IS STILL BLOCKED. This model is in its own units while BodyParts3D meshes are anatomical millimetres, so this scene must not gain a mesh-backed structure until something reconciles scale. That is its own queue item, not a defect here."
+  "MIXING PROVIDERS IS STILL BLOCKED. This model is in its own units while BodyParts3D meshes are anatomical millimetres, so this scene must not gain a mesh-backed structure until something reconciles scale. That is its own queue item, not a defect here.",
+  "THE CORD IS END-ON FROM `anterior`, AND THAT IS WHY THERE IS A BEAT 9. (It is no longer drawn in beat 6 at all — see the last gap in this list, round 5.) Found by looking at the render on 2026-09-30, after the cord had been built and all four of its new acceptance rows passed. A cord leaves the umbilicus VENTRALLY, which is +z, and viz3d's `anterior` view direction is (0,0,1) - the same axis. Measured: from `anterior` the cord keeps 0.0000 of its own length on the screen and draws its dome cap as a flesh-coloured disc, so beats 6 and 7 PIN the insertion numerically (claims B6-cord-sac, B6-cord-normal, B7-cord) but do not SHOW it, and the two variants' cords look identical there. From `lateral` it keeps 1.0000. Beats 6 and 7 keep `anterior` because their other claims are about which SIDE the defect is on, which a lateral camera cannot answer - RENDER-STANDARD 3.y, 'where two claims want incompatible cameras, that is two beats' - so a profile beat was added to show the insertions (beat 9 originally showed BOTH in one frame; since 2026-10-01 it is beats 9 and 10, one variant each — see the gap below), and acceptance row O asserts BOTH halves: that `lateral` keeps the length and that `anterior` does not. If a later change makes the cord legible from the front, row O fails, which is correct: the scene would then be carrying a beat it no longer needs. Note also what beat 9 does NOT show - the gastroschisis window itself is on the embryo's right, i.e. the far side from a `lateral` camera, and is hidden behind the trunk there. Beats 6 and 7 are the beats for that. BEAT 9 DRAWS NEITHER THE RING NOR THE INNER LAYER OF THE WALL, and that is a choice rather than an oversight: the visibility walk measured both at 0% from `lateral` on either measure - a ring is a hole seen edge-on from the side, and the somatic layer is inside the ectoderm - so they were taken out of the beat rather than waived. Claim B9-ring still asserts the ring EXISTS at this instant, because the narration leans on where the lower cord leaves the wall; it does not claim the ring is visible here. Beats 4 to 8 are the beats that show it, at 0.37% to 0.86%. AND THE TWO CORDS ARE COLLINEAR, because both leave the umbilicus ventrally, which is where a cord leaves from - so no camera separates them and the first version of this beat's narration called them 'upper' and 'lower', which the render showed to be wrong. What separates them is the GAP: 1.197 cord diameters of clear space on the paths, 0.772 measured on the built meshes - the difference is the two dome caps, which reach past the centreline's last point at each end - with the herniated bowel and the membrane's near wall in it. Asserted by claim B9-two-cords and acceptance row O-two, floored at 0.5 so the smaller of the two figures carries it. Bring the sac back towards the wall and the picture becomes one rod passing through a bubble, and that row fails. SUPERSEDED IN PART, 2026-10-01: the two-cords-in-one-frame reading of this gap is gone. Beat 9 no longer draws both variants, so the GAP between the cords no longer certifies any picture a student sees. Acceptance rows O-two and claim-measure cord.gap_between_diam are KEPT because they remain true, perturbation-tested statements about the model's coordinates, but they are no longer evidence about a frame, and B9-two-cords has been removed from the scene because the frame it described does not exist.",
+  "THE VITELLINE DUCT IS TWO WALLS, NOT A TUBE, and this was an UNDECLARED approximation until the review run of 2026-09-30 added it here. The duct is built as the two lateral walls of the gut's own free edge, at x = +/- gx, swept from the gut edge to the yolk sac's neck; there is no cranial or caudal wall, because the duct is a kept range of the SAME sheet the gut and the yolk sac are cut from, and a sheet has no fourth side. In a transverse section that is exactly right - a tube in section IS two walls - which is why beat 3 reads correctly. From `anterior` it does not: beats 4, 5 and 8 look straight down the duct's own axis, where a tube would show a lumen and this shows TWO SEPARATE ORANGE BARS with the lumen's width between them. A student pointed at those bars in beat 4 is being pointed at a slit. Nothing examinable rests on the duct's cross-section - what beats 3 and 8 teach is that the wide connection NARROWS, which is solved geometry (claim B3-duct / B8-duct, gut.duct_over_gut_d) and is not affected - so this is declared rather than fixed. It belongs in the approximations list above, below the amnion and the yolk-sac balloon and above the mesentery's thinning schedule.",
+  "THE GASTROSCHISIS CORD STUB LIES WHOLLY INSIDE THE OMPHALOCELE SAC IN SHARED COORDINATES, AND THE SCENE NO LONGER DRAWS THE TWO TOGETHER — raised by the review run of 2026-09-30 round 3, fixed by the build run of 2026-10-01. THE FACT IS UNCHANGED AND IS NOT FIXABLE IN THE GEOMETRY, which the fix run measured before choosing: the ring is at z = 1.792 and its outward direction is +z; the sac must cover the herniated coil, which lies outward of the ring, so it spans z 1.454..3.001 and the omphalocele cord's base sits on its surface at z = 2.941; the gastroschisis cord is rooted AT the ring and leaves along THE SAME outward direction, spanning z 1.732..2.424 on the same axis. Any sac that covers the bowel swallows a 0.691-long stub rooted at the ring, and rooting the sac at the ring makes it worse, not better, because it moves the membrane outward over MORE of the cord. Measured now by claim-measure cord.gastroschisis_inside_sac_frac = 1.0000 (fraction of the stub's LENGTH inside sacSphere; the omphalocele cord reads 0.0875 in its own sac, which is the CORD_SINK insertion and is correct). So this is a COMPOSITIONAL constraint, not a geometric defect: the two variants are two different babies sharing one coordinate frame, and no beat may draw a structure of one INSIDE a structure of the other. The review run of 2026-10-01 found this sentence, as first written (\"no beat may draw structures of both\"), to be FALSE OF THIS SCENE and overbroad as a rule: beat 6 draws gastroschisis_wall, gastroschisis_somatic and gastroschisis_bowel together with omphalocele_gut, omphalocele_sac and omphalocele_cord, and it is RIGHT to — it is the comparison beat, its narration opens 'Two babies with bowel on the outside', and COMPARE_STRUCTURES is the op for exactly that. What is forbidden is CONTAINMENT, which is what the cross-variant check below actually tests and all that the cord defect ever was. Beat 10's narration says the stricter thing too ('a frame holding both would draw the normal insertion inside the other one's membrane') and is true as written only of the CORDS, which are the structures that share the ring's outward axis; it is not a general ban and beat 6 is not an exception to it. Beat 6 no longer shows gastroschisis_cord (claim B6-cord-normal removed with it; the insertion is pinned in the profile beats instead), and the old beat 9 is split into beat 9 (gastroschisis alone) and beat 10 (omphalocele alone), each in `lateral`. ENFORCED, not just asserted: render-lateral-folding.mjs now runs a beat-aware cross-variant containment check over every beat in the scene — for each beat it takes the structures that beat SHOWS, groups them by variant, and where two variants are present requires zero containment between them. That check fails on the pre-fix scene and passes on this one, which is the property B9-two-cords lacked: a gap measured ALONG an axis is not a test of containment, and 38/38 beat claims, 21/21 acceptance rows and 9/9 visibility beats all passed with a normally-inserted cord drawn inside a membrane.",
+  "BEAT 9 DRAWS THE WALL AND THE CORD AND NOT THE BOWEL, and that was found by the visibility walk rather than decided. The build run of 2026-10-01 first wrote beat 9 with gastroschisis_bowel shown; measure-scene-visibility put it at 0.01% of the frame and failed the beat. The reason is the one gaps[20] already gives for this camera: the gastroschisis window is on the embryo's RIGHT, which is the far side from a `lateral` camera, so the bowel coming through it is behind the trunk. The beat's subject is the cord's INSERTION, not the defect - its narration already says the defect is 'out of sight behind the trunk, to the embryo's right' - so the structure was removed rather than waived, and the picture now matches the sentence. Beats 6 and 7 are the beats that show the bowel, at 3.00% and (with the bowel set aside) the window itself.",
+  "B6-membrane WAS CERTIFYING A PICTURE IT COULD NOT SEE, AND THE CORD WAS THE THING IN FRONT OF IT — raised by the review run of 2026-10-01 round 4, fixed by the build run of 2026-10-01 03:05Z. The claim read sac.covers_omphalocele_frac >= 0.95 and reported 1.0000. That measure projects exactly TWO things on to the screen plane: the herniated loop's own path dilated by its tube radius, and the sac's centre and radius. Every other structure beat 6 drew was outside its arithmetic, so it would have read 1.0000 with the loop entirely hidden. MEASURED, on the built triangles, in beat 6's own `anterior` camera, by depth-buffering every structure the beat drew: the omphalocele CORD was the structure nearest the viewer (max depth 3.816, against the sac's 3.001 and the loop's 2.616) and the first surface over 32.76% of the loop's footprint. So a third of what the claim called 'drawn under the sac' was drawn under an opaque flesh-coloured rod, in the beat whose entire question is 'is there a membrane?'. THE FIX IS IN TWO PARTS. (1) The measure now sees the beat: new claim-measures sac.covers_omphalocele_seen and sac.covers_gastroschisis_seen, and new acceptance row M-seen, compute first hit along the beat's camera axis over the beat's whole shown list, on the REAL TRIANGLES rather than on proxies — a proxy version was written first and discarded, because a sphere-cloud stand-in for the sheets would have occluded through the very gastroschisis window the beat exists to show. A shown key that yields no geometry FAILS the row rather than being skipped, because the fault being fixed was a measure that could not see something. (2) The composition was then decided on the number, not on taste: omphalocele_cord is no longer SHOWN in beat 6, which takes the measure from 0.6728 to 1.0000 exactly, with nothing in front. Dropping it costs no claim — B6-cord-sac measured cord.omphalocele_standoff >= 1, which is the identical measure and floor to B10-on-sac in the beat that can actually show it, and acceptance row O already asserts that `anterior` keeps 0.0000 of the cord's length, so all it contributed to this beat was the cream disc gaps[20] describes. Moving the cord clear instead was rejected on the geometry: a cord leaves the umbilicus ventrally, which IS the anterior camera's axis, and perturbation lever O exists precisely to break the model if it ever leaves any other way. The bare loop's figure drops from the silhouette 0.149 to a depth-aware 0.1383, so B6-bare's floor of 0.20 keeps its headroom. The silhouette measures M and sac.covers_*_frac are KEPT in acceptance: M says the silhouettes nest, M-seen says nothing is in the way, and both are true statements about different things.",
+  "BEAT 6 WAS CLIPPED, AND THE CAUSE WAS NOT THE ONE THE FINDING NAMED — raised by the review run of 2026-10-01 round 5, diagnosed and fixed by the build run of 2026-10-01 05:06Z. The finding read that \"the scene cannot express per-beat framing: all ten views carry camera:null and the only framing is the top-level camera {framing:'superior'}, while beat 6 rotates to 'anterior'\", and that beat 6 \"runs off the right-hand edge\". MEASURED in the live player instead of reasoned about: the camera was correctly ANTERIOR (position 2.82 in +z from its target, which is what ROTATE_TO_VIEW does — the top-level framing is used once at mount and never again), and the clip was at the TOP AND BOTTOM, not the right edge. Projected to NDC at that beat's own camera, gastroschisis_wall spanned y -1.303..+1.257 and gastroschisis_somatic -1.250..+1.206, both outside ±1; every other structure was inside, and the union of omphalocele_sac and gastroschisis_bowel came to exactly ±0.95, which is 1/FRAME_PAD. THE REAL MECHANISM IS THAT viz3d DISAGREES WITH ITSELF ABOUT WHAT 'SUBJECT' MEANS. paint() (viz3d.js ~line 2402/2418) treats isSel || state.hi as subject and draws it at full authored opacity, and SHOW_RELATIONSHIP (~line 1918) sets state.hi on BOTH its endpoints. subjectBox() (~line 2129), which is what the per-view camera is fitted to, reads state.only ALONE — and only COMPARE_STRUCTURES and ISOLATE_REGION write state.only. So beat 6's two SHOW_RELATIONSHIPs made gastroschisis_wall solid without putting it in the box the camera was fitted to, and the whole trunk wall was framed out of a frame fitted to the two lesions. THE FIX, in the scene and not in the engine: beat 6's COMPARE_STRUCTURES is replaced by the two HIGHLIGHT_STRUCTUREs it is equivalent to (COMPARE sets state.hi = 0.5 on its targets; HIGHLIGHT sets state.hi = intensity, here 0.5), which leaves state.only null so subjectBox() falls back to everything visible and the frame contains everything the beat draws. Nothing was shown or hidden by this change, no claim or camera moved, and the model's SEEN_BEATS cross-check still reports the coverage measure is computed over exactly what the beat draws. MEASURED AFTER: 0 clipped beats, beat 6 SUBJECT 6 of 6 with 0 ghosted, and gastroschisis_somatic — which the beat showed but which drew 0 pixels while it was being ghosted to 0.10 behind the wall — now draws 1.352% of subject. COST, stated rather than hidden: the lesion pair is smaller on screen than it was in the clipped frame, because the frame now has to hold the whole ventral wall. That is the right trade for this beat, whose narration makes MIDLINE one of its three checks and so needs the wall the defects sit on. ENGINE FINDING LEFT OPEN, deliberately not fixed here: subjectBox() should frame what paint() draws solid, which is one condition. It is not changed because viz3d sits under ~146 scenes and every COMPARE_STRUCTURES or ISOLATE_REGION view that also carries a HIGHLIGHT or a SHOW_RELATIONSHIP would reframe at once — that is a ruling, not a patch, and it is the same class as the ghosting question escalated on the coccyx item the same morning.",
+  "BEAT 1 NO LONGER DRAWS THE AMNION OR THE YOLK SAC — raised by the review run of 2026-10-01 round 5 (\"beat 1 is dominated by its context structures\"), fixed by the build run of 2026-10-01 05:06Z. MEASURED IN THE PLAYER BEFORE: the beat lit 75.7% of the frame, and of that the yolk sac took 32.1% and the amnion 31.1% — 63% between two structures the narration never names — while the four germ layers the beat exists to teach (ectoderm, somatic, splanchnic, endoderm) totalled 20.6%. Both were already ghosted to 0.10 by COMPARE_STRUCTURES; ghosting a sac that encloses the whole disc does not stop it filling the frame. AFTER: the beat lits 28.0%, somatic goes 6.8% -> 18.4% of subject and splanchnic 5.5% -> 14.9% — the two layers the narration says to get right — and the coelom they split around, which the beat HIGHLIGHTs at 0.9, is 56.7%. The camera did not move: it is fitted to COMPARE_STRUCTURES' targets, which are still somatic and splanchnic, so the layers are the same size on screen and what went is the clutter over them. NOTHING BECOMES UNDRAWN: the amnion is still drawn in beat 2, which is the same section at t = 0.5 from the same `superior` camera and where the narration does name it (\"the expanding amnion draws them round\"), and the yolk sac in beats 2 and 3. WHAT IS LOST, stated: beat 1's claim B1-open is worded \"the coelom is still wide open to the EXTRAEMBRYONIC cavity on both sides\", and with the amnion and the yolk sac gone the student sees the coelom open to empty space rather than to a drawn cavity. The claim itself is unaffected — it measures coelom.escapes_at_flank on the model, 120 degrees and up, not what is drawn — and beat 2 is one click away with both membranes in it. The alternative was to keep them and leave the two named layers at a fifth of the picture, which is the defect.",
+  "THE BLADDER PLATE'S ONE PRESCRIBED NUMBER, and the contact it implies. Rebuilt 2026-10-01 for review round 6: the plate is no longer an ellipsoid with a chosen half-height, half-width and depth. Its half-width at every cranio-caudal station is the wall's OWN ventral half-gap there, and its centre z is that station's own mean free-edge z, so it fills the hole and follows the wall's surface at any t and under any change to YW_EXST, R_EXST, SOFT_EXST or BRIDGE_F. The one number left prescribed is PLATE_LAP, how far it reaches under the wall's lip, and that is taken from the ectoderm's own half-thickness rather than chosen. CONSEQUENCE, declared by name per RENDER-STANDARD 3.z: over that overlap, and at the two closed stations the plate is rooted in, the plate shares space with the ectoderm and somatic sheets. That contact is CONSTRUCTION and it is also the anatomy — the exstrophic posterior bladder wall is continuous with the abdominal wall at the margin of the defect, not a disc floating in a hole — so it is excluded by name and not by a tolerance. It is the reason acceptance row K reads 0.946 rather than 1.000: 5.4% of the plate's visible footprint is the rim of that rooting, where the lip does not quite cover it.",
+  "THE COVERING SAC IN BEAT 6 HAS NO SILHOUETTE: THE MEMBRANE IS A TINT, AND THE MEASURE THAT CERTIFIES IT CANNOT TELL A MEMBRANE FROM A TINT. Raised by the review run of 2026-10-01 round 8 (did not build this item), measured in the player frames the build run committed at 12:25Z, and NOT fixed here because the fix is composition plus a re-render, which is the build task's loop. Beat 6 is the discriminator beat; its narration asks the student one question — \"Is there a membrane?\" — and names the sac \"the diagnostic feature\". Claim B6-membrane (sac.covers_omphalocele_seen atLeast 0.95) reads 1.0000 and is TRUE: the sac is the first surface along this beat's own camera axis over the whole of the herniated loop's footprint. WHAT A STUDENT SEES IS NOT A MEMBRANE. Measured on models-out/lateral-folding/player/beat-06.png: the sac draws no silhouette anywhere — classifying every pixel in the frame leaves 380 that are neither background, wall blue, ring purple nor either bowel, and all 380 are antialiasing at structure edges; scanning for cream-tinted wall (#e8d9c0 at 0.30 over the wall would read about (119,175,205) against the wall's (71,157,210)) returns 305 candidates with mean (69,112,156), which is the outline stroke, scattered over the whole wall and not an annulus. The sac's entire visible contribution is a wash on the bowel it covers: omphalocele_gut is authored #c0563a and renders (222,140,113) under the sac here, against (216,111,71) for `herniation` in beat 5, which is THE SAME AUTHORED COLOUR with no sac over it — dE2000 8.46, and that is the whole of the membrane. Meanwhile the two bowels the student must discriminate in this frame differ by dE2000 14.65, of which 9.14 is the authored difference between omphalocele_gut #c0563a and gastroschisis_bowel #d63a2f measured with no sac involved (herniation vs gastroschisis_bowel). So most of what separates the two loops on screen is a colour the author chose, and the membrane itself is a tint with no edge. A student answering \"the right-hand one is paler\" has not found a membrane. WHY NO NUMBER CAUGHT IT, and it is the fifth instance of this item's one recurring shape: first hit along the camera axis is OCCLUSION ORDER, not legibility. A perfectly transparent sac in the same position reads 1.0000 on sac.covers_omphalocele_seen. Rounds 4 and 5 fixed this measure to see WHAT IS IN FRONT OF the sac (gaps[24]); nothing asks whether the sac is distinguishable from what is BEHIND it. THE SCENE ALREADY OWNS THE CAMERA THAT SHOWS IT: in beat 10, `lateral`, the same sac reads as a grey disc with a hard edge at 15.38% of subject, with the bowel visible inside it and the cord inserting on it — the beat-9/10/11 precedent (RENDER-STANDARD 3.y, where two claims want incompatible cameras that is two beats). Beat 6 keeps `anterior` because MIDLINE and SIDE are its other two checks and a lateral camera cannot answer them. ESCALATED rather than fixed, because the general rule this needs — a structure the narration asserts must be LEGIBLE in the beat that asserts it, and legibility is contrast and silhouette, not occlusion order — is the corpus-wide rule round 4 proposed and deliberately did NOT write, RENDER-STANDARD section 3 being shared with nine other models. See ESCALATIONS.md, 2026-10-01 12:49Z.",
+  "BEAT 11's TWO GREENS, the one measurement the build run of 2026-10-01 11:26Z said it owed and did not make (BUILD-LOG, that entry, section 5 point 5). Measured by the review run of round 8 on the committed frame: splanchnic renders mean (64,183,149) and mesentery mean (93,198,179) over their own bands, dE2000 6.12 — against 5.97 as authored. The HIGHLIGHT on the mesentery adds 0.15 of separation, where round 7's hide-and-difference found the renderer adding 2 to 6 points on this scene's other close pairs. It clears the 5 that round 7 used as a working threshold, and it is the narrowest margin in the scene, between two structures that are adjacent and touching here. NOT A FINDING: the mesentery is in the right place (verified independently — screen-ventral in `lateral` is established by beat 10, where the sac herniates to screen-left; in beat 11 the mesentery band at screen-x 413-442 lies between the gut at 323-407 and the dorsal wall at 444-511, i.e. DORSAL to the gut, which is what the narration says), and there is still no rule anywhere in RENDER-STANDARD about the separability of adjacent structures' colours — round 7 proposed that gap and it is still open. Recorded so the next run does not have to re-measure it. Note also a 5-pixel dark gap at screen-x 408-412 between the splanchnic and the mesentery's gut end: that is the sheet's own taper to 0.0068 at the gut (claim B11-taper, 0.0800) going sub-pixel, not a detachment, but it means the gut-end attachment the narration asks the student to follow is not drawn."
+ ],
+ "visibility_waivers": [
+  {
+   "view": 1,
+   "key": "notochord",
+   "why": "At t = 0 the disc is at its widest - 6.1 across, against 2.0 at t = 1 - so the camera is fitted furthest away and every axial structure is at its smallest on screen. Seen end-on from `superior`, a rod 0.08 across is 0.015% of that frame; there is no framing of a flat disc in which it is more. It is drawn because a transverse section of the trilaminar disc without its axial rod is a less honest picture than one in which the rod is hard to find, and the narration never names it. Beat 2 draws the same rod at 0.070% once the disc has narrowed, and beat 3 at 0.023%."
+  },
+  {
+   "view": 4,
+   "key": "mesentery",
+   "why": "Beat 4 is the ventral view - `anterior`, with the left half of the wall opened - because its subject is the umbilical ring on the front of the embryo. The mesentery is a sheet in the median plane DORSAL to the gut, so from directly in front the gut is between it and the camera and it measures 0%. The narration names it once, in a list of what the finished embryo contains. Beat 3 is the beat that shows it best TODAY, from `superior` with the wall opened, and that is 0.676% of subject; turning this beat to show the mesentery would turn it away from the ring. UPDATED 2026-10-01 11:08:20Z by review round 7: this waiver's argument for why beat 4 cannot show the mesentery is sound and is kept, but it rested on the view-3 waiver's claim that no camera could do better, which is measured false — see that waiver. The two beats whose narration names the mesentery (3 and 4) between them give a student 0.676% and 0.000%, and a `lateral` probe reaches 11.374%. What is waived here is beat 4's camera, not the scene's duty to show the structure somewhere. CLOSED BY BEAT 11, built 2026-10-01 11:26Z by the model3d BUILD task (round-7 rework): the profile beat this waiver's last sentence asked for now exists — `lateral`, t=1, the opened wall with splanchnic, endoderm and mesentery, HIGHLIGHT on the mesentery. Measured in that beat's own camera over that beat's own shown list: the mesentery is 12.573% of the frame and 1.0000 of its own footprint is unoccluded, against 0.278% from this beat's camera over this beat's own structures. Floored at 0.080 and 0.950 by acceptance rows S and S-vis and by claims B11-share and B11-unhidden. This waiver stands as a waiver ON THIS BEAT: the sheet is still edge-on here, and that is still the right trade for a beat whose subject is elsewhere. What is no longer true of the SCENE is that no camera shows the mesentery."
+  },
+  {
+   "view": 8,
+   "key": "endoderm",
+   "why": "The gut is shown here only so that a vitelline remnant has a gut to arise from - it was added to this beat by the review task on 2026-09-23 for exactly that reason, because the SHOW_RELATIONSHIP from endoderm to vitelline had no gut under it. This beat's subject is WHERE ON THE WALL each failure sits, so it is drawn from `anterior` with the wall closed except its two openings, and behind that wall the gut measures 0.13% against a 0.3% floor for a structure that is pointed at. Opening the wall would remove the thing the beat is about. Beat 3 shows the gut at 1.03% and beat 4 at 0.20%. — UPDATED 2026-10-01 by the round-6 rework, because the number in this waiver is no longer the number, and a waiver carrying a stale measurement is a claim rather than an argument. Re-walked in the player after the bladder plate was rebuilt to fill its own aperture: the gut now draws 0.637% of the frame and 3.258% of the subject in this beat, ABOVE the 0.3% floor, and the whole of it is seen through the UMBILICAL RING, which is where the beat's SHOW_RELATIONSHIP points. In the infra-umbilical window it is now 0.00% (it was 42.21% of that window's first hits), which is the round-6 finding. So this waiver is no longer load-bearing; it is kept because it is the record of WHY the gut is in this beat at all, which two separate review rounds have now turned on."
+  },
+  {
+   "view": 3,
+   "key": "vitelline",
+   "why": "Beats 1, 2 and 3 are one section at three values of t - which is what “the same three sections” means in the narration - so all three share the `superior` camera. The duct is at the umbilicus in the MIDDLE of the block and points ventrally, so looking down the body axis puts the cranial half of the gut and the yolk sac between it and the camera: 0.001%. That is occlusion and not size, and the only fix is to turn this beat away from the section it is one of three of. Beat 4 turns to the ventral surface and draws the same duct at 0.254%, which is the most any beat in this scene manages."
+  },
+  {
+   "view": 3,
+   "key": "mesentery",
+   "why": "Same camera, and here it is size as much as occlusion: from `superior` the mesentery is seen EDGE-ON, as its cut edge - 0.085 across at the body wall, tapering to 0.0068 at the gut, over a z extent of 0.28. That is about 0.14% of a frame fitted to a 3.2-long block by arithmetic, and it measures 0.113%. Removing the wall to expose it is already done here (this beat uses the opened wall, changed this run for exactly this reason: it was 0.108% with the wall shut and the gain was 0.005%, which says the wall was never what was hiding it). No beat in this scene shows it better, and beat 4 shows it at 0% and is waived separately — both true. THE SENTENCE THAT FOLLOWED THEM WAS NOT, AND IS CORRECTED HERE BY THE REVIEW RUN OF 2026-10-01 11:08:20Z (round 7, did not build this item). It read: “A camera that would show this sheet face-on is one on the x axis, which is not a section view. THE FLOOR IS ABOVE THIS STRUCTURE'S CEILING FROM ANY SECTION CAMERA.” The first half is right and the conclusion does not follow from it, because this scene is not confined to section cameras: beats 9 and 10 are `lateral`, and they exist for exactly this reason — the cord was end-on from `anterior`, so a beat was added in the camera that shows it (gaps[20], RENDER-STANDARD 3.y). MEASURED in the player rather than reasoned about, with walk-scene-in-player over a probe beat carrying this beat's own structures from `lateral` with the wall opened: the mesentery draws 3.134% OF FRAME and 11.374% OF SUBJECT, against 0.089% of frame and 0.676% of subject here — 35x on frame share, and above every floor in this scene. With no wall at all it reads 3.961% / 25.458%, so the wall is not what is hiding it; the camera is. So this structure has no ceiling, it has an unused camera, and the waiver is now a waiver on THIS beat only. The remaining work — a profile beat for the dorsal mesentery, on the precedent of beats 9 and 10 — is the review's one open finding for round 7 and belongs to the build task. CLOSED BY BEAT 11, built 2026-10-01 11:26Z by the model3d BUILD task (round-7 rework): the profile beat this waiver's last sentence asked for now exists — `lateral`, t=1, the opened wall with splanchnic, endoderm and mesentery, HIGHLIGHT on the mesentery. Measured in that beat's own camera over that beat's own shown list: the mesentery is 12.573% of the frame and 1.0000 of its own footprint is unoccluded, against 0.278% from this beat's camera over this beat's own structures. Floored at 0.080 and 0.950 by acceptance rows S and S-vis and by claims B11-share and B11-unhidden. This waiver stands as a waiver ON THIS BEAT: the sheet is still edge-on here, and that is still the right trade for a beat whose subject is elsewhere. What is no longer true of the SCENE is that no camera shows the mesentery."
+  },
+  {
+   "view": 8,
+   "key": "vitelline",
+   "why": "0.232% against a 0.3% floor for a structure that is pointed at, and the shortfall is the umbilical ring tube and the wall's own lips at the umbilicus standing in front of a duct 0.17 across. The yolk sac was removed from this beat this run, which took the duct from 0% to 0.232% - the sac hangs in the cord directly over it. Beat 4 draws it at 0.254%, the best in this scene. This is the smallest structure any beat in this scene points at, and neither figure reaches the floor."
+  },
+  {
+   "view": 11,
+   "key": "endoderm",
+   "why": "MEASURED, NOT ESTIMATED, by the build run of 2026-10-01 11:26Z: in this beat's own camera and over this beat's own shown list, endoderm draws 0.000% of the frame and 0.0000 of its own footprint is its own nearest surface — splanchnic is in front of 100% of it. That is CORRECT anatomy and not an occlusion defect: the splanchnic (visceral) mesoderm wraps the gut tube, so from any camera outside the gut the surface you see where the gut is IS the splanchnic layer. It is shown rather than dropped for two reasons. First, the review that asked for this beat prescribed this shown list including endoderm, and the model's SHARE_BEATS copy of the list is cross-checked against these ops by render-lateral-folding.mjs, so the two must agree. Second, the mesentery's whole meaning is that it suspends the GUT, and the gut tube being present behind the layer that wraps it is the truthful composition even where it contributes no pixels. WHAT WAS NOT DONE, deliberately: no SHOW_RELATIONSHIP in this beat points AT endoderm, and the narration does not ask the student to look at it — it says in as many words that the surface the mesentery runs down to is the gut's own wall. Pointing a relationship at a structure drawing zero pixels is the round-1 finding on beat 7 and the round-7 finding on beats 3 and 4, and this beat is the fix for the second of those, so it does not reproduce it."
+  }
  ]
 }

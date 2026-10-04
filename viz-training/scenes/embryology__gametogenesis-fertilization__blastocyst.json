@@ -1,8 +1,9 @@
 {
   "schema": 2,
   "id": "embryology__gametogenesis-fertilization__blastocyst",
-  "mode": "sequence",
+  "mode": "3d_anatomy",
   "deferred_modes": [
+    "sequence",
     "diagram"
   ],
   "course": "Embryology",
@@ -12,9 +13,9 @@
     "Blastocyst"
   ],
   "learning_goal": "Name the three parts of a blastocyst on a cut drawing, say what each becomes, explain how the cavity is made and why the embryo must hatch before it can implant, and date days five to six correctly.",
-  "status": "planned",
+  "status": "candidate",
   "provider": {
-    "primary": "svg",
+    "primary": "procedural",
     "fallbacks": []
   },
   "match": {
@@ -92,71 +93,116 @@
   "camera": {
     "framing": "anterior"
   },
+  "framing_strict": true,
   "structures": [
     {
-      "key": "uterine_cavity",
-      "label": "The uterine cavity — days 4 to 6",
+      "key": "zona",
+      "name": "Zona pellucida — stretched, thinned, then breached",
+      "label": "Zona pellucida — stretched, thinned, then breached",
       "role": "context",
-      "group": "Where and when",
-      "layer": "organ",
-      "color": "#b07aa1",
+      "group": "The shell",
+      "color": "#f0b232",
+      "opacity": 0.24,
+      "refs": {
+        "procedural": "blastocyst#zona"
+      },
       "terms": [
-        "uterine cavity",
-        "endometrium",
-        "uterine glands",
-        "uterine milk",
-        "free blastocyst",
-        "day 4",
+        "hatching",
+        "zona pellucida",
+        "assisted hatching",
+        "expansion",
+        "thinning",
+        "lytic enzymes",
         "day 5",
-        "day 6",
-        "secretory phase",
-        "window of implantation"
+        "must precede implantation"
       ],
-      "narration": "The morula arrives in the uterine cavity on about day four and floats free for a day or two, fed by secretions from the endometrial glands. The endometrium is in its secretory phase and is receptive for only a short window. Two clocks must match again: an embryo that arrives early or late meets a wall that will not take it."
+      "narration": "The blastocyst cannot implant while the zona is around it, because the zona is exactly what has been preventing attachment for four days. On about day five the expanding cavity thins the shell and trophoblast enzymes help break it, and the blastocyst squeezes out. Hatching must come before implantation, always in that order. A zona too tough to breach is one cause of repeated failure after embryo transfer, which is why a laboratory sometimes thins it artificially.",
+      "narration_from": "sequence-version structure \"hatching\" — carried across verbatim. In the SVG scene \"hatching\" was a teaching BEAT with no geometry; here the thing it is about — the shell — is a built structure, and the beat that narrates its going is view 7. The words are unchanged."
     },
     {
-      "key": "cavitation",
-      "label": "Cavitation — making the cavity",
-      "role": "part",
-      "group": "Making the cavity",
-      "layer": "organ",
-      "color": "#3498db",
-      "terms": [
-        "cavitation",
-        "sodium potassium ATPase",
-        "sodium pump",
-        "aquaporin",
-        "osmotic gradient",
-        "tight junction",
-        "fluid accumulation",
-        "day 5"
-      ],
-      "narration": "The outer cells are sealed together by tight junctions and pump sodium inward with a sodium-potassium ATPase on their inner face. Water follows the salt through aquaporins, and because the seal will not let it leak back out, it collects in one growing space. That is cavitation, and it is pure physics — an ion pump plus a watertight sheet."
-    },
-    {
-      "key": "blastocoele",
-      "label": "Blastocyst cavity (blastocoele)",
+      "key": "trophectoderm",
+      "name": "Trophectoderm — the morula's outer layer, before polar and mural exist",
+      "label": "Trophectoderm — the outer layer of the morula",
       "role": "part",
       "group": "The three parts",
-      "layer": "organ",
-      "color": "#85c1e9",
+      "color": "#d1483c",
+      "opacity": 1,
+      "refs": {
+        "procedural": "blastocyst#trophectoderm@0"
+      },
       "terms": [
-        "blastocoele",
-        "blastocoel",
-        "blastocyst cavity",
-        "fluid-filled cavity",
-        "expansion",
-        "eccentric inner cell mass"
+        "trophectoderm",
+        "trophoblast",
+        "outer cell layer",
+        "morula",
+        "trophectoderm biopsy"
       ],
-      "narration": "The fluid space that turns a solid morula into a hollow blastocyst. It is what pushes the inner cell mass off-centre, and its expansion is what stretches and thins the zona until the embryo can escape. Grading in a laboratory is largely a judgement about how far this cavity has expanded."
+      "narration": "Before there is a cavity there is one outer layer, and it has one name. The morula's outer cells have already committed to becoming trophoblast, but polar and mural are positional labels — they mean the part over the inner cell mass and the part away from it — and until the cavity pushes the mass to one end there is no over and no away. The split into polar and mural is something the cavity does, not something the cells have done yet.",
+      "narration_from": "WRITTEN IN ROUND 3, 2026-10-02, and the only narration in this scene that is not carried over from the SVG version. It exists because the review's R2 found beat 1 drawing the polar/mural distinction on a solid morula, at the equator — a latitude the real boundary never occupies — and the fix is to draw one layer there and say why it is one. It makes the same point beat 5 makes from the other end, and it is deliberately about the LABELS rather than about the cells: the commitment is early, the names are not."
+    },
+    {
+      "key": "mural_troph",
+      "name": "Mural trophoblast — the thin wall away from the mass",
+      "label": "Mural trophoblast — the thin wall away from the mass",
+      "role": "part",
+      "group": "The three parts",
+      "color": "#e0564a",
+      "opacity": 1,
+      "refs": {
+        "procedural": "blastocyst#mural_troph"
+      },
+      "terms": [
+        "trophoblast",
+        "trophectoderm",
+        "outer cell layer",
+        "placenta",
+        "chorion",
+        "fetal membranes",
+        "cytotrophoblast",
+        "syncytiotrophoblast",
+        "invasion",
+        "hydatidiform mole",
+        "mural trophoblast",
+        "trophectoderm biopsy"
+      ],
+      "narration": "The single flattened layer around the outside, away from the inner cell mass — and it is the half of the trophoblast that does NOT invade. It is the thinner of the two for the whole of this scene, and it is what the expanding fluid presses against. It becomes the chorion laeve, the smooth chorion, which regresses rather than forming placenta; the villous placenta forms over the opposite pole, where the mass sits. Like all trophoblast it contributes nothing to the fetus. At the implantation site — which is the polar surface, not this one — the trophoblast splits into an inner cytotrophoblast, which keeps dividing, and an outer syncytiotrophoblast, which fuses into one multinucleate mass and does the invading. A tumour of this tissue is a hydatidiform mole — placenta without an embryo, which is why it produces enormous amounts of hCG and no fetal parts.",
+      "narration_from": "sequence-version structure \"trophoblast\" — carried across verbatim until ROUND 4, 2026-10-02, when the review's F2 found it CONTRADICTING the scene on the question the scene says is examined. The inherited paragraph is true of the trophoblast AS ONE TISSUE, which is what it described in the SVG version; the conversion duplicated it onto two halves that differ in precisely the property it asserts. On this half the sentence '...an outer syncytiotrophoblast, which fuses into one multinucleate mass and does the invading' is false, and structures[abembryonic_pole] says in the same scene that 'its trophoblast is thinner and does not invade', while beat 5's own relationship label reads 'thicker here, and it is this surface that invades'. NOTHING IS DELETED: every clause of the inherited paragraph survives, re-attributed to the implantation site, and the paragraph stays WHOLE and unaltered on polar_troph, where every sentence of it is true. New here: the chorion laeve, which is where the non-invading half actually goes."
+    },
+    {
+      "key": "polar_troph",
+      "name": "Polar trophoblast — the thicker wall over the mass",
+      "label": "Polar trophoblast — the thicker wall over the mass",
+      "role": "part",
+      "group": "The three parts",
+      "color": "#c23b2f",
+      "opacity": 1,
+      "refs": {
+        "procedural": "blastocyst#polar_troph"
+      },
+      "terms": [
+        "embryonic pole",
+        "polar trophoblast",
+        "adhesion site",
+        "attaches first",
+        "site of implantation",
+        "polar trophoblast",
+        "cytotrophoblast",
+        "syncytiotrophoblast"
+      ],
+      "narration": "The single flattened layer around the outside. It becomes the placenta and the chorion and contributes nothing to the fetus. At implantation it splits into an inner cytotrophoblast, which keeps dividing, and an outer syncytiotrophoblast, which fuses into one multinucleate mass and does the invading. A tumour of this tissue is a hydatidiform mole — placenta without an embryo, which is why it produces enormous amounts of hCG and no fetal parts.",
+      "narration_from": "sequence-version structure \"trophoblast\" — carried across verbatim, on the POLAR half. See mural_troph."
     },
     {
       "key": "icm",
+      "name": "Inner cell mass (embryoblast)",
       "label": "Inner cell mass (embryoblast)",
       "role": "part",
       "group": "The three parts",
-      "layer": "organ",
-      "color": "#2980b9",
+      "color": "#2d7fc4",
+      "opacity": 1,
+      "refs": {
+        "procedural": "blastocyst#icm"
+      },
       "terms": [
         "inner cell mass",
         "embryoblast",
@@ -169,15 +215,109 @@
         "yolk sac",
         "embryo proper"
       ],
-      "narration": "A knot of cells at one end, inside the cavity. Everything in the fetus comes from here, and it also makes the amnion and the yolk sac. Within days it will split into epiblast and hypoblast to form the bilaminar disc. It is pluripotent, not totipotent — it can make any tissue of the body but can no longer make a placenta, and that distinction is the exam point. Embryonic stem cell lines are derived from it."
+      "narration": "A knot of cells at one end, inside the cavity. Everything in the fetus comes from here, and it also makes the amnion and the yolk sac. Within days it will split into epiblast and hypoblast to form the bilaminar disc. It is pluripotent, not totipotent — it can make any tissue of the body but can no longer make a placenta, and that distinction is the exam point. Embryonic stem cell lines are derived from it.",
+      "narration_from": "sequence-version structure \"icm\" — carried across verbatim."
     },
     {
-      "key": "trophoblast",
-      "label": "Trophoblast",
+      "key": "blastocoele",
+      "name": "Blastocyst cavity (blastocoele) — pumped fluid",
+      "label": "Blastocyst cavity (blastocoele) — pumped fluid",
       "role": "part",
       "group": "The three parts",
-      "layer": "organ",
-      "color": "#e74c3c",
+      "color": "#9fd4f2",
+      "opacity": 0.3,
+      "refs": {
+        "procedural": "blastocyst#blastocoele"
+      },
+      "terms": [
+        "blastocoele",
+        "blastocoel",
+        "blastocyst cavity",
+        "fluid-filled cavity",
+        "expansion",
+        "eccentric inner cell mass"
+      ],
+      "narration": "The fluid space that turns a solid morula into a hollow blastocyst. It is what pushes the inner cell mass off-centre, and its expansion is what stretches and thins the zona until the embryo can escape. Grading in a laboratory is largely a judgement about how far this cavity has expanded. By the time the embryo hatches it is half again the width of the morula that entered the uterus, and not one cell has grown to do it — the whole increase is pumped fluid.",
+      "narration_from": "sequence-version structure \"blastocoele\" — carried across verbatim. ROUND 5, 2026-10-02 — NO LONGER VERBATIM. The sentence \"By the time the embryo hatches it is half again the width of the morula that entered the uterus, and not one cell has grown to do it — the whole increase is pumped fluid\" was MOVED HERE from view 8's narration by the round-5 build run, closing round 4's F5: the player refits the camera per beat, so a ratio between two beats is divided out of the frames that carry it, and this text is not read beside a frame. See view 8's narration_from, gaps[26] and engine__camera-scale-group. Recorded by the round-5 review because this file's own gaps[22] is the finding that a narration marked \"verbatim\" on both halves of a split structure can be false of one of them — the next reader must not take this last sentence for SVG-era text."
+    },
+    {
+      "key": "embryonic_pole",
+      "name": "Embryonic pole",
+      "label": "Embryonic pole",
+      "role": "part",
+      "group": "Poles",
+      "color": "#8e44ad",
+      "opacity": 0.95,
+      "refs": {
+        "procedural": "blastocyst#embryonic_pole"
+      },
+      "terms": [
+        "embryonic pole",
+        "polar trophoblast",
+        "adhesion site",
+        "attaches first",
+        "site of implantation"
+      ],
+      "narration": "The end where the inner cell mass sits. The trophoblast overlying it is the polar trophoblast, and it is always the part that touches the endometrium first. So the embryo implants head-end first, and the placenta forms over the pole the embryo is attached to.",
+      "narration_from": "sequence-version structure \"embryonic_pole\" — carried across verbatim. Drawn as a MARKER outside the embryo rather than as a region of it, because RENDER-STANDARD's \"a reference must survive the view that uses it\" was learned on a reference that lay inside the subject and showed 125 of its 3,525 pixels. The tissue the narration is about is polar_troph, which this marker points at."
+    },
+    {
+      "key": "abembryonic_pole",
+      "name": "Abembryonic pole",
+      "label": "Abembryonic pole",
+      "role": "part",
+      "group": "Poles",
+      "color": "#a569bd",
+      "opacity": 0.95,
+      "refs": {
+        "procedural": "blastocyst#abembryonic_pole"
+      },
+      "terms": [
+        "abembryonic pole",
+        "mural trophoblast",
+        "opposite end",
+        "thin wall"
+      ],
+      "narration": "The opposite end, wall only, with the cavity behind it. Its trophoblast is thinner and does not invade. Naming the two poles is how you answer which surface implants — and it is asked that way.",
+      "narration_from": "sequence-version structure \"abembryonic_pole\" — carried across verbatim. A marker, as embryonic_pole is."
+    },
+    {
+      "key": "endometrium",
+      "name": "Secretory endometrium — a patch of wall, at TRUE scale",
+      "label": "Secretory endometrium — a patch of wall, at TRUE scale",
+      "role": "context",
+      "group": "Where it lands",
+      "color": "#b07aa1",
+      "opacity": 0.96,
+      "refs": {
+        "procedural": "blastocyst#endometrium"
+      },
+      "terms": [
+        "uterine cavity",
+        "endometrium",
+        "uterine glands",
+        "uterine milk",
+        "free blastocyst",
+        "day 4",
+        "day 5",
+        "day 6",
+        "secretory phase",
+        "window of implantation"
+      ],
+      "narration": "The morula arrives in the uterine cavity on about day four and floats free for a day or two, fed by secretions from the endometrial glands. The endometrium is in its secretory phase and is receptive for only a short window. Two clocks must match again: an embryo that arrives early or late meets a wall that will not take it.",
+      "narration_from": "sequence-version structure \"uterine_cavity\" — carried across verbatim. The SVG scene could draw a whole uterus; at 10 µm per unit this scene cannot, so what is built is a 260 µm window on the luminal surface with two gland openings, at TRUE scale and with no scale break. Declared in gaps[]."
+    },
+    {
+      "key": "mural_troph_cut",
+      "name": "Mural trophoblast — the thin wall away from the mass — cut open",
+      "label": "Mural trophoblast — the thin wall away from the mass — cut open",
+      "role": "part",
+      "group": "Cut open",
+      "color": "#e0564a",
+      "opacity": 1,
+      "refs": {
+        "procedural": "blastocyst#mural_troph+cut"
+      },
       "terms": [
         "trophoblast",
         "trophectoderm",
@@ -188,48 +328,96 @@
         "cytotrophoblast",
         "syncytiotrophoblast",
         "invasion",
-        "hydatidiform mole"
+        "hydatidiform mole",
+        "mural trophoblast",
+        "trophectoderm biopsy"
       ],
-      "narration": "The single flattened layer around the outside. It becomes the placenta and the chorion and contributes nothing to the fetus. At implantation it splits into an inner cytotrophoblast, which keeps dividing, and an outer syncytiotrophoblast, which fuses into one multinucleate mass and does the invading. A tumour of this tissue is a hydatidiform mole — placenta without an embryo, which is why it produces enormous amounts of hCG and no fetal parts."
+      "narration": "The single flattened layer around the outside, away from the inner cell mass — and it is the half of the trophoblast that does NOT invade. It is the thinner of the two for the whole of this scene, and it is what the expanding fluid presses against. It becomes the chorion laeve, the smooth chorion, which regresses rather than forming placenta; the villous placenta forms over the opposite pole, where the mass sits. Like all trophoblast it contributes nothing to the fetus. At the implantation site — which is the polar surface, not this one — the trophoblast splits into an inner cytotrophoblast, which keeps dividing, and an outer syncytiotrophoblast, which fuses into one multinucleate mass and does the invading. A tumour of this tissue is a hydatidiform mole — placenta without an embryo, which is why it produces enormous amounts of hCG and no fetal parts.",
+      "narration_from": "sequence-version structure \"trophoblast\" — carried across verbatim until ROUND 4, 2026-10-02, when the review's F2 found it CONTRADICTING the scene on the question the scene says is examined. The inherited paragraph is true of the trophoblast AS ONE TISSUE, which is what it described in the SVG version; the conversion duplicated it onto two halves that differ in precisely the property it asserts. On this half the sentence '...an outer syncytiotrophoblast, which fuses into one multinucleate mass and does the invading' is false, and structures[abembryonic_pole] says in the same scene that 'its trophoblast is thinner and does not invade', while beat 5's own relationship label reads 'thicker here, and it is this surface that invades'. NOTHING IS DELETED: every clause of the inherited paragraph survives, re-attributed to the implantation site, and the paragraph stays WHOLE and unaltered on polar_troph, where every sentence of it is true. New here: the chorion laeve, which is where the non-invading half actually goes."
     },
     {
-      "key": "embryonic_pole",
-      "label": "Embryonic pole",
+      "key": "polar_troph_cut",
+      "name": "Polar trophoblast — the thicker wall over the mass — cut open",
+      "label": "Polar trophoblast — the thicker wall over the mass — cut open",
       "role": "part",
-      "group": "Poles",
-      "layer": "organ",
-      "color": "#8e44ad",
+      "group": "Cut open",
+      "color": "#c23b2f",
+      "opacity": 1,
+      "refs": {
+        "procedural": "blastocyst#polar_troph+cut"
+      },
       "terms": [
         "embryonic pole",
         "polar trophoblast",
         "adhesion site",
         "attaches first",
-        "site of implantation"
+        "site of implantation",
+        "polar trophoblast",
+        "cytotrophoblast",
+        "syncytiotrophoblast"
       ],
-      "narration": "The end where the inner cell mass sits. The trophoblast overlying it is the polar trophoblast, and it is always the part that touches the endometrium first. So the embryo implants head-end first, and the placenta forms over the pole the embryo is attached to."
+      "narration": "The single flattened layer around the outside. It becomes the placenta and the chorion and contributes nothing to the fetus. At implantation it splits into an inner cytotrophoblast, which keeps dividing, and an outer syncytiotrophoblast, which fuses into one multinucleate mass and does the invading. A tumour of this tissue is a hydatidiform mole — placenta without an embryo, which is why it produces enormous amounts of hCG and no fetal parts.",
+      "narration_from": "the same structure as \"polar_troph\", sectioned. A cross-section is the only way to show that cavitation has created an inside: the cavity and the mass ARE inside, so no camera reveals them, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries the +cut flag and NO pinned t, so it follows the view like any other ref and the four cut beats can each be at their own stage."
     },
     {
-      "key": "abembryonic_pole",
-      "label": "Abembryonic pole",
+      "key": "icm_cut",
+      "name": "Inner cell mass (embryoblast) — cut open",
+      "label": "Inner cell mass (embryoblast) — cut open",
       "role": "part",
-      "group": "Poles",
-      "layer": "organ",
-      "color": "#a569bd",
+      "group": "Cut open",
+      "color": "#2d7fc4",
+      "opacity": 1,
+      "refs": {
+        "procedural": "blastocyst#icm+cut"
+      },
       "terms": [
-        "abembryonic pole",
-        "mural trophoblast",
-        "opposite end",
-        "thin wall"
+        "inner cell mass",
+        "embryoblast",
+        "pluripotent",
+        "embryonic stem cells",
+        "epiblast",
+        "hypoblast",
+        "bilaminar disc",
+        "amnion",
+        "yolk sac",
+        "embryo proper"
       ],
-      "narration": "The opposite end, wall only, with the cavity behind it. Its trophoblast is thinner and does not invade. Naming the two poles is how you answer which surface implants — and it is asked that way."
+      "narration": "A knot of cells at one end, inside the cavity. Everything in the fetus comes from here, and it also makes the amnion and the yolk sac. Within days it will split into epiblast and hypoblast to form the bilaminar disc. It is pluripotent, not totipotent — it can make any tissue of the body but can no longer make a placenta, and that distinction is the exam point. Embryonic stem cell lines are derived from it.",
+      "narration_from": "the same structure as \"icm\", sectioned. A cross-section is the only way to show that cavitation has created an inside: the cavity and the mass ARE inside, so no camera reveals them, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries the +cut flag and NO pinned t, so it follows the view like any other ref and the four cut beats can each be at their own stage."
     },
     {
-      "key": "hatching",
-      "label": "Hatching from the zona pellucida (day 5)",
+      "key": "blastocoele_cut",
+      "name": "Blastocyst cavity (blastocoele) — pumped fluid — cut open",
+      "label": "Blastocyst cavity (blastocoele) — pumped fluid — cut open",
       "role": "part",
-      "group": "Hatching & implanting",
-      "layer": "organ",
-      "color": "#f39c12",
+      "group": "Cut open",
+      "color": "#9fd4f2",
+      "opacity": 0.98,
+      "refs": {
+        "procedural": "blastocyst#blastocoele+cut"
+      },
+      "terms": [
+        "blastocoele",
+        "blastocoel",
+        "blastocyst cavity",
+        "fluid-filled cavity",
+        "expansion",
+        "eccentric inner cell mass"
+      ],
+      "narration": "The fluid space that turns a solid morula into a hollow blastocyst. It is what pushes the inner cell mass off-centre, and its expansion is what stretches and thins the zona until the embryo can escape. Grading in a laboratory is largely a judgement about how far this cavity has expanded. By the time the embryo hatches it is half again the width of the morula that entered the uterus, and not one cell has grown to do it — the whole increase is pumped fluid.",
+      "narration_from": "the same structure as \"blastocoele\", sectioned. A cross-section is the only way to show that cavitation has created an inside: the cavity and the mass ARE inside, so no camera reveals them, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries the +cut flag and NO pinned t, so it follows the view like any other ref and the four cut beats can each be at their own stage. ROUND 5, 2026-10-02 — NO LONGER VERBATIM. The sentence \"By the time the embryo hatches it is half again the width of the morula that entered the uterus, and not one cell has grown to do it — the whole increase is pumped fluid\" was MOVED HERE from view 8's narration by the round-5 build run, closing round 4's F5: the player refits the camera per beat, so a ratio between two beats is divided out of the frames that carry it, and this text is not read beside a frame. See view 8's narration_from, gaps[26] and engine__camera-scale-group. Recorded by the round-5 review because this file's own gaps[22] is the finding that a narration marked \"verbatim\" on both halves of a split structure can be false of one of them — the next reader must not take this last sentence for SVG-era text."
+    },
+    {
+      "key": "zona_cut",
+      "name": "Zona pellucida — stretched, thinned, then breached — cut open",
+      "label": "Zona pellucida — stretched, thinned, then breached — cut open",
+      "role": "context",
+      "group": "Cut open",
+      "color": "#f0b232",
+      "opacity": 0.24,
+      "refs": {
+        "procedural": "blastocyst#zona+cut"
+      },
       "terms": [
         "hatching",
         "zona pellucida",
@@ -240,196 +428,494 @@
         "day 5",
         "must precede implantation"
       ],
-      "narration": "The blastocyst cannot implant while the zona is around it, because the zona is exactly what has been preventing attachment for four days. On about day five the expanding cavity thins the shell and trophoblast enzymes help break it, and the blastocyst squeezes out. Hatching must come before implantation, always in that order. A zona too tough to breach is one cause of repeated failure after embryo transfer, which is why a laboratory sometimes thins it artificially."
-    },
-    {
-      "key": "implantation_start",
-      "label": "Implantation begins (day 6)",
-      "role": "part",
-      "group": "Hatching & implanting",
-      "layer": "organ",
-      "color": "#c0392b",
-      "terms": [
-        "implantation",
-        "apposition",
-        "adhesion",
-        "invasion",
-        "day 6",
-        "day 7",
-        "posterior superior uterine wall",
-        "endometrium",
-        "syncytiotrophoblast",
-        "interstitial implantation"
-      ],
-      "narration": "About day six the hatched blastocyst lies against the endometrium, sticks to it, and the syncytiotrophoblast begins to eat its way in. The usual site is the upper posterior wall of the uterus. A blastocyst that implants low sets up a placenta praevia; one that never reached the uterus implants in the tube. By the end of week one it is only partly embedded — full burial belongs to week two."
-    },
-    {
-      "key": "hcg",
-      "label": "hCG and the corpus luteum",
-      "role": "part",
-      "group": "Hatching & implanting",
-      "layer": "organ",
-      "color": "#16a085",
-      "terms": [
-        "human chorionic gonadotropin",
-        "hCG",
-        "syncytiotrophoblast",
-        "corpus luteum rescue",
-        "progesterone",
-        "pregnancy test",
-        "missed period",
-        "LH receptor"
-      ],
-      "narration": "The syncytiotrophoblast starts secreting human chorionic gonadotropin almost as soon as it invades. hCG acts on the LH receptor of the corpus luteum and keeps it producing progesterone, so the endometrium is not shed and the period is missed. It is detectable in blood about eight days after fertilization. Every pregnancy test in every clinic is measuring a product of this cell layer, not of the embryo."
-    },
-    {
-      "key": "twinning_late",
-      "label": "Splitting after day 4 — shared membranes",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#9b59b6",
-      "terms": [
-        "monozygotic twins",
-        "monochorionic diamniotic",
-        "monochorionic monoamniotic",
-        "day 4 to 8",
-        "day 8 to 13",
-        "conjoined twins",
-        "twin-to-twin transfusion",
-        "shared placenta"
-      ],
-      "narration": "Once the trophoblast is committed, a split can no longer duplicate it. An inner cell mass that divides between days four and eight gives twins with one placenta and two amnions — monochorionic, diamniotic — and that shared placenta is what allows twin-to-twin transfusion syndrome. A split between days eight and thirteen shares the amnion too, and a later one leaves them conjoined. Read the membranes backwards and they date the split."
-    },
-    {
-      "key": "clinical",
-      "label": "Day 5 in a clinic",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#5a8fd6",
-      "terms": [
-        "blastocyst transfer",
-        "day 5 transfer",
-        "expansion grading",
-        "trophectoderm biopsy",
-        "preimplantation genetic testing",
-        "assisted hatching",
-        "embryonic stem cells",
-        "ectopic pregnancy",
-        "placenta praevia"
-      ],
-      "narration": "The blastocyst is where assisted reproduction now does most of its work. Transfer at day five selects the embryos that survived the genome handover, so fewer need to be replaced. Cells for genetic testing are taken from the trophectoderm rather than from the embryo itself, which is both safer and more representative than a day-three blastomere. The zona can be thinned to help hatching. And the two ways implantation goes wrong in position — too low, or never leaving the tube — are both decided in the next forty-eight hours."
+      "narration": "The blastocyst cannot implant while the zona is around it, because the zona is exactly what has been preventing attachment for four days. On about day five the expanding cavity thins the shell and trophoblast enzymes help break it, and the blastocyst squeezes out. Hatching must come before implantation, always in that order. A zona too tough to breach is one cause of repeated failure after embryo transfer, which is why a laboratory sometimes thins it artificially.",
+      "narration_from": "the same structure as \"zona\", sectioned. A cross-section is the only way to show that cavitation has created an inside: the cavity and the mass ARE inside, so no camera reveals them, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries the +cut flag and NO pinned t, so it follows the view like any other ref and the four cut beats can each be at their own stage."
     }
   ],
   "views": [
     {
-      "mode": "cross_section",
+      "mode": "mechanism",
       "beat": 1,
-      "title": "Cut it open — three parts, and only three",
+      "title": "Day four — a solid morula reaches the uterus",
       "ops": [
         {
-          "op": "SHOW_STRUCTURE",
+          "op": "HIDE_STRUCTURE",
           "target": "*"
         },
         {
-          "op": "ISOLATE_REGION",
-          "target": "The three parts"
+          "op": "SHOW_STRUCTURE",
+          "target": "zona"
         },
         {
-          "op": "CROSS_SECTION",
-          "axis": "z",
-          "offset": 0,
-          "animate": true
+          "op": "SHOW_STRUCTURE",
+          "target": "trophectoderm"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "icm",
+          "target": "zona",
           "intensity": 0.9
         },
         {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "trophoblast",
-          "to": "blastocoele",
-          "kind": "encloses"
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "trophectoderm",
+          "intensity": 0.8
         }
       ],
-      "narration": "A blastocyst cut across has three parts and you should never need a fourth. A single flattened outer layer, the trophoblast, which becomes the placenta. A fluid space, the blastocyst cavity. And a knot of cells at one end, the inner cell mass, which becomes the entire fetus. Name those three in that order and most of week one is answerable."
+      "narration": "The morula arrives in the uterine cavity on about day four and floats free for a day or two, fed by secretions from the endometrial glands. The endometrium is in its secretory phase and is receptive for only a short window. Two clocks must match again: an embryo that arrives early or late meets a wall that will not take it.",
+      "narration_from": "sequence-version structure \"uterine_cavity\" — carried across verbatim. It is the opening beat because it is the only narration in the scene about WHERE the embryo is and WHEN, and t = 0 is the state the previous structure (Cleavage & morula) ends at: the same cytoplasm, the same zona, no cavity.",
+      "claims": [
+        {
+          "id": "B1-no-cavity",
+          "claim": "a SOLID morula: there is no cavity at all",
+          "measure": "cavityFracOfEmbryo",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-9
+        },
+        {
+          "id": "B1-size",
+          "claim": "120 µm across, as the zygote was",
+          "measure": "embryoD_um",
+          "op": "near",
+          "value": 120,
+          "tol": 0.6
+        },
+        {
+          "id": "B1-central",
+          "claim": "and the inner cells are still enclosed, not yet at one end",
+          "measure": "icmEccFracR",
+          "op": "between",
+          "value": [
+            -0.03,
+            0.03
+          ]
+        },
+        {
+          "id": "B1-zona-intact",
+          "claim": "the zona is intact and covers the whole embryo",
+          "measure": "zonaCoverFrac",
+          "op": "near",
+          "value": 1,
+          "tol": 1e-9
+        },
+        {
+          "id": "B1-cells",
+          "claim": "the cytoplasm is the zygote's, undiminished",
+          "measure": "cellVolRel",
+          "op": "near",
+          "value": 1,
+          "tol": 0.004
+        }
+      ]
     },
     {
       "mode": "mechanism",
       "beat": 2,
-      "title": "How the cavity is made",
+      "title": "How the cavity is made — it is pumped, not left behind",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "Making the cavity"
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
         },
         {
           "op": "SHOW_STRUCTURE",
-          "target": "The three parts"
+          "target": "zona_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mural_troph_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "polar_troph_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "icm_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "blastocoele_cut"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.18
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Cut open"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "cavitation",
-          "intensity": 0.95
+          "target": "blastocoele_cut",
+          "intensity": 0.35
         },
         {
           "op": "SHOW_RELATIONSHIP",
-          "from": "trophoblast",
-          "to": "cavitation",
-          "kind": "pumps sodium inward through a sealed sheet"
+          "from": "mural_troph_cut",
+          "to": "blastocoele_cut",
+          "kind": "pumps sodium inward through a sealed sheet, and water follows"
         },
         {
           "op": "SHOW_RELATIONSHIP",
-          "from": "cavitation",
-          "to": "blastocoele",
-          "kind": "fills and expands it"
+          "from": "blastocoele_cut",
+          "to": "icm_cut",
+          "kind": "its expansion is what pushes the mass to one end"
         }
       ],
-      "narration": "The cavity is not a gap that appears; it is pumped. The outer cells are sealed to one another by tight junctions and drive sodium inward with a sodium-potassium ATPase. Water follows through aquaporins and cannot leak back out through the seal, so it accumulates in one space and inflates it. The morula becomes a blastocyst at about day five, and the growing cavity pushes the inner cell mass to one end."
+      "narration": "The cavity is not a gap that appears; it is pumped. The outer cells are sealed to one another by tight junctions and drive sodium inward with a sodium-potassium ATPase. Water follows through aquaporins and cannot leak back out through the seal, so it accumulates in one space and inflates it. The morula becomes a blastocyst at about day five, and the growing cavity pushes the inner cell mass to one end.\n\nThe outer cells are sealed together by tight junctions and pump sodium inward with a sodium-potassium ATPase on their inner face. Water follows the salt through aquaporins, and because the seal will not let it leak back out, it collects in one growing space. That is cavitation, and it is pure physics — an ion pump plus a watertight sheet.",
+      "narration_from": "sequence-version view beat 2 followed by structure \"cavitation\", both — carried across verbatim. The beat and the structure said the same thing twice in the SVG scene — one as a panel, one as a region — and in a procedural scene the mechanism has no geometry of its own, so the two texts belong on the one beat that draws what the pump CAUSES. Its SHOW_RELATIONSHIP ops are kept and re-pointed at the built parts; the \"cavitation\" region itself is gone, because an ion pump has no form at 10 µm and a drawn \"tight junction\" would be an invention. Declared in gaps[].",
+      "claims": [
+        {
+          "id": "B2-cavity-exists",
+          "claim": "the cavity has appeared",
+          "measure": "cavityFracOfEmbryo",
+          "op": "atLeast",
+          "value": 0.02
+        },
+        {
+          "id": "B2-cavity-small",
+          "claim": "and it is still being made, not yet a blastocyst cavity",
+          "measure": "cavityFracOfEmbryo",
+          "op": "atMost",
+          "value": 0.09
+        },
+        {
+          "id": "B2-no-growth",
+          "claim": "the cytoplasm has not grown: everything new is fluid",
+          "measure": "cellVolRel",
+          "op": "near",
+          "value": 1,
+          "tol": 0.004
+        },
+        {
+          "id": "B2-fluid-is-growth",
+          "claim": "and the embryo is bigger by exactly the fluid it holds",
+          "measure": "cavityVolRel",
+          "op": "atLeast",
+          "value": 0.03
+        },
+        {
+          "id": "B2-stage",
+          "claim": "and the beat is at this stage of the expansion: the cavity is 4% to 8% of the embryo",
+          "measure": "cavityFracOfEmbryo",
+          "op": "between",
+          "value": [
+            0.035,
+            0.076
+          ]
+        },
+        {
+          "id": "B2-bounded-by-trophoblast",
+          "claim": "and the space the water collects in is bounded by that sealed sheet — the trophoblast — not by the inner cell mass",
+          "measure": "wallWetFrac",
+          "op": "atLeast",
+          "value": 0.3,
+          "note": "ADDED IN ROUND 2 BECAUSE ITS ABSENCE WAS THE REVIEW'S F1. This beat narrates sodium pumped through a sealed SHEET so that water collects in one space, and round 1 drew that space entirely inside the inner cell mass: measured off the built mesh, the cavity's own rmax 3.342 sat inside the mass's 3.526, so the fluid touched the trophoblast at NO point and the picture taught that the blastocyst cavity is a space within the embryoblast. Nothing caught it because this beat's other five claims are about the cavity's SIZE and the cell volume, and not one of them asks what BOUNDS the fluid. The measure is the share of the trophoblast's inner surface AREA the fluid is against, read off the built inner-surface triangles. Measured here 0.4576, against 0.0000 in round 1."
+        }
+      ]
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Cut it open — three parts, and only three",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "zona_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mural_troph_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "polar_troph_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "icm_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "blastocoele_cut"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.52
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Cut open"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "icm_cut",
+          "intensity": 0.4
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "mural_troph_cut",
+          "to": "blastocoele_cut",
+          "kind": "encloses"
+        }
+      ],
+      "narration": "A blastocyst cut across has three parts and you should never need a fourth. A single flattened outer layer, the trophoblast, which becomes the placenta. A fluid space, the blastocyst cavity. And a knot of cells at one end, the inner cell mass, which becomes the entire fetus. Name those three in that order and most of week one is answerable.",
+      "narration_from": "sequence-version view beat 1 — carried across verbatim. Its CROSS_SECTION op is replaced by the +cut refs, which open the solids as real geometry rather than asking the player to section a procedural group.",
+      "claims": [
+        {
+          "id": "B3-three",
+          "claim": "three parts, and the third is the cavity",
+          "measure": "parts",
+          "op": "equals",
+          "value": 3
+        },
+        {
+          "id": "B3-troph-share",
+          "claim": "the trophoblast is the great majority of the cells",
+          "measure": "trophVolRel",
+          "op": "near",
+          "value": 0.88,
+          "tol": 0.004
+        },
+        {
+          "id": "B3-icm-share",
+          "claim": "and the mass is the minority",
+          "measure": "icmVolRel",
+          "op": "near",
+          "value": 0.12,
+          "tol": 0.004
+        },
+        {
+          "id": "B3-eccentric",
+          "claim": "the mass is at ONE END, well off centre",
+          "measure": "icmEccFracR",
+          "op": "atLeast",
+          "value": 0.45
+        },
+        {
+          "id": "B3-mostly-cavity",
+          "claim": "and more than half of what you are looking at is fluid",
+          "measure": "cavityFracOfEmbryo",
+          "op": "atLeast",
+          "value": 0.5
+        },
+        {
+          "id": "B3-stage",
+          "claim": "and the beat is at this stage of the expansion: the cavity is 53% to 58% of the embryo",
+          "measure": "cavityFracOfEmbryo",
+          "op": "between",
+          "value": [
+            0.528,
+            0.581
+          ]
+        },
+        {
+          "id": "B3-knot-not-a-layer",
+          "claim": "a KNOT of cells, about twice as broad as it is deep — not a layer across the roof of the cavity",
+          "measure": "massAspect",
+          "op": "atMost",
+          "value": 2.6,
+          "note": "ADDED IN ROUND 2 BECAUSE ITS ABSENCE WAS THE REVIEW'S F2. The review's ruling on round 1 was NO for beat 4 and borderline for beat 3: measured off the built mesh the mass was 20.3 um deep and drawn to 78 deg at t = 0.42 — 104 um of chord across a 144 um embryo, 5:1 wide to deep — and 26.0 um over 96 um at t = 0.52, 3.7:1. A band that shallow spanning three quarters of the width is confusable with a SECOND LINING LAYER, which is the standard distractor for the inner cell mass. The reason nothing caught it is the sharp half of the finding: B3-eccentric and B4-eccentric measure the mass's CENTROID, and a lining with a slight polar bulge satisfies a centroid test perfectly. So these two claims measure the SHAPE — the chord across the footprint over the depth at the pole, and the half-angle the mass is drawn to. Neither existed in round 1. Measured here 1.975."
+        },
+        {
+          "id": "B3-knot-at-one-end",
+          "claim": "and drawn over ONE END of the embryo rather than across it",
+          "measure": "massFootDeg",
+          "op": "atMost",
+          "value": 55,
+          "note": "The half-angle, from the embryo's centre, out to which the mass is drawn. Round 1 drew it to 78 deg at t = 0.42 and 60 deg at t = 0.52. Measured here 37.6 deg."
+        }
+      ]
     },
     {
       "mode": "mechanism",
-      "beat": 3,
+      "beat": 4,
       "title": "Two cell lines, two destinies",
       "ops": [
         {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mural_troph_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "polar_troph_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "icm_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "blastocoele_cut"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.42
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
           "op": "ISOLATE_REGION",
-          "target": "The three parts"
+          "target": "Cut open"
         },
         {
           "op": "COMPARE_STRUCTURES",
           "targets": [
-            "icm",
-            "trophoblast"
+            "icm_cut",
+            "mural_troph_cut",
+            "polar_troph_cut"
           ],
           "layout": "side-by-side"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "trophoblast",
-          "intensity": 0.85
+          "target": "icm_cut",
+          "intensity": 0.4
         },
         {
-          "op": "HIDE_STRUCTURE",
-          "target": "cavitation"
+          "op": "SHOW_RELATIONSHIP",
+          "from": "icm_cut",
+          "to": "polar_troph_cut",
+          "kind": "sits against it, and is sealed inside by it"
         }
       ],
-      "narration": "The inner cell mass makes the embryo, the amnion and the yolk sac. The trophoblast makes the placenta and the chorion and no part of the fetus. Note the wording: the inner cell mass is pluripotent, not totipotent, because it can no longer produce a placenta. That is why a hydatidiform mole — a trophoblastic tumour — grows placental tissue with no embryo in it, and floods the blood with hCG."
+      "narration": "The inner cell mass makes the embryo, the amnion and the yolk sac. The trophoblast makes the placenta and the chorion and no part of the fetus. Note the wording: the inner cell mass is pluripotent, not totipotent, because it can no longer produce a placenta. That is why a hydatidiform mole — a trophoblastic tumour — grows placental tissue with no embryo in it, and floods the blood with hCG.\n\nA knot of cells at one end, inside the cavity. Everything in the fetus comes from here, and it also makes the amnion and the yolk sac. Within days it will split into epiblast and hypoblast to form the bilaminar disc. It is pluripotent, not totipotent — it can make any tissue of the body but can no longer make a placenta, and that distinction is the exam point. Embryonic stem cell lines are derived from it.",
+      "narration_from": "sequence-version view beat 3 followed by structure \"icm\", both — carried across verbatim. Beat 3's COMPARE_STRUCTURES is kept and re-pointed at the cut variants, because the comparison the narration makes is between two tissues in ONE embryo rather than between two panels. The zona is dropped from this beat so that nothing is drawn in front of the two structures it compares — RENDER-STANDARD 3.aa. CAMERA CORRECTED TO ANTERIOR by the visibility walk, which is what found it. The cut is a world z-plane, so a LATERAL camera (viz3d's VIEW_DIR lateral = +x) sees that plane EDGE-ON and a student is shown the intact half from the side — the cut variants of the mass, the cavity and the polar wall measured 0.000%, 0.000% and 0.005% of the frame in a beat that points at them, while the mural wall filled 19.5%. The SVG version's own \"lateral\" was right for a panel drawn in that plane and is wrong for a sectioned solid. ROUND 4, the review's F1: polar_troph_cut ADDED to the COMPARE targets. viz3d runs the ops in order and COMPARE_STRUCTURES overwrites state.only, which subjectBox() frames on, so the beat was framing on a pair that excluded the polar cap and 574 subject pixels of that cap lay on row 0 of player/beat04.png - about 5.8% of the embryo's diameter outside the picture, on the one beat whose own claim B4-cap-seals-the-mass is about what is SEEN. The review offered dropping the COMPARE op instead; adding the third target is taken because it also makes the comparison anatomically whole. The beat's title is \"Two cell lines, two destinies\" and the trophoblast cell line is BOTH halves, so comparing the mass against the mural wall alone named only part of the lineage it contrasts.",
+      "claims": [
+        {
+          "id": "B4-icm-minority",
+          "claim": "the mass is a small part of the cells",
+          "measure": "icmVolRel",
+          "op": "near",
+          "value": 0.12,
+          "tol": 0.004
+        },
+        {
+          "id": "B4-troph-majority",
+          "claim": "and the trophoblast is nearly all of them",
+          "measure": "trophVolRel",
+          "op": "near",
+          "value": 0.88,
+          "tol": 0.004
+        },
+        {
+          "id": "B4-eccentric",
+          "claim": "the mass is at one end",
+          "measure": "icmEccFracR",
+          "op": "atLeast",
+          "value": 0.35
+        },
+        {
+          "id": "B4-cavity",
+          "claim": "with the cavity filling the rest",
+          "measure": "cavityFracOfEmbryo",
+          "op": "atLeast",
+          "value": 0.35
+        },
+        {
+          "id": "B4-stage",
+          "claim": "and the beat is at this stage of the expansion: the cavity is 38% to 45% of the embryo",
+          "measure": "cavityFracOfEmbryo",
+          "op": "between",
+          "value": [
+            0.381,
+            0.452
+          ]
+        },
+        {
+          "id": "B4-knot-not-a-layer",
+          "claim": "a KNOT of cells, about twice as broad as it is deep — not a layer across the roof of the cavity",
+          "measure": "massAspect",
+          "op": "atMost",
+          "value": 2.6,
+          "note": "ADDED IN ROUND 2 BECAUSE ITS ABSENCE WAS THE REVIEW'S F2. The review's ruling on round 1 was NO for beat 4 and borderline for beat 3: measured off the built mesh the mass was 20.3 um deep and drawn to 78 deg at t = 0.42 — 104 um of chord across a 144 um embryo, 5:1 wide to deep — and 26.0 um over 96 um at t = 0.52, 3.7:1. A band that shallow spanning three quarters of the width is confusable with a SECOND LINING LAYER, which is the standard distractor for the inner cell mass. The reason nothing caught it is the sharp half of the finding: B3-eccentric and B4-eccentric measure the mass's CENTROID, and a lining with a slight polar bulge satisfies a centroid test perfectly. So these two claims measure the SHAPE — the chord across the footprint over the depth at the pole, and the half-angle the mass is drawn to. Neither existed in round 1. Measured here 1.955."
+        },
+        {
+          "id": "B4-knot-at-one-end",
+          "claim": "and drawn over ONE END of the embryo rather than across it",
+          "measure": "massFootDeg",
+          "op": "atMost",
+          "value": 55,
+          "note": "The half-angle, from the embryo's centre, out to which the mass is drawn. Round 1 drew it to 78 deg at t = 0.42 and 60 deg at t = 0.52. Measured here 46.9 deg."
+        },
+        {
+          "id": "B4-cap-seals-the-mass",
+          "claim": "and the polar trophoblast seals it in: the thicker wall covers the whole of the mass's footprint, with no blue showing past the darker red",
+          "measure": "capCoversMassFrac",
+          "op": "near",
+          "value": 1,
+          "tol": 1e-9,
+          "note": "ADDED IN ROUND 2 BECAUSE OF THE REVIEW'S F3, and this beat is where that finding bit: its own op tells the student the mass is SEALED INSIDE by the polar trophoblast, and round 1's cap was memoised from the t = 1 mound and reported 29.674855578584584 degrees at EVERY t — against a mass whose own footprint ran to 104.7 deg at t = 0.18 and 46.9 deg here. The blue mass extended well beyond the darker red cap in beats 2, 3 and 4, so the colour boundary did not mark the embryonic pole at all. The boundary is now the circle where the mass's bounding sphere MEETS the wall, recomputed per t, so this claim is an identity of the construction wherever there is a cavity — which is why its tolerance is 1e-9 and not a margin."
+        }
+      ]
     },
     {
       "mode": "location",
-      "beat": 4,
+      "beat": 5,
       "title": "Which end goes in first",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "Poles"
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
         },
         {
           "op": "SHOW_STRUCTURE",
-          "target": "The three parts"
+          "target": "mural_troph_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "polar_troph_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "icm_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "blastocoele_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "embryonic_pole"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "abembryonic_pole"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
         },
         {
           "op": "COMPARE_STRUCTURES",
@@ -440,162 +926,598 @@
           "layout": "side-by-side"
         },
         {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "embryonic_pole",
-          "to": "icm",
-          "kind": "is the end the inner cell mass sits at"
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "lateral"
-        }
-      ],
-      "narration": "The blastocyst has an axis. The end carrying the inner cell mass is the embryonic pole; the far end is the abembryonic pole. The trophoblast over the embryonic pole is the part that touches the endometrium first and the part that invades, so the embryo attaches at the same end it will grow from. Ask which surface implants and this is the answer."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 5,
-      "title": "Hatching must come first",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Hatching & implanting"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "blastocoele"
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "polar_troph_cut",
+          "intensity": 0.9
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "hatching",
+          "target": "embryonic_pole",
           "intensity": 0.95
         },
         {
           "op": "SHOW_RELATIONSHIP",
-          "from": "blastocoele",
-          "to": "hatching",
-          "kind": "expansion thins the shell"
+          "from": "embryonic_pole",
+          "to": "icm_cut",
+          "kind": "is the end the inner cell mass sits at"
         },
         {
-          "op": "PEEL_LAYER",
-          "layer": "organ",
-          "direction": "outward"
+          "op": "SHOW_RELATIONSHIP",
+          "from": "polar_troph_cut",
+          "to": "mural_troph_cut",
+          "kind": "thicker here, and it is this surface that invades"
         }
       ],
-      "narration": "For four days the zona pellucida has been stopping the embryo from sticking to anything. It now has to go. The expanding cavity stretches and thins it, trophoblast enzymes weaken it, and on about day five the blastocyst squeezes out. Hatching before implantation, in that order, every time. A zona that will not break is one recognised cause of repeated implantation failure after transfer."
+      "narration": "The blastocyst has an axis. The end carrying the inner cell mass is the embryonic pole; the far end is the abembryonic pole. The trophoblast over the embryonic pole is the part that touches the endometrium first and the part that invades, so the embryo attaches at the same end it will grow from. Ask which surface implants and this is the answer.\n\nThe end where the inner cell mass sits. The trophoblast overlying it is the polar trophoblast, and it is always the part that touches the endometrium first. So the embryo implants head-end first, and the placenta forms over the pole the embryo is attached to.\n\nThe opposite end, wall only, with the cavity behind it. Its trophoblast is thinner and does not invade. Naming the two poles is how you answer which surface implants — and it is asked that way.",
+      "narration_from": "sequence-version view beat 4 followed by structures \"embryonic_pole\" and \"abembryonic_pole\", all — carried across verbatim. Beat 4's ROTATE_TO_VIEW lateral is kept: the axis the narration is about is in that plane. CAMERA CORRECTED TO ANTERIOR by the visibility walk, which is what found it. The cut is a world z-plane, so a LATERAL camera (viz3d's VIEW_DIR lateral = +x) sees that plane EDGE-ON and a student is shown the intact half from the side — the cut variants of the mass, the cavity and the polar wall measured 0.000%, 0.000% and 0.005% of the frame in a beat that points at them, while the mural wall filled 19.5%. The SVG version's own \"lateral\" was right for a panel drawn in that plane and is wrong for a sectioned solid.",
+      "claims": [
+        {
+          "id": "B5-polar-thicker",
+          "claim": "the trophoblast over the mass is the thicker of the two",
+          "measure": "polarOverMural",
+          "op": "atLeast",
+          "value": 1.35
+        },
+        {
+          "id": "B5-eccentric",
+          "claim": "the mass defines the embryonic end",
+          "measure": "icmEccFracR",
+          "op": "atLeast",
+          "value": 0.5
+        },
+        {
+          "id": "B5-cap",
+          "claim": "and the thicker cap is no wider than the mass under it",
+          "measure": "polarCapDeg",
+          "op": "atMost",
+          "value": 40
+        },
+        {
+          "id": "B5-mural-thin",
+          "claim": "while the far wall is thin",
+          "measure": "wallMuralUm",
+          "op": "atMost",
+          "value": 11
+        },
+        {
+          "id": "B5-stage",
+          "claim": "and the beat is at this stage of the expansion: the cavity is 62% to 66% of the embryo",
+          "measure": "cavityFracOfEmbryo",
+          "op": "between",
+          "value": [
+            0.616,
+            0.655
+          ]
+        },
+        {
+          "id": "B5-cap-tracks-the-mass",
+          "claim": "and \"the trophoblast over the embryonic pole\" means exactly that: the thicker region is the region the mass lies against",
+          "measure": "capCoversMassFrac",
+          "op": "near",
+          "value": 1,
+          "tol": 1e-9,
+          "note": "The same identity as B4-cap-seals-the-mass, asserted on the beat whose narration names the region. This beat already claimed polarCapDeg atMost 40; that bounds the cap's SIZE and says nothing about whether it is in the right PLACE, which is what the review's F3 was about."
+        }
+      ]
     },
     {
       "mode": "mechanism",
       "beat": 6,
-      "title": "Day 6 — attaching, and announcing it",
+      "title": "A single flattened layer — and that is the whole trophoblast",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "Hatching & implanting"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "uterine_cavity"
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:implantation-onset",
-          "path": [
-            "hatching",
-            "embryonic_pole",
-            "implantation_start",
-            "hcg"
-          ],
-          "duration": 6
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "hcg",
-          "intensity": 0.9
-        }
-      ],
-      "narration": "Apposition, adhesion, invasion — the hatched blastocyst lies against the endometrium at about day six, sticks, and the syncytiotrophoblast digs in at the embryonic pole. The usual site is the upper posterior uterine wall. As it invades it secretes hCG, which acts on the corpus luteum's LH receptor and keeps progesterone flowing, so the period is missed. A pregnancy test is detecting the placenta, not the embryo, from about eight days after fertilization."
-    },
-    {
-      "mode": "comparison",
-      "beat": 7,
-      "title": "A later split shares more",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Clinical"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "The three parts"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "twinning_late",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "icm",
-          "to": "twinning_late",
-          "kind": "the part that can still divide in two"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "trophoblast",
-          "to": "twinning_late",
-          "kind": "already committed — so the placenta is shared"
-        }
-      ],
-      "narration": "Once a blastocyst has formed, only the inner cell mass can still split, and the trophoblast around it cannot be duplicated. So twins arising between days four and eight share one placenta and have two amnions, and that shared circulation is what makes twin-to-twin transfusion possible. A split between days eight and thirteen shares the amnion as well; later still and the twins are conjoined. The membranes on the scan date the split."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 8,
-      "title": "Why day 5 is where the clinic works",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
+          "op": "HIDE_STRUCTURE",
           "target": "*"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "mural_troph_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "polar_troph_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "icm_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "blastocoele_cut"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.86
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Cut open"
+        },
+        {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "clinical",
-          "intensity": 0.9
+          "target": "mural_troph_cut",
+          "intensity": 0.95
         },
         {
           "op": "SHOW_RELATIONSHIP",
-          "from": "clinical",
-          "to": "trophoblast",
-          "kind": "biopsied here, not from the embryo"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "clinical",
-          "to": "hatching",
-          "kind": "the zona can be thinned to help"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "clinical",
-          "to": "implantation_start",
-          "kind": "where it implants decides what goes wrong"
+          "from": "mural_troph_cut",
+          "to": "blastocoele_cut",
+          "kind": "one cell thick, and it is what holds the fluid in"
         }
       ],
-      "narration": "Four practical points. Transferring at day five selects embryos that survived the genome handover, so fewer are replaced and fewer twins result. Genetic testing takes cells from the trophectoderm, which is safer and more representative than a day-three blastomere and does not touch the future fetus. The zona can be thinned artificially when hatching keeps failing. And where the blastocyst lands settles two diagnoses in advance: too low in the uterus is a placenta praevia, still in the tube is an ectopic pregnancy."
+      "narration": "The single flattened layer around the outside — one cell thick, and that is the whole of it. And it is the half of the trophoblast that does NOT invade. It is the thinner of the two for the whole of this scene, and it is what the expanding fluid presses against. It becomes the chorion laeve, the smooth chorion, which regresses rather than forming placenta; the villous placenta forms over the opposite pole, where the mass sits. Like all trophoblast it contributes nothing to the fetus. At the implantation site — which is the polar surface, not this one — the trophoblast splits into an inner cytotrophoblast, which keeps dividing, and an outer syncytiotrophoblast, which fuses into one multinucleate mass and does the invading. A tumour of this tissue is a hydatidiform mole — placenta without an embryo, which is why it produces enormous amounts of hCG and no fetal parts.",
+      "narration_from": "sequence-version structure \"trophoblast\" — carried across verbatim. It had no beat of its own in the SVG scene; it has one here because \"a single flattened layer\" is the examinable claim about the trophoblast and it is a THICKNESS, which this beat is the only one that shows. Cut, and at the expanded stage, because the wall is thinnest there and a wall is not a picture from outside. ROUND 4, the review's F2: this beat's narration WAS the inherited trophoblast paragraph verbatim, and its only highlight is mural_troph_cut — so one beat after being told the mural wall does not invade, a student was shown the mural wall and told that it does. It now carries the mural half's own text. The thickness claims the beat is built on are untouched; nothing geometric moved.",
+      "claims": [
+        {
+          "id": "B6-thin-um",
+          "claim": "the wall is a few microns thick",
+          "measure": "wallMuralUm",
+          "op": "atMost",
+          "value": 7.5
+        },
+        {
+          "id": "B6-thin-frac",
+          "claim": "under a fifteenth of the embryo's own radius",
+          "measure": "wallMuralFracR",
+          "op": "atMost",
+          "value": 0.075
+        },
+        {
+          "id": "B6-thinned",
+          "claim": "and it has thinned more than fourfold, as a share of the radius, since the morula",
+          "measure": "wallThinningVsMorula",
+          "op": "atLeast",
+          "value": 4
+        },
+        {
+          "id": "B6-polar-thicker",
+          "claim": "the layer over the mass is still the thicker",
+          "measure": "polarOverMural",
+          "op": "atLeast",
+          "value": 1.35
+        },
+        {
+          "id": "B6-cells",
+          "claim": "without the cells having grown at all",
+          "measure": "cellVolRel",
+          "op": "near",
+          "value": 1,
+          "tol": 0.004
+        },
+        {
+          "id": "B6-stage",
+          "claim": "and the beat is at this stage of the expansion: the cavity is 76% to 77% of the embryo",
+          "measure": "cavityFracOfEmbryo",
+          "op": "between",
+          "value": [
+            0.762,
+            0.772
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Hatching must come first",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "zona"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mural_troph"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "polar_troph"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.66
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The shell"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "zona",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "zona",
+          "to": "mural_troph",
+          "kind": "stretched thin by the expanding cavity, and now breached"
+        }
+      ],
+      "narration": "For four days the zona pellucida has been stopping the embryo from sticking to anything. It now has to go. The expanding cavity stretches and thins it, trophoblast enzymes weaken it, and on about day five the blastocyst squeezes out. Hatching before implantation, in that order, every time. A zona that will not break is one recognised cause of repeated implantation failure after transfer.",
+      "narration_from": "sequence-version view beat 5 — carried across verbatim. Its PEEL_LAYER op is gone: the zona does not peel here, it thins and tears, and that is now built geometry rather than an op. The structure \"hatching\" carries the same teaching and is attached to the zona itself.",
+      "claims": [
+        {
+          "id": "B7-zona-thinned",
+          "claim": "the zona has lost a third of its thickness, stretched by the cavity",
+          "measure": "zonaThFrac0",
+          "op": "atMost",
+          "value": 0.6
+        },
+        {
+          "id": "B7-breached",
+          "claim": "and it is open",
+          "measure": "zonaCoverFrac",
+          "op": "atMost",
+          "value": 0.9
+        },
+        {
+          "id": "B7-still-there",
+          "claim": "but not yet gone",
+          "measure": "zonaPresent",
+          "op": "equals",
+          "value": 1
+        },
+        {
+          "id": "B7-expanded",
+          "claim": "the embryo is half again the diameter it had as a morula",
+          "measure": "embryoDRel",
+          "op": "atLeast",
+          "value": 1.4
+        },
+        {
+          "id": "B7-stage",
+          "claim": "and the beat is at this stage of the expansion: the cavity is 67% to 70% of the embryo",
+          "measure": "cavityFracOfEmbryo",
+          "op": "between",
+          "value": [
+            0.667,
+            0.697
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Out of the shell — and only now can it stick to anything",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mural_troph"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "polar_troph"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.78
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "mural_troph",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The shell has gone. What is left is a bare blastocyst, about 190 µm across, holding the same quantity of cytoplasm as the zygote did — not one cell has grown. Only now, with nothing at all between the trophoblast and the endometrium, can the next step happen.",
+      "narration_from": "NEWLY WRITTEN for this beat, and it is the only narration in this scene that is. The SVG scene had nothing between hatching and implantation because one drawing could carry both; a procedural scene cannot, because \"the shell is going\" and \"the shell has gone\" are two different pictures and RENDER-STANDARD requires a beat to change the picture. Every sentence states only what this beat MEASURES and SHOWS — the diameter and the absent zona are both claims below. A first draft of it also quoted the wall thickness, the cavity fraction and the position of the mass; those were cut because this beat draws the blastocyst from OUTSIDE and shows none of the three, and beats 6, 3 and 5 are where each of them is both drawn and claimed. A beat must not narrate what it does not draw.\n\nROUND 5, 2026-10-02 — THE SIZE RATIO WAS REMOVED FROM THIS BEAT, which is round 4's F5. The clause \"— half again the width of the morula that entered the uterus, and not one cell has grown to do it\" is gone from here and now reads on structures[blastocoele].narration and structures[blastocoele_cut].narration, where no frame is implied by it. WHY, and the distinction that decides it: the player refits the camera on every view, so every beat is drawn at the same on-screen size and a RATIO BETWEEN TWO BEATS is divided out of the pictures that carry it — measured, beat 1 and this beat render at 75.40% box fill and 33.37% / 33.33% subject, i.e. the morula and the blastocyst are the same width on screen to within 0.1%. An ABSOLUTE size is not affected and stays: nothing in a single frame contradicts \"about 190 µm across\", because the student is given no ruler and no second frame beside it. This is RENDER-STANDARD 3.y — a beat that narrates a difference in size must assert it as PROJECTED ON TO ITS OWN CAMERA'S SCREEN PLANE — and the projected assertion cannot be made here: no camera in the player can show the ratio, because nothing can declare that two beats share one distance. The capability is filed as engine__camera-scale-group. Claim B8-vs-morula is KEPT, unchanged in measure, op and value: the geometry is still asserted and still machine-checked, and only the narrated sentence moved.",
+      "claims": [
+        {
+          "id": "B8-no-zona",
+          "claim": "the zona has gone",
+          "measure": "zonaPresent",
+          "op": "equals",
+          "value": 0
+        },
+        {
+          "id": "B8-cover",
+          "claim": "nothing is between the trophoblast and the outside",
+          "measure": "zonaCoverFrac",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-9
+        },
+        {
+          "id": "B8-size",
+          "claim": "about 190 µm across",
+          "measure": "embryoD_um",
+          "op": "near",
+          "value": 189,
+          "tol": 2.5
+        },
+        {
+          "id": "B8-vs-morula",
+          "claim": "the geometry is half again the width of the morula that entered the uterus — asserted here, narrated on blastocoele, because the per-beat camera refit makes the ratio unshowable in this frame (engine__camera-scale-group)",
+          "measure": "embryoDRel",
+          "op": "atLeast",
+          "value": 1.5
+        },
+        {
+          "id": "B8-cells",
+          "claim": "the same quantity of cytoplasm as the zygote",
+          "measure": "cellVolRel",
+          "op": "near",
+          "value": 1,
+          "tol": 0.004
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "Day 6 — attaching, and announcing it",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "endometrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mural_troph"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "polar_troph"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "polar_troph",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "endometrium",
+          "intensity": 0.7
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "polar_troph",
+          "to": "endometrium",
+          "kind": "the surface that touches first, and the one that invades"
+        }
+      ],
+      "narration": "Apposition, adhesion, invasion — the hatched blastocyst lies against the endometrium at about day six, sticks, and the syncytiotrophoblast digs in at the embryonic pole. The usual site is the upper posterior uterine wall. As it invades it secretes hCG, which acts on the corpus luteum's LH receptor and keeps progesterone flowing, so the period is missed. A pregnancy test is detecting the placenta, not the embryo, from about eight days after fertilization.",
+      "narration_from": "sequence-version view beat 6 — carried across verbatim. Its TRACE_STRUCTURE of \"concept:implantation-onset\" is gone: in a procedural scene the stages are values of t rather than waypoints in space, and the three things it traced through are this beat (apposition), view 7 (the shell going) and narration with no geometry at all (hCG). Declared in gaps[]. The embryonic-pole MARKER is not shown in this beat: it sits 2.5 to 36 µm outside the +y pole, which at t = 1 is exactly where the endometrium is, so it would be drawn inside the wall it is pointing at. Beat 5 is where the poles are marked, and the wall is not there.",
+      "claims": [
+        {
+          "id": "B9-apposed",
+          "claim": "the blastocyst is lying against the endometrium",
+          "measure": "apposedGapUm",
+          "op": "atMost",
+          "value": 1
+        },
+        {
+          "id": "B9-polar-first",
+          "claim": "and it is the POLAR trophoblast that reaches it",
+          "measure": "apposedIsPolar",
+          "op": "equals",
+          "value": 1
+        },
+        {
+          "id": "B9-hatched",
+          "claim": "with no zona in the way",
+          "measure": "zonaPresent",
+          "op": "equals",
+          "value": 0
+        },
+        {
+          "id": "B9-full-size",
+          "claim": "at its full 200 µm",
+          "measure": "embryoD_um",
+          "op": "near",
+          "value": 200,
+          "tol": 1
+        }
+      ]
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 10,
+      "title": "Back to day 5 — and why that is where the clinic works",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "zona"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mural_troph"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "polar_troph"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "embryonic_pole"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.72
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "mural_troph",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "zona",
+          "intensity": 0.6
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "mural_troph",
+          "to": "zona",
+          "kind": "biopsied here, through the gap the zona is making"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "mural_troph",
+          "to": "embryonic_pole",
+          "kind": "and as far from the future fetus as the embryo allows"
+        }
+      ],
+      "narration": "A step back in time, and it is deliberate: this beat stands at day five, BEFORE the attachment you have just seen. The zona is back because the embryo has not FINISHED hatching — it is thinned and already breached, and the blastocyst is still inside it — that is the order, and this is the stage the clinic works at.\n\nFour practical points. Transferring at day five selects embryos that survived the genome handover, so fewer are replaced and fewer twins result. Genetic testing takes cells from the trophectoderm, which is safer and more representative than a day-three blastomere and does not touch the future fetus. The zona can be thinned artificially when hatching keeps failing. And where the blastocyst lands settles two diagnoses in advance: too low in the uterus is a placenta praevia, still in the tube is an ectopic pregnancy.\n\nThe blastocyst is where assisted reproduction now does most of its work. Transfer at day five selects the embryos that survived the genome handover, so fewer need to be replaced. Cells for genetic testing are taken from the trophectoderm rather than from the embryo itself, which is both safer and more representative than a day-three blastomere. The zona can be thinned to help hatching. And the two ways implantation goes wrong in position — too low, or never leaving the tube — are both decided in the next forty-eight hours.",
+      "narration_from": "sequence-version view beat 8 followed by structure \"clinical\", both — carried across verbatim. Beat 8's three SHOW_RELATIONSHIP ops pointed at regions that are now narration rather than geometry; two are re-pointed at the built parts the clinical facts are ABOUT — the mural trophoblast a biopsy takes cells from, and the zona a laboratory thins — and the third, about where implantation goes wrong, has no geometry in this scene and stays as words. The beat sits at the stage where the zona is open and the wall is expanded, which is what a day-5 transfer is graded on. ROUND 4, the review's F4: the TITLE and the first paragraph are NEW — not inherited — and they exist to mark this beat as a return to an earlier instant. Measured through the model at each beat's own t, zonaCoverFrac runs 1.0 at beats 1-3, 0.0 at beat 6 (t=0.86), 0.843 at beat 7 (t=0.66), 0.0 at beats 8 and 9, and 0.157 here (t=0.72); the embryo is 200.0 um across at beat 9 and 183.0 here. The scene's own learning_goal is why the embryo must hatch before it can implant, and beat 7's words are 'hatching before implantation, in that order, every time' — so a re-shelled embryo drawn AFTER the apposition beat, unmarked, walks the student backwards through the ordering the scene teaches. The alternative the review offered was to swap beats 9 and 10, which costs nothing geometrically; it is NOT taken because beat 9 is the scene's destination (covers[] stops at apposition) and a clinical correlate that lands after it reads as the aside it is, once it says so. See the gaps[] entry on beat order.",
+      "claims": [
+        {
+          "id": "B10-biopsy-clear",
+          "claim": "the part of the wall a biopsy samples is well clear of the inner cell mass",
+          "measure": "biopsyClearanceUm",
+          "op": "atLeast",
+          "value": 90
+        },
+        {
+          "id": "B10-zona-open",
+          "claim": "the zona is already breaking: a laboratory thinning it is helping something under way",
+          "measure": "zonaCoverFrac",
+          "op": "atMost",
+          "value": 0.45
+        },
+        {
+          "id": "B10-zona-thin",
+          "claim": "and it is down to little more than half its original thickness",
+          "measure": "zonaThFrac0",
+          "op": "atMost",
+          "value": 0.56
+        },
+        {
+          "id": "B10-expanded",
+          "claim": "the cavity has expanded to over seven tenths of the embryo, which is what grading measures",
+          "measure": "cavityFracOfEmbryo",
+          "op": "atLeast",
+          "value": 0.7
+        },
+        {
+          "id": "B10-stage",
+          "claim": "and the beat is at this stage of the expansion: the cavity is 70% to 73% of the embryo",
+          "measure": "cavityFracOfEmbryo",
+          "op": "between",
+          "value": [
+            0.705,
+            0.728
+          ]
+        }
+      ]
+    }
+  ],
+  "visibility_waivers": [
+    {
+      "view": 9,
+      "key": "polar_troph",
+      "why": "SEEN EDGE-ON BY THE ONLY CAMERA THAT CAN SHOW THE CONTACT, AND THAT IS TWO CLAIMS WANTING TWO CAMERAS. The polar trophoblast is the cap over the mass — measured at a 25.1 degree half-angle AT t = 1, read off where the mass's own bounding sphere meets the wall, recomputed at every t rather than frozen at one — see the review's F3 and acceptance row D — and a cap that size is about 0.8% of the embryo's own silhouette from any camera in the contact plane. Beat 9 has to be in that plane: apposition is the blastocyst LYING AGAINST the wall, and a camera that would show the cap face-on is a superior one, looking straight through the endometrium that the beat exists to put the embryo against. RENDER-STANDARD 3.y: \"where two claims want incompatible cameras, that is two beats.\" So the cap itself is BEAT 5, where it is cut, highlighted and measured at 1.487% of the frame, and beat 9 carries the claim that it is the POLAR surface which reaches the wall as a MEASUREMENT instead — claim B9-polar-first, apposedIsPolar, read off the built meshes, with B9-apposed measuring the gap at 0.015 µm. What this beat draws and what it points at are the contact and the wall, and both are well over the floor (endometrium 23%, mural trophoblast 18%). Measured here at 0.137% against a 0.30% floor; three recompositions were tried first and are recorded in the model (the patch went from 400 to 260 to 220 µm, and the pole marker was enlarged until it cleared the floor in beat 10), each of which moved this number and none of which could move it far enough, because the limit is the cap's own solid angle and not the framing.",
+      "round2_note": "THE NUMBER IN THIS WAIVER MOVED IN ROUND 2 AND THE ARGUMENT DID NOT. Round 1's cap was a frozen 29.674855578584584 deg at every t; the cap is now the mass's own footprint, which at this beat's t = 1 is 25.095 deg. A smaller cap is a smaller share of the silhouette, so the waiver is if anything more necessary than it was, and it is re-argued rather than re-tolerated: the three recompositions recorded in the model were tried against the walk's numbers, and the beat that DOES show this structure face-on is still beat 5."
     }
   ],
   "provenance": {
+    "corrected_at": "2026-10-02T11:46:19Z",
+    "corrected_by": "the model3d review task",
+    "correction_note": "ROUND 5 REVIEW, 2026-10-02T11:46:19Z. Three prose corrections; no geometry touched, no t, no op, no claim measure/op/value, no render re-made. (1) ROUND 5'S OWN FIX OVER-REACHED AND TOOK A TRUE SENTENCE WITH THE FALSE ONE. Closing F5, the build removed from beat 8 the whole clause \"— half again the width of the morula that entered the uterus, and not one cell has grown to do it\". Only the first half is a RATIO BETWEEN TWO BEATS and only the first half is contradicted by the frames; \"not one cell has grown to do it\" is an absolute statement about cytoplasm, it is asserted on this very beat by its own machine-checked claim B8-cells (cellVolRel near 1, tol 0.004), the zygote it compares against is not drawn in this scene at all, and no frame contradicts it. The build's own written rule — \"an ABSOLUTE size is not affected and stays ... only a RATIO is contradicted\" — applies to it and was not applied. CONSEQUENCE, measured across the file before the fix: after round 5 NO beat narration anywhere in this scene told a student that the expansion costs no cytoplasm. It survived only in four claim strings (B1-cells, B2-no-growth, B6-cells, B8-cells) and in structures[blastocoele]. That is the single most examinable fact about blastocyst expansion and it had been deleted from the student-facing walk as collateral. Beat 8 now reads \"... about 190 µm across, holding the same quantity of cytoplasm as the zygote did — not one cell has grown.\" A first version of this correction ended \"; what has been added is fluid\", and that was cut by the same review before committing: beat 8 draws the blastocyst from OUTSIDE and does not draw the cavity, and this beat's own narration_from states the rule \"A beat must not narrate what it does not draw\". The surviving two clauses name only what beat 8 draws and what beat 8 claims. Every clause is asserted by a claim ON THIS BEAT (B8-size, B8-cells) and no clause states a ratio between beats, so RENDER-STANDARD 3.y is satisfied and F5 does not reopen. (2) CLAIM B8-cells' PROSE WAS A FRAGMENT LEFT BY THAT EXCISION: it read \"and the same quantity of cytoplasm as the zygote\", a sentence-initial \"and\" that had continued the deleted clause. Leading \"and\" removed; measure, op, value and tol untouched. This is the same class as round 4's beat-6 splice and the second round running in which a text edit left a dangling fragment behind. (3) structures[blastocoele].narration_from still read 'sequence-version structure \"blastocoele\" — carried across verbatim' and structures[blastocoele_cut].narration_from mentioned nothing, although round 5 APPENDED a sentence to both. The round-5 build note states \"narration_from and gaps[27] record it\": the narration_from that records it is VIEW 8's, not the two structures that received the text, and gaps has 27 entries so the last index is [26]. Both structures now record the move, because this file's own gaps[22] is a round-4 finding about exactly this failure — a narration marked verbatim on both halves of a split structure. The scene stays at status candidate. --- PREVIOUS NOTE KEPT: ROUND 4 REVIEW, 2026-10-02T09:48:14Z. Two narration corrections; no geometry touched and no render re-made. (1) BEAT 10 CONTRADICTED ITS OWN CLAIM AND ITS OWN PICTURE. The sentence round 4 added to close F4 read 'The zona is back because the embryo has not hatched yet'. Beat 10 stands at t = 0.72; T_HATCH0 = 0.60 and T_HATCH1 = 0.78, so zonaCoverFrac there is (1 + cos(pi * smoothstep(0.60, 0.78, 0.72))) / 2 = 0.1569 - the shell is 84% gone and renders as a crescent cap over the top third of the embryo. The beat's OWN claim B10-zona-open asserts zonaCoverFrac atMost 0.45 ('the zona is already breaking'), so the narration and the machine-checked claim on the same beat said opposite things, and the learning_goal is why the embryo must hatch before it can implant. The clause now says it has not FINISHED hatching and that the shell is thinned and already breached, which is true of t = 0.72, consistent with B10-zona-open and B10-zona-thin, and still carries the step back from beat 9 that F4 asked for. Nothing in the battery, the beat claims or the visibility walk compares a beat's prose against its own claims - that is the standards gap named in this round's queue entry. (2) BEAT 6'S VIEW NARRATION HAD A BROKEN SPLICE from round 4's F2 rework: 'and that is the whole of it. and it is the half of the trophoblast...' - sentence-initial lowercase after a full stop, in student-facing text. Capitalised; no wording changed. The scene stays at status candidate. --- PREVIOUS NOTE KEPT: ROUND 2 REVIEW, 2026-10-02. Two text/metadata corrections; no geometry touched and no render re-made. (1) PALETTE DISAGREEMENT between this scene and the model. structures[blastocoele].color and structures[blastocoele_cut].color read #85c1e9 while models3d/blastocyst.js LAYERS.blastocoele is 0x9fd4f2, and viz3d.js takes the material colour from LAYERS - so the scene's legend swatch for the cavity differed from the fluid actually drawn. The scene is corrected to the model's value. Nothing in the acceptance battery, the proof or the visibility walk compares the two palettes, which is why neither round caught it; that is a standards gap and it is named in the queue item. (2) The gaps[] entry on the degenerate window t <= 0.02 asserted that 'the two colours either side of the boundary are both reds'. Measured off beat01.png they are (248,52,45) and (255,173,161) either side of a one-pixel transition along a dead-straight line across the whole embryo. The entry now carries the measured values and the window is marked OPEN rather than declared. The scene stays at status candidate.",
     "author": "task",
-    "authored_at": "2026-08-28"
+    "authored_at": "2026-08-28",
+    "reauthored_at": "2026-10-02",
+    "reauthored_by": "model3d BUILD run 2026-10-02T08:07:59Z, round 4",
+    "reauthor_note": "ROUND 4, 2026-10-02 — the four findings the round-3 review left open, all four closed. F1: beat 4's COMPARE_STRUCTURES now includes polar_troph_cut, so the beat frames on a subject that contains the cap its own claim is about; proved by counting subject pixels on the border rows and columns of every beat, which is a measurement this corpus did not have before this round. F2: the mural trophoblast and beat 6 get their own narration — the inherited paragraph stays whole on polar_troph, nothing is deleted, and the clause that is false of the mural half is re-attributed to the implantation site. F3: the cavity now emits its own section on the cut plane, matte and nearly opaque, so it reads as a flat fluid-filled space rather than as a shaded ball; this REVERSES round 3's 'a space has no section to draw' and acceptance row CUT now carries every part with no named exclusion. F4: the non-monotone beat order is declared in gaps[] and beat 10 is marked in its own title and first sentence as a step back to day five. Also closed, found while fixing F3 and not reported by the review: the scene's own opacity for the fluid (0.42) overrode the model's (0.30), so round 3's mitigation never reached a frame anyone judged. Status stays candidate.",
+    "round2_at": "2026-10-02",
+    "round2_by": "model3d BUILD run 2026-10-02T01:05Z, round 2",
+    "round2_note": "REWORK AGAINST THE REVIEW OF 2026-10-02, four findings. F1 and F2 shared a root — the partition was star-shaped about the embryo's centre — and both are closed by rebuilding it: the inner cell mass is now the part of the void within a distance lambda of the embryonic pole, so the cavity is by definition the part furthest from that pole and reaches the mural wall at every t at which it exists, and the mass's inner face is a sphere about that pole and so is convex at every t. F3 is closed by the same change, because the polar/mural boundary is now the circle where that sphere meets the wall and is recomputed per t; MURAL_THRESH and S_WALL are gone from the model, as are KNOT_DEPTH, D_MAX, D_MAX_AT and EPS_FILM. F4 is closed in the render harness, whose t walk now contains the grid REVIEW-TASK-PROMPT section 2 names and checks that it does. The OBSERVED axial V-crease is gone with the old boundary. Five claims were ADDED to this scene, which is the half of F1 and F2 that was about the scene rather than the model: nothing in round 1 claimed what bounds the fluid, or the mass's shape, or that the coloured cap is in the right place.",
+    "round3_at": "2026-10-02",
+    "round3_by": "model3d BUILD task",
+    "round3_note": "ROUND 3, 2026-10-02 — the two findings the round-2 review left open. R1: the cut now emits its own cross-section for every material part (the inner cell mass, both trophoblast halves and the zona), so the mass is no longer an open bowl in the four sectioned beats; the fluid stays open by name, because a space has no section. R2: the pre-cavitation wall is drawn as ONE key, trophectoderm, and beat 1 points at it instead of at polar and mural, so the straight equatorial seam on the scene's first frame is gone along with the 82.9 deg label jump at t = 0.02 — the label boundary is the mass's footprint at every t with no exception anywhere. One structure added with new narration about why the labels do not exist yet; its ref is PINNED at @0 because a part that exists only for t <= 0.02 would resolve to reason:'none' at the adapter's default t = 1. No other narration touched. Acceptance row CUT added and row K's exception removed. Status stays candidate: only a review that did not build this promotes it.\nConverted from the SVG sequence engine to the procedural provider, per the queue item's note. The twelve sequence \"structures\" were teaching BEATS, not anatomical parts: five of them (blastocoele, icm, trophoblast, embryonic_pole, abembryonic_pole) named things the model now BUILDS and their narration moved onto those structures; four (uterine_cavity, cavitation, hatching, implantation_start) were IDEAS whose narration moved onto the beat that draws what they cause; and two (hcg, twinning_late) have no geometry in this scene at all and went to deferred_beats with their full text. Of the eight sequence views, seven became beats here and one (twinning) is deferred. Every sentence of narration in this scene is verbatim from the SVG version except beat 8's, which is new, is marked as new, and states only what that beat measures."
   },
+  "deferred_beats": [
+    {
+      "from_structure": "twinning_late",
+      "from_beat": 7,
+      "mode": "comparison",
+      "title": "A later split shares more",
+      "narration": "Once a blastocyst has formed, only the inner cell mass can still split, and the trophoblast around it cannot be duplicated. So twins arising between days four and eight share one placenta and have two amnions, and that shared circulation is what makes twin-to-twin transfusion possible. A split between days eight and thirteen shares the amnion as well; later still and the twins are conjoined. The membranes on the scan date the split.",
+      "also": "Once the trophoblast is committed, a split can no longer duplicate it. An inner cell mass that divides between days four and eight gives twins with one placenta and two amnions — monochorionic, diamniotic — and that shared placenta is what allows twin-to-twin transfusion syndrome. A split between days eight and thirteen shares the amnion too, and a later one leaves them conjoined. Read the membranes backwards and they date the split.",
+      "why_not_a_view": "It needs geometry this model does not build: a SECOND inner cell mass inside one trophoblast, and then a third case sharing one amnion. The model solves a single mass against a single volume constraint, and a twin variant is a real build rather than a flag — the same reason the cleavage scene defers its own twinning beat. Both texts are kept whole. If a future round builds a twin variant, this is the beat it belongs to, and it wants the cut variants and a lateral camera."
+    },
+    {
+      "from_structure": "hcg",
+      "mode": "mechanism",
+      "title": "hCG and the corpus luteum",
+      "narration": "The syncytiotrophoblast starts secreting human chorionic gonadotropin almost as soon as it invades. hCG acts on the LH receptor of the corpus luteum and keeps it producing progesterone, so the endometrium is not shed and the period is missed. It is detectable in blood about eight days after fertilization. Every pregnancy test in every clinic is measuring a product of this cell layer, not of the embryo.",
+      "why_not_a_view": "Nothing in it has form at this scale, and the cell layer it is about — the syncytiotrophoblast — is a WEEK TWO differentiation that this scene's own gaps[] already places outside its scope. Its teaching reaches a student inside beat 9, whose narration (verbatim from the SVG version) carries the hCG sentences; this entry keeps the longer text so nothing is lost. A beat drawing a hormone would be a label on a frame already shown, which RENDER-STANDARD calls text."
+    },
+    {
+      "from_structure": "implantation_start",
+      "mode": "mechanism",
+      "title": "Implantation begins (day 6)",
+      "narration": "About day six the hatched blastocyst lies against the endometrium, sticks to it, and the syncytiotrophoblast begins to eat its way in. The usual site is the upper posterior wall of the uterus. A blastocyst that implants low sets up a placenta praevia; one that never reached the uterus implants in the tube. By the end of week one it is only partly embedded — full burial belongs to week two.",
+      "why_not_a_view": "APPOSITION is drawn — it is beat 9, and the gap and which pole reaches the wall are both measured there. ADHESION and INVASION are not: they need a syncytiotrophoblast eroding an endometrial surface, which is week two and belongs to the Implantation structure, and which this scene does not claim in covers[]. The full text is kept here because it is the best statement in the corpus of what day six is, and beat 9 carries the half of it this scene can show."
+    }
+  ],
   "gaps": [
-    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and no 3d option; the subject is a staged process at cell scale. Only diagram is deferred. The curriculum asks for cross_section and mechanism views and both are authored — beat 1 is the cut.",
-    "Status is 'planned'. Twelve regions, eight beats, ops and narration are complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a cut blastocyst with the trophoblast drawn as a single flattened layer, an eccentric inner cell mass, a labelled cavity, both poles marked, the zona shown intact and then shed, and an endometrial-wall inset for beats 6 and 8.",
-    "Beat 6 traces concept:implantation-onset. The subject is the transition from hatching to attachment and hCG secretion, which is a process rather than a drawn object.",
-    "This scene stops at the START of implantation. Apposition, adhesion and the first invasion are named because they are what day six is, but trophoblast invasion proper, the lacunar stage and the bilaminar disc belong to 'Implantation' and 'Bilaminar embryonic disc' in the next topic. Those entries are NOT claimed in covers[].",
-    "Cytotrophoblast and syncytiotrophoblast are named inside the trophoblast narration rather than given their own regions, because they are strictly a week-two differentiation. If the implantation scene wants them as regions they should be authored there and this narration reduced to one line.",
-    "Twinning appears here and in the cleavage scene by design: the dichorionic split happens before day three and the monochorionic splits after, so the rule is met from both ends. Neither scene claims a twinning curriculum entry, and there is no such entry to claim.",
-    "Timings are the standard teaching ones — blastocyst at day five, hatching about day five, implantation beginning about day six, hCG detectable at about day eight — and are narrated as approximations. Cell counts are deliberately omitted from the labels here, unlike the cleavage scene, because published blastocyst counts vary too widely to be quoted as a fact a student should reproduce."
+    "ROUTED TO 3d_anatomy, NOT to its first preferred mode. The curriculum lists sequence then diagram and no 3d option, and the SVG version was correctly routed to sequence — but it has sat at status \"planned\" since August because no artwork was ever drawn for it, so it rendered nothing. The subject is a staged process at cell scale, which is what the procedural provider is for. Both curriculum view types are authored: cross_section is beat 3 and mechanism is seven of the ten beats.",
+    "STATUS IS \"candidate\", never \"ready\". Only a review that did not build this promotes it (ARTWORK-STANDARD), and only after looking at the renders.",
+    "SCALE. 1 unit = 10 µm, inherited from models3d/cleavage-morula.js and through it from models3d/fertilization.js. Acceptance row ZC re-measures the zona against cleavage-morula's own BUILT geometry at its t = 1 rather than against a copied constant, so the three scenes cannot drift into drawing different embryos. This scene must not mix in a bodyparts3d ref until something reconciles procedural units with anatomical millimetres — that is a known engine gap and its own queue item.",
+    "AXES. +y is the EMBRYONIC POLE and is NOT a body direction. The model is axisymmetric apart from its section function, has no chiral content and no mesh-anchored right/left pair, so per RENDER-STANDARD (\"a declared axis is not a proved one, and a symmetric model cannot prove its own\") no handedness claim is made anywhere, and no narration in this scene names a left or a right of the body. The one sentence that names a body location — \"the usual site is the upper posterior uterine wall\", in beat 9 — is narration about the uterus, which this scene does not draw, and is not a claim about the geometry.",
+    "THE UTERUS IS NOT DRAWN, and what replaces it is a 260 µm patch of secretory endometrium at TRUE scale with two gland openings. At 10 µm per unit a uterus is 5,000 units across, so there is no honest single-scale frame holding both it and a 200 µm blastocyst. The cleavage scene met the same problem and answered it with a schematic tube at its own declared scale, because its subject was a journey; this scene's subject is in CONTACT with a wall, so a true-scale window on that wall is the honest picture and there is no scale break anywhere in this scene.",
+    "THE PUMP HAS NO GEOMETRY. Tight junctions, the sodium-potassium ATPase and the aquaporins are narration (beat 2, verbatim from the SVG scene) and are not drawn: at 10 µm they have no form and a drawn \"junction\" would be an invention. What the geometry carries is what they CAUSE — one growing space that cannot leak back out — and the growth and the cavity are the same quantity by construction, which acceptance row F asserts.",
+    "THE ZONA'S THINNING HERE IS MECHANICAL ONLY. Its own material volume is conserved while the expanding embryo stretches it, so the modelled thinning — 15.2 µm down to 9.3 µm by the breach, row Z — is a LOWER BOUND on the real thinning, which also has trophoblast lysins working on it. The narration names the enzymes; the geometry does not model them.",
+    "HATCHING HAS NO WAIST. A real blastocyst herniates out of its zona hourglass-shaped, over hours. This model has no shell mechanics, so the blastocyst stays centred and the breach opens from the abembryonic pole until the shell is gone. The alternative was tried and is geometrically impossible here, not merely harder: an expanded blastocyst (R = 9.2) is LARGER than its own unstretched zona (outer radius 7.72), so the moment the shell is allowed to relax it is entirely inside the embryo. The site of the breach is a composition choice — the pole with no mass behind it, so the escape does not draw over the subject — the teaching texts do not fix it, and nothing here claims it.",
+    "THE SHED ZONA IS NOT DRAWN after hatching, for the same reason: an intact sphere beside a blastocyst larger than itself is a geometric lie, and a crumpled remnant needs a crumple law this model does not have. The shell leaves CONTINUOUSLY as the breach opens, so no frame loses it between two frames, and row H measures that it goes.",
+    "NO CELL COUNTS ANYWHERE, which the SVG version already decided and this version keeps: published blastocyst counts vary too widely to be a fact a student should reproduce. Individual cells are not drawn either — the trophoblast is built as a LAYER whose thickness is the examinable property, not as a tessellation of cells. A student is examined on \"a single flattened layer\", which is a thickness, and beat 6 is the beat that shows it. If a future round wants cell outlines on the wall, that is new geometry and a new claim.",
+    "CYTOTROPHOBLAST AND SYNCYTIOTROPHOBLAST are named inside the trophoblast narration and are not built or given structures, because they are strictly a week-two differentiation. Unchanged from the SVG version's own gap, and still correct.",
+    "THIS SCENE STOPS AT APPOSITION. Beat 9 draws the blastocyst lying against the endometrium and measures the gap and which pole closes it. Adhesion, invasion, the lacunar stage and the bilaminar disc belong to \"Implantation\" and \"Bilaminar embryonic disc\" in the next topic and are NOT claimed in covers[]. The implantation_start narration is kept whole in deferred_beats.",
+    "TWINNING appears here and in the cleavage scene by design — the dichorionic split is before day three and the monochorionic splits after — so the rule is met from both ends. Neither scene claims a twinning curriculum entry and there is no such entry to claim. The beat is deferred here for want of a second inner cell mass in the geometry, not for want of a place to put it.",
+    "TIMINGS are the standard teaching ones — blastocyst at day five, hatching about day five, implantation beginning about day six, hCG detectable about day eight — and are narrated as approximations. The model's t is the ORDER of events with each stage given room to be seen and is NOT linear in real time; nothing in the model claims a day.",
+    "THE MASS'S SHAPE IS NOW A CONSEQUENCE, NOT A PROFILE — REPLACED IN ROUND 2, 2026-10-02. This entry used to describe a plateau mound whose angular WIDTH was solved so the mass held its volume, with its depth derived from that volume; the review of 2026-10-02 found that construction drawing the mass as a LINING at beat 2 (its F1) and as a shallow band at beats 3 and 4 (its F2), and both followed from the boundary being star-shaped about the embryo's centre. The mass is now the part of the void within a distance lambda of the embryonic pole, and lambda is the only solved scalar: its inner face is therefore a SPHERE about that pole, so it is convex at every t and cannot be a spike, a funnel or a film. There is no profile left to tune. MEASURED, off the built mesh, so that a future round can compare rather than re-derive: peak depth 59.2 um in the morula, 49.7 at t = 0.18, 40.1 at 0.42, 39.5 at 0.52 and 38.8 at t = 1; footprint half-angle 176.4 deg, 104.7, 46.9, 37.6 and 25.1 over the same t; chord across the footprint 59.8, 71.0, 78.6, 78.0 and 77.2 um. The chord-over-depth ratio runs 1.01 to 1.99 and is CLAIMED at the two beats the review named. What is still a simplification is that the knot is ONE SOLID rather than a cluster of blastomeres — see the neighbouring gap on cell counts — and that its footprint is a circle, where a real inner cell mass is lumpy at its rim.",
+    "EVERY BEAT CARRIES A \"-stage\" CLAIM ON THE EXPANSION FRACTION, AND THIS IS WHAT IT IS FOR. RENDER-STANDARD requires each beat to FAIL when it is displaced in t, or it is not pinned to its own instant. Seven of these ten beats narrate STRUCTURE rather than a moment — \"three parts\", \"two cell lines\", \"which end goes in first\" — and every structural claim in them is true across a wide band of t, so without this they were reported NOT PINNED, correctly. Rather than declare a wide negative_displacement and buy them out of the check, each carries one extra claim: a narrow window on how far the cavity has expanded, chosen so the beat fails at both the near and the far displacement. It is honest rather than decorative because the expansion fraction IS the stage of this process — this scene's own blastocoele narration says grading \"is largely a judgement about how far this cavity has expanded\" — but it is declared here so a reviewer reads it as what it is: the claim that pins the beat, not a claim the narration makes in words.",
+    "THE POLAR/MURAL LABEL BOUNDARY IS THE MASS'S OWN FOOTPRINT AT EVERY t, AND BEFORE CAVITATION THERE IS NO BOUNDARY AT ALL. REWRITTEN IN ROUND 3, 2026-10-02; this entry previously declared an exception and the review's R2 was raised against what that exception drew. The polar trophoblast is the wall over the mass, so the boundary is measured per t and acceptance row D asserts the identity and that the series moves: 104.7 deg at t = 0.18 down to 25.1 at t = 1. In the degenerate window t <= 0.02 there is no fluid, the inner cells fill the void, and the derived answer is that the WHOLE wall is polar — true about the definition and useless about anatomy. Rounds 1 and 2 answered that by dividing the two keys at the EQUATOR in that window alone, purely so both would be nameable in the opening beat, and declared the 82.9 deg jump that followed at t = 0.02. What that actually drew, measured by the round-2 review in player/beat01.png rather than taken on trust: a dead-straight horizontal seam holding within 2 px across the embryo's whole visible width, crossing from RGB (248,52,45) to (255,173,161) in ONE pixel — a saturated crimson against a pale pink, not 'both reds' in any sense a student would see — on the scene's first frame, whose own title is 'Day four: a solid morula reaches the uterus', at the one latitude the real boundary NEVER occupies. Polar versus mural is DEFINED by where the inner cell mass sits and does not exist before cavitation. SO THE EXCEPTION IS GONE RATHER THAN REWORDED: inside that window the model builds ONE wall key, trophectoderm, polar_troph and mural_troph are not built at all, and beat 1 points at the one key. The boundary is now continuous everywhere — it enters at the abembryonic pole at about 180 deg and sweeps up — so acceptance row K asserts the jump ABSENT where it used to permit it at T_CAV0, and gates the cap label's own area series alongside the rest. WHAT IS STILL A SIMPLIFICATION, stated because it is the honest residue: the handover at t = 0.02 is a change of KEY, so a stage walk crossing it sees one red part become two. Nothing moves and no surface changes — polarOverMural reads 0.978 either side — and the change of key is the anatomy's own event rather than an artefact, which is why it is drawn as one. Row CUT asserts the key set both ways, so the pairing cannot rot.",
+    "EVERY PART THE CUT OPENS IS CAPPED, INCLUDING THE FLUID — AND THAT REVERSES ROUND 3, WHICH LEFT THE FLUID OPEN BY NAME. ROUND 4, 2026-10-02, closing the review's F3. Round 3 capped the inner cell mass, both trophoblast halves and the zona, and argued the blastocoele out of the rule: it is a SPACE, and a space has no section to draw. The argument confuses the space with the mesh that stands for it. The space has no tissue to section; the mesh is a closed shell either way, and leaving it open does not show a student emptiness — it shows them the inside of its own far half, a convex dome lit as a dome with a centred highlight. The review measured the consequence: in beat 3 the cavity is 26.3% of the frame against the mass's 5.2%, and because beats 3 and 4 HIGHLIGHT the mass it draws PALER than the fluid, so a student reads a pale lens on a large shaded ball — a ball inside a ring, when the one property a blastocyst is famous for is being hollow. The cavity now emits its own section on the cut plane: planar, so evenly lit, with roughness 1.0 and no clearcoat, and at 0.94 opacity in the cut variant so it stops the dome behind it being read. THE CAP IS IN FRONT OF THE SHELL RATHER THAN INSTEAD OF IT, because dropping the shell would leave the 0.8 um CAV_GAP clearance showing background between the mass and the fluid — about 4 px at beat 3's framing, a black crescent, which is a worse fourth part than the dome was. Acceptance row CUT now carries the fluid with no named exclusion left in it. ROUND 3'S OWN TEXT IS KEPT BELOW so the reversal is legible rather than silent. --- A CUT SOLID IS CAPPED, AND THE FLUID IS THE ONE PART LEFT OPEN. NEW IN ROUND 3, 2026-10-02, closing the review's R1. The cut is real geometry — every quad facing the cut direction is dropped, which opens the solid rather than hiding half of it — and for the trophoblast, which is a WALL, and for the blastocoele, which is a SPACE, that was the whole of it. For the inner cell mass it was wrong: it is the only solid tissue this model builds, the player's materials are DoubleSide, and what a student saw through the opening was the unlit inside of the far dome. The review measured it two independent ways — the key rendered alone at t = 0.42 in its own container, and the shipped frames, where the dark interior is 30.5% of the mass's own drawn area in player/beat03.png and 38.8% in beat04.png. Beat 3 is titled 'Cut it open: three parts, and only three' and the picture handed the student a fourth, which is the standard exam distractor for the ICM. It was round 1's F2 surviving in a new form: the proportions were fixed and the READING was not. So the section plane is now emitted as geometry in each material part's own colour, wound outward through the kit's triN: the mass fans its section from the same pole it is star-shaped about, the trophoblast gets its wall annulus — which beat 6 needs, because 'a single flattened layer' is a THICKNESS and a wall whose section draws nothing shows it nowhere — and the zona gets its own 15.2 um annulus. THE FLUID IS EXCLUDED BY NAME AND THAT IS AN ARGUMENT, NOT A TOLERANCE: a space has no cross-section to draw, and a section across it would read as a solid body filling the cavity, which is the mistake this model's own cavity note records making once already with a 0.6 clearcoat. WHAT NOTHING CAUGHT IT WITH, and the reason there is a new acceptance row rather than only a fix: the battery, proof.json, the beat claims and the visibility walk measure volumes, angles, ink fractions and ray hits, and not one of them asked whether a cut solid is closed. Row CUT asks it as a property of the EDGES — every edge lying in the cut plane shared by exactly two triangles — which is indifferent to the polar/mural seam and fails an uncapped section and a doubled one in opposite directions. CORPUS SCOPE, from the review: models3d/cleavage-morula.js uses the identical idiom with the identical comment and its blastomeres are solid cells. That scene is escalated; this entry is the record for whoever takes it.",
+    "THE FLUID IS DRAWN 0.8 um CLEAR OF BOTH SURFACES THAT BOUND IT, so that no two surfaces in this model are coincident. The size was set by LOOKING at a render, not by reasoning: at 0.2 um the trophoblast ring in beat 3 carried a moire of darker triangles right round its circumference — two parallel surfaces sharing a tessellation, separated by less than a pixel wherever the wall is oblique to the camera. The CLAIMS use the exact partition volume, and acceptance row G computes what the clearance costs the drawn volume from the same two radial functions the build emits and asserts the built buffer against THAT rather than widening a tolerance.",
+    "THE MODEL IS HEAVIER THAN ROUND 1'S AND THAT IS A DECLARED COST. The partition lives on a second 56 x 64 grid about the embryonic pole, which carries four surfaces — the trophoblast's inner surface, the mass, and the cavity's two — so a full build is about 60,700 triangles including silhouettes against round 1's 17,000 to 28,000, and one rebuild measured 0.93 s in a headless container against round 1's claim of a fortieth of a second for its solve. 72 x 72 was tried first and measured 71,700 triangles and 677 ms of emitter time; the fluid's silhouette was dropped (a space does not have one) and the grid cut. A reviewer who thinks the abembryonic wall is too faceted should know the trade: its azimuthal step there is 6.4 deg, because a step in the P-grid's polar angle subtends twice the arc at the far pole as at the near one.",
+    "THE ZONA IS HELD 0.6 um CLEAR OF THE EMBRYO ONCE THE EMBRYO OUTGROWS IT, AND THAT IS A BUG FIX FOUND BY LOOKING. Its inner surface used to be the embryo's outer radius exactly, so from the moment the blastocyst is larger than its own unstretched zona the two were the SAME smooth sphere on two different grids, their facets crossed, and every beat that draws the zona — six of ten — carried a moire of gold and salmon triangles over the whole embryo. The frame this rework found on disk from round 1 has it too, so it is a defect of the model as first built rather than of the new partition, and it is recorded here because a reviewer comparing the two rounds' renders will see it disappear. 0.6 um is twice what the two tessellations need and is the perivitelline space, squeezed: the model's own unstretched gap is 2 um. The zona's material volume is still conserved from its own inner radius, so acceptance row Z's thinning is unchanged in kind.",
+    "THE BEAT ORDER IS PEDAGOGICAL, NOT CHRONOLOGICAL, AND BEAT 10 IS A DELIBERATE STEP BACK. DECLARED IN ROUND 4, 2026-10-02, closing the review's F4; raised as an undeclared observation in round 2 (its O2) and as a finding in round 3. The ten beats stand at t = 0, 0.18, 0.52, 0.42, 0.60, 0.86, 0.66, 0.78, 1.0, 0.72. Seven of the ten narrate STRUCTURE rather than a moment — 'three parts', 'two cell lines', 'which end goes in first', 'a single flattened layer' — and each is placed at the t where the thing it teaches is clearest, which is why the sequence is not monotone. The consequence a student sees is measured, not argued: zonaCoverFrac is 1.0000 at beats 1-3, 0.0000 at beat 6, 0.8431 at beat 7, 0.0000 at beats 8 and 9 and 0.1569 at beat 10, and the embryo is 195.3 um across at beat 6 against 176.0 at beat 7, and 200.0 at beat 9 against 183.0 at beat 10 — so across the walk the shell leaves, returns, leaves and returns, and the embryo shrinks three times. THE ONE PLACE THIS COULD TEACH SOMETHING FALSE IS BEAT 10, because the scene's learning_goal is why the embryo must hatch before it can implant and beat 7's words are 'hatching before implantation, in that order, every time'. Beat 10 now says so in its own title and first sentence. Every beat is independently pinned to its own instant by its '-stage' claim, and check-beat-claims displaces each one and requires it to stop being true, so no beat can drift onto a neighbour's t; what those claims do NOT assert, and this entry is what carries instead, is the ORDER the instants are shown in.",
+    "A NARRATION CARRIED VERBATIM ONTO BOTH HALVES OF A SPLIT STRUCTURE CAN BE FALSE OF ONE OF THEM, AND IT WAS. ROUND 4, 2026-10-02, closing the review's F2. structures[mural_troph] and structures[polar_troph] held character-identical narration (446 chars, in both the plain and the _cut variants), inherited from the SVG version where there was ONE trophoblast region. It ends '...an outer syncytiotrophoblast, which fuses into one multinucleate mass and does the invading', which is true of the polar surface and false of the mural one — against which the same scene's structures[abembryonic_pole] says 'its trophoblast is thinner and does not invade' and beat 5's relationship label says 'thicker here, and it is this surface that invades'. Beat 6 is where it bit: its narration WAS that paragraph verbatim and its only highlight is mural_troph_cut. THE VERBATIM RULE YIELDED, AND NOTHING WAS DELETED: the paragraph stays whole on polar_troph, and the mural half and beat 6 now carry a text that keeps every clause of it, re-attributed to the implantation site, plus the chorion laeve, which is where the non-invading half goes. WHY NOTHING MECHANICAL CAUGHT IT: no check in this corpus compares one structure's narration with another's, or with a relationship label. That is a standards gap and it is named in the build notes.",
+    "THE SCENE AND THE MODEL EACH CARRIED THEIR OWN OPACITY FOR THE FLUID AND THEY DISAGREED. ROUND 4, 2026-10-02. models3d/blastocyst.js set the cavity's material to 0.30 in round 3, with a comment recording that 0.42 plus a clearcoat had rendered as a glossy ball; structures[blastocoele].opacity and structures[blastocoele_cut].opacity went on reading 0.42, and viz3d.js line 2417 takes a structure's opacity from the SCENE — so every frame the round-3 review judged was drawn at the value round 3 had rejected, and the model's own mitigation reached nothing a student sees. This is the same shape as the palette disagreement the round-2 review corrected: a thing asserted in two places and compared in none. The model's LAYERS now carries both numbers (opacity 0.30 uncut, opacityCut 0.94), the scene is set to them, and the proof harness's check OPA compares the two files and fails on any disagreement — colour and opacity together, so the round-2 finding is now asserted rather than remembered.",
+    "BEAT 4 FRAMED ON A PAIR THAT EXCLUDED THE STRUCTURE ITS OWN CLAIM IS ABOUT. ROUND 4, 2026-10-02, closing the review's F1. viz3d runs a view's ops in order; ISOLATE_REGION 'Cut open' set state.only to the five cut keys and COMPARE_STRUCTURES then OVERWROTE it with just ['icm_cut', 'mural_troph_cut'], and subjectBox() frames on state.only with ghosted context 'allowed to run off the edges'. polar_troph_cut was not in the pair, so the cap ran off the top: 574 subject pixels on row 0 of player/beat04.png, all of them polar-trophoblast red, about 5.8% of the embryo's diameter outside the picture — while the beat's claim B4-cap-seals-the-mass is phrased about what is SEEN ('no blue showing past the darker red') and is asserted at tol 1e-9. The engine is doing what it documents; the beat asked for the wrong subject. polar_troph_cut is now a COMPARE target, which also makes the comparison anatomically whole — the trophoblast cell line is both halves. THE MEASUREMENT THAT COULD HAVE REVEALED IT WAS THE ONE THAT THREW THE INFORMATION AWAY: measure-scene-visibility's boxFillPct CLAMPS the projected box to the frame, so beat 4 reported the scene's HIGHEST box_fill, 85.05%, and framing:false, on the one clipped frame. That tool now also reports the UNCLAMPED extent and counts subject pixels on the border rows and columns, and this scene's proof harness FAILS on a non-zero count. Beat 5 is the same mechanism and is not a defect: it compares the two pole markers, which bracket the embryo, so its subject box is tall and thin by construction and its low box_fill is a property of what it compares rather than of where the camera is.",
+    "HIGHLIGHT INTENSITY IS NOT INDEPENDENT OF THE STRUCTURE'S OWN COLOUR, AND THREE BEATS WERE CALIBRATED FOR IT WHILE THE REST WERE MEASURED AND LEFT. ROUND 4, 2026-10-02, found while closing the review's F3 and reported because it is the mechanism behind half of that finding. viz3d.js paints a highlight as EMISSIVE of the structure's OWN colour at emissiveIntensity = the beat's intensity (the paint loop, ~line 2435), so the same number glows a dark structure and CLIPS a light one. This scene used 0.9 to 0.95 everywhere. MEASURED CONSEQUENCES, off the shipped frames: at 0.9 the inner cell mass (#2d7fc4) rendered (159,226,255) against the fluid's (137,245,254), so the TISSUE was lighter and less saturated than the SPACE — the convention a student brings to a section, inverted, and exactly what the round-3 review meant by 'a pale blue lens and a large shaded ball'; and at 0.95 the fluid itself (#9fd4f2) clipped to pure white in beat 2. CHANGED: beat 2's blastocoele_cut 0.95 -> 0.35, beat 3's icm_cut 0.9 -> 0.40, beat 4's icm_cut 0.95 -> 0.40. The mass now reads (96,162,255) in beat 3 against the fluid's (137,247,255) — saturated tissue, pale space. MEASURED AND DELIBERATELY LEFT: beat 6's mural_troph_cut at 0.95 renders (255,168,157), clipped in red, which is PALER than the unhighlighted polar cap beside it at (245,52,44) — the same inversion in the red family. It is left because the round-3 review examined beat 6 and recorded it as sound, the thin ring is still unmistakably the subject and is nowhere near the fluid's cyan, and re-lighting frames a review has already accepted re-opens settled ground for a gain nobody has asked for. It is written down here rather than fixed so the next review can rule on it with the numbers in hand. THE GENERAL RULE THE CORPUS DOES NOT STATE: an emissive highlight is a fixed ADDITION, so the intensity that reads as a glow depends on what it is added to, and a scene that uses one number everywhere is calibrated for its darkest structure only.",
+    "ROUND 5, 2026-10-02 · THE EMBRYO'S EXPANSION IS NOT VISIBLE ACROSS THE BEATS, and this scene cannot make it visible. The player refits the camera on every view (viz3d.js frameView calls subjectBox() then distanceForBox() with no memory of the previous beat), so every beat is normalised to the same fill and the one quantity this model solves for — pumped fluid volume, which is the whole of the growth — is divided out of every frame. MEASURED in this run with the new scale columns in viz-training/tools/measure-scene-visibility.mjs: box_fill_pct is 75.40 on ALL TEN beats while the subject's own world box runs 15.685 → 25.858 units and world_per_px runs 0.0215 → 0.039526. CONSEQUENCE ACCEPTED HERE: the one narrated ratio has been moved off its beat (see view 8's narration_from) so no sentence a student reads is contradicted by the frame carrying it; the expansion is taught in words, on blastocoele, and is not shown. ALSO MEASURED, and it is why this was not fixed by declaring a scale group in this file: the review's proposed group, fitted to the largest SUBJECT BOX among beats 1, 2, 3, 4, 6 and 8, would still not make the sentence true. Beat 1's subject is {zona, trophectoderm} and its box is 15.685 units because it is the ZONA's outer diameter; beat 8's subject is {mural_troph, polar_troph} and its box is 19.2117 units with no zona at all. Those stand in the ratio 1.2249, against the narrated 1.5 and the model's own embryoDRel of 1.59 at t=0.78. A group fitted to subject boxes would draw \"half again\" as 1.22×. Showing it needs the group fitted to a DECLARED REFERENCE MEASURE — the embryo's own diameter — which is a design, not a field. Filed as engine__camera-scale-group, escalated, with this measurement in it."
   ]
 }

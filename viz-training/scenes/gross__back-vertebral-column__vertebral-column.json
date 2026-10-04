@@ -989,6 +989,11 @@
           "intensity": 0.35
         },
         {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "coccyx",
+          "intensity": 0.9
+        },
+        {
           "op": "ROTATE_TO_VIEW",
           "view": "posterior"
         }
@@ -1096,19 +1101,53 @@
         }
       ],
       "narration": "Remove the discs and the bodies sit bone on bone with no space to bend and no cushion. Every millimetre of movement in the column is borrowed from that pad."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Where the sacrum ends and the coccyx begins",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Sacrum & coccyx"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sacrum",
+          "to": "coccyx",
+          "kind": "sacrococcygeal joint"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "coccyx",
+          "intensity": 0.95
+        }
+      ],
+      "narration": "The bottom of the count, the two of them on their own. Above is the sacrum: five vertebrae fused into a wedge, concave in front, driven down between the hip bones and carrying your weight out sideways through the sacroiliac joints. Running on from its apex is the coccyx — three to five rudimentary vertebrae fused into one, about a third the sacrum's length, tapering to a tip and curving forwards. Seen from behind on a whole column these two read as one continuous wedge, which is why they get a beat of their own here: at this angle you can count the coccygeal segments and see the curve carry through both bones, and the level where one ends and the other begins is the sacrococcygeal joint — a secondary cartilaginous joint with a disc, which is why the tip hinges backwards to widen the outlet in labour and why a fall onto the buttock can fracture or dislocate it. One honest caveat about the picture: the scan segments these as a single bone and the pair was cut apart at the narrowest point of it, so the join you are looking at is a flat face, not a modelled apex, base and disc."
     }
   ],
   "provenance": {
     "author": "task",
     "authored_at": "2026-08-26",
     "audited_at": "2026-08-29",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-10-01T05:10:00Z",
+    "corrected_by": "model3d REVIEW task, round 2 — did not build this item",
+    "correction_note_coccyx_split": "Declared in gaps[] what the split left undeclared: the sacrum/coccyx interface is a flat cut plane at z = 825.5, not a modelled sacrococcygeal joint, and both structures name that joint in their terms. No geometry, narration or structure changed.",
+    "correction_note_coccyx_teaching": "Finding 2 was an authoring call offered as one of three: recolour the coccyx, highlight it separately at beat 2, or add a seventh view isolating the pair in lateral. Took the second and the third and refused the first, because the region palette is a scene-wide convention and breaking it for one bone would make the sacrum and coccyx the only region whose members do not share a colour. No existing narration, structure, colour or ref changed; beat 2 gained one op and the scene gained one view. Beat 7’s camera direction was SOLVED against the measured coccyx share, not named from anatomy, after the first authoring (`lateral`) measured 0.000%; see gaps[]. The 2026-09-30 review's own correction to this scene is untouched and stays recorded in provenance.correction_note_coccyx_split; corrected_at/corrected_by name this run only because it is the latest writer of the pair.",
+    "correction_note_beat7_op_order": "Beat 7's four ops reordered so SHOW_RELATIONSHIP precedes HIGHLIGHT_STRUCTURE. Nothing else changed: same four ops, same targets, same intensities, same narration, same structures. Reason and measurement in gaps[]."
   },
   "gaps": [
     "Sub-parts of a vertebra — body, pedicle, lamina, spinous and transverse processes, vertebral foramen — are not separate models in the catalog. They are taught here by cross-section and narration rather than as labelled parts.",
     "All twenty-three intervertebral discs are included, C2/3 to L5/S1. An earlier version of this scene carried only the five lumbar ones and this note still said so after they were added.",
     "No calibrated landmark anchors were placed. Anchor coordinates must be measured on the source geometry, which was not available offline this run; guessed anchors would be worse than none.",
     "The column is complete from the atlas to the sacrum: all 24 vertebrae and all 23 intervertebral discs. Earlier versions of this scene showed only part of it, which left visible gaps in the stack and made two isolated vertebrae float on their own with nothing between them and the rest.",
-    "The coccyx IS separately modelled as of 2026-09-11. BodyParts3D ships it fused to the sacrum as FMA16202; that mesh was cut at its minimum cross-section (z = 825.5) into FMA16202-sacrum (110.5 mm) and FMA16202-coccyx (34.8 mm), both closed solids, so the coccyx can now be shown, hidden and isolated like any other bone."
+    "The coccyx IS separately modelled as of 2026-09-11. BodyParts3D ships it fused to the sacrum as FMA16202; that mesh was cut at its minimum cross-section (z = 825.5) into FMA16202-sacrum (110.5 mm) and FMA16202-coccyx (34.8 mm), both closed solids, so the coccyx can now be shown, hidden and isolated like any other bone. The interface between the two is the CUT PLANE and not a modelled sacrococcygeal joint: a flat transverse face at z = 825.5 exactly, where the sacrum piece bottoms out and the coccyx piece tops out. The scan is one fused bone, so the convex sacral apex, the concave base of Co1 and the fibrocartilaginous disc between them are not in the geometry. Where narration names the sacrococcygeal joint, the picture shows a butt joint. (Added by review, 2026-09-30.)",
+    "Beat 7 isolates “Sacrum & coccyx” and highlights the coccyx on its own, which is the answer to the review finding (2026-09-30) that the geometry existed and the teaching did not: before this beat no view in the scene carried an ISOLATE_REGION, a HIGHLIGHT_STRUCTURE or a camera move that targeted `coccyx`, and the only view that named it highlighted the whole region on a full-column frame where both members share colour #cdc3a6. The region palette is DELIBERATE (cervical #efe6d0, thoracic #e4dcc4, lumbar #d9d0b6, sacrum & coccyx #cdc3a6: every member of a region shares its colour) and was therefore NOT broken; the coccyx is separated by highlight intensity instead — 0.9 against the region's 0.35 on beat 2, 0.95 on beat 7.\n\nWHY BEAT 7 SAYS `posterior` AND LOOKS LATERAL, which matters to whoever edits it next. This scene authors camera.initialYaw 1.2 rad (68.8 deg), and ROTATE_TO_VIEW moves the CAMERA to a world axis without turning the model back, so every named direction in this scene is seen through that yaw and none of them delivers the view its name promises. Beat 7 was first authored `lateral`, which lands near axial — looking down the length of the column, with the coccyx directly behind the sacrum — and MEASURED THE COCCYX AT 0.000% OF FRAME in the real player: the beat added to show the bone did not show it. The direction was then solved rather than named, by re-pointing the beat at each of the six and measuring (viz-training/models-out/coccyx/probe-beat7-direction.mjs, results in probe-beat7/directions.json): lateral 0.000%, anterior 0.575%, inferior 0.845%, posterior 1.198%, superior 1.252%, medial 1.305%. `posterior` was taken over the marginally larger `medial` because its picture is the one the teaching needs — the coccygeal segments are countable and the ventral curve runs through both bones — and because beat 2 already uses `posterior`, so the two agree. THE UNDERLYING DEFECT IS THE YAW, not this beat, and it is not a scene-level fix: see BUILD-LOG 2026-10-01.",
+    "Beat 7's ops are ordered SHOW_RELATIONSHIP BEFORE HIGHLIGHT_STRUCTURE, and the order is load-bearing. viz3d's SHOW_RELATIONSHIP handler sets state.hi[from] and state.hi[to] to 0.5 unconditionally, so with it last the authored coccyx intensity 0.95 was silently overwritten and the sacrum was lit to the same 0.5 — both bones the same colour (#cdc3a6) at the same emissive, on the one beat that exists to tell them apart. MEASURED in the real player (walk-scene-in-player.mjs, 1040px): coccyx/sacrum mean luminance 1.173 as authored, 1.250 with the ops reordered, 19,502 px (5.8% of frame) changed. Do not move SHOW_RELATIONSHIP back to the end. (Found and fixed by review, 2026-10-01.)"
   ]
 }

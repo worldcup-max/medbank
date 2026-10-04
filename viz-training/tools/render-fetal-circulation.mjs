@@ -310,6 +310,35 @@ for (const [name, t, opts, label] of STAGES) {
 report.normals0 = await p.evaluate("window.normalProbe(0, window.MB3D_MODELS['fetal-circulation'].FULL)");
 report.normals1 = await p.evaluate("window.normalProbe(1, window.MB3D_MODELS['fetal-circulation'].FULL)");
 
+/* check 11's measurement: the flap's centroid in the SEPTAL frame, on the triangles actually built.
+   Recomputes nAx and vAx from the model's own chamber centres rather than trusting a printed axis. */
+report.flapProbe = await p.evaluate(() => {
+  const T = window.THREE, M = window.MB3D_MODELS['fetal-circulation'];
+  const out = [];
+  for (const t of [0, 1]) {
+    const g = M.build(t, M.FULL);
+    g.updateMatrixWorld(true);
+    const cen = {}, all = {};
+    g.traverse(o => {
+      if (!o.isMesh || !o.geometry || !o.geometry.attributes.position) return;
+      const k = o.userData && o.userData.key; if (!k) return;
+      const pos = o.geometry.attributes.position, v = new T.Vector3();
+      const a = all[k] = all[k] || { x: 0, y: 0, z: 0, n: 0 };
+      for (let i = 0; i < pos.count; i++) {
+        v.fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld);
+        a.x += v.x; a.y += v.y; a.z += v.z; a.n++;
+      }
+    });
+    for (const k of Object.keys(all)) cen[k] = new T.Vector3(all[k].x / all[k].n, all[k].y / all[k].n, all[k].z / all[k].n);
+    const nAx = new T.Vector3().subVectors(cen.left_atrium, cen.right_atrium).normalize();
+    const vAx = new T.Vector3(0, 1, 0).addScaledVector(nAx, -nAx.y).normalize();
+    const sep = cen.atrial_septum, flap = cen.foramen_ovale;
+    const d = new T.Vector3().subVectors(flap, sep);
+    out.push({ t: t, n: d.dot(nAx), v: d.dot(vAx) });
+  }
+  return out;
+});
+
 report.lumen = [];
 for (const [nm2, t2, o2, yaw, pitch] of [
   ['anterior fetal',  0.00, { flow: true }, -0.18, 0.04],
@@ -486,6 +515,54 @@ console.log('duct reversal, on screen:', (report.ductFrames.frac * 100).toFixed(
 console.log('view diffs       :', VIEW_FRAMES ? '' : '(no scene views yet)');
 for (const d of report.viewDiffs) console.log('   ' + d.from + ' -> ' + d.to, (d.frac * 100).toFixed(1) + '%');
 console.log('refs             :', report.refs ? report.refs.map(r => r.key + '=' + (r.hasMesh ? r.tris + ' tris' : (r.reason || r.error))).join(', ') : 'skipped');
+
+/* ── 10. EVERY DECLARED STRUCTURE IS SHOWN BY AT LEAST ONE VIEW ────────────────────────────────
+ *
+ * Added 2026-09-30 (round 2) against review finding R1-OPEN-1, whose worst half was not a camera:
+ * pfc_duct and pfc_flow were declared structures that built geometry and resolved through the real
+ * adapter while NO view in the scene showed either of them, so the narration's third failure mode
+ * had a model a student could not reach. Every check in this file passed on it, because "32/32 refs
+ * resolve" measures RESOLUTION and nothing measured DISPLAY.
+ *
+ * This walks each view's SHOW/HIDE ops with viz3d's own semantics — resetState leaves every
+ * structure VISIBLE, HIDE_STRUCTURE '*' clears them all, group names resolve to their members — and
+ * asserts that every structures[] key is visible in at least one view. It is deliberately a check on
+ * this scene rather than an edit to validate-scenes.mjs, which would change the verdict for ~150
+ * scenes at once; that is proposed in BUILD-LOG, not landed here. */
+{
+  const sc = existsSync(SCENE) ? JSON.parse(readFileSync(SCENE, 'utf8')) : null;
+  if (sc) {
+    const keys = sc.structures.map(s => s.key);
+    const groups = {};
+    for (const s of sc.structures) (groups[s.group] = groups[s.group] || []).push(s.key);
+    const keysFor = t => (t === '*' ? keys.slice() : (groups[t] ? groups[t].slice() : (keys.includes(t) ? [t] : [])));
+    const shownBy = {}; keys.forEach(k => shownBy[k] = []);
+    for (const v of sc.views) {
+      const vis = {}; keys.forEach(k => vis[k] = true);              // viz3d resetState()
+      for (const o of v.ops || []) {
+        if (o.op === 'SHOW_STRUCTURE') keysFor(o.target).forEach(k => vis[k] = true);
+        else if (o.op === 'HIDE_STRUCTURE') keysFor(o.target).forEach(k => vis[k] = false);
+      }
+      for (const k of keys) if (vis[k]) shownBy[k].push(v.beat);
+    }
+    const never = keys.filter(k => shownBy[k].length === 0);
+    report.shownByView = { shownBy: shownBy, neverShown: never, ok: never.length === 0 };
+    console.log('shown by a view  :', never.length === 0
+      ? 'all ' + keys.length + ' declared structures are shown by at least one view'
+      : 'NEVER SHOWN BY ANY VIEW: ' + never.join(', '));
+  }
+}
+
+/* ── 11. THE FLAP'S HINGE AND OPENING SIDE, ON THE BUILT TRIANGLES ────────────────────────────
+ * Row Q asserts this off the model's own arithmetic; this re-measures it on the vertices actually
+ * drawn, because RENDER-STANDARD prefers the substrate to the formula. Signs: nAx runs RA -> LA, so
+ * a POSITIVE nAx offset puts the leaf in the left atrium; vAx is cranial. */
+if (report.flapProbe) {
+  const f = report.flapProbe;
+  console.log('flap on real vertices:');
+  for (const r of f) console.log('   t=' + r.t, 'centroid along nAx (LA positive)', r.n.toFixed(4),
+    ' along vAx from the septum centre (cranial positive)', r.v.toFixed(4));
+}
 
 writeFileSync(`${OUT}/report.json`, JSON.stringify(report, null, 1));
 console.log('\nreport written to ' + OUT + '/report.json');

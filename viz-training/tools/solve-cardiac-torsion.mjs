@@ -148,7 +148,23 @@ const POLE = new T.Vector3(0, -L0 * 0.46, 0);
    do further along. Giving the inflow limb its own curvature is what lets the ventricle be solved for
    independently of it, which is the whole content of the review's finding 8. */
 export const CENTRES = [0.055, 0.165, 0.400, 0.660, 0.870];   // horn confluence, sinoatrial, AV canal, BV sulcus, bulbotruncal
-export const WIDTHS  = [0.070, 0.085, 0.100, 0.095, 0.080];
+export const WIDTHS  = [0.070, 0.085, 0.100, 0.095, 0.080];   // the round-4 values; now a DEFAULT, see below
+/* ROUND-5: THE BEND WIDTHS ARE SOLVED, NOT DECLARED — the sixth parameter family, and the reason is
+   the same one that produced the per-bend twist in round 3. With five bends at FIXED widths the
+   thirteen floored relations are not independent: a minimax search over the round-4 parameter space
+   tops out at a worst margin of 0.290, with the binding constraint rotating between E, B', I and
+   Jside across independent restarts — which is the signature of an active frontier rather than a bad
+   seed, and is precisely the tell this file's header describes ("a penalty term that is still large
+   at the optimum after a global search is a missing degree of freedom"). The floor the standard sets
+   is 0.35; the model could reach 0.29 and no further, so the honest options were to enrich it or to
+   lower the bar, and round 3's finding 8 already ruled on which: DO NOT WEAKEN THE TEST, ENRICH THE
+   MODEL.
+   A bend's WIDTH is how much of the tube participates in that turn, which is a real property and a
+   different one at each landmark: the bulboventricular sulcus is a sharp groove and the
+   atrioventricular canal a broad one. Bounded to keep each bend recognisably at its own landmark and
+   to stop two adjacent bends merging into one. */
+export const WBOUNDS = [[0.045, 0.115], [0.055, 0.135], [0.065, 0.155], [0.060, 0.150], [0.050, 0.130]];
+const wOf = p => (p && p.w) ? p.w : WIDTHS;
 export const NB = CENTRES.length;
 
 /* STAGGERED ONSETS — declared from the anatomy, not solved. The bulboventricular bend leads; the
@@ -166,7 +182,7 @@ export function ramp(t, on) {
    bend's own width, so a bend can enter in one plane and leave in another. */
 const TWCLAMP = 1.8;
 function planeAt(p, j, u) {
-  const z = Math.max(-TWCLAMP, Math.min(TWCLAMP, (u - CENTRES[j]) / WIDTHS[j]));
+  const z = Math.max(-TWCLAMP, Math.min(TWCLAMP, (u - CENTRES[j]) / wOf(p)[j]));
   return p.psi[j] + (p.tw ? p.tw[j] : 0) * z;
 }
 
@@ -185,7 +201,7 @@ function integrate(p, lambda, t, N, mirror) {
     b.crossVectors(d, n).normalize();
     let k = 0, wsum = 0, asum = 0;
     for (let j = 0; j < NB; j++) {
-      const g = gauss(u, CENTRES[j], WIDTHS[j]) * rmp[j];
+      const g = gauss(u, CENTRES[j], wOf(p)[j]) * rmp[j];
       k += p.a[j] * g;
       const wt = Math.abs(p.a[j]) * g;
       wsum += wt; asum += wt * planeAt(p, j, u);
@@ -346,6 +362,11 @@ export const FRAC = {
   KRIGHT: 0.22,   // the sinus must reach at least this fraction of its width onto the embryo's RIGHT
   KC: 0.38,       // and its centroid must sit within this fraction of its width of the median plane
   L: 0.85,        // transverse centre separation of the two limbs, over their tangency distance
+  /* ROUND-5, 2026-09-29 (round-4 finding 3). The seven relations that were still bare sign tests.
+     0.35 is the figure standards_gap_round_3 set and the one D and I already carry; it is used
+     unchanged rather than tuned per test, because a floor chosen per test from what the geometry
+     reaches is the move this item has been failed for before. */
+  SIGN: 0.35,
 };
 export const TARGET = { A: 0.55, Bp: -0.45, BVX: -0.03, C: -0.80, E: 0.25, F: -0.55,
                         G: 0.30, H: 0.12, H65: 0.08, MAXZ: 0.60 };
@@ -444,9 +465,63 @@ export function measure(p, N) {
   const Kright = (-sB.min.x) / Math.max(1e-9, sB.ex);
   const Kc = Math.abs(s.x) / Math.max(1e-9, sB.ex);
 
+  /* ---- ROUND-5 REWORK, 2026-09-29: THE SIGN TESTS GET MAGNITUDE FLOORS TOO (round-4 finding 3).
+     standards_gap_round_3 said a sign test on a spatial relation is not a test, and round 3 duly
+     floored D and I and wrote J, K and L with floors. A, B', C, E, F, G and H were left as > 0 / < 0
+     for two more rounds. Each is now ALSO expressed as a fraction of the extent the claim should be
+     legible against — the SAME normalisation the round-4 review measured them with, so its figures
+     and these are the same numbers and can be compared directly:
+       A   ventricle z, over the ventricle's own DEPTH              (review measured 33.0%)
+       B'  bulbus x, over the bulbus's own WIDTH                    (31.7%)
+       C   atrium z - ventricle z, over their mean DEPTH            (53.5%)
+       E   bulbus z - ventricle z, over their mean DEPTH            (25.5%)
+       F   bulbus x - ventricle x, over their mean WIDTH            (74.3%)
+       G   |dx| - |dy|, over the bulbus/ventricle mean WIDTH        (72.8%)
+       H   |dx| - |dz|, over the bulbus/ventricle mean WIDTH        (51.6%)
+     A one-structure claim (A, B') is normalised by that structure's own extent; a two-structure
+     claim by their mean. G and H are normalised by WIDTH in both cases because both are claims about
+     how far the transverse arrangement wins, and normalising a difference of magnitudes by the axis
+     it is asserting keeps the two comparable with each other. */
+  const bBz = bB.ez, vBz = vB.ez, bBx = bB.ex, vBx = vB.ex;
+  const meanZbv = 0.5 * (bBz + vBz), meanXbv = 0.5 * (bBx + vBx), meanZav = 0.5 * (aB.ez + vB.ez);
+  const Afrac  = v.z / Math.max(1e-9, vBz);
+  const Bpfrac = -b.x / Math.max(1e-9, bBx);          // positive = on the embryo's RIGHT, as B' claims
+  const Cfrac  = -(a.z - v.z) / Math.max(1e-9, meanZav);   // positive = atrium BEHIND ventricle
+  const Efrac  = dz / Math.max(1e-9, meanZbv);
+  const Ffrac  = -dx / Math.max(1e-9, meanXbv);            // positive = bulbus RIGHT of ventricle
+  const Gfrac  = (Math.abs(dx) - Math.abs(dy)) / Math.max(1e-9, meanXbv);
+  const Hfrac  = (Math.abs(dx) - Math.abs(dz)) / Math.max(1e-9, meanXbv);
+  /* AND AT THE t THE VIEWS ARE ACTUALLY DRAWN AT. standards_gap_round_4's second point: a test
+     evaluated where the student is not looking is not a test. The scene draws three stages —
+     _ab at t = 0.42 (view 3), _b at t = 0.65 (view 4), _c at t = 1 (views 5-9) — so every relation
+     is measured at all three. Which of them each test is GATED at is declared in musts(); the rest
+     are REPORTED, so a review can see a relation arrive rather than take it on trust. */
+  const at = (P2, t2) => {
+    const vv = segC(P2, t2, 'ventricle', N), bb = segC(P2, t2, 'bulbus', N),
+          aa = segC(P2, t2, 'atrium', N);
+    const vv2 = segBox(P2, t2, 'ventricle', N), bb2 = segBox(P2, t2, 'bulbus', N),
+          aa2 = segBox(P2, t2, 'atrium', N);
+    const ddx = bb.x - vv.x, ddy = bb.y - vv.y, ddz = bb.z - vv.z;
+    const mX = 0.5 * (bb2.ex + vv2.ex), mZ = 0.5 * (bb2.ez + vv2.ez);
+    return {
+      Afrac: vv.z / Math.max(1e-9, vv2.ez),
+      Bpfrac: -bb.x / Math.max(1e-9, bb2.ex),
+      Cfrac: -(aa.z - vv.z) / Math.max(1e-9, 0.5 * (aa2.ez + vv2.ez)),
+      Efrac: ddz / Math.max(1e-9, mZ),
+      Ffrac: -ddx / Math.max(1e-9, mX),
+      Gfrac: (Math.abs(ddx) - Math.abs(ddy)) / Math.max(1e-9, mX),
+      Hfrac: (Math.abs(ddx) - Math.abs(ddz)) / Math.max(1e-9, mX),
+      Ifrac: vv.x / Math.max(1e-9, vv2.ex),
+    };
+  };
+  const c42 = curve(p, 0.42, N, false).P;
+  const F42 = at(c42, 0.42), F65 = at(c65, 0.65), F100 = at(P, 1);
+
   return { A: v.z, Bp: b.x, bvx, bvxExtreme,
            C: a.z - v.z, D: a.y - v.y, E: dz, F: dx,
            G: Math.abs(dx) - Math.abs(dy), H: Math.abs(dx) - Math.abs(dz), H65, I: v.x,
+           Afrac, Bpfrac, Cfrac, Efrac, Ffrac, Gfrac, Hfrac,
+           F42, F65, F100,
            Dfrac, Dov, Ifrac, Iside, Jside, Jc, Kright, Kc, meanH, Atrans, L, L65,
            maxz, rad, sz: s.z,
            lambda: cv.lambda, chordErr: Math.abs(cv.chord - cv.target),
@@ -455,14 +530,47 @@ export function measure(p, N) {
 
 /* The MUST set, evaluated from a measurement. One place, so the search, the N=600 verdict and the
    model's own acceptance() cannot drift apart about what passing means. */
+/* WHICH t EACH TEST IS GATED AT — round 5, 2026-09-29, standards_gap_round_4's second proposed rule:
+   A TEST EVALUATED WHERE THE STUDENT IS NOT LOOKING IS NOT A TEST, and the converse, a test gated
+   where the student is NOT being told the claim is not a test either — it is a demand that the loop
+   be finished before it is. The scene draws three stages: _ab at t = 0.42 (view 3), _b at t = 0.65
+   (view 4) and _c at t = 1 (views 5-9). Every relation is MEASURED at all three and printed; this
+   table says which of them each test is GATED at. Anything not listed is REPORTED only.
+
+   A and B' are gated at all three because the loop is ventrally convex and dextral THROUGHOUT — that
+   is what the trajectory penalty has always asserted, now expressed as a floored fraction instead of
+   a sign. F is gated at 0.65 as well as 1 because the re-worded view 4 makes that claim at that
+   stage. Everything else is a DAY-28 arrangement and is gated at t = 1, where the views that claim
+   it are drawn. */
+export const GATED_AT = {
+  A: [0.42, 0.65, 1], "B'": [0.42, 0.65, 1], C: [1], D: [1], E: [1],
+  F: [0.65, 1], G: [1], H: [1], I: [1], J: [1], K: [1], L: [1],
+};
+
 export function musts(m) {
+  const fr = { 0.42: m.F42, 0.65: m.F65, 1: m.F100 };
+  const gate = (id, key) => GATED_AT[id].every(t => fr[t][key] >= FRAC.SIGN);
   return {
-    A: m.A > 0,
-    "B'": m.Bp < 0 && m.bvx < 0,
-    C: m.C < 0,
+    A: m.A > 0 && gate('A', 'Afrac'),
+    "B'": m.Bp < 0 && m.bvx < 0 && gate("B'", 'Bpfrac'),
+    C: m.C < 0 && gate('C', 'Cfrac'),
     D: m.Dfrac >= FRAC.D && m.Dov <= FRAC.DOV,
-    E: m.E > 0, F: m.F < 0, G: m.G > 0,
-    H: m.H > 0 && m.H65 > 0,
+    E: m.E > 0 && gate('E', 'Efrac'),
+    F: m.F < 0 && gate('F', 'Ffrac'),
+    G: m.G > 0 && gate('G', 'Gfrac'),
+    /* H65 IS NO LONGER GATED, AND THAT IS A DELIBERATE REVERSAL OF A ROUND-2 DECISION — round-5
+       rework, argued in BUILD-LOG rather than done quietly. H65 was gated because view 4 claimed, at
+       t = 0.65, that the bulbus and ventricle "now sit side by side rather than one behind the
+       other". Round-4 finding 3 measured that claim passing by 2% and flipping sign with the
+       estimator, and measured that the relation actually DOMINATING at 0.65 is neither: the two
+       limbs are still one ABOVE the other. Both are true, and the cause is not the geometry. At
+       mid-loop the bulboventricular loop IS still a U with one limb above the other; side-by-side is
+       what day 28 leaves you with, which is what view 6 says and where G and H are gated. So the
+       narration was asserting the finished loop over a mid-loop frame, and view 4 has been re-worded
+       to describe the movement in progress. Forcing G65 and H65 over a floor, as finding 3's FIX
+       line suggests, would have made the model assert an arrangement that does not exist yet — the
+       same reasoning the round-4 model already uses, in this file, for not gating L at 0.65. */
+    H: m.H > 0 && gate('H', 'Hfrac'),
     /* I IS THE CENTROID FLOOR, WHICH IS THE FIGURE THE REVIEW RULED ON. Iside — how much of the
        ventricle's WIDTH is left of the median plane — was added by this run and is REPORTED but not
        gated. It earns its place as a diagnostic: it is what named the mechanism (the lateral swing was
@@ -498,15 +606,36 @@ function penalty(m) {
   /* THE FLOORED RELATIONS. Scaled up hard relative to round 2's sign tests, because these are the
      three the review found passing on their sign and failing in the picture. Margin beyond the floor
      so a rounded parameter set does not land exactly on it. */
-  pen += 220 * h(m.Ifrac,  FRAC.I     + 0.06, +1);   // the hardest of the three; two searches traded it away
+  /* ROUND-5: 220 -> 600 and Jside 150 -> 400. With seven more floored relations in the objective the
+     search began TRADING I AND J AWAY to buy A, B' and E — Ifrac 0.299 and Jside 0.263 on an
+     otherwise-passing candidate. That is the failure mode this file's own header records from round 2
+     ("they were not forgotten, they were TRADED AWAY"), arriving again for the same reason: a sum of
+     penalties lets a search pay for one floor with another. The weights on the floors the review has
+     already ruled on are raised until they cannot be bought. These are SEARCH weights, not the test —
+     musts() is unchanged by them. */
+  pen += 600 * h(m.Ifrac,  FRAC.I     + 0.06, +1);   // the hardest of the three; two searches traded it away
   pen += 45 * h(m.Iside,  FRAC.ISIDE + 0.05, +1);   // guides the search; does not gate it
   pen += 400 * h(m.Dfrac,  FRAC.D     + 0.10, +1);   // the last one standing; see BUILD-LOG
   pen += 200 * h(m.Dov,    FRAC.DOV   - 0.03, -1);
-  pen += 150 * h(m.Jside,  FRAC.JSIDE + 0.05, +1);
+  pen += 400 * h(m.Jside,  FRAC.JSIDE + 0.05, +1);
   pen += 100 * h(m.Jc,     FRAC.JC    - 0.05, -1);
   pen += 100 * h(m.Kright, FRAC.KRIGHT+ 0.05, +1);
   pen += 80  * h(m.Kc,     FRAC.KC    - 0.05, -1);
 
+  /* ---- ROUND-5: THE SEVEN FORMER SIGN TESTS, AS FLOORED FRACTIONS (round-4 finding 3).
+     Each pushed to FRAC.SIGN plus a margin, at every t the test is GATED at — see GATED_AT. A, B'
+     and E are the three the review measured BELOW the floor at day 28 (33.0%, 31.7%, 25.5%); C, F,
+     G and H already clear it there and are penalised anyway so a re-solve cannot trade them away
+     to buy the other three, which is how round 2 lost J and K. */
+  {
+    const fr = { 0.42: m.F42, 0.65: m.F65, 1: m.F100 };
+    const push = (id, key, wt) => {
+      for (const t of GATED_AT[id]) pen += wt * h(fr[t][key], FRAC.SIGN + 0.06, +1);
+    };
+    push('A', 'Afrac', 160); push("B'", 'Bpfrac', 160); push('C', 'Cfrac', 60);
+    push('E', 'Efrac', 200); push('F', 'Ffrac', 90);  push('G', 'Gfrac', 60);
+    push('H', 'Hfrac', 90);
+  }
   pen += 200 * h(m.Atrans, 0.25, +1);   // the atrium wider than it is tall — this is what unlocks Dov
   pen += 300 * h(m.L,   FRAC.L + 0.08, +1);    // the two limbs on opposite sides of the cavity
   pen += 120 * h(m.L65, 0.60, +1);             // and already well under way at the t view 4 is drawn at
@@ -564,6 +693,29 @@ function trajectoryPenalty(tr) {
    (0.42), the bulboventricular bend must have done most of its turning while the sinoatrial bend has
    done almost none of its lift. Expressed on the geometry rather than on the ramps, so it stays a
    claim about the picture. */
+/* BEND PROGRESS — how much of each bend's final turn is done at a given t (round-4 finding 1).
+   Measured the way the round-4 review measured it, so its figures and these are comparable: the
+   angle between the unit tangents 2.2 bend-widths either side of the bend's CENTRE, as a fraction of
+   the same angle at t = 1. This is the evidence behind whatever view 3's narration says about the
+   stagger, and it is printed on every --check so the sentence cannot drift away from it again — the
+   round-4 sentence passed review because the BUILD-LOG quoted the leading bend and the trailing bend
+   and not the two in the middle. All five are printed. */
+export function bendProgress(p, t, N = 300) {
+  const ang = (tt) => {
+    const P = curve(p, tt, N, false).P;
+    return CENTRES.map((c, j) => {
+      const half = 2.2 * wOf(p)[j];
+      const iA = Math.max(1, Math.round((c - half) * N)), iB = Math.min(N - 1, Math.round((c + half) * N));
+      const tA = new T.Vector3().subVectors(P[iA + 1], P[iA - 1]).normalize();
+      const tB = new T.Vector3().subVectors(P[iB + 1], P[iB - 1]).normalize();
+      return Math.acos(Math.max(-1, Math.min(1, tA.dot(tB)))) * 180 / Math.PI;
+    });
+  };
+  const now = ang(t), fin = ang(1);
+  return CENTRES.map((c, j) => ({ centre: c, deg: now[j], degFinal: fin[j],
+                                  frac: fin[j] > 1e-6 ? now[j] / fin[j] : 0 }));
+}
+
 export function stagger(p, N = 140) {
   const at = t => {
     const P = curve(p, t, N, false).P;
@@ -601,7 +753,8 @@ export function score(p, fine = false) {
   if (!fine) return { pen, m: m1 };
   const m2 = measure(p, 300);
   const tr2 = trajectory(p, 300), tr1 = trajectory(p, 140);
-  const drift = ['A','Bp','bvx','C','D','E','F','G','H','H65','I','Dfrac','Dov','Ifrac','Iside','Jside','Kright','Atrans','L','L65']
+  const drift = ['A','Bp','bvx','C','D','E','F','G','H','H65','I','Dfrac','Dov','Ifrac','Iside','Jside','Kright','Atrans','L','L65',
+                 'Afrac','Bpfrac','Cfrac','Efrac','Ffrac','Gfrac','Hfrac']
       .reduce((s,k)=>s + (m1[k]-m2[k])**2, 0)
     + tr1.reduce((s,x,i)=>s + (x.vx-tr2[i].vx)**2 + (x.vz-tr2[i].vz)**2, 0);
   return { pen: Math.max(pen, penalty(m2) + trajectoryPenalty(tr2) + staggerPenalty(stagger(p, 300))) + 50 * drift,
@@ -609,7 +762,8 @@ export function score(p, fine = false) {
 }
 
 export function unpack(x) {
-  return { a: x.slice(0, NB), psi: x.slice(NB, 2*NB), tw: x.slice(2*NB, 3*NB), chordFrac: x[3*NB] };
+  return { a: x.slice(0, NB), psi: x.slice(NB, 2*NB), tw: x.slice(2*NB, 3*NB), chordFrac: x[3*NB],
+           w: x.length > 3*NB + 1 ? x.slice(3*NB + 1, 4*NB + 1) : WIDTHS.slice() };
 }
 /* BOUNDS WIDENED, round 3. The first five-parameter search came back with chordFrac AT its upper
    bound in both independent runs, psi[3] exactly at pi, and three of the four twists at +/-1.5 — a
@@ -621,6 +775,7 @@ export const BOUNDS = [
   [-2*Math.PI, 2*Math.PI], [-2*Math.PI, 2*Math.PI], [-2*Math.PI, 2*Math.PI], [-2*Math.PI, 2*Math.PI], [-2*Math.PI, 2*Math.PI],
   [-2.5, 2.5], [-2.5, 2.5], [-2.5, 2.5], [-2.5, 2.5], [-2.5, 2.5],
   [0.26, 0.64],
+  ...WBOUNDS,
 ];
 
 
@@ -755,6 +910,27 @@ console.log('trajectory:'); for (const s2 of trajectory(p, 300)) console.log('  
 const st = stagger(p, 300);
 console.log('stagger at t=0.42: bulboventricular ' + (st.bvEarly*100).toFixed(0) + '% of its final turn, sinoatrial climb ' + (st.saEarly*100).toFixed(0) + '% of its final rise');
 console.log('FLOORS:', JSON.stringify(FRAC));
+{
+  const mm = measure(p, 300);
+  const row = (lab, f) => '  ' + lab.padEnd(6) +
+    ['Afrac','Bpfrac','Cfrac','Efrac','Ffrac','Gfrac','Hfrac','Ifrac']
+      .map(k => (f[k] * 100).toFixed(1).padStart(7)).join('');
+  console.log('FRACTIONAL MARGINS (% of the extent the claim is legible against)');
+  console.log('        ' + ['A','B\'','C','E','F','G','H','I'].map(x=>x.padStart(7)).join(''));
+  console.log(row('t=0.42', mm.F42));
+  console.log(row('t=0.65', mm.F65));
+  console.log(row('t=1.00', mm.F100));
+}
+{
+  const NAMES = ['sinus-horn confluence', 'sinoatrial', 'atrioventricular', 'bulboventricular', 'bulbotruncal'];
+  for (const t of [0.42, 0.65]) {
+    const bp = bendProgress(p, t, 300);
+    console.log('BEND PROGRESS at t = ' + t + ' (angle across the bend, as a fraction of its day-28 angle)');
+    for (let j = 0; j < bp.length; j++)
+      console.log('   ' + NAMES[j].padEnd(22) + bp[j].deg.toFixed(1).padStart(6) + ' deg of ' +
+        bp[j].degFinal.toFixed(1).padStart(6) + '   = ' + (bp[j].frac * 100).toFixed(0).padStart(3) + '%');
+  }
+}
 
 /* STABILITY VERDICT AT N = 600. Added 2026-09-10 by the round-2 build run, which produced a
    candidate that agreed with itself at N = 140 and N = 300 — the two resolutions the robust score
@@ -771,7 +947,8 @@ console.log('FLOORS:', JSON.stringify(FRAC));
      that is on a bifurcation between 140 and 300 — which is where round 3's near-miss lived, and it
      printed "stable" while the loop had inverted. The pair that matters is whichever pair disagrees. */
   const m1 = measure(p, 140), m3 = measure(p, 300), m6 = measure(p, 600);
-  const KEYS = ['A','Bp','bvx','C','D','E','F','G','H','H65','I','Dfrac','Dov','Ifrac','Iside','Jside','Jc','Kright','Kc','L','L65'];
+  const KEYS = ['A','Bp','bvx','C','D','E','F','G','H','H65','I','Dfrac','Dov','Ifrac','Iside','Jside','Jc','Kright','Kc','L','L65',
+                'Afrac','Bpfrac','Cfrac','Efrac','Ffrac','Gfrac','Hfrac'];
   const drifts = [];
   for (const k of KEYS) drifts.push(
     { k: k + ' (140-300)', d: Math.abs(m1[k] - m3[k]) },

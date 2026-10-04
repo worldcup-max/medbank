@@ -51,8 +51,45 @@ if (existsSync(SCENE_PATH)) {
   REFS = scene.structures.map(s => ({ key: s.key, ref: s.refs && s.refs.procedural })).filter(r => r.ref);
   const ts = [...new Set(scene.views.flatMap(v => v.ops.filter(o => o.op === 'SET_STAGE').map(o => o.t)))];
   if (ts.length) SCENE_T = ts.sort((a, b) => a - b);
-  VIEWS = scene.views.map(v => ({ title: v.title, mode: v.mode,
-    t: (v.ops.find(o => o.op === 'SET_STAGE') || {}).t, view: (v.ops.find(o => o.op === 'ROTATE_TO_VIEW') || {}).view }));
+  /* WHAT EACH BEAT ACTUALLY SHOWS, not what the model can build.
+     Until 2026-09-29 every beat frame here was rendered with the whole model visible, so "look at the
+     frames" checked that the geometry existed and NOT that the beat looked like anything. That is how
+     a beat narrating a measurement nobody could see survived a round: the proof frames showed the
+     structure from a camera the beat does not use, with structures the beat hides. The SHOW/HIDE ops
+     are replayed here exactly as viz3d's keysFor does — '*', a group name, or a key — and the frame is
+     fitted to what is left, which is what the player's frameView does.
+
+     COMPARE_STRUCTURES IS NOW REPLAYED TOO, added 2026-09-29 by the round-3 build run against review
+     round 2's OPEN 3. That finding was about ISOLATE_REGION and COMPARE_STRUCTURES both: the earlier
+     comment here said they were deliberately not replayed because they ghost rather than hide, which
+     was honest, and the cost of it was that b06 and b09 came out BYTE-IDENTICAL — two beats narrating
+     different things, one set of pixels, and the "no view renders the same frame as the view before
+     it" rule unevaluable for either. This round removed every ISOLATE_REGION from the scene (the
+     engine ghosts the isolate's own subject, escalated as engine__isolate-ghosts-its-own-subject, so
+     an isolate beat currently draws its subject at 0.10 like everything else), so the op is gone from
+     here rather than approximated. COMPARE_STRUCTURES remains and does two things the frame can show
+     honestly, both read straight off viz3d: it sets `state.only` to the compared keys, which is what
+     subjectBox() FRAMES on (viz3d:2129), and `state.ghosted`, which drops everything not compared to
+     0.10 opacity in paint() (viz3d:2409, 2418). Both are reproduced. What is NOT reproduced is the
+     emissive lift the compared keys get, because that is a look and not a fact about what is visible. */
+  const GROUP = {}, ALLKEYS = scene.structures.map(s => s.key);
+  scene.structures.forEach(s => { (GROUP[s.group || ''] = GROUP[s.group || ''] || []).push(s.key); });
+  const keysFor = target => (!target || target === '*') ? ALLKEYS.slice()
+    : (ALLKEYS.indexOf(target) >= 0 ? [target] : (GROUP[target] || []));
+  VIEWS = scene.views.map(v => {
+    const vis = {}; ALLKEYS.forEach(k => { vis[k] = true; });
+    for (const o of v.ops) {
+      if (o.op === 'SHOW_STRUCTURE') keysFor(o.target).forEach(k => { vis[k] = true; });
+      if (o.op === 'HIDE_STRUCTURE') keysFor(o.target).forEach(k => { vis[k] = false; });
+    }
+    const cmp = v.ops.filter(o => o.op === 'COMPARE_STRUCTURES')
+                     .reduce((a2, o) => a2.concat((o.targets || []).flatMap(keysFor)), []);
+    return { title: v.title, mode: v.mode, beat: v.beat,
+      t: (v.ops.find(o => o.op === 'SET_STAGE') || {}).t,
+      view: (v.ops.find(o => o.op === 'ROTATE_TO_VIEW') || {}).view,
+      keys: ALLKEYS.filter(k => vis[k]),
+      compare: cmp.length ? [...new Set(cmp)].filter(k => vis[k]) : null };
+  });
 }
 
 const W = 1100, H = 900;
@@ -107,6 +144,48 @@ window.setStage = function (t, opts) {
   scene.add(group);
   renderer.render(scene, camera);
   return true;
+};
+/** Build at t, show only the given keys, and frame on what is left — the player's own per-view framing.
+    Returns the keys that actually carried geometry, so a beat that names a part the model does not
+    build cannot pass unnoticed. */
+window.frameBeat = function (t, opts, eye, keys, compare) {
+  if (group) scene.remove(group);
+  group = MOD.build(t, Object.assign({}, MOD.FULL, opts || {}));
+  group.updateMatrixWorld(true);
+  const shown = [];
+  group.traverse(function (o) {
+    if (!o.isMesh) return;
+    const vis = !keys || keys.indexOf(o.userData.key) >= 0;
+    o.visible = vis;
+    if (vis && !(o.userData || {}).outline) shown.push(o.userData.key);
+    /* COMPARE_STRUCTURES, as paint() draws it: everything not compared goes to 0.10, never above its
+       own authored ceiling. viz3d:2409 + 2418. */
+    if (vis && compare && compare.length && compare.indexOf(o.userData.key) < 0 && o.material) {
+      o.material.transparent = true;
+      o.material.opacity = Math.min(0.10, o.material.opacity == null ? 1 : o.material.opacity);
+      o.material.depthWrite = false;
+    }
+  });
+  scene.add(group);
+  /* AND THE FRAME IS THE COMPARED SET, not everything left visible: viz3d's subjectBox() takes
+     state.only when a view compares or isolates, and COMPARE_STRUCTURES sets it. */
+  const box = new THREE.Box3();
+  const inSubject = function (o) { return !compare || !compare.length || compare.indexOf(o.userData.key) >= 0; };
+  group.traverse(function (o) { if (o.isMesh && o.visible && !(o.userData || {}).outline && inSubject(o)) box.expandByObject(o); });
+  if (box.isEmpty()) return { shown: shown, empty: true };
+  const s = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
+  const proxy = new THREE.Mesh(new THREE.BoxGeometry(Math.max(0.01,s.x), Math.max(0.01,s.y), Math.max(0.01,s.z)));
+  proxy.position.copy(c); proxy.updateMatrixWorld(true);
+  const f = VizKit.fitCamera(camera, proxy, 1.08);
+  const dir = new THREE.Vector3().fromArray(eye).normalize();
+  camera.position.copy(f.centre).addScaledVector(dir, f.distance);
+  camera.up.set(0, 1, 0);
+  if (Math.abs(dir.y) > 0.97) camera.up.set(0, 0, -1);
+  camera.lookAt(f.centre);
+  L.key.position.copy(camera.position).add(new THREE.Vector3(4, 7, 5));
+  L.rim.position.copy(f.centre).addScaledVector(dir, -f.distance).add(new THREE.Vector3(-3, 4, 0));
+  renderer.render(scene, camera);
+  return { shown: [...new Set(shown)], empty: false, size: s.toArray() };
 };
 window.only = function (keys) {
   if (!group) return false;
@@ -250,15 +329,21 @@ report.acceptance = await p.evaluate('window.acceptance()');
 report.triangles = await p.evaluate('window.tris(1)');
 
 /* one frame per t the scene visits, from the camera that beat uses, plus two detail frames */
-const EYE = { anterior: [0, 0.20, 1], posterior: [0, 0.20, -1], superior: [0, 1, 0.001],
-              inferior: [0, -1, 0.001], lateral: [1, 0.15, 0.25], medial: [-1, 0.15, 0.25] };
+/* viz3d.js's VIEW_DIR, COPIED EXACTLY rather than prettied up. These used to carry a small elevation
+   (anterior was [0, 0.20, 1], lateral [1, 0.15, 0.25]) because the tilted frames look better, and that
+   is precisely the wrong thing for a proof frame: the whole defect this round fixes was a beat whose
+   narration could not be seen FROM THE CAMERA THE PLAYER USES, and a proof rendered from a camera the
+   player does not use cannot catch that. If a beat needs an elevation, the elevation belongs in the
+   player, not in the evidence. */
+const EYE = { anterior: [0, 0, 1], posterior: [0, 0, -1], lateral: [1, 0, 0],
+              medial: [-1, 0, 0], superior: [0, 1, 0.001], inferior: [0, -1, 0.001] };
 const SHOTS = [];
 const seen = new Set();
 for (const v of (VIEWS.length ? VIEWS : SCENE_T.map(t => ({ t, view: 'anterior', title: 't' + t })))) {
   const t = v.t == null ? 1 : v.t;
   const eye = EYE[v.view || 'anterior'] || EYE.anterior;
   const name = 'b' + String(SHOTS.length + 1).padStart(2, '0') + '-' + (v.view || 'anterior') + '-t' + String(Math.round(t * 1000)).padStart(3, '0');
-  SHOTS.push({ name, t, eye, opts: {}, label: v.title || '' });
+  SHOTS.push({ name, t, eye, opts: {}, label: v.title || '', keys: v.keys || null, compare: v.compare || null });
 }
 /* extra proof frames the scene does not ask for: the two extremes from above, and the roots off */
 SHOTS.push({ name: 'x1-superior-shut',  t: 0.35, eye: EYE.superior, opts: { roots: false, ghost: false }, label: 'AV shut / SL open, from above, roots off' });
@@ -268,12 +353,20 @@ SHOTS.push({ name: 'x4-anterior-shut',  t: 0.35, eye: EYE.anterior, opts: { root
 SHOTS.push({ name: 'x5-ghost',          t: 0.80, eye: EYE.anterior, opts: { ghost: true }, label: 'with the ventricular walls' });
 
 for (const s of SHOTS) {
-  s.fit = await p.evaluate(([ts, o, e]) => window.fitOnce(ts, o, e), [SCENE_T.concat([s.t]), s.opts, s.eye]);
-  await p.evaluate(([t, o]) => window.setStage(t, o), [s.t, s.opts]);
+  let shown = null;
+  if (s.keys) {
+    shown = await p.evaluate(([t, o, e, k, c]) => window.frameBeat(t, o, e, k, c), [s.t, s.opts, s.eye, s.keys, s.compare || null]);
+  } else {
+    s.fit = await p.evaluate(([ts, o, e]) => window.fitOnce(ts, o, e), [SCENE_T.concat([s.t]), s.opts, s.eye]);
+    await p.evaluate(([t, o]) => window.setStage(t, o), [s.t, s.opts]);
+  }
   const at = await p.evaluate(t => window.at(t), s.t);
   await p.locator('#c').screenshot({ path: `${OUT}/${s.name}.png` });
   report.stages.push({ name: s.name, t: s.t, eye: s.eye, opts: s.opts, label: s.label,
-                       phase: at.phase.name, closure: at.closure });
+                       phase: at.phase.name, closure: at.closure,
+                       asksFor: s.keys ? s.keys.length : null, compare: s.compare || null,
+                       shown: shown ? shown.shown.length : null,
+                       missing: s.keys && shown ? s.keys.filter(k => shown.shown.indexOf(k) < 0) : null });
 }
 
 report.normals = await p.evaluate('window.normalProbe(0.35)');
@@ -349,6 +442,15 @@ for (const k of Object.keys(byKey).sort()) {
 console.log('front-face rays :', report.frontFace.rays, 'hit,', report.frontFace.facingAway, 'facing AWAY (',
   (report.frontFace.fraction * 100).toFixed(2) + '% )');
 
+/* every beat frame was rendered with exactly the structures that beat leaves visible; a beat that
+   names a part the model does not build shows up here rather than in a student's hands */
+const beatShots = report.stages.filter(s => s.asksFor != null);
+const beatMissing = beatShots.filter(s => (s.missing || []).length);
+for (const s of beatShots) console.log('  beat frame', s.name.padEnd(26), s.shown + '/' + s.asksFor, 'structures shown', s.label.slice(0, 52));
+console.log('beat framing    :', beatMissing.length
+  ? 'MISSING GEOMETRY: ' + beatMissing.map(s => s.name + ' -> ' + s.missing.join(',')).join('; ')
+  : beatShots.length + ' beats, every structure each one shows has geometry');
+
 let refOK = true;
 if (report.refs) {
   const failed = report.refs.filter(r => !r.hasMesh || !r.tris);
@@ -365,6 +467,6 @@ if (report.refs) {
   refOK = false;
 }
 
-const ok = !bad.length && !badA.length && acc.allPass && worstWind > 0.98 && refOK && report.frontFace.fraction < 0.005;
+const ok = !bad.length && !badA.length && acc.allPass && worstWind > 0.98 && refOK && report.frontFace.fraction < 0.005 && !beatMissing.length;
 console.log('\nVERDICT:', ok ? 'PASS' : 'FAIL');
 process.exit(ok ? 0 : 1);

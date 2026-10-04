@@ -89,3 +89,18 @@ delete from topics where id in (
  'd5cb1820-3ee3-41af-9ecd-0b542e461a4e','256cd0cb-278c-4401-b2a8-cb48564c2658',
  '541da27c-3f93-495c-9ed8-0d11efa554e5','8a41807e-7c1d-478b-9c4b-64fff8c34c7c');
 ```
+
+---
+
+## V1.8.2 source-pool expansion (thin families) — 2026-09-08
+Fix for the 17.6% duplicate rate concentrated in cardio_endocrine + pregnancy_cardio (shallow pools → re-mined territory).
+Added course **"Integrated Source Pool"** (id `3221982f-c6ee-4002-8929-03e119bfd578`, account frankthejay, level 500),
+15 concept lectures each built with QBank. VERIFIED persisted: 15/15 topics, **131 QBank cards**, all with stem+options+answer
+(miner reads topics.extras.qbank → new hashes are unseen → auto-enter the source pool; no per-ID wiring needed).
+Source concept text: SOURCE-POOLS-THIN-FAMILIES.md.
+- cardio_endocrine (8): Cushing's, primary hyperaldosteronism, hyperthyroid high-output, Addisonian crisis, calcium/QT,
+  diabetic autonomic silent ischaemia, SGLT2i/GLP-1 HF decision, carcinoid heart disease.
+- pregnancy_cardio (7): preeclampsia/pulmonary oedema, pulmonary HTN/Eisenmenger, aortopathy/Marfan, SVT, VTE/PE,
+  aortic stenosis/HOCM, amniotic fluid embolism.
+PENDING PROOF: watch the next acquisition batches — the duplicate rate must fall below the 17.6% baseline for the fix
+to be called successful. Adding the lectures is the hypothesis; the batch data is the evidence.

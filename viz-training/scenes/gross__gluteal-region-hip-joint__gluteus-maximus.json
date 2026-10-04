@@ -381,6 +381,26 @@
       "narration": "The medial half of the origin. The muscle crosses the sacroiliac joint, so it braces that joint as well as moving the hip."
     },
     {
+      "key": "coccyx",
+      "name": "coccyx",
+      "label": "Coccyx",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#ded4b9",
+      "refs": {
+        "bodyparts3d": "FMA16202-coccyx"
+      },
+      "terms": [
+        "coccyx",
+        "tailbone",
+        "coccygeal",
+        "origin of gluteus maximus",
+        "sacrotuberous ligament"
+      ],
+      "narration": "The medial end of the origin line. Gluteus maximus arises from the ilium behind the posterior gluteal line, then the back of the sacrum, then the back of the coccyx, then the sacrotuberous ligament — and this bone is the lowest and most medial bony part of that run, where the origin passes off the skeleton onto ligament."
+    },
+    {
       "key": "femur",
       "name": "right femur",
       "label": "Femur",
@@ -807,7 +827,7 @@
     }
   ],
   "gaps": [
-    "There is no coccyx mesh in the catalog, so the coccygeal part of the origin of gluteus maximus is narrated against the sacrum rather than shown.",
+    "The coccyx is drawn as of 2026-10-01, in the “Bony frame” group, refed to FMA16202-coccyx, so beat two’s origin line — “the ilium behind the posterior gluteal line, then the back of the sacrum and coccyx, then the sacrotuberous ligament” — has a bone under its medial end instead of empty space. The sacrotuberous ligament itself is still unmodelled; see the gap below. The coccyx is drawn from FMA16202-coccyx, a DERIVED asset: BodyParts3D ships the coccyx fused to the sacrum as FMA16202, and that scan was cut at its minimum cross-section (z = 825.5) into FMA16202-sacrum (110.5 mm) and FMA16202-coccyx (34.8 mm), both closed solids. So the interface between the two is the CUT PLANE, not a modelled sacrococcygeal joint: a flat transverse face where one piece bottoms out and the other tops out. The convex sacral apex, the concave base of Co1 and the fibrocartilaginous disc between them are not in the geometry. Where narration names the sacrococcygeal joint, the picture shows a butt joint. (Same wording as the vertebral-column scene, which review added on 2026-09-30.)",
     "No ligament of the pelvis is modelled — the sacrotuberous ligament gives about a fifth of the muscle's origin and the sacrospinous ligament divides the greater from the lesser sciatic foramen, and both are described only in narration.",
     "No nerve of the lower limb exists as a model, so the sciatic nerve is authored as a traced concept path across the short rotators, and the inferior and superior gluteal nerves — the two nerves the whole clinical beat turns on — are taught by lighting the muscles they supply.",
     "No artery is modelled in this region either. The superior and inferior gluteal vessels are named in narration only; they are the subject of the separate Gluteal vessels curriculum entry, which this scene does not claim to cover.",
@@ -819,6 +839,22 @@
     "author": "task",
     "authored_at": "2026-08-27",
     "audited_at": "2026-08-29",
-    "audited_by": "task"
-  }
+    "audited_by": "task",
+    "corrected_at": "2026-10-01T02:00:00Z",
+    "corrected_by": "model3d BUILD task, queue item gross__back-vertebral-column__coccyx, review round 1 finding 1",
+    "correction_note_coccyx_split": "Corrected a false claim in gaps[]: it said there is no coccyx mesh in the catalog, which stopped being true on 2026-09-11. No geometry, narration or structure changed — the rewritten gap records that the coccygeal segment of the gluteus maximus origin now points at empty space.",
+    "correction_note_coccyx": "Added one structure, coccyx -> FMA16202-coccyx, in the group and colour the scene already gives the sacrum, and rewrote the gaps[] entry that said it was missing. No view op, no other structure, no narration and no geometry changed: every view either shows \"*\" or shows this group, so the new structure inherits the existing view logic. Verified in the real player with viz-training/tools/walk-scene-in-player.mjs before and after. The 2026-09-30 review's own correction to this scene is untouched and stays recorded in provenance.correction_note_coccyx_split; corrected_at/corrected_by name this run only because it is the latest writer of the pair."
+  },
+  "visibility_waivers": [
+    {
+      "view": 9,
+      "key": "coccyx",
+      "why": "0.000% of frame. CROSS_SECTION y 0 cuts the buttock to show the layers a needle passes; the coccyx is a midline bone and is removed or hidden by that cut. It is context here, not pointed at. SHOWN IN BEAT 5 (0.118%), 6 (0.127%) and 11 (0.127%); the origin beat that names it, beat 2, draws it at 0.056%. Measured with walk-scene-in-player.mjs, 2026-10-01."
+    },
+    {
+      "view": 10,
+      "key": "coccyx",
+      "why": "0.000% of frame. ISOLATE_REGION “Abductors” with the bony frame brought back behind it, framed on the upper outer quadrant; the coccyx is medial and far from that frame's subject. Context, not pointed at. SHOWN IN BEATS 5, 6 and 11. Measured with walk-scene-in-player.mjs, 2026-10-01."
+    }
+  ]
 }

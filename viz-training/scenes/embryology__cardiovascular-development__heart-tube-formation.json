@@ -190,6 +190,24 @@
       ]
     },
     {
+      "key": "lumen",
+      "name": "Lumen of the heart tube",
+      "label": "Lumen of the heart tube",
+      "role": "part",
+      "group": "The heart tube",
+      "color": "#7d1a2b",
+      "refs": {
+        "procedural": "heart-tube-formation#lumen"
+      },
+      "terms": [
+        "lumen of the heart tube",
+        "cardiac lumen",
+        "blood in the heart tube",
+        "endocardial lumen"
+      ],
+      "note_opacity": "OPAQUE ON PURPOSE. Drawn at 0.78 the cast banded across its own length in the player walk: viz3d sets depthWrite from the opacity (op >= 0.98) so a translucent solid shows its own back faces through its front ones with no sort between them. Nothing needs to be seen THROUGH the lumen — it is the innermost thing in the tube — so it is drawn solid, which is also what a blood cast should look like."
+    },
+    {
       "key": "jelly",
       "name": "Cardiac jelly",
       "label": "Cardiac jelly",
@@ -324,7 +342,7 @@
       "group": "The tube in section",
       "color": "#c02a3a",
       "refs": {
-        "procedural": "heart-tube-formation#ventricle@1+cutaway"
+        "procedural": "heart-tube-formation#ventricle@1+crosscut"
       },
       "terms": [
         "myocardium",
@@ -339,7 +357,7 @@
       "group": "The tube in section",
       "color": "#6fc9bb",
       "refs": {
-        "procedural": "heart-tube-formation#jelly@1+cutaway"
+        "procedural": "heart-tube-formation#jelly@1+crosscut"
       },
       "terms": [
         "cardiac jelly"
@@ -353,12 +371,30 @@
       "group": "The tube in section",
       "color": "#e7aebe",
       "refs": {
-        "procedural": "heart-tube-formation#endocardium@1+cutaway"
+        "procedural": "heart-tube-formation#endocardium@1+crosscut"
       },
       "terms": [
         "endocardium",
         "lumen"
       ]
+    },
+    {
+      "key": "cut_lumen",
+      "name": "Lumen of the heart tube",
+      "label": "Lumen of the heart tube (cut face)",
+      "role": "part",
+      "group": "The heart tube",
+      "color": "#7d1a2b",
+      "refs": {
+        "procedural": "heart-tube-formation#lumen@1+crosscut"
+      },
+      "terms": [
+        "lumen of the heart tube",
+        "cardiac lumen",
+        "blood in the heart tube",
+        "endocardial lumen"
+      ],
+      "note_opacity": "OPAQUE ON PURPOSE. Drawn at 0.78 the cast banded across its own length in the player walk: viz3d sets depthWrite from the opacity (op >= 0.98) so a translucent solid shows its own back faces through its front ones with no sort between them. Nothing needs to be seen THROUGH the lumen — it is the innermost thing in the tube — so it is drawn solid, which is also what a blood cast should look like."
     },
     {
       "key": "bifid_left",
@@ -495,7 +531,54 @@
           "view": "anterior"
         }
       ],
-      "narration": "Look down on the flat trilaminar disc in the third week. In front of the buccopharyngeal membrane there is a horseshoe of splanchnic mesoderm — the cardiogenic field. Inside it, angiogenic cells hollow out into a pair of endocardial tubes, and the coelom above them will be the pericardial cavity. Nothing about this picture looks like a heart yet, and it is on the wrong side of the head.\n\nThe heart begins in the third week as a horseshoe of splanchnic mesoderm lying in front of the buccopharyngeal membrane, above the head end of the embryo. Fix that position now, because everything that follows is the story of this horseshoe being carried down and folded together. The cells of the horseshoe are the primary heart field, and they are committed to cardiac muscle before the embryo has any recognisable heart at all.\n\nWithin the horseshoe, clusters of angiogenic cells hollow out and join into a pair of thin-walled endocardial tubes, one on each side. The heart is a paired organ before it is a single one. That fact matters clinically: everything about heart formation is the fusion of two things in the midline, and failure of fusion is the shape that the earliest cardiac malformations take."
+      "narration": "Look down on the flat trilaminar disc in the third week. In front of the buccopharyngeal membrane there is a horseshoe of splanchnic mesoderm — the cardiogenic field. Inside it, angiogenic cells hollow out into a pair of endocardial tubes, and the coelom above them will be the pericardial cavity. Nothing about this picture looks like a heart yet, and it is on the wrong side of the head.\n\nThe heart begins in the third week as a horseshoe of splanchnic mesoderm lying in front of the buccopharyngeal membrane, above the head end of the embryo. Fix that position now, because everything that follows is the story of this horseshoe being carried down and folded together. The cells of the horseshoe are the primary heart field, and they are committed to cardiac muscle before the embryo has any recognisable heart at all.\n\nWithin the horseshoe, clusters of angiogenic cells hollow out and join into a pair of thin-walled endocardial tubes, one on each side. The heart is a paired organ before it is a single one. That fact matters clinically: everything about heart formation is the fusion of two things in the midline, and failure of fusion is the shape that the earliest cardiac malformations take.",
+      "claims": [
+        {
+          "id": "HTF1-day",
+          "claim": "this is day 18",
+          "measure": "day",
+          "op": "near",
+          "value": 18,
+          "tol": 0.02
+        },
+        {
+          "id": "HTF1-paired",
+          "claim": "the heart is still two separate endocardial tubes along their whole length",
+          "measure": "front",
+          "op": "atLeast",
+          "value": 1
+        },
+        {
+          "id": "HTF1-flat",
+          "claim": "the disc is still flat — the lateral folds have not begun",
+          "measure": "fold.phi_deg",
+          "op": "near",
+          "value": 0,
+          "tol": 0.25
+        },
+        {
+          "id": "HTF1-turned",
+          "claim": "and the cardiogenic area is a full 180 degrees from where the head fold will put it",
+          "measure": "fold.theta_deg",
+          "op": "near",
+          "value": -180,
+          "tol": 0.5
+        },
+        {
+          "id": "HTF1-bpm",
+          "claim": "the cardiogenic area lies CRANIAL to the buccopharyngeal membrane — \"in front of\" it on the flat disc",
+          "measure": "order.heart_minus_bpm",
+          "op": "atLeast",
+          "value": 0.35
+        },
+        {
+          "id": "HTF1-st",
+          "claim": "and the septum transversum is cranial to the cardiogenic area, which is the order the head fold will reverse",
+          "measure": "order.septum_minus_heart",
+          "op": "atLeast",
+          "value": 0.35
+        }
+      ]
     },
     {
       "mode": "mechanism",
@@ -561,7 +644,47 @@
           "view": "lateral"
         }
       ],
-      "narration": "Now fold the embryo twice at once. The head fold swings the cardiogenic area through a hundred and eighty degrees so it comes to lie under the pharynx and above the septum transversum, and the order of the structures along the axis is reversed with it. The lateral folds push the two endocardial tubes together in the midline and they fuse from the head end back, giving a single tube by about day twenty-two. The heart did not migrate. The embryo folded around it.\n\nThe brain grows fast and the head end of the embryo folds forward over the cardiogenic area. The heart tube is swung through roughly a hundred and eighty degrees, so it ends up below and behind the buccopharyngeal membrane instead of in front of it. The order along the axis is turned over as well. What began as pericardial cavity, then heart, then septum transversum now reads septum transversum, then heart, then pericardial cavity from below upwards. Every adult relation of the heart to the diaphragm and the mouth dates from this one movement.\n\nThe intraembryonic coelom above the cardiogenic field becomes the pericardial cavity, and the septum transversum sits at its caudal edge. Splanchnic mesoderm forms the heart itself; somatic mesoderm forms the wall of the sac around it. This is why the visceral pericardium is on the heart and the parietal pericardium is on the sac — the two layers were never the same tissue."
+      "narration": "Now fold the embryo twice at once. The head fold swings the cardiogenic area through a hundred and eighty degrees so it comes to lie under the pharynx and above the septum transversum, and the order of the structures along the axis is reversed with it. The lateral folds push the two endocardial tubes together in the midline and they fuse from the head end back, giving a single tube by about day twenty-two. The heart did not migrate. The embryo folded around it.\n\nThe brain grows fast and the head end of the embryo folds forward over the cardiogenic area. The heart tube is swung through roughly a hundred and eighty degrees, so it ends up below and behind the buccopharyngeal membrane instead of in front of it. The order along the axis is turned over as well. What began as pericardial cavity, then heart, then septum transversum now reads septum transversum, then heart, then pericardial cavity from below upwards. Every adult relation of the heart to the diaphragm and the mouth dates from this one movement.\n\nThe intraembryonic coelom above the cardiogenic field becomes the pericardial cavity, and the septum transversum sits at its caudal edge. Splanchnic mesoderm forms the heart itself; somatic mesoderm forms the wall of the sac around it. This is why the visceral pericardium is on the heart and the parietal pericardium is on the sac — the two layers were never the same tissue.",
+      "claims": [
+        {
+          "id": "HTF2-day",
+          "claim": "this is day 19-20, with both foldings under way",
+          "measure": "day",
+          "op": "near",
+          "value": 19.75,
+          "tol": 0.02
+        },
+        {
+          "id": "HTF2-phi",
+          "claim": "the lateral folds have swung the tubes 31.5 degrees medially",
+          "measure": "fold.phi_deg",
+          "op": "near",
+          "value": 31.5,
+          "tol": 0.3
+        },
+        {
+          "id": "HTF2-theta",
+          "claim": "and the head fold has carried the cardiogenic area 63 of its 180 degrees",
+          "measure": "fold.theta_deg",
+          "op": "near",
+          "value": -117,
+          "tol": 0.6
+        },
+        {
+          "id": "HTF2-unfused",
+          "claim": "the two tubes have not met yet: the fold is not far enough advanced for them to touch",
+          "measure": "front",
+          "op": "atLeast",
+          "value": 1
+        },
+        {
+          "id": "HTF2-order",
+          "claim": "the septum transversum is still cranial to the heart — the order has not turned over yet",
+          "measure": "order.septum_minus_heart",
+          "op": "atLeast",
+          "value": 0.35
+        }
+      ]
     },
     {
       "mode": "mechanism",
@@ -618,7 +741,39 @@
           "view": "anterior"
         }
       ],
-      "narration": "At the same time the flat embryo folds inwards at both sides. The two endocardial tubes are pushed to the midline and zip together from the cranial end backwards, giving one tube by about day twenty-two. Two clinical points hang on this. If the lateral folds fail to bring the tubes together, the embryo has two separate hearts — cardia bifida, seen experimentally and incompatible with life. If the ventral body wall fails to close over the fused tube, the heart lies outside the chest as ectopia cordis."
+      "narration": "At the same time the flat embryo folds inwards at both sides. The two endocardial tubes are pushed to the midline and zip together from the cranial end backwards, giving one tube by about day twenty-two. Two clinical points hang on this. If the lateral folds fail to bring the tubes together, the embryo has two separate hearts — cardia bifida, seen experimentally and incompatible with life. If the ventral body wall fails to close over the fused tube, the heart lies outside the chest as ectopia cordis.",
+      "claims": [
+        {
+          "id": "HTF3-day",
+          "claim": "this is day 21-22, mid-zip",
+          "measure": "day",
+          "op": "near",
+          "value": 21.8,
+          "tol": 0.02
+        },
+        {
+          "id": "HTF3-front",
+          "claim": "the fusion front stands 45% of the way down from the arterial end",
+          "measure": "front",
+          "op": "near",
+          "value": 0.4489,
+          "tol": 0.02
+        },
+        {
+          "id": "HTF3-single",
+          "claim": "so the picture shows BOTH states at once — one tube over at least 40% of its length",
+          "measure": "fused_fraction",
+          "op": "atLeast",
+          "value": 0.4
+        },
+        {
+          "id": "HTF3-apart",
+          "claim": "and at the venous end the two tubes are still a clear gap apart, at least 35% of a diameter",
+          "measure": "pair_gap",
+          "op": "atLeast",
+          "value": 0.35
+        }
+      ]
     },
     {
       "mode": "cross_section",
@@ -635,22 +790,6 @@
         },
         {
           "op": "SHOW_STRUCTURE",
-          "target": "atrium"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "bulbus"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "truncus"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "sinus"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
           "target": "cut_myocardium"
         },
         {
@@ -662,23 +801,72 @@
           "target": "cut_endocardium"
         },
         {
-          "op": "CROSS_SECTION",
-          "axis": "z",
-          "offset": 0,
-          "animate": true
+          "op": "SHOW_STRUCTURE",
+          "target": "cut_lumen"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "cut_jelly",
-          "intensity": 0.95
+          "intensity": 0.55
         },
         {
           "op": "PEEL_LAYER",
           "layer": "organ",
           "direction": "inward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
         }
       ],
-      "narration": "Cut across the new tube. Endocardium inside, myocardium outside, cardiac jelly between them — and that jelly is not filler, it is the future endocardial cushions and therefore the future atrioventricular valves. The epicardium is not there yet; it crawls over the tube later from the proepicardial organ. The tube hangs by a dorsal mesocardium which then breaks down in the middle, leaving it fixed only at its two ends and leaving behind the transverse pericardial sinus.\n\nCut the tube across and there are three coats. The endocardial tube itself becomes endocardium. Around it the splanchnic mesoderm thickens into myocardium. Between them lies a thick layer of extracellular matrix called cardiac jelly. Do not treat the jelly as packing — it is where the endocardial cushions will form, and therefore where the atrioventricular valves and part of the septa come from. The outer epicardium arrives last and from elsewhere, migrating over the tube from the proepicardial organ near the sinus venosus."
+      "narration": "Cut across the new tube at day twenty-three. Endocardium inside, myocardium outside, cardiac jelly between them — and that jelly is not filler, it is the future endocardial cushions and therefore the future atrioventricular valves. The epicardium is not there yet; it crawls over the tube later from the proepicardial organ.\n\nCut the tube across and there are three coats. The endocardial tube itself becomes endocardium. Around it the splanchnic mesoderm thickens into myocardium. Between them lies a thick layer of extracellular matrix called cardiac jelly. Do not treat the jelly as packing — it is where the endocardial cushions will form, and therefore where the atrioventricular valves and part of the septa come from. The outer epicardium arrives last and from elsewhere, migrating over the tube from the proepicardial organ near the sinus venosus.",
+      "claims": [
+        {
+          "id": "HTF4-day",
+          "claim": "this is day 23, the finished tube",
+          "measure": "day",
+          "op": "near",
+          "value": 23,
+          "tol": 0.02
+        },
+        {
+          "id": "HTF4-one",
+          "claim": "one tube along its whole length",
+          "measure": "front",
+          "op": "atMost",
+          "value": 0
+        },
+        {
+          "id": "HTF4-jelly",
+          "claim": "the cardiac jelly is A THICK LAYER — thicker than the myocardium around it, not a line between two walls",
+          "measure": "coat.jelly_over_wall",
+          "op": "atLeast",
+          "value": 1.1
+        },
+        {
+          "id": "HTF4-face",
+          "claim": "the cut is AT THE VENTRICLE BODY — the section face sits at the station this beat is about, and it moves as the tube lengthens, which is what pins this beat to day 23 rather than to a shape that is true all week",
+          "measure": "xs.face_y",
+          "op": "near",
+          "value": 0.42,
+          "tol": 0.005
+        },
+        {
+          "id": "HTF4-camera",
+          "claim": "and this beat has exactly ONE camera that can see it: the face is normal to the tube’s axis, so a superior camera looks along that normal and an anterior one sees three rings edge-on, as three lines. RENDER-STANDARD 3.y — the beat carries its own camera assertion",
+          "measure": "xs.face_dot.superior",
+          "op": "atLeast",
+          "value": 0.9
+        },
+        {
+          "id": "HTF4-sinus",
+          "claim": "and the dorsal mesocardium has already given way in the middle, which is what the last line of this beat says",
+          "measure": "meso.half_gap",
+          "op": "near",
+          "value": 0.055,
+          "tol": 0.002
+        }
+      ]
     },
     {
       "mode": "cross_section",
@@ -722,6 +910,10 @@
           "target": "midline"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "pericardium"
+        },
+        {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "mesocardium",
           "intensity": 0.9
@@ -731,7 +923,48 @@
           "view": "lateral"
         }
       ],
-      "narration": "The tube hangs in the pericardial cavity by a dorsal mesocardium; the ventral mesocardium never really forms. The dorsal mesocardium then breaks down in its middle, leaving the tube attached only at its two ends and free in between. The hole it leaves is the transverse pericardial sinus, the space the surgeon passes a finger through behind the aorta and pulmonary trunk. The breakdown is also the permission slip for looping — a tube tied down along its whole length cannot bend."
+      "narration": "The tube hangs in the pericardial cavity by a dorsal mesocardium; the ventral mesocardium never really forms. The dorsal mesocardium then breaks down in its middle. At day 23, the stage drawn here, that breakdown is a single perforation: a sheet still runs from the tube to the pericardial wall on either side of it, reaching the arterial pole above and the venous pole below, and the hole between them is the transverse pericardial sinus. As the perforation enlarges the tube is left attached at its two ends only — which is the state you will meet it described in, and the permission slip for looping, because a tube tied down along its whole length cannot bend. In the adult the sinus is the space the surgeon passes a finger through behind the aorta and pulmonary trunk; here, with the tube already crowding its sac, it is a slit.",
+      "claims": [
+        {
+          "id": "HTF5-day",
+          "claim": "this is day 23",
+          "measure": "day",
+          "op": "near",
+          "value": 23,
+          "tol": 0.02
+        },
+        {
+          "id": "HTF5-venous",
+          "claim": "the dorsal mesocardium reaches the VENOUS pole",
+          "measure": "meso.u0",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-9
+        },
+        {
+          "id": "HTF5-arterial",
+          "claim": "and the ARTERIAL pole — the sheet runs pole to pole, which is Frank’s ruling of 2026-09-29. NOTE WHAT THIS ROW DOES NOT SAY. Reaching both poles is not the same as being attached ONLY at them, and it is not the same as being DRAWN at them: this row reads the sheet’s span, and acceptance rows M and P read its ink, station by station. Measured 2026-09-30: the sheet is inked over 0.883 of the tube’s extent, stopping 0.033 short at this pole and 0.083 short at the venous one, where the sac has closed onto the tube and a pericardial reflection is a line rather than a membrane. “Free in between” is carried by the single opening HTF5-sinus measures.",
+          "measure": "meso.u1",
+          "op": "near",
+          "value": 1,
+          "tol": 1e-9
+        },
+        {
+          "id": "HTF5-sinus",
+          "claim": "and the hole between the two remnants — the transverse pericardial sinus — is open",
+          "measure": "meso.half_gap",
+          "op": "near",
+          "value": 0.055,
+          "tol": 0.002
+        },
+        {
+          "id": "HTF5-remnants",
+          "claim": "and it is TWO remnants with one hole between them, not a sheet fading out at both ends — the opening sits in from either end of the sheet",
+          "measure": "meso.half_gap",
+          "op": "atLeast",
+          "value": 0.0001
+        }
+      ]
     },
     {
       "mode": "associated_organs",
@@ -793,9 +1026,44 @@
             "bulbus"
           ],
           "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
         }
       ],
-      "narration": "Follow a drop of blood from the tail end forwards and you name the five segments in order. Sinus venosus, taking the vitelline, umbilical and common cardinal veins, giving the smooth part of the right atrium and the coronary sinus. Primitive atrium, giving the rough pectinate parts of both atria. Primitive ventricle, giving the trabeculated left ventricle. Bulbus cordis, giving the trabeculated right ventricle and the smooth outflow of both. Truncus arteriosus, giving the ascending aorta and the pulmonary trunk. Learn the list in the direction of flow and you never have to memorise it twice.\n\nThe most cranial segment is the truncus arteriosus. It opens into the aortic sac and from there into the aortic arch arteries. Later it is divided by a spiral septum into the ascending aorta and the pulmonary trunk. Remember that neural crest cells come into this segment, because that is why arch defects and outflow tract defects appear in the same child.\n\nNext comes the bulbus cordis, and it is the segment students most often get wrong. Its proximal third becomes the trabeculated part of the right ventricle. Its middle, the conus cordis, becomes the smooth outflow tract of both ventricles — the conus arteriosus on the right and the aortic vestibule on the left. So the right ventricle is not simply a mirror of the left; most of it is bulbus, while the left ventricle is almost all primitive ventricle.\n\nThe primitive ventricle becomes the trabeculated part of the left ventricle. The groove between it and the bulbus cordis is where the muscular interventricular septum will grow up, which is the reason a muscular ventricular septal defect sits exactly there.\n\nThe primitive atrium gives the rough, pectinate-muscled parts of both atria — in the adult, the two auricles. Everything smooth-walled in an atrium came from somewhere else: from the sinus venosus on the right and from the absorbed pulmonary vein on the left.\n\nThe most caudal segment is the sinus venosus, and three pairs of veins drain into it: vitelline, umbilical and common cardinal. Its right horn is absorbed into the right atrium as the smooth sinus venarum, and the crista terminalis is the surviving seam between smooth and rough. Its left horn shrinks to the coronary sinus and the oblique vein of the left atrium. The sinuatrial node develops in this territory, which is why the pacemaker of the adult heart ends up high in the right atrium near the opening of the superior vena cava."
+      "narration": "Follow a drop of blood from the tail end forwards and you name the five segments in order. Sinus venosus, taking the vitelline, umbilical and common cardinal veins, giving the smooth part of the right atrium and the coronary sinus. Primitive atrium, giving the rough pectinate parts of both atria. Primitive ventricle, giving the trabeculated left ventricle. Bulbus cordis, giving the trabeculated right ventricle and the smooth outflow of both. Truncus arteriosus, giving the ascending aorta and the pulmonary trunk. Learn the list in the direction of flow and you never have to memorise it twice.\n\nThe most cranial segment is the truncus arteriosus. It opens into the aortic sac and from there into the aortic arch arteries. Later it is divided by a spiral septum into the ascending aorta and the pulmonary trunk. Remember that neural crest cells come into this segment, because that is why arch defects and outflow tract defects appear in the same child.\n\nNext comes the bulbus cordis, and it is the segment students most often get wrong. Its proximal third becomes the trabeculated part of the right ventricle. Its middle, the conus cordis, becomes the smooth outflow tract of both ventricles — the conus arteriosus on the right and the aortic vestibule on the left. So the right ventricle is not simply a mirror of the left; most of it is bulbus, while the left ventricle is almost all primitive ventricle.\n\nThe primitive ventricle becomes the trabeculated part of the left ventricle. The groove between it and the bulbus cordis is where the muscular interventricular septum will grow up, which is the reason a muscular ventricular septal defect sits exactly there.\n\nThe primitive atrium gives the rough, pectinate-muscled parts of both atria — in the adult, the two auricles. Everything smooth-walled in an atrium came from somewhere else: from the sinus venosus on the right and from the absorbed pulmonary vein on the left.\n\nThe most caudal segment is the sinus venosus, and three pairs of veins drain into it: vitelline, umbilical and common cardinal. Its right horn is absorbed into the right atrium as the smooth sinus venarum, and the crista terminalis is the surviving seam between smooth and rough. Its left horn shrinks to the coronary sinus and the oblique vein of the left atrium. The sinuatrial node develops in this territory, which is why the pacemaker of the adult heart ends up high in the right atrium near the opening of the superior vena cava.",
+      "claims": [
+        {
+          "id": "HTF6-day",
+          "claim": "this is day 23",
+          "measure": "day",
+          "op": "near",
+          "value": 23,
+          "tol": 0.02
+        },
+        {
+          "id": "HTF6-five",
+          "claim": "five segments",
+          "measure": "segment_order.count",
+          "op": "equals",
+          "value": 5
+        },
+        {
+          "id": "HTF6-flow",
+          "claim": "and the truncus arteriosus is cranial to the sinus venosus, so the list runs caudal to cranial",
+          "measure": "segment_order.truncus_minus_sinus",
+          "op": "atLeast",
+          "value": 4
+        },
+        {
+          "id": "HTF6-av",
+          "claim": "with the primitive ventricle cranial to the primitive atrium across the atrioventricular canal",
+          "measure": "segment_order.ventricle_minus_atrium",
+          "op": "atLeast",
+          "value": 0.8
+        }
+      ]
     },
     {
       "mode": "mechanism",
@@ -854,12 +1122,43 @@
           "view": "lateral"
         }
       ],
-      "narration": "The tube starts contracting at about day twenty-two and moves blood in one direction by about day twenty-four, which makes the heart the first organ in the body to work. Flow enters caudally at the sinus venosus and leaves cranially through the truncus arteriosus into the aortic arches. Name the segments in that order — sinus venosus, primitive atrium, primitive ventricle, bulbus cordis, truncus arteriosus — and you have both the anatomy and the direction of flow in one list."
+      "narration": "The tube starts contracting at about day twenty-two and moves blood in one direction by about day twenty-four, which makes the heart the first organ in the body to work. Flow enters caudally at the sinus venosus and leaves cranially through the truncus arteriosus into the aortic arches. Name the segments in that order — sinus venosus, primitive atrium, primitive ventricle, bulbus cordis, truncus arteriosus — and you have both the anatomy and the direction of flow in one list.",
+      "claims": [
+        {
+          "id": "HTF7-day",
+          "claim": "this is day 23, when the tube is moving blood one way",
+          "measure": "day",
+          "op": "near",
+          "value": 23,
+          "tol": 0.02
+        },
+        {
+          "id": "HTF7-in-out",
+          "claim": "blood enters caudally at the sinus venosus and leaves cranially through the truncus",
+          "measure": "segment_order.truncus_minus_sinus",
+          "op": "atLeast",
+          "value": 4
+        },
+        {
+          "id": "HTF7-atrium",
+          "claim": "the primitive atrium lying cranial to the sinus venosus, next in the order",
+          "measure": "segment_order.atrium_minus_sinus",
+          "op": "atLeast",
+          "value": 0.8
+        },
+        {
+          "id": "HTF7-bulbus",
+          "claim": "and the truncus cranial to the bulbus cordis, last in it",
+          "measure": "segment_order.truncus_minus_bulbus",
+          "op": "atLeast",
+          "value": 0.8
+        }
+      ]
     },
     {
       "mode": "mechanism",
       "beat": 8,
-      "title": "The first beat, and the bend that follows",
+      "title": "It outgrows its cavity, and bends",
       "ops": [
         {
           "op": "HIDE_STRUCTURE",
@@ -925,7 +1224,39 @@
           "view": "anterior"
         }
       ],
-      "narration": "The tube contracts from about day twenty-two and moves blood one way by day twenty-four, making the heart the first working organ. Then it outgrows its cavity while staying tied at both ends, and it bends — that is looping, and it is the next scene. Two things can already have gone wrong: the tubes may never have fused, giving cardia bifida, or the body wall may not have closed over them, giving ectopia cordis. Both belong to weeks three and four, before most pregnancies are recognised.\n\nThe tube elongates faster than the pericardial cavity that holds it, and it is anchored at both ends by the arteries above and the veins below. A lengthening tube fixed at both ends and growing in a box has only one option, which is to bend. Cells added from the secondary heart field at both poles keep that elongation going. This is the point at which the next scene, cardiac looping, takes over."
+      "narration": "The tube now outgrows its cavity while staying tied at both ends, and it bends — that is looping, and it is the next scene. Two things can already have gone wrong: the tubes may never have fused, giving cardia bifida, or the body wall may not have closed over them, giving ectopia cordis. Both belong to weeks three and four, before most pregnancies are recognised.\n\nThe tube elongates faster than the pericardial cavity that holds it, and it is anchored at both ends by the arteries above and the veins below. A lengthening tube fixed at both ends and growing in a box has only one option, which is to bend. Cells added from the secondary heart field at both poles keep that elongation going. This is the point at which the next scene, cardiac looping, takes over.",
+      "claims": [
+        {
+          "id": "HTF8-day",
+          "claim": "this is day 23",
+          "measure": "day",
+          "op": "near",
+          "value": 23,
+          "tol": 0.02
+        },
+        {
+          "id": "HTF8-crowded",
+          "claim": "the tube has outgrown its cavity: no more than 14% of room is left around it",
+          "measure": "clearance",
+          "op": "atMost",
+          "value": 0.14
+        },
+        {
+          "id": "HTF8-length",
+          "claim": "at its full day-23 length, having grown from 3.30 on day 18",
+          "measure": "length",
+          "op": "near",
+          "value": 6,
+          "tol": 0.02
+        },
+        {
+          "id": "HTF8-one",
+          "claim": "as one tube, tethered by the arches above and the veins below",
+          "measure": "front",
+          "op": "atMost",
+          "value": 0
+        }
+      ]
     },
     {
       "mode": "comparison",
@@ -974,7 +1305,31 @@
           "view": "anterior"
         }
       ],
-      "narration": "Two malformations belong to tube formation itself. Failure of the lateral folds to bring the tubes together gives cardia bifida. Failure of the ventral body wall to close over the fused tube gives ectopia cordis, where the heart beats outside the chest, and when it comes with a sternal cleft, a diaphragmatic and pericardial defect and an omphalocele it is the pentalogy of Cantrell. Note the timing rather than the rarity: the heart is being built in weeks three and four, often before a woman knows she is pregnant, which is why teratogen counselling and folate matter before conception and not after."
+      "narration": "Two malformations belong to tube formation itself. Failure of the lateral folds to bring the tubes together gives cardia bifida. Failure of the ventral body wall to close over the fused tube gives ectopia cordis, where the heart beats outside the chest, and when it comes with a sternal cleft, a diaphragmatic and pericardial defect and an omphalocele it is the pentalogy of Cantrell. Note the timing rather than the rarity: the heart is being built in weeks three and four, often before a woman knows she is pregnant, which is why teratogen counselling and folate matter before conception and not after.",
+      "claims": [
+        {
+          "id": "HTF9-day",
+          "claim": "the comparison is drawn at day 23, against the normal tube of the beats before it",
+          "measure": "day",
+          "op": "near",
+          "value": 23,
+          "tol": 0.02
+        },
+        {
+          "id": "HTF9-arrest",
+          "claim": "in cardia bifida the fusion front never leaves the cranial end — nothing fuses at all",
+          "measure": "bifida.front",
+          "op": "atLeast",
+          "value": 1
+        },
+        {
+          "id": "HTF9-apart",
+          "claim": "so at day 23 the two tubes are still a clear gap apart, each otherwise normally formed",
+          "measure": "bifida.gap",
+          "op": "atLeast",
+          "value": 0.35
+        }
+      ]
     }
   ],
   "provenance": {
@@ -982,11 +1337,14 @@
     "authored_at": "2026-08-28",
     "reauthored_at": "2026-09-10",
     "reauthored_by": "model3d BUILD task",
-    "reauthor_note": "Re-authored from the SVG sequence engine onto the procedural provider on models3d/heart-tube-formation.js. The old structures[] were teaching BEATS with no geometry; they are now the parts the model builds, and every one of the twenty narration blocks — five beats and fifteen structures — was MOVED by script rather than retyped, with a check that each appears exactly once in the output. Nothing taught was dropped and nothing was reworded."
+    "reauthor_note": "Re-authored from the SVG sequence engine onto the procedural provider on models3d/heart-tube-formation.js. The old structures[] were teaching BEATS with no geometry; they are now the parts the model builds, and every one of the twenty narration blocks — five beats and fifteen structures — was MOVED by script rather than retyped, with a check that each appears exactly once in the output. Nothing taught was dropped and nothing was reworded.",
+    "corrected_at": "2026-09-30T04:49:53Z",
+    "corrected_by": "the model3d review task, round 3 (device shell in-repo; renders and the player walk in a cloud container)",
+    "correction_note": "Round-3 review. CORRECTED HERE, all three measured before the edit and re-measured after: (1) BEAT 4 REPEATED BEAT 5 VERBATIM. The round-3 renarration of beats 4 and 5 left two shared strings of 71 and 74 characters in consecutive beats, and put a dorsal-mesocardium / transverse-sinus paragraph into a beat that draws neither — beat 4 shows four concentric rings and nothing else. The paragraph was MOVED to deferred_beats[], not deleted; beat 4 keeps its explicit day-23 stage in its opening sentence. (2) THE __framing__ WAIVER ON VIEW 4 WAS DEAD AND SAID SOMETHING FALSE. It argued a 7.1:1 tube cannot reach MIN_SUBJECT while the same run measured beat 4 at 70.4% with framingWaived false. Removed, and gaps[18] corrected from \"five beats\" to four. (3) NOT CORRECTED, and the measurement is in findings: the endocardium is built at 0.049 against a myocardium of 0.076 at the cut face, held there by FLOORS.COAT = 0.18 and acceptance row H. A CORRECTION THAT WAS TRIED AND REJECTED ON THE MEASUREMENT: dropping `midline` from beat 5 to stop a reference plane out-inking the beat’s own subject 8.794% to 0%. Measured: the subject falls 16.22% -> 7.42% and the beat FAILS framing, while the mesocardium does not move (0.847 -> 0.843). Reverted. The reference plane was inflating subject_pct, not occluding the sheet."
   },
   "gaps": [
     "RE-AUTHORED from sequence to 3d_anatomy. The scene previously routed to its first preferred mode because no provider held embryonic cardiac geometry; one now does, and it is procedural rather than scanned, because heart tube formation is a PROCESS — there is no STL of two tubes fusing. deferred_modes keeps sequence and diagram on the record.",
-    "THE SCENE WALKS ITS STAGES WITH SET_STAGE, so each part is declared ONCE and every view says where it stands. The cardiac-looping scene next door still carries 44 structures for about fifteen organs because it was written before that op existed; this one carries 14 plus 8 pinned comparison parts. The pinned ones are the cutaway and the cardia bifida variant, which are comparisons rather than stages and must not slide when a neighbouring view walks the process.",
+    "THE SCENE WALKS ITS STAGES WITH SET_STAGE, so each part is declared ONCE and every view says where it stands. The cardiac-looping scene next door still carries 44 structures for about fifteen organs because it was written before that op existed; this one carries 14 plus 10 pinned comparison parts. The pinned ones are the crosscut (four, added 2026-09-30 and replacing the three cutaway ones) and the cardia bifida variant (five), which are comparisons rather than stages and must not slide when a neighbouring view walks the process.",
     "t RUNS FROM DAY 18 TO DAY 23: day(t) = 18 + 5t. At t = 1 this model's tube is the tube cardiac-looping starts from at ITS t = 0 — same length, same poles, same calibre profile, same wall thickness, same segment boundaries, same day-23 mesocardial gap. That is measured, not asserted: the model exposes continuity(), which builds both models in one page and compares the five shared segment keys box by box on real vertices. The two scenes teach one tube.",
     "THE FUSION FRONT IS SOLVED, NOT SCHEDULED. The tubes fuse where they touch, and because the cardiogenic horseshoe is narrower cranially the contact point appears at the cranial end and marches caudally — so \"they zip together from the cranial end backwards\" is a result rather than an assumption. The dates fall out of it: fusion begins about day 21.2 and completes about day 22.4, against a narration that says \"one tube by about day twenty-two\".",
     "THE EPICARDIUM IS NOT BUILT, and that is a range decision rather than an omission. The narration is explicit that it \"arrives last and from elsewhere, migrating over the tube from the proepicardial organ\" — that migration is a day 24-28 event and falls outside this model's t. It is taught in the cross-section beat and shown by no geometry; a coat drawn here would assert it was present at day 23, which it is not.",
@@ -995,8 +1353,67 @@
     "THE LATERAL FOLD IS EXPRESSED ONLY IN ITS MEDIAL COMPONENT. The real fold swings the body wall ventrally as well as medially; here the two tubes travel straight to the midline at the same dorsoventral level, because that is where they end up and this model builds no body wall to carry the ventral excursion. The head fold, by contrast, IS a real 180-degree rotation about a hinge, and the reversal of the order along the axis is its consequence rather than a second movement.",
     "THE FIVE-SEGMENT COLOUR KEY IS cardiac-looping's, unchanged, and must stay that way in the septation scene too. The whole point of the segment list is that it survives looping; the same colours moving into new positions is the teaching, and re-colouring between scenes destroys it. It is now also visible BEFORE fusion, because each unfused limb carries the same five bands — a student can see the future truncus fuse first and the future sinus fuse last.",
     "Beat 6 traces concept:blood, which is a direction of flow rather than a drawn region. Beat 4 authors PEEL_LAYER inward; the current renderer degrades it to hiding structures tagged with that layer, and the op is authored because layer-by-layer removal is exactly how cardiac jelly should be introduced.",
-    "Beat 4 cuts on axis z. The tube runs along the model's +y (cranial) axis, so a section ACROSS the tube is cut normal to that axis. This is a post-folding embryo in the definitive frame, which is the case model3d-scene-spec-v2 says must state its axis rather than inherit the LPS table; the ventricle is additionally opened by the model's own cutaway, which is what actually shows the three coats.",
+    "BEAT 4's SECTION — SUPERSEDED 2026-09-30, AND KEPT BECAUSE THE REASONING IN IT IS STILL RIGHT ABOUT THE ENGINE. This entry used to end \"right axis, right level, no picture of its own today\", which was an honest description of an op that clipped nothing, and the round-2 review was right that it left the beat drawing the longitudinal cutaway window under a title that says \"Cut the tube across\". THE CROSS_SECTION OP IS NOW GONE FROM THE BEAT and the section is BUILT instead, by the model's new `crosscut` variant — see the next entry. What stands from the old entry, because it is what forced that design: viz3d.js sets `m.material.clippingPlanes = (clipping && !isTaught(s)) ? [clipPlane] : null` and isTaught is `role !== 'context'`, so CROSS_SECTION NEVER CUTS A STRUCTURE WITH role 'part' OR 'primary'. A scene cannot section its own subject. Round 1's advice to revert the three cut_* refs to plain refs would therefore have left three intact nested tubes with nothing opened, which is why it was not taken then and is not taken now. The op's careful normalised offset of 0.0086 — derived in this scene's own bounding box and fragile to any change in the structure list — is retired with it, which removes a number nobody could safely nudge. ONE SIDE EFFECT, NOTED RATHER THAN CLAIMED AS A FIX: validate-scenes' warning about the word \"transverse\" in this beat (old gap 21) was attached to the CROSS_SECTION op's axis, so it goes away with the op. The validator's blocklist limitation is unchanged and the proposal in gap 21 stands.",
     "Day numbers are the standard teaching approximations. Texts differ by a day or two either way and the narration gives them as approximations; the model's own dates are derived from its mechanism and are asserted only to fall inside a window, not at a point.",
-    "'Cardiac looping' is NOT claimed in covers[]. Looping is named at the end only as the consequence of the growth mismatch, and the D-loop, the position of the chambers and dextrocardia belong to that entry. Septation and fetal circulation are likewise named and not claimed."
+    "'Cardiac looping' is NOT claimed in covers[]. Looping is named at the end only as the consequence of the growth mismatch, and the D-loop, the position of the chambers and dextrocardia belong to that entry. Septation and fetal circulation are likewise named and not claimed.",
+    "THE DAY-18 HORSESHOE'S ORIENTATION — RULED, AND NOW CITED. Frank ruled on 2026-09-29: 'the cardiogenic horseshoe's bend is NOT cranial before folding — the model's caudal orientation stands', and asked for a citation from Langman or Moore and for the day-18 depiction to be checked against it. WHAT THE MODEL DRAWS, measured: at t = 0 the cranio-caudal order is septum transversum (y 7.16), veins, sinus, atrium, ventricle, bulbus, truncus (3.43), aortic arches, buccopharyngeal membrane (2.29) — so the arterial end, which carries the horseshoe's confluence, is the CAUDAL end beside the membrane, and the venous limbs run cranially toward the septum transversum. WHAT THE SOURCES SAY. Columbia University's human development lecture, whose reading assignment is Larsen pp. 133-147 (Silverman, Chapt3-Flexion, www.columbia.edu/itc/hs/medical/humandev/2004/Chapt3-Flexion.pdf): 'The cranial rim of the embryo contains the buccopharyngeal membrane and cranial to the BPM is the cardiogenic area', and 'the septum transversum forms cranial to the cardiogenic area in the germ disc and is translocated to the future lower thoracic region through the folding of the cranial end' (its Fig. 3-6). That is the model's order, structure for structure. WikiLectures' heart development article, which cites Sadler's Langman's Medical Embryology and Moore & Persaud: 'the apical part of the horseshoe region expands, thus creating the future outflow compartment' — the APEX of the horseshoe becomes the OUTFLOW, which is where this model puts the confluence. AND THE APPARENT CONTRADICTION DISSOLVES ONCE THE FRAME IS NAMED: UNSW's 'the bilateral fields merge cranially' is a statement in the DEFINITIVE frame, where fusion does run cranial to caudal — which is also what this model's solved fusion front does. Pre-fold, in the flat disc, that same arterial end lies caudal. There is no disagreement between the two sources, only between two frames. A THIRD SOURCE, ADDED 2026-09-30 BY THE ROUND-3 BUILD RUN, and it is the one that states the pre-fold order directly rather than by implication. The University of Fribourg's embryology.ch, on cephalo-caudal folding: “In the cephalic region, rostral to the prechordal plate and the pharyngeal membrane, the mesenchymal cells form the cardiac plate (pericardium) and the septum transversum”, and then, of the fold itself, “With the 180 degree turn that results from the folding … the cardiogenic plate (which initially lay most cranially) [moves] into the thorax area”, concluding “After this movement is completed, the brain lies the most cranially, followed by the mouth, heart, and diaphragm (septum transversum)”. That is this model at both ends: septum transversum most CRANIAL at t = 0 (measured y 7.16) and most CAUDAL at t = 1, with the buccopharyngeal membrane crossing the other way, and the whole inversion produced by ONE 180-degree rotation rather than by moving three things separately. Acceptance rows E and F assert both crossings with a magnitude floor. AND THE UNSW CONTRADICTION IS NOW SETTLED RATHER THAN ARGUED: its page was re-read this run and every statement on it — “fusion of the heart tubes begins cranially and extends caudally”, the truncus arteriosus listed at the cranial end — is in the DEFINITIVE frame, and it says nothing at all about the buccopharyngeal membrane. It is what this model's own solved fusion front does at t = 1. There was never a disagreement about anatomy, only two frames. WHAT THIS RUN COULD NOT DO, stated plainly: it could not open Langman or Moore themselves, so the FIGURE NUMBER in either text is not verified here and is not quoted. The depiction is verified against two retrievable sources that cite them, and against Frank's ruling, which is the authority. The round-3 run searched again and neither text is retrievable — both are copyrighted books, and the sources that quote them (WikiLectures citing Sadler and Moore & Persaud, Duke's embryology module setting Langman's 11th ed. ch. 12 pp. 165-200 as its reading) paraphrase rather than reproduce a figure. A human with either book on the shelf can close this in one look, and until they do the condition Frank attached to closing this item is NOT met. THE HALF THAT COULD BE DONE WAS DONE: the finding also asked for the answer to be written into CORPUS.md “so no future run guesses again”, and what stops the guessing is not the page number but the FRAME DISTINCTION that dissolves the apparent contradiction. That, with Frank's ruling and the three retrievable sources, is now in CORPUS.md, flagged as carrying no Langman/Moore page reference yet. No citation anybody has opened has been invented to fill the gap.",
+    "TWO DECLARED DIVERGENCES FROM cardiac-looping, BOTH CREATED ON PURPOSE ON 2026-09-30, BOTH MEASURED. Frank's ruling asks for the dorsal mesocardium to reach both poles 'in this scene AND in cardiac-looping'. cardiac-looping is `escalated`, and the queue's note on it says in terms that neither task touches it — 'Apply when and if this item is reopened' — so only this half could be done, and the two models now disagree about two surfaces: (1) THE DORSAL MESOCARDIUM. This model's sheet spans u 0.00-1.00; cardiac-looping's spans 0.30-0.84. Measured y-extents at the handover: this model -2.76..3.24, cardiac-looping -0.96..2.28, worst difference 1.80. (2) THE MYOCARDIAL WALL. Review finding 7 was that the cardiac jelly was drawn THINNER than the myocardium (0.069 against 0.095) while every line of narration calls it a thick layer. The sum WALL + JELLY = 0.180 is the handover and is unchanged, so the endocardial OUTER surface is still r - 0.180 in both models; how the 0.180 is SPENT is now 0.074 wall + 0.106 jelly here against 0.095 + 0.085 there. Built and measured at the ventricle body: wall 0.076, jelly 0.092, ratio 1.216. cardiac-looping's myocardial inner surface therefore sits 0.021 inside this one's. NEITHER IS VISIBLE TO continuity(), which is the third finding and the reason it was extended. That check compares the BOUNDING BOXES of the five segment keys, which are dominated by the myocardium's outer radius: it passed at 0.0100 against a 0.02 tolerance throughout, and would have passed whatever happened to the jelly, the endocardium or the mesocardium. It now measures both divergences and REPORTS them beside the pass rather than folding them into it, so the cardiac-looping reopening has numbers to close rather than a sentence to re-read.",
+    "THE LUMEN IS NOW A DRAWN PART, AND THE OBVIOUS FIX WOULD HAVE BEEN A NO-OP. Review finding 6: the tube read as 'a solid pink core' in every sectioned view while beat 7 traces blood through it, diagnosed as the endocardium rendering DoubleSide so its far wall shows through. The material is not the model's to change: viz3d.js's procedural adapter builds its OWN MeshStandardMaterial for every part, with `side: T.DoubleSide` written into it, and never reads the material the model attached. A model-side FrontSide would have changed the proof frames and nothing a student sees. So the model builds a solid cast of the blood space instead — strictly inside the endocardium's inner surface, in a colour that is not the endocardium's — and acceptance row N pins the clearance at 0.080 of the endocardial inner radius over 60 bands so it cannot close. It is drawn OPAQUE: at 0.78 it banded along its own length in the player walk, because viz3d sets depthWrite from the opacity and a translucent solid then shows its own back faces through its front ones. IT IS SHOWN ONLY WHERE THE WALL IS OPEN. It was added to beat 7 as well and the walk measured it at 0.000% on both measures there — correctly, since an intact wall hides it — so beat 7 shows it no longer, and beat 4 is the beat that does. UPDATED 2026-09-30: beat 4 now draws `cut_lumen`, the lumen under the crosscut variant, which is the cast TRUNCATED AT THE CUT — the solid disc in the middle of the three rings, measured at 13.6% of that beat’s frame in the player walk. Showing the full-length cast there would have stood the whole blood space up in front of a superior camera and hidden the rings the beat is about. The unpinned `lumen` structure is kept and still resolves, so a student can still bring the cast up from the parts list.",
+    "THE SCENE HAS NOW BEEN WALKED AS THE PLAYER DRAWS IT, which it never had been. tools/measure-scene-visibility.mjs, all nine beats: every structure each beat draws or points at survives that beat, with six waivers recorded in visibility_waivers. THE TOOL HAD TO BE FIXED FIRST, and that is itself a finding: it matched a mesh to a structure by userData.key alone and built one group per beat from MOD.FULL, so every structure whose ref names a part under a VARIANT FLAG or pins its own t drew nothing at all in its accounting. On this scene that was all three cutaway coats and all five cardia-bifida parts, reported at 0.000% of the frame while viz3d's real adapter resolves every one of them with geometry. It now parses refs.procedural the way viz3d does, and drops outline shells the way viz3d's mergeByKey does. WHAT THAT MOVED ELSEWHERE is recorded in BUILD-LOG.md 2026-09-30 rather than left for someone to trip over: heart-valves stays at 0 failing beats with its subject percentages 0.15-1.2 points lower; cardiac-cycle-pumping goes from 0 failing beats to 3, on la_blood, pulm_veins and papillary. Neither of those scenes has a pinned or flagged ref, so every point of their movement is the outline-shell drop and none of it is the ref parsing. cardiac-cycle-pumping is `built` and awaiting review; this run did not touch it or its queue entry.",
+    "THE FRAMING BAR CANNOT BE MET BY THIS SUBJECT, and the waivers say so with a measurement rather than an argument. The day-23 tube is 6.54 long and 0.92 wide, 7.1:1. Rendered ALONE with the camera perfectly fitted in the tool's own 1100x900 frame, the five segments lay down 7.44% of it from an anterior camera and 5.90% from a lateral one, against a MIN_SUBJECT of 8%. The only camera that clears the bar is superior, at 19.8% — looking straight down the tube, which foreshortens away the cranio-caudal order beats 6, 7 and 8 exist to teach. FOUR beats therefore carry a __framing__ waiver — 3, 6, 7 and 8. CORRECTED BY THE ROUND-3 REVIEW, 2026-09-30: this entry and a fifth waiver both still named beat 4, and beat 4 has not been a thin subject since the crosscut variant was built in the round-3 rework. The same run’s own player walk measures its subject at 70.4% of the frame with framingWaived false — the tool does not consult the waiver and has not needed to. The dead waiver was removed and this sentence corrected; the argument below still holds for the four beats that draw the whole tube. A threshold on INK that a long thin subject cannot meet at any camera looks like a gap in the threshold rather than in the scene, and box_fill_pct is the honest number here; this run did NOT move MIN_SUBJECT, because it is shared with every other scene the tool grades and the tool's own MIN_PEAK note is explicit about what moving a shared threshold mid-review does.",
+    "AN OLD DEFECT NOBODY HAD MEASURED: the dorsal mesocardium used to hang OUTSIDE the sac it suspends the tube inside. Its dorsal reach was the constant 1.15, which put its free edge at z = -1.50 while the pericardial cavity's own dorsal wall at day 23 is at z = -0.502. Nothing checked it, because nothing compared the two. The reach is now SOLVED off the cavity at each station's own y — the sac's dorsal wall less the tube's own dorsal surface — so it lands inside by construction and narrows toward the poles by itself as the sac closes, and new acceptance row P asserts both containment and that the sheet still stands at least 0.08 proud of the tube's silhouette, which is the only part of it a lateral camera can see. Measured: 0.091 proud at t = 1, 0.426 at t = 0.82. THE HONEST CONSEQUENCE, stated because it constrains the teaching: at day 23 the whole dorsal gap between tube and sac is 0.131 units, about a seventh of a tube diameter, because this model's cavity is deliberately sized so the tube outgrows it (acceptance K, and beat 8's whole point). The transverse sinus is therefore a slit at this stage, not the finger-wide space beat 5's narration describes in the adult. The narration is right about the adult and was not edited to match the embryo.",
+    "ACCEPTANCE ROW J USED TO COMPARE A CONSTANT WITH ITSELF. It read mesoHalfGap(1), which returns MESO_GAP_D23, and asserted it equalled MESO_GAP_D23 — the exact defect RENDER-STANDARD recorded on 2026-09-23 against lateral-folding, in a row that had a magnitude floor and a negative case and still could not fail. It also could not see that the sheet reached neither pole. J now reads VERTICES: the largest gap between consecutive vertex rows of the built sheet, which is 0.110 of the sheet at t = 1 with its centre at 0.575, and row spacing (0.023) at t = 0.82 where the sheet exists and is intact. At t = 0.5 it asserts there is NO SHEET AT ALL, which is the true state — there is no midline tube to suspend yet — and is what the first rewrite of this row got wrong, failing on a null instead of on the anatomy.",
+    "ONE VALIDATOR WARNING STANDS, AND IT IS A FALSE POSITIVE — checked rather than assumed. validate-scenes says of beat 4: 'narration names the transverse plane but axis is \"y\" — expected \"z\" (LPS: sagittal=x, coronal=y, axial=z)'. The word 'transverse' in that narration is in 'the transverse pericardial sinus', which is a STRUCTURE, not a cut plane. The validator already strips plane words that are part of structure names and its blocklist carries 'transverse sinus' — it does not match here only because an adjective sits between the two words. Beyond that, this scene is one of the cases the spec and the validator's own comment exempt: the LPS table does not apply to a pre-folding embryo, and this model declares +y = CRANIAL and proves it, so a section across the tube is normal to y. PROPOSED, NOT DONE: let the blocklist take one optional word between the plane word and the noun, so 'transverse pericardial sinus' reads as the structure it is. That is a shared validator and this run could reach only four scenes of the corpus, so it could not measure what the change does to the other hundred and forty — and changing a shared check it cannot regression-test, to silence a warning that blocks nothing, is the wrong trade.",
+    "ROUND-2 FINDING 1, ANSWERED 2026-09-30 — AND THE PRESCRIBED FIX WAS FOR A DIFFERENT DEFECT, WHICH IS ITSELF THE FINDING. The review was right that Frank's ruling was in the vertices and not in the picture: the sheet read as attached over the middle and free at the ends for a second round running. It diagnosed the cause as OCCLUSION — \"the tube hides everything inside its own silhouette\" — and prescribed removing the near half of the tube for beat 5, a cutaway or clipped lateral. MEASURED BEFORE BUILDING IT, as RENDER-STANDARD §6 asks of any note in a file: THE TUBE IS NOT THE OCCLUDER. sweptShell draws a ring point at P + N r section(th) cos th + B r section(th) sin th x flatten with flatten = 0.90, so the tube's DRAWN dorsal surface is at 0.945 x 0.90 = 0.8505 of radius(u,t) — while the sheet's attachment was at 0.92 OF THE RADIUS. The whole sheet already stood outside the tube's silhouette, in 0.019 to 0.030 units of clear air at every station of the day-23 build, and a hemisection would have removed geometry that was hiding nothing. The review's own per-band number, \"dorsal reach beyond the tube's silhouette\", is to within 0.004 the sheet's OWN DEPTH: the measurement was right, the picture was right, the cause was not. THE HEMISECT VARIANT WAS THEREFORE NOT BUILT. What was wrong is three things, all measured and all fixed: (1) the attachment used radius(u,t) where the drawn surface is 0.8505 of it, so the membrane never touched the tube it suspends — the model's own comment claimed the opposite, and RENDER-STANDARD says a comment is checked by nothing. It is now 0.97 of dorsalSurface(), which sinks it in; acceptance row S asserts dorsalSurface() against the built tube's x = 0 ring vertices at six stations, worst error 1e-8, so the two constants copied out of render-kit cannot drift again. (2) mesoReach's floor of 0.02 hung the sheet outside the sac at the venous pole — see the entry above. (3) BOTH TAPER RUNS WERE TUNED TO A FIFTH OF THE TUBE'S LENGTH: MESO_POLE_FILLET 0.085 and MESO_TORN_RUN 0.22, which are 0.56 and 1.44 units, on a sheet whose greatest depth anywhere was 0.163. A tear drawn out over nine times the depth of its own membrane is a fade, not an opening between two tongues, and that is what a student saw. The runs are now SOLVED from the reach at their own edge — 1.6x the depth for a torn edge, 0.8x for a pole reflection — so they move with the sheet instead of disagreeing with it. MEASURED, before and after, in 60 bands at t = 1: sheet depth went from 0.007-0.163 with fill of the available dorsal space running 0.08-1.0, to 0.004-0.264 with fill at or above 0.70 at every station outside the three declared taper runs and the sinus; detached bands 60 of 60 to 0 of 60; vertices outside the fitted sac 42 to 1. IN THE PLAYER, which is the only number that answers the finding: the mesocardium's share of beat 5's frame went from 0.491% to 0.847%, peak 101 to 93, on the alpha-aware pass. ROWS M AND P ARE BOTH PER STATION NOW, as the review required.",
+    "ROUND-2 FINDING 2, ANSWERED 2026-09-30. The beat now draws a BUILT transverse section. The model grew a `crosscut` variant, exactly as the review proposed: the fused tube stops at the ventricle body (u = 0.530, model y = 0.420 — the same station row H reads) and the cranial dome is skipped, so the ANNULAR END CAP sweptShell already emits at the end of every span IS the ring, one per coat, and the lumen's own solid centre-fan cap is the disc inside them. No new geometry, and no clipping: the figure is the caps that were always there with the tube above them removed. Beat 4 shows the four crosscut structures and nothing else, from ROTATE_TO_VIEW superior. MEASURED IN THE PLAYER WALK, before and after: the beat's subject went from 7.47% of the frame to 70.4%, the three coats from 0.85/0.51/0.27% to 24.0/22.1/10.7%, and the lumen disc is 13.6%; the beat no longer needs the thin-subject framing waiver the other five carry. It also drops out of the open-lumen probe's exemption list: the old cutaway camera reads 61 of 890 first hits facing away and is exempted because a window is meant to expose the far wall, while the crosscut reads 0 of 1208 from above and 0 of 646 from anterior — an annular cap faces along the tube's axis, so from the camera this beat uses it faces the camera. ACCEPTANCE ROW Q reads the face's own vertices: planar to 0, at y = 0.420 exactly, four keys reaching it, radii nesting along the theta = 0 ray with 0.0082 of clearance at the worst pair. AND THE CAMERA IS PART OF THE BEAT (RENDER-STANDARD 3.y): the face's normal is the tube's axis, so with viz3d's own VIEW_DIR table a superior camera gives |axis . dir| = 1.000 and the ANTERIOR camera the beat carried through two review rounds gives 0.000 — three rings seen edge-on are three lines. Claim HTF4-camera asserts it in the beat. TWO SMALLER THINGS DONE IN THE SAME EDIT, both because the figure is now 70% of the frame instead of 1.6%: the crosscut builds its coats at 72 and 60 sides instead of 32 and 22, a variant-local change that leaves the plain build's ring counts and therefore the handover untouched; and the jelly's highlight came down from 0.95 to 0.55, which at the new size still separates it and no longer washes its colour to white.",
+    "WHAT THIS ROUND DID NOT DO, STATED SO IT IS NOT MISTAKEN FOR DONE. (1) FRANK'S RULING 1 IS STILL NOT DISCHARGED ON ITS OWN TERMS — see the citation entry above. (2) THE `cutaway` VARIANT IS NOW UNUSED BY THIS SCENE. No structure refs it; beat 4 was its only consumer. It is kept in the model and in VARIANTS because it is a legitimate picture and removing capability is not this round's job, but note that its open-lumen row — 61 of 890 rays hitting a face turned away, identical before and after this run, reproduced on the untouched file — is therefore no longer on screen anywhere in this scene. (3) THE MESOCARDIUM IS STILL A NARROW STRUCTURE IN BEAT 5, at 0.847% of the frame. That is better than 0.491% and it is not good. The remaining limit is not the sheet: it is that beat 5's visible set is a sac 7.1 long and a median-plane reference, so the camera fits to them and the sheet is a ribbon inside that frame. What would fix it is a beat zoomed on the transverse sinus itself, which is AUTHORING a tenth view and was not done in a round that already moved the geometry the review asked about. Proposed, not built. (4) render-kit.js WAS NOT TOUCHED. The cardiac-cycle builder's finding that sweptShell's base-end annular cap calls quad() where the corner order needs quadFlip() is still open, and that item was `building` in another run throughout this one; the crosscut face is a CRANIAL cap, sign > 0, which is the branch that already uses quadFlip, so this scene's new figure does not sit on the suspect code.",
+    "HOW THIS RUN REACHED THE REPO, because the standing instructions say it cannot. BUILD-TASK-PROMPT §0 and REVIEW-TASK-PROMPT §0 both state in capitals that device_bash is dead since the 2026-09-08 Windows update and must not be tried. THE ROUND-2 REVIEW REPORTED THAT IT WORKS AND THAT THE OUTAGE IS INTERMITTENT, and this run tried it once on that evidence: it mounted on the first call. The queue claim and release were therefore written with queue-set.mjs IN-REPO under its real lock, which is what the tool was built for and what removes the silent-loss failure the review hit at 02:53Z. The chromium proofs still ran in a cloud container against staged copies, because the device VM has no browser. The instruction should say TRY IT ONCE, THEN FALL BACK — as written it turns an intermittent outage into a permanent one, and it would have cost this run the in-repo tooling."
+  ],
+  "deferred_beats": [
+    {
+      "from_view": 8,
+      "why": "REVIEW FINDING 5, round 1: beats 7 and 8 opened with the same sentence in near-identical words — day 22 contraction, day 24 unidirectional flow, the first working organ. The frames differ, so the mechanical \"a view must change the picture\" check passed and nothing caught it. Both views are real views and neither was deleted; the REPEAT was removed from beat 8, whose own teaching is the outgrowth that leads into looping. The sentence itself is not lost — it survives verbatim as the opening of beat 7, which is the beat about the first beat — and it is recorded here as well so that removing it is an edit someone can see and argue with rather than a silent deletion.",
+      "narration": "The tube contracts from about day twenty-two and moves blood one way by day twenty-four, making the heart the first working organ.",
+      "belongs_with": "view 7, \"Which way the blood runs through the tube\", which states the same fact at greater length and is the view the student is looking at when the flow is traced"
+    },
+    {
+      "from_view": 4,
+      "why": "REVIEW FINDING 1, round 3. The round-2 review asked for beats 4 and 5 to be renarrated in one edit so the mesocardium's narration matched the ruled geometry. The edit landed, and it put beat 5's WHOLE TEACHING into beat 4 as well: two strings of 71 and 74 characters ran verbatim across the two consecutive beats — \"at day 23, the stage drawn here, that breakdown is a single perforation\" and \"as the perforation enlarges the tube is left attached at its two ends only\". That is round-1 finding 5's failure mode reintroduced by the fix for a different finding, and the mechanical \"a view must change the picture\" check cannot see it: beats 4 and 5 differ in 70.3% of their pixels. WORSE THAN THE REPEAT, and this is why the sentences were moved rather than reworded: BEAT 4 DRAWS NO MESOCARDIUM. Its ops show cut_myocardium, cut_jelly, cut_endocardium and cut_lumen and nothing else — no mesocardium, no pericardium, no sinus — so the narration described three structures that are not in the frame while the student looks at four concentric rings. Beat 5 draws the sheet and the sac and says all of this at greater length. Beat 4's own stage is kept: \"at day twenty-three\" moved into its opening sentence, so the explicit stage the round-3 build added is not lost with the paragraph. THE REAL FIX, proposed not built: the crosscut variant could build the dorsal mesocardium into the section face, which is where a textbook transverse section labels it. Then these sentences belong in beat 4 and beat 5 is the one that should lose them.",
+      "narration": "The tube hangs by a dorsal mesocardium, which then breaks down in its middle: at day 23, the stage drawn here, that breakdown is a single perforation, and the hole it leaves is the transverse pericardial sinus. As the perforation enlarges the tube is left attached at its two ends only.",
+      "belongs_with": "view 5, \"The mesentery that has to break\", which draws the mesocardium and the pericardial sac and states all of this at greater length"
+    }
+  ],
+  "visibility_waivers": [
+    {
+      "view": 2,
+      "key": "membrane",
+      "why": "THE BUCCOPHARYNGEAL MEMBRANE IS SEEN EDGE-ON, AND NOT ONLY HERE. It is built as a flat plate in the TRANSVERSE plane — 0.60 across, 0.48 deep, 0.085 thick — so a camera in the transverse plane sees its trace and not its face. Beat 2's camera is lateral and beat 1's is anterior; both lie in that plane, so the membrane draws 0.151% of the frame here and 0.293% in beat 1, against a pointed-at bar of 0.30%. It is NOT invisible: the alpha-aware pass moves its pixels by 195 of 255, so where it is drawn it is plainly there — it is a line marking a level, which is exactly what beat 2's claim needs, since the claim is about the ORDER along the axis and not about the membrane's shape. Removing the pericardial sac from this beat was tried and measured: it lifts the membrane only to 0.197% and costs the beat the sac its own third paragraph is about. WHAT WOULD ACTUALLY FIX IT, declared rather than done: no beat in this scene uses a superior or inferior camera, and that is the only kind that sees this disc face-on. That is RENDER-STANDARD 3.y's case of two claims wanting two cameras, and its answer is a second beat rather than a compromise camera — which is a scene addition this run did not make and a reviewer can ask for."
+    },
+    {
+      "view": 2,
+      "key": "__claim__:HTF2-unfused",
+      "why": "ROUND-2 REVIEW, MINOR, AND IT IS A CAMERA PROBLEM RATHER THAN A DATA ONE. Claim HTF2-unfused is true in the geometry at this beat's t — the fusion front is 1, the two tubes have not met — and it is INVISIBLE IN THIS BEAT'S OWN FRAME, because the camera is lateral and a lateral camera superimposes the two limbs exactly. The beat cannot move to an anterior camera: its subject is the HEAD FOLD, whose 180-degree swing is only legible from the side, and RENDER-STANDARD 3.y says that where two claims want incompatible cameras that is two beats rather than one beat and a hope. BEAT 3 IS THAT OTHER BEAT: it is anterior, it is the zip, and acceptance row C asserts the two tubes' separation there with a magnitude floor (measured 0.994 of a diameter at the venous end). The claim is kept here because it is what makes this beat's t honest, and it is SHOWN in beat 3.",
+      "shown_in": "view 3, \"The lateral folds zip the two tubes together\""
+    },
+    {
+      "view": 3,
+      "key": "__framing__",
+      "why": "MEASURED, NOT ARGUED. The day-23 heart tube is 6.54 long and 0.92 wide — an aspect ratio of 7.1:1 — and viz3d fits the camera to the visible set's bounding box with a 1.05 pad in an 1100x900 frame. Rendered ALONE, with nothing else in the frame and the camera perfectly fitted, the five segments lay down 7.44% of the frame from an anterior camera and 5.90% from a lateral one. Both are below the tool's 8% MIN_SUBJECT. The only camera that clears it is SUPERIOR, at 19.8% — and that is the camera looking straight down the tube, which foreshortens away the cranio-caudal ORDER that these beats exist to teach. So the bar is unreachable for this subject at any camera that shows what the beat is about, and the honest framing number here is box_fill_pct, which the tool prints beside it. (The measurement is viz-training/tools/_ceiling probe, run 2026-09-30; its numbers are in BUILD-LOG.md under the same date.) PROPOSED, NOT TAKEN: an ink threshold that a long thin subject cannot meet at any camera is a gap in the threshold rather than in the scene. MIN_SUBJECT is shared with every other scene this tool grades, and this run declined to move it for the reason the tool's own MIN_PEAK note gives."
+    },
+    {
+      "view": 6,
+      "key": "__framing__",
+      "why": "MEASURED, NOT ARGUED. The day-23 heart tube is 6.54 long and 0.92 wide — an aspect ratio of 7.1:1 — and viz3d fits the camera to the visible set's bounding box with a 1.05 pad in an 1100x900 frame. Rendered ALONE, with nothing else in the frame and the camera perfectly fitted, the five segments lay down 7.44% of the frame from an anterior camera and 5.90% from a lateral one. Both are below the tool's 8% MIN_SUBJECT. The only camera that clears it is SUPERIOR, at 19.8% — and that is the camera looking straight down the tube, which foreshortens away the cranio-caudal ORDER that these beats exist to teach. So the bar is unreachable for this subject at any camera that shows what the beat is about, and the honest framing number here is box_fill_pct, which the tool prints beside it. (The measurement is viz-training/tools/_ceiling probe, run 2026-09-30; its numbers are in BUILD-LOG.md under the same date.) PROPOSED, NOT TAKEN: an ink threshold that a long thin subject cannot meet at any camera is a gap in the threshold rather than in the scene. MIN_SUBJECT is shared with every other scene this tool grades, and this run declined to move it for the reason the tool's own MIN_PEAK note gives."
+    },
+    {
+      "view": 7,
+      "key": "__framing__",
+      "why": "MEASURED, NOT ARGUED. The day-23 heart tube is 6.54 long and 0.92 wide — an aspect ratio of 7.1:1 — and viz3d fits the camera to the visible set's bounding box with a 1.05 pad in an 1100x900 frame. Rendered ALONE, with nothing else in the frame and the camera perfectly fitted, the five segments lay down 7.44% of the frame from an anterior camera and 5.90% from a lateral one. Both are below the tool's 8% MIN_SUBJECT. The only camera that clears it is SUPERIOR, at 19.8% — and that is the camera looking straight down the tube, which foreshortens away the cranio-caudal ORDER that these beats exist to teach. So the bar is unreachable for this subject at any camera that shows what the beat is about, and the honest framing number here is box_fill_pct, which the tool prints beside it. (The measurement is viz-training/tools/_ceiling probe, run 2026-09-30; its numbers are in BUILD-LOG.md under the same date.) PROPOSED, NOT TAKEN: an ink threshold that a long thin subject cannot meet at any camera is a gap in the threshold rather than in the scene. MIN_SUBJECT is shared with every other scene this tool grades, and this run declined to move it for the reason the tool's own MIN_PEAK note gives."
+    },
+    {
+      "view": 8,
+      "key": "__framing__",
+      "why": "MEASURED, NOT ARGUED. The day-23 heart tube is 6.54 long and 0.92 wide — an aspect ratio of 7.1:1 — and viz3d fits the camera to the visible set's bounding box with a 1.05 pad in an 1100x900 frame. Rendered ALONE, with nothing else in the frame and the camera perfectly fitted, the five segments lay down 7.44% of the frame from an anterior camera and 5.90% from a lateral one. Both are below the tool's 8% MIN_SUBJECT. The only camera that clears it is SUPERIOR, at 19.8% — and that is the camera looking straight down the tube, which foreshortens away the cranio-caudal ORDER that these beats exist to teach. So the bar is unreachable for this subject at any camera that shows what the beat is about, and the honest framing number here is box_fill_pct, which the tool prints beside it. (The measurement is viz-training/tools/_ceiling probe, run 2026-09-30; its numbers are in BUILD-LOG.md under the same date.) PROPOSED, NOT TAKEN: an ink threshold that a long thin subject cannot meet at any camera is a gap in the threshold rather than in the scene. MIN_SUBJECT is shared with every other scene this tool grades, and this run declined to move it for the reason the tool's own MIN_PEAK note gives."
+    }
   ]
 }

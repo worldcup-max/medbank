@@ -1,763 +1,2083 @@
 {
-  "schema": 2,
-  "id": "embryology__weeks-1-2-implantation-bilaminar-disc__amniotic-cavity-yolk-sac",
-  "mode": "sequence",
-  "deferred_modes": [
-    "diagram"
+ "schema": 2,
+ "id": "embryology__weeks-1-2-implantation-bilaminar-disc__amniotic-cavity-yolk-sac",
+ "mode": "3d_anatomy",
+ "deferred_modes": [
+  "sequence",
+  "diagram"
+ ],
+ "course": "Embryology",
+ "topic": "Weeks 1-2: Implantation & Bilaminar Disc",
+ "structure": "Amniotic cavity & yolk sac",
+ "covers": [
+  "Amniotic cavity & yolk sac"
+ ],
+ "learning_goal": "Say where each early cavity comes from and which layer lines it, follow the amnion until it obliterates the chorionic cavity, list what the yolk sac hands over before it disappears, and name the adult remnant of the vitelline duct and of the allantois.",
+ "status": "candidate",
+ "provider": {
+  "primary": "procedural",
+  "fallbacks": []
+ },
+ "match": {
+  "topics": [
+   "amniotic cavity",
+   "yolk sac",
+   "week 2",
+   "early development",
+   "fetal membranes",
+   "umbilical cord",
+   "early pregnancy scan",
+   "amniotic fluid"
   ],
-  "course": "Embryology",
-  "topic": "Weeks 1-2: Implantation & Bilaminar Disc",
-  "structure": "Amniotic cavity & yolk sac",
-  "covers": [
-    "Amniotic cavity & yolk sac"
-  ],
-  "learning_goal": "Say where each early cavity comes from and which layer lines it, follow the amnion until it obliterates the chorionic cavity, list what the yolk sac hands over before it disappears, and name the adult remnant of the vitelline duct and of the allantois.",
-  "status": "planned",
-  "provider": {
-    "primary": "svg",
-    "fallbacks": []
-  },
-  "match": {
-    "topics": [
-      "amniotic cavity",
-      "yolk sac",
-      "week 2",
-      "early development",
-      "fetal membranes",
-      "umbilical cord",
-      "early pregnancy scan",
-      "amniotic fluid"
-    ],
-    "terms": [
-      "amniotic cavity",
-      "amnion",
-      "amnioblasts",
-      "amniotic fluid",
-      "liquor",
-      "hydramnios",
-      "polyhydramnios",
-      "oligohydramnios",
-      "Potter sequence",
-      "Potter facies",
-      "renal agenesis",
-      "amniocentesis",
-      "premature rupture of membranes",
-      "PROM",
-      "amniotic band syndrome",
-      "amniochorionic membrane",
-      "amniochorion",
-      "chorionic cavity",
-      "extraembryonic coelom",
-      "yolk sac",
-      "primary yolk sac",
-      "primitive yolk sac",
-      "secondary yolk sac",
-      "definitive yolk sac",
-      "exocoelomic cavity",
-      "exocoelomic membrane",
-      "Heuser membrane",
-      "exocoelomic cysts",
-      "hypoblast",
-      "epiblast",
-      "bilaminar disc",
-      "day 8",
-      "day 9",
-      "day 12",
-      "day 13",
-      "primordial germ cells",
-      "gonadal ridge",
-      "haematopoiesis",
-      "hematopoiesis",
-      "blood islands",
-      "extraembryonic mesoderm",
-      "primitive gut",
-      "foregut",
-      "midgut",
-      "hindgut",
-      "folding",
-      "vitelline duct",
-      "omphalomesenteric duct",
-      "omphaloenteric duct",
-      "vitelline vessels",
-      "Meckel diverticulum",
-      "Meckel's diverticulum",
-      "rule of 2s",
-      "umbilical fistula",
-      "vitelline cyst",
-      "allantois",
-      "urachus",
-      "median umbilical ligament",
-      "urachal fistula",
-      "urachal cyst",
-      "urachal sinus",
-      "connecting stalk",
-      "body stalk",
-      "umbilical cord",
-      "double bleb sign",
-      "gestational sac",
-      "yolk sac on ultrasound",
-      "transvaginal scan",
-      "vernix",
-      "lung development",
-      "fetal swallowing",
-      "fetal urine",
-      "umbilical vesicle"
-    ]
-  },
-  "camera": {
-    "framing": "lateral"
-  },
-  "structures": [
-    {
-      "key": "two_balloons",
-      "label": "One disc, two balloons",
-      "role": "context",
-      "group": "Where the cavities come from",
-      "layer": "organ",
-      "color": "#34495e",
-      "terms": [
-        "bilaminar disc",
-        "two cavities",
-        "amniotic cavity",
-        "yolk sac",
-        "dorsal",
-        "ventral",
-        "sandwich"
-      ],
-      "narration": "Hold one picture in your head for the whole of this scene. A flat two-layer disc with a balloon above it and a balloon below it. The balloon above is the amniotic cavity, sitting on the epiblast. The balloon below is the yolk sac, hanging from the hypoblast. Every fact in this topic is either about where one of those balloons came from or about what it turns into."
-    },
-    {
-      "key": "amniotic_cavity",
-      "label": "Amniotic cavity — a slit inside the epiblast",
-      "role": "part",
-      "group": "Where the cavities come from",
-      "layer": "organ",
-      "color": "#5dade2",
-      "terms": [
-        "amniotic cavity",
-        "amnioblasts",
-        "amnion",
-        "day 8",
-        "epiblast",
-        "floor of the amniotic cavity",
-        "dorsal",
-        "roof of amnioblasts"
-      ],
-      "narration": "On about day eight a small space opens within the epiblast itself. Epiblast cells at its edge flatten into amnioblasts and roof it over; the rest of the epiblast stays as its floor. That space is the amniotic cavity. Two things follow from how it forms: it is lined by epiblast-derived cells, and it lies on the dorsal side of the disc. Dorsal in embryology means the amniotic side, for the rest of the course."
-    },
-    {
-      "key": "primary_yolk_sac",
-      "label": "Primary yolk sac — hypoblast lines the old blastocyst cavity",
-      "role": "part",
-      "group": "Where the cavities come from",
-      "layer": "organ",
-      "color": "#f7dc6f",
-      "terms": [
-        "primary yolk sac",
-        "primitive yolk sac",
-        "exocoelomic cavity",
-        "exocoelomic membrane",
-        "Heuser membrane",
-        "day 9",
-        "hypoblast",
-        "blastocyst cavity",
-        "ventral"
-      ],
-      "narration": "On about day nine, hypoblast cells creep out from the edge of the disc and line the inside of the old blastocyst cavity with a thin sheet — the exocoelomic membrane, or Heuser's membrane. The space they enclose is the primary yolk sac. Its roof is the hypoblast, so it sits ventral to the disc, the mirror image of the amniotic cavity above."
-    },
-    {
-      "key": "secondary_yolk_sac",
-      "label": "Secondary yolk sac — the one that matters",
-      "role": "part",
-      "group": "Where the cavities come from",
-      "layer": "organ",
-      "color": "#f4d03f",
-      "terms": [
-        "secondary yolk sac",
-        "definitive yolk sac",
-        "umbilical vesicle",
-        "day 12",
-        "day 13",
-        "second wave of hypoblast",
-        "pinched off",
-        "exocoelomic cysts",
-        "smaller"
-      ],
-      "narration": "Around day twelve to thirteen the hypoblast sends a second wave of cells into the primary sac. They push in and pinch off a smaller cavity — the secondary, or definitive, yolk sac — leaving scraps of the primary sac behind as exocoelomic cysts. When an examiner or a sonographer says yolk sac, this smaller second one is what they mean."
-    },
-    {
-      "key": "amnion_grows",
-      "label": "The amnion expands and swallows the chorionic cavity",
-      "role": "part",
-      "group": "The amnion takes over",
-      "layer": "organ",
-      "color": "#85c1e9",
-      "terms": [
-        "amnion",
-        "expands",
-        "chorionic cavity",
-        "extraembryonic coelom",
-        "obliterated",
-        "week 8",
-        "week 12",
-        "amniochorionic membrane",
-        "amniochorion",
-        "folding"
-      ],
-      "narration": "The amniotic cavity does not stay a slit. As the embryo folds, the amnion is carried round the body and keeps filling with fluid, so it expands into the chorionic cavity and squeezes it out of existence between roughly weeks eight and twelve. The two membranes then lie against each other as one amniochorionic membrane. That single membrane is what ruptures when the waters break, and its position is why a scan later in pregnancy shows no separate chorionic space."
-    },
-    {
-      "key": "amnion_sheathes_cord",
-      "label": "The amnion sheathes the umbilical cord",
-      "role": "part",
-      "group": "The amnion takes over",
-      "layer": "organ",
-      "color": "#a9cce3",
-      "terms": [
-        "amnion",
-        "connecting stalk",
-        "body stalk",
-        "umbilical cord",
-        "sheath",
-        "Wharton jelly",
-        "vitelline duct",
-        "yolk sac remnant"
-      ],
-      "narration": "As the amnion expands it wraps the connecting stalk and the yolk sac stalk together and covers them with a single tube of amniotic epithelium. That tube is the umbilical cord. So the cord is not a new organ: it is the connecting stalk, the vitelline duct and their vessels, packed in jelly and sleeved in amnion."
-    },
-    {
-      "key": "amniotic_fluid",
-      "label": "Amniotic fluid — where it comes from and what it does",
-      "role": "part",
-      "group": "The amnion takes over",
-      "layer": "organ",
-      "color": "#aed6f1",
-      "terms": [
-        "amniotic fluid",
-        "liquor",
-        "transudate",
-        "fetal urine",
-        "fetal swallowing",
-        "lung fluid",
-        "cushion",
-        "lung development",
-        "limb movement",
-        "temperature",
-        "vernix",
-        "term volume"
-      ],
-      "narration": "Early on the fluid is a transudate from maternal blood and from the amnion itself. From about the second trimester the fetus makes most of it as dilute urine, and clears it by swallowing it. So the fluid is a circuit, not a pool. It cushions the fetus, lets the limbs move so joints form properly, keeps the temperature steady, prevents the amnion sticking to the skin, and — the point students forget — it is breathed in and out, which is required for the lungs to develop at all. Volume rises to roughly a litre near term and then falls."
-    },
-    {
-      "key": "fluid_clinical",
-      "label": "Too little fluid, too much fluid",
-      "role": "part",
-      "group": "The amnion takes over",
-      "layer": "organ",
-      "color": "#7fb3d5",
-      "terms": [
-        "oligohydramnios",
-        "Potter sequence",
-        "Potter facies",
-        "renal agenesis",
-        "posterior urethral valves",
-        "pulmonary hypoplasia",
-        "limb deformity",
-        "polyhydramnios",
-        "hydramnios",
-        "oesophageal atresia",
-        "esophageal atresia",
-        "duodenal atresia",
-        "anencephaly",
-        "cannot swallow",
-        "amniocentesis",
-        "premature rupture of membranes",
-        "amniotic band syndrome"
-      ],
-      "narration": "Read the volume as a report on the circuit. Too little fluid means the fetus is not making urine or is leaking it out — renal agenesis, obstructed valves, or ruptured membranes — and the consequences follow from what the fluid was for: squashed face, limb contractures and, most dangerous, hypoplastic lungs. That combination is the Potter sequence. Too much fluid means the fetus cannot swallow it back — oesophageal or duodenal atresia, or anencephaly. Two more clinical facts live here: amniocentesis samples this fluid for fetal cells from about the fifteenth week, and torn strands of amnion can wrap a limb and amputate it, which is amniotic band syndrome."
-    },
-    {
-      "key": "germ_cells",
-      "label": "Primordial germ cells start in the yolk sac wall",
-      "role": "part",
-      "group": "What the yolk sac hands over",
-      "layer": "organ",
-      "color": "#e9d16b",
-      "terms": [
-        "primordial germ cells",
-        "yolk sac wall",
-        "allantois",
-        "week 3",
-        "week 4",
-        "week 6",
-        "migrate",
-        "hindgut",
-        "dorsal mesentery",
-        "gonadal ridge",
-        "genital ridge",
-        "teratoma"
-      ],
-      "narration": "The germ cells do not begin in the gonad. They appear in the wall of the yolk sac near the origin of the allantois in week three, then migrate along the dorsal mesentery of the hindgut to reach the gonadal ridges by about week six. Two exam consequences: if they never arrive, the gonad does not develop, and if some of them stop on the way, a germ cell tumour can grow anywhere along that midline route."
-    },
-    {
-      "key": "haematopoiesis",
-      "label": "The first blood is made on the yolk sac",
-      "role": "part",
-      "group": "What the yolk sac hands over",
-      "layer": "organ",
-      "color": "#dc7633",
-      "terms": [
-        "haematopoiesis",
-        "hematopoiesis",
-        "blood islands",
-        "extraembryonic mesoderm",
-        "week 3",
-        "vitelline vessels",
-        "first blood cells",
-        "liver",
-        "spleen",
-        "bone marrow"
-      ],
-      "narration": "In week three, blood islands appear in the extraembryonic mesoderm covering the yolk sac. They make the first blood cells and the first vessels, and the vitelline vessels that drain them are the beginning of the circulation. This is the first stop in the sequence you will be asked to recite — yolk sac, then liver, then spleen, then bone marrow."
-    },
-    {
-      "key": "primitive_gut",
-      "label": "The roof of the yolk sac becomes the gut",
-      "role": "part",
-      "group": "What the yolk sac hands over",
-      "layer": "organ",
-      "color": "#d4ac0d",
-      "terms": [
-        "primitive gut",
-        "foregut",
-        "midgut",
-        "hindgut",
-        "folding",
-        "week 4",
-        "incorporated",
-        "endoderm",
-        "vitelline duct",
-        "narrowed"
-      ],
-      "narration": "In week four the disc folds head to tail and side to side. The folding pinches the roof of the yolk sac up into the body, and that incorporated part becomes the primitive gut tube — foregut, midgut and hindgut. The part left outside stays as the yolk sac, and the neck between the two narrows into the vitelline duct. So the gut and the yolk sac are the same original cavity, separated by folding."
-    },
-    {
-      "key": "vitelline_duct",
-      "label": "Vitelline duct and Meckel's diverticulum",
-      "role": "part",
-      "group": "What is left behind",
-      "layer": "organ",
-      "color": "#ca6f1e",
-      "terms": [
-        "vitelline duct",
-        "omphalomesenteric duct",
-        "omphaloenteric duct",
-        "obliterates",
-        "week 6",
-        "week 10",
-        "Meckel diverticulum",
-        "Meckel's diverticulum",
-        "rule of 2s",
-        "ileum",
-        "ectopic gastric mucosa",
-        "painless rectal bleeding",
-        "vitelline fistula",
-        "vitelline cyst",
-        "fibrous band",
-        "volvulus"
-      ],
-      "narration": "The vitelline duct normally closes and disappears around weeks six to ten. When part of it persists you get the commonest congenital anomaly of the gut — Meckel's diverticulum, remembered by the rule of twos: about two per cent of people, roughly two inches long, about two feet from the ileocaecal valve, often two types of ectopic mucosa, gastric and pancreatic, usually presenting before age two. Gastric mucosa in it ulcerates the neighbouring ileum, which is why the classic presentation is painless rectal bleeding in a small child. If the duct stays open along its whole length, faeces discharge at the umbilicus; if only the middle stays open, a cyst forms; and a residual fibrous band can trap a loop of bowel and cause a volvulus."
-    },
-    {
-      "key": "allantois",
-      "label": "Allantois — a pouch that becomes a ligament",
-      "role": "part",
-      "group": "What is left behind",
-      "layer": "organ",
-      "color": "#b9770e",
-      "terms": [
-        "allantois",
-        "day 16",
-        "diverticulum",
-        "caudal yolk sac",
-        "hindgut",
-        "connecting stalk",
-        "umbilical vessels",
-        "urachus",
-        "bladder",
-        "median umbilical ligament",
-        "urachal fistula",
-        "urachal cyst",
-        "urachal sinus",
-        "urine at the umbilicus"
-      ],
-      "narration": "About day sixteen a small finger of yolk sac pushes into the connecting stalk. That is the allantois. In humans it does almost nothing itself, but two things grow from it: the umbilical vessels form in its wall, and its stalk stays connected to the developing bladder. That connection narrows into the urachus and then into the fibrous median umbilical ligament running from the bladder apex to the umbilicus. If it fails to close you get urine leaking at the umbilicus through a urachal fistula, or a urachal cyst or sinus along its line."
-    },
-    {
-      "key": "yolk_sac_fate",
-      "label": "The yolk sac itself shrivels",
-      "role": "part",
-      "group": "What is left behind",
-      "layer": "organ",
-      "color": "#b7950b",
-      "terms": [
-        "yolk sac",
-        "shrivels",
-        "week 12",
-        "week 20",
-        "chorionic cavity",
-        "base of the cord",
-        "no nutrition",
-        "vestigial",
-        "not a yolk"
-      ],
-      "narration": "The human yolk sac holds no yolk and feeds nothing. Once the placenta takes over, it shrinks and is left as a small pale nodule near the base of the cord, usually gone from view by the second half of pregnancy. Its whole importance is what it did in weeks three and four — the first blood, the germ cells, and the roof that became the gut."
-    },
-    {
-      "key": "scan_cavities",
-      "label": "What the two cavities look like on a scan",
-      "role": "part",
-      "group": "Seeing it in a clinic",
-      "layer": "organ",
-      "color": "#5499c7",
-      "terms": [
-        "gestational sac",
-        "yolk sac on ultrasound",
-        "transvaginal scan",
-        "5 weeks",
-        "double bleb sign",
-        "amniotic cavity",
-        "intrauterine pregnancy",
-        "ectopic pregnancy",
-        "pseudogestational sac",
-        "enlarged yolk sac",
-        "miscarriage"
-      ],
-      "narration": "On an early transvaginal scan the chorionic cavity is the gestational sac, and the yolk sac is the first structure seen inside it, at around five weeks. Seeing it is what confirms the pregnancy is really in the uterus, because a pseudosac in an ectopic pregnancy contains nothing. A little later the amniotic cavity and the yolk sac sit either side of the disc and give the double bleb appearance. A yolk sac that is absent, unusually large, or calcified is an early warning that the pregnancy may fail."
-    }
-  ],
-  "views": [
-    {
-      "mode": "cross_section",
-      "beat": 1,
-      "title": "Cut it: a balloon above, a balloon below",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Where the cavities come from"
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "y",
-          "offset": 0,
-          "animate": true
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "amniotic_cavity",
-            "primary_yolk_sac"
-          ],
-          "layout": "stacked"
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "lateral"
-        }
-      ],
-      "narration": "Start with the cut drawing. Disc in the middle, amniotic cavity above it, yolk sac below it. The layer that lines each cavity is the layer nearest it — epiblast roofs nothing and floors the amnion, hypoblast floors nothing and roofs the yolk sac. Learn the sandwich this way up once and you will never have to redraw it."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 2,
-      "title": "Day 8 and day 9 — each cavity is made differently",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Where the cavities come from"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "amniotic_cavity",
-          "intensity": 0.9
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "primary_yolk_sac",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "amniotic_cavity",
-          "to": "primary_yolk_sac",
-          "kind": "opposite sides of the same disc"
-        }
-      ],
-      "narration": "The two cavities are not made the same way, and that is the examinable difference. The amniotic cavity opens inside the epiblast — nothing migrates, a space simply appears and amnioblasts roof it. The yolk sac is the reverse: hypoblast cells migrate out and line a cavity that already existed, the old blastocyst cavity. One is a space that opened, the other is a space that was lined."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 3,
-      "title": "The yolk sac is remade smaller",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "Where the cavities come from"
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:yolk-sac-remodelling",
-          "path": [
-            "primary_yolk_sac",
-            "secondary_yolk_sac"
-          ],
-          "duration": 5
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "secondary_yolk_sac",
-          "intensity": 0.95
-        },
-        {
-          "op": "HIDE_STRUCTURE",
-          "target": "two_balloons"
-        }
-      ],
-      "narration": "Days twelve to thirteen. A second wave of hypoblast pushes into the primary sac and pinches off a smaller one — the secondary or definitive yolk sac — leaving fragments of the old one as exocoelomic cysts. If a question asks which yolk sac makes blood cells and germ cells, or which one is seen on a scan, the answer is always the secondary."
-    },
-    {
-      "mode": "location",
-      "beat": 4,
-      "title": "The amnion grows until there is nowhere left to grow",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The amnion takes over"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "amniotic_cavity"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "amniotic_cavity",
-          "to": "amnion_grows",
-          "kind": "expands until the chorionic cavity is gone"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "amnion_grows",
-          "to": "amnion_sheathes_cord",
-          "kind": "and wraps the stalk on the way"
-        },
-        {
-          "op": "PEEL_LAYER",
-          "layer": "organ",
-          "direction": "outward"
-        }
-      ],
-      "narration": "Follow the amnion forward. It fills with fluid and expands into the chorionic cavity until, somewhere between weeks eight and twelve, that cavity is obliterated and amnion lies fused against chorion as a single membrane. On the way it wraps the connecting stalk and the yolk sac stalk into one sleeve — the umbilical cord. Two structures you will be asked about, the amniochorionic membrane and the cord, are both just consequences of this one expansion."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 5,
-      "title": "The fluid is a circuit, not a pool",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The amnion takes over"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "amniotic_fluid",
-          "intensity": 0.9
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:amniotic-fluid-turnover",
-          "path": [
-            "amniotic_fluid",
-            "fluid_clinical"
-          ],
-          "duration": 6
-        }
-      ],
-      "narration": "The fetus urinates the fluid out and swallows it back, and breathes it in and out of the lungs. Because it is a circuit, the volume is a clinical measurement rather than a curiosity — it tells you whether the kidneys are making it, whether the gut can clear it, and whether the membranes are holding it."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 6,
-      "title": "Reading the volume in a clinic",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "The amnion takes over"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "fluid_clinical",
-          "intensity": 0.95
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "amniotic_fluid",
-            "fluid_clinical"
-          ],
-          "layout": "side-by-side"
-        }
-      ],
-      "narration": "Too little fluid points at production or leakage — renal agenesis, obstructed urethral valves, ruptured membranes — and produces the squashed face, the contracted limbs and the hypoplastic lungs of the Potter sequence. Too little fluid kills through the lungs, not the kidneys, and that is the sentence to write. Too much points at clearance — the fetus cannot swallow, so think oesophageal or duodenal atresia, or anencephaly."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 7,
-      "title": "What the yolk sac gives away before it goes",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "What the yolk sac hands over"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "secondary_yolk_sac"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "secondary_yolk_sac",
-          "to": "germ_cells",
-          "kind": "germ cells arise in its wall"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "secondary_yolk_sac",
-          "to": "haematopoiesis",
-          "kind": "first blood islands on its surface"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "secondary_yolk_sac",
-          "to": "primitive_gut",
-          "kind": "its roof is folded in as the gut"
-        }
-      ],
-      "narration": "Three handovers, and they are the whole reason the yolk sac is examinable. The first blood cells and vessels form on it in week three. The primordial germ cells appear in its wall and then migrate to the gonadal ridges. And in week four its roof is folded up into the body to become the primitive gut. After that it has nothing left to give."
-    },
-    {
-      "mode": "cross_section",
-      "beat": 8,
-      "title": "Folding separates the gut from the sac",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "What the yolk sac hands over"
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "z",
-          "offset": 0,
-          "animate": true
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "primitive_gut",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "primitive_gut",
-          "to": "vitelline_duct",
-          "kind": "the narrowed neck between them"
-        }
-      ],
-      "narration": "Cut the folding embryo across and the geometry explains itself. The lateral folds pinch the yolk sac into an hourglass. The upper half is inside the embryo and becomes the gut tube; the lower half stays outside as the yolk sac; the waist between them is the vitelline duct. Everything that goes wrong at the umbilicus later is that waist failing to close."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 9,
-      "title": "The remnants you will be asked to name",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "What is left behind"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "vitelline_duct",
-          "intensity": 0.95
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "allantois",
-          "intensity": 0.95
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "vitelline_duct",
-            "allantois"
-          ],
-          "layout": "side-by-side"
-        },
-        {
-          "op": "HIDE_STRUCTURE",
-          "target": "The amnion takes over"
-        }
-      ],
-      "narration": "Two stalks leave the yolk sac and two remnants are left. The vitelline duct runs to the ileum; if it persists you get Meckel's diverticulum with its rule of twos, or a fistula, cyst or band. The allantois runs to the bladder; its remnant is the urachus and then the median umbilical ligament, and if it persists you get urine at the umbilicus. Same umbilicus, two entirely different ducts, and students mix them constantly — one drains gut, the other drains bladder."
-    },
-    {
-      "mode": "location",
-      "beat": 10,
-      "title": "The two cavities on an early scan",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Seeing it in a clinic"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "secondary_yolk_sac"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "amniotic_cavity"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "scan_cavities",
-          "to": "secondary_yolk_sac",
-          "kind": "the first structure seen inside the sac"
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "anterior"
-        }
-      ],
-      "narration": "Close where a student will meet this in practice. The gestational sac on a five-week scan is the chorionic cavity, and the small ring inside it is the secondary yolk sac — the finding that says the pregnancy is genuinely in the uterus. Shortly after, the amniotic cavity and the yolk sac either side of the disc give the double bleb sign. An absent, oversized or calcified yolk sac is an early sign that the pregnancy is not going to continue."
-    }
-  ],
-  "provenance": {
-    "author": "task",
-    "authored_at": "2026-08-28"
-  },
-  "gaps": [
-    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and offers no 3d option, and the subject is a staged process at a scale no mesh exists for. Only diagram is deferred. The curriculum asks for cross_section and location views; beats 1, 8 and 10 supply them.",
-    "Status is 'planned'. Fifteen regions, ten beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a sagittal cut at day 9 and day 13 with the amniotic cavity above and yolk sac below the disc, a later panel with the amnion expanded and the chorionic cavity obliterated, a transverse cut through the folding embryo showing the yolk sac pinched into gut plus duct plus sac, and a final panel of the umbilical stalks with the vitelline duct running to the ileum and the allantois to the bladder.",
-    "The folding panel in beat 8 must be drawn as a transverse cut, not a sagittal one. The hourglass waist that becomes the vitelline duct is only visible in cross section, and the whole beat depends on the student seeing it.",
-    "Beats 3 and 5 trace concepts rather than objects: concept:yolk-sac-remodelling is the replacement of the primary sac by the secondary, and concept:amniotic-fluid-turnover is the production-and-clearance circuit. Neither is a drawable subject, so both are declared abstractions the renderer walks without lighting a subject.",
-    "'Chorion & placenta (early)' is a SEPARATE curriculum entry authored in the same run and is NOT claimed here. The chorionic cavity appears in this scene only as the space the amnion obliterates and as the gestational sac on a scan; the villous tree, the placental barrier and maternal-fetal exchange belong to that entry.",
-    "'Bilaminar embryonic disc' is already covered by its own scene and is NOT re-claimed. Epiblast and hypoblast appear here only as the linings of the two cavities.",
-    "Day numbers are the standard teaching approximations — amniotic cavity about day 8, primary yolk sac day 9, secondary yolk sac day 12 to 13, allantois about day 16, vitelline duct closing weeks 6 to 10, chorionic cavity obliterated weeks 8 to 12 — and are narrated as approximations. Published figures for chorionic cavity obliteration in particular range from about week 8 to week 12 and no single week is stated as fact.",
-    "Amniotic fluid volume is narrated as roughly a litre near term with a fall thereafter, rather than a precise figure, because quoted term volumes vary between texts and the teaching point is the trend, not the number.",
-    "Meckel's rule of twos is included in the form Nigerian MBBS teaching uses. It is a memory aid with real variation behind it — reported prevalence is about 2 per cent but the length, distance from the ileocaecal valve and age at presentation are all ranges, and the narration says 'about' and 'roughly' throughout rather than presenting the twos as measurements."
+  "terms": [
+   "amniotic cavity",
+   "amnion",
+   "amnioblasts",
+   "amniotic fluid",
+   "liquor",
+   "hydramnios",
+   "polyhydramnios",
+   "oligohydramnios",
+   "Potter sequence",
+   "Potter facies",
+   "renal agenesis",
+   "amniocentesis",
+   "premature rupture of membranes",
+   "PROM",
+   "amniotic band syndrome",
+   "amniochorionic membrane",
+   "amniochorion",
+   "chorionic cavity",
+   "extraembryonic coelom",
+   "yolk sac",
+   "primary yolk sac",
+   "primitive yolk sac",
+   "secondary yolk sac",
+   "definitive yolk sac",
+   "exocoelomic cavity",
+   "exocoelomic membrane",
+   "Heuser membrane",
+   "exocoelomic cysts",
+   "hypoblast",
+   "epiblast",
+   "bilaminar disc",
+   "day 8",
+   "day 9",
+   "day 12",
+   "day 13",
+   "primordial germ cells",
+   "gonadal ridge",
+   "haematopoiesis",
+   "hematopoiesis",
+   "blood islands",
+   "extraembryonic mesoderm",
+   "primitive gut",
+   "foregut",
+   "midgut",
+   "hindgut",
+   "folding",
+   "vitelline duct",
+   "omphalomesenteric duct",
+   "omphaloenteric duct",
+   "vitelline vessels",
+   "Meckel diverticulum",
+   "Meckel's diverticulum",
+   "rule of 2s",
+   "umbilical fistula",
+   "vitelline cyst",
+   "allantois",
+   "urachus",
+   "median umbilical ligament",
+   "urachal fistula",
+   "urachal cyst",
+   "urachal sinus",
+   "connecting stalk",
+   "body stalk",
+   "umbilical cord",
+   "double bleb sign",
+   "gestational sac",
+   "yolk sac on ultrasound",
+   "transvaginal scan",
+   "vernix",
+   "lung development",
+   "fetal swallowing",
+   "fetal urine",
+   "umbilical vesicle"
   ]
+ },
+ "camera": {
+  "framing": "lateral"
+ },
+ "framing_strict": true,
+ "structures": [
+  {
+   "key": "epiblast",
+   "name": "Epiblast",
+   "label": "Epiblast",
+   "role": "part",
+   "group": "Where the cavities come from",
+   "color": "#f0dcc0",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#epiblast"
+   },
+   "narration": "Hold one picture in your head for the whole of this scene. A flat two-layer disc with a balloon above it and a balloon below it. The balloon above is the amniotic cavity, sitting on the epiblast. The balloon below is the yolk sac, hanging from the hypoblast. Every fact in this topic is either about where one of those balloons came from or about what it turns into.",
+   "narration_from": "sequence-version structure \"two_balloons\" — carried across verbatim. In the SVG scene that was a framing BEAT about the whole sandwich, with no geometry: \"a flat two-layer disc with a balloon above it and a balloon below it\". The thing it is a framing of is the DISC, and this model draws the disc as its two epithelia and nothing else — a bilaminar disc has epiblast and hypoblast and no third layer. The epiblast is the layer the sandwich is read from: it floors the amniotic cavity and it is the disc's dorsal surface, which is the \"up\" the paragraph asks the student to learn once.",
+   "terms": [
+    "bilaminar disc",
+    "two cavities",
+    "amniotic cavity",
+    "yolk sac",
+    "dorsal",
+    "ventral",
+    "sandwich"
+   ]
+  },
+  {
+   "key": "hypoblast",
+   "name": "Hypoblast",
+   "label": "Hypoblast",
+   "role": "part",
+   "group": "Where the cavities come from",
+   "color": "#e8cfa8",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#hypoblast"
+   },
+   "narration": "The hypoblast is the thinner, cuboidal layer on the ventral face of the disc. It does two jobs in this topic and both are about the yolk sac: its cells migrate out to line the old blastocyst cavity, which makes the primary yolk sac, and the sheet itself is that sac's roof. So when the disc folds in week four and the roof is drawn up into the body, it is this layer that becomes the lining of the gut.",
+   "narration_from": "NEW. The SVG scene had no region for the hypoblast as a structure — it named it inside other beats. It is a built part here because two of this scene's claims are about it: that it roofs the yolk sac (row R) and that the gut comes from that roof.",
+   "terms": [
+    "hypoblast",
+    "exocoelomic membrane",
+    "primary yolk sac",
+    "roof",
+    "endoderm",
+    "bilaminar disc"
+   ]
+  },
+  {
+   "key": "amniotic_cavity",
+   "name": "Amniotic cavity",
+   "label": "Amniotic cavity",
+   "role": "part",
+   "group": "Where the cavities come from",
+   "color": "#5dade2",
+   "opacity": 0.25,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#amniotic_cavity"
+   },
+   "narration": "On about day eight a small space opens within the epiblast itself. Epiblast cells at its edge flatten into amnioblasts and roof it over; the rest of the epiblast stays as its floor. That space is the amniotic cavity. Two things follow from how it forms: it is lined by epiblast-derived cells, and it lies on the dorsal side of the disc. Dorsal in embryology means the amniotic side, for the rest of the course.",
+   "narration_from": "sequence-version structure \"amniotic_cavity\" — carried across verbatim. The cavity is a built part and the paragraph is about it unchanged. What the model adds is that the two things the paragraph says FOLLOW from how it forms are now measurable: it is drawn as a DOME standing on the epiblast, so the epiblast is its floor (row S), and the dome stands on the dorsal face of the disc, so \"dorsal means the amniotic side\" is a position (row A) rather than a sentence. DRAWN AT 0.25 OPACITY, AND 0.18 WAS TRIED AND REJECTED ON THE MEASUREMENT. At 0.25 the embryo inside the cavity moves its pixels by 32 of 255 in beat 10, under that tool's 40/255 floor for a structure seen only through something translucent, so the obvious fix was to make the cavity more transparent. Rendered and counted: at 0.18 the CAVITY ITSELF fell under the floor in beats 4, 5 and 10 — one failure traded for three. RENDER-STANDARD 3.ab corollary 1 is about exactly this (\"the obvious value makes it worse\"), and the beat-10 epiblast carries a waiver instead.",
+   "terms": [
+    "amniotic cavity",
+    "amnioblasts",
+    "amnion",
+    "day 8",
+    "epiblast",
+    "floor of the amniotic cavity",
+    "dorsal",
+    "roof of amnioblasts"
+   ]
+  },
+  {
+   "key": "amnion",
+   "name": "Amnion",
+   "label": "Amnion",
+   "role": "part",
+   "group": "The amnion takes over",
+   "color": "#d8e6ef",
+   "opacity": 0.55,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#amnion"
+   },
+   "narration": "The amniotic cavity does not stay a slit. As the embryo folds, the amnion is carried round the body and keeps filling with fluid, so it expands into the chorionic cavity and squeezes it out of existence between roughly weeks eight and twelve. The two membranes then lie against each other as one amniochorionic membrane. That single membrane is what ruptures when the waters break, and its position is why a scan later in pregnancy shows no separate chorionic space.",
+   "narration_from": "sequence-version structure \"amnion_grows\" — carried across verbatim. The membrane itself, which the beat describes the growth of. The day it finishes obliterating the chorionic cavity is the number this model SOLVES rather than declares — the fit lands on day 83.8, post-fertilisation week 11.97, against the paragraph's \"somewhere between weeks eight and twelve\", from three ultrasound cavity ratios that were told nothing about either bound. Rows F and F2.",
+   "terms": [
+    "amnion",
+    "expands",
+    "chorionic cavity",
+    "extraembryonic coelom",
+    "obliterated",
+    "week 8",
+    "week 12",
+    "amniochorionic membrane",
+    "amniochorion",
+    "folding"
+   ]
+  },
+  {
+   "key": "chorion",
+   "name": "Chorion",
+   "label": "Chorion",
+   "role": "part",
+   "group": "The amnion takes over",
+   "color": "#d98f8a",
+   "opacity": 0.3,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#chorion"
+   },
+   "narration": "The chorion is the outer wall of the conceptus — trophoblast with a layer of extraembryonic mesoderm on its inner face. For this topic it matters as the thing the amnion is growing TOWARDS: the chorionic cavity is the space between them, and when the amnion reaches it the two membranes fuse into the single amniochorionic membrane that ruptures when the waters break.",
+   "narration_from": "NEW. The SVG scene had no region for the chorion; it is built here because the chorionic cavity is defined as the space between it and the amnion, so the obliteration claim needs both surfaces to exist.",
+   "terms": [
+    "chorion",
+    "trophoblast",
+    "amniochorionic membrane",
+    "amniochorion",
+    "chorionic plate"
+   ]
+  },
+  {
+   "key": "extraembryonic_mesoderm",
+   "name": "Extraembryonic mesoderm",
+   "label": "Extraembryonic mesoderm",
+   "role": "part",
+   "group": "The amnion takes over",
+   "color": "#c9a79c",
+   "opacity": 0.32,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#extraembryonic_mesoderm"
+   },
+   "narration": "Before day twelve the space inside the chorion is not a cavity at all: it is filled with loose extraembryonic mesoderm. Cavities then open up inside that tissue and run together into one space — the chorionic cavity — which splits the mesoderm into a layer lining the chorion and a layer covering the amnion and the yolk sac. The tissue is what the cavity is made out of, which is why it has to be thick before it is thin.",
+   "narration_from": "NEW. Built because the chorionic cavity cannot appear out of nothing: the first version of this model derived this layer's thickness from the yolk sac it was supposed to leave room for, the two cancelled, and the mesoderm came out one sheet thick on day 9 — a cavitation with nothing to cavitate.",
+   "terms": [
+    "extraembryonic mesoderm",
+    "chorionic cavity",
+    "extraembryonic coelom",
+    "cavitation",
+    "somatopleuric",
+    "splanchnopleuric"
+   ]
+  },
+  {
+   "key": "chorionic_cavity",
+   "name": "Chorionic cavity (extraembryonic coelom)",
+   "label": "Chorionic cavity (extraembryonic coelom)",
+   "role": "part",
+   "group": "The amnion takes over",
+   "color": "#3f6d86",
+   "opacity": 0.3,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#chorionic_cavity"
+   },
+   "narration": "On an early transvaginal scan the chorionic cavity is the gestational sac, and the yolk sac is the first structure seen inside it, at around five weeks. Seeing it is what confirms the pregnancy is really in the uterus, because a pseudosac in an ectopic pregnancy contains nothing. A little later the amniotic cavity and the yolk sac sit either side of the disc and give the double bleb appearance. A yolk sac that is absent, unusually large, or calcified is an early warning that the pregnancy may fail.",
+   "narration_from": "sequence-version structure \"scan_cavities\" — carried across verbatim. The paragraph is about what this cavity looks like on a scan — \"the chorionic cavity IS the gestational sac\" — so it belongs to the cavity rather than to a separate clinical beat. The structure is the shell between the mesoderm's inner surface and the amnion's outer one, so it is EMPTY before the mesoderm cavitates on days 12 to 13 and a sliver at the end, which is the anatomy and not a drawing convenience.",
+   "terms": [
+    "gestational sac",
+    "yolk sac on ultrasound",
+    "transvaginal scan",
+    "5 weeks",
+    "double bleb sign",
+    "amniotic cavity",
+    "intrauterine pregnancy",
+    "ectopic pregnancy",
+    "pseudogestational sac",
+    "enlarged yolk sac",
+    "miscarriage"
+   ]
+  },
+  {
+   "key": "exocoelomic_membrane",
+   "name": "Exocoelomic (Heuser's) membrane",
+   "label": "Exocoelomic (Heuser's) membrane",
+   "role": "part",
+   "group": "Where the cavities come from",
+   "color": "#ead9a0",
+   "opacity": 0.6,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#exocoelomic_membrane@0.05"
+   },
+   "narration": "Heuser's membrane is the thin sheet of hypoblast-derived cells that creeps out from the rim of the disc and lines the inside of the old blastocyst cavity. It is worth knowing by name for one reason: it is what makes the primary yolk sac a LINED space rather than a new one. The cavity was already there.",
+   "narration_from": "NEW, and PINNED at day 9, the only day it exists. It is gone by day 13.5, so an unpinned ref would be resolved at t = 1 by the player and come back empty for ever.",
+   "terms": [
+    "Heuser's membrane",
+    "exocoelomic membrane",
+    "hypoblast",
+    "primary yolk sac",
+    "day 9"
+   ]
+  },
+  {
+   "key": "primary_yolk_sac",
+   "name": "Primary yolk sac",
+   "label": "Primary yolk sac",
+   "role": "part",
+   "group": "Where the cavities come from",
+   "color": "#f7dc6f",
+   "opacity": 0.45,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#primary_yolk_sac@0.05"
+   },
+   "narration": "On about day nine, hypoblast cells creep out from the edge of the disc and line the inside of the old blastocyst cavity with a thin sheet — the exocoelomic membrane, or Heuser's membrane. The space they enclose is the primary yolk sac. Its roof is the hypoblast, so it sits ventral to the disc, the mirror image of the amniotic cavity above.",
+   "narration_from": "sequence-version structure \"primary_yolk_sac\" — carried across verbatim. PINNED at day 9, which is the day the paragraph is about and the day both beats that show it sit at. The sac is drawn TRUNCATED at the disc's ventral surface rather than as a full sphere, because the paragraph's \"its roof is the hypoblast\" is the claim: a full sphere would wrap over the disc and draw the amniotic cavity inside the yolk sac. Row R measures that the two surfaces meet.",
+   "terms": [
+    "primary yolk sac",
+    "primitive yolk sac",
+    "exocoelomic cavity",
+    "exocoelomic membrane",
+    "Heuser membrane",
+    "day 9",
+    "hypoblast",
+    "blastocyst cavity",
+    "ventral"
+   ]
+  },
+  {
+   "key": "primary_yolk_sac_late",
+   "name": "Primary yolk sac, day 12-13",
+   "label": "Primary yolk sac, day 12-13",
+   "role": "part",
+   "group": "Where the cavities come from",
+   "color": "#f7dc6f",
+   "opacity": 0.45,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#primary_yolk_sac_late@0.15"
+   },
+   "narration": "This is the same primary yolk sac three days later, at its largest, in the instant before the second wave of hypoblast pushes in. It is here as a second structure rather than as the same one at another moment because a beat can only draw one instant of a part, and the comparison this topic turns on — a big primary sac beside the small definitive one it is pinched out of — needs both at once.",
+   "narration_from": "NEW, and PINNED at day 12.5. check-beat-claims.mjs's own note is the authority for the shape of this: \"Two beats needing two different t of one part need two keys.\"",
+   "terms": [
+    "primary yolk sac",
+    "day 12",
+    "day 13",
+    "second wave of hypoblast",
+    "pinched off"
+   ]
+  },
+  {
+   "key": "secondary_yolk_sac",
+   "name": "Secondary (definitive) yolk sac",
+   "label": "Secondary (definitive) yolk sac",
+   "role": "part",
+   "group": "Where the cavities come from",
+   "color": "#f4d03f",
+   "opacity": 0.55,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#secondary_yolk_sac"
+   },
+   "narration": "Around day twelve to thirteen the hypoblast sends a second wave of cells into the primary sac. They push in and pinch off a smaller cavity — the secondary, or definitive, yolk sac — leaving scraps of the primary sac behind as exocoelomic cysts. When an examiner or a sonographer says yolk sac, this smaller second one is what they mean.",
+   "narration_from": "sequence-version structure \"secondary_yolk_sac\" — carried across verbatim. The definitive sac, built across the whole rest of the model: it grows to a 5.5 mm peak at about day 49 and then regresses, which is the geometry of the later paragraph about it shrivelling. Its size at every day is the published ultrasound curve, converted from menstrual weeks once.",
+   "terms": [
+    "secondary yolk sac",
+    "definitive yolk sac",
+    "umbilical vesicle",
+    "day 12",
+    "day 13",
+    "second wave of hypoblast",
+    "pinched off",
+    "exocoelomic cysts",
+    "smaller"
+   ]
+  },
+  {
+   "key": "exocoelomic_cysts",
+   "name": "Exocoelomic cysts",
+   "label": "Exocoelomic cysts",
+   "role": "part",
+   "group": "Where the cavities come from",
+   "color": "#e6c9a0",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#exocoelomic_cysts"
+   },
+   "narration": "The scraps of the primary yolk sac that are left behind when the definitive one is pinched off do not vanish at once: they sit in the chorionic cavity as exocoelomic cysts, a few tenths of a millimetre across, and are slowly resorbed. They are worth recognising on an early scan precisely because they are nothing to worry about.",
+   "narration_from": "NEW. Their size is the one thing here that is SOLVED by conservation rather than declared: the volume the primary sac loses, less what the definitive sac keeps, is shared between seven cysts, and the radius is found by bisection against the volumes of the spheres this model actually builds. Row H, which says in its own text that the share is calibrated and that the resulting diameter is therefore a consistency check and not a prediction.",
+   "terms": [
+    "exocoelomic cysts",
+    "primary yolk sac",
+    "chorionic cavity",
+    "remnant",
+    "early scan"
+   ]
+  },
+  {
+   "key": "connecting_stalk",
+   "name": "Connecting stalk",
+   "label": "Connecting stalk",
+   "role": "part",
+   "group": "What is left behind",
+   "color": "#c08a76",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#connecting_stalk"
+   },
+   "narration": "The connecting stalk is the bridge of extraembryonic mesoderm that holds the embryo to the chorion at its caudal end. Nothing about it is dramatic and everything that follows depends on it: the allantois grows into it, the umbilical vessels form in it, and when the amnion wraps it together with the yolk sac stalk the result is the umbilical cord. It is also why the embryo hangs high in the sac rather than floating in the middle of it.",
+   "narration_from": "NEW. Built because three other structures are defined by their relation to it, and because its length is read off the geometry rather than chosen: the stalk is run out along its own direction until it meets the chorion. DRAWN AT 0.45 OPACITY, AND THE VALUE WAS MEASURED RATHER THAN CHOSEN. The allantois runs up inside the stalk, and with the stalk opaque the walk reported the allantois at 0% in the two beats that point at it. RENDER-STANDARD 3.ab, corollary 1: \"a translucency chosen by eye is a guess; render it and count.\"",
+   "terms": [
+    "connecting stalk",
+    "body stalk",
+    "umbilical cord",
+    "allantois",
+    "umbilical vessels",
+    "caudal"
+   ],
+   "opacity": 0.45
+  },
+  {
+   "key": "cord_sheath",
+   "name": "Amniotic sheath of the cord",
+   "label": "Amniotic sheath of the cord",
+   "role": "part",
+   "group": "The amnion takes over",
+   "color": "#a9cce3",
+   "opacity": 0.35,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#cord_sheath"
+   },
+   "narration": "As the amnion expands it wraps the connecting stalk and the yolk sac stalk together and covers them with a single tube of amniotic epithelium. That tube is the umbilical cord. So the cord is not a new organ: it is the connecting stalk, the vitelline duct and their vessels, packed in jelly and sleeved in amnion.",
+   "narration_from": "sequence-version structure \"amnion_sheathes_cord\" — carried across verbatim. The sleeve of amniotic epithelium the paragraph describes, drawn translucent in every beat that shows it so the three things inside it stay visible — which is the whole content of the sentence \"the cord is not a new organ\".",
+   "terms": [
+    "amnion",
+    "connecting stalk",
+    "body stalk",
+    "umbilical cord",
+    "sheath",
+    "Wharton jelly",
+    "vitelline duct",
+    "yolk sac remnant"
+   ]
+  },
+  {
+   "key": "primitive_gut",
+   "name": "Primitive gut tube",
+   "label": "Primitive gut tube",
+   "role": "part",
+   "group": "What the yolk sac hands over",
+   "color": "#d4ac0d",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#primitive_gut"
+   },
+   "narration": "In week four the disc folds head to tail and side to side. The folding pinches the roof of the yolk sac up into the body, and that incorporated part becomes the primitive gut tube — foregut, midgut and hindgut. The part left outside stays as the yolk sac, and the neck between the two narrows into the vitelline duct. So the gut and the yolk sac are the same original cavity, separated by folding.",
+   "narration_from": "sequence-version structure \"primitive_gut\" — carried across verbatim. The tube itself. Its two ends are drawn narrower than its middle because the segment boundaries belong at the real landmarks, which here are the flexures, and the duct leaves from the widest part — the midgut — which is where the paragraph says it leaves from.",
+   "terms": [
+    "primitive gut",
+    "foregut",
+    "midgut",
+    "hindgut",
+    "folding",
+    "week 4",
+    "incorporated",
+    "endoderm",
+    "vitelline duct",
+    "narrowed"
+   ]
+  },
+  {
+   "key": "vitelline_duct",
+   "name": "Vitelline duct",
+   "label": "Vitelline duct",
+   "role": "part",
+   "group": "What is left behind",
+   "color": "#ca6f1e",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#vitelline_duct@0.48"
+   },
+   "narration": "The vitelline duct normally closes and disappears around weeks six to ten. When part of it persists you get the commonest congenital anomaly of the gut — Meckel's diverticulum, remembered by the rule of twos: about two per cent of people, roughly two inches long, about two feet from the ileocaecal valve, often two types of ectopic mucosa, gastric and pancreatic, usually presenting before age two. Gastric mucosa in it ulcerates the neighbouring ileum, which is why the classic presentation is painless rectal bleeding in a small child. If the duct stays open along its whole length, faeces discharge at the umbilicus; if only the middle stays open, a cyst forms; and a residual fibrous band can trap a loop of bowel and cause a volvulus.",
+   "narration_from": "sequence-version structure \"vitelline_duct\" — carried across verbatim. PINNED at day 28, the end of week four, which is the day both beats that show it sit at. The duct is built as a surface of revolution with an hourglass profile so that its WAIST is a measurable thing (rows J and J2) rather than a word; what the model does NOT do is predict the day it closes. Section 2 of the model file says at length why the catenoid solve that would have predicted it was abandoned instead of dressed up.",
+   "terms": [
+    "vitelline duct",
+    "omphalomesenteric duct",
+    "omphaloenteric duct",
+    "obliterates",
+    "week 6",
+    "week 10",
+    "Meckel diverticulum",
+    "Meckel's diverticulum",
+    "rule of 2s",
+    "ileum",
+    "ectopic gastric mucosa",
+    "painless rectal bleeding",
+    "vitelline fistula",
+    "vitelline cyst",
+    "fibrous band",
+    "volvulus"
+   ]
+  },
+  {
+   "key": "vitelline_duct_closing",
+   "name": "Vitelline duct, weeks 6-10",
+   "label": "Vitelline duct, weeks 6-10",
+   "role": "part",
+   "group": "What is left behind",
+   "color": "#ca6f1e",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#vitelline_duct_closing@0.82"
+   },
+   "narration": "The same duct in the middle of the window in which it normally closes. Its waist, measured as a fraction of the gut tube it leaves, is half what it was at the end of week four. This is the state a question about Meckel's diverticulum is really about: the diverticulum is this duct failing to finish.",
+   "narration_from": "NEW, and PINNED at day 56. A second key for the same part at a second instant, for the same reason as primary_yolk_sac_late.",
+   "terms": [
+    "vitelline duct",
+    "omphalomesenteric duct",
+    "obliterates",
+    "week 6",
+    "week 10",
+    "Meckel's diverticulum"
+   ]
+  },
+  {
+   "key": "allantois",
+   "name": "Allantois",
+   "label": "Allantois",
+   "role": "part",
+   "group": "What is left behind",
+   "color": "#b9770e",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#allantois"
+   },
+   "narration": "About day sixteen a small finger of yolk sac pushes into the connecting stalk. That is the allantois. In humans it does almost nothing itself, but two things grow from it: the umbilical vessels form in its wall, and its stalk stays connected to the developing bladder. That connection narrows into the urachus and then into the fibrous median umbilical ligament running from the bladder apex to the umbilicus. If it fails to close you get urine leaking at the umbilicus through a urachal fistula, or a urachal cyst or sinus along its line.",
+   "narration_from": "sequence-version structure \"allantois\" — carried across verbatim. A finger of the caudal gut running into the connecting stalk, built from day 16 — the day the paragraph gives — and kept to the end, because its stalk is what becomes the urachus and then the median umbilical ligament, so it is one of the two remnants the last beats are about.",
+   "terms": [
+    "allantois",
+    "day 16",
+    "diverticulum",
+    "caudal yolk sac",
+    "hindgut",
+    "connecting stalk",
+    "umbilical vessels",
+    "urachus",
+    "bladder",
+    "median umbilical ligament",
+    "urachal fistula",
+    "urachal cyst",
+    "urachal sinus",
+    "urine at the umbilicus"
+   ]
+  },
+  {
+   "key": "blood_islands",
+   "name": "Blood islands",
+   "label": "Blood islands",
+   "role": "part",
+   "group": "What the yolk sac hands over",
+   "color": "#dc7633",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#blood_islands@0.34"
+   },
+   "narration": "In week three, blood islands appear in the extraembryonic mesoderm covering the yolk sac. They make the first blood cells and the first vessels, and the vitelline vessels that drain them are the beginning of the circulation. This is the first stop in the sequence you will be asked to recite — yolk sac, then liver, then spleen, then bone marrow.",
+   "narration_from": "sequence-version structure \"haematopoiesis\" — carried across verbatim. PINNED at day 21 — week three, the week the paragraph names. Drawn as patches on the yolk sac's own outer surface, in mirrored pairs rather than scattered, because row P measures that every key in this model is mirror-symmetric in x and that measurement is the only honest basis this model has for declaring which way round left and right are.",
+   "terms": [
+    "haematopoiesis",
+    "hematopoiesis",
+    "blood islands",
+    "extraembryonic mesoderm",
+    "week 3",
+    "vitelline vessels",
+    "first blood cells",
+    "liver",
+    "spleen",
+    "bone marrow"
+   ]
+  },
+  {
+   "key": "germ_cells",
+   "name": "Primordial germ cells",
+   "label": "Primordial germ cells",
+   "role": "part",
+   "group": "What the yolk sac hands over",
+   "color": "#e9d16b",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#germ_cells@0.34"
+   },
+   "narration": "The germ cells do not begin in the gonad. They appear in the wall of the yolk sac near the origin of the allantois in week three, then migrate along the dorsal mesentery of the hindgut to reach the gonadal ridges by about week six. Two exam consequences: if they never arrive, the gonad does not develop, and if some of them stop on the way, a germ cell tumour can grow anywhere along that midline route.",
+   "narration_from": "sequence-version structure \"germ_cells\" — carried across verbatim. PINNED at day 21. A cluster in the yolk sac wall NEAR THE ORIGIN OF THE ALLANTOIS, which is the examinable location, with a short file of cells along the route. The route is drawn as a straight run towards the dorsal body wall and is a schematic, not a path: it is declared in gaps[].",
+   "terms": [
+    "primordial germ cells",
+    "yolk sac wall",
+    "allantois",
+    "week 3",
+    "week 4",
+    "week 6",
+    "migrate",
+    "hindgut",
+    "dorsal mesentery",
+    "gonadal ridge",
+    "genital ridge",
+    "teratoma"
+   ]
+  },
+  {
+   "key": "yolk_sac_remnant",
+   "name": "Yolk sac remnant",
+   "label": "Yolk sac remnant",
+   "role": "part",
+   "group": "What is left behind",
+   "color": "#b7950b",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#yolk_sac_remnant"
+   },
+   "narration": "The human yolk sac holds no yolk and feeds nothing. Once the placenta takes over, it shrinks and is left as a small pale nodule near the base of the cord, usually gone from view by the second half of pregnancy. Its whole importance is what it did in weeks three and four — the first blood, the germ cells, and the roof that became the gut.",
+   "narration_from": "sequence-version structure \"yolk_sac_fate\" — carried across verbatim. The small pale nodule the paragraph ends on, placed at the chorionic end of the stalk — between amnion and chorion, near the cord's insertion, which is where it is found. It is a separate key from the sac itself because the paragraph is about what is LEFT, and the thing that is left is in a different place from the sac that was there.",
+   "terms": [
+    "yolk sac",
+    "shrivels",
+    "week 12",
+    "week 20",
+    "chorionic cavity",
+    "base of the cord",
+    "no nutrition",
+    "vestigial",
+    "not a yolk"
+   ]
+  },
+  {
+   "key": "chorion_cut",
+   "name": "Chorion, in section",
+   "label": "Chorion, in section",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#d98f8a",
+   "opacity": 0.85,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#chorion_cut+cut"
+   },
+   "narration": "The same structure seen in the MEDIAN section. It is a separate structure because a structure carries one ref and a beat that sections the conceptus and a beat that does not are two pictures of one part. The section is in the GEOMETRY and not in the player's clip plane, deliberately: measure-scene-visibility.mjs reimplements SHOW/HIDE/HIGHLIGHT/ROTATE/SET_STAGE and not CROSS_SECTION, so a section that lives in the clip plane is invisible to the one tool that measures the picture a student looks at.",
+   "narration_from": "NEW — a section variant.",
+   "terms": [
+    "section",
+    "median",
+    "sagittal"
+   ]
+  },
+  {
+   "key": "extraembryonic_mesoderm_cut",
+   "name": "Extraembryonic mesoderm, in section",
+   "label": "Extraembryonic mesoderm, in section",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#c9a79c",
+   "opacity": 0.9,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#extraembryonic_mesoderm_cut+cut"
+   },
+   "narration": "The same structure seen in the MEDIAN section. It is a separate structure because a structure carries one ref and a beat that sections the conceptus and a beat that does not are two pictures of one part. The section is in the GEOMETRY and not in the player's clip plane, deliberately: measure-scene-visibility.mjs reimplements SHOW/HIDE/HIGHLIGHT/ROTATE/SET_STAGE and not CROSS_SECTION, so a section that lives in the clip plane is invisible to the one tool that measures the picture a student looks at.",
+   "narration_from": "NEW — a section variant.",
+   "terms": [
+    "section",
+    "median",
+    "sagittal"
+   ]
+  },
+  {
+   "key": "chorionic_cavity_cut",
+   "name": "Chorionic cavity, in section",
+   "label": "Chorionic cavity, in section",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#3f6d86",
+   "opacity": 0.55,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#chorionic_cavity_cut+cut"
+   },
+   "narration": "The same structure seen in the MEDIAN section. It is a separate structure because a structure carries one ref and a beat that sections the conceptus and a beat that does not are two pictures of one part. The section is in the GEOMETRY and not in the player's clip plane, deliberately: measure-scene-visibility.mjs reimplements SHOW/HIDE/HIGHLIGHT/ROTATE/SET_STAGE and not CROSS_SECTION, so a section that lives in the clip plane is invisible to the one tool that measures the picture a student looks at.",
+   "narration_from": "NEW — a section variant.",
+   "terms": [
+    "section",
+    "median",
+    "sagittal"
+   ]
+  },
+  {
+   "key": "amnion_cut",
+   "name": "Amnion, in section",
+   "label": "Amnion, in section",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#d8e6ef",
+   "opacity": 1.0,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#amnion_cut+cut"
+   },
+   "narration": "The same structure seen in the MEDIAN section. It is a separate structure because a structure carries one ref and a beat that sections the conceptus and a beat that does not are two pictures of one part. The section is in the GEOMETRY and not in the player's clip plane, deliberately: measure-scene-visibility.mjs reimplements SHOW/HIDE/HIGHLIGHT/ROTATE/SET_STAGE and not CROSS_SECTION, so a section that lives in the clip plane is invisible to the one tool that measures the picture a student looks at.",
+   "narration_from": "NEW — a section variant.",
+   "terms": [
+    "section",
+    "median",
+    "sagittal"
+   ]
+  },
+  {
+   "key": "amniotic_cavity_cut",
+   "name": "Amniotic cavity, in section",
+   "label": "Amniotic cavity, in section",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#5dade2",
+   "opacity": 0.35,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#amniotic_cavity_cut+cut"
+   },
+   "narration": "The same structure seen in the MEDIAN section. It is a separate structure because a structure carries one ref and a beat that sections the conceptus and a beat that does not are two pictures of one part. The section is in the GEOMETRY and not in the player's clip plane, deliberately: measure-scene-visibility.mjs reimplements SHOW/HIDE/HIGHLIGHT/ROTATE/SET_STAGE and not CROSS_SECTION, so a section that lives in the clip plane is invisible to the one tool that measures the picture a student looks at.",
+   "narration_from": "NEW — a section variant.",
+   "terms": [
+    "section",
+    "median",
+    "sagittal"
+   ]
+  },
+  {
+   "key": "epiblast_cut",
+   "name": "Epiblast, in section",
+   "label": "Epiblast, in section",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#f0dcc0",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#epiblast_cut+cut"
+   },
+   "narration": "The same structure seen in the MEDIAN section. It is a separate structure because a structure carries one ref and a beat that sections the conceptus and a beat that does not are two pictures of one part. The section is in the GEOMETRY and not in the player's clip plane, deliberately: measure-scene-visibility.mjs reimplements SHOW/HIDE/HIGHLIGHT/ROTATE/SET_STAGE and not CROSS_SECTION, so a section that lives in the clip plane is invisible to the one tool that measures the picture a student looks at.",
+   "narration_from": "NEW — a section variant.",
+   "terms": [
+    "section",
+    "median",
+    "sagittal"
+   ]
+  },
+  {
+   "key": "hypoblast_cut",
+   "name": "Hypoblast, in section",
+   "label": "Hypoblast, in section",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#e8cfa8",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#hypoblast_cut+cut"
+   },
+   "narration": "The same structure seen in the MEDIAN section. It is a separate structure because a structure carries one ref and a beat that sections the conceptus and a beat that does not are two pictures of one part. The section is in the GEOMETRY and not in the player's clip plane, deliberately: measure-scene-visibility.mjs reimplements SHOW/HIDE/HIGHLIGHT/ROTATE/SET_STAGE and not CROSS_SECTION, so a section that lives in the clip plane is invisible to the one tool that measures the picture a student looks at.",
+   "narration_from": "NEW — a section variant.",
+   "terms": [
+    "section",
+    "median",
+    "sagittal"
+   ]
+  },
+  {
+   "key": "exocoelomic_membrane_cut",
+   "name": "Heuser's membrane, in section",
+   "label": "Heuser's membrane, in section",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#ead9a0",
+   "opacity": 0.75,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#exocoelomic_membrane_cut@0.05+cut"
+   },
+   "narration": "The same structure seen in the MEDIAN section. It is a separate structure because a structure carries one ref and a beat that sections the conceptus and a beat that does not are two pictures of one part. The section is in the GEOMETRY and not in the player's clip plane, deliberately: measure-scene-visibility.mjs reimplements SHOW/HIDE/HIGHLIGHT/ROTATE/SET_STAGE and not CROSS_SECTION, so a section that lives in the clip plane is invisible to the one tool that measures the picture a student looks at.",
+   "narration_from": "NEW — a section variant.",
+   "terms": [
+    "section",
+    "median",
+    "sagittal"
+   ]
+  },
+  {
+   "key": "primary_yolk_sac_cut",
+   "name": "Primary yolk sac, in section",
+   "label": "Primary yolk sac, in section",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#f7dc6f",
+   "opacity": 0.45,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#primary_yolk_sac_cut@0.05+cut"
+   },
+   "narration": "The same structure seen in the MEDIAN section. It is a separate structure because a structure carries one ref and a beat that sections the conceptus and a beat that does not are two pictures of one part. The section is in the GEOMETRY and not in the player's clip plane, deliberately: measure-scene-visibility.mjs reimplements SHOW/HIDE/HIGHLIGHT/ROTATE/SET_STAGE and not CROSS_SECTION, so a section that lives in the clip plane is invisible to the one tool that measures the picture a student looks at.",
+   "narration_from": "NEW — a section variant.",
+   "terms": [
+    "section",
+    "median",
+    "sagittal"
+   ]
+  },
+  {
+   "key": "secondary_yolk_sac_cut",
+   "name": "Secondary yolk sac, in section",
+   "label": "Secondary yolk sac, in section",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#f4d03f",
+   "opacity": 0.6,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#secondary_yolk_sac_cut+cut"
+   },
+   "narration": "The same structure seen in the MEDIAN section. It is a separate structure because a structure carries one ref and a beat that sections the conceptus and a beat that does not are two pictures of one part. The section is in the GEOMETRY and not in the player's clip plane, deliberately: measure-scene-visibility.mjs reimplements SHOW/HIDE/HIGHLIGHT/ROTATE/SET_STAGE and not CROSS_SECTION, so a section that lives in the clip plane is invisible to the one tool that measures the picture a student looks at.",
+   "narration_from": "NEW — a section variant.",
+   "terms": [
+    "section",
+    "median",
+    "sagittal"
+   ]
+  },
+  {
+   "key": "epiblast_cutz",
+   "name": "Epiblast, cut across",
+   "label": "Epiblast, cut across",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#f0dcc0",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#epiblast_cutz+cutz"
+   },
+   "narration": "The same structure seen in the TRANSVERSE section — cut across the body, read from the cranial end, which is the plane the beat that uses it names in its own words. Same argument as the median variants for why the cut is in the geometry.",
+   "narration_from": "NEW — a transverse section variant.",
+   "terms": [
+    "section",
+    "transverse",
+    "across"
+   ]
+  },
+  {
+   "key": "hypoblast_cutz",
+   "name": "Hypoblast, cut across",
+   "label": "Hypoblast, cut across",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#e8cfa8",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#hypoblast_cutz+cutz"
+   },
+   "narration": "The same structure seen in the TRANSVERSE section — cut across the body, read from the cranial end, which is the plane the beat that uses it names in its own words. Same argument as the median variants for why the cut is in the geometry.",
+   "narration_from": "NEW — a transverse section variant.",
+   "terms": [
+    "section",
+    "transverse",
+    "across"
+   ]
+  },
+  {
+   "key": "primitive_gut_cutz",
+   "name": "Primitive gut tube, cut across",
+   "label": "Primitive gut tube, cut across",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#d4ac0d",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#primitive_gut_cutz+cutz"
+   },
+   "narration": "The same structure seen in the TRANSVERSE section — cut across the body, read from the cranial end, which is the plane the beat that uses it names in its own words. Same argument as the median variants for why the cut is in the geometry.",
+   "narration_from": "NEW — a transverse section variant.",
+   "terms": [
+    "section",
+    "transverse",
+    "across"
+   ]
+  },
+  {
+   "key": "vitelline_duct_cutz",
+   "name": "Vitelline duct, cut across",
+   "label": "Vitelline duct, cut across",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#ca6f1e",
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#vitelline_duct_cutz@0.48+cutz"
+   },
+   "narration": "The same structure seen in the TRANSVERSE section — cut across the body, read from the cranial end, which is the plane the beat that uses it names in its own words. Same argument as the median variants for why the cut is in the geometry.",
+   "narration_from": "NEW — a transverse section variant.",
+   "terms": [
+    "section",
+    "transverse",
+    "across"
+   ]
+  },
+  {
+   "key": "secondary_yolk_sac_cutz",
+   "name": "Secondary yolk sac, cut across",
+   "label": "Secondary yolk sac, cut across",
+   "role": "context",
+   "group": "Seen in section",
+   "color": "#f4d03f",
+   "opacity": 0.6,
+   "refs": {
+    "procedural": "amniotic-cavity-yolk-sac#secondary_yolk_sac_cutz+cutz"
+   },
+   "narration": "The same structure seen in the TRANSVERSE section — cut across the body, read from the cranial end, which is the plane the beat that uses it names in its own words. Same argument as the median variants for why the cut is in the geometry.",
+   "narration_from": "NEW — a transverse section variant.",
+   "terms": [
+    "section",
+    "transverse",
+    "across"
+   ]
+  }
+ ],
+ "views": [
+  {
+   "mode": "cross_section",
+   "beat": 1,
+   "title": "Cut it: a balloon above, a balloon below",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "exocoelomic_membrane_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "primary_yolk_sac_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "hypoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "amnion_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "amniotic_cavity_cut"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.05
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "amniotic_cavity_cut",
+     "intensity": 0.9
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "primary_yolk_sac_cut",
+     "intensity": 0.9
+    }
+   ],
+   "narration": "Start with the cut drawing. Disc in the middle, amniotic cavity above it, yolk sac below it. The layer that lines each cavity is the layer nearest it — epiblast roofs nothing and floors the amnion, hypoblast floors nothing and roofs the yolk sac. Learn the sandwich this way up once and you will never have to redraw it.",
+   "narration_from": "sequence-version view beat 1 — carried across verbatim. The CROSS_SECTION op is gone and the section is in the geometry instead — see any _cut structure's note for why. The lateral camera is the one that sees into a median section, because viz3d puts it at +x looking towards -x and the cut removes x > 0. THE WALL WAS DROPPED FROM THIS BEAT after the visibility walk measured the amniotic cavity at 0.208% of the frame against the 0.30% floor for a structure the beat points at. The narration names the disc, the cavity above it and the sac below it and never names the chorion, so the two outer shells were only setting the camera's framing — and framing on a 0.4 mm ball to show a 50 um slit is the composition decision RENDER-STANDARD 3.aa says to make on the number. The wall is drawn in beats 4 and 5, which are about it.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration is about",
+     "measure": "day",
+     "op": "near",
+     "value": 9,
+     "tol": 0.3,
+     "note": "The clock is a declared map from t to post-fertilisation days, so this asserts that the beat is pointed at the instant its words describe. It is not what PINS the beat."
+    },
+    {
+     "id": "B1-slit",
+     "claim": "the amniotic cavity is a SLIT and not a balloon",
+     "measure": "amnEccBuilt",
+     "op": "atMost",
+     "value": 0.06,
+     "note": "Read off the BUILT cavity's bounding box: its vertical extent over its cranio-caudal one."
+    },
+    {
+     "id": "B1-dorsal",
+     "claim": "the balloon above is dorsal to the disc",
+     "measure": "amnDorsalSep",
+     "op": "atLeast",
+     "value": 0.35,
+     "note": "Measured on built centroids and normalised to the cavity's own height; row A asserts the stronger edge form of the same claim."
+    },
+    {
+     "id": "B1-ventral",
+     "claim": "and the balloon below is ventral to it",
+     "measure": "primVentralSep",
+     "op": "atLeast",
+     "value": 0.35
+    },
+    {
+     "id": "B1-plate",
+     "claim": "the disc between them is a plate",
+     "measure": "discFlatBuilt",
+     "op": "atMost",
+     "value": 0.55,
+     "note": "Built vertical extent over built cranio-caudal extent, over both epithelia together."
+    },
+    {
+     "id": "B1-pin",
+     "claim": "and it draws the sac at the size it is on that day",
+     "measure": "chorSacDiamMm",
+     "op": "near",
+     "value": 0.4145,
+     "tol": 0.0332,
+     "note": "THE PINNING CLAIM. The chorionic sac's diameter is strictly increasing in t across the whole model, so an 8% tolerance fails at every displacement check-beat-claims.mjs applies. It is read off the declared sac table at this beat's own t, and the day claim above it is the one that says the beat sits where its words say."
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 2,
+   "title": "Day 8 and day 9 — each cavity is made differently",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "hypoblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "amnion"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "amniotic_cavity"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "exocoelomic_membrane"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "primary_yolk_sac"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.05
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "amniotic_cavity",
+     "intensity": 0.9
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "exocoelomic_membrane",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "amniotic_cavity",
+     "to": "primary_yolk_sac",
+     "kind": "opposite sides of the same disc"
+    }
+   ],
+   "narration": "The two cavities are not made the same way, and that is the examinable difference. The amniotic cavity opens inside the epiblast — nothing migrates, a space simply appears and amnioblasts roof it. The yolk sac is the reverse: hypoblast cells migrate out and line a cavity that already existed, the old blastocyst cavity. One is a space that opened, the other is a space that was lined.",
+   "narration_from": "sequence-version view beat 2 — carried across verbatim. The picture changes from beat 1 by dropping the section and the wall: what is left is the disc with one cavity above and one below, and the two LININGS highlighted instead of the two cavities, because the paragraph is about how each lining got there.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration is about",
+     "measure": "day",
+     "op": "near",
+     "value": 9,
+     "tol": 0.3
+    },
+    {
+     "id": "B2-lined",
+     "claim": "the cavity the hypoblast LINED is the old blastocyst cavity, so it fills most of the conceptus while the amniotic cavity is a fifth of it",
+     "measure": "amnOverSacBuilt",
+     "op": "between",
+     "value": [
+      0.15,
+      0.3
+     ],
+     "note": "The built amnion's mean radius over the built sac's. The asymmetry IS the paragraph's point: one space opened inside a sheet, the other was already there."
+    },
+    {
+     "id": "B2-ventral",
+     "claim": "the lined space is ventral to the disc",
+     "measure": "primVentralSep",
+     "op": "atLeast",
+     "value": 0.35
+    },
+    {
+     "id": "B2-pin",
+     "claim": "and it draws the sac at the size it is on that day",
+     "measure": "chorSacDiamMm",
+     "op": "near",
+     "value": 0.4145,
+     "tol": 0.0332,
+     "note": "THE PINNING CLAIM. The chorionic sac's diameter is strictly increasing in t across the whole model, so an 8% tolerance fails at every displacement check-beat-claims.mjs applies. It is read off the declared sac table at this beat's own t, and the day claim above it is the one that says the beat sits where its words say."
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 3,
+   "title": "The yolk sac is remade smaller",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "hypoblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "primary_yolk_sac_late"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "secondary_yolk_sac"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "exocoelomic_cysts"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.15
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "secondary_yolk_sac",
+     "intensity": 0.95
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "primary_yolk_sac_late",
+      "secondary_yolk_sac"
+     ],
+     "layout": "stacked"
+    }
+   ],
+   "narration": "Days twelve to thirteen. A second wave of hypoblast pushes into the primary sac and pinches off a smaller one — the secondary or definitive yolk sac — leaving fragments of the old one as exocoelomic cysts. If a question asks which yolk sac makes blood cells and germ cells, or which one is seen on a scan, the answer is always the secondary.",
+   "narration_from": "sequence-version view beat 3 — carried across verbatim. The TRACE_STRUCTURE op on a concept: pseudo-key is gone — the procedural adapter degrades TRACE to a highlight and the concept key resolves to nothing — and the comparison the paragraph is about is made with COMPARE_STRUCTURES on the two real sacs instead. primary_yolk_sac_late is the primary sac at day 12.5, which is this beat's own instant, so nothing here is drawn at another beat's t.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the days its own narration names",
+     "measure": "day",
+     "op": "near",
+     "value": 12.5,
+     "tol": 0.3
+    },
+    {
+     "id": "B3-smaller",
+     "claim": "the second sac really is smaller: the primary's mean radius is over one and a half times the definitive one's",
+     "measure": "primOverSecEqR",
+     "op": "atLeast",
+     "value": 1.5,
+     "note": "Both read off built geometry as the radius of a sphere of the same volume, which is the only fair comparison between a truncated sphere and a whole one."
+    },
+    {
+     "id": "B3-size",
+     "claim": "and the definitive sac is a few hundred microns across at this stage",
+     "measure": "secYolkDiamUm",
+     "op": "between",
+     "value": [
+      200,
+      340
+     ],
+     "note": "Diameter in microns, off the built sac. The published secondary yolk sac at this age is about 0.3 mm. CLAUSE REMOVED 2026-10-03 by the rework run, review round 1 finding 3: this used to read 'the few hundred microns an early scan sees', which conflated the sac's ANATOMICAL size on day 12.5 with its SONOGRAPHIC size. Nothing is seen on a scan on day 12.5 — the sonographic yolk sac is 3-5 mm and appears from about five weeks menstrual, which is where beat 5 now sits. The measure and its band are unchanged; only the sentence claimed something the number never did."
+    },
+    {
+     "id": "B3-cysts",
+     "claim": "with the scraps of the old one left behind as cysts",
+     "measure": "cystCountBuilt",
+     "op": "equals",
+     "value": 7
+    },
+    {
+     "id": "B3-pin",
+     "claim": "and it draws the sac at the size it is on that day",
+     "measure": "chorSacDiamMm",
+     "op": "near",
+     "value": 0.8958,
+     "tol": 0.0717,
+     "note": "THE PINNING CLAIM. The chorionic sac's diameter is strictly increasing in t across the whole model, so an 8% tolerance fails at every displacement check-beat-claims.mjs applies. It is read off the declared sac table at this beat's own t, and the day claim above it is the one that says the beat sits where its words say."
+    }
+   ]
+  },
+  {
+   "mode": "cross_section",
+   "beat": 4,
+   "title": "Day 13: the whole arrangement in one cut",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "chorion_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "extraembryonic_mesoderm_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "chorionic_cavity_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "hypoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "amnion_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "amniotic_cavity_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "secondary_yolk_sac_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "exocoelomic_cysts"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "connecting_stalk"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.17
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "chorionic_cavity_cut",
+     "intensity": 0.85
+    }
+   ],
+   "narration": "This is the picture every later question assumes. One cut, end of week two. The disc in the middle with the amniotic cavity on its dorsal side and the definitive yolk sac hanging below it. Round the outside, the chorion. And between the two — new since day twelve — the chorionic cavity, opened up inside the extraembryonic mesoderm, with the embryo and its two balloons slung in it on the connecting stalk at the caudal end. Three cavities, and a student should be able to name which layer lines each: epiblast for the amniotic, hypoblast for the yolk sac, mesoderm for the chorionic.",
+   "narration_from": "NEW beat. There was no day-13 section in the sequence version — it went straight from the day-9 arrangement to the remodelling — and without it the chorionic cavity is first named in a beat nine weeks later, by which time it is almost gone. It changes the picture from beat 1 by having a third cavity in it, a stalk, and a definitive sac where the primary one was.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits at the end of week two",
+     "measure": "day",
+     "op": "near",
+     "value": 13,
+     "tol": 0.3
+    },
+    {
+     "id": "B4-coelom",
+     "claim": "the chorionic cavity is the biggest space in the picture — at this stage it is nearly the whole sac",
+     "measure": "coelomFracBuilt",
+     "op": "atLeast",
+     "value": 0.9,
+     "note": "The built coelom shell's volume over the built volume of the sphere that bounds it."
+    },
+    {
+     "id": "B4-sac",
+     "claim": "and the whole conceptus is about a millimetre across",
+     "measure": "chorSacDiamMm",
+     "op": "near",
+     "value": 1.0,
+     "tol": 0.08,
+     "note": "THE PINNING CLAIM. The chorionic sac's diameter is strictly increasing in t across the whole model, so an 8% tolerance fails at every displacement check-beat-claims.mjs applies. It is read off the declared sac table at this beat's own t, and the day claim above it is the one that says the beat sits where its words say."
+    },
+    {
+     "id": "B4-ys",
+     "claim": "with a definitive yolk sac of about three hundred microns",
+     "measure": "secYolkDiamUm",
+     "op": "between",
+     "value": [
+      250,
+      360
+     ]
+    }
+   ]
+  },
+  {
+   "mode": "location",
+   "beat": 5,
+   "title": "The two cavities on an early scan",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "chorion"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "extraembryonic_mesoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "chorionic_cavity"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "hypoblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "amnion"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "amniotic_cavity"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "secondary_yolk_sac"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.34
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "secondary_yolk_sac",
+     "intensity": 0.95
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "chorionic_cavity",
+     "to": "secondary_yolk_sac",
+     "kind": "the first structure seen inside the sac"
+    }
+   ],
+   "narration": "Close where a student will meet this in practice. The gestational sac on a five-week scan is the chorionic cavity, and the small ring inside it is the secondary yolk sac — the finding that says the pregnancy is genuinely in the uterus. Shortly after, the amniotic cavity and the yolk sac either side of the disc give the double bleb sign. An absent, oversized or calcified yolk sac is an early sign that the pregnancy is not going to continue.",
+   "narration_from": "sequence-version view beat 10 — carried across verbatim. The scan_cavities beat, moved from the end of the sequence to the day it is about. Its first sentence identifies the gestational sac WITH the chorionic cavity, which is a structure in this scene, so the beat can show the thing rather than describe it. The ISOLATE_REGION on a clinical group is gone — the group was a set of teaching beats, and the structures now exist. THE CONNECTING STALK WAS DROPPED FROM THIS BEAT'S SHOWN LIST. The visibility walk measured it at 0% on both measures here: at day 16 the stalk runs out behind the chorion and the mesoderm from an anterior camera, and nothing in the beat points at it. RENDER-STANDARD 3.aa: \"dropping it is the cheaper answer whenever the claim it carried is already made\" — and the stalk's own claim is made in beats 4, 8 and 9, which show it from the side.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration names: a five-week scan is five weeks MENSTRUAL, which is day 21 post-fertilisation, the clock this model runs on",
+     "measure": "day",
+     "op": "near",
+     "value": 21,
+     "tol": 0.5,
+     "note": "MOVED FROM DAY 16 2026-10-03 by the rework run, review round 1 finding 3. The beat was written against 'week three' — true of day 16 post-fertilisation — while its narration describes a FIVE-WEEK SCAN, and five weeks menstrual is day 21. The two-week offset is the one this file's header calls the single easiest way to be wrong by a lot here."
+    },
+    {
+     "id": "B5-double",
+     "claim": "the amniotic cavity and the yolk sac sit either side of the disc, which is what gives the double bleb",
+     "measure": "secVentralSep",
+     "op": "atLeast",
+     "value": 0.35,
+     "note": "With B5-dorsal below, this is the double bleb as two measurements rather than a phrase."
+    },
+    {
+     "id": "B5-dorsal",
+     "claim": "the amniotic cavity on the dorsal side",
+     "measure": "amnDorsalSep",
+     "op": "atLeast",
+     "value": 0.35
+    },
+    {
+     "id": "B5-small",
+     "claim": "and the amniotic cavity is still much the smaller of the two spaces inside the gestational sac",
+     "measure": "amnOverSacBuilt",
+     "op": "between",
+     "value": [
+      0.12,
+      0.26
+     ]
+    },
+    {
+     "id": "B5-pin",
+     "claim": "drawn at the size the sac is on that day — about five millimetres, which is what a real five-week gestational sac measures",
+     "measure": "chorSacDiamMm",
+     "op": "near",
+     "value": 5.0,
+     "tol": 0.4,
+     "note": "THE PINNING CLAIM. The chorionic sac's diameter is strictly increasing in t across the whole model, so an 8% tolerance fails at every displacement check-beat-claims.mjs applies. It is read off the declared sac table at this beat's own t, and the day claim above it is the one that says the beat sits where its words say."
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 6,
+   "title": "What the yolk sac gives away before it goes",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "hypoblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "secondary_yolk_sac"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "blood_islands"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "germ_cells"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "allantois"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "connecting_stalk"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.34
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "blood_islands",
+     "intensity": 0.9
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "germ_cells",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "secondary_yolk_sac",
+     "to": "germ_cells",
+     "kind": "germ cells arise in its wall"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "secondary_yolk_sac",
+     "to": "blood_islands",
+     "kind": "first blood islands on its surface"
+    }
+   ],
+   "narration": "Three handovers, and they are the whole reason the yolk sac is examinable. The first blood cells and vessels form on it in week three. The primordial germ cells appear in its wall and then migrate to the gonadal ridges. And in week four its roof is folded up into the body to become the primitive gut. After that it has nothing left to give.",
+   "narration_from": "sequence-version view beat 7 — carried across verbatim. ONE OP WAS DROPPED AND IT MATTERS. The sequence version also pointed a SHOW_RELATIONSHIP at the primitive gut here. At day 21 this model builds no gut — folding has not started, which is what the paragraph itself says (\"in week four\") — so the op would have pointed at a structure that draws nothing, which is the defect RENDER-STANDARD 3.x names first in its list. The third handover is narrated here and DRAWN in beat 7, which is the beat for it. The words are unchanged.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits in week three, where the paragraph puts both handovers",
+     "measure": "day",
+     "op": "near",
+     "value": 21,
+     "tol": 0.5
+    },
+    {
+     "id": "B6-islands",
+     "claim": "the blood islands are drawn on the yolk sac wall",
+     "measure": "islandCountBuilt",
+     "op": "equals",
+     "value": 14
+    },
+    {
+     "id": "B6-germ",
+     "claim": "and so are the germ cells",
+     "measure": "germPresent",
+     "op": "equals",
+     "value": 1
+    },
+    {
+     "id": "B6-ys",
+     "claim": "the sac they are on is about one and a half millimetres across by now",
+     "measure": "secYolkDiamUm",
+     "op": "between",
+     "value": [
+      1300,
+      1700
+     ]
+    },
+    {
+     "id": "B6-pin",
+     "claim": "and the conceptus is five millimetres",
+     "measure": "chorSacDiamMm",
+     "op": "near",
+     "value": 5.0,
+     "tol": 0.4,
+     "note": "THE PINNING CLAIM. The chorionic sac's diameter is strictly increasing in t across the whole model, so an 8% tolerance fails at every displacement check-beat-claims.mjs applies. It is read off the declared sac table at this beat's own t, and the day claim above it is the one that says the beat sits where its words say."
+    }
+   ]
+  },
+  {
+   "mode": "cross_section",
+   "beat": 7,
+   "title": "Folding separates the gut from the sac",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast_cutz"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "hypoblast_cutz"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "primitive_gut_cutz"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "vitelline_duct_cutz"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "secondary_yolk_sac_cutz"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.48
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "vitelline_duct_cutz",
+     "intensity": 0.95
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "primitive_gut_cutz",
+     "to": "vitelline_duct_cutz",
+     "kind": "the narrowed neck between them"
+    }
+   ],
+   "narration": "Cut the folding embryo across and the geometry explains itself. The lateral folds pinch the yolk sac into an hourglass. The upper half is inside the embryo and becomes the gut tube; the lower half stays outside as the yolk sac; the waist between them is the vitelline duct. Everything that goes wrong at the umbilicus later is that waist failing to close.",
+   "narration_from": "sequence-version view beat 8 — carried across verbatim. THE NARRATION SAYS \"CUT THE FOLDING EMBRYO ACROSS\", SO THE PICTURE IS A TRANSVERSE CUT AND NOT A MEDIAN ONE. That cost the model a second section window and two surfaces of revolution; the alternative was to draw the median cut and put the discrepancy in gaps[], which is \"a camera is not a fix\" wearing a different hat. The anterior camera is the one that reads it, because +z is CRANIAL in this model and viz3d puts `anterior` at +z. What is NOT drawn is the folding itself — the body is a straight lens that thickens rather than a C — and that is declared in gaps[]: cranio-caudal-folding.js and lateral-folding.js are separate queue items and own it. The gut tube's calibre was raised from 0.30 to 0.42 of the body's half-thickness against this beat's own measurement — its cut face read 0.271% against the 0.30% floor — and not by eye. The model file says so at rGut().",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits at the end of week four, where the paragraph puts the folding",
+     "measure": "day",
+     "op": "near",
+     "value": 28,
+     "tol": 0.6
+    },
+    {
+     "id": "B7-hourglass",
+     "claim": "the neck between the gut and the sac is a WAIST: at most 0.55 of the gut tube's own radius",
+     "measure": "ductWaistOverGut",
+     "op": "atMost",
+     "value": 0.55,
+     "note": "Both sides measured on built vertices — the smallest distance to the axis over the middle third of the duct, against the largest radius of the gut tube."
+    },
+    {
+     "id": "B7-gut",
+     "claim": "and the gut tube that has been pinched up into the body runs most of its length",
+     "measure": "gutLengthOverDisc",
+     "op": "atLeast",
+     "value": 0.6
+    },
+    {
+     "id": "B7-pin",
+     "claim": "at a conceptus twelve millimetres across",
+     "measure": "chorSacDiamMm",
+     "op": "near",
+     "value": 12.0,
+     "tol": 0.96,
+     "note": "THE PINNING CLAIM. The chorionic sac's diameter is strictly increasing in t across the whole model, so an 8% tolerance fails at every displacement check-beat-claims.mjs applies. It is read off the declared sac table at this beat's own t, and the day claim above it is the one that says the beat sits where its words say."
+    }
+   ]
+  },
+  {
+   "mode": "location",
+   "beat": 8,
+   "title": "The cord is three things in a sleeve",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "hypoblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cord_sheath"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "connecting_stalk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "vitelline_duct"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "allantois"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "secondary_yolk_sac"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.48
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "cord_sheath",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "cord_sheath",
+     "to": "connecting_stalk",
+     "kind": "the sleeve and what it sleeves"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "cord_sheath",
+     "to": "vitelline_duct",
+     "kind": "and the yolk sac stalk with it"
+    }
+   ],
+   "narration": "Look at the cord as a bundle rather than as an organ. The amnion has been carried round the body and has met itself at the caudal end, and what it closes over is the connecting stalk, the vitelline duct, and the allantois running up inside the stalk towards the bladder. Name those three and you have named everything an umbilical cord is made of, plus the jelly and the vessels. It also explains two things students find arbitrary: why a persistent vitelline duct and a persistent urachus both present at the umbilicus, and why they are completely different diseases — they were different tubes that happened to travel in the same sleeve.",
+   "narration_from": "NEW beat. The sequence version narrated the sheathing inside the amnion_grows beat and never drew the bundle, so the cord arrived as a sentence. It changes the picture from beat 7 by being the same day seen from outside, uncut, with the sleeve translucent over its three contents. THE GUT WAS DROPPED FROM THIS BEAT: measured at 0% on both measures, because it is inside a body whose two epithelia are opaque and this beat looks at the cord from outside. It is drawn in beat 7, which cuts the body open, and the narration here names the three things in the SLEEVE rather than the gut.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits at the end of week four",
+     "measure": "day",
+     "op": "near",
+     "value": 28,
+     "tol": 0.6
+    },
+    {
+     "id": "B8-sleeve",
+     "claim": "the sleeve is wider than the stalk it sleeves",
+     "measure": "sheathOverStalkBuilt",
+     "op": "atLeast",
+     "value": 1.05,
+     "note": "Both radii measured on built vertices as the largest perpendicular distance from the stalk's own axis — NOT as bounding boxes, because the sleeve is deliberately shorter than the stalk while the amnion is still working its way out along it, and a box comparison grades that length instead of the calibre. The first version did exactly that and failed a correct sleeve at 0.67."
+    },
+    {
+     "id": "B8-allantois",
+     "claim": "the allantois is in there with it",
+     "measure": "allantoisPresent",
+     "op": "equals",
+     "value": 1
+    },
+    {
+     "id": "B8-duct",
+     "claim": "and so is the vitelline duct, with a real calibre at this stage",
+     "measure": "ductWaistUnits",
+     "op": "atLeast",
+     "value": 3.0
+    },
+    {
+     "id": "B8-pin",
+     "claim": "at a conceptus twelve millimetres across",
+     "measure": "chorSacDiamMm",
+     "op": "near",
+     "value": 12.0,
+     "tol": 0.96,
+     "note": "THE PINNING CLAIM. The chorionic sac's diameter is strictly increasing in t across the whole model, so an 8% tolerance fails at every displacement check-beat-claims.mjs applies. It is read off the declared sac table at this beat's own t, and the day claim above it is the one that says the beat sits where its words say."
+    }
+   ]
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 9,
+   "title": "The remnants you will be asked to name",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "hypoblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "vitelline_duct_closing"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "allantois"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "secondary_yolk_sac"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "connecting_stalk"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.82
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "vitelline_duct_closing",
+     "intensity": 0.95
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "allantois",
+     "intensity": 0.95
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "vitelline_duct_closing",
+      "allantois"
+     ],
+     "layout": "side-by-side"
+    }
+   ],
+   "narration": "Two stalks leave the yolk sac and two remnants are left. The vitelline duct runs to the ileum; if it persists you get Meckel's diverticulum with its rule of twos, or a fistula, cyst or band. The allantois runs to the bladder; its remnant is the urachus and then the median umbilical ligament, and if it persists you get urine at the umbilicus. Same umbilicus, two entirely different ducts, and students mix them constantly — one drains gut, the other drains bladder.",
+   "narration_from": "sequence-version view beat 9 — carried across verbatim. Moved to day 56 — week eight, inside the narrated weeks six to ten — because that is where the duct is actually closing, and the beat is about what the two ducts leave behind. vitelline_duct_closing is pinned at this beat's own t. The HIDE of the amnion group is now unnecessary because the ops hide everything first and name what is shown. THE CORD WAS DROPPED FROM THIS BEAT, and that fixed three measurements at once. The walk reported the subject CUT OFF at the frame edge (1,894 subject pixels on a border row), the allantois at 0% while the beat points at it, and the epiblast at 0.002%: the sleeve ran out to the chorion, so the camera framed a 25 mm cord and drew the sleeve over the two ducts the beat is entirely about. This beat is the two REMNANTS at the umbilicus — the duct that runs to the ileum and the duct that runs to the bladder — and it now frames them. The cord as a bundle is beat 8. THE EPIBLAST WAS DROPPED FROM THIS BEAT TOO, and the reason is the camera rather than the layer: the yolk sac hangs 14 mm below the embryo here, so the subject's centre is well under the body and a lateral camera levelled on it looks at the body's UNDERSIDE. The walk measured the dorsal layer at 0.001% — occluded by the embryo itself, which is what being seen from below means. The beat is about the two ducts leaving the umbilicus; the hypoblast gives it the body it needs, and the epiblast is drawn in beats 1, 2 and 8.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits inside the weeks the duct normally closes in",
+     "measure": "day",
+     "op": "near",
+     "value": 56,
+     "tol": 1.5
+    },
+    {
+     "id": "B9-closing",
+     "claim": "the duct has narrowed to under a fifth of the gut tube it leaves",
+     "measure": "ductWaistOverGut",
+     "op": "atMost",
+     "value": 0.2,
+     "note": "Measured on the day-28 duct in beat 7 at 0.3559 and here at 0.1780: the narration's \"normally closes\" as a number. Acceptance row J2 asserts the same halving."
+    },
+    {
+     "id": "B9-allantois",
+     "claim": "and the other duct, the one that runs to the bladder, is still there",
+     "measure": "allantoisPresent",
+     "op": "equals",
+     "value": 1
+    },
+    {
+     "id": "B9-amnion",
+     "claim": "the amnion has taken over more than half the sac by now",
+     "measure": "amnOverSacBuilt",
+     "op": "between",
+     "value": [
+      0.5,
+      0.66
+     ]
+    },
+    {
+     "id": "B9-pin",
+     "claim": "at a conceptus forty millimetres across",
+     "measure": "chorSacDiamMm",
+     "op": "near",
+     "value": 40.0,
+     "tol": 3.2,
+     "note": "THE PINNING CLAIM. The chorionic sac's diameter is strictly increasing in t across the whole model, so an 8% tolerance fails at every displacement check-beat-claims.mjs applies. It is read off the declared sac table at this beat's own t, and the day claim above it is the one that says the beat sits where its words say."
+    }
+   ]
+  },
+  {
+   "mode": "location",
+   "beat": 10,
+   "title": "The amnion grows until there is nowhere left to grow",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "chorion"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "extraembryonic_mesoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "chorionic_cavity"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "amnion"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "amniotic_cavity"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cord_sheath"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "connecting_stalk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "secondary_yolk_sac"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "hypoblast"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.93
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "chorionic_cavity",
+     "intensity": 0.95
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "amnion",
+     "to": "chorion",
+     "kind": "about to fuse as the amniochorionic membrane"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "cord_sheath",
+     "to": "amnion",
+     "kind": "and the sleeve it left on the way"
+    }
+   ],
+   "narration": "Follow the amnion forward. It fills with fluid and expands into the chorionic cavity until, somewhere between weeks eight and twelve, that cavity is obliterated and amnion lies fused against chorion as a single membrane. On the way it wraps the connecting stalk and the yolk sac stalk into one sleeve — the umbilical cord. Two structures you will be asked about, the amniochorionic membrane and the cord, are both just consequences of this one expansion.",
+   "narration_from": "sequence-version view beat 4 — carried across verbatim. Moved to day 70 — week ten — which is inside the paragraph's own window and is where the model can SHOW the thing: the chorionic cavity is down to half its volume and the amnion is three quarters of the way out. The PEEL_LAYER op is gone; the procedural adapter degrades it and it would have hidden every structure in the layer. THE YOLK SAC REMNANT WAS DROPPED FROM THIS BEAT and given beat 11. Measured here at 0.001% of the frame: a 3 mm nodule beside a 54 mm sac is 0.003% of its area, so no composition of THIS beat can show it. Beat 11 frames the cord's chorionic end, where it is a readable fraction of the picture.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits inside the weeks the paragraph gives for the obliteration",
+     "measure": "day",
+     "op": "near",
+     "value": 70,
+     "tol": 1.5
+    },
+    {
+     "id": "B10-closing",
+     "claim": "the chorionic cavity is down to half its volume",
+     "measure": "coelomFracBuilt",
+     "op": "atMost",
+     "value": 0.55,
+     "note": "Built coelom over the built sphere that bounds it. Acceptance row F bisects the same measurement for the day it crosses a half and gets day 69.8 — week 9.98."
+    },
+    {
+     "id": "B10-amnion",
+     "claim": "and the amnion has three quarters of the sac's radius",
+     "measure": "amnOverSacBuilt",
+     "op": "atLeast",
+     "value": 0.72
+    },
+    {
+     "id": "B10-remnant",
+     "claim": "with the yolk sac already reduced to a nodule by the cord",
+     "measure": "remnantDiamUm",
+     "op": "atLeast",
+     "value": 150
+    },
+    {
+     "id": "B10-pin",
+     "claim": "at a conceptus fifty-four millimetres across",
+     "measure": "chorSacDiamMm",
+     "op": "near",
+     "value": 54.0,
+     "tol": 4.32,
+     "note": "THE PINNING CLAIM. The chorionic sac's diameter is strictly increasing in t across the whole model, so an 8% tolerance fails at every displacement check-beat-claims.mjs applies. It is read off the declared sac table at this beat's own t, and the day claim above it is the one that says the beat sits where its words say."
+    }
+   ]
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 11,
+   "title": "And the sac itself, reduced to a nodule by the cord",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "yolk_sac_remnant"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cord_sheath"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "connecting_stalk"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.93
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "yolk_sac_remnant",
+     "intensity": 0.95
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "yolk_sac_remnant",
+     "to": "cord_sheath",
+     "kind": "left between the membranes at the root of the cord"
+    }
+   ],
+   "narration": "The human yolk sac holds no yolk and feeds nothing. Once the placenta takes over, it shrinks and is left as a small pale nodule near the base of the cord, usually gone from view by the second half of pregnancy. Its whole importance is what it did in weeks three and four — the first blood, the germ cells, and the roof that became the gut.",
+   "narration_from": "sequence-version structure \"yolk_sac_fate\" — carried across verbatim. NEW BEAT, added because the walk proved the paragraph could not be shown anywhere else: the remnant measured 0.001% of beat 10's frame, and a 3 mm nodule beside a 54 mm sac cannot be made bigger without lying about it. This beat frames the cord's chorionic end instead — the sleeve, the stalk inside it and the nodule between the membranes — which is where the paragraph says to look (\"near the base of the cord\"). The paragraph was also on the yolk_sac_remnant structure and still is; a structure and the beat that draws it may carry the same words.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits in week ten, where the paragraph puts the shrivelling",
+     "measure": "day",
+     "op": "near",
+     "value": 70,
+     "tol": 1.5
+    },
+    {
+     "id": "B11-nodule",
+     "claim": "what is left of the yolk sac is a nodule a few millimetres across",
+     "measure": "remnantDiamUm",
+     "op": "between",
+     "value": [
+      1200,
+      3000
+     ],
+     "note": "Diameter in microns off the BUILT remnant. The published yolk sac remnant at this age is 3 to 5 mm and this model draws 1.9, at the small end and declared in gaps[]: the remnant is a little over half the radius of the sac it is the remnant of, which is the shrivelling the paragraph describes. The range was [150,900] while the remnant was a tenth of the sac, which is the error the visibility walk reported as a yellow pixel."
+    },
+    {
+     "id": "B11-pin",
+     "claim": "at a conceptus fifty-four millimetres across",
+     "measure": "chorSacDiamMm",
+     "op": "near",
+     "value": 54.0,
+     "tol": 4.32,
+     "note": "THE PINNING CLAIM — see any other beat."
+    }
+   ]
+  }
+ ],
+ "visibility_waivers": [
+  {
+   "view": 9,
+   "key": "__clipped__",
+   "why": "THE SUBJECT TOUCHES THE FRAME EDGE BY ABOUT A THOUSANDTH OF ITS PIXELS, AND IT IS PERSPECTIVE, NOT FRAMING. viz3d frames on the eight corners of the subject box with a FRAME_PAD of 1.05, and this beat's box projects to +/-0.952 in both axes — exactly the pad, with nothing to spare. The subject is also DEEP along the camera axis (the embryo is 11.9 mm across the x axis and the camera is lateral), and under a perspective projection a surface nearer the camera than the box's far face projects outside the corners that were framed. Measured: 1,263 subject pixels of 990,000 on a border row or column, which is a hairline on one edge of the body and no structure lost — every shown structure clears its floor. The honest fix is a smaller FRAME_PAD in viz3d for deep subjects, which is a player change and not this item's to make; it is reported in BUILD-LOG.md as a candidate finding."
+  }
+ ],
+ "provenance": {
+  "author": "task",
+  "authored_at": "2026-08-28",
+  "reauthored_at": "2026-10-03",
+  "reauthored_by": "model3d BUILD task",
+  "reauthor_note": "CONVERTED FROM THE SVG PANEL ENGINE TO A PROCEDURAL 3D SCENE, per the queue item's note: \"RE-AUTHORING, NOT WIRING ... these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts. two cavities.\" All fifteen of the old structures[] were beats. Every one of their narrations, and every one of the ten views' narrations, is carried across BYTE FOR BYTE: the scene was generated by a script that reads each paragraph out of the old file by key rather than retyping it, the old file is kept at viz-training/_amniotic-cavity-yolk-sac-preconversion.json, and the render harness re-asserts afterwards that all 25 paragraphs appear in this file verbatim. Two views and two structure beats could not become views and are in deferred_beats[] with their full text and the reason. The model is models3d/amniotic-cavity-yolk-sac.js, built in the same run.",
+  "preconversion": "viz-training/_amniotic-cavity-yolk-sac-preconversion.json",
+  "corrections": [
+   "2026-10-03, rework of review round 1 (build-run-2026-10-03T1106Z). THREE FINDINGS, THREE CHANGES, no narration touched — all 25 SVG-era paragraphs are still byte for byte what they were, and the harness re-asserts it.",
+   "F1 amnion recoloured #85c1e9 -> #d8e6ef, here AND in models3d/amniotic-cavity-yolk-sac.js's COL. The amniotic cavity is seen through its own roof, and the two blues differed by at most 40/255 before lighting, so the cavity cleared the visibility floor by one unit on beat 10 and three on beat 5. Measured after: peak 41 -> 88 on beat 10 and 44 -> 87 on beat 5. The cavity keeps #5dade2, which is what the SVG scene and the adjacent bilaminar-embryonic-disc scene both call it.",
+   "F2 chorionic_cavity opacity 0.22 -> 0.30 and extraembryonic_mesoderm 0.45 -> 0.32. Beat 10's own highlighted subject drew in 34 components with its largest holding 57.3% of its ink — a crescent, because at 0.22 behind a 0.45 mesoderm the coelom cleared 40/255 only where the eccentric shell is thick. Measured after: 1 component, largest holds 100.0%, ink 2.060% -> 9.192% of frame, peak 50 -> 67. RENDER-STANDARD 3.ab.",
+   "F3 beat 5 moved from t=0.24 (day 16) to t=0.34 (day 21) with its day and pin claims rewritten to the day its narration names. Its narration describes a FIVE-WEEK scan; five weeks menstrual is day 21 post-fertilisation, where this model already builds a 5.0 mm sac. All five of the beat's claims pass at the new instant with no band refitted, including 'still much the smaller of the two spaces' at 0.2279. Beat 3's B3-size sentence lost its sonographic clause for the same reason.",
+   "ALSO: the view-10 epiblast visibility waiver was REMOVED, not re-argued. It existed because the epiblast moved only 32/255 against the 40 floor; the F1 recolour lifts it to 43 on its own, so the waiver is spent and keeping it would hide a real failure later."
+  ],
+  "corrected_at": "2026-10-03T13:05:00Z",
+  "corrected_by": "the model3d REVIEW task (round 2)",
+  "correction_note": "ONE CORRECTION, IN THE MODEL AND NOT IN THIS FILE: models3d/amniotic-cavity-yolk-sac.js vdLength() now carries the vitelline duct's OWN birth ramp on its first term (0.25 * Rys(day) * rampDay(day, VD_OPEN, 26)). Before this, the definitive yolk sac was hung a duct-length below the hypoblast on EVERY day from day 8, while rVitelline() declares no duct before day 22 - the model's two declared laws disagreed about when the duct exists. The visible consequence was that beats 4, 5 and 6 drew the definitive yolk sac floating free beneath the disc across an empty gap (4.66 world units at day 13, 82% of the whole disc's thickness), in the three beats whose narration teaches 'hypoblast for the yolk sac' and 'the definitive yolk sac hanging below it'. Day 13 now separates by gapAt(rys) = 0.398, the anti-coincidence inset every adjacent pair in the file carries. Every day from 26 on is unchanged by construction, so beats 7 to 11 are bit-identical. Re-proved after the change: render harness ALL CHECKS PASS, visibility walk 11/11, check-beat-claims 51 claims 0 failures. No narration touched."
+ },
+ "deferred_beats": [
+  {
+   "title": "The fluid is a circuit, not a pool",
+   "from": "sequence-version view beat 5",
+   "narration": "The fetus urinates the fluid out and swallows it back, and breathes it in and out of the lungs. Because it is a circuit, the volume is a clinical measurement rather than a curiosity — it tells you whether the kidneys are making it, whether the gut can clear it, and whether the membranes are holding it.",
+   "why_not_a_view": "THE FLUID IS A CIRCUIT AND THIS MODEL DRAWS NO CIRCUIT. The paragraph is about where amniotic fluid comes from and where it goes: fetal kidneys make it, the fetus swallows it, the lungs breathe it in and out. Not one of those organs is in this model, and the cavity that holds the fluid IS a structure here, so a beat on this paragraph would show the amniotic cavity unchanged from the beat before it and narrate physiology over the top. RENDER-STANDARD: \"If a beat renders the same frame as the one before it — same structures, no highlight, no rotation, no section — it is not a view. It is text, and text has its own home in this app.\" Where it belongs: a sequence or diagram beat on amniotic fluid turnover, or the respiratory and renal development scenes, which have the organs."
+  },
+  {
+   "title": "Reading the volume in a clinic",
+   "from": "sequence-version view beat 6",
+   "narration": "Too little fluid points at production or leakage — renal agenesis, obstructed urethral valves, ruptured membranes — and produces the squashed face, the contracted limbs and the hypoplastic lungs of the Potter sequence. Too little fluid kills through the lungs, not the kidneys, and that is the sentence to write. Too much points at clearance — the fetus cannot swallow, so think oesophageal or duodenal atresia, or anencephaly.",
+   "why_not_a_view": "SAME REASON, AND SHARPER. Oligohydramnios and polyhydramnios are READINGS OF A VOLUME, and the consequences the paragraph lists — Potter facies, limb contractures, pulmonary hypoplasia, oesophageal and duodenal atresia, anencephaly — are features of organs this model does not build. Drawing a smaller or larger amniotic cavity would be the one thing the model could do and it would teach almost nothing: the examinable content is the CAUSAL CHAIN from the circuit to the lung, not the size of a bleb. It is the best clinical paragraph in this scene and it is kept here word for word so whoever builds that beat has it."
+  },
+  {
+   "title": "Amniotic fluid — where it comes from and what it does",
+   "from": "sequence-version structure \"amniotic_fluid\"",
+   "narration": "Early on the fluid is a transudate from maternal blood and from the amnion itself. From about the second trimester the fetus makes most of it as dilute urine, and clears it by swallowing it. So the fluid is a circuit, not a pool. It cushions the fetus, lets the limbs move so joints form properly, keeps the temperature steady, prevents the amnion sticking to the skin, and — the point students forget — it is breathed in and out, which is required for the lungs to develop at all. Volume rises to roughly a litre near term and then falls.",
+   "why_not_a_view": "The structure this paragraph is about — the fluid — is the inside of amniotic_cavity, which already carries the paragraph about where the cavity comes from, and a structure carries one narration. The content is physiology: transudate, then fetal urine, cleared by swallowing, breathed in and out. Deferred with view beat 5, which it belongs with."
+  },
+  {
+   "title": "Too little fluid, too much fluid",
+   "from": "sequence-version structure \"fluid_clinical\"",
+   "narration": "Read the volume as a report on the circuit. Too little fluid means the fetus is not making urine or is leaking it out — renal agenesis, obstructed valves, or ruptured membranes — and the consequences follow from what the fluid was for: squashed face, limb contractures and, most dangerous, hypoplastic lungs. That combination is the Potter sequence. Too much fluid means the fetus cannot swallow it back — oesophageal or duodenal atresia, or anencephaly. Two more clinical facts live here: amniocentesis samples this fluid for fetal cells from about the fifteenth week, and torn strands of amnion can wrap a limb and amputate it, which is amniotic band syndrome.",
+   "why_not_a_view": "Deferred with view beat 6 for the same reason. Note the one sentence in it that this scene DOES draw the substrate for — \"torn strands of amnion can wrap a limb and amputate it\" — and that drawing an amniotic band would need a limb, which is another scene."
+  }
+ ],
+ "gaps": [
+  "ROUTED TO 3d_anatomy, NOT TO ITS FIRST PREFERRED MODE. CURRICULUM.json lists preferred_modes [\"sequence\",\"diagram\"] for \"Amniotic cavity & yolk sac\" and the SVG-era scene took the first of them. This conversion moves it to 3d_anatomy on the queue item's instruction (\"RE-AUTHORING, NOT WIRING\"), and both original modes are kept in deferred_modes rather than discarded. The curriculum's declared views[] are [\"cross_section\",\"location\"]; this scene carries three cross_section views, three location views, three mechanism views and one associated_organs view, so the contract is met with room to spare.",
+  "THE YOLK SAC IS DRAWN STRAIGHT BELOW THE EMBRYO AND NOT CARRIED INTO THE CORD, AND THIS IS THE WEAKEST THING IN THE SCENE. From about week six a real yolk sac lies BESIDE the cord, in the chorionic cavity, with its duct running inside the cord alongside the connecting stalk. This model keeps it on the ventral axis, and the position is then forced by two constraints that are both correct on their own: the sac must be outside the amnion (which by week eight is a sphere enveloping the embryo) and inside the chorion. The consequence is that at day 56 the sac hangs 14 mm straight down on an 11 mm duct, which makes beat 9 a tall thin subject — it passes the visibility walk on every structure and carries a clipping waiver, and it is still the one frame in this scene a reviewer should look at first. Fixing it means giving the sac a direction rather than a height, which moves the duct off the y axis and therefore out of the surface-of-revolution primitive that lets it be sectioned in beat 7. That is a round of work, not a tweak, and it was not done.",
+  "THE EMBRYO IS DRAWN AS A LENS THAT THICKENS, NOT AS A C-SHAPED BODY THAT FOLDS. This scene is about what folding does to the YOLK SAC — the hourglass, the gut, the duct — and not about folding itself, which is models3d/cranio-caudal-folding.js and models3d/lateral-folding.js, two separate queue items that own it. The consequence is declared rather than hidden: the drawn extent of the embryo from day 24 on is half its published crown-rump length times 0.60, because a real embryo of that age is curled and its greatest straight-line dimension is about 60% of its CRL. Without that correction the straight lens was 2 mm across inside a 1.5 mm amniotic cavity.",
+  "NO GERM LAYERS BEYOND THE TWO. The disc is drawn as epiblast and hypoblast and nothing between them, which is right for days 8 to 16 and is an omission afterwards: there is no mesoderm, no notochord, no neural tube and no somites in this model. embryology__week-3-gastrulation__* owns those and three of them are already built. The practical effect is that the body's interior is empty apart from the gut tube.",
+  "NO BODY SIDE IS DECLARED AS PROVED. \"+x = LEFT\" is in the model's ACCEPTANCE.axes for a future part that needs it, and acceptance row P MEASURES that every key this model builds is mirror-symmetric in x — 0 unmatched vertices of 4,244 sampled. So there is no chiral landmark anywhere in it, a mirror of it would be indistinguishable, and nothing this scene narrates names a side. RENDER-STANDARD, \"A DECLARED AXIS IS NOT A PROVED ONE, AND A SYMMETRIC MODEL CANNOT PROVE ITS OWN\": met by not making the claim rather than by letting a comment stand as the proof.",
+  "THE VITELLINE DUCT'S CLOSURE DAY IS DECLARED, NOT SOLVED, AND THIS IS THE ONE PLACE A SOLVE WAS AVAILABLE AND REFUSED. A catenoid neck between the gut and the sac pinches off when stretched past 0.6628 of its end radius, which would have made the duct's obliteration day a prediction. Measured on this model's own dimensions it fires at about day 28 instead of the narrated weeks six to ten, and moves anywhere you like for a 20% change in a declared end radius. Section 2 of models3d/amniotic-cavity-yolk-sac.js records it. What IS asserted is the hourglass and the narrowing (rows J and J2, and beat claims B7-hourglass and B9-closing), which is what the beats teach; the day is a declared ramp across days 42 to 70.",
+  "THE COELOM'S INNER BOUNDARY IS THE CLOSED ENVELOPE OF THE AMNIOTIC DOME, NOT THE DOME. A shell needs a closed inner surface, and while the amnion is a dome (to day 30) the region under its floor holds the disc and the yolk sac rather than coelom. The cost is that the chorionic cavity is understated by (1 - capFrac) of the amnion's envelope while the dome is open: 0.4% at day 28, and nil at every day rows E2 and F measure, because the dome is closed from day 30.",
+  "THE YOLK SAC IS PRESSED AGAINST THE AMNION AT THE MOUNT, AND THE REASON IS A STRUCTURE THIS MODEL DOES NOT BUILD. From about day 63 the chorionic cavity is thinner than the yolk sac is wide (2.0 mm against 2.3 mm at day 80), so a sac kept inside the chorion must touch the amnion. In a real conceptus the amnion is REFLECTED over the cord and the remnant lies in that reflection; this model does not resolve the reflection. Published in PARTITION.declaredConsequence and pinned by acceptance row K at 0.26 of the sac's vertices at day 80, with ZERO required on both days a beat draws the two together (56 and 70).",
+  "MEMBRANE AND EPITHELIAL THICKNESSES ARE FRACTIONS OF THE RADIUS THEY SIT ON, NOT TRUE THICKNESSES, AND THE SCALE IS OTHERWISE TRUE THROUGHOUT. The amnion and Heuser's membrane are one cell thick; on a 32 mm sac that is 0.03% of the radius and no camera in the player resolves it. The epiblast and hypoblast are at TRUE thickness through week two — they sum to 95% of the bilaminar disc's own half-thickness, which is what a 30 um columnar sheet on a 15 um cuboidal one is — and thin to a quarter of it after folding. Every length, including the 190-fold growth of the sac from day 8 to day 80, is at true scale with no break.",
+  "THE GERM CELLS' MIGRATION ROUTE IS A SCHEMATIC. Five cells are drawn in a straight file from the yolk sac wall towards the dorsal body wall. The real route is along the dorsal mesentery of the hindgut, which this model does not build, and the gonadal ridges, which it does not build either. The LOCATION the paragraph is examined on — the yolk sac wall near the origin of the allantois — is drawn correctly; the path is a direction, not an anatomy.",
+  "AMNIOTIC FLUID PHYSIOLOGY AND THE HYDRAMNIOS CLINICAL BEAT ARE IN deferred_beats[] WITH THEIR FULL TEXT. They are the best clinical paragraphs in the scene and neither can be a view here: the organs the circuit runs through — kidneys, gut, lungs — are not in this model, so a beat on either would draw the frame before it and narrate over the top.",
+  "STATUS IS \"candidate\", NEVER \"ready\". Only a review that did not build it can promote this scene, which is the two-review rule in ARTWORK-STANDARD.md.",
+  "BEAT 9 DRAWS NEITHER DESTINATION ITS NARRATION NAMES, AND ONE OF THE TWO IS BUILT BUT CANNOT BE SHOWN IN THIS BEAT. Round-2 review, 2026-10-03: \"The vitelline duct runs to the ileum ... The allantois runs to the bladder\" over a frame holding only hypoblast, the closing duct, the allantois and the sac, with the allantois ending bluntly in open space. PARTLY FIXED: the connecting stalk is now shown in this beat, so the allantois runs INTO the structure beat 8 names as the sleeve it travels in, instead of stopping in the chorionic cavity. Its proximal end was already correct and is unchanged — buildStalkAndCord() starts it on the caudal gut at (0, yGut - 0.1 rgut, -0.92 gutHalf) and PARTITION declares the allantois/primitive_gut overlap as anatomy rather than collision. STILL NOT DRAWN, and declared rather than left to be rediscovered: (a) THE BLADDER does not exist in this model at all, so the allantois's named destination is narrated and not shown; the urachus and the median umbilical ligament it becomes are later still. (b) THE ILEUM, and regional gut anatomy generally, does not exist either — primitive_gut is one undifferentiated tube. (c) primitive_gut IS built at this beat's own t (day 56) and is deliberately NOT shown, because it lies inside an opaque hypoblast dome and would contribute no ink: adding it would put a structure in the beat that the visibility walk correctly reports as unseeable. The only way to show it here is to make the hypoblast translucent FOR THIS BEAT, and the engine cannot do that — opacity is a per-structure property of the scene and viz3d has no per-view opacity op (its op set is SHOW/HIDE/HIGHLIGHT/ISOLATE/PEEL/COMPARE/TRACE/ROTATE/CROSS_SECTION/SET_STAGE, checked rather than assumed). That gap is a candidate engine item and is recorded in BUILD-LOG.md, not worked around here.",
+  "THE COMB ALONG THE AMNION'S LIMB IN BEAT 10 IS A DOUBLE-SIDED BLEND-ORDER ARTEFACT AND IS KIT-LEVEL, NOT THIS MODEL'S. Round-2 review eliminated it six ways on the amnion rendered ALONE at t = 0.93 — as-is PRESENT, opaque GONE, FrontSide GONE, outer surface only GONE, inner surface only PRESENT, depthTest false PRESENT — so it is transparent double-sided blending of the shell's own inner surface against itself, with no neighbour implicated and the depth buffer ruled out. It is NOT fixed here and the reason is scope, stated rather than implied: viz3d.js builds every player material with side: T.DoubleSide centrally (viz3d.js:609) and offers no per-structure override, so FrontSide for one shell is an engine change that re-proves all 146 scenes. Every _cut and _cutz beat in this corpus needs DoubleSide, so it cannot simply be switched. The review's proposed test has been adopted into RENDER-STANDARD section 4 as a rung ABOVE the depth rung, so the next model to meet it stops at the right diagnosis instead of sweeping the depth buffer again."
+ ]
 }

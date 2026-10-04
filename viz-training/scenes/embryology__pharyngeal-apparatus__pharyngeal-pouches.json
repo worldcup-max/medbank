@@ -1,595 +1,1570 @@
 {
-  "schema": 2,
-  "id": "embryology__pharyngeal-apparatus__pharyngeal-pouches",
-  "mode": "sequence",
-  "deferred_modes": [
-    "diagram"
+ "schema": 2,
+ "id": "embryology__pharyngeal-apparatus__pharyngeal-pouches",
+ "mode": "3d_anatomy",
+ "deferred_modes": [
+  "sequence",
+  "diagram"
+ ],
+ "course": "Embryology",
+ "topic": "Pharyngeal Apparatus",
+ "structure": "Pharyngeal pouches",
+ "covers": [
+  "Pharyngeal pouches"
+ ],
+ "learning_goal": "Name the derivative of each of the four pharyngeal pouches from its dorsal and ventral wings, explain by the descent of the thymus why the inferior parathyroids come from a higher pouch than the superior ones, and use that to predict the findings in DiGeorge syndrome and to locate an ectopic parathyroid gland.",
+ "status": "candidate",
+ "provider": {
+  "primary": "procedural",
+  "fallbacks": []
+ },
+ "match": {
+  "topics": [
+   "pharyngeal pouches",
+   "branchial pouches",
+   "pharyngeal apparatus",
+   "branchial apparatus",
+   "head and neck development",
+   "week 4",
+   "week 5",
+   "endoderm",
+   "thymus development",
+   "parathyroid development",
+   "middle ear development",
+   "tonsil",
+   "DiGeorge syndrome"
   ],
-  "course": "Embryology",
-  "topic": "Pharyngeal Apparatus",
-  "structure": "Pharyngeal pouches",
-  "covers": [
-    "Pharyngeal pouches"
-  ],
-  "learning_goal": "Name the derivative of each of the four pharyngeal pouches from its dorsal and ventral wings, explain by the descent of the thymus why the inferior parathyroids come from a higher pouch than the superior ones, and use that to predict the findings in DiGeorge syndrome and to locate an ectopic parathyroid gland.",
-  "status": "planned",
-  "provider": {
-    "primary": "svg",
-    "fallbacks": []
-  },
-  "match": {
-    "topics": [
-      "pharyngeal pouches",
-      "branchial pouches",
-      "pharyngeal apparatus",
-      "branchial apparatus",
-      "head and neck development",
-      "week 4",
-      "week 5",
-      "endoderm",
-      "thymus development",
-      "parathyroid development",
-      "middle ear development",
-      "tonsil",
-      "DiGeorge syndrome"
-    ],
-    "terms": [
-      "pharyngeal pouch",
-      "branchial pouch",
-      "endodermal outpocketing",
-      "first pouch",
-      "second pouch",
-      "third pouch",
-      "fourth pouch",
-      "fifth pouch",
-      "dorsal wing",
-      "ventral wing",
-      "endoderm",
-      "tubotympanic recess",
-      "middle ear cavity",
-      "tympanic cavity",
-      "mastoid antrum",
-      "auditory tube",
-      "pharyngotympanic tube",
-      "Eustachian tube",
-      "tympanic membrane",
-      "otitis media",
-      "otitis media with effusion",
-      "glue ear",
-      "palatine tonsil",
-      "tonsillar fossa",
-      "tonsillar crypts",
-      "tonsillar bed",
-      "lymphoid tissue",
-      "Waldeyer ring",
-      "thymus",
-      "thymic primordium",
-      "inferior parathyroid gland",
-      "parathyroid III",
-      "superior parathyroid gland",
-      "parathyroid IV",
-      "descent of the thymus",
-      "anterior mediastinum",
-      "ultimopharyngeal body",
-      "ultimobranchial body",
-      "parafollicular cells",
-      "C cells",
-      "calcitonin",
-      "neural crest",
-      "thyroid gland",
-      "crossover",
-      "DiGeorge syndrome",
-      "22q11.2 deletion",
-      "CATCH-22",
-      "thymic aplasia",
-      "T cell deficiency",
-      "recurrent viral infection",
-      "recurrent fungal infection",
-      "hypoparathyroidism",
-      "hypocalcaemia",
-      "neonatal tetany",
-      "seizures",
-      "Chvostek sign",
-      "Trousseau sign",
-      "conotruncal defect",
-      "truncus arteriosus",
-      "interrupted aortic arch",
-      "tetralogy of Fallot",
-      "cleft palate",
-      "absent thymic shadow",
-      "ectopic parathyroid",
-      "mediastinal parathyroid adenoma",
-      "ectopic thymus",
-      "cervical thymic cyst",
-      "parathyroid autotransplantation",
-      "thyroidectomy",
-      "medullary thyroid carcinoma",
-      "MEN 2"
-    ]
-  },
-  "camera": {
-    "framing": "lateral"
-  },
-  "structures": [
-    {
-      "key": "pouch_plan",
-      "label": "Pouches are the inside of the apparatus",
-      "role": "context",
-      "group": "The plan",
-      "layer": "organ",
-      "color": "#aeb6bf",
-      "terms": [
-        "pharyngeal pouch",
-        "branchial pouch",
-        "endoderm",
-        "outpocketing",
-        "lateral wall of the pharynx",
-        "between the arches",
-        "four pairs",
-        "clefts are outside",
-        "ectoderm",
-        "glands and epithelium"
-      ],
-      "narration": "Get the geography right before any list. The arches are bars, the clefts are grooves on the outside lined by ectoderm, and the pouches are the matching pockets on the inside lined by endoderm. Four pairs of pouches count. Endoderm makes epithelium and glands, so almost everything a pouch becomes is either a glandular organ or a lined cavity."
-    },
-    {
-      "key": "wings",
-      "label": "Each pouch has a dorsal and a ventral wing",
-      "role": "part",
-      "group": "The plan",
-      "layer": "organ",
-      "color": "#5d6d7e",
-      "terms": [
-        "dorsal wing",
-        "ventral wing",
-        "two derivatives per pouch",
-        "third pouch",
-        "fourth pouch",
-        "parathyroid",
-        "thymus",
-        "ultimopharyngeal body"
-      ],
-      "narration": "The third and fourth pouches each split into a dorsal wing and a ventral wing, and each wing makes a different organ. This is the detail that turns a memorised list into something you can reconstruct. Dorsal wings make parathyroid tissue in both pouches. The ventral wing of the third makes the thymus, and the ventral wing of the fourth makes the ultimopharyngeal body."
-    },
-    {
-      "key": "pouch1",
-      "label": "Pouch 1 — the middle ear and the auditory tube",
-      "role": "part",
-      "group": "Pouches",
-      "layer": "organ",
-      "color": "#c0392b",
-      "terms": [
-        "first pouch",
-        "tubotympanic recess",
-        "middle ear cavity",
-        "tympanic cavity",
-        "mastoid antrum",
-        "auditory tube",
-        "pharyngotympanic tube",
-        "Eustachian tube",
-        "tympanic membrane",
-        "first cleft",
-        "external acoustic meatus",
-        "otitis media",
-        "glue ear"
-      ],
-      "narration": "The first pouch elongates into the tubotympanic recess. Its far end expands into the middle ear cavity and the mastoid antrum, and its narrow proximal part stays as the auditory tube — which is why the middle ear is, embryologically, a blind end of the pharynx and why infection climbs that tube so easily in children. Where the pouch meets the first cleft from outside, endoderm and ectoderm come together with a thin layer of mesoderm between them, and that three-layered sheet is the tympanic membrane."
-    },
-    {
-      "key": "pouch2",
-      "label": "Pouch 2 — the palatine tonsil",
-      "role": "part",
-      "group": "Pouches",
-      "layer": "organ",
-      "color": "#e67e22",
-      "terms": [
-        "second pouch",
-        "palatine tonsil",
-        "tonsillar crypts",
-        "surface epithelium",
-        "tonsillar fossa",
-        "tonsillar sinus",
-        "lymphoid tissue",
-        "mesenchyme",
-        "Waldeyer ring",
-        "tonsillitis"
-      ],
-      "narration": "The second pouch is largely obliterated as the palatine tonsil grows into it. The endoderm gives the surface epithelium and the lining of the tonsillar crypts; the lymphoid tissue itself infiltrates later from the surrounding mesenchyme. What is left of the pouch is the tonsillar fossa the tonsil sits in."
-    },
-    {
-      "key": "pouch3",
-      "label": "Pouch 3 — thymus below, inferior parathyroid above",
-      "role": "part",
-      "group": "Pouches",
-      "layer": "organ",
-      "color": "#117864",
-      "terms": [
-        "third pouch",
-        "dorsal wing",
-        "inferior parathyroid gland",
-        "parathyroid III",
-        "ventral wing",
-        "thymus",
-        "thymic primordium",
-        "T lymphocyte",
-        "anterior mediastinum",
-        "descent"
-      ],
-      "narration": "The third pouch is the important one. Its ventral wing becomes the thymus and its dorsal wing becomes the inferior parathyroid gland. Both then travel: the thymus migrates down and medially into the anterior mediastinum, and the inferior parathyroid is dragged along with it for part of the way before separating. Hold on to the fact that the inferior parathyroid comes from the third pouch, because the next region contradicts what the names suggest."
-    },
-    {
-      "key": "pouch4",
-      "label": "Pouch 4 — superior parathyroid, and the C cells",
-      "role": "part",
-      "group": "Pouches",
-      "layer": "organ",
-      "color": "#2874a6",
-      "terms": [
-        "fourth pouch",
-        "dorsal wing",
-        "superior parathyroid gland",
-        "parathyroid IV",
-        "ventral wing",
-        "ultimopharyngeal body",
-        "ultimobranchial body",
-        "parafollicular cells",
-        "C cells",
-        "calcitonin",
-        "thyroid gland",
-        "neural crest",
-        "fifth pouch"
-      ],
-      "narration": "The fourth pouch gives the superior parathyroid gland from its dorsal wing and the ultimopharyngeal body from its ventral wing. The ultimopharyngeal body is absorbed into the thyroid and disperses as the parafollicular or C cells that secrete calcitonin — and note that the C cells themselves are neural crest cells that came in through the pouch, not endoderm. Some texts describe a small fifth pouch as the source of the ultimopharyngeal body; treat it as part of the fourth and the answer is the same."
-    },
-    {
-      "key": "crossover",
-      "label": "Why the inferior parathyroid comes from the higher pouch",
-      "role": "part",
-      "group": "Descent",
-      "layer": "organ",
-      "color": "#7d3c98",
-      "terms": [
-        "crossover",
-        "inferior parathyroid from third pouch",
-        "superior parathyroid from fourth pouch",
-        "descent of the thymus",
-        "dragged downwards",
-        "overtakes",
-        "counter-intuitive",
-        "parathyroid III",
-        "parathyroid IV",
-        "variable position",
-        "constant position"
-      ],
-      "narration": "Here is the point the examiner is testing. Parathyroid tissue from the third pouch ends up below parathyroid tissue from the fourth, so the inferior glands come from the higher pouch and the superior glands from the lower one. The reason is the thymus: it descends a long way and drags the third pouch parathyroid past the fourth pouch parathyroid on the way. Because it is towed rather than placed, the inferior gland's final position is far more variable than the superior gland's — the surgical consequence follows directly."
-    },
-    {
-      "key": "thymus_descent",
-      "label": "The thymus travels furthest and leaves a trail",
-      "role": "part",
-      "group": "Descent",
-      "layer": "organ",
-      "color": "#8e44ad",
-      "terms": [
-        "thymus",
-        "descent",
-        "anterior mediastinum",
-        "behind the sternum",
-        "thymic tail",
-        "ectopic thymus",
-        "cervical thymic cyst",
-        "midline neck swelling",
-        "involution",
-        "puberty",
-        "T lymphocyte maturation",
-        "absent thymic shadow"
-      ],
-      "narration": "The thymic primordia grow caudally as two strands, meet in the midline and settle behind the sternum in the anterior mediastinum. Any part of the strand left behind stays where it stopped, which is why ectopic thymic tissue and thymic cysts turn up anywhere along a line from the angle of the mandible to the sternum. The thymus keeps growing until puberty and then involutes into fat, and an absent thymic shadow on a neonatal chest film is a real clue to a pouch failure."
-    },
-    {
-      "key": "ectopic_parathyroid",
-      "label": "Ectopic parathyroid glands — a surgical consequence",
-      "role": "part",
-      "group": "Descent",
-      "layer": "organ",
-      "color": "#af7ac5",
-      "terms": [
-        "ectopic parathyroid",
-        "inferior parathyroid",
-        "carotid sheath",
-        "anterior mediastinum",
-        "within the thymus",
-        "undescended",
-        "parathyroid adenoma",
-        "persistent hyperparathyroidism",
-        "failed neck exploration",
-        "sestamibi",
-        "parathyroid autotransplantation"
-      ],
-      "narration": "Because the inferior gland travels with the thymus, it can stop anywhere along that route or overshoot it. An inferior parathyroid may sit high in the neck, inside the carotid sheath, inside the thymus, or down in the anterior mediastinum. That is why an adenoma is not always found at the first neck exploration and why the mediastinum is searched when hyperparathyroidism persists after surgery. The superior gland, which barely moved, is where you expect it."
-    },
-    {
-      "key": "digeorge",
-      "label": "DiGeorge syndrome — pouches three and four fail together",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#cb4335",
-      "terms": [
-        "DiGeorge syndrome",
-        "22q11.2 deletion",
-        "CATCH-22",
-        "neural crest",
-        "third and fourth pouches",
-        "thymic aplasia",
-        "thymic hypoplasia",
-        "T cell deficiency",
-        "recurrent viral infection",
-        "recurrent fungal infection",
-        "parathyroid aplasia",
-        "hypoparathyroidism",
-        "hypocalcaemia",
-        "neonatal tetany",
-        "seizures",
-        "Chvostek sign",
-        "Trousseau sign",
-        "conotruncal defect",
-        "truncus arteriosus",
-        "interrupted aortic arch",
-        "tetralogy of Fallot",
-        "cleft palate",
-        "abnormal facies",
-        "absent thymic shadow",
-        "live vaccine",
-        "irradiated blood products"
-      ],
-      "narration": "One deletion, one set of cells, and you can predict the whole picture. Neural crest cells fail to populate the third and fourth pouch territory, so the thymus and the parathyroids do not form. No thymus means no T cell maturation and a baby with recurrent viral and fungal infection. No parathyroids means hypocalcaemia, and the presentation is often neonatal tetany or a seizure in the first days of life. The same cells build the outflow tract of the heart, so add a conotruncal defect — truncus arteriosus or an interrupted aortic arch. Cleft palate and abnormal facies complete it. Two practical points: no live vaccines, and irradiate any blood products."
-    },
-    {
-      "key": "c_cell_clinical",
-      "label": "The C cells and medullary thyroid carcinoma",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#e74c3c",
-      "terms": [
-        "parafollicular cells",
-        "C cells",
-        "calcitonin",
-        "medullary thyroid carcinoma",
-        "MEN 2A",
-        "MEN 2B",
-        "RET gene",
-        "neural crest",
-        "not follicular",
-        "does not take up iodine",
-        "not treated with radioiodine",
-        "serum calcitonin"
-      ],
-      "narration": "The C cells arrive through the fourth pouch but they are neural crest in origin, and that single fact explains the tumour they give rise to. Medullary thyroid carcinoma is not a follicular cell tumour: it does not concentrate iodine, so radioiodine does not treat it, it is followed with serum calcitonin instead of thyroglobulin, and it belongs with phaeochromocytoma in the multiple endocrine neoplasia type two syndromes through the RET gene. A thyroid cancer that behaves like a neuroendocrine tumour makes sense once you know where its cells came from."
-    },
-    {
-      "key": "pouch_summary",
-      "label": "The four-line summary",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#f4d03f",
-      "terms": [
-        "one ear",
-        "two tonsil",
-        "three thymus and inferior parathyroid",
-        "four superior parathyroid and C cells",
-        "pouch derivatives",
-        "revision list"
-      ],
-      "narration": "Reduce it to four lines and rebuild the detail from them. One, the ear — middle ear cavity and auditory tube. Two, the tonsil. Three, thymus and inferior parathyroid. Four, superior parathyroid and the C cells. Then add the one thing the list cannot show: the third pouch derivative ends up below the fourth pouch derivative, because the thymus dragged it there."
-    }
-  ],
-  "views": [
-    {
-      "mode": "location",
-      "beat": 1,
-      "title": "Look at the apparatus from the inside",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The plan"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "pouch_plan",
-          "intensity": 0.9
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "medial"
-        }
-      ],
-      "narration": "Turn the embryo inside out and look at the wall of the pharynx from the lumen. Between the arches, the endoderm pockets outwards four times on each side. These are the pouches. Everything they make is endodermal — a lined cavity or a gland — and everything the clefts make outside is ectodermal. Keep those two sides apart from the first sentence and nothing later gets mixed up."
-    },
-    {
-      "mode": "cross_section",
-      "beat": 2,
-      "title": "Split each pouch into its two wings",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The plan"
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "y",
-          "offset": 0,
-          "animate": true
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "wings",
-          "intensity": 0.95
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "wings",
-          "to": "pouch3",
-          "kind": "dorsal wing gives parathyroid and ventral wing gives thymus in"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "wings",
-          "to": "pouch4",
-          "kind": "dorsal wing gives parathyroid and ventral wing gives the ultimopharyngeal body in"
-        }
-      ],
-      "narration": "Cut across and notice that the third and fourth pouches are not single pockets. Each has a dorsal and a ventral wing, and each wing has its own fate. Both dorsal wings make parathyroid tissue. The ventral wing of the third makes the thymus; the ventral wing of the fourth makes the ultimopharyngeal body. Two pouches, four organs, and the pattern is symmetrical enough to reconstruct under pressure."
-    },
-    {
-      "mode": "glands",
-      "beat": 3,
-      "title": "Down the series: ear, tonsil, thymus, parathyroid",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "HIDE_STRUCTURE",
-          "target": "Clinical"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Pouches"
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:pouch-series",
-          "path": [
-            "pouch1",
-            "pouch2",
-            "pouch3",
-            "pouch4"
-          ],
-          "duration": 9
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "pouch3",
-            "pouch4"
-          ],
-          "layout": "side-by-side"
-        }
-      ],
-      "narration": "Run down the four pouches. One becomes the tubotympanic recess — middle ear, mastoid antrum and auditory tube — and meets the first cleft to build the tympanic membrane. Two is filled in by the palatine tonsil and leaves the tonsillar fossa. Three gives the thymus and the inferior parathyroid. Four gives the superior parathyroid and the ultimopharyngeal body, whose cells become the calcitonin-secreting C cells of the thyroid."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 4,
-      "title": "The thymus descends and the parathyroids cross",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Descent"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "pouch3"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "pouch4"
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:thymic-descent",
-          "path": [
-            "pouch3",
-            "thymus_descent",
-            "crossover",
-            "ectopic_parathyroid"
-          ],
-          "duration": 10
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "crossover",
-          "intensity": 0.95
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "anterior"
-        }
-      ],
-      "narration": "Now watch the movement, because it is the movement that produces the exam question. The thymus grows down towards the anterior mediastinum and tows the third pouch parathyroid behind it, past the fourth pouch parathyroid which barely moves. The result is a crossover: inferior parathyroids from the third pouch, superior parathyroids from the fourth. Because the inferior gland was towed, it can stop anywhere along the route — high in the neck, in the carotid sheath, inside the thymus or in the mediastinum — and that is where a missing adenoma hides."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 5,
-      "title": "When the pouches do not form",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Clinical"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "pouch3",
-          "to": "digeorge",
-          "kind": "no thymus and no inferior parathyroid gives"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "pouch4",
-          "to": "digeorge",
-          "kind": "no superior parathyroid gives"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "pouch4",
-          "to": "c_cell_clinical",
-          "kind": "its neural crest C cells give"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "pouch_summary",
-          "intensity": 0.9
-        },
-        {
-          "op": "PEEL_LAYER",
-          "layer": "organ",
-          "direction": "outward"
-        }
-      ],
-      "narration": "Take away the third and fourth pouches and you have written the case yourself. No thymus, so a baby with recurrent viral and fungal infection and no thymic shadow on the film. No parathyroids, so hypocalcaemia presenting as tetany or a neonatal seizure. The same neural crest cells build the cardiac outflow tract, so add truncus arteriosus or an interrupted aortic arch, with cleft palate and abnormal facies. That is DiGeorge, and it is one deletion producing four systems' worth of findings. Finish with the four-line summary and the crossover, and the topic is closed."
-    }
-  ],
-  "provenance": {
-    "author": "task",
-    "authored_at": "2026-08-28"
-  },
-  "gaps": [
-    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram for this structure and no 3d option, so deferred_modes carries diagram only.",
-    "Status is 'planned'. Twelve regions, five beats, ops and narration complete, but no SVG artwork exists so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a medial view of the pharyngeal wall from inside the lumen with the four pouches numbered and the clefts drawn on the far side in a visibly different fill to keep endoderm and ectoderm apart; an enlargement of pouches three and four split into dorsal and ventral wings with each wing labelled by its organ; a derivatives panel of the four pouches in order; a two-stage descent sequence of the neck showing the thymus and both parathyroid pairs before and after migration, with the crossover drawn explicitly and the route of the thymus marked so ectopic sites can be pinned on it; and a final panel with DiGeorge findings grouped by the pouch that failed.",
-    "Endoderm and ectoderm must carry the same two fills in every panel. The single commonest error in this topic is a student attributing a cleft derivative to a pouch, and a drawing that colours the two sides alike actively teaches that error.",
-    "The descent panel must show a before and an after, side by side and on the same neck outline. The crossover is a change of relative position over time; drawn as one static picture it is a fact to memorise instead of a consequence to understand.",
-    "Beat 3 traces concept:pouch-series and beat 4 traces concept:thymic-descent. In each the subject is a progression through the series or a migration over time, neither of which is a drawn region.",
-    "Beat 5 authors PEEL_LAYER on the organ layer to strip the derivative organs off the final clinical map. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because the same panel is read twice, once for what forms and once for what is missing.",
-    "'Pharyngeal arches' is NOT claimed in covers[]. The arches are named only as the bars the pouches lie between; the arch cartilages, muscles, cranial nerves and arch arteries belong to that entry and are deliberately absent here.",
-    "'Pharyngeal clefts & membranes' is NOT claimed. The first cleft is named because the tympanic membrane needs both sides of the apparatus to exist, but the external acoustic meatus, the cervical sinus, the branchial cyst and the branchial fistula belong to that entry.",
-    "'Thyroid gland development' is NOT claimed. The ultimopharyngeal body is followed only as far as the C cells joining the thyroid; the descent from the foramen cecum, the thyroglossal duct and the ectopic thyroid are that entry's subject.",
-    "The fifth pouch is described as rudimentary and treated as part of the fourth, which is how most texts present it. Where a text counts it separately it is credited with the ultimopharyngeal body — the derivative is the same either way, and the narration says so rather than picking a side.",
-    "Whether the C cells are endodermal or neural crest is not universally stated the same way across texts. The scene teaches the neural crest origin because that is what makes medullary thyroid carcinoma and its behaviour make sense, and it says so explicitly rather than leaving it implied.",
-    "Immunology beyond the consequence of an absent thymus is not taught here. T cell development, thymic selection and the full immunodeficiency differential belong to physiology and immunology; this scene names only the clinical picture that follows from the pouch failing.",
-    "The parathyroid glands' physiology — parathyroid hormone, calcium regulation, primary and secondary hyperparathyroidism — is named only where it explains the surgical relevance of an ectopic gland. It appears in match.terms so a highlighted term still reaches this scene.",
-    "Week numbers are the standard teaching approximations — pouches appearing through weeks four and five, thymic descent complete by about week eight. Texts differ by several days and the narration gives them as approximations.",
-    "VIEW MODES: CURRICULUM.json asks this structure for `cross_section` and `glands`. Beat 2 supplied cross_section; nothing supplied glands, and no validator stage compares a scene`s beat modes to its curriculum views, so the omission went unseen. Beat 3 — the run down the four pouches to middle ear, tonsil, thymus and both parathyroid pairs — was already a glands view in substance and was moded associated_organs; it is now moded `glands`. Beat 5, the failure case, stays associated_organs. No narration changed."
+  "terms": [
+   "pharyngeal pouch",
+   "branchial pouch",
+   "endodermal outpocketing",
+   "first pouch",
+   "second pouch",
+   "third pouch",
+   "fourth pouch",
+   "fifth pouch",
+   "dorsal wing",
+   "ventral wing",
+   "endoderm",
+   "tubotympanic recess",
+   "middle ear cavity",
+   "tympanic cavity",
+   "mastoid antrum",
+   "auditory tube",
+   "pharyngotympanic tube",
+   "Eustachian tube",
+   "tympanic membrane",
+   "otitis media",
+   "otitis media with effusion",
+   "glue ear",
+   "palatine tonsil",
+   "tonsillar fossa",
+   "tonsillar crypts",
+   "tonsillar bed",
+   "lymphoid tissue",
+   "Waldeyer ring",
+   "thymus",
+   "thymic primordium",
+   "inferior parathyroid gland",
+   "parathyroid III",
+   "superior parathyroid gland",
+   "parathyroid IV",
+   "descent of the thymus",
+   "anterior mediastinum",
+   "ultimopharyngeal body",
+   "ultimobranchial body",
+   "parafollicular cells",
+   "C cells",
+   "calcitonin",
+   "neural crest",
+   "thyroid gland",
+   "crossover",
+   "DiGeorge syndrome",
+   "22q11.2 deletion",
+   "CATCH-22",
+   "thymic aplasia",
+   "T cell deficiency",
+   "recurrent viral infection",
+   "recurrent fungal infection",
+   "hypoparathyroidism",
+   "hypocalcaemia",
+   "neonatal tetany",
+   "seizures",
+   "Chvostek sign",
+   "Trousseau sign",
+   "conotruncal defect",
+   "truncus arteriosus",
+   "interrupted aortic arch",
+   "tetralogy of Fallot",
+   "cleft palate",
+   "absent thymic shadow",
+   "ectopic parathyroid",
+   "mediastinal parathyroid adenoma",
+   "ectopic thymus",
+   "cervical thymic cyst",
+   "parathyroid autotransplantation",
+   "thyroidectomy",
+   "medullary thyroid carcinoma",
+   "MEN 2"
   ]
+ },
+ "camera": {
+  "framing": "lateral"
+ },
+ "structures": [
+  {
+   "key": "pharyngeal_wall",
+   "name": "Pharyngeal endoderm — the lateral wall of the pharynx",
+   "label": "Pharyngeal endoderm — the lateral wall of the pharynx",
+   "role": "context",
+   "group": "The apparatus",
+   "layer": "organ",
+   "color": "#d9a48a",
+   "refs": {
+    "procedural": "pharyngeal-pouches#pharyngeal_wall"
+   },
+   "terms": [
+    "pharyngeal pouch",
+    "branchial pouch",
+    "endoderm",
+    "outpocketing",
+    "lateral wall of the pharynx",
+    "between the arches",
+    "four pairs",
+    "glands and epithelium",
+    "primitive pharynx",
+    "foregut"
+   ],
+   "narration": "The wall the pouches come out of, and the reason they are endodermal. Everything a pouch becomes is made of this: endoderm makes epithelium and glands, so every pouch derivative is either a lined cavity or a gland. It is cut away on the right in the first view so you can look at the left wall from inside the lumen, which is where the pouches open.",
+   "opacity": 0.55
+  },
+  {
+   "key": "arch_bars",
+   "name": "The pharyngeal arches — the bars the pouches lie between",
+   "label": "The pharyngeal arches — the bars the pouches lie between",
+   "role": "context",
+   "group": "The apparatus",
+   "layer": "organ",
+   "color": "#9aa3ae",
+   "refs": {
+    "procedural": "pharyngeal-pouches#arch_bars"
+   },
+   "terms": [
+    "pharyngeal arch",
+    "branchial arch",
+    "arch bar",
+    "mesenchyme",
+    "between the arches",
+    "five arches",
+    "first arch",
+    "second arch",
+    "third arch",
+    "fourth arch",
+    "sixth arch"
+   ],
+   "narration": "The arches are bars of mesenchyme, and they are here only as the thing the pouches lie between. Their cartilages, muscles, cranial nerves and arch arteries belong to the Pharyngeal arches entry and are deliberately absent. What matters here is the geography: a pouch sits in the gap between two bars, and the cleft for that same gap sits on the other side of them.",
+   "opacity": 0.3
+  },
+  {
+   "key": "surface_ectoderm",
+   "name": "Surface ectoderm — the body surface",
+   "label": "Surface ectoderm — the body surface",
+   "role": "context",
+   "group": "The apparatus",
+   "layer": "organ",
+   "color": "#b7cde0",
+   "opacity": 0.16,
+   "refs": {
+    "procedural": "pharyngeal-pouches#surface_ectoderm"
+   },
+   "terms": [
+    "surface ectoderm",
+    "body surface",
+    "skin",
+    "cervical sinus",
+    "branchial cyst",
+    "external surface"
+   ],
+   "narration": "The outside of the neck — the ectoderm the clefts are grooves IN. It is drawn here because a groove is a feature of a surface, and until this surface existed the four clefts were four crescents hanging in space with nothing to be a groove in. It is shown only in the sectioned view, and faintly: it encloses everything else, so a beat that stands outside it would be looking at skin. What a student should take from it is the arrangement — pharyngeal endoderm on the inside, this on the outside, arch mesenchyme between, and the two epithelia meeting at four levels with only a membrane between them. The second arch then overgrows the lower three grooves into a cervical sinus which normally obliterates; where it does not, the remnant is a branchial cyst on the side of the neck."
+  },
+  {
+   "key": "cleft1",
+   "name": "The FIRST cleft — ECTODERM, on the outside",
+   "label": "The FIRST cleft — ECTODERM, on the outside",
+   "role": "part",
+   "group": "The apparatus",
+   "layer": "organ",
+   "color": "#5b7fa6",
+   "refs": {
+    "procedural": "pharyngeal-pouches#cleft1"
+   },
+   "terms": [
+    "pharyngeal cleft",
+    "branchial cleft",
+    "first cleft",
+    "ectoderm",
+    "groove",
+    "outside",
+    "external acoustic meatus",
+    "tympanic membrane"
+   ],
+   "narration": "A groove on the OUTSIDE, lined by ectoderm, and drawn in a colour nothing on the inside of the apparatus uses for exactly one reason: the single commonest error in this topic is attributing a cleft derivative to a pouch. Keep the two sides apart from the first sentence and nothing later gets mixed up. This is the cleft that matters most — it persists as the external acoustic meatus, and where it meets the first pouch it builds the tympanic membrane."
+  },
+  {
+   "key": "clefts_lower",
+   "name": "The second, third and fourth clefts — buried by the cervical sinus",
+   "label": "The second, third and fourth clefts — buried by the cervical sinus",
+   "role": "part",
+   "group": "The apparatus",
+   "layer": "organ",
+   "color": "#4a6b8c",
+   "refs": {
+    "procedural": "pharyngeal-pouches#clefts_lower"
+   },
+   "terms": [
+    "pharyngeal cleft",
+    "branchial cleft",
+    "second cleft",
+    "third cleft",
+    "fourth cleft",
+    "ectoderm",
+    "cervical sinus",
+    "branchial cyst",
+    "branchial fistula"
+   ],
+   "narration": "The same germ layer and the same side of the apparatus as the first cleft — the shade is darker only so a beat can point at one group without pointing at the other. These three are overgrown by the second arch and buried as the cervical sinus, which normally disappears. What happens when it does not is the Pharyngeal clefts and membranes entry, not this one."
+  },
+  {
+   "key": "median_plane",
+   "name": "The median plane",
+   "label": "The median plane",
+   "role": "context",
+   "group": "The apparatus",
+   "layer": "organ",
+   "color": "#9aa6bf",
+   "refs": {
+    "procedural": "pharyngeal-pouches#median_plane"
+   },
+   "terms": [
+    "median plane",
+    "midline",
+    "bilateral",
+    "four pairs",
+    "meet in the midline"
+   ],
+   "narration": "A reference, not a structure. Everything in this scene is a PAIR — four pairs of pouches, two parathyroid pairs, two thymic strands — and the one thing that crosses this plane is the thymus, whose two strands meet on it. The rod stops above the thymus on purpose, so it does not sit in front of the fusion it exists to let you judge.",
+   "opacity": 0.8
+  },
+  {
+   "key": "pouch1",
+   "name": "Pouch 1 — the middle ear and the auditory tube",
+   "label": "Pouch 1 — the middle ear and the auditory tube",
+   "role": "primary",
+   "group": "Pouches",
+   "layer": "organ",
+   "color": "#c0392b",
+   "refs": {
+    "procedural": "pharyngeal-pouches#pouch1"
+   },
+   "terms": [
+    "first pouch",
+    "tubotympanic recess",
+    "middle ear cavity",
+    "tympanic cavity",
+    "mastoid antrum",
+    "auditory tube",
+    "pharyngotympanic tube",
+    "Eustachian tube",
+    "tympanic membrane",
+    "first cleft",
+    "external acoustic meatus",
+    "otitis media",
+    "glue ear"
+   ],
+   "narration": "The first pouch elongates into the tubotympanic recess. Its far end expands into the middle ear cavity and the mastoid antrum, and its narrow proximal part stays as the auditory tube — which is why the middle ear is, embryologically, a blind end of the pharynx and why infection climbs that tube so easily in children. Where the pouch meets the first cleft from outside, endoderm and ectoderm come together with a thin layer of mesoderm between them, and that three-layered sheet is the tympanic membrane."
+  },
+  {
+   "key": "pouch2",
+   "name": "Pouch 2 — the palatine tonsil",
+   "label": "Pouch 2 — the palatine tonsil",
+   "role": "primary",
+   "group": "Pouches",
+   "layer": "organ",
+   "color": "#e67e22",
+   "refs": {
+    "procedural": "pharyngeal-pouches#pouch2"
+   },
+   "terms": [
+    "second pouch",
+    "palatine tonsil",
+    "tonsillar crypts",
+    "surface epithelium",
+    "tonsillar fossa",
+    "tonsillar sinus",
+    "lymphoid tissue",
+    "mesenchyme",
+    "Waldeyer ring",
+    "tonsillitis"
+   ],
+   "narration": "The second pouch is largely obliterated as the palatine tonsil grows into it. The endoderm gives the surface epithelium and the lining of the tonsillar crypts; the lymphoid tissue itself infiltrates later from the surrounding mesenchyme. What is left of the pouch is the tonsillar fossa the tonsil sits in."
+  },
+  {
+   "key": "pouch3",
+   "name": "Pouch 3 — thymus below, inferior parathyroid above",
+   "label": "Pouch 3 — thymus below, inferior parathyroid above",
+   "role": "primary",
+   "group": "Pouches",
+   "layer": "organ",
+   "color": "#117864",
+   "refs": {
+    "procedural": "pharyngeal-pouches#pouch3"
+   },
+   "terms": [
+    "third pouch",
+    "dorsal wing",
+    "inferior parathyroid gland",
+    "parathyroid III",
+    "ventral wing",
+    "thymus",
+    "thymic primordium",
+    "T lymphocyte",
+    "anterior mediastinum",
+    "descent"
+   ],
+   "narration": "The third pouch is the important one. Its ventral wing becomes the thymus and its dorsal wing becomes the inferior parathyroid gland. Both then travel: the thymus migrates down and medially into the anterior mediastinum, and the inferior parathyroid is dragged along with it for part of the way before separating. Hold on to the fact that the inferior parathyroid comes from the third pouch, because the next region contradicts what the names suggest."
+  },
+  {
+   "key": "pouch4",
+   "name": "Pouch 4 — superior parathyroid, and the C cells",
+   "label": "Pouch 4 — superior parathyroid, and the C cells",
+   "role": "primary",
+   "group": "Pouches",
+   "layer": "organ",
+   "color": "#b0387a",
+   "refs": {
+    "procedural": "pharyngeal-pouches#pouch4"
+   },
+   "terms": [
+    "fourth pouch",
+    "dorsal wing",
+    "superior parathyroid gland",
+    "parathyroid IV",
+    "ventral wing",
+    "ultimopharyngeal body",
+    "ultimobranchial body",
+    "parafollicular cells",
+    "C cells",
+    "calcitonin",
+    "thyroid gland",
+    "neural crest",
+    "fifth pouch"
+   ],
+   "narration": "The fourth pouch gives the superior parathyroid gland from its dorsal wing and the ultimopharyngeal body from its ventral wing. The ultimopharyngeal body is absorbed into the thyroid and disperses as the parafollicular or C cells that secrete calcitonin — and note that the C cells themselves are neural crest cells that came in through the pouch, not endoderm. Some texts describe a small fifth pouch as the source of the ultimopharyngeal body; treat it as part of the fourth and the answer is the same."
+  },
+  {
+   "key": "pouch3_dorsal_wing",
+   "name": "Third pouch, DORSAL wing — the inferior parathyroid",
+   "label": "Third pouch, DORSAL wing — the inferior parathyroid",
+   "role": "part",
+   "group": "Wings",
+   "layer": "organ",
+   "color": "#117864",
+   "refs": {
+    "procedural": "pharyngeal-pouches#pouch3_dorsal_wing"
+   },
+   "terms": [
+    "dorsal wing",
+    "third pouch",
+    "inferior parathyroid gland",
+    "parathyroid III",
+    "two derivatives per pouch"
+   ],
+   "narration": "The dorsal wing of the third pouch, which becomes the inferior parathyroid gland. Dorsal wings make parathyroid tissue in BOTH pouches — that is the half of the pattern worth holding on to, because it means the only thing you have to remember separately is what the two ventral wings do."
+  },
+  {
+   "key": "pouch3_ventral_wing",
+   "name": "Third pouch, VENTRAL wing — the thymus",
+   "label": "Third pouch, VENTRAL wing — the thymus",
+   "role": "part",
+   "group": "Wings",
+   "layer": "organ",
+   "color": "#117864",
+   "refs": {
+    "procedural": "pharyngeal-pouches#pouch3_ventral_wing"
+   },
+   "terms": [
+    "ventral wing",
+    "third pouch",
+    "thymus",
+    "thymic primordium",
+    "T lymphocyte",
+    "descent"
+   ],
+   "narration": "The ventral wing of the third pouch, which becomes the thymus. It is the wing that travels, and everything counter-intuitive in this topic follows from how far it goes."
+  },
+  {
+   "key": "pouch4_dorsal_wing",
+   "name": "Fourth pouch, DORSAL wing — the superior parathyroid",
+   "label": "Fourth pouch, DORSAL wing — the superior parathyroid",
+   "role": "part",
+   "group": "Wings",
+   "layer": "organ",
+   "color": "#b0387a",
+   "refs": {
+    "procedural": "pharyngeal-pouches#pouch4_dorsal_wing"
+   },
+   "terms": [
+    "dorsal wing",
+    "fourth pouch",
+    "superior parathyroid gland",
+    "parathyroid IV"
+   ],
+   "narration": "The dorsal wing of the fourth pouch, which becomes the superior parathyroid gland. Same rule as the third: dorsal wing, parathyroid tissue. This one barely moves from where it starts."
+  },
+  {
+   "key": "pouch4_ventral_wing",
+   "name": "Fourth pouch, VENTRAL wing — the ultimopharyngeal body",
+   "label": "Fourth pouch, VENTRAL wing — the ultimopharyngeal body",
+   "role": "part",
+   "group": "Wings",
+   "layer": "organ",
+   "color": "#b0387a",
+   "refs": {
+    "procedural": "pharyngeal-pouches#pouch4_ventral_wing"
+   },
+   "terms": [
+    "ventral wing",
+    "fourth pouch",
+    "ultimopharyngeal body",
+    "ultimobranchial body",
+    "fifth pouch"
+   ],
+   "narration": "The ventral wing of the fourth pouch, which becomes the ultimopharyngeal body. Some texts credit a small fifth pouch with it instead; treat it as part of the fourth and the answer is the same."
+  },
+  {
+   "key": "tympanic_membrane",
+   "name": "The tympanic membrane — three layers, two germ layers meeting",
+   "label": "The tympanic membrane — three layers, two germ layers meeting",
+   "role": "part",
+   "group": "Derivatives",
+   "layer": "organ",
+   "color": "#e8d9b0",
+   "refs": {
+    "procedural": "pharyngeal-pouches#tympanic_membrane"
+   },
+   "terms": [
+    "tympanic membrane",
+    "first pouch",
+    "first cleft",
+    "endoderm",
+    "ectoderm",
+    "mesoderm",
+    "three-layered sheet",
+    "external acoustic meatus",
+    "otitis media"
+   ],
+   "narration": "Where the first pouch meets the first cleft from outside, endoderm and ectoderm come together with a thin layer of mesoderm between them, and that three-layered sheet is the tympanic membrane. It is the one place in this scene where a pouch and a cleft touch, which is why it is drawn between them and in neither of their two colours.",
+   "opacity": 0.9
+  },
+  {
+   "key": "palatine_tonsil",
+   "name": "The palatine tonsil, filling the second pouch",
+   "label": "The palatine tonsil, filling the second pouch",
+   "role": "part",
+   "group": "Derivatives",
+   "layer": "organ",
+   "color": "#b9770e",
+   "refs": {
+    "procedural": "pharyngeal-pouches#palatine_tonsil"
+   },
+   "terms": [
+    "palatine tonsil",
+    "tonsillar crypts",
+    "surface epithelium",
+    "tonsillar fossa",
+    "tonsillar sinus",
+    "lymphoid tissue",
+    "mesenchyme",
+    "Waldeyer ring",
+    "tonsillitis"
+   ],
+   "narration": "The tonsil grows INTO the second pouch and largely obliterates it, which is why the two are drawn sharing space here rather than side by side. The endoderm gives the surface epithelium and the crypt lining; the lymphoid tissue infiltrates later from the surrounding mesenchyme. What is left of the pouch is the fossa the tonsil sits in."
+  },
+  {
+   "key": "thymus",
+   "name": "The thymus — the organ that travels furthest",
+   "label": "The thymus — the organ that travels furthest",
+   "role": "primary",
+   "group": "Derivatives",
+   "layer": "organ",
+   "color": "#7d3c98",
+   "refs": {
+    "procedural": "pharyngeal-pouches#thymus"
+   },
+   "terms": [
+    "thymus",
+    "descent",
+    "anterior mediastinum",
+    "behind the sternum",
+    "thymic tail",
+    "ectopic thymus",
+    "cervical thymic cyst",
+    "involution",
+    "puberty",
+    "T lymphocyte maturation",
+    "absent thymic shadow"
+   ],
+   "narration": "Two strands from the two third pouches, growing caudally and medially until they meet on the median plane behind the sternum. Watch how far it goes, because the distance is the mechanism: the thymus is what drags the third pouch parathyroid past the fourth pouch one."
+  },
+  {
+   "key": "ultimopharyngeal_body",
+   "name": "The ultimopharyngeal body, on its way into the thyroid",
+   "label": "The ultimopharyngeal body, on its way into the thyroid",
+   "role": "part",
+   "group": "Derivatives",
+   "layer": "organ",
+   "color": "#d98cb3",
+   "refs": {
+    "procedural": "pharyngeal-pouches#ultimopharyngeal_body"
+   },
+   "terms": [
+    "ultimopharyngeal body",
+    "ultimobranchial body",
+    "fourth pouch",
+    "ventral wing",
+    "thyroid gland",
+    "parafollicular cells",
+    "C cells",
+    "neural crest"
+   ],
+   "narration": "The ventral wing of the fourth pouch, travelling into the thyroid, where it is absorbed and disperses. It is present in the middle of this process and gone by the end — which is the whole of its story, and the reason the C cells end up somewhere the fourth pouch never reaches."
+  },
+  {
+   "key": "c_cells",
+   "name": "The parafollicular (C) cells, dispersed through the thyroid",
+   "label": "The parafollicular (C) cells, dispersed through the thyroid",
+   "role": "part",
+   "group": "Derivatives",
+   "layer": "organ",
+   "color": "#f4d03f",
+   "refs": {
+    "procedural": "pharyngeal-pouches#c_cells"
+   },
+   "terms": [
+    "parafollicular cells",
+    "C cells",
+    "calcitonin",
+    "neural crest",
+    "not follicular",
+    "thyroid gland",
+    "medullary thyroid carcinoma",
+    "MEN 2A",
+    "MEN 2B",
+    "RET gene",
+    "serum calcitonin"
+   ],
+   "narration": "What the ultimopharyngeal body becomes: cells scattered through the thyroid rather than a lump in it, which is why they are drawn as a scatter. They arrive through the fourth pouch but they are neural crest in origin, and that one fact is what makes medullary thyroid carcinoma behave the way it does."
+  },
+  {
+   "key": "thymopharyngeal_duct",
+   "name": "The thymopharyngeal duct — the route, and where things get left behind",
+   "label": "The thymopharyngeal duct — the route, and where things get left behind",
+   "role": "part",
+   "group": "Descent",
+   "layer": "organ",
+   "color": "#af7ac5",
+   "refs": {
+    "procedural": "pharyngeal-pouches#thymopharyngeal_duct"
+   },
+   "terms": [
+    "thymopharyngeal duct",
+    "descent of the thymus",
+    "thymic tail",
+    "ectopic thymus",
+    "cervical thymic cyst",
+    "midline neck swelling",
+    "ectopic parathyroid",
+    "carotid sheath",
+    "within the thymus",
+    "undescended",
+    "anterior mediastinum"
+   ],
+   "narration": "The trail the descending thymus draws out behind it, from the third pouch to the mediastinum. It normally disappears. Where it does not, it is a cervical thymic cyst — and because the inferior parathyroid is towed along this same line, every ectopic site that gland can occupy lies somewhere on it. This is the structure to look at when you are asked where a missing adenoma is."
+  },
+  {
+   "key": "inferior_parathyroid",
+   "name": "The INFERIOR parathyroid — from the THIRD pouch",
+   "label": "The INFERIOR parathyroid — from the THIRD pouch",
+   "role": "primary",
+   "group": "Descent",
+   "layer": "organ",
+   "color": "#1e8449",
+   "refs": {
+    "procedural": "pharyngeal-pouches#inferior_parathyroid"
+   },
+   "terms": [
+    "inferior parathyroid gland",
+    "parathyroid III",
+    "third pouch",
+    "dorsal wing",
+    "crossover",
+    "dragged downwards",
+    "variable position",
+    "ectopic parathyroid",
+    "parathyroid adenoma",
+    "persistent hyperparathyroidism",
+    "sestamibi",
+    "parathyroid autotransplantation"
+   ],
+   "narration": "From the third pouch, and it ends up BELOW the gland that came from the fourth. Follow it rather than memorising it: it starts above its neighbour, it is towed down past it, and it stops at the lower pole of the thyroid. Because it was towed rather than placed, its final position is far more variable than the superior gland’s, and that is the surgical consequence."
+  },
+  {
+   "key": "superior_parathyroid",
+   "name": "The SUPERIOR parathyroid — from the FOURTH pouch",
+   "label": "The SUPERIOR parathyroid — from the FOURTH pouch",
+   "role": "primary",
+   "group": "Descent",
+   "layer": "organ",
+   "color": "#6d1b47",
+   "refs": {
+    "procedural": "pharyngeal-pouches#superior_parathyroid"
+   },
+   "terms": [
+    "superior parathyroid gland",
+    "parathyroid IV",
+    "fourth pouch",
+    "dorsal wing",
+    "constant position",
+    "upper pole of the thyroid",
+    "barely moved"
+   ],
+   "narration": "From the fourth pouch, and it hardly moves at all: it stays at the level it started and ends up on the upper-posterior surface of the thyroid. It is the gland that is where you expect it, and it is the reference against which the inferior gland’s journey is measured."
+  },
+  {
+   "key": "thyroid_gland",
+   "name": "The thyroid gland — the landmark both parathyroids end up on",
+   "label": "The thyroid gland — the landmark both parathyroids end up on",
+   "role": "context",
+   "group": "Descent",
+   "layer": "organ",
+   "color": "#a9724a",
+   "refs": {
+    "procedural": "pharyngeal-pouches#thyroid_gland"
+   },
+   "terms": [
+    "thyroid gland",
+    "upper pole",
+    "lower pole",
+    "posterior surface",
+    "parafollicular cells",
+    "C cells",
+    "ultimopharyngeal body"
+   ],
+   "narration": "Context, and a landmark. Thyroid development is a different entry — the foramen caecum, the thyroglossal duct and the ectopic thyroid are not taught here. What it is doing in this scene is carrying the two levels the parathyroids come to rest at: the superior gland at its upper pole, the inferior gland at its lower pole. That is the crossover, drawn on one gland.",
+   "opacity": 0.22
+  }
+ ],
+ "views": [
+  {
+   "mode": "location",
+   "beat": 1,
+   "title": "Look at the apparatus from the inside",
+   "day": 34,
+   "camera": "anterior",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.352941
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pharyngeal_wall"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "arch_bars"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cleft1"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "clefts_lower"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch1"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch2"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch3"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch4"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surface_ectoderm"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "pharyngeal_wall",
+     "intensity": 0.95
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "z",
+     "offset": 0,
+     "animate": true
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "Turn the embryo inside out and look at the wall of the pharynx from the lumen. Between the arches, the endoderm pockets outwards four times on each side. These are the pouches. Everything they make is endodermal — a lined cavity or a gland — and everything the clefts make outside is ectodermal. Keep those two sides apart from the first sentence and nothing later gets mixed up.\n\nGet the geography right before any list. The arches are bars, the clefts are grooves on the outside lined by ectoderm, and the pouches are the matching pockets on the inside lined by endoderm. Four pairs of pouches count. Endoderm makes epithelium and glands, so almost everything a pouch becomes is either a glandular organ or a lined cavity.",
+   "claims": [
+    {
+     "id": "B1-day",
+     "claim": "this beat draws day 34 — the first stage at which all four pouches stand clearly above the floor the engine makes the model draw them at before they bud",
+     "measure": "day",
+     "op": "near",
+     "value": 34,
+     "tol": 0.4
+    },
+    {
+     "id": "B1-four",
+     "claim": "the endoderm pockets outwards four times on each side: four pairs of pouches count",
+     "measure": "pouchCount",
+     "op": "equals",
+     "value": 4
+    },
+    {
+     "id": "B1-even",
+     "claim": "and they leave the wall evenly spaced down the pharynx, at the divisions of five equal intersegments",
+     "measure": "pouchSpacingSpread",
+     "op": "atMost",
+     "value": 0.05
+    },
+    {
+     "id": "B1-first",
+     "claim": "the first pouch is the longest of the four, on its way to the ear — measured as a comparison, not as a length",
+     "measure": "longestPouch",
+     "op": "equals",
+     "value": 1
+    },
+    {
+     "id": "B1-groove",
+     "claim": "the grooves on the outside are grooves IN the body surface — the first cleft's ectoderm is in contact with the surface ectoderm this beat draws, not floating lateral to it",
+     "measure": "gapOverSeg.cleft1.surface_ectoderm",
+     "op": "atMost",
+     "value": 0.06,
+     "why_this_measure": "Review finding F4, 2026-10-03: there was no body surface at all, so the four clefts hung in space 3.9 to 4.5 intersegments out with the pharyngeal wall ending at 0.80 and nothing drawn between, under a narration that calls a cleft 'a groove on the OUTSIDE'."
+    },
+    {
+     "id": "B1-appose",
+     "claim": "and on the inside the endoderm has pocketed out far enough to MEET that ectoderm: the first pouch stops one membrane thickness short of the first cleft, which is where the tympanic membrane will be",
+     "measure": "gapOverSeg.pouch1.cleft1",
+     "op": "atMost",
+     "value": 0.22
+    }
+   ]
+  },
+  {
+   "mode": "cross_section",
+   "beat": 2,
+   "title": "Split each pouch into its two wings",
+   "day": 38,
+   "camera": "lateral",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.470588
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pharyngeal_wall"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch3"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch4"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch3_dorsal_wing"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch3_ventral_wing"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch4_dorsal_wing"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch4_ventral_wing"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "pouch3_dorsal_wing",
+     "to": "inferior_parathyroid",
+     "kind": "the dorsal wing of the third pouch gives"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "pouch3_ventral_wing",
+     "to": "thymus",
+     "kind": "the ventral wing of the third pouch gives"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "pouch4_dorsal_wing",
+     "to": "superior_parathyroid",
+     "kind": "the dorsal wing of the fourth pouch gives"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "pouch4_ventral_wing",
+     "to": "ultimopharyngeal_body",
+     "kind": "the ventral wing of the fourth pouch gives"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "pouch3",
+      "pouch4"
+     ],
+     "layout": "side-by-side"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "pouch3_ventral_wing",
+     "intensity": 0.95
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    }
+   ],
+   "narration": "Cut across and notice that the third and fourth pouches are not single pockets. Each has a dorsal and a ventral wing, and each wing has its own fate. Both dorsal wings make parathyroid tissue. The ventral wing of the third makes the thymus; the ventral wing of the fourth makes the ultimopharyngeal body. Two pouches, four organs, and the pattern is symmetrical enough to reconstruct under pressure.\n\nThe third and fourth pouches each split into a dorsal wing and a ventral wing, and each wing makes a different organ. This is the detail that turns a memorised list into something you can reconstruct. Dorsal wings make parathyroid tissue in both pouches. The ventral wing of the third makes the thymus, and the ventral wing of the fourth makes the ultimopharyngeal body.",
+   "claims": [
+    {
+     "id": "B2-day",
+     "claim": "this beat draws day 38, when both pouches and all four wings are at their fullest",
+     "measure": "day",
+     "op": "near",
+     "value": 38,
+     "tol": 0.4
+    },
+    {
+     "id": "B2-sep3",
+     "claim": "the third pouch is not a single pocket: its dorsal and ventral wings are separated, ON THIS CAMERA’S SCREEN, by at least 35% of their own mean screen extent",
+     "measure": "wingScreenSepOverExtent.3.lateral",
+     "op": "atLeast",
+     "value": 0.35
+    },
+    {
+     "id": "B2-sep4",
+     "claim": "and so are the fourth pouch’s two wings",
+     "measure": "wingScreenSepOverExtent.4.lateral",
+     "op": "atLeast",
+     "value": 0.35
+    },
+    {
+     "id": "B2-both",
+     "claim": "the third pouch is at FULL extension here, so neither pair of wings is a residue — measured against its own maximum across the whole process",
+     "measure": "fracOfPeak.pouch3",
+     "op": "atLeast",
+     "value": 0.95
+    },
+    {
+     "id": "B2-both4",
+     "claim": "and so is the fourth",
+     "measure": "fracOfPeak.pouch4",
+     "op": "atLeast",
+     "value": 0.95
+    }
+   ]
+  },
+  {
+   "mode": "glands",
+   "beat": 3,
+   "title": "Down the series: ear, tonsil, thymus, parathyroid",
+   "day": 50,
+   "camera": "anterior",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.823529
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pharyngeal_wall"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch1"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch2"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "palatine_tonsil"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "Run down the four pouches. One becomes the tubotympanic recess — middle ear, mastoid antrum and auditory tube — and meets the first cleft to build the tympanic membrane. Two is filled in by the palatine tonsil and leaves the tonsillar fossa. Three gives the thymus and the inferior parathyroid. Four gives the superior parathyroid and the ultimopharyngeal body, whose cells become the calcitonin-secreting C cells of the thyroid.",
+   "claims": [
+    {
+     "id": "B3-day",
+     "claim": "this beat draws day 50, the first stage at which every derivative in the list exists at once",
+     "measure": "day",
+     "op": "near",
+     "value": 50,
+     "tol": 0.4
+    },
+    {
+     "id": "B3-tonsil",
+     "claim": "the second pouch is filled in by the palatine tonsil, which is substantial by now",
+     "measure": "relSize.palatine_tonsil",
+     "op": "atLeast",
+     "value": 0.5
+    },
+    {
+     "id": "B3-thymus",
+     "claim": "three gives the thymus, which by this stage has grown a long way caudally",
+     "measure": "relSize.thymus",
+     "op": "atLeast",
+     "value": 1.3
+    },
+    {
+     "id": "B3-recess",
+     "claim": "one becomes the tubotympanic recess — middle ear, mastoid antrum and auditory tube — which by this stage is the longest of the four pouches and still expanding at its far end",
+     "measure": "pouch1CalibreRatio",
+     "op": "atLeast",
+     "value": 1.8
+    },
+    {
+     "id": "B3-longest",
+     "claim": "and is still the longest of them",
+     "measure": "longestPouch",
+     "op": "equals",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "mode": "cross_section",
+   "beat": 4,
+   "title": "The first pouch meets the first cleft",
+   "day": 44,
+   "camera": "lateral",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.647059
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch1"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cleft1"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "tympanic_membrane"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "tympanic_membrane",
+     "intensity": 0.95
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    }
+   ],
+   "narration": "The first pouch elongates into the tubotympanic recess. Its far end expands into the middle ear cavity and the mastoid antrum, and its narrow proximal part stays as the auditory tube — which is why the middle ear is, embryologically, a blind end of the pharynx and why infection climbs that tube so easily in children. Where the pouch meets the first cleft from outside, endoderm and ectoderm come together with a thin layer of mesoderm between them, and that three-layered sheet is the tympanic membrane.",
+   "claims": [
+    {
+     "id": "B4-day",
+     "claim": "this beat draws day 44, by which the membrane is formed and the recess has its two calibres",
+     "measure": "day",
+     "op": "near",
+     "value": 44,
+     "tol": 0.4
+    },
+    {
+     "id": "B4-calibre",
+     "claim": "its narrow proximal part stays as the auditory tube and its far end expands into the middle ear cavity and the mastoid antrum — measured as a calibre ratio along the built recess",
+     "measure": "pouch1CalibreRatio",
+     "op": "atLeast",
+     "value": 1.8
+    },
+    {
+     "id": "B4-membrane",
+     "claim": "where the pouch meets the first cleft, a three-layered sheet stands BETWEEN them — and it stands between them ON THIS BEAT'S OWN SCREEN, not only in the model's coordinates: its screen position lies between the pouch's and the cleft's by a stated fraction of the three structures' own mean screen extent",
+     "measure": "screenBetween.pouch1.tympanic_membrane.cleft1.lateral",
+     "op": "atLeast",
+     "value": 0.1,
+     "why_this_measure": "Review finding F2, 2026-10-03. This claim used to be screenHeightOverSeg.tympanic_membrane.lateral — the membrane's own screen height on the one camera that projects the apposition axis to almost nothing. A claim that something stands BETWEEN two things cannot be measured as the size of the thing in the middle. RENDER-STANDARD's magnitude-floor rule is why it is normalised rather than a sign test."
+    },
+    {
+     "id": "B4-apart",
+     "claim": "and the pouch and the cleft do NOT run into one another — endoderm and ectoderm stay separate, with the membrane between: the SURFACE separation between the first pouch and the first cleft, measured in intersegments at this beat's own t, is one membrane thick and no more",
+     "measure": "gapOverSeg.pouch1.cleft1",
+     "op": "atMost",
+     "value": 0.22,
+     "why_this_measure": "Review finding F2, 2026-10-03. This claim used to be relSize.tympanic_membrane — the membrane's own extent — so it could not fail for the reason its text states, and it did not: the pouch and the cleft were 1.93 intersegments apart with the membrane floating between them touching neither, and this row passed. A claim about where two structures are relative to each other is now measured as that relation."
+    },
+    {
+     "id": "B4-not-fused",
+     "claim": "and they do not FUSE either — the membrane is a layer, not a join: the same separation is at least two thirds of a membrane thickness, so there is something between them",
+     "measure": "gapOverSeg.pouch1.cleft1",
+     "op": "atLeast",
+     "value": 0.045,
+     "why_this_measure": "The commonest marked-wrong answer in this topic, per this scene's own gaps[], is attributing a cleft derivative to a pouch. A picture in which the two epithelia share space teaches that error harder than a colour could, so the separation is held from BOTH sides: a void fails B4-apart, a fusion fails this."
+    },
+    {
+     "id": "B4-touches",
+     "claim": "and the three-layered sheet TOUCHES both of them — it is the tissue between, not a disc parked in the gap: its surface separation from the pouch and from the cleft are both under a fiftieth of an intersegment",
+     "measure": "gapOverSeg.tympanic_membrane.cleft1",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "B4-touches-pouch",
+     "claim": "— and the same on the endodermal side",
+     "measure": "gapOverSeg.pouch1.tympanic_membrane",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "B4-sheet-seen",
+     "claim": "and the student can actually see it: over its own screen footprint from this camera the membrane is the NEAREST surface on most of it — measured against everything this beat draws, so the pouch or the cleft being drawn in front of it would count against the claim",
+     "measure": "firstHitFrac.4.tympanic_membrane",
+     "op": "atLeast",
+     "value": 0.5,
+     "why_this_measure": "RENDER-STANDARD 3.aa: a claim about what is in front of or between things is measured by FIRST HIT over the beat's whole shown list, not over the pair it names. THE FLOOR MOVED FROM 0.55 TO 0.50 DURING THIS RUN AND THAT IS AN ARGUMENT, NOT A RETREAT — the standard's rule is that a waiver is an argument someone wrote down and a lowered threshold is not, so here is the argument. 0.55 was set from a measurement of a membrane 1.5 times the width of the recess it caps: an overhanging saucer, and the overhang was exactly the part of its own footprint nothing else could cover. Sized honestly at 1.15 of the recess's tip calibre it necessarily surrenders more of its footprint to the two solids it lies between, which is what being between them means. 0.50 states the thing worth stating — that MORE THAN HALF of the membrane is the nearest surface, so it is not mostly hidden. Measured 0.5429 from `lateral` against 0.3786 from `anterior` and 0.3191 from `superior`, which is why this beat keeps the camera it had: the camera choice is a number, not a preference."
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 5,
+   "title": "The trail the thymus leaves",
+   "day": 44,
+   "camera": "lateral",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.647059
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch3"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pouch3_ventral_wing"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "thymopharyngeal_duct"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "thymus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "inferior_parathyroid"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "thyroid_gland"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "thymopharyngeal_duct",
+     "intensity": 0.95
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    }
+   ],
+   "narration": "The thymic primordia grow caudally as two strands, meet in the midline and settle behind the sternum in the anterior mediastinum. Any part of the strand left behind stays where it stopped, which is why ectopic thymic tissue and thymic cysts turn up anywhere along a line from the angle of the mandible to the sternum. The thymus keeps growing until puberty and then involutes into fat, and an absent thymic shadow on a neonatal chest film is a real clue to a pouch failure.\n\nBecause the inferior gland travels with the thymus, it can stop anywhere along that route or overshoot it. An inferior parathyroid may sit high in the neck, inside the carotid sheath, inside the thymus, or down in the anterior mediastinum. That is why an adenoma is not always found at the first neck exploration and why the mediastinum is searched when hyperparathyroidism persists after surgery. The superior gland, which barely moved, is where you expect it.",
+   "claims": [
+    {
+     "id": "B5-day",
+     "claim": "this beat draws day 44 — mid-descent, which is the only stage at which there is a trail to look at",
+     "measure": "day",
+     "op": "near",
+     "value": 44,
+     "tol": 0.4
+    },
+    {
+     "id": "B5-trail",
+     "claim": "the strand has been drawn out a long way behind the descending thymus, and every ectopic site lies ON it — so it must be CONTINUOUS with the third pouch at its upper end, through the ventral wing the thymus arises from, and continuous with the thymus at its lower one",
+     "measure": "gapOverSeg.thymopharyngeal_duct.pouch3_ventral_wing",
+     "op": "atMost",
+     "value": 0.03,
+     "why_this_measure": "Review findings F2 and F6, 2026-10-03. This claim used to be relSize.thymopharyngeal_duct — the duct's own size — and the beat it stands in did not draw the ventral wing at all, so a student saw the duct end in mid air with pouch 3 detached above it. Measured, the duct IS continuous: 0.0065 of an intersegment to the ventral wing it leaves, and the wing 0.008 from the pouch. The defect was the beat's shown set, not the geometry — F6 attributed it to the geometry and the duct-to-pouch3 figure it quoted, 0.312 of an intersegment, is the LENGTH OF THE WING that lies between them. The wing is now shown, and the chain is claimed link by link."
+    },
+    {
+     "id": "B5-lateral",
+     "claim": "at this stage the two strands are still apart — which is why a strand left behind turns up lateral in the neck and not only in the midline",
+     "measure": "thymusMinAbsXOverSeg",
+     "op": "atLeast",
+     "value": 0.3
+    },
+    {
+     "id": "B5-towed",
+     "claim": "and the inferior parathyroid has been towed about a whole intersegment of the way down with it",
+     "measure": "descentSeg.inferior_parathyroid",
+     "op": "between",
+     "value": [
+      0.6,
+      1.4
+     ]
+    },
+    {
+     "id": "B5-trail-wing",
+     "claim": "— and that wing is continuous with the third pouch itself, which is the other link in the chain",
+     "measure": "gapOverSeg.pouch3_ventral_wing.pouch3",
+     "op": "atMost",
+     "value": 0.03
+    },
+    {
+     "id": "B5-trail-thymus",
+     "claim": "— and with the thymus at its lower end, so the trail runs the whole way from the pouch to the mediastinum",
+     "measure": "gapOverSeg.thymopharyngeal_duct.thymus",
+     "op": "atMost",
+     "value": 0.03
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 6,
+   "title": "The thymus descends and the parathyroids cross",
+   "day": 54,
+   "camera": "anterior",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.941176
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "thymus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "thymopharyngeal_duct"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "inferior_parathyroid"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "superior_parathyroid"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "thyroid_gland"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "median_plane"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "inferior_parathyroid",
+     "intensity": 0.95
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "Now watch the movement, because it is the movement that produces the exam question. The thymus grows down towards the anterior mediastinum and tows the third pouch parathyroid behind it, past the fourth pouch parathyroid which barely moves. The result is a crossover: inferior parathyroids from the third pouch, superior parathyroids from the fourth. Because the inferior gland was towed, it can stop anywhere along the route — high in the neck, in the carotid sheath, inside the thymus or in the mediastinum — and that is where a missing adenoma hides.\n\nHere is the point the examiner is testing. Parathyroid tissue from the third pouch ends up below parathyroid tissue from the fourth, so the inferior glands come from the higher pouch and the superior glands from the lower one. The reason is the thymus: it descends a long way and drags the third pouch parathyroid past the fourth pouch parathyroid on the way. Because it is towed rather than placed, the inferior gland's final position is far more variable than the superior gland's — the surgical consequence follows directly.",
+   "claims": [
+    {
+     "id": "B6-day",
+     "claim": "this beat draws day 54, after the crossover and after the two thymic strands have met",
+     "measure": "day",
+     "op": "near",
+     "value": 54,
+     "tol": 0.4
+    },
+    {
+     "id": "B6-crossed",
+     "claim": "the result is a crossover: the gland from the THIRD pouch now lies BELOW the gland from the fourth — measured on this beat’s own screen plane, as a fraction of the two glands’ own mean screen extent",
+     "measure": "ptGapScreenOverExtent.anterior",
+     "op": "atMost",
+     "value": -0.35
+    },
+    {
+     "id": "B6-barely",
+     "claim": "past the fourth pouch parathyroid WHICH BARELY MOVES — under a quarter of an intersegment, with the embryo’s own growth divided out",
+     "measure": "descentSeg.superior_parathyroid",
+     "op": "atMost",
+     "value": 0.25
+    },
+    {
+     "id": "B6-far",
+     "claim": "while the thymus grows down towards the anterior mediastinum, clearing two whole intersegments",
+     "measure": "descentSeg.thymus",
+     "op": "atLeast",
+     "value": 2.0
+    },
+    {
+     "id": "B6-midline",
+     "claim": "and the two strands have met in the midline",
+     "measure": "thymusMinAbsXOverSeg",
+     "op": "atMost",
+     "value": 0.06
+    },
+    {
+     "id": "B6-day-solved",
+     "claim": "the day the two glands actually change places is solved off the built geometry, not asserted — it falls in the second half of the descent",
+     "measure": "crossoverDay",
+     "op": "between",
+     "value": [
+      36.0,
+      48.0
+     ]
+    }
+   ]
+  },
+  {
+   "mode": "glands",
+   "beat": 7,
+   "title": "The ultimopharyngeal body becomes the C cells",
+   "day": 48,
+   "camera": "lateral",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.764706
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ultimopharyngeal_body"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "thyroid_gland"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "c_cells"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "superior_parathyroid"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "ultimopharyngeal_body",
+     "to": "c_cells",
+     "kind": "is absorbed into the thyroid and disperses as"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "c_cells",
+     "intensity": 0.95
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    }
+   ],
+   "narration": "The C cells arrive through the fourth pouch but they are neural crest in origin, and that single fact explains the tumour they give rise to. Medullary thyroid carcinoma is not a follicular cell tumour: it does not concentrate iodine, so radioiodine does not treat it, it is followed with serum calcitonin instead of thyroglobulin, and it belongs with phaeochromocytoma in the multiple endocrine neoplasia type two syndromes through the RET gene. A thyroid cancer that behaves like a neuroendocrine tumour makes sense once you know where its cells came from.",
+   "claims": [
+    {
+     "id": "B7-day",
+     "claim": "this beat draws day 48 — the midpoint of the handover, the one stage at which the ultimopharyngeal body is half gone and the C cells are half arrived, so a student can see one becoming the other",
+     "measure": "day",
+     "op": "near",
+     "value": 48,
+     "tol": 0.4
+    },
+    {
+     "id": "B7-body",
+     "claim": "the ultimopharyngeal body is still present here, on its way in — measured against its own maximum, so the claim is about the handover and not about a size",
+     "measure": "fracOfPeak.ultimopharyngeal_body",
+     "op": "atLeast",
+     "value": 0.4
+    },
+    {
+     "id": "B7-cells",
+     "claim": "and the cells are already arriving as it goes",
+     "measure": "fracOfPeak.c_cells",
+     "op": "atLeast",
+     "value": 0.4
+    },
+    {
+     "id": "B7-dispersed",
+     "claim": "the cells it disperses as are INSIDE the thyroid, not a lump on it",
+     "measure": "cCellsInThyroidFrac",
+     "op": "atLeast",
+     "value": 0.95
+    },
+    {
+     "id": "B7-scatter",
+     "claim": "scattered rather than collected — which is what \"disperses\" means and why they are drawn as a scatter",
+     "measure": "relSize.c_cells",
+     "op": "atLeast",
+     "value": 0.3
+    }
+   ],
+   "section_removed_2026_10_03": "The CROSS_SECTION this beat carried DELETED THE WHOLE THYROID from the frame the player draws, and nothing had ever measured that. viz3d.js:2438 applies a cross-section's clipping plane ONLY to structures whose role is 'context' (isTaught, viz3d.js:167, is role !== 'context'), and the thyroid is this scene's one context structure here. The plane for axis z at offset 0 keeps z <= 0, and the thyroid sits entirely at z 0.51 to 1.39 intersegments ventral — so all of it was clipped. Measured with the player's own clip semantics: thyroid_gland 0.000% of the frame, while the beat's narration is that the ultimopharyngeal body is absorbed INTO the thyroid and claim B7-dispersed asserts the C cells are INSIDE it. A student saw a scatter of yellow cells and a parathyroid floating in space with no gland anywhere. The section is removed rather than re-aimed because its offset is a static number multiplied by 3 while the model grows 5.6-fold across t, so no fixed offset can track the gland — and it was not needed: the thyroid is already drawn at opacity 0.22, which is what lets a student see the C cells inside it. Found by tools/render-pharyngeal-pouches.mjs section 12, which exists because review finding F5 (2026-10-03) could not be resolved without it."
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 8,
+   "title": "When the pouches do not form",
+   "day": 54,
+   "camera": "anterior",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.941176
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "thyroid_gland"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "thymus"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "inferior_parathyroid"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "superior_parathyroid"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "c_cells"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "thyroid_gland",
+     "intensity": 0.95
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "Take away the third and fourth pouches and you have written the case yourself. No thymus, so a baby with recurrent viral and fungal infection and no thymic shadow on the film. No parathyroids, so hypocalcaemia presenting as tetany or a neonatal seizure. The same neural crest cells build the cardiac outflow tract, so add truncus arteriosus or an interrupted aortic arch, with cleft palate and abnormal facies. That is DiGeorge, and it is one deletion producing four systems' worth of findings. Finish with the four-line summary and the crossover, and the topic is closed.\n\nOne deletion, one set of cells, and you can predict the whole picture. Neural crest cells fail to populate the third and fourth pouch territory, so the thymus and the parathyroids do not form. No thymus means no T cell maturation and a baby with recurrent viral and fungal infection. No parathyroids means hypocalcaemia, and the presentation is often neonatal tetany or a seizure in the first days of life. The same cells build the outflow tract of the heart, so add a conotruncal defect — truncus arteriosus or an interrupted aortic arch. Cleft palate and abnormal facies complete it. Two practical points: no live vaccines, and irradiate any blood products.",
+   "claims": [
+    {
+     "id": "B8-day",
+     "claim": "this beat draws day 54 — the same stage and the same camera as the crossover beat, so the two can be compared directly",
+     "measure": "day",
+     "op": "near",
+     "value": 54,
+     "tol": 0.4
+    },
+    {
+     "id": "B8-authored",
+     "claim": "the thymus is ABSENT from this picture because the beat takes it away, not because the model has none: at this stage the model builds a thymus that has cleared two intersegments",
+     "measure": "relSize.thymus",
+     "op": "atLeast",
+     "value": 1.4
+    },
+    {
+     "id": "B8-pt-authored",
+     "claim": "and the same for both parathyroid pairs — the model has them here, and this beat is the lesion",
+     "measure": "relSize.inferior_parathyroid",
+     "op": "atLeast",
+     "value": 0.25
+    },
+    {
+     "id": "B8-thyroid",
+     "claim": "what is left is the thyroid, which is NOT a pouch derivative and is unaffected — the C cells it has already received are the only pouch contribution in the picture",
+     "measure": "relSize.thyroid_gland",
+     "op": "atLeast",
+     "value": 0.6
+    }
+   ]
+  }
+ ],
+ "provenance": {
+  "author": "task",
+  "authored_at": "2026-08-28",
+  "converted_to_3d_at": "2026-10-03",
+  "converted_by": "the model3d BUILD task (run 2026-10-03T16:05Z)",
+  "corrected_at": "2026-10-04T09:05:00Z",
+  "corrected_by": "the model3d REVIEW task (run 2026-10-04T08:52Z)",
+  "corrections": [
+   "2026-10-04, REVIEW ROUND 2: structures[].color for pouch4, pouch4_dorsal_wing, pouch4_ventral_wing (#2874a6 -> #b0387a), ultimopharyngeal_body (#5499c7 -> #d98cb3) and superior_parathyroid (#1f618d -> #6d1b47). The 2026-10-03 rework recorded F3 as addressed and changed the palette in models3d/pharyngeal-pouches.js ONLY. viz3d.js:2427 repaints every mesh from the SCENE's structures[].color on every view change, and viz3d.js:2436 fills the parts-list swatch from the same field, so the model's rose/plum palette never reached a student: driven through the real player, pouch4 came back rgb(40,116,166) and its swatch with it. Measured on the scene's own values, cleft1-to-pouch4 was dE 10.9 and clefts_lower-to-superior_parathyroid dE 9.9 - the exact numbers F3 reported - against cleft1's narration promising a colour nothing inside the apparatus uses. After this change the closest ectoderm-to-endoderm pair in the corpus-visible set is dE 37.1. Colour values only; no geometry, narration, op or claim changed. The model file is already correct and is untouched.",
+   "gaps[2]: the parenthetical describing when the ultimopharyngeal body is shown said 'beat 7 (day 44, its peak)'. Beat 7 stands at day 48 and the model measures the body at 0.50 of its peak there. Text only; no geometry, narration, op or claim was changed."
+  ],
+  "reworked_at": "2026-10-03T19:05Z",
+  "reworked_by": "model3d build run 2026-10-03T19:05Z",
+  "rework_round": 2,
+  "rework_findings_addressed": [
+   "F1",
+   "F2",
+   "F3",
+   "F4",
+   "F5",
+   "F6",
+   "F9a",
+   "F9b"
+  ]
+ },
+ "gaps": [
+  "CONVERTED FROM THE SVG SEQUENCE SCENE on 2026-10-03 by the model3d BUILD task. The scene authored 2026-08-28 had twelve structures[] of which EIGHT were teaching BEATS, not anatomical parts: pouch_plan, wings, crossover, thymus_descent, ectopic_parathyroid, digeorge, c_cell_clinical and pouch_summary had no geometry and never could. Converting means the structures become the parts the model builds, and each of those eight narrations moved VERBATIM onto the view that replaced it — pouch_plan to beat 1, wings to beat 2, thymus_descent and ectopic_parathyroid to beat 5, crossover to beat 6, c_cell_clinical to beat 7, digeorge to beat 8 — or into deferred_beats with the reason, which is where pouch_summary went. The four pouch structures were already anatomical and keep their own narration unchanged, byte for byte. NO NARRATION WAS DELETED. Thirteen new parts were authored with new narration: the wall, the arch bars, the clefts, the median plane, the four wings, the tympanic membrane, the tonsil, the thymus, the duct, both parathyroid pairs, the ultimopharyngeal body, the thyroid and the C cells.",
+  "STATUS IS \"candidate\", NOT \"ready\". It was \"planned\" because no SVG artwork existed; it is not \"ready\" because this run BUILT it and the builder never reviews. ARTWORK-STANDARD section 3: \"The drawer never performs review 2 on their own plate in the same pass... Three versus sixteen, on the same file, on the same day.\" The queue carries it as `built` for the review task.",
+  "EVERY STRUCTURE BUILDS GEOMETRY AT t = 1 AND SOME OF THEM ARE VESTIGES THERE. This is a workaround for queue item 137 (engine__procedural-ref-default-t), not an anatomical claim. viz3d.js parseProceduralRef (:478) defaults an unpinned ref to t = 1 at mount; a structure that builds nothing at t = 1 comes back reason:\"none\", never enters meshes[], and restage() (:1854) filters on `meshes[s.key] && adapter.stageable(s)` — so SET_STAGE can never bring it back at any later t. Two independent reviews have converged on fix (a) for that item and it is not a scene’s to make. So the pouch stems, the four wings, the thymopharyngeal duct and the ultimopharyngeal body never shrink below a tenth of their peak size. NO BEAT SHOWS ONE OF THEM AT A t WHERE IT IS A VESTIGE: the wings appear only in beat 2 (day 38, their peak), the ultimopharyngeal body only in beat 7 (day 48, at 0.50 of its peak — corrected by the review task 2026-10-03: this said “day 44, its peak” and beat 7 stands at day 48, where the model's own B7-body claim measures the body at 0.50 of peak; the substantive claim that no beat shows a structure at its mounting floor is unaffected and the harness proves it independently), and the pouch stems only up to beat 3. Acceptance row V measures every one of them at peak against t = 1 and requires at least a fourfold collapse, so a reviewer can see which structures the floor applies to and that it is a floor rather than a drawn shape. The second pouch is deliberately NOT on that list: what is left of it at t = 1 is the tonsillar fossa, which is real, so it is floored at 0.38 of its peak as anatomy and not at the mounting vestige.",
+  "NO NARRATION CLAIM IN THIS SCENE NAMES A SIDE, AND THAT IS DELIBERATE. RENDER-STANDARD: \"A model with no chiral content cannot witness its own handedness, and an acceptance test written in the same coordinates as the declaration is circular, however carefully it is floored.\" Every structure here is built as a mirror-symmetric PAIR about x = 0 — which is what \"four pairs of pouches count\" means — so flipping the sign of x in the model’s AXES declaration would leave every acceptance row passing and change nothing a student could see. Acceptance row Y asserts the symmetry the model does have; it does not assert handedness. Any future claim here about a LEFT or RIGHT pouch, gland or strand is UNPROVEN until the model carries a landmark that is independently right/left determined, or a corpus-level test checks its axes string against a mesh-anchored model.",
+  "THE FIFTH POUCH is described as rudimentary and treated as part of the fourth, which is how most texts present it. Where a text counts it separately it is credited with the ultimopharyngeal body — the derivative is the same either way, and the narration says so rather than picking a side. No separate geometry is built for it.",
+  "WHETHER THE C CELLS ARE ENDODERMAL OR NEURAL CREST is not universally stated the same way across texts. The scene teaches the neural crest origin because that is what makes medullary thyroid carcinoma and its behaviour make sense, and it says so explicitly rather than leaving it implied. The geometry cannot express a cell’s lineage: the C cells are drawn in a colour of their own inside the thyroid, and the claim is carried by the words.",
+  "THE AUDITORY TUBE AND THE MIDDLE EAR CAVITY ARE NOT SEPARATE KEYS. They are the two ends of ONE solid, pouch1, whose calibre is narrow where it leaves the pharynx and expanded at its far end. There is no waist between them — it is a continuous taper — and RENDER-STANDARD says segment boundaries belong at the waists, so a key boundary there would draw a border a student would then look for in a specimen. The consequence is that a beat cannot highlight the tube alone. What beat 4 does instead is measure the calibre ratio off the built recess (acceptance row E1-calibre, 3.51 at t = 1 against a floor of 1.8) and name both parts in the narration.",
+  "THE MASTOID ANTRUM is inside the pouch-1 expansion and is not separately drawn, for the same reason. It is named in the narration and in match.terms.",
+  "THE DESCENT IS DRIVEN BY DIFFERENTIAL GROWTH, which is the mechanism, but the model does not build the structures that do the growing — there is no neck, no sternum, no mediastinum and no great vessels here. The thymus’s resting place is expressed as a stated number of intersegments below the thyroid’s lower pole and ventral of the pharyngeal axis, which is \"retrosternal\" in this frame without a sternum in it. A student looking for the sternum will not find it.",
+  "WEEK NUMBERS ARE THE STANDARD TEACHING APPROXIMATIONS. t = 0 is day 22 and t = 1 is day 56; pouches bud through weeks four and five and thymic descent is complete by about week eight. Texts differ by several days and the narration gives them as approximations. The crown-rump length law the whole model scales by is a least-squares fit through three stated anchors (2.0 mm at day 22, 8.0 mm at day 35, 30.0 mm at day 56) with a real residual — reported by acceptance row G-fit as rms 0.157 in ln(mm), i.e. about 17%. That is the accuracy of the sizes in this scene.",
+  "THE SOLVED CROSSOVER DAY IS 41.6, and it is a property of this model rather than a datum from a text. What is anatomically load-bearing is the ORDER — that the pouch-3 gland ends below the pouch-4 one — and the day is what falls out of the descent geometry when you ask when the sign flips. Texts do not give a day for the crossover. Beat 6 claims it only as \"the second half of the descent\" (between day 36 and 48), which is as much as the model can honestly support.",
+  "\"Pharyngeal arches\" is NOT claimed in covers[]. The arches are built as context — the bars the pouches lie between — and the arch cartilages, muscles, cranial nerves and arch arteries belong to that entry and are deliberately absent here.",
+  "\"Pharyngeal clefts & membranes\" is NOT claimed. The clefts are built because the first one is needed for the tympanic membrane and because keeping ectoderm visibly apart from endoderm is this topic’s commonest error — but the external acoustic meatus, the cervical sinus, the branchial cyst and the branchial fistula belong to that entry.",
+  "\"Thyroid gland development\" is NOT claimed. The thyroid is built as context and as the landmark both parathyroid pairs come to rest on; the ultimopharyngeal body is followed only as far as the C cells joining it. The descent from the foramen caecum, the thyroglossal duct and the ectopic thyroid are that entry’s subject.",
+  "IMMUNOLOGY BEYOND THE CONSEQUENCE OF AN ABSENT THYMUS is not taught here. T cell development, thymic selection and the full immunodeficiency differential belong to physiology and immunology; this scene names only the clinical picture that follows from the pouch failing.",
+  "THE PARATHYROID GLANDS’ PHYSIOLOGY — parathyroid hormone, calcium regulation, primary and secondary hyperparathyroidism — is named only where it explains the surgical relevance of an ectopic gland. It appears in match.terms so a highlighted term still reaches this scene.",
+  "VIEW MODES. CURRICULUM.json asks this structure for `cross_section` and `glands`, and both are supplied: beats 1 and 4 are cross_section, beats 3 and 7 are glands. The eight beats of the 3D scene replace the five of the sequence scene — three new views were authored because three of the original beats were carrying two pictures each: the descent and the trail it leaves are not the same frame (beats 5 and 6), the ear is not the same frame as the run down the series (beat 4), and the C cells are not the same frame as the fourth pouch (beat 7).",
+  "THE TWO OPS THE SVG SCENE AUTHORED THAT ARE NOT CARRIED OVER. PEEL_LAYER on the organ layer was authored in the old beat 5 because the same flat panel was read twice, once for what forms and once for what is missing; in 3D that is two cameras on two stages and the work is done by beat 6 and beat 8 standing at the SAME day and the SAME anterior camera with three structures hidden, which is a true with-and-without pair rather than a degraded op. TRACE_STRUCTURE on concept:pouch-series and concept:thymic-descent is not carried over either: the procedural adapter degrades TRACE to a highlight (viz3d.js:536) because a procedural model has no centreline to walk, and both traces were pointing at concepts rather than at drawn regions in any case. What they were for — progression through the series, migration over time — is now carried by SET_STAGE and by the beats being at different days.",
+  "CROSS_SECTION CUTS ONLY THE CONTEXT STRUCTURES, and beat 1 depends on that. viz3d.js:2438 sets `m.material.clippingPlanes = (clipping && !isTaught(s)) ? [clipPlane] : null`, and isTaught is true for any role other than \"context\" (viz3d.js:167). So beat 1’s CROSS_SECTION on x opens the pharyngeal wall — which is role \"context\" for exactly this reason — and leaves the pouches whole, which is the dissection the narration asks for: look at the wall of the pharynx from the lumen. If a later edit promotes pharyngeal_wall to a taught role, beat 1 stops being a cutaway and becomes an outside view of an opaque tube.",
+  "THE CROSS_SECTION OFFSET IS 0 AND MUST STAY 0. The player multiplies the authored offset by 3 (viz3d.js:2061) and applies the plane in WORLD space, after fit() has normalised the scene; the model’s own units change with t because the whole apparatus scales with crown-rump length. An offset of 0 is the median plane at every t and under any normalisation. A non-zero offset in this scene would mean a different anatomical level at every beat, which is why the old beat 2’s `CROSS_SECTION axis y offset 0` was dropped rather than retargeted: on this model a y-cut at the world origin is above everything and removes nothing.",
+  "THE LATERAL LAYOUT WAS REBUILT 2026-10-03 FROM REVIEW FINDINGS F1 AND F4, AND THE APPOSITION IS NOW EXACT BY CONSTRUCTION RATHER THAN MEASURED AND HOPED FOR. The old layout placed all four grooves at one stated radius (F_CLEFT = 3.60 intersegments) chosen by eye; measured, the first pouch stopped 1.93 intersegments short of the first cleft at EVERY t, with the tympanic membrane floating in the middle of that void touching neither. Now: a groove's floor is placed on its own pouch's end tangent one membrane-thickness beyond its dome, so pouch-to-cleft is F_MEMB by construction (0.1019 of an intersegment measured at day 44); the body surface is SOLVED to pass through the grooves' lips; and the other three grooves' depths are derived from that surface. Claims B1-appose, B1-groove, B4-apart, B4-not-fused, B4-touches and B4-touches-pouch assert all of it at the beats' own t, and acceptance rows AP and AG assert it across six days.",
+  "surface_ectoderm IS NEW AND IS A SHELL, NOT A SKIN WITH A FACE. It exists because a groove is a feature of a surface and there was none: the four clefts hung in space with the pharyngeal wall ending at 0.80 of an intersegment and the clefts beginning at 3.94. It is a thick-walled swept shell because every gate in this model's harness — watertight edge pairing, and the ray-parity test — is defined on a closed solid and an open panel has neither. It carries no surface detail, no facial or limb form and no cervical sinus as a separate structure; it is the body surface as a smooth envelope of the pharyngeal region, and nothing more should be read off its shape.",
+  "THE SURFACE ECTODERM TAKES 61% OF BEAT 1's FRAME, MEASURED, AND THAT IS THE COST OF FIXING F4. With the beat's own CROSS_SECTION applied the shares are surface_ectoderm 61.00, pharyngeal_wall 13.71, pouch1 5.21, pouch2 2.06, pouch3 1.90, clefts_lower 1.82, arch_bars 1.11, cleft1 0.92, pouch4 0.79 — every one above the 0.3% floor the corpus uses, but the skin is the backdrop and the apparatus is small in front of it. It is drawn at opacity 0.16 and the player refits the camera to what is visible, so showing the surface enlarges beat 1's frame and shrinks its subject. The alternative considered and NOT taken was a ninth beat carrying the arrangement on its own, which would be the better composition; it was not taken because inserting a beat renumbers every beat after it and every claim id that names one, and this run would rather hand a reviewer a measured trade-off than an unreviewed renumbering. THIS IS THE FIRST THING TO LOOK AT.",
+  "BEAT 7's CROSS_SECTION WAS REMOVED THIS RUN BECAUSE IT DELETED THE WHOLE THYROID. The gap note above about CROSS_SECTION cutting only context structures was already in this file and was right; what nobody had done was apply it to beat 7, whose ONE context structure is the thyroid gland. The plane for axis z at offset 0 keeps z <= 0 and the thyroid sits entirely at z 0.51 to 1.39 intersegments ventral, so all of it was clipped: measured 0.000% of the frame, in a beat whose narration says the ultimopharyngeal body is absorbed INTO the thyroid and whose claim B7-dispersed asserts the C cells are inside it. The section is not re-aimed because the authored offset is multiplied by 3 and applied in world space while the model grows 5.6-fold across t, so no fixed offset tracks the gland. It was not needed: the thyroid is drawn at opacity 0.22, which is what lets a student see the cells inside it. Found by render-pharyngeal-pouches.mjs section 12.",
+  "THE SCENE INDEX WAS NOT REBUILT AND surface_ectoderm's SEARCH TERMS ARE THEREFORE NOT IN IT. viz-training/scenes/index.json is built by tools/build-scene-index.mjs, which readdirSync's the whole scenes directory and rewrites the file wholesale. This run works on a staged copy of the repo, and while it was running another build run was actively rewriting embryology__pharyngeal-apparatus__pharyngeal-clefts-membranes.json — its mtime moved from the August version to 2026-10-03T18:56 and its size from 29,446 to 82,320 bytes mid-run. Regenerating index.json from this run's snapshot would have written that run's half-finished scene into the shared index, and index.json has no compare-and-swap protection finer than its own mtime. The consequence of leaving it is small and bounded: role 'context' structures do not enter the index's parts list at all, so only the term mappings 'surface ectoderm', 'body surface', 'skin', 'cervical sinus' and 'branchial cyst' are missing, and this scene's structure count reads 22 rather than 23. A corpus-wide run should rebuild it.",
+  "THE GROOVES ARE SWEPT AT ring 14 AND LOOK FACETED CLOSE UP. Visible in the beat-4 frame as a sawtooth along the first cleft's upper edge. It is a tessellation choice inherited from before this run and not a winding fault — the harness reads 0 of 1288 hull triangles mis-wound and 0 unpaired edges on cleft1 at every sampled day. Raising the ring count is cheap and was not done because it changes triangle counts, which acceptance row T-poles pins deliberately."
+ ],
+ "deferred_beats": [
+  {
+   "from_structure": "pouch_summary",
+   "title": "The four-line summary",
+   "narration": "Reduce it to four lines and rebuild the detail from them. One, the ear — middle ear cavity and auditory tube. Two, the tonsil. Three, thymus and inferior parathyroid. Four, superior parathyroid and the C cells. Then add the one thing the list cannot show: the third pouch derivative ends up below the fourth pouch derivative, because the thymus dragged it there.",
+   "terms": [
+    "one ear",
+    "two tonsil",
+    "three thymus and inferior parathyroid",
+    "four superior parathyroid and C cells",
+    "pouch derivatives",
+    "revision list"
+   ],
+   "why_not_a_view": "It is a revision list, and the picture it would draw is the picture beat 3 already draws. RENDER-STANDARD: \"A VIEW MUST CHANGE THE PICTURE. If a beat renders the same frame as the one before it — same structures, no highlight, no rotation, no section — it is not a view. It is text, and text has its own home in this app.\" Every fact in these four lines is made visible somewhere else in the scene: the ear in beats 3 and 4, the tonsil in beat 3, the thymus and the inferior parathyroid in beats 5 and 6, the superior parathyroid and the C cells in beats 6 and 7, and the crossover — the one thing the list cannot show — in beat 6, where it is measured on the beat’s own screen plane. The words are kept here in full and belong in a text panel or a revision card, not in a ninth frame identical to the third.",
+   "where_it_belongs": "a text panel at the end of the scene, or the topic’s revision card"
+  }
+ ],
+ "visibility_waivers": [
+  {
+   "view": 7,
+   "key": "pouch4",
+   "why": "NOT SHOWN RATHER THAN NOT VISIBLE, and the reason is the biology. Beat 7 stands at day 48 because that is the one stage at which the ultimopharyngeal body is half gone and the C cells are half arrived — the handover the narration describes. By day 48 the fourth pouch is at 0.16 of its own peak and its ventral wing at 0.26: both have involuted, which is correct, and drawing them beside the thing they became would show a student two structures that no longer exist. Measured: pouch4 peaks at day 38, the wing at day 40.",
+   "shown_instead_by": "beat 2, at day 38, where every wing is at full extension and a SHOW_RELATIONSHIP runs from pouch4_ventral_wing to ultimopharyngeal_body"
+  },
+  {
+   "view": 7,
+   "key": "pouch4_ventral_wing",
+   "why": "As pouch4 above — 0.26 of its own peak at day 48.",
+   "shown_instead_by": "beat 2, at day 38"
+  },
+  {
+   "view": 3,
+   "key": "tympanic_membrane",
+   "why": "Beat 3 runs down the whole series and its narration names the membrane, but the membrane sits 2.9 intersegments lateral of the pharyngeal axis while the rest of this beat’s subject is within 1.5 — showing it stretched the subject box and took the beat from 9.7% of the frame to 7.2%, under the tool’s 8% subject floor. It is not that the membrane cannot be seen; it is that showing it here makes everything else too small to read.",
+   "shown_instead_by": "beat 4, whose entire subject it is, at 0.93 of an intersegment of screen height"
+  },
+  {
+   "view": 3,
+   "key": "thymus",
+   "why": "Beat 3’s narration runs the full series — ear, tonsil, thymus, both parathyroids — and no single camera can hold the ear and the mediastinum at a size a student can read. Measured when it was tried: the subject spanned 179 world units, and the thymus, both parathyroids and the thyroid all drew ZERO pixels because the frame that fits the whole apparatus leaves them a handful of pixels each and the compare op refit the camera onto the pharynx. The beat now shows the first two pouches and the tonsil, which are what a frame this tight can carry, and the words still run the series.",
+   "shown_instead_by": "beats 5 and 6 for the thymus, beat 6 for both parathyroid pairs"
+  },
+  {
+   "view": 3,
+   "key": "inferior_parathyroid",
+   "why": "As thymus above.",
+   "shown_instead_by": "beat 6, where the crossover is measured on that beat’s own screen plane"
+  },
+  {
+   "view": 3,
+   "key": "superior_parathyroid",
+   "why": "As thymus above.",
+   "shown_instead_by": "beats 6 and 7"
+  },
+  {
+   "view": 1,
+   "key": "surface_ectoderm",
+   "why": "NOT A WAIVER FOR A STRUCTURE THAT CANNOT BE SEEN — the opposite, and it is recorded here because the number is surprising and a reviewer should meet it with the argument rather than derive it. surface_ectoderm is the NEAREST surface over 61.00% of beat 1's frame once the beat's own CROSS_SECTION is applied. It is context at opacity 0.16, it is the outermost thing the model builds, and the beat is sectioned and seen from `anterior` — so a student is looking into a cut neck with the dorsal half of the skin behind everything. The structures in front of it all clear the 0.3% floor (pouch1 5.21, arch_bars 1.11, cleft1 0.92, pouch4 0.79). The corpus walk, tools/measure-scene-visibility.mjs, does NOT implement CROSS_SECTION, so its own numbers for this beat are measured on an uncut shell that covers everything and reports every other structure only through the alpha-aware pass. Both sets of numbers are in BUILD-LOG.md."
+  },
+  {
+   "view": 4,
+   "key": "__subject_fill__",
+   "why": "BEAT 4 FAILS tools/measure-scene-visibility.mjs's 8% SUBJECT-FILL FLOOR, AT 7.71%, AND THIS RUN DID NOT TUNE IT UP. Stated plainly because it is the one corpus check this item does not pass. The beat shows exactly three things — pouch1, the tympanic membrane and cleft1 — so nothing foreign is taking the frame: the subject's own bounding box fills 31.4% and its ink is 7.71%, because the tubotympanic recess is a long tapering cone lying diagonally and a diagonal cone fills about a quarter of its own box. It measured 8.41% before this run only because the tympanic membrane was drawn 1.7 times the width of the recess it caps — an overhanging saucer, visible as one in the render — and the overhang was ink. Sizing it honestly at 1.15 of the tip calibre cost 0.70 of a percentage point. WHAT WAS TRIED: widening the membrane to 1.40 of the tip calibre, which is still a rim rather than a saucer and still defensible anatomically, reached 7.99% — one hundredth of a point short. That is the signal that the membrane's width is not what this measure is about, so it was put back to 1.15, which is the size chosen for the picture rather than for the threshold. WHAT WOULD ACTUALLY FIX IT is a camera perpendicular to the recess's own axis, which is neither of the two the player offers near it (`lateral` gives the membrane first-hit 0.5429 and `anterior` 0.3786), or splitting the beat so the calibre claim keeps the whole cone and the apposition claim gets a close view of the tip. Both are composition changes a review should weigh, not a builder's to make unilaterally in a rework round."
+  }
+ ]
 }

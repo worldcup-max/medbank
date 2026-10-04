@@ -1,672 +1,1943 @@
 {
-  "schema": 2,
-  "id": "embryology__folding-of-the-embryo__body-cavity-coelom",
-  "mode": "sequence",
-  "deferred_modes": [
-    "diagram"
+ "schema": 2,
+ "id": "embryology__folding-of-the-embryo__body-cavity-coelom",
+ "mode": "3d_anatomy",
+ "deferred_modes": [
+  "sequence",
+  "diagram"
+ ],
+ "course": "Embryology",
+ "topic": "Folding of the Embryo",
+ "structure": "Body cavity (coelom)",
+ "covers": [
+  "Body cavity (coelom)"
+ ],
+ "learning_goal": "Trace one horseshoe-shaped cavity from its appearance in lateral plate mesoderm to three separate serous cavities, name the four partitions and the four parts of the diaphragm, explain why the diaphragm is supplied by C3, C4 and C5, and use each partition's failure to explain congenital diaphragmatic hernia and its variants.",
+ "status": "candidate",
+ "provider": {
+  "primary": "procedural",
+  "fallbacks": []
+ },
+ "match": {
+  "topics": [
+   "body cavity",
+   "coelom",
+   "intraembryonic coelom",
+   "folding of the embryo",
+   "diaphragm development",
+   "serous cavities",
+   "pericardium",
+   "pleura",
+   "peritoneum",
+   "congenital diaphragmatic hernia"
   ],
-  "course": "Embryology",
-  "topic": "Folding of the Embryo",
-  "structure": "Body cavity (coelom)",
-  "covers": [
-    "Body cavity (coelom)"
-  ],
-  "learning_goal": "Trace one horseshoe-shaped cavity from its appearance in lateral plate mesoderm to three separate serous cavities, name the four partitions and the four parts of the diaphragm, explain why the diaphragm is supplied by C3, C4 and C5, and use each partition's failure to explain congenital diaphragmatic hernia and its variants.",
-  "status": "planned",
-  "provider": {
-    "primary": "svg",
-    "fallbacks": []
-  },
-  "match": {
-    "topics": [
-      "body cavity",
-      "coelom",
-      "intraembryonic coelom",
-      "folding of the embryo",
-      "diaphragm development",
-      "serous cavities",
-      "pericardium",
-      "pleura",
-      "peritoneum",
-      "congenital diaphragmatic hernia"
-    ],
-    "terms": [
-      "body cavity",
-      "coelom",
-      "intraembryonic coelom",
-      "extraembryonic coelom",
-      "chorionic cavity",
-      "lateral plate mesoderm",
-      "somatic mesoderm",
-      "parietal mesoderm",
-      "somatopleure",
-      "splanchnic mesoderm",
-      "visceral mesoderm",
-      "splanchnopleure",
-      "horseshoe shape",
-      "U shaped cavity",
-      "pericardial cavity",
-      "pericardioperitoneal canal",
-      "pleural cavity",
-      "peritoneal cavity",
-      "serous membrane",
-      "parietal layer",
-      "visceral layer",
-      "mesothelium",
-      "septum transversum",
-      "central tendon",
-      "pleuropericardial fold",
-      "pleuropericardial membrane",
-      "fibrous pericardium",
-      "common cardinal vein",
-      "phrenic nerve",
-      "C3 C4 C5",
-      "keeps the diaphragm alive",
-      "pleuroperitoneal membrane",
-      "pleuroperitoneal canal",
-      "week 7",
-      "dorsal mesentery of the oesophagus",
-      "crura",
-      "body wall myoblasts",
-      "peripheral muscle of diaphragm",
-      "descent of the diaphragm",
-      "cervical somites",
-      "C3 to C5 myotomes",
-      "referred pain to the shoulder",
-      "supraclavicular nerves",
-      "dorsal mesentery",
-      "ventral mesentery",
-      "lesser omentum",
-      "falciform ligament",
-      "greater sac",
-      "lesser sac",
-      "omental bursa",
-      "epiploic foramen",
-      "foramen of Winslow",
-      "congenital diaphragmatic hernia",
-      "Bochdalek hernia",
-      "posterolateral",
-      "left sided",
-      "pulmonary hypoplasia",
-      "scaphoid abdomen",
-      "bowel sounds in the chest",
-      "Morgagni hernia",
-      "retrosternal",
-      "anteromedial",
-      "foramen of Morgagni",
-      "oesophageal hiatus hernia",
-      "eventration of the diaphragm",
-      "ectopia cordis",
-      "pentalogy of Cantrell",
-      "ascites",
-      "pleural effusion",
-      "pericardial effusion"
-    ]
-  },
-  "camera": {
-    "framing": "anterior"
-  },
-  "structures": [
-    {
-      "key": "coelom_appears",
-      "label": "A cavity appears inside the lateral plate mesoderm",
-      "role": "context",
-      "group": "One cavity",
-      "layer": "organ",
-      "color": "#aeb6bf",
-      "terms": [
-        "lateral plate mesoderm",
-        "splits",
-        "intraembryonic coelom",
-        "week 3",
-        "spaces coalesce",
-        "somatic mesoderm",
-        "splanchnic mesoderm",
-        "somatopleure",
-        "splanchnopleure"
-      ],
-      "narration": "In week three small spaces appear inside the lateral plate mesoderm on each side and run together into one cavity, the intraembryonic coelom. That split leaves somatic mesoderm against the ectoderm and splanchnic mesoderm against the endoderm — the somatopleure and the splanchnopleure. Every serous cavity in the adult is a surviving piece of this one space."
-    },
-    {
-      "key": "horseshoe",
-      "label": "It is one horseshoe, open at both ends",
-      "role": "part",
-      "group": "One cavity",
-      "layer": "organ",
-      "color": "#5d6d7e",
-      "terms": [
-        "horseshoe shape",
-        "U shaped",
-        "continuous across the midline",
-        "cranial part",
-        "future pericardial cavity",
-        "two limbs",
-        "communicates with extraembryonic coelom",
-        "chorionic cavity",
-        "week 3"
-      ],
-      "narration": "Draw it from the front and it is a horseshoe. The bend across the front of the head end becomes the pericardial cavity, the two limbs running back on either side become pleural and peritoneal cavities, and at this stage both limbs open freely into the extraembryonic coelom. One continuous space — remember that, because everything after this is partitioning."
-    },
-    {
-      "key": "folding_closes",
-      "label": "Folding closes it and puts the heart in front",
-      "role": "part",
-      "group": "One cavity",
-      "layer": "organ",
-      "color": "#85929e",
-      "terms": [
-        "cranio-caudal folding",
-        "lateral folding",
-        "week 4",
-        "pericardial cavity moves ventrally",
-        "closed cavity",
-        "loses communication",
-        "extraembryonic coelom",
-        "pericardioperitoneal canals",
-        "dorsal to the septum transversum"
-      ],
-      "narration": "Folding does two things to the horseshoe. The head fold swings the pericardial cavity from in front of the mouth to below and behind the heart region, and the lateral folds pinch off both openings into the extraembryonic coelom. The cavity is now sealed, and the only connections left inside are two narrow pericardioperitoneal canals running behind the septum transversum, one on each side."
-    },
-    {
-      "key": "serous_layers",
-      "label": "Why every serous cavity has two layers",
-      "role": "part",
-      "group": "One cavity",
-      "layer": "organ",
-      "color": "#7f8c8d",
-      "terms": [
-        "parietal layer",
-        "somatic mesoderm",
-        "visceral layer",
-        "splanchnic mesoderm",
-        "mesothelium",
-        "serous fluid",
-        "potential space",
-        "parietal pleura",
-        "visceral pleura",
-        "parietal peritoneum",
-        "visceral peritoneum",
-        "somatic innervation",
-        "sharply localised pain",
-        "visceral innervation",
-        "poorly localised pain"
-      ],
-      "narration": "Because the cavity was carved out of a single sheet that split in two, each serous cavity is lined on the outside by somatic mesoderm and on the inside by splanchnic mesoderm. That is the parietal and visceral layer of pleura, pericardium and peritoneum, with a film of fluid between them. It also explains their nerve supply: the parietal layer takes somatic nerves and hurts sharply and precisely, the visceral layer takes autonomic nerves and gives dull, badly localised pain."
-    },
-    {
-      "key": "septum_transversum",
-      "label": "Partition 1 — the septum transversum",
-      "role": "part",
-      "group": "Partitions",
-      "layer": "organ",
-      "color": "#c0392b",
-      "terms": [
-        "septum transversum",
-        "mesoderm",
-        "thick plate",
-        "incomplete partition",
-        "central tendon of diaphragm",
-        "liver",
-        "head fold",
-        "cervical level",
-        "descends",
-        "ventral mesentery"
-      ],
-      "narration": "The first partition is a thick plate of mesoderm called the septum transversum, carried down by the head fold from the neck to lie between the heart and the developing liver. It is deliberately incomplete: it separates the pericardial cavity from the peritoneal cavity everywhere except at the two pericardioperitoneal canals behind it. It becomes the central tendon of the diaphragm."
-    },
-    {
-      "key": "pleuropericardial",
-      "label": "Partition 2 — the pleuropericardial membranes",
-      "role": "part",
-      "group": "Partitions",
-      "layer": "organ",
-      "color": "#e74c3c",
-      "terms": [
-        "pleuropericardial folds",
-        "pleuropericardial membranes",
-        "common cardinal veins",
-        "phrenic nerve",
-        "grow medially",
-        "fuse with the mesenchyme around the oesophagus",
-        "separate pleural from pericardial",
-        "fibrous pericardium",
-        "week 5"
-      ],
-      "narration": "The lungs grow into the pericardioperitoneal canals and expand, splitting the body wall into two folds on each side. The upper pair are the pleuropericardial folds, carrying the common cardinal veins and the phrenic nerves. They grow medially and fuse in the midline, walling the pericardial cavity off from the two pleural cavities, and what is left of them becomes the fibrous pericardium — which is exactly why the phrenic nerve runs on its surface."
-    },
-    {
-      "key": "pleuroperitoneal",
-      "label": "Partition 3 — the pleuroperitoneal membranes",
-      "role": "part",
-      "group": "Partitions",
-      "layer": "organ",
-      "color": "#ec7063",
-      "terms": [
-        "pleuroperitoneal folds",
-        "pleuroperitoneal membranes",
-        "close the pericardioperitoneal canals",
-        "week 7",
-        "right closes before left",
-        "fuse with septum transversum",
-        "fuse with dorsal mesentery of the oesophagus",
-        "separate pleural from peritoneal"
-      ],
-      "narration": "The lower pair are the pleuroperitoneal folds. They grow forward and inward and fuse with the septum transversum in front and the dorsal mesentery of the oesophagus in the middle, closing the two canals by about week seven. The right canal closes before the left, and the left is larger — which is the whole reason the common congenital diaphragmatic hernia is on the left."
-    },
-    {
-      "key": "muscular_ingrowth",
-      "label": "Partition 4 — body wall muscle grows in around the rim",
-      "role": "part",
-      "group": "Partitions",
-      "layer": "muscle",
-      "color": "#f5b041",
-      "terms": [
-        "body wall myoblasts",
-        "peripheral rim",
-        "muscular part of the diaphragm",
-        "costal part",
-        "crura",
-        "dorsal mesentery of the oesophagus",
-        "four sources",
-        "intercostal nerves",
-        "peripheral sensory supply",
-        "T7 to T12"
-      ],
-      "narration": "Finally, myoblasts from the body wall grow inward around the rim to make the muscular periphery, and the dorsal mesentery of the oesophagus supplies the crura. So the diaphragm has four sources: septum transversum for the central tendon, pleuroperitoneal membranes, the oesophageal mesentery for the crura, and body wall for the muscular rim. Count them off on four fingers and the whole developmental story is retrievable."
-    },
-    {
-      "key": "phrenic_descent",
-      "label": "The diaphragm descends, and the nerve follows it",
-      "role": "part",
-      "group": "Partitions",
-      "layer": "organ",
-      "color": "#f4d03f",
-      "terms": [
-        "descent of the diaphragm",
-        "cervical somites",
-        "C3 C4 C5",
-        "myotomes",
-        "phrenic nerve",
-        "C3 4 and 5 keep the diaphragm alive",
-        "L1 level by week 8",
-        "long nerve",
-        "referred pain to the shoulder tip",
-        "supraclavicular nerves",
-        "C3 C4",
-        "Kehr sign"
-      ],
-      "narration": "The septum transversum starts opposite the third to fifth cervical somites, so the muscle that forms in it takes its nerve from C3, C4 and C5 — the phrenic. As the embryo elongates the diaphragm descends to the level of the first lumbar vertebra, dragging the nerve behind it, which is why so short a muscle has so long a nerve. It is also why irritation under the diaphragm, from blood or infection or air, is felt at the tip of the shoulder: the supraclavicular nerves are C3 and C4 too."
-    },
-    {
-      "key": "pericardial_cavity",
-      "label": "The pericardial cavity",
-      "role": "part",
-      "group": "The three cavities",
-      "layer": "organ",
-      "color": "#2874a6",
-      "terms": [
-        "pericardial cavity",
-        "bend of the horseshoe",
-        "fibrous pericardium",
-        "serous pericardium",
-        "parietal layer",
-        "visceral layer",
-        "epicardium",
-        "pericardial effusion",
-        "cardiac tamponade"
-      ],
-      "narration": "The bend of the horseshoe becomes the pericardial cavity, closed off by the pleuropericardial membranes. Its outer wall is the fibrous pericardium, lined by the parietal serous layer, and the visceral layer clings to the heart as the epicardium. Because it is a closed, unyielding bag, fluid collecting inside it compresses the heart rather than expanding the space."
-    },
-    {
-      "key": "pleural_cavities",
-      "label": "The pleural cavities",
-      "role": "part",
-      "group": "The three cavities",
-      "layer": "organ",
-      "color": "#117864",
-      "terms": [
-        "pleural cavities",
-        "pericardioperitoneal canals",
-        "lung buds expand",
-        "parietal pleura",
-        "visceral pleura",
-        "two separate cavities",
-        "do not communicate",
-        "pleural effusion",
-        "pneumothorax"
-      ],
-      "narration": "The two pericardioperitoneal canals become the pleural cavities as the lung buds expand into them, pushing the body wall out ahead of themselves. Note that they end up completely separate from each other and from the pericardium — three sealed spaces where there was one. A pneumothorax on one side therefore does not empty into the other."
-    },
-    {
-      "key": "peritoneal_cavity",
-      "label": "The peritoneal cavity, and its mesenteries",
-      "role": "part",
-      "group": "The three cavities",
-      "layer": "organ",
-      "color": "#7d3c98",
-      "terms": [
-        "peritoneal cavity",
-        "largest part of the coelom",
-        "dorsal mesentery",
-        "ventral mesentery",
-        "septum transversum",
-        "lesser omentum",
-        "falciform ligament",
-        "greater sac",
-        "lesser sac",
-        "omental bursa",
-        "epiploic foramen",
-        "foramen of Winslow",
-        "stomach rotation",
-        "ascites"
-      ],
-      "narration": "Everything below the diaphragm stays as the peritoneal cavity. The gut hangs in it from a dorsal mesentery along its whole length, while a ventral mesentery exists only in the upper abdomen, cut from the septum transversum — which is why the lesser omentum and falciform ligament are there and nowhere lower. The stomach's rotation then drags part of the cavity behind it as the lesser sac, leaving the epiploic foramen as its only doorway."
-    },
-    {
-      "key": "bochdalek",
-      "label": "Bochdalek hernia — the pleuroperitoneal membrane never closed",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#cb4335",
-      "terms": [
-        "congenital diaphragmatic hernia",
-        "Bochdalek hernia",
-        "posterolateral defect",
-        "left sided",
-        "80 to 90 percent left",
-        "pleuroperitoneal membrane fails to close",
-        "abdominal viscera in the chest",
-        "pulmonary hypoplasia",
-        "scaphoid abdomen",
-        "bowel sounds in the chest",
-        "mediastinal shift",
-        "respiratory distress at birth",
-        "polyhydramnios",
-        "antenatal ultrasound"
-      ],
-      "narration": "If a pleuroperitoneal membrane fails to close its canal, abdominal viscera pass into the chest — a Bochdalek hernia, posterolateral, and on the left in the great majority because the left canal is larger and closes later. The danger is not the displaced bowel but the lung it prevented from growing: the baby is born with pulmonary hypoplasia and is in respiratory distress immediately. A flat or scaphoid abdomen with bowel sounds in the chest is the classic bedside picture."
-    },
-    {
-      "key": "morgagni",
-      "label": "Morgagni hernia and the other diaphragmatic defects",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#e74c3c",
-      "terms": [
-        "Morgagni hernia",
-        "retrosternal",
-        "anteromedial",
-        "right sided",
-        "foramen of Morgagni",
-        "septum transversum defect",
-        "often asymptomatic",
-        "found later",
-        "eventration of the diaphragm",
-        "incomplete muscularisation",
-        "thin membranous sheet",
-        "oesophageal hiatus hernia",
-        "congenital short oesophagus"
-      ],
-      "narration": "The rarer defects follow the other partitions. A gap where the septum transversum meets the anterior body wall gives a retrosternal Morgagni hernia, usually on the right, often small and often found by chance years later. Failure of muscle to grow into an otherwise complete diaphragm gives eventration — the leaf is intact but thin and rides high. And a wide oesophageal hiatus gives a congenital hiatus hernia. Same organ, four origins, four different lesions."
-    },
-    {
-      "key": "wall_failures",
-      "label": "When the cavity itself is left open",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#af7ac5",
-      "terms": [
-        "ventral body wall closure",
-        "ectopia cordis",
-        "heart outside the thorax",
-        "pentalogy of Cantrell",
-        "sternal cleft",
-        "omphalocele",
-        "pericardial defect",
-        "intracardiac defect",
-        "serous cavity exposed"
-      ],
-      "narration": "One last failure belongs to the cavity rather than to a partition. If the ventral body wall never closes over the pericardial cavity, the heart lies outside the thorax — ectopia cordis, which in its full form is the pentalogy of Cantrell: a cleft sternum, a defect in the diaphragm and pericardium, an intracardiac defect and an omphalocele. It is rare, but it is the cleanest demonstration that these cavities are closed only because folding closed them."
-    }
-  ],
-  "views": [
-    {
-      "mode": "cross_section",
-      "beat": 1,
-      "title": "One space, split out of one sheet",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "One cavity"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "coelom_appears",
-          "intensity": 0.9
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "y",
-          "offset": 0,
-          "animate": true
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "coelom_appears",
-          "to": "serous_layers",
-          "kind": "splitting one mesoderm sheet in two is what gives"
-        }
-      ],
-      "narration": "Cut across the embryo in week three. The lateral plate mesoderm has split around a new space, leaving somatic mesoderm above and splanchnic mesoderm below. That single split is the reason every serous cavity in the body has a parietal and a visceral layer, and the reason the parietal layer hurts precisely while the visceral layer does not."
-    },
-    {
-      "mode": "location",
-      "beat": 2,
-      "title": "The horseshoe, and how folding seals it",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "One cavity"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "horseshoe",
-          "intensity": 0.95
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:coelom",
-          "path": [
-            "horseshoe",
-            "folding_closes"
-          ],
-          "duration": 6
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "anterior"
-        }
-      ],
-      "narration": "From the front the cavity is a horseshoe: the bend in front of the head end, two limbs running backwards, both open into the extraembryonic coelom. Then the head fold swings the bend down under the heart and the lateral folds pinch both openings shut. What is left inside is one sealed space with two narrow channels — the pericardioperitoneal canals — running behind the septum transversum. Everything that follows is dividing that space into three."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 3,
-      "title": "Four partitions, in order",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Partitions"
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:diaphragm-formation",
-          "path": [
-            "septum_transversum",
-            "pleuropericardial",
-            "pleuroperitoneal",
-            "muscular_ingrowth"
-          ],
-          "duration": 9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "pleuropericardial",
-          "to": "pericardial_cavity",
-          "kind": "fusing in the midline closes off"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "pleuroperitoneal",
-          "to": "pleural_cavities",
-          "kind": "closing the canals separates"
-        }
-      ],
-      "narration": "Take the partitions in order and the diaphragm assembles itself. Septum transversum first, incomplete, leaving two canals. Then the pleuropericardial membranes fuse in the midline and wall the pericardium off, becoming the fibrous pericardium with the phrenic nerve on it. Then the pleuroperitoneal membranes close the two canals by about week seven, right before left. Last, body wall muscle grows in around the rim and the oesophageal mesentery supplies the crura. Four sources — central tendon, pleuroperitoneal membranes, crura, muscular rim."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 4,
-      "title": "Why C3, C4 and C5 keep the diaphragm alive",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Partitions"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "phrenic_descent",
-          "intensity": 0.95
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:phrenic-nerve",
-          "path": [
-            "phrenic_descent",
-            "septum_transversum",
-            "pleuropericardial"
-          ],
-          "duration": 7
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "lateral"
-        }
-      ],
-      "narration": "The septum transversum forms opposite the third to fifth cervical somites, so its muscle takes C3, C4 and C5 and keeps them for life. As the trunk elongates, the diaphragm descends to the first lumbar vertebra and the phrenic nerve is stretched down alongside the pericardium to follow it. Two exam facts fall straight out: a high cervical cord injury takes out breathing, and blood or pus under the diaphragm is felt at the shoulder tip because the supraclavicular nerves are C3 and C4."
-    },
-    {
-      "mode": "cross_section",
-      "beat": 5,
-      "title": "Three cavities where there was one",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The three cavities"
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "pericardial_cavity",
-            "pleural_cavities",
-            "peritoneal_cavity"
-          ],
-          "layout": "stacked"
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "y",
-          "offset": 0.4
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "peritoneal_cavity",
-          "to": "serous_layers",
-          "kind": "keeps the same two-layer plan as"
-        }
-      ],
-      "narration": "Stand back and count what the horseshoe became: one pericardial cavity, two pleural cavities that do not communicate with each other, and one peritoneal cavity below the diaphragm with the gut slung in it on a dorsal mesentery. A ventral mesentery survives only in the upper abdomen, from the septum transversum, giving the lesser omentum and the falciform ligament. Every one of them is lined the same way, parietal outside and visceral inside, because they are all pieces of the same original space."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 6,
-      "title": "A partition that fails, and where the hernia appears",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Clinical"
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "bochdalek",
-            "morgagni"
-          ],
-          "layout": "side-by-side"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "pleuroperitoneal",
-          "to": "bochdalek",
-          "kind": "failing to close its canal gives"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "septum_transversum",
-          "to": "morgagni",
-          "kind": "leaving a retrosternal gap gives"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "muscular_ingrowth",
-          "to": "morgagni",
-          "kind": "failing to muscularise the leaf gives, alongside it,"
-        },
-        {
-          "op": "PEEL_LAYER",
-          "layer": "muscle",
-          "direction": "outward"
-        }
-      ],
-      "narration": "Map each lesion onto the partition that failed. Pleuroperitoneal membrane open — Bochdalek hernia, posterolateral, usually left, and the killer is the hypoplastic lung, not the bowel. Gap beside the septum transversum — Morgagni hernia, retrosternal, usually right, often silent for years. Muscle never grows in — eventration, a diaphragm that is complete but thin and high. Wide hiatus — congenital hiatus hernia. And if the ventral wall never closed over the pericardium at all, ectopia cordis. Learn the four partitions and you have not learned four facts; you have learned the differential."
-    }
-  ],
-  "provenance": {
-    "author": "task",
-    "authored_at": "2026-08-28"
-  },
-  "gaps": [
-    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram, so diagram is recorded in deferred_modes. No 3d_anatomy option is listed for this structure and none has been added — a cavity being partitioned is taught from staged sections, and inventing a 3d option here would be authoring against the curriculum rather than for it. The judgement is recorded so a later reviewer can disagree deliberately.",
-    "Status is 'planned'. Fifteen regions, six beats, ops and narration complete, but no SVG artwork exists, so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: an anterior view of the week-3 embryo with the intraembryonic coelom drawn as one horseshoe and both limbs shown opening into the extraembryonic coelom; a transverse section showing the lateral plate mesoderm split into somatic and splanchnic layers with the cavity between them; a median section after folding with the pericardial cavity below the heart, the septum transversum, and the two pericardioperitoneal canals passing behind it; a four-panel partition sequence showing, in order, the septum transversum, the pleuropericardial folds fusing with the phrenic nerve and common cardinal vein drawn in them, the pleuroperitoneal membranes closing the canals with the right closing before the left, and the muscular rim growing in; an inferior view of the finished diaphragm colour-coded by its four embryological sources; and a coronal view with Bochdalek, Morgagni, eventration and the oesophageal hiatus marked at their sites.",
-    "The inferior view of the finished diaphragm is the key panel and must use the SAME four colours as the four-panel partition sequence. The entire teaching claim of this scene is that the adult diaphragm is a map of its four origins and that each origin has its own hernia; different colours between the two panels breaks precisely that link.",
-    "The partition sequence must show the right canal closing before the left. It is a single visual detail and it is the whole reason the common congenital diaphragmatic hernia is left-sided — narrating it without drawing it wastes the panel.",
-    "Beats 2, 3 and 4 trace concept:coelom, concept:diaphragm-formation and concept:phrenic-nerve. In each the subject is a space, a sequence of fusions, or a nerve being dragged rather than a drawn object, so none can be a region.",
-    "Beat 6 authors PEEL_LAYER on the muscle layer to lift the diaphragm off the hernia map. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because 'what is missing from the leaf' is exactly how the four defects are told apart.",
-    "'Lateral folding' and 'Cranio-caudal folding' are NOT claimed in covers[]. Both are named in beat 2 because folding is what seals the coelom, and both have their own scenes; this one starts from the sealed cavity.",
-    "'Primitive gut tube' is NOT claimed. The dorsal and ventral mesenteries are named because they are what remains of the coelom's walls around the gut, but the gut's own divisions, arteries and derivatives belong to that entry.",
-    "Diaphragm anatomy proper — the three major openings with their vertebral levels and contents, the crura, the arcuate ligaments — is Gross Anatomy and is taught in the thoracic wall scenes. It appears here in match.terms only so a highlighted term still reaches a scene.",
-    "Lesser sac anatomy and stomach rotation are named in one sentence to explain why the peritoneal cavity has two compartments, and no further. Stomach rotation belongs to GIT Development.",
-    "Week numbers are the standard teaching approximations — coelom appearing in week 3, folding through week 4, pleuroperitoneal closure about week 7, diaphragm at the first lumbar level by about week 8. Texts differ by several days and the narration gives them as approximations.",
-    "The left-sided predominance of Bochdalek hernia is given as 'the great majority' rather than a fixed percentage; quoted figures range from about 80 to 90 percent across texts and nothing taught here turns on the exact number.",
-    "The malformations are named with their embryological origin and their classic presentation only. Antenatal management and surgical repair are not embryology and are deliberately absent."
+  "terms": [
+   "body cavity",
+   "coelom",
+   "intraembryonic coelom",
+   "extraembryonic coelom",
+   "chorionic cavity",
+   "lateral plate mesoderm",
+   "somatic mesoderm",
+   "parietal mesoderm",
+   "somatopleure",
+   "splanchnic mesoderm",
+   "visceral mesoderm",
+   "splanchnopleure",
+   "horseshoe shape",
+   "U shaped cavity",
+   "pericardial cavity",
+   "pericardioperitoneal canal",
+   "pleural cavity",
+   "peritoneal cavity",
+   "serous membrane",
+   "parietal layer",
+   "visceral layer",
+   "mesothelium",
+   "septum transversum",
+   "central tendon",
+   "pleuropericardial fold",
+   "pleuropericardial membrane",
+   "fibrous pericardium",
+   "common cardinal vein",
+   "phrenic nerve",
+   "C3 C4 C5",
+   "keeps the diaphragm alive",
+   "pleuroperitoneal membrane",
+   "pleuroperitoneal canal",
+   "week 7",
+   "dorsal mesentery of the oesophagus",
+   "crura",
+   "body wall myoblasts",
+   "peripheral muscle of diaphragm",
+   "descent of the diaphragm",
+   "cervical somites",
+   "C3 to C5 myotomes",
+   "referred pain to the shoulder",
+   "supraclavicular nerves",
+   "dorsal mesentery",
+   "ventral mesentery",
+   "lesser omentum",
+   "falciform ligament",
+   "greater sac",
+   "lesser sac",
+   "omental bursa",
+   "epiploic foramen",
+   "foramen of Winslow",
+   "congenital diaphragmatic hernia",
+   "Bochdalek hernia",
+   "posterolateral",
+   "left sided",
+   "pulmonary hypoplasia",
+   "scaphoid abdomen",
+   "bowel sounds in the chest",
+   "Morgagni hernia",
+   "retrosternal",
+   "anteromedial",
+   "foramen of Morgagni",
+   "oesophageal hiatus hernia",
+   "eventration of the diaphragm",
+   "ectopia cordis",
+   "pentalogy of Cantrell",
+   "ascites",
+   "pleural effusion",
+   "pericardial effusion"
   ]
+ },
+ "camera": {
+  "framing": "anterior"
+ },
+ "structures": [
+  {
+   "key": "pericardial",
+   "name": "Pericardial cavity",
+   "label": "Pericardial cavity",
+   "role": "primary",
+   "group": "The coelom",
+   "color": "#2874a6",
+   "refs": {
+    "procedural": "body-cavity-coelom#pericardial"
+   },
+   "terms": [
+    "pericardial cavity",
+    "bend of the horseshoe",
+    "fibrous pericardium",
+    "serous pericardium",
+    "epicardium",
+    "pericardial effusion",
+    "cardiac tamponade"
+   ],
+   "narration": "The bend of the horseshoe becomes the pericardial cavity, closed off by the pleuropericardial membranes. Its outer wall is the fibrous pericardium, lined by the parietal serous layer, and the visceral layer clings to the heart as the epicardium. Because it is a closed, unyielding bag, fluid collecting inside it compresses the heart rather than expanding the space.",
+   "layer": "organ",
+   "opacity": 0.3
+  },
+  {
+   "key": "pleural_r",
+   "name": "Right pleural cavity",
+   "label": "Right pleural cavity — the right pericardioperitoneal canal",
+   "role": "primary",
+   "group": "The coelom",
+   "color": "#117864",
+   "refs": {
+    "procedural": "body-cavity-coelom#pleural_r"
+   },
+   "terms": [
+    "right pleural cavity",
+    "pericardioperitoneal canal",
+    "lung bud",
+    "parietal pleura",
+    "visceral pleura",
+    "right closes before left"
+   ],
+   "narration": "The right limb of the horseshoe. Its canal is the first of the two to be closed, which is the whole reason the common congenital diaphragmatic hernia is on the LEFT.",
+   "layer": "organ",
+   "opacity": 0.3
+  },
+  {
+   "key": "pleural_l",
+   "name": "Left pleural cavity",
+   "label": "Left pleural cavity — the left pericardioperitoneal canal",
+   "role": "primary",
+   "group": "The coelom",
+   "color": "#14a085",
+   "refs": {
+    "procedural": "body-cavity-coelom#pleural_l"
+   },
+   "terms": [
+    "left pleural cavity",
+    "pericardioperitoneal canal",
+    "lung bud",
+    "pleural effusion",
+    "pneumothorax",
+    "two separate cavities",
+    "do not communicate"
+   ],
+   "narration": "The two pericardioperitoneal canals become the pleural cavities as the lung buds expand into them, pushing the body wall out ahead of themselves. Note that they end up completely separate from each other and from the pericardium — three sealed spaces where there was one. A pneumothorax on one side therefore does not empty into the other.",
+   "layer": "organ",
+   "opacity": 0.3
+  },
+  {
+   "key": "peritoneal",
+   "name": "Peritoneal cavity",
+   "label": "Peritoneal cavity",
+   "role": "primary",
+   "group": "The coelom",
+   "color": "#7d3c98",
+   "refs": {
+    "procedural": "body-cavity-coelom#peritoneal"
+   },
+   "terms": [
+    "peritoneal cavity",
+    "largest part of the coelom",
+    "greater sac",
+    "lesser sac",
+    "omental bursa",
+    "epiploic foramen",
+    "foramen of Winslow",
+    "ascites"
+   ],
+   "narration": "Everything below the diaphragm stays as the peritoneal cavity. The gut hangs in it from a dorsal mesentery along its whole length, while a ventral mesentery exists only in the upper abdomen, cut from the septum transversum — which is why the lesser omentum and falciform ligament are there and nowhere lower. The stomach's rotation then drags part of the cavity behind it as the lesser sac, leaving the epiploic foramen as its only doorway.",
+   "layer": "organ",
+   "opacity": 0.26
+  },
+  {
+   "key": "somatic",
+   "name": "Somatic mesoderm",
+   "label": "Somatic (parietal) mesoderm — every parietal layer",
+   "role": "part",
+   "group": "The two layers",
+   "color": "#2f5f9e",
+   "refs": {
+    "procedural": "body-cavity-coelom#somatic"
+   },
+   "terms": [
+    "somatic mesoderm",
+    "parietal mesoderm",
+    "somatopleure",
+    "parietal layer",
+    "parietal pleura",
+    "parietal peritoneum",
+    "sharply localised pain",
+    "somatic innervation"
+   ],
+   "narration": "Because the cavity was carved out of a single sheet that split in two, each serous cavity is lined on the outside by somatic mesoderm and on the inside by splanchnic mesoderm. That is the parietal and visceral layer of pleura, pericardium and peritoneum, with a film of fluid between them. It also explains their nerve supply: the parietal layer takes somatic nerves and hurts sharply and precisely, the visceral layer takes autonomic nerves and gives dull, badly localised pain.",
+   "layer": "organ",
+   "opacity": 0.5
+  },
+  {
+   "key": "splanchnic",
+   "name": "Splanchnic mesoderm",
+   "label": "Splanchnic (visceral) mesoderm — every visceral layer",
+   "role": "part",
+   "group": "The two layers",
+   "color": "#179473",
+   "refs": {
+    "procedural": "body-cavity-coelom#splanchnic"
+   },
+   "terms": [
+    "splanchnic mesoderm",
+    "visceral mesoderm",
+    "splanchnopleure",
+    "visceral layer",
+    "visceral pleura",
+    "visceral peritoneum",
+    "poorly localised pain",
+    "visceral innervation",
+    "mesothelium",
+    "serous fluid",
+    "potential space"
+   ],
+   "narration": "The other half of the same split sheet. It clings to the viscera as every VISCERAL layer — epicardium, visceral pleura, visceral peritoneum — and carries visceral innervation, which is why visceral pain is poorly localised. The two halves are continuous with each other at the reflection lines, and that is why a mesentery has a root.",
+   "layer": "organ",
+   "opacity": 0.5
+  },
+  {
+   "key": "ectoderm",
+   "name": "Ectoderm",
+   "label": "Ectoderm — the outermost of the four layers",
+   "role": "context",
+   "group": "The two layers",
+   "color": "#2f7fc4",
+   "refs": {
+    "procedural": "body-cavity-coelom#ectoderm"
+   },
+   "terms": [
+    "ectoderm",
+    "surface ectoderm",
+    "outer germ layer"
+   ],
+   "narration": "Outside the somatic mesoderm. Ectoderm plus somatic mesoderm is the somatopleure — the future body wall.",
+   "layer": "skin",
+   "opacity": 0.18
+  },
+  {
+   "key": "endoderm",
+   "name": "Endoderm",
+   "label": "Endoderm — the innermost of the four layers",
+   "role": "context",
+   "group": "The two layers",
+   "color": "#b8b33c",
+   "refs": {
+    "procedural": "body-cavity-coelom#endoderm"
+   },
+   "terms": [
+    "endoderm",
+    "inner germ layer",
+    "gut lining"
+   ],
+   "narration": "Inside the splanchnic mesoderm. Endoderm plus splanchnic mesoderm is the splanchnopleure — the future gut wall.",
+   "layer": "organ"
+  },
+  {
+   "key": "septum_transversum",
+   "name": "Septum transversum",
+   "label": "Source 1 of the diaphragm — the septum transversum → the central tendon (and the first partition of the coelom)",
+   "role": "part",
+   "group": "Partitions",
+   "color": "#c0392b",
+   "refs": {
+    "procedural": "body-cavity-coelom#septum_transversum"
+   },
+   "terms": [
+    "septum transversum",
+    "mesoderm",
+    "thick plate",
+    "incomplete partition",
+    "central tendon of diaphragm",
+    "liver",
+    "head fold",
+    "cervical level",
+    "descends",
+    "ventral mesentery"
+   ],
+   "narration": "The first partition is a thick plate of mesoderm called the septum transversum, carried down by the head fold from the neck to lie between the heart and the developing liver. It is deliberately incomplete: it separates the pericardial cavity from the peritoneal cavity everywhere except at the two pericardioperitoneal canals behind it. It becomes the central tendon of the diaphragm.",
+   "layer": "organ"
+  },
+  {
+   "key": "pleuropericardial",
+   "name": "Pleuropericardial membrane",
+   "label": "The pleuropericardial membranes — they wall off the pericardium and become the fibrous pericardium. A partition of the coelom, and NOT one of the diaphragm's four sources.",
+   "role": "part",
+   "group": "Partitions",
+   "color": "#e74c3c",
+   "refs": {
+    "procedural": "body-cavity-coelom#pleuropericardial"
+   },
+   "terms": [
+    "pleuropericardial folds",
+    "pleuropericardial membranes",
+    "common cardinal veins",
+    "phrenic nerve",
+    "grow medially",
+    "fuse with the mesenchyme around the oesophagus",
+    "separate pleural from pericardial",
+    "fibrous pericardium",
+    "week 5"
+   ],
+   "narration": "The lungs grow into the pericardioperitoneal canals and expand, splitting the body wall into two folds on each side. The upper pair are the pleuropericardial folds, carrying the common cardinal veins and the phrenic nerves. They grow medially and fuse in the midline, walling the pericardial cavity off from the two pleural cavities, and what is left of them becomes the fibrous pericardium — which is exactly why the phrenic nerve runs on its surface.",
+   "layer": "organ"
+  },
+  {
+   "key": "pleuroperitoneal",
+   "name": "Pleuroperitoneal membrane",
+   "label": "Source 2 of the diaphragm — the pleuroperitoneal membranes (they close the two pericardioperitoneal canals)",
+   "role": "part",
+   "group": "Partitions",
+   "color": "#ec7063",
+   "refs": {
+    "procedural": "body-cavity-coelom#pleuroperitoneal"
+   },
+   "terms": [
+    "pleuroperitoneal folds",
+    "pleuroperitoneal membranes",
+    "close the pericardioperitoneal canals",
+    "week 7",
+    "right closes before left",
+    "fuse with septum transversum",
+    "fuse with dorsal mesentery of the oesophagus",
+    "separate pleural from peritoneal"
+   ],
+   "narration": "The lower pair are the pleuroperitoneal folds. They grow forward and inward and fuse with the septum transversum in front and the dorsal mesentery of the oesophagus in the middle, closing the two canals by about week seven. The right canal closes before the left, and the left is larger — which is the whole reason the common congenital diaphragmatic hernia is on the left.",
+   "layer": "organ"
+  },
+  {
+   "key": "muscular_rim",
+   "name": "Muscular rim of the diaphragm",
+   "label": "Source 4 of the diaphragm — body wall muscle grows in round the rim",
+   "role": "part",
+   "group": "Partitions",
+   "color": "#f5b041",
+   "refs": {
+    "procedural": "body-cavity-coelom#muscular_rim"
+   },
+   "terms": [
+    "body wall myoblasts",
+    "peripheral rim",
+    "muscular part of the diaphragm",
+    "costal part",
+    "crura",
+    "dorsal mesentery of the oesophagus",
+    "four sources",
+    "intercostal nerves",
+    "peripheral sensory supply",
+    "T7 to T12"
+   ],
+   "narration": "Finally, myoblasts from the body wall grow inward around the rim to make the muscular periphery, and the dorsal mesentery of the oesophagus supplies the crura. So the diaphragm has four sources: septum transversum for the central tendon, pleuroperitoneal membranes, the oesophageal mesentery for the crura, and body wall for the muscular rim. Count them off on four fingers and the whole developmental story is retrievable.",
+   "layer": "muscle"
+  },
+  {
+   "key": "crura",
+   "name": "Crura of the diaphragm",
+   "label": "Source 3 of the diaphragm — the crura, from the dorsal mesentery of the oesophagus",
+   "role": "part",
+   "group": "Partitions",
+   "color": "#e59866",
+   "refs": {
+    "procedural": "body-cavity-coelom#crura"
+   },
+   "terms": [
+    "crura",
+    "dorsal mesentery of the oesophagus",
+    "oesophageal hiatus",
+    "decussate",
+    "fourth source"
+   ],
+   "narration": "The crura come from the dorsal mesentery of the oesophagus, arch over it and decussate above it — so the oesophageal hiatus is a hole in a continuous mass, not a gap between two slips. The fourth of the diaphragm's four sources.",
+   "layer": "muscle"
+  },
+  {
+   "key": "phrenic",
+   "name": "Phrenic nerve",
+   "label": "Phrenic nerve — C3, C4 and C5",
+   "role": "part",
+   "group": "Partitions",
+   "color": "#f4d03f",
+   "refs": {
+    "procedural": "body-cavity-coelom#phrenic"
+   },
+   "terms": [
+    "descent of the diaphragm",
+    "cervical somites",
+    "C3 C4 C5",
+    "myotomes",
+    "phrenic nerve",
+    "C3 4 and 5 keep the diaphragm alive",
+    "L1 level by week 8",
+    "long nerve",
+    "referred pain to the shoulder tip",
+    "supraclavicular nerves",
+    "C3 C4",
+    "Kehr sign"
+   ],
+   "narration": "The septum transversum starts opposite the third to fifth cervical somites, so the muscle that forms in it takes its nerve from C3, C4 and C5 — the phrenic. As the embryo elongates the diaphragm descends to the level of the first lumbar vertebra, dragging the nerve behind it, which is why so short a muscle has so long a nerve. It is also why irritation under the diaphragm, from blood or infection or air, is felt at the tip of the shoulder: the supraclavicular nerves are C3 and C4 too.",
+   "layer": "organ"
+  },
+  {
+   "key": "cardinal",
+   "name": "Common cardinal vein",
+   "label": "Common cardinal vein — carried in the fold",
+   "role": "part",
+   "group": "Partitions",
+   "color": "#5499c7",
+   "refs": {
+    "procedural": "body-cavity-coelom#cardinal"
+   },
+   "terms": [
+    "common cardinal vein",
+    "pleuropericardial fold",
+    "carried in the fold",
+    "fibrous pericardium"
+   ],
+   "narration": "The fold is where it is BECAUSE the common cardinal vein runs there. The vein is why the body wall buckles into a pair of folds on each side at that level, and the phrenic nerve rides the same fold down.",
+   "layer": "vessel"
+  },
+  {
+   "key": "somites",
+   "name": "Cervical somites C3–C5",
+   "label": "Cervical somites C3–C5 — the nerve’s fixed origin",
+   "role": "context",
+   "group": "Partitions",
+   "color": "#6b4fa8",
+   "refs": {
+    "procedural": "body-cavity-coelom#somites"
+   },
+   "terms": [
+    "cervical somites",
+    "C3 C4 C5",
+    "myotomes",
+    "fixed origin"
+   ],
+   "narration": "The three somites the septum transversum forms opposite. They do not move — which is the entire reason the nerve ends up as long as it does.",
+   "layer": "organ"
+  },
+  {
+   "key": "dorsal_mesentery",
+   "name": "Dorsal mesentery",
+   "label": "Dorsal mesentery — along the whole gut",
+   "role": "part",
+   "group": "Mesenteries",
+   "color": "#9b8ec4",
+   "refs": {
+    "procedural": "body-cavity-coelom#dorsal_mesentery"
+   },
+   "terms": [
+    "dorsal mesentery",
+    "suspends the gut",
+    "root of the mesentery"
+   ],
+   "narration": "What is left of the coelom's walls where they wrap round the gut: the gut hangs in the peritoneal cavity from a dorsal mesentery along its whole length. It tapers to nothing where it meets the gut it suspends.",
+   "layer": "organ",
+   "opacity": 0.8
+  },
+  {
+   "key": "ventral_mesentery",
+   "name": "Ventral mesentery",
+   "label": "Ventral mesentery — upper abdomen only",
+   "role": "part",
+   "group": "Mesenteries",
+   "color": "#af7ac5",
+   "refs": {
+    "procedural": "body-cavity-coelom#ventral_mesentery"
+   },
+   "terms": [
+    "ventral mesentery",
+    "lesser omentum",
+    "falciform ligament",
+    "septum transversum",
+    "upper abdomen only"
+   ],
+   "narration": "A ventral mesentery survives only in the upper abdomen, from the septum transversum, and gives the lesser omentum and the falciform ligament. The liver develops WITHIN it.",
+   "layer": "organ",
+   "opacity": 0.8
+  },
+  {
+   "key": "body_wall",
+   "name": "Body wall",
+   "label": "Body wall",
+   "role": "context",
+   "group": "Context",
+   "color": "#9aa7b4",
+   "refs": {
+    "procedural": "body-cavity-coelom#body_wall"
+   },
+   "terms": [
+    "body wall",
+    "ventral body wall closure",
+    "lateral folds"
+   ],
+   "narration": "The wall the lateral folds close. Until they meet, each flank is open and the coelom communicates with the extraembryonic cavity.",
+   "layer": "skin",
+   "opacity": 0.14
+  },
+  {
+   "key": "heart",
+   "name": "Heart",
+   "label": "Heart",
+   "role": "context",
+   "group": "Context",
+   "color": "#b03a2e",
+   "refs": {
+    "procedural": "body-cavity-coelom#heart"
+   },
+   "terms": [
+    "heart",
+    "epicardium",
+    "in the pericardial cavity"
+   ],
+   "narration": "In the pericardial cavity, with the visceral layer clinging to it as the epicardium.",
+   "layer": "organ"
+  },
+  {
+   "key": "lung_r",
+   "name": "Right lung bud",
+   "label": "Right lung bud",
+   "role": "context",
+   "group": "Context",
+   "color": "#d98880",
+   "refs": {
+    "procedural": "body-cavity-coelom#lung_r"
+   },
+   "terms": [
+    "right lung bud",
+    "grows into the canal",
+    "pulmonary hypoplasia"
+   ],
+   "narration": "The lung bud grows into the pericardioperitoneal canal and expands, pushing the body wall out ahead of it — and splitting it into the two folds that become the two membranes.",
+   "layer": "organ"
+  },
+  {
+   "key": "lung_l",
+   "name": "Left lung bud",
+   "label": "Left lung bud",
+   "role": "context",
+   "group": "Context",
+   "color": "#d98880",
+   "refs": {
+    "procedural": "body-cavity-coelom#lung_l"
+   },
+   "terms": [
+    "left lung bud",
+    "grows into the canal"
+   ],
+   "narration": "The same on the left — and the left canal is the one that closes last.",
+   "layer": "organ"
+  },
+  {
+   "key": "liver",
+   "name": "Liver",
+   "label": "Liver",
+   "role": "context",
+   "group": "Context",
+   "color": "#8e5b3a",
+   "refs": {
+    "procedural": "body-cavity-coelom#liver"
+   },
+   "terms": [
+    "liver",
+    "septum transversum",
+    "ventral mesentery"
+   ],
+   "narration": "Below the septum transversum, developing within the ventral mesentery.",
+   "layer": "organ"
+  },
+  {
+   "key": "gut",
+   "name": "Gut tube",
+   "label": "Gut tube",
+   "role": "context",
+   "group": "Context",
+   "color": "#c49a6c",
+   "refs": {
+    "procedural": "body-cavity-coelom#gut"
+   },
+   "terms": [
+    "gut tube",
+    "dorsal mesentery",
+    "slung in the peritoneal cavity"
+   ],
+   "narration": "Slung in the peritoneal cavity on its dorsal mesentery.",
+   "layer": "organ"
+  },
+  {
+   "key": "oesophagus",
+   "name": "Oesophagus",
+   "label": "Oesophagus — through the hiatus",
+   "role": "context",
+   "group": "Context",
+   "color": "#cbb17a",
+   "refs": {
+    "procedural": "body-cavity-coelom#oesophagus"
+   },
+   "terms": [
+    "oesophagus",
+    "oesophageal hiatus",
+    "dorsal mesentery of the oesophagus"
+   ],
+   "narration": "Through the hiatus, between the crura. Its own dorsal mesentery is what supplies them.",
+   "layer": "organ"
+  },
+  {
+   "key": "bochdalek",
+   "name": "Bochdalek hernia",
+   "label": "Bochdalek hernia — posterolateral, LEFT",
+   "role": "part",
+   "group": "Clinical",
+   "color": "#cb4335",
+   "refs": {
+    "procedural": "body-cavity-coelom#bochdalek@1+bochdalek"
+   },
+   "terms": [
+    "congenital diaphragmatic hernia",
+    "Bochdalek hernia",
+    "posterolateral defect",
+    "left sided",
+    "80 to 90 percent left",
+    "pleuroperitoneal membrane fails to close",
+    "abdominal viscera in the chest",
+    "pulmonary hypoplasia",
+    "scaphoid abdomen",
+    "bowel sounds in the chest",
+    "mediastinal shift",
+    "respiratory distress at birth",
+    "polyhydramnios",
+    "antenatal ultrasound"
+   ],
+   "narration": "If a pleuroperitoneal membrane fails to close its canal, abdominal viscera pass into the chest — a Bochdalek hernia, posterolateral, and on the left in the great majority because the left canal is larger and closes later. The danger is not the displaced bowel but the lung it prevented from growing: the baby is born with pulmonary hypoplasia and is in respiratory distress immediately. A flat or scaphoid abdomen with bowel sounds in the chest is the classic bedside picture.",
+   "layer": "organ"
+  },
+  {
+   "key": "morgagni",
+   "name": "Morgagni hernia",
+   "label": "Morgagni hernia — retrosternal, RIGHT",
+   "role": "part",
+   "group": "Clinical",
+   "color": "#e74c3c",
+   "refs": {
+    "procedural": "body-cavity-coelom#morgagni@1+morgagni"
+   },
+   "terms": [
+    "Morgagni hernia",
+    "retrosternal",
+    "anteromedial",
+    "right sided",
+    "foramen of Morgagni",
+    "septum transversum defect",
+    "often asymptomatic",
+    "found later",
+    "eventration of the diaphragm",
+    "incomplete muscularisation",
+    "thin membranous sheet",
+    "oesophageal hiatus hernia",
+    "congenital short oesophagus"
+   ],
+   "narration": "The rarer defects follow the other partitions. A gap where the septum transversum meets the anterior body wall gives a retrosternal Morgagni hernia, usually on the right, often small and often found by chance years later. Failure of muscle to grow into an otherwise complete diaphragm gives eventration — the leaf is intact but thin and rides high. And a wide oesophageal hiatus gives a congenital hiatus hernia. Same organ, four origins, four different lesions.",
+   "layer": "organ"
+  },
+  {
+   "key": "rim_eventration",
+   "name": "Eventration of the diaphragm",
+   "label": "Eventration — complete, but thin and high",
+   "role": "part",
+   "group": "Clinical",
+   "color": "#f9c56a",
+   "refs": {
+    "procedural": "body-cavity-coelom#muscular_rim@1+eventration"
+   },
+   "terms": [
+    "eventration of the diaphragm",
+    "incomplete muscularisation",
+    "thin membranous sheet",
+    "complete but thin",
+    "high hemidiaphragm"
+   ],
+   "narration": "The muscle never grows in. The leaf is COMPLETE — so the cavity count does not change, and that is the discriminator: eventration is a thin high diaphragm, not a hole.",
+   "layer": "muscle"
+  },
+  {
+   "key": "crura_wide",
+   "name": "Wide oesophageal hiatus",
+   "label": "Congenitally wide oesophageal hiatus",
+   "role": "part",
+   "group": "Clinical",
+   "color": "#e0a06a",
+   "refs": {
+    "procedural": "body-cavity-coelom#crura@1+hiatus_wide"
+   },
+   "terms": [
+    "oesophageal hiatus hernia",
+    "congenital short oesophagus",
+    "wide hiatus"
+   ],
+   "narration": "A hiatus wider than the oesophagus needs: congenital hiatus hernia, the fourth of the partition failures.",
+   "layer": "muscle"
+  },
+  {
+   "key": "wall_ectopia",
+   "name": "Ectopia cordis",
+   "label": "Ectopia cordis — the wall never closed over the pericardium",
+   "role": "part",
+   "group": "Clinical",
+   "color": "#af7ac5",
+   "refs": {
+    "procedural": "body-cavity-coelom#body_wall@1+ectopia"
+   },
+   "terms": [
+    "ventral body wall closure",
+    "ectopia cordis",
+    "heart outside the thorax",
+    "pentalogy of Cantrell",
+    "sternal cleft",
+    "omphalocele",
+    "pericardial defect",
+    "intracardiac defect",
+    "serous cavity exposed"
+   ],
+   "narration": "One last failure belongs to the cavity rather than to a partition. If the ventral body wall never closes over the pericardial cavity, the heart lies outside the thorax — ectopia cordis, which in its full form is the pentalogy of Cantrell: a cleft sternum, a defect in the diaphragm and pericardium, an intracardiac defect and an omphalocele. It is rare, but it is the cleanest demonstration that these cavities are closed only because folding closed them.",
+   "layer": "skin",
+   "opacity": 0.45
+  }
+ ],
+ "views": [
+  {
+   "mode": "cross_section",
+   "beat": 1,
+   "title": "One space, split out of one sheet",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ectoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "somatic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardial"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleural_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleural_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "peritoneal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "splanchnic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "endoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "gut"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "pericardial",
+     "intensity": 0.9
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "somatic",
+      "splanchnic"
+     ],
+     "layout": "side-by-side"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "somatic",
+     "to": "splanchnic",
+     "kind": "splitting one mesoderm sheet in two is what gives"
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "y",
+     "offset": 0.3,
+     "animate": true
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "superior"
+    }
+   ],
+   "narration": "Cut across the embryo in week three. The lateral plate mesoderm has split around a new space, leaving somatic mesoderm above and splanchnic mesoderm below. That single split is the reason every serous cavity in the body has a parietal and a visceral layer, and the reason the parietal layer hurts precisely while the visceral layer does not. (The cut is TRANSVERSE — in this model's frame the cranio-caudal axis is y, so a transverse plane is cut normal to y, not to z.)",
+   "claims": [
+    {
+     "id": "B1-open-r",
+     "claim": "the right pericardioperitoneal canal is wide open — there is no partition anywhere yet",
+     "measure": "coelom.canal_open_r",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B1-open-l",
+     "claim": "and so is the left",
+     "measure": "coelom.canal_open_l",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B1-flank",
+     "claim": "the coelom still communicates with the extraembryonic cavity on each flank",
+     "measure": "coelom.escapes_at_flank",
+     "op": "atLeast",
+     "value": 40
+    },
+    {
+     "id": "B1-u",
+     "claim": "the two limbs are not yet confluent ventrally: the horseshoe is still an open U",
+     "measure": "coelom.cross_half",
+     "op": "atMost",
+     "value": -0.02
+    },
+    {
+     "id": "B1-t",
+     "claim": "and this beat is drawn at its own instant: the diaphragm has descended this far",
+     "measure": "dia.descent_frac",
+     "op": "near",
+     "value": 0,
+     "tol": 0.004
+    }
+   ]
+  },
+  {
+   "mode": "location",
+   "beat": 2,
+   "title": "The horseshoe, and how folding seals it",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardial"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleural_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleural_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "peritoneal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "body_wall"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "The coelom"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "pericardial",
+     "intensity": 0.95
+    },
+    {
+     "op": "TRACE_STRUCTURE",
+     "target": "concept:coelom",
+     "path": [
+      "pericardial",
+      "pleural_r",
+      "peritoneal",
+      "pleural_l"
+     ],
+     "duration": 6
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "From the front the cavity is a horseshoe: the bend in front of the head end, two limbs running backwards, both open into the extraembryonic coelom. Then the head fold swings the bend down under the heart and the lateral folds pinch both openings shut. What is left inside is one sealed space with two narrow channels — the pericardioperitoneal canals — running behind the septum transversum. Everything that follows is dividing that space into three.",
+   "claims": [
+    {
+     "id": "B2-open",
+     "claim": "both limbs are still open to the extraembryonic coelom",
+     "measure": "coelom.escapes_at_flank",
+     "op": "atLeast",
+     "value": 40
+    },
+    {
+     "id": "B2-one",
+     "claim": "and it is ONE space: nothing divides it",
+     "measure": "coelom.canal_open_r",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B2-slot",
+     "claim": "the lateral openings are at their widest",
+     "measure": "wall.slot_half_rad",
+     "op": "atLeast",
+     "value": 0.45
+    },
+    {
+     "id": "B2-t",
+     "claim": "and this beat is drawn at its own instant: the diaphragm has descended this far",
+     "measure": "dia.descent_frac",
+     "op": "near",
+     "value": 0,
+     "tol": 0.004
+    }
+   ]
+  },
+  {
+   "mode": "location",
+   "beat": 3,
+   "title": "Sealed — and two narrow channels left behind",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.2
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardial"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleural_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleural_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "peritoneal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "body_wall"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "septum_transversum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "liver"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "septum_transversum",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "septum_transversum",
+     "to": "pericardial",
+     "kind": "an INCOMPLETE plate between the heart and the liver, leaving"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "The flank openings have shut, so count what is inside. One sealed space, and the septum transversum lying across it between the heart and the developing liver — deliberately incomplete, because the two pericardioperitoneal canals pass behind it. Everything from here is dividing that one space into three.",
+   "claims": [
+    {
+     "id": "B3-sealed",
+     "claim": "not one of 240 transverse rays leaving the coelom now reaches the outside",
+     "measure": "coelom.escapes_at_flank",
+     "op": "atMost",
+     "value": 0
+    },
+    {
+     "id": "B3-shut",
+     "claim": "the flank openings are shut",
+     "measure": "wall.slot_half_rad",
+     "op": "atMost",
+     "value": 0.0001
+    },
+    {
+     "id": "B3-confluent",
+     "claim": "and the two limbs ARE now confluent ventrally: the peritoneal cavity is one cavity",
+     "measure": "coelom.cross_half",
+     "op": "atLeast",
+     "value": 0.04
+    },
+    {
+     "id": "B3-canals",
+     "claim": "but both canals are still wide open — the plate is incomplete by design",
+     "measure": "coelom.canal_open_r",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B3-t",
+     "claim": "and this beat is drawn at its own instant: the diaphragm has descended this far",
+     "measure": "dia.descent_frac",
+     "op": "near",
+     "value": 0.104,
+     "tol": 0.004
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 4,
+   "title": "The partitions, in the order they close",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.52
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardial"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "peritoneal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "septum_transversum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleuropericardial"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cardinal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Partitions"
+    },
+    {
+     "op": "TRACE_STRUCTURE",
+     "target": "concept:diaphragm-formation",
+     "path": [
+      "septum_transversum",
+      "pleuropericardial"
+     ],
+     "duration": 5
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "pleuropericardial",
+     "to": "pericardial",
+     "kind": "fusing in the midline closes off"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "cardinal",
+     "to": "pleuropericardial",
+     "kind": "the vein is what the fold is built round:"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "Take the partitions in order and the diaphragm assembles itself. Septum transversum first, incomplete, leaving two canals. Then the pleuropericardial membranes fuse in the midline and wall the pericardium off, becoming the fibrous pericardium with the phrenic nerve on it. Then the pleuroperitoneal membranes close the two canals by about week seven, right before left. Last, body wall muscle grows in around the rim and the oesophageal mesentery supplies the crura. [What is on screen at this instant is the second of those partitions, the pleuropericardial membrane, and it is the one that gives the diaphragm nothing — it becomes the fibrous pericardium. The diaphragm's own four sources are counted in beat 6, where all four are drawn together; the sentence that counted them here has been moved there verbatim, because at this stage two of the four do not yet exist.]",
+   "claims": [
+    {
+     "id": "B4-pp",
+     "claim": "the pleuropericardial membranes have fused: the pericardium is walled off",
+     "measure": "coelom.pp_open",
+     "op": "atMost",
+     "value": 0.0001
+    },
+    {
+     "id": "B4-canals",
+     "claim": "and the two canals are still open, so this is TWO cavities, not four",
+     "measure": "coelom.canal_open_r",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B4-gap",
+     "claim": "the cranial waist is now a gap and not an overlap",
+     "measure": "coelom.waist_gap_pp",
+     "op": "atMost",
+     "value": -0.05
+    },
+    {
+     "id": "B4-t",
+     "claim": "and this beat is drawn at its own instant: the diaphragm has descended this far",
+     "measure": "dia.descent_frac",
+     "op": "near",
+     "value": 0.53,
+     "tol": 0.004
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 5,
+   "title": "Right before left — and that is why the hernia is left-sided",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.7658
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardial"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleural_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleural_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleuroperitoneal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "septum_transversum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lung_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lung_l"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "pleural_r",
+      "pleural_l",
+      "pleuroperitoneal",
+      "lung_r"
+     ],
+     "layout": "side-by-side"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "pleuroperitoneal",
+     "intensity": 0.95
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "lung_r",
+     "to": "pleuroperitoneal",
+     "kind": "the membrane closing beneath it is what shuts this lung’s cavity off from the abdomen"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "inferior"
+    }
+   ],
+   "narration": "Hold the picture here, because this is the moment the exam question comes from. The RIGHT pleuroperitoneal membrane has reached the oesophageal mesentery and closed its canal; the LEFT has not. For this whole stage there are THREE separate spaces and not four, and the left pleural cavity is still open to the abdomen. The left canal shuts last, so it is the left one that is caught out — and the great majority of congenital diaphragmatic hernias are on the left. [Read from below, as beats 6 and 9 are. From the front the closing membranes are edge-on and the one this beat is about measured 0.000% of the frame; the shut right canal and the still-open left one are only a picture from this side.] [SPACES, not named cavities, and the distinction is the one beat 8 counts: the finished embryo has FOUR separate spaces — pericardial, right pleural, left pleural, peritoneal — which are the THREE named serous cavities beat 8 ends on, because the two pleural cavities are two spaces but one named cavity. At this stage the left pleural cavity and the peritoneal cavity are still one space, so the count is three. The model’s own component probe counts spaces: acceptance C3 reads three here and B6-four/B8-shut-l read four at t = 1.]",
+   "claims": [
+    {
+     "id": "B5-r",
+     "claim": "the right canal is shut",
+     "measure": "coelom.canal_open_r",
+     "op": "atMost",
+     "value": 0.0001
+    },
+    {
+     "id": "B5-l",
+     "claim": "the left canal is not",
+     "measure": "coelom.canal_open_l",
+     "op": "atLeast",
+     "value": 0.1
+    },
+    {
+     "id": "B5-edge",
+     "claim": "the left membrane's free edge has not yet reached the canal's own radius",
+     "measure": "leaf.edge_rho_l",
+     "op": "atLeast",
+     "value": 0.65
+    },
+    {
+     "id": "B5-gap",
+     "claim": "so the right waist is a gap while the left is still an overlap",
+     "measure": "coelom.waist_gap_l",
+     "op": "atLeast",
+     "value": 0
+    },
+    {
+     "id": "B5-t",
+     "claim": "and this beat is drawn at its own instant: the diaphragm has descended this far",
+     "measure": "dia.descent_frac",
+     "op": "near",
+     "value": 0.8611,
+     "tol": 0.004
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 6,
+   "title": "The muscle grows in, and the leaf has four sources",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 1
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "septum_transversum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleuroperitoneal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "muscular_rim"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "crura"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oesophagus"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Partitions"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "septum_transversum",
+      "pleuroperitoneal",
+      "muscular_rim",
+      "crura"
+     ],
+     "layout": "stacked"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "muscular_rim",
+     "intensity": 0.9
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "inferior"
+    }
+   ],
+   "narration": "Now look up at the finished leaf from below, and read it as a map of where it came from. Central tendon in the middle, from the septum transversum. The two pleuroperitoneal membranes behind and to each side. The crura in the dorsal midline, arching over the oesophagus. Muscle round the whole rim, grown in from the body wall. Four sources, four territories, and — as the next beat shows — four hernias. Four sources — central tendon, pleuroperitoneal membranes, crura, muscular rim. [Carried here verbatim from beat 4, where only two of the four were on screen. On the labels these are Source 1 to Source 4 in the order just named. The pleuropericardial membrane is deliberately not among them: it partitions the coelom, walls off the pericardium and becomes the fibrous pericardium, and contributes no part of the diaphragm.]",
+   "claims": [
+    {
+     "id": "B6-muscle",
+     "claim": "the muscular rim has grown all the way in",
+     "measure": "dia.muscle_progress",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B6-four",
+     "claim": "all four canals and waists are shut: four cavities",
+     "measure": "coelom.canal_open_l",
+     "op": "atMost",
+     "value": 0.0001
+    },
+    {
+     "id": "B6-L1",
+     "claim": "and the diaphragm has completed its descent",
+     "measure": "dia.descent_frac",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B6-seg",
+     "claim": "sixteen segments below where it started, which is C4 to L1",
+     "measure": "dia.segments_below_c4",
+     "op": "near",
+     "value": 16,
+     "tol": 0.05
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 7,
+   "title": "Why C3, C4 and C5 keep the diaphragm alive",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 1
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "somites"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "septum_transversum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleuropericardial"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardial"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Partitions"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "phrenic",
+     "intensity": 0.95
+    },
+    {
+     "op": "TRACE_STRUCTURE",
+     "target": "concept:phrenic-nerve",
+     "path": [
+      "somites",
+      "phrenic",
+      "septum_transversum"
+     ],
+     "duration": 7
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "somites",
+     "to": "phrenic",
+     "kind": "a fixed origin at C3, C4 and C5 for"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    }
+   ],
+   "narration": "The septum transversum forms opposite the third to fifth cervical somites, so its muscle takes C3, C4 and C5 and keeps them for life. As the trunk elongates, the diaphragm descends to the first lumbar vertebra and the phrenic nerve is stretched down alongside the pericardium to follow it. Two exam facts fall straight out: a high cervical cord injury takes out breathing, and blood or pus under the diaphragm is felt at the shoulder tip because the supraclavicular nerves are C3 and C4.",
+   "claims": [
+    {
+     "id": "B7-grown",
+     "claim": "the nerve is now more than twice the length it started at, and it grew because its target left",
+     "measure": "phrenic.growth_over_start",
+     "op": "atLeast",
+     "value": 2
+    },
+    {
+     "id": "B7-sac",
+     "claim": "and it took the shortest path it could, round the pericardial sac rather than through it",
+     "measure": "phrenic.sac_detour",
+     "op": "atLeast",
+     "value": 0.02
+    },
+    {
+     "id": "B7-descended",
+     "claim": "the diaphragm has reached L1",
+     "measure": "dia.descent_frac",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B7-seg",
+     "claim": "sixteen segments below C4",
+     "measure": "dia.segments_below_c4",
+     "op": "near",
+     "value": 16,
+     "tol": 0.05
+    }
+   ]
+  },
+  {
+   "mode": "cross_section",
+   "beat": 8,
+   "title": "Three cavities where there was one",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 1
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardial"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleural_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleural_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "peritoneal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "somatic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "splanchnic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "dorsal_mesentery"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ventral_mesentery"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "gut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "liver"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "septum_transversum"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "The coelom"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "pericardial",
+      "pleural_r",
+      "pleural_l",
+      "peritoneal"
+     ],
+     "layout": "stacked"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "peritoneal",
+     "to": "somatic",
+     "kind": "keeps the same two-layer plan as"
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "y",
+     "offset": 0.4
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "Stand back and count what the horseshoe became: one pericardial cavity, two pleural cavities that do not communicate with each other, and one peritoneal cavity below the diaphragm with the gut slung in it on a dorsal mesentery. A ventral mesentery survives only in the upper abdomen, from the septum transversum, giving the lesser omentum and the falciform ligament. Every one of them is lined the same way, parietal outside and visceral inside, because they are all pieces of the same original space. (This section is TRANSVERSE: in this model's frame the cranio-caudal axis is y, so the cut plane's normal is y.)",
+   "claims": [
+    {
+     "id": "B8-shut-r",
+     "claim": "the right canal is shut",
+     "measure": "coelom.canal_open_r",
+     "op": "atMost",
+     "value": 0.0001
+    },
+    {
+     "id": "B8-shut-l",
+     "claim": "and so is the left: four separate casts, which the component probe counts as four",
+     "measure": "coelom.canal_open_l",
+     "op": "atMost",
+     "value": 0.0001
+    },
+    {
+     "id": "B8-pp",
+     "claim": "and the pericardium is walled off from both of them",
+     "measure": "coelom.pp_open",
+     "op": "atMost",
+     "value": 0.0001
+    },
+    {
+     "id": "B8-seg",
+     "claim": "drawn at the finished state, sixteen segments below C4",
+     "measure": "dia.segments_below_c4",
+     "op": "near",
+     "value": 16,
+     "tol": 0.05
+    }
+   ]
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 9,
+   "title": "A source that fails, and where the hernia appears",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 1
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "septum_transversum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleuroperitoneal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "muscular_rim"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "crura"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "bochdalek"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "morgagni"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oesophagus"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Clinical"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "bochdalek",
+      "morgagni",
+      "septum_transversum",
+      "pleuroperitoneal"
+     ],
+     "layout": "side-by-side"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "pleuroperitoneal",
+     "to": "bochdalek",
+     "kind": "failing to close its canal gives"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "septum_transversum",
+     "to": "morgagni",
+     "kind": "leaving a gap at its ventral corner gives"
+    },
+    {
+     "op": "PEEL_LAYER",
+     "layer": "muscle",
+     "direction": "outward"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "inferior"
+    }
+   ],
+   "narration": "Map each lesion onto the source that failed. Pleuroperitoneal membrane open — Bochdalek hernia, posterolateral, usually left, and the killer is the hypoplastic lung, not the bowel. Gap beside the septum transversum — Morgagni hernia, retrosternal, usually right, often silent for years. Muscle never grows in — eventration, a diaphragm that is complete but thin and high. Wide hiatus — congenital hiatus hernia. And if the ventral wall never closed over the pericardium at all, ectopia cordis — [the wall itself is not on screen in this beat; beat 10 is where it is drawn]. Learn the four sources and you have not learned four facts; you have learned the differential.",
+   "claims": [
+    {
+     "id": "B9-four",
+     "claim": "this is the finished diaphragm, read for its defects, not a stage of it",
+     "measure": "dia.muscle_progress",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B9-shut",
+     "claim": "both canals are shut in the normal build, which is what makes a defect a defect",
+     "measure": "coelom.canal_open_l",
+     "op": "atMost",
+     "value": 0.0001
+    },
+    {
+     "id": "B9-seg",
+     "claim": "at L1, sixteen segments below C4",
+     "measure": "dia.segments_below_c4",
+     "op": "near",
+     "value": 16,
+     "tol": 0.05
+    }
+   ]
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 10,
+   "title": "Eventration and the wide hiatus — complete, but not normal",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 1
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "rim_eventration"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "crura_wide"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "septum_transversum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pleuroperitoneal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oesophagus"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Clinical"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "rim_eventration",
+      "crura_wide"
+     ],
+     "layout": "side-by-side"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "rim_eventration",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "muscular_rim",
+     "to": "rim_eventration",
+     "kind": "muscle that never grew in gives"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "inferior"
+    }
+   ],
+   "narration": "Two of the four failures are not holes, and that is the discriminator. In EVENTRATION the leaf is complete — thin and high, but complete — so the cavity count does not change and nothing herniates through a defect; the lung is squashed by a diaphragm sitting too high. A WIDE HIATUS is a hole, but it is the hole the oesophagus already uses, made too big. [Read from below now, like beats 6 and 9. From the front the wide hiatus measured 0.000% of the frame, because the crura are in the dorsal midline and the ventral body wall was drawn in front of them at 93% of the subject. The ectopia cordis sentence that used to end this beat has moved verbatim to beat 11, which draws the ventral wall it is about.]",
+   "claims": [
+    {
+     "id": "B10-shut",
+     "claim": "measured on the NORMAL build at this t, the cavity is sealed — which is what the variant breaks",
+     "measure": "coelom.escapes_at_flank",
+     "op": "atMost",
+     "value": 0
+    },
+    {
+     "id": "B10-muscle",
+     "claim": "and this is the finished leaf, not a stage of it",
+     "measure": "dia.muscle_progress",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B10-seg",
+     "claim": "at L1, sixteen segments below C4",
+     "measure": "dia.segments_below_c4",
+     "op": "near",
+     "value": 16,
+     "tol": 0.05
+    }
+   ]
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 11,
+   "title": "Ectopia cordis — when the cavity itself never closed",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 1
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "wall_ectopia"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardial"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "septum_transversum"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "wall_ectopia",
+      "pericardial",
+      "heart"
+     ],
+     "layout": "stacked"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "wall_ectopia",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "wall_ectopia",
+     "to": "pericardial",
+     "kind": "a ventral wall that never closed leaves"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    }
+   ],
+   "narration": "And if the ventral wall never closed over the pericardium at all, the cavity is open to the outside and the heart lies outside the thorax — ectopia cordis, which is why the last beat's rule is about partitions AND about the cavity itself. [Carried verbatim from beat 10, where it was read over a frame fitted to the diaphragm and the wall it names was 93% of the subject and 813 px over the rim. \"The last beat's rule\" is beat 9's — learn the four sources and you have learned the differential — and this beat is the half of it that is about the cavity rather than the partitions. The three structures the sentence names are the three the camera is fitted to. The ectopic wall is drawn at 0.45 rather than the 0.14 the intact body wall uses: a gap in glass is not a gap anyone can see, and this structure is used in no other beat, so nothing else changes.]",
+   "claims": [
+    {
+     "id": "B11-ect",
+     "claim": "with the ventral wall open over the pericardium, at least 40 of 240 rays leaving the pericardial cavity reach the OUTSIDE — measured on the ectopia build, not on the normal one",
+     "measure": "coelom.escapes_at_pericardium_ectopia",
+     "op": "atLeast",
+     "value": 40
+    },
+    {
+     "id": "B11-shut",
+     "claim": "measured on the NORMAL build at this t, the cavity is sealed — which is what the variant breaks",
+     "measure": "coelom.escapes_at_flank",
+     "op": "atMost",
+     "value": 0
+    },
+    {
+     "id": "B11-muscle",
+     "claim": "and this is the finished leaf, not a stage of it",
+     "measure": "dia.muscle_progress",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B11-seg",
+     "claim": "at L1, sixteen segments below C4",
+     "measure": "dia.segments_below_c4",
+     "op": "near",
+     "value": 16,
+     "tol": 0.05
+    }
+   ]
+  }
+ ],
+ "provenance": {
+  "author": "task",
+  "authored_at": "2026-08-28",
+  "reauthored_at": "2026-10-01",
+  "reauthored_by": "the model3d BUILD task, 2026-10-01 07:05Z slot",
+  "reauthor_note": "Re-authored from the sequence version onto models3d/body-cavity-coelom.js, built in the same run. The old structures[] were fifteen teaching BEATS with no geometry, as the queue note says of all 28 of these scenes; they are now thirty anatomical parts the model actually builds. EVERY LINE OF NARRATION FROM THE SIX ORIGINAL BEATS IS CARRIED ACROSS VERBATIM, on views 1, 2, 4, 7, 8 and 9 in that order, with two additions of my own in brackets on views 1 and 8 stating the section plane's axis (this model's cranio-caudal axis is y, so a transverse cut is normal to y, not to z as the spec's LPS table says) and nothing removed. Views 3, 5, 6 and 10 are NEW: the sealing of the flanks, the right-before-left stage where there are three cavities and not four, the finished leaf read as a map of its four sources, and the two failures that are not holes. The fifteen original region narrations are carried on the structures[] entries they became, also verbatim where the structure is the same thing. deferred_beats is empty because all ten views change the picture.",
+  "status_note": "candidate, never ready: only a review that did not build this may promote it (ARTWORK-STANDARD section 3).",
+  "corrected_at": "2026-10-01T16:54:49Z",
+  "corrected_by": "the model3d REVIEW task, 2026-10-01 16:35Z slot (round 2)",
+  "correction_note": "Two corrections, neither touching narration. (1) gaps[0] asserted that the sibling cranio-caudal-folding was converted and accepted; it was escalated at 09:15Z, before this scene was written, and lateral-folding at 12:49Z. (2) pleuropericardial carried the bare label Partition 2 in the same numbered series as the three structures that ARE sources of the diaphragm; in view 4 it is the second-largest thing on screen (0.269 of subject) while the narration recites the four sources, which do not include it. Label now says so. Numbering collision between the two quartets is reported as a finding, not relabelled here.",
+  "reworked_at": "2026-10-01",
+  "reworked_by": "the model3d BUILD task, 2026-10-01 15:05Z slot",
+  "rework_note": "Rework of the 2026-10-01 review's six findings. NARRATION: nothing was discarded. One sentence -- 'Four sources - central tendon, pleuroperitoneal membranes, crura, muscular rim.' -- MOVED VERBATIM from beat 4 to beat 6, because beat 4 is drawn at t=0.52 where two of those four do not yet exist and beat 6 draws all four (finding 2). The ectopia cordis sentence MOVED VERBATIM from beat 10 to the new beat 11, which draws the ventral wall it is about. Two words changed in beat 9, 'partition'->'source', because that beat's four are the diaphragm's sources and not the coelom's partitions (finding 3). Everything else the original author wrote is where it was; every addition of this run's own is in [square brackets], the convention the 07:05Z re-authoring already used. NUMBERING, finding 3, chosen deliberately: the numbered quartet is now the FOUR SOURCES OF THE DIAPHRAGM (septum transversum->central tendon, pleuroperitoneal, crura, muscular rim), because that is the quartet beats 4, 6 and 9 all lean on and the one the four hernias map onto one-for-one. The coelom's partitioning stays taught in prose, unnumbered, which is where the pleuropericardial membrane belongs: it partitions the coelom and gives the diaphragm nothing. The numbering now has no gap in it, which is what beat 6 showed before.",
+  "correction_note_round2": "Three corrections, none touching the original author’s narration (views 1, 2, 4, 7, 8, 9 are byte-unchanged). (1) Beat 5’s SHOW_RELATIONSHIP from lung_r to pleuroperitoneal carried kind \"the expanding lung is what peels the wall in to make\", which attributes the PLEUROPERITONEAL MEMBRANE to the mechanism that in fact produces the MUSCULAR RIM. The expanding pleural cavities burrow into the body wall and split off the peripheral muscular rim (source 4) in about month 4; the pleuroperitoneal membranes (source 2) grow from the dorsolateral body wall and close the canals at about week 7, which is what this scene’s own beat 4 narration says and what beat 4 puts the muscle LAST for. So the label contradicted the scene’s own timeline as well as the anatomy. Replaced with a statement that is true at this instant and is the beat’s actual teaching point. Beat 5 is a build-run beat, not the original author’s, so the wording was the build run’s to correct. (2) Beat 5 said \"there are THREE cavities and not four\" while beat 8’s title says \"Three cavities where there was one\" and the learning_goal says \"three separate serous cavities\" — the same word counting two different things, on the most basic countable fact in the topic. Changed to \"THREE separate spaces\" and the distinction stated in brackets. (3) The beat-2 heart visibility waiver named beat 7 as a beat that shows the heart; it does not (0.000% on both passes, and beat 7 is the clipped beat, so it reports no share). The false half removed, the true beat-8 half kept with measured numbers. NO WAIVERS WERE ADDED by this review, deliberately — see the round-2 findings: four of the six outstanding visibility failures ARE waivable under the standard’s own rule and the beat that shows each is named there, but a reviewer who writes the waivers and then judges them has done both jobs in one pass, which ARTWORK-STANDARD §3 forbids."
+ },
+ "deferred_beats": [],
+ "gaps": [
+  "ROUTED TO 3d_anatomy, AND THE CURRICULUM DOES NOT LIST IT. CURRICULUM.json gives this structure preferred_modes [sequence, diagram] and views [cross_section, mechanism]; there is no 3d_anatomy option. The previous version of this scene recorded a deliberate judgement NOT to add one - 'a cavity being partitioned is taught from staged sections, and inventing a 3d option here would be authoring against the curriculum rather than for it'. This run overrode that, because BUILD-QUEUE.json lists the item as kind:'model3d' with the standing note that all 28 of these SVG-era scenes are to be converted. The build run also cited the sibling item 'Cranio-caudal folding' as having the same preferred_modes and having been 'converted and accepted'. CORRECTED BY REVIEW 2026-10-01: that is not so. At the time this scene was written (files on disk ~11:14Z) cranio-caudal-folding had ALREADY been escalated, at 09:15Z, and it still is; lateral-folding, the third item in this topic, was escalated at 12:49Z. Neither sibling was accepted and neither is 'done'. The override therefore rests on the queue's standing conversion note ALONE, which is an instruction and may well be sufficient - but the precedent offered beside it does not exist, and a human should know that before reading the rest of this gap as settled. Both declared view types are present (views 1 and 8 are cross_section; 4, 5, 6 and 7 are mechanism). THE DISAGREEMENT IS RECORDED RATHER THAN RESOLVED: a reviewer who thinks the old judgement was right should say so, and the honest fix would be to add 3d_anatomy to the curriculum entry rather than to leave the scene and the curriculum contradicting each other.",
+  "THE CAST IS THE CAVITY'S EXTENT, NOT THE FILM, and this is the one approximation the whole model rests on. A real serous cavity is a potential space a few cells thick wrapped round a viscus. Drawn that way it would be invisible, and no component probe at any resolution a browser can afford could count it. So each cavity is drawn as the solid volume it occupies and the viscus inside it lies inside that solid by construction. Every such pair is named in the model's CONTACT_RULES partition and acceptance row M asserts that NOTHING outside that partition overlaps anything - which is where the model's six real interpenetrations were found, including the cavity casts and the diaphragm's own rim passing through the body wall.",
+  "THE FOLDING IS PRESCRIBED, NOT SOLVED. The head fold swinging the pericardial cavity caudally and the lateral folds pinching the coelom off are both schedules here. They have their own scenes (cranio-caudal-folding, lateral-folding), covers[] claims neither, and this scene has always said it starts from the sealed cavity. What IS solved is the partitioning: see the next two entries.",
+  "WHAT IS SOLVED, so a reviewer can tell it from what is not. (1) The pleuroperitoneal flap: three unknowns - curvature amplitude, hinge share, arc length - against three conditions, that its free edge reaches the dorsal mesentery of the oesophagus in both coordinates and arrives TANGENT to the septum transversum it fuses with. Residual 0 to machine precision; 43 of 48 seeds converge to the same point. The answer is that the membrane must be 3.4% longer than the gap it closes and that essentially all of its curvature sits at the hinge. (2) The phrenic nerve: the shortest path from fixed C3-C5 roots to the descending central tendon that stays outside BOTH the pericardial sac and the lung bud, by relaxation to a residual of 1e-9. Its length is then a consequence of the descent, not a number anybody chose.",
+  "WHAT THE SOLVE BUYS, stated because a solve that changes nothing is decoration: the free edge's RADIAL position on the diaphragm is what decides when each pericardioperitoneal canal is shut, and the flap's shape makes that markedly non-linear in the sweep. So 'the right canal closes before the left' - and therefore the left-sidedness of the common congenital diaphragmatic hernia - comes out of the geometry rather than out of a timetable. The three-cavity stage is 0.125 of the process wide, and acceptance row C3 counts THREE components in the built geometry at its midpoint.",
+  "THE CLOSURE TIMETABLE IS PRESCRIBED, from the weeks the narration gives (coelom week 3, folding week 4, pleuropericardial fusion week 5, pleuroperitoneal closure about week 7, L1 by about week 8). Only the ORDER is asserted, and it is asserted as a component count rather than as a caption.",
+  "THE TWO ENDPOINTS OF THE MEMBRANE'S SWEEP ARE PINNED, and that is a declared normalisation rather than a result. The flap's endpoint radius is rescaled affinely so that sweep 0 reads exactly 1.0 (the body wall) and sweep 1 reads exactly the central tendon's own edge. Without it the membrane's territory and the septum's would miss each other by 0.03 and the parity probe would find an annular slot and report the pericardial and peritoneal cavities as one. The SHAPE between the endpoints is the solve's and is what the timing depends on.",
+  "THE PLEUROPERICARDIAL MEMBRANE IS DRAWN AS A COLLAR, not as the full parasagittal sheet it is. It is built as a disc normal to the coelom's own path at the cranial waist, growing inward from its rim as the fold closes, and clipped to stop just short of the median plane. Drawn out to its anatomical extent it crossed the midline and ran through the oesophagus. What the picture supports is that the membrane PLUGS the canal and carries the vein and the nerve; what it does not show is the sheet becoming the whole fibrous pericardium.",
+  "MORGAGNI'S SITE IS THE NEAREST TRIPLE POINT THIS TERRITORY MAP HAS, not a sternocostal triangle. The model has no sternum and no ribs, so 'retrosternal' is narrated and what is MEASURED is the relation an exam asks for: the Morgagni channel's centroid is VENTRAL of the Bochdalek channel's by 0.40 of the dome's half-depth and on the opposite side in x, both floored in acceptance row D2. Bochdalek's site needs no such caveat: it is AT the canal, on the canal's own bearing, so there is no third constant to get wrong.",
+  "CONGENITAL HIATUS HERNIA IS MEASURED AS A SITE, NOT AS A COMMUNICATION. The hiatus is built, the oesophagus passes through it with a floored clearance, and the wide-hiatus variant has 2.5 times that clearance - but no cavity cast is routed through the hiatus, so the model does not make a hiatus hernia a change in the cavity count the way it makes Bochdalek and Morgagni ones. The narration names it and the picture shows the hole; the topology does not.",
+  "THE VISCERA ARE PRESCRIBED CONTEXT. Heart, lungs, liver, gut and oesophagus are there so that 'the heart sits in the pericardial cavity' is a picture and not a sentence. Their shapes are not examinable here and none is mesh-backed; the lung's EXPANSION is the mechanism the scene turns on and it is narrated and scheduled, not solved.",
+  "THE LIVER IS DRAWN INSIDE THE VENTRAL MESENTERY, measured at 0.47 of the sheet's vertices, and that is pinned rather than named away (model CONTACT_PINNED, acceptance row M-pin). It is the anatomy - the liver develops within the ventral mesentery, which is where the lesser omentum and the falciform ligament come from - but the model does not build the liver as lobes with the mesentery reflected over them, so the sheet passes through the organ. Pinned at 0.62 so that if it GROWS something else has moved.",
+  "THE SOMITES DO NOT GROW and the body wall does not thicken. The somites are present only as the landmark the phrenic nerve's fixed origin is asserted against, which is acceptance row H; nothing in the narration asks a student to watch them.",
+  "THE AXES ARE PROVED ONLY BY ROUTE (b) OF RENDER-STANDARD'S RULE. This model has genuine chiral content - the right canal closes before the left - but that content is BUILT FROM the declared convention, so asserting it would be circular in exactly the way acceptance row I on lateral-folding was. What is asserted instead is that this model's AXES object and its ACCEPTANCE.axes string agree with lateral-folding's, whose convention IS measured off six BodyParts3D right/left pairs by tools/prove-corpus-axes.mjs. Any narration claim naming a side inherits that proof and no more.",
+  "THE MODEL IS NOT IN ANATOMICAL MILLIMETRES. It is on a vertebral scale - one segment is 0.22 model units - so that 'opposite the third to fifth cervical somites' and 'the first lumbar vertebra' are measured positions rather than captions, and acceptance rows H-band and I read them off that table. Nothing in the scene quotes a length in centimetres.",
+  "A TRANSVERSE SECTION IN THIS MODEL IS CUT NORMAL TO y. model3d-scene-spec-v2.md states the corpus frame is LPS (+X left, +Y posterior, +Z superior) and gives axial = z; every procedural model in the corpus, and viz3d.js's own VIEW_DIR table (superior = [0, 1, 0.001]), instead treat +y as cranial and +z as ventral. The two agree only on +x = left. Views 1 and 8 say so in their narration, which is what the spec's own escape clause for a pre-folding embryo asks for, and the disagreement is reported in BUILD-LOG as a corpus finding rather than silently picked.",
+  "BEATS 2, 4 AND 7 TRACE concept:coelom, concept:diaphragm-formation and concept:phrenic-nerve. In each the subject is a space, a sequence of fusions, or a nerve being dragged, and the first two have no single structure to light; the renderer degrades TRACE_STRUCTURE to a timed highlight along the path, which is what those beats want anyway.",
+  "BEAT 9 AUTHORS PEEL_LAYER ON THE MUSCLE LAYER DELIBERATELY, and the current renderer degrades it to hiding the structures tagged with that layer. That is the intended effect - 'what is missing from the leaf' is how the four defects are told apart - so muscular_rim and crura drawing nothing in that beat is the op working, and it carries a visibility waiver saying so rather than being treated as a defect.",
+  "'Lateral folding', 'Cranio-caudal folding' and 'Primitive gut tube' are NOT claimed in covers[]. All three are named in the narration because folding is what seals the coelom and because the mesenteries are what remain of its walls round the gut; all three have their own entries.",
+  "Diaphragm anatomy proper - the three openings with their vertebral levels and contents, the arcuate ligaments - is Gross Anatomy and is taught in the thoracic wall scenes. It appears here in match.terms only so a highlighted term still reaches a scene.",
+  "Lesser sac anatomy and stomach rotation are named in one sentence to explain why the peritoneal cavity has two compartments, and no further. Stomach rotation belongs to GIT Development.",
+  "Week numbers are the standard teaching approximations and the narration gives them as such; texts differ by several days. The left-sided predominance of Bochdalek hernia is given as 'the great majority' rather than a percentage, because quoted figures range from about 80 to 90 and nothing taught here turns on the number.",
+  "The malformations are named with their embryological origin and their classic presentation only. Antenatal management and surgical repair are not embryology and are deliberately absent.",
+  "validate-scenes WARNS ON VIEW 8 AND THE WARNING IS A TOOL LIMITATION, NOT A DEFECT - said here so the next run does not 'fix' it by changing the axis. The check compares the plane the narration names against CROSS_SECTION.axis using the LPS table (axial = z). This is a PROCEDURAL model whose cranio-caudal axis is y, declared machine-readably in MB3D_MODELS['body-cavity-coelom'].AXES, so a transverse cut here really is normal to y and axis:'y' is correct. The honest fix is in the tool: for a scene whose provider is procedural it should read the model's AXES rather than assume LPS. Reported in BUILD-LOG; changing axis to 'z' to silence it would cut the scene in a coronal plane while telling the student it was transverse.",
+  "BEAT 6 DOES NOT SHOW THE PERITONEAL CAVITY, and that is deliberate. It is the one beat that looks up at the finished leaf from below to read it as a map of its four sources, and the peritoneal cast lies between that camera and the leaf - with it shown, the harness's inferior frame is a translucent purple mass with the territories barely legible behind it. The cavity is shown from `inferior` in beat 5 and from `anterior` in beat 8.",
+  "FOUR OF THE TEN BEATS CLIP IN THE PLAYER, AND THE SCENE CANNOT FIX IT. walk-scene-in-player.mjs reports SUBJECT pixels on the frame border for beat 5 (115 px), beat 7 (100), beat 9 (1,121) and beat 10 (813), and suppresses those beats' per-structure shares because the frame moved out from under them - so for those four beats the 3.x requirement that every structure a beat draws be shown to survive it is NOT demonstrated, and that is stated here rather than implied by a pass. The cause is specific and is the same one review round 5 left OPEN on lateral-folding: viz3d refits the camera per view to the subject's own box, the scene has no field in which to ask for a margin (every view carries camera:null and the only framing is the top-level camera), and three of these four beats are `inferior` views of a diaphragm whose rim IS the body wall - a subject fitted exactly to the frame touches its border by construction. Four compositions were tried: beat 5 went from 1,181 border pixels to 115 by moving to `anterior` and dropping the long peritoneal limb, and beats 9 and 10 did not improve, because what reaches the rim in them is the pleuroperitoneal membrane, which those beats exist to point at. Turning them to `anterior` would frame cleanly and show a hernia map end-on, which is the wrong picture - RENDER-STANDARD's own 'a camera is not a fix'. The fix belongs in the engine: a margin in viz3d's frameView, or a per-view camera field in the spec.",
+  "TWO CORPUS-LEVEL DEFECTS WERE FOUND BY THIS ITEM'S CHECKS AND ARE NOT FIXED HERE, because both are in files shared with every other model. (1) render-kit's sweptShell emits its ring quads through emitter().quad, whose vertex order is FIXED, against normals nrm() may have NEGATED to force them outward - so wherever that guard fires, face winding and vertex normals disagree. Measured: cardiac-looping, which the queue marks `done`, has 7 of 11 keys below 0.999 agreement (pericardium 0.515, arches 0.529, sinus 0.950); lateral-folding has 0 of 13 only because every structure in it is a slab. This model corrects its own geometry locally (fixWinding(), 1.3% of its triangles) and reports the numbers. (2) tools/prove-corpus-axes.mjs, with the STL corpus absent, reads 'no pair measured' as 'every pair said +x = RIGHT', prints that as a measured convention and FAILS all three models that declare -x = RIGHT - including the one it exists to anchor. A run that trusted it would mirror the corpus. Both are in BUILD-LOG with the one-line fix each needs.",
+  "FRAMING, AND THE RULE THAT CAME OUT OF IT (finding 1, fixed this run). viz3d frames a view on `state.only` (subjectBox) but paints at full authored opacity everything in `state.hi` -- and state.hi is set by COMPARE_STRUCTURES *and* by HIGHLIGHT_STRUCTURE and SHOW_RELATIONSHIP, while state.only is set by COMPARE_STRUCTURES and ISOLATE_REGION alone. Where hi is wider than only, a beat lights structures the camera was never fitted to and they run off the rim: that is the whole of beat 9's 1,121 border px and beat 10's 813. THE INVARIANT A BEAT MUST HOLD: everything a beat promotes to full opacity must be inside its framing op's target list. Widening those lists changes no painting at all -- the keys added were already at full opacity via a relationship -- it only widens the box the camera fits. Beats 9 and 10 now measure 0 border px and have shares for the first time. Beat 5's remaining 2 px, before it was re-aimed, were NOT structure: with every player.meshes[k] hidden, beat 5 still drew 672 lit px of which 2 were on the rim. Those are the SHOW_RELATIONSHIP overlay lines, which live in viz3d's `overlay` and not in `meshes`, so walk-scene-in-player cannot hide them and counts them as subject. That is a measurement defect in the walk tool -- the one-line fix is to hide `overlay` for the background and subject shots -- and it is NOT changed here, because that tool is shared and every scene already walked would move.",
+  "MEASURE-SCENE-VISIBILITY HAD NEVER BEEN RUN ON THIS SCENE, and this run ran it. On the scene as the review left it: 6 of 10 beats failed, and TWO of them pointed at a structure a student cannot see -- beat 5 at pleuroperitoneal 0.000%, the membrane its entire narration is about, and beat 10 at crura_wide 0.000%, the wide hiatus its own title names. Both were read from `anterior`, where a flap that closes a canal is edge-on and the crura are behind everything; beat 6 reads the same leaf from `inferior` and gets the crura at 8.07%, which is the evidence that the attitude and not the geometry was hiding them. FIXED by re-aiming both beats to `inferior`: pleuroperitoneal 0.000% -> 19.938%, crura_wide 0.000% -> 5.007%, rim_eventration 1.87% -> 36.645%, and beat 10 now passes outright. STILL FAILING, pre-existing and NOT fixed by this run: beats 1 (endoderm), 3 (both pleural cavities), 7 (pericardial, heart), 8 (dorsal mesentery), and beat 5, which from `inferior` cannot see the RIGHT pleural cavity or the right lung bud -- arguably because at t=0.7658 the right canal is shut, which is the beat's own claim B5-r, but that is an argument a reviewer should test rather than one this run should bank. NO WAIVERS WERE WRITTEN FOR ANY OF THESE, deliberately: the standard requires a waiver to name the beat that DOES show the structure, and no beat in this scene shows the pericardial cavity, the right pleural cavity or either lung bud above the bar. Writing six waivers that could not name such a beat would be the lowered threshold the standard forbids. The honest fix is region-framed beats for the cavities, which is a composition job beyond this rework."
+ ],
+ "visibility_waivers": [
+  {
+   "view": 9,
+   "key": "muscular_rim",
+   "why": "Beat 9 authors PEEL_LAYER on the muscle layer so that the hernia map can be read off the leaf with the muscle lifted away, and the current renderer degrades that op to hiding every structure tagged layer:'muscle'. muscular_rim is one of those, so it drawing nothing in this beat IS the op doing its job rather than a structure that failed to appear. It is shown in the ops so that a renderer which implements PEEL_LAYER properly animates it away instead of never having it. Beat 6 is the beat that shows it, from `inferior` with the whole leaf lit, and beat 10 shows the eventrated version of it."
+  },
+  {
+   "view": 9,
+   "key": "crura",
+   "why": "As above: layer:'muscle', hidden by the same degraded PEEL_LAYER. Beat 6 shows the crura, and beat 10 shows the wide-hiatus version."
+  },
+  {
+   "view": 2,
+   "key": "heart",
+   "why": "0.000% of beat 2's frame. The heart sits INSIDE the pericardial cast, which is the bend of the horseshoe and is what this beat is about; at 0.30 opacity the cast is translucent but the heart is behind the whole depth of it from `anterior` at t = 0, when the cast is at its most cranial and the camera furthest away. The narration does not name the heart. Beat 8 shows it, at 6.438% of the subject in walk-scene-in-player and 2.112% of the frame on measure-scene-visibility’s alpha-aware pass. CORRECTED BY REVIEW 2026-10-01 (round 2): this waiver also named beat 7 at \"6.0% of the subject\", and beat 7 does not show the heart — measure-scene-visibility reads heart 0.000% there on both the id-pick and the alpha-aware pass, and beat 7 is the one beat walk-scene-in-player reports CLIPPED, so it yields no share at all. The beat-8 half stands and is what this waiver now rests on."
+  }
+ ]
 }

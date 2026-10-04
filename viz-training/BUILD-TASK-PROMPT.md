@@ -8,7 +8,61 @@ and hand it to the review task. One item. Not two.
 
 ---
 
-## 0 · Before anything else
+## 0 · HOW YOU REACH THE REPO — read this first, it changed on 2026-09-13
+
+**You have no shell on Frank's machine.** A Windows update released 2026-09-08 stopped Claude's
+workspace from starting there, so `device_bash` fails with "Workspace unavailable" and every path
+under `$HOME/mnt/` is unreachable. Do not try it, and do not treat its failure as your failure.
+
+All three tasks auto-suspended with `device_absent` because of this. The review task died first, on
+the evening of the 10th; the build task ran on for another eight and a half hours making work nothing
+consumed, and eleven items reached `built` with nine never reviewed. That is the failure this section
+exists to prevent recurring.
+
+**What still works is FILE access, plus the shell in your own cloud container.** So the shape of a run
+is: stage in, work in the cloud, commit back.
+
+1. **Stage what you need** with `device_stage_files`, using Windows absolute paths under
+   `C:\Users\domin\OneDrive\Documents\GitHub\medbank\`. They land in your container under
+   `/mnt/user-data/uploads/medbank/...`. **Record the `mtimeMs` of anything you intend to write back.**
+2. **Work in your own container.** It has node. Run the repo's tools there against the staged copies —
+   `queue-set.mjs`, `validate-scenes.mjs` and the rest all take `--queue` or a path argument.
+3. **Commit back** with `device_commit_files`, passing `expectedMtimeMs` — the value you recorded at
+   step 1 — for every file.
+
+**THE QUEUE IS WRITTEN BY COMPARE-AND-SWAP, NOT BY A LOCK.** `queue-set.mjs` still takes a lock file,
+and on a staged copy that lock is worthless: two runs would each take their own uncontended lock and
+the second commit would erase the first. What actually protects the queue is `expectedMtimeMs` —
+`device_commit_files` REFUSES the write if the file changed since you staged it. So:
+
+```
+stage BUILD-QUEUE.json, note mtimeMs
+node viz-training/tools/queue-set.mjs --queue /mnt/user-data/uploads/medbank/viz-training/BUILD-QUEUE.json <item> --status building --set claimed_at=<utc>
+commit it back with expectedMtimeMs = the noted value
+```
+
+**If that commit is REFUSED, another run edited the queue while you were working. Do not force it.**
+Re-stage, re-apply your change to the fresh copy, and commit again. A refusal is the system working.
+
+**NEVER COMMIT TWICE FROM THE SAME PATH UNDER `/mnt/user-data/outputs/`. Added 2026-10-03 by the build
+run on neurulation, which clobbered the queue for seventy seconds doing exactly that.** That run wrote
+its claim from `outputs/BUILD-QUEUE.json`, and later wrote its `built` update over the SAME path and
+committed it — and the bytes that reached Frank's machine were the EARLIER ones, erasing another run's
+`built` and `building` entries. A local read of that path a second before the commit returned the NEW
+content, so the staleness was in the transfer, not in the file. `expectedMtimeMs` cannot catch this: it
+compares the DEVICE's file against what you staged and says nothing about whether the bytes you are
+SENDING are the bytes you meant. So: **one output path per commit, a name this run has not used before,
+and re-read it from that path immediately before committing.** A fresh name committed correctly on the
+first try. The read-back in section 3 is what caught it — but a read-back tells you only after you have
+already overwritten someone else's work, which on the queue is a race another run can lose.
+
+**PROVE YOU CAN SEE THE REPO BEFORE ANYTHING ELSE.** Stage
+`C:\Users\domin\OneDrive\Documents\GitHub\medbank\viz-training\BUILD-QUEUE.json` and read it. If that
+fails, STOP and make it the first line of your reply. An earlier version of this task ran repeatedly,
+reported success and touched nothing; a run that cannot reach the repo has failed and must say so
+loudly.
+
+## 0.1 · Before anything else
 
 Read, in this order:
 
@@ -29,16 +83,22 @@ them, and a run that trusted it died on its first queue write — `MODULE_NOT_FO
 claimed anything. The `models3d/` paths in section 2 ARE repo-root-relative and are correct; it was
 only the tools half that was wrong. Commands below are written to run from the repo root.
 
-**NEVER EDIT `BUILD-QUEUE.json` BY HAND.** Every write goes through `viz-training/tools/queue-set.mjs`, which takes
-a lock, re-reads the file, changes only your fields and renames the result into place. You and the
+**NEVER EDIT `BUILD-QUEUE.json` BY HAND.** Every write goes through `viz-training/tools/queue-set.mjs`,
+which re-reads the file, changes only your fields and renames the result into place. You and the
 review task can be alive at the same time, and two hand-edits of the same JSON silently erase one
-another — the file stays valid, the run reports success, and a review's findings just vanish. Proven:
-eight concurrent writers through the tool kept all eight changes.
+another — the file stays valid, the run reports success, and a review's findings just vanish.
+
+The tool also takes a lock file. **That lock no longer protects anything** now that you work on a
+staged copy: two runs would each take their own uncontended lock in their own container. Section 0 has
+the replacement — `expectedMtimeMs` on the commit. Do not let the lock talk you out of passing it.
 
 ```
-node viz-training/tools/queue-set.mjs --next                          # what to take, rework-first, with its findings
-node viz-training/tools/queue-set.mjs <item> --status building --set claimed_at=<utc>
-node viz-training/tools/queue-set.mjs <item> --status built --set built_at=<utc> --append built_notes="…"
+# $Q is the STAGED copy in your own container, not a path on Frank's machine:
+#   Q=/mnt/user-data/uploads/medbank/viz-training/BUILD-QUEUE.json
+node viz-training/tools/queue-set.mjs --queue $Q --next                    # what to take, rework-first, with its findings
+node viz-training/tools/queue-set.mjs --queue $Q <item> --status building --set claimed_at=<utc>
+node viz-training/tools/queue-set.mjs --queue $Q <item> --status built --set built_at=<utc> --append built_notes="…"
+# then commit BUILD-QUEUE.json back with expectedMtimeMs — see section 0.
 ```
 
 - `--next` tells you what to take and why. It puts any **`changes-requested`** item ahead of every
@@ -48,8 +108,26 @@ node viz-training/tools/queue-set.mjs <item> --status built --set built_at=<utc>
   see it is taken. If you find an item already `building` with a `claimed_at` older than two hours,
   that run died; reclaim it.
 
-If every item is `done` or `escalated`, do not invent work. Write that in the log, fire the review
-task, and stop. A run with nothing to build is a complete run, not a failed one.
+If every item is `done` or `escalated`, do not invent work. Write that in the log and stop — and do
+NOT fire the review task, which section 4 explains. (This paragraph used to say "fire the review
+task", contradicting section 4 in the same file. Corrected 2026-09-13.) A run with nothing to build is
+a complete run, not a failed one.
+
+## 1a · BACK-PRESSURE — do not outrun the reviewer
+
+**Before you claim anything, count the items with status `built`. If there are more than THREE, stop.**
+Write in the log that you stopped because the review queue is `built`×N and the reviewer is behind,
+and end your run. Do not build. That is a complete run.
+
+This rule exists because the alternative already happened. On 2026-09-10 the review task died at
+18:35 and this one carried on for another eight and a half hours, producing nine more scenes that
+nothing ever looked at. Eleven items sat `built`, nine of them never reviewed, and the queue was still
+sitting that way three days later. A builder with no reviewer does not idle — it manufactures unread
+work, and every item it adds is one more thing a human eventually has to check by hand.
+
+Three is not a magic number; it is roughly one review cycle of slack. The point is that a growing
+`built` count is a symptom, and the correct response to a symptom is to stop and say so, not to add
+to it.
 
 ## 1b · Which KIND of item is it?
 
@@ -168,6 +246,32 @@ Do not mark anything built on the strength of having written it. Run all four:
    is what caught the winding bug; it is cheap and it is not negotiable.
 4. **It looks like the thing.** Open the render and ask whether a student would recognise it.
 
+**IF THE SCENE IS TIME-VARYING, CHECK ITS NARRATION AGAINST THE MODEL AT EVERY BEAT'S OWN `t`.**
+`node viz-training/tools/check-beat-claims.mjs <scene>`. Every view carries its narrated claims as
+`claims[]` and the tool evaluates them at that view's `SET_STAGE` t, then displaces each beat and
+requires it to stop being true. Added 2026-09-29 as RENDER-STANDARD §3; the reason it is worth a
+whole check of its own is that four of the eight defects found on the cardiac-cycle item across two
+review rounds were of this one shape — a correct model with the scene pointed at the wrong instant —
+and a 30-row acceptance battery could not have caught any of them, because every row tested the model
+against physiology and none tested the scene against the model. A beat whose claim is true at NO `t`
+is a MODEL finding and must not be fixed by rewriting the narration.
+
+**IF THE SCENE IS TIME-VARYING, WALK IT AS THE PLAYER DRAWS IT BEFORE YOU MARK IT BUILT.**
+`node viz-training/tools/measure-scene-visibility.mjs <scene>`. Every proof tool in this corpus
+renders `build(t)` with every layer on, at full opacity, with the camera fitted ONCE to the whole
+model. The player does none of those things: it resets every structure to visible, applies the
+view's ops, applies each structure's own `opacity`, and REFITS THE CAMERA PER VIEW to what is still
+visible. So the proof frames prove the geometry and prove nothing about the pictures a student looks
+at. Proposed by the review task on 2026-09-29 and adopted here the same day, because the first time
+anyone ran the walk on a model that had already passed three review rounds and a 34-row battery, it
+found EIGHT defects at once: the aortic valve contributed 0.000% of the frame in all six beats whose
+narration pointed at it, the tricuspid 0.000% in nine of ten, the beats that promise "the wall is
+taken away so you can see the four rings" drew opaque blood casts over the rings, and two beats
+highlighted structures that drew nothing at all. Every structure a beat draws or points at must
+survive that beat, or carry a waiver in `scene.visibility_waivers` that says WHY and, where it can,
+names the beat that does show it. A waiver is an argument someone wrote down; a lowered threshold is
+not.
+
 **TEST ON THE SUBSTRATE, NOT ON SOMETHING THAT RESEMBLES IT.** The queue lock tool passed a race test
 with eight concurrent writers — in a container where deleting files works. This repo is reached through
 a mount that FORBIDS deletion, so on the real machine the tool could not release its own lock and would
@@ -178,7 +282,30 @@ confidence you have not earned.
    the scene names. Each must come back with a mesh carrying geometry. This is the only check that proves
    a student would see it; everything above only proves the geometry exists.
 
+**READ IT BACK. A COMMIT THAT WAS ISSUED IS NOT A COMMIT THAT LANDED.** Before you set an item to
+`built`, re-stage EVERY file you claim to have written with `device_stage_files` and confirm each one
+exists with an mtime later than the moment your run started. Report the read-back in `built_notes` —
+the paths and their mtimes. If a file is missing or older than your run, your work did not reach the
+repo: say so as the first line of your reply and leave the item where it was.
+
+This is not belt-and-braces. On 2026-09-11 a run marked `cranio-caudal-folding` built with 1,900 words
+of specific proof, and nothing reached the repo — the model file has never existed, nor its render
+harness, nor the probe it cited, and the scene on disk was the untouched August version. It was the
+first run to lose the shell on Frank's machine and it improvised the stage-in / commit-back shape you
+are using now. Its queue commit landed; its file commits did not; and nothing required it to look.
+The item sat `built` for nine days while six others were reviewed ahead of it.
+
+Note that this is STRICTLY STRONGER than checking the `written` and `rejected` arrays
+`device_commit_files` returns, and that is deliberate: a run that never issued the commit at all also
+fails a read-back, and we cannot rule that out as what happened.
+
 Then set status `built`, record `built_at`, and list in `built_notes` what you deliberately left out.
+
+**STAMP TIMESTAMPS FROM THE CLOCK, NEVER FROM A SCHEDULE.** On 2026-09-22 a run wrote
+`built_at: 2026-09-22T15:05:00Z` at 14:37 — twenty-eight minutes in the future, and exactly its next
+`:05` cron slot. Every "built for over a day without review" check then read that item wrong. If a
+timestamp you write is later than the moment you write it, that is a bug in your run, not a rounding
+choice.
 
 ## 4 · Log, then hand over
 

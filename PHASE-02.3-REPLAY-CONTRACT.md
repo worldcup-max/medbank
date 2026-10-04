@@ -160,8 +160,165 @@ If anyone later edits `conf>=2` without updating the declaration, T10 fails.
 | `qa/v18-event-contract.mjs` | new — 15 tests |
 | `sw.js` | cache v226 |
 
-## Outstanding
+---
 
-Live emit of a genuine 02.3 event needs the deploy. Chain remaining:
-deploy -> session-only flag flip on my own account -> emit -> read persisted
-row -> confirm all three fields -> confirm the 14 pre-02.3 rows still NULL.
+## LIVE VERIFICATION (commit 3d8fa61, SW v226 active)
+
+Deployed, then the flag flipped **in that browser session only** — `config.js`
+was not in the commit and still reads `LEARNING_EVENTS: false`; the live page
+reported `flag:false` on load before the flip, and the flip died with the tab.
+
+### Version builders, live in production
+
+```
+mbSchedVerCard()   -> srs-box-v1@1.3.7.7.7.14.14
+mbSchedVerQbank()  -> qb-retention-v1@1.3.7.14~2.1.1.99
+caches             -> ['medbank-v226']
+```
+
+### Four genuine events emitted
+
+```
+emitted: { card:true, qbank:true, note:true, refused:false }
+stats:   { queued:3, sent:3, dup:0, pending:0, failed:0, refused:1 }
+```
+
+### Read back from the database
+
+```
+event_type        surface    sched_ver                          local_day  tz
+card_reviewed     flashcard  srs-box-v1@1.3.7.7.7.14.14           20706    -60
+question_answered qbank      qb-retention-v1@1.3.7.14~2.1.1.99    20706    -60
+note_read         note       <NULL>                              <NULL>   <NULL>
+```
+
+- Each surface persisted **its own** algorithm namespace.
+- `tz_offset = -60` (WAT, UTC+1) — the real device offset, so `local_day`
+  20706 is interpretable rather than an opaque integer.
+- `note_read` stayed NULL **although a `scheduler_version` was deliberately
+  offered to it**. Meaningless provenance is refused at the writer.
+- The 4th event — a `card_reviewed` with no version — was **refused**, counted,
+  and never reached the database.
+
+### The temporal boundary holds
+
+```
+era                  rows  with_ver  with_day  with_tz  unreplayable_sched
+02.3 verify             3         2         2        2                   0
+pre-02.3 (build 01)    14         0         0        0                  12
+```
+
+The 12 pre-02.3 scheduler events are honestly unreplayable and remain so.
+Nothing was retrofitted. Every scheduler event written after the deploy
+carries the full contract.
+
+### Immutability re-confirmed after the DDL
+
+```
+policies = 2    cmds = INSERT, SELECT
+```
+
+No UPDATE policy, no DELETE policy. Unchanged.
+
+---
+
+## GATE — 02.3 APPROVED / PROVEN IN PRODUCTION
+
+> The immutable learning ledger now records sufficient temporal and scheduler
+> provenance for future replay without retrofitting historical events.
+> Scheduler-specific provenance is surface-specific and enforced at write time.
+> Invalid scheduler events are refused. Existing pre-contract events remain
+> explicitly unreplayable rather than being fabricated into compliance.
+> Feature remains dark.
+
+### The three verification rows — permanent by decision
+
+`object_id like 'v023-verify-%'`
+
+**02.3 production verification fixtures — permanent immutable audit records.**
+
+They are legitimate rows written through the real production path. They are
+NOT to be deleted, and **no DELETE capability may be added to remove them** —
+introducing mutability into the ledger to tidy three rows would be
+architectural damage far exceeding the benefit.
+
+If a formal operational-vs-verification distinction is ever genuinely needed,
+it belongs in `metadata` or a future event classification. That distinction
+must **not** be introduced merely to clean these rows up.
+
+### Production flag flip — bounded and recorded
+
+```
+deployed writer -> session-only flag -> genuine events
+    -> database verification -> flag false -> session closed
+```
+
+`config.js` was never modified, so no persistent enablement existed at any
+point. Recorded as controlled production verification, not a deviation.
+
+---
+
+## PHASE STATUS
+
+| Phase | Status |
+|---|---|
+| 02.1 Card identity | **closed** — investigated, no migration warranted |
+| 02.2 System of record | **closed** — Architecture C approved |
+| 02.3 Replay contract | **closed** — production-proven |
+| 02.4 `memory_state` | **HELD — design review required before any work** |
+
+### 02.4 is frozen pending review of seven design questions
+
+1. exact `memory_state` schema
+2. identity/key strategy for Q-bank + flashcards
+3. CAS semantics
+4. migration strategy from existing `profile_state`
+5. how scheduler versions interact with current state
+6. recovery/rollback behaviour
+7. what happens to legacy state that cannot be reconstructed from events
+
+**Until that gate is explicitly approved: no feature-flag changes, no
+migrations, no target work, no scheduler unification, no cleanup.**
+The two flashcard orphans remain an open hygiene item, untouched.
+
+### Question 5 is an ARCHITECTURAL decision, not an implementation detail
+
+The two questions are genuinely different:
+
+```
+learning_events.scheduler_version
+    -> "which algorithm produced THIS EVENT?"          (settled, 02.3)
+
+memory_state
+    -> "what algorithmic state do we currently hold,
+        and under what semantics may the NEXT transition
+        safely be computed?"                            (open, 02.4)
+```
+
+Neither "last writer wins" nor "set of contributing versions" may be chosen
+prematurely — both can create subtle replay and rollback problems.
+
+**Seven cases must be explicitly modelled before any schema is approved:**
+
+1. **v1 -> v2 transition** — an existing row receives its first event under a
+   new scheduler.
+2. **v1 -> v2 -> v1** — rollback / reversion.
+3. **Historical replay** — reconstructing state from events after scheduler
+   versions have changed.
+4. **Partial migration** — some memory objects migrated, others still
+   represented only in `profile_state`.
+5. **Concurrent transition** — two clients advancing the same memory row.
+6. **Algorithm correction** — discovering a scheduler version was wrong,
+   without rewriting historical events.
+7. **Mixed-version history** — one current state genuinely being the
+   accumulated result of multiple scheduler versions.
+
+### Governing principle for 02.4
+
+> **Never make `memory_state` pretend that historical provenance is simpler
+> than it actually is.**
+
+The immutable event ledger already holds the historical truth. `memory_state`
+is an authoritative *materialised current state* carrying enough metadata to
+know how that state may safely be advanced — **not** a compressed substitute
+for the event history.

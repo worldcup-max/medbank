@@ -1,102 +1,146 @@
-3D: a per-mesh ceiling, and the coccyx becomes a bone
+Clarify 3D build/review escalation and read-back workflow
 
-Two changes. The first came from a measurement on a phone; the second is
-the escalated item.
+THIS COMMIT SPANS 23 DAYS
+-------------------------
+The previous commit on this machine is 56a06095, 2026-09-11 07:55. Every
+change since — the scheduled build and review tasks' output as well as
+the workflow work described below — lands here at once. It is large for
+that reason and not because any one change is.
 
-A CEILING, BECAUSE A BUDGET IS BLIND TO CONCENTRATION
------------------------------------------------------
-Frank opened the intercostal scene on a phone on Nigerian mobile data: 25
-seconds, and 32 of 35 structures. The three it lost were the external,
-internal and innermost intercostals — every muscle the scene exists to
-teach. A bare rib cage.
+What the build and review tasks produced in that window, as recorded in
+viz-training/BUILD-QUEUE.json at the time of this commit:
 
-The per-scene budget did not prevent that and could not. Two scenes can
-weigh the same 21 MB and fail completely differently:
+  done (4 new)    cardiac-cycle-pumping, blastocyst, chorion-placenta-early,
+                  pharyngeal-arches
+  escalated (24)  — up from 3 on 2026-09-29. Eighteen are embryology
+                  scenes (twelve carry an escalated_at between 09-29 and
+                  10-03; six carry none), three are gross anatomy and
+                  three are engine items. See ESCALATIONS.md.
+  in flight       pharyngeal-pouches and pharyngeal-clefts-membranes
+                  (changes-requested), thyroid-gland-development (building)
 
-    vertebral column   48 files under 1 MB   lose one -> you lose a vertebra
-    intercostals        3 files over 4 MB    lose one -> you lose the subject
+Twenty-four escalated against seven done is a ratio worth reading
+as a signal about the loop, not only as a list of decisions. Nearly every
+embryology scene the chain has touched since 09-29 has ended up waiting
+on a person.
 
-A big file on a flaky link does not fail at random. It fails FIRST, and the
-biggest mesh in a scene is almost always the thing the scene is about. So
-concentration is a separate risk from total weight and needs its own limit.
 
-40,000 triangles per mesh, measured against the two cases most likely to
-break rather than picked:
+This commit is about the loop rather than about any one scene. Nineteen
+decisions were put to Frank on a decision desk; seventeen are applied
+here, two are explicitly left open, and one older question is restated as
+open because a ruling landed near it without answering it.
 
-    scapula      65,538 -> 40,000   surface moved 0.023 mm
-    cerebellum  117,127 -> 40,000   surface moved 0.041 mm
+WHAT THE RUNS ARE NOW REQUIRED TO DO
+------------------------------------
+A READ-BACK, in BUILD-TASK-PROMPT.md section 3 and its equivalent in
+REVIEW-TASK-PROMPT.md. A run may not mark an item `built` or `done` until
+it has re-staged every file it claims to have written and confirmed each
+exists with an mtime later than the run started, and has reported the
+read-back in `built_notes`.
 
-The scapula is the bone RENDER-STANDARD section 5 singles out because an
-exam asks a student to recognise THAT shape; the cerebellum's folia are the
-finest texture in the corpus. Both come through intact. Across all 31 meshes
-over the ceiling the worst mover is the internal intercostal at 0.334 mm,
-and its fibre direction — the examinable fact — is still legible against the
-723,154-triangle scan.
+This is deliberately stronger than checking the `written` and `rejected`
+arrays `device_commit_files` returns, because a run that never issued the
+commit at all also fails a read-back, and that cannot be ruled out as what
+happened on 2026-09-11: `cranio-caudal-folding` was marked built with
+1,900 words of specific proof and nothing reached the repo. The model file
+has never existed, nor its render harness, nor the probe it cited, and the
+scene on disk was the untouched August version. That run wrote exactly one
+thing — its own queue entry — and sat `built` for nine days while six
+other items were reviewed ahead of it.
 
-    31 meshes re-decimated from their SCANS, not from what we ship, so the
-    result is what apply-mesh-budget.mjs would regenerate
-    largest file in the corpus   6.08 MB -> 1.91 MB
-    corpus                        317 MB -> 274 MB
-    intercostal scene            21.6 MB -> ~13.4 MB
+A CLOCK RULE, beside it: stamp timestamps from the clock at the moment of
+writing, never from a schedule. On 2026-09-22 a run wrote
+`built_at: 15:05:00Z` at 14:37 — twenty-eight minutes in the future, and
+exactly its next :05 cron slot. Every "built for over a day without
+review" check then read that item wrong.
 
-The ceiling is applied AFTER the never-go-backwards clamp and overrides it.
-That is deliberate: "keeps the detail it already has" is worthless if the
-file never arrives.
+A FOURTH ESCALATION REASON in ESCALATIONS.md: *a run's account of itself
+is contradicted by the repo*. The desk previously admitted three reasons
+and an entry like cranio-caudal-folding's had no legitimate home in the
+file built to catch exactly it.
 
-Not yet re-measured on a phone. One lever at a time — the per-scene budget
-is untouched so the next measurement attributes cleanly.
+A STALE-CLAIM FIX in tools/queue-set.mjs, which is the more interesting
+half. BUILD-TASK-PROMPT.md has said for weeks: "if you find an item
+already `building` with a `claimed_at` older than two hours, that run
+died; reclaim it." The rule was right and UNREACHABLE — `--next` only ever
+looked at `changes-requested` and `todo`, so no run ever *found* a
+`building` item and the condition never became true. Four items sat
+claimed for 8, 7, 6 and 6 days while every run stepped past them to fresh
+work and reported a good day: zero `built`, four `building`, and a
+reviewer with nothing to do. `--next` now surfaces a stale claim first,
+with its age and the status to restore.
 
-Ruled out on the way: the slowness is not Render, which is not in the mesh
-path at all (it serves IMPORT_API only; meshes come from Supabase, the app
-from GitHub Pages). And it does not look like Supabase's tier either —
-racing the two hosts on the same connection, GitHub Pages gave 1.52 and
-4.27 Mbit/s against Supabase's 1.67 and 3.18. Same ballpark. What the
-numbers show is a link that swings by 3x on the same file seconds apart and
-degrades on long transfers. File size is the lever we control.
+  A rule conditioned on noticing something is only as good as whatever
+  decides what you look at. Prose cannot repair that.
 
-THE COCCYX
-----------
-BodyParts3D segments the sacrum and coccyx as ONE object, FMA16202 — a
-single connected piece 145.3 mm tall where a sacrum is 100-115. The coccyx
-was already on screen as real scan data but had no id, so it could not be
-shown, hidden or isolated; scenes reached it only through an anchor, which
-drew a marker ON TOP of the bone instead of letting a student look at it.
+THE RULINGS, IN THE QUEUE
+-------------------------
+Six items carry a `ruling` field and a rewritten note; six new items
+exist. Reopened: `septation-of-heart` and `heart-tube-formation` to
+`changes-requested`, `coccyx` to `todo` as a mesh-pipeline job rather than
+a model3d one. New: `engine__conotruncal-wedging`,
+`engine__isolate-ghosts-its-own-subject`, `engine__role-primary-in-spec`,
+`engine__scene-overrides-model-material`, `engine__t-invariance-policy`,
+`engine__anchor-sphere-whole-bone`.
 
-Cut at the minimum cross-section, z = 825.5 (147 mm^2), where the
-sacrococcygeal joint would be if the scan had not fused it:
+viz3d.js is NOT touched. Four of the rulings are engine changes and all
+four are queue items awaiting a build and a review, because a ruling is
+permission to do the work, not the work.
 
-    FMA16202-sacrum   110.5 mm   188.8 cm3   (adult sacrum 100-115 mm)
-    FMA16202-coccyx    34.8 mm     5.3 cm3   (adult coccyx   30-45 mm)
+Settled and recorded: the cardiogenic horseshoe's bend is caudal
+pre-folding (citation to follow in the scene's gaps[]); the dorsal
+mesocardium reaches both poles in heart-tube-formation and cardiac-looping
+alike; the model owns colour and opacity where a scene is silent;
+t-invariant models are allowed and the player hides the timeline when
+T_MEANING declares none; `role: 'primary'` becomes a third role in the
+spec and the 92 structures that use it are NOT rewritten.
 
-Both closed solids — triangles crossing the plane are split, the section is
-traced into loops and capped, the caps face opposite ways. Verified by
-signed volume: both positive, summing to exactly the source's 194,116.9.
+WHAT IS STILL OPEN, AND STAYS OPEN
+----------------------------------
+`engine__mesh-resolution-by-role`. Two answers were recorded against it
+and neither addressed it — both carried the text of the refit-camera
+answers, given a minute earlier. Nothing about which mesh build is live
+may be inferred from this repo. The only legitimate inputs are the size of
+`viz-meshes/FMA13073.stl` in the bucket — 347,384, or 150,084, or another
+exact number — and then, from that number, whether to upload the 316.6 MB
+`meshes-lite/`.
 
-FMA16202 is left alone and stops being referenced. Rewriting that id's file
-would have been fifteen fewer edits, but the id names a BodyParts3D object
-and a re-ingest would have silently restored the fused mesh underneath us.
+`engine__refit-camera-on-isolate` is ruled and blocked. Read-only git is
+now permitted for scheduled runs WITH SAFEGUARDS, and the safeguard — a
+way to clear the .git/*.lock a read-only command leaves on a mount that
+forbids deletion — does not exist yet.
 
-THE ANCHORS HAD TO MOVE. anchor.uvw is a fraction of the PARENT's bounding
-box, so trimming 34.8 mm off the sacrum moves everything riding it. The
-sacrum piece keeps the fused mesh's x and y extents exactly; only z shrinks,
-145.309 -> 110.499. sacral_promontory in bony-pelvis is re-derived to the
-same world point, z = 903.828, uvw z 0.7786 -> 0.7089. The two coccyx
-anchors are deleted — the thing they pointed at is a mesh now.
+`cardiac-looping` stays escalated on its own question, which no ruling
+here touches: the thirteen floored relations cannot all reach the
+standard's 0.35 at once. A minimax search over sixteen parameters tops out
+at 0.290 across three independent runs, the binding constraint rotating
+between E, B', I and Jside, and adding five more degrees of freedom made
+it worse. The call is whether 0.35 is the floor where it is reachable,
+with 0.29 recorded as this model's uniform floor and the binding relation
+re-measured on every build — or whether 0.35 is the bar and this model
+does not clear it.
 
-Sixteen scenes reference that mesh and all sixteen are updated. Fifteen came
-from grepping what happened to be staged; the sixteenth,
-gross__stomach-intestines__large-intestine, only appeared when the whole
-corpus was scanned.
+TWO CONTRADICTIONS IN THE DESK, FIXED
+-------------------------------------
+The isolate entry was marked ruled while still saying it had no queue item
+— true when written, false once the ruling created one. And the coccyx
+entry was filed under reasons 2 and 3 while the schema admits exactly one:
+its reason-3 half was the anchor-sphere question, which is corpus-wide and
+is now its own item, leaving reason 2 alone.
 
-The validator caught a real mistake: the new coccyx structure carried a
-provenance block naming the provider, and a scene must not know who renders
-it — the adapter emits the CC-BY-SA credit, not the scene file. Removed.
+CORRECTIONS TO MY OWN EARLIER CLAIMS, ALSO IN THIS COMMIT
+---------------------------------------------------------
+BUILD-LOG.md carries two corrections rather than quiet rewrites. The
+review task was never "firing and changing nothing in 3.6 seconds" — that
+figure is a dispatch acknowledgement, not the end of a run, and a run that
+reads as five seconds long routinely works for forty minutes after. That
+misreading had been promoted into the escalation desk's standing prompt as
+a detection rule that would have raised a false alarm every day; it is
+removed and disowned in place. And the reclaim rule was never missing from
+the build prompt, only unreachable.
 
-tools/split-mesh-at-plane.mjs does the cut and is reusable. Its first
-version wound both cut faces inside-out and the halves STILL summed to the
-source volume, because the caps cancel either way; it now checks both
-positive volumes and the sum, and records all four measured combinations in
-its header so nobody re-derives it by reasoning.
+  A metric emitted by the scheduler is a claim about the scheduler. Only
+  the artefact is evidence about the work.
 
-Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_018cYuhd9CR3gc7vu5onQQEh

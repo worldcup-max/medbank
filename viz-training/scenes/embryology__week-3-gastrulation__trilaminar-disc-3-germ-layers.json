@@ -1,683 +1,1569 @@
 {
-  "schema": 2,
-  "id": "embryology__week-3-gastrulation__trilaminar-disc-3-germ-layers",
-  "mode": "sequence",
-  "deferred_modes": [
-    "diagram"
+ "schema": 2,
+ "id": "embryology__week-3-gastrulation__trilaminar-disc-3-germ-layers",
+ "mode": "3d_anatomy",
+ "deferred_modes": [
+  "sequence",
+  "diagram"
+ ],
+ "course": "Embryology",
+ "topic": "Week 3: Gastrulation",
+ "structure": "Trilaminar disc (3 germ layers)",
+ "covers": [
+  "Trilaminar disc (3 germ layers)"
+ ],
+ "learning_goal": "Draw a cut trilaminar disc with the three layers the right way up, name the three subdivisions of mesoderm on a transverse section, and give the adult derivatives of each germ layer well enough to work backwards from an organ to the layer it came from.",
+ "status": "candidate",
+ "provider": {
+  "primary": "procedural",
+  "fallbacks": []
+ },
+ "match": {
+  "topics": [
+   "trilaminar disc",
+   "germ layers",
+   "gastrulation",
+   "week 3",
+   "early development",
+   "mesoderm",
+   "organogenesis",
+   "teratoma"
   ],
-  "course": "Embryology",
-  "topic": "Week 3: Gastrulation",
-  "structure": "Trilaminar disc (3 germ layers)",
-  "covers": [
-    "Trilaminar disc (3 germ layers)"
-  ],
-  "learning_goal": "Draw a cut trilaminar disc with the three layers the right way up, name the three subdivisions of mesoderm on a transverse section, and give the adult derivatives of each germ layer well enough to work backwards from an organ to the layer it came from.",
-  "status": "planned",
-  "provider": {
-    "primary": "svg",
-    "fallbacks": []
-  },
-  "match": {
-    "topics": [
-      "trilaminar disc",
-      "germ layers",
-      "gastrulation",
-      "week 3",
-      "early development",
-      "mesoderm",
-      "organogenesis",
-      "teratoma"
-    ],
-    "terms": [
-      "trilaminar disc",
-      "trilaminar embryonic disc",
-      "three germ layers",
-      "germ layers",
-      "gastrulation",
-      "day 16",
-      "week 3",
-      "epiblast",
-      "hypoblast",
-      "primitive streak",
-      "ectoderm",
-      "surface ectoderm",
-      "neuroectoderm",
-      "neural plate",
-      "neural crest",
-      "mesoderm",
-      "intraembryonic mesoderm",
-      "paraxial mesoderm",
-      "somitomere",
-      "somite",
-      "sclerotome",
-      "myotome",
-      "dermatome",
-      "intermediate mesoderm",
-      "urogenital ridge",
-      "nephrogenic cord",
-      "lateral plate mesoderm",
-      "somatic mesoderm",
-      "parietal mesoderm",
-      "splanchnic mesoderm",
-      "visceral mesoderm",
-      "intraembryonic coelom",
-      "body cavity",
-      "endoderm",
-      "definitive endoderm",
-      "gut tube",
-      "epithelial lining",
-      "parenchyma",
-      "liver",
-      "pancreas",
-      "thyroid",
-      "lungs",
-      "bladder epithelium",
-      "urothelium",
-      "adrenal cortex",
-      "adrenal medulla",
-      "dura mater",
-      "enamel",
-      "dentine",
-      "anterior pituitary",
-      "posterior pituitary",
-      "Rathke's pouch",
-      "oropharyngeal membrane",
-      "cloacal membrane",
-      "notochord",
-      "cardiogenic area",
-      "teratoma",
-      "dermoid cyst",
-      "germ layer derivatives"
-    ]
-  },
-  "camera": {
-    "framing": "lateral"
-  },
-  "structures": [
-    {
-      "key": "disc",
-      "label": "The trilaminar disc — day 16 onwards",
-      "role": "context",
-      "group": "The three layers",
-      "layer": "organ",
-      "color": "#8e44ad",
-      "terms": [
-        "trilaminar disc",
-        "trilaminar embryonic disc",
-        "three-layered disc",
-        "day 16",
-        "week 3",
-        "embryo proper",
-        "flat plate",
-        "amniotic cavity",
-        "yolk sac"
-      ],
-      "narration": "By the middle of week three gastrulation has turned a two-layer plate into a three-layer one. The disc is still flat and still slung between the amniotic cavity above and the yolk sac below, but everything the body is made of is now present in sheet form. Folding and organogenesis are only rearrangements of these three sheets."
-    },
-    {
-      "key": "one_source",
-      "label": "All three come from the epiblast",
-      "role": "part",
-      "group": "The three layers",
-      "layer": "organ",
-      "color": "#c0392b",
-      "terms": [
-        "epiblast",
-        "one source",
-        "primitive streak",
-        "ingression",
-        "definitive endoderm",
-        "displaces hypoblast",
-        "hypoblast contributes nothing",
-        "pluripotent"
-      ],
-      "narration": "One fact underlies the whole topic and it is counter-intuitive: all three layers are epiblast. Cells that went through the streak first became endoderm and threw the hypoblast out; cells that followed stopped in the middle as mesoderm; cells that stayed on the surface are ectoderm. The hypoblast contributes not one cell to the fetus. Say this before you list any derivative."
-    },
-    {
-      "key": "ectoderm",
-      "label": "Ectoderm — the upper sheet",
-      "role": "part",
-      "group": "The three layers",
-      "layer": "organ",
-      "color": "#2980b9",
-      "terms": [
-        "ectoderm",
-        "upper layer",
-        "dorsal",
-        "surface ectoderm",
-        "neuroectoderm",
-        "neural plate",
-        "neural crest",
-        "epidermis",
-        "hair",
-        "nails",
-        "sweat glands",
-        "mammary gland",
-        "enamel",
-        "lens",
-        "inner ear",
-        "anterior pituitary",
-        "Rathke's pouch",
-        "central nervous system",
-        "peripheral nervous system",
-        "adrenal medulla",
-        "melanocytes"
-      ],
-      "narration": "The layer left on the surface, facing the amniotic cavity. Remember it as everything that touches the outside world plus the entire nervous system. Surface ectoderm gives epidermis, hair, nails, sweat and mammary glands, enamel, the lens and the inner ear; neuroectoderm gives brain, cord and retina; neural crest gives peripheral ganglia, melanocytes, most of the face and the adrenal medulla."
-    },
-    {
-      "key": "mesoderm",
-      "label": "Mesoderm — the middle sheet",
-      "role": "part",
-      "group": "The three layers",
-      "layer": "organ",
-      "color": "#27ae60",
-      "terms": [
-        "mesoderm",
-        "intraembryonic mesoderm",
-        "middle layer",
-        "mesenchyme",
-        "supporting tissue",
-        "muscle",
-        "bone",
-        "cartilage",
-        "connective tissue",
-        "blood",
-        "blood vessels",
-        "heart",
-        "kidney",
-        "gonad",
-        "spleen",
-        "adrenal cortex",
-        "serous membranes",
-        "dermis"
-      ],
-      "narration": "The layer that spread between the other two. It builds everything structural and everything circulating: bone, cartilage, muscle of all three kinds, dermis, connective tissue, blood and blood vessels, the heart, the kidneys and gonads, the spleen, the adrenal cortex and the serous membranes. If an organ is neither a lining nor a nerve, start with mesoderm."
-    },
-    {
-      "key": "endoderm",
-      "label": "Endoderm — the lower sheet",
-      "role": "part",
-      "group": "The three layers",
-      "layer": "organ",
-      "color": "#f39c12",
-      "terms": [
-        "endoderm",
-        "definitive endoderm",
-        "lower layer",
-        "ventral",
-        "gut tube",
-        "epithelial lining",
-        "liver",
-        "gallbladder",
-        "pancreas",
-        "thyroid",
-        "parathyroid",
-        "thymus",
-        "tonsil",
-        "respiratory epithelium",
-        "lungs",
-        "bladder epithelium",
-        "urethra",
-        "tympanic cavity",
-        "auditory tube"
-      ],
-      "narration": "The layer facing the yolk sac, which becomes the roof of the gut tube. Hold it as linings and the glands that bud off them: the epithelium of the whole gut from pharynx to upper anal canal, the liver, gallbladder and pancreas, the respiratory tract down to the alveoli, the thyroid, parathyroids, thymus and tonsils, the bladder and urethral epithelium, and the middle ear cavity with the auditory tube."
-    },
-    {
-      "key": "paraxial",
-      "label": "Paraxial mesoderm — beside the midline",
-      "role": "part",
-      "group": "Mesoderm splits into three",
-      "layer": "organ",
-      "color": "#1e8449",
-      "terms": [
-        "paraxial mesoderm",
-        "beside the notochord",
-        "somitomere",
-        "somite",
-        "day 20",
-        "segmentation",
-        "sclerotome",
-        "myotome",
-        "dermatome",
-        "vertebrae",
-        "skeletal muscle",
-        "dermis of the back"
-      ],
-      "narration": "The column nearest the midline thickens and, from about day twenty, breaks into blocks called somites. Each somite splits three ways: sclerotome for vertebrae and ribs, myotome for skeletal muscle, dermatome for the dermis of the back. This is where segmentation of the body comes from, and it is why a dermatome map exists at all."
-    },
-    {
-      "key": "intermediate",
-      "label": "Intermediate mesoderm — the narrow strip",
-      "role": "part",
-      "group": "Mesoderm splits into three",
-      "layer": "organ",
-      "color": "#52be80",
-      "terms": [
-        "intermediate mesoderm",
-        "nephrogenic cord",
-        "urogenital ridge",
-        "kidney",
-        "ureter",
-        "gonad",
-        "genital duct",
-        "pronephros",
-        "mesonephros",
-        "metanephros"
-      ],
-      "narration": "A thin strip between the paraxial column and the flat plate lateral to it. It makes the urinary and genital systems and almost nothing else, which makes it the easiest of the three to remember: kidneys, ureters, gonads and their ducts. The fact that both systems come from one strip is why urinary and genital anomalies so often turn up in the same patient."
-    },
-    {
-      "key": "lateral_plate",
-      "label": "Lateral plate — and the cavity in it",
-      "role": "part",
-      "group": "Mesoderm splits into three",
-      "layer": "organ",
-      "color": "#7dcea0",
-      "terms": [
-        "lateral plate mesoderm",
-        "somatic mesoderm",
-        "parietal mesoderm",
-        "splanchnic mesoderm",
-        "visceral mesoderm",
-        "intraembryonic coelom",
-        "body cavity",
-        "parietal pleura",
-        "visceral pleura",
-        "peritoneum",
-        "pericardium",
-        "limb bones",
-        "gut wall muscle",
-        "heart"
-      ],
-      "narration": "The flattest and most lateral part splits into two sheets with a space between them. The upper, somatic sheet stays with the ectoderm and makes the body wall, the limb bones and the parietal serous membranes; the lower, splanchnic sheet stays with the endoderm and makes the gut wall, its muscle and the visceral serous membranes, and the heart. The space between them is the intraembryonic coelom, the future pericardial, pleural and peritoneal cavities."
-    },
-    {
-      "key": "no_mesoderm",
-      "label": "Two places that stay two-layered",
-      "role": "part",
-      "group": "Exceptions and edges",
-      "layer": "organ",
-      "color": "#d35400",
-      "terms": [
-        "oropharyngeal membrane",
-        "buccopharyngeal membrane",
-        "cloacal membrane",
-        "no mesoderm",
-        "ectoderm and endoderm fused",
-        "future mouth",
-        "future anus",
-        "membrane rupture",
-        "imperforate anus"
-      ],
-      "narration": "Mesoderm reaches everywhere except two spots. Cranially the oropharyngeal membrane and caudally the cloacal membrane keep ectoderm and endoderm stuck together with nothing between them. Both later break down to open the mouth and the anus. A cloacal membrane that fails to rupture is an imperforate anus, so these two islands are worth marking on the drawing."
-    },
-    {
-      "key": "notochord_edge",
-      "label": "The midline column, named but not taught here",
-      "role": "context",
-      "group": "Exceptions and edges",
-      "layer": "organ",
-      "color": "#16a085",
-      "terms": [
-        "notochord",
-        "notochordal process",
-        "midline",
-        "axial",
-        "induction",
-        "neural plate",
-        "nucleus pulposus"
-      ],
-      "narration": "A rod of cells sits in the midline between ectoderm and endoderm, laid down through the primitive pit. It is the reference point the three mesoderm columns are described against — paraxial means beside it. What it induces and what becomes of it is taught on its own."
-    },
-    {
-      "key": "backwards",
-      "label": "Working backwards from an organ",
-      "role": "part",
-      "group": "Using the layers",
-      "layer": "organ",
-      "color": "#5d6d7e",
-      "terms": [
-        "germ layer derivatives",
-        "lining versus wall",
-        "epithelium",
-        "parenchyma",
-        "stroma",
-        "gut wall",
-        "bladder epithelium",
-        "detrusor",
-        "adrenal cortex",
-        "adrenal medulla",
-        "anterior pituitary",
-        "posterior pituitary",
-        "enamel",
-        "dentine",
-        "dura mater"
-      ],
-      "narration": "Most organs are built from more than one layer, and the exam question is usually about the seam. The gut is endodermal lining in a mesodermal wall. The bladder is endodermal epithelium with mesodermal detrusor. The adrenal is mesodermal cortex around a neural crest medulla. The pituitary is ectodermal throughout but from two different ectoderms — Rathke's pouch in front, neuroectoderm behind. A tooth is ectodermal enamel on neural crest dentine. Name the part before you name the layer."
-    },
-    {
-      "key": "teratoma_layers",
-      "label": "Why a teratoma contains hair and teeth",
-      "role": "part",
-      "group": "Using the layers",
-      "layer": "organ",
-      "color": "#af7ac5",
-      "terms": [
-        "teratoma",
-        "dermoid cyst",
-        "mature cystic teratoma",
-        "all three germ layers",
-        "pluripotent",
-        "germ cell tumour",
-        "ovary",
-        "testis",
-        "sacrococcygeal",
-        "hair",
-        "teeth",
-        "sebaceous glands",
-        "thyroid tissue",
-        "struma ovarii"
-      ],
-      "narration": "A teratoma is defined by containing tissue from all three germ layers, and that definition only makes sense once you know a single cell can still choose any of the three. Hair and sebaceous glands are ectoderm, cartilage and fat are mesoderm, respiratory or thyroid epithelium is endoderm. An ovarian dermoid cyst full of hair and teeth is not an oddity — it is a pluripotent cell doing exactly what the epiblast does, in the wrong place and at the wrong time."
-    },
-    {
-      "key": "whats_next",
-      "label": "What the three sheets do next",
-      "role": "part",
-      "group": "Using the layers",
-      "layer": "organ",
-      "color": "#85929e",
-      "terms": [
-        "folding",
-        "craniocaudal folding",
-        "lateral folding",
-        "gut tube",
-        "neurulation",
-        "neural plate",
-        "somites",
-        "cardiogenic area",
-        "organogenesis",
-        "week 4",
-        "week 8"
-      ],
-      "narration": "Nothing is added after week three; the rest of embryology is these three sheets folding and rolling. The ectoderm rolls into a tube to make the nervous system. The disc folds head to tail and side to side, and the endoderm becomes the gut tube. The mesoderm segments and cavitates. Organogenesis runs from week four to week eight, which is why that window is the vulnerable one for teratogens."
-    }
-  ],
-  "views": [
-    {
-      "mode": "cross_section",
-      "beat": 1,
-      "title": "Cut it — three sheets, the right way up",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The three layers"
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "y",
-          "offset": 0,
-          "animate": true
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "disc",
-          "intensity": 0.85
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "lateral"
-        }
-      ],
-      "narration": "The drawing is the bilaminar one with a sheet inserted. Ectoderm on top, facing the amniotic cavity. Endoderm underneath, facing the yolk sac. Mesoderm between them. Same orientation as week two, so dorsal still means the amniotic side. Get the three names in that order and the rest of this topic is derivatives."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 2,
-      "title": "One layer made all three",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The three layers"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "one_source",
-          "intensity": 0.95
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "one_source",
-          "to": "endoderm",
-          "kind": "first wave — displaced the hypoblast"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "one_source",
-          "to": "mesoderm",
-          "kind": "second wave — stopped in the middle"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "one_source",
-          "to": "ectoderm",
-          "kind": "never moved — stayed on the surface"
-        }
-      ],
-      "narration": "Three arrows from one box. Epiblast cells that went through the streak first replaced the hypoblast and are the definitive endoderm. Those that followed stopped between the sheets as mesoderm. Those that never entered the streak are the ectoderm. The hypoblast is gone and gives the fetus nothing. Students who assume the bottom layer was already there answer half the derivative questions wrongly."
-    },
-    {
-      "mode": "comparison",
-      "beat": 3,
-      "title": "Ectoderm — outside, and the whole nervous system",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The three layers"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "ectoderm",
-          "intensity": 0.95
-        },
-        {
-          "op": "HIDE_STRUCTURE",
-          "target": "Mesoderm splits into three"
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "ectoderm",
-            "endoderm"
-          ],
-          "layout": "stacked"
-        }
-      ],
-      "narration": "One rule holds most of ectoderm: what meets the outside world, and what conducts. Epidermis with its hair, nails, sweat and mammary glands. Enamel, the lens, the inner ear, the anterior pituitary from Rathke's pouch. Then neuroectoderm — brain, spinal cord, retina, posterior pituitary. Then neural crest — sensory and autonomic ganglia, Schwann cells, melanocytes, most of the facial skeleton, and the adrenal medulla. Crest is worth a separate line because it explains too many syndromes to be buried in a list."
-    },
-    {
-      "mode": "comparison",
-      "beat": 4,
-      "title": "Endoderm — linings, and the glands that bud from them",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The three layers"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "endoderm",
-          "intensity": 0.95
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "endoderm",
-          "to": "whats_next",
-          "kind": "rolls up to become the gut tube"
-        },
-        {
-          "op": "HIDE_STRUCTURE",
-          "target": "Mesoderm splits into three"
-        }
-      ],
-      "narration": "Endoderm is easiest as one tube and its buds. The epithelium of the gut from the pharynx to the upper anal canal. Budding off it: liver, gallbladder, pancreas, the whole respiratory tract to the alveoli, thyroid, parathyroids, thymus and tonsils. At the far end, the epithelium of the bladder and urethra. And from the first pouch, the middle ear cavity and auditory tube. Every one of them is a lining or a gland that grew out of a lining."
-    },
-    {
-      "mode": "cross_section",
-      "beat": 5,
-      "title": "Mesoderm splits into three columns",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Mesoderm splits into three"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "notochord_edge"
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "x",
-          "offset": 0,
-          "animate": true
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "paraxial",
-            "intermediate",
-            "lateral_plate"
-          ],
-          "layout": "side-by-side"
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "anterior"
-        }
-      ],
-      "narration": "Cut across the disc and read outwards from the midline. Nearest the notochord, paraxial mesoderm, which segments into somites. Next, a thin strip of intermediate mesoderm. Then the wide lateral plate. Three columns, named by position, and each has its own destiny — this transverse picture is worth more than any list, because the names only make sense as positions."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 6,
-      "title": "What each column becomes",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Mesoderm splits into three"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "paraxial",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "lateral_plate",
-          "to": "whats_next",
-          "kind": "its cavity becomes the body cavities"
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:mesoderm-fates",
-          "path": [
-            "paraxial",
-            "intermediate",
-            "lateral_plate"
-          ],
-          "duration": 6
-        }
-      ],
-      "narration": "Paraxial breaks into somites from about day twenty, and each somite gives sclerotome for vertebrae and ribs, myotome for skeletal muscle, dermatome for the dermis of the back — segmentation, and the reason dermatomes exist. Intermediate makes the kidneys, ureters, gonads and genital ducts, which is why urinary and genital anomalies travel together. Lateral plate splits in two: somatic with the ectoderm for body wall, limb bones and parietal serous membranes, splanchnic with the endoderm for gut wall, heart and visceral serous membranes. The gap between them is the intraembryonic coelom."
-    },
-    {
-      "mode": "location",
-      "beat": 7,
-      "title": "Where the disc stays two layers thick",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Exceptions and edges"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "The three layers"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "no_mesoderm",
-          "intensity": 0.95
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "ectoderm",
-          "to": "no_mesoderm",
-          "kind": "stays fused to endoderm here"
-        },
-        {
-          "op": "PEEL_LAYER",
-          "layer": "organ",
-          "direction": "inward"
-        }
-      ],
-      "narration": "Two spots never get a middle layer. At the cranial end the oropharyngeal membrane sits over the prechordal plate; at the caudal end the cloacal membrane. Ectoderm and endoderm are fused at both, and both must later break down — one to open the mouth, one to open the anus and urogenital tract. A cloacal membrane that does not rupture presents as an imperforate anus at the first newborn examination."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 8,
-      "title": "Working backwards, and why teratomas look the way they do",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Using the layers"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "backwards",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "teratoma_layers",
-          "to": "one_source",
-          "kind": "a cell that could still become any of the three"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "whats_next",
-          "to": "disc",
-          "kind": "folds and rolls these sheets — nothing new is added"
-        }
-      ],
-      "narration": "Two uses. First, work backwards from an organ by naming its parts: gut is endodermal lining in a mesodermal wall, bladder is endodermal epithelium with mesodermal muscle, adrenal is mesodermal cortex around a crest-derived medulla, pituitary is two different ectoderms meeting, a tooth is ectodermal enamel on crest dentine. Second, a teratoma is defined as containing all three germ layers — hair and sebaceous glands, cartilage and fat, respiratory or thyroid epithelium in one ovarian cyst. That is only strange if you have not just learned that one cell type made all three. From here nothing new is added: the sheets fold, roll and segment, and organogenesis runs from week four to week eight."
-    }
-  ],
-  "provenance": {
-    "author": "task",
-    "authored_at": "2026-08-28"
-  },
-  "gaps": [
-    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and offers no 3d option for this structure. Only diagram is deferred. The curriculum asks for cross_section and mechanism views; beats 1, 5 and 7 are cuts.",
-    "Status is 'planned'. Thirteen regions, eight beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a sagittal cut of the three-layered disc with the amniotic cavity above and yolk sac below, a transverse cut through the disc showing notochord, paraxial, intermediate and lateral plate columns in order outward on both sides, the lateral plate drawn already split into somatic and splanchnic sheets with the coelom between them, and the oropharyngeal and cloacal membranes marked as two-layered islands on a dorsal view.",
-    "The transverse panel must show both sides of the midline. Drawing one half to save room would make the three columns read as a stack rather than as bilateral columns, and the somites in beat 6 only make sense as paired blocks.",
-    "The sagittal panel must keep ectoderm uppermost, matching the bilaminar disc scene. Beat 1 explicitly tells the student the orientation is unchanged from week two, and a flipped panel would contradict the beat it is illustrating.",
-    "Beat 6 traces concept:mesoderm-fates. The subject is the divergence of three columns into their derivatives, which is a set of fates rather than a drawn object.",
-    "'Primitive streak' is a SEPARATE curriculum entry in this topic and is NOT claimed in covers[], although beat 2 names the two waves through the streak because the origin of the layers cannot be stated without them. How the streak forms, its parts, ingression and its clinical failures are authored in that scene in the same run.",
-    "'Notochord' is NOT claimed. The notochord appears as a context region only, because paraxial mesoderm is defined by its position beside it and beat 5 cannot be read without the midline marked. Induction, the notochordal canal and the nucleus pulposus belong to that entry.",
-    "'Neurulation (neural plate/tube)' is NOT claimed. The neural plate and neural crest appear inside the ectoderm derivative list, which is where every text puts them, but neural tube closure and its defects belong to that entry.",
-    "'Body cavity (coelom)' in the Folding topic is NOT claimed. The intraembryonic coelom is named in beat 6 because the lateral plate split creates it, but its partitioning into pericardial, pleural and peritoneal cavities belongs to that entry.",
-    "Derivative lists are the standard teaching ones and are deliberately incomplete. They cover what Nigerian MBBS papers ask to be reproduced; rarer derivatives are omitted rather than compressed, because a list a student cannot finish is worse than a shorter one they can.",
-    "Neural crest is narrated as a fourth population within ectoderm rather than given its own region. Several texts teach it as a fourth germ layer. The scene follows the majority convention and keeps it under ectoderm; if a neural crest curriculum entry is ever added, this narration should shrink to one line and point at it.",
-    "The adrenal, pituitary and tooth examples in beat 8 are chosen because each has parts from two different origins and each is examined that way. They are teaching examples, not a claim on any Gross Anatomy or Histology entry."
+  "terms": [
+   "trilaminar disc",
+   "trilaminar embryonic disc",
+   "three germ layers",
+   "germ layers",
+   "gastrulation",
+   "day 16",
+   "week 3",
+   "epiblast",
+   "hypoblast",
+   "primitive streak",
+   "ectoderm",
+   "surface ectoderm",
+   "neuroectoderm",
+   "neural plate",
+   "neural crest",
+   "mesoderm",
+   "intraembryonic mesoderm",
+   "paraxial mesoderm",
+   "somitomere",
+   "somite",
+   "sclerotome",
+   "myotome",
+   "dermatome",
+   "intermediate mesoderm",
+   "urogenital ridge",
+   "nephrogenic cord",
+   "lateral plate mesoderm",
+   "somatic mesoderm",
+   "parietal mesoderm",
+   "splanchnic mesoderm",
+   "visceral mesoderm",
+   "intraembryonic coelom",
+   "body cavity",
+   "endoderm",
+   "definitive endoderm",
+   "gut tube",
+   "epithelial lining",
+   "parenchyma",
+   "liver",
+   "pancreas",
+   "thyroid",
+   "lungs",
+   "bladder epithelium",
+   "urothelium",
+   "adrenal cortex",
+   "adrenal medulla",
+   "dura mater",
+   "enamel",
+   "dentine",
+   "anterior pituitary",
+   "posterior pituitary",
+   "Rathke's pouch",
+   "oropharyngeal membrane",
+   "cloacal membrane",
+   "notochord",
+   "cardiogenic area",
+   "teratoma",
+   "dermoid cyst",
+   "germ layer derivatives"
   ]
+ },
+ "camera": {
+  "framing": "lateral"
+ },
+ "structures": [
+  {
+   "key": "ectoderm",
+   "label": "Ectoderm — the upper sheet",
+   "name": "Ectoderm — the upper sheet",
+   "role": "primary",
+   "group": "The three layers",
+   "layer": "organ",
+   "color": "#2980b9",
+   "opacity": 1,
+   "terms": [
+    "ectoderm",
+    "upper layer",
+    "dorsal",
+    "surface ectoderm",
+    "neuroectoderm",
+    "neural plate",
+    "neural crest",
+    "epidermis",
+    "hair",
+    "nails",
+    "sweat glands",
+    "mammary gland",
+    "enamel",
+    "lens",
+    "inner ear",
+    "anterior pituitary",
+    "Rathke's pouch",
+    "central nervous system",
+    "peripheral nervous system",
+    "adrenal medulla",
+    "melanocytes"
+   ],
+   "narration": "The layer left on the surface, facing the amniotic cavity. Remember it as everything that touches the outside world plus the entire nervous system. Surface ectoderm gives epidermis, hair, nails, sweat and mammary glands, enamel, the lens and the inner ear; neuroectoderm gives brain, cord and retina; neural crest gives peripheral ganglia, melanocytes, most of the face and the adrenal medulla.",
+   "narration_from": "sequence-version structure \"ectoderm\" — carried across verbatim from the sequence version. In the 3D scene the sheet it describes IS a built structure rather than a framing sentence.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#ectoderm"
+   }
+  },
+  {
+   "key": "mesoderm",
+   "label": "Mesoderm — the middle sheet",
+   "name": "Mesoderm — the middle sheet",
+   "role": "primary",
+   "group": "The three layers",
+   "layer": "organ",
+   "color": "#27ae60",
+   "opacity": 1,
+   "terms": [
+    "mesoderm",
+    "intraembryonic mesoderm",
+    "middle layer",
+    "mesenchyme",
+    "supporting tissue",
+    "muscle",
+    "bone",
+    "cartilage",
+    "connective tissue",
+    "blood",
+    "blood vessels",
+    "heart",
+    "kidney",
+    "gonad",
+    "spleen",
+    "adrenal cortex",
+    "serous membranes",
+    "dermis"
+   ],
+   "narration": "The layer that spread between the other two. It builds everything structural and everything circulating: bone, cartilage, muscle of all three kinds, dermis, connective tissue, blood and blood vessels, the heart, the kidneys and gonads, the spleen, the adrenal cortex and the serous membranes. If an organ is neither a lining nor a nerve, start with mesoderm.",
+   "narration_from": "sequence-version structure \"mesoderm\" — carried across verbatim from the sequence version. This key is the UNDIVIDED middle sheet; the three columns are the same surface under the model's `split` variant, and no beat shows both keyings.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#mesoderm"
+   }
+  },
+  {
+   "key": "endoderm",
+   "label": "Endoderm — the lower sheet",
+   "name": "Endoderm — the lower sheet",
+   "role": "primary",
+   "group": "The three layers",
+   "layer": "organ",
+   "color": "#f39c12",
+   "opacity": 1,
+   "terms": [
+    "endoderm",
+    "definitive endoderm",
+    "lower layer",
+    "ventral",
+    "gut tube",
+    "epithelial lining",
+    "liver",
+    "gallbladder",
+    "pancreas",
+    "thyroid",
+    "parathyroid",
+    "thymus",
+    "tonsil",
+    "respiratory epithelium",
+    "lungs",
+    "bladder epithelium",
+    "urethra",
+    "tympanic cavity",
+    "auditory tube"
+   ],
+   "narration": "The layer facing the yolk sac, which becomes the roof of the gut tube. Hold it as linings and the glands that bud off them: the epithelium of the whole gut from pharynx to upper anal canal, the liver, gallbladder and pancreas, the respiratory tract down to the alveoli, the thyroid, parathyroids, thymus and tonsils, the bladder and urethral epithelium, and the middle ear cavity with the auditory tube.",
+   "narration_from": "sequence-version structure \"endoderm\" — carried across verbatim from the sequence version",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#endoderm"
+   }
+  },
+  {
+   "key": "hypoblast",
+   "label": "Hypoblast — the layer that is evicted",
+   "name": "Hypoblast — the layer that is evicted",
+   "role": "part",
+   "group": "One source, three layers",
+   "layer": "organ",
+   "color": "#95a5a6",
+   "opacity": 1,
+   "terms": [
+    "hypoblast",
+    "evicted",
+    "displaced",
+    "definitive endoderm",
+    "day 17",
+    "yolk sac",
+    "contributes nothing"
+   ],
+   "narration": "The layer the definitive endoderm replaces. It is not renamed and it does not become anything: epiblast cells that went through the streak first push it out to the edges of the yolk sac, and by about day seventeen there is none of it left under the embryo. Watch it shrink across the beats — this model solves where its boundary stands at every stage rather than fading it out.",
+   "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no hypoblast region: the fact lived inside the \"one_source\" panel's prose, whose full narration is carried verbatim on `streak` below. Here the hypoblast is a built part whose extent is solved, so it can be pointed at. SHOWN IN THE CUT BLOCK (model variant `block`): a paramedian window of the same lens. A SECTION of the whole disc cannot be framed by the current player — see the model's note at inBlock and this scene's gaps[] — so the section beats are built from a block, and acceptance row Y measures that the block is literally a piece of the same geometry rather than a second drawing of it.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#hypoblast+block"
+   }
+  },
+  {
+   "key": "streak",
+   "label": "Primitive streak — the door all three came through",
+   "name": "Primitive streak — the door all three came through",
+   "role": "part",
+   "group": "One source, three layers",
+   "layer": "organ",
+   "color": "#c0392b",
+   "opacity": 1,
+   "terms": [
+    "epiblast",
+    "one source",
+    "primitive streak",
+    "ingression",
+    "definitive endoderm",
+    "displaces hypoblast",
+    "hypoblast contributes nothing",
+    "pluripotent"
+   ],
+   "narration": "One fact underlies the whole topic and it is counter-intuitive: all three layers are epiblast. Cells that went through the streak first became endoderm and threw the hypoblast out; cells that followed stopped in the middle as mesoderm; cells that stayed on the surface are ectoderm. The hypoblast contributes not one cell to the fetus. Say this before you list any derivative.",
+   "narration_from": "sequence-version structure \"one_source\" — carried across verbatim from the sequence version. In the 3D scene the thing its sentences are about is a built structure — the streak — rather than a framing box with three arrows out of it.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#streak"
+   }
+  },
+  {
+   "key": "route_endo",
+   "label": "First wave — down to the lower layer",
+   "name": "First wave — down to the lower layer",
+   "role": "part",
+   "group": "One source, three layers",
+   "layer": "organ",
+   "color": "#f5b041",
+   "opacity": 1,
+   "terms": [
+    "first wave",
+    "definitive endoderm",
+    "ingression",
+    "groove",
+    "displaces hypoblast"
+   ],
+   "narration": "The first cells through the groove do not stop in the middle. They go all the way down, into the lower layer, and the hypoblast gives way in front of them. These are the definitive endoderm.",
+   "narration_from": "AUTHORED FOR THE 3D SCENE, from the second and third sentences of the sequence version's \"one_source\" panel, which is carried verbatim in full on `streak`. Drawn on BOTH sides, because cells leaving the groove go both ways. SHOWN IN THE CUT BLOCK (model variant `block`): a paramedian window of the same lens. A SECTION of the whole disc cannot be framed by the current player — see the model's note at inBlock and this scene's gaps[] — so the section beats are built from a block, and acceptance row Y measures that the block is literally a piece of the same geometry rather than a second drawing of it.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#route_endo+block"
+   }
+  },
+  {
+   "key": "route_meso",
+   "label": "Second wave — into the middle",
+   "name": "Second wave — into the middle",
+   "role": "part",
+   "group": "One source, three layers",
+   "layer": "organ",
+   "color": "#52be80",
+   "opacity": 1,
+   "terms": [
+    "second wave",
+    "intraembryonic mesoderm",
+    "ingression",
+    "spreads laterally"
+   ],
+   "narration": "The cells that follow stop between the two sheets and spread out sideways. That spreading sheet is the intraembryonic mesoderm, and where it has got to is what every later beat of this scene is about.",
+   "narration_from": "AUTHORED FOR THE 3D SCENE, from the same panel as `route_endo`; the full sequence-version narration is on `streak`. SHOWN IN THE CUT BLOCK (model variant `block`): a paramedian window of the same lens. A SECTION of the whole disc cannot be framed by the current player — see the model's note at inBlock and this scene's gaps[] — so the section beats are built from a block, and acceptance row Y measures that the block is literally a piece of the same geometry rather than a second drawing of it.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#route_meso+block"
+   }
+  },
+  {
+   "key": "paraxial",
+   "label": "Paraxial mesoderm — beside the midline",
+   "name": "Paraxial mesoderm — beside the midline",
+   "role": "primary",
+   "group": "Mesoderm splits into three",
+   "layer": "organ",
+   "color": "#1e8449",
+   "opacity": 1,
+   "terms": [
+    "paraxial mesoderm",
+    "beside the notochord",
+    "somitomere",
+    "somite",
+    "day 20",
+    "segmentation",
+    "sclerotome",
+    "myotome",
+    "dermatome",
+    "vertebrae",
+    "skeletal muscle",
+    "dermis of the back"
+   ],
+   "narration": "The column nearest the midline thickens and, from about day twenty, breaks into blocks called somites. Each somite splits three ways: sclerotome for vertebrae and ribs, myotome for skeletal muscle, dermatome for the dermis of the back. This is where segmentation of the body comes from, and it is why a dermatome map exists at all.",
+   "narration_from": "sequence-version structure \"paraxial\" — carried across verbatim from the sequence version",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#paraxial+split"
+   }
+  },
+  {
+   "key": "intermediate",
+   "label": "Intermediate mesoderm — the narrow strip",
+   "name": "Intermediate mesoderm — the narrow strip",
+   "role": "primary",
+   "group": "Mesoderm splits into three",
+   "layer": "organ",
+   "color": "#52be80",
+   "opacity": 1,
+   "terms": [
+    "intermediate mesoderm",
+    "nephrogenic cord",
+    "urogenital ridge",
+    "kidney",
+    "ureter",
+    "gonad",
+    "genital duct",
+    "pronephros",
+    "mesonephros",
+    "metanephros"
+   ],
+   "narration": "A thin strip between the paraxial column and the flat plate lateral to it. It makes the urinary and genital systems and almost nothing else, which makes it the easiest of the three to remember: kidneys, ureters, gonads and their ducts. The fact that both systems come from one strip is why urinary and genital anomalies so often turn up in the same patient.",
+   "narration_from": "sequence-version structure \"intermediate\" — carried across verbatim from the sequence version",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#intermediate+split"
+   }
+  },
+  {
+   "key": "lateral_plate",
+   "label": "Lateral plate — the flat sheet lateral to the strip",
+   "name": "Lateral plate — the flat sheet lateral to the strip",
+   "role": "primary",
+   "group": "Mesoderm splits into three",
+   "layer": "organ",
+   "color": "#7dcea0",
+   "opacity": 1,
+   "terms": [
+    "lateral plate mesoderm",
+    "somatic mesoderm",
+    "parietal mesoderm",
+    "splanchnic mesoderm",
+    "visceral mesoderm",
+    "intraembryonic coelom",
+    "body cavity",
+    "parietal pleura",
+    "visceral pleura",
+    "peritoneum",
+    "pericardium",
+    "limb bones",
+    "gut wall muscle",
+    "heart"
+   ],
+   "narration": "The flattest and most lateral part splits into two sheets with a space between them. The upper, somatic sheet stays with the ectoderm and makes the body wall, the limb bones and the parietal serous membranes; the lower, splanchnic sheet stays with the endoderm and makes the gut wall, its muscle and the visceral serous membranes, and the heart. The space between them is the intraembryonic coelom, the future pericardial, pleural and peritoneal cavities.",
+   "narration_from": "sequence-version structure \"lateral_plate\" — carried across verbatim from the sequence version. In 3D the sheet and the two halves it splits into are separate parts, so this key is the plate where it is still ONE sheet — its lateral rim and both its ends, which is where the coelom never reaches.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#lateral_plate+split"
+   }
+  },
+  {
+   "key": "somatic",
+   "label": "Somatic (parietal) sheet — stays with the ectoderm",
+   "name": "Somatic (parietal) sheet — stays with the ectoderm",
+   "role": "part",
+   "group": "Mesoderm splits into three",
+   "layer": "organ",
+   "color": "#76d7c4",
+   "opacity": 0.45,
+   "terms": [
+    "somatic mesoderm",
+    "parietal mesoderm",
+    "body wall",
+    "limb bones",
+    "parietal pleura",
+    "parietal peritoneum"
+   ],
+   "narration": "The upper half of the split plate. It stays against the ectoderm and goes on to make the body wall, the bones of the limbs and the PARIETAL serous membranes — parietal pleura, parietal peritoneum, the fibrous and parietal layers of the pericardium.",
+   "narration_from": "AUTHORED FOR THE 3D SCENE, from the sequence version's \"lateral_plate\" panel, whose full narration is carried verbatim on `lateral_plate`. In 3D the two sheets are separate parts and each can be pointed at.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#somatic+split"
+   }
+  },
+  {
+   "key": "splanchnic",
+   "label": "Splanchnic (visceral) sheet — stays with the endoderm",
+   "name": "Splanchnic (visceral) sheet — stays with the endoderm",
+   "role": "part",
+   "group": "Mesoderm splits into three",
+   "layer": "organ",
+   "color": "#a9dfbf",
+   "opacity": 1,
+   "terms": [
+    "splanchnic mesoderm",
+    "visceral mesoderm",
+    "gut wall",
+    "smooth muscle",
+    "visceral pleura",
+    "heart"
+   ],
+   "narration": "The lower half. It stays against the endoderm and makes the wall of the gut and its muscle, the VISCERAL serous membranes, and the heart.",
+   "narration_from": "AUTHORED FOR THE 3D SCENE, from the same panel as `somatic`; the full sequence-version narration is on `lateral_plate`.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#splanchnic+split"
+   }
+  },
+  {
+   "key": "coelom",
+   "label": "Intraembryonic coelom — the future body cavities",
+   "name": "Intraembryonic coelom — the future body cavities",
+   "role": "part",
+   "group": "Mesoderm splits into three",
+   "layer": "organ",
+   "color": "#d6eaf8",
+   "opacity": 0.4,
+   "terms": [
+    "intraembryonic coelom",
+    "body cavity",
+    "pericardial cavity",
+    "pleural cavity",
+    "peritoneal cavity",
+    "horseshoe"
+   ],
+   "narration": "The space that opens between the two sheets. It is one continuous cavity at this stage and it becomes the pericardial, pleural and peritoneal cavities. Note where it is: INSIDE the lateral plate, so the plate keeps a solid rim lateral to it and solid tissue at both its ends.",
+   "narration_from": "AUTHORED FOR THE 3D SCENE, from the last two sentences of the sequence version's \"lateral_plate\" panel, carried verbatim in full on `lateral_plate`.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#coelom+split"
+   }
+  },
+  {
+   "key": "notochord",
+   "label": "Notochord — the midline the columns are named against",
+   "name": "Notochord — the midline the columns are named against",
+   "role": "context",
+   "group": "Exceptions and edges",
+   "layer": "organ",
+   "color": "#16a085",
+   "opacity": 1,
+   "terms": [
+    "notochord",
+    "notochordal process",
+    "midline",
+    "axial",
+    "induction",
+    "neural plate",
+    "nucleus pulposus"
+   ],
+   "narration": "A rod of cells sits in the midline between ectoderm and endoderm, laid down through the primitive pit. It is the reference point the three mesoderm columns are described against — paraxial means beside it. What it induces and what becomes of it is taught on its own.",
+   "narration_from": "sequence-version structure \"notochord_edge\" — carried across verbatim from the sequence version",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#notochord"
+   }
+  },
+  {
+   "key": "oropharyngeal_membrane",
+   "label": "Oropharyngeal membrane — two layers, no mesoderm",
+   "name": "Oropharyngeal membrane — two layers, no mesoderm",
+   "role": "primary",
+   "group": "Exceptions and edges",
+   "layer": "organ",
+   "color": "#d35400",
+   "opacity": 1,
+   "terms": [
+    "oropharyngeal membrane",
+    "buccopharyngeal membrane",
+    "cloacal membrane",
+    "no mesoderm",
+    "ectoderm and endoderm fused",
+    "future mouth",
+    "future anus",
+    "membrane rupture",
+    "imperforate anus"
+   ],
+   "narration": "Mesoderm reaches everywhere except two spots. Cranially the oropharyngeal membrane and caudally the cloacal membrane keep ectoderm and endoderm stuck together with nothing between them. Both later break down to open the mouth and the anus. A cloacal membrane that fails to rupture is an imperforate anus, so these two islands are worth marking on the drawing.",
+   "narration_from": "sequence-version structure \"no_mesoderm\" — carried across verbatim from the sequence version. That ONE region covered BOTH membranes; in 3D they are two parts in two places, so the full paragraph is carried here and `cloacal_membrane` carries a note authored for this scene.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#oropharyngeal_membrane"
+   }
+  },
+  {
+   "key": "cloacal_membrane",
+   "label": "Cloacal membrane — two layers, no mesoderm",
+   "name": "Cloacal membrane — two layers, no mesoderm",
+   "role": "primary",
+   "group": "Exceptions and edges",
+   "layer": "organ",
+   "color": "#e67e22",
+   "opacity": 1,
+   "terms": [
+    "cloacal membrane",
+    "no mesoderm",
+    "ectoderm and endoderm fused",
+    "future anus",
+    "membrane rupture",
+    "imperforate anus"
+   ],
+   "narration": "The caudal one of the two. Ectoderm and endoderm are stuck together here with nothing between them, and it has to break down to open the anus and the urogenital tract. A cloacal membrane that does not rupture presents as an imperforate anus at the first newborn examination.",
+   "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had a single \"no_mesoderm\" region covering both membranes, whose full narration is carried verbatim on `oropharyngeal_membrane`; these sentences are the caudal half of it, rewritten for a part rather than a region.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#cloacal_membrane"
+   }
+  },
+  {
+   "key": "amnion",
+   "label": "Amniotic cavity — above the ectoderm",
+   "name": "Amniotic cavity — above the ectoderm",
+   "role": "context",
+   "group": "Which way up",
+   "layer": "organ",
+   "color": "#aed6f1",
+   "opacity": 0.18,
+   "terms": [
+    "amniotic cavity",
+    "amnion",
+    "dorsal",
+    "above the disc",
+    "week two orientation"
+   ],
+   "narration": "The cavity the ectoderm faces. It is drawn here for one reason: it is how a student tells which way up the picture is. Dorsal is the amniotic side, and it was the amniotic side in week two as well.",
+   "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version named the amniotic cavity in prose (in the \"disc\" panel and in beat 1) but had no region for it; in 3D it is a built envelope, and acceptance row R measures that it is on the side it claims. SHOWN IN THE CUT BLOCK (model variant `block`): a paramedian window of the same lens. A SECTION of the whole disc cannot be framed by the current player — see the model's note at inBlock and this scene's gaps[] — so the section beats are built from a block, and acceptance row Y measures that the block is literally a piece of the same geometry rather than a second drawing of it.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#amnion+block"
+   }
+  },
+  {
+   "key": "yolk_sac",
+   "label": "Yolk sac — below the endoderm",
+   "name": "Yolk sac — below the endoderm",
+   "role": "context",
+   "group": "Which way up",
+   "layer": "organ",
+   "color": "#f9e79f",
+   "opacity": 0.18,
+   "terms": [
+    "yolk sac",
+    "ventral",
+    "below the disc",
+    "gut tube roof"
+   ],
+   "narration": "The cavity the endoderm faces, and the roof of which the endoderm becomes when the disc folds. The other half of the orientation cue: ventral is the yolk-sac side.",
+   "narration_from": "AUTHORED FOR THE 3D SCENE, for the same reason as `amnion`. SHOWN IN THE CUT BLOCK (model variant `block`): a paramedian window of the same lens. A SECTION of the whole disc cannot be framed by the current player — see the model's note at inBlock and this scene's gaps[] — so the section beats are built from a block, and acceptance row Y measures that the block is literally a piece of the same geometry rather than a second drawing of it.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#yolk_sac+block"
+   }
+  },
+  {
+   "key": "ectoderm_block",
+   "label": "Ectoderm — the upper sheet — in the cut block",
+   "name": "Ectoderm — the upper sheet — in the cut block",
+   "role": "primary",
+   "group": "The cut block",
+   "layer": "organ",
+   "color": "#2980b9",
+   "opacity": 1,
+   "terms": [
+    "ectoderm",
+    "upper layer",
+    "dorsal",
+    "surface ectoderm",
+    "neuroectoderm",
+    "neural plate",
+    "neural crest",
+    "epidermis",
+    "hair",
+    "nails",
+    "sweat glands",
+    "mammary gland",
+    "enamel",
+    "lens",
+    "inner ear",
+    "anterior pituitary",
+    "Rathke's pouch",
+    "central nervous system",
+    "peripheral nervous system",
+    "adrenal medulla",
+    "melanocytes"
+   ],
+   "narration": "The layer left on the surface, facing the amniotic cavity. Remember it as everything that touches the outside world plus the entire nervous system. Surface ectoderm gives epidermis, hair, nails, sweat and mammary glands, enamel, the lens and the inner ear; neuroectoderm gives brain, cord and retina; neural crest gives peripheral ganglia, melanocytes, most of the face and the adrenal medulla.",
+   "narration_from": "the SAME structure as `ectoderm`, shown in the cut block. SHOWN IN THE CUT BLOCK (model variant `block`): a paramedian window of the same lens. A SECTION of the whole disc cannot be framed by the current player — see the model's note at inBlock and this scene's gaps[] — so the section beats are built from a block, and acceptance row Y measures that the block is literally a piece of the same geometry rather than a second drawing of it. It is a separate scene structure only because a scene structure carries ONE ref and this model id resolves per flag set, so the beats that cut and the beats that look down on the whole disc cannot share one entry. Its narration is `ectoderm`'s, unchanged.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#ectoderm+block"
+   }
+  },
+  {
+   "key": "mesoderm_block",
+   "label": "Mesoderm — the middle sheet — in the cut block",
+   "name": "Mesoderm — the middle sheet — in the cut block",
+   "role": "primary",
+   "group": "The cut block",
+   "layer": "organ",
+   "color": "#27ae60",
+   "opacity": 1,
+   "terms": [
+    "mesoderm",
+    "intraembryonic mesoderm",
+    "middle layer",
+    "mesenchyme",
+    "supporting tissue",
+    "muscle",
+    "bone",
+    "cartilage",
+    "connective tissue",
+    "blood",
+    "blood vessels",
+    "heart",
+    "kidney",
+    "gonad",
+    "spleen",
+    "adrenal cortex",
+    "serous membranes",
+    "dermis"
+   ],
+   "narration": "The layer that spread between the other two. It builds everything structural and everything circulating: bone, cartilage, muscle of all three kinds, dermis, connective tissue, blood and blood vessels, the heart, the kidneys and gonads, the spleen, the adrenal cortex and the serous membranes. If an organ is neither a lining nor a nerve, start with mesoderm.",
+   "narration_from": "the SAME structure as `mesoderm`, shown in the cut block. SHOWN IN THE CUT BLOCK (model variant `block`): a paramedian window of the same lens. A SECTION of the whole disc cannot be framed by the current player — see the model's note at inBlock and this scene's gaps[] — so the section beats are built from a block, and acceptance row Y measures that the block is literally a piece of the same geometry rather than a second drawing of it. It is a separate scene structure only because a scene structure carries ONE ref and this model id resolves per flag set, so the beats that cut and the beats that look down on the whole disc cannot share one entry. Its narration is `mesoderm`'s, unchanged.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#mesoderm+block"
+   }
+  },
+  {
+   "key": "endoderm_block",
+   "label": "Endoderm — the lower sheet — in the cut block",
+   "name": "Endoderm — the lower sheet — in the cut block",
+   "role": "primary",
+   "group": "The cut block",
+   "layer": "organ",
+   "color": "#f39c12",
+   "opacity": 1,
+   "terms": [
+    "endoderm",
+    "definitive endoderm",
+    "lower layer",
+    "ventral",
+    "gut tube",
+    "epithelial lining",
+    "liver",
+    "gallbladder",
+    "pancreas",
+    "thyroid",
+    "parathyroid",
+    "thymus",
+    "tonsil",
+    "respiratory epithelium",
+    "lungs",
+    "bladder epithelium",
+    "urethra",
+    "tympanic cavity",
+    "auditory tube"
+   ],
+   "narration": "The layer facing the yolk sac, which becomes the roof of the gut tube. Hold it as linings and the glands that bud off them: the epithelium of the whole gut from pharynx to upper anal canal, the liver, gallbladder and pancreas, the respiratory tract down to the alveoli, the thyroid, parathyroids, thymus and tonsils, the bladder and urethral epithelium, and the middle ear cavity with the auditory tube.",
+   "narration_from": "the SAME structure as `endoderm`, shown in the cut block. SHOWN IN THE CUT BLOCK (model variant `block`): a paramedian window of the same lens. A SECTION of the whole disc cannot be framed by the current player — see the model's note at inBlock and this scene's gaps[] — so the section beats are built from a block, and acceptance row Y measures that the block is literally a piece of the same geometry rather than a second drawing of it. It is a separate scene structure only because a scene structure carries ONE ref and this model id resolves per flag set, so the beats that cut and the beats that look down on the whole disc cannot share one entry. Its narration is `endoderm`'s, unchanged.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#endoderm+block"
+   }
+  },
+  {
+   "key": "streak_block",
+   "label": "Primitive streak — the door all three came through — in the cut block",
+   "name": "Primitive streak — the door all three came through — in the cut block",
+   "role": "part",
+   "group": "The cut block",
+   "layer": "organ",
+   "color": "#c0392b",
+   "opacity": 1,
+   "terms": [
+    "epiblast",
+    "one source",
+    "primitive streak",
+    "ingression",
+    "definitive endoderm",
+    "displaces hypoblast",
+    "hypoblast contributes nothing",
+    "pluripotent"
+   ],
+   "narration": "One fact underlies the whole topic and it is counter-intuitive: all three layers are epiblast. Cells that went through the streak first became endoderm and threw the hypoblast out; cells that followed stopped in the middle as mesoderm; cells that stayed on the surface are ectoderm. The hypoblast contributes not one cell to the fetus. Say this before you list any derivative.",
+   "narration_from": "the SAME structure as `streak`, shown in the cut block. SHOWN IN THE CUT BLOCK (model variant `block`): a paramedian window of the same lens. A SECTION of the whole disc cannot be framed by the current player — see the model's note at inBlock and this scene's gaps[] — so the section beats are built from a block, and acceptance row Y measures that the block is literally a piece of the same geometry rather than a second drawing of it. It is a separate scene structure only because a scene structure carries ONE ref and this model id resolves per flag set, so the beats that cut and the beats that look down on the whole disc cannot share one entry. Its narration is `streak`'s, unchanged.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#streak+block"
+   }
+  },
+  {
+   "key": "notochord_slab",
+   "label": "Notochord — the midline the columns are named against — in the transverse section",
+   "name": "Notochord — the midline the columns are named against — in the transverse section",
+   "role": "context",
+   "group": "The transverse section",
+   "layer": "organ",
+   "color": "#16a085",
+   "opacity": 1,
+   "terms": [
+    "notochord",
+    "notochordal process",
+    "midline",
+    "axial",
+    "induction",
+    "neural plate",
+    "nucleus pulposus"
+   ],
+   "narration": "A rod of cells sits in the midline between ectoderm and endoderm, laid down through the primitive pit. It is the reference point the three mesoderm columns are described against — paraxial means beside it. What it induces and what becomes of it is taught on its own.",
+   "narration_from": "the SAME structure as `notochord`, shown in the transverse slab. SHOWN IN THE TRANSVERSE SLAB (model variant `slab`): the same lens built only inside a cranio-caudal window one somite thick, at FULL mediolateral extent, whose level is SOLVED per t for the completeness of the section it cuts. This beat's narration asks for a transverse picture and until round 3 the scene showed a plan view instead — round 2's open finding. The paramedian `block` could not be reused: its window is on one side of the midline and clear of it, so at this stage it emits NO notochord and NO lateral plate (measured: 0 vertices of each, against 8376 and 39600 in the whole disc), which are the two ends of the mediolateral reading the beat is about. Acceptance row SL measures that the slab is literally a piece of the same geometry, that wherever the whole disc has all four section keys the slab has them too, and that it stays mirror-symmetric in x. It is a separate scene structure only because a scene structure carries ONE ref and this model id resolves per flag set. Its narration is `notochord`'s, unchanged.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#notochord+slab"
+   }
+  },
+  {
+   "key": "paraxial_slab",
+   "label": "Paraxial mesoderm — beside the midline — in the transverse section",
+   "name": "Paraxial mesoderm — beside the midline — in the transverse section",
+   "role": "primary",
+   "group": "The transverse section",
+   "layer": "organ",
+   "color": "#1e8449",
+   "opacity": 1,
+   "terms": [
+    "paraxial mesoderm",
+    "beside the notochord",
+    "somitomere",
+    "somite",
+    "day 20",
+    "segmentation",
+    "sclerotome",
+    "myotome",
+    "dermatome",
+    "vertebrae",
+    "skeletal muscle",
+    "dermis of the back"
+   ],
+   "narration": "The column nearest the midline thickens and, from about day twenty, breaks into blocks called somites. Each somite splits three ways: sclerotome for vertebrae and ribs, myotome for skeletal muscle, dermatome for the dermis of the back. This is where segmentation of the body comes from, and it is why a dermatome map exists at all.",
+   "narration_from": "the SAME structure as `paraxial`, shown in the transverse slab. SHOWN IN THE TRANSVERSE SLAB (model variant `slab`): the same lens built only inside a cranio-caudal window one somite thick, at FULL mediolateral extent, whose level is SOLVED per t for the completeness of the section it cuts. This beat's narration asks for a transverse picture and until round 3 the scene showed a plan view instead — round 2's open finding. The paramedian `block` could not be reused: its window is on one side of the midline and clear of it, so at this stage it emits NO notochord and NO lateral plate (measured: 0 vertices of each, against 8376 and 39600 in the whole disc), which are the two ends of the mediolateral reading the beat is about. Acceptance row SL measures that the slab is literally a piece of the same geometry, that wherever the whole disc has all four section keys the slab has them too, and that it stays mirror-symmetric in x. It is a separate scene structure only because a scene structure carries ONE ref and this model id resolves per flag set. Its narration is `paraxial`'s, unchanged.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#paraxial+split,slab"
+   }
+  },
+  {
+   "key": "intermediate_slab",
+   "label": "Intermediate mesoderm — the narrow strip — in the transverse section",
+   "name": "Intermediate mesoderm — the narrow strip — in the transverse section",
+   "role": "primary",
+   "group": "The transverse section",
+   "layer": "organ",
+   "color": "#52be80",
+   "opacity": 1,
+   "terms": [
+    "intermediate mesoderm",
+    "nephrogenic cord",
+    "urogenital ridge",
+    "kidney",
+    "ureter",
+    "gonad",
+    "genital duct",
+    "pronephros",
+    "mesonephros",
+    "metanephros"
+   ],
+   "narration": "A thin strip between the paraxial column and the flat plate lateral to it. It makes the urinary and genital systems and almost nothing else, which makes it the easiest of the three to remember: kidneys, ureters, gonads and their ducts. The fact that both systems come from one strip is why urinary and genital anomalies so often turn up in the same patient.",
+   "narration_from": "the SAME structure as `intermediate`, shown in the transverse slab. SHOWN IN THE TRANSVERSE SLAB (model variant `slab`): the same lens built only inside a cranio-caudal window one somite thick, at FULL mediolateral extent, whose level is SOLVED per t for the completeness of the section it cuts. This beat's narration asks for a transverse picture and until round 3 the scene showed a plan view instead — round 2's open finding. The paramedian `block` could not be reused: its window is on one side of the midline and clear of it, so at this stage it emits NO notochord and NO lateral plate (measured: 0 vertices of each, against 8376 and 39600 in the whole disc), which are the two ends of the mediolateral reading the beat is about. Acceptance row SL measures that the slab is literally a piece of the same geometry, that wherever the whole disc has all four section keys the slab has them too, and that it stays mirror-symmetric in x. It is a separate scene structure only because a scene structure carries ONE ref and this model id resolves per flag set. Its narration is `intermediate`'s, unchanged.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#intermediate+split,slab"
+   }
+  },
+  {
+   "key": "lateral_plate_slab",
+   "label": "Lateral plate — the flat sheet lateral to the strip — in the transverse section",
+   "name": "Lateral plate — the flat sheet lateral to the strip — in the transverse section",
+   "role": "primary",
+   "group": "The transverse section",
+   "layer": "organ",
+   "color": "#7dcea0",
+   "opacity": 1,
+   "terms": [
+    "lateral plate mesoderm",
+    "somatic mesoderm",
+    "parietal mesoderm",
+    "splanchnic mesoderm",
+    "visceral mesoderm",
+    "intraembryonic coelom",
+    "body cavity",
+    "parietal pleura",
+    "visceral pleura",
+    "peritoneum",
+    "pericardium",
+    "limb bones",
+    "gut wall muscle",
+    "heart"
+   ],
+   "narration": "The flattest and most lateral part splits into two sheets with a space between them. The upper, somatic sheet stays with the ectoderm and makes the body wall, the limb bones and the parietal serous membranes; the lower, splanchnic sheet stays with the endoderm and makes the gut wall, its muscle and the visceral serous membranes, and the heart. The space between them is the intraembryonic coelom, the future pericardial, pleural and peritoneal cavities.",
+   "narration_from": "the SAME structure as `lateral_plate`, shown in the transverse slab. SHOWN IN THE TRANSVERSE SLAB (model variant `slab`): the same lens built only inside a cranio-caudal window one somite thick, at FULL mediolateral extent, whose level is SOLVED per t for the completeness of the section it cuts. This beat's narration asks for a transverse picture and until round 3 the scene showed a plan view instead — round 2's open finding. The paramedian `block` could not be reused: its window is on one side of the midline and clear of it, so at this stage it emits NO notochord and NO lateral plate (measured: 0 vertices of each, against 8376 and 39600 in the whole disc), which are the two ends of the mediolateral reading the beat is about. Acceptance row SL measures that the slab is literally a piece of the same geometry, that wherever the whole disc has all four section keys the slab has them too, and that it stays mirror-symmetric in x. It is a separate scene structure only because a scene structure carries ONE ref and this model id resolves per flag set. Its narration is `lateral_plate`'s, unchanged.",
+   "refs": {
+    "procedural": "trilaminar-disc-3-germ-layers#lateral_plate+split,slab"
+   }
+  }
+ ],
+ "views": [
+  {
+   "mode": "cross_section",
+   "beat": 1,
+   "title": "Cut it — three sheets, the right way up",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ectoderm_block"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "mesoderm_block"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "endoderm_block"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "amnion"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "yolk_sac"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.55
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "x",
+     "offset": -0.1667,
+     "animate": true
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "superior"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "ectoderm_block",
+      "mesoderm_block",
+      "endoderm_block"
+     ],
+     "layout": "stacked"
+    }
+   ],
+   "narration": "The drawing is the bilaminar one with a sheet inserted. Ectoderm on top, facing the amniotic cavity. Endoderm underneath, facing the yolk sac. Mesoderm between them. Same orientation as week two, so dorsal still means the amniotic side. Get the three names in that order and the rest of this topic is derivatives.",
+   "narration_from": "sequence-version view beat 1 — carried across verbatim from the sequence version. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player every structure starts visible and a beat that does not hide what it does not want draws the whole model. THE PLAYER WALK DECIDED THIS BEAT'S COMPOSITION, not the sequence version's op list. viz-training/tools/measure-scene-visibility.mjs frames each beat the way viz3d does and counts what a student can actually see; the first composition of this scene failed six of its seven beats and every failure had one cause. viz3d's frameView fits the camera to the shown set's whole bounding box with NO knowledge of which way the camera points — that is engine__refit-camera-on-isolate, which is ESCALATED and waiting on a human — and this disc is 8.6 x 10 x 0.7 units. So a camera looking along z (a PLAN view) sees 8.6 x 10 and fills the frame, while a camera looking along x or y sees a sliver 0.7 units deep inside a frame sized for 10. A clip does not help: THREE clipping planes hide geometry but Box3.setFromObject still measures it, so the cut does not shrink the box the camera is fitted to. Measured consequences and the fix are given per beat below. HERE: the cut is PARAMEDIAN (axis x, offset -0.1667, which viz3d's setClip turns into \"keep x <= -0.5\"), so the face the camera looks at is half a unit off the midline. That is not decoration. The middle sheet is built with a permanent midline gap of one notochord half-width, so a TRUE median section cuts through the one strip of this disc that has no mesoderm in it and the beat would show two layers while its narration named three. The paramedian face has all three. The notochord is dropped from the shown list for the same reason in reverse — it lives inside |x| <= 0.30 and the cut removes it, and the first composition showed it anyway, at 0.000% of the frame. The context envelopes stay, because the narration names both of them; they were made shallower in the model so they stop setting the frame height (see the note at the dome in models3d). AND THE CAMERA IS `inferior`, WHICH IS A CAUDAL VIEW IN THIS MODEL'S FRAME, NOT A VIEW FROM BELOW. viz3d's VIEW_DIR names are LPS, where superior is +y; here +y is CRANIAL, so `inferior` [0,-1,0.001] looks along the disc from its tail. That matters for one reason and it is the beat's own claim. viz3d holds the camera's up-vector at world +y, so from a `lateral` camera the screen's vertical axis is the CRANIO-CAUDAL one and the three layers come out as three vertical stripes side by side — a picture in which \"ectoderm on top\" reads as \"ectoderm on the right\". Only a camera looking ALONG +/-y makes the up-vector degenerate enough that the screen's vertical becomes the dorsoventral axis, and of the two, `superior` looks at the block's CRANIAL end face, where at day 18 the mesoderm front has not yet arrived — measured at 0.029% of the frame. `inferior` looks at the caudal end, next to the streak, where all three layers are present: 74.33% subject, ectoderm 21.3%, mesoderm 19.8%, endoderm 12.2%, with the amnion above and the yolk sac below, stacked the way the sentence says. BEAT 2 KEEPS `lateral` AND THEREFORE KEEPS THE SIDEWAYS STACK, because the one thing it must show — the hypoblast still in place — is cranial at that stage and an `inferior` camera measures it at 0.000%. A reviewer who finds the two beats' orientations inconsistent for a student is right that they are, and the cause is a fixed up-vector the scene cannot set.\n\nROUND 2 FIX, 2026-10-02 — THE CAMERA, NOT THE MODEL. Round 1's blocking finding was that this beat drew the disc VENTRAL-SIDE-UP: a student read the germ layers in inverted order under a title saying \"the right way up\". The geometry was never wrong — stackInverted reads 0 at every t, and it always did, because it measures WORLD order and the defect was in the camera. viz3d.js never assigns camera.up, so it keeps THREE's default (0,1,0), and VIEW_DIR.inferior is [0,-1,0.001] — very nearly antiparallel to it. Screen-up therefore falls out of that 0.001 tilt alone and lands on world +z, which this model declares VENTRAL. MEASURED, not reasoned: reading the camera's own world matrix after lookAt, inferior gives screen-up (0.000,0.001,+1.000) and the parts stack yolk_sac > endoderm > mesoderm > ectoderm > amnion — exactly inverted — at EVERY t from 0.40 to 0.70. superior gives (0.000,0.001,-1.000) and amnion > ectoderm > mesoderm > endoderm > yolk_sac, correct at every t. So the view is now `superior`. THE ONE-WORD FIX IS NOT ENOUGH, which round 1 also measured: at the old t=0.40 superior HIDES the middle sheet, because the camera looks straight at the disc's cranial face and the mesoderm has not spread that far yet. Occlusion-aware pixel counts, every mesh flat-shaded in an ID colour: at t=0.40 mesoderm draws 135 px against ectoderm 20330 and endoderm 26301 — the beat would show two sheets while naming three. SO THE STAGE MOVED TOO, to t=0.55, and it was chosen from the MECHANISM rather than off the pixel curve: the middle sheet's cranial front reaches the disc's own cranial edge (y=3.1668) at t=0.433 and stays there for every later t, so from 0.433 the face the camera looks at is trilaminar for good. t=0.55 sits 0.117 past that saturation and inside the flat band of the pixel curve (mesoderm 16758/17701/17918/18191/18453 px at t=0.50/0.55/0.60/0.65/0.70) — a beat perched one step past a cliff falls off it the next time anything upstream moves. 0.55 rather than round 1's suggested 0.60 for one measured reason: mesoCoverFrac SATURATES to 1.000 by t=0.60, so a beat 1 there would already show a fully spread sheet and beat 7's \"by now the mesoderm has reached all the rest of the disc\" would stop marking a change. At 0.55 it reads 0.8373 and beat 7 still earns its \"by now\". THE NARRATION IS UNCHANGED, verbatim as carried across — it was true all along and the picture was not, which is the right way round. Only the two STAGE-DEPENDENT claim values are re-pinned, by measurement at the new t: mesoCoverFrac 0.4967 -> 0.8373, notochordLenFrac 0.1813 -> 0.3453. WHAT ROUND 1 GOT SLIGHTLY WRONG, recorded under BUILD-TASK-PROMPT section 6: it attributed the occlusion to \"BLK_Y1 = 3.20 is cranial to the mesoderm front\" and suggested pulling BLK_Y1 caudal. BLK_Y1 never binds — measured over 31 stages, no layer ever reaches it. All three sheets stop at the DISC's cranial edge, y = 3.1668, and that edge is the face the camera sees. The remedy would still have worked; the landmark named for it does not exist.",
+   "claims": [
+    {
+     "id": "B1-order",
+     "claim": "ectoderm on top, endoderm underneath, mesoderm between them — at every place in the disc, not on average",
+     "measure": "stackInverted",
+     "op": "equals",
+     "value": 0
+    },
+    {
+     "id": "B1-visible",
+     "claim": "and the three are visibly separate rather than three names for one slab",
+     "measure": "stackGapWorst",
+     "op": "atLeast",
+     "value": 0.3
+    },
+    {
+     "id": "B1-sheet",
+     "claim": "a sheet HAS been inserted, and by this stage it has spread across most of the disc",
+     "measure": "mesoCoverFrac",
+     "op": "near",
+     "value": 0.837252,
+     "tol": 0.04
+    },
+    {
+     "id": "B1-hypo",
+     "claim": "the lower sheet is definitive endoderm by now — the hypoblast has gone",
+     "measure": "hypoFrac",
+     "op": "atMost",
+     "value": 0.001
+    },
+    {
+     "id": "B1-noto",
+     "claim": "and the midline rod is laid down to about a third of the disc by now",
+     "measure": "notochordLenFrac",
+     "op": "near",
+     "value": 0.345346,
+     "tol": 0.02
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 2,
+   "title": "One layer made all three",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ectoderm_block"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "mesoderm_block"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "endoderm_block"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "hypoblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "streak_block"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "route_endo"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "route_meso"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.22
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "x",
+     "offset": -0.1667,
+     "animate": true
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "streak_block",
+     "to": "endoderm_block",
+     "kind": "first wave — displaced the hypoblast"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "streak_block",
+     "to": "mesoderm_block",
+     "kind": "second wave — stopped in the middle"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "streak_block",
+     "to": "ectoderm_block",
+     "kind": "never moved — stayed on the surface"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "streak_block",
+     "intensity": 0.95
+    }
+   ],
+   "narration": "Three arrows from one box. Epiblast cells that went through the streak first replaced the hypoblast and are the definitive endoderm. Those that followed stopped between the sheets as mesoderm. Those that never entered the streak are the ectoderm. The hypoblast is gone and gives the fetus nothing. Students who assume the bottom layer was already there answer half the derivative questions wrongly.",
+   "narration_from": "sequence-version view beat 2 — carried across verbatim. Its explicit shown list replaces SHOW_STRUCTURE \"*\" / ISOLATE_REGION for the reason given on beat 1, and its three SHOW_RELATIONSHIP arrows out of a \"one_source\" box are kept with the source changed from that box to the STREAK, which is the thing the box stood for and is a built structure here. THE PLAYER WALK DECIDED THIS BEAT'S COMPOSITION, not the sequence version's op list. viz-training/tools/measure-scene-visibility.mjs frames each beat the way viz3d does and counts what a student can actually see; the first composition of this scene failed six of its seven beats and every failure had one cause. viz3d's frameView fits the camera to the shown set's whole bounding box with NO knowledge of which way the camera points — that is engine__refit-camera-on-isolate, which is ESCALATED and waiting on a human — and this disc is 8.6 x 10 x 0.7 units. So a camera looking along z (a PLAN view) sees 8.6 x 10 and fills the frame, while a camera looking along x or y sees a sliver 0.7 units deep inside a frame sized for 10. A clip does not help: THREE clipping planes hide geometry but Box3.setFromObject still measures it, so the cut does not shrink the box the camera is fitted to. Measured consequences and the fix are given per beat below. HERE: the first composition gave this beat a lateral camera and NO cut, and the walk measured the subject at 2.50% of the frame with the mesoderm at 0.000% and both ingression routes at 0.003%. The same paramedian cut as beat 1 is used, for the same reason — the mesoderm is absent from the midline strip by construction — and the streak was widened in the model to 0.60 units so that a cut half a unit off the midline still passes through the band this beat is about. primitive-streak.js, which owns the streak as a subject, carries the same 0.58-unit half-width.",
+   "claims": [
+    {
+     "id": "B2-hypo",
+     "claim": "the hypoblast is being pushed out — about half of the lower layer is still it",
+     "measure": "hypoFrac",
+     "op": "near",
+     "value": 0.5215,
+     "tol": 0.05
+    },
+    {
+     "id": "B2-endo",
+     "claim": "and the other half is already epiblast-derived definitive endoderm",
+     "measure": "endoFrac",
+     "op": "near",
+     "value": 0.4785,
+     "tol": 0.05
+    },
+    {
+     "id": "B2-meso",
+     "claim": "the second wave has only just started: the middle sheet covers under a tenth of the ground it will cover",
+     "measure": "mesoCoverFrac",
+     "op": "near",
+     "value": 0.0865,
+     "tol": 0.025
+    },
+    {
+     "id": "B2-order",
+     "claim": "and what there is of it is already in the right place, between the two sheets",
+     "measure": "stackInverted",
+     "op": "equals",
+     "value": 0
+    }
+   ]
+  },
+  {
+   "mode": "comparison",
+   "beat": 3,
+   "title": "Ectoderm — outside, and the whole nervous system",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ectoderm"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.44
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "ectoderm",
+     "intensity": 0.95
+    }
+   ],
+   "narration": "One rule holds most of ectoderm: what meets the outside world, and what conducts. Epidermis with its hair, nails, sweat and mammary glands. Enamel, the lens, the inner ear, the anterior pituitary from Rathke's pouch. Then neuroectoderm — brain, spinal cord, retina, posterior pituitary. Then neural crest — sensory and autonomic ganglia, Schwann cells, melanocytes, most of the facial skeleton, and the adrenal medulla. Crest is worth a separate line because it explains too many syndromes to be buried in a list.",
+   "narration_from": "sequence-version view beat 3 — carried across verbatim, with the explicit shown list replacing SHOW_STRUCTURE \"*\" / ISOLATE_REGION as on beat 1. Its COMPARE_STRUCTURES [ectoderm, endoderm] is DROPPED, and so is the notochord the first composition showed. Both for the same measured reason: this beat looks down on the disc from inside the amniotic cavity, which is the one view in which \"the layer left on the surface\" is a picture rather than a caption, and from there the endoderm is under the ectoderm everywhere and the notochord is under it too — the walk measured the notochord at 0.000% of this frame. A beat does not point at what its own camera cannot reach. The ectoderm/endoderm comparison is beat 1's section, where both are visible. viz3d's `posterior` camera is [0,0,-1]; in this model's frame VENTRAL = +z, so that is the DORSAL plan view, and it frames at 44% of the canvas.",
+   "claims": [
+    {
+     "id": "B3-surface",
+     "claim": "this is the layer that faces the amniotic cavity — the whole dorsal surface of the disc is ectoderm",
+     "measure": "stackInverted",
+     "op": "equals",
+     "value": 0
+    },
+    {
+     "id": "B3-stage",
+     "claim": "by day nineteen the middle sheet is most of the way across, which is why the surface is all that is left to see from here",
+     "measure": "mesoCoverFrac",
+     "op": "near",
+     "value": 0.5846,
+     "tol": 0.04
+    },
+    {
+     "id": "B3-hypo",
+     "claim": "and nothing of the hypoblast remains to confuse the lower layer with",
+     "measure": "hypoFrac",
+     "op": "atMost",
+     "value": 0.001
+    }
+   ]
+  },
+  {
+   "mode": "comparison",
+   "beat": 4,
+   "title": "Endoderm — linings, and the glands that bud from them",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "endoderm"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.56
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "endoderm",
+     "intensity": 0.95
+    }
+   ],
+   "narration": "Endoderm is easiest as one tube and its buds. The epithelium of the gut from the pharynx to the upper anal canal. Budding off it: liver, gallbladder, pancreas, the whole respiratory tract to the alveoli, thyroid, parathyroids, thymus and tonsils. At the far end, the epithelium of the bladder and urethra. And from the first pouch, the middle ear cavity and auditory tube. Every one of them is a lining or a gland that grew out of a lining.",
+   "narration_from": "sequence-version view beat 4 — carried across verbatim, explicit shown list as on beat 1. Its SHOW_RELATIONSHIP endoderm -> \"whats_next\" is dropped because \"whats_next\" was a prose panel, not a part; its narration is kept in full in deferred_beats. THE CAMERA IS `anterior`, AND THE FIRST COMPOSITION HAD IT WRONG. It used `inferior`, reading the name as \"from below the disc\" — but viz3d's VIEW_DIR table is named in LPS, where superior is +y, and in this model's frame +y is CRANIAL. So `inferior` is a view from the embryo's TAIL, not from its ventral side, and the walk measured this beat at 2.64% of the frame with the endoderm seen edge-on. VENTRAL is +z here, so the ventral plan view is `anterior` [0,0,1] — the exact mirror of beat 3's dorsal `posterior`, which is what \"the layer facing the yolk sac\" asks for.",
+   "claims": [
+    {
+     "id": "B4-surface",
+     "claim": "this is the layer that faces the yolk sac — the whole ventral surface of the disc is endoderm",
+     "measure": "endoFrac",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B4-stage",
+     "claim": "and by day nineteen and a half the middle sheet has nearly finished spreading between the two",
+     "measure": "mesoCoverFrac",
+     "op": "near",
+     "value": 0.8648,
+     "tol": 0.04
+    },
+    {
+     "id": "B4-noto",
+     "claim": "the midline rod has reached almost its full length by now",
+     "measure": "notochordLenFrac",
+     "op": "near",
+     "value": 0.3551,
+     "tol": 0.02
+    }
+   ]
+  },
+  {
+   "mode": "cross_section",
+   "beat": 5,
+   "title": "Mesoderm splits into three columns",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "paraxial_slab"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "intermediate_slab"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lateral_plate_slab"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "notochord_slab"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.5
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "superior"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "paraxial_slab",
+      "intermediate_slab",
+      "lateral_plate_slab"
+     ],
+     "layout": "side-by-side"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "notochord_slab",
+     "intensity": 0.6
+    }
+   ],
+   "narration": "Cut across the disc and read outwards from the midline. Nearest the notochord, paraxial mesoderm, which segments into somites. Next, a thin strip of intermediate mesoderm. Then the wide lateral plate. Three columns, named by position, and each has its own destiny — this transverse picture is worth more than any list, because the names only make sense as positions.",
+   "narration_from": "sequence-version view beat 5 — carried across verbatim, explicit shown list as on beat 1. THE PLAYER WALK DECIDED THIS BEAT'S COMPOSITION, not the sequence version's op list. viz-training/tools/measure-scene-visibility.mjs frames each beat the way viz3d does and counts what a student can actually see; the first composition of this scene failed six of its seven beats and every failure had one cause. viz3d's frameView fits the camera to the shown set's whole bounding box with NO knowledge of which way the camera points — that is engine__refit-camera-on-isolate, which is ESCALATED and waiting on a human — and this disc is 8.6 x 10 x 0.7 units. So a camera looking along z (a PLAN view) sees 8.6 x 10 and fills the frame, while a camera looking along x or y sees a sliver 0.7 units deep inside a frame sized for 10. A clip does not help: THREE clipping planes hide geometry but Box3.setFromObject still measures it, so the cut does not shrink the box the camera is fitted to. Measured consequences and the fix are given per beat below. HERE: THE TRANSVERSE SECTION THIS NARRATION ASKS FOR CANNOT BE FRAMED BY THE CURRENT PLAYER, and the numbers are worth recording rather than hiding. Composed as a transverse cut (CROSS_SECTION axis y) seen from `superior`, the walk measured the subject at 4.42% of the frame against an 8% floor, and the three columns the beat exists to compare at 0.056%, 0.021% and 0.257% against a 0.3% floor for a structure a beat points at. No composition fixes it: the frame height is set by the disc's own 10-unit length whatever the camera does, and the clip cannot shrink it. That is engine__refit-camera-on-isolate, ESCALATED. What the player CAN show is the same reading, in plan: the ectoderm is hidden and the three columns are read outwards from the notochord as three bands, from the dorsal camera that frames at 44%. The narration's \"cut across the disc and read outwards from the midline\" is the mental operation and it survives; the mode is changed from cross_section to comparison because this beat is now a peel rather than a cut, and the scene's cross_section contract is carried by beat 1. A reviewer who would rather have the transverse section with a framing waiver has a fair argument, and the numbers above are what it would have to be waived against. AND THE BEAT MOVED FROM DAY 20.1 TO DAY 19.0, which is a composition fix with a picture behind it. At day 20.1 the lateral plate has begun to cavitate, and in this keying `lateral_plate` is only the part that is STILL ONE SHEET — its lateral rim and its two ends. The rendered frame therefore showed the paraxial column, the intermediate strip, and then a GAP where the cavity had opened, with the plate a crescent beyond it: a picture that contradicts this beat's own first claim, that the three columns abut with no space between them. Day 19.0 is the last stage at which all three are solid and all three are present (the front reaches the plate at about day 18.4). The narration loses nothing: its only temporal clause, \"which segments into somites\", is a forward reference, and the somites and the day-twenty clock are beat 6's, where they are drawn. Claim B5-solid now asserts the plate is undivided HERE, which is also what pins this beat against being moved later.",
+   "claims": [
+    {
+     "id": "B5-order",
+     "claim": "read outwards from the midline: paraxial, then intermediate, then lateral plate — and they ABUT, with no space between them",
+     "measure": "colOrderGapFrac",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "B5-narrow",
+     "claim": "the intermediate strip is the THIN one of the three",
+     "measure": "interNarrowestRatio",
+     "op": "atMost",
+     "value": 0.62
+    },
+    {
+     "id": "B5-wide",
+     "claim": "and the lateral plate is the WIDE one",
+     "measure": "latWidestRatio",
+     "op": "atLeast",
+     "value": 1.35
+    },
+    {
+     "id": "B5-solid",
+     "claim": "and at this stage the lateral plate is still ONE sheet — it splits later, which is the next beat",
+     "measure": "coelomOpenFrac",
+     "op": "equals",
+     "value": 0
+    },
+    {
+     "id": "B5-cover",
+     "claim": "the middle sheet has spread most of the way across the disc by day nineteen",
+     "measure": "mesoCoverFrac",
+     "op": "near",
+     "value": 0.7241,
+     "tol": 0.04
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 6,
+   "title": "What each column becomes",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "paraxial"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "intermediate"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lateral_plate"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "somatic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "notochord"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.7
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "paraxial",
+     "intensity": 0.9
+    }
+   ],
+   "narration": "Paraxial breaks into somites from about day twenty, and each somite gives sclerotome for vertebrae and ribs, myotome for skeletal muscle, dermatome for the dermis of the back — segmentation, and the reason dermatomes exist. Intermediate makes the kidneys, ureters, gonads and genital ducts, which is why urinary and genital anomalies travel together. Lateral plate splits in two: somatic with the ectoderm for body wall, limb bones and parietal serous membranes, splanchnic with the endoderm for gut wall, heart and visceral serous membranes. The gap between them is the intraembryonic coelom.",
+   "narration_from": "sequence-version view beat 6 — carried across verbatim, explicit shown list as on beat 1. Its TRACE_STRUCTURE over a \"concept:mesoderm-fates\" pseudo-key is dropped — the procedural adapter degrades TRACE to a highlight anyway, and there was no such structure to trace — and its SHOW_RELATIONSHIP lateral_plate -> \"whats_next\" is re-pointed at the COELOM, which is what that sentence is about and is now a built part. THE PLAYER WALK DECIDED THIS BEAT'S COMPOSITION, not the sequence version's op list. viz-training/tools/measure-scene-visibility.mjs frames each beat the way viz3d does and counts what a student can actually see; the first composition of this scene failed six of its seven beats and every failure had one cause. viz3d's frameView fits the camera to the shown set's whole bounding box with NO knowledge of which way the camera points — that is engine__refit-camera-on-isolate, which is ESCALATED and waiting on a human — and this disc is 8.6 x 10 x 0.7 units. So a camera looking along z (a PLAN view) sees 8.6 x 10 and fills the frame, while a camera looking along x or y sees a sliver 0.7 units deep inside a frame sized for 10. A clip does not help: THREE clipping planes hide geometry but Box3.setFromObject still measures it, so the cut does not shrink the box the camera is fitted to. Measured consequences and the fix are given per beat below. HERE: composed as a transverse cut from `superior`, the walk measured the subject at 4.22% and the coelom, the somatic sheet and the notochord at 0.000% — the same unframable section as beat 5. In plan, with the ectoderm hidden, the difficulty becomes a real one instead: the coelom is a cavity INSIDE the plate, so from a dorsal camera the somatic sheet is directly over it. The somatic sheet is therefore given opacity 0.45 rather than hidden, which is the case the visibility tool is built for — it counts twice, once by id-pick and once by differencing the frame with and without each structure, and a cavity seen through a translucent sheet is exactly what a teaching diagram draws. Hiding the somatic sheet was the alternative and it was rejected: the narration names it in its first sentence. AND THE BEAT WAS SPLIT IN TWO. Composed with the whole cavitated plate shown at once, the walk measured the coelom at 0.000% and the splanchnic sheet at 0.000%: from a dorsal camera the somatic sheet is directly over both of them, and making it translucent did not rescue either — the alpha-aware pass moved no pixels at all. RENDER-STANDARD's rule for two claims that want incompatible cameras is that it is two beats and never one beat and a hope; two claims that want incompatible OCCLUSION are the same thing. So this beat keeps the somatic sheet, which is the one the narration names first, and beat 8 peels it away to show the cavity under it.",
+   "claims": [
+    {
+     "id": "B6-somites",
+     "claim": "the paraxial column has broken into somites — about five pairs by now",
+     "measure": "somitePairs",
+     "op": "near",
+     "value": 5.3333,
+     "tol": 0.6
+    },
+    {
+     "id": "B6-blocks",
+     "claim": "and they are drawn as separate blocks with real fissures between them, not as a column called segmented",
+     "measure": "paraxialRuns",
+     "op": "atLeast",
+     "value": 4
+    },
+    {
+     "id": "B6-plate",
+     "claim": "and the lateral plate is still the widest of the three",
+     "measure": "latWidestRatio",
+     "op": "atLeast",
+     "value": 1.35
+    },
+    {
+     "id": "B6-split",
+     "claim": "by day twenty-one the plate has split, so its upper sheet is a part in its own right",
+     "measure": "coelomOpenFrac",
+     "op": "near",
+     "value": 0.8017,
+     "tol": 0.08
+    }
+   ]
+  },
+  {
+   "mode": "location",
+   "beat": 7,
+   "title": "Where the disc stays two layers thick",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "mesoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oropharyngeal_membrane"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cloacal_membrane"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "notochord"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "streak"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.65
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "oropharyngeal_membrane",
+     "to": "cloacal_membrane",
+     "kind": "the two places ectoderm stays fused to endoderm"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "oropharyngeal_membrane",
+     "intensity": 0.95
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "cloacal_membrane",
+     "intensity": 0.95
+    }
+   ],
+   "narration": "Two spots never get a middle layer. At the cranial end the oropharyngeal membrane sits over the prechordal plate; at the caudal end the cloacal membrane. Ectoderm and endoderm are fused at both, and both must later break down — one to open the mouth, one to open the anus and urogenital tract. A cloacal membrane that does not rupture presents as an imperforate anus at the first newborn examination.",
+   "narration_from": "sequence-version view beat 7 — carried across verbatim from the sequence version. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player every structure starts visible and a beat that does not hide what it does not want draws the whole model. Its PEEL_LAYER op is replaced by HIDING the ectoderm outright, for a reason worth stating: the two membranes sit at the ecto/endo INTERFACE, so from a dorsal camera the ectoderm covers both of them completely and a beat that drew it would point at two structures contributing nothing to the frame. With the ectoderm off, the picture is the mesoderm sheet with two holes in it and the membranes filling those holes — which is the claim the narration makes, drawn rather than captioned. THE PLAYER WALK DECIDED THIS BEAT'S COMPOSITION, not the sequence version's op list. viz-training/tools/measure-scene-visibility.mjs frames each beat the way viz3d does and counts what a student can actually see; the first composition of this scene failed six of its seven beats and every failure had one cause. viz3d's frameView fits the camera to the shown set's whole bounding box with NO knowledge of which way the camera points — that is engine__refit-camera-on-isolate, which is ESCALATED and waiting on a human — and this disc is 8.6 x 10 x 0.7 units. So a camera looking along z (a PLAN view) sees 8.6 x 10 and fills the frame, while a camera looking along x or y sees a sliver 0.7 units deep inside a frame sized for 10. A clip does not help: THREE clipping planes hide geometry but Box3.setFromObject still measures it, so the cut does not shrink the box the camera is fitted to. Measured consequences and the fix are given per beat below. HERE: nothing needed changing — this beat was composed as a dorsal plan view from the start and the walk measured it at 44.5% of the frame with every structure it points at well clear of its floor (mesoderm 38.16%, oropharyngeal membrane 1.80%, streak 1.77%, notochord 1.51%, cloacal membrane 1.26%).",
+   "claims": [
+    {
+     "id": "B7-oro",
+     "claim": "there is NO mesoderm at the oropharyngeal membrane — measured over its whole footprint, not at its centre",
+     "measure": "oroMesoPoints",
+     "op": "equals",
+     "value": 0
+    },
+    {
+     "id": "B7-clo",
+     "claim": "and none at the cloacal membrane either, over all of it",
+     "measure": "cloMesoPoints",
+     "op": "equals",
+     "value": 0
+    },
+    {
+     "id": "B7-orofuse",
+     "claim": "at the oropharyngeal membrane ectoderm and endoderm are FUSED, not merely thin",
+     "measure": "oroGapFrac",
+     "op": "atMost",
+     "value": 0.3
+    },
+    {
+     "id": "B7-clofuse",
+     "claim": "and the same at the cloacal membrane",
+     "measure": "cloGapFrac",
+     "op": "atMost",
+     "value": 0.3
+    },
+    {
+     "id": "B7-everywhere",
+     "claim": "and the other half of \"everywhere except two spots\": by now the mesoderm has reached all the rest of the disc, so these two are the only holes in it",
+     "measure": "mesoCoverFrac",
+     "op": "atLeast",
+     "value": 0.999
+    },
+    {
+     "id": "B7-prechordal",
+     "claim": "the cranial membrane sits over the prechordal plate, which is where the notochord stops — and the rod has reached it by now",
+     "measure": "notochordLenFrac",
+     "op": "near",
+     "value": 0.422,
+     "tol": 0.025
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 8,
+   "title": "Peel the upper sheet — the space between them is the coelom",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "paraxial"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "intermediate"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lateral_plate"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "coelom"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "splanchnic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "notochord"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.7
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "lateral_plate",
+     "to": "coelom",
+     "kind": "its cavity becomes the body cavities"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "coelom",
+      "splanchnic",
+      "lateral_plate"
+     ]
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "coelom",
+     "intensity": 0.95
+    }
+   ],
+   "narration": "Take the upper sheet away and the space is what is left. The somatic sheet has gone with the ectoderm; under it lies the splanchnic sheet, and between the two is the intraembryonic coelom — one continuous cavity at this stage, and the pericardial, pleural and peritoneal cavities later. Look where it is: INSIDE the lateral plate, so the plate keeps a solid rim lateral to it and solid tissue at both ends. That is why the body cavity is a closed space from the moment it opens.",
+   "narration_from": "AUTHORED FOR THE 3D SCENE, from the last two sentences of the sequence version's \"lateral_plate\" panel, which is carried verbatim in full on the `lateral_plate` structure. This beat exists because the player walk measured the coelom and the splanchnic sheet at 0.000% of beat 6's frame: from a dorsal camera the somatic sheet is directly over both. Peeling it is the only composition that shows the cavity, and a peel and a cover cannot be the same beat.\n\nROUND 2 FIX, 2026-10-02 — THIS BEAT AND BEAT 6 WERE THE SAME PICTURE. Round 1's minor finding: beats 6 and 8 share a camera (posterior), a stage (t = 0.70), and three of their five structures, and differ only by a translucent somatic sheet against a translucent coelom — both pale, both in the same band. MEASURED rather than taken on trust, with a new probe that renders each beat as viz3d's beauty pass draws it (per-structure opacity, ghosting, camera refitted per view): tools/probe-beat-likeness.mjs. Beats 6 and 8 differed in 15.05% of pixels, mean absolute 13.69 — the most alike pair in the scene, against a median over all 28 pairs of 45.02%. Nothing existing could have said so: the render harness's check 10 asserts only that no two frames are IDENTICAL, and the visibility walk asks whether a structure can be SEEN, which is not the same as being distinguishable from the beat before. THE FIX IS ONE OP: COMPARE_STRUCTURES over coelom + splanchnic + lateral_plate, which is what viz3d ghosting is for — the somites, the intermediate column and the notochord drop to 10% and stop competing, and the cavity is left sitting inside its plate. 6-vs-8 goes to 56.21% changed, mean absolute 42.38, above the scene's median pair. THE LATERAL PLATE IS IN THE COMPARED SET DELIBERATELY, and this is the whole reason variant A was taken over the one that scored higher: ghosting the plate too reaches 79.72%, but this beat's own sentence is \"it is INSIDE the lateral plate, so the plate keeps a solid rim lateral to it\", and claim B8-inside measures that rim. A frame that fades the plate to a tenth scores better and teaches less. The number was the question, not the answer. NOT CHANGED: narration, stage, camera, shown list and all three claims — the beat was composed correctly and was only competing with beat 6 for a student's attention.",
+   "claims": [
+    {
+     "id": "B8-coelom",
+     "claim": "the space between the two sheets is open by day twenty-one",
+     "measure": "coelomOpenFrac",
+     "op": "near",
+     "value": 0.8017,
+     "tol": 0.08
+    },
+    {
+     "id": "B8-inside",
+     "claim": "and it is INSIDE the plate — the plate keeps a solid rim lateral to it",
+     "measure": "plateRimSolidFrac",
+     "op": "atLeast",
+     "value": 0.18
+    },
+    {
+     "id": "B8-vol",
+     "claim": "the cavity is a substantial share of the plate rather than a drawn line",
+     "measure": "coelomVolFrac",
+     "op": "near",
+     "value": 0.4327,
+     "tol": 0.05
+    }
+   ]
+  }
+ ],
+ "deferred_beats": [
+  {
+   "from": "sequence-version structure \"disc\"",
+   "kind": "framing",
+   "title": "The trilaminar disc — day 16 onwards",
+   "narration": "By the middle of week three gastrulation has turned a two-layer plate into a three-layer one. The disc is still flat and still slung between the amniotic cavity above and the yolk sac below, but everything the body is made of is now present in sheet form. Folding and organogenesis are only rearrangements of these three sheets.",
+   "why": "A sentence about the disc as a WHOLE. There is no `disc` part in the 3D scene because the disc IS the model — every sheet in it is a built structure — so this has no part to sit on and no view of its own to be. Kept verbatim: it belongs in the topic's opening text."
+  },
+  {
+   "from": "sequence-version view beat 8",
+   "kind": "beat",
+   "beat": 8,
+   "title": "Working backwards, and why teratomas look the way they do",
+   "narration": "Two uses. First, work backwards from an organ by naming its parts: gut is endodermal lining in a mesodermal wall, bladder is endodermal epithelium with mesodermal muscle, adrenal is mesodermal cortex around a crest-derived medulla, pituitary is two different ectoderms meeting, a tooth is ectodermal enamel on crest dentine. Second, a teratoma is defined as containing all three germ layers — hair and sebaceous glands, cartilage and fat, respiratory or thyroid epithelium in one ovarian cyst. That is only strange if you have not just learned that one cell type made all three. From here nothing new is added: the sheets fold, roll and segment, and organogenesis runs from week four to week eight.",
+   "why": "A VIEW MUST CHANGE THE PICTURE (RENDER-STANDARD). This beat is two exam techniques — work backwards from an organ by naming its parts, and why a teratoma contains hair and teeth — and neither is a thing in the disc. Drawn, it would be beat 7's frame with a different caption. It is the best content in the scene and none of it is lost; it is text, and text has its own home in this app."
+  },
+  {
+   "from": "sequence-version structure \"backwards\"",
+   "kind": "teaching",
+   "title": "Working backwards from an organ",
+   "narration": "Most organs are built from more than one layer, and the exam question is usually about the seam. The gut is endodermal lining in a mesodermal wall. The bladder is endodermal epithelium with mesodermal detrusor. The adrenal is mesodermal cortex around a neural crest medulla. The pituitary is ectodermal throughout but from two different ectoderms — Rathke's pouch in front, neuroectoderm behind. A tooth is ectodermal enamel on neural crest dentine. Name the part before you name the layer.",
+   "why": "Every example in it — gut, bladder, adrenal, pituitary, tooth — is an ADULT organ. None of them exists at day 21 and none can be drawn in this disc. It is the pay-off of the topic and it is kept whole."
+  },
+  {
+   "from": "sequence-version structure \"teratoma_layers\"",
+   "kind": "teaching",
+   "title": "Why a teratoma contains hair and teeth",
+   "narration": "A teratoma is defined by containing tissue from all three germ layers, and that definition only makes sense once you know a single cell can still choose any of the three. Hair and sebaceous glands are ectoderm, cartilage and fat are mesoderm, respiratory or thyroid epithelium is endoderm. An ovarian dermoid cyst full of hair and teeth is not an oddity — it is a pluripotent cell doing exactly what the epiblast does, in the wrong place and at the wrong time.",
+   "why": "A tumour, not a part of the embryonic disc. (primitive-streak.js does build a sacrococcygeal teratoma, because that scene is about the streak remnant it arises from; nothing in THIS scene is its origin.)"
+  },
+  {
+   "from": "sequence-version structure \"whats_next\"",
+   "kind": "teaching",
+   "title": "What the three sheets do next",
+   "narration": "Nothing is added after week three; the rest of embryology is these three sheets folding and rolling. The ectoderm rolls into a tube to make the nervous system. The disc folds head to tail and side to side, and the endoderm becomes the gut tube. The mesoderm segments and cavitates. Organogenesis runs from week four to week eight, which is why that window is the vulnerable one for teratogens.",
+   "why": "What the three sheets do AFTER this scene. Two SHOW_RELATIONSHIP ops in the sequence version pointed at it as though it were a structure; it is a forward reference, and the scenes it points to (neurulation, cranio-caudal folding, lateral folding, primitive gut tube) exist in the corpus in their own right."
+  }
+ ],
+ "visibility_waivers": [
+  {
+   "view": 5,
+   "key": "__framing__",
+   "why": "BEAT 5's SUBJECT COVERS 4.07% OF THE FRAME AGAINST AN 8% FLOOR, AND NO CAMERA AND NO COMPOSITION CAN DO BETTER WITHOUT LOSING THE BEAT. MIN_SUBJECT is an AREA floor and this beat's subject is a TRANSVERSE SECTION of a disc 1.0 mm long and 40 um thick in the middle lamina: the three compared columns measure 6.478 x 0.398 world units, an aspect of 16.3 to 1, inside a 1100x900 frame whose aspect is 1.22 to 1. THE CEILING IS A PROOF, NOT A PREFERENCE: fit that box exactly to the frame's WIDTH, with FRAME_PAD 1 and the near-face term removed - better than the player can ever do - and the frame is 6.478 x 5.300 units, so the subject's own bounding box is 0.398/5.300 = 7.51% of it. The 8% floor is therefore UNREACHABLE for any bilateral transverse section of this disc at this viewport, whatever the camera does. With the player's real FRAME_PAD of 1.05 and its real near-face term the prediction is 5.91% of frame for the box (viz-training/tools/probe-transverse-slab.mjs, which re-derives viz3d's own distanceForBox) and the rendered ink is 4.07%, the difference being that the columns do not tile the band solidly - the midline strip is notochord and the laminae taper laterally. WHAT A STUDENT CAN ACTUALLY SEE, which is what a waiver has to argue: every structure this beat draws or points at clears its OWN floor with room - lateral_plate_slab 1.815%, paraxial_slab 1.435%, intermediate_slab 0.453%, notochord_slab 0.363% against a 0.30% pointed-at floor - and the subject spans 95.2% of the frame's WIDTH with ZERO pixels on any border row or column. The subject is not small in the frame; it is THIN in it, which is what a transverse section of a flat disc is. box_fill_pct 6.39% prints beside this waiver and shows the camera is exactly where it should be. FOUR ALTERNATIVES WERE MEASURED AND RULED OUT, so a later round need not rediscover them. (a) The PLAN VIEW this beat carried until round 3 frames at 41.46% - and is not a section at all, which was round 2's open finding: the narration says 'cut across the disc' and 'this transverse picture', and the student was shown an uncut outline of the whole disc from the dorsal side. A beat that frames well and teaches the wrong figure is the worse failure. (b) A CROSS_SECTION op cannot work at all: viz3d paint() sets material.clippingPlanes only when !isTaught(s) and isTaught is role !== 'context', so a cut never touches these three structures (role primary); and a clip would not help anyway, because THREE's clipping planes hide geometry while Box3.setFromObject still measures it, so the camera would still be fitted to a box 10 units deep. (c) The PARAMEDIAN BLOCK already in the model, built {split,block} at this t, emits ZERO notochord vertices and ZERO lateral_plate vertices against 8376 and 39600 in the whole disc - its window is one side of the midline and clear of it, so it loses both ends of the mediolateral reading. (d) A ONE-SIDED SLAB (the same variant with its x-window closed at the midline) DOES clear the framing floor, at 9.09% subject - and it was rejected on its own measurement, not on taste: it halves the notochord to 0.236%, BELOW the 0.30% pointed-at floor, so the beat would point at the landmark the whole reading is named against ('paraxial means beside it') and a student could not see it; it also puts 90 subject pixels on the frame border. It trades a framing failure for the loss of the subject's own reference point. THE REAL CAUSE IS THE ENGINE AND IT IS ESCALATED: engine__refit-camera-on-isolate. viz3d's distanceForBox IS direction-aware - it builds screen axes from the view direction, which this scene's earlier notes denied - but it adds the box's half-extent ALONG the view axis as a near-face term and fits the whole box, so a thin wide subject can never fill a frame of this aspect. A per-view framing hint, or a fit that knows the subject's on-screen aspect, would retire this waiver and nothing in this scene has to change for it."
+  }
+ ],
+ "provenance": {
+  "author": "task",
+  "authored_at": "2026-08-28",
+  "converted_at": "2026-10-02",
+  "converted_by": "the model3d build task",
+  "converted_from": "mode \"sequence\", status \"planned\" — thirteen teaching panels and eight beats with no geometry, authored for the SVG panel engine",
+  "model": "models3d/trilaminar-disc-3-germ-layers.js",
+  "harness": "viz-training/tools/render-trilaminar-disc-3-germ-layers.mjs",
+  "corrected_at": "2026-10-02T19:08:36Z",
+  "corrected_by": "the model3d build task (round 4) — findings dispositioned, no model or narration change; previously the model3d review task (round 3) at 2026-10-02T18:35:45Z"
+ },
+ "gaps": [
+  "ROUTED TO 3d_anatomy, NOT TO ITS FIRST PREFERRED MODE. CURRICULUM lists preferred_modes [sequence, diagram] for this structure and declares views [cross_section, mechanism]; both preferred modes are deferred. The reason is the queue item's own note — this is one of the twenty-eight scenes authored for the SVG panel engine, whose structures[] were teaching BEATS with no geometry, and the queue converts them to 3d_anatomy rather than drawing SVG plates that do not exist. Both declared view types are present: cross_section at beats 1 and 5, mechanism at beats 2 and 6.",
+  "VALIDATE-SCENES RAISED AN ADVISORY ON A CUT AXIS AND THE ADVISORY IS WRONG FOR PROCEDURAL SCENES. It does not fire here, and ROUND 3 CHANGED WHY. Round 2's recomposition had turned beat 5 from a transverse section into a plan view, which removed the op the advisory fired on; round 3 made beat 5 a transverse section again, but by BUILDING LESS GEOMETRY (the model's `slab` variant) rather than by cutting, so there is still no CROSS_SECTION op naming a transverse plane and the advisory still does not fire. The corpus finding stands either way, and BUILD-TASK-PROMPT section 6 says a disagreement between a file's account and what is in the repo IS the finding. The warning read: 'narration names the transverse plane but axis is \"y\" - expected \"z\" (LPS: sagittal=x, coronal=y, axial=z)'. Its PLANE_AXIS table is right for BodyParts3D MESHES, which model3d-scene-spec-v2.md states are LPS (+X left, +Y posterior, +Z superior). It is wrong for every PROCEDURAL model in this corpus, because all of them - cardiac-looping, primitive-streak and this one - declare CRANIAL = +y and VENTRAL = +z, which is not LPS. viz3d clips on the WORLD axis the op names (viz3d.js: state.clip = {axis: o.axis || \"z\"}), so in a procedural model's own frame a transverse plane's normal is y and \"z\" would cut a horizontal slab through the laminae. viz3d's own header records the SCALE mismatch between the two providers and says nothing about the AXIS mismatch, which is the same shape of problem. The fix belongs in validate-scenes (branch PLANE_AXIS on scene.provider.primary, or read the model's declared axes) and in model3d-scene-spec-v2.md, not in a scene - a build run should not quietly change a shared checker. Beat 1 keeps axis \"x\", which is a MEDIAN/paramedian plane and is \"x\" in both conventions, so nothing in this scene now depends on the disagreement.",
+  "THE QUEUE ITEM'S NOTE IS WRONG ABOUT ITS STARTING POINT, and BUILD-TASK-PROMPT section 6 says that disagreement is the finding. It reads \"neurulation.js already builds this exact disc\". There is no neurulation.js in models3d/. The only file of that name is viz-training/spike/neurulation.js — a frozen v2 spike that nothing loads, that registers nothing on window.MB3D_MODELS, and that predates render-kit.js and so hand-rolls its own winding reversal, index buffers and computeVertexNormals, which RENDER-STANDARD section 6 now forbids. Its LENS IDEA is kept (one tapering lens whose three germ layers are fractions of a shared thickness, so they thin out together instead of floating apart as separate leaves); none of its code is. The model was written fresh on render-kit.js.",
+  "NOT RECONCILED VERTEX-FOR-VERTEX WITH primitive-streak.js, which was built the same morning and builds an overlapping subject: the same disc seven days earlier, with the same epiblast, hypoblast, definitive endoderm, intraembryonic mesoderm and two membranes. The two share a SCALE and an AXIS convention deliberately (1 unit = 100 µm, RIGHT = -x, CRANIAL = +y, VENTRAL = +z) and they share the SHAPE of the conservation solve, because it is the honest physics for both. They do not share a disc outline function, a thickness law or a vertex, so a view that drew both models would show two discs. Acceptance row S pins the scale agreement so it cannot drift silently. Whether the two should be ONE model is a real question for a reviewer and this run did not answer it: the adapter maps a model id to a FILE, so merging them is a refactor of two scenes, not an edit to one.",
+  "THE HANDEDNESS OF THE MODEL IS DECLARED, NOT PROVED, and RENDER-STANDARD's own words for this condition are UNPROVEN. Every structure the model builds is mirror-symmetric in x — acceptance row T measures the worst residual at 0.000 units — so there is no chiral content in it at all and nothing in it can witness its own left/right. Flipping the sign in the model's header would mirror the picture and leave every acceptance row passing. NO NARRATION IN THIS SCENE NAMES A SIDE, and none may be added until either the model gains a landmark that is independently right/left determined or a corpus-level test checks its declared axes against a mesh-anchored model. The ingression routes are drawn on BOTH sides for exactly this reason: a single arrow would have been the one thing in the picture a reader could mistake for evidence of a side.",
+  "THE SOMITE CLOCK OUTRUNS THIS DISC FROM DAY 21.31, and the scene's last beat stands at day 21.0. The model holds the disc's OUTLINE FIXED through its whole window — a stated simplification; the real embryo elongates, and that elongation is what gives the later somites room. The clock does not know that, so by day 24 it asks for 19.7 pairs at 105 µm each, which is 2.07 mm of somites in a 1.0 mm disc; the column measures room for 7. The number SHOWN is capped at what the column holds, the overrun is reported, and acceptance row G asserts the overrun is ZERO at every t up to the scene's last beat and that the day it begins is later than that beat. THE MARGIN IS THIN — day 21.31 against day 21.0 — and a reviewer who wants beat 6 moved earlier, or the disc given a length that grows, has a fair argument. The alternative that was rejected: letting the geometry draw 19 somites of 55 µm each, which would teach a wrong somite size to make a check go green.",
+  "THE MIDLINE STRIP CRANIAL TO THE NOTOCHORD'S TIP CARRIES NO MIDDLE LAYER. The mesoderm sheet is built with a permanent midline gap of one notochord half-width (0.30 units), because the midline of this disc is never plain intraembryonic mesoderm — it is streak caudally and notochord cranially. Ahead of the notochord's growing tip that leaves a thin strip with ectoderm and endoderm in contact. Anatomically that strip is the PRECHORDAL PLATE, which this model does not build as a named part. At the scene's beats it is covered by the oropharyngeal membrane's footprint or by the notochord itself, so no beat shows the strip bare — but it is a real simplification and not a rendering artefact. Giving the prechordal plate its own key is the obvious next increment.",
+  "THE DAY THE HYPOBLAST VANISHES IS AN INPUT, NOT AN OUTPUT (DAY_FW_END = 17.2, the textbook day). What the model earns is the SPATIAL spreading: where each front stands at every t, solved by bisection against the measured volume delivered through the groove, with both delivery rates solved in closed form from the measured full-cover volumes. An earlier version of the model tried to make the day an output from a single delivery budget split by a constant share, and it cannot be done: the lower lamina is 41% of the tissue and has to be finished when a third of the groove-length integral has accrued, so no constant share — not even 1.0 — completes it in time, and a share of 1.0 would mean no mesoderm existed before day 17.6, when mesoderm appears on day 16.",
+  "THE THREE COLUMN WIDTHS ARE TYPED DIMENSIONS, NOT SOLVED PARAMETERS, and the model says so in its header. R_NCH (notochord half-width 30 µm), W_INTER (intermediate strip 34 µm: the nephric duct plus its mesenchyme) and W_SOM (one somite 105 µm, and so the paraxial half-width, because a somite is cuboidal) are lengths read off histology. An earlier draft \"solved\" the paraxial width as the fixed point of \"a somite's width is its length, and its length is the segmented extent over the number of pairs\" — which divides N somites by N, so it could not be wrong, and with one pair formed it demanded a 550 µm somite and saturated its own bisection at 2.400. What IS asserted about the three widths is the relation a student is examined on: the ORDER outward from the midline (row J), the intermediate strip narrowest (row K) and the lateral plate widest (row L), each with a magnitude floor.",
+  "THE CONTEXT ENVELOPES ARE OPEN SHELLS. The amniotic cavity and the yolk sac are each a dome whose rim meets the disc's own rim — a cavity wall, not a solid — so each carries one unpaired edge loop (40 edges) and no meaningful signed volume. Acceptance rows W and X exclude them BY NAME with that reason rather than by a lowered threshold. Closing them with a lid was considered and rejected: a lid across the rim ellipse would pass straight through the disc it is slung from.",
+  "TWO KEYINGS OF ONE SURFACE, AND NO BEAT MAY SHOW BOTH. The middle sheet is keyed `mesoderm` in the default build and by COLUMN under the model's `split` variant — the same surface, keyed two ways, because emitting both in one build would put two coincident sheets in the picture (RENDER-STANDARD section 2.5, scratches, on every beat). Beats 1-4 and 7 use `mesoderm` (beats 1-2 as `mesoderm_block`; beats 3-4 show neither keying, only `ectoderm` and `endoderm`); beats 5, 6 AND 8 use the columns. CORRECTED BY THE ROUND-3 REVIEW, 2026-10-02: this sentence omitted beat 8, which shows paraxial, intermediate and lateral_plate alongside coelom and splanchnic and so uses the column keying too. The disjointness claim itself (acceptance row Q, and the harness check that no BEAT shows both keyings) was right and was re-checked against the scene ops this round; only the list of beats was wrong. Acceptance row Q asserts the two key sets are disjoint on the middle sheet, and the render harness asserts that no BEAT shows both, read off this scene's own ops rather than from a promise. The consequence a reviewer should know: the parts list for beats 5 and 6 has no \"mesoderm\" entry and the list for beats 1-4 and 7 has no columns, because at those beats those keys genuinely do not exist in the build the player loaded.",
+  "SOME KEYS DO NOT EXIST AT EVERY t, BY DESIGN, AND THE PLAYER WILL SAY SO. `hypoblast` resolves to nothing from t = 0.32 (day 17.2) because it has been evicted — which is the teaching point — and `coelom`, `somatic` and `splanchnic` resolve to nothing below t = 0.50 (day 19) because the plate has not cavitated. Every structure each beat SHOWS resolves at that beat's own t and the render harness checks exactly that, structure by structure, beat by beat. But a student who drags the stage slider will see parts drop out of the list, and for a part that has genuinely gone that is honest rather than a bug. It is listed here so a reviewer does not read it as one.",
+  "STATUS IS \"candidate\", NEVER \"ready\". ARTWORK-STANDARD: the builder does not review its own work, and only a review that did not build this may promote it. The build run's own proof is in BUILD-LOG.md with what it PROVED separated from what it ASSUMED.",
+  "THE SECTION BEATS AND THE PLAN BEATS DISAGREE ABOUT WHICH WAY IS UP ON SCREEN, and the scene cannot fix it. viz3d holds the camera's up-vector at world +y, which in this model's frame is CRANIAL, so from any camera except one looking along +/-y the screen's vertical axis is the cranio-caudal one. Beats 1 and 5 get the textbook orientation - dorsal up - only because their `superior` camera looks ALONG that axis and makes the up-vector degenerate. CORRECTED BY THE ROUND-2 REVIEW, 2026-10-02: this entry previously named `inferior` here, which is the camera that produced the INVERTED stack - round 1's blocking finding. Measured off the camera's world matrix after lookAt: inferior gives screen-up (0.000,0.001,+1.000) = VENTRAL, superior gives (0.000,0.001,-1.000) = DORSAL. Both orientations rest entirely on the SIGN of VIEW_DIR's 0.001 tilt, because viz3d assigns camera.up nowhere. UPDATED BY ROUND 3: beat 5 is now a transverse section on the same `superior` camera, so two of the three section beats now agree with each other and with every textbook figure of this subject, and the remaining odd one is beat 2. Beat 2 cannot use that camera (the hypoblast it is about is cranial at that stage and measures 0.000% from there), so its three layers come out as three vertical stripes side by side. A student moving between beat 2 and beats 1 or 5 sees the same stack rotated ninety degrees. The honest fixes are both outside this item: a per-view up-vector in viz3d, or the camera-aware refit that engine__refit-camera-on-isolate is ESCALATED for.",
+  "BEAT 2 CLEARS THE SUBJECT-COVERAGE FLOOR BY 0.12 OF A PERCENTAGE POINT (8.12% against 8.00%), and that margin is thin enough to be worth a reviewer's attention rather than a silence. It is the beat whose block window had to be longest — it is the only beat that must contain the streak, both ingression routes and a piece of surviving hypoblast at once, and those are spread over the disc's length while the frame the player fits is that length times the viewport aspect. Pulling the window's caudal limit in from -2.80 to -1.40 is what bought the margin; pulling it further starts cutting the routes. If a reviewer would rather have the routes dropped from this beat — the three SHOW_RELATIONSHIP arrows already carry the same three destinations, and viz3d draws them — the window could shorten again and the margin would roughly double.",
+  "BEAT 5 IS A TRANSVERSE SECTION BUILT BY A WINDOW, NOT BY A CUT, AND IT CARRIES THE SCENE'S ONLY FRAMING WAIVER. Round 2's open finding was that beat 5 promised a transverse picture and showed a plan view. Round 3 closed it with a new model variant, `slab`: the same lens, the same masks and the same height functions, built only inside a cranio-caudal window one somite thick (W_SOM, a typed dimension already in the model) at FULL mediolateral extent. Nothing is reshaped - acceptance row SL measures that every slab vertex lies inside the declared window, that the four surfaces agree with the whole disc's to 1e-9 units, that wherever the whole-disc build has all four section keys the slab has them too, and that the slab stays mirror-symmetric in x (worst residual 0.000) so it cannot become the first chiral thing in a model whose handedness is UNPROVEN. THE WINDOW'S LEVEL IS SOLVED, NOT TYPED, and that matters: the notochord lies cranial to the streak's tip, the three columns spread outwards from the streak, and the paraxial column is interrupted by its own intersegmental fissures once it segments, so a typed level would be right at one t and wrong at another. slabCenterY(t) scores every candidate level by the completeness of the section it would cut and takes the best; at beat 5's t = 0.50 it chooses y = 0.8929 with completeness 0.9565, meaning the least-represented of the four keys is at 96% of the best any level could give it. WHY THE SCENE NEEDED A NEW VARIANT RATHER THAN THE BLOCK IT ALREADY HAD: the block's window is PARAMEDIAN, on one side of the midline and clear of it, so at this stage it emits zero notochord and zero lateral plate - the two ends of the mediolateral reading. Negative case SL3 asserts exactly that, so the reason this variant exists is pinned rather than remembered. WHAT THE WAIVER COSTS AND WHY IT IS NOT A LOWERED THRESHOLD: the beat frames at 4.07% of the frame against an 8% floor, and visibility_waivers[0] carries the argument with a proof that 7.51% is the CEILING for any bilateral transverse section of this disc at this viewport. Every structure the beat draws or points at clears its own floor. The one-sided section that would clear the framing floor was measured at 9.09% and rejected because it drops the notochord to 0.236%, below the pointed-at floor. THE NARRATION WAS NOT TOUCHED. It was right all along; the picture was not. Beat 5's mode went back to cross_section, which is what round 2 had changed it away from when the beat became a peel.",
+  "ROUND 3'S OPEN FINDING IS NOT A DEFECT IN THIS MODEL OR THIS SCENE — IT IS AN ARTEFACT OF THE MEASURING TOOL, AND THE PICTURE A STUDENT SEES IS CLEAN. Round 3 (2026-10-02T18:35Z) reported beat 6 drawn with a grid of bright dashes over the RIGHT half of the disc and a smooth LEFT half, in a model declared mirror-symmetric in x — measured as the fraction of pixels with |laplacian| > 8 inside two mirror-image 180x550 boxes, left 11.54% right 33.23%, ratio 2.88. ROUND 4 REPRODUCED THAT NUMBER EXACTLY (11.56 / 33.11 / 2.86 on the committed viz-training/models-out/trilaminar-disc-3-germ-layers/player/beat06.png, and bit-identically from a fresh run of the same tool), SO THE OBSERVATION STANDS. WHAT IT IS AN OBSERVATION OF IS THE POINT. That frame is drawn by viz-training/tools/measure-scene-visibility.mjs, which is a REIMPLEMENTATION of viz3d and says so in its own header: 'IT IS NOT THE PLAYER ... if the two ever disagree, viz3d is right.' Round 4 therefore walked this scene in the REAL PLAYER with viz-training/tools/walk-scene-in-player.mjs, which loads viz3d.js, calls MB3D.mountScene and clicks the view chips, so the ops, the opacity and the per-view refit are viz3d's own code. MEASURED ON THE PLAYER'S OWN FRAMEBUFFER, BEAT 6 IS SYMMETRIC: textured fraction of the subject left 14.71% right 14.79%, RATIO 1.01, and the frame mirrored about the subject's own centre differs from itself by a mean of 1.19 grey levels. The build harness agrees (ratio 1.05). Only the replica disagrees (ratio 2.07 by the same subject-relative measure, mirror difference 5.93). THE CAUSE IS ONE LINE, AND IT IS IN THE TOOL. measure-scene-visibility.mjs, beauty pass: `if(o.material && s.opacity!=null){ o.material.transparent=true; o.material.opacity=s.opacity; }` — it sets transparent and opacity and NEVER SETS depthWrite, so it keeps three.js's default of TRUE. viz3d.js's procedural adapter sets `depthWrite: op >= 0.98`, which is FALSE for `somatic` at the authored 0.45. A depth-writing translucent DoubleSide sheet lying on the lateral plate z-fights, and z-fighting breaks mirror symmetry through float rounding that differs in sign between +x and -x — which is exactly the one-sided, grid-aligned dash field round 3 saw. PROVED BY REVERSAL: adding `o.material.depthWrite = s.opacity >= 0.98;` to a COPY of the tool and re-running drops beat 6 from 2.86 to 1.14, into agreement with the player's 1.01 and the harness's 1.05; beats 1-5, 7 and 8 come back PIXEL-IDENTICAL (0 changed pixels each) and beat 6 is the only frame that moves, which is right because `somatic` is the scene's only sub-0.98-opacity structure in a position to z-fight. ROUND 3 HAD THE MECHANISM AND DISCARDED IT for a good reason that happened to be aimed at the wrong renderer: it wrote 'forcing depthWrite ON for somatic DOES reproduce the pattern (3.18) but both viz3d code paths set it false at 0.45, so that is a lookalike and not the cause'. Both viz3d paths do set it false. There is a THIRD path — the tool that drew the frame being graded — and it sets it true. NOTHING IN THIS SCENE OR MODEL WAS CHANGED FOR THIS FINDING, and the model file is byte-identical to round 3's. DO NOT RE-OPEN THIS AGAINST THE MODEL. The tool defect is real, is NOT this item's to fix (it is shared by every scene, and its beauty pass feeds the alpha-aware `diffKey` number, so changing it can move reported percentages corpus-wide — round 4 could only verify that it moves none on THIS scene, where visibility.json is identical apart from output paths), and is written up in BUILD-LOG.md for a reviewer to turn into its own queue item. `somatic: 0.45` is load-bearing for beat 6 and was left alone.",
+  "NEW IN ROUND 4, AND ONLY THE REAL PLAYER CAN SEE IT: BEAT 7 CLIPS THE FRAME, AND THE THING THAT TOUCHES THE BORDER IS VIZ3D'S RELATIONSHIP LINE, NOT THE DISC. walk-scene-in-player.mjs reports beat 7 CLIPPED — 4 subject pixels on the frame border — and suppresses its per-structure shares in consequence, while every other beat passes. MEASURED: the border pixels are 2 px at the top row and 2 px at the bottom row, all at x = 383-384 of a 768-wide frame, which is the exact midline, and all carrying the same colour (97,94,112). They are a 2-px-wide vertical hairline running off the top and the bottom of the picture; the disc itself is comfortably inside the frame (at y=20 it spans x 357-411, at y=120 x 225-542). PROVED BY REMOVAL: re-running beat 7 in the real player against a copy of this scene with its single SHOW_RELATIONSHIP op deleted and NOTHING else changed reports clipped: 0 and prints all five structure shares. So the op is the cause, not the camera and not the geometry. viz3d.js:2262 drawPairs() builds a THREE.Line between center(meshes[from]) and center(meshes[to]) and adds it to `overlay`, a group created at viz3d.js:1425 as a SIBLING of `holder` under sceneObj — so it receives none of the per-view re-centring and rescaling that viz3d.js:1686-1688 applies to holder's children. ASSUMED, NOT PROVED: that the endpoints are therefore stale by one fit and the segment is drawn at a previous frame's scale, which would explain a line far longer than the span between the two membranes it joins. Round 4 did not isolate that, and it is in viz3d.js, which is shared by every scene — the same reason round 3 and the notochord build both declined to touch the engine. IT IS NOT THIS ITEM'S TO FIX. Left for a reviewer to file as an engine item, alongside the already-escalated engine__refit-camera-on-isolate. THE SCENE WAS NOT CHANGED TO WORK AROUND IT: deleting the SHOW_RELATIONSHIP op would clear the clip and would also delete the op that carries beat 7's whole point — 'the two places ectoderm stays fused to endoderm' — so the honest record is the finding, not a quieter beat. THE CORPUS-WIDE BLAST RADIUS IS UNMEASURED: this container holds only this scene, so how many of the 146 use SHOW_RELATIONSHIP was not counted and is not claimed.",
+  "THE QUEUE'S OWN STATUS DEFINITIONS AND THE QUEUE'S OWN DATA DISAGREE ABOUT THIS ITEM, and BUILD-TASK-PROMPT section 6 says the disagreement is the finding. BUILD-QUEUE.json defines `escalated` as 'three review rounds without converging. A human looks at it. Neither task touches it again'. This item carries review_rounds: 3 with open_findings_by_round [2,1,1] — three rounds, each leaving at least one open finding — yet round 3 set it to `changes-requested`, and queue-set.mjs --next duly handed it to round 4 as 'rework beats new work'. Round 4 took it because the build task's only hard rule is 'never take an item marked escalated' and it was not so marked, and because --next is the authority the prompt names. FLAGGED RATHER THAN ACTED ON: whether three rounds should have auto-escalated is a human's call, not a build run's. If the rule is meant literally, --next should refuse an item at review_rounds >= 3 instead of leaving each run to notice."
+ ]
 }

@@ -10,7 +10,7 @@ and a structure is covered when a scene exists for it carrying a view of each de
 
 | topic | structure | declared views | scene | status | missing |
 |---|---|---|---|---|---|
-| Back & Vertebral Column | Vertebral column | location, cross_section, mechanism | 6 views | ready | — |
+| Back & Vertebral Column | Vertebral column | location, cross_section, mechanism | 7 views | ready | — |
 | Back & Vertebral Column | Typical vertebra | location, cross_section | 6 views | ready | — |
 | Back & Vertebral Column | Intervertebral disc | cross_section, mechanism | 7 views | ready | — |
 | Back & Vertebral Column | Spinal cord in vertebral canal | location, cross_section, vasculature | 7 views | candidate | vasculature |
@@ -55,12 +55,12 @@ and a structure is covered when a scene exists for it carrying a view of each de
 | Thoracic Wall & Diaphragm | Diaphragm | location, mechanism, associated_organs | 9 views | ready | — |
 | Thoracic Wall & Diaphragm | Intercostal neurovascular bundle | cross_section, vasculature | 7 views | candidate | — |
 | Thoracic Wall & Diaphragm | Pleura & pleural cavity | cross_section, mechanism | 7 views | planned | — |
-| Heart & Pericardium | Heart (external) | location, associated_organs | 14 views | candidate | — |
+| Heart & Pericardium | Heart (external) | location, associated_organs | 16 views | candidate | — |
 | Heart & Pericardium | Heart chambers | cross_section, mechanism | 7 views | planned | — |
-| Heart & Pericardium | Cardiac cycle (pumping) | mechanism | 10 views | candidate | — |
+| Heart & Pericardium | Cardiac cycle (pumping) | mechanism | 11 views | candidate | — |
 | Heart & Pericardium | Coronary arteries & cardiac veins | vasculature, location | 12 views | candidate | — |
 | Heart & Pericardium | Conducting system | mechanism, location | 7 views | planned | — |
-| Heart & Pericardium | Heart valves | cross_section, mechanism | 9 views | candidate | — |
+| Heart & Pericardium | Heart valves | cross_section, mechanism | 10 views | candidate | — |
 | Lungs & Mediastinum | Lungs | location, cross_section, associated_organs | 7 views | ready | — |
 | Lungs & Mediastinum | Tracheobronchial tree | mechanism, location | 7 views | ready | — |
 | Lungs & Mediastinum | Mediastinum | location, associated_organs, cross_section | 8 views | ready | — |
@@ -99,29 +99,29 @@ and a structure is covered when a scene exists for it carrying a view of each de
 | topic | structure | declared views | scene | status | missing |
 |---|---|---|---|---|---|
 | Gametogenesis & Fertilization | Spermatogenesis & oogenesis | mechanism | 8 views | planned | — |
-| Gametogenesis & Fertilization | Fertilization | mechanism | 8 views | planned | — |
-| Gametogenesis & Fertilization | Cleavage & morula | mechanism | 8 views | planned | — |
-| Gametogenesis & Fertilization | Blastocyst | cross_section, mechanism | 8 views | planned | — |
-| Weeks 1-2: Implantation & Bilaminar Disc | Implantation | mechanism, associated_organs | 8 views | planned | — |
-| Weeks 1-2: Implantation & Bilaminar Disc | Bilaminar embryonic disc | cross_section | 9 views | planned | — |
-| Weeks 1-2: Implantation & Bilaminar Disc | Amniotic cavity & yolk sac | cross_section, location | 10 views | planned | — |
-| Weeks 1-2: Implantation & Bilaminar Disc | Chorion & placenta (early) | associated_organs, mechanism | 10 views | planned | — |
-| Week 3: Gastrulation | Primitive streak | mechanism, location | 8 views | planned | — |
-| Week 3: Gastrulation | Trilaminar disc (3 germ layers) | cross_section, mechanism | 8 views | planned | — |
-| Week 3: Gastrulation | Notochord | location, mechanism | 8 views | planned | — |
-| Week 3: Gastrulation | Neurulation (neural plate/tube) | cross_section, mechanism | 8 views | planned | — |
-| Folding of the Embryo | Cranio-caudal folding | mechanism, cross_section | 6 views | planned | — |
-| Folding of the Embryo | Lateral folding | mechanism, cross_section | 6 views | planned | — |
-| Folding of the Embryo | Primitive gut tube | location, mechanism | 6 views | planned | — |
-| Folding of the Embryo | Body cavity (coelom) | cross_section, mechanism | 6 views | planned | — |
-| Pharyngeal Apparatus | Pharyngeal arches | location, associated_organs | 5 views | planned | — |
+| Gametogenesis & Fertilization | Fertilization | mechanism | 9 views | candidate | — |
+| Gametogenesis & Fertilization | Cleavage & morula | mechanism | 11 views | candidate | — |
+| Gametogenesis & Fertilization | Blastocyst | cross_section, mechanism | 10 views | candidate | — |
+| Weeks 1-2: Implantation & Bilaminar Disc | Implantation | mechanism, associated_organs | 10 views | candidate | — |
+| Weeks 1-2: Implantation & Bilaminar Disc | Bilaminar embryonic disc | cross_section | 11 views | candidate | — |
+| Weeks 1-2: Implantation & Bilaminar Disc | Amniotic cavity & yolk sac | cross_section, location | 11 views | candidate | — |
+| Weeks 1-2: Implantation & Bilaminar Disc | Chorion & placenta (early) | associated_organs, mechanism | 10 views | candidate | — |
+| Week 3: Gastrulation | Primitive streak | mechanism, location | 10 views | candidate | — |
+| Week 3: Gastrulation | Trilaminar disc (3 germ layers) | cross_section, mechanism | 8 views | candidate | — |
+| Week 3: Gastrulation | Notochord | location, mechanism | 11 views | candidate | — |
+| Week 3: Gastrulation | Neurulation (neural plate/tube) | cross_section, mechanism | 9 views | candidate | — |
+| Folding of the Embryo | Cranio-caudal folding | mechanism, cross_section | 10 views | candidate | — |
+| Folding of the Embryo | Lateral folding | mechanism, cross_section | 11 views | candidate | — |
+| Folding of the Embryo | Primitive gut tube | location, mechanism | 18 views | candidate | — |
+| Folding of the Embryo | Body cavity (coelom) | cross_section, mechanism | 11 views | candidate | — |
+| Pharyngeal Apparatus | Pharyngeal arches | location, associated_organs | 6 views | candidate | — |
 | Pharyngeal Apparatus | Pharyngeal pouches | cross_section, glands | 5 views | planned | — |
 | Pharyngeal Apparatus | Pharyngeal clefts & membranes | cross_section | 5 views | planned | — |
 | Pharyngeal Apparatus | Thyroid gland development | mechanism, glands | 5 views | planned | — |
-| Cardiovascular Development | Heart tube formation | mechanism, cross_section | 5 views | planned | — |
-| Cardiovascular Development | Cardiac looping | mechanism | 9 views | candidate | mechanism |
-| Cardiovascular Development | Septation of heart | cross_section, mechanism | 5 views | planned | — |
-| Cardiovascular Development | Fetal circulation | vasculature, mechanism | 5 views | planned | — |
+| Cardiovascular Development | Heart tube formation | mechanism, cross_section | 9 views | candidate | — |
+| Cardiovascular Development | Cardiac looping | mechanism | 9 views | candidate | — |
+| Cardiovascular Development | Septation of heart | cross_section, mechanism | 6 views | candidate | — |
+| Cardiovascular Development | Fetal circulation | vasculature, mechanism | 14 views | candidate | — |
 | Respiratory System Development | Respiratory diverticulum | mechanism, location | 6 views | planned | — |
 | Respiratory System Development | Tracheoesophageal septum | cross_section, mechanism | 5 views | planned | — |
 | Respiratory System Development | Bronchial tree branching | mechanism | 6 views | planned | — |
@@ -240,8 +240,8 @@ and a structure is covered when a scene exists for it carrying a view of each de
 ## Where the gap actually is
 
 - **207** structures in the curriculum, declaring **397** view-slots between them.
-- **140** have a scene. Those scenes carry **1003** authored views — an average of **7.2 per structure**.
-- **276/397** declared view-slots are covered.
+- **140** have a scene. Those scenes carry **1066** authored views — an average of **7.6 per structure**.
+- **277/397** declared view-slots are covered.
 - **67** structures have no scene at all. That is the whole gap.
 
 The corpus is not thin inside the scenes it has — seven views per structure is already more than

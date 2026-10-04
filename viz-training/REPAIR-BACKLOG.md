@@ -645,3 +645,290 @@ is probably one decision applied twenty times. The kidney one is a hand-authored
 need its own answer.
 
 **Do not fix these by changing the framing.** The picture is wrong before the camera is involved.
+
+## 2026-09-30 · render-kit winds its ANNULAR END CAPS and CUTAWAY RIMS against their own normals
+
+**Found by** the model3d BUILD run on `embryology__folding-of-the-embryo__cranio-caudal-folding`.
+**Reproduced with no model in it:** `viz-training/tools/probe-kit-rim-winding.mjs`, checked in with this
+entry. **NOT FIXED — it needs its own queue item.** `render-kit.js` is under every procedural model in
+the corpus and changing it changes all of them at once.
+
+### What the probe measures
+
+Not a ray cast. It builds a *straight* thick-walled `sweptShell` — no curvature, no model, no options —
+and for every triangle compares the geometric normal `(b-a) x (c-a)` against the normals render-kit
+itself supplied for those three vertices. Disagreement is attributable to the code that wrote that span
+of the buffer and to nothing else.
+
+```
+render-kit.js, thick-walled sweptShell, straight tube, ring=24, rows=25
+  outer surface      0 / 1152 wound against their own normals
+  inner surface      0 / 1152
+  ANNULAR END CAPS   48 / 96
+  with a cutaway window (dir +z, half 0.9 rad, rows 6..18):
+  outer surface      0 / 960
+  inner+caps+RIM     86 / 1132   (plain shell, no rim: 48 / 1248)
+```
+
+**48 of 96 — exactly half.** That is the signature of one of the two branches of `cap(k, sign)` being
+backwards: `sign > 0` emits `quadFlip` and `sign < 0` emits `quad`, and one of the two is reversed. The
+cutaway rim adds a further 38 over the same shell without a window.
+
+### Why it has been invisible
+
+The same reasons RENDER-STANDARD 2.4b records for the case it did fix: the caps and rims sit inside the
+hull count so nothing inflates them into a silhouette, the materials are `DoubleSide`, and the shading
+is right because the normals were supplied. 2.4b fixed the SOLID path — `triN`, `domeCap` — and left the
+thick-walled path, which is every body wall, every gut tube, every vessel with an inner surface and
+every opened sac in the corpus.
+
+### How it shows
+
+Ray-cast first hits that face AWAY from the camera wherever a cut end or a window rim is exposed. On
+cranio-caudal-folding: 18 on the truncated trunk of the caudal-regression variant, 3 on the tail fold's
+caudal tip, 2-3 on the pericardial sac's window. **Zero on any outer surface.** That item's render tool
+attributes every back-facing first hit to hull vs non-hull and pins the non-hull ones rather than
+hiding them.
+
+### The claim this confirms, and the one it does not
+
+A build note on that same queue item asserted this on 2026-09-11 and cited a probe at
+`viz-training/tools/probe-kit-winding.mjs`. That build was **voided** on 2026-09-20 — nothing it
+described was ever written — and the probe it cited **has never existed**; checked again today. The
+assertion sat in the queue for nineteen days with nothing behind it. It turns out to have been right
+about the cap and the rim. It remains true that nothing in that note was checkable, and the file above
+exists so that this one is.
+
+---
+
+## 2026-10-01 · `meshes-hi/` IS NOT A SECOND TIER — IT IS A BYTE-FOR-BYTE COPY OF `meshes-lite/`
+
+Raised by the 2026-09-30 review of `gross__back-vertebral-column__coccyx` as finding 4: "meshes-hi/
+holds only the fused FMA16202, not the derived pair … a 404 on both the sacrum and the coccyx the day
+a second tier is published." The 404 is real. The premise under it is not, and the difference changes
+what should be done.
+
+Measured today, in this container, on files staged from the repo:
+
+```
+md5                               file                                  triangles
+a04e4d845d2e1e5e39df91fd13feb29f  meshes-hi/FMA16202.stl                   20,000
+a04e4d845d2e1e5e39df91fd13feb29f  meshes-lite/FMA16202.stl                 20,000   <- IDENTICAL
+6ab6f52119ae719e07c97d32e2433940  meshes-lite/FMA16202-sacrum.stl          20,000
+10916fb4a8feb4473203532a2350856c  meshes-lite/FMA16202-coccyx.stl           5,322
+8f2bf097b75054c9ee572837d3c57756  meshes/FMA16202-sacrum.stl               39,418
+10916fb4a8feb4473203532a2350856c  meshes/FMA16202-coccyx.stl                5,322   <- IDENTICAL to lite
+```
+
+`meshes-hi/FMA16202.stl` and `meshes-lite/FMA16202.stl` are the same 20,000 triangles with the same
+md5. `meshes-hi/` holds 49 files — exactly the vertebral-column scene's mesh set — and nothing in it
+is higher resolution than the lite tier. So it is not a partially-built `full` tier; it is a partial
+COPY of the lite one, under a name that says the opposite.
+
+Three consequences, none of which the original finding could see:
+
+1. **Publishing `meshes-hi/` as `MESH_TIERS.full` would do nothing at all** except 404 on the two
+   derived ids. Every file it holds is already what `lite` serves. A tier that returns identical bytes
+   is a tier that costs a second upload and buys no pixels.
+2. **For this bone the budget inverts the tiers.** `decimate-meshes.mjs --target 20000` caps the full
+   tier at 20,000 triangles, and `meshes/FMA16202-sacrum.stl` — the source — is 39,418. So a genuinely
+   regenerated `full` tier would hand the sacrum (role `part` → `full`) FEWER triangles than a
+   `context` structure gets from `meshes/`. That is worth knowing before anyone regenerates.
+3. The names mislead. `config.js` describes the full tier as living at `viz-training/meshes-part`
+   (`--out viz-training/meshes-part`), and no such directory exists. `meshes-hi` is not that
+   directory and is not what the comment describes.
+
+**Done today, and it is first aid rather than a fix:** `meshes-lite/FMA16202-sacrum.stl` and
+`meshes-lite/FMA16202-coccyx.stl` were copied into `meshes-hi/` unchanged. That makes `meshes-hi/`
+internally consistent — every file in it is now a copy of the corresponding lite file, which is what
+the other 49 already were — and removes the latent 404. It does NOT make it a full tier and must not
+be read as doing so.
+
+**Still open, and it needs a human or its own item:** is `meshes-hi/` meant to be deleted as a
+duplicate, renamed to `meshes-part`, or regenerated at a budget that is actually above lite? Nobody
+should publish `MESH_TIERS` until that is answered, and the answer is not a builder's to give.
+
+---
+
+## 2026-10-01 · `walk-scene-in-player.mjs` REPORTED ANIMATION AS GEOMETRY ON ANY TRACED BEAT
+
+Found while using the tool on mesh scenes for the first time (see BUILD-LOG, same date). **Fixed in
+the same run**; recorded here because the numbers it produced are already quotable in two walk
+outputs and because the shape of the mistake generalises.
+
+Every per-structure `share` the tool reports is a difference between two renders taken about a second
+apart: the beat as composed, then the beat with one structure's `visible` set to false. That is a
+measurement of the structure only if nothing else moved in between. On a beat running
+`TRACE_STRUCTURE`, something always does — `trace()` re-ghosts the whole scene at every waypoint, so
+the blend over most of the frame is still changing while the shares are being taken.
+
+What it produced, measured:
+
+- `gross__pelvis-perineum__bony-pelvis` beat 2 (`TRACE_STRUCTURE`, duration 7): **nine structures each
+  reported ~97.3% of subject**, among them `bladder` and `rectum` — which that beat explicitly hides.
+- `gross__pelvis-perineum__pelvic-diaphragm-levator-ani` beat 4 (`TRACE_STRUCTURE`, duration 6): the
+  coccyx reported **49.5% of frame**, while the same beat rendered in two separate runs, once with the
+  coccyx in the scene and once without it, differed by **0.783% of pixels**, peak delta 31.
+- Non-traced beats in the same two scenes were reproducible **to the pixel** across separate runs:
+  0.000% changed, peak delta 0. So the instability is specific, not ambient.
+
+**The fix is a measurement, not a special case for `TRACE_STRUCTURE`.** The tool now renders the same
+state twice and counts what moved (`selfDriftPx`, `selfDriftOfLit`). Above 1% of the lit subject it
+prints `SHARES SUPPRESSED (frame not still)` and reports no share for that beat. Framing, clipping,
+the subject span and the screenshots are all still produced, because none of them depends on two
+renders agreeing. Written as a drift measurement so it also catches anything else that animates,
+rather than only the one cause that was found.
+
+**The general shape, which is the part worth keeping:** a difference-of-two-renders metric is only
+valid on a still frame, and nothing in this corpus was checking that the frame was still. Any other
+harness that diffs two renders should be assumed to have the same hole until it is shown not to.
+
+---
+
+## engine · `trace()` REPLACES the highlight state instead of merging into it — so a traced view can hold no other op's lighting
+
+Filed 2026-10-01 by the model3d BUILD task, while taking review round 1's finding 1 on
+`embryology__folding-of-the-embryo__cranio-caudal-folding`. **Not fixed here, deliberately:**
+`viz3d.js` is under every model in this corpus, and a build session has been live in this repo during
+each of the last two runs. This needs its own `engine__` item.
+
+`trace(o)` in `viz3d.js` opens every waypoint with
+
+```js
+state.hi = {}; state.hi[k] = 0.85;
+state.only = subject ? [k, subject] : [k];
+state.ghosted = true;
+```
+
+so whatever any earlier op in the same view put in `state.hi` or `state.only` is gone the moment the
+first waypoint lights. `COMPARE_STRUCTURES` sets `state.only` to its targets and `state.hi[k] = 0.5`
+on each of them; a view running both ops therefore cannot draw its comparison, whatever order they
+are written in. **Measured in the real player, not reasoned about** — `viz-training/tools/probe-beat3-compare.mjs`,
+written in the same run, mounts the scene through `MB3D.mountScene`, clicks the chip a student clicks
+and samples `material.opacity`:
+
+| beat 3 as round 1 reviewed it | 0.5s | 1.5s | 3s | 5s | 7s | 9s | 12s | 16s |
+|---|---|---|---|---|---|---|---|---|
+| `head_order_before` | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 |
+| `head_order_after` | 0.10 | 0.10 | 0.10 | 0.10 | 0.10 | 0.10 | 0.10 | 0.10 |
+
+0.10 is the ghost floor — the same value the discarded context sits at. The scene was repaired by
+splitting the beat in two (RENDER-STANDARD §3.y), which is the right repair at the SCENE level and
+does nothing for the next author who writes the same pair of ops.
+
+**Second consequence of the same `traced` flag, and the sharper one.** `applyView()` computes
+`var traced = ops.some(TRACE_STRUCTURE)` and calls `frameView(700)` only `if (!traced)`, so no traced
+beat in the corpus gets a per-view camera fit. Measured on this scene with the repo's own gate,
+`viz-training/tools/measure-view-framing.mjs`, BEFORE any repair:
+
+| beat (9-beat version) | traces | fillW | fillH | clipped at rest |
+|---|---|---|---|---|
+| 3 | yes | 0.8% | 12.5% | no |
+| 4 | no | 14.4% | 89.4% | no |
+| 5 | yes | 9.9% | 18.7% | no |
+| 6 | yes | 10.8% | 68.1% | **YES — gate FAILURE** |
+
+Review round 1 reported this as beat 3 being "the only beat in the scene that never gets a per-view
+camera fit". It was not: beats 5 and 6 traced too, and beat 6 was failing the gate outright. A scene
+can only go so far here — moving `ROTATE_TO_VIEW` ahead of `TRACE_STRUCTURE` so the trace's own
+`flyTo` holds the newest camera ticket cleared beat 6's clip and improved beat 5 — but the framing of
+a traced view is an engine question and belongs with the item above.
+
+---
+
+## harness · `walk-scene-in-player.mjs` reports a traced beat's LAST waypoint and measures its FIRST
+
+Filed 2026-10-01 by the same run. The tool prints
+
+> `TRACE_STRUCTURE — waiting 7.5s for the walk to finish before measuring; the frame measured is the
+> trace's last waypoint, which is where the player parks it.`
+
+and then waits `duration + 1.5s`. In a headless container that wait is far too short, and the frame
+it measures is the walk's **first** stop. The cause is not the trace's own `step` (which is
+`max(1600, duration*1000/path.length)`, 2333 ms here) but `sayThen()`: its fallback timer is
+`max(readMs(text) + 8000, floorMs, 200)` whenever a SPEAK function is registered, and a stubbed
+`speechSynthesis` registers one and then never calls back. So each stop costs about twenty seconds.
+
+**Measured** with `probe-beat3-compare.mjs --beat 4`, sampling `material.opacity` out to 50 s on the
+three waypoints of a 7-second, three-stop trace:
+
+| | 1s | 4s | 8s | 12s | 16s | 20s | 26s | 32s | 40s | 50s |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `head_order_before` | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 0.10 | 0.10 | 0.10 | 0.10 |
+| `head_fold` | 0.10 | 0.10 | 0.10 | 0.10 | 0.10 | 0.10 | 0.45 | 0.45 | 0.45 | 0.10 |
+| `head_order_after` | 0.10 | 0.10 | 0.10 | 0.10 | 0.10 | 0.10 | 0.10 | 0.10 | 0.10 | **1.00** |
+
+The walk does complete and it does light one waypoint at a time, which is the trace working as
+designed. But `shares.json` for that beat records `subjectKeys: ["head_order_before"]`, the first
+stop, under a banner saying it is the last — so every traced beat the tool has ever reported, in any
+scene, has been measured at stop one. Nothing it says about a traced beat's framing or shares is
+wrong about a frame the player draws; it is wrong about WHICH frame. Two honest fixes: drive the walk
+from the player's own trace state rather than from a wall-clock guess, or register no SPEAK at all in
+the harness so `sayThen` falls through on `floorMs`. The second is one line and the first is correct.
+
+---
+
+## Routed by the model3d review run, 2026-10-02 (from `embryology__week-3-gastrulation__notochord`)
+
+Two defects in SHARED machinery, found by the notochord build run and deliberately not fixed there
+because a build or review run editing shared files changes every model in the corpus at once, unreviewed.
+The build run asked the reviewer to decide; the decision is that both are their own items.
+
+**1. `models3d/render-kit.js` — `sweptShell`'s ANNULAR end caps are wound backwards (one of the two).**
+Measured by the build run's own normals probe, with a minimal reproduction that involves nothing of the
+notochord model: a straight annulus, ring 24, 4 rows, outer 1.0, inner 0.6 — 480 triangles, **48 wound
+against their own supplied vertex normals, agreement 0.9000**. Outer surface 0/192 wrong, inner wall
+0/192 wrong, **end caps 48/96 wrong, all of the `cap(0, -1)` branch, buffer indices 432..479**. The same
+probe on a SOLID tube returns 0/240, because RENDER-STANDARD section 2.4b routed that path through `triN`.
+So the 2.4b fix reached the solid cap and not the annular one.
+
+*Consequence:* **every hollow `sweptShell` in the corpus has one cap inside out** — the neural tube, the
+gut tube, bronchi, great vessels — and the cutaway-rim branch is written the same way. It is invisible in
+normal rendering for exactly the reason 2.4b gives: the materials are `DoubleSide`, the normals are
+supplied, so the shading is right. It surfaces on the inverted-hull silhouette and on a first-hit ray cast.
+
+*Fix:* route the annular cap and the cutaway rim through `emitter().triN(p1, p2, p3, n)`, which decides
+vertex order from the geometry instead of from a comment, exactly as 2.4b requires. Then re-run the
+ray-cast probe across every model that uses a hollow `sweptShell`, because this changes them all.
+The notochord model is NOT affected: it emits its collars and annulus through its own `axialSweep`, whose
+annular caps already go through `triN`.
+
+**2. `tools/build-scene-index.mjs` — the DEGRADED map has no `procedural` key.** So every procedural
+scene's degraded ops are missing from `scenes/index.json`. Counted on the current index: **18 procedural
+entries carry `degrades: []`**. The notochord scene degrades `TRACE_STRUCTURE` (viz3d highlights rather
+than walking a centreline for the procedural provider) and its index entry says `degrades: []`, which is
+what the tool would have written — the entry is not a splice error, the tool is wrong.
+
+*Consequence:* the player cannot warn a student that an op is degraded for any procedural scene, and a
+reviewer reading `index.json` gets a clean bill that the scene files contradict.
+
+*Fix:* add a `procedural` key to the DEGRADED map in `build-scene-index.mjs`, then regenerate
+`index.json` on a machine that holds the whole corpus — NOT in a container holding three scenes, which is
+how a 146-scene index nearly got overwritten with a 3-scene one.
+
+**3. `viz3d.js` — `SHOW_RELATIONSHIP` is declared `native` but silently discards its `kind` text.**
+Found by the model3d review run, 2026-10-02, reviewing the notochord scene. The op is listed under
+`capabilities.native` for both the bodyparts3d adapter (viz3d.js:194) and the procedural one
+(:536). Its entire implementation is `drawPairs()` (:2263): a `THREE.Line` between the two
+structures' bounding-box centres, in one fixed colour. **`o.kind` is never read anywhere in the
+file** — `grep -n "\.kind" viz3d.js` returns nothing.
+
+*Consequence:* every teaching sentence any scene in this corpus has written into a relationship's
+`kind` is dead content, and the capability table tells the author it is natively supported. The
+notochord scene had `from: prechordal_plate, to: chordoma_clival, kind: "remnants anywhere along it
+become"` — teaching that clival chordoma arises from the prechordal plate, which is not notochord
+and is the structure the scene's own beat 5 uses to mark where the notochord STOPS. Because the text
+never renders, the error was invisible to every check that reads narration, and the only thing
+carrying the claim to the student was which end the line was drawn from. It survived three build
+rounds and two reviews. Fixed in that scene (`from` is now `definitive` for both masses); the engine
+defect is here.
+
+*Fix, either way round:* render `kind` as a small pin on the midpoint of the line — `addPin` already
+does the label-and-leader work and the midpoint is `pa.lerp(pb, 0.5)` — **or** move
+`SHOW_RELATIONSHIP` from `native` to `degraded` in both capability tables, so a scene author is told
+their sentence will not be shown. The first is better teaching; the second is honest in one line.
+Until one of them lands, a reviewer cannot take a relationship's text as something a student sees.
+
+*And the standing rule this suggests, for RENDER-STANDARD section 3:* **a capability listed as
+`native` is a claim about the adapter, not about the renderer.** Before trusting that an op teaches
+what its payload says, read what the op actually draws.

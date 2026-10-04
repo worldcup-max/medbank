@@ -1,1192 +1,1384 @@
 {
- "schema": 2,
- "id": "embryology__cardiovascular-development__septation-of-heart",
- "mode": "3d_anatomy",
- "deferred_modes": [
-  "sequence",
-  "diagram"
- ],
- "course": "Embryology",
- "topic": "Cardiovascular Development",
- "structure": "Septation of heart",
- "covers": [
-  "Septation of heart"
- ],
- "learning_goal": "Build the four septa in order — atrioventricular cushions, atrial septum primum and secundum, the muscular and membranous interventricular septum, and the spiral aorticopulmonary septum — say what each one divides and when, explain why the atrial septum must stay open before birth and shut after it, and derive atrial septal defect, atrioventricular septal defect, ventricular septal defect, transposition, persistent truncus arteriosus and tetralogy of Fallot from the exact step that failed.",
- "status": "candidate",
- "provider": {
-  "primary": "procedural",
-  "fallbacks": []
- },
- "match": {
-  "topics": [
-   "septation of the heart",
-   "cardiac septation",
-   "heart development",
-   "cardiovascular development",
-   "week 4",
-   "week 5",
-   "week 8",
-   "congenital heart disease",
-   "acyanotic heart disease",
-   "cyanotic heart disease",
-   "left to right shunt",
-   "right to left shunt"
+  "schema": 2,
+  "id": "embryology__cardiovascular-development__septation-of-heart",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "sequence",
+    "diagram"
   ],
-  "terms": [
-   "septation",
-   "cardiac septation",
-   "endocardial cushions",
-   "superior endocardial cushion",
-   "inferior endocardial cushion",
-   "atrioventricular canal",
-   "right atrioventricular canal",
-   "left atrioventricular canal",
-   "tricuspid valve",
-   "mitral valve",
-   "bicuspid valve",
-   "septum primum",
-   "ostium primum",
-   "foramen primum",
-   "ostium secundum",
-   "foramen secundum",
-   "septum secundum",
-   "foramen ovale",
-   "fossa ovalis",
-   "limbus fossae ovalis",
-   "flap valve",
-   "crista terminalis",
-   "sinus venarum",
-   "interventricular septum",
-   "muscular interventricular septum",
-   "membranous interventricular septum",
-   "primary interventricular foramen",
-   "interventricular foramen",
-   "conus cordis",
-   "truncus arteriosus",
-   "conotruncal ridges",
-   "conotruncal swellings",
-   "bulbar ridges",
-   "aorticopulmonary septum",
-   "spiral septum",
-   "neural crest",
-   "cardiac neural crest",
-   "atrial septal defect",
-   "ASD",
-   "secundum ASD",
-   "ostium primum defect",
-   "patent foramen ovale",
-   "PFO",
-   "paradoxical embolism",
-   "fixed split second heart sound",
-   "atrioventricular septal defect",
-   "AVSD",
-   "endocardial cushion defect",
-   "common AV canal",
-   "Down syndrome",
-   "trisomy 21",
-   "ventricular septal defect",
-   "VSD",
-   "membranous VSD",
-   "perimembranous VSD",
-   "left to right shunt",
-   "Eisenmenger syndrome",
-   "pansystolic murmur",
-   "transposition of the great arteries",
-   "TGA",
-   "persistent truncus arteriosus",
-   "tetralogy of Fallot",
-   "overriding aorta",
-   "pulmonary stenosis",
-   "right ventricular hypertrophy",
-   "DiGeorge",
-   "22q11 deletion",
-   "cyanosis",
-   "boot shaped heart",
-   "egg on a string"
-  ]
- },
- "camera": {
-  "framing": "anterior"
- },
- "structures": [
-  {
-   "key": "sinus",
-   "name": "Sinus venosus & venous inflow",
-   "label": "Sinus venosus & venous inflow",
-   "role": "part",
-   "group": "The looped tube",
-   "color": "#5b49ad",
-   "refs": {
-    "procedural": "septation-of-heart#sinus"
-   },
-   "terms": [
-    "sinus venosus",
-    "right horn",
-    "left horn",
-    "sinus venarum"
-   ]
+  "course": "Embryology",
+  "topic": "Cardiovascular Development",
+  "structure": "Septation of heart",
+  "covers": [
+    "Septation of heart"
+  ],
+  "learning_goal": "Build the four septa in order — atrioventricular cushions, atrial septum primum and secundum, the muscular and membranous interventricular septum, and the spiral aorticopulmonary septum — say what each one divides and when, explain why the atrial septum must stay open before birth and shut after it, and derive atrial septal defect, atrioventricular septal defect, ventricular septal defect, transposition, persistent truncus arteriosus and tetralogy of Fallot from the exact step that failed.",
+  "status": "candidate",
+  "provider": {
+    "primary": "procedural",
+    "fallbacks": []
   },
-  {
-   "key": "atrium",
-   "name": "Common atrium",
-   "label": "Common atrium",
-   "role": "part",
-   "group": "The looped tube",
-   "color": "#1f7fc4",
-   "refs": {
-    "procedural": "septation-of-heart#atrium"
-   },
-   "terms": [
-    "common atrium",
-    "primitive atrium",
-    "right atrium",
-    "left atrium"
-   ]
+  "match": {
+    "topics": [
+      "septation of the heart",
+      "cardiac septation",
+      "heart development",
+      "cardiovascular development",
+      "week 4",
+      "week 5",
+      "week 8",
+      "congenital heart disease",
+      "acyanotic heart disease",
+      "cyanotic heart disease",
+      "left to right shunt",
+      "right to left shunt"
+    ],
+    "terms": [
+      "septation",
+      "cardiac septation",
+      "endocardial cushions",
+      "superior endocardial cushion",
+      "inferior endocardial cushion",
+      "atrioventricular canal",
+      "right atrioventricular canal",
+      "left atrioventricular canal",
+      "tricuspid valve",
+      "mitral valve",
+      "bicuspid valve",
+      "septum primum",
+      "ostium primum",
+      "foramen primum",
+      "ostium secundum",
+      "foramen secundum",
+      "septum secundum",
+      "foramen ovale",
+      "fossa ovalis",
+      "limbus fossae ovalis",
+      "flap valve",
+      "crista terminalis",
+      "sinus venarum",
+      "interventricular septum",
+      "muscular interventricular septum",
+      "membranous interventricular septum",
+      "primary interventricular foramen",
+      "interventricular foramen",
+      "conus cordis",
+      "truncus arteriosus",
+      "conotruncal ridges",
+      "conotruncal swellings",
+      "bulbar ridges",
+      "aorticopulmonary septum",
+      "spiral septum",
+      "neural crest",
+      "cardiac neural crest",
+      "atrial septal defect",
+      "ASD",
+      "secundum ASD",
+      "ostium primum defect",
+      "patent foramen ovale",
+      "PFO",
+      "paradoxical embolism",
+      "fixed split second heart sound",
+      "atrioventricular septal defect",
+      "AVSD",
+      "endocardial cushion defect",
+      "common AV canal",
+      "Down syndrome",
+      "trisomy 21",
+      "ventricular septal defect",
+      "VSD",
+      "membranous VSD",
+      "perimembranous VSD",
+      "left to right shunt",
+      "Eisenmenger syndrome",
+      "pansystolic murmur",
+      "transposition of the great arteries",
+      "TGA",
+      "persistent truncus arteriosus",
+      "tetralogy of Fallot",
+      "overriding aorta",
+      "pulmonary stenosis",
+      "right ventricular hypertrophy",
+      "DiGeorge",
+      "22q11 deletion",
+      "cyanosis",
+      "boot shaped heart",
+      "egg on a string"
+    ]
   },
-  {
-   "key": "ventricle",
-   "name": "Primitive ventricle (left ventricle)",
-   "label": "Primitive ventricle (left ventricle)",
-   "role": "part",
-   "group": "The looped tube",
-   "color": "#c02a3a",
-   "refs": {
-    "procedural": "septation-of-heart#ventricle"
-   },
-   "terms": [
-    "primitive ventricle",
-    "left ventricle",
-    "ventricular loop"
-   ]
+  "camera": {
+    "framing": "anterior"
   },
-  {
-   "key": "bulbus",
-   "name": "Bulbus cordis & conus (right ventricle)",
-   "label": "Bulbus cordis & conus (right ventricle)",
-   "role": "part",
-   "group": "The looped tube",
-   "color": "#d85c26",
-   "refs": {
-    "procedural": "septation-of-heart#bulbus"
-   },
-   "terms": [
-    "bulbus cordis",
-    "conus cordis",
-    "conus arteriosus",
-    "infundibulum",
-    "right ventricle"
-   ]
-  },
-  {
-   "key": "truncus",
-   "name": "Truncus arteriosus",
-   "label": "Truncus arteriosus",
-   "role": "part",
-   "group": "The looped tube",
-   "color": "#cf9a1e",
-   "refs": {
-    "procedural": "septation-of-heart#truncus"
-   },
-   "terms": [
-    "truncus arteriosus",
-    "aortic sac",
-    "conotruncus"
-   ]
-  },
-  {
-   "key": "av_cushions",
-   "name": "Endocardial cushions",
-   "label": "Endocardial cushions",
-   "role": "part",
-   "group": "Atrioventricular canal",
-   "color": "#2fa68a",
-   "refs": {
-    "procedural": "septation-of-heart#av_cushions"
-   },
-   "terms": [
-    "endocardial cushions",
-    "superior cushion",
-    "inferior cushion",
-    "dorsal cushion",
-    "ventral cushion",
-    "cardiac jelly",
-    "atrioventricular canal",
-    "epithelial to mesenchymal transformation",
-    "right atrioventricular canal",
-    "left atrioventricular canal",
-    "tricuspid valve",
-    "mitral valve",
-    "bicuspid valve",
-    "atrioventricular valves",
-    "undermining",
-    "chordae tendineae",
-    "papillary muscles"
-   ]
-  },
-  {
-   "key": "septum_primum",
-   "name": "Septum primum",
-   "label": "Septum primum",
-   "role": "part",
-   "group": "Atrial septum",
-   "color": "#e8d6a8",
-   "refs": {
-    "procedural": "septation-of-heart#septum_primum"
-   },
-   "terms": [
-    "septum primum",
-    "ostium primum",
-    "ostium secundum",
-    "foramen primum",
-    "foramen secundum",
-    "flap valve",
-    "fossa ovalis floor"
-   ]
-  },
-  {
-   "key": "septum_secundum",
-   "name": "Septum secundum",
-   "label": "Septum secundum",
-   "role": "part",
-   "group": "Atrial septum",
-   "color": "#b08246",
-   "refs": {
-    "procedural": "septation-of-heart#septum_secundum"
-   },
-   "terms": [
-    "septum secundum",
-    "foramen ovale",
-    "limbus",
-    "crista dividens",
-    "fossa ovalis"
-   ]
-  },
-  {
-   "key": "shunt",
-   "name": "Fetal right-to-left shunt",
-   "label": "Fetal right-to-left shunt",
-   "role": "part",
-   "group": "Atrial septum",
-   "color": "#e25f3a",
-   "refs": {
-    "procedural": "septation-of-heart#shunt"
-   },
-   "terms": [
-    "right to left shunt",
-    "foramen ovale flow",
-    "fetal circulation",
-    "right atrial pressure",
-    "left atrial pressure",
-    "first breath",
-    "functional closure",
-    "probe patent foramen ovale"
-   ]
-  },
-  {
-   "key": "muscular_ivs",
-   "name": "Muscular interventricular septum",
-   "label": "Muscular interventricular septum",
-   "role": "part",
-   "group": "Ventricular septum",
-   "color": "#9e2430",
-   "refs": {
-    "procedural": "septation-of-heart#muscular_ivs"
-   },
-   "terms": [
-    "muscular interventricular septum",
-    "interventricular foramen",
-    "ventricular ballooning"
-   ]
-  },
-  {
-   "key": "membranous_ivs",
-   "name": "Membranous interventricular septum",
-   "label": "Membranous interventricular septum",
-   "role": "part",
-   "group": "Ventricular septum",
-   "color": "#dcc7d8",
-   "refs": {
-    "procedural": "septation-of-heart#membranous_ivs"
-   },
-   "terms": [
-    "membranous interventricular septum",
-    "membranous septum",
-    "week 7",
-    "three tissue junction",
-    "inferior endocardial cushion",
-    "bulbar ridges",
-    "right bulbar ridge",
-    "left bulbar ridge"
-   ]
-  },
-  {
-   "key": "spiral_septum",
-   "name": "Aorticopulmonary (spiral) septum",
-   "label": "Aorticopulmonary (spiral) septum",
-   "role": "part",
-   "group": "Outflow tract",
-   "color": "#7d3c98",
-   "refs": {
-    "procedural": "septation-of-heart#spiral_septum"
-   },
-   "terms": [
-    "aorticopulmonary septum",
-    "spiral septum",
-    "conotruncal ridges",
-    "bulbar ridges",
-    "truncal ridges",
-    "neural crest",
-    "conotruncal septum",
-    "180 degree spiral"
-   ]
-  },
-  {
-   "key": "aortic_channel",
-   "name": "Aortic channel",
-   "label": "Aortic channel",
-   "role": "part",
-   "group": "Outflow tract",
-   "color": "#d0405a",
-   "refs": {
-    "procedural": "septation-of-heart#aortic_channel"
-   },
-   "terms": [
-    "ascending aorta",
-    "aortic channel",
-    "aortic orifice",
-    "posterior",
-    "from the left ventricle"
-   ]
-  },
-  {
-   "key": "pulmonary_channel",
-   "name": "Pulmonary channel",
-   "label": "Pulmonary channel",
-   "role": "part",
-   "group": "Outflow tract",
-   "color": "#3f7fd0",
-   "refs": {
-    "procedural": "septation-of-heart#pulmonary_channel"
-   },
-   "terms": [
-    "pulmonary trunk",
-    "pulmonary channel",
-    "pulmonary orifice",
-    "anterior",
-    "from the right ventricle"
-   ]
-  },
-  {
-   "key": "avsd",
-   "name": "Atrioventricular septal defect",
-   "label": "Atrioventricular septal defect",
-   "role": "part",
-   "group": "Defects",
-   "color": "#2fa68a",
-   "refs": {
-    "procedural": "septation-of-heart#av_cushions@1+avsd"
-   },
-   "terms": [
-    "atrioventricular septal defect",
-    "AVSD",
-    "endocardial cushion defect",
-    "common AV valve",
-    "ostium primum ASD",
-    "Down syndrome",
-    "trisomy 21"
-   ]
-  },
-  {
-   "key": "asd",
-   "name": "Secundum atrial septal defect",
-   "label": "Secundum atrial septal defect",
-   "role": "part",
-   "group": "Defects",
-   "color": "#e8d6a8",
-   "refs": {
-    "procedural": "septation-of-heart#septum_primum@1+asd"
-   },
-   "terms": [
-    "atrial septal defect",
-    "secundum ASD",
-    "patent foramen ovale",
-    "excessive resorption",
-    "left to right shunt",
-    "paradoxical embolism"
-   ]
-  },
-  {
-   "key": "vsd",
-   "name": "Membranous ventricular septal defect",
-   "label": "Membranous ventricular septal defect",
-   "role": "part",
-   "group": "Defects",
-   "color": "#9e2430",
-   "refs": {
-    "procedural": "septation-of-heart#muscular_ivs@1+vsd"
-   },
-   "terms": [
-    "ventricular septal defect",
-    "VSD",
-    "membranous VSD",
-    "perimembranous",
-    "left to right shunt",
-    "Eisenmenger syndrome"
-   ]
-  },
-  {
-   "key": "tga",
-   "name": "Transposition of the great arteries",
-   "label": "Transposition of the great arteries",
-   "role": "part",
-   "group": "Defects",
-   "color": "#7d3c98",
-   "refs": {
-    "procedural": "septation-of-heart#spiral_septum@1+transposition"
-   },
-   "terms": [
-    "transposition of the great arteries",
-    "d-TGA",
-    "non-spiral septum",
-    "parallel circulations"
-   ]
-  },
-  {
-   "key": "truncus_persistent",
-   "name": "Persistent truncus arteriosus",
-   "label": "Persistent truncus arteriosus",
-   "role": "part",
-   "group": "Defects",
-   "color": "#cf9a1e",
-   "refs": {
-    "procedural": "septation-of-heart#spiral_septum@1+truncus_persistent"
-   },
-   "terms": [
-    "persistent truncus arteriosus",
-    "common trunk",
-    "neural crest",
-    "22q11 deletion",
-    "DiGeorge"
-   ]
-  },
-  {
-   "key": "fallot",
-   "name": "Tetralogy of Fallot",
-   "label": "Tetralogy of Fallot",
-   "role": "part",
-   "group": "Defects",
-   "color": "#d85c26",
-   "refs": {
-    "procedural": "septation-of-heart#spiral_septum@1+fallot"
-   },
-   "terms": [
-    "tetralogy of Fallot",
-    "anterior displacement",
-    "overriding aorta",
-    "pulmonary stenosis",
-    "infundibular stenosis",
-    "right ventricular hypertrophy",
-    "boot shaped heart"
-   ]
-  },
-  {
-   "key": "midline",
-   "name": "Median plane",
-   "label": "Median plane",
-   "role": "context",
-   "group": "References",
-   "color": "#9aa6bf",
-   "refs": {
-    "procedural": "septation-of-heart#midline"
-   },
-   "terms": [
-    "median plane",
-    "midline",
-    "sagittal"
-   ]
-  }
- ],
- "views": [
-  {
-   "mode": "mechanism",
-   "beat": 1,
-   "title": "One lumen, four walls, four weeks",
-   "ops": [
+  "structures": [
     {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
+      "key": "sinus",
+      "name": "Sinus venosus & venous inflow",
+      "label": "Sinus venosus & venous inflow",
+      "role": "part",
+      "group": "The looped tube",
+      "color": "#5b49ad",
+      "refs": {
+        "procedural": "septation-of-heart#sinus"
+      },
+      "terms": [
+        "sinus venosus",
+        "right horn",
+        "left horn",
+        "sinus venarum"
+      ]
     },
     {
-     "op": "SET_STAGE",
-     "t": 0.0
+      "key": "atrium",
+      "name": "Common atrium",
+      "label": "Common atrium",
+      "role": "part",
+      "group": "The looped tube",
+      "color": "#1f7fc4",
+      "refs": {
+        "procedural": "septation-of-heart#atrium"
+      },
+      "terms": [
+        "common atrium",
+        "primitive atrium",
+        "right atrium",
+        "left atrium"
+      ]
     },
     {
-     "op": "SHOW_STRUCTURE",
-     "target": "sinus"
+      "key": "ventricle",
+      "name": "Primitive ventricle (left ventricle)",
+      "label": "Primitive ventricle (left ventricle)",
+      "role": "part",
+      "group": "The looped tube",
+      "color": "#c02a3a",
+      "refs": {
+        "procedural": "septation-of-heart#ventricle"
+      },
+      "terms": [
+        "primitive ventricle",
+        "left ventricle",
+        "ventricular loop"
+      ]
     },
     {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrium"
+      "key": "bulbus",
+      "name": "Bulbus cordis & conus (right ventricle)",
+      "label": "Bulbus cordis & conus (right ventricle)",
+      "role": "part",
+      "group": "The looped tube",
+      "color": "#d85c26",
+      "refs": {
+        "procedural": "septation-of-heart#bulbus"
+      },
+      "terms": [
+        "bulbus cordis",
+        "conus cordis",
+        "conus arteriosus",
+        "infundibulum",
+        "right ventricle"
+      ]
     },
     {
-     "op": "SHOW_STRUCTURE",
-     "target": "ventricle"
+      "key": "truncus",
+      "name": "Truncus arteriosus",
+      "label": "Truncus arteriosus",
+      "role": "part",
+      "group": "The looped tube",
+      "color": "#cf9a1e",
+      "refs": {
+        "procedural": "septation-of-heart#truncus"
+      },
+      "terms": [
+        "truncus arteriosus",
+        "aortic sac",
+        "conotruncus"
+      ]
     },
     {
-     "op": "SHOW_STRUCTURE",
-     "target": "bulbus"
+      "key": "av_cushions",
+      "name": "Endocardial cushions",
+      "label": "Endocardial cushions",
+      "role": "part",
+      "group": "Atrioventricular canal",
+      "color": "#2fa68a",
+      "refs": {
+        "procedural": "septation-of-heart#av_cushions"
+      },
+      "terms": [
+        "endocardial cushions",
+        "superior cushion",
+        "inferior cushion",
+        "dorsal cushion",
+        "ventral cushion",
+        "cardiac jelly",
+        "atrioventricular canal",
+        "epithelial to mesenchymal transformation",
+        "right atrioventricular canal",
+        "left atrioventricular canal",
+        "tricuspid valve",
+        "mitral valve",
+        "bicuspid valve",
+        "atrioventricular valves",
+        "undermining",
+        "chordae tendineae",
+        "papillary muscles"
+      ]
     },
     {
-     "op": "SHOW_STRUCTURE",
-     "target": "truncus"
+      "key": "septum_primum",
+      "name": "Septum primum",
+      "label": "Septum primum",
+      "role": "part",
+      "group": "Atrial septum",
+      "color": "#e8d6a8",
+      "refs": {
+        "procedural": "septation-of-heart#septum_primum"
+      },
+      "terms": [
+        "septum primum",
+        "ostium primum",
+        "ostium secundum",
+        "foramen primum",
+        "foramen secundum",
+        "flap valve",
+        "fossa ovalis floor"
+      ]
     },
     {
-     "op": "SHOW_STRUCTURE",
-     "target": "midline"
+      "key": "septum_secundum",
+      "name": "Septum secundum",
+      "label": "Septum secundum",
+      "role": "part",
+      "group": "Atrial septum",
+      "color": "#b08246",
+      "refs": {
+        "procedural": "septation-of-heart#septum_secundum"
+      },
+      "terms": [
+        "septum secundum",
+        "foramen ovale",
+        "limbus",
+        "crista dividens",
+        "fossa ovalis"
+      ]
     },
     {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "The looped tube",
-     "intensity": 0.9
+      "key": "shunt",
+      "name": "Fetal right-to-left shunt",
+      "label": "Fetal right-to-left shunt",
+      "role": "part",
+      "group": "Atrial septum",
+      "color": "#e25f3a",
+      "refs": {
+        "procedural": "septation-of-heart#shunt"
+      },
+      "terms": [
+        "right to left shunt",
+        "foramen ovale flow",
+        "fetal circulation",
+        "right atrial pressure",
+        "left atrial pressure",
+        "first breath",
+        "functional closure",
+        "probe patent foramen ovale"
+      ]
     },
     {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
+      "key": "muscular_ivs",
+      "name": "Muscular interventricular septum",
+      "label": "Muscular interventricular septum",
+      "role": "part",
+      "group": "Ventricular septum",
+      "color": "#9e2430",
+      "refs": {
+        "procedural": "septation-of-heart#muscular_ivs"
+      },
+      "terms": [
+        "muscular interventricular septum",
+        "interventricular foramen",
+        "ventricular ballooning"
+      ]
+    },
+    {
+      "key": "membranous_ivs",
+      "name": "Membranous interventricular septum",
+      "label": "Membranous interventricular septum",
+      "role": "part",
+      "group": "Ventricular septum",
+      "color": "#dcc7d8",
+      "refs": {
+        "procedural": "septation-of-heart#membranous_ivs"
+      },
+      "terms": [
+        "membranous interventricular septum",
+        "membranous septum",
+        "week 7",
+        "three tissue junction",
+        "inferior endocardial cushion",
+        "bulbar ridges",
+        "right bulbar ridge",
+        "left bulbar ridge"
+      ]
+    },
+    {
+      "key": "spiral_septum",
+      "name": "Aorticopulmonary (spiral) septum",
+      "label": "Aorticopulmonary (spiral) septum",
+      "role": "part",
+      "group": "Outflow tract",
+      "color": "#7d3c98",
+      "refs": {
+        "procedural": "septation-of-heart#spiral_septum"
+      },
+      "terms": [
+        "aorticopulmonary septum",
+        "spiral septum",
+        "conotruncal ridges",
+        "bulbar ridges",
+        "truncal ridges",
+        "neural crest",
+        "conotruncal septum",
+        "180 degree spiral"
+      ]
+    },
+    {
+      "key": "aortic_channel",
+      "name": "Aortic channel",
+      "label": "Aortic channel",
+      "role": "part",
+      "group": "Outflow tract",
+      "color": "#d0405a",
+      "refs": {
+        "procedural": "septation-of-heart#aortic_channel"
+      },
+      "terms": [
+        "ascending aorta",
+        "aortic channel",
+        "aortic orifice",
+        "posterior",
+        "from the left ventricle"
+      ]
+    },
+    {
+      "key": "pulmonary_channel",
+      "name": "Pulmonary channel",
+      "label": "Pulmonary channel",
+      "role": "part",
+      "group": "Outflow tract",
+      "color": "#3f7fd0",
+      "refs": {
+        "procedural": "septation-of-heart#pulmonary_channel"
+      },
+      "terms": [
+        "pulmonary trunk",
+        "pulmonary channel",
+        "pulmonary orifice",
+        "anterior",
+        "from the right ventricle"
+      ]
+    },
+    {
+      "key": "avsd",
+      "name": "Atrioventricular septal defect",
+      "label": "Atrioventricular septal defect",
+      "role": "part",
+      "group": "Defects",
+      "color": "#2fa68a",
+      "refs": {
+        "procedural": "septation-of-heart#av_cushions@1+avsd"
+      },
+      "terms": [
+        "atrioventricular septal defect",
+        "AVSD",
+        "endocardial cushion defect",
+        "common AV valve",
+        "ostium primum ASD",
+        "Down syndrome",
+        "trisomy 21"
+      ]
+    },
+    {
+      "key": "asd",
+      "name": "Secundum atrial septal defect",
+      "label": "Secundum atrial septal defect",
+      "role": "part",
+      "group": "Defects",
+      "color": "#e8d6a8",
+      "refs": {
+        "procedural": "septation-of-heart#septum_primum@1+asd"
+      },
+      "terms": [
+        "atrial septal defect",
+        "secundum ASD",
+        "patent foramen ovale",
+        "excessive resorption",
+        "left to right shunt",
+        "paradoxical embolism"
+      ]
+    },
+    {
+      "key": "vsd",
+      "name": "Membranous ventricular septal defect",
+      "label": "Membranous ventricular septal defect",
+      "role": "part",
+      "group": "Defects",
+      "color": "#9e2430",
+      "refs": {
+        "procedural": "septation-of-heart#muscular_ivs@1+vsd"
+      },
+      "terms": [
+        "ventricular septal defect",
+        "VSD",
+        "membranous VSD",
+        "perimembranous",
+        "left to right shunt",
+        "Eisenmenger syndrome"
+      ]
+    },
+    {
+      "key": "tga",
+      "name": "Transposition of the great arteries",
+      "label": "Transposition of the great arteries",
+      "role": "part",
+      "group": "Defects",
+      "color": "#7d3c98",
+      "refs": {
+        "procedural": "septation-of-heart#spiral_septum@1+transposition"
+      },
+      "terms": [
+        "transposition of the great arteries",
+        "d-TGA",
+        "non-spiral septum",
+        "parallel circulations"
+      ]
+    },
+    {
+      "key": "truncus_persistent",
+      "name": "Persistent truncus arteriosus",
+      "label": "Persistent truncus arteriosus",
+      "role": "part",
+      "group": "Defects",
+      "color": "#cf9a1e",
+      "refs": {
+        "procedural": "septation-of-heart#spiral_septum@1+truncus_persistent"
+      },
+      "terms": [
+        "persistent truncus arteriosus",
+        "common trunk",
+        "neural crest",
+        "22q11 deletion",
+        "DiGeorge"
+      ]
+    },
+    {
+      "key": "fallot",
+      "name": "Tetralogy of Fallot",
+      "label": "Tetralogy of Fallot",
+      "role": "part",
+      "group": "Defects",
+      "color": "#d85c26",
+      "refs": {
+        "procedural": "septation-of-heart#spiral_septum@1+fallot"
+      },
+      "terms": [
+        "tetralogy of Fallot",
+        "anterior displacement",
+        "overriding aorta",
+        "pulmonary stenosis",
+        "infundibular stenosis",
+        "right ventricular hypertrophy",
+        "boot shaped heart"
+      ]
+    },
+    {
+      "key": "midline",
+      "name": "Median plane",
+      "label": "Median plane",
+      "role": "context",
+      "group": "References",
+      "color": "#9aa6bf",
+      "refs": {
+        "procedural": "septation-of-heart#midline"
+      },
+      "terms": [
+        "median plane",
+        "midline",
+        "sagittal"
+      ]
     }
-   ],
-   "narration": "Before any detail, fix the map. The looped heart has one continuous lumen, and between the middle of week four and the end of week eight four walls are built inside it. Cushions across the middle, a double sheet between the atria, a ridge between the ventricles, and a spiral wall down the outflow. Four jobs done in parallel, not one after the other, and each one has its own way of failing.\n\nLooping has finished and the heart is still one continuous tube bent into an S. Between the middle of week four and the end of week eight, four separate walls are built inside it and it becomes a four-chambered pump. Learn them as four jobs, not one event. The cushions divide the atrioventricular canal. The septum primum and secundum divide the atria. The muscular and membranous septum divides the ventricles. The spiral septum divides the outflow. Every congenital lesion in this topic is one of those four jobs done badly."
-  },
-  {
-   "mode": "cross_section",
-   "beat": 2,
-   "title": "The cushions — one fusion, four consequences",
-   "ops": [
+  ],
+  "views": [
     {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "One lumen, four walls, four weeks",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "bulbus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "truncus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midline"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Before any detail, fix the map. The looped heart has one continuous lumen, and between the middle of week four and the end of week eight four walls are built inside it. Cushions across the middle, a double sheet between the atria, a ridge between the ventricles, and a spiral wall down the outflow. Four jobs done in parallel, not one after the other, and each one has its own way of failing.\n\nLooping has finished and the heart is still one continuous tube bent into an S. Between the middle of week four and the end of week eight, four separate walls are built inside it and it becomes a four-chambered pump. Learn them as four jobs, not one event. The cushions divide the atrioventricular canal. The septum primum and secundum divide the atria. The muscular and membranous septum divides the ventricles. The spiral septum divides the outflow. Every congenital lesion in this topic is one of those four jobs done badly.",
+      "claims": [
+        {
+          "id": "v1-one-lumen",
+          "claim": "the looped heart is still ONE continuous lumen — not one of the four walls exists yet",
+          "measure": "septaPresent",
+          "op": "atMost",
+          "value": 1e-9
+        },
+        {
+          "id": "v1-day-25",
+          "claim": "this is the middle of week four, before any septation",
+          "measure": "day",
+          "op": "near",
+          "value": 25,
+          "tol": 0.05
+        }
+      ]
     },
     {
-     "op": "SET_STAGE",
-     "t": 0.323
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "The cushions — one fusion, four consequences",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.323
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "av_cushions"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "av_cushions"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "av_cushions",
+          "intensity": 0.55
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Cut across the atrioventricular canal and watch the two cushions meet. That one fusion divides the canal, forms the valve leaflets, closes the bottom of the atrial septum and helps close the top of the ventricular septum. Because it does four jobs, its failure produces one lesion with four features — a hole in the lower atrial septum, a hole in the upper ventricular septum, one common valve instead of two, and a large shunt from the first weeks of life. That lesion is the atrioventricular septal defect, and trisomy twenty-one is its classic company.\n\nSwellings of cardiac jelly appear in the roof and floor of the atrioventricular canal and grow towards each other. By the end of week five they meet and fuse in the middle. That single fusion does four things at once, which is why it matters more than its size suggests: it splits one atrioventricular canal into a right and a left, it forms the valve leaflets on each side, it closes the lower part of the atrial septum, and it contributes the membranous part of the ventricular septum. One structure, four contributions — remember that list and the defects explain themselves.\n\nOnce the cushions have fused, the right canal leads into the right ventricle and the left canal into the left. The valves that guard them are not sculpted from the cushions alone; the ventricular wall beneath is hollowed out from below, leaving cords and papillary muscles still attached to the flaps. That is why the atrioventricular valves have tendinous cords and the outflow valves do not, and it is why the tricuspid and mitral apparatus can fail at the muscle rather than at the leaflet.",
+      "claims": [
+        {
+          "id": "v2-cushions-fused",
+          "claim": "the two cushions have MET AND FUSED in the middle — the emitted masses interpenetrate and read as one",
+          "measure": "cushion.gapFrac",
+          "op": "atMost",
+          "value": 0
+        },
+        {
+          "id": "v2-two-masses",
+          "claim": "there are two cushion masses to fuse, not one blob and not none",
+          "measure": "cushion.masses",
+          "op": "equals",
+          "value": 2
+        },
+        {
+          "id": "v2-before-primum-arrives",
+          "claim": "the cushions fuse BEFORE the atrial septum arrives — septum primum is still descending",
+          "measure": "primum.descent",
+          "op": "between",
+          "value": [
+            0.8,
+            0.95
+          ]
+        },
+        {
+          "id": "v2-muscular-a-quarter",
+          "claim": "and while the muscular septum is only about a quarter grown — the four jobs run in parallel",
+          "measure": "muscular.height",
+          "op": "between",
+          "value": [
+            0.24,
+            0.32
+          ]
+        }
+      ]
     },
     {
-     "op": "SHOW_STRUCTURE",
-     "target": "sinus"
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Septum primum grows down, and is perforated before it arrives",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.29
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "bulbus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "truncus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "av_cushions"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "septum_primum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midline"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "septum_primum",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "A thin crescent of tissue, the septum primum, grows down from the roof of the common atrium towards the endocardial cushions. The gap that remains beneath its free edge is the ostium primum. This is the first attempt at an atrial wall and it is deliberately incomplete: the fetus must keep blood crossing from right to left, so a hole is required at every moment of development.\n\nBefore the septum primum reaches the cushions, small perforations appear in its upper part and run together into a second opening, the ostium secundum. Only then does the lower edge fuse with the cushions and shut the ostium primum. Read the sequence carefully — the new hole opens before the old one closes, so right-to-left flow is never interrupted for a single beat. Examiners like this order because a student who has memorised names rather than sequence always gets it the wrong way round.",
+      "claims": [
+        {
+          "id": "v3-primum-not-arrived",
+          "claim": "septum primum has NOT yet reached the cushions, so the ostium primum is still open beneath its free edge",
+          "measure": "primum.descent",
+          "op": "atMost",
+          "value": 0.9
+        },
+        {
+          "id": "v3-ostium2-formed",
+          "claim": "the perforations have already run together into a full-size ostium secundum",
+          "measure": "ostium2.radius",
+          "op": "atLeast",
+          "value": 0.145
+        },
+        {
+          "id": "v3-cushions-there",
+          "claim": "the cushions the primum is growing towards are drawn",
+          "measure": "cushion.masses",
+          "op": "equals",
+          "value": 2
+        }
+      ]
     },
     {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrium"
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Two sheets, two holes, and a shunt that is never closed",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.613
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "bulbus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "truncus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "av_cushions"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "septum_primum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "septum_secundum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "shunt"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midline"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "septum_primum",
+            "septum_secundum"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "shunt",
+          "path": [
+            "septum_secundum",
+            "septum_primum"
+          ],
+          "duration": 12
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Follow the blood, not the names. Septum primum grows down and leaves the ostium primum below it. Perforations open at its top and become the ostium secundum before the primum shuts, so the crossing is never interrupted. Septum secundum then grows down on the right with a low gap, the foramen ovale, while primum has a high gap. The two gaps do not line up, so flow can only run right to left — exactly what a fetus needs. At birth the pressures reverse and the thin sheet is pressed shut. If the sheets are too short to overlap, that is a secundum atrial septal defect; if they overlap but never fuse, it is a patent foramen ovale and usually silent until a clot takes the shortcut.\n\nA second, much thicker crescent then grows down immediately to the right of the septum primum. It never becomes a complete wall either: its free edge stops short and leaves the foramen ovale. So the atria are now separated by two overlapping incomplete sheets — a thick one on the right with a low gap, a thin one on the left with a high gap.\n\nBecause the gaps in the two sheets do not line up, blood can only cross one way. In the fetus, right atrial pressure exceeds left, so blood pushes the thin septum primum aside and passes into the left atrium. At birth the lungs open, pulmonary flow rises, left atrial pressure exceeds right, and the same thin sheet is pressed shut against the thick one. The valve closes because the pressures reverse, not because anything grows. The two sheets fuse over the following months, and what is left in the adult right atrium is the fossa ovalis with the limbus as its rim.",
+      "claims": [
+        {
+          "id": "v4-primum-complete",
+          "claim": "septum primum has arrived and the ostium primum is shut",
+          "measure": "primum.descent",
+          "op": "atLeast",
+          "value": 0.999
+        },
+        {
+          "id": "v4-secundum-just-complete",
+          "claim": "septum secundum has JUST finished growing down — this is the first instant the double sheet is complete",
+          "measure": "secundum.frac",
+          "op": "atLeast",
+          "value": 0.999
+        },
+        {
+          "id": "v4-foramen-ovale-open",
+          "claim": "its free edge stops short: the ostium secundum is still open above the limbus",
+          "measure": "ostium2.radius",
+          "op": "atLeast",
+          "value": 0.145
+        },
+        {
+          "id": "v4-sheets-overlap",
+          "claim": "the two sheets OVERLAP, so the gaps do not line up and flow can only run right to left",
+          "measure": "overlap",
+          "op": "atLeast",
+          "value": 0.1
+        },
+        {
+          "id": "v4-membranous-not-begun",
+          "claim": "the atrial job is finished while the membranous septum has not arrived — parallel jobs, and this one finishes first. Day 44.003 is 0.003 days into the membranous window, so the measure is 7.5e-7 rather than exactly 0; the floor is 0.01, which the beat clears by four orders of magnitude and which 0.05 of t later (day 45.55, 0.166) it does not.",
+          "measure": "membranous.frac",
+          "op": "atMost",
+          "value": 0.01
+        }
+      ]
     },
     {
-     "op": "SHOW_STRUCTURE",
-     "target": "ventricle"
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "The muscular septum is left standing, not pushed up",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.484
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "bulbus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "truncus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "av_cushions"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "muscular_ivs"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "muscular_ivs",
+          "intensity": 0.95
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "A muscular ridge rises from the floor of the ventricle towards the fused cushions. It does not push its way up so much as get left standing: the two ventricles balloon out on either side of it and the ridge between them becomes a wall. It stops short of the cushions, and the gap above its free edge is the interventricular foramen.",
+      "claims": [
+        {
+          "id": "v5-septum-standing",
+          "claim": "the muscular ridge is well up from the floor — about three quarters of its final height",
+          "measure": "muscular.frac",
+          "op": "between",
+          "value": [
+            0.65,
+            0.82
+          ]
+        },
+        {
+          "id": "v5-stops-short",
+          "claim": "it STOPS SHORT of the cushions: the interventricular foramen is open above its free edge",
+          "measure": "ivForamen",
+          "op": "atLeast",
+          "value": 0.04
+        },
+        {
+          "id": "v5-cushions-fused",
+          "claim": "the cushions it is rising towards are already fused",
+          "measure": "cushion.gapFrac",
+          "op": "atMost",
+          "value": 0
+        },
+        {
+          "id": "v5-nothing-has-closed-it",
+          "claim": "and nothing has closed that gap yet — the membranous part has not started",
+          "measure": "membranous.frac",
+          "op": "atMost",
+          "value": 1e-9
+        }
+      ]
     },
     {
-     "op": "SHOW_STRUCTURE",
-     "target": "bulbus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "truncus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "av_cushions"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "av_cushions",
-     "intensity": 0.95
-    },
-    {
-     "op": "CROSS_SECTION",
-     "axis": "y",
-     "offset": 0,
-     "animate": true
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "av_cushions",
-     "to": "membranous_ivs",
-     "kind": "the inferior cushion sends tissue down to help close"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
+      "mode": "mechanism",
+      "beat": 6,
+      "beat_was": 7,
+      "title": "Two neural crest ridges, before they become one wall",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.419
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "bulbus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "truncus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "spiral_septum"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "spiral_septum",
+          "intensity": 0.95
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Two ridges appear in the walls of the conus cordis and truncus arteriosus. The cells that build them do not come from the heart at all — they are cardiac neural crest cells that have migrated in through the pharyngeal arches. That single fact links the outflow defects to the face, the thymus and the parathyroids, which is why a child with a conotruncal lesion, a small chin, no thymic shadow and a low calcium is being pointed towards a twenty-two q eleven deletion.",
+      "claims": [
+        {
+          "id": "v6-ridges-appearing",
+          "claim": "the two conotruncal ridges have APPEARED but are nowhere near fused — this beat is \"two ridges\", not \"one wall\"",
+          "measure": "ridges.frac",
+          "op": "between",
+          "value": [
+            0.15,
+            0.45
+          ]
+        },
+        {
+          "id": "v6-cushions-fused",
+          "claim": "the atrioventricular cushions are already fused by the time the outflow ridges appear",
+          "measure": "cushion.gapFrac",
+          "op": "atMost",
+          "value": 0
+        },
+        {
+          "id": "v6-muscular-underway",
+          "claim": "and the muscular septum is already more than half built — the outflow is the last job to start",
+          "measure": "muscular.frac",
+          "op": "between",
+          "value": [
+            0.45,
+            0.7
+          ]
+        }
+      ]
     }
-   ],
-   "narration": "Cut across the atrioventricular canal and watch the two cushions meet. That one fusion divides the canal, forms the valve leaflets, closes the bottom of the atrial septum and helps close the top of the ventricular septum. Because it does four jobs, its failure produces one lesion with four features — a hole in the lower atrial septum, a hole in the upper ventricular septum, one common valve instead of two, and a large shunt from the first weeks of life. That lesion is the atrioventricular septal defect, and trisomy twenty-one is its classic company.\n\nSwellings of cardiac jelly appear in the roof and floor of the atrioventricular canal and grow towards each other. By the end of week five they meet and fuse in the middle. That single fusion does four things at once, which is why it matters more than its size suggests: it splits one atrioventricular canal into a right and a left, it forms the valve leaflets on each side, it closes the lower part of the atrial septum, and it contributes the membranous part of the ventricular septum. One structure, four contributions — remember that list and the defects explain themselves.\n\nOnce the cushions have fused, the right canal leads into the right ventricle and the left canal into the left. The valves that guard them are not sculpted from the cushions alone; the ventricular wall beneath is hollowed out from below, leaving cords and papillary muscles still attached to the flaps. That is why the atrioventricular valves have tendinous cords and the outflow valves do not, and it is why the tricuspid and mitral apparatus can fail at the muscle rather than at the leaflet."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 3,
-   "title": "Septum primum grows down, and is perforated before it arrives",
-   "ops": [
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SET_STAGE",
-     "t": 0.29
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "bulbus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "truncus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "av_cushions"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "septum_primum"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "midline"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "septum_primum",
-     "intensity": 0.95
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "lateral"
-    }
-   ],
-   "narration": "A thin crescent of tissue, the septum primum, grows down from the roof of the common atrium towards the endocardial cushions. The gap that remains beneath its free edge is the ostium primum. This is the first attempt at an atrial wall and it is deliberately incomplete: the fetus must keep blood crossing from right to left, so a hole is required at every moment of development.\n\nBefore the septum primum reaches the cushions, small perforations appear in its upper part and run together into a second opening, the ostium secundum. Only then does the lower edge fuse with the cushions and shut the ostium primum. Read the sequence carefully — the new hole opens before the old one closes, so right-to-left flow is never interrupted for a single beat. Examiners like this order because a student who has memorised names rather than sequence always gets it the wrong way round."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 4,
-   "title": "Two sheets, two holes, and a shunt that is never closed",
-   "ops": [
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SET_STAGE",
-     "t": 0.613
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "bulbus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "truncus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "av_cushions"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "septum_primum"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "septum_secundum"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "shunt"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "midline"
-    },
-    {
-     "op": "COMPARE_STRUCTURES",
-     "targets": [
-      "septum_primum",
-      "septum_secundum"
-     ],
-     "layout": "side-by-side"
-    },
-    {
-     "op": "TRACE_STRUCTURE",
-     "target": "shunt",
-     "path": [
-      "septum_secundum",
-      "septum_primum"
-     ],
-     "duration": 12
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "lateral"
-    }
-   ],
-   "narration": "Follow the blood, not the names. Septum primum grows down and leaves the ostium primum below it. Perforations open at its top and become the ostium secundum before the primum shuts, so the crossing is never interrupted. Septum secundum then grows down on the right with a low gap, the foramen ovale, while primum has a high gap. The two gaps do not line up, so flow can only run right to left — exactly what a fetus needs. At birth the pressures reverse and the thin sheet is pressed shut. If the sheets are too short to overlap, that is a secundum atrial septal defect; if they overlap but never fuse, it is a patent foramen ovale and usually silent until a clot takes the shortcut.\n\nA second, much thicker crescent then grows down immediately to the right of the septum primum. It never becomes a complete wall either: its free edge stops short and leaves the foramen ovale. So the atria are now separated by two overlapping incomplete sheets — a thick one on the right with a low gap, a thin one on the left with a high gap.\n\nBecause the gaps in the two sheets do not line up, blood can only cross one way. In the fetus, right atrial pressure exceeds left, so blood pushes the thin septum primum aside and passes into the left atrium. At birth the lungs open, pulmonary flow rises, left atrial pressure exceeds right, and the same thin sheet is pressed shut against the thick one. The valve closes because the pressures reverse, not because anything grows. The two sheets fuse over the following months, and what is left in the adult right atrium is the fossa ovalis with the limbus as its rim."
-  },
-  {
-   "mode": "cross_section",
-   "beat": 5,
-   "title": "The muscular septum is left standing, not pushed up",
-   "ops": [
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SET_STAGE",
-     "t": 0.484
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "bulbus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "truncus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "av_cushions"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "muscular_ivs"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "muscular_ivs",
-     "intensity": 0.95
-    },
-    {
-     "op": "CROSS_SECTION",
-     "axis": "x",
-     "offset": 0,
-     "animate": true
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    }
-   ],
-   "narration": "A muscular ridge rises from the floor of the ventricle towards the fused cushions. It does not push its way up so much as get left standing: the two ventricles balloon out on either side of it and the ridge between them becomes a wall. It stops short of the cushions, and the gap above its free edge is the interventricular foramen."
-  },
-  {
-   "mode": "cross_section",
-   "beat": 6,
-   "title": "The corner where three tissues meet",
-   "ops": [
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SET_STAGE",
-     "t": 0.806
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "bulbus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "truncus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "av_cushions"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "muscular_ivs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "membranous_ivs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "spiral_septum"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "membranous_ivs",
-     "intensity": 0.95
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "av_cushions",
-     "to": "membranous_ivs",
-     "kind": "the inferior cushion sends tissue down to help close"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "spiral_septum",
-     "to": "membranous_ivs",
-     "kind": "the bulbar ridges send tissue down from the outflow to help close"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    }
-   ],
-   "narration": "The muscular septum is not pushed up; the ventricles grow out around it and leave it standing. It stops short of the cushions, and the gap left above it is closed in week seven from three directions — the inferior cushion from above, and both conotruncal ridges from the outflow. Until that moment the aorta is not yet committed to the left ventricle. A corner where three separately growing tissues must meet exactly is where a wall fails, which is why the membranous part is the usual site of a ventricular septal defect, and why the murmur is pansystolic at the lower left sternal edge in a child who is pink rather than blue.\n\nThe interventricular foramen is shut in week seven by tissue from three directions at once: the inferior endocardial cushion, and the right and left conotruncal ridges coming down from the outflow tract. Only when it closes does the aorta become committed to the left ventricle and the pulmonary trunk to the right. A junction where three separately growing tissues must meet exactly is a weak point by design, which is the whole explanation for the next region."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 7,
-   "title": "Two neural crest ridges, before they become one wall",
-   "ops": [
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SET_STAGE",
-     "t": 0.419
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "bulbus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "truncus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "spiral_septum"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "spiral_septum",
-     "intensity": 0.95
-    },
-    {
-     "op": "PEEL_LAYER",
-     "layer": "organ",
-     "direction": "outward"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    }
-   ],
-   "narration": "Two ridges appear in the walls of the conus cordis and truncus arteriosus. The cells that build them do not come from the heart at all — they are cardiac neural crest cells that have migrated in through the pharyngeal arches. That single fact links the outflow defects to the face, the thymus and the parathyroids, which is why a child with a conotruncal lesion, a small chin, no thymic shadow and a low calcium is being pointed towards a twenty-two q eleven deletion."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 8,
-   "title": "The wall twists, so the vessels cross",
-   "ops": [
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SET_STAGE",
-     "t": 1.0
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "bulbus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "truncus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "spiral_septum"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "aortic_channel"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_channel"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "muscular_ivs"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "aortic_channel",
-     "intensity": 0.9
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "pulmonary_channel",
-     "intensity": 0.9
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "aortic_channel",
-     "to": "ventricle",
-     "kind": "the twist is what carries this channel over"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "pulmonary_channel",
-     "to": "bulbus",
-     "kind": "and this one over"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "lateral"
-    }
-   ],
-   "narration": "The last wall is the one that twists. Two neural crest ridges fuse into a septum that spirals half a turn as it descends, which is why the pulmonary trunk and aorta cross instead of running parallel. Vary that one wall and you get the three classic lesions. No spiral: transposition, with two circulations in parallel. No septum at all: a single trunk over a ventricular septal defect. A spiral placed too far forward: a narrow pulmonary outflow, an overriding aorta, a ventricular septal defect and a hypertrophied right ventricle — tetralogy of Fallot, four findings from one displaced wall. Then close every case with the same four questions: blue or pink, which septum, which way is pressure pushing, and what else did those cells build.\n\nThe two ridges grow towards each other and fuse into one septum that divides the outflow into aorta and pulmonary trunk. The crucial detail is that they do not run straight — they spiral through about half a turn as they descend. That twist is why the pulmonary trunk leaves in front and immediately passes backwards while the aorta starts behind and arches over it, and why the two vessels cross each other rather than running as parallel pipes. Draw the spiral, not two straight lines, or the next region will make no sense."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 9,
-   "title": "When a wall does not arrive: the cushions, the flap, the corner",
-   "ops": [
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SET_STAGE",
-     "t": 1.0
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "bulbus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "truncus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "avsd"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "asd"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "vsd"
-    },
-    {
-     "op": "COMPARE_STRUCTURES",
-     "targets": [
-      "avsd",
-      "asd",
-      "vsd"
-     ],
-     "layout": "side-by-side"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "Defects",
-     "intensity": 0.9
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    }
-   ],
-   "narration": "If the cushions fail to fuse, all four of their jobs fail together. The result is a hole that runs across the centre of the heart — the lower atrial septum and the upper ventricular septum are both deficient, and there is one common atrioventricular valve instead of two. That is the atrioventricular septal defect, and it is the lesion most strongly associated with trisomy twenty-one. A partial form leaves an ostium primum defect with a cleft in the anterior mitral leaflet. Expect a large left-to-right shunt, heart failure in the first months of life, and left axis deviation on the electrocardiogram.\n\nA true secundum atrial septal defect happens when the septum primum is resorbed too far, or the septum secundum grows too short, so the two sheets no longer overlap. Flow then runs left to right, the right heart is volume-loaded, and the classic sign is a second heart sound that is widely split and does not vary with breathing. Distinguish this from a patent foramen ovale, where the sheets simply never fuse but still overlap. A quarter of adults have one, most never know, and its importance is that a clot from a leg vein can cross to the systemic side during a strain and cause a stroke in a young person with otherwise clean arteries.\n\nVentricular septal defect is the commonest congenital cardiac malformation, and the membranous part is where most of them sit, because that is where three tissues had to meet. Flow runs left to right, so the child is not blue; the murmur is harsh and pansystolic at the lower left sternal edge, and a small defect is louder than a large one. Left untreated, a large shunt drives pulmonary vascular disease until pulmonary pressure exceeds systemic, the shunt reverses and the patient turns blue — Eisenmenger syndrome, at which point closing the hole is no longer an option."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 10,
-   "title": "Three ways the outflow septum fails, and four questions that sort them",
-   "ops": [
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SET_STAGE",
-     "t": 1.0
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "bulbus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "truncus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "tga"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "truncus_persistent"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "fallot"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "aortic_channel"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_channel"
-    },
-    {
-     "op": "COMPARE_STRUCTURES",
-     "targets": [
-      "tga",
-      "truncus_persistent",
-      "fallot"
-     ],
-     "layout": "side-by-side"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "spiral_septum",
-     "to": "fallot",
-     "kind": "because neural crest builds this wall, a crest disorder brings the face, thymus and parathyroids along with"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    }
-   ],
-   "narration": "Take the same septum and vary one property. If it forms but does not spiral, the aorta stays over the right ventricle and the pulmonary trunk over the left: transposition, two circulations running in parallel, and a newborn who survives only while a shunt stays open. If it fails to form at all, one arterial trunk leaves the heart astride a ventricular septal defect: persistent truncus arteriosus. If it forms and spirals but sits too far forward, it divides the outflow unequally — a narrow pulmonary outflow, a wide aorta that straddles the septum, a ventricular septal defect because the displaced septum cannot meet the muscular part, and a right ventricle that hypertrophies against the obstruction. That is tetralogy of Fallot, and all four features come from one misplaced wall.\n\nWork in a fixed order. First, is the child blue or not — left-to-right shunts are pink, right-to-left are blue. Second, which of the four septa would produce that hole: cushions, atrial, ventricular, or outflow. Third, which way does pressure drive the flow, remembering that a long-standing pink shunt can turn blue. Fourth, what else was built by the same cells, because a neural crest lesion brings the face, the thymus and the parathyroids with it. Four questions, and most cases sort themselves."
-  }
- ],
- "provenance": {
-  "author": "task",
-  "authored_at": "2026-08-28",
-  "reauthored_at": "2026-09-11",
-  "reauthored_by": "model3d BUILD task",
-  "reauthor_note": "Re-authored from the SVG sequence engine onto the procedural provider on models3d/septation-of-heart.js. The old structures[] were teaching BEATS with no geometry; they are now the parts the model builds, and every one of the twenty-one narration blocks — five beats and sixteen structures — was MOVED by script rather than retyped, with a check that each appears verbatim in the output. Nothing taught was dropped and nothing was reworded.",
-  "prior_provenance": [
-   {
+  ],
+  "provenance": {
     "author": "task",
-    "authored_at": "2026-08-28"
-   },
-   "2026-09-11 · re-authored from the sequence-mode scene onto models3d/septation-of-heart.js by the model3d build task. Every word of narration from the sixteen original teaching regions and the five original beats is carried over verbatim onto the view that replaces it; nothing was rewritten and nothing was dropped."
-  ]
- },
- "gaps": [
-  "RE-AUTHORED 2026-09-11 from sequence mode. The sixteen original structures[] were teaching BEATS, not anatomical parts; they are now the parts the model builds, and each beat's narration has moved verbatim onto the view that replaces it. deferred_beats[] is empty because every one of the sixteen found a view that CHANGES THE PICTURE — measured, not judged: the smallest consecutive frame difference across the ten views is 41% of lit pixels.",
-  "COLOUR THREAD — A DISAGREEMENT, NOT A DECISION. This scene's previous gaps[] said the thread is 'atrium blue, ventricle YELLOW, bulbus/conus orange, truncus RED, sinus venosus dark blue'. The two models already built and rendered — models3d/cardiac-looping.js and models3d/heart-tube-formation.js — both use ventricle #c02a3a (RED) and truncus #cf9a1e (GOLD), i.e. the ventricle and truncus entries swapped relative to that note. A note is a claim; two rendered models that agree with each other are a fact. This scene follows the built corpus so the three panels match on screen. The review should settle which is canonical and correct whichever is wrong.",
-  "WHAT THE MODEL DOES NOT BUILD, stated rather than left to fail silently. There are no valve leaflets, no chordae tendineae and no papillary muscles: av_canal_divided's narration teaches the undermining of the ventricular wall that leaves cords attached, and the model shows the canal divided but not the apparatus that hangs from it. There is no separate right and left atrial appendage, no pulmonary venous ingrowth and no sinus venosus incorporation — this scene is about the four septa, and 'Heart tube formation' and 'Cardiac looping' remain unclaimed in covers[].",
-  "RIGHT VENTRICULAR HYPERTROPHY IS NOT DRAWN. The tetralogy variant delivers three of the four features as geometry — the malaligned VSD, the overriding aorta and the narrowed infundibulum — because all three are the same displaced septum. The fourth is the right ventricle's response to months of work against that stenosis. It is not a shape this model can honestly produce from its own mechanism, so it is narrated and not drawn.",
-  "The atrial fetal shunt IS drawn, as the scene's earlier gaps[] required, as a right-to-left arrow passing under the limbus and lifting the flap of septum primum. The PRESSURES that drive it are in the narration and are not labelled on the geometry; a pressure label is a 2D annotation and belongs to the player's label layer, not to the model.",
-  "Beat 1 previously traced concept:septation and beat 3 concept:blood. Neither is a drawable structure, so the first is now carried by SET_STAGE walking the four windows in order across the ten views, and the second by the 'shunt' structure, which IS geometry.",
-  "Beat 10 keeps PEEL_LAYER on the organ layer from the original beat 5. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because the spiral cannot be seen from outside the intact trunk, and the model's own 'ghost' option is the procedural answer to the same problem.",
-  "Beat 7 is drawn at day 38 and not at day 56, and the reason is a measurement rather than a preference. Drawn at day 56 it was the SAME PICTURE as beat 6 — 4.2% of lit pixels different, which by RENDER-STANDARD is text, not a view — because the conotruncal ridges have fused by day 44 and beat 6 already shows the fused septum. At day 38 the ridges are still two, which is what that beat's narration is about, and the difference is now legible."
- ],
- "deferred_beats": [],
- "axes": "+x = embryo LEFT, -x = RIGHT, +y = CRANIAL, +z = VENTRAL",
- "model": {
-  "id": "septation-of-heart",
-  "file": "models3d/septation-of-heart.js",
-  "t_means": "day 25 at t = 0, day 56 at t = 1; day(t) = 25 + 31t"
- }
+    "authored_at": "2026-08-28",
+    "reauthored_at": "2026-09-11",
+    "reauthored_by": "model3d BUILD task",
+    "reauthor_note": "Re-authored from the SVG sequence engine onto the procedural provider on models3d/septation-of-heart.js. The old structures[] were teaching BEATS with no geometry; they are now the parts the model builds, and every one of the twenty-one narration blocks — five beats and sixteen structures — was MOVED by script rather than retyped, with a check that each appears verbatim in the output. Nothing taught was dropped and nothing was reworded.",
+    "prior_provenance": [
+      {
+        "author": "task",
+        "authored_at": "2026-08-28"
+      },
+      "2026-09-11 · re-authored from the sequence-mode scene onto models3d/septation-of-heart.js by the model3d build task. Every word of narration from the sixteen original teaching regions and the five original beats is carried over verbatim onto the view that replaces it; nothing was rewritten and nothing was dropped."
+    ],
+    "corrected_at": "2026-09-30T06:52Z",
+    "corrected_by": "the model3d REVIEW task, round 3 (device shell available; own probe in a cloud container)",
+    "correction_note": "Round 3 review changed ONE thing in this file: five gaps[] entries that still used the PRE-RENUMBERING beat numbers. Since the round-3 hold there are two different beats called 6 -- live beat 6 (the neural-crest ridges, formerly beat 7) and held beat 6 (the three-tissue corner) -- and the prose did not distinguish them, so entries about the held beat read as if they described the live one. Wording disambiguated only; no measurement, view, structure, narration or t was altered. Every other finding of this round is recorded in BUILD-QUEUE.json findings[] and ESCALATIONS.md rather than patched here.",
+    "round_3_rework": "2026-09-30, model3d BUILD task (cloud container, stage-in/commit-back)"
+  },
+  "gaps": [
+    "RE-AUTHORED 2026-09-11 from sequence mode. The sixteen original structures[] were teaching BEATS, not anatomical parts; they are now the parts the model builds, and each beat's narration has moved verbatim onto the view that replaces it. SUPERSEDED IN PART, 2026-09-30 (round 3): this entry used to say deferred_beats[] was empty because every beat found a view that changes the picture, and quoted 41% as the smallest consecutive frame difference across ten views. FOUR BEATS ARE NOW DEFERRED — 6, 8, 9 and 10, held under Frank's ruling of 2026-09-29 until engine__conotruncal-wedging lands; each carries held_until, held_reason and its narration verbatim, and each returns unchanged in wording when the outflow geometry supports what it says. They are deferred because the PICTURES CONTRADICT THE WORDS, which is a different reason from the one this entry was written about, and the original claim still holds for the six beats that remain: measured this round, the smallest consecutive frame difference across them is 37.1% of lit pixels (live beats 5 -> 6, i.e. old 5 -> 7) and the largest is 102.7%.",
+    "COLOUR THREAD — SETTLED BY THE REVIEW, 2026-09-22. The disagreement the build run recorded here is closed. Checked in the files, not taken on trust: models3d/cardiac-looping.js (lines 47-51), models3d/heart-tube-formation.js (lines 99-103) and models3d/septation-of-heart.js all declare the same five segment colours — sinus #5b49ad, atrium #1f7fc4, ventricle #c02a3a, bulbus #d85c26, truncus #cf9a1e. Three built models agree; the only dissenting voice was a prose note in this scene's earlier gaps[], which said 'ventricle YELLOW, truncus RED'. That note is WRONG and is superseded. The canonical thread is ventricle RED, truncus GOLD. This needed no human decision — it was a stale claim, not a curriculum question — and it is recorded here so the next panel in the story does not reopen it.",
+    "WHAT THE MODEL DOES NOT BUILD, stated rather than left to fail silently. There are no valve leaflets, no chordae tendineae and no papillary muscles: av_canal_divided's narration teaches the undermining of the ventricular wall that leaves cords attached, and the model shows the canal divided but not the apparatus that hangs from it. There is no separate right and left atrial appendage, no pulmonary venous ingrowth and no sinus venosus incorporation — this scene is about the four septa, and 'Heart tube formation' and 'Cardiac looping' remain unclaimed in covers[].",
+    "RIGHT VENTRICULAR HYPERTROPHY IS NOT DRAWN. The tetralogy variant delivers three of the four features as geometry — the malaligned VSD, the overriding aorta and the narrowed infundibulum — because all three are the same displaced septum. The fourth is the right ventricle's response to months of work against that stenosis. It is not a shape this model can honestly produce from its own mechanism, so it is narrated and not drawn.",
+    "The atrial fetal shunt IS drawn, as the scene's earlier gaps[] required, and its PATH was corrected in review round 1 (findings 3 and 5). It used to be described here as \"passing under the limbus and lifting the flap of septum primum\", and it did neither: measured, the arrow bowed straight across at one atrial level and its median-plane vertices sat 0.0090 INSIDE septum primum, at a level view 4's own narration says is solid, teaching that the two gaps line up when the beat exists to say they do not. It now runs the way the blood runs — low on the right, UNDER the free edge of septum secundum, cranially up the slit between the two sheets, and out to the left THROUGH the ostium secundum at its own centre. The slit's width is not chosen: it is what the two sheets' own thickness laws leave between their planes, and the arrow's radius is half that clearance less a margin. Measured on emitted vertices at day 56: 0 shunt vertices inside either sheet, worst clearance 0.0071, and 204 vertices crossing septum primum's plane inside the ostium secundum's aperture. Acceptance test U asserts all three. The PRESSURES that drive it are in the narration and are not labelled on the geometry; a pressure label is a 2D annotation and belongs to the player's label layer, not to the model.",
+    "Beat 1 previously traced concept:septation and beat 3 concept:blood. Neither is a drawable structure, so the first is now carried by SET_STAGE walking the four windows in order across the views (ten when authored; six live since the round-3 hold), and the second by the 'shunt' structure, which IS geometry.",
+    "Held beat 10 keeps PEEL_LAYER on the organ layer from the original beat 5. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because the spiral cannot be seen from outside the intact trunk, and the model's own 'ghost' option is the procedural answer to the same problem.",
+    "Beat 7 -- which is LIVE BEAT 6 since the round-3 renumbering -- is drawn at day 38 and not at day 56, and the reason is a measurement rather than a preference. Drawn at day 56 it was the SAME PICTURE as the old beat 6, now HELD beat 6 — 4.2% of lit pixels different, which by RENDER-STANDARD is text, not a view — because the conotruncal ridges have fused by day 44 and beat 6 already shows the fused septum. At day 38 the ridges are still two, which is what that beat's narration is about, and the difference is now legible.",
+    "THE CONOTRUNCAL CONTRIBUTION TO MEMBRANOUS CLOSURE IS NARRATED, NOT DRAWN — declared here rather than left to contradict view 6 on screen (review round 1, finding 2). View 6 narrates closure \"from three directions — the inferior cushion from above, and both conotruncal ridges from the outflow\". Two of the three are real geometry and are asserted by acceptance test V: membranous<->muscular 0.0031 and membranous<->cushions 0.0017, both touching. The third is not: the spiral septum's nearest emitted vertex is 0.667 from the membranous septum, and its conal foot is 0.807 from the rim of the interventricular foramen. THE REASON IS STRUCTURAL, AND IT WAS TESTED BEFORE IT WAS DECLARED. The review's suggested fix was to carry the septum's proximal end down through the conus to that rim. It was tried: a straight chord leaves the lumen over 8 of its 10 sampled points; bowing it through the right ventricle to stay inside the cavity leaves 6 to 10 of 25 outside whatever the bow; a search over 224 combinations of terminus height, position along the crest, offset and bow found nothing better than 4 of 25 outside, and that one lands BELOW the crest, mid-septum. The cause is that this model never builds the WEDGING of the outflow tract — the conal absorption that in life brings the conal septum onto the muscular crest — so at day 56 the conus is still out on the embryonic loop at x = -0.51 while the foramen's rim is at x = +0.12, with solid myocardium between them. Drawing a bridge there would be tissue through a wall the model shows as solid, which RENDER-STANDARD §5 calls a plausible fake. What view 6 shows is therefore two tissues meeting and the third's contribution carried by a SHOW_RELATIONSHIP annotation, whose text now says so. Closing this honestly needs the wedging modelled, which is a scene-scale change and not a patch.",
+    "THE MUSCULAR INTERVENTRICULAR SEPTUM'S EXTENT IS NOW THE SHADOW OF THE VENTRICULAR LUMEN, not a lumen probe (review round 1, finding 1). The old frame sat at the midpoint of the two ventricular balloon CENTRES, which lies in the crotch of the loop and is outside the lumen until day 45.2 — so muscular_ivs was a ZERO-VERTEX mesh from day 25 to day 44.8 and view 5, staged at day 40 with that septum as its only subject, was a picture of nothing. The septum's outline is now the region with ventricle on BOTH sides of it, which exists from the moment the ridge does: emitted height 0.021 of its reach at day 29, 0.353 at day 36, 0.617 at day 40, 0.799 at day 44, all measured on vertices by acceptance test S. WHAT THIS MEANS FOR THE PICTURE: at day 40 the septum is a real wall across the floor of the common ventricle with the interventricular foramen above it, which is what view 5's narration teaches. ONE MORE THING THE FIX HAD TO GET RIGHT, recorded because the first attempt got it wrong: an intermediate version seeded the frame on the loop apex, because that point is lumen at every t, and the septum then stood INSIDE the left ventricle — 0.310 from the LV centre against 0.556 from the RV’s, visible as a wall in one chamber in view 5. The plane is back at the midpoint of the two ventricular centres, 0.428 from each, and it is only the EXTENT that is measured the new way.",
+    "THE TWO ATRIAL OPENINGS NOW SHARE A WINDOW A STUDENT CAN SEE (review round 1, finding 4). Septum primum's descent ran [28,34] and the perforations [31,35]; measured on mesh vertices that left the ostium primum fused by day 33.9 while the ostium secundum's radius was still 0.075, so no frame in the scene showed both. The schedules are now [28,37] and [29,34], and acceptance test T measures the result on emitted vertices: both openings clear 6% of the atrial span for 3 whole days, days 31 through 34 inclusive, and the widest point is day 34, where the smaller of the two is 0.147 of the span. VIEW 3 IS ALREADY STAGED AT t = 0.29 = DAY 34.0, i.e. at the best day in that window, so the beat that narrates \"the gap that remains beneath its free edge is the ostium primum\" now has both gaps in its own frame. Test D, which only compared two DATES, is kept but is no longer where this claim lives.",
+    "ROUND 3, 2026-09-30 — THE CUSHION LAW, AND WHAT IT COST TO FIX. Review round 2's blocking finding R2-1 was that the two endocardial cushions MET AND THEN CAME APART: emitted centre separation 0.0928 at day 26.5, 0.0220 at day 31.2 and 0.1020 again at day 56, under a beat narrating \"watch the two cushions meet\"; and the AVSD variant was drawn 0.0386 apart against health's 0.1020, i.e. two and a half times MORE fused than the healthy heart, which teaches the lesion backwards. Cause was one line: the centre offset was 0.38r*(1 - 2h), which passes through zero at h = 0.5 and REVERSES SIGN, so each mass crossed the canal axis and continued out the far side. The replacement pins each swelling's outer edge to the lumen wall (dCentre + semi == r at every h) and grows it inward: semi 0.26r -> 0.62r, dCentre 0.74r -> 0.38r, both monotone, neither crossing. Measured on emitted vertices at eleven days, the normalised surface gap now runs 1.799 / 1.274 / 0.548 / 0.076 / -0.233 / -0.354 / -0.387 and then stays there — two separate swellings that close once and stay closed. AVSD stands open at +0.717 where health is fused at -0.387, so the polarity is the right way round. AT t = 1 THE TWO ELLIPSOIDS ARE MIRROR IMAGES AT THE OLD LAW'S OWN MAGNITUDES, so the day-56 union is the same set of vertices it always was: test V's membranous<->cushions contact re-measures at 0.0017 and membranous<->muscular at 0.0031, unchanged. Rows C and L now read the emitted buffer instead of the schedule, and a new row W asserts the whole trajectory, which is what C and L between them could not: both asserted single days, and a law that met at day 31 and came apart by day 35 satisfied a day-28 gap and a day-35 closure while teaching the opposite in between.",
+    "ROUND 3 — TWO ON-SCREEN ASSERTIONS DELETED, AND ONE THAT WAS NEVER A KEY. View 2 carried SHOW_RELATIONSHIP av_cushions -> membranous_ivs at t = 0.323 (day 35.0), where membranous_ivs emits ZERO vertices (its window is [44, 50]) and which the view did not SHOW either — an arrow to a structure that is neither present nor drawn. Deleted; the narration's prospective sentence stays, and HELD beat 6 (not live beat 6, which is the old beat 7) is where that relationship is drawn, at day 50, when there is something to draw it to. View 8's SHOW_RELATIONSHIP aortic_channel -> ventricle is deleted under Frank's ruling of 2026-09-29 (measured 0.438 apart across solid myocardium). View 1 carried HIGHLIGHT_STRUCTURE \"The looped tube\", which is not a structure key at all — a label left over from the SVG panel engine; deleted, and with all five segments shown it highlighted nothing anyway. The held beats carry two more of the same class, recorded in their held_reason: beat 9's HIGHLIGHT target \"Defects\", and beat 10's SHOW_RELATIONSHIP naming spiral_septum, which that beat does not SHOW.",
+    "ROUND 3 — BEAT 2 WAS LOOKING DOWN THE AXIS OF ITS OWN MECHANISM, and only the player walk and then the rendered frame showed it. The cushions travel along the DORSOVENTRAL axis, and the beat asked for ROTATE_TO_VIEW anterior, which points the camera straight down that axis: the two masses overlap as concentric discs and the approach is invisible however correct the geometry is. It is now lateral, where the two swellings separate across the frame. Separately the walk measured av_cushions at 0.195% of the frame in the beat that HIGHLIGHTS them — below the 0.3% pointed-at floor — because the camera was fitted to the whole heart and the fused mass is 0.25 units across. ISOLATE_REGION av_cushions puts the player's camera on them (viz3d.js subjectBox uses state.only), taking them to 33.8% of the frame; sinus, bulbus and truncus were then out of frame entirely at 0.000%, so the beat no longer claims to show them — the atrium and ventricle it does show are the two chambers the canal joins. NO VISIBILITY WAIVER WAS NEEDED ON ANY BEAT: all six pass the walk on their own.",
+    "ROUND 3 — A CORRECTION TO ROUND 1'S \"PASSED, DO NOT RE-CHECK\" LIST, raised by round 2 as R2-10 and recorded here because a false entry on a do-not-re-check list is worse than no entry. That list said \"the aortic channel is dorsal and RIGHT of the pulmonary at the valves (0.308 / 0.292)\". DORSAL HOLDS on the mesh — aorta z -0.346 against pulmonary z +0.628. RIGHT DOES NOT: +x is LEFT in this scene's own stated axes and the aorta's arterial end is x +0.306 against the pulmonary's -0.253, so the aorta is 0.559 to the embryo's LEFT. Both quoted figures were the analytic aortaRightOfPulm / aortaDorsalOfPulm rows, not measurements of the channels. The right-of clause is now SUSPENDED rather than asserted (model HELD.G_right), together with row Q's TGA-comparison clause and row P's pulmonary-calibre clause — the three rows R2-7 measured false on emitted mesh. All three are outflow claims and all three return as assertions when engine__conotruncal-wedging lands. A row that cannot be expressed on emitted geometry is a note, not a test.",
+    "ROUND 3 — BEAT NUMBERING. With beats 6, 8, 9 and 10 held, views[] ran 1,2,3,4,5,7 and validate-scenes reported \"expected 1..6 in order\" — and a student would have seen the last of six beats labelled 7. The six live beats are renumbered 1..6 and each carries beat_was with the number every review finding to date refers to; only one moved, the neural-crest ridges beat, 7 -> 6. The held beats keep their original numbers 6, 8, 9 and 10 in deferred_beats[] so those findings still resolve. When engine__conotruncal-wedging lands and they return, the whole set renumbers 1..10 again and beat_was is what makes that traceable."
+  ],
+  "deferred_beats": [
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "The corner where three tissues meet",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.806
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "bulbus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "truncus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "av_cushions"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "muscular_ivs"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "membranous_ivs"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "spiral_septum"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "membranous_ivs",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "av_cushions",
+          "to": "membranous_ivs",
+          "kind": "the inferior cushion sends tissue down to help close"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "spiral_septum",
+          "to": "membranous_ivs",
+          "kind": "the bulbar ridges send tissue down from the outflow to help close — shown as a relationship, not as continuous tissue: this model does not build the wedging of the outflow tract, so the conal foot stays 0.84 from the foramen's rim. See gaps[]."
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The muscular septum is not pushed up; the ventricles grow out around it and leave it standing. It stops short of the cushions, and the gap left above it is closed in week seven from three directions — the inferior cushion from above, and both conotruncal ridges from the outflow. Until that moment the aorta is not yet committed to the left ventricle. A corner where three separately growing tissues must meet exactly is where a wall fails, which is why the membranous part is the usual site of a ventricular septal defect, and why the murmur is pansystolic at the lower left sternal edge in a child who is pink rather than blue.\n\nThe interventricular foramen is shut in week seven by tissue from three directions at once: the inferior endocardial cushion, and the right and left conotruncal ridges coming down from the outflow tract. Only when it closes does the aorta become committed to the left ventricle and the pulmonary trunk to the right. A junction where three separately growing tissues must meet exactly is a weak point by design, which is the whole explanation for the next region.",
+      "held": true,
+      "held_until": "engine__conotruncal-wedging",
+      "held_at": "2026-09-30",
+      "held_by": "Frank's ruling of 2026-09-29, applied by the model3d BUILD run of 2026-09-30 (round 3)",
+      "held_reason": "The \"corner where three tissues meet\" shows two. Measured on emitted vertices at t=1: membranous<->muscular 0.0031 and membranous<->cushions 0.0017 (touching), but membranous<->spiral_septum 0.667 — the conotruncal ridges never reach the membranous septum, and this beat carries a SHOW_RELATIONSHIP and narrates closure \"from three directions\". Review round 2, finding 2 / R2-2.",
+      "held_note": "Narration kept VERBATIM. This beat returns to views[] unchanged in wording when engine__conotruncal-wedging lands and the outflow geometry supports what it says. It is here rather than in views[] because the pictures contradict the words, and a beat that contradicts itself on screen teaches the lesion backwards.",
+      "beat_was": 6
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "The wall twists, so the vessels cross",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "bulbus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "truncus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "spiral_septum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aortic_channel"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_channel"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "muscular_ivs"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "aortic_channel",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pulmonary_channel",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pulmonary_channel",
+          "to": "bulbus",
+          "kind": "and this one over"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The last wall is the one that twists. Two neural crest ridges fuse into a septum that spirals half a turn as it descends, which is why the pulmonary trunk and aorta cross instead of running parallel. Vary that one wall and you get the three classic lesions. No spiral: transposition, with two circulations in parallel. No septum at all: a single trunk over a ventricular septal defect. A spiral placed too far forward: a narrow pulmonary outflow, an overriding aorta, a ventricular septal defect and a hypertrophied right ventricle — tetralogy of Fallot, four findings from one displaced wall. Then close every case with the same four questions: blue or pink, which septum, which way is pressure pushing, and what else did those cells build.\n\nThe two ridges grow towards each other and fuse into one septum that divides the outflow into aorta and pulmonary trunk. The crucial detail is that they do not run straight — they spiral through about half a turn as they descend. That twist is why the pulmonary trunk leaves in front and immediately passes backwards while the aorta starts behind and arches over it, and why the two vessels cross each other rather than running as parallel pipes. Draw the spiral, not two straight lines, or the next region will make no sense.",
+      "held": true,
+      "held_until": "engine__conotruncal-wedging",
+      "held_at": "2026-09-30",
+      "held_by": "Frank's ruling of 2026-09-29, applied by the model3d BUILD run of 2026-09-30 (round 3)",
+      "held_reason": "BOTH GREAT VESSELS ARISE FROM THE RIGHT VENTRICLE. At t=1 the aortic channel's proximal end is 0.006 from the bulbus (future RV) and 0.438 from the ventricle (future LV). The beat narrates the twist carrying the aorta over to the left ventricle. Its SHOW_RELATIONSHIP aortic_channel -> ventricle has been DELETED under Frank's ruling of 2026-09-29 (a review may delete an on-screen assertion the geometry contradicts without a scope call); the beat itself waits for the wedging. Review round 2, R2-2.",
+      "held_note": "Narration kept VERBATIM. This beat returns to views[] unchanged in wording when engine__conotruncal-wedging lands and the outflow geometry supports what it says. It is here rather than in views[] because the pictures contradict the words, and a beat that contradicts itself on screen teaches the lesion backwards.",
+      "beat_was": 8
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "When a wall does not arrive: the cushions, the flap, the corner",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "bulbus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "truncus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "avsd"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "asd"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "vsd"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "avsd",
+            "asd",
+            "vsd"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Defects",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "If the cushions fail to fuse, all four of their jobs fail together. The result is a hole that runs across the centre of the heart — the lower atrial septum and the upper ventricular septum are both deficient, and there is one common atrioventricular valve instead of two. That is the atrioventricular septal defect, and it is the lesion most strongly associated with trisomy twenty-one. A partial form leaves an ostium primum defect with a cleft in the anterior mitral leaflet. Expect a large left-to-right shunt, heart failure in the first months of life, and left axis deviation on the electrocardiogram.\n\nA true secundum atrial septal defect happens when the septum primum is resorbed too far, or the septum secundum grows too short, so the two sheets no longer overlap. Flow then runs left to right, the right heart is volume-loaded, and the classic sign is a second heart sound that is widely split and does not vary with breathing. Distinguish this from a patent foramen ovale, where the sheets simply never fuse but still overlap. A quarter of adults have one, most never know, and its importance is that a clot from a leg vein can cross to the systemic side during a strain and cause a stroke in a young person with otherwise clean arteries.\n\nVentricular septal defect is the commonest congenital cardiac malformation, and the membranous part is where most of them sit, because that is where three tissues had to meet. Flow runs left to right, so the child is not blue; the murmur is harsh and pansystolic at the lower left sternal edge, and a small defect is louder than a large one. Left untreated, a large shunt drives pulmonary vascular disease until pulmonary pressure exceeds systemic, the shunt reverses and the patient turns blue — Eisenmenger syndrome, at which point closing the hole is no longer an option.",
+      "held": true,
+      "held_until": "engine__conotruncal-wedging",
+      "held_at": "2026-09-30",
+      "held_by": "Frank's ruling of 2026-09-29, applied by the model3d BUILD run of 2026-09-30 (round 3)",
+      "held_reason": "Three defects in one heart, and two of the three are not in the geometry. The vsd variant is byte-identical to the normal muscular septum (same 16224 vertices, max per-vertex difference 0.000000 — the flag's only effect is that membranous_ivs emits nothing, and this beat shows no membranous septum and no marker where it should be). The asd variant IS real (primum 17556 -> 12444 vertices) but the beat does not SHOW septum_secundum, and a secundum ASD is defined by the two sheets no longer overlapping. Its HIGHLIGHT_STRUCTURE target \"Defects\" is not a structure key at all. Review round 2, R2-4, R2-9. The AVSD half of the beat is now correct on the mesh (round 3 fixed the cushion law, gap +0.717 of mean thickness against health's fused -0.387) and comes back with the beat.",
+      "held_note": "Narration kept VERBATIM. This beat returns to views[] unchanged in wording when engine__conotruncal-wedging lands and the outflow geometry supports what it says. It is here rather than in views[] because the pictures contradict the words, and a beat that contradicts itself on screen teaches the lesion backwards.",
+      "beat_was": 9
+    },
+    {
+      "mode": "mechanism",
+      "beat": 10,
+      "title": "Three ways the outflow septum fails, and four questions that sort them",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "bulbus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "truncus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tga"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "truncus_persistent"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "fallot"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aortic_channel"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_channel"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "tga",
+            "truncus_persistent",
+            "fallot"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "spiral_septum",
+          "to": "fallot",
+          "kind": "because neural crest builds this wall, a crest disorder brings the face, thymus and parathyroids along with"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Take the same septum and vary one property. If it forms but does not spiral, the aorta stays over the right ventricle and the pulmonary trunk over the left: transposition, two circulations running in parallel, and a newborn who survives only while a shunt stays open. If it fails to form at all, one arterial trunk leaves the heart astride a ventricular septal defect: persistent truncus arteriosus. If it forms and spirals but sits too far forward, it divides the outflow unequally — a narrow pulmonary outflow, a wide aorta that straddles the septum, a ventricular septal defect because the displaced septum cannot meet the muscular part, and a right ventricle that hypertrophies against the obstruction. That is tetralogy of Fallot, and all four features come from one misplaced wall.\n\nWork in a fixed order. First, is the child blue or not — left-to-right shunts are pink, right-to-left are blue. Second, which of the four septa would produce that hole: cushions, atrial, ventricular, or outflow. Third, which way does pressure drive the flow, remembering that a long-standing pink shunt can turn blue. Fourth, what else was built by the same cells, because a neural crest lesion brings the face, the thymus and the parathyroids with it. Four questions, and most cases sort themselves.",
+      "held": true,
+      "held_until": "engine__conotruncal-wedging",
+      "held_at": "2026-09-30",
+      "held_by": "Frank's ruling of 2026-09-29, applied by the model3d BUILD run of 2026-09-30 (round 3)",
+      "held_reason": "All three outflow variants draw the same picture as health where a student looks. transposition: channel ends differ from normal by 0.004-0.008, both cross, both put the aorta dorsal. truncus_persistent: the two channels are byte-identical to normal — one common trunk is the whole lesion. fallot: mean channel calibre 0.0871 vs the normal 0.0877, i.e. the outflow is divided EQUALLY. All three scene keys (tga, truncus_persistent, fallot) also resolve to the SAME model part, spiral_septum, so COMPARE_STRUCTURES is asked to compare one mesh with itself three times; and the beat's SHOW_RELATIONSHIP names spiral_septum, which it does not SHOW. Review round 2, R2-3, R2-5, R2-6.",
+      "held_note": "Narration kept VERBATIM. This beat returns to views[] unchanged in wording when engine__conotruncal-wedging lands and the outflow geometry supports what it says. It is here rather than in views[] because the pictures contradict the words, and a beat that contradicts itself on screen teaches the lesion backwards.",
+      "beat_was": 10
+    }
+  ],
+  "axes": "+x = embryo LEFT, -x = RIGHT, +y = CRANIAL, +z = VENTRAL",
+  "model": {
+    "id": "septation-of-heart",
+    "file": "models3d/septation-of-heart.js",
+    "t_means": "day 25 at t = 0, day 56 at t = 1; day(t) = 25 + 31t"
+  }
 }

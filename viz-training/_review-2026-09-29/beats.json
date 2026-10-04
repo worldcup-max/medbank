@@ -1,0 +1,328 @@
+{
+ "beats": [
+  {
+   "beat": 1,
+   "view": "anterior",
+   "visible": [
+    "heart",
+    "ra_auricle",
+    "la_auricle",
+    "asc_aorta",
+    "aortic_arch",
+    "pulm_trunk",
+    "r_pa",
+    "l_pa",
+    "svc",
+    "ivc",
+    "pulm_veins_r",
+    "pulm_veins_l",
+    "lig_arteriosum",
+    "lung_r",
+    "lung_l",
+    "diaphragm",
+    "sternum",
+    "trachea_bronchi",
+    "oesophagus",
+    "desc_aorta",
+    "phrenic_r",
+    "phrenic_l"
+   ],
+   "highlight": "The heart",
+   "section": ""
+  },
+  {
+   "beat": 2,
+   "view": "lateral",
+   "visible": [
+    "heart",
+    "la",
+    "ra_auricle",
+    "la_auricle",
+    "asc_aorta",
+    "aortic_arch",
+    "pulm_trunk",
+    "r_pa",
+    "l_pa",
+    "svc",
+    "ivc",
+    "pulm_veins_r",
+    "pulm_veins_l",
+    "lig_arteriosum",
+    "lung_r",
+    "lung_l",
+    "diaphragm",
+    "sternum",
+    "trachea_bronchi",
+    "oesophagus",
+    "desc_aorta",
+    "phrenic_r",
+    "phrenic_l"
+   ],
+   "highlight": "Mediastinum",
+   "section": ""
+  },
+  {
+   "beat": 3,
+   "view": "anterior",
+   "visible": [
+    "heart",
+    "ra",
+    "rv",
+    "la",
+    "lv",
+    "ra_auricle",
+    "la_auricle",
+    "asc_aorta",
+    "aortic_arch",
+    "pulm_trunk",
+    "r_pa",
+    "l_pa",
+    "svc",
+    "ivc",
+    "pulm_veins_r",
+    "pulm_veins_l",
+    "lig_arteriosum"
+   ],
+   "highlight": "rv",
+   "section": ""
+  },
+  {
+   "beat": 4,
+   "view": "posterior",
+   "visible": [
+    "heart",
+    "ra",
+    "rv",
+    "la",
+    "lv",
+    "ra_auricle",
+    "la_auricle",
+    "asc_aorta",
+    "aortic_arch",
+    "pulm_trunk",
+    "r_pa",
+    "l_pa",
+    "svc",
+    "ivc",
+    "pulm_veins_r",
+    "pulm_veins_l",
+    "lig_arteriosum"
+   ],
+   "highlight": "la+ra",
+   "section": ""
+  },
+  {
+   "beat": 5,
+   "view": "anterior",
+   "visible": [
+    "heart",
+    "ra_auricle",
+    "la_auricle",
+    "surf_sternocostal",
+    "surf_diaphragmatic",
+    "surf_left_pulmonary",
+    "asc_aorta",
+    "aortic_arch",
+    "pulm_trunk",
+    "r_pa",
+    "l_pa",
+    "svc",
+    "ivc",
+    "pulm_veins_r",
+    "pulm_veins_l",
+    "lig_arteriosum"
+   ],
+   "highlight": "surf_sternocostal",
+   "section": ""
+  },
+  {
+   "beat": 6,
+   "view": "inferior",
+   "visible": [
+    "heart",
+    "ra_auricle",
+    "la_auricle",
+    "surf_sternocostal",
+    "surf_diaphragmatic",
+    "surf_left_pulmonary",
+    "asc_aorta",
+    "aortic_arch",
+    "pulm_trunk",
+    "r_pa",
+    "l_pa",
+    "svc",
+    "ivc",
+    "pulm_veins_r",
+    "pulm_veins_l",
+    "lig_arteriosum"
+   ],
+   "highlight": "surf_diaphragmatic",
+   "section": ""
+  },
+  {
+   "beat": 7,
+   "view": "lateral",
+   "visible": [
+    "heart",
+    "ra_auricle",
+    "la_auricle",
+    "surf_sternocostal",
+    "surf_diaphragmatic",
+    "surf_left_pulmonary",
+    "asc_aorta",
+    "aortic_arch",
+    "pulm_trunk",
+    "r_pa",
+    "l_pa",
+    "svc",
+    "ivc",
+    "pulm_veins_r",
+    "pulm_veins_l",
+    "lig_arteriosum",
+    "lung_l"
+   ],
+   "highlight": "surf_left_pulmonary",
+   "section": ""
+  },
+  {
+   "beat": 8,
+   "view": "anterior",
+   "visible": [
+    "heart",
+    "ra_auricle",
+    "la_auricle",
+    "border_right",
+    "border_left",
+    "border_inferior",
+    "border_superior"
+   ],
+   "highlight": "border_right+border_left+border_inferior+border_superior",
+   "section": ""
+  },
+  {
+   "beat": 9,
+   "view": "anterior",
+   "visible": [
+    "heart",
+    "ra_auricle",
+    "la_auricle",
+    "coronary_sulcus",
+    "ant_iv_sulcus",
+    "post_iv_sulcus"
+   ],
+   "highlight": "ant_iv_sulcus",
+   "section": ""
+  },
+  {
+   "beat": 10,
+   "view": "inferior",
+   "visible": [
+    "heart",
+    "ra_auricle",
+    "la_auricle",
+    "coronary_sulcus",
+    "ant_iv_sulcus",
+    "post_iv_sulcus"
+   ],
+   "highlight": "post_iv_sulcus",
+   "section": ""
+  },
+  {
+   "beat": 11,
+   "view": "lateral",
+   "visible": [
+    "heart",
+    "ra_auricle",
+    "la_auricle",
+    "apex"
+   ],
+   "highlight": "apex",
+   "section": ""
+  },
+  {
+   "beat": 12,
+   "view": "posterior",
+   "visible": [
+    "heart",
+    "ra_auricle",
+    "la_auricle",
+    "apex",
+    "base"
+   ],
+   "highlight": "base",
+   "section": ""
+  },
+  {
+   "beat": 13,
+   "view": "anterior",
+   "visible": [
+    "heart",
+    "ra_auricle",
+    "la_auricle",
+    "asc_aorta",
+    "aortic_arch",
+    "pulm_trunk",
+    "r_pa",
+    "l_pa",
+    "svc",
+    "ivc",
+    "pulm_veins_r",
+    "pulm_veins_l",
+    "lig_arteriosum"
+   ],
+   "highlight": "Great vessels",
+   "section": ""
+  },
+  {
+   "beat": 14,
+   "view": "lateral",
+   "visible": [
+    "heart",
+    "ra_auricle",
+    "la_auricle",
+    "asc_aorta",
+    "aortic_arch",
+    "pulm_trunk",
+    "r_pa",
+    "l_pa",
+    "svc",
+    "ivc",
+    "pulm_veins_r",
+    "pulm_veins_l",
+    "lig_arteriosum",
+    "pericardium_fibrous",
+    "pericardium_parietal_serous",
+    "pericardium_visceral_serous",
+    "pericardial_cavity",
+    "phrenic_r",
+    "phrenic_l"
+   ],
+   "highlight": "Pericardium",
+   "section": "CROSS_SECTIONx0"
+  },
+  {
+   "beat": 15,
+   "view": "anterior",
+   "visible": [
+    "heart",
+    "ra_auricle",
+    "la_auricle",
+    "apex",
+    "base",
+    "asc_aorta",
+    "aortic_arch",
+    "pulm_trunk",
+    "r_pa",
+    "l_pa",
+    "svc",
+    "ivc",
+    "pulm_veins_r",
+    "pulm_veins_l",
+    "lig_arteriosum"
+   ],
+   "highlight": "",
+   "section": ""
+  }
+ ],
+ "dup": []
+}

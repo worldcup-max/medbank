@@ -1,0 +1,880 @@
+{
+ "beat01": {
+  "view": "anterior",
+  "opts": {
+   "context": true,
+   "nerves": true
+  },
+  "litPctOfFrame": 39.14,
+  "rows": [
+   [
+    "lung_r",
+    32.49,
+    12.72
+   ],
+   [
+    "lung_l",
+    21.89,
+    8.57
+   ],
+   [
+    "heart",
+    13.19,
+    5.16
+   ],
+   [
+    "sternum",
+    12.69,
+    4.97
+   ],
+   [
+    "diaphragm",
+    10.89,
+    4.26
+   ],
+   [
+    "pulm_trunk",
+    2.8,
+    1.09
+   ],
+   [
+    "trachea_bronchi",
+    2.03,
+    0.79
+   ],
+   [
+    "svc",
+    1.21,
+    0.47
+   ],
+   [
+    "phrenic_r",
+    0.77,
+    0.3
+   ],
+   [
+    "pulm_veins_r",
+    0.67,
+    0.26
+   ],
+   [
+    "ra_auricle",
+    0.39,
+    0.15
+   ],
+   [
+    "la_auricle",
+    0.34,
+    0.13
+   ],
+   [
+    "r_pa",
+    0.31,
+    0.12
+   ],
+   [
+    "phrenic_l",
+    0.2,
+    0.08
+   ],
+   [
+    "aortic_arch",
+    0.07,
+    0.03
+   ],
+   [
+    "ivc",
+    0.06,
+    0.02
+   ],
+   [
+    "l_pa",
+    0.01,
+    0
+   ]
+  ]
+ },
+ "beat02": {
+  "view": "lateral",
+  "opts": {
+   "chambers": true,
+   "context": true,
+   "nerves": true
+  },
+  "litPctOfFrame": 22.43,
+  "rows": [
+   [
+    "lung_l",
+    71.36,
+    16.01
+   ],
+   [
+    "diaphragm",
+    9.38,
+    2.1
+   ],
+   [
+    "sternum",
+    6.63,
+    1.49
+   ],
+   [
+    "lv",
+    5.19,
+    1.16
+   ],
+   [
+    "trachea_bronchi",
+    2.58,
+    0.58
+   ],
+   [
+    "oesophagus",
+    2.55,
+    0.57
+   ],
+   [
+    "pulm_trunk",
+    1.6,
+    0.36
+   ],
+   [
+    "rv",
+    0.48,
+    0.11
+   ],
+   [
+    "heart",
+    0.17,
+    0.04
+   ],
+   [
+    "la_auricle",
+    0.05,
+    0.01
+   ]
+  ]
+ },
+ "beat03": {
+  "view": "anterior",
+  "opts": {
+   "chambers": true
+  },
+  "litPctOfFrame": 40.13,
+  "rows": [
+   [
+    "rv",
+    40.24,
+    16.15
+   ],
+   [
+    "lv",
+    12.05,
+    4.83
+   ],
+   [
+    "pulm_trunk",
+    9.75,
+    3.91
+   ],
+   [
+    "svc",
+    6.95,
+    2.79
+   ],
+   [
+    "ra",
+    6.54,
+    2.62
+   ],
+   [
+    "asc_aorta",
+    4.71,
+    1.89
+   ],
+   [
+    "r_pa",
+    3.95,
+    1.58
+   ],
+   [
+    "ra_auricle",
+    3.29,
+    1.32
+   ],
+   [
+    "pulm_veins_r",
+    3.14,
+    1.26
+   ],
+   [
+    "ivc",
+    3.03,
+    1.22
+   ],
+   [
+    "la_auricle",
+    2.55,
+    1.02
+   ],
+   [
+    "l_pa",
+    2.1,
+    0.84
+   ],
+   [
+    "aortic_arch",
+    1.24,
+    0.5
+   ],
+   [
+    "heart",
+    0.48,
+    0.19
+   ]
+  ]
+ },
+ "beat04": {
+  "view": "posterior",
+  "opts": {
+   "chambers": true
+  },
+  "litPctOfFrame": 39.08,
+  "rows": [
+   [
+    "lv",
+    28.59,
+    11.17
+   ],
+   [
+    "la",
+    19.08,
+    7.46
+   ],
+   [
+    "pulm_veins_r",
+    10.9,
+    4.26
+   ],
+   [
+    "aortic_arch",
+    9.51,
+    3.72
+   ],
+   [
+    "pulm_veins_l",
+    8.4,
+    3.28
+   ],
+   [
+    "r_pa",
+    5.8,
+    2.26
+   ],
+   [
+    "ivc",
+    5.37,
+    2.1
+   ],
+   [
+    "l_pa",
+    4.72,
+    1.84
+   ],
+   [
+    "svc",
+    3.91,
+    1.53
+   ],
+   [
+    "asc_aorta",
+    2.42,
+    0.95
+   ],
+   [
+    "ra",
+    0.81,
+    0.32
+   ],
+   [
+    "pulm_trunk",
+    0.22,
+    0.09
+   ],
+   [
+    "lig_arteriosum",
+    0.12,
+    0.05
+   ],
+   [
+    "rv",
+    0.08,
+    0.03
+   ],
+   [
+    "heart",
+    0.05,
+    0.02
+   ]
+  ]
+ },
+ "beat05": {
+  "view": "anterior",
+  "opts": {
+   "surfaces": true
+  },
+  "litPctOfFrame": 40.17,
+  "rows": [
+   [
+    "surf_sternocostal",
+    49.22,
+    19.77
+   ],
+   [
+    "pulm_trunk",
+    9.63,
+    3.87
+   ],
+   [
+    "surf_diaphragmatic",
+    9.54,
+    3.83
+   ],
+   [
+    "svc",
+    6.85,
+    2.75
+   ],
+   [
+    "asc_aorta",
+    4.49,
+    1.8
+   ],
+   [
+    "r_pa",
+    3.9,
+    1.57
+   ],
+   [
+    "pulm_veins_r",
+    3.1,
+    1.24
+   ],
+   [
+    "ra_auricle",
+    3.05,
+    1.23
+   ],
+   [
+    "ivc",
+    2.84,
+    1.14
+   ],
+   [
+    "la_auricle",
+    2.46,
+    0.99
+   ],
+   [
+    "l_pa",
+    2.09,
+    0.84
+   ],
+   [
+    "aortic_arch",
+    1.23,
+    0.49
+   ],
+   [
+    "surf_left_pulmonary",
+    1.13,
+    0.45
+   ],
+   [
+    "heart",
+    0.48,
+    0.19
+   ]
+  ]
+ },
+ "beat06": {
+  "view": "inferior",
+  "opts": {
+   "surfaces": true
+  },
+  "litPctOfFrame": 27.99,
+  "rows": [
+   [
+    "surf_diaphragmatic",
+    47.63,
+    13.33
+   ],
+   [
+    "surf_sternocostal",
+    15.76,
+    4.41
+   ],
+   [
+    "ivc",
+    11.31,
+    3.17
+   ],
+   [
+    "surf_left_pulmonary",
+    9.02,
+    2.53
+   ],
+   [
+    "pulm_veins_r",
+    6.21,
+    1.74
+   ],
+   [
+    "pulm_veins_l",
+    4.05,
+    1.13
+   ],
+   [
+    "r_pa",
+    2.74,
+    0.77
+   ],
+   [
+    "heart",
+    1.56,
+    0.44
+   ],
+   [
+    "ra_auricle",
+    1.31,
+    0.37
+   ],
+   [
+    "l_pa",
+    0.27,
+    0.07
+   ],
+   [
+    "aortic_arch",
+    0.14,
+    0.04
+   ]
+  ]
+ },
+ "beat07": {
+  "view": "lateral",
+  "opts": {
+   "surfaces": true,
+   "context": true
+  },
+  "litPctOfFrame": 22.45,
+  "rows": [
+   [
+    "lung_l",
+    71.32,
+    16.01
+   ],
+   [
+    "diaphragm",
+    9.34,
+    2.1
+   ],
+   [
+    "sternum",
+    6.41,
+    1.44
+   ],
+   [
+    "surf_sternocostal",
+    3.74,
+    0.84
+   ],
+   [
+    "trachea_bronchi",
+    2.58,
+    0.58
+   ],
+   [
+    "oesophagus",
+    2.55,
+    0.57
+   ],
+   [
+    "pulm_trunk",
+    1.58,
+    0.35
+   ],
+   [
+    "heart",
+    1.15,
+    0.26
+   ],
+   [
+    "surf_diaphragmatic",
+    1.07,
+    0.24
+   ],
+   [
+    "surf_left_pulmonary",
+    0.23,
+    0.05
+   ],
+   [
+    "la_auricle",
+    0.03,
+    0.01
+   ]
+  ]
+ },
+ "beat08": {
+  "view": "anterior",
+  "opts": {
+   "borders": true,
+   "vessels": false
+  },
+  "litPctOfFrame": 39.54,
+  "rows": [
+   [
+    "heart",
+    75.47,
+    29.84
+   ],
+   [
+    "border_inferior",
+    7.09,
+    2.8
+   ],
+   [
+    "border_left",
+    6.4,
+    2.53
+   ],
+   [
+    "la_auricle",
+    5.16,
+    2.04
+   ],
+   [
+    "ra_auricle",
+    4.64,
+    1.83
+   ],
+   [
+    "border_right",
+    0.79,
+    0.31
+   ],
+   [
+    "border_superior",
+    0.45,
+    0.18
+   ]
+  ]
+ },
+ "beat09": {
+  "view": "anterior",
+  "opts": {
+   "sulci": true,
+   "vessels": false
+  },
+  "litPctOfFrame": 38.03,
+  "rows": [
+   [
+    "heart",
+    82.82,
+    31.5
+   ],
+   [
+    "la_auricle",
+    5.49,
+    2.09
+   ],
+   [
+    "ant_iv_sulcus",
+    5.33,
+    2.03
+   ],
+   [
+    "ra_auricle",
+    4.92,
+    1.87
+   ],
+   [
+    "coronary_sulcus",
+    1.26,
+    0.48
+   ],
+   [
+    "post_iv_sulcus",
+    0.18,
+    0.07
+   ]
+  ]
+ },
+ "beat10": {
+  "view": "inferior",
+  "opts": {
+   "sulci": true,
+   "vessels": false
+  },
+  "litPctOfFrame": 29.52,
+  "rows": [
+   [
+    "heart",
+    88.41,
+    26.1
+   ],
+   [
+    "post_iv_sulcus",
+    7.58,
+    2.24
+   ],
+   [
+    "coronary_sulcus",
+    2.37,
+    0.7
+   ],
+   [
+    "ra_auricle",
+    1.64,
+    0.49
+   ]
+  ]
+ },
+ "beat11": {
+  "view": "lateral",
+  "opts": {
+   "poles": true,
+   "vessels": false
+  },
+  "litPctOfFrame": 27.03,
+  "rows": [
+   [
+    "heart",
+    76.51,
+    20.68
+   ],
+   [
+    "base",
+    12.45,
+    3.37
+   ],
+   [
+    "apex",
+    10.2,
+    2.76
+   ],
+   [
+    "la_auricle",
+    0.84,
+    0.23
+   ]
+  ]
+ },
+ "beat12": {
+  "view": "posterior",
+  "opts": {
+   "poles": true,
+   "vessels": false
+  },
+  "litPctOfFrame": 34.18,
+  "rows": [
+   [
+    "heart",
+    56.1,
+    19.17
+   ],
+   [
+    "base",
+    43.46,
+    14.85
+   ],
+   [
+    "apex",
+    0.3,
+    0.1
+   ],
+   [
+    "ra_auricle",
+    0.14,
+    0.05
+   ]
+  ]
+ },
+ "beat13": {
+  "view": "anterior",
+  "opts": {},
+  "litPctOfFrame": 39.74,
+  "rows": [
+   [
+    "heart",
+    58.42,
+    23.22
+   ],
+   [
+    "pulm_trunk",
+    9.85,
+    3.91
+   ],
+   [
+    "svc",
+    7.03,
+    2.79
+   ],
+   [
+    "asc_aorta",
+    4.89,
+    1.94
+   ],
+   [
+    "r_pa",
+    3.98,
+    1.58
+   ],
+   [
+    "ra_auricle",
+    3.48,
+    1.38
+   ],
+   [
+    "ivc",
+    3.19,
+    1.27
+   ],
+   [
+    "pulm_veins_r",
+    3.18,
+    1.26
+   ],
+   [
+    "la_auricle",
+    2.61,
+    1.04
+   ],
+   [
+    "l_pa",
+    2.12,
+    0.84
+   ],
+   [
+    "aortic_arch",
+    1.25,
+    0.5
+   ]
+  ]
+ },
+ "beat14": {
+  "view": "lateral",
+  "opts": {
+   "pericardium": true,
+   "nerves": true
+  },
+  "litPctOfFrame": 30.5,
+  "rows": [
+   [
+    "pericardium_fibrous",
+    80.07,
+    24.42
+   ],
+   [
+    "l_pa",
+    6.32,
+    1.93
+   ],
+   [
+    "pulm_trunk",
+    5.82,
+    1.78
+   ],
+   [
+    "aortic_arch",
+    3.53,
+    1.08
+   ],
+   [
+    "pulm_veins_l",
+    3.52,
+    1.07
+   ],
+   [
+    "ivc",
+    0.64,
+    0.2
+   ],
+   [
+    "svc",
+    0.1,
+    0.03
+   ]
+  ]
+ },
+ "beat15": {
+  "view": "anterior",
+  "opts": {
+   "poles": true
+  },
+  "litPctOfFrame": 39.82,
+  "rows": [
+   [
+    "heart",
+    56.36,
+    22.44
+   ],
+   [
+    "pulm_trunk",
+    9.83,
+    3.91
+   ],
+   [
+    "svc",
+    7.01,
+    2.79
+   ],
+   [
+    "asc_aorta",
+    4.88,
+    1.94
+   ],
+   [
+    "r_pa",
+    3.98,
+    1.58
+   ],
+   [
+    "ra_auricle",
+    3.47,
+    1.38
+   ],
+   [
+    "ivc",
+    3.18,
+    1.27
+   ],
+   [
+    "pulm_veins_r",
+    3.18,
+    1.26
+   ],
+   [
+    "la_auricle",
+    2.6,
+    1.04
+   ],
+   [
+    "apex",
+    2.14,
+    0.85
+   ],
+   [
+    "l_pa",
+    2.12,
+    0.84
+   ],
+   [
+    "aortic_arch",
+    1.25,
+    0.5
+   ]
+  ]
+ }
+}

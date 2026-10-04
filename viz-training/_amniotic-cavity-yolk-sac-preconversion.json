@@ -1,0 +1,763 @@
+{
+  "schema": 2,
+  "id": "embryology__weeks-1-2-implantation-bilaminar-disc__amniotic-cavity-yolk-sac",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Weeks 1-2: Implantation & Bilaminar Disc",
+  "structure": "Amniotic cavity & yolk sac",
+  "covers": [
+    "Amniotic cavity & yolk sac"
+  ],
+  "learning_goal": "Say where each early cavity comes from and which layer lines it, follow the amnion until it obliterates the chorionic cavity, list what the yolk sac hands over before it disappears, and name the adult remnant of the vitelline duct and of the allantois.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "amniotic cavity",
+      "yolk sac",
+      "week 2",
+      "early development",
+      "fetal membranes",
+      "umbilical cord",
+      "early pregnancy scan",
+      "amniotic fluid"
+    ],
+    "terms": [
+      "amniotic cavity",
+      "amnion",
+      "amnioblasts",
+      "amniotic fluid",
+      "liquor",
+      "hydramnios",
+      "polyhydramnios",
+      "oligohydramnios",
+      "Potter sequence",
+      "Potter facies",
+      "renal agenesis",
+      "amniocentesis",
+      "premature rupture of membranes",
+      "PROM",
+      "amniotic band syndrome",
+      "amniochorionic membrane",
+      "amniochorion",
+      "chorionic cavity",
+      "extraembryonic coelom",
+      "yolk sac",
+      "primary yolk sac",
+      "primitive yolk sac",
+      "secondary yolk sac",
+      "definitive yolk sac",
+      "exocoelomic cavity",
+      "exocoelomic membrane",
+      "Heuser membrane",
+      "exocoelomic cysts",
+      "hypoblast",
+      "epiblast",
+      "bilaminar disc",
+      "day 8",
+      "day 9",
+      "day 12",
+      "day 13",
+      "primordial germ cells",
+      "gonadal ridge",
+      "haematopoiesis",
+      "hematopoiesis",
+      "blood islands",
+      "extraembryonic mesoderm",
+      "primitive gut",
+      "foregut",
+      "midgut",
+      "hindgut",
+      "folding",
+      "vitelline duct",
+      "omphalomesenteric duct",
+      "omphaloenteric duct",
+      "vitelline vessels",
+      "Meckel diverticulum",
+      "Meckel's diverticulum",
+      "rule of 2s",
+      "umbilical fistula",
+      "vitelline cyst",
+      "allantois",
+      "urachus",
+      "median umbilical ligament",
+      "urachal fistula",
+      "urachal cyst",
+      "urachal sinus",
+      "connecting stalk",
+      "body stalk",
+      "umbilical cord",
+      "double bleb sign",
+      "gestational sac",
+      "yolk sac on ultrasound",
+      "transvaginal scan",
+      "vernix",
+      "lung development",
+      "fetal swallowing",
+      "fetal urine",
+      "umbilical vesicle"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "two_balloons",
+      "label": "One disc, two balloons",
+      "role": "context",
+      "group": "Where the cavities come from",
+      "layer": "organ",
+      "color": "#34495e",
+      "terms": [
+        "bilaminar disc",
+        "two cavities",
+        "amniotic cavity",
+        "yolk sac",
+        "dorsal",
+        "ventral",
+        "sandwich"
+      ],
+      "narration": "Hold one picture in your head for the whole of this scene. A flat two-layer disc with a balloon above it and a balloon below it. The balloon above is the amniotic cavity, sitting on the epiblast. The balloon below is the yolk sac, hanging from the hypoblast. Every fact in this topic is either about where one of those balloons came from or about what it turns into."
+    },
+    {
+      "key": "amniotic_cavity",
+      "label": "Amniotic cavity — a slit inside the epiblast",
+      "role": "part",
+      "group": "Where the cavities come from",
+      "layer": "organ",
+      "color": "#5dade2",
+      "terms": [
+        "amniotic cavity",
+        "amnioblasts",
+        "amnion",
+        "day 8",
+        "epiblast",
+        "floor of the amniotic cavity",
+        "dorsal",
+        "roof of amnioblasts"
+      ],
+      "narration": "On about day eight a small space opens within the epiblast itself. Epiblast cells at its edge flatten into amnioblasts and roof it over; the rest of the epiblast stays as its floor. That space is the amniotic cavity. Two things follow from how it forms: it is lined by epiblast-derived cells, and it lies on the dorsal side of the disc. Dorsal in embryology means the amniotic side, for the rest of the course."
+    },
+    {
+      "key": "primary_yolk_sac",
+      "label": "Primary yolk sac — hypoblast lines the old blastocyst cavity",
+      "role": "part",
+      "group": "Where the cavities come from",
+      "layer": "organ",
+      "color": "#f7dc6f",
+      "terms": [
+        "primary yolk sac",
+        "primitive yolk sac",
+        "exocoelomic cavity",
+        "exocoelomic membrane",
+        "Heuser membrane",
+        "day 9",
+        "hypoblast",
+        "blastocyst cavity",
+        "ventral"
+      ],
+      "narration": "On about day nine, hypoblast cells creep out from the edge of the disc and line the inside of the old blastocyst cavity with a thin sheet — the exocoelomic membrane, or Heuser's membrane. The space they enclose is the primary yolk sac. Its roof is the hypoblast, so it sits ventral to the disc, the mirror image of the amniotic cavity above."
+    },
+    {
+      "key": "secondary_yolk_sac",
+      "label": "Secondary yolk sac — the one that matters",
+      "role": "part",
+      "group": "Where the cavities come from",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "terms": [
+        "secondary yolk sac",
+        "definitive yolk sac",
+        "umbilical vesicle",
+        "day 12",
+        "day 13",
+        "second wave of hypoblast",
+        "pinched off",
+        "exocoelomic cysts",
+        "smaller"
+      ],
+      "narration": "Around day twelve to thirteen the hypoblast sends a second wave of cells into the primary sac. They push in and pinch off a smaller cavity — the secondary, or definitive, yolk sac — leaving scraps of the primary sac behind as exocoelomic cysts. When an examiner or a sonographer says yolk sac, this smaller second one is what they mean."
+    },
+    {
+      "key": "amnion_grows",
+      "label": "The amnion expands and swallows the chorionic cavity",
+      "role": "part",
+      "group": "The amnion takes over",
+      "layer": "organ",
+      "color": "#85c1e9",
+      "terms": [
+        "amnion",
+        "expands",
+        "chorionic cavity",
+        "extraembryonic coelom",
+        "obliterated",
+        "week 8",
+        "week 12",
+        "amniochorionic membrane",
+        "amniochorion",
+        "folding"
+      ],
+      "narration": "The amniotic cavity does not stay a slit. As the embryo folds, the amnion is carried round the body and keeps filling with fluid, so it expands into the chorionic cavity and squeezes it out of existence between roughly weeks eight and twelve. The two membranes then lie against each other as one amniochorionic membrane. That single membrane is what ruptures when the waters break, and its position is why a scan later in pregnancy shows no separate chorionic space."
+    },
+    {
+      "key": "amnion_sheathes_cord",
+      "label": "The amnion sheathes the umbilical cord",
+      "role": "part",
+      "group": "The amnion takes over",
+      "layer": "organ",
+      "color": "#a9cce3",
+      "terms": [
+        "amnion",
+        "connecting stalk",
+        "body stalk",
+        "umbilical cord",
+        "sheath",
+        "Wharton jelly",
+        "vitelline duct",
+        "yolk sac remnant"
+      ],
+      "narration": "As the amnion expands it wraps the connecting stalk and the yolk sac stalk together and covers them with a single tube of amniotic epithelium. That tube is the umbilical cord. So the cord is not a new organ: it is the connecting stalk, the vitelline duct and their vessels, packed in jelly and sleeved in amnion."
+    },
+    {
+      "key": "amniotic_fluid",
+      "label": "Amniotic fluid — where it comes from and what it does",
+      "role": "part",
+      "group": "The amnion takes over",
+      "layer": "organ",
+      "color": "#aed6f1",
+      "terms": [
+        "amniotic fluid",
+        "liquor",
+        "transudate",
+        "fetal urine",
+        "fetal swallowing",
+        "lung fluid",
+        "cushion",
+        "lung development",
+        "limb movement",
+        "temperature",
+        "vernix",
+        "term volume"
+      ],
+      "narration": "Early on the fluid is a transudate from maternal blood and from the amnion itself. From about the second trimester the fetus makes most of it as dilute urine, and clears it by swallowing it. So the fluid is a circuit, not a pool. It cushions the fetus, lets the limbs move so joints form properly, keeps the temperature steady, prevents the amnion sticking to the skin, and — the point students forget — it is breathed in and out, which is required for the lungs to develop at all. Volume rises to roughly a litre near term and then falls."
+    },
+    {
+      "key": "fluid_clinical",
+      "label": "Too little fluid, too much fluid",
+      "role": "part",
+      "group": "The amnion takes over",
+      "layer": "organ",
+      "color": "#7fb3d5",
+      "terms": [
+        "oligohydramnios",
+        "Potter sequence",
+        "Potter facies",
+        "renal agenesis",
+        "posterior urethral valves",
+        "pulmonary hypoplasia",
+        "limb deformity",
+        "polyhydramnios",
+        "hydramnios",
+        "oesophageal atresia",
+        "esophageal atresia",
+        "duodenal atresia",
+        "anencephaly",
+        "cannot swallow",
+        "amniocentesis",
+        "premature rupture of membranes",
+        "amniotic band syndrome"
+      ],
+      "narration": "Read the volume as a report on the circuit. Too little fluid means the fetus is not making urine or is leaking it out — renal agenesis, obstructed valves, or ruptured membranes — and the consequences follow from what the fluid was for: squashed face, limb contractures and, most dangerous, hypoplastic lungs. That combination is the Potter sequence. Too much fluid means the fetus cannot swallow it back — oesophageal or duodenal atresia, or anencephaly. Two more clinical facts live here: amniocentesis samples this fluid for fetal cells from about the fifteenth week, and torn strands of amnion can wrap a limb and amputate it, which is amniotic band syndrome."
+    },
+    {
+      "key": "germ_cells",
+      "label": "Primordial germ cells start in the yolk sac wall",
+      "role": "part",
+      "group": "What the yolk sac hands over",
+      "layer": "organ",
+      "color": "#e9d16b",
+      "terms": [
+        "primordial germ cells",
+        "yolk sac wall",
+        "allantois",
+        "week 3",
+        "week 4",
+        "week 6",
+        "migrate",
+        "hindgut",
+        "dorsal mesentery",
+        "gonadal ridge",
+        "genital ridge",
+        "teratoma"
+      ],
+      "narration": "The germ cells do not begin in the gonad. They appear in the wall of the yolk sac near the origin of the allantois in week three, then migrate along the dorsal mesentery of the hindgut to reach the gonadal ridges by about week six. Two exam consequences: if they never arrive, the gonad does not develop, and if some of them stop on the way, a germ cell tumour can grow anywhere along that midline route."
+    },
+    {
+      "key": "haematopoiesis",
+      "label": "The first blood is made on the yolk sac",
+      "role": "part",
+      "group": "What the yolk sac hands over",
+      "layer": "organ",
+      "color": "#dc7633",
+      "terms": [
+        "haematopoiesis",
+        "hematopoiesis",
+        "blood islands",
+        "extraembryonic mesoderm",
+        "week 3",
+        "vitelline vessels",
+        "first blood cells",
+        "liver",
+        "spleen",
+        "bone marrow"
+      ],
+      "narration": "In week three, blood islands appear in the extraembryonic mesoderm covering the yolk sac. They make the first blood cells and the first vessels, and the vitelline vessels that drain them are the beginning of the circulation. This is the first stop in the sequence you will be asked to recite — yolk sac, then liver, then spleen, then bone marrow."
+    },
+    {
+      "key": "primitive_gut",
+      "label": "The roof of the yolk sac becomes the gut",
+      "role": "part",
+      "group": "What the yolk sac hands over",
+      "layer": "organ",
+      "color": "#d4ac0d",
+      "terms": [
+        "primitive gut",
+        "foregut",
+        "midgut",
+        "hindgut",
+        "folding",
+        "week 4",
+        "incorporated",
+        "endoderm",
+        "vitelline duct",
+        "narrowed"
+      ],
+      "narration": "In week four the disc folds head to tail and side to side. The folding pinches the roof of the yolk sac up into the body, and that incorporated part becomes the primitive gut tube — foregut, midgut and hindgut. The part left outside stays as the yolk sac, and the neck between the two narrows into the vitelline duct. So the gut and the yolk sac are the same original cavity, separated by folding."
+    },
+    {
+      "key": "vitelline_duct",
+      "label": "Vitelline duct and Meckel's diverticulum",
+      "role": "part",
+      "group": "What is left behind",
+      "layer": "organ",
+      "color": "#ca6f1e",
+      "terms": [
+        "vitelline duct",
+        "omphalomesenteric duct",
+        "omphaloenteric duct",
+        "obliterates",
+        "week 6",
+        "week 10",
+        "Meckel diverticulum",
+        "Meckel's diverticulum",
+        "rule of 2s",
+        "ileum",
+        "ectopic gastric mucosa",
+        "painless rectal bleeding",
+        "vitelline fistula",
+        "vitelline cyst",
+        "fibrous band",
+        "volvulus"
+      ],
+      "narration": "The vitelline duct normally closes and disappears around weeks six to ten. When part of it persists you get the commonest congenital anomaly of the gut — Meckel's diverticulum, remembered by the rule of twos: about two per cent of people, roughly two inches long, about two feet from the ileocaecal valve, often two types of ectopic mucosa, gastric and pancreatic, usually presenting before age two. Gastric mucosa in it ulcerates the neighbouring ileum, which is why the classic presentation is painless rectal bleeding in a small child. If the duct stays open along its whole length, faeces discharge at the umbilicus; if only the middle stays open, a cyst forms; and a residual fibrous band can trap a loop of bowel and cause a volvulus."
+    },
+    {
+      "key": "allantois",
+      "label": "Allantois — a pouch that becomes a ligament",
+      "role": "part",
+      "group": "What is left behind",
+      "layer": "organ",
+      "color": "#b9770e",
+      "terms": [
+        "allantois",
+        "day 16",
+        "diverticulum",
+        "caudal yolk sac",
+        "hindgut",
+        "connecting stalk",
+        "umbilical vessels",
+        "urachus",
+        "bladder",
+        "median umbilical ligament",
+        "urachal fistula",
+        "urachal cyst",
+        "urachal sinus",
+        "urine at the umbilicus"
+      ],
+      "narration": "About day sixteen a small finger of yolk sac pushes into the connecting stalk. That is the allantois. In humans it does almost nothing itself, but two things grow from it: the umbilical vessels form in its wall, and its stalk stays connected to the developing bladder. That connection narrows into the urachus and then into the fibrous median umbilical ligament running from the bladder apex to the umbilicus. If it fails to close you get urine leaking at the umbilicus through a urachal fistula, or a urachal cyst or sinus along its line."
+    },
+    {
+      "key": "yolk_sac_fate",
+      "label": "The yolk sac itself shrivels",
+      "role": "part",
+      "group": "What is left behind",
+      "layer": "organ",
+      "color": "#b7950b",
+      "terms": [
+        "yolk sac",
+        "shrivels",
+        "week 12",
+        "week 20",
+        "chorionic cavity",
+        "base of the cord",
+        "no nutrition",
+        "vestigial",
+        "not a yolk"
+      ],
+      "narration": "The human yolk sac holds no yolk and feeds nothing. Once the placenta takes over, it shrinks and is left as a small pale nodule near the base of the cord, usually gone from view by the second half of pregnancy. Its whole importance is what it did in weeks three and four — the first blood, the germ cells, and the roof that became the gut."
+    },
+    {
+      "key": "scan_cavities",
+      "label": "What the two cavities look like on a scan",
+      "role": "part",
+      "group": "Seeing it in a clinic",
+      "layer": "organ",
+      "color": "#5499c7",
+      "terms": [
+        "gestational sac",
+        "yolk sac on ultrasound",
+        "transvaginal scan",
+        "5 weeks",
+        "double bleb sign",
+        "amniotic cavity",
+        "intrauterine pregnancy",
+        "ectopic pregnancy",
+        "pseudogestational sac",
+        "enlarged yolk sac",
+        "miscarriage"
+      ],
+      "narration": "On an early transvaginal scan the chorionic cavity is the gestational sac, and the yolk sac is the first structure seen inside it, at around five weeks. Seeing it is what confirms the pregnancy is really in the uterus, because a pseudosac in an ectopic pregnancy contains nothing. A little later the amniotic cavity and the yolk sac sit either side of the disc and give the double bleb appearance. A yolk sac that is absent, unusually large, or calcified is an early warning that the pregnancy may fail."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "Cut it: a balloon above, a balloon below",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Where the cavities come from"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "amniotic_cavity",
+            "primary_yolk_sac"
+          ],
+          "layout": "stacked"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Start with the cut drawing. Disc in the middle, amniotic cavity above it, yolk sac below it. The layer that lines each cavity is the layer nearest it — epiblast roofs nothing and floors the amnion, hypoblast floors nothing and roofs the yolk sac. Learn the sandwich this way up once and you will never have to redraw it."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Day 8 and day 9 — each cavity is made differently",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Where the cavities come from"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "amniotic_cavity",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "primary_yolk_sac",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "amniotic_cavity",
+          "to": "primary_yolk_sac",
+          "kind": "opposite sides of the same disc"
+        }
+      ],
+      "narration": "The two cavities are not made the same way, and that is the examinable difference. The amniotic cavity opens inside the epiblast — nothing migrates, a space simply appears and amnioblasts roof it. The yolk sac is the reverse: hypoblast cells migrate out and line a cavity that already existed, the old blastocyst cavity. One is a space that opened, the other is a space that was lined."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "The yolk sac is remade smaller",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Where the cavities come from"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:yolk-sac-remodelling",
+          "path": [
+            "primary_yolk_sac",
+            "secondary_yolk_sac"
+          ],
+          "duration": 5
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "secondary_yolk_sac",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "two_balloons"
+        }
+      ],
+      "narration": "Days twelve to thirteen. A second wave of hypoblast pushes into the primary sac and pinches off a smaller one — the secondary or definitive yolk sac — leaving fragments of the old one as exocoelomic cysts. If a question asks which yolk sac makes blood cells and germ cells, or which one is seen on a scan, the answer is always the secondary."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "The amnion grows until there is nowhere left to grow",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The amnion takes over"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "amniotic_cavity"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "amniotic_cavity",
+          "to": "amnion_grows",
+          "kind": "expands until the chorionic cavity is gone"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "amnion_grows",
+          "to": "amnion_sheathes_cord",
+          "kind": "and wraps the stalk on the way"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Follow the amnion forward. It fills with fluid and expands into the chorionic cavity until, somewhere between weeks eight and twelve, that cavity is obliterated and amnion lies fused against chorion as a single membrane. On the way it wraps the connecting stalk and the yolk sac stalk into one sleeve — the umbilical cord. Two structures you will be asked about, the amniochorionic membrane and the cord, are both just consequences of this one expansion."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "The fluid is a circuit, not a pool",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The amnion takes over"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "amniotic_fluid",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:amniotic-fluid-turnover",
+          "path": [
+            "amniotic_fluid",
+            "fluid_clinical"
+          ],
+          "duration": 6
+        }
+      ],
+      "narration": "The fetus urinates the fluid out and swallows it back, and breathes it in and out of the lungs. Because it is a circuit, the volume is a clinical measurement rather than a curiosity — it tells you whether the kidneys are making it, whether the gut can clear it, and whether the membranes are holding it."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 6,
+      "title": "Reading the volume in a clinic",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The amnion takes over"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "fluid_clinical",
+          "intensity": 0.95
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "amniotic_fluid",
+            "fluid_clinical"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Too little fluid points at production or leakage — renal agenesis, obstructed urethral valves, ruptured membranes — and produces the squashed face, the contracted limbs and the hypoplastic lungs of the Potter sequence. Too little fluid kills through the lungs, not the kidneys, and that is the sentence to write. Too much points at clearance — the fetus cannot swallow, so think oesophageal or duodenal atresia, or anencephaly."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "What the yolk sac gives away before it goes",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What the yolk sac hands over"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "secondary_yolk_sac"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "secondary_yolk_sac",
+          "to": "germ_cells",
+          "kind": "germ cells arise in its wall"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "secondary_yolk_sac",
+          "to": "haematopoiesis",
+          "kind": "first blood islands on its surface"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "secondary_yolk_sac",
+          "to": "primitive_gut",
+          "kind": "its roof is folded in as the gut"
+        }
+      ],
+      "narration": "Three handovers, and they are the whole reason the yolk sac is examinable. The first blood cells and vessels form on it in week three. The primordial germ cells appear in its wall and then migrate to the gonadal ridges. And in week four its roof is folded up into the body to become the primitive gut. After that it has nothing left to give."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 8,
+      "title": "Folding separates the gut from the sac",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "What the yolk sac hands over"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "primitive_gut",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "primitive_gut",
+          "to": "vitelline_duct",
+          "kind": "the narrowed neck between them"
+        }
+      ],
+      "narration": "Cut the folding embryo across and the geometry explains itself. The lateral folds pinch the yolk sac into an hourglass. The upper half is inside the embryo and becomes the gut tube; the lower half stays outside as the yolk sac; the waist between them is the vitelline duct. Everything that goes wrong at the umbilicus later is that waist failing to close."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 9,
+      "title": "The remnants you will be asked to name",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What is left behind"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "vitelline_duct",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "allantois",
+          "intensity": 0.95
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "vitelline_duct",
+            "allantois"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "The amnion takes over"
+        }
+      ],
+      "narration": "Two stalks leave the yolk sac and two remnants are left. The vitelline duct runs to the ileum; if it persists you get Meckel's diverticulum with its rule of twos, or a fistula, cyst or band. The allantois runs to the bladder; its remnant is the urachus and then the median umbilical ligament, and if it persists you get urine at the umbilicus. Same umbilicus, two entirely different ducts, and students mix them constantly — one drains gut, the other drains bladder."
+    },
+    {
+      "mode": "location",
+      "beat": 10,
+      "title": "The two cavities on an early scan",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Seeing it in a clinic"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "secondary_yolk_sac"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "amniotic_cavity"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "scan_cavities",
+          "to": "secondary_yolk_sac",
+          "kind": "the first structure seen inside the sac"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Close where a student will meet this in practice. The gestational sac on a five-week scan is the chorionic cavity, and the small ring inside it is the secondary yolk sac — the finding that says the pregnancy is genuinely in the uterus. Shortly after, the amniotic cavity and the yolk sac either side of the disc give the double bleb sign. An absent, oversized or calcified yolk sac is an early sign that the pregnancy is not going to continue."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and offers no 3d option, and the subject is a staged process at a scale no mesh exists for. Only diagram is deferred. The curriculum asks for cross_section and location views; beats 1, 8 and 10 supply them.",
+    "Status is 'planned'. Fifteen regions, ten beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a sagittal cut at day 9 and day 13 with the amniotic cavity above and yolk sac below the disc, a later panel with the amnion expanded and the chorionic cavity obliterated, a transverse cut through the folding embryo showing the yolk sac pinched into gut plus duct plus sac, and a final panel of the umbilical stalks with the vitelline duct running to the ileum and the allantois to the bladder.",
+    "The folding panel in beat 8 must be drawn as a transverse cut, not a sagittal one. The hourglass waist that becomes the vitelline duct is only visible in cross section, and the whole beat depends on the student seeing it.",
+    "Beats 3 and 5 trace concepts rather than objects: concept:yolk-sac-remodelling is the replacement of the primary sac by the secondary, and concept:amniotic-fluid-turnover is the production-and-clearance circuit. Neither is a drawable subject, so both are declared abstractions the renderer walks without lighting a subject.",
+    "'Chorion & placenta (early)' is a SEPARATE curriculum entry authored in the same run and is NOT claimed here. The chorionic cavity appears in this scene only as the space the amnion obliterates and as the gestational sac on a scan; the villous tree, the placental barrier and maternal-fetal exchange belong to that entry.",
+    "'Bilaminar embryonic disc' is already covered by its own scene and is NOT re-claimed. Epiblast and hypoblast appear here only as the linings of the two cavities.",
+    "Day numbers are the standard teaching approximations — amniotic cavity about day 8, primary yolk sac day 9, secondary yolk sac day 12 to 13, allantois about day 16, vitelline duct closing weeks 6 to 10, chorionic cavity obliterated weeks 8 to 12 — and are narrated as approximations. Published figures for chorionic cavity obliteration in particular range from about week 8 to week 12 and no single week is stated as fact.",
+    "Amniotic fluid volume is narrated as roughly a litre near term with a fall thereafter, rather than a precise figure, because quoted term volumes vary between texts and the teaching point is the trend, not the number.",
+    "Meckel's rule of twos is included in the form Nigerian MBBS teaching uses. It is a memory aid with real variation behind it — reported prevalence is about 2 per cent but the length, distance from the ileocaecal valve and age at presentation are all ranges, and the narration says 'about' and 'roughly' throughout rather than presenting the twos as measurements."
+  ]
+}

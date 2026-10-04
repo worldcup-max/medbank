@@ -1,10 +1,10 @@
 {
   "schema": 2,
   "id": "embryology__week-3-gastrulation__neurulation-neural-plate-tube",
-  "mode": "sequence",
+  "mode": "3d_anatomy",
   "deferred_modes": [
-    "diagram",
-    "3d_anatomy"
+    "sequence",
+    "diagram"
   ],
   "course": "Embryology",
   "topic": "Week 3: Gastrulation",
@@ -13,9 +13,9 @@
     "Neurulation (neural plate/tube)"
   ],
   "learning_goal": "Draw the four cross-sections of neurulation from plate to closed tube, say where closure starts and which day each neuropore shuts, name what neural crest becomes, and use a failure of closure at each end to explain anencephaly, spina bifida and their screening.",
-  "status": "planned",
+  "status": "candidate",
   "provider": {
-    "primary": "svg",
+    "primary": "procedural",
     "fallbacks": []
   },
   "match": {
@@ -118,52 +118,40 @@
   "camera": {
     "framing": "posterior"
   },
+  "model": "neurulation-neural-plate-tube",
+  "framing_strict": true,
   "structures": [
     {
-      "key": "disc_context",
-      "label": "The trilaminar disc from above, with the notochord beneath",
-      "role": "context",
-      "group": "Setting",
-      "layer": "organ",
-      "color": "#aeb6bf",
-      "terms": [
-        "trilaminar disc",
-        "ectoderm",
-        "notochord",
-        "dorsal surface",
-        "midline",
-        "cranial end",
-        "caudal end",
-        "week 3"
-      ],
-      "narration": "Look down on the dorsal surface of the trilaminar disc. Under the midline lies the notochord, already a solid rod. Neurulation is the story of what the ectoderm directly above that rod does next, so keep the notochord in every picture even when you are drawing the surface."
-    },
-    {
-      "key": "induction",
-      "label": "The notochord gives the order",
+      "key": "surface_ectoderm",
+      "label": "Surface ectoderm",
+      "name": "Surface ectoderm",
       "role": "part",
-      "group": "Setting",
+      "group": "The embryo, dorsal view",
       "layer": "organ",
-      "color": "#16a085",
+      "color": "#2980b9",
+      "opacity": 0.22,
       "terms": [
-        "neural induction",
-        "notochord",
-        "signals",
-        "overlying ectoderm",
-        "thickens",
-        "neuroectoderm",
-        "sonic hedgehog",
-        "SHH"
+        "surface ectoderm",
+        "skin ectoderm",
+        "epiblast",
+        "continuous",
+        "closes over"
       ],
-      "narration": "Nothing here is spontaneous. The notochord signals up into the ectoderm lying over it, and that ectoderm becomes neuroectoderm. This is the link between the last scene and this one: the notochord induces, the ectoderm responds. Sonic hedgehog from the notochord keeps working afterwards to make the ventral half of the tube."
+      "narration": "The sheet the neural plate is part of. Where the notochord signals, it thickens into neuroectoderm; everywhere else it stays thin, and at the fold tips the two are one continuous epithelium — which is why the cells that leave at the seam have a choice to make. It is drawn see-through here so you can watch the tube close underneath it, and then watch it close over the top.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no structure for this — its structures[] were teaching PANELS, not parts — so this is new geometry and new words.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#surface_ectoderm"
+      }
     },
     {
-      "key": "plate",
+      "key": "neural_plate",
       "label": "Stage 1 — the neural plate",
+      "name": "Stage 1 — the neural plate",
       "role": "part",
-      "group": "Four cross-sections",
+      "group": "The four stages, as four levels",
       "layer": "organ",
       "color": "#f4d03f",
+      "opacity": 1,
       "terms": [
         "neural plate",
         "neuroectoderm",
@@ -174,15 +162,21 @@
         "narrow caudally",
         "flat"
       ],
-      "narration": "By about day eighteen the midline ectoderm has thickened into a flat, slipper-shaped neural plate — broad at the head end, narrow at the tail end. That difference in width is not decoration: the broad part becomes brain and the narrow part becomes spinal cord."
+      "narration": "By about day eighteen the midline ectoderm has thickened into a flat, slipper-shaped neural plate — broad at the head end, narrow at the tail end. That difference in width is not decoration: the broad part becomes brain and the narrow part becomes spinal cord.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"Stage 1 — the neural plate\". In the 3D scene it is a BAND of the one neuroepithelial sheet: the stations whose midline has not yet sunk half an epithelial thickness. At day 23 that band is at the TAIL end, because closure began in the neck and has run cranially faster than caudally.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_plate"
+      }
     },
     {
-      "key": "groove",
+      "key": "neural_groove",
       "label": "Stage 2 — the neural groove",
+      "name": "Stage 2 — the neural groove",
       "role": "part",
-      "group": "Four cross-sections",
+      "group": "The four stages, as four levels",
       "layer": "organ",
       "color": "#f5b041",
+      "opacity": 1,
       "terms": [
         "neural groove",
         "midline depression",
@@ -191,15 +185,21 @@
         "day 19",
         "day 20"
       ],
-      "narration": "The middle of the plate sinks to form the neural groove, running the length of the midline. Draw this cross-section as a shallow dish: the floor is the future ventral cord and the rim is on its way to becoming the back of the tube."
+      "narration": "The middle of the plate sinks to form the neural groove, running the length of the midline. Draw this cross-section as a shallow dish: the floor is the future ventral cord and the rim is on its way to becoming the back of the tube.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"Stage 2 — the neural groove\". A band of the same sheet, between half an epithelial thickness of sagitta and two.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_groove"
+      }
     },
     {
-      "key": "folds",
+      "key": "neural_folds",
       "label": "Stage 3 — the neural folds rise",
+      "name": "Stage 3 — the neural folds rise",
       "role": "part",
-      "group": "Four cross-sections",
+      "group": "The four stages, as four levels",
       "layer": "organ",
       "color": "#e67e22",
+      "opacity": 1,
       "terms": [
         "neural folds",
         "elevated edges",
@@ -209,15 +209,21 @@
         "day 20",
         "day 21"
       ],
-      "narration": "The edges of the plate lift into the neural folds and lean towards each other over the groove. Everything up to this point is reversible-looking; from here the embryo is committed to closing a tube, and the fold tips are where the next two things both happen."
+      "narration": "The edges of the plate lift into the neural folds and lean towards each other over the groove. Everything up to this point is reversible-looking; from here the embryo is committed to closing a tube, and the fold tips are where the next two things both happen.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"Stage 3 — the neural folds rise\". A band of the same sheet: the tips now stand two epithelial thicknesses above the floor, which is when they have cleared the surface ectoderm they are continuous with.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_folds"
+      }
     },
     {
-      "key": "tube",
+      "key": "neural_tube",
       "label": "Stage 4 — the folds fuse into the neural tube",
+      "name": "Stage 4 — the folds fuse into the neural tube",
       "role": "part",
-      "group": "Four cross-sections",
+      "group": "The four stages, as four levels",
       "layer": "organ",
       "color": "#d35400",
+      "opacity": 0.34,
       "terms": [
         "neural tube",
         "fusion",
@@ -228,34 +234,43 @@
         "day 22",
         "brain and spinal cord"
       ],
-      "narration": "The fold tips meet and fuse, the tube separates from the surface ectoderm, and skin ectoderm closes over the top. The lumen left inside is the future ventricular system and central canal. Four pictures, in order: plate, groove, folds, tube. Draw those four and you have answered most of this topic."
+      "narration": "The fold tips meet and fuse, the tube separates from the surface ectoderm, and skin ectoderm closes over the top. The lumen left inside is the future ventricular system and central canal. Four pictures, in order: plate, groove, folds, tube. Draw those four and you have answered most of this topic.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"Stage 4 — the folds fuse into the neural tube\". A band of the same sheet, and its boundary with the folds IS the closure front: a station is this once its two fold tips are in contact. It is drawn SEE-THROUGH, at 0.34, so the cavity inside it can be seen in the whole-embryo beats — a first attempt used a second structure pointing at the same part so one beat could have it opaque and another translucent, and the visibility walk showed why that cannot work: viz3d maps one mesh to one structure, so the second one measured 0% ink in every beat. One opacity per part, chosen so every beat that uses it can make its own point.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_tube"
+      }
     },
     {
-      "key": "zipper",
-      "label": "Closure starts in the middle and runs both ways",
+      "key": "neural_canal",
+      "label": "The canal inside it",
+      "name": "The canal inside it",
       "role": "part",
-      "group": "How closure runs",
+      "group": "The four stages, as four levels",
       "layer": "organ",
-      "color": "#c0392b",
+      "color": "#5dade2",
+      "opacity": 1,
       "terms": [
-        "closure begins",
-        "fifth somite",
-        "cervical region",
-        "day 22",
-        "zipper",
-        "bidirectional",
-        "cranially and caudally",
-        "primary neurulation"
+        "central canal",
+        "ventricular system",
+        "lumen",
+        "neural canal",
+        "cerebrospinal fluid"
       ],
-      "narration": "Fusion does not start at one end. It starts in the future cervical region, at about the fifth somite, on about day twenty-two, and then runs like a zip in both directions at once. That is why the two ends are the last to shut — and why the two ends are where defects appear."
+      "narration": "The space the closed tube encloses, drawn as a solid cast so you can see it. Nobody chose how wide it is: the plate rolls up conserving its own arc length, so the tube is as wide as the plate was, and the cavity is what is left over inside the epithelium. That is why it is a future ventricle at the head end and a slit of a central canal at the tail end — the plate is broad there and narrow here.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no structure for this — its structures[] were teaching PANELS, not parts — so this is new geometry and new words.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_canal"
+      }
     },
     {
       "key": "cranial_neuropore",
       "label": "The cranial neuropore — closes day 25",
+      "name": "The cranial neuropore — closes day 25",
       "role": "part",
       "group": "How closure runs",
       "layer": "organ",
       "color": "#a93226",
+      "opacity": 1,
       "terms": [
         "cranial neuropore",
         "rostral neuropore",
@@ -265,15 +280,21 @@
         "last opening at the head end",
         "closes first"
       ],
-      "narration": "The opening at the head end is the cranial neuropore and it closes on about day twenty-five. Learn the number as a pair with the other one. Twenty-five at the top, twenty-seven at the bottom, and every defect in this topic is one of those two dates missed."
+      "narration": "The opening at the head end is the cranial neuropore and it closes on about day twenty-five. Learn the number as a pair with the other one. Twenty-five at the top, twenty-seven at the bottom, and every defect in this topic is one of those two dates missed.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"The cranial neuropore — closes day 25\". In 3D it is the LIP that bounds the opening: one loop running up one fold tip, over the rostral end of the plate and back down the other. An opening is defined by the closure that bounds it, so it exists only once the front has started.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#cranial_neuropore"
+      }
     },
     {
       "key": "caudal_neuropore",
       "label": "The caudal neuropore — closes day 27",
+      "name": "The caudal neuropore — closes day 27",
       "role": "part",
       "group": "How closure runs",
       "layer": "organ",
       "color": "#922b21",
+      "opacity": 1,
       "terms": [
         "caudal neuropore",
         "posterior neuropore",
@@ -283,15 +304,144 @@
         "end of week 4",
         "closes second"
       ],
-      "narration": "The tail-end opening is the caudal neuropore and it closes about two days later, on day twenty-seven, at roughly the level of the future lumbosacral spine. Once both are shut the tube is a closed system and the circulation of what will become cerebrospinal fluid can begin."
+      "narration": "The tail-end opening is the caudal neuropore and it closes about two days later, on day twenty-seven, at roughly the level of the future lumbosacral spine. Once both are shut the tube is a closed system and the circulation of what will become cerebrospinal fluid can begin.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"The caudal neuropore — closes day 27\". The same lip at the other end. Where it sits is not a choice: it is the caudal edge of the last somite present on day 27, so it moves if the somite clock does.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#caudal_neuropore"
+      }
     },
     {
-      "key": "secondary",
+      "key": "somites",
+      "label": "The somites — and the fifth one",
+      "name": "The somites — and the fifth one",
+      "role": "part",
+      "group": "How closure runs",
+      "layer": "organ",
+      "color": "#cf3f3b",
+      "opacity": 1,
+      "terms": [
+        "closure begins",
+        "fifth somite",
+        "cervical region",
+        "day 22",
+        "zipper",
+        "bidirectional",
+        "cranially and caudally",
+        "primary neurulation",
+        "somite",
+        "paraxial mesoderm",
+        "segmentation"
+      ],
+      "narration": "Fusion does not start at one end. It starts in the future cervical region, at about the fifth somite, on about day twenty-two, and then runs like a zip in both directions at once. That is why the two ends are the last to shut — and why the two ends are where defects appear.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"Closure starts in the middle and runs both ways\". The words belong on the SOMITES in the 3D scene, because the somites are what \"the fifth somite\" points at and this model reads the closure site off them rather than typing it in: one pair every eight hours from day 20, each pair keeping the v-extent it had when it formed, and closure begins at the centre of the fifth.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#somites"
+      }
+    },
+    {
+      "key": "notochord",
+      "label": "The notochord gives the order",
+      "name": "The notochord gives the order",
+      "role": "context",
+      "group": "Setting",
+      "layer": "organ",
+      "color": "#d4306f",
+      "opacity": 1,
+      "terms": [
+        "neural induction",
+        "notochord",
+        "signals",
+        "overlying ectoderm",
+        "thickens",
+        "neuroectoderm",
+        "sonic hedgehog",
+        "SHH"
+      ],
+      "narration": "Nothing here is spontaneous. The notochord signals up into the ectoderm lying over it, and that ectoderm becomes neuroectoderm. This is the link between the last scene and this one: the notochord induces, the ectoderm responds. Sonic hedgehog from the notochord keeps working afterwards to make the ventral half of the tube.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"The notochord gives the order\". Here it is the rod itself, immediately ventral to the plate, tapering out at the prechordal plate. The sibling scene embryology__week-3-gastrulation__notochord is where its own four stages are taught; this one only needs it to be in the picture, underneath, in every beat.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#notochord"
+      }
+    },
+    {
+      "key": "endoderm",
+      "label": "The trilaminar disc, with the notochord beneath",
+      "name": "The trilaminar disc, with the notochord beneath",
+      "role": "context",
+      "group": "Setting",
+      "layer": "organ",
+      "color": "#5f9e2a",
+      "opacity": 1,
+      "terms": [
+        "trilaminar disc",
+        "ectoderm",
+        "notochord",
+        "dorsal surface",
+        "midline",
+        "cranial end",
+        "caudal end",
+        "week 3"
+      ],
+      "narration": "Look down on the dorsal surface of the trilaminar disc. Under the midline lies the notochord, already a solid rod. Neurulation is the story of what the ectoderm directly above that rod does next, so keep the notochord in every picture even when you are drawing the surface.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"The trilaminar disc from above, with the notochord beneath\". The words are about the setting, so they go on the floor of it: the endoderm, the gut roof the notochord has detached from.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#endoderm"
+      }
+    },
+    {
+      "key": "lateral_mesoderm",
+      "label": "Lateral mesoderm",
+      "name": "Lateral mesoderm",
+      "role": "context",
+      "group": "Setting",
+      "layer": "organ",
+      "color": "#a65c5c",
+      "opacity": 1,
+      "terms": [
+        "lateral plate mesoderm",
+        "intermediate mesoderm",
+        "mesenchyme"
+      ],
+      "narration": "The tissue either side, between the ectoderm above and the gut roof below. It matters here for one reason: it is what the neural crest migrates THROUGH on its way to becoming everything in the next beat but one.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no structure for this — its structures[] were teaching PANELS, not parts — so this is new geometry and new words.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#lateral_mesoderm"
+      }
+    },
+    {
+      "key": "neural_crest",
+      "label": "Neural crest — cells that leave at the seam",
+      "name": "Neural crest — cells that leave at the seam",
+      "role": "part",
+      "group": "Neural crest",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "opacity": 1,
+      "terms": [
+        "neural crest",
+        "neural crest cells",
+        "fold tips",
+        "epithelial to mesenchymal transition",
+        "EMT",
+        "migrate",
+        "fourth germ layer",
+        "delamination"
+      ],
+      "narration": "As the folds fuse, the cells at their tips do not join either the tube or the skin. They break loose and migrate away through the embryo. These are the neural crest cells, and they use the same epithelial to mesenchymal transition the primitive streak used. Some books call them the fourth germ layer, which tells you how much of the body they build.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"Neural crest — cells that leave at the seam\". As a population of cells at the fold tips, appearing only where the tips are nearly shut and then migrating laterally and ventrally. It is deliberately many small bodies rather than one: a population is not a structure, and RENDER-STANDARD 3.ab's fragment rule is about things the narration calls continuous, which this is not.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_crest"
+      }
+    },
+    {
+      "key": "caudal_eminence",
       "label": "Below that, the cord is made differently",
+      "name": "Below that, the cord is made differently",
       "role": "part",
       "group": "How closure runs",
       "layer": "organ",
       "color": "#7b241c",
+      "opacity": 1,
       "terms": [
         "secondary neurulation",
         "canalisation",
@@ -304,34 +454,175 @@
         "filum terminale",
         "tethered cord"
       ],
-      "narration": "The lowest part of the cord is not made by folding at all. A solid cord of cells in the caudal eminence hollows out and joins on — canalisation, followed by retrogressive differentiation, which trims it back to the conus medullaris and filum terminale. Two mechanisms, one cord. It matters clinically: defects of secondary neurulation are the occult, skin-covered lumbosacral lesions rather than the open ones."
+      "narration": "The lowest part of the cord is not made by folding at all. A solid cord of cells in the caudal eminence hollows out and joins on — canalisation, followed by retrogressive differentiation, which trims it back to the conus medullaris and filum terminale. Two mechanisms, one cord. It matters clinically: defects of secondary neurulation are the occult, skin-covered lumbosacral lesions rather than the open ones.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"Below that, the cord is made differently\". The tail bud itself, on the cord's own axis, which is where the cord continues into it.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#caudal_eminence"
+      }
     },
     {
-      "key": "crest",
-      "label": "Neural crest — cells that leave at the seam",
+      "key": "secondary_canal",
+      "label": "The cavity canalisation hollows out",
+      "name": "The cavity canalisation hollows out",
       "role": "part",
-      "group": "Neural crest",
+      "group": "How closure runs",
       "layer": "organ",
-      "color": "#8e44ad",
+      "color": "#85c1e9",
+      "opacity": 1,
       "terms": [
-        "neural crest",
-        "neural crest cells",
-        "fold tips",
-        "epithelial to mesenchymal transition",
-        "EMT",
-        "migrate",
-        "fourth germ layer",
-        "delamination"
+        "canalisation",
+        "retrogressive differentiation",
+        "secondary neurulation",
+        "cavitation"
       ],
-      "narration": "As the folds fuse, the cells at their tips do not join either the tube or the skin. They break loose and migrate away through the embryo. These are the neural crest cells, and they use the same epithelial to mesenchymal transition the primitive streak used. Some books call them the fourth germ layer, which tells you how much of the body they build."
+      "narration": "Secondary neurulation does not fold anything. A solid cord of cells in the caudal eminence HOLLOWS OUT from day 25 and the cavity joins the canal above it, so the lowest cord has a lumen that was never a groove. Then retrogressive differentiation trims the whole thing back, which is where the conus medullaris and the filum terminale come from.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no structure for this — its structures[] were teaching PANELS, not parts — so this is new geometry and new words.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#secondary_canal"
+      }
     },
     {
-      "key": "crest_fates",
+      "key": "sec_plate",
+      "label": "Transverse section — the flat plate",
+      "name": "Transverse section — the flat plate",
+      "role": "part",
+      "group": "The four sections, side by side",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "opacity": 1,
+      "terms": [
+        "transverse section",
+        "cross-section"
+      ],
+      "narration": "The same embryo, cut across at the level where the flat plate currently is. All four sections are slabs of ONE build at ONE instant, cut at stations the model reads off its own stage field — so they are four samples of one function and cannot have drifted out of agreement with each other, which is the whole argument for building this procedurally rather than drawing it four times.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no structure for this — its structures[] were teaching PANELS, not parts — so this is new geometry and new words. The sequence version asked for exactly these four pictures at one scale; this is them, as sections of one embryo rather than as four drawings.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_plate+sections"
+      }
+    },
+    {
+      "key": "sec_groove",
+      "label": "Transverse section — the groove",
+      "name": "Transverse section — the groove",
+      "role": "part",
+      "group": "The four sections, side by side",
+      "layer": "organ",
+      "color": "#f5b041",
+      "opacity": 1,
+      "terms": [
+        "transverse section",
+        "cross-section"
+      ],
+      "narration": "The same embryo, cut across at the level where the groove currently is. All four sections are slabs of ONE build at ONE instant, cut at stations the model reads off its own stage field — so they are four samples of one function and cannot have drifted out of agreement with each other, which is the whole argument for building this procedurally rather than drawing it four times.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no structure for this — its structures[] were teaching PANELS, not parts — so this is new geometry and new words. The sequence version asked for exactly these four pictures at one scale; this is them, as sections of one embryo rather than as four drawings.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_groove+sections"
+      }
+    },
+    {
+      "key": "sec_folds",
+      "label": "Transverse section — the raised folds",
+      "name": "Transverse section — the raised folds",
+      "role": "part",
+      "group": "The four sections, side by side",
+      "layer": "organ",
+      "color": "#e67e22",
+      "opacity": 1,
+      "terms": [
+        "transverse section",
+        "cross-section"
+      ],
+      "narration": "The same embryo, cut across at the level where the raised folds currently is. All four sections are slabs of ONE build at ONE instant, cut at stations the model reads off its own stage field — so they are four samples of one function and cannot have drifted out of agreement with each other, which is the whole argument for building this procedurally rather than drawing it four times.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no structure for this — its structures[] were teaching PANELS, not parts — so this is new geometry and new words. The sequence version asked for exactly these four pictures at one scale; this is them, as sections of one embryo rather than as four drawings.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_folds+sections"
+      }
+    },
+    {
+      "key": "sec_tube",
+      "label": "Transverse section — the closed tube",
+      "name": "Transverse section — the closed tube",
+      "role": "part",
+      "group": "The four sections, side by side",
+      "layer": "organ",
+      "color": "#d35400",
+      "opacity": 1,
+      "terms": [
+        "transverse section",
+        "cross-section"
+      ],
+      "narration": "The same embryo, cut across at the level where the closed tube currently is. All four sections are slabs of ONE build at ONE instant, cut at stations the model reads off its own stage field — so they are four samples of one function and cannot have drifted out of agreement with each other, which is the whole argument for building this procedurally rather than drawing it four times.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no structure for this — its structures[] were teaching PANELS, not parts — so this is new geometry and new words. The sequence version asked for exactly these four pictures at one scale; this is them, as sections of one embryo rather than as four drawings.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_tube+sections"
+      }
+    },
+    {
+      "key": "sec_canal",
+      "label": "Transverse section — the canal",
+      "name": "Transverse section — the canal",
+      "role": "part",
+      "group": "The four sections, side by side",
+      "layer": "organ",
+      "color": "#5dade2",
+      "opacity": 1,
+      "terms": [
+        "lumen",
+        "central canal"
+      ],
+      "narration": "In the closed section the lumen is the disc inside the ring, and in the other three there is no lumen at all — because there is no tube yet. That is the plainest way to see what fusion actually does.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no structure for this — its structures[] were teaching PANELS, not parts — so this is new geometry and new words.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_canal+sections"
+      }
+    },
+    {
+      "key": "sec_notochord",
+      "label": "Transverse section — the notochord beneath",
+      "name": "Transverse section — the notochord beneath",
+      "role": "context",
+      "group": "The four sections, side by side",
+      "layer": "organ",
+      "color": "#d4306f",
+      "opacity": 1,
+      "terms": [
+        "notochord",
+        "midline"
+      ],
+      "narration": "Beneath the midline in all four sections, which is the point: keep the notochord in every picture even when you are drawing the surface, because it is the reason the surface is doing anything. The rod is not the same calibre in every panel, and that is the notochord and not the drawing: it thins towards the tail, so the panel cut at the flat plate — which at this instant is the most caudal of the four, a few thousandths of the axis above the notochord's own caudal end — carries a rod about a third the width of the three cranial to it.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no structure for this — its structures[] were teaching PANELS, not parts — so this is new geometry and new words. The sentence it paraphrases is carried verbatim on `endoderm`. THE SECOND SENTENCE WAS ADDED 2026-10-03 in answer to review finding F2, which measured the flat-plate panel's rod at 0.217 units across against 0.600 for the other three and said: decide, because on a figure sold as four slabs of ONE build at ONE instant an unexplained third-calibre rod reads as an error and a student drawing from it cannot tell which it is. The taper is KEPT, because it is the notochord's own caudal end: addNotochord fades the radius over the 0.05 of the axis above V_LO_BUILD, and the plate station at beat 5's t is v = 0.14254, which is 0.0070 into that ramp — so the rod there is at the taper's published floor of 0.30 of R_NOTO. Flooring the calibre inside the variant would have drawn a full-width rod where the embryo has a tapering one, to make a figure look tidier. Acceptance row Y now measures the calibre PER PANEL against the panels' own stations, so the thin rod is a declared measurement rather than something a reader discovers. This sentence is AUTHORED, like the rest of this structure's narration — no verbatim sequence-era text is touched.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#notochord+sections"
+      }
+    },
+    {
+      "key": "sec_ectoderm",
+      "label": "Transverse section — the skin over it",
+      "name": "Transverse section — the skin over it",
+      "role": "context",
+      "group": "The four sections, side by side",
+      "layer": "organ",
+      "color": "#2980b9",
+      "opacity": 1,
+      "terms": [
+        "surface ectoderm",
+        "continuous"
+      ],
+      "narration": "Continuous with the plate at the fold tips in the first three sections, and continuous OVER the tube in the fourth. It is the same epithelium throughout — the tube has not burrowed under the skin, the skin has met in the middle above it.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no structure for this — its structures[] were teaching PANELS, not parts — so this is new geometry and new words.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#surface_ectoderm+sections"
+      }
+    },
+    {
+      "key": "sec_crest",
       "label": "What neural crest becomes",
+      "name": "What neural crest becomes",
       "role": "part",
       "group": "Neural crest",
       "layer": "organ",
       "color": "#a569bd",
+      "opacity": 1,
       "terms": [
         "dorsal root ganglion",
         "sensory ganglia",
@@ -349,15 +640,21 @@
         "pia",
         "arachnoid"
       ],
-      "narration": "Crest cells become the dorsal root ganglia, the autonomic ganglia and the sympathetic chain, the adrenal medulla, Schwann cells, melanocytes, the enteric nervous system, the pharyngeal arch cartilages and much of the face, the odontoblasts, and the pia and arachnoid. Learn the list, because it is the answer to why Hirschsprung disease, phaeochromocytoma and a facial cleft can all be called crest problems."
+      "narration": "Crest cells become the dorsal root ganglia, the autonomic ganglia and the sympathetic chain, the adrenal medulla, Schwann cells, melanocytes, the enteric nervous system, the pharyngeal arch cartilages and much of the face, the odontoblasts, and the pia and arachnoid. Learn the list, because it is the answer to why Hirschsprung disease, phaeochromocytoma and a facial cleft can all be called crest problems.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"What neural crest becomes\". The fates are a list and have no geometry of their own, so the words sit on the crest cells seen in TRANSVERSE SECTION, which is the one view where you can see them leave the tip and set off through the mesoderm.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_crest+sections"
+      }
     },
     {
-      "key": "anencephaly",
+      "key": "anen_exposed",
       "label": "Cranial end open — anencephaly",
+      "name": "Cranial end open — anencephaly",
       "role": "part",
       "group": "Clinical — the two ends",
       "layer": "organ",
       "color": "#cb4335",
+      "opacity": 1,
       "terms": [
         "anencephaly",
         "meroanencephaly",
@@ -371,15 +668,118 @@
         "incompatible with life",
         "raised AFP"
       ],
-      "narration": "If the cranial neuropore does not close by day twenty-five, the forebrain is left exposed, degenerates, and the skull vault never forms over it. That is anencephaly. The face has the flattened, bulging-eyed look described as frog-like, and because the fetus cannot swallow, the mother has polyhydramnios. It is uniformly fatal — a fact worth stating plainly, because much of antenatal screening exists to detect it."
+      "narration": "If the cranial neuropore does not close by day twenty-five, the forebrain is left exposed, degenerates, and the skull vault never forms over it. That is anencephaly. The face has the flattened, bulging-eyed look described as frog-like, and because the fetus cannot swallow, the mother has polyhydramnios. It is uniformly fatal — a fact worth stating plainly, because much of antenatal screening exists to detect it.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"Cranial end open — anencephaly\". On the exposed, degenerated forebrain lying in the groove that never closed. AUTHORED FOR THE 3D SCENE. Nothing here is a drawing of a malformation: it is the same build with the cranial front STOPPED at the cranial end of the segmented axis, so dayFront never arrives for the head, phi never reaches its fusion value there, the plate stays open and no skin closes over it. The only geometry that had to be added is the exposed tissue itself.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#area_cerebrovasculosa+openCranial"
+      }
     },
     {
-      "key": "spina_bifida",
-      "label": "Caudal end open — the spina bifida spectrum",
+      "key": "anen_plate",
+      "label": "Anencephaly — the plate that never closed",
+      "name": "Anencephaly — the plate that never closed",
       "role": "part",
       "group": "Clinical — the two ends",
       "layer": "organ",
-      "color": "#e74c3c",
+      "color": "#f4d03f",
+      "opacity": 1,
+      "terms": [
+        "anencephaly",
+        "open neural plate"
+      ],
+      "narration": "In the same embryo, at day 25. Up to the first somite the tube closed normally; beyond it, in the unsegmented head, nothing did, because that is where the front stopped. One date missed, and everything downstream of it follows without being drawn.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. Nothing here is a drawing of a malformation: it is the same build with the cranial front STOPPED at the cranial end of the segmented axis, so dayFront never arrives for the head, phi never reaches its fusion value there, the plate stays open and no skin closes over it. The only geometry that had to be added is the exposed tissue itself.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_plate+openCranial"
+      }
+    },
+    {
+      "key": "anen_folds",
+      "label": "Anencephaly — folds still standing open",
+      "name": "Anencephaly — folds still standing open",
+      "role": "part",
+      "group": "Clinical — the two ends",
+      "layer": "organ",
+      "color": "#e67e22",
+      "opacity": 1,
+      "terms": [
+        "anencephaly",
+        "open neural plate"
+      ],
+      "narration": "In the same embryo, at day 25. Up to the first somite the tube closed normally; beyond it, in the unsegmented head, nothing did, because that is where the front stopped. One date missed, and everything downstream of it follows without being drawn.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. Nothing here is a drawing of a malformation: it is the same build with the cranial front STOPPED at the cranial end of the segmented axis, so dayFront never arrives for the head, phi never reaches its fusion value there, the plate stays open and no skin closes over it. The only geometry that had to be added is the exposed tissue itself.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_folds+openCranial"
+      }
+    },
+    {
+      "key": "anen_tube",
+      "label": "Anencephaly — the part that DID close",
+      "name": "Anencephaly — the part that DID close",
+      "role": "part",
+      "group": "Clinical — the two ends",
+      "layer": "organ",
+      "color": "#d35400",
+      "opacity": 1,
+      "terms": [
+        "anencephaly",
+        "open neural plate"
+      ],
+      "narration": "In the same embryo, at day 25. Up to the first somite the tube closed normally; beyond it, in the unsegmented head, nothing did, because that is where the front stopped. One date missed, and everything downstream of it follows without being drawn.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. Nothing here is a drawing of a malformation: it is the same build with the cranial front STOPPED at the cranial end of the segmented axis, so dayFront never arrives for the head, phi never reaches its fusion value there, the plate stays open and no skin closes over it. The only geometry that had to be added is the exposed tissue itself.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_tube+openCranial"
+      }
+    },
+    {
+      "key": "anen_neuropore",
+      "label": "Anencephaly — the opening that stayed",
+      "name": "Anencephaly — the opening that stayed",
+      "role": "part",
+      "group": "Clinical — the two ends",
+      "layer": "organ",
+      "color": "#a93226",
+      "opacity": 1,
+      "terms": [
+        "cranial neuropore",
+        "day 25",
+        "fails to close"
+      ],
+      "narration": "The lip of the cranial neuropore, still there on day 25 when it should have gone. Compare it with the normal embryo at the same day, where there is no lip to find.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. Nothing here is a drawing of a malformation: it is the same build with the cranial front STOPPED at the cranial end of the segmented axis, so dayFront never arrives for the head, phi never reaches its fusion value there, the plate stays open and no skin closes over it. The only geometry that had to be added is the exposed tissue itself.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#cranial_neuropore+openCranial"
+      }
+    },
+    {
+      "key": "anen_ectoderm",
+      "label": "Anencephaly — no skin closed over it",
+      "name": "Anencephaly — no skin closed over it",
+      "role": "context",
+      "group": "Clinical — the two ends",
+      "layer": "organ",
+      "color": "#2980b9",
+      "opacity": 0.22,
+      "terms": [
+        "no skull vault",
+        "exposed",
+        "amniotic fluid"
+      ],
+      "narration": "The surface ectoderm closes over the tube only where the tube closed. Cranially it is still carried up on open fold tips with a gap between them, and the forebrain sits in amniotic fluid.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. Nothing here is a drawing of a malformation: it is the same build with the cranial front STOPPED at the cranial end of the segmented axis, so dayFront never arrives for the head, phi never reaches its fusion value there, the plate stays open and no skin closes over it. The only geometry that had to be added is the exposed tissue itself.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#surface_ectoderm+openCranial"
+      }
+    },
+    {
+      "key": "sb_sac",
+      "label": "Caudal end open — the spina bifida spectrum",
+      "name": "Caudal end open — the spina bifida spectrum",
+      "role": "part",
+      "group": "Clinical — the two ends",
+      "layer": "organ",
+      "color": "#aed6f1",
+      "opacity": 0.45,
       "terms": [
         "spina bifida",
         "spina bifida occulta",
@@ -400,15 +800,21 @@
         "Chiari II",
         "hydrocephalus"
       ],
-      "narration": "At the other end the spectrum runs by how much is exposed. Spina bifida occulta is a vertebral arch defect with skin over it, often marked only by a tuft of hair or a dimple at L5 or S1 and usually harmless. A meningocele pushes meninges through the gap. A myelomeningocele pushes cord and roots out too, and that child has flaccid weakness and a neurogenic bladder below the lesion, commonly with a Chiari II malformation and hydrocephalus. Myeloschisis is the flat, unclosed plate lying open on the back."
+      "narration": "At the other end the spectrum runs by how much is exposed. Spina bifida occulta is a vertebral arch defect with skin over it, often marked only by a tuft of hair or a dimple at L5 or S1 and usually harmless. A meningocele pushes meninges through the gap. A myelomeningocele pushes cord and roots out too, and that child has flaccid weakness and a neurogenic bladder below the lesion, commonly with a Chiari II malformation and hydrocephalus. Myeloschisis is the flat, unclosed plate lying open on the back.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"Caudal end open — the spina bifida spectrum\". On the sac, because the sac is the thing whose contents the whole spectrum is about. AUTHORED FOR THE 3D SCENE. The four panels are built by one function, at one station, from one arch, one cord section and one sac radius — so they are at ONE SCALE with the SAME vertebral outline, which the sequence version's own gaps[] names as the condition the teaching depends on. Acceptance row S measures that rather than asserting it: the four arches agree to within floating-point zero.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#dura_sac+sbPanel"
+      }
     },
     {
-      "key": "other_ntd",
+      "key": "sb_arch",
       "label": "The rest of the spectrum",
+      "name": "The rest of the spectrum",
       "role": "part",
       "group": "Clinical — the two ends",
       "layer": "organ",
-      "color": "#ec7063",
+      "color": "#d5d8dc",
+      "opacity": 1,
       "terms": [
         "craniorachischisis",
         "whole tube open",
@@ -416,17 +822,26 @@
         "occipital",
         "herniated brain",
         "skull defect",
-        "rachischisis totalis"
+        "rachischisis totalis",
+        "vertebral arch",
+        "lamina",
+        "bony defect"
       ],
-      "narration": "Two more to name. If the tube never closes anywhere, that is craniorachischisis — the extreme, and stillborn. And if the tube closes but brain herniates later through a hole in the skull, usually occipital, that is an encephalocele, which is a skull defect rather than a closure defect. Distinguishing those two in a viva is easy money."
+      "narration": "Two more to name. If the tube never closes anywhere, that is craniorachischisis — the extreme, and stillborn. And if the tube closes but brain herniates later through a hole in the skull, usually occipital, that is an encephalocele, which is a skull defect rather than a closure defect. Distinguishing those two in a viva is easy money.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"The rest of the spectrum\". On the vertebral arch, which is the one thing identical in all four panels and therefore the thing that makes them comparable. AUTHORED FOR THE 3D SCENE. The four panels are built by one function, at one station, from one arch, one cord section and one sac radius — so they are at ONE SCALE with the SAME vertebral outline, which the sequence version's own gaps[] names as the condition the teaching depends on. Acceptance row S measures that rather than asserting it: the four arches agree to within floating-point zero.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#vertebral_arch+sbPanel"
+      }
     },
     {
-      "key": "screening",
+      "key": "sb_skin",
       "label": "How they are found before birth",
+      "name": "How they are found before birth",
       "role": "part",
       "group": "Clinical — prevention and detection",
       "layer": "organ",
-      "color": "#5499c7",
+      "color": "#f5cba7",
+      "opacity": 1,
       "terms": [
         "alpha-fetoprotein",
         "AFP",
@@ -440,15 +855,942 @@
         "open defect",
         "closed defect"
       ],
-      "narration": "An open defect leaks fetal protein into the amniotic fluid, so maternal serum alpha-fetoprotein is raised and amniotic acetylcholinesterase appears. That is why AFP screens for open neural tube defects and misses closed ones like spina bifida occulta — the skin seals the leak. Ultrasound confirms, with the lemon and banana signs of a myelomeningocele."
+      "narration": "An open defect leaks fetal protein into the amniotic fluid, so maternal serum alpha-fetoprotein is raised and amniotic acetylcholinesterase appears. That is why AFP screens for open neural tube defects and misses closed ones like spina bifida occulta — the skin seals the leak. Ultrasound confirms, with the lemon and banana signs of a myelomeningocele.",
+      "narration_from": "carried VERBATIM from the sequence version, where it was the narration of the structure panel \"How they are found before birth\". On the SKIN, and that is the right home rather than a convenience: what decides whether alpha-fetoprotein leaks is whether the lesion is open or closed, and the skin over panel one is the only reason occulta is closed. The sequence version authored a PEEL_LAYER op to make the same point by lifting the skin off; here the skin is simply there in one panel and absent in the other three, which is the same teaching move without an op to degrade.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#skin_cover+sbPanel"
+      }
     },
     {
-      "key": "prevention",
-      "label": "Folate, and the timing that decides everything",
+      "key": "sb_cord",
+      "label": "The cord, in each panel",
+      "name": "The cord, in each panel",
       "role": "part",
-      "group": "Clinical — prevention and detection",
+      "group": "Clinical — the two ends",
       "layer": "organ",
-      "color": "#48c9b0",
+      "color": "#d35400",
+      "opacity": 1,
+      "terms": [
+        "spinal cord",
+        "closed",
+        "myelomeningocele"
+      ],
+      "narration": "A closed cord in the first three panels, in the same place in each. What changes between them is what else has come through the gap — nothing, then meninges, then the cord itself.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The four panels are built by one function, at one station, from one arch, one cord section and one sac radius — so they are at ONE SCALE with the SAME vertebral outline, which the sequence version's own gaps[] names as the condition the teaching depends on. Acceptance row S measures that rather than asserting it: the four arches agree to within floating-point zero.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_tube+sbPanel"
+      }
+    },
+    {
+      "key": "sb_open",
+      "label": "The plate, in the fourth panel",
+      "name": "The plate, in the fourth panel",
+      "role": "part",
+      "group": "Clinical — the two ends",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "opacity": 1,
+      "terms": [
+        "myeloschisis",
+        "rachischisis",
+        "open plate"
+      ],
+      "narration": "The fourth panel has no sac and no closed cord: an unfused neural plate lying open on the surface, which is myeloschisis. It is the same section function as the other three, asked for a stage rather than a day — so it is at the same scale as its neighbours by construction.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The four panels are built by one function, at one station, from one arch, one cord section and one sac radius — so they are at ONE SCALE with the SAME vertebral outline, which the sequence version's own gaps[] names as the condition the teaching depends on. Acceptance row S measures that rather than asserting it: the four arches agree to within floating-point zero.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_plate+sbPanel"
+      }
+    },
+    {
+      "key": "tail_tube",
+      "label": "The cord, where folding stops",
+      "name": "The cord, where folding stops",
+      "role": "part",
+      "group": "How closure runs",
+      "layer": "organ",
+      "color": "#d35400",
+      "opacity": 0.34,
+      "terms": [
+        "primary neurulation",
+        "neural tube",
+        "caudal"
+      ],
+      "narration": "The lowest part of the cord that WAS made by folding a sheet. Follow it down and it stops — and what continues below it was never a sheet at all.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The `tail` variant is the caudal quarter of the same build, with v clipped exactly as the transverse slabs are. It exists because the visibility walk measured the whole-embryo version of this beat at 3.05% of the frame: from any camera, a 38-unit embryo holding a 4-unit subject frames the embryo.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_tube+tail"
+      }
+    },
+    {
+      "key": "tail_canal",
+      "label": "The canal, where folding stops",
+      "name": "The canal, where folding stops",
+      "role": "part",
+      "group": "How closure runs",
+      "layer": "organ",
+      "color": "#5dade2",
+      "opacity": 1,
+      "terms": [
+        "central canal",
+        "lumen"
+      ],
+      "narration": "The cavity the folding made, which is a cavity because the sheet rolled round it.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The `tail` variant is the caudal quarter of the same build, with v clipped exactly as the transverse slabs are. It exists because the visibility walk measured the whole-embryo version of this beat at 3.05% of the frame: from any camera, a 38-unit embryo holding a 4-unit subject frames the embryo.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#neural_canal+tail"
+      }
+    },
+    {
+      "key": "tail_eminence",
+      "label": "The caudal eminence",
+      "name": "The caudal eminence",
+      "role": "part",
+      "group": "How closure runs",
+      "layer": "organ",
+      "color": "#7b241c",
+      "opacity": 0.4,
+      "terms": [
+        "caudal eminence",
+        "tail bud",
+        "secondary neurulation"
+      ],
+      "narration": "A solid mass of cells with no sheet and no fold anywhere in it. Drawn see-through at 0.40 so the cavity forming inside it can be seen — the value was not chosen by eye: RENDER-STANDARD 3.ab corollary 1 says a translucency that hides a continuous structure has to be rendered and counted, and this one is, in the walk report beside this scene.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The `tail` variant is the caudal quarter of the same build, with v clipped exactly as the transverse slabs are. It exists because the visibility walk measured the whole-embryo version of this beat at 3.05% of the frame: from any camera, a 38-unit embryo holding a 4-unit subject frames the embryo.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#caudal_eminence+tail"
+      }
+    },
+    {
+      "key": "tail_secondary",
+      "label": "The cavity that was never a groove",
+      "name": "The cavity that was never a groove",
+      "role": "part",
+      "group": "How closure runs",
+      "layer": "organ",
+      "color": "#85c1e9",
+      "opacity": 1,
+      "terms": [
+        "canalisation",
+        "retrogressive differentiation",
+        "conus medullaris",
+        "filum terminale",
+        "tethered cord"
+      ],
+      "narration": "Canalisation: the solid cord hollows out from day 25 and the cavity joins the canal above it, so the lowest cord has a lumen that was never on the surface. Retrogressive differentiation then trims the whole thing back, which is where the conus medullaris and the filum terminale come from — and why a failure down here is skin-covered and a failure of folding is not.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The `tail` variant is the caudal quarter of the same build, with v clipped exactly as the transverse slabs are. It exists because the visibility walk measured the whole-embryo version of this beat at 3.05% of the frame: from any camera, a 38-unit embryo holding a 4-unit subject frames the embryo.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#secondary_canal+tail"
+      }
+    },
+    {
+      "key": "tail_somites",
+      "label": "The somites beside it",
+      "name": "The somites beside it",
+      "role": "context",
+      "group": "How closure runs",
+      "layer": "organ",
+      "color": "#cf3f3b",
+      "opacity": 1,
+      "terms": [
+        "somite",
+        "lumbosacral",
+        "S2"
+      ],
+      "narration": "The last somites to form, flanking the junction. They are the scale: the caudal neuropore sits at the caudal edge of the last one present on day 27, which is how this model knows where it is.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The `tail` variant is the caudal quarter of the same build, with v clipped exactly as the transverse slabs are. It exists because the visibility walk measured the whole-embryo version of this beat at 3.05% of the frame: from any camera, a 38-unit embryo holding a 4-unit subject frames the embryo.",
+      "refs": {
+        "procedural": "neurulation-neural-plate-tube#somites+tail"
+      }
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "The four pictures — plate, groove, folds, tube",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_plate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_groove"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_folds"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_tube"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_canal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_notochord"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_ectoderm"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.5
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sec_tube",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sec_plate",
+          "to": "sec_tube",
+          "kind": "conserving its own arc length, rolls up into"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across the embryo and watch the same section four times. Flat thickened plate on about day eighteen. Then the middle sinks into a groove. Then the edges lift as folds and lean inwards. Then the folds meet, fuse, and the tube drops beneath a skin that closes over it. Learn to draw those four sections in sixty seconds and you can answer almost any question here.",
+      "narration_from": "sequence-version view beat 1 — carried across VERBATIM. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. Its TRACE_STRUCTURE of a concept: target is dropped — the procedural adapter degrades TRACE to a highlight, and in 3D the thing the trace was faking is simply drawn. HERE: the four sections are four LEVELS of one day-23 embryo rather than four times at one level — which is the fact the four drawings hide. Because closure zips outwards from the fifth somite, all four stages are present at once at four different cranio-caudal levels, and the stations are read off the stage field rather than typed. The camera is `superior`, where the screen up is DORSAL and the screen right is the embryo's LEFT: a transverse section drawn the way a textbook draws one. Laid out two by two rather than in a row — see gaps[].",
+      "claims": [
+        {
+          "id": "B1-four",
+          "claim": "all four stages are present at this one instant",
+          "measure": "stagesPresent",
+          "op": "equals",
+          "value": 4
+        },
+        {
+          "id": "B1-span",
+          "claim": "and the fused span is this much of the axis, which is what fixes which four levels they are at",
+          "measure": "fusedSpan",
+          "op": "near",
+          "value": 0.24232,
+          "tol": 0.01
+        },
+        {
+          "id": "B1-order",
+          "claim": "the fold is deepest at the front and shallows away from it in both directions, with no exception",
+          "measure": "foldUnimodal",
+          "op": "equals",
+          "value": 0
+        },
+        {
+          "id": "B1-run",
+          "claim": "and none of the four is a sliver: each occupies at least 3% of the axis",
+          "measure": "minStageRun",
+          "op": "atLeast",
+          "value": 0.03
+        }
+      ]
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Why the ectoderm bothered — induction from below",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_plate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_notochord"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_ectoderm"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.083333
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sec_notochord",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sec_notochord",
+          "to": "sec_plate",
+          "kind": "signals upward and thickens ectoderm into"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "The plate does not appear on its own. The notochord underneath signals up into the ectoderm and converts it to neuroectoderm. This is why the two topics are taught together: if you are asked what induces the neural plate, the answer is the notochord, and if you are asked what the notochord does, this is the first thing on the list.",
+      "narration_from": "sequence-version view beat 2 — carried across VERBATIM. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. Its TRACE_STRUCTURE of a concept: target is dropped — the procedural adapter degrades TRACE to a highlight, and in 3D the thing the trace was faking is simply drawn. HERE: at day 18 the `sections` variant is ONE section, because only one of the four stages exists — nothing in the scene decides that, the stage field does. The camera is `superior` because this beat is about the DORSOVENTRAL stack, notochord under plate, and acceptance row W measures that the stack survives a `superior` camera (0.50 of its own extent) and does NOT survive a `lateral` one (it lies along that view axis): a beat that names the stack has exactly one camera it can stand at.",
+      "claims": [
+        {
+          "id": "B2-flat",
+          "claim": "the plate is FLAT everywhere: nowhere has the midline sunk even half an epithelial thickness",
+          "measure": "maxFoldRatio",
+          "op": "atMost",
+          "value": 0.05
+        },
+        {
+          "id": "B2-one",
+          "claim": "and only one of the four stages exists, so there is one section to look at",
+          "measure": "stagesPresent",
+          "op": "equals",
+          "value": 1
+        },
+        {
+          "id": "B2-contact",
+          "claim": "the plate sits ON the notochord — a gap of a seventh of the notochord's own diameter, in contact and not through it",
+          "measure": "plateOnNotochord",
+          "op": "between",
+          "value": [
+            0.01,
+            0.3
+          ]
+        },
+        {
+          "id": "B2-over",
+          "claim": "and OVER it, not beside it: the notochord's centre is well inside the plate's half-width",
+          "measure": "notochordUnderMidline",
+          "op": "atLeast",
+          "value": 0.35
+        }
+      ],
+      "negative_displacement": 0.1
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "It zips from the neck outwards",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "surface_ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_plate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_groove"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_folds"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_tube"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "cranial_neuropore"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "caudal_neuropore"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "somites"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.541667
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "neural_tube",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "somites",
+          "to": "neural_tube",
+          "kind": "fusion begins at the fifth of these and runs both ways"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Fusion begins in the future neck, around the fifth somite, on about day twenty-two, and travels both ways like a zip. So the last two places to shut are the two ends — the cranial neuropore on day twenty-five and the caudal neuropore on day twenty-seven. Fix those three numbers. Every malformation in this scene is one of them missed.",
+      "narration_from": "sequence-version view beat 3 — carried across VERBATIM. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. Its TRACE_STRUCTURE of a concept: target is dropped — the procedural adapter degrades TRACE to a highlight, and in 3D the thing the trace was faking is simply drawn. HERE: the whole embryo from behind, which is the scene's own framing, at day 23.5 — chosen because it is the instant at which there is a tube to see and both neuropores are still open. The two front positions below are MEASURED off the stage field, not read back from the zip speeds, so the claim checks the solve rather than restating it. The surface ectoderm is see-through so the tube can be watched closing underneath it.",
+      "claims": [
+        {
+          "id": "B3-cranial",
+          "claim": "the cranial front has got this far, and it is the faster of the two",
+          "measure": "frontCranial",
+          "op": "near",
+          "value": 0.74378,
+          "tol": 0.01
+        },
+        {
+          "id": "B3-caudal",
+          "claim": "and the caudal front this far, from the same starting point on the same day",
+          "measure": "frontCaudal",
+          "op": "near",
+          "value": 0.3803,
+          "tol": 0.01
+        },
+        {
+          "id": "B3-span",
+          "claim": "so this much of the axis is shut, and the two ends are what is left",
+          "measure": "fusedSpan",
+          "op": "near",
+          "value": 0.36348,
+          "tol": 0.015
+        },
+        {
+          "id": "B3-somites",
+          "claim": "ten pairs of somites exist by now — the fifth, where this started, is well cranial of the caudal front",
+          "measure": "somiteCount",
+          "op": "equals",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The tail end is built by a different method",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tail_tube"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tail_canal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tail_eminence"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tail_secondary"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tail_somites"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.916667
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "tail_eminence",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "tail_secondary",
+          "to": "tail_canal",
+          "kind": "hollows out and joins"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Everything you have just drawn is primary neurulation — folding a sheet. The sacral and coccygeal cord is made the other way: a solid cell mass in the caudal eminence hollows out and joins the tube, then shrinks back to leave the conus medullaris and filum terminale. Compare the two, one above the other in this frame, because the mechanism predicts the lesion — folding failures are open and secondary neurulation failures are skin-covered.",
+      "narration_from": "sequence-version view beat 4 — carried across VERBATIM. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. Its TRACE_STRUCTURE of a concept: target is dropped — the procedural adapter degrades TRACE to a highlight, and in 3D the thing the trace was faking is simply drawn. Its COMPARE_STRUCTURES side-by-side is dropped: the two mechanisms are at two LEVELS of one embryo, so putting them side by side would separate things the picture can show joined. HERE: day 28, by which the cavity has formed and retrogressive differentiation has begun, in the `tail` window — the caudal quarter of the same build, because the visibility walk measured the whole-embryo version of this beat at 3.05% of the frame and no camera fixes an aspect ratio of 19:1. The camera is `posterior`, the scene's own framing, where the window is 6.9 by 14.9 units; both the cord and the eminence it continues into are drawn see-through so the two cavities can be seen meeting inside them. ONE CLAUSE DEPARTS FROM VERBATIM, 2026-10-03, in answer to review finding F3 — the only departure in this scene, and the whole original sentence is kept on this view as narration_verbatim_original so nothing is discarded. F3: the sentence told a student to \"compare the two sections side by side\" and the frame is a single longitudinal view of the tail — there are no two sections in it, and a student told to compare two things and shown one assumes they have missed something. The clause referred to an op this conversion had ALREADY dropped: the note above records that the sequence version's COMPARE_STRUCTURES side-by-side was removed because the two mechanisms are at two LEVELS of one embryo and putting them beside each other would separate what this picture can show joined. That reasoning still stands and the picture is the better one — what it failed to notice is that a sentence pointed at the op it had removed. So the picture is kept and the four words are made true of it: from the `posterior` camera the subject is 6.9 by 14.9 units, the folded cord above and the canalising eminence below, one above the other. The alternative the review named — build the median-section variant, which gaps[] calls the proper fix for beats 4 and 9 both — is still the better picture and is still not built; it stays in gaps[]. FOR THE REVIEW: this is a content call on verbatim text and the review declined to make it. If Frank or a reviewer would rather have the original sentence back, it is one copy from narration_verbatim_original on this view, and the finding then returns to open.",
+      "claims": [
+        {
+          "id": "B4-cavity",
+          "claim": "the cavity exists, and this is how much of it there is by now",
+          "measure": "secondaryCanalVol",
+          "op": "near",
+          "value": 0.270931,
+          "tol": 0.004
+        },
+        {
+          "id": "B4-join",
+          "claim": "and it joins rather than floats: the eminence shares a length with the tube above it",
+          "measure": "eminenceJoin",
+          "op": "atLeast",
+          "value": 0.02
+        },
+        {
+          "id": "B4-shut",
+          "claim": "the caudal neuropore itself is long shut by day 28",
+          "measure": "caudalLeft",
+          "op": "atMost",
+          "value": 0.000001
+        }
+      ],
+      "narration_verbatim_original": "Everything you have just drawn is primary neurulation — folding a sheet. The sacral and coccygeal cord is made the other way: a solid cell mass in the caudal eminence hollows out and joins the tube, then shrinks back to leave the conus medullaris and filum terminale. Compare the two sections side by side, because the mechanism predicts the lesion — folding failures are open and secondary neurulation failures are skin-covered."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "The cells that walk away from the seam",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_plate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_groove"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_folds"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_tube"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_crest"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sec_notochord"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.583333
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sec_crest",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sec_folds",
+          "to": "sec_crest",
+          "kind": "cells at the fusing tips break loose as"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "At the moment of fusion, the cells at the very tips of the folds join neither the tube nor the skin. They lose their attachments and migrate off through the embryo. Follow them and you find the dorsal root ganglia, the sympathetic chain, the adrenal medulla, Schwann cells, melanocytes, the enteric plexuses, the pharyngeal arch cartilages, the odontoblasts and the pia and arachnoid. Half the questions that begin with why do these three unrelated things go wrong together end here.",
+      "narration_from": "sequence-version view beat 5 — carried across VERBATIM. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. Its TRACE_STRUCTURE of a concept: target is dropped — the procedural adapter degrades TRACE to a highlight, and in 3D the thing the trace was faking is simply drawn. HERE: in TRANSVERSE SECTION, at day 24, which is the only view in which a student can watch the cells leave the tip and set off laterally and ventrally through the mesoderm. The stations are a day later than beat 1's, so this is a different picture of the same four stages as well as a different subject.",
+      "claims": [
+        {
+          "id": "B5-spread",
+          "claim": "the population has got this far laterally, measured against the tube's own half-width",
+          "measure": "crestSpreadFrac",
+          "op": "near",
+          "value": 2.4404,
+          "tol": 0.08
+        },
+        {
+          "id": "B5-depth",
+          "claim": "and this far ventrally, which is the direction the ganglia and the adrenal medulla lie in",
+          "measure": "crestDepthFrac",
+          "op": "atLeast",
+          "value": 0.3
+        },
+        {
+          "id": "B5-only",
+          "claim": "they exist only where the folds are nearly shut — there are none at all before the folds rise",
+          "measure": "crestCount",
+          "op": "atLeast",
+          "value": 80
+        }
+      ]
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 6,
+      "title": "Day 25 missed — anencephaly",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "anen_ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "anen_plate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "anen_folds"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "anen_tube"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "anen_neuropore"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "anen_exposed"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.666667
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "anen_exposed",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "anen_neuropore",
+          "to": "anen_exposed",
+          "kind": "failing to close on day 25 gives"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Leave the cranial neuropore open and the forebrain sits exposed in amniotic fluid, breaks down, and no skull vault forms over it. That is anencephaly: a flattened head, prominent eyes, no cranial vault, and polyhydramnios because the fetus cannot swallow. It is not survivable. One date missed, at the top end.",
+      "narration_from": "sequence-version view beat 6 — carried across VERBATIM. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. Its TRACE_STRUCTURE of a concept: target is dropped — the procedural adapter degrades TRACE to a highlight, and in 3D the thing the trace was faking is simply drawn. HERE: this is not a drawing of anencephaly. It is the same build with the cranial front STOPPED at the cranial end of the segmented axis — so it travels normally and then does not finish, which is what a neuropore failing IS, and what stays open is the head. A first version set the zip SPEED to zero and left half the embryo open from the neck up; that is craniorachischisis, and the render is what showed it. The claim pairs the lesion build against the NORMAL one at the same day, which is the comparison the sentence actually makes.",
+      "claims": [
+        {
+          "id": "B6-normal-shut",
+          "claim": "in a normal embryo the cranial neuropore is shut by today",
+          "measure": "cranialLeft",
+          "op": "atMost",
+          "value": 0.000001
+        },
+        {
+          "id": "B6-lesion-open",
+          "claim": "in this one it stopped at the cranial end of the segmented axis, so the HEAD is still open",
+          "measure": "cranialLeft/openCranial",
+          "op": "near",
+          "value": 0.22017,
+          "tol": 0.01
+        },
+        {
+          "id": "B6-exposed",
+          "claim": "and there is exposed, degenerating forebrain tissue lying in the groove, this much of it",
+          "measure": "exposedBrainVol/openCranial",
+          "op": "near",
+          "value": 11.2005,
+          "tol": 0.4
+        },
+        {
+          "id": "B6-normal-none",
+          "claim": "which the normal embryo at the same day has none of",
+          "measure": "exposedBrainVol",
+          "op": "equals",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 7,
+      "title": "Day 27 missed — how much is showing?",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sb_arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sb_cord"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sb_open"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sb_sac"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sb_skin"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.833333
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sb_sac",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sb_skin",
+          "to": "sb_arch",
+          "kind": "intact over a bony defect is occulta"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sb_sac",
+          "to": "sb_cord",
+          "kind": "and when the cord is inside it, myelomeningocele"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "At the lower end the question is simply how much comes through the gap. Nothing but a bony defect under intact skin is spina bifida occulta — a hairy patch or a dimple over L5 or S1, usually silent. Meninges through the gap is a meningocele. Cord and nerve roots as well is a myelomeningocele, with weakness and a neurogenic bladder below the level, and usually a Chiari II with hydrocephalus. An unclosed plate lying open is myeloschisis. And if nothing closes anywhere, craniorachischisis. Draw the cross-section each time; the picture answers the question faster than the name does.",
+      "narration_from": "sequence-version view beat 7 — carried across VERBATIM. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. Its TRACE_STRUCTURE of a concept: target is dropped — the procedural adapter degrades TRACE to a highlight, and in 3D the thing the trace was faking is simply drawn. Its CROSS_SECTION op is dropped because the panels ARE sections. HERE: four panels at the lumbosacral level, built by one function from one arch, one cord section and one sac radius. The sequence version's gaps[] made one scale a condition on the artwork — \"the teaching point is how much herniates, and a set of drawings at different magnifications destroys exactly that comparison\" — and here it is a measurement: the four arches agree to floating-point zero.",
+      "claims": [
+        {
+          "id": "B7-scale",
+          "claim": "the four panels are at ONE scale: their vertebral outlines agree exactly",
+          "measure": "archSpread/sbPanel",
+          "op": "atMost",
+          "value": 1e-9
+        },
+        {
+          "id": "B7-four",
+          "claim": "and there are four of them, which is the spectrum",
+          "measure": "panelCount/sbPanel",
+          "op": "equals",
+          "value": 4
+        },
+        {
+          "id": "B7-sac",
+          "claim": "the sac that comes through the gap is this big",
+          "measure": "sacVolume.myelomeningocele/sbPanel",
+          "op": "near",
+          "value": 1.27523,
+          "tol": 0.03
+        },
+        {
+          "id": "B7-in",
+          "claim": "the cord is INSIDE the sac in the myelomeningocele panel",
+          "measure": "cordInSac.myelomeningocele/sbPanel",
+          "op": "atLeast",
+          "value": 0.9
+        },
+        {
+          "id": "B7-out",
+          "claim": "and outside it in the meningocele panel, which is the whole difference between them",
+          "measure": "cordInSac.meningocele/sbPanel",
+          "op": "atMost",
+          "value": 0.02
+        },
+        {
+          "id": "B7-level",
+          "claim": "and the level is read off the somite table: twenty-one pairs exist today, and the caudal neuropore is the caudal edge of the last of them",
+          "measure": "somiteCount",
+          "op": "equals",
+          "value": 21
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Finding them, and preventing them",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "surface_ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_tube"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_canal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "somites"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "caudal_eminence"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.833333
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "surface_ectoderm",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "surface_ectoderm",
+          "to": "neural_tube",
+          "kind": "has closed over"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "An open defect leaks alpha-fetoprotein into the amniotic fluid and the mother's blood, and acetylcholinesterase appears in the fluid — which is why AFP screening finds anencephaly and myelomeningocele but not skin-covered occulta. Ultrasound then confirms. Prevention is folic acid: four hundred micrograms daily periconceptionally, five milligrams where risk is high, as after a previous affected child or on valproate. Then look at the calendar one more time. The tube is shut by day twenty-seven, often before a period is even missed, so the tablet has to be taken before conception. That is why folate is advised to women who might become pregnant, not to women who already know they are.",
+      "narration_from": "sequence-version view beat 8 — carried across VERBATIM. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. Its TRACE_STRUCTURE of a concept: target is dropped — the procedural adapter degrades TRACE to a highlight, and in 3D the thing the trace was faking is simply drawn. Its PEEL_LAYER op is dropped and the teaching move it existed for — \"the skin is what hides this one\" — is carried by beat 7, where the skin is drawn over the occulta panel and absent from the other three. HERE: day 27, the day the sentence is about. Both fronts have arrived, so the tube is shut end to end, which is exactly the point the last three sentences turn on. The secondary canal is NOT shown here even though it exists: it is inside an opaque tail bud at this camera and the walk measured it at 0.000% on both measures, so showing it would be drawing a structure a student cannot see. Beat 4 is the beat that shows it, in a window, through a see-through eminence.",
+      "claims": [
+        {
+          "id": "B8-cranial",
+          "claim": "the cranial neuropore is shut",
+          "measure": "cranialLeft",
+          "op": "atMost",
+          "value": 0.000001
+        },
+        {
+          "id": "B8-caudal",
+          "claim": "and so is the caudal one — today, day twenty-seven, which is the date the advice hangs on",
+          "measure": "caudalLeft",
+          "op": "atMost",
+          "value": 0.000001
+        },
+        {
+          "id": "B8-day",
+          "claim": "twenty-one pairs of somites, which is what day it is in the only clock this model has",
+          "measure": "somiteCount",
+          "op": "equals",
+          "value": 21
+        },
+        {
+          "id": "B8-length",
+          "claim": "and the embryo is this long by now, so there is no doubt which day is being drawn",
+          "measure": "axisLength",
+          "op": "near",
+          "value": 34,
+          "tol": 0.8
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "Why one end becomes ventricles and the other a central canal",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "surface_ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_tube"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_canal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "somites"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.875
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "neural_canal",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "neural_canal",
+          "to": "neural_tube",
+          "kind": "is all that is left inside"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Look along the finished tube from behind and the cavity is not the same size at both ends. Nobody chose that. The plate was broad at the head end and narrow at the tail — the slipper shape from the very first beat — and rolling a broad strip into a tube gives a wide tube, while rolling a narrow one gives a narrow tube, because the arc length is conserved either way. The epithelium is the same thickness in both, so what is left over inside differs by more than the tube does: measured on this model, the cavity is twice as wide across at the head end as at the tail. That is where the future ventricular system comes from at one end and a slit of a central canal at the other, and it is why the width of the plate on day eighteen is worth noticing.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE — there is no sequence-version beat behind this one. It exists because the conversion made a teaching point available that the panel engine could not carry: the calibre of the tube is a CONSEQUENCE of the plate's width through a conserved arc length, so the ventricle and the central canal come out of one mechanism rather than being two facts to memorise. Both claims below are measured on the built cast — one in the model's own frame, one AS PROJECTED ON THE SCREEN PLANE of this beat's own camera, which is RENDER-STANDARD 3.y: a beat that narrates a shape asserts that shape on the camera it rotates to, not in the model's frame. The camera is `posterior` rather than `lateral`, and that was decided by the walk rather than by taste: from `lateral` the embryo is 15 times longer than it is wide and the subject measured 1.98% of the frame, while `posterior` makes it 31 by 14 and the claim is equally measurable there (1.980 against 1.989). The tube is see-through, so the cast inside it is what a student looks at.",
+      "claims": [
+        {
+          "id": "B9-ratio",
+          "claim": "the cavity is this many times wider at the head end than at the tail, measured on the built cast",
+          "measure": "canalRadiusRatio",
+          "op": "atLeast",
+          "value": 1.55
+        },
+        {
+          "id": "B9-screen",
+          "claim": "and it still is on THIS camera's screen plane, which is where the student is looking",
+          "measure": "canalScreenRatio.posterior",
+          "op": "atLeast",
+          "value": 1.4
+        },
+        {
+          "id": "B9-day",
+          "claim": "twenty-two pairs of somites: the picture is the finished tube, not a closing one",
+          "measure": "somiteCount",
+          "op": "equals",
+          "value": 22
+        },
+        {
+          "id": "B9-length",
+          "claim": "and the embryo measures this, which pins the instant",
+          "measure": "axisLength",
+          "op": "near",
+          "value": 36.392,
+          "tol": 0.8
+        }
+      ]
+    }
+  ],
+  "deferred_beats": [
+    {
+      "from": "structure panel \"Folate, and the timing that decides everything\"",
+      "why": "Folate is not a part and has no geometry. Every other structure panel in the sequence version found an anatomical home in the conversion — the four stages became bands of one sheet, the zipper went onto the somites it is measured against, screening went onto the SKIN because skin is what decides whether a lesion leaks protein — but a drug and a calendar have nothing to draw. Its teaching is carried by beat 8, whose own narration says the same thing in its own words and whose claims pin it to day 27; the panel's words are kept verbatim here rather than edited into that beat, because RENDER-STANDARD says never delete the words.",
+      "belongs": "beat 8, as narration; and in a flashcard, where a dose belongs",
+      "narration": "Folic acid before conception cuts the risk substantially — four hundred micrograms daily for most women, five milligrams where the risk is high, such as a previous affected pregnancy or a mother on valproate. Now look at the dates. Closure finishes on day twenty-seven, before many women know they are pregnant. That is the entire argument for supplementing every woman who might conceive rather than every woman who has tested positive, and it is the exam point, not the dose.",
       "terms": [
         "folic acid",
         "400 micrograms",
@@ -464,304 +1806,90 @@
         "maternal diabetes",
         "hyperthermia",
         "obesity"
-      ],
-      "narration": "Folic acid before conception cuts the risk substantially — four hundred micrograms daily for most women, five milligrams where the risk is high, such as a previous affected pregnancy or a mother on valproate. Now look at the dates. Closure finishes on day twenty-seven, before many women know they are pregnant. That is the entire argument for supplementing every woman who might conceive rather than every woman who has tested positive, and it is the exam point, not the dose."
+      ]
     }
   ],
-  "views": [
+  "visibility_waivers": [
     {
-      "mode": "cross_section",
-      "beat": 1,
-      "title": "The four pictures — plate, groove, folds, tube",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Four cross-sections"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "disc_context"
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "x",
-          "offset": 0,
-          "animate": true
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:neurulation",
-          "path": [
-            "plate",
-            "groove",
-            "folds",
-            "tube"
-          ],
-          "duration": 8
-        }
-      ],
-      "narration": "Cut across the embryo and watch the same section four times. Flat thickened plate on about day eighteen. Then the middle sinks into a groove. Then the edges lift as folds and lean inwards. Then the folds meet, fuse, and the tube drops beneath a skin that closes over it. Learn to draw those four sections in sixty seconds and you can answer almost any question here."
+      "view": 4,
+      "key": "tail_canal",
+      "why": "The canal is the cast of the lumen INSIDE the cord, and the cord is drawn see-through at 0.34 precisely so it can be seen. The walk's id-pick pass makes every structure opaque, so the cast reads 0.000% there by construction — that is expected and is not what this waiver is about. What it is about is the ALPHA-AWARE pass, which also reads 0.000% with a peak of 0. MEASURED, NOT ASSERTED, and the measurement is in viz-training/tools/render-neurulation-neural-plate-tube.mjs check 12 and in viz-training/models-out/neurulation-neural-plate-tube/_depthwrite.json. The walk's alpha-aware pass renders the beauty frame with and without the structure and counts pixels that change by 40/255 or more. Its beauty pass sets `transparent` and `opacity` on a translucent structure and leaves `depthWrite` at three's default of TRUE; viz3d.js paint() sets depthWrite = opacity >= 0.98, and render-kit.js tissueMaterial carries the same rule at the same threshold with a note recording what happens when it is missing (\"a lung authored at 0.32 filled the depth buffer and discarded the fragments of everything behind it\"). A cast INSIDE a translucent wall is therefore depth-rejected in the walk's frame and blended in the player's. The walk's own header says that where it and viz3d disagree, viz3d is right. The harness renders this beat twice, once with depthWrite left on and once with viz3d's rule, and reports both numbers; and the walk's OWN second measure — visible_pct, \"only opaque structures occlude\" — reads it above the floor. Measured: visible_pct 1.315% against a 0.30% floor, and the fragment tool (tools/measure-fragments.mjs) reports 0 components for the same reason and the same cause.",
+      "shown_by_beat": 4,
+      "shown_by_note": "This IS the beat that shows it; the waiver is about the instrument, not the picture. A reviewer who wants it measured without the instrument's blind spot should look at _depthwrite.json, where the same frame under viz3d's own depthWrite rule is reported."
     },
     {
-      "mode": "mechanism",
-      "beat": 2,
-      "title": "Why the ectoderm bothered — induction from below",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Setting"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "plate"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "induction",
-          "intensity": 0.95
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "induction",
-          "to": "plate",
-          "kind": "signals upward and thickens ectoderm into"
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "posterior"
-        }
-      ],
-      "narration": "The plate does not appear on its own. The notochord underneath signals up into the ectoderm and converts it to neuroectoderm. This is why the two topics are taught together: if you are asked what induces the neural plate, the answer is the notochord, and if you are asked what the notochord does, this is the first thing on the list."
+      "view": 4,
+      "key": "tail_secondary",
+      "why": "The same, one layer deeper: the cavity canalisation hollows out lies inside the caudal eminence, which is drawn see-through at 0.40 for exactly that reason. MEASURED, NOT ASSERTED, and the measurement is in viz-training/tools/render-neurulation-neural-plate-tube.mjs check 12 and in viz-training/models-out/neurulation-neural-plate-tube/_depthwrite.json. The walk's alpha-aware pass renders the beauty frame with and without the structure and counts pixels that change by 40/255 or more. Its beauty pass sets `transparent` and `opacity` on a translucent structure and leaves `depthWrite` at three's default of TRUE; viz3d.js paint() sets depthWrite = opacity >= 0.98, and render-kit.js tissueMaterial carries the same rule at the same threshold with a note recording what happens when it is missing (\"a lung authored at 0.32 filled the depth buffer and discarded the fragments of everything behind it\"). A cast INSIDE a translucent wall is therefore depth-rejected in the walk's frame and blended in the player's. The walk's own header says that where it and viz3d disagree, viz3d is right. The harness renders this beat twice, once with depthWrite left on and once with viz3d's rule, and reports both numbers; and the walk's OWN second measure — visible_pct, \"only opaque structures occlude\" — reads it above the floor. Measured: visible_pct 0.405% against a 0.30% floor. The 0.40 opacity was not chosen by eye — RENDER-STANDARD 3.ab corollary 1 says a translucency that hides a continuous structure has to be rendered and counted, and the calibre of the cavity was raised from 0.55 to 0.78 of the canal it becomes confluent with after the walk measured the smaller version at 0.269%.",
+      "shown_by_beat": 4,
+      "shown_by_note": "As above: the instrument, not the picture."
     },
     {
-      "mode": "mechanism",
-      "beat": 3,
-      "title": "It zips from the neck outwards",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "How closure runs"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "tube"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "zipper",
-          "intensity": 0.95
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:closure-front",
-          "path": [
-            "zipper",
-            "cranial_neuropore",
-            "caudal_neuropore"
-          ],
-          "duration": 6
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "posterior"
-        }
-      ],
-      "narration": "Fusion begins in the future neck, around the fifth somite, on about day twenty-two, and travels both ways like a zip. So the last two places to shut are the two ends — the cranial neuropore on day twenty-five and the caudal neuropore on day twenty-seven. Fix those three numbers. Every malformation in this scene is one of them missed."
+      "view": 9,
+      "key": "neural_canal",
+      "why": "The beat whose whole subject is the cavity inside the tube, with the tube drawn see-through at 0.34 so the cavity can be seen. The alpha-aware pass reads 0.107% with a PEAK of 184 out of 255 — so the cast is plainly changing the picture where it is, and what falls under the floor is the FRACTION of pixels that change by 40 or more, through two translucent layers (the surface ectoderm at 0.22 and the tube at 0.34). MEASURED, NOT ASSERTED, and the measurement is in viz-training/tools/render-neurulation-neural-plate-tube.mjs check 12 and in viz-training/models-out/neurulation-neural-plate-tube/_depthwrite.json. The walk's alpha-aware pass renders the beauty frame with and without the structure and counts pixels that change by 40/255 or more. Its beauty pass sets `transparent` and `opacity` on a translucent structure and leaves `depthWrite` at three's default of TRUE; viz3d.js paint() sets depthWrite = opacity >= 0.98, and render-kit.js tissueMaterial carries the same rule at the same threshold with a note recording what happens when it is missing (\"a lung authored at 0.32 filled the depth buffer and discarded the fragments of everything behind it\"). A cast INSIDE a translucent wall is therefore depth-rejected in the walk's frame and blended in the player's. The walk's own header says that where it and viz3d disagree, viz3d is right. The harness renders this beat twice, once with depthWrite left on and once with viz3d's rule, and reports both numbers; and the walk's OWN second measure — visible_pct, \"only opaque structures occlude\" — reads it above the floor. Measured: visible_pct 1.250% against a 0.30% floor, and the fragment tool reports ONE component for the tube at this camera, so nothing is drawing the cast in pieces.",
+      "shown_by_beat": 9,
+      "shown_by_note": "The proper fix is a MEDIAN-SECTION variant, which this model does not have — see the gaps[] entry about it. notochord.js added `hemi` for the same reason and records that without it \"the player walk fails ten beats of eleven on occlusion alone\". Here it is two beats, and the cut wants its own round."
     },
     {
-      "mode": "cross_section",
-      "beat": 4,
-      "title": "The tail end is built by a different method",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "How closure runs"
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "tube",
-            "secondary"
-          ],
-          "layout": "side-by-side"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "secondary",
-          "intensity": 0.9
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "x",
-          "offset": 0.4
-        }
-      ],
-      "narration": "Everything you have just drawn is primary neurulation — folding a sheet. The sacral and coccygeal cord is made the other way: a solid cell mass in the caudal eminence hollows out and joins the tube, then shrinks back to leave the conus medullaris and filum terminale. Compare the two sections side by side, because the mechanism predicts the lesion — folding failures are open and secondary neurulation failures are skin-covered."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 5,
-      "title": "The cells that walk away from the seam",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Neural crest"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "folds"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "crest",
-          "intensity": 0.95
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "folds",
-          "to": "crest",
-          "kind": "cells at the fusing tips break loose as"
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:crest-migration",
-          "path": [
-            "crest",
-            "crest_fates"
-          ],
-          "duration": 5
-        }
-      ],
-      "narration": "At the moment of fusion, the cells at the very tips of the folds join neither the tube nor the skin. They lose their attachments and migrate off through the embryo. Follow them and you find the dorsal root ganglia, the sympathetic chain, the adrenal medulla, Schwann cells, melanocytes, the enteric plexuses, the pharyngeal arch cartilages, the odontoblasts and the pia and arachnoid. Half the questions that begin with why do these three unrelated things go wrong together end here."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 6,
-      "title": "Day 25 missed — anencephaly",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Clinical — the two ends"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "cranial_neuropore"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "anencephaly",
-          "intensity": 0.95
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "cranial_neuropore",
-          "to": "anencephaly",
-          "kind": "failing to close on day 25 gives"
-        },
-        {
-          "op": "HIDE_STRUCTURE",
-          "target": "Neural crest"
-        }
-      ],
-      "narration": "Leave the cranial neuropore open and the forebrain sits exposed in amniotic fluid, breaks down, and no skull vault forms over it. That is anencephaly: a flattened head, prominent eyes, no cranial vault, and polyhydramnios because the fetus cannot swallow. It is not survivable. One date missed, at the top end."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 7,
-      "title": "Day 27 missed — how much is showing?",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Clinical — the two ends"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "caudal_neuropore"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "spina_bifida",
-          "intensity": 0.95
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "caudal_neuropore",
-          "to": "spina_bifida",
-          "kind": "failing to close on day 27 gives"
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "spina_bifida",
-            "other_ntd"
-          ],
-          "layout": "stacked"
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "x",
-          "offset": 0.6
-        }
-      ],
-      "narration": "At the lower end the question is simply how much comes through the gap. Nothing but a bony defect under intact skin is spina bifida occulta — a hairy patch or a dimple over L5 or S1, usually silent. Meninges through the gap is a meningocele. Cord and nerve roots as well is a myelomeningocele, with weakness and a neurogenic bladder below the level, and usually a Chiari II with hydrocephalus. An unclosed plate lying open is myeloschisis. And if nothing closes anywhere, craniorachischisis. Draw the cross-section each time; the picture answers the question faster than the name does."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 8,
-      "title": "Finding them, and preventing them",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Clinical — prevention and detection"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "spina_bifida"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "spina_bifida",
-          "to": "screening",
-          "kind": "an open lesion leaks protein, detected by"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "prevention",
-          "to": "caudal_neuropore",
-          "kind": "must be taken before this closes"
-        },
-        {
-          "op": "PEEL_LAYER",
-          "layer": "organ",
-          "direction": "outward"
-        }
-      ],
-      "narration": "An open defect leaks alpha-fetoprotein into the amniotic fluid and the mother's blood, and acetylcholinesterase appears in the fluid — which is why AFP screening finds anencephaly and myelomeningocele but not skin-covered occulta. Ultrasound then confirms. Prevention is folic acid: four hundred micrograms daily periconceptionally, five milligrams where risk is high, as after a previous affected child or on valproate. Then look at the calendar one more time. The tube is shut by day twenty-seven, often before a period is even missed, so the tablet has to be taken before conception. That is why folate is advised to women who might become pregnant, not to women who already know they are."
+      "view": 9,
+      "key": "__framing__",
+      "why": "The beat is about the difference between the two ENDS of a 3.6 mm axis, so its subject is 31.7 units long and 11 wide by nature and the frame has to hold both ends at once. With the surface ectoderm drawn for context the subject reaches 23.73% of the frame and this waiver is not needed; it is kept because the first composition, without the ectoderm, measured 5.38% and a reviewer may reasonably prefer that cleaner picture to this fuller one. If they do, this is the argument for the trade: the alternative to one long frame is two sections at two levels, which is exactly the pair of drawings this beat exists to replace with a mechanism."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-28"
+    "authored_at": "2026-08-28",
+    "converted_at": "2026-10-03",
+    "converted_from": "sequence (SVG panel engine), 17 structure panels and 8 beats",
+    "converted_by": "the model3d BUILD task",
+    "model": "models3d/neurulation-neural-plate-tube.js",
+    "narration_carried": "All 8 sequence-version beat narrations are carried VERBATIM onto the 9 views, in order. 16 of the 17 structure-panel narrations are carried VERBATIM onto the structures that replaced them, each saying in narration_from which panel it came from and why that part is its home; the 17th, on folic acid, is in deferred_beats[] with its full text. Beat 9 is new and says so. Nothing was shortened, reworded or merged.",
+    "corrected_at": "2026-10-03T10:52Z",
+    "corrected_by": "the model3d REVIEW task (round 2)",
+    "corrections": [
+      "models3d/neurulation-neural-plate-tube.js, sectionStations(): THE `sections` VARIANT DREW THREE NOTOCHORDS UNDER FOUR PANELS. Each stage exists in up to two runs of the axis — one cranial to the closure site, one caudal — and the function always took the CRANIAL one. The notochord ends at the prechordal plate (V_PRE = 0.862), so the cranial run of the earliest stage present ran off the end of the rod: at beat 1's t the groove's station was v = 0.95997 and at beat 5's the folds' was 0.91375, addNotochord's clipV returned null, and that panel was rendered with nothing beneath it. A DIFFERENT panel lost its rod at each t — the groove in beat 1, the folds in beat 5 — which is why neither frame looked systematically broken. Measured, not inferred: vertsByKey(t, {sections:true}) returned 3 notochord bodies against 4 panels at both beats, and 0 magenta pixels in the empty quadrant of each rendered frame. FIXED by preferring, among a stage's runs, one whose centre lies within the notochord's own span, falling back to the cranial-most only when none does — which is also the truer section, since the four-panel figure every text draws is a trunk section.",
+      "models3d/neurulation-neural-plate-tube.js: NEW ACCEPTANCE ROW X and its negative case, so this cannot regress. The row sweeps day 19 to 28 and requires every `sections` panel to carry a notochord body, and requires the sweep to have REACHED a four-panel day so it cannot pass vacuously. Measured: 48 panels over 19 days, 48 with a rod, 4 four-panel days. Verified to FAIL on the pre-fix behaviour and pass after it.",
+      "NO SCENE GEOMETRY VALUE CHANGED. All 36 beat claims measure the same numbers after the fix as before it (re-measured through claimMeasure at each beat's own t); all 24 acceptance rows and 24 negative cases pass; the 12-check render harness passes. Only models-out/beat01-superior.png and beat05-superior.png differ, and they are committed.",
+      "views[8] (beat 9) narration: \"Look down the finished tube from the side\" -> \"Look along the finished tube from behind\". The beat rotates to posterior; no view in this scene uses a lateral camera, and gaps[] entry 17 explains why one is impractical here (the embryo is ~15x longer than it is wide). Verified in this review's own run of tools/check-beat-claims.mjs: B9-screen reads canalScreenRatio.posterior 1.9804 against a 1.4 floor, so the head:tail cavity difference the sentence teaches IS legible on the camera the beat actually uses. Authored narration, not verbatim; logged in narration_departures[] with a revert instruction. No geometry changed."
+    ]
   },
   "gaps": [
-    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence, then diagram, then 3d_anatomy, so BOTH diagram and 3d_anatomy are recorded in deferred_modes. The 3d option is real and should be revisited: a closing neural tube with migrating crest is a genuinely spatial subject, and the day a provider holds staged embryo geometry this scene should be re-authored as 3d_anatomy. It is deferred because no such model exists in the catalog today, not because the subject is flat.",
-    "Status is 'planned'. Eighteen regions, eight beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: four transverse sections in a row — flat plate, groove, raised folds, closed tube with skin ectoderm continuous over it and the notochord drawn beneath in all four; a dorsal view of the whole embryo with the closure front marked at the fifth somite and arrows running cranially and caudally; the two neuropores labelled separately with their days; a sagittal panel showing the caudal eminence cavitating; and four cross-sections of the spina bifida spectrum drawn to the same scale so occulta, meningocele, myelomeningocele and myeloschisis differ only in what comes through the gap.",
-    "The spina bifida panels in beat 7 must be drawn at one scale with the same vertebral outline. The teaching point is how much herniates, and a set of drawings at different magnifications destroys exactly that comparison.",
-    "Beats 1, 3 and 5 trace concept:neurulation, concept:closure-front and concept:crest-migration. In each the subject is a process or a moving cell population rather than a drawn object, so none can be a region.",
-    "Beat 8 authors PEEL_LAYER to lift the skin off an occult lesion. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because the teaching move — 'the skin is what hides this one' — is exactly what separates occulta from an open defect.",
-    "'Notochord' is NOT claimed in covers[]. Induction is named in beat 2 because the plate has no other cause, but the four stages of notochord formation, its extent and its adult fate are that entry's work and are authored alongside this one.",
-    "'Primitive streak' and 'Trilaminar disc (3 germ layers)' are NOT claimed. Neural crest is described as using the same epithelial-to-mesenchymal transition the streak used, but the streak itself is taught in its own scene.",
-    "Nervous System Development is a separate embryology topic later in the curriculum. This scene stops at tube closure and neural crest fates; the alar and basal plates, the sulcus limitans and brain vesicle derivatives are named in match.terms only, so a highlighted term reaches the right scene once that topic is authored.",
-    "Day numbers are the standard teaching ones — plate about day 18, closure beginning about day 22 at the fifth somite, cranial neuropore about day 25, caudal about day 27. Texts vary by a day and by somite count; the narration gives them as approximations but keeps the 25/27 pair exact, because that pair is what the malformations hang on.",
-    "Folic acid doses are given as the widely taught 400 micrograms and 5 mg periconceptional figures. National guidance differs and changes; the scene teaches the principle — supplement before conception because closure finishes before pregnancy is usually recognised — and a note using this scene should not be read as a prescribing reference.",
-    "Anencephaly is stated plainly as fatal because that is the examined fact and softening it would mislead. The narration describes the malformation and the screening, and does not discuss management of an affected pregnancy, which is a counselling matter rather than an embryology one."
+    "RE-AUTHORED FROM sequence TO 3d_anatomy ON 2026-10-03. The sequence version is kept in deferred_modes, and its own gaps[] said this was coming: \"The 3d option is real and should be revisited: a closing neural tube with migrating crest is a genuinely spatial subject, and the day a provider holds staged embryo geometry this scene should be re-authored as 3d_anatomy. It is deferred because no such model exists in the catalog today, not because the subject is flat.\" The model now exists and is procedural, so the reason has gone. Status is \"candidate\", never \"ready\": only a review that did not build it may promote it.",
+    "WHAT THE CONVERSION ADDED, rather than merely moved. Because closure zips outwards from one place, a single embryo at a single instant shows ALL FOUR STAGES AT ONCE at four different cranio-caudal levels. The four drawings every text shows are four LEVELS of one day-23 embryo as much as they are four times at one level, and a student who has only seen them as four times does not know where to cut. Beats 1 and 5 are that picture. Beat 9 is the second thing the conversion made available: the tube's calibre is a CONSEQUENCE of the plate's width through a conserved arc length, so the future ventricle at one end and the slit of a central canal at the other come out of one mechanism instead of being two facts.",
+    "A DISAGREEMENT WITH THE CORPUS, AND IT IS LOAD-BEARING HERE. models3d/notochord.js — the sibling scene in this topic, and the model that draws the rod this one's plate is induced by — carries SOMITE_PERIOD_H = 4.5, one somite pair every four and a half hours. Every text teaches THREE PAIRS PER DAY, which is 8.0. At 4.5 h there are 37 pairs by day 27; at 8.0 h there are 21, and 24 by day 28, which is the taught figure of \"about 25 by the end of week 4\". This model uses 8.0 and says so in MB3D_MODELS[...].CONSTANTS_DISAGREE, because BOTH the closure site (the centre of the fifth somite) and the caudal neuropore (the caudal edge of the last somite on day 27) are read off the somite table here, so the figure moves the anatomy rather than decorating it. notochord.js was NOT edited: it is a separate queue item and was in review when this was built. The render harness asserts the agreement on the nine shared constants AND asserts that this one disagrees, so neither can drift quietly.",
+    "A RENDER-KIT FINDING, MEASURED AND WORKED AROUND HERE RATHER THAN FIXED THERE. VizKit.sweptShell decides ONE winding order per QUAD, through E.quad(); where a quad spans a fast-turning feature its two triangles want OPPOSITE orders, so no single choice satisfies both. models3d/notochord.js records exactly this for its own sheets (agreement 0.99251 before it went per-triangle) and solves it in the MODEL; the kit still has the per-quad version, so every tubeAlong and tubeCapped in the corpus inherits it. Measured here: the neural canal built with tubeCapped came back with 19 of its 1,872 triangles (1.015%) wound AGAINST their own supplied normals, in two clusters at the two rows nearest the closure fronts. On a DoubleSide material with supplied normals nothing looks wrong, which is RENDER-STANDARD 2.1 describing itself. This model therefore sweeps its own round tubes and path tubes through its own patch(), whose order is measured per triangle, and reports 1.00000 on every key at every sampled stage and variant. THE KIT IS STILL UNFIXED and a reviewer may reasonably call that the finding rather than this work-around; a repro is one tubeCapped call on a centreline that turns sharply.",
+    "THE EMBRYO IS A FLAT PLAN AND DOES NOT FOLD. Cranio-caudal folding and lateral folding are their own curriculum entries with their own models (models3d/cranio-caudal-folding.js, models3d/lateral-folding.js) and this scene stops at the dorsal plan. So the day-27 embryo here is a straight 3.4 mm sheet rather than the C-shaped, curled embryo a photograph shows. Nothing in the narration claims otherwise, and the three taught dates are unaffected; but a student who meets this picture before they meet folding should be told that the embryo is drawn unrolled.",
+    "THE TUBE DOES NOT SINK, AND THAT IS A DECISION. \"The tube separates from the surface ectoderm and skin closes over the top\" is usually drawn as the tube dropping beneath the skin. In a real embryo there is room because the dorsal body wall rises around it; in a model whose embryo is a fixed thickness there is none — the tube is 1.9 units across and the whole stack from basal plane to gut roof is 0.72, so translating it ventrally drives it through the notochord and the gut. The first build did exactly that and acceptance row Q measured 19% of the notochord inside the neural tube. What is drawn instead is the arrangement that needs no translation: the plate's floor becomes the tube's ventral wall and stays where it was, clear of the notochord, and the SURFACE ECTODERM arches over the tube. A day-23 section then has the tube standing proud of the dorsal surface with skin stretched over it, which is what a textbook section shows. What is NOT drawn is the dorsal body wall closing in around it afterwards.",
+    "THE FOUR SECTIONS ARE LAID OUT TWO BY TWO, NOT IN A ROW, and the sequence version's gaps[] asked for a row. Four six-unit panels in a row is a subject 26 units wide and 3.5 tall; fitCamera frames the width and the sections become a band across the middle of the frame. The condition that note was actually protecting — ONE SCALE, the same outline in every panel, because the teaching point is the difference between them — is untouched and is measured (acceptance row V: a slab's section area equals the full build's to within quadrature). Reading order is left to right, top row first.",
+    "TWO VARIANTS THE MODEL BUILDS AND NO BEAT SHOWS: `openCaudal` on the whole embryo (myeloschisis as a stopped caudal front) and `openCranial+openCaudal` (craniorachischisis). Both are reachable, both are proved by acceptance row R, and neither has a beat, because the caudal end of the spectrum is examined as the FOUR LUMBOSACRAL PANELS of beat 7 rather than as a whole-embryo picture, and a whole-embryo craniorachischisis would be beat 6 twice. A reviewer who thinks the spectrum needs the whole-embryo picture as well has a case; it is one more beat and the geometry is already there.",
+    "WHAT THE FOUR LUMBOSACRAL PANELS DO NOT CONTAIN. They carry a vertebral arch with a dorsal gap, a body, a cord, a meningeal sac and skin — enough to separate occulta, meningocele, myelomeningocele and myeloschisis, which is what the narration separates. They do NOT carry dura and arachnoid as two layers, nerve roots, a filum, or the Chiari II hindbrain the narration names: the vertebral column and the meninges are other curriculum entries with their own meshes, and procedural stand-ins for them here would be plausible shapes a student could be marked wrong for. The sac is one wall, and the narration's \"meninges through the gap\" is as far as the geometry goes.",
+    "THE AXES ARE DECLARED AND NOT PROVED, and acceptance row P is what stands in their place. This model has no chiral content: every key it builds is mirror-symmetric in x (row P measures that at zero unmatched vertices), and NO narration in this scene names a side. RENDER-STANDARD is explicit that a symmetric model cannot witness its own handedness and that a test written in the same coordinates as the declaration is circular however carefully it is floored. The three dimensional constants come from notochord.js, which carries the same status, so that is not a second independent witness either. Nothing here is at risk from it today; it becomes a real gap the moment a beat says \"left\" or \"right\".",
+    "ONE TUNED CONSTANT, AND WHY IT DOES NOT REACH THE EXAMINABLE FACTS. D_FOLD — how long one station takes to go from flat to fused, 3 days — is chosen. The three taught dates are properties of the FRONT and dayFront does not contain it; D_FOLD decides only how far AHEAD of the front the groove and the folds reach, which no beat quotes a number for. Acceptance row C checks the dates against the geometry rather than against the schedule. W_EXP (how fast the embryo widens) and D_SINK (how long the skin takes to close over) are the other two, both declared in MB3D_MODELS[...].ACCEPTANCE.tuned.",
+    "THE SEAM IS 0.4 MICROMETRES WIDE. Fusion is defined geometrically — the two midsurface tips within SEAM of each other — so the \"closed\" tube carries a hairline slit at the dorsal midline where the two tips met. That is the model's one piece of numerical slack and it is deliberate: closing it to zero makes the two tip faces exactly coincident and they z-fight, which is the artefact RENDER-STANDARD 2.1 exists to prevent, arriving by a different route. At every camera this scene uses the slit is under a pixel. It is also the reason the cranial front measures as arriving 0.0026 of a day before day 25 rather than exactly on it, which acceptance row C floors at 0.05 of a day.",
+    "CRANIAL NEURAL FOLD ELEVATION LEADS IN REALITY; HERE IT DOES NOT. Because every station folds on the same schedule relative to the front's arrival, the deepest fold is always AT the front — so at day 21 this embryo has its deepest folds in the cervical region and flatter plate at both ends. In a real embryo the cranial folds are the largest and most prominent structures of the day-21 embryo, and human closure may be multi-site rather than a single bidirectional zip at all. The single-zip account is what is taught and what the three dates belong to, so it is what is built; the simplification is here so a reviewer does not have to find it.",
+    "THE AMNION IS NOT DRAWN. Beat 6's narration has the forebrain sitting exposed in amniotic fluid and there is no amnion in the picture. A translucent dome over the whole embryo would occlude every other beat and would have to be waived in most of them; the exposure is carried instead by there being no skin over the lesion, which is the thing a student is actually asked to recognise.",
+    "DAY NUMBERS AND DOSES, carried from the sequence version unchanged and still true of this one. Day numbers are the standard teaching ones — plate about day 18, closure beginning about day 22 at the fifth somite, cranial neuropore about day 25, caudal about day 27. Texts vary by a day and by somite count; the narration gives them as approximations but keeps the 25/27 pair exact, because that pair is what the malformations hang on. Folic acid doses are the widely taught 400 micrograms and 5 mg periconceptional figures; national guidance differs and changes, and a note using this scene should not be read as a prescribing reference. Anencephaly is stated plainly as fatal because that is the examined fact and softening it would mislead.",
+    "WHAT IS NOT CLAIMED IN covers[]. \"Notochord\", \"Primitive streak\" and \"Trilaminar disc (3 germ layers)\" are each their own entry and are authored alongside this one; induction is named here because the plate has no other cause. Nervous System Development is a separate topic later in the curriculum — this scene stops at tube closure and neural crest fates, so the alar and basal plates, the sulcus limitans and the brain vesicle derivatives are in match.terms only, which is what gets a highlighted term to the right scene once that topic exists.",
+    "A MEDIAN-SECTION VARIANT IS THE PROPER FIX FOR TWO BEATS AND IS NOT BUILT. Beats 4 and 9 both point at a cast that lies INSIDE a wall, and both are carried by drawing the wall see-through. That works in the player and it is awkward to measure: the visibility walk leaves depthWrite on for a translucent material while viz3d sets it false below 0.98, so the walk cannot see through the wall. Three waivers say so and the harness MEASURES it (check 12, _depthwrite.json): the same frame reads 0.000% of the cast under the walk's rule with a peak of 39 out of 255, and 0.742% with a peak of 204 under viz3d's. models3d/notochord.js met the same problem and solved it with a `hemi` variant that cuts every sheet at the median plane, recording that without it \"the player walk fails ten beats of eleven on occlusion alone\". A median section here would be the better picture as well as the easier measurement. It is not built because a second cut wants its own acceptance rows and because from the one camera a median section can be read at, `lateral`, this embryo is fifteen times longer than it is wide. That is a round of work, not a line, and it should be visible as a decision rather than buried as an omission.",
+    "WHERE A STOPPED FRONT STOPS WAS GOT WRONG ONCE, AND THE RENDER IS WHAT FOUND IT. The first build made `openCranial` set the cranial zip SPEED to zero, so nothing cranial of the fifth somite ever closed — half the embryo open from the neck up. Every check passed: the lesion existed, the normal build at the same day was shut, the volumes were positive and the winding was clean. It was wrong anyway, because that is craniorachischisis and the beat says anencephaly. A neuropore FAILING means the front travels and does not finish, so it now stops at V_SEG_CRANIAL — the cranial end of the segmented axis, a constant shared with notochord.js — and what stays open is the unsegmented head. Recorded because the thing that caught it was looking at the picture, which is BUILD-TASK-PROMPT check 4 and the only check in the list a file cannot run."
+  ],
+  "narration_departures": [
+    {
+      "view": 4,
+      "clause_before": "Compare the two sections side by side, because the mechanism predicts the lesion",
+      "clause_after": "Compare the two, one above the other in this frame, because the mechanism predicts the lesion",
+      "why": "review finding F3: the clause instructed a comparison the frame cannot offer, because it referred to the sequence version's COMPARE_STRUCTURES op, which this conversion dropped on purpose. The picture is kept and the words made true of it. The original sentence is kept verbatim on the view as narration_verbatim_original. This is the ONLY departure from verbatim sequence-era narration in this scene.",
+      "reversible": "copy views[3].narration_verbatim_original back over views[3].narration",
+      "added": "2026-10-03 by the model3d BUILD task"
+    },
+    {
+      "view": 9,
+      "clause_before": "Look down the finished tube from the side",
+      "clause_after": "Look along the finished tube from behind",
+      "why": "review round 2 finding R1: the clause named a camera the beat does not use. views[8] rotates to posterior (a dorsal view of the whole axis) and the frame models-out/.../beat09-posterior.png shows the tube end to end from behind - not along its lumen and not from the side. The beat's own claim B9-screen measures the head:tail cavity ratio ON THIS CAMERA (canalScreenRatio.posterior 1.9804 against a 1.4 floor), so the picture supports the teaching point; only the instruction to the student was false of it. Beat 9 narration is AUTHORED for this 3d scene (provenance.narration_carried: \"Beat 9 is new and says so\"), NOT carried verbatim from the sequence version, so amending it is not a departure from verbatim curriculum text - unlike the view-4 entry above.",
+      "reversible": "replace the first eight words of views[8].narration with: Look down the finished tube from the side",
+      "added": "2026-10-03 by the model3d REVIEW task (round 2)"
+    }
   ]
 }

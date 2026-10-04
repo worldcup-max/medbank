@@ -1,0 +1,2274 @@
+{
+  "schema": 2,
+  "id": "embryology__week-3-gastrulation__notochord",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Week 3: Gastrulation",
+  "structure": "Notochord",
+  "covers": [
+    "Notochord"
+  ],
+  "learning_goal": "Trace the notochord from the primitive pit through canal, plate and neurenteric canal to a solid rod, say exactly where it runs and what its two ends are, name the two things it induces, say what survives of it in the adult, and explain the tumour and the cysts that come from cells that should have gone.",
+  "status": "candidate",
+  "provider": {
+    "primary": "procedural",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "notochord",
+      "gastrulation",
+      "week 3",
+      "early development",
+      "axial skeleton",
+      "neural induction",
+      "vertebral column development",
+      "intervertebral disc"
+    ],
+    "terms": [
+      "notochord",
+      "notochordal process",
+      "prenotochordal cells",
+      "primitive pit",
+      "primitive node",
+      "Hensen's node",
+      "notochordal canal",
+      "notochordal plate",
+      "intercalation",
+      "neurenteric canal",
+      "canalis neurentericus",
+      "definitive notochord",
+      "prechordal plate",
+      "oropharyngeal membrane",
+      "buccopharyngeal membrane",
+      "cloacal membrane",
+      "primitive node to prechordal plate",
+      "midline",
+      "axial mesoderm",
+      "paraxial mesoderm",
+      "sclerotome",
+      "somite",
+      "neural plate",
+      "neural induction",
+      "sonic hedgehog",
+      "SHH",
+      "floor plate",
+      "basal plate",
+      "motor neurons",
+      "vertebral body",
+      "nucleus pulposus",
+      "annulus fibrosus",
+      "intervertebral disc",
+      "disc prolapse",
+      "chordoma",
+      "clivus",
+      "sacrococcygeal",
+      "physaliphorous cells",
+      "brachyury",
+      "neurenteric cyst",
+      "split notochord syndrome",
+      "persistent notochordal canal",
+      "notochordal remnant",
+      "apex of the dens",
+      "apical ligament of dens",
+      "day 16",
+      "day 17",
+      "day 18",
+      "day 20"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "model": "notochord",
+  "structures": [
+    {
+      "key": "ectoderm",
+      "label": "Ectoderm — the upper sheet",
+      "name": "Ectoderm — the upper sheet",
+      "role": "context",
+      "group": "The disc, in the midline",
+      "layer": "organ",
+      "color": "#2980b9",
+      "opacity": 1,
+      "terms": [
+        "ectoderm",
+        "epiblast",
+        "upper layer",
+        "dorsal",
+        "amniotic side",
+        "median section"
+      ],
+      "narration": "The upper sheet, facing the amniotic cavity. In this scene it matters for one reason: it is the tissue the notochord signals to. Where the notochord runs under it, it thickens into the neural plate; everywhere else it stays the flat epiblast you see here.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version had no ectoderm structure — its structures were teaching panels, not parts — so this sheet is new geometry and new words. The panel that framed the median section is carried verbatim on `amnion`.",
+      "refs": {
+        "procedural": "notochord#ectoderm+hemi"
+      }
+    },
+    {
+      "key": "neural_plate",
+      "label": "It induces the neural plate",
+      "name": "It induces the neural plate",
+      "role": "part",
+      "group": "What it induces",
+      "layer": "organ",
+      "color": "#c0392b",
+      "opacity": 1,
+      "terms": [
+        "neural induction",
+        "neural plate",
+        "overlying ectoderm",
+        "neuroectoderm",
+        "thickens",
+        "sonic hedgehog",
+        "SHH",
+        "floor plate",
+        "basal plate",
+        "motor neurons",
+        "ventral patterning"
+      ],
+      "narration": "The notochord signals upwards to the ectoderm directly over it, and that ectoderm thickens into the neural plate. This is the single most examined thing the notochord does. It keeps signalling after the tube closes: sonic hedgehog from the notochord makes the floor plate and the ventral, motor half of the cord. No notochord, no neural plate — and no neurulation to teach.",
+      "narration_from": "sequence-version structure \"induce_neural\" — carried across VERBATIM from the sequence version. In the 3D scene the plate it describes is BUILT, and built where the signal from the notochord is above threshold rather than where it would look right — see the model's section 6 and acceptance rows H and I.",
+      "refs": {
+        "procedural": "notochord#neural_plate+hemi"
+      }
+    },
+    {
+      "key": "floor_plate",
+      "label": "Floor plate — the ventral midline it patterns",
+      "name": "Floor plate — the ventral midline it patterns",
+      "role": "part",
+      "group": "What it induces",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "opacity": 1,
+      "terms": [
+        "floor plate",
+        "sonic hedgehog",
+        "SHH",
+        "ventral patterning",
+        "basal plate",
+        "motor neurons",
+        "midline"
+      ],
+      "narration": "The strip of the plate directly over the notochord. Sonic hedgehog from the notochord makes this the floor plate, and the floor plate goes on to pattern the ventral, motor half of the cord. It is the one part of the nervous system whose position is set by the rod underneath it.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE, from the fourth sentence of the sequence version's \"induce_neural\" panel, which is carried verbatim in full on `neural_plate`.",
+      "refs": {
+        "procedural": "notochord#floor_plate+hemi"
+      }
+    },
+    {
+      "key": "endoderm",
+      "label": "Endoderm — the roof of the yolk sac",
+      "name": "Endoderm — the roof of the yolk sac",
+      "role": "context",
+      "group": "The disc, in the midline",
+      "layer": "organ",
+      "color": "#f39c12",
+      "opacity": 1,
+      "terms": [
+        "endoderm",
+        "definitive endoderm",
+        "yolk sac roof",
+        "gut roof",
+        "lower layer",
+        "ventral"
+      ],
+      "narration": "The lower sheet, which is the roof of the yolk sac and will be the roof of the gut. Watch this one through the scene: it is interrupted exactly where the notochordal plate is set into it, and it closes again behind the rod once the rod has pinched off.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The interruption is not decoration — acceptance rows X and Z measure that the window is exactly the plate's own width and that it is never a hole.",
+      "refs": {
+        "procedural": "notochord#endoderm+hemi"
+      }
+    },
+    {
+      "key": "mesoderm",
+      "label": "Intraembryonic mesoderm — the middle sheet",
+      "name": "Intraembryonic mesoderm — the middle sheet",
+      "role": "context",
+      "group": "The disc, in the midline",
+      "layer": "organ",
+      "color": "#27ae60",
+      "opacity": 1,
+      "terms": [
+        "intraembryonic mesoderm",
+        "middle layer",
+        "paraxial mesoderm",
+        "lateral plate",
+        "midline gap"
+      ],
+      "narration": "The middle sheet, on both sides of the midline and nowhere in it: the midline is where the axial structure runs, and the mesoderm stops short of it. Inside the two membranes there is no mesoderm at all, which is why the upper and lower sheets are fused there.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. trilaminar-disc-3-germ-layers.json is the scene that teaches this sheet; here it is context, and the same numbers build it.",
+      "refs": {
+        "procedural": "notochord#mesoderm+hemi"
+      }
+    },
+    {
+      "key": "amnion",
+      "label": "The disc in median section — where the midline runs",
+      "name": "The disc in median section — where the midline runs",
+      "role": "context",
+      "group": "The disc, in the midline",
+      "layer": "organ",
+      "color": "#aeb6bf",
+      "opacity": 1,
+      "terms": [
+        "trilaminar disc",
+        "ectoderm",
+        "mesoderm",
+        "endoderm",
+        "median section",
+        "amniotic cavity",
+        "yolk sac",
+        "midline",
+        "week 3"
+      ],
+      "narration": "Cut the week-three disc down the middle from head to tail and look at it from the side. Amniotic cavity above, yolk sac below, three layers between them. Everything in this scene happens on that one line — the notochord is a midline structure and nothing about it makes sense until you are looking at the midline.",
+      "narration_from": "sequence-version structure \"disc_context\" — carried across VERBATIM from the sequence version. It is the panel that framed the whole scene — the cut, the amniotic cavity above, the yolk sac below — and the amniotic cavity is the first thing it names, so it rides here. The three layers and the yolk sac it also names have structures of their own in this scene.",
+      "refs": {
+        "procedural": "notochord#amnion+hemi"
+      }
+    },
+    {
+      "key": "yolk_sac",
+      "label": "Yolk sac",
+      "name": "Yolk sac",
+      "role": "context",
+      "group": "The disc, in the midline",
+      "layer": "organ",
+      "color": "#d7bde2",
+      "opacity": 1,
+      "terms": [
+        "yolk sac",
+        "ventral",
+        "gut roof",
+        "endoderm"
+      ],
+      "narration": "The cavity below. It matters twice in this scene: the notochordal plate spends two days as part of its roof, and while the floor of the notochordal canal is open the amniotic cavity drains into it.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE, from the sequence version's \"disc_context\" panel, carried verbatim in full on `amnion`.",
+      "refs": {
+        "procedural": "notochord#yolk_sac+hemi"
+      }
+    },
+    {
+      "key": "process",
+      "label": "Stage 1 — the notochordal process",
+      "name": "Stage 1 — the notochordal process",
+      "role": "primary",
+      "group": "How it forms — four stages",
+      "layer": "organ",
+      "color": "#16a085",
+      "opacity": 1,
+      "terms": [
+        "notochordal process",
+        "hollow tube",
+        "cranial migration",
+        "midline cord",
+        "day 16",
+        "day 17",
+        "prechordal plate"
+      ],
+      "narration": "The prenotochordal cells run cranially as a hollow tube — the notochordal process. Note the word hollow; students who learn the notochord as a solid rod from the start cannot explain the next three stages. The tube grows forward until it reaches the prechordal plate and stops there.",
+      "narration_from": "sequence-version structure \"process\" — carried across VERBATIM from the sequence version. It is now the caudal stretch of one swept body rather than a panel: \"note the word hollow\" is a measurement here (acceptance row F, and claim B2-hollow).",
+      "refs": {
+        "procedural": "notochord#process+hemi"
+      }
+    },
+    {
+      "key": "canal",
+      "label": "Stage 2 — the notochordal canal",
+      "name": "Stage 2 — the notochordal canal",
+      "role": "primary",
+      "group": "How it forms — four stages",
+      "layer": "organ",
+      "color": "#48c9b0",
+      "opacity": 0.62,
+      "terms": [
+        "notochordal canal",
+        "lumen",
+        "hollow",
+        "continuous with primitive pit",
+        "day 17"
+      ],
+      "narration": "The lumen of that tube is the notochordal canal, and it opens backwards into the primitive pit. So for a couple of days there is a channel running from the floor of the amniotic cavity forwards inside the midline. It is temporary, but what it does before it closes is the reason the next two stages exist.",
+      "narration_from": "sequence-version structure \"canal\" — carried across VERBATIM from the sequence version. Built as a cast of the lumen itself, so the \"channel running from the floor of the amniotic cavity forwards inside the midline\" is a solid a student can look at.",
+      "refs": {
+        "procedural": "notochord#canal+hemi"
+      }
+    },
+    {
+      "key": "plate",
+      "label": "Stage 3 — the floor breaks down and the plate intercalates",
+      "name": "Stage 3 — the floor breaks down and the plate intercalates",
+      "role": "primary",
+      "group": "How it forms — four stages",
+      "layer": "organ",
+      "color": "#1abc9c",
+      "opacity": 1,
+      "terms": [
+        "notochordal plate",
+        "intercalation",
+        "floor breaks down",
+        "fuses with endoderm",
+        "roof of the yolk sac",
+        "day 18",
+        "flattened"
+      ],
+      "narration": "The floor of the tube breaks down and the remaining cells flatten into the roof of the yolk sac. That flattened strip, set into the endoderm, is the notochordal plate. For a short time the notochord is literally part of the gut lining — which is why anything that fails here ties the future gut to the future spinal cord.",
+      "narration_from": "sequence-version structure \"plate\" — carried across VERBATIM from the sequence version. \"Literally part of the gut lining\" is acceptance row G: the plate's whole thickness lies inside the gut roof's own thickness, and the roof has a window exactly its width.",
+      "refs": {
+        "procedural": "notochord#plate+hemi"
+      }
+    },
+    {
+      "key": "definitive",
+      "label": "Stage 4 — the definitive notochord",
+      "name": "Stage 4 — the definitive notochord",
+      "role": "primary",
+      "group": "How it forms — four stages",
+      "layer": "organ",
+      "color": "#0e6655",
+      "opacity": 1,
+      "terms": [
+        "definitive notochord",
+        "solid rod",
+        "detaches from endoderm",
+        "pinches off",
+        "day 20",
+        "mesoderm",
+        "axial mesoderm"
+      ],
+      "narration": "The plate then rolls up, pinches off from the endoderm and sits free in the mesoderm as a solid rod. That is the definitive notochord, complete by about day twenty. The endoderm closes underneath it and becomes a continuous gut roof again. Four steps in order: process, canal, plate, rod.",
+      "narration_from": "sequence-version structure \"definitive\" — carried across VERBATIM from the sequence version. The rod is NARROWER than the tube was, and that is not a drawing decision: it is what conserving the same cross-sectional area without a lumen requires (acceptance row E).",
+      "refs": {
+        "procedural": "notochord#definitive+hemi"
+      }
+    },
+    {
+      "key": "neurenteric",
+      "label": "The neurenteric canal — amnion talking to yolk sac",
+      "name": "The neurenteric canal — amnion talking to yolk sac",
+      "role": "part",
+      "group": "How it forms — four stages",
+      "layer": "organ",
+      "color": "#f5b041",
+      "opacity": 0.72,
+      "terms": [
+        "neurenteric canal",
+        "canalis neurentericus",
+        "transient communication",
+        "amniotic cavity",
+        "yolk sac",
+        "primitive pit",
+        "obliterates"
+      ],
+      "narration": "While the floor is open, the amniotic cavity and the yolk sac are briefly continuous through the pit — the neurenteric canal. It is a normal, transient communication and it closes on its own. Remember it exists, because a canal that does not close is a malformation you can name.",
+      "narration_from": "sequence-version structure \"neurenteric\" — carried across VERBATIM from the sequence version. Built as a through-and-through channel with its own window in t: acceptance row J measures that it pierces both laminae while it is open and does not exist before day 17 or after day 19.",
+      "refs": {
+        "procedural": "notochord#neurenteric+hemi"
+      }
+    },
+    {
+      "key": "node",
+      "label": "Primitive node (Hensen's node)",
+      "name": "Primitive node (Hensen's node)",
+      "role": "part",
+      "group": "Where it comes from",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "opacity": 1,
+      "terms": [
+        "primitive node",
+        "Hensen's node",
+        "thickening",
+        "cranial end of the streak",
+        "organiser"
+      ],
+      "narration": "The thickening at the cranial end of the streak. It is the organiser: everything in this scene leaves the embryo's surface through the dimple in the middle of it, and as the streak regresses caudally the node carries that dimple back with it, laying the notochord down behind it.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. primitive-streak.json owns the node and the streak as a subject; here they are the door and the thing the door is in.",
+      "refs": {
+        "procedural": "notochord#node+hemi"
+      }
+    },
+    {
+      "key": "pit",
+      "label": "Cells enter at the primitive pit",
+      "name": "Cells enter at the primitive pit",
+      "role": "part",
+      "group": "Where it comes from",
+      "layer": "organ",
+      "color": "#7d3c98",
+      "opacity": 1,
+      "terms": [
+        "primitive pit",
+        "primitive node",
+        "Hensen's node",
+        "prenotochordal cells",
+        "epiblast",
+        "ingression",
+        "midline entry",
+        "day 16"
+      ],
+      "narration": "The notochord starts as epiblast cells that sink in at the primitive pit, not at the groove. That single fact separates it from the germ layers: groove cells become endoderm and mesoderm, pit cells become the midline. They are called prenotochordal cells and they move forwards, in the midline, between the ectoderm above and the newly laid endoderm below.",
+      "narration_from": "sequence-version structure \"pit_origin\" — carried across VERBATIM from the sequence version. Drawn as a cast of the depression rather than as a hole cut through the node — see the scene's gaps[].",
+      "refs": {
+        "procedural": "notochord#pit+hemi"
+      }
+    },
+    {
+      "key": "streak",
+      "label": "Primitive streak — regressing caudally",
+      "name": "Primitive streak — regressing caudally",
+      "role": "context",
+      "group": "Where it comes from",
+      "layer": "organ",
+      "color": "#a569bd",
+      "opacity": 1,
+      "terms": [
+        "primitive streak",
+        "regression",
+        "caudal",
+        "groove"
+      ],
+      "narration": "The streak behind the node, already shortening. Its regression is what extends the notochord caudally after day eighteen, so the rod you see at day twenty-four is longer than the process that started it.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. primitive-streak.json is the scene that teaches the streak.",
+      "refs": {
+        "procedural": "notochord#streak+hemi"
+      }
+    },
+    {
+      "key": "prechordal_plate",
+      "label": "Its two ends",
+      "name": "Its two ends",
+      "role": "part",
+      "group": "What it defines",
+      "layer": "organ",
+      "color": "#5dade2",
+      "opacity": 1,
+      "terms": [
+        "prechordal plate",
+        "cranial end",
+        "primitive node",
+        "caudal end",
+        "oropharyngeal membrane",
+        "cloacal membrane",
+        "midline axis",
+        "extent"
+      ],
+      "narration": "The notochord runs from the primitive node behind to the prechordal plate in front. In front of the prechordal plate there is no notochord, which is why the head is patterned differently from the trunk. Behind, the streak is regressing towards the cloacal membrane. Those two ends are worth knowing by name — they are the anatomical boundaries of the whole axial story.",
+      "narration_from": "sequence-version structure \"extent\" — carried across VERBATIM from the sequence version. The cranial end of the two it names is the prechordal plate, which is where this structure sits — and acceptance row H measures that neither the notochord nor the neural plate passes it.",
+      "refs": {
+        "procedural": "notochord#prechordal_plate+hemi"
+      }
+    },
+    {
+      "key": "oropharyngeal_membrane",
+      "label": "Oropharyngeal membrane",
+      "name": "Oropharyngeal membrane",
+      "role": "context",
+      "group": "What it defines",
+      "layer": "organ",
+      "color": "#5d6d7e",
+      "opacity": 1,
+      "terms": [
+        "oropharyngeal membrane",
+        "buccopharyngeal membrane",
+        "fused laminae",
+        "no mesoderm",
+        "future mouth"
+      ],
+      "narration": "Cranial to the prechordal plate the upper and lower sheets are stuck together with no mesoderm between them. That is the oropharyngeal membrane, and it is the landmark that says you have run out of notochord: in front of it there is head, patterned without a rod underneath.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE.",
+      "refs": {
+        "procedural": "notochord#oropharyngeal_membrane+hemi"
+      }
+    },
+    {
+      "key": "cloacal_membrane",
+      "label": "Cloacal membrane",
+      "name": "Cloacal membrane",
+      "role": "context",
+      "group": "What it defines",
+      "layer": "organ",
+      "color": "#717d7e",
+      "opacity": 1,
+      "terms": [
+        "cloacal membrane",
+        "fused laminae",
+        "caudal",
+        "no mesoderm"
+      ],
+      "narration": "The same arrangement at the tail end, and the landmark the streak is regressing towards.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE.",
+      "refs": {
+        "procedural": "notochord#cloacal_membrane+hemi"
+      }
+    },
+    {
+      "key": "somite",
+      "label": "Somite — paraxial mesoderm, segmented",
+      "name": "Somite — paraxial mesoderm, segmented",
+      "role": "context",
+      "group": "What it induces",
+      "layer": "organ",
+      "color": "#239b56",
+      "opacity": 1,
+      "terms": [
+        "somite",
+        "paraxial mesoderm",
+        "segmentation",
+        "somite clock",
+        "day 20"
+      ],
+      "narration": "The paraxial mesoderm, segmenting into blocks from day twenty, one new pair every four and a half hours. Each pair is what releases the sclerotome that the next structure is made of.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The clock predicts more pairs than a 1 mm disc has room for, which the model reports rather than hides — see the scene's gaps[] and acceptance row K.",
+      "refs": {
+        "procedural": "notochord#somite+hemi"
+      }
+    },
+    {
+      "key": "sclerotome",
+      "label": "It patterns the sclerotome",
+      "name": "It patterns the sclerotome",
+      "role": "part",
+      "group": "What it induces",
+      "layer": "organ",
+      "color": "#d35400",
+      "opacity": 0.4,
+      "terms": [
+        "paraxial mesoderm",
+        "somite",
+        "sclerotome",
+        "vertebral body",
+        "resegmentation",
+        "vertebral column",
+        "surrounds the notochord",
+        "chondrification"
+      ],
+      "narration": "Sideways, the notochord signals the somites to release their sclerotome, and sclerotome cells migrate round it to build the vertebral bodies. So the vertebral column is not made from notochord — it is made around notochord. Getting that preposition right is the difference between a correct answer and a common wrong one.",
+      "narration_from": "sequence-version structure \"induce_sclerotome\" — carried across VERBATIM from the sequence version. \"Round it, not from it\" is acceptance row L: the collars wrap the rod through at least 88% of the circle and share none of its space. REVIEW CORRECTION 2026-10-02: opacity dropped from 1 to 0.4. At full opacity the three sclerotome drums are opaque and sit between the camera and the midline, so beat 6 — the only beat that shows this key — drew the CONTINUOUS definitive notochord as FOUR disconnected dark fragments (measured: 4 components, 0.82% of frame; the two middle ones are 16-pixel slivers between the drums). That is the segmented-notochord picture ARTWORK-STANDARD section 3 names as the canonical teaching error for this structure, and it sat immediately before beat 7, whose title is \"Round it, not from it\". Measured after the change, by rendering beat 6 with and without the rod and differencing: at opacity 0.7 and 0.6 the rod shows through in 13 and 10 patches (worse — a dotted line), at 0.5 in 4, and at 0.4 and below as ONE fragment spanning the full y 179-668. 0.4 is the loosest value that reads as a single continuous rod, and the drums stay legible as three segmental masses.",
+      "refs": {
+        "procedural": "notochord#sclerotome+hemi"
+      }
+    },
+    {
+      "key": "vertebral_body",
+      "label": "Vertebral body — built AROUND the notochord",
+      "name": "Vertebral body — built AROUND the notochord",
+      "role": "context",
+      "group": "What becomes of it",
+      "layer": "organ",
+      "color": "#d5d8dc",
+      "opacity": 1,
+      "terms": [
+        "vertebral body",
+        "centrum",
+        "sclerotome",
+        "chondrification",
+        "end plate"
+      ],
+      "narration": "Two bodies and the disc between them. The body is built around the notochord, which is why the notochord ends up inside it — and being inside it is what destroys it.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. A DIFFERENT SCALE and a different clock from every other structure here: see the scene's gaps[]. Drawn TRANSLUCENT because the beat's whole subject is what is inside it: at full opacity the player walk measured the nucleus pulposus and the remnant at 0.000% each, which is the sequence version's PEEL_LAYER op failing in a different way. It is a CUTAWAY rather than a translucent drum — per-structure opacity was tried first and the walk's id-pick pass still read zero.",
+      "refs": {
+        "procedural": "notochord#vertebral_body+adult"
+      }
+    },
+    {
+      "key": "annulus_fibrosus",
+      "label": "Annulus fibrosus",
+      "name": "Annulus fibrosus",
+      "role": "context",
+      "group": "What becomes of it",
+      "layer": "organ",
+      "color": "#c98b2f",
+      "opacity": 1,
+      "terms": [
+        "annulus fibrosus",
+        "intervertebral disc",
+        "lamellae",
+        "tear",
+        "prolapse"
+      ],
+      "narration": "The fibrous ring of the disc, and the thing that has to tear before the notochordal tissue in the middle of it can go anywhere.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. Translucent for the same reason as the body: the nucleus it rings is what the beat points at.",
+      "refs": {
+        "procedural": "notochord#annulus_fibrosus+adult"
+      }
+    },
+    {
+      "key": "nucleus_pulposus",
+      "label": "What survives of it in you",
+      "name": "What survives of it in you",
+      "role": "primary",
+      "group": "What becomes of it",
+      "layer": "organ",
+      "color": "#7d3c98",
+      "opacity": 1,
+      "terms": [
+        "nucleus pulposus",
+        "intervertebral disc",
+        "annulus fibrosus",
+        "regresses within the vertebral body",
+        "apical ligament of dens",
+        "gelatinous",
+        "disc prolapse",
+        "herniation"
+      ],
+      "narration": "Where the notochord lies inside a vertebral body it disappears. Where it lies between two bodies it persists as the nucleus pulposus, the gelatinous centre of the intervertebral disc. A prolapsed disc is therefore notochord squeezing out through a torn annulus, and the apical ligament of the dens is another small remnant. That is the whole adult answer to what becomes of the notochord.",
+      "narration_from": "sequence-version structure \"nucleus_pulposus\" — carried across VERBATIM from the sequence version. Built as a conservation rather than as a picture: whatever regresses out of the bodies has to arrive in the discs, and the nucleus's radius is solved against that budget (acceptance row N).",
+      "refs": {
+        "procedural": "notochord#nucleus_pulposus+adult"
+      }
+    },
+    {
+      "key": "notochord_regressed",
+      "label": "Where it was crushed out of existence",
+      "name": "Where it was crushed out of existence",
+      "role": "part",
+      "group": "What becomes of it",
+      "layer": "organ",
+      "color": "#515a5a",
+      "opacity": 1,
+      "terms": [
+        "regression",
+        "vertebral body",
+        "notochordal remnant",
+        "disappears"
+      ],
+      "narration": "What is left of the notochord inside a vertebral body: a thread, and shrinking. This is the half of the answer students forget — the notochord does not survive everywhere, it survives BETWEEN the bodies and is destroyed inside them.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE, from the first sentence of the sequence version's \"nucleus_pulposus\" panel, which is carried verbatim in full on `nucleus_pulposus`.",
+      "refs": {
+        "procedural": "notochord#notochord_regressed+adult"
+      }
+    },
+    {
+      "key": "chordoma_sacral",
+      "label": "A remnant that grows — chordoma",
+      "name": "A remnant that grows — chordoma",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "opacity": 1,
+      "terms": [
+        "chordoma",
+        "notochordal remnant",
+        "clivus",
+        "sacrococcygeal region",
+        "spheno-occipital",
+        "physaliphorous cells",
+        "brachyury",
+        "slow growing",
+        "locally invasive",
+        "midline tumour",
+        "cranial nerve palsy"
+      ],
+      "narration": "Notochordal cells left anywhere along the old axis can become a chordoma. It is a midline tumour, and the two places to name are the sacrococcygeal region and the clivus at the skull base. It grows slowly but eats bone locally, so a sacral one presents with pain and bowel or bladder trouble and a clival one with cranial nerve palsies. Its cells are described as physaliphorous — bubbly. When an examiner asks why a midline tumour appears in two such distant places, the answer is that the notochord ran between them.",
+      "narration_from": "sequence-version structure \"chordoma\" — carried across VERBATIM from the sequence version. Drawn at the CAUDAL end of the notochord's own axis; the sacrum itself is not built, and the scene's gaps[] says why that is the honest version of this picture.",
+      "refs": {
+        "procedural": "notochord#chordoma_sacral+clinical,hemi"
+      }
+    },
+    {
+      "key": "chordoma_clival",
+      "label": "The same tumour at the other end — the clivus",
+      "name": "The same tumour at the other end — the clivus",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "opacity": 1,
+      "terms": [
+        "chordoma",
+        "clivus",
+        "spheno-occipital",
+        "skull base",
+        "cranial nerve palsy",
+        "midline tumour"
+      ],
+      "narration": "The cranial mass, at what becomes the clivus. The only reason one tumour appears at the skull base and at the sacrum and almost nowhere else is the line you are looking at: acceptance row R measures that both masses sit on it, two thirds of the disc apart.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE, from the sequence version's \"chordoma\" panel, which is carried verbatim in full on `chordoma_sacral`.",
+      "refs": {
+        "procedural": "notochord#chordoma_clival+clinical,hemi"
+      }
+    },
+    {
+      "key": "persistent_canal",
+      "label": "A canal that does not close",
+      "name": "A canal that does not close",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#cd6155",
+      "opacity": 1,
+      "terms": [
+        "neurenteric cyst",
+        "split notochord syndrome",
+        "persistent neurenteric canal",
+        "gut and cord connected",
+        "dorsal enteric fistula",
+        "vertebral anomaly",
+        "diastematomyelia",
+        "spina bifida",
+        "hemivertebra"
+      ],
+      "narration": "If the neurenteric canal persists, gut stays connected to the back through a gap in the vertebral column. That is split notochord syndrome, and its milder end is a neurenteric cyst — a pouch of gut-type lining sitting in front of the cord. It explains why a child with an odd midline back lesion needs the spine and the gut imaged, not just the skin looked at.",
+      "narration_from": "sequence-version structure \"split_notochord\" — carried across VERBATIM from the sequence version. Built as the same channel `neurenteric` is, at a t where `neurenteric` no longer exists — which is what makes it a finding rather than a second drawing of a normal thing (claims B10-closed and B10-open).",
+      "refs": {
+        "procedural": "notochord#persistent_canal+clinical,hemi"
+      }
+    },
+    {
+      "key": "neurenteric_cyst",
+      "label": "Neurenteric cyst — the milder end of it",
+      "name": "Neurenteric cyst — the milder end of it",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#e6b0aa",
+      "opacity": 1,
+      "terms": [
+        "neurenteric cyst",
+        "gut-type lining",
+        "in front of the cord",
+        "midline",
+        "imaging"
+      ],
+      "narration": "A pouch of gut-type lining left in front of the cord. Same mechanism, smaller: tissue that should have separated did not, and it sits where the canal used to run.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE, from the second half of the sequence version's \"split_notochord\" panel, which is carried verbatim in full on `persistent_canal`.",
+      "refs": {
+        "procedural": "notochord#neurenteric_cyst+clinical,hemi"
+      }
+    },
+    {
+      "key": "definitive_defective",
+      "label": "When the axis fails",
+      "name": "When the axis fails",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#797d7f",
+      "opacity": 1,
+      "terms": [
+        "failed induction",
+        "no neural plate",
+        "vertebral body defects",
+        "hemivertebra",
+        "block vertebra",
+        "axial malformation",
+        "sirenomelia",
+        "caudal dysgenesis"
+      ],
+      "narration": "Because two systems depend on it, a notochord that forms badly damages both. The overlying ectoderm is never induced properly, so the neural tube is defective; the sclerotome has nothing to organise around, so vertebral bodies are fused, wedged or missing. This is why axial vertebral anomalies and cord anomalies so often turn up in the same child — one failure, two consequences.",
+      "narration_from": "sequence-version structure \"notochord_absent\" — carried across VERBATIM from the sequence version. It is a BUILD rather than an argument: the `failed` variant turns the induction source off and interrupts the rod, and the two consequences the panel names are then measured rather than asserted (claims B11-flat and B11-disordered).",
+      "refs": {
+        "procedural": "notochord#definitive_defective+failed,hemi"
+      }
+    },
+    {
+      "key": "ecto_uninduced",
+      "label": "Ectoderm that was never induced",
+      "name": "Ectoderm that was never induced",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#5499c7",
+      "opacity": 1,
+      "terms": [
+        "failed induction",
+        "no neural plate",
+        "flat ectoderm",
+        "neural tube defect"
+      ],
+      "narration": "The same strip of ectoderm, over an axis that formed badly. It is not thickened — it is ordinary epiblast, because nothing told it to be anything else. Compare it with the neural plate in the beat before this one: same place, same scale, two and a half times the thickness.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. Built by the SAME code as `neural_plate` with the source strength set to zero, so the contrast is a measurement and not a second drawing (acceptance row I).",
+      "refs": {
+        "procedural": "notochord#ecto_uninduced+failed,hemi"
+      }
+    },
+    {
+      "key": "sclerotome_disordered",
+      "label": "Sclerotome with nothing to organise around",
+      "name": "Sclerotome with nothing to organise around",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#e59866",
+      "opacity": 1,
+      "terms": [
+        "sclerotome",
+        "hemivertebra",
+        "block vertebra",
+        "fused",
+        "wedged",
+        "vertebral anomaly"
+      ],
+      "narration": "And the sclerotome, condensing without a rod to condense around: irregular, unequal, some of it fused. That is where hemivertebrae and block vertebrae come from, and it is why a child with an axial vertebral anomaly needs the cord looked at too.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE, from the second half of the sequence version's \"notochord_absent\" panel, which is carried verbatim in full on `definitive_defective`.",
+      "refs": {
+        "procedural": "notochord#sclerotome_disordered+failed,hemi"
+      }
+    },
+    {
+      "key": "ectoderm_sec",
+      "label": "Ectoderm, in transverse section",
+      "name": "Ectoderm, in transverse section",
+      "role": "context",
+      "group": "In transverse section",
+      "layer": "organ",
+      "color": "#2980b9",
+      "opacity": 1,
+      "terms": [
+        "ectoderm",
+        "epiblast",
+        "upper layer",
+        "dorsal",
+        "amniotic side",
+        "median section"
+      ],
+      "narration": "The upper sheet, facing the amniotic cavity. In this scene it matters for one reason: it is the tissue the notochord signals to. Where the notochord runs under it, it thickens into the neural plate; everywhere else it stays the flat epiblast you see here.",
+      "narration_from": "THE SAME GEOMETRY AS `ectoderm`, built only inside the block window — see the model's VARIANTS.block and acceptance row U, which measures that it is literally a piece of the same sweep and not a second drawing of it. It is a separate structure key because a scene op names a structure, and a beat that wants the block has to be able to say so. Narration is the same sentence as `ectoderm`.",
+      "refs": {
+        "procedural": "notochord#ectoderm+block"
+      }
+    },
+    {
+      "key": "endoderm_sec",
+      "label": "Endoderm, in transverse section",
+      "name": "Endoderm, in transverse section",
+      "role": "context",
+      "group": "In transverse section",
+      "layer": "organ",
+      "color": "#f39c12",
+      "opacity": 1,
+      "terms": [
+        "endoderm",
+        "definitive endoderm",
+        "yolk sac roof",
+        "gut roof",
+        "lower layer",
+        "ventral"
+      ],
+      "narration": "The lower sheet, which is the roof of the yolk sac and will be the roof of the gut. Watch this one through the scene: it is interrupted exactly where the notochordal plate is set into it, and it closes again behind the rod once the rod has pinched off.",
+      "narration_from": "THE SAME GEOMETRY AS `endoderm`, built only inside the block window — see the model's VARIANTS.block and acceptance row U, which measures that it is literally a piece of the same sweep and not a second drawing of it. It is a separate structure key because a scene op names a structure, and a beat that wants the block has to be able to say so. Narration is the same sentence as `endoderm`.",
+      "refs": {
+        "procedural": "notochord#endoderm+block"
+      }
+    },
+    {
+      "key": "mesoderm_sec",
+      "label": "Mesoderm, in transverse section",
+      "name": "Mesoderm, in transverse section",
+      "role": "context",
+      "group": "In transverse section",
+      "layer": "organ",
+      "color": "#27ae60",
+      "opacity": 1,
+      "terms": [
+        "intraembryonic mesoderm",
+        "middle layer",
+        "paraxial mesoderm",
+        "lateral plate",
+        "midline gap"
+      ],
+      "narration": "The middle sheet, on both sides of the midline and nowhere in it: the midline is where the axial structure runs, and the mesoderm stops short of it. Inside the two membranes there is no mesoderm at all, which is why the upper and lower sheets are fused there.",
+      "narration_from": "THE SAME GEOMETRY AS `mesoderm`, built only inside the block window — see the model's VARIANTS.block and acceptance row U, which measures that it is literally a piece of the same sweep and not a second drawing of it. It is a separate structure key because a scene op names a structure, and a beat that wants the block has to be able to say so. Narration is the same sentence as `mesoderm`.",
+      "refs": {
+        "procedural": "notochord#mesoderm+block"
+      }
+    },
+    {
+      "key": "plate_sec",
+      "label": "The plate, in transverse section",
+      "name": "The plate, in transverse section",
+      "role": "primary",
+      "group": "In transverse section",
+      "layer": "organ",
+      "color": "#1abc9c",
+      "opacity": 1,
+      "terms": [
+        "notochordal plate",
+        "intercalation",
+        "floor breaks down",
+        "fuses with endoderm",
+        "roof of the yolk sac",
+        "day 18",
+        "flattened"
+      ],
+      "narration": "The floor of the tube breaks down and the remaining cells flatten into the roof of the yolk sac. That flattened strip, set into the endoderm, is the notochordal plate. For a short time the notochord is literally part of the gut lining — which is why anything that fails here ties the future gut to the future spinal cord.",
+      "narration_from": "THE SAME GEOMETRY AS `plate`, built only inside the block window — see the model's VARIANTS.block and acceptance row U, which measures that it is literally a piece of the same sweep and not a second drawing of it. It is a separate structure key because a scene op names a structure, and a beat that wants the block has to be able to say so. Narration is the same sentence as `plate`.",
+      "refs": {
+        "procedural": "notochord#plate+block"
+      }
+    },
+    {
+      "key": "process_sec",
+      "label": "The hollow process, in transverse section",
+      "name": "The hollow process, in transverse section",
+      "role": "primary",
+      "group": "In transverse section",
+      "layer": "organ",
+      "color": "#16a085",
+      "opacity": 1,
+      "terms": [
+        "notochordal process",
+        "hollow tube",
+        "cranial migration",
+        "midline cord",
+        "day 16",
+        "day 17",
+        "prechordal plate"
+      ],
+      "narration": "The prenotochordal cells run cranially as a hollow tube — the notochordal process. Note the word hollow; students who learn the notochord as a solid rod from the start cannot explain the next three stages. The tube grows forward until it reaches the prechordal plate and stops there.",
+      "narration_from": "THE SAME GEOMETRY AS `process`, built only inside the block window — see the model's VARIANTS.block and acceptance row U, which measures that it is literally a piece of the same sweep and not a second drawing of it. It is a separate structure key because a scene op names a structure, and a beat that wants the block has to be able to say so. Narration is the same sentence as `process`.",
+      "refs": {
+        "procedural": "notochord#process+block"
+      }
+    },
+    {
+      "key": "canal_sec",
+      "label": "The canal, in transverse section",
+      "name": "The canal, in transverse section",
+      "role": "primary",
+      "group": "In transverse section",
+      "layer": "organ",
+      "color": "#48c9b0",
+      "opacity": 0.62,
+      "terms": [
+        "notochordal canal",
+        "lumen",
+        "hollow",
+        "continuous with primitive pit",
+        "day 17"
+      ],
+      "narration": "The lumen of that tube is the notochordal canal, and it opens backwards into the primitive pit. So for a couple of days there is a channel running from the floor of the amniotic cavity forwards inside the midline. It is temporary, but what it does before it closes is the reason the next two stages exist.",
+      "narration_from": "THE SAME GEOMETRY AS `canal`, built only inside the block window — see the model's VARIANTS.block and acceptance row U, which measures that it is literally a piece of the same sweep and not a second drawing of it. It is a separate structure key because a scene op names a structure, and a beat that wants the block has to be able to say so. Narration is the same sentence as `canal`.",
+      "refs": {
+        "procedural": "notochord#canal+block"
+      }
+    },
+    {
+      "key": "definitive_sec",
+      "label": "The rod, in transverse section",
+      "name": "The rod, in transverse section",
+      "role": "primary",
+      "group": "In transverse section",
+      "layer": "organ",
+      "color": "#0e6655",
+      "opacity": 1,
+      "terms": [
+        "definitive notochord",
+        "solid rod",
+        "detaches from endoderm",
+        "pinches off",
+        "day 20",
+        "mesoderm",
+        "axial mesoderm"
+      ],
+      "narration": "The plate then rolls up, pinches off from the endoderm and sits free in the mesoderm as a solid rod. That is the definitive notochord, complete by about day twenty. The endoderm closes underneath it and becomes a continuous gut roof again. Four steps in order: process, canal, plate, rod.",
+      "narration_from": "THE SAME GEOMETRY AS `definitive`, built only inside the block window — see the model's VARIANTS.block and acceptance row U, which measures that it is literally a piece of the same sweep and not a second drawing of it. It is a separate structure key because a scene op names a structure, and a beat that wants the block has to be able to say so. Narration is the same sentence as `definitive`.",
+      "refs": {
+        "procedural": "notochord#definitive+block"
+      }
+    },
+    {
+      "key": "neural_plate_sec",
+      "label": "The neural plate, in transverse section",
+      "name": "The neural plate, in transverse section",
+      "role": "part",
+      "group": "In transverse section",
+      "layer": "organ",
+      "color": "#c0392b",
+      "opacity": 1,
+      "terms": [
+        "neural induction",
+        "neural plate",
+        "overlying ectoderm",
+        "neuroectoderm",
+        "thickens",
+        "sonic hedgehog",
+        "SHH",
+        "floor plate",
+        "basal plate",
+        "motor neurons",
+        "ventral patterning"
+      ],
+      "narration": "The notochord signals upwards to the ectoderm directly over it, and that ectoderm thickens into the neural plate. This is the single most examined thing the notochord does. It keeps signalling after the tube closes: sonic hedgehog from the notochord makes the floor plate and the ventral, motor half of the cord. No notochord, no neural plate — and no neurulation to teach.",
+      "narration_from": "THE SAME GEOMETRY AS `neural_plate`, built only inside the block window — see the model's VARIANTS.block and acceptance row U, which measures that it is literally a piece of the same sweep and not a second drawing of it. It is a separate structure key because a scene op names a structure, and a beat that wants the block has to be able to say so. Narration is the same sentence as `neural_plate`.",
+      "refs": {
+        "procedural": "notochord#neural_plate+block"
+      }
+    },
+    {
+      "key": "floor_plate_sec",
+      "label": "The floor plate, in transverse section",
+      "name": "The floor plate, in transverse section",
+      "role": "part",
+      "group": "In transverse section",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "opacity": 1,
+      "terms": [
+        "floor plate",
+        "sonic hedgehog",
+        "SHH",
+        "ventral patterning",
+        "basal plate",
+        "motor neurons",
+        "midline"
+      ],
+      "narration": "The strip of the plate directly over the notochord. Sonic hedgehog from the notochord makes this the floor plate, and the floor plate goes on to pattern the ventral, motor half of the cord. It is the one part of the nervous system whose position is set by the rod underneath it.",
+      "narration_from": "THE SAME GEOMETRY AS `floor_plate`, built only inside the block window — see the model's VARIANTS.block and acceptance row U, which measures that it is literally a piece of the same sweep and not a second drawing of it. It is a separate structure key because a scene op names a structure, and a beat that wants the block has to be able to say so. Narration is the same sentence as `floor_plate`.",
+      "refs": {
+        "procedural": "notochord#floor_plate+block"
+      }
+    },
+    {
+      "key": "sclerotome_sec",
+      "label": "The sclerotome collar, in transverse section",
+      "name": "The sclerotome collar, in transverse section",
+      "role": "part",
+      "group": "In transverse section",
+      "layer": "organ",
+      "color": "#d35400",
+      "opacity": 1,
+      "terms": [
+        "paraxial mesoderm",
+        "somite",
+        "sclerotome",
+        "vertebral body",
+        "resegmentation",
+        "vertebral column",
+        "surrounds the notochord",
+        "chondrification"
+      ],
+      "narration": "Sideways, the notochord signals the somites to release their sclerotome, and sclerotome cells migrate round it to build the vertebral bodies. So the vertebral column is not made from notochord — it is made around notochord. Getting that preposition right is the difference between a correct answer and a common wrong one.",
+      "narration_from": "THE SAME GEOMETRY AS `sclerotome`, built only inside the block window — see the model's VARIANTS.block and acceptance row U, which measures that it is literally a piece of the same sweep and not a second drawing of it. It is a separate structure key because a scene op names a structure, and a beat that wants the block has to be able to say so. Narration is the same sentence as `sclerotome`.",
+      "refs": {
+        "procedural": "notochord#sclerotome+block"
+      }
+    },
+    {
+      "key": "somite_sec",
+      "label": "A somite, in transverse section",
+      "name": "A somite, in transverse section",
+      "role": "context",
+      "group": "In transverse section",
+      "layer": "organ",
+      "color": "#239b56",
+      "opacity": 1,
+      "terms": [
+        "somite",
+        "paraxial mesoderm",
+        "segmentation",
+        "somite clock",
+        "day 20"
+      ],
+      "narration": "The paraxial mesoderm, segmenting into blocks from day twenty, one new pair every four and a half hours. Each pair is what releases the sclerotome that the next structure is made of.",
+      "narration_from": "THE SAME GEOMETRY AS `somite`, built only inside the block window — see the model's VARIANTS.block and acceptance row U, which measures that it is literally a piece of the same sweep and not a second drawing of it. It is a separate structure key because a scene op names a structure, and a beat that wants the block has to be able to say so. Narration is the same sentence as `somite`.",
+      "refs": {
+        "procedural": "notochord#somite+block"
+      }
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Find the midline, then find the pit",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "endoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "amnion"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "yolk_sac"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "node"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pit"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "streak"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "process"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "canal"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.2
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pit",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Take the trilaminar disc and cut it from head to tail down the middle. Amnion above, yolk sac below. Now find the primitive pit at the back end. The cells that make the notochord go in there and nowhere else — groove cells make the germ layers, pit cells make the midline. Hold that split and the rest of this scene is bookkeeping.",
+      "narration_from": "sequence-version view beat 1 — carried across VERBATIM from the sequence version. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. The composition below was decided by the player walk (viz-training/tools/measure-scene-visibility.mjs), not by the sequence version's op list. HERE: the camera is `lateral`, which in this model's frame looks along the midline with CRANIAL up the screen — the right orientation for a scene whose whole story is arranged head to tail. The cost is stated rather than hidden: viz3d holds the camera's up-vector at world +y, so from `lateral` the screen's vertical axis is the cranio-caudal one and \"amnion above, yolk sac below\" reads as amnion to one SIDE of the disc. Acceptance row V measures exactly that — the dorsoventral stack survives an `inferior` camera (0.979 of the sheets' own extent) and not a `lateral` one (0.005) — and beats 3 and 7 are the two beats that look along +/-y: beat 7 at `inferior`, beat 3 at `superior`. (Corrected by review 2026-10-02: this read \"beats 3 and 7 are the beats that stand at `inferior`\", which the late camera change to beat 3 had already made untrue.) The claim below is therefore about the ORDER of the two cavities in the model, which is true whatever camera reads it.",
+      "claims": [
+        {
+          "id": "B1-caudal",
+          "claim": "the pit is at the BACK end — the axis starts there and runs forward",
+          "measure": "axisCaudalV/hemi",
+          "op": "near",
+          "value": 0.497593,
+          "tol": 0.015
+        },
+        {
+          "id": "B1-hollow",
+          "claim": "nothing is a rod yet: on day sixteen there is no definitive notochord at all",
+          "measure": "rodLenFrac/hemi",
+          "op": "atMost",
+          "value": 0.001
+        },
+        {
+          "id": "B1-stack",
+          "claim": "amniotic cavity above, yolk sac below, with the disc between them",
+          "measure": "dorsoventralOrder/hemi",
+          "op": "atLeast",
+          "value": 0.55
+        },
+        {
+          "id": "B1-conserve",
+          "claim": "and the material in the midline is the one cross-section this scene conserves",
+          "measure": "conservationWorst",
+          "op": "atMost",
+          "value": 0.04
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "A hollow tube, not a rod — yet",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "endoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "node"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pit"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "streak"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "process"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "canal"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.26
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pit",
+          "to": "process",
+          "kind": "cells run forward in the midline as"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "process",
+          "to": "canal",
+          "kind": "is hollow, and its lumen is"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "process",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Around day sixteen the prenotochordal cells run cranially as a hollow tube — the notochordal process — and its lumen is the notochordal canal, open behind into the pit. Say hollow out loud. Almost every mistake in this topic comes from a student who pictured a solid rod on day sixteen and then could not explain how it ever joined the endoderm.",
+      "narration_from": "sequence-version view beat 2 — carried across VERBATIM from the sequence version. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. The composition below was decided by the player walk (viz-training/tools/measure-scene-visibility.mjs), not by the sequence version's op list. The two SHOW_RELATIONSHIP ops are the sequence version's own, kept verbatim. \"Say hollow out loud\" is claim B2-hollow: the lumen is a third of the tube's own section, measured on the built triangles by ray cast, and the rod does not exist yet.",
+      "claims": [
+        {
+          "id": "B2-hollow",
+          "claim": "a HOLLOW tube: its lumen is a real share of its own cross-section",
+          "measure": "lumenAreaFrac/hemi",
+          "op": "atLeast",
+          "value": 0.2
+        },
+        {
+          "id": "B2-not-a-rod",
+          "claim": "and not a rod — there is no definitive notochord on day sixteen",
+          "measure": "rodLenFrac/hemi",
+          "op": "atMost",
+          "value": 0.001
+        },
+        {
+          "id": "B2-tip",
+          "claim": "it has run this far cranially by now, and it is still growing forward",
+          "measure": "axisCranialV/hemi",
+          "op": "near",
+          "value": 0.735442,
+          "tol": 0.02
+        },
+        {
+          "id": "B2-conserve",
+          "claim": "the wall holds the cross-section the whole scene conserves",
+          "measure": "conservationWorst",
+          "op": "atMost",
+          "value": 0.04
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "The floor gives way and the notochord joins the gut roof",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ectoderm_sec"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "endoderm_sec"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesoderm_sec"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "plate_sec"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_plate_sec"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.4
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "plate_sec",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across the embryo and watch the floor of the tube break down. The cells left flatten and intercalate into the roof of the yolk sac as the notochordal plate — for two days the notochord is part of the gut lining. While that floor is open the amniotic cavity drains into the yolk sac through the pit, which is the neurenteric canal. It is normal, and it closes.",
+      "narration_from": "sequence-version view beat 3 — carried across VERBATIM from the sequence version. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. The composition below was decided by the player walk (viz-training/tools/measure-scene-visibility.mjs), not by the sequence version's op list. TWO THINGS ABOUT THIS BEAT'S COMPOSITION, both forced by measurement. (1) IT IS BUILT FROM THE BLOCK, not from a CROSS_SECTION op on the whole disc. viz3d's frameView fits the camera to the bounding box of what is shown, and a THREE clipping plane hides geometry without shrinking that box — so a section of the whole 8.6 x 10 disc gives the structure it is about a fraction of a per cent of the frame; the sibling scene measured 0.046%. The block is the same lens and the same sweep built inside a window 2.3 units wide, and its own end cap IS the transverse face. (2) THE CAMERA IS `superior`, which in this model's frame is a view at the CRANIAL end face of the block, not from above: viz3d's VIEW_DIR names are LPS and here +y is cranial. It is the only family of cameras whose screen vertical is the DORSOVENTRAL axis, which is what \"cut across the embryo\" has to show, and acceptance row V and claim B3-camera measure that it does. It is `superior` rather than `inferior` because the camera looks at the end FACE of the window nearest it: at this t the plate occupies v 0.770 to 0.862, so the window's CRANIAL face cuts through the plate and its caudal face is still hollow tube. The first composition used `inferior` and the player walk measured `plate_sec` — the beat's own subject — at 0.000%. Beat 7 keeps `inferior` because its subject, the collar, is caudal. AND TWO OMISSIONS, BOTH MEASURED. (a) The beat's narration names the neurenteric canal, which lies at the pit, caudal of the window: it is waived in visibility_waivers and beat 4 shows it. (b) The sequence version's SHOW_RELATIONSHIP from the canal to the plate is MOVED to beat 4, as process -> plate, and the hollow tube and its canal are dropped from this beat's shown list. Both are caudal of the plate, so from this camera they sit behind its cut face and the player walk measured them at 0.000% — a structure a relationship POINTS AT and the student cannot see is the defect RENDER-STANDARD 3.x exists to stop, and beat 4 is a `lateral` beat that shows all three stages at once.",
+      "claims": [
+        {
+          "id": "B3-in-roof",
+          "claim": "the plate is set INTO the roof of the yolk sac, not laid on top of it",
+          "measure": "plateInRoofFrac/block",
+          "op": "atLeast",
+          "value": 0.93
+        },
+        {
+          "id": "B3-flat",
+          "claim": "and it is flattened: wider than the tube it came from",
+          "measure": "plateWiderThanTube/block",
+          "op": "atLeast",
+          "value": 1.45
+        },
+        {
+          "id": "B3-front",
+          "claim": "the breakdown front has come this far caudally by day eighteen",
+          "measure": "brkBuiltV/block",
+          "op": "near",
+          "value": 0.773692,
+          "tol": 0.015
+        },
+        {
+          "id": "B3-no-rod",
+          "claim": "there is still no definitive rod anywhere",
+          "measure": "rodLenFrac/block",
+          "op": "atMost",
+          "value": 0.001
+        },
+        {
+          "id": "B3-camera",
+          "claim": "and this is a camera that can show three stacked sheets as three stacked sheets",
+          "measure": "stackAcross.inferior/block",
+          "op": "atLeast",
+          "value": 0.08
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "It rolls up, detaches, and becomes a rod",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "endoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "process"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "plate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "definitive"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "node"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pit"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "streak"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neurenteric"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.48
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "process",
+          "to": "plate",
+          "kind": "its floor breaks down, leaving"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "definitive",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:prenotochordal-cells",
+          "path": [
+            "process",
+            "canal",
+            "plate",
+            "definitive"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The plate then folds back on itself, pinches off from the endoderm and lies free in the mesoderm as a solid rod. That is the definitive notochord, and it is finished by about day twenty. The endoderm heals under it into a continuous gut roof. Learn the four stages as a sequence you can write in one line: process, canal, plate, rod.",
+      "narration_from": "sequence-version view beat 4 — carried across VERBATIM from the sequence version. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. The composition below was decided by the player walk (viz-training/tools/measure-scene-visibility.mjs), not by the sequence version's op list. THE TRACE IS THE SEQUENCE VERSION'S OWN OP, kept deliberately: viz3d lists TRACE_STRUCTURE as DEGRADED for the procedural provider, so it highlights rather than walking a centreline, and that is still the correct teaching move — the sequence version's gaps[] made the same argument. THE REASON THIS BEAT EXISTS AT THIS t: at day 18.8 all three stages are on the embryo AT ONCE, arranged along the axis — rod cranially, plate in the middle, hollow tube caudally — because the transformation sweeps caudally from the oldest material. One frame, four stages, in order. Claims B4-three and B4-ordered measure that it is so, on the built boxes, with the ordering floored as a fraction of the axis's own length.",
+      "claims": [
+        {
+          "id": "B4-three",
+          "claim": "all three stages are present on the one axis at this instant",
+          "measure": "stagesPresent/hemi",
+          "op": "equals",
+          "value": 3
+        },
+        {
+          "id": "B4-ordered",
+          "claim": "and in order, cranial to caudal: rod, then plate, then hollow tube",
+          "measure": "stagesOrdered/hemi",
+          "op": "atLeast",
+          "value": 0.045
+        },
+        {
+          "id": "B4-detached",
+          "claim": "the rod has left the gut roof behind",
+          "measure": "rodInRoofFrac/hemi",
+          "op": "atMost",
+          "value": 0.06
+        },
+        {
+          "id": "B4-front",
+          "claim": "the detachment front has come this far caudally by now",
+          "measure": "detBuiltV/hemi",
+          "op": "near",
+          "value": 0.784438,
+          "tol": 0.015
+        },
+        {
+          "id": "B4-conserve",
+          "claim": "and the same cross-section is carried through both fronts",
+          "measure": "conservationWorst",
+          "op": "atMost",
+          "value": 0.04
+        },
+        {
+          "id": "B4-canal",
+          "claim": "and the tube behind it is still hollow",
+          "measure": "lumenAreaFrac",
+          "op": "atLeast",
+          "value": 0.2
+        }
+      ]
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "How far it runs, and where it stops",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "endoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "definitive"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "prechordal_plate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "oropharyngeal_membrane"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "node"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pit"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "streak"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_plate"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.6
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "prechordal_plate",
+          "to": "definitive",
+          "kind": "a midline rod from node to prechordal plate is"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "definitive",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The rod runs from the primitive node behind to the prechordal plate in front, and it goes no further forward than that. Everything in front of the prechordal plate is head, and the head is patterned without a notochord underneath it. Within its own extent the notochord is the primitive axis of the embryo — the first skeleton, and the line the vertebral column will be built around.",
+      "narration_from": "sequence-version view beat 5 — carried across VERBATIM from the sequence version. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. The composition below was decided by the player walk (viz-training/tools/measure-scene-visibility.mjs), not by the sequence version's op list. The sequence version's SHOW_RELATIONSHIP from `extent` to `axis` is kept with its two ends now being built structures. \"It goes no further forward than that\" is claim B5-span, measured off the rod's own built bounding box against the prechordal plate's.",
+      "claims": [
+        {
+          "id": "B5-solid",
+          "claim": "by day twenty it is solid along its whole length — no lumen left anywhere",
+          "measure": "lumenAreaFrac/hemi",
+          "op": "atMost",
+          "value": 0.02
+        },
+        {
+          "id": "B5-span",
+          "claim": "it runs forward as far as the prechordal plate and no further",
+          "measure": "axisCranialV/hemi",
+          "op": "near",
+          "value": 0.862,
+          "tol": 0.008
+        },
+        {
+          "id": "B5-caudal",
+          "claim": "and back to the node, which regression has brought to here",
+          "measure": "axisCaudalV/hemi",
+          "op": "near",
+          "value": 0.474052,
+          "tol": 0.012
+        },
+        {
+          "id": "B5-thin",
+          "claim": "the finished rod is NARROWER than the hollow process was — it lost a lumen, not material",
+          "measure": "rodHalfWOverProcR/hemi",
+          "op": "atMost",
+          "value": 0.86
+        },
+        {
+          "id": "B5-np-stops",
+          "claim": "and the neural plate above it stops where it stops",
+          "measure": "npOverhangFrac/hemi",
+          "op": "equals",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Two things it tells other tissues to do",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "endoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "definitive"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_plate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "floor_plate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "somite"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sclerotome"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "node"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.7
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "definitive",
+          "to": "neural_plate",
+          "kind": "signals upward to thicken ectoderm into"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "definitive",
+          "to": "sclerotome",
+          "kind": "signals sideways to organise"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "neural_plate",
+          "intensity": 0.95
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "neural_plate",
+            "sclerotome"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Upwards, it induces the overlying ectoderm to thicken into the neural plate — the beginning of the whole nervous system, and the answer to the commonest question in this topic. It keeps talking afterwards: sonic hedgehog from the notochord builds the floor plate and the motor half of the cord. Sideways, it tells each somite to release its sclerotome, and those cells crawl round it to form the vertebral bodies. Round it, not from it.",
+      "narration_from": "sequence-version view beat 6 — carried across VERBATIM from the sequence version. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. The composition below was decided by the player walk (viz-training/tools/measure-scene-visibility.mjs), not by the sequence version's op list. Both SHOW_RELATIONSHIP ops and the COMPARE_STRUCTURES are the sequence version's own. The beat's second subject — sclerotome crawling round the rod — gets a beat of its own at 7, because the one thing that cannot be shown from a `lateral` camera is a collar wrapped round something; this beat keeps the narration whole and beat 7 shows the wrap.",
+      "claims": [
+        {
+          "id": "B6-thick",
+          "claim": "the ectoderm over it has thickened into a plate — more than twice flat ectoderm",
+          "measure": "npThickRatio/hemi",
+          "op": "atLeast",
+          "value": 2
+        },
+        {
+          "id": "B6-only-over",
+          "claim": "and only over it: no notochord, no neural plate",
+          "measure": "npOverhangFrac/hemi",
+          "op": "equals",
+          "value": 0
+        },
+        {
+          "id": "B6-floor",
+          "claim": "the midline strip of it is the floor plate, which is built",
+          "measure": "floorPlateVol/hemi",
+          "op": "atLeast",
+          "value": 0.005
+        },
+        {
+          "id": "B6-sclerotome",
+          "claim": "and sideways, sclerotome has wrapped this much of the rod's length by day twenty-one",
+          "measure": "sclerotomeCoverFrac/hemi",
+          "op": "near",
+          "value": 0.653872,
+          "tol": 0.03
+        }
+      ]
+    },
+    {
+      "mode": "cross_section",
+      "beat": 7,
+      "title": "Round it, not from it",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ectoderm_sec"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "endoderm_sec"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesoderm_sec"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "definitive_sec"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sclerotome_sec"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "somite_sec"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_plate_sec"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "floor_plate_sec"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sclerotome_sec",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        }
+      ],
+      "narration": "Cut across the embryo at a somite and look at it from the tail. The rod is in the middle, the thickened neural plate is directly above it, and the sclerotome has come round the rod from both sides to meet in front of it. That ring is the vertebral body being laid down, and the rod is inside the ring rather than part of it. This is the preposition the topic turns on: the vertebral column forms AROUND the notochord. Nothing of the notochord becomes bone. One orientation note, because this scene cuts the embryo across twice: beat three looked at the cut face from the HEAD end and this one looks at it from the TAIL, so the two transverse views are mirror images of each other and left and right swap between them. Every structure here is midline-symmetric and no claim in this scene names a side, so nothing you are learning turns on it — but the two pictures are not the same way round, and that is worth knowing before you compare them.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. It carries the second half of the sequence version's beat 6 — \"those cells crawl round it to form the vertebral bodies. Round it, not from it\" — which is kept verbatim on beat 6, where that sentence still sits. It is a separate beat because a wrap is the one thing a `lateral` camera cannot show: from the side a collar and a cuff and a pair of blocks all draw the same picture. Measured here instead (claim B7-ring): the collar occupies the whole circle round the axis, read off its own vertices binned by angle, and claim B7-around measures by containment that it shares none of the rod's space. Built from the block, and from `inferior`, for the reasons beat 3 gives. ROUND 2, review round 1 finding \"BEAT 3 vs BEAT 7, OPEN (minor)\": the two transverse beats stand at opposite ends of the same axis, so their cut faces are mirrored. The review's own words were \"Beat 3s camera is JUSTIFIED ... so do not simply flip it. Either say so to the student or harmonise.\" Harmonising would mean moving beat 3 to `inferior`, which points it at the caudal face of the block — still a hollow tube at that t, with no notochordal plate on it, which is the one thing beat 3 exists to show. So it is SAID TO THE STUDENT, and it is said HERE and not on beat 3 because beat 3's narration is carried VERBATIM from the sequence version and gap 0 forbids rewriting it; beat 7's was authored for this scene. It is also the better place for it: a student meets the mirror when the SECOND transverse section appears, not the first.",
+      "claims": [
+        {
+          "id": "B7-ring",
+          "claim": "the sclerotome has come all the way round the rod",
+          "measure": "collarRingFrac/block",
+          "op": "atLeast",
+          "value": 0.88
+        },
+        {
+          "id": "B7-around",
+          "claim": "and AROUND it, not from it: it shares none of the rod's own space",
+          "measure": "sclerotomeInRod/block",
+          "op": "atMost",
+          "value": 0.03
+        },
+        {
+          "id": "B7-camera",
+          "claim": "which is a claim only a camera looking along the axis can carry",
+          "measure": "stackAcross.inferior/block",
+          "op": "atLeast",
+          "value": 0.08
+        },
+        {
+          "id": "B7-cover",
+          "claim": "and it has reached this far along the rod by day twenty-one — measured on the whole model, which acceptance row U proves the block is a piece of",
+          "measure": "sclerotomeCoverFrac/hemi",
+          "op": "near",
+          "value": 0.653872,
+          "tol": 0.03
+        }
+      ]
+    },
+    {
+      "mode": "location",
+      "beat": 8,
+      "title": "What is left of it when you are grown",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "vertebral_body"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "annulus_fibrosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "nucleus_pulposus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "notochord_regressed"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "notochord_regressed",
+          "to": "nucleus_pulposus",
+          "kind": "the bodies squeeze it out, leaving between them"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "nucleus_pulposus",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Inside each vertebral body the notochord is crushed out of existence. Between the bodies it survives as the nucleus pulposus at the centre of every intervertebral disc, plus a scrap in the apical ligament of the dens. So you still carry your notochord, and when a disc prolapses it is notochordal tissue pushing through the torn annulus onto a nerve root.",
+      "narration_from": "sequence-version view beat 7 — carried across VERBATIM from the sequence version. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. The composition below was decided by the player walk (viz-training/tools/measure-scene-visibility.mjs), not by the sequence version's op list. The sequence version's PEEL_LAYER op is NOT kept: viz3d degrades it to hiding every structure tagged with that layer, which in this scene is every structure, so the beat would have drawn nothing. The teaching move it stood for — take the bodies away and look at what is between them — is instead the beat's shown list and its highlight. TWO THINGS THIS BEAT IS HONEST ABOUT, both in gaps[] as well: it is at a DIFFERENT SCALE from every other beat (one vertebral body is 15 mm where the whole disc is 1 mm), so no beat shows it beside an embryonic structure; and its t is a PROGRESS parameter for a regression that takes years, not a day count. What is NOT approximate is the conservation: the nucleus's radius is solved against the volume the bodies squeeze out, and claims B8-grown and B8-regressed measure both sides of it off the built vertices.",
+      "claims": [
+        {
+          "id": "B8-between",
+          "claim": "every nucleus lies BETWEEN two bodies, not inside one",
+          "measure": "nucleusBetweenBodies/adult",
+          "op": "atMost",
+          "value": 0.02
+        },
+        {
+          "id": "B8-onaxis",
+          "claim": "and on the line the notochord ran along",
+          "measure": "nucleusOffAxis/adult",
+          "op": "atMost",
+          "value": 0.05
+        },
+        {
+          "id": "B8-regressed",
+          "claim": "inside the body the notochord is all but gone — this much of it is left",
+          "measure": "remnantAreaFrac/adult",
+          "op": "atMost",
+          "value": 0.2
+        },
+        {
+          "id": "B8-grown",
+          "claim": "and what left the bodies has arrived in the discs — the nucleus is this much bigger than the rod it came from",
+          "measure": "nucleusRadiusFrac/adult",
+          "op": "near",
+          "value": 2.256726,
+          "tol": 0.05
+        }
+      ]
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 9,
+      "title": "Cells that stayed, and a canal that did not close",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "endoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "definitive"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "prechordal_plate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "node"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "streak"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_plate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "chordoma_clival"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "chordoma_sacral"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neurenteric_cyst"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.86
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "prechordal_plate",
+          "to": "chordoma_clival",
+          "kind": "remnants anywhere along it become"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "definitive",
+          "to": "chordoma_sacral",
+          "kind": "remnants anywhere along it become"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "chordoma_sacral",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "chordoma_clival",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Three clinical endings, and each is a stage of this scene going wrong. Cells left behind along the axis grow into a chordoma — midline, slow, bone-destroying, and found at the sacrum or the clivus because that is where the notochord ran. A neurenteric canal that stays open leaves gut connected to the back through a split vertebral column, from a small neurenteric cyst up to split notochord syndrome. And a notochord that forms poorly takes both its pupils down with it: no proper neural plate above, no organised vertebral bodies around. One rod, and the spine and the cord both depend on it.",
+      "narration_from": "sequence-version view beat 8 — carried across VERBATIM from the sequence version. Its SHOW_STRUCTURE \"*\" / ISOLATE_REGION pair is replaced by an explicit shown list, because in the 3D player EVERY structure starts visible and a beat that does not hide what it does not want draws the whole model. The composition below was decided by the player walk (viz-training/tools/measure-scene-visibility.mjs), not by the sequence version's op list. The sequence version's HIDE_STRUCTURE of a whole REGION is replaced by the explicit shown list, for the reason above. THE TWO MASSES ARE DRAWN ON THE EMBRYONIC AXIS rather than on an adult skeleton, and that is the point rather than a shortcut: the answer to \"why does one tumour appear at the clivus and at the sacrum and almost nowhere between\" is that the notochord ran between them, so the picture that answers it is the notochord with a mass at each end. The skull base and the sacrum are not built — gaps[] says so. Claim B9-oneaxis measures that both masses sit on the axis to within 2% of the rod's own half-width, and B9-ends that they are two thirds of the disc apart.",
+      "claims": [
+        {
+          "id": "B9-oneaxis",
+          "claim": "both masses are on ONE axis — the line the notochord ran along",
+          "measure": "chordomaAxisOffset/clinical/hemi",
+          "op": "atMost",
+          "value": 0.02
+        },
+        {
+          "id": "B9-ends",
+          "claim": "and at its two ENDS, most of the embryo apart",
+          "measure": "chordomaSeparationFrac/clinical/hemi",
+          "op": "atLeast",
+          "value": 0.45
+        },
+        {
+          "id": "B9-caudal",
+          "claim": "the caudal one sits where the notochord's caudal end is at this stage",
+          "measure": "chordomaCaudalV/clinical/hemi",
+          "op": "near",
+          "value": 0.28328,
+          "tol": 0.012
+        },
+        {
+          "id": "B9-cyst",
+          "claim": "and the cyst is drawn where the canal used to run",
+          "measure": "cystVol/clinical/hemi",
+          "op": "atLeast",
+          "value": 0.005
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 10,
+      "title": "The canal that should have closed",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "endoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "definitive"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "node"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pit"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "streak"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural_plate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "persistent_canal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neurenteric_cyst"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.62
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "persistent_canal",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "It is day twenty. The neurenteric canal closed two days ago in a normal embryo — look back at beat four and it is there, and at beat five it has gone. Here it has not gone. Amniotic cavity to yolk sac, straight through the midline, at a stage when nothing should be passing between them. Everything downstream follows from that one channel staying open: the gut stays tethered to the back, the vertebral column has to form around a hole, and what a surgeon finds runs from a small cyst in front of the cord to a complete dorsal enteric fistula.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE. The sequence version taught this inside its beat 8, whose narration is carried verbatim on beat 9. It gets its own beat because the defect is only visible as a defect at a t where the NORMAL canal no longer exists — which is a thing a sequence of panels cannot show and a function of t can. Claims B10-closed and B10-open are the two halves of that: the normal channel's built volume is exactly zero at this instant and the persistent one's is not, and B10-through measures that it pierces both laminae rather than merely lying between them.",
+      "claims": [
+        {
+          "id": "B10-closed",
+          "claim": "the normal neurenteric canal has closed by now — it does not exist at this t",
+          "measure": "necVol/clinical/hemi",
+          "op": "atMost",
+          "value": 0
+        },
+        {
+          "id": "B10-open",
+          "claim": "and this one has not",
+          "measure": "persistVol/clinical/hemi",
+          "op": "atLeast",
+          "value": 0.004
+        },
+        {
+          "id": "B10-through",
+          "claim": "it is a through-and-through channel: it pierces BOTH laminae",
+          "measure": "persistPierces/clinical/hemi",
+          "op": "equals",
+          "value": 2
+        },
+        {
+          "id": "B10-node",
+          "claim": "at the stage the node has regressed to here",
+          "measure": "axisCaudalV/clinical/hemi",
+          "op": "near",
+          "value": 0.460521,
+          "tol": 0.012
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 11,
+      "title": "When the axis fails, both its pupils fail",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ectoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "endoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesoderm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "node"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "streak"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pit"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "definitive_defective"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ecto_uninduced"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sclerotome_disordered"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ecto_uninduced",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The same embryo at the same stage with one thing wrong: the notochord formed badly — interrupted, beaded, not a continuous rod. Look at what has happened above and beside it. The ectoderm over it is flat; it was never induced, so there is no neural plate here and there will be no proper neural tube. The sclerotome beside it has condensed without anything to organise around, so the vertebral primordia are unequal and some are fused. One failure, two consequences — and that is why a child with axial vertebral anomalies gets the cord imaged as well.",
+      "narration_from": "AUTHORED FOR THE 3D SCENE, and it is a BUILD of the negative control rather than an argument about one. The sequence version's \"notochord_absent\" panel is carried verbatim on `definitive_defective`. The `failed` variant sets the induction source strength to zero and the SAME builder that makes the neural plate returns a flat strip of epiblast — so claim B11-flat and claim B11-induced are the same measurement on two builds at the same t, which is what makes the contrast evidence. Acceptance row I is the same pair.",
+      "claims": [
+        {
+          "id": "B11-flat",
+          "claim": "the ectoderm over a failed axis is not thickened — it is ordinary epiblast",
+          "measure": "uninducedThickRatio/failed/hemi",
+          "op": "atMost",
+          "value": 1.1
+        },
+        {
+          "id": "B11-induced",
+          "claim": "where the axis is intact, at this same stage, it is more than twice as thick",
+          "measure": "npThickRatio/hemi",
+          "op": "atLeast",
+          "value": 2
+        },
+        {
+          "id": "B11-disordered",
+          "claim": "and the sclerotome beside it is irregular rather than segmental",
+          "measure": "collarWidthCV/failed/hemi",
+          "op": "atLeast",
+          "value": 0.2
+        },
+        {
+          "id": "B11-cover",
+          "claim": "measured at the stage this beat stands at",
+          "measure": "sclerotomeCoverFrac/failed/hemi",
+          "op": "near",
+          "value": 0.613466,
+          "tol": 0.04
+        }
+      ]
+    }
+  ],
+  "deferred_beats": [
+    {
+      "from": "sequence-version structure \"axis\"",
+      "title": "The primitive axis of the embryo",
+      "narration": "The notochord is the embryo's first skeleton. It is the axis everything else is arranged around, and the definition examiners want is short: a midline rod of mesoderm that defines the primitive axis and around which the vertebral column later forms. If you can only keep one sentence, keep that one.",
+      "terms": [
+        "midline",
+        "primitive axis",
+        "axial skeleton",
+        "body axis",
+        "median plane",
+        "bilateral symmetry",
+        "scaffold"
+      ],
+      "why_not_a_view": "It is a DEFINITION of the whole notochord rather than of any part the model builds, so there is no structure for it to ride on and no frame it would change: every beat that draws the rod draws what it describes. The words are the best single sentence in this topic — \"a midline rod of mesoderm that defines the primitive axis and around which the vertebral column later forms\" — so they are carried here whole rather than cut. Beat 5 is the beat that teaches them and beat 7 is the one that shows the column forming around it."
+    }
+  ],
+  "visibility_waivers": [
+    {
+      "view": 3,
+      "key": "neurenteric",
+      "why": "Beat 3's narration names the neurenteric canal (\"the amniotic cavity drains into the yolk sac through the pit, which is the neurenteric canal\") and the beat does not draw it. The channel is at the primitive pit, which at this t sits at v = 0.582; this beat is built from the block window, v 0.655 to 0.855, so the pit is outside the picture. Widening the window to reach the pit would make it 2.75 units long and shrink the plate — the subject — by a third, and the beat exists to show the plate intercalated in the gut roof.",
+      "shown_by_beat": 4,
+      "shown_by_note": "Beat 4 is at t = 0.48, inside the canal's own window, from a `lateral` camera with no block: it draws the channel from the amniotic cavity through to the yolk sac. Acceptance row J measures that it pierces both laminae there."
+    },
+    {
+      "view": 5,
+      "key": "prechordal_plate",
+      "why": "MEASURED 0.268% of the frame against the 0.30% floor for a structure a beat points at — nine tenths of the bar, and thirteen times the 0.02% bar for a structure that is merely shown. It is a flat midline condensation 1.42 units long and 0.49 deep seen EDGE-ON, and roughly half of it is behind the neural plate, which abuts it at exactly v = 0.862 because that is where induction stops. It cannot be made longer: its cranial edge is already at the disc's own rim, and it cannot be made to start further caudally, because \"in front of the prechordal plate there is no notochord\" is the sentence it exists to carry. The camera that WOULD show it large is a dorsal one, and that camera loses the dorsoventral stack this beat is about (acceptance row V). The claim that matters here, B5-span, measures the rod's cranial end against this structure's own built box and does not depend on how many pixels it has.",
+      "shown_by_beat": null
+    },
+    {
+      "view": 5,
+      "key": "oropharyngeal_membrane",
+      "why": "MEASURED 0% — it is 5 µm of fused basal laminae (H_FUSE, the sibling scene's own number) seen edge-on in a frame 125 square units across, so it is a line and not a shape. It is shown rather than hidden because beat 5's narration turns on where the notochord STOPS and this membrane is the landmark cranial to that point; a student reading the beat should see that something is there. Making it thicker would be inventing 20 µm of tissue to pass a pixel count, and it would disagree with trilaminar-disc-3-germ-layers.js, which this model agrees with on every dimension of the disc.",
+      "shown_by_beat": null
+    },
+    {
+      "view": 9,
+      "key": "prechordal_plate",
+      "why": "MEASURED 0.229% against the 0.30% floor, for the reasons given on beat 5 — same structure, same edge-on geometry, and here it also lies partly behind the cranial chordoma mass, which is the thing this beat points at. The relationship op that names it is the sequence version's own (\"remnants anywhere along it become\"), and the claim it supports, B9-oneaxis, is measured on centroids rather than on pixels.",
+      "shown_by_beat": 5
+    },
+    {
+      "view": 2,
+      "key": "__framing__",
+      "why": "MEASURED: the subject covers 7.82% of the frame against the 8.0% floor, with its bounding box filling 14.51%. This is the framing limit of a median section, and it is the escalated engine item rather than a composition fault: viz3d sizes the frame from the subject's LONGEST visible axis, which here is the embryo's 7.5-unit cranio-caudal length, while the section itself is 2.3 units deep — so the picture is a tall thin slab in a square frame and no camera or shown-list changes that. Trimming the flank from 4.3 units to 1.6 moved the measured scale by nothing (0.015158 world units per pixel before and after); cropping the length from 9.6 to 7.5 units is what took this beat from 5.67% to 7.82%, and cropping further would drop the primitive streak, which this beat shows the pit in. See engine__refit-camera-on-isolate, which is ESCALATED.",
+      "box_fill_pct": 14.51
+    },
+    {
+      "view": 4,
+      "key": "__framing__",
+      "why": "MEASURED: 7.03% against the 8.0% floor, bounding box 18.36%. Same cause as beat 2's framing waiver, and this beat is the worst case of it because it is the beat that shows ALL THREE stages at once — rod cranially, plate in the middle, hollow tube caudally — so it cannot be cropped to any one of them without losing the thing it exists to show. Every structure in it clears its own bar: nothing is waived here but the frame.",
+      "box_fill_pct": 18.36
+    }
+  ],
+  "provenance": {
+    "author": "the model3d build task",
+    "authored_at": "2026-08-28",
+    "converted_at": null,
+    "converted_from": "mode \"sequence\" (the SVG panel engine), status \"planned\", 15 structures that were teaching PANELS with no geometry and 8 beats of prose.",
+    "converted_by": "the model3d build run",
+    "model": "models3d/notochord.js",
+    "narration_carried": "13 of the sequence version's 15 structure narrations and all 8 of its beat narrations are carried VERBATIM; the fourteenth (\"disc_context\") is carried verbatim on `amnion` and the fifteenth (\"axis\") in deferred_beats[]. Nothing was cut. 3 beats and 17 structure narrations are new and each says so in its own narration_from.",
+    "corrected_at": "2026-10-02T17:52:00Z",
+    "corrected_by": "the model3d review task (round 1)",
+    "corrections": [
+      "beat 6: sclerotome opacity 1 -> 0.4. At full opacity the continuous definitive notochord rendered as FOUR disconnected fragments behind the three opaque sclerotome drums — the segmented-notochord teaching error named in ARTWORK-STANDARD section 3, one beat before \"Round it, not from it\". Verified by render-and-difference: 1 fragment at 0.4, 4 at 1.0.",
+      "gaps[7] and views[0].narration_from: both said beats 3 and 7 stand at `inferior` and that eight beats stand at `lateral`. Beat 3 is `superior` and nine beats are `lateral`; the prose was stale against the build run's own late camera change."
+    ]
+  },
+  "gaps": [
+    "RE-AUTHORED, NOT WIRED. The sequence version was built for the SVG panel engine: 15 structures that were teaching PANELS with no geometry, 8 beats of prose, status 'planned', and no artwork, so nothing rendered. This is a 3d_anatomy scene of 42 structures and 11 views on a new procedural model, models3d/notochord.js. Nothing was cut: 13 of the 15 structure narrations and all 8 beat narrations are carried VERBATIM, the 14th ('disc_context') rides verbatim on `amnion`, and the 15th ('axis') is in deferred_beats[] because it defines the whole notochord rather than any part the model builds. 3 beats and 17 structure narrations are new and each says so in its own narration_from.",
+    "THE EMBRYO DOES NOT ELONGATE, and the somite clock pays for it. The disc is 1 mm long at every t, where in life it lengthens greatly between days 20 and 24 — which is how twenty-one somite pairs fit. So the clock predicts more pairs than there is room to draw and the model reports both numbers rather than hiding one: somitePairsPredicted / somitePairsDrawn / somiteOverrun. MEASURED overrun: 0 before day 20, 2 at beat 6 and 7's t (predicted 5, drawn 3), 17 at t = 1 (predicted 21, drawn 4). Acceptance row K pins those figures so the overrun cannot grow unnoticed. No beat narrates a somite COUNT, which is why this is a declared approximation rather than a false claim.",
+    "THE ADULT BEAT IS AT A DIFFERENT SCALE AND ON A DIFFERENT CLOCK, and both are deliberate. One vertebral body in the `adult` build is 150 units — 15 mm — where the whole embryonic disc is 100 units. So no beat may show an adult structure beside an embryonic one, and the render harness asserts off this scene's own ops that none does. Its t is also not a day: notochordal regression inside the vertebral bodies runs over the fetal period and the first years of life, and the model reuses t as the fraction of that regression completed (regressFrac). Beat 8's day label is therefore meaningless and the beat does not give one. What is NOT approximate is the conservation: the nucleus pulposus's radius is solved by bisection against the volume the bodies squeeze out, and claims B8-grown and B8-regressed measure both sides of it off the built vertices. ROUND 2, from review round 1 finding \"BEAT 8, OPEN\": the segment was drawn as five CUT-AWAY CYLINDERS — an angular window over the middle 80% of each piece's height, which left an intact collar at each end and read as \"machined parts\" with \"flanges\" — and the annulus fibrosus was a near-white grey indistinguishable from the vertebral body (dE*ab 16.3 at chroma 2.7). It is now a MEDIAN SECTION, the same convention `hemi` already uses on the embryo: the +x half removed over the whole height, so the rim walls ARE the cut faces and there are no collars, with the midline bodies (nucleus, regressed thread) left whole and standing proud of the cut. The annulus is amber #c98b2f, chosen by maximising the minimum dE*ab against everything else beat 8 draws subject to a chroma floor; the disc is now as wide as the bodies it joins; and the annulus's bore follows the nucleus instead of running straight past it, so the ring of empty disc space above and below the nucleus is gone. Acceptance rows T and Y measure all of it. WHAT DID NOT CHANGE: the conservation. The nucleus's radius is still solved against the volume the bodies squeeze out, and claim B8-grown's pinned value is unmoved at 2.2567.",
+    "CHORDOMA IS DRAWN ON THE EMBRYONIC AXIS. The clivus and the sacrum are not built. The teaching point is the one a student is examined on — why a midline tumour appears at the skull base and at the sacrum and almost nowhere between — and the answer is that the notochord ran between them, so the picture that carries it is the notochord with a mass at each end. An adult skeleton would be a second model at a third scale and would not make the argument any better. The narration names both sites in words.",
+    "THE OROPHARYNGEAL MEMBRANE'S FOOTPRINT IS CLIPPED CRANIAL OF THE PRECHORDAL PLATE, and this is a DISAGREEMENT WITH THE SIBLING MODEL rather than a choice. Every dimension of the disc here is the same number as in models3d/trilaminar-disc-3-germ-layers.js — deliberately, so a student meets one embryo, and the render harness loads both files into one page and asserts the two constants() agree. But the sibling's membrane is a circle of radius 0.95 centred at v = 0.925, which reaches back to v = 0.830 — caudal of the prechordal plate at v = 0.862 — so it would own the space the notochord's cranial 0.3 units occupy. Acceptance row O measured 3.6% of the rod's vertices inside it. In the sibling the notochord is context geometry and the membrane wins; here the notochord is the subject and the anatomy is the other way round, so oroEdge() returns 0 caudal of V_PRE. The two models' PLANS differ in that one strip.",
+    "A SECOND TIMING DISAGREEMENT WITH THE SIBLING, found rather than assumed. trilaminar-disc-3-germ-layers.js carries DAY_NCH_FULL = 20.0 and uses it for the notochord's SPAN, so its context rod only reaches the prechordal plate on day 20. Here the TIP reaches the prechordal plate on day 18 (DAY_TIP_PCP) and the DEFINITIVE rod is complete on day 20 (DAY_DET_END), which is the textbook account of two different events. The dimensions agree; this one timing does not.",
+    "THE PRIMITIVE PIT IS DRAWN AS A CAST OF THE DEPRESSION, not as a hole cut through the node. So the upper sheet is continuous where the pit is, and `pit` overlaps `ectoderm` and `node` by construction — both pairs are named in the model's TOUCH_OK partition, which acceptance row O publishes. Cutting a real hole would mean giving the node's lane a moving midline window; it would look the same from every camera this scene uses and it would put a seam where the cells are entering, which is the thing the beat points at.",
+    "THE CAMERA CANNOT SHOW THE DORSOVENTRAL STACK AND THE CRANIO-CAUDAL STORY AT ONCE, and this scene is split by that rather than around it. viz3d holds the camera's up-vector at world +y, and in this model +y is CRANIAL, so from `lateral` the screen's vertical axis is the cranio-caudal one and 'amnion above, yolk sac below' reads as amnion to one side. Only a camera looking along +/-y makes the screen's vertical the dorsoventral axis. Measured (acceptance row V, and claims B3-camera and B7-camera): the two sheets' projections are separated by 0.1084 of their own mean extent from `inferior` at beat 3's t and 0.2655 at beat 7's, and by exactly 0.0000 from `lateral` at both — they overlap completely. So the NINE cranio-caudal beats stand at `lateral` and the two transverse beats look along +/-y — beat 7 at `inferior` and beat 3 at `superior`, because at beat 3's t the caudal face of the block is still hollow tube and only the CRANIAL face carries the notochordal plate the beat is about. (Corrected by review 2026-10-02: this sentence read \"the eight cranio-caudal beats\" and put BOTH transverse beats at `inferior`, which the late camera change to beat 3 had already made untrue.) A reviewer who finds the two orientations inconsistent for a student is right that they are: beat 3 and beat 7 are mirrored left-to-right relative to one another, which is harmless on a midline-symmetric subject but is still two conventions in one scene. The cause is a fixed up-vector the scene cannot set: engine__refit-camera-on- isolate, which is ESCALATED and waiting on a human. ROUND 2: the last sentence of that argument is now also in beat 7's own narration, where a student reads it, rather than only here where a reviewer does.",
+    "THE TWO TRANSVERSE BEATS ARE BUILT FROM A BLOCK, for a measured reason. viz3d's frameView fits the camera to the bounding box of what a beat shows, with no knowledge of which way the camera points, and a THREE clipping plane hides geometry without shrinking that box — so CROSS_SECTION on the whole 8.6 x 10 disc gives the structure the beat is about a fraction of a per cent of the frame (the sibling scene measured 0.046%). The `block` variant is the same lens and the same sweep built inside a window 2.3 units wide and 2.0 long, whose own end cap IS the transverse face. Acceptance row U asserts it is literally a piece of the same geometry: every block vertex inside the window, and its section at a shared station within 0.002% of the full build's. The cost is 11 extra structure keys (`*_sec`), because a scene op names a structure and a beat that wants the block has to be able to say so.",
+    "NO BEAT IN THIS SCENE MAKES AN OCCLUSION CLAIM, so RENDER-STANDARD 3.aa's first-hit measure is not implemented and not needed. The claims are about containment (the plate inside the gut roof), position (the nucleus between two bodies, the masses on one axis), thickness (the neural plate against flat ectoderm), angular coverage (the collar round the rod) and the existence or absence of a channel. A reviewer can check that reading against the 48 claims: none says covers, occludes, under, behind or in front of. If a future round adds one, it needs the measure.",
+    "THE TRACE ON BEAT 4 IS DEGRADED AND KEPT ANYWAY. viz3d lists TRACE_STRUCTURE as degraded for the procedural provider — it highlights rather than walking a centreline — and the op targets concept:prenotochordal-cells, which is a migrating cell population and not a drawn object. The sequence version authored it deliberately and made the same argument in its own gaps[]; it is kept for the same reason, and the beat does not depend on it: all three stages are drawn and claims B4-three and B4-ordered measure that they are in order.",
+    "render-kit.js HAS A WINDING DEFECT IN ITS ANNULAR END CAPS, found by this run's normals probe and NOT FIXED HERE. sweptShell's annular caps are emitted with E.quad / E.quadFlip in an order chosen by reasoning about which way the ring runs, which is exactly the pattern RENDER-STANDARD 2.4b says will be got wrong at some call site. Minimal reproduction, nothing of this model involved — a straight annulus, ring 24, 4 rows, outer 1.0, inner 0.6: 480 triangles, 48 wound AGAINST their own supplied normal, agreement 0.9000; outer surface 0 of 192 wrong, inner wall 0 of 192 wrong, END CAPS 48 of 96 wrong — all of one cap, buffer indices 432..479, which is the cap(0, -1) branch. The same probe on a SOLID tube: 0 of 240, because 2.4b routed that path through triN. So the 2.4b fix reached the solid cap and not the annular one, and every hollow sweptShell in the corpus has one cap inside out — the neural tube, the gut tube, a bronchus, a great vessel — as does the cutaway rim branch, which is written the same way. This model therefore emits its collars and its annulus fibrosus through its own axialSweep, whose annular caps go through triN. The shared file was left alone on purpose: a build run editing it would change every model in the corpus at once, unreviewed, and this item is the notochord.",
+    "STATUS IS 'candidate', NEVER 'ready'. Only a review promotes a scene, and only after seeing it."
+  ]
+}

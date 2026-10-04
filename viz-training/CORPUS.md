@@ -3876,3 +3876,42 @@ vessels that are irreplaceable in seconds from the ones that collateralise, and 
   it read `ready`. Sentences retired and dated; ids re-verified (17/17, 21/21, 15/15 in catalog and on
   disk). No anatomical content changed. `corrected_at` 2026-09-09 added to all three; `hypothalamus-
   pituitary` had been promoted on 2026-09-08 with no `corrected_at` at all, which is now fixed.
+
+### 2026-09-30 amendment — the day-18 cardiogenic field, and which frame a source is speaking in
+Recorded here because a build run and two review rounds each had to re-derive it, and one of them
+escalated the item over it. RULED BY FRANK, 2026-09-29: **the cardiogenic horseshoe's bend is NOT
+cranial before folding — the caudal orientation stands.**
+
+**What that means concretely.** In the flat disc at day 18 the order along the embryonic axis, cranial
+to caudal, is: septum transversum, then the cardiogenic area with its VENOUS limbs nearer the septum
+and its ARTERIAL confluence nearer the membrane, then the buccopharyngeal membrane. The head fold then
+turns that whole arrangement through 180 degrees about the arterial end, and the order inverts: brain,
+mouth, heart, diaphragm. `models3d/heart-tube-formation.js` builds exactly this and applies the fold as
+ONE rigid rotation, so the inversion is a consequence rather than three things moved separately;
+acceptance rows E and F assert both crossings with a magnitude floor.
+
+**THE APPARENT CONTRADICTION IN THE SOURCES IS A FRAME AMBIGUITY, AND THAT IS THE PART WORTH KEEPING.**
+UNSW Embryology says the bilateral heart fields "merge cranially" and lists the truncus arteriosus at
+the cranial end; StatPearls says the horseshoe's apex becomes the outflow tract. Those look opposed and
+are not. **Every statement on the UNSW page is in the DEFINITIVE (post-fold) frame** — re-read
+2026-09-30, and it makes no reference to the buccopharyngeal membrane at all. Pre-fold, in the flat
+disc, that same arterial end lies caudal. Before quoting any source on this, establish which frame it
+is speaking in; nearly every disagreement in the literature on it is this and nothing else.
+
+**Sources that state the pre-fold order directly.** Fribourg's embryology.ch on cephalo-caudal folding:
+"In the cephalic region, rostral to the prechordal plate and the pharyngeal membrane, the mesenchymal
+cells form the cardiac plate (pericardium) and the septum transversum", and "With the 180 degree turn
+that results from the folding … the cardiogenic plate (which initially lay most cranially) [moves] into
+the thorax area", concluding "the brain lies the most cranially, followed by the mouth, heart, and
+diaphragm (septum transversum)". Columbia's human-development lecture (Silverman, Chapt3-Flexion, its
+reading assignment Larsen pp. 133–147): "The cranial rim of the embryo contains the buccopharyngeal
+membrane and cranial to the BPM is the cardiogenic area", and the septum transversum "forms cranial to
+the cardiogenic area in the germ disc".
+
+**WHAT IS STILL MISSING, and it is the condition Frank attached to closing the item.** He asked for a
+citation from **Langman or Moore** and for the day-18 depiction to be checked against that figure.
+Neither text has been opened: both are copyrighted books and not retrievable from any run so far; the
+sources that cite them (WikiLectures citing Sadler and Moore & Persaud; Duke's module setting Langman's
+11th ed. ch. 12 pp. 165–200 as its reading) paraphrase rather than reproduce a figure. **No page or
+figure number is quoted here, and none should be added until somebody has the book open.** Anyone who
+does can close this in one look; until then the ruling and the three sources above are what stands.

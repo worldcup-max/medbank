@@ -1,0 +1,71 @@
+MedBank · beat-claim check
+  scene viz-training/scenes/embryology__week-3-gastrulation__notochord.json
+  model models3d/notochord.js
+  THREE  the real three.js from node_modules
+
+beat 1  t=0.2000  Find the midline, then find the pit
+    PASS  B1-caudal       the pit is at the BACK end — the axis starts there and runs forward  [axisCaudalV/hemi near 0.497593 +/-0.015]  -> 0.4976
+    PASS  B1-hollow       nothing is a rod yet: on day sixteen there is no definitive notochord at all  [rodLenFrac/hemi atMost 0.001]  -> 0.0000
+    PASS  B1-stack        amniotic cavity above, yolk sac below, with the disc between them  [dorsoventralOrder/hemi atLeast 0.55]  -> 1.9848
+    PASS  B1-conserve     and the material in the midline is the one cross-section this scene conserves  [conservationWorst atMost 0.04]  -> 0.0084
+
+beat 2  t=0.2600  A hollow tube, not a rod — yet
+    PASS  B2-hollow       a HOLLOW tube: its lumen is a real share of its own cross-section  [lumenAreaFrac/hemi atLeast 0.2]  -> 0.4757
+    PASS  B2-not-a-rod    and not a rod — there is no definitive notochord on day sixteen  [rodLenFrac/hemi atMost 0.001]  -> 0.0000
+    PASS  B2-tip          it has run this far cranially by now, and it is still growing forward  [axisCranialV/hemi near 0.735442 +/-0.02]  -> 0.7354
+    PASS  B2-conserve     the wall holds the cross-section the whole scene conserves  [conservationWorst atMost 0.04]  -> 0.0084
+
+beat 3  t=0.4000  The floor gives way and the notochord joins the gut roof
+    PASS  B3-in-roof      the plate is set INTO the roof of the yolk sac, not laid on top of it  [plateInRoofFrac/block atLeast 0.93]  -> 0.9921
+    PASS  B3-flat         and it is flattened: wider than the tube it came from  [plateWiderThanTube/block atLeast 1.45]  -> 2.0251
+    PASS  B3-front        the breakdown front has come this far caudally by day eighteen  [brkBuiltV/block near 0.773692 +/-0.015]  -> 0.7737
+    PASS  B3-no-rod       there is still no definitive rod anywhere  [rodLenFrac/block atMost 0.001]  -> 0.0000
+    PASS  B3-camera       and this is a camera that can show three stacked sheets as three stacked sheets  [stackAcross.inferior/block atLeast 0.08]  -> 0.1084
+
+beat 4  t=0.4800  It rolls up, detaches, and becomes a rod
+    PASS  B4-three        all three stages are present on the one axis at this instant  [stagesPresent/hemi equals 3]  -> 3.0000
+    PASS  B4-ordered      and in order, cranial to caudal: rod, then plate, then hollow tube  [stagesOrdered/hemi atLeast 0.045]  -> 0.2130
+    PASS  B4-detached     the rod has left the gut roof behind  [rodInRoofFrac/hemi atMost 0.06]  -> 0.0000
+    PASS  B4-front        the detachment front has come this far caudally by now  [detBuiltV/hemi near 0.784438 +/-0.015]  -> 0.7844
+    PASS  B4-conserve     and the same cross-section is carried through both fronts  [conservationWorst atMost 0.04]  -> 0.0083
+    PASS  B4-canal        and the tube behind it is still hollow  [lumenAreaFrac atLeast 0.2]  -> 0.3254
+
+beat 5  t=0.6000  How far it runs, and where it stops
+    PASS  B5-solid        by day twenty it is solid along its whole length — no lumen left anywhere  [lumenAreaFrac/hemi atMost 0.02]  -> 0.0000
+    PASS  B5-span         it runs forward as far as the prechordal plate and no further  [axisCranialV/hemi near 0.862 +/-0.008]  -> 0.8620
+    PASS  B5-caudal       and back to the node, which regression has brought to here  [axisCaudalV/hemi near 0.474052 +/-0.012]  -> 0.4741
+    PASS  B5-thin         the finished rod is NARROWER than the hollow process was — it lost a lumen, not material  [rodHalfWOverProcR/hemi atMost 0.86]  -> 0.7446
+    PASS  B5-camera       and this is the camera that shows the cranial landmark as a patch rather than as a line  [projAreaRatio.prechordal_plate.posterior.lateral/hemi atLeast 2.5]  -> 7.6709
+
+beat 6  t=0.7000  Two things it tells other tissues to do
+    PASS  B6-thick        the ectoderm over it has thickened into a plate — more than twice flat ectoderm  [npThickRatio/hemi atLeast 2]  -> 2.5366
+    PASS  B6-only-over    and only over it: no notochord, no neural plate  [npOverhangFrac/hemi equals 0]  -> 0.0000
+    PASS  B6-floor        the midline strip of it is the floor plate, which is built  [floorPlateVol/hemi atLeast 0.005]  -> 0.0460
+    PASS  B6-sclerotome   and sideways, sclerotome has wrapped this much of the rod's length by day twenty-one  [sclerotomeCoverFrac/hemi near 0.653872 +/-0.03]  -> 0.6539
+
+beat 7  t=0.7000  Round it, not from it
+    PASS  B7-ring         the sclerotome has come all the way round the rod  [collarRingFrac/block atLeast 0.88]  -> 1.0000
+    PASS  B7-around       and AROUND it, not from it: it shares none of the rod's own space  [sclerotomeInRod/block atMost 0.03]  -> 0.0130
+    PASS  B7-camera       which is a claim only a camera looking along the axis can carry  [stackAcross.inferior/block atLeast 0.08]  -> 0.2655
+    PASS  B7-cover        and it has reached this far along the rod by day twenty-one — measured on the whole model, which acceptance row U proves the block is a piece of  [sclerotomeCoverFrac/hemi near 0.653872 +/-0.03]  -> 0.6539
+
+beat 8  t=0.9000  What is left of it when you are grown
+    PASS  B8-between      every nucleus lies BETWEEN two bodies, not inside one  [nucleusBetweenBodies/adult atMost 0.02]  -> 0.0000
+    PASS  B8-onaxis       and on the line the notochord ran along  [nucleusOffAxis/adult atMost 0.05]  -> 0.0000
+    PASS  B8-regressed    inside the body the notochord is all but gone — this much of it is left  [remnantAreaFrac/adult atMost 0.2]  -> 0.1563
+    PASS  B8-grown        and what left the bodies has arrived in the discs — the nucleus is this much bigger than the rod it came from  [nucleusRadiusFrac/adult near 2.256726 +/-0.05]  -> 2.2567
+    PASS  B8-oblique      and you are looking at the cut from an angle, not square on to it — this is a solid, not a diagram  [cutFaceAngle.lateral/adult atLeast 40]  -> 45.0000
+
+beat 9  t=0.8600  Cells that stayed, and a canal that did not close
+    PASS  B9-oneaxis      both masses are on ONE axis — the line the notochord ran along  [chordomaAxisOffset/clinical/hemi atMost 0.02]  -> 0.0000
+    PASS  B9-ends         and at its two ENDS, most of the embryo apart  [chordomaSeparationFrac/clinical/hemi atLeast 0.45]  -> 0.6087
+    PASS  B9-caudal       the caudal one sits where the notochord's caudal end is at this stage  [chordomaCaudalV/clinical/hemi near 0.28328 +/-0.012]  -> 0.2833
+    PASS  B9-cyst         and the cyst is drawn where the canal used to run  [cystVol/clinical/hemi atLeast 0.005]  -> 0.1276
+
+beat 10  t=0.6200  The canal that should have closed
+    PASS  B10-closed      the normal neurenteric canal has closed by now — it does not exist at this t  [necVol/clinical/hemi atMost 0]  -> 0.0000
+    PASS  B10-open        and this one has not  [persistVol/clinical/hemi atLeast 0.004]  -> 0.3199
+    PASS  B10-through     it is a through-and-through channel: it pierces BOTH laminae  [persistPierces/clinical/hemi equals 2]  -> 2.0000
+    PASS  B10-node        at the stage the node has regressed to here  [axisCaudalV/clinical/hemi near 0.460521 +/-0.012]  -> 0.4605
+
+beat 11  t=0.7000  When the axis fails, both its pupils fail

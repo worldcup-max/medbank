@@ -1,0 +1,1388 @@
+[
+ {
+  "beat": 1,
+  "title": "Where the heart actually sits",
+  "dir": "anterior",
+  "lit": 533230,
+  "litOfFrame": 0.4930011094674556,
+  "shares": [
+   {
+    "key": "lung_r",
+    "px": 175278,
+    "ofSubject": 0.3287099375504004,
+    "ofFrame": 0.16205436390532543
+   },
+   {
+    "key": "lung_l",
+    "px": 121217,
+    "ofSubject": 0.22732591939688315,
+    "ofFrame": 0.11207193047337279
+   },
+   {
+    "key": "heart",
+    "px": 91109,
+    "ofSubject": 0.17086247960542356,
+    "ofFrame": 0.08423539201183432
+   },
+   {
+    "key": "diaphragm",
+    "px": 77854,
+    "ofSubject": 0.146004538379311,
+    "ofFrame": 0.07198039940828402
+   },
+   {
+    "key": "sternum",
+    "px": 68932,
+    "ofSubject": 0.1292725465558952,
+    "ofFrame": 0.06373150887573964
+   },
+   {
+    "key": "pulm_trunk",
+    "px": 16773,
+    "ofSubject": 0.03145546949721509,
+    "ofFrame": 0.015507581360946746
+   },
+   {
+    "key": "trachea_bronchi",
+    "px": 15063,
+    "ofSubject": 0.02824859816589464,
+    "ofFrame": 0.01392659023668639
+   },
+   {
+    "key": "svc",
+    "px": 13201,
+    "ofSubject": 0.024756671605123494,
+    "ofFrame": 0.012205066568047337
+   },
+   {
+    "key": "asc_aorta",
+    "px": 9065,
+    "ofSubject": 0.01700016878270165,
+    "ofFrame": 0.008381102071005918
+   },
+   {
+    "key": "oesophagus",
+    "px": 8635,
+    "ofSubject": 0.016193762541492414,
+    "ofFrame": 0.007983542899408284
+   },
+   {
+    "key": "r_pa",
+    "px": 8096,
+    "ofSubject": 0.015182941694953397,
+    "ofFrame": 0.007485207100591716
+   },
+   {
+    "key": "ra_auricle",
+    "px": 6619,
+    "ofSubject": 0.01241303002456726,
+    "ofFrame": 0.006119637573964497
+   },
+   {
+    "key": "pulm_veins_r",
+    "px": 6574,
+    "ofSubject": 0.012328638673743038,
+    "ofFrame": 0.006078032544378698
+   },
+   {
+    "key": "ivc",
+    "px": 6533,
+    "ofSubject": 0.012251748776325413,
+    "ofFrame": 0.006040125739644971
+   },
+   {
+    "key": "phrenic_r",
+    "px": 4455,
+    "ofSubject": 0.008354743731597997,
+    "ofFrame": 0.004118897928994083
+   },
+   {
+    "key": "la_auricle",
+    "px": 4397,
+    "ofSubject": 0.008245972657202333,
+    "ofFrame": 0.004065273668639053
+   },
+   {
+    "key": "l_pa",
+    "px": 3868,
+    "ofSubject": 0.00725390544417981,
+    "ofFrame": 0.0035761834319526626
+   },
+   {
+    "key": "aortic_arch",
+    "px": 2642,
+    "ofSubject": 0.004954709975057667,
+    "ofFrame": 0.0024426775147928996
+   },
+   {
+    "key": "phrenic_l",
+    "px": 1919,
+    "ofSubject": 0.0035988222718151643,
+    "ofFrame": 0.001774223372781065
+   },
+   {
+    "key": "desc_aorta",
+    "px": 712,
+    "ofSubject": 0.00133525870637436,
+    "ofFrame": 0.0006582840236686391
+   },
+   {
+    "key": "pulm_veins_l",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "lig_arteriosum",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ },
+ {
+  "beat": 2,
+  "title": "The neighbours that shape it",
+  "dir": "lateral",
+  "lit": 313969,
+  "litOfFrame": 0.29028198964497043,
+  "shares": [
+   {
+    "key": "lung_l",
+    "px": 224324,
+    "ofSubject": 0.7144781809669107,
+    "ofFrame": 0.20740014792899408
+   },
+   {
+    "key": "diaphragm",
+    "px": 73160,
+    "ofSubject": 0.23301663540031023,
+    "ofFrame": 0.0676405325443787
+   },
+   {
+    "key": "heart",
+    "px": 70727,
+    "ofSubject": 0.22526746271128678,
+    "ofFrame": 0.06539108727810651
+   },
+   {
+    "key": "oesophagus",
+    "px": 32552,
+    "ofSubject": 0.10367902563628893,
+    "ofFrame": 0.030096153846153845
+   },
+   {
+    "key": "desc_aorta",
+    "px": 29317,
+    "ofSubject": 0.09337546063464865,
+    "ofFrame": 0.02710521449704142
+   },
+   {
+    "key": "sternum",
+    "px": 20388,
+    "ofSubject": 0.06493634721899295,
+    "ofFrame": 0.018849852071005917
+   },
+   {
+    "key": "trachea_bronchi",
+    "px": 17845,
+    "ofSubject": 0.056836821469635534,
+    "ofFrame": 0.016498705621301776
+   },
+   {
+    "key": "pulm_trunk",
+    "px": 13022,
+    "ofSubject": 0.041475432287901036,
+    "ofFrame": 0.01203957100591716
+   },
+   {
+    "key": "la",
+    "px": 11745,
+    "ofSubject": 0.03740815176020563,
+    "ofFrame": 0.010858912721893491
+   },
+   {
+    "key": "lung_r",
+    "px": 9754,
+    "ofSubject": 0.031066761368160552,
+    "ofFrame": 0.009018121301775149
+   },
+   {
+    "key": "l_pa",
+    "px": 9208,
+    "ofSubject": 0.029327736177775513,
+    "ofFrame": 0.008513313609467455
+   },
+   {
+    "key": "aortic_arch",
+    "px": 8678,
+    "ofSubject": 0.027639671432529964,
+    "ofFrame": 0.008023298816568047
+   },
+   {
+    "key": "ivc",
+    "px": 5977,
+    "ofSubject": 0.019036911287420095,
+    "ofFrame": 0.005526072485207101
+   },
+   {
+    "key": "pulm_veins_l",
+    "px": 5299,
+    "ofSubject": 0.01687746242463428,
+    "ofFrame": 0.004899223372781065
+   },
+   {
+    "key": "phrenic_l",
+    "px": 2533,
+    "ofSubject": 0.00806767547114524,
+    "ofFrame": 0.0023419008875739645
+   },
+   {
+    "key": "svc",
+    "px": 1644,
+    "ofSubject": 0.005236185738082422,
+    "ofFrame": 0.0015199704142011834
+   },
+   {
+    "key": "asc_aorta",
+    "px": 285,
+    "ofSubject": 0.0009077329290471352,
+    "ofFrame": 0.0002634985207100592
+   },
+   {
+    "key": "r_pa",
+    "px": 269,
+    "ofSubject": 0.0008567724839076469,
+    "ofFrame": 0.00024870562130177516
+   },
+   {
+    "key": "phrenic_r",
+    "px": 227,
+    "ofSubject": 0.0007230013154164902,
+    "ofFrame": 0.00020987426035502959
+   },
+   {
+    "key": "la_auricle",
+    "px": 114,
+    "ofSubject": 0.0003630931716188541,
+    "ofFrame": 0.00010539940828402367
+   },
+   {
+    "key": "pulm_veins_r",
+    "px": 4,
+    "ofSubject": 0.000012740111284872073,
+    "ofFrame": 0.000003698224852071006
+   },
+   {
+    "key": "ra_auricle",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "lig_arteriosum",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ },
+ {
+  "beat": 3,
+  "title": "Which chamber you are looking at, from the front",
+  "dir": "anterior",
+  "lit": 568661,
+  "litOfFrame": 0.5257590606508876,
+  "shares": [
+   {
+    "key": "rv",
+    "px": 226334,
+    "ofSubject": 0.398012172454239,
+    "ofFrame": 0.20925850591715978
+   },
+   {
+    "key": "lv",
+    "px": 64071,
+    "ofSubject": 0.1126699386805144,
+    "ofFrame": 0.059237241124260355
+   },
+   {
+    "key": "pulm_trunk",
+    "px": 57435,
+    "ofSubject": 0.10100042028554798,
+    "ofFrame": 0.053101886094674554
+   },
+   {
+    "key": "svc",
+    "px": 41334,
+    "ofSubject": 0.07268653908040115,
+    "ofFrame": 0.03821560650887574
+   },
+   {
+    "key": "ra",
+    "px": 35515,
+    "ofSubject": 0.062453729023091084,
+    "ofFrame": 0.032835613905325446
+   },
+   {
+    "key": "asc_aorta",
+    "px": 28414,
+    "ofSubject": 0.04996650025234718,
+    "ofFrame": 0.02627034023668639
+   },
+   {
+    "key": "r_pa",
+    "px": 23924,
+    "ofSubject": 0.04207075920451728,
+    "ofFrame": 0.022119082840236687
+   },
+   {
+    "key": "ra_auricle",
+    "px": 21461,
+    "ofSubject": 0.03773953198830234,
+    "ofFrame": 0.019841900887573965
+   },
+   {
+    "key": "ivc",
+    "px": 18528,
+    "ofSubject": 0.03258180181162415,
+    "ofFrame": 0.0171301775147929
+   },
+   {
+    "key": "pulm_veins_r",
+    "px": 17208,
+    "ofSubject": 0.030260559454578388,
+    "ofFrame": 0.01590976331360947
+   },
+   {
+    "key": "la_auricle",
+    "px": 16074,
+    "ofSubject": 0.028266401247843617,
+    "ofFrame": 0.014861316568047338
+   },
+   {
+    "key": "l_pa",
+    "px": 11900,
+    "ofSubject": 0.020926351552154974,
+    "ofFrame": 0.011002218934911243
+   },
+   {
+    "key": "aortic_arch",
+    "px": 5648,
+    "ofSubject": 0.009932103661056412,
+    "ofFrame": 0.00522189349112426
+   },
+   {
+    "key": "heart",
+    "px": 4222,
+    "ofSubject": 0.007424458508672126,
+    "ofFrame": 0.003903476331360947
+   },
+   {
+    "key": "la",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "pulm_veins_l",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "lig_arteriosum",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ },
+ {
+  "beat": 4,
+  "title": "From behind: the base is the left atrium",
+  "dir": "posterior",
+  "lit": 957264,
+  "litOfFrame": 0.8850443786982248,
+  "shares": [
+   {
+    "key": "la",
+    "px": 483027,
+    "ofSubject": 0.5045912099483528,
+    "ofFrame": 0.4465856139053254
+   },
+   {
+    "key": "heart",
+    "px": 216137,
+    "ofSubject": 0.22578619900048472,
+    "ofFrame": 0.19983080621301774
+   },
+   {
+    "key": "lv",
+    "px": 214076,
+    "ofSubject": 0.22363318791890222,
+    "ofFrame": 0.19792529585798815
+   },
+   {
+    "key": "rv",
+    "px": 196093,
+    "ofSubject": 0.2048473566330709,
+    "ofFrame": 0.18129900147928993
+   },
+   {
+    "key": "pulm_veins_l",
+    "px": 146429,
+    "ofSubject": 0.15296616189473333,
+    "ofFrame": 0.13538184171597634
+   },
+   {
+    "key": "pulm_veins_r",
+    "px": 104142,
+    "ofSubject": 0.10879130521987665,
+    "ofFrame": 0.09628513313609467
+   },
+   {
+    "key": "svc",
+    "px": 59702,
+    "ofSubject": 0.062367330224473085,
+    "ofFrame": 0.055197855029585796
+   },
+   {
+    "key": "r_pa",
+    "px": 56799,
+    "ofSubject": 0.05933472897758612,
+    "ofFrame": 0.05251386834319527
+   },
+   {
+    "key": "asc_aorta",
+    "px": 40063,
+    "ofSubject": 0.04185156863728292,
+    "ofFrame": 0.037040495562130175
+   },
+   {
+    "key": "aortic_arch",
+    "px": 30749,
+    "ofSubject": 0.03212175533604105,
+    "ofFrame": 0.02842917899408284
+   },
+   {
+    "key": "ivc",
+    "px": 24680,
+    "ofSubject": 0.02578181149609721,
+    "ofFrame": 0.022818047337278106
+   },
+   {
+    "key": "ra",
+    "px": 15222,
+    "ofSubject": 0.015901569472998044,
+    "ofFrame": 0.014073594674556213
+   },
+   {
+    "key": "l_pa",
+    "px": 14730,
+    "ofSubject": 0.015387604673318959,
+    "ofFrame": 0.01361871301775148
+   },
+   {
+    "key": "pulm_trunk",
+    "px": 11887,
+    "ofSubject": 0.012417682060539203,
+    "ofFrame": 0.010990199704142011
+   },
+   {
+    "key": "ra_auricle",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "la_auricle",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "lig_arteriosum",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ },
+ {
+  "beat": 5,
+  "title": "The sternocostal surface",
+  "dir": "anterior",
+  "lit": 569707,
+  "litOfFrame": 0.5267261464497042,
+  "shares": [
+   {
+    "key": "surf_sternocostal",
+    "px": 280355,
+    "ofSubject": 0.49210383583140105,
+    "ofFrame": 0.25920395710059174
+   },
+   {
+    "key": "surf_diaphragmatic",
+    "px": 68415,
+    "ofSubject": 0.1200880452583521,
+    "ofFrame": 0.06325351331360947
+   },
+   {
+    "key": "pulm_trunk",
+    "px": 56414,
+    "ofSubject": 0.09902283103419827,
+    "ofFrame": 0.05215791420118343
+   },
+   {
+    "key": "svc",
+    "px": 40780,
+    "ofSubject": 0.07158065461719797,
+    "ofFrame": 0.037703402366863904
+   },
+   {
+    "key": "asc_aorta",
+    "px": 27189,
+    "ofSubject": 0.04772453208403618,
+    "ofFrame": 0.025137758875739644
+   },
+   {
+    "key": "r_pa",
+    "px": 23689,
+    "ofSubject": 0.041581023227729344,
+    "ofFrame": 0.021901812130177514
+   },
+   {
+    "key": "ra_auricle",
+    "px": 19909,
+    "ofSubject": 0.03494603366291796,
+    "ofFrame": 0.018406989644970412
+   },
+   {
+    "key": "ivc",
+    "px": 17440,
+    "ofSubject": 0.030612226986854646,
+    "ofFrame": 0.016124260355029587
+   },
+   {
+    "key": "pulm_veins_r",
+    "px": 17065,
+    "ofSubject": 0.029953993895107486,
+    "ofFrame": 0.01577755177514793
+   },
+   {
+    "key": "la_auricle",
+    "px": 15450,
+    "ofSubject": 0.027119203379983043,
+    "ofFrame": 0.01428439349112426
+   },
+   {
+    "key": "l_pa",
+    "px": 11858,
+    "ofSubject": 0.02081420800516757,
+    "ofFrame": 0.010963387573964497
+   },
+   {
+    "key": "surf_left_pulmonary",
+    "px": 9614,
+    "ofSubject": 0.016875341184152556,
+    "ofFrame": 0.008888683431952663
+   },
+   {
+    "key": "aortic_arch",
+    "px": 5613,
+    "ofSubject": 0.00985243291727151,
+    "ofFrame": 0.005189534023668639
+   },
+   {
+    "key": "heart",
+    "px": 1720,
+    "ofSubject": 0.0030190957808136462,
+    "ofFrame": 0.0015902366863905326
+   },
+   {
+    "key": "pulm_veins_l",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "lig_arteriosum",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ },
+ {
+  "beat": 6,
+  "title": "The diaphragmatic surface",
+  "dir": "inferior",
+  "lit": 405597,
+  "litOfFrame": 0.37499722633136096,
+  "shares": [
+   {
+    "key": "surf_diaphragmatic",
+    "px": 201818,
+    "ofSubject": 0.49758257580800647,
+    "ofFrame": 0.18659208579881656
+   },
+   {
+    "key": "surf_sternocostal",
+    "px": 67675,
+    "ofSubject": 0.16685281202770239,
+    "ofFrame": 0.06256934171597633
+   },
+   {
+    "key": "ivc",
+    "px": 51188,
+    "ofSubject": 0.12620408928073926,
+    "ofFrame": 0.04732618343195266
+   },
+   {
+    "key": "surf_left_pulmonary",
+    "px": 40470,
+    "ofSubject": 0.09977884451808075,
+    "ofFrame": 0.0374167899408284
+   },
+   {
+    "key": "pulm_veins_r",
+    "px": 24490,
+    "ofSubject": 0.06038013101674815,
+    "ofFrame": 0.022642381656804735
+   },
+   {
+    "key": "pulm_veins_l",
+    "px": 17778,
+    "ofSubject": 0.04383168514560019,
+    "ofFrame": 0.016436760355029587
+   },
+   {
+    "key": "r_pa",
+    "px": 12347,
+    "ofSubject": 0.03044154665838258,
+    "ofFrame": 0.011415495562130177
+   },
+   {
+    "key": "ra_auricle",
+    "px": 6208,
+    "ofSubject": 0.015305833129929463,
+    "ofFrame": 0.005739644970414202
+   },
+   {
+    "key": "l_pa",
+    "px": 3367,
+    "ofSubject": 0.008301343451751368,
+    "ofFrame": 0.0031129807692307694
+   },
+   {
+    "key": "heart",
+    "px": 3267,
+    "ofSubject": 0.008054793304684206,
+    "ofFrame": 0.003020525147928994
+   },
+   {
+    "key": "aortic_arch",
+    "px": 1876,
+    "ofSubject": 0.0046252807589799725,
+    "ofFrame": 0.0017344674556213017
+   },
+   {
+    "key": "la_auricle",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "asc_aorta",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "pulm_trunk",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "svc",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "lig_arteriosum",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ },
+ {
+  "beat": 7,
+  "title": "The left pulmonary surface",
+  "dir": "lateral",
+  "lit": 452686,
+  "litOfFrame": 0.4185336538461538,
+  "shares": [
+   {
+    "key": "lung_l",
+    "px": 414374,
+    "ofSubject": 0.9153673848981413,
+    "ofFrame": 0.38311205621301775
+   },
+   {
+    "key": "surf_left_pulmonary",
+    "px": 69397,
+    "ofSubject": 0.15330052177447503,
+    "ofFrame": 0.0641614275147929
+   },
+   {
+    "key": "surf_diaphragmatic",
+    "px": 41107,
+    "ofSubject": 0.09080687275506642,
+    "ofFrame": 0.03800573224852071
+   },
+   {
+    "key": "surf_sternocostal",
+    "px": 29421,
+    "ofSubject": 0.06499206955814847,
+    "ofFrame": 0.027201368343195267
+   },
+   {
+    "key": "pulm_trunk",
+    "px": 20196,
+    "ofSubject": 0.044613705747471755,
+    "ofFrame": 0.018672337278106507
+   },
+   {
+    "key": "l_pa",
+    "px": 16391,
+    "ofSubject": 0.036208320999544935,
+    "ofFrame": 0.015154400887573964
+   },
+   {
+    "key": "heart",
+    "px": 14581,
+    "ofSubject": 0.03220996452287016,
+    "ofFrame": 0.013480954142011834
+   },
+   {
+    "key": "aortic_arch",
+    "px": 13721,
+    "ofSubject": 0.030310192937267773,
+    "ofFrame": 0.012685835798816568
+   },
+   {
+    "key": "pulm_veins_l",
+    "px": 9353,
+    "ofSubject": 0.02066112051178963,
+    "ofFrame": 0.00864737426035503
+   },
+   {
+    "key": "ivc",
+    "px": 8994,
+    "ofSubject": 0.019868076326637008,
+    "ofFrame": 0.008315458579881656
+   },
+   {
+    "key": "svc",
+    "px": 1484,
+    "ofSubject": 0.0032782105035278316,
+    "ofFrame": 0.0013720414201183432
+   },
+   {
+    "key": "asc_aorta",
+    "px": 642,
+    "ofSubject": 0.0014182015790194528,
+    "ofFrame": 0.0005935650887573964
+   },
+   {
+    "key": "r_pa",
+    "px": 422,
+    "ofSubject": 0.0009322134989816341,
+    "ofFrame": 0.0003901627218934911
+   },
+   {
+    "key": "pulm_veins_r",
+    "px": 385,
+    "ofSubject": 0.0008504791400661827,
+    "ofFrame": 0.0003559541420118343
+   },
+   {
+    "key": "la_auricle",
+    "px": 1,
+    "ofSubject": 0.0000022090367274446303,
+    "ofFrame": 9.245562130177515e-7
+   },
+   {
+    "key": "ra_auricle",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "lig_arteriosum",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ },
+ {
+  "beat": 8,
+  "title": "The four borders — the outline on a chest film",
+  "dir": "anterior",
+  "lit": 678469,
+  "litOfFrame": 0.6272827292899408,
+  "shares": [
+   {
+    "key": "heart",
+    "px": 553079,
+    "ofSubject": 0.8151868397819207,
+    "ofFrame": 0.511352625739645
+   },
+   {
+    "key": "ra_auricle",
+    "px": 69286,
+    "ofSubject": 0.102121099121699,
+    "ofFrame": 0.06405880177514793
+   },
+   {
+    "key": "border_inferior",
+    "px": 44459,
+    "ofSubject": 0.06552841765799175,
+    "ofFrame": 0.04110484467455621
+   },
+   {
+    "key": "la_auricle",
+    "px": 40029,
+    "ofSubject": 0.05899901100860909,
+    "ofFrame": 0.037009060650887576
+   },
+   {
+    "key": "border_left",
+    "px": 36954,
+    "ofSubject": 0.05446674792805567,
+    "ofFrame": 0.03416605029585799
+   },
+   {
+    "key": "border_right",
+    "px": 5064,
+    "ofSubject": 0.0074638634926577335,
+    "ofFrame": 0.0046819526627218935
+   },
+   {
+    "key": "border_superior",
+    "px": 2970,
+    "ofSubject": 0.0043775028778028175,
+    "ofFrame": 0.0027459319526627218
+   }
+  ]
+ },
+ {
+  "beat": 9,
+  "title": "The superior border, from above",
+  "dir": "superior",
+  "lit": 442303,
+  "litOfFrame": 0.4089339866863905,
+  "shares": [
+   {
+    "key": "heart",
+    "px": 317001,
+    "ofSubject": 0.7167055163541735,
+    "ofFrame": 0.29308524408284026
+   },
+   {
+    "key": "border_superior",
+    "px": 68697,
+    "ofSubject": 0.1553166042283231,
+    "ofFrame": 0.06351423816568047
+   },
+   {
+    "key": "la_auricle",
+    "px": 33417,
+    "ofSubject": 0.0755522797720115,
+    "ofFrame": 0.0308958949704142
+   },
+   {
+    "key": "ra_auricle",
+    "px": 23885,
+    "ofSubject": 0.054001442450085126,
+    "ofFrame": 0.022083025147928995
+   }
+  ]
+ },
+ {
+  "beat": 10,
+  "title": "The sulci: reading the septa from the outside",
+  "dir": "anterior",
+  "lit": 590069,
+  "litOfFrame": 0.5455519600591716,
+  "shares": [
+   {
+    "key": "heart",
+    "px": 484412,
+    "ofSubject": 0.8209412797486396,
+    "ofFrame": 0.44786612426035505
+   },
+   {
+    "key": "la_auricle",
+    "px": 35722,
+    "ofSubject": 0.0605386827642191,
+    "ofFrame": 0.03302699704142012
+   },
+   {
+    "key": "ra_auricle",
+    "px": 32238,
+    "ofSubject": 0.05463428853235808,
+    "ofFrame": 0.029805843195266274
+   },
+   {
+    "key": "ant_iv_sulcus",
+    "px": 31874,
+    "ofSubject": 0.05401741152305917,
+    "ofFrame": 0.02946930473372781
+   },
+   {
+    "key": "coronary_sulcus",
+    "px": 7193,
+    "ofSubject": 0.012190099801887577,
+    "ofFrame": 0.006650332840236687
+   },
+   {
+    "key": "post_iv_sulcus",
+    "px": 994,
+    "ofSubject": 0.001684548756162415,
+    "ofFrame": 0.000919008875739645
+   }
+  ]
+ },
+ {
+  "beat": 11,
+  "title": "Behind: the posterior sulcus and the crux",
+  "dir": "inferior",
+  "lit": 460409,
+  "litOfFrame": 0.42567400147928997,
+  "shares": [
+   {
+    "key": "heart",
+    "px": 407925,
+    "ofSubject": 0.8860057036243861,
+    "ofFrame": 0.37714959319526625
+   },
+   {
+    "key": "post_iv_sulcus",
+    "px": 36095,
+    "ofSubject": 0.07839768553612114,
+    "ofFrame": 0.03337185650887574
+   },
+   {
+    "key": "coronary_sulcus",
+    "px": 10752,
+    "ofSubject": 0.023353149047911748,
+    "ofFrame": 0.009940828402366864
+   },
+   {
+    "key": "ra_auricle",
+    "px": 7752,
+    "ofSubject": 0.016837203443025656,
+    "ofFrame": 0.00716715976331361
+   },
+   {
+    "key": "la_auricle",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "ant_iv_sulcus",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ },
+ {
+  "beat": 12,
+  "title": "The apex — left ventricle and nothing else",
+  "dir": "lateral",
+  "lit": 413414,
+  "litOfFrame": 0.38222448224852074,
+  "shares": [
+   {
+    "key": "heart",
+    "px": 368410,
+    "ofSubject": 0.8911405999796814,
+    "ofFrame": 0.34061575443786984
+   },
+   {
+    "key": "apex",
+    "px": 43246,
+    "ofSubject": 0.10460700411693846,
+    "ofFrame": 0.03998335798816568
+   },
+   {
+    "key": "la_auricle",
+    "px": 1583,
+    "ofSubject": 0.0038290914192552743,
+    "ofFrame": 0.0014635724852071006
+   },
+   {
+    "key": "ra_auricle",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ },
+ {
+  "beat": 13,
+  "title": "The base — mainly left atrium",
+  "dir": "posterior",
+  "lit": 513816,
+  "litOfFrame": 0.475051775147929,
+  "shares": [
+   {
+    "key": "heart",
+    "px": 286689,
+    "ofSubject": 0.5579604371993087,
+    "ofFrame": 0.2650600961538462
+   },
+   {
+    "key": "base",
+    "px": 226777,
+    "ofSubject": 0.44135838510283837,
+    "ofFrame": 0.20966808431952663
+   },
+   {
+    "key": "apex",
+    "px": 1602,
+    "ofSubject": 0.0031178476341725443,
+    "ofFrame": 0.0014811390532544378
+   },
+   {
+    "key": "ra_auricle",
+    "px": 463,
+    "ofSubject": 0.0009011007831597304,
+    "ofFrame": 0.00042806952662721894
+   },
+   {
+    "key": "la_auricle",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ },
+ {
+  "beat": 14,
+  "title": "The great vessels at the base",
+  "dir": "anterior",
+  "lit": 573237,
+  "litOfFrame": 0.5299898298816568,
+  "shares": [
+   {
+    "key": "heart",
+    "px": 328056,
+    "ofSubject": 0.5722868551750846,
+    "ofFrame": 0.30330621301775146
+   },
+   {
+    "key": "pulm_trunk",
+    "px": 58268,
+    "ofSubject": 0.10164731167039114,
+    "ofFrame": 0.053872041420118345
+   },
+   {
+    "key": "svc",
+    "px": 41787,
+    "ofSubject": 0.07289655064135776,
+    "ofFrame": 0.03863443047337278
+   },
+   {
+    "key": "asc_aorta",
+    "px": 29473,
+    "ofSubject": 0.05141503427029309,
+    "ofFrame": 0.02724944526627219
+   },
+   {
+    "key": "r_pa",
+    "px": 24158,
+    "ofSubject": 0.04214312753712688,
+    "ofFrame": 0.02233542899408284
+   },
+   {
+    "key": "ra_auricle",
+    "px": 22657,
+    "ofSubject": 0.03952466431859772,
+    "ofFrame": 0.020947670118343194
+   },
+   {
+    "key": "ivc",
+    "px": 19159,
+    "ofSubject": 0.033422476218387856,
+    "ofFrame": 0.0177135724852071
+   },
+   {
+    "key": "pulm_veins_r",
+    "px": 17348,
+    "ofSubject": 0.030263224460388986,
+    "ofFrame": 0.016039201183431953
+   },
+   {
+    "key": "la_auricle",
+    "px": 16423,
+    "ofSubject": 0.028649581237777742,
+    "ofFrame": 0.015183986686390533
+   },
+   {
+    "key": "l_pa",
+    "px": 11944,
+    "ofSubject": 0.020836059082020176,
+    "ofFrame": 0.011042899408284023
+   },
+   {
+    "key": "aortic_arch",
+    "px": 5677,
+    "ofSubject": 0.00990340818893407,
+    "ofFrame": 0.005248705621301775
+   },
+   {
+    "key": "pulm_veins_l",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "lig_arteriosum",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ },
+ {
+  "beat": 15,
+  "title": "Inside the sac: a median section",
+  "dir": "lateral",
+  "lit": 450559,
+  "litOfFrame": 0.4165671227810651,
+  "shares": [
+   {
+    "key": "pericardium_fibrous",
+    "px": 347256,
+    "ofSubject": 0.7707225912699558,
+    "ofFrame": 0.3210576923076923
+   },
+   {
+    "key": "pericardium_parietal_serous",
+    "px": 331137,
+    "ofSubject": 0.7349470324641167,
+    "ofFrame": 0.3061547707100592
+   },
+   {
+    "key": "pericardial_cavity",
+    "px": 290529,
+    "ofSubject": 0.6448189915194237,
+    "ofFrame": 0.26861039201183434
+   },
+   {
+    "key": "pericardium_visceral_serous",
+    "px": 250605,
+    "ofSubject": 0.5562090647395791,
+    "ofFrame": 0.2316984097633136
+   },
+   {
+    "key": "heart",
+    "px": 242019,
+    "ofSubject": 0.5371527369334538,
+    "ofFrame": 0.2237601701183432
+   },
+   {
+    "key": "pulm_trunk",
+    "px": 38624,
+    "ofSubject": 0.08572462208057102,
+    "ofFrame": 0.035710059171597634
+   },
+   {
+    "key": "l_pa",
+    "px": 29977,
+    "ofSubject": 0.06653290690009521,
+    "ofFrame": 0.027715421597633134
+   },
+   {
+    "key": "aortic_arch",
+    "px": 20858,
+    "ofSubject": 0.04629360416726777,
+    "ofFrame": 0.01928439349112426
+   },
+   {
+    "key": "pulm_veins_l",
+    "px": 18678,
+    "ofSubject": 0.04145517013310133,
+    "ofFrame": 0.01726886094674556
+   },
+   {
+    "key": "ivc",
+    "px": 13065,
+    "ofSubject": 0.02899731222769937,
+    "ofFrame": 0.012079326923076924
+   },
+   {
+    "key": "phrenic_l",
+    "px": 7343,
+    "ofSubject": 0.01629753262058909,
+    "ofFrame": 0.006789016272189349
+   },
+   {
+    "key": "svc",
+    "px": 2471,
+    "ofSubject": 0.005484298393773068,
+    "ofFrame": 0.002284578402366864
+   },
+   {
+    "key": "asc_aorta",
+    "px": 1227,
+    "ofSubject": 0.0027232837430835916,
+    "ofFrame": 0.0011344304733727812
+   },
+   {
+    "key": "phrenic_r",
+    "px": 996,
+    "ofSubject": 0.0022105872926742112,
+    "ofFrame": 0.0009208579881656804
+   },
+   {
+    "key": "r_pa",
+    "px": 615,
+    "ofSubject": 0.001364971069271727,
+    "ofFrame": 0.0005686020710059172
+   },
+   {
+    "key": "la_auricle",
+    "px": 102,
+    "ofSubject": 0.0002263854456353108,
+    "ofFrame": 0.00009430473372781066
+   },
+   {
+    "key": "pulm_veins_r",
+    "px": 4,
+    "ofSubject": 0.000008877860613149443,
+    "ofFrame": 0.000003698224852071006
+   },
+   {
+    "key": "ra_auricle",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "lig_arteriosum",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ },
+ {
+  "beat": 16,
+  "title": "Take the sac off",
+  "dir": "anterior",
+  "lit": 569737,
+  "litOfFrame": 0.5267538831360947,
+  "shares": [
+   {
+    "key": "heart",
+    "px": 317710,
+    "ofSubject": 0.5576432634706892,
+    "ofFrame": 0.29374075443786984
+   },
+   {
+    "key": "pulm_trunk",
+    "px": 57860,
+    "ofSubject": 0.10155563005386696,
+    "ofFrame": 0.0534948224852071
+   },
+   {
+    "key": "svc",
+    "px": 41496,
+    "ofSubject": 0.07283360568121783,
+    "ofFrame": 0.038365384615384614
+   },
+   {
+    "key": "asc_aorta",
+    "px": 29254,
+    "ofSubject": 0.05134649847210204,
+    "ofFrame": 0.027046967455621303
+   },
+   {
+    "key": "r_pa",
+    "px": 23970,
+    "ofSubject": 0.042072043767562926,
+    "ofFrame": 0.022161612426035503
+   },
+   {
+    "key": "ra_auricle",
+    "px": 22500,
+    "ofSubject": 0.03949190591448335,
+    "ofFrame": 0.020802514792899407
+   },
+   {
+    "key": "ivc",
+    "px": 19034,
+    "ofSubject": 0.03340839720783449,
+    "ofFrame": 0.01759800295857988
+   },
+   {
+    "key": "pulm_veins_r",
+    "px": 17229,
+    "ofSubject": 0.030240268755583718,
+    "ofFrame": 0.01592917899408284
+   },
+   {
+    "key": "la_auricle",
+    "px": 16274,
+    "ofSubject": 0.0285640567489912,
+    "ofFrame": 0.015046227810650887
+   },
+   {
+    "key": "l_pa",
+    "px": 11919,
+    "ofSubject": 0.020920178959765647,
+    "ofFrame": 0.01101978550295858
+   },
+   {
+    "key": "apex",
+    "px": 8767,
+    "ofSubject": 0.015387801740101134,
+    "ofFrame": 0.008105584319526626
+   },
+   {
+    "key": "aortic_arch",
+    "px": 5658,
+    "ofSubject": 0.009930897940628746,
+    "ofFrame": 0.005231139053254438
+   },
+   {
+    "key": "base",
+    "px": 87,
+    "ofSubject": 0.00015270203620266896,
+    "ofFrame": 0.00008043639053254437
+   },
+   {
+    "key": "pulm_veins_l",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   },
+   {
+    "key": "lig_arteriosum",
+    "px": 0,
+    "ofSubject": 0,
+    "ofFrame": 0
+   }
+  ]
+ }
+]

@@ -156,8 +156,15 @@
         b.onclick=function(){
           if(id==="record"){
             if(!window.MB_openRecorder){ show("Recording isn't available right now — reload the app, or use File / YouTube / Paste."); return; }
-            if(o.parentNode) document.body.removeChild(o);
-            MB_openRecorder(); return;
+            // AUDIT-09: this used to jump straight into MB_openRecorder(), which starts capturing
+            // mic audio immediately (see lecture-record.js docstring: "start recording") — so a
+            // student just browsing the 4 source-tab options (unlike File/YouTube/Paste, which only
+            // reveal an input control) could accidentally start recording. Gate it behind an
+            // explicit confirm, same as any other irreversible/side-effecting action in the app.
+            var go=function(){ if(o.parentNode) document.body.removeChild(o); MB_openRecorder(); };
+            if(window.mbConfirm) window.mbConfirm("Start recording?","MedBank will start listening through your microphone right away.",go);
+            else if(confirm("Start recording now? MedBank will start listening through your microphone right away.")) go();
+            return;
           }
           srcMode=id; paintSeg();
         };

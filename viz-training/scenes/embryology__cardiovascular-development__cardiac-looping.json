@@ -98,7 +98,7 @@
    "label": "Sinus venosus",
    "role": "part",
    "group": "Day 23 — the straight tube",
-   "color": "#3f6ea8",
+   "color": "#5b49ad",
    "refs": {
     "procedural": "cardiac-looping#sinus@0"
    },
@@ -112,7 +112,7 @@
    "label": "Primitive atrium",
    "role": "part",
    "group": "Day 23 — the straight tube",
-   "color": "#5b8fd0",
+   "color": "#1f7fc4",
    "refs": {
     "procedural": "cardiac-looping#atrium@0"
    },
@@ -126,7 +126,7 @@
    "label": "Primitive ventricle",
    "role": "part",
    "group": "Day 23 — the straight tube",
-   "color": "#d94f5c",
+   "color": "#c02a3a",
    "refs": {
     "procedural": "cardiac-looping#ventricle@0"
    },
@@ -140,7 +140,7 @@
    "label": "Bulbus cordis",
    "role": "part",
    "group": "Day 23 — the straight tube",
-   "color": "#e4784a",
+   "color": "#d85c26",
    "refs": {
     "procedural": "cardiac-looping#bulbus@0"
    },
@@ -154,7 +154,7 @@
    "label": "Truncus arteriosus",
    "role": "part",
    "group": "Day 23 — the straight tube",
-   "color": "#e0a94f",
+   "color": "#cf9a1e",
    "refs": {
     "procedural": "cardiac-looping#truncus@0"
    },
@@ -182,7 +182,7 @@
    "label": "Sinus venosus",
    "role": "part",
    "group": "Early loop — movement one alone",
-   "color": "#3f6ea8",
+   "color": "#5b49ad",
    "refs": {
     "procedural": "cardiac-looping#sinus@0.42"
    },
@@ -196,7 +196,7 @@
    "label": "Primitive atrium",
    "role": "part",
    "group": "Early loop — movement one alone",
-   "color": "#5b8fd0",
+   "color": "#1f7fc4",
    "refs": {
     "procedural": "cardiac-looping#atrium@0.42"
    },
@@ -210,7 +210,7 @@
    "label": "Primitive ventricle",
    "role": "part",
    "group": "Early loop — movement one alone",
-   "color": "#d94f5c",
+   "color": "#c02a3a",
    "refs": {
     "procedural": "cardiac-looping#ventricle@0.42"
    },
@@ -224,7 +224,7 @@
    "label": "Bulbus cordis",
    "role": "part",
    "group": "Early loop — movement one alone",
-   "color": "#e4784a",
+   "color": "#d85c26",
    "refs": {
     "procedural": "cardiac-looping#bulbus@0.42"
    },
@@ -238,7 +238,7 @@
    "label": "Truncus arteriosus",
    "role": "part",
    "group": "Early loop — movement one alone",
-   "color": "#e0a94f",
+   "color": "#cf9a1e",
    "refs": {
     "procedural": "cardiac-looping#truncus@0.42"
    },
@@ -252,7 +252,7 @@
    "label": "Arches at the fixed arterial pole",
    "role": "context",
    "group": "Early loop — movement one alone",
-   "color": "#c2464f",
+   "color": "#8f2438",
    "refs": {
     "procedural": "cardiac-looping#arches@0.42"
    },
@@ -266,7 +266,7 @@
    "label": "Sinus venosus",
    "role": "part",
    "group": "Mid-loop — the C",
-   "color": "#3f6ea8",
+   "color": "#5b49ad",
    "refs": {
     "procedural": "cardiac-looping#sinus@0.65"
    },
@@ -280,7 +280,7 @@
    "label": "Primitive atrium",
    "role": "part",
    "group": "Mid-loop — the C",
-   "color": "#5b8fd0",
+   "color": "#1f7fc4",
    "refs": {
     "procedural": "cardiac-looping#atrium@0.65"
    },
@@ -294,7 +294,7 @@
    "label": "Primitive ventricle",
    "role": "part",
    "group": "Mid-loop — the C",
-   "color": "#d94f5c",
+   "color": "#c02a3a",
    "refs": {
     "procedural": "cardiac-looping#ventricle@0.65"
    },
@@ -308,7 +308,7 @@
    "label": "Bulbus cordis",
    "role": "part",
    "group": "Mid-loop — the C",
-   "color": "#e4784a",
+   "color": "#d85c26",
    "refs": {
     "procedural": "cardiac-looping#bulbus@0.65"
    },
@@ -322,7 +322,7 @@
    "label": "Truncus arteriosus",
    "role": "part",
    "group": "Mid-loop — the C",
-   "color": "#e0a94f",
+   "color": "#cf9a1e",
    "refs": {
     "procedural": "cardiac-looping#truncus@0.65"
    },
@@ -336,7 +336,7 @@
    "label": "Sinus venosus",
    "role": "part",
    "group": "Day 28 — the looped heart",
-   "color": "#3f6ea8",
+   "color": "#5b49ad",
    "refs": {
     "procedural": "cardiac-looping#sinus@1"
    },
@@ -350,7 +350,7 @@
    "label": "Primitive atrium",
    "role": "part",
    "group": "Day 28 — the looped heart",
-   "color": "#5b8fd0",
+   "color": "#1f7fc4",
    "refs": {
     "procedural": "cardiac-looping#atrium@1"
    },
@@ -364,7 +364,7 @@
    "label": "Primitive ventricle",
    "role": "part",
    "group": "Day 28 — the looped heart",
-   "color": "#d94f5c",
+   "color": "#c02a3a",
    "refs": {
     "procedural": "cardiac-looping#ventricle@1"
    },
@@ -378,7 +378,7 @@
    "label": "Bulbus cordis",
    "role": "part",
    "group": "Day 28 — the looped heart",
-   "color": "#e4784a",
+   "color": "#d85c26",
    "refs": {
     "procedural": "cardiac-looping#bulbus@1"
    },
@@ -392,7 +392,7 @@
    "label": "Truncus arteriosus",
    "role": "part",
    "group": "Day 28 — the looped heart",
-   "color": "#e0a94f",
+   "color": "#cf9a1e",
    "refs": {
     "procedural": "cardiac-looping#truncus@1"
    },
@@ -406,7 +406,7 @@
    "label": "Veins at the fixed venous pole",
    "role": "context",
    "group": "Day 28 — the looped heart",
-   "color": "#2f5d94",
+   "color": "#27497a",
    "refs": {
     "procedural": "cardiac-looping#veins@1"
    },
@@ -420,7 +420,7 @@
    "label": "Arches at the fixed arterial pole",
    "role": "context",
    "group": "Day 28 — the looped heart",
-   "color": "#c2464f",
+   "color": "#8f2438",
    "refs": {
     "procedural": "cardiac-looping#arches@0"
    },
@@ -434,7 +434,7 @@
    "label": "Arches at the fixed arterial pole",
    "role": "context",
    "group": "Day 28 — the looped heart",
-   "color": "#c2464f",
+   "color": "#8f2438",
    "refs": {
     "procedural": "cardiac-looping#arches@0.65"
    },
@@ -448,7 +448,7 @@
    "label": "Arches at the fixed arterial pole",
    "role": "context",
    "group": "Day 28 — the looped heart",
-   "color": "#c2464f",
+   "color": "#8f2438",
    "refs": {
     "procedural": "cardiac-looping#arches@1"
    },
@@ -462,7 +462,7 @@
    "label": "Endocardial tube inside the myocardium",
    "role": "part",
    "group": "Day 28 — the looped heart",
-   "color": "#f2d3dd",
+   "color": "#e7aebe",
    "refs": {
     "procedural": "cardiac-looping#endocardium@1"
    },
@@ -476,7 +476,7 @@
    "label": "Primitive ventricle, L-loop",
    "role": "part",
    "group": "L-loop — the abnormal mirror",
-   "color": "#d94f5c",
+   "color": "#c02a3a",
    "refs": {
     "procedural": "cardiac-looping#ventricle@1+mirror"
    },
@@ -490,7 +490,7 @@
    "label": "Bulbus cordis, L-loop",
    "role": "part",
    "group": "L-loop — the abnormal mirror",
-   "color": "#e4784a",
+   "color": "#d85c26",
    "refs": {
     "procedural": "cardiac-looping#bulbus@1+mirror"
    },
@@ -546,7 +546,7 @@
    "label": "Sinus venosus, L-loop",
    "role": "part",
    "group": "L-loop — the abnormal mirror",
-   "color": "#3f6ea8",
+   "color": "#5b49ad",
    "terms": [
     "sinus venosus"
    ]
@@ -560,7 +560,7 @@
    "label": "Primitive atrium, L-loop",
    "role": "part",
    "group": "L-loop — the abnormal mirror",
-   "color": "#5b8fd0",
+   "color": "#1f7fc4",
    "terms": [
     "primitive atrium"
    ]
@@ -574,7 +574,7 @@
    "label": "Truncus arteriosus, L-loop",
    "role": "part",
    "group": "L-loop — the abnormal mirror",
-   "color": "#e0a94f",
+   "color": "#cf9a1e",
    "terms": [
     "truncus arteriosus"
    ]
@@ -588,7 +588,7 @@
    "label": "Sinus venosus, D-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#3f6ea8",
+   "color": "#5b49ad",
    "terms": [
     "sinus venosus"
    ]
@@ -602,7 +602,7 @@
    "label": "Sinus venosus, L-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#3f6ea8",
+   "color": "#5b49ad",
    "terms": [
     "sinus venosus"
    ]
@@ -616,7 +616,7 @@
    "label": "Primitive atrium, D-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#5b8fd0",
+   "color": "#1f7fc4",
    "terms": [
     "primitive atrium"
    ]
@@ -630,7 +630,7 @@
    "label": "Primitive atrium, L-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#5b8fd0",
+   "color": "#1f7fc4",
    "terms": [
     "primitive atrium"
    ]
@@ -644,7 +644,7 @@
    "label": "Primitive ventricle, D-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#d94f5c",
+   "color": "#c02a3a",
    "terms": [
     "primitive ventricle"
    ]
@@ -658,7 +658,7 @@
    "label": "Primitive ventricle, L-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#d94f5c",
+   "color": "#c02a3a",
    "terms": [
     "primitive ventricle"
    ]
@@ -672,7 +672,7 @@
    "label": "Bulbus cordis, D-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#e4784a",
+   "color": "#d85c26",
    "terms": [
     "bulbus cordis"
    ]
@@ -686,7 +686,7 @@
    "label": "Bulbus cordis, L-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#e4784a",
+   "color": "#d85c26",
    "terms": [
     "bulbus cordis"
    ]
@@ -700,7 +700,7 @@
    "label": "Truncus arteriosus, D-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#e0a94f",
+   "color": "#cf9a1e",
    "terms": [
     "truncus arteriosus"
    ]
@@ -714,7 +714,7 @@
    "label": "Truncus arteriosus, L-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#e0a94f",
+   "color": "#cf9a1e",
    "terms": [
     "truncus arteriosus"
    ]
@@ -728,7 +728,7 @@
    "label": "Vitelline & cardinal veins, D-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#2f5d94",
+   "color": "#27497a",
    "terms": [
     "vitelline & cardinal veins"
    ]
@@ -742,7 +742,7 @@
    "label": "Vitelline & cardinal veins, L-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#2f5d94",
+   "color": "#27497a",
    "terms": [
     "vitelline & cardinal veins"
    ]
@@ -756,7 +756,7 @@
    "label": "Aortic arches, D-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#c2464f",
+   "color": "#8f2438",
    "terms": [
     "aortic arches"
    ]
@@ -770,7 +770,7 @@
    "label": "Aortic arches, L-loop",
    "role": "part",
    "group": "D-loop against L-loop, side by side",
-   "color": "#c2464f",
+   "color": "#8f2438",
    "terms": [
     "aortic arches"
    ]
@@ -784,7 +784,7 @@
    "label": "Vitelline & cardinal veins, L-loop",
    "role": "part",
    "group": "L-loop — the abnormal mirror",
-   "color": "#2f5d94",
+   "color": "#27497a",
    "terms": []
   },
   {
@@ -796,13 +796,13 @@
    "label": "Aortic arches, L-loop",
    "role": "part",
    "group": "L-loop — the abnormal mirror",
-   "color": "#c2464f",
+   "color": "#8f2438",
    "terms": []
   }
  ],
  "views": [
   {
-   "mode": "process",
+   "mode": "mechanism",
    "beat": 1,
    "title": "Why a straight tube cannot stay straight",
    "ops": [
@@ -854,7 +854,7 @@
    "narration": "By day twenty-three the heart tube is tied at both ends — arteries above, veins below — and it is elongating faster than the pericardial cavity around it. Cells added at both poles from the secondary heart field keep lengthening it. A tube that is growing, held at both ends and running out of room can only do one thing, and it bends. Looping is mechanics before it is genetics; the genes decide which way, not whether.\n\nStart with the straight tube at day twenty-three. It is anchored above by the arch arteries and below by the veins, its dorsal mesocardium has broken down in the middle, and the secondary heart field keeps adding cells at both poles so it lengthens inside a pericardial cavity that does not lengthen with it. Held at both ends, free in the middle, growing. It bends."
   },
   {
-   "mode": "process",
+   "mode": "mechanism",
    "beat": 2,
    "title": "The dorsal mesocardium has already broken down",
    "ops": [
@@ -907,7 +907,7 @@
    "narration": "The middle of the dorsal mesocardium has already given way, so the tube hangs free between its two fixed ends. That is what makes bending possible at all. The gap it leaves behind is the transverse pericardial sinus, which is why in the adult you can pass a finger behind the aorta and pulmonary trunk and in front of the atria."
   },
   {
-   "mode": "process",
+   "mode": "mechanism",
    "beat": 3,
    "title": "Movement one — the bulbus swings ventrally, caudally and to the RIGHT",
    "ops": [
@@ -953,12 +953,12 @@
      "view": "anterior"
     }
    ],
-   "narration": "The first movement is the one that names the loop. The bulbus cordis, the cranial half of the tube, swings forwards, downwards and to the right. That is the D-loop, D for dextro, and it is the normal direction in every healthy human heart. Say it as one sentence you can repeat under exam pressure: the bulbus goes ventral, caudal and right. What you are looking at is the loop CAUGHT EARLY: the bulboventricular bend has done about two thirds of its turn and the other three bends have barely started, so this really is movement one and not the finished loop with a caption on it."
+   "narration": "The first movement is the one that names the loop. The bulbus cordis, the cranial half of the tube, swings forwards, downwards and to the right. That is the D-loop, D for dextro, and it is the normal direction in every healthy human heart. Say it as one sentence you can repeat under exam pressure: the bulbus goes ventral, caudal and right. What you are looking at is the loop CAUGHT EARLY, not the finished loop with a caption on it: the bulboventricular bend has done about two thirds of its turn, while the sinoatrial bend — the one that lifts the inflow end up behind the ventricles in movement three — has done under a fifth of its own. The three bends between them are part of the way round. Movement one leading and movement three not yet begun is what this frame exists to show."
   },
   {
-   "mode": "process",
+   "mode": "mechanism",
    "beat": 4,
-   "title": "Movement two — the ventricle swings dorsally and to the LEFT",
+   "title": "Movement two — the ventricle swings back, and the bulbus comes round to its right",
    "ops": [
     {
      "op": "HIDE_STRUCTURE",
@@ -998,10 +998,10 @@
      "intensity": 0.85
     }
    ],
-   "narration": "The second movement is the mirror of the first. The primitive ventricle moves backwards and to the left. Bulbus to the right, ventricle to the left, and the two now sit side by side rather than one behind the other. The groove between them outside is the bulboventricular sulcus, and the opening between them inside is the primary interventricular foramen — the hole the muscular septum will later grow up towards."
+   "narration": "The second movement is the mirror of the first: the primitive ventricle swings backwards, and it will travel to the embryo's left — but not from here. Caught mid-loop, that travel has not started: the ventricle is still a little to the RIGHT of the midline, and the two limbs are still stacked, the bulbus sitting above and behind it. What you can already read off this frame is the relation that decides everything after it — the bulbus lies to the RIGHT of the ventricle. The groove between them outside is the bulboventricular sulcus, and the opening between them inside is the primary interventricular foramen, the hole the muscular septum will later grow up towards. Between here and day twenty-eight the bulbus comes down and forwards to lie level with the ventricle and in front of it, and the ventricle crosses to the left. That arrangement — the two side by side — is view six, and it is worth waiting for rather than being told about now."
   },
   {
-   "mode": "process",
+   "mode": "mechanism",
    "beat": 5,
    "title": "Movement three — the atria climb up behind",
    "ops": [
@@ -1055,7 +1055,7 @@
    "narration": "The third movement carries the atrium and the sinus venosus backwards and upwards, so the inflow end comes to lie behind and above the ventricles instead of below them. This is the movement that produces the adult arrangement: atria posterior and superior, ventricles anterior and inferior, and the great vessels rising between the two atria in front. Every relation you learn in the adult mediastinum was set here."
   },
   {
-   "mode": "process",
+   "mode": "mechanism",
    "beat": 6,
    "title": "What the loop leaves you with",
    "ops": [
@@ -1103,7 +1103,7 @@
    "narration": "By about day twenty-eight the tube has become an S. The two future ventricles lie side by side, the two future atria lie side by side behind and above them, the atrioventricular canal joins the atrial half to the ventricular half, and the outflow tract runs up in the midline between the atria. Nothing has been divided yet — this is one continuous lumen. But the pieces are now in the right places relative to each other.\n\nThree sentences, in this order. One: the bulbus cordis swings ventrally, caudally and to the right — that is the D-loop. Two: the primitive ventricle moves dorsally and to the left, so the two future ventricles now lie side by side. Three: the atrium and sinus venosus move dorsally and cranially, so the inflow ends up behind and above the outflow. If you can say those three lines you can draw the loop from memory."
   },
   {
-   "mode": "process",
+   "mode": "mechanism",
    "beat": 7,
    "title": "Looping is the setup for septation",
    "ops": [
@@ -1152,7 +1152,7 @@
    "narration": "Understand looping as the step that brings each part alongside the part it must be joined to. The septa built next are all short walls between structures that looping has already parked next to one another. That is why a looping or alignment error shows up later as a connection fault rather than a hole: the great arteries coming off the wrong ventricle, or both off the right. If the pieces are put in the wrong place, no amount of correct wall-building fixes it.\n\nBy day twenty-eight it is an S-shaped heart with a single continuous lumen. Ventricles side by side in front and below, atria side by side behind and above, joined through the atrioventricular canal, with the outflow tract climbing between the two atria. Cut it across and check yourself against the segment colours from the tube scene — nothing has been added or lost, the same five segments have simply been repositioned. That repositioning is the whole purpose of the step, because septation is only short walls between parts that are already correctly parked."
   },
   {
-   "mode": "process",
+   "mode": "mechanism",
    "beat": 8,
    "title": "L-loop — the tube turns the wrong way",
    "ops": [
@@ -1239,7 +1239,7 @@
    "narration": "If the tube loops to the left instead of the right, the ventricles end up inverted — the morphological right ventricle on the left and the left ventricle on the right. When the great arteries are also transposed, the two errors cancel each other for flow and the child is pink: congenitally corrected transposition. Do not read 'corrected' as 'normal'. The right ventricle is pumping to the body for a lifetime, and it fails eventually, with conduction tissue that is abnormally placed and prone to block."
   },
   {
-   "mode": "process",
+   "mode": "mechanism",
    "beat": 9,
    "title": "Mirror-image anatomy — and the difference from dextroposition",
    "ops": [
@@ -1309,7 +1309,13 @@
   "rebuild_note_round_2": "Round-2 findings 1, 3, 4 and 5. The MODEL changed (true reflection; torsion re-solved against the amended test set B'/G/H/I plus two conditions this run had to add). The SCENE changed in two places only: peri_c added and shown on view 6, and two gaps[] entries brought into line with what is now true. No narration was touched.",
   "corrected_at_round_3": "2026-09-10T17:52:00Z",
   "corrected_by_round_3": "model3d REVIEW task, round 3 — cloud run with the medbank folder attached; did not build this scene",
-  "correction_note_round_3": "Corrected a false measurement claim in gaps[] about the day-28 mesocardium, and recorded three corrections made in models3d/cardiac-looping.js (mirror-probe degenerate case, mesocardium layer flag, acceptance() parameter guard). NO geometry and NO narration changed. Round 2 findings 1, 3, 4 and 5 were re-verified independently and are FIXED. The anatomical defects found this round are in the MODEL geometry and are listed as findings on the queue item."
+  "correction_note_round_3": "Corrected a false measurement claim in gaps[] about the day-28 mesocardium, and recorded three corrections made in models3d/cardiac-looping.js (mirror-probe degenerate case, mesocardium layer flag, acceptance() parameter guard). NO geometry and NO narration changed. Round 2 findings 1, 3, 4 and 5 were re-verified independently and are FIXED. The anatomical defects found this round are in the MODEL geometry and are listed as findings on the queue item.",
+  "corrected_at_round_4": "2026-09-20T07:10:00Z",
+  "corrected_by_round_4": "model3d REVIEW task, round 4 — cloud run, files staged from the medbank folder; did not build this scene and did not use the build task’s provers",
+  "correction_note_round_4": "Re-pointed every segment colour to the palette models3d/cardiac-looping.js declares in LAYERS, which is the palette heart-tube-formation.json and septation-of-heart.json already carry. This scene was the only one of the three on a different set — a leftover from the SVG sequence version it was re-authored from on 2026-09-10 — and viz3d.js resolves colour as \"scene first, then the model’s palette\", so the leftover set was what a student saw. View 7’s narration tells the student to \"check yourself against the segment colours from the tube scene\", and none of the eight matched; the sinus venosus was #3f6ea8, a blue close enough to the tube scene’s atrium (#1f7fc4) to be read as it, while the tube scene’s sinus is violet. NO geometry and NO narration changed. Anatomical defects found this round are in the model and the narration and are listed as findings on the queue item.",
+  "rebuilt_at_round_5": "2026-09-29T11:15:00Z",
+  "rebuilt_by_round_5": "model3d BUILD task — round-5 rework, cloud run with the medbank folder attached",
+  "rebuild_note_round_5": "Round-4 findings 1 and 2, both NARRATION, both fixed here; finding 3 is a standards conflict and is ESCALATED (see ESCALATIONS.md 2026-09-29 and the queue item). VIEW 3: the round-4 sentence said 'the bulboventricular bend has done about two thirds of its turn and the other three bends have barely started'. Independently re-measured this run, at t = 0.42, as the angle between the unit tangents 2.2 bend-widths either side of each bend's centre, over the same angle at t = 1 — bulboventricular 68%, atrioventricular 70%, bulbotruncal 56%, sinoatrial 19%, sinus-horn confluence 7%. The review's figures reproduce exactly. So the sentence was false about two of the bends, and 'the other three' was stale besides: the model has had FIVE bends since round 3. Re-worded to the claim the stagger does support — movement one leading, movement three not begun — which is also what the stagger was added for. VIEW 4: the title said the ventricle swings to the LEFT and the narration said the two 'now sit side by side rather than one behind the other', over stage _b at t = 0.65. Measured on the centreline at NSEG 300: ventricle x = -0.212 at t = 0.42 and -0.510 at t = 0.65 — it moves FURTHER RIGHT between the two frames and does not cross to the left until about t = 0.8; and bulbus-minus-ventricle at 0.65 is dx -0.726, dy +0.863, dz -0.677, so the bulbus is above and BEHIND the ventricle and the limbs are more stacked than side by side. The picture is the mid-loop anatomy and it is right; the narration was describing day 28 over a mid-loop frame. Re-worded to what the frame shows, keeping the relative claim the geometry does support (the bulbus lies RIGHT of the ventricle, margin 40.5% of the two chambers' mean width at 0.65), and handing the finished side-by-side arrangement to view 6, which draws t = 1 and already says it. NO GEOMETRY CHANGED and no other view was touched. models3d/cardiac-looping.js changed only in its acceptance BOOKKEEPING — `must` strings generated from FLOORS, every relation measured at all three rendered t, and a GATED_AT table — not in SOLVED."
  },
  "gaps": [
   "THREE BEATS WERE MOVED OUT, NOT DELETED — see deferred_beats[]. They rendered pixel-identical to the view before them because they were never 3D beats: they are narration that survived the conversion from the sequence engine. Each carries its full text, why it is not a view, and where it belongs. A view must change the picture; text has its own home in this app.",
@@ -1328,7 +1334,11 @@
   "BUILD 2026-09-10 round 2: pericardium@1 IS NOW USED — it is peri_c on view 6 (review round 2, finding 5). View 6 is view 1's day-28 counterpart: same anterior camera, same whole heart, so a student sees the sac twice and the crowding becomes a comparison between two frames instead of a claim made over one. MEASURED on the built geometry, heart bounding box as a fraction of the sac: width 39% -> 75%, depth 31% -> 57%, height 77% -> 72%. The transverse axes are where the crowding shows, and they are the two that move. The HEIGHT fraction FALLS, and that is not a defect to be tuned away: the sac spans pole to pole and the poles converge, so tube and sac shorten together — the tube outgrows its cavity sideways, which is exactly why it buckles sideways. Worth a reviewer's eye: the peak crowding is at MID-LOOP, not at day 28 (t = 0.65 measures 84% width and 69% depth, against 75% and 57% at t = 1), because the sac keeps widening on its own schedule after the loop has stopped bulging. If the intended teaching is that day 28 is the tightest moment, the sac's width schedule is what needs re-examining, not the second view. mesocardium@1 remains the one key the model builds that no view names. REVIEW 2026-09-10 round 3 — THE REST OF THIS SENTENCE WAS WRONG AND IS CORRECTED. It read \"at day 28 it is two small reflections almost entirely hidden behind the heart\". Measured on the built geometry at t = 1, the two cuffs together span 2.10 in x and 2.29 in y on a heart 3.27 x 3.19 x 2.49, and their dorsal edge stands 0.74 clear behind the dorsal-most point of the atrium. In the LATERAL camera — which is the camera view 5 uses — the sheet is a conspicuous wing projecting behind the atrium, not a hidden reflection. It stays out of the player because every view from 3 onwards opens with HIDE_STRUCTURE *, not because it is small. If a future view shows it at day 28, size it against this measurement rather than the old note.",
   "BUILD 2026-09-10: view 8 compares the WHOLE D loop with the WHOLE L loop, five segments each, rather than ventricle+bulbus alone — two segments shown without their neighbours expose the waist end caps and read as hollow pipes cut in mid-air (review finding 7). Both loops carry the new 'apart' flag, which offsets each clear of the median plane: mirror images drawn in one space interpenetrate, and the first attempt at this fix produced one unreadable mass. 'apart' is a presentation flag for this view only; no view that shows a single heart uses it. The veins and arches are shown on both sides too, because without them the tube's two POLE ends are bare and read as cut pipes — the same objection the finding makes about the waist caps.",
   "BUILD 2026-09-10 round 2 — THE MIRROR IS NOW A REAL REFLECTION, and the entry this replaces (which correctly said it was not) is retained in the queue item findings. What was wrong: seeding the transported frame with n = -x negates BOTH n and b, because b is derived as d x n, so the \"mirror\" was a 180 degree ROTATION about the cranio-caudal axis. The two builds had the same handedness, so views 8 and 9 were showing the ordinary D-looped heart from behind. What was done: the curve is built once, always right-handed, and the FINISHED GROUP is reflected in the median plane by VizKit.reflectGroupX — positions and normals negate x and every triangle reverses its winding, which is what keeps faces outward through a handedness flip. The per-side flips in the veins and the arches are gone; they were mirroring a second time and differently, which is why the parts disagreed. PROVED, the same three ways the review disproved it: (1) signed volume of the sinus-atrium-ventricle-bulbus centroid tetrahedron D -0.05005 vs L +0.05005, ratio exactly -1.0000, where a rotation gives +1; (2) every vertex of every one of the eleven parts matches a true reflect-X at 1.000 and a rot-Y-180 at 0.000-0.004, with identical vertex counts (the midline and the pericardium match both, because they are symmetric about x); (3) face-winding agreement is 0.99 on both builds, which is only possible if the triangle ORDER reversed — reflecting positions without reversing winding would have driven it to 0.01. The model asserts it on every mirror build (acceptance test M, mirrorProof()).",
-  "REVIEW 2026-09-10 round 3 — THREE CORRECTIONS MADE IN THE MODEL, no geometry changed and all nine acceptance tests still pass at nseg 140/300/600. (a) The mirror chirality probe warned on its own degenerate case: at t = 0 the tube is straight, the four centroids are coplanar, the signed volume is exactly 0 and the ratio is 0/0 — the guard reported CANNOT MEASURE as MEASURED AND WRONG and fired on every t=0 mirror build, which is what cost tools/test-per-view-t.mjs its console-clean check on an unrelated item. It now reports not-measurable. Console is clean at t = 0/0.2/0.4/0.6/0.65/0.8/1 and on the mirror build. (b) The dorsal mesocardium was guarded by `opts.mesocardium !== false`, making it the one optional layer that was ON unless switched off while endocardium, pericardium and midline are all opt-in and FULL declares all four alike. build(t, {}) returned a mesocardium nobody asked for. Invisible in the player, because the provider builds with FULL and slices by key — but every direct render carried it, including the build task stage proofs: in tools/render-cardiac-looping.mjs the plain stages pass {} and the -meso stages pass {mesocardium:true}, so the pair meant to show the sheet against its absence differed only by the midline rod. Now opt-in. (c) acceptance(nseg) took the SEGMENT COUNT, and a reviewer following the built_notes naturally calls acceptance(1). That integrated the centreline with one segment and returned confident numbers at 1e-16 reporting D, G and I FAILING — a false failure on a model whose tests all pass. It now throws a message naming the parameter. This review lost twenty minutes to it and nearly filed a fabricated CRITICAL finding."
+  "REVIEW 2026-09-10 round 3 — THREE CORRECTIONS MADE IN THE MODEL, no geometry changed and all nine acceptance tests still pass at nseg 140/300/600. (a) The mirror chirality probe warned on its own degenerate case: at t = 0 the tube is straight, the four centroids are coplanar, the signed volume is exactly 0 and the ratio is 0/0 — the guard reported CANNOT MEASURE as MEASURED AND WRONG and fired on every t=0 mirror build, which is what cost tools/test-per-view-t.mjs its console-clean check on an unrelated item. It now reports not-measurable. Console is clean at t = 0/0.2/0.4/0.6/0.65/0.8/1 and on the mirror build. (b) The dorsal mesocardium was guarded by `opts.mesocardium !== false`, making it the one optional layer that was ON unless switched off while endocardium, pericardium and midline are all opt-in and FULL declares all four alike. build(t, {}) returned a mesocardium nobody asked for. Invisible in the player, because the provider builds with FULL and slices by key — but every direct render carried it, including the build task stage proofs: in tools/render-cardiac-looping.mjs the plain stages pass {} and the -meso stages pass {mesocardium:true}, so the pair meant to show the sheet against its absence differed only by the midline rod. Now opt-in. (c) acceptance(nseg) took the SEGMENT COUNT, and a reviewer following the built_notes naturally calls acceptance(1). That integrated the centreline with one segment and returned confident numbers at 1e-16 reporting D, G and I FAILING — a false failure on a model whose tests all pass. It now throws a message naming the parameter. This review lost twenty minutes to it and nearly filed a fabricated CRITICAL finding.",
+  "REVIEW 2026-09-20 round 4 — SEGMENT COLOURS RE-POINTED TO THE MODEL PALETTE. Measured across the three cardiac scenes: heart-tube-formation.json and septation-of-heart.json agree with each other and with models3d/cardiac-looping.js LAYERS on all eight shared segment colours; this scene agreed on none of them (sinus #3f6ea8 vs #5b49ad, atrium #5b8fd0 vs #1f7fc4, ventricle #d94f5c vs #c02a3a, bulbus #e4784a vs #d85c26, truncus #e0a94f vs #cf9a1e, veins #2f5d94 vs #27497a, arches #c2464f vs #8f2438, endocardium #f2d3dd vs #e7aebe; only the mesocardium matched). viz3d.js line ~601 takes the SCENE colour first and the model palette only as a fallback, so the odd set was the rendered one. Corrected to the model palette. If a future run wants a lighter palette for legibility it belongs in models3d/cardiac-looping.js LAYERS, where all three scenes inherit it together.",
+  "REVIEW 2026-09-20 round 4 — TWO CHANGES TO THIS FILE WERE FOUND ALREADY MADE AND UNRECORDED, and per REVIEW-TASK-PROMPT §6 the disagreement is the finding. (a) The round-4 build rework of 2026-09-10T20:41Z added the _ab stage at t = 0.42, re-pointed view 3 to it and added a sentence to view 3’s narration, and left no provenance stamp and no entry here; it is in BUILD-LOG under \"round-3 rework, plus round-4 finding 9\". (b) All nine views carried mode \"process\" as late as 2026-09-11T01:05Z, when the fetal-circulation build run recorded this scene failing validate-scenes for exactly that; they now read \"mechanism\", the file’s mtime is 2026-09-13T13:04:15Z, and no BUILD-LOG entry and no provenance field records the change. The content of (b) is CORRECT and was verified this round — CURRICULUM.json declares views [\"mechanism\"] for Cardiac looping and the scene now validates clean — so it is recorded rather than reverted. It is the same shape as the unlogged 2026-09-11T06:23Z write to viz3d.js that the engine__refit-camera-on-isolate review escalated on 2026-09-13, and a second instance of it is worth a human knowing about.",
+  "H65 IS NO LONGER A GATED ACCEPTANCE TEST, round 5, 2026-09-29 — recorded here because it reverses a round-2 decision. It was gated because view 4 asserted, at t = 0.65, that the bulbus and ventricle 'now sit side by side rather than one behind the other'. Round-4 finding 3 measured that passing by 2% and flipping sign with the estimator. View 4 no longer makes that claim at that stage, so the gate has no claim to defend; G and H remain gated at t = 1, where view 6 does make it. The relation is still MEASURED and REPORTED at 0.42, 0.65 and 1 by acceptance().byT, so nobody has to take this on trust. If a later review wants it gated again it is one entry in GATED_AT.",
+  "THE SEVEN FORMER SIGN TESTS (A, B', C, E, F, G, H) STILL HAVE NO MAGNITUDE FLOOR, and that is the open item on this scene — round-4 finding 3, escalated 2026-09-29 rather than fixed. The floors cannot all be raised to the standard's 0.35 at once: measured over three independent minimax searches in two parameter spaces, the best achievable WORST margin across the thirteen gated relations is 0.290, and a candidate that does clear 0.35 on all five tests the finding names breaks Ifrac (0.299) and Jside (0.263), two tests the same review has already closed. The margins are reported at every rendered t by acceptance().byT so the gap is visible rather than implied."
  ],
  "deferred_beats": [
   {

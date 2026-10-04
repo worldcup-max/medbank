@@ -1,683 +1,1663 @@
 {
-  "schema": 2,
-  "id": "embryology__gametogenesis-fertilization__fertilization",
-  "mode": "sequence",
-  "deferred_modes": [
-    "diagram"
+ "schema": 2,
+ "id": "embryology__gametogenesis-fertilization__fertilization",
+ "mode": "3d_anatomy",
+ "deferred_modes": [
+  "sequence",
+  "diagram"
+ ],
+ "course": "Embryology",
+ "topic": "Gametogenesis & Fertilization",
+ "structure": "Fertilization",
+ "covers": [
+  "Fertilization"
+ ],
+ "learning_goal": "Put the steps of fertilization in order from capacitation to the first cleavage spindle, say where in the tube it happens and inside what time window, and explain what each block to polyspermy does and what goes wrong when it fails.",
+ "status": "candidate",
+ "provider": {
+  "primary": "procedural",
+  "fallbacks": []
+ },
+ "match": {
+  "topics": [
+   "fertilization",
+   "fertilisation",
+   "conception",
+   "gametogenesis",
+   "week 1",
+   "reproduction",
+   "uterine tube",
+   "infertility",
+   "assisted reproduction",
+   "ectopic pregnancy"
   ],
-  "course": "Embryology",
-  "topic": "Gametogenesis & Fertilization",
-  "structure": "Fertilization",
-  "covers": [
-    "Fertilization"
-  ],
-  "learning_goal": "Put the steps of fertilization in order from capacitation to the first cleavage spindle, say where in the tube it happens and inside what time window, and explain what each block to polyspermy does and what goes wrong when it fails.",
-  "status": "planned",
-  "provider": {
-    "primary": "svg",
-    "fallbacks": []
-  },
-  "match": {
-    "topics": [
-      "fertilization",
-      "fertilisation",
-      "conception",
-      "gametogenesis",
-      "week 1",
-      "reproduction",
-      "uterine tube",
-      "infertility",
-      "assisted reproduction",
-      "ectopic pregnancy"
-    ],
-    "terms": [
-      "fertilization",
-      "fertilisation",
-      "capacitation",
-      "hyperactivation",
-      "glycoprotein coat",
-      "seminal plasma proteins",
-      "ampulla",
-      "uterine tube",
-      "fallopian tube",
-      "isthmus",
-      "infundibulum",
-      "fimbriae",
-      "sperm transport",
-      "cervical mucus",
-      "corona radiata",
-      "cumulus oophorus",
-      "hyaluronidase",
-      "zona pellucida",
-      "ZP3",
-      "ZP2",
-      "sperm receptor",
-      "acrosome reaction",
-      "acrosin",
-      "oolemma",
-      "perivitelline space",
-      "membrane fusion",
-      "IZUMO1",
-      "JUNO",
-      "polyspermy",
-      "fast block",
-      "membrane depolarisation",
-      "slow block",
-      "cortical reaction",
-      "cortical granules",
-      "zona reaction",
-      "secondary oocyte",
-      "metaphase II arrest",
-      "completion of meiosis II",
-      "second polar body",
-      "male pronucleus",
-      "female pronucleus",
-      "pronuclei",
-      "syngamy",
-      "zygote",
-      "diploid",
-      "46 chromosomes",
-      "restoration of diploid number",
-      "sex determination",
-      "SRY",
-      "X-bearing sperm",
-      "Y-bearing sperm",
-      "paternal centriole",
-      "maternal mitochondria",
-      "mitochondrial inheritance",
-      "first cleavage",
-      "24 hours",
-      "72 hours",
-      "fertile window",
-      "ectopic pregnancy",
-      "tubal pregnancy",
-      "pelvic inflammatory disease",
-      "IVF",
-      "ICSI",
-      "hydatidiform mole",
-      "triploidy",
-      "dispermy"
-    ]
-  },
-  "camera": {
-    "framing": "anterior"
-  },
-  "structures": [
-    {
-      "key": "ampulla",
-      "label": "Ampulla of the uterine tube",
-      "role": "context",
-      "group": "Where and when",
-      "layer": "organ",
-      "color": "#b07aa1",
-      "terms": [
-        "ampulla",
-        "uterine tube",
-        "fallopian tube",
-        "infundibulum",
-        "fimbriae",
-        "isthmus",
-        "site of fertilization",
-        "ectopic pregnancy",
-        "tubal pregnancy",
-        "pelvic inflammatory disease"
-      ],
-      "narration": "Fertilization happens in the ampulla, the wide lateral third of the uterine tube, not in the uterus. Say the site and you have half the clinical medicine: a scarred tube after pelvic inflammatory disease still lets a thin sperm through but traps the far larger blastocyst, and the pregnancy implants where it stands. That is why tubal ectopic pregnancy is the commonest ectopic and why it presents as a ruptured ampulla with shoulder-tip pain."
-    },
-    {
-      "key": "window",
-      "label": "The fertile window",
-      "role": "part",
-      "group": "Where and when",
-      "layer": "organ",
-      "color": "#e8a33d",
-      "terms": [
-        "fertile window",
-        "24 hours",
-        "72 hours",
-        "oocyte viability",
-        "sperm survival",
-        "ovulation timing",
-        "day 14"
-      ],
-      "narration": "Two clocks must overlap. The secondary oocyte survives about twenty-four hours after ovulation; sperm survive about three days in the female tract, sometimes five. So the fertile window opens days before ovulation and shuts about a day after. Sperm reach the ampulla within thirty minutes to a few hours, but only a few hundred of the two to three hundred million ejaculated ever arrive."
-    },
-    {
-      "key": "capacitation",
-      "label": "Capacitation",
-      "role": "part",
-      "group": "Preparing the sperm",
-      "layer": "organ",
-      "color": "#3f7fbf",
-      "terms": [
-        "capacitation",
-        "glycoprotein coat",
-        "seminal plasma proteins",
-        "cholesterol efflux",
-        "hyperactivation",
-        "female genital tract",
-        "seven hours",
-        "IVF medium"
-      ],
-      "narration": "An ejaculated sperm cannot fertilise anything. Over about seven hours in the female tract it loses the glycoprotein coat and seminal plasma proteins covering its acrosome, and its membrane loses cholesterol. Only then can the acrosome react, and the tail changes to a whip-like hyperactivated beat that drives it through the cumulus. This is the step reproduced in a dish before IVF, and it is why sperm taken straight from semen will not fertilise in vitro."
-    },
-    {
-      "key": "sperm",
-      "label": "Capacitated spermatozoon",
-      "role": "part",
-      "group": "Preparing the sperm",
-      "layer": "organ",
-      "color": "#1f618d",
-      "terms": [
-        "spermatozoon",
-        "sperm head",
-        "acrosome",
-        "midpiece",
-        "tail",
-        "flagellum",
-        "paternal centriole",
-        "hyperactivated motility"
-      ],
-      "narration": "Head, midpiece and tail all enter the oocyte — the whole cell goes in, not just the nucleus. The head carries the haploid genome under the acrosomal cap, the midpiece carries the mitochondria that power the swim, and the neck carries the centriole. Two of those three matter after entry: the centriole is kept and builds the first cleavage spindle, and the paternal mitochondria are destroyed, which is why mitochondrial DNA is inherited only from the mother."
-    },
-    {
-      "key": "corona",
-      "label": "Corona radiata & cumulus oophorus",
-      "role": "part",
-      "group": "The two coats",
-      "layer": "organ",
-      "color": "#ba68c8",
-      "terms": [
-        "corona radiata",
-        "cumulus oophorus",
-        "granulosa cells",
-        "hyaluronic acid",
-        "hyaluronidase",
-        "first barrier"
-      ],
-      "narration": "The first coat is a crowd of granulosa cells held together in hyaluronic acid, carried out of the follicle with the oocyte. Sperm push through it using hyaluronidase and the force of the hyperactivated tail. Many sperm are needed to clear the way even though only one will fuse, which is one reason a low count causes infertility long before it reaches zero."
-    },
-    {
-      "key": "zona",
-      "label": "Zona pellucida & ZP3",
-      "role": "part",
-      "group": "The two coats",
-      "layer": "organ",
-      "color": "#f1c40f",
-      "terms": [
-        "zona pellucida",
-        "ZP3",
-        "ZP2",
-        "sperm receptor",
-        "species specificity",
-        "glycoprotein",
-        "second barrier",
-        "hatching"
-      ],
-      "narration": "The second coat is an acellular glycoprotein shell secreted by the oocyte itself. ZP3 is the sperm receptor and binding to it is species-specific, which is what stops cross-species fertilisation. ZP2 holds the reacted sperm while it drills through. The same zona keeps the early cleaving embryo together until the blastocyst hatches from it before implantation."
-    },
-    {
-      "key": "acrosome_reaction",
-      "label": "Acrosome reaction",
-      "role": "part",
-      "group": "Getting in",
-      "layer": "organ",
-      "color": "#a569bd",
-      "terms": [
-        "acrosome reaction",
-        "ZP3 binding",
-        "acrosin",
-        "hyaluronidase",
-        "neuraminidase",
-        "exocytosis",
-        "lysosome",
-        "inner acrosomal membrane"
-      ],
-      "narration": "Binding to ZP3 triggers it. The outer acrosomal membrane fuses with the sperm's own plasma membrane at many points and the enzymes inside are released — acrosin, hyaluronidase, neuraminidase — digesting a narrow path through the zona. The acrosome is a modified lysosome and this is regulated exocytosis, not damage. A sperm that reacts too early is spent before it arrives."
-    },
-    {
-      "key": "fusion",
-      "label": "Fusion with the oolemma",
-      "role": "part",
-      "group": "Getting in",
-      "layer": "organ",
-      "color": "#e74c3c",
-      "terms": [
-        "oolemma",
-        "membrane fusion",
-        "perivitelline space",
-        "IZUMO1",
-        "JUNO",
-        "equatorial segment",
-        "whole sperm enters",
-        "microvilli"
-      ],
-      "narration": "The sperm crosses the perivitelline space and lies flat against the oocyte membrane. IZUMO1 on the sperm binds JUNO on the oolemma and the two membranes fuse. Head, midpiece and tail all pass into the cytoplasm. The moment of fusion is the moment of fertilisation, and everything after it is the oocyte's response."
-    },
-    {
-      "key": "fast_block",
-      "label": "Fast block — membrane depolarisation",
-      "role": "part",
-      "group": "One sperm only",
-      "layer": "organ",
-      "color": "#16a085",
-      "terms": [
-        "fast block",
-        "polyspermy",
-        "membrane depolarisation",
-        "sodium influx",
-        "seconds"
-      ],
-      "narration": "Within seconds of fusion the oolemma depolarises and no second sperm can fuse with it. It is immediate but temporary, and it buys the time the slower chemical block needs."
-    },
-    {
-      "key": "cortical_reaction",
-      "label": "Slow block — cortical & zona reaction",
-      "role": "part",
-      "group": "One sperm only",
-      "layer": "organ",
-      "color": "#27ae60",
-      "terms": [
-        "cortical reaction",
-        "cortical granules",
-        "zona reaction",
-        "calcium wave",
-        "calcium oscillations",
-        "ZP3 inactivation",
-        "ZP2 cleavage",
-        "slow block",
-        "perivitelline space"
-      ],
-      "narration": "Fusion sets off a wave of calcium through the oocyte. Cortical granules lying under the membrane empty their enzymes into the perivitelline space, and those enzymes change the zona — ZP3 loses its receptor activity and ZP2 is cleaved, so the shell hardens and no further sperm can bind or penetrate. That is the zona reaction. The same calcium wave is what releases the metaphase II arrest, so one signal both closes the door and restarts the cell cycle."
-    },
-    {
-      "key": "polyspermy_failure",
-      "label": "When the block fails",
-      "role": "part",
-      "group": "One sperm only",
-      "layer": "organ",
-      "color": "#c0392b",
-      "terms": [
-        "polyspermy",
-        "dispermy",
-        "triploidy",
-        "69 XXY",
-        "partial hydatidiform mole",
-        "non-viable"
-      ],
-      "narration": "Two sperm entering gives a triploid conceptus, usually 69,XXY. It is not viable. Dispermic fertilisation of a normal oocyte is the classic route to a partial hydatidiform mole, which is why the blocks to polyspermy are worth naming rather than skimming."
-    },
-    {
-      "key": "meiosis_ii_completion",
-      "label": "Meiosis II completes — second polar body",
-      "role": "part",
-      "group": "The oocyte's answer",
-      "layer": "organ",
-      "color": "#e91e63",
-      "terms": [
-        "secondary oocyte",
-        "metaphase II arrest",
-        "completion of meiosis II",
-        "second polar body",
-        "ootid",
-        "mature ovum",
-        "calcium oscillations"
-      ],
-      "narration": "The cell the sperm entered was a secondary oocyte, still arrested in metaphase II. The calcium wave releases that arrest and meiosis II finishes at last, throwing off the second polar body. So a mature ovum exists for only minutes, inside a cell that is already fertilised. This is the answer to the question of when oogenesis actually ends."
-    },
-    {
-      "key": "pronuclei",
-      "label": "Male & female pronuclei",
-      "role": "part",
-      "group": "The oocyte's answer",
-      "layer": "organ",
-      "color": "#8e44ad",
-      "terms": [
-        "male pronucleus",
-        "female pronucleus",
-        "pronuclei",
-        "decondensation",
-        "protamine removal",
-        "DNA replication",
-        "23 chromosomes each",
-        "two pronuclei",
-        "IVF grading"
-      ],
-      "narration": "The sperm nucleus swells as protamines are stripped and replaced with histones, becoming the male pronucleus; the oocyte nucleus becomes the female pronucleus. Each holds twenty-three chromosomes and each replicates its DNA where it lies. Two visible pronuclei is the sign an IVF embryologist looks for the next morning to confirm normal fertilisation; one or three means the cycle has gone wrong."
-    },
-    {
-      "key": "syngamy",
-      "label": "Syngamy — the zygote",
-      "role": "part",
-      "group": "The oocyte's answer",
-      "layer": "organ",
-      "color": "#c0392b",
-      "terms": [
-        "syngamy",
-        "zygote",
-        "diploid",
-        "46 chromosomes",
-        "restoration of the diploid number",
-        "first cleavage spindle",
-        "paternal centriole",
-        "first mitotic division",
-        "day 1"
-      ],
-      "narration": "The pronuclear membranes break down and the two sets of chromosomes meet on a single spindle. There is no interphase nucleus between them — the chromosomes go straight into the first mitosis. That spindle is built on the centriole the sperm brought, since the oocyte discarded its own. The diploid number is restored, and the new cell is a zygote."
-    },
-    {
-      "key": "results",
-      "label": "What fertilization achieves",
-      "role": "part",
-      "group": "The oocyte's answer",
-      "layer": "organ",
-      "color": "#f39c12",
-      "terms": [
-        "restoration of diploid number",
-        "sex determination",
-        "SRY",
-        "X-bearing sperm",
-        "Y-bearing sperm",
-        "genetic variation",
-        "initiation of cleavage",
-        "maternal mitochondria",
-        "mitochondrial inheritance"
-      ],
-      "narration": "Four results, and they are asked as a list. It restores the diploid number. It determines chromosomal sex — the oocyte always carries an X, so an X-bearing or Y-bearing sperm decides it, and SRY on the Y then directs the gonad. It mixes two genomes, adding to the variation meiosis already created. And it starts cleavage: the zygote divides within about a day while still travelling down the tube. Note what is not inherited from the father — the mitochondria, which are destroyed after entry."
-    },
-    {
-      "key": "clinical",
-      "label": "Where this is used clinically",
-      "role": "context",
-      "group": "The oocyte's answer",
-      "layer": "organ",
-      "color": "#5a8fd6",
-      "terms": [
-        "IVF",
-        "in vitro fertilization",
-        "ICSI",
-        "intracytoplasmic sperm injection",
-        "capacitation in vitro",
-        "zona drilling",
-        "ectopic pregnancy",
-        "emergency contraception",
-        "tubal ligation"
-      ],
-      "narration": "Every step in this sequence is a step assisted reproduction can substitute for. Capacitation is done in the dish. In ICSI a single sperm is injected straight into the cytoplasm, bypassing the cumulus, the zona, the acrosome reaction and the fusion step entirely — which is why it works for severe male-factor infertility, and why it also bypasses the natural selection those barriers performed. Tubal ligation blocks the meeting; a damaged tube lets it happen but not the return journey."
-    }
-  ],
-  "views": [
-    {
-      "mode": "location",
-      "beat": 1,
-      "title": "In the ampulla, inside a day",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Where and when"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "ampulla",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "window",
-          "to": "ampulla",
-          "kind": "the two clocks must overlap here"
-        }
-      ],
-      "narration": "Fertilization happens in the ampulla, the wide outer third of the uterine tube. The oocyte lives about twenty-four hours after ovulation and sperm live about three days in the tract, so the fertile window opens before ovulation and closes just after it. Of two to three hundred million sperm ejaculated, a few hundred reach the ampulla. Remember the site, because a tube scarred by infection is where an ectopic pregnancy will lodge."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 2,
-      "title": "Capacitation — the sperm is not ready when it arrives",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Preparing the sperm"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "ampulla"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "capacitation",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "capacitation",
-          "to": "sperm",
-          "kind": "unmasks the acrosome and hyperactivates the tail"
-        }
-      ],
-      "narration": "An ejaculated sperm cannot fertilise. About seven hours in the female tract strip the glycoprotein coat and seminal plasma proteins from over the acrosome and remove cholesterol from its membrane. Two things become possible: the acrosome can now react, and the tail switches to a powerful whip-like beat. Capacitation is why sperm taken straight from semen fail in a dish, and it is a step IVF must reproduce."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 3,
-      "title": "Through the corona, onto ZP3",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The two coats"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "sperm"
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:sperm",
-          "path": [
-            "corona",
-            "zona",
-            "acrosome_reaction",
-            "fusion"
-          ],
-          "duration": 6
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "zona",
-          "intensity": 0.85
-        }
-      ],
-      "narration": "Two coats stand between the sperm and the oocyte. The corona radiata is a crowd of granulosa cells in hyaluronic acid, cleared by hyaluronidase and by the force of the hyperactivated tail. The zona pellucida beneath it is an acellular glycoprotein shell, and its ZP3 is the sperm receptor. Binding is species-specific, so ZP3 is what stops fertilisation across species."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 4,
-      "title": "The acrosome reaction and fusion",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Getting in"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "The two coats"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "acrosome_reaction",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "zona",
-          "to": "acrosome_reaction",
-          "kind": "ZP3 binding triggers it"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "acrosome_reaction",
-          "to": "fusion",
-          "kind": "opens the path to the oolemma"
-        },
-        {
-          "op": "PEEL_LAYER",
-          "layer": "organ",
-          "direction": "inward"
-        }
-      ],
-      "narration": "Binding to ZP3 makes the outer acrosomal membrane fuse with the sperm's plasma membrane and release its enzymes — acrosin above all — cutting a narrow path through the zona. The sperm crosses the perivitelline space, lies against the oolemma, and IZUMO1 on its surface binds JUNO on hers. The membranes fuse and the whole sperm enters: head, midpiece and tail. That fusion is the instant of fertilisation."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 5,
-      "title": "One sperm only — the two blocks",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "One sperm only"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "zona"
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "fast_block",
-            "cortical_reaction"
-          ],
-          "layout": "side-by-side"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "cortical_reaction",
-          "to": "zona",
-          "kind": "hardens it — the zona reaction"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "polyspermy_failure",
-          "intensity": 0.8
-        }
-      ],
-      "narration": "Fusion must happen once and only once. The fast block is electrical: the oolemma depolarises within seconds and no second sperm can fuse. The slow block is chemical: a calcium wave makes the cortical granules empty into the perivitelline space, ZP3 loses its receptor activity, ZP2 is cleaved, and the zona hardens. Both fail and you get dispermy — a triploid conceptus, usually 69,XXY, which is not viable and is the classic origin of a partial mole."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 6,
-      "title": "The oocyte finishes what it started",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The oocyte's answer"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "cortical_reaction"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "cortical_reaction",
-          "to": "meiosis_ii_completion",
-          "kind": "the same calcium wave releases the arrest"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "meiosis_ii_completion",
-          "intensity": 0.9
-        },
-        {
-          "op": "HIDE_STRUCTURE",
-          "target": "clinical"
-        }
-      ],
-      "narration": "The cell the sperm entered was still a secondary oocyte, held in metaphase II since ovulation. The calcium wave that closed the zona also releases that arrest, meiosis II completes, and the second polar body is extruded. One signal does both jobs. A mature ovum therefore exists for only a few minutes, inside a cell that is already fertilised."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 7,
-      "title": "Two pronuclei, then none",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The oocyte's answer"
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:zygote-formation",
-          "path": [
-            "meiosis_ii_completion",
-            "pronuclei",
-            "syngamy",
-            "results"
-          ],
-          "duration": 6
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "syngamy",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "sperm",
-          "to": "syngamy",
-          "kind": "supplies the centriole for the first spindle"
-        }
-      ],
-      "narration": "The sperm nucleus decondenses as protamines are swapped for histones and becomes the male pronucleus; the oocyte's becomes the female pronucleus. Each carries twenty-three chromosomes and each replicates its DNA separately. Then the membranes break down and the chromosomes meet on one spindle — syngamy — with no interphase nucleus in between, so the zygote goes straight into its first mitosis. The spindle is built on the sperm's centriole, because the oocyte discarded hers."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 8,
-      "title": "Four results, and where medicine uses them",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "results",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "clinical",
-          "to": "capacitation",
-          "kind": "reproduced in vitro"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "clinical",
-          "to": "fusion",
-          "kind": "bypassed by ICSI"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "clinical",
-          "to": "ampulla",
-          "kind": "the site an ectopic pregnancy occupies"
-        }
-      ],
-      "narration": "Fertilization restores the diploid number, determines chromosomal sex, mixes two genomes, and starts cleavage. The father decides the sex because the oocyte always carries an X. He does not pass on mitochondria — his are destroyed after entry, so mitochondrial disease is inherited maternally. Clinically, each barrier in this sequence is something a laboratory can now step around: ICSI injects one sperm past the cumulus, the zona, the acrosome reaction and the fusion step in a single move."
-    }
-  ],
-  "provenance": {
-    "author": "task",
-    "authored_at": "2026-08-28"
-  },
-  "gaps": [
-    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and no 3d option; the subject is an ordered process at cell scale. Only diagram is deferred.",
-    "Status is 'planned'. Sixteen regions, eight beats, ops and narration are complete, but no SVG artwork exists so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: an oocyte with corona radiata and zona pellucida drawn as separate coats, a sperm shown before and after the acrosome reaction, cortical granules under the oolemma, the second polar body in the perivitelline space, and two pronuclei approaching a single spindle. A small tube inset marking the ampulla is needed for beat 1.",
-    "The fertile-window figures are the standard teaching ones — oocyte about 24 hours, sperm about 3 days and sometimes 5, capacitation about 7 hours — and are narrated as approximations for that reason.",
-    "Beats 3 and 7 trace concept:sperm and concept:zygote-formation. In beat 3 the sperm is a drawn region but the moving subject is its passage through the coats, and in beat 7 the subject is the transformation itself, which has no object of its own.",
-    "Sex determination is named here as one of the four results, but SRY and gonadal differentiation belong to a later curriculum entry. The term is in match.terms so a highlighted 'SRY' finds this scene while nothing else covers it; that mapping should move when the genital system topic is authored.",
-    "Cleavage stops at the first mitotic division on purpose — 'Cleavage & morula' is the next curriculum structure and would otherwise be half-taught here without being claimable in covers[].",
-    "Overlap with the spermatogenesis and oogenesis scene is deliberate and bounded: that scene ends at the metaphase II arrest and this one begins by releasing it. The second polar body is narrated in both because a student meets it from both directions."
+  "terms": [
+   "fertilization",
+   "fertilisation",
+   "capacitation",
+   "hyperactivation",
+   "glycoprotein coat",
+   "seminal plasma proteins",
+   "ampulla",
+   "uterine tube",
+   "fallopian tube",
+   "isthmus",
+   "infundibulum",
+   "fimbriae",
+   "sperm transport",
+   "cervical mucus",
+   "corona radiata",
+   "cumulus oophorus",
+   "hyaluronidase",
+   "zona pellucida",
+   "ZP3",
+   "ZP2",
+   "sperm receptor",
+   "acrosome reaction",
+   "acrosin",
+   "oolemma",
+   "perivitelline space",
+   "membrane fusion",
+   "IZUMO1",
+   "JUNO",
+   "polyspermy",
+   "fast block",
+   "membrane depolarisation",
+   "slow block",
+   "cortical reaction",
+   "cortical granules",
+   "zona reaction",
+   "secondary oocyte",
+   "metaphase II arrest",
+   "completion of meiosis II",
+   "second polar body",
+   "male pronucleus",
+   "female pronucleus",
+   "pronuclei",
+   "syngamy",
+   "zygote",
+   "diploid",
+   "46 chromosomes",
+   "restoration of diploid number",
+   "sex determination",
+   "SRY",
+   "X-bearing sperm",
+   "Y-bearing sperm",
+   "paternal centriole",
+   "maternal mitochondria",
+   "mitochondrial inheritance",
+   "first cleavage",
+   "24 hours",
+   "72 hours",
+   "fertile window",
+   "ectopic pregnancy",
+   "tubal pregnancy",
+   "pelvic inflammatory disease",
+   "IVF",
+   "ICSI",
+   "hydatidiform mole",
+   "triploidy",
+   "dispermy"
   ]
+ },
+ "camera": {
+  "framing": "anterior"
+ },
+ "structures": [
+  {
+   "key": "ampulla",
+   "name": "Ampulla of the uterine tube",
+   "label": "Ampulla of the uterine tube",
+   "role": "context",
+   "group": "Where and when",
+   "color": "#b07aa1",
+   "opacity": 0.26,
+   "refs": {
+    "procedural": "fertilization#ampulla"
+   },
+   "terms": [
+    "ampulla",
+    "uterine tube",
+    "fallopian tube",
+    "infundibulum",
+    "fimbriae",
+    "isthmus",
+    "site of fertilization",
+    "ectopic pregnancy",
+    "tubal pregnancy",
+    "pelvic inflammatory disease"
+   ],
+   "narration": "Fertilization happens in the ampulla, the wide lateral third of the uterine tube, not in the uterus. Say the site and you have half the clinical medicine: a scarred tube after pelvic inflammatory disease still lets a thin sperm through but traps the far larger blastocyst, and the pregnancy implants where it stands. That is why tubal ectopic pregnancy is the commonest ectopic and why it presents as a ruptured ampulla with shoulder-tip pain.",
+   "narration_from": "sequence-version structure \"ampulla\" — carried across verbatim"
+  },
+  {
+   "key": "cumulus",
+   "name": "Cumulus oophorus",
+   "label": "Cumulus oophorus",
+   "role": "part",
+   "group": "The two coats",
+   "color": "#cf9fd8",
+   "opacity": 0.8,
+   "refs": {
+    "procedural": "fertilization#cumulus"
+   },
+   "terms": [],
+   "narration": "Outside the corona sits the cumulus oophorus, a looser crowd of the same granulosa cells, carried out of the follicle with the oocyte. The sperm crosses it first, and crossing it is work: hyaluronidase and the force of the hyperactivated tail, with many sperm clearing the way for the one that fuses."
+  },
+  {
+   "key": "corona",
+   "name": "Corona radiata",
+   "label": "Corona radiata",
+   "role": "part",
+   "group": "The two coats",
+   "color": "#ba68c8",
+   "opacity": 0.92,
+   "refs": {
+    "procedural": "fertilization#corona"
+   },
+   "terms": [
+    "corona radiata",
+    "cumulus oophorus",
+    "granulosa cells",
+    "hyaluronic acid",
+    "hyaluronidase",
+    "first barrier"
+   ],
+   "narration": "The first coat is a crowd of granulosa cells held together in hyaluronic acid, carried out of the follicle with the oocyte. Sperm push through it using hyaluronidase and the force of the hyperactivated tail. Many sperm are needed to clear the way even though only one will fuse, which is one reason a low count causes infertility long before it reaches zero.",
+   "narration_from": "sequence-version structure \"corona\" — carried across verbatim"
+  },
+  {
+   "key": "zona",
+   "name": "Zona pellucida",
+   "label": "Zona pellucida & ZP3",
+   "role": "part",
+   "group": "The two coats",
+   "color": "#e8c33d",
+   "opacity": 0.4,
+   "refs": {
+    "procedural": "fertilization#zona"
+   },
+   "terms": [
+    "zona pellucida",
+    "ZP3",
+    "ZP2",
+    "sperm receptor",
+    "species specificity",
+    "glycoprotein",
+    "second barrier",
+    "hatching"
+   ],
+   "narration": "The second coat is an acellular glycoprotein shell secreted by the oocyte itself. ZP3 is the sperm receptor and binding to it is species-specific, which is what stops cross-species fertilisation. ZP2 holds the reacted sperm while it drills through. The same zona keeps the early cleaving embryo together until the blastocyst hatches from it before implantation.",
+   "narration_from": "sequence-version structure \"zona\" — carried across verbatim"
+  },
+  {
+   "key": "zona_channel",
+   "name": "Channel through the zona pellucida",
+   "label": "Channel cut through the zona",
+   "role": "part",
+   "group": "Getting in",
+   "color": "#f5e6a0",
+   "opacity": 0.42,
+   "refs": {
+    "procedural": "fertilization#zona_channel@0.47"
+   },
+   "terms": [],
+   "narration": "The narrow path the acrosomal enzymes digest through the zona. It is drawn as the volume that was removed, and it is solved to be exactly wide enough for one head: when the zona reaction hardens the shell the path closes, and the second sperm is stopped by the absence of a way in rather than by instruction."
+  },
+  {
+   "key": "perivitelline",
+   "name": "Perivitelline space",
+   "label": "Perivitelline space",
+   "role": "part",
+   "group": "The oocyte",
+   "color": "#9fd8e8",
+   "opacity": 0.16,
+   "refs": {
+    "procedural": "fertilization#perivitelline"
+   },
+   "terms": [],
+   "narration": "The gap between the zona and the oolemma, about two micrometres. Nearly everything that has to sit in it is bigger than it is — a polar body is nine micrometres across and a sperm head five long — so each one lies in a local hollow of the oolemma. That is why the second polar body is visible here at all, and why the sperm must turn and lie flat before it can fuse."
+  },
+  {
+   "key": "oolemma",
+   "name": "Oolemma",
+   "label": "Oolemma",
+   "role": "part",
+   "group": "The oocyte",
+   "color": "#e06a5a",
+   "opacity": 0.5,
+   "refs": {
+    "procedural": "fertilization#oolemma"
+   },
+   "terms": [
+    "oolemma",
+    "membrane fusion",
+    "perivitelline space",
+    "IZUMO1",
+    "JUNO",
+    "equatorial segment",
+    "whole sperm enters",
+    "microvilli"
+   ],
+   "narration": "The sperm crosses the perivitelline space and lies flat against the oocyte membrane. IZUMO1 on the sperm binds JUNO on the oolemma and the two membranes fuse. Head, midpiece and tail all pass into the cytoplasm. The moment of fusion is the moment of fertilisation, and everything after it is the oocyte's response.",
+   "narration_from": "sequence-version structure \"fusion\" — carried across verbatim"
+  },
+  {
+   "key": "ooplasm",
+   "name": "Ooplasm",
+   "label": "Ooplasm",
+   "role": "part",
+   "group": "The oocyte",
+   "color": "#f0b9a4",
+   "opacity": 0.26,
+   "refs": {
+    "procedural": "fertilization#ooplasm"
+   },
+   "terms": [],
+   "narration": "The cytoplasm the whole sperm enters. Its stores of mRNA and protein carry the first cleavages before the embryonic genome switches on, and its mitochondria are the only ones the embryo keeps."
+  },
+  {
+   "key": "cortical_granules",
+   "name": "Cortical granules",
+   "label": "Cortical granules",
+   "role": "part",
+   "group": "One sperm only",
+   "color": "#1f9d6f",
+   "refs": {
+    "procedural": "fertilization#cortical_granules@0.52"
+   },
+   "terms": [
+    "cortical reaction",
+    "cortical granules",
+    "zona reaction",
+    "calcium wave",
+    "calcium oscillations",
+    "ZP3 inactivation",
+    "ZP2 cleavage",
+    "slow block",
+    "perivitelline space"
+   ],
+   "narration": "Fusion sets off a wave of calcium through the oocyte. Cortical granules lying under the membrane empty their enzymes into the perivitelline space, and those enzymes change the zona — ZP3 loses its receptor activity and ZP2 is cleaved, so the shell hardens and no further sperm can bind or penetrate. That is the zona reaction. The same calcium wave is what releases the metaphase II arrest, so one signal both closes the door and restarts the cell cycle.",
+   "narration_from": "sequence-version structure \"cortical_reaction\" — carried across verbatim"
+  },
+  {
+   "key": "granule_exudate",
+   "name": "Cortical granule contents in the perivitelline space",
+   "label": "Cortical granule contents — the zona reaction",
+   "role": "part",
+   "group": "One sperm only",
+   "color": "#8fd6a8",
+   "opacity": 0.16,
+   "refs": {
+    "procedural": "fertilization#granule_exudate"
+   },
+   "terms": [],
+   "narration": "What the cortical granules release into the perivitelline space. These enzymes are the zona reaction itself: ZP3 loses its receptor activity, ZP2 is cleaved, and the shell hardens — which is why the model draws the zona thicker and the channel shut from this point on."
+  },
+  {
+   "key": "depolarisation_wave",
+   "name": "Depolarisation of the oolemma",
+   "label": "Fast block — membrane depolarisation",
+   "role": "part",
+   "group": "One sperm only",
+   "color": "#16a085",
+   "opacity": 0.72,
+   "refs": {
+    "procedural": "fertilization#depolarisation_wave@0.6"
+   },
+   "terms": [
+    "fast block",
+    "polyspermy",
+    "membrane depolarisation",
+    "sodium influx",
+    "seconds"
+   ],
+   "narration": "Within seconds of fusion the oolemma depolarises and no second sperm can fuse with it. It is immediate but temporary, and it buys the time the slower chemical block needs.",
+   "narration_from": "sequence-version structure \"fast_block\" — carried across verbatim"
+  },
+  {
+   "key": "blocked_sperm",
+   "name": "A second spermatozoon, blocked at the zona",
+   "label": "When the block holds — and when it fails",
+   "role": "part",
+   "group": "One sperm only",
+   "color": "#8a97ad",
+   "opacity": 0.95,
+   "refs": {
+    "procedural": "fertilization#blocked_sperm"
+   },
+   "terms": [
+    "polyspermy",
+    "dispermy",
+    "triploidy",
+    "69 XXY",
+    "partial hydatidiform mole",
+    "non-viable"
+   ],
+   "narration": "Two sperm entering gives a triploid conceptus, usually 69,XXY. It is not viable. Dispermic fertilisation of a normal oocyte is the classic route to a partial hydatidiform mole, which is why the blocks to polyspermy are worth naming rather than skimming.",
+   "narration_from": "sequence-version structure \"polyspermy_failure\" — carried across verbatim"
+  },
+  {
+   "key": "glycoprotein_coat",
+   "name": "Glycoprotein coat over the acrosome",
+   "label": "Capacitation — the coat that must come off",
+   "role": "part",
+   "group": "Preparing the sperm",
+   "color": "#a8b4c8",
+   "opacity": 0.42,
+   "refs": {
+    "procedural": "fertilization#glycoprotein_coat@0.08"
+   },
+   "terms": [
+    "capacitation",
+    "glycoprotein coat",
+    "seminal plasma proteins",
+    "cholesterol efflux",
+    "hyperactivation",
+    "female genital tract",
+    "seven hours",
+    "IVF medium"
+   ],
+   "narration": "An ejaculated sperm cannot fertilise anything. Over about seven hours in the female tract it loses the glycoprotein coat and seminal plasma proteins covering its acrosome, and its membrane loses cholesterol. Only then can the acrosome react, and the tail changes to a whip-like hyperactivated beat that drives it through the cumulus. This is the step reproduced in a dish before IVF, and it is why sperm taken straight from semen will not fertilise in vitro.",
+   "narration_from": "sequence-version structure \"capacitation\" — carried across verbatim"
+  },
+  {
+   "key": "sperm_head",
+   "name": "Spermatozoon head — paternal chromatin",
+   "label": "Capacitated spermatozoon",
+   "role": "part",
+   "group": "Preparing the sperm",
+   "color": "#1f4e8d",
+   "refs": {
+    "procedural": "fertilization#sperm_head"
+   },
+   "terms": [
+    "spermatozoon",
+    "sperm head",
+    "acrosome",
+    "midpiece",
+    "tail",
+    "flagellum",
+    "paternal centriole",
+    "hyperactivated motility"
+   ],
+   "narration": "Head, midpiece and tail all enter the oocyte — the whole cell goes in, not just the nucleus. The head carries the haploid genome under the acrosomal cap, the midpiece carries the mitochondria that power the swim, and the neck carries the centriole. Two of those three matter after entry: the centriole is kept and builds the first cleavage spindle, and the paternal mitochondria are destroyed, which is why mitochondrial DNA is inherited only from the mother.",
+   "narration_from": "sequence-version structure \"sperm\" — carried across verbatim"
+  },
+  {
+   "key": "acrosome",
+   "name": "Acrosome",
+   "label": "Acrosome reaction",
+   "role": "part",
+   "group": "Getting in",
+   "color": "#7e57c2",
+   "opacity": 0.62,
+   "refs": {
+    "procedural": "fertilization#acrosome"
+   },
+   "terms": [
+    "acrosome reaction",
+    "ZP3 binding",
+    "acrosin",
+    "hyaluronidase",
+    "neuraminidase",
+    "exocytosis",
+    "lysosome",
+    "inner acrosomal membrane"
+   ],
+   "narration": "Binding to ZP3 triggers it. The outer acrosomal membrane fuses with the sperm's own plasma membrane at many points and the enzymes inside are released — acrosin, hyaluronidase, neuraminidase — digesting a narrow path through the zona. The acrosome is a modified lysosome and this is regulated exocytosis, not damage. A sperm that reacts too early is spent before it arrives.",
+   "narration_from": "sequence-version structure \"acrosome_reaction\" — carried across verbatim"
+  },
+  {
+   "key": "inner_acrosomal_membrane",
+   "name": "Inner acrosomal membrane",
+   "label": "Inner acrosomal membrane",
+   "role": "part",
+   "group": "Getting in",
+   "color": "#4a2f8f",
+   "refs": {
+    "procedural": "fertilization#inner_acrosomal_membrane@0.47"
+   },
+   "terms": [],
+   "narration": "Uncovered by the acrosome reaction. It is the face that does the drilling through the zona, and the face that comes to lie against the oolemma — but it is not the membrane that fuses. Fusion is between the oolemma and the sperm's own plasma membrane over the equatorial segment behind this one, which is where IZUMO1 sits. A sperm that reacted too early has spent this surface before it arrives."
+  },
+  {
+   "key": "sperm_midpiece",
+   "name": "Spermatozoon midpiece",
+   "label": "Midpiece",
+   "role": "part",
+   "group": "Preparing the sperm",
+   "color": "#2f6fae",
+   "refs": {
+    "procedural": "fertilization#sperm_midpiece"
+   },
+   "terms": [],
+   "narration": "The mitochondrial sheath that powers the swim. It enters the oocyte with the rest of the cell, and the paternal mitochondria in it are then destroyed — which is the whole of why mitochondrial DNA is maternally inherited."
+  },
+  {
+   "key": "sperm_tail",
+   "name": "Spermatozoon tail",
+   "label": "Tail — hyperactivated",
+   "role": "part",
+   "group": "Preparing the sperm",
+   "color": "#4f90cf",
+   "refs": {
+    "procedural": "fertilization#sperm_tail"
+   },
+   "terms": [],
+   "narration": "Before capacitation it beats in a low sinusoid; after it, a slow high-amplitude whip. That change is hyperactivation, it is what drives the head through the cumulus, and it enters the oocyte along with everything else."
+  },
+  {
+   "key": "centriole",
+   "name": "Paternal centriole",
+   "label": "Paternal centriole",
+   "role": "part",
+   "group": "The oocyte's answer",
+   "color": "#3b2f7a",
+   "refs": {
+    "procedural": "fertilization#centriole"
+   },
+   "terms": [],
+   "narration": "The oocyte discards its own centrioles during meiosis, so the one the sperm brings in its neck is the only one the zygote has. It builds the first cleavage spindle. A fertilised oocyte with no paternal centriole cannot divide."
+  },
+  {
+   "key": "first_polar_body",
+   "name": "First polar body",
+   "label": "First polar body",
+   "role": "part",
+   "group": "The oocyte's answer",
+   "color": "#c77ba8",
+   "refs": {
+    "procedural": "fertilization#first_polar_body"
+   },
+   "terms": [],
+   "narration": "Extruded at ovulation, before any of this. It is already sitting in the perivitelline space when the sperm arrives, which is how a second one appearing beside it marks the moment meiosis II finally completed."
+  },
+  {
+   "key": "second_polar_body",
+   "name": "Second polar body",
+   "label": "Meiosis II completes — second polar body",
+   "role": "part",
+   "group": "The oocyte's answer",
+   "color": "#e91e63",
+   "refs": {
+    "procedural": "fertilization#second_polar_body"
+   },
+   "terms": [
+    "secondary oocyte",
+    "metaphase II arrest",
+    "completion of meiosis II",
+    "second polar body",
+    "ootid",
+    "mature ovum",
+    "calcium oscillations"
+   ],
+   "narration": "The cell the sperm entered was a secondary oocyte, still arrested in metaphase II. The calcium wave releases that arrest and meiosis II finishes at last, throwing off the second polar body. So a mature ovum exists for only minutes, inside a cell that is already fertilised. This is the answer to the question of when oogenesis actually ends.",
+   "narration_from": "sequence-version structure \"meiosis_ii_completion\" — carried across verbatim"
+  },
+  {
+   "key": "oocyte_chromatin",
+   "name": "Maternal chromatin",
+   "label": "Maternal chromatin",
+   "role": "part",
+   "group": "The oocyte's answer",
+   "color": "#b3246b",
+   "refs": {
+    "procedural": "fertilization#oocyte_chromatin"
+   },
+   "terms": [],
+   "narration": "One object throughout: the metaphase II plate held in arrest, then the contents of the female pronucleus, then the maternal half of the chromosomes on the first spindle. It is drawn as one thing because it is one thing."
+  },
+  {
+   "key": "mii_spindle",
+   "name": "Metaphase II spindle",
+   "label": "Metaphase II spindle",
+   "role": "part",
+   "group": "The oocyte's answer",
+   "color": "#d94f8a",
+   "opacity": 0.8,
+   "refs": {
+    "procedural": "fertilization#mii_spindle@0.6"
+   },
+   "terms": [],
+   "narration": "The spindle the oocyte has been holding since ovulation, arrested in metaphase II. It is not waiting for the sperm as such — it is waiting for calcium."
+  },
+  {
+   "key": "male_pronucleus",
+   "name": "Male pronucleus",
+   "label": "Male & female pronuclei",
+   "role": "part",
+   "group": "The oocyte's answer",
+   "color": "#5a7fd6",
+   "opacity": 0.55,
+   "refs": {
+    "procedural": "fertilization#male_pronucleus@0.82"
+   },
+   "terms": [
+    "male pronucleus",
+    "female pronucleus",
+    "pronuclei",
+    "decondensation",
+    "protamine removal",
+    "DNA replication",
+    "23 chromosomes each",
+    "two pronuclei",
+    "IVF grading"
+   ],
+   "narration": "The sperm nucleus swells as protamines are stripped and replaced with histones, becoming the male pronucleus; the oocyte nucleus becomes the female pronucleus. Each holds twenty-three chromosomes and each replicates its DNA where it lies. Two visible pronuclei is the sign an IVF embryologist looks for the next morning to confirm normal fertilisation; one or three means the cycle has gone wrong.",
+   "narration_from": "sequence-version structure \"pronuclei\" — carried across verbatim"
+  },
+  {
+   "key": "female_pronucleus",
+   "name": "Female pronucleus",
+   "label": "Female pronucleus",
+   "role": "part",
+   "group": "The oocyte's answer",
+   "color": "#d65a9a",
+   "opacity": 0.55,
+   "refs": {
+    "procedural": "fertilization#female_pronucleus@0.82"
+   },
+   "terms": [],
+   "narration": "The oocyte's own nucleus after meiosis II completes. Like the male pronucleus it holds twenty-three chromosomes and replicates its DNA where it lies, and like the male pronucleus it exists for a few hours and then its membrane breaks down."
+  },
+  {
+   "key": "syngamy_spindle",
+   "name": "First cleavage spindle",
+   "label": "Syngamy — the zygote",
+   "role": "part",
+   "group": "The oocyte's answer",
+   "color": "#dccf9a",
+   "opacity": 0.62,
+   "refs": {
+    "procedural": "fertilization#syngamy_spindle"
+   },
+   "terms": [
+    "syngamy",
+    "zygote",
+    "diploid",
+    "46 chromosomes",
+    "restoration of the diploid number",
+    "first cleavage spindle",
+    "paternal centriole",
+    "first mitotic division",
+    "day 1"
+   ],
+   "narration": "The pronuclear membranes break down and the two sets of chromosomes meet on a single spindle. There is no interphase nucleus between them — the chromosomes go straight into the first mitosis. That spindle is built on the centriole the sperm brought, since the oocyte discarded its own. The diploid number is restored, and the new cell is a zygote.",
+   "narration_from": "sequence-version structure \"syngamy\" — carried across verbatim"
+  }
+ ],
+ "views": [
+  {
+   "mode": "location",
+   "beat": 1,
+   "title": "In the ampulla, inside a day",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ampulla"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cumulus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "corona"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "zona"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "perivitelline"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oolemma"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ooplasm"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.02
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Where and when"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "ampulla",
+     "intensity": 0.9
+    }
+   ],
+   "narration": "Fertilization happens in the ampulla, the wide outer third of the uterine tube. The oocyte lives about twenty-four hours after ovulation and sperm live about three days in the tract, so the fertile window opens before ovulation and closes just after it. Of two to three hundred million sperm ejaculated, a few hundred reach the ampulla. Remember the site, because a tube scarred by infection is where an ectopic pregnancy will lodge.",
+   "claims": [
+    {
+     "id": "B1-coat",
+     "claim": "the sperm that is about to arrive has not yet been capacitated: its glycoprotein coat is still on",
+     "measure": "coat.frac",
+     "op": "atLeast",
+     "value": 0.85
+    },
+    {
+     "id": "B1-outside",
+     "claim": "and it is still outside the coats, in the tubal fluid",
+     "measure": "sperm.minRadius",
+     "op": "near",
+     "value": 13.6247,
+     "tol": 0.3
+    },
+    {
+     "id": "B1-zona-shut",
+     "claim": "the zona is intact — nothing has cut a path through it",
+     "measure": "channel.open",
+     "op": "equals",
+     "value": false
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 2,
+   "title": "Capacitation — the sperm is not ready when it arrives",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "glycoprotein_coat"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sperm_head"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "acrosome"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sperm_midpiece"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sperm_tail"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "centriole"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.08
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Preparing the sperm"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "glycoprotein_coat",
+     "intensity": 0.9
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "sperm_tail",
+     "intensity": 0.7
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "glycoprotein_coat",
+     "to": "sperm_tail",
+     "kind": "shed in the tract — and only then can the tail hyperactivate"
+    }
+   ],
+   "narration": "An ejaculated sperm cannot fertilise. About seven hours in the female tract strip the glycoprotein coat and seminal plasma proteins from over the acrosome and remove cholesterol from its membrane. Two things become possible: the acrosome can now react, and the tail switches to a powerful whip-like beat. Capacitation is why sperm taken straight from semen fail in a dish, and it is a step IVF must reproduce.",
+   "claims": [
+    {
+     "id": "B2-coat-going",
+     "claim": "the coat is coming off: part shed, part still covering the acrosome",
+     "measure": "coat.frac",
+     "op": "between",
+     "value": [
+      0.1,
+      0.4
+     ]
+    },
+    {
+     "id": "B2-position",
+     "claim": "measured on the built head, it is in the cumulus, not yet at the zona",
+     "measure": "sperm.minRadius",
+     "op": "near",
+     "value": 12.6612,
+     "tol": 0.3
+    },
+    {
+     "id": "B2-acrosome-intact",
+     "claim": "the acrosome has not reacted — capacitation only makes it able to",
+     "measure": "acrosome.intactFrac",
+     "op": "atLeast",
+     "value": 0.97
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 3,
+   "title": "Through the corona, onto ZP3",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cumulus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "corona"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "zona"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "perivitelline"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oolemma"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ooplasm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sperm_head"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "acrosome"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sperm_midpiece"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sperm_tail"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.3
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "The two coats"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "zona",
+     "intensity": 0.85
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "corona",
+     "intensity": 0.7
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "corona",
+     "to": "zona",
+     "kind": "the first coat, then the second"
+    }
+   ],
+   "narration": "Two coats stand between the sperm and the oocyte. The corona radiata is a crowd of granulosa cells in hyaluronic acid, cleared by hyaluronidase and by the force of the hyperactivated tail. The zona pellucida beneath it is an acellular glycoprotein shell, and its ZP3 is the sperm receptor. Binding is species-specific, so ZP3 is what stops fertilisation across species.",
+   "claims": [
+    {
+     "id": "B3-on-zona",
+     "claim": "the built head is at the zona surface, past the corona",
+     "measure": "sperm.minRadius",
+     "op": "near",
+     "value": 6.7519,
+     "tol": 0.12
+    },
+    {
+     "id": "B3-no-channel",
+     "claim": "and nothing has yet been cut through the zona",
+     "measure": "channel.open",
+     "op": "equals",
+     "value": false
+    },
+    {
+     "id": "B3-acrosome-intact",
+     "claim": "the acrosome is still intact at the moment of ZP3 binding",
+     "measure": "acrosome.intactFrac",
+     "op": "atLeast",
+     "value": 0.97
+    },
+    {
+     "id": "B3-corona-outside",
+     "claim": "the corona lies outside the zona, so the sperm meets it first",
+     "measure": "coats.coronaOutsideZonaBy",
+     "op": "atLeast",
+     "value": 0.0
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 4,
+   "title": "The acrosome reaction and fusion",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "zona"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "zona_channel"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "perivitelline"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oolemma"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ooplasm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sperm_head"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "acrosome"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "inner_acrosomal_membrane"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sperm_midpiece"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sperm_tail"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.47
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Getting in"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "acrosome",
+     "intensity": 0.9
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "inner_acrosomal_membrane",
+     "intensity": 0.85
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "zona_channel",
+     "intensity": 0.8
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "acrosome",
+     "to": "zona_channel",
+     "kind": "ZP3 binding releases the enzymes that cut it"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "inner_acrosomal_membrane",
+     "to": "oolemma",
+     "kind": "it reaches the oolemma — but the membrane that fuses is the sperm's plasma membrane over the equatorial segment behind it"
+    }
+   ],
+   "narration": "Binding to ZP3 makes the outer acrosomal membrane fuse with the sperm's plasma membrane and release its enzymes — acrosin above all — cutting a narrow path through the zona. The sperm crosses the perivitelline space, lies against the oolemma, and IZUMO1 on its surface binds JUNO on hers. The membranes fuse and the whole sperm enters: head, midpiece and tail. That fusion is the instant of fertilisation.",
+   "claims": [
+    {
+     "id": "B4-in-zona",
+     "claim": "the built head is in the zona, its apex just emerging into the perivitelline space",
+     "measure": "sperm.minRadius",
+     "op": "near",
+     "value": 6.1,
+     "tol": 0.09
+    },
+    {
+     "id": "B4-channel",
+     "claim": "the channel is cut and at full width",
+     "measure": "channel.radius",
+     "op": "atLeast",
+     "value": 0.34
+    },
+    {
+     "id": "B4-admits",
+     "claim": "and it is wider than the built head by the solved clearance",
+     "measure": "channel.admitsHeadBy",
+     "op": "atLeast",
+     "value": 0.045
+    },
+    {
+     "id": "B4-iam",
+     "claim": "the inner acrosomal membrane is exposed — the face that drills through the zona",
+     "measure": "acrosome.iamExposed",
+     "op": "equals",
+     "value": true
+    },
+    {
+     "id": "B4-acrosome-gone",
+     "claim": "the acrosomal cap has vesiculated",
+     "measure": "acrosome.intactFrac",
+     "op": "atMost",
+     "value": 0.03
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 5,
+   "title": "One sperm only — the two blocks",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "zona"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "perivitelline"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oolemma"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "depolarisation_wave"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cortical_granules"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "granule_exudate"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sperm_head"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.6
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "One sperm only"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "depolarisation_wave",
+     "intensity": 0.9
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "cortical_granules",
+     "intensity": 0.85
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "cortical_granules",
+     "to": "zona",
+     "kind": "their contents harden it — the zona reaction"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "depolarisation_wave",
+     "to": "oolemma",
+     "kind": "the fast block sweeps it in seconds"
+    }
+   ],
+   "narration": "Fusion must happen once and only once. The fast block is electrical: the oolemma depolarises within seconds and no second sperm can fuse. The slow block is chemical: a calcium wave makes the cortical granules empty into the perivitelline space, ZP3 loses its receptor activity, ZP2 is cleaved, and the zona hardens.",
+   "claims": [
+    {
+     "id": "B5-depol",
+     "claim": "the depolarisation has swept most of the way round the oolemma",
+     "measure": "depol.frontFrac",
+     "op": "between",
+     "value": [
+      0.7,
+      0.95
+     ]
+    },
+    {
+     "id": "B5-granules",
+     "claim": "the cortical granules are part-way through emptying",
+     "measure": "granules.frac",
+     "op": "between",
+     "value": [
+      0.6,
+      0.88
+     ]
+    },
+    {
+     "id": "B5-exudate",
+     "claim": "and their contents are in the perivitelline space",
+     "measure": "granules.exudatePresent",
+     "op": "equals",
+     "value": true
+    },
+    {
+     "id": "B5-zona-hardening",
+     "claim": "the zona has begun to harden",
+     "measure": "zona.hardened",
+     "op": "between",
+     "value": [
+      0.08,
+      0.4
+     ]
+    },
+    {
+     "id": "B5-position",
+     "claim": "and the first sperm is already inside",
+     "measure": "sperm.minRadius",
+     "op": "near",
+     "value": 5.0098,
+     "tol": 0.18
+    }
+   ],
+   "pinned_ok": {
+    "cortical_granules": "pinned @0.52. Cortical granules exist AS GRANULES only before the cortical reaction, so there is no t = 0.60 population to draw. This beat is the one that names them and it shows the full pre-reaction population; what the granules become after release is the separate granule_exudate key, which this beat also shows, at the beat's own t."
+   }
+  },
+  {
+   "mode": "mechanism",
+   "beat": 6,
+   "title": "The second sperm has nothing left to use",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "zona"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "granule_exudate"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "blocked_sperm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "corona"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.6
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "blocked_sperm"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "blocked_sperm",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "blocked_sperm",
+     "to": "zona",
+     "kind": "it rests on the hardened shell and gets no further"
+    }
+   ],
+   "narration": "Both fail and you get dispermy — a triploid conceptus, usually 69,XXY, which is not viable and is the classic origin of a partial mole.",
+   "claims": [
+    {
+     "id": "B6-blocked-present",
+     "claim": "a second sperm has arrived",
+     "measure": "blocked.present",
+     "op": "equals",
+     "value": true
+    },
+    {
+     "id": "B6-blocked-out",
+     "claim": "and gets nowhere past the built zona surface: it rests on it",
+     "measure": "blocked.penetration",
+     "op": "atMost",
+     "value": 0.0
+    },
+    {
+     "id": "B6-closing",
+     "claim": "the channel the first sperm used is closing as the zona hardens",
+     "measure": "channel.radius",
+     "op": "between",
+     "value": [
+      0.1,
+      0.33
+     ]
+    },
+    {
+     "id": "B6-position",
+     "claim": "the first sperm, meanwhile, is already well inside",
+     "measure": "sperm.minRadius",
+     "op": "near",
+     "value": 5.0098,
+     "tol": 0.18
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 7,
+   "title": "The oocyte finishes what it started",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "perivitelline"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oolemma"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ooplasm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "first_polar_body"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "second_polar_body"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oocyte_chromatin"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "mii_spindle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "zona"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.73
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "The oocyte's answer"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "second_polar_body",
+     "intensity": 0.9
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "mii_spindle",
+     "intensity": 0.8
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "mii_spindle",
+     "to": "second_polar_body",
+     "kind": "the calcium wave releases the arrest, and the spindle throws it off"
+    }
+   ],
+   "narration": "The cell the sperm entered was still a secondary oocyte, held in metaphase II since ovulation. The calcium wave that closed the zona also releases that arrest, meiosis II completes, and the second polar body is extruded. One signal does both jobs. A mature ovum therefore exists for only a few minutes, inside a cell that is already fertilised.",
+   "claims": [
+    {
+     "id": "B7-pb2",
+     "claim": "the second polar body is extruded, at full size",
+     "measure": "pb2.diameter",
+     "op": "near",
+     "value": 0.9144,
+     "tol": 0.02
+    },
+    {
+     "id": "B7-pb2-in-pv",
+     "claim": "and lies in the perivitelline space — outside the oolemma, inside the zona",
+     "measure": "pb2.inPerivitelline",
+     "op": "equals",
+     "value": true
+    },
+    {
+     "id": "B7-pb2-clear",
+     "claim": "clear of the built oolemma by a real margin, not a hair",
+     "measure": "pb2.outsideOolemmaBy",
+     "op": "atLeast",
+     "value": 0.05
+    },
+    {
+     "id": "B7-granules-spent",
+     "claim": "the cortical granules have emptied",
+     "measure": "granules.frac",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "B7-position",
+     "claim": "measured on the built head, the sperm nucleus is well inside the ooplasm",
+     "measure": "sperm.minRadius",
+     "op": "near",
+     "value": 2.6992,
+     "tol": 0.2
+    }
+   ],
+   "pinned_ok": {
+    "mii_spindle": "pinned @0.60. The metaphase II spindle exists only while the arrest holds, and this beat is about the arrest being released, so at the beat's own t = 0.73 there is nothing left to draw. It is shown at 0.60 — the spindle as it was, beside the polar body it has just thrown off — because the comparison is the teaching point and is impossible at one t."
+   }
+  },
+  {
+   "mode": "mechanism",
+   "beat": 8,
+   "title": "Two pronuclei, then none",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oolemma"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ooplasm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oocyte_chromatin"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "male_pronucleus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "female_pronucleus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sperm_head"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "centriole"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.82
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "The oocyte's answer"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "male_pronucleus",
+     "intensity": 0.9
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "female_pronucleus",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "sperm_head",
+     "to": "male_pronucleus",
+     "kind": "the sperm nucleus decondenses into it"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "oocyte_chromatin",
+     "to": "female_pronucleus",
+     "kind": "and the oocyte nucleus into the other"
+    }
+   ],
+   "narration": "The sperm nucleus decondenses as protamines are swapped for histones and becomes the male pronucleus; the oocyte's becomes the female pronucleus. Each carries twenty-three chromosomes and each replicates its DNA separately. Then the membranes break down and the chromosomes meet on one spindle — syngamy — with no interphase nucleus in between, so the zygote goes straight into its first mitosis. The spindle is built on the sperm's centriole, because the oocyte discarded hers.",
+   "claims": [
+    {
+     "id": "B8-two",
+     "claim": "two pronuclei exist at this instant",
+     "measure": "pronuclei.count",
+     "op": "equals",
+     "value": 2
+    },
+    {
+     "id": "B8-no-spindle",
+     "claim": "and no spindle yet",
+     "measure": "spindle.present",
+     "op": "equals",
+     "value": false
+    },
+    {
+     "id": "B8-apart",
+     "claim": "the two chromatin masses are still well apart, measured on built geometry",
+     "measure": "pronuclei.separationFrac",
+     "op": "near",
+     "value": 2.7026,
+     "tol": 0.3
+    },
+    {
+     "id": "B8-position",
+     "claim": "and the paternal set has not yet reached the spindle equator",
+     "measure": "sperm.minRadius",
+     "op": "near",
+     "value": 1.828,
+     "tol": 0.24
+    }
+   ]
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 9,
+   "title": "Four results, and where medicine uses them",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oolemma"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ooplasm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oocyte_chromatin"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "syngamy_spindle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "centriole"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sperm_head"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 1.0
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "The oocyte's answer"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "syngamy_spindle",
+     "intensity": 0.9
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "sperm_head",
+     "intensity": 0.8
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "oocyte_chromatin",
+     "intensity": 0.8
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "centriole",
+     "to": "syngamy_spindle",
+     "kind": "the sperm supplies the centriole the spindle is built on"
+    }
+   ],
+   "narration": "Fertilization restores the diploid number, determines chromosomal sex, mixes two genomes, and starts cleavage. The father decides the sex because the oocyte always carries an X. He does not pass on mitochondria — his are destroyed after entry, so mitochondrial disease is inherited maternally. Clinically, each barrier in this sequence is something a laboratory can now step around: ICSI injects one sperm past the cumulus, the zona, the acrosome reaction and the fusion step in a single move.",
+   "claims": [
+    {
+     "id": "B9-none",
+     "claim": "the pronuclear membranes have broken down: no pronuclei remain",
+     "measure": "pronuclei.count",
+     "op": "equals",
+     "value": 0
+    },
+    {
+     "id": "B9-spindle",
+     "claim": "one spindle exists",
+     "measure": "spindle.present",
+     "op": "equals",
+     "value": true
+    },
+    {
+     "id": "B9-on-equator",
+     "claim": "and both chromatin masses lie on its equatorial plane",
+     "measure": "spindle.chromatinOffEquatorFrac",
+     "op": "atMost",
+     "value": 0.35
+    },
+    {
+     "id": "B9-in-barrel",
+     "claim": "every chromosome is inside the spindle barrel, not beside it",
+     "measure": "spindle.chromatinOffAxisFrac",
+     "op": "atMost",
+     "value": 1.0
+    },
+    {
+     "id": "B9-tellable-apart",
+     "claim": "and the two sets are far enough apart ON THIS BEAT’S OWN CAMERA to be told apart",
+     "measure": "spindle.plateSeparation.anterior",
+     "op": "atLeast",
+     "value": 0.9
+    },
+    {
+     "id": "B9-centriole",
+     "claim": "the spindle is built on the paternal centriole, which sits at a pole",
+     "measure": "centriole.atPoleFrac",
+     "op": "atMost",
+     "value": 0.15
+    },
+    {
+     "id": "B9-coalesced",
+     "claim": "measured on built geometry, the two sets have come together on one plate",
+     "measure": "pronuclei.separationFrac",
+     "op": "near",
+     "value": 0.8256,
+     "tol": 0.1
+    }
+   ]
+  }
+ ],
+ "visibility_waivers": [
+  {
+   "view": 2,
+   "key": "sperm_head",
+   "why": "ENCLOSED BY THE SUBJECT OF THIS BEAT. The glycoprotein coat is a closed shell over the head, so no camera can see the head while the coat is on — which is the beat's whole point: an ejaculated sperm cannot fertilise because this is in the way. The head is shown at full size, uncovered, in beat 4, where it measures 2.98% of the frame."
+  },
+  {
+   "view": 2,
+   "key": "acrosome",
+   "why": "Same shell, same reason: the acrosomal cap lies under the glycoprotein coat until capacitation removes it. Beat 4 shows the acrosome reacting, where it measures 3.04%."
+  },
+  {
+   "view": 2,
+   "key": "__framing__",
+   "why": "THE SUBJECT IS A FLAGELLUM. A 45 µm tail 0.5 µm thick cannot paint 8% of any frame that contains it, whatever the camera does — and this beat must contain it, because hyperactivation of the tail is half of what capacitation means. The bounding box fills 12.2%, which is what a 3:1 object gives in a 4:3 frame when it is correctly fitted, so the camera is where it should be and the threshold is measuring thickness rather than framing."
+  },
+  {
+   "view": 3,
+   "key": "sperm_head",
+   "why": "A SCALE PROBLEM, NOT AN OCCLUSION ONE. This beat's camera must contain BOTH coats — the cumulus mass is 280 µm across — and a 5 µm sperm head is 1/56th of that in each dimension. It is shown at its own scale in beats 2 and 4. The alternative, framing on the head, would lose the two coats this beat exists to teach."
+  },
+  {
+   "view": 3,
+   "key": "acrosome",
+   "why": "Same frame, same arithmetic. The acrosome is the subject of beat 4, at 3.04% of frame."
+  },
+  {
+   "view": 3,
+   "key": "sperm_midpiece",
+   "why": "Same frame, same arithmetic. It is shown in beat 2 at 0.27% and in beat 4 at 1.91%."
+  }
+ ],
+ "provenance": {
+  "author": "task",
+  "authored_at": "2026-08-28",
+  "reauthored_at": "2026-10-01",
+  "reauthored_by": "model3d BUILD task",
+  "reauthor_note": "Converted from the SVG sequence engine to the procedural provider, per the queue item's note. The sixteen sequence 'structures' were teaching BEATS with no geometry; they are replaced by the 26 parts models3d/fertilization.js actually builds, and every one of their narrations is carried across VERBATIM onto the part or view that now teaches it. The three that have no geometry and cannot have any - the fertile window, the four results, and the clinical uses - are in deferred_beats[] with their full text. No narration was edited, shortened or rewritten.",
+  "corrected_at": "2026-10-01T20:52:00Z",
+  "corrected_by": "the model3d REVIEW task, 2026-10-01 20:35Z slot (review round 2)",
+  "correction_note": "BEAT 4 TAUGHT THE WRONG FUSION MEMBRANE, in three places: the B4-iam claim gloss, the SHOW_RELATIONSHIP kind from inner_acrosomal_membrane to oolemma, and the inner_acrosomal_membrane narration. All three said the INNER ACROSOMAL MEMBRANE is the surface that fuses with the oolemma. It is not, and the distinction is examined: the inner acrosomal membrane is the leading face that penetrates the zona, while fusion is between the oolemma and the sperm's PLASMA membrane over the EQUATORIAL (post-acrosomal) SEGMENT, where IZUMO1 is localised. The scene already had this right in the oolemma structure, whose terms[] list 'equatorial segment' and 'IZUMO1' and whose narration is carried verbatim — so the scene contradicted itself, and the wrong version was the one HIGHLIGHTED, LABELLED and MACHINE-CHECKED at beat 4 while the right one sat in a structure the beat does not point at. All three texts corrected. NO GEOMETRY CHANGED: the model never asserted this (grep of models3d/fertilization.js finds none of the three phrasings), so no re-render was needed and none was done. NO MEASURE CHANGED: B4-iam still measures acrosome.iamExposed equals true, which was correct all along and still passes — only the English on it was wrong, which is why every gate passed with the error in place. NO CARRIED NARRATION TOUCHED: of the three, only the structure narration is narration, and it is build-task-authored — it carries no narration_from field, unlike every narration carried across from the sequence version — so the scene's standing rule that no carried narration is edited, shortened or rewritten is intact."
+ },
+ "gaps": [
+  "RE-AUTHORED FROM THE SVG SEQUENCE ENGINE, 2026-10-01. The sixteen sequence 'structures' were teaching beats with no geometry (‘The fertile window’, ‘What fertilization achieves’, ‘Where this is used clinically’ and so on). They are replaced by the 26 parts models3d/fertilization.js builds, and every one of their narrations is carried across VERBATIM — onto the structure that now teaches it, or, for the three that have no geometry and can have none, into deferred_beats[] in full. No narration was edited, shortened or rewritten anywhere in this scene.",
+  "MODE CHANGED from 'sequence' to '3d_anatomy'. CURRICULUM.json lists preferred_modes [sequence, diagram] for this structure and the course is marked suspended-pending-SVG-artwork; the queue overrode that on 2026-09-10 (policy_no_mesh_means_procedural) and the item's own note says 'sperm-oocyte: spheres and a zona pellucida'. 'sequence' and 'diagram' stay in deferred_modes. The curriculum's declared view list for Fertilization is ['mechanism'] and eight of the nine beats are mechanism, so coverage.mjs counts this structure exactly as it did before.",
+  "LATERALITY IS UNPROVEN AND THE MODEL CANNOT PROVE IT. RENDER-STANDARD, 'A DECLARED AXIS IS NOT A PROVED ONE, AND A SYMMETRIC MODEL CANNOT PROVE ITS OWN': this model is procedural, in its own units, with no mesh-anchored right/left pair in it and no chiral content at all — an oocyte is a sphere and a tube segment is a cylinder. It declares +x as the APPROACH AXIS (the direction the sperm comes from) and NOT as a body side. One phrase in the scene names a side: the ampulla structure's narration, carried across verbatim from the sequence version, calls it 'the wide lateral third of the uterine tube'. That 'lateral' denotes position ALONG the tube — the third furthest from the uterus, nearest the ovary — and not left versus right of the body, and nothing in the geometry stands for either. It is recorded here so the phrase is not mistaken for a handedness claim the model could witness: the model draws ONE tube segment and has no second side to be lateral to. (An earlier draft of this note claimed the word had been changed to 'outer'. It had not; the note was wrong and is corrected here. Checked word for word afterwards: every word of the sequence version's narration is present in this scene, nothing was edited, and the only reshaping is that beat 5's narration is split across beats 5 and 6 at a sentence boundary, reassembling exactly.)",
+  "MOLECULES ARE NARRATION, NOT GEOMETRY. ZP3, ZP2, IZUMO1, JUNO, acrosin, hyaluronidase and the calcium wave have no form at 100 micrometres and a drawn 'receptor' would be an invention. The geometry carries the EVENTS those molecules cause — a coat shed, a cap vesiculated, a channel cut and sealed, a membrane crossed, granules emptied, an arrest released — and the molecules stay in the words, where they are right.",
+  "TWO DELIBERATE DEPARTURES FROM TRUE SCALE OR TRUE FORM, BOTH DECLARED IN THE MODEL'S OWN HEADER. (1) The paternal centriole is drawn at 4x life. At its real 0.5 x 0.2 micrometres it measured 0.002% of the frame in the beat whose narration points straight at it, and a structure a beat points at and nobody can see is the defect the visibility walk exists to find. (2) At syngamy the two chromosome sets are drawn as two groups either side of the spindle axis, and five per set rather than twenty-three. On a real first cleavage plate the 46 chromosomes INTERMINGLE and no microscope could tell which came from which parent; the separation is a teaching device for the one thing the beat exists to say, that two haploid sets of twenty-three meet. The numbers are in the narration, where they are right. Nothing else in the model is off true scale.",
+  "THE CLOCK IS THE ORDER OF EVENTS, NOT REAL TIME, and the model says so. Capacitation takes about seven hours, the swim about thirty minutes, the acrosome reaction seconds, the fast block seconds, syngamy about twenty hours. A t linear in hours would spend nine-tenths of the picture on two stages. t gives each stage room to be seen; the real durations are narrated as words and the model makes no claim about them. No beat claim measures a duration.",
+  "BEAT 7 IS A CLOSE-UP ON THE CORTEX and a reviewer should decide whether it should be. It frames on the second polar body and the metaphase II spindle, which is the only camera at which either is visible: at whole-cell scale the polar body measures 0.222% of the frame against the 0.30% a pointed-at structure needs, and the spindle 0.063%. The frame now includes the zona above and the oolemma below, so the body is visibly IN the perivitelline space rather than floating on a red landscape — which is what the first version looked like, and was the reason this note exists. The alternative is two beats, one close and one at cell scale, and that was not taken because the cell-scale half would have nothing a student could see.",
+  "THE CORTICAL GRANULES AND THE METAPHASE II SPINDLE ARE PINNED, with reasons declared in views[].pinned_ok where check-beat-claims.mjs prints them. Both exist only before the event their beat is about: granules AS GRANULES only before the cortical reaction, the MII spindle only while the arrest holds. Six other keys are pinned at the t of the one beat that shows them (glycoprotein_coat, zona_channel, inner_acrosomal_membrane, depolarisation_wave and the two pronuclear envelopes) and in each case the pin equals that beat's own t, so nothing is drawn at an instant its beat is not at. The pins exist because viz3d.js mounts every structure at its ref's own t — 1 with no @t — and restages only the ones that ARRIVED (viz3d.js restage(), 'Only structures that ARRIVED are restaged'): an unpinned key that does not exist at t = 1 would come back reason:'none' on the first mount and never be restaged.",
+  "SIX VISIBILITY WAIVERS, all of one of two shapes, all in visibility_waivers[] with their arguments. Beat 2: the sperm head and acrosome are ENCLOSED by the glycoprotein coat, which is the beat's whole point, and they are shown uncovered in beat 4 at 2.98% and 3.04% of frame; and that beat's subject is a flagellum, 45 micrometres long and 0.5 thick, which cannot paint 8% of any frame containing it. Beat 3: the camera must contain both coats — the cumulus is 280 micrometres across — and a 5 micrometre sperm head is 1/56th of that in each dimension; it is shown at its own scale in beats 2 and 4.",
+  "NOT REGENERATED BY THIS RUN: scenes/index.json and COVERAGE.md. This run holds 2 of the corpus's 155 scenes in its container, and build-scene-index.mjs over a partial corpus would erase the other 153. Noted as a finding rather than a choice: index.json's mtime is already older than four scenes edited after it (primitive-gut-tube, body-cavity-coelom, lateral-folding, cranio-caudal-folding), so the index is stale in the repo independently of anything this run did. Coverage itself does not move — the curriculum declares ['mechanism'] for this structure and the scene had mechanism views before and after — but the index's record of this scene's mode, status and view count is now out of date and something that holds the whole corpus needs to rebuild it.",
+  "ONE VALIDATOR WARNING, LEFT STANDING DELIBERATELY. validate-scenes.mjs reports that beat 9 highlights 'sperm_head', which sits in the 'Preparing the sperm' group and therefore outside that beat's ISOLATE_REGION. It is correct that it does, and the narration does ask for it: by beat 9 'sperm_head' is no longer a sperm head, it is the paternal chromatin, and it is half of the metaphase plate the beat is about. The alternative — a second key for the same continuous object so it could change groups — would break the one thing that key exists to carry, that the chromatin the sperm brought and the chromosomes on the spindle are one object followed through."
+ ],
+ "deferred_beats": [
+  {
+   "was_structure": "window",
+   "label": "The fertile window",
+   "terms": [
+    "fertile window",
+    "24 hours",
+    "72 hours",
+    "oocyte viability",
+    "sperm survival",
+    "ovulation timing",
+    "day 14"
+   ],
+   "narration": "Two clocks must overlap. The secondary oocyte survives about twenty-four hours after ovulation; sperm survive about three days in the female tract, sometimes five. So the fertile window opens days before ovulation and shuts about a day after. Sperm reach the ampulla within thirty minutes to a few hours, but only a few hundred of the two to three hundred million ejaculated ever arrive.",
+   "why_not_a_view": "It has no geometry and cannot have any. RENDER-STANDARD: a beat that renders the same frame as the one before it is text, not a view, and this one would — there is nothing for the model to draw. The words are kept here in full because the narration is the best content in this corpus and none of it is deleted; the teaching still reaches the student through the narration of beat 1, which carries the same material.",
+   "belongs_in": "beat 1"
+  },
+  {
+   "was_structure": "results",
+   "label": "What fertilization achieves",
+   "terms": [
+    "restoration of diploid number",
+    "sex determination",
+    "SRY",
+    "X-bearing sperm",
+    "Y-bearing sperm",
+    "genetic variation",
+    "initiation of cleavage",
+    "maternal mitochondria",
+    "mitochondrial inheritance"
+   ],
+   "narration": "Four results, and they are asked as a list. It restores the diploid number. It determines chromosomal sex — the oocyte always carries an X, so an X-bearing or Y-bearing sperm decides it, and SRY on the Y then directs the gonad. It mixes two genomes, adding to the variation meiosis already created. And it starts cleavage: the zygote divides within about a day while still travelling down the tube. Note what is not inherited from the father — the mitochondria, which are destroyed after entry.",
+   "why_not_a_view": "It has no geometry and cannot have any. RENDER-STANDARD: a beat that renders the same frame as the one before it is text, not a view, and this one would — there is nothing for the model to draw. The words are kept here in full because the narration is the best content in this corpus and none of it is deleted; the teaching still reaches the student through the narration of beat 8, which carries the same material.",
+   "belongs_in": "beat 8"
+  },
+  {
+   "was_structure": "clinical",
+   "label": "Where this is used clinically",
+   "terms": [
+    "IVF",
+    "in vitro fertilization",
+    "ICSI",
+    "intracytoplasmic sperm injection",
+    "capacitation in vitro",
+    "zona drilling",
+    "ectopic pregnancy",
+    "emergency contraception",
+    "tubal ligation"
+   ],
+   "narration": "Every step in this sequence is a step assisted reproduction can substitute for. Capacitation is done in the dish. In ICSI a single sperm is injected straight into the cytoplasm, bypassing the cumulus, the zona, the acrosome reaction and the fusion step entirely — which is why it works for severe male-factor infertility, and why it also bypasses the natural selection those barriers performed. Tubal ligation blocks the meeting; a damaged tube lets it happen but not the return journey.",
+   "why_not_a_view": "It has no geometry and cannot have any. RENDER-STANDARD: a beat that renders the same frame as the one before it is text, not a view, and this one would — there is nothing for the model to draw. The words are kept here in full because the narration is the best content in this corpus and none of it is deleted; the teaching still reaches the student through the narration of beat 8, which carries the same material.",
+   "belongs_in": "beat 8"
+  }
+ ]
 }

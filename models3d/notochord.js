@@ -1,0 +1,3385 @@
+/* MedBank · viz-training · THE NOTOCHORD, days 16 to 20, as one continuous function of t
+ *
+ * Registers itself as MB3D_MODELS['notochord'] — LAYERS, build(t, opts), FULL, VARIANTS — which is
+ * the whole contract the procedural adapter in viz3d.js needs.
+ *
+ * WHAT THIS SCENE IS ABOUT, AND WHY IT IS A PROCESS RATHER THAN AN OBJECT. The examinable sentence
+ * is "process, canal, plate, rod" — four stages in order — and the commonest wrong answer in the
+ * topic is a notochord that was a solid rod from the start. A student who pictures a rod on day 16
+ * cannot explain how the notochord ever came to be part of the gut roof, and so cannot explain the
+ * neurenteric canal, split notochord syndrome or the neurenteric cyst. So the model's whole job is to
+ * make the HOLLOW-to-SOLID transformation visible, and the one thing it must not do is draw four
+ * separate pictures that happen to sit next to one another.
+ *
+ * THE SHAPE OF THE ANSWER: ALL FOUR STAGES EXIST AT ONCE, ARRANGED ALONG THE AXIS. The notochordal
+ * process grows cranially from the primitive pit and reaches the prechordal plate about day 18; the
+ * canal → plate → rod transformation then sweeps CAUDALLY from the cranial end, because the cranial
+ * material is the oldest. So at any instant in the middle of the window the midline carries, from
+ * head to tail: definitive rod, then notochordal plate, then hollow process, then the node and pit.
+ * That is what the texts describe and it is the single most useful picture in the topic — one frame
+ * in which the four stages of a sequence are four PLACES on one structure. The fronts are what move;
+ * the stages are where they are. `brkV(t)` and `detV(t)` are those two fronts and they are the only
+ * things in this file that decide which key a given station belongs to.
+ *
+ * SO THE WHOLE AXIS IS ONE SWEEP, NOT FOUR SOLIDS. Sections 5 and 10 build the notochord as a single
+ * swept superellipse from the node to the tip, whose section SHAPE is a function of v and t — a
+ * circle with a lumen where the tube is still hollow, a flat near-rectangle inside the gut roof where
+ * the plate is, a smaller circle where the rod has detached — and whose semi-WIDTH is solved at every
+ * station from the conservation below. `process`, `plate` and `definitive` are three consecutive
+ * v-ranges of that one sweep. Nothing can drift out of agreement with anything else because there is
+ * only one thing.
+ *
+ * WHAT IS SOLVED RATHER THAN TUNED (RENDER-STANDARD §3, "solve the parameter that decides the
+ * examinable relation"). The relation a student is marked wrong for is that the rod is the SAME
+ * MATERIAL as the tube: the cells are conserved and only their arrangement changes. So the
+ * cross-sectional AREA of notochordal cells is the conserved quantity, and it is carried across both
+ * fronts and through both transitions:
+ *
+ *     A0 = pi * (R_PROC^2 - R_IN^2)       the wall of the hollow process — TYPED, from an outer
+ *                                         half-width of 0.30 and a wall of 0.10
+ *     secArea(a, b, n) = 4ab * c(n)       the area of the superellipse |x/a|^n + |z/b|^n = 1
+ *     a(v, t) = A0 / (4 b(v,t) c(n(v,t))) SOLVED at every station: given the height and the
+ *                                         squareness the stage calls for, the width is whatever
+ *                                         holds the same area
+ *
+ * Two consequences fall out rather than being typed, and both are teaching points: the plate is
+ * WIDER than the tube, because it is flat; the rod is NARROWER than the tube, because it has lost
+ * its lumen. Nothing in this file states either — they are measured off the built triangles in
+ * acceptance rows C, D and E. The perturbation that proves the measure reads the model is
+ * `_setConst('W_WALL', …)`: a thinner wall moves A0, and the plate's width and the rod's radius move
+ * with it. The declared NEGATIVE CONTROL is `_setConst('H_VENT', …)`: it moves the plate's width —
+ * the plate lies in the endoderm and its height is the endoderm's thickness — and must leave the
+ * rod's radius exactly where it was, because the rod has left the endoderm behind. A perturbation
+ * that moved both would mean the two were being computed from one another.
+ *
+ * THE SECOND SOLVE IS INDUCTION, because "no notochord, no neural plate" is the other examined
+ * sentence. The neural plate is not drawn where it looks right; it is drawn where the signal from the
+ * axis is above threshold. `npHalf()` solves the half-width in closed form from a declared diffusion
+ * length and threshold against the distance from the axial surface, and the plate's cranio-caudal
+ * extent is the axis's own extent one induction lag ago — so as node regression extends the axis
+ * caudally the plate extends with it, and acceptance row H measures, off the built geometry, that the
+ * plate stops where the notochord stops. The `failed` variant sets the source strength to zero and
+ * the same builder returns a flat strip of ordinary ectoderm: the negative control is a build, not an
+ * argument.
+ *
+ * THE THIRD IS THE ADULT FATE, and its clock is honestly a different one — see gap 2. Inside a
+ * vertebral body the notochord disappears; between two bodies it persists as the nucleus pulposus.
+ * That is a conservation too, so `nucleusR(t)` is solved by bisection against the volume budget:
+ * whatever regresses out of the body segments has to appear in the discs.
+ *
+ * SCALE AND AXES, AND THE AGREEMENT WITH THE SIBLING SCENE. One unit is 100 µm, the same as
+ * primitive-streak.js and trilaminar-disc-3-germ-layers.js, and every dimension of the disc itself —
+ * DISC_L, W_MAX, DOME, H_ECTO, H_VENT, H_MESO, H_FUSE, the membranes, the streak, the somite, the
+ * somite clock — is the same NUMBER as in trilaminar-disc-3-germ-layers.js, deliberately, so that a
+ * student who meets both scenes meets one embryo. That is not a comment: the render harness loads
+ * BOTH model files into one page and asserts the two `constants()` agree, which also exercises the
+ * IIFE rule, since two models in one page is exactly the case that breaks a model written at top
+ * level.
+ *
+ *   AXES: RIGHT = -x, LEFT = +x, CRANIAL = +y, VENTRAL = +z, DORSAL = -z.
+ *
+ * AND THE AXES ARE DECLARED, NOT PROVED. RENDER-STANDARD's rule "A DECLARED AXIS IS NOT A PROVED
+ * ONE, AND A SYMMETRIC MODEL CANNOT PROVE ITS OWN" applies here in full: every structure this file
+ * builds is mirror-symmetric in x except the disordered sclerotome of the `failed` variant, whose
+ * asymmetry is a jitter and not a landmark. There is no right/left content in the subject at all, so
+ * the convention cannot be witnessed from inside, and NO narration in this scene names a side.
+ * Acceptance row T asserts the symmetry rather than asserting the convention, which is the honest
+ * version of the check: it proves the model has no chirality to get wrong.
+ *
+ * GAPS, STATED HERE AS WELL AS IN THE SCENE, because a reader of the model should not have to open
+ * the scene to find them:
+ *
+ *   1. THE EMBRYO DOES NOT ELONGATE. The disc is 1 mm long at every t. In life it lengthens greatly
+ *      between days 20 and 24, which is how twenty-one somite pairs fit. So the somite clock predicts
+ *      more pairs than there is room to draw; `somiteOverrun(t)` reports the difference rather than
+ *      hiding it, and acceptance row K pins it at its measured size so it cannot grow unnoticed.
+ *   2. THE ADULT VARIANT'S t IS A PROGRESS PARAMETER, NOT A DAY. Notochordal regression inside the
+ *      vertebral bodies runs over the fetal period and the first years of life, not over days 20-24.
+ *      The `adult` build reuses t as the fraction of that regression completed — `regressFrac(t)` —
+ *      and the day labels do not apply to it. It is also at a different SCALE: a vertebral body here
+ *      is 150 units, i.e. 15 mm, so no beat may show adult and embryonic structures together. The
+ *      render harness asserts off the scene's own ops that none does.
+ *   3. CHORDOMA IS DRAWN ON THE EMBRYONIC AXIS, NOT ON AN ADULT SKELETON. The teaching point is why
+ *      a midline tumour appears at the clivus and at the sacrum — because the notochord ran between
+ *      them — so the two masses are drawn at the notochord's own two ends. The skull base and the
+ *      sacrum are not built, and the narration says so.
+ *   4. THE DISAGREEMENT WITH THE SIBLING MODEL'S TIMING, found rather than assumed.
+ *      trilaminar-disc-3-germ-layers.js carries DAY_NCH_FULL = 20.0 and uses it for the notochord's
+ *      SPAN, so its crude context rod only reaches the prechordal plate on day 20. Here the TIP
+ *      reaches the prechordal plate on day 18 and the DEFINITIVE rod is complete on day 20, which is
+ *      the textbook account of two different events. The dimensions agree; this one timing does not,
+ *      and the sibling's notochord is context geometry in a scene that is not about it.
+ */
+
+(function () {
+  const T = window.THREE, K = window.VizKit;
+
+/* ═══════════════════════════════════════════════════════════════════════ 1 · THE PARTS
+
+   Every key is a thing a student names. Colours are sRGB hex and reach a material only through
+   VizKit.C() (RENDER-STANDARD §2.2) — never fed to three directly anywhere in this file. */
+
+const LAYERS = {
+  /* the disc, as the stage the axial story happens on */
+  ectoderm:      { color: 0x2980b9, name: 'Ectoderm — the upper sheet' },
+  neural_plate:  { color: 0xc0392b, name: 'Neural plate — ectoderm thickened over the notochord' },
+  floor_plate:   { color: 0xe74c3c, name: 'Floor plate — the ventral midline the notochord patterns' },
+  endoderm:      { color: 0xf39c12, name: 'Endoderm — the roof of the yolk sac' },
+  mesoderm:      { color: 0x27ae60, name: 'Intraembryonic mesoderm — the middle sheet' },
+  amnion:        { color: 0xaeb6bf, name: 'Amniotic cavity' },
+  yolk_sac:      { color: 0xd7bde2, name: 'Yolk sac' },
+
+  /* the four stages — three v-ranges of one sweep, plus the lumen's own cast */
+  process:       { color: 0x16a085, name: 'Stage 1 — the notochordal process, a hollow tube' },
+  canal:         { color: 0x48c9b0, name: 'Stage 2 — the notochordal canal, its lumen' },
+  plate:         { color: 0x1abc9c, name: 'Stage 3 — the notochordal plate, set into the gut roof' },
+  definitive:    { color: 0x0e6655, name: 'Stage 4 — the definitive notochord, a solid rod' },
+  neurenteric:   { color: 0xf5b041, name: 'Neurenteric canal — amnion to yolk sac, transiently' },
+
+  /* the two ends, and the landmarks that define them */
+  node:          { color: 0x8e44ad, name: "Primitive node (Hensen's node)" },
+  pit:           { color: 0x7d3c98, name: 'Primitive pit — the door these cells come through' },
+  streak:        { color: 0xa569bd, name: 'Primitive streak — regressing caudally' },
+  prechordal_plate: { color: 0x5dade2, name: 'Prechordal plate — the cranial limit' },
+  oropharyngeal_membrane: { color: 0x5d6d7e, name: 'Oropharyngeal membrane' },
+  cloacal_membrane:       { color: 0x717d7e, name: 'Cloacal membrane' },
+
+  /* what it induces */
+  somite:        { color: 0x239b56, name: 'Somite — paraxial mesoderm, segmented' },
+  sclerotome:    { color: 0xd35400, name: 'Sclerotome — migrating AROUND the notochord' },
+
+  /* clinical overlays, on the embryonic axis */
+  chordoma_clival:  { color: 0xaf7ac5, name: 'Chordoma at the cranial end — the clivus' },
+  chordoma_sacral:  { color: 0xaf7ac5, name: 'Chordoma at the caudal end — sacrococcygeal' },
+  persistent_canal: { color: 0xcd6155, name: 'A neurenteric canal that did not close' },
+  neurenteric_cyst: { color: 0xe6b0aa, name: 'Neurenteric cyst — gut-type lining in front of the cord' },
+
+  /* the adult remnant — a DIFFERENT SCALE, see gap 2 */
+  vertebral_body:      { color: 0xd5d8dc, name: 'Vertebral body — built AROUND the notochord' },
+  /* #a6acaf UNTIL REVIEW ROUND 1, WHICH IS WHY IT IS NOT A GREY NOW. The annulus and the vertebral
+     body were both near-white neutrals — dE*ab 16.3 apart at chroma 2.7 — and the review could not
+     tell which ring was bone and which was the fibrous ring. The rule the replacement was chosen by,
+     stated before the table was read: it must differ in CHROMA and not only in lightness (chroma
+     >= 25, since the confound was two neutrals), and subject to that it maximises the minimum dE*ab
+     against everything else beat 8 draws. Measured over ten candidates in the fibrocartilage family
+     an atlas uses: amber 64.7, ochre 51.1, tan 48.1, olive-buff 42.3, wheat 42.0, light-tan 35.1,
+     ivory-cream 17.5, the incumbent 16.3. The full table is in the build log. */
+  annulus_fibrosus:    { color: 0xc98b2f, name: 'Annulus fibrosus' },
+  nucleus_pulposus:    { color: 0x7d3c98, name: 'Nucleus pulposus — the notochord that survived' },
+  notochord_regressed: { color: 0x515a5a, name: 'Where the notochord was crushed out of existence' },
+
+  /* the failed axis — the negative control, as a build rather than an argument */
+  ecto_uninduced:        { color: 0x5499c7, name: 'Ectoderm that was never induced' },
+  sclerotome_disordered: { color: 0xe59866, name: 'Sclerotome with nothing to organise around' },
+  definitive_defective:  { color: 0x797d7f, name: 'A notochord that formed badly' },
+};
+
+const AXES = 'RIGHT=-x LEFT=+x CRANIAL=+y VENTRAL=+z (DORSAL=-z)';
+const UNIT_UM = 100;              // one unit is 100 µm — the scale the sibling scenes use
+
+/* ═════════════════════════════════════════════════════ 2 · DIMENSIONS, in units of 100 µm
+
+   Every number here is a LENGTH or a TIME; none is a fitted coefficient. PERT is the perturbation
+   hook: _setConst moves one of these and every number that claims to measure the model must move
+   with it (RENDER-STANDARD, "an acceptance measurement must be a function of the built geometry"). */
+
+const PERT = {};
+const p = (k, v) => (PERT[k] !== undefined ? PERT[k] : v);
+
+/* ─── the disc. EVERY ONE OF THESE IS THE SAME NUMBER AS trilaminar-disc-3-germ-layers.js, and the
+   harness asserts it by loading both files into one page and comparing constants(). */
+const DISC_L   = 10.00;   // cranio-caudal length of the disc: 1.0 mm
+const W_MAX    =  4.30;   // greatest half-width
+const DOME     =  0.30;   // gently convex dorsally; not a flat card
+const H_ECTO   =  0.28;   // ectoderm: tall columnar epiblast, 28 µm
+const H_VENT   =  0.16;   // the lower lamina, 16 µm
+const H_MESO   =  0.26;   // intraembryonic mesoderm at full thickness, 26 µm
+const H_FUSE   =  0.05;   // the fused basal laminae AT a membrane: 5 µm, and no mesoderm in it
+const W_INTER  =  0.34;   // intermediate mesoderm half-width — not used here; kept for the agreement
+const W_STREAK =  0.60;   // the streak is a broad band
+const W_SOM    =  1.05;   // one somite, 105 µm
+const SOMITE_PERIOD_H = 4.5;   // one new pair every four and a half hours
+const DAY_SOM_START   = 20.0;  // the first pair appears on day 20
+const V_SEG_CRANIAL   = 0.78;  // segmentation starts just caudal to the prechordal plate, running back
+
+const V_STK0   =  0.165;  // caudal end of the streak
+const V_TIP_0  =  0.205;  // where the streak's tip is at t = 0
+const V_TIP_MX =  0.600;  // its furthest cranial reach
+const DAY_TIP_MAX = 17.0; // when the streak is longest
+const V_TIP_1  =  0.280;  // where regression has brought it by day 24
+const V_PRE    =  0.862;  // prechordal plate: the notochord's cranial limit
+const V_ORO    =  0.925;  // oropharyngeal membrane centre
+const R_ORO    =  0.95;
+const V_CLO    =  0.105;  // cloacal membrane centre
+const R_CLO    =  0.78;
+
+const DAY_0 = 14.0;
+/* t = 1 IS DAY 24, and that is a checking constraint as much as a biological one — the same one the
+   sibling records. check-beat-claims.mjs displaces every beat by ±0.15 of the parameter and requires
+   its claims to stop being true there, which a beat at t = 0.9 of a day-21 window cannot do. Each
+   process keeps its own DAY window below, so nothing was stretched to fill the extra room. */
+const DAY_1 = 24.0;
+
+/* ─── THE NOTOCHORD'S OWN DIMENSIONS. Two typed numbers. Everything else about its calibre — the
+   plate's width, the rod's radius, the width at every station of both transitions — is solved from
+   them in section 5. */
+const R_PROC   =  0.30;   // outer half-width of the hollow notochordal process — the same 0.30 the
+                          // sibling types as R_NCH for the notochord's half-width
+const W_WALL   =  0.10;   // the wall of that tube: a pseudostratified epithelium, 10 µm
+
+const R_NODE   =  0.52;   // the node is a lens-shaped thickening, wider than the tube it feeds
+const L_NODE   =  0.62;   // its cranio-caudal length, in units
+const R_PIT    =  0.22;   // the pit: the depression in the node's dorsal surface. 0.44 across in a
+                          // node 1.04 wide. It was 0.34 and the player walk measured it at 0.20% of
+                          // the frame on the two beats that point at it, under the 0.30% floor — a
+                          // structure the narration calls the door these cells come through and a
+                          // student could not pick out.
+const R_PCP    =  0.62;   // prechordal plate radius in the plan
+const R_NEC    =  0.105;  // the neurenteric channel's calibre
+const R_CYST   =  0.30;   // the neurenteric cyst
+
+const GAP_MESO =  0.07;   // the mesoderm stops this far short of the axial structure
+const R_SCL_O  =  0.56;   // outer radius of a sclerotome collar
+const SCL_GAP  =  0.05;   // and it stands this far off the axial surface
+const GAP_MIN  =  0.030;  // the two laminae never come closer than this — see the note at gapAt
+const AX_MARG  =  0.035;  // clearance between the axial structure and each lamina
+const SWELL_W  =  0.70;   // how far laterally the axial swelling of the ectoderm dies away
+const OVERLAP  =  0.014;  // adjacent parts of DIFFERENT keys overlap by this much rather than sharing
+                          // a face — RENDER-STANDARD, "overlap adjacent parts very slightly so
+                          // neither end cap is ever exposed". Every such pair is named in TOUCH_OK.
+const TRANS_V  =  0.040;  // the length of each maturation transition, in v
+const V_LO = 0.020, V_HI = 0.980;   // the sheets stop just short of the rim, where half-width is 0
+                                    // and every quad there would be degenerate (the sibling's
+                                    // TAPER_MIN note: a degenerate quad counts an edge twice and
+                                    // leaves the surface reporting a hole)
+
+/* ─── the timeline. STATED TIMINGS FROM THE TEXTBOOK ACCOUNT, not fitted coefficients. */
+const DAY_NCH_BEG  = 15.0;  // prenotochordal cells begin to ingress at the pit
+const DAY_TIP_PCP  = 18.0;  // the process's tip reaches the prechordal plate and stops there
+const DAY_BRK_BEG  = 17.0;  // the floor of the tube begins to break down, at the cranial end
+const DAY_BRK_END  = 19.6;  // and the breakdown front reaches the node
+const DAY_DET_BEG  = 18.2;  // the plate begins to detach from the endoderm, cranially
+const DAY_DET_END  = 20.0;  // the definitive notochord is complete — the day a student quotes
+const DAY_NEC_CLOSE = 19.0; // the neurenteric canal closes on its own
+const DAY_NEUR_BEG  = 18.0; // the neural plate appears over the notochord
+const LAG_T         = 0.055; // induction lags the axis by this much of t, about thirteen hours
+const DAY_REG_BEG   = 20.0; // regression inside the vertebral bodies — SEE GAP 2: this is a
+const DAY_REG_END   = 24.0; // progress parameter, not a day count
+
+const tOfDay = d => (d - DAY_0) / (DAY_1 - DAY_0);
+const day = t => DAY_0 + (DAY_1 - DAY_0) * clamp01(t);
+function clamp01(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+function ss(a, b, x) { const u = clamp01((x - a) / (b - a)); return u * u * (3 - 2 * u); }
+
+/* emission resolution */
+const NX = 14, NR = 28, NQ = 240;
+
+/* ═══════════════════════════════════════════════════════════ 3 · THE PLAN OF THE DISC
+
+   v runs 0 (caudal) to 1 (cranial). Pear-shaped, broader cranially — which in a dorsal view is the
+   only thing that says which way round the picture is. Identical to the sibling's plan. */
+
+function wRaw(v) {
+  const u = clamp01(v);
+  return Math.pow(Math.sin(Math.PI * u), 0.62) * (0.72 + 0.38 * u);
+}
+let _wPeak = null;
+function wPeak() {
+  if (_wPeak == null) { let m = 0; for (let i = 0; i <= 2000; i++) m = Math.max(m, wRaw(i / 2000)); _wPeak = m; }
+  return _wPeak;
+}
+function halfW(v) { return p('W_MAX', W_MAX) * wRaw(v) / wPeak(); }
+const yOf = v => (clamp01(v) - 0.5) * p('DISC_L', DISC_L);
+const vOf = y => y / p('DISC_L', DISC_L) + 0.5;
+
+/* ═══════════════════════════════════════ 4 · THE LENS, BUILT FROM THE GUT ROOF UPWARDS
+
+   The ENDODERM is the reference surface, because it is the one thing in this scene that does not
+   move: the roof of the yolk sac. Everything else is stacked dorsally off it, so that when the
+   axial structure swells it lifts the ectoderm — which is what it does, and which is what gives the
+   neural plate its dorsal bulge. Building from the dorsal surface downwards, as the sibling does,
+   cannot express that: the axis would have to push the gut roof away instead.
+
+   Thickness falls to nothing at every rim so the layers thin out and meet the way real germ layers
+   do rather than ending in a vertical cliff. TAPER_MIN keeps every quad non-degenerate, which is
+   what keeps the sheets watertight — the sibling's note, the same fix for the same reason. */
+const TAPER_MIN = 0.02;
+function rimTaper(x, y) {
+  const v = vOf(y), hw = halfW(v);
+  if (hw <= 1e-6) return TAPER_MIN;
+  const s = Math.min(Math.abs(x) / hw, 1);
+  const lat = 1 - Math.pow(s, 8);
+  const end = Math.pow(Math.sin(Math.PI * clamp01(v)), 0.30);
+  return Math.max(TAPER_MIN, Math.max(0, lat) * end);
+}
+function hEcto(x, y) { return p('H_ECTO', H_ECTO) * rimTaper(x, y); }
+function hVent(x, y) { return p('H_VENT', H_VENT) * rimTaper(x, y); }
+function hMeso(x, y) { return p('H_MESO', H_MESO) * rimTaper(x, y); }
+
+/* the two membranes: permanent, for all t, and a HARD boundary rather than a cone. Taking the
+   primitive-streak round-2 finding directly — a cos-squared mask excludes the mesoderm at exactly one
+   POINT and leaves 99% of full thickness at the rim, so every check that samples inside the footprint
+   certifies a mesoderm-free zone that is not there. Inside a footprint the two laminae are held
+   H_FUSE apart and there is NO mesoderm; the membrane part fills exactly that gap, so neither lamina
+   has a hole in it and a beat that draws a lamina without the membranes still draws a whole sheet.
+   That is the primitive-streak round-3 finding, designed out rather than fixed later. */
+/* THE OROPHARYNGEAL MEMBRANE IS CRANIAL OF THE PRECHORDAL PLATE, so its footprint is clipped there.
+   The sibling's circle — same centre, same radius, deliberately — reaches back to v = 0.830, which is
+   caudal of V_PRE = 0.862, so it would own the space the notochord's cranial 0.3 units occupy: row O
+   measured 3.6% of the rod's vertices inside the membrane. In the sibling the notochord is context
+   geometry and the membrane wins; here the notochord is the subject and the anatomy is the other way
+   round. The two models' PLANS therefore differ in this one strip, and the scene's gaps[] says so. */
+function oroEdge(y) {
+  if (vOf(y) < V_PRE + 0.008) return 0;
+  const dy = y - yOf(V_ORO), r = p('R_ORO', R_ORO); const q = r * r - dy * dy;
+  return q > 0 ? Math.sqrt(q) : 0;
+}
+function cloEdge(y) { const dy = y - yOf(V_CLO), r = p('R_CLO', R_CLO); const q = r * r - dy * dy; return q > 0 ? Math.sqrt(q) : 0; }
+function membEdge(y) { return Math.max(oroEdge(y), cloEdge(y)); }
+function inMembrane(x, y) { return Math.abs(x) <= membEdge(y); }
+
+/* the ventral-most surface of the disc — the yolk-sac side, gently convex ventrally */
+function zEndoVent(x, y) {
+  const v = vOf(y), hw = halfW(v);
+  if (hw <= 1e-6) return 0;
+  const s = Math.min(Math.abs(x) / hw, 1);
+  return p('DOME', DOME) * 0.55 * (1 - s * s) * Math.pow(Math.sin(Math.PI * clamp01(v)), 0.5);
+}
+function zEndoDors(x, y) { return zEndoVent(x, y) - hVent(x, y); }
+
+/* ─── the streak and the node, as context: primitive-streak.js owns that subject */
+const T_TIP = tOfDay(DAY_TIP_MAX);
+function vTip(t) {
+  const u = clamp01(t);
+  return u <= T_TIP ? V_TIP_0 + (V_TIP_MX - V_TIP_0) * ss(0, T_TIP, u)
+                    : V_TIP_MX + (V_TIP_1 - V_TIP_MX) * ss(T_TIP, 1, u);
+}
+
+/* ════════════════════════════════════════════ 5 · THE AXIS, ITS FRONTS, AND THE CONSERVATION
+
+   nodeV is where the node sits — the streak's own tip, so the axis's caudal end regresses caudally
+   with the streak, which is what extends the notochord after day 18.
+
+   tipV is the cranial end of the notochordal process, growing from the node towards the prechordal
+   plate and stopping there.
+
+   brkV and detV are the two maturation fronts. Both start at the cranial tip and sweep CAUDALLY,
+   because the cranial material is the oldest. Everything cranial of detV has detached (definitive
+   rod); between brkV and detV the floor has broken down but the plate is still in the gut roof;
+   caudal of brkV the tube is still hollow. detV >= brkV always, because detachment lags breakdown at
+   every station — and that is an INEQUALITY THE MODEL DOES NOT ASSUME: acceptance row B measures it
+   on the built segment bounds at thirteen values of t. */
+
+function nodeV(t) { return vTip(t); }
+function tipV(t) {
+  const n = nodeV(t);
+  const reach = ss(tOfDay(DAY_NCH_BEG), tOfDay(DAY_TIP_PCP), clamp01(t));
+  return n + (V_PRE - n) * reach;
+}
+function brkV(t) {
+  const n = nodeV(t), c = tipV(t);
+  return c + (n - c) * ss(tOfDay(DAY_BRK_BEG), tOfDay(DAY_BRK_END), clamp01(t));
+}
+function detV(t) {
+  const n = nodeV(t), c = tipV(t);
+  return c + (n - c) * ss(tOfDay(DAY_DET_BEG), tOfDay(DAY_DET_END), clamp01(t));
+}
+/** the three stage segments at t, cranial first, as [v0, v1] or null when empty */
+function segments(t) {
+  const n = nodeV(t), c = tipV(t), b = brkV(t), d = detV(t);
+  const mk = (a, z) => (c > n + 1e-6 && z > a + 2.5e-3 ? [a, z] : null);
+  return { definitive: mk(d, c), plate: mk(b, d), process: mk(n, b) };
+}
+function axisSpan(t) {
+  const n = nodeV(t), c = tipV(t);
+  return c > n + 1e-6 ? [n, c] : null;
+}
+
+/* ─── THE SECTION, AND THE AREA IT MUST HOLD.
+
+   The section is a superellipse |x/a|^n + |z/b|^n = 1. n = 2 is an ellipse (the tube and the rod);
+   a large n is a rectangle with rounded corners (the plate, lying flat in the gut roof). Its area is
+   4ab * c(n) where c(n) = Gamma(1+1/n)^2 / Gamma(1+2/n) — 0.7854 at n = 2, rising towards 1. So
+   given the HEIGHT the stage calls for and the SQUARENESS, the semi-width is whatever holds A0. */
+function gammaLn(x) {   /* Lanczos — needed for the superellipse's area constant */
+  const g = [76.18009172947146, -86.50532032941677, 24.01409824083091,
+             -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5];
+  let y = x, tmp = x + 5.5, ser = 1.000000000190015;
+  tmp -= (x + 0.5) * Math.log(tmp);
+  for (let j = 0; j < 6; j++) ser += g[j] / ++y;
+  return -tmp + Math.log(2.5066282746310005 * ser / x);
+}
+const _secC = new Map();
+function secC(n) {
+  const k = Math.round(n * 4096);
+  let v = _secC.get(k);
+  if (v === undefined) { v = Math.exp(2 * gammaLn(1 + 1 / n) - gammaLn(1 + 2 / n)); _secC.set(k, v); }
+  return v;
+}
+function secArea(a, b, n) { return 4 * a * b * secC(n); }
+
+function rIn()   { const ro = p('R_PROC', R_PROC); return Math.max(0.02, ro - p('W_WALL', W_WALL)); }
+function area0() { const ro = p('R_PROC', R_PROC), ri = rIn(); return Math.PI * (ro * ro - ri * ri); }
+
+/* the section the stage at v calls for, blended across each front over TRANS_V, with the semi-width
+   SOLVED from the area at every station. `hole` is the lumen's share of the section's own area. */
+const _secAt = new Map(), _clrAt = new Map();
+function sectionAt(v, t) {
+  const k = Math.round(v * 200000) * 4096 + Math.round(t * 4000);
+  let r = _secAt.get(k);
+  if (r === undefined) { r = sectionAtRaw(v, t); _secAt.set(k, r); }
+  return r;
+}
+function sectionAtRaw(v, t) {
+  const s = { process: 0, plate: 0, rod: 0 };
+  const b = brkV(t), d = detV(t);
+  /* smooth membership of the three phases */
+  const toPlate = ss(b - TRANS_V / 2, b + TRANS_V / 2, v);     // 0 caudal of the breakdown front
+  const toRod   = ss(d - TRANS_V / 2, d + TRANS_V / 2, v);     // 0 caudal of the detachment front
+  s.process = 1 - toPlate;
+  s.plate = toPlate * (1 - toRod);
+  s.rod = toRod;
+  const hVentMid = hVent(0, yOf(v));
+  const bProc = p('R_PROC', R_PROC);
+  const bPlate = hVentMid / 2;
+  const bRod = Math.sqrt(area0() / Math.PI);
+  const bb = s.process * bProc + s.plate * bPlate + s.rod * bRod;
+  const nn = s.process * 2 + s.plate * 6 + s.rod * 2;
+  /* THE LUMEN CLOSES BEFORE THE PLATE BEGINS, over the caudal half of the breakdown transition.
+     The first version let it follow the phase blend, so the `plate` key's own caudal end still had a
+     lumen while its inner surface — emitted only between two stations that BOTH have one — did not
+     reach it: 28 unpaired edges, exactly one ring's worth, on `plate` and on `definitive`. A lumen
+     that ends inside a body has to be CAPPED, and axialSweep now does that where the run ends. */
+  const holeFrac = 1 - ss(b - TRANS_V, b - TRANS_V / 2, v);
+  const ri = rIn() * holeFrac;
+  /* THE CONSERVED QUANTITY IS THE WALL, NOT THE OUTLINE, and the first draft of this solve got that
+     wrong in the one way that is invisible: it set the OUTER area to A0, so a hollow process came
+     out holding A0 minus its own lumen — 0.0475 against 0.157 — and the plate was then three times
+     the tube's width instead of 1.7 times. Row C caught it on the first run, which is what row C is
+     for: the measured area is read off the triangles and the triangles disagreed with the solve. */
+  const a = (area0() + Math.PI * ri * ri) / (4 * bb * secC(nn));
+  return { a, b: bb, n: nn, holeFrac, mix: s };
+}
+/** the lumen's own semi-axes at v: a cast of the notochordal canal */
+function lumenAt(v, t) {
+  const sec = sectionAt(v, t);
+  if (sec.holeFrac <= 1e-3) return null;
+  const ri = rIn() * sec.holeFrac;
+  return ri > 0.02 ? { a: ri, b: ri } : null;
+}
+/** the plate's half-width, and the rod's radius, as the SOLVE returns them — exposed so acceptance
+    can compare them with what the triangles actually came out at */
+function wPlateSolved(t) {
+  const s = segments(t); if (!s.plate) return 0;
+  return sectionAt((s.plate[0] + s.plate[1]) / 2, t).a;
+}
+function rRodSolved() { return Math.sqrt(area0() / Math.PI); }
+
+/* THREE DIFFERENT QUESTIONS, THREE DIFFERENT PROFILES, and the first draft used one for all of
+   them. `clearHalf` (section 9) is what the middle sheet must stand clear of — the axis, the streak,
+   the prechordal plate, a membrane's footprint, a sclerotome collar. `swellHalf` is what LIFTS the
+   upper sheet, which is the axis and a collar but not a membrane. And induction is the axis ALONE:
+   the signal comes from the notochord, so an oropharyngeal membrane 0.95 wide has no business
+   widening the neural plate — which is what it did, taking the plate's half-width to 1.36 and
+   degenerating the block build's lanes, where the window is 1.15. */
+function swellHalf(v, t) { return Math.max(axisProfile(v, t), sclerotomeOuter(v, t)); }
+/** and its HEIGHT, which is what lifts the ectoderm. The plate contributes nothing: it lies INSIDE
+    the gut roof, so it does not need room between the laminae. */
+function axialHeight(v, t) {
+  const sp = axisSpan(t);
+  if (!sp || v < sp[0] || v > sp[1]) return 0;
+  const sec = sectionAt(v, t);
+  return 2 * sec.b * (1 - sec.mix.plate);
+}
+
+/* the gap between the two laminae at (x, y): the mesoderm's thickness out on the flank, the fused
+   thickness at a membrane, and whatever the axial structure needs in the midline */
+function gapAt(x, y, t) {
+  const flank = inMembrane(x, y) ? p('H_FUSE', H_FUSE) : hMeso(x, y);
+  const v = vOf(y);
+  /* AND FOR A SCLEROTOME COLLAR. The first version sized the gap from the axis alone, so a collar
+     of outer radius 0.56 sat in a gap of 0.52 and poked through BOTH laminae by 0.30 — row O found
+     it at three keys at once. A vertebral primordium thickens the embryo around it; that is what the
+     lift is for. */
+  const need = Math.max(axialHeight(v, t), 2 * sclerotomeOuter(v, t)) + 2 * AX_MARG;
+  const d = Math.max(0, Math.abs(x) - swellHalf(v, t));
+  const fall = d >= SWELL_W ? 0 : 1 - (d / SWELL_W) * (d / SWELL_W);
+  /* GAP_MIN: AT THE RIM THE TAPER TAKES THE GAP BELOW THE OVERLAP ITSELF, which put the two laminae
+     inside one another there — 6.5% of the ectoderm's vertices measured inside the endoderm at the
+     extreme rim, found by row O before any of this shipped. The floor is 3 µm, below anything a
+     render can show, and it is a floor on the GAP rather than a shrinking of the overlap, because
+     the overlap is what stops the sheets sharing a face in the first place. */
+  return Math.max(GAP_MIN, Math.max(flank, need * fall));
+}
+/** the ectoderm's ventral face: the gut roof's dorsal face, less the gap */
+function zGapDors(x, y, t) { return zEndoDors(x, y) - gapAt(x, y, t); }
+/** the centre of the axial structure in the midline at v */
+function zAxial(v, t) {
+  const y = yOf(v);
+  return (zEndoDors(0, y) + zGapDors(0, y, t)) / 2;
+}
+/** the gut roof's own mid-surface in the midline — where the plate lies, flush */
+function zPlateMid(v) { const y = yOf(v); return zEndoVent(0, y) - hVent(0, y) / 2; }
+/** the axial structure's centre, blended from the gap's middle to the gut roof's middle */
+function zAxisAt(v, t) {
+  const sec = sectionAt(v, t);
+  return zAxial(v, t) * (1 - sec.mix.plate) + zPlateMid(v) * sec.mix.plate;
+}
+
+/* ─── THE CLEARANCE PROFILE. What the mesoderm, the ectoderm's window and the induction solve all
+   have to stand clear of in the midline at station v. It is a MAX OF SMOOTH BUMPS rather than a
+   lookup with branches, and that is deliberate: the first draft branched on which segment v fell in,
+   which put a 0.30-unit STEP in the mesoderm's inner boundary at the node and another at the tip —
+   and a step in a swept boundary is the primitive-streak round-4 defect, a strip of sheet that
+   belongs to nobody. A max of continuous functions cannot have one. */
+function axisProfile(v, t) {
+  const sp = axisSpan(t); if (!sp) return 0;
+  if (v >= sp[0] && v <= sp[1]) return sectionAt(v, t).a;
+  const d = v < sp[0] ? sp[0] - v : v - sp[1];
+  if (d > 0.025) return 0;
+  const edge = sectionAt(v < sp[0] ? sp[0] : sp[1], t).a;
+  return edge * (1 - d / 0.025);
+}
+function streakProfile(v, t) {
+  const n = nodeV(t);
+  if (v <= n) return p('W_STREAK', W_STREAK);
+  const d = (v - n) / 0.045;
+  return d >= 1 ? 0 : p('W_STREAK', W_STREAK) * (1 - d);
+}
+function pcpProfile(v) {
+  const d = Math.abs(v - V_PRE) / 0.055;
+  return d >= 1 ? 0 : p('R_PCP', R_PCP) * (1 - d * d);
+}
+function sclerotomeOuter(v, t) {
+  const n = somitePairsDrawn(t); if (!n) return 0;
+  for (let i = 0; i < n; i++) {
+    const c = collarSpan(i, t); if (!c) continue;
+    if (v >= c[0] - 0.012 && v <= c[1] + 0.012) return R_SCL_O;
+  }
+  return 0;
+}
+function clearHalf(v, t) {
+  const k = Math.round(v * 200000) * 4096 + Math.round(t * 4000);
+  let r = _clrAt.get(k);
+  if (r === undefined) {
+    r = Math.max(axisProfile(v, t), streakProfile(v, t), pcpProfile(v),
+                 membEdge(yOf(v)), sclerotomeOuter(v, t));
+    _clrAt.set(k, r);
+  }
+  return r;
+}
+
+/* ─── THE NEURENTERIC CANAL. It exists while the floor is open — from the first breakdown to
+   DAY_NEC_CLOSE — and that is a window, not a constant. necOpen is 0 outside it. */
+function necOpen(t) {
+  const a = tOfDay(DAY_BRK_BEG), b = tOfDay(DAY_NEC_CLOSE), u = clamp01(t);
+  if (u <= a || u >= b) return 0;
+  return Math.min(1, Math.min(u - a, b - u) / (0.3 * (b - a)));
+}
+
+/* ═══════════════════════════════════════════════════ 6 · INDUCTION, SOLVED NOT DRAWN
+
+   The neural plate is where the signal from the axis is above threshold, and nowhere else. The signal
+   falls exponentially with distance from the axial SURFACE with a declared diffusion length; the
+   plate's half-width is the distance at which it crosses the threshold, solved in closed form.
+   Thickness scales with the same signal, so the plate is tallest in the midline and thins to ordinary
+   ectoderm at its edge — which is what a neural plate looks like in section.
+
+   The `failed` variant passes src = 0. The same builder then returns a flat strip of plain ectoderm,
+   so "no notochord, no neural plate" is a build rather than a sentence. */
+const NP_LAMBDA = 0.42;   // diffusion length, in units
+const NP_THRESH = 0.38;   // the fraction of source strength at which ectoderm thickens
+const NP_MAXFAC = 2.6;    // the neural plate is this many times the thickness of flat ectoderm
+const NP_SRC    = 1.00;   // source strength at the axial surface
+const NP_COLS   = 12;     // columns across the plate's half-span, in the build AND in npThickAt, so
+                          // the border's width and the mesh that has to carry it cannot drift apart
+
+function npSignal(dist, src) { return src * Math.exp(-Math.max(0, dist) / NP_LAMBDA); }
+/** SOLVED: the distance from the axial surface at which the signal hits threshold */
+function npHalf(v, t, src) {
+  if (src <= NP_THRESH) return 0;
+  return axisProfile(v, t) + NP_LAMBDA * Math.log(src / NP_THRESH);
+}
+/** the induced span: the axis's own span one induction lag ago, capped at the prechordal plate */
+function npSpan(t) {
+  const u = clamp01(t);
+  if (u < tOfDay(DAY_NEUR_BEG)) return null;
+  const tl = Math.max(0, u - LAG_T);
+  const sp = axisSpan(tl); if (!sp) return null;
+  const a = Math.max(V_LO, sp[0]), b = Math.min(V_PRE, sp[1]);
+  return b > a + 2.5e-3 ? [a, b] : null;
+}
+/** THE RESPONSE IS SATURATED, NOT GRADED — review round 1, beat 3.
+
+    This used to map the signal LINEARLY onto thickness: factor = 1 + (MAXFAC - 1) * (sig - THRESH)
+    / (SRC - THRESH). The signal falls EXPONENTIALLY with distance, so the thickness did too, and the
+    plate came out as a steep midline cone standing on a thin skirt — a peak in the midline, which is
+    where a student should expect the neural GROOVE. The review's words: "a sharp midline ridge risks
+    teaching a peak where a student should expect a depression."
+
+    The fault was in the biology, not in the drawing. Induction is already modelled as a THRESHOLD —
+    npHalf() is the distance at which the signal crosses it, and that is what sets the plate's width.
+    A cell either is induced, and becomes the tall pseudostratified columnar cell of the neural plate,
+    or it is not, and stays cuboidal surface ectoderm. There is no cell of intermediate height in the
+    middle of a neural plate. So the thickness is FULL wherever the signal is above threshold, and
+    the only shaping is at the lateral border.
+
+    SO THE BORDER HAS NO BIOLOGICAL WIDTH, and this file does not invent one for it. A switch is a
+    switch; what sets the width of the bevel between the plate and the flat ectoderm beside it is the
+    MESH, and the narrowest bevel a mesh can carry without a staircase is two of its own columns. The
+    plate is built with NP_COLS columns across its full span, so the ramp is 2 * (half / NP_COLS) and
+    it scales with the plate rather than being a length that could one day be larger than the thing
+    it shapes. TWO LENGTHS WERE TRIED FIRST AND BOTH WERE WORSE, measured rather than argued:
+    one PLATE-thickness (hEcto * NP_MAXFAC = 0.728) is WIDER than the plate's own half-width (0.646),
+    so the ramp swallowed the plate and the plateau measured 0.175 against the graded law's 0.350 —
+    a worse cone than the one it replaced; one flat-ectoderm cell-height (hEcto = 0.280) gave 0.325,
+    better than the graded law but still a block standing on a brim. The mesh-column ramp gives the
+    numbers acceptance row Y reports. A reviewer who wants a softer border should raise the 2 and
+    re-run row Y, not reach back for a graded response. */
+function npThickAt(x, v, t, src) {
+  const base = hEcto(x, yOf(v));
+  if (src <= NP_THRESH) return base;
+  const half = npHalf(v, t, src);
+  const ax = Math.abs(x);
+  if (!(half > 0) || ax >= half) return base;
+  const w = Math.min(half * (2 / NP_COLS), half * 0.5);   // the border: two of the plate's columns
+  const sm = clamp01((half - ax) / w);
+  const e = sm * sm * (3 - 2 * sm);                     // smoothstep: flat-topped at both ends
+  return base * (1 + (NP_MAXFAC - 1) * e);
+}
+const FP_HALF = 0.10, H_FP = 0.055;   // the floor plate: the np's own ventral midline strip
+
+/* ═══════════════════════════════════════════════════ 7 · SEGMENTATION, AND AN HONEST OVERRUN
+
+   The somite clock is the one a student quotes: one new pair every four and a half hours from day 20.
+   The disc in this model does not elongate (gap 1), so there is not room for every pair the clock
+   predicts. Both numbers are reported and their difference is `somiteOverrun`, which acceptance row K
+   pins at its measured size so it cannot grow unnoticed. */
+function somitePairsPredicted(t) {
+  const d = day(t);
+  if (d <= DAY_SOM_START) return 0;
+  return Math.floor((d - DAY_SOM_START) * 24 / p('SOMITE_PERIOD_H', SOMITE_PERIOD_H));
+}
+function segSpan(t) {
+  const a = Math.max(nodeV(t), V_LO), b = V_SEG_CRANIAL;
+  return b > a + 1e-6 ? [a, b] : null;
+}
+function somitePairsDrawn(t) {
+  const sp = segSpan(t); if (!sp) return 0;
+  const room = Math.floor((sp[1] - sp[0]) * p('DISC_L', DISC_L) / p('W_SOM', W_SOM));
+  return Math.max(0, Math.min(somitePairsPredicted(t), room));
+}
+function somiteOverrun(t) { return somitePairsPredicted(t) - somitePairsDrawn(t); }
+/** the v-interval of the i-th sclerotome collar, laid cranial to caudal from V_SEG_CRANIAL */
+function collarSpan(i, t) {
+  const w = p('W_SOM', W_SOM) / p('DISC_L', DISC_L);
+  const b = V_SEG_CRANIAL - i * w, a = b - w * 0.84;
+  return a > nodeV(t) + 1e-3 ? [a, b] : null;
+}
+/** the fraction of the axis's length that sclerotome has wrapped. CONTINUOUS in t — the collars are
+    discrete but their cranio-caudal reach is not, which is what lets a beat after day 20 be pinned
+    to its own instant. */
+function sclerotomeCoverFrac(t) {
+  const sp = axisSpan(t); if (!sp) return 0;
+  const n = somitePairsDrawn(t); if (!n) return 0;
+  let lo = Infinity, hi = -Infinity;
+  for (let i = 0; i < n; i++) { const c = collarSpan(i, t); if (!c) continue; lo = Math.min(lo, c[0]); hi = Math.max(hi, c[1]); }
+  if (!isFinite(lo)) return 0;
+  const a = Math.max(lo, sp[0]), b = Math.min(hi, sp[1]);
+  return b > a ? (b - a) / (sp[1] - sp[0]) : 0;
+}
+
+/* ═══════════════════════════════════════════ 8 · REGRESSION, AND THE ADULT CONSERVATION
+
+   Inside a vertebral body the notochord disappears; between two bodies it persists. So the material
+   that leaves the body segments has to arrive in the discs, and the nucleus pulposus's radius is
+   SOLVED by bisection against that budget rather than drawn at a size that looks right.
+
+   regressFrac is this model's progress parameter for a process that takes years — see gap 2. */
+function regressFrac(t) { return ss(tOfDay(DAY_REG_BEG), tOfDay(DAY_REG_END), clamp01(t)); }
+
+/* ONE SEGMENT'S PITCH, AND THE SCALE IS 1.5 RATHER THAN 150 FOR A MEASURED REASON. At 150 — one
+   unit still 100 µm, so a 15 mm pitch, which is the honest anatomical figure — the segment is 750
+   units long against the embryo's 10, and the player walk rendered it at 0% ink: the camera stands
+   900 units back and nothing survives the depth range the tool gives it. So the adult segment is
+   drawn at 1/100 of the embryo's scale: one unit is 10 mm here. It is a DIAGRAM beside a model, it
+   is declared in gap 2 and in the beat's own narration_from, and no beat shows it with an embryonic
+   structure — the harness asserts that off the scene's ops. Every claim about it is a RATIO, so
+   none of them moves. */
+const ADU_SCALE  = 1.5;
+const ADU_BODY_H = 0.62;   // of that pitch, the body's share
+const ADU_R_BODY = 0.52;   // in units of the pitch
+/* THE DISC IS AS WIDE AS THE BODIES IT JOINS — it is bounded by their end plates, so its margin is
+   level with theirs. It was an independent 0.44 against the body's 0.52, which drew the discs as
+   narrow washers tucked between wide drums: four separate objects rather than one column. Review
+   round 1, beat 8: "the intervertebral disc does not read as a unit". Derived, not typed. */
+const ADU_R_ANN  = ADU_R_BODY;
+const ADU_NCH_R  = 0.100;  // the notochord's radius in adult units, before regression. It was
+                           // 0.055 and the thread left of it after regression measured 0.009% of the
+                           // frame — below anything a student could pick out.
+
+/* THE ADULT SEGMENT IS CUT AT THE MEDIAN PLANE, which is what the rest of this scene already does
+   to the embryo (`hemi`, section 10) and what an atlas does to a spine. It was five CUT-AWAY CANS:
+   a window of half-angle 0.95 rad over the middle 80% of each piece's height, which left an intact
+   collar at each end, and review round 1 read the result as "five cut-away cylinders with flanges
+   ... machined parts". A half-angle of exactly pi/2 removes the +x half — the camera's side on this
+   beat's `lateral` — over the WHOLE height, so the rim walls ARE the median cut faces and there are
+   no collars. The midline bodies (the nucleus, the regressed thread) are left WHOLE and stand proud
+   of the cut, which is the same convention section 10 states for the embryo and for the same
+   reason. Acceptance row T measures that the cut is exactly x <= 0. */
+const ADU_CUT = Math.PI / 2;
+/* THE SEGMENT IS TURNED OFF THE CUT-PLANE NORMAL, because a median section viewed along its own
+   normal is a flat chart. Review round 2 found beat 8 reading as "featureless grey rectangles with
+   no three-dimensional form at all", and it was right about the cause: viz3d offers only the six
+   world-axis cameras (VIEW_DIR, copied in section 13), `lateral` IS the median plane's normal, and
+   there is no oblique camera and no per-view yaw to ask for — `scene.camera.initialYaw` is applied
+   once to the whole scene, so using it would turn every other beat as well. The camera cannot move,
+   so the SPECIMEN turns, which is what a demonstrator does with a hemisected spine on the bench.
+   The rotation is about the segment's OWN long axis and is BAKED INTO THE VERTICES rather than left
+   on the group, so it survives the adapter lifting each part out by key.
+   WHY 45 DEGREES. Row AA brackets it, and the two ends of the bracket are established differently
+   — which is said here rather than smoothed over.
+     THE UPPER END IS MEASURED. Past about 60 degrees the annulus's own near wall begins to cover the
+     nucleus pulposus, which is this beat's HIGHLIGHTed subject. Its share of the frame in the player
+     walk, at six yaws: 1.221% face-on, 1.217 at 12, 1.199 at 20, 1.142 at 30, 1.008 at 45, 0.856 at
+     60 — so 60 degrees costs the subject 30% of its pixels and 45 costs it 17%.
+     THE LOWER END IS LOOKED AT, and there is no honest way to dress that up as a measurement. The
+     frames at 12, 20, 30 and 45 degrees were all rendered through the player walk and looked at; the
+     first three still read as a flat chart with a faint edge, and only 45 reads as a turned solid
+     with the bodies' uncut outer surface down one side. The obvious instrument for it,
+     cutFaceProjShare below, is REPORTED by row AA and deliberately NOT floored: measured, it runs
+     0.4191 / 0.4043 / 0.3851 / 0.3378 / 0.2655 at 0 / 20 / 30 / 45 / 60 degrees, because even
+     face-on the flat cut faces are only two fifths of the projection — the bore's inner surface
+     carries the rest — so it moves by a fifth of itself across the whole usable range and cannot
+     separate a picture that reads from one that does not. A floor fitted to it would be a floor
+     fitted to the answer, which is the fault RENDER-STANDARD records three times over.
+   NOTHING ANATOMICAL MOVES. The cut is still exactly the median plane and row T still measures it —
+   now against the plane's own normal derived from the built triangles instead of against the x axis,
+   which is the same assertion written so that it cannot be satisfied by a happy choice of frame. */
+const ADU_YAW = 45 * Math.PI / 180;
+/* THE BORE'S FLOOR WHERE THERE IS NOTHING LEFT TO HOUSE — AND IT CANNOT BE ZERO, FOR A REASON THE
+   OLD COMMENT HERE DID NOT GIVE AND THE ROUND-4 BUILD FOUND BY TRYING IT. The old note said only
+   "not zero ... the degenerate-quad note in axialSweep's fenestra". The harder constraint is that
+   THE MEDIAN CUT IS THE WINDOW MECHANISM, and axialSweep refuses a window where there is no lumen to
+   look into (`inWin` → `hasLumen`, with its own fenestra-over-solid-tissue note). Returning `null`
+   from this bore to close it properly was built and measured: row T's adultCutMaxX went from 1e-6 to
+   1.00 — the vertebral bodies silently STOPPED BEING HEMISECTED, because with no lumen there is no
+   window to cut them with — and row P reported unpaired edges on top of it. So the bore stays open.
+
+   WHAT CHANGED IS ITS SIZE, AND THE CRITERION IS A PIXEL RATHER THAN A FRACTION. It was
+   ADU_NCH_R * ADU_SCALE * 0.12 = 0.0180, which was invisible while the remnant filled it and became
+   the whole defect once the remnant withdrew (review round 3, OPEN 1/2): a 0.0180-wide open channel
+   on the cut face, running unbroken through every body AND through every disc above and below its
+   nucleus — the continuous cord again, in white instead of grey, after the geometry that drew it had
+   been fixed. Beat 8's own player-walk scale is 0.008815 world units per pixel, so 0.0180 is 2.0 px
+   of hairline. At 0.02 it is 0.0030 units, 0.34 px — under half a pixel at the camera the beat
+   actually stands at, which is the measure that matters here (the same reasoning as the 40/255
+   player-frame rule). Row AB measures the break this leaves. */
+const ADU_BORE_MIN = ADU_NCH_R * ADU_SCALE * 0.02;
+/** the nucleus's own radius profile, as a fraction of its equatorial radius, at s = z / (h/2).
+    It is the ellipsoid `blob` builds, written once so the annulus's bore cannot drift from it. */
+function nucProfile(s) { const a = Math.abs(s); return a >= 1 ? 0 : Math.sqrt(1 - a * a); }
+function aduBodies(t) { return Math.max(2, Math.min(5, somitePairsDrawn(t) + 1)); }
+/** SOLVED by bisection: the nucleus that holds what regression squeezed out of the bodies either
+    side of it, plus what always lay between them. */
+function nucleusR(t) {
+  const f = regressFrac(t);
+  const r0 = ADU_NCH_R * ADU_SCALE, A = Math.PI * r0 * r0;
+  const fromBodies = A * ADU_SCALE * ADU_BODY_H * f;        // one body's length, squeezed out
+  const between = A * ADU_SCALE * (1 - ADU_BODY_H);          // what already lay between two bodies
+  const want = fromBodies + between;
+  const h = (1 - ADU_BODY_H) * ADU_SCALE * 0.70;             // the nucleus's own height
+  let lo = 0.01, hi = ADU_R_ANN * ADU_SCALE;
+  for (let i = 0; i < 70; i++) {
+    const mid = (lo + hi) / 2;
+    if ((4 / 3) * Math.PI * mid * mid * (h / 2) < want) lo = mid; else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+function nucleusH() { return (1 - ADU_BODY_H) * ADU_SCALE * 0.70; }
+
+/* THE VESTIGE SHRINKS AS A SHAPE, NOT ONLY AS A RADIUS — review round 3, beat 8, OPEN 1/2.
+   WHAT WAS WRONG. regression was modelled as THINNING ALONE: the remnant kept the vertebral body's
+   full height at every t and only lost calibre, so it never left the body it was being crushed out
+   of. Measured on the built triangles at t=0.90, the five remnants occupied y [-3.53,-2.47]
+   [-2.03,-0.97] [-0.53,0.53] [0.97,2.03] [2.47,3.53] and the four nuclei landed in the 0.44 gaps
+   between them with ~0.01 of clearance, so end to end the column was effectively unbroken from -3.53
+   to +3.53 — row AB, built afterwards, scores that law 0.0416 at this t and 0.0824 at its best, in
+   eight slivers nobody sees: a dark cord threading every vertebral body with the nuclei strung on it,
+   which is what the frame in models-out shows, in the beat whose
+   sentence is "inside each vertebral body the notochord is crushed out of existence". A student read
+   the opposite of what the beat exists to teach — the adult notochord persisting as a continuous
+   cord — which is the segmented-notochord error one layer up. And the old law could not fix itself
+   by moving the beat's t: at regressFrac 1 it still left a 0.060-wide cord 4.86 long.
+
+   THE LAW NOW. The vestige shrinks ISOTROPICALLY — it keeps its aspect ratio and loses size in
+   every direction at once, which is what being crushed from all sides by an advancing ossification
+   front means, and it is the only shrinkage that needs no exponent chosen by hand. One scale factor
+   k falls out of the SAME conservation the old law obeyed, so nothing else moves:
+
+       remaining volume  =  pi (k r0)^2 (k h0)  =  k^3 . pi r0^2 h0  =  A h0 (1 - f)
+   so  k(f) = (1 - f)^(1/3)
+
+   NOTHING IN THE NUCLEUS SOLVE CHANGES. nucleusR() bisects against `fromBodies = A . pitch . BODY_H
+   . f`, which is the volume that LEFT one body's length; the identity above is the same one the old
+   law satisfied, so the budget, the bisection and every pinned claim that depends on them —
+   B8-grown's nucleusRadiusFrac included — are untouched by this edit. That is deliberate: the review
+   warned that moving the beat's t instead would drag the solved geometry with it, and this fix does
+   not move the beat's t at all.
+
+   THE FLOOR IS ON THE SCALE, NOT ON THE RADIUS, so the vestige stays a SHAPE as it vanishes rather
+   than collapsing into a full-height hair. A floor is still needed for the reason the old one gave:
+   a structure a beat SHOWS must draw something. 0.12 is the old radius floor's own value, re-used so
+   row N's `remnantRadiusFrac <= 0.16` at t=1 is held by the same number as before. */
+const VEST_FLOOR = 0.12;
+/* the vestige's end caps bulge past its own polyline; named here rather than left inline because the
+   POCKET the vertebral body opens for it is derived from the same number — see buildAdult */
+const ADU_VEST_BULGE = 0.85;
+function vestigeScale(t) { return Math.max(VEST_FLOOR, Math.cbrt(Math.max(0, 1 - regressFrac(t)))); }
+/** what is left of the notochord inside one body at t: a thinning rod that also SHORTENS, so it
+    withdraws from the end plates instead of spanning them */
+function regressedR(t) { return ADU_NCH_R * ADU_SCALE * vestigeScale(t); }
+function regressedH(t) { return ADU_BODY_H * ADU_SCALE * vestigeScale(t); }
+
+/* ═══════════════════════════════════════════════════════════ 9 · GEOMETRY HELPERS
+
+   Everything geometric goes through render-kit: winding through emitter().quad / quadFlip / triN,
+   colour through C(), silhouettes through outlineOf, framing through fitCamera. Nothing here
+   reimplements any of them (RENDER-STANDARD §6).
+
+   A LANE is the unit the sheets are built from: a v-interval with an inner and an outer x boundary, a
+   mid-surface and a thickness, swept as a CLOSED slab with its own side walls and end caps. Lanes of
+   the same key abut on interior faces nobody sees. Lanes of DIFFERENT keys overlap by OVERLAP and the
+   pair is named in TOUCH_OK, because a shared face between two keys is §2.5's scratches and a shared
+   EDGE is a hole. A STEP in a boundary is a lane boundary, never a very short sweep — which is the
+   primitive-streak round-4 finding, taken here before it could happen again. */
+
+const BLK_X = 1.15, BLK_V0 = 0.655, BLK_V1 = 0.855;   // the block window — see the note at inBlock
+
+function laneSlab(lane) {
+  if (!lane) return null;
+  const n = lane.rows || 40;
+  /* COLUMNS ARE DERIVED FROM THE LANE'S WIDTH, not typed. A fixed 14 columns is fine on a lane half a
+     unit wide and far too coarse on one 8.6 units wide: the ectoderm's ventral face has to follow the
+     axial swelling, which is about 1.4 units across, and at 0.6 units per column the surface cut
+     straight across it and dipped into the somite underneath — 18% of the somite's vertices measured
+     inside the upper sheet, in the `failed` build only, because that is the build whose ectoderm has
+     no midline window and therefore one very wide lane. Row O found it; the fix is resolution, not a
+     declared exception. */
+  let maxW = 0;
+  for (let i = 0; i <= 8; i++) { const v = lane.v0 + (lane.v1 - lane.v0) * (i / 8); maxW = Math.max(maxW, Math.abs(lane.xb(v) - lane.xa(v))); }
+  const cols = lane.cols || Math.max(8, Math.min(52, Math.round(maxW / 0.17)));
+  /* A LANE WITH NO WIDTH IS NOT A LANE. The block window clamps both boundaries to its own edge, so
+     a lane whose x-range lies entirely outside it collapses to a line — every quad zero-area, every
+     side wall coincident with its own end cap, and a closed surface reporting a negative volume.
+     The clamp is right; emitting the collapse is not. */
+  if (maxW < 6e-3) return null;
+  const E = K.emitter();
+  const R = [];
+  for (let i = 0; i <= n; i++) {
+    const v = lane.v0 + (lane.v1 - lane.v0) * (i / n), y = yOf(v);
+    R.push({ v, y, a: lane.xa(v), b: lane.xb(v) });
+  }
+  const px = (i, j) => { const r = R[i]; return r.a + (r.b - r.a) * (j / cols); };
+  const pt = (i, j, side) => {
+    const r = R[i], x = px(i, j), zm = lane.zMid(x, r.y, r.v), h = lane.thick(x, r.y, r.v) / 2;
+    return new T.Vector3(x, r.y, zm + side * h);
+  };
+  /* normals from a finite difference of the SAME point function that produced the positions, guarded
+     against collapse — RENDER-STANDARD §2.3. */
+  const nrm = (i, j, side) => {
+    const r = R[i], x = px(i, j), e = 1.2e-3;
+    const f = (xx, yy) => lane.zMid(xx, yy, vOf(yy)) + side * lane.thick(xx, yy, vOf(yy)) / 2;
+    const dzdx = (f(x + e, r.y) - f(x - e, r.y)) / (2 * e);
+    const dzdy = (f(x, r.y + e) - f(x, r.y - e)) / (2 * e);
+    const out = new T.Vector3(-dzdx * side, -dzdy * side, side);
+    if (out.lengthSq() < 1e-12) out.set(0, 0, side);
+    return out.normalize();
+  };
+  for (const side of [-1, 1]) {
+    for (let i = 0; i < n; i++) for (let j = 0; j < cols; j++) {
+      const a = pt(i, j, side), b = pt(i + 1, j, side), c = pt(i + 1, j + 1, side), d = pt(i, j + 1, side);
+      const ma = nrm(i, j, side), mb = nrm(i + 1, j, side), mc = nrm(i + 1, j + 1, side), md = nrm(i, j + 1, side);
+      ringQuad(E, a, b, c, d, ma, mb, mc, md);
+    }
+  }
+  const hullCount = E.count();
+  for (const j of [0, cols]) {                       // the two side walls
+    const sgn = j === 0 ? -1 : 1, nx = new T.Vector3(sgn, 0, 0);
+    for (let i = 0; i < n; i++) {
+      const p0 = pt(i, j, -1), p1 = pt(i, j, 1), q0 = pt(i + 1, j, -1), q1 = pt(i + 1, j, 1);
+      E.triN(p0, p1, q1, nx); E.triN(p0, q1, q0, nx);
+    }
+  }
+  for (const i of [0, n]) {                          // the two end caps
+    const sgn = i === 0 ? -1 : 1, ny = new T.Vector3(0, sgn, 0);
+    for (let j = 0; j < cols; j++) {
+      const p0 = pt(i, j, -1), p1 = pt(i, j, 1), q0 = pt(i, j + 1, -1), q1 = pt(i, j + 1, 1);
+      E.triN(p0, p1, q1, ny); E.triN(p0, q1, q0, ny);
+    }
+  }
+  return E.geometry(hullCount);
+}
+
+/* ─── THE RING QUAD, WITH ITS ORDER MEASURED RATHER THAN REASONED ABOUT.
+
+   RENDER-STANDARD §2.4b states the rule this exists to obey: "a winding convention that has to be
+   reasoned about at the call site will be got wrong at some call site". It was. The kit's quad()
+   takes a fixed vertex order and corrects nothing, so whether it comes out inward or outward depends
+   on the HANDEDNESS of the parametrisation it is handed — and all three of this file's surfaces
+   (a sheet swept (v, x), a tube swept (v, theta), a spheroid swept (polar, azimuth)) are right-handed
+   with respect to their own outward normal, which is the opposite of what quad() assumes. Measured
+   before this was written: winding agreement 0.0903 over 834,642 triangles, and 277 closed bodies
+   with a NEGATIVE signed volume. Every single surface in the model was inside out, and nothing in
+   the picture looked wrong, because the materials are DoubleSide and the normals were supplied —
+   which is §2.1's description of itself.
+
+   So this does for a quad what the kit's triN does for a triangle: it computes the face normal the
+   quad() order would give and compares it with the normals the caller supplied, then emits whichever
+   of the kit's two orders agrees. The decision is per quad and costs one cross product. A degenerate
+   quad — at a taper's point, where the cross product collapses — inherits the previous decision
+   rather than flipping on noise. The emission is still the kit's; only the choice between its two
+   orders is measured here. */
+const _rq = { e1: null, e2: null, fn: null };
+/** ONE triangle, ordered so its face normal agrees with the normals supplied for its own corners,
+    and carrying all three of them so the surface still shades smoothly. This is the kit's triN
+    generalised from one normal to three: triN would decide the order just as well, but it writes a
+    single flat normal to all three vertices, which costs the smooth shading every curved surface in
+    this file depends on. */
+function emitTri(E, p1, p2, p3, n1, n2, n3) {
+  if (!_rq.e1) { _rq.e1 = new T.Vector3(); _rq.e2 = new T.Vector3(); _rq.fn = new T.Vector3(); }
+  _rq.fn.copy(_rq.e1.subVectors(p2, p1).cross(_rq.e2.subVectors(p3, p1)));
+  if (_rq.fn.lengthSq() < 1e-20) return;             // degenerate: at a taper's point or a pole
+  const mx = n1.x + n2.x + n3.x, my = n1.y + n2.y + n3.y, mz = n1.z + n2.z + n3.z;
+  if (_rq.fn.x * mx + _rq.fn.y * my + _rq.fn.z * mz >= 0) E.tri(p1, p2, p3, n1, n2, n3);
+  else E.tri(p1, p3, p2, n1, n3, n2);
+}
+function ringQuad(E, a, b, c, d, ma, mb, mc, md) {
+  /* PER TRIANGLE, NOT PER QUAD, and the difference is measurable. Deciding one order for the whole
+     quad leaves the warped ones wrong: where a quad spans a fast-turning feature — a superellipse's
+     corner at n = 6, the lens taper at a prechordal plate's end, a short segment's end rows — its
+     two triangles can want OPPOSITE orders, and no single choice satisfies both. Measured with the
+     per-quad version: agreement 0.99251 on `plate` at t = 0.34, 0.98848 on `definitive` at 0.44,
+     0.98239 on `prechordal_plate`, scattered across eleven of the fifty-two sampled builds. Per
+     triangle there is nothing left to be ambiguous about. */
+  emitTri(E, a, d, c, ma, md, mc);
+  emitTri(E, a, c, b, ma, mc, mb);
+}
+
+/* ─── THE AXIAL SWEEP. One superellipse section per station, area-preserving by construction (§5),
+   optionally with a lumen. This is emitted through the kit's emitter so winding is the kit's
+   business, and its normals are a finite difference of the same point function. */
+function superPt(a, b, n, th) {
+  const c = Math.cos(th), s = Math.sin(th);
+  const ex = 2 / n;
+  return { x: a * Math.sign(c) * Math.pow(Math.abs(c), ex),
+           z: b * Math.sign(s) * Math.pow(Math.abs(s), ex) };
+}
+function axialSweep(v0, v1, t, opts) {
+  const o = opts || {};
+  const n = o.rows || 34, ring = o.ring || NR;
+  const E = K.emitter();
+  const secOf = v => (o.sec ? o.sec(v) : sectionAt(v, t));
+  const zOf = v => (o.zOf ? o.zOf(v) : zAxisAt(v, t));
+  const yAt = v => (o.yOf ? o.yOf(v) : yOf(v));
+  const vAt = i => v0 + (v1 - v0) * (i / n);
+  const TH = j => (j / ring) * Math.PI * 2;
+  const surf = (v, th, inner) => {
+    const sec = secOf(v);
+    let a = sec.a, b = sec.b, nn = sec.n;
+    if (inner) { const L = o.lumen ? o.lumen(v) : lumenAt(v, t); if (!L) return null; a = L.a; b = L.b; nn = 2; }
+    const q = superPt(a, b, nn, th);
+    return new T.Vector3(q.x, yAt(v), zOf(v) + q.z);
+  };
+  const nrmAt = (v, th, inner) => {
+    const e = 6e-4, dv = (v1 - v0) / (n * 4) || 1e-3;
+    const a0 = surf(v, th, inner), a1 = surf(v, th + e, inner), a2 = surf(v + dv, th, inner);
+    if (!a0 || !a1 || !a2) return new T.Vector3(0, 0, 1);
+    const du = new T.Vector3().subVectors(a1, a0), dw = new T.Vector3().subVectors(a2, a0);
+    const nv = new T.Vector3().crossVectors(dw, du);
+    if (nv.lengthSq() < 1e-16) {
+      const q = superPt(1, 1, 2, th); nv.set(q.x, 0, q.z);
+      if (nv.lengthSq() < 1e-16) nv.set(0, 0, 1);
+    }
+    /* force it away from the centreline on the OUTER surface and towards it on the inner one,
+       which is the direction each surface's solid is on the other side of (§2.3's guard, and §2.4's
+       reason for keeping the inner wall out of the silhouette) */
+    const c = new T.Vector3(0, yAt(v), zOf(v));
+    const rad = new T.Vector3().subVectors(a0, c);
+    if (nv.dot(rad) < 0 !== !!inner) nv.negate();
+    return nv.normalize();
+  };
+  /* A FENESTRA IN THE NEAR SIDE, SO THE LUMEN IS SOMETHING A STUDENT CAN SEE. The sequence version
+     asked for exactly this in its own gaps[] — "the notochordal process drawn as a HOLLOW tube with
+     its canal open into the pit" — and the player walk turned it from a wish into a requirement: the
+     `canal` cast is a solid lying inside the wall that encloses it, so on an uncut tube it drew
+     0.000% of the frame in all three beats that show it, which is a structure a student is told
+     about and cannot see. The window faces +x, which is the camera's side on every median-section
+     beat, and it stops short of both ends so the end caps stay whole and the four rim walls close
+     it: a fenestra, not a split tube. */
+  const WIN = o.window || 0;                       // half-angle, 0 for none
+  /* AND IT MAY RUN THE WHOLE SWEEP, which is a different thing from a fenestra and is used for one
+     thing only: the adult segment's MEDIAN SECTION (section 11). A fenestra stops short of both ends
+     so the end caps stay whole; a hemisection does not, so the end caps must be cut to the kept
+     sector and the window's own floor at i = 0 must NOT be emitted — there is no floor to a cut that
+     runs off the end. Both are handled below, and both are no-ops when winFull is false, which is
+     every other call in this file. */
+  const WINFULL = !!o.winFull;
+  const wv0 = WINFULL ? Math.min(v0, v1) - 1 : v0 + (v1 - v0) * 0.10;
+  const wv1 = WINFULL ? Math.max(v0, v1) + 1 : v0 + (v1 - v0) * 0.90;
+  const hasLumen = v => !!(o.lumen ? o.lumen(v) : lumenAt(v, t));
+  const inWin = (v, th) => {
+    if (!WIN) return false;
+    if (v < wv0 || v > wv1) return false;
+    /* AND ONLY WHERE THERE IS A LUMEN TO LOOK INTO. Without this the rim walls ran to the
+       CENTRELINE wherever the lumen had already closed, where two of each quad's corners are the
+       same point — 8 unpaired edges, the degenerate-quad fault the sibling records at its taper,
+       arriving at a window's corner. A fenestra over solid tissue is also not a fenestra. */
+    if (!hasLumen(v)) return false;
+    let d = Math.abs(((th + Math.PI) % (2 * Math.PI)) - Math.PI);
+    return d <= WIN;
+  };
+  const cellWin = (va, vb, j) => inWin((va + vb) / 2, TH(j + 0.5)) && hasLumen(va) && hasLumen(vb);
+  /* the outer surface */
+  for (let i = 0; i < n; i++) {
+    const va = vAt(i), vb = vAt(i + 1);
+    for (let j = 0; j < ring; j++) {
+      if (cellWin(va, vb, j)) continue;
+      const a = surf(va, TH(j), false), b = surf(vb, TH(j), false),
+            c = surf(vb, TH(j + 1), false), d = surf(va, TH(j + 1), false);
+      ringQuad(E, a, b, c, d, nrmAt(va, TH(j), false), nrmAt(vb, TH(j), false),
+                              nrmAt(vb, TH(j + 1), false), nrmAt(va, TH(j + 1), false));
+    }
+  }
+  const hullCount = E.count();
+  /* the inner surface, where there is a lumen — wound the other way, because its outward direction
+     is into the solid */
+  const hasL = v => !!(o.lumen ? o.lumen(v) : lumenAt(v, t));
+  let lastL = -1;
+  for (let i = 0; i <= n; i++) if (hasL(vAt(i))) lastL = i; else break;
+  for (let i = 0; i < n; i++) {
+    const va = vAt(i), vb = vAt(i + 1);
+    if (!hasL(va) || !hasL(vb)) continue;
+    for (let j = 0; j < ring; j++) {
+      if (cellWin(va, vb, j)) continue;
+      const a = surf(va, TH(j), true), b = surf(vb, TH(j), true),
+            c = surf(vb, TH(j + 1), true), d = surf(va, TH(j + 1), true);
+      ringQuad(E, a, b, c, d, nrmAt(va, TH(j), true), nrmAt(vb, TH(j), true),
+                              nrmAt(vb, TH(j + 1), true), nrmAt(va, TH(j + 1), true));
+    }
+  }
+  /* THE FENESTRA'S FOUR RIM WALLS, from the outer surface to the inner one (or to the centreline
+     where the body is solid), so a cut wall reads as a wall and not as a paper edge. */
+  if (WIN) {
+    const inner = (v, th) => (hasL(v) ? surf(v, th, true) : new T.Vector3(0, yAt(v), zOf(v)));
+    for (let i = 0; i < n; i++) {
+      const va = vAt(i), vb = vAt(i + 1);
+      for (let j = 0; j < ring; j++) {
+        const here = cellWin(va, vb, j);
+        const prev = j > 0 ? cellWin(va, vb, j - 1) : cellWin(va, vb, ring - 1);
+        if (here === prev) continue;
+        const th = TH(j);
+        const oa = surf(va, th, false), ob = surf(vb, th, false);
+        const ia = inner(va, th), ib = inner(vb, th);
+        const tg = new T.Vector3().crossVectors(new T.Vector3(0, 1, 0), oa.clone().sub(new T.Vector3(0, yAt(va), zOf(va)))).normalize();
+        if (here) tg.negate();
+        emitTri(E, oa, ob, ib, tg, tg, tg);
+        emitTri(E, oa, ib, ia, tg, tg, tg);
+      }
+    }
+    for (let i = 0; i < n; i++) {
+      const va = vAt(i), vb = vAt(i + 1);
+      for (let j = 0; j < ring; j++) {
+        const here = cellWin(va, vb, j);
+        const prev = i > 0 ? cellWin(vAt(i - 1), va, j) : (WINFULL ? here : false);
+        if (here === prev) continue;
+        const v = va, sgn = here ? -1 : 1, ny = new T.Vector3(0, sgn, 0);
+        const o0 = surf(v, TH(j), false), o1 = surf(v, TH(j + 1), false);
+        const i0 = inner(v, TH(j)), i1 = inner(v, TH(j + 1));
+        emitTri(E, o0, o1, i1, ny, ny, ny);
+        emitTri(E, o0, i1, i0, ny, ny, ny);
+      }
+    }
+  }
+  /* WHERE THE LUMEN'S RUN ENDS INSIDE THE BODY, CLOSE IT. A canal that stops has a blind end, and
+     a blind end is a surface: without it the solid is open along one whole ring. The normal points
+     back along the lumen, which is the side the solid is NOT on. */
+  if (lastL >= 0 && lastL < n) {
+    const v = vAt(lastL), ny = new T.Vector3(0, -1, 0);
+    const ctr = new T.Vector3(0, yAt(v), zOf(v));
+    for (let j = 0; j < ring; j++) {
+      const i0 = surf(v, TH(j), true), i1 = surf(v, TH(j + 1), true);
+      if (i0 && i1) E.triN(i0, i1, ctr, ny);
+    }
+  }
+  /* the end caps: an annulus where there is a lumen, a disc where there is not */
+  for (const i of [0, n]) {
+    const v = vAt(i), sgn = i === 0 ? -1 : 1, ny = new T.Vector3(0, sgn, 0);
+    const L = hasL(v);
+    /* the cell this cap sits on, so a cap is not drawn across a sector the window removed */
+    const ca = i === 0 ? vAt(0) : vAt(n - 1), cb = i === 0 ? vAt(1) : vAt(n);
+    for (let j = 0; j < ring; j++) {
+      if (cellWin(ca, cb, j)) continue;
+      const o0 = surf(v, TH(j), false), o1 = surf(v, TH(j + 1), false);
+      if (L) {
+        const i0 = surf(v, TH(j), true), i1 = surf(v, TH(j + 1), true);
+        E.triN(o0, o1, i1, ny); E.triN(o0, i1, i0, ny);
+      } else {
+        const ctr = new T.Vector3(0, yAt(v), zOf(v));
+        E.triN(o0, o1, ctr, ny);
+      }
+    }
+  }
+  return E.geometry(hullCount);
+}
+
+/** a collar: an annulus around the axis over [v0, v1].
+
+    IT DOES NOT GO THROUGH THE KIT'S HOLLOW sweptShell, AND THAT IS A FINDING RATHER THAN A STYLE
+    CHOICE. render-kit.js's ANNULAR end caps are written with E.quad / E.quadFlip in an order chosen
+    by reasoning about which way the ring runs — which is exactly the pattern §2.4b says "will be got
+    wrong at some call site", and it is wrong at this one. Measured on a plain straight annulus
+    (ring 24, 4 rows, outer 1.0, inner 0.6, nothing of this model involved):
+
+        480 triangles, 48 wound against their own supplied normal, agreement 0.9000
+        outer surface 0 of 192 wrong, inner wall 0 of 192 wrong, END CAPS 48 of 96 wrong
+        — i.e. ALL of one cap: buffer indices 432..479, which is cap(0, -1), the E.quad branch.
+        The same probe on a SOLID tube: 0 of 240 wrong, because §2.4b routed that path through triN.
+
+    So the §2.4b fix reached the solid cap and not the annular one, and every hollow sweptShell in
+    the corpus has one cap inside out: the neural tube, the gut tube, a bronchus, a great vessel, and
+    the cutaway rim branch below it, which is written the same way. THIS RUN HAS NOT CHANGED
+    render-kit.js — a build run editing the shared machinery would change every model in the corpus
+    at once, unreviewed, and this item is the notochord. The reproduction above is in the build log
+    for the review task to act on; here, the collars are emitted through axialSweep, whose annular
+    caps go through triN and whose ring quads have their order MEASURED per quad (see ringQuad). */
+function collar(v0, v1, t, ri, ro) {
+  return axialSweep(v0, v1, t, {
+    rows: 10, sec: () => ({ a: ro, b: ro, n: 2 }), lumen: () => ({ a: ri, b: ri }),
+  });
+}
+/** the same annulus, along y at an arbitrary scale — the adult vertebral body and annulus fibrosus.
+    `ri` may be a NUMBER (a straight bore) or a FUNCTION of the sweep parameter (a bore that follows
+    something — the annulus fibrosus follows the nucleus pulposus it wraps, see section 11).
+    RING IS 32 AND NOT 30 FOR A MEASURED REASON: the hemisection's rim wall lands on a ring VERTEX,
+    so the cut plane is exactly x = 0 only if there is a vertex at th = pi/2 and at 3pi/2. At ring 30
+    there is not — the nearest are at 84 and 96 degrees — and the cut would have overshot the median
+    plane by 6 degrees. At 32 both are vertices (j = 8 and j = 24) and acceptance row T measures that
+    every vertex of the cut keys has x <= 0. */
+function annulusAlongY(y0, y1, ri, ro, rows, win, winFull) {
+  const bore = typeof ri === 'function' ? ri : () => ri;
+  return axialSweep(0, 1, 0, {
+    rows: rows || 8, ring: 32, window: win || 0, winFull: !!winFull,
+    yOf: u => y0 + (y1 - y0) * u, zOf: () => 0,
+    sec: () => ({ a: ro, b: ro, n: 2 }), lumen: v => { const r = bore(v); return { a: r, b: r }; },
+  });
+}
+
+/** an oblate spheroid: a cyst, a chordoma, a nucleus pulposus */
+function blob(cx, cy, cz, rx, ry, rz) {
+  const NA = 16, NB = 26, E = K.emitter();
+  const pt = (a, b) => {
+    const ph = (a / NA) * Math.PI, th = (b / NB) * Math.PI * 2;
+    return new T.Vector3(cx + rx * Math.sin(ph) * Math.cos(th),
+                         cy + ry * Math.sin(ph) * Math.sin(th),
+                         cz + rz * Math.cos(ph));
+  };
+  const nr = (a, b) => {
+    const ph = (a / NA) * Math.PI, th = (b / NB) * Math.PI * 2;
+    return new T.Vector3(Math.sin(ph) * Math.cos(th) / rx, Math.sin(ph) * Math.sin(th) / ry,
+                         Math.cos(ph) / rz).normalize();
+  };
+  for (let a = 0; a < NA; a++) for (let b = 0; b < NB; b++) {
+    const p0 = pt(a, b), p1 = pt(a + 1, b), p2 = pt(a + 1, b + 1), p3 = pt(a, b + 1);
+    const n0 = nr(a, b), n1 = nr(a + 1, b), n2 = nr(a + 1, b + 1), n3 = nr(a, b + 1);
+    /* the pole rows are triangles, and triN decides their order from the geometry — §2.4b */
+    /* AT THE POLE p0 AND p3 ARE THE SAME POINT, and the first version of this emitted
+       (p0, p2, p3) — a triangle with two identical corners, whose two surviving edges are the same
+       edge counted twice. Measured: 104 unpaired edges on every spheroid in the model, which is the
+       sibling's TAPER_MIN finding arriving at a different kind of surface. The pole fan is
+       (pole, p1, p2). */
+    if (a === 0) E.triN(p0, p1, p2, n1);
+    else if (a === NA - 1) E.triN(p0, p1, p3, n0);
+    else ringQuad(E, p0, p1, p2, p3, n0, n1, n2, n3);
+  }
+  return E.geometry(E.count());
+}
+
+/** a tube along an arbitrary polyline — the neurenteric channel and the fistula */
+function pipe(points, r) {
+  return K.tubeCapped(points.map(q => q.clone()), () => r,
+    { ring: 18, flatten: 1, section: () => 1, cap: 'both', rows: 6, bulge: 0.85 });
+}
+
+/* ══════════════════════════════════════════════════════════════════ 10 · THE BUILD */
+
+function inBlock(v) { return v >= BLK_V0 && v <= BLK_V1; }
+/* THE BLOCK WINDOW, AND THE MEASUREMENT THAT FORCED IT. viz3d's frameView fits the camera to the
+   whole bounding box of what a beat shows, with no knowledge of which way the camera points — that
+   is engine__refit-camera-on-isolate, which is ESCALATED and waiting on a human. A THREE clipping
+   plane hides geometry but Box3.setFromObject still measures it, so CROSS_SECTION does not shrink
+   the box the camera is fitted to. The sibling scene measured the consequence: a section of the whole
+   disc gives the structure it is about 0.046% of the frame. So the two transverse beats here are
+   built from a BLOCK — the same lens and the same sweep, built only inside a window 2.3 units wide
+   and 2.1 long around the fronts — whose own end cap IS the transverse face, seen from `inferior`.
+   Acceptance row Y asserts the block is literally a piece of the same geometry rather than a second
+   drawing of it. */
+function clipV(v0, v1, blk) {
+  if (!blk) return [v0, v1];
+  const a = Math.max(v0, BLK_V0), b = Math.min(v1, BLK_V1);
+  return b > a + 2.5e-3 ? [a, b] : null;
+}
+function clipX(x, blk) { return blk ? Math.max(-BLK_X, Math.min(BLK_X, x)) : x; }
+/* THE MEDIAN SECTION, AND THE MEASUREMENT THAT FORCED IT. The scene's first sentence is "cut the
+   week-three disc down the middle from head to tail and look at it from the side", and the first
+   composition of this scene did the looking without the cutting: it showed the whole disc from
+   `lateral`. The player walk (viz-training/tools/measure-scene-visibility.mjs) failed TEN of the
+   eleven beats on that composition, and the cause was not framing but OCCLUSION — from the side of
+   an intact disc the midline is behind 4.3 units of mesoderm and ectoderm, so `definitive` drew
+   0.000% of the frame in every beat whose narration points at it, as did `prechordal_plate`,
+   `sclerotome` and both chordoma masses.
+
+   So `hemi` cuts every SHEET at the median plane and keeps the half away from the camera, leaving
+   the midline structures whole: the camera then looks at the cut faces of the five sheets with the
+   notochord, the node, the pit and the collars standing proud of them. It is the picture the
+   sequence version described in words. The sheets are the only thing clipped because they are the
+   only thing in the way, and leaving the axial bodies whole costs nothing a median section would
+   have shown and avoids capping a swept superellipse against a plane.
+
+   AND IT IS A SLAB, NOT A HALF: the flank is kept only to HEMI_X = 1.60 units. That is not trimming
+   for looks, it is the only lever a scene has on the frame. viz3d stands the camera back by
+   ext(up)/tan(fov/2) + ext(dir), where ext(dir) is the subject's half-depth ALONG the view axis — so
+   on a `lateral` beat the 4.3 units of lateral mesoderm behind the cut push the camera 2.15 units
+   further back and shrink everything in the picture, while contributing nothing a median section is
+   about. Measured on beat 4: the whole flank gives the rod 0.262% of the frame, a 1.6-unit slab
+   gives it 0.32%, against a 0.30% floor for a structure the narration points at. A median section in
+   any textbook is drawn as a slab for the same reason. Acceptance row W asserts the cut is exactly
+   the median plane and that nothing else moved. */
+const HEMI_X = 1.60;   // how much of the flank a median-section beat keeps — see the note below
+const HEMI_V0 = 0.240, HEMI_V1 = 0.990;
+/* AND IT IS CROPPED CRANIO-CAUDALLY, which is the lever that actually moves the picture. Measured
+   rather than reasoned: trimming the flank from 4.3 units to 1.6 changed the player walk's numbers
+   by nothing at all — the tool reported 0.015158 world units per pixel before and after, because
+   viz3d sizes the frame from the subject's LONGEST visible axis and that is the disc's 9.6-unit
+   length, not its depth. So the only thing a scene can do is show less length. v 0.24 to 0.99 is
+   7.5 units: it keeps the whole notochordal axis at every t this scene uses (the node is at v 0.498
+   at beat 1 and 0.313 at beat 9), the node, the pit, the prechordal plate and both membranes'
+   oropharyngeal one, and it drops the caudal tip of the disc, where the only structure is the
+   cloacal membrane — which is declared in gaps[] and dropped from the beat that showed it. */
+function hemiX(x, hem) { return hem ? Math.max(-HEMI_X, Math.min(x, 0)) : x; }
+function hemiV(v0, v1, hem) {
+  if (!hem) return [v0, v1];
+  const a = Math.max(v0, HEMI_V0), b = Math.min(v1, HEMI_V1);
+  return b > a + 2.5e-3 ? [a, b] : null;
+}
+
+/* every slab in the build goes through this, so the median cut cannot be forgotten at a call site */
+function lane(L, blk, hem) {
+  const vv = hemiV(L.v0, L.v1, hem);
+  if (!vv) return null;
+  const xa = v => hemiX(clipX(L.xa(v), blk), hem);
+  const xb = v => hemiX(clipX(L.xb(v), blk), hem);
+  return Object.assign({}, L, { v0: vv[0], v1: vv[1],
+    xa: v => Math.min(xa(v), xb(v)), xb: v => Math.max(xa(v), xb(v)) });
+}
+function addPart(g, key, geo, over) {
+  if (!geo) return null;
+  const L = LAYERS[key];
+  return K.addSolid(g, key, geo, Object.assign({
+    color: L.color, name: L.name, outline: 0.010,
+  }, over || {}));
+}
+/** a lens-shaped plan taper that never reaches zero width, so no row of the sweep is degenerate */
+function lens(u, floorFrac) {
+  const s = Math.max(0, 1 - (2 * u - 1) * (2 * u - 1));
+  return (floorFrac || 0.3) + (1 - (floorFrac || 0.3)) * Math.sqrt(s);
+}
+
+function buildNotochord(t, opts) {
+  const o = opts || {}, u = clamp01(t);
+  const g = new T.Group();
+  if (o.adult) { buildAdult(g, u, o); finish(g, u, o); return g; }
+  const blk = !!o.block, hem = !!o.hemi;
+  const seg = segments(u), sp = axisSpan(u), nSp = npSpan(u);
+  const src = o.failed ? 0 : NP_SRC;
+
+  /* ─── 10.1 THE GUT ROOF. The reference surface, and the one sheet with a window in it: the plate
+     is INTERCALATED, which means the endoderm is interrupted exactly where the plate lies and
+     nowhere else. Cranial of the detachment front the roof has closed again — "the endoderm closes
+     underneath it and becomes a continuous gut roof" — and caudal of the breakdown front it was
+     never open. */
+  const endoThick = (x, y) => hVent(x, y) + OVERLAP * 0.5 * rimTaper(x, y);
+  const endoMid = (x, y) => zEndoVent(x, y) - hVent(x, y) / 2;
+  const win = seg.plate;
+  const winHalf = v => Math.max(0.04, sectionAt(v, u).a - OVERLAP);
+  const endoLanes = [];
+  if (win && win[1] > win[0] + 5e-3) {
+    endoLanes.push({ v0: V_LO, v1: win[0], xa: v => -halfW(v), xb: v => halfW(v) });
+    endoLanes.push({ v0: win[0], v1: win[1], xa: v => -halfW(v), xb: v => -winHalf(v) });
+    endoLanes.push({ v0: win[0], v1: win[1], xa: v => winHalf(v), xb: v => halfW(v) });
+    endoLanes.push({ v0: win[1], v1: V_HI, xa: v => -halfW(v), xb: v => halfW(v) });
+  } else {
+    endoLanes.push({ v0: V_LO, v1: V_HI, xa: v => -halfW(v), xb: v => halfW(v) });
+  }
+  for (const L of endoLanes) {
+    const c = clipV(L.v0, L.v1, blk); if (!c) continue;
+    addPart(g, 'endoderm', laneSlab(lane({ v0: c[0], v1: c[1], rows: 34,
+      xa: L.xa, xb: L.xb, zMid: endoMid, thick: endoThick }, blk, hem)));
+  }
+
+  /* ─── 10.2 THE UPPER SHEET, AND THE WINDOW THE NEURAL PLATE FILLS. Same treatment, for the same
+     reason: the neural plate IS the ectoderm there, thickened, so the ectoderm is interrupted under
+     it rather than drawn under it. Two coincident sheets would be §2.5's scratches on every beat. */
+  const ectoMid = (x, y) => zGapDors(x, y, u) - hEcto(x, y) / 2;
+  const ectoLanes = [];
+  const npH = v => Math.max(0.05, npHalf(v, u, src) - OVERLAP);
+  if (nSp && src > NP_THRESH) {
+    ectoLanes.push({ v0: V_LO, v1: nSp[0], xa: v => -halfW(v), xb: v => halfW(v) });
+    ectoLanes.push({ v0: nSp[0], v1: nSp[1], xa: v => -halfW(v), xb: v => -npH(v) });
+    ectoLanes.push({ v0: nSp[0], v1: nSp[1], xa: v => npH(v), xb: v => halfW(v) });
+    ectoLanes.push({ v0: nSp[1], v1: V_HI, xa: v => -halfW(v), xb: v => halfW(v) });
+  } else {
+    ectoLanes.push({ v0: V_LO, v1: V_HI, xa: v => -halfW(v), xb: v => halfW(v) });
+  }
+  for (const L of ectoLanes) {
+    const c = clipV(L.v0, L.v1, blk); if (!c) continue;
+    addPart(g, 'ectoderm', laneSlab(lane({ v0: c[0], v1: c[1], rows: 34,
+      xa: L.xa, xb: L.xb, zMid: ectoMid,
+      thick: (x, y) => hEcto(x, y) + OVERLAP * 0.5 * rimTaper(x, y) }, blk, hem)));
+  }
+
+  /* ─── 10.3 THE MIDDLE SHEET. Its inner boundary is the clearance profile — the axial structure
+     plus a margin, the streak caudal to the node, the prechordal plate, and a HARD exclusion inside
+     each membrane footprint, where there is no mesoderm at all. */
+  const mesoInner = v => Math.max(clearHalf(v, u) + GAP_MESO, membEdge(yOf(v)));
+  /* AND ONLY OVER THE v WHERE THERE IS ROOM FOR IT. At the caudal rim the streak is 0.60 wide and
+     the disc is 0.61, so the inner boundary passed the outer one and the lane came out INVERTED —
+     which flips the parametrisation's handedness and takes the winding with it: 1.1% of the
+     mesoderm's triangles disagreed with their own normals, on every build. There is no mesoderm
+     under the streak, so the honest fix is for the sheet to stop rather than to fold over. */
+  const roomFor = v => mesoInner(v) <= halfW(v) - 0.05;
+  const scan = (from, to) => { let a = from; for (let i = 0; i <= 240; i++) { const v = from + (to - from) * (i / 240); if (roomFor(v)) { a = v; break; } } return a; };
+  const mv0 = scan(V_LO, V_HI), mv1 = scan(V_HI, V_LO);
+  for (const side of [-1, 1]) {
+    const c = clipV(Math.min(mv0, mv1), Math.max(mv0, mv1), blk); if (!c) continue;
+    addPart(g, 'mesoderm', laneSlab(lane({ v0: c[0], v1: c[1], rows: 40,
+      xa: v => (side < 0 ? -halfW(v) : Math.min(mesoInner(v), halfW(v) - 0.05)),
+      xb: v => (side < 0 ? -Math.min(mesoInner(v), halfW(v) - 0.05) : halfW(v)),
+      zMid: (x, y) => zEndoDors(x, y) - hMeso(x, y) / 2,
+      thick: (x, y) => hMeso(x, y) + OVERLAP * 0.5 * rimTaper(x, y) }, blk, hem)));
+  }
+
+  /* ─── 10.4 THE AXIS ITSELF: one sweep, three keys, three consecutive v-ranges of it. Adjacent
+     keys overlap by OV in v so neither end cap is ever exposed and no crack can open between them.
+     The section law is continuous across both joins (section 5), so the overlap is a run boundary
+     with coincident caps rather than a very short sweep. */
+  const OV = 0.004;
+  /* THE FAILED VARIANT DOES NOT DRAW THE NORMAL AXIS. It would be drawn in the same place as the
+     defective one — two coincident rods, §2.5's scratches on the one beat whose whole point is the
+     contrast — and a reviewer comparing the two pictures would be comparing a picture of both. */
+  if (sp && !o.failed) {
+    if (seg.process) {
+      const c = clipV(seg.process[0], Math.min(sp[1], seg.process[1] + OV), blk);
+      if (c) addPart(g, 'process', axialSweep(c[0], c[1], u,
+        { rows: 30, window: hem ? 1.00 : 0 }));
+      /* the lumen's own cast, standing clear of the wall it lies inside */
+      const cc = clipV(seg.process[0] + 0.006, Math.max(seg.process[0] + 0.012, seg.process[1] - 0.004), blk);
+      if (cc) {
+        const lum = v => { const L = lumenAt(v, u); return L ? { a: L.a * 0.90, b: L.b * 0.90, n: 2 } : { a: 0.021, b: 0.021, n: 2 }; };
+        addPart(g, 'canal', axialSweep(cc[0], cc[1], u, { rows: 22, sec: lum, lumen: () => null }),
+          { matOver: { opacity: 0.62, transparent: true } });
+      }
+    }
+    if (seg.plate) {
+      const c = clipV(Math.max(sp[0], seg.plate[0] - OV), Math.min(sp[1], seg.plate[1] + OV), blk);
+      if (c) addPart(g, 'plate', axialSweep(c[0], c[1], u, { rows: 30 }));
+    }
+    if (seg.definitive) {
+      const c = clipV(Math.max(sp[0], seg.definitive[0] - OV), seg.definitive[1], blk);
+      if (c) addPart(g, 'definitive', axialSweep(c[0], c[1], u, { rows: 30 }));
+    }
+  }
+
+  /* ─── 10.5 THE TWO ENDS. The node is a lens-shaped thickening of the upper sheet at the streak's
+     cranial tip; the pit is the narrow depression in it that these cells came through; the streak is
+     the broad band caudal to it. Each is drawn as a thickening ON its sheet and overlaps it, which
+     is named in TOUCH_OK — primitive-streak.js owns the streak as a subject. */
+  const nv = nodeV(u), lNode = L_NODE / p('DISC_L', DISC_L);
+  {
+    const c = clipV(nv - lNode * 0.45, nv + lNode * 0.55, blk);
+    if (c) addPart(g, 'node', laneSlab(lane({ v0: c[0], v1: c[1], rows: 14, cols: 10,
+      xa: v => -R_NODE * lens((v - (nv - lNode * 0.45)) / lNode, 0.42),
+      xb: v => R_NODE * lens((v - (nv - lNode * 0.45)) / lNode, 0.42),
+      zMid: (x, y) => zGapDors(x, y, u) - hEcto(x, y) * 0.95,
+      thick: (x, y) => hEcto(x, y) * 1.9 }, blk, hem)));
+  }
+  if (!blk || inBlock(nv)) {
+    /* IT STOPS AT THE CANAL. With a dome cap on the ventral end at the kit's default bulge, the
+       first version reached 0.14 further than its own polyline and 12.7% of its vertices measured
+       inside the gut roof — a pit that opened into the yolk sac two days early. */
+    const yP = yOf(nv), zd = zGapDors(0, yP, u) - hEcto(0, yP) * 1.9;
+    /* A FUNNEL, WHICH IS WHAT A PIT IS, and also what makes it visible: as a cylinder of radius
+       R_PIT it measured 0.28% of the frame on the two beats that point at it, just under the 0.30%
+       floor, and a wide cylinder would have been the wrong shape bought for a number. A depression
+       in an epithelium is wide at the surface and narrow at its depth. */
+    addPart(g, 'pit', K.tubeCapped(
+      [new T.Vector3(0, yP, zd - 0.02), new T.Vector3(0, yP, zAxisAt(nv, u) - 0.04)],
+      u2 => R_PIT * (1.36 - 0.78 * u2),
+      { ring: 18, flatten: 1, section: () => 1, cap: 'both', rows: 5, bulge: 0.22 }));
+  }
+  {
+    const c = clipV(V_STK0, Math.max(V_STK0 + 0.02, nv), blk);
+    if (c) addPart(g, 'streak', laneSlab(lane({ v0: c[0], v1: c[1], rows: 20, cols: 10,
+      xa: v => -p('W_STREAK', W_STREAK) * lens((v - V_STK0) / Math.max(1e-3, nv - V_STK0), 0.5),
+      xb: v => p('W_STREAK', W_STREAK) * lens((v - V_STK0) / Math.max(1e-3, nv - V_STK0), 0.5),
+      zMid: (x, y) => zGapDors(x, y, u) - hEcto(x, y) * 0.92,
+      thick: (x, y) => hEcto(x, y) * 1.55 }, blk, hem)));
+  }
+  {
+    /* CRANIAL OF THE TIP, not centred on it. The first version straddled V_PRE and so contained
+       the notochord's cranial 0.5 units: 37.5% of the rod's vertices measured inside it. "In front of
+       the prechordal plate there is no notochord" is the sentence this geometry has to carry. */
+    const c = clipV(V_PRE - OVERLAP, V_PRE + 0.160, blk);
+    if (c) addPart(g, 'prechordal_plate', laneSlab(lane({ v0: c[0], v1: c[1], rows: 12, cols: 10,
+      xa: v => -R_PCP * lens((v - (V_PRE - OVERLAP)) / 0.174, 0.40),
+      xb: v => R_PCP * lens((v - (V_PRE - OVERLAP)) / 0.174, 0.40),
+      zMid: (x, y) => (zEndoDors(x, y) + zGapDors(x, y, u)) / 2,
+      /* NOT CUT BY `hemi`. It is the landmark that says where the notochord stops, it is only 1.14
+         units long, and halved it measured 0.045% of the frame on the beat whose whole subject is
+         the two ends. Left whole it stands proud of the cut like the other midline structures. */
+      thick: (x, y) => Math.max(0.08, gapAt(x, y, u) * 0.94) }, blk, false)));
+  }
+
+  /* ─── 10.6 THE TWO MEMBRANES, filling exactly the fused gap, so neither lamina has a hole. */
+  const memb = [
+    ['oropharyngeal_membrane', V_PRE + 0.012, Math.min(V_HI, 0.980), oroEdge],
+    ['cloacal_membrane', 0.033, 0.177, cloEdge],
+  ];
+  for (const [key, a, b, edge] of memb) {
+    const c = clipV(a, b, blk); if (!c) continue;
+    addPart(g, key, laneSlab(lane({ v0: c[0], v1: c[1], rows: 16, cols: 10,
+      xa: v => -Math.max(0.06, edge(yOf(v))), xb: v => Math.max(0.06, edge(yOf(v))),
+      zMid: (x, y) => zEndoDors(x, y) - p('H_FUSE', H_FUSE) / 2,
+      thick: () => p('H_FUSE', H_FUSE) + OVERLAP * 0.5 }, blk, hem)));
+  }
+
+  /* ─── 10.7 THE CONTEXT ENVELOPES, deliberately shallow. The sibling's note applies here too: a
+     deep dome sets the frame height and the subject shrinks inside it, so these are sheets a little
+     wider than the disc rather than cavities enclosing it. Both are named in narration, so they are
+     built rather than left out. */
+  {
+    const c = clipV(V_LO, V_HI, blk);
+    if (c) {
+      addPart(g, 'amnion', laneSlab(lane({ v0: c[0], v1: c[1], rows: 24, cols: 12,
+        xa: v => -halfW(v) * 1.07, xb: v => halfW(v) * 1.07,
+        zMid: (x, y) => zGapDors(x, y, u) - hEcto(x, y) - 0.62 + zEndoVent(x, y) * 0.3,
+        thick: () => 0.055 }, blk, hem)), { matOver: { opacity: 0.30, transparent: true }, noOutline: true });
+      addPart(g, 'yolk_sac', laneSlab(lane({ v0: c[0], v1: c[1], rows: 24, cols: 12,
+        xa: v => -halfW(v) * 1.07, xb: v => halfW(v) * 1.07,
+        zMid: (x, y) => zEndoVent(x, y) + 0.52,
+        thick: () => 0.055 }, blk, hem)), { matOver: { opacity: 0.30, transparent: true }, noOutline: true });
+    }
+  }
+
+  /* ─── 10.8 INDUCTION. The neural plate and its floor plate, where the signal is above threshold —
+     or, in the `failed` variant, a flat strip of ectoderm that was never induced, built by the SAME
+     code with the source turned off. */
+  if (nSp) {
+    const c = clipV(nSp[0], nSp[1], blk);
+    if (c) {
+      if (src > NP_THRESH) {
+        /* THE NEURAL PLATE IS NOT CUT BY `hemi`. It is a midline structure 1.3 units across and
+           the whole point of beats 6 and 11 is its thickness against flat ectoderm, which a cut
+           face shows and a half does not hide — and leaving it whole keeps it in front of nothing. */
+        addPart(g, 'neural_plate', laneSlab(lane({ v0: c[0], v1: c[1], rows: 30, cols: NP_COLS,
+          xa: v => -npHalf(v, u, src), xb: v => npHalf(v, u, src),
+          zMid: (x, y) => zGapDors(x, y, u) - npThickAt(x, vOf(y), u, src) / 2,
+          thick: (x, y) => npThickAt(x, vOf(y), u, src) }, blk, false)));
+        addPart(g, 'floor_plate', laneSlab(lane({ v0: c[0], v1: c[1], rows: 24, cols: 8,
+          xa: () => -FP_HALF, xb: () => FP_HALF,
+          /* INSIDE the plate's own ventral surface rather than protruding below it: protruding,
+             it met the notochord's dorsal surface 0.006 short of the clearance and row O found it.
+             In a transverse section — which is the only beat that points at it — the cut face shows
+             it either way. */
+          zMid: (x, y) => zGapDors(x, y, u) - H_FP / 2 + OVERLAP,
+          thick: () => H_FP }, blk, false)));
+      } else {
+        addPart(g, 'ecto_uninduced', laneSlab(lane({ v0: c[0], v1: c[1], rows: 30, cols: NP_COLS,
+          xa: v => -npHalf(v, u, NP_SRC), xb: v => npHalf(v, u, NP_SRC),
+          zMid: (x, y) => zGapDors(x, y, u) - hEcto(x, y) / 2,
+          thick: (x, y) => hEcto(x, y) }, blk, false)));
+      }
+    }
+  }
+
+  /* ─── 10.9 SEGMENTATION. Somites as thickenings on the paraxial strip, and sclerotome as collars
+     AROUND the axis — around it, not made from it, which is the preposition the topic turns on. */
+  const nPairs = somitePairsDrawn(u);
+  for (let i = 0; i < nPairs; i++) {
+    const cs = collarSpan(i, u); if (!cs) continue;
+    const c = clipV(cs[0], cs[1], blk); if (!c) continue;
+    for (const side of [-1, 1]) {
+      const x0 = v => clearHalf(v, u) + GAP_MESO + 0.02;
+      addPart(g, 'somite', laneSlab(lane({ v0: c[0], v1: c[1], rows: 8, cols: 8,
+        xa: v => (side < 0 ? -(x0(v) + p('W_SOM', W_SOM)) : x0(v)),
+        xb: v => (side < 0 ? -x0(v) : x0(v) + p('W_SOM', W_SOM)),
+        /* A SOMITE FILLS THE GAP IT IS IN rather than being a fixed multiple of the flat sheet's
+           thickness: at 1.55 x hMeso it stood 0.575 of a sheet-thickness above the ectoderm's own
+           ventral face and ran straight through it — half its vertices measured inside the upper
+           sheet. */
+        zMid: (x, y) => zEndoDors(x, y) - gapAt(x, y, u) / 2,
+        thick: (x, y) => gapAt(x, y, u) * 0.84 }, blk, hem)));
+    }
+    if (!sp) continue;
+    const ca = Math.max(c[0], sp[0]), cb = Math.min(c[1], sp[1]);
+    if (cb <= ca + 2e-3) continue;
+    const ri = Math.max(sectionAt((ca + cb) / 2, u).a, sectionAt((ca + cb) / 2, u).b) + SCL_GAP;
+    if (o.failed) {
+      /* THE NEGATIVE CONTROL, AS A BUILD. With nothing to organise around, the condensations are
+         irregular: the jitter is deterministic in i so two builds of the same t agree exactly. */
+      const j = ((i * 2654435761) % 1000) / 1000;
+      const w = 0.55 + 0.9 * j;
+      /* THE JITTER IS CLAMPED AT THE UNJITTERED RADIUS, because the gap the collar sits in is sized
+         from that radius: an outer radius 1.17 x R_SCL_O had no room and ran through the upper sheet,
+         which row O read — correctly — as a defect in the variant rather than as disorder. */
+      addPart(g, 'sclerotome_disordered', collar(ca, Math.min(sp[1], ca + (cb - ca) * w), u,
+        ri * (0.9 + 0.5 * j), R_SCL_O * (0.58 + 0.42 * j)));
+    } else {
+      addPart(g, 'sclerotome', collar(ca, cb, u, ri, R_SCL_O));
+    }
+  }
+
+  /* ─── 10.10 THE NEURENTERIC CANAL. A real, transient, through-and-through channel: amniotic cavity
+     to yolk sac, through the pit and out through the broken floor. It exists only inside its own
+     window (necOpen), which is what makes the `clinical` variant's persistent one a finding rather
+     than a duplicate. */
+  const nec = necOpen(u);
+  if (nec > 0 && sp && seg.process && (!blk || inBlock(nv))) {
+    const yA = yOf(nv) + 0.04, vB = Math.max(nv + 0.012, brkV(u) - 0.02), yB = yOf(vB);
+    addPart(g, 'neurenteric', pipe([
+      new T.Vector3(0, yA, zGapDors(0, yA, u) - hEcto(0, yA) - 0.30),
+      new T.Vector3(0, yA, zAxisAt(nv + 0.006, u)),
+      new T.Vector3(0, yB, zAxisAt(vB, u)),
+      new T.Vector3(0, yB, zEndoVent(0, yB) + 0.30),
+    ], R_NEC * (0.55 + 0.45 * nec)), { matOver: { opacity: 0.70, transparent: true } });
+  }
+
+  /* ─── 10.11 THE CLINICAL OVERLAYS, on the embryonic axis. See gap 3: the clivus and the sacrum are
+     not built, because the teaching point is that the two masses lie on ONE old axis. */
+  if (o.clinical) {
+    const yCr = yOf(V_PRE) + 0.30, yCa = yOf(nv) - 0.30;
+    const gh = v => Math.max(0.16, gapAt(0, yOf(v), u) / 2 * 0.92);
+    /* 0.90 x 0.84 x the gap. They were 0.68 x 0.60 and the player walk measured them at 0.154% and
+       0.136% of the frame, under the 0.30% floor. A chordoma is a mass, and the beat exists to point
+       at two of them. */
+    addPart(g, 'chordoma_clival', blob(0, yCr, zAxial(V_PRE, u), 0.62, 0.58, gh(V_PRE)));
+    addPart(g, 'chordoma_sacral', blob(0, yCa, zAxial(nv, u), 0.62, 0.58, gh(nv)));
+    /* the canal that did not close: the same construction as 10.10, but outside its window */
+    const vP = Math.min(V_PRE - 0.02, nv + 0.10), yP = yOf(vP);
+    addPart(g, 'persistent_canal', pipe([
+      new T.Vector3(0, yP, zGapDors(0, yP, u) - hEcto(0, yP) - 0.34),
+      new T.Vector3(0, yP, zAxisAt(vP, u)),
+      new T.Vector3(0, yP + 0.30, zAxisAt(vP, u)),
+      new T.Vector3(0, yP + 0.30, zEndoVent(0, yP) + 0.34),
+    ], R_NEC * 2.20));   // a persistent tract is a dilated one, and at R_NEC it measured 0.094%
+    const vC = Math.min(V_PRE - 0.05, nv + 0.22), yC = yOf(vC);
+    addPart(g, 'neurenteric_cyst', blob(0, yC, zAxial(vC, u) - 0.02, R_CYST, R_CYST * 1.15, Math.min(R_CYST, gh(vC))));
+  }
+
+  /* ─── 10.12 A NOTOCHORD THAT FORMED BADLY: the axis as a beaded, interrupted rod. Built from the
+     same sweep with the same section law, over sub-intervals, so the contrast with the normal build
+     is the interruption and not a second way of drawing a rod. */
+  if (o.failed && sp) {
+    const n = 5;
+    for (let i = 0; i < n; i++) {
+      const a = sp[0] + (sp[1] - sp[0]) * (i / n), b = a + (sp[1] - sp[0]) * (0.62 / n);
+      const c = clipV(a, b, blk); if (!c) continue;
+      const j = ((i * 1103515245) % 1000) / 1000;
+      const fac = 0.55 + 0.7 * j;
+      addPart(g, 'definitive_defective', axialSweep(c[0], c[1], u, {
+        rows: 12, sec: v => { const s = sectionAt(v, u); return { a: s.a * fac, b: s.b * fac, n: 2 }; },
+        lumen: () => null }));
+    }
+  }
+
+  finish(g, u, o);
+  return g;
+}
+
+/* ══════════════════════════════════════════ 11 · THE ADULT REMNANT — A DIFFERENT SCALE
+
+   Gap 2 in full: this build is in units where one segment's pitch is 150 (15 mm), and its t is the
+   fraction of notochordal regression completed, not a day. No beat may show it beside an embryonic
+   structure, and the render harness asserts off the scene's own ops that none does. */
+function buildAdult(g, u, o) {
+  const n = aduBodies(u), pitch = ADU_SCALE;
+  const rB = ADU_R_BODY * pitch, hB = ADU_BODY_H * pitch;
+  const rA = ADU_R_ANN * pitch, hA = (1 - ADU_BODY_H) * pitch;
+  const yc = i => (i - (n - 1) / 2) * pitch;
+  for (let i = 0; i < n; i++) {
+    const y = yc(i);
+    /* THE BULGE EXTENDS THE BODY BEYOND ITS OWN POLYLINE, and the first draft did not allow for it:
+       at bulge 0.35 on a radius of 78 units each end cap reached 27 units past the end plate, so the
+       two domes met in the middle of the disc space and 87% of the nucleus pulposus measured INSIDE
+       a vertebral body — row N caught it. A vertebral body's end plates are flat in any case, so the
+       dome is nearly flat and the polyline is shortened by exactly what it adds. */
+    /* THE BODY IS CUT, NOT SOLID. Beat 8's whole subject is what is INSIDE the body and between the
+       bodies, and a solid body hides both: the player walk measured the nucleus pulposus and the
+       regressed thread at 0.000% and 0.009%. Per-structure opacity was tried first and the id-pick
+       pass still read zero. It was a window of half-angle 0.95 rad over the middle 80% of the
+       height; it is now the MEDIAN SECTION at ADU_CUT, for the reason stated there. */
+    /* THE BODY'S BORE IS A POCKET, NOT A THROUGH-CHANNEL — the other half of review round 3's
+       OPEN 1/2, and the half that would have undone the first. The bore was a straight cylinder of
+       radius max(regressedR*1.5, …) running the body's WHOLE height, which was right while the
+       remnant also ran the whole height. Now that the vestige withdraws from the end plates, a
+       full-height bore would leave an empty channel through every body, cut open along the median
+       plane — and a continuous open groove down the column teaches the same false sentence the solid
+       cord taught. So the bore follows the VESTIGE, exactly as the annulus's bore follows the nucleus
+       it wraps (the pattern is already in this file, twenty lines below), closing to ADU_BORE_MIN
+       where the vestige has ended. The envelope's half-height includes the cap bulge, from the same
+       constant the cap is built with, so the pocket cannot drift from the thing it holds. */
+    const rV = regressedR(u), hV = regressedH(u);
+    const hEnv = hV / 2 + ADU_VEST_BULGE * rV;
+    const yB0 = y - hB / 2;
+    const bodyBore = v => Math.max(ADU_BORE_MIN,
+      rV * 1.5 * nucProfile((yB0 + hB * v - y) / hEnv));
+    addPart(g, 'vertebral_body', annulusAlongY(yB0, y + hB / 2,
+      bodyBore, rB, 8, ADU_CUT, true), { outline: 0.012 });
+    /* what is left of the notochord inside the body: a thinning, SHORTENING vestige that no longer
+       reaches its own end plates. It never reaches exactly zero, because a structure a beat SHOWS
+       must draw something — the claim is that it is at most a few per cent of its original calibre
+       and no longer spans the body, not that it has become nothing. The floor is now on the SCALE
+       (VEST_FLOOR, section 8) rather than on the radius alone, so what is left stays a shape. */
+    addPart(g, 'notochord_regressed', K.tubeCapped(
+      [new T.Vector3(0, y - hV / 2, 0), new T.Vector3(0, y + hV / 2, 0)],
+      () => rV, { ring: 16, flatten: 1, section: () => 1, cap: 'both',
+                  rows: 5, bulge: ADU_VEST_BULGE, seed: new T.Vector3(1, 0, 0) }), { outline: 0.012 });
+  }
+  const rN = nucleusR(u), hN = nucleusH();
+  for (let i = 0; i < n - 1; i++) {
+    const y = (yc(i) + yc(i + 1)) / 2;
+    const y0A = y - hA / 2, y1A = y + hA / 2;
+    /* THE ANNULUS'S BORE FOLLOWS THE NUCLEUS IT WRAPS. It was a straight cylinder of radius
+       rN * 1.04 over the disc's whole height while the nucleus is only 0.70 of that height, so a
+       ring of empty disc space stood above and below it and review round 1 saw "a small ellipsoid in
+       a large hollow". A disc has no void in it: the annulus's inner lamellae curve over the nucleus
+       and attach to the end plates. So the bore is the NUCLEUS'S OWN PROFILE at the same clearance,
+       closing to ADU_BORE_MIN where the nucleus has ended — which is the line the notochord ran
+       along, and is a floor rather than zero because a lumen of zero radius is a degenerate quad
+       (the fenestra note above records what that costs). Acceptance row T measures the void. */
+    /* ROUND 4: the floor is the same ADU_BORE_MIN and it is now SIX TIMES SMALLER — see the note
+       there. The disc carried half of the hairline the intravertebral fix exposed: the channel ran
+       above and below every nucleus as well as through every body, and a break in four places out of
+       nine is not a break. */
+    const bore = v => Math.max(ADU_BORE_MIN, rN * 1.04 * nucProfile((y0A + (y1A - y0A) * v - y) / (hN / 2)));
+    addPart(g, 'annulus_fibrosus', annulusAlongY(y0A, y1A, bore, rA, 10, ADU_CUT, true),
+      { outline: 0.012 });
+      addPart(g, 'nucleus_pulposus', blob(0, y, 0, rN, hN / 2, rN), { outline: 0.012 });
+  }
+  /* turn the whole segment about its own long axis — see ADU_YAW. Baked into every geometry this
+     function added, silhouette shells included, so a part lifted out by the adapter carries it. */
+  const yaw = p('ADU_YAW', ADU_YAW);
+  if (yaw) {
+    const M = new T.Matrix4().makeRotationY(yaw);
+    g.traverse(c => {
+      if (c.geometry && !c.geometry.userData.__yawed) {
+        c.geometry.applyMatrix4(M);
+        c.geometry.userData.__yawed = 1;
+      }
+    });
+  }
+}
+
+function finish(g, u, o) {
+  g.userData.t = u;
+  g.userData.axes = AXES;
+  g.userData.flags = { block: !!o.block, hemi: !!o.hemi, clinical: !!o.clinical, failed: !!o.failed, adult: !!o.adult };
+}
+
+/* ════════════════════════════════ 12 · MEASUREMENT, READ OFF THE BUILT TRIANGLES
+
+   RENDER-STANDARD, "AN ACCEPTANCE MEASUREMENT MUST BE A FUNCTION OF THE BUILT GEOMETRY": the
+   measured side of every assertion in this file is read from the vertices the model emitted, never
+   from the constants the geometry was built from. Restating a shape law in the test that checks it
+   proves only that the author can do the arithmetic twice.
+
+   SILHOUETTE MESHES ARE EXCLUDED BY NAME, through userData.outline. The primitive-streak round-1
+   review records what happens when they are not: every thickness reads as the hull's, and the next
+   run inherits a number that is 0.22 everywhere and means nothing. */
+
+const _built = {};
+function buildKey(t, o) {
+  return (+t).toFixed(5) + '|' + (o.block ? 'b' : '') + (o.hemi ? 'h' : '') + (o.clinical ? 'c' : '') +
+         (o.failed ? 'f' : '') + (o.adult ? 'a' : '');
+}
+function builtGroup(t, opts) {
+  const o = opts || {}, k = buildKey(t, o);
+  if (!_built[k]) {
+    if (Object.keys(_built).length > 40) for (const q in _built) { delete _built[q]; break; }
+    _built[k] = buildNotochord(t, o);
+  }
+  return _built[k];
+}
+function meshesOf(group) {
+  const out = [];
+  group.traverse(m => { if (m.isMesh && m.geometry && !(m.userData && m.userData.outline)) out.push(m); });
+  return out;
+}
+/** every key's vertices, as flat arrays, plus one entry per MESH so per-body measures are possible */
+function vertsByKey(t, opts) {
+  const g = builtGroup(t, opts), per = {}, bodies = {};
+  for (const m of meshesOf(g)) {
+    const key = m.userData.key, a = m.geometry.attributes.position.array;
+    if (!per[key]) { per[key] = []; bodies[key] = []; }
+    per[key].push(a); bodies[key].push(a);
+  }
+  const flat = {};
+  for (const k in per) {
+    let n = 0; for (const a of per[k]) n += a.length;
+    const out = new Float32Array(n); let o = 0;
+    for (const a of per[k]) { out.set(a, o); o += a.length; }
+    flat[k] = out;
+  }
+  return { flat, bodies };
+}
+function bboxOf(arr) {
+  if (!arr || !arr.length) return null;
+  const b = { x0: Infinity, x1: -Infinity, y0: Infinity, y1: -Infinity, z0: Infinity, z1: -Infinity };
+  for (let i = 0; i < arr.length; i += 3) {
+    if (arr[i] < b.x0) b.x0 = arr[i]; if (arr[i] > b.x1) b.x1 = arr[i];
+    if (arr[i + 1] < b.y0) b.y0 = arr[i + 1]; if (arr[i + 1] > b.y1) b.y1 = arr[i + 1];
+    if (arr[i + 2] < b.z0) b.z0 = arr[i + 2]; if (arr[i + 2] > b.z1) b.z1 = arr[i + 2];
+  }
+  return b;
+}
+function centroidOf(arr) {
+  if (!arr || !arr.length) return null;
+  let x = 0, y = 0, z = 0, n = arr.length / 3;
+  for (let i = 0; i < arr.length; i += 3) { x += arr[i]; y += arr[i + 1]; z += arr[i + 2]; }
+  return { x: x / n, y: y / n, z: z / n };
+}
+function signedVolume(arr) {
+  let v = 0;
+  for (let i = 0; i < arr.length; i += 9) {
+    const ax = arr[i], ay = arr[i + 1], az = arr[i + 2];
+    const bx = arr[i + 3], by = arr[i + 4], bz = arr[i + 5];
+    const cx = arr[i + 6], cy = arr[i + 7], cz = arr[i + 8];
+    v += (ax * (by * cz - bz * cy) - ay * (bx * cz - bz * cx) + az * (bx * cy - by * cx)) / 6;
+  }
+  return v;
+}
+
+/* ─── THE CROSS-SECTION, BY RAY CAST ALONG z. For a plane y = const, shoot a ray parallel to z at
+   each of nx values of x, collect every intersection with the built triangles, sort and pair them.
+   The total inside length times dx is the area of the section — of the WALL where the body is
+   hollow, which is exactly the quantity the conservation is about. This reads triangles; it cannot
+   be satisfied by a constant. */
+/* the body's own x-range, finely sampled. THE QUADRATURE STEP IS THE ERROR BAR: measured over a
+   fixed +/-2.2 range at 176 columns, a rod 0.447 across got 18 samples and its area came out 8.7%
+   low — which row C read as a conservation failure in the model rather than in its own ruler. */
+function sectionOfAtY(arr, y, nx) {
+  if (!arr || !arr.length) return null;
+  const b = bboxOf(arr);
+  const pad = Math.max(0.01, (b.x1 - b.x0) * 0.04);
+  return sectionProfileAtY(arr, y, b.x0 - pad, b.x1 + pad, nx || 360);
+}
+function sectionProfileAtY(arr, y, x0, x1, nx) {
+  const dx = (x1 - x0) / nx, spans = [], widths = [];
+  /* only the triangles whose own y-range straddles this plane can contribute — without this
+     prefilter every column walks every triangle and the battery takes minutes rather than seconds */
+  const band = [];
+  for (let i = 0; i < arr.length; i += 9) {
+    const ya = arr[i + 1], yb = arr[i + 4], yc = arr[i + 7];
+    if (Math.min(ya, yb, yc) > y || Math.max(ya, yb, yc) < y) continue;
+    band.push(i);
+  }
+  for (let k = 0; k < nx; k++) {
+    const x = x0 + dx * (k + 0.5), hits = [];       // midpoints: the end columns are not half-counted
+    for (let bi = 0; bi < band.length; bi++) {
+      const i = band[bi];
+      const p0x = arr[i], p0y = arr[i + 1], p0z = arr[i + 2];
+      const p1x = arr[i + 3], p1y = arr[i + 4], p1z = arr[i + 5];
+      const p2x = arr[i + 6], p2y = arr[i + 7], p2z = arr[i + 8];
+      /* barycentric inside test in the xy-plane */
+      const d = (p1y - p2y) * (p0x - p2x) + (p2x - p1x) * (p0y - p2y);
+      if (Math.abs(d) < 1e-14) continue;
+      const l0 = ((p1y - p2y) * (x - p2x) + (p2x - p1x) * (y - p2y)) / d;
+      const l1 = ((p2y - p0y) * (x - p2x) + (p0x - p2x) * (y - p2y)) / d;
+      const l2 = 1 - l0 - l1;
+      if (l0 < -1e-9 || l1 < -1e-9 || l2 < -1e-9) continue;
+      hits.push(l0 * p0z + l1 * p1z + l2 * p2z);
+    }
+    if (hits.length < 2) { widths.push(0); continue; }
+    hits.sort((a, b) => a - b);
+    let inside = 0;
+    for (let q = 0; q + 1 < hits.length; q += 2) inside += hits[q + 1] - hits[q];
+    widths.push(inside);
+    if (inside > 1e-6) spans.push({ x, z0: hits[0], z1: hits[hits.length - 1] });
+  }
+  let area = 0; for (const w of widths) area += w * dx;
+  let xa = Infinity, xb = -Infinity, za = Infinity, zb = -Infinity;
+  for (const s of spans) { xa = Math.min(xa, s.x); xb = Math.max(xb, s.x); za = Math.min(za, s.z0); zb = Math.max(zb, s.z1); }
+  return { area, halfW: isFinite(xa) ? (xb - xa) / 2 : 0, xa, xb, z0: za, z1: zb,
+           height: isFinite(za) ? zb - za : 0, hit: spans.length };
+}
+function sectionAtKey(t, opts, key, y) {
+  const V = vertsByKey(t, opts).flat[key];
+  if (!V) return null;
+  return sectionOfAtY(V, y);
+}
+
+/* ─── WINDING, the invariant RENDER-STANDARD §2.1 actually states: every triangle's FACE normal,
+   from its vertex ORDER, must agree with the vertex normals emitted with it. That holds on any
+   shape, unlike the count-the-radial-normals probe, which is NOT valid on a sheet — see the note in
+   the render harness. */
+function windingReport(t, opts) {
+  const g = builtGroup(t, opts);
+  let tot = 0, agree = 0; const per = {};
+  for (const m of meshesOf(g)) {
+    const P = m.geometry.attributes.position.array, N = m.geometry.attributes.normal.array;
+    const key = m.userData.key;
+    if (!per[key]) per[key] = { n: 0, ok: 0 };
+    for (let i = 0; i < P.length; i += 9) {
+      const e1 = [P[i + 3] - P[i], P[i + 4] - P[i + 1], P[i + 5] - P[i + 2]];
+      const e2 = [P[i + 6] - P[i], P[i + 7] - P[i + 1], P[i + 8] - P[i + 2]];
+      const f = [e1[1] * e2[2] - e1[2] * e2[1], e1[2] * e2[0] - e1[0] * e2[2], e1[0] * e2[1] - e1[1] * e2[0]];
+      const fl = Math.sqrt(f[0] * f[0] + f[1] * f[1] + f[2] * f[2]);
+      if (fl < 1e-12) continue;                      // degenerate: at a taper's point
+      const vn = [(N[i] + N[i + 3] + N[i + 6]) / 3, (N[i + 1] + N[i + 4] + N[i + 7]) / 3,
+                  (N[i + 2] + N[i + 5] + N[i + 8]) / 3];
+      const dot = (f[0] * vn[0] + f[1] * vn[1] + f[2] * vn[2]) / fl;
+      tot++; per[key].n++;
+      if (dot >= 0) { agree++; per[key].ok++; }
+    }
+  }
+  const out = { triangles: tot, agreement: tot ? agree / tot : 0, per: {} };
+  for (const k in per) out.per[k] = per[k].n ? per[k].ok / per[k].n : 1;
+  return out;
+}
+/** every closed body's signed volume must be POSITIVE — true exactly when it is wound outward */
+function volumeReport(t, opts) {
+  const V = vertsByKey(t, opts), out = { worst: Infinity, per: {}, bodies: 0, nonPositive: 0 };
+  for (const k in V.bodies) {
+    let worst = Infinity;
+    for (const a of V.bodies[k]) {
+      const v = signedVolume(a);
+      out.bodies++;
+      if (v <= 0) out.nonPositive++;
+      worst = Math.min(worst, v);
+    }
+    out.per[k] = worst;
+    out.worst = Math.min(out.worst, worst);
+  }
+  return out;
+}
+/** WELD VERTICES WITHIN A TOLERANCE, rather than rounding them to a grid.
+
+    This is a correction to the probe and not to the model, and it is worth the note. The first
+    version keyed a vertex by rounding each coordinate to 1/2048, which reports two vertices as
+    DIFFERENT whenever they straddle a bucket boundary however close they are: the block build's
+    `plate` came back with four unpaired edges whose endpoints differed by exactly one bucket —
+    0.04638671875 against 0.0458984375 — on a surface that is closed. Re-run at 1/65536 the same
+    body reported zero, which is the tell: a probe whose answer depends on its own grid is measuring
+    the grid. Welding with a spatial hash that checks neighbouring cells has no boundary to straddle.
+    The tolerance is 1e-6, four orders below the 6e-3 any real gap in this model would have. */
+function weldIndex(arr, tol) {
+  const TOL = tol || 1e-6, C = TOL * 2, n = arr.length / 3;
+  const cells = new Map(), out = new Int32Array(n);
+  const pos = [];
+  const ci = x => Math.floor(x / C);
+  for (let i = 0; i < n; i++) {
+    const x = arr[i * 3], y = arr[i * 3 + 1], z = arr[i * 3 + 2];
+    const gx = ci(x), gy = ci(y), gz = ci(z);
+    let found = -1;
+    for (let dx = -1; dx <= 1 && found < 0; dx++)
+      for (let dy = -1; dy <= 1 && found < 0; dy++)
+        for (let dz = -1; dz <= 1 && found < 0; dz++) {
+          const list = cells.get((gx + dx) + ',' + (gy + dy) + ',' + (gz + dz));
+          if (!list) continue;
+          for (const q of list) {
+            if (Math.abs(pos[q * 3] - x) <= TOL && Math.abs(pos[q * 3 + 1] - y) <= TOL &&
+                Math.abs(pos[q * 3 + 2] - z) <= TOL) { found = q; break; }
+          }
+        }
+    if (found < 0) {
+      found = pos.length / 3;
+      pos.push(x, y, z);
+      const key = gx + ',' + gy + ',' + gz;
+      if (!cells.has(key)) cells.set(key, []);
+      cells.get(key).push(found);
+    }
+    out[i] = found;
+  }
+  return out;
+}
+/** unpaired edges PER BODY — a closed surface has none */
+function watertightReport(t, opts) {
+  const V = vertsByKey(t, opts), per = {};
+  let worst = 0;
+  for (const k in V.bodies) {
+    let unp = 0;
+    for (const a of V.bodies[k]) {
+      const ix = weldIndex(a), m = new Map();
+      for (let f = 0; f < ix.length; f += 3) {
+        for (let e = 0; e < 3; e++) {
+          const p = ix[f + e], r = ix[f + (e + 1) % 3];
+          if (p === r) continue;                     // a degenerate edge is not an edge
+          const key2 = p < r ? p + '|' + r : r + '|' + p;
+          m.set(key2, (m.get(key2) || 0) + 1);
+        }
+      }
+      for (const c of m.values()) if (c % 2 === 1) unp++;
+    }
+    per[k] = unp; worst = Math.max(worst, unp);
+  }
+  return { per, worst };
+}
+
+/* ─── §3.z: A MODEL THAT BUILDS MORE THAN ONE SOLID PROVES THEY DO NOT SHARE SPACE, with the pairs
+   whose contact is CONSTRUCTION rather than anatomy excluded BY NAME in a published partition. Every
+   pair here is a part drawn as a thickening ON the sheet it belongs to, or two consecutive v-ranges
+   of the one axial sweep, or the OVERLAP by which adjacent keys are made not to share a face. */
+const TOUCH_OK = [
+  ['ectoderm', 'neural_plate'], ['ectoderm', 'ecto_uninduced'], ['neural_plate', 'floor_plate'],
+  ['ectoderm', 'node'], ['ectoderm', 'streak'], ['ectoderm', 'amnion'], ['node', 'pit'],
+  ['node', 'streak'], ['node', 'process'], ['pit', 'process'], ['pit', 'neurenteric'],
+  ['endoderm', 'plate'], ['endoderm', 'yolk_sac'], ['endoderm', 'mesoderm'],
+  ['ectoderm', 'mesoderm'], ['mesoderm', 'somite'], ['mesoderm', 'prechordal_plate'],
+  ['endoderm', 'prechordal_plate'], ['ectoderm', 'prechordal_plate'],
+  ['ectoderm', 'oropharyngeal_membrane'], ['endoderm', 'oropharyngeal_membrane'],
+  ['ectoderm', 'cloacal_membrane'], ['endoderm', 'cloacal_membrane'],
+  ['mesoderm', 'oropharyngeal_membrane'], ['mesoderm', 'cloacal_membrane'],
+  ['process', 'plate'], ['plate', 'definitive'], ['process', 'canal'], ['process', 'neurenteric'],
+  ['plate', 'neurenteric'], ['endoderm', 'neurenteric'], ['ectoderm', 'neurenteric'],
+  ['definitive', 'sclerotome'], ['plate', 'sclerotome'], ['process', 'sclerotome'],
+  ['sclerotome', 'somite'], ['mesoderm', 'sclerotome'], ['ectoderm', 'sclerotome'],
+  ['endoderm', 'sclerotome'], ['sclerotome', 'neural_plate'],
+  ['definitive', 'sclerotome_disordered'], ['process', 'sclerotome_disordered'],
+  ['plate', 'sclerotome_disordered'], ['mesoderm', 'sclerotome_disordered'],
+  ['ectoderm', 'sclerotome_disordered'], ['endoderm', 'sclerotome_disordered'],
+  ['definitive_defective', 'sclerotome_disordered'], ['definitive_defective', 'ecto_uninduced'],
+  ['definitive_defective', 'mesoderm'], ['definitive_defective', 'endoderm'],
+  ['definitive_defective', 'node'], ['definitive_defective', 'pit'],
+  ['definitive_defective', 'canal'], ['definitive_defective', 'process'],
+  ['definitive_defective', 'plate'], ['definitive_defective', 'definitive'],
+  ['chordoma_clival', 'ectoderm'], ['chordoma_clival', 'endoderm'], ['chordoma_clival', 'mesoderm'],
+  ['chordoma_clival', 'prechordal_plate'], ['chordoma_clival', 'oropharyngeal_membrane'],
+  ['chordoma_clival', 'definitive'], ['chordoma_clival', 'neural_plate'],
+  ['chordoma_sacral', 'ectoderm'], ['chordoma_sacral', 'endoderm'], ['chordoma_sacral', 'mesoderm'],
+  ['chordoma_sacral', 'streak'], ['chordoma_sacral', 'node'], ['chordoma_sacral', 'process'],
+  ['chordoma_sacral', 'pit'], ['chordoma_sacral', 'definitive'], ['chordoma_sacral', 'plate'],
+  ['persistent_canal', 'ectoderm'], ['persistent_canal', 'endoderm'], ['persistent_canal', 'mesoderm'],
+  ['persistent_canal', 'definitive'], ['persistent_canal', 'plate'], ['persistent_canal', 'process'],
+  ['persistent_canal', 'neural_plate'], ['persistent_canal', 'floor_plate'],
+  ['persistent_canal', 'neurenteric_cyst'], ['persistent_canal', 'sclerotome'],
+  ['neurenteric_cyst', 'ectoderm'], ['neurenteric_cyst', 'endoderm'], ['neurenteric_cyst', 'mesoderm'],
+  ['neurenteric_cyst', 'definitive'], ['neurenteric_cyst', 'plate'], ['neurenteric_cyst', 'neural_plate'],
+  ['neurenteric_cyst', 'sclerotome'], ['neurenteric_cyst', 'floor_plate'],
+  /* FOUND BY ROW O ON ITS FIRST RUN, and each one is construction rather than anatomy:
+     - the pit opens INTO the canal, which is the sentence beat 2 teaches;
+     - the prechordal plate abuts the notochord's tip and the oropharyngeal membrane, by OVERLAP;
+     - the clinical overlay's fistula and cyst traverse the axis and the sheets on purpose;
+     - the axial sweep's transition zones carry it INTO the gut roof — that is stage 3;
+     - the neural plate begins just cranial of the node and overlaps its cranial edge. */
+  ['pit', 'canal'], ['pit', 'definitive'], ['pit', 'plate'], ['pit', 'amnion'], ['pit', 'endoderm'],
+  ['pit', 'ectoderm'], ['pit', 'streak'], ['pit', 'process'],
+  ['pit', 'neural_plate'], ['pit', 'floor_plate'], ['pit', 'ecto_uninduced'],
+  ['prechordal_plate', 'oropharyngeal_membrane'], ['prechordal_plate', 'definitive'],
+  ['prechordal_plate', 'plate'], ['prechordal_plate', 'neural_plate'],
+  ['prechordal_plate', 'definitive_defective'], ['prechordal_plate', 'ecto_uninduced'],
+  ['prechordal_plate', 'neurenteric_cyst'], ['prechordal_plate', 'chordoma_clival'],
+  ['ectoderm', 'definitive_defective'], ['ectoderm', 'process'], ['ectoderm', 'plate'],
+  ['ectoderm', 'definitive'], ['ectoderm', 'floor_plate'], ['ectoderm', 'canal'],
+  ['endoderm', 'process'], ['endoderm', 'definitive'], ['endoderm', 'canal'],
+  ['canal', 'neurenteric'], ['canal', 'persistent_canal'], ['canal', 'plate'], ['canal', 'definitive'],
+  ['node', 'neural_plate'], ['node', 'floor_plate'], ['node', 'ecto_uninduced'], ['node', 'amnion'],
+  ['node', 'canal'], ['streak', 'amnion'], ['neural_plate', 'amnion'], ['ecto_uninduced', 'amnion'],
+  ['mesoderm', 'neural_plate'], ['mesoderm', 'ecto_uninduced'], ['mesoderm', 'floor_plate'],
+  ['process', 'floor_plate'], ['plate', 'floor_plate'], ['definitive', 'floor_plate'],
+  ['floor_plate', 'sclerotome'], ['floor_plate', 'sclerotome_disordered'],
+  ['ecto_uninduced', 'sclerotome_disordered'], ['ecto_uninduced', 'definitive_defective'],
+  ['neural_plate', 'somite'], ['ecto_uninduced', 'somite'], ['somite', 'amnion'],
+  ['endoderm', 'somite'], ['somite', 'yolk_sac'],
+  ['chordoma_clival', 'amnion'], ['chordoma_clival', 'yolk_sac'],
+  ['chordoma_sacral', 'amnion'], ['chordoma_sacral', 'yolk_sac'],
+  ['chordoma_sacral', 'canal'], ['chordoma_sacral', 'neurenteric'],
+  ['persistent_canal', 'amnion'], ['persistent_canal', 'yolk_sac'],
+  ['persistent_canal', 'canal'], ['persistent_canal', 'neurenteric'],
+  ['neurenteric_cyst', 'amnion'], ['neurenteric_cyst', 'yolk_sac'], ['neurenteric_cyst', 'canal'],
+  ['vertebral_body', 'notochord_regressed'], ['vertebral_body', 'annulus_fibrosus'],
+  ['annulus_fibrosus', 'nucleus_pulposus'], ['vertebral_body', 'nucleus_pulposus'],
+  ['notochord_regressed', 'nucleus_pulposus'], ['notochord_regressed', 'annulus_fibrosus'],
+];
+function touchAllowed(a, b) {
+  for (const [x, y] of TOUCH_OK) if ((x === a && y === b) || (x === b && y === a)) return true;
+  return false;
+}
+/** for every pair of keys whose boxes meet and whose contact is NOT declared, how much of one lies
+    inside the other — by ray-cast containment of its vertices */
+function overlapReport(t, opts) {
+  const V = vertsByKey(t, opts).flat, keys = Object.keys(V), out = { pairs: [], worst: 0 };
+  const bb = {}; for (const k of keys) bb[k] = bboxOf(V[k]);
+  const meet = (a, b) => a && b && a.x0 <= b.x1 && b.x0 <= a.x1 && a.y0 <= b.y1 && b.y0 <= a.y1 && a.z0 <= b.z1 && b.z0 <= a.z1;
+  for (let i = 0; i < keys.length; i++) for (let j = i + 1; j < keys.length; j++) {
+    const A = keys[i], B = keys[j];
+    if (!meet(bb[A], bb[B]) || touchAllowed(A, B)) continue;
+    /* how many of A's vertices lie inside B, by parity of z-crossings */
+    const f = pairShare(V[A], V[B]);
+    out.pairs.push({ a: A, b: B, frac: f });
+    out.worst = Math.max(out.worst, f);
+  }
+  return out;
+}
+/* a coarse xy grid over a hull's triangles, so a containment test walks a handful of them rather
+   than all of them. The first version of this walked every triangle for every sampled vertex and
+   row O alone took minutes — which is its own small lesson: a probe nobody can afford to run is a
+   probe that stops being run. */
+function hullIndex(hull) {
+  const b = bboxOf(hull);
+  const NG = 24;
+  const cells = new Array(NG * NG);
+  const gx = x => Math.max(0, Math.min(NG - 1, Math.floor((x - b.x0) / Math.max(1e-9, b.x1 - b.x0) * NG)));
+  const gy = y => Math.max(0, Math.min(NG - 1, Math.floor((y - b.y0) / Math.max(1e-9, b.y1 - b.y0) * NG)));
+  for (let q = 0; q < hull.length; q += 9) {
+    const x0 = Math.min(hull[q], hull[q + 3], hull[q + 6]), x1 = Math.max(hull[q], hull[q + 3], hull[q + 6]);
+    const y0 = Math.min(hull[q + 1], hull[q + 4], hull[q + 7]), y1 = Math.max(hull[q + 1], hull[q + 4], hull[q + 7]);
+    for (let i = gx(x0); i <= gx(x1); i++) for (let j = gy(y0); j <= gy(y1); j++) {
+      const c = i * NG + j;
+      if (!cells[c]) cells[c] = [];
+      cells[c].push(q);
+    }
+  }
+  return { b, NG, cells, gx, gy };
+}
+function insideFrac(arr, hull, idx) {
+  const H = idx || hullIndex(hull);
+  let n = 0, inside = 0;
+  for (let i = 0; i < arr.length; i += 51) {         // every seventeenth vertex: enough, and cheap
+    const x = arr[i], y = arr[i + 1], z = arr[i + 2];
+    n++;
+    if (x < H.b.x0 || x > H.b.x1 || y < H.b.y0 || y > H.b.y1 || z < H.b.z0 || z > H.b.z1) continue;
+    const list = H.cells[H.gx(x) * H.NG + H.gy(y)];
+    if (!list) continue;
+    let cross = 0;
+    for (let li = 0; li < list.length; li++) {
+      const q = list[li];
+      const p0x = hull[q], p0y = hull[q + 1], p0z = hull[q + 2];
+      const p1x = hull[q + 3], p1y = hull[q + 4], p1z = hull[q + 5];
+      const p2x = hull[q + 6], p2y = hull[q + 7], p2z = hull[q + 8];
+      const d = (p1y - p2y) * (p0x - p2x) + (p2x - p1x) * (p0y - p2y);
+      if (Math.abs(d) < 1e-14) continue;
+      const l0 = ((p1y - p2y) * (x - p2x) + (p2x - p1x) * (y - p2y)) / d;
+      const l1 = ((p2y - p0y) * (x - p2x) + (p0x - p2x) * (y - p2y)) / d;
+      const l2 = 1 - l0 - l1;
+      if (l0 < 0 || l1 < 0 || l2 < 0) continue;
+      if (l0 * p0z + l1 * p1z + l2 * p2z > z) cross++;
+    }
+    if (cross % 2 === 1) inside++;
+  }
+  return n ? inside / n : 0;
+}
+/* a cheaper pairwise walk for row O: index each hull once and reuse it across the pair */
+function pairShare(A, B) {
+  const ia = hullIndex(A), ib = hullIndex(B);
+  return Math.max(insideFrac(A, B, ib), insideFrac(B, A, ia));
+}
+
+/* ─── §3.y: A BEAT THAT NARRATES A SHAPE ASSERTS IT ON ITS OWN CAMERA'S SCREEN PLANE. VIEW_DIR is
+   COPIED from viz3d.js rather than restated, and the up-vector rule is copied with it, so the
+   player's cameras and this probe's cannot drift apart. */
+const VIEW_DIR = {
+  anterior: [0, 0, 1], posterior: [0, 0, -1], lateral: [1, 0, 0], medial: [-1, 0, 0],
+  superior: [0, 1, 0.001], inferior: [0, -1, 0.001],
+};
+function screenAxes(view) {
+  const d = VIEW_DIR[view] || VIEW_DIR.anterior;
+  const dir = new T.Vector3(d[0], d[1], d[2]).normalize();
+  let up = Math.abs(dir.y) > 0.99 ? new T.Vector3(0, 0, -1) : new T.Vector3(0, 1, 0);
+  const right = new T.Vector3().crossVectors(up, dir).normalize();
+  up = new T.Vector3().crossVectors(dir, right).normalize();
+  return { dir, right, up };
+}
+/** THE DORSOVENTRAL STACK AS THE NAMED CAMERA SEES IT: the GAP between the ectoderm's and the
+    endoderm's projections on that camera's screen UP axis, as a fraction of their mean extent along
+    it. On a `lateral` camera the up-vector is world +y, so the screen's vertical axis is the
+    CRANIO-CAUDAL one, the two sheets' projections lie on top of one another and the gap is zero —
+    which is the whole point of the measure: a beat that says "ectoderm on top, endoderm underneath"
+    cannot say it from there. That is not a defect in the model and the scene cannot fix it; viz3d
+    holds the up-vector at world +y (engine__refit-camera-on-isolate is the queue item, and it is
+    escalated).
+
+    IT MEASURES THE GAP BETWEEN INTERVALS, NOT THE DISTANCE BETWEEN MEANS, and the difference is why
+    this is worth a note. The first version compared the two sheets' mean projected positions, which
+    on a lateral camera is not zero but a RESIDUAL: the two sheets carry different midline windows, so
+    their centroids sit at slightly different cranio-caudal positions and the measure read 0.127 of
+    their own extent — a number with nothing to do with whether a student can see three stacked
+    sheets. Row V duly failed against a floor of 0.12 that had been set from an earlier, coarser
+    build. An interval gap is zero whenever the projections overlap at all, which is exactly the
+    question "are they stacked on screen?" asks. */
+function stackAcross(t, opts, view) {
+  const V = vertsByKey(t, opts).flat;
+  const A = V.ectoderm, B = V.endoderm;
+  if (!A || !B) return 0;
+  const S = screenAxes(view);
+  const proj = arr => {
+    let lo = Infinity, hi = -Infinity;
+    for (let i = 0; i < arr.length; i += 3) {
+      const d = arr[i] * S.up.x + arr[i + 1] * S.up.y + arr[i + 2] * S.up.z;
+      if (d < lo) lo = d; if (d > hi) hi = d;
+    }
+    return { lo, hi, ext: hi - lo };
+  };
+  const a = proj(A), b = proj(B);
+  const mean = (a.ext + b.ext) / 2;
+  const gap = Math.max(0, Math.max(b.lo - a.hi, a.lo - b.hi));
+  return mean > 1e-9 ? gap / mean : 0;
+}
+
+/* ─── the measures the scene's claims are written against. Every one of them reads vertices. */
+function midOf(seg) { return seg ? (seg[0] + seg[1]) / 2 : null; }
+/* WHERE A FLANK SAMPLE GOES, and it has to be inside every variant's own window. It was |x| = 1.6,
+   which is exactly the median slab's edge: the 0.10-wide sampling window then straddled the cut, half
+   of it in empty space, and the measured ectoderm came back half as thick — so the neural plate read
+   1.95 times ordinary ectoderm where the geometry says 0.98, and claim B11-flat failed on a ruler
+   rather than on a model. 1.0 is inside the slab (1.60) and inside the block (1.15) both. */
+const FLANK_X = 1.00;
+
+function axisBoundsBuilt(t, opts) {
+  const V = vertsByKey(t, opts).flat;
+  let y0 = Infinity, y1 = -Infinity;
+  /* `definitive_defective` IS the axis in the `failed` variant, and leaving it out made every
+     measure that divides by the axis's length return zero there — including the one claim that was
+     meant to pin beat 11 to its own instant. */
+  for (const k of ['process', 'plate', 'definitive', 'definitive_defective']) {
+    const b = bboxOf(V[k]); if (!b) continue;
+    y0 = Math.min(y0, b.y0); y1 = Math.max(y1, b.y1);
+  }
+  return isFinite(y0) ? { v0: vOf(y0), v1: vOf(y1), y0, y1 } : null;
+}
+function keyVFrac(t, opts, key) {
+  const b = bboxOf(vertsByKey(t, opts).flat[key]);
+  const ab = axisBoundsBuilt(t, opts);
+  if (!b || !ab) return 0;
+  return (b.y1 - b.y0) / Math.max(1e-6, ab.y1 - ab.y0);
+}
+function volOfKey(t, opts, key) {
+  const V = vertsByKey(t, opts), bs = V.bodies[key];
+  if (!bs) return 0;
+  let s = 0; for (const a of bs) s += Math.abs(signedVolume(a));
+  return s;
+}
+function meshCount(t, opts, key) {
+  const V = vertsByKey(t, opts);
+  return V.bodies[key] ? V.bodies[key].length : 0;
+}
+/** the collar's angular coverage around the axis, measured from its own vertices */
+function collarRingFrac(t, opts) {
+  const V = vertsByKey(t, opts), bs = V.bodies.sclerotome || V.bodies.sclerotome_disordered;
+  if (!bs || !bs.length) return 0;
+  const a = bs[0], c = centroidOf(a);
+  /* FEWER BINS THAN THERE ARE RING POINTS. The first version used 48 bins against this model's 28
+     ring positions and reported 0.625 on a complete annulus — a probe whose own resolution was the
+     thing it measured. NR is the emitter's ring count, so the bin count is derived from it. */
+  const NB = Math.max(8, Math.floor(NR * 0.85)), seen = new Array(NB).fill(0);
+  for (let i = 0; i < a.length; i += 3) {
+    const th = Math.atan2(a[i + 2] - c.z, a[i] - c.x);
+    seen[Math.floor(((th + Math.PI) / (2 * Math.PI)) * NB) % NB] = 1;
+  }
+  return seen.reduce((s, x) => s + x, 0) / NB;
+}
+/** does the channel go through BOTH laminae? Measured against the two sheets' own built z-extents at
+    the channel's own station — which is what "amnion talking to yolk sac" means geometrically. */
+function piercesBoth(t, opts, key) {
+  const V = vertsByKey(t, opts).flat;
+  const c = V[key]; if (!c) return 0;
+  const cb = bboxOf(c), E = bboxOf(V.ectoderm), N = bboxOf(V.endoderm);
+  if (!E || !N) return 0;
+  const yc = (cb.y0 + cb.y1) / 2;
+  const se = sectionProfileAtY(V.ectoderm, yc, -2.2, 2.2, 120);
+  const sn = sectionProfileAtY(V.endoderm, yc, -2.2, 2.2, 120);
+  const dorsalOut = cb.z0 < (se.hit ? se.z0 : E.z0) - 0.02;
+  const ventralOut = cb.z1 > (sn.hit ? sn.z1 : N.z1) + 0.02;
+  return (dorsalOut ? 1 : 0) + (ventralOut ? 1 : 0);
+}
+/** the thickness of a sheet at the midline, read off its own section */
+function sheetThickAtMid(t, opts, key, y) {
+  const V = vertsByKey(t, opts).flat[key]; if (!V) return 0;
+  const s = sectionProfileAtY(V, y, -0.06, 0.06, 8);
+  return s.hit ? s.area / 0.12 : 0;
+}
+/** the thickness of a sheet at |x|, read off whichever side of the midline still has geometry —
+    `hemi` keeps only the half away from the camera, so a flank sample typed as +1.6 would land in
+    empty space and report a thickness of zero, which would make the neural plate infinitely thicker
+    than ordinary ectoderm rather than two and a half times */
+function sheetThickAt(t, opts, key, y, x) {
+  const V = vertsByKey(t, opts).flat[key]; if (!V) return 0;
+  for (const xx of [x, -x]) {
+    const s = sectionProfileAtY(V, y, xx - 0.05, xx + 0.05, 8);
+    if (s.hit) return s.area / 0.10;
+  }
+  return 0;
+}
+/** how much of the neural plate has no axial material under it — "no notochord, no neural plate" */
+function npOverhangFrac(t, opts) {
+  const V = vertsByKey(t, opts).flat;
+  const np = V.neural_plate || V.ecto_uninduced; if (!np) return 1;
+  const b = bboxOf(np), ab = axisBoundsBuilt(t, opts);
+  if (!ab) return 1;
+  let over = 0, n = 0;
+  for (let i = 0; i <= 40; i++) {
+    const y = b.y0 + (b.y1 - b.y0) * (i / 40); n++;
+    if (y < ab.y0 - 1e-6 || y > ab.y1 + 1e-6) over++;
+  }
+  return over / n;
+}
+/** the fraction of the plate's z-span that lies inside the gut roof's z-span at the same station */
+function plateInRoofFrac(t, opts) {
+  const V = vertsByKey(t, opts).flat;
+  if (!V.plate || !V.endoderm) return 0;
+  const b = bboxOf(V.plate), y = (b.y0 + b.y1) / 2;
+  const sp = sectionOfAtY(V.plate, y, 200);
+  const se = sectionOfAtY(V.endoderm, y, 200);
+  if (!sp.hit || !se.hit) return 0;
+  const lo = Math.max(sp.z0, se.z0), hi = Math.min(sp.z1, se.z1);
+  return Math.max(0, hi - lo) / Math.max(1e-9, sp.z1 - sp.z0);
+}
+/** and the reverse for the rod: it has LEFT the gut roof, so none of it should be inside it */
+function rodInRoofFrac(t, opts) {
+  const V = vertsByKey(t, opts).flat;
+  if (!V.definitive || !V.endoderm) return 0;
+  const b = bboxOf(V.definitive), y = (b.y0 + b.y1) / 2;
+  const sr = sectionOfAtY(V.definitive, y, 200);
+  const se = sectionOfAtY(V.endoderm, y, 200);
+  if (!sr.hit || !se.hit) return 0;
+  const lo = Math.max(sr.z0, se.z0), hi = Math.min(sr.z1, se.z1);
+  return Math.max(0, hi - lo) / Math.max(1e-9, sr.z1 - sr.z0);
+}
+/** the measured section of each stage at its own segment's midpoint */
+function stageSection(t, opts, key) {
+  const seg = segments(t)[key === 'canal' ? 'process' : key];
+  const m = midOf(seg);
+  if (m == null) return null;
+  return sectionAtKey(t, opts, key, yOf(m));
+}
+function conservationWorst(t, opts) {
+  let worst = 0; const A = area0();
+  for (const k of ['process', 'plate', 'definitive']) {
+    const s = stageSection(t, opts, k); if (!s || !s.hit) continue;
+    let a = s.area;
+    if (k === 'process') { const c = stageSection(t, opts, 'canal'); if (c && c.hit) a = s.area; }
+    worst = Math.max(worst, Math.abs(a - A) / A);
+  }
+  return worst;
+}
+
+/* ═══════════════════════════════════════════════════════════ 13 · THE CLAIM VOCABULARY
+
+   check-beat-claims.mjs calls this with a measure's name and the beat's own t. Every name resolves
+   to one of the geometry readers above. The flags a measure needs come from the name's suffix, so a
+   claim about the clinical overlay or the adult remnant is evaluated against the build the beat
+   actually draws rather than against the default one. */
+function parseName(name) {
+  const bits = name.split('/');
+  const o = {};
+  for (const b of bits.slice(1)) {
+    if (b === 'block') o.block = true;
+    else if (b === 'hemi') o.hemi = true;
+    else if (b === 'clinical') o.clinical = true;
+    else if (b === 'failed') o.failed = true;
+    else if (b === 'adult') o.adult = true;
+  }
+  return { base: bits[0], opts: o };
+}
+/** the variant suffixes of a measure name, so a measure built out of two others keeps the variant
+    it was asked for instead of silently falling back to the default build */
+function nameSuffix(name) {
+  const i = name.indexOf('/');
+  return i < 0 ? '' : name.slice(i);
+}
+/** THE CUT PLANE'S OWN NORMAL, READ OFF THE BUILT TRIANGLES. The median cut leaves two coplanar
+    rectangular faces on every vertebral body — one each side of the bore — and they share one
+    outward normal, so their combined area is far the largest single planar area on the segment once
+    the end plates (normal along the long axis) are excluded. Binning the triangle normals by area
+    and taking the heaviest bin therefore recovers the cut plane without reading ADU_YAW, which is
+    what lets row T and row AA both be assertions about the geometry rather than restatements of the
+    constant that built it (RENDER-STANDARD, "an acceptance measurement must be a function of the
+    built geometry"). */
+function adultCutNormal(u, opts) {
+  const V = vertsByKey(u, opts).flat.vertebral_body;
+  if (!V) return null;
+  const bins = new Map();
+  for (let i = 0; i + 8 < V.length; i += 9) {
+    const ux = V[i + 3] - V[i], uy = V[i + 4] - V[i + 1], uz = V[i + 5] - V[i + 2];
+    const vx = V[i + 6] - V[i], vy = V[i + 7] - V[i + 1], vz = V[i + 8] - V[i + 2];
+    let nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+    const two = Math.hypot(nx, ny, nz); if (two < 1e-12) continue;
+    nx /= two; ny /= two; nz /= two;
+    if (Math.abs(ny) > 0.2) continue;                 // end plates and caps are not the cut
+    const key = Math.round(nx * 100) + '|' + Math.round(nz * 100);
+    const e = bins.get(key) || { a: 0, x: 0, y: 0, z: 0 };
+    e.a += two / 2; e.x += nx * two / 2; e.y += ny * two / 2; e.z += nz * two / 2;
+    bins.set(key, e);
+  }
+  let best = null;
+  for (const e of bins.values()) if (!best || e.a > best.a) best = e;
+  if (!best) return null;
+  const L = Math.hypot(best.x, best.y, best.z);
+  return L < 1e-12 ? null : { x: best.x / L, y: best.y / L, z: best.z / L };
+}
+
+function claimMeasure(name, t) {
+  const { base, opts } = parseName(name);
+  const path = base.split('.');
+  const u = clamp01(t);
+  switch (path[0]) {
+    /* ─ where the axis and its fronts are, read off the built triangles ─ */
+    case 'axisCaudalV':    { const a = axisBoundsBuilt(u, opts); return a ? a.v0 : -1; }
+    case 'axisCranialV':   { const a = axisBoundsBuilt(u, opts); return a ? a.v1 : -1; }
+    case 'axisLenFrac':    { const a = axisBoundsBuilt(u, opts); return a ? (a.y1 - a.y0) / p('DISC_L', DISC_L) : 0; }
+    case 'nodeCranialV':   { const b = bboxOf(vertsByKey(u, opts).flat.node); return b ? vOf(b.y1) : -1; }
+    case 'brkBuiltV':      { const b = bboxOf(vertsByKey(u, opts).flat.process); return b ? vOf(b.y1) : -1; }
+    case 'detBuiltV':      { const b = bboxOf(vertsByKey(u, opts).flat.plate); return b ? vOf(b.y1) : -1; }
+    case 'processLenFrac':   return keyVFrac(u, opts, 'process');
+    case 'plateLenFrac':     return keyVFrac(u, opts, 'plate');
+    case 'rodLenFrac':       return keyVFrac(u, opts, 'definitive');
+    case 'stagesPresent': {
+      const V = vertsByKey(u, opts).flat;
+      return ['process', 'plate', 'definitive'].filter(k => V[k]).length;
+    }
+    case 'stagesOrdered': {
+      /* cranial to caudal: rod, plate, tube. Measured on the built boxes, with a magnitude floor
+         expressed as a fraction of the axis's own length — RENDER-STANDARD's floor rule. */
+      const V = vertsByKey(u, opts).flat, a = axisBoundsBuilt(u, opts);
+      const R = bboxOf(V.definitive), P = bboxOf(V.plate), Q = bboxOf(V.process);
+      if (!R || !P || !Q || !a) return 0;
+      const L = a.y1 - a.y0;
+      const d1 = (R.y0 - P.y0) / L, d2 = (P.y0 - Q.y0) / L;
+      return Math.min(d1, d2);
+    }
+    /* ─ the conservation ─ */
+    case 'sectionAreaProcess': { const s = stageSection(u, opts, 'process'); return s ? s.area : 0; }
+    case 'sectionAreaPlate':   { const s = stageSection(u, opts, 'plate'); return s ? s.area : 0; }
+    case 'sectionAreaRod':     { const s = stageSection(u, opts, 'definitive'); return s ? s.area : 0; }
+    case 'conservationWorst':  return conservationWorst(u, opts);
+    case 'areaTarget':         return area0();
+    case 'procHalfW':  { const s = stageSection(u, opts, 'process'); return s ? s.halfW : 0; }
+    case 'plateHalfW': { const s = stageSection(u, opts, 'plate'); return s ? s.halfW : 0; }
+    case 'rodHalfW':   { const s = stageSection(u, opts, 'definitive'); return s ? s.halfW : 0; }
+    case 'plateWiderThanTube': {
+      const a = stageSection(u, opts, 'plate'), b = stageSection(u, opts, 'process');
+      return (a && b && b.halfW > 0) ? a.halfW / b.halfW : 0;
+    }
+    case 'rodNarrowerThanTube': {
+      const a = stageSection(u, opts, 'definitive'), b = stageSection(u, opts, 'process');
+      return (a && b && b.halfW > 0) ? a.halfW / b.halfW : 0;
+    }
+    case 'rodHalfWOverProcR': {
+      const a = stageSection(u, opts, 'definitive');
+      return a ? a.halfW / p('R_PROC', R_PROC) : 0;
+    }
+    /* ─ hollow or solid ─ */
+    case 'lumenAreaFrac': {
+      const w = stageSection(u, opts, 'process'), c = stageSection(u, opts, 'canal');
+      if (!w || !w.hit) return 0;
+      const lum = (c && c.hit) ? c.area : 0;
+      return lum / Math.max(1e-9, lum + w.area);
+    }
+    case 'canalVol':       return volOfKey(u, opts, 'canal');
+    case 'rodLumenFrac': {
+      /* the rod has no lumen: its section's area must equal the area a SOLID section of that
+         outline would have, so the ratio of measured area to (4 a b c(n)) is 1 */
+      const s = stageSection(u, opts, 'definitive'); if (!s || !s.hit) return 1;
+      const solid = Math.PI * s.halfW * (s.height / 2);
+      return Math.max(0, 1 - s.area / Math.max(1e-9, solid));
+    }
+    /* ─ where the plate lies, and where the rod does not ─ */
+    case 'plateInRoofFrac': return plateInRoofFrac(u, opts);
+    case 'rodInRoofFrac':   return rodInRoofFrac(u, opts);
+    /* ─ the neurenteric canal ─ */
+    case 'necVol':        return volOfKey(u, opts, 'neurenteric');
+    case 'necPierces':    return piercesBoth(u, opts, 'neurenteric');
+    case 'persistVol':    return volOfKey(u, opts, 'persistent_canal');
+    case 'persistPierces':return piercesBoth(u, opts, 'persistent_canal');
+    /* ─ induction ─ */
+    case 'npThickRatio': {
+      const b = bboxOf(vertsByKey(u, opts).flat.neural_plate);
+      if (!b) return 0;
+      const y = (b.y0 + b.y1) / 2;
+      const np = sheetThickAtMid(u, opts, 'neural_plate', y);
+      const ec = sheetThickAt(u, opts, 'ectoderm', y, FLANK_X);
+      return ec > 1e-6 ? np / ec : 0;
+    }
+    case 'uninducedThickRatio': {
+      const b = bboxOf(vertsByKey(u, opts).flat.ecto_uninduced);
+      if (!b) return 0;
+      const y = (b.y0 + b.y1) / 2;
+      const un = sheetThickAtMid(u, opts, 'ecto_uninduced', y);
+      const ec = sheetThickAt(u, opts, 'ectoderm', y, FLANK_X);
+      return ec > 1e-6 ? un / ec : 0;
+    }
+    case 'npOverhangFrac': return npOverhangFrac(u, opts);
+    case 'npCranialV':  { const b = bboxOf(vertsByKey(u, opts).flat.neural_plate); return b ? vOf(b.y1) : -1; }
+    case 'npLenFrac':      return keyVFrac(u, opts, 'neural_plate');
+    case 'floorPlateVol':  return volOfKey(u, opts, 'floor_plate');
+    /* ─ segmentation ─ */
+    case 'sclerotomeCoverFrac': {
+      const V = vertsByKey(u, opts).flat;
+      const k = V.sclerotome ? 'sclerotome' : 'sclerotome_disordered';
+      return keyVFrac(u, opts, k);
+    }
+    case 'collarRingFrac':  return collarRingFrac(u, opts);
+    case 'collarsBuilt':    return meshCount(u, opts, 'sclerotome') || meshCount(u, opts, 'sclerotome_disordered');
+    case 'sclerotomeInRod': {
+      /* AROUND it, not FROM it: none of the rod may lie inside a collar's own solid, and the collar
+         must not lie inside the rod either. Measured by containment, not by a radius comparison. */
+      const V = vertsByKey(u, opts).flat;
+      if (!V.definitive || !V.sclerotome) return 0;
+      return Math.max(insideFrac(V.definitive, V.sclerotome), insideFrac(V.sclerotome, V.definitive));
+    }
+    case 'collarWidthCV': {
+      const V = vertsByKey(u, opts);
+      const bs = V.bodies.sclerotome_disordered || V.bodies.sclerotome;
+      if (!bs || bs.length < 2) return 0;
+      const w = bs.map(a => { const b = bboxOf(a); return b.y1 - b.y0; });
+      const m = w.reduce((s, x) => s + x, 0) / w.length;
+      const sd = Math.sqrt(w.reduce((s, x) => s + (x - m) * (x - m), 0) / w.length);
+      return m > 1e-9 ? sd / m : 0;
+    }
+    /* ─ the two ends, and the clinical masses that sit on them ─ */
+    case 'chordomaCaudalV': { const c = centroidOf(vertsByKey(u, opts).flat.chordoma_sacral); return c ? vOf(c.y) : -1; }
+    case 'chordomaCranialV': { const c = centroidOf(vertsByKey(u, opts).flat.chordoma_clival); return c ? vOf(c.y) : -1; }
+    case 'chordomaAxisOffset': {
+      /* both masses lie on ONE axis: the greater of the two lateral offsets, as a fraction of the
+         axis's own half-width, which is the floor that makes the claim visible */
+      const V = vertsByKey(u, opts).flat;
+      const a = centroidOf(V.chordoma_clival), b = centroidOf(V.chordoma_sacral);
+      if (!a || !b) return 99;
+      return Math.max(Math.abs(a.x), Math.abs(b.x)) / Math.max(1e-6, p('R_PROC', R_PROC));
+    }
+    case 'chordomaSeparationFrac': {
+      const V = vertsByKey(u, opts).flat;
+      const a = centroidOf(V.chordoma_clival), b = centroidOf(V.chordoma_sacral);
+      if (!a || !b) return 0;
+      return Math.abs(a.y - b.y) / p('DISC_L', DISC_L);
+    }
+    case 'cystVol':      return volOfKey(u, opts, 'neurenteric_cyst');
+    /* ─ the adult remnant ─ */
+    case 'nucleusCount':   return meshCount(u, opts, 'nucleus_pulposus');
+    case 'bodyCount':      return meshCount(u, opts, 'vertebral_body');
+    case 'nucleusOffAxis': {
+      const V = vertsByKey(u, opts), bs = V.bodies.nucleus_pulposus;
+      if (!bs || !bs.length) return 99;
+      let worst = 0;
+      for (const a of bs) { const c = centroidOf(a); worst = Math.max(worst, Math.hypot(c.x, c.z)); }
+      return worst / Math.max(1e-6, nucleusR(u));
+    }
+    case 'nucleusBetweenBodies': {
+      /* every nucleus must lie in a gap between two bodies, not inside one — measured by containment
+         against the bodies' own built triangles */
+      const V = vertsByKey(u, opts);
+      const bs = V.bodies.nucleus_pulposus, bodies = V.flat.vertebral_body;
+      if (!bs || !bodies) return 1;
+      let worst = 0;
+      for (const a of bs) worst = Math.max(worst, insideFrac(a, bodies));
+      return worst;
+    }
+    case 'remnantRadiusFrac': {
+      const V = vertsByKey(u, opts), bs = V.bodies.notochord_regressed;
+      if (!bs || !bs.length) return 1;
+      let worst = 0;
+      for (const a of bs) { const b = bboxOf(a); worst = Math.max(worst, (b.x1 - b.x0) / 2); }
+      return worst / (ADU_NCH_R * ADU_SCALE);
+    }
+    case 'axisBreakFrac': {
+      /* THE INSTRUMENT FOR REVIEW ROUND 3's OPEN 1/2, AND IT MEASURES THE PICTURE'S OWN CLAIM.
+         Beat 8's sentence is "inside each vertebral body the notochord is crushed out of existence;
+         between the bodies it survives as the nucleus pulposus" — which is a claim that the midline
+         column is BROKEN. Every earlier instrument here measured how WIDE the remnant was, and the
+         defect was that a remnant of any width spanning its own body leaves the column continuous
+         end to end: at t=0.90 the five remnants and four nuclei tiled y from -3.53 to +3.53 with
+         0.01 of clearance at each junction and the student saw one unbroken cord.
+         So: project both midline keys onto y, union their intervals, and report the fraction of the
+         column's own extent that NEITHER occupies. Zero means no break anywhere, which is what the
+         old law scored. Read off the built triangles, silhouette shells excluded by vertsByKey. */
+      const V = vertsByKey(u, opts).bodies;
+      const segs = [];
+      for (const k of ['notochord_regressed', 'nucleus_pulposus']) {
+        for (const a of (V[k] || [])) { const b = bboxOf(a); if (b) segs.push([b.y0, b.y1]); }
+      }
+      if (segs.length < 2) return 0;
+      segs.sort((p, q) => p[0] - q[0]);
+      const lo = segs[0][0]; let hi = -Infinity;
+      for (const s of segs) hi = Math.max(hi, s[1]);
+      const span = hi - lo;
+      if (span <= 1e-9) return 0;
+      let covered = 0, cur0 = segs[0][0], cur1 = segs[0][1];
+      for (let i = 1; i < segs.length; i++) {
+        if (segs[i][0] > cur1) { covered += cur1 - cur0; cur0 = segs[i][0]; cur1 = segs[i][1]; }
+        else cur1 = Math.max(cur1, segs[i][1]);
+      }
+      covered += cur1 - cur0;
+      return (span - covered) / span;
+    }
+    case 'remnantSpanFrac': {
+      /* does one remnant still span the body it is being crushed out of? its own y-extent over the
+         vertebral body's — 1.0 and over is the old law, which overhung its body at both ends */
+      const V = vertsByKey(u, opts).bodies;
+      const rs = V.notochord_regressed, bs = V.vertebral_body;
+      if (!rs || !rs.length || !bs || !bs.length) return 1;
+      let hR = 0, hB = Infinity;
+      for (const a of rs) { const b = bboxOf(a); if (b) hR = Math.max(hR, b.y1 - b.y0); }
+      for (const a of bs) { const b = bboxOf(a); if (b) hB = Math.min(hB, b.y1 - b.y0); }
+      return hB > 1e-9 ? hR / hB : 1;
+    }
+    case 'remnantVolFrac': {
+      /* HOW MUCH OF THE NOTOCHORD IS LEFT INSIDE ONE BODY, AND WHY THIS REPLACED remnantAreaFrac AS
+         B8-regressed's INSTRUMENT. The area ratio below carries the right argument — "all but gone"
+         is a claim about MATERIAL, not about width — and it was a correct proxy for material only
+         while the remnant's LENGTH was fixed at the vertebral body's. Under the isotropic law
+         (section 8) the vestige shortens as well as thins, so area understates how much has gone:
+         at t=0.90 the area ratio reads 0.2901 and the material actually left is 0.1559. Keeping the
+         area instrument would have failed a claim that the geometry had just made MORE true, which
+         is the shape of mistake RENDER-STANDARD's beat-claim rule exists to catch in the other
+         direction. So the measure is now a volume ratio, and both sides of it are read off the
+         built triangles — the vestige's own bounding box at t over the same box at regressFrac 0 —
+         rather than from the scale factor the geometry was built from (section 12's rule). It
+         recovers k^3 = 1 - regressFrac, which is the conservation nucleusR() is solved against, so
+         this claim and the nucleus's are now two readings of one law. */
+      const box = (tt) => {
+        const V = vertsByKey(tt, opts).bodies.notochord_regressed;
+        if (!V || !V.length) return null;
+        let best = null;
+        for (const a of V) { const b = bboxOf(a); if (!b) continue;
+          const h = b.y1 - b.y0; if (!best || h > best.h) best = { w: (b.x1 - b.x0) / 2, h }; }
+        return best;
+      };
+      const now = box(u), ref = box(0);
+      if (!now || !ref || ref.w <= 1e-9 || ref.h <= 1e-9) return 1;
+      return (now.w / ref.w) * (now.w / ref.w) * (now.h / ref.h);
+    }
+    case 'remnantAreaFrac': {
+      /* HOW MUCH IS LEFT, not how wide it is. A radius ratio of 0.40 is an AREA ratio of 0.16, and
+         "all but gone" is a claim about material: reporting the radius made the beat's own sentence
+         read as a 40% survival when the measured survival is 16%. */
+      const r = claimMeasure('remnantRadiusFrac' + (opts.adult ? '/adult' : ''), u);
+      return r * r;
+    }
+    /* ─ review round 1, beat 3: is the plate a PLATEAU or a CONE? ─
+       Read off the BUILT sheet, not off npThickAt: the fraction of the plate's own half-width over
+       which its built thickness is within 5% of its built midline thickness. A broad thickening
+       plateaus over most of itself; a cone peaks at one point. */
+    case 'npPlateauFrac': {
+      const V = vertsByKey(u, opts).flat;
+      const np = V.neural_plate || V.ecto_uninduced; if (!np) return 0;
+      const b = bboxOf(np); if (!b) return 0;
+      const y = (b.y0 + b.y1) / 2, half = (b.x1 - b.x0) / 2;
+      if (!(half > 1e-6)) return 0;
+      const mid = sheetThickAtMid(u, opts, V.neural_plate ? 'neural_plate' : 'ecto_uninduced', y);
+      if (!(mid > 1e-9)) return 0;
+      const N = 40;
+      let last = 0;
+      for (let i = 1; i <= N; i++) {
+        const x = half * (i / N);
+        const th = sheetThickAt(u, opts, V.neural_plate ? 'neural_plate' : 'ecto_uninduced', y, x);
+        if (th >= 0.95 * mid) last = i / N; else break;
+      }
+      return last;
+    }
+    /* ─ review round 1, beat 8: the median cut, and the void that is no longer in the disc ─ */
+    case 'adultCutMaxX': {
+      /* MEASURED AGAINST THE CUT PLANE'S OWN NORMAL, not against the x axis. Before the segment was
+         turned (ADU_YAW) those were the same vector and this read `a[i]`, the raw x; written that
+         way it is a statement about the world frame rather than about the cut, and it would have
+         gone red on a change that moved nothing anatomical. The normal is DERIVED from the built
+         triangles by adultCutNormal() below — nothing here reads ADU_YAW — so at a yaw of zero this
+         returns exactly what it returned before, and row T's assertion is unchanged in meaning. */
+      const V = vertsByKey(u, opts).flat;
+      const n = adultCutNormal(u, opts); if (!n) return 99;
+      let worst = -Infinity;
+      for (const k of ['vertebral_body', 'annulus_fibrosus']) {
+        const a = V[k]; if (!a) continue;
+        for (let i = 0; i < a.length; i += 3) {
+          const d = a[i] * n.x + a[i + 1] * n.y + a[i + 2] * n.z;
+          if (d > worst) worst = d;
+        }
+      }
+      return worst === -Infinity ? 99 : worst / (ADU_R_BODY * ADU_SCALE);
+    }
+    case 'discBoreTaper': {
+      /* DOES THE ANNULUS'S BORE FOLLOW THE NUCLEUS, OR RUN STRAIGHT PAST IT? The bore's radius at
+         ONE disc's END PLATE over its radius at that same disc's EQUATOR, read off that disc's own
+         built vertices. It is measured per BODY and not on the flattened key, because the flattened
+         key is four discs and three vertebral bodies' worth of y and its mid-height lands inside a
+         bone. A straight cylindrical bore — what this was before review round 1 — gives exactly 1,
+         and the ring of empty disc space above and below the nucleus that the review saw as "a small
+         ellipsoid in a large hollow" IS that 1. A bore that closes onto the nucleus gives
+         ADU_BORE_MIN over the equatorial bore. Reported as the worst (largest) over every disc. */
+      const bs = vertsByKey(u, opts).bodies.annulus_fibrosus;
+      if (!bs || !bs.length) return 1;
+      let worst = 0;
+      for (const an of bs) {
+        const bb = bboxOf(an); if (!bb) return 1;
+        const tol = (bb.y1 - bb.y0) * 0.02;
+        const boreAt = y => { let r = Infinity;
+          for (let k = 0; k < an.length; k += 3)
+            if (Math.abs(an[k + 1] - y) <= tol) r = Math.min(r, Math.hypot(an[k], an[k + 2]));
+          return r; };
+        const top = boreAt(bb.y1), mid = boreAt((bb.y0 + bb.y1) / 2);
+        if (!isFinite(top) || !isFinite(mid) || mid < 1e-9) return 1;
+        worst = Math.max(worst, top / mid);
+      }
+      return worst;
+    }
+    case 'discBoreClearance': {
+      /* and at the equator the bore sits ON the nucleus rather than away from it: the gap between
+         the two, as a fraction of the nucleus's own equatorial radius. Both read off built vertices,
+         per disc, pairing each annulus body with the nucleus body nearest it in y. */
+      const V = vertsByKey(u, opts);
+      const as = V.bodies.annulus_fibrosus, ns = V.bodies.nucleus_pulposus;
+      if (!as || !as.length || !ns || !ns.length) return 1;
+      let worst = 0;
+      for (const an of as) {
+        const bb = bboxOf(an); if (!bb) return 1;
+        const yMid = (bb.y0 + bb.y1) / 2, tol = (bb.y1 - bb.y0) * 0.02;
+        let bore = Infinity;
+        for (let k = 0; k < an.length; k += 3)
+          if (Math.abs(an[k + 1] - yMid) <= tol) bore = Math.min(bore, Math.hypot(an[k], an[k + 2]));
+        let best = null, bd = Infinity;
+        for (const nu of ns) { const c = centroidOf(nu); const d = Math.abs(c.y - yMid);
+          if (d < bd) { bd = d; best = nu; } }
+        if (!best || !isFinite(bore)) return 1;
+        let nuc = 0;
+        for (let k = 0; k < best.length; k += 3)
+          if (Math.abs(best[k + 1] - yMid) <= tol * 4) nuc = Math.max(nuc, Math.hypot(best[k], best[k + 2]));
+        if (nuc < 1e-9) return 1;
+        worst = Math.max(worst, (bore - nuc) / nuc);
+      }
+      return worst;
+    }
+    case 'nucleusRadiusFrac': {
+      const V = vertsByKey(u, opts), bs = V.bodies.nucleus_pulposus;
+      if (!bs || !bs.length) return 0;
+      let w = 0;
+      for (const a of bs) { const b = bboxOf(a); w = Math.max(w, (b.x1 - b.x0) / 2); }
+      return w / (ADU_NCH_R * ADU_SCALE);
+    }
+    /* ─ the picture, on the beat's own camera (§3.y) ─ */
+    case 'stackAcross':    return stackAcross(u, opts, path[1] || 'inferior');
+    /* ─ review round 2, beat 8: is the median section seen face-on? §3.y — the claim is measured on
+         the screen plane of the camera the beat rotates to, through the VIEW_DIR table copied from
+         viz3d, so it moves when the beat's camera moves. ─ */
+    /* ─ §3.y again, for beat 5's camera: how large a structure DRAWS on a named camera, as a ratio
+         between two cameras, read off its own built triangles. A flat condensation seen edge-on and
+         the same condensation seen face-on are the same solid and a different picture, and this is
+         the only number in the file that can tell them apart. Area-weighted |n . d| over the
+         structure's triangles IS its projected area (the Cauchy projection), silhouette shells
+         already excluded by vertsByKey. ─ */
+    case 'projArea': {
+      const a = vertsByKey(u, opts).flat[path[1]]; if (!a) return 0;
+      const d = screenAxes(path[2] || 'lateral').dir;
+      let tot = 0;
+      for (let i = 0; i + 8 < a.length; i += 9) {
+        const ux = a[i + 3] - a[i], uy = a[i + 4] - a[i + 1], uz = a[i + 5] - a[i + 2];
+        const vx = a[i + 6] - a[i], vy = a[i + 7] - a[i + 1], vz = a[i + 8] - a[i + 2];
+        const nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+        tot += Math.abs(nx * d.x + ny * d.y + nz * d.z) / 2;
+      }
+      return tot / 2;                       // front and back of a closed body project the same area
+    }
+    case 'projAreaRatio': {
+      const A = claimMeasure('projArea.' + path[1] + '.' + path[2] + nameSuffix(name), t);
+      const B = claimMeasure('projArea.' + path[1] + '.' + path[3] + nameSuffix(name), t);
+      return B < 1e-12 ? 0 : A / B;
+    }
+    case 'cutFaceAngle': {
+      const n = adultCutNormal(u, opts); if (!n) return -1;
+      const d = screenAxes(path[1] || 'lateral').dir;
+      return Math.acos(Math.min(1, Math.abs(n.x * d.x + n.y * d.y + n.z * d.z))) * 180 / Math.PI;
+    }
+    case 'cutFaceProjShare': {
+      /* WHAT THE ANGLE COSTS THE PICTURE. The share of the segment's projected area, on that
+         camera, contributed by the flat cut faces themselves. A section seen along its own normal
+         gives 1.000 — every other surface is edge-on and projects nothing, which IS the flat chart
+         review round 2 found. Area-weighted over the built triangles of the two cut solids. */
+      const n = adultCutNormal(u, opts); if (!n) return 1;
+      const d = screenAxes(path[1] || 'lateral').dir;
+      const V = vertsByKey(u, opts).flat;
+      let cut = 0, all = 0;
+      for (const k of ['vertebral_body', 'annulus_fibrosus']) {
+        const a = V[k]; if (!a) continue;
+        for (let i = 0; i + 8 < a.length; i += 9) {
+          const ux = a[i + 3] - a[i], uy = a[i + 4] - a[i + 1], uz = a[i + 5] - a[i + 2];
+          const vx = a[i + 6] - a[i], vy = a[i + 7] - a[i + 1], vz = a[i + 8] - a[i + 2];
+          const nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+          const two = Math.hypot(nx, ny, nz); if (two < 1e-12) continue;
+          const proj = Math.abs(nx * d.x + ny * d.y + nz * d.z) / 2;   // area * |n . d|
+          all += proj;
+          const al = Math.abs((nx * n.x + ny * n.y + nz * n.z) / two);
+          if (al > 0.999) cut += proj;
+        }
+      }
+      return all < 1e-12 ? 1 : cut / all;
+    }
+    case 'dorsoventralOrder': {
+      /* amnion above (dorsal, -z), yolk sac below (ventral, +z), with a floor as a fraction of the
+         mean of the two sheets' own z-extents */
+      const V = vertsByKey(u, opts).flat;
+      const A = bboxOf(V.amnion), Y = bboxOf(V.yolk_sac);
+      if (!A || !Y) return 0;
+      const mean = ((A.z1 - A.z0) + (Y.z1 - Y.z0)) / 2;
+      return (Y.z0 - A.z1) / Math.max(1e-9, mean);
+    }
+    case 'symmetryX': {
+      /* the model has no chirality to get wrong, and this measures that rather than asserting the
+         convention — the honest form of RENDER-STANDARD's rule for a model with no chiral content */
+      const V = vertsByKey(u, opts).flat;
+      let worst = 0;
+      for (const k in V) {
+        if (k === 'sclerotome_disordered' || k === 'definitive_defective') continue;
+        const b = bboxOf(V[k]);
+        worst = Math.max(worst, Math.abs(b.x1 + b.x0) / Math.max(1e-6, b.x1 - b.x0));
+      }
+      return worst;
+    }
+  }
+  throw new Error('unknown measure: ' + name);
+}
+
+/* ═══════════════════════════════════════════════════════════════ 14 · ACCEPTANCE
+
+   Every row's measured side is read from the built triangles (section 12). Every row carries a
+   MAGNITUDE FLOOR expressed as a fraction of the relevant extent, never `> 0` — RENDER-STANDARD's
+   rule after three review rounds lost to sign tests that passed at five per cent of a chamber's own
+   width. And every row has a NEGATIVE CASE in negatives() below, because a test that cannot fail is
+   not evidence however carefully its floor was chosen. */
+
+const FLOORS = {
+  CONSERVE: 0.040,   // the measured section area may differ from A0 by this fraction at most. It is
+                     // not zero because the measure is a quadrature over 176 columns of a curved
+                     // outline, and the quadrature step is its own error bar.
+  WIDER: 1.45,       // the plate is at least this many times the tube's half-width
+  NARROWER: 0.86,    // and the rod is at most this fraction of it
+  LUMEN: 0.20,       // the hollow process's lumen is at least this share of its own section
+  INROOF: 0.93,      // this much of the plate lies inside the gut roof
+  OUTROOF: 0.06,     // and at most this much of the rod does
+  NPTHICK: 2.00,     // the neural plate is at least twice the thickness of flat ectoderm
+  NPFLAT: 1.10,      // and the uninduced strip is at most this
+  RING: 0.88,        // a sclerotome collar wraps at least this share of the circle
+  SHARE: 0.03,       // no undeclared pair may have more than this fraction of one inside the other
+  ORDER: 0.045,      // the stage order's floor, as a fraction of the axis's own length. Measured
+                     // across the three t at which all three stages exist: 0.429, 0.213 and 0.052.
+                     // The last is t = 0.52, where the hollow process is nearly spent — which is
+                     // what the picture shows, so the floor is set below it rather than the beat
+                     // being moved to flatter ground.
+  STACK: 0.080,      // the two sheets' projections must be separated by at least this fraction of
+                     // their own mean extent, on the camera a beat claims the stack from. MEASURED:
+                     // 0.1084 at beat 3's t and 0.2655 at beat 7's, against 0.0000 from `lateral` at
+                     // both — the floor's job is to separate those two answers and it does, with 35%
+                     // headroom on the tighter one. It is not larger because the measure is the gap
+                     // between the two sheets' EXTREME projections normalised by their own extents,
+                     // and the upper sheet's extent includes the whole axial swelling: the thing the
+                     // row has to rule out is the overlap a `lateral` camera gives, which is exact.
+  STACKFLAT: 0.02,   // and must OVERLAP on a camera that cannot show it
+  SYMM: 0.02,        // |x1 + x0| / (x1 - x0) for every non-jittered key
+  GAPCLEAR: 0.004,   // a window must be clear of its own sheet to within this area
+  /* ─── review round 3's OPEN 1/2, beat 8: the column has to be BROKEN ─── */
+  AXISBREAK: 0.12,   // the fraction of the midline column's own y-extent occupied by NEITHER the
+                     // intravertebral vestige NOR a nucleus pulposus.
+                     // BOTH LAWS WERE MEASURED, the rejected one by building the round-3 file beside
+                     // this one and running this same measure over it — not by quoting the review:
+                     //        t      0.80    0.85    0.90    0.95    1.00
+                     //   old break  0.0000  0.0172  0.0416  0.0693  0.0824
+                     //   new break  0.0942  0.1742  0.2806  0.4295  0.6263
+                     // The floor is 0.12: above the old law's BEST score anywhere (0.0824, at the
+                     // end of regression) and below the new law's score at the only two t this row
+                     // grades. It is deliberately NOT placed to pass the new law at t=0.80, where it
+                     // scores 0.0942 — at half-completed regression a vestige that still nearly
+                     // spans its body is correct, and no beat stands there. Beat 8 stands at 0.90.
+                     // Note the old law's break is not literally zero: the review reported ~0.01 of
+                     // clearance at each junction measured WITH the silhouette shells, and this
+                     // measure excludes them (vertsByKey), which is where 0.0416 at t=0.90 comes
+                     // from. Four per cent of a column, in eight slivers, is not a break a student
+                     // sees — the rendered frame is the evidence for that, and it is in models-out.
+  REMSPAN: 0.80,     // one vestige's y-extent over its vertebral body's. MEASURED the same way:
+                     //        t      0.80    0.85    0.90    0.95    1.00
+                     //   old span   1.1939  1.1542  1.1084  1.0568  1.0329
+                     //   new span   1.0113  0.8683  0.6863  0.4463  0.1529
+                     // The old law is OVER ONE at every t — the remnant overhung its own body at
+                     // both ends, which is exactly how a cord "crushed out of existence inside each
+                     // body" arrived at the next one. The floor is below its best (1.0329) and above
+                     // the new law's score at both graded t.
+  /* ─── the two floors review round 1 added ─── */
+  NPPLATEAU: 0.25,   // this much of the neural plate's half-width must be within 5% of its midline
+                     // thickness — a broad thickening rather than a midline cone. MEASURED on both
+                     // laws at both t a beat uses the plate at: the graded law the review rejected
+                     // gives 0.150 (t 0.40, block) and 0.350 (t 0.70, hemi); the saturated law with
+                     // the mesh-column border gives 0.425 and 0.800. The floor sits between the two
+                     // WORST numbers — 70% headroom on the one it has to pass, 40% clear of the one
+                     // it has to reject — and not between the two best, which would have let a
+                     // regression at beat 3's own t through on beat 6's margin.
+  CUTX: 1e-6,        // the adult median cut, as a fraction of the vertebral body's own radius.
+                     // IT WAS 1e-9, AND THAT NUMBER WAS AN ARTEFACT OF THE OLD FRAME rather than a
+                     // statement about the cut. Before ADU_YAW the cut faces were written into the
+                     // vertex buffer as literal 0.0 and the measure read them back exactly; they are
+                     // now a rotation of that plane, held in the Float32Array the geometry actually
+                     // carries, so the residual is the float32 ulp at this radius. MEASURED over
+                     // yaws 0, 12, 20, 30, 45 and 60: worst 1.06e-8, about 1.4 ulp. The floor is two
+                     // orders above the measurement and five below the 0.1045 that negative case T2
+                     // feeds it — a cut six degrees off the median plane — so it still separates the
+                     // thing it was written to separate. A floor at the ruler's own resolution is
+                     // the same move FLOORS.CONSERVE makes for its quadrature step.
+  BORETAPER: 0.25,   // the annulus's bore at the end plate over its bore at the equator. A straight
+                     // cylindrical bore is exactly 1.000 and is the void review round 1 found; a
+                     // bore that closes onto the nucleus measures 0.051.
+  BORECLEAR: 0.06,   // and at the equator the bore sits on the nucleus to within this fraction of
+                     // the nucleus's radius — the 4% clearance the build declares, plus quadrature
+  /* ─── the floor review round 2 added: beat 8 was a flat chart ─── */
+  CUTANGLE_MIN: 40,  // degrees between the median cut's OWN normal — derived from the built
+                     // triangles — and the camera beat 8 stands at. Zero is the defect review round
+                     // 2 found: the section seen along its own normal, which draws a flat chart.
+                     // The band is [40, 60] and the two ends are set differently; the note at
+                     // ADU_YAW says which is measured and which was looked at, and does not pretend
+                     // they are the same kind of evidence. 45 sits 5 degrees inside the lower end
+                     // and 15 inside the upper.
+  CUTANGLE_MAX: 60,  // and not more, because past this the annulus's near wall covers the nucleus
+                     // pulposus — the beat's own highlighted subject — which the player walk
+                     // measures falling from 1.221% of the frame face-on to 0.856% at 60 degrees.
+};
+const T_SAMPLE = [0.20, 0.26, 0.34, 0.40, 0.44, 0.48, 0.52, 0.60, 0.70, 0.78, 0.86, 0.94, 1.00];
+/* the rows that rebuild every variant use a smaller set: 7 stages x 4 variants is 28 builds, and
+   the two measures they take (winding, unpaired edges) are properties of the EMITTER rather than of
+   the stage, so they do not become more convincing at thirteen. */
+const T_HEAVY = [0.20, 0.40, 0.48, 0.60, 0.70, 0.86, 1.00];
+/* the scene's own greatest SET_STAGE t. The render harness asserts this against the scene's ops
+   rather than trusting it: it was 1.00 while the scene's latest beat sits at 0.90, which is the kind
+   of constant that drifts the moment a beat moves and takes a row's validity with it. */
+const SCENE_T_MAX = 0.90;
+
+const ACCEPTANCE = {
+  axes: AXES,
+  axes_status: 'DECLARED, NOT PROVED. This model has no chiral content: every key it builds is ' +
+    'mirror-symmetric in x apart from the deliberately jittered sclerotome of the `failed` variant. ' +
+    'RENDER-STANDARD says a symmetric model cannot witness its own handedness, so row Q asserts the ' +
+    'symmetry instead — it proves there is no handedness here to get wrong — and NO narration in ' +
+    'this scene names a side.',
+  unit_um: UNIT_UM,
+  tests: [
+    { id: 'A', must: 'the built disc is broader CRANIALLY than caudally at mirrored stations, by at least 20%' },
+    { id: 'B', must: 'the detachment front is never caudal of the breakdown front, at 13 values of t, measured on the built segment bounds' },
+    { id: 'C', must: 'the measured cross-sectional area of the notochordal material is A0 at every stage, within one quadrature step' },
+    { id: 'D', must: 'the plate is WIDER than the tube — a consequence of flattening at constant area, not a typed number' },
+    { id: 'E', must: 'the rod is NARROWER than the tube — a consequence of losing the lumen' },
+    { id: 'F', must: 'the process is HOLLOW and the rod is not, measured on their own built sections' },
+    { id: 'G', must: 'the plate lies INSIDE the gut roof and the rod has LEFT it' },
+    { id: 'H', must: 'no part of the neural plate overhangs the notochord, and it never passes the prechordal plate' },
+    { id: 'I', must: 'the induced plate is at least twice the thickness of flat ectoderm and the uninduced strip is not thickened at all' },
+    { id: 'J', must: 'the neurenteric canal pierces BOTH laminae while its window is open, and does not exist outside it' },
+    { id: 'K', must: 'the somite overrun is exactly its measured size at every sampled t — gap 1, pinned' },
+    { id: 'L', must: 'sclerotome wraps the rod and does not share space with it: around it, not from it' },
+    { id: 'M', must: 'every triangle\'s face normal agrees with its vertex normals, and every closed body has positive signed volume, over 13 stages and 4 variants' },
+    { id: 'N', must: 'the nucleus pulposus grows as regression proceeds, and every one of them lies between two bodies rather than inside one' },
+    { id: 'O', must: 'no two closed solids share space outside the published TOUCH_OK partition' },
+    { id: 'P', must: 'zero unpaired edges per BODY, over 13 stages and 4 variants' },
+    { id: 'Q', must: 'every non-jittered key is mirror-symmetric in x — see axes_status' },
+    { id: 'R', must: 'the two chordoma masses lie on one axis, at its two ends, separated by most of the disc' },
+    { id: 'T', must: 'the adult segment is cut at EXACTLY the median plane, and its disc has no void: the annulus\'s bore follows the nucleus instead of running straight past it' },
+    { id: 'Y', must: 'the neural plate is a broad thickening and not a midline cone: most of its half-width is at full thickness, at both t a beat shows it at' },
+    { id: 'S', must: 'the BUILT disc measures 1.0 mm cranio-caudally and 0.86 mm across — the sibling scene\'s embryo' },
+    { id: 'U', must: 'the block is a piece of the same geometry: every block vertex is inside the window, and its section at a shared station equals the full build\'s' },
+    { id: 'V', must: 'the dorsoventral stack survives an `inferior` camera and does NOT survive a `lateral` one — so a beat that names the stack has exactly one camera it can stand at' },
+    { id: 'W', must: 'the median section is exactly the median plane and the slab, and nothing else moved: every sheet vertex is within the window and every midline body is untouched' },
+    { id: 'X', must: 'the ectoderm is CLEAR of the midline where the neural plate fills it, and the endoderm is clear where the plate is intercalated' },
+    { id: 'Z', must: 'and neither window is a HOLE: the sheet plus its inlay covers the midline with no gap' },
+    { id: 'AA', must: 'beat 8\'s median section is not seen along its own normal: the cut plane, derived from the built triangles rather than from the constant that turned it, stands between 40 and 60 degrees to that beat\'s own camera, and is still EXACTLY the median plane' },
+    { id: 'AB', must: 'the adult midline column is BROKEN and the vestige does not span its own vertebral body: beat 8 draws what its sentence says, at its own t and at the end of regression' },
+  ],
+};
+
+function acceptance() {
+  const m = {}, ok = {};
+  const F = FLOORS;
+
+  /* A — the plan, off the built endoderm */
+  {
+    const V = vertsByKey(0.60, {}).flat.endoderm;
+    const a = sectionProfileAtY(V, yOf(0.22), -5, 5, 200);
+    const b = sectionProfileAtY(V, yOf(0.78), -5, 5, 200);
+    m.A_caudalHalfW = a.halfW; m.A_cranialHalfW = b.halfW;
+    m.A_ratio = a.halfW > 1e-6 ? b.halfW / a.halfW : 0;
+    ok.A = m.A_ratio >= 1.20;
+  }
+  /* B — the fronts never cross, measured on built boxes */
+  {
+    let worst = Infinity, n = 0; m.B_per = {};
+    for (const t of T_SAMPLE) {
+      const V = vertsByKey(t, {}).flat;
+      if (!V.process || !V.plate || !V.definitive) continue;
+      const d = claimMeasure('stagesOrdered', t);
+      m.B_per[t] = d; worst = Math.min(worst, d); n++;
+    }
+    m.B_worst = isFinite(worst) ? worst : 0;
+    m.B_stages = n;
+    ok.B = n >= 3 && m.B_worst >= FLOORS.ORDER;
+  }
+  /* C, D, E, F — the conservation and the two consequences that fall out of it */
+  {
+    const t = 0.48;
+    m.C_target = area0();
+    m.C_process = claimMeasure('sectionAreaProcess', t);
+    m.C_plate = claimMeasure('sectionAreaPlate', t);
+    m.C_rod = claimMeasure('sectionAreaRod', t);
+    m.C_worst = conservationWorst(t);
+    ok.C = m.C_worst <= F.CONSERVE;
+    m.D_ratio = claimMeasure('plateWiderThanTube', t);
+    ok.D = m.D_ratio >= F.WIDER;
+    m.E_ratio = claimMeasure('rodNarrowerThanTube', t);
+    ok.E = m.E_ratio > 0 && m.E_ratio <= F.NARROWER;
+    m.F_lumenFrac = claimMeasure('lumenAreaFrac', t);
+    m.F_rodLumen = claimMeasure('rodLumenFrac', t);
+    ok.F = m.F_lumenFrac >= F.LUMEN && m.F_rodLumen <= 0.14;
+  }
+  /* G — where the plate is, and where the rod is not */
+  {
+    const t = 0.48;
+    m.G_plateInRoof = plateInRoofFrac(t, {});
+    m.G_rodInRoof = rodInRoofFrac(t, {});
+    ok.G = m.G_plateInRoof >= F.INROOF && m.G_rodInRoof <= F.OUTROOF;
+  }
+  /* H, I — induction, and the build that is its negative control */
+  {
+    const t = 0.70;
+    m.H_overhang = npOverhangFrac(t, {});
+    m.H_npCranialV = claimMeasure('npCranialV', t);
+    ok.H = m.H_overhang <= 1e-9 && m.H_npCranialV <= V_PRE + 0.02;
+    m.I_npThick = claimMeasure('npThickRatio', t);
+    m.I_flatThick = claimMeasure('uninducedThickRatio/failed', t);
+    ok.I = m.I_npThick >= F.NPTHICK && m.I_flatThick > 0 && m.I_flatThick <= F.NPFLAT;
+  }
+  /* J — the transient channel, and the window it lives in */
+  {
+    m.J_openVol = claimMeasure('necVol', 0.40);
+    m.J_pierces = claimMeasure('necPierces', 0.40);
+    m.J_closedVol = claimMeasure('necVol', 0.62);
+    m.J_beforeVol = claimMeasure('necVol', 0.26);
+    ok.J = m.J_pierces === 2 && m.J_openVol > 0 && m.J_closedVol === 0 && m.J_beforeVol === 0;
+  }
+  /* K — the overrun, pinned at its measured size. GAP 1, reported rather than hidden. */
+  {
+    m.K_per = {};
+    for (const t of T_SAMPLE) m.K_per[t] = { predicted: somitePairsPredicted(t), drawn: somitePairsDrawn(t), overrun: somiteOverrun(t) };
+    m.K_at070 = somiteOverrun(0.70); m.K_at100 = somiteOverrun(1.00);
+    ok.K = m.K_at070 === 2 && m.K_at100 === 17;
+  }
+  /* L — around it, not from it */
+  {
+    const t = 0.70;
+    m.L_ring = collarRingFrac(t, {});
+    m.L_share = claimMeasure('sclerotomeInRod', t);
+    ok.L = m.L_ring >= F.RING && m.L_share <= F.SHARE;
+  }
+  /* M — winding and signed volume, over every stage and every variant */
+  {
+    m.M_worst = 1; m.M_nonPositive = 0; m.M_triangles = 0; m.M_builds = [];
+    const variants = [{}, { block: true }, { clinical: true }, { failed: true }];
+    for (const t of T_HEAVY) for (const o of variants) {
+      const w = windingReport(t, o), v = volumeReport(t, o);
+      m.M_worst = Math.min(m.M_worst, w.agreement);
+      m.M_triangles += w.triangles;
+      m.M_nonPositive += v.nonPositive;
+    }
+    const wa = windingReport(1.00, { adult: true }), va = volumeReport(1.00, { adult: true });
+    m.M_worst = Math.min(m.M_worst, wa.agreement);
+    m.M_triangles += wa.triangles; m.M_nonPositive += va.nonPositive;
+    m.M_builds = ['default', 'block', 'clinical', 'failed', 'adult'];
+    ok.M = m.M_worst >= 0.99999 && m.M_nonPositive === 0;
+  }
+  /* N — the adult conservation */
+  {
+    m.N_rFrac100 = claimMeasure('nucleusRadiusFrac/adult', 1.00);
+    m.N_rFrac060 = claimMeasure('nucleusRadiusFrac/adult', 0.60);
+    m.N_inside = claimMeasure('nucleusBetweenBodies/adult', 1.00);
+    m.N_remnant = claimMeasure('remnantRadiusFrac/adult', 1.00);
+    ok.N = m.N_rFrac100 > m.N_rFrac060 * 1.25 && m.N_inside <= 0.02 && m.N_remnant <= 0.16;
+  }
+  /* O — no undeclared pair shares space */
+  {
+    m.O_worst = 0; m.O_offenders = [];
+    for (const t of [0.26, 0.48, 0.70, 1.00]) for (const o of [{}, { clinical: true }, { failed: true }]) {
+      const r = overlapReport(t, o);
+      if (r.worst > m.O_worst) m.O_worst = r.worst;
+      for (const q of r.pairs) if (q.frac > FLOORS.SHARE) m.O_offenders.push({ t, o: Object.keys(o).join(',') || 'default', ...q });
+    }
+    const ra = overlapReport(1.00, { adult: true });
+    m.O_worst = Math.max(m.O_worst, ra.worst);
+    for (const q of ra.pairs) if (q.frac > FLOORS.SHARE) m.O_offenders.push({ t: 1, o: 'adult', ...q });
+    ok.O = m.O_worst <= FLOORS.SHARE;
+  }
+  /* P — watertight per body */
+  {
+    m.P_worst = 0; m.P_where = null;
+    for (const t of T_HEAVY) for (const o of [{}, { block: true }, { clinical: true }, { failed: true }]) {
+      const r = watertightReport(t, o);
+      if (r.worst > m.P_worst) { m.P_worst = r.worst; m.P_where = { t, o: Object.keys(o).join(',') || 'default', per: r.per }; }
+    }
+    const ra = watertightReport(1.00, { adult: true });
+    if (ra.worst > m.P_worst) { m.P_worst = ra.worst; m.P_where = { t: 1, o: 'adult', per: ra.per }; }
+    ok.P = m.P_worst === 0;
+  }
+  /* Q — the symmetry that stands in for a handedness proof */
+  {
+    m.Q_worst = 0;
+    for (const t of [0.26, 0.48, 0.70]) for (const o of [{}, { clinical: true }])
+      m.Q_worst = Math.max(m.Q_worst, claimMeasure('symmetryX' + (o.clinical ? '/clinical' : ''), t));
+    ok.Q = m.Q_worst <= FLOORS.SYMM;
+  }
+  /* R — one axis, two ends */
+  {
+    const t = 1.00;
+    m.R_offset = claimMeasure('chordomaAxisOffset/clinical', t);
+    m.R_sep = claimMeasure('chordomaSeparationFrac/clinical', t);
+    m.R_caudalV = claimMeasure('chordomaCaudalV/clinical', t);
+    m.R_axisCaudalV = claimMeasure('axisCaudalV/clinical', t);
+    ok.R = m.R_offset <= 0.02 && m.R_sep >= 0.45 && Math.abs(m.R_caudalV - m.R_axisCaudalV) <= 0.07;
+  }
+  /* S — the embryo is the sibling's embryo, measured off the built sheets */
+  {
+    const b = bboxOf(vertsByKey(0.60, {}).flat.endoderm);
+    m.S_lengthMm = (b.y1 - b.y0) * UNIT_UM / 1000;
+    m.S_widthMm = (b.x1 - b.x0) * UNIT_UM / 1000;
+    ok.S = Math.abs(m.S_lengthMm - 0.96) <= 0.05 && Math.abs(m.S_widthMm - 0.86) <= 0.06;
+  }
+  /* U — the block is a piece of the same geometry */
+  {
+    const t = 0.40;
+    const Vb = vertsByKey(t, { block: true }).flat, Vf = vertsByKey(t, {}).flat;
+    let outside = 0, n = 0;
+    for (const k in Vb) {
+      const a = Vb[k];
+      for (let i = 0; i < a.length; i += 3) {
+        n++;
+        if (a[i] < -BLK_X - 0.02 || a[i] > BLK_X + 0.02) outside++;
+        const v = vOf(a[i + 1]);
+        if (v < BLK_V0 - 0.02 || v > BLK_V1 + 0.02) outside++;
+      }
+    }
+    m.U_outsideFrac = n ? outside / n : 1;
+    /* a station inside the plate's OWN span intersected with the window — the first version took
+       the window's midpoint, which at this t is caudal of the plate, so both sections were empty and
+       the row reported a 100% disagreement between two nothings */
+    const seg = segments(t).plate;
+    const y = yOf((Math.max(seg[0], BLK_V0) + Math.min(seg[1], BLK_V1)) / 2);
+    const sb = sectionOfAtY(Vb.plate, y), sf = sectionOfAtY(Vf.plate, y);
+    m.U_sectionDelta = (sb && sf && sf.area > 1e-9) ? Math.abs(sb.area - sf.area) / sf.area : 1;
+    ok.U = m.U_outsideFrac === 0 && m.U_sectionDelta <= 0.02;
+  }
+  /* V — the camera row. §3.y: a beat that narrates the stack has exactly one camera it can use. */
+  {
+    const t = 0.40;
+    m.V_inferior = stackAcross(t, { block: true }, 'inferior');
+    m.V_lateral = stackAcross(t, { block: true }, 'lateral');
+    ok.V = m.V_inferior >= FLOORS.STACK && m.V_lateral <= FLOORS.STACKFLAT;
+  }
+  /* W — the median section is a cut, not a redrawing */
+  {
+    const t = 0.48;
+    const Vh = vertsByKey(t, { hemi: true }).flat, Vf = vertsByKey(t, {}).flat;
+    const SHEETS = ['ectoderm', 'endoderm', 'mesoderm', 'amnion', 'yolk_sac', 'somite',
+                    'node', 'streak', 'oropharyngeal_membrane', 'cloacal_membrane'];
+    let out = 0, n = 0;
+    for (const k of SHEETS) {
+      const a = Vh[k]; if (!a) continue;
+      for (let i = 0; i < a.length; i += 3) {
+        n++;
+        if (a[i] > 1e-6 || a[i] < -HEMI_X - 1e-6) out++;
+        const v = vOf(a[i + 1]);
+        if (v < HEMI_V0 - 1e-6 || v > HEMI_V1 + 1e-6) out++;
+      }
+    }
+    m.W_sheetOutside = n ? out / n : 1;
+    /* and the midline bodies are IDENTICAL, not merely similar: same triangle count, same volume */
+    let worst = 0; m.W_bodies = {};
+    for (const k of ['process', 'plate', 'definitive', 'canal', 'pit', 'neural_plate', 'prechordal_plate']) {
+      if (!Vh[k] || !Vf[k]) continue;
+      if (k === 'process') continue;          // the fenestra is cut only on the median build, by design
+      const a = Math.abs(signedVolume(Vh[k])), b = Math.abs(signedVolume(Vf[k]));
+      const d = b > 1e-9 ? Math.abs(a - b) / b : (a > 1e-9 ? 1 : 0);
+      m.W_bodies[k] = d; worst = Math.max(worst, d);
+    }
+    m.W_bodyDelta = worst;
+    /* the fenestra takes a measurable bite out of the process and nothing else */
+    const pf = Math.abs(signedVolume(Vf.process || new Float32Array(0)));
+    const ph = Math.abs(signedVolume(Vh.process || new Float32Array(0)));
+    m.W_fenestraBite = pf > 1e-9 ? 1 - ph / pf : 0;
+    ok.W = m.W_sheetOutside === 0 && m.W_bodyDelta <= 1e-9 && m.W_fenestraBite > 0.05 && m.W_fenestraBite < 0.45;
+  }
+  /* X, Z — the two windows are exact, and neither is a hole */
+  {
+    const t = 0.48;
+    const V = vertsByKey(t, {}).flat;
+    const npb = bboxOf(V.neural_plate), plb = bboxOf(V.plate);
+    m.X_ectoInWindow = 0; m.X_endoInWindow = 0; m.Z_ectoCover = 0; m.Z_endoCover = 0;
+    if (npb) {
+      const y = (npb.y0 + npb.y1) / 2, h = npHalf(vOf(y), t, NP_SRC);
+      m.X_ectoInWindow = sectionProfileAtY(V.ectoderm, y, -(h - 3 * OVERLAP), h - 3 * OVERLAP, 40).area;
+      const cover = sectionProfileAtY(V.ectoderm, y, -0.02, 0.02, 4).area
+                  + sectionProfileAtY(V.neural_plate, y, -0.02, 0.02, 4).area;
+      m.Z_ectoCover = cover / (0.04 * hEcto(0, y));
+    }
+    if (plb) {
+      const y = (plb.y0 + plb.y1) / 2, h = sectionAt(vOf(y), t).a;
+      m.X_endoInWindow = sectionProfileAtY(V.endoderm, y, -(h - 3 * OVERLAP), h - 3 * OVERLAP, 40).area;
+      const cover = sectionProfileAtY(V.endoderm, y, -0.02, 0.02, 4).area
+                  + sectionProfileAtY(V.plate, y, -0.02, 0.02, 4).area;
+      m.Z_endoCover = cover / (0.04 * hVent(0, y));
+    }
+    ok.X = m.X_ectoInWindow <= FLOORS.GAPCLEAR && m.X_endoInWindow <= FLOORS.GAPCLEAR;
+    ok.Z = m.Z_ectoCover >= 0.95 && m.Z_endoCover >= 0.95;
+  }
+
+  /* T — review round 1, beat 8: the median cut, and the disc with no void in it */
+  {
+    const t = SCENE_T_MAX;
+    m.T_cutMaxX = claimMeasure('adultCutMaxX/adult', t);
+    m.T_boreTaper = claimMeasure('discBoreTaper/adult', t);
+    m.T_boreClearance = claimMeasure('discBoreClearance/adult', t);
+    /* and the midline bodies were NOT cut — the same statement row W makes about the embryo */
+    const V = vertsByKey(t, { adult: true }).flat;
+    let proud = 0;
+    for (const k of ['nucleus_pulposus', 'notochord_regressed']) {
+      const a = V[k]; if (!a) continue;
+      for (let i = 0; i < a.length; i += 3) if (a[i] > 1e-6) { proud++; break; }
+    }
+    m.T_midlineBodiesWhole = proud;
+    ok.T = m.T_cutMaxX <= F.CUTX && m.T_boreTaper <= F.BORETAPER &&
+           m.T_boreClearance <= F.BORECLEAR && m.T_midlineBodiesWhole === 2;
+  }
+  /* AA — review round 2, beat 8: the section is seen obliquely, not along its own normal.
+     RENDER-STANDARD §3.y: measured on the screen plane of the camera the beat rotates to. The
+     camera is read from the SCENE's own ops by the render harness and asserted against the view
+     named here, so the row cannot go on measuring a camera the beat has stopped standing at. */
+  {
+    const t = SCENE_T_MAX;
+    m.AA_view = 'lateral';
+    m.AA_angleDeg = claimMeasure('cutFaceAngle.lateral/adult', t);
+    m.AA_cutShare = claimMeasure('cutFaceProjShare.lateral/adult', t);
+    /* and the cut is STILL exactly the median plane — the same number row T asserts, repeated here
+       so that a yaw introduced to fix the picture cannot quietly take the section with it */
+    m.AA_cutMaxX = claimMeasure('adultCutMaxX/adult', t);
+    /* m.AA_cutShare is REPORTED, NOT GRADED — see the note at ADU_YAW. It is in the row so that a
+       later round can see the instrument that was tried and why it was not trusted, rather than
+       re-deriving it and fitting a floor to the one answer it has. */
+    ok.AA = m.AA_angleDeg >= F.CUTANGLE_MIN && m.AA_angleDeg <= F.CUTANGLE_MAX &&
+            m.AA_cutMaxX <= F.CUTX;
+  }
+  /* AB — review round 3, beat 8, OPEN 1/2: the midline column is BROKEN, and the remnant does not
+     span the body it is being crushed out of. Graded at the beat's OWN t (0.90) and at the end of
+     regression (1.00), because the defect's sharpest form was that the old law never obliterated
+     the cord at ANY t — a row graded only at t=1 could be satisfied by a law that still drew a
+     continuous cord everywhere a beat actually stands. */
+  {
+    m.AB_breakAt090 = claimMeasure('axisBreakFrac/adult', SCENE_T_MAX);
+    m.AB_breakAt100 = claimMeasure('axisBreakFrac/adult', 1.00);
+    m.AB_spanAt090 = claimMeasure('remnantSpanFrac/adult', SCENE_T_MAX);
+    m.AB_spanAt100 = claimMeasure('remnantSpanFrac/adult', 1.00);
+    m.AB_worstBreak = Math.min(m.AB_breakAt090, m.AB_breakAt100);
+    m.AB_worstSpan = Math.max(m.AB_spanAt090, m.AB_spanAt100);
+    ok.AB = m.AB_worstBreak >= F.AXISBREAK && m.AB_worstSpan <= F.REMSPAN;
+  }
+  /* Y — review round 1, beat 3: a plateau, not a cone, at both t a beat shows the plate at */
+  {
+    m.Y_plateau = { '0.40/block': claimMeasure('npPlateauFrac/block', 0.40),
+                    '0.70/hemi':  claimMeasure('npPlateauFrac/hemi', 0.70) };
+    m.Y_worst = Math.min(...Object.values(m.Y_plateau));
+    ok.Y = m.Y_worst >= F.NPPLATEAU;
+  }
+
+  return { measured: m, pass: ok, allPass: Object.keys(ok).every(k => ok[k]), spec: ACCEPTANCE,
+           floors: FLOORS };
+}
+
+/* ─── THE NEGATIVE CASES. Each row's predicate is fed a deliberately wrong input and must reject it.
+   RENDER-STANDARD: a test that grades its own homework in the wrong units is worse than no test,
+   because it launders a defect into a proof. */
+function negatives() {
+  const r = [], F = FLOORS;
+  const N = (id, says, pred) => {
+    let ok;
+    try { ok = !!pred(); } catch (e) { r.push({ id, says, rejected: false, threw: e.message }); return; }
+    r.push({ id, says, rejected: ok });
+  };
+  const a = acceptance().measured;
+  N('T', 'a bore that runs straight past the nucleus — the void review round 1 found — is rejected',
+    () => !(1.0 <= F.BORETAPER));
+  N('T2', 'a cut 6 degrees past the median plane, which ring 30 would have given, is rejected',
+    () => !(Math.sin(96 * Math.PI / 180) * 0 + Math.cos(84 * Math.PI / 180) <= F.CUTX));
+  N('AA', 'the face-on median section review round 2 found — the cut plane square to beat 8\'s own camera — is rejected',
+    () => !(0 >= F.CUTANGLE_MIN));
+  N('AA2', 'and so is a turn that was rendered, looked at, and still read as a chart: 30 degrees',
+    () => !(30 >= F.CUTANGLE_MIN));
+  N('AA3', 'a turn so far round that the annulus wall covers the nucleus — 75 degrees — is rejected',
+    () => !(75 <= F.CUTANGLE_MAX));
+  N('AA4', 'a yaw that took the cut off the median plane with it — half a body radius of overshoot — is rejected',
+    () => !(0.5 <= F.CUTX));
+  N('Y', 'the graded-response plate the review rejected (plateau 0.150) is rejected',
+    () => !(0.150 >= F.NPPLATEAU));
+  N('Y2', 'and so is a plate whose plateau is a tenth of its half-width', () => !(0.10 >= F.NPPLATEAU));
+  N('A', 'a pear the other way round is rejected', () => !(1 / Math.max(1e-9, a.A_ratio) >= 1.20));
+  N('B', 'a detachment front caudal of the breakdown front is rejected', () => !(-0.4 >= F.ORDER));
+  N('B2', 'an ordering that holds by 1% of the axis\'s length is rejected', () => !(0.01 >= F.ORDER));
+  N('C', 'an area 20% off A0 is rejected', () => !(0.20 <= F.CONSERVE));
+  N('D', 'a plate NARROWER than the tube is rejected', () => !(0.8 >= F.WIDER));
+  N('E', 'a rod as wide as the tube is rejected', () => !(1.0 <= F.NARROWER));
+  N('F', 'a solid "process" is rejected', () => !(0.0 >= F.LUMEN));
+  N('F2', 'a hollow "rod" is rejected', () => !(0.5 <= 0.14));
+  N('G', 'a plate sitting ON the roof rather than in it is rejected', () => !(0.4 >= F.INROOF));
+  N('G2', 'a rod still inside the roof is rejected', () => !(0.8 <= F.OUTROOF));
+  N('H', 'a neural plate that overhangs the axis is rejected', () => !(0.2 <= 1e-9));
+  N('H2', 'a neural plate reaching past the prechordal plate is rejected', () => !(0.95 <= V_PRE + 0.02));
+  N('I', 'an unthickened neural plate is rejected', () => !(1.0 >= F.NPTHICK));
+  N('I2', 'a THICKENED uninduced strip is rejected', () => !(2.4 <= F.NPFLAT));
+  N('J', 'a channel piercing only one lamina is rejected', () => !(1 === 2));
+  N('J2', 'a neurenteric canal still open on day 20 is rejected', () => !(0.4 === 0));
+  N('K', 'an overrun one larger than measured is rejected', () => !(a.K_at070 + 1 === a.K_at070));
+  N('L', 'a collar covering half the circle is rejected', () => !(0.5 >= F.RING));
+  N('L2', 'sclerotome made FROM the rod — overlapping it — is rejected', () => !(0.4 <= F.SHARE));
+  N('M', 'a winding agreement of 0.97 is rejected', () => !(0.97 >= 0.99999));
+  N('M2', 'one non-positive signed volume is rejected', () => !(1 === 0));
+  /* FED THE REJECTED LAW'S OWN BEST NUMBERS, not a token wrong value: 0.0824 is the thinning-only
+     law's largest break at any t and 1.0329 its smallest span, both measured off that file. A
+     negative case fed the worst case it could ever see is a weaker test than one fed the best. */
+  N('AB', 'the thinning-only law\'s best break anywhere — a column that is never broken — is rejected', () => !(0.0824 >= F.AXISBREAK));
+  N('AB2', 'a vestige that still spans, and overhangs, its own vertebral body is rejected', () => !(1.0329 <= F.REMSPAN));
+  N('N', 'a nucleus that does not grow with regression is rejected', () => !(a.N_rFrac060 > a.N_rFrac060 * 1.25));
+  N('N2', 'a nucleus inside a vertebral body is rejected', () => !(0.5 <= 0.02));
+  N('O', 'an undeclared pair sharing 20% is rejected', () => !(0.20 <= F.SHARE));
+  N('P', 'one unpaired edge is rejected', () => !(1 === 0));
+  N('Q', 'a key displaced 10% off the midline is rejected', () => !(0.10 <= F.SYMM));
+  N('R', 'a chordoma a tube-width off the axis is rejected', () => !(1.0 <= 0.02));
+  N('R2', 'two masses at the same end are rejected', () => !(0.05 >= 0.45));
+  N('S', 'a disc 2 mm long is rejected', () => !(Math.abs(2.0 - 0.96) <= 0.05));
+  N('U', 'a block with vertices outside its own window is rejected', () => !(0.03 === 0));
+  N('U2', 'a block whose section disagrees with the full build by 10% is rejected', () => !(0.10 <= 0.02));
+  N('V', 'a stack that survives a lateral camera is rejected', () => !(0.9 <= F.STACKFLAT));
+  N('V2', 'a stack that does NOT survive the camera that claims it is rejected', () => !(0.02 >= F.STACK));
+  N('X', 'sheet material left inside its own window is rejected', () => !(0.05 <= F.GAPCLEAR));
+  N('W', 'a sheet vertex on the wrong side of the median plane is rejected', () => !(0.01 === 0));
+  N('W2', 'a midline body the cut CHANGED is rejected', () => !(0.05 <= 1e-9));
+  N('W3', 'a fenestra that takes nothing out of the tube is rejected', () => !(0.0 > 0.05));
+  N('Z', 'a window with a HOLE in it is rejected', () => !(0.4 >= 0.95));
+  return r;
+}
+
+/** the `must` strings and the rows must stay in step: a row with no must, or a must with no row, is
+    a documentation drift the next reviewer would have to find by reading. */
+function selfCheckMustStrings() {
+  const a = acceptance();
+  const ids = ACCEPTANCE.tests.map(x => x.id).sort().join(',');
+  const got = Object.keys(a.pass).sort().join(',');
+  return { spec: ids, measured: got, agree: ids === got };
+}
+
+/* ═══════════════════════════════════════════════════════════ 15 · THE PROVIDER CONTRACT */
+
+window.MB3D_MODELS = window.MB3D_MODELS || {};
+window.MB3D_MODELS['notochord'] = {
+  LAYERS: LAYERS,
+  build: buildNotochord,
+  /* FULL IS EMPTY, AND THAT IS A STATEMENT RATHER THAN AN OMISSION. FULL exists so a structure behind
+     an option flag is still RESOLVABLE — without it the provider builds only the defaults and
+     anything optional comes back as reason:'none', which the player shows a student as "there is no
+     model of this structure", a confident lie about a model sitting right there. Here every part of
+     the normal embryo builds unconditionally, and the three remaining flag sets are MUTUALLY
+     EXCLUSIVE pictures rather than optional layers: `clinical` puts two tumours and a fistula on the
+     axis, `failed` replaces induction and segmentation with their negative controls, and `adult` is
+     at a different SCALE entirely. Turning them on by default would draw a tumour in every normal
+     beat and put a 15 mm vertebra beside a 1 mm disc. So each scene structure that needs one names it
+     in its own ref, and the render harness asserts off the scene's ops that no beat mixes them. */
+  FULL: {},
+  VARIANTS: {
+    block: 'the same lens and the same sweep built only inside a window 2.3 units wide around the ' +
+           'fronts, so a TRANSVERSE beat has a bounding box the player can frame. See the note at ' +
+           'clipV: a section of the whole disc gives the structure it is about 0.046% of the frame ' +
+           'in the sibling scene, and no camera fixes that.',
+    hemi: 'the MEDIAN SECTION the scene asks for in its first sentence: every sheet cut at the '
+         + 'median plane with the half away from the camera kept, and the midline structures left '
+         + 'whole so they stand proud of the cut faces. Without it the midline is behind 4.3 units '
+         + 'of mesoderm and the player walk fails ten beats of eleven on occlusion alone. See the '
+         + 'note at hemiX and acceptance row W.',
+    clinical: 'chordoma at both ends of the old axis, a neurenteric canal that did not close, and a ' +
+           'neurenteric cyst. On the EMBRYONIC axis — gap 3.',
+    failed: 'the negative controls, as builds: ectoderm that was never induced, sclerotome with ' +
+           'nothing to organise around, and a notochord that formed badly.',
+    adult: 'the vertebral segment the notochord ends up in — a DIFFERENT SCALE and a different ' +
+           'clock, see gap 2. No beat may show it with an embryonic structure.',
+  },
+  BLOCK: { x: [-BLK_X, BLK_X], v: [BLK_V0, BLK_V1] },
+  ACCEPTANCE: ACCEPTANCE,
+  FLOORS: FLOORS,
+  AXES: AXES,
+  UNIT_UM: UNIT_UM,
+  T_SAMPLE: T_SAMPLE,
+  SCENE_T_MAX: SCENE_T_MAX,
+  VIEW_DIR: VIEW_DIR,
+  TOUCH_OK: TOUCH_OK,
+  /* exposed so a test, a review or the console can re-check the arithmetic rather than trust a note */
+  acceptance: acceptance,
+  negatives: negatives,
+  selfCheckMustStrings: selfCheckMustStrings,
+  claimMeasure: claimMeasure,
+  windingReport: windingReport,
+  volumeReport: volumeReport,
+  watertightReport: watertightReport,
+  weldIndex: weldIndex,
+  overlapReport: overlapReport,
+  vertsByKey: vertsByKey,
+  meshesOf: meshesOf,
+  signedVolume: signedVolume,
+  sectionProfileAtY: sectionProfileAtY,
+  stackAcross: stackAcross,
+  segments: segments,
+  axisSpan: axisSpan,
+  npSpan: npSpan,
+  necOpen: necOpen,
+  somitePairsPredicted: somitePairsPredicted,
+  somitePairsDrawn: somitePairsDrawn,
+  somiteOverrun: somiteOverrun,
+  sclerotomeCoverFrac: sclerotomeCoverFrac,
+  regressFrac: regressFrac,
+  nucleusR: nucleusR,
+  dayOf: day,
+  tOfDay: tOfDay,
+  fronts: t => ({ nodeV: nodeV(t), tipV: tipV(t), brkV: brkV(t), detV: detV(t) }),
+  /* THE AGREEMENT WITH THE SIBLING SCENE is checked, not asserted: the harness loads both model
+     files into one page and compares these. Every entry is a dimension of the EMBRYO, not of the
+     notochord — the notochord's own calibre is this model's subject and is solved, not typed. */
+  constants: function () {
+    return { DISC_L: p('DISC_L', DISC_L), W_MAX: p('W_MAX', W_MAX), DOME: p('DOME', DOME),
+             H_ECTO: p('H_ECTO', H_ECTO), H_VENT: p('H_VENT', H_VENT), H_MESO: p('H_MESO', H_MESO),
+             H_FUSE: p('H_FUSE', H_FUSE), W_INTER, W_STREAK: p('W_STREAK', W_STREAK),
+             W_SOM: p('W_SOM', W_SOM), SOMITE_PERIOD_H: p('SOMITE_PERIOD_H', SOMITE_PERIOD_H),
+             DAY_SOM_START, V_SEG_CRANIAL, V_STK0, V_TIP_0, V_TIP_MX, DAY_TIP_MAX, V_TIP_1,
+             V_PRE, V_ORO, R_ORO: p('R_ORO', R_ORO), V_CLO, R_CLO: p('R_CLO', R_CLO),
+             DAY_0, DAY_1, UNIT_UM };
+  },
+  /* the notochord's own solved calibre, for a reader who wants the numbers without a render */
+  solved: function () {
+    return { A0: area0(), R_PROC: p('R_PROC', R_PROC), R_IN: rIn(),
+             R_ROD: rRodSolved(), W_PLATE_at_0_48: wPlateSolved(0.48) };
+  },
+  /* THE PERTURBATION HOOK. RENDER-STANDARD: "change the constant the geometry uses and the reported
+     number must move. If it does not, the test is not measuring the model." */
+  _setConst: function (which, value) {
+    const before = PERT[which];
+    PERT[which] = value;
+    this._resetCaches();
+    return before;
+  },
+  _clearConst: function (which) { delete PERT[which]; this._resetCaches(); },
+  _resetCaches: function () {
+    for (const k in _built) delete _built[k];
+    _secAt.clear(); _clrAt.clear(); _secC.clear();
+    _wPeak = null;
+  },
+};
+
+})();

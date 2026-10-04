@@ -1,8 +1,9 @@
 {
   "schema": 2,
   "id": "embryology__gametogenesis-fertilization__cleavage-morula",
-  "mode": "sequence",
+  "mode": "3d_anatomy",
   "deferred_modes": [
+    "sequence",
     "diagram"
   ],
   "course": "Embryology",
@@ -12,9 +13,9 @@
     "Cleavage & morula"
   ],
   "learning_goal": "Put days one to four in order — zygote, two-cell, four-cell, eight-cell, compaction, morula — say where the embryo is on each day, explain why the embryo divides without growing, and name what compaction decides.",
-  "status": "planned",
+  "status": "candidate",
   "provider": {
-    "primary": "svg",
+    "primary": "procedural",
     "fallbacks": []
   },
   "match": {
@@ -89,12 +90,16 @@
   },
   "structures": [
     {
-      "key": "tube_journey",
-      "label": "The uterine tube — the four-day journey",
+      "key": "journey",
+      "name": "Uterine tube and uterus — schematic, NOT to cell scale",
+      "label": "Uterine tube and uterus — schematic, NOT to cell scale",
       "role": "context",
       "group": "Where and when",
-      "layer": "organ",
       "color": "#b07aa1",
+      "opacity": 0.3,
+      "refs": {
+        "procedural": "cleavage-morula#journey"
+      },
       "terms": [
         "uterine tube",
         "fallopian tube",
@@ -107,191 +112,44 @@
         "day 4",
         "ectopic pregnancy"
       ],
-      "narration": "Cleavage happens on the move. The zygote forms in the ampulla and is swept medially by ciliary beating and smooth muscle peristalsis, reaching the uterine cavity at about day four as a morula. Nothing implants during this journey, and that is the point of the timetable — an embryo delayed in a scarred tube reaches the implanting stage before it reaches the uterus, and lodges where it stands as a tubal ectopic pregnancy."
+      "narration": "Cleavage happens on the move. The zygote forms in the ampulla and is swept medially by ciliary beating and smooth muscle peristalsis, reaching the uterine cavity at about day four as a morula. Nothing implants during this journey, and that is the point of the timetable — an embryo delayed in a scarred tube reaches the implanting stage before it reaches the uterus, and lodges where it stands as a tubal ectopic pregnancy.",
+      "narration_from": "sequence-version structure \"tube_journey\" — carried across verbatim"
     },
     {
-      "key": "zygote",
-      "label": "Zygote (day 1)",
-      "role": "part",
-      "group": "The divisions",
-      "layer": "organ",
-      "color": "#c0392b",
+      "key": "day_markers",
+      "name": "Day 1 to day 4 along the tube",
+      "label": "Day 1 to day 4 along the tube",
+      "role": "context",
+      "group": "Where and when",
+      "color": "#e4c65b",
+      "opacity": 0.95,
+      "refs": {
+        "procedural": "cleavage-morula#day_markers"
+      },
       "terms": [
-        "zygote",
-        "one-cell embryo",
-        "first cleavage",
-        "30 hours",
         "day 1",
-        "diploid",
-        "46 chromosomes"
-      ],
-      "narration": "One diploid cell, still inside the zona pellucida, carrying the cytoplasm and mitochondria the oocyte supplied. It divides about thirty hours after fertilization. Cleavage is dated from this division, so day one of development is the day the zygote first splits."
-    },
-    {
-      "key": "two_cell",
-      "label": "Two-cell stage",
-      "role": "part",
-      "group": "The divisions",
-      "layer": "organ",
-      "color": "#d35400",
-      "terms": [
-        "two-cell stage",
-        "blastomere",
-        "first cleavage division",
-        "asynchronous division",
-        "day 1",
-        "day 2"
-      ],
-      "narration": "The two daughter cells are called blastomeres. From here divisions are not synchronised, so odd numbers are normal — three-cell and five-cell embryos are seen routinely in a dish and are not abnormal."
-    },
-    {
-      "key": "four_cell",
-      "label": "Four-cell stage (day 2)",
-      "role": "part",
-      "group": "The divisions",
-      "layer": "organ",
-      "color": "#e67e22",
-      "terms": [
-        "four-cell stage",
         "day 2",
-        "blastomere",
-        "embryonic genome activation",
-        "totipotent"
-      ],
-      "narration": "By day two the embryo is four cells and no larger than the zygote was. Each blastomere is still totipotent — separate one now and it can make a whole embryo."
-    },
-    {
-      "key": "eight_cell",
-      "label": "Eight-cell stage (day 3)",
-      "role": "part",
-      "group": "The divisions",
-      "layer": "organ",
-      "color": "#f1c40f",
-      "terms": [
-        "eight-cell stage",
-        "day 3",
-        "cleavage-stage transfer",
-        "blastomere biopsy",
-        "preimplantation genetic testing",
-        "loosely packed"
-      ],
-      "narration": "Day three, eight loosely packed cells with visible gaps between them, still round and still separable. This is the classic cleavage-stage embryo transferred in an older assisted-reproduction protocol, and it is where a single blastomere used to be removed for genetic testing."
-    },
-    {
-      "key": "no_growth",
-      "label": "Division without growth",
-      "role": "part",
-      "group": "The divisions",
-      "layer": "organ",
-      "color": "#7f8c8d",
-      "terms": [
-        "cleavage",
-        "no increase in size",
-        "decreasing cell size",
-        "high nucleus to cytoplasm ratio",
-        "zona pellucida constrains",
-        "no G1",
-        "short cell cycle"
-      ],
-      "narration": "This is the one idea that makes cleavage different from ordinary mitosis. The cell cycles are stripped down and almost skip the growth phases, so each division halves the cell size instead of restoring it. The embryo at eight cells is the same overall size as the zygote — it has been subdivided, not enlarged. The zona pellucida holds the whole thing to a fixed volume, and the nucleus-to-cytoplasm ratio climbs with every round."
-    },
-    {
-      "key": "genome_activation",
-      "label": "The embryo switches its own genome on",
-      "role": "part",
-      "group": "The divisions",
-      "layer": "organ",
-      "color": "#8e44ad",
-      "terms": [
-        "embryonic genome activation",
-        "maternal-to-zygotic transition",
-        "maternal mRNA",
-        "four-cell stage",
-        "eight-cell stage",
-        "developmental arrest"
-      ],
-      "narration": "Until about the four-to-eight-cell stage the embryo runs entirely on messenger RNA and protein stockpiled by the oocyte. Then its own genome takes over. That handover explains why so many embryos arrest at exactly this point in a dish: the maternal supply runs out and a defective embryonic genome has nothing to replace it with."
-    },
-    {
-      "key": "compaction",
-      "label": "Compaction (8–16 cells)",
-      "role": "part",
-      "group": "Compaction & morula",
-      "layer": "organ",
-      "color": "#16a085",
-      "terms": [
-        "compaction",
-        "E-cadherin",
-        "tight junction",
-        "gap junction",
-        "polarisation",
-        "flattening",
-        "indistinct cell borders",
-        "first cell-fate decision"
-      ],
-      "narration": "At around the eight-to-sixteen-cell stage the blastomeres suddenly flatten against each other and the outlines between them blur. E-cadherin pulls them together, tight junctions seal the outside, and gap junctions couple the inside. This is the first cell-fate decision of a human life: a cell's position now decides what it will become, and no blastomere is fully totipotent afterwards."
-    },
-    {
-      "key": "morula",
-      "label": "Morula (12–32 cells, day 3–4)",
-      "role": "part",
-      "group": "Compaction & morula",
-      "layer": "organ",
-      "color": "#27ae60",
-      "terms": [
-        "morula",
-        "mulberry",
-        "16 cells",
-        "32 cells",
         "day 3",
         "day 4",
-        "solid ball",
-        "enters uterine cavity"
+        "ampulla",
+        "isthmus",
+        "uterine cavity",
+        "four-day journey"
       ],
-      "narration": "A solid ball of twelve to thirty-two cells, named from the Latin for mulberry because that is what it looks like. It reaches the uterine cavity at about day four and floats free there, nourished by secretions from the endometrial glands, while fluid begins to seep in between its cells."
-    },
-    {
-      "key": "inner_cells",
-      "label": "Inner cell mass — the embryo itself",
-      "role": "part",
-      "group": "Compaction & morula",
-      "layer": "organ",
-      "color": "#2980b9",
-      "terms": [
-        "inner cell mass",
-        "embryoblast",
-        "inner cells",
-        "pluripotent",
-        "embryo proper",
-        "embryonic stem cells"
-      ],
-      "narration": "The few cells sealed inside by compaction become the inner cell mass. Everything the fetus is made of comes from this small group, and nothing else does. Embryonic stem cell lines are derived from exactly these cells."
-    },
-    {
-      "key": "outer_cells",
-      "label": "Outer cells — the future placenta",
-      "role": "part",
-      "group": "Compaction & morula",
-      "layer": "organ",
-      "color": "#e74c3c",
-      "terms": [
-        "outer cell layer",
-        "outer cells",
-        "trophoblast precursor",
-        "placenta",
-        "fetal membranes",
-        "polarised cells",
-        "sodium pump"
-      ],
-      "narration": "The cells left on the outside become the placenta and membranes and contribute nothing to the fetus. They are polarised, with a sealed outer face, and they begin pumping sodium inward — which is what will inflate the cavity that turns this morula into a blastocyst. Inside becomes the child, outside becomes the afterbirth: that is the sentence to remember."
+      "narration": "Four markers, one for each day, at the fractions of the journey the timetable names: day one in the ampulla where the zygote forms, day two in the ampulla still, day three in the isthmus, day four entering the uterine cavity as a morula. The markers are markers — the embryo is not drawn on this tube, because at this scale it would be smaller than a pixel. See gaps[] on the scale break.",
+      "narration_from": "new — the day markers are geometry this scene needs and the sequence version drew in prose"
     },
     {
       "key": "zona",
+      "name": "Zona pellucida — the shell that must not open yet",
       "label": "Zona pellucida — the shell that must not open yet",
       "role": "context",
       "group": "What the zona does",
-      "layer": "organ",
-      "color": "#f39c12",
+      "color": "#f0b232",
+      "opacity": 0.26,
+      "refs": {
+        "procedural": "cleavage-morula#zona"
+      },
       "terms": [
         "zona pellucida",
         "hardened zona",
@@ -302,46 +160,141 @@
         "assisted hatching",
         "holds blastomeres together"
       ],
-      "narration": "Three jobs, all of them still running during cleavage. It holds the loose blastomeres together as one embryo. It fixes the volume, which is why cleavage subdivides rather than grows. And it stops the embryo sticking to the wall of the tube on the way down — an embryo that lost its zona early would implant in the tube. It is shed only at day five, in the uterus, and only then can implantation start."
+      "narration": "Three jobs, all of them still running during cleavage. It holds the loose blastomeres together as one embryo. It fixes the volume, which is why cleavage subdivides rather than grows. And it stops the embryo sticking to the wall of the tube on the way down — an embryo that lost its zona early would implant in the tube. It is shed only at day five, in the uterus, and only then can implantation start.\n\nIt is also what makes the no-growth point visible. The zona is the same size at every stage in this scene, and the embryo fills it at every stage — one cell, then two, then four, eight, sixteen and thirty-two, all inside the same shell. That is the whole of \"cleavage divides without growing\", in one picture, repeated.",
+      "narration_from": "sequence-version structure \"zona\" — carried across verbatim, with the no-growth paragraph appended. The sequence-version structure \"no_growth\" had its own narration and this scene first gave it its own geometry, a translucent outline at the zygote's radius; the visibility walk measured that outline at an alpha peak of 28-37 against a floor of 40 in three of the four beats that showed it — invisible in the player's own composition — so the outline was dropped and the zona carries the claim. The no_growth narration itself is on the deferred list below, unedited."
     },
     {
-      "key": "twinning",
-      "label": "When blastomeres separate — monozygotic twins",
+      "key": "outer_cells",
+      "name": "Outer cells — every cell with a face on the zona",
+      "label": "Outer cells — every cell with a face on the zona",
       "role": "part",
-      "group": "What the zona does",
-      "layer": "organ",
-      "color": "#9b59b6",
+      "group": "Compaction & morula",
+      "color": "#e0564a",
+      "opacity": 1.0,
+      "refs": {
+        "procedural": "cleavage-morula#outer_cells"
+      },
       "terms": [
-        "monozygotic twins",
-        "identical twins",
-        "totipotent",
-        "splitting before day 3",
-        "dichorionic diamniotic",
-        "two placentas",
-        "two amnions",
-        "conjoined twins"
-      ],
-      "narration": "Because early blastomeres are totipotent, a cleavage-stage embryo that splits gives two complete embryos. Split in the first three days, before the outer cells are committed, and each half makes its own placenta and its own amnion — dichorionic, diamniotic identical twins, which look on a scan exactly like non-identical ones. Split later and they share, and the later the split the more they share. Timing of the split, not the fact of it, is what determines the membranes."
-    },
-    {
-      "key": "clinical",
-      "label": "Where this shows up clinically",
-      "role": "part",
-      "group": "What the zona does",
-      "layer": "organ",
-      "color": "#5a8fd6",
-      "terms": [
+        "outer cell layer",
+        "outer cells",
+        "trophoblast precursor",
+        "placenta",
+        "fetal membranes",
+        "polarised cells",
+        "sodium pump",
+        "eight-cell stage",
+        "day 3",
         "cleavage-stage transfer",
-        "day 3 transfer",
-        "blastocyst transfer",
         "blastomere biopsy",
         "preimplantation genetic testing",
-        "mosaicism",
-        "embryo grading",
-        "ectopic pregnancy",
-        "emergency contraception"
+        "loosely packed"
       ],
-      "narration": "Three uses. Embryos are graded on cell number and evenness at day two and three, so knowing what is normal on each day is a clinical skill. A single blastomere can be biopsied at eight cells for genetic testing, though mosaicism between blastomeres makes that result less reliable than a later one. And the four-day interval before the embryo reaches the uterus is the window in which post-coital contraception still acts, because nothing has yet attached."
+      "narration": "The cells left on the outside become the placenta and membranes and contribute nothing to the fetus. They are polarised, with a sealed outer face, and they begin pumping sodium inward — which is what will inflate the cavity that turns this morula into a blastocyst. Inside becomes the child, outside becomes the afterbirth: that is the sentence to remember.  Before compaction EVERY cell is one of these — every blastomere still has an outside face, which is exactly why no cell is committed yet. The model does not label them: a cell is an outer cell if its own built surface still has free, unapposed area, and at eight cells all eight do.",
+      "narration_from": "sequence-version structure \"outer_cells\" — carried across verbatim, with the pre-compaction sentence added because this one key now carries every cell before there is an inside"
+    },
+    {
+      "key": "outer_cells_ghost",
+      "name": "Outer cells, drawn see-through so the nuclei inside them can be seen",
+      "label": "Outer cells (see-through, beat 6 only)",
+      "role": "part",
+      "group": "Compaction & morula",
+      "color": "#e0564a",
+      "opacity": 0.33,
+      "refs": {
+        "procedural": "cleavage-morula#outer_cells@0.595+ghost"
+      },
+      "terms": [
+        "nucleus to cytoplasm ratio",
+        "embryonic genome activation"
+      ],
+      "narration": "The same eight blastomeres beat 5 draws, built as the model's `ghost` variant — the cell layers alone, no zona and no nuclei — and drawn at 0.33 opacity for ONE beat, so the nuclei inside them are visible. It is a structure of its own rather than an op because the player applies opacity per structure and has no per-beat opacity op, and it carries the `ghost` flag rather than pointing straight at outer_cells because two structures naming the same stage, flags and part collide: the visibility walk gives each mesh to exactly one of them and the other measures 0% on both passes.",
+      "narration_from": "outer_cells, with the variant and the reason for it added by the round-2 build"
+    },
+    {
+      "key": "inner_cells",
+      "name": "Inner cell mass — the cells compaction seals inside",
+      "label": "Inner cell mass — the cells compaction seals inside",
+      "role": "part",
+      "group": "Compaction & morula",
+      "color": "#2d7fc4",
+      "opacity": 1.0,
+      "refs": {
+        "procedural": "cleavage-morula#inner_cells"
+      },
+      "terms": [
+        "inner cell mass",
+        "embryoblast",
+        "inner cells",
+        "pluripotent",
+        "embryo proper",
+        "embryonic stem cells"
+      ],
+      "narration": "The few cells sealed inside by compaction become the inner cell mass. Everything the fetus is made of comes from this small group, and nothing else does. Embryonic stem cell lines are derived from exactly these cells.",
+      "narration_from": "sequence-version structure \"inner_cells\" — carried across verbatim"
+    },
+    {
+      "key": "nuclei",
+      "name": "Nuclei — one per blastomere, and they do not shrink",
+      "label": "Nuclei — one per blastomere, and they do not shrink",
+      "role": "part",
+      "group": "The divisions",
+      "color": "#6d4aa8",
+      "opacity": 1.0,
+      "refs": {
+        "procedural": "cleavage-morula#nuclei"
+      },
+      "terms": [
+        "embryonic genome activation",
+        "maternal-to-zygotic transition",
+        "maternal mRNA",
+        "four-cell stage",
+        "eight-cell stage",
+        "developmental arrest",
+        "nucleus to cytoplasm ratio",
+        "nucleus"
+      ],
+      "narration": "Until about the four-to-eight-cell stage the embryo runs entirely on messenger RNA and protein stockpiled by the oocyte. Then its own genome takes over. That handover explains why so many embryos arrest at exactly this point in a dish: the maternal supply runs out and a defective embryonic genome has nothing to replace it with.  The nuclei are drawn at a CONSTANT size at every stage, which is the geometry of the other half of the same idea: the cells halve with every round and the nucleus does not, so the nucleus-to-cytoplasm ratio climbs. Measured on the built geometry it rises 32-fold from one cell to thirty-two.  A nucleus sits inside its own cell, so at full cytoplasm opacity no camera reaches it: round 1 drew this beat with the cells solid and it came out PIXEL-IDENTICAL to the beat before it, 0 of 810,000 pixels different, on the one beat whose subject is the nuclei. Beat 6 therefore draws the cells see-through, from their own structure, which is the cutaway a teaching plate uses for exactly this.",
+      "narration_from": "sequence-version structure \"genome_activation\" — carried across verbatim, with the nucleus-to-cytoplasm sentence added because the nuclei are now geometry rather than prose"
+    },
+    {
+      "key": "outer_cells_cut",
+      "name": "Outer cells, morula cut open",
+      "label": "Outer cells, morula cut open",
+      "role": "part",
+      "group": "Compaction & morula",
+      "color": "#e0564a",
+      "opacity": 1.0,
+      "refs": {
+        "procedural": "cleavage-morula#outer_cells@0.88+cut"
+      },
+      "terms": [
+        "outer cell layer",
+        "trophoblast precursor",
+        "cut surface",
+        "cross-section"
+      ],
+      "narration": "The same outer cells, with the near half of the embryo removed so that what compaction sealed inside can be seen at all. A camera cannot do this: the inner cells are inside, so no viewpoint reveals them.",
+      "narration_from": "new — the cross-section beat needs real cut geometry, not a camera"
+    },
+    {
+      "key": "inner_cells_cut",
+      "name": "Inner cell mass, morula cut open",
+      "label": "Inner cell mass, morula cut open",
+      "role": "part",
+      "group": "Compaction & morula",
+      "color": "#2d7fc4",
+      "opacity": 1.0,
+      "refs": {
+        "procedural": "cleavage-morula#inner_cells@0.88+cut"
+      },
+      "terms": [
+        "inner cell mass",
+        "embryoblast",
+        "cut surface",
+        "cross-section"
+      ],
+      "narration": "The inner cell mass, exposed by the cut. Four cells of the thirty-two, sealed on every side by their neighbours — which the model derives rather than labels.",
+      "narration_from": "new — the cross-section beat needs real cut geometry, not a camera"
     }
   ],
   "views": [
@@ -351,8 +304,20 @@
       "title": "Four days, one journey",
       "ops": [
         {
-          "op": "SHOW_STRUCTURE",
+          "op": "HIDE_STRUCTURE",
           "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "journey"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "day_markers"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
         },
         {
           "op": "ISOLATE_REGION",
@@ -360,129 +325,533 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "tube_journey",
+          "target": "journey",
           "intensity": 0.9
         },
         {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:embryo-transit",
-          "path": [
-            "zygote",
-            "two_cell",
-            "four_cell",
-            "eight_cell",
-            "morula"
-          ],
-          "duration": 7
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "day_markers",
+          "intensity": 0.95
         }
       ],
-      "narration": "Everything in this scene happens while the embryo is travelling. Fertilization is in the ampulla; the first division is about thirty hours later; the embryo is two cells on day one, four on day two, eight on day three, and a morula entering the uterine cavity on day four. Cilia and tubal peristalsis carry it. Hold that timetable, because a delay in it is an ectopic pregnancy."
+      "narration": "Everything in this scene happens while the embryo is travelling. Fertilization is in the ampulla; the first division is about thirty hours later; the embryo is two cells on day one, four on day two, eight on day three, and a morula entering the uterine cavity on day four. Cilia and tubal peristalsis carry it. Hold that timetable, because a delay in it is an ectopic pregnancy.",
+      "narration_from": "sequence-version view beat 1 — carried across verbatim. Its TRACE_STRUCTURE of \"concept:embryo-transit\" is gone: in a procedural model the stages are values of t, not waypoints in space, so the trace is replaced by the SET_STAGE walk that beats 2-9 now are. See gaps[]."
     },
     {
       "mode": "mechanism",
       "beat": 2,
-      "title": "Cleavage divides without growing",
+      "title": "Day one — one cell, inside the zona",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "The divisions"
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
         },
         {
           "op": "SHOW_STRUCTURE",
           "target": "zona"
         },
         {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "no_growth",
-          "intensity": 0.9
+          "op": "SHOW_STRUCTURE",
+          "target": "outer_cells"
         },
         {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "zygote",
-            "eight_cell"
-          ],
-          "layout": "side-by-side"
+          "op": "SET_STAGE",
+          "t": 0.0
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "outer_cells",
+          "intensity": 0.9
         },
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "zona",
-          "to": "no_growth",
-          "kind": "fixes the total volume"
+          "to": "outer_cells",
+          "kind": "holds it, and fixes its volume"
         }
       ],
-      "narration": "Put the zygote and the eight-cell embryo side by side and they are the same size. Cleavage is mitosis with the growth phases cut out, so each round halves the cell rather than replacing what was divided. The zona pellucida fixes the outer volume, so the embryo is being subdivided into smaller and smaller blastomeres with a rising nucleus-to-cytoplasm ratio. Divisions are not synchronised, so a three-cell or five-cell embryo is normal."
+      "narration": "One diploid cell, still inside the zona pellucida, carrying the cytoplasm and mitochondria the oocyte supplied. It divides about thirty hours after fertilization. Cleavage is dated from this division, so day one of development is the day the zygote first splits.",
+      "narration_from": "sequence-version structure \"zygote\" — carried across verbatim onto the view that now draws it. It was a teaching beat with no geometry; in a procedural model a stage is a value of t.",
+      "claims": [
+        {
+          "id": "B2-one-cell",
+          "claim": "one cell, and it has not divided yet",
+          "measure": "cells",
+          "op": "equals",
+          "value": 1
+        },
+        {
+          "id": "B2-undivided",
+          "claim": "the clock has not started: no division has begun",
+          "measure": "gamma",
+          "op": "atMost",
+          "value": 1e-09
+        },
+        {
+          "id": "B2-full-size",
+          "claim": "this one cell IS the reference volume every later stage is held to",
+          "measure": "meanCellVolumeRel",
+          "op": "near",
+          "value": 1.0,
+          "tol": 1e-06
+        }
+      ],
+      "negative_displacement": 0.13,
+      "pinning_note": "PINNED AS AN INTERVAL, NOT AN INSTANT — corrected by the review task 2026-10-01. The model is constant from t = 0 until the first cleavage begins, so no claim can distinguish t = 0 from t = 0.05 and t = -0.05 is outside the clock. The build declared this as an unresolvable gap, but check-beat-claims already has the mechanism for a beat that legitimately stands for an INTERVAL rather than an instant: negative_displacement, the same waiver cardiac-cycle's diastasis beat uses. It is declared here at 0.13, which is the width of the interval the zygote is unchanged over, and the claims DO break at it. The non-negotiable far displacement of ±0.15 is untouched and the beat fails it as required, so this buys the beat nothing except an honest description of what it depicts. check-beat-claims now passes on this scene. ORIGINAL BUILD NOTE: NOT PINNED BELOW OR JUST ABOVE, and it cannot be. The model is constant over t 0 to 0.120 — a zygote does not change until it divides — so no claim can distinguish t = 0 from t = 0.05, and t = -0.05 is outside the clock. check-beat-claims will report this beat as not pinned at -0.05 and +0.05; it IS pinned at both far displacements. This is a monotone developmental series meeting a check written for a cycle, and it is declared rather than worked around. See gaps[]."
     },
     {
       "mode": "mechanism",
       "beat": 3,
-      "title": "The genome hands over",
+      "title": "The first cleavage — a furrow, not a growth spurt",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "The divisions"
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "zona"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "outer_cells"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.175
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "genome_activation",
+          "target": "outer_cells",
           "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "genome_activation",
-          "to": "four_cell",
-          "kind": "handover begins here"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "genome_activation",
-          "to": "eight_cell",
-          "kind": "and is complete by here"
         }
       ],
-      "narration": "The first divisions are not run by the embryo. They are run by messenger RNA and protein the oocyte stored before ovulation. Somewhere between the four- and eight-cell stage the embryonic genome switches on and takes control. This is why a large share of embryos in a laboratory stop developing at exactly this stage — the maternal supply is exhausted and a faulty genome cannot take over."
+      "narration": "The two daughter cells are called blastomeres. From here divisions are not synchronised, so odd numbers are normal — three-cell and five-cell embryos are seen routinely in a dish and are not abnormal.",
+      "narration_from": "sequence-version structure \"two_cell\" — carried across verbatim",
+      "claims": [
+        {
+          "id": "B3-mid-division",
+          "claim": "the first cleavage is halfway through: a furrow, deepening",
+          "measure": "gamma",
+          "op": "near",
+          "value": 0.5,
+          "tol": 0.02
+        },
+        {
+          "id": "B3-two-cells",
+          "claim": "two blastomeres",
+          "measure": "cells",
+          "op": "equals",
+          "value": 2
+        },
+        {
+          "id": "B3-each-half",
+          "claim": "and each is HALF the zygote's volume, not the same size as it",
+          "measure": "meanCellVolumeRel",
+          "op": "near",
+          "value": 0.5,
+          "tol": 1e-06
+        }
+      ]
     },
     {
       "mode": "mechanism",
       "beat": 4,
-      "title": "Compaction — the first decision",
+      "title": "Day two — four cells, and no larger than one was",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "Compaction & morula"
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
         },
         {
           "op": "SHOW_STRUCTURE",
-          "target": "eight_cell"
+          "target": "zona"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "outer_cells"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.435
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "By day two the embryo is four cells and no larger than the zygote was. Each blastomere is still totipotent — separate one now and it can make a whole embryo.",
+      "narration_from": "sequence-version structure \"four_cell\" — carried across verbatim",
+      "claims": [
+        {
+          "id": "B4-four",
+          "claim": "four blastomeres",
+          "measure": "cells",
+          "op": "equals",
+          "value": 4
+        },
+        {
+          "id": "B4-settled",
+          "claim": "the second division is complete and the third has not begun",
+          "measure": "gamma",
+          "op": "near",
+          "value": 2.0,
+          "tol": 0.02
+        },
+        {
+          "id": "B4-quarter",
+          "claim": "each is a QUARTER of the zygote's volume",
+          "measure": "meanCellVolumeRel",
+          "op": "near",
+          "value": 0.25,
+          "tol": 1e-06
+        },
+        {
+          "id": "B4-no-growth",
+          "claim": "and the total is still exactly the zygote's",
+          "measure": "volumeRatio",
+          "op": "near",
+          "value": 1.0,
+          "tol": 0.004
+        },
+        {
+          "id": "B4-same-outside",
+          "claim": "and the embryo's outer boundary — the zona, which is what is measured down a microscope — is the same size it was on day one",
+          "measure": "zonaOuterR",
+          "op": "near",
+          "value": 7.719,
+          "tol": 0.001
+        },
+        {
+          "id": "B4-mass-within-pv",
+          "claim": "the cell mass itself has expanded only into the 2 um perivitelline space it already had: at most 3.33% on diameter, which is the zona's inner face divided by the zygote's own radius and therefore a ceiling the geometry cannot pass",
+          "measure": "diameterRatio",
+          "op": "atMost",
+          "value": 1.0333
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Day three — eight cells, the same size as one",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "zona"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "outer_cells"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.595
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "compaction",
-          "intensity": 0.95
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "eight_cell",
-          "to": "compaction",
-          "kind": "cells flatten and seal against each other"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "compaction",
-          "to": "morula",
-          "kind": "produces"
+          "target": "outer_cells",
+          "intensity": 0.9
         }
       ],
-      "narration": "At eight to sixteen cells the blastomeres stop looking like a bag of marbles. E-cadherin makes them flatten onto each other, tight junctions seal the outer surface and gap junctions couple the interior, so the individual outlines disappear. The embryo becomes a solid ball — the morula. Nothing has been added; the cells have simply committed to a position, and position is now destiny."
+      "narration": "The zona has not changed size since day one, and the eight cells fill it exactly as the one cell did. Cleavage is mitosis with the growth phases cut out, so each round halves the cell rather than replacing what was divided. The zona pellucida fixes the outer volume, so the embryo is being subdivided into smaller and smaller blastomeres with a rising nucleus-to-cytoplasm ratio.  Day three, eight rounded blastomeres with open clefts between them: over two thirds of every cell's surface is still free rather than pressed against a neighbour, which is what makes them still separable at this stage. This is the classic cleavage-stage embryo transferred in an older assisted-reproduction protocol, and it is where a single blastomere used to be removed for genetic testing.",
+      "narration_from": "sequence-version view beat 2 plus structure \"eight_cell\". The eight_cell text is VERBATIM. Beat 2's FIRST SENTENCE was changed, and it is the only narration in this scene that was: it read \"Put the zygote and the eight-cell embryo side by side and they are the same size\", which described a side-by-side LAYOUT of two panels. This scene makes the same point in one frame instead, against the zona, which is the same size at every stage and which the embryo fills at every stage. Every other sentence of beat 2 is verbatim. Declared in gaps[].",
+      "claims": [
+        {
+          "id": "B5-eight",
+          "claim": "eight blastomeres",
+          "measure": "cells",
+          "op": "equals",
+          "value": 8
+        },
+        {
+          "id": "B5-settled",
+          "claim": "the third division is complete and compaction has not begun",
+          "measure": "gamma",
+          "op": "near",
+          "value": 3.0,
+          "tol": 0.02
+        },
+        {
+          "id": "B5-eighth",
+          "claim": "each is an EIGHTH of the zygote's volume",
+          "measure": "meanCellVolumeRel",
+          "op": "near",
+          "value": 0.125,
+          "tol": 1e-06
+        },
+        {
+          "id": "B5-no-growth",
+          "claim": "and the total is still exactly the zygote's",
+          "measure": "volumeRatio",
+          "op": "near",
+          "value": 1.0,
+          "tol": 0.004
+        },
+        {
+          "id": "B5-loose",
+          "claim": "the cells are still loosely packed: over two thirds of every cell's surface is still free, not pressed against a neighbour",
+          "measure": "freeFracMin",
+          "op": "atLeast",
+          "value": 0.6
+        },
+        {
+          "id": "B5-no-inside",
+          "claim": "and NOT ONE cell is sealed inside — which is why no blastomere is committed yet",
+          "measure": "innerCells",
+          "op": "equals",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "The genome hands over — and the nuclei stop keeping up",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "zona"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "outer_cells_ghost"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "nuclei"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.595
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "nuclei"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP"
+        }
+      ],
+      "narration": "The first divisions are not run by the embryo. They are run by messenger RNA and protein the oocyte stored before ovulation. Somewhere between the four- and eight-cell stage the embryonic genome switches on and takes control. This is why a large share of embryos in a laboratory stop developing at exactly this stage — the maternal supply is exhausted and a faulty genome cannot take over.\n\nThe nuclei are drawn at the same size at every stage, because they are. Measured on the built geometry, the nucleus-to-cytoplasm ratio at eight cells is eight times what it was in the zygote, and at thirty-two it is thirty-two times. That rising ratio is the same fact as the handover: a cell running out of maternal stockpile is a cell whose nucleus has become large relative to the cytoplasm it has to supply.  The cytoplasm is drawn see-through here, and only here, so that the nuclei inside the cells can be seen at all.",
+      "narration_from": "sequence-version view beat 3 — carried across verbatim, with the nucleus-to-cytoplasm paragraph added because that is now measured geometry rather than prose",
+      "claims": [
+        {
+          "id": "B6-eight",
+          "claim": "still eight cells — this beat adds the nuclei, not a division",
+          "measure": "cells",
+          "op": "equals",
+          "value": 8
+        },
+        {
+          "id": "B6-settled",
+          "claim": "at the stage the handover completes",
+          "measure": "gamma",
+          "op": "near",
+          "value": 3.0,
+          "tol": 0.02
+        },
+        {
+          "id": "B6-nc",
+          "claim": "the nucleus-to-cytoplasm ratio is EIGHT times the zygote's",
+          "measure": "ncRatioRel",
+          "op": "near",
+          "value": 8.0,
+          "tol": 0.02
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Compaction begins — the cells start to flatten",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "zona"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "outer_cells"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "outer_cells",
+          "intensity": 0.95
+        }
+      ],
+      "narration": "At eight to sixteen cells the blastomeres stop looking like a bag of marbles. E-cadherin makes them flatten onto each other, tight junctions begin to seal the outer surface and gap junctions couple the interior, so the individual outlines start to disappear.  This beat is the change IN PROGRESS and not its result: most of every cell's surface is still free, and the embryo has not yet become the solid ball it is about to be.",
+      "narration_from": "sequence-version view beat 4 — carried across verbatim",
+      "claims": [
+        {
+          "id": "B7-sixteen",
+          "claim": "sixteen cells — compaction is an 8-to-16-cell event",
+          "measure": "cells",
+          "op": "equals",
+          "value": 16
+        },
+        {
+          "id": "B7-halfway",
+          "claim": "and it is HALFWAY through: this beat is the change in progress, not its result",
+          "measure": "adhesion",
+          "op": "near",
+          "value": 0.5,
+          "tol": 0.03
+        },
+        {
+          "id": "B7-still-round",
+          "claim": "the cells have not finished flattening — most of every cell's surface is still free",
+          "measure": "freeFracMin",
+          "op": "atLeast",
+          "value": 0.5
+        },
+        {
+          "id": "B7-volume",
+          "claim": "nothing has been added: the total volume is still the zygote's",
+          "measure": "volumeRatio",
+          "op": "near",
+          "value": 1.0,
+          "tol": 0.004
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Compaction complete — a solid ball with a sealed outside",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "zona"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "outer_cells"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "outer_cells",
+          "intensity": 0.95
+        }
+      ],
+      "narration": "Flattening is finished. Each blastomere now presses on its neighbours over nearly two thirds of its surface, against under a third before compaction began, and the outlines between them have blurred: the embryo has become a solid ball, and that ball is the morula. Nothing has been added — the total volume is still exactly the zygote's — so compaction is a rearrangement and not a growth.  At sixteen cells every cell in this packing still keeps a face on the outside. The inside that compaction creates, and the first cell-fate decision that follows from it, are what the next beat cuts the embryo open to show.",
+      "narration_from": "sequence-version structure \"compaction\" — carried across verbatim",
+      "claims": [
+        {
+          "id": "B8-done",
+          "claim": "compaction is complete",
+          "measure": "adhesion",
+          "op": "near",
+          "value": 1.0,
+          "tol": 0.01
+        },
+        {
+          "id": "B8-flattened",
+          "claim": "and the cells are flattened against one another: the apposed fraction of cell surface is now nearly two thirds, against under a third before compaction",
+          "measure": "apposedFrac",
+          "op": "atLeast",
+          "value": 0.58
+        },
+        {
+          "id": "B8-volume",
+          "claim": "at constant volume — compaction is a rearrangement, not a growth",
+          "measure": "volumeRatio",
+          "op": "near",
+          "value": 1.0,
+          "tol": 0.004
+        },
+        {
+          "id": "B8-sixteen",
+          "claim": "sixteen cells",
+          "measure": "cells",
+          "op": "equals",
+          "value": 16
+        },
+        {
+          "id": "B8-no-inside-yet",
+          "claim": "and at sixteen cells NOT ONE cell is sealed inside this packing yet — the beat says so rather than asserting an inside it cannot show",
+          "measure": "innerCells",
+          "op": "equals",
+          "value": 0
+        }
+      ]
     },
     {
       "mode": "cross_section",
-      "beat": 5,
+      "beat": 9,
       "title": "Cut the morula open — inside and outside",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "Compaction & morula"
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "zona"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "outer_cells_cut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "inner_cells_cut"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.88
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
         },
         {
           "op": "CROSS_SECTION",
@@ -493,49 +862,102 @@
         {
           "op": "COMPARE_STRUCTURES",
           "targets": [
-            "inner_cells",
-            "outer_cells"
+            "inner_cells_cut",
+            "outer_cells_cut"
           ],
           "layout": "side-by-side"
         },
         {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "compaction",
-          "to": "inner_cells",
-          "kind": "seals these cells inside"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "compaction",
-          "to": "outer_cells",
-          "kind": "polarises these on the surface"
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "inner_cells_cut",
+          "intensity": 0.95
         }
       ],
-      "narration": "Cut a morula across and there are two populations, not one. A small group sealed inside — the inner cell mass — becomes the entire embryo and nothing else. The larger group on the outside becomes the placenta and membranes and contributes nothing to the fetus. Inside becomes the child, outside becomes the afterbirth. The outer cells have already begun pumping sodium inward, and the water that follows will open the cavity that makes this a blastocyst."
+      "narration": "This is the first cell-fate decision of a human life, and it is a decision taken by POSITION: a cell sealed on the inside and a cell with a face on the outside are now headed for different fates, and no blastomere is fully totipotent afterwards.  Cut a morula across and there are two populations, not one. A small group sealed inside — the inner cell mass — becomes the entire embryo and nothing else. The larger group on the outside becomes the placenta and membranes and contributes nothing to the fetus. Inside becomes the child, outside becomes the afterbirth. The outer cells have already begun pumping sodium inward, and the water that follows will open the cavity that makes this a blastocyst.  A solid ball of twelve to thirty-two cells, named from the Latin for mulberry because that is what it looks like. It reaches the uterine cavity at about day four and floats free there, nourished by secretions from the endometrial glands, while fluid begins to seep in between its cells.",
+      "narration_from": "sequence-version view beat 5 plus structure \"morula\" — both carried across verbatim",
+      "pinned_ok": {
+        "outer_cells_cut": "the cut is a different PICTURE, not a different stage: the pin and the +cut flag together are what open the solid, and a sectioned embryo must not slide when a neighbouring beat walks the stages",
+        "inner_cells_cut": "same — the cut pair is pinned at the stage this beat is about"
+      },
+      "claims": [
+        {
+          "id": "B9-32",
+          "claim": "thirty-two cells",
+          "measure": "cells",
+          "op": "equals",
+          "value": 32
+        },
+        {
+          "id": "B9-inside-exists",
+          "claim": "and there are now cells with NO outside face at all — four of the thirty-two, which the model derives from the geometry rather than labelling",
+          "measure": "innerCells",
+          "op": "atLeast",
+          "value": 3
+        },
+        {
+          "id": "B9-outside",
+          "claim": "the rest keep a face on the zona",
+          "measure": "outerCells",
+          "op": "atLeast",
+          "value": 24
+        },
+        {
+          "id": "B9-mid-division",
+          "claim": "the fifth division is in progress",
+          "measure": "gamma",
+          "op": "near",
+          "value": 4.5,
+          "tol": 0.03
+        },
+        {
+          "id": "B9-volume",
+          "claim": "and the whole thing is still the volume of one cell",
+          "measure": "volumeRatio",
+          "op": "near",
+          "value": 1.0,
+          "tol": 0.004
+        }
+      ]
     },
     {
       "mode": "mechanism",
-      "beat": 6,
+      "beat": 10,
       "title": "What the zona is for",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "What the zona does"
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
         },
         {
           "op": "SHOW_STRUCTURE",
-          "target": "morula"
+          "target": "zona"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "outer_cells"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "inner_cells"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.91
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "zona",
-          "intensity": 0.9
+          "intensity": 0.95
         },
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "zona",
-          "to": "tube_journey",
-          "kind": "prevents attachment on the way down"
+          "to": "outer_cells",
+          "kind": "holds them together as ONE embryo"
         },
         {
           "op": "PEEL_LAYER",
@@ -543,86 +965,180 @@
           "direction": "outward"
         }
       ],
-      "narration": "The zona pellucida is doing three jobs at once during cleavage. It keeps the loose blastomeres together as one embryo. It fixes the volume, which is what makes cleavage subdivide instead of grow. And it stops the embryo sticking to the tube wall while it travels. That last job is the clinically important one: shedding the zona early means implanting in the tube. It is shed at day five, in the uterus, and not before."
-    },
-    {
-      "mode": "comparison",
-      "beat": 7,
-      "title": "Splitting — how identical twins get their membranes",
-      "ops": [
+      "narration": "The zona pellucida is doing three jobs at once during cleavage. It keeps the loose blastomeres together as one embryo. It fixes the volume, which is what makes cleavage subdivide instead of grow. And it stops the embryo sticking to the tube wall while it travels. That last job is the clinically important one: shedding the zona early means implanting in the tube. It is shed at day five, in the uterus, and not before.",
+      "narration_from": "sequence-version view beat 6 — carried across verbatim",
+      "claims": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "What the zona does"
+          "id": "B10-intact",
+          "claim": "the zona is intact and unchanged — it is shed on day five, in the next curriculum structure, not here",
+          "measure": "zonaOuterR",
+          "op": "near",
+          "value": 7.719,
+          "tol": 0.001
         },
         {
-          "op": "SHOW_STRUCTURE",
-          "target": "The divisions"
+          "id": "B10-fixed-volume",
+          "claim": "and it is still fixing the volume: the embryo is the size of one cell",
+          "measure": "volumeRatio",
+          "op": "near",
+          "value": 1.0,
+          "tol": 0.004
         },
         {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "twinning",
-          "intensity": 0.9
+          "id": "B10-late",
+          "claim": "at the end of the fifth division",
+          "measure": "gamma",
+          "op": "near",
+          "value": 4.84375,
+          "tol": 0.03
         },
         {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "four_cell",
-          "to": "twinning",
-          "kind": "totipotent — a split here gives two complete embryos"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "compaction",
-          "to": "twinning",
-          "kind": "after this, a split shares membranes"
+          "id": "B10-32",
+          "claim": "thirty-two cells",
+          "measure": "cells",
+          "op": "equals",
+          "value": 32
         }
-      ],
-      "narration": "An early blastomere can still make a whole embryo on its own, so a cleavage-stage embryo that splits produces monozygotic twins. Split within the first three days, before compaction has committed the outer cells, and each twin builds its own placenta and its own amnion — dichorionic and diamniotic, indistinguishable on a scan from non-identical twins. Split after compaction and they share, progressively more the later it happens. The membranes report the timing of the split, not the zygosity."
+      ]
     },
     {
       "mode": "associated_organs",
-      "beat": 8,
+      "beat": 11,
       "title": "Day three in a clinic",
       "ops": [
         {
-          "op": "SHOW_STRUCTURE",
+          "op": "HIDE_STRUCTURE",
           "target": "*"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "zona"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "outer_cells"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.52
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "clinical",
+          "target": "outer_cells",
           "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "clinical",
-          "to": "eight_cell",
-          "kind": "graded and biopsied at this stage"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "clinical",
-          "to": "tube_journey",
-          "kind": "nothing has implanted yet"
-        },
-        {
-          "op": "HIDE_STRUCTURE",
-          "target": "no_growth"
         }
       ],
-      "narration": "Three things follow from the timetable. Laboratories grade embryos on cell number and evenness at days two and three, so what is normal on each day is a working clinical fact. A blastomere can be removed at eight cells for genetic testing, but blastomeres differ from one another, so the result is less reliable than one taken later. And for four days nothing is attached to the mother — which is the window in which post-coital contraception can still act, and the window a scarred tube shortens into an ectopic pregnancy."
+      "narration": "Three things follow from the timetable. Laboratories grade embryos on cell number and evenness at days two and three, so what is normal on each day is a working clinical fact. A blastomere can be removed at eight cells for genetic testing, but blastomeres differ from one another, so the result is less reliable than one taken later. And for four days nothing is attached to the mother — which is the window in which post-coital contraception can still act, and the window a scarred tube shortens into an ectopic pregnancy.",
+      "narration_from": "sequence-version view beat 8 — carried across verbatim. THE STRUCTURE 'clinical' TEXT WAS ALSO CONCATENATED HERE AND SAID THE SAME THREE THINGS A SECOND TIME; the review task moved it to deferred_beats[] on 2026-10-02 rather than leave a student reading one beat's content twice. Nothing was deleted — the full text is in deferred_beats[], as no_growth's is.",
+      "claims": [
+        {
+          "id": "B11-mid-division",
+          "claim": "this is what an embryologist grades: a division IN PROGRESS, where cell number and evenness are the measurement",
+          "measure": "gamma",
+          "op": "near",
+          "value": 2.5,
+          "tol": 0.03
+        },
+        {
+          "id": "B11-uneven",
+          "claim": "and the cells are measurably uneven at this instant — the spread of cell volume is three times what it is at a settled stage",
+          "measure": "cellVolumeSpread",
+          "op": "atLeast",
+          "value": 0.06
+        },
+        {
+          "id": "B11-eight",
+          "claim": "eight cells, the stage a blastomere was biopsied from",
+          "measure": "cells",
+          "op": "equals",
+          "value": 8
+        },
+        {
+          "id": "B11-nothing-implanted",
+          "claim": "nothing has attached: the zona is intact",
+          "measure": "zonaInnerR",
+          "op": "near",
+          "value": 6.2,
+          "tol": 0.001
+        }
+      ]
+    }
+  ],
+  "visibility_waivers": [
+    {
+      "view": 10,
+      "key": "inner_cells",
+      "why": "SEALED INSIDE, DELIBERATELY, AND THAT IS THE DEFINITION. Beat 10 is about the zona and draws the morula whole; the inner cell mass is by definition enclosed by twenty-eight outer cells, so no camera can see it in an uncut embryo. It is the SUBJECT of beat 9, which cuts the embryo open precisely because a camera cannot do this, and beat 9 is where it is measured. Showing it here costs nothing and keeps the morula intact, which is what beat 10 is about."
+    },
+    {
+      "view": 6,
+      "key": "nuclei",
+      "why": "INSIDE THEIR OWN CELLS, which is where nuclei are — BUT ONLY THE ID-PICK IS WAIVED, and that scoping is the point. Geometric occlusion reads a nucleus inside opaque cytoplasm as invisible by construction, exactly as a teaching plate's cutaway would, so the id-pick measure cannot decide this beat. The ALPHA-AWARE measure is NOT waived and must clear the floor on its own.\nROUND 1 FAILED EXACTLY THERE AND THE WAIVER SAID IT WOULD. It read 0.000% on both measures and beat 6 came out PIXEL-IDENTICAL to beat 5 — 0 of 810,000 pixels — on the one beat whose subject is the nuclei. The waiver's own closing sentence said that if the alpha pass also reported them under the floor the beat needed the cut variant or a lowered cell opacity and the review should say so; the review said so. Fixed as prescribed, by the SECOND of the two options the waiver named: beat 6 draws the cytoplasm at 0.33 opacity, from a structure of its own, so the nuclei are seen through it. BOTH options were built and measured before choosing. The cut at the eight-cell stage works and passes this walk, but it is the worse picture — eight large cells leave deep cups facing the camera and the frame reads as a yellow disc with eight dots in it, with none of the cytoplasm the narration compares the nuclei against. The lowered-opacity structure needs the model's `ghost` flag to get meshes of its own, because a plain duplicate naming the same stage, flags and part collides and measures 0% on both passes — which it did, on the first attempt. This waiver is retained for the id-pick alone, which remains 0.000% and always will be.",
+      "measure": "id_pick"
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-28"
+    "authored_at": "2026-08-28",
+    "reauthored_at": "2026-10-01",
+    "reauthored_by": "model3d BUILD task",
+    "corrected_at": "2026-10-02T01:58:00Z",
+    "corrected_by": "model3d REVIEW task, round 2",
+    "correction_note": "ROUND 2 REVIEW. Five corrections, none of them geometry; the model, the harness and every claim are untouched and check-beat-claims is unchanged at 43 claims, 0 failures. (1) gaps[3] quoted a sentence of narration that is not in this scene — it pointed at the size_ref outline that gaps[1] records as dropped — and asserted that only one passage had ever been edited; both statements were false against the file, and a SECOND beat-5 passage was reworded in round 2. Rewritten with the real text of both. (2) gaps[6] carried round 1's two shortfall windows and 12.63% where the build's own proof.txt now records three windows and 13.38%. (3) gaps[10] carried 43% cell-volume spread where acceptance row S now measures 53.5% — a drift the build's notes recorded without updating the gap. (4) provenance's reauthor_note still credited the dropped size_ref outline as drawn geometry carrying the no-growth claim, and still said ONE sentence of narration had changed. (5) beat 11's narration made the same three clinical points TWICE, because the re-authoring concatenated a view text and a structure text that duplicated each other; the structure text is moved WHOLE into deferred_beats[] and nothing is deleted. THE ITEM IS ESCALATED on a question these corrections do not touch: see ESCALATIONS.md 2026-10-02, and do not read the corrections above as the review passing the scene.",
+    "reauthor_note": "Converted from the SVG sequence engine to the procedural provider, per the queue item's note. The fifteen sequence 'structures' were teaching BEATS with no geometry. Five of them (zygote, two_cell, four_cell, eight_cell, morula) were STAGES, which in a procedural model are values of t, so their narration moved onto the views that now draw those t. Four more (no_growth, genome_activation, compaction, clinical) were IDEAS; genome_activation is carried by geometry the model builds for it (constant-size nuclei); no_growth was given geometry too (a persistent outline at the zygote's radius) and that outline was BUILT, MEASURED AND DROPPED by the visibility walk — see gaps[1] and deferred_beats[] — so its claim is carried by the zona and by the volume claims instead. CORRECTED 2026-10-02 by the review task: this note credited the dropped outline as though it were still drawn and their narration moved onto those structures, while compaction and clinical moved onto views. Four were real parts (tube_journey, zona, inner_cells, outer_cells) and are structures. One (twinning) has no geometry in this model and is in deferred_beats[] with its full text. Every narration is carried across VERBATIM except TWO passages, both in beat 5, both named and explained in gaps[3] — corrected 2026-10-02 by the review task from \"ONE sentence\".",
+    "correction_note_round1": "Beat 2 given negative_displacement 0.13 with an argued reason, closing the only mechanical failure in the scene: check-beat-claims went from BEAT CLAIM CHECK FAILED (beats not pinned to their own t: 1) to ALL BEAT CLAIMS HOLD. Nothing else was changed; the remaining findings were recorded on the queue item as changes-requested. — model3d REVIEW task, round 1, 2026-10-01T22:52:00Z"
   },
+  "deferred_beats": [
+    {
+      "from_beat": 7,
+      "mode": "comparison",
+      "title": "Splitting — how identical twins get their membranes",
+      "narration": "An early blastomere can still make a whole embryo on its own, so a cleavage-stage embryo that splits produces monozygotic twins. Split within the first three days, before compaction has committed the outer cells, and each twin builds its own placenta and its own amnion — dichorionic and diamniotic, indistinguishable on a scan from non-identical twins. Split after compaction and they share, progressively more the later it happens. The membranes report the timing of the split, not the zygosity.",
+      "also": "Because early blastomeres are totipotent, a cleavage-stage embryo that splits gives two complete embryos. Split in the first three days, before the outer cells are committed, and each half makes its own placenta and its own amnion — dichorionic, diamniotic identical twins, which look on a scan exactly like non-identical ones. Split later and they share, and the later the split the more they share. Timing of the split, not the fact of it, is what determines the membranes.",
+      "why_not_a_view": "It needs geometry this model does not build: two embryos, each in its own zona, split at a named stage. RENDER-STANDARD is explicit that a view must change the picture, and the only picture this model could give this beat is a four-cell embryo that beat 4 already draws — which would make it text wearing a view's clothes. The narration is the best content in the scene and is kept whole here rather than attached to a frame that does not show it.\nWHAT IT WOULD TAKE, stated so it is a piece of work rather than a regret: a `split` variant that partitions the cells of a chosen generation into two groups by the first cleavage plane, offsets each group, and draws a zona round each. The parts are all present — the lineage tree already knows which cells descend from which first-division daughter, which is exactly the partition monozygotic twinning needs. It was left out because this run had one item to build and chose to spend the time on the no-growth and compaction claims, which are what the learning goal names.",
+      "note": "The twinning rule is narrated from the other side in the blastocyst scene, deliberately, and neither scene claims a twinning curriculum entry — that was true of the sequence version and is still true."
+    },
+    {
+      "from_structure": "no_growth",
+      "title": "Division without growth",
+      "narration": "This is the one idea that makes cleavage different from ordinary mitosis. The cell cycles are stripped down and almost skip the growth phases, so each division halves the cell size instead of restoring it. The embryo at eight cells is the same overall size as the zygote — it has been subdivided, not enlarged. The zona pellucida holds the whole thing to a fixed volume, and the nucleus-to-cytoplasm ratio climbs with every round.",
+      "why_not_a_view": "It is not a part and it is not a stage — it is the idea the whole scene is about, and every beat from 2 to 9 teaches it. It was given its own geometry (a translucent outline at the zygote's radius, drawn at every stage so the later stages could be seen filling it) and the visibility walk measured that outline at an alpha peak of 28, 31 and 37 against a floor of 40 in beats 5, 3 and 2 — NOT SEEABLE on either measure, in the player's own composition, in the beats that pointed at it. That is the cardiac-cycle failure exactly: a correct model whose picture carries nothing. The outline was dropped rather than made opaque, because an outline opaque enough to register would hide the cells it exists to measure, and because the ZONA already makes the same point better — it is the same size at every stage, it is 33% of every frame, and the embryo visibly fills it throughout. The text is kept whole here and its claim is carried by the zona's narration and by beat claims B4-no-growth, B5-no-growth, B7-volume, B8-volume, B9-volume and B10-fixed-volume.",
+      "model_layer_kept": "models3d/cleavage-morula.js still builds `size_ref` behind its own flag. It is correct geometry and it costs nothing to leave; a later scene that draws the embryo WITHOUT the zona would be able to use it, which is the only composition it could be seen in."
+    },
+    {
+      "from_beat": 8,
+      "mode": "diagram",
+      "title": "The three junction types compaction builds, and what each one does",
+      "narration": "E-cadherin is the adhesion molecule that makes compaction happen: calcium-dependent, concentrated at every cell-cell contact, and the reason the blastomeres flatten onto one another rather than merely touching. Behind it two junction types do two different jobs. Tight junctions form a continuous belt around the OUTER face of the outer cells and seal the embryo against the outside, which is what later lets those cells pump sodium inward and hold the water that follows. Gap junctions couple the INTERIOR electrically and metabolically, so the cells sealed inside behave as one compartment. Position is destiny because these two junction systems give an inside cell and an outside cell genuinely different surroundings.",
+      "why_not_a_view": "DUPLICATE CONTENT, NOT NEW CONTENT — this is the fix for the review's finding 7. Beats 7 and 8 both opened 'at eight to sixteen cells', both named E-cadherin, tight junctions sealing the outside and gap junctions coupling the inside, and both ended on 'position is now destiny', which is beat 8's own title. The frames differ (t 0.70 against t 0.80) so the duplicate-FRAME rule could not catch it. Beat 7 keeps the mechanism because beat 7 is the beat where flattening is in progress; beat 8 now narrates what compaction has PRODUCED; and beat 9 carries the fate decision, where the cut actually shows the sealed cells. The molecular detail that was being said twice is kept here, whole.\nWHY IT IS NOT A VIEW: RENDER-STANDARD section 3 — a beat that shows the same frame as the one before it is text. The model does not build junctions and says so in its own header: they have no form at 100 um and a drawn junction would be an invention. Any frame this beat could be given is a frame beat 7 or beat 8 already draws. WHAT IT WOULD TAKE: a schematic inset at membrane scale, which is a second scale break in a scene that already declares one for the uterine tube, and belongs in a diagram-mode scene rather than here."
+    },
+    {
+      "from_structure": "clinical",
+      "mode": "diagram",
+      "title": "Three uses of the timetable",
+      "narration": "Three uses. Embryos are graded on cell number and evenness at day two and three, so knowing what is normal on each day is a clinical skill. A single blastomere can be biopsied at eight cells for genetic testing, though mosaicism between blastomeres makes that result less reliable than a later one. And the four-day interval before the embryo reaches the uterus is the window in which post-coital contraception still acts, because nothing has yet attached.",
+      "why_not_a_view": "DUPLICATE CONTENT, NOT ABSENT CONTENT — moved here by the model3d review task on 2026-10-02, round 2. The re-authoring concatenated sequence-version view beat 8 and sequence-version structure 'clinical' into beat 11's narration, and the two texts make the SAME three points in the same order: (1) laboratories grade embryos on cell number and evenness at days two and three, (2) a blastomere can be biopsied at eight cells for genetic testing and is less reliable than a later sample, (3) the four-day interval before the embryo reaches the uterus is the post-coital-contraception window. A student reading beat 11 read all three twice. Neither version strictly contains the other — the view text names the ectopic-pregnancy consequence, this text names mosaicism as the reason the biopsy is less reliable — so this one is kept whole here rather than merged or cut, and a later pass that wants the word 'mosaicism' in the beat can lift that clause from here. The duplicate-view rule in REVIEW-TASK-PROMPT §2 did not catch this because it compares FRAMES between beats; this is one beat whose own narration repeats itself, which nothing checks."
+    }
+  ],
   "gaps": [
-    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and no 3d option; the subject is an ordered process at cell scale over four days. Only diagram is deferred.",
-    "Status is 'planned'. Fourteen regions, eight beats, ops and narration are complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a row of stages from zygote through two, four and eight cells to a compacted morula, all drawn to the SAME outer diameter so the no-growth point is visible without narration; a cut morula showing inner cells sealed by an outer polarised layer; and a tube-and-uterus inset with the day marked at each position along it.",
-    "The size-constancy point in beat 2 depends entirely on the artwork keeping every stage the same outer diameter. If the illustration enlarges the later stages for legibility it teaches the opposite of the narration, so this constraint is a requirement of the drawing, not a preference.",
-    "Beat 1 traces concept:embryo-transit. The subject is the embryo's passage down the tube over four days; the waypoints are stages in time, not parts in space, which is what a sequence-mode trace is for.",
-    "Cleavage stops at the morula on purpose. Cavitation, the blastocoele, the inner cell mass proper and hatching all belong to 'Blastocyst', the next curriculum structure, and are named here only far enough to hand over. The inner and outer cell populations ARE claimed here because compaction — which creates them — is the teaching of this structure.",
-    "Twinning is narrated here and will be narrated again in the blastocyst scene, deliberately: the dichorionic-diamniotic split happens before day three and the monochorionic splits happen after, so a student meets the same rule from both sides. Neither scene claims a twinning curriculum entry.",
-    "Timings are the standard teaching ones — first division about thirty hours, eight cells at day three, morula reaching the uterus at day four, twelve to thirty-two cells in a morula — and are narrated as approximations for that reason. Genome activation is placed at the four-to-eight-cell stage, which is the human figure and differs from the mouse most primary literature uses."
+    "ROUTED TO 3d_anatomy, NOT to its first preferred mode. CURRICULUM lists preferred_modes [sequence, diagram] and declares views [mechanism]. Both preferred modes are deferred. The reason is the queue item's own note — these scenes were authored for the SVG panel engine and the engine is not coming — plus the fact that cleavage is the clearest procedural subject in the corpus: the form at every stage is the SAME cytoplasm subdivided a different number of times inside the SAME shell, so the stages are samples of one function and cannot drift out of agreement. The declared view type, mechanism, is carried by seven of the eleven beats.",
+    "THE SIZE REFERENCE WAS BUILT, MEASURED, AND DROPPED — by the visibility walk, not by taste. The no-growth claim was first given its own geometry: a translucent shell at the zygote's own radius, drawn at every stage so a student could see the later stages filling it. viz-training/tools/measure-scene-visibility.mjs walked the scene as the player composes it and measured that shell at an alpha-aware peak of 37, 31 and 28 against the tool's 40/255 floor in beats 2, 3 and 5 — NOT SEEABLE on either measure — and beat 4 scraped through at 65. At 0.17 opacity behind a 0.26-opacity zona, and flush against a cell mass that reaches 6.12 where the reference sits at 6.00, it moved almost no pixels. Two beats were POINTING AT it. It was dropped rather than made opaque: a reference solid enough to register would occlude the cells it exists to measure, and the zona already carries the claim better — same size at every stage, 33% of every frame, visibly filled at every stage. The model still builds the layer behind its flag. This is the defect class RENDER-STANDARD 3.x exists for, and the only reason it was found is that the walk was run.",
+    "THE CELLS READ AS A SCORED BALL — FIXED IN ROUND 2, AND THE STATED CAUSE WAS WRONG. Round 1 drew the 2-cell embryo as a sphere with a hairline: an unbroken circular silhouette on the beat titled 'a furrow, not a growth spurt'. The review read the cause as the edge fillet K_ROUND being a fraction of the cell's own radius and therefore widest when the cells are largest, and prescribed lowering it. MEASURED, THAT IS NOT THE CAUSE: the 2-cell geometry is identical at K_ROUND 0.75, 0.40, 0.20 and 0.08, to every digit. The real cause was that the cortical multiple rho was pinned at a constant 2.20 x the equal-volume radius — a number measured at the EIGHT-cell stage, where round cells genuinely cannot hold the cytoplasm — so a cell's own sphere bound NOWHERE, both daughters were clipped to the same mass sphere by the same hard minimum, and their union was that sphere exactly. At two cells the round answer fits and always did: r = 5.813 and a = 0.387 solve 'two truncated spheres, each half the zygote, inside a zona of 6.20' and leave a 6.4% waist. rho is now SOLVED per stage as the smallest multiple the packing permits, so it comes out near 1.22 at two cells and rises on its own as the count does. The furrow is drawn, the silhouette is broken, and no new tuned constant was added — see the model's own rhoRoundAt(). WHAT IS STILL TRUE: at EIGHT cells the embryo still largely fills the zona, because the cytoplasm is 90.6% of the cavity (gap 7), so the 8-cell silhouette is still close to circular. Beat 5's narration was rewritten to describe the clefts and the measured free fraction rather than to promise loose balls with daylight between them.",
+    "THE NARRATION THAT WAS CHANGED, AND THIS GAP WAS ITSELF WRONG UNTIL ROUND 2 REVIEW. Sequence-version beat 2 opened \"Put the zygote and the eight-cell embryo side by side and they are the same size\", which describes a two-panel LAYOUT. CORRECTED 2026-10-02 by the review task: this gap previously said the sentence \"now reads 'The grey outline is the zygote's own size, and the eight cells fill it exactly.'\" and that \"nothing else in the scene was edited, shortened or reworded\". BOTH STATEMENTS WERE FALSE AGAINST THE FILE THEY DESCRIBE. (a) That sentence is not in the scene and cannot be: the grey outline is size_ref, which gap[1] records as BUILT, MEASURED AND DROPPED, so the gap quoted narration pointing at geometry the same scene had already removed. Beat 5 actually opens \"The zona has not changed size since day one, and the eight cells fill it exactly as the one cell did.\" — the zona carries the claim, as gap[1] says it should. (b) A SECOND passage was reworded, in round 2, answering round 1's finding 3: beat 5's eight-cell text read \"eight loosely packed cells with visible gaps between them, still round and still separable\" and now reads \"eight rounded blastomeres with open clefts between them: over two thirds of every cell's surface is still free rather than pressed against a neighbour, which is what makes them still separable at this stage\" — tied to measured freeFracMin 0.7541 and to claim B5-loose. So TWO passages have been edited, both in beat 5, and both are named here. The side-by-side alternative was considered and rejected on three grounds: it needs two pinned builds and two cameras' worth of framing, it doubles the geometry, and it asks a student to carry a size across the gap between two objects instead of reading it off one picture.",
+    "THE SCALE BREAK IN BEAT 1, AND IT IS A BREAK. The uterine tube is about 10 cm and the embryo is 0.12 mm, so there is no honest single-scale picture of the four-day journey: at one scale the tube is a hairline, at the other the embryo is sub-pixel. Beat 1 therefore draws the tube at its OWN scale, marks the four days along it, and draws NO embryo on it — the day markers are markers, not cells. Nothing at cell scale appears in that frame, so the two scales are never in one picture. The layer's own name says so, and so does the structure's narration. A reviewer who wants the journey taken out of this scene entirely and given to the topic rather than the structure has a reasonable case; it is here because the learning goal asks the student to say where the embryo is on each day.",
+    "BEAT 2 IS PINNED AS AN INTERVAL — RESOLVED by the review task 2026-10-01, this gap is closed. The build left it open with the note below; the fix was that check-beat-claims already has negative_displacement for a beat that stands for an interval rather than an instant, and beat 2 now declares it at 0.13. check-beat-claims passes. ORIGINAL: BEAT 2 CANNOT BE PINNED TO ITS OWN INSTANT, and check-beat-claims will say so. The model is constant over t 0 to 0.120 — a zygote does not change until it divides — so no claim can distinguish t = 0 from t = 0.05, and t = -0.05 is outside the clock. The beat IS pinned at both far displacements. This is a monotone developmental series meeting a check written for a cyclic one; RENDER-STANDARD's rule that the far displacement is not negotiable is satisfied, and the near one is reported rather than worked around. The alternative — inventing motion in the pre-division window — would be inventing anatomy to make a check go green, and the pronuclear events that really do fill that window belong to models3d/fertilization.js, which already draws them.",
+    "THE CYTOPLASM IS SHORT BY UP TO 13.4% AT THREE INSTANTS, AND THEY ARE NAMED. CORRECTED 2026-10-02 by the review task: this gap said TWO instants and 12.63%, which were round 1's numbers. Round 2 solved rho per stage, and the build's own proof.txt now records a THIRD declared window and a larger worst shortfall; the gap was not updated with them. Walked at 0.005 across the whole clock, the total cell volume is exactly the zygote's everywhere except t 0.465-0.515, t 0.615-0.690 and t 0.818-0.840 — the instants the 4-to-8, 8-to-16 and 16-to-32 divisions OPEN — where it falls short by up to 13.38% (worst at t = 0.625; acceptance row V2). Row B reports the mass-radius solve returning its bound at 15 of 201 t, 0 of them outside those three declared windows. The cause is geometric and real: immediately after a division the cells sit as N closely apposed PAIRS, which packs worse than a free tessellation of 2N, so transient intercellular spaces open and the cytoplasm cannot reach its settled volume without pushing past the zona. Real cleavage does the same thing, so what is approximate is the SIZE of the effect, not its existence. Row V asserts the volume is EXACT at every t this scene renders and at every settled stage; row V2 pins the transient at its measured value so it cannot grow; row B asserts the condition occurs ONLY inside those three windows. NO BEAT OF THIS SCENE SITS IN ANY OF THE THREE — the nearest are beat 11 at t = 0.520 and beat 8 at t = 0.800. A reviewer who wants the transient smaller should ask for a wider perivitelline space, which is the next gap.",
+    "THE PERIVITELLINE SPACE IS INHERITED AND IT IS TIGHT. The zygote is 6.00 and the zona's inner face 6.20, both taken from models3d/fertilization.js so that the two scenes draw the same embryo (acceptance row Z measures this against that model's own built zona, not against a copied constant). That makes the cytoplasm 90.6% of the cavity it sits in, which is why the blastomeres here are drawn already apposed rather than as free balls with gaps — a loose packing of round cells fills about 65-74% of its container and simply cannot hold this cytoplasm. Micrographs of human 4- and 8-cell embryos agree with the apposed picture. But the tightness is also the direct cause of the transient shortfall above, and a reviewer may reasonably decide the shared perivitelline space should be wider in BOTH models. That is a change to fertilization.js as well, which is why this run did not make it unilaterally.",
+    "THE 16-CELL STAGE HAS NO SEALED CELL IN THIS PACKING, and a real 16-cell morula has one to three. RE-MEASURED IN ROUND 2 AND IT IS NOT A NEAR MISS. Free surface fraction per cell, sorted, at t = 0.80 (16 cells, compaction complete): 0.348 to 0.380 — every one of the sixteen, against a sealing threshold of 0.10. At 32 cells the same measure gives 0.041, 0.041, 0.044, 0.044 for four cells and 0.280 or more for the other twenty-eight: an order-of-magnitude band with nothing in it. So the model does not nearly seal a cell at 16; it does not come close, and the cause is geometric — a Voronoi tessellation of a ball with 16 generators has no interior generator, and with 32 it has four. THE RESPONSE WAS TO STOP ASSERTING IT, which is the third of the three options the review offered and the only one available: this model derives fate from the built geometry and is forbidden by its own central rule from LABELLING a cell inner, so sealing one at 16 would be the exact fake the rule exists to prevent. Beat 8 now narrates what compaction has produced and states that every cell still keeps an outside face at this stage — pinned by new claim B8-no-inside-yet, innerCells equals 0 — and the first cell-fate decision has moved to beat 9, where the cut shows the four sealed cells and B9-inside-exists already pinned them. The discrepancy that remains is one division of timing, and it is this paragraph.",
+    "WHAT IS NOT MODELLED, so nobody has to discover it. E-cadherin, the tight-junction and gap-junction complexes, the sodium pump and the maternal transcripts are narration, not geometry: they have no form at this scale and a drawn junction would be an invention — the same line models3d/fertilization.js draws about ZP3 and acrosin. The geometry carries what they cause: a contact that widens, a cleft that closes, an interior that comes into existence. Cavitation, the blastocoele, the inner cell mass proper and hatching all belong to the next curriculum structure and are deliberately absent; the inner and outer cell populations ARE claimed here because compaction, which creates them, is the teaching of this structure. That division of labour is unchanged from the sequence version.",
+    "CELL VOLUMES ARE NOT EQUAL, and the model does not pretend they are. One mass radius is solved for the whole embryo, so the cells share the space rather than each holding an identical volume: the spread reaches 53.5% of the mean at 32 cells (acceptance row S caps it at 60%) — CORRECTED 2026-10-02 by the review task from the 43% this gap carried, which was round 1's figure; round 2's rounder cells share space less evenly and the build's own notes record the drift 43.3%->53.5% without updating this gap. It now sits inside 90% of its own cap. Real cleavage is close to equal and the unevenness here is largest at the boundary cells. Solving 32 radii instead of one would fix it and was not attempted. Beat 11's narration turns this to account honestly — unevenness at a division IS what an embryologist grades — but the 53.5% figure is a property of the packing, not a claim about grading.",
+    "BEAT 1 LOST ITS TRACE. The sequence version traced concept:embryo-transit through the stage waypoints. In a procedural model the stages are values of t, not points in space, so there is nothing to trace along; the SET_STAGE walk that beats 2 to 9 now form is what carries the sequence. No narration was lost with it.",
+    "+y IS THE ANIMAL POLE, NOT A BODY DIRECTION. Per RENDER-STANDARD, \"a declared axis is not a proved one, and a symmetric model cannot prove its own\": this model has no chiral content and no mesh-anchored right/left pair, so any handedness assertion would be circular. The first cleavage plane passing through the polar bodies is the one axis cleavage genuinely has, and it is declared as +y. NOTHING in this scene's narration names a left or a right of the body, and no claim here may be read as one.",
+    "ASYNCHRONOUS DIVISION IS TAUGHT AND IS NOT DRAWN, declared in round 2 after the review found it undeclared. Beat 3's narration says that divisions are not synchronised and that three-cell and five-cell embryos are seen routinely in a dish. The model cannot draw one: the division ladder doubles every generation by construction, so the cell count is 1, 2, 4, 8, 16, 32 and nothing else, and every stage between two of those is an interpolation of the SAME doubling rather than a cell count of its own. Round 1 said this twice — the same sentence appeared in beats 3 and 5 — and drew it zero times. Round 2 says it once, in beat 3, where the first division is actually in progress and the claim B3-mid-division pins the beat to the middle of it. WHAT IT WOULD TAKE: per-cell division times instead of one generation clock, which would make the cell count a step function of t with odd values in it and would break the 'seven stages are seven samples of one function' property the whole model is built on. That is a different model, not a parameter, and it is not obviously worth it for one sentence.",
+    "EVERY CELL-CELL CONTACT IS DRAWN WITH A GAP, AND THE GAP IS A DRAWING CONVENTION. Round 1 made two apposed blastomere facets coincide to floating point and recorded that in proof.txt as a virtue. It is not one: two surfaces at exactly the same depth have no ordering, so the cut view stippled the teal inner cells with orange across whole facets, and acceptance row 3.z could not see it because that row asks whether a vertex lies 0.05 INSIDE another part and coincident is 0.0 inside. The model now takes EPS_MEM = 0.020 units — 0.2 um, half from each cell — off every bisecting plane, so no two drawn surfaces coincide anywhere. Two real apposed plasma membranes are about 20 nm apart, which is 0.002 units and far below anything that can be drawn here, so this is a DRAWING CONVENTION and not a measurement: it is ten times the real separation, chosen as the smallest gap that clears the depth buffer at this scene's camera distances. The apposition test carries it explicitly rather than being charged for it — see apposeTol() — because the first version did charge it, and the inner/outer population separation fell from 7.28x to 1.27x purely because the yardstick had been shortened by the drawing convention. New acceptance row X asserts the no-coincidence property directly, which is the review's standards gap G3."
   ]
 }

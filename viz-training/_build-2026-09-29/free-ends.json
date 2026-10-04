@@ -1,0 +1,1045 @@
+[
+ {
+  "id": "ra_auricle",
+  "key": "ra_auricle",
+  "end": "start",
+  "r": 1.3,
+  "discInside": {
+   "ra": 0.71,
+   "surf_sternocostal": 0.72,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.02,
+   "pericardium_parietal_serous": 1.06,
+   "pericardium_fibrous": 1.08
+  },
+  "apexInside": {
+   "heart": 1,
+   "ra": 0.73,
+   "surf_sternocostal": 0.69,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.02,
+   "pericardium_parietal_serous": 1.05,
+   "pericardium_fibrous": 1.07
+  },
+  "exposedIn": [
+   1,
+   2,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   16
+  ],
+  "hiddenBy": [
+   "ra",
+   "surf_sternocostal",
+   "pericardium_visceral_serous",
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "ra_auricle",
+  "key": "ra_auricle",
+  "end": "end",
+  "r": 0.7150000000000001,
+  "discInside": {
+   "heart": 1,
+   "surf_sternocostal": 0.6,
+   "asc_aorta": 1,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.03,
+   "pericardium_parietal_serous": 1.1,
+   "pericardium_fibrous": 1.13
+  },
+  "apexInside": {
+   "heart": 1,
+   "surf_sternocostal": 0.55,
+   "asc_aorta": 1,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.04,
+   "pericardium_parietal_serous": 1.1,
+   "pericardium_fibrous": 1.13
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "heart",
+   "asc_aorta",
+   "surf_sternocostal",
+   "pericardium_visceral_serous",
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "la_auricle",
+  "key": "la_auricle",
+  "end": "start",
+  "r": 0.8,
+  "discInside": {
+   "ra": 0.68,
+   "surf_sternocostal": 0.75,
+   "asc_aorta": 1,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.02,
+   "pericardium_parietal_serous": 1.08,
+   "pericardium_fibrous": 1.11
+  },
+  "apexInside": {
+   "heart": 1,
+   "ra": 0.57,
+   "surf_sternocostal": 0.68,
+   "asc_aorta": 1,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.03,
+   "pericardium_parietal_serous": 1.08,
+   "pericardium_fibrous": 1.11
+  },
+  "exposedIn": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13
+  ],
+  "hiddenBy": [
+   "asc_aorta",
+   "ra",
+   "surf_sternocostal",
+   "pericardium_visceral_serous",
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "la_auricle",
+  "key": "la_auricle",
+  "end": "end",
+  "r": 0.5439999999999999,
+  "discInside": {
+   "surf_sternocostal": 0.76,
+   "pericardial_cavity": 1.02,
+   "pericardium_parietal_serous": 1.06,
+   "pericardium_fibrous": 1.09
+  },
+  "apexInside": {
+   "rv": 0.64,
+   "surf_sternocostal": 0.75,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.02,
+   "pericardium_parietal_serous": 1.06,
+   "pericardium_fibrous": 1.09
+  },
+  "exposedIn": [
+   1,
+   2,
+   3,
+   4,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   16
+  ],
+  "hiddenBy": [
+   "surf_sternocostal",
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "pulm_trunk",
+  "key": "pulm_trunk",
+  "end": "start",
+  "r": 1.4,
+  "discInside": {
+   "heart": 1,
+   "surf_sternocostal": 0.73,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.07,
+   "pericardium_parietal_serous": 1.2,
+   "pericardium_fibrous": 1.24
+  },
+  "apexInside": {
+   "heart": 1,
+   "surf_sternocostal": 0.66,
+   "asc_aorta": 1,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.04,
+   "pericardium_parietal_serous": 1.11,
+   "pericardium_fibrous": 1.14
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "heart",
+   "surf_sternocostal",
+   "pericardium_visceral_serous",
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "pulm_trunk",
+  "key": "pulm_trunk",
+  "end": "end",
+  "r": 1.2799999999999998,
+  "discInside": {
+   "r_pa": 1,
+   "l_pa": 1
+  },
+  "apexInside": {},
+  "exposedIn": [],
+  "hiddenBy": [
+   "r_pa",
+   "l_pa"
+  ],
+  "apexProtrudes": true
+ },
+ {
+  "id": "r_pa",
+  "key": "r_pa",
+  "end": "start",
+  "r": 1.04,
+  "discInside": {
+   "pulm_trunk": 1,
+   "l_pa": 1,
+   "pericardium_fibrous": 1.01
+  },
+  "apexInside": {
+   "pulm_trunk": 1,
+   "pericardial_cavity": 0.94,
+   "pericardium_parietal_serous": 1.1,
+   "pericardium_fibrous": 1.43
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "pulm_trunk",
+   "l_pa",
+   "pericardium_fibrous"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "r_pa",
+  "key": "r_pa",
+  "end": "end",
+  "r": 0.88,
+  "discInside": {
+   "lung_r": 0.97
+  },
+  "apexInside": {
+   "lung_r": 0.97
+  },
+  "exposedIn": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   14,
+   15,
+   16
+  ],
+  "hiddenBy": [
+   "lung_r"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "l_pa",
+  "key": "l_pa",
+  "end": "start",
+  "r": 1,
+  "discInside": {
+   "pulm_trunk": 1,
+   "r_pa": 1,
+   "pericardium_fibrous": 1.01
+  },
+  "apexInside": {
+   "pulm_trunk": 1,
+   "r_pa": 1,
+   "pericardial_cavity": 0.99,
+   "pericardium_parietal_serous": 1.07,
+   "pericardium_fibrous": 1.16
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "pulm_trunk",
+   "r_pa",
+   "pericardium_fibrous"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "l_pa",
+  "key": "l_pa",
+  "end": "end",
+  "r": 0.84,
+  "discInside": {
+   "lung_l": 0.96
+  },
+  "apexInside": {
+   "lung_l": 0.96
+  },
+  "exposedIn": [
+   3,
+   4,
+   5,
+   6,
+   14,
+   15,
+   16
+  ],
+  "hiddenBy": [
+   "lung_l"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "asc_aorta",
+  "key": "asc_aorta",
+  "end": "start",
+  "r": 1.52,
+  "discInside": {
+   "heart": 1,
+   "ra_auricle": 1,
+   "surf_sternocostal": 0.58,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.03,
+   "pericardium_parietal_serous": 1.1,
+   "pericardium_fibrous": 1.13
+  },
+  "apexInside": {
+   "heart": 1,
+   "surf_sternocostal": 0.58,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.04,
+   "pericardium_parietal_serous": 1.1,
+   "pericardium_fibrous": 1.13
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "heart",
+   "ra_auricle",
+   "surf_sternocostal",
+   "pericardium_visceral_serous",
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "asc_aorta",
+  "key": "asc_aorta",
+  "end": "end",
+  "r": 1.44,
+  "discInside": {
+   "r_pa": 1,
+   "aortic_arch": 1
+  },
+  "apexInside": {
+   "svc": 1
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "r_pa",
+   "aortic_arch"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "aortic_arch",
+  "key": "aortic_arch",
+  "end": "start",
+  "r": 1.3,
+  "discInside": {
+   "r_pa": 1,
+   "asc_aorta": 1
+  },
+  "apexInside": {
+   "border_superior": 0.54,
+   "asc_aorta": 1,
+   "pericardial_cavity": 1.01,
+   "pericardium_parietal_serous": 1.05,
+   "pericardium_fibrous": 1.07
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "r_pa",
+   "asc_aorta"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "aortic_arch",
+  "key": "aortic_arch",
+  "end": "end",
+  "r": 1.24,
+  "discInside": {
+   "trachea_bronchi": 1,
+   "desc_aorta": 1
+  },
+  "apexInside": {
+   "desc_aorta": 1
+  },
+  "exposedIn": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   14,
+   15,
+   16
+  ],
+  "hiddenBy": [
+   "trachea_bronchi",
+   "desc_aorta"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "lig_arteriosum",
+  "key": "lig_arteriosum",
+  "end": "start",
+  "r": 0.16,
+  "discInside": {
+   "l_pa": 1,
+   "lung_l": 0.98
+  },
+  "apexInside": {
+   "l_pa": 1,
+   "lung_l": 0.98
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "l_pa",
+   "lung_l"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "lig_arteriosum",
+  "key": "lig_arteriosum",
+  "end": "end",
+  "r": 0.16,
+  "discInside": {
+   "aortic_arch": 1,
+   "desc_aorta": 1
+  },
+  "apexInside": {
+   "aortic_arch": 1,
+   "desc_aorta": 1
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "aortic_arch",
+   "desc_aorta"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "svc",
+  "key": "svc",
+  "end": "start",
+  "r": 1,
+  "discInside": {},
+  "apexInside": {},
+  "exposedIn": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   14,
+   15,
+   16
+  ],
+  "hiddenBy": [],
+  "apexProtrudes": 0
+ },
+ {
+  "id": "svc",
+  "key": "svc",
+  "end": "end",
+  "r": 1.1400000000000001,
+  "discInside": {
+   "heart": 1,
+   "ra": 0.62,
+   "surf_sternocostal": 0.53,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.02,
+   "pericardium_parietal_serous": 1.05,
+   "pericardium_fibrous": 1.07
+  },
+  "apexInside": {
+   "heart": 1,
+   "ra": 0.51,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.02,
+   "pericardium_parietal_serous": 1.07,
+   "pericardium_fibrous": 1.09
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "heart",
+   "ra",
+   "surf_sternocostal",
+   "pericardium_visceral_serous",
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "ivc",
+  "key": "ivc",
+  "end": "start",
+  "r": 1.2,
+  "discInside": {},
+  "apexInside": {
+   "diaphragm": 0.56
+  },
+  "exposedIn": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   14,
+   15,
+   16
+  ],
+  "hiddenBy": [],
+  "apexProtrudes": 0
+ },
+ {
+  "id": "ivc",
+  "key": "ivc",
+  "end": "end",
+  "r": 1.26,
+  "discInside": {
+   "heart": 1,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.08,
+   "pericardium_parietal_serous": 1.19,
+   "pericardium_fibrous": 1.23
+  },
+  "apexInside": {
+   "heart": 1,
+   "surf_sternocostal": 0.5,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.05,
+   "pericardium_parietal_serous": 1.14,
+   "pericardium_fibrous": 1.17
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "heart",
+   "pericardium_visceral_serous",
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "pulm_veins_r#1",
+  "key": "pulm_veins_r",
+  "end": "start",
+  "r": 0.58,
+  "discInside": {
+   "lung_r": 0.98
+  },
+  "apexInside": {
+   "lung_r": 0.98
+  },
+  "exposedIn": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   14,
+   15,
+   16
+  ],
+  "hiddenBy": [
+   "lung_r"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "pulm_veins_r#1",
+  "key": "pulm_veins_r",
+  "end": "end",
+  "r": 0.6399999999999999,
+  "discInside": {
+   "heart": 1,
+   "la": 0.71,
+   "base": 0.68,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.01,
+   "pericardium_parietal_serous": 1.03,
+   "pericardium_fibrous": 1.05
+  },
+  "apexInside": {
+   "heart": 1,
+   "la": 0.7,
+   "base": 0.68,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.01,
+   "pericardium_parietal_serous": 1.04,
+   "pericardium_fibrous": 1.06
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "heart",
+   "la",
+   "pericardium_visceral_serous",
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous",
+   "base"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "pulm_veins_r#2",
+  "key": "pulm_veins_r",
+  "end": "start",
+  "r": 0.58,
+  "discInside": {
+   "lung_r": 0.98
+  },
+  "apexInside": {
+   "lung_r": 0.98
+  },
+  "exposedIn": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   14,
+   15,
+   16
+  ],
+  "hiddenBy": [
+   "lung_r"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "pulm_veins_r#2",
+  "key": "pulm_veins_r",
+  "end": "end",
+  "r": 0.6399999999999999,
+  "discInside": {
+   "heart": 1,
+   "la": 0.63,
+   "base": 0.65,
+   "surf_left_pulmonary": 0.53,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.02,
+   "pericardium_parietal_serous": 1.08,
+   "pericardium_fibrous": 1.11
+  },
+  "apexInside": {
+   "heart": 1,
+   "la": 0.63,
+   "base": 0.64,
+   "surf_left_pulmonary": 0.58,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.03,
+   "pericardium_parietal_serous": 1.11,
+   "pericardium_fibrous": 1.15
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "heart",
+   "la",
+   "surf_left_pulmonary",
+   "pericardium_visceral_serous",
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous",
+   "base"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "pulm_veins_l#1",
+  "key": "pulm_veins_l",
+  "end": "start",
+  "r": 0.58,
+  "discInside": {
+   "lung_l": 0.98
+  },
+  "apexInside": {
+   "lung_l": 0.98
+  },
+  "exposedIn": [
+   3,
+   4,
+   5,
+   6,
+   14,
+   15,
+   16
+  ],
+  "hiddenBy": [
+   "lung_l"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "pulm_veins_l#1",
+  "key": "pulm_veins_l",
+  "end": "end",
+  "r": 0.6399999999999999,
+  "discInside": {
+   "heart": 1,
+   "la": 0.75,
+   "base": 0.68,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.01,
+   "pericardium_parietal_serous": 1.03,
+   "pericardium_fibrous": 1.05
+  },
+  "apexInside": {
+   "heart": 1,
+   "la": 0.75,
+   "base": 0.57,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.01,
+   "pericardium_parietal_serous": 1.03,
+   "pericardium_fibrous": 1.04
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "heart",
+   "la",
+   "pericardium_visceral_serous",
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous",
+   "base"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "pulm_veins_l#2",
+  "key": "pulm_veins_l",
+  "end": "start",
+  "r": 0.58,
+  "discInside": {
+   "lung_l": 0.98
+  },
+  "apexInside": {
+   "lung_l": 0.98
+  },
+  "exposedIn": [
+   3,
+   4,
+   5,
+   6,
+   14,
+   15,
+   16
+  ],
+  "hiddenBy": [
+   "lung_l"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "pulm_veins_l#2",
+  "key": "pulm_veins_l",
+  "end": "end",
+  "r": 0.6399999999999999,
+  "discInside": {
+   "heart": 1,
+   "la": 0.67,
+   "base": 0.65,
+   "surf_left_pulmonary": 0.59,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.02,
+   "pericardium_parietal_serous": 1.08,
+   "pericardium_fibrous": 1.11
+  },
+  "apexInside": {
+   "heart": 1,
+   "la": 0.6,
+   "base": 0.57,
+   "pericardium_visceral_serous": 1,
+   "pericardial_cavity": 1.03,
+   "pericardium_parietal_serous": 1.08,
+   "pericardium_fibrous": 1.11
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "heart",
+   "la",
+   "surf_left_pulmonary",
+   "pericardium_visceral_serous",
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous",
+   "base"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "trachea",
+  "key": "trachea_bronchi",
+  "end": "start",
+  "r": 0.95,
+  "discInside": {},
+  "apexInside": {},
+  "exposedIn": [
+   1,
+   2
+  ],
+  "hiddenBy": [],
+  "apexProtrudes": 0
+ },
+ {
+  "id": "trachea",
+  "key": "trachea_bronchi",
+  "end": "end",
+  "r": 0.95,
+  "discInside": {},
+  "apexInside": {},
+  "exposedIn": [
+   1,
+   2
+  ],
+  "hiddenBy": [],
+  "apexProtrudes": 0
+ },
+ {
+  "id": "bronchus_r",
+  "key": "trachea_bronchi",
+  "end": "start",
+  "r": 0.74,
+  "discInside": {},
+  "apexInside": {
+   "aortic_arch": 1
+  },
+  "exposedIn": [
+   1,
+   2
+  ],
+  "hiddenBy": [],
+  "apexProtrudes": 0
+ },
+ {
+  "id": "bronchus_r",
+  "key": "trachea_bronchi",
+  "end": "end",
+  "r": 0.64,
+  "discInside": {
+   "lung_r": 0.98
+  },
+  "apexInside": {
+   "lung_r": 0.98
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "lung_r"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "bronchus_l",
+  "key": "trachea_bronchi",
+  "end": "start",
+  "r": 0.66,
+  "discInside": {},
+  "apexInside": {},
+  "exposedIn": [
+   1,
+   2
+  ],
+  "hiddenBy": [],
+  "apexProtrudes": 0
+ },
+ {
+  "id": "bronchus_l",
+  "key": "trachea_bronchi",
+  "end": "end",
+  "r": 0.5800000000000001,
+  "discInside": {
+   "lung_l": 0.98
+  },
+  "apexInside": {
+   "lung_l": 0.98
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "lung_l"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "oesophagus",
+  "key": "oesophagus",
+  "end": "start",
+  "r": 0.8,
+  "discInside": {},
+  "apexInside": {},
+  "exposedIn": [
+   1,
+   2
+  ],
+  "hiddenBy": [],
+  "apexProtrudes": 0
+ },
+ {
+  "id": "oesophagus",
+  "key": "oesophagus",
+  "end": "end",
+  "r": 0.8,
+  "discInside": {
+   "desc_aorta": 1
+  },
+  "apexInside": {
+   "diaphragm": 0.63,
+   "desc_aorta": 1
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "desc_aorta"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "desc_aorta",
+  "key": "desc_aorta",
+  "end": "start",
+  "r": 1.16,
+  "discInside": {
+   "aortic_arch": 1
+  },
+  "apexInside": {},
+  "exposedIn": [],
+  "hiddenBy": [
+   "aortic_arch"
+  ],
+  "apexProtrudes": true
+ },
+ {
+  "id": "desc_aorta",
+  "key": "desc_aorta",
+  "end": "end",
+  "r": 1.16,
+  "discInside": {
+   "oesophagus": 1
+  },
+  "apexInside": {
+   "diaphragm": 0.62
+  },
+  "exposedIn": [],
+  "hiddenBy": [
+   "oesophagus"
+  ],
+  "apexProtrudes": false
+ },
+ {
+  "id": "phrenic_r",
+  "key": "phrenic_r",
+  "end": "start",
+  "r": 0.15,
+  "discInside": {},
+  "apexInside": {},
+  "exposedIn": [
+   1,
+   2,
+   15
+  ],
+  "hiddenBy": [],
+  "apexProtrudes": 0
+ },
+ {
+  "id": "phrenic_r",
+  "key": "phrenic_r",
+  "end": "end",
+  "r": 0.15,
+  "discInside": {},
+  "apexInside": {},
+  "exposedIn": [
+   1,
+   2,
+   15
+  ],
+  "hiddenBy": [],
+  "apexProtrudes": 0
+ },
+ {
+  "id": "phrenic_l",
+  "key": "phrenic_l",
+  "end": "start",
+  "r": 0.15,
+  "discInside": {},
+  "apexInside": {},
+  "exposedIn": [
+   1,
+   2,
+   15
+  ],
+  "hiddenBy": [],
+  "apexProtrudes": 0
+ },
+ {
+  "id": "phrenic_l",
+  "key": "phrenic_l",
+  "end": "end",
+  "r": 0.15,
+  "discInside": {
+   "surf_diaphragmatic": 0.8,
+   "surf_left_pulmonary": 0.68,
+   "pericardial_cavity": 1.01,
+   "pericardium_parietal_serous": 1.02,
+   "pericardium_fibrous": 1.03
+  },
+  "apexInside": {
+   "pericardial_cavity": 1.01,
+   "pericardium_parietal_serous": 1.02,
+   "pericardium_fibrous": 1.03
+  },
+  "exposedIn": [
+   1,
+   2
+  ],
+  "hiddenBy": [
+   "pericardial_cavity",
+   "pericardium_parietal_serous",
+   "pericardium_fibrous"
+  ],
+  "apexProtrudes": false
+ }
+]

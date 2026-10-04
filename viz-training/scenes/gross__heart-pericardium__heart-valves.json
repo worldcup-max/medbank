@@ -12,7 +12,16 @@
  "status": "candidate",
  "provenance": {
   "author": "task",
-  "authored_at": "2026-09-10"
+  "authored_at": "2026-09-10",
+  "corrected_at": "2026-09-29T22:52:00Z",
+  "corrected_by": "the model3d review task, round 3",
+  "corrections": [
+   "models3d/heart-valves.js: the two mitral papillary muscles were transposed — the muscle named anterolateral sat at the postero-medial commissure (0.47 cm posterior of the annular centre) and vice versa. th values swapped so each name sits where its name says. The three right-ventricular muscles were checked at the same time and were already correct.",
+   "beats 4 and 5: SHOW_STRUCTURE \"Tension apparatus\" pulled in papillary_rv and chordae_tricuspid, so a beat narrating the mitral valve alone put five papillary muscles and an orphaned set of right-sided cords on screen. Replaced with the three mitral keys by name.",
+   "beat 9: COMPARE_STRUCTURES listed only the tricuspid and aortic annuli, and because compare REPLACES the subject set that isolate established, the player framed two rings under a narration that ranks four. All four annuli are now compared.",
+   "2026-09-29, review round 2: (a) models3d/heart-valves.js gains acceptance row AD, which pins which mitral papillary muscle is which - the transposition review round 1 corrected was held by two `th` values and by nothing else, and a mutation test confirms all 27 earlier rows passed with the two muscles swapped back. (b) gaps[] now records that the muscle beat 2 names between the aortic and pulmonary valves is not modelled, with the measured root-to-root overlap. Nothing else in this scene was changed.",
+   "2026-09-29, review round 3: two FALSE CAUSAL CLAUSES in the narration, both outside the escalated question and both costing a student marks if reproduced. (a) Beat 7 explained M1-before-T1 as 'the left ventricle reaches its atrial pressure first because it starts from a higher one'. Read either way that argument fails: left atrial pressure is the HIGHER of the two atrial pressures, so a higher target makes the crossover later, not earlier. Replaced with the standard account - earlier left-sided activation plus a far steeper dP/dt, which beats the higher left atrial pressure. (b) Beat 8 said the aortic valve was 'slammed by the recoil of the stretched aorta rather than by anything the ventricle did'. The falling ventricular pressure is half of the gradient that shuts it, and beat 3 of this same scene already teaches correctly that every valve here 'is driven entirely by the pressure difference across it', so the clause contradicted its own scene. Replaced with the gradient reversal, keeping aortic recoil as what holds the downstream pressure up. Geometry, ops, cameras, claims and beat instants are untouched by both edits; no claim string quoted either clause."
+  ]
  },
  "provider": {
   "primary": "procedural",
@@ -536,6 +545,95 @@
     "right ventricle"
    ],
    "narration": "Drawn only so the valves have somewhere to be. This scene is about what hangs in these chambers, not about the chambers."
+  },
+  {
+   "key": "mitral_anterior_cut",
+   "name": "Anterior mitral leaflet, in long-axis section",
+   "label": "Anterior leaflet - sectioned",
+   "role": "primary",
+   "group": "Long-axis section",
+   "layer": "fascia",
+   "color": "#efe6d2",
+   "refs": {
+    "procedural": "heart-valves#mitral_anterior_cut"
+   },
+   "terms": [
+    "A2",
+    "long-axis section",
+    "parasternal long axis",
+    "tenting"
+   ],
+   "narration": "The anterior leaflet cut through its middle. The cut runs through the centre of the valve at right angles to the line joining the two commissures - the plane an echocardiographer measures a mitral valve in - and the half nearer you has been taken away, so what you are looking at is the cut face and everything behind it."
+  },
+  {
+   "key": "mitral_posterior_cut",
+   "name": "Posterior mitral leaflet, in long-axis section",
+   "label": "Posterior leaflet - sectioned",
+   "role": "primary",
+   "group": "Long-axis section",
+   "layer": "fascia",
+   "color": "#e7dcc2",
+   "refs": {
+    "procedural": "heart-valves#mitral_posterior_cut"
+   },
+   "terms": [
+    "P2",
+    "long-axis section",
+    "coaptation"
+   ],
+   "narration": "The posterior leaflet in the same cut. Far shorter than its partner, and it meets it well over on this side of the ring rather than in the middle - which is why the closure line of a mitral valve is not a diameter but a curve pushed back towards the posterior wall."
+  },
+  {
+   "key": "annulus_mitral_cut",
+   "name": "Mitral annulus, sectioned half",
+   "label": "Annulus - sectioned half",
+   "role": "part",
+   "group": "Long-axis section",
+   "layer": "fascia",
+   "color": "#d8c893",
+   "refs": {
+    "procedural": "heart-valves#annulus_mitral_cut"
+   },
+   "terms": [
+    "mitral annulus"
+   ],
+   "narration": "The far half of the ring. Its two ends are the points where the cut crossed it, and they are the two hinges the leaflets in this picture hang from."
+  },
+  {
+   "key": "chordae_mitral_cut",
+   "name": "Chordae tendineae, sectioned half",
+   "label": "Chordae - sectioned half",
+   "role": "part",
+   "group": "Long-axis section",
+   "layer": "fascia",
+   "color": "#f3edda",
+   "refs": {
+    "procedural": "heart-valves#chordae_mitral_cut"
+   },
+   "terms": [
+    "chordae tendineae",
+    "marginal chordae"
+   ],
+   "narration": "Only the cords belonging to the half that survived the cut. A cord with one end in the half that was removed is not drawn, because it would hang in the space that half used to occupy."
+  },
+  {
+   "key": "annular_plane_line",
+   "name": "The annular plane, seen edge-on",
+   "label": "Annular plane",
+   "role": "part",
+   "group": "Long-axis section",
+   "layer": "fascia",
+   "color": "#ffcf5c",
+   "refs": {
+    "procedural": "heart-valves#annular_plane_line"
+   },
+   "terms": [
+    "annular plane",
+    "coaptation depth",
+    "tenting height",
+    "mitral tenting"
+   ],
+   "narration": "Not tissue - the annular plane itself, drawn as the line it becomes when you look along it. Coaptation depth is measured from this line straight down to the point where the leaflets meet, and it is one of the numbers an echocardiogram reports."
   }
  ],
  "views": [
@@ -546,18 +644,64 @@
    "ops": [
     {
      "op": "SET_STAGE",
-     "t": 0.8
+     "t": 0.72
     },
     {
      "op": "SHOW_STRUCTURE",
      "target": "*"
     },
     {
+     "op": "HIDE_STRUCTURE",
+     "target": "Long-axis section"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Arterial roots"
+    },
+    {
      "op": "ROTATE_TO_VIEW",
      "view": "anterior"
     }
    ],
-   "narration": "All four valves lie in one oblique plane at the base of the ventricles - the plane of the fibrous skeleton. Everything above it is atrium or great artery; everything below it is ventricle. The two atrioventricular valves hang down into the ventricles on cords; the two arterial valves stand up into their roots on nothing at all. That difference in construction is the whole difference in how they work, and it is the first thing to fix before any of the names go in."
+   "narration": "All four valves lie in one oblique plane at the base of the ventricles - the plane of the fibrous skeleton. Everything above it is atrium or great artery; everything below it is ventricle. The two atrioventricular valves hang down into the ventricles on cords; the two arterial valves stand up in the mouths of their arteries on nothing at all - no cords, no muscle. That difference in construction is the whole difference in how they work, and it is the first thing to fix before any of the names go in. The two arterial roots are taken off here so that the cusps inside them can be seen at all; beat 6 puts one of them back.",
+   "claims": [
+    {
+     "id": "b1-mitral-open",
+     "claim": "the mitral valve hangs open into the ventricle",
+     "measure": "closure.mitral",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "b1-tricuspid-open",
+     "claim": "and so does the tricuspid",
+     "measure": "closure.tricuspid",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "b1-aortic-shut",
+     "claim": "the aortic valve stands shut in its root",
+     "measure": "closure.aortic",
+     "op": "atLeast",
+     "value": 0.98
+    },
+    {
+     "id": "b1-pulmonary-shut",
+     "claim": "and so does the pulmonary",
+     "measure": "closure.pulmonary",
+     "op": "atLeast",
+     "value": 0.98
+    },
+    {
+     "id": "b1-phase",
+     "claim": "this is ventricular filling",
+     "measure": "phase",
+     "op": "equals",
+     "value": "filling"
+    }
+   ],
+   "negative_displacement": 0.09
   },
   {
    "mode": "cross_section",
@@ -566,16 +710,15 @@
    "ops": [
     {
      "op": "SET_STAGE",
-     "t": 0.8
+     "t": 0.72
     },
     {
      "op": "SHOW_STRUCTURE",
      "target": "*"
     },
     {
-     "op": "CROSS_SECTION",
-     "axis": "y",
-     "offset": 0.15
+     "op": "HIDE_STRUCTURE",
+     "target": "Long-axis section"
     },
     {
      "op": "HIDE_STRUCTURE",
@@ -590,7 +733,45 @@
      "view": "superior"
     }
    ],
-   "narration": "Now look straight down on that plane with the atria taken off - the view every question about valve relations is really asking about. The aortic valve is the keystone: it sits in the middle, wedged against all three of the others. The pulmonary valve is furthest forward and highest, separated from the aortic by muscle. The mitral is furthest back, the tricuspid to the right. At this instant the heart is filling, so the two atrioventricular valves are open and the two arterial valves are shut, each showing the three-pointed line where its cusps meet."
+   "narration": "Now look straight down on that plane with the atria taken off - the view every question about valve relations is really asking about. The aortic valve is the keystone: it sits in the middle, wedged against all three of the others. The pulmonary valve is furthest forward and highest, separated from the aortic by muscle. The mitral is furthest back, the tricuspid to the right. At this instant the heart is filling, so the two atrioventricular valves are open and the two arterial valves are shut, each showing the three-pointed line where its cusps meet.",
+   "claims": [
+    {
+     "id": "b2-filling",
+     "claim": "the heart is filling at this instant",
+     "measure": "phase",
+     "op": "equals",
+     "value": "filling"
+    },
+    {
+     "id": "b2-av-open-m",
+     "claim": "so the mitral valve is open",
+     "measure": "closure.mitral",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "b2-av-open-t",
+     "claim": "and the tricuspid is open",
+     "measure": "closure.tricuspid",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "b2-sl-shut-a",
+     "claim": "the aortic valve shows its three-pointed closure line",
+     "measure": "closure.aortic",
+     "op": "atLeast",
+     "value": 0.98
+    },
+    {
+     "id": "b2-sl-shut-p",
+     "claim": "and so does the pulmonary",
+     "measure": "closure.pulmonary",
+     "op": "atLeast",
+     "value": 0.98
+    }
+   ],
+   "negative_displacement": 0.09
   },
   {
    "mode": "cross_section",
@@ -606,9 +787,8 @@
      "target": "*"
     },
     {
-     "op": "CROSS_SECTION",
-     "axis": "y",
-     "offset": 0.15
+     "op": "HIDE_STRUCTURE",
+     "target": "Long-axis section"
     },
     {
      "op": "HIDE_STRUCTURE",
@@ -623,7 +803,45 @@
      "view": "superior"
     }
    ],
-   "narration": "The same section a fifth of a second later, mid-ejection. Every one of the four has reversed: the arterial valves stand wide open and the atrioventricular valves are shut lids. Nothing pulled them. There is no muscle in a valve leaflet and no nerve to one; each of the four is driven entirely by the pressure difference across it, and every murmur in the syllabus is a valve that has stopped obeying that."
+   "narration": "The same section a fifth of a second later, mid-ejection. Every one of the four has reversed: the arterial valves stand wide open and the atrioventricular valves are shut lids. Nothing pulled them. There is no muscle in a valve leaflet and no nerve to one; each of the four is driven entirely by the pressure difference across it, and every murmur in the syllabus is a valve that has stopped obeying that.",
+   "claims": [
+    {
+     "id": "b3-ejection",
+     "claim": "a fifth of a second later, mid-ejection",
+     "measure": "phase",
+     "op": "equals",
+     "value": "ejection"
+    },
+    {
+     "id": "b3-aortic-open",
+     "claim": "the aortic valve stands wide open",
+     "measure": "closure.aortic",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "b3-pulmonary-open",
+     "claim": "and so does the pulmonary",
+     "measure": "closure.pulmonary",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "b3-mitral-shut",
+     "claim": "the mitral valve is a shut lid",
+     "measure": "closure.mitral",
+     "op": "atLeast",
+     "value": 0.98
+    },
+    {
+     "id": "b3-tricuspid-shut",
+     "claim": "and so is the tricuspid",
+     "measure": "closure.tricuspid",
+     "op": "atLeast",
+     "value": 0.98
+    }
+   ],
+   "negative_displacement": 0.15
   },
   {
    "mode": "mechanism",
@@ -632,15 +850,27 @@
    "ops": [
     {
      "op": "SET_STAGE",
-     "t": 0.8
+     "t": 0.72
     },
     {
-     "op": "ISOLATE_REGION",
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
      "target": "Mitral valve"
     },
     {
      "op": "SHOW_STRUCTURE",
-     "target": "Tension apparatus"
+     "target": "chordae_mitral"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pap_anterolateral"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pap_posteromedial"
     },
     {
      "op": "SHOW_STRUCTURE",
@@ -651,35 +881,114 @@
      "view": "lateral"
     }
    ],
-   "narration": "Filling. The two leaflets have swung apart into a funnel, and the chordae are looped and slack - they are carrying nothing. Notice how unequal the movement is: the long anterior leaflet does nearly all of it and the short posterior one barely leaves the annulus. Notice too where the leaflets stop. They are not stopped by muscle; they are stopped by the cords going tight, and a valve whose cords were longer would open further and shut worse."
+   "narration": "Filling. The two leaflets have swung apart into a funnel, and the chordae are looped and slack - they are carrying nothing. Notice how unequal the movement is: the long anterior leaflet does nearly all of it - six times as far as its partner - and the short posterior one barely leaves the annulus. Notice too where the leaflets stop. They are not stopped by muscle; they are stopped by the cords going tight, and a valve whose cords were longer would open further and shut worse.",
+   "claims": [
+    {
+     "id": "b4-filling",
+     "claim": "filling",
+     "measure": "phase",
+     "op": "equals",
+     "value": "filling"
+    },
+    {
+     "id": "b4-mitral-open",
+     "claim": "the mitral valve is open",
+     "measure": "closure.mitral",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "b4-cords-slack",
+     "claim": "the chordae are looped and slack - at least one bows 1 mm or more out of line",
+     "measure": "sag.mitral",
+     "op": "atLeast",
+     "value": 0.1
+    },
+    {
+     "id": "b4-anterior-travels",
+     "claim": "the long anterior leaflet travels far from where it sits when shut",
+     "measure": "travel.mitral.mitral_anterior",
+     "op": "atLeast",
+     "value": 1.5
+    },
+    {
+     "id": "b4-posterior-barely",
+     "claim": "the short posterior one barely leaves the annulus",
+     "measure": "travel.mitral.mitral_posterior",
+     "op": "atMost",
+     "value": 0.8
+    }
+   ],
+   "negative_displacement": 0.09
   },
   {
-   "mode": "mechanism",
+   "mode": "cross_section",
    "beat": 5,
-   "title": "The mitral valve shut - the cords go straight",
+   "title": "The mitral valve shut, cut in its long axis - how far below the ring the leaflets meet",
    "ops": [
     {
      "op": "SET_STAGE",
-     "t": 0.35
+     "t": 0.4
     },
     {
-     "op": "ISOLATE_REGION",
-     "target": "Mitral valve"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "Tension apparatus"
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
     },
     {
      "op": "SHOW_STRUCTURE",
-     "target": "annulus_mitral"
+     "target": "Long-axis section"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pap_posteromedial"
     },
     {
      "op": "ROTATE_TO_VIEW",
-     "view": "lateral"
+     "view": "anterior"
     }
    ],
-   "narration": "The same valve at mid-systole, holding back 120 mmHg. Every cord is now dead straight, and the two leaflets meet along a line that sits a few millimetres BELOW the annulus and well towards the posterior side - both leaflets have used up the same fraction of their length getting there. That depth is measurable in a real patient, and it is diagnostic: about half a centimetre is normal, and much more than a centimetre means the leaflets are being tethered down by a dilated ventricle. Give the cords a few extra millimetres instead and the leaflet rides up past the annulus into the atrium, which is prolapse."
+   "narration": "The same valve at mid-systole, holding back 120 mmHg - and this time cut through, in the plane that runs through the middle of both leaflets at right angles to the commissures, with the near half taken away. The gold line is the annular plane seen edge-on. Every cord is dead straight. And now you can see the thing the last view could not show you: the two leaflets do not meet AT the ring, they meet about seven millimetres BELOW it, and much nearer its posterior end than its anterior one - both leaflets have used up the same fraction of their length getting there. That depth is measurable in a real patient and it is diagnostic: between half a centimetre and a centimetre is normal, and much more than that means the leaflets are being tethered down by a dilated ventricle. Give the cords a few extra millimetres instead and the leaflet rides up past the ring into the atrium, which is prolapse.",
+   "claims": [
+    {
+     "id": "b5-midsystole",
+     "claim": "mid-systole",
+     "measure": "phase",
+     "op": "equals",
+     "value": "ejection"
+    },
+    {
+     "id": "b5-mitral-shut",
+     "claim": "the valve is shut",
+     "measure": "closure.mitral",
+     "op": "atLeast",
+     "value": 0.98
+    },
+    {
+     "id": "b5-cords-taut",
+     "claim": "every cord is dead straight",
+     "measure": "sag.mitral",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "b5-depth",
+     "claim": "the leaflets meet a few millimetres BELOW the annular plane",
+     "measure": "section.depth_cm",
+     "op": "between",
+     "value": [
+      0.4,
+      1.0
+     ]
+    },
+    {
+     "id": "b5-posterior",
+     "claim": "and much nearer the posterior end of the annular line than the anterior one",
+     "measure": "section.posterior_frac",
+     "op": "atLeast",
+     "value": 0.25
+    }
+   ],
+   "negative_displacement": 0.15
   },
   {
    "mode": "mechanism",
@@ -691,16 +1000,28 @@
      "t": 0.4
     },
     {
-     "op": "ISOLATE_REGION",
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
      "target": "Aortic valve"
     },
     {
      "op": "SHOW_STRUCTURE",
-     "target": "Arterial roots"
+     "target": "aortic_root"
     },
     {
      "op": "SHOW_STRUCTURE",
      "target": "annulus_aortic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ostium_left"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ostium_right"
     },
     {
      "op": "ROTATE_TO_VIEW",
@@ -708,10 +1029,37 @@
     },
     {
      "op": "HIGHLIGHT_STRUCTURE",
-     "target": "aortic_root"
+     "target": "Aortic valve"
     }
    ],
-   "narration": "Down the open aortic valve at peak ejection. The three cusps have laid back against the wall, and where they have gone is into the three pouches of the root. This is not a detail of shape: a cusp is a sheet of collagen of fixed area, and folding it out of the way of a wide orifice requires more room than a straight tube has - about a fifth more radius, which is what the sinuses provide. Two of the three have a coronary artery leaving them, and the open cusp lies beside the opening rather than across it. Both facts come from the same piece of geometry."
+   "narration": "Down the open aortic valve at peak ejection. The three cusps have laid back against the wall, and where they have gone is into the three pouches of the root. This is not a detail of shape: a cusp is a sheet of collagen of fixed area, and folding it out of the way of a wide orifice requires more room than a straight tube has - about a fifth more radius, which is what the sinuses provide. Two of the three have a coronary artery leaving them, and the open cusp lies beside the opening rather than across it. Both facts come from the same piece of geometry.",
+   "claims": [
+    {
+     "id": "b6-ejection",
+     "claim": "peak ejection",
+     "measure": "phase",
+     "op": "equals",
+     "value": "ejection"
+    },
+    {
+     "id": "b6-aortic-open",
+     "claim": "the aortic valve is open",
+     "measure": "closure.aortic",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "b6-sinus",
+     "claim": "a cusp needs about a fifth more radius than a straight tube to lay back into",
+     "measure": "sinus.aortic",
+     "op": "between",
+     "value": [
+      1.15,
+      1.4
+     ]
+    }
+   ],
+   "negative_displacement": 0.15
   },
   {
    "mode": "mechanism",
@@ -720,11 +1068,15 @@
    "ops": [
     {
      "op": "SET_STAGE",
-     "t": 0.222
+     "t": 0.2475
     },
     {
      "op": "SHOW_STRUCTURE",
      "target": "*"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Long-axis section"
     },
     {
      "op": "HIDE_STRUCTURE",
@@ -746,7 +1098,44 @@
      ]
     }
    ],
-   "narration": "Caught between the two components of the first heart sound. The mitral has already shut; the tricuspid, twenty milliseconds behind it, has not. The order is not arbitrary - the left ventricle reaches its atrial pressure first because it starts from a higher one - and that gap is what you are hearing when S1 sounds split. The arterial valves are both still closed: for these few hundredths of a second the ventricle is a sealed box, building pressure and moving nothing."
+   "narration": "Caught between the two components of the first heart sound. The mitral has already shut; the tricuspid, twenty milliseconds behind it, has not. The order is not arbitrary - the left ventricle is activated a fraction earlier than the right and its pressure climbs far more steeply, so it overtakes its own atrium first even though left atrial pressure is the higher of the two to beat - and that gap is what you are hearing when S1 sounds split. The arterial valves are both still closed: for these few hundredths of a second the ventricle is a sealed box, building pressure and moving nothing.",
+   "claims": [
+    {
+     "id": "b7-ivc",
+     "claim": "caught inside isovolumetric contraction",
+     "measure": "phase",
+     "op": "equals",
+     "value": "IVC"
+    },
+    {
+     "id": "b7-mitral-shut",
+     "claim": "the mitral has already shut",
+     "measure": "closure.mitral",
+     "op": "atLeast",
+     "value": 0.98
+    },
+    {
+     "id": "b7-tricuspid-not",
+     "claim": "the tricuspid, behind it, has not",
+     "measure": "closure.tricuspid",
+     "op": "atMost",
+     "value": 0.9
+    },
+    {
+     "id": "b7-aortic-shut",
+     "claim": "the aortic valve is still closed",
+     "measure": "closure.aortic",
+     "op": "atLeast",
+     "value": 0.98
+    },
+    {
+     "id": "b7-pulmonary-shut",
+     "claim": "and so is the pulmonary",
+     "measure": "closure.pulmonary",
+     "op": "atLeast",
+     "value": 0.98
+    }
+   ]
   },
   {
    "mode": "mechanism",
@@ -755,7 +1144,7 @@
    "ops": [
     {
      "op": "SET_STAGE",
-     "t": 0.565
+     "t": 0.598
     },
     {
      "op": "SHOW_STRUCTURE",
@@ -763,7 +1152,15 @@
     },
     {
      "op": "HIDE_STRUCTURE",
+     "target": "Long-axis section"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
      "target": "Context"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "Arterial roots"
     },
     {
      "op": "ROTATE_TO_VIEW",
@@ -777,7 +1174,40 @@
      ]
     }
    ],
-   "narration": "The mirror of the last beat, at the other end of systole. The aortic valve has shut - slammed by the recoil of the stretched aorta rather than by anything the ventricle did - and the pulmonary valve, thirty milliseconds later, is still closing. That is the physiological splitting of the second sound, and inspiration widens it by holding more blood in the right ventricle for a moment longer. A split that does not move with breathing is the abnormal one."
+   "narration": "The mirror of the last beat, at the other end of systole. The aortic valve has shut - and nothing pulled it: the relaxing ventricle's pressure has fallen below the pressure still standing in the aorta, and the recoil of the stretched aortic wall is what holds that pressure up and pushes the blood back against the cusps - and the pulmonary valve, thirty milliseconds later, is still closing. That is the physiological splitting of the second sound, and inspiration widens it by holding more blood in the right ventricle for a moment longer. A split that does not move with breathing is the abnormal one.",
+   "claims": [
+    {
+     "id": "b8-ivr",
+     "claim": "caught inside isovolumetric relaxation",
+     "measure": "phase",
+     "op": "equals",
+     "value": "IVR"
+    },
+    {
+     "id": "b8-aortic-shut",
+     "claim": "the aortic valve has shut",
+     "measure": "closure.aortic",
+     "op": "atLeast",
+     "value": 0.98
+    },
+    {
+     "id": "b8-pulmonary-closing",
+     "claim": "the pulmonary valve is still closing",
+     "measure": "closure.pulmonary",
+     "op": "between",
+     "value": [
+      0.05,
+      0.95
+     ]
+    },
+    {
+     "id": "b8-mitral-shut",
+     "claim": "the mitral valve has not reopened",
+     "measure": "closure.mitral",
+     "op": "atLeast",
+     "value": 0.98
+    }
+   ]
   },
   {
    "mode": "comparison",
@@ -789,7 +1219,11 @@
      "t": 0.4
     },
     {
-     "op": "ISOLATE_REGION",
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
      "target": "Fibrous skeleton"
     },
     {
@@ -800,11 +1234,196 @@
      "op": "COMPARE_STRUCTURES",
      "targets": [
       "annulus_tricuspid",
+      "annulus_mitral",
+      "annulus_pulmonary",
       "annulus_aortic"
      ]
     }
    ],
-   "narration": "The skeleton alone. Tricuspid largest, then mitral, then pulmonary, then aortic - the order runs opposite to the pressure each valve holds, because a ring that has to seal against a high pressure is better off small. Two of the four are proper rings; the two arterial ones are crowns, dipping to the floor of each sinus and rising to each commissure. The collagen tying them together carries the only conducting bridge between atria and ventricles, so this small block of tissue is where valve surgery, aortic root disease and complete heart block all meet."
+   "narration": "The skeleton alone, straight down the axis the four rings share. Tricuspid largest, then mitral, then pulmonary, then aortic - the order runs opposite to the pressure each valve holds, because a ring that has to seal against a high pressure is better off small. From this one camera the four enclosed areas are within a twentieth of their true size, so the comparison you are being asked to make is a comparison you can actually see. The collagen tying them together carries the only conducting bridge between atria and ventricles, so this small block of tissue is where valve surgery, aortic root disease and complete heart block all meet.",
+   "claims": [
+    {
+     "id": "b9-ejection",
+     "claim": "the skeleton, caught at mid-ejection",
+     "measure": "phase",
+     "op": "equals",
+     "value": "ejection"
+    },
+    {
+     "id": "b9-aortic-open",
+     "claim": "with the arterial valves open",
+     "measure": "closure.aortic",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "b9-tricuspid-largest",
+     "claim": "tricuspid largest",
+     "measure": "annulus.tricuspid",
+     "op": "atLeast",
+     "value": 1.7
+    },
+    {
+     "id": "b9-mitral-next",
+     "claim": "then mitral",
+     "measure": "annulus.mitral",
+     "op": "between",
+     "value": [
+      1.4,
+      1.6
+     ]
+    },
+    {
+     "id": "b9-pulmonary-next",
+     "claim": "then pulmonary",
+     "measure": "annulus.pulmonary",
+     "op": "between",
+     "value": [
+      1.15,
+      1.35
+     ]
+    },
+    {
+     "id": "b9-aortic-smallest",
+     "claim": "then aortic, the smallest",
+     "measure": "annulus.aortic",
+     "op": "atMost",
+     "value": 1.2
+    },
+    {
+     "id": "b9-order-screen-tm",
+     "claim": "tricuspid reads larger than mitral FROM THIS CAMERA, not merely in the numbers",
+     "measure": "ringAreaRatio.tricuspid.mitral.superior",
+     "op": "atLeast",
+     "value": 1.08
+    },
+    {
+     "id": "b9-order-screen-mp",
+     "claim": "and mitral larger than pulmonary",
+     "measure": "ringAreaRatio.mitral.pulmonary.superior",
+     "op": "atLeast",
+     "value": 1.08
+    },
+    {
+     "id": "b9-order-screen-pa",
+     "claim": "and pulmonary larger than aortic - the tightest of the three gaps",
+     "measure": "ringAreaRatio.pulmonary.aortic.superior",
+     "op": "atLeast",
+     "value": 1.08
+    },
+    {
+     "id": "b9-areas-are-true",
+     "claim": "each ring keeps essentially all of its enclosed area from here",
+     "measure": "ringArea.aortic.superior",
+     "op": "between",
+     "value": [
+      3.74,
+      4.16
+     ]
+    }
+   ],
+   "negative_displacement": 0.15
+  },
+  {
+   "mode": "comparison",
+   "beat": 10,
+   "title": "The same two, from in front: not rings but crowns",
+   "ops": [
+    {
+     "op": "SET_STAGE",
+     "t": 0.4
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "annulus_aortic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "annulus_pulmonary"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "Aortic valve"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "Pulmonary valve"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "annulus_aortic",
+      "annulus_pulmonary"
+     ]
+    }
+   ],
+   "narration": "The two arterial attachments again, from in front, with the cusps laid back in ejection so nothing hides the line. They are not rings. Each one is a crown: it dips to the floor of each of the three sinuses and rises to a peak at each commissure, about thirteen millimetres from floor to peak. That rise runs along the vessel's own axis, so the view you have just left - looking straight down that axis - could show you almost none of it, and a crown and a flat ring draw the same picture there. That is why this is a beat and not a clause. The consequence is clinical: there is no single plane you can call the aortic valve. Ventricular muscle reaches up between the sinuses, so anyone sizing a root or siting a prosthesis is working to a scalloped line rather than a circle.",
+   "claims": [
+    {
+     "id": "b10-ejection",
+     "claim": "caught in ejection, with the cusps laid back",
+     "measure": "phase",
+     "op": "equals",
+     "value": "ejection"
+    },
+    {
+     "id": "b10-aortic-open",
+     "claim": "the aortic valve is open",
+     "measure": "closure.aortic",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "b10-aortic-rise",
+     "claim": "the aortic attachment rises about thirteen millimetres from sinus floor to commissure",
+     "measure": "crown.aortic",
+     "op": "between",
+     "value": [
+      1.2,
+      1.4
+     ]
+    },
+    {
+     "id": "b10-pulmonary-rise",
+     "claim": "and the pulmonary about the same",
+     "measure": "crown.pulmonary",
+     "op": "between",
+     "value": [
+      1.25,
+      1.45
+     ]
+    },
+    {
+     "id": "b10-aortic-rise-on-screen",
+     "claim": "and from THIS camera that whole rise lies across the screen",
+     "measure": "crownAcross.aortic.anterior",
+     "op": "atLeast",
+     "value": 1.15
+    },
+    {
+     "id": "b10-pulmonary-rise-on-screen",
+     "claim": "for the pulmonary crown too",
+     "measure": "crownAcross.pulmonary.anterior",
+     "op": "atLeast",
+     "value": 1.15
+    },
+    {
+     "id": "b10-hidden-from-above",
+     "claim": "where the superior camera of the view before could show almost none of it",
+     "measure": "crownAcross.aortic.superior",
+     "op": "atMost",
+     "value": 0.3
+    }
+   ],
+   "negative_displacement": 0.15
   }
  ],
  "gaps": [
@@ -817,6 +1436,26 @@
   "THE PLANE-WORD CHECK AND THIS MODEL DISAGREE ABOUT AXES, AND THE SCENE STEPS ROUND IT RATHER THAN TRIPPING IT. model3d-scene-spec-v2 maps a named plane to a CROSS_SECTION axis using the scanned-mesh convention (+X left, +Y posterior, +Z superior). Procedural models are not in that frame - RENDER-STANDARD fixes +y cranial and +z ventral - so on this model a cut level with the valves is normal to y, where the spec table would say z. The two cutting beats therefore describe the section in words (\"look straight down on that plane\") without naming a plane, which keeps a warning that would be a false alarm out of the validator. The disagreement itself is real, is not this scene to fix, and is written up in BUILD-LOG.md.",
   "THE TRICUSPID LEAFLET LENGTHS ARE THE WEAKEST STATED NUMBERS IN THE MODEL. The mitral figures (2.3 cm anterior, 1.3 cm posterior) are quoted consistently; the tricuspid ones are not, and the three used here were chosen to keep the published ORDER (anterior largest) and to give a competent valve. The competence test on the right side is therefore weaker evidence than the one on the left, and it is fair to read the tricuspid closure as qualitative.",
   "THE CHORDAE ARE SINGLE STRANDS, NOT FANS. A real marginal chord branches two or three times before it reaches the free edge, and basal and strut chordae insert into the leaflet body as well as its edge. Only marginal chordae are drawn, one strand each, five per leaflet per muscle. The consequence for the teaching is small - the strand that matters is the marginal one - but a student should not count them.",
-  "NOBODY HAS WALKED THIS SCENE IN THE PLAYER. The proof frames come from a harness that builds the model directly with every layer on at full opacity; the scene sets roles, groups, opacities and hides most structures in most beats. The frames prove the geometry, the timing and that every ref resolves through the real adapter. They are not a preview of what a student sees."
+  "THE SCENE HAS NOW BEEN WALKED AS THE PLAYER DRAWS IT, and that is what this round's biggest repairs came from. viz-training/tools/measure-scene-visibility.mjs composes every beat the way viz3d does - ops applied, per-structure opacity applied, camera refitted to what is left - and on first run it failed SIX of the nine beats. Beat 4, which narrates the mitral leaflets, drew them at 0.000% of the frame; beat 8, which narrates the aortic valve shutting, drew all three aortic cusps at 0.006% or less; beats 6 and 9 drew IDENTICAL pictures in which the four annuli beat 9 exists to compare were at 0.000 and 0.462%. One cause under nearly all of it: the ventricular ghost and the two arterial roots stood in front of whatever the beat was about. All ten beats now pass. WHAT IS STILL NOT DONE: the walk is not viz3d itself - the tool reimplements viz3d's resetState, ops, VIEW_DIR and per-view refit, and says so in its own header. Nobody has loaded this scene into the actual player.",
+  "THE LONG-AXIS SECTION IS HALF A VALVE, NOT A SLICE, AND IT IS SEEN 28.7 DEGREES OFF ITS OWN AXIS. Beat 5 needed a cut because review round 1 found - and this round re-measured by rendering the shut valve from all six of the player's view directions - that the coaptation depth and the posterior offset it narrates are invisible from every one of them: a shut mitral valve is a closed dome and the line where the leaflets meet is inside it. The cut is geometry, in models3d/heart-valves.js section 10a, because the player cannot cut a leaflet (CROSS_SECTION clips only role:'context' structures). What is shown is the FAR HALF of the valve, not a thin slice: a slice would read as a crisper profile but would orphan the chordae and the papillary muscle, which the same beat narrates, whereas a half is a complete dissection in which nothing hangs from nothing. The player's cameras are six fixed axes and the best of them for this cut, `anterior`, looks 28.7 degrees off the commissural axis - measured, and asserted by acceptance row AB. A crisper profile would need an oblique camera op, which is an engine item and is not attempted here.",
+  "CORDS THAT CROSS THE CUT ARE ABSENT, NOT STUMPED. A real section would leave a cut end; chordae_mitral_cut simply omits any cord with one end in the removed half. Of the twenty mitral cords, the ones drawn are those whose leaflet station and whose papillary muscle are both in the surviving half.",
+  "EIGHT OF THE NINE BEATS MOVED THEIR t THIS ROUND, and two of them were wrong rather than merely loose. Beat 7 stood at t=0.222 and narrated 'the mitral has already shut': the mitral was 47 per cent shut and still travelling. Beat 8 stood at t=0.565 and narrated 'the aortic valve has shut... the pulmonary, thirty milliseconds later, is still closing': the aortic was 65 per cent shut and the pulmonary had not begun to close at all. Both are now at instants where their own words are true (0.2475 and 0.598) and both are checked by claims[] at every run of viz-training/tools/check-beat-claims.mjs. The other six moved so that a 40 ms displacement breaks at least one of their claims - beats 1, 2 and 4 from t=0.80, which is diastasis, to 0.72, which is the rapid filling their narration actually describes.",
+  "THE MUSCLE BETWEEN THE AORTIC AND PULMONARY VALVES IS NOT DRAWN, AND BEAT 2 NAMES IT. Beat 2 narrates that the pulmonary valve is 'separated from the aortic by muscle' - the subpulmonary infundibulum, and the reason those two valves have no fibrous continuity while the aortic and mitral do. The fact is correct and it is examinable, but nothing between the two roots is modelled: in every frame they simply touch. MEASURED by review round 2 rather than eyeballed - the two root shells interpenetrate by at most 0.97 mm (mean 0.69 mm over 0.4-0.6 per cent of each root's vertices, all of it between y=2.43 and y=2.80, the upper rims). Two vessels that lie against each other in life, so the overlap is cosmetic rather than a teaching error, but a student is being told about a separation the picture denies. Nothing in the 28 acceptance rows tests inter-structure interpenetration at all, while the sibling cardiac-cycle-pumping model proves LV/RV cavity interpenetration is 0.0 per cent - that asymmetry is the gap, and it is proposed as a standing rule in BUILD-LOG.md rather than patched here.",
+  "THE RIGHT CORONARY OSTIUM PASSES INTO THE PULMONARY ANNULUS, 0.71 mm, AND IT IS THE SAME MISSING MUSCLE AS gaps[13]. Found 2026-09-29 by the interpenetration probe added this round (model section 12b, acceptance row AG) - not by any of the 28 rows, three review rounds or 43 beat claims that preceded it. Measured: 17.7% of the sampled vertices of ostium_right lie inside annulus_pulmonary by five-direction parity ray-cast, to a depth of 0.0713 cm; the ostium's centroid is 0.205 cm from the nearest vertex of the pulmonary crown, and the two tubes have radii 0.115 and 0.085. Round 2's review checked both ostia against the pulmonary ROOT and found 0 of 198 vertices inside, which was true and was not the same question. CAUSE: the subpulmonary infundibulum is not modelled, so the two arterial roots sit against each other (gaps[13]) and the right coronary sinus is therefore right against the pulmonary crown. NOT FIXED, and deliberately not fixed by tuning: shortening the ostium's stub or nudging the pulmonary valve would hide a structural gap behind a moved constant, and every asserted relation between the four valves is solved against stated anatomy. MITIGATED in the scene rather than in the geometry: beat 6, the one beat that shows the coronary ostia, now shows the aortic root alone and no pulmonary structure at all, so no student is shown the fusion. Row AG pins it at its measured size so it cannot grow unnoticed, and a reviewer should rule on whether the infundibulum is now worth building.",
+  "ISOLATE_REGION IS NO LONGER USED ANYWHERE IN THIS SCENE, and that is a decision rather than an oversight. Beats 4, 6 and 9 used it; all three are now HIDE_STRUCTURE '*' followed by named SHOW_STRUCTUREs. Two reasons. (1) engine__isolate-ghosts-its-own-subject is open and escalated: ISOLATE_REGION sets state.only and state.ghosted but never state.hi (viz3d:1906), so paint() draws EVERY structure including the isolated subject at 0.10 opacity. (2) Even with that fixed, the op ghosts rather than hides, and the walk showed that a ghosted ventricular wall in front of a leaflet is the difference between 0.000% and 13.5% of the frame. The scene-level workaround the review forbade - HIGHLIGHTing the isolated keys to paper over the engine bug - was NOT applied; what changed is what each beat asks for. If the engine bug is fixed, whether these three beats should go back to ghosting is an authoring question and not an automatic revert.",
+  "WHAT ROW AG EXCLUDES BY NAME, so that a reader can argue with the partition rather than discover it. Contact inside ONE apparatus is construction: a leaflet is continuous with its own annulus and its own cords in life, and the five *_cut parts are the SAME surfaces as their whole counterparts restricted to one half of the model (leafletSurface is the u0=0,u1=1 case of leafletSurfaceRange), so mitral_posterior sits inside mitral_posterior_cut over 79% of its sampled vertices and always will. chamber_ghost is an envelope whose job is to contain everything, and trigones is the block of collagen that ties all four valves together, so both meet everything by design and are named as shared. What the row actually asserts is that NO TWO SEPARATE VALVES share space, with the two the missing infundibulum costs us allowed at their measured size. Of 91 overlapping pairs at t=0.40, exactly two are cross-apparatus.",
+  "BEAT 9 DRAWS LESS INK THAN THE FRAMING BAR WANTS, AND CARRIES A WAIVER SAYING SO. Its subject is the fibrous skeleton alone - four tubular rings of 0.085-0.095 cm radius and the trigones, spread over about 6 cm - and their pixels come to 7.26% of the frame against MIN_SUBJECT 8%. The camera is not the problem: the subject's bounding box fills 84.4% of the frame, more than beats 1, 4, 5 or 6, all of which pass. box_fill_pct was added to measure-scene-visibility.mjs in this run so the waiver carries a number, and the framing waiver uses the same {view, key, why} mechanism the tool already had for structures. FINDING FOR THE STANDARD, not fixed here: subject_pct measures how much INK a subject lays down, while RENDER-STANDARD's rule - 'the subject fills the frame' - is about the camera being too far away. A wireframe-like subject can never satisfy the first however well it satisfies the second. The two numbers are now both reported; whether the bar should move to the box is a reviewer's call and was deliberately not made by the run whose scene it would let through."
+ ],
+ "visibility_waivers": [
+  {
+   "view": 3,
+   "key": "chordae_mitral",
+   "why": "Beat 3 looks straight down on the valve plane in systole, and the mitral cords hang directly beneath the shut leaflets, so the leaflets are exactly what occludes them - which is the projection, not a defect. The same cords draw 0.50% of beat 2's frame, where the valve is open and the funnel lets the view through; and beats 4 and 5 are the cord beats, at 0.11% and 0.77% with nothing in front of them."
+  },
+  {
+   "view": 9,
+   "key": "__framing__",
+   "why": "FRAMING, not occlusion. Beat 9's subject is the fibrous skeleton alone: four tubular rings of 0.085-0.095 cm radius and the trigones, spread across about 6 cm of the base of the heart. Their ink comes to 7.26% of the frame against a bar of 8%, and no camera that holds all four rings can do better - the number is measuring how THIN the subject is, not how far away the camera is. The camera is in fact closer than most of this scene's: the subject's bounding box fills 84.4% of the frame, against 76.3% on beat 1, 70.6% on beat 6 and 51.7% on beat 4, all of which pass. box_fill_pct was added to the tool in the same run so that this waiver carries a number rather than an assertion. The four rings themselves draw 1.92 (pulmonary), 1.80 (tricuspid), 1.67 (mitral) and 1.48% (aortic) of the frame, and the trigones 0.40 - every one of them between 20 and 96 times MIN_ANY, so nothing in this beat is hard to see. It is a sparse picture, not an unreadable one."
+  }
  ]
 }

@@ -12,7 +12,27 @@
  "status": "candidate",
  "provenance": {
   "author": "task",
-  "authored_at": "2026-09-10"
+  "authored_at": "2026-09-10",
+  "corrected_at": "2026-09-30",
+  "corrected_by": "the review task (did not build it) - round 4",
+  "corrections": [
+   "beat 2 drew SHOW_RELATIONSHIP la -> oesophagus while `la` was hidden (beat 1 hid it and nothing showed it again); `la` is now shown in that beat.",
+   "beat 14 narrates 'with the pericardium and the phrenic nerves removed' and peels layer fascia, but the phrenic nerves had been hidden since beat 3, so the peel removed nothing visible. They are now shown in beat 13, the pericardium beat, where they anatomically belong.",
+   "beat 10 · ROTATE_TO_VIEW posterior -> inferior. The narration already says \"on the diaphragmatic surface\", and measured by id-pick the posterior interventricular sulcus is 0.03% of the lit subject from posterior against 6.00% from inferior — the beat that HIGHLIGHTs it and teaches the crux was pointed at the one camera that cannot see it.",
+   "beats 8-12 · HIDE_STRUCTURE \"Great vessels\" added at beat 8 (beat 13 already re-shows the group). Measured by id-pick, as shares of the lit subject: the four borders together 10.10% -> 15.35%, border_superior 0.03% -> 0.86%, border_right 0.64% -> 0.74%, coronary sulcus 0.62% -> 1.83%, anterior interventricular sulcus 3.03% -> 5.57%. RENDER-STANDARD: a reference must survive the view that uses it.",
+   "beats 4, 11, 12, 13 · narration: removed build-run provenance and changelog text that was being read to the student (\"measured on this model, 88.6% ...\", \"in this model the interventricular septum is solved to ...\", \"SPLIT FROM THE APEX BEAT, 2026-09-29: ... rendered ZERO pixels ...\", \"Built, not just narrated: the trunk's centroid sits 1.87 cm ... the model asserts it on every build\"). These are facts about the model, not about the heart; ARTWORK-STANDARD puts naming and teaching text in the scene, and a measurement of this geometry is neither.",
+   "beat 7 · narration: \"it is the reason the left lung has two lobes where the right has three\" was a false causal claim — the left lung has two lobes because of its lobar bronchial development, not because of the heart. The heart accounts for the cardiac impression, the cardiac notch and the lingula, and the sentence now says that.",
+   "gaps · the claim that \"viz3d's VIEW_DIR has no superior ... named view\" is false and was about to be raised as an engine item. viz3d.js line 2095 defines superior: [0, 1, 0.001]. Only the oblique view is genuinely missing.",
+   "beat 1 HIGHLIGHT_STRUCTURE targeted the GROUP 'The heart', which keysFor() resolves to {heart, apex, base} -- but beat 1 hides `apex` and `base` (they are taught at beats 12 and 13). The highlight named two structures that were not on screen. Retargeted to the key `heart`, which is what the beat is about.",
+   "beat 9 narration said the superior border 'shows as a line a couple of pixels wide' -- render-harness language in text a student reads. Rewritten as 'reads as a hairline rather than as a border'; the anatomical point (edge-on to the anterior outline) is unchanged.",
+   "gaps[11] claimed 'every beat now opens with HIDE_STRUCTURE *'. Beat 1 does not; it uses an exhaustive explicit hide-list. Verified equivalent (20 hidden + 22 shown = the 42 keys), so the behaviour is right and only the claim was wrong. Claim corrected.",
+   "beat 4 · COMPARE_STRUCTURES targets [la, ra] -> [la, lv]. Round-3 finding 4 said beat 4 is not a picture of a heart, and it still was not after the harness camera was fixed: a smooth pink dome filling 84% of the frame with four dark stubs poking in, touching all four edges. The cause is the op, not the camera. viz3d.js subjectBox() frames on state.only when a view compares, so comparing la with ra fitted the frame to the left atrium plus a right-atrial patch that forms almost none of this aspect - a small, one-sided subject - and the camera closed in until the rest of the heart ran off every edge as ghosted context. The pair the beat's OWN narration contrasts is la against lv: 'ABOVE the coronary sulcus you are looking at the BASE... BELOW the groove the back of the heart is the posterior surface of the LEFT VENTRICLE, not atrium: say the base is left atrium, never the back of the heart is left atrium.' ra is named once, to say the right ventricle forms almost none of the view. So the op was comparing a pair the narration does not, and fixing it to the pair it does also gives the frame a subject that spans the whole posterior aspect and reads as a heart.",
+   "ROUND-4 VERIFICATION RUN, 2026-09-30: beat 4's COMPARE_STRUCTURES la/lv replaced by HIGHLIGHT_STRUCTURE on each. COMPARE sets viz3d's state.only, and `la`/`ra` here are surface territory patches, so the per-view camera fitted two thin shells and the beat rendered as a featureless dome. HIGHLIGHT lights the same two structures and leaves the framing on the whole posterior aspect. No narration changed; the beat's claims are unaffected.",
+   "ROUND 4, 2026-09-30 · beat 11 title. The title read 'Behind: the posterior sulcus and the crux' while the beat's camera is INFERIOR - round 3 moved it there (measured: the posterior interventricular sulcus is 0.03% of the lit subject from posterior against 6.00% from inferior) and left the title behind. The narration already says 'on the diaphragmatic surface'. Calling an inferior view 'Behind' teaches the exact confusion beat 4 warns against - 'the base faces backwards ... calling it the bottom is the commonest slip on this structure'. Retitled 'From below'.",
+   "ROUND 4, 2026-09-30 · gaps[3] claimed the transverse and oblique sinuses 'are named in the narration of the median-section beat'. They are named in no narration in this scene. Claim corrected; the requirement to add them before promotion stands.",
+   "ROUND 4, 2026-09-30 · beat 9 narrated five structures none of which was on screen, and the fix is the NARRATION, not the visible set - TRIED BOTH AND MEASURED BOTH. 'Seen from above it is the whole upper aspect - the two atria side by side, with the aorta and the pulmonary trunk emerging between them and the superior vena cava entering on the right', in a beat whose visible set was heart, the two auricles and border_superior. Showing ra, la, asc_aorta, pulm_trunk and svc does put four of the five on screen (asc_aorta 21.7%, pulm_trunk 20.1%, svc 13.6%, la 12.1% of the subject) but ra still renders 0.064% - the right atrium is not visible from above in this model - and it costs the beat its own subject: border_superior falls from 15.907% to 5.288%, a factor of three, in the beat that exists to answer round-2 finding 6. That is a worse picture, so it was reverted. The narration now states the border's composition (the two atria, with the great vessels between them) without telling the student to look at things this view does not draw, and points at beat 14 where they are drawn. Both measurements in the player, viz-training/tools/walk-scene-in-player.mjs. This beat was ADDED in round 2 and no round had checked it against its own narration; it is named in no gap and no built_note.",
+   "ROUND 4, 2026-09-30 · beat 6 · post_iv_sulcus was added and REVERTED, and the reason is a geometric constraint worth recording. The narration hangs on the posterior interventricular sulcus ('the right ventricle taking the strip to the RIGHT of the posterior interventricular sulcus') and the sulcus was not on screen. Shown, it renders 0.067% of the subject - against 9.125% at the SAME inferior camera in beat 11, which shows no surface patches. The surface patches are drawn at OFF_SURFACE = 0.12 outside the shell and the sulci are drawn in the grooves, so any beat showing a surface patch BURIES the sulci under it. That is why beats 5, 6 and 7 cannot carry a landmark, and it is a model-side fix (a gap in the patch along each sulcus, or the sulci re-offset outside the patches), not a scene one. The attribution beat 6 teaches is itself correct - measured at beat 6's own camera in the player, with the surfaces swapped for the chamber territories and the camera untouched: lv 56.4%, rv 34.0%, la 6.2%, ra 3.4% of the four territories. Round-1 finding 2 is closed."
+  ]
  },
  "provider": {
   "primary": "procedural",
@@ -48,8 +68,8 @@
  },
  "camera": {
   "framing": "anterior",
-  "autoRotate": 0.0,
-  "initialYaw": 0.0
+  "autoRotate": 0,
+  "initialYaw": 0
  },
  "structures": [
   {
@@ -936,7 +956,7 @@
     },
     {
      "op": "HIGHLIGHT_STRUCTURE",
-     "target": "The heart"
+     "target": "heart"
     }
    ],
    "narration": "In the middle mediastinum, behind the lower half of the sternum, between the two lungs and resting on the diaphragm. It reaches about 2 cm to the right of the median plane and about 9 cm to the left, so the greater part of it is on the left — and the apex sits in the left fifth intercostal space, a hand's breadth from the midline, where you feel the apex beat."
@@ -946,6 +966,98 @@
    "beat": 2,
    "title": "The neighbours that shape it",
    "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "asc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "aortic_arch"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_trunk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "r_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "svc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ivc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lig_arteriosum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lung_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lung_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "diaphragm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sternum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "trachea_bronchi"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oesophagus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "desc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic_l"
+    },
     {
      "op": "SHOW_STRUCTURE",
      "target": "lung_r"
@@ -987,6 +1099,10 @@
      "target": "Mediastinum"
     },
     {
+     "op": "SHOW_STRUCTURE",
+     "target": "la"
+    },
+    {
      "op": "SHOW_RELATIONSHIP",
      "from": "la",
      "to": "oesophagus",
@@ -1004,6 +1120,102 @@
    "beat": 3,
    "title": "Which chamber you are looking at, from the front",
    "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "asc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "aortic_arch"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_trunk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "r_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "svc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ivc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lig_arteriosum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lung_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lung_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "diaphragm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sternum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "trachea_bronchi"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "oesophagus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "desc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic_l"
+    },
     {
      "op": "HIDE_STRUCTURE",
      "target": "lung_r"
@@ -1137,6 +1349,78 @@
    "title": "From behind: the base is the left atrium",
    "ops": [
     {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "rv"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lv"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "asc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "aortic_arch"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_trunk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "r_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "svc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ivc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lig_arteriosum"
+    },
+    {
      "op": "SHOW_STRUCTURE",
      "target": "ra"
     },
@@ -1157,20 +1441,95 @@
      "view": "posterior"
     },
     {
-     "op": "COMPARE_STRUCTURES",
-     "targets": [
-      "la",
-      "ra"
-     ]
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "la",
+     "intensity": 0.5
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "lv",
+     "intensity": 0.5
     }
    ],
-   "narration": "Turn it round and the picture inverts: the back of the heart is almost all LEFT atrium, with the four pulmonary veins entering it. The base faces backwards, upwards and a little to the right — it is the posterior surface, not the bottom, and calling it the bottom is the commonest slip on this structure."
+   "narration": "Turn it round. ABOVE the coronary sulcus you are looking at the BASE, and the base is almost all LEFT atrium — with the four pulmonary veins entering it. BELOW the groove the back of the heart is the posterior surface of the LEFT VENTRICLE, not atrium: say 'the base is left atrium', never 'the back of the heart is left atrium'. The right ventricle is an anterior chamber and forms almost none of this view. The base faces backwards, upwards and a little to the right — it is the posterior surface, not the bottom, and calling it the bottom is the commonest slip on this structure."
   },
   {
    "mode": "location",
    "beat": 5,
    "title": "The sternocostal surface",
    "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "rv"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lv"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "asc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "aortic_arch"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_trunk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "r_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "svc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ivc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lig_arteriosum"
+    },
     {
      "op": "HIDE_STRUCTURE",
      "target": "ra"
@@ -1216,6 +1575,74 @@
    "title": "The diaphragmatic surface",
    "ops": [
     {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surf_sternocostal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surf_diaphragmatic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surf_left_pulmonary"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "asc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "aortic_arch"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_trunk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "r_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "svc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ivc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lig_arteriosum"
+    },
+    {
      "op": "ROTATE_TO_VIEW",
      "view": "inferior"
     },
@@ -1231,6 +1658,74 @@
    "beat": 7,
    "title": "The left pulmonary surface",
    "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surf_sternocostal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surf_diaphragmatic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surf_left_pulmonary"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "asc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "aortic_arch"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_trunk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "r_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "svc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ivc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lig_arteriosum"
+    },
     {
      "op": "ROTATE_TO_VIEW",
      "view": "lateral"
@@ -1250,13 +1745,85 @@
      "kind": "contact"
     }
    ],
-   "narration": "Left ventricle, facing the left lung. This bulge is what presses the cardiac impression and the cardiac notch into the left lung, and it is the reason the left lung has two lobes where the right has three."
+   "narration": "Left ventricle, facing the left lung. This bulge is what presses the cardiac impression into the left lung, and it is why the left lung carries a cardiac notch and a lingula that the right lung has nothing to match."
   },
   {
    "mode": "location",
    "beat": 8,
    "title": "The four borders — the outline on a chest film",
    "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surf_sternocostal"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surf_diaphragmatic"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surf_left_pulmonary"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "asc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "aortic_arch"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_trunk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "r_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "svc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ivc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lig_arteriosum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lung_l"
+    },
     {
      "op": "HIDE_STRUCTURE",
      "target": "surf_sternocostal"
@@ -1290,6 +1857,10 @@
      "target": "border_superior"
     },
     {
+     "op": "HIDE_STRUCTURE",
+     "target": "Great vessels"
+    },
+    {
      "op": "ROTATE_TO_VIEW",
      "view": "anterior"
     },
@@ -1303,13 +1874,81 @@
      ]
     }
    ],
-   "narration": "Right border: right atrium, from the third to the sixth right costal cartilage. Left border: left ventricle, with the left auricle at its top. Inferior border: right ventricle, running almost horizontally to the apex, sharp enough to be called the acute border. Superior border: the two atria and the great vessels between them. These four lines are the cardiac silhouette a chest radiograph shows you."
+   "narration": "Right border: right atrium, from the third to the sixth right costal cartilage. Left border: left ventricle, with the left auricle at its top. Inferior border: right ventricle, running almost horizontally to the apex, sharp enough to be called the acute border. Superior border: the two atria and the great vessels between them. These four lines are the cardiac silhouette a chest radiograph shows you. The right and superior borders lie on the most oblique part of the outline and read best from above and to the right rather than from straight in front."
   },
   {
    "mode": "location",
-   "beat": 9,
+   "title": "The superior border, from above",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "border_superior"
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "superior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "border_superior"
+    }
+   ],
+   "narration": "The superior border again, this time from directly above. From the front it is the one border you cannot read: it lies along the top of the heart, edge-on to the outline the anterior camera makes, so it reads as a hairline rather than as a border. From above it is not a line at all but the whole upper aspect of the heart, and it is formed by the two ATRIA, with the aorta and the pulmonary trunk leaving and the superior vena cava entering between them - those vessels are drawn at beat 14. That is why the superior mediastinal structures, and not the cardiac outline, are what a chest film shows you at this level.",
+   "beat": 9
+  },
+  {
+   "mode": "location",
+   "beat": 10,
    "title": "The sulci: reading the septa from the outside",
    "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "border_right"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "border_left"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "border_inferior"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "border_superior"
+    },
     {
      "op": "HIDE_STRUCTURE",
      "target": "border_right"
@@ -1351,12 +1990,40 @@
   },
   {
    "mode": "location",
-   "beat": 10,
-   "title": "Behind: the posterior sulcus and the crux",
+   "beat": 11,
+   "title": "From below: the posterior sulcus and the crux",
    "ops": [
     {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "coronary_sulcus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ant_iv_sulcus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "post_iv_sulcus"
+    },
+    {
      "op": "ROTATE_TO_VIEW",
-     "view": "posterior"
+     "view": "inferior"
     },
     {
      "op": "HIGHLIGHT_STRUCTURE",
@@ -1373,9 +2040,37 @@
   },
   {
    "mode": "location",
-   "beat": 11,
-   "title": "Apex and base — the two ends",
+   "beat": 12,
+   "title": "The apex — left ventricle and nothing else",
    "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "coronary_sulcus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ant_iv_sulcus"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "post_iv_sulcus"
+    },
     {
      "op": "HIDE_STRUCTURE",
      "target": "coronary_sulcus"
@@ -1393,28 +2088,97 @@
      "target": "apex"
     },
     {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "apex"
+    }
+   ],
+   "narration": "The apex is left ventricle and nothing else: the right ventricle stops short of it, ending at the APICAL NOTCH on the apex’s right margin, about a centimetre short of the tip. The apex points forwards, downwards and to the left, into the left fifth intercostal space at the midclavicular line."
+  },
+  {
+   "mode": "location",
+   "beat": 13,
+   "title": "The base — mainly left atrium",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "apex"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "coronary_sulcus"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "ant_iv_sulcus"
+    },
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "post_iv_sulcus"
+    },
+    {
      "op": "SHOW_STRUCTURE",
      "target": "base"
     },
     {
      "op": "ROTATE_TO_VIEW",
-     "view": "lateral"
+     "view": "posterior"
     },
     {
-     "op": "COMPARE_STRUCTURES",
-     "targets": [
-      "apex",
-      "base"
-     ]
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "base"
     }
    ],
-   "narration": "The apex is left ventricle and nothing else: the right ventricle stops short of it. It points forwards, downwards and to the left, into the left fifth intercostal space at the midclavicular line. The base is at the opposite end, facing backwards and upwards, and is mainly left atrium."
+   "narration": "The base is at the opposite end of the long axis, facing backwards and upwards, and is mainly LEFT atrium. Apex and base are at opposite ends of the same 12 cm axis and face opposite ways, so they are taught one camera each: the apex from the left, the base from behind."
   },
   {
    "mode": "vasculature",
-   "beat": 12,
+   "beat": 14,
    "title": "The great vessels at the base",
    "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "apex"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "base"
+    },
     {
      "op": "HIDE_STRUCTURE",
      "target": "apex"
@@ -1482,9 +2246,65 @@
   },
   {
    "mode": "cross_section",
-   "beat": 13,
+   "beat": 15,
    "title": "Inside the sac: a median section",
    "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "asc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "aortic_arch"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_trunk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "r_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "svc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ivc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lig_arteriosum"
+    },
     {
      "op": "SHOW_STRUCTURE",
      "target": "pericardium_fibrous"
@@ -1502,13 +2322,21 @@
      "target": "pericardial_cavity"
     },
     {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic_l"
+    },
+    {
      "op": "ROTATE_TO_VIEW",
      "view": "lateral"
     },
     {
      "op": "CROSS_SECTION",
      "axis": "x",
-     "offset": 0.0,
+     "offset": 0,
      "animate": true
     },
     {
@@ -1520,9 +2348,89 @@
   },
   {
    "mode": "location",
-   "beat": 14,
+   "beat": 16,
    "title": "Take the sac off",
    "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "heart"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ra_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "la_auricle"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "asc_aorta"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "aortic_arch"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_trunk"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "r_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "l_pa"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "svc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "ivc"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pulm_veins_l"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lig_arteriosum"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardium_fibrous"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardium_parietal_serous"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardium_visceral_serous"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pericardial_cavity"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic_r"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "phrenic_l"
+    },
     {
      "op": "PEEL_LAYER",
      "layer": "fascia"
@@ -1545,11 +2453,40 @@
  ],
  "gaps": [
   "PROCEDURAL BY NECESSITY, AND THE CATALOG WAS CHECKED RATHER THAN TRUSTED. available-meshes.json holds 934 mesh ids, 924 named; exactly ONE name-matches this structure - 'wall of heart' (FMA7274). There is no mesh of the pericardium, an atrium, a ventricle, an auricle, a sulcus, the apex, or any named surface or border, at any granularity. The queue item's candidate_meshes:9 is a looser name match than the structure's own parts. Since every fact this scene teaches is an attribution of one continuous outer form to its parts, and nobody has segmented that one mesh into surfaces, a scan mesh cannot carry any of it - so this is 'no mesh means build it', not 'no mesh means fake it'. A student who needs the exact cadaveric contour should be shown the bodyparts3d scene gross__heart-pericardium__heart, which loads 'wall of heart' as real scan data.",
-  "THE ATRIAL MASS IS MODELLED AS A COAXIAL CONTINUATION OF THE VENTRICULAR SPINDLE, so the atria sit somewhat more superiorly and less dorsally than a real heart's, where they are offset backwards from the ventricular long axis. Consequence: the great-vessel roots are placed on THIS model's surface (by the world direction each part of it faces) rather than at their measured thoracic positions, and the coronary sulcus is less visible on the anterior aspect than it is on a real heart. The chamber, surface, border, apex and base attributions - which is what the scene teaches - are unaffected and are measured, not asserted; see the model's acceptance report.",
+  "THE ATRIAL MASS IS SEATED DORSAL TO THE LONG AXIS, 2026-09-29, replacing the coaxial simplification this gap used to declare. It is displaced straight backwards by 1.20 cm, SOLVED rather than dialled: the oesophagus lies against the posterior surface of the left atrium, so the posterior-most point of the heart is bisected onto the oesophagus's own anterior wall. What that bought, measured: the right ventricle's share of the backward-facing surface fell from 24.0% to 1.3%, the left atrium's share of the base rose to 88.6%, and the left atrium's share of the FORWARD-facing surface fell from 12.3% to 1.0% — the left atrium forms no part of the sternocostal surface on a real heart, and now forms none here. THE HONEST CONSEQUENCE, stated because it is real: the base CENTRE now lies dorsal to the end of the straight long axis, so its distance to the apex is sqrt(12.0^2 + 1.20^2) = 12.06 cm rather than 12.00. The 12.0 cm is a statement about the axis; acceptance() reports the base-centre distance separately.",
   "NO CORONARY VESSELS. The coronary arteries and cardiac veins are the next queue item (gross__heart-pericardium__coronary-arteries-cardiac-veins) and are deliberately left to it, so the two scenes do not each build half of them. This scene shows the sulci they run in and names them in the narration; it does not draw them.",
-  "NO PERICARDIAL SINUSES. The transverse and oblique sinuses need the serous reflections around the great vessels, which this version does not build. Both are examined; they are named in the narration of the median-section beat and should be added before this scene is promoted past candidate.",
+  "NO PERICARDIAL SINUSES. The transverse and oblique sinuses need the serous reflections around the great vessels, which this version does not build. Both are examined. ROUND-4 REVIEW, 2026-09-30: this gap used to say they 'are named in the narration of the median-section beat'. They are not. The word 'sinus' does not occur in any narration in this scene - the only occurrence anywhere in the file is inside this gap. So the scene neither draws them nor names them, and a student who works through all sixteen beats never meets either sinus. They must be added, in the geometry AND in beat 15's narration, before this scene is promoted past candidate. This is the third gap in three rounds whose own claim was contradicted by the file it describes (gaps on VIEW_DIR.superior and on the uniform HIDE '*' opening were the other two).",
   "AURICLE SHAPE IS SCHEMATIC. The right auricle is broad and the left narrow and hooked - which is the distinction that is examined - but neither carries its crenated margin.",
   "THE TEXTBOOK 'ABOUT TWO THIRDS OF THE HEART LIES TO THE LEFT OF THE MEDIAN PLANE' IS NOT CLAIMED HERE. The model measures the fraction of its own volume left of the median plane at 0.88, and its transverse extent at 2.0 cm right against 8.7 cm left, which is 0.81. Neither is two thirds, and the textbook statement gives no measurement basis, so the first beat states the two extents instead. If a reviewer knows the intended basis, that is a real finding and the constraint should become one of the solves.",
-  "t IS NOT A PARAMETER OF THIS FORM. The adult heart's exterior is not a process, so build(t) returns the same geometry at every t and this scene carries no SET_STAGE. It is the first t-invariant procedural model in the corpus; a reviewer should decide whether that is acceptable rather than inherit it."
+  "t IS NOT A PARAMETER OF THIS FORM. The adult heart's exterior is not a process, so build(t) returns the same geometry at every t and this scene carries no SET_STAGE. It is the first t-invariant procedural model in the corpus; a reviewer should decide whether that is acceptable rather than inherit it.",
+  "THE INTERATRIAL SEPTUM IS TAKEN AS CONTINUOUS WITH THE INTERVENTRICULAR ONE. Both are the trace of a single stated plane (45 degrees to the median plane, facing antero-right), the atrial one with zero offset and the ventricular one offset towards the right ventricle by the amount that puts the apical notch 1.0 cm from the apex. On a real heart the two septa are NOT coplanar - the atrioventricular septum lies between them - and nothing in this scene teaches that. It replaced four picked angles (TH_AIV0/1, TH_PIV0/1, TH_IA_ANT/POST), which is a clear improvement, but a reviewer should decide whether the atrial septum wants its own stated orientation.",
+  "THE SUPERIOR BORDER IS FORESHORTENED FROM THE ANTERIOR CAMERA, and beat 9 now answers it. Round 2 corrected this gap's claim that viz3d.js had no `superior` view - it does, VIEW_DIR.superior = [0,1,0.001] at viz3d.js line 2095 - and left the authoring open. Beat 9, 'The superior border, from above', is that authoring. MEASURED on each beat's own composition, by removing the structure and differencing the frames (viz-training/_build-2026-09-29/measure-beats.mjs): border_superior is 0.44% of the lit subject in beat 8 at the anterior camera and 15.53% in beat 9 at the superior one, a factor of 35. What is still genuinely missing is an OBLIQUE named view; that remains an engine item and nothing in this scene depends on it.",
+  "THE RIGHT BORDER IS STILL THE LEAST LEGIBLE OF THE FOUR. Review finding 6 said the four borders were hairlines, at 5.2% of the anterior frame between them. Band width is now SOLVED per station against its width in the PICTURE (0.85 cm projected) rather than set in degrees, and displaced onto the camera-facing side; on the review's own basis (bare shell, no great vessels) the four now measure inferior 6.80%, left 5.75%, right 0.79%, superior 0.39% - 13.7% between them against 5.2%. The inferior and left borders are fixed. The RIGHT border is only marginally better than the 0.65% the review measured, because it is short (it spans the atrial third of the axis alone) and lies on the most oblique part of the outline, and the superior border is worse from this camera for the reason in the gap above. Finding 6 is PARTLY addressed, not closed.",
+  "THE LEFT AURICLE'S OUTWARD-NORMAL FRACTION IS 0.748, and the number is now understood well enough to say what it is not. Round 1 measured 0.803 and read it as a path curling back into the form; the roots were moved onto the surface and the rendered size went from 0.04% to 2.6% of the anterior frame. It then read 0.842, and capping the free tip with a dome took it to 0.748 - CAPPING A TUBE LOWERS THIS NUMBER, because the dome's normals point away from the TIP while the probe measures them against the mesh's own CENTROID, which on a hooked tube is off to one side. The winding test, which is the one that detects the bug this probe was written for, reads 1.000 on this mesh: every face agrees with its own vertex normals. The centroid figure is not a fault here; it is the wrong instrument for a hooked tube, and it should be read as such rather than chased.",
+  "EVERY BEAT IS NOW SELF-CONTAINED, and it was not before - this is the round-3 root finding. viz3d.js runOps() calls resetState(), which sets every structure VISIBLE, before applying a view's ops (viz3d.js lines 1790-1793 and 1892). Visibility therefore does not carry from one beat to the next. This scene was authored as though it did: beat 3 hid twenty-five structures and beats 4, 6, 7, 10, 14 and 15 hid none at all, because the beats before them had. In the player that meant beat 4 - 'From behind: the base is the left atrium' - showed all 42 structures at once, and beat 5, 'The sternocostal surface', rendered with the sternum in front of it. Fifteen of the sixteen beats now open with HIDE_STRUCTURE '*' and name what they show; beat 1 instead carries an exhaustive explicit hide-list (20 keys hidden, the other 22 shown), which the review verified resolves to the identical visible set under reset semantics but is NOT the uniform form this gap claimed. The rewrite is exact rather than interpreted: the block restores the state the cumulative reading carried into that beat and the original ops follow untouched, and viz-training/_build-2026-09-29/selfcontain-beats.mjs asserts that all 16 beats replayed under reset semantics equal the 15 the old file meant under cumulative ones. BOTH REVIEW ROUNDS, AND THIS BUILDER, MEASURED BEATS WITH A CUMULATIVE REPLAY - which is the same error both rounds found in the model, one level up, in the harness that was looking for it.",
+  "TWO PLACES WHERE A PART LIES INSIDE ANOTHER, FOUND BY THE FREE-END PROBE AND NOT FIXED. Raycasting every tube's terminal station against the rest of the model (generalised winding number) reports the RIGHT AURICLE'S TIP inside the 'heart' shell (w = 1.00) and the LEFT AURICLE'S ROOT inside asc_aorta (w = 1.00). The first contradicts this model's own comment that the auricles 'project clear of the form'; the second is why the left auricle's root needs no cap. Neither is visible as a defect - both ends are buried, so nothing shows - and neither was touched, because moving either path would move the auricle sizes the round-2 review has just measured and closed. Stated so the next round decides rather than rediscovers.",
+  "THE LIGAMENTUM ARTERIOSUM IS NOT VISIBLE FROM ANY NAMED CAMERA, and beat 14 draws a SHOW_RELATIONSHIP from it. MEASURED on beat 14's own composition, by removing it and differencing the frames: 0.00% of the lit subject from anterior, 0.00% from lateral, 0.09% from posterior, 0.61% from superior. This is not a camera problem — round-1 finding 8's shape, but with a geometric cause. Its two ends lie 1.00 inside l_pa and inside aortic_arch (generalised winding number, free-end probe), and a 2.3 cm ligament of radius 0.16 running between vessels of radius 0.9 and 1.3 has almost nothing left over. THE ENDPOINTS ARE NOW SOLVED rather than picked — walked in from each end to the first station more than 0.22 cm past the neighbour's real surface — and it changed the measurement by 0.01 percentage points, which is the finding: in this model the left pulmonary artery and the arch are so nearly touching along that line that there is no free span for the structure to occupy. Fixing it means revisiting the separation of those two vessels under the arch, which is a larger change than a rework round should make on a geometry the review has just measured and accepted. NOT FIXED, measured and declared: the reviewer should rule on whether to move the vessels, drop the relationship from beat 14, or accept the ligament as named-but-unshown.",
+  "THE THREE SURFACE PATCHES Z-FIGHT WHERE THEY MEET, visible as olive and magenta stippling across the sternocostal surface in viz-training/_build-2026-09-29/beats/beat-05.png. All three are drawn at the same offset from the form (OFF_SURFACE = 0.12) and their theta ranges overlap by construction — each is 'the arc that faces X', and those arcs are not disjoint — so wherever two surfaces both claim a piece of the heart they are coplanar and the depth test picks between them per pixel. It is pre-existing and neither review round raised it; it is recorded here because beats 5, 6 and 7 all show all three surfaces at once, so it is on screen in the three beats the surfaces exist for. The cheap fix is to stagger the three offsets, which stops the fighting without answering the real question, which is whether two surfaces should be claiming the same square centimetre at all. Left for the reviewer to rule on rather than papered over.",
+  "THE AORTIC WINDOW IS SOLVED, NOT PLACED (round 4, 2026-09-29). The ligamentum arteriosum's course is derived from the two vessels it ties: it runs between their stations of closest approach within the anatomical attachment ranges (the root of the left pulmonary artery, the distal arch at the isthmus), and each end is walked in until it is exactly BURY inside its vessel, so no end cap is ever exposed and every millimetre beyond that is free. The free span is MEASURED - the stations outside both vessels, added up - rather than inferred from the path length, which is what the previous version did and which is wrong exactly when the walk hits its floor. Measured: 0.843 cm free, against a 0.70 cm floor and a vessel surface gap of 0.885 cm. The separation between the arch and the left pulmonary artery is itself solved against that floor and came out at ZERO - the vessels did not need moving, which contradicts what round 3's finding 3 asked for and is recorded here because the measurement, not the note, is the fact.",
+  "THE THREE NAMED SURFACES NOW PARTITION THE EXTERIOR (round 4, 2026-09-29). Sternocostal, diaphragmatic and left pulmonary were three independently chosen 'facing this way' arcs and therefore OVERLAPPED - measured at 19.9%, 9.9% and 13.0% of one patch's vertices lying within 1 mm of another's, all three drawn at the same offset, which is what tore beat 5 into olive and magenta stripes across 9.24% of what the student looks at. Each theta is now assigned to the ONE surface its normal most nearly faces, so the arcs are disjoint by construction and meet on the borders. Residual coincidence 0.67%, 0.60% and 0.68%, which is the shared edges and is what meeting looks like. A theta facing none of the three - the right and posterior aspects - belongs to no named surface, which is the honest answer: this model names three of them and the right pulmonary surface is not one.",
+  "THE PHRENIC NERVES ARE ON THE SAC, AND THREE WRONG CONSTRUCTIONS ARE RECORDED IN THE MODEL SOURCE so the next run does not retry them (round 4, 2026-09-29). They were two free beziers through picked points, rendering as disconnected sticks with a free end 4 cm above the sac; measured, their distance to the fibrous pericardium ran 0.085 to 5.18 cm, so the course dived in and out of the sac it is described as lying on. They are now laid along the sac itself, parametrised by WORLD HEIGHT rather than by the heart's own long axis - which was the subtlest of the three errors, because a line that follows zeta correctly still travels from x -2.8 at the base to x +9.4 at the apex and wraps round the heart instead of descending beside it. Each nerve runs on the sac while the sac is on its side and then descends to the diaphragm. Asserted by three acceptance rows a side: on the sac (worst departure 0.002 cm), on its own side of the median, and one continuous line (largest step 0.74 and 1.11 cm). NOT MODELLED: the cervical and upper mediastinal course above the sac. The old geometry drew part of it as a stick in mid-air; this one stops where the scene stops.",
+  "BEAT 4 FRAMED ON TWO SURFACE PATCHES AND WAS NOT A PICTURE OF A HEART - CLOSED 2026-09-30 by the round-4 verification run; round-3 finding 4. viz3d.js subjectBox() uses state.only when a view COMPARES, and beat 4 compared `la` against `lv`, which in this model are territory PATCHES on the exterior rather than solid chambers. The camera fitted two thin curved shells and came in close enough that the frame was a featureless pink dome with the ghosted rest of the heart running off all four edges - established by walking the beat in the real player and LOOKING at it. The subject itself was never clipped (0 border pixels), so round 3's attribution of this to its own harness's framing formula was only half right: the harness was wrong AND this beat was wrong, independently. FIXED on the scene side: COMPARE_STRUCTURES is replaced by HIGHLIGHT_STRUCTURE on `la` and `lv`, which lights the same two structures without setting state.only, so the camera keeps framing the whole posterior aspect. Re-walked in the player: subject 17 of 17 structures spanning 47% x 79% of the frame, and the picture shows the left atrium forming the base with the four pulmonary veins entering it and the left ventricle below, which is what the narration teaches. Beat 8 also compares and was CHECKED AND LEFT ALONE: its four borders are legible and its subject is not clipped either."
+ ],
+ "visibility_waivers": [
+  {
+   "beat": 14,
+   "structure": "lig_arteriosum",
+   "shown_instead_by": null,
+   "measured": "0.000% of the lit subject from anterior, posterior, lateral, medial and inferior; 0.477% from superior. Measured on beat 14's own composition by rendering with and without the structure and counting pixels that change, with the camera held at the beat's own framing (viz-training/_build-2026-09-29/dirs/, 2026-09-29 round 4).",
+   "why": "THE GEOMETRY IS NO LONGER THE REASON. Round 3 recorded the ligament as invisible and round 2 blamed the arch and the left pulmonary artery for being too close to leave it a span. Measured, they are 0.885 cm apart at the attachment and the ligament now has 0.843 cm of free course outside both vessels - see the model's acceptance().aorticWindow. What was wrong was the ligament's own course, which ran between two picked points 1.00 cm deep inside each vessel at the FRONT, where the two really do nearly touch; it is now derived from the two vessels and attaches where the anatomy says. What remains is not a defect but an aspect. Beat 14's own narration says the ligament ties the left pulmonary artery 'to the UNDERSIDE of the arch', and an anterior camera cannot see an underside: the arch and the pulmonary trunk are in front of it from every direction except above. The beat is right to be anterior - the trunk-in-front-of-aorta spiral, the SVC, the IVC and the four pulmonary veins are all anterior facts and all visible - so the SHOW_RELATIONSHIP is the one thing in it that its camera cannot serve.",
+   "unresolved": "No beat in this scene shows the ligament. Beat 9 is the only superior view and it is about the superior border. The honest options are a new superior beat for the aortic window, or moving beat 14's SHOW_RELATIONSHIP on to it. Both are authoring decisions about a beat that works for its other five structures, and this run did not make either quietly at the end of itself. Left for the review."
+  },
+  {
+   "beat": 15,
+   "structure": "phrenic_r, phrenic_l",
+   "shown_instead_by": null,
+   "measured": "phrenic_l 6.04% of the lit subject in beat 15, phrenic_r 0.46% (the far side, behind the sac); 1.63% / 0.85% in beat 1 and 2.73% / 0.23% in beat 2. They are visible and continuous - that part of round-3 finding 6 is closed and measured.",
+   "why": "RESIDUAL, SEEN IN THE RENDER AND DECLARED RATHER THAN LEFT TO BE FOUND. Each nerve's last 1.8 cm descends past the sac to end inside the DIAPHRAGM, which is what buries its terminal cap. Beats that show the nerves without showing the diaphragm - beat 15 is one - therefore draw that tail with nothing to end in, and it reads as a short yellow stub hanging below the sac. Looked at in beat-15.png. It is a much smaller fault than the three disconnected sticks it replaces, and the fix is a scene decision rather than a geometric one: either show the diaphragm in the beats that show the nerves, or stop the nerve at the sac and accept an unburied end there. Not chosen here."
+  }
  ]
 }

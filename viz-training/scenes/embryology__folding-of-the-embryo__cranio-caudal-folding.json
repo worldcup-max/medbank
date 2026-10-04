@@ -1,8 +1,9 @@
 {
   "schema": 2,
   "id": "embryology__folding-of-the-embryo__cranio-caudal-folding",
-  "mode": "sequence",
+  "mode": "3d_anatomy",
   "deferred_modes": [
+    "sequence",
     "diagram"
   ],
   "course": "Embryology",
@@ -12,9 +13,9 @@
     "Cranio-caudal folding"
   ],
   "learning_goal": "Explain why the embryo folds in the median plane during week 4, draw the head fold and the tail fold in sagittal section, list in order what each fold carries and where it ends up — including the reversal that puts the heart caudal to the oropharyngeal membrane — and use those movements to account for ectopia cordis, a diaphragmatic hernia and caudal regression.",
-  "status": "planned",
+  "status": "candidate",
   "provider": {
-    "primary": "svg",
+    "primary": "procedural",
     "fallbacks": []
   },
   "match": {
@@ -92,11 +93,14 @@
   "structures": [
     {
       "key": "flat_disc",
+      "name": "Where we start — a flat trilaminar disc",
       "label": "Where we start — a flat trilaminar disc",
       "role": "context",
       "group": "Before folding",
-      "layer": "organ",
       "color": "#aeb6bf",
+      "refs": {
+        "procedural": "cranio-caudal-folding#trunk@0+hemisection"
+      },
       "terms": [
         "trilaminar disc",
         "flat disc",
@@ -108,15 +112,19 @@
         "yolk sac below",
         "pear-shaped"
       ],
-      "narration": "At the end of week three the embryo is a flat, pear-shaped disc of three layers, with the amniotic cavity above it and the yolk sac hanging below. Nothing about that shape looks like a body yet. Everything in this scene is how that disc becomes a curled, cylindrical embryo in the space of about a week."
+      "narration": "At the end of week three the embryo is a flat, pear-shaped disc of three layers, with the amniotic cavity above it and the yolk sac hanging below. Nothing about that shape looks like a body yet. Everything in this scene is how that disc becomes a curled, cylindrical embryo in the space of about a week.",
+      "opacity": 0.85
     },
     {
       "key": "sagittal_frame",
+      "name": "Cut it in the median plane and watch from the side",
       "label": "Cut it in the median plane and watch from the side",
       "role": "context",
       "group": "Before folding",
-      "layer": "organ",
       "color": "#95a5a6",
+      "refs": {
+        "procedural": "cranio-caudal-folding#trunk+hemisection"
+      },
       "terms": [
         "median plane",
         "sagittal section",
@@ -126,15 +134,19 @@
         "cranial end",
         "caudal end"
       ],
-      "narration": "Cranio-caudal folding happens in the median plane, so draw it as a side view. One long cut from head end to tail end, and the same picture repeated at each stage. Lateral folding is the other plane and is a separate scene; if you try to draw both in one diagram you will confuse yourself and the examiner."
+      "narration": "Cranio-caudal folding happens in the median plane, so draw it as a side view. One long cut from head end to tail end, and the same picture repeated at each stage. Lateral folding is the other plane and is a separate scene; if you try to draw both in one diagram you will confuse yourself and the examiner.",
+      "opacity": 0.85
     },
     {
       "key": "driver_growth",
+      "name": "Why it folds — the nervous system outgrows the disc",
       "label": "Why it folds — the nervous system outgrows the disc",
       "role": "part",
       "group": "The mechanism",
-      "layer": "organ",
       "color": "#16a085",
+      "refs": {
+        "procedural": "cranio-caudal-folding#brain"
+      },
       "terms": [
         "differential growth",
         "rapid growth",
@@ -149,11 +161,14 @@
     },
     {
       "key": "driver_amnion",
+      "name": "And the amnion presses in from outside",
       "label": "And the amnion presses in from outside",
       "role": "part",
       "group": "The mechanism",
-      "layer": "organ",
       "color": "#1abc9c",
+      "refs": {
+        "procedural": "cranio-caudal-folding#amnion"
+      },
       "terms": [
         "amnion",
         "amniotic cavity",
@@ -163,15 +178,19 @@
         "amniotic fluid",
         "umbilical cord"
       ],
-      "narration": "At the same time the amniotic cavity expands until it wraps around the embryo from every side. So the disc is pushed from within by growth and drawn round from without by the enlarging amnion. Where the amnion finally meets underneath is where the umbilical cord will be."
+      "narration": "At the same time the amniotic cavity expands until it wraps around the embryo from every side. So the disc is pushed from within by growth and drawn round from without by the enlarging amnion. Where the amnion finally meets underneath is where the umbilical cord will be.",
+      "opacity": 0.15
     },
     {
       "key": "head_fold",
+      "name": "The head fold — the cranial end swings ventrally",
       "label": "The head fold — the cranial end swings ventrally",
       "role": "part",
       "group": "The head fold",
-      "layer": "organ",
       "color": "#f4d03f",
+      "refs": {
+        "procedural": "cranio-caudal-folding#headfold"
+      },
       "terms": [
         "head fold",
         "cranial fold",
@@ -182,15 +201,19 @@
         "C-shaped",
         "day 22"
       ],
-      "narration": "The cranial end of the disc grows forward past its own attachment and then curls downwards, so the future head comes to overhang the front of the embryo. Draw it as the top of a question mark. Everything that was lying flat in front of the head is now swung underneath it — and that is the part students get wrong."
+      "narration": "The cranial end of the disc grows forward past its own attachment and then curls downwards, so the future head comes to overhang the front of the embryo. Draw it as the top of a question mark. Everything that was lying flat in front of the head is now swung underneath it — and that is the part students get wrong.",
+      "opacity": 0.45
     },
     {
       "key": "head_order_before",
+      "name": "Before the fold: the order from head backwards",
       "label": "Before the fold: the order from head backwards",
       "role": "part",
       "group": "The head fold",
-      "layer": "organ",
       "color": "#f5b041",
+      "refs": {
+        "procedural": "cranio-caudal-folding#cranialstrip@0"
+      },
       "terms": [
         "septum transversum",
         "pericardial cavity",
@@ -205,11 +228,14 @@
     },
     {
       "key": "head_order_after",
+      "name": "After the fold: the order is reversed",
       "label": "After the fold: the order is reversed",
       "role": "part",
       "group": "The head fold",
-      "layer": "organ",
       "color": "#e67e22",
+      "refs": {
+        "procedural": "cranio-caudal-folding#cranialstrip@1"
+      },
       "terms": [
         "reversal",
         "order after folding",
@@ -222,12 +248,87 @@
       "narration": "Now rotate that strip through half a turn, which is exactly what the head fold does to it. The oropharyngeal membrane ends up most cranial, the heart lies ventral and behind it, and the septum transversum ends up caudal to the heart, where the diaphragm will be. The list has flipped end for end. If you can reproduce that reversal you have understood cranio-caudal folding."
     },
     {
+      "key": "before_septum",
+      "name": "Before the fold: septum transversum, at the cranial edge",
+      "label": "Septum transversum — before the fold, most cranial",
+      "role": "part",
+      "group": "The head fold",
+      "color": "#e8743a",
+      "refs": {
+        "procedural": "cranio-caudal-folding#septum@0"
+      },
+      "terms": [
+        "septum transversum before folding",
+        "cranial edge of the disc",
+        "flat-disc order"
+      ],
+      "narration": "On the flat disc the septum transversum is the most cranial of the four — at the cranial edge, in front of the cardiogenic area. This is the same part as the one in the folded panel beside it, drawn where it starts.",
+      "added_by_round3": true
+    },
+    {
+      "key": "before_pericardium",
+      "name": "Before the fold: the pericardial cavity",
+      "label": "Pericardial cavity — before the fold, the space the cardiogenic area lies in",
+      "role": "part",
+      "group": "The head fold",
+      "color": "#f0c49c",
+      "refs": {
+        "procedural": "cranio-caudal-folding#pericardium@0"
+      },
+      "terms": [
+        "pericardial cavity before folding",
+        "cranial coelom",
+        "flat-disc order"
+      ],
+      "narration": "The pericardial cavity on the flat disc, caudal to the septum transversum and around the cardiogenic area. Drawn opened, as it is in the folded panel.",
+      "added_by_round3": true
+    },
+    {
+      "key": "before_heart",
+      "name": "Before the fold: the cardiogenic area with the heart tube in it",
+      "label": "Cardiogenic area — before the fold, between the septum transversum and the membrane",
+      "role": "part",
+      "group": "The head fold",
+      "color": "#e8685a",
+      "refs": {
+        "procedural": "cranio-caudal-folding#heart@0"
+      },
+      "terms": [
+        "cardiogenic area before folding",
+        "heart tube on the flat disc",
+        "cranial to the oropharyngeal membrane"
+      ],
+      "narration": "The cardiogenic area, with the heart tube in it, lies CRANIAL to the oropharyngeal membrane on the flat disc. That is the half of this topic students get wrong, and it is what this panel exists to show.",
+      "added_by_round3": true
+    },
+    {
+      "key": "before_oropharyngeal",
+      "name": "Before the fold: the oropharyngeal membrane",
+      "label": "Oropharyngeal membrane — before the fold, most caudal of the four",
+      "role": "part",
+      "group": "The head fold",
+      "color": "#f3e8d6",
+      "refs": {
+        "procedural": "cranio-caudal-folding#oropharyngeal@0"
+      },
+      "terms": [
+        "oropharyngeal membrane before folding",
+        "caudal to the cardiogenic area",
+        "flat-disc order"
+      ],
+      "narration": "On the flat disc the oropharyngeal membrane lies CAUDAL to the cardiogenic area and the septum transversum — the opposite of where it ends up. After the fold it is the most cranial point of the embryo.",
+      "added_by_round3": true
+    },
+    {
       "key": "foregut",
+      "name": "The head fold pinches off the foregut",
       "label": "The head fold pinches off the foregut",
       "role": "part",
       "group": "The head fold",
-      "layer": "organ",
       "color": "#d35400",
+      "refs": {
+        "procedural": "cranio-caudal-folding#foregut"
+      },
       "terms": [
         "foregut",
         "dorsal part of yolk sac",
@@ -242,11 +343,14 @@
     },
     {
       "key": "septum_transversum",
+      "name": "The septum transversum is carried down to the diaphragm",
       "label": "The septum transversum is carried down to the diaphragm",
       "role": "part",
       "group": "The head fold",
-      "layer": "organ",
       "color": "#ba4a00",
+      "refs": {
+        "procedural": "cranio-caudal-folding#septum"
+      },
       "terms": [
         "septum transversum",
         "central tendon of diaphragm",
@@ -261,11 +365,14 @@
     },
     {
       "key": "tail_fold",
+      "name": "The tail fold — the caudal end swings ventrally too",
       "label": "The tail fold — the caudal end swings ventrally too",
       "role": "part",
       "group": "The tail fold",
-      "layer": "organ",
       "color": "#5dade2",
+      "refs": {
+        "procedural": "cranio-caudal-folding#tailfold"
+      },
       "terms": [
         "tail fold",
         "caudal fold",
@@ -275,15 +382,19 @@
         "under the embryo",
         "week 4"
       ],
-      "narration": "The same thing happens at the other end. The caudal region grows past its attachment and curls forwards and under, so the tail end also comes to point towards the belly. The embryo now has the C-shape you see in every week-four picture."
+      "narration": "The same thing happens at the other end. The caudal region grows past its attachment and curls forwards and under, so the tail end also comes to point towards the belly. The embryo now has the C-shape you see in every week-four picture.",
+      "opacity": 0.45
     },
     {
       "key": "hindgut",
+      "name": "The tail fold pinches off the hindgut and the cloaca",
       "label": "The tail fold pinches off the hindgut and the cloaca",
       "role": "part",
       "group": "The tail fold",
-      "layer": "organ",
       "color": "#3498db",
+      "refs": {
+        "procedural": "cranio-caudal-folding#hindgut"
+      },
       "terms": [
         "hindgut",
         "cloaca",
@@ -298,11 +409,14 @@
     },
     {
       "key": "stalk_ventral",
+      "name": "The connecting stalk is swung to the ventral surface",
       "label": "The connecting stalk is swung to the ventral surface",
       "role": "part",
       "group": "The tail fold",
-      "layer": "organ",
-      "color": "#2e86c1",
+      "color": "#c8a08a",
+      "refs": {
+        "procedural": "cranio-caudal-folding#stalk"
+      },
       "terms": [
         "connecting stalk",
         "body stalk",
@@ -317,11 +431,14 @@
     },
     {
       "key": "midgut_yolk",
+      "name": "What is left in the middle — the midgut",
       "label": "What is left in the middle — the midgut",
       "role": "part",
       "group": "The result",
-      "layer": "organ",
       "color": "#8e44ad",
+      "refs": {
+        "procedural": "cranio-caudal-folding#midgut"
+      },
       "terms": [
         "midgut",
         "still open to yolk sac",
@@ -336,11 +453,14 @@
     },
     {
       "key": "result_shape",
+      "name": "The result — a C-shaped embryo with a tube inside it",
       "label": "The result — a C-shaped embryo with a tube inside it",
       "role": "part",
       "group": "The result",
-      "layer": "organ",
       "color": "#9b59b6",
+      "refs": {
+        "procedural": "cranio-caudal-folding#trunk"
+      },
       "terms": [
         "C-shaped",
         "cylindrical",
@@ -355,11 +475,14 @@
     },
     {
       "key": "ectopia_cordis",
+      "name": "Head fold fails — ectopia cordis",
       "label": "Head fold fails — ectopia cordis",
       "role": "part",
       "group": "Clinical",
-      "layer": "organ",
       "color": "#cb4335",
+      "refs": {
+        "procedural": "cranio-caudal-folding#ectopia@1+ectopia"
+      },
       "terms": [
         "ectopia cordis",
         "heart outside the chest",
@@ -374,11 +497,14 @@
     },
     {
       "key": "cdh",
+      "name": "Septum transversum fails — congenital diaphragmatic hernia",
       "label": "Septum transversum fails — congenital diaphragmatic hernia",
       "role": "part",
       "group": "Clinical",
-      "layer": "organ",
       "color": "#e74c3c",
+      "refs": {
+        "procedural": "cranio-caudal-folding#cdh@1+cdh"
+      },
       "terms": [
         "congenital diaphragmatic hernia",
         "Bochdalek",
@@ -394,11 +520,14 @@
     },
     {
       "key": "caudal_regression",
+      "name": "Tail fold fails — caudal regression",
       "label": "Tail fold fails — caudal regression",
       "role": "part",
       "group": "Clinical",
-      "layer": "organ",
       "color": "#ec7063",
+      "refs": {
+        "procedural": "cranio-caudal-folding#trunk@1+regression"
+      },
       "terms": [
         "caudal regression syndrome",
         "sacral agenesis",
@@ -412,7 +541,192 @@
         "renal agenesis",
         "neurogenic bladder"
       ],
-      "narration": "Deficient mesoderm at the caudal end gives caudal regression syndrome: absent or shortened sacrum, lower limb weakness, a neurogenic bladder, anorectal and renal malformations, and in its extreme form sirenomelia with fused lower limbs. The association to remember for the exam is poorly controlled maternal diabetes. It is the single most quoted teratogenic link in this topic."
+      "narration": "Deficient mesoderm at the caudal end gives caudal regression syndrome: absent or shortened sacrum, lower limb weakness, a neurogenic bladder, anorectal and renal malformations, and in its extreme form sirenomelia with fused lower limbs. The association to remember for the exam is poorly controlled maternal diabetes. It is the single most quoted teratogenic link in this topic.",
+      "opacity": 0.4
+    },
+    {
+      "key": "neural",
+      "name": "Neural tube",
+      "label": "The neural tube along the dorsal midline",
+      "role": "part",
+      "group": "The mechanism",
+      "color": "#5c6bc0",
+      "refs": {
+        "procedural": "cranio-caudal-folding#neural"
+      },
+      "terms": [
+        "neural tube",
+        "neural plate",
+        "dorsal midline",
+        "neuraxis",
+        "spinal cord",
+        "grows fastest"
+      ],
+      "narration": "The neural tube runs the whole length of the embryo along its dorsal midline, and it is the sheet that grows. Draw it first in any sagittal picture of folding: everything else in this scene is arranged around it, and the fold is what happens to a sheet anchored below a structure that lengthens above.",
+      "added_by_reauthor": true
+    },
+    {
+      "key": "oropharyngeal",
+      "name": "Oropharyngeal membrane",
+      "label": "The oropharyngeal membrane — the future mouth",
+      "role": "part",
+      "group": "The head fold",
+      "color": "#e8d9c0",
+      "refs": {
+        "procedural": "cranio-caudal-folding#oropharyngeal"
+      },
+      "terms": [
+        "oropharyngeal membrane",
+        "buccopharyngeal membrane",
+        "stomodeum",
+        "future mouth",
+        "ectoderm meets endoderm",
+        "ruptures week 4",
+        "most cranial point"
+      ],
+      "narration": "Where ectoderm meets endoderm with no mesoderm between them, the two layers stay fused as the oropharyngeal membrane. Follow it: it starts well back from the cranial edge of the disc, and after the head fold it is the most cranial point of the whole embryo. It ruptures in week four and the gut opens to the amniotic cavity.",
+      "added_by_reauthor": true
+    },
+    {
+      "key": "heart",
+      "name": "Heart tube",
+      "label": "The heart tube in the cardiogenic area",
+      "role": "part",
+      "group": "The head fold",
+      "color": "#c0392b",
+      "refs": {
+        "procedural": "cranio-caudal-folding#heart"
+      },
+      "terms": [
+        "heart tube",
+        "cardiogenic area",
+        "cardiogenic field",
+        "endocardial tubes",
+        "fuse",
+        "cardiac prominence"
+      ],
+      "narration": "The heart tubes form in the cardiogenic area, which on the flat disc lies CRANIAL to the oropharyngeal membrane. Watch where it ends up. After the head fold the heart lies ventral to the foregut and caudal to that membrane, in the cardiac prominence you can see on the outside of any week-four embryo.",
+      "added_by_reauthor": true
+    },
+    {
+      "key": "pericardium",
+      "name": "Pericardial cavity",
+      "label": "The pericardial cavity around the heart",
+      "role": "part",
+      "group": "The head fold",
+      "color": "#e59866",
+      "refs": {
+        "procedural": "cranio-caudal-folding#pericardium"
+      },
+      "terms": [
+        "pericardial cavity",
+        "pericardium",
+        "intraembryonic coelom",
+        "cranial coelom"
+      ],
+      "narration": "The pericardial cavity is the space the heart tube lies in, and it travels with the heart through the fold. It is drawn here as an opened sac so the heart inside it can be seen; the coelom and how it is partitioned belong to their own scene.",
+      "added_by_reauthor": true
+    },
+    {
+      "key": "cloacal",
+      "name": "Cloacal membrane",
+      "label": "The cloacal membrane",
+      "role": "part",
+      "group": "The tail fold",
+      "color": "#aed6f1",
+      "refs": {
+        "procedural": "cranio-caudal-folding#cloacal"
+      },
+      "terms": [
+        "cloacal membrane",
+        "proctodeum",
+        "anal pit",
+        "ventral surface",
+        "infra-umbilical"
+      ],
+      "narration": "The cloacal membrane is the tail end's counterpart of the oropharyngeal membrane: ectoderm fused to endoderm, sealing the hindgut. On the flat disc it faces caudally. After the tail fold it faces the belly, which is why a defect below the umbilicus and a bladder that fails to close are the same accident.",
+      "added_by_reauthor": true
+    },
+    {
+      "key": "cloaca",
+      "name": "Cloaca",
+      "label": "The cloaca — the common terminal chamber",
+      "role": "part",
+      "group": "The tail fold",
+      "color": "#2e86c1",
+      "refs": {
+        "procedural": "cranio-caudal-folding#cloaca"
+      },
+      "terms": [
+        "cloaca",
+        "common chamber",
+        "urorectal septum",
+        "rectum",
+        "bladder",
+        "urogenital sinus"
+      ],
+      "narration": "The terminal hindgut dilates where the allantois joins it, and that common chamber is the cloaca. It is later partitioned by the urorectal septum into rectum behind and bladder and urethra in front; that partition is taught elsewhere and is not drawn here.",
+      "added_by_reauthor": true
+    },
+    {
+      "key": "allantois",
+      "name": "Allantois",
+      "label": "The allantois, drawn in with the tail fold",
+      "role": "part",
+      "group": "The tail fold",
+      "color": "#48c9b0",
+      "refs": {
+        "procedural": "cranio-caudal-folding#allantois"
+      },
+      "terms": [
+        "allantois",
+        "urachus",
+        "median umbilical ligament",
+        "connecting stalk",
+        "endodermal diverticulum"
+      ],
+      "narration": "The allantois is a finger of endoderm that runs from the caudal gut into the connecting stalk. The tail fold draws it in, so it opens into the cloaca; its remnant in the adult is the urachus, and then the median umbilical ligament.",
+      "added_by_reauthor": true
+    },
+    {
+      "key": "vitelline",
+      "name": "Vitelline duct",
+      "label": "The vitelline duct — what the wide connection narrows to",
+      "role": "part",
+      "group": "The result",
+      "color": "#c9a227",
+      "refs": {
+        "procedural": "cranio-caudal-folding#vitelline"
+      },
+      "terms": [
+        "vitelline duct",
+        "omphalomesenteric duct",
+        "yolk stalk",
+        "narrows",
+        "Meckel diverticulum"
+      ],
+      "narration": "At the start the midgut and the yolk sac are one continuous space. As the folds close in from both ends the communication narrows to a single duct running in the cord. Its failure to disappear is a Meckel diverticulum, which is that entry's work and not this one's.",
+      "added_by_reauthor": true
+    },
+    {
+      "key": "yolksac",
+      "name": "Yolk sac",
+      "label": "The yolk sac, which barely grows",
+      "role": "context",
+      "group": "The mechanism",
+      "color": "#d8c86a",
+      "refs": {
+        "procedural": "cranio-caudal-folding#yolksac"
+      },
+      "terms": [
+        "yolk sac",
+        "umbilical vesicle",
+        "grows slowly",
+        "ventral",
+        "anchored"
+      ],
+      "narration": "The yolk sac hangs below the disc and does almost nothing. That is exactly why the embryo folds: a sheet that lengthens fast while it stays anchored to something that does not has no option but to curl around it.",
+      "added_by_reauthor": true
     }
   ],
   "views": [
@@ -422,16 +736,37 @@
       "title": "Why a flat disc has to curl",
       "ops": [
         {
-          "op": "SHOW_STRUCTURE",
+          "op": "HIDE_STRUCTURE",
           "target": "*"
         },
         {
-          "op": "ISOLATE_REGION",
-          "target": "The mechanism"
+          "op": "SET_STAGE",
+          "t": 0
         },
         {
           "op": "SHOW_STRUCTURE",
           "target": "flat_disc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "driver_growth"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "driver_amnion"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "yolksac"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "driver_growth",
+          "intensity": 0.95
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -444,18 +779,211 @@
           "from": "driver_amnion",
           "to": "flat_disc",
           "kind": "expands around and wraps"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
         }
       ],
-      "narration": "Start with the flat trilaminar disc and ask one question: what would make a flat sheet curl? Two things. The neural tube along its midline grows enormously while the yolk sac below it does not, and the amniotic cavity swells around the whole embryo. Growth from inside, pressure from outside, and the disc folds in both planes at once. This scene follows the median plane."
+      "narration": "Start with the flat trilaminar disc and ask one question: what would make a flat sheet curl? Two things. The neural tube along its midline grows enormously while the yolk sac below it does not, and the amniotic cavity swells around the whole embryo. Growth from inside, pressure from outside, and the disc folds in both planes at once. This scene follows the median plane.",
+      "claims": [
+        {
+          "id": "B1-flat",
+          "claim": "the disc is FLAT: it is far wider across than it is deep",
+          "measure": "aspect.trunk",
+          "op": "atLeast",
+          "value": 3.45
+        },
+        {
+          "id": "B1-unfolded",
+          "claim": "and nothing has folded yet",
+          "measure": "turn.cranial_rad",
+          "op": "atMost",
+          "value": 0.05
+        },
+        {
+          "id": "B1-order",
+          "claim": "the flat-disc order holds: septum transversum, then heart, then the membrane",
+          "measure": "order.flat_order",
+          "op": "equals",
+          "value": 1
+        }
+      ]
     },
     {
       "mode": "mechanism",
       "beat": 2,
+      "title": "Halfway: both ends on their way round",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.5
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sagittal_frame"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_fold"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tail_fold"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "driver_growth"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foregut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut_yolk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "vitelline"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "yolksac"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stalk_ventral"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Stop the clock halfway. Both ends have swung about a quarter turn and neither has finished: the cranial end is still reaching forward rather than tucking under, the caudal end is following it, and the connection between midgut and yolk sac is still wide. Nothing here is a separate event from the last picture or the next one — it is the same movement, caught in the middle.",
+      "new_narration": "Added by the 2026-09-30 re-author. A process scene that shows only its endpoints teaches the endpoints; this beat exists so the two folds are seen as one continuous movement. No existing narration was altered and no beat was removed.",
+      "claims": [
+        {
+          "id": "B2-half",
+          "claim": "the cranial strip has turned about half of its half-turn",
+          "measure": "turn.septum_rad",
+          "op": "between",
+          "value": [
+            1.45,
+            1.7
+          ]
+        },
+        {
+          "id": "B2-aspect",
+          "claim": "the section is part way from flat to round",
+          "measure": "aspect.trunk",
+          "op": "between",
+          "value": [
+            2.3,
+            2.62
+          ]
+        },
+        {
+          "id": "B2-open",
+          "claim": "and the connection to the yolk sac is still wide",
+          "measure": "comm.narrowing",
+          "op": "between",
+          "value": [
+            1.22,
+            1.46
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
       "title": "The head fold, and the reversal it causes",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "The head fold"
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_fold"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_order_before"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_order_after"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "septum_transversum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "heart"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pericardium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "oropharyngeal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flat_disc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "before_septum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "before_pericardium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "before_heart"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "before_oropharyngeal"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "head_order_before",
+            "before_septum",
+            "before_pericardium",
+            "before_heart",
+            "before_oropharyngeal",
+            "head_fold",
+            "head_order_after",
+            "septum_transversum",
+            "pericardium",
+            "heart",
+            "oropharyngeal"
+          ],
+          "layout": "side-by-side"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
@@ -463,12 +991,94 @@
           "intensity": 0.95
         },
         {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "head_order_before",
-            "head_order_after"
-          ],
-          "layout": "side-by-side"
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Before the fold, working back from the cranial edge: septum transversum, pericardial cavity, cardiogenic area, oropharyngeal membrane. The head fold swings that whole strip through half a turn. Afterwards the oropharyngeal membrane is most cranial, the heart lies ventral and caudal to it, and the septum transversum sits behind the heart at the future diaphragm. Same four things, opposite order. Draw both panels side by side and the reversal teaches itself.",
+      "claims": [
+        {
+          "id": "B3-reversed",
+          "claim": "the order has flipped end for end: membrane most cranial, then heart, then septum",
+          "measure": "order.reversed",
+          "op": "equals",
+          "value": 1
+        },
+        {
+          "id": "B3-crown",
+          "claim": "and the oropharyngeal membrane IS the most cranial point",
+          "measure": "crown.s_minus_oro",
+          "op": "atMost",
+          "value": 0.005
+        },
+        {
+          "id": "B3-halfturn",
+          "claim": "the strip has turned through half a turn",
+          "measure": "turn.septum_rad",
+          "op": "between",
+          "value": [
+            3.1,
+            3.19
+          ]
+        }
+      ],
+      "pinned_ok": {
+        "head_order_before": "DELIBERATE, and it is the whole beat: the cranial strip BEFORE the head fold has to be drawn beside the same strip AFTER it, or the reversal — the single most examined point in this topic — is invisible. Same pattern as cardiac-looping's L-loop comparison. The beat itself sits at t = 1 and its three claims are evaluated there.",
+        "flat_disc": "DELIBERATE, and for the same reason: the \"before\" panel needs the disc the strip lay on, or it is a rod floating in space next to a folded embryo. Drawn opened in the median plane like the rest of the scene.",
+        "before_septum": "DELIBERATE, and it is the finding this beat was re-opened for. The narration's first sentence recites the BEFORE order of four NAMED structures and this is the septum transversum drawn at t = 0, on the before panel, beside head_order_before on its flat disc. Without it the four things the sentence names are drawn ONLY in their after positions and a student maps the spoken list onto the wrong picture. The beat itself stands at t = 1 and its three claims are evaluated there.",
+        "before_pericardium": "DELIBERATE, and it is the finding this beat was re-opened for. The narration's first sentence recites the BEFORE order of four NAMED structures and this is the pericardial cavity drawn at t = 0, on the before panel, beside head_order_before on its flat disc. Without it the four things the sentence names are drawn ONLY in their after positions and a student maps the spoken list onto the wrong picture. The beat itself stands at t = 1 and its three claims are evaluated there.",
+        "before_heart": "DELIBERATE, and it is the finding this beat was re-opened for. The narration's first sentence recites the BEFORE order of four NAMED structures and this is the cardiogenic area drawn at t = 0, on the before panel, beside head_order_before on its flat disc. Without it the four things the sentence names are drawn ONLY in their after positions and a student maps the spoken list onto the wrong picture. The beat itself stands at t = 1 and its three claims are evaluated there.",
+        "before_oropharyngeal": "DELIBERATE, and it is the finding this beat was re-opened for. The narration's first sentence recites the BEFORE order of four NAMED structures and this is the oropharyngeal membrane drawn at t = 0, on the before panel, beside head_order_before on its flat disc. Without it the four things the sentence names are drawn ONLY in their after positions and a student maps the spoken list onto the wrong picture. The beat itself stands at t = 1 and its three claims are evaluated there."
+      }
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Walk the strip through the fold",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_fold"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_order_before"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_order_after"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "septum_transversum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "heart"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pericardium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "oropharyngeal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flat_disc"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
         },
         {
           "op": "TRACE_STRUCTURE",
@@ -479,26 +1089,88 @@
             "head_order_after"
           ],
           "duration": 7
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "lateral"
         }
       ],
-      "narration": "Before the fold, working back from the cranial edge: septum transversum, pericardial cavity, cardiogenic area, oropharyngeal membrane. The head fold swings that whole strip through half a turn. Afterwards the oropharyngeal membrane is most cranial, the heart lies ventral and caudal to it, and the septum transversum sits behind the heart at the future diaphragm. Same four things, opposite order. Draw both panels side by side and the reversal teaches itself."
+      "narration": "Now walk it, one stop at a time. The strip as it lay on the flat disc; the fold that takes hold of it; and the strip where that fold has carried it to. Nothing is redrawn between the first stop and the last — the same material stations are bent round, which is why the oropharyngeal membrane ends up at the crown and the septum transversum ends up behind the heart.",
+      "new_narration": "Added 2026-10-01 by the model3d BUILD task, taking review round 1 finding 1. The TRACE_STRUCTURE walk used to share beat 3 with COMPARE_STRUCTURES, and in viz3d.js trace() opens every waypoint with `state.hi = {}` and `state.only = [waypoint]`, so it wiped the comparison's two lit panels and, because applyView() skips frameView() on any traced view, cost beat 3 its per-view camera fit as well. Measured in the real player before the split: beat 3 at fillW 0.8% / fillH 12.5% against 14.4 / 89.4 for the beat after it. RENDER-STANDARD §3.y — where two claims want incompatible cameras, that is two beats, never one beat and a hope. Beat 3 keeps its original narration word for word and makes the comparison; this beat is the walk, and its narration is the only text here not written by the original author. The engine behaviour is NOT touched: viz3d.js sits under every model in the corpus and a merge-instead-of-replace in trace() is its own engine item.",
+      "claims": [
+        {
+          "id": "B4-quarterturn",
+          "claim": "the oropharyngeal membrane's own facing has come through a quarter turn",
+          "measure": "turn.oro_rad",
+          "op": "between",
+          "value": [
+            1.55,
+            1.59
+          ]
+        },
+        {
+          "id": "B4-ends-swapped",
+          "claim": "the membrane has passed the septum transversum, so the strip's two ends have changed places",
+          "measure": "order.oro_minus_septum_y",
+          "op": "atLeast",
+          "value": 0.3
+        },
+        {
+          "id": "B4-strip-turn",
+          "claim": "and the strip as a whole has turned further than half a turn, further than the septum alone",
+          "measure": "turn.cranial_rad",
+          "op": "between",
+          "value": [
+            3.25,
+            3.35
+          ]
+        }
+      ],
+      "pinned_ok": {
+        "head_order_before": "DELIBERATE, and it is the first stop of the walk: head_order_before is the cranial strip pinned at t = 0 and head_order_after the same part at t = 1, so the walk starts on the strip as it lay flat and ends on the strip as the fold left it. Same reason as beat 3, which this beat was split from.",
+        "flat_disc": "DELIBERATE, and for the same reason as on beat 3: the first stop needs the disc the strip lay on, or it is a rod floating in space next to a folded embryo. Drawn opened in the median plane like the rest of the scene."
+      }
     },
     {
       "mode": "cross_section",
-      "beat": 3,
+      "beat": 5,
       "title": "The foregut appears, and the diaphragm starts its journey",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "The head fold"
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sagittal_frame"
         },
         {
           "op": "SHOW_STRUCTURE",
           "target": "foregut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "oropharyngeal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "septum_transversum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "heart"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pericardium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "neural"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut_yolk"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
@@ -507,7 +1179,7 @@
         },
         {
           "op": "CROSS_SECTION",
-          "axis": "z",
+          "axis": "x",
           "offset": 0,
           "animate": true
         },
@@ -516,23 +1188,82 @@
           "from": "head_fold",
           "to": "foregut",
           "kind": "takes the dorsal yolk sac into the embryo as"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
         }
       ],
-      "narration": "Cut in the midline and watch the head fold roll the dorsal part of the yolk sac into the embryo. That blind tube is the foregut, sealed in front by the oropharyngeal membrane until it ruptures in week four. In the same movement the septum transversum is carried from opposite the neck down towards the thorax — which is why the diaphragm answers to C3, C4 and C5 and why the phrenic nerve is so long."
+      "narration": "Cut in the midline and watch the head fold roll the dorsal part of the yolk sac into the embryo. That blind tube is the foregut, sealed in front by the oropharyngeal membrane until it ruptures in week four. In the same movement the septum transversum is carried from opposite the neck down towards the thorax — which is why the diaphragm answers to C3, C4 and C5 and why the phrenic nerve is so long.",
+      "claims": [
+        {
+          "id": "B5-foregut",
+          "claim": "a third of the gut is now sealed foregut",
+          "measure": "foregut.len_frac",
+          "op": "atLeast",
+          "value": 0.335
+        },
+        {
+          "id": "B5-descent",
+          "claim": "and the septum transversum has been carried a long way caudally",
+          "measure": "septum.descent_frac",
+          "op": "atLeast",
+          "value": 0.12
+        },
+        {
+          "id": "B5-heart",
+          "claim": "with the heart ventral to the membrane it used to lie cranial of",
+          "measure": "heart.ventral_of_oro_dz",
+          "op": "atLeast",
+          "value": 0.15
+        }
+      ]
     },
     {
       "mode": "mechanism",
-      "beat": 4,
+      "beat": 6,
       "title": "The tail fold does the mirror image",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "The tail fold"
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tail_fold"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "cloaca"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "cloacal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "allantois"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stalk_ventral"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "tail_fold",
           "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
         },
         {
           "op": "TRACE_STRUCTURE",
@@ -551,16 +1282,47 @@
           "kind": "carries onto the ventral surface"
         }
       ],
-      "narration": "The tail end curls the same way. It seals the hindgut at the cloacal membrane, pulls the allantois in so that the terminal hindgut becomes the cloaca, and swings the connecting stalk from behind the embryo round onto its belly. The cloacal membrane travels with it. Every one of those three movements is an exam answer somewhere else in the course."
+      "narration": "The tail end curls the same way. It seals the hindgut at the cloacal membrane, pulls the allantois in so that the terminal hindgut becomes the cloaca, and swings the connecting stalk from behind the embryo round onto its belly. The cloacal membrane travels with it. Every one of those three movements is an exam answer somewhere else in the course.",
+      "claims": [
+        {
+          "id": "B6-cloacal",
+          "claim": "the cloacal membrane has come round to face the belly",
+          "measure": "cloacal.normal_dot_ventral",
+          "op": "atLeast",
+          "value": 0.999
+        },
+        {
+          "id": "B6-hindgut",
+          "claim": "a third of the gut is sealed hindgut",
+          "measure": "hindgut.len_frac",
+          "op": "atLeast",
+          "value": 0.335
+        },
+        {
+          "id": "B6-stalk",
+          "claim": "and the connecting stalk points ventrally",
+          "measure": "stalk.angle_to_ventral_deg",
+          "op": "atMost",
+          "value": 20
+        }
+      ]
     },
     {
       "mode": "location",
-      "beat": 5,
+      "beat": 7,
       "title": "What the two folds leave behind",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "The result"
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sagittal_frame"
         },
         {
           "op": "SHOW_STRUCTURE",
@@ -568,12 +1330,32 @@
         },
         {
           "op": "SHOW_STRUCTURE",
+          "target": "midgut_yolk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
           "target": "hindgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "vitelline"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "yolksac"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stalk_ventral"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "midgut_yolk",
           "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
         },
         {
           "op": "TRACE_STRUCTURE",
@@ -584,26 +1366,142 @@
             "hindgut"
           ],
           "duration": 6
+        }
+      ],
+      "narration": "Sealed in front, sealed behind, still open in the middle. That is all foregut, midgut and hindgut means at this stage, and the midgut keeps its connection to the yolk sac through the narrowing vitelline duct. Step back and look at the embryo: a curled cylinder with a gut tube inside it and one stalk at the belly, where a flat disc stood a week ago.",
+      "claims": [
+        {
+          "id": "B7-narrowed",
+          "claim": "the wide connection has narrowed several-fold into the vitelline duct",
+          "measure": "comm.narrowing",
+          "op": "atLeast",
+          "value": 6
+        },
+        {
+          "id": "B7-open",
+          "claim": "and it is still open — the midgut never seals",
+          "measure": "comm.open",
+          "op": "equals",
+          "value": 1
+        },
+        {
+          "id": "B7-round",
+          "claim": "the section is round: the disc has become a cylinder",
+          "measure": "aspect.trunk",
+          "op": "atMost",
+          "value": 1.25
+        }
+      ]
+    },
+    {
+      "mode": "location",
+      "beat": 8,
+      "title": "The C-shaped embryo, from outside",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "result_shape"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_fold"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tail_fold"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "driver_amnion"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stalk_ventral"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "yolksac"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "result_shape",
+          "intensity": 0.85
         },
         {
           "op": "ROTATE_TO_VIEW",
           "view": "lateral"
         }
       ],
-      "narration": "Sealed in front, sealed behind, still open in the middle. That is all foregut, midgut and hindgut means at this stage, and the midgut keeps its connection to the yolk sac through the narrowing vitelline duct. Step back and look at the embryo: a curled cylinder with a gut tube inside it and one stalk at the belly, where a flat disc stood a week ago."
+      "narration": "Now close the embryo up and look at it from the side, the way an ultrasound or a textbook plate shows it. Dorsally convex, curled around a belly that has one stalk leaving it, with the head overhanging the heart at one end and the tail tucked under at the other. Every feature of that outline was produced by the two movements in this scene, and none of it was there a week ago.",
+      "new_narration": "Added by the 2026-09-30 re-author, because no existing beat shows the finished outside of the embryo and the learning goal asks a student to draw it. No existing narration was altered.",
+      "claims": [
+        {
+          "id": "B8-caudal",
+          "claim": "the tail fold has turned the caudal end through most of a right angle and more",
+          "measure": "turn.caudal_rad",
+          "op": "between",
+          "value": [
+            1.87,
+            1.95
+          ]
+        },
+        {
+          "id": "B8-brain",
+          "claim": "the brain vesicles have hugely outgrown the rest of the neural tube",
+          "measure": "brain.radius_over_neural",
+          "op": "atLeast",
+          "value": 4.25
+        }
+      ]
     },
     {
       "mode": "associated_organs",
-      "beat": 6,
+      "beat": 9,
       "title": "When a fold does not finish",
       "ops": [
         {
-          "op": "SHOW_STRUCTURE",
+          "op": "HIDE_STRUCTURE",
           "target": "*"
         },
         {
-          "op": "ISOLATE_REGION",
-          "target": "Clinical"
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sagittal_frame"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ectopia_cordis"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "cdh"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "caudal_regression"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "septum_transversum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_fold"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tail_fold"
         },
         {
           "op": "SHOW_RELATIONSHIP",
@@ -627,26 +1525,156 @@
           "op": "PEEL_LAYER",
           "layer": "organ",
           "direction": "outward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
         }
       ],
-      "narration": "Three lesions, one per fold. Cranial wall fails and the heart is outside the chest — ectopia cordis, and in full form the pentalogy of Cantrell. The diaphragm fails to close behind the septum transversum and bowel enters the chest — a Bochdalek hernia, where the killer is the hypoplastic lung, not the hole. And deficient mesoderm at the tail end gives caudal regression, from sacral agenesis to sirenomelia, classically with poorly controlled maternal diabetes. Learn the fold and the lesion comes free."
+      "narration": "Three lesions, one per fold. Cranial wall fails and the heart is outside the chest — ectopia cordis, and in full form the pentalogy of Cantrell. The diaphragm fails to close behind the septum transversum and bowel enters the chest — a Bochdalek hernia, where the killer is the hypoplastic lung, not the hole. And deficient mesoderm at the tail end gives caudal regression, from sacral agenesis to sirenomelia, classically with poorly controlled maternal diabetes. Learn the fold and the lesion comes free.",
+      "claims": [
+        {
+          "id": "B9-ectopia",
+          "claim": "the heart lies clear OUTSIDE the body wall",
+          "measure": "ectopia.out_of_wall",
+          "op": "atLeast",
+          "value": 0.1
+        },
+        {
+          "id": "B9-cdh",
+          "claim": "the herniated bowel reaches cranial of the septum transversum, into the chest",
+          "measure": "cdh.above_septum_dy",
+          "op": "atLeast",
+          "value": 0.33
+        },
+        {
+          "id": "B9-regression",
+          "claim": "and caudal regression has removed a fifth of the embryo's length",
+          "measure": "regression.caudal_arc_loss_frac",
+          "op": "atLeast",
+          "value": 0.2
+        }
+      ]
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 10,
+      "title": "The two cranial lesions, close up",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_fold"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "septum_transversum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "heart"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ectopia_cordis"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "cdh"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ectopia_cordis",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cdh",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Both of the cranial failures happen in the same small region, so look at it on its own. The heart sits outside a ventral wall that never closed; behind and below it, bowel has climbed through a gap left in the back corner of the septum transversum. One is a hole in the wall in front of the heart and the other is a hole in the floor beneath it, and a picture of the whole embryo is too small to tell them apart.",
+      "new_narration": "Added by the 2026-09-30 re-author, and not for teaching reasons but for measured ones: on the whole-embryo clinical beat the scene-visibility walk put ectopia cordis at 0.222% of the frame and the septum transversum at 0.205%, both under the 0.3% a structure a beat POINTS AT must reach. The lesions are small and the truncated body of caudal regression is large, so one camera cannot serve all three. RENDER-STANDARD: where two claims want incompatible cameras, that is two beats. Beat 9 keeps its narration word for word and waives those two structures TO THIS BEAT.",
+      "claims": [
+        {
+          "id": "B10-ectopia",
+          "claim": "the heart lies clear outside the body wall",
+          "measure": "ectopia.out_of_wall",
+          "op": "atLeast",
+          "value": 0.1
+        },
+        {
+          "id": "B10-cdh",
+          "claim": "and the bowel has reached cranial of the septum transversum",
+          "measure": "cdh.above_septum_dy",
+          "op": "atLeast",
+          "value": 0.33
+        }
+      ]
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-28"
+    "authored_at": "2026-08-28",
+    "reauthored_at": "2026-09-30",
+    "reauthored_by": "model3d BUILD task",
+    "reauthor_note": "Re-authored from mode \"sequence\" (provider svg, status planned, no artwork ever drawn) onto the procedural model models3d/cranio-caudal-folding.js, the way lateral-folding was re-authored on 2026-09-30. WHAT WAS CARRIED ACROSS VERBATIM: all seventeen original structures, with their key, label, role, group, colour, terms and narration unchanged, each gaining only refs.procedural; and the narration of all six original beats, word for word, in their original order. WHAT CHANGED: those six beats gained SET_STAGE, claims[] and structure lists, and were renumbered to make room for NEW BEATS, whose narration is the only text in this scene not written by the original author and is flagged with new_narration. Nine structures were ADDED for parts the original narration names but the sequence scene never drew as regions: neural tube, oropharyngeal membrane, heart tube, pericardial cavity, cloacal membrane, cloaca, allantois, vitelline duct and yolk sac. Nothing was deleted and deferred_beats is empty, because every original beat changes the picture. Status is candidate, never ready: only a review that has SEEN it promotes a scene.",
+    "revised_at": "2026-10-01",
+    "revised_by": "model3d BUILD task, review round 2 rework (round 1 rework is recorded below it)",
+    "revision_note": "Round 1 rework, both findings taken. FINDING 1: beat 3 ran COMPARE_STRUCTURES and TRACE_STRUCTURE in one view, and trace() in viz3d.js opens each waypoint with `state.hi = {}` and `state.only = [waypoint]`, which wiped the comparison's two lit panels; applyView() also skips frameView() on any traced view, so beat 3 got no per-view camera fit either. Split into two beats per RENDER-STANDARD §3.y: beat 3 holds the comparison with both panels lit and a per-view frame, and a NEW beat 4 holds the walk. Beat 3 keeps its original narration word for word; beat 4's narration is new and flagged. Beats 4-9 became 5-10 and every reference to a beat number in gaps[], visibility_waivers[] and new_narration was renumbered with them. On all three traced beats ROTATE_TO_VIEW was moved ahead of TRACE_STRUCTURE so the walk's own flyTo keeps the camera. FINDING 2: gaps[0] reworded to state the deferral rather than park the item on a human. The MODEL was not touched — models3d/cranio-caudal-folding.js is byte-identical to the version round 1 reviewed. Three new beats now carry new_narration (2, 8 and 10 after renumbering, plus this round's 4), where the 2026-09-30 reauthor_note said two; corrected above.",
+    "revision_note_round2": "Round 2 rework, the one open finding taken. FINDING: beat 3 narrates \"Same four things, opposite order\" and drew the four NAMED things — septum transversum, pericardial cavity, cardiogenic area, oropharyngeal membrane — in their AFTER positions only, ghosted at 0.10, while the first sentence of the narration recited their BEFORE order. The reversal was real in the model and absent from the picture. FIX, route (a) of the two the review offered: four structures pinned @0 were ADDED — before_septum, before_pericardium, before_heart, before_oropharyngeal, each a @0 pin of a part the scene already carries — so the before panel holds the same four things the sentence names, beside head_order_before on its flat disc; and the four at t = 1 were brought into COMPARE_STRUCTURES so BOTH panels are lit rather than one. Route (b), a second split, was rejected because the beat's closing sentence is \"Draw both panels side by side and the reversal teaches itself\", which a split makes false. Every new structure is declared in the view's pinned_ok with its reason. THE NARRATION WAS NOT TOUCHED — beat 3 still carries the original author's text word for word — and NEITHER WAS THE MODEL: models3d/cranio-caudal-folding.js is byte-identical to the version rounds 1 and 2 reviewed, because the review found the model correct and the composition at fault. New tool viz-training/tools/probe-beat3-order-on-screen.mjs asserts the two drawn orders on the screen plane of the beat's own camera and fails on the pre-fix scene.",
+    "corrected_at": "2026-10-01T07:53:00Z",
+    "corrected_by": "the model3d REVIEW task, round 3 (07:35Z slot) — did not build this item",
+    "correction_note": "Two corrections, both SCENE-LEVEL and both measured before and after; the model was NOT touched and neither was any narration. (1) stalk_ventral's colour was #2e86c1, byte-identical to cloaca's, on beat 6 where the narration names both; restored to the model's own LAYERS.stalk 0xc8a08a. (2) before_pericardium and before_heart were labelled 'second' and 'third from the cranial edge' when the model draws them co-located, pericardium fractionally the more caudal of the two; both labels reworded to drop the rank. Recorded as gaps entries with the measurements and with a proposed RENDER-STANDARD rule for same-beat colour separation."
   },
+  "deferred_beats": [],
+  "visibility_waivers": [
+    {
+      "view": 9,
+      "key": "ectopia_cordis",
+      "why": "0.222% of the frame on the whole-embryo clinical beat, against the 0.3% a pointed-at structure must reach. It is not buried — its peak pixel difference is 227 of 255, so it is bright and simply small — and it cannot be made bigger without shrinking the truncated body that beat 9 is also about. SHOWN AT FULL SIZE IN BEAT 10, which exists for this reason."
+    },
+    {
+      "view": 9,
+      "key": "septum_transversum",
+      "why": "0.205% on the same beat and for the same reason, peak 170 of 255. SHOWN IN BEATS 5 AND 10, where it is 0.306% and larger still."
+    }
+  ],
   "gaps": [
-    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram, so diagram is recorded in deferred_modes. No 3d_anatomy option is listed for this structure and none is invented here.",
-    "Status is 'planned'. Seventeen regions, six beats, ops and narration complete, but no SVG artwork exists, so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a row of four median sagittal sections of the same embryo at days 22, 24, 26 and 28, drawn at one scale and one orientation, each showing amnion, yolk sac, neural tube, heart, septum transversum, oropharyngeal membrane, cloacal membrane and connecting stalk in their positions for that day; plus a two-panel inset showing the cranial strip before and after the fold with the four items numbered 1-4 in each so the reversal is visible at a glance.",
-    "The before/after panels in beat 2 are the centre of the scene and must be drawn with the four items numbered identically in both, at one scale. If the artist draws them as two unrelated pictures the reversal — the single most examined point here — becomes invisible.",
-    "Beats 2, 4 and 5 trace concept:head-fold-rotation, concept:tail-fold-rotation and concept:gut-tube. In each the subject is a movement or a lumen rather than a drawn object, so none can be a region.",
-    "Beat 6 authors PEEL_LAYER to lift the ventral body wall off the malformations. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because 'what is missing is the wall in front' is the teaching move that unites all three lesions.",
-    "'Primitive gut tube' is NOT claimed in covers[]. The foregut, midgut and hindgut are named here because the folds are what create them, but the regional derivatives, the arterial supply by gut division and the vitelline duct anomalies are that entry's work and are authored separately.",
-    "'Body cavity (coelom)' is NOT claimed. The pericardial cavity and the septum transversum are named as passengers of the head fold, but the splitting of lateral plate mesoderm and the partitioning of the coelom belong to that entry and to Lateral folding.",
-    "'Lateral folding' is NOT claimed. The two folds are simultaneous in life and the narration says so, but this scene draws only the median plane; the transverse story is authored alongside this one.",
-    "Diaphragm development is named only as far as the septum transversum's journey and the C3-C4-C5 innervation, because that is what the head fold explains. The pleuroperitoneal membranes, the dorsal mesentery of the oesophagus and the body wall contribution belong to a diaphragm scene and appear here in match.terms only, so a highlighted term still reaches this scene until that one exists.",
-    "Day numbers are the standard teaching approximations — folding through week 4, essentially complete by about day 28. Texts differ by a day or two; the narration gives them as approximations because no exam turns on the exact day of folding, unlike the neuropore dates.",
-    "Caudal regression is given with its diabetes association because that is the examined link. The narration names the malformation and its association and does not discuss management of an affected pregnancy, which is a counselling matter rather than an embryology one."
+    "MODE: 3d_anatomy IS RECORDED AS A DEFERRAL THE CORPUS WAY, AND NOTHING HERE IS WAITING ON A HUMAN. CURRICULUM.json gives 'Cranio-caudal folding' preferred_modes [sequence, diagram] and does not list 3d_anatomy — unlike 'Lateral folding' two entries below it, which does. This is a 3d_anatomy scene anyway, because the BUILD-QUEUE item (kind model3d, re-opened 2026-09-20) instructs exactly that and Frank's 2026-09-10 ruling is that where no mesh exists the scene is built rather than left waiting. The mismatch is therefore RECORDED, not open: deferred_modes carries [sequence, diagram], which is the same field and the same convention nine other scenes in this corpus state verbatim — 'stays first in preferred_modes and is recorded in deferred_modes ... with no curriculum edit' (brachial-artery, axillary-artery, axillary-vein, axillary-lymph-nodes, brachial-plexus, breast-mammary-gland, peritoneum-mesentery, pleura-pleural-cavity, median-ulnar-radial-nerves; checked in this run — each of those defers 3d_anatomy and builds a listed mode, so this scene uses the field in the mirror direction). CURRICULUM.json is deliberately NOT edited, by that same convention. Both views the curriculum does require, mechanism and cross_section, are present. REWORDED 2026-10-01 taking review round 1 finding 2: the previous text called the resolution 'a decision for a human, not for this run', which told every future reviewer this item was blocked when it was not — which is how an item goes quiet while looking healthy.",
+    "THE AXIS CONVENTION IS NOT PROVED BY THIS MODEL. It is a median-plane subject, so every structure it draws is mirror-symmetric in x apart from the Bochdalek defect, and the acceptance row that asserts that defect lies on the embryo's LEFT is the same statement as the declaration rather than a check on it — RENDER-STANDARD's 'a declared axis is not a proved one, and a symmetric model cannot prove its own'. The convention is carried by that rule's route (b), viz-training/tools/prove-corpus-axes.mjs, against BodyParts3D right/left pairs. A student IS marked wrong for the side of a Bochdalek hernia, so this is recorded rather than assumed.",
+    "UNITS. The model is in its own units, not anatomical millimetres, so this scene must not mix the procedural provider with bodyparts3d until something reconciles scale (engine__unit-reconciliation). No structure here carries a bodyparts3d ref.",
+    "WHAT IS SOLVED AND WHAT IS PRESCRIBED. Solved, by bisection against three statements this scene's own narration makes: where the head fold's curvature is centred and how strong it is (so that the oropharyngeal membrane becomes the most cranial point AND the cranial strip turns through half a turn), and the tail fold's amplitude (so that the cloacal membrane comes to face ventrally). Prescribed, and therefore chosen rather than derived: that the growth differential is two gaussians and how WIDE they are — so how tight the folds look is a modelling choice, though how far they turn is not; how much the midline lengthens; the schedule by which the gut's communication with the yolk sac closes; the amnion's whole aperture schedule; and the size schedule of the brain vesicles.",
+    "THE BRAIN DOES NOT CAUSALLY DRIVE THE FOLD IN THIS MODEL, and beat 1's narration says it drives it. That is the largest thing here asserted in words and not in geometry. What IS geometry is the LINK: the vesicles are placed relative to the SOLVED centre of the head fold's curvature, so the neural tube's widest station and the fold's tightest station are the same station and move together — acceptance row P1. Growing the vesicles does not bend the sheet.",
+    "THE PERICARDIAL CAVITY IS DRAWN AS AN OPENED SAC. A closed one would hide the heart it contains, and a sleeve left open at its ends would be the lit annulus RENDER-STANDARD forbids, so it carries a permanent window on the embryo's left. The coelom and its partitioning belong to 'Body cavity (coelom)' and are not claimed here.",
+    "THREE STRUCTURES SHARE GEOMETRY WITH ANOTHER AT A DIFFERENT STAGE OR VARIANT, DELIBERATELY. flat_disc is the trunk body wall pinned at t = 0 and result_shape is the same part following the view; sagittal_frame is that same part with the hemisection variant, which IS what 'cut it in the median plane' means; head_order_before and head_order_after are the cranial strip pinned at t = 0 and t = 1, which is the before/after pair the original gaps[] asked an artist for. None of them is a second copy of a bone: they are one part at two instants, which is what a procedural model is for.",
+    "THE CRANIAL STRIP IS A TEACHING DEVICE, NOT AN ANATOMICAL STRUCTURE. head_order_before and head_order_after resolve to a slender rod running along the midline from the oropharyngeal membrane to the cranial edge. It is the strip the narration tells a student to rotate; the four things ON it — septum transversum, pericardial cavity, heart, membrane — are separate structures and are what actually reverse. Declared so nobody reads the rod as a named embryonic part.",
+    "CAUDAL REGRESSION IS AN ABSENCE AND IS DRAWN AS ONE. Its ref is the TRUNK body wall built with the +regression variant — the same wall, truncated — because a lesion of deficiency has no geometry of its own to point at. In that variant the tail-fold segment, hindgut, cloaca, cloacal membrane, allantois and connecting stalk resolve to no geometry at all, which is the lesion. The first version of this scene pointed the structure at the tail-fold segment and would have shown a student 'there is no model of this structure'.",
+    "AT t = 0 THE VITELLINE DUCT IS NOT A DUCT. The whole endodermal trough is open to the yolk sac, so the part is drawn at the trough's own width, capped at the yolk sac's own radius so it does not swallow the sac it opens into. The NARROWING that beat 7 claims is measured from the communication window's own built station span, never from that capped radius.",
+    "THE VENTRAL WINDOWS ARE AIMED AT A WORLD DIRECTION, NOT AT THE LOCAL ONE. render-kit resolves a cutaway's angle per row from a world direction; the body's own ventral direction rotates along the fold. Each window is given the ventral normal at the middle of its own span, and every window in this scene is short enough in s that the error at its edges is a few degrees. The hemisection is exempt: its direction is +x, which is this model's binormal at every station and at every t, because the midline is planar by construction.",
+    "BEAT 1 STANDS AT t = 0, THE BOUNDARY. check-beat-claims displaces each beat by +/- 0.05 and +/- 0.15 and requires a claim to break at each; for this beat only the positive displacements exist. Two of its three claims break at +0.05. Beat 9's regression claim is t-INDEPENDENT by construction — the lesion is a fixed material truncation — and pins nothing; the other two claims on that beat do the pinning.",
+    "THE THREE LESIONS ARE SITED CORRECTLY AND ARE NOT FULL ANATOMICAL ACCOUNTS. Ectopia cordis is drawn as the heart outside a cranial ventral wall defect; the other four components of the pentalogy of Cantrell are named in the narration and not modelled. The Bochdalek defect is a posterolateral gap in the septum transversum with a bowel loop through it; the pleuroperitoneal membranes, the body wall contribution and the hypoplastic lung are not built, and the lung is what actually kills the baby. Caudal regression is a truncation; sirenomelia is named in the narration and not modelled.",
+    "NOT CLAIMED, unchanged from the sequence version: 'Primitive gut tube', 'Body cavity (coelom)' and 'Lateral folding' are each their own curriculum entry. The foregut, midgut and hindgut are named here because the folds are what create them; the regional derivatives, the arterial supply by gut division and the vitelline duct anomalies belong to the gut-tube entry. Diaphragm development is carried only as far as the septum transversum's journey and the C3-C4-C5 innervation.",
+    "Day numbers are the standard teaching approximations — folding through week 4, essentially complete by about day 28 — and the narration gives them as approximations, because no exam turns on the exact day of folding.",
+    "BEATS 3 AND 4 PIN ONE STRUCTURE AT ANOTHER STAGE ON PURPOSE. head_order_before is the cranial strip at t = 0 and head_order_after the same part at t = 1, drawn side by side on beat 3 and walked through on beat 4, because that is what 'draw both panels side by side and the reversal teaches itself' means and it cannot be done with one stage. It is declared in each view's pinned_ok with its reason, so check-beat-claims reports it rather than counting it as a defect — a waiver is an argument someone wrote down. Both beats' claims are evaluated at t = 1.",
+    "THE DISC IN BEAT 1 IS DRAWN OPENED IN THE MEDIAN PLANE, like the rest of this scene. flat_disc was first the closed body wall at t = 0, and the scene-visibility walk then reported driver_growth — the brain vesicles, which beat 1 HIGHLIGHTS as the entire mechanism of folding — at 0% of the frame on both measures: the part the beat is about was inside an opaque disc. It is now the same geometry with the hemisection variant, so the neural tube and its vesicles are directly visible. The label, the terms and the narration are unchanged.",
+    "BEAT 1 IS THE ONE BEAT THAT IS NOT A MEDIAN-PLANE VIEW, and it is deliberate. It looks at the flat disc face on from the ventral side, which is how every textbook draws a trilaminar disc and is what lets a student see the neural plate running down the midline with its broad cranial end. Measured rather than chosen: from `lateral` the brain vesicles that this beat HIGHLIGHTS as the entire mechanism of folding were 0.204% of the frame against the 0.3% a pointed-at structure must reach, because a lateral camera sees a flat disc edge on. From `anterior` they are 0.333% and the disc itself goes from 2.7% to 7.7%. Every other beat is `lateral`, as the scene's camera.framing says, and the narration's 'this scene follows the median plane' is about the two folds, which begin at beat 2.",
+    "BEAT 3 IS THE ONE BEAT WHOSE COMPOSITION WAS CHANGED AFTER LOOKING AT IT RATHER THAN MEASURING IT. The scene-visibility walk passed it, and the picture was still poor: COMPARE_STRUCTURES' 'side-by-side' layout is NOT implemented as a translation in viz3d.js (~1913) — it ghosts the rest and moves nothing — so the before-strip was drawn at its own t = 0 position, a bare rod alone at one edge of the frame with a void between it and the folded embryo. The flat disc at t = 0 is now drawn with it, so the before-panel is a panel. The two panels are still not laid out side by side by the player; they are the two things in their own places, which for this subject is honest — the strip really does end up where it ends up — but an author expecting a two-panel plate should know that is not what the op gives them. ROUND 3, 2026-10-01: it was changed again, and this time ON a measurement. Round 2 found that the beat drew the four NAMED things — septum transversum, pericardial cavity, cardiogenic area, oropharyngeal membrane — in their AFTER positions only, ghosted at 0.10, while the narration's first sentence recited their BEFORE order; the model was right and the picture carried one order. Four structures pinned @0 were added (before_septum, before_pericardium, before_heart, before_oropharyngeal) and the four at t = 1 were brought into COMPARE_STRUCTURES so both panels are lit, each declared in pinned_ok. MEASURED ON THE DRAWN PIXELS in the real player by viz-training/tools/probe-beat3-order-on-screen.mjs: before panel top-down septum y 94.9, heart 179.1, membrane 276.8; after panel membrane 204.5, heart 248.7, septum 346.5; panels 166 px apart with no overlap. The same probe run against the pre-fix scene fails on exactly the rows the finding named, so it is a measure of the picture and not of the model.",
+    "THE TRACED BEATS GET NO PER-VIEW CAMERA FIT, AND THAT IS AN ENGINE ITEM, NOT A SCENE ONE. applyView() in viz3d.js computes `var traced = ops.some(TRACE_STRUCTURE)` and calls frameView(700) only `if (!traced)`, so every beat carrying a trace is framed by whatever the trace's own flyTo last did. Review round 1 reported this as beat 3 being 'the only beat in the scene that never gets a per-view camera fit'; MEASURED IN THIS RUN with the repo's own gate, that is not so — beats 5 and 6 of the nine-beat version traced too, and measure-view-framing.mjs FAILED beat 6 outright with 'clipped at rest' (edgeTouch true), a failing view the review did not report, while beat 5 came second-worst at fillW 9.9 / fillH 18.7. What this run changed at the scene level is op ORDER: on every traced beat ROTATE_TO_VIEW now runs BEFORE TRACE_STRUCTURE, so the trace's own flyTo holds the newest camera ticket instead of having it taken back by a rotation standing after it. That is a scene edit and it is all a scene can do here. The merge-instead-of-replace fix to trace()'s `state.hi = {}` / `state.only = [waypoint]`, and a framing pass for traced views, are engine items: viz3d.js is under every model in the corpus and a build session has been live in this repo during each of the last two runs. Logged in REPAIR-BACKLOG.md.",
+    "THE FOUR THINGS THE NARRATION NAMES ARE THREE LEVELS ON SCREEN, AND THAT IS ANATOMY. The first sentence lists septum transversum, pericardial cavity, cardiogenic area, oropharyngeal membrane — but the pericardial cavity IS the space the cardiogenic area lies in, so the two share a station on the strip at every t (model centroids at t = 0: heart y 1.2660, pericardium 1.2640; at t = 1: 1.0892 and 1.1092). The before/after ordering on beat 3 is therefore asserted over three levels, and the cavity is asserted the other way round — CO-LOCATED with the heart, within a tolerance of the panel's own drawn height (measured 3.7 px of a 43.9 px tolerance on the before panel, 5.6 of 41.4 on the after one). That is a statement that can fail; leaving the cavity out of the ordering silently would not be.",
+    "BEAT 3'S COMPARISON STRIPS ARE NOW BEHIND THE STRUCTURES THEY CARRY, AND THAT IS THE PRICE OF THE ROUND-3 FIX, PINNED AT ITS MEASURED SIZE. With the eight structures lit, head_order_after falls to 0.006% of the frame on measure-scene-visibility's id-pick — it is behind the opaque heart — and clears on the alpha-aware with/without measure at 0.436%, peak 241 of 255, over the 0.3% floor; head_order_before is 0.328% on the id-pick. Both are still subject and still framed. The strips are a teaching marker (gaps[7]) and BEAT 4 is the beat that walks one through the fold, with the strip as its only subject. If a later round wants the strips to read as strongly as the structures on beat 3, that is a third split, not a brighter rod.",
+    "COLOUR SEPARATION IS NOT IN ANY STANDARD AND THIS SCENE HAD THE CORPUS'S ONLY REAL COLLISION. Review round 3 compared, in CIE Lab dE76, every pair of structures DRAWN IN THE SAME BEAT across all 146 scenes: 4522 pairs. 65 pairs share a colour to dE < 0.5, and 64 of them are deliberate — left/right pairs (l_pa/r_pa, phrenic_l/phrenic_r, vis_l/vis_r), the D-loop/L-loop comparison pairs in cardiac-looping, and continuous segments of one vessel in fetal-circulation. The 65th was this scene: cloaca and stalk_ventral were BOTH #2e86c1, dE 0.0, drawn together on beat 6, whose narration names them as two of its three separate exam answers — the terminal hindgut becoming the cloaca, and the connecting stalk swinging onto the belly. They are endodermal gut and extraembryonic mesoderm, they touch (the allantois runs from the one into the other), and viz3d.js paint() writes s.color over the material AND onto the chip dot (lines 2427, 2436), so the two were one colour in the picture and one colour in the list. CORRECTED by review round 3 to the model's OWN declared colour for that part, LAYERS.stalk = 0xc8a08a, which the scene had been overriding; minimum same-beat separation goes 0.0 -> 42.0 on beat 6 and 7.9 -> 26.0 on beats 2 and 7. NOT CORRECTED, because choosing new colours is a palette decision and not a forced repair: beat 6 still draws tail_fold, hindgut, cloaca and the cloacal membrane as four blues separated by only dE 7.9-11.6, and beats 9 and 10 draw ectopia_cordis against cdh at dE 9.8 and, on beat 10, heart against ectopia_cordis at dE 3.7 — on the one beat that exists to tell the two cranial lesions apart. PROPOSED RULE for RENDER-STANDARD, since no standard would have caught this: structures drawn in the same beat must differ by at least dE 15 unless they are the same structure on two sides, one structure at two stages, or two segments of one continuous thing — and a visibility floor expressed as AREA does not catch it, because two structures can each fill the frame and still be one shape to a student.",
+    "THE FOUR 'BEFORE' LABELS ASSERTED A RANK THE MODEL DOES NOT DRAW, AND THIS SCENE'S OWN gaps ENTRY SAID SO. The round-2 rework added before_septum/before_pericardium/before_heart/before_oropharyngeal and labelled the middle two 'second from the cranial edge' and 'third from the cranial edge' — while the entry above them states that the pericardial cavity IS the space the cardiogenic area lies in and is asserted CO-LOCATED with it, not ordered above it. Review round 3 re-measured it off actual mesh vertices in a fresh vm rather than taking either account: at t = 0 the vertex-box centres are septum y 1.4550, heart 1.2660, pericardium 1.2633, oropharyngeal 1.0350 — the pericardium is 0.0027 CAUDAL to the heart, under 1% of the heart's own 0.3176 y-extent, so the two labels ranked them in the order opposite to the one drawn. CORRECTED: both labels now name the structure and its relation without claiming an ordinal position. The narration, which recites four names, is original-author text and is untouched; the four-names-three-levels compression is the entry above."
   ]
 }

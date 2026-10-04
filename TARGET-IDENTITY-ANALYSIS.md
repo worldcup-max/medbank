@@ -152,6 +152,42 @@ collisions, ~4 qualifier clusters, ~2 synonym pairs (aldosteronism, cor-pulmonal
 existing SIRS acronym. Generic-umbrella "Cardiology"/"Embryology" is separate (question re-tagging). Similarity-based
 normalization REJECTED by evidence (47% false-positive rate). STILL GATED — no map applied, no merges, no resolver change.
 
+## Section-A canonical topic key — OFF-vs-ON PRODUCTION MEASUREMENT & DECISION (2026-09-10)
+Deployed dormant (commit 91af829), enabled MEDBANK_TOPIC_CANON=on, measured deterministically (read-only replay of
+retrieveCandidates OFF vs ON over the real corpus: 625 targets, 582 retrospective NEW proposals), then DISABLED.
+
+**Result (with the real production K=8 cap / reserveT3=3 / T3 floor 0.40):**
+- 22 / 582 proposals (3.8%) had ANY candidate-set change.
+- Uncapped: 170 added candidates, **159/170 (94%) low-overlap noise**.
+- **Only 2 genuinely useful recoveries survived the cap** (Hyponatraemia↔Hyponatremia, aldosteronism↔hyperaldosteronism).
+- **3 useful recoveries surfaced but were CAPPED OUT** — all the Pediatric Pneumonia↔Pneumonia ones (27-target namespace,
+  T2 unranked, dropped before K=8).
+- Demonstrated benefit = **2 / 582 = 0.34%** of proposals.
+
+**Decision: MEDBANK_TOPIC_CANON=off.** Section-A canonical topic retrieval is technically SAFE and does recover real
+cross-topic candidates, but with INSUFFICIENT demonstrated benefit under the current T2/K=8 retrieval policy. Disabled
+pending a separately-gated T2-ranking investigation. Implementation + tests (48/48 map, 12/12 wiring) are KEPT (dormant),
+not deleted.
+
+**What we learned (the valuable part):**
+1. The Section-A map is safe. 2. It does recover real cross-topic candidates. 3. Current retrieval capping prevents most
+recoveries from reaching adjudication. 4. Broadening T2 without ranking creates substantial low-overlap candidate noise.
+5. **T2 ranking — not topic normalization — is now the bottleneck.**
+
+**Next hypothesis (NOT implemented; own gate): measurement-only T2 ranking.** Question: if T2 candidates were ranked by an
+existing deterministic signal (e.g. statement overlap) before the K=8 cap, how many of the capped-out recoveries would
+survive, and how much extra noise would be admitted? Do NOT modify the cap or T2 ranking now — that would turn a measured
+normalization experiment into a second optimization experiment. Record and hold.
+
+STATE: Topic normalization → measured → safe but low-value under current retrieval → OFF. T2 overlap ranking → identified
+as next hypothesis → not implemented.
+
+**READ THIS BEFORE REVISITING (anti-misremember guard):** the experiment did NOT demonstrate that canonical topic
+normalization is a worthwhile production optimization. It demonstrated that the normalization is SAFE, and that T2
+candidate ranking/capping is the LIMITING FACTOR. A green regression suite (48/48, 12/12, 95/95) proves the change is
+bounded and safe — NOT that it is beneficial. Do not later recall this as "normalization worked." The production number
+was 0.34%.
+
 ## Architectural direction (NOT to build yet)
 Three layers currently conflated: Question → Knowledge identity/decision-point → Relationships (sibling/prerequisite/
 misconception/contrast). `question_targets` infers the middle layer from the extracted statement, which is why we see

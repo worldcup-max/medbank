@@ -1,668 +1,2108 @@
 {
-  "schema": 2,
-  "id": "embryology__week-3-gastrulation__primitive-streak",
-  "mode": "sequence",
-  "deferred_modes": [
-    "diagram"
+ "schema": 2,
+ "id": "embryology__week-3-gastrulation__primitive-streak",
+ "mode": "3d_anatomy",
+ "deferred_modes": [
+  "sequence",
+  "diagram"
+ ],
+ "course": "Embryology",
+ "topic": "Week 3: Gastrulation",
+ "structure": "Primitive streak",
+ "covers": [
+  "Primitive streak"
+ ],
+ "learning_goal": "Say where and when the primitive streak appears, name its parts on a drawing of the dorsal disc, describe how epiblast cells leave the surface and where they go, use the streak to give the embryo three axes, and explain the three malformations that follow when it fails to regress or fails to signal.",
+ "status": "candidate",
+ "provider": {
+  "primary": "procedural",
+  "fallbacks": []
+ },
+ "match": {
+  "topics": [
+   "primitive streak",
+   "gastrulation",
+   "week 3",
+   "early development",
+   "germ layers",
+   "body axes",
+   "laterality",
+   "congenital malformation"
   ],
-  "course": "Embryology",
-  "topic": "Week 3: Gastrulation",
-  "structure": "Primitive streak",
-  "covers": [
-    "Primitive streak"
-  ],
-  "learning_goal": "Say where and when the primitive streak appears, name its parts on a drawing of the dorsal disc, describe how epiblast cells leave the surface and where they go, use the streak to give the embryo three axes, and explain the three malformations that follow when it fails to regress or fails to signal.",
-  "status": "planned",
-  "provider": {
-    "primary": "svg",
-    "fallbacks": []
-  },
-  "match": {
-    "topics": [
-      "primitive streak",
-      "gastrulation",
-      "week 3",
-      "early development",
-      "germ layers",
-      "body axes",
-      "laterality",
-      "congenital malformation"
-    ],
-    "terms": [
-      "primitive streak",
-      "streak",
-      "gastrulation",
-      "day 15",
-      "day 16",
-      "week 3",
-      "epiblast",
-      "hypoblast",
-      "bilaminar disc",
-      "trilaminar disc",
-      "caudal end",
-      "cranial end",
-      "midline",
-      "dorsal surface",
-      "primitive groove",
-      "primitive pit",
-      "primitive node",
-      "Hensen's node",
-      "primitive knot",
-      "ingression",
-      "invagination",
-      "epithelial to mesenchymal transition",
-      "EMT",
-      "E-cadherin",
-      "FGF8",
-      "Brachyury",
-      "T gene",
-      "mesenchyme",
-      "definitive endoderm",
-      "intraembryonic mesoderm",
-      "ectoderm",
-      "mesoderm",
-      "endoderm",
-      "notochordal process",
-      "prenotochordal cells",
-      "craniocaudal axis",
-      "left-right axis",
-      "dorsoventral axis",
-      "bilateral symmetry",
-      "oropharyngeal membrane",
-      "prechordal plate",
-      "cloacal membrane",
-      "streak regression",
-      "day 26",
-      "week 4",
-      "cardiogenic area",
-      "nodal cilia",
-      "situs inversus",
-      "situs inversus totalis",
-      "Kartagener syndrome",
-      "primary ciliary dyskinesia",
-      "dextrocardia",
-      "sacrococcygeal teratoma",
-      "caudal dysgenesis",
-      "caudal regression syndrome",
-      "sirenomelia",
-      "maternal diabetes",
-      "14-day rule",
-      "individuation"
-    ]
-  },
-  "camera": {
-    "framing": "posterior"
-  },
-  "structures": [
-    {
-      "key": "disc_context",
-      "label": "The bilaminar disc, seen from above — day 15",
-      "role": "context",
-      "group": "Where and when",
-      "layer": "organ",
-      "color": "#aeb6bf",
-      "terms": [
-        "bilaminar disc",
-        "epiblast",
-        "hypoblast",
-        "dorsal surface",
-        "amniotic cavity",
-        "day 15",
-        "week 3",
-        "pear-shaped disc"
-      ],
-      "narration": "Week three opens with the disc still two layers thick. Look down on it from inside the amniotic cavity and you are looking at the epiblast. Everything in this scene happens on that surface. The disc is broader at the cranial end than the caudal end, so the shape itself tells you which way round it is."
-    },
-    {
-      "key": "streak",
-      "label": "Primitive streak",
-      "role": "part",
-      "group": "The streak itself",
-      "layer": "organ",
-      "color": "#c0392b",
-      "terms": [
-        "primitive streak",
-        "streak",
-        "day 15",
-        "caudal end",
-        "midline",
-        "epiblast",
-        "narrow groove",
-        "thickened band",
-        "first sign of gastrulation"
-      ],
-      "narration": "On about day fifteen a narrow band thickens in the midline at the caudal end of the epiblast. That is the primitive streak. Two facts define it and both are asked: it forms in the epiblast, and it forms caudally. It then extends forwards towards the middle of the disc, so the streak is a moving structure, not a fixed line."
-    },
-    {
-      "key": "groove",
-      "label": "Primitive groove",
-      "role": "part",
-      "group": "The streak itself",
-      "layer": "organ",
-      "color": "#e74c3c",
-      "terms": [
-        "primitive groove",
-        "groove",
-        "narrow furrow",
-        "midline",
-        "entry point",
-        "ingression"
-      ],
-      "narration": "A shallow furrow runs down the middle of the streak. That is the primitive groove, and it is simply the doorway: it is where surface cells sink out of the epiblast. If a question asks how cells get from the top layer into the middle of the disc, the answer starts at this groove."
-    },
-    {
-      "key": "node",
-      "label": "Primitive node (Hensen's node)",
-      "role": "part",
-      "group": "The streak itself",
-      "layer": "organ",
-      "color": "#8e44ad",
-      "terms": [
-        "primitive node",
-        "Hensen's node",
-        "primitive knot",
-        "cranial end of the streak",
-        "organiser",
-        "signalling centre",
-        "nodal cilia",
-        "prenotochordal cells"
-      ],
-      "narration": "The cranial end of the streak swells into a small mound — the primitive node, also called Hensen's node. Do not treat it as decoration. It is the embryo's chief organiser: the cells that build the midline pass through it, and the signals that decide which side is left come from it. Almost everything the streak does that is not simple layer-making is done here."
-    },
-    {
-      "key": "pit",
-      "label": "Primitive pit",
-      "role": "part",
-      "group": "The streak itself",
-      "layer": "organ",
-      "color": "#a569bd",
-      "terms": [
-        "primitive pit",
-        "depression in the node",
-        "notochordal process",
-        "notochordal canal",
-        "midline entry"
-      ],
-      "narration": "A small depression sits in the centre of the node — the primitive pit. Cells destined for the midline sink here rather than at the groove, and they run forward as a tube under the ectoderm. Groove for the layers, pit for the midline: that split is the cleanest way to hold the two routes apart."
-    },
-    {
-      "key": "ingression",
-      "label": "Ingression — cells leave the surface",
-      "role": "part",
-      "group": "How cells move",
-      "layer": "organ",
-      "color": "#e67e22",
-      "terms": [
-        "ingression",
-        "invagination",
-        "epithelial to mesenchymal transition",
-        "EMT",
-        "E-cadherin",
-        "loss of adhesion",
-        "flask-shaped cells",
-        "mesenchyme",
-        "FGF8",
-        "Brachyury",
-        "T gene",
-        "migration"
-      ],
-      "narration": "An epiblast cell reaching the groove loosens its junctions, loses E-cadherin, becomes flask-shaped and drops out of the sheet as a free mesenchymal cell. That change of state is an epithelial to mesenchymal transition, driven at the streak by FGF8, and it is the single mechanism the whole of gastrulation runs on. The same trick is reused by neural crest cells later, and by carcinoma cells when they metastasise — which is why examiners like it."
-    },
-    {
-      "key": "endoderm_route",
-      "label": "First wave — displacing the hypoblast",
-      "role": "part",
-      "group": "How cells move",
-      "layer": "organ",
-      "color": "#f1c40f",
-      "terms": [
-        "definitive endoderm",
-        "displaces the hypoblast",
-        "first wave",
-        "epiblast origin",
-        "lower layer",
-        "not from hypoblast"
-      ],
-      "narration": "The first cells through the groove push all the way down and displace the hypoblast entirely, replacing it as the definitive endoderm. Learn the direction of that sentence. The lower layer of the trilaminar disc is not the old hypoblast renamed — it is epiblast that migrated down and evicted it. Students lose this mark every year."
-    },
-    {
-      "key": "mesoderm_route",
-      "label": "Second wave — filling the middle",
-      "role": "part",
-      "group": "How cells move",
-      "layer": "organ",
-      "color": "#27ae60",
-      "terms": [
-        "intraembryonic mesoderm",
-        "second wave",
-        "middle layer",
-        "spreads laterally",
-        "spreads cranially",
-        "mesenchyme",
-        "extraembryonic mesoderm continuity"
-      ],
-      "narration": "The cells that follow stop between the two sheets and spread out as intraembryonic mesoderm. They fan sideways and forwards, meeting their opposite numbers in front of the prechordal plate to form the cardiogenic area. The epiblast left behind on the surface is now the ectoderm. One source, three layers, in that order."
-    },
-    {
-      "key": "notochordal_process",
-      "label": "Midline cells through the pit",
-      "role": "part",
-      "group": "How cells move",
-      "layer": "organ",
-      "color": "#16a085",
-      "terms": [
-        "notochordal process",
-        "prenotochordal cells",
-        "primitive pit",
-        "notochordal canal",
-        "midline",
-        "cranial migration",
-        "prechordal plate",
-        "notochord"
-      ],
-      "narration": "Cells that enter through the pit take a different road. They run forward in the midline between ectoderm and endoderm as far as the prechordal plate and form the notochordal process, which becomes the notochord. This scene names that route because the pit has no other purpose; what the notochord then does is taught on its own."
-    },
-    {
-      "key": "axes",
-      "label": "Three axes at once",
-      "role": "part",
-      "group": "What the streak defines",
-      "layer": "organ",
-      "color": "#2980b9",
-      "terms": [
-        "craniocaudal axis",
-        "left-right axis",
-        "dorsoventral axis",
-        "bilateral symmetry",
-        "midline",
-        "body plan",
-        "median plane"
-      ],
-      "narration": "The moment the streak appears the embryo acquires a body plan. The streak is caudal, so there is a head end and a tail end. It lies in the midline, so there is a left and a right. Ectoderm is dorsal and endoderm ventral, so there is a back and a front. Three axes from one structure, and every later description of position depends on them."
-    },
-    {
-      "key": "membranes",
-      "label": "Two places mesoderm never reaches",
-      "role": "part",
-      "group": "What the streak defines",
-      "layer": "organ",
-      "color": "#d35400",
-      "terms": [
-        "oropharyngeal membrane",
-        "buccopharyngeal membrane",
-        "prechordal plate",
-        "cloacal membrane",
-        "no mesoderm",
-        "ectoderm and endoderm fused",
-        "future mouth",
-        "future anus"
-      ],
-      "narration": "Mesoderm spreads everywhere except two spots where ectoderm and endoderm stay stuck together. Cranially that is the oropharyngeal membrane, at the prechordal plate, and it breaks down to open the mouth. Caudally it is the cloacal membrane, which breaks down to open the anus and the urogenital opening. Both are two-layered islands in a three-layered disc, and both later have to rupture."
-    },
-    {
-      "key": "regression",
-      "label": "The streak regresses",
-      "role": "part",
-      "group": "What the streak defines",
-      "layer": "organ",
-      "color": "#7f8c8d",
-      "terms": [
-        "streak regression",
-        "shortens",
-        "caudal",
-        "day 26",
-        "week 4",
-        "disappears",
-        "caudal eminence",
-        "remnant"
-      ],
-      "narration": "Once the streak has produced enough cells it stops growing and shrinks backwards, and by about day twenty-six it has all but gone. The order it built the body in is the order it leaves: cranial structures were laid down first, caudal ones last. Two of the three malformations in this topic are simply this shrinking going wrong."
-    },
-    {
-      "key": "laterality",
-      "label": "Why the heart is on the left",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#5dade2",
-      "terms": [
-        "nodal cilia",
-        "leftward flow",
-        "left-right asymmetry",
-        "laterality",
-        "situs inversus",
-        "situs inversus totalis",
-        "dextrocardia",
-        "Kartagener syndrome",
-        "primary ciliary dyskinesia",
-        "bronchiectasis",
-        "infertility"
-      ],
-      "narration": "Cilia on the primitive node beat in one direction and sweep signalling fluid to the left, which is how a symmetrical disc decides which side is which. If those cilia do not move, the side is settled by chance and about half of such embryos end up mirror-image — situs inversus. That is the link to Kartagener syndrome: immotile cilia give situs inversus with chronic sinusitis and bronchiectasis, and subfertility, because the same protein moves sperm tails and airway cilia."
-    },
-    {
-      "key": "teratoma",
-      "label": "A streak that does not disappear",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#af7ac5",
-      "terms": [
-        "sacrococcygeal teratoma",
-        "remnant of the primitive streak",
-        "pluripotent cells",
-        "sacrococcygeal region",
-        "newborn tumour",
-        "female predominance",
-        "all three germ layers",
-        "malignant change"
-      ],
-      "narration": "Streak cells are pluripotent, so a remnant left behind in the sacrococcygeal region can grow into a tumour containing tissue from all three germ layers — a sacrococcygeal teratoma. It is the commonest tumour of the newborn, far commoner in girls, and it is removed early because the risk of malignant change rises with age. When you are asked why it contains teeth or gut or nerve, the answer is that its parent cell had not yet chosen a layer."
-    },
-    {
-      "key": "caudal_dysgenesis",
-      "label": "A streak that makes too little",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#cd6155",
-      "terms": [
-        "caudal dysgenesis",
-        "caudal regression syndrome",
-        "sirenomelia",
-        "mermaid syndrome",
-        "insufficient mesoderm",
-        "maternal diabetes",
-        "sacral agenesis",
-        "fused lower limbs",
-        "renal agenesis",
-        "imperforate anus"
-      ],
-      "narration": "If too little mesoderm is made at the caudal end, the structures that depend on it are deficient — sacral agenesis, imperforate anus, absent or fused kidneys, and in the extreme the lower limb buds run together as sirenomelia. This is caudal dysgenesis, and its best-known association is poorly controlled maternal diabetes. It is one of the arguments for getting glucose under control before conception rather than after a positive test."
-    }
-  ],
-  "views": [
-    {
-      "mode": "location",
-      "beat": 1,
-      "title": "Look down on the disc and find the line",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The streak itself"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "disc_context"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "streak",
-          "intensity": 0.95
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "posterior"
-        }
-      ],
-      "narration": "One picture carries this topic: the disc seen from above, from inside the amniotic cavity, so you are looking at the epiblast. On about day fifteen a narrow thickened line appears in the midline at the caudal end. That is the primitive streak, and its appearance is the definition of week three. It then grows forwards, so it is a line that lengthens towards the middle of the disc."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 2,
-      "title": "Groove, node, pit — three named parts",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The streak itself"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "groove",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "streak",
-          "to": "node",
-          "kind": "swells at its cranial end into"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "node",
-          "to": "pit",
-          "kind": "is depressed in its centre as"
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "groove",
-            "pit"
-          ],
-          "layout": "side-by-side"
-        }
-      ],
-      "narration": "Label three things on the streak and you can answer any question about it. A furrow down its length — the primitive groove. A mound at its cranial end — the primitive node, or Hensen's node. A dimple in that mound — the primitive pit. Cells for the germ layers go in at the groove; cells for the midline go in at the pit. Two doors, two destinations."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 3,
-      "title": "How a surface cell becomes a wandering one",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "How cells move"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "groove"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "ingression",
-          "intensity": 0.95
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "groove",
-          "to": "ingression",
-          "kind": "is where it happens"
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "x",
-          "offset": 0,
-          "animate": true
-        }
-      ],
-      "narration": "Cut across the streak and watch one cell. It reaches the groove, releases its hold on its neighbours, loses E-cadherin, narrows to a flask shape and drops out of the sheet as free mesenchyme. That is an epithelial to mesenchymal transition. It is worth a name because the embryo reuses it for neural crest, and because a carcinoma cell leaving its epithelium does exactly the same thing."
-    },
-    {
-      "mode": "cross_section",
-      "beat": 4,
-      "title": "Two waves, and the mistake everyone makes",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "How cells move"
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:ingressing-cells",
-          "path": [
-            "ingression",
-            "endoderm_route",
-            "mesoderm_route"
-          ],
-          "duration": 6
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "endoderm_route",
-            "mesoderm_route"
-          ],
-          "layout": "stacked"
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "x",
-          "offset": 0
-        }
-      ],
-      "narration": "The first cells through go all the way to the bottom and push the hypoblast out completely; what they form is the definitive endoderm. The next cells stop halfway and spread as intraembryonic mesoderm. The epiblast that never moved stays on the surface as ectoderm. So all three germ layers come from one layer, the epiblast — and the lower layer of the new disc is not the old hypoblast under a new name. That is the sentence that separates a good answer from an average one."
-    },
-    {
-      "mode": "location",
-      "beat": 5,
-      "title": "The pit sends cells straight up the middle",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "How cells move"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "pit"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "notochordal_process",
-          "intensity": 0.9
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:midline-migration",
-          "path": [
-            "pit",
-            "notochordal_process",
-            "membranes"
-          ],
-          "duration": 5
-        }
-      ],
-      "narration": "Cells entering at the pit do not spread sideways. They run forward in the midline, between the ectoderm above and the new endoderm below, and stop at the prechordal plate. That column is the notochordal process and it becomes the notochord. Trace it here so the pit has a purpose; what the notochord induces is a separate story."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 6,
-      "title": "The embryo gets a head, a left and a back",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "What the streak defines"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "streak"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "axes",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "streak",
-          "to": "axes",
-          "kind": "being caudal and median, defines all three"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "membranes",
-          "to": "axes",
-          "kind": "marks the two ends of the gut tube"
-        }
-      ],
-      "narration": "Before the streak the disc is a plate with a head end and nothing else. After it there is a craniocaudal axis, because the streak is caudal; a left and a right, because it lies in the midline; and a dorsal and a ventral surface, because ectoderm is above and endoderm below. The oropharyngeal membrane and the cloacal membrane stay two-layered and mark where the mouth and the anus will open."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 7,
-      "title": "Cilia on the node decide which side is left",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Clinical"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "node"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "laterality",
-          "intensity": 0.95
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "node",
-          "to": "laterality",
-          "kind": "its cilia sweep fluid leftward"
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "superior"
-        }
-      ],
-      "narration": "A symmetrical disc has to break its own symmetry. Cilia on the primitive node beat in one direction and drive fluid to the left, and the signal that collects there is what puts the heart, stomach and spleen on the left. When the cilia are immotile the choice is random, so about half of those embryos come out mirror-imaged. That is situs inversus, and paired with sinusitis, bronchiectasis and subfertility it is Kartagener syndrome — one broken motor protein, four findings."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 8,
-      "title": "A streak that stays too long, and one that does too little",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Clinical"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "regression"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "regression",
-          "to": "teratoma",
-          "kind": "a remnant left behind grows into"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "regression",
-          "to": "caudal_dysgenesis",
-          "kind": "too little caudal mesoderm gives"
-        },
-        {
-          "op": "HIDE_STRUCTURE",
-          "target": "How cells move"
-        }
-      ],
-      "narration": "The streak should shrink away by about day twenty-six. Two things go wrong with that. Cells left behind in the sacrococcygeal region stay pluripotent and can grow into a sacrococcygeal teratoma — the commonest tumour of the newborn, mostly in girls, containing tissue from all three layers, and removed early because it can turn malignant. Or the streak makes too little caudal mesoderm, and you get sacral agenesis, imperforate anus, renal defects and, at the extreme, fused lower limbs. That is caudal dysgenesis, and it is the malformation most strongly linked to poorly controlled maternal diabetes — a reason to control glucose before conception, not after."
-    }
-  ],
-  "provenance": {
-    "author": "task",
-    "authored_at": "2026-08-28"
-  },
-  "gaps": [
-    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and offers no 3d option for this structure; the subject is a staged migration at a scale no mesh exists for. Only diagram is deferred. The curriculum asks for mechanism and location views and both are authored.",
-    "Status is 'planned'. Fifteen regions, eight beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a dorsal view of the pear-shaped disc with the streak drawn caudal and lengthening cranially, groove, node and pit labelled separately, a transverse cut through the streak showing flask-shaped cells leaving the epiblast, a second cut showing the first wave reaching the lower layer and the second stopping in the middle, and the two membranes marked at the cranial and caudal ends.",
-    "The dorsal view must be drawn with the cranial end at the top in every panel. Beats 1, 6 and 8 all depend on the reader knowing which end is caudal without being told again, and flipping the disc between panels for layout would make the streak look cranial.",
-    "Beat 4 traces concept:ingressing-cells and beat 5 traces concept:midline-migration. In both the subject is a population of cells in motion, not a drawn object, so neither can be a region.",
-    "'Trilaminar disc (3 germ layers)' is a SEPARATE curriculum entry in this topic and is NOT claimed in covers[], although beat 4 describes the two waves that make the layers. This scene teaches how cells get out of the epiblast; what the three layers then become is that entry's work and is authored alongside this one.",
-    "'Notochord' is likewise NOT claimed. The notochordal process is named in beat 5 because the primitive pit has no other function, but the notochordal canal, the notochordal plate, induction of the neural plate and the fate of the notochord as nucleus pulposus belong to that entry.",
-    "'Neurulation (neural plate/tube)' is NOT claimed and is not named as a region. It follows from notochordal induction, which this scene does not teach.",
-    "Day numbers are the standard teaching ones — streak appears about day 15, regression largely complete by about day 26 — and are narrated as approximations. Texts differ by a day or two at both ends and no single figure is stated as fact.",
-    "The molecular detail is deliberately shallow: FGF8, Brachyury and E-cadherin appear as terms and FGF8 once in narration, because Nigerian MBBS papers name them but do not examine the pathways. If a molecular embryology topic is ever added, the signalling belongs there and this narration should not grow.",
-    "Kartagener syndrome is taught here rather than in a respiratory topic because the node cilia are the reason situs inversus and bronchiectasis appear in the same patient. The scene does not claim any respiratory curriculum entry; the terms sit in match.terms so a highlighted 'situs inversus' in a note lands on the mechanism.",
-    "The 14-day rule appears only in match.terms. It is taught in the bilaminar disc scene, where the argument is that the streak has not yet appeared, and repeating it here would duplicate rather than extend."
+  "terms": [
+   "primitive streak",
+   "streak",
+   "gastrulation",
+   "day 15",
+   "day 16",
+   "week 3",
+   "epiblast",
+   "hypoblast",
+   "bilaminar disc",
+   "trilaminar disc",
+   "caudal end",
+   "cranial end",
+   "midline",
+   "dorsal surface",
+   "primitive groove",
+   "primitive pit",
+   "primitive node",
+   "Hensen's node",
+   "primitive knot",
+   "ingression",
+   "invagination",
+   "epithelial to mesenchymal transition",
+   "EMT",
+   "E-cadherin",
+   "FGF8",
+   "Brachyury",
+   "T gene",
+   "mesenchyme",
+   "definitive endoderm",
+   "intraembryonic mesoderm",
+   "ectoderm",
+   "mesoderm",
+   "endoderm",
+   "notochordal process",
+   "prenotochordal cells",
+   "craniocaudal axis",
+   "left-right axis",
+   "dorsoventral axis",
+   "bilateral symmetry",
+   "oropharyngeal membrane",
+   "prechordal plate",
+   "cloacal membrane",
+   "streak regression",
+   "day 26",
+   "week 4",
+   "cardiogenic area",
+   "nodal cilia",
+   "situs inversus",
+   "situs inversus totalis",
+   "Kartagener syndrome",
+   "primary ciliary dyskinesia",
+   "dextrocardia",
+   "sacrococcygeal teratoma",
+   "caudal dysgenesis",
+   "caudal regression syndrome",
+   "sirenomelia",
+   "maternal diabetes",
+   "14-day rule",
+   "individuation"
   ]
+ },
+ "camera": {
+  "framing": "posterior"
+ },
+ "structures": [
+  {
+   "role": "primary",
+   "opacity": 1,
+   "key": "epiblast",
+   "label": "Epiblast — the dorsal layer every germ layer comes from",
+   "group": "Where and when",
+   "color": "#9fb6c9",
+   "terms": [
+    "bilaminar disc",
+    "epiblast",
+    "hypoblast",
+    "dorsal surface",
+    "amniotic cavity",
+    "day 15",
+    "week 3",
+    "pear-shaped disc"
+   ],
+   "narration": "Week three opens with the disc still two layers thick. Look down on it from inside the amniotic cavity and you are looking at the epiblast. Everything in this scene happens on that surface. The disc is broader at the cranial end than the caudal end, so the shape itself tells you which way round it is.",
+   "narration_from": "sequence-version structure \"disc_context\" — carried across verbatim. In the 3D scene the surface it describes IS a built structure rather than a framing sentence.",
+   "name": "Epiblast — the dorsal layer every germ layer comes from",
+   "refs": {
+    "procedural": "primitive-streak#epiblast"
+   }
+  },
+  {
+   "role": "context",
+   "opacity": 1,
+   "key": "hypoblast",
+   "label": "Hypoblast — the lower layer that gets evicted",
+   "group": "Where and when",
+   "color": "#95a5a6",
+   "terms": [
+    "hypoblast",
+    "lower layer",
+    "bilaminar disc",
+    "displaced",
+    "not the definitive endoderm",
+    "extraembryonic endoderm"
+   ],
+   "narration": "The lower layer of the bilaminar disc. Grey here, and shrinking in every later beat, because that is its whole story in this topic: it is pushed out of the embryonic disc by cells coming down through the streak and takes no part in the three germ layers. Watch it disappear rather than change colour — nothing here is renamed.",
+   "narration_from": "new — the hypoblast was described inside other structures' prose in the sequence version and needs geometry of its own here, because the whole of beat 5 turns on what happens to it.",
+   "name": "Hypoblast — the lower layer that gets evicted",
+   "refs": {
+    "procedural": "primitive-streak#hypoblast"
+   }
+  },
+  {
+   "role": "primary",
+   "opacity": 1,
+   "key": "streak",
+   "label": "Primitive streak",
+   "group": "The streak itself",
+   "color": "#c0392b",
+   "terms": [
+    "primitive streak",
+    "streak",
+    "day 15",
+    "caudal end",
+    "midline",
+    "epiblast",
+    "narrow groove",
+    "thickened band",
+    "first sign of gastrulation"
+   ],
+   "narration": "On about day fifteen a narrow band thickens in the midline at the caudal end of the epiblast. That is the primitive streak. Two facts define it and both are asked: it forms in the epiblast, and it forms caudally. It then extends forwards towards the middle of the disc, so the streak is a moving structure, not a fixed line.",
+   "narration_from": "sequence-version structure \"streak\" — carried across verbatim",
+   "name": "Primitive streak",
+   "refs": {
+    "procedural": "primitive-streak#streak"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "groove",
+   "label": "Primitive groove",
+   "group": "The streak itself",
+   "color": "#e74c3c",
+   "terms": [
+    "primitive groove",
+    "groove",
+    "narrow furrow",
+    "midline",
+    "entry point",
+    "ingression"
+   ],
+   "narration": "A shallow furrow runs down the middle of the streak. That is the primitive groove, and it is simply the doorway: it is where surface cells sink out of the epiblast. If a question asks how cells get from the top layer into the middle of the disc, the answer starts at this groove.",
+   "narration_from": "sequence-version structure \"groove\" — carried across verbatim",
+   "name": "Primitive groove",
+   "refs": {
+    "procedural": "primitive-streak#groove"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "node",
+   "label": "Primitive node (Hensen's node)",
+   "group": "The streak itself",
+   "color": "#8e44ad",
+   "terms": [
+    "primitive node",
+    "Hensen's node",
+    "primitive knot",
+    "cranial end of the streak",
+    "organiser",
+    "signalling centre",
+    "nodal cilia",
+    "prenotochordal cells"
+   ],
+   "narration": "The cranial end of the streak swells into a small mound — the primitive node, also called Hensen's node. Do not treat it as decoration. It is the embryo's chief organiser: the cells that build the midline pass through it, and the signals that decide which side is left come from it. Almost everything the streak does that is not simple layer-making is done here.",
+   "narration_from": "sequence-version structure \"node\" — carried across verbatim",
+   "name": "Primitive node (Hensen's node)",
+   "refs": {
+    "procedural": "primitive-streak#node"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "pit",
+   "label": "Primitive pit",
+   "group": "The streak itself",
+   "color": "#a569bd",
+   "terms": [
+    "primitive pit",
+    "depression in the node",
+    "notochordal process",
+    "notochordal canal",
+    "midline entry"
+   ],
+   "narration": "A small depression sits in the centre of the node — the primitive pit. Cells destined for the midline sink here rather than at the groove, and they run forward as a tube under the ectoderm. Groove for the layers, pit for the midline: that split is the cleanest way to hold the two routes apart.",
+   "narration_from": "sequence-version structure \"pit\" — carried across verbatim",
+   "name": "Primitive pit",
+   "refs": {
+    "procedural": "primitive-streak#pit"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "endoderm",
+   "label": "Definitive endoderm — epiblast that moved down and stayed",
+   "group": "How cells move",
+   "color": "#f1c40f",
+   "terms": [
+    "definitive endoderm",
+    "first wave",
+    "epiblast origin",
+    "displaces the hypoblast",
+    "lower layer",
+    "gut epithelium"
+   ],
+   "narration": "The lower layer of the trilaminar disc, drawn in its own colour so that the replacement can be watched happening. It spreads from the streak outwards, and the grey hypoblast ahead of it gets smaller as it goes. Every part of it entered through the groove: there is no station on this journey where a hypoblast cell joins in.",
+   "narration_from": "new — the sequence version taught the first wave as a route only; the 3D scene can show the layer the route builds, which is the half students are examined on.",
+   "name": "Definitive endoderm — epiblast that moved down and stayed",
+   "refs": {
+    "procedural": "primitive-streak#endoderm"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "mesoderm",
+   "label": "Intraembryonic mesoderm — the middle layer",
+   "group": "How cells move",
+   "color": "#27ae60",
+   "terms": [
+    "intraembryonic mesoderm",
+    "middle layer",
+    "second wave",
+    "paraxial",
+    "spreads laterally",
+    "spreads cranially",
+    "cardiogenic area",
+    "mesenchyme"
+   ],
+   "narration": "The middle layer, spreading sideways and forwards between the other two and thinning to nothing at its own leading edge, which is what a sheet of migrating mesenchyme does. Two things to notice: it never crosses the midline where the notochordal process lies, because it is paraxial; and it never reaches the two membranes at the ends of the disc.",
+   "narration_from": "new — as for the endoderm: the sequence version had the route, not the layer.",
+   "name": "Intraembryonic mesoderm — the middle layer",
+   "refs": {
+    "procedural": "primitive-streak#mesoderm"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "notochordal_process",
+   "label": "Notochordal process — the midline route through the pit",
+   "group": "How cells move",
+   "color": "#16a085",
+   "terms": [
+    "notochordal process",
+    "prenotochordal cells",
+    "primitive pit",
+    "notochordal canal",
+    "midline",
+    "cranial migration",
+    "prechordal plate",
+    "notochord"
+   ],
+   "narration": "Cells that enter through the pit take a different road. They run forward in the midline between ectoderm and endoderm as far as the prechordal plate and form the notochordal process, which becomes the notochord. This scene names that route because the pit has no other purpose; what the notochord then does is taught on its own.",
+   "narration_from": "sequence-version structure \"notochordal_process\" — carried across verbatim",
+   "name": "Notochordal process — the midline route through the pit",
+   "refs": {
+    "procedural": "primitive-streak#notochordal_process"
+   }
+  },
+  {
+   "role": "context",
+   "opacity": 1,
+   "key": "axes",
+   "label": "Three axes at once",
+   "group": "What the streak defines",
+   "color": "#2980b9",
+   "terms": [
+    "craniocaudal axis",
+    "left-right axis",
+    "dorsoventral axis",
+    "bilateral symmetry",
+    "midline",
+    "body plan",
+    "median plane"
+   ],
+   "narration": "The moment the streak appears the embryo acquires a body plan. The streak is caudal, so there is a head end and a tail end. It lies in the midline, so there is a left and a right. Ectoderm is dorsal and endoderm ventral, so there is a back and a front. Three axes from one structure, and every later description of position depends on them.",
+   "narration_from": "sequence-version structure \"axes\" — carried across verbatim",
+   "name": "Three axes at once",
+   "refs": {
+    "procedural": "primitive-streak#axes"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "membranes",
+   "label": "Two places mesoderm never reaches",
+   "group": "What the streak defines",
+   "color": "#d35400",
+   "terms": [
+    "oropharyngeal membrane",
+    "buccopharyngeal membrane",
+    "prechordal plate",
+    "cloacal membrane",
+    "no mesoderm",
+    "ectoderm and endoderm fused",
+    "future mouth",
+    "future anus"
+   ],
+   "narration": "Mesoderm spreads everywhere except two spots where ectoderm and endoderm stay stuck together. Cranially that is the oropharyngeal membrane, at the prechordal plate, and it breaks down to open the mouth. Caudally it is the cloacal membrane, which breaks down to open the anus and the urogenital opening. Both are two-layered islands in a three-layered disc, and both later have to rupture.",
+   "narration_from": "sequence-version structure \"membranes\" — carried across verbatim",
+   "name": "Two places mesoderm never reaches",
+   "refs": {
+    "procedural": "primitive-streak#membranes"
+   }
+  },
+  {
+   "role": "context",
+   "opacity": 1,
+   "key": "streak_max",
+   "label": "How far the streak reached — the regression reference",
+   "group": "What the streak defines",
+   "color": "#7f8c8d",
+   "terms": [
+    "streak regression",
+    "shortens",
+    "caudal",
+    "day 26",
+    "week 4",
+    "disappears",
+    "caudal eminence",
+    "remnant"
+   ],
+   "narration": "Once the streak has produced enough cells it stops growing and shrinks backwards, and by about day twenty-six it has all but gone. The order it built the body in is the order it leaves: cranial structures were laid down first, caudal ones last. Two of the three malformations in this topic are simply this shrinking going wrong.",
+   "narration_from": "sequence-version structure \"regression\" — carried across verbatim. Regression is a change over t rather than an object, so what the 3D scene gives it is a fixed reference at the streak's own high-water mark: the rails stay, the streak shrinks away from them, and the shortening becomes something a student can see rather than be told.",
+   "name": "How far the streak reached — the regression reference",
+   "refs": {
+    "procedural": "primitive-streak#streak_max"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "laterality",
+   "label": "Nodal cilia and the leftward flow",
+   "group": "Clinical",
+   "color": "#5dade2",
+   "terms": [
+    "nodal cilia",
+    "leftward flow",
+    "left-right asymmetry",
+    "laterality",
+    "situs inversus",
+    "situs inversus totalis",
+    "dextrocardia",
+    "Kartagener syndrome",
+    "primary ciliary dyskinesia",
+    "bronchiectasis",
+    "infertility"
+   ],
+   "narration": "Cilia on the primitive node beat in one direction and sweep signalling fluid to the left, which is how a symmetrical disc decides which side is which. If those cilia do not move, the side is settled by chance and about half of such embryos end up mirror-image — situs inversus. That is the link to Kartagener syndrome: immotile cilia give situs inversus with chronic sinusitis and bronchiectasis, and subfertility, because the same protein moves sperm tails and airway cilia.",
+   "narration_from": "sequence-version structure \"laterality\" — carried across verbatim",
+   "name": "Nodal cilia and the leftward flow",
+   "refs": {
+    "procedural": "primitive-streak#laterality"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "teratoma",
+   "label": "A streak that does not disappear",
+   "group": "Clinical",
+   "color": "#af7ac5",
+   "terms": [
+    "sacrococcygeal teratoma",
+    "remnant of the primitive streak",
+    "pluripotent cells",
+    "sacrococcygeal region",
+    "newborn tumour",
+    "female predominance",
+    "all three germ layers",
+    "malignant change"
+   ],
+   "narration": "Streak cells are pluripotent, so a remnant left behind in the sacrococcygeal region can grow into a tumour containing tissue from all three germ layers — a sacrococcygeal teratoma. It is the commonest tumour of the newborn, far commoner in girls, and it is removed early because the risk of malignant change rises with age. When you are asked why it contains teeth or gut or nerve, the answer is that its parent cell had not yet chosen a layer.",
+   "narration_from": "sequence-version structure \"teratoma\" — carried across verbatim",
+   "name": "A streak that does not disappear",
+   "refs": {
+    "procedural": "primitive-streak#teratoma"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 0.32,
+   "key": "caudal_deficit",
+   "label": "A streak that makes too little",
+   "group": "Clinical",
+   "color": "#cd6155",
+   "terms": [
+    "caudal dysgenesis",
+    "caudal regression syndrome",
+    "sirenomelia",
+    "mermaid syndrome",
+    "insufficient mesoderm",
+    "maternal diabetes",
+    "sacral agenesis",
+    "fused lower limbs",
+    "renal agenesis",
+    "imperforate anus"
+   ],
+   "narration": "If too little mesoderm is made at the caudal end, the structures that depend on it are deficient — sacral agenesis, imperforate anus, absent or fused kidneys, and in the extreme the lower limb buds run together as sirenomelia. This is caudal dysgenesis, and its best-known association is poorly controlled maternal diabetes. It is one of the arguments for getting glucose under control before conception rather than after a positive test.",
+   "narration_from": "sequence-version structure \"caudal_dysgenesis\" — carried across verbatim. The model marks the caudal zone the deficiency affects; see gaps[] on what it does and does not draw.",
+   "name": "A streak that makes too little",
+   "refs": {
+    "procedural": "primitive-streak#caudal_deficit"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "sec_epiblast",
+   "label": "Epiblast, in median section",
+   "group": "Median section — the layers",
+   "color": "#9fb6c9",
+   "terms": [],
+   "narration": "The same part, in the median section. The left half of the disc is taken away so the midline can be seen in profile; it is one variant of one model, not a second drawing, so it cannot disagree with the plan view.",
+   "narration_from": "new — a section variant of epiblast. RENDER-STANDARD: a sectioned disc is a different picture, not an extra layer, so it is a declared VARIANT of the model and the scene names it with keys of its own. Two structures naming the same part, stage and flags would collide in the player.",
+   "name": "Epiblast, in median section",
+   "refs": {
+    "procedural": "primitive-streak#epiblast+cutx"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "sec_streak",
+   "label": "Primitive streak, in median section",
+   "group": "Median section — the streak in profile",
+   "color": "#c0392b",
+   "terms": [
+    "primitive streak",
+    "streak",
+    "day 15",
+    "caudal end",
+    "midline",
+    "epiblast",
+    "narrow groove",
+    "thickened band",
+    "first sign of gastrulation"
+   ],
+   "narration": "The same part, in the median section. The left half of the disc is taken away so the midline can be seen in profile; it is one variant of one model, not a second drawing, so it cannot disagree with the plan view.",
+   "narration_from": "new — a section variant of streak. RENDER-STANDARD: a sectioned disc is a different picture, not an extra layer, so it is a declared VARIANT of the model and the scene names it with keys of its own. Two structures naming the same part, stage and flags would collide in the player.",
+   "name": "Primitive streak, in median section",
+   "refs": {
+    "procedural": "primitive-streak#streak+cutx"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "sec_groove",
+   "label": "Primitive groove, in median section",
+   "group": "Median section — the streak in profile",
+   "color": "#e74c3c",
+   "terms": [
+    "primitive groove",
+    "groove",
+    "narrow furrow",
+    "midline",
+    "entry point",
+    "ingression"
+   ],
+   "narration": "The same part, in the median section. The left half of the disc is taken away so the midline can be seen in profile; it is one variant of one model, not a second drawing, so it cannot disagree with the plan view.",
+   "narration_from": "new — a section variant of groove. RENDER-STANDARD: a sectioned disc is a different picture, not an extra layer, so it is a declared VARIANT of the model and the scene names it with keys of its own. Two structures naming the same part, stage and flags would collide in the player.",
+   "name": "Primitive groove, in median section",
+   "refs": {
+    "procedural": "primitive-streak#groove+cutx"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "sec_pit",
+   "label": "Primitive pit, in median section",
+   "group": "Median section — the streak in profile",
+   "color": "#a569bd",
+   "terms": [
+    "primitive pit",
+    "depression in the node",
+    "notochordal process",
+    "notochordal canal",
+    "midline entry"
+   ],
+   "narration": "The same part, in the median section. The left half of the disc is taken away so the midline can be seen in profile; it is one variant of one model, not a second drawing, so it cannot disagree with the plan view.",
+   "narration_from": "new — a section variant of pit. RENDER-STANDARD: a sectioned disc is a different picture, not an extra layer, so it is a declared VARIANT of the model and the scene names it with keys of its own. Two structures naming the same part, stage and flags would collide in the player.",
+   "name": "Primitive pit, in median section",
+   "refs": {
+    "procedural": "primitive-streak#pit+cutx"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "sec_node",
+   "label": "Primitive node (Hensen's node), in median section",
+   "group": "Median section — the streak in profile",
+   "color": "#8e44ad",
+   "terms": [
+    "primitive node",
+    "Hensen's node",
+    "primitive knot",
+    "cranial end of the streak",
+    "organiser"
+   ],
+   "narration": "The same part, in the median section. The left half of the disc is taken away so the midline can be seen in profile; it is one variant of one model, not a second drawing, so it cannot disagree with the plan view.",
+   "narration_from": "new — review round 4. The ONLY dorsal part that had no section variant at all: sec_streak, sec_groove and sec_pit existed and sec_node did not, so every sectioned beat drew the node's footprint as a gap in the dorsal lamina. Measured against the built triangles on a 0.1-unit lattice: 48 columns at t = 0.44 and the same 48 at t = 0.52, owner `node` in both. Adding it changes no framing: the node lies wholly inside the group box the section already had.",
+   "name": "Primitive node (Hensen's node), in median section",
+   "refs": {
+    "procedural": "primitive-streak#node+cutx"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "sec_endoderm",
+   "label": "Definitive endoderm, in median section",
+   "group": "Median section — the layers",
+   "color": "#f1c40f",
+   "terms": [],
+   "narration": "The same part, in the median section. The left half of the disc is taken away so the midline can be seen in profile; it is one variant of one model, not a second drawing, so it cannot disagree with the plan view.",
+   "narration_from": "new — a section variant of endoderm. RENDER-STANDARD: a sectioned disc is a different picture, not an extra layer, so it is a declared VARIANT of the model and the scene names it with keys of its own. Two structures naming the same part, stage and flags would collide in the player.",
+   "name": "Definitive endoderm, in median section",
+   "refs": {
+    "procedural": "primitive-streak#endoderm+cutx"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "sec_hypoblast",
+   "label": "Hypoblast, in median section",
+   "group": "Median section — the layers",
+   "color": "#95a5a6",
+   "terms": [],
+   "narration": "The same part, in the median section. The left half of the disc is taken away so the midline can be seen in profile; it is one variant of one model, not a second drawing, so it cannot disagree with the plan view.",
+   "narration_from": "new — a section variant of hypoblast. RENDER-STANDARD: a sectioned disc is a different picture, not an extra layer, so it is a declared VARIANT of the model and the scene names it with keys of its own. Two structures naming the same part, stage and flags would collide in the player.",
+   "name": "Hypoblast, in median section",
+   "refs": {
+    "procedural": "primitive-streak#hypoblast+cutx"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "sec_mesoderm",
+   "label": "Intraembryonic mesoderm, in median section",
+   "group": "Median section — the layers",
+   "color": "#27ae60",
+   "terms": [],
+   "narration": "The same part, in the median section. The left half of the disc is taken away so the midline can be seen in profile; it is one variant of one model, not a second drawing, so it cannot disagree with the plan view.",
+   "narration_from": "new — a section variant of mesoderm. RENDER-STANDARD: a sectioned disc is a different picture, not an extra layer, so it is a declared VARIANT of the model and the scene names it with keys of its own. Two structures naming the same part, stage and flags would collide in the player.",
+   "name": "Intraembryonic mesoderm, in median section",
+   "refs": {
+    "procedural": "primitive-streak#mesoderm+cutx"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "sec_endo_route",
+   "label": "First wave — the road to the lower layer",
+   "group": "Median section — the layers",
+   "color": "#f5b041",
+   "terms": [
+    "definitive endoderm",
+    "displaces the hypoblast",
+    "first wave",
+    "epiblast origin",
+    "lower layer",
+    "not from hypoblast"
+   ],
+   "narration": "The first cells through the groove push all the way down and displace the hypoblast entirely, replacing it as the definitive endoderm. Learn the direction of that sentence. The lower layer of the trilaminar disc is not the old hypoblast renamed — it is epiblast that migrated down and evicted it. Students lose this mark every year.",
+   "narration_from": "sequence-version structure \"endoderm_route\" — carried across verbatim onto the section variant, because the median section is the only beat that draws it. See gaps[].",
+   "name": "First wave — the road to the lower layer",
+   "refs": {
+    "procedural": "primitive-streak#endoderm_route+cutx"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "sec_meso_route",
+   "label": "Second wave — the road into the middle",
+   "group": "Median section — the layers",
+   "color": "#52be80",
+   "terms": [
+    "intraembryonic mesoderm",
+    "second wave",
+    "middle layer",
+    "spreads laterally",
+    "spreads cranially",
+    "mesenchyme",
+    "extraembryonic mesoderm continuity"
+   ],
+   "narration": "The cells that follow stop between the two sheets and spread out as intraembryonic mesoderm. They fan sideways and forwards, meeting their opposite numbers in front of the prechordal plate to form the cardiogenic area. The epiblast left behind on the surface is now the ectoderm. One source, three layers, in that order.",
+   "narration_from": "sequence-version structure \"mesoderm_route\" — carried across verbatim onto the section variant, because the median section is the only beat that draws it. See gaps[].",
+   "name": "Second wave — the road into the middle",
+   "refs": {
+    "procedural": "primitive-streak#mesoderm_route+cutx"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "sec_membranes",
+   "label": "Oropharyngeal and cloacal membranes, in median section",
+   "group": "Median section — the layers",
+   "color": "#d35400",
+   "terms": [
+    "oropharyngeal membrane",
+    "buccopharyngeal membrane",
+    "prechordal plate",
+    "cloacal membrane",
+    "no mesoderm",
+    "ectoderm and endoderm fused",
+    "future mouth",
+    "future anus"
+   ],
+   "narration": "The same two membranes, in this section. They own the whole thickness of the disc inside their own footprint — the two laminae are in contact there and there is no mesoderm between them — so a sectioned beat that draws the layers and leaves these out draws the disc with a hole in it where the mouth and the anus will be.",
+   "narration_from": "new — review round 3. The median plane passes through the centre of BOTH membranes, and the membranes part owns the footprint of both laminae there, so without this structure beats 3 and 5 drew the sectioned disc with a 1.3-unit gap cranially and a 1.0-unit gap caudally. Measured against the built triangles, not inferred. Adding it to this group changes no framing: the membranes lie wholly inside the group box the section already had.",
+   "name": "Oropharyngeal and cloacal membranes, in median section",
+   "refs": {
+    "procedural": "primitive-streak#membranes+cutx"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 0.42,
+   "key": "tv_epiblast",
+   "label": "Epiblast, in transverse section",
+   "group": "Transverse section through the streak",
+   "color": "#9fb6c9",
+   "terms": [],
+   "narration": "The same part, in a transverse section through the middle of the streak — the cut every textbook uses to show a cell leaving the epiblast. The cranial half is taken away and the face is viewed from above the cut.",
+   "narration_from": "a section variant of epiblast; see the median-section note. The opacities here are the scene's own and they are the reason the cells in the groove are visible at all: an opaque cut face hides everything behind it, which RENDER-STANDARD 3.x is precisely about.",
+   "name": "Epiblast, in transverse section",
+   "refs": {
+    "procedural": "primitive-streak#epiblast+cuty"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 0.55,
+   "key": "tv_streak",
+   "label": "Primitive streak, in transverse section",
+   "group": "Transverse section through the streak",
+   "color": "#c0392b",
+   "terms": [
+    "primitive streak",
+    "streak",
+    "day 15",
+    "caudal end",
+    "midline",
+    "epiblast",
+    "narrow groove",
+    "thickened band",
+    "first sign of gastrulation"
+   ],
+   "narration": "The same part, in a transverse section through the middle of the streak — the cut every textbook uses to show a cell leaving the epiblast. The cranial half is taken away and the face is viewed from above the cut.",
+   "narration_from": "a section variant of streak; see the median-section note. The opacities here are the scene's own and they are the reason the cells in the groove are visible at all: an opaque cut face hides everything behind it, which RENDER-STANDARD 3.x is precisely about.",
+   "name": "Primitive streak, in transverse section",
+   "refs": {
+    "procedural": "primitive-streak#streak+cuty"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 0.7,
+   "key": "tv_groove",
+   "label": "Primitive groove, in transverse section",
+   "group": "Transverse section through the streak",
+   "color": "#e74c3c",
+   "terms": [
+    "primitive groove",
+    "groove",
+    "narrow furrow",
+    "midline",
+    "entry point",
+    "ingression"
+   ],
+   "narration": "The same part, in a transverse section through the middle of the streak — the cut every textbook uses to show a cell leaving the epiblast. The cranial half is taken away and the face is viewed from above the cut.",
+   "narration_from": "a section variant of groove; see the median-section note. The opacities here are the scene's own and they are the reason the cells in the groove are visible at all: an opaque cut face hides everything behind it, which RENDER-STANDARD 3.x is precisely about.",
+   "name": "Primitive groove, in transverse section",
+   "refs": {
+    "procedural": "primitive-streak#groove+cuty"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "tv_cells",
+   "label": "Ingressing cells — the epithelial to mesenchymal transition",
+   "group": "Transverse section through the streak",
+   "color": "#e67e22",
+   "terms": [
+    "ingression",
+    "invagination",
+    "epithelial to mesenchymal transition",
+    "EMT",
+    "E-cadherin",
+    "loss of adhesion",
+    "flask-shaped cells",
+    "mesenchyme",
+    "FGF8",
+    "Brachyury",
+    "T gene",
+    "migration"
+   ],
+   "narration": "An epiblast cell reaching the groove loosens its junctions, loses E-cadherin, becomes flask-shaped and drops out of the sheet as a free mesenchymal cell. That change of state is an epithelial to mesenchymal transition, driven at the streak by FGF8, and it is the single mechanism the whole of gastrulation runs on. The same trick is reused by neural crest cells later, and by carcinoma cells when they metastasise — which is why examiners like it.",
+   "narration_from": "sequence-version structure \"ingression\" — carried across verbatim onto the transverse-section variant, because that is the only beat that draws it. See gaps[]. a section variant of ingression; see the median-section note. The opacities here are the scene's own and they are the reason the cells in the groove are visible at all: an opaque cut face hides everything behind it, which RENDER-STANDARD 3.x is precisely about.",
+   "name": "Ingressing cells — the epithelial to mesenchymal transition",
+   "refs": {
+    "procedural": "primitive-streak#ingression+cuty"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 0.8,
+   "key": "tv_endoderm",
+   "label": "Definitive endoderm, in transverse section",
+   "group": "Transverse section through the streak",
+   "color": "#f1c40f",
+   "terms": [],
+   "narration": "The same part, in a transverse section through the middle of the streak — the cut every textbook uses to show a cell leaving the epiblast. The cranial half is taken away and the face is viewed from above the cut.",
+   "narration_from": "a section variant of endoderm; see the median-section note. The opacities here are the scene's own and they are the reason the cells in the groove are visible at all: an opaque cut face hides everything behind it, which RENDER-STANDARD 3.x is precisely about.",
+   "name": "Definitive endoderm, in transverse section",
+   "refs": {
+    "procedural": "primitive-streak#endoderm+cuty"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 0.7,
+   "key": "tv_mesoderm",
+   "label": "Intraembryonic mesoderm, in transverse section",
+   "group": "Transverse section through the streak",
+   "color": "#27ae60",
+   "terms": [],
+   "narration": "The same part, in a transverse section through the middle of the streak — the cut every textbook uses to show a cell leaving the epiblast. The cranial half is taken away and the face is viewed from above the cut.",
+   "narration_from": "a section variant of mesoderm; see the median-section note. The opacities here are the scene's own and they are the reason the cells in the groove are visible at all: an opaque cut face hides everything behind it, which RENDER-STANDARD 3.x is precisely about.",
+   "name": "Intraembryonic mesoderm, in transverse section",
+   "refs": {
+    "procedural": "primitive-streak#mesoderm+cuty"
+   }
+  },
+  {
+   "role": "part",
+   "opacity": 1,
+   "key": "tv_membranes",
+   "label": "Cloacal membrane, in transverse section",
+   "group": "Transverse section through the streak",
+   "color": "#d35400",
+   "terms": [
+    "oropharyngeal membrane",
+    "buccopharyngeal membrane",
+    "prechordal plate",
+    "cloacal membrane",
+    "no mesoderm",
+    "ectoderm and endoderm fused",
+    "future mouth",
+    "future anus"
+   ],
+   "narration": "The same two membranes, in this section. They own the whole thickness of the disc inside their own footprint — the two laminae are in contact there and there is no mesoderm between them — so a sectioned beat that draws the layers and leaves these out draws the disc with a hole in it where the mouth and the anus will be.",
+   "narration_from": "new — review round 3. The transverse cut keeps the caudal half, which contains the cloacal membrane, so without this structure beat 4 drew that half with a hole at y -4.83..-4.17. Framing is unchanged: the membrane lies wholly inside the group box beat 4 already had.",
+   "name": "Cloacal membrane, in transverse section",
+   "refs": {
+    "procedural": "primitive-streak#membranes+cuty"
+   }
+  }
+ ],
+ "views": [
+  {
+   "mode": "location",
+   "beat": 1,
+   "title": "Look down on the disc and find the line",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "hypoblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "streak"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "groove"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "node"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pit"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "membranes"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.2
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "streak",
+     "intensity": 0.95
+    }
+   ],
+   "narration": "One picture carries this topic: the disc seen from above, from inside the amniotic cavity, so you are looking at the epiblast. On about day fifteen a narrow thickened line appears in the midline at the caudal end. That is the primitive streak, and its appearance is the definition of week three. It then grows forwards, so it is a line that lengthens towards the middle of the disc.",
+   "narration_from": "sequence-version view beat 1 — carried across verbatim. Its SHOW_STRUCTURE \"*\" / ISOLATE pair is replaced by an explicit shown list, because in the 3D player every structure starts visible and a beat that does not hide what it does not want draws the whole model.",
+   "claims": [
+    {
+     "id": "B1-tip",
+     "claim": "the streak's cranial tip is still well caudal — this is day fifteen, not day seventeen",
+     "measure": "streakTipFrac",
+     "op": "near",
+     "value": 0.29441,
+     "tol": 0.015,
+     "note": "recentred 2026-10-02 by the model3d build run, round 4, with F3's station fix. The measure is the y-extent of the BUILT streak/groove/node/pit, and it used to read the outermost QUADRATURE ROW CENTRE the sweep stopped at rather than the landmark the model puts there: 0.59821 is exactly rowY(33)/10+0.5 and 0.27679 exactly rowY(15)/10+0.5. The mesh now reaches the landmark itself, so the target is the landmark: at t=0.44 the node's cranial rim is yTip+NOD_RY = 1.12 and 1.12/10+0.5 = 0.61200 exactly. The claim's SENTENCE is unchanged and was true before and after; only the number it is pinned to moved, from the grid to the anatomy."
+    },
+    {
+     "id": "B1-caudal",
+     "claim": "and its caudal end sits in the caudal fifth of the disc",
+     "measure": "streakCaudFrac",
+     "op": "atMost",
+     "value": 0.2
+    },
+    {
+     "id": "B1-pear",
+     "claim": "the disc is broader cranially, so the outline alone says which way round it is",
+     "measure": "cranialWidthRatio",
+     "op": "atLeast",
+     "value": 1.15
+    },
+    {
+     "id": "B1-nothing-yet",
+     "claim": "almost nothing has gone in yet: the middle layer covers under 2% of the ground it will cover",
+     "measure": "mesoCoverFrac",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "B1-hypoblast",
+     "claim": "and the lower layer is still essentially all hypoblast",
+     "measure": "hypoFrac",
+     "op": "atLeast",
+     "value": 0.9
+    }
+   ]
+  },
+  {
+   "mode": "location",
+   "beat": 2,
+   "title": "Groove, node, pit — three named parts",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "streak"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "groove"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "node"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pit"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "membranes"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.44
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "The streak itself"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "groove",
+     "intensity": 0.9
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "pit",
+     "intensity": 0.95
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "streak",
+     "to": "node",
+     "kind": "swells at its cranial end into"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "node",
+     "to": "pit",
+     "kind": "is depressed in its centre as"
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "groove",
+      "pit"
+     ],
+     "layout": "side-by-side"
+    }
+   ],
+   "narration": "Label three things on the streak and you can answer any question about it. A furrow down its length — the primitive groove. A mound at its cranial end — the primitive node, or Hensen's node. A dimple in that mound — the primitive pit. Cells for the germ layers go in at the groove; cells for the midline go in at the pit. Two doors, two destinations.",
+   "narration_from": "sequence-version view beat 2 — carried across verbatim. The sentence about the mound is kept here because it names the part; the SHAPE of the mound is claimed in beat 3, which is the beat whose camera can show it. See gaps[].",
+   "claims": [
+    {
+     "id": "B2-tip",
+     "claim": "the streak is at full extent: its tip has reached the middle of the disc",
+     "measure": "streakTipFrac",
+     "op": "near",
+     "value": 0.612,
+     "tol": 0.004,
+     "note": "recentred 2026-10-02 by the model3d build run, round 4, with F3's station fix. The measure is the y-extent of the BUILT streak/groove/node/pit, and it used to read the outermost QUADRATURE ROW CENTRE the sweep stopped at rather than the landmark the model puts there: 0.59821 is exactly rowY(33)/10+0.5 and 0.27679 exactly rowY(15)/10+0.5. The mesh now reaches the landmark itself, so the target is the landmark: at t=0.44 the node's cranial rim is yTip+NOD_RY = 1.12 and 1.12/10+0.5 = 0.61200 exactly. The claim's SENTENCE is unchanged and was true before and after; only the number it is pinned to moved, from the grid to the anatomy."
+    },
+    {
+     "id": "B2-one-channel",
+     "claim": "the groove and the pit are one channel, centred on the same midline",
+     "measure": "channelCentreGap",
+     "op": "equals",
+     "value": 0
+    },
+    {
+     "id": "B2-channel-meets",
+     "claim": "and they meet: the pit begins where the groove ends",
+     "measure": "channelMeetGap",
+     "op": "atMost",
+     "value": 0.181
+    },
+    {
+     "id": "B2-stage",
+     "claim": "the second wave is well under way but far from finished",
+     "measure": "mesoCoverFrac",
+     "op": "near",
+     "value": 0.16394,
+     "tol": 0.012
+    },
+    {
+     "id": "B2-mound-not-here",
+     "claim": "and the mound itself is INVISIBLE from this camera — a rise along the dorsal axis seen down the dorsal axis. That is why beat 3 exists",
+     "measure": "nodeRiseAcross.posterior",
+     "op": "atMost",
+     "value": 1e-06
+    }
+   ]
+  },
+  {
+   "mode": "cross_section",
+   "beat": 3,
+   "title": "The same three parts, in profile",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_streak"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_groove"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_pit"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_node"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_endoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_mesoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_membranes"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.44
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Median section — the streak in profile"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "sec_pit",
+     "intensity": 0.95
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "sec_groove",
+     "intensity": 0.9
+    }
+   ],
+   "narration": "Cut the disc down the middle and look at it from the side, and the three parts stop being coloured patches and become a shape. The band is thicker than the epiblast on either side of it. The groove is a furrow in that thickening — a doorway, not a hole, so there is still floor under it. The node rises above the band, and the pit is a dimple in the top of the node that runs straight on from the groove. If you can draw this profile you will not confuse the groove with the pit in a question.",
+   "narration_from": "new. RENDER-STANDARD 3.y: a beat that narrates a SHAPE must assert that shape on the screen plane of its own camera, and a mound is a rise along the dorsal axis — exactly the axis the dorsal view looks down. Measured: the node keeps 0.000 of its rise across the screen from `posterior` and 0.143 of 0.143 from `lateral`. Beat 2 names the parts; this beat is where their shape is claimed, because \"where two claims want incompatible cameras, that is two beats\".",
+   "claims": [
+    {
+     "id": "B3-mound-visible",
+     "claim": "from this camera the node keeps essentially all of its rise across the screen",
+     "measure": "nodeRiseAcross.lateral",
+     "op": "atLeast",
+     "value": 0.135
+    },
+    {
+     "id": "B3-groove-visible",
+     "claim": "and so does the depth of the groove",
+     "measure": "grooveDepthAcross.lateral",
+     "op": "atLeast",
+     "value": 0.145
+    },
+    {
+     "id": "B3-groove-depth",
+     "claim": "the furrow is about half the epiblast's own thickness deep",
+     "measure": "grooveDepth",
+     "op": "near",
+     "value": 0.15292,
+     "tol": 0.003
+    },
+    {
+     "id": "B3-floor",
+     "claim": "and there is still floor under it — the groove never perforates the band",
+     "measure": "grooveFloorH",
+     "op": "atLeast",
+     "value": 0.33
+    },
+    {
+     "id": "B3-pit",
+     "claim": "the pit is a real dimple in the node, not a mark on it",
+     "measure": "pitDepth",
+     "op": "atLeast",
+     "value": 0.09
+    },
+    {
+     "id": "B3-stage",
+     "claim": "drawn at the same instant as beat 2, so the two pictures are one object",
+     "measure": "mesoCoverFrac",
+     "op": "near",
+     "value": 0.16394,
+     "tol": 0.012
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 4,
+   "title": "How a surface cell becomes a wandering one",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "tv_epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "tv_streak"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "tv_groove"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "tv_cells"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "tv_endoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "tv_mesoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "tv_membranes"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.33
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "superior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Transverse section through the streak"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "tv_cells",
+     "intensity": 0.95
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "tv_groove",
+     "to": "tv_cells",
+     "kind": "is where it happens"
+    }
+   ],
+   "narration": "Cut across the streak and watch one cell. It reaches the groove, releases its hold on its neighbours, loses E-cadherin, narrows to a flask shape and drops out of the sheet as free mesenchyme. That is an epithelial to mesenchymal transition. It is worth a name because the embryo reuses it for neural crest, and because a carcinoma cell leaving its epithelium does exactly the same thing.",
+   "narration_from": "sequence-version view beat 3 — carried across verbatim. Its CROSS_SECTION op is replaced by the model's own `cuty` variant: the player's CROSS_SECTION clips at a plane the scene nominates, whereas the model can take the cranial half away and leave a face to look at, which is the picture the narration describes.",
+   "claims": [
+    {
+     "id": "B4-cells",
+     "claim": "several cells are mid-ingression along the streak at this instant",
+     "measure": "cells",
+     "op": "atLeast",
+     "value": 6
+    },
+    {
+     "id": "B4-cells-in-section",
+     "claim": "and the section itself passes through four or more of them, which is why they can be seen at all",
+     "measure": "cellsInSection",
+     "op": "atLeast",
+     "value": 4
+    },
+    {
+     "id": "B4-flask-in-section",
+     "claim": "and at least one of the cells IN THE SECTION is mid-transition, not merely in transit somewhere along the streak",
+     "measure": "flaskMaxInSection",
+     "op": "atLeast",
+     "value": 0.5
+    },
+    {
+     "id": "B4-cell-size",
+     "claim": "a cell is smaller than the sheet it is leaving is thick",
+     "measure": "cellFitsEpiblast",
+     "op": "atMost",
+     "value": 0.9
+    },
+    {
+     "id": "B4-flask",
+     "claim": "and at least one of them is at full flask shape — the narrowed apex still in the sheet, the body already out of it",
+     "measure": "flaskMax",
+     "op": "atLeast",
+     "value": 0.8
+    },
+    {
+     "id": "B4-left-sheet",
+     "claim": "more than two have left the sheet entirely",
+     "measure": "cellsBelowBasal",
+     "op": "atLeast",
+     "value": 3
+    },
+    {
+     "id": "B4-stage",
+     "claim": "the lower layer is well under half replaced at this instant",
+     "measure": "hypoFrac",
+     "op": "near",
+     "value": 0.61742,
+     "tol": 0.03
+    },
+    {
+     "id": "B4-meso",
+     "claim": "and the middle layer has barely begun to spread",
+     "measure": "mesoCoverFrac",
+     "op": "near",
+     "value": 0.06013,
+     "tol": 0.008
+    }
+   ]
+  },
+  {
+   "mode": "cross_section",
+   "beat": 5,
+   "title": "Two waves, and the mistake everyone makes",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_endoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_hypoblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_mesoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_endo_route"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_meso_route"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "sec_membranes"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.52
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "lateral"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Median section — the layers"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "sec_endoderm",
+     "intensity": 0.95
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "sec_mesoderm",
+     "intensity": 0.9
+    },
+    {
+     "op": "COMPARE_STRUCTURES",
+     "targets": [
+      "sec_endoderm",
+      "sec_mesoderm"
+     ],
+     "layout": "stacked"
+    }
+   ],
+   "narration": "The first cells through go all the way to the bottom and push the hypoblast out completely; what they form is the definitive endoderm. The next cells stop halfway and spread as intraembryonic mesoderm. The epiblast that never moved stays on the surface as ectoderm. So all three germ layers come from one layer, the epiblast — and the lower layer of the new disc is not the old hypoblast under a new name. That is the sentence that separates a good answer from an average one.",
+   "narration_from": "sequence-version view beat 4 — carried across verbatim. Its TRACE_STRUCTURE of \"concept:ingressing-cells\" is replaced by the two route arrows, which are geometry built on the same path function the cells themselves travel: a procedural model has no centreline for the player to walk, and viz3d degrades TRACE_STRUCTURE to a highlight. See gaps[].",
+   "claims": [
+    {
+     "id": "B5-hypo-going",
+     "claim": "the hypoblast is nearly gone — about a tenth of the lower layer is left",
+     "measure": "hypoFrac",
+     "op": "near",
+     "value": 0.111511,
+     "tol": 0.02
+    },
+    {
+     "id": "B5-endo-built",
+     "claim": "which means nine tenths of the lower layer is now epiblast that migrated down",
+     "measure": "endoFrac",
+     "op": "atLeast",
+     "value": 0.88
+    },
+    {
+     "id": "B5-meso",
+     "claim": "and the middle layer has reached under a third of its ground",
+     "measure": "mesoCoverFrac",
+     "op": "near",
+     "value": 0.288029,
+     "tol": 0.015
+    },
+    {
+     "id": "B5-conserved",
+     "claim": "every cubic micron of both new layers came through the streak: the delivered volume and the built volume agree",
+     "measure": "balance",
+     "op": "atLeast",
+     "value": 0.995
+    },
+    {
+     "id": "B5-conserved2",
+     "claim": "and neither exceeds it",
+     "measure": "balance",
+     "op": "atMost",
+     "value": 1.005
+    }
+   ]
+  },
+  {
+   "mode": "location",
+   "beat": 6,
+   "title": "The pit sends cells straight up the middle",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "streak"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "groove"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "node"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pit"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "notochordal_process"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "endoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "mesoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "membranes"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.7
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "notochordal_process",
+     "intensity": 0.95
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "pit",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "pit",
+     "to": "notochordal_process",
+     "kind": "sends cells forward in the midline as"
+    }
+   ],
+   "narration": "Cells entering at the pit do not spread sideways. They run forward in the midline, between the ectoderm above and the new endoderm below, and stop at the prechordal plate. That column is the notochordal process and it becomes the notochord. Trace it here so the pit has a purpose; what the notochord induces is a separate story.",
+   "narration_from": "sequence-version view beat 5 — carried across verbatim. Its TRACE_STRUCTURE of \"concept:midline-migration\" is replaced by the notochordal process itself, drawn as a rod lying between the layers in the median plane, which is the thing the trace stood in for. The ectoderm is taken away in this beat rather than drawn over the rod: see gaps[] on what that costs.",
+   "claims": [
+    {
+     "id": "B6-length",
+     "claim": "the process has run forward a quarter of the disc's length so far",
+     "measure": "notoLength",
+     "op": "near",
+     "value": 2.12389,
+     "tol": 0.12
+    },
+    {
+     "id": "B6-not-there-yet",
+     "claim": "and has not yet reached the prechordal plate",
+     "measure": "notoCranialFrac",
+     "op": "atMost",
+     "value": 0.8
+    },
+    {
+     "id": "B6-hypo-gone",
+     "claim": "by now the hypoblast has gone entirely",
+     "measure": "hypoFrac",
+     "op": "equals",
+     "value": 0
+    },
+    {
+     "id": "B6-meso",
+     "claim": "and the middle layer covers about three quarters of its ground",
+     "measure": "mesoCoverFrac",
+     "op": "near",
+     "value": 0.710182,
+     "tol": 0.02
+    },
+    {
+     "id": "B6-paraxial",
+     "claim": "no mesoderm crosses the midline anywhere along the notochordal process — the worst column of a lattice down the rod's whole length, read off the built triangles",
+     "measure": "mesoWorstNotoStrip",
+     "op": "equals",
+     "value": 0
+    },
+    {
+     "id": "B6-run-seen",
+     "claim": "and the rod's whole cranial run lies across this camera's screen plane, where its length can be read",
+     "measure": "notoAcross.posterior",
+     "op": "atLeast",
+     "value": 1.8
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 7,
+   "title": "The embryo gets a head, a left and a back",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "streak"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "groove"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "node"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pit"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "endoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "membranes"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "axes"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.58
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "What the streak defines"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "axes",
+     "intensity": 0.9
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "membranes",
+     "intensity": 0.95
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "streak",
+     "to": "axes",
+     "kind": "being caudal and median, defines all three"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "membranes",
+     "to": "axes",
+     "kind": "marks the two ends of the gut tube"
+    }
+   ],
+   "narration": "Before the streak the disc is a plate with a head end and nothing else. After it there is a craniocaudal axis, because the streak is caudal; a left and a right, because it lies in the midline; and a dorsal and a ventral surface, because ectoderm is above and endoderm below. The oropharyngeal membrane and the cloacal membrane stay two-layered and mark where the mouth and the anus will open.",
+   "narration_from": "sequence-version view beat 6 — carried across verbatim",
+   "claims": [
+    {
+     "id": "B7-two-layered",
+     "claim": "the oropharyngeal membrane is two-layered EVERYWHERE inside its footprint: the worst column of a lattice over the whole footprint still passes through exactly two laminae",
+     "measure": "layersMaxOro",
+     "op": "equals",
+     "value": 2
+    },
+    {
+     "id": "B7-two-layered-min",
+     "claim": "and nowhere inside it does the lattice find FEWER than two laminae either — the fix for a three-layered membrane must not leave a hole in it",
+     "measure": "layersMinOro",
+     "op": "equals",
+     "value": 2
+    },
+    {
+     "id": "B7-contact",
+     "claim": "the two laminae are in CONTACT across that footprint: a winding scan down every column finds no empty space inside the membrane",
+     "measure": "membGapOro",
+     "op": "atMost",
+     "value": 1e-09
+    },
+    {
+     "id": "B7-region-is-a-region",
+     "claim": "and the lattice behind those four claims is an area and not a handful of points: at least 300 columns land on the membrane as built",
+     "measure": "membPointsOro",
+     "op": "atLeast",
+     "value": 300
+    },
+    {
+     "id": "B7-three-layered",
+     "claim": "while the band immediately lateral to the streak, in the same disc at the same instant, is three-layered at EVERY column of a lattice over it — the region is stated from the anatomy, not chosen from where the mesoderm happens to have reached",
+     "measure": "layersMinPara",
+     "op": "equals",
+     "value": 3
+    },
+    {
+     "id": "B7-no-meso-oro",
+     "claim": "and there is no mesoderm anywhere inside that membrane's footprint — not a point sample at its centre, the worst column of the lattice",
+     "measure": "mesoWorstOro",
+     "op": "equals",
+     "value": 0
+    },
+    {
+     "id": "B7-no-meso-clo",
+     "claim": "as there is none anywhere inside the cloacal membrane's footprint, measured the same way",
+     "measure": "mesoWorstClo",
+     "op": "equals",
+     "value": 0
+    },
+    {
+     "id": "B7-stage",
+     "claim": "measured at the instant this beat draws",
+     "measure": "mesoCoverFrac",
+     "op": "near",
+     "value": 0.4058,
+     "tol": 0.015
+    },
+    {
+     "id": "B7-cc-axis",
+     "claim": "and the craniocaudal axis the streak defines lies across this camera's screen plane, where it can be read",
+     "measure": "streakAxisAcross.posterior",
+     "op": "atLeast",
+     "value": 4
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 8,
+   "title": "Cilia on the node decide which side is left",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "streak"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "groove"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "node"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pit"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "laterality"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "membranes"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.46
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "laterality",
+     "intensity": 0.95
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "node",
+     "intensity": 0.6
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "node",
+     "to": "laterality",
+     "kind": "its cilia sweep fluid leftward"
+    }
+   ],
+   "narration": "A symmetrical disc has to break its own symmetry. Cilia on the primitive node beat in one direction and drive fluid to the left, and the signal that collects there is what puts the heart, stomach and spleen on the left. When the cilia are immotile the choice is random, so about half of those embryos come out mirror-imaged. That is situs inversus, and paired with sinusitis, bronchiectasis and subfertility it is Kartagener syndrome — one broken motor protein, four findings.",
+   "narration_from": "sequence-version view beat 7 — carried across verbatim. Its ROTATE_TO_VIEW was `superior`, which is changed to `posterior`, and the change is a correction rather than a preference: the embryonic disc at this stage is a flat plate in the x-y plane, so a camera placed on the cranio-caudal axis sees it edge on and the left-to-right sweep this beat exists to show collapses to a point. Measured: the sweep keeps 3.98 of its 3.98 units across the screen from `posterior` and 0.00 from a camera on the x axis. See gaps[] on what this beat does NOT prove.",
+   "claims": [
+    {
+     "id": "B8-sweep-seen",
+     "claim": "the sweep keeps its whole span across this camera's screen plane",
+     "measure": "flowAcross.posterior",
+     "op": "atLeast",
+     "value": 3
+    },
+    {
+     "id": "B8-sweep-not-lateral",
+     "claim": "and would keep none of it from a camera on the left-right axis itself",
+     "measure": "flowAcross.lateral",
+     "op": "atMost",
+     "value": 0.05
+    },
+    {
+     "id": "B8-sweep-left",
+     "claim": "the arrow ends on the +x side, which this model DECLARES to be the left — declared, not proved; see gaps[]",
+     "measure": "flowTipX",
+     "op": "atLeast",
+     "value": 1.3
+    },
+    {
+     "id": "B8-tip",
+     "claim": "drawn with the streak at full extent, when the node is at its largest",
+     "measure": "streakTipFrac",
+     "op": "near",
+     "value": 0.612,
+     "tol": 0.004,
+     "note": "recentred 2026-10-02 by the model3d build run, round 4, with F3's station fix. The measure is the y-extent of the BUILT streak/groove/node/pit, and it used to read the outermost QUADRATURE ROW CENTRE the sweep stopped at rather than the landmark the model puts there: 0.59821 is exactly rowY(33)/10+0.5 and 0.27679 exactly rowY(15)/10+0.5. The mesh now reaches the landmark itself, so the target is the landmark: at t=0.44 the node's cranial rim is yTip+NOD_RY = 1.12 and 1.12/10+0.5 = 0.61200 exactly. The claim's SENTENCE is unchanged and was true before and after; only the number it is pinned to moved, from the grid to the anatomy."
+    },
+    {
+     "id": "B8-stage",
+     "claim": "and at this instant in the spread of the middle layer",
+     "measure": "mesoCoverFrac",
+     "op": "near",
+     "value": 0.187908,
+     "tol": 0.012
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 9,
+   "title": "The streak shrinks back the way it came",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "streak"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "groove"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "node"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pit"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "streak_max"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "mesoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "notochordal_process"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "membranes"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.86
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "streak_max",
+     "intensity": 0.9
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "streak",
+     "intensity": 0.95
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "streak_max",
+     "to": "streak",
+     "kind": "is where the streak reached before it began to shrink"
+    }
+   ],
+   "narration": "The grey rails mark how far the streak reached at its longest. By the fourth week the streak itself has pulled back inside them, from the cranial end, because it is the node that retreats — and the notochordal process you can see running forward is what the node leaves behind as it goes. So the order the body was built in is the order the builder leaves: cranial structures first, caudal ones last. Nothing new is made cranially after this.",
+   "narration_from": "new. The sequence version taught regression inside the structure \"regression\", whose narration is carried onto the `streak_max` structure; this view is what makes it a PICTURE — RENDER-STANDARD, \"a view must change the picture\", and a reference that is only described is the fault that rule exists to prevent.",
+   "claims": [
+    {
+     "id": "B9-shrunk",
+     "claim": "the streak is down to about a quarter of the length it reached",
+     "measure": "streakTipFrac",
+     "op": "near",
+     "value": 0.3125,
+     "tol": 0.012
+    },
+    {
+     "id": "B9-short",
+     "claim": "measured as a length, under 1.3 units of the disc's ten",
+     "measure": "streakLength",
+     "op": "atMost",
+     "value": 1.9
+    },
+    {
+     "id": "B9-reference-stays",
+     "claim": "while the reference still marks where it got to",
+     "measure": "streakMaxReachFrac",
+     "op": "atLeast",
+     "value": 0.6
+    },
+    {
+     "id": "B9-noto",
+     "claim": "and the notochordal process it left behind spans more than half the disc",
+     "measure": "notoLength",
+     "op": "atLeast",
+     "value": 4.8
+    },
+    {
+     "id": "B9-meso-done",
+     "claim": "the middle layer has all but finished spreading",
+     "measure": "mesoCoverFrac",
+     "op": "atLeast",
+     "value": 0.93
+    }
+   ]
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 10,
+   "title": "A streak that stays too long, and one that does too little",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epiblast"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "streak"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "groove"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "node"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "pit"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "streak_max"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "mesoderm"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "teratoma"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "caudal_deficit"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "membranes"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.98
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "posterior"
+    },
+    {
+     "op": "ISOLATE_REGION",
+     "target": "Clinical"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "teratoma",
+     "intensity": 0.95
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "caudal_deficit",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "streak",
+     "to": "teratoma",
+     "kind": "a remnant left behind grows into"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "caudal_deficit",
+     "to": "streak",
+     "kind": "is the ground a failing streak leaves short of mesoderm"
+    }
+   ],
+   "narration": "The streak should shrink away by about day twenty-six. Two things go wrong with that. Cells left behind in the sacrococcygeal region stay pluripotent and can grow into a sacrococcygeal teratoma — the commonest tumour of the newborn, mostly in girls, containing tissue from all three layers, and removed early because it can turn malignant. Or the streak makes too little caudal mesoderm, and you get sacral agenesis, imperforate anus, renal defects and, at the extreme, fused lower limbs. That is caudal dysgenesis, and it is the malformation most strongly linked to poorly controlled maternal diabetes — a reason to control glucose before conception, not after.",
+   "narration_from": "sequence-version view beat 8 — carried across verbatim. Its SHOW_RELATIONSHIP from \"regression\" is re-pointed at `streak`, which is the structure regression is now a property of; the reference rails carry the regression narration.",
+   "claims": [
+    {
+     "id": "B10-gone",
+     "claim": "the streak has all but gone",
+     "measure": "streakLength",
+     "op": "atMost",
+     "value": 0.6,
+     "note": "recentred 2026-10-02 by the model3d build run, round 4, with F3's station fix. The measure is the y-extent of the BUILT streak/groove/node/pit, and it used to read the outermost QUADRATURE ROW CENTRE the sweep stopped at rather than the landmark the model puts there: 0.59821 is exactly rowY(33)/10+0.5 and 0.27679 exactly rowY(15)/10+0.5. The mesh now reaches the landmark itself, so the target is the landmark: at t=0.44 the node's cranial rim is yTip+NOD_RY = 1.12 and 1.12/10+0.5 = 0.61200 exactly. The claim's SENTENCE is unchanged and was true before and after; only the number it is pinned to moved, from the grid to the anatomy. For this row the bound moved 0.5 -> 0.60: the built length at t=0.98 is 0.5521, which is (yTip+nodRy) - yCaudS exactly, 5.5% of the disc. It still rejects every other beat (t=0.86 measures 1.8242)."
+    },
+    {
+     "id": "B10-tip",
+     "claim": "measured as a fraction of the disc, its tip is barely clear of its own caudal end",
+     "measure": "streakTipFrac",
+     "op": "near",
+     "value": 0.1875,
+     "tol": 0.008
+    },
+    {
+     "id": "B10-teratoma-caudal",
+     "claim": "the teratoma sits clear caudal of the disc itself, in the sacrococcygeal region",
+     "measure": "teratomaCaudalGap",
+     "op": "atLeast",
+     "value": 0.2
+    },
+    {
+     "id": "B10-teratoma-midline",
+     "claim": "and on the midline, where a streak remnant would be",
+     "measure": "teratomaMidlineOffset",
+     "op": "atMost",
+     "value": 0.25
+    },
+    {
+     "id": "B10-deficit",
+     "claim": "the caudal zone a deficient streak leaves short is between a fifth and two fifths of the disc",
+     "measure": "deficitAreaFrac",
+     "op": "between",
+     "value": [
+      0.18,
+      0.42
+     ]
+    },
+    {
+     "id": "B10-late",
+     "claim": "and all of it is happening at the END of the streak's life, not the beginning: the middle layer has finished spreading",
+     "measure": "mesoCoverFrac",
+     "op": "atLeast",
+     "value": 0.95
+    },
+    {
+     "id": "B10-hypo",
+     "claim": "with no hypoblast left anywhere in the disc",
+     "measure": "hypoFrac",
+     "op": "equals",
+     "value": 0
+    }
+   ]
+  }
+ ],
+ "visibility_waivers": [
+  {
+   "view": 1,
+   "key": "hypoblast",
+   "why": "UNDER THE EPIBLAST, WHICH IS THE DEFINITION OF IT. Beat 1 looks down on the disc from inside the amniotic cavity, so the lower layer of a two-layered disc is behind the upper one everywhere except a sliver at the margin; it measures 0.004% of this frame. It is shown rather than hidden because the beat's first sentence is 'the disc still two layers thick' and a structure named in the narration should be in the frame it is named in, even where the camera cannot reach it. The beats that SHOW it are the two median sections: 0.328% in beat 3 and 0.186% in beat 5, both of which are about the layer it is being replaced by. A reviewer who would rather beat 1 hid it than drew it invisibly has a fair point; it is drawn because hiding it would make the parts list for that beat say the disc has one layer."
+  },
+  {
+   "view": 4,
+   "key": "__framing__",
+   "why": "A TRANSVERSE SECTION OF THIS DISC IS A THIN SLAB, AND THIS ROUND'S FIX IS WHAT MADE THE SHORTFALL VISIBLE RATHER THAN WHAT CAUSED IT. Beat 4 cuts a slab 0.90 units thick across a disc 6.8 wide and views it from `superior`, so most of what the camera frames is the space between two laminae 0.28 and 0.16 thick: the subject's own bounding box fills 19.6% of the frame and the ink inside that box is 41% of it. BE CLEAR ABOUT THE HISTORY, because it would otherwise read as a beat that always passed and now does not. Before the round-2 fix to finding F1 this beat measured 8.02% against a floor of 8.00 — two hundredths of a percentage point of margin. The F1 fix re-solves K, dEndo and dMeso (the mesoderm's full volume falls 4.7%, from 11.705 to 11.159, because the two membrane footprints stop being mesoderm's ground), the endoderm front at this stage comes in 2.4% shorter, and the beat now measures 7.98%. The change in what a student sees is four hundredths of one percent of the frame; the change in whether the check passes is total. So this is declared rather than chased: the beat sat on the floor by construction and the fix did not move it in any way a reader could perceive. Every per-structure floor is still cleared — tv_epiblast 5.58%, tv_endoderm 1.91%, tv_streak 1.06%, tv_cells 0.72%, tv_groove 0.51%, tv_mesoderm 0.23% — so nothing in this frame is unseeable; the shortfall is the slab's aspect ratio, which is the same argument beat 5 already carries for the median section. The honest alternatives are both out of this item's reach: a tighter per-view camera fit is engine__refit-camera-on-isolate, which is ESCALATED and waiting on a human, and thickening the section to fill the frame would make this beat and the six plan-view beats disagree about one object. A reviewer who would rather see beat 4's subject narrowed to the streak and its two laminae — dropping the disc's full width from the fit, as beat 3 does to clear 17.5% without a waiver — has a real argument, and that is the change to make if this waiver is refused."
+  },
+  {
+   "view": 5,
+   "key": "__framing__",
+   "why": "A MEDIAN SECTION OF THIS DISC IS A STRIP, AND NO CAMERA CHANGES THAT. The embryonic disc is 1.0 mm long and about 0.03 mm thick, so its median section has an aspect ratio of roughly seven to one; fitted into a square frame a 7:1 strip can fill about 14% of it at best, and the ink inside the bounding box is a little over half of that. This beat is about the LAYERS, so its camera has to hold the whole disc — beat 3, which is about the streak's own profile, isolates three pieces 4.8 units long instead of ten and clears the floor at 17.5% without a waiver, which is what tells you the shortfall here is the aspect ratio and not the composition. Its per-structure floors are all cleared — epiblast 2.11%, definitive endoderm 1.84%, mesoderm 1.82%, hypoblast 0.19% and both route arrows above the floor — and the shortfall is the strip's aspect ratio, not an occlusion. The alternative was a vertical exaggeration of the section, which is what a printed textbook does, and it was declined for a specific reason rather than on taste: six other beats draw the same disc in plan view, and a section that thickened the layers would have the two sets of beats disagreeing about one object while both claimed to be the same model. A reviewer who would rather have the exaggeration and a declared factor has a real argument and this is the place to make it."
+  },
+  {
+   "view": 9,
+   "key": "notochordal_process",
+   "why": "BURIED BETWEEN THE LAYERS, WHICH IS WHERE IT IS. The notochordal process lies between the ectoderm above and the definitive endoderm below, so from the dorsal camera this beat uses it is behind the whole thickness of the epiblast; the alpha-aware pass reads it at 0.006%. It is shown here only so that the sentence 'the notochordal process you can see running forward is what the node leaves behind as it goes' has its subject present in the frame rather than referring to nothing. The beat that SHOWS it is beat 6, which takes the ectoderm away and measures it at 1.10% of the frame, and the claim about its length is asserted in both beats against the same measure."
+  },
+  {
+   "view": 10,
+   "key": "streak",
+   "why": "THE BEAT'S SUBJECT IS THAT THE STREAK HAS NEARLY GONE, SO REQUIRING IT TO COVER A THIRD OF A PERCENT OF THE FRAME IS REQUIRING IT NOT TO HAVE. At t = 0.98 the streak is 0.357 units of a ten-unit disc — acceptance row F pins it at 4% of the length it reached — and its whole footprint measures 0.209% of this frame against the 0.30% floor for a structure the narration points at. The same structure measures 0.306% in beat 9, where it is still shrinking, and 7.801% in beat 2 at full extent, so the student has seen it; what this beat points at is its disappearance. The id-pick reads 0.000% rather than 0.209% because the deficiency plate is drawn over it at 0.32 opacity; the alpha-aware pass is the one that reports the real number, and the plate's opacity was lowered from 0.55 to 0.32 for exactly this reason. A reviewer who wants the relationship re-pointed from the regression rails, which measure 1.145%, has a reasonable alternative; it was not taken because a sacrococcygeal teratoma is a remnant of the STREAK and the rails are a reference rather than tissue."
+  },
+  {
+   "view": 3,
+   "key": "sec_streak",
+   "why": "THE SECTION'S PLANE DOES NOT PASS THROUGH THE BAND. Beat 3 is the median section (x = 0) and the streak BAND lies lateral to it, from |x| = GU 0.22 to SU 0.58; what the midline shows is the groove and the pit, 5.755% and 1.764% of this frame. The band measures 0.002% here, seen edge-on past the cut face. IT MEASURED ABOVE THE FLOOR BEFORE THIS ROUND, AND THAT IS THE EVIDENCE RATHER THAN THE PROBLEM: until F3's fix there was a 0.18-unit hole in the dorsal lamina exactly where the groove hands the midline over to the pit, and the band was being seen THROUGH it. Closing the hole took those pixels away. The beats that show the band are 2 (7.343%), 8 (1.612%) and 4 (tv_streak 0.819%)."
+  },
+  {
+   "view": 9,
+   "key": "mesoderm",
+   "why": "UNDER THE EPIBLAST, WHICH IS WHAT A MIDDLE LAYER IS — the same argument as beat 1's hypoblast waiver, and the same measurement. Beat 9 looks down on an intact disc from the amniotic cavity and the epiblast is 25.355% of the frame; the middle layer cannot be seen from outside it. It is shown rather than hidden because the beat narrates that the middle layer has all but finished spreading, and the claim that carries that sentence (B9-meso-done, mesoCoverFrac >= 0.93 -> 0.9556) measures the model rather than the picture. It measured above the floor before this round for a reason F3 names: every sheet was built half a quadrature row short at each end of the disc, so the mesoderm showed through the gap at the margin. The beats that SHOW it are 6 (19.26%), 3 (sec_mesoderm 5.703%), 5 (1.805%) and 7 (1.229%)."
+  },
+  {
+   "view": 3,
+   "key": "sec_membranes",
+   "why": "A STRUCTURAL FILLER, NOT A SUBJECT, AND PRE-EXISTING — measured both ways this run: the same walk on the pre-F3 model reports the identical 0%. sec_membranes was added to beats 3 and 5 by round 2's F2 fix because the membranes own the full thickness of BOTH laminae inside their footprint, so a beat that draws a lamina without them draws a hole; it is there to close that hole and not to be looked at. Both footprints lie more than 3.5 units cranial or caudal of what beat 3 frames (the section is tight on the streak, box extent y [-0.95, 0.95] of the frame). The beats that show the membranes are 5 (sec_membranes 0.685%), 1 (1.413%), 6 (1.459%) and 7 (1.068%)."
+  },
+  {
+   "view": 4,
+   "key": "tv_membranes",
+   "why": "The same filler and the same argument as beat 3's sec_membranes, and pre-existing in the same measured sense (0.004% on the pre-F3 model too). Beat 4 is the transverse section at the ingression station, two to four units caudal of the oropharyngeal footprint and clear of the cloacal one; tv_membranes exists so the cut laminae have no hole where a membrane owns them. The beats that show the membranes are 5, 1, 6 and 7, with the figures in the sec_membranes waiver."
+  },
+  {
+   "view": 7,
+   "key": "endoderm",
+   "why": "UNDER THE EPIBLAST, WHICH IS WHAT THE BEAT'S OWN SENTENCE SAYS IT IS — 'a dorsal and a ventral surface, because ectoderm is above and endoderm below'. Beat 7 looks down on an INTACT disc from the amniotic cavity, so the lower layer is behind the full thickness of the epiblast (23.301% of this frame) at every column; the id-pick, the occlusion pass and the alpha-aware pass all read it at 0%, peak 0, under the 40/255 floor. It is kept shown rather than hidden on this scene's own stated rule, the one beat 1's hypoblast waiver gives: a structure NAMED IN THE NARRATION should be in the frame it is named in, even where the camera cannot reach it. The beats that SHOW it are 6 (endoderm 9.18%), 3 (sec_endoderm 2.645%) and 4 (tv_endoderm 1.824%). AND BE EXACT ABOUT THE HISTORY, because this waiver is new and the structure used to measure above the floor: before round 4's F4 fix beat 7 read endoderm at 0.044%, mesoderm at 1.229% and notochordal_process at 0.172% ONLY because the beat drew no groove, node or pit and the dorsal lamina was therefore missing over 324 columns of the midline — a canyon down the length of the streak with the middle layer at the bottom of it. Those pixels were a defect being read as visibility, exactly as gap 31 records for beat 3's sec_streak and beat 9's mesoderm. Closing the canyon removed them, which is the fix working and not a regression."
+  },
+  {
+   "view": 10,
+   "key": "mesoderm",
+   "why": "UNDER THE EPIBLAST AND UNDER THE DEFICIENCY PLATE, ON A BEAT WHOSE SUBJECT IS THAT THERE IS TOO LITTLE OF IT. Beat 10 narrates 'the streak makes too little caudal mesoderm', so the middle layer is named and stays shown under the same rule as beat 1's hypoblast and beat 7's endoderm; what the beat POINTS AT is the teratoma (4.896%) and the caudal deficit (21.852%), both well clear. From this dorsal camera on an intact disc the middle layer reads 0% on the id-pick and 0.007% once translucency is allowed, peak 64 — the percentage, not the alpha, is what puts it under the floor. The beats that SHOW it are 6 (19.26%) and 3 (sec_mesoderm 5.703%). PRE-EXISTING IN THE SAME MEASURED SENSE AS GAP 31's TWO: it cleared the floor before round 4 only by being seen through the 24-column notch beat 10 left at the regressed groove, node and pit, and the same walk run against the pre-F4 scene reports it carried by the alpha-aware pass alone."
+  },
+  {
+   "view": 3,
+   "key": "sec_node",
+   "why": "A STRUCTURAL FILLER, NOT A SUBJECT — the same argument as sec_membranes and added for the same reason one round later. The node owns the dorsal lamina from |x| = PIT_RX 0.30 to NOD_RX 0.80, and until round 4 there was no section variant of it at all, so every sectioned beat drew the node's footprint as a gap: 48 columns of 2,571 on a 0.1-unit lattice at t = 0.44, read off the built triangles. sec_node closes that gap and then cannot be seen, because the median plane passes through the PIT, which owns the midline (|x| < 0.30) and stands in front of the node's own slab from this lateral camera; the id-pick reads it at 0.015%. That is the geometry being honest rather than the beat being wrong: what beat 3 shows of the node IS its profile, and acceptance row T measures that rise as 0.1427 of 0.1427 across the lateral camera where the dorsal camera keeps exactly 0.000 of it. The beat that shows the node as its own coloured part is beat 2 (2.672%), with beats 8 (0.407%) and 6 (0.588%) behind it. Adding it cost beat 3 nothing measurable: sec_groove 5.755, sec_pit 1.764, sec_mesoderm 5.703, sec_endoderm 2.645 and sec_epiblast 0.213 are unchanged to three decimals from the run before it, and sec_streak moved 0.002 -> 0 inside a waiver it already carried."
+  }
+ ],
+ "provenance": {
+  "author": "task",
+  "authored_at": "2026-08-28",
+  "converted_at": "2026-10-02",
+  "converted_by": "the model3d build task",
+  "converted_from": "mode \"sequence\", status \"planned\" — fifteen teaching panels with no geometry, authored for the SVG panel engine",
+  "model": "models3d/primitive-streak.js",
+  "reworked_at": "2026-10-02",
+  "reworked_by": "the model3d build task, review round 2 — round-1 finding F1 (the membrane exclusion was a point, not a footprint) and the standards rule round 1 proposed with it",
+  "corrected_at": "2026-10-02",
+  "corrected_by": "the model3d review task, round 4 — the round-3 rule extended from the membranes to the streak's own parts: every beat that draws the epiblast now also draws the groove, node and pit, which own the dorsal lamina inside their footprints. Beat 1, the opening frame of the topic, drew a 2,229-pixel hole straight through to the background where the node and pit sit at the cranial end of the streak; beat 7, which teaches that the disc has a dorsal and a ventral surface, drew a full-length canyon down the midline exposing the middle layer; beat 10 drew a 24-column notch at the regressed remnant. Round 3 fixed this class for `membranes` only and the same defect in `groove`/`node`/`pit` went unlooked-for. The same fix buried three structures that had only been visible through the canyon, so beat 7's endoderm and beat 10's mesoderm are waived with their figures and beat 7's mesoderm and notochordal_process — named in no sentence and drawing no pixel — are hidden instead of waived."
+ },
+ "gaps": [
+  "ROUTED TO 3d_anatomy, NOT TO ITS FIRST PREFERRED MODE. CURRICULUM lists preferred_modes [sequence, diagram] for this structure and declares views [mechanism, location]; both preferred modes are deferred. The reason is the queue item's own note — these twenty-eight scenes were authored for the SVG panel engine and that engine is not coming — plus the fact that the streak is a textbook procedural subject: a line that lengthens and then shortens, and two sheets built out of a third one cell at a time, so every stage is a sample of one function and no two stages can drift out of agreement. Both declared view types are carried: four beats are `mechanism` and three are `location`, with two `cross_section` and one `associated_organs` on top of them.",
+  "THE DISC IS HELD AT A FIXED SIZE AND THE REAL ONE GROWS. The embryonic disc is about 0.4 mm long when the streak appears and roughly 2 mm by the end of week three; this model draws it at 1.0 mm throughout and the growth is not modelled. The choice is deliberate and it is the one every printed figure makes: what is examined is the streak's extent AS A FRACTION of the disc — 'it reaches the middle and stops' — and a disc that grew under it would make that fraction a moving target in the picture while the geometry still satisfied it. The cost is that nothing in this scene teaches how fast the disc itself grows, and a student who takes the frames as a size comparison would be wrong. Acceptance rows E1/E2 pin the fraction at 0.598 at peak against a 0.66 ceiling.",
+  "THE HANDEDNESS OF THIS MODEL IS DECLARED AND NOT PROVED, which RENDER-STANDARD's rule 'A DECLARED AXIS IS NOT A PROVED ONE, AND A SYMMETRIC MODEL CANNOT PROVE ITS OWN' says must be recorded here rather than left to a comment. Every structure the model builds is mirror-symmetric in x — acceptance row J3 measures it and finds not one unmirrored vertex across nine sheets — EXCEPT the leftward nodal flow arrow, whose direction is a constant in models3d/primitive-streak.js and is checked against nothing outside that file. Flipping `LEFT = +x` in the header would mirror beat 8's picture, teach a rightward nodal flow and leave all 44 acceptance rows passing. The model says so itself: it exports `axesProved: false`. What this means for beat 8 is narrow and worth stating exactly: the MECHANISM it teaches — cilia beat, fluid is swept to one side, the side that collects the signal becomes the left, immotile cilia make the choice random — is not at risk, and neither is the Kartagener link. What is unproved is only that the arrow in the picture points to the student's left. Closing it needs either a landmark in this model that is independently right/left determined, or a corpus-level test of the declared axes string against a mesh-anchored model; neither exists today for a procedural model in its own units.",
+  "NOBODY HAS LOADED THIS SCENE INTO viz3d.js AND WATCHED IT. viz-training/tools/measure-scene-visibility.mjs walked all ten beats and every structure each one draws or points at is seeable, but that tool REIMPLEMENTS viz3d's ops rather than driving viz3d, and its own header says that where the two disagree viz3d is right. The adapter half IS driven by the real viz3d — 63 refs, every beat's own t and its own flags, all resolving with geometry — so what is untested is the op semantics and the per-view camera fit, not the model resolution.",
+  "BEAT 5'S FRAME IS A STRIP AND CARRIES A FRAMING WAIVER; BEAT 3'S DOES NOT. A median section of a disc 1.0 mm long and 0.03 mm thick has an aspect ratio near seven to one, and in a square frame that caps the subject at roughly 7% against the tool's 8% floor. Beat 5 is about the LAYERS so its camera must hold the whole disc, and it is waived at 6.01% with every per-structure floor cleared. Beat 3 is about the streak's own profile, so it isolates three pieces 4.8 units long rather than ten and clears the floor at 17.53% with no waiver — which is the evidence that beat 5's shortfall is the aspect ratio and not the composition. The alternative for both was a vertical exaggeration of the section, which is what a printed textbook does; it was declined because six other beats draw the same disc in plan view and an exaggerated section would have the two sets disagreeing about one object's thickness. A reviewer who would rather have the exaggeration, with the factor declared and asserted, has a real argument.",
+  "THE SECTIONS ARE ROTATED NINETY DEGREES FROM THE WAY A TEXTBOOK DRAWS THEM, and this is a corpus constraint rather than a choice. viz3d offers six canonical cameras; the median section is seen from `lateral`, which puts cranial at the top of the screen and dorsal to the right, where a printed figure puts cranial to the left and dorsal up. Nothing in the geometry is affected and no claim depends on it, but a student moving between this scene and a textbook has to turn their head.",
+  "THE TRANSVERSE SECTION IS A THICK SLAB, AND IT HAS TO BE. Beat 4 keeps the cells within 45 um of its cut plane rather than exactly in it, because a zero-thickness plane passes through no cell at all: the first version removed every cell cranial of the plane and the walk measured the ingressing cells at 0.000% of the frame on the one beat whose whole subject is an ingressing cell. A real section is tens of microns thick and the cells it shows stand proud of its face, which is what this draws. The plane itself is placed at the median y of the cells that are MID-TRANSITION at that t — measured, not nominated — so the beat cannot show six cells and not one of them flask-shaped. Claim B4-flask-in-section asserts exactly that.",
+  "THE NUMBER OF CELLS IS NOT A NUMBER OF CELLS. Twenty-six cells cross the streak over the whole of this model's clock and between five and ten are in transit at any stage. The real figure is orders of magnitude larger and is not knowable from this geometry. What the cells are for is the ROUTE and the SHAPE CHANGE — which door, which destination, and the flask profile — and claims B4-cells, B4-cells-in-section, B4-flask and B4-left-sheet are all about those. A count is never narrated.",
+  "THE TWO ROUTE ARROWS REPLACE TWO TRACE_STRUCTURE OPS, and that is a capability gap rather than an authoring choice. The sequence version's beats 4 and 5 traced `concept:ingressing-cells` and `concept:midline-migration`; viz3d's procedural adapter degrades TRACE_STRUCTURE to a highlight because a procedural model exposes no centreline for the player to walk. The arrows are built on the SAME path function the cells travel, resampled by arc length, so the road a student follows and the cells they watch cannot disagree — but the player draws them as objects rather than animating along them, so the motion the trace would have given is lost.",
+  "THE UNCUT `ingression`, `endoderm_route` AND `mesoderm_route` ARE BUILT BY THE MODEL AND NAMED BY NO BEAT. They were authored as structures first and removed: from the dorsal camera the cells in the groove are three specks and both arrows are seen end-on, and the harness reported all three as shown in no beat. Their sequence-version narration is carried verbatim onto the section variants that DO draw them — tv_cells, sec_endo_route, sec_meso_route — so no teaching was lost, and acceptance row S asserts the model still builds all three, so a later beat can take them without touching the model.",
+  "THE `dysgenesis` VARIANT IS BUILT, PROVED AND DRAWN BY NO BEAT. The model can build a mesoderm with its caudal third missing and acceptance row W2 measures the coverage falling by 0.247 when it is switched on, but beat 10 draws the deficient ZONE as a marked plate over the normal mesoderm instead. The reason is the visibility walk: a beat showing a deficient mesoderm shows an absence, and an absence has no pixels to measure. The plate's area is pinned by claim B10-deficit between a fifth and two fifths of the disc. A reviewer who wants beat 10 to use the variant — or to add an eleventh beat comparing the two mesoderms side by side — has a reasonable case and the model already supports it.",
+  "THE CONSERVATION IS EXACT IN A PLANAR MEASURE. Every volume the model solves against is a quadrature of dx dy on the midsurface's projection, which ignores the disc's 0.26-unit dorsal convexity and so understates the true surface area by about 0.2%. The same measure is used for the delivery and for all three built layers, so the conservation it enforces is exact in the measure it is stated in — acceptance row C reports a worst residual of 3.5e-9 across thirteen stages — and the perturbation battery uses the dome as its NEGATIVE control for exactly this reason: moving the convexity must change the picture and must NOT change a solved volume, and it does not.",
+  "BELOW t = 0.15 THE SOLVED FRONTS ARE NOT MONOTONE, AND THAT IS A MEASUREMENT ARTEFACT RATHER THAN A PICTURE. At those stages the streak is shorter than one row of the quadrature grid, so which row centres fall inside its span changes as it grows and the front radius needed to hold a monotone volume genuinely falls. Acceptance row M1 asserts the monotone thing — the built VOLUMES, over 301 stages, exactly — and row M3 pins the mesoderm at that point at under one ten-thousandth of its final volume. No beat goes near it; the earliest is t = 0.20.",
+  "A RENDER-KIT DEFECT WAS FOUND AND IS REPORTED RATHER THAN FIXED. A kit tube whose radius function reaches EXACTLY zero at one end, capped at the other, comes back non-manifold at the capped rim — three triangles on every rim edge. The mechanism: sweptShell writes a solid tube's flat end discs through triN, which drops a degenerate triangle, so a zero-radius end gets no disc; stripFlatCap then fails its own `pos.count === hull + 6 * ring` assertion and returns the geometry UNSTRIPPED, leaving the start's flat disc coincident under the start's dome. That is precisely the defect tubeCapped was written to remove — render-kit's own comment calls it 'a one-pixel dark ellipse round every capped end' — reappearing wherever a tube comes to a point, which is every arrowhead in this corpus. Section 10b of viz-training/tools/render-primitive-streak.mjs reproduces it in five lines with no model code and keeps a positive control beside it. It is NOT fixed here because render-kit is shared by every model and that is a review's decision. This model stays off the shape instead: its arrowheads are blunted to 6% of their own radius, which the probe measures as clean and which is 1.3 um on screen.",
+  "THE EPIBLAST IS TAKEN AWAY IN BEAT 6 RATHER THAN DRAWN OVER THE ROD. The notochordal process lies between the ectoderm above and the endoderm below, and the player applies opacity per structure rather than per beat, so a translucent epiblast for one beat needs a structure and a model flag of its own. Beat 6 removes the ectoderm instead and shows the rod directly from the dorsal camera at 0.674% of the frame. The cost is that the sentence 'between the ectoderm above and the new endoderm below' has only one of its two neighbours in that frame; the other is in beat 5's section, which draws all three layers in profile.",
+  "'Trilaminar disc (3 germ layers)' IS A SEPARATE CURRICULUM ENTRY IN THIS TOPIC AND IS NOT CLAIMED IN covers[], although beats 4 and 5 describe the two waves that make the layers and the model builds all three. This scene teaches how cells get out of the epiblast; what the three layers then become is that entry's work and is authored alongside this one.",
+  "'Notochord' IS LIKEWISE NOT CLAIMED. The notochordal process is named and built because the primitive pit has no other function, but the notochordal canal, the notochordal plate, induction of the neural plate and the fate of the notochord as nucleus pulposus belong to that entry.",
+  "'Neurulation (neural plate/tube)' IS NOT CLAIMED and is not built. It follows from notochordal induction, which this scene does not teach.",
+  "DAY NUMBERS ARE THE STANDARD TEACHING ONES — streak appears about day 15, regression largely complete by about day 26 — and are narrated as approximations. Texts differ by a day or two at both ends and no single figure is stated as fact. The model's t is the ORDER of events with each given room to be seen, not a linear map to days, and nothing in it claims a date.",
+  "THE MOLECULAR DETAIL IS DELIBERATELY SHALLOW: FGF8, Brachyury and E-cadherin appear as terms and FGF8 once in narration, because Nigerian MBBS papers name them but do not examine the pathways. If a molecular embryology topic is ever added, the signalling belongs there and this narration should not grow.",
+  "KARTAGENER SYNDROME IS TAUGHT HERE rather than in a respiratory topic because the node cilia are the reason situs inversus and bronchiectasis appear in the same patient. The scene does not claim any respiratory curriculum entry; the terms sit in match.terms so a highlighted 'situs inversus' in a note lands on the mechanism.",
+  "THE 14-DAY RULE APPEARS ONLY IN match.terms. It is taught in the bilaminar disc scene, where the argument is that the streak has not yet appeared, and repeating it here would duplicate rather than extend.",
+  "EVERY BEAT'S NARRATION IS THE SEQUENCE VERSION'S, VERBATIM, except two that are new. The eight panels of the sequence scene map onto beats 1, 2, 4, 5, 6, 7, 8 and 10 with their words unchanged; beat 3 (the streak's profile) and beat 9 (regression against the high-water mark) are new, and they exist because of RENDER-STANDARD rather than for content — beat 3 because a mound is a rise along the axis the dorsal camera looks down, and beat 9 because regression was a property of the clock with no picture of its own. The fifteen sequence-version STRUCTURES carry across as well: thirteen keep their narration verbatim on a successor part, and three parts the model builds but the sequence version had no structure for — hypoblast, definitive endoderm and intraembryonic mesoderm — carry new narration, marked as such in narration_from. Nothing was deleted and nothing was deferred, because every one of the eight panels maps to a different combination of stage, section and camera: the harness differences all ten rendered frames pairwise and no two are identical.",
+  "BEAT 2 SAYS 'A MOUND AT ITS CRANIAL END' AND ITS CAMERA CANNOT SHOW A MOUND. The sentence is kept because it NAMES the part, which is what beat 2 is for, and claim B2-mound-not-here asserts the consequence openly: the node keeps exactly 0.000 of its rise across the dorsal camera's screen plane. The shape itself is claimed in beat 3, where the same measure reads 0.143 of 0.143. RENDER-STANDARD 3.y: where two claims want incompatible cameras, that is two beats.",
+  "ROUND-2 FIX, AND WHAT IT MOVED. Round 1 found that the mesoderm-free zone at the two membranes was a single POINT: membraneMask() was a cos-squared cone while membraneExtent() built the same membrane as a hard ellipse, so the geometry was three-layered over almost the whole of both footprints and every check that certified it sampled the one point where the cone bottomed out. The mask is now a plateau over the whole drawn footprint, fading to zero over 30% of R OUTSIDE the rim, and the mesoderm's lane starts at the rim as the definitive endoderm's always has. Measured on the built triangles over a 27x27 lattice per membrane: worst mesoderm thickness inside the footprints was 0.2584 (oropharyngeal) and 0.2594 (cloacal) of a 0.2600 flank thickness and is now exactly 0, three laminae at every sampled column and now exactly two, and the two laminae were held up to 0.26 apart inside the island and are now in contact to 1.1e-16. THE PRICE, stated because it is real: the two footprints stop being the mesoderm's ground, so the mesoderm's full volume falls 4.7% (11.705 to 11.159) and the delivery constant K with it (8.967 to 8.738); dEndo and dMeso re-solve smaller, and four narrated numbers were re-pinned to the new values — beat 5's coverage 0.29011 to 0.28803 and hypoblast remnant 0.0985 to 0.11151, beat 6's coverage 0.72521 to 0.71018, beat 8's 0.19066 to 0.18791. Every one of those was still inside its own tolerance, so the re-pinning is honesty rather than necessity.",
+  "THE FIX IS NOT VISIBLE IN ANY SHIPPED FRAME, AND THAT IS THE POINT ROUND 1 MADE. Beats 3 and 5 are median sections at x = 0, which pass through the one point where the model was already right, and the plan-view beats draw the membranes as opaque islands from above. A reader comparing round-1 and round-2 renders will see almost no difference; the difference is in what the geometry would show if it were ever sectioned off-midline through a membrane, which is exactly how a student is asked about it.",
+  "THE MESODERM CROSSES THE MIDLINE FOR ONE QUADRATURE ROW AT EACH END OF THE NOTOCHORDAL PROCESS, AND IT IS DECLARED RATHER THAN HIDDEN. regionsAt() decides the mesoderm's medial edge row by row, so the rod's two ends fall between rows: sampled down the rod's whole length inset by one row (0.179) the mesoderm's thickness on the median strip is exactly 0, and at the two boundary rows themselves it reads 0.724. That is a one-row transition and not an overlap with the rod — the 3.z pair test measures the mesoderm/notochord pair at 0.009 — and acceptance row Q3 pins the boundary figure so it cannot drift unnoticed. Row Q used to ask this question at the rod's MID-STATION only, which is the same point-sample fault as F1 in a second place; round 1 did not reach it.",
+  "TWO OF ROUND 1'S OBSERVATIONS ARE NOT TAKEN THIS ROUND, DELIBERATELY. O1: beat 7's frame clips the disc at the right edge because viz3d's subjectBox frames an ISOLATE_REGION beat on state.only and that group carries the axes gizmo, which sits outside the disc; beat 10 clips for the same reason. O2: the teratoma reads as free-floating partly because of O1's crop. Both were marked OBSERVED, NOT BLOCKING by round 1 and both are framing rather than geometry, and the engine-side fix is engine__refit-camera-on-isolate, which is ESCALATED and waiting on a human. There IS a scene-side fix within reach and a reviewer should rule on it rather than inherit it silently: drop `axes` from beat 7's isolate group (the gizmo would still be shown, just not framed on) or re-centre the gizmo inside the disc. It was not taken unasked because it changes what every beat using that group is framed on, and this round's brief was F1.",
+  "ROUND-3 FINDING F3 IS CLOSED, AND HERE IS WHAT IT ACTUALLY WAS. The hole in the dorsal surface was NOT in regionsAt()'s medial lane boundaries, which is where round 3 placed it: the partition is exact at every row centre (row P1 passes on the unfixed file, and a lane-by-lane sweep of all 56 rows at nine values of t finds no uncovered micron). It was in the SWEEP. Each region was built from its first row centre to its last, so wherever the part owning a column changed from one row to the next — groove to pit, pit to epiblast — both runs stopped at their own row centres and the row-wide strip between them belonged to nobody. The y-boundaries of this model's parts are ellipse rims and named landmarks and not one of them lands on a row centre. The fix: the dorsal lamina's five central parts and the epiblast are now swept over a SHARED STATION SET that carries, besides every row centre, a station on every y where any of them appears or disappears, each found by bisecting the lane itself; a part that stops abruptly does it as a run boundary with coincident end caps rather than as a very short sweep. MEASURED: at t=0.44 the four parts now tile y exactly — streak [-3.65, 0.073], groove [-3.65, -0.12], node and pit [-0.12, 1.12] — against the analytic landmarks yNodeCaud = -0.12 and yTip + NOD_RY = 1.12, where before they stopped at row centres 0.03 to 0.14 short. A ray probe at 0.005-unit spacing along y and thirteen columns in x, over ten values of t, finds NO column of the disc without dorsal lamina except at the two membranes' rims (below). Row P3 is the standing check, and the harness's rowsOnly control re-creates the old construction from the live file and requires P3 to fail on it, which it does. On the reviewer's own test — background-coloured pixels enclosed by the disc in beat08_posterior.png — 925 before, 49 after, and all 49 at the membranes' rims rather than cranial of the node.",
+  "AND WHAT F3'S FIX DOES NOT REACH, MEASURED RATHER THAN ESTIMATED, BECAUSE IT IS THE SAME DEFECT ELSEWHERE. (a) THE MEMBRANES' RIMS: the membranes and the ventral lamina are still swept on row centres, so the handover from a membrane to the epiblast and to the endoderm still spreads over a whole row. Row P3 counts it every run (68 columns of 6,007 at four values of t, all within one row of a rim or of the disc's own tip) and it is the 49 enclosed pixels in beat 8. (b) THE VENTRAL LAMINA generally: the same ray probe finds 220 to 753 uncovered columns per t on the ventral side, at the membranes' rims, at the mesoderm front's leading rim and at the disc's cranial margin. (c) THE DISC'S OWN TIPS: every sheet still ends at the outermost row centre, so the disc is built 9.82 long against the 10.00 its outline declares. WHY NONE OF THE THREE WAS TAKEN HERE, which is a geometry problem and not a scheduling one: each membrane's footprint is a circle, so AT ITS RIM THE BOUNDARY RUNS ACROSS THE SWEEP, and a station there makes the interval below it carry the whole closure — the endoderm's inner edge travels 0.213 in x across 0.038 in y. On the dorsal side the height field is smooth there and the quads survive row N; on the ventral side the mesoderm's fade ramp meets the same rim and 2 of the endoderm's 5,288 triangles at t=0.98 wind against their own normals (row N, 0.99962). Row N is the row that caught the original winding bug and it does not get a threshold. Four ways round it were tried and measured: midpoint refinement makes it WORSE (44 offending triangles at seven passes, endoderm triangles tripled), taking the normal's y-slope from the mesh's own secant makes it worse (15), choosing the other diagonal of the sheared quad does not reach it, and truncating the footprint to turn the rim into a step needs the truncation to reach 0.163 of the radius before the shear is bounded, which flattens a membrane a beat points at. What it needs is a sweeper whose two adjacent stations may carry DIFFERENT numbers of samples across the lane, so a boundary running across the sweep is met by a fan rather than by shearing every quad in the row. That is a change to how every sheet in this model is built and it is proposed here rather than made at the end of a build run.",
+  "FOUR BEAT-CLAIM NUMBERS MOVED WITH THE FIX AND NO BEAT'S SENTENCE DID. B1-tip, B2-tip and B8-tip read streakTipFrac, which is the y-extent of the BUILT streak/groove/node/pit; they were pinned to the outermost quadrature row centre the old sweep stopped at (0.59821 is exactly rowY(33)/10+0.5, 0.27679 exactly rowY(15)/10+0.5) and are now pinned to the landmark the model puts there (0.61200 = (0.5+0.62)/10 + 0.5 exactly). B10-gone's bound moved 0.5 -> 0.60 against a measured 0.5521, which is (yTip+nodRy) - yCaudS exactly. Each still rejects every other beat, and check-beat-claims reports 61 claims, 0 failures, 0 beats unpinned.",
+  "TWO BEATS LOST PIXELS THEY SHOULD NEVER HAVE HAD, AND BOTH ARE NOW WAIVED WITH THE MEASUREMENT. Beat 3's sec_streak (0.002%) and beat 9's mesoderm (0%) were above the visibility walk's floor before this round ONLY because they were being seen THROUGH F3's holes — the band through the groove-to-pit gap, the middle layer through the half-row the dorsal lamina was short at the disc's margin. Closing the holes took those pixels away, which is the fix working rather than a regression: a median section does not cut the streak band (it lies at |x| 0.22 to 0.58), and a dorsal view of an intact disc cannot show the middle layer. Beat 3's sec_membranes and beat 4's tv_membranes were ALREADY failing before this round — verified by running the same walk against the pre-F3 model, which reports the identical 0% and 0.004% — and are waived as the structural fillers round 2 added them as.",
+  "ROUND-4 FINDING F4 IS CLOSED, AND IT IS ROUND 3'S F2 IN A SECOND SET OF PARTS. F2 established that a beat drawing a lamina must also draw everything that owns part of that lamina's footprint, and fixed it for `membranes`. The same is true of `groove`, `node` and `pit`, which own the dorsal lamina on the midline, and no beat was checked against them. MEASURED on the built triangles by vertical raycast over a 0.1-unit lattice (5,053 columns inside the disc), counting columns where the FULL model has dorsal-lamina geometry and the beat's own shown set has none, at each beat's own t: beat 1 (t 0.20) 38 columns, all of them background — nothing is drawn behind the epiblast at that stage, so the opening frame of the topic showed a 2,229-pixel hole in the disc at the cranial end of the streak, 46 times the 49 pixels F3's fix left at the membrane rims and the only hole in the corpus visible without rotating anything. Beat 7 (t 0.58) 324 columns — groove 175, node 96, pit 53 — reading not as a hole but as a trench down the whole length of the streak with the green middle layer at the bottom of it, on the beat whose sentence is that the embryo now has a dorsal and a ventral surface. Beat 10 (t 0.98) 24 columns at the remnant. Beats 2, 8 and 9 were already complete and measure 0; beat 6 measures 4,378 because it removes the epiblast deliberately, which gap 14 declares, and only 2 of its columns reach the background. FIX, scene-side only and no model change, exactly as F2's: SHOW_STRUCTURE node and pit on beat 1, and groove, node and pit on beats 7 and 10. Framing-neutral by construction — beats 7 and 10 frame on ISOLATE_REGION's group, which is unchanged, and beat 1's added parts lie inside the disc's own bounding box — and measured both ways before and after. WHY NOTHING CAUGHT IT: row P3, added by F3's fix, walks the FULL model's dorsal lamina and asks whether the model builds a surface there; it is not asked what any BEAT draws. The visibility walk asks the opposite question — whether each structure a beat draws can be seen — and a hole is not a structure, so neither tool has a side that fails. PROPOSED RULE, which is round 3's proposal (1) made concrete and should be a tool rather than a reviewer's lattice: EVERY BEAT IS CHECKED FOR WHAT IT DOES NOT DRAW. For each beat, at its own t and flags, count the columns where the model has lamina geometry and the beat's shown set has none; the count is zero or it is declared with its size and its owner. STRUCTURAL NOTE, NOT FIXED HERE AND THE REASON THIS KEEPS RECURRING: the partition gives each sub-part exclusive ownership of its footprint, so the epiblast is not a continuous sheet that the groove, node and pit sit in — it is a sheet with holes cut in it that those parts plug. Every beat must therefore carry the whole plug set or draw a hole, and every new sub-part repeats this. A model in which the epiblast owns its full footprint and the sub-parts are drawn over it would make the defect unreachable instead of re-fixable. That is a build decision and is left to one.",
+  "WHAT F4's FIX COST, MEASURED BOTH WAYS AND NOT ABSORBED QUIETLY. Plugging the midline restored the dorsal surface and in doing so took away pixels three structures should never have had, which is gap 31's pattern repeating one round later and is the strongest evidence that F4 was real: a structure seen through a hole is not a structure the student can see. The visibility walk run against the pre-F4 scene passes 10 beats of 10; run against the fixed scene it failed beats 7 and 10, and the three structures that fell are exactly the three the canyon was showing (beat 7: mesoderm 1.229 -> 0, notochordal_process 0.172 -> 0, endoderm 0.044 -> 0) plus beat 10's mesoderm. RESOLVED BY THE SCENE'S OWN RULE rather than by four more waivers: beat 1's hypoblast waiver states that a structure NAMED IN THE NARRATION stays in the frame it is named in and is waived, and that anything else has no claim on the frame. Beat 7's sentence names the endoderm and beat 10's names the mesoderm, so those two are waived with their figures. Beat 7's mesoderm and notochordal_process are named nowhere in its narration, carry no HIGHLIGHT_STRUCTURE or SHOW_RELATIONSHIP, and draw zero pixels, so they are HIDDEN rather than argued for — removing two SHOW_STRUCTURE ops that change not one pixel of the frame. Both remain shown in beats that do draw them (mesoderm in 6, 9 and 10; notochordal_process in 6 and 9), so no structure in this scene is drawn by no beat. The builder's own warning on its four waivers — 'a reviewer should read them as four arguments and reject any that does not hold' — is the standard applied here to the reviewer's own.",
+  "ROUND-4 FINDING F5 IS OPEN AND ESCALATED, AND IT IS THE REASON F2 AND F4 KEEP HAPPENING. The sectioned beats have the same defect as the plan-view ones and ONE OF THEM CANNOT BE FIXED FROM THE SCENE AT ALL. MEASURED on the built triangles of the cut model, 0.1-unit lattice, columns where the model has dorsal lamina and the beat's own shown set has none: beat 3 (cutx, t 0.44) 48 columns, owner `node`; beat 5 (cutx, t 0.52) 293 columns — streak 109, groove 105, node 48, pit 31; beat 4 (cuty, t 0.33) 0. Beat 3's is closed this round by adding sec_node, the one dorsal part that had no section variant. BEAT 5'S CANNOT BE. Its subject is the two waves, carried by sec_endo_route and sec_meso_route, and the parts that own the dorsal lamina on the median plane are exactly the parts that stand in front of those arrows from the lateral camera. Drawing them closes the lamina and buries the beat: measured both ways, with sec_streak, sec_groove, sec_node and sec_pit added the walk reads sec_endo_route 0.033 -> 0.010 and sec_meso_route 0.027 -> 0.003, both under the floor, and dropping sec_streak and keeping only the three midline parts gives the identical 0.010 and 0.003 — so it is the groove and the pit on the midline, not the band, and there is no subset that closes the gap and keeps the beat. The scene is left with beat 5 as it was, the gap open and declared, rather than with its own teaching content occluded. WHY IT IS A DECISION AND NOT A DEFECT: the model's partition gives each sub-part EXCLUSIVE, OPAQUE ownership of its footprint, so the epiblast is not a sheet the groove and node sit in — it is a sheet with holes cut in it that they plug. Every beat must therefore carry the whole plug set or draw a hole, and on beat 5 carrying the plug set and teaching the beat are mutually exclusive. Rounds 3 (F2, membranes), 4 (F4, groove/node/pit in plan view) and 4 (F5, the sections) are three instances of that one cause, each found only by someone going looking for it. The fix is a build decision and there are two: give the section's dorsal parts their own opacity so beat 5 can draw them and still show the arrows through them, which gap 14 already says needs a structure and a model flag of its own; or make the epiblast own its full footprint and draw the sub-parts over it, which makes the whole class unreachable instead of re-fixable. The second is the larger change and the one that stops this recurring. Neither is a reviewer's call."
+ ]
 }

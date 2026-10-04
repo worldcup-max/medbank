@@ -1,1821 +1,2468 @@
 {
- "schema": 2,
- "id": "embryology__cardiovascular-development__fetal-circulation",
- "mode": "3d_anatomy",
- "deferred_modes": [
-  "sequence",
-  "diagram"
- ],
- "course": "Embryology",
- "topic": "Cardiovascular Development",
- "structure": "Fetal circulation",
- "covers": [
-  "Fetal circulation"
- ],
- "learning_goal": "Trace one red cell from the placenta back to the placenta, name the three shunts and say what each one bypasses and why, explain why the best-oxygenated blood reaches the brain and the heart, describe what the first breath and the clamped cord change about pressure and resistance, list what each fetal vessel becomes in the adult, and use all of it to explain patent ductus arteriosus, duct-dependent lesions and persistent fetal circulation.",
- "status": "candidate",
- "provider": {
-  "primary": "procedural",
-  "fallbacks": []
- },
- "match": {
-  "topics": [
-   "fetal circulation",
-   "circulation before birth",
-   "changes at birth",
-   "neonatal circulation",
-   "cardiovascular development",
-   "placenta",
-   "shunts",
-   "transitional circulation",
-   "congenital heart disease"
+  "schema": 2,
+  "id": "embryology__cardiovascular-development__fetal-circulation",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "sequence",
+    "diagram"
   ],
-  "terms": [
-   "fetal circulation",
-   "placenta",
-   "umbilical vein",
-   "umbilical arteries",
-   "ductus venosus",
-   "liver bypass",
-   "inferior vena cava",
-   "superior vena cava",
-   "right atrium",
-   "crista dividens",
-   "streaming",
-   "foramen ovale",
-   "septum primum",
-   "septum secundum",
-   "left atrium",
-   "left ventricle",
-   "ascending aorta",
-   "coronary arteries",
-   "carotid arteries",
-   "brain sparing",
-   "right ventricle",
-   "pulmonary trunk",
-   "ductus arteriosus",
-   "descending aorta",
-   "high pulmonary vascular resistance",
-   "low systemic vascular resistance",
-   "placental resistance",
-   "oxygen saturation",
-   "80 percent",
-   "65 percent",
-   "first breath",
-   "lung expansion",
-   "cord clamping",
-   "functional closure",
-   "anatomical closure",
-   "prostaglandin E2",
-   "bradykinin",
-   "indomethacin",
-   "ibuprofen",
-   "prostaglandin E1",
-   "alprostadil",
-   "ligamentum teres hepatis",
-   "round ligament of the liver",
-   "ligamentum venosum",
-   "fossa ovalis",
-   "ligamentum arteriosum",
-   "medial umbilical ligaments",
-   "superior vesical arteries",
-   "patent ductus arteriosus",
-   "PDA",
-   "machinery murmur",
-   "continuous murmur",
-   "congenital rubella",
-   "prematurity",
-   "duct dependent circulation",
-   "coarctation",
-   "transposition of the great arteries",
-   "hypoplastic left heart",
-   "pulmonary atresia",
-   "persistent fetal circulation",
-   "persistent pulmonary hypertension of the newborn",
-   "meconium aspiration",
-   "recurrent laryngeal nerve"
+  "course": "Embryology",
+  "topic": "Cardiovascular Development",
+  "structure": "Fetal circulation",
+  "covers": [
+    "Fetal circulation"
+  ],
+  "learning_goal": "Trace one red cell from the placenta back to the placenta, name the three shunts and say what each one bypasses and why, explain why the best-oxygenated blood reaches the brain and the heart, describe what the first breath and the clamped cord change about pressure and resistance, list what each fetal vessel becomes in the adult, and use all of it to explain patent ductus arteriosus, duct-dependent lesions and persistent fetal circulation.",
+  "status": "candidate",
+  "provider": {
+    "primary": "procedural",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "fetal circulation",
+      "circulation before birth",
+      "changes at birth",
+      "neonatal circulation",
+      "cardiovascular development",
+      "placenta",
+      "shunts",
+      "transitional circulation",
+      "congenital heart disease"
+    ],
+    "terms": [
+      "fetal circulation",
+      "placenta",
+      "umbilical vein",
+      "umbilical arteries",
+      "ductus venosus",
+      "liver bypass",
+      "inferior vena cava",
+      "superior vena cava",
+      "right atrium",
+      "crista dividens",
+      "streaming",
+      "foramen ovale",
+      "septum primum",
+      "septum secundum",
+      "left atrium",
+      "left ventricle",
+      "ascending aorta",
+      "coronary arteries",
+      "carotid arteries",
+      "brain sparing",
+      "right ventricle",
+      "pulmonary trunk",
+      "ductus arteriosus",
+      "descending aorta",
+      "high pulmonary vascular resistance",
+      "low systemic vascular resistance",
+      "placental resistance",
+      "oxygen saturation",
+      "80 percent",
+      "65 percent",
+      "first breath",
+      "lung expansion",
+      "cord clamping",
+      "functional closure",
+      "anatomical closure",
+      "prostaglandin E2",
+      "bradykinin",
+      "indomethacin",
+      "ibuprofen",
+      "prostaglandin E1",
+      "alprostadil",
+      "ligamentum teres hepatis",
+      "round ligament of the liver",
+      "ligamentum venosum",
+      "fossa ovalis",
+      "ligamentum arteriosum",
+      "medial umbilical ligaments",
+      "superior vesical arteries",
+      "patent ductus arteriosus",
+      "PDA",
+      "machinery murmur",
+      "continuous murmur",
+      "congenital rubella",
+      "prematurity",
+      "duct dependent circulation",
+      "coarctation",
+      "transposition of the great arteries",
+      "hypoplastic left heart",
+      "pulmonary atresia",
+      "persistent fetal circulation",
+      "persistent pulmonary hypertension of the newborn",
+      "meconium aspiration",
+      "recurrent laryngeal nerve"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "placenta",
+      "name": "Placenta",
+      "label": "Placenta — where gas exchange actually happens",
+      "role": "part",
+      "group": "From the placenta",
+      "layer": "organ",
+      "color": "#8e3b4e",
+      "refs": {
+        "procedural": "fetal-circulation#placenta"
+      },
+      "terms": [
+        "placenta",
+        "maternal-fetal exchange",
+        "low resistance bed",
+        "gas exchange at the placenta",
+        "chorionic villi"
+      ],
+      "opacity": 0.42
+    },
+    {
+      "key": "umbilical_vein",
+      "name": "Umbilical vein",
+      "label": "Umbilical vein — the only truly oxygenated vessel",
+      "role": "part",
+      "group": "From the placenta",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "procedural": "fetal-circulation#umbilical_vein"
+      },
+      "terms": [
+        "umbilical vein",
+        "single umbilical vein",
+        "left umbilical vein",
+        "80 percent saturated",
+        "oxygenated blood",
+        "falciform ligament",
+        "ligamentum teres hepatis",
+        "round ligament of the liver",
+        "two arteries one vein"
+      ],
+      "narration": "One umbilical vein leaves the placenta carrying blood at about eighty percent saturation — the highest anywhere in the fetus, and lower than any adult arterial value. Note the reversal that catches students out: in the cord the vein carries the oxygenated blood and the two arteries carry the deoxygenated. It enters the abdomen at the umbilicus and runs up in the free edge of the falciform ligament, which is exactly where you will find its adult remnant."
+    },
+    {
+      "key": "ductus_venosus",
+      "name": "Ductus venosus",
+      "label": "Ductus venosus — shunt one, past the liver",
+      "role": "part",
+      "group": "Through the liver",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "refs": {
+        "procedural": "fetal-circulation#ductus_venosus"
+      },
+      "terms": [
+        "ductus venosus",
+        "bypasses the liver",
+        "half the flow",
+        "ligamentum venosum",
+        "sphincter",
+        "first shunt"
+      ],
+      "narration": "Most of that blood does not enter the hepatic sinusoids. The ductus venosus carries roughly half of it straight from the umbilical vein into the inferior vena cava, so the liver — an organ the fetus does not need for detoxification while the mother's liver is available — does not slow down the delivery of oxygen. The rest perfuses the liver itself and rejoins by the hepatic veins."
+    },
+    {
+      "key": "portal_sinus",
+      "name": "Portal sinus",
+      "label": "Portal sinus and left portal vein",
+      "role": "part",
+      "group": "Through the liver",
+      "layer": "vessel",
+      "color": "#a04a3a",
+      "refs": {
+        "procedural": "fetal-circulation#portal_sinus"
+      },
+      "terms": [
+        "portal sinus",
+        "left portal vein",
+        "portal vein",
+        "hepatic sinusoids"
+      ]
+    },
+    {
+      "key": "liver",
+      "name": "Liver",
+      "label": "Liver — the organ the first shunt goes past",
+      "role": "part",
+      "group": "Through the liver",
+      "layer": "organ",
+      "color": "#8d5a45",
+      "refs": {
+        "procedural": "fetal-circulation#liver"
+      },
+      "terms": [
+        "liver",
+        "hepatic sinusoids",
+        "fetal liver",
+        "detoxification"
+      ],
+      "opacity": 0.38
+    },
+    {
+      "key": "hepatic_veins",
+      "name": "Hepatic veins",
+      "label": "Hepatic veins — the half that did perfuse the liver",
+      "role": "part",
+      "group": "Through the liver",
+      "layer": "vessel",
+      "color": "#b05a4a",
+      "refs": {
+        "procedural": "fetal-circulation#hepatic_veins"
+      },
+      "terms": [
+        "hepatic veins",
+        "rejoins the inferior vena cava",
+        "liver drainage"
+      ]
+    },
+    {
+      "key": "ivc",
+      "name": "Inferior vena cava",
+      "label": "Inferior vena cava — the well-oxygenated stream",
+      "role": "part",
+      "group": "Into the right heart",
+      "layer": "vessel",
+      "color": "#d98880",
+      "refs": {
+        "procedural": "fetal-circulation#ivc"
+      },
+      "terms": [
+        "inferior vena cava",
+        "IVC",
+        "mixing",
+        "70 percent saturated",
+        "streaming",
+        "laminar",
+        "inferior caval stream"
+      ],
+      "narration": "The shunted blood mixes with venous return from the lower body and reaches the right atrium at about seventy percent saturation. It arrives as a stream rather than a swirl — this is the single most important idea in the whole topic, because the fetus has no way to separate oxygenated from deoxygenated blood except by keeping the two streams apart as they cross the right atrium."
+    },
+    {
+      "key": "ivc_terminal",
+      "name": "Inferior vena cava — terminal segment",
+      "label": "Terminal inferior vena cava — hepatic venous confluence to the caval opening of the diaphragm",
+      "role": "part",
+      "group": "Into the right heart",
+      "layer": "vessel",
+      "color": "#d98880",
+      "refs": {
+        "procedural": "fetal-circulation#ivc_terminal"
+      },
+      "terms": [
+        "terminal inferior vena cava",
+        "suprahepatic inferior vena cava",
+        "hepatic venous confluence",
+        "caval confluence"
+      ],
+      "narration": "The same vessel as the inferior vena cava, cut at both ends at a landmark: the hepatic venous confluence below and the caval opening of the diaphragm above. It is here so that the beat about the ductus venosus can show what the duct empties into without putting six units of cava along that beat’s own line of sight — viz3d frames on the bounding box, so cranial reach is distance. It is never shown in the same frame as the whole cava."
+    },
+    {
+      "key": "svc",
+      "name": "Superior vena cava",
+      "label": "Superior vena cava — the poorly oxygenated stream",
+      "role": "part",
+      "group": "Into the right heart",
+      "layer": "vessel",
+      "color": "#2874a6",
+      "refs": {
+        "procedural": "fetal-circulation#svc"
+      },
+      "terms": [
+        "superior vena cava",
+        "SVC",
+        "head and upper limbs",
+        "tricuspid valve",
+        "superior caval stream",
+        "deoxygenated"
+      ],
+      "narration": "Blood returning from the head and upper limbs enters the right atrium from above, is directed downwards across the tricuspid valve into the right ventricle, and barely mixes with the inferior caval stream at all. Two streams, two destinations, in the same chamber."
+    },
+    {
+      "key": "right_atrium",
+      "name": "Right atrium",
+      "label": "Right atrium — where the two streams cross without mixing",
+      "role": "part",
+      "group": "Into the right heart",
+      "layer": "organ",
+      "color": "#3d7fb5",
+      "refs": {
+        "procedural": "fetal-circulation#right_atrium"
+      },
+      "terms": [
+        "right atrium",
+        "streaming",
+        "two streams",
+        "crista terminalis"
+      ],
+      "opacity": 0.42
+    },
+    {
+      "key": "atrial_septum",
+      "name": "Interatrial septum",
+      "label": "Interatrial septum — septum primum and septum secundum",
+      "role": "part",
+      "group": "Into the right heart",
+      "layer": "organ",
+      "color": "#b8c4d4",
+      "refs": {
+        "procedural": "fetal-circulation#atrial_septum"
+      },
+      "terms": [
+        "interatrial septum",
+        "septum primum",
+        "septum secundum",
+        "fossa ovalis",
+        "limbus"
+      ],
+      "opacity": 0.55
+    },
+    {
+      "key": "crista_dividens",
+      "name": "Crista dividens",
+      "label": "Crista dividens — the ledge that aims the stream",
+      "role": "part",
+      "group": "Into the right heart",
+      "layer": "organ",
+      "color": "#e59866",
+      "refs": {
+        "procedural": "fetal-circulation#crista_dividens"
+      },
+      "terms": [
+        "crista dividens",
+        "free lower edge of the septum secundum",
+        "ledge",
+        "aims the stream"
+      ],
+      "narration": "The free lower edge of the septum secundum overhangs the mouth of the inferior vena cava as a ledge called the crista dividens. It splits the incoming stream, sending most of it straight through the foramen ovale into the left atrium and letting the remainder turn down into the right ventricle. The fetus does not mix and then divide; it aims."
+    },
+    {
+      "key": "foramen_ovale",
+      "name": "Foramen ovale",
+      "label": "Foramen ovale — shunt two, past the lungs and the right heart",
+      "role": "part",
+      "group": "Into the right heart",
+      "layer": "organ",
+      "color": "#5499c7",
+      "refs": {
+        "procedural": "fetal-circulation#foramen_ovale"
+      },
+      "terms": [
+        "foramen ovale",
+        "flap valve",
+        "septum primum",
+        "right to left shunt",
+        "second shunt",
+        "fossa ovalis"
+      ],
+      "narration": "Because right atrial pressure exceeds left, the thin septum primum is pushed aside and blood crosses right to left through the foramen ovale. The best-oxygenated blood in the body therefore arrives in the left atrium without ever passing through the lungs or the right ventricle."
+    },
+    {
+      "key": "left_atrium",
+      "name": "Left atrium",
+      "label": "Left atrium — fed across the septum, not by the lungs",
+      "role": "part",
+      "group": "The left heart and the head",
+      "layer": "organ",
+      "color": "#b04a55",
+      "refs": {
+        "procedural": "fetal-circulation#left_atrium"
+      },
+      "terms": [
+        "left atrium",
+        "left atrial pressure",
+        "pulmonary venous return"
+      ],
+      "opacity": 0.42
+    },
+    {
+      "key": "left_ventricle",
+      "name": "Left ventricle",
+      "label": "Left ventricle — a third of the work before birth",
+      "role": "part",
+      "group": "The left heart and the head",
+      "layer": "organ",
+      "color": "#a8333f",
+      "refs": {
+        "procedural": "fetal-circulation#left_ventricle"
+      },
+      "terms": [
+        "left ventricle",
+        "combined ventricular output",
+        "one third"
+      ],
+      "opacity": 0.42
+    },
+    {
+      "key": "ascending_aorta",
+      "name": "Ascending aorta",
+      "label": "Ascending aorta — the best blood in the body",
+      "role": "part",
+      "group": "The left heart and the head",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "procedural": "fetal-circulation#ascending_aorta"
+      },
+      "terms": [
+        "ascending aorta",
+        "coronary arteries",
+        "preductal",
+        "65 percent saturated"
+      ]
+    },
+    {
+      "key": "aortic_arch",
+      "name": "Aortic arch",
+      "label": "Aortic arch and the isthmus",
+      "role": "part",
+      "group": "The left heart and the head",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "procedural": "fetal-circulation#aortic_arch"
+      },
+      "terms": [
+        "aortic arch",
+        "aortic isthmus",
+        "coarctation"
+      ]
+    },
+    {
+      "key": "head_neck_vessels",
+      "name": "Brachiocephalic, left common carotid and left subclavian arteries",
+      "label": "Head and arm vessels — supplied before the duct joins",
+      "role": "part",
+      "group": "The left heart and the head",
+      "layer": "vessel",
+      "color": "#e74c3c",
+      "refs": {
+        "procedural": "fetal-circulation#head_neck_vessels"
+      },
+      "terms": [
+        "brachiocephalic trunk",
+        "left common carotid",
+        "left subclavian",
+        "carotids",
+        "brain",
+        "preductal",
+        "head and upper limbs"
+      ],
+      "narration": "From the left atrium the blood passes to the left ventricle and out into the ascending aorta, whose first branches are the coronaries and then the vessels to the head and upper limbs. So the two organs that can least tolerate hypoxia, the brain and the heart itself, are supplied first and with the best available blood. Understand the streaming and this arrangement is not a coincidence but the point of the whole design."
+    },
+    {
+      "key": "right_ventricle",
+      "name": "Right ventricle",
+      "label": "Right ventricle — two thirds of the work before birth",
+      "role": "part",
+      "group": "The right heart and the lungs",
+      "layer": "organ",
+      "color": "#2e6da4",
+      "refs": {
+        "procedural": "fetal-circulation#right_ventricle"
+      },
+      "terms": [
+        "right ventricle",
+        "combined ventricular output",
+        "two thirds",
+        "dominant ventricle"
+      ],
+      "opacity": 0.42
+    },
+    {
+      "key": "pulmonary_trunk",
+      "name": "Pulmonary trunk",
+      "label": "Pulmonary trunk",
+      "role": "part",
+      "group": "The right heart and the lungs",
+      "layer": "vessel",
+      "color": "#3f6ea8",
+      "refs": {
+        "procedural": "fetal-circulation#pulmonary_trunk"
+      },
+      "terms": [
+        "pulmonary trunk",
+        "main pulmonary artery"
+      ]
+    },
+    {
+      "key": "pulmonary_arteries",
+      "name": "Pulmonary arteries",
+      "label": "Pulmonary arteries — only enough to grow the lungs",
+      "role": "part",
+      "group": "The right heart and the lungs",
+      "layer": "vessel",
+      "color": "#4a7fbf",
+      "refs": {
+        "procedural": "fetal-circulation#pulmonary_arteries"
+      },
+      "terms": [
+        "pulmonary arteries",
+        "right pulmonary artery",
+        "left pulmonary artery",
+        "8 percent of output"
+      ]
+    },
+    {
+      "key": "lungs",
+      "name": "Lungs",
+      "label": "Lungs — fluid filled, and their vessels clamped tight",
+      "role": "part",
+      "group": "The right heart and the lungs",
+      "layer": "organ",
+      "color": "#6f7f93",
+      "refs": {
+        "procedural": "fetal-circulation#lungs"
+      },
+      "terms": [
+        "lungs",
+        "fluid filled lungs",
+        "high pulmonary vascular resistance",
+        "hypoxic pulmonary vasoconstriction",
+        "pulmonary vascular resistance"
+      ],
+      "opacity": 0.34
+    },
+    {
+      "key": "pulmonary_veins",
+      "name": "Pulmonary veins",
+      "label": "Pulmonary veins — almost nothing comes back, before birth",
+      "role": "part",
+      "group": "The right heart and the lungs",
+      "layer": "vessel",
+      "color": "#bf5f66",
+      "refs": {
+        "procedural": "fetal-circulation#pulmonary_veins"
+      },
+      "terms": [
+        "pulmonary veins",
+        "pulmonary venous return",
+        "left atrial filling"
+      ]
+    },
+    {
+      "key": "ductus_arteriosus",
+      "name": "Ductus arteriosus",
+      "label": "Ductus arteriosus — shunt three, past the lungs",
+      "role": "part",
+      "group": "The right heart and the lungs",
+      "layer": "vessel",
+      "color": "#5dade2",
+      "refs": {
+        "procedural": "fetal-circulation#ductus_arteriosus"
+      },
+      "terms": [
+        "ductus arteriosus",
+        "third shunt",
+        "below the left subclavian",
+        "prostaglandin E2",
+        "ligamentum arteriosum",
+        "postductal",
+        "left recurrent laryngeal nerve"
+      ],
+      "narration": "The right ventricle pumps into the pulmonary trunk, but pulmonary resistance is so high that only a small fraction reaches the lungs — enough to grow them, no more. The rest crosses the ductus arteriosus into the descending aorta, entering below the origin of the left subclavian artery, which is why the lower body receives blood that is less saturated than the head. The duct is held open by low oxygen tension and by prostaglandin E2 from the placenta, and both of those facts become treatment later."
+    },
+    {
+      "key": "descending_aorta",
+      "name": "Descending aorta",
+      "label": "Descending aorta — below the duct, and less saturated",
+      "role": "part",
+      "group": "Back to the placenta",
+      "layer": "vessel",
+      "color": "#b03a2e",
+      "refs": {
+        "procedural": "fetal-circulation#descending_aorta"
+      },
+      "terms": [
+        "descending aorta",
+        "postductal",
+        "lower body",
+        "less saturated"
+      ]
+    },
+    {
+      "key": "common_iliacs",
+      "name": "Common and internal iliac arteries",
+      "label": "Common and internal iliac arteries",
+      "role": "part",
+      "group": "Back to the placenta",
+      "layer": "vessel",
+      "color": "#a93226",
+      "refs": {
+        "procedural": "fetal-circulation#common_iliacs"
+      },
+      "terms": [
+        "common iliac artery",
+        "internal iliac artery",
+        "superior vesical artery"
+      ]
+    },
+    {
+      "key": "umbilical_arteries",
+      "name": "Umbilical arteries",
+      "label": "Umbilical arteries — back to the placenta",
+      "role": "part",
+      "group": "Back to the placenta",
+      "layer": "vessel",
+      "color": "#2e86c1",
+      "refs": {
+        "procedural": "fetal-circulation#umbilical_arteries"
+      },
+      "terms": [
+        "umbilical arteries",
+        "two arteries",
+        "internal iliac arteries",
+        "medial umbilical ligaments",
+        "single umbilical artery",
+        "superior vesical arteries"
+      ],
+      "narration": "Two umbilical arteries branch from the internal iliac arteries, run either side of the bladder and back out along the cord to the placenta, carrying blood at roughly fifty-five to sixty percent saturation for reoxygenation. A cord with only one artery instead of two is worth reporting at delivery, because it carries a raised rate of renal and other anomalies."
+    },
+    {
+      "key": "flow",
+      "name": "Flow",
+      "label": "Flow — direction and size from the solved network (the two ducts carry their own keys)",
+      "role": "part",
+      "group": "Reference",
+      "layer": "vessel",
+      "color": "#f4d03f",
+      "refs": {
+        "procedural": "fetal-circulation#flow"
+      },
+      "terms": [
+        "flow",
+        "direction of flow",
+        "right to left shunt",
+        "left to right shunt",
+        "combined ventricular output"
+      ]
+    },
+    {
+      "key": "flow_ductus_venosus",
+      "name": "Flow — ductus venosus",
+      "label": "Flow through the ductus venosus — about half the umbilical venous return",
+      "role": "part",
+      "group": "From the placenta",
+      "layer": "flow",
+      "color": "#f4d03f",
+      "refs": {
+        "procedural": "fetal-circulation#flow_ductus_venosus@0"
+      },
+      "terms": [
+        "ductus venosus shunt",
+        "umbilical venous return",
+        "liver bypass"
+      ]
+    },
+    {
+      "key": "flow_foramen_ovale",
+      "name": "Flow — foramen ovale",
+      "label": "Flow across the foramen ovale — right to left, while right atrial pressure is the higher",
+      "role": "part",
+      "group": "Into the right heart",
+      "layer": "flow",
+      "color": "#f4d03f",
+      "refs": {
+        "procedural": "fetal-circulation#flow_foramen_ovale@0"
+      },
+      "terms": [
+        "right-to-left shunt",
+        "interatrial shunt",
+        "foramen ovale flow"
+      ]
+    },
+    {
+      "key": "flow_foramen_ovale_residual",
+      "name": "Flow — foramen ovale, the residual shunt",
+      "label": "The residual interatrial shunt at ten minutes — a tenth of the fetal arrow by drawn area",
+      "role": "part",
+      "group": "Into the right heart",
+      "layer": "flow",
+      "color": "#f4d03f",
+      "refs": {
+        "procedural": "fetal-circulation#flow_foramen_ovale@0.0998"
+      },
+      "terms": [
+        "residual interatrial shunt",
+        "probe-patent foramen",
+        "functional closure"
+      ],
+      "narration": "The same marker as the fetal one, at the instant beat 8 sits at. It is a SECOND KEY rather than the same one restaged, because viz3d cannot restage a pinned ref and an unpinned flow ref resolves reason:none at the adapter’s default t=1, where the model emits no marker at all — which the player would show a student as “there is no model of this structure”. Two beats that need one part at two values of t need two keys; pda_duct and pfc_duct are the same pattern on the ductus arteriosus."
+    },
+    {
+      "key": "flow_ductus_arteriosus",
+      "name": "Flow — ductus arteriosus",
+      "label": "Flow through the ductus arteriosus — the arrows that reverse at birth",
+      "role": "part",
+      "group": "Out of the right heart",
+      "layer": "flow",
+      "color": "#f4d03f",
+      "refs": {
+        "procedural": "fetal-circulation#flow_ductus_arteriosus@0.25"
+      },
+      "terms": [
+        "ductal shunt",
+        "right-to-left shunt",
+        "ductal flow reversal"
+      ]
+    },
+    {
+      "key": "flow_ivc",
+      "name": "Flow — inferior caval stream",
+      "label": "The inferior caval stream, well oxygenated, arriving at the right atrium from below",
+      "role": "part",
+      "group": "Into the right heart",
+      "layer": "flow",
+      "color": "#f4d03f",
+      "refs": {
+        "procedural": "fetal-circulation#flow_ivc"
+      },
+      "terms": [
+        "inferior caval stream",
+        "streaming",
+        "preferential streaming"
+      ]
+    },
+    {
+      "key": "flow_svc",
+      "name": "Flow — superior caval stream",
+      "label": "The superior caval stream, desaturated, arriving at the right atrium from above",
+      "role": "part",
+      "group": "Into the right heart",
+      "layer": "flow",
+      "color": "#f4d03f",
+      "refs": {
+        "procedural": "fetal-circulation#flow_svc"
+      },
+      "terms": [
+        "superior caval stream",
+        "streaming"
+      ]
+    },
+    {
+      "key": "midline",
+      "name": "Median plane",
+      "label": "Median plane — reference",
+      "role": "context",
+      "group": "Reference",
+      "layer": "organ",
+      "color": "#9aa6bf",
+      "refs": {
+        "procedural": "fetal-circulation#midline"
+      },
+      "terms": [
+        "median plane",
+        "midline"
+      ]
+    },
+    {
+      "key": "pda_duct",
+      "name": "Patent ductus arteriosus",
+      "label": "Patent ductus arteriosus — the same duct, still open",
+      "role": "part",
+      "group": "When the change fails",
+      "layer": "vessel",
+      "color": "#ec7063",
+      "refs": {
+        "procedural": "fetal-circulation#ductus_arteriosus@1+pda"
+      },
+      "terms": [
+        "patent ductus arteriosus",
+        "PDA",
+        "machinery murmur",
+        "bounding pulses",
+        "indomethacin",
+        "ibuprofen",
+        "premature",
+        "congenital rubella",
+        "left to right shunt"
+      ],
+      "narration": "If the duct stays open after birth the pressure gradient has reversed, so flow now runs from aorta to pulmonary trunk — left to right, through both systole and diastole. That is the continuous machinery murmur below the left clavicle, with bounding pulses and a wide pulse pressure. It is common in premature babies and classically associated with congenital rubella. Because prostaglandin holds the duct open, a prostaglandin synthesis inhibitor such as indomethacin or ibuprofen closes it."
+    },
+    {
+      "key": "pda_flow",
+      "name": "Flow in a persistent duct",
+      "label": "Flow with the duct still open — now left to right",
+      "role": "part",
+      "group": "When the change fails",
+      "layer": "vessel",
+      "color": "#f5b041",
+      "refs": {
+        "procedural": "fetal-circulation#flow_ductus_arteriosus@1+pda"
+      },
+      "terms": [
+        "left to right shunt",
+        "reversed shunt",
+        "continuous murmur"
+      ]
+    },
+    {
+      "key": "pfc_duct",
+      "name": "Duct in persistent fetal circulation",
+      "label": "Persistent fetal circulation — the duct still shunting right to left",
+      "role": "part",
+      "group": "When the change fails",
+      "layer": "vessel",
+      "color": "#af7ac5",
+      "refs": {
+        "procedural": "fetal-circulation#ductus_arteriosus@1+pfc"
+      },
+      "terms": [
+        "persistent fetal circulation",
+        "persistent pulmonary hypertension of the newborn",
+        "PPHN",
+        "meconium aspiration",
+        "birth asphyxia",
+        "right to left shunt",
+        "cyanosis"
+      ],
+      "narration": "The transition can also fail on the lung side. If pulmonary vascular resistance does not fall — after meconium aspiration, birth asphyxia, sepsis or with hypoplastic lungs — the foramen ovale and duct keep shunting right to left and the baby stays hypoxic. Hypoxia and acidosis constrict the pulmonary vessels further, so the failure feeds itself. This is why the transition is described as a circulation that must be actively completed rather than a switch that flips at delivery."
+    },
+    {
+      "key": "pfc_flow",
+      "name": "Flow in persistent fetal circulation",
+      "label": "Flow when the pulmonary bed never opens",
+      "role": "part",
+      "group": "When the change fails",
+      "layer": "vessel",
+      "color": "#c39bd3",
+      "refs": {
+        "procedural": "fetal-circulation#flow_ductus_arteriosus@1+pfc"
+      },
+      "terms": [
+        "persistent fetal circulation",
+        "right to left",
+        "hypoxia",
+        "acidosis"
+      ]
+    },
+    {
+      "key": "pfc_septum",
+      "name": "Atrial septum — persistent fetal circulation",
+      "label": "The atrial septum at six weeks with the lung side of the transition never completed",
+      "role": "part",
+      "group": "When the transition fails",
+      "layer": "organ",
+      "color": "#b8c4d4",
+      "refs": {
+        "procedural": "fetal-circulation#atrial_septum@1+pfc"
+      },
+      "terms": [
+        "atrial septum",
+        "septum secundum"
+      ],
+      "opacity": 0.55
+    },
+    {
+      "key": "pfc_crista",
+      "name": "Crista dividens — persistent fetal circulation",
+      "label": "The free lower edge of the septum secundum, still aiming the inferior caval stream at an open foramen",
+      "role": "part",
+      "group": "When the transition fails",
+      "layer": "organ",
+      "color": "#e59866",
+      "refs": {
+        "procedural": "fetal-circulation#crista_dividens@1+pfc"
+      },
+      "terms": [
+        "crista dividens"
+      ]
+    },
+    {
+      "key": "pfc_foramen",
+      "name": "Foramen ovale — still patent, still shunting right to left",
+      "label": "The septum primum flap at six weeks, never pressed shut because left atrial pressure never overtook right",
+      "role": "part",
+      "group": "When the transition fails",
+      "layer": "organ",
+      "color": "#5499c7",
+      "refs": {
+        "procedural": "fetal-circulation#foramen_ovale@1+pfc"
+      },
+      "terms": [
+        "foramen ovale",
+        "septum primum",
+        "patent foramen ovale"
+      ]
+    },
+    {
+      "key": "pfc_flow_foramen",
+      "name": "Flow — foramen ovale, persistent fetal circulation",
+      "label": "The interatrial shunt still running right to left at six weeks",
+      "role": "part",
+      "group": "When the transition fails",
+      "layer": "flow",
+      "color": "#f4d03f",
+      "refs": {
+        "procedural": "fetal-circulation#flow_foramen_ovale@1+pfc"
+      },
+      "terms": [
+        "right-to-left shunt",
+        "interatrial shunt"
+      ]
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "title": "Two resistances decide everything",
+      "narration": "Start with two numbers rather than a diagram. Pulmonary vascular resistance is very high because the lungs are fluid-filled and their vessels are constricted. Systemic vascular resistance is very low because the placenta is an enormous low-resistance bed. Blood goes where resistance is least, so it avoids the lungs and heads for the placenta, and three shunts exist to let it do that — one past the liver, one past the right heart, one past the lungs. Learn the two resistances and the three shunts stop being a list to memorise.\n\nThe fetus breathes through the placenta, not the lungs. The lungs are full of fluid and their vessels are clamped tight, so pulmonary resistance is very high, while the placenta is a huge low-resistance bed that keeps systemic resistance low. Blood therefore wants to go anywhere except the lungs. Three shunts are built to let it: one past the liver, one past the right side of the heart, and one past the lungs. Every fetal peculiarity follows from those two resistances and those three shunts.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "placenta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "liver"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "lungs"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "left_atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "left_ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrial_septum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ductus_venosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foramen_ovale"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ductus_arteriosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_trunk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ascending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aortic_arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "descending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "umbilical_vein"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ivc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midline"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "placenta",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lungs",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "liver",
+          "to": "ductus_venosus",
+          "kind": "an organ the fetus does not yet need is bypassed by"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_ventricle",
+          "to": "foramen_ovale",
+          "kind": "high pulmonary resistance means the right heart is bypassed through"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lungs",
+          "to": "ductus_arteriosus",
+          "kind": "whatever still enters the right ventricle bypasses the lungs through"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "beat": 1,
+      "claims": [
+        {
+          "id": "B1-PLAC",
+          "measure": "flow.plac",
+          "op": "near",
+          "value": 0.4,
+          "tol": 0.015,
+          "claim": "two fifths of the combined output goes to the placenta - the low-resistance bed the narration names first"
+        },
+        {
+          "id": "B1-LUNG",
+          "measure": "derived.pulmonary_share",
+          "op": "atMost",
+          "value": 0.1,
+          "claim": "and under a tenth goes to the lungs, which is the other resistance"
+        }
+      ]
+    },
+    {
+      "mode": "vasculature",
+      "title": "Follow one red cell from the placenta",
+      "narration": "Now walk the whole route once, out loud. Umbilical vein at eighty percent, the highest in the body. Ductus venosus past the liver into the inferior vena cava. Into the right atrium at about seventy percent, aimed by the crista dividens through the foramen ovale into the left atrium. Left ventricle, ascending aorta, coronaries and carotids — the brain and the heart get the best of it. Meanwhile the superior caval stream crosses into the right ventricle, meets a shut pulmonary bed and crosses the ductus arteriosus into the descending aorta below the left subclavian. Then out along the two umbilical arteries to the placenta to start again. Say that route until it is automatic; most of the marks in this topic are in it.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "placenta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "umbilical_vein"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ductus_venosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "portal_sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "liver"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hepatic_veins"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ivc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "svc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrial_septum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "crista_dividens"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foramen_ovale"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "left_atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "left_ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ascending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aortic_arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_neck_vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_trunk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_arteries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "lungs"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_veins"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ductus_arteriosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "descending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "common_iliacs"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "umbilical_arteries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_ivc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_svc"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:blood",
+          "path": [
+            "umbilical_vein",
+            "ductus_venosus",
+            "ivc",
+            "right_atrium",
+            "crista_dividens",
+            "foramen_ovale",
+            "left_atrium",
+            "left_ventricle",
+            "ascending_aorta",
+            "head_neck_vessels",
+            "svc",
+            "right_ventricle",
+            "pulmonary_trunk",
+            "ductus_arteriosus",
+            "descending_aorta",
+            "common_iliacs",
+            "umbilical_arteries",
+            "placenta"
+          ],
+          "duration": 20
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "beat": 2,
+      "claims": [
+        {
+          "id": "B2-UV",
+          "measure": "flow.uv",
+          "op": "near",
+          "value": 0.4,
+          "tol": 0.02,
+          "claim": "the whole placental return comes back up the umbilical vein - the route this beat follows"
+        },
+        {
+          "id": "B2-SAT",
+          "measure": "sat.uv",
+          "op": "near",
+          "value": 0.8,
+          "tol": 0.01,
+          "claim": "at about eighty per cent saturation, the highest anywhere in the fetus"
+        }
+      ]
+    },
+    {
+      "mode": "vasculature",
+      "title": "Past the liver — the ductus venosus",
+      "narration": "The first shunt, on its own and close enough to see. Umbilical venous blood arrives at about eighty percent saturation — the highest anywhere in the fetus — and the liver is not yet doing the work it will do after birth, so roughly half of it is sent straight past through the ductus venosus into the inferior vena cava. The rest goes through the portal sinus into the liver itself and leaves by the hepatic veins, and the two streams meet again in the inferior cava. That is why the blood arriving at the right atrium is better oxygenated than any other venous blood in the body: most of it never went through an organ.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "umbilical_vein"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ductus_venosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "portal_sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "liver"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hepatic_veins"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ivc_terminal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_ductus_venosus"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ductus_venosus",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "umbilical_vein",
+          "to": "ductus_venosus",
+          "kind": "about half the umbilical venous return is sent past the liver through"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ductus_venosus",
+          "to": "ivc_terminal",
+          "kind": "empties straight into"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "beat": 3,
+      "claims": [
+        {
+          "id": "B3-DV",
+          "measure": "flow.dv",
+          "op": "near",
+          "value": 0.2,
+          "tol": 0.02,
+          "claim": "roughly half the umbilical venous return is sent straight past the liver through the ductus venosus"
+        },
+        {
+          "id": "B3-DIR",
+          "measure": "marker.flow_ductus_venosus.direction",
+          "op": "equals",
+          "value": 1,
+          "claim": "and its arrows run toward the cava, not away from it"
+        },
+        {
+          "id": "B3-HEP",
+          "measure": "flow.hepatic",
+          "op": "near",
+          "value": 0.2,
+          "tol": 0.02,
+          "claim": "the other half goes through the portal sinus into the liver and leaves by the hepatic veins"
+        }
+      ]
+    },
+    {
+      "mode": "vasculature",
+      "title": "Streaming — why the fetus is not just mixed blood",
+      "narration": "Look into the right atrium and follow the two streams across it. The inferior caval stream is well oxygenated and the superior caval stream is not, and they cross the same chamber without properly mixing — the inferior one aimed by the crista dividens at the foramen ovale, the superior one turning down to the tricuspid orifice. The chamber wall is drawn translucent so the crossing inside it can be seen.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ivc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "svc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrial_septum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_ivc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_svc"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ivc",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "svc",
+          "intensity": 0.9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ivc",
+            "svc"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "beat": 4,
+      "claims": [
+        {
+          "id": "B4-IVC",
+          "measure": "sat.ivc",
+          "op": "near",
+          "value": 0.7,
+          "tol": 0.02,
+          "claim": "the inferior caval stream reaches the right atrium at about seventy per cent - \"well oxygenated\""
+        },
+        {
+          "id": "B4-SVC",
+          "measure": "sat.svc",
+          "op": "atMost",
+          "value": 0.45,
+          "claim": "and the superior caval stream is not - the contrast the whole beat rests on"
+        },
+        {
+          "id": "B4-CROSS",
+          "measure": "flow.fo",
+          "op": "atLeast",
+          "value": 0.2,
+          "claim": "and the inferior stream really does cross the chamber to the left: the interatrial shunt is a fifth of combined output, which is what the intra-atrial marker is drawn from"
+        },
+        {
+          "id": "B4-DIRI",
+          "measure": "marker.flow_ivc.direction",
+          "op": "equals",
+          "value": 1,
+          "claim": "both caval streams point INTO the atrium"
+        },
+        {
+          "id": "B4-DIRS",
+          "measure": "marker.flow_svc.direction",
+          "op": "equals",
+          "value": 1,
+          "claim": "- the superior one as well as the inferior"
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "title": "The crista dividens aims the better stream",
+      "narration": "The crista dividens, the free lower edge of the septum secundum, splits the inferior stream and sends most of it through the foramen ovale. That is the mechanism behind the exam favourite: the fetal brain and heart receive the most saturated blood, and the lower body receives the least, because the ductus arteriosus empties into the aorta beyond the head and arm vessels.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrial_septum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "crista_dividens"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foramen_ovale"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_foramen_ovale"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ivc"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "crista_dividens",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "foramen_ovale",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "crista_dividens",
+          "to": "foramen_ovale",
+          "kind": "aiming the inferior caval stream through"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "beat": 5,
+      "claims": [
+        {
+          "id": "B5-FO",
+          "measure": "flow.fo",
+          "op": "near",
+          "value": 0.26,
+          "tol": 0.02,
+          "claim": "most of the inferior stream is aimed through the foramen ovale - a quarter of combined output"
+        },
+        {
+          "id": "B5-DIR",
+          "measure": "marker.flow_foramen_ovale.direction",
+          "op": "equals",
+          "value": 1,
+          "claim": "right to left, which is the direction the marker is oriented by"
+        },
+        {
+          "id": "B5-FLAP",
+          "measure": "flap.open",
+          "op": "atLeast",
+          "value": 0.98,
+          "claim": "and the flap is fully open, held by the fetal gradient"
+        }
+      ]
+    },
+    {
+      "mode": "vasculature",
+      "title": "Why the brain gets the best blood",
+      "narration": "From the left atrium the blood passes to the left ventricle and out into the ascending aorta, whose first branches are the coronaries and then the vessels to the head and upper limbs. So the two organs that can least tolerate hypoxia, the brain and the heart itself, are supplied first and with the best available blood. Understand the streaming and this arrangement is not a coincidence but the point of the whole design.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ascending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aortic_arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_neck_vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ductus_arteriosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "left_ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "left_atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_trunk"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "head_neck_vessels",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ascending_aorta",
+          "intensity": 0.85
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "beat": 6,
+      "claims": [
+        {
+          "id": "B6-ORDER",
+          "measure": "derived.order_frac",
+          "op": "atLeast",
+          "value": 0.25,
+          "claim": "the ascending aorta is better oxygenated than the descending one by at least a quarter of the whole cascade - \"the brain gets the best blood\""
+        },
+        {
+          "id": "B6-AOA",
+          "measure": "sat.aoa",
+          "op": "near",
+          "value": 0.6734,
+          "tol": 0.02,
+          "claim": "and the ascending aortic saturation is the fetal one, not a newborn value"
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "title": "Two events at birth, every closure follows",
+      "narration": "Two events, and you can derive the rest. The lungs open, so pulmonary resistance falls, pulmonary flow rises and left atrial pressure goes up. The cord is clamped, so systemic resistance rises and right atrial pressure comes down. Left now exceeds right, the flap valve is pressed shut and the foramen ovale closes functionally in minutes. Rising oxygen and the loss of placental prostaglandin constrict the ductus arteriosus over ten to fifteen hours. Umbilical flow stops, so the ductus venosus closes. Then name what each becomes: ligamentum teres, ligamentum venosum, fossa ovalis, ligamentum arteriosum, medial umbilical ligaments — and remember the superior vesical arteries stay open and keep working.\n\nThe lungs inflate, the fluid is cleared and alveolar oxygen dilates the pulmonary vessels. Pulmonary vascular resistance collapses, pulmonary blood flow increases many times over, and all that blood returns to the left atrium, whose pressure now rises.\n\nClamping the cord removes the largest low-resistance bed in the circulation, so systemic resistance jumps. At the same time the umbilical venous return stops, so right atrial pressure falls. Two changes, one result: left atrial pressure now exceeds right for the first time, and it stays that way for life.\n\nThe foramen ovale shuts because the pressures reversed and the septum primum is pressed against the septum secundum — no tissue has to grow for that, only for permanent fusion over the following months. The ductus arteriosus constricts within about ten to fifteen hours as oxygen tension rises, placental prostaglandin E2 disappears and bradykinin acts on its muscular wall, and it is anatomically sealed within two to three weeks. The ductus venosus closes once umbilical flow stops. Distinguish functional closure, which happens in hours, from anatomical closure, which takes weeks — that distinction is the whole reason a duct can be reopened with a drug.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.0998
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "placenta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "umbilical_vein"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ductus_venosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "portal_sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "liver"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hepatic_veins"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ivc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "svc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrial_septum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "crista_dividens"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foramen_ovale"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "left_atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "left_ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ascending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aortic_arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "head_neck_vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_ventricle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_trunk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_arteries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "lungs"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_veins"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ductus_arteriosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "descending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "common_iliacs"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "umbilical_arteries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_ivc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_svc"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lungs",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "umbilical_arteries",
+          "intensity": 0.85
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lungs",
+          "to": "left_atrium",
+          "kind": "rising pulmonary flow raises the pressure in"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "placenta",
+          "to": "right_atrium",
+          "kind": "losing the placenta raises systemic resistance and lowers the pressure in"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "beat": 7,
+      "claims": [
+        {
+          "id": "B7-CLOCK",
+          "measure": "clock.minutes",
+          "op": "near",
+          "value": 2.0,
+          "tol": 0.3,
+          "claim": "two minutes old - this beat is the moment both birth events have happened"
+        },
+        {
+          "id": "B7-PLAC",
+          "measure": "flow.plac",
+          "op": "atMost",
+          "value": 0.01,
+          "claim": "the cord is clamped, so placental flow has gone"
+        },
+        {
+          "id": "B7-LUNG",
+          "measure": "derived.pulmonary_share",
+          "op": "atLeast",
+          "value": 0.3,
+          "claim": "and the lungs have opened, taking over a third of the output"
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "title": "The flap is pressed shut",
+      "narration": "Same moment, at the septum, seen from the right — the side a student meets the fossa from. Left atrial pressure has now overtaken right, and the septum primum flap — hinged on the caudal rim of the foramen with its free edge cranial — is held against the septum secundum. Nothing has grown and nothing has torn: the leaf lies flat because the gradient it hung open on has reversed. The arrow still crossing the septum is a tenth of the fetal one by drawn area, because a residual shunt is not the same as no shunt: permanent fusion takes months, which is why a quarter of adults keep a probe-patent foramen and why this closure is called functional rather than anatomical.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.0998
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrial_septum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "crista_dividens"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foramen_ovale"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_foramen_ovale_residual"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "foramen_ovale",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "left_atrium",
+          "to": "foramen_ovale",
+          "kind": "left now exceeds right, which presses shut"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "beat": 8,
+      "claims": [
+        {
+          "id": "B8-FLAP",
+          "measure": "flap.open",
+          "op": "atMost",
+          "value": 0.15,
+          "claim": "the flap is lying all but flat - the solved gradient has reversed"
+        },
+        {
+          "id": "B8-FO",
+          "measure": "flow.fo",
+          "op": "between",
+          "value": [
+            0.006,
+            0.05
+          ],
+          "claim": "and yet a residual shunt still crosses: enough for a marker to be emitted, a fourteenth of the fetal shunt"
+        },
+        {
+          "id": "B8-AREA",
+          "measure": "fo_marker.area_frac_of_fetal",
+          "op": "atMost",
+          "value": 0.15,
+          "claim": "so the arrow across the septum is about a tenth of the fetal one by drawn area - the claim this beat makes in words"
+        },
+        {
+          "id": "B8-EXISTS",
+          "measure": "marker.flow_foramen_ovale.exists",
+          "op": "equals",
+          "value": 1,
+          "claim": "and it is still drawn, because a residual shunt is not the same as no shunt"
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "title": "Fifteen minutes old — the duct turns round",
+      "narration": "Watch the arrows in the duct, and nothing else. A quarter of an hour ago they pointed from the pulmonary trunk into the aorta, because the lungs were the hard way round. Now they point from the aorta into the pulmonary trunk. Nothing was rebuilt and no valve moved: the two resistances swapped places, and the blood went the way that was easier, which is the only thing blood has ever done. A normal newborn shunts a little left to right across a duct that is still closing, for the ten to fifteen hours it takes to shut. Hold on to this frame, because a duct that fails to shut is stuck here — and the murmur, the bounding pulses and the drug that treats it all follow from an arrow pointing this way instead of that way.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.25
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ductus_arteriosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_ductus_arteriosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_trunk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_arteries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aortic_arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "descending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ascending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_ventricle"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ductus_arteriosus",
+          "intensity": 0.95
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pulmonary_arteries",
+            "aortic_arch"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "beat": 9,
+      "claims": [
+        {
+          "id": "B9-CLOCK",
+          "measure": "clock.minutes",
+          "op": "between",
+          "value": [
+            10,
+            20
+          ],
+          "claim": "a quarter of an hour old"
+        },
+        {
+          "id": "B9-DIR",
+          "measure": "marker.flow_ductus_arteriosus.direction",
+          "op": "equals",
+          "value": -1,
+          "claim": "and the ductal arrows now point the OTHER WAY - from the aorta into the pulmonary trunk. This is the claim nothing in the corpus could check until round 5: the model knows the sign, the narration knows the words"
+        },
+        {
+          "id": "B9-DA",
+          "measure": "flow.da",
+          "op": "atMost",
+          "value": -0.1,
+          "claim": "and the reversed flow is a real left-to-right shunt, not a rounding error"
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "title": "What each one becomes — below the diaphragm",
+      "narration": "Five pairs to know cold — the three below the diaphragm first. Umbilical vein becomes the ligamentum teres hepatis in the free edge of the falciform ligament. Ductus venosus becomes the ligamentum venosum. The distal umbilical arteries become the medial umbilical ligaments while their proximal parts stay open as the superior vesical arteries — the only fetal vessel on this list that keeps a job.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "umbilical_vein"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ductus_venosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "portal_sinus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "umbilical_arteries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "common_iliacs"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "umbilical_vein",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ductus_venosus",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "umbilical_arteries",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "beat": 10,
+      "claims": [
+        {
+          "id": "B10-UV",
+          "measure": "calibre.umbilical_vein",
+          "op": "atMost",
+          "value": 0.32,
+          "claim": "the umbilical vein is a cord and not a vessel - the ligamentum teres"
+        },
+        {
+          "id": "B10-DV",
+          "measure": "calibre.ductus_venosus",
+          "op": "atMost",
+          "value": 0.32,
+          "claim": "and so is the ductus venosus - the ligamentum venosum"
+        },
+        {
+          "id": "B10-CLOCK",
+          "measure": "clock.minutes",
+          "op": "atLeast",
+          "value": 50000,
+          "claim": "six weeks old, which is where the structural closure has finished"
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "title": "What each one becomes — in the chest",
+      "narration": "Foramen ovale becomes the fossa ovalis, and the free lower edge of the septum secundum — the crista dividens that aimed the inferior stream — becomes its limbus. This is the view from the right, because the fossa is a right atrial feature: a shallow dimple with a raised crescent along the margin the crista occupied. Ductus arteriosus becomes the ligamentum arteriosum, and the left recurrent laryngeal nerve stays hooked under it for life.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ductus_arteriosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aortic_arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_trunk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atrial_septum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foramen_ovale"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "crista_dividens"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ascending_aorta"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ductus_arteriosus",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "foramen_ovale",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "crista_dividens",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "beat": 11,
+      "claims": [
+        {
+          "id": "B11-DA",
+          "measure": "calibre.ductus_arteriosus",
+          "op": "atMost",
+          "value": 0.32,
+          "claim": "the ductus arteriosus is a cord - the ligamentum arteriosum"
+        },
+        {
+          "id": "B11-FO",
+          "measure": "marker.flow_foramen_ovale.exists",
+          "op": "equals",
+          "value": 0,
+          "claim": "and nothing crosses the septum any more: the fossa ovalis is a floor, not a door"
+        },
+        {
+          "id": "B11-CLOCK",
+          "measure": "clock.minutes",
+          "op": "atLeast",
+          "value": 50000,
+          "claim": "six weeks old"
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "title": "When the duct stays open — and when it must not close",
+      "narration": "The duct can be wrong in either direction. Left open when it should have shut, the reversed gradient makes it shunt left to right — a continuous machinery murmur, bounding pulses, and a prostaglandin inhibitor to close it. But in a duct-dependent lesion it is the only connection the baby has, and closing it causes collapse on day two or three; there prostaglandin E1 keeps it open until surgery. The third failure is on the lung side: if pulmonary resistance never falls, the shunts keep running right to left and the newborn stays blue, with hypoxia and acidosis making the constriction worse. Finish every question the same way — trace the blood, name the shunt and the gradient, apply the two birth events, then name the remnant.\n\nIf the duct stays open after birth the pressure gradient has reversed, so flow now runs from aorta to pulmonary trunk — left to right, through both systole and diastole. That is the continuous machinery murmur below the left clavicle, with bounding pulses and a wide pulse pressure. It is common in premature babies and classically associated with congenital rubella. Because prostaglandin holds the duct open, a prostaglandin synthesis inhibitor such as indomethacin or ibuprofen closes it.\n\nReverse the logic and you have the most useful fact in neonatal cardiology. In some malformations the only route between the two circulations is the duct itself — transposition, pulmonary atresia, critical coarctation, hypoplastic left heart. Those babies are stable while the duct is open and collapse in the first days of life as it closes. Prostaglandin E1 keeps it open and buys time for surgery. A newborn who is well at birth and becomes blue or shocked on day two or three, especially with absent femoral pulses, is a duct closing on a lesion that needed it.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pda_duct"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pda_flow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_trunk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_arteries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aortic_arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "descending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ascending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_ventricle"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pda_duct",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ductus_arteriosus",
+          "to": "pda_duct",
+          "kind": "the same vessel, after the pressures have reversed, shunting the other way as"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "beat": 12,
+      "claims": [
+        {
+          "id": "B12-DIR",
+          "measure": "pda:marker.flow_ductus_arteriosus.direction",
+          "op": "equals",
+          "value": -1,
+          "claim": "in a duct that never closed the arrows run LEFT TO RIGHT - aorta into pulmonary trunk, the opposite of the fetal direction"
+        },
+        {
+          "id": "B12-DA",
+          "measure": "pda:flow.da",
+          "op": "atMost",
+          "value": -0.15,
+          "claim": "and it is a substantial shunt, not a trickle"
+        },
+        {
+          "id": "B12-CLOCK",
+          "measure": "calibre.umbilical_vein",
+          "op": "atMost",
+          "value": 0.32,
+          "claim": "at six weeks, where the other remnants are cords - so this is a newborn with a persistent duct and not a fetus"
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "title": "When the lung side fails — persistent fetal circulation",
+      "narration": "This is six weeks old with the lung side of the transition never completed. The duct is still the calibre it had before birth, and the arrows in it still run right to left — away from the lung, into the systemic circulation — which is why this baby is blue while the previous frame’s baby is pink and overloaded. The foramen is shunting the same way at the same moment, and the next frame shows it. Compare the duct here with the duct in the frame before: the same vessel, the same age, shunting the other way.\n\nThe transition can also fail on the lung side. If pulmonary vascular resistance does not fall — after meconium aspiration, birth asphyxia, sepsis or with hypoplastic lungs — the foramen ovale and duct keep shunting right to left and the baby stays hypoxic. Hypoxia and acidosis constrict the pulmonary vessels further, so the failure feeds itself. This is why the transition is described as a circulation that must be actively completed rather than a switch that flips at delivery.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pfc_duct"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pfc_flow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_trunk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pulmonary_arteries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aortic_arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "descending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ascending_aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_ventricle"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pfc_duct",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pulmonary_arteries",
+          "to": "pfc_duct",
+          "kind": "if pulmonary resistance never falls, the fetal pattern persists as"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "beat": 13,
+      "claims": [
+        {
+          "id": "B13-DIR",
+          "measure": "pfc:marker.flow_ductus_arteriosus.direction",
+          "op": "equals",
+          "value": 1,
+          "claim": "when the lung side fails the duct still runs RIGHT TO LEFT, the fetal way, weeks after birth"
+        },
+        {
+          "id": "B13-DA",
+          "measure": "pfc:flow.da",
+          "op": "atLeast",
+          "value": 0.3,
+          "claim": "and it carries a third of the combined output doing it"
+        },
+        {
+          "id": "B13-BLUE",
+          "measure": "pfc:sat.aod",
+          "op": "atMost",
+          "value": 0.8,
+          "claim": "which is why the newborn stays blue"
+        },
+        {
+          "id": "B13-CLOCK",
+          "measure": "calibre.umbilical_vein",
+          "op": "atMost",
+          "value": 0.32,
+          "claim": "at six weeks - a newborn, not a fetus"
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "title": "Persistent fetal circulation — the foramen is shunting too",
+      "narration": "Same baby, the same instant, at the atrial septum. The arrows through the foramen still run right to left — away from the lung, into the systemic circulation — which is why this baby is blue. The flap has not been pressed shut, because the pressure that shuts it never arrived: left atrial pressure overtakes right only once the lungs open and pulmonary resistance falls, and here it has not. So both shunts are still running, which is the whole of the lesion — and it is why hypoxia and acidosis make it worse, since each constricts the pulmonary vessels further and holds the gradient where it is.\n\nNote what is NOT drawn here. The crista dividens is still aiming the inferior caval stream at the foramen exactly as it did before birth. Nothing has grown, nothing has torn and nothing has been re-plumbed: this is the fetal arrangement, unchanged, in a baby who is six weeks old.",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pfc_septum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pfc_crista"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pfc_foramen"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pfc_flow_foramen"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ivc"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pfc_foramen",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pfc_crista",
+          "to": "pfc_foramen",
+          "kind": "still aiming the inferior caval stream through"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "beat": 14,
+      "claims": [
+        {
+          "id": "B14-DIR",
+          "measure": "pfc:marker.flow_foramen_ovale.direction",
+          "op": "equals",
+          "value": 1,
+          "claim": "the foramen is shunting too, and in the same fetal direction"
+        },
+        {
+          "id": "B14-FO",
+          "measure": "pfc:flow.fo",
+          "op": "atLeast",
+          "value": 0.05,
+          "claim": "carrying enough for the marker to exist at all"
+        },
+        {
+          "id": "B14-FLAP",
+          "measure": "pfc:flap.open",
+          "op": "atLeast",
+          "value": 0.5,
+          "claim": "because the gradient that holds the flap open never reversed"
+        },
+        {
+          "id": "B14-CLOCK",
+          "measure": "calibre.umbilical_vein",
+          "op": "atMost",
+          "value": 0.32,
+          "claim": "at six weeks - a newborn, not a fetus"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28",
+    "reauthored_at": "2026-09-11",
+    "reauthored_by": "model3d BUILD task",
+    "reauthor_note": "Re-authored from the sequence engine onto the procedural provider. The structures were teaching BEATS with no geometry; they are now the anatomical parts models3d/fetal-circulation.js builds, and every beat's narration is carried across VERBATIM onto the structure or the view that replaced it. Nothing taught was dropped: one beat that cannot be a view is in deferred_beats with its full text. One view (beat 6) is newly written, for a picture the sequence engine could not show at all — the duct reversing.",
+    "corrected_at": "2026-09-30T11:56:00Z",
+    "corrected_by": "model3d REVIEW task (review round 4; device shell available in-repo, renders in the cloud container)",
+    "correction_note": "[ROUND 4, 2026-09-30] No geometry, narration, view or claim was changed by this review. The only edit is the gaps[] entry recording that the pfc variant's saturation field is the 0.05 clamp rather than a solution, and that every automated check in the chain certifies it. The item is ESCALATED on that finding as a decision no task may make; see ESCALATIONS.md. PREVIOUS NOTE FOLLOWS. View 7 'What each one becomes' carried {op:'ISOLATE_REGION', target:'From the placenta'}. That group is [placenta, umbilical_vein], and the view hides the placenta, so in the player viz3d.js set state.only=['placenta','umbilical_vein'] and subjectBox() framed the camera on the umbilical vein ALONE. Measured against the player's own subjectBox()/distanceForBox() at four viewport aspects (0.6, 1.0, 1.6, 2.2): the ductus arteriosus and the foramen ovale — two of the five remnants this view exists to name — fell OUTSIDE the camera frustum at every one. No render in models-out shows this, because render-fetal-circulation.mjs applies only the SHOW list and fits with VizKit.fitCamera over the whole group, ignoring ISOLATE_REGION and visibility. viz-training/tools/validate-scenes.mjs had already warned four times on this view ('sit outside this beat's ISOLATE_REGION ... legal, but check the narration asks for them'). No group in this scene contains the five remnants, so the op is removed rather than retargeted: the view now frames its visible set and keeps all five highlighted at full opacity, which is what views 1 and 5 already do. Narration untouched.\n\n--- 2026-09-30, review round 2 ---\nFour of the nine visibility_waivers cited a percentage the committed scene does not reproduce; re-measured with the player visibility walk on the pinned renderer and corrected in place: beat 3 ductus venosus 0.35 -> 1.258, beat 9 ductus arteriosus 0.75 -> 0.383 (twice), beat 8 foramen ovale 3.3 -> 0.371. The other five reproduce exactly (beat 5 foramen 3.401 against the waiver's 3.4, beat 5 crista 0.33 against 0.33), which is the evidence that the tool is deterministic and these four were wrong rather than noisy. The beat 8 correction matters: the waiver's argument is 'not seeable here, seeable large there', and 'there' turns out to be 0.371% against a 0.300% floor.\ngaps[16] asserted 'THE PLAYER VISIBILITY WALK FAILS ON ALL NINE BEATS'; the scene has thirteen beats and the walk passes 13/13. Rewritten to the measured state, keeping round 2's account of the cause, and carrying the reviewer's new finding about what the fix cost beat 4.\ngaps[1] still described per-vessel flow keys as 'left undone'; round 3 built them. Rewritten.\ngaps[5] asked the reviewer to decide the ductus venosus share; decided (keep 0.50) and recorded there, so it stops going round.\nNOT CHANGED, and left as findings for the build task: beat 4's camera, and beat 13 narrating a foramen shunt it does not show. Both need an authorial choice the reviewer should not make alone - see the queue findings.",
+    "corrected_at_round2": "2026-09-30T06:41:27Z",
+    "corrected_by_round2": "model3d BUILD run, round 2 (scheduled 2026-09-30T06:05Z; cloud container, stage-in/commit-back, no device shell)",
+    "correction_note_round2": "Round 1 finding R1-OPEN-1, in two halves. (a) View 8 carried {op:\"COMPARE_STRUCTURES\", targets:[\"pda_duct\",\"pfc_duct\"]} and a SHOW_RELATIONSHIP to pfc_duct, while the view never SHOWs pfc_duct; viz3d.js subjectBox() skips an invisible mesh, so the camera framed pda_duct alone at camDist 1.20 - controls.minDistance exactly, the formula wanting closer and hitting the floor. Both ops deleted; the view now frames its whole visible set with pda_duct highlighted at full opacity, as views 1 and 5 already do. (b) pfc_duct and pfc_flow were declared structures that no view showed at all, so the narration’s third failure mode - persistent fetal circulation - had geometry a student could not reach. A NINTH VIEW now shows them. The reviewer left the choice between \"put PFC inside view 8\" and \"give PFC its own view\" to the author; its own view was chosen because view 8 would then have had to carry three flow layers (flow, pda_flow, pfc_flow) in one frame, against this scene’s own rule in gaps[1] that a view either shows the whole circuit or isolates. The PFC paragraph of view 8’s narration moved to beat 9 VERBATIM; nothing was discarded, and beat 9’s lead sentence is the only newly written prose. View 8 retitled from \"When the transition fails - in both directions\", which is no longer what it alone shows.",
+    "correction_note_round3": "REVIEW ROUND 3, 2026-09-30. Five corrections, each re-verified by re-running the proof and the player walk after the edit.\n(1) flow_ductus_arteriosus ref @0 -> @0.25. Beat 9 was drawing the duct arrows in the FETAL direction in the one beat written to show them reverse - see the gaps[] entry. This is the substantive one.\n(2) beat 3 + SHOW_STRUCTURE hepatic_veins. The beat narrated the hepatic veins and the inferior cava and showed neither; the hepatic veins are now drawn, the IVC is left open with the cost of each option measured.\n(3) beat 13 narration. It carried the build run’s own rationale into text a student reads - \"it has the next frame to itself, because beats 12 and 13 differ in the duct alone and adding a second shunt here would break that comparison\" - and used the engine’s variable name, \"the same t\". A student does not know what beat 12 is or what t is. Every teaching clause is preserved; \"the same t\" becomes \"the same age\", and the reason for the split becomes \"and the next frame shows it\". The rationale itself is correct and belongs in gaps[18], where it already is.\n(4) beat 10 narration. \"Five pairs to know cold.\" opened a beat that names three; round 3 split the old beat 7 at a sentence boundary and the count stayed with the first half. Now \"Five pairs to know cold - the three below the diaphragm first.\"\n(5) gaps[4], [9], [10], [11], [14] carried beat numbers left stale by the 9 -> 13 -> 14 renumbering, and gaps[8] and [15] described a CROSS_SECTION this scene does not contain. gaps[9] additionally asserted that beat 7 does not show the placenta, which the committed scene contradicts. All corrected in place and annotated. The round-3 build note named this foot-gun for the visibility_waivers (\"indexed by view number, so inserting a beat renumbers every waiver after it\") and nobody applied it to gaps[], which has the same shape. The waivers themselves need no renumbering: they sit on views 1, 2, 4 and 7, all ahead of the inserted beats.",
+    "reworked_at_round5": "2026-09-30T11:02:00Z",
+    "reworked_by_round5": "model3d BUILD run, round 5 (scheduled 2026-09-30T10:05Z slot, fired 10:06:06Z; cloud container, stage-in / commit-back). Closed all four round-3 review findings (R3-OPEN-1..4) and landed the claims[] mechanism R3-STANDARDS-GAP-1 asked for. See gaps[21]-[27] and BUILD-LOG 2026-09-30 round 5."
+  },
+  "gaps": [
+    "THE ADAPTER PAINTS A STRUCTURE ONE COLOUR, SO THE MODEL'S SOLVED SATURATION DOES NOT REACH A STUDENT. viz3d.js merges every mesh carrying a key into one geometry and gives it one MeshStandardMaterial coloured from the SCENE's color field (or the model's LAYERS palette) - the material the model built, which carries the solved oxygen saturation at that t, is discarded. In a direct render the whole picture recolours as the transition proceeds, and the umbilical vein, inferior cava, ascending aorta, descending aorta and umbilical artery come out in that order by measured pixel warmth (120.8, 87.5, 75.2, 53.3, 52.0 red-minus-blue). In the player they are flat anatomical colours. The scene keeps the original author's colours, which at least carry the vein-artery reversal in the cord, and nothing is shown that is WRONG - but the single best thing this model does is currently invisible in the app. The fix is an engine change and belongs on its own queue item: let the adapter keep the built mesh's own colour when the scene declares none.",
+    "THE FLOW LAYER IS ONE STRUCTURE COVERING EVERY VESSEL'S ARROWS, so a view that hides a vessel leaves its arrows hanging in mid air. Measured, not predicted: beats 3 and 4 were first authored isolating a region with the flow layer on, and rendered as a cloud of loose gold cones. The rule applied here is that a view either shows the whole circuit and may show flow, or isolates a region and must not. The better fix is per-vessel marker keys in the model so a view can show exactly the arrows of the vessels it is showing. RESOLVED 2026-09-30 (round 3): FLOW_KEY_OF/FLOW_KEYS partition the markers and the three shunts each carry their own key (flow_ductus_venosus, flow_foramen_ovale, flow_ductus_arteriosus), so an isolating beat can now show exactly its own arrows. It cost three structures, not the twenty-odd feared here. The monolithic `flow` key remains for the whole-circuit beats and no longer carries the duct. [REVIEW 2026-09-30: this gap still described the fix as undone two rounds after it was built.]",
+    "RE-AUTHORED from sequence to model3d on 2026-09-11. The scene previously had teaching BEATS as its structures (the_problem, brain_first, first_breath, cord_clamped, shunts_close, remnants, pda, duct_dependent, persistent_fetal, exam_frame) because it was written for the SVG panel engine. Structures are now the anatomical parts models3d/fetal-circulation.js builds; every beat's narration is preserved verbatim on the structure or the view that replaced it. Nothing taught was dropped.",
+    "ONE BEAT WAS MOVED OUT, NOT DELETED - see deferred_beats[]. 'How to answer any fetal circulation question' is exam technique with no frame it could change, and every structure it names is already shown by the view that teaches it.",
+    "ONE VIEW IS NEW. Beat 9, 'Fifteen minutes old - the duct turns round', has narration written for this conversion rather than carried over. It exists because the model can show something the sequence engine could not: the arrows in the duct reversing, as a consequence of the solved resistances rather than as an assertion. Every other word in this scene is the original author's.",
+    "THE MODEL AGREES WITH THE NARRATION, NOT WITH THE LITERATURE, ON ONE NUMBER, and it is flagged rather than resolved. The ductus venosus narration says it carries 'roughly half' of umbilical venous flow, and the model uses 0.50 so the picture agrees with the words a student is reading. Human fetal MRI in late gestation puts it nearer 0.30. Whoever reviews this should decide which one the corpus teaches; the build task is not the right place to overrule the narration silently. REVIEWER'S DECISION 2026-09-30, so this stops recurring: KEEP 0.50. This corpus is exam-oriented and the standard texts a student is marked against teach 'roughly half'; the narration says 'roughly half'; and the model agreeing with the words on screen is worth more here than agreeing with late-gestation MRI. The 0.30 figure stays recorded in this gap as the better physiological number and as the reason a reader may see a discrepancy. This is a reviewer's call on an editorial question the build task correctly refused to make silently, and Frank can overrule it; it is no longer an open question for either task, and neither should raise it again without new reason.",
+    "THE INFERIOR VENA CAVA IS MODELLED AS ONE WELL-MIXED STREAM, and it should probably be two. Because the ductus venosus stream at 0.80 is a large part of it, holding the mixed inferior caval saturation at the narration's stated 0.70 forces the lower body's oxygen extraction down to about a tenth of the whole body's, which is not a fetus. In life the ductus venosus stream and the lower-body stream do not mix before the crista dividens - which is the same streaming the crista then exploits - so the 0.70 belongs to a stream, not to a mixture. This does not change any relation the scene asserts; it changes how the upper-to-lower extraction split is apportioned inside the solve.",
+    "THE CURRICULUM DOES NOT OFFER 3d_anatomy FOR THIS STRUCTURE. CURRICULUM.json lists preferred_modes ['sequence','diagram'] for 'Fetal circulation', so this scene's mode has been promoted past what the curriculum names. model3d-scene-spec-v2.md is explicit that this is the intended behaviour - 'a structure routed to diagram becomes a 3D scene the day a model for it exists, with no curriculum edit' - and deferred_modes keeps both the earlier options on the record. Noted because a reader comparing the two files will otherwise think one of them is wrong.",
+    "AXES. This model is +x = fetus's LEFT, +y = CRANIAL, +z = VENTRAL, which is NOT the LPS convention the spec's CROSS_SECTION table assumes for scanned meshes. CORRECTED [REVIEW ROUND 3, 2026-09-30]: this entry read \"Beat 3's cut is therefore normal to y, which in this model's frame is the transverse plane the narration asks for\". THE SCENE CONTAINS NO CROSS_SECTION OP AT ALL - 225 ops across 14 views, and the string CROSS_SECTION appears in this file only in this sentence. Nothing is cut anywhere in this scene. The axis statement above is still the right one to keep for whoever adds a cut; the claim that a cut exists is withdrawn. See the open finding on beat 4, whose narration opens \"Cut across the right atrium\".",
+    "THE PLACENTA AND THE CORD ARE STILL DRAWN AFTER BIRTH. Geometry is built at every t and the views hide what is gone. CORRECTED [REVIEW ROUND 3, 2026-09-30]: this entry read \"so beat 7 and beat 8 do not show them\", and beat 7 DOES show the placenta and the umbilical vein, deliberately - its narration is about losing the placenta and it carries the placenta -> right_atrium relationship. What is true is that the placenta is hidden from beat 9 onward, and that beat 8 shows neither. The umbilical vessels and the two ducts DO shrink with t, to three tenths of their fetal calibre, which is the ligamentum teres, venosum and arteriosum and the medial umbilical ligaments - the most examined line in the topic, made geometry rather than caption.",
+    "DUCT-DEPENDENT LESIONS ARE DESCRIBED, NOT SHOWN. Transposition, pulmonary atresia, critical coarctation and hypoplastic left heart each need a different heart, and this model builds one. Their narration is carried on beat 12, where the duct that keeps those babies alive is the thing on screen.",
+    "THE CORONARY ARTERIES ARE NOT BUILT. Beat 6 teaches that the ascending aorta’s \"first branches are the coronaries and then the vessels to the head and upper limbs\", and this model builds no coronary geometry at all - head_neck_vessels are the first branches a student actually sees leave the arch. Nothing wrong is drawn and the narration is correct; the claim is simply unsupported by the picture. Declared here 2026-09-30 against review finding R1-OPEN-2 (round 1, 2026-09-21), which is precisely what gaps[] is for. The coronaries carry no shunt and no saturation this scene teaches, so building them would add two vessels and no lesson; the honest fix is this line. gross__heart-pericardium__coronary-arteries-cardiac-veins is where they are taught and has its own scene.",
+    "THE NEWBORN PREDUCTAL SATURATION CURVE DISAGREES WITH THE PUBLISHED ONE, AND IT IS NOT A MIS-TUNED PARAMETER - IT IS PROVEN UNREACHABLE IN THIS NETWORK. Round 1 finding R1-OPEN-4 said the model reads 0.543 / 0.962 / 0.976 at 1, 5 and 10 minutes against published 0.60-0.65 / 0.80-0.85 / 0.85-0.95, and asked for the number to be settled. Round 2 measured the model’s aoa saturation as a function of the IMPOSED aeration fraction at each checkpoint (11 values, 0.01-0.99, by driving EVENTS.breath to a chosen value at that instant). Reading the published bands back through that response: one minute needs the lung 0.42-0.49 aerated and two minutes needs it 0.385-0.411 aerated. The second interval lies BELOW the first, and aeration is monotone, so no aeration profile of any shape can satisfy both - not one logistic, not two phases, not anything. A 70-point sweep of single-logistic ranges agrees from the other side: the best puts 4 of 6 checkpoints in band and drags one minute to 0.263. THE CAUSE: the published curve rises only 0.05 between one and two minutes because oxygenating a newborn means filling an oxygen STORE - a whole circulating volume, plus progressive alveolar recruitment - and a store is capacitive. This is a steady-state resistive network with instantaneous mixing, so its arterial saturation tracks aeration immediately and has no capacity to buffer a nadir. THE REMEDY is a transit/equilibration term, which is a different model and a queue item of its own, not a constant to bend here. Acceptance row R now asserts the shape this model CAN claim - a nadir below the fetal value within two minutes of the clamp, monotone rise from it, plateau above 0.97 by six weeks - and report.json carries agrees_with_published:false beside the numbers so they cannot be quoted as agreement. No view renders the curve.",
+    "THE SEPTUM PRIMUM FLAP’S HINGE WAS ON THE WRONG RIM UNTIL 2026-09-30, and the leaf’s taper is still radial rather than hinge-to-free-edge. The hinge is fixed (see provenance and models3d/fetal-circulation.js FLAP_HINGE_V): it is now the caudal rim, free edge cranial, opening into the left atrium. What is NOT fixed is that leaf() draws a lens thickest at its CENTRE and tapering to nothing all the way round its rim, while the comment above it says \"thick at its hinge and tapering to nothing at its free edge\". The picture reads correctly as a valve and the profile is not what the comment claims; noted so the next reader does not take the comment for the code. Related: the flap’s hinge and the crista dividens now both sit on the caudal rim, the flap on the left-atrial face and the ridge on the right, which is the right side for each but closer together than the real septum secundum’s overlap.",
+    "EVERY DECLARED STRUCTURE IS NOW SHOWN BY AT LEAST ONE VIEW - and nothing in the standard tooling checks that. Round 1 finding R1-OPEN-1 found pfc_duct and pfc_flow declared, building geometry and resolving through the real adapter while NO view showed either, so the narration’s third failure mode had a model a student could not reach. Every automated check passed on it: \"32/32 refs resolve\" measures resolution, not display. Beat 13 now shows them. The general check - assert that each structures[] key appears in some view’s visible set after the player’s own resetState and ops - is implemented as check 10 of viz-training/tools/render-fetal-circulation.mjs for this scene only, and is PROPOSED for validate-scenes.mjs, where it would cover all ~150 scenes. That proposal is shared tooling and is not this run’s to land.",
+    "THE MEDIAN-PLANE TRACE IS NOW SHOWN BY BEAT 1, and it was found by check 10 of render-fetal-circulation.mjs on that check’s FIRST run. `midline` was a declared structure that builds geometry and resolves through the real adapter while no view showed it - the identical defect to pfc_duct in review finding R1-OPEN-1, in a structure nobody had mentioned. It is shown in beat 1, the establishing view of the whole fetus, because a median-plane trace is a spatial reference and that is the beat where a student is orienting; it is deliberately NOT added to beat 3 (see the AXES gap, corrected [REVIEW ROUND 3, 2026-09-30] - beat 3 has no cut). A check written for one finding catching a second, unrelated one on its first run is the argument for proposing it for validate-scenes.mjs.",
+    "THE PLAYER VISIBILITY WALK NOW PASSES ON ALL THIRTEEN BEATS. CORRECTED 2026-09-30 BY THE REVIEW TASK - this entry previously read 'THE PLAYER VISIBILITY WALK FAILS ON ALL NINE BEATS' and was left in place through round 3, which built the beats that fixed it. As committed, measure-scene-visibility.mjs (three.js r128; thresholds any >= 0.02%, pointed-at >= 0.3%, subject >= 8% of frame) reports 13 beats, 0 failures, EVERY STRUCTURE A BEAT DRAWS OR POINTS AT IS SEEABLE. Re-run by the reviewer rather than taken from the build log. WHAT ROUND 2 ESTABLISHED ABOUT THE CAUSE, kept because it is still the best account of why the shunts are hard to show: (1) OPACITY HELPS AND IS NOT ENOUGH - placenta 0.42, liver 0.38, lungs 0.34, the four chambers 0.42 and the septum 0.55 moved every shunt up and closed none. (2) IT IS OCCLUSION BY THE GREAT VESSELS, NOT SCALE - the duct at 21.8% of the framed extent still drew 0.058%. (3) CAMERA DIRECTION IS THE BIGGEST SINGLE LEVER for a whole-circuit frame, and was still 3.4x short. (4) THE MONOLITHIC FLOW LAYER BLOCKED THE OBVIOUS REMEDY; per-vessel flow keys were the enabling fix and were built in round 3. WHAT ACTUALLY WORKED, from the round-3 probes: A SUPERIOR CAMERA ON A TIGHT STRUCTURE SET CLEARS EVERY SHUNT, because these are long thin tubes and a camera that fits the bounding box of a set spread over the whole fetus fills that box with empty space. AND THE COST OF THAT REMEDY, WHICH IS THE REVIEWER'S OPEN FINDING R2-OPEN-1 (see the queue): on BEAT 4 the superior camera looks straight down the shared axis of the superior and inferior venae cavae, so the SVC renders as a featureless disc at 10.595% and occludes the IVC to 0.046%. The beat exists to compare those two streams. The camera that passes the subject floor is the one camera that destroys the comparison.",
+    "BEAT 4 FAILS THE 8% SUBJECT FLOOR AND IS WAIVED ON A MEASURED ARGUMENT, not a lowered threshold. Round 4, closing review finding R2-OPEN-1. The beat's subject is the two venae cavae - two long thin tubes running the length of the trunk - and the camera fits their bounding box, which is 9.31% filled. No camera and no subject choice satisfies both the teaching and the floor: the full six-camera sweep is in the beat's visibility_waivers entry. The floor rewards exactly the camera that hides half the subject, which is review finding R2-STANDARDS-GAP-1 and is a change to measure-scene-visibility.mjs shared by ~150 scenes - proposed there, not landed here. WHAT DID CHANGE IN THE MODEL: the inferior and superior caval streams now carry their own flow keys (flow_ivc, flow_svc), so beat 4 can draw the two streams its narration points at without the whole circuit's cloud. Beats 2 and 7 show both keys as well, so the partition changed no frame but beat 4's - proved rather than asserted: every structure in beats 2 and 7 reproduces its pre-change percentage to three decimals and the three flow keys sum to the single old one exactly (beat 2: 1.008+0.217+0.122 = 1.347; beat 7: 0.551+0.194+0.129 = 0.874).",
+    "PERSISTENT FETAL CIRCULATION NOW HAS ITS FORAMEN, AS BEAT 14. Round 4, closing review finding R2-OPEN-2, which found beat 13 narrating ‘the arrows in it and through the foramen still run right to left’ over a frame containing no foramen. The reviewer left the choice of fix to the author and named the cost of each: adding the foramen to beat 13 breaks the controlled comparison beats 12 and 13 exist to make - they are deliberately identical but for the duct, and beat 13's own narration leans on that - while giving PFC a second frame does not. A SECOND FRAME IS TAKEN. The foramen clause moved out of beat 13 verbatim; beat 14's lead sentence and its closing note are the only newly written prose. THE PICTURE WAS ALREADY IN THE MODEL AND NOBODY HAD ASKED FOR IT: in the +pfc build at t=1 the flap is held 0.858 open and the foramen marker is emitted, because the solved interatrial gradient never reverses when the lungs never open - and in the plain and pda builds at the same t the flap is flat at 0.000 and no marker is emitted at all. That is now machine-guarded as acceptance row U with two negative cases, one flipping the shunt's sign and one holding the foramen open in every build. Row L already said ‘the shunts’ plural and only ever measured the duct.",
+    "THE VISIBILITY WALK WAS MIS-MEASURING THIS SCENE, AND EVERY OTHER SCENE PAST 32 STRUCTURES. Found by round 4 and FIXED IN THE TOOL, viz-training/tools/measure-scene-visibility.mjs. The structure id was written into the red channel alone as id*8, so the 33rd structure onward clamped to 255 and every one of them decoded as the 32nd. Consequences here, all now corrected: pfc_duct and pfc_flow read 0.000 and were passing only on the through-the-wall rescue (they are 0.410 and 0.522); pda_flow's pixels were being added to pda_duct, which is why pda_duct read 0.905 and now reads 0.571 + 0.334 = 0.905 exactly; and `midline` collapsed to 0.000 the moment two structures were inserted ahead of it, which is how the bug was found. REVIEW ROUND 2 CAME WITHIN ONE STEP OF THIS and was right not to guess: it recorded pfc_duct as ‘~10x worse than ductus_arteriosus’ and declined to call it a scene defect because ‘scene vs +pfc variant vs the harness's variant-ref handling has not been isolated’. It was the harness. The id is now split across two channels; ids 1-32 encode byte-identically, so no scene at or under 32 structures can be re-graded, and that was verified over all 1023 ids on the pinned renderer rather than argued from the arithmetic. Four procedural scenes this tool grades carry more than 32 structures - cardiac-looping at 51, heart-external at 42, coronary-arteries-cardiac-veins at 35, and this one - and THEIR PAST WALK RESULTS SHOULD BE TREATED AS UNRELIABLE UNTIL RE-RUN. This run did not re-run them: three of the four are other queue items and re-grading them is not this item's to do.",
+    "THE DUCT ARROWS IN BEAT 9 WERE POINTING THE FETAL WAY, IN THE ONE BEAT WRITTEN TO SHOW THEM REVERSE. FOUND AND FIXED BY REVIEW ROUND 3, 2026-09-30. The structure flow_ductus_arteriosus carried the ref 'fetal-circulation#flow_ductus_arteriosus@0'. viz3d.js atStage() returns null for a pinned ref (`if (!r || r.tPinned) return null`, viz3d.js:561) and stageable() reports it unstageable, so SET_STAGE CANNOT restage a pinned structure - the round-3 build note claiming 'SET_STAGE re-pins per view so the pin changes no picture' is false against the very lines it asked a reviewer to check, and the same note's separate claim that the pin merely changes a marker's SIZE is what that error looked like from the inside. markerCones() orients every cone by the SIGN of the solved flow (`const dir = qSigned >= 0 ? 1 : -1`, models3d/fetal-circulation.js:995). The solved duct flow is da=+0.5800 at t=0 and da=-0.1639 at beat 9's t=0.25. So beat 9 - 'Fifteen minutes old, the duct turns round', whose narration is 'A quarter of an hour ago they pointed from the pulmonary trunk into the aorta ... Now they point from the aorta into the pulmonary trunk' - was drawing the t=0 arrows, pointing the fetal way, at 3.5x the correct magnitude (len scales with min(1, mag/0.60): 3.347 against 2.237). MEASURED CONSEQUENCE beyond direction: the oversized markers were covering the duct they annotate - repinned to @0.25, ductus_arteriosus goes 0.383% to 0.559% of frame and flow_ductus_arteriosus 0.509% to 0.291%, in a frame identical in every other respect. FIXED as @0.25 rather than by removing the pin, because the build note's reason for pinning at all - an unpinned flow ref resolves reason:none at a t where the model emits no marker, which the player shows a student as 'there is no model of this structure' - is sound, and beat 9 is the only view that uses this key. HOW IT SURVIVED: validate-scenes passes (the ref resolves); the visibility walk passes (it counts pixels, not direction); acceptance row L and the 'duct reversal 76.1% of lit pixels' check both measure the MODEL at two values of t, where the reversal is real, and never the beat. NOTHING IN THE CHAIN ASKS WHETHER A BEAT'S ARROWS POINT THE WAY ITS NARRATION SAYS. This is the third defect in this scene found by asking 'how did it pass?' rather than 'did it pass?'.",
+    "CLOSED ROUND 5 - BEAT 3 NOW SHOWS WHAT THE DUCT EMPTIES INTO, as a TERMINAL CAVA on its own key. Review finding R3-OPEN-1. The reviewer measured the cost of the obvious fix through the real tool and left the authoring call: adding the whole `ivc` collapses the beat's own highlighted ductus venosus from 1.258 to 0.072 per cent. The reason is in viz3d's distanceForBox: it ADDS the subject box's half-extent along the view direction to the camera distance, so from beat 3's superior camera every unit of cranial reach is a unit of standing back. So the second of the reviewer's two options was taken - a short segment as its own key - and it is cut at a LANDMARK AT BOTH ENDS, the hepatic venous confluence below and the caval opening of the diaphragm above, which is the segment a student is taught anyway. MEASURED, three cuts walked through the real tool: to the right atrium (y=1.95) ductus_venosus 0.085; caudal of the confluence (y=-0.95) 0.087; at the confluence to the diaphragm (y=-0.40 to 0.15) 0.162 on the id-pick and 0.607 through the liver, with ivc_terminal itself at 2.361 and the beat's subject back up to 22.66%. The duct is still read through the liver it runs inside, which it always was - it is intrahepatic - and the beat passes. `ivc_terminal` is never shown in the same frame as `ivc`; its geometry is cut out of GEO.ivc itself rather than written out again, so the two cannot disagree about where the cava is.",
+    "CLOSED ROUND 5, BUT NOT THE WAY THE FINDING PROPOSED, AND THE DIFFERENCE IS A FINDING ABOUT THE ENGINE. Review finding R3-OPEN-2 recommended adding CROSS_SECTION to beat 4, on the ground that 'viz3d.js:1912 implements CROSS_SECTION as a clip plane, so the op is available and the adapter supports it'. Line 1912 does record the clip. LINE 2438 IS WHERE IT IS APPLIED, and it reads `m.material.clippingPlanes = (clipping && !isTaught(s)) ? [clipPlane] : null`, with isTaught(s) at :167 returning `s.role !== 'context'`. SO CROSS_SECTION CUTS ONLY SCAFFOLDING. In this scene 41 of 42 structures are role 'part' and the only 'context' one is `midline`: a CROSS_SECTION on beat 4 would cut the median-plane trace and nothing else, and could not cut the right atrium at any offset. Cutting the atrium would mean demoting it to 'context', which takes it out of the student's parts list - a worse defect than the one being fixed. This is NOT proposed as an engine change here: the gating is deliberate (a cross-section that sliced the taught subject would be wrong in most of the 150 scenes) and changing it is shared-tooling work for a round that owns it. WHAT WAS DONE INSTEAD IS THE SUBSTANCE OF THE FINDING - 'the frame shows two streams arriving at the chamber and never crossing it'. The two streams now CROSS, as geometry: models3d/fetal-circulation.js builds GEO.stream_ivc and GEO.stream_svc, each from its own caval mouth to its own destination - the septum for the inferior stream, which the crista dividens aims at the foramen, and the tricuspid orifice for the superior - carrying F.fo and F.svc, so the crossing is drawn only while something crosses and disappears at t=1 because the arithmetic stops it. Acceptance row W measures it: the chords pass within one stream width (0.313 against 0.400) at a point 0.334 of the way out of the right atrial ellipsoid, and not at either chord's end. The narration's opening was rewritten from 'Cut across the right atrium' to 'Look into the right atrium and follow the two streams across it', and says that the wall is translucent - which is what the player actually draws, the atrium being authored at opacity 0.42. THE HONEST LIMIT: measure-scene-visibility's id-pick pass replaces every material with an opaque one, so the intra-atrial markers are behind the atrial wall on that pass and beat 4's flow_ivc/flow_svc numbers (1.201 / 0.353) count only the extra-atrial markers, unchanged from round 4. The crossing is proved by row W and by the render, not by the walk.",
+    "CLOSED ROUND 5 - THE FORAMEN MARKER NOW CARRIES ITS MAGNITUDE IN BOTH DIMENSIONS, and the fix needed a second half the finding did not name. Review finding R3-OPEN-3. The marker takes markerCones' two rules instead of fixed extents: LENGTH by magLaw, now a named function both markers read so there is one copy of the rule, normalised by the FETAL shunt; WIDTH by the aperture the flap leaves, `GEO.septum.rIn * 1.32 * sin(ang)`, which is markerCones' own 'width is fixed to the vessel's CURRENT calibre' applied to the vessel this marker passes through. MEASURED: fetal w 0.150 l 0.640 (byte-for-byte the marker this model has always drawn - the fix is not a quietly smaller arrow everywhere), at beat 8's own t w 0.021 l 0.475, drawn area 10.5% of fetal. In the player: beat 8's flow_foramen_ovale 1.401% of frame to 0.110%, against a foramen_ovale at 4.692% - it was 3.8x the flap it passes through and is now a fortieth of it. Acceptance row V asserts both dimensions fall AND that the area clears FLOORS.marker, with two negative cases: the fetal dimensions restored (the defect itself) and both dimensions shrunk by one per cent (which a monotonicity test alone would pass). THE SECOND HALF, and it is why the review's own measurement said unpinning changes nothing: the scene's ref was `#flow_foramen_ovale@0`, and viz3d cannot restage a pinned ref, so beat 8 at t=0.0998 was drawing the model at t=0. That was harmless while the geometry did not depend on t and became load-bearing the moment it did - the model fix would have reached beat 5 and not beat 8. FIXED BY MINTING A SECOND KEY, not by unpinning - and the unpinned version was tried first and rejected on a measurement: with `#flow_foramen_ovale` and no @t the adapter's default is t=1 (viz3d.js:480), where the model emits no marker, so check 5 of render-fetal-circulation.mjs reported flow_foramen_ovale=none - the 'there is no model of this structure' lie the pin existed to prevent. So beat 5 keeps `@0` and beat 8 takes `flow_foramen_ovale_residual`, the same model part pinned `@0.0998`. That is the pattern pda_duct and pfc_duct already use on the ductus arteriosus, and it is the rule the new check states: two beats needing one part at two values of t need two keys. Found not by reading the scene but by a new check - see gaps[26].",
+    "CLOSED ROUND 5 - BOTH REMNANT BEATS NOW CLEAR THE POINTED-AT FLOOR ON THE HONEST ID-PICK PASS, with no through-the-wall rescue. Review finding R3-OPEN-4, and both halves took the reviewer's own third lever: hide the organ on the beat that names the ligament rather than the bed. BEAT 10, below the diaphragm: the liver is hidden. umbilical_arteries 0.232 to 0.998, umbilical_vein 0.172 to 0.737, ductus_venosus 0.191 to 0.476, and portal_sinus - which read EXACTLY 0.000 behind the liver - to 1.348. The beat now fails the 8% subject floor and is waived on a measured argument; see visibility_waivers view 10, and note that round 4's beat 10 passed that floor only because the liver was filling a fifth of a frame whose own subject was invisible. BEAT 11, in the chest: the two atrial cavities are hidden and the camera moved from lateral to MEDIAL, which is the anatomically correct side - the fossa ovalis is a RIGHT atrial feature and was being shown from the left, through the left atrium, which is why left_atrium sat at 10.734% in front of it. foramen_ovale 0.000 to 1.256, ductus_arteriosus 0.362 to 0.630, atrial_septum 0.152 to 9.658. The crista dividens is now SHOWN AND HIGHLIGHTED, because it is the limbus the narration names and the beat was naming it while drawing only the septum that carries it: 0.429%. The reviewer's reading of beat11.png - 'a pale disc floating inside a translucent ball, not a fossa ovalis on a septum with a limbus' - was the whole diagnosis.",
+    "BEAT 8 MOVED FROM THE SUPERIOR CAMERA TO THE MEDIAL ONE, and all six were walked through the real tool to choose it rather than reasoned about. The septum's disc lies in a plane whose normal is the RA-to-LA axis, so a superior camera sees it EDGE-ON: with `ivc` dropped from the beat (it is context inherited from beat 5 and named nowhere in beat 8's narration) the subject fell to 5.39% of the frame and the beat failed the framing floor, and with `ivc` kept the beat framed but its own highlighted foramen_ovale fell to 0.292, under the pointed-at floor. foramen_ovale / crista_dividens / flow_foramen_ovale / subject, measured: superior 0.732 / 0.158 / 0.098 / 5.39 FAIL, inferior 0.275 / 0.375 / 0.109 / 5.00 FAIL, anterior 0.388 / 0.515 / 0.163 / 10.58, posterior 1.882 / 0.132 / 0.047 / 10.46, lateral 10.237 / 0.000 / 0.007 / 43.96 FAIL, medial 4.692 / 1.624 / 0.110 / 43.96. LATERAL draws the flap biggest and loses both the crista - which is behind the septum from the left, correctly - and the marker, which is seen end-on. MEDIAL is the only camera on which every structure the beat draws or points at clears its own floor, and it is also the side a student meets the fossa from.",
+    "check-beat-claims.mjs NOW ASSERTS THAT A BEAT DRAWS THE t IT CLAIMS, and it found a live defect on its first run. ADDED ROUND 5 in answer to review finding R3-STANDARDS-GAP-1's second proposal - 'nothing anywhere asserts that a beat's flow markers point the way its own narration says' - which R3-FIXED-1 was the worked example for. TWO PARTS. (1) THE MODEL BRINGS A VOCABULARY: claimMeasure(name, t) exposes flows, saturations, calibres, the flap, the foramen marker's drawn dimensions, the clock, and markerState(), which returns for every flow key the DIRECTION its cones are oriented by at a t - +1 along the centreline, -1 reversed, 0 no marker. Beat 9 now carries `marker.flow_ductus_arteriosus.direction equals -1` as a claim, which is R3-FIXED-1 as a machine check. All 14 beats carry claims, 44 in total, and every beat is pinned to its own instant under the tool's own +/-0.05 and +/-0.15 displacements. (2) A CLAIM CANNOT SEE A PIN: check-beat-claims evaluates at the view's SET_STAGE t while the player draws a PINNED ref at the pin's t, so the tool now reads every view's showing set and fails any beat whose pinned refs are pinned somewhere else. On its first run it found one: beat 8 at t=0.0998 showing flow_foramen_ovale pinned @0. That is R3-FIXED-1's exact shape, in a different beat, and no other check in this repo could have seen it.",
+    "THE UMBILICAL VEIN AND ARTERIES ARE STILL DRAWN OUT TO THE PLACENTA AT t=1, AT REMNANT CALIBRE - not just after birth (gaps[9] covers the beats hiding them) but on the beat that is ABOUT the remnants. The ligamentum teres is the INTRA-ABDOMINAL remnant, from the umbilicus to the liver; the cord beyond the umbilicus is cut and gone. Beat 10 therefore draws five cords spanning from the liver to where the placenta was, which is what makes its subject 4.88% of the frame - the framing waiver's argument is true but it is true about a span that should be shorter. THE FIX IS THE ONE THE UMBILICAL ARTERIES ALREADY HAVE: calibre() gives them an ALONG-VESSEL taper so the proximal part stays open as the superior vesical while the distal part becomes a thread. The umbilical VEIN needs the same treatment with the cut at the umbilicus, and the cord spans (uacord_L, uacord_R, and the placental end of GEO.umbilical_vein) should go to zero calibre rather than to REMNANT. NOT DONE THIS ROUND: it moves the picture in beats 1, 2, 7 and 10 and is a separate measured change, not a rider on four findings. Recorded here with its own argument so the next round can take it rather than rediscover it.",
+    "THE LIMBUS IS DRAWN ON THE CAUDAL RIM, WHICH IS WHERE THIS MODEL'S CRISTA DIVIDENS IS AND NOT WHERE THE ADULT LIMBUS IS MOST PROMINENT. The model builds crista_dividens as a crescent on the CAUDAL rim of the foramen, and its own comment gives the reason: that is the side the inferior caval stream arrives on, and drawn anywhere else it would be decorative. Beat 11 then identifies that crescent as the limbus fossae ovalis, which is the standard teaching line - the limbus IS the free edge of the septum secundum. But in the adult the limbus is most marked SUPERIORLY AND ANTERIORLY, and beat11.png shows the crescent below the fossa. FOUND BY LOOKING AT THE FRAME, round 5: the narration first written for this beat said 'along its upper and anterior margin', which the picture contradicted, and the words were changed to 'the margin the crista occupied' rather than the geometry, because the geometry is right for the fetal beats that the crista exists for (beats 5 and 8) and a crescent that moved between t=0 and t=1 would be asserting a migration that does not happen. THE HONEST FIX, not done here: give the septum a limbus of its own - a crescent on the cranial and ventral rim, appearing as the fossa forms - so the fetal crista and the adult limbus are two structures rather than one relabelled. That is a model change with its own acceptance row and it belongs to a round that owns it.",
+    "THE pfc VARIANT'S SATURATION FIELD HAS COLLAPSED ONTO THE 0.05 CLAMP, AND EVERY AUTOMATED CHECK CERTIFIES IT. Found by review round 4, 2026-09-30; ESCALATED as a decision, see ESCALATIONS.md. At t=1 in the pfc variant, seven of the fifteen solved saturations are EXACTLY the floor that saturations() applies with Math.max(0.05, ...) - hep, ivcLow, svc, ivc, ra, rv and pa all read 0.0500 - and the arterial values are computed from those clamped inputs: sat.aoa (preductal) 0.1972, sat.aod (postductal) 0.0558. A newborn at 20% preductal and 6% postductal is not a blue baby, it is an unsurvivable one; the teaching figures for PPHN are a preductal/postductal split in the 70-90% range with a gradient over ~10 points as the sign. The model has the gradient's SIGN right and its magnitudes meaningless. CAUSE, and it is structural rather than a mis-tuned constant: EXTRACT is solved once by bisection at t=0 against the fetal figures and memoised in _mix, then reused for every t and every variant. In pfc the lung takes 6% of combined output (derived.pulmonary_share 0.0605) and there is no placenta (flow.plac 0), so the only oxygen entering the body is 6% of output at 98% while a fetal-sized extraction keeps being subtracted; the subtraction goes negative, the clamp catches it, and the clamp injects oxygen conservation says is not there. The clamp is silently active in the HEALTHY path too - plain variant at t=1 has hep = 0.0500. THIS IS THE SAME LIMITATION AS gaps[13]: a steady-state resistive network with instantaneous mixing and fixed extraction cannot represent a circulation that is not in oxygen steady state, and that gap already recorded the remedy as a transit/equilibration term belonging to its own queue item. NOTHING A STUDENT SEES IS WRONG TODAY, by luck and not design: gaps[0] records that the adapter discards the model's solved saturation and paints flat scene colours, so the collapsed field never reaches the screen - and closing gaps[0] is itself an open queue item. HOW IT PASSED: every claim on the pfc beats is a one-sided bound on a SIGN. B13-BLUE is `pfc:sat.aod atMost 0.8` reading 0.0558, passing by a factor of fourteen while its prose asserts a magnitude nothing checks; B13-DA is `atLeast 0.3` reading 0.5571 while its prose says 'a third of the combined output'. check-beat-claims' +/-0.05 displacement cannot see this class, because a value wrong by an order of magnitude is still wrong after displacement. The claims are left UNCHANGED by this review on purpose: writing the correct band is the curriculum decision being escalated, and a reviewer who writes the band has made the call."
+  ],
+  "deferred_beats": [
+    {
+      "title": "How to answer any fetal circulation question",
+      "narration": "Four moves, in order. One: trace a red cell from placenta to placenta and name every vessel and shunt out loud — most marks are here. Two: at each shunt say what is being bypassed and which pressure difference drives the flow. Three: at birth, apply the two changes, lungs open and cord clamped, and let every closure follow from them. Four: name the remnant. Answer in that order and you never have to memorise the diagram as a picture.",
+      "why_not_a_view": "It is exam technique, not anatomy. There is no frame it could change: it describes the ORDER to say things in, and every structure it names is already shown by the view that teaches it. Rendered as a view it would be beat 2's frame with different words over it, which is what RENDER-STANDARD means by a beat that is text.",
+      "belongs_in": "the topic's revision notes, or as the scene's closing text panel — it is the best summary in this scene and it should not be a 3D beat",
+      "moved_at": "2026-09-11",
+      "moved_by": "model3d BUILD task"
+    }
+  ],
+  "visibility_waivers_note": "A WAIVER IS AN ARGUMENT, AND THIS ONE HAS A BEAT BEHIND IT. Round 2 declined to write waivers on\nthis scene and said exactly why: \"a waiver must name a beat that does show the structure and there is\nno such beat.\" Round 3 built those beats, so the waivers below can each name one. Every waived\nstructure is waived on an OVERVIEW beat whose subject is the whole circuit, and is shown large, at\nits own camera, in the close beat named.",
+  "visibility_waivers": [
+    {
+      "view": 1,
+      "key": "ductus_venosus",
+      "why": "Beat 1 teaches the two resistances and names the three shunts as the consequence - the relationship op is the topology, not a request to inspect the vessel. At a camera that frames placenta to iliacs the duct is 0.06% of the frame. It is shown at 1.258% under its own superior camera in BEAT 3, 'Past the liver - the ductus venosus', which exists for this reason. [REVIEW 2026-09-30: this figure was re-measured; the scene as committed did not reproduce the number originally written here.]"
+    },
+    {
+      "view": 1,
+      "key": "foramen_ovale",
+      "why": "Same frame, same reason: the foramen is named as the second shunt, not examined here. BEAT 5, 'The crista dividens aims the better stream', shows the flap at 3.4% of the frame at the same t=0."
+    },
+    {
+      "view": 1,
+      "key": "ductus_arteriosus",
+      "why": "Same frame, same reason: the third shunt is named as the route past the lungs. BEAT 9, 'Fifteen minutes old - the duct turns round', shows the duct at 0.383% under a superior camera, and BEAT 11 shows it again as the ligamentum arteriosum. [REVIEW 2026-09-30: this figure was re-measured; the scene as committed did not reproduce the number originally written here.]"
+    },
+    {
+      "view": 2,
+      "key": "ductus_arteriosus",
+      "why": "Beat 2 walks the whole route in one frame and must therefore contain it; the duct is part of the circuit here and is pointed at by nothing in this beat. Shown at 0.383% in BEAT 9. [REVIEW 2026-09-30: this figure was re-measured; the scene as committed did not reproduce the number originally written here.]"
+    },
+    {
+      "view": 2,
+      "key": "crista_dividens",
+      "why": "Beat 2 names the crista in narration while the frame holds the whole circuit. It is pointed at by no op here. BEAT 5 is the crista's own beat and shows it at 0.33% with the inferior caval stream it splits."
+    },
+    {
+      "view": 2,
+      "key": "foramen_ovale",
+      "why": "As above - part of the traced route, pointed at by no op in this beat. Shown at 3.4% in BEAT 5."
+    },
+    {
+      "view": 7,
+      "key": "ductus_arteriosus",
+      "why": "Beat 7 is the second whole-circuit frame, at ten minutes old, and its subject is the two birth events. The duct is context here and is pointed at by no op. BEAT 9 shows it at the next t, at its own camera."
+    },
+    {
+      "view": 7,
+      "key": "crista_dividens",
+      "why": "Context in a whole-circuit frame, pointed at by no op. Shown in BEAT 5."
+    },
+    {
+      "view": 7,
+      "key": "foramen_ovale",
+      "why": "Beat 7 narrates the flap being pressed shut and CANNOT show it at this camera - which is why the closure was given its own frame at the same t: BEAT 8, 'The flap is pressed shut', shows the foramen at 0.371% - a hair over the 0.300% pointed-at floor, which is thin for an argument of this shape and carries the left_atrium -> foramen_ovale relationship that used to sit on this beat unseeable. [REVIEW 2026-09-30: this figure was re-measured; the scene as committed did not reproduce the number originally written here.]"
+    },
+    {
+      "view": 4,
+      "key": "__framing__",
+      "why": "THE SUBJECT IS A VERTICAL COLUMN AND THE FRAME IS LANDSCAPE, so 6.82% of ink is what a correctly framed picture of it looks like: the subject's own bounding box fills only 9.31% of the frame, and the empty space is to the left and right of a column, not around a subject the camera is too far from. ROUND 4, in answer to review finding R2-OPEN-1. THE CAMERA THIS REPLACES WAS THE DEGENERATE ONE: superior looks straight down the axis the two cavae share, so the SVC rendered end-on as a featureless disc at 10.511% while the IVC behind it measured EXACTLY 0.000% on the id-pick - it cleared the pointed-at floor only through the translucent right atrium. ALL SIX CAMERAS WERE WALKED THROUGH THIS TOOL, on this scene as committed, ivc/svc/subject: anterior 0.992/0.704/6.82, medial 1.358/0.680/6.73, lateral 1.525/0.632/6.78, posterior 1.593/0.684/6.22, superior 10.511/0.000/19.45, inferior 14.833/0.000/36.64. The two cameras that clear the 8% floor are the two that hide one caval vein completely, and they clear it BECAUSE they do: collapsing a tube to a disc maximises its share of its own box. Anterior is taken because it is the most balanced of the four honest cameras - 1.41:1 between the compared structures, against 230:1 for the camera it replaces - and both compared structures are now well over the 0.30% pointed-at floor on the ID-PICK pass, with no through-the-wall rescue. THIS BEAT ALSO NOW DRAWS THE STREAMS IT NARRATES: flow_ivc 1.201% and flow_svc 0.353%, on the per-vessel flow keys, where before it showed no flow at all. The standing fix for the floor itself is review finding R2-STANDARDS-GAP-1 and is shared tooling, not this scene's to land; see gaps."
+    },
+    {
+      "view": 10,
+      "key": "__framing__",
+      "why": "THE SUBJECT IS FIVE CORDS SPANNING THE WHOLE ABDOMEN, so 4.88% of ink is what a correctly framed picture of it looks like: the subject's own bounding box fills 49.55% of the frame, and the empty space is BETWEEN the cords rather than around a subject the camera is too far from. ROUND 5, closing review finding R3-OPEN-4's abdominal half. WHAT THIS REPLACES, AND WHY IT IS NOT A LOWERED THRESHOLD: round 4's beat 10 showed the LIVER, which filled 21.87% of the frame and passed the 8% floor comfortably while all three structures the beat exists to name measured BELOW the 0.300 pointed-at floor on the honest id-pick pass (umbilical_vein 0.172, ductus_venosus 0.191, umbilical_arteries 0.232) and the UNhighlighted common_iliacs at 0.332 was the only thing in the frame above it. The liver was passing the framing check on the beat's behalf while hiding the beat's own subject. With the liver hidden - the reviewer's own third option, 'hiding the organ on the beat that names the ligament rather than the bed' - every pointed-at structure clears the floor on the id-pick with no through-the-wall rescue: umbilical_arteries 0.998, umbilical_vein 0.737, ductus_venosus 0.476, and portal_sinus 1.348 and common_iliacs 1.316 as context. A framing number that falls because an occluder was removed is the check reporting the removal, not a defect. The falciform ligament the narration names is carried in words and the liver bed is shown large in BEAT 3, 'Past the liver - the ductus venosus', at 18.668%."
+    }
   ]
- },
- "camera": {
-  "framing": "anterior"
- },
- "structures": [
-  {
-   "key": "placenta",
-   "name": "Placenta",
-   "label": "Placenta — where gas exchange actually happens",
-   "role": "part",
-   "group": "From the placenta",
-   "layer": "organ",
-   "color": "#8e3b4e",
-   "refs": {
-    "procedural": "fetal-circulation#placenta"
-   },
-   "terms": [
-    "placenta",
-    "maternal-fetal exchange",
-    "low resistance bed",
-    "gas exchange at the placenta",
-    "chorionic villi"
-   ]
-  },
-  {
-   "key": "umbilical_vein",
-   "name": "Umbilical vein",
-   "label": "Umbilical vein — the only truly oxygenated vessel",
-   "role": "part",
-   "group": "From the placenta",
-   "layer": "vessel",
-   "color": "#c0392b",
-   "refs": {
-    "procedural": "fetal-circulation#umbilical_vein"
-   },
-   "terms": [
-    "umbilical vein",
-    "single umbilical vein",
-    "left umbilical vein",
-    "80 percent saturated",
-    "oxygenated blood",
-    "falciform ligament",
-    "ligamentum teres hepatis",
-    "round ligament of the liver",
-    "two arteries one vein"
-   ],
-   "narration": "One umbilical vein leaves the placenta carrying blood at about eighty percent saturation — the highest anywhere in the fetus, and lower than any adult arterial value. Note the reversal that catches students out: in the cord the vein carries the oxygenated blood and the two arteries carry the deoxygenated. It enters the abdomen at the umbilicus and runs up in the free edge of the falciform ligament, which is exactly where you will find its adult remnant."
-  },
-  {
-   "key": "ductus_venosus",
-   "name": "Ductus venosus",
-   "label": "Ductus venosus — shunt one, past the liver",
-   "role": "part",
-   "group": "Through the liver",
-   "layer": "vessel",
-   "color": "#cb4335",
-   "refs": {
-    "procedural": "fetal-circulation#ductus_venosus"
-   },
-   "terms": [
-    "ductus venosus",
-    "bypasses the liver",
-    "half the flow",
-    "ligamentum venosum",
-    "sphincter",
-    "first shunt"
-   ],
-   "narration": "Most of that blood does not enter the hepatic sinusoids. The ductus venosus carries roughly half of it straight from the umbilical vein into the inferior vena cava, so the liver — an organ the fetus does not need for detoxification while the mother's liver is available — does not slow down the delivery of oxygen. The rest perfuses the liver itself and rejoins by the hepatic veins."
-  },
-  {
-   "key": "portal_sinus",
-   "name": "Portal sinus",
-   "label": "Portal sinus and left portal vein",
-   "role": "part",
-   "group": "Through the liver",
-   "layer": "vessel",
-   "color": "#a04a3a",
-   "refs": {
-    "procedural": "fetal-circulation#portal_sinus"
-   },
-   "terms": [
-    "portal sinus",
-    "left portal vein",
-    "portal vein",
-    "hepatic sinusoids"
-   ]
-  },
-  {
-   "key": "liver",
-   "name": "Liver",
-   "label": "Liver — the organ the first shunt goes past",
-   "role": "part",
-   "group": "Through the liver",
-   "layer": "organ",
-   "color": "#8d5a45",
-   "refs": {
-    "procedural": "fetal-circulation#liver"
-   },
-   "terms": [
-    "liver",
-    "hepatic sinusoids",
-    "fetal liver",
-    "detoxification"
-   ]
-  },
-  {
-   "key": "hepatic_veins",
-   "name": "Hepatic veins",
-   "label": "Hepatic veins — the half that did perfuse the liver",
-   "role": "part",
-   "group": "Through the liver",
-   "layer": "vessel",
-   "color": "#b05a4a",
-   "refs": {
-    "procedural": "fetal-circulation#hepatic_veins"
-   },
-   "terms": [
-    "hepatic veins",
-    "rejoins the inferior vena cava",
-    "liver drainage"
-   ]
-  },
-  {
-   "key": "ivc",
-   "name": "Inferior vena cava",
-   "label": "Inferior vena cava — the well-oxygenated stream",
-   "role": "part",
-   "group": "Into the right heart",
-   "layer": "vessel",
-   "color": "#d98880",
-   "refs": {
-    "procedural": "fetal-circulation#ivc"
-   },
-   "terms": [
-    "inferior vena cava",
-    "IVC",
-    "mixing",
-    "70 percent saturated",
-    "streaming",
-    "laminar",
-    "inferior caval stream"
-   ],
-   "narration": "The shunted blood mixes with venous return from the lower body and reaches the right atrium at about seventy percent saturation. It arrives as a stream rather than a swirl — this is the single most important idea in the whole topic, because the fetus has no way to separate oxygenated from deoxygenated blood except by keeping the two streams apart as they cross the right atrium."
-  },
-  {
-   "key": "svc",
-   "name": "Superior vena cava",
-   "label": "Superior vena cava — the poorly oxygenated stream",
-   "role": "part",
-   "group": "Into the right heart",
-   "layer": "vessel",
-   "color": "#2874a6",
-   "refs": {
-    "procedural": "fetal-circulation#svc"
-   },
-   "terms": [
-    "superior vena cava",
-    "SVC",
-    "head and upper limbs",
-    "tricuspid valve",
-    "superior caval stream",
-    "deoxygenated"
-   ],
-   "narration": "Blood returning from the head and upper limbs enters the right atrium from above, is directed downwards across the tricuspid valve into the right ventricle, and barely mixes with the inferior caval stream at all. Two streams, two destinations, in the same chamber."
-  },
-  {
-   "key": "right_atrium",
-   "name": "Right atrium",
-   "label": "Right atrium — where the two streams cross without mixing",
-   "role": "part",
-   "group": "Into the right heart",
-   "layer": "organ",
-   "color": "#3d7fb5",
-   "refs": {
-    "procedural": "fetal-circulation#right_atrium"
-   },
-   "terms": [
-    "right atrium",
-    "streaming",
-    "two streams",
-    "crista terminalis"
-   ]
-  },
-  {
-   "key": "atrial_septum",
-   "name": "Interatrial septum",
-   "label": "Interatrial septum — septum primum and septum secundum",
-   "role": "part",
-   "group": "Into the right heart",
-   "layer": "organ",
-   "color": "#b8c4d4",
-   "refs": {
-    "procedural": "fetal-circulation#atrial_septum"
-   },
-   "terms": [
-    "interatrial septum",
-    "septum primum",
-    "septum secundum",
-    "fossa ovalis",
-    "limbus"
-   ]
-  },
-  {
-   "key": "crista_dividens",
-   "name": "Crista dividens",
-   "label": "Crista dividens — the ledge that aims the stream",
-   "role": "part",
-   "group": "Into the right heart",
-   "layer": "organ",
-   "color": "#e59866",
-   "refs": {
-    "procedural": "fetal-circulation#crista_dividens"
-   },
-   "terms": [
-    "crista dividens",
-    "free lower edge of the septum secundum",
-    "ledge",
-    "aims the stream"
-   ],
-   "narration": "The free lower edge of the septum secundum overhangs the mouth of the inferior vena cava as a ledge called the crista dividens. It splits the incoming stream, sending most of it straight through the foramen ovale into the left atrium and letting the remainder turn down into the right ventricle. The fetus does not mix and then divide; it aims."
-  },
-  {
-   "key": "foramen_ovale",
-   "name": "Foramen ovale",
-   "label": "Foramen ovale — shunt two, past the lungs and the right heart",
-   "role": "part",
-   "group": "Into the right heart",
-   "layer": "organ",
-   "color": "#5499c7",
-   "refs": {
-    "procedural": "fetal-circulation#foramen_ovale"
-   },
-   "terms": [
-    "foramen ovale",
-    "flap valve",
-    "septum primum",
-    "right to left shunt",
-    "second shunt",
-    "fossa ovalis"
-   ],
-   "narration": "Because right atrial pressure exceeds left, the thin septum primum is pushed aside and blood crosses right to left through the foramen ovale. The best-oxygenated blood in the body therefore arrives in the left atrium without ever passing through the lungs or the right ventricle."
-  },
-  {
-   "key": "left_atrium",
-   "name": "Left atrium",
-   "label": "Left atrium — fed across the septum, not by the lungs",
-   "role": "part",
-   "group": "The left heart and the head",
-   "layer": "organ",
-   "color": "#b04a55",
-   "refs": {
-    "procedural": "fetal-circulation#left_atrium"
-   },
-   "terms": [
-    "left atrium",
-    "left atrial pressure",
-    "pulmonary venous return"
-   ]
-  },
-  {
-   "key": "left_ventricle",
-   "name": "Left ventricle",
-   "label": "Left ventricle — a third of the work before birth",
-   "role": "part",
-   "group": "The left heart and the head",
-   "layer": "organ",
-   "color": "#a8333f",
-   "refs": {
-    "procedural": "fetal-circulation#left_ventricle"
-   },
-   "terms": [
-    "left ventricle",
-    "combined ventricular output",
-    "one third"
-   ]
-  },
-  {
-   "key": "ascending_aorta",
-   "name": "Ascending aorta",
-   "label": "Ascending aorta — the best blood in the body",
-   "role": "part",
-   "group": "The left heart and the head",
-   "layer": "vessel",
-   "color": "#c0392b",
-   "refs": {
-    "procedural": "fetal-circulation#ascending_aorta"
-   },
-   "terms": [
-    "ascending aorta",
-    "coronary arteries",
-    "preductal",
-    "65 percent saturated"
-   ]
-  },
-  {
-   "key": "aortic_arch",
-   "name": "Aortic arch",
-   "label": "Aortic arch and the isthmus",
-   "role": "part",
-   "group": "The left heart and the head",
-   "layer": "vessel",
-   "color": "#c0392b",
-   "refs": {
-    "procedural": "fetal-circulation#aortic_arch"
-   },
-   "terms": [
-    "aortic arch",
-    "aortic isthmus",
-    "coarctation"
-   ]
-  },
-  {
-   "key": "head_neck_vessels",
-   "name": "Brachiocephalic, left common carotid and left subclavian arteries",
-   "label": "Head and arm vessels — supplied before the duct joins",
-   "role": "part",
-   "group": "The left heart and the head",
-   "layer": "vessel",
-   "color": "#e74c3c",
-   "refs": {
-    "procedural": "fetal-circulation#head_neck_vessels"
-   },
-   "terms": [
-    "brachiocephalic trunk",
-    "left common carotid",
-    "left subclavian",
-    "carotids",
-    "brain",
-    "preductal",
-    "head and upper limbs"
-   ],
-   "narration": "From the left atrium the blood passes to the left ventricle and out into the ascending aorta, whose first branches are the coronaries and then the vessels to the head and upper limbs. So the two organs that can least tolerate hypoxia, the brain and the heart itself, are supplied first and with the best available blood. Understand the streaming and this arrangement is not a coincidence but the point of the whole design."
-  },
-  {
-   "key": "right_ventricle",
-   "name": "Right ventricle",
-   "label": "Right ventricle — two thirds of the work before birth",
-   "role": "part",
-   "group": "The right heart and the lungs",
-   "layer": "organ",
-   "color": "#2e6da4",
-   "refs": {
-    "procedural": "fetal-circulation#right_ventricle"
-   },
-   "terms": [
-    "right ventricle",
-    "combined ventricular output",
-    "two thirds",
-    "dominant ventricle"
-   ]
-  },
-  {
-   "key": "pulmonary_trunk",
-   "name": "Pulmonary trunk",
-   "label": "Pulmonary trunk",
-   "role": "part",
-   "group": "The right heart and the lungs",
-   "layer": "vessel",
-   "color": "#3f6ea8",
-   "refs": {
-    "procedural": "fetal-circulation#pulmonary_trunk"
-   },
-   "terms": [
-    "pulmonary trunk",
-    "main pulmonary artery"
-   ]
-  },
-  {
-   "key": "pulmonary_arteries",
-   "name": "Pulmonary arteries",
-   "label": "Pulmonary arteries — only enough to grow the lungs",
-   "role": "part",
-   "group": "The right heart and the lungs",
-   "layer": "vessel",
-   "color": "#4a7fbf",
-   "refs": {
-    "procedural": "fetal-circulation#pulmonary_arteries"
-   },
-   "terms": [
-    "pulmonary arteries",
-    "right pulmonary artery",
-    "left pulmonary artery",
-    "8 percent of output"
-   ]
-  },
-  {
-   "key": "lungs",
-   "name": "Lungs",
-   "label": "Lungs — fluid filled, and their vessels clamped tight",
-   "role": "part",
-   "group": "The right heart and the lungs",
-   "layer": "organ",
-   "color": "#6f7f93",
-   "refs": {
-    "procedural": "fetal-circulation#lungs"
-   },
-   "terms": [
-    "lungs",
-    "fluid filled lungs",
-    "high pulmonary vascular resistance",
-    "hypoxic pulmonary vasoconstriction",
-    "pulmonary vascular resistance"
-   ]
-  },
-  {
-   "key": "pulmonary_veins",
-   "name": "Pulmonary veins",
-   "label": "Pulmonary veins — almost nothing comes back, before birth",
-   "role": "part",
-   "group": "The right heart and the lungs",
-   "layer": "vessel",
-   "color": "#bf5f66",
-   "refs": {
-    "procedural": "fetal-circulation#pulmonary_veins"
-   },
-   "terms": [
-    "pulmonary veins",
-    "pulmonary venous return",
-    "left atrial filling"
-   ]
-  },
-  {
-   "key": "ductus_arteriosus",
-   "name": "Ductus arteriosus",
-   "label": "Ductus arteriosus — shunt three, past the lungs",
-   "role": "part",
-   "group": "The right heart and the lungs",
-   "layer": "vessel",
-   "color": "#5dade2",
-   "refs": {
-    "procedural": "fetal-circulation#ductus_arteriosus"
-   },
-   "terms": [
-    "ductus arteriosus",
-    "third shunt",
-    "below the left subclavian",
-    "prostaglandin E2",
-    "ligamentum arteriosum",
-    "postductal",
-    "left recurrent laryngeal nerve"
-   ],
-   "narration": "The right ventricle pumps into the pulmonary trunk, but pulmonary resistance is so high that only a small fraction reaches the lungs — enough to grow them, no more. The rest crosses the ductus arteriosus into the descending aorta, entering below the origin of the left subclavian artery, which is why the lower body receives blood that is less saturated than the head. The duct is held open by low oxygen tension and by prostaglandin E2 from the placenta, and both of those facts become treatment later."
-  },
-  {
-   "key": "descending_aorta",
-   "name": "Descending aorta",
-   "label": "Descending aorta — below the duct, and less saturated",
-   "role": "part",
-   "group": "Back to the placenta",
-   "layer": "vessel",
-   "color": "#b03a2e",
-   "refs": {
-    "procedural": "fetal-circulation#descending_aorta"
-   },
-   "terms": [
-    "descending aorta",
-    "postductal",
-    "lower body",
-    "less saturated"
-   ]
-  },
-  {
-   "key": "common_iliacs",
-   "name": "Common and internal iliac arteries",
-   "label": "Common and internal iliac arteries",
-   "role": "part",
-   "group": "Back to the placenta",
-   "layer": "vessel",
-   "color": "#a93226",
-   "refs": {
-    "procedural": "fetal-circulation#common_iliacs"
-   },
-   "terms": [
-    "common iliac artery",
-    "internal iliac artery",
-    "superior vesical artery"
-   ]
-  },
-  {
-   "key": "umbilical_arteries",
-   "name": "Umbilical arteries",
-   "label": "Umbilical arteries — back to the placenta",
-   "role": "part",
-   "group": "Back to the placenta",
-   "layer": "vessel",
-   "color": "#2e86c1",
-   "refs": {
-    "procedural": "fetal-circulation#umbilical_arteries"
-   },
-   "terms": [
-    "umbilical arteries",
-    "two arteries",
-    "internal iliac arteries",
-    "medial umbilical ligaments",
-    "single umbilical artery",
-    "superior vesical arteries"
-   ],
-   "narration": "Two umbilical arteries branch from the internal iliac arteries, run either side of the bladder and back out along the cord to the placenta, carrying blood at roughly fifty-five to sixty percent saturation for reoxygenation. A cord with only one artery instead of two is worth reporting at delivery, because it carries a raised rate of renal and other anomalies."
-  },
-  {
-   "key": "flow",
-   "name": "Flow",
-   "label": "Flow — direction and volume, at this moment",
-   "role": "part",
-   "group": "Reference",
-   "layer": "vessel",
-   "color": "#f4d03f",
-   "refs": {
-    "procedural": "fetal-circulation#flow"
-   },
-   "terms": [
-    "flow",
-    "direction of flow",
-    "right to left shunt",
-    "left to right shunt",
-    "combined ventricular output"
-   ]
-  },
-  {
-   "key": "midline",
-   "name": "Median plane",
-   "label": "Median plane — reference",
-   "role": "context",
-   "group": "Reference",
-   "layer": "organ",
-   "color": "#9aa6bf",
-   "refs": {
-    "procedural": "fetal-circulation#midline"
-   },
-   "terms": [
-    "median plane",
-    "midline"
-   ]
-  },
-  {
-   "key": "pda_duct",
-   "name": "Patent ductus arteriosus",
-   "label": "Patent ductus arteriosus — the same duct, still open",
-   "role": "part",
-   "group": "When the change fails",
-   "layer": "vessel",
-   "color": "#ec7063",
-   "refs": {
-    "procedural": "fetal-circulation#ductus_arteriosus@1+pda"
-   },
-   "terms": [
-    "patent ductus arteriosus",
-    "PDA",
-    "machinery murmur",
-    "bounding pulses",
-    "indomethacin",
-    "ibuprofen",
-    "premature",
-    "congenital rubella",
-    "left to right shunt"
-   ],
-   "narration": "If the duct stays open after birth the pressure gradient has reversed, so flow now runs from aorta to pulmonary trunk — left to right, through both systole and diastole. That is the continuous machinery murmur below the left clavicle, with bounding pulses and a wide pulse pressure. It is common in premature babies and classically associated with congenital rubella. Because prostaglandin holds the duct open, a prostaglandin synthesis inhibitor such as indomethacin or ibuprofen closes it."
-  },
-  {
-   "key": "pda_flow",
-   "name": "Flow in a persistent duct",
-   "label": "Flow with the duct still open — now left to right",
-   "role": "part",
-   "group": "When the change fails",
-   "layer": "vessel",
-   "color": "#f5b041",
-   "refs": {
-    "procedural": "fetal-circulation#flow@1+pda"
-   },
-   "terms": [
-    "left to right shunt",
-    "reversed shunt",
-    "continuous murmur"
-   ]
-  },
-  {
-   "key": "pfc_duct",
-   "name": "Duct in persistent fetal circulation",
-   "label": "Persistent fetal circulation — the duct still shunting right to left",
-   "role": "part",
-   "group": "When the change fails",
-   "layer": "vessel",
-   "color": "#af7ac5",
-   "refs": {
-    "procedural": "fetal-circulation#ductus_arteriosus@1+pfc"
-   },
-   "terms": [
-    "persistent fetal circulation",
-    "persistent pulmonary hypertension of the newborn",
-    "PPHN",
-    "meconium aspiration",
-    "birth asphyxia",
-    "right to left shunt",
-    "cyanosis"
-   ],
-   "narration": "The transition can also fail on the lung side. If pulmonary vascular resistance does not fall — after meconium aspiration, birth asphyxia, sepsis or with hypoplastic lungs — the foramen ovale and duct keep shunting right to left and the baby stays hypoxic. Hypoxia and acidosis constrict the pulmonary vessels further, so the failure feeds itself. This is why the transition is described as a circulation that must be actively completed rather than a switch that flips at delivery."
-  },
-  {
-   "key": "pfc_flow",
-   "name": "Flow in persistent fetal circulation",
-   "label": "Flow when the pulmonary bed never opens",
-   "role": "part",
-   "group": "When the change fails",
-   "layer": "vessel",
-   "color": "#c39bd3",
-   "refs": {
-    "procedural": "fetal-circulation#flow@1+pfc"
-   },
-   "terms": [
-    "persistent fetal circulation",
-    "right to left",
-    "hypoxia",
-    "acidosis"
-   ]
-  }
- ],
- "views": [
-  {
-   "mode": "mechanism",
-   "beat": 1,
-   "title": "Two resistances decide everything",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.0
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "placenta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "liver"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "lungs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrial_septum"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_venosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "foramen_ovale"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_arteriosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_trunk"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ascending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "aortic_arch"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "descending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "umbilical_vein"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ivc"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "ductus_venosus",
-     "intensity": 0.9
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "foramen_ovale",
-     "intensity": 0.9
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "ductus_arteriosus",
-     "intensity": 0.9
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "liver",
-     "to": "ductus_venosus",
-     "kind": "an organ the fetus does not yet need is bypassed by"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "right_ventricle",
-     "to": "foramen_ovale",
-     "kind": "high pulmonary resistance means the right heart is bypassed through"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "lungs",
-     "to": "ductus_arteriosus",
-     "kind": "whatever still enters the right ventricle bypasses the lungs through"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    }
-   ],
-   "narration": "Start with two numbers rather than a diagram. Pulmonary vascular resistance is very high because the lungs are fluid-filled and their vessels are constricted. Systemic vascular resistance is very low because the placenta is an enormous low-resistance bed. Blood goes where resistance is least, so it avoids the lungs and heads for the placenta, and three shunts exist to let it do that — one past the liver, one past the right heart, one past the lungs. Learn the two resistances and the three shunts stop being a list to memorise.\n\nThe fetus breathes through the placenta, not the lungs. The lungs are full of fluid and their vessels are clamped tight, so pulmonary resistance is very high, while the placenta is a huge low-resistance bed that keeps systemic resistance low. Blood therefore wants to go anywhere except the lungs. Three shunts are built to let it: one past the liver, one past the right side of the heart, and one past the lungs. Every fetal peculiarity follows from those two resistances and those three shunts."
-  },
-  {
-   "mode": "vasculature",
-   "beat": 2,
-   "title": "Follow one red cell from the placenta",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.0
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "placenta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "umbilical_vein"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_venosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "portal_sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "liver"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "hepatic_veins"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ivc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "svc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrial_septum"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "crista_dividens"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "foramen_ovale"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ascending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "aortic_arch"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "head_neck_vessels"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_trunk"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_arteries"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "lungs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_veins"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_arteriosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "descending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "common_iliacs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "umbilical_arteries"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "flow"
-    },
-    {
-     "op": "TRACE_STRUCTURE",
-     "target": "concept:blood",
-     "path": [
-      "umbilical_vein",
-      "ductus_venosus",
-      "ivc",
-      "right_atrium",
-      "crista_dividens",
-      "foramen_ovale",
-      "left_atrium",
-      "left_ventricle",
-      "ascending_aorta",
-      "head_neck_vessels",
-      "svc",
-      "right_ventricle",
-      "pulmonary_trunk",
-      "ductus_arteriosus",
-      "descending_aorta",
-      "common_iliacs",
-      "umbilical_arteries",
-      "placenta"
-     ],
-     "duration": 20
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    }
-   ],
-   "narration": "Now walk the whole route once, out loud. Umbilical vein at eighty percent, the highest in the body. Ductus venosus past the liver into the inferior vena cava. Into the right atrium at about seventy percent, aimed by the crista dividens through the foramen ovale into the left atrium. Left ventricle, ascending aorta, coronaries and carotids — the brain and the heart get the best of it. Meanwhile the superior caval stream crosses into the right ventricle, meets a shut pulmonary bed and crosses the ductus arteriosus into the descending aorta below the left subclavian. Then out along the two umbilical arteries to the placenta to start again. Say that route until it is automatic; most of the marks in this topic are in it."
-  },
-  {
-   "mode": "vasculature",
-   "beat": 3,
-   "title": "Streaming — why the fetus is not just mixed blood",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.0
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ivc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "svc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrial_septum"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "crista_dividens"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "foramen_ovale"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_trunk"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ascending_aorta"
-    },
-    {
-     "op": "ISOLATE_REGION",
-     "target": "Into the right heart"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "crista_dividens",
-     "intensity": 0.95
-    },
-    {
-     "op": "COMPARE_STRUCTURES",
-     "targets": [
-      "ivc",
-      "svc"
-     ],
-     "layout": "side-by-side"
-    },
-    {
-     "op": "CROSS_SECTION",
-     "axis": "y",
-     "offset": 0,
-     "animate": true
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "crista_dividens",
-     "to": "foramen_ovale",
-     "kind": "aiming the inferior caval stream through"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    }
-   ],
-   "narration": "Cut across the right atrium and look at the two streams. The inferior caval stream is well oxygenated and the superior caval stream is not, and they cross the same chamber without properly mixing. The crista dividens, the free lower edge of the septum secundum, splits the inferior stream and sends most of it through the foramen ovale. That is the mechanism behind the exam favourite: the fetal brain and heart receive the most saturated blood, and the lower body receives the least, because the ductus arteriosus empties into the aorta beyond the head and arm vessels."
-  },
-  {
-   "mode": "vasculature",
-   "beat": 4,
-   "title": "Why the brain gets the best blood",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.0
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "placenta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "umbilical_vein"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_venosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "portal_sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "liver"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "hepatic_veins"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ivc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "svc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrial_septum"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "crista_dividens"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "foramen_ovale"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ascending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "aortic_arch"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "head_neck_vessels"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_trunk"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_arteries"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "lungs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_veins"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_arteriosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "descending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "common_iliacs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "umbilical_arteries"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "flow"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "head_neck_vessels",
-     "intensity": 0.9
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "ascending_aorta",
-     "intensity": 0.85
-    },
-    {
-     "op": "COMPARE_STRUCTURES",
-     "targets": [
-      "ascending_aorta",
-      "descending_aorta"
-     ],
-     "layout": "side-by-side"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "ductus_arteriosus",
-     "to": "descending_aorta",
-     "kind": "joins below the head and arm vessels, which is why the lower body gets less, at"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "lateral"
-    }
-   ],
-   "narration": "From the left atrium the blood passes to the left ventricle and out into the ascending aorta, whose first branches are the coronaries and then the vessels to the head and upper limbs. So the two organs that can least tolerate hypoxia, the brain and the heart itself, are supplied first and with the best available blood. Understand the streaming and this arrangement is not a coincidence but the point of the whole design."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 5,
-   "title": "Two events at birth, every closure follows",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.0998
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "placenta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "umbilical_vein"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_venosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "portal_sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "liver"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "hepatic_veins"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ivc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "svc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrial_septum"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "crista_dividens"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "foramen_ovale"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ascending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "aortic_arch"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "head_neck_vessels"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_trunk"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_arteries"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "lungs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_veins"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_arteriosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "descending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "common_iliacs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "umbilical_arteries"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "flow"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "lungs",
-     "intensity": 0.9
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "umbilical_arteries",
-     "intensity": 0.85
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "lungs",
-     "to": "left_atrium",
-     "kind": "rising pulmonary flow raises the pressure in"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "placenta",
-     "to": "right_atrium",
-     "kind": "losing the placenta raises systemic resistance and lowers the pressure in"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "left_atrium",
-     "to": "foramen_ovale",
-     "kind": "left now exceeds right, which presses shut"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    }
-   ],
-   "narration": "Two events, and you can derive the rest. The lungs open, so pulmonary resistance falls, pulmonary flow rises and left atrial pressure goes up. The cord is clamped, so systemic resistance rises and right atrial pressure comes down. Left now exceeds right, the flap valve is pressed shut and the foramen ovale closes functionally in minutes. Rising oxygen and the loss of placental prostaglandin constrict the ductus arteriosus over ten to fifteen hours. Umbilical flow stops, so the ductus venosus closes. Then name what each becomes: ligamentum teres, ligamentum venosum, fossa ovalis, ligamentum arteriosum, medial umbilical ligaments — and remember the superior vesical arteries stay open and keep working.\n\nThe lungs inflate, the fluid is cleared and alveolar oxygen dilates the pulmonary vessels. Pulmonary vascular resistance collapses, pulmonary blood flow increases many times over, and all that blood returns to the left atrium, whose pressure now rises.\n\nClamping the cord removes the largest low-resistance bed in the circulation, so systemic resistance jumps. At the same time the umbilical venous return stops, so right atrial pressure falls. Two changes, one result: left atrial pressure now exceeds right for the first time, and it stays that way for life.\n\nThe foramen ovale shuts because the pressures reversed and the septum primum is pressed against the septum secundum — no tissue has to grow for that, only for permanent fusion over the following months. The ductus arteriosus constricts within about ten to fifteen hours as oxygen tension rises, placental prostaglandin E2 disappears and bradykinin acts on its muscular wall, and it is anatomically sealed within two to three weeks. The ductus venosus closes once umbilical flow stops. Distinguish functional closure, which happens in hours, from anatomical closure, which takes weeks — that distinction is the whole reason a duct can be reopened with a drug."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 6,
-   "title": "Fifteen minutes old — the duct turns round",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.25
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "placenta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "umbilical_vein"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_venosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "portal_sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "liver"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "hepatic_veins"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ivc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "svc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrial_septum"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "crista_dividens"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "foramen_ovale"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ascending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "aortic_arch"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "head_neck_vessels"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_trunk"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_arteries"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "lungs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_veins"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_arteriosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "descending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "common_iliacs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "umbilical_arteries"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "flow"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "ductus_arteriosus",
-     "intensity": 0.95
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "flow",
-     "intensity": 0.8
-    },
-    {
-     "op": "COMPARE_STRUCTURES",
-     "targets": [
-      "pulmonary_arteries",
-      "descending_aorta"
-     ],
-     "layout": "side-by-side"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    }
-   ],
-   "narration": "Watch the arrows in the duct, and nothing else. A quarter of an hour ago they pointed from the pulmonary trunk into the aorta, because the lungs were the hard way round. Now they point from the aorta into the pulmonary trunk. Nothing was rebuilt and no valve moved: the two resistances swapped places, and the blood went the way that was easier, which is the only thing blood has ever done. A normal newborn shunts a little left to right across a duct that is still closing, for the ten to fifteen hours it takes to shut. Hold on to this frame, because a duct that fails to shut is stuck here — and the murmur, the bounding pulses and the drug that treats it all follow from an arrow pointing this way instead of that way."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 7,
-   "title": "What each one becomes",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 1.0
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "umbilical_vein"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_venosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "liver"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "portal_sinus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "hepatic_veins"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ivc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrial_septum"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "foramen_ovale"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_arteriosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_trunk"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "aortic_arch"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "descending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "common_iliacs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "umbilical_arteries"
-    },
-    {
-     "op": "ISOLATE_REGION",
-     "target": "From the placenta"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "umbilical_vein",
-     "intensity": 0.9
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "ductus_venosus",
-     "intensity": 0.9
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "ductus_arteriosus",
-     "intensity": 0.9
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "umbilical_arteries",
-     "intensity": 0.9
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "foramen_ovale",
-     "intensity": 0.9
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "lateral"
-    }
-   ],
-   "narration": "Five pairs to know cold. Umbilical vein becomes the ligamentum teres hepatis in the free edge of the falciform ligament. Ductus venosus becomes the ligamentum venosum. Foramen ovale becomes the fossa ovalis, with the edge of the septum secundum as its limbus. Ductus arteriosus becomes the ligamentum arteriosum, and the left recurrent laryngeal nerve stays hooked under it for life. The distal umbilical arteries become the medial umbilical ligaments while their proximal parts stay open as the superior vesical arteries — the only fetal vessel on this list that keeps a job."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 8,
-   "title": "When the transition fails — in both directions",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 1.0
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "liver"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "hepatic_veins"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ivc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "svc"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "atrial_septum"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "crista_dividens"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "foramen_ovale"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_atrium"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "left_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ascending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "aortic_arch"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "head_neck_vessels"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "right_ventricle"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_trunk"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_arteries"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "lungs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pulmonary_veins"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "ductus_arteriosus"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "descending_aorta"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "common_iliacs"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "flow"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pda_duct"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "pda_flow"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "pda_duct",
-     "intensity": 0.95
-    },
-    {
-     "op": "COMPARE_STRUCTURES",
-     "targets": [
-      "pda_duct",
-      "pfc_duct"
-     ],
-     "layout": "side-by-side"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "ductus_arteriosus",
-     "to": "pda_duct",
-     "kind": "the same vessel, after the pressures have reversed, shunting the other way as"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "lungs",
-     "to": "pfc_duct",
-     "kind": "if pulmonary resistance never falls, the fetal pattern persists as"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    }
-   ],
-   "narration": "The duct can be wrong in either direction. Left open when it should have shut, the reversed gradient makes it shunt left to right — a continuous machinery murmur, bounding pulses, and a prostaglandin inhibitor to close it. But in a duct-dependent lesion it is the only connection the baby has, and closing it causes collapse on day two or three; there prostaglandin E1 keeps it open until surgery. The third failure is on the lung side: if pulmonary resistance never falls, the shunts keep running right to left and the newborn stays blue, with hypoxia and acidosis making the constriction worse. Finish every question the same way — trace the blood, name the shunt and the gradient, apply the two birth events, then name the remnant.\n\nIf the duct stays open after birth the pressure gradient has reversed, so flow now runs from aorta to pulmonary trunk — left to right, through both systole and diastole. That is the continuous machinery murmur below the left clavicle, with bounding pulses and a wide pulse pressure. It is common in premature babies and classically associated with congenital rubella. Because prostaglandin holds the duct open, a prostaglandin synthesis inhibitor such as indomethacin or ibuprofen closes it.\n\nReverse the logic and you have the most useful fact in neonatal cardiology. In some malformations the only route between the two circulations is the duct itself — transposition, pulmonary atresia, critical coarctation, hypoplastic left heart. Those babies are stable while the duct is open and collapse in the first days of life as it closes. Prostaglandin E1 keeps it open and buys time for surgery. A newborn who is well at birth and becomes blue or shocked on day two or three, especially with absent femoral pulses, is a duct closing on a lesion that needed it.\n\nThe transition can also fail on the lung side. If pulmonary vascular resistance does not fall — after meconium aspiration, birth asphyxia, sepsis or with hypoplastic lungs — the foramen ovale and duct keep shunting right to left and the baby stays hypoxic. Hypoxia and acidosis constrict the pulmonary vessels further, so the failure feeds itself. This is why the transition is described as a circulation that must be actively completed rather than a switch that flips at delivery."
-  }
- ],
- "provenance": {
-  "author": "task",
-  "authored_at": "2026-08-28",
-  "reauthored_at": "2026-09-11",
-  "reauthored_by": "model3d BUILD task",
-  "reauthor_note": "Re-authored from the sequence engine onto the procedural provider. The structures were teaching BEATS with no geometry; they are now the anatomical parts models3d/fetal-circulation.js builds, and every beat's narration is carried across VERBATIM onto the structure or the view that replaced it. Nothing taught was dropped: one beat that cannot be a view is in deferred_beats with its full text. One view (beat 6) is newly written, for a picture the sequence engine could not show at all — the duct reversing."
- },
- "gaps": [
-  "THE ADAPTER PAINTS A STRUCTURE ONE COLOUR, SO THE MODEL'S SOLVED SATURATION DOES NOT REACH A STUDENT. viz3d.js merges every mesh carrying a key into one geometry and gives it one MeshStandardMaterial coloured from the SCENE's color field (or the model's LAYERS palette) - the material the model built, which carries the solved oxygen saturation at that t, is discarded. In a direct render the whole picture recolours as the transition proceeds, and the umbilical vein, inferior cava, ascending aorta, descending aorta and umbilical artery come out in that order by measured pixel warmth (120.8, 87.5, 75.2, 53.3, 52.0 red-minus-blue). In the player they are flat anatomical colours. The scene keeps the original author's colours, which at least carry the vein-artery reversal in the cord, and nothing is shown that is WRONG - but the single best thing this model does is currently invisible in the app. The fix is an engine change and belongs on its own queue item: let the adapter keep the built mesh's own colour when the scene declares none.",
-  "THE FLOW LAYER IS ONE STRUCTURE COVERING EVERY VESSEL'S ARROWS, so a view that hides a vessel leaves its arrows hanging in mid air. Measured, not predicted: beats 3 and 4 were first authored isolating a region with the flow layer on, and rendered as a cloud of loose gold cones. The rule applied here is that a view either shows the whole circuit and may show flow, or isolates a region and must not. The better fix is per-vessel marker keys in the model so a view can show exactly the arrows of the vessels it is showing; it is left undone because it would add twenty-odd structures to this scene.",
-  "RE-AUTHORED from sequence to model3d on 2026-09-11. The scene previously had teaching BEATS as its structures (the_problem, brain_first, first_breath, cord_clamped, shunts_close, remnants, pda, duct_dependent, persistent_fetal, exam_frame) because it was written for the SVG panel engine. Structures are now the anatomical parts models3d/fetal-circulation.js builds; every beat's narration is preserved verbatim on the structure or the view that replaced it. Nothing taught was dropped.",
-  "ONE BEAT WAS MOVED OUT, NOT DELETED - see deferred_beats[]. 'How to answer any fetal circulation question' is exam technique with no frame it could change, and every structure it names is already shown by the view that teaches it.",
-  "ONE VIEW IS NEW. Beat 6, 'Fifteen minutes old - the duct turns round', has narration written for this conversion rather than carried over. It exists because the model can show something the sequence engine could not: the arrows in the duct reversing, as a consequence of the solved resistances rather than as an assertion. Every other word in this scene is the original author's.",
-  "THE MODEL AGREES WITH THE NARRATION, NOT WITH THE LITERATURE, ON ONE NUMBER, and it is flagged rather than resolved. The ductus venosus narration says it carries 'roughly half' of umbilical venous flow, and the model uses 0.50 so the picture agrees with the words a student is reading. Human fetal MRI in late gestation puts it nearer 0.30. Whoever reviews this should decide which one the corpus teaches; the build task is not the right place to overrule the narration silently.",
-  "THE INFERIOR VENA CAVA IS MODELLED AS ONE WELL-MIXED STREAM, and it should probably be two. Because the ductus venosus stream at 0.80 is a large part of it, holding the mixed inferior caval saturation at the narration's stated 0.70 forces the lower body's oxygen extraction down to about a tenth of the whole body's, which is not a fetus. In life the ductus venosus stream and the lower-body stream do not mix before the crista dividens - which is the same streaming the crista then exploits - so the 0.70 belongs to a stream, not to a mixture. This does not change any relation the scene asserts; it changes how the upper-to-lower extraction split is apportioned inside the solve.",
-  "THE CURRICULUM DOES NOT OFFER 3d_anatomy FOR THIS STRUCTURE. CURRICULUM.json lists preferred_modes ['sequence','diagram'] for 'Fetal circulation', so this scene's mode has been promoted past what the curriculum names. model3d-scene-spec-v2.md is explicit that this is the intended behaviour - 'a structure routed to diagram becomes a 3D scene the day a model for it exists, with no curriculum edit' - and deferred_modes keeps both the earlier options on the record. Noted because a reader comparing the two files will otherwise think one of them is wrong.",
-  "AXES. This model is +x = fetus's LEFT, +y = CRANIAL, +z = VENTRAL, which is NOT the LPS convention the spec's CROSS_SECTION table assumes for scanned meshes. Beat 3's cut is therefore normal to y, which in this model's frame is the transverse plane the narration asks for. The narration names no plane word, so nothing in it disagrees with the axis.",
-  "THE PLACENTA AND THE CORD ARE STILL DRAWN AFTER BIRTH. Geometry is built at every t and the views hide what is gone, so beat 7 and beat 8 do not show them. The umbilical vessels and the two ducts DO shrink with t, to three tenths of their fetal calibre, which is the ligamentum teres, venosum and arteriosum and the medial umbilical ligaments - the most examined line in the topic, made geometry rather than caption.",
-  "DUCT-DEPENDENT LESIONS ARE DESCRIBED, NOT SHOWN. Transposition, pulmonary atresia, critical coarctation and hypoplastic left heart each need a different heart, and this model builds one. Their narration is carried on beat 8, where the duct that keeps those babies alive is the thing on screen."
- ],
- "deferred_beats": [
-  {
-   "title": "How to answer any fetal circulation question",
-   "narration": "Four moves, in order. One: trace a red cell from placenta to placenta and name every vessel and shunt out loud — most marks are here. Two: at each shunt say what is being bypassed and which pressure difference drives the flow. Three: at birth, apply the two changes, lungs open and cord clamped, and let every closure follow from them. Four: name the remnant. Answer in that order and you never have to memorise the diagram as a picture.",
-   "why_not_a_view": "It is exam technique, not anatomy. There is no frame it could change: it describes the ORDER to say things in, and every structure it names is already shown by the view that teaches it. Rendered as a view it would be beat 2's frame with different words over it, which is what RENDER-STANDARD means by a beat that is text.",
-   "belongs_in": "the topic's revision notes, or as the scene's closing text panel — it is the best summary in this scene and it should not be a 3D beat",
-   "moved_at": "2026-09-11",
-   "moved_by": "model3d BUILD task"
-  }
- ]
 }

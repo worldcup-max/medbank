@@ -76,6 +76,8 @@ const STAGES = [
   ['t076-full',   0.76, { pericardium: true, midline: true },        'mid-zip in its cavity'],
   ['t100-full',   1.00, { pericardium: true, midline: true },        'day 23 in its cavity — crowded'],
   ['t100-cut',    1.00, { cutaway: true },                           'the three coats and the lumen'],
+  /* added 2026-09-30 with the variant itself: the transverse face beat 4 now draws */
+  ['t100-xs',     1.00, { crosscut: true },                          'the crosscut face at the ventricle body'],
   ['t090-meso',   0.90, { mesocardium: true },                       'the mesocardium, still whole'],
   ['t100-meso',   1.00, { mesocardium: true, midline: true },        'day 23 — the mesocardium has broken'],
   ['t100-bifida', 1.00, { bifida: true },                            'cardia bifida'],
@@ -272,8 +274,20 @@ window.pairProbe = function (t, opts) {
    and its face normal compared with the ray direction. A normal pointing the SAME way as the ray
    means the nearest thing to the camera is a surface facing away — which is what looking into an open
    pipe is. Genuinely two-sided sheets are excluded by key, not by guesswork. */
+/* THE lumen KEY WAS ADDED 2026-09-30, and leaving it out was making this probe answer a question about a model
+   that no longer exists. The lumen is a solid cast of the blood space (finding 6), so a ray that used
+   to pass through an empty tube and land on the far wall's INNER surface — a face pointing away, which
+   is what this probe counts — now stops on the cast's outer surface, a face pointing at the camera. A
+   target list written before the cast existed measures the wall as if the cavity were still empty.
+   NOTE WHAT THIS DOES NOT CHANGE: the 'cutaway day 23' row was already OPEN on the model as it stood
+   on 2026-09-11, at 64 of 890 rays, on this same harness — reproduced this run by putting the old
+   file back. The 2026-09-11 build notes said "no open lumen from ten cameras across five builds", and
+   there are ELEVEN camera rows here; ten of them are closed. The verdict line never gated on this
+   probe, so the row printed OPEN under a PROVEN. That is logged as a finding rather than fixed here:
+   a wedge cut out of a wall is SUPPOSED to expose the far wall, so the row is arguably right to be
+   open, and the defect is that it cannot say which of those two things it means. */
 const SOLID_KEYS = { sinus:1, atrium:1, ventricle:1, bulbus:1, truncus:1, veins:1, arches:1,
-                     endocardium:1, jelly:1, septum:1, membrane:1 };
+                     endocardium:1, jelly:1, lumen:1, septum:1, membrane:1 };
 window.lumenProbe = function (grid) {
   const G = grid || 96;
   const rc = new THREE.Raycaster();
@@ -412,6 +426,13 @@ for (const [nm2, t2, opts2, yaw2, pitch2] of [
   ['lateral day 23',    1.00, {}, -1.45,  0.04],
   ['cutaway day 23',    1.00, { cutaway: true }, -0.26, 0.04],
   ['cutaway from behind', 1.00, { cutaway: true }, 2.88, 0.04],
+  /* THE CROSSCUT GETS NO EXEMPTION, and that is the point of adding it here. Its face is a deliberately
+     exposed annulus — the one place this model leaves a terminal ring uncovered — so the obvious worry
+     is that beat 4 has traded a longitudinal window for an open pipe. It has not: an annular CAP faces
+     along the tube's axis, so from the superior camera the beat uses it faces the camera, and the lumen
+     disc behind it does too. Both rows must read zero like any other. */
+  ['crosscut from above', 1.00, { crosscut: true }, -0.26, -1.15],
+  ['crosscut anterior',   1.00, { crosscut: true }, -0.26,  0.04],
   ['bifida day 23',     1.00, { bifida: true }, -0.26, 0.04],
 ]) {
   await p.evaluate(([t3, o3, y3, pi3]) => window.setStage(t3, o3, y3, pi3), [t2, opts2, yaw2, pitch2]);
@@ -433,7 +454,10 @@ const VIEW_FRAMES = [
   { name: '2 head fold',   t: 0.35, opts: {},                yaw: -1.35 },
   { name: '3 the zip',     t: 0.76, opts: { midline: true }, yaw: -0.26 },
   { name: '4 one tube',    t: 1.00, opts: {},                yaw: -0.26 },
-  { name: '5 three coats', t: 1.00, opts: { cutaway: true, endocardium: true, jelly: true }, yaw: -0.55 },
+  /* beat 4 draws the CROSSCUT from a superior camera as of 2026-09-30, so the frame this check
+     compares must be that one — a harness still rendering the old cutaway would be proving that the
+     views of a scene that no longer exists differ from each other. */
+  { name: '5 three coats', t: 1.00, opts: { crosscut: true, endocardium: true, jelly: true }, yaw: -0.26, pitch: -1.15 },
   { name: '6 mesocardium', t: 1.00, opts: { mesocardium: true }, yaw: -1.35 },
   { name: '7 five segments', t: 1.00, opts: {},              yaw: -0.90 },
   { name: '8 the tethers', t: 1.00, opts: { pericardium: true }, yaw: -0.26, pitch: 0.30 },

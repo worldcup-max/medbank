@@ -102,14 +102,31 @@ window.setStage = function (t, opts, yaw, pitch, show) {
      list and rendered the whole model at the view's t — so two views differing only in what they
      reveal came out as the SAME FRAME, and the frame-difference check reported 0.0% between beats 6
      and 7 and could not tell a real duplicate from its own blindness. */
+  /* REVIEW ROUND 2, R2-8. The show list used to arrive as the SCENE'S STRUCTURE KEYS and was matched
+     against userData.key, which carries the MODEL'S PART NAME. For most structures the two spell
+     the same word, so the filter looked like it worked — but the six defect structures are aliases
+     (avsd -> av_cushions, asd -> septum_primum, vsd -> muscular_ivs, tga/truncus_persistent/fallot
+     -> spiral_septum), so NONE of them matched any mesh and every mesh was hidden. The two views
+     carrying the entire defect payload rendered with none of their subjects in frame, and were
+     signed off as "20 stages rendered and looked at". The REAL PLAYER was never wrong here —
+     viz3d.js resolves each structure through its own ref — so this was a hole in the instrument.
+     The show list is now the RESOLVED PART KEYS (viewFramesFromScene does the resolution the way the
+     player does), and setStage REPORTS what each requested key matched so the caller can assert
+     that none of them matched nothing. A prover that filters by key must resolve keys the way the
+     player resolves them, or at minimum say when it could not. */
+  window.lastShowMatch = null;
   if (show && show.length) {
-    const keep = {};
-    for (const k of show) keep[k] = 1;
+    const keep = {}, hits = {};
+    for (const k of show) { keep[k] = 1; hits[k] = 0; }
     group.traverse(function (o) {
       if (!o.isMesh) return;
       const k = o.userData && o.userData.key;
-      if (k && !keep[k]) o.visible = false;
+      if (!k) return;
+      if (keep[k]) { hits[k] += 1; return; }
+      o.visible = false;
     });
+    const missed = Object.keys(hits).filter(function (k) { return hits[k] === 0; });
+    window.lastShowMatch = { hits: hits, missed: missed };
   }
   group.rotation.y = yaw == null ? -0.20 : yaw;
   group.rotation.x = pitch == null ? 0.05 : pitch;
@@ -381,10 +398,24 @@ for (const [nm2, t2] of [['anterior day 56', 1.00], ['anterior day 34', 0.29]]) 
 function viewFramesFromScene() {
   if (!existsSync(SCENE)) return null;
   const sc = JSON.parse(readFileSync(SCENE, 'utf8'));
-  const keysOf = v => new Set(v.ops.filter(o => o.op === 'SHOW_STRUCTURE').map(o => o.target));
+  const keysOf = v => new Set(v.ops.filter(o => o.op === 'SHOW_STRUCTURE')
+                                    .map(o => o.target).filter(x => x !== '*'));
+  /* THE PLAYER'S OWN RESOLUTION, R2-8: scene structure key -> model part name + option flags,
+     read off structures[].refs.procedural ("septation-of-heart#av_cushions@1+avsd"). */
+  const REF = {};
+  for (const st of (sc.structures || [])) {
+    const r = ((st.refs || {}).procedural) || '';
+    const m = /^[^#]+#([A-Za-z0-9_]+)(?:@[^+]*)?((?:\+[A-Za-z0-9_]+)*)$/.exec(r);
+    if (m) REF[st.key] = { part: m[1], flags: (m[2] || '').split('+').filter(Boolean) };
+  }
   return sc.views.map(v => {
     const st = v.ops.find(o => o.op === 'SET_STAGE');
     const k = keysOf(v);
+    const parts = [], unresolved = [];
+    for (const key of k) {
+      if (REF[key]) { if (parts.indexOf(REF[key].part) < 0) parts.push(REF[key].part); }
+      else unresolved.push(key);
+    }
     const rot = v.ops.filter(o => o.op === 'ROTATE_TO_VIEW').pop();
     const opts = { ghost: true };
     if (k.has('aortic_channel') || k.has('pulmonary_channel') || k.has('tga') ||
@@ -394,8 +425,10 @@ function viewFramesFromScene() {
     if (k.has('avsd')) opts.avsd = true;
     if (k.has('vsd')) opts.vsd = true;
     if (k.has('fallot')) opts.fallot = true;
+    /* the flags the PLAYER would end up with, from the refs rather than from a hand-kept list */
+    for (const key of k) for (const f of ((REF[key] || {}).flags || [])) opts[f] = true;
     return { name: v.beat + ' ' + v.title, t: st ? st.t : 1, opts: opts,
-             show: Array.from(k),
+             show: parts, sceneKeys: Array.from(k), unresolved: unresolved,
              yaw: (rot && rot.view === 'lateral') ? -1.50 : -0.20, pitch: 0.05 };
   });
 }
@@ -415,8 +448,20 @@ for (let i = 1; i < VIEW_FRAMES.length; i++) {
   const d = await p.evaluate(([a, c]) => window.frameDiff(a, c), [VIEW_FRAMES[i - 1], VIEW_FRAMES[i]]);
   report.viewDiffs.push({ from: VIEW_FRAMES[i - 1].name, to: VIEW_FRAMES[i].name, ...d });
 }
+/* EVERY KEY A VIEW NAMES MUST MATCH AT LEAST ONE MESH, and every scene key must resolve. R2-8:
+   without this the prover's own blindness looks like a clean run. Recorded per view, and summarised
+   as report.showMatch.bad so a reviewer does not have to read ten rows to find the empty one. */
+report.showMatch = { views: [], bad: [] };
 for (const v of VIEW_FRAMES) {
   await p.evaluate(a => window.setStage(a.t, a.opts, a.yaw, a.pitch, a.show), v);
+  const mt = await p.evaluate('window.lastShowMatch');
+  const row = { view: v.name, sceneKeys: v.sceneKeys || null, parts: v.show || null,
+                unresolved: v.unresolved || [], missed: (mt && mt.missed) || [],
+                hits: (mt && mt.hits) || null };
+  report.showMatch.views.push(row);
+  if ((row.unresolved && row.unresolved.length) || (row.missed && row.missed.length)) {
+    report.showMatch.bad.push({ view: v.name, unresolved: row.unresolved, missed: row.missed });
+  }
   await p.locator('#c').screenshot({ path: `${OUT}/view-${v.name.replace(/[^a-z0-9]+/gi, '-')}.png` });
 }
 

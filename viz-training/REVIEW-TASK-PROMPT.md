@@ -13,7 +13,70 @@ honest about what you cannot.
 
 ---
 
-## 0 · Read first
+## 0 · HOW YOU REACH THE REPO — read this first, it changed on 2026-09-13
+
+**THE SHELL ON FRANK'S MACHINE IS INTERMITTENT, NOT DEAD. TRY IT ONCE, FIRST — corrected 2026-09-30.**
+A Windows update released 2026-09-08 stopped Claude's workspace from starting there, and for weeks
+`device_bash` failed with "Workspace unavailable" with every path under `$HOME/mnt/` unreachable.
+This section used to say "do not try it". That was wrong by 2026-09-30: the review run at 02:36 UTC
+mounted the repo on its FIRST `device_bash` call and ran `tools/validate-scenes.mjs` in-repo, an hour
+and three quarters after a build run had recorded the same shell failing with "sandbox-helper: no
+Plan9 drive shares". An instruction that says "do not try it" turns an intermittent outage into a
+permanent one, and that is what left `scenes/index.json` and `COVERAGE.md` stale for nineteen days.
+
+So: run `ls "$HOME/mnt/medbank/viz-training/BUILD-QUEUE.json"` ONCE at the start of a run.
+ - If it works, you have node in-repo. Run the tools there — above all `queue-set.mjs`, which then
+   takes its REAL lock and re-reads inside it, which is what it was built for. Chromium is NOT on
+   that machine, so renders still happen in your own container off staged files.
+ - If it fails, fall back to the stage-in / work-in-your-container / commit-back shape below, and do
+   not treat the failure as your failure.
+Never assert which state the shell is in without testing it — including not asserting it here.
+
+**You died first, and that is why this matters.** All three tasks auto-suspended with `device_absent`.
+Your last successful run was the evening of 2026-09-10; the build task carried on for another eight
+and a half hours, and eleven items reached `built` with nine of them never reviewed. A builder with no
+reviewer does not stop — it piles up unread work. If you cannot run, say so loudly; silence here is
+the expensive failure.
+
+**What still works is FILE access, plus the shell in your own cloud container.** The shape of a run is:
+stage in, work in the cloud, commit back.
+
+1. **Stage what you need** with `device_stage_files`, using Windows absolute paths under
+   `C:\Users\domin\OneDrive\Documents\GitHub\medbank\`. They land under
+   `/mnt/user-data/uploads/medbank/...`. **Record the `mtimeMs` of anything you will write back.**
+2. **Work in your own container.** It has node, and chromium for the render checks.
+3. **Commit back** with `device_commit_files`, passing `expectedMtimeMs` for every file.
+
+**THE QUEUE IS WRITTEN BY COMPARE-AND-SWAP, NOT BY A LOCK.** `queue-set.mjs` still takes a lock file
+and on a staged copy it protects nothing — two runs would each take their own, in their own container.
+What protects the queue is `expectedMtimeMs`: `device_commit_files` REFUSES the write if the file
+changed since you staged it. **If your commit is refused, a build run edited the queue while you were
+reviewing. Do not force it** — re-stage, re-apply, commit again. A refusal is the system working, and
+forcing it is how a review's findings vanish.
+
+**AND READ IT BACK. THIS IS NOT THEORETICAL — it caught a loss on 2026-09-30.** That run committed
+BUILD-QUEUE.json with a correct `expectedMtimeMs`, got `written` back with an empty `rejected`, and
+thirty seconds later the file on disk still read `in-review`/round 1: the whole review result was
+gone, while the scene and the log committed in the same run had landed. It was re-applied with
+`queue-set.mjs` run in-repo through the device shell. So: after every commit, re-stage the files (or
+read them through the device shell) and confirm your changes are in them.
+`device_commit_files` returning `written` is the bridge's word for "I issued it", not proof it landed.
+A build run once marked an item `built` on writes that never reached the repo and it went unnoticed
+for nine days; the same can happen to a review's findings. Before you set an item to `done`,
+`changes-requested` or `escalated`, re-read BUILD-QUEUE.json off the machine and check your own entry
+is there.
+
+**PROVE YOU CAN SEE THE REPO BEFORE ANYTHING ELSE.** Stage
+`C:\Users\domin\OneDrive\Documents\GitHub\medbank\viz-training\BUILD-QUEUE.json` and read it.
+If that fails, STOP and make it the first line of your reply.
+
+**THE BACKLOG IS CLEARED — corrected 2026-09-30.** Eleven items were `built` when the chain stopped
+and nine were never reviewed; as of 2026-09-30T02:53Z the queue holds none of them. Section 1 still
+holds — take the oldest `built_at` — but expect one item or none, not a pile. Do not try to review
+more than one in a run. (This task's scheduled prompt still describes the eleven-item backlog. It is
+stale in the same way this paragraph was; believe the queue, not the prompt.)
+
+## 0.1 · Read first
 
 1. `viz-training/ARTWORK-STANDARD.md` §3 — the two reviews and why they must fail differently.
 2. `viz-training/RENDER-STANDARD.md` — the four bugs, the standing rules, and §4, the diagnostic
@@ -26,6 +89,30 @@ You run on your own schedule, hourly at :35. Nothing pokes you and nothing tells
 open `viz-training/BUILD-QUEUE.json` and take the item with status `built`. If several are `built`,
 take the **oldest `built_at`**; builds have run ahead of reviews before and the queue can hold three.
 
+**`in-review` IS A STATUS WITH NO OWNER AND, UNTIL NOW, NO RECLAIM RULE — added 2026-10-01T00:45Z.**
+A review run claims an item by setting it `in-review`. If that run then dies, *nothing* recovers the
+item: the build task takes only `changes-requested` and `todo`, and every later review run looks for
+`built`, finds none, and correctly stops. The item is then invisible to both tasks forever and the
+chain goes quiet while looking healthy — the same silent-stall class that left `scenes/index.json` and
+`COVERAGE.md` stale for nineteen days. The queue's own `statuses` dictionary does not even list
+`in-review`, while `building` carries "if this is stale by more than one run, reclaim it".
+
+So, mirroring the build task's rule (`BUILD-TASK-PROMPT.md` §1, two hours):
+
+> If no item is `built`, look for one that is `in-review`. If its `updated_at` is **more than two
+> hours** old, it has no `reviewed_at` and no findings from that round, and nothing in the repo has
+> been written since, **that review run died: reclaim it.** Review it from the start, and say in the
+> log that you reclaimed a stale review claim and from which timestamp.
+>
+> **Under two hours, leave it alone and stop.** This task fires hourly at :35 and a thorough review
+> here routinely runs past the hour, so a fresh `in-review` is a colleague mid-review, not a corpse.
+> Reviewing it in parallel is exactly the two-sessions-on-one-file loss §5 forbids, and the loser is
+> whichever findings commit second.
+
+Proposed for whoever next writes the queue through `queue-set.mjs`: give `statuses` an `in-review`
+entry that says this out loud. The 2026-10-01T00:36Z run did **not** hand-edit `BUILD-QUEUE.json` to
+add it, because §1 forbids hand-edits and `queue-set.mjs` writes items, not the `statuses` dictionary.
+
 (An earlier version of this task was fired by the build run instead. That is now forbidden, because a
 run fired from another cloud session inherits no device binding — it woke with no `$HOME/mnt`, no repo
 and no remote-devices tools, and could do nothing but report the failure. If you ever find yourself
@@ -33,17 +120,20 @@ with a detailed description of an item and no repo, that is what has happened: r
 say so and stop. That is a complete run.
 
 Read `viz-training/BUILD-LOG.md` for what the builder said they did, and what they admitted to being
-unsure about. Then claim it: `node tools/queue-set.mjs <item> --status in-review`.
+unsure about. Then claim it with `queue-set.mjs --queue $Q <item> --status in-review` and commit the queue back.
 
-**NEVER EDIT `BUILD-QUEUE.json` BY HAND.** Every write goes through `tools/queue-set.mjs`. A build run
+**NEVER EDIT `BUILD-QUEUE.json` BY HAND.** Every write goes through `viz-training/tools/queue-set.mjs`. A build run
 can be alive while you are reviewing, and two hand-edits of the same JSON silently erase one another —
 the file stays valid, both runs report success, and your findings are the thing that disappears.
 
 ```
-node tools/queue-set.mjs <item> --status in-review
-node tools/queue-set.mjs <item> --status changes-requested --bump review_rounds --append findings="…"
-node tools/queue-set.mjs <item> --status done --set reviewed_at=<utc> --set reviewed_by="the review task"
-node tools/queue-set.mjs --show <item>                      # read one item back
+# $Q is the STAGED copy in your own container, not a path on Frank's machine:
+#   Q=/mnt/user-data/uploads/medbank/viz-training/BUILD-QUEUE.json
+node viz-training/tools/queue-set.mjs --queue $Q <item> --status in-review
+node viz-training/tools/queue-set.mjs --queue $Q <item> --status changes-requested --bump review_rounds --append findings="…"
+node viz-training/tools/queue-set.mjs --queue $Q <item> --status done --set reviewed_at=<utc> --set reviewed_by="the review task"
+node viz-training/tools/queue-set.mjs --queue $Q --show <item>             # read one item back
+# then commit BUILD-QUEUE.json back with expectedMtimeMs — see section 0.
 ```
 
 ## 2 · Two reviews, and they must fail differently

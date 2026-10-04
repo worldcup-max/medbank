@@ -1,10 +1,10 @@
 {
   "schema": 2,
   "id": "embryology__folding-of-the-embryo__primitive-gut-tube",
-  "mode": "sequence",
+  "mode": "3d_anatomy",
   "deferred_modes": [
-    "diagram",
-    "3d_anatomy"
+    "sequence",
+    "diagram"
   ],
   "course": "Embryology",
   "topic": "Folding of the Embryo",
@@ -13,11 +13,12 @@
     "Primitive gut tube"
   ],
   "learning_goal": "Divide the primitive gut into foregut, midgut and hindgut at their exact boundaries, name the artery and the vertebral level of each, list what each division becomes, and use those three divisions to place referred pain and to explain oesophageal atresia, duodenal atresia, malrotation, Hirschsprung disease and imperforate anus.",
-  "status": "planned",
+  "status": "candidate",
   "provider": {
-    "primary": "svg",
+    "primary": "procedural",
     "fallbacks": []
   },
+  "model": "primitive-gut-tube",
   "match": {
     "topics": [
       "primitive gut tube",
@@ -141,115 +142,206 @@
     ]
   },
   "camera": {
-    "framing": "lateral"
+    "framing": "anterior"
   },
   "structures": [
     {
-      "key": "tube_forms",
-      "label": "One tube, made by folding",
+      "key": "anorectal",
+      "name": "Anorectal canal",
+      "label": "Anorectal canal",
+      "role": "part",
+      "group": "Hindgut",
+      "refs": {
+        "procedural": "primitive-gut-tube#anorectal"
+      },
+      "color": "#76448a"
+    },
+    {
+      "key": "aorta",
+      "name": "Dorsal aorta",
+      "label": "Dorsal aorta",
       "role": "context",
-      "group": "The tube",
-      "layer": "organ",
-      "color": "#aeb6bf",
+      "group": "Blood supply",
+      "refs": {
+        "procedural": "primitive-gut-tube#aorta"
+      },
+      "color": "#922b21"
+    },
+    {
+      "key": "appendix",
+      "name": "Appendix",
+      "label": "Appendix",
+      "role": "part",
+      "group": "Midgut",
+      "refs": {
+        "procedural": "primitive-gut-tube#appendix"
+      },
+      "color": "#0e6251"
+    },
+    {
+      "key": "bodywall",
+      "name": "Ventral body wall",
+      "label": "Ventral body wall",
+      "role": "context",
+      "group": "Context",
+      "refs": {
+        "procedural": "primitive-gut-tube#bodywall"
+      },
+      "opacity": 0.14,
+      "color": "#aeb6bf"
+    },
+    {
+      "key": "buccoph",
+      "name": "Buccopharyngeal membrane",
+      "label": "Buccopharyngeal membrane",
+      "role": "part",
+      "group": "The ends",
+      "refs": {
+        "procedural": "primitive-gut-tube#buccoph@0.08"
+      },
+      "narration": "At each end of the tube, ectoderm and endoderm touch with no mesoderm between them, and those two-layered spots are the buccopharyngeal membrane at the head and the cloacal membrane at the tail. The buccopharyngeal ruptures in week four to open the mouth, the cloacal in week seven to open the anus and urogenital tract. A membrane that never ruptures is an atresia — choanal or oesophageal at one end, imperforate anus at the other.",
       "terms": [
-        "primitive gut tube",
-        "endoderm rolled into a tube",
-        "cranio-caudal folding",
-        "lateral folding",
+        "buccopharyngeal membrane",
+        "oropharyngeal membrane",
+        "stomodeum",
         "week 4",
-        "flat sheet becomes a tube",
-        "incorporated yolk sac"
+        "ruptures",
+        "cloacal membrane",
+        "proctodeum",
+        "week 7",
+        "ectoderm meets endoderm",
+        "no mesoderm between"
       ],
-      "narration": "The primitive gut is not a new organ. It is the roof of the yolk sac, rolled into a tube by the head, tail and lateral folds during week four. Hold that in mind and the whole gut becomes one tube that was cut into three by its blood supply."
+      "carried_from": "membranes",
+      "ref_note": "REF PINNED WITH @t ON 2026-10-01, AND THE REASON IS AN ENGINE RULE NOTHING IN THIS REPO HAD WRITTEN DOWN. viz3d loads every structure ONCE at mount, from its own ref, and a ref with no @t means t = 1 (viz3d.js, the SET_STAGE block). restage() then rebuilds only the structures that ALREADY ARRIVED — `meshes[s.key] && adapter.stageable(s)` — with the stated reason that a part appearing and disappearing between stages would have no entry explaining it. THE CONSEQUENCE: A STRUCTURE THE MODEL DOES NOT BUILD AT t = 1 CAN NEVER BE DRAWN BY ANY BEAT, whatever t that beat sets. It loads as reason:'none' at mount and is never retried. Measured in the real player with walk-scene-in-player and a direct probe of player.meshes: the entry exists and its value is null at every beat. A PINNED ref is loaded at ITS OWN t at mount, so the mesh arrives and stays at that stage, which is exactly what a stage-limited structure needs. buccoph is declared absent for t >= 0.30 by the model's STAGE_LIMITED, so it never loaded and BEAT 1 NAMED IT TO THE STUDENT AND DREW NOTHING — 'sealed at the head by the buccopharyngeal membrane'. Pre-existing, not introduced by this round's work, and found by this run while chasing round-3 finding 1: the player probe lists the visible meshes of beat 1 and neither membrane was among them. Beat 1 is the only beat that shows it and sits at t = 0.08, so that is where it is pinned.",
+      "color": "#f4d03f"
     },
     {
-      "key": "tube_layers",
-      "label": "Endoderm lines it, splanchnic mesoderm builds it",
+      "key": "caecum",
+      "name": "Caecal bud",
+      "label": "Caecal bud",
       "role": "part",
-      "group": "The tube",
-      "layer": "organ",
-      "color": "#5d6d7e",
+      "group": "Midgut",
+      "refs": {
+        "procedural": "primitive-gut-tube#caecum"
+      },
+      "narration": "Midgut: duodenum beyond the papilla, jejunum, ileum, caecum, appendix, ascending colon and the proximal two thirds of the transverse colon. Superior mesenteric artery, lesser splanchnic nerve at T10 and T11, and therefore periumbilical pain — which is exactly why early appendicitis hurts around the umbilicus before it moves to the right iliac fossa.",
       "terms": [
-        "endoderm",
-        "epithelial lining",
-        "glands",
-        "splanchnic mesoderm",
-        "visceral mesoderm",
-        "smooth muscle",
-        "connective tissue",
-        "visceral peritoneum",
-        "neural crest",
-        "enteric nervous system",
-        "myenteric plexus",
-        "Auerbach plexus",
-        "Meissner plexus"
-      ],
-      "narration": "Two germ layers build the gut and it is worth being exact about which does what. Endoderm gives only the epithelial lining and the glands that bud from it. Splanchnic mesoderm gives the muscle, the connective tissue and the visceral peritoneum. The nerve cells come from neither — neural crest cells migrate in to form the enteric plexuses, and when they fail to arrive you get Hirschsprung disease."
-    },
-    {
-      "key": "three_divisions",
-      "label": "Three divisions, defined by three arteries",
-      "role": "part",
-      "group": "The tube",
-      "layer": "vessel",
-      "color": "#c0392b",
-      "terms": [
-        "foregut",
-        "midgut",
-        "hindgut",
-        "coeliac trunk",
-        "T12",
+        "distal duodenum",
+        "jejunum",
+        "ileum",
+        "caecum",
+        "appendix",
+        "ascending colon",
+        "proximal two thirds of transverse colon",
         "superior mesenteric artery",
-        "L1",
-        "inferior mesenteric artery",
-        "L3",
-        "one artery per division",
-        "blood supply defines the boundary"
+        "lesser splanchnic nerve",
+        "T10 to T11",
+        "periumbilical pain",
+        "vitelline duct"
       ],
-      "narration": "The gut is divided into foregut, midgut and hindgut, and the division is arterial, not anatomical convenience. Coeliac trunk at T12 for the foregut, superior mesenteric at L1 for the midgut, inferior mesenteric at L3 for the hindgut. Learn the three arteries and their levels first; every boundary, every pattern of referred pain and half the surgical anatomy of the abdomen falls out of them."
+      "carried_from": "midgut_derivs",
+      "color": "#16a085"
     },
     {
-      "key": "boundary_papilla",
-      "label": "Foregut ends at the major duodenal papilla",
-      "role": "part",
-      "group": "The tube",
-      "layer": "organ",
-      "color": "#e67e22",
+      "key": "cloaca",
+      "name": "Cloaca",
+      "label": "Cloaca",
+      "role": "context",
+      "group": "Hindgut",
+      "refs": {
+        "procedural": "primitive-gut-tube#cloaca"
+      },
+      "narration": "The hindgut ends in a common chamber, the cloaca. A wedge of mesoderm, the urorectal septum, grows down and splits it into an anorectal canal behind and a urogenital sinus in front, meeting the cloacal membrane at what becomes the perineal body. The ectodermal proctodeum then meets the endoderm from inside, and their meeting point is the pectinate line.",
       "terms": [
-        "major duodenal papilla",
-        "ampulla of Vater",
-        "second part of duodenum",
-        "opening of the bile duct",
-        "foregut midgut junction",
-        "coeliac to superior mesenteric"
+        "cloaca",
+        "urorectal septum",
+        "anorectal canal",
+        "urogenital sinus",
+        "perineal body",
+        "cloacal membrane",
+        "anal membrane",
+        "urogenital membrane",
+        "week 7",
+        "proctodeum",
+        "anal pit",
+        "pectinate line",
+        "ectoderm"
       ],
-      "narration": "The foregut ends and the midgut begins in the second part of the duodenum, exactly where the bile duct opens at the major duodenal papilla. That is why the duodenum has a double blood supply from both the coeliac and superior mesenteric territories: the boundary runs through the middle of it."
+      "carried_from": "cloaca",
+      "opacity": 0.45,
+      "role_note": "ROLE CHANGED FROM \"part\" TO \"context\" ON 2026-10-01 for round-3 finding 1, and the cost is declared rather than hidden. viz3d clips ONLY structures that are not taught — isTaught() at viz3d.js:167 returns role !== \"context\", and :2438 assigns clippingPlanes on (clipping && !isTaught(s)) — so in the midline-section beat every one of the seven structures shown was role \"part\" and NOTHING WAS CUT. Measured in the real player with walk-scene-in-player before the change: urorectal 0.017% of the frame, anorectal 0.001%, urogenital 0.001%, against 0.565%, 1.569% and 1.861% in the close-up that simply HIDES this chamber. The cloaca is the occluding chamber wall — the close-up's own narration says so, \"the septum and the two channels it makes are INSIDE the cloaca and no camera can see them through it\" — which is the pattern the 140 CROSS_SECTION beats that work corpus-wide rely on: the wall is context, the thing revealed is the part. THE COST: a context structure gets no button in the student's parts list (viz3d.js:1285), so the cloaca can no longer be tapped by name. It still carries a pin and is labelled whenever a beat shows or highlights it (viz3d.js:1737), and it is still named in the narration of the beats that teach it. The alternative was changing the engine for one scene, which round 3 explicitly ruled out.",
+      "color": "#8e44ad"
     },
     {
-      "key": "boundary_colon",
-      "label": "Midgut ends two thirds of the way along the transverse colon",
+      "key": "cloacalmem",
+      "name": "Cloacal membrane",
+      "label": "Cloacal membrane",
       "role": "part",
-      "group": "The tube",
-      "layer": "organ",
-      "color": "#d35400",
-      "terms": [
-        "junction of proximal two thirds and distal one third",
-        "transverse colon",
-        "midgut hindgut junction",
-        "superior mesenteric to inferior mesenteric",
-        "watershed",
-        "left colic flexure",
-        "marginal artery"
-      ],
-      "narration": "The midgut ends at the junction of the proximal two thirds and the distal one third of the transverse colon. That is the arterial watershed between superior and inferior mesenteric territories, and it is why ischaemic colitis has a favourite site near the left colic flexure."
+      "group": "The ends",
+      "refs": {
+        "procedural": "primitive-gut-tube#cloacalmem@0.08"
+      },
+      "ref_note": "REF PINNED WITH @t ON 2026-10-01, AND THE REASON IS AN ENGINE RULE NOTHING IN THIS REPO HAD WRITTEN DOWN. viz3d loads every structure ONCE at mount, from its own ref, and a ref with no @t means t = 1 (viz3d.js, the SET_STAGE block). restage() then rebuilds only the structures that ALREADY ARRIVED — `meshes[s.key] && adapter.stageable(s)` — with the stated reason that a part appearing and disappearing between stages would have no entry explaining it. THE CONSEQUENCE: A STRUCTURE THE MODEL DOES NOT BUILD AT t = 1 CAN NEVER BE DRAWN BY ANY BEAT, whatever t that beat sets. It loads as reason:'none' at mount and is never retried. Measured in the real player with walk-scene-in-player and a direct probe of player.meshes: the entry exists and its value is null at every beat. A PINNED ref is loaded at ITS OWN t at mount, so the mesh arrives and stays at that stage, which is exactly what a stage-limited structure needs. the same defect as buccoph: absent for t >= 0.74, never loaded, named by beat 1 ('at the tail by the cloacal membrane') and drawn by nothing. Beat 1 is the only beat that shows it. Note that gaps[] already recorded that the midline-section beat deliberately does NOT show this membrane because it has ruptured by then — that entry was right and had the wrong reason to be comfortable: the membrane was not being drawn anywhere.",
+      "color": "#f5b041"
     },
     {
-      "key": "foregut_derivs",
-      "label": "Foregut derivatives",
+      "key": "coeliac",
+      "name": "Coeliac trunk (T12) — foregut",
+      "label": "Coeliac trunk (T12) — foregut",
+      "role": "part",
+      "group": "Blood supply",
+      "refs": {
+        "procedural": "primitive-gut-tube#coeliac"
+      },
+      "color": "#c0392b"
+    },
+    {
+      "key": "duodenum",
+      "name": "Duodenum — spans the foregut/midgut boundary",
+      "label": "Duodenum — spans the foregut/midgut boundary",
       "role": "part",
       "group": "Foregut",
-      "layer": "organ",
-      "color": "#2874a6",
+      "refs": {
+        "procedural": "primitive-gut-tube#duodenum"
+      },
+      "narration": "In week six the proliferating epithelium temporarily plugs the lumen in places, especially the duodenum, and it must recanalize by about week eight. Fail completely and you get an atresia; fail partly and you get a stenosis. Remember the mechanism by region: duodenal atresia is a failure of recanalization, while jejunal and ileal atresia are usually a vascular accident in a segment that had already opened.",
+      "terms": [
+        "solid cord stage",
+        "epithelial proliferation",
+        "recanalization",
+        "week 8",
+        "duodenum",
+        "atresia",
+        "stenosis",
+        "failure of recanalization",
+        "vascular accident"
+      ],
+      "carried_from": "recanalization",
+      "color": "#5dade2"
+    },
+    {
+      "key": "enteric",
+      "name": "Enteric nervous system — neural crest colonisation",
+      "label": "Enteric nervous system — neural crest colonisation",
+      "role": "part",
+      "group": "Innervation",
+      "refs": {
+        "procedural": "primitive-gut-tube#enteric"
+      },
+      "opacity": 0.34,
+      "color": "#7e57c2"
+    },
+    {
+      "key": "foregut",
+      "name": "Foregut",
+      "label": "Foregut",
+      "role": "part",
+      "group": "The three divisions",
+      "refs": {
+        "procedural": "primitive-gut-tube#foregut"
+      },
+      "narration": "Foregut: oesophagus, stomach, duodenum as far as the papilla, and the organs that bud off it — liver and biliary tree from the hepatic diverticulum, both pancreatic buds, and the respiratory diverticulum that becomes trachea and lungs. All supplied by the coeliac trunk, all sensed through the greater splanchnic nerve from T5 to T9, which is why foregut pain is felt in the epigastrium.",
       "terms": [
         "oesophagus",
         "esophagus",
@@ -271,63 +363,30 @@
         "T5 to T9",
         "epigastric pain"
       ],
-      "narration": "Foregut: oesophagus, stomach, duodenum as far as the papilla, and the organs that bud off it — liver and biliary tree from the hepatic diverticulum, both pancreatic buds, and the respiratory diverticulum that becomes trachea and lungs. All supplied by the coeliac trunk, all sensed through the greater splanchnic nerve from T5 to T9, which is why foregut pain is felt in the epigastrium."
+      "carried_from": "foregut_derivs",
+      "color": "#2874a6"
     },
     {
-      "key": "midgut_derivs",
-      "label": "Midgut derivatives",
+      "key": "hepatic",
+      "name": "Hepatic diverticulum (liver, biliary tree)",
+      "label": "Hepatic diverticulum (liver, biliary tree)",
       "role": "part",
-      "group": "Midgut",
-      "layer": "organ",
-      "color": "#117864",
-      "terms": [
-        "distal duodenum",
-        "jejunum",
-        "ileum",
-        "caecum",
-        "appendix",
-        "ascending colon",
-        "proximal two thirds of transverse colon",
-        "superior mesenteric artery",
-        "lesser splanchnic nerve",
-        "T10 to T11",
-        "periumbilical pain",
-        "vitelline duct"
-      ],
-      "narration": "Midgut: duodenum beyond the papilla, jejunum, ileum, caecum, appendix, ascending colon and the proximal two thirds of the transverse colon. Superior mesenteric artery, lesser splanchnic nerve at T10 and T11, and therefore periumbilical pain — which is exactly why early appendicitis hurts around the umbilicus before it moves to the right iliac fossa."
+      "group": "Foregut",
+      "refs": {
+        "procedural": "primitive-gut-tube#hepatic"
+      },
+      "color": "#935116"
     },
     {
-      "key": "midgut_loop",
-      "label": "The midgut loop, its hernia and its turn",
+      "key": "hindgut",
+      "name": "Hindgut",
+      "label": "Hindgut",
       "role": "part",
-      "group": "Midgut",
-      "layer": "organ",
-      "color": "#148f77",
-      "terms": [
-        "midgut loop",
-        "vitelline duct",
-        "apex of the loop",
-        "cranial limb",
-        "caudal limb",
-        "caecal bud",
-        "physiological herniation",
-        "week 6",
-        "umbilical ring",
-        "270 degrees anticlockwise",
-        "counterclockwise",
-        "superior mesenteric artery is the axis",
-        "week 10",
-        "retroperitoneal fixation"
-      ],
-      "narration": "Only the midgut does something dramatic. Around week six the loop outgrows the abdomen and herniates into the umbilical cord, rotating ninety degrees anticlockwise around the superior mesenteric artery on the way out. It returns by about week ten, rotating a further one hundred and eighty degrees, so the total is two hundred and seventy degrees anticlockwise. That rotation is what carries the caecum to the right iliac fossa and lays the duodenum and the ascending and descending colon against the back wall."
-    },
-    {
-      "key": "hindgut_derivs",
-      "label": "Hindgut derivatives",
-      "role": "part",
-      "group": "Hindgut",
-      "layer": "organ",
-      "color": "#7d3c98",
+      "group": "The three divisions",
+      "refs": {
+        "procedural": "primitive-gut-tube#hindgut"
+      },
+      "narration": "Hindgut: distal third of the transverse colon, descending and sigmoid colon, rectum and the anal canal down to the pectinate line. Inferior mesenteric artery, least splanchnic nerve at T12, hypogastric or suprapubic pain. The pectinate line is a germ-layer boundary, and it is why everything above it differs from everything below it in blood supply, venous drainage, lymphatics and sensation.",
       "terms": [
         "distal one third of transverse colon",
         "descending colon",
@@ -343,60 +402,178 @@
         "upper part of the urogenital sinus",
         "bladder"
       ],
-      "narration": "Hindgut: distal third of the transverse colon, descending and sigmoid colon, rectum and the anal canal down to the pectinate line. Inferior mesenteric artery, least splanchnic nerve at T12, hypogastric or suprapubic pain. The pectinate line is a germ-layer boundary, and it is why everything above it differs from everything below it in blood supply, venous drainage, lymphatics and sensation."
+      "carried_from": "hindgut_derivs",
+      "color": "#7d3c98"
     },
     {
-      "key": "cloaca",
-      "label": "The cloaca is partitioned by the urorectal septum",
+      "key": "ima",
+      "name": "Inferior mesenteric artery (L3) — hindgut",
+      "label": "Inferior mesenteric artery (L3) — hindgut",
+      "role": "part",
+      "group": "Blood supply",
+      "refs": {
+        "procedural": "primitive-gut-tube#ima"
+      },
+      "color": "#cb4335"
+    },
+    {
+      "key": "mesentery",
+      "name": "Dorsal mesentery",
+      "label": "Dorsal mesentery",
+      "role": "part",
+      "group": "Blood supply",
+      "refs": {
+        "procedural": "primitive-gut-tube#mesentery"
+      },
+      "opacity": 0.32,
+      "color": "#14a08b"
+    },
+    {
+      "key": "midgut",
+      "name": "Midgut",
+      "label": "Midgut",
+      "role": "part",
+      "group": "The three divisions",
+      "refs": {
+        "procedural": "primitive-gut-tube#midgut"
+      },
+      "narration": "The gut is divided into foregut, midgut and hindgut, and the division is arterial, not anatomical convenience. Coeliac trunk at T12 for the foregut, superior mesenteric at L1 for the midgut, inferior mesenteric at L3 for the hindgut. Learn the three arteries and their levels first; every boundary, every pattern of referred pain and half the surgical anatomy of the abdomen falls out of them.",
+      "terms": [
+        "foregut",
+        "midgut",
+        "hindgut",
+        "coeliac trunk",
+        "T12",
+        "superior mesenteric artery",
+        "L1",
+        "inferior mesenteric artery",
+        "L3",
+        "one artery per division",
+        "blood supply defines the boundary"
+      ],
+      "carried_from": "three_divisions",
+      "color": "#117864"
+    },
+    {
+      "key": "panc_dorsal",
+      "name": "Dorsal pancreatic bud",
+      "label": "Dorsal pancreatic bud",
+      "role": "part",
+      "group": "Foregut",
+      "refs": {
+        "procedural": "primitive-gut-tube#panc_dorsal"
+      },
+      "color": "#b9770e"
+    },
+    {
+      "key": "panc_ventral",
+      "name": "Ventral pancreatic bud",
+      "label": "Ventral pancreatic bud",
+      "role": "part",
+      "group": "Foregut",
+      "refs": {
+        "procedural": "primitive-gut-tube#panc_ventral"
+      },
+      "color": "#d4ac0d"
+    },
+    {
+      "key": "papilla",
+      "name": "Major duodenal papilla (foregut/midgut boundary)",
+      "label": "Major duodenal papilla (foregut/midgut boundary)",
+      "role": "part",
+      "group": "The two boundaries",
+      "refs": {
+        "procedural": "primitive-gut-tube#papilla"
+      },
+      "narration": "The foregut ends and the midgut begins in the second part of the duodenum, exactly where the bile duct opens at the major duodenal papilla. That is why the duodenum has a double blood supply from both the coeliac and superior mesenteric territories: the boundary runs through the middle of it.",
+      "terms": [
+        "major duodenal papilla",
+        "ampulla of Vater",
+        "second part of duodenum",
+        "opening of the bile duct",
+        "foregut midgut junction",
+        "coeliac to superior mesenteric"
+      ],
+      "carried_from": "boundary_papilla",
+      "color": "#e67e22"
+    },
+    {
+      "key": "respir",
+      "name": "Respiratory diverticulum (trachea, lung buds)",
+      "label": "Respiratory diverticulum (trachea, lung buds)",
+      "role": "part",
+      "group": "Foregut",
+      "refs": {
+        "procedural": "primitive-gut-tube#respir"
+      },
+      "color": "#5499c7"
+    },
+    {
+      "key": "sma",
+      "name": "Superior mesenteric artery (L1) — midgut",
+      "label": "Superior mesenteric artery (L1) — midgut",
+      "role": "part",
+      "group": "Blood supply",
+      "refs": {
+        "procedural": "primitive-gut-tube#sma"
+      },
+      "color": "#e74c3c"
+    },
+    {
+      "key": "stomach",
+      "name": "Stomach (fusiform dilatation)",
+      "label": "Stomach (fusiform dilatation)",
+      "role": "part",
+      "group": "Foregut",
+      "refs": {
+        "procedural": "primitive-gut-tube#stomach"
+      },
+      "color": "#3a8fc4"
+    },
+    {
+      "key": "umbring",
+      "name": "Umbilical ring",
+      "label": "Umbilical ring",
+      "role": "context",
+      "group": "Context",
+      "refs": {
+        "procedural": "primitive-gut-tube#umbring"
+      },
+      "opacity": 0.45,
+      "color": "#6c3483"
+    },
+    {
+      "key": "urogenital",
+      "name": "Urogenital sinus",
+      "label": "Urogenital sinus",
       "role": "part",
       "group": "Hindgut",
-      "layer": "organ",
-      "color": "#8e44ad",
-      "terms": [
-        "cloaca",
-        "urorectal septum",
-        "anorectal canal",
-        "urogenital sinus",
-        "perineal body",
-        "cloacal membrane",
-        "anal membrane",
-        "urogenital membrane",
-        "week 7",
-        "proctodeum",
-        "anal pit",
-        "pectinate line",
-        "ectoderm"
-      ],
-      "narration": "The hindgut ends in a common chamber, the cloaca. A wedge of mesoderm, the urorectal septum, grows down and splits it into an anorectal canal behind and a urogenital sinus in front, meeting the cloacal membrane at what becomes the perineal body. The ectodermal proctodeum then meets the endoderm from inside, and their meeting point is the pectinate line."
+      "refs": {
+        "procedural": "primitive-gut-tube#urogenital"
+      },
+      "color": "#c39bd3"
     },
     {
-      "key": "membranes",
-      "label": "The tube is sealed at both ends until it is not",
+      "key": "urorectal",
+      "name": "Urorectal septum",
+      "label": "Urorectal septum",
       "role": "part",
-      "group": "The ends",
-      "layer": "organ",
-      "color": "#f4d03f",
-      "terms": [
-        "buccopharyngeal membrane",
-        "oropharyngeal membrane",
-        "stomodeum",
-        "week 4",
-        "ruptures",
-        "cloacal membrane",
-        "proctodeum",
-        "week 7",
-        "ectoderm meets endoderm",
-        "no mesoderm between"
-      ],
-      "narration": "At each end of the tube, ectoderm and endoderm touch with no mesoderm between them, and those two-layered spots are the buccopharyngeal membrane at the head and the cloacal membrane at the tail. The buccopharyngeal ruptures in week four to open the mouth, the cloacal in week seven to open the anus and urogenital tract. A membrane that never ruptures is an atresia — choanal or oesophageal at one end, imperforate anus at the other."
+      "group": "Hindgut",
+      "refs": {
+        "procedural": "primitive-gut-tube#urorectal"
+      },
+      "color": "#af7ac5"
     },
     {
-      "key": "vitelline_stalk",
-      "label": "The vitelline duct — the tube's old connection to the yolk sac",
+      "key": "vitelline",
+      "name": "Vitelline (omphalomesenteric) duct",
+      "label": "Vitelline (omphalomesenteric) duct",
       "role": "part",
-      "group": "The ends",
-      "layer": "organ",
-      "color": "#f5b041",
+      "group": "Midgut",
+      "refs": {
+        "procedural": "primitive-gut-tube#vitelline"
+      },
+      "narration": "Where the midgut still opens into the yolk sac, folding narrows the connection to a thin vitelline duct at the apex of the midgut loop. It should regress completely. When it does not, the commonest remnant is a Meckel diverticulum — a true diverticulum of the ileum, often with ectopic gastric mucosa, classically presenting as painless rectal bleeding in a small child.",
       "terms": [
         "vitelline duct",
         "omphalomesenteric duct",
@@ -408,81 +585,53 @@
         "ectopic gastric mucosa",
         "painless rectal bleeding"
       ],
-      "narration": "Where the midgut still opens into the yolk sac, folding narrows the connection to a thin vitelline duct at the apex of the midgut loop. It should regress completely. When it does not, the commonest remnant is a Meckel diverticulum — a true diverticulum of the ileum, often with ectopic gastric mucosa, classically presenting as painless rectal bleeding in a small child."
+      "carried_from": "vitelline_stalk",
+      "color": "#c9a227"
     },
     {
-      "key": "recanalization",
-      "label": "The lumen is obliterated and reopened — and that is where atresias come from",
+      "key": "watershed",
+      "name": "Transverse colon 2/3 point (midgut/hindgut boundary)",
+      "label": "Transverse colon 2/3 point (midgut/hindgut boundary)",
       "role": "part",
-      "group": "The ends",
-      "layer": "organ",
-      "color": "#e59866",
+      "group": "The two boundaries",
+      "refs": {
+        "procedural": "primitive-gut-tube#watershed"
+      },
+      "narration": "The midgut ends at the junction of the proximal two thirds and the distal one third of the transverse colon. That is the arterial watershed between superior and inferior mesenteric territories, and it is why ischaemic colitis has a favourite site near the left colic flexure.",
       "terms": [
-        "solid cord stage",
-        "epithelial proliferation",
-        "recanalization",
-        "week 8",
-        "duodenum",
-        "atresia",
-        "stenosis",
-        "failure of recanalization",
-        "vascular accident"
+        "junction of proximal two thirds and distal one third",
+        "transverse colon",
+        "midgut hindgut junction",
+        "superior mesenteric to inferior mesenteric",
+        "watershed",
+        "left colic flexure",
+        "marginal artery"
       ],
-      "narration": "In week six the proliferating epithelium temporarily plugs the lumen in places, especially the duodenum, and it must recanalize by about week eight. Fail completely and you get an atresia; fail partly and you get a stenosis. Remember the mechanism by region: duodenal atresia is a failure of recanalization, while jejunal and ileal atresia are usually a vascular accident in a segment that had already opened."
+      "carried_from": "boundary_colon",
+      "color": "#d35400"
     },
     {
-      "key": "oesoph_atresia",
-      "label": "Oesophageal atresia and tracheo-oesophageal fistula",
+      "key": "yolksac",
+      "name": "Yolk sac",
+      "label": "Yolk sac",
+      "role": "context",
+      "group": "Midgut",
+      "refs": {
+        "procedural": "primitive-gut-tube#yolksac"
+      },
+      "opacity": 0.42,
+      "color": "#d8c86a"
+    },
+    {
+      "key": "var_malrotation",
+      "name": "Malrotation — the turn stopped at 90 degrees",
+      "label": "Malrotation — the turn stopped at 90 degrees",
       "role": "part",
       "group": "Clinical",
-      "layer": "organ",
-      "color": "#cb4335",
-      "terms": [
-        "oesophageal atresia",
-        "esophageal atresia",
-        "tracheo-oesophageal fistula",
-        "TOF",
-        "tracheo-oesophageal septum",
-        "respiratory diverticulum",
-        "proximal blind pouch",
-        "distal fistula",
-        "commonest type",
-        "polyhydramnios",
-        "cannot pass nasogastric tube",
-        "frothing at the mouth",
-        "choking on first feed",
-        "VACTERL"
-      ],
-      "narration": "The respiratory diverticulum buds off the foregut and is separated from it by the tracheo-oesophageal septum. When that septum forms incompletely the oesophagus ends blind and usually communicates with the trachea below — the common variant is a proximal blind pouch with a distal fistula. Suspect it before birth from polyhydramnios, because the fetus cannot swallow amniotic fluid, and after birth when a nasogastric tube will not pass and the first feed causes choking. Look for the rest of the VACTERL group."
-    },
-    {
-      "key": "duodenal_atresia",
-      "label": "Duodenal atresia — the double bubble",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#e74c3c",
-      "terms": [
-        "duodenal atresia",
-        "failure of recanalization",
-        "double bubble sign",
-        "bilious vomiting",
-        "distal to the papilla",
-        "polyhydramnios",
-        "Down syndrome",
-        "trisomy 21",
-        "annular pancreas",
-        "ventral pancreatic bud"
-      ],
-      "narration": "Duodenal atresia is the recanalization failure, and it is the one tied to Down syndrome. The plain film shows a double bubble — stomach and proximal duodenum both distended, nothing beyond. The vomiting is bilious because the obstruction is usually distal to the major duodenal papilla. Annular pancreas, where the ventral bud encircles the duodenum, produces the same picture from outside."
-    },
-    {
-      "key": "malrotation",
-      "label": "Malrotation and midgut volvulus",
-      "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#ec7063",
+      "refs": {
+        "procedural": "primitive-gut-tube#midgut@1+malrotation"
+      },
+      "narration": "If the two hundred and seventy degree rotation is incomplete, the caecum never reaches the right iliac fossa and the mesentery stays attached over a narrow base instead of a broad oblique line. A narrow base is a pivot: the whole midgut can twist on the superior mesenteric artery and infarct within hours. Bilious vomiting in a neonate is malrotation with volvulus until imaging proves otherwise, and it is a surgical emergency, not an outpatient problem.",
       "terms": [
         "malrotation",
         "incomplete rotation",
@@ -496,15 +645,49 @@
         "corkscrew duodenum",
         "upper GI contrast"
       ],
-      "narration": "If the two hundred and seventy degree rotation is incomplete, the caecum never reaches the right iliac fossa and the mesentery stays attached over a narrow base instead of a broad oblique line. A narrow base is a pivot: the whole midgut can twist on the superior mesenteric artery and infarct within hours. Bilious vomiting in a neonate is malrotation with volvulus until imaging proves otherwise, and it is a surgical emergency, not an outpatient problem."
+      "carried_from": "malrotation",
+      "color": "#117864",
+      "color_note": "The colour of the NORMAL part this variant resolves to (midgut). That is what viz3d.js:604 already assigns this structure at mount, so carrying it here changes no picture except by keeping it. Whether a variant should be visually distinct from its normal twin is an authoring decision and the review did not make it."
     },
     {
-      "key": "hirschsprung",
-      "label": "Hirschsprung disease — the neural crest cells never arrived",
+      "key": "var_highARM",
+      "name": "High anorectal malformation — the septum stopped short",
+      "label": "High anorectal malformation — the septum stopped short",
       "role": "part",
       "group": "Clinical",
-      "layer": "organ",
+      "refs": {
+        "procedural": "primitive-gut-tube#urorectal@1+highARM"
+      },
+      "narration": "At the tail end, two things can go wrong. The anal membrane may simply fail to rupture, giving a low lesion with a normally placed but covered anus. Or the urorectal septum may fail to reach the cloacal membrane, leaving the rectum communicating with the urinary tract or vagina — a high lesion with a fistula. Meconium appearing in the urine or at the vulva is what tells you which. As with oesophageal atresia, examine for the rest of the VACTERL association.",
+      "terms": [
+        "imperforate anus",
+        "anorectal malformation",
+        "anal membrane fails to rupture",
+        "urorectal septum",
+        "rectovesical fistula",
+        "rectourethral fistula",
+        "rectovaginal fistula",
+        "perineal fistula",
+        "high lesion",
+        "low lesion",
+        "levator ani",
+        "VACTERL",
+        "meconium in urine"
+      ],
+      "carried_from": "imperforate_anus",
       "color": "#af7ac5",
+      "color_note": "The colour of the NORMAL part this variant resolves to (urorectal). That is what viz3d.js:604 already assigns this structure at mount, so carrying it here changes no picture except by keeping it. Whether a variant should be visually distinct from its normal twin is an authoring decision and the review did not make it."
+    },
+    {
+      "key": "var_hirschsprung",
+      "name": "Aganglionic segment — the crest front stopped at s = 0.86",
+      "label": "Aganglionic segment — the crest front stopped at s = 0.86",
+      "role": "part",
+      "group": "Clinical",
+      "refs": {
+        "procedural": "primitive-gut-tube#enteric@1+entericStop"
+      },
+      "narration": "Neural crest cells colonise the gut from the top down, so when migration fails it is the last segment that is left bare. That makes Hirschsprung disease always involve the rectum and extend proximally, most often only as far as the rectosigmoid. The aganglionic segment cannot relax, so it stays narrow and the normal bowel above it dilates — the megacolon is the healthy part. Failure to pass meconium in the first forty-eight hours is the clue, and the diagnosis is made on rectal biopsy showing absent ganglion cells.",
       "terms": [
         "Hirschsprung disease",
         "congenital aganglionic megacolon",
@@ -525,31 +708,39 @@
         "rectal suction biopsy",
         "enterocolitis"
       ],
-      "narration": "Neural crest cells colonise the gut from the top down, so when migration fails it is the last segment that is left bare. That makes Hirschsprung disease always involve the rectum and extend proximally, most often only as far as the rectosigmoid. The aganglionic segment cannot relax, so it stays narrow and the normal bowel above it dilates — the megacolon is the healthy part. Failure to pass meconium in the first forty-eight hours is the clue, and the diagnosis is made on rectal biopsy showing absent ganglion cells."
+      "carried_from": "hirschsprung",
+      "opacity": 0.34,
+      "color": "#7e57c2",
+      "color_note": "The colour of the NORMAL part this variant resolves to (enteric). That is what viz3d.js:604 already assigns this structure at mount, so carrying it here changes no picture except by keeping it. Whether a variant should be visually distinct from its normal twin is an authoring decision and the review did not make it."
     },
     {
-      "key": "imperforate_anus",
-      "label": "Imperforate anus and the anorectal malformations",
+      "key": "duod_lumen",
+      "label": "Duodenal lumen — the patent channel",
+      "name": "Duodenal lumen — the patent channel",
       "role": "part",
-      "group": "Clinical",
-      "layer": "organ",
-      "color": "#c39bd3",
-      "terms": [
-        "imperforate anus",
-        "anorectal malformation",
-        "anal membrane fails to rupture",
-        "urorectal septum",
-        "rectovesical fistula",
-        "rectourethral fistula",
-        "rectovaginal fistula",
-        "perineal fistula",
-        "high lesion",
-        "low lesion",
-        "levator ani",
-        "VACTERL",
-        "meconium in urine"
-      ],
-      "narration": "At the tail end, two things can go wrong. The anal membrane may simply fail to rupture, giving a low lesion with a normally placed but covered anus. Or the urorectal septum may fail to reach the cloacal membrane, leaving the rectum communicating with the urinary tract or vagina — a high lesion with a fistula. Meconium appearing in the urine or at the vulva is what tells you which. As with oesophageal atresia, examine for the rest of the VACTERL association."
+      "refs": {
+        "procedural": "primitive-gut-tube#duod_lumen"
+      },
+      "narration": "The channel through the duodenum. It is cast at the wall's own calibre times lumenAt, so when the epithelium proliferates the cast thins and at the peak of the plug there is no channel to draw at all.",
+      "added_note": "Added 2026-10-01 for round-3 finding 3. The lumen existed in the model only as a number the acceptance battery read, so recanalization — which beat 17 hangs duodenal atresia and the double bubble on — had no picture anywhere in this scene.",
+      "color": "#aed6f1",
+      "group": "Foregut",
+      "group_note": "ADDED BY THE REVIEW, 2026-10-01. This structure carried no group. viz3d.js:1720 emits a heading only when p.group is truthy AND differs from the previous one, so an ungrouped structure is listed under whatever heading precedes it. These two are last in structures[], after the three var_* entries whose group is Clinical, so the student parts list filed the duodenal lumen and the normal proliferating epithelium under Clinical, beside malrotation, high ARM and Hirschsprung. Both are parts of the duodenum, whose group is Foregut."
+    },
+    {
+      "key": "duod_plug",
+      "label": "Proliferating epithelium — the solid-cord duodenum",
+      "name": "Proliferating epithelium — the solid-cord duodenum",
+      "role": "part",
+      "refs": {
+        "procedural": "primitive-gut-tube#duod_plug@0.52"
+      },
+      "narration": "The epithelium that fills the duodenal lumen between about week five and week eight. Its radius is the lumen's complement, so the cord and the channel together always occupy exactly the inner calibre — it is not a second number.",
+      "added_note": "Added 2026-10-01 for round-3 finding 3. Absent outside the recanalization window, which is declared in the model's STAGE_LIMITED.",
+      "ref_note": "REF PINNED WITH @t ON 2026-10-01, AND THE REASON IS AN ENGINE RULE NOTHING IN THIS REPO HAD WRITTEN DOWN. viz3d loads every structure ONCE at mount, from its own ref, and a ref with no @t means t = 1 (viz3d.js, the SET_STAGE block). restage() then rebuilds only the structures that ALREADY ARRIVED — `meshes[s.key] && adapter.stageable(s)` — with the stated reason that a part appearing and disappearing between stages would have no entry explaining it. THE CONSEQUENCE: A STRUCTURE THE MODEL DOES NOT BUILD AT t = 1 CAN NEVER BE DRAWN BY ANY BEAT, whatever t that beat sets. It loads as reason:'none' at mount and is never retried. Measured in the real player with walk-scene-in-player and a direct probe of player.meshes: the entry exists and its value is null at every beat. A PINNED ref is loaded at ITS OWN t at mount, so the mesh arrives and stays at that stage, which is exactly what a stage-limited structure needs. the plug exists only in the recanalization window (t 0.40 to 0.64), so an unpinned ref never loaded it and the beat built for round-3 finding 3 drew an empty frame — measured, not assumed: walk-scene-in-player reported beat 8 with SUBJECT (0/2) and duod_plug absent from its share table before this pin. 0.52 is the peak of the plug, which is the instant the beat sets and the instant at which the channel is fully obliterated.",
+      "color": "#f2f3f4",
+      "group": "Foregut",
+      "group_note": "ADDED BY THE REVIEW, 2026-10-01. This structure carried no group. viz3d.js:1720 emits a heading only when p.group is truthy AND differs from the previous one, so an ungrouped structure is listed under whatever heading precedes it. These two are last in structures[], after the three var_* entries whose group is Clinical, so the student parts list filed the duodenal lumen and the normal proliferating epithelium under Clinical, beside malrotation, high ARM and Hirschsprung. Both are parts of the duodenum, whose group is Foregut."
     }
   ],
   "views": [
@@ -559,28 +750,92 @@
       "title": "One tube from mouth to anus",
       "ops": [
         {
-          "op": "SHOW_STRUCTURE",
+          "op": "HIDE_STRUCTURE",
           "target": "*"
         },
         {
-          "op": "ISOLATE_REGION",
-          "target": "The tube"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "tube_forms",
-          "intensity": 0.9
+          "op": "SET_STAGE",
+          "t": 0.08
         },
         {
           "op": "SHOW_STRUCTURE",
-          "target": "tube_layers"
+          "target": "foregut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "buccoph"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "cloacalmem"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "vitelline"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "yolksac"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "papilla"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "watershed"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "midgut",
+          "intensity": 0.8
         },
         {
           "op": "ROTATE_TO_VIEW",
           "view": "lateral"
         }
       ],
-      "narration": "Start with the whole tube in side view, sealed at the head by the buccopharyngeal membrane and at the tail by the cloacal membrane, with the yolk sac still hanging from its middle. It is endoderm rolled up by the folds of week four. Endoderm gives the lining and the glands, splanchnic mesoderm gives the muscle and the peritoneum, and neural crest cells arrive later to supply the nerve cells. Three sources, three sets of diseases."
+      "narration": "Start with the whole tube in side view, sealed at the head by the buccopharyngeal membrane and at the tail by the cloacal membrane, with the yolk sac still hanging from its middle. It is endoderm rolled up by the folds of week four. Endoderm gives the lining and the glands, splanchnic mesoderm gives the muscle and the peritoneum, and neural crest cells arrive later to supply the nerve cells. Three sources, three sets of diseases.",
+      "claims": [
+        {
+          "measure": "cavity_len",
+          "op": "near",
+          "value": 0.709809,
+          "tol": 0.004,
+          "claim": "the abdominal cavity is still small at this stage",
+          "id": "B1-CAVITY-LEN"
+        },
+        {
+          "measure": "apex.z",
+          "op": "near",
+          "value": 0.741817,
+          "tol": 0.004,
+          "claim": "the tube still lies close to the dorsal body wall",
+          "id": "B1-APEX-Z"
+        },
+        {
+          "measure": "theta_deg",
+          "op": "equals",
+          "value": 0,
+          "claim": "nothing has rotated yet",
+          "id": "B1-THETA-DEG"
+        },
+        {
+          "measure": "herniated",
+          "op": "equals",
+          "value": false,
+          "claim": "and nothing has herniated yet",
+          "id": "B1-HERNIATED"
+        }
+      ]
     },
     {
       "mode": "vasculature",
@@ -588,212 +843,1769 @@
       "title": "Three arteries cut the tube into three",
       "ops": [
         {
-          "op": "ISOLATE_REGION",
-          "target": "The tube"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "three_divisions",
-          "intensity": 0.95
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "boundary_papilla",
-            "boundary_colon"
-          ],
-          "layout": "side-by-side"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "three_divisions",
-          "to": "boundary_papilla",
-          "kind": "coeliac territory gives way to superior mesenteric at"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "three_divisions",
-          "to": "boundary_colon",
-          "kind": "superior mesenteric gives way to inferior mesenteric at"
-        }
-      ],
-      "narration": "Now put the arteries on. Coeliac trunk at T12, superior mesenteric at L1, inferior mesenteric at L3. The boundaries are exactly where one territory hands over to the next: the major duodenal papilla in the second part of the duodenum, and the junction of the proximal two thirds and distal one third of the transverse colon. Those are the two sentences to memorise verbatim — every derivative list and every referred pain answer depends on them."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 3,
-      "title": "What each division becomes",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
+          "op": "HIDE_STRUCTURE",
           "target": "*"
         },
         {
-          "op": "HIDE_STRUCTURE",
-          "target": "Clinical"
+          "op": "SET_STAGE",
+          "t": 0.3
         },
         {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "foregut_derivs",
-            "midgut_derivs",
-            "hindgut_derivs"
-          ],
-          "layout": "stacked"
+          "op": "SHOW_STRUCTURE",
+          "target": "foregut"
         },
         {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:gut-tube",
-          "path": [
-            "foregut_derivs",
-            "boundary_papilla",
-            "midgut_derivs",
-            "boundary_colon",
-            "hindgut_derivs",
-            "cloaca"
-          ],
-          "duration": 9
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "coeliac"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sma"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ima"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "papilla"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "watershed"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "coeliac",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sma",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ima",
+          "intensity": 0.9
         },
         {
           "op": "ROTATE_TO_VIEW",
           "view": "lateral"
         }
       ],
-      "narration": "Run down the tube once, division by division. Foregut to the papilla, with the liver, gallbladder, pancreas and the lung bud all budding off it. Midgut to two thirds along the transverse colon, carrying the appendix and the vitelline duct. Hindgut to the pectinate line, ending in the cloaca. Then attach the nerve to each: greater splanchnic T5 to T9 for the foregut and epigastric pain, lesser splanchnic T10 to T11 for the midgut and periumbilical pain, least splanchnic T12 for the hindgut and suprapubic pain. That is why appendicitis starts at the umbilicus."
+      "narration": "Now put the arteries on. Coeliac trunk at T12, superior mesenteric at L1, inferior mesenteric at L3. The boundaries are exactly where one territory hands over to the next: the major duodenal papilla in the second part of the duodenum, and the junction of the proximal two thirds and distal one third of the transverse colon. Those are the two sentences to memorise verbatim — every derivative list and every referred pain answer depends on them.",
+      "claims": [
+        {
+          "measure": "cavity_len",
+          "op": "near",
+          "value": 0.87968,
+          "tol": 0.02,
+          "claim": "the cavity is growing but has not yet overtaken the gut",
+          "id": "B2-CAVITY-LEN"
+        },
+        {
+          "measure": "midgut_len",
+          "op": "near",
+          "value": 1.052091,
+          "tol": 0.03,
+          "claim": "the midgut is in its growth spurt",
+          "id": "B2-MIDGUT-LEN"
+        },
+        {
+          "measure": "enteric_front",
+          "op": "near",
+          "value": 0.032535,
+          "tol": 0.02,
+          "claim": "the crest front has entered the foregut and is moving caudally",
+          "id": "B2-ENTERIC-FRONT"
+        }
+      ]
     },
     {
-      "mode": "mechanism",
-      "beat": 4,
-      "title": "The midgut leaves the abdomen and comes back turned",
+      "mode": "location",
+      "beat": 3,
+      "title": "Close up: the three arterial origins",
       "ops": [
         {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.3
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foregut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "coeliac"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sma"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ima"
+        },
+        {
           "op": "ISOLATE_REGION",
-          "target": "Midgut"
+          "target": "Blood supply"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "aorta"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "mesentery"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "midgut_loop",
-          "intensity": 0.95
+          "target": "coeliac",
+          "intensity": 0.9
         },
         {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:midgut-rotation",
-          "path": [
-            "midgut_loop",
-            "vitelline_stalk",
-            "midgut_derivs"
-          ],
-          "duration": 8
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sma",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ima",
+          "intensity": 0.9
         },
         {
           "op": "ROTATE_TO_VIEW",
-          "view": "anterior"
+          "view": "lateral"
         }
       ],
-      "narration": "Only the midgut rotates, and only because it runs out of room. It herniates into the cord at about week six, turning ninety degrees anticlockwise around the superior mesenteric artery, and returns by about week ten with a further one hundred and eighty degrees — two hundred and seventy in total, all anticlockwise, viewed from the front. The caecum lands in the right iliac fossa and the mesentery is left attached along a broad oblique line. Both of those facts matter in the last beat."
+      "narration": "The same three arteries, with the aorta taken away so that the only thing left to look at is the spacing. Coeliac, superior mesenteric, inferior mesenteric, in that order from the head down, each one reaching forward from the midline into its own division of the tube. Nothing else in this scene is arranged in a line like this, and the order is the whole of the fact: whatever an artery supplies, it supplies because the tube was cut there first.",
+      "claims": [
+        {
+          "measure": "theta_deg",
+          "op": "near",
+          "value": 17.1,
+          "tol": 3,
+          "claim": "the tube is still almost unturned while the arteries are being laid down",
+          "id": "R1-THETA-DEG"
+        }
+      ],
+      "region_framed": "ISOLATE_REGION puts viz3d's subjectBox on this region instead of the whole tube; the rest of the scene stays drawn but ghosted, so the close-up keeps its context. Added 2026-10-01 for finding 3 of that day's review, which judged the 21 framing waivers not to hold."
     },
     {
-      "mode": "cross_section",
-      "beat": 5,
-      "title": "Opening the two ends",
+      "mode": "location",
+      "beat": 4,
+      "title": "Close up: the two boundaries",
       "ops": [
         {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.3
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foregut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "papilla"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "watershed"
+        },
+        {
           "op": "ISOLATE_REGION",
-          "target": "The ends"
+          "target": "The two boundaries"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "papilla",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "watershed",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Now the two beads on their own. The upper one is the major duodenal papilla, in the second part of the duodenum, where the foregut hands over to the midgut. The lower one is the point two thirds of the way along the transverse colon, where the midgut hands over to the hindgut. Everything a question can ask about this topic — which artery, which derivative, where the pain is felt, which malformation — is decided by which side of one of these two beads a structure sits on. This is the same instant as the last beat, with the turn barely begun, so the two beads are still where the arteries put them.",
+      "claims": [
+        {
+          "measure": "papilla.x",
+          "op": "atMost",
+          "value": -0.02,
+          "claim": "the papilla is already on the embryo’s right at this stage",
+          "id": "R2-PAPILLA-RIGHT"
+        },
+        {
+          "measure": "theta_deg",
+          "op": "near",
+          "value": 17.1253,
+          "tol": 3,
+          "claim": "the turn has barely begun at this instant",
+          "id": "R2-THETA-DEG"
+        }
+      ],
+      "region_framed": "ISOLATE_REGION puts viz3d's subjectBox on this region instead of the whole tube; the rest of the scene stays drawn but ghosted, so the close-up keeps its context. Added 2026-10-01 for finding 3 of that day's review, which judged the 21 framing waivers not to hold.",
+      "beat_refs": [
+        {
+          "phrase": "This is the same instant as the last beat",
+          "means": "the PRECEDING beat",
+          "resolves_to_beat": 3,
+          "resolves_to_title": "Close up: the three arterial origins",
+          "verified": "both beats SET_STAGE t = 0.3, so 'the same instant' is true of the pair"
+        }
+      ],
+      "beat_refs_note": "RECORDED SO A RENUMBER BREAKS A CHECK INSTEAD OF BREAKING A STUDENT. Round-3 finding 2: five of the seven relative beat pointers in this scene's narration were WRONG, because the scene was re-authored from 7 beats to 17 and the pointers were carried verbatim along with the prose. Carrying narration verbatim is the standing rule and is right — but a relative pointer is a REFERENCE, not teaching, and a reference has to be re-resolved when the beats are renumbered. Nothing in the repo could see it. The four wrong ones were rewritten to name the beat by its SUBJECT rather than by a count, so a future insertion cannot falsify them; the two that were already correct use \"the last beat\" to mean the PRECEDING beat and still land. Every one is recorded here against the beat it resolves to."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "What each division becomes",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.5
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foregut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stomach"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "duodenum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hepatic"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "panc_dorsal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "panc_ventral"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "respir"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "caecum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
         },
         {
           "op": "SHOW_STRUCTURE",
           "target": "cloaca"
         },
         {
-          "op": "CROSS_SECTION",
-          "axis": "x",
-          "offset": 0,
-          "animate": true
+          "op": "SHOW_STRUCTURE",
+          "target": "papilla"
         },
         {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "cloaca",
-          "to": "membranes",
-          "kind": "is divided by the urorectal septum down onto"
+          "op": "SHOW_STRUCTURE",
+          "target": "watershed"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:gut-tube",
+          "path": [
+            "foregut",
+            "midgut",
+            "hindgut"
+          ],
+          "duration": 8
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "recanalization",
+          "target": "stomach",
           "intensity": 0.85
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "caecum",
+          "intensity": 0.85
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
         }
       ],
-      "narration": "Cut the embryo in the midline and look at the two ends. The buccopharyngeal membrane ruptures in week four, the cloacal in week seven, and before that rupture the urorectal septum has already split the cloaca into anorectal canal and urogenital sinus. In the middle of the tube, the duodenal lumen is temporarily plugged by proliferating epithelium and must reopen by week eight. Three events, three sets of atresias — and knowing which mechanism belongs to which region is what the question is actually testing."
+      "narration": "Run down the tube once, division by division. Foregut to the papilla, with the liver, gallbladder, pancreas and the lung bud all budding off it. Midgut to two thirds along the transverse colon, carrying the appendix and the vitelline duct. Hindgut to the pectinate line, ending in the cloaca. Then attach the nerve to each: greater splanchnic T5 to T9 for the foregut and epigastric pain, lesser splanchnic T10 to T11 for the midgut and periumbilical pain, least splanchnic T12 for the hindgut and suprapubic pain. That is why appendicitis starts at the umbilicus.",
+      "claims": [
+        {
+          "measure": "theta_deg",
+          "op": "near",
+          "value": 92.114603,
+          "tol": 6,
+          "claim": "the turn is under way at this stage",
+          "id": "B3-THETA-DEG"
+        },
+        {
+          "measure": "hernia_d",
+          "op": "near",
+          "value": 0.433865,
+          "tol": 0.012,
+          "claim": "and the loop is already outside the ring",
+          "id": "B3-HERNIA-D"
+        },
+        {
+          "measure": "duodenal_lumen",
+          "op": "near",
+          "value": 0.018741,
+          "tol": 0.05,
+          "claim": "the duodenal lumen is obliterated around this stage",
+          "id": "B3-DUODENAL-LUMEN"
+        }
+      ]
     },
     {
-      "mode": "associated_organs",
+      "mode": "location",
       "beat": 6,
-      "title": "Where each division fails",
+      "title": "Close up: the liver and pancreas bud off the duodenum",
       "ops": [
         {
-          "op": "SHOW_STRUCTURE",
+          "op": "HIDE_STRUCTURE",
           "target": "*"
         },
         {
+          "op": "SET_STAGE",
+          "t": 0.5
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "duodenum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hepatic"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "panc_dorsal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "panc_ventral"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "papilla"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stomach"
+        },
+        {
           "op": "ISOLATE_REGION",
-          "target": "Clinical"
+          "target": "duodenum"
         },
         {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "foregut_derivs",
-          "to": "oesoph_atresia",
-          "kind": "an incomplete tracheo-oesophageal septum gives"
+          "op": "HIDE_STRUCTURE",
+          "target": "respir"
         },
         {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "recanalization",
-          "to": "duodenal_atresia",
-          "kind": "failing in the duodenum gives"
+          "op": "HIDE_STRUCTURE",
+          "target": "foregut"
         },
         {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "midgut_loop",
-          "to": "malrotation",
-          "kind": "returning without its full turn gives"
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "hepatic",
+          "intensity": 0.9
         },
         {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "tube_layers",
-          "to": "hirschsprung",
-          "kind": "neural crest cells failing to reach the end gives"
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "panc_dorsal",
+          "intensity": 0.9
         },
         {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "cloaca",
-          "to": "imperforate_anus",
-          "kind": "an unruptured membrane or an incomplete septum gives"
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "panc_ventral",
+          "intensity": 0.9
         },
         {
-          "op": "PEEL_LAYER",
-          "layer": "vessel",
-          "direction": "outward"
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
         }
       ],
-      "narration": "Walk down the tube one more time and hang a disease on each step. Foregut septation fails: oesophageal atresia with a fistula, polyhydramnios, a tube that will not pass. Recanalization fails: duodenal atresia, double bubble, think of Down syndrome. Rotation fails: malrotation, and a narrow mesenteric base that lets the midgut twist — bilious vomiting in a neonate is an emergency. Neural crest migration fails: Hirschsprung, always involving the rectum, diagnosed by biopsy. The cloacal end fails: imperforate anus, with a fistula if the lesion is high. One tube, one developmental step each, and the whole paediatric surgical list in order."
+      "narration": "The foregut is the division that grows organs off its own wall, and this is the frame that shows them: the camera is on the duodenum, because all three of these buds leave the tube within a few millimetres of the papilla. The hepatic diverticulum reaches forward and becomes liver and biliary tree. Behind it the dorsal pancreatic bud, and ventrally the smaller bud that swings round to join it — one gland from two buds, which is why an annular pancreas can ring the duodenum. All of them hang off the tube ABOVE the papilla, which is why all of them are foregut, coeliac territory, and epigastric pain. This is also the stage at which the duodenal lumen between them is a solid cord of epithelium, which is the next beat but one.",
+      "claims": [
+        {
+          "measure": "duodenal_lumen",
+          "op": "near",
+          "value": 0.018741,
+          "tol": 0.02,
+          "claim": "the duodenal lumen is obliterated at this instant",
+          "id": "R3-DUODENAL-LUMEN"
+        }
+      ],
+      "region_framed": "ISOLATE_REGION puts viz3d's subjectBox on this region instead of the whole tube; the rest of the scene stays drawn but ghosted, so the close-up keeps its context. Added 2026-10-01 for finding 3 of that day's review, which judged the 21 framing waivers not to hold."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Close up: the respiratory diverticulum",
+      "region_framed": "ISOLATE_REGION puts viz3d's subjectBox on this region instead of the whole tube; the rest of the scene stays drawn but ghosted, so the close-up keeps its context. Added 2026-10-01 for finding 3 of that day's review, which judged the 21 framing waivers not to hold.",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.5
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foregut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "respir"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "respir"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "respir",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Highest of the foregut buds, and the only one that stops being gut. The respiratory diverticulum grows off the ventral wall of the foregut and is then separated from it by the tracheo-oesophageal septum, leaving trachea in front and oesophagus behind. When that septum fails the two stay joined: oesophageal atresia with a tracheo-oesophageal fistula, polyhydramnios because the fetus cannot swallow, and a tube that will not pass. It is the first disease in this scene's list of failures, and this is the structure it happens to.",
+      "claims": [
+        {
+          "measure": "theta_deg",
+          "op": "near",
+          "value": 92.1146,
+          "tol": 4,
+          "claim": "drawn at the stage the midgut is half-turned",
+          "id": "R9-THETA-DEG"
+        }
+      ],
+      "beat_refs": [
+        {
+          "phrase": "the first disease in this scene's list of failures",
+          "means": "the beat that hangs one disease on each division",
+          "resolves_to_beat": 17,
+          "resolves_to_title": "Where each division fails",
+          "was": "'the first disease in the last beat' — WRONG from the 7-beat scene onward; the last beat is the high-ARM close-up, whose only disease is imperforate anus, so a student following the pointer landed on the wrong disease",
+          "verified": "beat 17's narration opens its list with oesophageal atresia, which is this beat's structure"
+        }
+      ],
+      "beat_refs_note": "RECORDED SO A RENUMBER BREAKS A CHECK INSTEAD OF BREAKING A STUDENT. Round-3 finding 2: five of the seven relative beat pointers in this scene's narration were WRONG, because the scene was re-authored from 7 beats to 17 and the pointers were carried verbatim along with the prose. Carrying narration verbatim is the standing rule and is right — but a relative pointer is a REFERENCE, not teaching, and a reference has to be re-resolved when the beats are renumbered. Nothing in the repo could see it. The four wrong ones were rewritten to name the beat by its SUBJECT rather than by a count, so a future insertion cannot falsify them; the two that were already correct use \"the last beat\" to mean the PRECEDING beat and still land. Every one is recorded here against the beat it resolves to."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 8,
+      "title": "Close up: the duodenum is a solid cord",
+      "region_framed": "ISOLATE_REGION on the duodenum, which does two things the player's own code already does: it puts viz3d's subjectBox on the duodenum instead of the whole tube, and it GHOSTS everything not highlighted to 10% opacity (viz3d.js:2409 and :2418). That ghost is how this beat shows an interior WITHOUT CROSS_SECTION. It cannot use CROSS_SECTION: the engine clips only role \"context\" structures, the duodenum is genuinely taught and must not become context, and round 3 ruled out changing the engine. So the wall goes to 10% and the cord inside it is the one highlighted thing at full opacity.",
+      "narration": "The duodenum with its wall dropped back to almost nothing, so that what is inside it can be seen. Between about week five and week eight the lining proliferates until it fills the channel completely and the duodenum is a solid cord of epithelium: the pale core is that cord, and there is no lumen drawn beside it because at this instant there is none to draw. It must recanalize by week eight. When it does not, the duodenum stays obstructed exactly here — duodenal atresia, the double bubble on the film, and the association with Down syndrome. The plug is local to the duodenum, which is the whole of why duodenal atresia is a recanalization failure and jejunal or ileal atresia is not.",
+      "claims": [
+        {
+          "measure": "duodenal_plug",
+          "op": "atLeast",
+          "value": 0.5499,
+          "claim": "the epithelial plug fills the whole inner calibre at this instant — the solid-cord stage",
+          "id": "R11-PLUG-FULL"
+        },
+        {
+          "measure": "duodenal_lumen",
+          "op": "atMost",
+          "value": 1e-9,
+          "claim": "and the channel through it is obliterated, which is why no lumen is drawn",
+          "id": "R11-LUMEN-NIL"
+        },
+        {
+          "measure": "jejunal_lumen",
+          "op": "atLeast",
+          "value": 0.5,
+          "claim": "while the lumen elsewhere in the gut stays patent — the plug is local to the duodenum",
+          "id": "R11-PLUG-LOCAL"
+        }
+      ],
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.52
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "duodenum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "duod_plug"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "papilla"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "duodenum"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "foregut"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "stomach"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "duod_lumen"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "duod_plug",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "The midgut leaves the abdomen and comes back turned",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.568
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "caecum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "appendix"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "vitelline"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "yolksac"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "umbring"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sma"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesentery"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:midgut-rotation",
+          "path": [
+            "midgut",
+            "vitelline",
+            "caecum"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "midgut",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Only the midgut rotates, and only because it runs out of room. It herniates into the cord at about week six, turning ninety degrees anticlockwise around the superior mesenteric artery, and returns by about week ten with a further one hundred and eighty degrees — two hundred and seventy in total, all anticlockwise, viewed from the front. The caecum lands in the right iliac fossa and the mesentery is left attached along a broad oblique line. Both of those facts matter when the failures are listed.",
+      "claims": [
+        {
+          "measure": "hernia_d",
+          "op": "near",
+          "value": 0.456237,
+          "tol": 0.004,
+          "claim": "this is the peak of the physiological hernia, read off the solve",
+          "id": "B4-HERNIA-D"
+        },
+        {
+          "measure": "herniated",
+          "op": "equals",
+          "value": true,
+          "claim": "the loop is outside the abdomen here",
+          "id": "B4-HERNIATED"
+        },
+        {
+          "measure": "theta_deg",
+          "op": "near",
+          "value": 120.839274,
+          "tol": 8,
+          "claim": "the first ninety degrees are done and the second stage is under way",
+          "id": "B4-THETA-DEG"
+        }
+      ],
+      "beat_refs": [
+        {
+          "phrase": "when the failures are listed",
+          "means": "the beat that hangs one disease on each division",
+          "resolves_to_beat": 17,
+          "resolves_to_title": "Where each division fails",
+          "was": "'in the last beat' — WRONG once the scene passed 7 beats",
+          "verified": "beat 17 narrates malrotation and the narrow mesenteric base, which are the two facts this beat asserts"
+        }
+      ],
+      "beat_refs_note": "RECORDED SO A RENUMBER BREAKS A CHECK INSTEAD OF BREAKING A STUDENT. Round-3 finding 2: five of the seven relative beat pointers in this scene's narration were WRONG, because the scene was re-authored from 7 beats to 17 and the pointers were carried verbatim along with the prose. Carrying narration verbatim is the standing rule and is right — but a relative pointer is a REFERENCE, not teaching, and a reference has to be re-resolved when the beats are renumbered. Nothing in the repo could see it. The four wrong ones were rewritten to name the beat by its SUBJECT rather than by a count, so a future insertion cannot falsify them; the two that were already correct use \"the last beat\" to mean the PRECEDING beat and still land. Every one is recorded here against the beat it resolves to."
+    },
+    {
+      "mode": "location",
+      "beat": 10,
+      "title": "Close up: the loop turns on its artery",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.568
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "caecum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "appendix"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "vitelline"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sma"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesentery"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "yolksac"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "umbring"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sma",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "mesentery",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The yolk sac is taken off and the camera is brought in on the loop itself, because the thing the last beat asserted is only checkable here: the axis of the turn is the superior mesenteric artery, running forward through the middle of the loop, and the dorsal mesentery is the sheet hung from it. The cranial limb becomes jejunum and most of the ileum; the caudal limb carries the caecal bud and becomes the rest. Watch which limb the caecum is on — that is what decides where it lands. The instant drawn is the peak of the herniation, which is where the solve puts the loop at its most proud of the wall.",
+      "claims": [
+        {
+          "measure": "herniated",
+          "op": "equals",
+          "value": true,
+          "claim": "the loop is outside the abdomen at this instant",
+          "id": "R4-HERNIATED"
+        },
+        {
+          "measure": "hernia_d",
+          "op": "near",
+          "value": 0.456237,
+          "tol": 0.004,
+          "claim": "this is the peak of the physiological hernia, read off the solve",
+          "id": "R4-HERNIA-D"
+        },
+        {
+          "measure": "fix",
+          "op": "atMost",
+          "value": 0.0001,
+          "claim": "and fixation has not begun, because it waits on the turn completing",
+          "id": "R4-FIX"
+        }
+      ],
+      "region_framed": "FRAMED BY SELECTION, NOT BY ISOLATE_REGION, and that is a correction this run measured rather than guessed. With ISOLATE_REGION on the midgut the player fitted the camera to the loop alone and walk-scene-in-player reported 108 SUBJECT pixels on the frame border — CLIPPED, the loop running off the edge of its own close-up. Hiding the yolk sac and the umbilical ring and letting the camera fit everything that is left puts the artery inside the subject box, which pulls the frame back far enough to hold the whole loop AND is the honest framing for a beat whose subject is the loop together with the artery it turns on.",
+      "beat_refs": [
+        {
+          "phrase": "the thing the last beat asserted",
+          "means": "the PRECEDING beat",
+          "resolves_to_beat": 9,
+          "resolves_to_title": "The midgut leaves the abdomen and comes back turned",
+          "verified": "beat 9 is the beat that asserts the turn is around the superior mesenteric artery"
+        }
+      ],
+      "beat_refs_note": "RECORDED SO A RENUMBER BREAKS A CHECK INSTEAD OF BREAKING A STUDENT. Round-3 finding 2: five of the seven relative beat pointers in this scene's narration were WRONG, because the scene was re-authored from 7 beats to 17 and the pointers were carried verbatim along with the prose. Carrying narration verbatim is the standing rule and is right — but a relative pointer is a REFERENCE, not teaching, and a reference has to be re-resolved when the beats are renumbered. Nothing in the repo could see it. The four wrong ones were rewritten to name the beat by its SUBJECT rather than by a count, so a future insertion cannot falsify them; the two that were already correct use \"the last beat\" to mean the PRECEDING beat and still land. Every one is recorded here against the beat it resolves to."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 11,
+      "title": "Opening the two ends",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.78
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "cloaca"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "urorectal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "anorectal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "urogenital"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "duodenum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "papilla"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "urorectal",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "duodenum",
+          "intensity": 0.7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Cut the embryo in the midline and look at the two ends. The buccopharyngeal membrane ruptures in week four, the cloacal in week seven, and before that rupture the urorectal septum has already split the cloaca into anorectal canal and urogenital sinus. In the middle of the tube, the duodenal lumen is temporarily plugged by proliferating epithelium and must reopen by week eight. Three events, three sets of atresias — and knowing which mechanism belongs to which region is what the question is actually testing.",
+      "claims": [
+        {
+          "measure": "septum_descent",
+          "op": "near",
+          "value": 0.888889,
+          "tol": 0.06,
+          "claim": "the urorectal septum is most of the way down",
+          "id": "B5-SEPTUM-DESCENT"
+        },
+        {
+          "measure": "duodenal_lumen",
+          "op": "near",
+          "value": 0.55,
+          "tol": 0.04,
+          "claim": "and the duodenal lumen has reopened",
+          "id": "B5-DUODENAL-LUMEN"
+        },
+        {
+          "measure": "enteric_front",
+          "op": "near",
+          "value": 0.851282,
+          "tol": 0.03,
+          "claim": "the crest front has not yet reached the rectum",
+          "id": "B5-ENTERIC-FRONT"
+        },
+        {
+          "measure": "duodenal_plug",
+          "op": "atMost",
+          "value": 1e-9,
+          "claim": "and the solid cord of epithelium has gone, which is what duodenal atresia fails to do",
+          "id": "B5-PLUG-GONE"
+        }
+      ],
+      "beat_refs": [
+        {
+          "phrase": "the duodenal lumen is temporarily plugged by proliferating epithelium and must reopen by week eight",
+          "means": "a TIMELINE statement, not an assertion about the instant drawn: the plugged stage has its own beat",
+          "resolves_to_beat": 8,
+          "resolves_to_title": "Close up: the duodenum is a solid cord",
+          "verified": "this beat sits at t = 0.78 where the model's lumen is 0.550 and its plug 0.000, and it now carries claims for BOTH halves of the sentence — B5-DUODENAL-LUMEN that the channel has reopened and B5-PLUG-GONE that the cord has gone. Round 3 flagged the sentence as reading like an assertion about the picture because the duodenum is highlighted here; the picture of the cord is beat 8, and the words were deliberately not rewritten"
+        }
+      ],
+      "beat_refs_note": "RECORDED SO A RENUMBER BREAKS A CHECK INSTEAD OF BREAKING A STUDENT. Round-3 finding 2: five of the seven relative beat pointers in this scene's narration were WRONG, because the scene was re-authored from 7 beats to 17 and the pointers were carried verbatim along with the prose. Carrying narration verbatim is the standing rule and is right — but a relative pointer is a REFERENCE, not teaching, and a reference has to be re-resolved when the beats are renumbered. Nothing in the repo could see it. The four wrong ones were rewritten to name the beat by its SUBJECT rather than by a count, so a future insertion cannot falsify them; the two that were already correct use \"the last beat\" to mean the PRECEDING beat and still land. Every one is recorded here against the beat it resolves to."
+    },
+    {
+      "mode": "location",
+      "beat": 12,
+      "title": "Close up: the cloaca and its partition",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 0.78
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "urorectal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "anorectal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "urogenital"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Hindgut"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "cloaca"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "urorectal",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The caudal end with the chamber wall taken off, because the septum and the two channels it makes are INSIDE the cloaca and no camera can see them through it. The urorectal septum comes down through the cloaca and divides one chamber into two: the anorectal canal behind, the urogenital sinus in front. Dorsal is the gut, ventral is the bladder and urethra. If the septum stops short the two stay joined, and that is a fistula — which is why a high anorectal malformation is a plumbing problem between two systems and not simply a blocked anus.",
+      "claims": [
+        {
+          "measure": "septum_descent",
+          "op": "near",
+          "value": 0.888889,
+          "tol": 0.06,
+          "claim": "the septum is most of the way down at this instant",
+          "id": "R5-SEPTUM-DESCENT"
+        }
+      ],
+      "region_framed": "ISOLATE_REGION puts viz3d's subjectBox on this region instead of the whole tube; the rest of the scene stays drawn but ghosted, so the close-up keeps its context. Added 2026-10-01 for finding 3 of that day's review, which judged the 21 framing waivers not to hold."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 13,
+      "title": "The gut comes to rest: the colon frames the small bowel",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "caecum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "appendix"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "watershed"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "papilla"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sma"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesentery"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "caecum",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "watershed",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The turn is not the end of the story. Once the loop is back inside, the colon lengthens and is pressed against the posterior wall: the caecum descends into the right iliac fossa, the ascending colon runs up the right gutter, the transverse crosses, the descending runs down the left, and the jejunum and ileum coil inside that frame. Look at where the two boundaries have ended up. The major duodenal papilla is still where it always was, high and on the RIGHT, in the second part of the duodenum — it is the duodenojejunal flexure that crosses to the left, which is the pair of facts the C-shaped duodenum exists to hold apart; the watershed has been carried two thirds of the way along the transverse colon, which is why the transverse colon is the one segment of gut with two blood supplies and the one place an aortic occlusion is survivable.",
+      "claims": [
+        {
+          "measure": "midgut_flat_ratio",
+          "op": "atLeast",
+          "value": 0.9,
+          "claim": "the midgut is no longer a flat pinwheel: its cranio-caudal extent is comparable to its width",
+          "id": "B6-MIDGUT-FLAT-RATIO"
+        },
+        {
+          "measure": "watershed_across",
+          "op": "near",
+          "value": 0.6666666666666666,
+          "tol": 0.000001,
+          "claim": "the watershed sits two thirds along the transverse limb",
+          "id": "B6-WATERSHED-ACROSS"
+        },
+        {
+          "measure": "colon_elongation",
+          "op": "atLeast",
+          "value": 1.15,
+          "claim": "the colon has lengthened onto the frame rather than been shrunk onto it",
+          "id": "B6-COLON-ELONGATION"
+        },
+        {
+          "measure": "fix",
+          "op": "near",
+          "value": 1,
+          "tol": 0.08,
+          "claim": "fixation is complete at this stage",
+          "id": "B6-FIX"
+        },
+        {
+          "measure": "herniated",
+          "op": "equals",
+          "value": false,
+          "claim": "and the hernia has reduced",
+          "id": "B6-HERNIATED"
+        },
+        {
+          "measure": "papilla.x",
+          "op": "atMost",
+          "value": -0.05,
+          "claim": "the major duodenal papilla is right of the midline",
+          "id": "B6-PAPILLA-RIGHT"
+        },
+        {
+          "measure": "dj.x",
+          "op": "atLeast",
+          "value": 0.12,
+          "claim": "and the duodenojejunal flexure is left of it",
+          "id": "B6-DJ-LEFT"
+        }
+      ],
+      "negative_displacement": 0.06
+    },
+    {
+      "mode": "location",
+      "beat": 14,
+      "title": "Close up: where the two boundaries ended up",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "papilla"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "watershed"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "duodenum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "duodenum"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "caecum"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "appendix"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "papilla",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "watershed",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The same two beads, at rest. The papilla has stayed on the embryo’s right, high, in the descending part of the duodenum; the duodenum itself makes its C around the head of the pancreas and only crosses to the left at the duodenojejunal flexure. The watershed has been carried two thirds of the way along the transverse colon. Those are the two positions worth being able to point to on a drawing, and they are the positions the rotation and fixation actually left them in rather than the ones a diagram would be tidier for.",
+      "claims": [
+        {
+          "measure": "papilla.x",
+          "op": "atMost",
+          "value": -0.05,
+          "claim": "the papilla is right of the midline",
+          "id": "R6-PAPILLA-RIGHT"
+        },
+        {
+          "measure": "duodenum.x_hi",
+          "op": "atLeast",
+          "value": 0.12,
+          "claim": "while the duodenum reaches across to the left at its far end",
+          "id": "R6-DUOD-LEFT"
+        },
+        {
+          "measure": "watershed_across",
+          "op": "near",
+          "value": 0.6666666666666666,
+          "tol": 0.000001,
+          "claim": "and the watershed sits two thirds along the transverse limb",
+          "id": "R6-WATERSHED"
+        },
+        {
+          "measure": "fix",
+          "op": "near",
+          "value": 1,
+          "tol": 0.08,
+          "claim": "fixation is complete at the stage drawn here",
+          "id": "R6-FIX"
+        }
+      ],
+      "region_framed": "ISOLATE_REGION puts viz3d's subjectBox on this region instead of the whole tube; the rest of the scene stays drawn but ghosted, so the close-up keeps its context. Added 2026-10-01 for finding 3 of that day's review, which judged the 21 framing waivers not to hold."
+    },
+    {
+      "mode": "location",
+      "beat": 15,
+      "title": "Close up: the caecum in the right iliac fossa",
+      "region_framed": "ISOLATE_REGION puts viz3d's subjectBox on this region instead of the whole tube; the rest of the scene stays drawn but ghosted, so the close-up keeps its context. Added 2026-10-01 for finding 3 of that day's review, which judged the 21 framing waivers not to hold.",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "caecum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "appendix"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "caecum"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "yolksac"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "vitelline"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "mesentery"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "watershed"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "caecum",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "appendix",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Where the turn put the caecum, and what it brought with it. The caecal bud sat on the caudal limb of the loop, so two hundred and seventy degrees anticlockwise carries it from the left, up over the top, and down into the right iliac fossa — and the appendix is the narrow diverticulum coming off it. That is the whole of why appendicitis is a right iliac fossa diagnosis, and why a malrotated gut can present with appendicitis in the wrong place entirely. The arrangement drawn is the one fixation has finished with.",
+      "claims": [
+        {
+          "measure": "caecum.x",
+          "op": "atMost",
+          "value": -0.12,
+          "claim": "the caecum has ended up on the embryo’s right",
+          "id": "R10-CAECUM-RIGHT"
+        },
+        {
+          "measure": "caecum.y",
+          "op": "atMost",
+          "value": -0.3,
+          "claim": "and low, in the iliac fossa rather than under the liver",
+          "id": "R10-CAECUM-LOW"
+        },
+        {
+          "measure": "fix",
+          "op": "near",
+          "value": 1,
+          "tol": 0.08,
+          "claim": "fixation is complete at the stage drawn here",
+          "id": "R10-FIX"
+        }
+      ]
+    },
+    {
+      "mode": "location",
+      "beat": 16,
+      "title": "Close up: the normal crest front, and why the rectum is last",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foregut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "enteric"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Innervation"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "var_hirschsprung"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "enteric",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "This is the normal case the list of failures needs you to have seen. Neural crest cells enter at the head end and colonise the tube from the top down, so the sleeve you are looking at reaches all the way to the end only at the very finish. The rectum is the last few millimetres to be reached, which is the whole reason Hirschsprung always involves the rectum and why the biopsy is taken there: the segment that fails is the segment that was colonised last.",
+      "claims": [
+        {
+          "measure": "enteric_front",
+          "op": "near",
+          "value": 1,
+          "tol": 0.0002,
+          "claim": "the front reaches the very end of the tube only at the very finish, which is why the rectum is the segment at risk",
+          "id": "R7-ENTERIC-FRONT"
+        }
+      ],
+      "region_framed": "ISOLATE_REGION puts viz3d's subjectBox on this region instead of the whole tube; the rest of the scene stays drawn but ghosted, so the close-up keeps its context. Added 2026-10-01 for finding 3 of that day's review, which judged the 21 framing waivers not to hold.",
+      "beat_refs": [
+        {
+          "phrase": "the list of failures",
+          "means": "the beat that hangs one disease on each division",
+          "resolves_to_beat": 17,
+          "resolves_to_title": "Where each division fails",
+          "was": "'the last beat' — WRONG once the scene passed 7 beats",
+          "verified": "beat 17 draws var_hirschsprung, which is the contrast this beat's normal crest front exists for"
+        }
+      ],
+      "beat_refs_note": "RECORDED SO A RENUMBER BREAKS A CHECK INSTEAD OF BREAKING A STUDENT. Round-3 finding 2: five of the seven relative beat pointers in this scene's narration were WRONG, because the scene was re-authored from 7 beats to 17 and the pointers were carried verbatim along with the prose. Carrying narration verbatim is the standing rule and is right — but a relative pointer is a REFERENCE, not teaching, and a reference has to be re-resolved when the beats are renumbered. Nothing in the repo could see it. The four wrong ones were rewritten to name the beat by its SUBJECT rather than by a count, so a future insertion cannot falsify them; the two that were already correct use \"the last beat\" to mean the PRECEDING beat and still land. Every one is recorded here against the beat it resolves to."
+    },
+    {
+      "mode": "comparison",
+      "beat": 17,
+      "title": "Where each division fails",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "var_malrotation"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "var_highARM"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "var_hirschsprung"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "caecum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sma"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "respir"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "duodenum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "papilla"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "enteric"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "var_malrotation",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "var_hirschsprung",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "var_highARM",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Walk down the tube one more time and hang a disease on each step. Foregut septation fails: oesophageal atresia with a fistula, polyhydramnios, a tube that will not pass. Recanalization fails: duodenal atresia, double bubble, think of Down syndrome. Rotation fails: malrotation, and a narrow mesenteric base that lets the midgut twist — bilious vomiting in a neonate is an emergency. Neural crest migration fails: Hirschsprung, always involving the rectum, diagnosed by biopsy. The cloacal end fails: imperforate anus, with a fistula if the lesion is high. One tube, one developmental step each, and the whole paediatric surgical list in order.",
+      "claims": [
+        {
+          "measure": "midgut_flat_ratio",
+          "op": "atLeast",
+          "value": 0.9,
+          "claim": "the normal case is the fixed arrangement",
+          "id": "B7-MIDGUT-FLAT-RATIO"
+        },
+        {
+          "measure": "enteric_front",
+          "op": "atLeast",
+          "value": 0.999,
+          "claim": "and in the normal case the crest front has reached the rectum",
+          "id": "B7-ENTERIC-FRONT"
+        },
+        {
+          "measure": "septum_descent",
+          "op": "equals",
+          "value": 1,
+          "claim": "and the urorectal septum has reached the cloacal membrane",
+          "id": "B7-SEPTUM-DESCENT"
+        },
+        {
+          "measure": "duodenal_lumen",
+          "op": "atLeast",
+          "value": 0.5,
+          "claim": "the normal duodenal lumen is patent by this stage, which is what duodenal atresia fails to reach",
+          "id": "B7-DUODENAL-LUMEN"
+        }
+      ],
+      "negative_displacement": 0.06
+    },
+    {
+      "mode": "location",
+      "beat": 18,
+      "title": "Close up: the high anorectal malformation",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SET_STAGE",
+          "t": 1
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "var_highARM"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "anorectal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "urogenital"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "var_highARM"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "cloaca"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "urorectal"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "var_highARM",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The variant on its own, because at the scale of the whole gut it is a few millimetres of septum and cannot be seen. The septum has stopped short of the cloacal membrane, so the anorectal canal and the urogenital sinus are still one chamber where they should have been two. High lesion, fistula, and a neonate who needs imaging before anyone operates — against the normal partition in the cloaca close-up, which is the comparison this picture is for. It is drawn at the end of the period, when the normal partition would long since have been complete.",
+      "claims": [
+        {
+          "measure": "septum_descent",
+          "op": "equals",
+          "value": 1,
+          "claim": "the normal septum has completed its descent by this stage, which is what this variant does not do",
+          "id": "R8-SEPTUM-DESCENT"
+        },
+        {
+          "measure": "fix",
+          "op": "near",
+          "value": 1,
+          "tol": 0.08,
+          "claim": "fixation is complete at the stage drawn here",
+          "id": "R8-FIX"
+        }
+      ],
+      "region_framed": "ISOLATE_REGION puts viz3d's subjectBox on this region instead of the whole tube; the rest of the scene stays drawn but ghosted, so the close-up keeps its context. Added 2026-10-01 for finding 3 of that day's review, which judged the 21 framing waivers not to hold.",
+      "beat_refs": [
+        {
+          "phrase": "the normal partition in the cloaca close-up",
+          "means": "the beat that shows the septum dividing the chamber normally",
+          "resolves_to_beat": 12,
+          "resolves_to_title": "Close up: the cloaca and its partition",
+          "was": "'two beats back' — WRONG; the normal partition is SIX beats back, and two back is the crest front",
+          "verified": "beat 12 shows urorectal, anorectal and urogenital at t = 0.78 with the chamber wall hidden"
+        }
+      ],
+      "beat_refs_note": "RECORDED SO A RENUMBER BREAKS A CHECK INSTEAD OF BREAKING A STUDENT. Round-3 finding 2: five of the seven relative beat pointers in this scene's narration were WRONG, because the scene was re-authored from 7 beats to 17 and the pointers were carried verbatim along with the prose. Carrying narration verbatim is the standing rule and is right — but a relative pointer is a REFERENCE, not teaching, and a reference has to be re-resolved when the beats are renumbered. Nothing in the repo could see it. The four wrong ones were rewritten to name the beat by its SUBJECT rather than by a count, so a future insertion cannot falsify them; the two that were already correct use \"the last beat\" to mean the PRECEDING beat and still land. Every one is recorded here against the beat it resolves to."
+    }
+  ],
+  "deferred_beats": [
+    {
+      "from_beat": "tube_forms",
+      "title": "One tube, made by folding",
+      "narration": "The primitive gut is not a new organ. It is the roof of the yolk sac, rolled into a tube by the head, tail and lateral folds during week four. Hold that in mind and the whole gut becomes one tube that was cut into three by its blood supply.",
+      "terms": [
+        "primitive gut tube",
+        "endoderm rolled into a tube",
+        "cranio-caudal folding",
+        "lateral folding",
+        "week 4",
+        "flat sheet becomes a tube",
+        "incorporated yolk sac"
+      ],
+      "why_not_a_view": "The folding that makes the tube is the subject of lateral-folding and cranio-caudal-folding, which model it. This model begins with the tube already closed, so a beat here would draw the same frame as beat 1 and teach it worse than the scenes that own it."
+    },
+    {
+      "from_beat": "tube_layers",
+      "title": "Endoderm lines it, splanchnic mesoderm builds it",
+      "narration": "Two germ layers build the gut and it is worth being exact about which does what. Endoderm gives only the epithelial lining and the glands that bud from it. Splanchnic mesoderm gives the muscle, the connective tissue and the visceral peritoneum. The nerve cells come from neither — neural crest cells migrate in to form the enteric plexuses, and when they fail to arrive you get Hirschsprung disease.",
+      "terms": [
+        "endoderm",
+        "epithelial lining",
+        "glands",
+        "splanchnic mesoderm",
+        "visceral mesoderm",
+        "smooth muscle",
+        "connective tissue",
+        "visceral peritoneum",
+        "neural crest",
+        "enteric nervous system",
+        "myenteric plexus",
+        "Auerbach plexus",
+        "Meissner plexus"
+      ],
+      "why_not_a_view": "This model carries no wall layers — it is a lumen and a calibre, not an endoderm and a splanchnic mesoderm. Drawing a beat for layers it does not build would be a caption over an unchanged picture."
+    },
+    {
+      "from_beat": "midgut_loop",
+      "title": "The midgut loop, its hernia and its turn",
+      "narration": "Only the midgut does something dramatic. Around week six the loop outgrows the abdomen and herniates into the umbilical cord, rotating ninety degrees anticlockwise around the superior mesenteric artery on the way out. It returns by about week ten, rotating a further one hundred and eighty degrees, so the total is two hundred and seventy degrees anticlockwise. That rotation is what carries the caecum to the right iliac fossa and lays the duodenum and the ascending and descending colon against the back wall.",
+      "terms": [
+        "midgut loop",
+        "vitelline duct",
+        "apex of the loop",
+        "cranial limb",
+        "caudal limb",
+        "caecal bud",
+        "physiological herniation",
+        "week 6",
+        "umbilical ring",
+        "270 degrees anticlockwise",
+        "counterclockwise",
+        "superior mesenteric artery is the axis",
+        "week 10",
+        "retroperitoneal fixation"
+      ],
+      "why_not_a_view": "Split across beats 4 and 5, which draw the hernia at its measured peak and the fixed arrangement at t = 1. The words are carried on those two views rather than here."
+    },
+    {
+      "from_beat": "oesoph_atresia",
+      "title": "Oesophageal atresia and tracheo-oesophageal fistula",
+      "narration": "The respiratory diverticulum buds off the foregut and is separated from it by the tracheo-oesophageal septum. When that septum forms incompletely the oesophagus ends blind and usually communicates with the trachea below — the common variant is a proximal blind pouch with a distal fistula. Suspect it before birth from polyhydramnios, because the fetus cannot swallow amniotic fluid, and after birth when a nasogastric tube will not pass and the first feed causes choking. Look for the rest of the VACTERL group.",
+      "terms": [
+        "oesophageal atresia",
+        "esophageal atresia",
+        "tracheo-oesophageal fistula",
+        "TOF",
+        "tracheo-oesophageal septum",
+        "respiratory diverticulum",
+        "proximal blind pouch",
+        "distal fistula",
+        "commonest type",
+        "polyhydramnios",
+        "cannot pass nasogastric tube",
+        "frothing at the mouth",
+        "choking on first feed",
+        "VACTERL"
+      ],
+      "why_not_a_view": "The respiratory diverticulum is built, but the tracheo-oesophageal septum that fails in this lesion is tracheoesophageal-septum’s own queue item and is not modelled here. A beat would be a caption over the normal foregut."
+    },
+    {
+      "from_beat": "duodenal_atresia",
+      "title": "Duodenal atresia — the double bubble",
+      "narration": "Duodenal atresia is the recanalization failure, and it is the one tied to Down syndrome. The plain film shows a double bubble — stomach and proximal duodenum both distended, nothing beyond. The vomiting is bilious because the obstruction is usually distal to the major duodenal papilla. Annular pancreas, where the ventral bud encircles the duodenum, produces the same picture from outside.",
+      "terms": [
+        "duodenal atresia",
+        "failure of recanalization",
+        "double bubble sign",
+        "bilious vomiting",
+        "distal to the papilla",
+        "polyhydramnios",
+        "Down syndrome",
+        "trisomy 21",
+        "annular pancreas",
+        "ventral pancreatic bud"
+      ],
+      "why_not_a_view": "Carried onto the duodenum structure and beat 5, where the lumen measurably closes and reopens. A separate beat would redraw beat 5’s frame."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-28"
+    "authored_at": "2026-08-28",
+    "reauthored_at": "2026-10-01",
+    "reauthored_by": "model3d BUILD task, 2026-10-01 14:05Z slot",
+    "reauthored_note": "Converted from mode \"sequence\"/provider \"svg\" to \"3d_anatomy\"/\"procedural\" against models3d/primitive-gut-tube.js. The 18 teaching regions of the sequence scene were not anatomical parts; the structures below are the parts the model actually builds, and every word of the old narration is carried verbatim — onto the structure that replaces it where one exists (see each structure's carried_from), onto a view where the beat survived, and into deferred_beats[] with a reason where neither does. Nothing was rewritten or dropped.",
+    "corrected_at": "2026-10-01T19:50:00Z",
+    "corrected_by": "the model3d review task, 2026-10-01 17:35Z slot ; then the model3d BUILD task, 2026-10-01 18:05Z slot (round-3 rework) ; then the model3d REVIEW task, 2026-10-01 19:35Z slot (round 4)",
+    "corrections": [
+      "beat 3 (\"What each division becomes\") was committed at 15:04:14Z showing 7 structures, but the build run's own proof artifact models-out/primitive-gut-tube/scene-refs.json, written 14:55:21Z, records it with 13 — hepatic, panc_dorsal, panc_ventral, respir, papilla and watershed were present and resolved ok=true at t=0.5 when the scene was PROVED and absent from the scene that was COMMITTED. Its narration says \"with the liver, gallbladder, pancreas and the lung bud all budding off it\" and \"Foregut to the papilla ... Midgut to two thirds along the transverse colon\", so the committed beat named six structures the student could not see. Restored by this review in the order the proof run resolved them; re-proved after restoring. The build run's read-back (built_notes item 4) compared SHAs and so confirmed the bytes landed, not that the proofs had been run against those bytes.",
+      "beat 10's CROSS_SECTION was written {\"axis\":\"x\",\"at\":0.5}. viz3d.js:1912 reads o.offset, not o.at, so the plane position was silently discarded and defaulted to 0. All 151 other CROSS_SECTION ops in the corpus use `offset`; this was the only `at`. Rewritten as {\"axis\":\"x\",\"offset\":0}, which is the midline the narration asks for and is byte-for-byte the plane the player was already using, so the rendered picture does not change. THIS DOES NOT MAKE THE BEAT CUT ANYTHING - see the review's finding 1: viz3d clips only structures whose role is 'context' (clippingPlanes set when !isTaught(s)), and all seven structures beat 10 shows are role 'part'. The op is now correct and still cuts nothing.",
+      "ROUND-3 REWORK, 2026-10-01 18:05Z slot. (a) THE BEAT COUNT WENT 17 -> 18: a region-framed close-up of the solid-cord duodenum was inserted at position 8, so every beat from the old 8 onward moved up by one. Every `beat` field, every visibility_waiver `view` index and every beat number quoted in a waiver's text was renumbered with it. THE EARLIER ENTRIES IN THIS LIST WERE NOT RENUMBERED, on purpose: they are a record of what an earlier run did to the 17-beat scene and rewriting them would falsify the record. Read 'beat 3' and 'beat 10' in the entries above as the 17-beat numbering, where beat 10 is the midline-section beat now numbered 11. (b) cloaca's role became \"context\" so the midline section actually cuts — see its role_note. (c) four relative beat pointers in narration were re-resolved and all seven are now recorded in each view's beat_refs.",
+      "ROUND-4 REVIEW, 2026-10-01 19:35Z slot. THE MODEL DECLARES A TEACHING COLOUR KEY AND THE PLAYER WAS THROWING ALL OF IT AWAY. Every one of the 34 structures now carries the colour the model already declares for the part its ref resolves to (models3d/primitive-gut-tube.js LAYERS, copied verbatim). ROOT CAUSE, read out of the player: viz3d.js:604 sets a mesh material from s.color, THEN the model palette, THEN the neutral #c9c3d8 — its own comment says 'Colour follows the scene, then the model's own palette, then a neutral'. But restyle, which runs on EVERY beat, is viz3d.js:2427 `m.material.color.copy(srgbColor(isSel ? glow : s.color, '#c9c3d8'))`, and that path knows nothing about the model palette. With no s.color it repainted every structure #c9c3d8 the instant any view was applied, discarding the palette line 604 had correctly installed. This is the ONLY scene in the corpus whose structures carry no color (checked against body-cavity-coelom and heart-external, which both do), so it is the only one that ever reached that fallback. MEASURED, in the real player via walk-scene-in-player, before and after, on the same bytes: beat 1 median saturation 0.083 -> 0.545 and occupied 30-degree hue bins 2 -> 5; beat 2 (three arteries) 0.083 -> 0.711 and 2 -> 6; beat 4 (the two boundary beads) 0.145 -> 0.927. Before the fix every pixel of every beat lay in two adjacent violet bins. WHAT A STUDENT COULD NOT SEE: beat 1 drew foregut, midgut and hindgut as one uniform tube, so 'one tube, three divisions' had no three; beat 2 drew the aorta and all three arteries in the same colour as the gut they supply; beat 4, whose narration calls the two beads 'the two sentences to memorise verbatim', drew both in the same lilac as each other. The model was right the whole time and every acceptance row was green, because the battery measures the model and this defect lives between the model and the screen. NOT FIXED IN THE ENGINE ON PURPOSE: changing viz3d.js:2427 to fall through to the model palette would re-grade all 146 scenes, and the scene-local fix is also what every other scene in the corpus already does.",
+      "ROUND-4 REVIEW, same slot. duod_lumen and duod_plug carried NO group, and viz3d.js:1720 only emits a heading when p.group is truthy and differs from the last, so an ungrouped structure inherits the preceding heading. Both are last in structures[], immediately after the three var_* entries whose group is Clinical — so the student's parts list presented the duodenal lumen and the normal proliferating epithelium as clinical variants alongside malrotation, high ARM and Hirschsprung. Both now carry group Foregut, which is the duodenum's group. Found by the review, not by any tool: nothing in the repo checks that a structure has a group."
+    ],
+    "reworked_at": "2026-10-01T16:40:06Z",
+    "reworked_by": "model3d BUILD task, 2026-10-01 16:05Z slot — rework round 2, findings 1-4 of the 15:35Z review",
+    "rework": [
+      "FINDING 2 (geometry): the duodenal C is re-derived — see models3d/primitive-gut-tube.js duodStations(). Papilla now on the embryo’s RIGHT at x = -0.098 on mesh vertices, DJ flexure LEFT at +0.271, the duodenum crossing [-0.237, +0.320]. Acceptance rows PAP-R and DUOD-C added, plus harness rows mesh/papilla-on-right, mesh/duodenal-C-crosses-midline and mesh/papilla-on-the-duodenum. Beat 12’s narration was corrected ONLY after that, and carries claims B6-PAPILLA-RIGHT and B6-DJ-LEFT so the words are now held to the geometry.",
+      "FINDINGS 1 and 3 (visibility): eight region-framed beats added, each ISOLATE_REGION on the region it teaches, so viz3d’s subjectBox frames the close-up while the rest of the scene stays drawn and ghosted. 9 of 17 beats now pass measure-scene-visibility unwaived, where 0 of 7 did. 18 waivers remain, 6 of them __framing__ on beats whose subject genuinely is the whole tube, and EVERY ONE names the beat that shows the structure adequately.",
+      "FINDING 3, the part that was not a framing problem at all: three structures were drawn INSIDE other structures and could not be seen from any camera at any framing — both boundary beads (radius 0.050 and 0.048 on a tube of radius 0.055), the caecum (a blob inside its own radiusAt swelling) and the appendix (drawn along the ascending colon’s axis, i.e. up the inside of it). Fixed in the model, not in the camera.",
+      "FINDING 4: beat 16 now shows respir and duodenum; beat 15 shows the normal enteric front, so var_hirschsprung has its normal twin in the scene and check-scene-refs no longer SKIPs the pair."
+    ]
   },
   "gaps": [
-    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence, then diagram, then 3d_anatomy, so both are recorded in deferred_modes. The 3d option is genuine — a tube that herniates, rotates 270 degrees and fixes to the posterior wall is a spatial subject that a flat drawing serves badly — and this scene should be re-authored as 3d_anatomy the day a provider holds staged embryonic gut geometry. It is deferred because no such model exists in the catalog today, not because the subject is flat.",
-    "Status is 'planned'. Eighteen regions, six beats, ops and narration complete, but no SVG artwork exists, so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a median-section side view of the week-4 embryo with the whole gut tube drawn as one continuous lumen from buccopharyngeal to cloacal membrane, the yolk sac and vitelline duct attached at the midgut apex; the same view repeated with the three arteries drawn in and the two boundaries marked at the major duodenal papilla and the transverse colon; a derivatives panel listing foregut, midgut and hindgut structures in three colour-coded columns; a four-stage anterior rotation sequence showing the midgut loop herniating, turning 90 degrees, returning and turning a further 180 degrees, with the superior mesenteric artery drawn as the axis in every stage; a midline enlargement of the cloaca being partitioned by the urorectal septum; and a final tube diagram with the six malformations pinned at the level each arises.",
-    "The three divisions must carry ONE colour key across every panel — foregut, midgut and hindgut the same colour in the derivatives table, the rotation sequence and the malformation map. The teaching point of the whole scene is that arterial territory, derivative list, referred pain level and malformation all belong to the same three blocks, and re-colouring between panels destroys exactly that.",
-    "The rotation sequence must state its viewpoint on the drawing. Anticlockwise is only anticlockwise when viewed from the front, and a sequence drawn without that label is the single commonest way students learn the direction backwards.",
-    "Beats 3 and 4 trace concept:gut-tube and concept:midgut-rotation. In each the subject is a lumen or a movement rather than a drawn object, so neither can be a region.",
-    "Beat 6 authors PEEL_LAYER on the vessel layer to take the arteries off the final map. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because the arteries are needed to define the divisions in beat 2 and then get in the way when the malformations are pinned on.",
-    "'Lateral folding' and 'Cranio-caudal folding' are NOT claimed in covers[]. Both are named in beat 1 because they are what makes the tube, but each has its own scene and this one draws the finished tube rather than the folding.",
-    "'Body cavity (coelom)' is NOT claimed. The dorsal mesentery and retroperitoneal fixation are named as consequences of rotation, but the partitioning of the coelom, the pleuroperitoneal membranes and the mesenteries in detail belong to that entry.",
-    "Foregut, midgut and hindgut organ development in detail — stomach rotation, the two pancreatic buds fusing, the liver's ductal plate, spleen development — is named here only far enough to place each organ in its division. Those belong to the GIT Development topic and appear here in match.terms only, so a highlighted term still reaches this scene until those exist.",
-    "The pectinate line is named as the hindgut's caudal limit and as a germ-layer boundary, but its consequences for venous drainage, lymphatics and the difference between internal and external haemorrhoids are gross anatomy and are taught in the Pelvis & Perineum scenes.",
-    "Week and day numbers are the standard teaching approximations — folding through week 4, herniation from about week 6, return by about week 10, recanalization by about week 8. Texts differ by several days and the narration gives them as approximations.",
-    "Vertebral levels for the three arteries (T12, L1, L3) are the conventional teaching values and vary between individuals; they are given because they are what is examined.",
-    "The malformations are named with their embryological mechanism and their classic presentation only. Operative management is surgery, not embryology, and is deliberately absent."
+    "PRESCRIBED, NOT SOLVED — the rotation SCHEDULE. theta(t) buys the first 90 degrees over the first third of the herniation window and the remaining 180 over the rest. The total (270) and every CONSEQUENCE of the turn are measured — acceptance rows ROT-TOTAL, ROT-SENSE, CAEC-R and DJ-L — but when each third happens is written down, not derived.",
+    "PRESCRIBED, NOT SOLVED — the cavity levels the fixed gut is arranged against: the transverse colon's level (Y_TRANS = +0.16), the level the caecum comes to rest at (Y_ILIAC = -0.52), the depth the colon lies at against the posterior wall and the depth of the jejunoileal mass ventral to it, and the number of jejunoileal coils (3). The caecum's SIDE is the turn's own consequence and is read off the rotated course; only its LEVEL is prescribed, because the descent of the caecum from its subhepatic position is a separate event this model does not carry.",
+    "PRESCRIBED — that the two paracolic gutters are SYMMETRIC about the midline. That is what makes the descending colon's position follow from the caecum's rather than being a second free number.",
+    "AN INPUT, NOT A MEASUREMENT — that the midgut/hindgut watershed lies TWO THIRDS along the transverse colon. The two colonic flexure stations are SOLVED from that convention plus the statement that the ascending and descending limbs carry equal arc, so acceptance row WATERSHED-ON-TRANSVERSE checks the construction and not the anatomy. Row COLON-LIMBS-FEASIBLE is the half that CAN fail on the geometry: the closed form needs the caecum-to-watershed stretch to be between a half and two thirds of the colon's arc, and it measures 0.570.",
+    "FIXATION IS PRESCRIBED AND GATED, not derived. It is zero until the turn completes and zero for ever in the malrotation variant. That gate is the honest form of the clinical claim — an incomplete turn does not present the segments to the posterior wall, so fixation does not follow — but the causal link is declared, not proved. The mesenteric root's LENGTH is measured on the built line at both ends; the link from rotation angle to a broad base is not, and cannot be in this parameterisation, because a rigid rotation preserves distances (acceptance row ROT-RIGID).",
+    "THE DUODENAL C IS NOW DERIVED, AND THIS GAP USED TO SAY SOMETHING ELSE. Until 2026-10-01 this entry described the duodenal and gastric sweep occluding the abdominal arrangement from the anterior camera and called it a framing problem worked around by hiding the foregut. The review found the real fault underneath it: fixation handed every station from the papilla to the caecum to the jejunoileal coil, whose first point is pinned beside the SPLENIC FLEXURE, so the major duodenal papilla was carried to the embryo’s LEFT and the scene’s narration had been written to agree with the wrong picture. The duodenum now has its own fixation target (duodStations) and the papilla measures -0.098 on mesh vertices, the DJ flexure +0.271. WHAT IS PRESCRIBED IN THE NEW TARGET, and it is two things: that the C lies in the frontal plane against the posterior wall at Z_COLON, and the shape of the curve itself (a quadratic Bezier). WHAT IS DERIVED: its depth to the right, from the pancreatic head’s own radius plus the gut’s, because the duodenum lies against the head; its turning level, from the superior mesenteric artery’s level, because the SMA crosses the third part; and the papilla’s position on it, from its own arc fraction. Rows PAP-R, DUOD-C and mesh/papilla-on-right measure the result.",
+    "ASSUMED — organ-level form inside each division. The stomach is a fusiform dilatation and not a modelled stomach; the liver, the two pancreatic buds and the respiratory diverticulum are buds, not organs. Each has its own curriculum entry. The stomach's own 90-degree rotation is NOT modelled; what the model carries is its lateral displacement to the left.",
+    "ASSUMED — the vertebral levels T12, L1 and L3 that the narration attaches to the three arteries. There is no vertebra in this model to anchor them to, so they are labels, not geometry.",
+    "ASSUMED — the cloacal partition's timetable (the septum descends between t = 0.46 and t = 0.82) and the enteric front's (it enters at t = 0.22 and reaches s = 1 at t = 0.96). Both are monotone by construction, which is what makes 'Hirschsprung always involves the rectum' a consequence rather than a fact to memorise; neither rate is derived.",
+    "NOT ANATOMICAL MILLIMETRES. The model is in its own units and its drawn tube is much shorter, relative to the embryo block it sits in, than a real gut is: the midgut's drawn arc at t = 1 is 1.826 units while the model's own notional length budget mgLen(1), which the hernia solve uses, is 2.34. Those two numbers disagree and nothing reconciles them. It is why the colon has to LENGTHEN by a factor of 2.01 onto its frame rather than being laid along it at its own length.",
+    "THE BODY WALL IS A FRAME, NOT A WALL. Closure of the ventral body wall is lateral-folding's subject. What is drawn here is the aperture the midgut herniates through and enough of a surround to see it against; it is declared STATIC in the model and it is context, not teaching.",
+    "Status is 'candidate', not 'ready'. Only a review that did not build this promotes it (ARTWORK-STANDARD, the two-review rule).",
+    "BEAT 11 DOES NOT SHOW THE CLOACAL MEMBRANE, and that is deliberate rather than an omission. The membrane ruptures in week 7 — the model declares it absent for t >= 0.74 — and this beat sits at t = 0.78, so the player would have resolved it reason:'none' and put \"there is no model of this structure\" on screen inside the beat that is about opening the two ends. Found by tools/check-scene-refs-primitive-gut-tube.mjs, which resolves every (beat, structure) pair at that beat's own t rather than once at the adapter's default. Beat 1, at t = 0.08, shows both membranes. THIS ENTRY SAID \"BEAT 5\" UNTIL 2026-10-01 and the beat it describes has never been beat 5 in the 17-beat scene — it is the midline-section beat at t = 0.78. A stale beat number left over from the 7-beat sequence scene, in gaps[] rather than in narration, and nothing in the repo could see it: the same defect as round-3 finding 2, one file away from where that finding looked.",
+    "THE SCENE PASSES measure-scene-visibility ONLY WITH WAIVERS, and the waivers are still the main thing a reviewer should argue with. THIS ENTRY WAS STALE UNTIL 2026-10-01: it described 21 waivers of which \"NONE names a beat that shows the structure adequately, because no such beat exists in this scene\", and said region-framed beats were \"the next run's work\". That work was done in round 2 — nine region-framed close-ups now exist and the count is 18 waivers, every one of which names the beat that does show its structure. Leaving the old text in place while gap 16 described the close-ups was a contradiction inside one file. WHAT IS TRUE NOW: five beats carry a __framing__ waiver because a tube of radius 0.055 running the embryo's whole 3.2-unit length cannot cover the subject floor of a frame fitted to it — the region-framed beats clear that bar unwaived, which is the evidence for the argument. Thirteen more waive individual structures that are sub-pixel or occluded at whole-tube framing, each naming its close-up.",
+    "THE DUODENAL C OVERSHOOTS ITS OWN PASS-THROUGH STATION. The curve is solved to pass through the descending-duodenum station (one pancreatic head plus one gut radius right of the midline, x = -0.099) at the papilla’s own arc fraction, but a quadratic Bezier’s extremum is not its pass-through point, so the C reaches x = -0.181 just proximal to the papilla — about twice as far right as the station it was solved to. The papilla itself, which is what the row measures and what the narration teaches, is at -0.098. Declared rather than tuned away: a cubic with two controls, or a circular arc through the three stations, would hold the extremum where the station is.",
+    "EIGHT OF THE SEVENTEEN BEATS ARE REGION-FRAMED CLOSE-UPS, which is well above the corpus average of seven views for a whole scene. That is a deliberate response to the 2026-10-01 review’s finding 3: this model is a tube of radius 0.055 running 3.2 units, so there is no single framing in which both the whole course and any individual structure are legible, and the alternative to a close-up was a waiver conceding that no beat showed the structure. A reviewer who thinks the count is too high should say which close-ups to merge rather than which waivers to restore. UPDATED 2026-10-01: the scene is now EIGHTEEN beats and NINE of them are region-framed, beat 8 being the new one.",
+    "THE ROTATION COLLAR’S HAND-BACK IS THE STEEPEST PART OF THE WHOLE CURVE. Row SMOOTH measures max |dC/ds| = 38.4 at s = 0.1654, the pylorus, where fixation switches on; the ceiling is 48 and the rest of the tube runs at about 10. It is a C1 kink rather than a tear (rows CONT and REFINE are clean), and it is the price of the duodenum being both the rotation collar and the one span with its own fixation target. Reported because it is the number closest to its floor in the battery.",
+    "MEASURE-SCENE-VISIBILITY DOES NOT IMPLEMENT CROSS_SECTION, AND THE BEAT THAT NEEDS IT IS BEAT 11. The tool reimplements viz3d's op semantics and its stateFor() handles SHOW/HIDE/HIGHLIGHT/ROTATE_TO_VIEW/SET_STAGE/ISOLATE_REGION/COMPARE_STRUCTURES and no clip. Until 2026-10-01 three waivers on beat 11 used that as their argument for a 0.005% reading, and round 3 was right that the argument was FALSE AS STATED: every structure the beat showed was role \"part\", and viz3d clips only non-taught structures, so the player did not clip either and the unclipped measurement was exactly the picture. That is now fixed at source — the cloaca is role \"context\" and the player cuts it — which makes the instrument gap REAL for the first time: measure-scene-visibility now measures beat 11 with the chamber wall intact and therefore UNDER-reports what is inside it. The honest numbers for that beat come from tools/walk-scene-in-player.mjs, which loads viz3d and clicks the chips, so the cut is the player's own code; they are quoted in the three waivers. Implementing clipping in measure-scene-visibility is the right fix and is NOT done here, because it re-grades every CROSS_SECTION beat in the corpus and that is a change to a shared tool, not to this item.",
+    "THE EPITHELIAL PLUG IS DRAWN; ITS TIMETABLE IS NOT DERIVED. The solid-cord stage now has geometry — duod_plug, radius = the wall's calibre times the lumen's complement, so the cord and the channel always occupy exactly the inner calibre between them. What is PRESCRIBED is the window (PLUG_T0 = 0.4 to PLUG_T1 = 0.64) and the sinusoid inside it; what is MEASURED is that the cord fills the calibre at the peak, that the channel is obliterated there, that both are strictly inside the duodenal wall and that the cord is gone by t = 1 — rows RECAN-CLOSES, RECAN-OPENS, RECAN-LOCAL and the three mesh rows mesh/lumen-cast-inside-the-duodenum, mesh/plug-fills-the-cord-stage and mesh/plug-absent-once-patent.",
+    "NINE OF THE EIGHTEEN BEATS ARE REGION-FRAMED CLOSE-UPS. See the entry above on the eight of seventeen: beat 8 is the ninth, and it is region-framed because the alternative for showing the inside of a taught structure was changing the engine.",
+    "BEAT 11'S MIDLINE CUT IS NOW REAL AND STILL DOES NOT MAKE THE INTERIOR LEGIBLE. Round-3 finding 1 was that the beat cut nothing, because viz3d clips only role \"context\" structures and all seven it showed were role \"part\". The cloaca is now context and the player clips it — read out of material.clippingPlanes in the live player, where it is the only clipped mesh in the beat. But the re-measurement that finding asked for says the numbers did not move: walk-scene-in-player gives urorectal 0.017% of the frame, anorectal 0.001%, urogenital 0.001%, cloaca itself 0.014% — byte for byte what they were before the change. The cloaca was never the occluder at this framing; the cause is SCALE. The beat's subject genuinely is both ends of the tube at once, so it stays wide and its three channels stay waived against beat 12, which measures them at 4.7%, 10.9% and 13.3%. A reviewer who thinks a wide beat promising a cut is not worth having should say so — the alternative is to drop the CROSS_SECTION op from it, and that would make its first sentence false of the picture.",
+    "MEASURE-SCENE-VISIBILITY CANNOT SEE THROUGH A GHOSTED WALL EITHER, which is the second half of the same instrument gap and is new on 2026-10-01. viz3d.js:2418 drops every non-highlighted structure to min(0.10, authored opacity) when a view has ISOLATE_REGION; the tool's paint at measure-scene-visibility.mjs:308 applies only the AUTHORED opacity. So beat 8, whose whole method is a wall ghosted to 0.10 with the cord at full opacity inside it, reads duod_plug 0% in the tool and 2.783% of the frame in the real player. The tool therefore FAILS that beat and the failure is carried as a waiver quoting the player. PROPOSED FIX, not made here because it is a shared tool and re-grades every ISOLATE_REGION beat in the corpus: model :2418 in the tool's paint. It can only move structures from invisible to visible, so it cannot turn a passing beat into a failing one.",
+    "viz-training/scenes/index.json STILL DESCRIBES THIS SCENE AS AN SVG SEQUENCE SCENE, AND IT IS NOT REBUILT HERE. The index was generated at 2026-10-01T06:43:16Z, BEFORE round 2 re-authored this scene, and its entry still reads mode \"sequence\", provider \"svg\", status \"planned\", student_ready false, gaps 13. The scene on disk has been mode \"3d_anatomy\", provider \"procedural\", status \"candidate\" since 15:04Z. Round 2 converted the scene and did not run tools/build-scene-index.mjs; nor did this round, and the reason is a race rather than an oversight: build-scene-index rewrites the index for the WHOLE corpus from whatever is on disk at that moment, and a second build run is live on embryology__gametogenesis-fertilization__fertilization right now — that file changed from 27,307 to 59,632 bytes at 18:27Z while this run was working. Rebuilding the index here would snapshot another run's half-finished scene into shared corpus state. It needs doing when no build run is mid-flight, and COVERAGE.md (same timestamp, same tool chain) needs it too."
+  ],
+  "visibility_waivers": [
+    {
+      "view": 1,
+      "key": "__framing__",
+      "why": "MEASURED, AND NOW WITH SOMEWHERE TO POINT. This model is a tube of radius 0.055 running the whole 3.2-unit length of the embryo block, about 1:29, so a camera fitted to the whole tube fills the frame’s HEIGHT with an object a few pixels wide and subject coverage cannot reach MIN_SUBJECT, which is calibrated on compact organs. This beat’s subject genuinely IS the whole tube, end to end, before anything has happened to it, so the wide shot is the beat rather than a lazy framing of it. WHAT HAS CHANGED SINCE 2026-10-01: the previous version of this waiver conceded that no beat showed the detail adequately, which the review rightly called a deferred defect in a waiver’s clothes. The detail in this beat is shown close up by beats 3, 4, 6 and 7. Eight region-framed beats were added for exactly this, and they clear MIN_SUBJECT unwaived — so the wide shot now carries only the job a wide shot can do."
+    },
+    {
+      "view": 2,
+      "key": "__framing__",
+      "why": "MEASURED, AND NOW WITH SOMEWHERE TO POINT. This model is a tube of radius 0.055 running the whole 3.2-unit length of the embryo block, about 1:29, so a camera fitted to the whole tube fills the frame’s HEIGHT with an object a few pixels wide and subject coverage cannot reach MIN_SUBJECT, which is calibrated on compact organs. This beat’s subject genuinely IS the three arteries against the whole length of the tube they divide, so the wide shot is the beat rather than a lazy framing of it. WHAT HAS CHANGED SINCE 2026-10-01: the previous version of this waiver conceded that no beat showed the detail adequately, which the review rightly called a deferred defect in a waiver’s clothes. Beat 3 frames the three origins alone and measures coeliac, superior mesenteric and inferior mesenteric well clear of MIN_POINTED, and beat 4 does the same for the two boundary beads. Eight region-framed beats were added for exactly this, and they clear MIN_SUBJECT unwaived — so the wide shot now carries only the job a wide shot can do."
+    },
+    {
+      "view": 2,
+      "key": "coeliac",
+      "why": "0.149% here against a 0.30% floor, and SHOWN ADEQUATELY BY BEAT 3, which frames the three origins with the aorta taken away and measures the coeliac at an order of magnitude more of the frame. A 0.030-radius artery cannot reach 0.30% of a frame fitted to a 3.2-unit tube; it is not buried, it is far away, and the next beat walks up to it."
+    },
+    {
+      "view": 2,
+      "key": "ima",
+      "why": "as coeliac above — 0.143% here, shown adequately by beat 3."
+    },
+    {
+      "view": 5,
+      "key": "__framing__",
+      "why": "MEASURED, AND NOW WITH SOMEWHERE TO POINT. This model is a tube of radius 0.055 running the whole 3.2-unit length of the embryo block, about 1:29, so a camera fitted to the whole tube fills the frame’s HEIGHT with an object a few pixels wide and subject coverage cannot reach MIN_SUBJECT, which is calibrated on compact organs. This beat’s subject genuinely IS the whole tube divided into its three parts, which is a statement about the whole tube, so the wide shot is the beat rather than a lazy framing of it. WHAT HAS CHANGED SINCE 2026-10-01: the previous version of this waiver conceded that no beat showed the detail adequately, which the review rightly called a deferred defect in a waiver’s clothes. Its foregut buds are shown close up by beats 6 and 7, its caecum by beat 15, and its two boundaries by beat 4. Eight region-framed beats were added for exactly this, and they clear MIN_SUBJECT unwaived — so the wide shot now carries only the job a wide shot can do. RENUMBERED 2026-10-01 (round 3): a beat was inserted at position 8, so the beats this waiver points FORWARD to moved by one. The targets are recorded in beat_refs on each view."
+    },
+    {
+      "view": 5,
+      "key": "caecum",
+      "why": "0.141% here against the 0.30% pointed-at floor, and SHOWN ADEQUATELY BY BEAT 15, which frames the caecum itself and measures it as the bulk of the picture. At this t the caecal bud is on the herniated loop and is one swelling among the whole tube’s length."
+    },
+    {
+      "view": 5,
+      "key": "panc_ventral",
+      "why": "0.016% here, and SHOWN ADEQUATELY BY BEAT 6, which frames the duodenum and measures the ventral bud clear of MIN_ANY. It is the smallest structure in the model — a bud of radius 0.038 and length 0.15 — so the only honest place to show it is a close-up."
+    },
+    {
+      "view": 9,
+      "key": "sma",
+      "why": "0% here, and SHOWN ADEQUATELY BY BEAT 10. This is not distance but OCCLUSION: the artery is the axis the loop turns on, so from the anterior camera the loop is in front of it. Beat 10 takes the yolk sac off and views the same instant from the side, where the artery is clear of both limbs — which is the reason that beat exists."
+    },
+    {
+      "view": 9,
+      "key": "appendix",
+      "why": "0.001% here, and SHOWN ADEQUATELY BY BEAT 15 at t = 1. At this instant the appendix is 0.10 long and 0.016 in radius on a herniated loop; it is a genuine bud rather than a structure being hidden, and the beat that teaches it is the one where it has grown."
+    },
+    {
+      "view": 10,
+      "key": "appendix",
+      "why": "as above — at t = 0.568 the appendix is 0.10 long and 0.016 in radius, and this beat is framed on the whole loop because the loop is its subject. Shown adequately by beat 15."
+    },
+    {
+      "view": 11,
+      "key": "__framing__",
+      "why": "MEASURED, AND NOW WITH SOMEWHERE TO POINT. This model is a tube of radius 0.055 running the whole 3.2-unit length of the embryo block, about 1:29, so a camera fitted to the whole tube fills the frame’s HEIGHT with an object a few pixels wide and subject coverage cannot reach MIN_SUBJECT, which is calibrated on compact organs. This beat’s subject genuinely IS both ends of the tube at once, which is what the beat compares, so the wide shot is the beat rather than a lazy framing of it. WHAT HAS CHANGED SINCE 2026-10-01: the previous version of this waiver conceded that no beat showed the detail adequately, which the review rightly called a deferred defect in a waiver’s clothes. The caudal end is shown close up by beat 12 and the papilla by beats 4 and 14. Eight region-framed beats were added for exactly this, and they clear MIN_SUBJECT unwaived — so the wide shot now carries only the job a wide shot can do."
+    },
+    {
+      "view": 11,
+      "key": "urorectal",
+      "why": "0.005% on measure-scene-visibility and 0.017% in the real player, against a 0.30% pointed-at floor, and SHOWN ADEQUATELY BY BEAT 12, which measures it at 4.738% with the chamber wall hidden. THE OLD VERSION OF THIS WAIVER GAVE A FALSE ARGUMENT AND ROUND 3 WAS RIGHT TO REJECT IT. It said the 0.005% reading was an instrument artifact because \"measure-scene-visibility DOES NOT IMPLEMENT CROSS_SECTION\", so the beat was being measured as a picture the player does not draw. The tool's half of that was true; the conclusion was not. viz3d assigns clippingPlanes only where !isTaught(s) (viz3d.js:2438, isTaught at :167 returning role !== \"context\"), and every one of the seven structures this beat showed was role \"part\" — so THE PLAYER DID NOT CLIP EITHER, and the tool's unclipped measurement was exactly the picture a student saw. WHAT THIS RUN DID ABOUT IT, 2026-10-01: the cloaca is now role \"context\", so the midline section really cuts the chamber — verified by reading material.clippingPlanes out of the live player, where cloaca is the one clipped mesh in this beat and was clipped in NO beat before the change. AND THE RE-MEASUREMENT DID NOT RESCUE THE NUMBERS, WHICH IS THE HONEST RESULT AND IS REPORTED RATHER THAN BURIED: walk-scene-in-player, which loads viz3d and clicks the chips so the cut is the player's own code, measures this beat's shares as hindgut 2.445% of the frame, duodenum 0.378, urorectal 0.017, cloaca 0.014, papilla 0.014, anorectal 0.001, urogenital 0.001 — IDENTICAL to the pre-change walk. The cloaca was never the occluder here: at 0.014% of the frame it is itself almost nothing. THE CAUSE IS DISTANCE, NOT OCCLUSION. This beat frames both ends of a 3.2-unit tube, so a partition a few hundredths of a unit across cannot reach the floor however much of the chamber is cut away. That is why this remains a waiver and not a fix: the fix for scale is a close-up, and beat 12 is it — the same three structures measure 0.565%, 1.569% and 1.861% of the frame there, 33x, 1569x and 1861x what they get here. The cut is still worth having: it is what makes the beat's \"Cut the embryo in the midline\" true of the picture rather than only of the narration."
+    },
+    {
+      "view": 11,
+      "key": "anorectal",
+      "why": "0% on measure-scene-visibility and 0.001% in the real player, and SHOWN ADEQUATELY BY BEAT 12, which measures it at 10.859%. THE OLD VERSION OF THIS WAIVER GAVE A FALSE ARGUMENT AND ROUND 3 WAS RIGHT TO REJECT IT. It said the 0.005% reading was an instrument artifact because \"measure-scene-visibility DOES NOT IMPLEMENT CROSS_SECTION\", so the beat was being measured as a picture the player does not draw. The tool's half of that was true; the conclusion was not. viz3d assigns clippingPlanes only where !isTaught(s) (viz3d.js:2438, isTaught at :167 returning role !== \"context\"), and every one of the seven structures this beat showed was role \"part\" — so THE PLAYER DID NOT CLIP EITHER, and the tool's unclipped measurement was exactly the picture a student saw. WHAT THIS RUN DID ABOUT IT, 2026-10-01: the cloaca is now role \"context\", so the midline section really cuts the chamber — verified by reading material.clippingPlanes out of the live player, where cloaca is the one clipped mesh in this beat and was clipped in NO beat before the change. AND THE RE-MEASUREMENT DID NOT RESCUE THE NUMBERS, WHICH IS THE HONEST RESULT AND IS REPORTED RATHER THAN BURIED: walk-scene-in-player, which loads viz3d and clicks the chips so the cut is the player's own code, measures this beat's shares as hindgut 2.445% of the frame, duodenum 0.378, urorectal 0.017, cloaca 0.014, papilla 0.014, anorectal 0.001, urogenital 0.001 — IDENTICAL to the pre-change walk. The cloaca was never the occluder here: at 0.014% of the frame it is itself almost nothing. THE CAUSE IS DISTANCE, NOT OCCLUSION. This beat frames both ends of a 3.2-unit tube, so a partition a few hundredths of a unit across cannot reach the floor however much of the chamber is cut away. That is why this remains a waiver and not a fix: the fix for scale is a close-up, and beat 12 is it — the same three structures measure 0.565%, 1.569% and 1.861% of the frame there, 33x, 1569x and 1861x what they get here. The cut is still worth having: it is what makes the beat's \"Cut the embryo in the midline\" true of the picture rather than only of the narration."
+    },
+    {
+      "view": 11,
+      "key": "urogenital",
+      "why": "0% on measure-scene-visibility and 0.001% in the real player, and SHOWN ADEQUATELY BY BEAT 12, which measures it at 13.258%. THE OLD VERSION OF THIS WAIVER GAVE A FALSE ARGUMENT AND ROUND 3 WAS RIGHT TO REJECT IT. It said the 0.005% reading was an instrument artifact because \"measure-scene-visibility DOES NOT IMPLEMENT CROSS_SECTION\", so the beat was being measured as a picture the player does not draw. The tool's half of that was true; the conclusion was not. viz3d assigns clippingPlanes only where !isTaught(s) (viz3d.js:2438, isTaught at :167 returning role !== \"context\"), and every one of the seven structures this beat showed was role \"part\" — so THE PLAYER DID NOT CLIP EITHER, and the tool's unclipped measurement was exactly the picture a student saw. WHAT THIS RUN DID ABOUT IT, 2026-10-01: the cloaca is now role \"context\", so the midline section really cuts the chamber — verified by reading material.clippingPlanes out of the live player, where cloaca is the one clipped mesh in this beat and was clipped in NO beat before the change. AND THE RE-MEASUREMENT DID NOT RESCUE THE NUMBERS, WHICH IS THE HONEST RESULT AND IS REPORTED RATHER THAN BURIED: walk-scene-in-player, which loads viz3d and clicks the chips so the cut is the player's own code, measures this beat's shares as hindgut 2.445% of the frame, duodenum 0.378, urorectal 0.017, cloaca 0.014, papilla 0.014, anorectal 0.001, urogenital 0.001 — IDENTICAL to the pre-change walk. The cloaca was never the occluder here: at 0.014% of the frame it is itself almost nothing. THE CAUSE IS DISTANCE, NOT OCCLUSION. This beat frames both ends of a 3.2-unit tube, so a partition a few hundredths of a unit across cannot reach the floor however much of the chamber is cut away. That is why this remains a waiver and not a fix: the fix for scale is a close-up, and beat 12 is it — the same three structures measure 0.565%, 1.569% and 1.861% of the frame there, 33x, 1569x and 1861x what they get here. The cut is still worth having: it is what makes the beat's \"Cut the embryo in the midline\" true of the picture rather than only of the narration."
+    },
+    {
+      "view": 11,
+      "key": "papilla",
+      "why": "0.013% here. The beat shows both ends of a 3.2-unit tube, so a 0.10-radius bead in the middle of it is far away; and the duodenum drawn over it is what the beat highlights. Shown adequately by beats 4 and 14, both of which frame the bead itself."
+    },
+    {
+      "view": 16,
+      "key": "__framing__",
+      "why": "MEASURED, AND NOW WITH SOMEWHERE TO POINT. This model is a tube of radius 0.055 running the whole 3.2-unit length of the embryo block, about 1:29, so a camera fitted to the whole tube fills the frame’s HEIGHT with an object a few pixels wide and subject coverage cannot reach MIN_SUBJECT, which is calibrated on compact organs. This beat’s subject genuinely IS the crest front along the WHOLE tube, since the teaching is that the rectum is reached last, so the wide shot is the beat rather than a lazy framing of it. WHAT HAS CHANGED SINCE 2026-10-01: the previous version of this waiver conceded that no beat showed the detail adequately, which the review rightly called a deferred defect in a waiver’s clothes. There is no closer framing that could carry this beat’s claim: a close-up of the front’s end would show a sleeve ending without showing that it had travelled the whole tube to get there. The sleeve itself measures 3.5% of the frame, which is most of what is lit. Eight region-framed beats were added for exactly this, and they clear MIN_SUBJECT unwaived — so the wide shot now carries only the job a wide shot can do."
+    },
+    {
+      "view": 17,
+      "key": "__framing__",
+      "why": "MEASURED, AND NOW WITH SOMEWHERE TO POINT. This model is a tube of radius 0.055 running the whole 3.2-unit length of the embryo block, about 1:29, so a camera fitted to the whole tube fills the frame’s HEIGHT with an object a few pixels wide and subject coverage cannot reach MIN_SUBJECT, which is calibrated on compact organs. This beat’s subject genuinely IS one disease per division along the whole tube, which is the list the beat is for, so the wide shot is the beat rather than a lazy framing of it. WHAT HAS CHANGED SINCE 2026-10-01: the previous version of this waiver conceded that no beat showed the detail adequately, which the review rightly called a deferred defect in a waiver’s clothes. Each lesion is shown close up elsewhere: the respiratory diverticulum in beat 7, the duodenum in beats 6 and 8, the normal crest front in beat 16, and the high anorectal malformation in beat 18. Eight region-framed beats were added for exactly this, and they clear MIN_SUBJECT unwaived — so the wide shot now carries only the job a wide shot can do."
+    },
+    {
+      "view": 17,
+      "key": "var_highARM",
+      "why": "0% here, and SHOWN ADEQUATELY BY BEAT 18. The lesion is a few hundredths of a unit of septum inside the cloaca at the far caudal end: at whole-tube framing it is both occluded and sub-pixel. Beat 18 frames it with the chamber wall off and measures it as the subject of the picture. This waiver is the pair of the one above on urorectal and has the same two causes."
+    },
+    {
+      "view": 8,
+      "key": "duod_plug",
+      "why": "THE TOOL READS 0% AND THE PLAYER DRAWS IT AT 41.6% OF THE SUBJECT. This is the one waiver in this scene that rests on the instrument, so it is stated with the line numbers rather than as an impression, and with the better measurement rather than instead of one. WHAT THE BEAT DOES: the cord is inside the duodenum, and the only way viz3d shows the inside of a TAUGHT structure is ISOLATE_REGION's ghost — viz3d.js:2409 sets `ghosting` from state.ghosted and :2418 then drops every structure that is not highlighted or selected to min(0.10, authored opacity). So the duodenum is drawn at 0.10 and the plug, which is the one highlighted thing, at 1.0. WHY measure-scene-visibility CANNOT SEE THAT: it reimplements viz3d's ops rather than driving it, and its painting applies ONLY each structure's AUTHORED opacity — measure-scene-visibility.mjs:308, `if (o.material && s.opacity != null) { o.material.opacity = s.opacity; }`. The duodenum authors no opacity, so the tool draws the wall fully opaque and both its id-pick and its alpha-aware pass read the cord as zero (peak 0). The tool's own header says this reimplementation is its one weakness and that where the two disagree, viz3d is right. THE MEASUREMENT THAT COUNTS: walk-scene-in-player.mjs loads viz3d.js, mounts the scene and clicks the view chip, so the ghost is the player's own code; it reads duod_plug at 2.783% of the frame and 41.6% of this beat's subject, with the duodenum at 4.847% and the papilla at 1.578%, frame still, 0 px drift. A direct probe of player.meshes in the same beat shows duod_plug visible with material.opacity 1.0 and the duodenum visible at 0.10. THIS IS NOT THE ARGUMENT ROUND 3 REJECTED. That one blamed the tool for a number the player agreed with. This one is a disagreement between two instruments that has been resolved by going to the player. The tool fix — modelling :2418's ghost in the tool's paint — is proposed in BUILD-LOG and deliberately not made here: it is a shared tool and it would re-grade every ISOLATE_REGION beat in the corpus, which is not one item's rework to do."
+    }
   ]
 }

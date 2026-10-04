@@ -1101,7 +1101,10 @@
     "author": "task",
     "authored_at": "2026-08-26",
     "audited_at": "2026-08-29",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-09-30T14:56:58Z",
+    "corrected_by": "model3d REVIEW task, round 1 on gross__back-vertebral-column__coccyx — did not build this",
+    "correction_note_coccyx_split": "Declared in gaps[] what the split left undeclared: the sacrum/coccyx interface is a flat cut plane at z = 825.5, not a modelled sacrococcygeal joint. No geometry, narration or structure changed."
   },
   "gaps": [
     "Nucleus pulposus and annulus fibrosus have no separate entries in the catalog — the smallest unit it holds is the whole disc. The cross-section beat therefore teaches the two zones by narration over a solid disc rather than by two labelled parts. Two models, or one measured anchor at the centre of the nucleus, would make that beat literal.",
@@ -1109,6 +1112,6 @@
     "The anterior and posterior longitudinal ligaments are absent from the catalog, so the reason the back wall fails posterolaterally rather than in the midline is narrated, not seen.",
     "Vertebral end plates are not separate models either; the disc-to-bone attachment is shown as contact between meshes.",
     "The column is complete from the atlas to the sacrum: all 24 vertebrae and all 23 intervertebral discs. Earlier versions of this scene showed only part of it, which left visible gaps in the stack and made two isolated vertebrae float on their own with nothing between them and the rest.",
-    "The coccyx IS separately modelled as of 2026-09-11. BodyParts3D ships it fused to the sacrum as FMA16202; that mesh was cut at its minimum cross-section (z = 825.5) into FMA16202-sacrum (110.5 mm) and FMA16202-coccyx (34.8 mm), both closed solids, so the coccyx can now be shown, hidden and isolated like any other bone."
+    "The coccyx IS separately modelled as of 2026-09-11. BodyParts3D ships it fused to the sacrum as FMA16202; that mesh was cut at its minimum cross-section (z = 825.5) into FMA16202-sacrum (110.5 mm) and FMA16202-coccyx (34.8 mm), both closed solids, so the coccyx can now be shown, hidden and isolated like any other bone. The interface between the two is the CUT PLANE and not a modelled sacrococcygeal joint: a flat transverse face at z = 825.5 exactly, where the sacrum piece bottoms out and the coccyx piece tops out. The scan is one fused bone, so the convex sacral apex, the concave base of Co1 and the fibrocartilaginous disc between them are not in the geometry. Where narration names the sacrococcygeal joint, the picture shows a butt joint. (Added by review, 2026-09-30.)"
   ]
 }

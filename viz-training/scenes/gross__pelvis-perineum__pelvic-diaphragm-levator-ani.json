@@ -599,6 +599,29 @@
         "sacral plexus"
       ],
       "narration": "Behind, the floor attaches to the lower sacrum and the coccyx. The sacrum also delivers the nerve supply: the ventral rami of the third and fourth sacral nerves give the nerve to levator ani from above, and the pudendal nerve, which is S2 to S4, reaches the external anal sphincter from below in the perineum."
+    },
+    {
+      "key": "coccyx",
+      "name": "coccyx",
+      "label": "Coccyx — what the floor hangs from behind",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA16202-coccyx"
+      },
+      "terms": [
+        "coccyx",
+        "tailbone",
+        "coccygeal",
+        "sacrococcygeal joint",
+        "anococcygeal body",
+        "pubococcygeus",
+        "iliococcygeus",
+        "coccygeus"
+      ],
+      "narration": "The back attachment of the pelvic floor, and the bone three of its muscles are named after. Pubococcygeus runs from the pubis to the coccyx and the anococcygeal body; iliococcygeus comes from the tendinous arch and the ischial spine to the coccyx and the same raphe; coccygeus lies behind them on the sacrospinous ligament and reaches the coccyx and the lowest sacrum. Only puborectalis has no bony insertion at all. So the funnel is slung from the pubis in front and from this bone behind, and the midline between the anal canal and the coccyx — the anococcygeal body — is where the two halves finally meet."
     }
   ],
   "views": [
@@ -822,13 +845,17 @@
     "author": "task",
     "authored_at": "2026-08-28",
     "audited_at": "2026-08-29",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-10-01T02:00:00Z",
+    "corrected_by": "model3d BUILD task, queue item gross__back-vertebral-column__coccyx, review round 1 finding 1",
+    "correction_note_coccyx_split": "Corrected a false claim in gaps[]: it said no coccyx exists in the catalog, which stopped being true on 2026-09-11. No geometry, narration or structure changed — the rewritten gap records that the posterior insertion of levator ani ends in air 34.8 mm sooner since the sacrum was re-reffed to the split asset.",
+    "correction_note_coccyx": "Added one structure, coccyx -> FMA16202-coccyx, in the group and colour the scene already gives the sacrum, and rewrote the gaps[] entry that said it was missing. No view op, no other structure, no narration and no geometry changed: every view either shows \"*\" or shows this group, so the new structure inherits the existing view logic. Verified in the real player with viz-training/tools/walk-scene-in-player.mjs before and after. The 2026-09-30 review's own correction to this scene is untouched and stays recorded in provenance.correction_note_coccyx_split; corrected_at/corrected_by name this run only because it is the latest writer of the pair."
   },
   "gaps": [
     "There is no vagina, uterus or pubovaginalis in the catalog, so the entire female floor — which is where this topic is examined and where it matters clinically — is taught in narration over male viscera. Pubovaginalis, the vaginal wall as the anterior and posterior support, cystocele, rectocele and uterine prolapse are all spoken, not shown. This is the largest gap in the scene and the same missing female pelvis set that has blocked 'Internal reproductive organs' since run 34.",
     "The perineal body has no mesh. It is the central anchor of the floor, the structure an episiotomy is angled to spare, and the point where levator ani, the external anal sphincter and the perineal muscles converge. Beat three names it over empty space between the anal canal and the urethra.",
     "The anococcygeal body and the midline raphe behind the anal canal have no models either, so the posterior meeting of the two halves — the counterpart of the hiatus in front — cannot be lit. Both are narrated in beats two and three.",
-    "No coccyx exists in the catalog, and every part of levator ani except puborectalis inserts into it. The sacrum model ends where the coccyx would begin, so the posterior insertion is shown ending in air.",
+    "The coccyx is drawn as of 2026-10-01, in the “Bony frame” group, refed to FMA16202-coccyx, so the posterior attachment that pubococcygeus, iliococcygeus and coccygeus are all named for is a bone on screen rather than a word. The anococcygeal body between it and the anal canal still has no mesh — see the separate gap above. The coccyx is drawn from FMA16202-coccyx, a DERIVED asset: BodyParts3D ships the coccyx fused to the sacrum as FMA16202, and that scan was cut at its minimum cross-section (z = 825.5) into FMA16202-sacrum (110.5 mm) and FMA16202-coccyx (34.8 mm), both closed solids. So the interface between the two is the CUT PLANE, not a modelled sacrococcygeal joint: a flat transverse face where one piece bottoms out and the other tops out. The convex sacral apex, the concave base of Co1 and the fibrocartilaginous disc between them are not in the geometry. Where narration names the sacrococcygeal joint, the picture shows a butt joint. (Same wording as the vertebral-column scene, which review added on 2026-09-30.)",
     "No nerve meshes: the nerve to levator ani from S3 and S4, the pudendal nerve and its inferior rectal branch are all narrated only. This is the thirty-sixth run in which the absence of nerve models has cost a scene its most examinable relationship, and here it costs two — the innervation of the floor and the course of the pudendal nerve through the canal in obturator fascia.",
     "The perineal membrane and the sphincter urethrae — the so-called urogenital diaphragm below the pelvic diaphragm — have no models. The distinction between the two diaphragms is a standard exam question and beat three has to make it in words alone.",
     "No sacrospinous or sacrotuberous ligament, so coccygeus is again used as a proxy marker for the sacrospinous ligament it lies on, as in the bony pelvis scene.",
@@ -836,5 +863,17 @@
     "The anorectal angle cannot be measured or drawn on the geometry. Beat four uses SHOW_RELATIONSHIP between the sling and the rectum and states the value; a future renderer with measured anchors on the pubis and the anorectal junction could draw it and animate the change on contraction, which for this scene would be close to the whole teaching point.",
     "This scene does not claim to cover 'Bony pelvis', 'Urinary bladder' or 'Internal reproductive organs' although parts of all three appear in it. The hip bones and sacrum are here only to carry the origin line, the bladder and prostate only to make the word support concrete.",
     "Only the right piriformis is shown, so the '*' views are asymmetric on the one structure the scene uses as an exam trap. This is a DELIVERY gap, not a catalog gap: the left piriformis is in the catalog as FMA22341 — it was authored at this audit, found not to be in the local decimated set, and removed again so the scene keeps drawing complete. Add it the day that mesh is fetched; nothing else in the scene needs to change."
+  ],
+  "visibility_waivers": [
+    {
+      "view": 3,
+      "key": "coccyx",
+      "why": "0.000% of frame. Inferior camera with the levator sheet, the viscera and the floor's contents all in front of it; this beat is about the hiatus in front and does not point at the coccyx. SHOWN IN BEAT 1 (0.386%), and beat 2 — the origin-line beat whose narration names it — draws it over 10.9% of the frame, though that beat clips and so reports no share. Measured with walk-scene-in-player.mjs, 2026-10-01."
+    },
+    {
+      "view": 5,
+      "key": "coccyx",
+      "why": "0.000% of frame. This beat runs CROSS_SECTION z 0.1 over the whole scene; the coccyx falls behind the retained viscera at that cut. SHOWN IN BEAT 1 at 0.386%. Measured with walk-scene-in-player.mjs, 2026-10-01."
+    }
   ]
 }

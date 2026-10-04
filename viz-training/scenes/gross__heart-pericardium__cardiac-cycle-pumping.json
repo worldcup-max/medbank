@@ -1,825 +1,1922 @@
 {
- "schema": 2,
- "id": "gross__heart-pericardium__cardiac-cycle-pumping",
- "mode": "3d_anatomy",
- "course": "Gross Anatomy",
- "topic": "Heart & Pericardium",
- "structure": "Cardiac cycle (pumping)",
- "covers": [
-  "Cardiac cycle (pumping)"
- ],
- "learning_goal": "Walk one heartbeat and be able to say, at any instant, which valves are open, which are shut, whether blood is moving, and what is making it move - and to state the volumes, the pressures and the durations of the five phases.",
- "status": "candidate",
- "provenance": {
-  "author": "task",
-  "authored_at": "2026-09-10"
- },
- "provider": {
-  "primary": "procedural",
-  "fallbacks": []
- },
- "match": {
-  "topics": [
-   "heart",
-   "cardiac cycle",
-   "cardiovascular",
-   "cardiac physiology",
-   "heart sounds",
-   "pericardium"
+  "schema": 2,
+  "id": "gross__heart-pericardium__cardiac-cycle-pumping",
+  "mode": "3d_anatomy",
+  "course": "Gross Anatomy",
+  "topic": "Heart & Pericardium",
+  "structure": "Cardiac cycle (pumping)",
+  "covers": [
+    "Cardiac cycle (pumping)"
   ],
-  "terms": [
-   "cardiac cycle",
-   "systole",
-   "diastole",
-   "ventricular systole",
-   "atrial systole",
-   "isovolumetric contraction",
-   "isovolumetric relaxation",
-   "ventricular ejection",
-   "ventricular filling",
-   "diastasis",
-   "stroke volume",
-   "ejection fraction",
-   "end-diastolic volume",
-   "end-systolic volume",
-   "preload",
-   "afterload",
-   "Wiggers diagram",
-   "first heart sound",
-   "second heart sound",
-   "S1",
-   "S2",
-   "dicrotic notch",
-   "atrial kick",
-   "E wave",
-   "A wave",
-   "mitral valve",
-   "aortic valve",
-   "tricuspid valve",
-   "pulmonary valve",
-   "papillary muscle",
-   "chordae tendineae",
-   "cardiac output",
-   "AV plane descent",
-   "apex beat"
+  "learning_goal": "Walk one heartbeat and be able to say, at any instant, which valves are open, which are shut, whether blood is moving, and what is making it move - and to state the volumes, the pressures and the durations of the five phases a student is examined on: atrial systole, isovolumetric contraction, ejection, isovolumetric relaxation and filling. This model resolves a sixth interval between the first two - the end-diastolic pause, in which the mitral valve is already apposed and the ventricle has not yet begun to contract - and names it rather than folding it into either neighbour; gaps[25] says why the goal still counts five.",
+  "status": "candidate",
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-09-10",
+    "corrected_at": "2026-09-30T06:05:00Z",
+    "corrected_by": "the model3d review task, round 6 (scheduled run fired 2026-09-30T05:44Z; device shell WAS available this run and the node tools were run in-repo, renders in the cloud container; did not build this item). Corrected one false narration claim on beat 10 ('the pulmonary valve is ... the furthest to the left' - the mitral annulus is 0.60 cm further left in this model's own base, verified twice: acceptance().geometry.base, and the live player's scene graph through viz3d.js), regraded it and 'medial to it' onto expressions that test what the sentences say, and added rows for two narrated claims that carried none ('the minor axis has shortened by 30%', 'the aortic the smallest'). Also named the papillary muscles in beat 10's 'only ... left' list, which they are drawn in and the next sentence depends on."
+  },
+  "provider": {
+    "primary": "procedural",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "heart",
+      "cardiac cycle",
+      "cardiovascular",
+      "cardiac physiology",
+      "heart sounds",
+      "pericardium"
+    ],
+    "terms": [
+      "cardiac cycle",
+      "systole",
+      "diastole",
+      "ventricular systole",
+      "atrial systole",
+      "isovolumetric contraction",
+      "isovolumetric relaxation",
+      "ventricular ejection",
+      "ventricular filling",
+      "diastasis",
+      "stroke volume",
+      "ejection fraction",
+      "end-diastolic volume",
+      "end-systolic volume",
+      "preload",
+      "afterload",
+      "Wiggers diagram",
+      "first heart sound",
+      "second heart sound",
+      "S1",
+      "S2",
+      "dicrotic notch",
+      "atrial kick",
+      "E wave",
+      "A wave",
+      "mitral valve",
+      "aortic valve",
+      "tricuspid valve",
+      "pulmonary valve",
+      "papillary muscle",
+      "chordae tendineae",
+      "cardiac output",
+      "AV plane descent",
+      "apex beat"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0,
+    "initialYaw": -0.7
+  },
+  "structures": [
+    {
+      "key": "lv",
+      "name": "Left ventricular myocardium",
+      "label": "Left ventricle (wall)",
+      "role": "part",
+      "group": "Myocardium",
+      "layer": "muscle",
+      "color": "#9e2b33",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#lv"
+      },
+      "opacity": 0.45,
+      "terms": [
+        "left ventricle",
+        "LV",
+        "myocardium",
+        "wall thickness",
+        "ventricular systole"
+      ],
+      "narration": "The thick-walled pump of the systemic circuit. Its wall is about 10 mm at end-diastole and about 14 mm at end-systole — it does not gain muscle, it gets shorter and fatter, because muscle cannot be compressed. Watch the wall, not just the cavity."
+    },
+    {
+      "key": "rv",
+      "name": "Right ventricular myocardium",
+      "label": "Right ventricle (wall)",
+      "role": "part",
+      "group": "Myocardium",
+      "layer": "muscle",
+      "color": "#b5555c",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#rv"
+      },
+      "opacity": 0.45,
+      "terms": [
+        "right ventricle",
+        "RV",
+        "thin wall"
+      ],
+      "narration": "A third the wall thickness of the left, because it pumps the same stroke volume against a fifth of the pressure. Same output, different load — that is the whole reason for the difference."
+    },
+    {
+      "key": "septum",
+      "name": "Interventricular septum",
+      "label": "Interventricular septum",
+      "role": "part",
+      "group": "Myocardium",
+      "layer": "muscle",
+      "color": "#8f2028",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#septum"
+      },
+      "terms": [
+        "interventricular septum",
+        "septum",
+        "septal motion"
+      ],
+      "narration": "Left ventricular muscle, and it thickens with the left ventricle rather than the right. In systole it moves TOWARDS the left ventricular cavity; if it moves the other way, the right ventricle is overloaded."
+    },
+    {
+      "key": "la",
+      "name": "Left atrium",
+      "label": "Left atrium (wall)",
+      "role": "part",
+      "group": "Myocardium",
+      "layer": "muscle",
+      "color": "#c98a92",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#la"
+      },
+      "opacity": 0.45,
+      "terms": [
+        "left atrium",
+        "LA",
+        "atrial systole",
+        "atrial kick"
+      ],
+      "narration": "A thin-walled reservoir, not a pump of consequence. Its contraction adds the last fifth of ventricular filling. Lose it — in atrial fibrillation — and a healthy ventricle barely notices, while a stiff one may not cope."
+    },
+    {
+      "key": "ra",
+      "name": "Right atrium",
+      "label": "Right atrium (wall)",
+      "role": "part",
+      "group": "Myocardium",
+      "layer": "muscle",
+      "color": "#b98890",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#ra"
+      },
+      "opacity": 0.45,
+      "terms": [
+        "right atrium",
+        "RA"
+      ],
+      "narration": "The same, on the venous side. It receives the superior and inferior venae cavae continuously, throughout the cycle, whatever the ventricles are doing."
+    },
+    {
+      "key": "lv_blood",
+      "name": "Blood in the left ventricle",
+      "label": "LV cavity",
+      "role": "primary",
+      "group": "Chambers",
+      "layer": "organ",
+      "color": "#c0392b",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#lv_blood"
+      },
+      "terms": [
+        "end-diastolic volume",
+        "EDV",
+        "end-systolic volume",
+        "ESV",
+        "stroke volume",
+        "ejection fraction"
+      ],
+      "narration": "120 ml at end-diastole, 50 ml at end-systole. The difference, 70 ml, is the stroke volume, and 70 of 120 is an ejection fraction of 58%. The ventricle never empties — that is normal, and it is the reserve a failing heart has already spent.",
+      "opacity": 0.38
+    },
+    {
+      "key": "rv_blood",
+      "name": "Blood in the right ventricle",
+      "label": "RV cavity",
+      "role": "primary",
+      "group": "Chambers",
+      "layer": "organ",
+      "color": "#2f5fa8",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#rv_blood"
+      },
+      "terms": [
+        "right ventricular volume",
+        "RV stroke volume"
+      ],
+      "narration": "130 ml to 60 ml — a slightly larger chamber, a slightly lower ejection fraction, and exactly the same 70 ml stroke volume. The two sides must match beat for beat or blood piles up behind one of them.",
+      "opacity": 0.38
+    },
+    {
+      "key": "la_blood",
+      "name": "Blood in the left atrium",
+      "label": "LA cavity",
+      "role": "part",
+      "group": "Chambers",
+      "layer": "organ",
+      "color": "#f0937f",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#la_blood"
+      },
+      "terms": [
+        "left atrial pressure",
+        "v wave"
+      ],
+      "narration": "Fills all through ventricular systole, while the mitral valve is shut and the pulmonary veins keep delivering. That is where the v wave of the atrial pressure trace comes from.",
+      "opacity": 0.38
+    },
+    {
+      "key": "ra_blood",
+      "name": "Blood in the right atrium",
+      "label": "RA cavity",
+      "role": "part",
+      "group": "Chambers",
+      "layer": "organ",
+      "color": "#7fb8e8",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#ra_blood"
+      },
+      "terms": [
+        "right atrial pressure",
+        "JVP",
+        "jugular venous pressure"
+      ],
+      "narration": "The same on the right, and its pressure is the jugular venous pressure you can see in the neck.",
+      "opacity": 0.38
+    },
+    {
+      "key": "mitral",
+      "name": "Mitral valve",
+      "label": "Mitral valve",
+      "role": "part",
+      "group": "Valves",
+      "layer": "fascia",
+      "color": "#efe6d2",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#mitral"
+      },
+      "terms": [
+        "mitral valve",
+        "bicuspid valve",
+        "anterior leaflet",
+        "first heart sound",
+        "S1"
+      ],
+      "narration": "Two leaflets, an anterior and a posterior. It is held shut against 120 mmHg by the chordae, and it opens and closes for one reason only: the pressure on either side of it. No muscle pulls a valve open."
+    },
+    {
+      "key": "tricuspid",
+      "name": "Tricuspid valve",
+      "label": "Tricuspid valve",
+      "role": "part",
+      "group": "Valves",
+      "layer": "fascia",
+      "color": "#e6dcc6",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#tricuspid"
+      },
+      "terms": [
+        "tricuspid valve",
+        "S1 splitting"
+      ],
+      "narration": "Three leaflets, and the largest annulus of the four valves — about 18% wider than the mitral in this model, and markedly oval rather than round. It shuts a fraction after the mitral, which is why S1 can be split."
+    },
+    {
+      "key": "aortic",
+      "name": "Aortic valve",
+      "label": "Aortic valve",
+      "role": "part",
+      "group": "Valves",
+      "layer": "fascia",
+      "color": "#f2ecdc",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#aortic"
+      },
+      "terms": [
+        "aortic valve",
+        "semilunar valve",
+        "second heart sound",
+        "S2",
+        "dicrotic notch"
+      ],
+      "narration": "Three semilunar cusps whose attachment is a crown, not a ring — low in the middle of each cusp, high at the commissures. They are pushed open by the ventricle and slammed shut by the aorta's own recoil, which is the second heart sound."
+    },
+    {
+      "key": "pulmonary",
+      "name": "Pulmonary valve",
+      "label": "Pulmonary valve",
+      "role": "part",
+      "group": "Valves",
+      "layer": "fascia",
+      "color": "#e8e0cc",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#pulmonary"
+      },
+      "terms": [
+        "pulmonary valve",
+        "splitting of S2"
+      ],
+      "narration": "The same three cusps on the right. It closes slightly later than the aortic, and inspiration delays it further — which is the physiological splitting of S2."
+    },
+    {
+      "key": "papillary",
+      "name": "Papillary muscles and chordae tendineae",
+      "label": "Papillary muscles & chordae",
+      "role": "part",
+      "group": "Valves",
+      "layer": "muscle",
+      "color": "#8f2028",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#papillary"
+      },
+      "terms": [
+        "papillary muscle",
+        "chordae tendineae",
+        "prolapse",
+        "mitral regurgitation"
+      ],
+      "narration": "They do not open or shut the valve. They contract WITH the ventricle to stop the leaflets being blown back into the atrium when the pressure hits 120 mmHg. Rupture one and the mitral valve prolapses that instant."
+    },
+    {
+      "key": "av_plane",
+      "name": "Atrioventricular plane",
+      "label": "AV plane",
+      "role": "part",
+      "group": "Myocardium",
+      "layer": "fascia",
+      "color": "#e0c060",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#av_plane"
+      },
+      "opacity": 0.35,
+      "terms": [
+        "atrioventricular plane",
+        "AV plane descent",
+        "MAPSE",
+        "apex beat"
+      ],
+      "narration": "The floor of the atria and the roof of the ventricles, carrying all four valve rings. In systole it descends about 12 mm towards a nearly stationary apex — which is why the apex beat stays in one intercostal space, and why the atria fill while the ventricles empty."
+    },
+    {
+      "key": "aorta",
+      "name": "Aorta",
+      "label": "Aorta",
+      "role": "part",
+      "group": "Great vessels",
+      "layer": "vessel",
+      "color": "#b02a2a",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#aorta"
+      },
+      "terms": [
+        "aorta",
+        "windkessel",
+        "aortic pressure",
+        "pulse pressure"
+      ],
+      "narration": "It does not just carry the stroke volume away, it stores it. About half of each stroke volume distends the aorta in systole and is squeezed onward in diastole, which is what turns an intermittent pump into a continuous flow.",
+      "opacity": 0.6
+    },
+    {
+      "key": "pulm_trunk",
+      "name": "Pulmonary trunk",
+      "label": "Pulmonary trunk",
+      "role": "part",
+      "group": "Great vessels",
+      "layer": "vessel",
+      "color": "#2f5fa8",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#pulm_trunk"
+      },
+      "terms": [
+        "pulmonary trunk",
+        "pulmonary artery pressure"
+      ],
+      "narration": "Carries the same 70 ml at a quarter of the pressure, because the pulmonary circulation's resistance is about a seventh of the systemic.",
+      "opacity": 0.6
+    },
+    {
+      "key": "svc",
+      "name": "Superior vena cava",
+      "label": "Superior vena cava",
+      "role": "context",
+      "group": "Great vessels",
+      "layer": "vessel",
+      "color": "#1f4272",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#svc"
+      },
+      "narration": "Venous return is continuous. It does not stop because the ventricles are contracting.",
+      "opacity": 0.6
+    },
+    {
+      "key": "ivc",
+      "name": "Inferior vena cava",
+      "label": "Inferior vena cava",
+      "role": "context",
+      "group": "Great vessels",
+      "layer": "vessel",
+      "color": "#1a3a66",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#ivc"
+      },
+      "narration": "The larger of the two, and the one that carries the effect of a change in posture straight to the right atrium.",
+      "opacity": 0.6
+    },
+    {
+      "key": "pulm_veins",
+      "name": "Pulmonary veins",
+      "label": "Pulmonary veins",
+      "role": "context",
+      "group": "Great vessels",
+      "layer": "vessel",
+      "color": "#9e3540",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#pulm_veins"
+      },
+      "narration": "They deliver into the left atrium continuously, which is what fills it during ventricular systole while the mitral valve is shut.",
+      "opacity": 0.6
+    },
+    {
+      "key": "flow_left_in",
+      "name": "Blood crossing the mitral valve",
+      "label": "Inflow, left",
+      "role": "part",
+      "group": "Blood flow",
+      "layer": "organ",
+      "color": "#ff7a66",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#flow_left_in"
+      },
+      "terms": [
+        "ventricular filling",
+        "E wave",
+        "A wave"
+      ],
+      "narration": "These markers move at the speed of the flow through the valve, not at the speed of the clock. When they stop, no blood is crossing — and during both isovolumetric phases they stop dead."
+    },
+    {
+      "key": "flow_left_out",
+      "name": "Blood crossing the aortic valve",
+      "label": "Outflow, left",
+      "role": "part",
+      "group": "Blood flow",
+      "layer": "organ",
+      "color": "#e03a28",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#flow_left_out"
+      },
+      "terms": [
+        "ejection",
+        "peak aortic flow",
+        "stroke volume"
+      ],
+      "narration": "Peak flow out of the left ventricle is about 560 ml every second — for about a fifth of a second in every beat, seventy-five beats a minute. Nothing crosses at any other time."
+    },
+    {
+      "key": "flow_right_in",
+      "name": "Blood crossing the tricuspid valve",
+      "label": "Inflow, right",
+      "role": "context",
+      "group": "Blood flow",
+      "layer": "organ",
+      "color": "#6aa6e6",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#flow_right_in"
+      },
+      "narration": "The right side does everything the left does, a moment earlier at the start and a moment later at the end."
+    },
+    {
+      "key": "flow_right_out",
+      "name": "Blood crossing the pulmonary valve",
+      "label": "Outflow, right",
+      "role": "context",
+      "group": "Blood flow",
+      "layer": "organ",
+      "color": "#2f6fae",
+      "refs": {
+        "procedural": "cardiac-cycle-pumping#flow_right_out"
+      },
+      "narration": "The same 70 ml, into a low-pressure circuit."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "Atrial systole, from behind — the last fifth of filling",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.04
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "av_plane"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "la"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Blood flow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_left_in"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_right_in"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "la_blood"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "la_blood",
+          "to": "lv_blood",
+          "kind": "flow"
+        }
+      ],
+      "narration": "The P wave has just passed and the atria are contracting. This beat looks at the heart FROM BEHIND, because the left atrium is the most posterior chamber of the four and from the front it is hidden by both ventricles. The atrioventricular valves are already open — they have been open through the whole of diastole — so this squeeze does not open anything, it simply tops the ventricle up. It supplies about a fifth of the filling. That is why losing atrial contraction in atrial fibrillation is survivable in a normal heart and dangerous in a stiff one.",
+      "claims": [
+        {
+          "id": "v1.mitral",
+          "claim": "the atrioventricular valves are already open",
+          "measure": "valve.mitral",
+          "op": "near",
+          "value": 1,
+          "tol": 0.001
+        },
+        {
+          "id": "v1.tricuspid",
+          "claim": "...and so is the tricuspid",
+          "measure": "valve.tricuspid",
+          "op": "near",
+          "value": 1,
+          "tol": 0.001
+        },
+        {
+          "id": "v1.aortic",
+          "claim": "the semilunar valves are shut",
+          "measure": "valve.aortic",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v1.pulmonary",
+          "claim": "...both of them",
+          "measure": "valve.pulmonary",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v1.phase",
+          "claim": "this instant is in atrial systole",
+          "measure": "phase",
+          "op": "equals",
+          "value": "atrial_systole"
+        },
+        {
+          "id": "v1.awave",
+          "claim": "the atrial kick is at or near its peak flow here",
+          "measure": "derived.mitral_flow_frac_of_A",
+          "op": "atLeast",
+          "value": 0.95
+        },
+        {
+          "id": "v1.kick",
+          "claim": "it supplies about a fifth of the filling",
+          "measure": "cycle.left.kick_frac",
+          "op": "between",
+          "value": [
+            0.15,
+            0.3
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "End-diastole — the ventricle at its fullest",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.174
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Blood flow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "av_plane"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "lv_blood",
+            "rv_blood"
+          ]
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "av_plane"
+        }
+      ],
+      "narration": "120 ml on the left, 130 ml on the right. This is end-diastolic volume, and it is the preload every Frank-Starling curve is drawn against. Note the atrioventricular plane, high up: it has the whole of systole to descend. Every valve in the heart is now shut, or about to be.",
+      "claims": [
+        {
+          "id": "v2.lv",
+          "claim": "120 ml on the left",
+          "measure": "lv.volume",
+          "op": "near",
+          "value": 120,
+          "tol": 1
+        },
+        {
+          "id": "v2.rv",
+          "claim": "130 ml on the right",
+          "measure": "rv.volume",
+          "op": "near",
+          "value": 130,
+          "tol": 1
+        },
+        {
+          "id": "v2.edv",
+          "claim": "the ventricle is at its fullest: this IS end-diastolic volume",
+          "measure": "derived.fill_frac",
+          "op": "near",
+          "value": 1,
+          "tol": 0.01
+        },
+        {
+          "id": "v2.mitral",
+          "claim": "every valve in the heart is now shut",
+          "measure": "valve.mitral",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v2.tricuspid",
+          "claim": "every valve in the heart is now shut",
+          "measure": "valve.tricuspid",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v2.aortic",
+          "claim": "every valve in the heart is now shut",
+          "measure": "valve.aortic",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v2.pulmonary",
+          "claim": "every valve in the heart is now shut",
+          "measure": "valve.pulmonary",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v2.phase",
+          "claim": "and the ventricle is not contracting yet",
+          "measure": "phase",
+          "op": "equals",
+          "value": "end_diastole"
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Isovolumetric contraction — all four valves shut",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.228
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Chambers"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Valves"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Valves"
+        }
+      ],
+      "narration": "The ventricle is contracting hard and not one millilitre is leaving it. The mitral shut the moment ventricular pressure passed atrial — that is the first heart sound — and the aortic cannot open until ventricular pressure passes aortic. Between those two instants the chamber is a sealed box: pressure climbs about 1900 mmHg every second, volume does not change at all, and the flow markers are taken away here, because nothing is crossing any valve to mark. This phase lasts about 0.06 seconds and it is where most of the heart's oxygen goes. The wall is taken away here so you can see the four rings themselves: all four are shut, and the blood in the four cavities is going nowhere.",
+      "claims": [
+        {
+          "id": "v3.mitral",
+          "claim": "all four are shut",
+          "measure": "valve.mitral",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v3.aortic",
+          "claim": "all four are shut",
+          "measure": "valve.aortic",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v3.tricuspid",
+          "claim": "all four are shut",
+          "measure": "valve.tricuspid",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v3.pulmonary",
+          "claim": "all four are shut",
+          "measure": "valve.pulmonary",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v3.phase",
+          "claim": "the ventricle is contracting",
+          "measure": "phase",
+          "op": "equals",
+          "value": "ivc"
+        },
+        {
+          "id": "v3.qin",
+          "claim": "not one millilitre is entering it",
+          "measure": "flow.mitral",
+          "op": "atMost",
+          "value": 1e-06
+        },
+        {
+          "id": "v3.qout",
+          "claim": "not one millilitre is leaving it",
+          "measure": "flow.aortic",
+          "op": "atMost",
+          "value": 1e-06
+        },
+        {
+          "id": "v3.vol",
+          "claim": "volume does not change at all",
+          "measure": "lv.volume",
+          "op": "near",
+          "value": 120,
+          "tol": 1
+        },
+        {
+          "id": "v3.dpdt",
+          "claim": "pressure climbs about 1900 mmHg every second",
+          "measure": "cycle.left.dpdt_max",
+          "op": "near",
+          "value": 1900,
+          "tol": 250
+        },
+        {
+          "id": "v3.dur",
+          "claim": "this phase lasts about 0.06 seconds",
+          "measure": "cycle.left.ivc_s",
+          "op": "near",
+          "value": 0.06,
+          "tol": 0.012
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Rapid ejection",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.419
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "av_plane"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Blood flow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_left_out"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_right_out"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "rv"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "rv_blood"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "ra"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "ra_blood"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "tricuspid"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "pulmonary"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "pulm_trunk"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "flow_right_out"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "svc"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "ivc"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "flow_left_out"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lv",
+          "to": "aorta",
+          "kind": "flow"
+        }
+      ],
+      "narration": "The aortic valve is open and the cusps are lying back against the sinus wall — beat 10 shows them from above. The right heart is taken away here because its outflow tract crosses in front of the aortic root and would hide exactly what this beat is about. Flow peaks here at around 560 millilitres a second. Watch two things at once: the cavity collapsing, and the wall getting thicker as it does — the muscle is not disappearing, it is being redistributed. And watch the left atrium: it is filling while the ventricle empties, because the plane between them is being pulled down.",
+      "claims": [
+        {
+          "id": "v4.aortic",
+          "claim": "the aortic valve is open and the cusps are lying back",
+          "measure": "valve.aortic",
+          "op": "near",
+          "value": 1,
+          "tol": 0.001
+        },
+        {
+          "id": "v4.mitral",
+          "claim": "the mitral is shut",
+          "measure": "valve.mitral",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v4.phase",
+          "claim": "this is ejection",
+          "measure": "phase",
+          "op": "equals",
+          "value": "ejection"
+        },
+        {
+          "id": "v4.peak",
+          "claim": "flow peaks HERE",
+          "measure": "derived.aortic_flow_frac_of_peak",
+          "op": "atLeast",
+          "value": 0.98
+        },
+        {
+          "id": "v4.rate",
+          "claim": "at around 560 millilitres a second",
+          "measure": "flow.aortic",
+          "op": "near",
+          "value": 560,
+          "tol": 40
+        },
+        {
+          "id": "v4.collapse",
+          "claim": "watch the cavity collapsing: it is well into the stroke",
+          "measure": "derived.ejected_frac",
+          "op": "between",
+          "value": [
+            0.35,
+            0.65
+          ]
+        },
+        {
+          "id": "v4.wall",
+          "claim": "and the wall getting thicker as it does",
+          "measure": "derived.wall_mm_here",
+          "op": "atLeast",
+          "value": 11
+        },
+        {
+          "id": "v4.atria",
+          "claim": "the left atrium is filling while the ventricle empties",
+          "measure": "derived.d_la_volume_dt",
+          "op": "atLeast",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Reduced ejection",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.48
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "av_plane"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Blood flow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_left_out"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_right_out"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "rv"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "rv_blood"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "ra"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "ra_blood"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "tricuspid"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "pulmonary"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "pulm_trunk"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "flow_right_out"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "svc"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "ivc"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "aorta"
+        }
+      ],
+      "narration": "Ejection continues even though the ventricle has begun to relax and the pressure gradient has already reversed, because the blood that is moving has momentum. Meanwhile the aorta has swallowed about half the stroke volume by stretching. It gives it back in diastole, and that stored-and-returned volume is what keeps blood moving between beats.",
+      "claims": [
+        {
+          "id": "v5.phase",
+          "claim": "ejection continues",
+          "measure": "phase",
+          "op": "equals",
+          "value": "ejection"
+        },
+        {
+          "id": "v5.reduced",
+          "claim": "this is REDUCED ejection: flow is well off its peak",
+          "measure": "derived.aortic_flow_frac_of_peak",
+          "op": "atMost",
+          "value": 0.8
+        },
+        {
+          "id": "v5.flow",
+          "claim": "...and it is still substantial",
+          "measure": "flow.aortic",
+          "op": "atLeast",
+          "value": 250
+        },
+        {
+          "id": "v5.reversed",
+          "claim": "even though the pressure gradient has already reversed",
+          "measure": "derived.lv_minus_aorta",
+          "op": "atMost",
+          "value": 0
+        },
+        {
+          "id": "v5.relaxing",
+          "claim": "the ventricle has begun to relax",
+          "measure": "derived.elastance_falling",
+          "op": "equals",
+          "value": true
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "End-systole — the wall at its thickest, the plane at its lowest",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.5476
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "av_plane"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Blood flow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_right_out"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "av_plane"
+        }
+      ],
+      "narration": "50 ml left in the left ventricle. The wall has gone from 10 mm to 14 mm, the minor axis has shortened by 30% and the long axis by 15%, and the atrioventricular plane has descended about 12 mm towards an apex that has barely moved. That descent is what you feel as the apex beat, and it is why the apex beat does not wander between ribs.",
+      "claims": [
+        {
+          "id": "v6.lv",
+          "claim": "50 ml left in the left ventricle",
+          "measure": "lv.volume",
+          "op": "near",
+          "value": 50,
+          "tol": 1
+        },
+        {
+          "id": "v6.instant",
+          "claim": "this is the instant of aortic valve closure — end-systole itself, not the relaxation after it",
+          "measure": "derived.ms_since_aortic_shut",
+          "op": "atMost",
+          "value": 5
+        },
+        {
+          "id": "v6.aortic",
+          "claim": "end-systole: the aortic valve is shut",
+          "measure": "valve.aortic",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v6.wall_ed",
+          "claim": "the wall has gone from 10 mm",
+          "measure": "geometry.wall_ed_mm",
+          "op": "near",
+          "value": 10,
+          "tol": 0.4
+        },
+        {
+          "id": "v6.wall_es",
+          "claim": "...to 14 mm",
+          "measure": "geometry.wall_es_mm",
+          "op": "near",
+          "value": 14,
+          "tol": 0.7
+        },
+        {
+          "id": "v6.minor",
+          "claim": "the minor axis has shortened by 30%",
+          "measure": "geometry.minorShort",
+          "op": "near",
+          "value": 0.3,
+          "tol": 0.03,
+          "note": "Added review round 6. The sentence states TWO shortenings and only the long-axis one was graded; the minor-axis 30% - the larger of the two and the one fractional shortening is quoted by - had no row. geometry.minorShort is exported by GEOM_REPORT in the same line as longShort; measured 0.3000 against lvid 5.333 cm end-diastole to 3.733 cm end-systole."
+        },
+        {
+          "id": "v6.long",
+          "claim": "and the long axis by 15%",
+          "measure": "geometry.longShort",
+          "op": "near",
+          "value": 0.15,
+          "tol": 0.03
+        },
+        {
+          "id": "v6.mapse",
+          "claim": "the atrioventricular plane has descended about 12 mm",
+          "measure": "geometry.av_plane_descent_cm",
+          "op": "near",
+          "value": 1.2,
+          "tol": 0.2
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Isovolumetric relaxation — the second sealed box",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.601
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Chambers"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Valves"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "aortic"
+        }
+      ],
+      "narration": "The aortic valve has shut — that is the second heart sound, and the aorta's recoil against the closed cusps is what makes the notch on the arterial pressure trace. All four valves are shut and the volume is again fixed, this time at 50 ml, while the pressure falls away. Nothing moves. The mitral will not open until ventricular pressure has fallen below atrial, and relaxation is an active, energy-consuming process — which is why it fails early in ischaemia. Notice how brief this all-shut window is on the whole heart: about 14 milliseconds, because the right ventricle never had much pressure to shed, and it reopens its tricuspid valve about seven milliseconds after the instant you are looking at - that reopening is what closes the window. The pulmonary valve shut about 36 milliseconds after the aortic, and that gap is the splitting of the second heart sound.",
+      "claims": [
+        {
+          "id": "v7.mitral",
+          "claim": "all four valves are shut",
+          "measure": "valve.mitral",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v7.aortic",
+          "claim": "all four valves are shut",
+          "measure": "valve.aortic",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v7.tricuspid",
+          "claim": "all four valves are shut",
+          "measure": "valve.tricuspid",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v7.pulmonary",
+          "claim": "all four valves are shut",
+          "measure": "valve.pulmonary",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v7.phase",
+          "claim": "this is isovolumetric relaxation",
+          "measure": "phase",
+          "op": "equals",
+          "value": "ivr"
+        },
+        {
+          "id": "v7.vol",
+          "claim": "the volume is again fixed, this time at 50 ml",
+          "measure": "lv.volume",
+          "op": "near",
+          "value": 50,
+          "tol": 1
+        },
+        {
+          "id": "v7.window",
+          "claim": "how brief this all-shut window is: about 14 milliseconds",
+          "measure": "derived.allshut_ivr_ms",
+          "op": "near",
+          "value": 14,
+          "tol": 3
+        },
+        {
+          "id": "v7.reopen",
+          "claim": "it reopens its tricuspid about seven milliseconds after this instant",
+          "measure": "derived.tricuspid_reopen_ms",
+          "op": "near",
+          "value": 7,
+          "tol": 2
+        },
+        {
+          "id": "v7.split",
+          "claim": "the pulmonary shut about 36 ms after the aortic",
+          "measure": "derived.a2p2_split_ms",
+          "op": "near",
+          "value": 36,
+          "tol": 5
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Rapid filling — the valve opens on its own",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.6765
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "av_plane"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Blood flow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_left_in"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_right_in"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "rv"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "rv_blood"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "ra"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "ra_blood"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "tricuspid"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "pulmonary"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "pulm_trunk"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "flow_right_in"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "svc"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "ivc"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "flow_left_in"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "la_blood",
+          "to": "lv_blood",
+          "kind": "flow"
+        }
+      ],
+      "narration": "Ventricular pressure has fallen below atrial and the mitral valve swings open with nothing pulling on it. Most of the filling happens right here, in the first third of diastole, driven by the pressure the atrium has accumulated while it was shut out. This is the E wave on a Doppler trace, and the atrial contraction later is the A wave. The right heart is taken away here so the atrium emptying into the ventricle is not hidden behind it — beat 11 shows the venous side filling a few hundredths of a beat later.",
+      "claims": [
+        {
+          "id": "v8.mitral",
+          "claim": "the mitral valve swings open",
+          "measure": "valve.mitral",
+          "op": "near",
+          "value": 1,
+          "tol": 0.001
+        },
+        {
+          "id": "v8.phase",
+          "claim": "this is ventricular filling",
+          "measure": "phase",
+          "op": "equals",
+          "value": "filling"
+        },
+        {
+          "id": "v8.epeak",
+          "claim": "this is the E wave, at its peak",
+          "measure": "derived.mitral_flow_frac_of_E",
+          "op": "atLeast",
+          "value": 0.98
+        },
+        {
+          "id": "v8.most",
+          "claim": "most of the filling happens right here, in the first third of diastole — the model gives the first third 0.495 of the filling volume against roughly 0.7-0.8 on a real Doppler trace; see gaps[]",
+          "measure": "derived.first_third_fill_frac",
+          "op": "atLeast",
+          "value": 0.45
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "Diastasis — and why the heart hates a fast rate",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.948
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "av_plane"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Blood flow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_left_in"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_right_in"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lv_blood"
+        }
+      ],
+      "narration": "Filling has almost stopped: the ventricle is nearly full and the gradient across the open valve is almost nothing. This quiet stretch is diastole's slack, and it is the part that disappears first when the heart rate rises. Diastole is also when the left coronary artery fills, because during systole the ventricle squeezes its own arteries shut — so a fast rate cuts filling and coronary supply together.",
+      "claims": [
+        {
+          "id": "v9.phase",
+          "claim": "the valve is still open and filling is still running",
+          "measure": "phase",
+          "op": "equals",
+          "value": "filling"
+        },
+        {
+          "id": "v9.mitral",
+          "claim": "...the mitral has not shut",
+          "measure": "valve.mitral",
+          "op": "atLeast",
+          "value": 0.3
+        },
+        {
+          "id": "v9.stopped",
+          "claim": "filling has almost stopped",
+          "measure": "derived.mitral_flow_frac_of_E",
+          "op": "atMost",
+          "value": 0.35
+        },
+        {
+          "id": "v9.full",
+          "claim": "the ventricle is nearly full",
+          "measure": "derived.fill_frac",
+          "op": "atLeast",
+          "value": 0.7
+        },
+        {
+          "id": "v9.grad",
+          "claim": "the gradient across the open valve is almost nothing",
+          "measure": "derived.gradient_frac_of_peak",
+          "op": "atMost",
+          "value": 0.35
+        },
+        {
+          "id": "v9.in",
+          "claim": "this instant is inside the measured diastasis window",
+          "measure": "derived.in_diastasis",
+          "op": "equals",
+          "value": true
+        }
+      ],
+      "negative_displacement": 0.06,
+      "negative_displacement_reason": "The measured diastasis window is t 0.896-1.000, 0.104 of a cycle wide, and this beat stands at its midpoint. A displacement of 0.05 lands INSIDE the window, so it is not a misplacement and nothing should fail there. 0.06 clears the window at both ends. The 0.15 displacement is applied to this beat like every other."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 10,
+      "title": "The four rings from above — nothing but pressure moves them",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.419
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Valves"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "av_plane"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Chambers"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "The same instant as rapid ejection, seen from directly above, with the muscle and the great vessels taken away and only the four rings, the atrioventricular plane they sit in, the four blood-filled cavities and the papillary muscles left. The aortic and pulmonary cusps are lying open; the mitral and tricuspid are pressed shut, held by their chordae against a pressure that would otherwise blow them inside out. There is no muscle in a heart valve and no nerve to it. Every one of the four opens and shuts because of the pressure difference across it, and every murmur is a valve that has stopped obeying that rule. Seen from above like this the four rings sit in their real left-right and front-back relation: the pulmonary valve is the most anterior and the most superior, the aortic is wedged behind it and medial to it, the mitral lies behind the aortic and to its left, and the tricuspid is the furthest to the patient's right. Note the sizes too - the tricuspid ring is the largest of the four and distinctly oval, the aortic the smallest.",
+      "claims": [
+        {
+          "id": "v10.same",
+          "claim": "the same instant as rapid ejection",
+          "measure": "derived.aortic_flow_frac_of_peak",
+          "op": "atLeast",
+          "value": 0.98
+        },
+        {
+          "id": "v10.ao",
+          "claim": "the aortic cusps are lying open",
+          "measure": "valve.aortic",
+          "op": "near",
+          "value": 1,
+          "tol": 0.001
+        },
+        {
+          "id": "v10.pv",
+          "claim": "the pulmonary cusps are lying open",
+          "measure": "valve.pulmonary",
+          "op": "near",
+          "value": 1,
+          "tol": 0.001
+        },
+        {
+          "id": "v10.mv",
+          "claim": "the mitral is pressed shut",
+          "measure": "valve.mitral",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v10.tv",
+          "claim": "the tricuspid is pressed shut",
+          "measure": "valve.tricuspid",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v10.pv_ant",
+          "claim": "the pulmonary valve is the most anterior",
+          "measure": "base.pv_minus_av.z",
+          "op": "atLeast",
+          "value": 0.735,
+          "note": "Review round 6: kept, but it is now ONE of three rows. On its own it graded 'the most anterior [of the four]' against the aortic alone, and that is the hole the leftness claim fell through - see v10.pv_sup_mv."
+        },
+        {
+          "id": "v10.pv_ant_mv",
+          "claim": "...anterior to the mitral as well",
+          "measure": "base.pv_minus_mv.z",
+          "op": "atLeast",
+          "value": 1.75
+        },
+        {
+          "id": "v10.pv_ant_tv",
+          "claim": "...and to the tricuspid",
+          "measure": "base.pv_minus_tv.z",
+          "op": "atLeast",
+          "value": 2.0
+        },
+        {
+          "id": "v10.pv_sup",
+          "claim": "...and the most superior",
+          "measure": "base.pv_minus_av.y",
+          "op": "atLeast",
+          "value": 2.05,
+          "note": "WAS v10.pv_left, 'the pulmonary valve is ... the furthest to the left', measured as base.pv_minus_av.x atLeast 0.735. The sentence compares the pulmonary with all four rings; the row compared it with the aortic only, so it passed for five review rounds while the narration was false. The model's own base puts the MITRAL annulus at x 2.084 and the pulmonary at 1.488 - the mitral is 0.60 cm further to the left, and a student looking at this beat from directly above can see that it is. Corrected review round 6, 2026-09-30: the pulmonary IS the most superior of the four here (y 4.030 against mitral 1.613, tricuspid 1.208, aortic 1.067), that is what the base of the heart is examined on, and it is now graded against all three of the others rather than against one."
+        },
+        {
+          "id": "v10.pv_sup_mv",
+          "claim": "...above the mitral",
+          "measure": "base.pv_minus_mv.y",
+          "op": "atLeast",
+          "value": 1.69
+        },
+        {
+          "id": "v10.pv_sup_tv",
+          "claim": "...and above the tricuspid",
+          "measure": "base.pv_minus_tv.y",
+          "op": "atLeast",
+          "value": 1.97
+        },
+        {
+          "id": "v10.ao_behind",
+          "claim": "the aortic is wedged behind it",
+          "measure": "base.pv_minus_av.z",
+          "op": "atLeast",
+          "value": 0.735
+        },
+        {
+          "id": "v10.ao_med",
+          "claim": "...and medial to it",
+          "measure": "base.av.x",
+          "op": "near",
+          "value": 0,
+          "tol": 0.5,
+          "note": "WAS base.pv_minus_av.x - the identical expression v10.pv_left used, so two narration phrases rested on one measurement and neither tested what it said. 'Medial' is a statement about the aortic ring's own distance from the midline: it sits at x -0.073, on it."
+        },
+        {
+          "id": "v10.mv_behind",
+          "claim": "the mitral lies behind the aortic",
+          "measure": "base.av_minus_mv.z",
+          "op": "atLeast",
+          "value": 0.8575
+        },
+        {
+          "id": "v10.mv_left",
+          "claim": "...and to its left",
+          "measure": "base.mv_minus_av.x",
+          "op": "atLeast",
+          "value": 0.8575
+        },
+        {
+          "id": "v10.tv_right",
+          "claim": "the tricuspid is the furthest to the patient's right",
+          "measure": "base.av_minus_tv.x",
+          "op": "atLeast",
+          "value": 0.8575
+        },
+        {
+          "id": "v10.tv_largest",
+          "claim": "the tricuspid ring is the largest of the four",
+          "measure": "geometry.annulus_ratio_tv_mv",
+          "op": "atLeast",
+          "value": 1.12
+        },
+        {
+          "id": "v10.tv_largest_by_area",
+          "claim": "...the largest of the four, by ORIFICE AREA and not only by mean diameter",
+          "measure": "geometry.orifice_ratio_tv_mv",
+          "op": "atLeast",
+          "value": 1.05,
+          "note": "Added round 6 for R5-OPEN-1. v10.tv_largest above reads annulus_ratio_tv_mv, which is a ratio of two MEAN diameters, and a mean cannot tell a 2.8-to-1 ellipse from a circle. Area can. The model's tricuspid orifice is 7% larger than its mitral where a real pair is 30-70% larger, which is the same declared defect acceptance row Y6 bounds. REVIEW ROUND 6: the other half of this sentence, \"the aortic the smallest\", still carries no row, and it is NOT an oversight - check-beat-claims reaches model geometry as `geometry.<field>` or `base.<a>_minus_<b>.<axis>`, and the four annulus_*_cm scalars live under `base` as plain numbers, which neither route can read (`base.annulus_av_cm.x` indexes a number). It IS asserted, by acceptance row Y2, 'the tricuspid annulus is the LARGEST of the four and the aortic the smallest', with negative case Y2 inverting the order. Recorded rather than papered over with a row that grades something else: the vocabulary gap is the thing to fix, and the smallest honest fix is for `geometry.<field>` to fall through to `base[field]` when it is a number. Proposed to the build task, not done here - it is shared tooling."
+        },
+        {
+          "id": "v10.tv_oval",
+          "claim": "...and distinctly oval",
+          "measure": "geometry.annulus_aspect_tv",
+          "op": "atLeast",
+          "value": 1.15,
+          "note": "Added round 6. This sentence carried NO claim row for five review rounds - the second standards gap review round 5 named: check-beat-claims grades only what a scene writes into claims[], so a comparative sentence with no row is ungraded. The row is deliberately a FLOOR and not a band: the ring IS distinctly oval, at 2.86 to 1, and the defect is that it is far too oval - which acceptance row Y6 bounds from above. Putting the upper bound here as well would make this beat fail for a geometry fault that is declared elsewhere."
+        }
+      ]
+    },
+    {
+      "mode": "mechanism",
+      "beat": 11,
+      "title": "The venous side, from the right — where the filling comes from",
+      "ops": [
+        {
+          "op": "SET_STAGE",
+          "t": 0.72
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "av_plane"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Blood flow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flow_right_in"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "lv"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "lv_blood"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "la"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "la_blood"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "septum"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "papillary"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "mitral"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "aortic"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "aorta"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "pulm_veins"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ra_blood"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ra_blood",
+          "to": "rv_blood",
+          "kind": "flow"
+        }
+      ],
+      "narration": "Everything so far has been the left heart from the front, and from there the venous side is behind the right ventricle and cannot be seen at all. This is the same heartbeat turned to look from the patient's right, with the left heart taken away. Mid-diastole: the tricuspid valve is open, the right atrium is emptying into a right ventricle that is filling towards 130 ml, and the pulmonary valve is shut. The superior and inferior venae cavae deliver all the way through the cycle - venous return does not pause because the ventricles are contracting, which is why the right atrium keeps filling even while its own valve is shut. The inferior cava is the larger of the two, and it is the one that carries a change in posture straight to the right atrium. The pressure in this chamber is the jugular venous pressure you can read off the neck.",
+      "claims": [
+        {
+          "id": "v11.tricuspid",
+          "claim": "the tricuspid valve is open",
+          "measure": "valve.tricuspid",
+          "op": "near",
+          "value": 1,
+          "tol": 0.001
+        },
+        {
+          "id": "v11.pulmonary",
+          "claim": "and the pulmonary valve is shut",
+          "measure": "valve.pulmonary",
+          "op": "near",
+          "value": 0,
+          "tol": 1e-09
+        },
+        {
+          "id": "v11.phase",
+          "claim": "mid-diastole: the ventricle is filling",
+          "measure": "phase",
+          "op": "equals",
+          "value": "filling"
+        },
+        {
+          "id": "v11.rv",
+          "claim": "a right ventricle that is filling towards 130 ml",
+          "measure": "rv.volume",
+          "op": "near",
+          "value": 79.9,
+          "tol": 1.5
+        },
+        {
+          "id": "v11.inflow",
+          "claim": "the right atrium is emptying into it",
+          "measure": "flow.tricuspid",
+          "op": "atLeast",
+          "value": 200
+        },
+        {
+          "id": "v11.edv",
+          "claim": "...towards 130 ml",
+          "measure": "cycle.right.edv",
+          "op": "near",
+          "value": 130,
+          "tol": 1
+        }
+      ]
+    }
+  ],
+  "gaps": [
+    "PROCEDURAL BY NECESSITY, AND THE CATALOG WAS CHECKED RATHER THAN TRUSTED. The queue item carries candidate_meshes:3. The three meshes in available-meshes.json whose names match are 'great cardiac vein' (FMA4707), 'middle cardiac vein' (FMA4713) and 'set of anterior cardiac veins' (FMA71567). They are VEINS; they match on the word 'cardiac' and have nothing to do with this structure. There is no mesh of the cardiac cycle and there cannot be one - the subject is not an object, it is what the object does over time. This is RENDER-STANDARD 5 'procedural belongs where the form is a function of something', and here the form is a function of time and of nothing else.",
+    "THE RIGHT VENTRICLE IS A WRAPPED TUBE, WHICH IS RIGHT IN KIND AND SCHEMATIC IN DETAIL. It was first built as a body of revolution standing beside the left ventricle, and measurement killed that: 19.6% of the LEFT ventricular cavity was also inside the RIGHT ventricular cavity - a fifth of the blood in both chambers at once - and the heart came out 11.7 cm across. Both follow from the same mistake, that two convex bodies of 120 and 130 ml side by side cannot be anything else. It is now a swept tube of flattened section running from the tricuspid annulus down towards the apex and up in front to the pulmonary valve, riding on the left ventricle's own axis, which is the shape it actually is. Interpenetration measured again afterwards: 0.0%. What remains schematic is the section - a flattened ellipse rather than a true crescent with a concave septal face - and the extent of the wrap (115 degrees, where a real right ventricle reaches further round). INTERPENETRATION IS NOW MEASURED BY A TOOL RATHER THAN BY THIS SENTENCE, 2026-09-30: the 0.0% above was measured once, by hand, on 2026-09-10, and the geometry then moved three times with nothing re-measuring it - the same failure as gaps[13] in a different dimension. viz-training/tools/measure-cavity-overlap.mjs parity ray-casts a 56^3 grid and reports the overlap as a fraction of EACH cavity in turn, because the smaller chamber's figure flatters. Re-run after the round-5 rvPath re-derivation at four t: left-against-right, left-against-left-atrium, left-atrium-against-right and right-atrium-against-right all read 0.000%.",
+    "THE SEPTUM IS DRAWN AS A DISCRETE PLATE between the two cavities, of left ventricular thickness. It is really the shared wall of both ventricles, not a third structure sitting between them. Drawn this way it can be shown, hidden and highlighted on its own, which is what the scene needs; a reviewer should decide whether the simplification costs more than it buys.",
+    "THE VENTRICULAR PRESSURE PEAK EXCEEDS THE RECORDED ARTERIAL PEAK BY ABOUT 32 mmHg, where a real pair of curves very nearly coincide through ejection. This is an artifact of representing the whole aorta as one lumped inertance, it is measured by acceptance test O rather than hidden, and it is not correctable by tuning. It is also the reason this scene does NOT draw a pressure trace: the geometry, the volumes, the valve timings and the flow are all trustworthy, and a Wiggers pressure curve drawn from this model would not be. A pressure trace belongs in a diagram-engine scene fed by the model's own numbers.",
+    "SYSTOLE COMES OUT AT 0.274 s AND ISOVOLUMETRIC RELAXATION AT 0.070 s, against textbook figures of about 0.30 and about 0.08. RE-MEASURED 2026-09-29 AFTER THE DIASTOLE REWORK, and the definition of systole changed with it: it now runs from M1 - the onset of the ventricular pressure rise, located on the trace - rather than from the instant transmitral flow stops. Those were the same instant while the atrium was clamped to an ideal venous source; they are 58 ms apart now that it is not, and measured from flow cessation systole read 0.332 s and isovolumetric contraction 0.113 s, most of which was a fully relaxed ventricle sitting at end-diastolic volume. See gap 17. The relaxation figure was 0.044 s until 2026-09-22, when the model's header blamed the single outflow inertance for it; the cause was the ventricular relaxation constant V_FALL at 0.105 s, where an isovolumic relaxation of time constant 40-50 ms takes three to four of them to complete.",
+    "NO CORONARY CIRCULATION. That the left coronary artery fills in DIASTOLE, because systolic compression shuts its own vessels, is a consequence of this very cycle and is examined. It is narrated in the diastasis beat and it is not drawn. The coronary vessels are their own queue item.",
+    "NO ECG, NO PRESSURE TRACE, NO HEART SOUNDS. S1 and S2 are named in the narration at the instants the model actually places them, and the PR interval enters the model as a number, but there is no conducting system, no waveform and no audio. A student who needs the Wiggers diagram itself needs a diagram-engine companion scene, and the numbers for it can be read straight off this model's cycle() report.",
+    "THE ATRIA ARE ROUNDED SACS with no auricles, no pectinate muscles and no pulmonary vein orifices beyond two stubs. Their VOLUMES are solved and correct; their shape is a container.",
+    "VALVE LEAFLETS HAVE NO MASS. A leaflet is latched to its own opening and closing events - which the model root-solves from the pressures - and the flow through its orifice then says how far open it sits, between a floor of 0.35 and fully open. So a valve is never open against a backward gradient, which is what the scene exists to teach, and it never slams shut on a momentary pause in the flow, which is what the previous flow-only rule did: through the mid-diastolic pause after the atrial kick it drove the mitral to fully shut at t=0.108, back open to 0.61 at t=0.180 and shut again at t=0.210, two complete closures inside one atrial systole with the first of them 80 ms early. What the floor shows instead - leaflets drifting towards apposition without coapting - is the partial closure after the A wave that an M-mode echo shows. They still do not flutter and they have no inertia of their own.",
+    "FINDING, NOT IN THIS MODEL: render-kit.js sweptShell emits its BASE-END annular cap with a winding that disagrees with the normals it supplies for that cap. Measured on this model's thick-walled chambers: winding agreement 0.989 with no cutaway and 0.972 with one, where every other surface reads 1.000. Derived as well as measured - cap(0,-1) calls quad() where the corner order it passes needs quadFlip(). It is invisible today because caps are excluded from the silhouette hull and the material is DoubleSide, but it is in the shared machinery and it affects every thick-walled model in the corpus. NOT changed here: cardiac-looping was claimed by another run while this one was building, and shared machinery should not move under it. Full derivation in BUILD-LOG.md.",
+    "THE CUTAWAY RIM IS RAGGED WHERE IT CROSSES THE RIGHT VENTRICLE'S FLATTENED SECTION. render-kit's window test keeps or drops a quad by its angle about the section, and on a strongly flattened ellipse equal angles are very unequal arc lengths, so the opening's edge steps rather than runs smooth. Visible as a zig-zag along the lower edge of the right ventricle in the proof frames. Cosmetic, in shared machinery rather than in this model, and not corrected here for the same reason as the cap winding finding.",
+    "THE SCENE HAS NOW BEEN WALKED AS THE PLAYER DRAWS IT, AND THAT IS WHAT THIS GAP USED TO SAY NOBODY HAD DONE. Until 2026-09-29 this entry read 'Nobody has yet loaded this scene into viz3d.js and walked its ten beats', and it sat there for three rounds while eight defects hid behind it: the aortic valve contributed 0.000% of the frame in every one of the six beats whose narration pointed at it, the tricuspid 0.000% in nine beats of ten, the left-sided flow markers 0.000% everywhere, and the two beats that say 'the wall is taken away so you can see the four rings' drew opaque blood casts over the rings. viz-training/tools/measure-scene-visibility.mjs now reimplements viz3d's resetState + ops + per-structure opacity + per-view camera refit, counts every structure by id-pick AND by with/without difference, and exits non-zero; round 4 runs it and all ELEVEN beats pass. What remains true is the weakness the tool states in its own header: it REIMPLEMENTS the player rather than being it. If the two ever disagree, viz3d is right, and making the player itself scriptable would be better than either. Nobody has yet done that. || UPDATE, ROUNDS 6 AND 6b (2026-09-30): the PLAYER ITSELF — viz-training/tools/walk-scene-in-player.mjs, which drives viz3d.js rather than reimplementing it — has now been run over ALL ELEVEN beats at the pinned three r128, not just the three (2, 3, 10) round 5 walked. Nine of the eleven come back clean and agree with measure-scene-visibility. TWO DO NOT: see the last gaps entry.",
+    "THE FIRST HEART SOUND'S TWO COMPONENTS ARE NOW IN THE RIGHT ORDER BUT THE INTERVAL IS SHORT. REPAIRED, NOT BY AIMING AT IT, 2026-09-29: this gap used to record that T1 preceded M1 by 2.8 ms, the wrong way round, and that no uniform right-sided activation delay could fix it without widening A2-P2 splitting past its own textbook range. The venous reservoir fixed it as a side effect and nothing in this round was aimed at it. Measured now: the mitral shuts at t=0.1320 and the tricuspid at t=0.1435, so M1 precedes T1 by 9.2 ms, which is the order life has. Life has it by 20-30 ms, so the interval is still about a third of what it should be. The order is now asserted - acceptance row W2, with a floor of 5 ms - which the old defect made impossible, since a test that asserts a defect locks it in. The magnitude is not asserted, and the shortfall is what remains of this gap. A2-P2 splitting is unchanged at 35.8 ms and still inside its range.",
+    "THE HEART IS STILL WIDER THAN A REAL ONE, BY ABOUT 2 cm, AND THE FIGURE IS NOW MEASURED BY A CHECK RATHER THAN BY A SENTENCE. History, because this entry has now been wrong twice and that is the point of it: the model's header recorded 'THE HEART WAS 11.7 cm ACROSS, against a real 8.5' as a fault the wrapped-tube right ventricle cured; this gap then claimed 12.3 cm from 2026-09-22; round 4 measured 13.55-14.66 cm in x and found that its own right-atrium move had widened the heart by 2 cm while closing another finding (R4-OPEN-1). NOTHING MEASURED IT, which is why it could drift.\n\nTWO NUMBERS, NOT ONE, AND THE OLD ARGUMENT CONFLATED THEM. The textbook 'about 8.5 cm wide' is measured ACROSS the heart's long axis. An x-span is a different quantity, because the heart lies obliquely and the left ventricle's own 9 cm axis projects 3.6 cm onto x. Round 4 measured the x-span and compared it with the header's transverse figure. Both are now measured separately and labelled: tools/render-cardiac-cycle.mjs check 8 walks the built triangles of the four chamber walls at every instant the scene stands on.\n\nMEASURED 2026-09-30, AFTER THE rvPath RE-DERIVATION THIS GAP ASKED FOR: transverse width 10.4-12.2 cm (widest 12.246 at t=0.48), x-span 12.5-13.4 cm (widest 13.426 at t=0.419), against 13.55-14.66 in x before. Bounds 12.5 and 13.8, with a negative case that pushes the right atrium back to where round 4 had it and is rejected on both measures. The base relations are asserted in the model's own battery: mitral-to-tricuspid annular centres 4.26 cm in x where round 4 measured 6.045 (row Z5), the four annuli spanning 4.26 cm where they spanned 6.85 (row Z6), and the tube's standoff 3.05 cm at the inflow and 2.86 at the outflow against a mid-body 4.94, where before it was 4.875120678076252 and 4.875120678076255 - equal to seven figures (row Z7). Tricuspid-to-pulmonary distance 5.46 cm, where it was 9.21.\n\nWHAT WAS ACTUALLY WRONG, and it was one line: rvPath clamped zeta at 0 for any station ABOVE the left ventricle's base plane, so every such station cleared the left ventricle's full basal cavity radius plus a 1.05 cm interventricular septum - at the one height where neither exists. Both orifices sit at or above the base, so both were pushed out to the same 4.875 cm. The obstacle now fades to the mitral annulus radius and the septum to the thin atrioventricular one over 1.6 cm of height, and the outflow end was given its own lift so the infundibulum rises into the position it actually occupies. Reducing the WRAP was tried in an earlier round and rejected - it moves the pulmonary valve to the patient's right of the aortic, losing a relation that IS examined (row T) - and nothing here touches phi0 or phi1.\n\nWHAT REMAINS. The transverse width is still about 2-3 cm over a real heart and the mitral-to-tricuspid separation is 4.26 cm against a real 3.3. Both have the same floor and it is declared rather than bounded away: the inflow standoff cannot fall below the mitral annulus radius (1.40) plus the atrioventricular septum (0.34) plus the tube's OWN radial half-thickness at the orifice (1.14), and the last of those is a consequence of the flattened-ellipse section gaps[1] still owes a true crescent. A thinner tube at the orifice is the next piece of work; until it exists, row Z5's bound is 4.6 and the derivation is written beside it in the model.",
+    "THE TRICUSPID RING IS THE MOST POSTERIOR OF THE FOUR AT END-DIASTOLE ONLY, AND BY 0.3 mm. Re-measured 2026-09-23 by the review task at three instants (+z anterior): at t=0.208 tricuspid -1.42, mitral -1.39, aortic -0.54, pulmonary +2.71, so the tricuspid is behind the mitral by 0.03 cm - the two are effectively coincident, not inverted. At t=0.33 and at t=0.4185, the instants beat 10 actually shows, the order is correct: mitral is the most posterior (-1.38 / -1.23) with the tricuspid in front of it (-1.35 / -0.92). The earlier text here recorded the end-diastolic figure as if it held at every t and called the relation wrong; it is wrong only at end-diastole and only by a third of a millimetre. The four relations beat 10 narrates were re-measured at its new t and all four hold: pulmonary most anterior (+2.78) and most leftward (x +3.37), aortic behind and medial to it (z -0.47, x -0.16), mitral behind the aortic and to its left (z -1.23, x +2.67), tricuspid furthest to the patient's right (x -2.19). The real remaining base defect is the width in gap 13, not the antero-posterior order.",
+    "THE SCENE STANDS IN A LEFT ANTERIOR OBLIQUE, camera.initialYaw -0.70 rad (40 degrees), and it used to stand square on at 0. That is a consequence of un-mirroring the base plane, not a taste: with the right ventricle finally where it belongs - the most anterior chamber, lying across the front of the left one - a square anterior view of this scene shows the right ventricle and almost nothing of the left. The left ventricle is now opened through its own FREE WALL (anterolateral) rather than anteriorly, which is how a heart is opened on a bench and why the septum is what you see across the far side, and the oblique brings that opening to face the viewer. The right ventricle is still opened anteriorly, because anterior IS its free wall. A reviewer should judge the 40 degrees on the frames: it is the trade between seeing into the left ventricle, which is what the scene is about, and keeping enough of a front-on view that the right ventricle still reads as the anterior chamber.",
+    "THE AORTA STORES 73% OF THE STROKE VOLUME WHERE THE NARRATION TEACHES ABOUT HALF, AND THE NARRATION IS THE ONE THAT IS RIGHT ABOUT HEARTS. Raised by the model3d review task on 2026-09-23 (R2-OPEN-2), which measured 71% against the parameters of the day and deliberately left the choice to the build run rather than making it quietly. Re-measured 2026-09-29 against the re-solved circulation, by integrating the model's own windkessel over its own ejection interval: 70.0 ml ejected, 18.8 ml of peripheral runoff during ejection, so 51.2 ml - 73% - is stored by arterial distension. Beat 5 says 'about half the stroke volume'. THE NARRATION IS LEFT ALONE. Editing a teaching sentence to agree with an approximate model would teach a number that is wrong about hearts, which is a worse error than the one being fixed, and it is the failure mode REVIEW-TASK-PROMPT section 3 warns about. SAME ROOT CAUSE AS gap[3]: the entire systemic circulation is one resistance and one compliance, and a compliance bisected to hit 120/80 exactly cannot also land the storage fraction. A distributed arterial model would fix both; nothing short of one will.",
+    "THE DIASTASIS IS REAL BUT SHALLOW: INFLOW FALLS TO 0.23 OF THE E PEAK WHERE A REAL TRACE REACHES ABOUT 0.10-0.15. Declared with the fix rather than after it. Review round 2 found that beat 9 narrated a diastasis this model did not have AT ANY t - inflow fell monotonically from its early peak to 120 ml/s at the P wave and never approached zero - and the venous reservoir and exponential end-diastolic pressure-volume relation put one there. Measured now: a window t 0.896-1.000, 83 ms wide, minimum inflow 85.7 ml/s at the P wave (0.234 of the 366 ml/s E peak), 104 ml/s (0.284) at beat 9's own t=0.948, with the ventricle 0.735 of the way from end-systolic to end-diastolic volume there. THE FLOOR IS STRUCTURAL AND NOT A TUNING FAILURE: in a lumped circulation with continuous venous return, mid-diastolic inflow cannot fall far below the mean venous return, which is 88 ml/s at this cardiac output. A sweep of the reservoir compliance from 3 to 8 ml/mmHg and its filling resistance from 0.02 to 0.20 moved the minimum only between 74 and 91 ml/s; it is in BUILD-LOG.md. Getting below it needs the atrium itself to store volume at nearly constant pressure - an exponential atrial pressure-volume relation, as the ventricle now has - which is the next piece of work and is not in this round.",
+    "THE E WAVE CARRIES 0.495 OF DIASTOLIC FILLING WHERE A REAL ONE CARRIES 0.7-0.8, and beat 8 says 'most of the filling happens right here, in the first third of diastole'. Found by the new per-beat claim check on its first run - the claim was written to a threshold of 0.50 and measured 0.4951 - which is the check doing exactly what it was proposed for. Same cause and same treatment as the diastasis gap above: the narration teaches the real physiology and is left alone, the claim's bound is set at 0.45 so the shortfall cannot grow unnoticed, and the number is declared here. The transmitral E/A ratio, which is the examined form of the same fact, is 1.29 on the left - inside the normal adult range, and repaired from 0.86, a reversed ratio, which is what this model had before 2026-09-29 and which nothing measured or asserted on.",
+    "THE RIGHT-SIDED VENOUS RESERVOIR COMPLIANCE, 12 ml/mmHg, IS A MODELLING CHOICE AND NOT THE SYSTEMIC VENOUS COMPLIANCE, which is of order 100 ml/mmHg. What the number represents is the part of the venous bed in direct communication with the right atrium within one 0.8 s beat, which is a small fraction of the whole. Stating the full figure would make the right atrium a constant pressure source again and reproduce precisely the defect the reservoir was added to remove. The left-hand value, 6.0 ml/mmHg, needs no such apology: total pulmonary vascular compliance is reported at 4-7 ml/mmHg. The consequence is visible in the measurements: transtricuspid E/A comes out at 0.99 against a transmitral 1.29, at the very bottom of the normal range for the right side.",
+    "THE MITRAL LEAFLETS COME INTO APPOSITION 58 ms BEFORE THE FIRST HEART SOUND, AND BEAT 3 CALLS THE APPOSITION S1. New on 2026-09-29 and a direct consequence of the venous reservoir. Measured: transmitral flow stops at t=0.1320, when the relaxing atrium's pressure falls below the ventricle's end-diastolic 8.0 mmHg; the ventricle is not activated until t=0.2050, where its pressure begins to rise. Between them the ventricle sits at 120 ml with all four valves shut and nothing contracting - a real interval, which the model now names 'End-diastolic pause' and beat 2 stands in. It is also right in kind: a mitral valve IS already apposed before the ventricle contracts, and M1 is the tensing of a shut valve rather than its closure. But beat 3 narrates 'the mitral shut the moment ventricular pressure passed atrial - that is the first heart sound', which is the standard examined answer and is left alone. 58 ms is on the long side for a PR interval of 160 ms; acceptance row W3 bounds it at 0.02-0.09 s so it cannot grow.",
+    "THE CHAMBER STIFFNESS CONSTANT WAS CHOSEN INSIDE A LITERATURE RANGE WITH THE E/A MEASUREMENT IN VIEW, AND THE ACCEPTANCE ROWS THAT READ IT SAY SO. b_pass is stated at 0.025 /ml on the left and 0.018 on the right, both inside the 0.01-0.03 /ml reported for the human ventricle, and a sweep across that range and across the atrial stiffness was run and looked at before those two were fixed - it is in BUILD-LOG.md. Nothing is bisected against E/A or against the depth of the diastasis, so rows Y and Z are not `solved`; but they are not free predictions either, and calling them `predicted` would claim evidence the round did not earn. They carry a third label, `calibrated`, defined in the model beside them: weaker than a prediction, stronger than a solve. The one genuinely free result of the change is the repair of the M1-T1 order, gap 12, which nothing was aimed at and which was a declared defect for a week.",
+    "THE LEFT ATRIUM, THE VENAE CAVAE AND THE RIGHT INFLOW ARE BEHIND THE HEART IN AN ANTERIOR PROJECTION, AND THE SCENE ANSWERS THAT WITH TWO BEATS RATHER THAN WITH A THRESHOLD. Round 3 found these declared with their own teaching narration and drawn at 0.000% of the frame in every beat, so a student could select them and be shown nothing (R3-OPEN-3). Round 4's answer is that the anatomy is right and the camera was the problem: the left atrium IS the most posterior chamber and the inferior cava DOES enter the right atrium from behind and below. So BEAT 1 now looks from BEHIND (left atrium 0.58% of the frame) and a new BEAT 11 looks from the patient's RIGHT with the left heart removed (right atrium, its cavity, both venae cavae and the right inflow all well above threshold). Nine visibility waivers remain, in beats 2, 6, 8 and 9, each naming which of those two beats shows the structure instead. What is NOT fixed is that the right atrium still sits in the right ventricle's shadow in the left anterior oblique the other nine beats stand in, even after its base was moved out to the heart's right border (RA_BORDER, 0.85 of its own radius): the cause is the same excessive width gaps[13] declares.",
+    "THE FLOW MARKERS ARE NOW SHORT TRAINS AT THEIR OWN ORIFICE, AND THE RENDERING CONSTANTS ARE CHOICES, NOT MEASUREMENTS. Until round 4 each train ran from the middle of a chamber to the far end of a great vessel, which put every left-sided marker inside an opaque cast (0.000% of the frame in every beat that pointed at one) and made the train the widest object in the scene, so the player's per-view camera fit framed the beads and shrank the heart. The route is now 0.85 cm upstream of the valve centre to 2.90 cm downstream, leaning downstream because that is the less buried side; the parcel radius is 0.60 cm, five parcels when the valve is passing blood and ONE smaller parked parcel when it is not; and LAPS=6 says how many times the stroke volume carries a parcel across the shortened segment. Only the GATE is physical - it reads the same integrated flow trace the valve state reads, at 0.03 of that orifice's own peak. The four numbers above were tuned against the visibility walk until the pointed-at trains cleared 0.30% of the frame, and they would need retuning if the opacities changed.",
+    "THE FOUR CAVITY OPACITIES ARE A COMPOSITION, AND THE WHOLE SCENE DEPENDS ON THEM. Round 3's root-cause finding (R3-OPEN-5) was that the blood casts carried no opacity at all and so buried everything inside them. They are now 0.38, the ventricular and atrial walls 0.45, the great vessels 0.60 and the AV plane 0.35, and at those values every structure each beat draws or points at clears the walk. Two things follow. The valves in the nine anterior beats are seen THROUGH the cast rather than beside it - the id-pick measure reads them as zero and the alpha-aware one as 0.1-1.0% - which is what a teaching diagram does and is why the walk tool was corrected this round to take the better of its own two measures rather than the id-pick alone. And a future change to any one opacity can push a structure back under threshold without anything else looking different, so measure-scene-visibility.mjs has to be re-run after any of them moves.\n\nAND 'SEEABLE' NOW MEANS THE PIXELS MOVE, NOT ONLY THAT THEY CHANGED (R4-OPEN-2, closed 2026-09-30). Round 4 found that the walk's alpha-aware measure counted any pixel changing by more than 6/255 and put no floor on the size of the change, so a structure could clear the bar on a 19/255 tint; it rendered beat 2 with and without the tricuspid, looked at both crops at 3x and could not tell them apart. measure-scene-visibility.mjs now requires a structure that passes ONLY on the alpha measure to move its pixels by at least 40/255 at peak - the value round 4's own data splits at, since the two cases it looked at and called legible read 39 and 156 and the five it could not see read 19 to 38. Round 4 declined to move the threshold itself because the tool is shared and 'moving a threshold during one item's review silently re-grades another item's verdict'. The build ran the tool over heart-valves before and after the change: 10 beats of 10 pass either way, nothing re-graded. Under the new floor five structures in this scene stopped counting; beat 8 was REPAIRED rather than waived, because the left atrial cavity it lost is a structure that beat points at, and the other four are declared in visibility_waivers.",
+    "THE LEARNING GOAL COUNTS FIVE PHASES AND THE MODEL RESOLVES SIX, AND THAT IS DELIBERATE (R4-OPEN-3, closed 2026-09-30). phaseAt has returned six keys since round 4, when the venous reservoir separated mitral leaflet apposition at t=0.1320 from the first heart sound at t=0.2050 and the 58 ms between them became an interval in its own right - real, argued for in gaps[20], and the one beat 2 stands in. The goal still said 'the five phases' and nothing compared the two, which is R4-OPEN-1's failure in a different dimension. THE MODEL WAS NOT CHANGED TO AGREE WITH THE GOAL: folding the end-diastolic pause into isovolumetric contraction would name a contraction that has not started, and folding it into atrial systole would name a contraction that has finished. The GOAL was corrected instead, and it still counts five, because five is what a student is examined on - the sixth is named beside them as an interval this model resolves rather than promoted to a sixth examinable phase. Both halves are now asserted so neither can drift again: acceptance row Z8 requires the declared keys to tile the cycle exactly with nothing undeclared returned, and row Z9 requires all five examined phases to exist and the narrowest to last at least 20 ms. Measured spans: atrial systole 0.1056 s, end-diastolic pause 0.0584, isovolumetric contraction 0.0596, ejection 0.2144, isovolumetric relaxation 0.0704, filling 0.2916; coverage 1.0000 over 4000 samples.",
+    "BEAT 8 NOW HIDES THE RIGHT HEART, AND THE ROUND-5 NARROWING IS WHY IT HAD TO. Bringing the right ventricle's outflow medially (gaps[13]) put more of it in front of the left atrium in the left anterior oblique, and the left atrial CAVITY - which beat 8 points at with a SHOW_RELATIONSHIP and narrates as the source of the filling pressure - fell from 0.47% of the frame to 0.072%. That is a structure a beat points at, so it is a defect and not a waiver: beat 8 now removes the right heart exactly as beats 4 and 5 do, and the narration says so. Measured after: left atrial cavity 1.14% of the frame, left inflow train 0.71% at a peak delta of 156. RECORDED AS A COST OF THE FIX, not found afterwards: round 4's own provenance moved the right atrium and did not record what it cost, which is how gaps[13] came to be wrong for a second time.",
+    "THE TRICUSPID ANNULUS IS DRAWN AS A 3:1 SLOT, AND THE ONE NUMBER THAT LEAVES THE MODEL HIDES IT. Measured by the model3d review task, round 5 (2026-09-30), on the built triangles, in the ring's OWN best-fit plane rather than in the left ventricle's: the tricuspid annulus is 4.92 cm by 1.61 cm at end-diastole, 4.81 by 1.58 at t=0.419 and 4.54 by 1.50 at t=0.601 - an aspect of 3.04-3.06 to 1 at every instant. The mitral, measured the same way, is 2.84 by 2.38, aspect 1.19. CAUSE, and it is deliberate as far as the tube goes: TV_ASPECT is set to SHAPE.rv.flatten = 0.35, the section of the wrapped right ventricle, because avLeaflet's comment is right that a CIRCLE of the correct mean radius drawn on that section stands proud of the free wall. The tube's flattening is declared in gaps[1]; what the annulus inherits from it is not declared anywhere and is not measured anywhere. WHAT LEAVES THE MODEL IS ONE SCALAR: annulus_tv_cm 3.304, the ARITHMETIC MEAN of the two diameters (measured mean 3.265). Rows Y2 and Y3 and beat 10's claim v10.tv_largest all read that scalar; acceptance().geometry.base exports no aspect, no minor diameter and no orifice area for any of the four rings, so nothing in a 44-row battery can see the shape. WHAT IT COSTS. By orifice AREA the model is right in kind - tricuspid 6.22 cm2 against a mitral 5.30, 17% larger, and in life the tricuspid orifice is the larger. By MINOR diameter the tricuspid is 1.61 cm against the mitral's 2.38, i.e. 32% NARROWER, and a real tricuspid annulus is oval at about 1.2-1.3 to 1, not 3 to 1. And in the real player (walk-scene-in-player, r128) BEAT 10 - the one beat whose narration says 'Note the sizes too - the tricuspid ring is the largest of the four and distinctly oval' - draws the tricuspid at 0.694% of the frame and the mitral at 0.704%: on the screen the mitral is marginally the LARGER of the two, and the tricuspid reads as a flat blade rather than a ring. SAME SHAPE AS R3-OPEN-7 ONE LEVEL DOWN: round 3 found the relation true by 0.26 mm, round 4 repaired it by STATING a mean-diameter ratio of 1.18, and the mean is a convention that a 3:1 ellipse defeats. DECLARED HERE BY THE REVIEW, NOT FIXED: narrowing the aspect needs the crescentic right-ventricular section gaps[1] still owes, and a row asserting the present 3.05 would lock the defect in. Handed back in BUILD-QUEUE findings as R5-OPEN-1, which asks for the aspect, the minor diameter and the orifice area to be exported and bounded first, so that whatever the geometry then does is visible. || ANSWERED IN PART BY BUILD ROUND 6 (2026-09-30), AND THE HALF THAT IS NOT ANSWERED IS STILL ON THE SCREEN. Part (1) of R5-OPEN-1 is in and verified by the round-6b run that is writing this: annulusAspect() and ringShape() are now the ONE definition of each ring's shape — buildCycle draws the tricuspid leaflets from annulusAspect and GEOM_REPORT measures with ringShape, so a row cannot grade a ring the student is not shown — and acceptance().geometry.base exports a major, a minor, an aspect and an orifice area for all four rings, plus annulus_aspect_tv and orifice_ratio_tv_mv as top-level scalars so a beat claim can read them (check-beat-claims does not walk into base.ring_tv, which is why beat 10's 'distinctly oval' was ungraded for five rounds). Rows Y4 (the three circular rings stay circular), Y5 (the examined order re-stated by ORIFICE AREA, which a non-circular ring cannot defeat) and Y6 (the tricuspid itself, labelled `limitation`) are live, each with a negative case, and beat 10 carries two new claims, v10.tv_largest_by_area and v10.tv_oval. CHECK 9 in render-cardiac-cycle.mjs re-measures all four rings ON THE BUILT TRIANGLES in each ring's own best-fit plane at three t and requires them to agree with the export within 8% on a diameter and 6% on an aspect; its negative — a CIRCLE of the reported mean diameter 3.304 cm, which is everything annulus_tv_cm ever claimed — is rejected at aspect off 181% and major off 48%. Measured by that check: tricuspid 4.88 x 1.73 cm, aspect 2.81, at every t. PART (2) IS NOT DONE AND THE PICTURE STILL SHOWS IT. Round 6 built the in-scope fix (rounding the inlet section: flatten high at the mouth, falling to 0.35 over the first quarter of the tube) and rejected it on measurement — see the table in row Y6's comment: flatten(0)=0.625 reaches aspect 1.58 and breaks Z5, Z7 and check 8's width bound, and 0.50 passes everything but has no anatomical basis and would be a constant chosen to keep a row passing. The fix is the crescentic right ventricular section gaps[1] still owes. WALKED AGAIN IN THE REAL PLAYER at r128 by the round-6b run: beat 10 still draws the mitral at 0.704% of the frame and the tricuspid at 0.694%, unchanged from the round-5 measurement, and the frame was LOOKED AT — the tricuspid reads as a thin pale blade seen nearly edge-on, lying apart from the other three, not as the largest ring of four. So the narration of beat 10 is still ahead of the geometry, Y6 bounds the defect at <= 2.90 so it cannot grow, and whether bounding it at its present value is the right call rather than locking it in is a question for review round 6.",
+    "BEATS 4 AND 11 ARE CLIPPED BY THE PLAYER'S OWN PER-VIEW CAMERA REFIT, BY ONE AND TWO PIXELS. FOUND BY BUILD ROUND 6 (2026-09-30), which also established that it PRE-DATES its own work: it put the untouched round-5 model and scene back and re-ran, and got the identical result, beats 4 and 11 clipped. Round 6's log entry records it as a shared-tool finding it deliberately did not act on. It is copied into the scene here by round 6b because a finding that lives only in a 756 KB log is not declared, and gaps[] is where this scene declares what is wrong with it. Round 5 walked only beats 2, 3 and 10 and did not meet it; the reimplementing tool (measure-scene-visibility) passes all eleven. RE-MEASURED INDEPENDENTLY BY ROUND 6b, at 1100x900 on the pinned three r128: beat 4 ('Rapid ejection') leaves 2 subject pixels on the frame border with all 11 of its structures visible; beat 11 ('The venous side, from the right') leaves 1, with all 10 visible — the inferior cava's far end, at the lower left. The other nine beats leave none. WHERE IT COMES FROM: viz3d.js fits each view to the bounding box of what that view leaves visible and stands back by FRAME_PAD = 1.05, and a box fitted that tightly can still put a corner of the subject a pixel outside the frustum once perspective is applied, because the box's corners and its near face do not project alike. NOT FIXED HERE, deliberately, and the reason is the one review round 4 gave itself about the visibility threshold: FRAME_PAD is a single constant shared by every scene in the corpus and viz-training/tools/test-view-framing.mjs asserts the player's framing and VizKit.fitCamera's still agree, so raising it during one item's run would silently re-grade ~150 other scenes' framing and break that test. The scene cannot fix it either: a view carries no camera or padding field. This is an ENGINE question — whether FRAME_PAD should be raised, or distanceForBox should fit the projected hull rather than the box — and it is handed to the review rather than worked around. SEVERITY, stated honestly: one and two pixels on a 990,000-pixel frame, at the edge of structures neither beat's narration points at. Nothing is taught wrongly. It is recorded because it is the first time the real player has disagreed with the reimplementing tool, and gaps[11] says in as many words that when those two disagree, viz3d is right."
+  ],
+  "beat_claims_note": "EVERY BEAT CARRIES MACHINE-CHECKABLE CLAIMS, evaluated against the model AT THAT BEAT'S OWN SET_STAGE t by viz-training/tools/check-beat-claims.mjs. Added 2026-09-29 on the review task's own proposal (BUILD-QUEUE findings, R2-STANDARDS-GAP): of the eight defects found on this item across two review rounds, four were the same shape - the model was right and the SCENE pointed at an instant where its own narration was false - and a 30-row acceptance battery could not catch one of them, because every row tested the model against physiology and none tested the scene against the model. The tool also NEGATIVE-TESTS itself: each beat is re-evaluated at t +/- 0.05 and at least one of its claims must fail there, so a claim that would be true at any t is reported as not binding to its beat and is worth nothing.",
+  "visibility_waivers": [
+    {
+      "view": 2,
+      "key": "ivc",
+      "why": "The inferior vena cava enters the right atrium from behind and below, so in an anterior projection it lies behind the right atrium and the wrapped right ventricle. BEAT 11 turns the heart to look from the patient's right, with the left heart removed, and is where this scene shows the venae cavae, the right atrium and its cavity - measured there at well above threshold."
+    },
+    {
+      "view": 2,
+      "key": "la",
+      "why": "The left atrial WALL, like its cavity above, is the most posterior thing in the heart and in this left anterior oblique it sits behind both ventricles. It cleared the walk until 2026-09-30 on a 25/255 tint over 0.033% of the frame, which the new peak-delta floor correctly stops counting (R4-OPEN-2): the pixels were moving, a student could not see them. Beat 1 looks from BEHIND and draws it at 1.41% of the frame. Nothing in this beat's narration points at it."
+    },
+    {
+      "view": 2,
+      "key": "la_blood",
+      "why": "The left atrium is the most posterior of the four chambers and from the front it is behind both ventricles - which is true of a real heart and is itself examined. This beat is about the left ventricle at end-diastole, not about the atrium. BEAT 1 LOOKS AT THE SAME HEARTBEAT FROM BEHIND and is where this scene shows the left atrium and its cavity."
+    },
+    {
+      "view": 2,
+      "key": "ra",
+      "why": "The right atrium stands at the right border but in this left anterior oblique it still sits behind the right ventricle's cast. BEAT 11 shows it from the patient's right and BEAT 1 from behind; this beat is about end-diastolic volume and the atrioventricular plane."
+    },
+    {
+      "view": 2,
+      "key": "ra_blood",
+      "why": "The right atrial cavity sits behind the right ventricle's own cast in this projection, and the round-5 narrowing of the heart moved the right atrium 1.78 cm medially — which is the repair R4-OPEN-1 asked for and it puts the cavity further into the right ventricle's shadow, not less. BEAT 11 looks from the patient's right with the left heart removed and draws it at 2.69%. Nothing in this beat's narration points at it."
+    },
+    {
+      "view": 6,
+      "key": "aortic",
+      "why": "As for the tricuspid above: end-systole is the most crowded frame in the scene and this beat's narration names no valve. BEATS 3, 7 and 10 show the aortic valve at 0.70%, 0.63% and 0.34%, and BEAT 4 is the beat that exists to show its cusps lying back against the sinus wall."
+    },
+    {
+      "view": 6,
+      "key": "ivc",
+      "why": "The inferior vena cava enters the right atrium from behind and below, so in an anterior projection it lies behind the right atrium and the wrapped right ventricle. BEAT 11 turns the heart to look from the patient's right, with the left heart removed, and is where this scene shows the venae cavae, the right atrium and its cavity - measured there at well above threshold."
+    },
+    {
+      "view": 6,
+      "key": "tricuspid",
+      "why": "At end-systole both ventricles are at their smallest and their casts and walls are at their most concentrated, so the two right-sided leaflets are behind the most material of any beat. This beat's narration is entirely about wall thickness and the descent of the atrioventricular plane and names no valve. BEATS 3 and 7 show the tricuspid through the wall at 0.81% and 1.15% with peak deltas of 153 and 138, and BEAT 11 draws it at 0.70% from the right."
+    },
+    {
+      "view": 9,
+      "key": "flow_right_in",
+      "why": "The tricuspid orifice lies behind the wrapped right ventricle in an anterior projection, so the right inflow train is buried by the chamber it is entering. This beat points at the LEFT inflow, which it draws at 0.3%+ of the frame; BEAT 11 shows the right inflow crossing the tricuspid from the patient's right."
+    },
+    {
+      "view": 9,
+      "key": "ivc",
+      "why": "The inferior vena cava enters the right atrium from behind and below, so in an anterior projection it lies behind the right atrium and the wrapped right ventricle. BEAT 11 turns the heart to look from the patient's right, with the left heart removed, and is where this scene shows the venae cavae, the right atrium and its cavity - measured there at well above threshold."
+    },
+    {
+      "view": 9,
+      "key": "la_blood",
+      "why": "The left atrium is the most posterior of the four chambers and from the front it is behind both ventricles - which is true of a real heart and is itself examined. This beat is about the left ventricle at end-diastole, not about the atrium. BEAT 1 LOOKS AT THE SAME HEARTBEAT FROM BEHIND and is where this scene shows the left atrium and its cavity."
+    },
+    {
+      "view": 9,
+      "key": "ra",
+      "why": "The right atrial wall is in the right ventricle's shadow in the nine anterior beats, which gaps[22] declares and the round-5 narrowing does not change. BEAT 11 draws it at 1.28% from the patient's right. This beat's narration is about left ventricular filling and the coronary circulation and does not point at it."
+    },
+    {
+      "view": 9,
+      "key": "tricuspid",
+      "why": "Mid-diastole in the left anterior oblique, with both casts full: the tricuspid reads 0.213% on the alpha measure but at a peak delta of 19/255, which is the tint R4-OPEN-2 found a reviewer could not tell apart at 3x magnification. Declared rather than counted. BEATS 3, 7 and 11 show it properly; this beat names no valve but the mitral."
+    },
+    {
+      "view": 2,
+      "key": "pulm_veins",
+      "why": "The pulmonary veins enter the left atrium POSTERIORLY, so in this anterior projection they are behind the left atrium and behind both ventricles - the same geometry this beat already declares for la, la_blood, ra and ra_blood in the four waivers above, and it is a fact about the heart rather than a composition fault. Measured on the walk at 0.002% of frame, peak 70/255. BEAT 1 IS THE BEAT THAT SHOWS THEM: it turns the heart to look from behind precisely because the left atrium is the most posterior chamber, and draws the pulmonary veins at 0.776% of frame on the id-pick - 26 times this beat's figure. Beats 8 and 9 draw them at 0.444% and 0.310% with the right heart out of the way. This beat's narration is about end-diastolic volume and the atrioventricular plane and names no vein. ADDED 2026-09-30 by the round-6 build run: this structure passed the walk until 01:56Z that day, on its own OUTLINE SILHOUETTE SHELL, which viz3d never draws. The heart-tube-formation build run fixed the walk to drop those shells the way viz3d's mergeByKey does, ran the before/after that the MIN_PEAK protocol requires, and recorded in BUILD-LOG that it newly exposed three structures on this scene. It was right, and it correctly left the finding in the log rather than editing another run's item."
+    },
+    {
+      "view": 10,
+      "key": "papillary",
+      "why": "This beat looks from DIRECTLY ABOVE, down the left ventricle's long axis, and the papillary muscles and their chordae run PARALLEL to that axis - so they project end-on to almost nothing at any size they could honestly be drawn. No camera can both show the four rings in their real left-right and front-back relation, which is the whole reason this beat exists, and show a structure that runs along the viewing direction. The beat's own narration says the muscle is taken away. Measured on the walk at 0.067% of frame, peak 39/255. THE BEATS THAT SHOW THEM: beat 3 at 0.575% (peak 98) and beat 7 at 0.552% (peak 90), both isovolumetric beats in the left anterior oblique, and beats 4, 5, 8 and 9 between 0.319% and 0.344%. So the apparatus is seeable in six of the eleven beats and this is the one geometry forbids. THE NARRATION CLAUSE THAT NAMES THEM, said out loud rather than quietly: 'held by their chordae against a pressure that would otherwise blow them inside out' is a statement about the mechanism and is true, and the chordae are drawn in this beat - they are simply end-on. It gets the treatment gaps[5] and gaps[6] already give beat 9's coronary sentence and beat 7's pressure-notch sentence: declared, not rewritten to agree with the picture. ADDED 2026-09-30 by the round-6 build run, same cause as the pulm_veins waiver above: this structure was clearing the bar on an outline silhouette shell until the walk was corrected at 01:56Z. ONE NUMBER WORTH A REVIEWER'S EYE, and this run did NOT act on it: the peak here is 39/255 and MIN_PEAK is 40, so this fails by one unit - while MIN_PEAK's own comment gives its evidence as 'the two cases it looked at and called legible read 39 and 156'. The floor therefore excludes a case its own rationale calls legible. That is a finding about a SHARED threshold, and round 4's rule that a threshold must not move during one item's work applies to this run too, so it is recorded in BUILD-LOG and left alone. The waiver above does not depend on it: the geometric argument stands at any floor."
+    }
   ]
- },
- "camera": {
-  "framing": "anterior",
-  "autoRotate": 0.0,
-  "initialYaw": 0.0
- },
- "structures": [
-  {
-   "key": "lv",
-   "name": "Left ventricular myocardium",
-   "label": "Left ventricle (wall)",
-   "role": "part",
-   "group": "Myocardium",
-   "layer": "muscle",
-   "color": "#9e2b33",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#lv"
-   },
-   "opacity": 0.55,
-   "terms": [
-    "left ventricle",
-    "LV",
-    "myocardium",
-    "wall thickness",
-    "ventricular systole"
-   ],
-   "narration": "The thick-walled pump of the systemic circuit. Its wall is about 10 mm at end-diastole and about 14 mm at end-systole — it does not gain muscle, it gets shorter and fatter, because muscle cannot be compressed. Watch the wall, not just the cavity."
-  },
-  {
-   "key": "rv",
-   "name": "Right ventricular myocardium",
-   "label": "Right ventricle (wall)",
-   "role": "part",
-   "group": "Myocardium",
-   "layer": "muscle",
-   "color": "#b5555c",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#rv"
-   },
-   "opacity": 0.55,
-   "terms": [
-    "right ventricle",
-    "RV",
-    "thin wall"
-   ],
-   "narration": "A third the wall thickness of the left, because it pumps the same stroke volume against a fifth of the pressure. Same output, different load — that is the whole reason for the difference."
-  },
-  {
-   "key": "septum",
-   "name": "Interventricular septum",
-   "label": "Interventricular septum",
-   "role": "part",
-   "group": "Myocardium",
-   "layer": "muscle",
-   "color": "#8f2028",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#septum"
-   },
-   "terms": [
-    "interventricular septum",
-    "septum",
-    "septal motion"
-   ],
-   "narration": "Left ventricular muscle, and it thickens with the left ventricle rather than the right. In systole it moves TOWARDS the left ventricular cavity; if it moves the other way, the right ventricle is overloaded."
-  },
-  {
-   "key": "la",
-   "name": "Left atrium",
-   "label": "Left atrium (wall)",
-   "role": "part",
-   "group": "Myocardium",
-   "layer": "muscle",
-   "color": "#c98a92",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#la"
-   },
-   "opacity": 0.5,
-   "terms": [
-    "left atrium",
-    "LA",
-    "atrial systole",
-    "atrial kick"
-   ],
-   "narration": "A thin-walled reservoir, not a pump of consequence. Its contraction adds the last fifth of ventricular filling. Lose it — in atrial fibrillation — and a healthy ventricle barely notices, while a stiff one may not cope."
-  },
-  {
-   "key": "ra",
-   "name": "Right atrium",
-   "label": "Right atrium (wall)",
-   "role": "part",
-   "group": "Myocardium",
-   "layer": "muscle",
-   "color": "#b98890",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#ra"
-   },
-   "opacity": 0.5,
-   "terms": [
-    "right atrium",
-    "RA"
-   ],
-   "narration": "The same, on the venous side. It receives the superior and inferior venae cavae continuously, throughout the cycle, whatever the ventricles are doing."
-  },
-  {
-   "key": "lv_blood",
-   "name": "Blood in the left ventricle",
-   "label": "LV cavity",
-   "role": "primary",
-   "group": "Chambers",
-   "layer": "organ",
-   "color": "#c0392b",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#lv_blood"
-   },
-   "terms": [
-    "end-diastolic volume",
-    "EDV",
-    "end-systolic volume",
-    "ESV",
-    "stroke volume",
-    "ejection fraction"
-   ],
-   "narration": "120 ml at end-diastole, 50 ml at end-systole. The difference, 70 ml, is the stroke volume, and 70 of 120 is an ejection fraction of 58%. The ventricle never empties — that is normal, and it is the reserve a failing heart has already spent."
-  },
-  {
-   "key": "rv_blood",
-   "name": "Blood in the right ventricle",
-   "label": "RV cavity",
-   "role": "primary",
-   "group": "Chambers",
-   "layer": "organ",
-   "color": "#2f5fa8",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#rv_blood"
-   },
-   "terms": [
-    "right ventricular volume",
-    "RV stroke volume"
-   ],
-   "narration": "130 ml to 60 ml — a slightly larger chamber, a slightly lower ejection fraction, and exactly the same 70 ml stroke volume. The two sides must match beat for beat or blood piles up behind one of them."
-  },
-  {
-   "key": "la_blood",
-   "name": "Blood in the left atrium",
-   "label": "LA cavity",
-   "role": "part",
-   "group": "Chambers",
-   "layer": "organ",
-   "color": "#d0453a",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#la_blood"
-   },
-   "terms": [
-    "left atrial pressure",
-    "v wave"
-   ],
-   "narration": "Fills all through ventricular systole, while the mitral valve is shut and the pulmonary veins keep delivering. That is where the v wave of the atrial pressure trace comes from."
-  },
-  {
-   "key": "ra_blood",
-   "name": "Blood in the right atrium",
-   "label": "RA cavity",
-   "role": "part",
-   "group": "Chambers",
-   "layer": "organ",
-   "color": "#2a559a",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#ra_blood"
-   },
-   "terms": [
-    "right atrial pressure",
-    "JVP",
-    "jugular venous pressure"
-   ],
-   "narration": "The same on the right, and its pressure is the jugular venous pressure you can see in the neck."
-  },
-  {
-   "key": "mitral",
-   "name": "Mitral valve",
-   "label": "Mitral valve",
-   "role": "part",
-   "group": "Valves",
-   "layer": "fascia",
-   "color": "#efe6d2",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#mitral"
-   },
-   "terms": [
-    "mitral valve",
-    "bicuspid valve",
-    "anterior leaflet",
-    "first heart sound",
-    "S1"
-   ],
-   "narration": "Two leaflets, an anterior and a posterior. It is held shut against 120 mmHg by the chordae, and it opens and closes for one reason only: the pressure on either side of it. No muscle pulls a valve open."
-  },
-  {
-   "key": "tricuspid",
-   "name": "Tricuspid valve",
-   "label": "Tricuspid valve",
-   "role": "part",
-   "group": "Valves",
-   "layer": "fascia",
-   "color": "#e6dcc6",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#tricuspid"
-   },
-   "terms": [
-    "tricuspid valve",
-    "S1 splitting"
-   ],
-   "narration": "Three leaflets, and the largest annulus of the four valves. It shuts a fraction after the mitral, which is why S1 can be split."
-  },
-  {
-   "key": "aortic",
-   "name": "Aortic valve",
-   "label": "Aortic valve",
-   "role": "part",
-   "group": "Valves",
-   "layer": "fascia",
-   "color": "#f2ecdc",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#aortic"
-   },
-   "terms": [
-    "aortic valve",
-    "semilunar valve",
-    "second heart sound",
-    "S2",
-    "dicrotic notch"
-   ],
-   "narration": "Three semilunar cusps whose attachment is a crown, not a ring — low in the middle of each cusp, high at the commissures. They are pushed open by the ventricle and slammed shut by the aorta's own recoil, which is the second heart sound."
-  },
-  {
-   "key": "pulmonary",
-   "name": "Pulmonary valve",
-   "label": "Pulmonary valve",
-   "role": "part",
-   "group": "Valves",
-   "layer": "fascia",
-   "color": "#e8e0cc",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#pulmonary"
-   },
-   "terms": [
-    "pulmonary valve",
-    "splitting of S2"
-   ],
-   "narration": "The same three cusps on the right. It closes slightly later than the aortic, and inspiration delays it further — which is the physiological splitting of S2."
-  },
-  {
-   "key": "papillary",
-   "name": "Papillary muscles and chordae tendineae",
-   "label": "Papillary muscles & chordae",
-   "role": "part",
-   "group": "Valves",
-   "layer": "muscle",
-   "color": "#8f2028",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#papillary"
-   },
-   "terms": [
-    "papillary muscle",
-    "chordae tendineae",
-    "prolapse",
-    "mitral regurgitation"
-   ],
-   "narration": "They do not open or shut the valve. They contract WITH the ventricle to stop the leaflets being blown back into the atrium when the pressure hits 120 mmHg. Rupture one and the mitral valve prolapses that instant."
-  },
-  {
-   "key": "av_plane",
-   "name": "Atrioventricular plane",
-   "label": "AV plane",
-   "role": "part",
-   "group": "Myocardium",
-   "layer": "fascia",
-   "color": "#e0c060",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#av_plane"
-   },
-   "opacity": 0.35,
-   "terms": [
-    "atrioventricular plane",
-    "AV plane descent",
-    "MAPSE",
-    "apex beat"
-   ],
-   "narration": "The floor of the atria and the roof of the ventricles, carrying all four valve rings. In systole it descends about 12 mm towards a nearly stationary apex — which is why the apex beat stays in one intercostal space, and why the atria fill while the ventricles empty."
-  },
-  {
-   "key": "aorta",
-   "name": "Aorta",
-   "label": "Aorta",
-   "role": "part",
-   "group": "Great vessels",
-   "layer": "vessel",
-   "color": "#b02a2a",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#aorta"
-   },
-   "terms": [
-    "aorta",
-    "windkessel",
-    "aortic pressure",
-    "pulse pressure"
-   ],
-   "narration": "It does not just carry the stroke volume away, it stores it. About half of each stroke volume distends the aorta in systole and is squeezed onward in diastole, which is what turns an intermittent pump into a continuous flow."
-  },
-  {
-   "key": "pulm_trunk",
-   "name": "Pulmonary trunk",
-   "label": "Pulmonary trunk",
-   "role": "part",
-   "group": "Great vessels",
-   "layer": "vessel",
-   "color": "#2f5fa8",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#pulm_trunk"
-   },
-   "terms": [
-    "pulmonary trunk",
-    "pulmonary artery pressure"
-   ],
-   "narration": "Carries the same 70 ml at a quarter of the pressure, because the pulmonary circulation's resistance is about a seventh of the systemic."
-  },
-  {
-   "key": "svc",
-   "name": "Superior vena cava",
-   "label": "Superior vena cava",
-   "role": "context",
-   "group": "Great vessels",
-   "layer": "vessel",
-   "color": "#1f4272",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#svc"
-   },
-   "narration": "Venous return is continuous. It does not stop because the ventricles are contracting."
-  },
-  {
-   "key": "ivc",
-   "name": "Inferior vena cava",
-   "label": "Inferior vena cava",
-   "role": "context",
-   "group": "Great vessels",
-   "layer": "vessel",
-   "color": "#1a3a66",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#ivc"
-   },
-   "narration": "The larger of the two, and the one that carries the effect of a change in posture straight to the right atrium."
-  },
-  {
-   "key": "pulm_veins",
-   "name": "Pulmonary veins",
-   "label": "Pulmonary veins",
-   "role": "context",
-   "group": "Great vessels",
-   "layer": "vessel",
-   "color": "#9e3540",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#pulm_veins"
-   },
-   "narration": "They deliver into the left atrium continuously, which is what fills it during ventricular systole while the mitral valve is shut."
-  },
-  {
-   "key": "flow_left_in",
-   "name": "Blood crossing the mitral valve",
-   "label": "Inflow, left",
-   "role": "part",
-   "group": "Blood flow",
-   "layer": "organ",
-   "color": "#ff7a66",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#flow_left_in"
-   },
-   "terms": [
-    "ventricular filling",
-    "E wave",
-    "A wave"
-   ],
-   "narration": "These markers move at the speed of the flow through the valve, not at the speed of the clock. When they stop, no blood is crossing — and during both isovolumetric phases they stop dead."
-  },
-  {
-   "key": "flow_left_out",
-   "name": "Blood crossing the aortic valve",
-   "label": "Outflow, left",
-   "role": "part",
-   "group": "Blood flow",
-   "layer": "organ",
-   "color": "#e03a28",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#flow_left_out"
-   },
-   "terms": [
-    "ejection",
-    "peak aortic flow",
-    "stroke volume"
-   ],
-   "narration": "Peak flow out of the left ventricle is about 560 ml every second — for about a fifth of a second, four times a minute per beat. Nothing crosses at any other time."
-  },
-  {
-   "key": "flow_right_in",
-   "name": "Blood crossing the tricuspid valve",
-   "label": "Inflow, right",
-   "role": "context",
-   "group": "Blood flow",
-   "layer": "organ",
-   "color": "#6aa6e6",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#flow_right_in"
-   },
-   "narration": "The right side does everything the left does, a moment earlier at the start and a moment later at the end."
-  },
-  {
-   "key": "flow_right_out",
-   "name": "Blood crossing the pulmonary valve",
-   "label": "Outflow, right",
-   "role": "context",
-   "group": "Blood flow",
-   "layer": "organ",
-   "color": "#2f6fae",
-   "refs": {
-    "procedural": "cardiac-cycle-pumping#flow_right_out"
-   },
-   "narration": "The same 70 ml, into a low-pressure circuit."
-  }
- ],
- "views": [
-  {
-   "mode": "mechanism",
-   "beat": 1,
-   "title": "Atrial systole — the last fifth of filling",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.04
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "av_plane"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "la"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "la",
-     "to": "lv",
-     "kind": "flow"
-    }
-   ],
-   "narration": "The P wave has just passed and the atria are contracting. The atrioventricular valves are already open — they have been open through the whole of diastole — so this squeeze does not open anything, it simply tops the ventricle up. It supplies about a fifth of the filling. That is why losing atrial contraction in atrial fibrillation is survivable in a normal heart and dangerous in a stiff one."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 2,
-   "title": "End-diastole — the ventricle at its fullest",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.208
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "Blood flow"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "av_plane"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    },
-    {
-     "op": "COMPARE_STRUCTURES",
-     "targets": [
-      "lv_blood",
-      "rv_blood"
-     ]
-    }
-   ],
-   "narration": "120 ml on the left, 130 ml on the right. This is end-diastolic volume, and it is the preload every Frank-Starling curve is drawn against. Note the atrioventricular plane, high up: it has the whole of systole to descend. Every valve in the heart is now shut, or about to be."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 3,
-   "title": "Isovolumetric contraction — all four valves shut",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.24
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "Valves"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "Blood flow"
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "Great vessels"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "Valves"
-    }
-   ],
-   "narration": "The ventricle is contracting hard and not one millilitre is leaving it. The mitral shut the moment ventricular pressure passed atrial — that is the first heart sound — and the aortic cannot open until ventricular pressure passes aortic. Between those two instants the chamber is a sealed box: pressure climbs about 1600 mmHg every second, volume does not change at all, and the flow markers do not move. This phase lasts about 0.06 seconds and it is where most of the heart's oxygen goes."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 4,
-   "title": "Rapid ejection",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.33
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "av_plane"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "flow_left_out"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "lv",
-     "to": "aorta",
-     "kind": "flow"
-    }
-   ],
-   "narration": "The aortic valve is open and the cusps are lying back against the sinus wall. Flow peaks here at around 560 millilitres a second. Watch two things at once: the cavity collapsing, and the wall getting thicker as it does — the muscle is not disappearing, it is being redistributed. And watch the atria: they are filling while the ventricles empty, because the plane between them is being pulled down."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 5,
-   "title": "Reduced ejection",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.48
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "av_plane"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "aorta"
-    }
-   ],
-   "narration": "Ejection continues even though the ventricle has begun to relax and the pressure gradient has already reversed, because the blood that is moving has momentum. Meanwhile the aorta has swallowed about half the stroke volume by stretching. It gives it back in diastole, and that stored-and-returned volume is what keeps blood moving between beats."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 6,
-   "title": "End-systole — the wall at its thickest, the plane at its lowest",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.546
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "av_plane"
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "Blood flow"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "av_plane"
-    }
-   ],
-   "narration": "50 ml left in the left ventricle. The wall has gone from 10 mm to 14 mm, the minor axis has shortened by 30% and the long axis by 15%, and the atrioventricular plane has descended about 12 mm towards an apex that has barely moved. That descent is what you feel as the apex beat, and it is why the apex beat does not wander between ribs."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 7,
-   "title": "Isovolumetric relaxation — the second sealed box",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.575
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "Valves"
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "Blood flow"
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "av_plane"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "aortic"
-    }
-   ],
-   "narration": "The aortic valve has shut — that is the second heart sound, and the aorta's recoil against the closed cusps is what makes the notch on the arterial pressure trace. All four valves are shut again and the volume is again fixed, this time at 50 ml, while the pressure falls away. Nothing moves. The mitral will not open until ventricular pressure has fallen below atrial, and relaxation is an active, energy-consuming process — which is why it fails early in ischaemia."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 8,
-   "title": "Rapid filling — the valve opens on its own",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.66
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "av_plane"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "flow_left_in"
-    },
-    {
-     "op": "SHOW_RELATIONSHIP",
-     "from": "la",
-     "to": "lv",
-     "kind": "flow"
-    }
-   ],
-   "narration": "Ventricular pressure has fallen below atrial and the mitral valve swings open with nothing pulling on it. Most of the filling happens right here, in the first third of diastole, driven by the pressure the atrium has accumulated while it was shut out. This is the E wave on a Doppler trace, and the atrial contraction later is the A wave."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 9,
-   "title": "Diastasis — and why the heart hates a fast rate",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.88
-    },
-    {
-     "op": "SHOW_STRUCTURE",
-     "target": "*"
-    },
-    {
-     "op": "HIDE_STRUCTURE",
-     "target": "av_plane"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "anterior"
-    },
-    {
-     "op": "HIGHLIGHT_STRUCTURE",
-     "target": "lv_blood"
-    }
-   ],
-   "narration": "Filling has almost stopped: the ventricle is nearly full and the gradient across the open valve is almost nothing. This quiet stretch is diastole's slack, and it is the part that disappears first when the heart rate rises. Diastole is also when the left coronary artery fills, because during systole the ventricle squeezes its own arteries shut — so a fast rate cuts filling and coronary supply together."
-  },
-  {
-   "mode": "mechanism",
-   "beat": 10,
-   "title": "The valves alone: nothing but pressure moves them",
-   "ops": [
-    {
-     "op": "SET_STAGE",
-     "t": 0.33
-    },
-    {
-     "op": "ISOLATE_REGION",
-     "target": "Valves"
-    },
-    {
-     "op": "ROTATE_TO_VIEW",
-     "view": "superior"
-    },
-    {
-     "op": "COMPARE_STRUCTURES",
-     "targets": [
-      "mitral",
-      "aortic"
-     ]
-    }
-   ],
-   "narration": "The same instant as rapid ejection, with everything but the valves taken away. The aortic and pulmonary cusps are lying open; the mitral and tricuspid are pressed shut, held by their chordae against a pressure that would otherwise blow them inside out. There is no muscle in a heart valve and no nerve to it. Every one of the four opens and shuts because of the pressure difference across it, and every murmur is a valve that has stopped obeying that rule."
-  }
- ],
- "gaps": [
-  "PROCEDURAL BY NECESSITY, AND THE CATALOG WAS CHECKED RATHER THAN TRUSTED. The queue item carries candidate_meshes:3. The three meshes in available-meshes.json whose names match are 'great cardiac vein' (FMA4707), 'middle cardiac vein' (FMA4713) and 'set of anterior cardiac veins' (FMA71567). They are VEINS; they match on the word 'cardiac' and have nothing to do with this structure. There is no mesh of the cardiac cycle and there cannot be one - the subject is not an object, it is what the object does over time. This is RENDER-STANDARD 5 'procedural belongs where the form is a function of something', and here the form is a function of time and of nothing else.",
-  "THE RIGHT VENTRICLE IS A WRAPPED TUBE, WHICH IS RIGHT IN KIND AND SCHEMATIC IN DETAIL. It was first built as a body of revolution standing beside the left ventricle, and measurement killed that: 19.6% of the LEFT ventricular cavity was also inside the RIGHT ventricular cavity - a fifth of the blood in both chambers at once - and the heart came out 11.7 cm across. Both follow from the same mistake, that two convex bodies of 120 and 130 ml side by side cannot be anything else. It is now a swept tube of flattened section running from the tricuspid annulus down towards the apex and up in front to the pulmonary valve, riding on the left ventricle's own axis, which is the shape it actually is. Interpenetration measured again afterwards: 0.0%. What remains schematic is the section - a flattened ellipse rather than a true crescent with a concave septal face - and the extent of the wrap (115 degrees, where a real right ventricle reaches further round).",
-  "THE SEPTUM IS DRAWN AS A DISCRETE PLATE between the two cavities, of left ventricular thickness. It is really the shared wall of both ventricles, not a third structure sitting between them. Drawn this way it can be shown, hidden and highlighted on its own, which is what the scene needs; a reviewer should decide whether the simplification costs more than it buys.",
-  "THE VENTRICULAR PRESSURE PEAK EXCEEDS THE RECORDED ARTERIAL PEAK BY ABOUT 32 mmHg, where a real pair of curves very nearly coincide through ejection. This is an artifact of representing the whole aorta as one lumped inertance, it is measured by acceptance test O rather than hidden, and it is not correctable by tuning. It is also the reason this scene does NOT draw a pressure trace: the geometry, the volumes, the valve timings and the flow are all trustworthy, and a Wiggers pressure curve drawn from this model would not be. A pressure trace belongs in a diagram-engine scene fed by the model's own numbers.",
-  "SYSTOLE COMES OUT AT 0.271 s AND ISOVOLUMETRIC RELAXATION AT 0.044 s, against textbook figures of about 0.30 and about 0.08. These two trade against one another through the single outflow inertance and there is no value that makes both exact; the model's header records the measured trade-off curve and the point chosen. Both land inside the acceptance bands, but a reviewer who thinks the balance should sit elsewhere is making a legitimate judgement about which phase is more examined.",
-  "NO CORONARY CIRCULATION. That the left coronary artery fills in DIASTOLE, because systolic compression shuts its own vessels, is a consequence of this very cycle and is examined. It is narrated in the diastasis beat and it is not drawn. The coronary vessels are their own queue item.",
-  "NO ECG, NO PRESSURE TRACE, NO HEART SOUNDS. S1 and S2 are named in the narration at the instants the model actually places them, and the PR interval enters the model as a number, but there is no conducting system, no waveform and no audio. A student who needs the Wiggers diagram itself needs a diagram-engine companion scene, and the numbers for it can be read straight off this model's cycle() report.",
-  "THE ATRIA ARE ROUNDED SACS with no auricles, no pectinate muscles and no pulmonary vein orifices beyond two stubs. Their VOLUMES are solved and correct; their shape is a container.",
-  "VALVE LEAFLETS HAVE NO MASS. Their opening fraction follows the flow through their own orifice, so they are never open against a backward gradient - which is the thing the scene exists to teach - but they do not flutter, and they drift shut slightly early in late ejection because the flow itself is falling.",
-  "FINDING, NOT IN THIS MODEL: render-kit.js sweptShell emits its BASE-END annular cap with a winding that disagrees with the normals it supplies for that cap. Measured on this model's thick-walled chambers: winding agreement 0.989 with no cutaway and 0.972 with one, where every other surface reads 1.000. Derived as well as measured - cap(0,-1) calls quad() where the corner order it passes needs quadFlip(). It is invisible today because caps are excluded from the silhouette hull and the material is DoubleSide, but it is in the shared machinery and it affects every thick-walled model in the corpus. NOT changed here: cardiac-looping was claimed by another run while this one was building, and shared machinery should not move under it. Full derivation in BUILD-LOG.md.",
-  "THE CUTAWAY RIM IS RAGGED WHERE IT CROSSES THE RIGHT VENTRICLE'S FLATTENED SECTION. render-kit's window test keeps or drops a quad by its angle about the section, and on a strongly flattened ellipse equal angles are very unequal arc lengths, so the opening's edge steps rather than runs smooth. Visible as a zig-zag along the lower edge of the right ventricle in the proof frames. Cosmetic, in shared machinery rather than in this model, and not corrected here for the same reason as the cap winding finding.",
-  "THE PROOF FRAMES SHOW THE MODEL, NOT THE PLAYER. The harness renders build(t) with every layer on and at full opacity; the scene sets per-structure opacity - the ventricular walls at 0.55, the AV plane at 0.35 - and hides most structures in most beats. So the frames prove the geometry and the timing; they are not a preview of what a student sees. Nobody has yet loaded this scene into viz3d.js and walked its ten beats."
- ]
 }

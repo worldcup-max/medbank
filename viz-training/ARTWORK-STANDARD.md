@@ -55,6 +55,50 @@ Two identical reviews catch the same things twice. These two are built to fail d
   error; each arrow is its own `<path>`
 - no `<text>` outside the plate's declared structural-context group
 
+### Review 1b — every panel of a multi-panel figure is counted on its own
+
+Added 2026-10-03. Proposed by the review task on the neurulation item and adopted by the build run the
+same day, because it is a gap in this standard and not a defect in one model.
+
+**WHERE A FIGURE LAYS OUT N PANELS OF ONE GEOMETRY, EVERY STRUCTURE THE BEAT SHOWS IS COUNTED PER
+PANEL.** A structure that the model builds inside a panel and that contributes no ink in that panel is a
+defect. A structure legitimately absent from a panel must say so — by the variant's own construction, or
+in `scene.panel_waivers`.
+
+The reason it needs saying is that no existing instrument asks the question, and two defects of exactly
+this shape got through everything on one model in one week:
+
+- a four-panel transverse figure drew **three notochords**. The scene's own narration for the rod reads
+  "beneath the midline in ALL FOUR SECTIONS, which is the point", and one panel had no rod at all. Which
+  panel lost it moved with `t`, so a spot check at one stage would have passed.
+- in the beat whose entire subject is the neural crest — "the cells at the very tips of the folds join
+  neither the tube nor the skin" — the **folds panel drew zero crest pixels**. The cells were built,
+  several of them inside that panel, and sat inside the fold's own silhouette where the camera reads its
+  cut face.
+
+Both passed twelve render checks, twenty-three acceptance rows and thirty-six beat claims. They passed
+for a structural reason that would have let the next one through too:
+
+- the mechanical review asks that every scene key resolve to something the model builds — that is
+  per-MODEL, and it held;
+- the visibility walk asks that each structure be visible in the beat's frame — that is per-BEAT, and it
+  held too, because three rods out of four is plenty of ink and one bright panel carries a crest;
+- **nothing anywhere asked a question per PANEL.**
+
+So a structure can be built, resolvable, and plainly present in the frame as a whole while being absent
+from one of the pictures the figure is made of — and the one thing a multi-panel figure exists to do is
+let a student compare the panels.
+
+Counting it: flood each panel with a flat id colour and render once, so every pixel belongs to a panel;
+then hide one structure at a time and attribute the changed pixels. The floor is a fraction of the
+PANEL'S own footprint, not of the frame — a four-panel figure gives each panel about a quarter of the
+picture, so a frame-relative floor rejects structures that are correctly small. The worked
+implementation is check 13 of `tools/render-neurulation-neural-plate-tube.mjs`, at 0.10% of a panel's
+footprint.
+
+This applies to plates as much as to 3D variants: a plate with four stage panels is the same figure and
+has the same blind spot.
+
 ### Review 2 — anatomical, by a reader who did not draw it
 
 A fresh reader with no memory of drawing the plate, told to assume it contains errors. Order matters:

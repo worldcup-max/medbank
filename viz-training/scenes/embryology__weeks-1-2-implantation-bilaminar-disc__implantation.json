@@ -1,666 +1,2076 @@
 {
-  "schema": 2,
-  "id": "embryology__weeks-1-2-implantation-bilaminar-disc__implantation",
-  "mode": "sequence",
-  "deferred_modes": [
-    "diagram"
+ "schema": 2,
+ "id": "embryology__weeks-1-2-implantation-bilaminar-disc__implantation",
+ "mode": "3d_anatomy",
+ "deferred_modes": [
+  "sequence",
+  "diagram"
+ ],
+ "course": "Embryology",
+ "topic": "Weeks 1-2: Implantation & Bilaminar Disc",
+ "structure": "Implantation",
+ "covers": [
+  "Implantation"
+ ],
+ "learning_goal": "Date implantation day by day from apposition to full burial, name the two trophoblast layers and say which one invades, explain how the lacunae become the first uteroplacental circulation, and predict what goes wrong when the site or the depth is abnormal.",
+ "status": "candidate",
+ "provider": {
+  "primary": "procedural",
+  "fallbacks": []
+ },
+ "match": {
+  "topics": [
+   "implantation",
+   "week 1",
+   "week 2",
+   "early development",
+   "trophoblast",
+   "placenta",
+   "decidua",
+   "ectopic pregnancy",
+   "antenatal bleeding",
+   "pregnancy test"
   ],
-  "course": "Embryology",
-  "topic": "Weeks 1-2: Implantation & Bilaminar Disc",
-  "structure": "Implantation",
-  "covers": [
-    "Implantation"
-  ],
-  "learning_goal": "Date implantation day by day from apposition to full burial, name the two trophoblast layers and say which one invades, explain how the lacunae become the first uteroplacental circulation, and predict what goes wrong when the site or the depth is abnormal.",
-  "status": "planned",
-  "provider": {
-    "primary": "svg",
-    "fallbacks": []
-  },
-  "match": {
-    "topics": [
-      "implantation",
-      "week 1",
-      "week 2",
-      "early development",
-      "trophoblast",
-      "placenta",
-      "decidua",
-      "ectopic pregnancy",
-      "antenatal bleeding",
-      "pregnancy test"
-    ],
-    "terms": [
-      "implantation",
-      "apposition",
-      "adhesion",
-      "invasion",
-      "interstitial implantation",
-      "window of implantation",
-      "receptive endometrium",
-      "pinopodes",
-      "leukaemia inhibitory factor",
-      "LIF",
-      "integrins",
-      "selectin",
-      "day 6",
-      "day 7",
-      "day 8",
-      "day 9",
-      "day 11",
-      "day 12",
-      "day 13",
-      "trophoblast",
-      "cytotrophoblast",
-      "syncytiotrophoblast",
-      "syncytium",
-      "multinucleate",
-      "mitotically active",
-      "proteolytic enzymes",
-      "lacunae",
-      "lacunar stage",
-      "trophoblastic lacunae",
-      "sinusoid",
-      "maternal sinusoids",
-      "uteroplacental circulation",
-      "primary villi",
-      "decidua",
-      "decidual reaction",
-      "decidua basalis",
-      "decidua capsularis",
-      "decidua parietalis",
-      "glycogen",
-      "lipid",
-      "closing plug",
-      "fibrin coagulum",
-      "epithelial repair",
-      "posterior superior uterine wall",
-      "endometrium",
-      "secretory phase",
-      "corpus luteum rescue",
-      "human chorionic gonadotropin",
-      "hCG",
-      "progesterone",
-      "missed period",
-      "pregnancy test",
-      "implantation bleeding",
-      "ectopic pregnancy",
-      "tubal pregnancy",
-      "ampulla",
-      "ruptured ectopic",
-      "placenta praevia",
-      "placenta accreta",
-      "placenta increta",
-      "placenta percreta",
-      "Nitabuch layer",
-      "previous caesarean scar",
-      "hydatidiform mole",
-      "spiral arteries",
-      "pre-eclampsia",
-      "shallow invasion"
-    ]
-  },
-  "camera": {
-    "framing": "anterior"
-  },
-  "structures": [
-    {
-      "key": "receptive_window",
-      "label": "The window of implantation",
-      "role": "context",
-      "group": "Before it can happen",
-      "layer": "organ",
-      "color": "#b07aa1",
-      "terms": [
-        "window of implantation",
-        "receptive endometrium",
-        "secretory phase",
-        "progesterone",
-        "pinopodes",
-        "leukaemia inhibitory factor",
-        "LIF",
-        "integrins",
-        "day 20",
-        "day 24",
-        "luteal phase"
-      ],
-      "narration": "The endometrium is not receptive for most of the cycle. Progesterone from the corpus luteum opens a short window in the mid-secretory phase, roughly cycle days twenty to twenty-four, when the surface throws up pinopodes and expresses the adhesion molecules the blastocyst needs. Outside that window the same blastocyst will not stick. Two clocks must agree — the embryo must arrive hatched and ready at exactly the days the wall is willing."
-    },
-    {
-      "key": "apposition",
-      "label": "Apposition — day 6",
-      "role": "part",
-      "group": "The three steps",
-      "layer": "organ",
-      "color": "#f5b041",
-      "terms": [
-        "apposition",
-        "day 6",
-        "loose contact",
-        "embryonic pole",
-        "polar trophoblast",
-        "uterine fluid",
-        "selectin"
-      ],
-      "narration": "Step one is contact, not attachment. The hatched blastocyst settles against the endometrial surface, embryonic pole first, held only loosely as the last of the uterine fluid is absorbed. It could still be washed away at this point. Learn the order — apposition, adhesion, invasion — because it is asked as an order."
-    },
-    {
-      "key": "adhesion",
-      "label": "Adhesion — day 6 to 7",
-      "role": "part",
-      "group": "The three steps",
-      "layer": "organ",
-      "color": "#e67e22",
-      "terms": [
-        "adhesion",
-        "day 7",
-        "integrins",
-        "L-selectin",
-        "cadherin",
-        "firm attachment",
-        "trophoblast",
-        "endometrial epithelium"
-      ],
-      "narration": "Step two is a firm grip. Integrins on the trophoblast lock onto the extracellular matrix of the endometrial surface and the embryo can no longer be dislodged. Only now is a pregnancy in any real sense established. Most losses in human reproduction happen at or before this step and are never known to the woman."
-    },
-    {
-      "key": "invasion",
-      "label": "Invasion — day 7 to 9",
-      "role": "part",
-      "group": "The three steps",
-      "layer": "organ",
-      "color": "#c0392b",
-      "terms": [
-        "invasion",
-        "interstitial implantation",
-        "proteolytic enzymes",
-        "matrix metalloproteinases",
-        "day 7",
-        "day 8",
-        "day 9",
-        "burrowing",
-        "endometrial stroma"
-      ],
-      "narration": "Step three is digestion. The syncytiotrophoblast releases proteolytic enzymes, breaks through the surface epithelium and eats its way into the stroma, and the whole embryo sinks below the surface. In the human this is interstitial implantation — the embryo ends up buried inside the wall, not sitting on it, and that is a species difference examiners like."
-    },
-    {
-      "key": "cytotrophoblast",
-      "label": "Cytotrophoblast — the inner layer",
-      "role": "part",
-      "group": "Two trophoblast layers",
-      "layer": "organ",
-      "color": "#3498db",
-      "terms": [
-        "cytotrophoblast",
-        "inner layer",
-        "mononuclear",
-        "distinct cell borders",
-        "mitotically active",
-        "germinative layer",
-        "stem cells",
-        "primary villi"
-      ],
-      "narration": "The inner layer, sitting against the embryo. Its cells are single-nucleus, have clear borders, and keep dividing — this is the layer that supplies new cells. It does not invade. Think of it as the factory: every syncytiotrophoblast nucleus was once a cytotrophoblast cell that divided and then fused outward."
-    },
-    {
-      "key": "syncytiotrophoblast",
-      "label": "Syncytiotrophoblast — the outer layer",
-      "role": "part",
-      "group": "Two trophoblast layers",
-      "layer": "organ",
-      "color": "#a93226",
-      "terms": [
-        "syncytiotrophoblast",
-        "syncytium",
-        "multinucleate",
-        "no cell borders",
-        "invasive",
-        "proteolytic enzymes",
-        "hormone secreting",
-        "human chorionic gonadotropin",
-        "hCG",
-        "lacunae"
-      ],
-      "narration": "The outer layer, and the aggressive one. Its cells have fused into a single multinucleate mass with no borders between nuclei, which is exactly what a tissue built to burrow needs — no gaps for the mother's cells to get through. It does three jobs: it invades, it forms the lacunae, and it makes hCG. If a question asks which layer invades or which layer secretes, the answer to both is this one."
-    },
-    {
-      "key": "lacunae",
-      "label": "Lacunar stage — day 8 to 9",
-      "role": "part",
-      "group": "Making a circulation",
-      "layer": "organ",
-      "color": "#cb4335",
-      "terms": [
-        "lacunae",
-        "lacunar stage",
-        "trophoblastic lacunae",
-        "vacuoles",
-        "day 8",
-        "day 9",
-        "syncytiotrophoblast",
-        "spaces"
-      ],
-      "narration": "Around day eight vacuoles appear inside the syncytiotrophoblast and run together into larger spaces called lacunae. They are holes in a tissue, not vessels — nothing lines them. But they are the beginning of the intervillous space of the placenta, so the adult organ starts as gaps in an invading cell mass."
-    },
-    {
-      "key": "sinusoids",
-      "label": "Maternal sinusoids open — day 11 to 12",
-      "role": "part",
-      "group": "Making a circulation",
-      "layer": "organ",
-      "color": "#e74c3c",
-      "terms": [
-        "maternal sinusoids",
-        "eroded capillaries",
-        "uteroplacental circulation",
-        "day 11",
-        "day 12",
-        "maternal blood",
-        "intervillous space",
-        "haemochorial"
-      ],
-      "narration": "By day eleven or twelve the syncytiotrophoblast has eroded the walls of maternal capillaries and their blood spills into the lacunae. That is the start of the uteroplacental circulation. Note what it means: maternal blood now bathes fetal tissue directly, with no vessel wall between them. The human placenta is haemochorial for the rest of the pregnancy because of what happens in these two days."
-    },
-    {
-      "key": "primary_villi",
-      "label": "Primary villi — day 13",
-      "role": "part",
-      "group": "Making a circulation",
-      "layer": "organ",
-      "color": "#d98880",
-      "terms": [
-        "primary villi",
-        "day 13",
-        "cytotrophoblast core",
-        "syncytiotrophoblast shell",
-        "chorionic villi",
-        "secondary villi",
-        "tertiary villi"
-      ],
-      "narration": "Late in week two, cytotrophoblast pushes finger-like columns into the syncytiotrophoblast and each one is a primary villus — a cytotrophoblast core in a syncytiotrophoblast cover. Mesoderm will move into the core to make it secondary, and vessels will grow inside that to make it tertiary. The naming series primary, secondary, tertiary is a standard one-mark question."
-    },
-    {
-      "key": "decidua",
-      "label": "The decidual reaction",
-      "role": "part",
-      "group": "The mother's response",
-      "layer": "organ",
-      "color": "#af7ac5",
-      "terms": [
-        "decidua",
-        "decidual reaction",
-        "decidual cells",
-        "glycogen",
-        "lipid",
-        "endometrial stroma",
-        "nutrition",
-        "limits invasion",
-        "Nitabuch layer"
-      ],
-      "narration": "The mother is not passive. Stromal cells around the implantation site swell with glycogen and lipid and become decidual cells. They feed the embryo before there is any circulation, and they also fence it in — a decidua that forms properly is what stops the trophoblast digging deeper than it should. Where that barrier fails you get an abnormally adherent placenta."
-    },
-    {
-      "key": "decidua_parts",
-      "label": "Basalis, capsularis, parietalis",
-      "role": "part",
-      "group": "The mother's response",
-      "layer": "organ",
-      "color": "#c39bd3",
-      "terms": [
-        "decidua basalis",
-        "decidua capsularis",
-        "decidua parietalis",
-        "maternal placenta",
-        "over the embryo",
-        "rest of the uterus"
-      ],
-      "narration": "Three names for the same tissue in three positions. Basalis lies deep to the embryo and becomes the maternal side of the placenta. Capsularis is the thin layer stretched over it towards the uterine cavity. Parietalis lines the rest of the uterus. As the sac grows, capsularis and parietalis meet and fuse and the uterine cavity is obliterated by about week twelve."
-    },
-    {
-      "key": "closing_plug",
-      "label": "Closing plug and full burial — day 9 to 12",
-      "role": "part",
-      "group": "Buried and sealed",
-      "layer": "organ",
-      "color": "#7f8c8d",
-      "terms": [
-        "closing plug",
-        "fibrin coagulum",
-        "day 9",
-        "day 12",
-        "fully embedded",
-        "epithelial repair",
-        "surface healed",
-        "implantation bleeding"
-      ],
-      "narration": "By day nine the embryo is under the surface and the defect above it is filled by a fibrin plug. By day twelve the plug is replaced by regrown epithelium and the embryo is completely buried with the surface healed over. The small bleed some women notice at this point is implantation bleeding — lighter and earlier than a period, and a classic way a pregnancy gets its dates wrong."
-    },
-    {
-      "key": "hcg_luteum",
-      "label": "hCG rescues the corpus luteum",
-      "role": "part",
-      "group": "Buried and sealed",
-      "layer": "organ",
-      "color": "#16a085",
-      "terms": [
-        "human chorionic gonadotropin",
-        "hCG",
-        "corpus luteum rescue",
-        "LH receptor",
-        "progesterone",
-        "missed period",
-        "pregnancy test",
-        "day 8",
-        "luteal-placental shift",
-        "week 8"
-      ],
-      "narration": "From the moment it invades, the syncytiotrophoblast secretes hCG. It acts on the corpus luteum's LH receptor and keeps progesterone flowing, so the endometrium is not shed and the period is missed. It is detectable in blood about eight days after fertilization, which is why a test can be positive before a period is late. The placenta takes over progesterone production at about week eight and the corpus luteum is then dispensable."
-    },
-    {
-      "key": "wrong_site",
-      "label": "When the site is wrong",
-      "role": "part",
-      "group": "When it goes wrong",
-      "layer": "organ",
-      "color": "#922b21",
-      "terms": [
-        "ectopic pregnancy",
-        "tubal pregnancy",
-        "ampulla",
-        "ruptured ectopic",
-        "pelvic inflammatory disease",
-        "placenta praevia",
-        "low implantation",
-        "internal os",
-        "painless bleeding",
-        "abdominal pregnancy"
-      ],
-      "narration": "The trophoblast will implant into almost any surface it meets, which is the whole danger. Most ectopics are in the ampulla of the uterine tube, where the wall is thin and rupture with severe intraperitoneal bleeding is the emergency. Anything that slows tubal transport — previous pelvic infection, tubal surgery — raises the risk. At the other end, a blastocyst that implants low in the uterus places the placenta over or near the internal os, and that is a placenta praevia presenting later as painless bright red bleeding."
-    },
-    {
-      "key": "wrong_depth",
-      "label": "When the depth is wrong",
-      "role": "part",
-      "group": "When it goes wrong",
-      "layer": "organ",
-      "color": "#6c3483",
-      "terms": [
-        "placenta accreta",
-        "placenta increta",
-        "placenta percreta",
-        "Nitabuch layer",
-        "deficient decidua",
-        "previous caesarean scar",
-        "retained placenta",
-        "postpartum haemorrhage",
-        "hysterectomy",
-        "shallow invasion",
-        "spiral arteries",
-        "pre-eclampsia",
-        "fetal growth restriction"
-      ],
-      "narration": "Invasion has to be deep enough and no deeper. Too deep, usually where a caesarean scar has left no decidua to stop it, and the placenta grows into the myometrium — accreta into it, increta through the muscle, percreta out beyond the serosa — so it will not separate at delivery and the haemorrhage can cost the uterus. Too shallow, and the trophoblast fails to remodel the maternal spiral arteries into wide low-resistance channels; the placenta stays underperfused, and that is the accepted origin of pre-eclampsia and much fetal growth restriction. Both diseases are settled in these fourteen days."
-    }
-  ],
-  "views": [
-    {
-      "mode": "mechanism",
-      "beat": 1,
-      "title": "Nothing implants into an unready wall",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Before it can happen"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "receptive_window",
-          "intensity": 0.9
-        }
-      ],
-      "narration": "Start with the wall, not the embryo. Progesterone from the corpus luteum makes the endometrium receptive for only a few days in the middle of the secretory phase, and the surface grows pinopodes and adhesion molecules for that window alone. Arrive early or late and the same healthy blastocyst simply will not stick. This is why timing, in a natural cycle and in a transfer cycle, is half the problem."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 2,
-      "title": "Apposition, adhesion, invasion — in that order",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The three steps"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "receptive_window"
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:implantation-sequence",
-          "path": [
-            "apposition",
-            "adhesion",
-            "invasion"
-          ],
-          "duration": 6
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "invasion",
-          "intensity": 0.9
-        }
-      ],
-      "narration": "Three steps over about three days. Day six, the blastocyst lies against the endometrium embryonic pole first — apposition, still loose. Day six to seven, integrins lock it on — adhesion, and now it cannot be washed away. Day seven to nine, the syncytiotrophoblast digests its way through the surface epithelium and the embryo sinks into the stroma — invasion. In humans the embryo ends up buried inside the wall, which is called interstitial implantation."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 3,
-      "title": "One trophoblast becomes two",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Two trophoblast layers"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "invasion"
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "cytotrophoblast",
-            "syncytiotrophoblast"
-          ],
-          "layout": "side-by-side"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "cytotrophoblast",
-          "to": "syncytiotrophoblast",
-          "kind": "divides and fuses outward to feed it"
-        },
-        {
-          "op": "CROSS_SECTION",
-          "axis": "z",
-          "offset": 0,
-          "animate": true
-        }
-      ],
-      "narration": "At contact the trophoblast splits into two layers and you must be able to tell them apart. The inner cytotrophoblast has single nuclei and visible cell borders and keeps dividing; it is the source of new cells and it does not invade. The outer syncytiotrophoblast is one fused multinucleate mass with no borders; it invades, it forms the lacunae, and it makes the hormones. Cells move one way only — cytotrophoblast divides and fuses outward into the syncytium."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 4,
-      "title": "Holes become a circulation",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Making a circulation"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "Two trophoblast layers"
-        },
-        {
-          "op": "TRACE_STRUCTURE",
-          "target": "concept:maternal-blood",
-          "path": [
-            "lacunae",
-            "sinusoids",
-            "primary_villi"
-          ],
-          "duration": 7
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "sinusoids",
-          "intensity": 0.95
-        }
-      ],
-      "narration": "Day eight, vacuoles open inside the syncytiotrophoblast and merge into lacunae. Day eleven to twelve, the same tissue erodes maternal capillaries and their blood pours into those spaces — the uteroplacental circulation has begun, and from here on maternal blood is in direct contact with fetal tissue. Day thirteen, cytotrophoblast columns push out as primary villi. Lacunae become the intervillous space; the villi become the exchange surface. The whole placenta is visible in outline by the end of week two."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 5,
-      "title": "The mother's half of the deal",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "The mother's response"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "syncytiotrophoblast"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "decidua",
-          "intensity": 0.9
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "decidua",
-          "to": "invasion",
-          "kind": "feeds it and limits how deep it goes"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "decidua_parts",
-          "to": "decidua",
-          "kind": "the same tissue named by position"
-        }
-      ],
-      "narration": "The stroma around the site swells with glycogen and lipid to become decidua. It feeds the embryo before any circulation exists and it also sets the limit on how far the trophoblast may dig. Learn the three positions: basalis deep to the embryo, which becomes the maternal side of the placenta; capsularis stretched over it; parietalis lining the rest of the uterus. Capsularis and parietalis meet by about week twelve and the uterine cavity disappears."
-    },
-    {
-      "mode": "mechanism",
-      "beat": 6,
-      "title": "Buried, plugged, and healed over",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Buried and sealed"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "The mother's response"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "closing_plug",
-          "intensity": 0.9
-        },
-        {
-          "op": "PEEL_LAYER",
-          "layer": "organ",
-          "direction": "outward"
-        },
-        {
-          "op": "ROTATE_TO_VIEW",
-          "view": "lateral"
-        }
-      ],
-      "narration": "Day nine, the embryo is under the surface and a fibrin plug fills the hole above it. Day twelve, the plug is replaced by new epithelium and the embryo is completely embedded with the surface intact. The small early bleed a woman may notice is implantation bleeding — lighter, shorter and earlier than a period, and one of the commonest reasons a pregnancy is dated a month wrong."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 7,
-      "title": "The pregnancy announces itself",
-      "ops": [
-        {
-          "op": "ISOLATE_REGION",
-          "target": "Buried and sealed"
-        },
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "syncytiotrophoblast"
-        },
-        {
-          "op": "HIGHLIGHT_STRUCTURE",
-          "target": "hcg_luteum",
-          "intensity": 0.95
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "syncytiotrophoblast",
-          "to": "hcg_luteum",
-          "kind": "secretes it from the first day of invasion"
-        }
-      ],
-      "narration": "The syncytiotrophoblast secretes hCG as soon as it starts invading. hCG acts on the LH receptor of the corpus luteum, progesterone keeps flowing, and the endometrium is not shed — so the first sign of implantation is a period that does not come. Blood levels are detectable about eight days after fertilization. Remember what a pregnancy test is measuring: a product of the future placenta, not of the embryo. By week eight the placenta itself makes the progesterone and the corpus luteum is no longer needed."
-    },
-    {
-      "mode": "associated_organs",
-      "beat": 8,
-      "title": "Wrong place, wrong depth",
-      "ops": [
-        {
-          "op": "SHOW_STRUCTURE",
-          "target": "*"
-        },
-        {
-          "op": "ISOLATE_REGION",
-          "target": "When it goes wrong"
-        },
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "wrong_site",
-            "wrong_depth"
-          ],
-          "layout": "side-by-side"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "wrong_depth",
-          "to": "decidua",
-          "kind": "no decidua, no brake"
-        },
-        {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "wrong_site",
-          "to": "invasion",
-          "kind": "the same invasion into the wrong wall"
-        }
-      ],
-      "narration": "Everything clinical here follows from one fact: the trophoblast invades whatever it lands on. Land in the ampulla of the tube and you get an ectopic pregnancy in a thin wall that ruptures and bleeds into the abdomen. Land low in the uterus and the placenta covers the internal os as a praevia. Land on a caesarean scar with no decidua to stop it and the placenta grows into the muscle — accreta, increta, percreta — and will not separate at delivery. And if invasion is too shallow to remodel the spiral arteries, the placenta is underperfused for the whole pregnancy, which is where pre-eclampsia and much growth restriction begin. Two weeks of embryology explains half of third-trimester obstetrics."
-    }
-  ],
-  "provenance": {
-    "author": "task",
-    "authored_at": "2026-08-28"
-  },
-  "gaps": [
-    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and no 3d option; implantation is a staged process at cell scale with no mesh that could represent it. Only diagram is deferred. The curriculum asks for mechanism and associated_organs views and both are authored — beats 1, 2, 3, 4 and 6 are mechanism, beats 5, 7 and 8 are associated_organs.",
-    "Status is 'planned'. Fifteen regions, eight beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a section of endometrium with the blastocyst shown at three depths (apposed on the surface, half sunk, fully buried under a plug), the trophoblast drawn as two distinguishable layers with the syncytium shown as a multinucleate mass without borders, lacunae shown first empty and then filled from an eroded maternal capillary, a primary villus, and the three decidual positions labelled on a whole-uterus inset.",
-    "Beats 2 and 4 trace concepts rather than objects — concept:implantation-sequence for the apposition-adhesion-invasion order, and concept:maternal-blood for the path from lacunae to filled sinusoids to villi. Neither subject is a drawn structure.",
-    "Cytotrophoblast and syncytiotrophoblast are given their own regions here, as the blastocyst scene's gaps[] anticipated. The blastocyst scene names them in one line of trophoblast narration and should not be expanded; this is where they are taught.",
-    "This scene stops where the embryo is buried and the placenta is sketched in outline. The bilaminar disc itself, the amniotic cavity, the yolk sac and the chorionic cavity are the other three entries in this topic and are NOT claimed in covers[], even though beats 4 and 5 touch the tissue they grow from.",
-    "Primary villi are named because day 13 falls inside implantation, but secondary and tertiary villi, the full villous tree and the placental barrier belong to 'Chorion & placenta (early)' and are only named in passing. That entry is not claimed.",
-    "Timings are the standard teaching ones — apposition about day 6, adhesion day 6 to 7, invasion day 7 to 9, lacunae day 8 to 9, maternal blood in the lacunae day 11 to 12, fully embedded day 12, primary villi day 13 — and are narrated as approximations. The receptive window is given in cycle days rather than embryonic days because that is how it is used clinically, and the two numbering systems should not be conflated in the artwork.",
-    "The placenta accreta spectrum, pre-eclampsia and ectopic pregnancy are narrated as consequences of abnormal implantation, not as diseases in their own right. They have no curriculum entry in Embryology and none is claimed; the terms are in match.terms so a highlighted 'accreta' or 'spiral arteries' in a note finds the mechanism that explains it."
+  "terms": [
+   "implantation",
+   "apposition",
+   "adhesion",
+   "invasion",
+   "interstitial implantation",
+   "window of implantation",
+   "receptive endometrium",
+   "pinopodes",
+   "leukaemia inhibitory factor",
+   "LIF",
+   "integrins",
+   "selectin",
+   "day 6",
+   "day 7",
+   "day 8",
+   "day 9",
+   "day 11",
+   "day 12",
+   "day 13",
+   "trophoblast",
+   "cytotrophoblast",
+   "syncytiotrophoblast",
+   "syncytium",
+   "multinucleate",
+   "mitotically active",
+   "proteolytic enzymes",
+   "lacunae",
+   "lacunar stage",
+   "trophoblastic lacunae",
+   "sinusoid",
+   "maternal sinusoids",
+   "uteroplacental circulation",
+   "primary villi",
+   "decidua",
+   "decidual reaction",
+   "decidua basalis",
+   "decidua capsularis",
+   "decidua parietalis",
+   "glycogen",
+   "lipid",
+   "closing plug",
+   "fibrin coagulum",
+   "epithelial repair",
+   "posterior superior uterine wall",
+   "endometrium",
+   "secretory phase",
+   "corpus luteum rescue",
+   "human chorionic gonadotropin",
+   "hCG",
+   "progesterone",
+   "missed period",
+   "pregnancy test",
+   "implantation bleeding",
+   "ectopic pregnancy",
+   "tubal pregnancy",
+   "ampulla",
+   "ruptured ectopic",
+   "placenta praevia",
+   "placenta accreta",
+   "placenta increta",
+   "placenta percreta",
+   "Nitabuch layer",
+   "previous caesarean scar",
+   "hydatidiform mole",
+   "spiral arteries",
+   "pre-eclampsia",
+   "shallow invasion"
   ]
+ },
+ "camera": {
+  "framing": "anterior"
+ },
+ "framing_strict": true,
+ "structures": [
+  {
+   "key": "epithelium",
+   "name": "Uterine surface epithelium",
+   "label": "Uterine surface epithelium",
+   "role": "part",
+   "group": "The wall, before anything happens",
+   "color": "#e8c39e",
+   "refs": {
+    "procedural": "implantation#epithelium"
+   },
+   "narration": "The endometrium is not receptive for most of the cycle. Progesterone from the corpus luteum opens a short window in the mid-secretory phase, roughly cycle days twenty to twenty-four, when the surface throws up pinopodes and expresses the adhesion molecules the blastocyst needs. Outside that window the same blastocyst will not stick. Two clocks must agree — the embryo must arrive hatched and ready at exactly the days the wall is willing.",
+   "narration_from": "sequence-version structure \"receptive_window\" — carried across verbatim. In the SVG scene that was a teaching BEAT about a STATE of the wall, with no geometry; here the thing the state is a state OF — the luminal epithelium — is a built structure, and the beat that narrates the window is view 1. The words are unchanged. What the model does NOT draw is pinopodes or an adhesion molecule: at 10 um per unit a pinopode is a tenth of a unit, and drawing one would be an invention. Declared in gaps[].",
+   "terms": [
+    "window of implantation",
+    "receptive endometrium",
+    "secretory phase",
+    "progesterone",
+    "pinopodes",
+    "leukaemia inhibitory factor",
+    "LIF",
+    "integrins",
+    "day 20",
+    "day 24",
+    "luteal phase"
+   ]
+  },
+  {
+   "key": "decidua_basalis",
+   "name": "Decidua basalis — deep to the conceptus",
+   "label": "Decidua basalis — deep to the conceptus",
+   "role": "part",
+   "group": "The mother's response",
+   "color": "#af7ac5",
+   "refs": {
+    "procedural": "implantation#decidua_basalis"
+   },
+   "narration": "The mother is not passive. Stromal cells around the implantation site swell with glycogen and lipid and become decidual cells. They feed the embryo before there is any circulation, and they also fence it in — a decidua that forms properly is what stops the trophoblast digging deeper than it should. Where that barrier fails you get an abnormally adherent placenta.",
+   "narration_from": "sequence-version structure \"decidua\" — carried across verbatim, WHOLE, on the basalis. Every clause of it is true of this third of the tissue: it is the part that swells deep to the embryo, the part that feeds it before any circulation exists, the part whose failure lets the placenta dig into muscle, and the part that becomes the maternal side of the placenta. It is placed here rather than duplicated across all three because blastocyst.js's round-4 review found that a narration marked \"verbatim\" on both halves of a split structure can be FALSE of one of them, and \"it also fences it in\" is a statement about the decidua UNDER the trophoblast.",
+   "terms": [
+    "decidua",
+    "decidual reaction",
+    "decidual cells",
+    "glycogen",
+    "lipid",
+    "endometrial stroma",
+    "nutrition",
+    "limits invasion",
+    "Nitabuch layer"
+   ]
+  },
+  {
+   "key": "decidua_parietalis",
+   "name": "Decidua parietalis — the rest of the wall",
+   "label": "Decidua parietalis — the rest of the wall",
+   "role": "part",
+   "group": "The mother's response",
+   "color": "#9b6bb3",
+   "refs": {
+    "procedural": "implantation#decidua_parietalis"
+   },
+   "narration": "Three names for the same tissue in three positions. Basalis lies deep to the embryo and becomes the maternal side of the placenta. Capsularis is the thin layer stretched over it towards the uterine cavity. Parietalis lines the rest of the uterus. As the sac grows, capsularis and parietalis meet and fuse and the uterine cavity is obliterated by about week twelve.",
+   "narration_from": "sequence-version structure \"decidua_parts\" — carried across verbatim, WHOLE, and DELIBERATELY ON BOTH of capsularis and parietalis. Unlike the case above this paragraph is a statement about the TRIO — \"three names for the same tissue in three positions\" — so it is true of each of them only as a member of the set, and splitting it into three would destroy the one thing it teaches. Nothing is altered and nothing is dropped.",
+   "terms": [
+    "decidua basalis",
+    "decidua capsularis",
+    "decidua parietalis",
+    "maternal placenta",
+    "over the embryo",
+    "rest of the uterus"
+   ]
+  },
+  {
+   "key": "decidua_capsularis_cut",
+   "name": "Decidua capsularis — the roof over it — cut open, day 8.6 — the roof has just closed over the embryo",
+   "label": "Decidua capsularis — the roof over it — cut open, day 8.6 — the roof has just closed over the embryo",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#c39bd3",
+   "refs": {
+    "procedural": "implantation#decidua_capsularis@0.371429+cut"
+   },
+   "narration": "Three names for the same tissue in three positions. Basalis lies deep to the embryo and becomes the maternal side of the placenta. Capsularis is the thin layer stretched over it towards the uterine cavity. Parietalis lines the rest of the uterus. As the sac grows, capsularis and parietalis meet and fuse and the uterine cavity is obliterated by about week twelve.",
+   "narration_from": "sequence-version structure \"decidua_parts\" — carried across verbatim, WHOLE, for the reason given on decidua_parietalis: it is a statement about the TRIO and splitting it would destroy the only thing it teaches. PINNED at 0.371429 because the capsularis does not exist before about day 7.4 — see the note at CAPS in the generator and the model header's section 3. One key per beat instant.",
+   "terms": [
+    "decidua basalis",
+    "decidua capsularis",
+    "decidua parietalis",
+    "maternal placenta",
+    "over the embryo",
+    "rest of the uterus"
+   ]
+  },
+  {
+   "key": "decidua_capsularis_d96_cut",
+   "name": "Decidua capsularis — the roof over it — cut open, day 9.6 — with the plug still in the surface above it",
+   "label": "Decidua capsularis — the roof over it — cut open, day 9.6 — with the plug still in the surface above it",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#c39bd3",
+   "refs": {
+    "procedural": "implantation#decidua_capsularis@0.514286+cut"
+   },
+   "narration": "Three names for the same tissue in three positions. Basalis lies deep to the embryo and becomes the maternal side of the placenta. Capsularis is the thin layer stretched over it towards the uterine cavity. Parietalis lines the rest of the uterus. As the sac grows, capsularis and parietalis meet and fuse and the uterine cavity is obliterated by about week twelve.",
+   "narration_from": "sequence-version structure \"decidua_parts\" — carried across verbatim, WHOLE, for the reason given on decidua_parietalis: it is a statement about the TRIO and splitting it would destroy the only thing it teaches. PINNED at 0.514286 because the capsularis does not exist before about day 7.4 — see the note at CAPS in the generator and the model header's section 3. One key per beat instant.",
+   "terms": [
+    "decidua basalis",
+    "decidua capsularis",
+    "decidua parietalis",
+    "maternal placenta",
+    "over the embryo",
+    "rest of the uterus"
+   ]
+  },
+  {
+   "key": "decidua_capsularis_d12_cut",
+   "name": "Decidua capsularis — the roof over it — cut open, day 12 — the surface healed over",
+   "label": "Decidua capsularis — the roof over it — cut open, day 12 — the surface healed over",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#c39bd3",
+   "refs": {
+    "procedural": "implantation#decidua_capsularis@0.857143+cut"
+   },
+   "narration": "Three names for the same tissue in three positions. Basalis lies deep to the embryo and becomes the maternal side of the placenta. Capsularis is the thin layer stretched over it towards the uterine cavity. Parietalis lines the rest of the uterus. As the sac grows, capsularis and parietalis meet and fuse and the uterine cavity is obliterated by about week twelve.",
+   "narration_from": "sequence-version structure \"decidua_parts\" — carried across verbatim, WHOLE, for the reason given on decidua_parietalis: it is a statement about the TRIO and splitting it would destroy the only thing it teaches. PINNED at 0.857143 because the capsularis does not exist before about day 7.4 — see the note at CAPS in the generator and the model header's section 3. One key per beat instant.",
+   "terms": [
+    "decidua basalis",
+    "decidua capsularis",
+    "decidua parietalis",
+    "maternal placenta",
+    "over the embryo",
+    "rest of the uterus"
+   ]
+  },
+  {
+   "key": "decidua_capsularis_d13_cut",
+   "name": "Decidua capsularis — the roof over it — cut open, day 13",
+   "label": "Decidua capsularis — the roof over it — cut open, day 13",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#c39bd3",
+   "refs": {
+    "procedural": "implantation#decidua_capsularis@1+cut"
+   },
+   "narration": "Three names for the same tissue in three positions. Basalis lies deep to the embryo and becomes the maternal side of the placenta. Capsularis is the thin layer stretched over it towards the uterine cavity. Parietalis lines the rest of the uterus. As the sac grows, capsularis and parietalis meet and fuse and the uterine cavity is obliterated by about week twelve.",
+   "narration_from": "sequence-version structure \"decidua_parts\" — carried across verbatim, WHOLE, for the reason given on decidua_parietalis: it is a statement about the TRIO and splitting it would destroy the only thing it teaches. PINNED at 1 because the capsularis does not exist before about day 7.4 — see the note at CAPS in the generator and the model header's section 3. One key per beat instant.",
+   "terms": [
+    "decidua basalis",
+    "decidua capsularis",
+    "decidua parietalis",
+    "maternal placenta",
+    "over the embryo",
+    "rest of the uterus"
+   ]
+  },
+  {
+   "key": "decidua_capsularis",
+   "name": "Decidua capsularis — the roof over it",
+   "label": "Decidua capsularis — the roof over it",
+   "role": "part",
+   "group": "The mother's response",
+   "color": "#c39bd3",
+   "refs": {
+    "procedural": "implantation#decidua_capsularis@1"
+   },
+   "narration": "Three names for the same tissue in three positions. Basalis lies deep to the embryo and becomes the maternal side of the placenta. Capsularis is the thin layer stretched over it towards the uterine cavity. Parietalis lines the rest of the uterus. As the sac grows, capsularis and parietalis meet and fuse and the uterine cavity is obliterated by about week twelve.",
+   "narration_from": "sequence-version structure \"decidua_parts\" — carried across verbatim, WHOLE. Pinned at day 13. No beat draws this uncut key: the capsularis is a roof INSIDE the wall and an uncut camera cannot see it, which the visibility walk established by measuring it at 0.000% of the frame when beat 9 was uncut. It is kept so the structure appears in the player's parts list under its own name rather than only as a cut variant.",
+   "terms": [
+    "decidua basalis",
+    "decidua capsularis",
+    "decidua parietalis",
+    "maternal placenta",
+    "over the embryo",
+    "rest of the uterus"
+   ]
+  },
+  {
+   "key": "gland",
+   "name": "Uterine gland",
+   "label": "Uterine gland",
+   "role": "context",
+   "group": "The wall, before anything happens",
+   "color": "#d7bde2",
+   "refs": {
+    "procedural": "implantation#gland"
+   },
+   "narration": "One secretory gland, opening on the surface. It is here as the thing that says this is a secretory endometrium under progesterone and not any other epithelial surface — the glands are coiled and actively secreting in the implantation window, and their secretion is what the blastocyst lives on for the few days between hatching and a circulation.",
+   "narration_from": "WRITTEN 2026-10-03 by the model3d build run. Not SVG-era text: the SVG scene had no structure for the gland, because a panel about the \"window of implantation\" could say \"secretory phase\" in words. A 3D wall has to look like one, and a reader who cannot tell proliferative from secretory endometrium cannot date the picture."
+  },
+  {
+   "key": "spiral_artery",
+   "name": "Maternal spiral artery",
+   "label": "Maternal spiral artery",
+   "role": "context",
+   "group": "Making a circulation",
+   "color": "#b03a2e",
+   "refs": {
+    "procedural": "implantation#spiral_artery"
+   },
+   "narration": "A maternal spiral artery, coiling up through the stroma towards the site. It is drawn from day six because it is there from day six: what changes in week two is not that the mother has vessels but that the syncytiotrophoblast opens one.",
+   "narration_from": "WRITTEN 2026-10-03 by the model3d build run. Not SVG-era text: the SVG scene narrated \"the syncytiotrophoblast has eroded the walls of maternal capillaries\" with nothing drawn to be eroded. A beat cannot show a vessel opening into a lacuna unless the vessel is in the picture before it opens."
+  },
+  {
+   "key": "maternal_blood",
+   "name": "Maternal blood",
+   "label": "Maternal blood",
+   "role": "part",
+   "group": "Making a circulation",
+   "color": "#e74c3c",
+   "refs": {
+    "procedural": "implantation#maternal_blood"
+   },
+   "narration": "By day eleven or twelve the syncytiotrophoblast has eroded the walls of maternal capillaries and their blood spills into the lacunae. That is the start of the uteroplacental circulation. Note what it means: maternal blood now bathes fetal tissue directly, with no vessel wall between them. The human placenta is haemochorial for the rest of the pregnancy because of what happens in these two days.",
+   "narration_from": "sequence-version structure \"sinusoids\" — carried across verbatim. The ref is UNPINNED, and that is the honest reading of this structure rather than a convenience: maternal blood is in the wall from day six, and what day eleven changes is not whether there is blood but where it can go. So the part exists at every t — in the artery early, in the lacunae late — which is also what makes it safe against engine__procedural-ref-default-t. See the model's header, section 3.",
+   "terms": [
+    "maternal sinusoids",
+    "eroded capillaries",
+    "uteroplacental circulation",
+    "day 11",
+    "day 12",
+    "maternal blood",
+    "intervillous space",
+    "haemochorial"
+   ]
+  },
+  {
+   "key": "surface_plane",
+   "name": "The original luminal surface",
+   "label": "The original luminal surface",
+   "role": "context",
+   "group": "Reference",
+   "color": "#76d7c4",
+   "refs": {
+    "procedural": "implantation#surface_plane"
+   },
+   "narration": "The level the uterine surface was at before anything happened, kept in the picture as a collar round the rim of the patch. Everything this topic is examined on is a statement about this line: the embryo starts above it, ends below it, and the surface closes over the top.",
+   "narration_from": "WRITTEN 2026-10-03 by the model3d build run. Not SVG-era text: a reference, not a tissue. It is drawn as a raised collar at the patch's edge rather than as a plane through the picture because RENDER-STANDARD's \"A REFERENCE MUST SURVIVE THE VIEW THAT USES IT\" was learned on a reference buried inside its subject: a translucent plane at y = 0 is seen exactly edge-on by the lateral camera that shows the burial."
+  },
+  {
+   "key": "trophoblast",
+   "name": "Trophoblast — one layer, not yet two",
+   "label": "Trophoblast — one layer, not yet two",
+   "role": "part",
+   "group": "Before contact",
+   "color": "#c23b2f",
+   "refs": {
+    "procedural": "implantation#trophoblast@0"
+   },
+   "narration": "Before contact there is one trophoblast, not two. The wall of the hatched blastocyst is a single layer, and it is adhesion that makes it split — which is why the order apposition, adhesion, invasion is asked as an order. The two layers beat 5 names do not exist yet in this picture.",
+   "narration_from": "NOT carried across from the sequence version: that file had no undifferentiated key at all, which is finding F4 of the 2026-10-03 review. Written by the rework run and marked as new rather than presented as inherited.",
+   "added_by": "model3d BUILD task, 2026-10-03, review finding F4",
+   "added_note": "THE REF IS PINNED AT t = 0, and it has to be. This part exists only before day 7, so by the model header's section 3 an unpinned ref would be resolved at t = 1 by viz3d's mountScene, come back reason:'none', and never be retried — the player would tell a student there is no 3D model of it. The decidua capsularis has five pinned keys for the same reason and the harness check 6 is what enforces it.",
+   "gaps": [
+    "It is the same band the two layers occupy between them, so the picture does not change shape at the split; what changes is that one colour becomes two. Acceptance row V measures that band against the built syncytiotrophoblast and cytotrophoblast rather than against the shape law."
+   ]
+  },
+  {
+   "key": "syncytiotrophoblast",
+   "name": "Syncytiotrophoblast — the outer layer",
+   "label": "Syncytiotrophoblast — the outer layer",
+   "role": "part",
+   "group": "Two trophoblast layers",
+   "color": "#a93226",
+   "opacity": 0.52,
+   "refs": {
+    "procedural": "implantation#syncytiotrophoblast"
+   },
+   "narration": "The outer layer, and the aggressive one. Its cells have fused into a single multinucleate mass with no borders between nuclei, which is exactly what a tissue built to burrow needs — no gaps for the mother's cells to get through. It does three jobs: it invades, it forms the lacunae, and it makes hCG. If a question asks which layer invades or which layer secretes, the answer to both is this one.",
+   "narration_from": "sequence-version structure \"syncytiotrophoblast\" — carried across verbatim. Drawn at 0.52 opacity in every beat that shows the lacunae, because the lacunae ARE the spaces inside it and an opaque shell hides the beat's whole subject. RENDER-STANDARD 3.x is explicit that this is what a teaching figure does. The containment is published in the model's PARTITION rather than tolerated.",
+   "terms": [
+    "syncytiotrophoblast",
+    "syncytium",
+    "multinucleate",
+    "no cell borders",
+    "invasive",
+    "proteolytic enzymes",
+    "hormone secreting",
+    "human chorionic gonadotropin",
+    "hCG",
+    "lacunae"
+   ]
+  },
+  {
+   "key": "cytotrophoblast",
+   "name": "Cytotrophoblast — the inner layer",
+   "label": "Cytotrophoblast — the inner layer",
+   "role": "part",
+   "group": "Two trophoblast layers",
+   "color": "#3498db",
+   "refs": {
+    "procedural": "implantation#cytotrophoblast"
+   },
+   "narration": "The inner layer, sitting against the embryo. Its cells are single-nucleus, have clear borders, and keep dividing — this is the layer that supplies new cells. It does not invade. Think of it as the factory: every syncytiotrophoblast nucleus was once a cytotrophoblast cell that divided and then fused outward.",
+   "narration_from": "sequence-version structure \"cytotrophoblast\" — carried across verbatim.",
+   "terms": [
+    "cytotrophoblast",
+    "inner layer",
+    "mononuclear",
+    "distinct cell borders",
+    "mitotically active",
+    "germinative layer",
+    "stem cells",
+    "primary villi"
+   ]
+  },
+  {
+   "key": "blastocoele",
+   "name": "Blastocyst cavity",
+   "label": "Blastocyst cavity",
+   "role": "part",
+   "group": "The conceptus",
+   "color": "#9fd4f2",
+   "opacity": 0.3,
+   "refs": {
+    "procedural": "implantation#blastocoele"
+   },
+   "narration": "The cavity the blastocyst arrived with. It is still here through the whole of week two, and it becomes the chorionic cavity — so the space a student meets as \"the blastocyst cavity\" on day five and as \"the extraembryonic coelom\" in week three is one continuous space that was never refilled.",
+   "narration_from": "WRITTEN 2026-10-03 by the model3d build run. Not SVG-era text: the SVG scene began at apposition and had no structure for the cavity. It is in this model because the cut beats would otherwise show a solid ball, and because the continuity with blastocyst.js's own blastocoele is worth a sentence."
+  },
+  {
+   "key": "embryoblast",
+   "name": "Embryoblast — the bilaminar disc",
+   "label": "Embryoblast — the bilaminar disc",
+   "role": "part",
+   "group": "The conceptus",
+   "color": "#2d7fc4",
+   "refs": {
+    "procedural": "implantation#embryoblast"
+   },
+   "narration": "The inner cell mass, flattening as week two goes on into the bilaminar disc of epiblast and hypoblast. Note where it is: at the embryonic pole, which is the pole that touched the wall first and the pole the trophoblast is thickest over. The embryo proper is the smallest thing in this picture and everything else here exists to supply it.",
+   "narration_from": "WRITTEN 2026-10-03 by the model3d build run. Not SVG-era text: the SVG scene for THIS topic had no disc structure — the bilaminar disc has its own scene in the same chapter. What is drawn here is a flattening lens, not a two-layered disc: the epiblast/hypoblast boundary is not built, and that is declared in gaps[] and left to the scene whose subject it is."
+  },
+  {
+   "key": "embryonic_pole",
+   "name": "Embryonic pole",
+   "label": "Embryonic pole",
+   "role": "context",
+   "group": "Reference",
+   "color": "#8e44ad",
+   "refs": {
+    "procedural": "implantation#embryonic_pole"
+   },
+   "narration": "The pole the inner cell mass sits at. It is the pole that apposes first, the pole the trophoblast thickens over, and the pole that invades — three facts with one answer, which is why it is worth marking rather than describing.",
+   "narration_from": "WRITTEN 2026-10-03 by the model3d build run. Not SVG-era text: a marker. It is a thin cap lying on the conceptus's own outer surface rather than a pointer standing beside it, because from day nine the conceptus is buried and there is no outside to stand in. The model's section 8 records the version that was a spike and why acceptance row M rejected it."
+  },
+  {
+   "key": "lacunae",
+   "name": "Trophoblastic lacunae — the lacunar stage",
+   "label": "Trophoblastic lacunae — the lacunar stage",
+   "role": "part",
+   "group": "Making a circulation",
+   "color": "#cb4335",
+   "refs": {
+    "procedural": "implantation#lacunae@0.371429"
+   },
+   "narration": "Around day eight vacuoles appear inside the syncytiotrophoblast and run together into larger spaces called lacunae. They are holes in a tissue, not vessels — nothing lines them. But they are the beginning of the intervillous space of the placenta, so the adult organ starts as gaps in an invading cell mass.",
+   "narration_from": "sequence-version structure \"lacunae\" — carried across verbatim. THE REF IS PINNED at this beat's own t, and that is required rather than tidy: there are no lacunae before about day eight, so an UNPINNED ref would be resolved at t = 1 at mount and then, on any beat earlier than day eight, resolve to nothing and never come back — engine__procedural-ref-default-t, filed the same morning this scene was written, after it deleted three of four stages from the notochord scene. The later, confluent, blood-filled lacunae are a second key, as cardiac-looping's stages are.",
+   "terms": [
+    "lacunae",
+    "lacunar stage",
+    "trophoblastic lacunae",
+    "vacuoles",
+    "day 8",
+    "day 9",
+    "syncytiotrophoblast",
+    "spaces"
+   ]
+  },
+  {
+   "key": "lacunae_late",
+   "name": "Trophoblastic lacunae — confluent, and open to maternal blood",
+   "label": "Trophoblastic lacunae — confluent, and open to maternal blood",
+   "role": "part",
+   "group": "Making a circulation",
+   "color": "#cb4335",
+   "refs": {
+    "procedural": "implantation#lacunae@0.857143"
+   },
+   "narration": "Around day eight vacuoles appear inside the syncytiotrophoblast and run together into larger spaces called lacunae. They are holes in a tissue, not vessels — nothing lines them. But they are the beginning of the intervillous space of the placenta, so the adult organ starts as gaps in an invading cell mass.",
+   "narration_from": "the same structure as \"lacunae\", four days later. The narration is the identical paragraph, unaltered — the lacunae are the same spaces, and what has changed is that they have run together and filled. Pinned at day twelve for the reason the first key states.",
+   "terms": [
+    "lacunae",
+    "lacunar stage",
+    "trophoblastic lacunae",
+    "vacuoles",
+    "day 8",
+    "day 9",
+    "syncytiotrophoblast",
+    "spaces"
+   ]
+  },
+  {
+   "key": "closing_plug",
+   "name": "Closing plug — fibrin coagulum",
+   "label": "Closing plug — fibrin coagulum",
+   "role": "part",
+   "group": "Buried and sealed",
+   "color": "#7f8c8d",
+   "refs": {
+    "procedural": "implantation#closing_plug@0.514286"
+   },
+   "narration": "By day nine the embryo is under the surface and the defect above it is filled by a fibrin plug. By day twelve the plug is replaced by regrown epithelium and the embryo is completely buried with the surface healed over. The small bleed some women notice at this point is implantation bleeding — lighter and earlier than a period, and a classic way a pregnancy gets its dates wrong.",
+   "narration_from": "sequence-version structure \"closing_plug\" — carried across verbatim. Pinned, because the plug exists only between burial and epithelial regrowth — about day nine to day twelve — and that window is a PREDICTION of the model's depth solve rather than a switch in it. See the model's section 8 and acceptance rows E and F.",
+   "terms": [
+    "closing plug",
+    "fibrin coagulum",
+    "day 9",
+    "day 12",
+    "fully embedded",
+    "epithelial repair",
+    "surface healed",
+    "implantation bleeding"
+   ]
+  },
+  {
+   "key": "primary_villi",
+   "name": "Primary villi",
+   "label": "Primary villi",
+   "role": "part",
+   "group": "Making a circulation",
+   "color": "#5dade2",
+   "refs": {
+    "procedural": "implantation#primary_villi@1"
+   },
+   "narration": "Late in week two, cytotrophoblast pushes finger-like columns into the syncytiotrophoblast and each one is a primary villus — a cytotrophoblast core in a syncytiotrophoblast cover. Mesoderm will move into the core to make it secondary, and vessels will grow inside that to make it tertiary. The naming series primary, secondary, tertiary is a standard one-mark question.",
+   "narration_from": "sequence-version structure \"primary_villi\" — carried across verbatim. Pinned at day thirteen, which is the day its own narration gives it and the first day it exists.",
+   "terms": [
+    "primary villi",
+    "day 13",
+    "cytotrophoblast core",
+    "syncytiotrophoblast shell",
+    "chorionic villi",
+    "secondary villi",
+    "tertiary villi"
+   ]
+  },
+  {
+   "key": "epithelium_cut",
+   "name": "Uterine surface epithelium — cut open",
+   "label": "Uterine surface epithelium — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#e8c39e",
+   "refs": {
+    "procedural": "implantation#epithelium+cut"
+   },
+   "narration": "The endometrium is not receptive for most of the cycle. Progesterone from the corpus luteum opens a short window in the mid-secretory phase, roughly cycle days twenty to twenty-four, when the surface throws up pinopodes and expresses the adhesion molecules the blastocyst needs. Outside that window the same blastocyst will not stick. Two clocks must agree — the embryo must arrive hatched and ready at exactly the days the wall is willing.",
+   "narration_from": "the same structure as \"epithelium\", sectioned. A cross-section is the only way to show any of this: from day nine the conceptus is INSIDE the wall, so no camera reveals the two trophoblast layers, the lacunae, the cavity or the disc, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries +cut and NO pinned t, so it follows the view like any other ref and every cut beat can be at its own stage.",
+   "terms": [
+    "window of implantation",
+    "receptive endometrium",
+    "secretory phase",
+    "progesterone",
+    "pinopodes",
+    "leukaemia inhibitory factor",
+    "LIF",
+    "integrins",
+    "day 20",
+    "day 24",
+    "luteal phase"
+   ]
+  },
+  {
+   "key": "decidua_basalis_cut",
+   "name": "Decidua basalis — deep to the conceptus — cut open",
+   "label": "Decidua basalis — deep to the conceptus — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#af7ac5",
+   "refs": {
+    "procedural": "implantation#decidua_basalis+cut"
+   },
+   "narration": "The mother is not passive. Stromal cells around the implantation site swell with glycogen and lipid and become decidual cells. They feed the embryo before there is any circulation, and they also fence it in — a decidua that forms properly is what stops the trophoblast digging deeper than it should. Where that barrier fails you get an abnormally adherent placenta.",
+   "narration_from": "the same structure as \"decidua_basalis\", sectioned. A cross-section is the only way to show any of this: from day nine the conceptus is INSIDE the wall, so no camera reveals the two trophoblast layers, the lacunae, the cavity or the disc, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries +cut and NO pinned t, so it follows the view like any other ref and every cut beat can be at its own stage.",
+   "terms": [
+    "decidua",
+    "decidual reaction",
+    "decidual cells",
+    "glycogen",
+    "lipid",
+    "endometrial stroma",
+    "nutrition",
+    "limits invasion",
+    "Nitabuch layer"
+   ]
+  },
+  {
+   "key": "decidua_parietalis_cut",
+   "name": "Decidua parietalis — the rest of the wall — cut open",
+   "label": "Decidua parietalis — the rest of the wall — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#9b6bb3",
+   "refs": {
+    "procedural": "implantation#decidua_parietalis+cut"
+   },
+   "narration": "Three names for the same tissue in three positions. Basalis lies deep to the embryo and becomes the maternal side of the placenta. Capsularis is the thin layer stretched over it towards the uterine cavity. Parietalis lines the rest of the uterus. As the sac grows, capsularis and parietalis meet and fuse and the uterine cavity is obliterated by about week twelve.",
+   "narration_from": "the same structure as \"decidua_parietalis\", sectioned. A cross-section is the only way to show any of this: from day nine the conceptus is INSIDE the wall, so no camera reveals the two trophoblast layers, the lacunae, the cavity or the disc, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries +cut and NO pinned t, so it follows the view like any other ref and every cut beat can be at its own stage.",
+   "terms": [
+    "decidua basalis",
+    "decidua capsularis",
+    "decidua parietalis",
+    "maternal placenta",
+    "over the embryo",
+    "rest of the uterus"
+   ]
+  },
+  {
+   "key": "syncytiotrophoblast_cut",
+   "name": "Syncytiotrophoblast — the outer layer — cut open",
+   "label": "Syncytiotrophoblast — the outer layer — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#a93226",
+   "opacity": 0.52,
+   "refs": {
+    "procedural": "implantation#syncytiotrophoblast+cut"
+   },
+   "narration": "The outer layer, and the aggressive one. Its cells have fused into a single multinucleate mass with no borders between nuclei, which is exactly what a tissue built to burrow needs — no gaps for the mother's cells to get through. It does three jobs: it invades, it forms the lacunae, and it makes hCG. If a question asks which layer invades or which layer secretes, the answer to both is this one.",
+   "narration_from": "the same structure as \"syncytiotrophoblast\", sectioned. A cross-section is the only way to show any of this: from day nine the conceptus is INSIDE the wall, so no camera reveals the two trophoblast layers, the lacunae, the cavity or the disc, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries +cut and NO pinned t, so it follows the view like any other ref and every cut beat can be at its own stage.",
+   "terms": [
+    "syncytiotrophoblast",
+    "syncytium",
+    "multinucleate",
+    "no cell borders",
+    "invasive",
+    "proteolytic enzymes",
+    "hormone secreting",
+    "human chorionic gonadotropin",
+    "hCG",
+    "lacunae"
+   ]
+  },
+  {
+   "key": "cytotrophoblast_cut",
+   "name": "Cytotrophoblast — the inner layer — cut open",
+   "label": "Cytotrophoblast — the inner layer — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#3498db",
+   "refs": {
+    "procedural": "implantation#cytotrophoblast+cut"
+   },
+   "narration": "The inner layer, sitting against the embryo. Its cells are single-nucleus, have clear borders, and keep dividing — this is the layer that supplies new cells. It does not invade. Think of it as the factory: every syncytiotrophoblast nucleus was once a cytotrophoblast cell that divided and then fused outward.",
+   "narration_from": "the same structure as \"cytotrophoblast\", sectioned. A cross-section is the only way to show any of this: from day nine the conceptus is INSIDE the wall, so no camera reveals the two trophoblast layers, the lacunae, the cavity or the disc, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries +cut and NO pinned t, so it follows the view like any other ref and every cut beat can be at its own stage.",
+   "terms": [
+    "cytotrophoblast",
+    "inner layer",
+    "mononuclear",
+    "distinct cell borders",
+    "mitotically active",
+    "germinative layer",
+    "stem cells",
+    "primary villi"
+   ]
+  },
+  {
+   "key": "blastocoele_cut",
+   "name": "Blastocyst cavity — cut open",
+   "label": "Blastocyst cavity — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#9fd4f2",
+   "opacity": 0.3,
+   "refs": {
+    "procedural": "implantation#blastocoele+cut"
+   },
+   "narration": "The cavity the blastocyst arrived with. It is still here through the whole of week two, and it becomes the chorionic cavity — so the space a student meets as \"the blastocyst cavity\" on day five and as \"the extraembryonic coelom\" in week three is one continuous space that was never refilled.",
+   "narration_from": "the same structure as \"blastocoele\", sectioned. A cross-section is the only way to show any of this: from day nine the conceptus is INSIDE the wall, so no camera reveals the two trophoblast layers, the lacunae, the cavity or the disc, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries +cut and NO pinned t, so it follows the view like any other ref and every cut beat can be at its own stage."
+  },
+  {
+   "key": "embryoblast_cut",
+   "name": "Embryoblast — the bilaminar disc — cut open",
+   "label": "Embryoblast — the bilaminar disc — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#2d7fc4",
+   "refs": {
+    "procedural": "implantation#embryoblast+cut"
+   },
+   "narration": "The inner cell mass, flattening as week two goes on into the bilaminar disc of epiblast and hypoblast. Note where it is: at the embryonic pole, which is the pole that touched the wall first and the pole the trophoblast is thickest over. The embryo proper is the smallest thing in this picture and everything else here exists to supply it.",
+   "narration_from": "the same structure as \"embryoblast\", sectioned. A cross-section is the only way to show any of this: from day nine the conceptus is INSIDE the wall, so no camera reveals the two trophoblast layers, the lacunae, the cavity or the disc, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries +cut and NO pinned t, so it follows the view like any other ref and every cut beat can be at its own stage."
+  },
+  {
+   "key": "maternal_blood_cut",
+   "name": "Maternal blood — cut open",
+   "label": "Maternal blood — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#e74c3c",
+   "refs": {
+    "procedural": "implantation#maternal_blood+cut"
+   },
+   "narration": "By day eleven or twelve the syncytiotrophoblast has eroded the walls of maternal capillaries and their blood spills into the lacunae. That is the start of the uteroplacental circulation. Note what it means: maternal blood now bathes fetal tissue directly, with no vessel wall between them. The human placenta is haemochorial for the rest of the pregnancy because of what happens in these two days.",
+   "narration_from": "the same structure as \"maternal_blood\", sectioned. A cross-section is the only way to show any of this: from day nine the conceptus is INSIDE the wall, so no camera reveals the two trophoblast layers, the lacunae, the cavity or the disc, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries +cut and NO pinned t, so it follows the view like any other ref and every cut beat can be at its own stage.",
+   "terms": [
+    "maternal sinusoids",
+    "eroded capillaries",
+    "uteroplacental circulation",
+    "day 11",
+    "day 12",
+    "maternal blood",
+    "intervillous space",
+    "haemochorial"
+   ]
+  },
+  {
+   "key": "spiral_artery_cut",
+   "name": "Maternal spiral artery — cut open",
+   "label": "Maternal spiral artery — cut open",
+   "role": "context",
+   "group": "Cut open",
+   "color": "#b03a2e",
+   "refs": {
+    "procedural": "implantation#spiral_artery+cut"
+   },
+   "narration": "A maternal spiral artery, coiling up through the stroma towards the site. It is drawn from day six because it is there from day six: what changes in week two is not that the mother has vessels but that the syncytiotrophoblast opens one.",
+   "narration_from": "the same structure as \"spiral_artery\", sectioned. A cross-section is the only way to show any of this: from day nine the conceptus is INSIDE the wall, so no camera reveals the two trophoblast layers, the lacunae, the cavity or the disc, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries +cut and NO pinned t, so it follows the view like any other ref and every cut beat can be at its own stage.",
+   "opacity": 0.45,
+   "opacity_note": "TRANSLUCENT FROM 2026-10-03, review finding F1. The vessel is built WHOLE rather than sectioned (the cut flag reaches the surfaces of revolution, not the swept tubes — the gland says the same thing about itself), so an opaque wall hid the lumen along its whole course and the blood a student could see was only the lacunar pool. The beat says \"their blood spills into the lacunae\"; with the wall at 0.45 the spilling is the picture rather than an inference. Same idiom, and the same argument, as the 0.52 on the syncytiotrophoblast: a teaching figure draws the wall you need to see through as a wall you can see through."
+  },
+  {
+   "key": "embryonic_pole_cut",
+   "name": "Embryonic pole — cut open",
+   "label": "Embryonic pole — cut open",
+   "role": "context",
+   "group": "Cut open",
+   "color": "#8e44ad",
+   "refs": {
+    "procedural": "implantation#embryonic_pole+cut"
+   },
+   "narration": "The pole the inner cell mass sits at. It is the pole that apposes first, the pole the trophoblast thickens over, and the pole that invades — three facts with one answer, which is why it is worth marking rather than describing.",
+   "narration_from": "the same structure as \"embryonic_pole\", sectioned. A cross-section is the only way to show any of this: from day nine the conceptus is INSIDE the wall, so no camera reveals the two trophoblast layers, the lacunae, the cavity or the disc, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries +cut and NO pinned t, so it follows the view like any other ref and every cut beat can be at its own stage."
+  },
+  {
+   "key": "gland_cut",
+   "name": "Uterine gland — cut open",
+   "label": "Uterine gland — cut open",
+   "role": "context",
+   "group": "Cut open",
+   "color": "#d7bde2",
+   "refs": {
+    "procedural": "implantation#gland+cut"
+   },
+   "narration": "One secretory gland, opening on the surface. It is here as the thing that says this is a secretory endometrium under progesterone and not any other epithelial surface — the glands are coiled and actively secreting in the implantation window, and their secretion is what the blastocyst lives on for the few days between hatching and a circulation.",
+   "narration_from": "the same structure as \"gland\", sectioned. A cross-section is the only way to show any of this: from day nine the conceptus is INSIDE the wall, so no camera reveals the two trophoblast layers, the lacunae, the cavity or the disc, and RENDER-STANDARD is explicit that a camera is not a fix. The ref carries +cut and NO pinned t, so it follows the view like any other ref and every cut beat can be at its own stage."
+  },
+  {
+   "key": "lacunae_cut",
+   "name": "Trophoblastic lacunae — the lacunar stage — cut open",
+   "label": "Trophoblastic lacunae — the lacunar stage — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#cb4335",
+   "refs": {
+    "procedural": "implantation#lacunae@0.371429+cut"
+   },
+   "narration": "Around day eight vacuoles appear inside the syncytiotrophoblast and run together into larger spaces called lacunae. They are holes in a tissue, not vessels — nothing lines them. But they are the beginning of the intervillous space of the placenta, so the adult organ starts as gaps in an invading cell mass.",
+   "narration_from": "the lacunae, sectioned, at this beat's own t. Pinned for the reason the uncut key gives, and pinned at the t of the beat that shows it so no beat draws another beat's instant — the check check-beat-claims.mjs added on fetal-circulation round 5.",
+   "terms": [
+    "lacunae",
+    "lacunar stage",
+    "trophoblastic lacunae",
+    "vacuoles",
+    "day 8",
+    "day 9",
+    "syncytiotrophoblast",
+    "spaces"
+   ]
+  },
+  {
+   "key": "lacunae_late_cut",
+   "name": "Trophoblastic lacunae — confluent, and open to maternal blood — cut open",
+   "label": "Trophoblastic lacunae — confluent, and open to maternal blood — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#cb4335",
+   "refs": {
+    "procedural": "implantation#lacunae@0.857143+cut"
+   },
+   "narration": "Around day eight vacuoles appear inside the syncytiotrophoblast and run together into larger spaces called lacunae. They are holes in a tissue, not vessels — nothing lines them. But they are the beginning of the intervillous space of the placenta, so the adult organ starts as gaps in an invading cell mass.",
+   "narration_from": "the lacunae, sectioned, at this beat's own t. Pinned for the reason the uncut key gives, and pinned at the t of the beat that shows it so no beat draws another beat's instant — the check check-beat-claims.mjs added on fetal-circulation round 5.",
+   "terms": [
+    "lacunae",
+    "lacunar stage",
+    "trophoblastic lacunae",
+    "vacuoles",
+    "day 8",
+    "day 9",
+    "syncytiotrophoblast",
+    "spaces"
+   ]
+  },
+  {
+   "key": "primary_villi_cut",
+   "name": "Primary villi — cut open",
+   "label": "Primary villi — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#5dade2",
+   "refs": {
+    "procedural": "implantation#primary_villi@1+cut"
+   },
+   "narration": "Late in week two, cytotrophoblast pushes finger-like columns into the syncytiotrophoblast and each one is a primary villus — a cytotrophoblast core in a syncytiotrophoblast cover. Mesoderm will move into the core to make it secondary, and vessels will grow inside that to make it tertiary. The naming series primary, secondary, tertiary is a standard one-mark question.",
+   "narration_from": "the same structure as \"primary_villi\", sectioned, pinned at the t of the beat that shows it.",
+   "terms": [
+    "primary villi",
+    "day 13",
+    "cytotrophoblast core",
+    "syncytiotrophoblast shell",
+    "chorionic villi",
+    "secondary villi",
+    "tertiary villi"
+   ]
+  },
+  {
+   "key": "closing_plug_cut",
+   "name": "Closing plug — fibrin coagulum — cut open",
+   "label": "Closing plug — fibrin coagulum — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#7f8c8d",
+   "refs": {
+    "procedural": "implantation#closing_plug@0.514286+cut"
+   },
+   "narration": "By day nine the embryo is under the surface and the defect above it is filled by a fibrin plug. By day twelve the plug is replaced by regrown epithelium and the embryo is completely buried with the surface healed over. The small bleed some women notice at this point is implantation bleeding — lighter and earlier than a period, and a classic way a pregnancy gets its dates wrong.",
+   "narration_from": "the same structure as \"closing_plug\", sectioned, pinned at the t of the beat that shows it.",
+   "terms": [
+    "closing plug",
+    "fibrin coagulum",
+    "day 9",
+    "day 12",
+    "fully embedded",
+    "epithelial repair",
+    "surface healed",
+    "implantation bleeding"
+   ]
+  },
+  {
+   "key": "lacunae_d13_cut",
+   "name": "Trophoblastic lacunae — at day 13, with the villi standing in them — cut open",
+   "label": "Trophoblastic lacunae — at day 13, with the villi standing in them — cut open",
+   "role": "part",
+   "group": "Cut open",
+   "color": "#cb4335",
+   "refs": {
+    "procedural": "implantation#lacunae@1+cut"
+   },
+   "narration": "Around day eight vacuoles appear inside the syncytiotrophoblast and run together into larger spaces called lacunae. They are holes in a tissue, not vessels — nothing lines them. But they are the beginning of the intervillous space of the placenta, so the adult organ starts as gaps in an invading cell mass.",
+   "narration_from": "the lacunae, sectioned, at day 13. A THIRD key for one part, and it exists because check-beat-claims.mjs requires a pinned ref to be pinned at its own beat's t — a pin that does not match its beat is a beat drawing another beat's picture, which is the fault that tool was written for on fetal-circulation. Two beats needing two instants of one part need two keys, as cardiac-looping's stages do; three beats need three.",
+   "terms": [
+    "lacunae",
+    "lacunar stage",
+    "trophoblastic lacunae",
+    "vacuoles",
+    "day 8",
+    "day 9",
+    "syncytiotrophoblast",
+    "spaces"
+   ]
+  }
+ ],
+ "views": [
+  {
+   "mode": "mechanism",
+   "beat": 1,
+   "title": "Nothing implants into an unready wall",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epithelium_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_basalis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_parietalis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surface_plane"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "gland_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "spiral_artery_cut"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "epithelium_cut",
+     "intensity": 0.9
+    }
+   ],
+   "narration": "Start with the wall, not the embryo. Progesterone from the corpus luteum makes the endometrium receptive for only a few days in the middle of the secretory phase, and the surface grows pinopodes and adhesion molecules for that window alone. Arrive early or late and the same healthy blastocyst simply will not stick. This is why timing, in a natural cycle and in a transfer cycle, is half the problem.",
+   "narration_from": "sequence-version view beat 1 — carried across verbatim. The conceptus is HIDDEN in this beat, which is what makes \"start with the wall, not the embryo\" a picture rather than an instruction: the model has a conceptus at t = 0 and this beat declines to draw it.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration names",
+     "measure": "day",
+     "op": "near",
+     "value": 6,
+     "tol": 0.2,
+     "note": "THE CLOCK IS DAYS (day = 6 + 7t), so this is a check and not a tautology: it is the one assertion that a beat is pointed at the instant its words describe. It is not what PINS the beat, though — conceptusWidthUm is, because a day claim would be satisfied by any model whose clock is labelled in days."
+    },
+    {
+     "id": "width",
+     "claim": "and it draws the conceptus at the size it is on that day",
+     "measure": "conceptusWidthUm",
+     "op": "near",
+     "value": 203.8,
+     "tol": 10.2,
+     "note": "THE PINNING CLAIM. The conceptus grows monotonically and exponentially across the week, so its measured width is a strictly increasing function of t: a displacement of 0.05 moves it by 9% against a 5% tolerance, and 0.15 moves it by 29%. Read off the built syncytiotrophoblast bounding box, not from the growth law."
+    },
+    {
+     "id": "B1-intact",
+     "claim": "the surface epithelium is unbroken — nothing has happened to it yet",
+     "measure": "defectOverRc",
+     "op": "atMost",
+     "value": 0.02,
+     "note": "Read off the BUILT epithelium: the smallest radius any of its vertices reaches, over the conceptus radius. The first version of the model reported 1.09 here — a hole as wide as the conceptus in the one beat whose entire content is that nothing is broken into yet — because its breach test asked whether the conceptus was ABOVE the stroma rather than THROUGH the sheet. See the model at breachRadius()."
+    },
+    {
+     "id": "B1-nothing-buried",
+     "claim": "and nothing is below the original luminal surface",
+     "measure": "submergedFrac",
+     "op": "atMost",
+     "value": 0.02
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 2,
+   "title": "Apposition — day 6",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epithelium"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_parietalis"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surface_plane"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "trophoblast"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "trophoblast",
+     "intensity": 0.95
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "trophoblast",
+     "to": "epithelium",
+     "kind": "lies against it, embryonic pole first — held only loosely"
+    }
+   ],
+   "narration": "Step one is contact, not attachment. The hatched blastocyst settles against the endometrial surface, embryonic pole first, held only loosely as the last of the uterine fluid is absorbed. It could still be washed away at this point. Learn the order — apposition, adhesion, invasion — because it is asked as an order.",
+   "narration_from": "sequence-version structure \"apposition\" — carried across verbatim. In the SVG scene that was a teaching BEAT with no geometry; here it is the beat that draws the moment, and the relationship op names the contact the words describe. THE CAMERA IS ANTERIOR, not the lateral one a profile of a ball resting on a wall would want, and the visibility walk is why: the embryonic pole is the point where the two touch, so from the side its marker is pinched between them and measured 0.000% of the frame — in the beat whose own words are \"embryonic pole first\". Face-on the marker is the nearest thing to the camera. The profile reading is carried by beat 3, which is cut.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration names",
+     "measure": "day",
+     "op": "near",
+     "value": 6,
+     "tol": 0.2,
+     "note": "THE CLOCK IS DAYS (day = 6 + 7t), so this is a check and not a tautology: it is the one assertion that a beat is pointed at the instant its words describe. It is not what PINS the beat, though — conceptusWidthUm is, because a day claim would be satisfied by any model whose clock is labelled in days."
+    },
+    {
+     "id": "width",
+     "claim": "and it draws the conceptus at the size it is on that day",
+     "measure": "conceptusWidthUm",
+     "op": "near",
+     "value": 203.8,
+     "tol": 10.2,
+     "note": "THE PINNING CLAIM. The conceptus grows monotonically and exponentially across the week, so its measured width is a strictly increasing function of t: a displacement of 0.05 moves it by 9% against a 5% tolerance, and 0.15 moves it by 29%. Read off the built syncytiotrophoblast bounding box, not from the growth law."
+    },
+    {
+     "id": "B2-above",
+     "claim": "the blastocyst is lying ON the surface, wholly above it",
+     "measure": "submergedFrac",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "B2-clear-of-stroma",
+     "claim": "and its top is a long way above the original luminal level — this is contact, not attachment and not invasion",
+     "measure": "apexYUm",
+     "op": "atLeast",
+     "value": 150,
+     "note": "A magnitude floor rather than a sign test: 150 um against a measured 234 um, on a conceptus 204 um across. By day 9 this measure is NEGATIVE, so the claim is specific to the beat."
+    },
+    {
+     "id": "B2-one-layer",
+     "claim": "and what it draws is ONE trophoblast — the two layers do not exist yet at this beat",
+     "measure": "undiffFrac",
+     "op": "atLeast",
+     "value": 0.98,
+     "note": "Review finding F4, 2026-10-03. This beat used to SHOW and HIGHLIGHT `syncytiotrophoblast`, labelled \"the outer layer\", three beats before beat 5 narrates \"at contact the trophoblast splits into two layers\" — so a student met the syncytiotrophoblast before the beat that says it comes into existence, on a blastocyst the same narration says could still be washed away. 1.000 here, and the measure is 0.718 at t + 0.05 and 0.000 from day 7, so it is specific to this beat. The paired claim is B5-split-done."
+    }
+   ],
+   "provenance": {
+    "corrected_at": "2026-10-03",
+    "corrected_by": "model3d BUILD task (rework run)",
+    "correction": "Review finding F4: the three ops naming `syncytiotrophoblast` now name `trophoblast`, the undifferentiated layer the model gained in the same change. No narration was touched."
+   }
+  },
+  {
+   "mode": "mechanism",
+   "beat": 3,
+   "title": "Adhesion — day 6 to 7",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epithelium_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_basalis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "syncytiotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cytotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "blastocoele_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryonic_pole_cut"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.142857
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "epithelium_cut",
+     "intensity": 0.9
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "z",
+     "offset": 0,
+     "animate": true
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "syncytiotrophoblast_cut",
+     "to": "epithelium_cut",
+     "kind": "integrins lock on to its matrix — it can no longer be dislodged"
+    }
+   ],
+   "narration": "Step two is a firm grip. Integrins on the trophoblast lock onto the extracellular matrix of the endometrial surface and the embryo can no longer be dislodged. Only now is a pregnancy in any real sense established. Most losses in human reproduction happen at or before this step and are never known to the woman.",
+   "narration_from": "sequence-version structure \"adhesion\" — carried across verbatim. THIS BEAT IS CUT and the one before it is not, which is how the two differ as PICTURES: adhesion is a molecular event with no shape of its own, so the only honest thing a frame can add is to open the contact and show that the trophoblast is against the epithelium and has not yet entered it. RENDER-STANDARD, \"A VIEW MUST CHANGE THE PICTURE\" — a second anterior frame of a slightly larger ball would have been text.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration names",
+     "measure": "day",
+     "op": "near",
+     "value": 7,
+     "tol": 0.2,
+     "note": "THE CLOCK IS DAYS (day = 6 + 7t), so this is a check and not a tautology: it is the one assertion that a beat is pointed at the instant its words describe. It is not what PINS the beat, though — conceptusWidthUm is, because a day claim would be satisfied by any model whose clock is labelled in days."
+    },
+    {
+     "id": "width",
+     "claim": "and it draws the conceptus at the size it is on that day",
+     "measure": "conceptusWidthUm",
+     "op": "near",
+     "value": 255.8,
+     "tol": 12.8,
+     "note": "THE PINNING CLAIM. The conceptus grows monotonically and exponentially across the week, so its measured width is a strictly increasing function of t: a displacement of 0.05 moves it by 9% against a 5% tolerance, and 0.15 moves it by 29%. Read off the built syncytiotrophoblast bounding box, not from the growth law."
+    },
+    {
+     "id": "B3-still-intact",
+     "claim": "the epithelium is still unbroken: adhesion is not invasion",
+     "measure": "defectOverRc",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "B3-still-above",
+     "claim": "and the embryo is still above the surface",
+     "measure": "submergedFrac",
+     "op": "atMost",
+     "value": 0.02
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 4,
+   "title": "Invasion — day 7 to 9",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epithelium_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_basalis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_parietalis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surface_plane"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "syncytiotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cytotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "blastocoele_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryonic_pole_cut"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.257143
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "syncytiotrophoblast_cut",
+     "intensity": 0.95
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "z",
+     "offset": 0,
+     "animate": true
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "syncytiotrophoblast_cut",
+     "to": "decidua_basalis_cut",
+     "kind": "digests it, and sinks into the space it makes"
+    }
+   ],
+   "narration": "Step three is digestion. The syncytiotrophoblast releases proteolytic enzymes, breaks through the surface epithelium and eats its way into the stroma, and the whole embryo sinks below the surface. In the human this is interstitial implantation — the embryo ends up buried inside the wall, not sitting on it, and that is a species difference examiners like.\n\nThree steps over about three days. Day six, the blastocyst lies against the endometrium embryonic pole first — apposition, still loose. Day six to seven, integrins lock it on — adhesion, and now it cannot be washed away. Day seven to nine, the syncytiotrophoblast digests its way through the surface epithelium and the embryo sinks into the stroma — invasion. In humans the embryo ends up buried inside the wall, which is called interstitial implantation.",
+   "narration_from": "sequence-version structure \"invasion\" followed by view beat 2, both — carried across verbatim. The structure described the step and the view described the three-step sequence it completes; in a 3D scene the sequence has no geometry of its own beyond the three beats that draw it, so both texts sit on the beat where the sequence arrives. Nothing is altered and nothing is dropped. The frame is caught at day 7.8, which is where the defect in the epithelium is at its WIDEST — a prediction of the depth solve rather than a chosen moment.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration names",
+     "measure": "day",
+     "op": "near",
+     "value": 7.8,
+     "tol": 0.2,
+     "note": "THE CLOCK IS DAYS (day = 6 + 7t), so this is a check and not a tautology: it is the one assertion that a beat is pointed at the instant its words describe. It is not what PINS the beat, though — conceptusWidthUm is, because a day claim would be satisfied by any model whose clock is labelled in days."
+    },
+    {
+     "id": "width",
+     "claim": "and it draws the conceptus at the size it is on that day",
+     "measure": "conceptusWidthUm",
+     "op": "near",
+     "value": 306.8,
+     "tol": 15.3,
+     "note": "THE PINNING CLAIM. The conceptus grows monotonically and exponentially across the week, so its measured width is a strictly increasing function of t: a displacement of 0.05 moves it by 9% against a 5% tolerance, and 0.15 moves it by 29%. Read off the built syncytiotrophoblast bounding box, not from the growth law."
+    },
+    {
+     "id": "B4-breached",
+     "claim": "the surface epithelium has been breached, and the hole is as wide as the embryo",
+     "measure": "defectOverRc",
+     "op": "atLeast",
+     "value": 0.6,
+     "note": "Measured 0.997 against a 0.60 floor. At day 7 this measure is 0.00 and by day 12 it is 0.00 again, so the claim belongs to this stretch of the week and to no other."
+    },
+    {
+     "id": "B4-halfway",
+     "claim": "and the embryo is halfway in — neither on the surface nor buried",
+     "measure": "submergedFrac",
+     "op": "between",
+     "value": [
+      0.15,
+      0.85
+     ],
+     "note": "Measured 0.450. This is the one beat where the share is strictly between the two ends, which is what \"it sinks into the stroma\" means as a picture."
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 5,
+   "title": "One trophoblast becomes two",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epithelium_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_basalis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_capsularis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "syncytiotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cytotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "blastocoele_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryonic_pole_cut"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.371429
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "syncytiotrophoblast_cut",
+     "intensity": 0.9
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "cytotrophoblast_cut",
+     "to": "syncytiotrophoblast_cut",
+     "kind": "divides and fuses outward to feed it"
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "z",
+     "offset": 0,
+     "animate": true
+    }
+   ],
+   "narration": "At contact the trophoblast splits into two layers and you must be able to tell them apart. The inner cytotrophoblast has single nuclei and visible cell borders and keeps dividing; it is the source of new cells and it does not invade. The outer syncytiotrophoblast is one fused multinucleate mass with no borders; it invades, it forms the lacunae, and it makes the hormones. Cells move one way only — cytotrophoblast divides and fuses outward into the syncytium.",
+   "narration_from": "sequence-version view beat 3 — carried across verbatim, with its SHOW_RELATIONSHIP op kept and re-pointed at the built layers; the label is the SVG scene's own string, unchanged. ITS COMPARE_STRUCTURES OP IS DROPPED and that is a finding rather than a tidy-up: side-by-side compare DISPLACES the two structures it compares, and the player refits the camera per view to the bounding box of what is visible WITHOUT accounting for that displacement, so the beat came back with 2486 subject pixels on the frame border under framing_strict — the trophoblast cut off at the edge in the beat that exists to compare its two layers. It is also redundant here: the two layers are concentric and a section already draws them side by side, touching, which is the one thing the comparison has to show. Recorded in gaps[] as a thing the next scene to use that op on a procedural model should expect.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration names",
+     "measure": "day",
+     "op": "near",
+     "value": 8.6,
+     "tol": 0.2,
+     "note": "THE CLOCK IS DAYS (day = 6 + 7t), so this is a check and not a tautology: it is the one assertion that a beat is pointed at the instant its words describe. It is not what PINS the beat, though — conceptusWidthUm is, because a day claim would be satisfied by any model whose clock is labelled in days."
+    },
+    {
+     "id": "width",
+     "claim": "and it draws the conceptus at the size it is on that day",
+     "measure": "conceptusWidthUm",
+     "op": "near",
+     "value": 367.9,
+     "tol": 18.4,
+     "note": "THE PINNING CLAIM. The conceptus grows monotonically and exponentially across the week, so its measured width is a strictly increasing function of t: a displacement of 0.05 moves it by 9% against a 5% tolerance, and 0.15 moves it by 29%. Read off the built syncytiotrophoblast bounding box, not from the growth law."
+    },
+    {
+     "id": "B5-asymmetry",
+     "claim": "the outer layer is far thicker over the implantation pole than away from it — the invading surface is the one against the wall",
+     "measure": "synPoleOverAbem",
+     "op": "atLeast",
+     "value": 3.0,
+     "note": "Measured 4.517, off the built shell's radial spans in two narrow cones. NOT A PINNING CLAIM: the ratio is constant across the week by design (the absolute thickness grows, the asymmetry does not), so it is true at every t and the beat is pinned by width above. It is here because it is the claim this beat makes and RENDER-STANDARD asks that a narrated relation be asserted where it is narrated. The first version of this measure restated the shape law and returned 4.5455 at every t for any geometry whatever."
+    },
+    {
+     "id": "B5-buried",
+     "claim": "and by now the embryo is essentially below the surface",
+     "measure": "submergedFrac",
+     "op": "atLeast",
+     "value": 0.9
+    },
+    {
+     "id": "B5-split-done",
+     "claim": "and by this beat the split its own narration describes has happened — there is no undifferentiated layer left",
+     "measure": "undiffFrac",
+     "op": "atMost",
+     "value": 0.02,
+     "note": "The other half of B2-one-layer, finding F4. 0.000 here against 1.000 on day 6. NOT a pinning claim: it is true at every t from day 7 on, and this beat is pinned by width."
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 6,
+   "title": "Holes become a circulation",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epithelium_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_basalis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_capsularis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "syncytiotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cytotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "blastocoele_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryonic_pole_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lacunae_cut"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.371429
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "lacunae_cut",
+     "intensity": 0.95
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "z",
+     "offset": 0,
+     "animate": true
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "syncytiotrophoblast_cut",
+     "to": "lacunae_cut",
+     "kind": "vacuoles open inside it and run together"
+    }
+   ],
+   "narration": "Day eight, vacuoles open inside the syncytiotrophoblast and merge into lacunae. Day eleven to twelve, the same tissue erodes maternal capillaries and their blood pours into those spaces — the uteroplacental circulation has begun, and from here on maternal blood is in direct contact with fetal tissue. Day thirteen, cytotrophoblast columns push out as primary villi. Lacunae become the intervillous space; the villi become the exchange surface. The whole placenta is visible in outline by the end of week two.",
+   "narration_from": "sequence-version view beat 4 — carried across verbatim, WHOLE, on the beat that opens the sequence it describes. That paragraph narrates days eight, eleven to twelve and thirteen in one breath, and those are three different pictures — beats 6, 8 and 10 here. It is NOT split across them: blastocyst.js's round-4 review found that a paragraph marked verbatim on two halves of a split can be false of one of them, and what this paragraph teaches is the arc. The two later beats carry the structure narrations for the events they draw.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration names",
+     "measure": "day",
+     "op": "near",
+     "value": 8.6,
+     "tol": 0.2,
+     "note": "THE CLOCK IS DAYS (day = 6 + 7t), so this is a check and not a tautology: it is the one assertion that a beat is pointed at the instant its words describe. It is not what PINS the beat, though — conceptusWidthUm is, because a day claim would be satisfied by any model whose clock is labelled in days."
+    },
+    {
+     "id": "width",
+     "claim": "and it draws the conceptus at the size it is on that day",
+     "measure": "conceptusWidthUm",
+     "op": "near",
+     "value": 367.9,
+     "tol": 18.4,
+     "note": "THE PINNING CLAIM. The conceptus grows monotonically and exponentially across the week, so its measured width is a strictly increasing function of t: a displacement of 0.05 moves it by 9% against a 5% tolerance, and 0.15 moves it by 29%. Read off the built syncytiotrophoblast bounding box, not from the growth law."
+    },
+    {
+     "id": "B6-lacunae-exist",
+     "claim": "vacuoles have opened inside the syncytiotrophoblast",
+     "measure": "lacVolFracOfSyn",
+     "op": "atLeast",
+     "value": 0.01,
+     "note": "The lacunar band's own volume over the shell's, both read off built triangles. Measured 0.0207. At day 7.4 the lacunae do not exist at all (acceptance row J), so the measure is 0."
+    },
+    {
+     "id": "B6-no-blood-yet",
+     "claim": "and they are HOLES, not vessels — there is no maternal blood in them yet",
+     "measure": "bloodInLacunaeFrac",
+     "op": "atMost",
+     "value": 0.02,
+     "note": "0.000 here against 0.980 on day 12, which is the whole point of the pair of beats: the spaces come first and the blood comes three days later."
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 7,
+   "title": "Buried, plugged, and healed over",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epithelium_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_basalis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_parietalis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surface_plane"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_capsularis_d96_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "syncytiotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cytotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "blastocoele_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "closing_plug_cut"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.514286
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "closing_plug_cut",
+     "intensity": 0.95
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "z",
+     "offset": 0,
+     "animate": true
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "closing_plug_cut",
+     "to": "epithelium_cut",
+     "kind": "fills the defect until epithelium grows back over it"
+    }
+   ],
+   "narration": "Day nine, the embryo is under the surface and a fibrin plug fills the hole above it. Day twelve, the plug is replaced by new epithelium and the embryo is completely embedded with the surface intact. The small early bleed a woman may notice is implantation bleeding — lighter, shorter and earlier than a period, and one of the commonest reasons a pregnancy is dated a month wrong.",
+   "narration_from": "sequence-version view beat 6 — carried across verbatim. Its PEEL_LAYER op is dropped: this scene has no layer stack to peel (the SVG version's \"organ\" layer was a diagram device), and the cut does the job the peel was there for. Declared in gaps[].",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration names",
+     "measure": "day",
+     "op": "near",
+     "value": 9.6,
+     "tol": 0.2,
+     "note": "THE CLOCK IS DAYS (day = 6 + 7t), so this is a check and not a tautology: it is the one assertion that a beat is pointed at the instant its words describe. It is not what PINS the beat, though — conceptusWidthUm is, because a day claim would be satisfied by any model whose clock is labelled in days."
+    },
+    {
+     "id": "width",
+     "claim": "and it draws the conceptus at the size it is on that day",
+     "measure": "conceptusWidthUm",
+     "op": "near",
+     "value": 461.8,
+     "tol": 23.1,
+     "note": "THE PINNING CLAIM. The conceptus grows monotonically and exponentially across the week, so its measured width is a strictly increasing function of t: a displacement of 0.05 moves it by 9% against a 5% tolerance, and 0.15 moves it by 29%. Read off the built syncytiotrophoblast bounding box, not from the growth law."
+    },
+    {
+     "id": "B7-under",
+     "claim": "the embryo is under the surface",
+     "measure": "submergedFrac",
+     "op": "atLeast",
+     "value": 0.98
+    },
+    {
+     "id": "B7-plug",
+     "claim": "and the defect above it is filled rather than open",
+     "measure": "plugVerts",
+     "op": "atLeast",
+     "value": 1,
+     "note": "The plug exists only between burial and epithelial regrowth. That window is a PREDICTION of the depth solve and the regrowth ramp: measured, it is empty on day 7.8 and on day 12, and present here. Row F checks the day-12 end of it off the built epithelium."
+    },
+    {
+     "id": "B7-not-yet-healed",
+     "claim": "the epithelium has not yet grown back over it",
+     "measure": "defectOverRc",
+     "op": "atLeast",
+     "value": 0.05,
+     "note": "Measured 0.578. By day 12 it is 0.000 — \"day twelve, the plug is replaced by new epithelium\"."
+    }
+   ]
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 8,
+   "title": "Maternal sinusoids open into the lacunae",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_basalis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_capsularis_d12_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "syncytiotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cytotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "blastocoele_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryonic_pole_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lacunae_late_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "spiral_artery_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "maternal_blood_cut"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.857143
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "maternal_blood_cut",
+     "intensity": 0.95
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "spiral_artery_cut",
+     "intensity": 0.8
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "z",
+     "offset": 0,
+     "animate": true
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "spiral_artery_cut",
+     "to": "lacunae_late_cut",
+     "kind": "its wall is eroded and the blood spills in"
+    }
+   ],
+   "narration": "By day eleven or twelve the syncytiotrophoblast has eroded the walls of maternal capillaries and their blood spills into the lacunae. That is the start of the uteroplacental circulation. Note what it means: maternal blood now bathes fetal tissue directly, with no vessel wall between them. The human placenta is haemochorial for the rest of the pregnancy because of what happens in these two days.",
+   "narration_from": "sequence-version structure \"sinusoids\" — carried across verbatim, on the beat that DRAWS the event. The same paragraph is also the narration of the structure `maternal_blood`, which is the tissue it describes; that duplication is deliberate and is the pattern blastocyst.js records (\"view beat 2 followed by structure cavitation, both\"), because in the SVG scene this text was a structure-beat and it has to serve as both here. Nothing is altered.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration names",
+     "measure": "day",
+     "op": "near",
+     "value": 12,
+     "tol": 0.2,
+     "note": "THE CLOCK IS DAYS (day = 6 + 7t), so this is a check and not a tautology: it is the one assertion that a beat is pointed at the instant its words describe. It is not what PINS the beat, though — conceptusWidthUm is, because a day claim would be satisfied by any model whose clock is labelled in days."
+    },
+    {
+     "id": "width",
+     "claim": "and it draws the conceptus at the size it is on that day",
+     "measure": "conceptusWidthUm",
+     "op": "near",
+     "value": 796.7,
+     "tol": 39.8,
+     "note": "THE PINNING CLAIM. The conceptus grows monotonically and exponentially across the week, so its measured width is a strictly increasing function of t: a displacement of 0.05 moves it by 9% against a 5% tolerance, and 0.15 moves it by 29%. Read off the built syncytiotrophoblast bounding box, not from the growth law."
+    },
+    {
+     "id": "B8-blood-in",
+     "claim": "maternal blood is in the lacunae",
+     "measure": "bloodInLacunaeFrac",
+     "op": "atLeast",
+     "value": 0.9,
+     "note": "1.000 here against 0.000 on day 9.6 and on day 10 (acceptance row L). THE RAMP'S FAR END MOVED FROM DAY 12.1 TO DAY 12 with finding F1, because it now drives the vessel's breach as well as the blood, and a mouth 2% short of its target on the day this beat sits on is a gap. This claim was TRUE of the model while the picture carried none of it, which is why the three claims below were added: a fraction the model computes is not a statement about what is drawn."
+    },
+    {
+     "id": "B8-healed",
+     "claim": "and by now the surface above has healed over",
+     "measure": "defectOverRc",
+     "op": "atMost",
+     "value": 0.02
+    },
+    {
+     "id": "B8-capsularis",
+     "claim": "with a thin roof of decidua between the conceptus and the cavity",
+     "measure": "capsularisUm",
+     "op": "between",
+     "value": [
+      40,
+      700
+     ],
+     "note": "Measured 401 um on the axis, off the built capsularis. The bounding box is NOT this number — it reads 848 um, because the roof follows the cavity's dome down to the conceptus's own equator. Acceptance row G records that."
+    },
+    {
+     "id": "B8-artery-breached",
+     "claim": "the syncytiotrophoblast has eroded the vessel wall: the artery is INSIDE the conceptus's outer surface",
+     "measure": "arteryReachFrac",
+     "op": "atLeast",
+     "value": 0.25,
+     "note": "Review finding F1. Measured 0.885 — the artery's deepest vertex is 88% of the local syncytiotrophoblast thickness inside the conceptus's outer surface — against MINUS 4.5 on day 11 and MINUS 4.0 on day 10, where the vessel is clear of it and acceptance row M owns the clearance. Before the rework this measure was negative at every t: the nearest arterial vertex sat 185 um outside a surface the beat says has been eroded through."
+    },
+    {
+     "id": "B8-blood-one-body",
+     "claim": "and the maternal blood is ONE body, from the arterial lumen into the lacunae",
+     "measure": "bloodBodiesTouch",
+     "op": "atLeast",
+     "value": 1,
+     "note": "The finding in one number. maternal_blood is drawn as two meshes and the defect was that they were two BODIES: the review binned their vertices into 5-unit radial shells and found an EMPTY shell at 40-45 units, about 50 um of unbroken decidua, with an intact artery on one side and blood already in the lacunae on the other. 1 here (the two interpenetrate) and 0 at day 11.2, where they are still 187 um apart. Acceptance row S carries the same test plus the radial binning itself."
+    },
+    {
+     "id": "B8-no-wall-between",
+     "claim": "with no vessel wall between them — which is what haemochorial means and what this beat exists to say",
+     "measure": "breachFirstHitFrac",
+     "op": "atLeast",
+     "value": 1,
+     "note": "A FIRST-HIT test, which is what the review asked for in place of a volume fraction: seventeen samples along the lumen's own path from the eroded station to the lacuna, and for each one the NEAREST surface over every part the model does not publish as containing the blood. 1.000 here — every sample's nearest surface is maternal blood — against 0.765 at day 11.2, where the path's tail still runs through decidua. The excluded set is read off the model's own PARTITION rather than listed by hand."
+    }
+   ],
+   "provenance": {
+    "corrected_at": "2026-10-03",
+    "corrected_by": "model3d BUILD task (rework run)",
+    "correction": "Review finding F1. The two SHOW_STRUCTURE ops the review added are kept. This run: the vessel is HIGHLIGHTed alongside the blood so the junction is what the beat points at, and the decidua parietalis and the rim collar are no longer drawn here — they are the full 2.6 mm slab and the per-view camera refit was spending the frame on them, which is why the highlighted blood measured 0.146% by the alpha-aware diff. The three claims B8-artery-breached, B8-blood-one-body and B8-no-wall-between are new."
+   }
+  },
+  {
+   "mode": "associated_organs",
+   "beat": 9,
+   "title": "The mother's half of the deal",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "epithelium_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_basalis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_parietalis_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "surface_plane"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_capsularis_d12_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "gland_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "syncytiotrophoblast_cut"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 0.857143
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "decidua_capsularis_d12_cut",
+     "intensity": 0.9
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "z",
+     "offset": 0,
+     "animate": true
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "decidua_basalis_cut",
+     "to": "syncytiotrophoblast_cut",
+     "kind": "feeds it and limits how deep it goes"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "decidua_capsularis_d12_cut",
+     "to": "decidua_parietalis_cut",
+     "kind": "the same tissue named by position"
+    }
+   ],
+   "narration": "The stroma around the site swells with glycogen and lipid to become decidua. It feeds the embryo before any circulation exists and it also sets the limit on how far the trophoblast may dig. Learn the three positions: basalis deep to the embryo, which becomes the maternal side of the placenta; capsularis stretched over it; parietalis lining the rest of the uterus. Capsularis and parietalis meet by about week twelve and the uterine cavity disappears.",
+   "narration_from": "sequence-version view beat 5 — carried across verbatim, and both of its SHOW_RELATIONSHIP labels kept word for word and re-pointed from the SVG scene's teaching beats to the built tissues: \"decidua -> invasion\" becomes basalis -> syncytiotrophoblast, and \"decidua_parts -> decidua\" becomes capsularis -> parietalis. THIS BEAT IS CUT, and the first composition had it uncut on the reasoning that an elevation of the surface is seen from outside. The visibility walk refused it: from outside, a buried site shows nothing but wall, and all three decidua and the trophoblast measured 0.000% of the frame. The three names ARE a statement about position relative to the conceptus, so the section is the only frame in which they can be told apart. It differs from beat 8 by what it draws and what it points at, not by its camera.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration names",
+     "measure": "day",
+     "op": "near",
+     "value": 12,
+     "tol": 0.2,
+     "note": "THE CLOCK IS DAYS (day = 6 + 7t), so this is a check and not a tautology: it is the one assertion that a beat is pointed at the instant its words describe. It is not what PINS the beat, though — conceptusWidthUm is, because a day claim would be satisfied by any model whose clock is labelled in days."
+    },
+    {
+     "id": "width",
+     "claim": "and it draws the conceptus at the size it is on that day",
+     "measure": "conceptusWidthUm",
+     "op": "near",
+     "value": 796.7,
+     "tol": 39.8,
+     "note": "THE PINNING CLAIM. The conceptus grows monotonically and exponentially across the week, so its measured width is a strictly increasing function of t: a displacement of 0.05 moves it by 9% against a 5% tolerance, and 0.15 moves it by 29%. Read off the built syncytiotrophoblast bounding box, not from the growth law."
+    },
+    {
+     "id": "B9-elevation",
+     "claim": "the site raises the endometrial surface into a low mound — in section, the stroma's own top surface stands above the original luminal level",
+     "measure": "bulgeUm",
+     "op": "between",
+     "value": [
+      50,
+      150
+     ],
+     "note": "Measured 80.4 um, read off the built parietalis's own top surface. It is a PREDICTION of stroma conservation, not a drawing decision: the amplitude is solved by bisection so that the tissue missing from the crater, less the tissue reappearing as the mound, is LYS_FRAC of the space the conceptus has taken. Acceptance row H."
+    },
+    {
+     "id": "B9-roof-complete",
+     "claim": "and the decidua has closed completely over it",
+     "measure": "capsularisInnerRadiusOverRc",
+     "op": "atMost",
+     "value": 0.02,
+     "note": "0.000 here; 1.057 on day 7.8, when the roof is an annulus and the conceptus is still through the hole. Acceptance row G."
+    }
+   ]
+  },
+  {
+   "mode": "mechanism",
+   "beat": 10,
+   "title": "Primary villi — day 13",
+   "ops": [
+    {
+     "op": "HIDE_STRUCTURE",
+     "target": "*"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "decidua_capsularis_d13_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "syncytiotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "cytotrophoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "blastocoele_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryoblast_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "embryonic_pole_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "lacunae_d13_cut"
+    },
+    {
+     "op": "SHOW_STRUCTURE",
+     "target": "primary_villi_cut"
+    },
+    {
+     "op": "SET_STAGE",
+     "t": 1
+    },
+    {
+     "op": "ROTATE_TO_VIEW",
+     "view": "anterior"
+    },
+    {
+     "op": "HIGHLIGHT_STRUCTURE",
+     "target": "primary_villi_cut",
+     "intensity": 0.95
+    },
+    {
+     "op": "CROSS_SECTION",
+     "axis": "z",
+     "offset": 0,
+     "animate": true
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "cytotrophoblast_cut",
+     "to": "primary_villi_cut",
+     "kind": "pushes columns out into the syncytiotrophoblast"
+    },
+    {
+     "op": "SHOW_RELATIONSHIP",
+     "from": "primary_villi_cut",
+     "to": "lacunae_d13_cut",
+     "kind": "and those columns stand in the spaces that become the intervillous space"
+    }
+   ],
+   "narration": "Late in week two, cytotrophoblast pushes finger-like columns into the syncytiotrophoblast and each one is a primary villus — a cytotrophoblast core in a syncytiotrophoblast cover. Mesoderm will move into the core to make it secondary, and vessels will grow inside that to make it tertiary. The naming series primary, secondary, tertiary is a standard one-mark question.",
+   "narration_from": "sequence-version structure \"primary_villi\" — carried across verbatim. THE SURFACE EPITHELIUM IS NOT DRAWN IN THIS BEAT, and the reason is framing rather than anatomy: it is the widest thing in the model (it spans the whole 2.9 mm patch) and the player refits the camera per beat to the bounding box of what is visible, so including it made the frame 2.5 times larger than the subject needs and held the villi at 0.287% against the walk's 0.30% floor — in the beat named after them. The decidua basalis stays, because claim B10-depth is about how deep the site sits and a claim should be about something the beat draws.",
+   "claims": [
+    {
+     "id": "day",
+     "claim": "the beat sits on the day its own narration names",
+     "measure": "day",
+     "op": "near",
+     "value": 13,
+     "tol": 0.2,
+     "note": "THE CLOCK IS DAYS (day = 6 + 7t), so this is a check and not a tautology: it is the one assertion that a beat is pointed at the instant its words describe. It is not what PINS the beat, though — conceptusWidthUm is, because a day claim would be satisfied by any model whose clock is labelled in days."
+    },
+    {
+     "id": "width",
+     "claim": "and it draws the conceptus at the size it is on that day",
+     "measure": "conceptusWidthUm",
+     "op": "near",
+     "value": 1000,
+     "tol": 50.0,
+     "note": "THE PINNING CLAIM. The conceptus grows monotonically and exponentially across the week, so its measured width is a strictly increasing function of t: a displacement of 0.05 moves it by 9% against a 5% tolerance, and 0.15 moves it by 29%. Read off the built syncytiotrophoblast bounding box, not from the growth law."
+    },
+    {
+     "id": "B10-villi",
+     "claim": "cytotrophoblast columns have appeared",
+     "measure": "villiVerts",
+     "op": "atLeast",
+     "value": 1,
+     "note": "Absent at every t before day 11.9, measured."
+    },
+    {
+     "id": "B10-villi-length",
+     "claim": "and they are columns rather than bumps",
+     "measure": "villiLenUm",
+     "op": "atLeast",
+     "value": 40,
+     "note": "47.8 um on the longest BUILT column against a 40 um floor — read off that column's own mesh, one mesh at a time. Finding F3 twice over: the measure used to be villiLen(t, 0) * 10, the shape law evaluated at a latitude no villus stands at, and the length itself used to be the whole local thickness, which left the tips 0.16 um inside the maternal surface. The length is now solved from a declared 25% syncytiotrophoblast cover and carries the end dome, which is the part of the column a camera sees. 1.46 um on day 12, so the claim is still specific to day 13."
+    },
+    {
+     "id": "B10-depth",
+     "claim": "and the whole site now sits about a millimetre deep in the endometrium",
+     "measure": "frontDepthUm",
+     "op": "atLeast",
+     "value": 900,
+     "note": "Measured 1186 um, off the built trophoblast's lowest point. A PREDICTION: the sink rate was solved from one sentence about day nine and says nothing about day thirteen. Acceptance row K checks it is still inside the drawn stroma, with 34% to spare."
+    },
+    {
+     "id": "B10-disc-flat",
+     "claim": "and the embryoblast has flattened from a ball towards a disc",
+     "measure": "discAspect",
+     "op": "atLeast",
+     "value": 7.0,
+     "note": "9.66 here against 3.84 on day 6, measured as width over ON-AXIS thickness. The bounding box is again the wrong number — it gave 3.97 for this same lens, because a curved cap's box is as tall as its sagitta, and a measure that moves 4% across the week measures nothing."
+    },
+    {
+     "id": "B10-villi-cover",
+     "claim": "and each one is a cytotrophoblast core IN a syncytiotrophoblast cover — the cover is there and it is thick enough to see",
+     "measure": "villiCoverFrac",
+     "op": "atLeast",
+     "value": 0.18,
+     "note": "Review finding F3, and the claim the beat's own words make. Measured 0.595 — the worst villus tip is covered by 59% of the shell's thickness where it stands — against 0.00016 before the rework, where row M's containment test passed on a clearance of 0.016% and the pale villi read as reaching the outer margin all round the silhouette. That picture taught cytotrophoblast AT the maternal surface, which is the day 14-15 cytotrophoblastic shell and precisely the thing this beat exists to distinguish. A MAGNITUDE FLOOR expressed as a fraction of the local thickness, per RENDER-STANDARD."
+    }
+   ],
+   "provenance": {
+    "corrected_at": "2026-10-03",
+    "corrected_by": "model3d BUILD task (rework run)",
+    "correction": "Review finding F3: claim B10-villi-cover added and B10-villi-length re-pointed at the built mesh."
+   }
+  }
+ ],
+ "visibility_waivers": [],
+ "provenance": {
+  "author": "task",
+  "authored_at": "2026-08-28",
+  "reauthored_at": "2026-10-03",
+  "reauthored_by": "model3d BUILD task",
+  "reauthor_note": "CONVERTED FROM THE SVG PANEL ENGINE TO A PROCEDURAL 3D SCENE, per the queue item's note: \"these 28 scenes were authored for the SVG panel engine, so their structures[] are teaching BEATS with no geometry, not anatomical parts.\" All fifteen of the old structures[] were beats. Every one of their narrations, and every one of the eight views' narrations, is carried across byte for byte — the scene was generated by a script that reads them out of the old file rather than retyped, and the render harness re-asserts afterwards that all 23 paragraphs appear in this file verbatim. Two of the old views could not become views and are in deferred_beats[] with their full text and the reason. The model is models3d/implantation.js, built in the same run.",
+  "corrected_at": "2026-10-03T05:12:00Z",
+  "corrected_by": "the model3d REVIEW task",
+  "correction_note": "REVIEW ROUND 1. One correction applied to this file, in view 8 only. Beat 8 (\"Maternal sinusoids open into the lacunae\") carried HIGHLIGHT_STRUCTURE on maternal_blood_cut and SHOW_RELATIONSHIP from spiral_artery_cut, and showed neither: its ops opened with HIDE_STRUCTURE * and no SHOW_STRUCTURE for either key. measure-scene-visibility.mjs reported both under \"POINTED AT BUT HIDDEN BY THIS BEAT'S OWN OPS - reported, not failed\" and visibility_waivers was empty, so RENDER-STANDARD 3.x's requirement that a structure which does not survive its beat carries a written waiver was unmet. Two SHOW_STRUCTURE ops were added. After the change the walk reports spiral_artery_cut at 2.486% of the frame and maternal_blood_cut at 0.454% by id-pick, the hidden-but-pointed-at line is gone, all ten beats still pass, the proof harness still passes with 95 beat refs resolved (was 94), and the scene's other nine views are untouched. WHAT THIS DID NOT FIX is in the queue item's findings: the erosion the beat narrates is absent from the geometry, so the picture now shows a spiral artery and an intact 185 um of decidua between it and the trophoblast. That is a model finding, not a scene one.",
+  "reworked_at": "2026-10-03",
+  "reworked_by": "model3d BUILD task (rework run build-run-2026-10-03T0506Z)",
+  "rework_note": "Took the five findings of the 2026-10-03 review (status changes-requested) and fixed all five. F1 the breach: the spiral artery now erodes into the syncytiotrophoblast and the maternal blood is one body from the arterial lumen into the lacunae, with the site SOLVED from the built geometry; acceptance row S. F2 was a harness defect and is fixed in viz-training/tools/render-implantation.mjs, not here. F3 the villus cover: the column length is solved from a declared cover and claim B10-villi-length now reads the built mesh; rows U and the new claim B10-villi-cover. F4 the order: a new undifferentiated `trophoblast` part, drawn in beat 2 in place of the syncytiotrophoblast, with claims B2-one-layer and B5-split-done; row V. F5: ACCEPTANCE.declared and row T. NO NARRATION WAS ADDED, REMOVED OR ALTERED ANYWHERE — the one new structure carries new words of its own and says so in narration_from. status stays \"candidate\": a rework is not a review."
+ },
+ "deferred_beats": [
+  {
+   "from": "sequence-version view beat 7",
+   "title": "The pregnancy announces itself",
+   "narration": "The syncytiotrophoblast secretes hCG as soon as it starts invading. hCG acts on the LH receptor of the corpus luteum, progesterone keeps flowing, and the endometrium is not shed — so the first sign of implantation is a period that does not come. Blood levels are detectable about eight days after fertilization. Remember what a pregnancy test is measuring: a product of the future placenta, not of the embryo. By week eight the placenta itself makes the progesterone and the corpus luteum is no longer needed.\n\nFrom the moment it invades, the syncytiotrophoblast secretes hCG. It acts on the corpus luteum's LH receptor and keeps progesterone flowing, so the endometrium is not shed and the period is missed. It is detectable in blood about eight days after fertilization, which is why a test can be positive before a period is late. The placenta takes over progesterone production at about week eight and the corpus luteum is then dispensable.",
+   "why_not_a_view": "NOTHING IN IT CAN BE DRAWN AT THIS SCALE. The beat is about hCG acting on the corpus luteum, and the corpus luteum is in the ovary — centimetres away from a 2.6 mm patch of uterine wall drawn at 10 um per unit. Putting it in the frame would need a scale break of about three orders of magnitude, and RENDER-STANDARD is explicit that a model may not fake what it cannot draw. The hormone itself has no form at all. A beat that highlighted the syncytiotrophoblast and talked about hCG would be the same frame as beat 5 with different words, which RENDER-STANDARD calls text; text has its own home in this app.",
+   "where_it_belongs": "the sequence and diagram modes, both of which are in deferred_modes — a panel can draw an ovary beside a uterus and an arrow between them, which is exactly the thing a true-scale 3D model cannot. The clinically essential half (a pregnancy test measures a product of the future placenta, and a missed period is the first sign of implantation) is pure physiology and belongs in prose."
+  },
+  {
+   "from": "sequence-version view beat 8",
+   "title": "Wrong place, wrong depth",
+   "narration": "Everything clinical here follows from one fact: the trophoblast invades whatever it lands on. Land in the ampulla of the tube and you get an ectopic pregnancy in a thin wall that ruptures and bleeds into the abdomen. Land low in the uterus and the placenta covers the internal os as a praevia. Land on a caesarean scar with no decidua to stop it and the placenta grows into the muscle — accreta, increta, percreta — and will not separate at delivery. And if invasion is too shallow to remodel the spiral arteries, the placenta is underperfused for the whole pregnancy, which is where pre-eclampsia and much growth restriction begin. Two weeks of embryology explains half of third-trimester obstetrics.\n\nThe trophoblast will implant into almost any surface it meets, which is the whole danger. Most ectopics are in the ampulla of the uterine tube, where the wall is thin and rupture with severe intraperitoneal bleeding is the emergency. Anything that slows tubal transport — previous pelvic infection, tubal surgery — raises the risk. At the other end, a blastocyst that implants low in the uterus places the placenta over or near the internal os, and that is a placenta praevia presenting later as painless bright red bleeding.\n\nInvasion has to be deep enough and no deeper. Too deep, usually where a caesarean scar has left no decidua to stop it, and the placenta grows into the myometrium — accreta into it, increta through the muscle, percreta out beyond the serosa — so it will not separate at delivery and the haemorrhage can cost the uterus. Too shallow, and the trophoblast fails to remodel the maternal spiral arteries into wide low-resistance channels; the placenta stays underperfused, and that is the accepted origin of pre-eclampsia and much fetal growth restriction. Both diseases are settled in these fourteen days.",
+   "why_not_a_view": "IT NEEDS FOUR THINGS THIS MODEL DOES NOT CONTAIN. An ectopic needs the ampulla of the uterine tube; a praevia needs the internal os; accreta, increta and percreta need the MYOMETRIUM, and this model draws a window on the superficial 2 mm of a 5-7 mm endometrium with no myometrium in it at all (see the model's ACCEPTANCE.scale); and the shallow-invasion end of it needs remodelled spiral arteries over weeks, not days. Each of those is a scale break or an invention, and the four together are a different scene rather than a beat of this one. The honest thing a 3D model can say here is what beat 10 already shows and measures: the front stops about a millimetre down, inside the decidua, with 34% of the drawn stroma to spare — the brake working. Narrating accreta over a picture with no muscle in it would teach a depth the student cannot see.",
+   "where_it_belongs": "its own scene. \"Abnormal implantation\" is a clinical topic with its own structures (tube, os, myometrium, caesarean scar) and it is not a view of the normal process. Until that exists the text belongs in the sequence mode, which is in deferred_modes. Filed as a gap rather than silently dropped, because this is the half of the topic that explains, as the paragraph itself says, half of third-trimester obstetrics."
+  }
+ ],
+ "gaps": [
+  "ROUTED TO 3d_anatomy, not to its first preferred mode. CURRICULUM.json lists preferred_modes [\"sequence\",\"diagram\"] for Implantation and the SVG-era scene took the first of them. This conversion moves it to 3d_anatomy on the queue item's instruction, and both original modes are retained in deferred_modes rather than discarded. The curriculum's declared views[] are [\"mechanism\",\"associated_organs\"]; this scene carries eight mechanism views and two associated_organs views, so the contract is met.",
+  "THE ENDOMETRIUM IS DRAWN AS A WINDOW, NOT WHOLE. A secretory endometrium is 5-7 mm thick; what is built is a 2.6 mm wide patch of its superficial 2.0 mm, at TRUE SCALE with no scale break. The window grows with the conceptus (45 to 142 units of radius) so that a 180 um embryo and a 1 mm one are both legible — the geometry is true scale at every t and what changes is how much wall is in frame.",
+  "NO MYOMETRIUM IS DRAWN, and therefore accreta, increta and percreta are narrated in deferred_beats[] and not drawn. Placing a myometrial boundary at the bottom of the drawn window would put it at 2 mm instead of 5-7 mm, which is exactly the scale break the paragraph above refuses.",
+  "NO BODY SIDE IS DECLARED OR DRAWN. Every structure but the gland and the spiral artery is a surface of revolution about the y axis, so this model has no left/right landmark and a mirror of it would be indistinguishable. RENDER-STANDARD's \"A DECLARED AXIS IS NOT A PROVED ONE, AND A SYMMETRIC MODEL CANNOT PROVE ITS OWN\" is met by not making the claim: nothing this scene narrates names a side.",
+  "PINOPODES AND ADHESION MOLECULES ARE NOT DRAWN. A pinopode is about 1 um — a tenth of one unit — and integrin binding has no form at any scale this model works at. Views 1 and 3 narrate both and draw the epithelium they are properties of. This is why view 3 is the CUT view: adhesion's only drawable content is that the trophoblast is against the sheet and not yet through it.",
+  "THE BILAMINAR DISC IS DRAWN AS A FLATTENING LENS, NOT AS TWO LAYERS. Epiblast and hypoblast are not separate parts here. That boundary is the subject of embryology__weeks-1-2-implantation-bilaminar-disc__bilaminar-embryonic-disc, the next item in this topic, and duplicating it badly here would give a student two different pictures of one thing. What IS asserted is the flattening the narration names, measured, in claim B10-disc-flat.",
+  "THE LACUNAE ARE DRAWN AS SOLIDS INSIDE A TRANSLUCENT SHELL, not as holes cut through it. They are spaces in the syncytiotrophoblast and the honest alternative — perforating the shell with a real radial partition — was rejected as a fragile two-piece construction whose two laminae become coincident wherever the perforation closes. The containment is published by name in the model's PARTITION, the shell is drawn at 0.52 opacity in every beat that shows them, and RENDER-STANDARD 3.x is explicit that this is what a teaching figure does.",
+  "THE SVG VERSION'S PEEL_LAYER AND TRACE_STRUCTURE OPS ARE GONE. PEEL_LAYER (old beat 6) addressed a diagram-engine layer stack this scene does not have, and the cross-section does its work. TRACE_STRUCTURE (old beats 2 and 4) is DEGRADED to a highlight by the procedural adapter (viz3d.js capabilities), and both of its traces were over teaching beats rather than over parts — the sequence they traced is now three and three beats respectively, each drawing its own stage.",
+  "THE SYNCYTIOTROPHOBLAST'S POLE-TO-ABEMBRYONIC THICKNESS RATIO IS CONSTANT ACROSS THE WEEK (4.52, measured). The absolute thickness grows from 5.5 um to 72 um at the pole, but the shape of the asymmetry is a declared profile and not a function of t, so claim B5-asymmetry is true at every t and does not pin its beat. Said here so a reviewer does not read it as a pinning claim.",
+  "THE CLOCK IS LINEAR IN REAL TIME (day = 6 + 7t), unlike every neighbouring embryology model. That is deliberate and is argued in the model's header section 1: this scene's narration quotes a day in almost every sentence, so a beat's t and the day its words name are the same number twice.",
+  "ONE SOLVED RATE, ANCHORED ON ONE SENTENCE. SINK_RATE comes from \"by day nine the embryo is under the surface\" and nothing else. Everything else about the depth is a prediction of it against the growth law and is checked rather than set: the day the epithelium is breached, how wide the defect gets and when it is widest, the day it closes, the plug's window, the capsularis's thickness, and the depth on days 12 and 13. If the growth law moves, the rate moves with it.",
+  "LYS_FRAC = 0.62 IS A DECLARED INPUT, not a measured one. It says what share of the room the conceptus makes is digested rather than pushed aside, and it is the only number in the model chosen to make a prediction land in a published range (the 50-150 um elevation of acceptance row H). A reviewer should read it as a drawing decision with a stated consequence.",
+  "WHAT THE LATE BEATS DO NOT DRAW, AND WHY — the visibility walk's doing rather than an oversight. The camera is refitted per beat to what is visible, so a structure that spans the whole drawn window holds the subject under 1% of the frame. The decidua parietalis is the full 2.6 mm slab and is not drawn in beats 3, 5, 6, 8 and 10; the surface epithelium spans the same radius and is not drawn in beat 8; and the decidua basalis at day 13 is not stroma that hugs the conceptus but a slab reaching the floor of the drawn window, so it is not drawn in beat 10. The wall at full width is established in beats 1, 2, 4, 7 and 9, and beat 9 is where the healed-over epithelium is SEEN — beat 8 still asserts it in claim B8-healed, which reads the model, and no longer draws it. MEASURED, which is why each of those came out: with the slab drawn, the blood beat 8 highlights measured 0.454% of the frame by id-pick and 0.146% by the alpha-aware diff, under the 0.30% pointed-at floor, and the beat cleared only because the walk passes on either measure (review finding F1). It now measures 0.475% and 1.194%. Beat 10's villi went from 0.158% to 0.539%. RENDER-STANDARD 3.aa in its general form: what a beat draws decides what can be seen in it, so the shown list is part of the claim.",
+  "THE EMBRYONIC POLE MARKER IS NOT DRAWN IN BEAT 2. At day 6 it is 0.019% of the frame — the conceptus is 180 um in an 870 um frame and the marker is a pin on its surface — against the visibility walk's 0.30% floor. It is drawn in the cut beats, where it clears the floor. Beat 2 names the pole in its relationship label instead of drawing a marker nobody can see.",
+  "COMPARE_STRUCTURES IS NOT USED, THOUGH THE SVG VERSION USED IT TWICE. viz3d lists it as a native op for the procedural adapter, but its side-by-side layout displaces the compared structures while the per-view camera refit is computed from the undisplaced bounding box, so under framing_strict the subject is clipped at the frame border. Measured on beat 5: 2486 subject pixels on a border row with the op, 0 without it. The comparison it was making is carried by the section itself, which draws the two layers concentric and touching. A scene that genuinely needs two things moved apart should expect to fight the framing pass.",
+  "THE DECIDUA CAPSULARIS HAS FIVE KEYS, ALL PINNED. It does not exist before about day 7.4, so by the model header's section 3 it may not carry an unpinned ref: viz3d resolves an unpinned ref at t = 1 at mount and restages every structure that arrived on every SET_STAGE, so beats 1 to 4 would resolve it to reason:none and it would be gone for the rest of the session. The scene's first version did carry it unpinned, and check 6 of render-implantation.mjs found it at four t values — this scene walking into the fault it was written to avoid, caught by its own proof.",
+  "THE SPIRAL ARTERY IS ONE VESSEL AND THE LACUNAE ARE OPENED AT ONE PLACE. Review finding F1 is fixed by making the vessel breach the trophoblast and the blood continuous into the lacunae, and the site is SOLVED — the nearest pair between the uneroded centreline and the lacunar band on the grid the band is built on, so nothing about it is typed in. What is still a simplification is the COUNT: a real day-12 site has many spiral arteries opening all round the decidua basalis, and this one draws a single vessel in the section plane because that is the one a cut specimen shows. The beat narrates \"maternal capillaries\", plural; the picture shows one of them. Declared rather than quietly accepted.",
+  "THE SYNCYTIOTROPHOBLAST IS NOT PERFORATED AT THE BREACH. The vessel's mouth is drawn INSIDE the shell's own radial band and the shell is a complete surface of revolution, so the shell's outer surface runs through the breach rather than opening at it — the same construction, and the same reason, as the lacunae themselves (the gap above). It is why the first-hit test in acceptance row S excludes, by name read off the model's PARTITION, the surfaces the model publishes as containing the blood: including them would report the published idiom as a defect. A reviewer who thinks the perforation is worth the fragility should say so — it is a real alternative and it was rejected rather than missed.",
+  "THE VILLUS COVER IS A DECLARED FRACTION, NOT A MEASURED ONE. Finding F3 replaced a containment test that passed at a clearance of 0.016% with a solved length leaving 25% of the local syncytiotrophoblast thickness over each tip, and 0.25 is a drawing decision with a stated consequence in the same sense LYS_FRAC is: it is chosen so the cover is visible at the scale the beat is drawn at (18 um at the pole) while the column stays long enough to be a column (41 um solved, 48 um measured on the built mesh including the dome). No source was consulted for the ratio. A reviewer should attack the number before the geometry.",
+  "ONE TROPHOBLAST BEFORE CONTACT, AND NOTHING BETWEEN. Finding F4 added an undifferentiated layer for the window before adhesion, so beat 2 no longer draws a syncytiotrophoblast three beats before the beat that says it comes into existence. What is NOT drawn is the splitting itself: the layer is replaced by the two, over the adhesion window, rather than shown dividing. Acceptance row V asserts the window and the band; no beat sits inside the transition, so nothing is claimed about it.",
+  "EVERY FIGURE THIS FILE AND THE MODEL STATE ABOUT THEMSELVES NOW LIVES IN ACCEPTANCE.declared, and row T asserts it. Finding F5: the comment beside SINK_RATE said 141.88 where the solve returns 151.535 — the model's one solved number, described 6.4% wrong by the only thing that described it. That is RENDER-STANDARD's cardiac-looping axis comment arriving again, and this model's own section 6: a note in a file is a claim, including your own.",
+  "THE SPIRAL ARTERY IS DRAWN TRANSLUCENT IN THE CUT BEATS, at 0.45, and that is the second half of finding F1's framing. The vessel is a swept tube, and the +cut flag reaches the surfaces of revolution rather than the tubes (the gland says the same of itself), so it is built WHOLE and stands proud of the cut face. With an opaque wall the lumen was hidden along the vessel's whole course and the only maternal blood a student could see was the lacunar pool — on a beat whose sentence is \"their blood spills into the lacunae\". Same idiom and same argument as the 0.52 on the syncytiotrophoblast. The honest alternative, sectioning the tube, needs a cut that reaches VizKit's swept shells and is a kit change, not a scene one.",
+  "NOTHING HERE HAS BEEN REVIEWED BY ANYONE WHO DID NOT BUILD IT. ARTWORK-STANDARD section 3: the drawer never performs the anatomical review. status is \"candidate\" and only a review promotes it."
+ ]
 }

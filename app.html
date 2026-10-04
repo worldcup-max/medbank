@@ -1102,7 +1102,14 @@ window.MB_DOCK = {
     try{
       if(typeof GAPLOOP!=='undefined' && GAPLOOP){ var gm=GAPLOOP.mt||null; var gt=topById(GAPLOOP.topicId||(gm&&gm.topicId)); if(gt){ t=gt; card=gm; cardId=(gm&&gm.id)||''; } }
       if(!t && typeof QB!=='undefined' && QB && QB.items && QB.items.length){ var q=QB.items[QB.i]; var qt=topById((q&&q.topicId)||QB.topicId); if(qt){ t=qt; card=q; cardId=(q&&(q.id||q.key))||''; } }
-      if(!t && typeof S!=='undefined' && S && S.items && S.items.length){ var it=S.items[S.order[S.i]]; if(it){ t=it.t; card=it.c; cardId=it.id; } }
+      // AUDIT-08: S (the review-session object) is never cleared on navigating away from a
+      // session — so falling back to it unconditionally let the dock keep showing the LAST
+      // session's topic/card ("Ask anything about Bronchiolitis...") on pages that never read
+      // S at all, e.g. Solve (which is in onStudyScreen's route list but has no card on screen).
+      // Only trust S as a context source while actually on a route that uses it.
+      var _sroute=(location.hash.slice(2)||'').split('/')[0];
+      var _sroutes={topic:1,study:1,review:1,cram:1,hard:1,leeches:1,mistakes:1,nudge:1,hardnudge:1,mega:1,exam:1};
+      if(!t && _sroutes[_sroute] && typeof S!=='undefined' && S && S.items && S.items.length){ var it=S.items[S.order[S.i]]; if(it){ t=it.t; card=it.c; cardId=it.id; } }
     }catch(e){}
     if(!t){ var p=(location.hash.slice(2)||'').split('/'); if(p[1] && (p[0]==='topic'||p[0]==='study'||p[0]==='cram')){ try{ t=topById(p[1]); }catch(e){} } }
     if(!t) return null;
@@ -1825,14 +1832,14 @@ function noteBlock(it){ const note=getNote(it.id);
   return `<details class="notewrap" onclick="event.stopPropagation()">
      <summary>✎ ${note?'My note / mnemonic — tap to read':'Add a note / mnemonic'}</summary>
      <div class="notebar"><button class="btn tiny" onclick="event.stopPropagation();openNoteFull('${it.id}')">⤢ Expand full screen</button></div>
-     <textarea class="notebox" placeholder="Your mnemonic, correction or memory hook…" oninput="setNote('${it.id}',this.value)">${esc(note)}</textarea>
+     <textarea class="notebox" placeholder="Your mnemonic, correction or memory hook…" oninput="setNote('${it.id}',this.value)" onblur="setNote('${it.id}',this.value)">${esc(note)}</textarea>
    </details>`; }
 function openNoteFull(id){
   closeNoteFull();
   const ov=document.createElement('div'); ov.className='noteov'; ov.id='noteov';
   ov.innerHTML=`<div class="noteov-card" onclick="event.stopPropagation()">
      <div class="noteov-top"><b>✎ My note / mnemonic</b><button class="btn" onclick="closeNoteFull()">✕ Close</button></div>
-     <textarea class="noteov-ta" placeholder="Your mnemonic, correction or memory hook…" oninput="setNote('${id}',this.value)">${esc(getNote(id))}</textarea>
+     <textarea class="noteov-ta" placeholder="Your mnemonic, correction or memory hook…" oninput="setNote('${id}',this.value)" onblur="setNote('${id}',this.value)">${esc(getNote(id))}</textarea>
    </div>`;
   ov.addEventListener('click',()=>closeNoteFull());
   document.body.appendChild(ov);
@@ -2313,7 +2320,7 @@ function pageHome(){
     <div class="h2hero" onclick="go('today')">
       <div class="h2herohead">
         <div><div class="h2hi">${greeting()}${(()=>{const n=studentName();return n?', '+esc(n):'';})()} ☀️</div>
-          <div class="h2sub">${allCaught?'You’re all caught up 🎉':'Your session is ready'}</div></div>
+          <div class="h2sub">${window.__MB_SYNC_PENDING?'⏳ Syncing your data — numbers below may still update…':(allCaught?'You’re all caught up 🎉':'Your session is ready')}</div></div>
         <div class="h2ringwrap">${goalRing(ringPct,58,7,'#a6f05a')}<span class="h2ringtxt">${ringPct}%</span></div>
       </div>
       <div class="h2big">${allCaught?'Nothing due':sMin+'-minute session'}</div>
@@ -2513,27 +2520,89 @@ function toggleLibView(){ LIBVIEW = LIBVIEW==='grid'?'list':'grid'; try{ localSt
 function libToggleBtn(){ return `<button class="btn" style="font-size:12.5px" onclick="toggleLibView()">${LIBVIEW==='grid'?'☰ List view':'⊞ Grid view'}</button>`; }
 const rowsCls = () => 'rows'+(LIBVIEW==='grid'?' gridv':'');
 
+/* ---- lightweight in-app modal — replaces window.prompt()/confirm() below.
+ * Native prompt()/confirm() block the JS main thread until dismissed; on some mobile
+ * home-screen (standalone PWA) contexts they can fail to appear at all, and automated
+ * QA tooling reads the block as a hard page freeze (see QA-BUGS.md CRIT-AUDIT-01 —
+ * "+ New folder" / "Add to folder" / Mock-exam Submit were the confirmed trigger points).
+ * This is a small non-blocking overlay styled with the app's own --panel/--line/--accent
+ * vars so it matches dark/light theme automatically. */
+function mbModalClose(){ const o=document.getElementById('mbModalOv'); if(o) o.remove(); document.removeEventListener('keydown',mbModalEsc); }
+function mbModalEsc(e){ if(e.key==='Escape') mbModalClose(); }
+function mbModalBase(title,sub){
+  mbModalClose();
+  const ov=document.createElement('div'); ov.id='mbModalOv';
+  ov.style.cssText='position:fixed;inset:0;background:rgba(8,6,16,.6);display:flex;align-items:center;justify-content:center;z-index:100000;padding:16px';
+  const box=document.createElement('div');
+  box.style.cssText='background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 20px 16px;max-width:400px;width:100%;max-height:86vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.45)';
+  box.onclick=e=>e.stopPropagation();
+  let h='';
+  if(title) h+=`<div style="font-weight:800;font-size:17.5px;margin-bottom:5px;color:var(--text)">${esc(title)}</div>`;
+  if(sub) h+=`<div style="color:var(--dim);font-size:13.5px;line-height:1.5;margin-bottom:14px">${esc(sub)}</div>`;
+  box.innerHTML=h;
+  ov.appendChild(box); ov.onclick=mbModalClose;
+  document.body.appendChild(ov);
+  document.addEventListener('keydown',mbModalEsc);
+  return box;
+}
+function mbModalBtnRow(box,btns){ // btns: [{label, primary, onClick}]
+  const row=document.createElement('div'); row.style.cssText='display:flex;gap:8px;margin-top:14px';
+  btns.forEach(b=>{ const el=document.createElement('button'); el.className='btn'+(b.primary?' primary':''); el.style.flex='1';
+    el.textContent=b.label; el.onclick=()=>{ mbModalClose(); b.onClick&&b.onClick(); }; row.appendChild(el); });
+  box.appendChild(row);
+}
+function mbConfirm(title,sub,onOk){
+  const box=mbModalBase(title,sub);
+  mbModalBtnRow(box,[{label:'Cancel'},{label:'Confirm',primary:true,onClick:onOk}]);
+}
+function mbPrompt(title,sub,defVal,placeholder,onOk){
+  const box=mbModalBase(title,sub);
+  const inp=document.createElement('input'); inp.type='text'; inp.value=defVal||''; inp.placeholder=placeholder||'';
+  inp.style.cssText='width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--text);font-size:15.5px';
+  box.appendChild(inp);
+  mbModalBtnRow(box,[{label:'Cancel'},{label:'Save',primary:true,onClick:()=>onOk(inp.value)}]);
+  setTimeout(()=>{ inp.focus(); inp.select(); },10);
+  inp.onkeydown=e=>{ if(e.key==='Enter'){ mbModalClose(); onOk(inp.value); } };
+}
+function mbPick(title,sub,options,onPick){ // options: [{label, value, sub}]
+  const box=mbModalBase(title,sub);
+  options.forEach(o=>{
+    const b=document.createElement('button'); b.className='btn'; b.style.cssText='width:100%;justify-content:flex-start;text-align:left;margin-bottom:8px';
+    b.innerHTML=esc(o.label)+(o.sub?` <span style="color:var(--dim);font-weight:400;margin-left:6px">${esc(o.sub)}</span>`:'');
+    b.onclick=()=>{ mbModalClose(); onPick(o.value); };
+    box.appendChild(b);
+  });
+  mbModalBtnRow(box,[{label:'Cancel'}]);
+}
+
 /* ---- #12 folders / collections ---- */
 function createFolderWith(topicId){
-  const nm=prompt('New folder name (e.g. "Exam block 1", "Weak areas")'); if(!nm||!nm.trim()) return;
-  const f={ id:'f'+Date.now().toString(36), name:nm.trim(), topics:topicId?[topicId]:[] };
-  DATA.folders.push(f); persist();
-  if(topicId){ alert('Created “'+f.name+'” and added this topic.'); } render();
+  mbPrompt('New folder', 'e.g. "Exam block 1", "Weak areas"', '', 'Folder name', nm=>{
+    if(!nm||!nm.trim()) return;
+    const f={ id:'f'+Date.now().toString(36), name:nm.trim(), topics:topicId?[topicId]:[] };
+    DATA.folders.push(f); persist();
+    if(topicId){ alert('Created “'+f.name+'” and added this topic.'); } render();
+  });
 }
-function renameFolder(id){ const f=(DATA.folders||[]).find(x=>x.id===id); if(!f) return; const n=prompt('Rename folder', f.name); if(n==null) return; f.name=(n.trim()||f.name); persist(); render(); }
-function deleteFolder(id){ if(!confirm('Delete this folder? Your topics stay — only the folder is removed.')) return; DATA.folders=(DATA.folders||[]).filter(x=>x.id!==id); persist(); location.hash='#/folders'; }
+function renameFolder(id){ const f=(DATA.folders||[]).find(x=>x.id===id); if(!f) return;
+  mbPrompt('Rename folder','',f.name,'Folder name', n=>{ if(n==null) return; f.name=(n.trim()||f.name); persist(); render(); });
+}
+function deleteFolder(id){
+  mbConfirm('Delete this folder?','Your topics stay — only the folder is removed.', ()=>{
+    DATA.folders=(DATA.folders||[]).filter(x=>x.id!==id); persist(); location.hash='#/folders';
+  });
+}
 function addToFolderPrompt(topicId){
   const fs=DATA.folders||[];
   if(!fs.length){ createFolderWith(topicId); return; }
-  let msg='Add this topic to which folder?\n\nType the NUMBER, then OK.\n\n0. + New folder\n'; fs.forEach((f,i)=>{ msg+=(i+1)+'. '+f.name+(((f.topics||[]).indexOf(topicId)>=0)?'  ✓ already in':'')+'\n'; });
-  const pick=prompt(msg); if(pick==null) return;
-  const n=parseInt(pick,10);
-  if(n===0){ createFolderWith(topicId); return; }
-  const f=fs[n-1];
-  // typing a folder NAME (or anything out of range) used to do nothing at all, with no feedback
-  if(!f){ alert('Type the number next to the folder (1–'+fs.length+'), or 0 for a new folder.'); return; }
-  f.topics=f.topics||[];
-  if(f.topics.indexOf(topicId)<0){ f.topics.push(topicId); persist(); alert('Added to “'+f.name+'”.'); } else { alert('Already in “'+f.name+'”.'); }
+  const opts=fs.map(f=>({ label:f.name, value:f.id, sub:((f.topics||[]).indexOf(topicId)>=0)?'✓ already in':'' }));
+  opts.push({ label:'+ New folder', value:'__new__' });
+  mbPick('Add to folder','Choose which folder this topic should go in.', opts, val=>{
+    if(val==='__new__'){ createFolderWith(topicId); return; }
+    const f=fs.find(x=>x.id===val); if(!f) return;
+    f.topics=f.topics||[];
+    if(f.topics.indexOf(topicId)<0){ f.topics.push(topicId); persist(); alert('Added to “'+f.name+'”.'); } else { alert('Already in “'+f.name+'”.'); }
+  });
 }
 function pageFolders(){
   const fs=DATA.folders||[];
@@ -5865,8 +5934,12 @@ function examPick(i){ if(!S||S.mode!=='exam'||S.finished) return; S.answers[S.or
 function examNav(d){ if(!S||S.mode!=='exam')return; const n=S.i+d; if(n<0||n>=S.items.length)return; S.i=n; render(); window.scrollTo(0,0); }
 function examSubmit(){ if(!S||S.mode!=='exam'||S.finished)return;
   const blank=S.answers.filter(a=>a==null).length;   // submitting is irreversible — confirm like qbEndEarly does
-  if(blank && !confirm('Submit now? '+blank+' question'+(blank>1?'s are':' is')+' still blank and will be marked wrong.')) return;
-  S.finished=Date.now(); render(); window.scrollTo(0,0); }
+  const finish=()=>{ S.finished=Date.now(); render(); window.scrollTo(0,0); };
+  // was a blocking window.confirm() — froze the tab on some hosts/automation and doesn't match
+  // the app's own UI; now a non-blocking in-app modal (mbConfirm), same gate, no hard block.
+  if(blank) mbConfirm('Submit now?', blank+' question'+(blank>1?'s are':' is')+' still blank and will be marked wrong.', finish);
+  else finish();
+}
 function examMissedItems(){ const out=[]; S.items.forEach((it,k)=>{ if(S.answers[k]!==it.c.ans) out.push(it); }); return out; }
 function examSendHard(){ if(!S)return; examMissedItems().forEach(it=>{ DATA.starred[it.id]=1; logMiss(it.id); });
   persist(); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){}
@@ -7881,7 +7954,23 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 <script src="auth-ui.js?v=20260908"></script>
 <script src="viz3d.js?v=20260828"></script>   <!-- 3D anatomy player (FEATURES.MODEL3D); inert while the flag is off -->
 
-<script>document.addEventListener('DOMContentLoaded',function(){ try{ if(window.MB_SYNC) MB_SYNC.init(); }catch(e){} });
+<script>document.addEventListener('DOMContentLoaded',function(){ try{ if(window.MB_SYNC){
+  // AUDIT-06: the sidebar chip (updateChip in auth-ui.js) paints its "Synced"/"Not syncing" pill
+  // from MB_SYNC.status().syncing at MOUNT time, but nothing ever repainted it once init()'s
+  // async pull/merge chain actually finished — so the badge could sit on a stale "Not syncing"
+  // read forever while the account modal (recomputed fresh each time it opens) correctly showed
+  // "syncing". Re-painting the chip when init() resolves keeps the two in agreement.
+  // AUDIT-05: the Home dashboard paints instantly from whatever's in local cache/DATA, then
+  // MB_SYNC.init() pulls the cloud copy and calls render() again once merged — so on a device
+  // whose cache is stale/empty, users briefly see "Nothing due" (or a wrong due-count) before
+  // it silently flips to the real numbers with no indication anything was still loading.
+  // __MB_SYNC_PENDING lets pageHome() show a small "syncing…" note during that window instead
+  // of presenting the first-paint numbers as final.
+  window.__MB_SYNC_PENDING = true;
+  var p = MB_SYNC.init();
+  var clearPending=function(){ window.__MB_SYNC_PENDING=false; try{ if(typeof render==='function') render(); }catch(e){} try{ if(window.MB_refreshAccountCard) window.MB_refreshAccountCard(); }catch(e){} };
+  if(p && typeof p.then==='function') p.then(clearPending).catch(clearPending); else clearPending();
+} }catch(e){} });
 /* safety: never let the "Loading your notes…" state stick if content can't load */
 setTimeout(function(){ if(!window.__MB_CONTENT_READY){ window.__MB_CONTENT_READY=true; try{ render(); }catch(e){} } },9000);
 /* admin: check whether the free Kokoro voice is up (so basic tier isn't silently spending Fish credits) */

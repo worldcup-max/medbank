@@ -222,6 +222,29 @@
       "narration": "Five vertebrae fused into a wedge, concave in front, driven down between the two hip bones. Its upper front edge is the sacral promontory, the central marker of the pelvic brim and the point measured from in every obstetric diameter. The four pairs of anterior sacral foramina transmit the ventral rami that form the sacral plexus. The sacral canal ends below at the sacral hiatus, between the two sacral cornua — the route for a caudal epidural. The auricular surface on each side takes the sacroiliac joint, and because that joint is wedged and irregular rather than smooth, body weight is transmitted through it and out along the arcuate line to the acetabulum when you stand, or to the ischial tuberosity when you sit."
     },
     {
+      "key": "coccyx",
+      "name": "coccyx",
+      "label": "Coccyx",
+      "role": "part",
+      "group": "Sacrum & spine",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA16202-coccyx"
+      },
+      "terms": [
+        "coccyx",
+        "tailbone",
+        "coccygeal",
+        "sacrococcygeal joint",
+        "Co1",
+        "coccygeal cornua",
+        "pelvic outlet",
+        "coccydynia"
+      ],
+      "narration": "The fourth bone of the ring and the last of the thirty-three. Three to five rudimentary vertebrae fused into one small wedge, hanging from the apex of the sacrum at the sacrococcygeal joint and curving forwards into the pelvis. It carries no weight in standing — load leaves the sacrum sideways through the sacroiliac joints, not downwards through here — but it closes the pelvic outlet behind, between the two ischial tuberosities, and its tip is the posterior end of the outlet's anteroposterior diameter — the transverse diameter of the outlet runs between the ischial tuberosities and does not reach it. The sacrococcygeal joint is a secondary cartilaginous joint with a disc, so the tip can be pushed backwards: in labour it hinges back to widen the outlet, and the same mobility is why a fall onto the buttock fractures or dislocates it and leaves a coccydynia that hurts most on sitting down and standing up."
+    },
+    {
       "key": "l5",
       "name": "fifth lumbar vertebra",
       "label": "Fifth lumbar vertebra",
@@ -1009,10 +1032,15 @@
     "author": "task",
     "authored_at": "2026-08-27",
     "audited_at": "2026-08-29",
-    "audited_by": "task"
+    "audited_by": "task",
+    "corrected_at": "2026-10-01T05:10:00Z",
+    "corrected_by": "model3d REVIEW task, round 2 — did not build this item",
+    "correction_note_coccyx_split": "Corrected a false claim in gaps[]: it said the coccyx is not in the catalog, which stopped being true on 2026-09-11 when FMA16202 was split. No geometry, narration or structure changed — the scene still does not draw the coccyx, and the rewritten gap says so and says where it belongs.",
+    "correction_note_coccyx": "Added one structure, coccyx -> FMA16202-coccyx, in the group and colour the scene already gives the sacrum, and rewrote the gaps[] entry that said it was missing. No view op, no other structure, no narration and no geometry changed: every view either shows \"*\" or shows this group, so the new structure inherits the existing view logic. Verified in the real player with viz-training/tools/walk-scene-in-player.mjs before and after. The 2026-09-30 review's own correction to this scene is untouched and stays recorded in provenance.correction_note_coccyx_split; corrected_at/corrected_by name this run only because it is the latest writer of the pair.",
+    "correction_note_coccyx_outlet_diameter": "The coccyx structure's narration claimed it is \"the posterior point every outlet diameter is measured to\". It is not: the transverse diameter of the outlet is the intertuberous one and does not involve the coccyx, as this scene's own beat 3 narration says (\"an intertuberous diameter of about eleven centimetres\"). Narrowed to the anteroposterior diameter. Text only; no structure, ref, colour, op or view narration changed."
   },
   "gaps": [
-    "The coccyx is not in the catalog. It is one of the four bones of the pelvis and one boundary of the outlet, so a scene about the bony pelvis that cannot show it is incomplete. It is narrated throughout and carried in match.terms; the sacrum model ends where the coccyx would begin.",
+    "The coccyx is drawn as of 2026-10-01, in the “Sacrum & spine” group, refed to FMA16202-coccyx. Beat one’s “four bones: two hip bones, the sacrum and the coccyx”, beat three’s posterior wall “of sacrum and coccyx, about twelve” and the posterior boundary of the pelvic outlet named in the learning goal are all drawn rather than only spoken. The coccyx is drawn from FMA16202-coccyx, a DERIVED asset: BodyParts3D ships the coccyx fused to the sacrum as FMA16202, and that scan was cut at its minimum cross-section (z = 825.5) into FMA16202-sacrum (110.5 mm) and FMA16202-coccyx (34.8 mm), both closed solids. So the interface between the two is the CUT PLANE, not a modelled sacrococcygeal joint: a flat transverse face where one piece bottoms out and the other tops out. The convex sacral apex, the concave base of Co1 and the fibrocartilaginous disc between them are not in the geometry. Where narration names the sacrococcygeal joint, the picture shows a butt joint. (Same wording as the vertebral-column scene, which review added on 2026-09-30.)",
     "The hip bone is a single fused model. Ilium, ischium and pubis have no separate meshes, so the three constituent bones and the triradiate cartilage are named in narration over one object. The student cannot isolate the ischium or click the pubis. This is anatomically defensible in an adult, where the bones are fused, but it weakens the paediatric point about the triradiate cartilage.",
     "No ligament that binds the pelvis exists in the catalog: no sacrospinous, no sacrotuberous, no iliolumbar, no pubic symphysis, no sacroiliac capsule and no obturator membrane. (The inguinal ligament, which is drawn here, is the rolled lower border of the external oblique aponeurosis rather than a ligament of the girdle, and it is present.) Beat four therefore teaches the two ligaments that convert the sciatic notches into foramina by narration, using coccygeus as a proxy marker for the sacrospinous ligament — the muscle lies directly on it — and piriformis to show where the greater foramen is. This is the largest remaining gap in the scene, because the foramina and their contents are the most examined part of the topic.",
     "There is no second pelvis to compare against, so beat five cannot actually show a male pelvis beside a female one. COMPARE_STRUCTURES is authored between the two hip bones so the beat has a visual anchor, but the sexual dimorphism is taught entirely in narration. A companion diagram-mode scene showing the two inlets side by side would be the single highest-value addition for this topic, and would make the obstetric material examinable rather than merely readable.",
@@ -1020,5 +1048,17 @@
     "The diameters of the inlet and outlet still cannot be drawn as lines. CROSS_SECTION in beat three exposes the curved canal so the student sees the short anterior wall against the long posterior one, and the promontory is now a measured point, but the symphysis end of each conjugate is not measured in this scene and the intertuberous diameter needs the left tuberosity, which is not authored. The numbers are spoken over the picture. A symphysis anchor and a left-side mirror of the tuberosity would let a future renderer draw all three conjugates and the outlet.",
     "This scene does not claim to cover 'Pelvic diaphragm (levator ani)', 'Urinary bladder' or 'Internal iliac vessels' although parts of all three appear in it. Coccygeus is here only as a marker for the sacrospinous ligament, the bladder and rectum only to show what the lesser pelvis holds, and the iliac arteries only to trace the brim. All three remain on the worklist as separate curriculum entries.",
     "Piriformis, obturator internus, coccygeus, the iliac arteries and all four hip-bone anchors are on the right side only. Their left counterparts exist in the catalog but were omitted so the bone stays visible through the scene; the teaching points are the openings and the brim, neither of which is side-specific."
+  ],
+  "visibility_waivers": [
+    {
+      "view": 1,
+      "key": "coccyx",
+      "why": "0.000% of frame. The bone IS on stage and loads — it is entirely behind the pubic symphysis and the hip bones from this beat's anterior camera, which is the right camera for “four bones, three joints, one ring”. Anatomy, not a rendering fault. The narration names it here because it is one of the four. SHOWN IN BEAT 3 (0.329%, the midline section, where the narration calls the posterior wall “sacrum and coccyx, about twelve”), and in beats 2, 4 and 5 at 0.302%, 0.101% and 0.297%. Measured with walk-scene-in-player.mjs, 2026-10-01."
+    },
+    {
+      "view": 6,
+      "key": "coccyx",
+      "why": "0.000% of frame. Everything is shown on this beat including the bladder and the rectum, which sit in front of it from anterior. The beat is the clinical summary and does not point at the coccyx. SHOWN IN BEAT 3 at 0.329%. Measured with walk-scene-in-player.mjs, 2026-10-01."
+    }
   ]
 }
