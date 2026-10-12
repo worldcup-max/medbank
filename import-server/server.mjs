@@ -24,6 +24,7 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
+import { EXPLAINER_TEMPLATES, explainerExcerpt, explainerKey, buildExplainerPrompt, parseExplainerLesson } from "./explainer.mjs";   // 3D Tutor
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
 import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
@@ -1879,6 +1880,38 @@ async function buildTopicPreview(note, subject){
   }
   return { status: scenes.length>=3 ? "ready" : "failed", title:(plan&&plan.title)||"", scenes };
 }
+/* 3D Tutor — personalise a template lesson to the student's note. The app plays the template's own lesson
+ * instantly and swaps these words in when they arrive, so this call is never on the critical path.
+ * Cached per (template, note excerpt) in "explainers" and shared by every student with the same note. */
+app.post("/explainer", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const template = (req.body.template||"").toString();
+    if(!EXPLAINER_TEMPLATES[template]) return res.status(400).json({ error:"unknown template" });
+    const excerpt = explainerExcerpt((req.body.text||"").toString().slice(0,60000), template);
+    if(excerpt.length < 80) return res.json({ ok:true, lesson:null, reason:"note too short to personalise" });
+    const key = explainerKey(template, excerpt);
+    try{ const c = await admin.from("explainers").select("lesson").eq("cache_key",key).maybeSingle();
+      if(c.data && c.data.lesson && c.data.lesson.steps) return res.json({ ok:true, cached:true, lesson:c.data.lesson }); }catch(_){}
+    // daily cap on NEW builds only (cached replays are free and unlimited)
+    try{
+      const premium = await isPremium(user.id, user.email).catch(()=>false);
+      const since = new Date(); since.setUTCHours(0,0,0,0);
+      const cnt = await admin.from("explainers").select("cache_key",{ count:"exact", head:true }).eq("account_id",user.id).gte("created_at",since.toISOString());
+      if(!cnt.error && (cnt.count||0) >= (premium ? 30 : 10)) return res.status(429).json({ error:"daily limit", message:"You’ve personalised all of today’s 3D lessons — the standard lesson still plays." });
+    }catch(_){}
+    const prompt = buildExplainerPrompt(template, excerpt);
+    let lesson = null;
+    for(let attempt=0; attempt<2 && !lesson; attempt++){
+      const gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:4500, temperature:0.4, json:true });
+      lesson = parseExplainerLesson(gen.text, template);
+    }
+    if(!lesson) return res.status(502).json({ error:"could not personalise this lesson — the standard lesson still plays" });
+    try{ await admin.from("explainers").upsert({ cache_key:key, template, account_id:user.id, lesson }); }catch(_){}
+    res.json({ ok:true, cached:false, lesson });
+  }catch(e){ console.error("[explainer]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
 app.post("/topic-preview", async (req,res)=>{
   try{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });

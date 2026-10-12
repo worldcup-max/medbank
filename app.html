@@ -2854,6 +2854,8 @@ function pageTopic(id){
     body = renderVizList(t);
   } else if(topicTab==='model3d'){
     body = renderModel3d(t);
+  } else if(topicTab==='mech3d'){
+    body = renderMech3d(t);
   } else {
     const rp=DATA.pos['pos:'+t.id+'recall'], pp=DATA.pos['pos:'+t.id+'primer'];
     const mast=Math.round(topicMastery(t)*100);
@@ -2915,6 +2917,7 @@ function modeSwitcher(t){
     ${sw('🎧 Podcast',"topicTab='podcast';render()",topicTab==='podcast')}
     ${(()=>{ const n=topicVizList(t).length; return sw('🎬 Videos'+(n?' ('+n+')':''),"topicTab='videos';render()",topicTab==='videos'); })()}
     ${(()=>{ return mb3dScenes(t).length ? sw('🧬 3D',"topicTab='model3d';render()",topicTab==='model3d') : ''; })()}
+    ${mbxTemplateFor(t) ? sw('⚗️ 3D Tutor',"topicTab='mech3d';render()",topicTab==='mech3d') : ''}
   </div>`;
 }
 
@@ -3056,6 +3059,57 @@ function renderModel3d(t){
   return chips
     + (cur.learning_goal?'<div style="color:var(--dim);font-size:13px;margin-bottom:10px">'+esc(cur.learning_goal)+'</div>':'')
     + '<div id="mb3dHost"></div>';
+}
+/* ===== 3D Tutor (mech3d) — organic mechanisms as real 3D molecules, narrated =====
+ * The engine (explainer/mech3d.js, three.js bundled in) is only downloaded when a student opens the tab.
+ * It plays the template's own lesson at once; POST /explainer then swaps in narration written from this
+ * topic's note (cached server-side and shared), so the student never waits on the model. */
+var MBX_TEMPLATES=[ {id:'sn2', label:'SN2', re:/\bS\s?N\s?2\b|bimolecular nucleophilic|nucleophilic substitution|backside attack|back-side attack|walden inversion/i} ];   /* keep in step with import-server/explainer.mjs */
+function mbxTemplateFor(t){
+  try{ if(!t) return null; if(localStorage.mbmech==='0') return null; }catch(e){}
+  var hay=(t.name||'')+' \n'+((t.subject&&t.subject.name)||'')+' \n'+String(t.note||'').slice(0,60000);
+  for(var i=0;i<MBX_TEMPLATES.length;i++) if(MBX_TEMPLATES[i].re.test(hay)) return MBX_TEMPLATES[i];
+  return null;
+}
+var _mbxLoad=null, _MBX_LESSON={}, _mbxCur=null;   /* _mbxCur: the live player, so a lesson that lands after a re-render reaches it */
+function mbxLoad(){
+  if(window.MBMech) return Promise.resolve(window.MBMech);
+  if(_mbxLoad) return _mbxLoad;
+  _mbxLoad=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='explainer/mech3d.js?v=1.0.0'; s.async=true;
+    s.onload=function(){ window.MBMech?res(window.MBMech):rej(new Error('3D Tutor failed to start')); };
+    s.onerror=function(){ _mbxLoad=null; rej(new Error('Could not download the 3D Tutor — check your connection.')); };
+    document.head.appendChild(s); });
+  return _mbxLoad;
+}
+async function mbxPersonalise(t, tpl){
+  if(_MBX_LESSON[t.id]!==undefined) return _MBX_LESSON[t.id];
+  var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB||!t.note) return null;
+  var ses=await window.__mbSB.auth.getSession(); var token=ses.data.session&&ses.data.session.access_token; if(!token) return null;
+  for(var attempt=0; attempt<3; attempt++){   // Render free tier may be asleep — retry while it wakes
+    try{
+      var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/explainer',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({template:tpl.id,topicId:t.id,text:String(t.note||'').slice(0,60000)})});
+      if(r.status===502||r.status===503||r.status===504){ var j5=await r.json().catch(function(){return null;}); if(j5&&j5.error) break; await new Promise(function(x){setTimeout(x,2000*(attempt+1));}); continue; }
+      var j=await r.json().catch(function(){return {};});
+      _MBX_LESSON[t.id]=(r.ok&&j.lesson)?j.lesson:null; return _MBX_LESSON[t.id];
+    }catch(e){ await new Promise(function(x){setTimeout(x,2000*(attempt+1));}); }
+  }
+  return null;
+}
+function renderMech3d(t){
+  var tpl=mbxTemplateFor(t);
+  if(!tpl) return '<div class="empty" style="text-align:left">No 3D Tutor for this topic yet.</div>';
+  setTimeout(function(){
+    var host=document.getElementById('mbxHost'); if(!host) return;
+    mbxLoad().then(function(M){
+      if(!host.isConnected) return;
+      var api=M.mount(host,{ template:tpl.id, lesson:_MBX_LESSON[t.id]||null,
+        speak:function(text,done){ if(text===null||text===undefined){ try{ stopSpeak(); }catch(e){} return; } try{ voiceSpeak(text, done||null, 'read'); }catch(e){ if(done) done(); } },
+        warm:function(lines){ try{ (lines||[]).slice(0,8).forEach(function(l){ window.warmSpeak&&window.warmSpeak(l,'read'); }); }catch(e){} } });
+      _mbxCur={tid:t.id, api:api};
+      if(_MBX_LESSON[t.id]===undefined) mbxPersonalise(t,tpl).then(function(l){ if(l&&_mbxCur&&_mbxCur.tid===t.id) _mbxCur.api.setLesson(l); }).catch(function(){});
+    }).catch(function(e){ if(host.isConnected) host.innerHTML='<div class="empty" style="text-align:left">'+esc(e.message)+'</div>'; });
+  },0);
+  return '<div style="color:var(--dim);font-size:13px;margin-bottom:10px">'+esc(tpl.label)+' as real 3D molecules — narrated, step by step, matched to this note.</div><div id="mbxHost"><div class="empty">Loading the 3D Tutor…</div></div>';
 }
 /* dev-only route #/viz3d[/sceneId] — not in student nav; lets any scene be opened without a topic */
 function pageViz3d(id){
