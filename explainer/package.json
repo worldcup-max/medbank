@@ -1,6 +1,6 @@
 {
   "private": true,
   "description": "MedBank 3D Tutor engine. Builds explainer/mech3d.js (three.js bundled in) for the app to lazy-load.",
-  "scripts": { "build": "esbuild src/mech3d.js --bundle --format=iife --minify --target=es2019 --legal-comments=none --outfile=mech3d.js" },
+  "scripts": { "build": "esbuild src/index.js --bundle --format=iife --minify --target=es2019 --legal-comments=none --outfile=mech3d.js" },
   "devDependencies": { "esbuild": "0.24.0", "three": "0.170.0" }
 }

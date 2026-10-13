@@ -25,6 +25,7 @@ import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
 import { EXPLAINER_TEMPLATES, explainerExcerpt, explainerKey, buildExplainerPrompt, parseExplainerLesson } from "./explainer.mjs";   // 3D Tutor
+import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
 import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
@@ -1910,6 +1911,70 @@ app.post("/explainer", async (req,res)=>{
     try{ await admin.from("explainers").upsert({ cache_key:key, template, account_id:user.id, lesson }); }catch(_){}
     res.json({ ok:true, cached:false, lesson });
   }catch(e){ console.error("[explainer]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* 3D Tutor — instant builder: scan a note for mechanisms, build a checked 3D lesson for one, and keep a queue of
+ * what students ask for so the most-wanted ones get a polished hand-built version (explainer/tools/queue.mjs). */
+async function mbxRecordRequest(name, field, topic){
+  try{
+    const key = mechKey(name); if(!key) return;
+    const cur = await admin.from("explainer_requests").select("*").eq("mech_key",key).maybeSingle();
+    const row = cur.data || { mech_key:key, name, requests:0, built:0, failed:0, flags:0 };
+    row[field] = (row[field]||0) + 1; row.name = name; row.updated_at = new Date().toISOString(); if(topic) row.last_topic = String(topic).slice(0,120);
+    await admin.from("explainer_requests").upsert(row);
+  }catch(_){}
+}
+app.post("/explainer/scan", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const note = (req.body.text||"").toString().slice(0,60000); if(note.trim().length < 80) return res.json({ ok:true, mechanisms:[] });
+    const key = scanCacheKey(note);
+    try{ const c = await admin.from("explainers").select("lesson").eq("cache_key",key).maybeSingle(); if(c.data && c.data.lesson && Array.isArray(c.data.lesson.mechanisms)) return res.json({ ok:true, cached:true, mechanisms:c.data.lesson.mechanisms }); }catch(_){}
+    const gen = await generate({ model: BASIC_MODEL, prompt: buildScanPrompt(note), parts:[], images:[], max_tokens:1200, temperature:0.2, json:true });
+    const mechanisms = parseScan(gen.text).map(m => ({ ...m, template: Object.keys(EXPLAINER_TEMPLATES).find(id => EXPLAINER_TEMPLATES[id].match.test(m.name)) || null }));
+    try{ await admin.from("explainers").upsert({ cache_key:key, template:"scan", account_id:user.id, lesson:{ mechanisms } }); }catch(_){}
+    res.json({ ok:true, mechanisms });
+  }catch(e){ console.error("[explainer/scan]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/explainer/build", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const name = (req.body.name||"").toString().replace(/\s+/g," ").trim().slice(0,90);
+    if(name.length < 3) return res.status(400).json({ error:"name the mechanism you want to see" });
+    const note = (req.body.text||"").toString().slice(0,60000), topic = (req.body.topic||"").toString();
+    const excerpt = autoExcerpt(note, name) || name;
+    const key = autoCacheKey(name, excerpt);
+    try{ const c = await admin.from("explainers").select("lesson").eq("cache_key",key).maybeSingle(); if(c.data && c.data.lesson && c.data.lesson.mechanism){ mbxRecordRequest(name,"requests",topic); return res.json({ ok:true, cached:true, lesson:c.data.lesson }); } }catch(_){}
+    try{
+      const premium = await isPremium(user.id, user.email).catch(()=>false);
+      const since = new Date(); since.setUTCHours(0,0,0,0);
+      const cnt = await admin.from("explainers").select("cache_key",{ count:"exact", head:true }).eq("account_id",user.id).neq("template","scan").gte("created_at",since.toISOString());
+      if(!cnt.error && (cnt.count||0) >= (premium ? 30 : 10)) return res.status(429).json({ error:"daily limit", message:"You’ve built all of today’s new 3D lessons. Lessons other students already built still open instantly." });
+    }catch(_){}
+    let errors = null, lesson = null;
+    for(let attempt=0; attempt<3 && !lesson; attempt++){
+      const gen = await generate({ model: BASIC_MODEL, prompt: buildAutoPrompt(name, excerpt, errors), parts:[], images:[], max_tokens:6000, temperature: attempt ? 0.2 : 0.35, json:true });
+      const r = checkAutoLesson(gen.text, name);
+      if(r.lesson) lesson = r.lesson; else { errors = r.errors; console.warn("[explainer/build] attempt", attempt+1, "failed:", (errors||[]).slice(0,4).join(" | ")); }
+    }
+    if(!lesson){ mbxRecordRequest(name,"failed",topic); return res.status(422).json({ error:"Couldn’t build a reliable 3D version of this one yet — it’s been added to the build queue.", queued:true }); }
+    try{ await admin.from("explainers").upsert({ cache_key:key, template:"auto", account_id:user.id, lesson }); }catch(_){}
+    mbxRecordRequest(name,"built",topic);
+    res.json({ ok:true, cached:false, lesson });
+  }catch(e){ console.error("[explainer/build]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/explainer/flag", async (req,res)=>{
+  try{ const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const name = (req.body.name||"").toString().slice(0,90); if(name) await mbxRecordRequest(name,"flags",req.body.topic); res.json({ ok:true }); }
+  catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/admin/explainer/queue", async (req,res)=>{
+  try{ const u = await requireAdmin(req); if(!u) return res.status(403).json({ error:"admins only" });
+    const r = await admin.from("explainer_requests").select("*").order("updated_at",{ ascending:false }).limit(500);
+    const rows = (r.data||[]).map(x => ({ ...x, score:(x.requests||0)+(x.built||0)+3*(x.failed||0)+5*(x.flags||0),
+      has_template: Object.values(EXPLAINER_TEMPLATES).some(t => t.match.test(x.name)) })).filter(x => !x.has_template).sort((a,b)=>b.score-a.score);
+    res.json({ ok:true, queue:rows });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 
 app.post("/topic-preview", async (req,res)=>{
