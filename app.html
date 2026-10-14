@@ -1266,6 +1266,7 @@ let DATA = (()=>{
   d.done     = d.done     || {};  // topicId -> 'YYYY-MM-DD' completed
   d.dayTopics= d.dayTopics|| {};  // 'YYYY-MM-DD' -> { topicId: 1 }  (topics touched that day)
   d.read     = d.read     || {};  // topicId -> 'YYYY-MM-DD' simplified note read
+  d.tutor    = d.tutor    || {};  // topicId -> 3D Tutor progress {tier,k,n,title,done:{overview,full,exam},exam:{right,of},at}
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
   d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
   d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
@@ -2917,7 +2918,7 @@ function modeSwitcher(t){
     ${sw('🎧 Podcast',"topicTab='podcast';render()",topicTab==='podcast')}
     ${(()=>{ const n=topicVizList(t).length; return sw('🎬 Videos'+(n?' ('+n+')':''),"topicTab='videos';render()",topicTab==='videos'); })()}
     ${(()=>{ return mb3dScenes(t).length ? sw('🧬 3D',"topicTab='model3d';render()",topicTab==='model3d') : ''; })()}
-    ${mbxShow(t) ? sw('⚗️ 3D Tutor',"topicTab='mech3d';render()",topicTab==='mech3d') : ''}
+    ${mbxShow(t) ? sw('⚗️ 3D Tutor'+(mbxPlateFor(t)?mbpTabNote(t):''),"topicTab='mech3d';render()",topicTab==='mech3d') : ''}
   </div>`;
 }
 
@@ -3087,11 +3088,13 @@ function mbxPlateFor(t){
   for(var i=0;i<MBX_PLATES.length;i++) if(MBX_PLATES[i].re.test(hay)) return MBX_PLATES[i];
   return null;
 }
-var _mbpLoad=null, _MBP_LESSON={}, _mbpCur=null;
+var _mbpLoad=null, _MBP_LESSON={}, _mbpCur=null, _mbpSaveT=null;
+/* "· 4/10" or "· ✓" on the 3D Tutor tab, from the student's synced progress */
+function mbpTabNote(t){ try{ var p=(DATA.tutor||{})[t.id]; if(!p) return ''; if(p.done&&(p.done.full||p.done.exam)) return ' · ✓'; if(p.k!=null&&p.n) return ' · '+(p.k+1)+'/'+p.n; }catch(e){} return ''; }
 function mbpLoad(){
   if(window.MBPlate&&window.MBPlate.mount) return Promise.resolve(window.MBPlate);
   if(_mbpLoad) return _mbpLoad;
-  _mbpLoad=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='explainer/plate-tutor.js?v=1.0.0'; s.async=true;
+  _mbpLoad=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='explainer/plate-tutor.js?v=1.1.0'; s.async=true;
     s.onload=function(){ window.MBPlate?res(window.MBPlate):rej(new Error('3D Tutor failed to start')); };
     s.onerror=function(){ _mbpLoad=null; rej(new Error('Could not download the 3D Tutor — check your connection.')); };
     document.head.appendChild(s); });
@@ -3114,7 +3117,10 @@ function renderPlateTutor(t, pl){
         speak:function(text,done){ try{ voiceSpeak(text, done||null, 'read'); }catch(e){ if(done) done(); } },
         stopSpeak:function(){ try{ stopSpeak(); }catch(e){} },
         warm:function(lines){ try{ (lines||[]).forEach(function(l){ window.warmSpeak&&window.warmSpeak(l,'read'); }); }catch(e){} },
-        isDark:function(){ return document.documentElement.getAttribute('data-theme')==='dark'; } });
+        isDark:function(){ return document.documentElement.getAttribute('data-theme')==='dark'; },
+        progressKey:t.id,
+        loadProgress:function(){ return (DATA.tutor||{})[t.id]||null; },
+        saveProgress:function(p){ DATA.tutor=DATA.tutor||{}; DATA.tutor[t.id]=p; clearTimeout(_mbpSaveT); _mbpSaveT=setTimeout(function(){ try{ persist(); }catch(e){} },1500); } });
       _mbpCur={tid:t.id, api:api};
     }).catch(function(e){ if(host.isConnected) host.innerHTML='<div class="empty" style="text-align:left">'+esc(e.message)+'</div>'; });
   },0);

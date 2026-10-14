@@ -175,5 +175,84 @@
  "extend": [
   "afferent and efferent arteriole constriction",
   "dilute urine without ADH"
+ ],
+ "overview": [
+  {
+   "stop": 2,
+   "say": "A net filtration pressure of about 10 millimetres of mercury filters about 180 litres a day."
+  },
+  {
+   "stop": 4,
+   "say": "The proximal tubule takes back about 65 percent of the sodium and water, and the fluid stays at about 300."
+  },
+  {
+   "stop": 6,
+   "say": "The thick ascending limb pumps out salt but not water, diluting the fluid and building the medullary osmotic gradient."
+  },
+  {
+   "stop": 9,
+   "say": "ADH inserts aquaporin 2, so water leaves into the hypertonic medulla and the urine is concentrated."
+  },
+  {
+   "stop": 10,
+   "say": "In the end more than 99 percent of the filtrate is reabsorbed."
+  }
+ ],
+ "exam": [
+  {
+   "stop": 2,
+   "q": "What is the net filtration pressure at the glomerulus?",
+   "options": [
+    "About 10 mmHg",
+    "About 55 mmHg",
+    "About 30 mmHg"
+   ],
+   "answer": 0,
+   "why": "Glomerular pressure of 55, minus 15 in Bowman's capsule and 30 oncotic pressure, leaves about 10."
+  },
+  {
+   "stop": 4,
+   "q": "How is fluid reabsorbed in the proximal convoluted tubule?",
+   "options": [
+    "Iso-osmotically, so it stays at about 300",
+    "Water only, so it concentrates",
+    "Salt only, so it dilutes"
+   ],
+   "answer": 0,
+   "why": "Reabsorption in the proximal tubule is iso-osmotic, so the tubular fluid stays at about 300."
+  },
+  {
+   "stop": 5,
+   "q": "Which part of the loop is permeable to water but not to salt?",
+   "options": [
+    "Thick ascending limb",
+    "Thin descending limb",
+    "Distal convoluted tubule"
+   ],
+   "answer": 1,
+   "why": "The thin descending limb lets water leave but not salt, so the fluid concentrates."
+  },
+  {
+   "stop": 6,
+   "q": "What does the thick ascending limb do to the tubular fluid?",
+   "options": [
+    "Concentrates it to about 1200",
+    "Keeps it at about 300",
+    "Dilutes it to about 100"
+   ],
+   "answer": 2,
+   "why": "It pumps out sodium, potassium and chloride but is impermeable to water, so the fluid is diluted."
+  },
+  {
+   "stop": 9,
+   "q": "What does ADH insert into the collecting duct?",
+   "options": [
+    "Aquaporin 2",
+    "NKCC2",
+    "A thiazide-sensitive carrier"
+   ],
+   "answer": 0,
+   "why": "ADH inserts aquaporin 2, so water moves out into the hypertonic medulla."
+  }
  ]
 }

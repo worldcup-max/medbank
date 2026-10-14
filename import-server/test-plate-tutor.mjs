@@ -35,5 +35,7 @@ const out = notePath.replace(/\.md$/, "") + ".tutor.live.json";
 writeFileSync(out, JSON.stringify(best, null, 1));
 console.log(`\ntokens in ${usage.in}, out ${usage.out} (multiply by your DeepSeek per-token price for the cost)`);
 best.steps.forEach((s, k) => console.log(`${k + 1}. [${s.lines.join(",")}] ${s.words ? "(in words)" : s.phase + " · " + s.focus.join("+") + (s.lens ? " · lens " + s.lens : "")} — ${s.say}`));
+console.log("\n2-minute overview:"); (best.overview || []).forEach((x) => console.log(`  stop ${x.stop + 1}: ${x.say}`));
+console.log("exam revision:"); (best.exam || []).forEach((x) => console.log(`  stop ${x.stop + 1}: ${x.q}  [${x.options.map((o, m) => (m === x.answer ? "*" : "") + o).join(" | ")}]`));
 if (best.flags.length) console.log("flags:", best.flags.map((f) => `${f.line} ${f.noteSays}→${f.plateSays}`).join("; "));
 console.log("extend:", best.extend.join("; ") || "—", "\nsaved", out);

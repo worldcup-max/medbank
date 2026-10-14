@@ -12,7 +12,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
-export const PLATE_TUTOR_VERSION = "p1";
+export const PLATE_TUTOR_VERSION = "p2";   // p2: + 2-minute overview and exam-revision questions
 const HERE = dirname(fileURLToPath(import.meta.url));
 
 /* ---------- the note, as numbered lines (keep identical to splitNote in explainer/plate-tutor.js) ---------- */
@@ -81,13 +81,17 @@ RULES (all are checked by a program; breaking one gets the stop thrown away):
 7. "flags": ONLY when a number in the note clearly disagrees with a number in the plate descriptions above (same quantity). Give the line, the note's figure, the plate's figure, and one gentle spoken sentence, e.g. "Your note gives about 1000 here; the plate, from Guyton, shows about 1200 — worth checking with your lecturer." Never flag rounding, ranges that include the plate value, or things the plate does not state. Usually there are none.
 8. Skip lines that are only headings, references or admin. Do not invent lines.
 9. A stop may add "lens" (one lens id) ONLY when the cited lines are about what that lens shows, and its phase is one of the lens's phases. While a lens is open, still say only what the note says.
+10. "overview" is the 2-minute version: pick the 3–6 stops that carry the note's main idea (by their number in "steps", 1 = first) and give each ONE short spoken sentence (8–30 words) from that stop's lines. Keep them in order.
+11. "exam" is exam revision: pick the 3–6 most examinable stops and write one multiple-choice question for each, answerable ONLY from that stop's lines: "q" (one sentence), exactly 3 "options" (short, one clearly right, two plausible wrong ones built from other facts in the note), "answer" (0, 1 or 2) and "why" (one sentence from the note). No trick questions, no facts outside the note.
 
 Return ONLY this JSON:
 {"steps":[{"title":"2–4 words","lines":["L2","L3"],"phase":"<phase name>","focus":["<part id>"],"lens":"<optional lens id>","speed":0.1–1,"say":"…"},
           {"title":"…","lines":["L5"],"words":true,"say":"…"}],
  "mentions":{"<part id>":["L2"]},
  "flags":[{"line":"L13","noteSays":"1000","plateSays":"1200","say":"…"}],
- "extend":["concept in the note this plate cannot show"]}${errors && errors.length ? `
+ "extend":["concept in the note this plate cannot show"],
+ "overview":[{"stop":1,"say":"one sentence"}],
+ "exam":[{"stop":4,"q":"…?","options":["…","…","…"],"answer":1,"why":"…"}]}${errors && errors.length ? `
 
 YOUR LAST ANSWER WAS REJECTED. Fix exactly these problems and keep everything else:
 - ${errors.slice(0, 14).join("\n- ")}` : ""}`;
@@ -129,6 +133,20 @@ export function checkPlateTutor(text, M, lines) {
   const n6 = new Set(spoken(noteText).toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length >= 2).map((w) => w.slice(0, 6)));
   const covers = (c) => { const ws = spoken(c).toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length >= 2 && !STOP.has(w) && !["and", "of", "the", "via", "as", "to"].includes(w)).map((w) => w.slice(0, 6)); return ws.length && ws.filter((w) => n6.has(w)).length / ws.length >= 0.66; };
   const lensOK = new Map((M.lenses || []).map((l) => [l.id, { l, ok: (l.concepts || []).filter(covers).length >= Math.max(1, Math.ceil((l.concepts || []).length / 2)) }]));
+  /* the same rules for every spoken or shown sentence: numbers from the cited lines, no drift, no un-noted concepts */
+  function sayErrors(tag, text, ids, { focus = [], phase = "", extraNums = [], min = 12, max = 95 } = {}) {
+    const errs = [], say = String(text || "").replace(/\s+/g, " ").trim(), wc = say ? say.split(" ").length : 0;
+    if (wc < min || wc > max) errs.push(`${tag}: must be ${min}–${max} words (it has ${wc})`);
+    if (/[→≈~∼≥≤]|\*\*/.test(say)) errs.push(`${tag}: has symbols or markdown; write it for the ear`);
+    const okN = new Set([...ids.flatMap((x) => nums(L.get(x).text)), ...extraNums]); ids.forEach((x) => flagNums.has(x) && okN.add(flagNums.get(x)));
+    const strayN = nums(say).filter((x) => !okN.has(x) && x > 4);
+    if (strayN.length) errs.push(`${tag} says ${strayN.join(", ")}, which is not in lines ${ids.join(", ")}`);
+    const ground = new Set([...ids.flatMap((x) => words(L.get(x).text)), ...focus.flatMap((p) => words(parts.get(p).name)), ...words(phase)]);
+    const sw = words(say), off = sw.filter((w) => !ground.has(w) && !noteWords.has(w));
+    if (sw.length >= 6 && off.length / sw.length > 0.45) errs.push(`${tag} drifts from the note (${off.slice(0, 5).join(", ")} are not in it)`);
+    for (const c of conceptTerms) { const cw = words(c).filter((w) => w.length >= 6); if (cw.length && cw.every((w) => sw.includes(w)) && !cw.every((w) => noteWords.has(w))) errs.push(`${tag} teaches "${c}", which is not in the note`); }
+    return errs; }
+  const kept = new Map();   // the model's stop number (1-based) → index in steps[] after checks
   let lastFirst = -1;
   (Array.isArray(j.steps) ? j.steps : []).slice(0, 16).forEach((s, k) => {
     const tag = `stop ${k + 1}${s && s.title ? ` ("${String(s.title).slice(0, 30)}")` : ""}`, errs = [];
@@ -139,19 +157,8 @@ export function checkPlateTutor(text, M, lines) {
     if (!isWords && !phases.has(s.phase)) errs.push(`${tag}: "${s.phase}" is not a phase name`);
     const focus = (Array.isArray(s.focus) ? s.focus : []).filter((x) => parts.has(x));
     if (!isWords && !focus.length) errs.push(`${tag} needs 1–4 focus part ids from the list`);
-    const say = String(s.say || "").replace(/\s+/g, " ").trim(), wc = say.split(" ").length;
-    if (wc < 12 || wc > 95) errs.push(`${tag}: "say" must be 2–4 sentences (it has ${wc} words)`);
-    if (/[→≈~∼≥≤]|\*\*/.test(say)) errs.push(`${tag}: "say" has symbols or markdown; write it for the ear`);
-    // numbers must come from the cited lines (or that line's flag)
-    const okN = new Set(ids.flatMap((x) => nums(L.get(x).text))); ids.forEach((x) => flagNums.has(x) && okN.add(flagNums.get(x)));
-    const strayN = nums(say).filter((x) => !okN.has(x) && x > 4);
-    if (strayN.length) errs.push(`${tag} says ${strayN.join(", ")}, which is not in lines ${ids.join(", ")}`);
-    // drift: what it says must be mostly the cited lines' words (or the names of what is on screen)
-    const ground = new Set([...ids.flatMap((x) => words(L.get(x).text)), ...focus.flatMap((p) => words(parts.get(p).name)), ...words(s.phase || "")]);
-    const sw = words(say), off = sw.filter((w) => !ground.has(w) && !noteWords.has(w));
-    if (sw.length >= 6 && off.length / sw.length > 0.45) errs.push(`${tag} drifts from the note (${off.slice(0, 5).join(", ")} are not in it)`);
-    // concepts of the topic the note never mentions
-    for (const c of conceptTerms) { const cw = words(c).filter((w) => w.length >= 6); if (cw.length && cw.every((w) => sw.includes(w)) && !cw.every((w) => noteWords.has(w))) errs.push(`${tag} teaches "${c}", which is not in the note`); }
+    const say = String(s.say || "").replace(/\s+/g, " ").trim();
+    errs.push(...sayErrors(tag, say, ids, { focus, phase: s.phase || "" }));
     let lens = null;
     if (s.lens && !isWords) { const z = lensOK.get(s.lens);
       if (!z) errs.push(`${tag}: "${s.lens}" is not a lens id`);
@@ -162,7 +169,7 @@ export function checkPlateTutor(text, M, lines) {
     const first = ids.length ? Math.min(...ids.map((x) => L.get(x).i)) : -1;
     if (first >= 0 && first < lastFirst) errs.push(`${tag} goes back to ${L.get(ids[0]).id}: keep the note's order`);
     if (errs.length) { errors.push(...errs); return; }
-    lastFirst = Math.max(lastFirst, first); ids.forEach((x) => seen.add(x));
+    lastFirst = Math.max(lastFirst, first); ids.forEach((x) => seen.add(x)); kept.set(k + 1, steps.length);
     steps.push(isWords ? { title: String(s.title || "").slice(0, 40), lines: ids, words: true, say }
       : { title: String(s.title || "").slice(0, 40), lines: ids, phase: s.phase, focus: focus.slice(0, 4), ...(lens ? { lens } : {}), ...(win ? { win } : {}), speed: Math.max(0.1, Math.min(2.5, Number(s.speed) || 0.5)), say });
   });
@@ -171,6 +178,29 @@ export function checkPlateTutor(text, M, lines) {
   for (const [id, v] of Object.entries(j.mentions && typeof j.mentions === "object" ? j.mentions : {})) { if (!parts.has(id)) continue; const ids = (Array.isArray(v) ? v : []).filter((x) => L.has(x)); if (ids.length) mentions[id] = [...new Set(ids)]; }
   steps.forEach((s) => (s.focus || []).forEach((p) => { mentions[p] = [...new Set([...(mentions[p] || []), ...s.lines])]; }));
   const extend = (Array.isArray(j.extend) ? j.extend : []).map((x) => String(x).slice(0, 90)).filter(Boolean).slice(0, 8);
-  const lesson = { v: 2, kind: "plate", plate: M.id, version: PLATE_TUTOR_VERSION, lines, steps, mentions, flags: flags.filter((f) => steps.some((s) => s.lines.includes(f.line))), extend, personal: true };
+  // 2-minute overview: 3–6 key stops, one sentence each, in order
+  const overview = []; let lastO = -1;
+  (Array.isArray(j.overview) ? j.overview : []).slice(0, 8).forEach((o, n) => { const k = kept.get(Number(o && o.stop)), tag = `overview ${n + 1}`;
+    if (k == null) { errors.push(`${tag}: stop ${o && o.stop} is not a kept stop`); return; } if (k <= lastO) { errors.push(`${tag}: keep the overview in order`); return; }
+    const st = steps[k], e = sayErrors(tag, o.say, st.lines, { focus: st.focus || [], phase: st.phase || "", min: 6, max: 34 });
+    if (e.length) { errors.push(...e); return; } lastO = k; overview.push({ stop: k, say: String(o.say).replace(/\s+/g, " ").trim() }); });
+  if (overview.length && overview.length < 3) errors.push("overview needs 3–6 stops");
+  // exam revision: one 3-option question per high-yield stop, answerable from that stop's lines
+  const allNums = nums(noteText), exam = [];
+  (Array.isArray(j.exam) ? j.exam : []).slice(0, 8).forEach((x, n) => { const k = kept.get(Number(x && x.stop)), tag = `exam question ${n + 1}`;
+    if (k == null) { errors.push(`${tag}: stop ${x && x.stop} is not a kept stop`); return; }
+    const st = steps[k], opts = Array.isArray(x.options) ? x.options.map((o) => String(o).replace(/\s+/g, " ").trim()) : [], ans = Number(x.answer);
+    const e = [];
+    if (opts.length !== 3 || new Set(opts.map((o) => o.toLowerCase())).size !== 3 || opts.some((o) => !o || o.split(" ").length > 16)) e.push(`${tag}: needs exactly 3 different short options`);
+    if (![0, 1, 2].includes(ans)) e.push(`${tag}: "answer" must be 0, 1 or 2`);
+    e.push(...sayErrors(tag + " (question)", x.q, st.lines, { focus: st.focus || [], phase: st.phase || "", extraNums: allNums, min: 4, max: 34 }));
+    if (!e.length) e.push(...sayErrors(tag + " (right answer)", opts[ans], st.lines, { focus: st.focus || [], phase: st.phase || "", min: 1, max: 16 }));
+    e.push(...sayErrors(tag + " (why)", x.why, st.lines, { focus: st.focus || [], phase: st.phase || "", min: 4, max: 40 }));
+    opts.forEach((o, m) => { if (m !== ans) e.push(...sayErrors(`${tag} (option ${m + 1})`, o, st.lines, { extraNums: allNums, min: 1, max: 16 }).filter((z) => !/drifts|words/.test(z))); });
+    if (e.length) { errors.push(...e); return; }
+    exam.push({ stop: k, q: String(x.q).trim(), options: opts, answer: ans, why: String(x.why).trim() }); });
+  if (exam.length && exam.length < 2) errors.push("exam needs 3–6 questions");
+  const lesson = { v: 2, kind: "plate", plate: M.id, version: PLATE_TUTOR_VERSION, lines, steps, mentions, flags: flags.filter((f) => steps.some((s) => s.lines.includes(f.line))), extend,
+    overview: overview.length >= 3 ? overview : [], exam: exam.length >= 2 ? exam : [], personal: true };
   return { lesson, errors, dropped: errors.length };
 }

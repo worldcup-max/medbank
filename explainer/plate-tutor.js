@@ -11,7 +11,11 @@
  * Phone: plate on top, note in a bottom sheet (current line + controls; pull up for the whole note).
  * Laptop: note in a rail on the right. The plate keeps ALL its own content (lenses, legend, ledger, live numbers, chart).
  *
- *   MBPlate.mount(host, { plate, note, getLesson, speak, stopSpeak, warm, isDark })  → { destroy }
+ * Three lengths (feature 2): a start card asks "How long have you got?" — Continue (where they stopped), 2-minute overview
+ * (key stops, one sentence each), Full walk-through (every stop), Exam revision (high-yield stops, a note-based question
+ * after each; a wrong answer replays that stop). Progress per topic goes through loadProgress/saveProgress.
+ *
+ *   MBPlate.mount(host, { plate, note, getLesson, speak, stopSpeak, warm, isDark, loadProgress, saveProgress })  → { destroy }
  *   MBPlate.match(text) → plate entry or null
  */
 (function () {
@@ -90,6 +94,26 @@
 .mbp-sheet.up{top:9vh}.mbp-sheet.up .mbp-all{display:grid;gap:2px;overflow:auto;align-content:start}.mbp-sheet.up .mbp-cur{display:none}
 .mbp-sheet.up{grid-template-rows:auto auto minmax(0,1fr) auto auto auto}
 html[data-theme="dark"] .mbp-sheet{box-shadow:0 -10px 30px rgba(0,0,0,.5)}
+.mbp-len{border:0;background:transparent;color:var(--accent);font:600 12px system-ui;letter-spacing:0;text-transform:none;padding:6px 2px;cursor:pointer}
+.mbp-pick{display:none;gap:9px}.mbp-note.pk .mbp-pick{display:grid}
+.mbp-note.pk .mbp-cur,.mbp-note.pk .mbp-cap,.mbp-note.pk .mbp-more,.mbp-note.pk .mbp-bar,.mbp-note.pk .mbp-eb.mbp-now{display:none}
+.mbp-sheet.pk{max-height:78vh;overflow:auto}.mbp-sheet.pk.up .mbp-all{display:none}
+.mbp-h{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dimmer)}
+.mbp-c{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:11px 13px;background:var(--panel);color:var(--text);text-align:left;width:100%;cursor:pointer;font:inherit}
+.mbp-c:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}.mbp-c.main{border:2px solid var(--accent);padding:10px 12px}
+.mbp-c .ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);font:700 15px system-ui;flex:none}
+.mbp-c .tx{flex:1;min-width:0;display:grid;gap:2px}.mbp-c b{font-size:14.5px}.mbp-c span{font-size:12.5px;color:var(--dim)}.mbp-c em{font-style:normal;font-size:12px;color:var(--dimmer);white-space:nowrap}
+.mbp-c[aria-disabled="true"]{opacity:.55;cursor:default}.mbp-c .ok{color:#15803d;font-weight:700}
+.mbp-pbar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:4px}.mbp-pbar i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.mbp-q p{margin:0;font-size:15px;line-height:1.45;color:var(--text);font-weight:600}
+.mbp-opt{text-align:left;border:1px solid var(--line);border-radius:10px;padding:11px 12px;min-height:46px;background:var(--panel);color:var(--text);font:14.5px/1.35 system-ui;cursor:pointer;display:flex;gap:10px;align-items:center}
+.mbp-opt .k{flex:none;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--dim)}
+.mbp-opt.right{border-color:#16a34a;background:color-mix(in srgb,#16a34a 12%,var(--panel))}.mbp-opt.right .k{border-color:#16a34a;color:#15803d}
+.mbp-opt.wrong{border-color:#dc2626;background:color-mix(in srgb,#dc2626 10%,var(--panel))}.mbp-opt.wrong .k{border-color:#dc2626;color:#b91c1c}
+.mbp-why{font-size:13.5px;line-height:1.45;color:var(--text);padding:9px 11px;border-radius:9px;background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.mbp-row{display:flex;gap:8px;flex-wrap:wrap}.mbp-btn{min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:600 14px system-ui;padding:0 16px;cursor:pointer}
+.mbp-btn.p{background:var(--accent);border-color:var(--accent);color:#fff}
+html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-opt.right .k{color:#4ade80}html[data-theme="dark"] .mbp-opt.wrong .k{color:#f87171}
 @media (prefers-reduced-motion:reduce){.mbp *{transition:none!important}}`;
 
   function mount(host, o) {
@@ -97,7 +121,7 @@ html[data-theme="dark"] .mbp-sheet{box-shadow:0 -10px 30px rgba(0,0,0,.5)}
     const P = o.plate, lines = splitNote(o.note), LI = new Map(lines.map((l, i) => [l.id, i]));
     const ukey = "mbp-unlock:" + P.id;
     const st = { lesson: null, stops: [], k: -1, j: 0, playing: false, through: false, voice: o.voice !== false, token: 0, mode: "loading",
-      manifest: null, linked: false, unlocked: new Set(store.get(ukey, [])), flagSaid: new Set(), partLines: new Set(), tipOpen: null, fallback: null };
+      manifest: null, linked: false, tier: "full", full: [], prog: null, exam: null, picking: false, unlocked: new Set(store.get(ukey, [])), flagSaid: new Set(), partLines: new Set(), tipOpen: null, fallback: null };
     let destroyed = false;
 
     host.innerHTML = `<div class="mbp">
@@ -113,14 +137,14 @@ html[data-theme="dark"] .mbp-sheet{box-shadow:0 -10px 30px rgba(0,0,0,.5)}
     let wide = null, spacer = null;
     function layout() { const w = host.clientWidth >= 860; if (w === wide) return; wide = w; root.classList.toggle("wide", w); build(); }
     function build() {
-      const capHtml = `<div class="mbp-eb"><span class="mbp-where"></span><span class="mbp-sp"></span></div><div class="mbp-cap"></div>`;
+      const capHtml = `<div class="mbp-eb mbp-now"><span class="mbp-where"></span><span class="mbp-sp"></span><button class="mbp-len" data-a="lengths">Change length</button></div><div class="mbp-cap"></div>`;
       const barHtml = `<div class="mbp-bar"><button class="mbp-b" data-a="prev" aria-label="Previous stop"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="2.6" height="12" rx="1" fill="currentColor"/><path d="M17 4.5v11L7.5 10z" fill="currentColor"/></svg></button><button class="mbp-b p" data-a="play" aria-label="Play">▶</button><button class="mbp-b" data-a="next" aria-label="Next stop"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><rect x="14.4" y="4" width="2.6" height="12" rx="1" fill="currentColor"/><path d="M3 4.5v11L12.5 10z" fill="currentColor"/></svg></button><div class="mbp-dots" role="tablist" aria-label="Stops"></div><button class="mbp-b" data-a="voice" aria-label="Voice">🔈</button></div>`;
       if (spacer) { spacer.remove(); spacer = null; }
-      if (wide) { aside.className = "mbp-note mbp-rail"; aside.innerHTML = `<div class="mbp-head">${capHtml}${barHtml}</div><div class="mbp-eb" style="padding:8px 6px 4px">Your note<span class="mbp-sp"></span><span class="mbp-sum" style="text-transform:none;letter-spacing:0;font-weight:500"></span></div><div class="mbp-all" style="display:grid;gap:2px"></div>`;
+      if (wide) { aside.className = "mbp-note mbp-rail"; aside.innerHTML = `<div class="mbp-head"><div class="mbp-pick"></div>${capHtml}${barHtml}</div><div class="mbp-eb" style="padding:8px 6px 4px">Your note<span class="mbp-sp"></span><span class="mbp-sum" style="text-transform:none;letter-spacing:0;font-weight:500"></span></div><div class="mbp-all" style="display:grid;gap:2px"></div>`;
         under.innerHTML = ""; }
-      else { aside.className = "mbp-note mbp-sheet"; aside.innerHTML = `<button class="mbp-grab" aria-label="Show your whole note"></button>${capHtml.replace('<div class="mbp-cap"></div>', "")}<div class="mbp-cur"></div><div class="mbp-all"></div><div class="mbp-cap"></div><button class="mbp-more"></button>${barHtml}`;
+      else { aside.className = "mbp-note mbp-sheet"; aside.innerHTML = `<button class="mbp-grab" aria-label="Show your whole note"></button><div class="mbp-pick"></div>${capHtml.replace('<div class="mbp-cap"></div>', "")}<div class="mbp-cur"></div><div class="mbp-all"></div><div class="mbp-cap"></div><button class="mbp-more"></button>${barHtml}`;
         under.innerHTML = ""; spacer = document.createElement("div"); root.after(spacer); }
-      wire(); renderLines(); renderDots(); renderNow(); sizeSpacer(); }
+      wire(); renderLines(); renderDots(); renderNow(); renderPick(); sizeSpacer(); }
     const sizeSpacer = () => { if (spacer) spacer.style.height = (aside.classList.contains("up") ? 260 : aside.offsetHeight + 16) + "px"; };
     const ro = new ResizeObserver(() => { layout(); sizeSpacer(); }); ro.observe(host);
 
@@ -192,20 +216,23 @@ html[data-theme="dark"] .mbp-sheet{box-shadow:0 -10px 30px rgba(0,0,0,.5)}
     function goStop(k, play) {
       const s = st.stops[k]; if (!s) return; haltSpeech(); st.mode = "lesson"; st.k = k; st.j = 0; st.partLines = new Set(); st.playing = !!play;
       if (s.words) post({ type: "mbx-show", focus: [], lens: null, play: false }); else post({ type: "mbx-show", phase: s.phase, focus: s.focus, lens: s.lens || null, win: s.win || null, speed: s.speed, play: true });
-      renderLines(); renderNow(); caption(s.say); if (play) speak(); }
+      closePick(); renderLines(); renderNow(); caption(s.say); saveProg({ k }); if (play) speak(); }
     function speak() { const s = st.stops[st.k]; if (!s) return; st.playing = true; renderNow();
-      const parts = sentences(s.say); const f = (st.lesson.flags || []).find((x) => s.lines.includes(x.line) && !st.flagSaid.has(x.line));
+      const parts = sentences(s.say); const f = st.tier === "overview" ? null : (st.lesson.flags || []).find((x) => s.lines.includes(x.line) && !st.flagSaid.has(x.line));
       if (f) parts.push(f.say);
       o.warm && o.warm(parts.slice(st.j, st.j + 3));
       const next = () => { if (st.j >= parts.length) { if (f) st.flagSaid.add(f.line);
+          if (st.tier === "exam" && s.quiz && !s.replay) { st.playing = false; renderNow(); ask(st.k); return; }
+          s.replay = false;
           if (st.through && st.k + 1 < st.stops.length) { const tok = st.token; setTimeout(() => { if (tok === st.token) goStop(st.k + 1, true); }, 700); }
-          else { st.playing = false; st.through = false; renderNow(); } return; }
+          else { st.playing = false; const end = st.k === st.stops.length - 1; st.through = false; renderNow(); if (end && st.mode === "lesson") finish(); } return; }
         const t = parts[st.j++]; caption(t); say(t, next); };
       next(); }
     function togglePlay() {
       if (st.mode === "loading") { caption("Still reading your note — the plate is yours to explore meanwhile.", true); return; }
       if (st.playing) { haltSpeech(); post({ type: "mbx-play", on: false }); renderNow(); return; }
       st.through = true;
+      if (st.picking && st.k < 0) { const r = resumable(); if (r) return choose(r.tier, r.k); return choose(st.lesson && st.lesson.overview && st.lesson.overview.length && false ? "overview" : "full", 0); }
       if (st.k < 0 || st.mode !== "lesson" || st.j >= sentences(st.stops[st.k].say).length + 1) goStop(st.k < 0 || st.mode !== "lesson" ? Math.max(0, st.k) : (st.k + 1) % st.stops.length, true);
       else { post({ type: "mbx-play", on: !st.stops[st.k].words }); st.j = Math.max(0, st.j - 1); speak(); } }
     function learn(id, phase) {
@@ -220,11 +247,17 @@ html[data-theme="dark"] .mbp-sheet{box-shadow:0 -10px 30px rgba(0,0,0,.5)}
         if (a === "play") togglePlay();
         else if (a === "prev") { st.through = false; goStop(Math.max(0, st.k - 1), true); }
         else if (a === "next") { st.through = false; goStop(Math.min(st.stops.length - 1, st.k + 1), true); }
+        else if (a === "lengths") { haltSpeech(); post({ type: "mbx-play", on: false }); openPick("start"); }
         else if (a === "voice") { st.voice = !st.voice; store.set("mbp-voice", st.voice); if (!st.voice) { try { o.stopSpeak && o.stopSpeak(); } catch (_) {} } renderNow(); } });
       aside.onclick = (e) => {
         const fl = e.target.closest("[data-flag]"); if (fl) { st.tipOpen = st.tipOpen === fl.dataset.flag ? null : fl.dataset.flag; renderLines(); e.stopPropagation(); return; }
-        const ln = e.target.closest(".mbp-ln"); if (ln) { const k = stopOfLine(ln.dataset.l); if (k >= 0) { st.through = false; goStop(k, true); if (!wide && aside.classList.contains("up")) sheet(false); } return; }
-        if (e.target.closest(".mbp-more")) sheet(!aside.classList.contains("up")); };
+        const ln = e.target.closest(".mbp-ln"); if (ln) { let k = stopOfLine(ln.dataset.l);
+          if (k < 0 && st.tier !== "full" && st.full.some((x) => x.lines.includes(ln.dataset.l))) { setTier("full"); k = stopOfLine(ln.dataset.l); }
+          if (k >= 0) { st.through = false; goStop(k, true); if (!wide && aside.classList.contains("up")) sheet(false); } return; }
+        if (e.target.closest(".mbp-more")) sheet(!aside.classList.contains("up"));
+        const c = e.target.closest("[data-pick]"); if (c && c.getAttribute("aria-disabled") !== "true") { const [t, k] = c.dataset.pick.split(":"); choose(t, +k || 0); }
+        const op = e.target.closest("[data-opt]"); if (op && st.exam && st.exam.answered == null) answer(+op.dataset.opt);
+        const nx = e.target.closest("[data-next]"); if (nx) { const a = nx.dataset.next; if (a === "go") afterQuestion(); else if (a === "start") openPick("start"); else choose(a, 0); } };
       const d = root.querySelector(".mbp-dots"); if (d) d.onclick = (e) => { const b = e.target.closest("[data-k]"); if (b) { st.through = false; goStop(+b.dataset.k, true); } };
       const g = aside.querySelector(".mbp-grab"); if (g) { let y0 = null;
         g.onpointerdown = (e) => { y0 = e.clientY; g.setPointerCapture(e.pointerId); };
@@ -232,10 +265,61 @@ html[data-theme="dark"] .mbp-sheet{box-shadow:0 -10px 30px rgba(0,0,0,.5)}
     function sheet(upOn) { aside.classList.toggle("up", upOn); renderLines(); sizeSpacer(); if (upOn) setTimeout(scrollToOn, 30); }
 
     /* ---------- lesson ---------- */
-    function useLesson(lesson) { st.lesson = lesson; st.stops = lesson.steps || []; st.mode = "ready"; st.k = -1; linkPlate(); renderLines(); renderNow(); sizeSpacer(); }
+    function useLesson(lesson) { st.lesson = lesson; st.full = lesson.steps || []; st.mode = "ready"; st.k = -1; setTier((loadProg() || {}).tier || "full"); linkPlate(); renderLines(); renderNow(); openPick("start"); }
     function useFallback(why) { if (why) st.fallbackWhy = why; st.mode = "fallback";
-      if (st.fallback && st.fallback.steps) { st.lesson = { steps: st.fallback.steps.map((s) => ({ ...s, lines: [] })), mentions: null, flags: [] }; st.stops = st.lesson.steps; st.mode = "fallback"; }
-      linkPlate(); renderLines(); renderNow(); }
+      if (st.fallback && st.fallback.steps) { st.lesson = { steps: st.fallback.steps.map((s) => ({ ...s, lines: [] })), mentions: null, flags: [], overview: [], exam: [] }; st.full = st.lesson.steps; setTier("full"); st.mode = "fallback"; }
+      linkPlate(); renderLines(); renderNow(); if (st.full.length) openPick("start"); }
+
+    /* ---------- lengths: overview · full · exam ---------- */
+    const TIERS = { overview: "2-minute overview", full: "Full walk-through", exam: "Exam revision" };
+    function stopsFor(tier) { const L = st.lesson || {}, F = st.full;
+      if (tier === "overview" && (L.overview || []).length) return L.overview.filter((x) => F[x.stop]).map((x) => ({ ...F[x.stop], say: x.say, full: x.stop }));
+      if (tier === "exam" && (L.exam || []).length) return L.exam.filter((x) => F[x.stop]).map((x) => ({ ...F[x.stop], quiz: x, full: x.stop }));
+      return F.map((x, i) => ({ ...x, full: i })); }
+    const has = (tier) => tier === "full" ? st.full.length > 0 : ((st.lesson || {})[tier] || []).length > 0;
+    function setTier(tier) { st.tier = has(tier) ? tier : "full"; st.stops = stopsFor(st.tier); st.k = -1; renderDots(); }
+    const minutes = (stops, tier) => Math.max(1, Math.round((stops.reduce((a, s) => a + String(s.say).split(/\s+/).length, 0) / 2.3 + stops.length * 3 + (tier === "exam" ? stops.length * 14 : 0)) / 60));
+    /* progress per topic: the app keeps it in the student's synced data; standalone pages use this browser */
+    const pkey = "mbp-prog:" + (o.progressKey || P.id);
+    function loadProg() { if (st.prog) return st.prog; let p = null; try { p = o.loadProgress ? o.loadProgress() : null; } catch (_) {} st.prog = p || store.get(pkey, null); return st.prog; }
+    function saveProg(patch) { if (st.mode === "fallback" && !st.full.length) return; const p = Object.assign({ done: {} }, loadProg() || {}, { tier: st.tier, n: st.stops.length, at: Date.now() }, patch);
+      if (patch && patch.k != null) p.title = (st.stops[patch.k] || {}).title || ""; st.prog = p; store.set(pkey, p); try { o.saveProgress && o.saveProgress(p); } catch (_) {} }
+    function resumable() { const p = loadProg(); if (!p || p.k == null || !has(p.tier)) return null; const n = stopsFor(p.tier).length;
+      if (p.k <= 0 && !p.exam) return null; if (p.finished === p.tier || p.k >= n - 1 && p.finished === p.tier) return null; return { tier: p.tier, k: Math.min(p.k, n - 1), n, title: p.title || "" }; }
+    function choose(tier, k) { setTier(tier); st.through = true; if (tier === "exam") st.exam = { i: 0, right: k ? ((loadProg() || {}).exam || {}).right || 0 : 0, answered: null }; saveProg({ k, finished: null }); goStop(Math.min(k, st.stops.length - 1), true); }
+
+    function openPick(kind) { st.picking = kind; aside.classList.add("pk"); renderPick(); if (!wide) { aside.classList.remove("up"); } sizeSpacer(); }
+    function closePick() { if (!st.picking) return; st.picking = false; aside.classList.remove("pk"); renderPick(); sizeSpacer(); }
+    function card(pick, ic, title, sub, right, main, disabled, extra) { return `<button class="mbp-c${main ? " main" : ""}" data-pick="${pick}"${disabled ? ' aria-disabled="true"' : ""}><span class="ic" aria-hidden="true">${ic}</span><span class="tx"><b>${esc(title)}</b><span>${sub}</span>${extra || ""}</span>${right ? `<em>${right}</em>` : ""}</button>`; }
+    function renderPick() { const box = aside.querySelector(".mbp-pick"); if (!box) return; if (!st.picking) { box.innerHTML = ""; return; }
+      const p = loadProg() || { done: {} }, done = (t) => p.done && p.done[t] ? ' · <span class="ok">✓ done</span>' : "";
+      if (st.picking === "start") {
+        const r = resumable(), fb = st.mode === "fallback";
+        let h = `<div class="mbp-h">${fb ? "Standard lesson · not matched to your note" : "How long have you got?"}</div>`;
+        if (r) { const left = stopsFor(r.tier).slice(r.k); h += card(r.tier + ":" + r.k, "▶", "Continue the " + TIERS[r.tier].replace(/^\d-minute /, "").toLowerCase(), `Stop ${r.k + 1} of ${r.n}${r.title ? " · " + esc(r.title) : ""} · about ${minutes(left, r.tier)} min left`, "", true, false, `<span class="mbp-pbar" aria-hidden="true"><i style="width:${Math.round(100 * r.k / r.n)}%"></i></span>`); }
+        if (!fb) h += card("overview:0", "2′", TIERS.overview, has("overview") ? `The big picture of your note in ${stopsFor("overview").length} stops` + done("overview") : "Not ready for this note yet", has("overview") ? minutes(stopsFor("overview")) + " min" : "", !r, !has("overview"));
+        h += card("full:0", "≡", fb ? "Standard walk-through" : TIERS.full, (fb ? "The plate's own tour" : "Every line of your note, in order") + done("full"), minutes(stopsFor("full")) + " min", !r && fb, false);
+        if (!fb) h += card("exam:0", "?", TIERS.exam, has("exam") ? `${stopsFor("exam").length} high-yield stops, a question after each` + (p.exam && p.exam.of ? ` · last time ${p.exam.right}/${p.exam.of}` : "") : "Not ready for this note yet", has("exam") ? minutes(stopsFor("exam"), "exam") + " min" : "", false, !has("exam"));
+        box.innerHTML = h; }
+      else if (st.picking === "question") { const s = st.stops[st.k], q = s.quiz, E = st.exam;
+        box.innerHTML = `<div class="mbp-h">Question ${st.k + 1} of ${st.stops.length} · from your note</div><div class="mbp-q"><p>${esc(q.q)}</p></div>`
+          + q.options.map((t, m) => `<button class="mbp-opt${E.answered == null ? "" : m === q.answer ? " right" : m === E.answered ? " wrong" : ""}" data-opt="${m}"${E.answered != null ? ' aria-disabled="true"' : ""}><span class="k">${"ABC"[m]}</span>${esc(t)}</button>`).join("")
+          + (E.answered == null ? "" : `<div class="mbp-why">${E.answered === q.answer ? "<b>Right.</b> " : "<b>Not quite.</b> "}${esc(q.why)}</div>`
+            + `<div class="mbp-row">${E.answered === q.answer || E.replayed ? `<button class="mbp-btn p" data-next="go">${st.k + 1 < st.stops.length ? "Next stop" : "See your score"}</button>` : `<span style="font-size:13px;color:var(--dim);align-self:center">Replaying that stop…</span>`}</div>`); }
+      else if (st.picking === "done") { const t = st.tier, sc = t === "exam" && st.exam ? `You got <b>${st.exam.right} of ${st.stops.length}</b> right.` : "";
+        box.innerHTML = `<div class="mbp-h">${TIERS[t]} · done ✓</div><div class="mbp-q"><p>${t === "exam" ? sc : "That's your note on this plate."}</p></div>`
+          + `<div class="mbp-row">${t !== "exam" && has("exam") ? `<button class="mbp-btn p" data-next="exam">Exam revision</button>` : ""}${t === "exam" ? `<button class="mbp-btn p" data-next="exam">Try again</button>` : ""}<button class="mbp-btn" data-next="${t}">Replay</button><button class="mbp-btn" data-next="start">Other lengths</button></div>`; }
+      if (!wide) sizeSpacer(); }
+    function ask(k) { const s = st.stops[k]; st.exam = Object.assign(st.exam || { right: 0 }, { answered: null, replayed: false }); openPick("question"); post({ type: "mbx-play", on: false }); caption(s.quiz.q); say(s.quiz.q, () => {}); }
+    function answer(m) { const s = st.stops[st.k], ok = m === s.quiz.answer; st.exam.answered = m; if (ok) st.exam.right++; renderPick();
+      saveProg({ k: st.k, exam: { right: st.exam.right, of: st.stops.length, at: st.k } }); try { o.onAnswer && o.onAnswer({ stop: s.full, ok }); } catch (_) {}
+      say((ok ? "Right. " : "Not quite. ") + s.quiz.why, () => { if (!ok && st.picking === "question") { const tok = st.token; setTimeout(() => { if (tok !== st.token) return; const k = st.k; st.stops[k].replay = true; replayThenAsk(k); }, 500); } }); }
+    function replayThenAsk(k) { // a wrong answer replays that stop, then offers "Next stop"
+      const s = st.stops[k]; haltSpeech(); st.k = k; st.j = 0; st.playing = true; s.replay = true;
+      if (s.words) post({ type: "mbx-show", focus: [], lens: null, play: false }); else post({ type: "mbx-show", phase: s.phase, focus: s.focus, lens: s.lens || null, win: s.win || null, speed: s.speed, play: true });
+      const parts = sentences(s.say); let j = 0; const next = () => { if (j >= parts.length) { s.replay = false; st.playing = false; st.exam.replayed = true; renderPick(); renderNow(); return; } caption(parts[j]); say(parts[j++], next); }; next(); }
+    function afterQuestion() { closePick(); if (st.k + 1 < st.stops.length) { st.through = true; goStop(st.k + 1, true); } else finish(); }
+    function finish() { const p = loadProg() || {}; const d = Object.assign({}, p.done, { [st.tier]: true }); saveProg({ k: st.stops.length - 1, finished: st.tier, done: d }); openPick("done"); }
     st.voice = store.get("mbp-voice", st.voice);
     layout();
     fetch(P.manifest).then((r) => r.json()).then((m) => { st.manifest = m; linkPlate(); renderLines(); }).catch(() => {});
@@ -246,7 +330,7 @@ html[data-theme="dark"] .mbp-sheet{box-shadow:0 -10px 30px rgba(0,0,0,.5)}
 
     function destroy() { if (destroyed) return; destroyed = true; haltSpeech(); clearInterval(watch); ro.disconnect(); mo.disconnect(); window.removeEventListener("message", onMsg); if (spacer) spacer.remove(); if (root.isConnected) host.innerHTML = ""; }
     const watch = setInterval(() => { if (!root.isConnected) destroy(); }, 800);   // the app re-renders pages by replacing HTML: stop talking when we're gone
-    return { destroy, state: st, goStop, lines };
+    return { destroy, state: st, goStop, choose, openPick, ask, finish, lines };
   }
 
   window.MBPlate = { PLATES, match, splitNote, mount };
