@@ -98,14 +98,14 @@ YOUR LAST ANSWER WAS REJECTED. Fix exactly these problems and keep everything el
 }
 
 /* ---------- checks ---------- */
-const STOP = new Set("about above after again against all also and another any are around because been before being below between both but by can cannot does doing down during each even every few first for from further gets have having here into its itself just keeps less like made makes many more most much must near next not now only other our out over same should since some such than that their them then there these they this those through thus under until very what when called means which leave leaves where which while with within without would your you".split(" "));
+const STOP = new Set("about above after again against all also and another any are around because been before being below between both but by can cannot does doing down during each even every few first for from further gets have having here into its itself just keeps less like made makes many more most much must near next not now only other our out over same should since some such than that their them then there these they this those through thus under until very what when called means which leave leaves minus equals plus roughly where which while with within without would your you".split(" "));
 /* how a note's shorthand is said aloud, so "mOsm/kg" grounds "milliosmoles per kilogram" */
 const SPOKEN = [[/mOsm\/kg|mOsm/gi, " milliosmoles per kilogram "], [/mmHg/gi, " millimetres of mercury "], [/mL\/min/gi, " millilitres a minute "], [/\bmL\b/gi, " millilitres "],
-  [/L\/day/gi, " litres a day "], [/\bL\b/g, " litres "], [/%/g, " percent "], [/[~≈]/g, " about "], [/>/g, " more than "], [/</g, " less than "], [/→/g, " so "],
+  [/L\/day/gi, " litres a day "], [/\bL\b/g, " litres "], [/%/g, " percent "], [/[~≈]/g, " about "], [/>/g, " more than "], [/</g, " less than "], [/→/g, " so "], [/\s[−–-]\s/g, " minus "], [/=/g, " equals "], [/\+\s/g, " plus "],
   [/\bNa\+/g, " sodium "], [/\bK\+/g, " potassium "], [/\bCl[−-]/g, " chloride "], [/\bHCO3[−-]?/gi, " bicarbonate "], [/\bADH\b/g, " ADH antidiuretic "], [/\bGFR\b/g, " GFR glomerular filtration rate "]];
 export const spoken = (s) => SPOKEN.reduce((t, [re, w]) => t.replace(re, w), String(s || ""));
 const stem = (w) => w.toLowerCase().replace(/[^a-z0-9]/g, "").replace(/(ies)$/, "y").replace(/(ing|ed|es|s)$/, "");
-const words = (s) => spoken(s).toLowerCase().split(/[^a-z0-9+]+/).filter((w) => w.length >= 5 && !STOP.has(w)).map(stem);
+const words = (s) => spoken(s).toLowerCase().replace(/meters?\b/g, (m) => m.replace("meter", "metre")).replace(/liters?\b/g, (m) => m.replace("liter", "litre")).split(/[^a-z0-9+]+/).filter((w) => w.length >= 5 && !STOP.has(w)).map(stem);
 /* standalone numbers only (not the 2 in NKCC2 or the 1 in AQP1) */
 const nums = (s) => (String(s || "").replace(/(\d),(\d{3})/g, "$1$2").match(/(?<![A-Za-z\d.])\d+(?:\.\d+)?/g) || []).map(Number);
 const numSet = (s) => new Set(nums(s));
