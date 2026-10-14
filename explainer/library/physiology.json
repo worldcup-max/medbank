@@ -410,7 +410,9 @@
        "status": "built",
        "wave": 1,
        "order": 1,
-       "note": "Four-Chamber Heart plate (hand-built); port into the library format"
+       "note": "Ported from the hand-built Four-Chamber Heart artifact (same drawing, chart with ECG and Left/Right heart toggle), manifest.json",
+       "built_at": "2026-10-14T08:51:45+00:00",
+       "plate": "explainer/library/physiology/cardiac-cycle-wiggers/cardiac-cycle-wiggers.html"
       },
       {
        "id": "pressure-volume-loop",
@@ -1115,7 +1117,9 @@
        "status": "built",
        "wave": 1,
        "order": 2,
-       "note": "Opus plate in explainer/studio/out/nephron-compare/src-opus; polish then publish"
+       "note": "Opus plate, polished: decluttered cortex, labels off tubes, manifest.json",
+       "built_at": "2026-10-14T08:27:56+00:00",
+       "plate": "explainer/library/physiology/nephron-urine-journey/nephron-urine-journey.html"
       },
       {
        "id": "pct-reabsorption",

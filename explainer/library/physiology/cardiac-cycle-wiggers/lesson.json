@@ -1,0 +1,18 @@
+{ "steps": [
+ { "title": "The rule", "phase": "Diastasis", "focus": ["mitral", "aortic", "tricuspid", "pulmonary"], "speed": 0.25,
+   "say": "Every valve in the heart is passive. It opens only when the pressure behind it is higher than the pressure in front, and it shuts the moment that reverses. Watch the four valves and the pressures beside each chamber, and the whole cycle explains itself." },
+ { "title": "Atrial systole", "phase": "Atrial systole", "focus": ["RA", "LA", "tricuspid", "mitral"], "speed": 0.15,
+   "say": "Just after the P wave, the atria contract. Left atrial pressure bumps up a few millimetres of mercury, the a wave, and pushes the last top-up of blood into the ventricles. The left ventricle reaches its end-diastolic volume, about 125 millilitres here." },
+ { "title": "Isovolumetric contraction", "phase": "Isovolumetric contraction", "focus": ["LV", "RV", "mitral", "aortic"], "speed": 0.12,
+   "say": "After the QRS, the ventricles contract. As soon as left ventricular pressure rises above the atrium, the mitral valve shuts, and that is the first heart sound. But pressure is still below the aorta's 80, so the aortic valve stays shut too. Both valves closed means the volume cannot change: pressure climbs steeply at a fixed volume." },
+ { "title": "Ejection", "phase": "Ventricular ejection", "focus": ["LV", "aortic", "aorta", "RV", "pulmonary", "pa"], "speed": 0.2,
+   "say": "When left ventricular pressure passes the aortic pressure of about 80, the aortic valve is forced open and blood is ejected. Pressure in the ventricle and aorta rises together to about 120. The right ventricle does the same into the pulmonary artery, but at only about 20 millimetres of mercury." },
+ { "title": "Stroke volume", "phase": "Ventricular ejection", "focus": ["LV"], "speed": 0.2,
+   "say": "By the end of ejection the left ventricle is down to about 55 millilitres, the end-systolic volume. End-diastolic minus end-systolic volume is the stroke volume, about 70 millilitres, and 70 out of 125 is an ejection fraction of about 55 percent." },
+ { "title": "Isovolumetric relaxation", "phase": "Isovolumetric relaxation", "focus": ["LV", "aortic", "mitral"], "speed": 0.12,
+   "say": "Now the ventricle relaxes. Its pressure drops below the aorta, so the aortic valve snaps shut: the second heart sound, and the dicrotic notch on the aortic trace. Pressure is still above the atrium, so the mitral stays shut. Again both valves are closed, and pressure falls at a fixed volume." },
+ { "title": "Rapid filling", "phase": "Rapid filling", "focus": ["LA", "LV", "mitral", "RA", "tricuspid"], "speed": 0.2,
+   "say": "When ventricular pressure falls below the atrium, the mitral and tricuspid valves open. Blood that piled up in the atria during systole rushes in. Most ventricular filling happens now, passively, before the atria ever contract." },
+ { "title": "Diastasis", "phase": "Diastasis", "focus": ["LA", "LV", "pveins", "cavae"], "speed": 0.25,
+   "say": "Atrial and ventricular pressures have nearly equalised, so filling slows to a trickle, fed straight through from the veins. Then the next P wave fires, and the cycle repeats about 75 times a minute, each beat taking 0.8 seconds." }
+]}

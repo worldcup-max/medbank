@@ -57,12 +57,12 @@ function frame({ meta, stageHtml, legendHtml }) {
   <header><div class="fig">${esc(meta.figLabel || "Plate")}</div><h1>${esc(meta.title)} <em>${esc(meta.titleEm || "")}</em></h1><p class="sub">${esc(meta.sub || "")}</p></header>
   <section class="plate main"><div class="stage">${stageHtml}<div class="legend">${legendHtml || ""}</div></div>
     <div class="ledger"><div><div class="eyebrow">Phase</div><p class="phase" id="phase">—</p><div class="clock" id="clock"></div></div>
-      <p class="why" id="why"></p><table id="gatesT"><thead><tr><th id="gatesH">Gate</th><th>Why</th><th class="r">State</th></tr></thead><tbody id="gates"></tbody></table>
+      <p class="why" id="why"></p><table id="gatesT"><thead><tr><th id="gatesH">Gate</th><th id="gatesW">Why</th><th class="r">State</th></tr></thead><tbody id="gates"></tbody></table>
       <div class="nums" id="nums"></div></div></section>
   <section class="plate tutor" aria-label="Tutor"><div class="eyebrow">Tutor</div><div class="say" id="say">Press “Tutor me” for a guided walk-through, or explore on your own.</div>
     <div class="steps" id="steps"></div><div><button id="tutor">▶ Tutor me</button> <button id="mute" aria-pressed="false">Voice on</button></div></section>
   <section class="plate"><div class="controls"><button id="play" aria-pressed="true">Pause</button><button id="prev">◀ Phase</button><button id="next">Phase ▶</button>
-      <span class="lbl">Speed</span><div class="seg" id="speed"></div><span class="spacer"></span><button id="sound" aria-pressed="false" hidden>Sound off</button></div>
+      <span class="lbl">Speed</span><div class="seg" id="speed"></div><span class="spacer"></span><span class="lbl" id="modesL" hidden>Chart</span><div class="seg" id="modes" hidden></div><button id="sound" aria-pressed="false" hidden>Sound off</button></div>
     <div class="chartwrap"><svg id="chart" class="chart" viewBox="0 0 1000 330" tabindex="0" role="slider" aria-label="Timeline. Drag or use arrow keys."></svg></div></section>
   <p class="notes" id="notes"></p><div class="err" id="err"></div>
 </div>`;
@@ -86,7 +86,7 @@ function runStudio(createScene, LESSON) {
   window.__studio.tracer = !!TR; window.__studio.parcelParts = [...new Set(S.map((s) => s.parcel && s.parcel.part).filter(Boolean))]; window.__studio.paths = Object.keys(scene.paths || {});
   window.__studio.registered = Object.keys(K.parts());
   // ledger
-  const gates = M.gates || []; if (!gates.length) $("gatesT").hidden = true; else $("gatesH").textContent = M.gateTitle || "Gate";
+  const gates = M.gates || []; if (!gates.length) $("gatesT").hidden = true; else $("gatesH").textContent = M.gateTitle || "Gate"; if (M.gateWhy) $("gatesW").textContent = M.gateWhy;
   const grows = gates.map((g) => { const tr = document.createElement("tr"); tr.innerHTML = "<td></td><td class='g'></td><td class='r'><span class='pill'></span></td>"; tr.children[0].textContent = g.label; $("gates").appendChild(tr); return { g, d: tr.children[1], p: tr.querySelector(".pill") }; });
   const big = (M.readouts || []).filter((r) => r.big).slice(0, 4);
   big.forEach((r) => { const d = document.createElement("div"); d.className = "num"; d.innerHTML = "<div class='v'></div><div class='l'></div>"; d.lastChild.textContent = r.label + (r.unit ? ", " + r.unit : ""); r.el = d.firstChild; $("nums").appendChild(d); });
@@ -95,26 +95,36 @@ function runStudio(createScene, LESSON) {
   function ledger(i) { const s = S[i]; $("phase").textContent = s.phase; $("clock").textContent = "t = " + fmt(i * T / N, unit === "s" ? 3 : 1) + " " + unit + " of " + fmt(T, unit === "s" ? 3 : 1) + " " + unit + (M.clockNote ? " · " + M.clockNote : "");
     try { $("why").innerHTML = M.explain ? M.explain(s, i * T / N) : ""; } catch (e) { $("why").textContent = ""; }
     grows.forEach((r) => { let on = false; try { on = !!r.g.on(s); r.d.textContent = r.g.detail ? r.g.detail(s) : ""; } catch (_) {} r.p.textContent = on ? (M.onWord || "OPEN") : (M.offWord || "SHUT"); r.p.className = "pill " + (on ? "on" : "off"); });
-    big.forEach((r) => { r.el.textContent = fmt(s.readouts[r.key], r.digits); }); }
+    big.forEach((r) => { let v; try { v = r.text ? r.text(s) : null; } catch (_) {} r.el.textContent = v != null ? v : fmt(s.readouts[r.key], r.digits); }); }
   // chart
   const chart = $("chart"), CX0 = 58, CX1 = 985, xOf = (i) => CX0 + (CX1 - CX0) * i / N; let cursor;
-  const lanes = (M.chart || []).slice(0, 3);
-  function drawChart() { chart.innerHTML = ""; const g = K.el("g", {}, chart);
+  // lanes: M.chart, or M.chartModes [{label, lanes}] with a toggle (e.g. left / right heart). Optional per lane: weight (relative height),
+  // step (gridline every step), grid:false, marks [{t, label}] (e.g. P, QRS, T), noEvents (event lines start below this lane), dot (series key
+  // that gets a cursor dot); per series: at (0–1 of the cycle, where its label sits), label "" (no label), width.
+  const modes = M.chartModes && M.chartModes.length ? M.chartModes : null; let mode = 0, dots = [];
+  const lanesNow = () => { const l = modes ? modes[mode].lanes : null; return ((Array.isArray(l) ? l : M.chart) || []).slice(0, 3); };  // a mode with lanes:null shows M.chart
+  function drawChart() { chart.innerHTML = ""; const g = K.el("g", {}, chart), lanes = lanesNow(); dots = [];
     BANDS.forEach((b, j) => { K.el("rect", { x: xOf(b.a), y: 4, width: xOf(b.b) - xOf(b.a), height: 300, fill: j % 2 ? "var(--ground)" : "var(--sheet)" }, g);
       if (xOf(b.b) - xOf(b.a) > 40) { const t = K.el("text", { x: (xOf(b.a) + xOf(b.b)) / 2, y: 322, "text-anchor": "middle" }, g); const room = Math.floor((xOf(b.b) - xOf(b.a) - 8) / 7), nm = (M.short && M.short[b.name]) || b.name; t.textContent = nm.length > room ? nm.slice(0, Math.max(3, room - 1)) + "…" : nm; } });
-    const H = 296 / Math.max(1, lanes.length);
-    lanes.forEach((ln, li) => { const y0 = 8 + li * H, y1 = y0 + H - 18; let lo = ln.min, hi = ln.max;
+    const W = lanes.map((l) => l.weight || 1), WT = W.reduce((a, b) => a + b, 0) || 1; let yAcc = 8, evTop = 6;
+    lanes.forEach((ln, li) => { const H = 296 * W[li] / WT, y0 = yAcc, y1 = y0 + H - 18; yAcc += H; if (ln.noEvents) evTop = yAcc - 4; let lo = ln.min, hi = ln.max;
       if (lo == null || hi == null) { let a = Infinity, b = -Infinity; ln.series.forEach((sr) => S.forEach((s) => { const v = s.readouts[sr.key]; if (typeof v === "number" && isFinite(v)) { a = Math.min(a, v); b = Math.max(b, v); } })); const pad = (b - a) * 0.08 || 1; lo = lo ?? a - pad; hi = hi ?? b + pad; }
       const yv = (v) => y1 - (v - lo) / ((hi - lo) || 1) * (y1 - y0 - 8);
-      [lo, hi].forEach((v) => { K.el("line", { x1: CX0, x2: CX1, y1: yv(v), y2: yv(v), stroke: "var(--hair)", "stroke-width": 0.8 }, g); K.el("text", { x: CX0 - 6, y: yv(v) + 4, "text-anchor": "end" }, g).textContent = fmt(v, Math.abs(hi - lo) < 5 ? 1 : 0); });
-      K.el("text", { x: CX0 + 6, y: y0 + 12 }, g).textContent = ln.unit || ln.lane;
+      if (ln.grid !== false) { const ticks = []; if (ln.step) { for (let v = Math.ceil(lo / ln.step - 1e-9) * ln.step; v <= hi + 1e-9; v += ln.step) ticks.push(v); } else ticks.push(lo, hi);
+        ticks.forEach((v) => { K.el("line", { x1: CX0, x2: CX1, y1: yv(v), y2: yv(v), stroke: "var(--hair)", "stroke-width": 0.8 }, g); K.el("text", { x: CX0 - 6, y: yv(v) + 4, "text-anchor": "end" }, g).textContent = fmt(v, Math.abs(hi - lo) < 5 ? 1 : 0); }); }
+      K.el("text", ln.step || ln.grid === false ? { x: 6, y: y0 + (ln.grid === false ? H / 2 - 4 : 12) } : { x: CX0 + 6, y: y0 + 12 }, g).textContent = ln.unit || ln.lane;
+      (ln.marks || []).forEach((m) => { const t = K.el("text", { x: xOf(Math.round(m.t / T * N)), y: y0 + 4, "text-anchor": "middle" }, g); t.textContent = m.label; });
       ln.series.forEach((sr, k) => { let d = ""; S.forEach((s, i) => { const v = s.readouts[sr.key]; if (typeof v === "number" && isFinite(v)) d += (d ? "L" : "M") + K.f1(xOf(i)) + " " + K.f1(yv(v)); });
         const col = { hot: "var(--hot)", cold: "var(--cold)", accent: "var(--accent)", muted: "var(--muted)", ink: "var(--ink)" }[sr.tone] || ["var(--hot)", "var(--cold)", "var(--accent)", "var(--muted)"][k % 4];
-        K.el("path", { d, fill: "none", stroke: col, "stroke-width": sr.dash ? 1.6 : 2.1, "stroke-dasharray": sr.dash ? "6 3" : "" }, g);
-        const bi = Math.round(N * (0.12 + 0.27 * k)) % N, bv = S[bi].readouts[sr.key];
-        const t = K.el("text", { x: xOf(bi) + 4, y: yv(typeof bv === "number" ? bv : lo) - 6 }, g); t.textContent = sr.label; t.setAttribute("style", "fill:var(--ink)"); }); });
-    EV.forEach((ev) => { const i = Math.round(ev.t / T * N); K.el("line", { x1: xOf(i), x2: xOf(i), y1: 6, y2: 304, stroke: "var(--ink)", "stroke-width": 0.8, "stroke-dasharray": "2 3" }, g); const t = K.el("text", { x: xOf(i) + 4, y: 16 }, g); t.textContent = ev.label; t.setAttribute("style", "fill:var(--ink)"); });
-    cursor = K.el("line", { x1: 0, x2: 0, y1: 2, y2: 306, stroke: "var(--accent)", "stroke-width": 2 }, chart); }
+        K.el("path", { d, fill: "none", stroke: col, "stroke-width": sr.width || (sr.dash ? 1.6 : 2.1), "stroke-dasharray": sr.dash ? "6 3" : "", "stroke-linejoin": "round" }, g);
+        if (sr.label === "") return; const bi = sr.at != null ? Math.round(N * sr.at) % N : Math.round(N * (0.12 + 0.27 * k)) % N, bv = S[bi].readouts[sr.key];
+        const t = K.el("text", { x: xOf(bi) + 4, y: yv(typeof bv === "number" ? bv : lo) - 6 }, g); t.textContent = sr.label; t.setAttribute("style", "fill:var(--ink)"); });
+      if (ln.dot) dots.push({ key: ln.dot, yv }); });
+    EV.forEach((ev) => { const i = Math.round(ev.t / T * N); K.el("line", { x1: xOf(i), x2: xOf(i), y1: evTop, y2: 304, stroke: "var(--ink)", "stroke-width": 0.8, "stroke-dasharray": "2 3" }, g); const t = K.el("text", { x: xOf(i) + 4, y: evTop + 10 }, g); t.textContent = ev.label; t.setAttribute("style", "fill:var(--ink)"); });
+    cursor = K.el("line", { x1: 0, x2: 0, y1: 2, y2: 306, stroke: "var(--accent)", "stroke-width": 2 }, chart);
+    dots.forEach((d) => { d.c = K.el("circle", { r: 4, fill: "var(--accent)" }, chart); }); }
+  if (modes) { $("modes").hidden = false; $("modesL").hidden = false; modes.forEach((m, k) => { const b = document.createElement("button"); b.textContent = m.label; b.setAttribute("aria-pressed", String(k === 0));
+    b.onclick = () => { mode = k; $("modes").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); drawChart(); prevI = -1; render(0); }; $("modes").appendChild(b); }); }
   drawChart(); matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawChart);
   // playback
   let t = (M.startAt || 0) * T, playing = !matchMedia("(prefers-reduced-motion: reduce)").matches, speed = (M.speeds || [0.25])[Math.min(1, (M.speeds || [0.25]).length - 1)], prevI = -1, sound = false, actx = null;
@@ -123,7 +133,7 @@ function runStudio(createScene, LESSON) {
   function thump(f) { if (!sound) return; try { actx = actx || new AudioContext(); const o = actx.createOscillator(), gN = actx.createGain(), now = actx.currentTime; o.frequency.setValueAtTime(f || 60, now); o.frequency.exponentialRampToValueAtTime(30, now + 0.12); gN.gain.setValueAtTime(0.0001, now); gN.gain.exponentialRampToValueAtTime(0.8, now + 0.01); gN.gain.exponentialRampToValueAtTime(0.0001, now + 0.15); o.connect(gN).connect(actx.destination); o.start(now); o.stop(now + 0.2); } catch (_) {} }
   const idx = () => Math.floor(((t % T + T) % T) / T * N) % N;
   function render(dBeat) { const i = idx(); if (TR) TR.set(S[i].parcel.part, S[i].parcel.u, parcelText(S[i])); try { scene.update(i, S[i], dBeat); } catch (e) { if (!window.__studio.sceneError) { window.__studio.sceneError = String(e.message); window.__studio.errors.push("scene.update: " + e.message); } }
-    if (i !== prevI) { ledger(i); cursor.setAttribute("transform", "translate(" + K.f1(xOf(i)) + " 0)");
+    if (i !== prevI) { ledger(i); cursor.setAttribute("transform", "translate(" + K.f1(xOf(i)) + " 0)"); dots.forEach((d) => { const v = S[i].readouts[d.key]; d.c.setAttribute("cx", K.f1(xOf(i))); d.c.setAttribute("cy", K.f1(d.yv(typeof v === "number" ? v : 0))); });
       if (playing && prevI >= 0) EV.forEach((ev) => { const k = Math.round(ev.t / T * N); if ((prevI < i && k > prevI && k <= i) || (prevI > i && (k > prevI || k <= i))) if (ev.sound) thump(ev.freq); }); prevI = i; }
     window.__studio.frames++; window.__studio.i = i; }
   let last = 0; function tick(now) { const dt = last ? Math.min((now - last) / 1000, 0.05) : 0; last = now; if (playing) { const d = dt * speed * (M.playRate || 1); t = (t + d) % T; render(d / T * (M.flowScale || 1)); } requestAnimationFrame(tick); }
@@ -145,7 +155,7 @@ function runStudio(createScene, LESSON) {
   function voice(text, done) { if (muted) return setTimeout(done, 700 + text.length * 55); if (window.parent !== window) { const id = "s" + Math.random(); const h = (e) => { if (e.data && e.data.type === "mbx-said" && e.data.id === id) { window.removeEventListener("message", h); done(); } }; window.addEventListener("message", h); window.parent.postMessage({ type: "mbx-speak", id, text }, "*"); setTimeout(() => { window.removeEventListener("message", h); }, 30000); return; }
     try { const u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.onend = done; u.onerror = done; speechSynthesis.speak(u); } catch (_) { setTimeout(done, 800 + text.length * 55); } }
   function goStep(k) { si = k; const s = steps[k]; if (!s) return; $("steps").querySelectorAll("button").forEach((b, j) => b.classList.toggle("on", j === k));
-    const band = BANDS.find((b) => b.name === s.phase); if (band) { scrubTo((band.a + 2) / N * T); } else if (typeof s.at === "number") scrubTo(s.at * T);
+    const band = BANDS.filter((b) => b.name === s.phase).sort((x, y) => (y.b - y.a) - (x.b - x.a))[0]; /* a phase can recur in one cycle: use its longest window */ if (band) { scrubTo((band.a + 2) / N * T); } else if (typeof s.at === "number") scrubTo(s.at * T);
     setPlaying(true); speed = s.speed || 0.1; K.focus(s.focus || []);
     const parts = sentences(s.say), id = ++sayId; let j = 0;
     const next = () => { if (id !== sayId) return; if (j >= parts.length) { if (tutoring && k + 1 < steps.length) setTimeout(() => goStep(k + 1), 900); else { tutoring = false; $("tutor").textContent = "▶ Tutor me"; K.focus([]); } return; }

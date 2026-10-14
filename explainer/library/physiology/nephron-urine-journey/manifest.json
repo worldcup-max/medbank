@@ -1,0 +1,282 @@
+{
+ "schema": "medbank-plate-manifest/1",
+ "id": "nephron-urine-journey",
+ "course": "physiology",
+ "title": "How the nephron makes urine",
+ "sub": "Follow one parcel of filtrate: each segment's wall decides whether water or salt may leave, and the depth of the medulla decides how far it goes.",
+ "kind": "journey",
+ "timeUnit": "s",
+ "duration": 133,
+ "conditions": [
+  "Juxtamedullary (long-loop) nephron",
+  "ADH on: concentrated urine",
+  "GFR 125 mL/min",
+  "Steady medullary gradient 300 → 1200 mOsm/kg"
+ ],
+ "phases": [
+  {
+   "name": "Glomerular filtration",
+   "from": 0,
+   "to": 3.103,
+   "shows": "Plasma is filtered from the glomerular capillaries into Bowman's space by a net filtration pressure of 10 mmHg (55 − 15 − 30); the parcel starts as 300 mOsm/kg filtrate."
+  },
+  {
+   "name": "Proximal convoluted tubule",
+   "from": 3.103,
+   "to": 15.073,
+   "shows": "Iso-osmotic reabsorption: Na⁺ is pumped out and water follows, so ~65% of the volume leaves while osmolality stays 300; all glucose and most bicarbonate are reclaimed."
+  },
+  {
+   "name": "Thin descending limb",
+   "from": 15.073,
+   "to": 35.023,
+   "shows": "Water-only wall: water leaves into the increasingly salty medulla, so the fluid concentrates to ~1200 mOsm/kg at the loop tip."
+  },
+  {
+   "name": "Thick ascending limb",
+   "from": 35.023,
+   "to": 57.19,
+   "shows": "Water-tight wall: NKCC2 pumps NaCl out, so the fluid dilutes (to ~100) while the interstitium is kept salty; the single effect that builds the gradient."
+  },
+  {
+   "name": "Distal convoluted tubule",
+   "from": 57.19,
+   "to": 73.15,
+   "shows": "NCC (thiazide-sensitive) removes more NaCl with no water; the fluid becomes most dilute; the macula densa sits at its start."
+  },
+  {
+   "name": "Cortical collecting duct",
+   "from": 73.15,
+   "to": 85.12,
+   "shows": "Principal cells: aldosterone drives ENaC Na⁺ uptake and K⁺ secretion; with ADH, water leaves and the fluid returns to ~300."
+  },
+  {
+   "name": "Medullary collecting duct",
+   "from": 85.12,
+   "to": 133,
+   "shows": "With ADH (AQP2), water leaves into the deep medulla so the urine concentrates toward ~1200 mOsm/kg, with under 1% of the filtrate left."
+  }
+ ],
+ "parts": [
+  {
+   "id": "aff",
+   "name": "Afferent arteriole",
+   "shows": "Afferent arteriole: brings blood into the glomerulus; its pressure sets glomerular capillary pressure."
+  },
+  {
+   "id": "glom",
+   "name": "Glomerulus",
+   "shows": "Glomerular capillary tuft where plasma is filtered."
+  },
+  {
+   "id": "eff",
+   "name": "Efferent arteriole",
+   "shows": "Efferent arteriole: carries blood out of the glomerulus into the peritubular capillaries and vasa recta."
+  },
+  {
+   "id": "bowman",
+   "name": "Bowman's capsule",
+   "shows": "Bowman's capsule: collects the filtrate; its pressure (15 mmHg) opposes filtration."
+  },
+  {
+   "id": "pct",
+   "name": "Proximal convoluted tubule",
+   "shows": "Proximal convoluted tubule with brush border: bulk iso-osmotic reabsorption (Na⁺, water, glucose, HCO₃⁻)."
+  },
+  {
+   "id": "tdl",
+   "name": "Thin descending limb",
+   "shows": "Thin descending limb: permeable to water (AQP1), not salt."
+  },
+  {
+   "id": "tal",
+   "name": "Thick ascending limb",
+   "shows": "Thick ascending limb: NKCC2 salt pump, impermeable to water; target of loop diuretics."
+  },
+  {
+   "id": "md",
+   "name": "Macula densa",
+   "shows": "Macula densa: tall cells of the late thick limb that sense NaCl delivery next to the glomerulus (tubuloglomerular feedback)."
+  },
+  {
+   "id": "dct",
+   "name": "Distal convoluted tubule",
+   "shows": "Distal convoluted tubule: NCC salt uptake, water-tight; target of thiazides."
+  },
+  {
+   "id": "cd",
+   "name": "Collecting duct",
+   "shows": "Collecting duct: aldosterone (ENaC, ROMK) and ADH-controlled water reabsorption (AQP2); sets final urine concentration."
+  },
+  {
+   "id": "ptc",
+   "name": "Peritubular capillaries",
+   "shows": "Peritubular capillaries: take back what the cortical tubule reabsorbs."
+  },
+  {
+   "id": "vr",
+   "name": "Vasa recta",
+   "shows": "Vasa recta: hairpin capillaries in the medulla that supply it without washing out the gradient (countercurrent exchange)."
+  },
+  {
+   "id": "interstitium",
+   "name": "Medullary interstitium",
+   "shows": "Medullary interstitium: osmolality rising from 300 at the corticomedullary border to 1200 at the papilla."
+  }
+ ],
+ "readouts": [
+  {
+   "key": "osm",
+   "label": "Tubular fluid",
+   "unit": "mOsm/kg",
+   "range": [
+    89.17,
+    1183
+   ],
+   "shows": "Osmolality of the tubular fluid in the parcel right now."
+  },
+  {
+   "key": "vol",
+   "label": "Filtrate left",
+   "unit": "%",
+   "range": [
+    0.6269,
+    100
+   ],
+   "shows": "Percentage of the original filtrate volume still left in the tubule."
+  },
+  {
+   "key": "intOsm",
+   "label": "Interstitium here",
+   "unit": "mOsm/kg",
+   "range": [
+    300,
+    1200
+   ],
+   "shows": "Osmolality of the interstitium around the parcel at its current depth."
+  },
+  {
+   "key": "flowDay",
+   "label": "Flow at this point",
+   "unit": "L/day",
+   "range": [
+    1.128,
+    180
+   ],
+   "shows": "Tubular flow at this point scaled to both kidneys, in litres per day."
+  },
+  {
+   "key": "gap",
+   "label": "Lumen minus interstitium",
+   "unit": "mOsm/kg",
+   "range": [
+    -210.8,
+    0.6862
+   ],
+   "shows": "Tubular fluid minus interstitial osmolality: negative means the fluid is more dilute than its surroundings."
+  },
+  {
+   "key": "waterOut",
+   "label": "Water leaving parcel",
+   "unit": "%/s",
+   "range": [
+    0,
+    45.94
+   ],
+   "shows": "Rate at which water is leaving the parcel."
+  },
+  {
+   "key": "saltOut",
+   "label": "Solute leaving parcel",
+   "unit": "%/s",
+   "range": [
+    0,
+    33.34
+   ],
+   "shows": "Rate at which solute is leaving the parcel."
+  },
+  {
+   "key": "glucose",
+   "label": "Glucose left",
+   "unit": "%",
+   "range": [
+    0.01179,
+    100
+   ],
+   "shows": "Percentage of filtered glucose still in the tubule."
+  },
+  {
+   "key": "hco3",
+   "label": "Bicarbonate left",
+   "unit": "%",
+   "range": [
+    19.97,
+    100
+   ],
+   "shows": "Percentage of filtered bicarbonate still in the tubule."
+  },
+  {
+   "key": "depth",
+   "label": "Depth into medulla",
+   "unit": "0–1",
+   "range": [
+    -0.4773,
+    1.007
+   ],
+   "shows": "How deep the parcel is in the medulla (0 = corticomedullary border, 1 = papilla tip; negative = cortex)."
+  },
+  {
+   "key": "nfp",
+   "label": "Net filtration pressure",
+   "unit": "mmHg",
+   "range": [
+    10,
+    10
+   ],
+   "shows": "Net filtration pressure across the glomerular membrane."
+  }
+ ],
+ "concepts": [
+  "glomerular filtration and Starling forces",
+  "GFR",
+  "nephron segments in order",
+  "proximal iso-osmotic reabsorption",
+  "glucose and bicarbonate reabsorption",
+  "loop of Henle permeabilities",
+  "countercurrent multiplier",
+  "medullary osmotic gradient",
+  "vasa recta countercurrent exchange",
+  "macula densa",
+  "distal tubule NaCl reabsorption",
+  "aldosterone action on principal cells",
+  "ADH and aquaporin-2",
+  "concentrated urine formation",
+  "sites of action of diuretics (loop, thiazide)"
+ ],
+ "not_shown": [
+  "urea recycling",
+  "dilute urine (ADH off)",
+  "renin–angiotensin system",
+  "tubuloglomerular feedback dynamics",
+  "acid secretion by intercalated cells",
+  "potassium handling in detail",
+  "renal clearance calculations",
+  "cortical (short-loop) nephrons"
+ ],
+ "tutor": {
+  "rule": "The student's note drives the tutor. Explain only what the note says, in the note's terms, order and depth. Never teach concepts of this topic that are not in the note.",
+  "use": "Pick only the phases and parts the note covers; parts the note does not mention stay dimmed and silent. Note content this plate cannot show is explained in words (no phase/focus) and listed in 'extend'.",
+  "step": {
+   "title": "short heading",
+   "phase": "one of phases[].name",
+   "focus": "array of parts[].id",
+   "speed": "0.1–1 playback speed",
+   "say": "2–4 sentences, written for the ear, in the note's own terms"
+  },
+  "output": {
+   "steps": "[step]",
+   "extend": "[note concepts this plate cannot show]"
+  },
+  "fallbackLesson": "lesson.json (recorded voice, used only when there is no note)"
+ }
+}

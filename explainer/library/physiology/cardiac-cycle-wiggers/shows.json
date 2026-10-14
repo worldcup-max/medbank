@@ -1,0 +1,69 @@
+{
+ "conditions": [
+  "Heart rate 75 bpm (cycle 0.8 s)",
+  "Normal adult resting heart",
+  "Frontal cutaway of all four chambers with both circulations"
+ ],
+ "phases": {
+  "Atrial systole": "The atria contract (a wave) and top up the ventricles; atrioventricular valves open, semilunar valves shut.",
+  "Isovolumetric contraction": "Ventricles contract with all four valves shut (S1 at AV closure); pressure rises steeply at constant volume.",
+  "Ventricular ejection": "LV pressure exceeds aortic (~80 mmHg) and RV exceeds pulmonary pressure; semilunar valves open and the stroke volume is ejected; LV peaks near 120 mmHg.",
+  "Isovolumetric relaxation": "Ventricles relax with all valves shut; aortic valve closure gives S2 and the dicrotic notch; pressure falls at constant volume (ESV).",
+  "Rapid filling": "Ventricular pressure falls below atrial; AV valves open and most ventricular filling occurs passively.",
+  "Diastasis": "Atrial and ventricular pressures nearly equal; slow filling straight from the veins."
+ },
+ "parts": {
+  "RA": "Right atrium: receives deoxygenated blood from the venae cavae; contracts in atrial systole.",
+  "RV": "Right ventricle: pumps into the pulmonary artery at low pressure (~20 mmHg systolic).",
+  "LA": "Left atrium: receives oxygenated blood from the pulmonary veins; pressure ~5–10 mmHg.",
+  "LV": "Left ventricle: thick-walled pump into the aorta; pressure 0–120 mmHg, volume ~125 → ~55 mL.",
+  "tricuspid": "Tricuspid valve: right atrioventricular valve; opens when RA pressure > RV pressure.",
+  "pulmonary": "Pulmonary valve: right semilunar valve; opens when RV pressure > pulmonary artery pressure.",
+  "mitral": "Mitral valve: left atrioventricular valve; opens when LA pressure > LV pressure; its closure contributes to S1.",
+  "aortic": "Aortic valve: left semilunar valve; opens when LV pressure > aortic pressure; its closure contributes to S2.",
+  "aorta": "Aorta: receives the LV stroke volume; elastic recoil keeps diastolic pressure ~80 mmHg.",
+  "pa": "Pulmonary trunk and arteries: carry RV output to the lungs.",
+  "cavae": "Superior and inferior venae cavae: return systemic venous blood to the right atrium.",
+  "pveins": "Pulmonary veins: return oxygenated blood to the left atrium."
+ },
+ "readouts": {
+  "LVP": "Left ventricular pressure.",
+  "AoP": "Aortic pressure (systolic/diastolic arterial pressure).",
+  "LAP": "Left atrial pressure (a, c and v waves).",
+  "RVP": "Right ventricular pressure.",
+  "PAP": "Pulmonary artery pressure.",
+  "RAP": "Right atrial pressure (≈ central venous pressure).",
+  "LVV": "Left ventricular volume: end-diastolic volume at its peak, end-systolic volume at its trough.",
+  "RVV": "Right ventricular volume.",
+  "LAV": "Left atrial volume.",
+  "RAV": "Right atrial volume.",
+  "SV": "Stroke volume = end-diastolic minus end-systolic volume.",
+  "EF": "Ejection fraction = stroke volume / end-diastolic volume.",
+  "ecg": "Schematic surface ECG on the same clock: P wave starts atrial contraction, QRS just before ventricular contraction, T wave during late ejection."
+ },
+ "concepts": [
+  "phases of the cardiac cycle",
+  "Wiggers diagram: pressure and volume against time",
+  "pressure gradients open and close the valves",
+  "atrioventricular vs semilunar valves",
+  "first heart sound (S1) and second heart sound (S2)",
+  "isovolumetric contraction and relaxation",
+  "atrial contribution to filling (atrial kick)",
+  "rapid filling and diastasis",
+  "end-diastolic volume, end-systolic volume, stroke volume, ejection fraction",
+  "left vs right heart pressures",
+  "aortic pressure: systolic, diastolic, dicrotic notch",
+  "pulmonary and systemic circulations through the four chambers"
+ ],
+ "not_shown": [
+  "ECG waves (P, QRS, T) as a trace",
+  "jugular venous pulse trace",
+  "pressure–volume loop",
+  "Frank–Starling mechanism / changing preload or afterload",
+  "effect of heart rate on the cycle",
+  "third and fourth heart sounds",
+  "valve disease murmurs",
+  "coronary blood flow",
+  "cardiac output regulation"
+ ]
+}

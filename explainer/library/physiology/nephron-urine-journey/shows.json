@@ -1,0 +1,72 @@
+{
+ "conditions": [
+  "Juxtamedullary (long-loop) nephron",
+  "ADH on: concentrated urine",
+  "GFR 125 mL/min",
+  "Steady medullary gradient 300 → 1200 mOsm/kg"
+ ],
+ "phases": {
+  "Glomerular filtration": "Plasma is filtered from the glomerular capillaries into Bowman's space by a net filtration pressure of 10 mmHg (55 − 15 − 30); the parcel starts as 300 mOsm/kg filtrate.",
+  "Proximal convoluted tubule": "Iso-osmotic reabsorption: Na⁺ is pumped out and water follows, so ~65% of the volume leaves while osmolality stays 300; all glucose and most bicarbonate are reclaimed.",
+  "Thin descending limb": "Water-only wall: water leaves into the increasingly salty medulla, so the fluid concentrates to ~1200 mOsm/kg at the loop tip.",
+  "Thick ascending limb": "Water-tight wall: NKCC2 pumps NaCl out, so the fluid dilutes (to ~100) while the interstitium is kept salty; the single effect that builds the gradient.",
+  "Distal convoluted tubule": "NCC (thiazide-sensitive) removes more NaCl with no water; the fluid becomes most dilute; the macula densa sits at its start.",
+  "Cortical collecting duct": "Principal cells: aldosterone drives ENaC Na⁺ uptake and K⁺ secretion; with ADH, water leaves and the fluid returns to ~300.",
+  "Medullary collecting duct": "With ADH (AQP2), water leaves into the deep medulla so the urine concentrates toward ~1200 mOsm/kg, with under 1% of the filtrate left."
+ },
+ "parts": {
+  "aff": "Afferent arteriole: brings blood into the glomerulus; its pressure sets glomerular capillary pressure.",
+  "glom": "Glomerular capillary tuft where plasma is filtered.",
+  "eff": "Efferent arteriole: carries blood out of the glomerulus into the peritubular capillaries and vasa recta.",
+  "bowman": "Bowman's capsule: collects the filtrate; its pressure (15 mmHg) opposes filtration.",
+  "pct": "Proximal convoluted tubule with brush border: bulk iso-osmotic reabsorption (Na⁺, water, glucose, HCO₃⁻).",
+  "tdl": "Thin descending limb: permeable to water (AQP1), not salt.",
+  "tal": "Thick ascending limb: NKCC2 salt pump, impermeable to water; target of loop diuretics.",
+  "md": "Macula densa: tall cells of the late thick limb that sense NaCl delivery next to the glomerulus (tubuloglomerular feedback).",
+  "dct": "Distal convoluted tubule: NCC salt uptake, water-tight; target of thiazides.",
+  "cd": "Collecting duct: aldosterone (ENaC, ROMK) and ADH-controlled water reabsorption (AQP2); sets final urine concentration.",
+  "ptc": "Peritubular capillaries: take back what the cortical tubule reabsorbs.",
+  "vr": "Vasa recta: hairpin capillaries in the medulla that supply it without washing out the gradient (countercurrent exchange).",
+  "interstitium": "Medullary interstitium: osmolality rising from 300 at the corticomedullary border to 1200 at the papilla."
+ },
+ "readouts": {
+  "osm": "Osmolality of the tubular fluid in the parcel right now.",
+  "vol": "Percentage of the original filtrate volume still left in the tubule.",
+  "intOsm": "Osmolality of the interstitium around the parcel at its current depth.",
+  "flowDay": "Tubular flow at this point scaled to both kidneys, in litres per day.",
+  "gap": "Tubular fluid minus interstitial osmolality: negative means the fluid is more dilute than its surroundings.",
+  "waterOut": "Rate at which water is leaving the parcel.",
+  "saltOut": "Rate at which solute is leaving the parcel.",
+  "glucose": "Percentage of filtered glucose still in the tubule.",
+  "hco3": "Percentage of filtered bicarbonate still in the tubule.",
+  "depth": "How deep the parcel is in the medulla (0 = corticomedullary border, 1 = papilla tip; negative = cortex).",
+  "nfp": "Net filtration pressure across the glomerular membrane."
+ },
+ "concepts": [
+  "glomerular filtration and Starling forces",
+  "GFR",
+  "nephron segments in order",
+  "proximal iso-osmotic reabsorption",
+  "glucose and bicarbonate reabsorption",
+  "loop of Henle permeabilities",
+  "countercurrent multiplier",
+  "medullary osmotic gradient",
+  "vasa recta countercurrent exchange",
+  "macula densa",
+  "distal tubule NaCl reabsorption",
+  "aldosterone action on principal cells",
+  "ADH and aquaporin-2",
+  "concentrated urine formation",
+  "sites of action of diuretics (loop, thiazide)"
+ ],
+ "not_shown": [
+  "urea recycling",
+  "dilute urine (ADH off)",
+  "renin–angiotensin system",
+  "tubuloglomerular feedback dynamics",
+  "acid secretion by intercalated cells",
+  "potassium handling in detail",
+  "renal clearance calculations",
+  "cortical (short-loop) nephrons"
+ ]
+}
