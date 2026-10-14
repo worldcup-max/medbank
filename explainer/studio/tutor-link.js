@@ -8,7 +8,7 @@
  * stay. Only the plate's own header and its built-in tutor panel are hidden while linked (the app shows its own).
  *
  * Messages IN  (parent → plate):
- *   {type:"mbx-link", parts:{id:{name, shows, covered}}, unlocked:[ids], dark}   start linked mode
+ *   {type:"mbx-link", parts:{id:{name, shows, covered, qs}}, unlocked:[ids], dark}   start linked mode (qs: ready questions for the part's popover)
  *   {type:"mbx-show", phase, focus:[ids], lens, win, speed, play}               move the stage to a stop (lens opens a close-up)
  *   {type:"mbx-play", on}  {type:"mbx-theme", dark}  {type:"mbx-unlock", id}  {type:"mbx-pop-close"}
  *   {type:"mbx-ask", before, ring:[ids], banner}   freeze just before phase 'before' (prediction) or anywhere (banner only); taps report mbx-pick
@@ -17,6 +17,7 @@
  * Messages OUT (plate → parent):
  *   {type:"mbx-linked", parts:[ids], phases:[names], lesson:{steps}}   (lesson = the plate's default, used only as a fallback)  {type:"mbx-height", h}  {type:"mbx-playing", on}
  *   {type:"mbx-tap", id, covered}  {type:"mbx-learn", id, phase}  {type:"mbx-pick", id}  {type:"mbx-phase", phase}
+ *   {type:"mbx-askq", id, q}  {type:"mbx-askown", id}   Ask the plate: a part's ready question was tapped / "or ask your own"
  */
 (function () {
   if (window.__mbxLink) return; window.__mbxLink = true;
@@ -88,6 +89,8 @@ html.mbx-mini .main{border:0!important;background:transparent!important}html.mbx
 .mbx-pop .tg.out{border:1px dashed var(--muted);color:var(--muted)}.mbx-pop .tg.in{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)}
 .mbx-pop .go{margin-top:10px;width:100%;min-height:42px;border-radius:9px;border:1.5px solid var(--accent);color:var(--accent);background:transparent;font:600 14px var(--body)}
 .mbx-banner{position:absolute;left:8px;right:8px;top:8px;z-index:25;background:rgba(109,40,217,.94);color:#fff;border-radius:10px;padding:8px 11px;font:600 13px/1.35 var(--body);pointer-events:none}
+.mbx-pop .qs{display:grid;gap:6px;margin-top:9px}.mbx-pop .q{text-align:left;min-height:40px;border-radius:9px;border:1px solid var(--hair);background:transparent;color:var(--accent);font:600 13.5px var(--body);padding:8px 10px;line-height:1.3}
+.mbx-pop .own{border:0;background:none;color:var(--muted);font:12.5px var(--body);text-align:left;padding:2px 2px 0}
 .mbx-pop .x{position:absolute;top:4px;right:4px;width:34px;height:34px;border:0;background:transparent;color:var(--muted);font-size:18px;padding:0}`;
     doc.head.appendChild(css);
 
@@ -123,12 +126,20 @@ html.mbx-mini .main{border:0!important;background:transparent!important}html.mbx
     function showPop(id, x, y) { closePop(); const P = PARTS[id] || {}, host = svg.parentNode; host.style.position = "relative";
       const covered = P.covered || unlocked.has(id);
       pop = doc.createElement("div"); pop.className = "mbx-pop"; pop.setAttribute("role", "dialog");
-      pop.innerHTML = "<button class='x' aria-label='Close'>×</button><b></b><span class='tg'></span><p></p>" + (covered ? "" : "<button class='go'>Learn it anyway</button>");
+      const qs = (P.qs || []).slice(0, 3);   // Ask the plate (feature 6): three ready questions about this part
+      pop.innerHTML = "<button class='x' aria-label='Close'>×</button><b></b><span class='tg'></span><p></p>" + (qs.length ? "<div class='qs'>" + qs.map((q, i) => "<button class='q' data-i='" + i + "'></button>").join("") + "<button class='own'>or ask your own ↓</button></div>" : "") + (covered ? "" : "<button class='go'>Learn it anyway</button>");
+      pop.querySelectorAll(".q").forEach((b) => { const q = qs[+b.dataset.i]; b.textContent = q; b.onclick = (e) => { e.stopPropagation(); closePop(); up({ type: "mbx-askq", id, q }); }; });
+      const own = pop.querySelector(".own"); if (own) own.onclick = (e) => { e.stopPropagation(); closePop(); up({ type: "mbx-askown", id }); };
       pop.querySelector("b").textContent = P.name || id;
       const tg = pop.querySelector(".tg"); tg.className = "tg " + (P.covered ? "in" : "out"); tg.textContent = P.covered ? "In your note" : unlocked.has(id) ? "Extra · you opened this" : "Not in your note";
       pop.querySelector("p").textContent = P.covered ? "The lines about it are highlighted in your note." : (P.shows || "");
       pop.querySelector(".x").onclick = (e) => { e.stopPropagation(); closePop(); };
       const go = pop.querySelector(".go"); if (go) go.onclick = (e) => { e.stopPropagation(); unlocked.add(id); paint(); closePop(); up({ type: "mbx-learn", id, phase: phaseOf(id) }); };
+      if (qs.length) {   // with questions the card needs room: place it on the whole page, not inside a narrow (lens-split) stage
+        if (P.covered) pop.querySelector("p").remove();
+        pop.style.width = Math.min(270, innerWidth - 16) + "px"; doc.body.appendChild(pop); const W = pop.offsetWidth, H = pop.offsetHeight;
+        pop.style.left = (Math.max(8, Math.min(innerWidth - W - 8, x - W / 2)) + scrollX) + "px";
+        pop.style.top = ((y - H - 14 > 4 ? y - H - 14 : y + 18) + scrollY) + "px"; return; }
       host.appendChild(pop);
       const hr = host.getBoundingClientRect(), W = pop.offsetWidth, H = pop.offsetHeight, lx = x - hr.left, ly = y - hr.top;
       pop.style.left = Math.max(6, Math.min(hr.width - W - 6, lx - W / 2)) + "px";

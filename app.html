@@ -2772,6 +2772,10 @@ function pageLecturer(id){
 let topicTab='note', topicTabFor=null;
 /* ===== Topic Preview — the pre-read "orientation video" (SPEC-TOPIC-PREVIEW.md; flag-gated) ===== */
 var _PREVIEW={};   // in-memory per-topic cache (kept OUT of DATA so big blueprints never bloat the synced blob)
+/* Background redraws (sync landing, fresh content, a preview finishing) must not rebuild a 3D lesson that is running: rebuilding reloads the
+   plate and loses an open answer or explain-back. They wait until the student leaves the 3D Tutor tab (any tab change redraws anyway). */
+function mbSoftRender(){ try{ if(_mbpCur&&_mbpCur.api.alive&&_mbpCur.api.alive()&&typeof topicTab!=='undefined'&&topicTab==='mech3d'&&/^#\/topic\//.test(location.hash||'')){ window.__mbRenderLater=true; return; } }catch(e){} render(); }
+window.mbSoftRender=mbSoftRender;
 function previewOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES&&C.FEATURES.TOPIC_PREVIEW); }catch(e){ return false; } }
 /* The preview used to collapse every possible setback into one dead end: no auth session YET (the
    commonest one — on a cold load Supabase has not finished restoring it when the first note opens),
@@ -2781,7 +2785,7 @@ function previewOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES
    session. Only a real, final refusal should look final; everything else is worth another go. */
 function _pvSoft(t, why, attempt){
   var waits=[1500,4000,10000,20000];
-  if(attempt>=waits.length){ _PREVIEW[t.id]={status:'failed', why:why}; try{ render(); }catch(e){} return; }
+  if(attempt>=waits.length){ _PREVIEW[t.id]={status:'failed', why:why}; try{ mbSoftRender(); }catch(e){} return; }
   _PREVIEW[t.id]={status:'building'};
   setTimeout(function(){ _pvFetch(t, attempt+1); }, waits[attempt]);
 }
@@ -2809,7 +2813,7 @@ async function _pvFetch(t, attempt){
     try{ if(window.smartLog&&j.status==='ready') smartLog({t:'preview_generated', topic_id:t.id, scenes:(j.scenes||[]).length}); }catch(e){}
   }catch(e){ return _pvSoft(t,'offline',attempt); }                                      // network blip
   finally{
-    try{ if((location.hash||'').indexOf(t.id)>=0 && (window.scrollY||window.pageYOffset||0) < 240) render(); }catch(e){}   // refresh the card when ready — but never yank a student who's already scrolled into the note
+    try{ if((location.hash||'').indexOf(t.id)>=0 && (window.scrollY||window.pageYOffset||0) < 240) mbSoftRender(); }catch(e){}   // refresh the card when ready — but never yank a student who's already scrolled into the note
   }
 }
 function ensureTopicPreview(t){
@@ -3129,7 +3133,7 @@ function mbxPlateFor(t){
 var _mbpLoad=null, _MBP_LESSON={}, _mbpCur=null, _mbpSaveT=null;
 /* "· 4/10" or "· ✓" on the 3D Tutor tab, from the student's synced progress */
 function mbpTabNote(t){ try{ var p=(DATA.tutor||{})[t.id]; if(!p) return ''; if(p.done&&(p.done.full||p.done.exam)) return ' · ✓'; if(p.k!=null&&p.n) return ' · '+(p.k+1)+'/'+p.n; }catch(e){} return ''; }
-var MBP_V='1.3.0';
+var MBP_V='1.4.0';
 function mbpLoad(){
   if(window.MBPlate&&window.MBPlate.mount) return Promise.resolve(window.MBPlate);
   if(_mbpLoad) return _mbpLoad;
@@ -3149,6 +3153,17 @@ function mbpLesson(t, pl){
     .then(function(j){ var l=j.lesson||null; if(l) try{ localStorage.setItem('mbp-les:'+k, JSON.stringify({h:mbpHash(String(t.note||'').slice(0,60000)), at:Date.now(), lesson:l})); }catch(e){} return l; })
     .catch(function(e){ delete _MBP_LESSON[k]; if(kept&&kept.lesson) return kept.lesson; throw e; });
   return _MBP_LESSON[k];
+}
+/* Ask the plate (feature 6): answers are kept on the device per topic (the same question again costs nothing and works offline) */
+function mbpAskNorm(q){ return String(q||'').toLowerCase().replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim(); }
+function mbpAsk(t,pl,x){
+  var k='mbp-ask:'+pl.id+'|'+t.id, h=mbpHash(String(t.note||'').slice(0,60000)), nq=mbpAskNorm(x.q), box={};
+  try{ box=JSON.parse(localStorage.getItem(k)||'{}'); if(box.h!==h) box={h:h,a:{}}; }catch(e){ box={h:h,a:{}}; }
+  if(box.a&&box.a[nq]) return Promise.resolve(box.a[nq]);
+  if(navigator.onLine===false) return Promise.reject(new Error('Asking a new question needs a connection — the questions you asked before still answer offline.'));
+  return mbxCall('/explainer/plate/ask',{plate:pl.id, topic:t.name, text:String(t.note||'').slice(0,60000), q:x.q, phase:x.phase||'', focus:x.focus||[]},2).then(function(j){
+    var a=j.answer||null; if(a){ try{ box.a=box.a||{}; box.a[nq]=a; var ks=Object.keys(box.a); if(ks.length>60) delete box.a[ks[0]]; localStorage.setItem(k,JSON.stringify(box)); }catch(e){} }
+    return a; });
 }
 /* Save a lesson for offline (feature 5), on any connection, once the student starts it: the plate files, then every line in the MedBank voice.
    Status per topic in localStorage mbp-off:<plate>|<topic> = {h, at, n} once complete; the start card shows the chip; a toast says it once. */
@@ -3173,17 +3188,20 @@ function mbpSaveOffline(pl,t,plate,api){
 function renderPlateTutor(t, pl){
   setTimeout(function(){
     var host=document.getElementById('mbpHost'); if(!host) return;
-    if(_mbpCur){ try{ _mbpCur.api.destroy(); }catch(e){} _mbpCur=null; }
+    var resume=null;   // a redraw of this same page while a lesson is running: the new tutor carries on at that stop
+    if(_mbpCur){ try{ var S0=_mbpCur.api.state; if(_mbpCur.tid===t.id&&_mbpCur.api.alive()&&S0.mode==='lesson'&&S0.k>=0) resume={tier:S0.tier,k:S0.k,play:!!S0.playing}; _mbpCur.api.destroy(); }catch(e){} _mbpCur=null; }
     mbpLoad().then(function(P){
       if(!host.isConnected) return;
       var plate=P.PLATES.filter(function(x){ return x.id===pl.id; })[0]; if(!plate) throw new Error('This plate is not in the library yet.');
-      var api=P.mount(host,{ plate:plate, note:String(t.note||''), getLesson:function(){ return mbpLesson(t,pl); },
+      var api=P.mount(host,{ plate:plate, resume:resume, note:String(t.note||''), getLesson:function(){ return mbpLesson(t,pl); },
         speak:function(text,done){ try{ voiceSpeak(text, done||null, 'read'); }catch(e){ if(done) done(); } },
         stopSpeak:function(){ try{ stopSpeak(); }catch(e){} },
         warm:function(lines){ try{ (lines||[]).forEach(function(l){ window.warmSpeak&&window.warmSpeak(l,'read'); }); }catch(e){} },
         isDark:function(){ return document.documentElement.getAttribute('data-theme')==='dark'; },
         progressKey:t.id,
-        onStart:function(a){ mbpSaveOffline(pl,t,plate,a); },   // saved once the student starts a lesson, on any connection
+        onStart:function(a){ mbpSaveOffline(pl,t,plate,a); },
+        ask:function(x){ return mbpAsk(t,pl,x); },
+        explain:function(x){ return mbxCall('/explainer/plate/explain',{plate:pl.id, topic:t.name, text:String(t.note||'').slice(0,60000), lines:x.lines, q:x.q, answer:x.answer},2).then(function(j){ return j.result||null; }); },   // saved once the student starts a lesson, on any connection
         offline:function(){ return mbpOffline(pl,t); },
         onCards:function(cards){ try{ touchTopic(t.id); }catch(e){} var n=addPlateCards(t.id,cards); if(n){ try{ mbToast(n+' card'+(n===1?'':'s')+' from this lesson added to your reviews — first one tomorrow.'); }catch(e){} } },
         loadProgress:function(){ return (DATA.tutor||{})[t.id]||null; },
@@ -8200,11 +8218,11 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
   // of presenting the first-paint numbers as final.
   window.__MB_SYNC_PENDING = true;
   var p = MB_SYNC.init();
-  var clearPending=function(){ window.__MB_SYNC_PENDING=false; try{ if(typeof render==='function') render(); }catch(e){} try{ if(window.MB_refreshAccountCard) window.MB_refreshAccountCard(); }catch(e){} };
+  var clearPending=function(){ window.__MB_SYNC_PENDING=false; try{ if(typeof render==='function') mbSoftRender(); }catch(e){} try{ if(window.MB_refreshAccountCard) window.MB_refreshAccountCard(); }catch(e){} };
   if(p && typeof p.then==='function') p.then(clearPending).catch(clearPending); else clearPending();
 } }catch(e){} });
 /* safety: never let the "Loading your notes…" state stick if content can't load */
-setTimeout(function(){ if(!window.__MB_CONTENT_READY){ window.__MB_CONTENT_READY=true; try{ render(); }catch(e){} } },9000);
+setTimeout(function(){ if(!window.__MB_CONTENT_READY){ window.__MB_CONTENT_READY=true; try{ mbSoftRender(); }catch(e){} } },9000);
 /* admin: check whether the free Kokoro voice is up (so basic tier isn't silently spending Fish credits) */
 setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }catch(e){} },6000);
 /* ============================================================

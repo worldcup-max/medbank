@@ -167,7 +167,7 @@
     Object.keys(DATA).forEach(function(k){ if(!(k in next)) return; DATA[k]=next[k]; });
     Object.keys(next).forEach(function(k){ DATA[k]=next[k]; });
     try{ localStorage.setItem("medbank_v1", JSON.stringify(DATA)); }catch(e){}
-    try{ if(typeof render==="function") render(); }catch(e){}
+    try{ if(typeof render==="function") (window.mbSoftRender||render)(); }catch(e){}   // not mid-3D-lesson (see mbSoftRender in app.html)
   }
 
   /* Does a synced state carry any real study progress? Used to refuse adopting an

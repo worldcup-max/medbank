@@ -25,7 +25,7 @@ import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
 import { EXPLAINER_TEMPLATES, explainerExcerpt, explainerKey, buildExplainerPrompt, parseExplainerLesson } from "./explainer.mjs";   // 3D Tutor
-import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPlateTutor } from "./plate-tutor.mjs";   // 3D Tutor · library plates, tutor from the note
+import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPlateTutor, plateAskKey, buildAskPrompt, checkAsk, buildExplainPrompt, checkExplain } from "./plate-tutor.mjs";   // 3D Tutor · library plates, tutor from the note
 import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
@@ -2022,6 +2022,57 @@ app.post("/explainer/plate", async (req,res)=>{
     (best.extend||[]).forEach(x => mbxRecordRequest(M.title+" · "+x, "requests", topic));
     res.json({ ok:true, cached:false, lesson:best });
   }catch(e){ console.error("[explainer/plate]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+/* Ask the plate (feature 6): one question → an answer from the student's note (or, marked, from the plate itself), checked like the
+ * lesson and cached per note + question, so a question asked again (by anyone with the same note) is free. */
+async function plateDailyCount(uid, template){ const since = new Date(); since.setUTCHours(0,0,0,0);
+  const c = await admin.from("explainers").select("cache_key",{ count:"exact", head:true }).eq("account_id",uid).eq("template",template).gte("created_at",since.toISOString());
+  return c.error ? 0 : (c.count||0); }
+app.post("/explainer/plate/ask", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const plate = (req.body.plate||"").toString().trim(), topic = (req.body.topic||"").toString().slice(0,120), q = (req.body.q||"").toString().replace(/\s+/g," ").trim().slice(0,300);
+    if(q.length < 3) return res.status(400).json({ error:"Ask a question about the plate." });
+    let M; try{ M = await loadManifest(plate); }catch(e){ return res.status(404).json({ error:"unknown plate" }); }
+    const lines = splitNote((req.body.text||"").toString().slice(0,60000)).slice(0,260);
+    const at = { phase: (req.body.phase||"").toString().slice(0,80), focus: (Array.isArray(req.body.focus)?req.body.focus:[]).map(String).slice(0,4) };
+    const key = plateAskKey(plate, lines, q);
+    try{ const c = await admin.from("explainers").select("lesson").eq("cache_key",key).maybeSingle(); if(c.data && c.data.lesson && c.data.lesson.say) return res.json({ ok:true, cached:true, answer:c.data.lesson }); }catch(_){}
+    try{ const premium = await isPremium(user.id, user.email).catch(()=>false);
+      if(await plateDailyCount(user.id, "plate-ask") >= (premium ? 200 : 60)) return res.status(429).json({ error:"daily limit", message:"You’ve asked the plate a lot today — questions you’ve asked before still answer." }); }catch(_){}
+    let answer = null, errors = null;
+    for(let attempt=0; attempt<2 && !answer; attempt++){
+      const gen = await generate({ model: BASIC_MODEL, prompt: buildAskPrompt(M, lines, q, at, errors), parts:[], images:[], max_tokens:700, temperature: attempt ? 0.1 : 0.25, json:true });
+      const r = checkAsk(gen.text, M, lines); if(!r.errors.length) answer = r.answer; else { errors = r.errors; console.warn("[plate/ask]", plate, "attempt", attempt+1, errors.slice(0,3).join(" | ")); }
+    }
+    if(!answer) return res.status(502).json({ error:"I couldn’t answer that from your note on this plate — try asking it another way." });
+    try{ await admin.from("explainers").upsert({ cache_key:key, template:"plate-ask", account_id:user.id, lesson:{ ...answer, q } }); }catch(_){}
+    if(!answer.inNote && !answer.offTopic) mbxRecordRequest(M.title+" · asked: "+q.slice(0,80), "requests", topic);
+    res.json({ ok:true, cached:false, answer });
+  }catch(e){ console.error("[plate/ask]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+/* Explain it back (feature 6): the student's own explanation of one concept, marked against that concept's note lines.
+ * Kept (template "plate-explain") for the student's history and for analytics; never cached, every answer is new. */
+app.post("/explainer/plate/explain", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const plate = (req.body.plate||"").toString().trim(), q = (req.body.q||"").toString().slice(0,200), answer = (req.body.answer||"").toString().replace(/\s+/g," ").trim().slice(0,900);
+    if(answer.length < 2) return res.status(400).json({ error:"Say or type your explanation first." });
+    let M; try{ M = await loadManifest(plate); }catch(e){ return res.status(404).json({ error:"unknown plate" }); }
+    const lines = splitNote((req.body.text||"").toString().slice(0,60000)).slice(0,260);
+    const ids = (Array.isArray(req.body.lines)?req.body.lines:[]).map(String).filter(x => lines.some(l => l.id===x && !l.h)).slice(0,12);
+    if(!ids.length) return res.status(400).json({ error:"no note lines for this concept" });
+    try{ if(await plateDailyCount(user.id, "plate-explain") >= 150) return res.status(429).json({ error:"daily limit", message:"That’s a lot of explaining for one day — the tutor carries on without marking." }); }catch(_){}
+    let result = null, partial = null, errors = null;
+    for(let attempt=0; attempt<2 && !result; attempt++){
+      const gen = await generate({ model: BASIC_MODEL, prompt: buildExplainPrompt(M, lines, ids, q, answer, errors), parts:[], images:[], max_tokens:700, temperature: attempt ? 0.1 : 0.2, json:true });
+      const r = checkExplain(gen.text, M, lines, ids); if(!r.errors.length) result = r.result; else { errors = r.errors; partial = r.result || partial; console.warn("[plate/explain]", plate, "attempt", attempt+1, errors.slice(0,3).join(" | ")); }
+    }
+    result = result || (partial ? { v:1, ...partial, say:null } : null);   // say:null → the app reads the missed lines from the note itself
+    if(!result) return res.status(502).json({ error:"Couldn’t mark that just now." });
+    try{ await admin.from("explainers").upsert({ cache_key:"explain-"+crypto.randomUUID(), template:"plate-explain", account_id:user.id, lesson:{ plate, q, answer, ids, result } }); }catch(_){}
+    res.json({ ok:true, result });
+  }catch(e){ console.error("[plate/explain]", e); res.status(500).json({ error:e.message||"server error" }); }
 });
 app.get("/admin/explainer/queue", async (req,res)=>{
   try{ const u = await requireAdmin(req); if(!u) return res.status(403).json({ error:"admins only" });

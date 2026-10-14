@@ -56,6 +56,7 @@
   }
 
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const SR = typeof window !== "undefined" && (window.SpeechRecognition || window.webkitSpeechRecognition) || null;
   const sentences = (x) => String(x || "").split(/(?<=[.!?])\s+/).filter(Boolean);
   const store = { get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (_) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} } };
 
@@ -88,10 +89,18 @@
 .mbp-dots i{display:block;width:7px;height:7px;border-radius:4px;background:var(--line);transition:width .2s}
 .mbp-dots .d i{background:color-mix(in srgb,var(--accent) 45%,transparent)}.mbp-dots .on i{background:var(--accent);width:18px}
 .mbp-dots .w i{border-radius:1px}
-.mbp-rail{grid-template-columns:minmax(0,1fr);border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:12px 10px 12px;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;display:grid;gap:2px;align-content:start}
+.mbp-rail{min-width:0;grid-template-columns:minmax(0,1fr);border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:12px 10px 12px;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;display:grid;gap:2px;align-content:start}
 .mbp-under{display:grid;gap:10px}.mbp-under:empty{display:none}
 .mbp-head{position:sticky;top:-12px;z-index:2;background:var(--panel);margin:-12px -10px 0;min-width:0;padding:12px 12px 12px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
 .mbp-head .mbp-cap{font-size:14.5px}
+.mbp-ask{display:flex;gap:8px;align-items:center;margin:6px 0 4px}.mbp-askin{flex:1;min-width:0;min-height:44px;border:1px solid var(--line);border-radius:22px;padding:0 15px;background:var(--panel);color:var(--text);font:15px system-ui}
+.mbp-askin:focus{outline:2px solid color-mix(in srgb,var(--accent) 55%,transparent);border-color:var(--accent)}.mbp-ic{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:18px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+.mbp-ic.p{background:var(--accent);border-color:var(--accent);color:#fff}.mbp-ic.rec,.mbp-btn.rec{background:#dc2626!important;border-color:#dc2626!important;color:#fff!important;animation:mbpPulse 1.1s ease-in-out infinite}@keyframes mbpPulse{50%{box-shadow:0 0 0 7px rgba(220,38,38,.18)}}
+.mbp-qq{margin:2px 0 6px;font-weight:700;font-size:15px;color:var(--text);line-height:1.4}.mbp-qa{margin:0 0 6px;font-size:14.5px;line-height:1.5;color:var(--text)}.mbp-qa.dim{color:var(--dim)}
+.mbp-src{display:block;font-size:12.5px;color:var(--dim);margin:0 0 8px}.mbp-tag{display:inline-block;border:1px dashed var(--dim);border-radius:99px;padding:0 8px;font-weight:600;font-size:11.5px;margin-right:4px}
+.mbp-tin{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--panel);color:var(--text);font:15px/1.45 system-ui;resize:vertical;margin:2px 0 8px}
+.mbp-mark{color:var(--accent);letter-spacing:3px;font-size:15px;margin:0 0 4px}.mbp-got,.mbp-miss{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:4px;font-size:14px;line-height:1.4}.mbp-got li{color:#047857}.mbp-miss li{color:var(--text)}.mbp-miss span{color:var(--dim);font-size:12.5px}
+:root[data-theme="dark"] .mbp-got li{color:#6ee7b7}.mbp-off2{border:0;background:none;color:var(--dim);font:12.5px system-ui;text-decoration:underline;padding:6px 0 0;cursor:pointer}
 .mbp-off{display:inline-flex;align-items:center;gap:6px;font:700 12.5px system-ui;border-radius:99px;padding:5px 11px;margin:0 0 8px;border:1px solid var(--line);color:var(--dim)}.mbp-off.ok{color:#047857;border-color:#a7f3d0;background:#ecfdf5}:root[data-theme="dark"] .mbp-off.ok{color:#6ee7b7;border-color:#065f46;background:rgba(16,185,129,.12)}
 .mbp-head .mbp-bar{flex-wrap:wrap;row-gap:2px}.mbp-head .mbp-dots{order:9;flex:1 0 100%;justify-content:flex-start}.mbp-head [data-a="voice"]{margin-left:auto}
 .mbp-sheet{grid-template-columns:minmax(0,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--panel);border-top:1px solid var(--line);border-radius:18px 18px 0 0;
@@ -107,7 +116,7 @@
 .mbp-sheet.up{grid-template-rows:auto auto minmax(0,1fr) auto auto auto}
 html[data-theme="dark"] .mbp-sheet{box-shadow:0 -10px 30px rgba(0,0,0,.5)}
 .mbp-len{border:0;background:transparent;color:var(--accent);font:600 12px system-ui;letter-spacing:0;text-transform:none;padding:6px 2px;cursor:pointer}
-.mbp-pick{display:none;gap:9px}.mbp-note.pk .mbp-pick{display:grid}
+.mbp-pick{display:none;gap:9px}.mbp-note.pk .mbp-pick{display:grid}.mbp-note.pk .mbp-ask{display:none}.mbp-note.pk.qa .mbp-ask{display:flex}
 .mbp-note.pk .mbp-cur,.mbp-note.pk .mbp-cap,.mbp-note.pk .mbp-more,.mbp-note.pk .mbp-bar,.mbp-note.pk .mbp-eb.mbp-now{display:none}
 .mbp-sheet.pk{max-height:78vh;overflow:auto}.mbp-sheet.pk.up .mbp-all{display:none}
 .mbp-h{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dimmer)}
@@ -143,7 +152,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
     if (!document.getElementById("mbp-css")) { const st = document.createElement("style"); st.id = "mbp-css"; st.textContent = CSS; document.head.appendChild(st); }
     const P = o.plate, lines = splitNote(o.note), LI = new Map(lines.map((l, i) => [l.id, i]));
     const ukey = "mbp-unlock:" + P.id;
-    const st = { lesson: null, stops: [], k: -1, j: 0, playing: false, through: false, voice: o.voice !== false, token: 0, mode: "loading",
+    const st = { taught: new Set(), qa: null, teach: null, concepts: null, rec: null, lesson: null, stops: [], k: -1, j: 0, playing: false, through: false, voice: o.voice !== false, token: 0, mode: "loading",
       manifest: null, linked: false, tier: "full", full: [], prog: null, exam: null, picking: false, phaseNow: null, wi: null, wiFrom: null, wiOffered: new Set(), predDone: new Set(), ask: null, endQ: null, unlocked: new Set(store.get(ukey, [])), flagSaid: new Set(), partLines: new Set(), tipOpen: null, fallback: null };
     let destroyed = false;
 
@@ -162,10 +171,12 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
     function build() {
       const capHtml = `<div class="mbp-eb mbp-now"><span class="mbp-where"></span><span class="mbp-sp"></span><button class="mbp-len" data-a="lengths">Change length</button></div><div class="mbp-cap"></div>`;
       const barHtml = `<div class="mbp-bar"><button class="mbp-b" data-a="prev" aria-label="Previous stop"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="2.6" height="12" rx="1" fill="currentColor"/><path d="M17 4.5v11L7.5 10z" fill="currentColor"/></svg></button><button class="mbp-b p" data-a="play" aria-label="Play">▶</button><button class="mbp-b" data-a="next" aria-label="Next stop"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><rect x="14.4" y="4" width="2.6" height="12" rx="1" fill="currentColor"/><path d="M3 4.5v11L12.5 10z" fill="currentColor"/></svg></button><div class="mbp-dots" role="tablist" aria-label="Stops"></div><button class="mbp-b" data-a="voice" aria-label="Voice">🔈</button></div>`;
+      const askHtml = o.ask ? `<form class="mbp-ask" autocomplete="off"><input class="mbp-askin" name="q" maxlength="300" enterkeyhint="send" placeholder="Ask the plate about your note…" aria-label="Ask the plate a question">${SR ? '<button type="button" class="mbp-ic" data-a="mic" aria-label="Ask out loud">🎤</button>' : ""}<button class="mbp-ic p" type="submit" aria-label="Ask">➤</button></form>` : "";
       if (spacer) { spacer.remove(); spacer = null; }
-      if (wide) { aside.className = "mbp-note mbp-rail"; aside.innerHTML = `<div class="mbp-head"><div class="mbp-wi" hidden></div><div class="mbp-pick"></div>${capHtml}${barHtml}</div><div class="mbp-eb" style="padding:8px 6px 4px">Your note<span class="mbp-sp"></span><span class="mbp-sum" style="text-transform:none;letter-spacing:0;font-weight:500"></span></div><div class="mbp-all" style="display:grid;gap:2px"></div>`;
+      aside.style.left = aside.style.width = aside.style.right = "";   // a sheet's laptop placement (fitSheet) must not follow it into the side-by-side layout
+      if (wide) { aside.className = "mbp-note mbp-rail"; aside.innerHTML = `<div class="mbp-head"><div class="mbp-wi" hidden></div><div class="mbp-pick"></div>${capHtml}${askHtml}${barHtml}</div><div class="mbp-eb" style="padding:8px 6px 4px">Your note<span class="mbp-sp"></span><span class="mbp-sum" style="text-transform:none;letter-spacing:0;font-weight:500"></span></div><div class="mbp-all" style="display:grid;gap:2px"></div>`;
         under.innerHTML = ""; }
-      else { aside.className = "mbp-note mbp-sheet"; aside.innerHTML = `<button class="mbp-grab" aria-label="Show your whole note"></button><div class="mbp-wi" hidden></div><div class="mbp-pick"></div>${capHtml.replace('<div class="mbp-cap"></div>', "")}<div class="mbp-cur"></div><div class="mbp-all"></div><div class="mbp-cap"></div><button class="mbp-more"></button>${barHtml}`;
+      else { aside.className = "mbp-note mbp-sheet"; aside.innerHTML = `<button class="mbp-grab" aria-label="Show your whole note"></button><div class="mbp-wi" hidden></div><div class="mbp-pick"></div>${capHtml.replace('<div class="mbp-cap"></div>', "")}<div class="mbp-cur"></div><div class="mbp-all"></div><div class="mbp-cap"></div><button class="mbp-more"></button>${askHtml}${barHtml}`;
         under.innerHTML = ""; spacer = document.createElement("div"); root.after(spacer); }
       wire(); renderLines(); renderDots(); renderNow(); renderPick(); renderChips(); sizeSpacer(); }
     /* the bottom sheet spans the screen on a phone; on a laptop with the app's sidebar or Ask panel open it sits under the tutor's own column */
@@ -221,7 +232,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
     /* ---------- the plate ---------- */
     const uncovered = () => !st.manifest || !st.lesson || st.mode === "fallback" ? [] : st.manifest.parts.map((p) => p.id).filter((id) => !(st.lesson && st.lesson.mentions && st.lesson.mentions[id]));
     function linkPlate() { if (!st.linked || !st.manifest) return; const un = new Set(uncovered()), parts = {};
-      st.manifest.parts.forEach((p) => { parts[p.id] = { name: p.name, shows: p.shows, covered: !un.has(p.id) }; });
+      st.manifest.parts.forEach((p) => { parts[p.id] = { name: p.name, shows: p.shows, covered: !un.has(p.id), qs: o.ask ? partQuestions(p) : [] }; });
       post({ type: "mbx-link", parts, unlocked: [...st.unlocked], dark: o.isDark ? o.isDark() : false }); }
     frame.addEventListener("load", () => { try { const d = frame.contentDocument, s = d.createElement("script"); s.src = BASE + "studio/tutor-link.js"; d.head.appendChild(s); } catch (e) { console.warn("[plate] tutor-link not injected", e); } });
     frame.src = P.src;
@@ -232,6 +243,8 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
         if (st.partLines.size) { haltSpeech(); st.mode = "part"; const nm = (st.manifest.parts.find((p) => p.id === m.id) || {}).name || m.id; where("Your note on the " + nm.toLowerCase()); caption(st.partLines.size + " line" + (st.partLines.size > 1 ? "s" : "") + " of your note about it — tap one to play it.", true); }
         renderLines(); }
       else if (m.type === "mbx-learn") learn(m.id, m.phase);
+      else if (m.type === "mbx-askq") askPlate(m.q, { focus: [m.id] });
+      else if (m.type === "mbx-askown") { const i = root.querySelector(".mbp-askin"); if (i) { if (!wide) sheet(false); i.focus(); } }
       else if (m.type === "mbx-pick") onPick(m.id);
       else if (m.type === "mbx-phase") { st.phaseNow = m.phase; const lv = aside.querySelector(".mbp-live"); if (lv) lv.textContent = "Now: " + (m.phase || "—"); } }
     window.addEventListener("message", onMsg);
@@ -256,6 +269,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
           if (st.tier === "exam" && s.quiz && !s.replay) { st.playing = false; renderNow(); ask(st.k); return; }
           if (st.tier === "full" && s.whatif && /stop|both/.test(wiUI) && !st.wiOffered.has(s.whatif) && whatifOf(s.whatif)) { st.wiOffered.add(s.whatif); st.playing = false; renderNow(); offerWhatif(s.whatif); return; }
           s.replay = false;
+          if (st.through && teachDue(st.k)) { const tok = st.token, k = st.k; st.playing = false; renderNow(); setTimeout(() => { if (tok === st.token) teach(k); }, 500); return; }
           if (st.through && st.k + 1 < st.stops.length) { const tok = st.token; setTimeout(() => { if (tok === st.token) goStop(st.k + 1, true); }, 700); }
           else { st.playing = false; const end = st.k === st.stops.length - 1; st.through = false; renderNow(); if (end && st.mode === "lesson") finish(); } return; }
         const t = parts[st.j++]; caption(t); say(t, next); };
@@ -280,6 +294,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
         else if (a === "prev") { st.through = false; goStop(Math.max(0, st.k - 1), true); }
         else if (a === "next") { st.through = false; goStop(Math.min(st.stops.length - 1, st.k + 1), true); }
         else if (a === "lengths") { haltSpeech(); post({ type: "mbx-play", on: false }); openPick("start"); }
+        else if (a === "mic") listen(root.querySelector(".mbp-askin"), b, (t) => askPlate(t));
         else if (a === "voice") { st.voice = !st.voice; store.set("mbp-voice", st.voice); if (!st.voice) { try { o.stopSpeak && o.stopSpeak(); } catch (_) {} } renderNow(); } });
       aside.onclick = (e) => {
         const fl = e.target.closest("[data-flag]"); if (fl) { st.tipOpen = st.tipOpen === fl.dataset.flag ? null : fl.dataset.flag; renderLines(); e.stopPropagation(); return; }
@@ -294,7 +309,14 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
           if (a === "choices" && A) { A.choices = true; renderPick(); } else if (a === "skip" && A) { st.predDone.add(A.q.id); st.ask = null; post({ type: "mbx-ask-end" }); closePick(); const s = st.stops[A.k]; post({ type: "mbx-show", phase: s.phase, focus: s.focus, lens: s.lens || null, win: s.win || null, speed: s.speed, play: true }); st.j = 0; speak(); }
           else if (a === "next" || a === "skipq") { post({ type: "mbx-ask-end" }); st.endQ.i++; askEnd(); } else if (a === "check") checkSeek(); else if (a === "back" || a === "fwd") post({ type: "mbx-phase-step", dir: a === "fwd" ? 1 : -1 }); }
         const wb = e.target.closest("[data-wi]"); if (wb) { const v = wb.dataset.wi; if (v === "normal") normal(st.picking === "whatif" && st.wiFrom != null); else if (v === "skip") normal(true); else runWhatif(v); }
+        const qa = e.target.closest("[data-qa]"); if (qa) { const a = qa.dataset.qa; if (a === "again") showAnswer(true); else if (a === "back") backToLesson(); }
+        const tb = e.target.closest("[data-tb]"); if (tb) { const a = tb.dataset.tb, T = st.teach;
+          if (a === "mic" && T) listen(aside.querySelector(".mbp-tin"), tb, (t) => { T.text = t; checkTeach(); }, true);
+          else if (a === "check" && T) { T.text = (aside.querySelector(".mbp-tin") || {}).value || T.text; checkTeach(); }
+          else if (a === "skip" || a === "go") teachDone();
+          else if (a === "off") { store.set("mbp-teach", "off"); teachDone(); } }
         const nx = e.target.closest("[data-next]"); if (nx) { const a = nx.dataset.next; if (a === "go") afterQuestion(); else if (a === "start") openPick("start"); else choose(a, 0); } };
+      const fm = root.querySelector(".mbp-ask"); if (fm) fm.onsubmit = (e) => { e.preventDefault(); const i = fm.querySelector(".mbp-askin"); const q = i.value.trim(); if (q.length >= 3) { i.value = ""; i.blur(); askPlate(q); } };
       const d = root.querySelector(".mbp-dots"); if (d) d.onclick = (e) => { const b = e.target.closest("[data-k]"); if (b) { st.through = false; goStop(+b.dataset.k, true); } };
       const g = aside.querySelector(".mbp-grab"); if (g) { let y0 = null;
         g.onpointerdown = (e) => { y0 = e.clientY; g.setPointerCapture(e.pointerId); };
@@ -302,7 +324,11 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
     function sheet(upOn) { aside.classList.toggle("up", upOn); renderLines(); sizeSpacer(); if (upOn) setTimeout(scrollToOn, 30); }
 
     /* ---------- lesson ---------- */
-    function useLesson(lesson) { st.lesson = lesson; st.full = lesson.steps || []; st.mode = "ready"; st.k = -1; setTier((loadProg() || {}).tier || "full"); linkPlate(); renderLines(); renderNow(); renderChips(); openPick("start"); }
+    function useLesson(lesson) { st.concepts = null; st.taught = new Set(); st.lesson = lesson; st.full = lesson.steps || []; st.mode = "ready"; st.k = -1; setTier((loadProg() || {}).tier || "full"); linkPlate(); renderLines(); renderNow(); renderChips();
+      /* the app redrew its page mid-lesson (sync finished, a toast, …): carry on at the same stop instead of showing the start card again */
+      const R = o.resume; o.resume = null;
+      if (R && has(R.tier) && R.k >= 0) { st.started = true; if (R.play) choose(R.tier, R.k); else { setTier(R.tier); goStop(Math.min(R.k, st.stops.length - 1), false); } }
+      else openPick("start"); }
     function useFallback(why) { if (why) st.fallbackWhy = why; st.mode = "fallback";
       if (st.fallback && st.fallback.steps) { st.lesson = { steps: st.fallback.steps.map((s) => ({ ...s, lines: [] })), mentions: null, flags: [], overview: [], exam: [] }; st.full = st.lesson.steps; setTier("full"); st.mode = "fallback"; }
       linkPlate(); renderLines(); renderNow(); if (st.full.length) openPick("start"); }
@@ -325,8 +351,8 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
       if (p.k <= 0 && !p.exam) return null; if (p.finished === p.tier || p.k >= n - 1 && p.finished === p.tier) return null; return { tier: p.tier, k: Math.min(p.k, n - 1), n, title: p.title || "" }; }
     function choose(tier, k) { if (!st.started) { st.started = true; try { o.onStart && o.onStart(API); } catch (e) { console.warn("[plate] onStart", e); } } setTier(tier); st.through = true; st.endQ = null; st.ask = null; if (st.wi) { post({ type: "mbx-params", params: {} }); st.wi = null; renderChips(); } if (tier === "exam") st.exam = { i: 0, right: k ? ((loadProg() || {}).exam || {}).right || 0 : 0, answered: null }; saveProg({ k, finished: null }); goStop(Math.min(k, st.stops.length - 1), true); }
 
-    function openPick(kind) { st.picking = kind; aside.classList.add("pk"); aside.classList.toggle("wion", kind === "whatif" && /chips|both/.test(o.whatifUI || "both")); renderPick(); if (!wide) { aside.classList.remove("up"); } sizeSpacer(); }
-    function closePick() { if (!st.picking) return; st.picking = false; aside.classList.remove("pk", "wion"); renderPick(); sizeSpacer(); }
+    function openPick(kind) { st.picking = kind; aside.classList.add("pk"); aside.classList.toggle("qa", kind === "answer"); aside.classList.toggle("wion", kind === "whatif" && /chips|both/.test(o.whatifUI || "both")); renderPick(); if (!wide) { aside.classList.remove("up"); } sizeSpacer(); }
+    function closePick() { if (!st.picking) return; st.picking = false; aside.classList.remove("pk", "wion", "qa"); renderPick(); sizeSpacer(); }
     function card(pick, ic, title, sub, right, main, disabled, extra) { return `<button class="mbp-c${main ? " main" : ""}" data-pick="${pick}"${disabled ? ' aria-disabled="true"' : ""}><span class="ic" aria-hidden="true">${ic}</span><span class="tx"><b>${esc(title)}</b><span>${sub}</span>${extra || ""}</span>${right ? `<em>${right}</em>` : ""}</button>`; }
     function renderPick() { const box = aside.querySelector(".mbp-pick"); if (!box) return; if (!st.picking) { box.innerHTML = ""; return; }
       const p = loadProg() || { done: {} }, done = (t) => p.done && p.done[t] ? ' · <span class="ok">✓ done</span>' : "";
@@ -348,6 +374,8 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
             + `<div class="mbp-row">${E.answered === q.answer || E.replayed ? `<button class="mbp-btn p" data-next="go">${st.k + 1 < st.stops.length ? "Next stop" : "See your score"}</button>` : `<span style="font-size:13px;color:var(--dim);align-self:center">Replaying that stop…</span>`}</div>`); }
       else if (st.picking === "predict" || st.picking === "tap" || st.picking === "seek") box.innerHTML = askHtml();
       else if (st.picking === "whatif-offer" || st.picking === "whatif") box.innerHTML = whatifHtml(st.picking === "whatif-offer");
+      else if (st.picking === "answer") box.innerHTML = answerHtml();
+      else if (st.picking === "teach") box.innerHTML = teachHtml();
       else if (st.picking === "done") { const t = st.tier, sc = t === "exam" && st.exam ? `You got <b>${st.exam.right} of ${st.stops.length}</b> right.` : st.endQ && st.endQ.of ? `Plate questions: <b>${st.endQ.right} of ${st.endQ.of}</b> right.` : "";
         box.innerHTML = `<div class="mbp-h">${TIERS[t]} · done ✓</div><div class="mbp-q"><p>${t === "exam" ? sc : "That's your note on this plate." + (sc ? " " + sc : "")}</p></div>`
           + `<div class="mbp-row">${t !== "exam" && has("exam") ? `<button class="mbp-btn p" data-next="exam">Exam revision</button>` : ""}${t === "exam" ? `<button class="mbp-btn p" data-next="exam">Try again</button>` : ""}<button class="mbp-btn" data-next="${t}">Replay</button><button class="mbp-btn" data-next="start">Other lengths</button></div>`; }
@@ -397,7 +425,8 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
     function runWhatif(id) { const w = whatifOf(id); if (!w) return; haltSpeech(); st.wi = id; post({ type: "mbx-params", params: w.params });
       setTimeout(() => post({ type: "mbx-show", phase: w.at, focus: [], lens: null, speed: 0.6, play: true }), 60); st.wiCurrent = id; openPick("whatif"); renderChips(); say(w.shows, () => {}); }
     function normal(cont) { if (st.wi) post({ type: "mbx-params", params: {} }); st.wi = null; renderChips(); closePick();
-      if (cont && st.wiFrom != null && st.through && st.wiFrom + 1 < st.stops.length) { const k = st.wiFrom; st.wiFrom = null; goStop(k + 1, true); } else { st.wiFrom = null; renderNow(); } }
+      if (cont && st.wiFrom != null && st.through && teachDue(st.wiFrom)) { const k = st.wiFrom; st.wiFrom = null; teach(k); }
+      else if (cont && st.wiFrom != null && st.through && st.wiFrom + 1 < st.stops.length) { const k = st.wiFrom; st.wiFrom = null; goStop(k + 1, true); } else { st.wiFrom = null; renderNow(); } }
     function whatifHtml(offer) { const w = whatifOf(st.wiCurrent); if (!w) return ""; const R = Object.fromEntries((st.manifest.readouts || []).map((r) => [r.key, r]));
       if (offer) { const ln = (st.stops[st.wiFrom] || {}).lines || []; const quote = lines.filter((l) => ln.includes(l.id) && (w.note || []).some((t) => l.text.toLowerCase().includes(t))).map((l) => l.text)[0];
         return `<div class="mbp-h">From your note</div>${quote ? `<p style="margin:0;font-size:14px;color:var(--text)">“${esc(quote)}”</p>` : ""}<div class="mbp-offer"><div class="mbp-q"><p>What if: ${esc(w.label.toLowerCase())}?</p></div><p style="margin:0;font-size:13px;color:var(--dim)">The plate re-runs with that change and shows you the numbers.</p><div class="mbp-row"><button class="mbp-btn p" data-wi="${w.id}">▶ Show me</button><button class="mbp-btn" data-wi="skip">Not now</button></div></div>`; }
@@ -428,12 +457,74 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
       if (st.mode === "fallback") { const ff = st.fallback; if (ff) useFallback(); } })
       .catch((e) => { if (!destroyed) useFallback((e && e.message) || ""); });
 
+    /* ---------- Ask the plate (feature 6): type, speak, or tap a part's question; answered from the note and shown on the plate ---------- */
+    function partQuestions(p) { const n = /^[A-Z0-9]{2,}/.test(p.name) ? p.name : p.name.charAt(0).toLowerCase() + p.name.slice(1);
+      return ["What does the " + n + " do here?", "What happens if the " + n + " stops working?", "Why does the " + n + " matter for the next step?"]; }
+    function askPlate(q, at) { if (!o.ask || !q) return; haltSpeech(); post({ type: "mbx-pop-close" }); post({ type: "mbx-play", on: false });
+      const s = st.stops[st.k], A = st.qa = { q, state: "loading", from: st.mode === "lesson" ? st.k : -1 };
+      openPick("answer"); if (!wide) aside.classList.remove("up");
+      Promise.resolve(o.ask({ q, phase: (at && at.phase) || st.phaseNow || (s && s.phase) || "", focus: (at && at.focus) || (s && s.focus) || [] }))
+        .then((a) => { if (st.qa !== A || destroyed) return; if (!a || !a.say) throw new Error("No answer came back."); A.a = a; A.state = "ok"; showAnswer(false); })
+        .catch((e) => { if (st.qa !== A || destroyed) return; A.state = "err"; A.err = (e && e.message) || "Couldn't answer that just now."; renderPick(); }); }
+    function showAnswer(again) { const A = st.qa; if (!A || !A.a) return; const a = A.a; renderPick();
+      if (a.phase || (a.focus || []).length) post({ type: "mbx-show", phase: a.phase || undefined, focus: a.focus || [], lens: a.lens || null, speed: 0.5, play: true });
+      st.partLines = new Set(a.lines || []); renderLines(); caption(a.say); say(a.say, () => {}); }
+    function answerHtml() { const A = st.qa; if (!A) return "";
+      const head = `<div class="mbp-h">Ask the plate</div><p class="mbp-qq">“${esc(A.q)}”</p>`;
+      if (A.state === "loading") return head + `<p class="mbp-qa dim">Looking in your note…</p><div class="mbp-row"><button class="mbp-btn" data-qa="back">Back to the lesson</button></div>`;
+      if (A.state === "err") return head + `<p class="mbp-qa dim">${esc(A.err)}</p><div class="mbp-row"><button class="mbp-btn" data-qa="back">Back to the lesson</button></div>`;
+      const a = A.a, ln = (a.lines || []).map((id) => String(id).replace(/^L/, "")).filter(Boolean);
+      const src = a.offTopic ? "" : a.inNote ? `From your note · line${ln.length > 1 ? "s" : ""} ${ln.join(", ")}${a.phase ? " · the plate is showing it now" : ""}` : `<span class="mbp-tag">Not in your note</span> from the plate itself`;
+      return head + `<p class="mbp-qa">${esc(a.say)}</p>${src ? `<span class="mbp-src">${src}</span>` : ""}<div class="mbp-row">${a.offTopic ? "" : '<button class="mbp-btn p" data-qa="again">▶ Show me again</button>'}<button class="mbp-btn" data-qa="back">Back to the lesson</button></div>`; }
+    function backToLesson() { const A = st.qa; st.qa = null; haltSpeech(); closePick(); st.partLines = new Set();
+      if (A && A.from >= 0 && st.stops[A.from]) goStop(A.from, false); else if (st.mode === "ready" || st.k < 0) openPick("start"); else renderLines(); }
+
+    /* ---------- Explain it back (feature 6): when a concept (a heading of the note) ends in the full walk-through, the student explains it ---------- */
+    function concepts() { if (st.concepts) return st.concepts; const map = new Map(), F = st.full, secOf = (s) => { const i = Math.min(...s.lines.map((x) => lines.findIndex((l) => l.id === x)).filter((i) => i >= 0)); let h = null; for (let k = i; k >= 0; k--) if (lines[k].h) { h = lines[k]; break; } return h; };
+      const hs = F.map(secOf), anyH = hs.some(Boolean);
+      F.forEach((s, k) => { const end = anyH ? (k === F.length - 1 || hs[k + 1] !== hs[k]) && hs[k] : (k + 1) % 3 === 0 || k === F.length - 1; if (!end) return;
+        let a = k; while (a > 0 && (anyH ? hs[a - 1] === hs[k] : a % 3 !== 0)) a--;
+        const ids = [...new Set(F.slice(a, k + 1).flatMap((x) => x.lines))].filter((id) => { const l = lines.find((z) => z.id === id); return l && !l.h; });
+        const title = hs[k] ? hs[k].text.replace(/^\d+[.)]\s*/, "").replace(/\s+[—–-]\s+.*$/, "") : "";
+        if (ids.length) map.set(k, { ids, from: a, title, q: title ? "Your turn. In your own words, explain this part of your note: " + title + "." : "Your turn. In your own words, explain what you've just seen." }); });
+      return (st.concepts = map); }
+    const teachOn = () => !!o.explain && store.get("mbp-teach", "on") !== "off";
+    function teachDue(k) { return st.tier === "full" && teachOn() && concepts().has(k) && !st.taught.has(k) && navigator.onLine !== false; }
+    function teach(k) { const c = concepts().get(k); if (!c) return afterTeach(k); st.taught.add(k); post({ type: "mbx-play", on: false });
+      st.teach = { k, ...c, state: "ask", text: "" }; openPick("teach"); if (!wide) aside.classList.remove("up"); st.partLines = new Set(c.ids); renderLines(); caption(c.q); say(c.q, () => {}); }
+    function checkTeach() { const T = st.teach; if (!T || !String(T.text || "").trim() || T.state === "marking") return; haltSpeech(); T.state = "marking"; renderPick();
+      Promise.resolve(o.explain({ lines: T.ids, q: T.q, answer: T.text.trim() })).then((r) => { if (st.teach !== T || destroyed) return; if (!r) throw new Error(); T.r = r; T.state = "marked"; renderPick();
+          const miss = (r.missed || []).map((m) => m.line).filter(Boolean); st.partLines = new Set(miss.length ? miss : T.ids); renderLines();
+          if (r.phase || (r.focus || []).length) post({ type: "mbx-show", phase: r.phase || undefined, focus: r.focus || [], lens: null, speed: 0.5, play: true });
+          const fb = r.say || (miss.length ? "Here is what your note adds. " + miss.map((id) => (lines.find((l) => l.id === id) || {}).text).join(" ") : "Well done, that covers it.");
+          caption(fb); say(fb, () => { if (st.teach === T) { const tok = st.token; setTimeout(() => { if (tok === st.token && st.teach === T) teachDone(); }, 1800); } }); })
+        .catch((e) => { if (st.teach !== T || destroyed) return; T.state = "err"; T.err = (e && e.message) || "Couldn't mark that just now."; renderPick(); }); }
+    function teachHtml() { const T = st.teach; if (!T) return ""; const h = `<div class="mbp-h">Your turn · explain it back${T.title ? " · " + esc(T.title) : ""}</div><p class="mbp-qq">${esc(T.q.replace(/^Your turn\. /, ""))}</p>`;
+      if (T.state === "ask" || T.state === "err") return h + (T.state === "err" ? `<p class="mbp-qa dim">${esc(T.err)}</p>` : "") + `<textarea class="mbp-tin" rows="3" maxlength="900" placeholder="Say it or type it, the way you'd explain it to a friend">${esc(T.text || "")}</textarea>
+        <div class="mbp-row">${SR ? '<button class="mbp-btn p" data-tb="mic">🎤 Say it</button>' : ""}<button class="mbp-btn${SR ? "" : " p"}" data-tb="check">Check my answer</button><button class="mbp-btn" data-tb="skip">Skip</button></div><button class="mbp-off2" data-tb="off">Don't ask me to explain back</button>`;
+      if (T.state === "marking") return h + `<p class="mbp-qa dim">“${esc(T.text)}”</p><p class="mbp-qa dim">Checking it against your note…</p>`;
+      const r = T.r, nOf = (id) => String(id).replace(/^L/, "");
+      return h + `<p class="mbp-qa dim">“${esc(T.text)}”</p><div class="mbp-mark">${"●".repeat(r.score)}${"○".repeat(3 - r.score)}</div>`
+        + ((r.got || []).length ? `<ul class="mbp-got">${r.got.map((g) => `<li>✓ ${esc(g)}</li>`).join("")}</ul>` : "")
+        + ((r.missed || []).length ? `<ul class="mbp-miss">${r.missed.map((m) => `<li>${m.wrong ? "✗" : "＋"} ${esc(m.point)}${m.line ? ` <span>· line ${nOf(m.line)}</span>` : ""}</li>`).join("")}</ul>` : "")
+        + `<div class="mbp-row"><button class="mbp-btn p" data-tb="go">Continue ▶</button></div>`; }
+    function teachDone() { const T = st.teach; st.teach = null; haltSpeech(); closePick(); st.partLines = new Set(); renderLines(); if (T) afterTeach(T.k); }
+    function afterTeach(k) { if (k + 1 < st.stops.length) { st.through = true; goStop(k + 1, true); } else finish(); }
+    /* speech to text: Chrome on Android and desktop (free, needs a connection); the keyboard's own mic works everywhere else */
+    function listen(input, btn, done, keep) { if (!SR || !input) return; if (st.rec) { try { st.rec.stop(); } catch (_) {} return; }
+      haltSpeech(); const r = new SR(); st.rec = r; r.lang = "en-NG"; r.interimResults = true; r.continuous = !!keep; let finalT = input.value ? input.value + " " : "";
+      btn.classList.add("rec"); const lab = btn.textContent; if (keep) btn.textContent = "■ Stop";
+      r.onresult = (e) => { let interim = ""; for (let i = e.resultIndex; i < e.results.length; i++) { const t = e.results[i][0].transcript; if (e.results[i].isFinal) finalT += t + " "; else interim += t; } input.value = (finalT + interim).trim(); };
+      r.onerror = () => {}; r.onend = () => { st.rec = null; btn.classList.remove("rec"); btn.textContent = lab; const t = input.value.trim(); if (t.length >= 3) { if (!keep) input.value = ""; done(t); } };
+      try { r.start(); } catch (_) { st.rec = null; btn.classList.remove("rec"); } }
+
     function voiceTexts() { const out = new Set(), add = (t) => { t = String(t || "").trim(); if (t) out.add(t); }, M = st.manifest || {}, L = st.lesson || {};
       const pn = (id) => ((M.parts || []).find((p) => p.id === id) || {}).name || id;
       ["overview", "full", "exam"].forEach((tier) => { if (!has(tier)) return; stopsFor(tier).forEach((s) => { sentences(s.say).forEach(add);
         if (s.quiz) { add(s.quiz.q); add("Right."); add("Not quite."); add(s.quiz.why); }
         const pq = s.predict && (M.predictions || []).find((q) => q.id === s.predict); if (pq && tier === "full") { add(pq.ask); add("Right. Watch it happen."); add("Not quite: it's the " + pn(pq.answer[0]).toLowerCase() + ". Watch."); } }); });
       (L.flags || []).forEach((f) => add(f.say));
+      if (teachOn()) concepts().forEach((c) => add(c.q));
       (L.whatifs || []).forEach((id) => { const w = (M.whatifs || []).find((x) => x.id === id); if (w) add(w.shows); });
       (L.end || []).forEach((q) => { add(q.q); add("Right."); add(q.type === "tap" ? "Not quite: it's the " + pn(q.parts[0]).toLowerCase() + "." : "Not quite: it's in the " + String(q.phase).toLowerCase() + "."); });
       return [...out]; }
@@ -441,7 +532,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
     let readyN = 0; function ready() { if (++readyN === 2 && st.mode === "ready" && !destroyed) try { o.onReady && o.onReady(API); } catch (e) { console.warn("[plate] onReady", e); } }
     function destroy() { if (destroyed) return; destroyed = true; haltSpeech(); clearInterval(watch); ro.disconnect(); mo.disconnect(); window.removeEventListener("message", onMsg); window.removeEventListener("resize", sizeSpacer); if (spacer) spacer.remove(); if (root.isConnected) host.innerHTML = ""; }
     const watch = setInterval(() => { if (!root.isConnected) destroy(); }, 800);   // the app re-renders pages by replacing HTML: stop talking when we're gone
-    const API = { destroy, state: st, goStop, choose, openPick, ask, finish, runWhatif, offerWhatif, askEnd, onPick, lines, voiceTexts, refresh };
+    const API = { destroy, alive: () => !destroyed, state: st, goStop, choose, openPick, ask, finish, runWhatif, offerWhatif, askEnd, onPick, lines, voiceTexts, refresh };
     return API;
   }
 
