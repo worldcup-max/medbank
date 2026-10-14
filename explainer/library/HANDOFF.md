@@ -10,6 +10,14 @@ Build a library of hand-quality, interactive, model-driven explainer "plates" (F
 Each plate: a numerical model is the single source of truth (createModel), an original detailed SVG drawing driven by it every frame (createScene), a live ledger + chart, a phase-by-phase tutor with a recorded VOICE (Kokoro, bf_emma, baked into the page as mp3 per sentence, so $0 per student).
 Students open a library plate instantly; only the narration is personalised to their note later (DeepSeek Flash, fractions of a cent). Topics not in the library fall back to the auto-builder.
 
+THE CORE RULE: THE STUDENT'S NOTE DRIVES THE TUTOR
+- Scheduled tasks build only the PLATE (model, drawing, controls, a default narration). They never decide what a student is taught.
+- DeepSeek writes the tutor from the student's own note, every time: it explains what the note says, in the note's terms, order and depth. It must NOT teach concepts of the topic that are not in the note.
+- So every plate must ship a manifest.json: its phases, parts (ids + names), readouts and what each one shows. DeepSeek maps the note onto the manifest and picks only the phases/parts the note covers. Parts the note doesn't mention are dimmed and stay silent (tappable). Content in the note that the plate can't show is explained in words and the topic is flagged for extension.
+- Validation before showing: every step's phase/focus must exist in the manifest; narration that drifts from the note's content is rejected and regenerated.
+- Voice for the personalised narration: the app's TTS (Kokoro free / Fish paid) via postMessage mbx-speak. The recorded voice baked into each plate is only the fallback when there's no note.
+- Per-student cost: about $0.001 (DeepSeek Flash) + TTS. The plate is built once and shared by everyone.
+
 WHAT WE LEARNED (DON'T REPEAT)
 - DeepSeek (explainer/studio/build.mjs pipeline) gets the science right but draws badly, even with checks and fix rounds. Don't use it to draw plates.
 - I compared Opus vs Sonnet on the same brief (nephron). OPUS WON: more faithful anatomy and a "cell wall here" transporter inset per segment. Sonnet is prettier but anatomically wrong in places. Build library plates with Opus (Sonnet only for rare topics).
