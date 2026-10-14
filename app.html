@@ -1097,6 +1097,7 @@ window.MB_STUDY_GET = function(){ try{ return DATA.study || {}; }catch(e){ retur
 window.MB_DOCK = {
   onStudyScreen: function(){ var r=(location.hash.slice(2)||'').split('/')[0];   // DCK-02: Mega/exam/gap are state overlays on their own routes; the dock's precondition is "content on screen"
     if((typeof QB!=='undefined'&&QB)||(typeof GAPLOOP!=='undefined'&&GAPLOOP)) return true;
+    if(r==='topic'&&typeof topicTab!=='undefined'&&topicTab==='mech3d') return false;   // the 3D Tutor needs the whole width: no Ask panel or Ask AI tab while it is open (comes back on the other tabs)
     return ['topic','study','review','cram','hard','leeches','mistakes','nudge','hardnudge','mega','exam','solve'].indexOf(r)>=0; },   // NOT 'today' (the hub is a menu, not reading/study content)
   ctx: function(){
     var t=null, card=null, cardId=null;
