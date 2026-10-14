@@ -1104,13 +1104,32 @@ async function _ttsRaw(p, text, voiceId){
   const spoken = (p==="kokoro") ? kokoroPrep(text) : sayPrep(text);
   const key = _ttsKey(p, voiceId, spoken);
   if(_ttsCache.has(key)) return _ttsCache.get(key);
+  const remember = (b) => { _ttsCache.set(key, b); if(_ttsCache.size > _TTS_MAX){ _ttsCache.delete(_ttsCache.keys().next().value); } return b; };
+  const kept = await ttsStoreGet(p, key); if(kept) return remember(kept);          // made before (any student, any server restart) → free
   let buf;
   if(p==="fish")        buf = await fishTTS(spoken, voiceId);
   else if(p==="kokoro") buf = await kokoroTTS(spoken, voiceId);
   else throw new Error("Unsupported TTS provider '"+p+"' (OpenAI TTS is disabled on this account)");
-  _ttsCache.set(key, buf);
-  if(_ttsCache.size > _TTS_MAX){ _ttsCache.delete(_ttsCache.keys().next().value); }
-  return buf;
+  ttsStorePut(p, key, buf);                                                         // not awaited: the student never waits on the upload
+  return remember(buf);
+}
+/* Every clip is kept in Supabase Storage (private bucket "tts-cache", created on first use), keyed by provider + voice + the exact
+ * spoken text. So a line is paid for once, ever: replays, a new phone, a cleared app, the server waking from sleep and classmates with
+ * the same lecture note all get the stored clip. TTS_STORE=0 turns it off. Storage trouble never breaks speech, it just skips the cache. */
+const TTS_BUCKET = "tts-cache", TTS_STORE_ON = process.env.TTS_STORE !== "0";
+const TTS_STORE = { hits:0, misses:0, puts:0, errors:0, lastError:null }; let _ttsBucketReady = null;
+function ttsBucket(){ if(!_ttsBucketReady) _ttsBucketReady = admin.storage.createBucket(TTS_BUCKET, { public:false }).then(()=>true, ()=>true); return _ttsBucketReady; }
+async function ttsStoreGet(p, key){
+  if(!TTS_STORE_ON) return null;
+  try{ const { data, error } = await admin.storage.from(TTS_BUCKET).download(p+"/"+key+".mp3");
+    if(error || !data){ TTS_STORE.misses++; return null; } TTS_STORE.hits++; return Buffer.from(await data.arrayBuffer()); }
+  catch(e){ TTS_STORE.errors++; TTS_STORE.lastError = String(e.message||e).slice(0,200); return null; }
+}
+function ttsStorePut(p, key, buf){
+  if(!TTS_STORE_ON || !buf || !buf.length) return;
+  ttsBucket().then(()=>admin.storage.from(TTS_BUCKET).upload(p+"/"+key+".mp3", buf, { contentType:"audio/mpeg", upsert:true }))
+    .then((r)=>{ if(r && r.error){ TTS_STORE.errors++; TTS_STORE.lastError = r.error.message; } else TTS_STORE.puts++; })
+    .catch((e)=>{ TTS_STORE.errors++; TTS_STORE.lastError = String(e.message||e).slice(0,200); });
 }
 /* Live Kokoro health — so the app can warn you (admin) when basic tier is silently
  * burning paid Fish credits because the self-hosted Kokoro box is down. */
@@ -1155,6 +1174,7 @@ async function uploadPodcastAudio(path, buf){
 }
 
 app.get("/health", (_req,res)=>res.json({ ok:true,
+  store:{ on:TTS_STORE_ON, bucket:TTS_BUCKET, ...TTS_STORE },
   kokoro:{ ok:KOKORO_HEALTH.ok, configured:!!process.env.KOKORO_TTS_URL, lastError:KOKORO_HEALTH.lastError,
            lastFailAt:KOKORO_HEALTH.lastFailAt, lastOkAt:KOKORO_HEALTH.lastOkAt, fallbacks:KOKORO_HEALTH.fallbacks },
   fish:{ configured:!!FISH_KEY, keyLen:FISH_KEY.length, source:FISH_KEY_SOURCE,
