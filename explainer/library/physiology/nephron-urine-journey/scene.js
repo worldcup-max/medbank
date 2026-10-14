@@ -177,6 +177,200 @@ function createScene(svg, K, M, S) {
     c.notes.forEach((t, k) => tx(g, IX + 10, IY + IH - 16 + k * 11, t, { s: 8.5, c: "var(--ink)" })); g.removeAttribute("display"); g.remove(); }
   K.part("pct", inset);
 
+
+  // =================== LENSES: six magnified views, each driven by the same parcel sample s and frame index i as the nephron ===================
+  const TX_ = K.text, lerp = K.lerp, N = S.length, T = M.T, DTn = T / N;
+  let nseed = 31; const rnd2 = () => ((nseed = (nseed * 16807) % 2147483647) / 2147483647);
+  const ION = { na: "var(--hot-hi)", k: "var(--spark)", cl: "var(--open)", glu: "var(--accent)", h: "var(--cold)", hco3: "var(--wall-deep)", w: "var(--cold-hi)", mg: "var(--ink)" };
+  // per-frame removal rates the model implies (per second), for glucose and bicarbonate
+  const dropRate = (key) => S.map((s, k) => Math.max(0, (S[(k + N - 1) % N].readouts[key] - s.readouts[key]) / DTn) * (k ? 1 : 0));
+  const gluRate = dropRate("glucose"), hco3Rate = dropRate("hco3");
+  // ions or molecules moving along a path through transporters, at a rate set by the model; idle ones fade
+  function lane(g, pts, col, opt = {}) { const poly = K.sampleSpline(pts, 8), cum = [0]; for (let k = 1; k < poly.length; k++) cum.push(cum[k - 1] + Math.hypot(poly[k][0] - poly[k - 1][0], poly[k][1] - poly[k - 1][1]));
+    const len = cum[cum.length - 1], n = opt.n || 5, r = opt.r || 3.2, Q = [];
+    for (let k = 0; k < n; k++) Q.push({ s: (k + rnd2() * 0.5) / n * len, e: opt.square ? el("rect", { width: r * 2, height: r * 2, rx: 1.2, fill: col, stroke: "var(--sheet)", "stroke-width": 0.8 }, g) : el("circle", { r, fill: col, stroke: "var(--sheet)", "stroke-width": 0.8 }, g) });
+    const at = (s) => { let k = 1; while (k < cum.length - 1 && cum[k] < s) k++; const t = (s - cum[k - 1]) / ((cum[k] - cum[k - 1]) || 1); return [lerp(poly[k - 1][0], poly[k][0], t), lerp(poly[k - 1][1], poly[k][1], t)]; };
+    return (rate, dS) => { const on = rate > 0.02; for (const q of Q) { if (on) q.s = (q.s + rate * dS * (opt.speed || 40)) % len; const [x, y] = at(q.s);
+      if (opt.square) { q.e.setAttribute("x", f1(x - r)); q.e.setAttribute("y", f1(y - r)); } else { q.e.setAttribute("cx", f1(x)); q.e.setAttribute("cy", f1(y)); } q.e.setAttribute("opacity", on ? 0.95 : 0.12); } }; }
+  const membraneProtein = (g, x, y, label, side, col = "var(--accent)") => { el("rect", { x: x - 7, y: y - 11, width: 14, height: 22, rx: 6, fill: col, stroke: "var(--sheet)", "stroke-width": 1.2 }, g);
+    TX_(g, side < 0 ? x - 11 : x + 11, y - 13, label, "lm halo", side < 0 ? "end" : "start", { style: "font-size:11px;fill:var(--ink)" }); };
+  const bar = (g, x, y, w, label, col) => { TX_(g, x, y + 9, label, "ls"); el("rect", { x: x + 118, y, width: w, height: 11, rx: 5.5, fill: "var(--ground)", stroke: "var(--hair)" }, g);
+    const b = el("rect", { x: x + 118, y, height: 11, rx: 5.5, fill: col }, g), v = TX_(g, x + 118 + w + 6, y + 9.5, "", "lm"); return (frac, txt) => { b.setAttribute("width", f1(Math.max(6, w * K.clamp(frac, 0, 1)))); v.textContent = txt; }; };
+  // an epithelial cell between the lumen (left) and the interstitium/blood (right)
+  function cellFrame(g, opt = {}) {
+    el("rect", { x: 0, y: 26, width: 104, height: 270, fill: "var(--fluid)" }, g); TX_(g, 52, 44, "Lumen", "lh", "middle"); TX_(g, 52, 60, "(urine side)", "lm", "middle");
+    el("rect", { x: 296, y: 26, width: 104, height: 270, fill: "var(--bed)" }, g); TX_(g, 348, 44, "Blood side", "lh", "middle");
+    el("rect", { x: 352, y: 66, width: 44, height: 222, rx: 22, fill: "var(--hot-lumen)", stroke: "var(--hot)", "stroke-width": 1.4 }, g); TX_(g, 396, 302, "capillary", "lm", "end");
+    for (const y of [26, 286]) el("rect", { x: 104, y: y === 26 ? 26 : 280, width: 192, height: 16, fill: "var(--wall-hi)", opacity: 0.35 }, g);
+    el("rect", { x: 104, y: 42, width: 192, height: 238, rx: 4, fill: "var(--wall-hi)", "fill-opacity": 0.42, stroke: "var(--wall-deep)", "stroke-width": 1.6 }, g);
+    for (const y of [42, 280]) el("rect", { x: 100, y: y - 3, width: 10, height: 6, rx: 2, fill: "var(--wall-deep)" }, g);   // tight junctions
+    el("ellipse", { cx: 232, cy: 238, rx: 26, ry: 18, fill: "var(--wall)", stroke: "var(--wall-deep)", "stroke-width": 1 }, g);
+    if (opt.brush) for (let y = 46; y < 278; y += 4.5) el("path", { d: `M104 ${f1(y)}h-9`, stroke: "var(--wall-hi)", "stroke-width": 2, "stroke-linecap": "round" }, g);
+    if (opt.mito) for (let k = 0; k < 7; k++) el("ellipse", { cx: 268 - (k % 2) * 12, cy: 64 + k * 30, rx: 9, ry: 4, fill: "var(--fat)", stroke: "var(--wall-deep)", "stroke-width": 0.6 }, g);
+    TX_(g, 104, 22, "apical", "lm", "middle"); TX_(g, 296, 22, "basolateral", "lm", "middle"); }
+  const here = (s, part) => s.parcel.part === part;
+
+  // 1 · the filtration barrier: capillary lumen → fenestrated endothelium → basement membrane → podocyte slits → Bowman's space
+  K.lens("barrier", { focus: [168, 52, 96, 96],
+    build(g) { const SL = [26, 72, 118, 164, 210];   // filtration channels: a fenestra, the basement membrane, then a slit diaphragm
+      el("rect", { x: 0, y: 22, width: 400, height: 96, fill: "var(--hot-lumen)" }, g); TX_(g, 12, 40, "Glomerular capillary", "lh"); TX_(g, 12, 56, "blood flows past", "lm");
+      el("rect", { x: 0, y: 166, width: 400, height: 76, fill: "var(--fluid)" }, g); TX_(g, 12, 234, "Bowman's space · filtrate", "lh");
+      for (let k = -1; k < SL.length; k++) { const a = k < 0 ? -4 : SL[k] + 6, b = k + 1 < SL.length ? SL[k + 1] - 6 : 250; el("rect", { x: a, y: 118, width: b - a, height: 10, rx: 3, fill: "var(--wall)", stroke: "var(--wall-deep)", "stroke-width": 0.8 }, g); }
+      el("rect", { x: -2, y: 128, width: 252, height: 16, fill: "var(--fat)", stroke: "var(--wall-deep)", "stroke-width": 0.6 }, g);
+      for (let x = 14; x < 246; x += 28) TX_(g, x, 140, "–", "lm", "middle", { style: "fill:var(--wall-deep);font-size:13px" });
+      for (let k = -1; k < SL.length; k++) { const a = k < 0 ? -8 : SL[k] + 4, b = k + 1 < SL.length ? SL[k + 1] - 4 : 252; el("path", { d: `M${a} 144q0 20 ${f1((b - a) / 2)} 20q${f1((b - a) / 2)} 0 ${f1((b - a) / 2)} -20`, fill: "var(--wall-hi)", stroke: "var(--wall-deep)", "stroke-width": 1 }, g); }
+      for (const x of SL) el("path", { d: `M${x - 4} 150h8`, stroke: "var(--ink)", "stroke-width": 1.2 }, g);
+      el("rect", { x: 254, y: 100, width: 146, height: 104, fill: "var(--sheet)", opacity: 0.9 }, g);
+      for (const [ly, y, a, b] of [[123, 112, "endothelium", "fenestrated"], [136, 148, "basement membrane", "negatively charged"], [156, 184, "podocytes", "slit diaphragms"]]) {
+        el("path", { d: `M246 ${ly}L262 ${ly}L266 ${y - 4}`, fill: "none", stroke: "var(--muted)", "stroke-width": 0.8 }, g); TX_(g, 270, y, a, "ls", "start", { style: "fill:var(--ink)" }); TX_(g, 270, y + 13, b, "lm"); }
+      const rbc = Array.from({ length: 4 }, (_, k) => ({ x: k * 110, e: el("ellipse", { cy: 88, rx: 17, ry: 9, fill: "var(--hot)", stroke: "var(--wall-deep)", "stroke-width": 1 }, g) }));
+      const alb = Array.from({ length: 5 }, (_, k) => ({ x: 24 + k * 44, y: 74 + (k % 3) * 12, v: k % 2 ? 1 : -1, e: el("circle", { r: 5.5, fill: "var(--cold)", stroke: "var(--sheet)", "stroke-width": 1 }, g) }));
+      const small = []; SL.forEach((x, k) => { for (let j = 0; j < 3; j++) small.push({ x, p: (j / 3 + k * 0.17) % 1, w: j !== 1, e: el("circle", { r: j === 1 ? 2.4 : 2.8, fill: j === 1 ? ION.na : ION.w, stroke: "var(--sheet)", "stroke-width": 0.6 }, g) }); });
+      // Starling forces across the barrier: arrows sized by the model's pressures
+      el("line", { x1: 0, x2: 400, y1: 250, y2: 250, stroke: "var(--hair)" }, g); TX_(g, 12, 268, "Starling forces (mmHg)", "lm");
+      const arr = [0, 1, 2, 3].map(() => el("path", { fill: "none", "stroke-width": 3, "stroke-linecap": "round", "stroke-linejoin": "round" }, g)), lab = [0, 1, 2, 3].map(() => TX_(g, 0, 0, "", "lm", "start", { style: "fill:var(--ink)" })), lab2 = [0, 1, 2, 3].map(() => TX_(g, 0, 0, "", "ls", "start"));
+      const legend = [[ION.w, "water"], [ION.na, "salts, glucose"], ["var(--cold)", "albumin"], ["var(--hot)", "red cells"]];
+      legend.forEach(([c, t], k) => { const x = 10 + k * 97; el("circle", { cx: x + 5, cy: 330, r: 4.5, fill: c }, g); TX_(g, x + 14, 334, t, "ls"); });
+      TX_(g, 12, 350, "albumin and red cells stay in the blood", "lm");
+      const eq = TX_(g, 12, 372, "", "lt"), st = TX_(g, 12, 392, "", "lm");
+      return (i, s, d) => { const r = s.readouts, dS = d * T;
+        const F = [[r.pGC, true, "var(--hot)", "P_GC " + r.pGC, "pushes out"], [r.pBS, false, "var(--cold)", "P_BS " + r.pBS, "pushes back"], [r.piGC, false, "var(--cold)", "π_GC " + r.piGC, "pulls back"], [r.nfp, true, "var(--accent)", "net " + r.nfp, "filters out"]];
+        F.forEach(([v, down, c, t1, t2], k) => { const x = 18 + k * 96, dir = down ? 1 : -1, y0 = down ? 280 : 312, y1 = down ? 280 + Math.min(32, 6 + v * 0.5) : 312 - Math.min(32, 6 + v * 0.5);
+          arr[k].setAttribute("d", `M${x} ${y0}V${f1(y1)}M${x - 5} ${f1(y1 - dir * 6)}L${x} ${f1(y1)}L${x + 5} ${f1(y1 - dir * 6)}`); arr[k].setAttribute("stroke", c);
+          lab[k].setAttribute("x", x + 12); lab[k].setAttribute("y", 293); lab[k].textContent = t1; lab2[k].setAttribute("x", x + 12); lab2[k].setAttribute("y", 307); lab2[k].textContent = t2; });
+        for (const q of rbc) { q.x = (q.x + 30 * dS) % 440; q.e.setAttribute("cx", f1(q.x - 20)); }
+        for (const q of alb) { q.y += q.v * 14 * dS; if (q.y > 112) { q.y = 112; q.v = -1; } if (q.y < 66) { q.y = 66; q.v = 1; } q.x = (q.x + 18 * dS) % 240; q.e.setAttribute("cx", f1(q.x)); q.e.setAttribute("cy", f1(q.y)); }
+        const flux = r.nfp * 0.06; for (const q of small) { q.p = (q.p + flux * dS * (q.w ? 1.15 : 1)) % 1; const y = 70 + q.p * 160; q.e.setAttribute("cx", f1(q.x + (q.p < 0.3 ? (q.w ? -7 : 7) * (1 - q.p / 0.3) : 0))); q.e.setAttribute("cy", f1(y)); }
+        eq.textContent = `Net filtration = ${r.pGC} − ${r.pBS} − ${r.piGC} = ${r.nfp} mmHg`;
+        st.textContent = here(s, "bowman") ? "this parcel is being filtered now · GFR 125 mL/min" : "filtration never stops · GFR 125 mL/min = 180 L/day"; }; } });
+
+  // 2 · a proximal tubule cell: Na⁺ pumped out, water follows, glucose and bicarbonate reclaimed
+  K.lens("pctcell", { focus: [48, 54, 152, 176],
+    build(g) { cellFrame(g, { brush: true, mito: true }); TX_(g, 200, 66, "Proximal tubule cell", "lh", "middle");
+      membraneProtein(g, 104, 96, "SGLT2", -1); membraneProtein(g, 104, 150, "NHE3", -1); membraneProtein(g, 104, 206, "AQP1", -1, "var(--cold)");
+      membraneProtein(g, 296, 96, "GLUT2", 1); membraneProtein(g, 296, 128, "Na⁺/K⁺ ATPase", 1, "var(--spark)"); membraneProtein(g, 296, 170, "NBCe1", 1); membraneProtein(g, 296, 214, "AQP1", 1, "var(--cold)");
+      TX_(g, 200, 160, "CO₂ + H₂O → H⁺ + HCO₃⁻", "lm", "middle");
+      const Lg = lane(g, [[14, 90], [104, 96], [200, 92], [296, 96], [372, 100]], ION.glu, { square: true, r: 3.3, n: 6 });
+      const Ln = lane(g, [[14, 104], [104, 100], [200, 116], [296, 128], [372, 132]], ION.na, { n: 7 });
+      const Ln2 = lane(g, [[14, 142], [104, 146], [190, 136], [296, 130], [372, 136]], ION.na, { n: 6 });
+      const Lh = lane(g, [[190, 168], [104, 154], [14, 158]], ION.h, { n: 4, r: 2.6 });
+      const Lb = lane(g, [[200, 172], [296, 172], [372, 176]], ION.hco3, { n: 4, r: 3 });
+      const Lk = lane(g, [[372, 122], [296, 124], [250, 118]], ION.k, { n: 3, r: 2.8 });
+      const Lw = lane(g, [[14, 202], [104, 206], [200, 210], [296, 214], [372, 216]], ION.w, { n: 8, r: 2.6 });
+      const Lw2 = lane(g, [[14, 274], [104, 282], [296, 282], [372, 268]], ION.w, { n: 5, r: 2.4 });
+      TX_(g, 200, 300, "water also slips between cells", "lm", "middle");
+      const legend = [[ION.na, "Na⁺"], [ION.glu, "glucose"], [ION.w, "water"], [ION.h, "H⁺"], [ION.hco3, "HCO₃⁻"], [ION.k, "K⁺"]];
+      legend.forEach(([c, t], k) => { const x = 8 + k * 65; el("circle", { cx: x + 5, cy: 318, r: 4, fill: c }, g); TX_(g, x + 13, 322, t, "ls"); });
+      const bV = bar(g, 8, 332, 190, "Filtrate left", "var(--accent)"), bG = bar(g, 8, 349, 190, "Glucose left", ION.glu), bB = bar(g, 8, 366, 190, "HCO₃⁻ left", ION.hco3);
+      const st = TX_(g, 200, 396, "", "lm", "middle");
+      return (i, s, d) => { const r = s.readouts, dS = d * T, inP = here(s, "pct");
+        Lg(inP ? gluRate[i] * 0.05 : 0, dS); Ln(inP ? r.saltOut * 0.25 : 0, dS); Ln2(inP ? r.saltOut * 0.25 : 0, dS); Lh(inP ? hco3Rate[i] * 0.06 : 0, dS); Lb(inP ? hco3Rate[i] * 0.06 : 0, dS);
+        Lk(inP ? r.saltOut * 0.12 : 0, dS); Lw(inP ? r.waterOut * 0.25 : 0, dS); Lw2(inP ? r.waterOut * 0.12 : 0, dS);
+        bV(r.vol / 100, r.vol.toFixed(r.vol < 10 ? 1 : 0) + "%"); bG(r.glucose / 100, r.glucose.toFixed(0) + "%"); bB(r.hco3 / 100, r.hco3.toFixed(0) + "%");
+        st.textContent = inP ? `iso-osmotic: water follows Na⁺, fluid stays ${r.osm.toFixed(0)}` : s.parcel.part === "bowman" ? "the parcel has not reached the proximal tubule yet" : "past the PCT now: the bars show what it reclaimed"; }; } });
+
+  // 3 · the countercurrent multiplier: the loop unfolded as a hairpin against the interstitial gradient
+  K.lens("multiplier", { focus: [196, 248, 100, 360],
+    build(g) { const Yz = (z) => 70 + K.clamp(z, 0, 1) * 250, XD = 128, XA = 222;
+      const grad = el("linearGradient", { id: "lzInt", x1: 0, y1: 0, x2: 0, y2: 1 }, g); for (const [o, a] of [[0, 0.04], [1, 0.46]]) el("stop", { offset: o, "stop-color": "var(--hot-hi)", "stop-opacity": a }, grad);
+      el("rect", { x: 40, y: 70, width: 320, height: 250, fill: "url(#lzInt)" }, g); el("rect", { x: 40, y: 70, width: 320, height: 250, fill: "none", stroke: "var(--hair)" }, g);
+      TX_(g, 16, 30, "The loop of Henle as a hairpin", "lh"); TX_(g, 16, 48, "cortex at the top · papilla at the bottom", "lm");
+      for (const v of [300, 600, 900, 1200]) { const y = Yz((v - 300) / 900); el("line", { x1: 40, x2: 360, y1: f1(y), y2: f1(y), stroke: "var(--hair)", "stroke-dasharray": "2 4" }, g); TX_(g, 364, y + 4, String(v), "lm"); }
+      TX_(g, 396, 340, "interstitium", "lm", "end");
+      // the hairpin: thin descending (water-permeable) and thick ascending (salt pump, water-tight)
+      const hp = `M${XD} 60V${f1(Yz(1) - 14)}Q${XD} ${f1(Yz(1) + 18)} ${(XD + XA) / 2} ${f1(Yz(1) + 18)}Q${XA} ${f1(Yz(1) + 18)} ${XA} ${f1(Yz(1) - 14)}V60`;
+      el("path", { d: hp, fill: "none", stroke: "var(--wall-deep)", "stroke-width": 26, "stroke-linejoin": "round" }, g);
+      el("path", { d: hp, fill: "none", stroke: "var(--wall-hi)", "stroke-width": 23, "stroke-linejoin": "round" }, g);
+      el("path", { d: `M${XA} 60V${f1(Yz(1) - 14)}`, stroke: "var(--wall)", "stroke-width": 23 }, g);
+      el("path", { d: hp, fill: "none", stroke: "var(--fluid)", "stroke-width": 12, "stroke-linejoin": "round" }, g);
+      TX_(g, XD + 12, 356, "thin descending", "ls", "end"); TX_(g, XD + 12, 370, "water out only", "lm", "end"); TX_(g, XA - 12, 356, "thick ascending", "ls", "start"); TX_(g, XA - 12, 370, "NaCl out only", "lm", "start");
+      // tubular fluid along each limb, from the model's own parcel
+      const dPts = [], aPts = []; S.forEach((s) => { if (s.parcel.part === "tdl") dPts.push([s.readouts.depth, s.readouts.osm]); if (s.parcel.part === "tal") aPts.push([s.readouts.depth, s.readouts.osm]); });
+      const near = (A, z) => A.reduce((b, p) => (Math.abs(p[0] - z) < Math.abs(b[0] - z) ? p : b), A[0])[1];
+      for (const z of [0.15, 0.5, 0.85]) { const y = Yz(z); TX_(g, XD - 36, y + 4, near(dPts, z).toFixed(0), "lm halo", "end", { style: "fill:var(--ink)" }); TX_(g, XA + 36, y + 4, near(aPts, z).toFixed(0), "lm halo", "start", { style: "fill:var(--ink)" }); }
+      // water leaving the descending limb, salt leaving the ascending limb
+      const wa = [], na = []; for (let k = 0; k < 5; k++) { const y = Yz(0.12 + k * 0.19); wa.push(el("path", { d: `M${XD - 14} ${f1(y)}h-16m6 -5l-6 5l6 5`, fill: "none", stroke: ION.w, "stroke-width": 2.2, "stroke-linecap": "round", "stroke-linejoin": "round" }, g));
+        na.push(el("path", { d: `M${XA + 14} ${f1(y + 8)}h16m-6 -5l6 5l-6 5`, fill: "none", stroke: ION.na, "stroke-width": 2.2, "stroke-linecap": "round", "stroke-linejoin": "round" }, g)); }
+      // the parcel on the hairpin
+      const pDot = el("circle", { r: 7, fill: "var(--accent)", stroke: "var(--sheet)", "stroke-width": 2 }, g), pTag = TX_(g, 0, 0, "", "lm halo", "middle", { style: "fill:var(--ink)" });
+      const st = TX_(g, 200, 392, "", "lm", "middle");
+      return (i, s) => { const r = s.readouts, p = s.parcel.part, inD = p === "tdl", inA = p === "tal";
+        wa.forEach((e) => e.setAttribute("opacity", inD ? 0.95 : 0.25)); na.forEach((e) => e.setAttribute("opacity", inA ? 0.95 : 0.25));
+        if (inD || inA) { const z = K.clamp(r.depth, 0, 1), y = Yz(z), nearTip = z > 0.94, x = nearTip ? lerp(XD, XA, inD ? 0.15 : 0.85) : inD ? XD : XA;
+          pDot.setAttribute("cx", f1(x)); pDot.setAttribute("cy", f1(nearTip ? Yz(1) + 8 : Math.max(62, y))); pDot.setAttribute("opacity", 1); pTag.setAttribute("x", f1((XD + XA) / 2)); pTag.setAttribute("y", f1(Math.max(62, y) - 12)); pTag.textContent = r.osm.toFixed(0) + " mOsm"; }
+        else { pDot.setAttribute("opacity", 0); pTag.textContent = ""; }
+        st.textContent = inD ? `water out · fluid ${r.osm.toFixed(0)}, outside ${r.intOsm.toFixed(0)}` : inA ? `NaCl out · fluid ${r.osm.toFixed(0)}, outside ${r.intOsm.toFixed(0)}` : "parcel outside the loop · numbers are its own values"; }; } });
+
+  // 4 · a thick ascending limb cell: NKCC2, K⁺ recycling, the lumen-positive voltage and paracellular Mg²⁺/Ca²⁺
+  K.lens("talcell", { focus: [262, 300, 42, 210],
+    build(g) { cellFrame(g, { mito: true }); TX_(g, 200, 66, "Thick ascending limb cell", "lh", "middle");
+      membraneProtein(g, 104, 104, "NKCC2", -1); membraneProtein(g, 104, 168, "ROMK", -1, "var(--spark)");
+      membraneProtein(g, 296, 104, "Na⁺/K⁺ ATPase", 1, "var(--spark)"); membraneProtein(g, 296, 150, "ClC-Kb", 1, "var(--open)");
+      TX_(g, 52, 248, "lumen +", "lt", "middle"); TX_(g, 52, 264, "(K⁺ recycled", "lm", "middle"); TX_(g, 52, 278, "back out)", "lm", "middle");
+      // water-tight wall
+      el("path", { d: "M18 214h68", stroke: ION.w, "stroke-width": 2.2, "stroke-dasharray": "3 3" }, g); el("path", { d: "M94 206l12 16M106 206l-12 16", stroke: "var(--shut)", "stroke-width": 2.4 }, g); TX_(g, 52, 204, "no aquaporins", "lm", "middle");
+      TX_(g, 150, 130, "loop diuretics", "lm", "start", { style: "fill:var(--shut)" }); TX_(g, 150, 143, "(furosemide) block", "lm", "start", { style: "fill:var(--shut)" }); el("path", { d: "M146 126L112 108", stroke: "var(--shut)", "stroke-width": 1, "stroke-dasharray": "3 2" }, g);
+      const Ln = lane(g, [[14, 96], [104, 100], [210, 96], [296, 104], [372, 108]], ION.na, { n: 6 });
+      const Lc1 = lane(g, [[14, 108], [104, 106], [210, 120], [296, 150], [372, 152]], ION.cl, { n: 6, r: 3 });
+      const Lc2 = lane(g, [[14, 118], [104, 110], [200, 132], [296, 152], [372, 160]], ION.cl, { n: 6, r: 3 });
+      const Lk = lane(g, [[14, 112], [104, 104], [180, 140], [104, 168], [14, 172]], ION.k, { n: 5, r: 2.8 });
+      const Lk2 = lane(g, [[372, 96], [296, 102], [240, 98]], ION.k, { n: 3, r: 2.6 });
+      const Lm = lane(g, [[14, 282], [104, 288], [200, 290], [296, 288], [372, 282]], ION.mg, { n: 5, r: 3 });
+      TX_(g, 200, 304, "Mg²⁺ and Ca²⁺ squeeze between cells", "lm", "middle");
+      const legend = [[ION.na, "Na⁺"], [ION.k, "K⁺"], [ION.cl, "Cl⁻"], [ION.mg, "Mg²⁺/Ca²⁺"]];
+      legend.forEach(([c, t], k) => { const x = 8 + k * 92; el("circle", { cx: x + 5, cy: 320, r: 4, fill: c }, g); TX_(g, x + 13, 324, t, "ls"); });
+      const bL = bar(g, 8, 338, 160, "Lumen", "var(--hot-hi)"), bI = bar(g, 8, 356, 160, "Interstitium", "var(--hot)"); const st = TX_(g, 200, 392, "", "lm", "middle");
+      return (i, s, d) => { const r = s.readouts, dS = d * T, on = here(s, "tal"), k = on ? r.saltOut * 0.35 : 0;
+        Ln(k, dS); Lc1(k, dS); Lc2(k, dS); Lk(k * 0.8, dS); Lk2(k * 0.5, dS); Lm(k * 0.4, dS);
+        bL(r.osm / 1200, r.osm.toFixed(0) + " mOsm/kg"); bI(r.intOsm / 1200, r.intOsm.toFixed(0) + " mOsm/kg");
+        st.textContent = on ? `NaCl out, water stays · lumen ${r.osm.toFixed(0)}, outside ${r.intOsm.toFixed(0)}` : "the parcel is not in the thick limb now"; }; } });
+
+  // 5 · a principal cell of the collecting duct: ADH → V2 → cAMP → aquaporin-2 inserted; aldosterone → ENaC, ROMK
+  K.lens("principal", { focus: [526, 140, 36, 330],
+    build(g) { cellFrame(g, {}); TX_(g, 200, 66, "Principal cell · ADH on", "lh", "middle");
+      membraneProtein(g, 104, 96, "ENaC", -1); membraneProtein(g, 104, 138, "ROMK", -1, "var(--spark)");
+      for (const y of [184, 208, 232]) el("rect", { x: 97, y: y - 9, width: 14, height: 18, rx: 6, fill: "var(--cold)", stroke: "var(--sheet)", "stroke-width": 1.2 }, g);
+      TX_(g, 92, 172, "AQP2", "lm halo", "end", { style: "font-size:11px;fill:var(--ink)" });
+      membraneProtein(g, 296, 110, "Na⁺/K⁺ ATPase", 1, "var(--spark)"); membraneProtein(g, 296, 196, "AQP3/4", 1, "var(--cold)");
+      el("path", { d: "M289 252h14", stroke: "var(--accent)", "stroke-width": 8, "stroke-linecap": "round" }, g); TX_(g, 310, 272, "V2 receptor", "lm halo", "start", { style: "font-size:11px;fill:var(--ink)" });
+      const adh = [0, 1, 2].map((k) => el("circle", { cx: 318 + k * 10, cy: 236 + (k % 2) * 8, r: 4, fill: "var(--accent)", stroke: "var(--sheet)" }, g)); TX_(g, 330, 226, "ADH", "lm", "middle", { style: "fill:var(--accent)" });
+      el("path", { d: "M282 252Q250 250 236 230", fill: "none", stroke: "var(--accent)", "stroke-width": 1.4, "stroke-dasharray": "3 3" }, g); TX_(g, 214, 196, "cAMP", "lm", "middle", { style: "fill:var(--accent)" });
+      TX_(g, 232, 242, "MR", "lm", "middle", { style: "fill:var(--sheet)" }); TX_(g, 198, 272, "aldosterone receptor", "lm", "middle");
+      const ves = [0, 1, 2, 3].map((k) => ({ p: k / 4, e: el("g", { "data-bleed": 1 }, g) })); ves.forEach((v) => { el("circle", { r: 7, fill: "var(--sheet)", stroke: "var(--cold)", "stroke-width": 1.5 }, v.e); el("rect", { x: -2.5, y: -4, width: 5, height: 8, rx: 2, fill: "var(--cold)" }, v.e); });
+      const Lw = lane(g, [[14, 196], [104, 208], [200, 206], [296, 196], [372, 192]], ION.w, { n: 9, r: 2.6 });
+      const Ln = lane(g, [[14, 92], [104, 96], [200, 100], [296, 110], [372, 112]], ION.na, { n: 6 });
+      const Lk = lane(g, [[372, 122], [296, 114], [200, 128], [104, 138], [14, 140]], ION.k, { n: 5, r: 2.8 });
+      const legend = [[ION.na, "Na⁺"], [ION.k, "K⁺"], [ION.w, "water"], ["var(--accent)", "ADH"]];
+      legend.forEach(([c, t], k) => { const x = 8 + k * 92; el("circle", { cx: x + 5, cy: 316, r: 4, fill: c }, g); TX_(g, x + 13, 320, t, "ls"); });
+      const bL = bar(g, 8, 334, 160, "Lumen", ION.w), bI = bar(g, 8, 352, 160, "Interstitium", "var(--hot)"); const st = TX_(g, 200, 392, "", "lm", "middle"), st2 = TX_(g, 200, 378, "", "lm", "middle");
+      return (i, s, d) => { const r = s.readouts, dS = d * T, on = here(s, "cd");
+        Lw(on ? r.waterOut * 0.35 : 0, dS); Ln(on ? r.saltOut * 0.6 : 0, dS); Lk(on ? r.saltOut * 0.4 : 0, dS);
+        for (const v of ves) { v.p = (v.p + dS * (on ? 0.25 : 0.05)) % 1; const y = 266 - v.p * 70, x = 150 - v.p * 32; v.e.setAttribute("transform", `translate(${f1(x)} ${f1(y)})`); v.e.setAttribute("opacity", f1(v.p > 0.85 ? (1 - v.p) / 0.15 : 1)); }
+        adh.forEach((a) => a.setAttribute("opacity", 1));
+        bL(r.osm / 1200, r.osm.toFixed(0) + " mOsm/kg"); bI(r.intOsm / 1200, r.intOsm.toFixed(0) + " mOsm/kg");
+        st2.textContent = on ? `water out at ${r.waterOut.toFixed(1)} %/s of the parcel's water` : "the parcel is not in the collecting duct now";
+        st.textContent = on ? `filtrate left ${r.vol < 10 ? r.vol.toFixed(1) : r.vol.toFixed(0)}% · ${r.flowDay.toFixed(1)} L/day at this point` : ""; }; } });
+
+  // 6 · where the filtrate goes: volume left after each segment, from the model's own parcel
+  K.lens("ledger", { focus: [30, 30, 532, 590],
+    build(g) { const PH = [...new Set(S.map((s) => s.phase))], short = { "Glomerular filtration": ["Bowman", ""], "Proximal convoluted tubule": ["PCT", ""], "Thin descending limb": ["thin", "desc."], "Thick ascending limb": ["thick", "asc."], "Distal convoluted tubule": ["DCT", ""], "Cortical collecting duct": ["CCD", ""], "Medullary collecting duct": ["MCD", ""] };
+      const seg = PH.map((ph) => { const idx = S.map((s, k) => (s.phase === ph ? k : -1)).filter((k) => k >= 0), a = S[idx[0]].readouts, b = S[idx[idx.length - 1]].readouts; return { ph, k0: idx[0], k1: idx[idx.length - 1], vIn: a.vol, vOut: b.vol, osmOut: b.osm }; });
+      const n = seg.length, X0 = 44, W = (390 - X0) / n, Y = (v) => 250 - v / 100 * 190;
+      TX_(g, 12, 28, "Where the 180 L/day of filtrate goes", "lh"); TX_(g, 12, 46, "% of the filtrate still in the tubule", "lm");
+      for (const v of [0, 25, 50, 75, 100]) { el("line", { x1: X0, x2: 390, y1: f1(Y(v)), y2: f1(Y(v)), stroke: "var(--hair)" }, g); TX_(g, X0 - 5, Y(v) + 4, String(v), "lm", "end"); }
+      const cols = seg.map((sg, k) => el("rect", { x: f1(X0 + k * W), y: 56, width: f1(W), height: 196, fill: "var(--accent)", opacity: 0 }, g));
+      let d = `M${X0} ${f1(Y(100))}`; seg.forEach((sg, k) => { d += `L${f1(X0 + k * W)} ${f1(Y(sg.vIn))}L${f1(X0 + (k + 1) * W)} ${f1(Y(sg.vOut))}`; });
+      el("path", { d: d + `L390 ${f1(Y(0))}L${X0} ${f1(Y(0))}Z`, fill: "var(--cold-hi)", "fill-opacity": 0.18 }, g); el("path", { d, fill: "none", stroke: "var(--cold-hi)", "stroke-width": 2.4 }, g);
+      seg.forEach((sg, k) => { const cx = X0 + (k + 0.5) * W, [a, b] = short[sg.ph] || [sg.ph.slice(0, 6), ""]; TX_(g, cx, 268, a, "lm", "middle", { style: "fill:var(--ink)" }); if (b) TX_(g, cx, 281, b, "lm", "middle", { style: "fill:var(--ink)" });
+        const out = sg.vIn - sg.vOut; TX_(g, cx, 314, out > 0.05 ? "−" + (out >= 10 ? out.toFixed(0) : out.toFixed(1)) : "0", "lm", "middle", { style: out > 0.05 ? "fill:var(--cold)" : "" }); TX_(g, cx, 348, sg.osmOut.toFixed(0), "lm", "middle"); });
+      TX_(g, 12, 298, "water removed here, % of the filtrate", "lm"); TX_(g, 12, 332, "osmolality leaving, mOsm/kg", "lm");
+      const fin = seg[n - 1]; TX_(g, 12, 372, `Urine: ${fin.vOut.toFixed(1)}% of the filtrate, ${(180 * fin.vOut / 100).toFixed(1)} L/day, ${fin.osmOut.toFixed(0)} mOsm/kg`, "lt");
+      const dot = el("circle", { r: 6, fill: "var(--accent)", stroke: "var(--sheet)", "stroke-width": 2 }, g), st = TX_(g, 12, 392, "", "lm");
+      return (i, s) => { const r = s.readouts, k = seg.findIndex((sg) => sg.ph === s.phase); cols.forEach((c, j) => c.setAttribute("opacity", j === k ? 0.1 : 0));
+        if (k >= 0) { const sg = seg[k], f = (i - sg.k0) / Math.max(1, sg.k1 - sg.k0); dot.setAttribute("cx", f1(X0 + (k + K.clamp(f, 0, 1)) * W)); dot.setAttribute("cy", f1(Y(r.vol))); }
+        st.textContent = `parcel now: ${r.vol < 10 ? r.vol.toFixed(1) : r.vol.toFixed(0)}% left · ${r.osm.toFixed(0)} mOsm/kg · ${r.flowDay.toFixed(1)} L/day`; }; } });
+
+
   return {
     paths: PATHS,
     update(i, s, d) {

@@ -39,7 +39,11 @@
   "RAV": "Right atrial volume.",
   "SV": "Stroke volume = end-diastolic minus end-systolic volume.",
   "EF": "Ejection fraction = stroke volume / end-diastolic volume.",
-  "ecg": "Schematic surface ECG on the same clock: P wave starts atrial contraction, QRS just before ventricular contraction, T wave during late ejection."
+  "ecg": "Schematic surface ECG on the same clock: P wave starts atrial contraction, QRS just before ventricular contraction, T wave during late ejection.",
+  "vmSA": "Membrane voltage of an SA-node pacemaker cell: drifts up to threshold (funny current), fires, resets.",
+  "vmV": "Membrane voltage of a ventricular muscle cell: resting −88 mV, fast upstroke, plateau, repolarisation.",
+  "ca": "Ventricular intracellular Ca²⁺ transient (0–1): rises just after the upstroke and drives contraction.",
+  "actV": "Ventricular activation (0–1): how strongly the ventricular muscle is contracting."
  },
  "concepts": [
   "phases of the cardiac cycle",
@@ -65,5 +69,156 @@
   "valve disease murmurs",
   "coronary blood flow",
   "cardiac output regulation"
- ]
+ ],
+ "lenses": {
+  "ap": {
+   "title": "Inside two heart cells",
+   "kicker": "Lens · membrane voltage",
+   "shows": "Action potentials of an SA-node pacemaker cell and a ventricular muscle cell over one beat, the ions behind each phase, and the ECG they add up to; the conduction system lights up on the heart.",
+   "phases": [
+    "Atrial systole",
+    "Isovolumetric contraction",
+    "Ventricular ejection"
+   ],
+   "parts": [
+    "RA",
+    "LV"
+   ],
+   "concepts": [
+    "pacemaker potential and the funny current",
+    "ventricular action potential phases 0–4 and the plateau",
+    "conduction: SA node, AV node delay, bundle of His, Purkinje fibres",
+    "ECG waves P, QRS, T and the PR interval"
+   ]
+  },
+  "mitral": {
+   "title": "Looking down through the left atrium",
+   "kicker": "Lens · surgeon's view",
+   "shows": "The mitral valve seen from the left atrium: anterior and posterior (P1–P3) leaflets, commissures and chordae; it opens only while LA pressure exceeds LV pressure.",
+   "phases": [
+    "Rapid filling",
+    "Diastasis",
+    "Atrial systole",
+    "Isovolumetric contraction"
+   ],
+   "parts": [
+    "mitral",
+    "LA",
+    "LV"
+   ],
+   "concepts": [
+    "mitral valve anatomy",
+    "AV valve opening and closure by pressure gradient",
+    "atrial kick",
+    "S1 from AV valve closure"
+   ]
+  },
+  "sarcomere": {
+   "title": "One sarcomere in the LV wall",
+   "kicker": "Lens · ×20,000",
+   "shows": "Ca²⁺ release from the sarcoplasmic reticulum, myosin cross-bridges binding actin, and sarcomere length against tension across the beat (isometric in the isovolumetric phases).",
+   "phases": [
+    "Isovolumetric contraction",
+    "Ventricular ejection",
+    "Isovolumetric relaxation",
+    "Rapid filling"
+   ],
+   "parts": [
+    "LV"
+   ],
+   "concepts": [
+    "excitation–contraction coupling",
+    "Ca²⁺ and troponin–tropomyosin",
+    "isometric vs shortening contraction",
+    "Frank–Starling length–tension",
+    "SERCA and active relaxation"
+   ]
+  },
+  "aortic": {
+   "title": "The aortic valve from above",
+   "kicker": "Lens · view down the aorta",
+   "shows": "The three aortic cusps opening into a triangle during ejection and closing (S2), with blood jetting through and the coronary ostia filling in diastole.",
+   "phases": [
+    "Ventricular ejection",
+    "Isovolumetric relaxation",
+    "Isovolumetric contraction"
+   ],
+   "parts": [
+    "aortic",
+    "aorta",
+    "LV"
+   ],
+   "concepts": [
+    "semilunar valve opening and closure",
+    "S2 and the dicrotic notch",
+    "right, left and non-coronary cusps",
+    "coronary filling in diastole",
+    "aortic stenosis"
+   ]
+  },
+  "shortaxis": {
+   "title": "The heart cut across the ventricles",
+   "kicker": "Lens · short-axis slice",
+   "shows": "A slice through both ventricles: the thick round LV and the thin crescent RV, the LV wall thickening as the cavity empties, and the cavity at end-diastole for comparison.",
+   "phases": [
+    "Ventricular ejection",
+    "Rapid filling",
+    "Isovolumetric contraction"
+   ],
+   "parts": [
+    "LV",
+    "RV"
+   ],
+   "concepts": [
+    "LV vs RV wall thickness",
+    "systolic wall thickening",
+    "Laplace's law",
+    "end-diastolic and end-systolic volume"
+   ]
+  },
+  "pv": {
+   "title": "LV pressure–volume loop",
+   "kicker": "Lens · a new graph",
+   "shows": "LV pressure plotted against LV volume over the beat: one loop whose corners are the four valve events, whose width is the stroke volume and whose area is stroke work.",
+   "phases": [
+    "Rapid filling",
+    "Diastasis",
+    "Atrial systole",
+    "Isovolumetric contraction",
+    "Ventricular ejection",
+    "Isovolumetric relaxation"
+   ],
+   "parts": [
+    "LV",
+    "mitral",
+    "aortic"
+   ],
+   "concepts": [
+    "pressure–volume loop",
+    "stroke volume and ejection fraction",
+    "stroke work",
+    "ESPVR (contractility) and EDPVR (compliance)"
+   ]
+  },
+  "chest": {
+   "title": "Listening points on the chest",
+   "kicker": "Lens · surface anatomy",
+   "shows": "Where each valve is heard on the chest wall, lighting up at S1 (mitral, tricuspid) and S2 (aortic, pulmonary), with the phonocardiogram of this beat.",
+   "phases": [
+    "Isovolumetric contraction",
+    "Isovolumetric relaxation"
+   ],
+   "parts": [
+    "mitral",
+    "tricuspid",
+    "aortic",
+    "pulmonary"
+   ],
+   "concepts": [
+    "first and second heart sounds",
+    "auscultation areas",
+    "what causes heart sounds"
+   ]
+  }
+ }
 }

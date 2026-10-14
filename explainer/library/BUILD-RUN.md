@@ -11,6 +11,7 @@ medbank folder on his computer (connected to this session). Read `explainer/libr
 - Quality bar: the two library plates `explainer/library/physiology/nephron-urine-journey/` and `explainer/library/physiology/cardiac-cycle-wiggers/`
   (the Four-Chamber Heart). Not `studio/fixtures/cardiac.*`: that is a simplified older drawing, never copy its look.
   If a plate cannot reach it after about 8 rounds, do not ship it: set status "needs-review" with a note.
+- Every plate ships **5–7 lenses** (see "Lenses" below) and a tour (lesson.json) whose steps open them. A plate without lenses is not done.
 
 ## 1. Claim 3 topics
 - Read `explainer/library/physiology.json`. Walk `plan.wave1` in order. Take the first 3 topics whose status is "todo",
@@ -22,7 +23,7 @@ medbank folder on his computer (connected to this session). Read `explainer/libr
 
 ## 2. Set up the cloud work folder
 - Copy into `work/tools/` (stage them from the computer): `explainer/studio/{kit.js,shell.mjs,qa.mjs,prompts.mjs,llm.mjs}`,
-  `explainer/studio/fixtures/*`, and `explainer/studio/plate-kit/{assemble.mjs,final.mjs,voice.py,manifest.mjs,freemap.mjs,compare.mjs,BRIEF-nephron-example.md}`.
+  `explainer/studio/fixtures/*`, and `explainer/studio/plate-kit/{assemble.mjs,final.mjs,voice.py,manifest.mjs,freemap.mjs,compare.mjs,stepshots.mjs,BRIEF-nephron-example.md}`.
   Also copy the library nephron plate `explainer/library/physiology/nephron-urine-journey/{plan.json,model.js,scene.js,lesson.json,shows.json,manifest.json}` into `work/tools/exemplar-nephron/` (this is the polished version; it supersedes `studio/out/nephron-compare/src-opus`), and
   `explainer/library/physiology/cardiac-cycle-wiggers/{plan.json,model.js,scene.js,lesson.json,shows.json,manifest.json}` into `work/tools/exemplar-heart/`.
 - assemble.mjs imports Playwright from `/opt/npm-tools/node_modules/playwright/index.js`. If that path does not exist, find
@@ -41,13 +42,16 @@ For each topic, write `work/BRIEF-<id>.md` by adapting `BRIEF-nephron-example.md
 - Charts: the shell supports per-lane `weight`, `step` (gridlines), `grid:false`, `marks` [{t,label}], `noEvents`, `dot`, per-series `at` and `label:""`,
   `M.chartModes` (a toggle, e.g. left/right heart), `M.gateWhy`, and a ledger number `text(s)` formatter. See the heart's model.js. Readouts must stay numeric.
 - `plan.json` may carry a `legend` (HTML) for the plate's own colour key.
+- Add: "Draw 5–7 lenses with `K.lens(id, { focus, build })` and describe each in shows.json `lenses` (see 'Lenses' below). Study both exemplars' lenses first."
+- Add: "assemble.mjs must print LENS ISSUES: none. Then look at every `lens-<id>.png` and `phone-lens.png` yourself, and run `node tools/stepshots.mjs <id>/A.html <id>/step` to see each tour stop with its lens open." 
 - Add: "Also write `shows.json` (format below); `manifest.json` is generated from it by `node tools/manifest.mjs <id> <id> physiology`, which must print MANIFEST ISSUES: none."
 - Add: "assemble.mjs must also print LABELS ON STRUCTURES: none (no label sitting on a tube, vessel or wall). If a label will not fit, use `node tools/freemap.mjs <id> x0 y0 x1 y1` to find free space, or a short leader line."
 Then launch three Agent subagents at once with `model: "opus"`, one per topic, each told to follow its brief in its own folder
-`work/<id>/` and iterate with `node tools/assemble.mjs <id>` and the screenshots until MODEL/PAGE ISSUES and LABELS ON STRUCTURES are all none and it looks excellent.
+`work/<id>/` and iterate with `node tools/assemble.mjs <id>` and the screenshots until MODEL/PAGE ISSUES, LABELS ON STRUCTURES and LENS ISSUES are all none and it looks excellent.
 
 ## 4. Review, voice, finish
-- Look at each `shot.png` and `stage-*.png` yourself. Reject anything that is boxes-and-arrows, cramped, mislabelled or wrong.
+- Look at each `shot.png`, `stage-*.png`, `lens-*.png` and `phone-lens.png` yourself. Reject anything that is boxes-and-arrows, cramped, mislabelled or wrong,
+  and any lens that is a static picture rather than a view driven by the model (it must change as the cycle plays).
   Send it back to its subagent with specific fixes, at most 2 extra rounds.
 - `KOKORO=<dir> python3 tools/voice.py <id> bf_emma` then `node tools/final.mjs <id> <id>.html`.
 
@@ -71,3 +75,21 @@ default lesson against it. Example: `explainer/library/physiology/nephron-urine-
 ```
 Every phase, part and readout of the model needs a "shows" line. The plate never decides what a student is taught; the
 default lesson.json (recorded voice) is only the fallback when a student has no note.
+
+## Lenses (5–7 per plate)
+A lens is a magnified, model-driven second view of one region of the plate: inside a cell (its transporters and ions), looking
+down a valve, a cross-section, the mechanism unfolded (e.g. the loop of Henle as a hairpin), a graph of the same cycle (e.g. a PV
+loop), or where the numbers go (a ledger). The shell does the layout: when a lens opens, the main drawing shrinks to ~40% (still
+live) with a box on the magnified region and a cone to the lens; on phones a small live locator sits above a full-width lens.
+- In scene.js, before `return`: `K.lens("<id>", { focus: [x, y, w, h], build(g, { S, M, N, T }) { …draw on a 400 × 400 canvas…; return (i, s, dBeat) => { …update from s… }; } })`.
+  `focus` is the region on the main drawing (scene coordinates). Optional: `cam: [cx, cy, w]` (main camera while open),
+  `toggle(on)` (show an overlay on the main drawing only while the lens is open, e.g. a cut plane or the conduction system).
+- Lenses read the SAME sample `s` and frame `i` as the scene: every motion and number comes from the model. If a lens needs a
+  quantity the model doesn't expose (a membrane voltage, a Ca²⁺ transient, a pressure), add it to the model as a readout first.
+  Moving particles use `dBeat × T` seconds (always ≥ 0). No timers of their own.
+- Text: `K.text(g, x, y, str, cls, anchor)` with classes lt / lh / lm / ls / big (+ " halo" over drawings). Keep every text inside
+  the 400 × 400 canvas at every moment of the cycle (live values get long). Mark deliberately edge-bleeding groups `data-bleed`.
+- shows.json: `"lenses": { "<id>": { "title", "kicker", "shows", "phases": [model phases], "parts": [part ids], "concepts": [...] } }`.
+  `manifest.mjs` copies them into manifest.json (DeepSeek picks only the lenses the student's note covers) and validates them.
+- Tour: lesson.json steps may set `"lens": "<id>"` (opens it) and `"win": [t0, t1]` (the moment "Loop this moment" replays;
+  default is the step's phase, padded). Most steps should open a lens, and the narration talks about what the lens shows.

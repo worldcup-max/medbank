@@ -173,9 +173,10 @@
        "title": "The Na+/K+ ATPase pump cycle",
        "kind": "cycle",
        "priority": 1,
-       "status": "todo",
+       "status": "building",
        "wave": 1,
-       "order": 4
+       "order": 4,
+       "claimed_at": "2026-10-14T12:45:10Z"
       },
       {
        "id": "secondary-active-transport",
@@ -209,18 +210,20 @@
        "title": "Resting membrane potential: Goldman equation and K+ leak",
        "kind": "time-course",
        "priority": 1,
-       "status": "todo",
+       "status": "building",
        "wave": 1,
-       "order": 5
+       "order": 5,
+       "claimed_at": "2026-10-14T12:45:10Z"
       },
       {
        "id": "action-potential-nerve",
        "title": "The nerve action potential: Na+ and K+ channel gating",
        "kind": "cycle",
        "priority": 1,
-       "status": "todo",
+       "status": "building",
        "wave": 1,
-       "order": 3
+       "order": 3,
+       "claimed_at": "2026-10-14T12:45:10Z"
       },
       {
        "id": "refractory-periods",

@@ -25,8 +25,8 @@
   const TONE = { hot: ["var(--hot)", "var(--hot-lumen)"], cold: ["var(--cold)", "var(--cold-lumen)"], neutral: ["var(--wall-deep)", "var(--fluid)"], tissue: ["var(--wall-deep)", "var(--wall)"] };
 
   const K = { el, f1, lerp, mid, clamp, norm, spline, sampleSpline, NS };
-  let svgRoot = null, top = null, defs = null; const LABELS = [], PARTS = {};
-  K.init = (svg) => { svgRoot = svg; defs = el("defs", {}, svg); top = null; LABELS.length = 0; for (const k in PARTS) delete PARTS[k];
+  let svgRoot = null, top = null, defs = null; const LABELS = [], PARTS = {}, LENSES = {};
+  K.init = (svg) => { svgRoot = svg; defs = el("defs", {}, svg); top = null; LABELS.length = 0; for (const k in PARTS) delete PARTS[k]; for (const k in LENSES) delete LENSES[k];
     const g = el("radialGradient", { id: "kTissue", cx: "45%", cy: "35%", r: "75%" }, defs); el("stop", { offset: "0", "stop-color": "var(--wall-hi)" }, g); el("stop", { offset: "1", "stop-color": "var(--wall)" }, g);
     const glow = el("filter", { id: "kGlow", x: "-30%", y: "-30%", width: "160%", height: "160%" }, defs); el("feGaussianBlur", { stdDeviation: "3", result: "b" }, glow); const m = el("feMerge", {}, glow); el("feMergeNode", { in: "b" }, m); el("feMergeNode", { in: "SourceGraphic" }, m);
   };
@@ -112,5 +112,15 @@
         if (p.c.parentNode !== sg.layer) sg.layer.appendChild(p.c);
         p.c.setAttribute("cx", f1(x)); p.c.setAttribute("cy", f1(y)); p.c.setAttribute("r", opt.r || 2.5); p.c.setAttribute("fill", RAMP[Math.round(clamp(tone, 0, 1) * 16)]); } } };
   };
+  /* lenses: a magnified, model-driven second view of one region of the plate (inside a cell, looking down a valve, a graph of the same beat…).
+     K.lens(id, { focus: [x, y, w, h]   the region on the main drawing it magnifies (boxed, with a cone to the lens),
+                  cam?: [cx, cy, w]     optional main-drawing camera while this lens is open (default: the whole drawing),
+                  build(g, ctx) → update(i, s, dBeat) })   draw once into g on a 400 × 400 canvas; update every frame from the SAME
+     model sample s and frame index i as the main scene (ctx = { S, M, N, T }). Title, kicker and "shows" come from shows.json, not code.
+     The shell owns the layout (split stage / phone locator), the cone, the tour and "Loop this moment". */
+  K.lens = (id, spec) => { LENSES[id] = spec; return spec; };
+  K.lenses = () => LENSES;
+  /* lens text: classes lt (body 14), lh (display heading), lm (mono small), ls (body small), big (display 30); add " halo" over drawings */
+  K.text = (parent, x, y, str, cls = "lt", anchor = "start", attrs = {}) => { const t = el("text", { x: f1(x), y: f1(y), class: cls, "text-anchor": anchor, ...attrs }, parent); t.textContent = str; return t; };
   window.K = K;
 })();

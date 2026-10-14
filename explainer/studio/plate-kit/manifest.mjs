@@ -11,13 +11,15 @@ import { readFileSync, writeFileSync, existsSync } from "node:fs"; import { join
 
 export function validateLesson(lesson, manifest, opt = {}) {
   // the same rule the app applies to DeepSeek's note-driven tutor before showing it
-  const issues = [], P = new Set(manifest.phases.map((p) => p.name)), Q = new Set(manifest.parts.map((p) => p.id));
+  const issues = [], P = new Set(manifest.phases.map((p) => p.name)), Q = new Set(manifest.parts.map((p) => p.id)), LZ = new Set((manifest.lenses || []).map((l) => l.id));
   if (!lesson || !Array.isArray(lesson.steps) || !lesson.steps.length) return ["lesson has no steps"];
   lesson.steps.forEach((s, k) => {
     if (!s.say || typeof s.say !== "string") issues.push(`step ${k + 1}: no narration`);
     if (s.phase && !P.has(s.phase)) issues.push(`step ${k + 1}: phase "${s.phase}" is not in the manifest`);
     if (!s.phase && typeof s.at !== "number") issues.push(`step ${k + 1}: needs a phase (or at)`);
     (s.focus || []).forEach((f) => { if (!Q.has(f)) issues.push(`step ${k + 1}: focus "${f}" is not a part in the manifest`); });
+    if (s.lens != null && !LZ.has(s.lens)) issues.push(`step ${k + 1}: lens "${s.lens}" is not in the manifest`);
+    if (s.win != null && !(Array.isArray(s.win) && s.win.length === 2 && s.win[0] >= 0 && s.win[1] > s.win[0] && s.win[1] <= manifest.duration + 1e-9)) issues.push(`step ${k + 1}: win must be [t0, t1] inside 0–${manifest.duration}`);
     if (opt.maxWords && s.say && s.say.split(/\s+/).length > opt.maxWords) issues.push(`step ${k + 1}: narration too long`);
   });
   return issues;
@@ -43,17 +45,23 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     parts: (M.parts || []).map((p) => ({ id: p.id, name: p.name, shows: (shows.parts || {})[p.id] || (issues.push(`part "${p.id}" has no 'shows'`), "") })),
     readouts: ro.map((r) => ({ ...r, shows: (shows.readouts || {})[r.key] || (issues.push(`readout "${r.key}" has no 'shows'`), "") })),
     concepts: shows.concepts || [], not_shown: shows.not_shown || [],
+    // lenses: magnified, model-driven second views the tutor can open at a step (see lenses[].shows); a step may name at most one
+    lenses: Object.entries(shows.lenses || {}).map(([id, l]) => ({ id, title: l.title, kicker: l.kicker || "", shows: l.shows, phases: l.phases || [], parts: l.parts || [], concepts: l.concepts || [] })),
     tutor: {
       rule: "The student's note drives the tutor. Explain only what the note says, in the note's terms, order and depth. Never teach concepts of this topic that are not in the note.",
       use: "Pick only the phases and parts the note covers; parts the note does not mention stay dimmed and silent. Note content this plate cannot show is explained in words (no phase/focus) and listed in 'extend'.",
-      step: { title: "short heading", phase: "one of phases[].name", focus: "array of parts[].id", speed: "0.1–1 playback speed", say: "2–4 sentences, written for the ear, in the note's own terms" },
+      lenses: "A step may open one lens (lens: lenses[].id) only when the note covers what that lens shows (match its concepts and shows against the note); skip every lens the note does not cover. When a lens is open, the narration should talk about what the lens shows.",
+      step: { title: "short heading", phase: "one of phases[].name", focus: "array of parts[].id", lens: "optional: one of lenses[].id", win: "optional: [t0, t1] model-time window to loop (default: the phase, padded)", speed: "playback speed (see the default lesson)", say: "2–4 sentences, written for the ear, in the note's own terms" },
       output: { steps: "[step]", extend: "[note concepts this plate cannot show]" },
       fallbackLesson: "lesson.json (recorded voice, used only when there is no note)",
     },
   };
   if (!man.concepts.length) issues.push("shows.json: 'concepts' is empty");
+  const PH = new Set(man.phases.map((p) => p.name)), PT = new Set(man.parts.map((p) => p.id));
+  man.lenses.forEach((l) => { if (!l.title || !l.shows) issues.push(`lens "${l.id}": needs a title and 'shows'`); if (!l.phases.length || !l.parts.length) issues.push(`lens "${l.id}": needs linked phases and parts`);
+    l.phases.forEach((p) => { if (!PH.has(p)) issues.push(`lens "${l.id}": phase "${p}" is not a model phase`); }); l.parts.forEach((p) => { if (!PT.has(p)) issues.push(`lens "${l.id}": part "${p}" is not a model part`); }); });
   validateLesson(lesson, man).forEach((x) => issues.push("default lesson: " + x));
   writeFileSync(join(dir, "manifest.json"), JSON.stringify(man, null, 1));
-  console.log("MANIFEST ISSUES:", issues.length ? issues : "none"); console.log(`manifest: ${man.phases.length} phases, ${man.parts.length} parts, ${man.readouts.length} readouts`);
+  console.log("MANIFEST ISSUES:", issues.length ? issues : "none"); console.log(`manifest: ${man.phases.length} phases, ${man.parts.length} parts, ${man.readouts.length} readouts, ${man.lenses.length} lenses`);
   if (issues.length) process.exitCode = 1;
 }

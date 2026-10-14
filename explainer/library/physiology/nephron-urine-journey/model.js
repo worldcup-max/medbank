@@ -52,7 +52,8 @@ function createModel() {
       { key: "intOsm", label: "Interstitium here", unit: "mOsm/kg", digits: 0, big: true }, { key: "flowDay", label: "Flow at this point", unit: "L/day", digits: 1, big: true },
       { key: "gap", label: "Lumen minus interstitium", unit: "mOsm/kg", digits: 0 }, { key: "waterOut", label: "Water leaving parcel", unit: "%/s", digits: 1 },
       { key: "saltOut", label: "Solute leaving parcel", unit: "%/s", digits: 1 }, { key: "glucose", label: "Glucose left", unit: "%", digits: 0 },
-      { key: "hco3", label: "Bicarbonate left", unit: "%", digits: 0 }, { key: "depth", label: "Depth into medulla", unit: "0–1", digits: 2 }, { key: "nfp", label: "Net filtration pressure", unit: "mmHg", digits: 0 }],
+      { key: "hco3", label: "Bicarbonate left", unit: "%", digits: 0 }, { key: "depth", label: "Depth into medulla", unit: "0–1", digits: 2 }, { key: "nfp", label: "Net filtration pressure", unit: "mmHg", digits: 0 },
+      { key: "pGC", label: "Glomerular capillary pressure", unit: "mmHg", digits: 0 }, { key: "pBS", label: "Bowman's space pressure", unit: "mmHg", digits: 0 }, { key: "piGC", label: "Plasma oncotic pressure", unit: "mmHg", digits: 0 }],
     chart: [{ lane: "Osmolality", unit: "mOsm/kg", min: 0, max: 1250, series: [{ key: "intOsm", label: "interstitium", tone: "muted", dash: true }, { key: "osm", label: "tubular fluid", tone: "hot" }] },
       { lane: "Volume", unit: "% left", min: 0, max: 100, series: [{ key: "vol", label: "filtrate left", tone: "accent" }] }],
     gateTitle: "Transport", onWord: "ON", offWord: "OFF",
@@ -78,7 +79,7 @@ function createModel() {
         interstitium: { active: z > 0 ? Math.min(1, z) : 0, level: (intOsm - PLASMA) / (PAPILLA - PLASMA) } };
       for (const p of ["pct", "tdl", "tal", "dct", "cd"]) parts[p] = { active: here(p), flow: g.part === p ? V / 100 : 0, level: g.part === p ? V / 100 : 0 };
       return { phase: g.phase, parcel: { part: g.part, u: Math.max(0, Math.min(1, u)) },
-        readouts: { osm, vol: V, intOsm, flowDay: GFR_DAY * V / 100, gap: osm - intOsm, waterOut: wOut, saltOut: sOut, glucose: L("G"), hco3: L("B"), depth: z, nfp: NFP },
+        readouts: { osm, vol: V, intOsm, flowDay: GFR_DAY * V / 100, gap: osm - intOsm, waterOut: wOut, saltOut: sOut, glucose: L("G"), hco3: L("B"), depth: z, nfp: NFP, pGC: P_GC, pBS: P_BS, piGC: PI_GC },
         parts };
     },
     explain(s) { const r = s.readouts;

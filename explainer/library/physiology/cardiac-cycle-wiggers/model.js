@@ -30,6 +30,11 @@ function createModel() {
   const open = (k, v) => (REC[k].Q[v] > 0.01 ? 1 : 0);
   // surface ECG, drawn on the same clock as the activation that drives the chambers (P at atrial onset, QRS just before ventricular onset)
   const g = (u, c, w) => Math.exp(-((u - c) * (u - c)) / (2 * w * w));
+  // membrane voltage of an SA-node pacemaker cell and a ventricular muscle cell, and the ventricular Ca²⁺ transient, on the same activation clock
+  // (SA fires at t = 0 = atrial onset; the ventricular upstroke at 0.10 s, just before ventricular force rises at 0.12 s)
+  const vmSA = (u) => u < 0.03 ? -40 + 50 * Math.sin(Math.PI / 2 * u / 0.03) : u < 0.17 ? 10 - 70 * (0.5 - 0.5 * Math.cos(Math.PI * (u - 0.03) / 0.14)) : -60 + 20 * Math.pow((u - 0.17) / (T - 0.17), 1.35);
+  const vmV = (u) => u < 0.10 ? -88 : u < 0.106 ? -88 + 113 * (u - 0.10) / 0.006 : u < 0.12 ? 25 - 20 * (u - 0.106) / 0.014 : u < 0.30 ? 5 - 10 * (u - 0.12) / 0.18 : u < 0.40 ? -5 - 83 * (0.5 - 0.5 * Math.cos(Math.PI * (u - 0.30) / 0.10)) : -88;
+  const CA = { start: 0.105, dur: 0.30, rise: 0.06 };
   const ecg = (u) => 0.13 * g(u, 0.05, 0.022) - 0.10 * g(u, 0.092, 0.006) + 1.0 * g(u, 0.104, 0.008) - 0.22 * g(u, 0.118, 0.007) + 0.28 * g(u, 0.36, 0.04);
   return {
     T, N, timeUnit: "s", clockNote: HR + " bpm", speeds: [0.1, 0.25, 0.5, 1],
@@ -39,6 +44,8 @@ function createModel() {
     readouts: [{ key: "LVP", label: "LV pressure", unit: "mmHg" }, { key: "AoP", label: "Aortic pressure", unit: "mmHg" }, { key: "LAP", label: "LA pressure", unit: "mmHg" },
       { key: "RVP", label: "RV pressure", unit: "mmHg" }, { key: "PAP", label: "Pulmonary artery pressure", unit: "mmHg" }, { key: "RAP", label: "RA pressure", unit: "mmHg" },
       { key: "LAV", label: "LA volume", unit: "mL" }, { key: "RAV", label: "RA volume", unit: "mL" }, { key: "ecg", label: "ECG", unit: "mV (schematic)" },
+      { key: "vmSA", label: "SA-node cell voltage", unit: "mV" }, { key: "vmV", label: "Ventricular cell voltage", unit: "mV" },
+      { key: "ca", label: "Ventricular Ca²⁺ transient", unit: "0–1" }, { key: "actV", label: "Ventricular activation", unit: "0–1" },
       { key: "LVV", label: "LV volume", unit: "mL", big: true }, { key: "RVV", label: "RV volume", unit: "mL", big: true }, { key: "SV", label: "Stroke vol · EF", unit: "", big: true, text: (s) => s.readouts.SV.toFixed(0) + " · " + s.readouts.EF.toFixed(0) + "%" }, { key: "EF", label: "Ejection fraction", unit: "%" }],
     chart: [{ lane: "ECG", unit: "ECG", min: -0.3, max: 1.05, weight: 0.7, grid: false, noEvents: true, marks: [{ t: 0.05, label: "P" }, { t: 0.104, label: "QRS" }, { t: 0.36, label: "T" }], series: [{ key: "ecg", label: "", tone: "ink", width: 1.3 }] },
       { lane: "Pressure", unit: "mmHg", min: 0, max: 130, step: 20, weight: 2.3, dot: "LVP", series: [{ key: "AoP", label: "Aorta", tone: "hot", dash: true, at: 0.38 }, { key: "LVP", label: "LV", tone: "hot", at: 0.29 }, { key: "LAP", label: "LA", tone: "muted", at: 0.04 }] },
@@ -59,7 +66,7 @@ function createModel() {
     sample(tt) { const k = Math.min(N - 1, Math.floor(tt / DT)), r = REC[k];
       return { phase: phaseOf(k),
         q: r.Q,
-        readouts: { ecg: ecg(k * DT), LVP: r.P.LV, AoP: r.P.SA, LAP: r.P.LA, RVP: r.P.RV, PAP: r.P.PA, RAP: r.P.RA, LVV: r.V.LV, RVV: r.V.RV, LAV: r.V.LA, RAV: r.V.RA, SV: EDV - ESV, EF: (EDV - ESV) / EDV * 100 },
+        readouts: { ecg: ecg(k * DT), vmSA: vmSA(k * DT), vmV: vmV(k * DT), ca: act(k * DT, CA), actV: act(k * DT, VEN), LVP: r.P.LV, AoP: r.P.SA, LAP: r.P.LA, RVP: r.P.RV, PAP: r.P.PA, RAP: r.P.RA, LVV: r.V.LV, RVV: r.V.RV, LAV: r.V.LA, RAV: r.V.RA, SV: EDV - ESV, EF: (EDV - ESV) / EDV * 100 },
         parts: { tricuspid: { open: open(k, "tricuspid") }, pulmonary: { open: open(k, "pulmonic") }, mitral: { open: open(k, "mitral") }, aortic: { open: open(k, "aortic") },
           RA: { active: act(k * DT, ATR), flow: r.Q.tricuspid / maxQ.tricuspid }, LA: { active: act(k * DT, ATR), flow: r.Q.mitral / maxQ.mitral },
           RV: { active: act(k * DT, VEN), flow: r.Q.pulmonic / maxQ.pulmonic }, LV: { active: act(k * DT, VEN), flow: r.Q.aortic / maxQ.aortic },
