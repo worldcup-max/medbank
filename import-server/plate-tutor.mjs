@@ -12,7 +12,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
-export const PLATE_TUTOR_VERSION = "p3";   // p2: + 2-minute overview and exam questions · p3: + predictions, what-ifs, plate questions
+export const PLATE_TUTOR_VERSION = "p4";   // p4: one-sentence stops allowed (short note lines no longer dropped) · p2: + 2-minute overview and exam questions · p3: + predictions, what-ifs, plate questions
 const HERE = dirname(fileURLToPath(import.meta.url));
 
 /* ---------- the note, as numbered lines (keep identical to splitNote in explainer/plate-tutor.js) ---------- */
@@ -76,7 +76,7 @@ RULES (all are checked by a program; breaking one gets the stop thrown away):
 2. Go through the note IN ORDER. Each stop cites the note lines it explains ("lines"), and stops follow the order of those lines.
 3. A stop that the plate can show gets "phase" (exactly one phase name from the list) and "focus" (1–4 part ids from the list). Choose the phase and parts that show what THOSE lines say.
 4. Note lines the plate cannot show (e.g. ${(M.not_shown || []).slice(0, 2).join(", ") || "things outside the plate"}) become a "words" stop: no phase or focus, explained in words only. Put the concept in "extend" too.
-5. "say": 2–4 short sentences for the ear (TTS), plain English, about 25–70 words. Numbers ONLY if they appear in the cited lines, written as digits ("about 1200 milliosmoles per kilogram", "65 percent"). No symbols like → ≈ ~ / + −, no markdown, no "your note says".
+5. "say": 2–4 short sentences for the ear (TTS), plain English, about 25–70 words (a note line with one short fact can be one sentence). Numbers ONLY if they appear in the cited lines, written as digits ("about 1200 milliosmoles per kilogram", "65 percent"). No symbols like → ≈ ~ / + −, no markdown, no "your note says".
 6. "mentions": for every part id, the note lines that talk about it (even lines with no stop of their own). Parts the note never mentions are left out — the app dims them.
 7. "flags": ONLY when a number in the note clearly disagrees with a number in the plate descriptions above (same quantity). Give the line, the note's figure, the plate's figure, and one gentle spoken sentence, e.g. "Your note gives about 1000 here; the plate, from Guyton, shows about 1200 — worth checking with your lecturer." Never flag rounding, ranges that include the plate value, or things the plate does not state. Usually there are none.
 8. Skip lines that are only headings, references or admin. Do not invent lines.
@@ -160,7 +160,7 @@ export function checkPlateTutor(text, M, lines) {
     const focus = (Array.isArray(s.focus) ? s.focus : []).filter((x) => parts.has(x));
     if (!isWords && !focus.length) errs.push(`${tag} needs 1–4 focus part ids from the list`);
     const say = String(s.say || "").replace(/\s+/g, " ").trim();
-    errs.push(...sayErrors(tag, say, ids, { focus, phase: s.phase || "" }));
+    errs.push(...sayErrors(tag, say, ids, { focus, phase: s.phase || "", min: 6 }));
     let lens = null;
     if (s.lens && !isWords) { const z = lensOK.get(s.lens);
       if (!z) errs.push(`${tag}: "${s.lens}" is not a lens id`);
