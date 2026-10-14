@@ -237,7 +237,14 @@ export function checkPlateTutor(text, M, lines) {
  * If the note doesn't cover it, the answer comes only from the plate's own (Guyton-checked) descriptions and is marked
  * "not in your note". Off-topic questions are declined. Every answer passes the same checks as the lesson.
  * ==================================================================================================================== */
-export const PLATE_ASK_VERSION = "a1";
+export const PLATE_ASK_VERSION = "a2";   // a2: answers are rewritten for the ear (units and ion symbols spelled out)
+/* What the voice reads: DeepSeek sometimes keeps the note's shorthand ("100 mOsm/kg", "Na, K and 2Cl"); spell it out so TTS says it right. */
+export function forEar(t) {
+  return String(t || "").replace(/\s*mOsm\/kg\b|\s*mOsm\b/gi, " milliosmoles per kilogram").replace(/\s*mmHg\b/gi, " millimetres of mercury").replace(/\s*mL\/min\b/gi, " millilitres a minute")
+    .replace(/\s*L\/day\b/g, " litres a day").replace(/(\d)\s*%/g, "$1 percent").replace(/[~≈∼]\s*/g, "about ").replace(/\s*→\s*/g, ", so ")
+    .replace(/\bNa\+?\/K\+?\/2Cl[−-]?/g, "sodium, potassium and two chloride").replace(/\b2\s*Cl[−-]?\b/g, "two chloride").replace(/\bNa\+|\bNa\b/g, "sodium").replace(/\bK\+/g, "potassium").replace(/(sodium,?\s+)K\b/g, "$1potassium")
+    .replace(/\bCl[−-]|\bCl\b/g, "chloride").replace(/\bHCO3[−-]?/gi, "bicarbonate").replace(/\b2 chloride\b/g, "two chloride").replace(/\s{2,}/g, " ").trim();
+}
 const clip = (s, n) => String(s || "").replace(/\s+/g, " ").trim().slice(0, n);
 export const normQuestion = (q) => clip(q, 300).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim();
 export function plateAskKey(plate, lines, q) {
@@ -298,7 +305,7 @@ export function checkAsk(text, M, lines) {
   else { const wc = say ? say.split(" ").length : 0; if (wc < 6 || wc > 70) errors.push(`the answer must be 6–70 words (it has ${wc})`); if (/[→≈~∼≥≤]|\*\*/.test(say)) errors.push("the answer has symbols or markdown");
     if (focus.length) errors.push(...plateErrors("the answer", say, M, focus, phase)); }
   if (errors.length) return { errors };
-  return { answer: { v: 1, version: PLATE_ASK_VERSION, inNote: !!j.inNote, lines: ids, say, phase, focus, lens }, errors: [] };
+  return { answer: { v: 1, version: PLATE_ASK_VERSION, inNote: !!j.inNote, lines: ids, say: forEar(say), phase, focus, lens }, errors: [] };
 }
 
 /* ====================================================================================================================
@@ -340,5 +347,5 @@ export function checkExplain(text, M, lines, ids) {
   const say = clip(j.say, 600); errors.push(...sayErrors("the feedback", say, own, { focus, phase: phase || "", min: 6, max: 80 }));
   const score = Math.max(0, Math.min(3, Math.round(Number(j.score) || 0)));
   if (errors.length) return { errors, result: { got, missed: missed.filter((m) => m.line), say: null, phase, focus, score } };
-  return { result: { v: 1, got, missed, say, phase, focus, score }, errors: [] };
+  return { result: { v: 1, got, missed, say: forEar(say), phase, focus, score }, errors: [] };
 }
