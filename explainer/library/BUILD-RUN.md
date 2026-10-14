@@ -109,3 +109,7 @@ The app's tutor uses these, but only where the student's note mentions them (it 
   Choose 2–4 events a student should be able to reason out (which valve opens next, where the fluid gets diluted…). The answer must be a part.
 - After the plate is final, `node tools/manifest.mjs <id> <id> physiology` must print `… N what-ifs, N predictions` and MANIFEST ISSUES: none.
 - To refresh an already-built plate after changing model.js or the shell (no re-voicing): `node explainer/studio/plate-kit/relink.mjs explainer/library/physiology/<id>`.
+
+## The tutor's copy of a plate (no baked voice)
+
+The 3D Tutor loads `<id>.lite.html`: the same page with the baked voice clips stripped (about 120 KB instead of 1.5 MB). `relink.mjs` rewrites it every run. After a fresh build or re-voice, run `node explainer/studio/plate-kit/lite.mjs explainer/library/<course>/<id>` and commit both files.

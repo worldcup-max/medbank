@@ -23,6 +23,24 @@
   const up = (m) => { try { window.parent.postMessage(m, "*"); } catch (_) {} };
   const ready = (cb) => { const go = () => (window.__studio && window.__studio.ready && window.K) ? cb() : setTimeout(go, 60); go(); };
 
+  /* Lite mode for cheap phones (feature 5): 30 frames a second and no glow filters (an SVG blur is the slowest thing a weak GPU draws;
+   * the focused part still stands out because everything else dims). On for Data Saver, 3 GB of memory or less, or 4 cores or fewer,
+   * and switched on by itself if the first seconds run below about 45 fps. localStorage "mbp-lite" = "on" | "off" overrides.
+   * window.__mbxLite says whether it is on and why. */
+  (function lite() {
+    let pref = null; try { pref = localStorage.getItem("mbp-lite"); } catch (_) {}
+    if (pref === "off") { window.__mbxLite = { on: false, why: "off by choice" }; return; }
+    const n = navigator, why = pref === "on" ? "on by choice" : n.connection && n.connection.saveData ? "data saver" : n.deviceMemory && n.deviceMemory <= 3 ? n.deviceMemory + " GB memory" : n.hardwareConcurrency && n.hardwareConcurrency <= 4 ? n.hardwareConcurrency + " cores" : null;
+    window.__mbxLite = { on: false, why: "full quality" };
+    const on = (w) => { if (window.__mbxLite.on) return; window.__mbxLite = { on: true, why: w };
+      const st = document.createElement("style"); st.textContent = "svg *{filter:none!important}"; (document.head || document.documentElement).appendChild(st);
+      const raf = window.requestAnimationFrame.bind(window); window.requestAnimationFrame = (cb) => raf(function half(t) { half.k = !half.k; if (half.k) raf(half); else cb(t); }); };
+    if (why) return on(why);
+    const raf = window.requestAnimationFrame.bind(window), ts = []; const probe = (t) => { ts.push(t); if (ts.length < 90) raf(probe); else {
+      const d = ts.slice(1).map((x, i) => x - ts[i]).sort((x, y) => x - y), med = d[d.length >> 1]; if (!document.hidden && med > 22) on(Math.round(1000 / med) + " fps"); } };
+    setTimeout(() => raf(probe), 1500);
+  })();
+
   /* What the parent drives. Built from the plate's public bits (window.__studio.seek / openLens / closeLens, the global
    * createModel, the page's own buttons), so it works on every built plate without touching shell.mjs. */
   function plateApi() {

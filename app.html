@@ -1784,15 +1784,39 @@ window.warmSpeak=function(text, use){
     const voice=DATA.settings.ttsVoiceAI||'nova', key=_ttsKey(text,voice,use);
     if(_ttsBlobCache[key]) return Promise.resolve();
     if(_ttsPending[key]) return _ttsPending[key];                     // already being generated → wait on that one
-    const p=_warmSpeakOnce(text,use,key,voice).then(function(){ delete _ttsPending[key]; },function(){ delete _ttsPending[key]; });
+    const p=_vcGet(key).then(function(u){ if(u){ _ttsBlobCache[key]=u; return; } return _warmSpeakOnce(text,use,key,voice); }).then(function(){ delete _ttsPending[key]; },function(){ delete _ttsPending[key]; });
     _ttsPending[key]=p; return p;
   }catch(e){ return Promise.resolve(); }
 };
+/* Voice saved for offline (3D Tutor, feature 5): each clip is kept in Cache Storage under a made-up same-origin URL, in a cache
+   the service worker never purges (mb-keep-*). serverSpeak looks there before the network, so a saved lesson speaks with no data. */
+var MB_VOICE_CACHE='mb-keep-voice';
+function _vcUrl(key){ var h=2166136261>>>0; for(var i=0;i<key.length;i++){ h^=key.charCodeAt(i); h=Math.imul(h,16777619)>>>0; } return './__mbvoice/'+h.toString(16)+'-'+key.length+'.mp3'; }
+async function _vcGet(key){ try{ if(!('caches' in window)) return null; var c=await caches.open(MB_VOICE_CACHE), r=await c.match(_vcUrl(key)); return r? URL.createObjectURL(await r.blob()) : null; }catch(e){ return null; } }
+async function _vcPut(key, blob){ try{ if(!('caches' in window)||!blob||!blob.size) return; var c=await caches.open(MB_VOICE_CACHE); await c.put(_vcUrl(key), new Response(blob,{headers:{'Content-Type':'audio/mpeg'}})); }catch(e){} }
+async function _vcHas(key){ try{ if(!('caches' in window)) return false; var c=await caches.open(MB_VOICE_CACHE); return !!(await c.match(_vcUrl(key))); }catch(e){ return false; } }
+/* save every line in the MedBank voice (two at a time); onStep(done,total). Resolves to {done,total} — done < total means some failed */
+window.mbVoiceSave=async function(texts, onStep){
+  var voice=DATA.settings.ttsVoiceAI||'nova', list=(texts||[]).filter(function(t){ return (t||'').trim(); }), done=0, total=list.length;
+  var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) return {done:0,total:total};
+  var ses=await window.__mbSB.auth.getSession(), token=ses.data.session&&ses.data.session.access_token;
+  async function one(t){ var key=_ttsKey(t,voice,'read');
+    if(_ttsPending[key]) try{ await _ttsPending[key]; }catch(e){}
+    if(!(await _vcHas(key))&&_ttsBlobCache[key]){ try{ await _vcPut(key, await (await fetch(_ttsBlobCache[key])).blob()); }catch(e){} }   // already played or warmed: keep that clip, no second download
+    if(!(await _vcHas(key))){ if(!token) return false;
+      try{ var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:stripMd(t).slice(0,3000),voice:voice,use:'read'})});
+        if(!r.ok) return false; var b=await r.blob(); await _vcPut(key,b); if(!_ttsBlobCache[key]) _ttsBlobCache[key]=URL.createObjectURL(b); }catch(e){ return false; } }
+    return true; }
+  var q=list.slice(), ok=0;
+  async function worker(){ while(q.length){ var t=q.shift(); if(await one(t)) ok++; done++; try{ onStep&&onStep(done,total); }catch(e){} } }
+  await Promise.all([worker(),worker()]); return {done:ok,total:total};
+};
 async function serverSpeak(text, cb, use){
   try{
-    const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) return false;
     const voice=DATA.settings.ttsVoiceAI||'nova', key=_ttsKey(text,voice,use);
     if(_ttsBlobCache[key]){ playCloudSrc(_ttsBlobCache[key], cb); return true; }   // already generated → instant
+    { const kept=await _vcGet(key); if(kept){ _ttsBlobCache[key]=kept; playCloudSrc(kept, cb); return true; } }   // saved for offline (works before sign-in loads, with no data)
+    const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) return false;
     const ses=await window.__mbSB.auth.getSession(); const token=ses.data.session&&ses.data.session.access_token; if(!token) return false;
     const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:stripMd(text).slice(0,3000),voice:voice,use:(use||'read')})});
     if(!r.ok) return false;
@@ -3104,20 +3128,46 @@ function mbxPlateFor(t){
 var _mbpLoad=null, _MBP_LESSON={}, _mbpCur=null, _mbpSaveT=null;
 /* "· 4/10" or "· ✓" on the 3D Tutor tab, from the student's synced progress */
 function mbpTabNote(t){ try{ var p=(DATA.tutor||{})[t.id]; if(!p) return ''; if(p.done&&(p.done.full||p.done.exam)) return ' · ✓'; if(p.k!=null&&p.n) return ' · '+(p.k+1)+'/'+p.n; }catch(e){} return ''; }
+var MBP_V='1.3.0';
 function mbpLoad(){
   if(window.MBPlate&&window.MBPlate.mount) return Promise.resolve(window.MBPlate);
   if(_mbpLoad) return _mbpLoad;
-  _mbpLoad=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='explainer/plate-tutor.js?v=1.2.0'; s.async=true;
+  _mbpLoad=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='explainer/plate-tutor.js?v='+MBP_V; s.async=true;
     s.onload=function(){ window.MBPlate?res(window.MBPlate):rej(new Error('3D Tutor failed to start')); };
     s.onerror=function(){ _mbpLoad=null; rej(new Error('Could not download the 3D Tutor — check your connection.')); };
     document.head.appendChild(s); });
   return _mbpLoad;
 }
+function mbpHash(s){ var h=2166136261>>>0; s=String(s||''); for(var i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619)>>>0; } return h.toString(16)+'-'+s.length; }
+function mbpKept(pl,t){ try{ var x=JSON.parse(localStorage.getItem('mbp-les:'+pl.id+'|'+t.id)||'null'); return x&&x.h===mbpHash(String(t.note||'').slice(0,60000))? x : null; }catch(e){ return null; } }
 function mbpLesson(t, pl){
   var k=pl.id+'|'+t.id; if(_MBP_LESSON[k]) return _MBP_LESSON[k];
+  /* data-light: the lesson for this exact note is kept on the device for a week, so reopening it costs no data and works offline */
+  var kept=mbpKept(pl,t); if(kept&&kept.lesson&&(Date.now()-kept.at<7*864e5||navigator.onLine===false)) return (_MBP_LESSON[k]=Promise.resolve(kept.lesson));
   _MBP_LESSON[k]=mbxCall('/explainer/plate',{plate:pl.id, topic:t.name, text:String(t.note||'').slice(0,60000)},3)
-    .then(function(j){ return j.lesson||null; }).catch(function(e){ delete _MBP_LESSON[k]; throw e; });
+    .then(function(j){ var l=j.lesson||null; if(l) try{ localStorage.setItem('mbp-les:'+k, JSON.stringify({h:mbpHash(String(t.note||'').slice(0,60000)), at:Date.now(), lesson:l})); }catch(e){} return l; })
+    .catch(function(e){ delete _MBP_LESSON[k]; if(kept&&kept.lesson) return kept.lesson; throw e; });
   return _MBP_LESSON[k];
+}
+/* Save a lesson for offline (feature 5), on any connection, once the student starts it: the plate files, then every line in the MedBank voice.
+   Status per topic in localStorage mbp-off:<plate>|<topic> = {h, at, n} once complete; the start card shows the chip; a toast says it once. */
+var _MBP_OFF={};
+function mbpOffline(pl,t){ var k=pl.id+'|'+t.id; if(_MBP_OFF[k]) return _MBP_OFF[k];
+  try{ var x=JSON.parse(localStorage.getItem('mbp-off:'+k)||'null'); if(x&&x.h===mbpHash(String(t.note||'').slice(0,60000))) return {state:'saved'}; }catch(e){} return null; }
+function mbpSaveOffline(pl,t,plate,api){
+  var k=pl.id+'|'+t.id, h=mbpHash(String(t.note||'').slice(0,60000));
+  if(mbpOffline(pl,t)||!('caches' in window)) return;
+  var texts=[]; try{ texts=api.voiceTexts(); }catch(e){} if(!texts.length) return;
+  _MBP_OFF[k]={state:'saving', n:0, of:texts.length}; try{ api.refresh(); }catch(e){}
+  try{ navigator.storage&&navigator.storage.persist&&navigator.storage.persist(); }catch(e){}
+  caches.open('mb-keep-plates').then(function(c){ return c.addAll((plate.files||[]).concat(['explainer/plate-tutor.js?v='+MBP_V])); })
+    .then(function(){ return window.mbVoiceSave(texts,function(n,of){ _MBP_OFF[k]={state:'saving', n:n, of:of}; try{ api.refresh(); }catch(e){} }); })
+    .then(function(r){ delete _MBP_OFF[k];
+      if(r.done<r.total){ try{ api.refresh(); }catch(e){} return; }    // something failed: the chip goes away and the next visit finishes the rest
+      try{ localStorage.setItem('mbp-off:'+k, JSON.stringify({h:h, at:Date.now(), n:r.total})); }catch(e){}
+      try{ api.refresh(); }catch(e){}
+      try{ mbToast('Saved for offline — this 3D lesson now plays with no data.'); }catch(e){} })
+    .catch(function(){ delete _MBP_OFF[k]; try{ api.refresh(); }catch(e){} });
 }
 function renderPlateTutor(t, pl){
   setTimeout(function(){
@@ -3132,6 +3182,8 @@ function renderPlateTutor(t, pl){
         warm:function(lines){ try{ (lines||[]).forEach(function(l){ window.warmSpeak&&window.warmSpeak(l,'read'); }); }catch(e){} },
         isDark:function(){ return document.documentElement.getAttribute('data-theme')==='dark'; },
         progressKey:t.id,
+        onStart:function(a){ mbpSaveOffline(pl,t,plate,a); },   // saved once the student starts a lesson, on any connection
+        offline:function(){ return mbpOffline(pl,t); },
         onCards:function(cards){ try{ touchTopic(t.id); }catch(e){} var n=addPlateCards(t.id,cards); if(n){ try{ mbToast(n+' card'+(n===1?'':'s')+' from this lesson added to your reviews — first one tomorrow.'); }catch(e){} } },
         loadProgress:function(){ return (DATA.tutor||{})[t.id]||null; },
         saveProgress:function(p){ DATA.tutor=DATA.tutor||{}; DATA.tutor[t.id]=p; clearTimeout(_mbpSaveT); _mbpSaveT=setTimeout(function(){ try{ persist(); }catch(e){} },1500); } });
