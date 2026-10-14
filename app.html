@@ -940,6 +940,17 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .mbprpbtn{display:flex;align-items:center;gap:8px;width:100%;border:1px dashed var(--line);background:var(--panel2);color:var(--accent);border-radius:12px;padding:12px 14px;font-weight:700;font-size:13.5px;margin:10px 0 12px;cursor:pointer;text-align:left}
 .mbprpbtn span{margin-left:auto;font-weight:500;color:var(--dimmer);font-size:12px}.mbprp{margin:10px 0 12px}
 </style>
+<style id="mb-plate-admin">
+.pa-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 14px}.pa-chip{min-height:36px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:600 13px system-ui;padding:0 14px;cursor:pointer}
+.pa-chip.on{background:var(--accent);border-color:var(--accent);color:#fff}.pa-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:10px;margin-bottom:12px}
+.pa-tile{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:12px 14px;display:grid;gap:2px}.pa-tile b{font:800 24px system-ui;color:var(--text)}.pa-tile span{font-size:12.5px;color:var(--dim)}.pa-tile i{font-style:normal;font-size:12px;color:var(--dim)}.pa-tile i.bad{color:#dc2626}
+.pa-grid2{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:12px;margin-bottom:12px}.pa-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:1100px){.pa-grid3{grid-template-columns:1fr}}@media(max-width:820px){.pa-grid2{grid-template-columns:1fr}}
+.pa-card{display:grid;gap:8px;align-content:start;margin:0}.pa-card h3{margin:0;font-size:15px}.pa-card>.sub{margin:-4px 0 4px;font-size:12.5px}
+.pa-bar{display:grid;grid-template-columns:minmax(0,130px) 1fr 42px;gap:8px;align-items:center;font-size:12.5px}.pa-bar span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pa-bar em{height:12px;border-radius:6px;background:var(--line);overflow:hidden}
+.pa-bar em i{display:block;height:100%;background:var(--accent);border-radius:6px}.pa-bar em i.bad{background:#dc2626}.pa-bar b{text-align:right;font-variant-numeric:tabular-nums}
+.pa-item{border-top:1px solid var(--line);padding-top:9px;display:grid;gap:3px;font-size:13.5px}.pa-item .sub{margin:0;font-size:12.5px}.pa-item.done{opacity:.6}.pa-item .ok{color:#059669;font-weight:700}.btn.sm{min-height:32px;padding:0 10px;font-size:12.5px}
+</style>
 <style id="mb-polish">
   #sidebar{background:#efe9fb;border-right-color:#e3ddf1}
   .navitem{transition:background .16s,color .16s,transform .12s}
@@ -2235,6 +2246,7 @@ function renderNav(){
   h += it('settings','⚙','Settings','',r==='settings');
   if(window.IS_ADMIN) h += it('admin','🛠','Prompt editor','',r==='admin');
   if(window.IS_ADMIN) h += it('vizadmin','🎨','Visualize assets','',r==='vizadmin');
+  if(window.IS_ADMIN) h += it('plateadmin','🧪','3D Tutor insights','',r==='plateadmin');
   $('#nav').innerHTML = h;
 }
 function go(route){location.hash='#/'+route;document.body.classList.remove('navopen');}
@@ -3133,7 +3145,7 @@ function mbxPlateFor(t){
 var _mbpLoad=null, _MBP_LESSON={}, _mbpCur=null, _mbpSaveT=null;
 /* "· 4/10" or "· ✓" on the 3D Tutor tab, from the student's synced progress */
 function mbpTabNote(t){ try{ var p=(DATA.tutor||{})[t.id]; if(!p) return ''; if(p.done&&(p.done.full||p.done.exam)) return ' · ✓'; if(p.k!=null&&p.n) return ' · '+(p.k+1)+'/'+p.n; }catch(e){} return ''; }
-var MBP_V='1.4.0';
+var MBP_V='1.5.0';
 function mbpLoad(){
   if(window.MBPlate&&window.MBPlate.mount) return Promise.resolve(window.MBPlate);
   if(_mbpLoad) return _mbpLoad;
@@ -3154,6 +3166,18 @@ function mbpLesson(t, pl){
     .catch(function(e){ delete _MBP_LESSON[k]; if(kept&&kept.lesson) return kept.lesson; throw e; });
   return _MBP_LESSON[k];
 }
+/* 3D Tutor insights (feature 7): what happens in a lesson is queued on the device and sent a few seconds later in one call
+   (kept while offline, sent next time). No note text is sent — only stop numbers and titles, scores and the questions asked. */
+var MBP_EVQ='mbp-ev', _mbpEvT=null;
+function mbpTrack(plate,topic,session,kind,data){ try{ var q=JSON.parse(localStorage.getItem(MBP_EVQ)||'[]'); q.push({plate:plate,topic:topic,session:session,kind:kind,data:data||{},at:new Date().toISOString()}); if(q.length>500) q=q.slice(-500); localStorage.setItem(MBP_EVQ,JSON.stringify(q)); }catch(e){} clearTimeout(_mbpEvT); _mbpEvT=setTimeout(mbpFlushEvents,4000); }
+var _mbpFlushing=false;
+async function mbpFlushEvents(){ if(_mbpFlushing||navigator.onLine===false) return; var q=[]; try{ q=JSON.parse(localStorage.getItem(MBP_EVQ)||'[]'); }catch(e){} if(!q.length) return; _mbpFlushing=true;
+  try{ var groups={}; q.forEach(function(e){ var k=e.plate+'|'+(e.topic||''); (groups[k]=groups[k]||[]).push(e); });
+    for(var k in groups){ var g=groups[k]; for(var i=0;i<g.length;i+=80){ var part=g.slice(i,i+80);
+      await mbxCall('/explainer/plate/events',{plate:part[0].plate, topic:part[0].topic, events:part.map(function(e){ return {kind:e.kind,data:e.data,at:e.at,session:e.session}; })},1); } }
+    try{ var now=JSON.parse(localStorage.getItem(MBP_EVQ)||'[]'); localStorage.setItem(MBP_EVQ,JSON.stringify(now.slice(q.length))); }catch(e){}
+  }catch(e){ /* keep them for next time */ } finally{ _mbpFlushing=false; } }
+setTimeout(function(){ try{ mbpFlushEvents(); }catch(e){} },12000);   // anything left from last time
 /* Ask the plate (feature 6): answers are kept on the device per topic (the same question again costs nothing and works offline) */
 function mbpAskNorm(q){ return String(q||'').toLowerCase().replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim(); }
 function mbpAsk(t,pl,x){
@@ -3161,7 +3185,7 @@ function mbpAsk(t,pl,x){
   try{ box=JSON.parse(localStorage.getItem(k)||'{}'); if(box.h!==h) box={h:h,a:{}}; }catch(e){ box={h:h,a:{}}; }
   if(box.a&&box.a[nq]) return Promise.resolve(box.a[nq]);
   if(navigator.onLine===false) return Promise.reject(new Error('Asking a new question needs a connection — the questions you asked before still answer offline.'));
-  return mbxCall('/explainer/plate/ask',{plate:pl.id, topic:t.name, text:String(t.note||'').slice(0,60000), q:x.q, phase:x.phase||'', focus:x.focus||[]},2).then(function(j){
+  return mbxCall('/explainer/plate/ask',{plate:pl.id, topic:t.name, session:x.session||'', text:String(t.note||'').slice(0,60000), q:x.q, phase:x.phase||'', focus:x.focus||[]},2).then(function(j){
     var a=j.answer||null; if(a){ try{ box.a=box.a||{}; box.a[nq]=a; var ks=Object.keys(box.a); if(ks.length>60) delete box.a[ks[0]]; localStorage.setItem(k,JSON.stringify(box)); }catch(e){} }
     return a; });
 }
@@ -3188,6 +3212,7 @@ function mbpSaveOffline(pl,t,plate,api){
 function renderPlateTutor(t, pl){
   setTimeout(function(){
     var host=document.getElementById('mbpHost'); if(!host) return;
+    var sess='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);   // one opening of the tutor (feature 7 insights)
     var resume=null;   // a redraw of this same page while a lesson is running: the new tutor carries on at that stop
     if(_mbpCur){ try{ var S0=_mbpCur.api.state; if(_mbpCur.tid===t.id&&_mbpCur.api.alive()&&S0.mode==='lesson'&&S0.k>=0) resume={tier:S0.tier,k:S0.k,play:!!S0.playing}; _mbpCur.api.destroy(); }catch(e){} _mbpCur=null; }
     mbpLoad().then(function(P){
@@ -3200,8 +3225,11 @@ function renderPlateTutor(t, pl){
         isDark:function(){ return document.documentElement.getAttribute('data-theme')==='dark'; },
         progressKey:t.id,
         onStart:function(a){ mbpSaveOffline(pl,t,plate,a); },
-        ask:function(x){ return mbpAsk(t,pl,x); },
-        explain:function(x){ return mbxCall('/explainer/plate/explain',{plate:pl.id, topic:t.name, text:String(t.note||'').slice(0,60000), lines:x.lines, q:x.q, answer:x.answer},2).then(function(j){ return j.result||null; }); },   // saved once the student starts a lesson, on any connection
+        ask:function(x){ return mbpAsk(t,pl,Object.assign({session:sess},x)); },
+        explain:function(x){ return mbxCall('/explainer/plate/explain',{plate:pl.id, topic:t.name, session:sess, text:String(t.note||'').slice(0,60000), lines:x.lines, q:x.q, answer:x.answer},2).then(function(j){ return j.result||null; }); },
+        onEvent:function(kind,data){ mbpTrack(pl.id,t.name,sess,kind,data); },
+        onReport:function(r){ mbxCall('/explainer/plate/report',Object.assign({plate:pl.id, topic:t.name, session:sess},r),2)
+          .then(function(){ mbToast('Thanks — sent to the MedBank team'+(r.k>=0?' with stop '+(r.k+1):'')+'.'); }, function(){ mbToast('Couldn’t send that — check your connection and try again.'); }); },   // saved once the student starts a lesson, on any connection
         offline:function(){ return mbpOffline(pl,t); },
         onCards:function(cards){ try{ touchTopic(t.id); }catch(e){} var n=addPlateCards(t.id,cards); if(n){ try{ mbToast(n+' card'+(n===1?'':'s')+' from this lesson added to your reviews — first one tomorrow.'); }catch(e){} } },
         loadProgress:function(){ return (DATA.tutor||{})[t.id]||null; },
@@ -5664,6 +5692,51 @@ async function taQuarantine(ev, target_id, qh){ if(ev&&ev.preventDefault)ev.prev
 
 
 /* ===== Admin: Visualize asset library — automated growth (is_admin only) ===== */
+/* ===== 3D Tutor insights (feature 7) — admins only. Every student, no names. Data: plate_events (import-server/sql/plate-events.sql). ===== */
+var _PA={plate:'', days:30, data:null};
+function pagePlateAdmin(){
+  if(!window.IS_ADMIN) return pageHome();
+  setTimeout(paFetch,40);
+  return crumbs([{label:'Home',route:'home'},{label:'Admin · 3D Tutor insights'}])+
+    `<h1>🧪 3D Tutor insights</h1><p class="sub">What students do with the 3D lessons · every student, no names</p>
+     <div id="paBody"><div class="empty">Loading…</div></div>`;
+}
+function paSet(k,v){ _PA[k]=v; paFetch(); }
+async function paFetch(){
+  var host=$('#paBody'); if(!host) return;
+  try{ var r=await admApi('/admin/plate/insights?days='+_PA.days+(_PA.plate?'&plate='+encodeURIComponent(_PA.plate):''));
+    if(!r.ok) throw new Error((r.data&&(r.data.error||r.data.message))||'Could not load insights'); _PA.data=r.data; host.innerHTML=paHtml(r.data); }
+  catch(e){ host.innerHTML='<div class="card"><b>Couldn’t load the insights.</b><p class="sub" style="margin:6px 0 0">'+esc(e.message)+'</p></div>'; }
+}
+function paHtml(d){
+  var H=d.headline||{}, chip=function(on,label,js){ return '<button class="pa-chip'+(on?' on':'')+'" onclick="'+js+'">'+esc(label)+'</button>'; };
+  var tile=function(n,l,s,bad){ return '<div class="pa-tile"><b>'+n+'</b><span>'+l+'</span>'+(s?'<i class="'+(bad?'bad':'')+'">'+s+'</i>':'')+'</div>'; };
+  var dash=function(v,suf){ return v==null?'—':v+(suf||''); };
+  var h='<div class="pa-row">'+chip(!_PA.plate,'All plates',"paSet('plate','')")+(d.plates||[]).map(function(p){ return chip(_PA.plate===p.id,p.title,"paSet('plate','"+esc(p.id)+"')"); }).join('')
+    +'<span style="flex:1"></span>'+[7,30,90].map(function(n){ return chip(_PA.days===n,n+' days',"paSet('days',"+n+")"); }).join('')+'</div>';
+  if(!d.rows){ return h+'<div class="card"><b>Nothing yet.</b><p class="sub" style="margin:6px 0 0">Insights appear as soon as students open 3D lessons'+(_PA.plate?' on this plate':'')+'.</p></div>'; }
+  var ws=H.worstStop&&(d.reach||[])[H.worstStop.k];
+  h+='<div class="pa-tiles">'+tile(H.opened,'lessons opened',H.students+' students')+tile(dash(H.finishedFullPct,'%'),'finished the full walk-through',ws?'most leave before '+esc(ws.title):'',!!ws)
+    +tile(dash(H.examPct,'%'),'exam revision score',H.examN?H.examN+' finished':'')+tile(H.explainAvg==null?'—':H.explainAvg+'/3','explain-back score',H.explainN?H.explainN+' answers':'')
+    +tile(H.asks,'questions asked','')+tile(H.openReports,'open reports','',H.openReports>0)+'</div>';
+  var reach=(d.reach||[]).map(function(x){ var bad=H.worstStop&&H.worstStop.k===x.k; return '<div class="pa-bar"><span>'+(x.k+1)+'. '+esc(x.title)+'</span><em><i style="width:'+(x.pct||0)+'%"'+(bad?' class="bad"':'')+'></i></em><b>'+dash(x.pct,'%')+'</b></div>'; }).join('')||'<p class="sub">No full walk-throughs yet.</p>';
+  var title=function(id){ var p=(d.plates||[]).find(function(x){ return x.id===id; }); return p?p.title:id; };
+  var reps=(d.reports||[]).map(function(x){ var open=x.status==='open';
+    return '<div class="pa-item'+(open?'':' done')+'"><div><b>'+esc(x.reason||'Report')+'</b> · '+(x.k!=null&&x.k>=0?'stop '+(x.k+1)+(x.title?' '+esc(x.title):''):'the plate')+(_PA.plate?'':' · '+esc(title(x.plate)))+(open?'':' · <span class="ok">fixed</span>')+'</div>'
+      +'<div class="sub">'+(x.comments&&x.comments.length?x.comments.map(function(c){ return '“'+esc(c)+'”'; }).join(' · ')+' · ':'')+x.n+' student'+(x.n>1?'s':'')+(x.version?' · lesson '+esc(x.version):'')+'</div>'
+      +(x.lineText?'<div class="sub">Note: “'+esc(x.lineText.slice(0,160))+'”</div>':'')
+      +'<div class="btnrow" style="gap:6px;margin-top:4px"><a class="btn sm" target="_blank" rel="noopener" href="'+paPlateUrl(x.plate)+'">Open the plate</a><button class="btn sm'+(open?' primary':'')+'" onclick="paStatus(['+x.ids.join(',')+'],\''+(open?'fixed':'open')+'\',this)">'+(open?'Mark fixed':'Reopen')+'</button></div></div>'; }).join('')||'<p class="sub">No reports. ⚑ on the player sends one with the exact stop.</p>';
+  var nin=(d.notInNote||[]).map(function(x){ return '<div class="pa-item"><div>'+esc(x.q)+' <b>· '+x.n+'</b></div><div class="sub">'+(x.failed?(x.failed===x.n?'couldn’t be answered':'sometimes couldn’t be answered'):'answered from the plate')+(_PA.plate?'':' · '+esc(title(x.plate)))+'</div>'
+    +'<div class="btnrow" style="margin-top:4px"><button class="btn sm" onclick="paQueue(\''+esc(title(x.plate)+' · '+x.q).replace(/'/g,"\\'")+'\',this)">Add to build queue</button></div></div>'; }).join('')||'<p class="sub">Nothing yet.</p>';
+  var mq=(d.missedQs||[]).map(function(x){ return '<div class="pa-item"><div>'+esc(x.q)+' <b>· '+x.pct+'% right</b></div><div class="sub">'+x.n+' answer'+(x.n>1?'s':'')+(x.commonWrong?' · most chose “'+esc(x.commonWrong)+'”':'')+'</div></div>'; }).join('')||'<p class="sub">No exam revision answers yet.</p>';
+  var wk=(d.weakest||[]).map(function(x){ return '<div class="pa-item"><div>'+esc(x.concept)+' <b>· '+x.avg+'/3</b></div><div class="sub">'+x.n+' answer'+(x.n>1?'s':'')+(x.topMissed?' · most missed: “'+esc(x.topMissed)+'”':'')+'</div></div>'; }).join('')||'<p class="sub">No explain-back answers yet.</p>';
+  var card=function(t,sub,body){ return '<div class="card pa-card"><h3>'+t+'</h3>'+(sub?'<p class="sub">'+sub+'</p>':'')+body+'</div>'; };
+  return h+'<div class="pa-grid2">'+card('Where students stop','Share of full walk-throughs that reached each stop',reach)+card('Reports from students · '+H.openReports+' open','From ⚑ on the player, grouped by stop and reason',reps)+'</div>'
+    +'<div class="pa-grid3">'+card('Asked, but not in their notes','What students want the plates (or their lecturers) to cover',nin)+card('Most-missed exam questions','',mq)+card('Weakest explain-back','',wk)+'</div>';
+}
+function paPlateUrl(id){ var P=(window.MBPlate&&MBPlate.PLATES||[]).find(function(x){ return x.id===id; }); return P?P.full:'explainer/library/physiology/'+id+'/'+id+'.html'; }
+async function paStatus(ids,status,btn){ try{ btn.disabled=true; var r=await admApi('/admin/plate/report-status',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ids:ids,status:status})}); if(!r.ok) throw new Error((r.data&&r.data.error)||'failed'); mbToast(status==='fixed'?'Marked fixed.':'Reopened.'); paFetch(); }catch(e){ btn.disabled=false; mbToast('Couldn’t update: '+e.message); } }
+async function paQueue(name,btn){ try{ btn.disabled=true; var r=await admApi('/admin/plate/queue',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name})}); if(!r.ok) throw new Error((r.data&&r.data.error)||'failed'); btn.textContent='✓ In the build queue'; }catch(e){ btn.disabled=false; mbToast('Couldn’t add: '+e.message); } }
 function pageVizAdmin(){
   if(!window.IS_ADMIN) return pageHome();
   setTimeout(vizAdmFetch,40);
@@ -7971,6 +8044,7 @@ function render(){
     case 'admin-integrated': html=pageIntegratedWorkbench(); break;
     case 'intel':     html=pagePilot(); break;   // dev-only pilot readout (not in student nav)
     case 'vizadmin':  html=pageVizAdmin(); break;
+    case 'plateadmin': html=pagePlateAdmin(); break;
     case 'viz3d':     html=pageViz3d(p[1]); break;   // dev-only 3D scene opener (not in student nav)
     case 'builder':   html=pageBuilder(); break;
     case 'subject':   html=pageSubject(p[1]); break;

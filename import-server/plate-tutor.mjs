@@ -349,3 +349,42 @@ export function checkExplain(text, M, lines, ids) {
   if (errors.length) return { errors, result: { got, missed: missed.filter((m) => m.line), say: null, phase, focus, score } };
   return { result: { v: 1, got, missed, say: forEar(say), phase, focus, score }, errors: [] };
 }
+
+/* ====================================================================================================================
+ * 3D Tutor insights (feature 7): turns plate_events rows into the admin page. Pure, so it is tested without a database.
+ * rows: [{ at, account_id, session, plate, topic, kind, data, status, id }]
+ * ==================================================================================================================== */
+export const PLATE_EVENT_KINDS = new Set(["open", "start", "stop", "finish", "exam", "predict"]);   // what the app may send; ask/explain/report are written by the server
+export function plateInsights(rows) {
+  rows = (rows || []).filter((r) => r && r.kind);
+  const by = (k) => rows.filter((r) => r.kind === k), D = (r) => r.data || {}, pct = (a, b) => (b ? Math.round((100 * a) / b) : null);
+  const students = new Set(rows.filter((r) => r.account_id).map((r) => r.account_id));
+  // where students stop: full walk-throughs only, the furthest stop each session reached
+  const fullS = new Map(), titles = [];
+  by("start").filter((r) => D(r).tier === "full" && r.session).forEach((r) => fullS.set(r.session, Math.max(fullS.get(r.session) ?? -1, -1)));
+  by("stop").filter((r) => D(r).tier === "full" && r.session).forEach((r) => { const k = +D(r).k; if (!fullS.has(r.session)) fullS.set(r.session, -1); fullS.set(r.session, Math.max(fullS.get(r.session), k));
+    if (k >= 0 && k < 40 && D(r).title) titles[k] = D(r).title; });
+  const n = Math.max(0, ...by("stop").filter((r) => D(r).tier === "full").map((r) => +D(r).n || 0)), reach = [];
+  for (let k = 0; k < n; k++) reach.push({ k, title: titles[k] || "Stop " + (k + 1), pct: pct([...fullS.values()].filter((m) => m >= k).length, fullS.size) });
+  let worst = null; for (let k = 1; k < reach.length; k++) { const d = (reach[k - 1].pct || 0) - (reach[k].pct || 0); if (d > 0 && (!worst || d > worst.drop)) worst = { k, drop: d }; }
+  const finishedFull = new Set(by("finish").filter((r) => D(r).tier === "full").map((r) => r.session));
+  // exam revision
+  const examDone = by("finish").filter((r) => D(r).tier === "exam" && D(r).of), examPct = examDone.length ? Math.round(examDone.reduce((a, r) => a + (100 * D(r).right) / D(r).of, 0) / examDone.length) : null;
+  const eq = new Map(); by("exam").forEach((r) => { const q = String(D(r).q || "").trim(); if (!q) return; const x = eq.get(q) || { q, n: 0, right: 0, wrong: new Map() }; x.n++; if (D(r).ok) x.right++; else x.wrong.set(D(r).picked, (x.wrong.get(D(r).picked) || 0) + 1); eq.set(q, x); });
+  const missedQs = [...eq.values()].filter((x) => x.n >= 1).map((x) => ({ q: x.q, n: x.n, pct: pct(x.right, x.n), commonWrong: [...x.wrong.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] || null })).sort((a, b) => a.pct - b.pct || b.n - a.n).slice(0, 8);
+  // explain it back
+  const ex = by("explain"), exAvg = ex.length ? +(ex.reduce((a, r) => a + (+D(r).score || 0), 0) / ex.length).toFixed(1) : null;
+  const ec = new Map(); ex.forEach((r) => { const c = String(D(r).concept || D(r).q || "").replace(/^Your turn\. In your own words, explain this part of your note: /, "").replace(/\.$/, "") || "—"; const x = ec.get(c) || { concept: c, n: 0, sum: 0, missed: new Map() };
+    x.n++; x.sum += +D(r).score || 0; (D(r).missed || []).forEach((m) => { const k = String(m).toLowerCase().trim(); if (k) x.missed.set(k, (x.missed.get(k) || 0) + 1); }); ec.set(c, x); });
+  const weakest = [...ec.values()].map((x) => ({ concept: x.concept, n: x.n, avg: +(x.sum / x.n).toFixed(1), topMissed: [...x.missed.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] || null })).sort((a, b) => a.avg - b.avg || b.n - a.n).slice(0, 8);
+  // asked, but not in their notes
+  const asks = by("ask"), an = new Map(); asks.filter((r) => !D(r).inNote && !D(r).offTopic).forEach((r) => { const q = String(D(r).q || "").trim(), k = normQuestion(q); if (!k) return; const x = an.get(k) || { q, n: 0, failed: 0, plate: r.plate, topic: r.topic }; x.n++; if (D(r).failed) x.failed++; an.set(k, x); });
+  const notInNote = [...an.values()].sort((a, b) => b.n - a.n).slice(0, 12);
+  // reports (⚑), grouped by plate + stop + reason
+  const rg = new Map(); by("report").forEach((r) => { const d = D(r), key = [r.plate, d.k, d.reason, r.status || "open"].join("|"); const x = rg.get(key) || { plate: r.plate, k: d.k, title: d.title, phase: d.phase, reason: d.reason, lineText: d.lineText, version: d.version, status: r.status || "open", n: 0, ids: [], comments: [], last: r.at };
+    x.n++; x.ids.push(r.id); if (d.comment) x.comments.push(d.comment); if (r.at > x.last) x.last = r.at; rg.set(key, x); });
+  const reports = [...rg.values()].sort((a, b) => (a.status === "open" ? 0 : 1) - (b.status === "open" ? 0 : 1) || b.n - a.n || String(b.last).localeCompare(String(a.last))).map((x) => ({ ...x, comments: x.comments.slice(-3) }));
+  return { headline: { opened: new Set(by("open").map((r) => r.session || r.id)).size, students: students.size, fullStarted: fullS.size, finishedFullPct: pct([...fullS.keys()].filter((s) => finishedFull.has(s)).length, fullS.size), worstStop: worst,
+      examPct, examN: examDone.length, explainAvg: exAvg, explainN: ex.length, asks: asks.length, openReports: reports.filter((x) => x.status === "open").reduce((a, x) => a + x.n, 0) },
+    reach, missedQs, weakest, notInNote, reports };
+}

@@ -22,7 +22,7 @@
  * Reviews (feature 4): when the student finishes the full walk-through or exam revision, the note's exam questions are
  * handed to the app (onCards) as review cards tied to their moment on the plate; MBPlate.replay() replays that moment.
  *
- *   MBPlate.mount(host, { plate, note, getLesson, speak, stopSpeak, warm, isDark, loadProgress, saveProgress, whatifUI, onCards, onReady, onStart, offline })  → { destroy, voiceTexts, refresh, … }
+ *   MBPlate.mount(host, { plate, note, getLesson, speak, stopSpeak, warm, isDark, loadProgress, saveProgress, whatifUI, onCards, onReady, onStart, offline, ask, explain, onReport, onEvent })  → { destroy, voiceTexts, refresh, … }
  * Data-light (feature 5): the plate loads as <id>.lite.html (no baked voice); onStart(api) fires when the student first picks a length (onReady(api) once the lesson and manifest are in), so the app can
  * save the plate files, the lesson and api.voiceTexts() (every line the tutor can say) for offline; offline() → {state:"saved"|"saving", n, of} draws the chip.
  *   MBPlate.match(text) → plate entry or null
@@ -93,6 +93,8 @@
 .mbp-under{display:grid;gap:10px}.mbp-under:empty{display:none}
 .mbp-head{position:sticky;top:-12px;z-index:2;background:var(--panel);margin:-12px -10px 0;min-width:0;padding:12px 12px 12px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
 .mbp-head .mbp-cap{font-size:14.5px}
+.mbp-ctx{font-size:12.5px;color:var(--dim);border-left:3px solid var(--accent);padding:2px 0 2px 9px;margin:0 0 8px}.mbp-chips{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 8px}
+.mbp-chip{min-height:38px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:600 13px system-ui;padding:0 12px}.mbp-chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
 .mbp-ask{display:flex;gap:8px;align-items:center;margin:6px 0 4px}.mbp-askin{flex:1;min-width:0;min-height:44px;border:1px solid var(--line);border-radius:22px;padding:0 15px;background:var(--panel);color:var(--text);font:15px system-ui}
 .mbp-askin:focus{outline:2px solid color-mix(in srgb,var(--accent) 55%,transparent);border-color:var(--accent)}.mbp-ic{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:18px;padding:0;display:inline-flex;align-items:center;justify-content:center}
 .mbp-ic.p{background:var(--accent);border-color:var(--accent);color:#fff}.mbp-ic.rec,.mbp-btn.rec{background:#dc2626!important;border-color:#dc2626!important;color:#fff!important;animation:mbpPulse 1.1s ease-in-out infinite}@keyframes mbpPulse{50%{box-shadow:0 0 0 7px rgba(220,38,38,.18)}}
@@ -170,7 +172,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
     function layout() { const w = host.clientWidth >= 860; if (w === wide) return; wide = w; root.classList.toggle("wide", w); build(); }
     function build() {
       const capHtml = `<div class="mbp-eb mbp-now"><span class="mbp-where"></span><span class="mbp-sp"></span><button class="mbp-len" data-a="lengths">Change length</button></div><div class="mbp-cap"></div>`;
-      const barHtml = `<div class="mbp-bar"><button class="mbp-b" data-a="prev" aria-label="Previous stop"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="2.6" height="12" rx="1" fill="currentColor"/><path d="M17 4.5v11L7.5 10z" fill="currentColor"/></svg></button><button class="mbp-b p" data-a="play" aria-label="Play">▶</button><button class="mbp-b" data-a="next" aria-label="Next stop"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><rect x="14.4" y="4" width="2.6" height="12" rx="1" fill="currentColor"/><path d="M3 4.5v11L12.5 10z" fill="currentColor"/></svg></button><div class="mbp-dots" role="tablist" aria-label="Stops"></div><button class="mbp-b" data-a="voice" aria-label="Voice">🔈</button></div>`;
+      const barHtml = `<div class="mbp-bar"><button class="mbp-b" data-a="prev" aria-label="Previous stop"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="2.6" height="12" rx="1" fill="currentColor"/><path d="M17 4.5v11L7.5 10z" fill="currentColor"/></svg></button><button class="mbp-b p" data-a="play" aria-label="Play">▶</button><button class="mbp-b" data-a="next" aria-label="Next stop"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><rect x="14.4" y="4" width="2.6" height="12" rx="1" fill="currentColor"/><path d="M3 4.5v11L12.5 10z" fill="currentColor"/></svg></button><div class="mbp-dots" role="tablist" aria-label="Stops"></div>${o.onReport ? '<button class="mbp-b" data-a="flag" aria-label="Report a problem at this stop" title="Something wrong here?">⚑</button>' : ""}<button class="mbp-b" data-a="voice" aria-label="Voice">🔈</button></div>`;
       const askHtml = o.ask ? `<form class="mbp-ask" autocomplete="off"><input class="mbp-askin" name="q" maxlength="300" enterkeyhint="send" placeholder="Ask the plate about your note…" aria-label="Ask the plate a question">${SR ? '<button type="button" class="mbp-ic" data-a="mic" aria-label="Ask out loud">🎤</button>' : ""}<button class="mbp-ic p" type="submit" aria-label="Ask">➤</button></form>` : "";
       if (spacer) { spacer.remove(); spacer = null; }
       aside.style.left = aside.style.width = aside.style.right = "";   // a sheet's laptop placement (fitSheet) must not follow it into the side-by-side layout
@@ -258,7 +260,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
     function goStop(k, play) {
       const s = st.stops[k]; if (!s) return; haltSpeech(); st.mode = "lesson"; st.k = k; st.j = 0; st.partLines = new Set(); st.playing = !!play;
       if (s.words) post({ type: "mbx-show", focus: [], lens: null, play: false }); else post({ type: "mbx-show", phase: s.phase, focus: s.focus, lens: s.lens || null, win: s.win || null, speed: s.speed, play: true });
-      closePick(); renderLines(); renderNow(); caption(s.say); saveProg({ k });
+      closePick(); renderLines(); renderNow(); caption(s.say); saveProg({ k }); ev("stop", { tier: st.tier, k, n: st.stops.length, title: s.title || "" });
       if (play && st.tier === "full" && s.predict && !st.predDone.has(s.predict) && predictionOf(s.predict)) return predict(k);
       if (play) speak(); }
     function speak() { const s = st.stops[st.k]; if (!s) return; st.playing = true; renderNow();
@@ -294,6 +296,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
         else if (a === "prev") { st.through = false; goStop(Math.max(0, st.k - 1), true); }
         else if (a === "next") { st.through = false; goStop(Math.min(st.stops.length - 1, st.k + 1), true); }
         else if (a === "lengths") { haltSpeech(); post({ type: "mbx-play", on: false }); openPick("start"); }
+        else if (a === "flag") openReport();
         else if (a === "mic") listen(root.querySelector(".mbp-askin"), b, (t) => askPlate(t));
         else if (a === "voice") { st.voice = !st.voice; store.set("mbp-voice", st.voice); if (!st.voice) { try { o.stopSpeak && o.stopSpeak(); } catch (_) {} } renderNow(); } });
       aside.onclick = (e) => {
@@ -309,6 +312,10 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
           if (a === "choices" && A) { A.choices = true; renderPick(); } else if (a === "skip" && A) { st.predDone.add(A.q.id); st.ask = null; post({ type: "mbx-ask-end" }); closePick(); const s = st.stops[A.k]; post({ type: "mbx-show", phase: s.phase, focus: s.focus, lens: s.lens || null, win: s.win || null, speed: s.speed, play: true }); st.j = 0; speak(); }
           else if (a === "next" || a === "skipq") { post({ type: "mbx-ask-end" }); st.endQ.i++; askEnd(); } else if (a === "check") checkSeek(); else if (a === "back" || a === "fwd") post({ type: "mbx-phase-step", dir: a === "fwd" ? 1 : -1 }); }
         const wb = e.target.closest("[data-wi]"); if (wb) { const v = wb.dataset.wi; if (v === "normal") normal(st.picking === "whatif" && st.wiFrom != null); else if (v === "skip") normal(true); else runWhatif(v); }
+        const rp = e.target.closest("[data-rp]"); if (rp && st.report) { const a = rp.dataset.rp, R = st.report;
+          if (a === "reason") { R.reason = rp.dataset.v; R.comment = (aside.querySelector(".mbp-tin") || {}).value || R.comment; renderPick(); }
+          else if (a === "send" && R.reason) { R.comment = (aside.querySelector(".mbp-tin") || {}).value || ""; sendReport(); }
+          else if (a === "cancel") { st.report = null; closePick(); renderNow(); } }
         const qa = e.target.closest("[data-qa]"); if (qa) { const a = qa.dataset.qa; if (a === "again") showAnswer(true); else if (a === "back") backToLesson(); }
         const tb = e.target.closest("[data-tb]"); if (tb) { const a = tb.dataset.tb, T = st.teach;
           if (a === "mic" && T) listen(aside.querySelector(".mbp-tin"), tb, (t) => { T.text = t; checkTeach(); }, true);
@@ -349,7 +356,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
       if (patch && patch.k != null) p.title = (st.stops[patch.k] || {}).title || ""; st.prog = p; store.set(pkey, p); try { o.saveProgress && o.saveProgress(p); } catch (_) {} }
     function resumable() { const p = loadProg(); if (!p || p.k == null || !has(p.tier)) return null; const n = stopsFor(p.tier).length;
       if (p.k <= 0 && !p.exam) return null; if (p.finished === p.tier || p.k >= n - 1 && p.finished === p.tier) return null; return { tier: p.tier, k: Math.min(p.k, n - 1), n, title: p.title || "" }; }
-    function choose(tier, k) { if (!st.started) { st.started = true; try { o.onStart && o.onStart(API); } catch (e) { console.warn("[plate] onStart", e); } } setTier(tier); st.through = true; st.endQ = null; st.ask = null; if (st.wi) { post({ type: "mbx-params", params: {} }); st.wi = null; renderChips(); } if (tier === "exam") st.exam = { i: 0, right: k ? ((loadProg() || {}).exam || {}).right || 0 : 0, answered: null }; saveProg({ k, finished: null }); goStop(Math.min(k, st.stops.length - 1), true); }
+    function choose(tier, k) { ev("start", { tier, from: k || 0 }); if (!st.started) { st.started = true; try { o.onStart && o.onStart(API); } catch (e) { console.warn("[plate] onStart", e); } } setTier(tier); st.through = true; st.endQ = null; st.ask = null; if (st.wi) { post({ type: "mbx-params", params: {} }); st.wi = null; renderChips(); } if (tier === "exam") st.exam = { i: 0, right: k ? ((loadProg() || {}).exam || {}).right || 0 : 0, answered: null }; saveProg({ k, finished: null }); goStop(Math.min(k, st.stops.length - 1), true); }
 
     function openPick(kind) { st.picking = kind; aside.classList.add("pk"); aside.classList.toggle("qa", kind === "answer"); aside.classList.toggle("wion", kind === "whatif" && /chips|both/.test(o.whatifUI || "both")); renderPick(); if (!wide) { aside.classList.remove("up"); } sizeSpacer(); }
     function closePick() { if (!st.picking) return; st.picking = false; aside.classList.remove("pk", "wion", "qa"); renderPick(); sizeSpacer(); }
@@ -375,13 +382,14 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
       else if (st.picking === "predict" || st.picking === "tap" || st.picking === "seek") box.innerHTML = askHtml();
       else if (st.picking === "whatif-offer" || st.picking === "whatif") box.innerHTML = whatifHtml(st.picking === "whatif-offer");
       else if (st.picking === "answer") box.innerHTML = answerHtml();
+      else if (st.picking === "report") box.innerHTML = reportHtml();
       else if (st.picking === "teach") box.innerHTML = teachHtml();
       else if (st.picking === "done") { const t = st.tier, sc = t === "exam" && st.exam ? `You got <b>${st.exam.right} of ${st.stops.length}</b> right.` : st.endQ && st.endQ.of ? `Plate questions: <b>${st.endQ.right} of ${st.endQ.of}</b> right.` : "";
         box.innerHTML = `<div class="mbp-h">${TIERS[t]} · done ✓</div><div class="mbp-q"><p>${t === "exam" ? sc : "That's your note on this plate." + (sc ? " " + sc : "")}</p></div>`
           + `<div class="mbp-row">${t !== "exam" && has("exam") ? `<button class="mbp-btn p" data-next="exam">Exam revision</button>` : ""}${t === "exam" ? `<button class="mbp-btn p" data-next="exam">Try again</button>` : ""}<button class="mbp-btn" data-next="${t}">Replay</button><button class="mbp-btn" data-next="start">Other lengths</button></div>`; }
       if (!wide) sizeSpacer(); }
     function ask(k) { const s = st.stops[k]; st.exam = Object.assign(st.exam || { right: 0 }, { answered: null, replayed: false }); openPick("question"); post({ type: "mbx-play", on: false }); caption(s.quiz.q); say(s.quiz.q, () => {}); }
-    function answer(m) { const s = st.stops[st.k], ok = m === s.quiz.answer; st.exam.answered = m; if (ok) st.exam.right++; (st.exam.log = st.exam.log || {})[s.full] = ok; renderPick();
+    function answer(m) { const s = st.stops[st.k], ok = m === s.quiz.answer; st.exam.answered = m; if (ok) st.exam.right++; (st.exam.log = st.exam.log || {})[s.full] = ok; renderPick(); ev("exam", { q: s.quiz.q, ok, picked: s.quiz.options[m], right: s.quiz.options[s.quiz.answer] });
       saveProg({ k: st.k, exam: { right: st.exam.right, of: st.stops.length, at: st.k } }); try { o.onAnswer && o.onAnswer({ stop: s.full, ok }); } catch (_) {}
       say(ok ? "Right." : "Not quite.", () => say(s.quiz.why, () => { if (!ok && st.picking === "question") { const tok = st.token; setTimeout(() => { if (tok !== st.token) return; const k = st.k; st.stops[k].replay = true; replayThenAsk(k); }, 500); } })); }
     function replayThenAsk(k) { // a wrong answer replays that stop, then offers "Next stop"
@@ -400,7 +408,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
       if (A.kind === "predict") { const ok = A.q.answer.includes(id); A.result = { ok, id }; st.predDone.add(A.q.id);
         post({ type: "mbx-ask-end", mark: { right: A.q.answer, wrong: ok ? [] : [id] } }); renderPick();
         const msg = ok ? "Right. Watch it happen." : "Not quite: it's the " + partName(A.q.answer[0]).toLowerCase() + ". Watch.";
-        try { o.onAnswer && o.onAnswer({ kind: "predict", id: A.q.id, ok }); } catch (_) {}
+        try { o.onAnswer && o.onAnswer({ kind: "predict", id: A.q.id, ok }); } catch (_) {} ev("predict", { id: A.q.id, ok });
         say(msg, () => { if (st.ask !== A) return; st.ask = null; closePick(); const s = st.stops[A.k]; post({ type: "mbx-show", phase: s.phase, focus: s.focus, lens: s.lens || null, win: s.win || null, speed: s.speed, play: true }); st.j = 0; speak(); }); }
       else if (A.kind === "tap") { const ok = A.q.parts.includes(id); A.result = { ok, id }; if (ok) st.endQ.right++;
         post({ type: "mbx-ask-end", mark: { right: A.q.parts, wrong: ok ? [] : [id] } }); renderPick(); say(ok ? "Right." : "Not quite: it's the " + partName(A.q.parts[0]).toLowerCase() + ".", () => {}); } }
@@ -447,6 +455,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
           caption: line ? "From your note: " + line.text : "", missed: results[x.stop] === false }; });
       try { o.onCards(cards); } catch (e) { console.warn("[plate] onCards", e); } }
     function finish() { if (st.tier === "full" && (st.lesson.end || []).length && st.endQ == null) { st.endQ = { i: 0, right: 0 }; return askEnd(); }
+      ev("finish", { tier: st.tier, right: st.tier === "exam" && st.exam ? st.exam.right : null, of: st.tier === "exam" ? st.stops.length : null });
       if (st.tier === "full" || st.tier === "exam") giveCards(st.tier === "exam" && st.exam ? st.exam.log || {} : {});
       const p = loadProg() || {}; const d = Object.assign({}, p.done, { [st.tier]: true }); saveProg({ k: st.stops.length - 1, finished: st.tier, done: d }); openPick("done"); }
     st.voice = store.get("mbp-voice", st.voice);
@@ -518,6 +527,21 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
       r.onerror = () => {}; r.onend = () => { st.rec = null; btn.classList.remove("rec"); btn.textContent = lab; const t = input.value.trim(); if (t.length >= 3) { if (!keep) input.value = ""; done(t); } };
       try { r.start(); } catch (_) { st.rec = null; btn.classList.remove("rec"); } }
 
+    /* ---------- Feedback and insights (feature 7): ⚑ reports carry the exact stop; events feed the admin insights page ---------- */
+    const REASONS = ["Plate shows the wrong thing", "Doesn't match my note", "Voice or words wrong", "Too fast or too slow", "Something else"];
+    const ev = (kind, data) => { try { o.onEvent && o.onEvent(kind, Object.assign({ v: (st.lesson && st.lesson.version) || null }, data || {})); } catch (_) {} };
+    function openReport() { haltSpeech(); post({ type: "mbx-play", on: false }); const s = st.stops[st.k];
+      st.report = { k: st.k, full: s ? s.full : null, title: s ? s.title || "" : "", phase: (s && s.phase) || st.phaseNow || "", lines: s ? s.lines : [], tier: st.tier, reason: null, comment: "" };
+      openPick("report"); if (!wide) aside.classList.remove("up"); }
+    function reportHtml() { const R = st.report; if (!R) return ""; const ln = (R.lines || []).map((x) => String(x).replace(/^L/, ""));
+      return `<div class="mbp-h">Something wrong here?</div><p class="mbp-qq">What's wrong at this stop?</p><div class="mbp-ctx">${R.k >= 0 ? `Stop ${R.k + 1}${R.title ? " · " + esc(R.title) : ""}${ln.length ? " · your note line" + (ln.length > 1 ? "s " : " ") + ln.join(", ") : ""}` : "The plate, before a lesson started"}</div>
+        <div class="mbp-chips">${REASONS.map((r) => `<button class="mbp-chip${R.reason === r ? " on" : ""}" data-rp="reason" data-v="${esc(r)}">${esc(r)}</button>`).join("")}</div>
+        <textarea class="mbp-tin" rows="2" maxlength="500" placeholder="Tell us more (optional)">${esc(R.comment || "")}</textarea>
+        <div class="mbp-row"><button class="mbp-btn p" data-rp="send"${R.reason ? "" : ' aria-disabled="true" style="opacity:.5"'}>Send</button><button class="mbp-btn" data-rp="cancel">Cancel</button></div>`; }
+    function sendReport() { const R = st.report; st.report = null; closePick(); renderNow();
+      const lineText = lines.filter((l) => (R.lines || []).includes(l.id)).map((l) => l.text).join(" ").slice(0, 400);
+      try { o.onReport({ stop: R.full, k: R.k, title: R.title, phase: R.phase, lines: R.lines, lineText, tier: R.tier, reason: R.reason, comment: R.comment.trim().slice(0, 500), version: (st.lesson && st.lesson.version) || null }); } catch (e) { console.warn("[plate] report", e); } }
+
     function voiceTexts() { const out = new Set(), add = (t) => { t = String(t || "").trim(); if (t) out.add(t); }, M = st.manifest || {}, L = st.lesson || {};
       const pn = (id) => ((M.parts || []).find((p) => p.id === id) || {}).name || id;
       ["overview", "full", "exam"].forEach((tier) => { if (!has(tier)) return; stopsFor(tier).forEach((s) => { sentences(s.say).forEach(add);
@@ -529,7 +553,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
       (L.end || []).forEach((q) => { add(q.q); add("Right."); add(q.type === "tap" ? "Not quite: it's the " + pn(q.parts[0]).toLowerCase() + "." : "Not quite: it's in the " + String(q.phase).toLowerCase() + "."); });
       return [...out]; }
     function refresh() { if (st.picking === "start") renderPick(); }
-    let readyN = 0; function ready() { if (++readyN === 2 && st.mode === "ready" && !destroyed) try { o.onReady && o.onReady(API); } catch (e) { console.warn("[plate] onReady", e); } }
+    let readyN = 0; function ready() { if (++readyN === 2 && st.mode === "ready" && !destroyed) try { ev("open", { stops: st.full.length, resumed: !!o.resume }); o.onReady && o.onReady(API); } catch (e) { console.warn("[plate] onReady", e); } }
     function destroy() { if (destroyed) return; destroyed = true; haltSpeech(); clearInterval(watch); ro.disconnect(); mo.disconnect(); window.removeEventListener("message", onMsg); window.removeEventListener("resize", sizeSpacer); if (spacer) spacer.remove(); if (root.isConnected) host.innerHTML = ""; }
     const watch = setInterval(() => { if (!root.isConnected) destroy(); }, 800);   // the app re-renders pages by replacing HTML: stop talking when we're gone
     const API = { destroy, alive: () => !destroyed, state: st, goStop, choose, openPick, ask, finish, runWhatif, offerWhatif, askEnd, onPick, lines, voiceTexts, refresh };
