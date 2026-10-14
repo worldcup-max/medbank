@@ -47,7 +47,18 @@
   /* an exchange bed (capillaries, alveoli, glomerulus…) */
   K.bed = (parent, x, y, w, h, label, opt = {}) => { const g = el("g", {}, parent); el("rect", { x, y, width: w, height: h, rx: Math.min(h, w) / 2, fill: opt.fill || "var(--bed)", stroke: "var(--hair)" }, g);
     const n = Math.max(6, Math.round(w / 14)); for (let i = 0; i < n; i++) { const xx = x + 12 + i * (w - 24) / (n - 1); el("path", { d: `M${f1(xx)} ${y + 5} q 4 ${f1(h / 2 - 5)} 0 ${f1(h - 10)}`, fill: "none", stroke: i % 2 ? "var(--hot)" : "var(--cold)", "stroke-width": 0.8, opacity: 0.35 }, g); }
-    if (label) K.label(x + w / 2, y + h + 13, label, "middle"); return g; };
+    if (label) K.label(x + w / 2, y + h + 13, label, "middle"); g.set = (a) => g.setAttribute("opacity", f1(0.55 + 0.45 * clamp(+a || 0, 0, 1))); return g; };
+  /* a tracer: the parcel being followed on a journey (a bolus of filtrate, food, an impulse). paths = { partId: centreline pts }.
+     .set(partId, u 0..1 along that part, "live text") puts it on that part's drawn path; unknown part → hidden */
+  K.tracer = (parent, paths, opt = {}) => { const g = el("g", { class: "tracer" }, parent), poly = {};
+    for (const id in paths) { const q = sampleSpline(paths[id], 12), cum = [0]; for (let i = 1; i < q.length; i++) cum.push(cum[i - 1] + Math.hypot(q[i][0] - q[i - 1][0], q[i][1] - q[i - 1][1])); poly[id] = { q, cum }; }
+    const halo = el("circle", { r: (opt.r || 7) + 6, fill: "var(--accent)", opacity: 0.22 }, g), dot = el("circle", { r: opt.r || 7, fill: "var(--accent)", stroke: "var(--sheet)", "stroke-width": 2 }, g);
+    const txt = el("text", { class: "lab halo strong", "text-anchor": "start" }, g);
+    g.set = (id, u, text) => { const P = poly[id]; if (!P) { g.setAttribute("opacity", 0); return; } g.setAttribute("opacity", 1);
+      const L = P.cum[P.cum.length - 1] * clamp(+u || 0, 0, 1); let k = 1; while (k < P.cum.length - 1 && P.cum[k] < L) k++;
+      const a = P.q[k - 1], b = P.q[k], t = (L - P.cum[k - 1]) / ((P.cum[k] - P.cum[k - 1]) || 1), x = lerp(a[0], b[0], t), y = lerp(a[1], b[1], t);
+      [halo, dot].forEach((c) => { c.setAttribute("cx", f1(x)); c.setAttribute("cy", f1(y)); }); txt.setAttribute("x", f1(x + 14)); txt.setAttribute("y", f1(y + 4)); txt.textContent = text || ""; };
+    return g; };
   /* a valve or gate: two leaflets hinged at A and B. down = unit vector of forward flow. kind "av" (hangs open into the next space) or "sl" (cusps lie along the wall) */
   K.valve = (parent, A, B, down, kind = "sl") => { const g = el("g", {}, parent), half = Math.hypot(B[0] - A[0], B[1] - A[1]) / 2, M = mid(A, B);
     const outer = [0, 1].map(() => el("path", { fill: "none", stroke: "var(--leaflet-edge)", "stroke-width": 6, "stroke-linecap": "round" }, g)), inner = [0, 1].map(() => el("path", { fill: "none", stroke: "var(--leaflet)", "stroke-width": 3.4, "stroke-linecap": "round" }, g));

@@ -8,9 +8,20 @@ export const MODELS = {
 };
 export const usage = { calls: 0, in: 0, out: 0, byModel: {} };
 
-export async function chat(prompt, { model = MODELS.think, json = false, max_tokens = 16000, temperature = 0.3, effort = process.env.STUDIO_REASONING || "none", timeoutMs = 600000 } = {}) {
+/* one answer; if it was cut off at max_tokens, ask the model to carry on from where it stopped (up to 2 times) and join the pieces */
+export async function chat(prompt, opt = {}) {
+  let messages = [{ role: "user", content: prompt }], out = "";
+  for (let part = 0; part < 3; part++) {
+    const { text, finish } = await chatOnce(messages, opt); out += text;
+    if (finish !== "length" || opt.json) return out;
+    messages = [{ role: "user", content: prompt }, { role: "assistant", content: out }, { role: "user", content: "You were cut off. Continue EXACTLY where you stopped — the next characters only, no repetition, no explanation, no new code fence at the start." }];
+  }
+  return out;
+}
+
+async function chatOnce(messages, { model = MODELS.think, json = false, max_tokens = 16000, temperature = 0.3, effort = process.env.STUDIO_REASONING || "none", timeoutMs = 600000 } = {}) {
   const key = process.env.DEEPSEEK_API_KEY; if (!key) throw new Error("DEEPSEEK_API_KEY is not set");
-  const body = { model, messages: [{ role: "user", content: prompt }], max_tokens, temperature, reasoning_effort: effort };
+  const body = { model, messages, max_tokens, temperature, reasoning_effort: effort };
   if (json) body.response_format = { type: "json_object" };
   for (let attempt = 0; attempt < 3; attempt++) {
     const ctrl = new AbortController(), to = setTimeout(() => ctrl.abort(), timeoutMs);
@@ -30,7 +41,7 @@ export async function chat(prompt, { model = MODELS.think, json = false, max_tok
     const m = (usage.byModel[model] = usage.byModel[model] || { in: 0, out: 0 }); m.in += u.prompt_tokens || 0; m.out += u.completion_tokens || 0;
     const text = (c.message && c.message.content) || "";
     if (!text.trim() && c.finish_reason === "length") throw new Error("DeepSeek ran out of tokens before answering");
-    return text;
+    return { text, finish: c.finish_reason };
   }
   throw new Error("DeepSeek did not answer");
 }
@@ -53,4 +64,5 @@ export function cost() {   // rough, from published list prices; check current p
 }
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 export function extractJson(t) { const s = String(t || ""); const a = s.indexOf("{"), b = s.lastIndexOf("}"); if (a < 0 || b <= a) return null; try { return JSON.parse(s.slice(a, b + 1)); } catch (_) { return null; } }
-export function extractCode(t) { const m = /```(?:js|javascript)?\s*\n([\s\S]*?)```/.exec(String(t || "")); return (m ? m[1] : String(t || "")).trim(); }
+export function extractCode(t) { const s = String(t || ""), m = /```(?:js|javascript)?\s*\n([\s\S]*?)```/.exec(s); if (m) return m[1].trim();
+  return s.replace(/^[\s\S]*?```(?:js|javascript)?\s*\n/, "").replace(/```\s*$/, "").trim(); }   // an unterminated fence still yields the code

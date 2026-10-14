@@ -1,0 +1,78 @@
+{
+ "steps": [
+  {
+   "title": "Filtration at the glomerulus",
+   "phase": "Bowman's capsule",
+   "focus": [
+    "glom",
+    "afferent",
+    "efferent",
+    "bowman"
+   ],
+   "say": "Blood enters the glomerulus through the afferent arteriole and leaves through the efferent arteriole. The net filtration pressure is 55 minus 15 minus 30, so about 10 millimetres of mercury, and that pushes plasma-like filtrate into Bowman's space at 300 milliosmoles per kilogram. Our parcel starts here as 100 percent of the filtered volume, part of a filtration rate of 125 millilitres per minute.",
+   "speed": 0.25
+  },
+  {
+   "title": "Iso-osmotic proximal tubule",
+   "phase": "Proximal tubule",
+   "focus": [
+    "pct",
+    "ptc"
+   ],
+   "say": "The proximal convoluted tubule reabsorbs about 65 percent of the filtered sodium and water, all of the glucose and amino acids, and most of the bicarbonate. Water simply follows the solute, so the fluid stays at 300 milliosmoles per kilogram while the parcel shrinks to about 35 percent of the filtered volume. Only the volume changes, not the concentration, and that is what iso-osmotic means.",
+   "speed": 1
+  },
+  {
+   "title": "Water leaves the loop",
+   "phase": "Descending limb",
+   "focus": [
+    "dtl",
+    "medulla",
+    "vasa"
+   ],
+   "say": "The thin descending limb is permeable to water but not to salt. The medullary interstitium gets saltier with depth, rising from 300 to 1200 milliosmoles per kilogram, so water is drawn out of the tube and the fluid inside concentrates to about 1200 at the tip of the loop. Only water has left, so the parcel is now down to about 9 percent of the filtered volume.",
+   "speed": 0.5
+  },
+  {
+   "title": "Salt is pumped out",
+   "phase": "Ascending limb",
+   "focus": [
+    "tal",
+    "medulla"
+   ],
+   "say": "The thick ascending limb does the opposite. It is impermeable to water and actively pumps sodium, potassium and two chloride ions out through the N-K-two-C-L cotransporter, called NKCC2. With the water left behind, the fluid is diluted to about 100 milliosmoles per kilogram, which is why this is the diluting segment. The salt it deposits is what builds the 300 to 1200 gradient, and the loop diuretic furosemide works by blocking NKCC2.",
+   "speed": 1
+  },
+  {
+   "title": "Back to the glomerulus",
+   "phase": "Distal tubule",
+   "focus": [
+    "md",
+    "dct"
+   ],
+   "say": "The tubule now returns to its own glomerulus, where the macula densa samples the fluid arriving. The distal convoluted tubule is still water-tight and reabsorbs sodium and chloride, a step that thiazide diuretics block, so the fluid stays dilute at around 80 milliosmoles per kilogram. The volume is unchanged at about 9 percent, because no water can leave yet.",
+   "speed": 0.6
+  },
+  {
+   "title": "ADH opens the duct",
+   "phase": "Collecting duct",
+   "focus": [
+    "cd",
+    "medulla"
+   ],
+   "say": "Now the dilute parcel enters the collecting duct and runs back down through the salty medulla. ADH, also called vasopressin, has inserted aquaporin-2 into the duct wall, so water moves out into the hypertonic interstitium and the urine concentrates toward 1200 milliosmoles per kilogram. Aldosterone acts on the principal cells here too, increasing sodium reabsorption and potassium secretion.",
+   "speed": 1.2
+  },
+  {
+   "title": "What is left",
+   "phase": "Collecting duct",
+   "focus": [
+    "cd",
+    "vasa",
+    "ptc"
+   ],
+   "say": "By the papilla, less than one percent of the filtered volume remains, so over 99 percent of the filtrate has been reabsorbed. Out of about 180 litres filtered a day, roughly 1.3 litres leave as urine. Without ADH the collecting duct would stay water-tight and the urine would stay dilute, around 50 to 100 milliosmoles per kilogram.",
+   "speed": 2
+  }
+ ]
+}

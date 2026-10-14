@@ -80,6 +80,10 @@ function runStudio(createScene, LESSON) {
   const BANDS = []; { let s0 = 0; for (let i = 1; i <= N; i++) if (i === N || S[i].phase !== S[s0].phase) { BANDS.push({ name: S[s0].phase, a: s0, b: i }); s0 = i; } }
   const EV = (M.events ? M.events(S, T) : []) || [];
   const svg = $("stage"); K.init(svg); const scene = createScene(svg, K, M, S) || { update() {} }; try { K.settleLabels(); } catch (_) {}
+  // journeys: the runtime (not the AI) puts the followed parcel on the drawn path, straight from the model's parcel
+  const TR = S[0] && S[0].parcel && scene.paths ? K.tracer(K.el("g", {}, svg), scene.paths) : null;
+  const parcelText = (s) => { try { if (M.parcelLabel) return M.parcelLabel(s); } catch (_) {} return (M.readouts || []).filter((r) => r.big).slice(0, 2).map((r) => fmt(s.readouts[r.key], r.digits) + " " + (r.unit || "")).join(" · "); };
+  window.__studio.tracer = !!TR; window.__studio.parcelParts = [...new Set(S.map((s) => s.parcel && s.parcel.part).filter(Boolean))]; window.__studio.paths = Object.keys(scene.paths || {});
   window.__studio.registered = Object.keys(K.parts());
   // ledger
   const gates = M.gates || []; if (!gates.length) $("gatesT").hidden = true; else $("gatesH").textContent = M.gateTitle || "Gate";
@@ -97,7 +101,7 @@ function runStudio(createScene, LESSON) {
   const lanes = (M.chart || []).slice(0, 3);
   function drawChart() { chart.innerHTML = ""; const g = K.el("g", {}, chart);
     BANDS.forEach((b, j) => { K.el("rect", { x: xOf(b.a), y: 4, width: xOf(b.b) - xOf(b.a), height: 300, fill: j % 2 ? "var(--ground)" : "var(--sheet)" }, g);
-      if (xOf(b.b) - xOf(b.a) > 40) { const t = K.el("text", { x: (xOf(b.a) + xOf(b.b)) / 2, y: 322, "text-anchor": "middle" }, g); t.textContent = (M.short && M.short[b.name]) || b.name.slice(0, 16); } });
+      if (xOf(b.b) - xOf(b.a) > 40) { const t = K.el("text", { x: (xOf(b.a) + xOf(b.b)) / 2, y: 322, "text-anchor": "middle" }, g); const room = Math.floor((xOf(b.b) - xOf(b.a) - 8) / 7), nm = (M.short && M.short[b.name]) || b.name; t.textContent = nm.length > room ? nm.slice(0, Math.max(3, room - 1)) + "…" : nm; } });
     const H = 296 / Math.max(1, lanes.length);
     lanes.forEach((ln, li) => { const y0 = 8 + li * H, y1 = y0 + H - 18; let lo = ln.min, hi = ln.max;
       if (lo == null || hi == null) { let a = Infinity, b = -Infinity; ln.series.forEach((sr) => S.forEach((s) => { const v = s.readouts[sr.key]; if (typeof v === "number" && isFinite(v)) { a = Math.min(a, v); b = Math.max(b, v); } })); const pad = (b - a) * 0.08 || 1; lo = lo ?? a - pad; hi = hi ?? b + pad; }
@@ -118,7 +122,7 @@ function runStudio(createScene, LESSON) {
   if (EV.some((e) => e.sound)) $("sound").hidden = false;
   function thump(f) { if (!sound) return; try { actx = actx || new AudioContext(); const o = actx.createOscillator(), gN = actx.createGain(), now = actx.currentTime; o.frequency.setValueAtTime(f || 60, now); o.frequency.exponentialRampToValueAtTime(30, now + 0.12); gN.gain.setValueAtTime(0.0001, now); gN.gain.exponentialRampToValueAtTime(0.8, now + 0.01); gN.gain.exponentialRampToValueAtTime(0.0001, now + 0.15); o.connect(gN).connect(actx.destination); o.start(now); o.stop(now + 0.2); } catch (_) {} }
   const idx = () => Math.floor(((t % T + T) % T) / T * N) % N;
-  function render(dBeat) { const i = idx(); try { scene.update(i, S[i], dBeat); } catch (e) { if (!window.__studio.sceneError) { window.__studio.sceneError = String(e.message); window.__studio.errors.push("scene.update: " + e.message); } }
+  function render(dBeat) { const i = idx(); if (TR) TR.set(S[i].parcel.part, S[i].parcel.u, parcelText(S[i])); try { scene.update(i, S[i], dBeat); } catch (e) { if (!window.__studio.sceneError) { window.__studio.sceneError = String(e.message); window.__studio.errors.push("scene.update: " + e.message); } }
     if (i !== prevI) { ledger(i); cursor.setAttribute("transform", "translate(" + K.f1(xOf(i)) + " 0)");
       if (playing && prevI >= 0) EV.forEach((ev) => { const k = Math.round(ev.t / T * N); if ((prevI < i && k > prevI && k <= i) || (prevI > i && (k > prevI || k <= i))) if (ev.sound) thump(ev.freq); }); prevI = i; }
     window.__studio.frames++; window.__studio.i = i; }

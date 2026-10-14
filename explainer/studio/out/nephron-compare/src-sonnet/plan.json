@@ -1,0 +1,19 @@
+{
+ "title": "How the nephron makes urine", "titleEm": "one parcel's journey",
+ "figLabel": "Plate 2 · Renal physiology",
+ "sub": "Water follows salt in the proximal tubule, the loop builds a 300 to 1200 mOsm/kg medulla, and ADH lets the collecting duct use it.",
+ "kind": "journey", "timeUnit": "s", "duration": 130,
+ "parts": [
+  {"id":"bowman","name":"Bowman's capsule"},{"id":"glom","name":"Glomerulus (capillary tuft)"},{"id":"afferent","name":"Afferent arteriole"},{"id":"efferent","name":"Efferent arteriole"},
+  {"id":"pct","name":"Proximal convoluted tubule"},{"id":"dtl","name":"Thin descending limb"},{"id":"tal","name":"Thick ascending limb"},{"id":"md","name":"Macula densa"},
+  {"id":"dct","name":"Distal convoluted tubule"},{"id":"cd","name":"Collecting duct"},{"id":"medulla","name":"Medullary interstitium"},{"id":"ptc","name":"Peritubular capillaries"},{"id":"vasa","name":"Vasa recta"}
+ ],
+ "phases": ["Bowman's capsule","Proximal tubule","Descending limb","Ascending limb","Distal tubule","Collecting duct"],
+ "quantities": [
+  {"key":"osm","label":"Fluid osmolality","unit":"mOsm/kg","typical":[50,1200]},
+  {"key":"vol","label":"Filtrate left","unit":"%","typical":[0,100]},
+  {"key":"flow","label":"Tubular flow","unit":"mL/min","typical":[0.5,125]},
+  {"key":"interst","label":"Local interstitium","unit":"mOsm/kg","typical":[300,1200]},
+  {"key":"pull","label":"Interstitium minus tube","unit":"mOsm/kg","typical":[0,260]}
+ ]
+}

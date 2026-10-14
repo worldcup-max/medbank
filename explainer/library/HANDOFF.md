@@ -1,0 +1,42 @@
+CONTINUE: MedBank physiology plate library (handoff from previous chat, 14 Oct 2026)
+
+WHO / WHAT
+I'm Frank, a 500L Nigerian medical student who builds MedBank (medbank.com.ng), a study PWA for Nigerian MBBS students.
+Repo on my Windows laptop: C:\Users\domin\OneDrive\Documents\GitHub\medbank (GitHub: worldcup-max/medbank), working branch: 3d-tutor.
+Rules: never run git on my machine (it leaves undeletable lock files). I commit, push and deploy myself. Never touch frankthewiz1@gmail.com's data in MedBank; test with frankthejay@gmail.com.
+
+THE GOAL
+Build a library of hand-quality, interactive, model-driven explainer "plates" (Four-Chamber Heart standard) for the top topics of every MBBS course, one course at a time, starting with PHYSIOLOGY (Guyton & Hall, 15th ed, 2025).
+Each plate: a numerical model is the single source of truth (createModel), an original detailed SVG drawing driven by it every frame (createScene), a live ledger + chart, a phase-by-phase tutor with a recorded VOICE (Kokoro, bf_emma, baked into the page as mp3 per sentence, so $0 per student).
+Students open a library plate instantly; only the narration is personalised to their note later (DeepSeek Flash, fractions of a cent). Topics not in the library fall back to the auto-builder.
+
+WHAT WE LEARNED (DON'T REPEAT)
+- DeepSeek (explainer/studio/build.mjs pipeline) gets the science right but draws badly, even with checks and fix rounds. Don't use it to draw plates.
+- I compared Opus vs Sonnet on the same brief (nephron). OPUS WON: more faithful anatomy and a "cell wall here" transporter inset per segment. Sonnet is prettier but anatomically wrong in places. Build library plates with Opus (Sonnet only for rare topics).
+- One Opus plate costs about 20 min and about 230k tokens. Wave 1 (49 left) is about 16 hours of build time.
+- Model must be real: no timers (t % 60), no sin(t) wobble. For paths through organs use kind "journey" (follow one parcel; sample() returns parcel {part,u}; scene returns paths {partId: pts}; the runtime moves the parcel). Proportions in %.
+
+FILES (all in the repo)
+- explainer\library\COURSES.md: course line-up and textbooks (Physiology → Biochemistry → Anatomy → Pharmacology → Histopath → Chempath → Haematology → Microbiology → Community Med → clinical).
+- explainer\library\physiology.json: THE BUILD QUEUE. 363 topics, 85 chapters. Each has id, title, kind, priority, status (todo/building/built/reviewed/published). "plan.wave1" = the 51 to build first, in order. cardiac-cycle-wiggers and nephron-urine-journey are already "built".
+- explainer\library\physiology-topics.md: human-readable list.
+- explainer\studio\: the engine. kit.js (drawing kit, window.K), shell.mjs (page runtime: ledger, chart, tutor, voice, parcel tracer), qa.mjs (checks), prompts.mjs (contracts + craft rules), build.mjs/llm.mjs (DeepSeek auto-builder), fixtures\cardiac.* (heart exemplar).
+- explainer\studio\plate-kit\: how to build a library plate. README.md (setup), BRIEF-nephron-example.md (the exact brief that produced the winning plate), assemble.mjs (build + all checks + screenshots), voice.py (Kokoro voice), final.mjs (final voiced page), nephron-note.md.
+- explainer\studio\out\nephron-compare\: the Opus and Sonnet nephron plates (nephron-opus.html, nephron-sonnet.html) + their sources (src-opus\, src-sonnet\).
+
+HOW TO BUILD ONE PLATE (the recipe)
+1. Copy explainer\studio\{kit.js,shell.mjs,qa.mjs,prompts.mjs,llm.mjs,fixtures} + plate-kit\{assemble.mjs,final.mjs,voice.py} into a cloud work folder "tools/". Set up Kokoro per plate-kit\README.md.
+2. Write a brief for the topic (copy BRIEF-nephron-example.md and swap the topic and note; use Guyton-level facts and real numbers).
+3. Opus writes <topic>/plan.json, model.js, scene.js, lesson.json (6–8 spoken steps written for the ear). Loop: node tools/assemble.mjs <topic>, then look at shot.png/stage-*.png, fix, until 0 issues and it truly looks excellent (at most about 8 rounds).
+4. python3 tools/voice.py <topic> bf_emma, then node tools/final.mjs <topic> <topic>.html.
+5. Write the plate into the repo at explainer\library\physiology\<topic-id>\ (sources + html) and set its status to "built" in physiology.json.
+
+WHAT I WANT NEXT
+1. Set up ONE recurring scheduled task (fresh session each run, which saves tokens) that reads explainer\library\physiology.json, takes the next 2 "todo" topics in wave1 order, builds them to the Opus standard with the recipe above, saves them into the repo, marks them "built" and stops. The next run continues from there. Suggested cadence: every 4–6 hours. It must run with my computer connected (needs the medbank folder). No git.
+2. Before that: polish the Opus nephron plate (busy cortex, a couple of labels over tubes), port the Four-Chamber Heart into the library format, and save both as the first two library plates.
+3. Later: wire the library into the app (3D Tutor tab opens a library plate when the topic matches; narration personalised; voice via postMessage mbx-speak or the baked audio), build-once-per-topic caching on the server, then repeat for Biochemistry.
+
+OTHER CONTEXT
+- MedBank app: single-file app.html PWA, Supabase, import-server on Render (DeepSeek V4), sw.js cache-first (bump CACHE on deploy). Go-live steps still pending from the SN2 3D Tutor work: run import-server\sql\explainers.sql, merge 3d-tutor, redeploy the import server, bump sw.js.
+- My DeepSeek API key was pasted in an earlier chat; I should rotate it.
+- On Windows PowerShell use npm.cmd (script execution is blocked); playwright is installed in explainer\node_modules.
