@@ -197,5 +197,60 @@
     "urine osmolality"
    ]
   }
+ },
+ "predictions": {
+  "concentrate": {
+   "before": "Thin descending limb",
+   "ask": "The fluid leaves the proximal tubule at about 300. Which segment will concentrate it next?",
+   "answer": [
+    "tdl"
+   ],
+   "choices": [
+    "tdl",
+    "tal",
+    "dct"
+   ],
+   "concepts": [
+    "loop of Henle permeabilities",
+    "medullary osmotic gradient"
+   ]
+  },
+  "dilute": {
+   "before": "Thick ascending limb",
+   "ask": "The fluid reached about 1200 at the tip of the loop. Which segment dilutes it next?",
+   "answer": [
+    "tal"
+   ],
+   "choices": [
+    "tdl",
+    "tal",
+    "cd"
+   ],
+   "concepts": [
+    "loop of Henle permeabilities",
+    "countercurrent multiplier",
+    "diluting segment"
+   ]
+  },
+  "adhwater": {
+   "before": "Medullary collecting duct",
+   "ask": "With ADH on, where does water leave to make the urine concentrated?",
+   "answer": [
+    "cd"
+   ],
+   "choices": [
+    "cd",
+    "dct",
+    "tal"
+   ],
+   "concepts": [
+    "ADH and aquaporin-2",
+    "concentrated urine formation"
+   ]
+  }
+ },
+ "whatifs": {
+  "furosemide": "High-dose furosemide (most NKCC2 blocked): the gradient collapses and a large volume of poorly concentrated urine is made.",
+  "noadh": "No ADH: the collecting duct stays water-tight, so a large volume of dilute urine is made."
  }
 }

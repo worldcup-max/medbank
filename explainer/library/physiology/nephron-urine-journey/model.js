@@ -1,11 +1,16 @@
 /* One parcel of glomerular filtrate followed from Bowman's capsule to the papilla (juxtamedullary nephron, ADH present).
  * State along the way: volume V (% of what was filtered), solute content Sol (V × osmolality), glucose and bicarbonate (% left).
  * Each segment applies its own transport law over the distance travelled; the interstitium the parcel sees depends on its depth. */
-function createModel() {
+function createModel(params) {
+  /* "what if" settings (the plate's what-ifs re-run this whole model): nkcc2 = thick-limb pump left working (0 = furosemide),
+   * adh = ADH effect on the collecting duct (0 = no ADH). Defaults are the normal kidney the plate draws. */
+  const P = Object.assign({ nkcc2: 1, adh: 1 }, params || {}), NK = Math.max(0, Math.min(1, P.nkcc2)), ADH = Math.max(0, Math.min(1, P.adh));
   // the note's numbers
   const P_GC = 55, P_BS = 15, PI_GC = 30, NFP = P_GC - P_BS - PI_GC;           // mmHg → 10
   const GFR = 125, RPF = 650, FF = GFR / RPF * 100, GFR_DAY = GFR * 1440 / 1000;  // mL/min, %, L/day (180)
-  const PLASMA = 300, PAPILLA = 1200, TAL_FLOOR = 100, SINGLE_EFFECT = 200;
+  const PLASMA = 300, PAPILLA_MAX = 1200, TAL_FLOOR = 100, SINGLE_EFFECT = 200 * NK;
+  // the gradient is built by the thick limb's pump (gone with furosemide) and partly washed out without ADH (Guyton: ~600 at the papilla)
+  const PAPILLA = PLASMA + (PAPILLA_MAX - PLASMA) * NK * (0.6 + 0.4 * ADH);
   const INT = (z) => PLASMA + (PAPILLA - PLASMA) * Math.max(0, Math.min(1, z));   // medullary interstitium, set up by the countercurrent multiplier
   // depth of each segment (0 = corticomedullary junction, 1 = papillary tip, < 0 = cortex) at u = 0, 0.05 … 1 of its length
   const DEPTH = {
@@ -24,10 +29,10 @@ function createModel() {
     { phase: "Glomerular filtration", part: "bowman", u0: 0, u1: 1, dur: 3, law: () => ({ dV: 0, dSol: 0 }) },
     { phase: "Proximal convoluted tubule", part: "pct", u0: 0, u1: 1, dur: 12, law: (st, u) => { const f = k_pct * (1.45 - 0.9 * u) / 1.0; const dV = -f * st.V; return { dV, dSol: dV * st.Sol / st.V, dG: -k_glu * st.G, dB: -k_hco3 * st.B, water: "follows Na⁺", salt: "Na⁺/H⁺, SGLT2" }; } },
     { phase: "Thin descending limb", part: "tdl", u0: 0, u1: 1, dur: 20, law: (st, u, z) => { const osm = st.Sol / st.V, drive = INT(z) - osm; return { dV: -24 * st.V * Math.max(0, drive) / osm, dSol: 0 }; } },
-    { phase: "Thick ascending limb", part: "tal", u0: 0, u1: 1, dur: 22, law: (st, u, z) => { const osm = st.Sol / st.V, floor = Math.max(TAL_FLOOR, INT(z) - SINGLE_EFFECT); return { dV: 0, dSol: -22 * st.V * Math.max(0, osm - floor) }; } },
+    { phase: "Thick ascending limb", part: "tal", u0: 0, u1: 1, dur: 22, law: (st, u, z) => { const osm = st.Sol / st.V, floor = Math.max(TAL_FLOOR, INT(z) - SINGLE_EFFECT); return { dV: 0, dSol: -22 * NK * st.V * Math.max(0, osm - floor) }; } },
     { phase: "Distal convoluted tubule", part: "dct", u0: 0, u1: 1, dur: 16, law: (st) => { const osm = st.Sol / st.V; return { dV: 0, dSol: -0.32 * st.V * Math.max(0, osm - 60) }; } },
-    { phase: "Cortical collecting duct", part: "cd", u0: 0, u1: ucc, dur: 12, law: (st, u, z) => { const osm = st.Sol / st.V; return { dV: -11 * st.V * Math.max(0, INT(z) - osm) / osm, dSol: -0.45 * st.Sol }; } },
-    { phase: "Medullary collecting duct", part: "cd", u0: ucc, u1: 1, dur: 48, law: (st, u, z) => { const osm = st.Sol / st.V; return { dV: -15 * st.V * Math.max(0, INT(z) - osm) / osm, dSol: 0 }; } },
+    { phase: "Cortical collecting duct", part: "cd", u0: 0, u1: ucc, dur: 12, law: (st, u, z) => { const osm = st.Sol / st.V; return { dV: -11 * ADH * st.V * Math.max(0, INT(z) - osm) / osm, dSol: -0.45 * st.Sol }; } },
+    { phase: "Medullary collecting duct", part: "cd", u0: ucc, u1: 1, dur: 48, law: (st, u, z) => { const osm = st.Sol / st.V; return { dV: -15 * ADH * st.V * Math.max(0, INT(z) - osm) / osm, dSol: 0 }; } },
   ];
   let T = 0; SEG.forEach((g) => { g.t0 = T; T += g.dur; });
   // integrate the parcel through every segment (fine Euler steps in u), recording its state
@@ -43,7 +48,14 @@ function createModel() {
   const N = 600, PARTS = ["aff", "glom", "eff", "bowman", "pct", "tdl", "tal", "md", "dct", "cd", "ptc", "vr", "interstitium"];
   const f0 = (v) => v.toFixed(0), f1 = (v) => (v < 10 ? v.toFixed(1) : v.toFixed(0));
   return {
-    T, N, timeUnit: "s", clockNote: "one parcel · ADH on · GFR " + GFR + " mL/min", speeds: [1, 2, 5, 10],
+    T, N, timeUnit: "s", clockNote: "one parcel · " + (ADH > 0.5 ? "ADH on" : "no ADH") + (NK < 0.5 ? " · furosemide" : "") + " · GFR " + GFR + " mL/min", speeds: [1, 2, 5, 10],
+    params: P,
+    /* what-ifs this plate can run (each re-runs the model): the app offers only those the student's note mentions */
+    whatifs: [
+      { id: "furosemide", label: "Furosemide", params: { nkcc2: 0.2 }, watch: ["osm", "vol", "flowDay", "intOsm"], at: "Thick ascending limb", note: ["furosemide", "loop diuretic"],
+        shows: "A high dose of furosemide blocks most NKCC2: the thick limb barely pumps NaCl, the medullary gradient collapses toward 300 and a large volume of poorly concentrated urine is made." },
+      { id: "noadh", label: "No ADH", params: { adh: 0 }, watch: ["osm", "vol", "flowDay", "intOsm"], at: "Medullary collecting duct", note: ["without adh", "no adh", "adh off", "absence of adh", "dilute urine"],
+        shows: "Without ADH the collecting duct has no aquaporin-2: water cannot leave, so the dilute fluid from the distal tubule becomes a large volume of dilute urine (about 50–100 mOsm/kg)." }],
     parts: [{ id: "aff", name: "Afferent arteriole" }, { id: "glom", name: "Glomerulus" }, { id: "eff", name: "Efferent arteriole" }, { id: "bowman", name: "Bowman's capsule" },
       { id: "pct", name: "Proximal convoluted tubule" }, { id: "tdl", name: "Thin descending limb" }, { id: "tal", name: "Thick ascending limb" }, { id: "md", name: "Macula densa" },
       { id: "dct", name: "Distal convoluted tubule" }, { id: "cd", name: "Collecting duct" }, { id: "ptc", name: "Peritubular capillaries" }, { id: "vr", name: "Vasa recta" },
@@ -76,7 +88,7 @@ function createModel() {
       const parts = { aff: { active: g.part === "bowman" ? 1 : 0, flow: 1 }, glom: { active: g.part === "bowman" ? 1 : 0, flow: 1 }, eff: { active: g.part === "bowman" ? 1 : 0, flow: 1 - FF / 100 },
         bowman: { active: g.part === "bowman" ? 1 : 0, flow: V / 100, level: V / 100 }, md: { active: md },
         ptc: { active: g.part === "pct" || g.part === "dct" ? act : 0, flow: 1 }, vr: { active: ["tdl", "tal", "cd"].includes(g.part) && z > 0 ? act : 0, flow: 0.6 },
-        interstitium: { active: z > 0 ? Math.min(1, z) : 0, level: (intOsm - PLASMA) / (PAPILLA - PLASMA) } };
+        interstitium: { active: z > 0 ? Math.min(1, z) : 0, level: (intOsm - PLASMA) / (PAPILLA_MAX - PLASMA) } };
       for (const p of ["pct", "tdl", "tal", "dct", "cd"]) parts[p] = { active: here(p), flow: g.part === p ? V / 100 : 0, level: g.part === p ? V / 100 : 0 };
       return { phase: g.phase, parcel: { part: g.part, u: Math.max(0, Math.min(1, u)) },
         readouts: { osm, vol: V, intOsm, flowDay: GFR_DAY * V / 100, gap: osm - intOsm, waterOut: wOut, saltOut: sOut, glucose: L("G"), hco3: L("B"), depth: z, nfp: NFP, pGC: P_GC, pBS: P_BS, piGC: PI_GC },
@@ -87,10 +99,13 @@ function createModel() {
         case "Glomerular filtration": return "Net filtration pressure is " + P_GC + " − " + P_BS + " − " + PI_GC + " = <b>" + NFP + " mmHg</b>, so plasma is pushed into Bowman's space: " + GFR + " mL/min, " + f0(FF) + "% of renal plasma flow. The parcel starts as plasma water at " + f0(r.osm) + " mOsm/kg.";
         case "Proximal convoluted tubule": return "Na⁺ is pumped out and <b>water follows it</b>, so the fluid stays at " + f0(r.osm) + " mOsm/kg while the volume falls to " + f1(r.vol) + "%. Glucose left: " + f0(r.glucose) + "%.";
         case "Thin descending limb": return "Water-permeable but salt-tight: water leaves toward the saltier interstitium (" + f0(r.intOsm) + "), so the fluid <b>concentrates to " + f0(r.osm) + "</b>; " + f1(r.vol) + "% of the filtrate is left.";
-        case "Thick ascending limb": return "<b>NKCC2 pumps NaCl out</b> but no water can follow, so the fluid dilutes to " + f0(r.osm) + " while the interstitium stays at " + f0(r.intOsm) + ". This salt builds the medullary gradient.";
+        case "Thick ascending limb": if (NK < 0.5) return "<b>NKCC2 is mostly blocked (furosemide)</b>: little NaCl leaves, so the fluid only falls to " + f0(r.osm) + " and the interstitium has collapsed to " + f0(r.intOsm) + ". Almost no gradient is being built.";
+          return "<b>NKCC2 pumps NaCl out</b> but no water can follow, so the fluid dilutes to " + f0(r.osm) + " while the interstitium stays at " + f0(r.intOsm) + ". This salt builds the medullary gradient.";
         case "Distal convoluted tubule": return "Past the macula densa, <b>NCC</b> (the thiazide target) removes more NaCl; the wall is still water-tight, so the fluid stays dilute at " + f0(r.osm) + ".";
-        case "Cortical collecting duct": return "With ADH, <b>aquaporin-2</b> lets water out to the 300 mOsm/kg cortex: the fluid rises to " + f0(r.osm) + " and volume drops to " + f1(r.vol) + "%. Aldosterone drives Na⁺ in and K⁺ out here.";
-        default: return "The duct dives through ever saltier medulla (" + f0(r.intOsm) + "), and ADH lets water follow: urine reaches <b>" + f0(r.osm) + " mOsm/kg</b> with " + f1(r.vol) + "% of the filtrate left, about " + f1(r.flowDay) + " L/day.";
+        case "Cortical collecting duct": if (ADH < 0.5) return "<b>No ADH, no aquaporin-2</b>: water cannot leave, so the fluid stays dilute at " + f0(r.osm) + " with " + f1(r.vol) + "% of the filtrate left. Aldosterone still drives Na⁺ in and K⁺ out.";
+          return "With ADH, <b>aquaporin-2</b> lets water out to the 300 mOsm/kg cortex: the fluid rises to " + f0(r.osm) + " and volume drops to " + f1(r.vol) + "%. Aldosterone drives Na⁺ in and K⁺ out here.";
+        default: if (ADH < 0.5) return "Without ADH the duct stays water-tight even in the salty medulla (" + f0(r.intOsm) + "): urine leaves <b>dilute at " + f0(r.osm) + " mOsm/kg</b>, about " + f1(r.flowDay) + " L/day.";
+          return "The duct dives through ever saltier medulla (" + f0(r.intOsm) + "), and ADH lets water follow: urine reaches <b>" + f0(r.osm) + " mOsm/kg</b> with " + f1(r.vol) + "% of the filtrate left, about " + f1(r.flowDay) + " L/day.";
       } },
     notes: "Juxtamedullary nephron with ADH on. Each segment's transport law (iso-osmotic PCT, water-only thin limb, NaCl-only thick limb with a 200 mOsm single effect, NCC in the DCT, ADH-gated water in the duct) acts on one parcel over typical transit times; the interstitium rises linearly from 300 to 1200 mOsm/kg with depth. Solute entry into the thin limb (urea recycling) is ignored. Final urine " + f0(urine.osm) + " mOsm/kg, " + f1(urine.V) + "% of filtrate, tip of loop " + f0(tipOsm) + ".",
   };

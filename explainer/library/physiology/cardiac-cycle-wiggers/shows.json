@@ -220,5 +220,58 @@
     "what causes heart sounds"
    ]
   }
- }
+ },
+ "predictions": {
+  "aorticopens": {
+   "before": "Ventricular ejection",
+   "ask": "LV pressure is about to rise above aortic pressure. Which valve opens next?",
+   "answer": [
+    "aortic"
+   ],
+   "choices": [
+    "mitral",
+    "aortic",
+    "tricuspid"
+   ],
+   "concepts": [
+    "pressure gradients open and close the valves",
+    "atrioventricular vs semilunar valves",
+    "isovolumetric contraction and relaxation"
+   ]
+  },
+  "aorticcloses": {
+   "before": "Isovolumetric relaxation",
+   "ask": "LV pressure has just fallen below aortic pressure. Which valve closes now?",
+   "answer": [
+    "aortic"
+   ],
+   "choices": [
+    "aortic",
+    "mitral",
+    "pulmonary"
+   ],
+   "concepts": [
+    "pressure gradients open and close the valves",
+    "first heart sound (S1) and second heart sound (S2)",
+    "aortic pressure: systolic, diastolic, dicrotic notch"
+   ]
+  },
+  "mitralopens": {
+   "before": "Rapid filling",
+   "ask": "LV pressure is falling below left atrial pressure. Which valve opens to let the ventricle fill?",
+   "answer": [
+    "mitral"
+   ],
+   "choices": [
+    "aortic",
+    "mitral",
+    "tricuspid"
+   ],
+   "concepts": [
+    "pressure gradients open and close the valves",
+    "rapid filling and diastasis"
+   ]
+  }
+ },
+ "whatifs": {}
 }

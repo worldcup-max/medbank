@@ -45,6 +45,7 @@ For each topic, write `work/BRIEF-<id>.md` by adapting `BRIEF-nephron-example.md
 - Add: "Draw 5–7 lenses with `K.lens(id, { focus, build })` and describe each in shows.json `lenses` (see 'Lenses' below). Study both exemplars' lenses first."
 - Add: "assemble.mjs must print LENS ISSUES: none. Then look at every `lens-<id>.png` and `phone-lens.png` yourself, and run `node tools/stepshots.mjs <id>/A.html <id>/step` to see each tour stop with its lens open." 
 - Add: "Also write `shows.json` (format below); `manifest.json` is generated from it by `node tools/manifest.mjs <id> <id> physiology`, which must print MANIFEST ISSUES: none."
+- Add: "Make the model take settings: `createModel(params)` with defaults for the normal state, and list 2–4 `whatifs` on the returned model, plus 2–4 `predictions` in shows.json (see 'What-ifs and predictions' below). manifest.mjs must list them with no issues."
 - Add: "assemble.mjs must also print LABELS ON STRUCTURES: none (no label sitting on a tube, vessel or wall). If a label will not fit, use `node tools/freemap.mjs <id> x0 y0 x1 y1` to find free space, or a short leader line."
 Then launch three Agent subagents at once with `model: "opus"`, one per topic, each told to follow its brief in its own folder
 `work/<id>/` and iterate with `node tools/assemble.mjs <id>` and the screenshots until MODEL/PAGE ISSUES, LABELS ON STRUCTURES and LENS ISSUES are all none and it looks excellent.
@@ -93,3 +94,18 @@ live) with a box on the magnified region and a cone to the lens; on phones a sma
   `manifest.mjs` copies them into manifest.json (DeepSeek picks only the lenses the student's note covers) and validates them.
 - Tour: lesson.json steps may set `"lens": "<id>"` (opens it) and `"win": [t0, t1]` (the moment "Loop this moment" replays;
   default is the step's phase, padded). Most steps should open a lens, and the narration talks about what the lens shows.
+
+## What-ifs and predictions (active learning; every plate)
+The app's tutor uses these, but only where the student's note mentions them (it never adds them on its own). Exemplars: both library plates.
+- **What-ifs** re-run the whole model with a setting changed (furosemide, no ADH, raised afterload, weak LV, blood loss…). In model.js:
+  `function createModel(params) { const P = Object.assign({ <setting>: <normal value>, … }, params || {}); … }` — every equation reads the
+  setting, the run length T and N stay the same, and with no params the plate is exactly the normal one. On the returned model add
+  `params: P` and `whatifs: [{ id, label, params: {…}, at: "<phase to replay>", watch: ["<readout key>" | "<key>:max" | "<key>:min"], note: ["words in a note that call for it"], shows: "one Guyton-level sentence" }]`.
+  Pick 2–4 that textbooks and exams ask about, with real directions and sizes of change (check the numbers by running the model; the
+  manifest stores normal → what-if for each watch key). `explain(s)` and `clockNote` should say when a setting is changed.
+  The shell's `window.__studio.setParams(params)` re-runs it live; `setParams({})` goes back to normal.
+- **Predictions** pause the plate just before a key event; the student taps the part they expect, then the plate plays. In shows.json:
+  `"predictions": { "<id>": { "before": "<phase name>", "ask": "one question", "answer": ["<part id>"], "choices": ["<part id>", 2–3 more], "concepts": ["<from concepts>"] } }`.
+  Choose 2–4 events a student should be able to reason out (which valve opens next, where the fluid gets diluted…). The answer must be a part.
+- After the plate is final, `node tools/manifest.mjs <id> <id> physiology` must print `… N what-ifs, N predictions` and MANIFEST ISSUES: none.
+- To refresh an already-built plate after changing model.js or the shell (no re-voicing): `node explainer/studio/plate-kit/relink.mjs explainer/library/physiology/<id>`.

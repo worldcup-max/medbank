@@ -53,6 +53,7 @@ button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-colo
 .mainv{min-width:0;position:relative}
 .lenspane{min-width:0;overflow:hidden;border:1px solid var(--hair);border-radius:8px;background:var(--sheet);box-shadow:0 10px 28px -16px rgba(10,20,30,.35);opacity:0;visibility:hidden;transition:opacity .3s .2s,visibility 0s .5s}
 .split.lensing .lenspane{opacity:1;visibility:visible;transition:opacity .3s .2s,visibility 0s}
+.split:not(.lensing) .lenspane{max-height:0;border-width:0}   /* closed: no height either, or its text wraps tall in the 0-width column and pushes the drawing down */
 .lenshead{display:flex;align-items:flex-start;gap:8px;padding:7px 8px 6px 12px;border-bottom:1px solid var(--hair)}.lenshead>div{flex:1;min-width:0;display:grid}
 .lenstitle{font-family:var(--display);font-weight:600;font-size:15px;line-height:1.25}.lenshead button{padding:1px 9px;font-size:16px;line-height:1.3}
 .stage .lenspane svg{width:100%;height:auto;aspect-ratio:1}
@@ -236,6 +237,18 @@ function runStudio(createScene, LESSON) {
   $("tutor").onclick = () => { if (tutoring) { tutoring = false; sayId++; try { speechSynthesis.cancel(); } catch (_) {} try { if (clip) clip.pause(); } catch (_) {} $("tutor").textContent = "▶ Tutor me"; K.focus([]); return; } tutoring = true; $("tutor").textContent = "❚❚ Stop"; goStep(si < 0 || si >= steps.length - 1 ? 0 : si); };
   $("mute").onclick = (e) => { muted = !muted; e.currentTarget.textContent = muted ? "Voice off" : "Voice on"; e.currentTarget.setAttribute("aria-pressed", String(muted)); };
   window.__studio.seek = (f) => { setPlaying(false); scrubTo(f * T); };
+  /* "what if": re-run the model with changed settings (createModel(params); M.whatifs lists the plate's own) and redraw
+   * everything that comes from it: samples, phase bands, events, chart, gates, ledger. Same objects are refilled in place,
+   * so the scene and lenses keep reading the live model. setParams({}) goes back to normal. */
+  window.__studio.setParams = (params) => { const nm = createModel(params || {}); if (nm.T !== T || (nm.N || 600) !== N) { window.__studio.errors.push("setParams: model length changed"); return false; }
+    for (const k of Object.keys(M)) delete M[k]; Object.assign(M, nm);
+    S.length = 0; for (let i = 0; i < N; i++) S.push(M.sample(i * T / N));
+    BANDS.length = 0; { let s0 = 0; for (let i = 1; i <= N; i++) if (i === N || S[i].phase !== S[s0].phase) { BANDS.push({ name: S[s0].phase, a: s0, b: i }); s0 = i; } }
+    EV.length = 0; ((M.events ? M.events(S, T) : []) || []).forEach((e) => EV.push(e));
+    grows.forEach((r, k) => { if (M.gates && M.gates[k]) r.g = M.gates[k]; });
+    const nb = (M.readouts || []).filter((r) => r.big).slice(0, 4); big.forEach((r, k) => { if (nb[k]) r.text = nb[k].text; });
+    $("notes").textContent = M.notes || ""; window.__studio.params = M.params || params || {};
+    drawChart(); prevI = -1; render(0); return true; };
   window.__studio.ready = true;
 }`;
 
@@ -285,3 +298,7 @@ export function chooser({ meta, a, b }) {
 <div id="pa">${frameOf(a)}</div>${b ? `<div id="pb" hidden>${frameOf(b)}</div>` : ""}
 <script>const ta=document.getElementById("ta"),tb=document.getElementById("tb");function sel(x){document.getElementById("pa").hidden=x!=="a";if(tb){document.getElementById("pb").hidden=x!=="b";tb.setAttribute("aria-pressed",x==="b");}ta.setAttribute("aria-pressed",x==="a");}ta.onclick=()=>sel("a");if(tb)tb.onclick=()=>sel("b");</script></body></html>`;
 }
+
+/* the page runtime on its own: plate-kit/relink.mjs swaps it (and a plate's model.js) into already-built, already-voiced plates */
+export const RUNTIME_JS = RUNTIME;
+export const CSS_TEXT = CSS;

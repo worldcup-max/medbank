@@ -495,6 +495,177 @@
    ]
   }
  ],
+ "whatifs": [
+  {
+   "id": "afterload",
+   "label": "Raised afterload",
+   "params": {
+    "afterload": 1.6
+   },
+   "at": "Ventricular ejection",
+   "note": [
+    "afterload",
+    "hypertension",
+    "aortic stenosis",
+    "peripheral resistance"
+   ],
+   "shows": "Raised afterload (systemic resistance up 60%): the LV must generate more pressure before the aortic valve opens, so pressures rise and less blood is ejected each beat.",
+   "effect": {
+    "AoP:max": [
+     116.5,
+     150.5
+    ],
+    "AoP:min": [
+     77.9,
+     115.3
+    ],
+    "LVP:max": [
+     117.1,
+     151
+    ],
+    "SV": [
+     70.1,
+     61.1
+    ],
+    "EF": [
+     55.4,
+     46.7
+    ]
+   }
+  },
+  {
+   "id": "weaklv",
+   "label": "Weak LV",
+   "params": {
+    "contractility": 0.6
+   },
+   "at": "Ventricular ejection",
+   "note": [
+    "contractility",
+    "heart failure",
+    "inotrop",
+    "myocardial infarction"
+   ],
+   "shows": "Weaker LV contraction (peak elastance down 40%): the ventricle empties less, so stroke volume and ejection fraction fall and left atrial pressure rises.",
+   "effect": {
+    "AoP:max": [
+     116.5,
+     107.1
+    ],
+    "LVP:max": [
+     117.1,
+     107.6
+    ],
+    "SV": [
+     70.1,
+     64
+    ],
+    "EF": [
+     55.4,
+     44.4
+    ],
+    "LAP:max": [
+     9.3,
+     10.7
+    ]
+   }
+  },
+  {
+   "id": "bleed",
+   "label": "10% blood loss",
+   "params": {
+    "bleed": 0.1
+   },
+   "at": "Rapid filling",
+   "note": [
+    "haemorrhage",
+    "hemorrhage",
+    "blood loss",
+    "preload",
+    "venous return",
+    "frank-starling",
+    "frank starling"
+   ],
+   "shows": "A 10% blood loss, before any reflex compensation, empties the veins: less venous return means a smaller end-diastolic volume (less preload), so by Frank–Starling the stroke volume and blood pressure fall.",
+   "effect": {
+    "LVV:max": [
+     126.5,
+     66.4
+    ],
+    "SV": [
+     70.1,
+     33.3
+    ],
+    "AoP:max": [
+     116.5,
+     55.3
+    ],
+    "AoP:min": [
+     77.9,
+     37
+    ],
+    "EF": [
+     55.4,
+     50.2
+    ]
+   }
+  }
+ ],
+ "predictions": [
+  {
+   "id": "aorticopens",
+   "before": "Ventricular ejection",
+   "ask": "LV pressure is about to rise above aortic pressure. Which valve opens next?",
+   "answer": [
+    "aortic"
+   ],
+   "choices": [
+    "mitral",
+    "aortic",
+    "tricuspid"
+   ],
+   "concepts": [
+    "pressure gradients open and close the valves",
+    "atrioventricular vs semilunar valves",
+    "isovolumetric contraction and relaxation"
+   ]
+  },
+  {
+   "id": "aorticcloses",
+   "before": "Isovolumetric relaxation",
+   "ask": "LV pressure has just fallen below aortic pressure. Which valve closes now?",
+   "answer": [
+    "aortic"
+   ],
+   "choices": [
+    "aortic",
+    "mitral",
+    "pulmonary"
+   ],
+   "concepts": [
+    "pressure gradients open and close the valves",
+    "first heart sound (S1) and second heart sound (S2)",
+    "aortic pressure: systolic, diastolic, dicrotic notch"
+   ]
+  },
+  {
+   "id": "mitralopens",
+   "before": "Rapid filling",
+   "ask": "LV pressure is falling below left atrial pressure. Which valve opens to let the ventricle fill?",
+   "answer": [
+    "mitral"
+   ],
+   "choices": [
+    "aortic",
+    "mitral",
+    "tricuspid"
+   ],
+   "concepts": [
+    "pressure gradients open and close the valves",
+    "rapid filling and diastasis"
+   ]
+  }
+ ],
  "tutor": {
   "rule": "The student's note drives the tutor. Explain only what the note says, in the note's terms, order and depth. Never teach concepts of this topic that are not in the note.",
   "use": "Pick only the phases and parts the note covers; parts the note does not mention stay dimmed and silent. Note content this plate cannot show is explained in words (no phase/focus) and listed in 'extend'.",

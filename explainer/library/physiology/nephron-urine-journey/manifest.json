@@ -453,6 +453,127 @@
    ]
   }
  ],
+ "whatifs": [
+  {
+   "id": "furosemide",
+   "label": "Furosemide",
+   "params": {
+    "nkcc2": 0.2
+   },
+   "at": "Thick ascending limb",
+   "note": [
+    "furosemide",
+    "loop diuretic"
+   ],
+   "shows": "High-dose furosemide (most NKCC2 blocked): the gradient collapses and a large volume of poorly concentrated urine is made.",
+   "effect": {
+    "osm": [
+     1136,
+     467.2
+    ],
+    "vol": [
+     0.6,
+     9.2
+    ],
+    "flowDay": [
+     1.1,
+     16.5
+    ],
+    "intOsm": [
+     1200,
+     480
+    ]
+   }
+  },
+  {
+   "id": "noadh",
+   "label": "No ADH",
+   "params": {
+    "adh": 0
+   },
+   "at": "Medullary collecting duct",
+   "note": [
+    "without adh",
+    "no adh",
+    "adh off",
+    "absence of adh",
+    "dilute urine"
+   ],
+   "shows": "No ADH: the collecting duct stays water-tight, so a large volume of dilute urine is made.",
+   "effect": {
+    "osm": [
+     1136,
+     80.2
+    ],
+    "vol": [
+     0.6,
+     12.6
+    ],
+    "flowDay": [
+     1.1,
+     22.8
+    ],
+    "intOsm": [
+     1200,
+     840
+    ]
+   }
+  }
+ ],
+ "predictions": [
+  {
+   "id": "concentrate",
+   "before": "Thin descending limb",
+   "ask": "The fluid leaves the proximal tubule at about 300. Which segment will concentrate it next?",
+   "answer": [
+    "tdl"
+   ],
+   "choices": [
+    "tdl",
+    "tal",
+    "dct"
+   ],
+   "concepts": [
+    "loop of Henle permeabilities",
+    "medullary osmotic gradient"
+   ]
+  },
+  {
+   "id": "dilute",
+   "before": "Thick ascending limb",
+   "ask": "The fluid reached about 1200 at the tip of the loop. Which segment dilutes it next?",
+   "answer": [
+    "tal"
+   ],
+   "choices": [
+    "tdl",
+    "tal",
+    "cd"
+   ],
+   "concepts": [
+    "loop of Henle permeabilities",
+    "countercurrent multiplier",
+    "diluting segment"
+   ]
+  },
+  {
+   "id": "adhwater",
+   "before": "Medullary collecting duct",
+   "ask": "With ADH on, where does water leave to make the urine concentrated?",
+   "answer": [
+    "cd"
+   ],
+   "choices": [
+    "cd",
+    "dct",
+    "tal"
+   ],
+   "concepts": [
+    "ADH and aquaporin-2",
+    "concentrated urine formation"
+   ]
+  }
+ ],
  "tutor": {
   "rule": "The student's note drives the tutor. Explain only what the note says, in the note's terms, order and depth. Never teach concepts of this topic that are not in the note.",
   "use": "Pick only the phases and parts the note covers; parts the note does not mention stay dimmed and silent. Note content this plate cannot show is explained in words (no phase/focus) and listed in 'extend'.",

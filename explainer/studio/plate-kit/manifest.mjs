@@ -47,6 +47,14 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     concepts: shows.concepts || [], not_shown: shows.not_shown || [],
     // lenses: magnified, model-driven second views the tutor can open at a step (see lenses[].shows); a step may name at most one
     lenses: Object.entries(shows.lenses || {}).map(([id, l]) => ({ id, title: l.title, kicker: l.kicker || "", shows: l.shows, phases: l.phases || [], parts: l.parts || [], concepts: l.concepts || [] })),
+    // what-ifs: the model re-run with changed settings (model.js whatifs[] + createModel(params)); effect = [normal, what-if] at the end of the run
+    whatifs: (M.whatifs || []).map((w) => { let M2 = null; try { M2 = new vm.Script(rd("model.js") + "\n;globalThis.__M2 = createModel(" + JSON.stringify(w.params) + ");").runInContext(ctx, { timeout: 5000 }) || ctx.__M2; } catch (e) { issues.push(`what-if "${w.id}": ${e.message}`); }
+      /* a watch key is a readout at the end of the run ("osm"), or its peak / lowest over the run ("AoP:max", "AoP:min") */
+      const val = (m, key) => { const [k, agg] = key.split(":"); if (!agg) return m.sample(T * (1 - 0.5 / N)).readouts[k]; const v = []; for (let i = 0; i < N; i++) v.push(m.sample(i * T / N).readouts[k]); return agg === "max" ? Math.max(...v) : Math.min(...v); };
+      return { id: w.id, label: w.label, params: w.params, at: w.at || null, note: w.note || [], shows: (shows.whatifs || {})[w.id] || w.shows || (issues.push(`what-if "${w.id}" has no 'shows'`), ""),
+        effect: Object.fromEntries((w.watch || []).map((k) => [k, [+(+val(M, k)).toFixed(1), M2 ? +(+val(M2, k)).toFixed(1) : null]])) }; }),
+    // predictions: the tutor pauses just before phase 'before', asks, the student taps a part (answer = part ids), then the plate plays on
+    predictions: Object.entries(shows.predictions || {}).map(([id, q]) => ({ id, before: q.before, ask: q.ask, answer: q.answer || [], choices: q.choices || q.answer || [], concepts: q.concepts || [] })),
     tutor: {
       rule: "The student's note drives the tutor. Explain only what the note says, in the note's terms, order and depth. Never teach concepts of this topic that are not in the note.",
       use: "Pick only the phases and parts the note covers; parts the note does not mention stay dimmed and silent. Note content this plate cannot show is explained in words (no phase/focus) and listed in 'extend'.",
@@ -60,8 +68,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const PH = new Set(man.phases.map((p) => p.name)), PT = new Set(man.parts.map((p) => p.id));
   man.lenses.forEach((l) => { if (!l.title || !l.shows) issues.push(`lens "${l.id}": needs a title and 'shows'`); if (!l.phases.length || !l.parts.length) issues.push(`lens "${l.id}": needs linked phases and parts`);
     l.phases.forEach((p) => { if (!PH.has(p)) issues.push(`lens "${l.id}": phase "${p}" is not a model phase`); }); l.parts.forEach((p) => { if (!PT.has(p)) issues.push(`lens "${l.id}": part "${p}" is not a model part`); }); });
+  man.whatifs.forEach((w) => { if (w.at && !PH.has(w.at)) issues.push(`what-if "${w.id}": at "${w.at}" is not a model phase`); if (!Object.keys(w.effect).length) issues.push(`what-if "${w.id}": needs watch readouts`); });
+  man.predictions.forEach((q) => { if (!PH.has(q.before)) issues.push(`prediction "${q.id}": before "${q.before}" is not a model phase`); if (!q.ask) issues.push(`prediction "${q.id}": needs 'ask'`);
+    [...q.answer, ...q.choices].forEach((p) => { if (!PT.has(p)) issues.push(`prediction "${q.id}": "${p}" is not a model part`); }); if (!q.answer.length || q.choices.length < 2) issues.push(`prediction "${q.id}": needs an answer and 2+ choices`); });
   validateLesson(lesson, man).forEach((x) => issues.push("default lesson: " + x));
   writeFileSync(join(dir, "manifest.json"), JSON.stringify(man, null, 1));
-  console.log("MANIFEST ISSUES:", issues.length ? issues : "none"); console.log(`manifest: ${man.phases.length} phases, ${man.parts.length} parts, ${man.readouts.length} readouts, ${man.lenses.length} lenses`);
+  console.log("MANIFEST ISSUES:", issues.length ? issues : "none"); console.log(`manifest: ${man.phases.length} phases, ${man.parts.length} parts, ${man.readouts.length} readouts, ${man.lenses.length} lenses, ${man.whatifs.length} what-ifs, ${man.predictions.length} predictions`);
   if (issues.length) process.exitCode = 1;
 }

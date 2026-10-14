@@ -11,9 +11,12 @@
  *   {type:"mbx-link", parts:{id:{name, shows, covered}}, unlocked:[ids], dark}   start linked mode
  *   {type:"mbx-show", phase, focus:[ids], lens, win, speed, play}               move the stage to a stop (lens opens a close-up)
  *   {type:"mbx-play", on}  {type:"mbx-theme", dark}  {type:"mbx-unlock", id}  {type:"mbx-pop-close"}
+ *   {type:"mbx-ask", before, ring:[ids], banner}   freeze just before phase 'before' (prediction) or anywhere (banner only); taps report mbx-pick
+ *   {type:"mbx-ask-end", mark:{right:[ids], wrong:[ids]}}   clear the question; optionally colour the answer
+ *   {type:"mbx-params", params}   what-if: re-run the model (window.__studio.setParams) · {type:"mbx-phase-step", dir}
  * Messages OUT (plate → parent):
  *   {type:"mbx-linked", parts:[ids], phases:[names], lesson:{steps}}   (lesson = the plate's default, used only as a fallback)  {type:"mbx-height", h}  {type:"mbx-playing", on}
- *   {type:"mbx-tap", id, covered}  {type:"mbx-learn", id, phase}
+ *   {type:"mbx-tap", id, covered}  {type:"mbx-learn", id, phase}  {type:"mbx-pick", id}  {type:"mbx-phase", phase}
  */
 (function () {
   if (window.__mbxLink) return; window.__mbxLink = true;
@@ -36,12 +39,15 @@
       seekTime(t) { seek(Math.max(0, Math.min(1, t / T))); },
       setSpeed(v) { const bs = [...doc.querySelectorAll("#speed button")]; if (!bs.length) return; bs.sort((x, y) => Math.abs(+x.dataset.s - v) - Math.abs(+y.dataset.s - v))[0].click(); },
       stopTutor() { const b = $("tutor"); if (b && /stop/i.test(b.textContent)) b.click(); try { speechSynthesis.cancel(); } catch (_) {} },
+      phaseAt() { const i = window.__studio.i || 0; const b = bands.find((x) => i >= x.a && i < x.b); return b ? b.name : null; },
+      stepPhase(dir) { const i = window.__studio.i || 0; let k = bands.findIndex((x) => i >= x.a && i < x.b); k = Math.max(0, Math.min(bands.length - 1, k + (dir > 0 ? 1 : -1))); seek((bands[k].a + 2) / N); },
+      before(name) { const b = bands.filter((x) => x.name === name).sort((x, y) => (y.b - y.a) - (x.b - x.a))[0]; if (b) seek(Math.max(0, b.a - 2) / N); return !!b; },
       lens(id) { try { if (id && window.__studio.openLens) window.__studio.openLens(id); else if (window.__studio.closeLens) window.__studio.closeLens(); } catch (_) {} } };
   }
 
   ready(function () {
     const A = plateApi(), K = window.K, doc = document, svg = doc.getElementById("stage");
-    let PARTS = {}, unlocked = new Set(), focus = new Set(), linked = false;
+    let PARTS = {}, unlocked = new Set(), focus = new Set(), linked = false, asking = null, marks = {};
 
     /* app dark mode: the plate's dark palette only answers prefers-color-scheme, so mirror it under [data-theme="dark"] */
     try { for (const sh of doc.styleSheets) for (const r of sh.cssRules) if (r.media && /dark/.test(r.conditionText || r.media.mediaText))
@@ -61,6 +67,7 @@ html.mbx-linked #stage{cursor:pointer}
 .mbx-pop .tg{display:inline-block;margin-top:5px;font:600 11px var(--body);letter-spacing:.02em;border-radius:99px;padding:1px 8px}
 .mbx-pop .tg.out{border:1px dashed var(--muted);color:var(--muted)}.mbx-pop .tg.in{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)}
 .mbx-pop .go{margin-top:10px;width:100%;min-height:42px;border-radius:9px;border:1.5px solid var(--accent);color:var(--accent);background:transparent;font:600 14px var(--body)}
+.mbx-banner{position:absolute;left:8px;right:8px;top:8px;z-index:25;background:rgba(109,40,217,.94);color:#fff;border-radius:10px;padding:8px 11px;font:600 13px/1.35 var(--body);pointer-events:none}
 .mbx-pop .x{position:absolute;top:4px;right:4px;width:34px;height:34px;border:0;background:transparent;color:var(--muted);font-size:18px;padding:0}`;
     doc.head.appendChild(css);
 
@@ -70,7 +77,11 @@ html.mbx-linked #stage{cursor:pointer}
     function paint() { const P = K.parts();
       for (const id in P) { const dim = linked && PARTS[id] && !PARTS[id].covered && !unlocked.has(id) && !focus.has(id);
         P[id].forEach((e) => { if (isGhost(e)) return; e.style.transition = "opacity .45s, filter .45s";
-          e.style.opacity = dim ? "0.3" : ""; e.style.filter = focus.has(id) ? "url(#kGlow)" : ""; }); } }
+          e.style.opacity = dim && !asking ? "0.3" : "";
+          e.style.filter = marks[id] === "right" ? "drop-shadow(0 0 5px #16a34a) drop-shadow(0 0 2px #16a34a)" : marks[id] === "wrong" ? "drop-shadow(0 0 5px #dc2626) drop-shadow(0 0 2px #dc2626)"
+            : asking && asking.ring.includes(id) ? "drop-shadow(0 0 5px #7c3aed) drop-shadow(0 0 2px #7c3aed)" : focus.has(id) ? "url(#kGlow)" : ""; }); } }
+    let banner = null; const setBanner = (txt) => { if (banner) { banner.remove(); banner = null; } if (!txt) return; const host = doc.querySelector(".mainv") || svg.parentNode; host.style.position = "relative";
+      banner = doc.createElement("div"); banner.className = "mbx-banner"; banner.textContent = txt; host.appendChild(banner); };
 
     /* ---- which part did a finger mean? tubes are a few px wide on a phone, so probe a ring around the touch and
      * prefer the most specific part (fewest drawn pixels), so a tap near a tube is not swallowed by the interstitium */
@@ -104,6 +115,7 @@ html.mbx-linked #stage{cursor:pointer}
       pop.style.top = Math.max(4, ly - H - 14 > 4 ? ly - H - 14 : Math.min(hr.height - H - 4, ly + 18)) + "px"; }
 
     svg.addEventListener("click", (ev) => { if (!linked) return; const id = hit(ev.clientX, ev.clientY);
+      if (asking) { if (id) up({ type: "mbx-pick", id }); return; }
       if (!id || !PARTS[id]) { closePop(); return; } showPop(id, ev.clientX, ev.clientY); up({ type: "mbx-tap", id, covered: !!PARTS[id].covered }); });
 
     /* ---- height + play state for the parent */
@@ -120,9 +132,15 @@ html.mbx-linked #stage{cursor:pointer}
       else if (m.type === "mbx-play") A.setPlaying(!!m.on);
       else if (m.type === "mbx-theme") theme(!!m.dark);
       else if (m.type === "mbx-unlock") { unlocked.add(m.id); paint(); }
-      else if (m.type === "mbx-pop-close") closePop(); });
+      else if (m.type === "mbx-pop-close") closePop();
+      else if (m.type === "mbx-ask") { closePop(); A.stopTutor(); A.setPlaying(false); if (A.lens) A.lens(null); if (m.before && A.before) A.before(m.before); asking = { ring: m.ring || [] }; marks = {}; setBanner(m.banner || ""); paint(); }
+      else if (m.type === "mbx-ask-end") { asking = null; setBanner(""); marks = {}; ((m.mark || {}).right || []).forEach((id) => (marks[id] = "right")); ((m.mark || {}).wrong || []).forEach((id) => (marks[id] = "wrong")); paint();
+        if (Object.keys(marks).length) setTimeout(() => { marks = {}; paint(); }, 2600); }
+      else if (m.type === "mbx-params") { try { window.__studio.setParams && window.__studio.setParams(m.params || {}); } catch (e) {} }
+      else if (m.type === "mbx-phase-step") { if (A.stepPhase) A.stepPhase(m.dir); } });
+    let lastPhase = null; setInterval(() => { const ph = A.phaseAt ? A.phaseAt() : null; if (ph !== lastPhase) { lastPhase = ph; up({ type: "mbx-phase", phase: ph }); } }, 200);
 
     const fallback = A.lesson && A.lesson.steps ? { steps: A.lesson.steps.map(({ title, phase, focus, speed, say }) => ({ title, phase, focus, speed, say })) } : null;   // the plate's default lesson, minus baked audio
-    up({ type: "mbx-linked", parts: Object.keys(K.parts()), phases: [...new Set(A.bands.map((b) => b.name))], lesson: fallback });
+    up({ type: "mbx-linked", whatif: !!window.__studio.setParams, parts: Object.keys(K.parts()), phases: [...new Set(A.bands.map((b) => b.name))], lesson: fallback });
   });
 })();

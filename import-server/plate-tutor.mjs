@@ -12,7 +12,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
-export const PLATE_TUTOR_VERSION = "p2";   // p2: + 2-minute overview and exam-revision questions
+export const PLATE_TUTOR_VERSION = "p3";   // p2: + 2-minute overview and exam questions · p3: + predictions, what-ifs, plate questions
 const HERE = dirname(fileURLToPath(import.meta.url));
 
 /* ---------- the note, as numbered lines (keep identical to splitNote in explainer/plate-tutor.js) ---------- */
@@ -82,6 +82,7 @@ RULES (all are checked by a program; breaking one gets the stop thrown away):
 8. Skip lines that are only headings, references or admin. Do not invent lines.
 9. A stop may add "lens" (one lens id) ONLY when the cited lines are about what that lens shows, and its phase is one of the lens's phases. While a lens is open, still say only what the note says.
 10. "overview" is the 2-minute version: pick the 3–6 stops that carry the note's main idea (by their number in "steps", 1 = first) and give each ONE short spoken sentence (8–30 words) from that stop's lines. Keep them in order.
+12. "end" is 1–3 questions answered BY ACTING ON THE PLATE, from the note: {"type":"tap","stop":N,"q":"Tap the segment where …","parts":["<part id>"]} (the right answer is that part) or {"type":"seek","stop":N,"q":"Move the parcel to where …","phase":"<phase name>"} (the right answer is that phase). Only ask what the note states.
 11. "exam" is exam revision: pick the 3–6 most examinable stops and write one multiple-choice question for each, answerable ONLY from that stop's lines: "q" (one sentence), exactly 3 "options" (short, one clearly right, two plausible wrong ones built from other facts in the note), "answer" (0, 1 or 2) and "why" (one sentence from the note). No trick questions, no facts outside the note.
 
 Return ONLY this JSON:
@@ -91,7 +92,8 @@ Return ONLY this JSON:
  "flags":[{"line":"L13","noteSays":"1000","plateSays":"1200","say":"…"}],
  "extend":["concept in the note this plate cannot show"],
  "overview":[{"stop":1,"say":"one sentence"}],
- "exam":[{"stop":4,"q":"…?","options":["…","…","…"],"answer":1,"why":"…"}]}${errors && errors.length ? `
+ "exam":[{"stop":4,"q":"…?","options":["…","…","…"],"answer":1,"why":"…"}],
+ "end":[{"type":"tap","stop":5,"q":"…","parts":["<part id>"]},{"type":"seek","stop":6,"q":"…","phase":"<phase name>"}]}${errors && errors.length ? `
 
 YOUR LAST ANSWER WAS REJECTED. Fix exactly these problems and keep everything else:
 - ${errors.slice(0, 14).join("\n- ")}` : ""}`;
@@ -200,7 +202,23 @@ export function checkPlateTutor(text, M, lines) {
     if (e.length) { errors.push(...e); return; }
     exam.push({ stop: k, q: String(x.q).trim(), options: opts, answer: ans, why: String(x.why).trim() }); });
   if (exam.length && exam.length < 2) errors.push("exam needs 3–6 questions");
-  const lesson = { v: 2, kind: "plate", plate: M.id, version: PLATE_TUTOR_VERSION, lines, steps, mentions, flags: flags.filter((f) => steps.some((s) => s.lines.includes(f.line))), extend,
+  // questions answered by acting on the plate: tap a part, or move the parcel to a phase
+  const end = [];
+  (Array.isArray(j.end) ? j.end : []).slice(0, 4).forEach((x, n) => { const k = kept.get(Number(x && x.stop)), tag = `plate question ${n + 1}`;
+    if (k == null) { errors.push(`${tag}: stop ${x && x.stop} is not a kept stop`); return; }
+    const st = steps[k], e = sayErrors(tag, x.q, st.lines, { focus: st.focus || [], phase: st.phase || "", min: 4, max: 34 });
+    if (x.type === "tap") { const ps = (Array.isArray(x.parts) ? x.parts : []).filter((p) => parts.has(p)); if (!ps.length) e.push(`${tag}: "parts" must be part ids`); if (e.length) { errors.push(...e); return; } end.push({ type: "tap", stop: k, q: String(x.q).trim(), parts: ps }); }
+    else if (x.type === "seek") { if (!phases.has(x.phase)) e.push(`${tag}: "${x.phase}" is not a phase name`); if (e.length) { errors.push(...e); return; } end.push({ type: "seek", stop: k, q: String(x.q).trim(), phase: x.phase }); }
+    else errors.push(`${tag}: type must be "tap" or "seek"`); });
+  // predictions and what-ifs come from the plate itself (Guyton-checked), offered only where the note covers them — no AI needed
+  const lc = (x) => spoken(x).toLowerCase();
+  (M.predictions || []).forEach((q) => { if (!(q.concepts || []).some(covers)) return; const k = steps.findIndex((st) => st.phase === q.before && !st.predict);
+    if (k < 0 || !q.answer.every((p) => mentions[p])) return; steps[k].predict = q.id; });
+  const whatifs = [];
+  (M.whatifs || []).forEach((w) => { const hit = (txt) => (w.note || []).some((t) => lc(txt).includes(lc(t)));
+    if (!lines.some((l) => hit(l.text))) return; whatifs.push(w.id);
+    const k = steps.findIndex((st) => !st.whatif && st.lines.some((x) => hit(L.get(x).text))); if (k >= 0) steps[k].whatif = w.id; });
+  const lesson = { v: 2, kind: "plate", end, whatifs, plate: M.id, version: PLATE_TUTOR_VERSION, lines, steps, mentions, flags: flags.filter((f) => steps.some((s) => s.lines.includes(f.line))), extend,
     overview: overview.length >= 3 ? overview : [], exam: exam.length >= 2 ? exam : [], personal: true };
   return { lesson, errors, dropped: errors.length };
 }

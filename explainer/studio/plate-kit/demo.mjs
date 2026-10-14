@@ -2,7 +2,7 @@
  * (app.html's own stylesheet + chrome), with a library plate driven by a note. For trying the student experience
  * and for headless screenshots, without signing in or calling the server.
  *   node explainer/studio/plate-kit/demo.mjs
- * Page options: ?theme=dark  ?flag=1 (a copy of the note with one disagreeing number)  ?fail=1 (no lesson → fallback) */
+ * Page options: ?theme=dark  ?wi=stop|chips|both (what-if style)  ?flag=1 (a copy of the note with one disagreeing number)  ?fail=1 (no lesson → fallback) */
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -51,7 +51,7 @@ window.TUTOR = MBPlate.mount(document.getElementById("mbpHost"), {
   plate: MBPlate.PLATES.find((p) => p.id === "nephron-urine-journey"),
   note: FLAG ? NOTE_FLAG : NOTE,
   getLesson: () => new Promise((r) => setTimeout(() => r(Q.get("fail") === "1" ? null : FLAG ? LESSON_FLAG : LESSON), 700)),
-  speak: voices.speak, stopSpeak: voices.stopSpeak, voice: Q.get("mute") !== "1",
+  speak: voices.speak, stopSpeak: voices.stopSpeak, voice: Q.get("mute") !== "1", whatifUI: Q.get("wi") || "both",
   isDark: () => document.documentElement.getAttribute("data-theme") === "dark" });
 </script></body></html>`;
 writeFileSync(join(ROOT, "explainer/studio/samples/plate-tutor-demo.html"), page);

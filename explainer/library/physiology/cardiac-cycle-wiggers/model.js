@@ -1,11 +1,14 @@
 /* Library plate: the cardiac cycle (Wiggers) as a time-varying-elastance model of all four chambers and both circulations. */
-function createModel() {
+function createModel(params) {
+  /* "what if" settings (each what-if re-runs this whole model): afterload multiplies systemic resistance, contractility
+   * multiplies the LV's peak elastance, bleed is the fraction of blood volume lost. Defaults are the normal heart. */
+  const PRM = Object.assign({ afterload: 1, contractility: 1, bleed: 0 }, params || {});
   const HR = 75, T = 60 / HR, N = 800, DT = T / N;
   const ATR = { start: 0, dur: 0.17, rise: 0.085 }, VEN = { start: 0.12, dur: 0.43, rise: 0.30 };
   const act = (t, a) => { const u = ((t - a.start) % T + T) % T; if (u > a.dur) return 0; return u < a.rise ? 0.5 * (1 - Math.cos(Math.PI * u / a.rise)) : 0.5 * (1 + Math.cos(Math.PI * (u - a.rise) / (a.dur - a.rise))); };
-  const CH = { LV: [0.07, 2.6, 12], RV: [0.035, 0.6, 12], LA: [0.16, 0.35, 6], RA: [0.07, 0.2, 6] };
+  const CH = { LV: [0.07, 2.6 * PRM.contractility, 12], RV: [0.035, 0.6, 12], LA: [0.16, 0.35, 6], RA: [0.07, 0.2, 6] };
   const CAP = { SA: 1.35, SV: 60, PA: 4.2, PV: 18 }, UV = { SA: 680, SV: 2700, PA: 120, PV: 520 };
-  const R = { sys: 1.05, sven: 0.035, pul: 0.075, pven: 0.012, mv: 0.006, av: 0.005, tv: 0.005, pv: 0.004 };
+  const R = { sys: 1.05 * PRM.afterload, sven: 0.035, pul: 0.075, pven: 0.012, mv: 0.006, av: 0.005, tv: 0.005, pv: 0.004 };
   const pos = (x) => (x > 0 ? x : 0);
   function pressures(t, V) { const ev = act(t, VEN), ea = act(t, ATR), P = {};
     for (const k of ["LV", "RV"]) { const c = CH[k]; P[k] = (c[0] + (c[1] - c[0]) * ev) * (V[k] - c[2]); }
@@ -14,7 +17,9 @@ function createModel() {
   const flows = (P) => ({ mitral: pos(P.LA - P.LV) / R.mv, aortic: pos(P.LV - P.SA) / R.av, systemic: (P.SA - P.SV) / R.sys, cava: (P.SV - P.RA) / R.sven,
     tricuspid: pos(P.RA - P.RV) / R.tv, pulmonic: pos(P.RV - P.PA) / R.pv, pulmonary: (P.PA - P.PV) / R.pul, pveins: (P.PV - P.LA) / R.pven });
   // simulate to a steady beat, then record one beat
-  const V = { LV: 130, RV: 135, LA: 60, RA: 60, SA: 820, SV: 3000, PA: 205, PV: 600 }; let t = 0; const h = DT / 5;
+  const V = { LV: 130, RV: 135, LA: 60, RA: 60, SA: 820, SV: 3000, PA: 205, PV: 600 };
+  { const total = Object.values(V).reduce((a, b) => a + b, 0); V.SV -= total * Math.max(0, Math.min(0.4, PRM.bleed)); }   // a bleed comes out of the veins first
+  let t = 0; const h = DT / 5;
   const step = () => { const P = pressures(t, V), Q = flows(P); V.LV += h * (Q.mitral - Q.aortic); V.SA += h * (Q.aortic - Q.systemic); V.SV += h * (Q.systemic - Q.cava); V.RA += h * (Q.cava - Q.tricuspid);
     V.RV += h * (Q.tricuspid - Q.pulmonic); V.PA += h * (Q.pulmonic - Q.pulmonary); V.PV += h * (Q.pulmonary - Q.pveins); V.LA += h * (Q.pveins - Q.mitral); t += h; };
   for (let i = 0; i < 40 * N * 5; i++) step(); t = Math.round(t / T) * T;
@@ -37,7 +42,16 @@ function createModel() {
   const CA = { start: 0.105, dur: 0.30, rise: 0.06 };
   const ecg = (u) => 0.13 * g(u, 0.05, 0.022) - 0.10 * g(u, 0.092, 0.006) + 1.0 * g(u, 0.104, 0.008) - 0.22 * g(u, 0.118, 0.007) + 0.28 * g(u, 0.36, 0.04);
   return {
-    T, N, timeUnit: "s", clockNote: HR + " bpm", speeds: [0.1, 0.25, 0.5, 1],
+    T, N, timeUnit: "s", clockNote: HR + " bpm" + (PRM.afterload > 1.05 ? " · raised afterload" : "") + (PRM.contractility < 0.95 ? " · weak LV" : "") + (PRM.bleed > 0.01 ? " · " + Math.round(PRM.bleed * 100) + "% blood loss" : ""),
+    params: PRM,
+    /* what-ifs this plate can run; the app offers only those the student's note mentions (note: words that trigger it) */
+    whatifs: [
+      { id: "afterload", label: "Raised afterload", params: { afterload: 1.6 }, at: "Ventricular ejection", watch: ["AoP:max", "AoP:min", "LVP:max", "SV", "EF"], note: ["afterload", "hypertension", "aortic stenosis", "peripheral resistance"],
+        shows: "Raised afterload (systemic resistance up 60%): the LV must generate more pressure before the aortic valve opens, so pressures rise and less blood is ejected each beat." },
+      { id: "weaklv", label: "Weak LV", params: { contractility: 0.6 }, at: "Ventricular ejection", watch: ["AoP:max", "LVP:max", "SV", "EF", "LAP:max"], note: ["contractility", "heart failure", "inotrop", "myocardial infarction"],
+        shows: "Weaker LV contraction (peak elastance down 40%): the ventricle empties less, so stroke volume and ejection fraction fall and left atrial pressure rises." },
+      { id: "bleed", label: "10% blood loss", params: { bleed: 0.1 }, at: "Rapid filling", watch: ["LVV:max", "SV", "AoP:max", "AoP:min", "EF"], note: ["haemorrhage", "hemorrhage", "blood loss", "preload", "venous return", "frank-starling", "frank starling"],
+        shows: "A 10% blood loss, before any reflex compensation, empties the veins: less venous return means a smaller end-diastolic volume (less preload), so by Frank–Starling the stroke volume and blood pressure fall." }], speeds: [0.1, 0.25, 0.5, 1],
     parts: [{ id: "RA", name: "Right atrium" }, { id: "RV", name: "Right ventricle" }, { id: "LA", name: "Left atrium" }, { id: "LV", name: "Left ventricle" },
       { id: "tricuspid", name: "Tricuspid valve" }, { id: "pulmonary", name: "Pulmonary valve" }, { id: "mitral", name: "Mitral valve" }, { id: "aortic", name: "Aortic valve" },
       { id: "aorta", name: "Aorta" }, { id: "pa", name: "Pulmonary artery" }, { id: "cavae", name: "Venae cavae" }, { id: "pveins", name: "Pulmonary veins" }],

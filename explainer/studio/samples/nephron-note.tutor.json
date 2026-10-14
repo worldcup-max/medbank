@@ -254,5 +254,21 @@
    "answer": 0,
    "why": "ADH inserts aquaporin 2, so water moves out into the hypertonic medulla."
   }
+ ],
+ "end": [
+  {
+   "type": "tap",
+   "stop": 6,
+   "q": "Tap the segment your note calls the diluting segment.",
+   "parts": [
+    "tal"
+   ]
+  },
+  {
+   "type": "seek",
+   "stop": 9,
+   "q": "Move the parcel to where ADH lets water leave into the hypertonic medulla.",
+   "phase": "Medullary collecting duct"
+  }
  ]
 }
