@@ -25,6 +25,7 @@ import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
 import { EXPLAINER_TEMPLATES, explainerExcerpt, explainerKey, buildExplainerPrompt, parseExplainerLesson } from "./explainer.mjs";   // 3D Tutor
+import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPlateTutor } from "./plate-tutor.mjs";   // 3D Tutor · library plates, tutor from the note
 import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
@@ -1967,6 +1968,40 @@ app.post("/explainer/flag", async (req,res)=>{
   try{ const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
     const name = (req.body.name||"").toString().slice(0,90); if(name) await mbxRecordRequest(name,"flags",req.body.topic); res.json({ ok:true }); }
   catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+/* 3D Tutor · library plates — the tutor is written FROM THE STUDENT'S NOTE onto the plate's manifest (plate-tutor.mjs).
+ * Body {plate, text, topic}. Cached per (plate, note lines) in "explainers" (template "plate") and shared by students
+ * with the same note. Every stop is checked; bad stops get one regeneration with the errors, then are dropped.
+ * Note content the plate cannot show ("extend") is queued in explainer_requests so the plate can be extended. */
+app.post("/explainer/plate", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const plate = (req.body.plate||"").toString().trim(), topic = (req.body.topic||"").toString().slice(0,120);
+    let M; try{ M = await loadManifest(plate); }catch(e){ return res.status(404).json({ error:"unknown plate" }); }
+    const lines = splitNote((req.body.text||"").toString().slice(0,60000)).slice(0,260);
+    if(lines.filter(l=>!l.h).length < 2) return res.json({ ok:true, lesson:null, reason:"note too short to follow" });
+    const key = plateTutorKey(plate, lines);
+    try{ const c = await admin.from("explainers").select("lesson").eq("cache_key",key).maybeSingle();
+      if(c.data && c.data.lesson && c.data.lesson.steps) return res.json({ ok:true, cached:true, lesson:c.data.lesson }); }catch(_){}
+    try{
+      const premium = await isPremium(user.id, user.email).catch(()=>false);
+      const since = new Date(); since.setUTCHours(0,0,0,0);
+      const cnt = await admin.from("explainers").select("cache_key",{ count:"exact", head:true }).eq("account_id",user.id).neq("template","scan").gte("created_at",since.toISOString());
+      if(!cnt.error && (cnt.count||0) >= (premium ? 30 : 10)) return res.status(429).json({ error:"daily limit", message:"You’ve used today’s new 3D lessons. Lessons already made from the same note still open." });
+    }catch(_){}
+    let best = null, errors = null;
+    for(let attempt=0; attempt<2; attempt++){
+      const gen = await generate({ model: BASIC_MODEL, prompt: buildPlateTutorPrompt(M, lines, errors), parts:[], images:[], max_tokens:5000, temperature: attempt ? 0.2 : 0.35, json:true });
+      const r = checkPlateTutor(gen.text, M, lines);
+      if(r.lesson && (!best || r.lesson.steps.length > best.steps.length || !r.errors.length)) best = r.lesson;
+      if(!r.errors.length) break;
+      errors = r.errors; console.warn("[explainer/plate]", plate, "attempt", attempt+1, "dropped:", errors.slice(0,4).join(" | "));
+    }
+    if(!best || !best.steps.length) return res.status(502).json({ error:"Couldn’t follow your note on this plate yet — the standard lesson still plays." });
+    try{ await admin.from("explainers").upsert({ cache_key:key, template:"plate", account_id:user.id, lesson:best }); }catch(_){}
+    (best.extend||[]).forEach(x => mbxRecordRequest(M.title+" · "+x, "requests", topic));
+    res.json({ ok:true, cached:false, lesson:best });
+  }catch(e){ console.error("[explainer/plate]", e); res.status(500).json({ error:e.message||"server error" }); }
 });
 app.get("/admin/explainer/queue", async (req,res)=>{
   try{ const u = await requireAdmin(req); if(!u) return res.status(403).json({ error:"admins only" });

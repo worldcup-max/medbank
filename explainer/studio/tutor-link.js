@@ -1,0 +1,128 @@
+/* MedBank tutor-link — runs INSIDE a library plate page and turns it into a remote-controlled stage for the app's
+ * note-driven tutor (explainer/plate-tutor.js). The parent (the app) owns the script: the student's note, the voice,
+ * the order of stops. This file only does visual work on the plate and reports taps.
+ *
+ * Loaded by the parent into a same-origin plate iframe. Uses only what every built plate already exposes
+ * (window.__studio.seek/openLens/closeLens, the global createModel, the page's own buttons), so shell.mjs is untouched.
+ * Nothing of the plate is removed: stage, lenses, legend, ledger (phase, why, live numbers), controls and chart all
+ * stay. Only the plate's own header and its built-in tutor panel are hidden while linked (the app shows its own).
+ *
+ * Messages IN  (parent → plate):
+ *   {type:"mbx-link", parts:{id:{name, shows, covered}}, unlocked:[ids], dark}   start linked mode
+ *   {type:"mbx-show", phase, focus:[ids], lens, win, speed, play}               move the stage to a stop (lens opens a close-up)
+ *   {type:"mbx-play", on}  {type:"mbx-theme", dark}  {type:"mbx-unlock", id}  {type:"mbx-pop-close"}
+ * Messages OUT (plate → parent):
+ *   {type:"mbx-linked", parts:[ids], phases:[names], lesson:{steps}}   (lesson = the plate's default, used only as a fallback)  {type:"mbx-height", h}  {type:"mbx-playing", on}
+ *   {type:"mbx-tap", id, covered}  {type:"mbx-learn", id, phase}
+ */
+(function () {
+  if (window.__mbxLink) return; window.__mbxLink = true;
+  const up = (m) => { try { window.parent.postMessage(m, "*"); } catch (_) {} };
+  const ready = (cb) => { const go = () => (window.__studio && window.__studio.ready && window.K) ? cb() : setTimeout(go, 60); go(); };
+
+  /* What the parent drives. Built from the plate's public bits (window.__studio.seek / openLens / closeLens, the global
+   * createModel, the page's own buttons), so it works on every built plate without touching shell.mjs. */
+  function plateApi() {
+    if (window.__studio.api) return window.__studio.api;
+    const doc = document, $ = (id) => doc.getElementById(id), M = createModel(), N = M.N || 600, T = M.T;
+    const S = []; for (let i = 0; i < N; i++) S.push(M.sample(i * T / N));
+    const bands = []; for (let i = 1, a = 0; i <= N; i++) if (i === N || S[i].phase !== S[a].phase) { bands.push({ name: S[a].phase, a, b: i }); a = i; }
+    let lesson = null; try { for (const sc of doc.scripts) { const m = /runStudio\(createScene, (\{[\s\S]*\})\);\s*\}\s*catch/.exec(sc.textContent); if (m) { lesson = JSON.parse(m[1]); break; } } } catch (_) {}
+    const isPlaying = () => $("play").getAttribute("aria-pressed") === "true";
+    const setPlaying = (p) => { if (isPlaying() !== !!p) $("play").click(); };
+    const seek = (f) => window.__studio.seek ? window.__studio.seek(f) : null;
+    return { T, N, samples: S, bands, lesson, isPlaying, setPlaying,
+      goPhase(name) { const b = bands.filter((x) => x.name === name).sort((x, y) => (y.b - y.a) - (x.b - x.a))[0]; if (b) seek((b.a + 2) / N); return !!b; },
+      seekTime(t) { seek(Math.max(0, Math.min(1, t / T))); },
+      setSpeed(v) { const bs = [...doc.querySelectorAll("#speed button")]; if (!bs.length) return; bs.sort((x, y) => Math.abs(+x.dataset.s - v) - Math.abs(+y.dataset.s - v))[0].click(); },
+      stopTutor() { const b = $("tutor"); if (b && /stop/i.test(b.textContent)) b.click(); try { speechSynthesis.cancel(); } catch (_) {} },
+      lens(id) { try { if (id && window.__studio.openLens) window.__studio.openLens(id); else if (window.__studio.closeLens) window.__studio.closeLens(); } catch (_) {} } };
+  }
+
+  ready(function () {
+    const A = plateApi(), K = window.K, doc = document, svg = doc.getElementById("stage");
+    let PARTS = {}, unlocked = new Set(), focus = new Set(), linked = false;
+
+    /* app dark mode: the plate's dark palette only answers prefers-color-scheme, so mirror it under [data-theme="dark"] */
+    try { for (const sh of doc.styleSheets) for (const r of sh.cssRules) if (r.media && /dark/.test(r.conditionText || r.media.mediaText))
+      for (const ir of r.cssRules) if (/:root:not\(\[data-theme="light"\]\)/.test(ir.selectorText || "")) sh.insertRule(':root[data-theme="dark"]{' + ir.style.cssText + "}", sh.cssRules.length); } catch (_) {}
+    const theme = (dark) => doc.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+
+    const css = doc.createElement("style");
+    css.textContent = `
+html.mbx-linked body{padding:6px 0 10px!important;background:transparent!important}
+html.mbx-linked .wrap{gap:10px!important;max-width:none!important;grid-template-columns:minmax(0,1fr)}
+html.mbx-linked .main{grid-template-columns:minmax(0,1fr)}@media (min-width:861px){html.mbx-linked .main{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}}
+html.mbx-linked .wrap>header,html.mbx-linked section.tutor{display:none!important}
+html.mbx-linked #stage{cursor:pointer}
+.mbx-pop{position:absolute;z-index:20;width:min(250px,78%);background:var(--sheet);color:var(--ink);border:1px solid var(--hair);border-radius:12px;
+ padding:11px 12px 12px;box-shadow:0 10px 30px rgba(0,0,0,.22);font:13px/1.45 var(--body)}
+.mbx-pop b{font-size:14.5px;display:block;padding-right:22px}.mbx-pop p{margin:6px 0 0;color:var(--muted)}
+.mbx-pop .tg{display:inline-block;margin-top:5px;font:600 11px var(--body);letter-spacing:.02em;border-radius:99px;padding:1px 8px}
+.mbx-pop .tg.out{border:1px dashed var(--muted);color:var(--muted)}.mbx-pop .tg.in{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)}
+.mbx-pop .go{margin-top:10px;width:100%;min-height:42px;border-radius:9px;border:1.5px solid var(--accent);color:var(--accent);background:transparent;font:600 14px var(--body)}
+.mbx-pop .x{position:absolute;top:4px;right:4px;width:34px;height:34px;border:0;background:transparent;color:var(--muted);font-size:18px;padding:0}`;
+    doc.head.appendChild(css);
+
+    /* ---- dimming: parts the note does not cover sit at 30% unless the student unlocked them; focused parts glow.
+     * Elements the scene keeps invisible on purpose (glow strokes at opacity 0) are never touched. */
+    const isGhost = (e) => e.getAttribute("opacity") === "0" || /kGlow/.test(e.getAttribute("filter") || "");
+    function paint() { const P = K.parts();
+      for (const id in P) { const dim = linked && PARTS[id] && !PARTS[id].covered && !unlocked.has(id) && !focus.has(id);
+        P[id].forEach((e) => { if (isGhost(e)) return; e.style.transition = "opacity .45s, filter .45s";
+          e.style.opacity = dim ? "0.3" : ""; e.style.filter = focus.has(id) ? "url(#kGlow)" : ""; }); } }
+
+    /* ---- which part did a finger mean? tubes are a few px wide on a phone, so probe a ring around the touch and
+     * prefer the most specific part (fewest drawn pixels), so a tap near a tube is not swallowed by the interstitium */
+    const owner = new Map(); const index = () => { owner.clear(); const P = K.parts(); for (const id in P) P[id].forEach((e) => owner.set(e, id)); };
+    const partAt = (el) => { for (let n = el; n && n !== svg; n = n.parentNode) if (owner.has(n)) return owner.get(n); return null; };
+    const area = {}; function areaOf(id) { if (area[id] != null) return area[id]; let a = 0; (K.parts()[id] || []).forEach((e) => { try { const b = e.getBBox(); a += b.width * b.height; } catch (_) {} }); return (area[id] = a || 1e9); }
+    function hit(x, y) { const votes = {}; const R = [0, 7, 14];
+      R.forEach((r, ri) => { const n = r ? 8 : 1; for (let k = 0; k < n; k++) { const a = k / n * 2 * Math.PI, el = doc.elementFromPoint(x + r * Math.cos(a), y + r * Math.sin(a));
+        const id = el && partAt(el); if (id) votes[id] = (votes[id] || 0) + (3 - ri); } });
+      const ids = Object.keys(votes); if (!ids.length) return null;
+      ids.sort((p, q) => (votes[q] / Math.sqrt(areaOf(q))) - (votes[p] / Math.sqrt(areaOf(p)))); return ids[0]; }
+
+    /* the phase a part is busiest in — where "Learn it anyway" takes the stage */
+    function phaseOf(id) { const S = A.samples, score = {}; S.forEach((s) => { const p = s.parts && s.parts[id]; const v = (p && (p.active || 0)) + (s.parcel && s.parcel.part === id ? 1 : 0); if (v) score[s.phase] = (score[s.phase] || 0) + v; });
+      const best = Object.keys(score).sort((a, b) => score[b] - score[a])[0]; return best || null; }
+
+    /* ---- popover */
+    let pop = null; const closePop = () => { if (pop) { pop.remove(); pop = null; } };
+    function showPop(id, x, y) { closePop(); const P = PARTS[id] || {}, host = svg.parentNode; host.style.position = "relative";
+      const covered = P.covered || unlocked.has(id);
+      pop = doc.createElement("div"); pop.className = "mbx-pop"; pop.setAttribute("role", "dialog");
+      pop.innerHTML = "<button class='x' aria-label='Close'>×</button><b></b><span class='tg'></span><p></p>" + (covered ? "" : "<button class='go'>Learn it anyway</button>");
+      pop.querySelector("b").textContent = P.name || id;
+      const tg = pop.querySelector(".tg"); tg.className = "tg " + (P.covered ? "in" : "out"); tg.textContent = P.covered ? "In your note" : unlocked.has(id) ? "Extra · you opened this" : "Not in your note";
+      pop.querySelector("p").textContent = P.covered ? "The lines about it are highlighted in your note." : (P.shows || "");
+      pop.querySelector(".x").onclick = (e) => { e.stopPropagation(); closePop(); };
+      const go = pop.querySelector(".go"); if (go) go.onclick = (e) => { e.stopPropagation(); unlocked.add(id); paint(); closePop(); up({ type: "mbx-learn", id, phase: phaseOf(id) }); };
+      host.appendChild(pop);
+      const hr = host.getBoundingClientRect(), W = pop.offsetWidth, H = pop.offsetHeight, lx = x - hr.left, ly = y - hr.top;
+      pop.style.left = Math.max(6, Math.min(hr.width - W - 6, lx - W / 2)) + "px";
+      pop.style.top = Math.max(4, ly - H - 14 > 4 ? ly - H - 14 : Math.min(hr.height - H - 4, ly + 18)) + "px"; }
+
+    svg.addEventListener("click", (ev) => { if (!linked) return; const id = hit(ev.clientX, ev.clientY);
+      if (!id || !PARTS[id]) { closePop(); return; } showPop(id, ev.clientX, ev.clientY); up({ type: "mbx-tap", id, covered: !!PARTS[id].covered }); });
+
+    /* ---- height + play state for the parent */
+    const report = () => up({ type: "mbx-height", h: Math.ceil(doc.documentElement.scrollHeight) });
+    try { new ResizeObserver(report).observe(doc.body); } catch (_) { setInterval(report, 1000); }
+    let wasPlaying = null; setInterval(() => { const p = A.isPlaying(); if (p !== wasPlaying) { wasPlaying = p; up({ type: "mbx-playing", on: p }); } }, 250);
+
+    window.addEventListener("message", (e) => { const m = e.data || {}; if (typeof m.type !== "string" || m.type.indexOf("mbx-") !== 0) return;
+      if (m.type === "mbx-link") { linked = true; PARTS = m.parts || {}; unlocked = new Set(m.unlocked || []); theme(!!m.dark);
+        doc.documentElement.classList.add("mbx-linked"); A.stopTutor(); index(); paint(); setTimeout(report, 50); }
+      else if (m.type === "mbx-show") { closePop(); A.stopTutor(); if (Array.isArray(m.win) && A.seekTime) A.seekTime(m.win[0]); else if (m.phase) A.goPhase(m.phase);
+        if (A.lens) A.lens(m.lens || null); focus = new Set(m.focus || []); paint();
+        if (m.speed) A.setSpeed(m.speed); A.setPlaying(m.play !== false); }
+      else if (m.type === "mbx-play") A.setPlaying(!!m.on);
+      else if (m.type === "mbx-theme") theme(!!m.dark);
+      else if (m.type === "mbx-unlock") { unlocked.add(m.id); paint(); }
+      else if (m.type === "mbx-pop-close") closePop(); });
+
+    const fallback = A.lesson && A.lesson.steps ? { steps: A.lesson.steps.map(({ title, phase, focus, speed, say }) => ({ title, phase, focus, speed, say })) } : null;   // the plate's default lesson, minus baked audio
+    up({ type: "mbx-linked", parts: Object.keys(K.parts()), phases: [...new Set(A.bands.map((b) => b.name))], lesson: fallback });
+  });
+})();

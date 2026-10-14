@@ -12,12 +12,12 @@ const safeScript = (s) => String(s).replace(/<\/script/gi, "<\\/script");
 const CSS = `
 :root{--ground:#eef1f3;--sheet:#fbfcfc;--ink:#1d2730;--muted:#5d6a75;--hair:#d5dbe0;--wall:#b9706b;--wall-deep:#8d4a49;--wall-hi:#d39892;--fat:#e7cf9a;
  --hot:#c3283a;--hot-lumen:#e7a2a6;--hot-hi:#ff5a68;--cold:#3a56a6;--cold-lumen:#a9b7e0;--cold-hi:#4f78e6;--fluid:#dfe7ee;--bed:#e6dcd3;
- --leaflet:#f6eadf;--leaflet-edge:#6b4b44;--accent:#0f6d6a;--open:#1c7a4a;--shut:#9a3a2e;
+ --leaflet:#f6eadf;--leaflet-edge:#6b4b44;--accent:#0f6d6a;--open:#1c7a4a;--shut:#9a3a2e;--spark:#d68a00;--ca:#c79a00;
  --display:"Spectral",Georgia,"Times New Roman",serif;--body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Consolas,monospace}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0f1418;--sheet:#151c21;--ink:#e5eaee;--muted:#93a1ac;--hair:#2a343c;--wall:#8e4a4c;--wall-deep:#5f2d31;--wall-hi:#b26d6d;--fat:#6d5b36;
- --hot:#e0465a;--hot-lumen:#6e2a33;--hot-hi:#ff7482;--cold:#6a86d8;--cold-lumen:#2b3a66;--cold-hi:#8eaaff;--fluid:#1f2a33;--bed:#2b2a29;--leaflet:#efe3d6;--leaflet-edge:#2a1d1a;--accent:#4fc2bb;--open:#4fc28a;--shut:#ff8a77;color-scheme:dark}}
+ --hot:#e0465a;--hot-lumen:#6e2a33;--hot-hi:#ff7482;--cold:#6a86d8;--cold-lumen:#2b3a66;--cold-hi:#8eaaff;--fluid:#1f2a33;--bed:#2b2a29;--leaflet:#efe3d6;--leaflet-edge:#2a1d1a;--accent:#4fc2bb;--open:#4fc28a;--shut:#ff8a77;--spark:#ffc94d;--ca:#ffd84a;color-scheme:dark}}
 *{box-sizing:border-box}body{margin:0;background:var(--ground);color:var(--ink);font:14px/1.5 var(--body);padding:20px 16px 40px}
-.wrap{max-width:1180px;margin:0 auto;display:grid;gap:14px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
 h1{font-family:var(--display);font-weight:600;font-size:clamp(24px,4vw,34px);margin:0;letter-spacing:-.01em}h1 em{font-style:italic;font-weight:500;color:var(--muted)}
 .sub{color:var(--muted);max-width:64ch;margin:2px 0 0}.fig,.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .plate{background:var(--sheet);border:1px solid var(--hair);border-radius:6px}
@@ -46,6 +46,23 @@ button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-colo
 .halo{paint-order:stroke;stroke:var(--sheet);stroke-width:3.5px;stroke-linejoin:round}
 .err{color:var(--shut);font-family:var(--mono);font-size:12px;white-space:pre-wrap}
 @media (max-width:600px){.phase{font-size:22px}.controls{gap:6px}.lbl{display:none}}
+/* lenses: split stage, never overlapping. Closed: the main drawing fills the stage. Open: it animates to ~40% (still live, the magnified
+   region boxed, a faint cone to the lens) and the lens takes the other 60%. Phones: a small live locator above a full-width lens. */
+.split{position:relative;display:grid;grid-template-columns:1fr 0fr;column-gap:0;align-items:center;transition:grid-template-columns .55s cubic-bezier(.2,.8,.2,1),column-gap .55s}
+.split.lensing{grid-template-columns:2fr 3fr;column-gap:16px}
+.mainv{min-width:0;position:relative}
+.lenspane{min-width:0;overflow:hidden;border:1px solid var(--hair);border-radius:8px;background:var(--sheet);box-shadow:0 10px 28px -16px rgba(10,20,30,.35);opacity:0;visibility:hidden;transition:opacity .3s .2s,visibility 0s .5s}
+.split.lensing .lenspane{opacity:1;visibility:visible;transition:opacity .3s .2s,visibility 0s}
+.lenshead{display:flex;align-items:flex-start;gap:8px;padding:7px 8px 6px 12px;border-bottom:1px solid var(--hair)}.lenshead>div{flex:1;min-width:0;display:grid}
+.lenstitle{font-family:var(--display);font-weight:600;font-size:15px;line-height:1.25}.lenshead button{padding:1px 9px;font-size:16px;line-height:1.3}
+.stage .lenspane svg{width:100%;height:auto;aspect-ratio:1}
+.lensshows{font-size:12px;color:var(--muted);padding:3px 12px 10px;line-height:1.45}
+.stage svg.cone{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.lensbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 8px 0}.lensbar .lbl{margin-right:2px}.lensbar button{font-size:12px;padding:4px 9px}.lensbar button.on{background:var(--accent);border-color:var(--accent);color:var(--sheet)}
+.steps button .lz{opacity:.65;margin-left:5px}
+.lt{font:500 14px var(--body);fill:var(--ink)}.lh{font:600 15.5px var(--display);fill:var(--ink)}.lm{font:12px var(--mono);fill:var(--muted)}.ls{font:12.5px var(--body);fill:var(--muted)}.big{font:600 30px var(--display);fill:var(--ink)}
+#stage .lab{font-size:calc(10.5px * var(--ls,1))}#stage .halo{stroke-width:calc(3.5px * var(--ls,1))}#stage .tag{font-size:calc(11px * var(--ls,1))}#stage .tagtitle{font-size:calc(18px * var(--ls,1))}
+@media (max-width:640px){.split.lensing{grid-template-columns:1fr;row-gap:10px}.split.lensing .mainv{width:50%;justify-self:center}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}`;
 
 function frame({ meta, stageHtml, legendHtml }) {
@@ -55,14 +72,17 @@ function frame({ meta, stageHtml, legendHtml }) {
 <style>${CSS}</style></head><body>
 <div class="wrap">
   <header><div class="fig">${esc(meta.figLabel || "Plate")}</div><h1>${esc(meta.title)} <em>${esc(meta.titleEm || "")}</em></h1><p class="sub">${esc(meta.sub || "")}</p></header>
-  <section class="plate main"><div class="stage">${stageHtml}<div class="legend">${legendHtml || ""}</div></div>
+  <section class="plate main"><div class="stage"><div class="split" id="split"><div class="mainv">${stageHtml}</div>
+    <div class="lenspane" id="lensPane"><div class="lenshead"><div><span class="eyebrow" id="lensKicker"></span><span class="lenstitle" id="lensTitle"></span></div><button id="lensClose" aria-label="Close the lens">×</button></div>
+      <svg id="lens" viewBox="0 0 400 400" role="img" aria-label="Lens"></svg><div class="lensshows" id="lensShows"></div></div><svg class="cone" id="cone" aria-hidden="true"></svg></div>
+    <div class="lensbar" id="lensBar" hidden><span class="lbl">Look closer</span></div><div class="legend">${legendHtml || ""}</div></div>
     <div class="ledger"><div><div class="eyebrow">Phase</div><p class="phase" id="phase">—</p><div class="clock" id="clock"></div></div>
       <p class="why" id="why"></p><table id="gatesT"><thead><tr><th id="gatesH">Gate</th><th id="gatesW">Why</th><th class="r">State</th></tr></thead><tbody id="gates"></tbody></table>
       <div class="nums" id="nums"></div></div></section>
   <section class="plate tutor" aria-label="Tutor"><div class="eyebrow">Tutor</div><div class="say" id="say">Press “Tutor me” for a guided walk-through, or explore on your own.</div>
     <div class="steps" id="steps"></div><div><button id="tutor">▶ Tutor me</button> <button id="mute" aria-pressed="false">Voice on</button></div></section>
   <section class="plate"><div class="controls"><button id="play" aria-pressed="true">Pause</button><button id="prev">◀ Phase</button><button id="next">Phase ▶</button>
-      <span class="lbl">Speed</span><div class="seg" id="speed"></div><span class="spacer"></span><span class="lbl" id="modesL" hidden>Chart</span><div class="seg" id="modes" hidden></div><button id="sound" aria-pressed="false" hidden>Sound off</button></div>
+      <span class="lbl">Speed</span><div class="seg" id="speed"></div><button id="loop" aria-pressed="true" hidden title="Replay only the part of the cycle this step is about">Loop this moment</button><span class="spacer"></span><span class="lbl" id="modesL" hidden>Chart</span><div class="seg" id="modes" hidden></div><button id="sound" aria-pressed="false" hidden>Sound off</button></div>
     <div class="chartwrap"><svg id="chart" class="chart" viewBox="0 0 1000 330" tabindex="0" role="slider" aria-label="Timeline. Drag or use arrow keys."></svg></div></section>
   <p class="notes" id="notes"></p><div class="err" id="err"></div>
 </div>`;
@@ -85,6 +105,41 @@ function runStudio(createScene, LESSON) {
   const parcelText = (s) => { try { if (M.parcelLabel) return M.parcelLabel(s); } catch (_) {} return (M.readouts || []).filter((r) => r.big).slice(0, 2).map((r) => fmt(s.readouts[r.key], r.digits) + " " + (r.unit || "")).join(" · "); };
   window.__studio.tracer = !!TR; window.__studio.parcelParts = [...new Set(S.map((s) => s.parcel && s.parcel.part).filter(Boolean))]; window.__studio.paths = Object.keys(scene.paths || {});
   window.__studio.registered = Object.keys(K.parts());
+  // ---- lenses (K.lens in the scene) + the main-drawing camera
+  const LZ = K.lenses(), LMETA = {}; ((window.LENS_META) || []).forEach((m) => { LMETA[m.id] = m; });
+  const split = $("split"), lensPane = $("lensPane"), lensSvg = $("lens"), cone = $("cone");
+  let lensId = null, stepCam = null;
+  const lensOrder = Object.keys(LMETA).filter((id) => LZ[id]).concat(Object.keys(LZ).filter((id) => !LMETA[id]));
+  window.__studio.lenses = Object.keys(LZ); window.__studio.lensErrors = [];
+  const lensToggle = (id, on) => { const L = id && LZ[id]; if (L && L.toggle) { try { L.toggle(on); } catch (e) { window.__studio.errors.push("lens " + id + ".toggle: " + e.message); } } };
+  function openLens(id) { const L = LZ[id]; if (!L) { closeLens(); return; } if (lensId === id) return; lensToggle(lensId, false); lensId = id; lensToggle(id, true);
+    if (!L._g) { L._g = K.el("g", {}, lensSvg); try { L._u = L.build(L._g, { S, M, N, T }) || (() => {}); } catch (e) { L._u = () => {}; window.__studio.lensErrors.push(id + ": " + e.message); window.__studio.errors.push("lens " + id + ": " + e.message); } }
+    for (const k in LZ) if (LZ[k]._g) LZ[k]._g.style.display = k === id ? "" : "none";
+    const m = LMETA[id] || {}; $("lensKicker").textContent = m.kicker || "Lens"; $("lensTitle").textContent = m.title || id; $("lensShows").textContent = m.shows || ""; lensSvg.setAttribute("aria-label", m.title || id);
+    split.classList.add("lensing"); $("lensBar").querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.id === id)); window.__studio.lens = id; prevI = -1; render(0); }
+  function closeLens() { lensToggle(lensId, false); lensId = null; split.classList.remove("lensing"); $("lensBar").querySelectorAll("button").forEach((b) => b.classList.remove("on")); window.__studio.lens = null; }
+  window.__studio.openLens = openLens; window.__studio.closeLens = closeLens;
+  $("lensClose").onclick = closeLens;
+  if (lensOrder.length) { $("lensBar").hidden = false; lensOrder.forEach((id) => { const b = document.createElement("button"); b.dataset.id = id; b.textContent = (LMETA[id] && LMETA[id].title) || id; b.onclick = () => (lensId === id ? closeLens() : openLens(id)); $("lensBar").appendChild(b); }); }
+  const vb = svg.viewBox.baseVal, BASE = { x: vb.x, y: vb.y, w: vb.width || 760, h: vb.height || 640 }, cam = { ...BASE };
+  function camTarget() { const c = (lensId && LZ[lensId].cam) || (!lensId && stepCam) || null; if (!c) return BASE;
+    const w = Math.min(BASE.w, c[2]), h = w * BASE.h / BASE.w; return { x: Math.max(BASE.x, Math.min(BASE.x + BASE.w - w, c[0] - w / 2)), y: Math.max(BASE.y, Math.min(BASE.y + BASE.h - h, c[1] - h / 2)), w, h }; }
+  let camKey = "";
+  function moveCam(a) { const g = camTarget(); for (const k of ["x", "y", "w", "h"]) cam[k] += (g[k] - cam[k]) * a; const key = [cam.x, cam.y, cam.w, cam.h].map((v) => v.toFixed(1)).join(" ");
+    if (key !== camKey) { camKey = key; svg.setAttribute("viewBox", key); svg.style.setProperty("--ls", (cam.w / BASE.w).toFixed(3)); } }
+  const P2 = (p) => p[0].toFixed(1) + " " + p[1].toFixed(1);
+  function drawCone() { const L = lensId && LZ[lensId]; if (!L || !L.focus) { if (cone.innerHTML) cone.innerHTML = ""; return; }
+    const sr = split.getBoundingClientRect(), m = svg.getScreenCTM(); if (!m || !sr.width) return;
+    const pt = (x, y) => { const p = svg.createSVGPoint(); p.x = x; p.y = y; const q = p.matrixTransform(m); return [q.x - sr.left, q.y - sr.top]; };
+    const f = L.focus, a = pt(f[0], f[1]), b = pt(f[0] + f[2], f[1] + f[3]), lr = lensPane.getBoundingClientRect(), l = [lr.left - sr.left, lr.top - sr.top, lr.right - sr.left, lr.bottom - sr.top];
+    const stacked = l[1] >= b[1] - 2;   // phone: the locator sits above the lens
+    const [p1, p2, c1, c2] = stacked ? [[a[0], b[1]], [b[0], b[1]], [l[0], l[1]], [l[2], l[1]]] : [[b[0], a[1]], [b[0], b[1]], [l[0], l[1]], [l[0], l[3]]];
+    cone.setAttribute("viewBox", "0 0 " + sr.width.toFixed(0) + " " + sr.height.toFixed(0)); cone.style.opacity = getComputedStyle(lensPane).opacity;
+    cone.innerHTML = '<path d="M' + P2(p1) + "L" + P2(c1) + "L" + P2(c2) + "L" + P2(p2) + 'Z" fill="var(--accent)" fill-opacity="0.06"/><path d="M' + P2(p1) + "L" + P2(c1) + "M" + P2(p2) + "L" + P2(c2) + '" stroke="var(--accent)" stroke-opacity="0.5" stroke-width="1.1" fill="none"/>'
+      + '<rect x="' + Math.min(a[0], b[0]).toFixed(1) + '" y="' + Math.min(a[1], b[1]).toFixed(1) + '" width="' + Math.abs(b[0] - a[0]).toFixed(1) + '" height="' + Math.abs(b[1] - a[1]).toFixed(1) + '" rx="4" fill="var(--accent)" fill-opacity="0.07" stroke="var(--accent)" stroke-width="1.6"/>'; }
+  // "Loop this moment": replay only the part of the cycle the current step is about
+  let loopWin = null, loopOn = true;
+  const setLoopBtn = () => { $("loop").hidden = !loopWin; $("loop").setAttribute("aria-pressed", String(loopOn)); };
   // ledger
   const gates = M.gates || []; if (!gates.length) $("gatesT").hidden = true; else $("gatesH").textContent = M.gateTitle || "Gate"; if (M.gateWhy) $("gatesW").textContent = M.gateWhy;
   const grows = gates.map((g) => { const tr = document.createElement("tr"); tr.innerHTML = "<td></td><td class='g'></td><td class='r'><span class='pill'></span></td>"; tr.children[0].textContent = g.label; $("gates").appendChild(tr); return { g, d: tr.children[1], p: tr.querySelector(".pill") }; });
@@ -135,42 +190,60 @@ function runStudio(createScene, LESSON) {
   function render(dBeat) { const i = idx(); if (TR) TR.set(S[i].parcel.part, S[i].parcel.u, parcelText(S[i])); try { scene.update(i, S[i], dBeat); } catch (e) { if (!window.__studio.sceneError) { window.__studio.sceneError = String(e.message); window.__studio.errors.push("scene.update: " + e.message); } }
     if (i !== prevI) { ledger(i); cursor.setAttribute("transform", "translate(" + K.f1(xOf(i)) + " 0)"); dots.forEach((d) => { const v = S[i].readouts[d.key]; d.c.setAttribute("cx", K.f1(xOf(i))); d.c.setAttribute("cy", K.f1(d.yv(typeof v === "number" ? v : 0))); });
       if (playing && prevI >= 0) EV.forEach((ev) => { const k = Math.round(ev.t / T * N); if ((prevI < i && k > prevI && k <= i) || (prevI > i && (k > prevI || k <= i))) if (ev.sound) thump(ev.freq); }); prevI = i; }
+    if (lensId && LZ[lensId]._u) { try { LZ[lensId]._u(i, S[i], Math.max(0, dBeat)); } catch (e) { if (!LZ[lensId]._err) { LZ[lensId]._err = 1; window.__studio.lensErrors.push(lensId + ": " + e.message); window.__studio.errors.push("lens " + lensId + ".update: " + e.message); } } }
     window.__studio.frames++; window.__studio.i = i; }
-  let last = 0; function tick(now) { const dt = last ? Math.min((now - last) / 1000, 0.05) : 0; last = now; if (playing) { const d = dt * speed * (M.playRate || 1); t = (t + d) % T; render(d / T * (M.flowScale || 1)); } requestAnimationFrame(tick); }
+  const still = matchMedia("(prefers-reduced-motion: reduce)");
+  let last = 0; function tick(now) { const dt = last ? Math.min((now - last) / 1000, 0.05) : 0; last = now;
+    moveCam(still.matches ? 1 : 1 - Math.exp(-dt / 0.3));
+    if (playing) { const d = dt * speed * (M.playRate || 1); let tn = t + d; if (loopOn && loopWin && (tn > loopWin[1] || tn < loopWin[0] - 1e-9)) tn = loopWin[0]; t = ((tn % T) + T) % T; render(d / T * (M.flowScale || 1)); }
+    drawCone(); requestAnimationFrame(tick); }
   for (let k = 0; k < 90; k++) { t = (t + T / N * 2) % T; render(2 / N); } render(0); requestAnimationFrame(tick);
   const setPlaying = (p) => { playing = p; $("play").textContent = p ? "Pause" : "Play"; $("play").setAttribute("aria-pressed", String(p)); }; setPlaying(playing);
   $("play").onclick = () => setPlaying(!playing);
   function scrubTo(tt) { let d = tt - t; if (d > T / 2) d -= T; if (d < -T / 2) d += T; const n = Math.max(1, Math.ceil(Math.abs(d) / (T / N * 3))); for (let k = 0; k < n; k++) { t = ((t + d / n) % T + T) % T; render(d / n / T); } }
-  function jump(dir) { setPlaying(false); const i = idx(); let b = BANDS.findIndex((x) => i >= x.a && i < x.b); b = dir > 0 ? (b + 1) % BANDS.length : (i - BANDS[b].a > 20 ? b : (b - 1 + BANDS.length) % BANDS.length); scrubTo((BANDS[b].a + 2) / N * T); }
+  const freeRoam = () => { loopOn = false; stepCam = null; setLoopBtn(); };
+  function jump(dir) { freeRoam(); setPlaying(false); const i = idx(); let b = BANDS.findIndex((x) => i >= x.a && i < x.b); b = dir > 0 ? (b + 1) % BANDS.length : (i - BANDS[b].a > 20 ? b : (b - 1 + BANDS.length) % BANDS.length); scrubTo((BANDS[b].a + 2) / N * T); }
   $("prev").onclick = () => jump(-1); $("next").onclick = () => jump(1);
   $("sound").onclick = (e) => { sound = !sound; e.currentTarget.setAttribute("aria-pressed", String(sound)); e.currentTarget.textContent = sound ? "Sound on" : "Sound off"; };
   let drag = false; const chartT = (ev) => { const r = chart.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * 1000; return Math.min(N - 1, Math.max(0, (x - CX0) / (CX1 - CX0) * N)) / N * T; };
-  chart.addEventListener("pointerdown", (ev) => { drag = true; chart.setPointerCapture(ev.pointerId); setPlaying(false); scrubTo(chartT(ev)); });
+  chart.addEventListener("pointerdown", (ev) => { drag = true; chart.setPointerCapture(ev.pointerId); setPlaying(false); freeRoam(); scrubTo(chartT(ev)); });
   chart.addEventListener("pointermove", (ev) => { if (drag) scrubTo(chartT(ev)); }); chart.addEventListener("pointerup", () => drag = false);
   document.addEventListener("keydown", (ev) => { if (ev.key === " ") { ev.preventDefault(); setPlaying(!playing); } else if (ev.key === "ArrowRight") { ev.preventDefault(); jump(1); } else if (ev.key === "ArrowLeft") { ev.preventDefault(); jump(-1); } });
   // tutor: each step jumps to its phase, spotlights its parts and is read aloud (the app's voice when embedded)
   const steps = (LESSON && LESSON.steps) || []; let si = -1, tutoring = false, muted = false, sayId = 0;
-  $("steps").innerHTML = steps.map((s, k) => "<button data-k='" + k + "'>" + (k + 1) + ". " + String(s.title || "").replace(/[<>&]/g, "") + "</button>").join("");
+  $("steps").innerHTML = steps.map((s, k) => "<button data-k='" + k + "'" + (s.lens ? " title='Opens a lens'" : "") + ">" + (k + 1) + ". " + String(s.title || "").replace(/[<>&]/g, "") + (s.lens && LZ[s.lens] ? "<span class='lz'>◎</span>" : "") + "</button>").join("");
+  $("loop").onclick = () => { loopOn = !loopOn; setLoopBtn(); };
   const sentences = (x) => String(x || "").split(/(?<=[.!?])\\s+/).filter(Boolean);
-  function voice(text, done) { if (muted) return setTimeout(done, 700 + text.length * 55); if (window.parent !== window) { const id = "s" + Math.random(); const h = (e) => { if (e.data && e.data.type === "mbx-said" && e.data.id === id) { window.removeEventListener("message", h); done(); } }; window.addEventListener("message", h); window.parent.postMessage({ type: "mbx-speak", id, text }, "*"); setTimeout(() => { window.removeEventListener("message", h); }, 30000); return; }
+  let clip = null;
+  function voice(text, done, rec) { if (muted) return setTimeout(done, 700 + text.length * 55);
+    window.__studio.lastVoice = rec ? "recorded" : window.parent !== window ? "app" : "browser";
+    if (rec) { let ended = false; const fin = () => { if (!ended) { ended = true; done(); } }; try { clip = new Audio(rec); clip.onended = fin; clip.onerror = () => { clip = null; voice(text, done, null); }; clip.play().catch(() => { clip = null; voice(text, fin, null); }); return; } catch (_) {} }
+    if (window.parent !== window) { const id = "s" + Math.random(); const h = (e) => { if (e.data && e.data.type === "mbx-said" && e.data.id === id) { window.removeEventListener("message", h); done(); } }; window.addEventListener("message", h); window.parent.postMessage({ type: "mbx-speak", id, text }, "*"); setTimeout(() => { window.removeEventListener("message", h); }, 30000); return; }
     try { const u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.onend = done; u.onerror = done; speechSynthesis.speak(u); } catch (_) { setTimeout(done, 800 + text.length * 55); } }
   function goStep(k) { si = k; const s = steps[k]; if (!s) return; $("steps").querySelectorAll("button").forEach((b, j) => b.classList.toggle("on", j === k));
-    const band = BANDS.filter((b) => b.name === s.phase).sort((x, y) => (y.b - y.a) - (x.b - x.a))[0]; /* a phase can recur in one cycle: use its longest window */ if (band) { scrubTo((band.a + 2) / N * T); } else if (typeof s.at === "number") scrubTo(s.at * T);
+    try { if (clip) clip.pause(); } catch (_) {}
+    const band = BANDS.filter((b) => b.name === s.phase).sort((x, y) => (y.b - y.a) - (x.b - x.a))[0]; /* a phase can recur in one cycle: use its longest window */
+    // the moment this step is about: s.win [t0, t1] in model time, else its phase window padded a little either side
+    loopWin = Array.isArray(s.win) ? [Math.max(0, s.win[0]), Math.min(T, s.win[1])] : band ? [Math.max(0, band.a / N * T - 0.03 * T), Math.min(T - T / N, band.b / N * T + 0.03 * T)] : null; loopOn = true; setLoopBtn();
+    stepCam = Array.isArray(s.cam) ? s.cam : null; if (s.lens) openLens(s.lens); else closeLens();
+    if (Array.isArray(s.win)) scrubTo(loopWin[0]); else if (band) { scrubTo((band.a + 2) / N * T); } else if (typeof s.at === "number") scrubTo(s.at * T);
     setPlaying(true); speed = s.speed || 0.1; K.focus(s.focus || []);
-    const parts = sentences(s.say), id = ++sayId; let j = 0;
+    const parts = sentences(s.say), id = ++sayId, rec = Array.isArray(s.audio) && s.audio.length === parts.length ? s.audio : null; let j = 0;
     const next = () => { if (id !== sayId) return; if (j >= parts.length) { if (tutoring && k + 1 < steps.length) setTimeout(() => goStep(k + 1), 900); else { tutoring = false; $("tutor").textContent = "▶ Tutor me"; K.focus([]); } return; }
-      $("say").innerHTML = parts.map((p, q) => "<span class='" + (q === j ? "on" : "") + "'>" + p.replace(/[<>&]/g, "") + "</span>").join(" "); voice(parts[j++], next); };
+      $("say").innerHTML = parts.map((p, q) => "<span class='" + (q === j ? "on" : "") + "'>" + p.replace(/[<>&]/g, "") + "</span>").join(" "); voice(parts[j], next, rec && rec[j]); j++; };
     next(); }
   $("steps").querySelectorAll("button").forEach((b) => b.onclick = () => { tutoring = false; goStep(+b.dataset.k); });
-  $("tutor").onclick = () => { if (tutoring) { tutoring = false; sayId++; try { speechSynthesis.cancel(); } catch (_) {} $("tutor").textContent = "▶ Tutor me"; K.focus([]); return; } tutoring = true; $("tutor").textContent = "❚❚ Stop"; goStep(si < 0 || si >= steps.length - 1 ? 0 : si); };
+  $("tutor").onclick = () => { if (tutoring) { tutoring = false; sayId++; try { speechSynthesis.cancel(); } catch (_) {} try { if (clip) clip.pause(); } catch (_) {} $("tutor").textContent = "▶ Tutor me"; K.focus([]); return; } tutoring = true; $("tutor").textContent = "❚❚ Stop"; goStep(si < 0 || si >= steps.length - 1 ? 0 : si); };
   $("mute").onclick = (e) => { muted = !muted; e.currentTarget.textContent = muted ? "Voice off" : "Voice on"; e.currentTarget.setAttribute("aria-pressed", String(muted)); };
+  window.__studio.seek = (f) => { setPlaying(false); scrubTo(f * T); };
   window.__studio.ready = true;
 }`;
 
 /* Version A: the AI's own scene */
-export function pageA({ meta, modelCode, sceneCode, lesson, legend }) {
+export function pageA({ meta, modelCode, sceneCode, lesson, legend, lenses }) {
+  // lenses = [{ id, title, kicker, shows }] from the plate's shows.json (the scene draws them with K.lens)
   return frame({ meta, stageHtml: `<svg id="stage" viewBox="0 0 760 640" role="img" aria-label="${esc(meta.alt || meta.title)}"></svg>`, legendHtml: legend })
-    + `<script>${KIT()}</script><script>${RUNTIME}</script><script>\n${safeScript(modelCode)}\n</script><script>\n${safeScript(sceneCode)}\n</script>`
+    + `<script>window.LENS_META = ${safeScript(JSON.stringify(lenses || []))};</script><script>${KIT()}</script><script>${RUNTIME}</script><script>\n${safeScript(modelCode)}\n</script><script>\n${safeScript(sceneCode)}\n</script>`
     + `<script>try{ runStudio(createScene, ${JSON.stringify(lesson || {})}); }catch(e){ window.__studio.errors.push("start: "+e.message); document.getElementById("err").textContent = "⚠ " + e.message; }</script></body></html>`;
 }
 

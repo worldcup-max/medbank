@@ -48,3 +48,9 @@ OTHER CONTEXT
 - MedBank app: single-file app.html PWA, Supabase, import-server on Render (DeepSeek V4), sw.js cache-first (bump CACHE on deploy). Go-live steps still pending from the SN2 3D Tutor work: run import-server\sql\explainers.sql, merge 3d-tutor, redeploy the import server, bump sw.js.
 - My DeepSeek API key was pasted in an earlier chat; I should rotate it.
 - On Windows PowerShell use npm.cmd (script execution is blocked); playwright is installed in explainer\node_modules.
+
+STUDENT LEARNING EXPERIENCE (3D Tutor chat, 14 Oct 2026) — feature 1 built: note-to-plate linking
+- App side: explainer/plate-tutor.js (MBPlate.mount). Phone: plate on top, the note in a bottom sheet (current line + caption + controls; pull up for the whole note). Laptop: note rail on the right. The plate keeps ALL its own content (lenses, legend, ledger, live numbers, chart).
+- In the plate: explainer/studio/tutor-link.js is injected into the same-origin plate iframe. It needs no shell change, but it RELIES ON these plate bits — keep them: window.__studio.ready/seek/openLens/closeLens, the global createModel, K.parts(), #stage, #play (aria-pressed = playing), #speed buttons with data-s, #tutor, and the runStudio(createScene, {lesson}) call.
+- Server: POST /explainer/plate {plate, text, topic} → import-server/plate-tutor.mjs (splitNote, prompt, checks). Stops cite note lines L1…Ln; every phase/part/lens id is checked against manifest.json, numbers must come from the cited lines, un-noted concepts and drift are rejected, a lens opens only when the note covers at least half its concepts. Cached in explainers (template 'plate').
+- Try it without the app: explainer/studio/samples/plate-tutor-demo.html (rebuild with node explainer/studio/plate-kit/demo.mjs). Fixture lesson: samples/nephron-note.tutor.json.

@@ -3075,9 +3075,54 @@ function mbxTemplateFor(t){
   for(var i=0;i<MBX_TEMPLATES.length;i++) if(MBX_TEMPLATES[i].re.test(hay)) return MBX_TEMPLATES[i];
   return null;
 }
+/* library plates (explainer/library/…): a hand-built, model-driven plate is the stage and the student's note is the
+ * script — POST /explainer/plate writes the tutor from the note (import-server/plate-tutor.mjs); explainer/plate-tutor.js
+ * shows the note beside the plate and links them both ways. Keep this list in step with PLATES in explainer/plate-tutor.js. */
+var MBX_PLATES=[
+  {id:'nephron-urine-journey', re:/\bnephron|urine (formation|concentration)|loop of henle|countercurrent|tubular (reabsorption|function)|glomerular filtration\b/i},
+  {id:'cardiac-cycle-wiggers', re:/\bcardiac cycle|wiggers|heart sounds|pressure.volume loop|systole and diastole\b/i} ];
+function mbxPlateFor(t){
+  try{ if(!t||localStorage.mbmech==='0'||localStorage.mbplate==='0') return null; }catch(e){}
+  var hay=(t.name||'')+' \n'+String(t.note||'').slice(0,600);   // the title and the note's opening, not every passing mention
+  for(var i=0;i<MBX_PLATES.length;i++) if(MBX_PLATES[i].re.test(hay)) return MBX_PLATES[i];
+  return null;
+}
+var _mbpLoad=null, _MBP_LESSON={}, _mbpCur=null;
+function mbpLoad(){
+  if(window.MBPlate&&window.MBPlate.mount) return Promise.resolve(window.MBPlate);
+  if(_mbpLoad) return _mbpLoad;
+  _mbpLoad=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='explainer/plate-tutor.js?v=1.0.0'; s.async=true;
+    s.onload=function(){ window.MBPlate?res(window.MBPlate):rej(new Error('3D Tutor failed to start')); };
+    s.onerror=function(){ _mbpLoad=null; rej(new Error('Could not download the 3D Tutor — check your connection.')); };
+    document.head.appendChild(s); });
+  return _mbpLoad;
+}
+function mbpLesson(t, pl){
+  var k=pl.id+'|'+t.id; if(_MBP_LESSON[k]) return _MBP_LESSON[k];
+  _MBP_LESSON[k]=mbxCall('/explainer/plate',{plate:pl.id, topic:t.name, text:String(t.note||'').slice(0,60000)},3)
+    .then(function(j){ return j.lesson||null; }).catch(function(e){ delete _MBP_LESSON[k]; throw e; });
+  return _MBP_LESSON[k];
+}
+function renderPlateTutor(t, pl){
+  setTimeout(function(){
+    var host=document.getElementById('mbpHost'); if(!host) return;
+    if(_mbpCur){ try{ _mbpCur.api.destroy(); }catch(e){} _mbpCur=null; }
+    mbpLoad().then(function(P){
+      if(!host.isConnected) return;
+      var plate=P.PLATES.filter(function(x){ return x.id===pl.id; })[0]; if(!plate) throw new Error('This plate is not in the library yet.');
+      var api=P.mount(host,{ plate:plate, note:String(t.note||''), getLesson:function(){ return mbpLesson(t,pl); },
+        speak:function(text,done){ try{ voiceSpeak(text, done||null, 'read'); }catch(e){ if(done) done(); } },
+        stopSpeak:function(){ try{ stopSpeak(); }catch(e){} },
+        warm:function(lines){ try{ (lines||[]).forEach(function(l){ window.warmSpeak&&window.warmSpeak(l,'read'); }); }catch(e){} },
+        isDark:function(){ return document.documentElement.getAttribute('data-theme')==='dark'; } });
+      _mbpCur={tid:t.id, api:api};
+    }).catch(function(e){ if(host.isConnected) host.innerHTML='<div class="empty" style="text-align:left">'+esc(e.message)+'</div>'; });
+  },0);
+  return '<div id="mbpHost"><div class="empty">Loading the 3D Tutor…</div></div>';
+}
 function mbxShow(t){
   try{ if(!t||localStorage.mbmech==='0') return false; }catch(e){}
-  return !!mbxTemplateFor(t) || MBX_CHEM.test((t.name||'')+' '+((t.subject&&t.subject.name)||'')+' '+String(t.note||'').slice(0,20000));
+  return !!mbxPlateFor(t) || !!mbxTemplateFor(t) || MBX_CHEM.test((t.name||'')+' '+((t.subject&&t.subject.name)||'')+' '+String(t.note||'').slice(0,20000));
 }
 var _mbxLoad=null, _MBX_LESSON={}, _mbxCur=null, _MBX_SCAN={}, _MBX_AUTO={}, _MBX_PICK={};
 function mbxLoad(){
@@ -3116,6 +3161,8 @@ function mbxSpeakers(){
 function mbxPick(tid, name){ _MBX_PICK[tid]=name; render(); }
 function mbxBuildTyped(tid){ var i=document.getElementById('mbxAsk'); var v=(i&&i.value||'').trim(); if(v.length>2) mbxPick(tid, v); }
 function renderMech3d(t){
+  var pl=mbxPlateFor(t); if(pl) return renderPlateTutor(t, pl);
+  if(_mbpCur){ try{ _mbpCur.api.destroy(); }catch(e){} _mbpCur=null; }
   if(!mbxShow(t)) return '<div class="empty" style="text-align:left">No 3D Tutor for this topic yet.</div>';
   var tpl=mbxTemplateFor(t), pick=_MBX_PICK[t.id]||(tpl?'@'+tpl.id:null), scan=_MBX_SCAN[t.id];
   if(scan===undefined){ _MBX_SCAN[t.id]='pending'; mbxCall('/explainer/scan',{text:String(t.note||'').slice(0,60000)},3).then(function(j){ _MBX_SCAN[t.id]=j.mechanisms||[]; if((location.hash||'').indexOf(t.id)>=0&&topicTab==='mech3d') render(); }).catch(function(e){ _MBX_SCAN[t.id]={error:e.message}; if((location.hash||'').indexOf(t.id)>=0&&topicTab==='mech3d') render(); }); }
