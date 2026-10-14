@@ -61,6 +61,8 @@ html.mbx-linked .wrap{gap:10px!important;max-width:none!important;grid-template-
 html.mbx-linked .main{grid-template-columns:minmax(0,1fr)}@media (min-width:861px){html.mbx-linked .main{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}}
 html.mbx-linked .wrap>header,html.mbx-linked section.tutor{display:none!important}
 html.mbx-linked #stage{cursor:pointer}
+html.mbx-mini .ledger,html.mbx-mini .wrap>section:not(.main),html.mbx-mini .notes,html.mbx-mini .err,html.mbx-mini .legend,html.mbx-mini .lensbar{display:none!important}
+html.mbx-mini .main{border:0!important;background:transparent!important}html.mbx-mini .stage{border:0!important;padding:0!important}html.mbx-mini body{padding:0!important}
 .mbx-pop{position:absolute;z-index:20;width:min(250px,78%);background:var(--sheet);color:var(--ink);border:1px solid var(--hair);border-radius:12px;
  padding:11px 12px 12px;box-shadow:0 10px 30px rgba(0,0,0,.22);font:13px/1.45 var(--body)}
 .mbx-pop b{font-size:14.5px;display:block;padding-right:22px}.mbx-pop p{margin:6px 0 0;color:var(--muted)}
@@ -119,13 +121,14 @@ html.mbx-linked #stage{cursor:pointer}
       if (!id || !PARTS[id]) { closePop(); return; } showPop(id, ev.clientX, ev.clientY); up({ type: "mbx-tap", id, covered: !!PARTS[id].covered }); });
 
     /* ---- height + play state for the parent */
-    const report = () => up({ type: "mbx-height", h: Math.ceil(doc.documentElement.scrollHeight) });
+    // the content's own height (body), not scrollHeight: that never shrinks below the iframe's current height, so it could only ever grow
+    const report = () => { const b = doc.body, cs = getComputedStyle(b); up({ type: "mbx-height", h: Math.ceil(b.getBoundingClientRect().height + parseFloat(cs.marginTop) + parseFloat(cs.marginBottom)) }); };
     try { new ResizeObserver(report).observe(doc.body); } catch (_) { setInterval(report, 1000); }
     let wasPlaying = null; setInterval(() => { const p = A.isPlaying(); if (p !== wasPlaying) { wasPlaying = p; up({ type: "mbx-playing", on: p }); } }, 250);
 
     window.addEventListener("message", (e) => { const m = e.data || {}; if (typeof m.type !== "string" || m.type.indexOf("mbx-") !== 0) return;
       if (m.type === "mbx-link") { linked = true; PARTS = m.parts || {}; unlocked = new Set(m.unlocked || []); theme(!!m.dark);
-        doc.documentElement.classList.add("mbx-linked"); A.stopTutor(); index(); paint(); setTimeout(report, 50); }
+        doc.documentElement.classList.add("mbx-linked"); doc.documentElement.classList.toggle("mbx-mini", !!m.mini); A.stopTutor(); index(); paint(); setTimeout(report, 50); }
       else if (m.type === "mbx-show") { closePop(); A.stopTutor(); if (Array.isArray(m.win) && A.seekTime) A.seekTime(m.win[0]); else if (m.phase) A.goPhase(m.phase);
         if (A.lens) A.lens(m.lens || null); focus = new Set(m.focus || []); paint();
         if (m.speed) A.setSpeed(m.speed); A.setPlaying(m.play !== false); }

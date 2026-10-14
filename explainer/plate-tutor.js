@@ -19,7 +19,10 @@
  * expect), "what if" re-runs of the plate's own model (furosemide, no ADH …) offered only where the note mentions them —
  * at that stop and/or as switches — and plate questions at the end (tap a part, or move the parcel to a phase).
  *
- *   MBPlate.mount(host, { plate, note, getLesson, speak, stopSpeak, warm, isDark, loadProgress, saveProgress, whatifUI })  → { destroy }
+ * Reviews (feature 4): when the student finishes the full walk-through or exam revision, the note's exam questions are
+ * handed to the app (onCards) as review cards tied to their moment on the plate; MBPlate.replay() replays that moment.
+ *
+ *   MBPlate.mount(host, { plate, note, getLesson, speak, stopSpeak, warm, isDark, loadProgress, saveProgress, whatifUI, onCards })  → { destroy }
  *   MBPlate.match(text) → plate entry or null
  */
 (function () {
@@ -125,6 +128,10 @@ html[data-theme="dark"] .mbp-sheet{box-shadow:0 -10px 30px rgba(0,0,0,.5)}
 .mbp-offer{border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));background:color-mix(in srgb,var(--accent) 6%,var(--panel));border-radius:12px;padding:12px;display:grid;gap:8px}
 .mbp-src{font-size:11.5px;color:var(--dimmer)}.mbp-live{font:600 14px system-ui;color:var(--text);padding:8px 10px;border-radius:9px;background:color-mix(in srgb,var(--text) 5%,transparent)}
 html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-opt.right .k{color:#4ade80}html[data-theme="dark"] .mbp-opt.wrong .k{color:#f87171}
+.mbp-rp{display:grid;gap:6px;max-width:560px;margin:0 auto;width:100%}.mbp-rpstage{position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.mbp-rpstage iframe{display:block;width:100%;height:220px;border:0;background:transparent}.mbp-rpstage .mbp-load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:13px;background:var(--panel)}
+.mbp-rpbar{display:flex;align-items:center;gap:8px}.mbp-rpb{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:15px;cursor:pointer}
+.mbp-rpt{font:600 12px system-ui;color:var(--dimmer);font-variant-numeric:tabular-nums}.mbp-rpcap{font-size:12.5px;color:var(--dim);line-height:1.4}
 @media (prefers-reduced-motion:reduce){.mbp *{transition:none!important}}`;
 
   function mount(host, o) {
@@ -334,7 +341,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
           + `<div class="mbp-row">${t !== "exam" && has("exam") ? `<button class="mbp-btn p" data-next="exam">Exam revision</button>` : ""}${t === "exam" ? `<button class="mbp-btn p" data-next="exam">Try again</button>` : ""}<button class="mbp-btn" data-next="${t}">Replay</button><button class="mbp-btn" data-next="start">Other lengths</button></div>`; }
       if (!wide) sizeSpacer(); }
     function ask(k) { const s = st.stops[k]; st.exam = Object.assign(st.exam || { right: 0 }, { answered: null, replayed: false }); openPick("question"); post({ type: "mbx-play", on: false }); caption(s.quiz.q); say(s.quiz.q, () => {}); }
-    function answer(m) { const s = st.stops[st.k], ok = m === s.quiz.answer; st.exam.answered = m; if (ok) st.exam.right++; renderPick();
+    function answer(m) { const s = st.stops[st.k], ok = m === s.quiz.answer; st.exam.answered = m; if (ok) st.exam.right++; (st.exam.log = st.exam.log || {})[s.full] = ok; renderPick();
       saveProg({ k: st.k, exam: { right: st.exam.right, of: st.stops.length, at: st.k } }); try { o.onAnswer && o.onAnswer({ stop: s.full, ok }); } catch (_) {}
       say((ok ? "Right. " : "Not quite. ") + s.quiz.why, () => { if (!ok && st.picking === "question") { const tok = st.token; setTimeout(() => { if (tok !== st.token) return; const k = st.k; st.stops[k].replay = true; replayThenAsk(k); }, 500); } }); }
     function replayThenAsk(k) { // a wrong answer replays that stop, then offers "Next stop"
@@ -391,7 +398,15 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
       box.hidden = !(/chips|both/.test(wiUI) && ids.length && st.mode !== "loading");
       box.innerHTML = `<span class="lb">What if</span><button data-wi="normal" aria-pressed="${!st.wi}">Normal</button>` + ids.map((id) => `<button data-wi="${id}" aria-pressed="${st.wi === id}">${esc(whatifOf(id).label)}</button>`).join(""); sizeSpacer(); }
 
+    /* review cards: the note's exam questions, each tied to its stop's moment on the plate (feature 4) */
+    function giveCards(results) { if (!o.onCards || st.mode === "fallback" || !(st.lesson.exam || []).length) return;
+      const cards = st.lesson.exam.map((x) => { const s = st.full[x.stop] || {}, line = (s.lines || []).map((id) => lines[LI.get(id)]).find((l) => l && !l.h);
+        return { q: x.q, opts: x.options.slice(), ans: x.answer, a: x.why, src3d: P.id,
+          plate: { id: P.id, phase: s.phase || null, focus: s.focus || [], lens: s.lens || null, win: s.win || null, speed: s.speed || 0.5 },
+          caption: line ? "From your note: " + line.text : "", missed: results[x.stop] === false }; });
+      try { o.onCards(cards); } catch (e) { console.warn("[plate] onCards", e); } }
     function finish() { if (st.tier === "full" && (st.lesson.end || []).length && st.endQ == null) { st.endQ = { i: 0, right: 0 }; return askEnd(); }
+      if (st.tier === "full" || st.tier === "exam") giveCards(st.tier === "exam" && st.exam ? st.exam.log || {} : {});
       const p = loadProg() || {}; const d = Object.assign({}, p.done, { [st.tier]: true }); saveProg({ k: st.stops.length - 1, finished: st.tier, done: d }); openPick("done"); }
     st.voice = store.get("mbp-voice", st.voice);
     layout();
@@ -406,5 +421,29 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
     return { destroy, state: st, goStop, choose, openPick, ask, finish, runWhatif, offerWhatif, askEnd, onPick, lines };
   }
 
-  window.MBPlate = { PLATES, match, splitNote, mount };
+  /* ---------- review replay (feature 4): a stage-only plate that replays one moment for ~30 s, muted and data-light ----------
+   * MBPlate.replay(host, { plate, stop: {phase, focus, lens, win, speed}, seconds, caption, isDark, onEnd }) → { stop() } */
+  function replay(host, r) {
+    if (!document.getElementById("mbp-css")) { const st = document.createElement("style"); st.id = "mbp-css"; st.textContent = CSS; document.head.appendChild(st); }
+    const P = r.plate, secs = r.seconds || 30, s = r.stop || {};
+    host.innerHTML = `<div class="mbp-rp"><div class="mbp-rpstage"><iframe title="${esc(P.title)} — replay" loading="lazy"></iframe><div class="mbp-load">Loading the replay…</div></div>
+      <div class="mbp-rpbar"><button class="mbp-rpb" aria-label="Replay">↻</button><div class="mbp-pbar" style="flex:1;margin:0"><i style="width:0%"></i></div><span class="mbp-rpt">0:${String(secs).padStart(2, "0")}</span></div>
+      ${r.caption ? `<div class="mbp-rpcap">${esc(r.caption)}</div>` : ""}</div>`;
+    const frame = host.querySelector("iframe"), bar = host.querySelector(".mbp-pbar i"), tl = host.querySelector(".mbp-rpt"); let t0 = 0, timer = null, linked = false, gone = false;
+    const post = (m) => { try { frame.contentWindow.postMessage(m, "*"); } catch (_) {} };
+    function go() { if (!linked) return; post({ type: "mbx-show", phase: s.phase, focus: s.focus || [], lens: s.lens || null, win: s.win || null, speed: s.speed || 0.5, play: true }); t0 = Date.now(); clearInterval(timer);
+      timer = setInterval(() => { const e = (Date.now() - t0) / 1000; bar.style.width = Math.min(100, 100 * e / secs) + "%"; tl.textContent = "0:" + String(Math.max(0, Math.ceil(secs - e))).padStart(2, "0");
+        if (e >= secs) { clearInterval(timer); post({ type: "mbx-play", on: false }); r.onEnd && r.onEnd(); } }, 250); }
+    frame.addEventListener("load", () => { try { const d = frame.contentDocument, sc = d.createElement("script"); sc.src = BASE + "studio/tutor-link.js"; d.head.appendChild(sc); } catch (_) {} });
+    function onMsg(e) { if (e.source !== frame.contentWindow) return; const m = e.data || {};
+      if (m.type === "mbx-linked") { linked = true; const ld = host.querySelector(".mbp-load"); if (ld) ld.remove(); post({ type: "mbx-link", parts: {}, unlocked: [], dark: r.isDark ? r.isDark() : false, mini: true }); setTimeout(go, 80); }
+      else if (m.type === "mbx-height" && linked) frame.style.height = Math.max(160, m.h) + "px"; }
+    window.addEventListener("message", onMsg); frame.src = P.src; frame.style.height = Math.round((host.clientWidth || 340) * 640 / 760 + 10) + "px";
+    host.querySelector(".mbp-rpb").onclick = (e) => { e.stopPropagation(); go(); };
+    const watch = setInterval(() => { if (!host.isConnected) stop(); }, 1000);
+    function stop() { if (gone) return; gone = true; clearInterval(timer); clearInterval(watch); window.removeEventListener("message", onMsg); }
+    return { stop, again: go };
+  }
+
+  window.MBPlate = { PLATES, match, splitNote, mount, replay };
 })();

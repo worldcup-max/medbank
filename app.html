@@ -937,6 +937,8 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .pstep.on i{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent)22}
 .pstep.on span{color:var(--text);font-weight:700}
 .pline{flex:1;height:2px;background:var(--line);min-width:14px;margin-top:-16px}
+.mbprpbtn{display:flex;align-items:center;gap:8px;width:100%;border:1px dashed var(--line);background:var(--panel2);color:var(--accent);border-radius:12px;padding:12px 14px;font-weight:700;font-size:13.5px;margin:10px 0 12px;cursor:pointer;text-align:left}
+.mbprpbtn span{margin-left:auto;font-weight:500;color:var(--dimmer);font-size:12px}.mbprp{margin:10px 0 12px}
 </style>
 <style id="mb-polish">
   #sidebar{background:#efe9fb;border-right-color:#e3ddf1}
@@ -1927,8 +1929,19 @@ function buildQueue(){
   return { due:orderItems(due), neu, newTotal:neu.length };
 }
 /* ---- Visualize quiz misses become real recall cards (fed into the SRS deck) ---- */
-function mergeVizCards(){ try{ if(!DATA.vizCards)return; Object.keys(DATA.vizCards).forEach(function(tid){ var t=topById(tid); if(!t)return; t.recall=t.recall||[];
-  (DATA.vizCards[tid]||[]).forEach(function(card){ if(!t.recall.some(function(c){return c.q===card.q;})) t.recall.push(card); }); }); }catch(e){} }
+function mergeVizCards(){ try{ [DATA.vizCards, DATA.plateCards].forEach(function(store){ if(!store) return; Object.keys(store).forEach(function(tid){ var t=topById(tid); if(!t)return; t.recall=t.recall||[];
+  (store[tid]||[]).forEach(function(card){ if(!t.recall.some(function(c){return c.q===card.q;})) t.recall.push(card); }); }); }); }catch(e){} }
+/* ---- 3D Tutor review cards: the note's exam questions, each tied to its moment on a library plate (explainer/plate-tutor.js).
+ * Added when the student finishes the full walk-through or exam revision: first review tomorrow; one they missed comes back today. */
+function addPlateCards(topicId,cards){ try{ if(!topicId||!cards||!cards.length) return 0;
+  DATA.plateCards=DATA.plateCards||{}; var arr=DATA.plateCards[topicId]=DATA.plateCards[topicId]||[], t=topById(topicId), added=0, today=dayNum();
+  cards.forEach(function(card){ if(!card||!card.q||!card.opts) return; var c={q:card.q, opts:card.opts, ans:card.ans, a:card.a, plate:card.plate, caption:card.caption||'', src3d:card.src3d};
+    if(!arr.some(function(x){return x.q===c.q;})){ arr.push(c); added++; }
+    if(t){ t.recall=t.recall||[]; if(!t.recall.some(function(x){return x.q===c.q;})) t.recall.push(c); }
+    var id=cid(topicId,'recall',c), st=DATA.cards[id];
+    if(!st) DATA.cards[id]={box:0, due:card.missed?today:today+1, seen:today, ivl:card.missed?0:1, ease:2.5, reps:0, isNew:false};
+    else if(card.missed && st.due>today){ st.due=today; } });
+  persist(); return added; }catch(e){ return 0; } }
 function addVizCard(topicId,card){ try{ if(!topicId||!card||!card.q)return;
   DATA.vizCards=DATA.vizCards||{}; var arr=DATA.vizCards[topicId]=DATA.vizCards[topicId]||[];
   if(arr.some(function(x){return x.q===card.q;}))return; arr.push(card);
@@ -3094,7 +3107,7 @@ function mbpTabNote(t){ try{ var p=(DATA.tutor||{})[t.id]; if(!p) return ''; if(
 function mbpLoad(){
   if(window.MBPlate&&window.MBPlate.mount) return Promise.resolve(window.MBPlate);
   if(_mbpLoad) return _mbpLoad;
-  _mbpLoad=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='explainer/plate-tutor.js?v=1.1.0'; s.async=true;
+  _mbpLoad=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='explainer/plate-tutor.js?v=1.2.0'; s.async=true;
     s.onload=function(){ window.MBPlate?res(window.MBPlate):rej(new Error('3D Tutor failed to start')); };
     s.onerror=function(){ _mbpLoad=null; rej(new Error('Could not download the 3D Tutor — check your connection.')); };
     document.head.appendChild(s); });
@@ -3119,6 +3132,7 @@ function renderPlateTutor(t, pl){
         warm:function(lines){ try{ (lines||[]).forEach(function(l){ window.warmSpeak&&window.warmSpeak(l,'read'); }); }catch(e){} },
         isDark:function(){ return document.documentElement.getAttribute('data-theme')==='dark'; },
         progressKey:t.id,
+        onCards:function(cards){ try{ touchTopic(t.id); }catch(e){} var n=addPlateCards(t.id,cards); if(n){ try{ mbToast(n+' card'+(n===1?'':'s')+' from this lesson added to your reviews — first one tomorrow.'); }catch(e){} } },
         loadProgress:function(){ return (DATA.tutor||{})[t.id]||null; },
         saveProgress:function(p){ DATA.tutor=DATA.tutor||{}; DATA.tutor[t.id]=p; clearTimeout(_mbpSaveT); _mbpSaveT=setTimeout(function(){ try{ persist(); }catch(e){} },1500); } });
       _mbpCur={tid:t.id, api:api};
@@ -5762,6 +5776,7 @@ function startBucket(k){
   go('review');
 }
 function startRecallSession(limit){
+  try{ mergeVizCards(); }catch(e){}
   const b=buildRecallSession();
   let items=b.capped.concat(b.conf);                    // priority order: hard → reviews → new → confidence
   if(limit&&limit>0&&items.length>limit) items=items.slice(0,limit);   // size-limited session keeps the most important cards
@@ -6418,6 +6433,7 @@ function mcqView(session){
       <div class="qlabel">${c.img?'Look at this — then answer':'Question'}${session?' · '+esc(t.subject.short):''}</div>
       <div class="q">${esc(c.q)}</div>
       ${c.img?`<div onclick="event.stopPropagation()">${imgBlock(c.img,c.imgCaption||'')}</div>`:''}
+      ${c.plate?mbpReviewSlot(it.id,c,picked):''}
       ${body}</div>
     ${picked?noteBlock(it):''}
     ${(c.src&&picked)?`<div style="text-align:center;margin-top:10px"><button onclick="event.stopPropagation();try{MB_DOCK_SOURCE()}catch(e){}" style="border:1px solid var(--line);background:var(--panel2);color:var(--accent);border-radius:999px;padding:6px 13px;font-weight:700;font-size:12.5px;cursor:pointer">${c.src_t!=null?('🎙 '+Math.floor(c.src_t/60)+':'+String(c.src_t%60).padStart(2,'0')+' · in the lecture'):'📄 Show in the note'}</button></div>`:''}
@@ -6484,6 +6500,20 @@ function cardView(session){
     ${(c.src&&S.show)?`<div style="text-align:center;margin-top:10px"><button onclick="event.stopPropagation();try{MB_DOCK_SOURCE()}catch(e){}" style="border:1px solid var(--line);background:var(--panel2);color:var(--accent);border-radius:999px;padding:6px 13px;font-weight:700;font-size:12.5px;cursor:pointer">${c.src_t!=null?('🎙 '+Math.floor(c.src_t/60)+':'+String(c.src_t%60).padStart(2,'0')+' · in the lecture'):'📄 Show in the note'}</button></div>`:''}
     ${cardActionsRow(it.id,it.deck)}
     ${controls}</div>`;
+}
+
+/* ---- 3D Tutor review cards: an optional 30-second replay of the card's moment before answering; after answering it
+ * plays as the explanation. The plate only downloads when it is shown (data-light). ---- */
+var _mbpRP={open:null, api:null};
+function mbpReviewSlot(id,c,picked){
+  var show = picked || _mbpRP.open===id, where=(c.plate&&c.plate.phase)||'';
+  if(!show) return `<button class="mbprpbtn" onclick="event.stopPropagation();_mbpRP.open='${id}';render()">▶ Watch the 30-second replay first <span>${esc(where.toLowerCase())}</span></button>`;
+  setTimeout(function(){ var host=document.getElementById('mbpRP'); if(!host||host.dataset.card===id) return; host.dataset.card=id;
+    mbpLoad().then(function(P){ if(!host.isConnected) return; var plate=P.PLATES.filter(function(x){return x.id===c.plate.id;})[0];
+      if(!plate){ host.innerHTML='<div class="empty" style="text-align:left">This plate is not in the library any more.</div>'; return; }
+      _mbpRP.api=P.replay(host,{ plate:plate, stop:c.plate, seconds:30, caption:c.caption||'', isDark:function(){ return document.documentElement.getAttribute('data-theme')==='dark'; } });
+    }).catch(function(e){ if(host.isConnected) host.innerHTML='<div class="empty" style="text-align:left">'+esc(e.message)+'</div>'; }); },0);
+  return `<div id="mbpRP" class="mbprp" onclick="event.stopPropagation()"><div class="empty">Loading the replay…</div></div>`;
 }
 
 /* ---- MCQ interaction (Recall cards with options) ---- */
