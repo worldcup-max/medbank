@@ -12,12 +12,12 @@ window.MEDBANK_CONFIG = {
   // Require sign-in before the app can be used (identified pilot). Set false to revert to study-first.
   REQUIRE_LOGIN: false,
 
-  // From Paystack → Settings → API Keys (use the PUBLIC key: pk_...)
-  PAYSTACK_PUBLIC_KEY: "pk_test_XXXXXXXXXXXXXXXXXXXX",
-
-  // Optional: a Paystack Plan code (create a monthly plan in Paystack → Plans).
-  // Leave "" to charge a one-off amount instead of a recurring plan.
-  PAYSTACK_PLAN_MONTHLY: "",
+  // Payments (Paystack). The import server opens and confirms every payment, so no Paystack
+  // key goes in this file: set PAYSTACK_SECRET_KEY (sk_live_… or sk_test_…) on the server
+  // (Render → Environment). Prices and optional recurring plan codes live there too
+  // (PRICE_NGN_*, PAYSTACK_PLAN_*); see import-server/README.md → Payments.
+  // ENABLED:false shows "Subscriptions open soon" instead of the checkout.
+  PAYMENTS: { ENABLED: true, PAYSTACK_INLINE_JS: "https://js.paystack.co/v2/inline.js" },
 
   // 60-second tutorial video. Paste a YouTube link (any form) or a direct .mp4 URL.
   // Leave "" to show a styled "coming soon" placeholder.
@@ -53,7 +53,7 @@ window.MEDBANK_CONFIG = {
 
   // The import server URL (Phase 5) — used by the app's Import tab. e.g. https://medbank-api.onrender.com
   IMPORT_API: "https://medbank-import.onrender.com",
-  // Your website URL — paywall nudges link here for subscribing.
+  // Your website URL — the subscribe fallback (its #pricing section) when the in-app checkout isn't loaded.
   WEBSITE_URL: "https://medbank.com.ng",
 
   // Where the installable app lives (fill in when the apps are published)
@@ -63,7 +63,7 @@ window.MEDBANK_CONFIG = {
     pwa: "https://worldcup-max.github.io/medbank/"  // the current PWA, installable now
   },
 
-  // Fallback prices in Naira if app_config can't be read (kept in sync with seed.sql)
+  // Fallback prices in Naira, shown only if the server's /plans can't be reached (the server's prices are what's charged)
   PRICES_NGN: { monthly: 2000, semester: 8000, annual: 15000 },
   TRIAL_DAYS: 14,
 

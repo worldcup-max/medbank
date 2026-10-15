@@ -19,5 +19,9 @@ services:
         sync: false            # console.anthropic.com. KEEP SECRET.
       - key: PAYSTACK_SECRET_KEY
         sync: false            # Paystack → Settings → API Keys (sk_...). KEEP SECRET. (optional until you charge)
+      - key: APP_URL
+        value: https://medbank.com.ng/app.html   # where Paystack returns students after paying
+      - key: PAYSTACK_PLAN_MONTHLY
+        sync: false            # optional: a Paystack Plan code (PLN_...) to make monthly auto-renew. Leave unset for one-off payments.
       - key: ALLOWED_ORIGINS
         sync: false            # comma-separated, e.g. https://worldcup-max.github.io,https://your-website

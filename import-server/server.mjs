@@ -6,11 +6,15 @@
  *
  * Endpoints:
  *   POST /import          — auth + gate + generate + validate + save topic
- *   POST /paystack/webhook— verify payment, flip subscription to active
+ *   GET  /plans           — prices for the in-app checkout
+ *   POST /paystack/checkout— open a Paystack transaction for the signed-in student
+ *   GET  /paystack/verify  — confirm a payment the moment the student returns
+ *   POST /paystack/webhook— charges, renewals and cancellations (see payments.mjs)
  *   GET  /health
  *
  * Env (set on the host):
  *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, ANTHROPIC_API_KEY, PAYSTACK_SECRET_KEY
+ *   optional: APP_URL, PAYSTACK_PLAN_MONTHLY/_SEMESTER/_ANNUAL, PRICE_NGN_MONTHLY/_SEMESTER/_ANNUAL
  *
  * Setup:  npm i express @supabase/supabase-js @anthropic-ai/sdk pdf-parse
  * Run:    node server.mjs
@@ -29,6 +33,7 @@ import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPla
 import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
+import { loadPlans, isActiveSub, verifySignature, handleEvent, startCheckout, verifyReference } from "./payments.mjs";
 import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
@@ -90,11 +95,11 @@ async function getUser(req){
 /* test override: emails in PREMIUM_TEST_EMAILS (comma-separated) count as premium — for building/QA only */
 const PREMIUM_TEST = (process.env.PREMIUM_TEST_EMAILS||"").toLowerCase().split(",").map(s=>s.trim()).filter(Boolean);
 async function isPremium(account_id, emailHint){ try{
-  const s=await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
+  const s=await admin.from("subscriptions").select("*").eq("account_id",account_id).maybeSingle();
   // ENT-04: maybeSingle() RETURNS an error, it doesn't throw — so a DB blip silently downgraded a
   // paying subscriber to Basic ("Solve is a premium feature — subscribe") with nothing in the logs.
   if(s.error) console.error("[isPremium] subscriptions read FAILED for %s — treating as NOT premium: %s", account_id, s.error.message||s.error);
-  if(s.data && s.data.status==="active") return true;
+  if(isActiveSub(s.data)) return true;                       // active AND the paid period hasn't ended. select("*") so this works before and after backend/payments.sql
   if(PREMIUM_TEST.length){                                   // only runs when a test list is set (empty in production)
     // Prefer the caller's auth-token email (always present); only hit the accounts table
     // if no hint was passed. This fixes premium test-accounts whose accounts.email row is blank.
@@ -1189,7 +1194,10 @@ app.get("/me", async (req,res)=>{
   try{ const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
     const premium = await isPremium(user.id, user.email).catch(()=>false);
     const isTest = PREMIUM_TEST.length>0 && PREMIUM_TEST.indexOf((user.email||"").toLowerCase())>=0;
-    res.json({ ok:true, email:user.email||"", premium, test:(premium && isTest) });
+    const sub = await admin.from("subscriptions").select("*").eq("account_id",user.id).maybeSingle();
+    const s = (premium && sub.data) || {};
+    res.json({ ok:true, email:user.email||"", premium, test:(premium && isTest),
+               plan:s.plan||null, current_period_end:s.current_period_end||null, auto_renew:!!s.auto_renew });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 
@@ -1303,8 +1311,8 @@ app.post("/import", async (req,res)=>{
     const pt = { data: await loadImportPrompt(level) };
     if(!pt.data){ await admin.from("imports").update({ status:"failed", error:"no active prompt" }).eq("id",importId); return res.status(500).json({ error:"no active prompt" }); }
     // IMPORT BUILD ONLY — the one place tiering applies: basic → Flash, premium → Pro
-    const paid = await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
-    let model = (paid.data && paid.data.status==="active") ? PREMIUM_MODEL : BASIC_MODEL;
+    const paid = await admin.from("subscriptions").select("*").eq("account_id",account_id).maybeSingle();
+    let model = isActiveSub(paid.data) ? PREMIUM_MODEL : BASIC_MODEL;
     // admins may override the model per import (for A/B testing)
     if(req.body.model){ const adm = await admin.from("accounts").select("is_admin").eq("id",account_id).maybeSingle(); if(adm.data && adm.data.is_admin) model = req.body.model; }
 
@@ -3116,36 +3124,60 @@ app.get("/admin/targets/near-miss", async (req,res)=>{
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 
-/* ---- Paystack webhook: confirm a payment server-side and activate the sub ---- */
-app.post("/paystack/webhook", async (req,res)=>{
+/* ---- Payments (Paystack) — logic in payments.mjs ---- */
+const PLANS = loadPlans();
+const PAYSTACK_SECRET = process.env.PAYSTACK_SECRET_KEY || "";
+/* Where Paystack sends the student back after paying. Only our own origins are accepted. */
+function checkoutReturnUrl(asked){
+  const fallback = process.env.APP_URL || "https://medbank.com.ng/app.html";
   try{
-    const sig = req.headers["x-paystack-signature"];
-    const hash = crypto.createHmac("sha512", process.env.PAYSTACK_SECRET_KEY).update(req.body).digest("hex");
-    if(hash !== sig) return res.status(401).end();
-    const event = JSON.parse(req.body.toString("utf8"));
-    if(event.event === "charge.success" || event.event === "subscription.create"){
-      const email = event.data && (event.data.customer && event.data.customer.email);
-      if(!email) console.error("[paystack] %s with NO customer email — payment cannot be matched to an account:", event.event, JSON.stringify(event.data||{}).slice(0,400));
-      if(email){
-        // ENT-01: the lookup was case/whitespace-sensitive while isPremium lowercases everywhere,
-        // and a miss was silent — the student paid and stayed Basic with nothing in the logs.
-        const norm = String(email).trim().toLowerCase();
-        let acc = await admin.from("accounts").select("id").eq("email", email).maybeSingle();
-        if(!acc.data && norm !== email) acc = await admin.from("accounts").select("id").eq("email", norm).maybeSingle();
-        if(!acc.data){
-          console.error("[paystack] PAID BUT UNMATCHED — no accounts row for %s (event %s). Grant this subscription by hand.", norm, event.event);
-        } else {
-          // .update() matching zero rows is a silent success — if the account has no subscriptions
-          // row yet, the payment vanished. .select() lets us see the row count and shout about it.
-          const up = await admin.from("subscriptions").update({ status:"active", plan:"monthly" }).eq("account_id", acc.data.id).select("account_id");
-          if(up.error) console.error("[paystack] PAID BUT NOT ACTIVATED — subscriptions update failed for account %s (%s): %s", acc.data.id, norm, up.error.message||up.error);
-          else if(!up.data || !up.data.length) console.error("[paystack] PAID BUT NOT ACTIVATED — no subscriptions row exists for account %s (%s); the update matched 0 rows. Insert one by hand.", acc.data.id, norm);
-          else console.log("[paystack] subscription active for account %s (%s)", acc.data.id, norm);
-        }
-      }
-    }
+    const u = new URL(asked||"");
+    const okOrigin = ALLOWED[0]==="*" ? /(^|\.)medbank\.com\.ng$|^worldcup-max\.github\.io$|^localhost$/.test(u.hostname) : ALLOWED.includes(u.origin);
+    return (okOrigin && /^https?:$/.test(u.protocol)) ? u.href : fallback;
+  }catch(_){ return fallback; }
+}
+
+app.get("/plans", (req,res)=>{
+  res.json({ ok:true, enabled:!!PAYSTACK_SECRET, plans:Object.values(PLANS).map(p=>({ id:p.id, label:p.label, months:p.months, ngn:p.ngn, recurring:!!p.planCode })) });
+});
+
+app.post("/paystack/checkout", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    if(!PAYSTACK_SECRET) return res.status(503).json({ error:"Payments aren't switched on yet." });
+    const out = await startCheckout({ user, planId:String((req.body||{}).plan||""), callbackUrl:checkoutReturnUrl((req.body||{}).return_url), plans:PLANS, secret:PAYSTACK_SECRET });
+    console.log("[paystack] checkout opened %s for %s (%s)", out.reference, user.id, out.plan);
+    res.json({ ok:true, ...out });
+  }catch(e){ console.error("[paystack] checkout failed:", e.message); res.status(e.status===400?400:502).json({ error:e.status===400 ? e.message : "Couldn't reach Paystack. Try again in a moment." }); }
+});
+
+app.get("/paystack/verify", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    if(!PAYSTACK_SECRET) return res.status(503).json({ error:"Payments aren't switched on yet." });
+    const out = await verifyReference({ db:admin, user, reference:String(req.query.reference||""), plans:PLANS, secret:PAYSTACK_SECRET });
+    if(!out.paid) console.warn("[paystack] verify %s for %s: %s %s", req.query.reference, user.id, out.status, out.reason||"");
+    res.json({ ok:true, ...out });
+  }catch(e){ console.error("[paystack] verify failed:", e.message); res.status(e.status===400?400:502).json({ error:e.status===400 ? e.message : "Couldn't confirm the payment yet. It will still count once Paystack tells us." }); }
+});
+
+/* Webhook: answers 500 when the database can't apply a payment, so Paystack retries
+   (for up to 72h). Applying is idempotent per reference, so retries never double-count. */
+app.post("/paystack/webhook", async (req,res)=>{
+  if(!verifySignature(req.body, req.headers["x-paystack-signature"], PAYSTACK_SECRET)) return res.status(401).end();
+  let event;
+  try{ event = JSON.parse(req.body.toString("utf8")); }catch(_){ return res.status(400).end(); }
+  try{
+    const out = await handleEvent(admin, event, PLANS);
+    const ref = event.data && event.data.reference;
+    if(out.skipped && event.event==="charge.success")
+      console.error("[paystack] PAID BUT NOT APPLIED — %s (ref %s, %s). Grant by hand if this is a real student.", out.skipped, ref, event.data && event.data.customer && event.data.customer.email);
+    else console.log("[paystack] %s %s", event.event, JSON.stringify(out));
     res.status(200).end();
-  }catch(e){ console.error(e); res.status(200).end(); }   // always 200 so Paystack stops retrying
+  }catch(e){
+    console.error("[paystack] %s FAILED, Paystack will retry: %s", event.event, e.message);
+    res.status(500).end();
+  }
 });
 
 const PORT = process.env.PORT || 8787;

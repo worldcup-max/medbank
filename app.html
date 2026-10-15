@@ -7211,12 +7211,14 @@ async function loadPlanBadge(){
     var ses=await window.__mbSB.auth.getSession(); var tok=ses.data.session&&ses.data.session.access_token; if(!tok){ el.textContent='—'; return; }
     var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/me',{headers:{'Authorization':'Bearer '+tok}});
     var j=await r.json().catch(function(){return{};}); el=document.getElementById('planBadge'); if(!el)return;
-    if(r.ok && j.premium){ el.className='planbadge prem'; el.textContent=j.test?'★ Premium · test':'★ Premium'; }
+    if(r.ok && j.premium){ el.className='planbadge prem'; el.style.cursor=''; el.title=''; el.onclick=null;
+      var until=j.current_period_end?new Date(j.current_period_end).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'';
+      el.textContent=j.test?'★ Premium · test':('★ Premium'+(until?(j.auto_renew?' · renews ':' · until ')+until:'')); }
     else if(r.ok){ el.className='planbadge free'; el.textContent='Basic · Upgrade →';
       /* ENT-07: the Plan row used to describe Premium with no way to buy it — the only subscribe
          route in the app was paywall.js, reachable only by hitting a wall. Same target as that nudge. */
       el.style.cursor='pointer'; el.title='See plans and subscribe';
-      el.onclick=function(){ try{ var C=window.MEDBANK_CONFIG||{}; window.open((C.WEBSITE_URL||(C.DOWNLOAD&&C.DOWNLOAD.pwa)||'#')+'#pricing','_blank'); }catch(e){} }; }
+      el.onclick=function(){ try{ if(window.MB_CHECKOUT) return MB_CHECKOUT.open(); var C=window.MEDBANK_CONFIG||{}; window.open((C.WEBSITE_URL||(C.DOWNLOAD&&C.DOWNLOAD.pwa)||'#')+'#pricing','_blank'); }catch(e){} }; }
     else { el.textContent='—'; }
   }catch(e){ if(el)el.textContent='—'; }
 }
@@ -8269,6 +8271,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 <script src="sync.js"></script>
 <script src="level-switcher.js"></script>
 <script src="paywall.js"></script>
+<script src="checkout.js"></script>
 <script src="import-tab.js"></script>
 <script src="lecture-record.js"></script>
 <script src="study-timer.js"></script>
