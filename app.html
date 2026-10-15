@@ -1252,7 +1252,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.21s';   // bump this each release
+const APP_VERSION='2026.10.15a';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -5521,6 +5521,7 @@ async function iwReadiness(){ try{ var r=await admApi('/admin/integrated/readine
 async function iwFetchPending(){ try{ var r=await admApi('/admin/integrated/pending'); var el=document.getElementById('iwPending'); if(!el)return;
   if(!r.ok){ el.textContent='Could not load: '+((r.data&&r.data.error)||'?'); return; }
   var items=(r.data&&r.data.items)||[]; if(!items.length){ el.innerHTML='<p class="sub">Nothing pending review. Transform or mine to create candidates.</p>'; return; }
+  window.__iwItems={}; items.forEach(function(it){ window.__iwItems[it.id]=it; });
   el.innerHTML=items.map(iwCard).join('');
 }catch(e){ } }
 function iwCard(it){ var tc=it.transformed_content||{}, ev=it.dependency_evidence||{}, qav=it.qa||{};
@@ -5537,6 +5538,7 @@ function iwCard(it){ var tc=it.transformed_content||{}, ev=it.dependency_evidenc
   var qaIn=qa.map(function(k){ return '<label class="iw-qa">'+k[0]+'<input type="number" min="0" max="'+k[1]+'" value="'+k[1]+'" id="qa_'+id+'_'+k[0]+'"></label>'; }).join('');
   return '<div class="card iw-item" style="cursor:default;margin-bottom:10px">'
     +'<div class="iw-h"><b>'+esc(it.integration_family||'?')+'</b> · '+esc(it.integration_type||'')+' · '+esc(it.primary_topic||'')+' → '+esc((it.integrated_topics||[]).join(', '))+' <span class="iw-st">'+esc(it.review_status)+'</span></div>'
+    +((it.queue_priority&&it.queue_priority.family_shortfall)?('<div class="iw-pri">'+esc(it.integration_family||'?')+' needs '+it.queue_priority.family_shortfall+' more approved ('+it.queue_priority.family_approved+'/10)</div>'):'')
     +(tc.stem?('<div class="iw-stem">'+esc(tc.stem)+'</div>'+'<div class="iw-opts">'+opts+'</div>'):'<div class="sub">(no transformed content — original question)</div>')
     +'<div class="iw-dep"><b>Dependency:</b> '+esc(it.integration_dependency||'')+'</div>'
     +'<div class="iw-checks">'+checks+'</div>'
@@ -5545,8 +5547,33 @@ function iwCard(it){ var tc=it.transformed_content||{}, ev=it.dependency_evidenc
     +'<div class="iw-qarow"><span class="sub">QA:</span> '+qaIn+'</div>'
     +'<div class="btnrow" style="gap:8px;margin-top:6px"><button class="btn primary sm" onclick="iwReview(\''+id+'\',\'approve\')">Approve</button>'
     +'<button class="btn sm" onclick="iwReview(\''+id+'\',\'edit\')">Needs edit</button>'
-    +'<button class="btn sm" style="color:#c0392b" onclick="iwReview(\''+id+'\',\'reject\')">Reject</button></div></div>';
+    +'<button class="btn sm" style="color:#c0392b" onclick="iwReview(\''+id+'\',\'reject\')">Reject</button>'
+    +(tc.stem?'<button class="btn sm" onclick="iwEditToggle(\''+id+'\')">✏️ Edit &amp; resubmit</button>':'')+'</div>'
+    +'<div id="iwEd_'+id+'" class="iw-edit" style="display:none"></div></div>';
 }
+/* needs_edit → resubmit: edit the candidate here; the server re-runs the four reviewers and puts it back in this queue. */
+function iwEditToggle(id){ var box=document.getElementById('iwEd_'+id); if(!box) return;
+  if(box.style.display!=='none'){ box.style.display='none'; box.innerHTML=''; return; }
+  var it=(window.__iwItems||{})[id]||{}, tc=it.transformed_content||{}, opts=(tc.options||[]).slice(), rat=tc.rationales||[];
+  while(opts.length<4) opts.push('');
+  box.innerHTML='<label class="sub">Stem</label><textarea id="iwEdS_'+id+'" class="sbox" rows="6">'+esc(tc.stem||'')+'</textarea>'
+    +opts.map(function(o,j){ return '<div class="iw-edopt"><label><input type="radio" name="iwEdA_'+id+'" value="'+j+'"'+(j===tc.answer?' checked':'')+'> '+qbLetter(j)+'</label>'
+      +'<input id="iwEdO_'+id+'_'+j+'" class="sbox" value="'+esc(o)+'" placeholder="Option '+qbLetter(j)+'">'
+      +'<input id="iwEdR_'+id+'_'+j+'" class="sbox iw-edrat" value="'+esc(rat[j]||'')+'" placeholder="Why '+qbLetter(j)+' is right/wrong"></div>'; }).join('')
+    +'<label class="sub">Why the second domain is needed</label><textarea id="iwEdD_'+id+'" class="sbox" rows="2">'+esc(it.integration_dependency||'')+'</textarea>'
+    +'<div class="sub" style="margin:4px 0">Saving re-runs the four AI reviewers on your version. It comes back here to approve, or is rejected if they find a hard error.</div>'
+    +'<div class="btnrow" style="gap:8px"><button class="btn primary sm" onclick="iwEditSave(\''+id+'\',this,'+opts.length+')">Save &amp; re-review</button>'
+    +'<button class="btn sm" onclick="iwEditToggle(\''+id+'\')">Cancel</button></div>';
+  box.style.display='';
+}
+async function iwEditSave(id, btn, n){ var v=function(x){ var el=document.getElementById(x); return el?el.value:''; };
+  var options=[], rationales=[]; for(var j=0;j<n;j++){ options.push(v('iwEdO_'+id+'_'+j)); rationales.push(v('iwEdR_'+id+'_'+j)); }
+  var a=document.querySelector('input[name="iwEdA_'+id+'"]:checked'); if(!a){ mbToast('Pick the correct answer.'); return; }
+  if(btn){ btn.disabled=true; btn.textContent='Re-reviewing…'; }
+  try{ var r=await admApi('/admin/integrated/edit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id, stem:v('iwEdS_'+id), options:options, answer:parseInt(a.value,10), rationales:rationales, dependency:v('iwEdD_'+id)})});
+    if(r.ok){ mbToast(r.data.review_status+(r.data.reason?(' — '+r.data.reason):' — clean')); iwReadiness(); iwFetchPending(); }
+    else { mbToast('Failed: '+((r.data&&r.data.error)||'?')); if(btn){ btn.disabled=false; btn.textContent='Save & re-review'; } } }
+  catch(e){ mbToast('Failed: '+(e.message||e)); if(btn){ btn.disabled=false; btn.textContent='Save & re-review'; } } }
 async function iwReview(id, action){ var qa=null;
   if(action==='approve'){ qa={}; ['dependency','coherence','educational','discrimination','targetClarity','difficulty','noArtificialComplexity'].forEach(function(k){ var el=document.getElementById('qa_'+id+'_'+k); qa[k]=el?parseInt(el.value,10)||0:0; }); }
   try{ var r=await admApi('/admin/integrated/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id, action:action, qa:qa})});
@@ -8353,6 +8380,12 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .iw-stem{font-size:13.5px;margin:4px 0}
 .iw-opt{font-size:12.5px;padding:2px 0}
 .iw-opt.r{color:#0a9d55;font-weight:600}
+.iw-pri{font-size:12px;color:#c77800;margin:2px 0}
+.iw-edit{margin-top:8px;border-top:1px solid var(--line,#ddd);padding-top:8px}
+.iw-edit textarea{width:100%;box-sizing:border-box}
+.iw-edopt{display:flex;gap:6px;align-items:center;margin:4px 0;flex-wrap:wrap}
+.iw-edopt .sbox{flex:1 1 200px;min-width:0}
+.iw-edopt .iw-edrat{flex-basis:100%}
 .iw-dep{font-size:12.5px;margin:6px 0;color:var(--dim)}
 .iw-checks span,.iw-checks span{font-size:11.5px;margin-right:8px}
 .iw-checks .ok{color:#0a9d55}

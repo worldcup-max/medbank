@@ -29,7 +29,7 @@ import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPla
 import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
-import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
+import { runCandidate, applyHumanReview, resubmitEdited, reviewQueueOrder, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -2875,7 +2875,9 @@ app.post("/admin/integrated/minedebug", async (req,res)=>{
 app.get("/admin/integrated/pending", async (req,res)=>{
   try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
     const r=await admin.from("integrated_items").select("*").in("review_status",["ai_reviewed","needs_edit"]).order("created_at",{ascending:true}).limit(200);
-    res.json({ ok:true, items:r.data||[] });
+    // shortest families first, so each review moves the readiness gate as far as it can
+    const ap=await admin.from("integrated_items").select("integration_family").eq("review_status","approved");
+    res.json({ ok:true, items:reviewQueueOrder(r.data||[], ap.data||[]) });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 app.post("/admin/integrated/review", async (req,res)=>{
@@ -2889,6 +2891,29 @@ app.post("/admin/integrated/review", async (req,res)=>{
     const updated=applyHumanReview(cur.data, action, qa, (user.email||user.id));
     await admin.from("integrated_items").update({ review_status:updated.review_status, qa:updated.qa||null, reviewer:updated.reviewer||null, reviewed_at:updated.reviewed_at||new Date().toISOString() }).eq("id",id);
     res.json({ ok:true, review_status:updated.review_status, reason:updated.reason||null });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/admin/integrated/edit", async (req,res)=>{
+  /* needs_edit → resubmit: save a human edit and re-run the frozen R1–R4 reviewers on it. Lands in ai_reviewed (or
+     rejected on a hard fail); never approved — /admin/integrated/review stays the only route there. */
+  try{
+    const user=await requireAdmin(req); if(!user) return res.status(403).json({ error:"admins only" });
+    const b=req.body||{}; if(!b.id) return res.status(400).json({ error:"id required" });
+    const cur=await admin.from("integrated_items").select("*").eq("id",b.id).maybeSingle();
+    const out=await resubmitEdited(cur.data, b, { adversarial:a17Adversarial, clinical:a17ClinicalReview, sba:a17SbaReview }, (user.email||user.id));
+    if(!out.ok) return res.status(cur.data?400:404).json({ error:out.error });
+    const up=out.update;
+    // same advisory diversity layer as /transform, against the rest of the family (not itself)
+    if(up.review_status!=="rejected"){
+      const cx=await admin.from("integrated_items").select("id,integration_family,transformed_content").eq("integration_family",cur.data.integration_family).neq("id",b.id).limit(500);
+      const corpus=(cx.data||[]).map(r=>({ id:r.id, integration_family:r.integration_family, stem:(r.transformed_content||{}).stem, options:(r.transformed_content||{}).options||[], answer:(r.transformed_content||{}).answer }));
+      const c=up.transformed_content, diversity=diversitySignal({ stem:c.stem, options:c.options, answer:c.answer, integration_family:cur.data.integration_family }, corpus);
+      up.qa=Object.assign({}, up.qa, { diversity });
+      if(diversity.tier==="exact"){ up.review_status="rejected"; out.reason=(out.reason?out.reason+" | ":"")+"exact duplicate of "+(diversity.matched||"existing item"); }
+    }
+    const w=await admin.from("integrated_items").update(up).eq("id",b.id);
+    if(w.error) return res.status(500).json({ error:w.error.message });
+    res.json({ ok:true, review_status:up.review_status, severity:out.severity||null, reason:out.reason||null });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 app.get("/admin/integrated/readiness", async (req,res)=>{
