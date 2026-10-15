@@ -8297,6 +8297,10 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 } }catch(e){} });
 /* safety: never let the "Loading your notes…" state stick if content can't load */
 setTimeout(function(){ if(!window.__MB_CONTENT_READY){ window.__MB_CONTENT_READY=true; try{ mbSoftRender(); }catch(e){} } },9000);
+/* Wake the AI server as soon as the app opens. On Render's free plan it sleeps after 15 quiet minutes
+   and takes about a minute to wake, so starting now means it is usually up by the time a student
+   taps Import, Podcast or Ask. Fire-and-forget: no-cors, result ignored. */
+try{ var __mbApi=(window.MEDBANK_CONFIG||{}).IMPORT_API; if(__mbApi) fetch(__mbApi.replace(/\/$/,'')+'/health',{mode:'no-cors',cache:'no-store'}).catch(function(){}); }catch(e){}
 /* admin: check whether the free Kokoro voice is up (so basic tier isn't silently spending Fish credits) */
 setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }catch(e){} },6000);
 /* ============================================================
