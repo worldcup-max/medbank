@@ -18,7 +18,8 @@
     return base.replace(/#.*$/, "") + "#pricing";
   }
 
-  // nudge(title, msg, cta, onCta) — onCta defaults to opening the pricing page.
+  // nudge(title, msg, cta, onCta) — onCta defaults to the in-app checkout (checkout.js),
+  // or the website's pricing section if checkout.js isn't loaded.
   function nudge(title, msg, cta, onCta){
     if(typeof document === "undefined" || !document.body) return;
     if(document.getElementById(NUDGE_ID)) return;                                 // PW-09: singleton
@@ -45,6 +46,7 @@
     go.style.cssText="width:100%;border:0;background:var(--brand,#4f46e5);color:#fff;border-radius:12px;padding:13px;font-weight:800;cursor:pointer;font-size:15px";
     go.onclick=function(){
       if(typeof onCta==="function"){ try{ onCta(); }catch(e){} close(); return; }               // PW-03: archived → level switcher
+      if(window.MB_CHECKOUT){ close(); window.MB_CHECKOUT.open(); return; }                     // in-app Paystack checkout
       var u=pricingURL(), w=null;                                                                // PW-06/07: reliable navigation
       try{ w=window.open(u,"_blank"); }catch(e){}
       if(!w){ try{ location.href=u; }catch(e){} }

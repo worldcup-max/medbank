@@ -16,9 +16,7 @@ never in the app.
 6. Saves the `topic` + `cards` (with the app's exact `card_key` scheme) and records the
    import + usage for metering.
 
-`POST /paystack/webhook`: verifies Paystack's signature with your secret key and flips the
-subscription to `active` — the trustworthy, server-side confirmation the website's optimistic
-checkout needs.
+Payments (Paystack): see **Payments** below.
 
 ## Deploy (Render — near one-click via the included Blueprint)
 
@@ -40,6 +38,54 @@ This folder is **self-contained** and ships with `render.yaml` (Render Blueprint
 
 **You handle the secret keys yourself** — I never read or store your service-role/Anthropic/Paystack
 secrets. Enter them directly in the host's dashboard.
+
+## Payments
+
+The app's Subscribe buttons open an in-app checkout (`checkout.js`). This server does all the
+Paystack work (`payments.mjs`), so the app never holds a Paystack key and can't choose its own price.
+
+| Endpoint | What it does |
+|---|---|
+| `GET /plans` | Prices for the plan picker |
+| `POST /paystack/checkout` | Opens a Paystack transaction for the signed-in student (`{ plan }`) |
+| `GET /paystack/verify?reference=` | Confirms a payment the moment the student is back in the app |
+| `POST /paystack/webhook` | Charges, renewals and cancellations from Paystack |
+
+**Plans**: two tiers, each monthly or annual (annual = 12 months at 20% off).
+
+| Tier | Monthly | Annual | Gets |
+|---|---|---|---|
+| Free | — | — | 1 built lecture |
+| Basic | ₦4,999 | ₦47,990 | Unlimited lecture imports |
+| Premium | ₦7,999 | ₦76,790 | Everything `isPremium` gates: Solve, Pro-model builds, natural voices, higher daily limits |
+
+Change a price with `PRICE_NGN_BASIC_MONTHLY`, `PRICE_NGN_BASIC_ANNUAL`, `PRICE_NGN_PREMIUM_MONTHLY`,
+`PRICE_NGN_PREMIUM_ANNUAL`. Switching tier mid-period converts the time left at the two monthly
+prices (a month of Basic left becomes about 19 days of Premium), then adds the new plan.
+Subscriptions from before tiers existed count as Premium.
+
+**Expiry**: each payment sets `subscriptions.current_period_end`, extended from the current end
+if the student pays early. Premium ends on that date; cancelling a recurring plan keeps access
+until then. Rows with no end date (granted by hand) stay active.
+
+**Exactly once**: a payment is applied by the SQL function `medbank_apply_payment`, keyed on the
+Paystack reference, so the webhook and the app's verify call can both arrive (in any order, any
+number of times) and the period is extended once. If the database can't apply a payment the
+webhook answers 500 and Paystack retries.
+
+**Going live, in this order:**
+1. Run `backend/payments.sql` in Supabase → SQL Editor (safe to re-run; read the note at the top
+   about duplicate rows first).
+2. On the host set `PAYSTACK_SECRET_KEY` (start with `sk_test_…`, then `sk_live_…`) and `APP_URL`.
+3. Paystack → Settings → API Keys & Webhooks: set the webhook URL to
+   `https://<server>/paystack/webhook`.
+4. Optional auto-renew: create Plans in Paystack and set `PAYSTACK_PLAN_BASIC_MONTHLY`,
+   `PAYSTACK_PLAN_BASIC_ANNUAL`, `PAYSTACK_PLAN_PREMIUM_MONTHLY`, `PAYSTACK_PLAN_PREMIUM_ANNUAL`.
+   Plan amounts must match the prices above. Without plan codes,
+   each payment is one-off and students renew from the app.
+5. Test with a Paystack test card, then switch to the live key.
+
+Tests: `npm run test:payments`.
 
 ## CORS
 

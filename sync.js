@@ -204,6 +204,23 @@
     pushTimer = setTimeout(function(){ pushNow().catch(function(e){log("push failed",e);}); }, PUSH_DEBOUNCE);
   }
 
+  /* ---------- entitlement (trial or paid) ---------- */
+  // select("*") so this keeps working before and after backend/payments.sql adds current_period_end.
+  // Paid access ends on current_period_end (the server's isActiveSub applies the same rule).
+  function entitledFrom(sub){
+    if(!sub) return false;
+    var now = new Date();
+    if(sub.status==="active") return !sub.current_period_end || new Date(sub.current_period_end) > now;
+    return sub.status==="trialing" && !!sub.trial_ends_at && new Date(sub.trial_ends_at) > now;
+  }
+  async function loadEntitlement(){
+    if(!sb || !account) return entitled;
+    var sub = await sb.from("subscriptions").select("*").eq("account_id", account.id).maybeSingle();   // AUTH-07
+    if(sub.error){ log("subscriptions read failed", sub.error.message); return entitled; }
+    entitled = entitledFrom(sub.data);
+    return entitled;
+  }
+
   /* ---------- init ---------- */
   async function init(client){
     try{
@@ -251,9 +268,7 @@
       try{
         var lp = await sb.from("level_profiles").select("level,archived").eq("id", profileId).maybeSingle();
         if(lp.data){ curLevel = lp.data.level; curArchived = !!lp.data.archived; }
-        var sub = await sb.from("subscriptions").select("status,trial_ends_at").eq("account_id", account.id).maybeSingle();   // AUTH-07
-        if(sub.data){ entitled = sub.data.status==="active" ||
-          (sub.data.status==="trialing" && sub.data.trial_ends_at && new Date(sub.data.trial_ends_at) > new Date()); }
+        await loadEntitlement();
       }catch(e){ log("entitlement load error", e && e.message); }
 
       // one-time on-device safety snapshot BEFORE sync ever touches DATA
@@ -389,6 +404,7 @@
     createProfile: createProfile,
     goToNextLevel: goToNextLevel,
     canUseFeatures: canUseFeatures,
+    refreshEntitlement: loadEntitlement,   // checkout.js calls this right after a confirmed payment
     status: status,
     currentLevel: function(){ return curLevel; },
     startLevel: function(){ return startLevel; },

@@ -2720,7 +2720,7 @@ async function solveNow(){
       const why=o.reason||'Subscribe to snap and solve any question.';
       /* paywall.js may not have loaded — without this else the button just re-enabled and nothing
        * at all appeared, so "Solve it" looked like a dead button. */
-      if(window.MB_PAYWALL) MB_PAYWALL.nudge('Solve is premium', why, 'Subscribe');
+      if(window.MB_PAYWALL) MB_PAYWALL.nudge('Snap & solve is part of Premium', why, 'See Premium', window.MB_CHECKOUT ? function(){ if(window.MB_CHECKOUT) MB_CHECKOUT.open({tier:'premium'}); } : null);
       else msg.innerHTML='<span style="color:#ff9db1">'+esc(why)+'</span>';
       return; }
     if(!r.ok||!o.answer) throw new Error(o.reason||o.error||'Could not solve this — try a clearer photo.');
@@ -7211,12 +7211,18 @@ async function loadPlanBadge(){
     var ses=await window.__mbSB.auth.getSession(); var tok=ses.data.session&&ses.data.session.access_token; if(!tok){ el.textContent='—'; return; }
     var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/me',{headers:{'Authorization':'Bearer '+tok}});
     var j=await r.json().catch(function(){return{};}); el=document.getElementById('planBadge'); if(!el)return;
-    if(r.ok && j.premium){ el.className='planbadge prem'; el.textContent=j.test?'★ Premium · test':'★ Premium'; }
-    else if(r.ok){ el.className='planbadge free'; el.textContent='Basic · Upgrade →';
+    var until=j.current_period_end?new Date(j.current_period_end).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'';
+    var when=until?((j.auto_renew?' · renews ':' · until ')+until):'';
+    if(r.ok && j.premium){ el.className='planbadge prem'; el.style.cursor=''; el.title=''; el.onclick=null;
+      el.textContent=j.test?'★ Premium · test':('★ Premium'+when); }
+    else if(r.ok && j.tier==='basic'){ el.className='planbadge free'; el.textContent='Basic'+when+' · Go Premium →';
+      el.style.cursor='pointer'; el.title='Upgrade to Premium';
+      el.onclick=function(){ try{ if(window.MB_CHECKOUT) MB_CHECKOUT.open({tier:'premium'}); }catch(e){} }; }
+    else if(r.ok){ el.className='planbadge free'; el.textContent='Free · Upgrade →';
       /* ENT-07: the Plan row used to describe Premium with no way to buy it — the only subscribe
          route in the app was paywall.js, reachable only by hitting a wall. Same target as that nudge. */
       el.style.cursor='pointer'; el.title='See plans and subscribe';
-      el.onclick=function(){ try{ var C=window.MEDBANK_CONFIG||{}; window.open((C.WEBSITE_URL||(C.DOWNLOAD&&C.DOWNLOAD.pwa)||'#')+'#pricing','_blank'); }catch(e){} }; }
+      el.onclick=function(){ try{ if(window.MB_CHECKOUT) return MB_CHECKOUT.open(); var C=window.MEDBANK_CONFIG||{}; window.open((C.WEBSITE_URL||(C.DOWNLOAD&&C.DOWNLOAD.pwa)||'#')+'#pricing','_blank'); }catch(e){} }; }
     else { el.textContent='—'; }
   }catch(e){ if(el)el.textContent='—'; }
 }
@@ -7289,7 +7295,7 @@ function pageSettings(){
       <button class="btn primary" id="installbtn" onclick="doInstall()" style="display:none">Install</button></div>
 
     <h2>App</h2>
-    <div class="setrow"><div><b>Plan</b><span>Premium unlocks Solve, 10 explainers a day, and the premium podcast voices.</span></div>
+    <div class="setrow"><div><b>Plan</b><span>Basic unlocks unlimited lecture imports. Premium adds Snap &amp; solve, 10 explainers a day and the natural podcast voices.</span></div>
       <span id="planBadge" class="planbadge">…</span></div>
     <div class="setrow"><div><b>Version &amp; updates</b><span>Version ${APP_VERSION}. After I push a new version, tap here to load it — this clears the offline cache and reloads the latest.</span></div>
       <button class="btn primary" id="updbtn" onclick="forceUpdate()">↻ Check for updates</button></div>`;
@@ -8269,6 +8275,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 <script src="sync.js"></script>
 <script src="level-switcher.js"></script>
 <script src="paywall.js"></script>
+<script src="checkout.js"></script>
 <script src="import-tab.js"></script>
 <script src="lecture-record.js"></script>
 <script src="study-timer.js"></script>
@@ -10225,7 +10232,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
           var jj=await rr.json().catch(function(){return{};});
           if(rr.status===429 && jj && jj.error==='daily_limit'){                          // Simpler counts against the daily limit
             if(btn){btn.disabled=false;btn.textContent='🔄 Simpler';}
-            if(!jj.premium && window.MB_PAYWALL){ MB_PAYWALL.nudge("You're out of explainers today", jj.message||"Upgrade to Premium for 10 a day.", "Upgrade"); }
+            if(!jj.premium && window.MB_PAYWALL){ MB_PAYWALL.nudge("You're out of explainers today", jj.message||"Upgrade to Premium for 10 a day.", "Upgrade", window.MB_CHECKOUT ? function(){ MB_CHECKOUT.open({tier:"premium"}); } : null); }
             else { vizNotice(jj.message||"You've used all of today's explainers. They reset tomorrow."); }
             return;
           }
@@ -10395,7 +10402,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   function vizLimitHit(e){
     removeVizFloat(); var j=(e&&e.info)||{};
     var msg=j.message||(e&&e.message)||"You've used all of today's explainers. They reset tomorrow.";
-    if(!j.premium && window.MB_PAYWALL) MB_PAYWALL.nudge("You're out of explainers today", msg, "Upgrade");
+    if(!j.premium && window.MB_PAYWALL) MB_PAYWALL.nudge("You're out of explainers today", msg, "Upgrade", window.MB_CHECKOUT ? function(){ MB_CHECKOUT.open({tier:"premium"}); } : null);
     else vizNotice(msg);
   }
   function applyLayout(bp){
