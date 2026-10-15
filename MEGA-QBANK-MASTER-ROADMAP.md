@@ -129,7 +129,7 @@ V1.8.2 hardened the QA engine; it did NOT advance the phase. We are still in Pha
    PHASE A  CORPUS GROWTH → READINESS         🟢 CURRENT  (47 / 100 approved, 10 families)
      gate: ≥100 approved · ≥8 families · ≥10/family · no family >30% · ≥3/integration-pair
                       ↓
-   PHASE B  INTEGRATED MODE (student-facing)  🔜  one primary target_id; integrated_topics[]/case_id = metadata; selector serves; requested-vs-delivered
+   PHASE B  INTEGRATED MODE (student-facing)  🔒 BUILT LOCKED (fail-closed; opens at gate)  one primary target_id; integrated_topics[]/case_id = metadata; selector serves; requested-vs-delivered
                       ↓
    PHASE C  REASONING PROFILE — integration axis  🔜  evidence-gated, NO premature claims; [Drill this] → Smart Drill
                       ↓
@@ -157,5 +157,6 @@ Do NOT: reopen Target retrieval, redo A6, tune V1 adjudicator, modify the frozen
 
 **Working protocol (agreed):** each run I re-open this file and tick what shipped. Before starting any box, I state what I understand and ask for context — no code until the contract is agreed.
 
-_Last ticked: 2026-08-30 — 🔒 QA ENGINE V1.8.2 FROZEN: R1 dependency → R2 clinical/mechanism → R3 SBA → R4 deterministic medication-redundancy. Live gate passed (6-case #3 hard citing Na trajectory; V18-4 SGLT2i + V18-5 β-blocker caught via R4 with R1 passing, 3× stable; V18-6 legit combo not false-flagged). Offline 92/92. V1.8/1.8.1/1.8.2 scope docs written. Weekday integrated-qbank-acquisition schedule RESUMED into human-review queue. Canonical phase spine A→F established; branching correctly seated at Phase F. Phase A is current (47/100 approved). A6/A7/R1/R3 untouched._
+_Last ticked: 2026-10-15 — PHASE A throughput: Integrated Workbench gains edit & resubmit (needs_edit items were stranded: the lifecycle had needs_edit→resubmit but no route; an edit re-runs the frozen R1–R4 and lands in ai_reviewed/rejected, never approved; old content kept in qa.edits) and the review queue is ordered by family shortfall to the ≥10 gate. QA engine, gate thresholds, A6/A7 untouched. qa/phase-a-throughput.mjs 25/25; all qa/ harnesses now run in CI (.github/workflows/qa-tests.yml)._
+_Prior tick: 2026-08-30 — 🔒 QA ENGINE V1.8.2 FROZEN: R1 dependency → R2 clinical/mechanism → R3 SBA → R4 deterministic medication-redundancy. Live gate passed (6-case #3 hard citing Na trajectory; V18-4 SGLT2i + V18-5 β-blocker caught via R4 with R1 passing, 3× stable; V18-6 legit combo not false-flagged). Offline 92/92. V1.8/1.8.1/1.8.2 scope docs written. Weekday integrated-qbank-acquisition schedule RESUMED into human-review queue. Canonical phase spine A→F established; branching correctly seated at Phase F. Phase A is current (47/100 approved). A6/A7/R1/R3 untouched._
 _Prior tick: 2026-08-25 — 🔒 V1.6 ARCHITECTURALLY COMPLETE + FROZEN. Adversarial 20/20; 15/15 harnesses green. Open item: no bounded-escalation rule for Targets that repeatedly fail intervention — deferred. gap+fragile live, misconception built/off._

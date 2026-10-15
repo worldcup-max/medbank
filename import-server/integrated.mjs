@@ -340,3 +340,79 @@ export function applyHumanReview(item, action, qaScores, reviewer){
   if(action==="edit")   return Object.assign({}, item, { review_status:"needs_edit", reviewer, reviewed_at:at });
   return item;
 }
+
+/* EDIT + RESUBMIT (Phase A throughput). The lifecycle has always had needs_edit → resubmit, but nothing implemented
+   it, so every "needs edit" item was stranded. A human edits the content; the SAME frozen reviewers (R1 dependency,
+   R2 clinical, R3 SBA, R4 redundancy) re-run on the edited version through runCandidate, and the item re-enters the
+   human queue (ai_reviewed) or is rejected on a hard fail. It can NEVER come out approved — applyHumanReview stays
+   the only route there. The previous content is kept in qa.edits[] for provenance. */
+export const EDITABLE_STATUSES = ["ai_reviewed","needs_edit"];
+export function validateEdit(edit){
+  edit=edit||{};
+  const stem=String(edit.stem||"").trim();
+  const options=normalizeOptions((Array.isArray(edit.options)?edit.options:[]).map(o=>String(o==null?"":o).trim()));
+  const answer=Number(edit.answer);
+  const errors=[];
+  if(stem.length<40) errors.push("stem is too short");
+  if(options.length<4 || options.length>5) errors.push("need 4 or 5 options");
+  if(options.some(o=>!o)) errors.push("an option is empty");
+  if(new Set(options.map(o=>o.toLowerCase())).size!==options.length) errors.push("two options are identical");
+  if(!Number.isInteger(answer) || answer<0 || answer>=options.length) errors.push("keyed answer is out of range");
+  const rat=Array.isArray(edit.rationales)?edit.rationales.map(r=>String(r==null?"":r)):[];
+  const rationales=options.map((_,i)=>rat[i]!==undefined?rat[i]:"");
+  return { ok:errors.length===0, errors, content:{ stem, options, answer, rationales } };
+}
+export async function resubmitEdited(item, edit, deps, editor){
+  if(!item) return { ok:false, error:"item not found" };
+  if(!EDITABLE_STATUSES.includes(item.review_status)) return { ok:false, error:"only ai_reviewed or needs_edit items can be edited (this one is "+item.review_status+")" };
+  const v=validateEdit(edit); if(!v.ok) return { ok:false, error:v.errors.join("; ") };
+  const proposal={ primary_topic:item.primary_topic, integrated_topics:item.integrated_topics||[], integration_type:item.integration_type,
+    integration_family:item.integration_family, rationale:item.integration_rationale, dependency:edit.dependency||item.integration_dependency,
+    source_question_ids:item.source_question_ids||[], transformed_content:v.content };
+  const rec=await runCandidate({ id:item.question_id }, Object.assign({}, deps, { mine:async()=>proposal }));
+  const at=new Date().toISOString();
+  const prev=item.transformed_content||null;
+  const edits=((item.qa&&item.qa.edits)||[]).concat([{ at, editor:editor||null, from_status:item.review_status, previous:prev }]);
+  return { ok:true, review_status:rec.review_status, severity:rec.severity, reason:rec.reason,
+    update:{ transformed_content:v.content, integration_dependency:proposal.dependency||null, dependency_evidence:rec.dependency_evidence,
+      qa:Object.assign({}, rec.qa, { edits }), review_status:rec.review_status, reviewer:null, reviewed_at:null } };
+}
+
+/* Review-queue priority (Phase A throughput). The gate needs EVERY family ≥10 plus 100 total, so a review spent on
+   a family that is already full moves the gate less than one on a short family. Order: biggest family shortfall
+   first → cleanest machine verdict first (fastest to approve) → oldest first. Families with no approvals yet count
+   as the full shortfall. Pure ordering: changes what the human sees first, never what gets approved. */
+export function reviewQueueOrder(items, approved, cfg){
+  const R=Object.assign({}, READINESS, cfg||{});
+  const have={}; (approved||[]).forEach(a=>{ const f=(a&&a.integration_family)||"?"; have[f]=(have[f]||0)+1; });
+  const shortfall=f=>Math.max(0, R.minPerFamily-(have[f]||0));
+  const sev=it=>SEVERITY_RANK[(it&&it.qa&&it.qa.severity)||"none"]||0;
+  return (items||[]).map((it,i)=>({ it, i, s:shortfall(it.integration_family||"?") }))
+    .sort((a,b)=> (b.s-a.s) || (sev(a.it)-sev(b.it)) || (String(a.it.created_at||"")<String(b.it.created_at||"")?-1:String(a.it.created_at||"")>String(b.it.created_at||"")?1:a.i-b.i))
+    .map(x=>Object.assign({}, x.it, { queue_priority:{ family_shortfall:x.s, family_approved:have[x.it.integration_family||"?"]||0 } }));
+}
+
+/* PHASE B — Integrated Mode, student view (PHASE-B-INTEGRATED-MODE-CONTRACT.md). FAIL CLOSED: the single canonical
+   readinessGate decides; below the gate the student gets the lock reason and ZERO items. At the gate, approved items
+   are projected to the ordinary question shape. Identity invariant: each item carries ONE primary target_id — the
+   item's own (set at approval) or else its source question's authoritative Target — or null, which falls back to the
+   question's own hash exactly like an AMBIGUOUS canonical question. integrated_topics / family are metadata only. */
+const INTEGRATED_SKILL = { mechanistic:"complications", diagnostic:"diagnosis", management:"management", competing:"next_step", longitudinal:"next_step" };
+export function integratedModeView(approved, sources){
+  approved=(Array.isArray(approved)?approved:[]).filter(r=>r && r.review_status==="approved");
+  sources=sources||{};   // { targets:{qh:target_id (authoritative only)}, topics:{qh:{id,name}} }
+  const tg=sources.targets||{}, tp=sources.topics||{};
+  const gate=readinessGate(approved.map(r=>({ integration_family:r.integration_family })));
+  const view={ integrated_mode: gate.ready?"available":"locked", total:gate.total, need:gate.gate.minApproved,
+    families:gate.families, blockers:gate.blockers, items:[] };
+  if(!gate.ready) return view;
+  view.items=approved.filter(r=>r.transformed_content && r.transformed_content.stem && Array.isArray(r.transformed_content.options) && r.transformed_content.options.length>=2)
+    .map(r=>{ const c=r.transformed_content, srcs=(Array.isArray(r.source_question_ids)?r.source_question_ids:[]).concat(r.question_id?[r.question_id]:[]);
+      const inherited=srcs.map(q=>tg[q]).find(Boolean)||null, topic=srcs.map(q=>tp[q]).find(Boolean)||null;
+      return { id:"ig:"+r.id, stem:c.stem, options:c.options.slice(), answer:Number.isInteger(c.answer)?c.answer:0, rationales:(c.rationales||[]).slice(),
+        skill:INTEGRATED_SKILL[r.integration_type]||"management", cognitive_level:"complex_reasoning",
+        target_id:r.target_id||inherited, integration_family:r.integration_family||null, integrated_topics:r.integrated_topics||[],
+        integration_type:r.integration_type||null, source_topic:topic, integrated:true }; })
+    .sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0);
+  return view;
+}
