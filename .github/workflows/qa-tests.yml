@@ -1,0 +1,35 @@
+# Runs the headless QA harnesses in qa/ on every push and pull request, so a change that
+# breaks the frozen engine, A6/A7 scheduling, the V1.6 interventions or the V1.7/V1.8
+# contracts shows up red before it reaches students. The harnesses read app.html and the
+# server modules directly and never edit app code; each exits non-zero on a failure.
+name: QA tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run every harness
+        run: |
+          fail=0
+          for f in qa/*.mjs; do
+            # extract-json.mjs is a helper module, not a harness
+            [ "$f" = "qa/extract-json.mjs" ] && continue
+            echo "::group::$f"
+            if node "$f"; then echo "PASS $f"; else echo "::error::FAIL $f"; fail=1; fi
+            echo "::endgroup::"
+          done
+          exit $fail
