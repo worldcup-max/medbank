@@ -60,3 +60,12 @@ curl localhost:8787/health          # → {"ok":true}
 - Requires the schema functions `can_use_features`, `check_ai_quota`, `bump_ai_usage`
   (already applied to your live database).
 - CORS is built in (see above).
+
+## 3D plates for any topic (tours)
+
+When a premium student opens the 3D tab on a topic with no library plate, `POST /explainer/tour/for-topic`
+names the topic (Claude Haiku, about $0.0002), reuses an existing plate for the same or similar note, or
+starts a quick draft (Claude Opus, `tour-draft.mjs`, about $0.77, up to $1.40 with a fix round) that every
+later student with that topic shares. Drafts are checked on the server with `tour-check.mjs` (linkedom).
+Needs: `ANTHROPIC_API_KEY`, the `plate_topics` table (`sql/plate-topics.sql`). Optional: `TOUR_DRAFT_MODEL`.
+Costs per plate are on the admin page (`#/plateadmin`) and `GET /admin/tours`.

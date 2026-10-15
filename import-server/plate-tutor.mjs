@@ -8,7 +8,7 @@
  * The same splitNote() runs in the app (explainer/plate-tutor.js): line ids L1…Ln are the contract between the two.
  */
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -35,13 +35,20 @@ const MCACHE = new Map();
 export async function loadManifest(plate, { base = process.env.PLATE_BASE || "https://medbank.com.ng/", course } = {}) {
   if (!/^[a-z0-9-]{3,80}$/.test(plate)) throw new Error("bad plate id");
   if (MCACHE.has(plate)) return MCACHE.get(plate);
-  const courses = course ? [course] : ["physiology", "biochemistry", "anatomy", "pharmacology"];
+  let local = []; try { local = readdirSync(join(HERE, "..", "explainer", "library"), { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name); } catch (_) {}
+  const courses = course ? [course] : [...new Set([...local, "physiology", "obstetrics", "biochemistry", "anatomy", "pharmacology", "medicine", "surgery", "paediatrics"])];
   let m = null;
   for (const c of courses) { try { m = JSON.parse(readFileSync(join(HERE, "..", "explainer", "library", c, plate, "manifest.json"), "utf8")); break; } catch (_) {} }
   for (const c of courses) { if (m) break; try { const r = await fetch(new URL(`explainer/library/${c}/${plate}/manifest.json`, base)); if (r.ok) m = await r.json(); } catch (_) {} }
+  if (!m && manifestResolver) { try { m = await manifestResolver(plate); } catch (_) {} }   // a quick-draft plate (server: plate_topics)
   if (!m || m.id !== plate) throw new Error("plate manifest not found: " + plate);
   MCACHE.set(plate, m); return m;
 }
+
+/* the server sets this so draft plates (built per topic, stored in the database) resolve like library plates */
+let manifestResolver = null;
+export function setManifestResolver(fn) { manifestResolver = fn; MCACHE.clear(); }
+export function forgetManifest(plate) { MCACHE.delete(plate); }
 
 export function plateTutorKey(plate, lines) {
   const body = lines.map((l) => (l.h ? "#" : "") + l.text.toLowerCase()).join("\n");

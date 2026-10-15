@@ -20,12 +20,13 @@ import crypto from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
 import Anthropic from "@anthropic-ai/sdk";
 import { createRequire } from "node:module";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
 import { EXPLAINER_TEMPLATES, explainerExcerpt, explainerKey, buildExplainerPrompt, parseExplainerLesson } from "./explainer.mjs";   // 3D Tutor
-import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPlateTutor, plateAskKey, buildAskPrompt, checkAsk, buildExplainPrompt, checkExplain, plateInsights, PLATE_EVENT_KINDS } from "./plate-tutor.mjs";   // 3D Tutor · library plates, tutor from the note
+import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPlateTutor, plateAskKey, buildAskPrompt, checkAsk, buildExplainPrompt, checkExplain, plateInsights, PLATE_EVENT_KINDS, setManifestResolver, forgetManifest } from "./plate-tutor.mjs";
+import { classifyTopic, buildTourDraft, DRAFT_MODEL } from "./tour-draft.mjs";   // 3D Tutor · quick draft plates for topics with no library plate   // 3D Tutor · library plates, tutor from the note
 import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
@@ -2000,7 +2001,7 @@ app.post("/explainer/plate", async (req,res)=>{
     let M; try{ M = await loadManifest(plate); }catch(e){ return res.status(404).json({ error:"unknown plate" }); }
     const lines = splitNote((req.body.text||"").toString().slice(0,60000)).slice(0,260);
     if(lines.filter(l=>!l.h).length < 2) return res.json({ ok:true, lesson:null, reason:"note too short to follow" });
-    const key = plateTutorKey(plate, lines);
+    const key = plateTutorKey(plate + (M.version ? "@" + M.version : ""), lines);   // a rebuilt draft plate gets fresh lessons
     try{ const c = await admin.from("explainers").select("lesson").eq("cache_key",key).maybeSingle();
       if(c.data && c.data.lesson && c.data.lesson.steps) return res.json({ ok:true, cached:true, lesson:c.data.lesson }); }catch(_){}
     try{
@@ -2023,6 +2024,93 @@ app.post("/explainer/plate", async (req,res)=>{
     res.json({ ok:true, cached:false, lesson:best });
   }catch(e){ console.error("[explainer/plate]", e); res.status(500).json({ error:e.message||"server error" }); }
 });
+/* ===================================================================================================================
+ * 3D Tutor · plates for topics the library has no plate for (import-server/tour-draft.mjs, sql/plate-topics.sql).
+ * A premium student's topic → Claude Haiku names the topic (reusing an existing one when it is the same) → if nobody has
+ * built it yet, Claude Opus writes a quick draft guided tour in the background (about 5–8 minutes) → every student whose
+ * topic maps to it gets it free. Every Claude call's cost is stored on the row (usd, calls) for the admin page.
+ * =================================================================================================================== */
+setManifestResolver(async (id) => { const r = await admin.from("plate_topics").select("manifest,status").eq("slug", id).maybeSingle();
+  return r.data && r.data.manifest && ["draft", "building", "full"].includes(r.data.status) ? r.data.manifest : null; });
+let _libPlates = null;
+function libraryPlates(){ if(_libPlates) return _libPlates; const out = [];
+  try{ const root = new URL("../explainer/library/", import.meta.url);
+    for(const c of readdirSync(root, { withFileTypes:true }).filter(d => d.isDirectory()))
+      for(const p of readdirSync(new URL(c.name + "/", root), { withFileTypes:true }).filter(d => d.isDirectory())){
+        try{ const m = JSON.parse(readFileSync(new URL(c.name + "/" + p.name + "/manifest.json", root), "utf8")); out.push({ slug:m.id, title:m.title, library:true }); }catch(_){} } }catch(_){}
+  return (_libPlates = out); }
+const TOUR_JOBS = new Map(), TOUR_QUEUE = []; let tourRunning = 0; const TOUR_MAX = +(process.env.TOUR_MAX_PARALLEL || 2);
+function runTourJob(slug){ if(TOUR_JOBS.has(slug)) return; TOUR_JOBS.set(slug, { at:Date.now(), step:"queued" }); TOUR_QUEUE.push(slug); pumpTours(); }
+function pumpTours(){ while(tourRunning < TOUR_MAX && TOUR_QUEUE.length){ const slug = TOUR_QUEUE.shift(); tourRunning++; buildTourRow(slug).finally(() => { tourRunning--; TOUR_JOBS.delete(slug); pumpTours(); }); } }
+async function buildTourRow(slug){
+  const job = TOUR_JOBS.get(slug) || {}, now = () => new Date().toISOString();
+  try{
+    const row = (await admin.from("plate_topics").select("*").eq("slug", slug).maybeSingle()).data; if(!row) return;
+    await admin.from("plate_topics").update({ status:"drafting", error:null, updated_at:now() }).eq("slug", slug);
+    console.log("[tour] building", slug, "with", DRAFT_MODEL);
+    const r = await buildTourDraft(anthropic, { slug, title:row.title, course:row.course, note:row.sample_note, log:(m) => { job.step = m; } });
+    const calls = [...(row.calls || []), ...r.calls.map(c => ({ ...c, model:r.model, at:now() }))], usd = +(Number(row.usd || 0) + r.usd).toFixed(4);
+    if(r.ok){ r.manifest.version = Date.now();
+      await admin.from("plate_topics").update({ status:"draft", html:r.html, manifest:r.manifest, meta:r.meta, usd, calls, problems:null, error:null, built_by:r.model + " · " + r.version, built_at:now(), updated_at:now() }).eq("slug", slug);
+      console.log("[tour] draft ready", slug, "$" + r.usd.toFixed(3)); }
+    else { await admin.from("plate_topics").update({ status:"failed", usd, calls, problems:r.problems, error:(r.problems[0] || "failed").slice(0, 300), updated_at:now() }).eq("slug", slug);
+      console.warn("[tour] draft failed", slug, r.problems.slice(0, 3).join(" | ")); }
+    forgetManifest(slug);
+  }catch(e){ console.error("[tour]", slug, e); try{ await admin.from("plate_topics").update({ status:"failed", error:String(e.message || e).slice(0, 300), updated_at:now() }).eq("slug", slug); }catch(_){} }
+}
+/* which plate does this topic get? body {title, text} → {status:"library"|"draft"|"drafting"|"failed"|"premium"|"none", slug, title} */
+app.post("/explainer/tour/for-topic", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const title = (req.body.title || "").toString().slice(0,160), text = (req.body.text || "").toString().slice(0,60000);
+    if(text.replace(/\s+/g," ").trim().length < 200) return res.json({ ok:true, status:"none", reason:"note too short" });
+    const mkey = createHash("md5").update("tourmap|" + title.toLowerCase() + "|" + text.slice(0,3000)).digest("hex");
+    let slug = null, fresh = false, cls = null;
+    try{ const c = await admin.from("explainers").select("lesson").eq("cache_key", mkey).maybeSingle(); if(c.data && c.data.lesson && c.data.lesson.slug) slug = c.data.lesson.slug; }catch(_){}
+    if(!slug){
+      if(!process.env.ANTHROPIC_API_KEY) return res.json({ ok:true, status:"none", reason:"builder not configured" });
+      const known = [...libraryPlates(), ...(((await admin.from("plate_topics").select("slug,title").limit(800)).data) || [])];
+      cls = await classifyTopic(anthropic, { title, note:text, known }); slug = cls.slug; fresh = true;
+      try{ await admin.from("explainers").upsert({ cache_key:mkey, template:"tour-map", account_id:user.id, lesson:{ slug, title:cls.title, usd:cls.usd } }); }catch(_){}
+    }
+    if(libraryPlates().some(p => p.slug === slug)) return res.json({ ok:true, status:"library", slug });
+    const row = (await admin.from("plate_topics").select("slug,title,course,status,updated_at,built_at,students,aliases,usd,calls").eq("slug", slug).maybeSingle()).data;
+    const premium = await isPremium(user.id, user.email).catch(() => false);
+    if(!row){
+      if(!premium) return res.json({ ok:true, status:"premium", slug, title:(cls && cls.title) || title });
+      const t = (cls && cls.title) || title;
+      const ins = await admin.from("plate_topics").insert({ slug, title:t, course:(cls && cls.course) || null, status:"drafting", sample_note:text.slice(0,12000), students:1, aliases:[title],
+        usd:cls ? +cls.usd.toFixed(5) : 0, calls:cls ? [{ step:"classify", model:"haiku", usd:cls.usd, usage:cls.usage, at:new Date().toISOString() }] : [] });
+      if(ins.error) return res.status(500).json({ error:"Run import-server/sql/plate-topics.sql in Supabase first.", detail:ins.error.message });
+      runTourJob(slug);
+      return res.json({ ok:true, status:"drafting", slug, title:t, step:"queued", started:new Date().toISOString() });
+    }
+    if(fresh){ try{ await admin.from("plate_topics").update({ students:(row.students || 0) + 1, aliases:[...new Set([...(row.aliases || []), title])].slice(0,30),
+      usd:+(Number(row.usd || 0) + (cls ? cls.usd : 0)).toFixed(5), calls:[...(row.calls || []), ...(cls ? [{ step:"classify", model:"haiku", usd:cls.usd, at:new Date().toISOString() }] : [])] }).eq("slug", slug); }catch(_){} }
+    // a build that was running when the server restarted: start it again
+    if(row.status === "drafting" && !TOUR_JOBS.has(slug) && Date.now() - Date.parse(row.updated_at) > 90000 && premium) runTourJob(slug);
+    res.json({ ok:true, status:row.status, slug, title:row.title, step:(TOUR_JOBS.get(slug) || {}).step || null, since:row.updated_at, built_at:row.built_at });
+  }catch(e){ console.error("[tour/for-topic]", e); res.status(500).json({ error:e.message || "server error" }); }
+});
+/* a built plate: the page and its manifest (no student data in it, so no sign-in) */
+app.get("/explainer/tour/:slug", async (req,res)=>{
+  try{ const slug = (req.params.slug || "").toString().slice(0,80);
+    const r = await admin.from("plate_topics").select("slug,title,course,status,html,manifest,built_at,updated_at").eq("slug", slug).maybeSingle(); const row = r.data;
+    if(!row) return res.status(404).json({ error:"no such plate" });
+    const ready = ["draft", "building", "full"].includes(row.status) && row.html;
+    if(ready) res.setHeader("Cache-Control", "public, max-age=300");
+    res.json({ ok:true, slug, title:row.title, course:row.course, status:row.status, step:(TOUR_JOBS.get(slug) || {}).step || null, built_at:row.built_at, html:ready ? row.html : null, manifest:ready ? row.manifest : null });
+  }catch(e){ res.status(500).json({ error:e.message || "server error" }); }
+});
+app.get("/admin/tours", async (req,res)=>{
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const r = await admin.from("plate_topics").select("slug,title,course,status,students,wanted,usd,calls,error,built_by,built_at,created_at,updated_at").order("updated_at",{ ascending:false }).limit(500);
+    if(r.error) return res.status(500).json({ error:"Run import-server/sql/plate-topics.sql in Supabase first.", detail:r.error.message });
+    const rows = (r.data || []).map(x => ({ ...x, calls:(x.calls || []).length, running:TOUR_JOBS.has(x.slug) ? (TOUR_JOBS.get(x.slug).step || "running") : null }));
+    res.json({ ok:true, rows, total_usd:+rows.reduce((a,x) => a + Number(x.usd || 0), 0).toFixed(2), model:DRAFT_MODEL });
+  }catch(e){ res.status(500).json({ error:e.message || "server error" }); }
+});
+
 /* Ask the plate (feature 6): one question → an answer from the student's note (or, marked, from the plate itself), checked like the
  * lesson and cached per note + question, so a question asked again (by anyone with the same note) is free. */
 async function plateDailyCount(uid, template){ const since = new Date(); since.setUTCHours(0,0,0,0);

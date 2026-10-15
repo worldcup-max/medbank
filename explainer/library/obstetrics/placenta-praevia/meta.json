@@ -1,0 +1,64 @@
+{
+ "id": "placenta-praevia",
+ "course": "obstetrics",
+ "title": "Placenta praevia",
+ "titleEm": "up close",
+ "fig": "Plate · Guided tour · Obstetrics",
+ "sub": "Eleven stops: what praevia is, why it happens, how it changes week by week, why it bleeds, how to diagnose it safely, and how to manage it from the first bleed through the drugs, delivery and haemorrhage. Every stop zooms in, and a lens shows that part from a new angle. Drag the timeline under the pelvis to move through the pregnancy.",
+ "foot": "Sources: RCOG Green-top Guidelines 27a (placenta praevia and placenta accreta, 2018), 63 (antepartum haemorrhage) and 52 (postpartum haemorrhage), NICE NG25 (preterm labour and birth), and Silver et al. 2006 for accreta risk by number of caesareans. Doses are teaching values, so check them against your local protocol and the BNF before using them clinically. Drawings are schematic. Controls: ← → move between stops, Space plays or pauses, and Shift + ← → moves through the weeks.",
+ "cases": [
+  {
+   "id": "A",
+   "label": "Low-lying, posterior"
+  },
+  {
+   "id": "B",
+   "label": "Complete praevia"
+  },
+  {
+   "id": "C",
+   "label": "Anterior + previous CS"
+  }
+ ],
+ "caseLabel": "Case",
+ "caseAria": "Which placenta",
+ "stage": {
+  "viewBox": "0 0 760 720",
+  "aria": "Sagittal section of a pregnant pelvis: abdominal wall, bladder, uterus with placenta and fetus, cervix, vagina, rectum and sacrum. The uterus grows with the weeks shown on the timeline."
+ },
+ "strip": {
+  "viewBox": "0 0 1000 132",
+  "aria": "Pregnancy timeline in weeks. Drag, or use Shift and the arrow keys, to move through the pregnancy.",
+  "min": 8,
+  "max": 40,
+  "now": 20
+ },
+ "nowDefault": "20+0 weeks",
+ "concepts": [
+  "placenta praevia",
+  "low-lying placenta",
+  "risk factors",
+  "lower segment formation",
+  "antepartum haemorrhage",
+  "vasa praevia",
+  "abruption",
+  "transvaginal ultrasound",
+  "no digital vaginal examination",
+  "major haemorrhage protocol",
+  "expectant management",
+  "corticosteroids",
+  "magnesium sulphate",
+  "anti-D",
+  "caesarean section",
+  "postpartum haemorrhage",
+  "uterotonics",
+  "tranexamic acid",
+  "Bakri balloon",
+  "placenta accreta spectrum"
+ ],
+ "not_shown": [
+  "histology of the villi",
+  "neonatal resuscitation",
+  "long-term outcomes"
+ ]
+}

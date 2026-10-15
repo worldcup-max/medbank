@@ -1,0 +1,33 @@
+/* Placenta praevia · topic colours (the layout is explainer/tours/tour.css) */
+/* Layout: a guided tour through one pregnancy. The pelvis fills the left stage and grows week by week;
+   a lens card magnifies one part from a new angle, joined to its spot by a translucent cone.
+   The pregnancy timeline (weeks 8–40) runs under the stage; narration sits on the right. */
+:root {
+  --ground: #eef1f3; --sheet: #fbfcfc; --ink: #1d2730; --muted: #5d6a75; --hair: #d5dbe0;
+  --skin: #ecc9b2; --fat: #f1dfa6; --muscle: #b9706b; --muscle-deep: #8d4a49; --muscle-hi: #d39892;
+  --fluid: #e3eef4; --fetus: #e6b49e; --fetus-deep: #a8705e;
+  --placenta: #8c3f52; --placenta-hi: #b5607a; --decidua: #e8b9a8;
+  --o2: #c3283a; --o2-lumen: #e7a2a6; --o2-hi: #ff5a68; --co2: #3a56a6; --co2-hi: #4f78e6;
+  --bladder: #ecd98f; --bone: #ddd6c8; --bone-deep: #b8ad98; --rectum: #d9b3a4;
+  --accent: #0f6d6a; --open: #1c7a4a; --warn: #b26a00; --shut: #9a3a2e; --glass: #dfe9ee; --ca: #c79a00;
+  --us-bg: #0b0d0e; --us-1: #3d4245; --us-2: #6f7579; --us-3: #c9ced1;
+  --display: "Spectral", Georgia, "Times New Roman", serif;
+  --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --ground: #0f1418; --sheet: #151c21; --ink: #e5eaee; --muted: #93a1ac; --hair: #2a343c;
+  --skin: #5e4434; --fat: #5f5330; --muscle: #8e4a4c; --muscle-deep: #5f2d31; --muscle-hi: #b26d6d;
+  --fluid: #1c2a33; --fetus: #a77462; --fetus-deep: #6b4335;
+  --placenta: #a3546a; --placenta-hi: #c77890; --decidua: #7a4a40;
+  --o2: #e0465a; --o2-lumen: #6e2a33; --o2-hi: #ff7482; --co2: #6a86d8; --co2-hi: #8eaaff;
+  --bladder: #6b5f2e; --bone: #3a3833; --bone-deep: #57524a; --rectum: #5a4038;
+  --accent: #4fc2bb; --open: #4fc28a; --warn: #f0a640; --shut: #ff8a77; --glass: #22303a; --ca: #ffd84a; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --ground: #0f1418; --sheet: #151c21; --ink: #e5eaee; --muted: #93a1ac; --hair: #2a343c;
+  --skin: #5e4434; --fat: #5f5330; --muscle: #8e4a4c; --muscle-deep: #5f2d31; --muscle-hi: #b26d6d;
+  --fluid: #1c2a33; --fetus: #a77462; --fetus-deep: #6b4335;
+  --placenta: #a3546a; --placenta-hi: #c77890; --decidua: #7a4a40;
+  --o2: #e0465a; --o2-lumen: #6e2a33; --o2-hi: #ff7482; --co2: #6a86d8; --co2-hi: #8eaaff;
+  --bladder: #6b5f2e; --bone: #3a3833; --bone-deep: #57524a; --rectum: #5a4038;
+  --accent: #4fc2bb; --open: #4fc28a; --warn: #f0a640; --shut: #ff8a77; --glass: #22303a; --ca: #ffd84a; color-scheme: dark; }

@@ -940,6 +940,16 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .mbprpbtn{display:flex;align-items:center;gap:8px;width:100%;border:1px dashed var(--line);background:var(--panel2);color:var(--accent);border-radius:12px;padding:12px 14px;font-weight:700;font-size:13.5px;margin:10px 0 12px;cursor:pointer;text-align:left}
 .mbprpbtn span{margin-left:auto;font-weight:500;color:var(--dimmer);font-size:12px}.mbprp{margin:10px 0 12px}
 </style>
+<style id="mb-tour-build">
+.mbt-card{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:16px;display:grid;gap:10px;margin-top:6px}.mbt-h{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.mbt-t{font:700 17px system-ui;color:var(--text);margin:0}.mbt-s{font-size:14px;color:var(--dim);margin:0;line-height:1.45}
+.mbt-st{display:grid;gap:9px;margin:4px 0}.mbt-st div{display:flex;gap:10px;align-items:center;font-size:14.5px;color:var(--text)}.mbt-st i{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;flex:none}
+.mbt-st .ok i{background:#10b981;color:#fff}.mbt-st .now i{border:2px solid var(--accent);border-top-color:transparent;animation:mbtSpin 1s linear infinite}.mbt-st .wait{color:var(--dim)}.mbt-st .wait i{border:2px solid var(--line)}@keyframes mbtSpin{to{transform:rotate(360deg)}}
+.mbt-bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden}.mbt-bar b{display:block;height:100%;background:var(--accent);transition:width 1s}
+.mbt-ready{display:flex;gap:12px;align-items:center;border-radius:16px;padding:14px 16px;margin:6px 0 10px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 16%,var(--panel)),var(--panel));border:1.5px solid color-mix(in srgb,var(--accent) 45%,var(--line))}
+@media(max-width:640px){.mbt-ready{flex-wrap:wrap}.mbt-ready .mbt-tx{flex:1 1 calc(100% - 80px)}.mbt-ready .btn{margin-left:44px}}
+.mbt-tx{flex:1;min-width:0}.mbt-ready .ic{font-size:26px}.mbt-ready b{display:block;font-size:16px;color:var(--text)}.mbt-ready span{display:block;font-size:13.5px;color:var(--dim);margin-top:2px}.mbt-x{border:0;background:none;color:var(--dim);font-size:20px;padding:4px 6px;cursor:pointer}
+</style>
 <style id="mb-plate-admin">
 .pa-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 14px}.pa-chip{min-height:36px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:600 13px system-ui;padding:0 14px;cursor:pointer}
 .pa-chip.on{background:var(--accent);border-color:var(--accent);color:#fff}.pa-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:10px;margin-bottom:12px}
@@ -949,6 +959,8 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .pa-card{display:grid;gap:8px;align-content:start;margin:0}.pa-card h3{margin:0;font-size:15px}.pa-card>.sub{margin:-4px 0 4px;font-size:12.5px}
 .pa-bar{display:grid;grid-template-columns:minmax(0,130px) 1fr 42px;gap:8px;align-items:center;font-size:12.5px}.pa-bar span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pa-bar em{height:12px;border-radius:6px;background:var(--line);overflow:hidden}
 .pa-bar em i{display:block;height:100%;background:var(--accent);border-radius:6px}.pa-bar em i.bad{background:#dc2626}.pa-bar b{text-align:right;font-variant-numeric:tabular-nums}
+.pa-tbl{width:100%;border-collapse:collapse;font-size:13.5px}.pa-tbl th{text-align:left;font-size:12px;color:var(--dim);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line)}.pa-tbl td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}.pa-tbl .sub{margin:0;font-size:12px}
+.pa-st{display:inline-block;border-radius:99px;padding:2px 9px;font-size:12px;font-weight:700;border:1px solid var(--line);color:var(--dim)}.pa-st.ok{color:#047857;border-color:#a7f3d0}.pa-st.bad{color:#dc2626;border-color:#fecaca}.pa-st.run{color:var(--accent);border-color:var(--accent)}
 .pa-item{border-top:1px solid var(--line);padding-top:9px;display:grid;gap:3px;font-size:13.5px}.pa-item .sub{margin:0;font-size:12.5px}.pa-item.done{opacity:.6}.pa-item .ok{color:#059669;font-weight:700}.btn.sm{min-height:32px;padding:0 10px;font-size:12.5px}
 </style>
 <style id="mb-polish">
@@ -2960,8 +2972,9 @@ function pageTopic(id){
 
 /* ===== one-tap study-mode switcher + the two new modes (Fill-blank, Written) ===== */
 function modeSwitcher(t){
+  mbtAuto(t);
   const sw=(label,onclick,active)=>`<button onclick="${onclick}" style="flex:none;border:1px solid ${active?'var(--accent)':'var(--line)'};background:${active?'var(--accent)':'var(--panel)'};color:${active?'#fff':'var(--text)'};border-radius:10px;padding:8px 13px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap">${label}</button>`;
-  return `<div style="display:flex;gap:7px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:5px;margin:8px 0 16px">
+  return mbtBanner(t)+`<div style="display:flex;gap:7px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:5px;margin:8px 0 16px">
     ${sw('📖 Notes',"topicTab='note';render()",topicTab==='note')}
     ${sw('📝 Simplified',"topicTab='simplified';render()",topicTab==='simplified')}
     ${sw('🃏 Flashcards',"go('study/"+t.id+"/primer')",false)}
@@ -2972,7 +2985,7 @@ function modeSwitcher(t){
     ${sw('🎧 Podcast',"topicTab='podcast';render()",topicTab==='podcast')}
     ${(()=>{ const n=topicVizList(t).length; return sw('🎬 Videos'+(n?' ('+n+')':''),"topicTab='videos';render()",topicTab==='videos'); })()}
     ${(()=>{ return mb3dScenes(t).length ? sw('🧬 3D',"topicTab='model3d';render()",topicTab==='model3d') : ''; })()}
-    ${mbxShow(t) ? sw('⚗️ 3D Tutor'+(mbxPlateFor(t)?mbpTabNote(t):''),"topicTab='mech3d';render()",topicTab==='mech3d') : ''}
+    ${mbxShow(t) ? sw('⚗️ 3D Tutor'+(mbxPlateFor(t)||mbtReady(t)?mbpTabNote(t):mbtBuilding(t)?' · building…':''),"topicTab='mech3d';render()",topicTab==='mech3d') : ''}
   </div>`;
 }
 
@@ -3137,7 +3150,9 @@ var MBX_PLATES=[
   {id:'nephron-urine-journey', re:/\bnephron|urine (formation|concentration)|loop of henle|countercurrent|tubular (reabsorption|function)|glomerular filtration\b/i,
    terms:[/\bnephrons?\b/i,/\bglomerul/i,/bowman/i,/proximal (convoluted )?tubule|\bPCT\b/i,/loop of henle/i,/descending limb/i,/ascending limb/i,/distal (convoluted )?tubule|\bDCT\b/i,/collecting duct/i,/\bGFR\b|glomerular filtration/i,/tubular (reabsorption|secretion)|\breabsorb/i,/\bADH\b|vasopressin|antidiuretic/i,/aldosterone/i,/aquaporin/i,/countercurrent/i,/juxtaglomerular|macula densa/i,/\bafferent arteriole|\befferent arteriole/i,/urine (formation|concentration|osmolality)/i]},
   {id:'cardiac-cycle-wiggers', re:/\bcardiac cycle|wiggers|heart sounds|pressure.volume loop|systole and diastole\b/i,
-   terms:[/cardiac cycle/i,/\bsystol/i,/\bdiastol/i,/isovolum(etric|ic)/i,/\bmitral\b/i,/aortic valve/i,/\bS1\b|first heart sound/i,/\bS2\b|second heart sound/i,/ejection/i,/end.diastolic|end.systolic/i,/stroke volume/i,/pressure.volume/i,/atrial (systole|kick|contraction)/i,/ventricular (filling|pressure|systole)/i,/\bwiggers/i,/dicrotic|incisura/i]} ];
+   terms:[/cardiac cycle/i,/\bsystol/i,/\bdiastol/i,/isovolum(etric|ic)/i,/\bmitral\b/i,/aortic valve/i,/\bS1\b|first heart sound/i,/\bS2\b|second heart sound/i,/ejection/i,/end.diastolic|end.systolic/i,/stroke volume/i,/pressure.volume/i,/atrial (systole|kick|contraction)/i,/ventricular (filling|pressure|systole)/i,/\bwiggers/i,/dicrotic|incisura/i]},
+  {id:'placenta-praevia', re:/\bplacenta(l)? pr(a)?evia|low.lying placenta\b/i,
+   terms:[/placenta(l)? pr(a)?evia/i,/low.lying placenta/i,/antepartum ha?emorrhage|\bAPH\b/i,/vasa pr(a)?evia/i,/abruption/i,/internal os/i,/transvaginal|\bTVS\b/i,/digital (vaginal )?exam/i,/lower (uterine )?segment/i,/expectant (care|management)|macafee/i,/placenta accreta|increta|percreta/i,/postpartum ha?emorrhage|\bPPH\b/i,/anti-?D/i,/caesarean|cesarean/i]} ];
 /* Which library plate fits a topic: its title or opening names it, or the WHOLE note covers enough of what the plate shows
    (at least 4 different parts or processes, e.g. a "Renal investigations" note that discusses GFR, glomeruli, tubules and ADH).
    The tutor then follows only the lines the plate can show; the rest of the note is explained in words. */
@@ -3152,7 +3167,7 @@ function mbxPlateFor(t){
 var _mbpLoad=null, _MBP_LESSON={}, _mbpCur=null, _mbpSaveT=null;
 /* "· 4/10" or "· ✓" on the 3D Tutor tab, from the student's synced progress */
 function mbpTabNote(t){ try{ var p=(DATA.tutor||{})[t.id]; if(!p) return ''; if(p.done&&(p.done.full||p.done.exam)) return ' · ✓'; if(p.k!=null&&p.n) return ' · '+(p.k+1)+'/'+p.n; }catch(e){} return ''; }
-var MBP_V='1.5.0';
+var MBP_V='1.6.0';
 function mbpLoad(){
   if(window.MBPlate&&window.MBPlate.mount) return Promise.resolve(window.MBPlate);
   if(_mbpLoad) return _mbpLoad;
@@ -3172,6 +3187,68 @@ function mbpLesson(t, pl){
     .then(function(j){ var l=j.lesson||null; if(l) try{ localStorage.setItem('mbp-les:'+k, JSON.stringify({h:mbpHash(String(t.note||'').slice(0,60000)), at:Date.now(), lesson:l})); }catch(e){} return l; })
     .catch(function(e){ delete _MBP_LESSON[k]; if(kept&&kept.lesson) return kept.lesson; throw e; });
   return _MBP_LESSON[k];
+}
+/* ===== 3D lessons built for a topic's own note (premium). The server names the topic (similar notes share one plate), builds a quick
+   draft guided tour in the background (5–8 min) and, later, the daily run replaces it with the full checked plate.
+   DATA.tourFor[topicId] = {slug, status, title, ready, seen} (synced), the built page is kept on the device for offline. ===== */
+var _MBT={}, _mbtPoll={};
+function mbtGet(t){ return (DATA.tourFor||{})[t.id]||null; }
+function mbtSet(t,v){ DATA.tourFor=DATA.tourFor||{}; DATA.tourFor[t.id]=Object.assign({},DATA.tourFor[t.id]||{},v); try{ persist(); }catch(e){} }
+function mbtReady(t){ var s=mbtGet(t); return !!(s&&/^(draft|building|full)$/.test(s.status||'')); }
+function mbtBuilding(t){ var s=mbtGet(t); return !!(s&&s.status==='drafting'); }
+function mbtApi(){ var CFG=window.MEDBANK_CONFIG||{}; return (CFG.IMPORT_API||'').replace(/\/$/,''); }
+/* ask once per topic which plate it gets; for a premium student this is what starts the build ("once a topic is imported") */
+function mbtFor(t){ if(_MBT[t.id]&&_MBT[t.id].pending) return _MBT[t.id].pending;
+  var p=mbxCall('/explainer/tour/for-topic',{title:t.name||'', text:String(t.note||'').slice(0,60000)},2).then(function(j){
+    var was=mbtGet(t)||{}; mbtSet(t,{slug:j.slug, status:j.status, title:j.title, step:j.step||null, since:j.since||j.started||null, at:Date.now()});
+    if(/^(draft|full)$/.test(j.status)&&was.status==='drafting') mbtSet(t,{ready:true, seen:false});
+    if(j.status==='drafting') mbtWatch(t);
+    delete _MBT[t.id]; return j; }, function(e){ delete _MBT[t.id]; throw e; });
+  _MBT[t.id]={pending:p}; return p; }
+function mbtAuto(t){ try{ if(!t||!t.id||mbxPlateFor(t)||mbxIsChem(t)) return; if(String(t.note||'').replace(/\s+/g,' ').trim().length<200) return;
+    var s=mbtGet(t); if(s&&s.status&&s.status!=='drafting'&&Date.now()-(s.at||0)<6*3600e3) return; if(s&&s.status==='drafting'){ mbtWatch(t); return; }
+    if(navigator.onLine===false||!window.__mbSB) return;
+    if(_MBT[t.id]) return; _MBT[t.id]={scheduled:true};   // one request per topic, however many redraws happen meanwhile
+    setTimeout(function(){ delete _MBT[t.id]; var s2=mbtGet(t); if(s2&&s2.status&&Date.now()-(s2.at||0)<6*3600e3) return; mbtFor(t).then(function(){ mbSoftRender(); }, function(){}); }, 1200); }catch(e){} }
+/* while it builds, check every 20 s; when it is ready, the banner says so (and the 3D tab opens it) */
+function mbtWatch(t){ if(_mbtPoll[t.id]) return; _mbtPoll[t.id]=setInterval(async function(){
+    var s=mbtGet(t); if(!s||s.status!=='drafting'){ clearInterval(_mbtPoll[t.id]); delete _mbtPoll[t.id]; return; }
+    try{ var r=await fetch(mbtApi()+'/explainer/tour/'+encodeURIComponent(s.slug)); var j=await r.json(); if(!j||!j.status) return;
+      if(j.status!=='drafting'){ clearInterval(_mbtPoll[t.id]); delete _mbtPoll[t.id]; mbtSet(t,{status:j.status, step:null, ready:/^(draft|full|building)$/.test(j.status), seen:false});
+        if(j.html) mbtKeep(s.slug,j); if((location.hash||'').indexOf(t.id)>=0) render(); }
+      else if(j.step&&j.step!==s.step){ mbtSet(t,{step:j.step}); var el=document.getElementById('mbtStep'); if(el) mbSoftRender(); }
+    }catch(e){} }, 20000); }
+async function mbtKeep(slug,j){ try{ var c=await caches.open('mb-keep-plates'); await c.put('./__mbtour/'+slug+'.json', new Response(JSON.stringify(j),{headers:{'Content-Type':'application/json'}})); }catch(e){} }
+async function mbtPlate(slug){
+  try{ var c=await caches.open('mb-keep-plates'), hit=await c.match('./__mbtour/'+slug+'.json'); if(hit){ var k=await hit.json(); if(k&&k.html) return k; } }catch(e){}
+  var r=await fetch(mbtApi()+'/explainer/tour/'+encodeURIComponent(slug)); var j=await r.json(); if(j&&j.html) mbtKeep(slug,j); return j; }
+function mbtBanner(t){ var s=mbtGet(t); if(!s||!s.ready||s.seen||topicTab==='mech3d') return '';
+  return '<div class="mbt-ready"><div class="ic">✨</div><div class="mbt-tx"><b>Your 3D lesson is ready</b><span>Built from your note on '+esc(s.title||t.name||'this topic')+'. The tutor walks you through your own note on an animated plate.</span></div>'
+    +'<button class="btn primary" onclick="mbtOpen(\''+t.id+'\')">Open it</button><button class="mbt-x" aria-label="Later" onclick="mbtSeen(\''+t.id+'\')">×</button></div>'; }
+function mbtOpen(id){ DATA.tourFor=DATA.tourFor||{}; if(DATA.tourFor[id]) DATA.tourFor[id].seen=true; try{ persist(); }catch(e){} topicTab='mech3d'; render(); }
+function mbtSeen(id){ DATA.tourFor=DATA.tourFor||{}; if(DATA.tourFor[id]) DATA.tourFor[id].seen=true; try{ persist(); }catch(e){} render(); }
+var MBT_STEPS=[['queued','Getting ready'],['writing the plate','Writing the plate from your note'],['checking the plate','Checking every stop runs'],['fixing','Fixing what the check found']];
+function renderTourFor(t){
+  if(_mbpCur){ try{ _mbpCur.api.destroy(); }catch(e){} _mbpCur=null; }
+  var s=mbtGet(t);
+  if(s&&s.ready&&!s.seen){ s.seen=true; try{ persist(); }catch(e){} }
+  if(!s||!s.status){ mbtFor(t).then(function(){ if(topicTab==='mech3d') render(); }, function(e){ var h=document.getElementById('mbtHost'); if(h) h.innerHTML='<div class="empty" style="text-align:left">'+esc(e.message||'The 3D lesson needs a connection the first time.')+'</div>'; });
+    return '<div id="mbtHost"><div class="empty">Looking for a 3D lesson for this topic…</div></div>'; }
+  if(s.status==='library'){ var lib=MBX_PLATES.filter(function(x){ return x.id===s.slug; })[0]; if(lib) return renderPlateTutor(t, lib); }
+  if(/^(draft|building|full)$/.test(s.status)){
+    setTimeout(function(){ var host=document.getElementById('mbtHost'); if(!host) return;
+      mbtPlate(s.slug).then(function(j){ if(!j||!j.html) throw new Error('This 3D lesson is not ready yet.');
+        if(!host.isConnected) return; host.outerHTML=renderPlateTutor(t,{id:s.slug, draftPlate:{id:s.slug, title:j.title, course:j.course, kind:'tour', html:j.html, manifestData:j.manifest, draft:j.status!=='full', files:[]}}); })
+      .catch(function(e){ if(host.isConnected) host.innerHTML='<div class="empty" style="text-align:left">'+esc(e.message)+'</div>'; }); },0);
+    return '<div id="mbtHost"><div class="empty">Opening your 3D lesson…</div></div>'; }
+  if(s.status==='drafting'){ mbtWatch(t);
+    var since=s.since?Date.parse(s.since):Date.now(), pct=Math.min(95,Math.round((Date.now()-since)/(7*60e3)*100)), k=Math.max(0,MBT_STEPS.findIndex(function(x){ return (s.step||'queued').indexOf(x[0])===0; }));
+    return '<div class="mbt-card"><div class="mbt-h">3D Tutor · '+esc(s.title||t.name||'')+'</div><p class="mbt-t">Building a 3D lesson for your note</p><div class="mbt-st" id="mbtStep">'
+      +MBT_STEPS.map(function(x,i){ return '<div class="'+(i<k?'ok':i===k?'now':'wait')+'"><i>'+(i<k?'✓':'')+'</i>'+x[1]+'</div>'; }).join('')+'</div>'
+      +'<div class="mbt-bar"><b style="width:'+Math.max(6,pct)+'%"></b></div><p class="mbt-s">About 5–8 minutes. You can leave this page; it keeps building, and a banner tells you when it is ready. Every student whose note covers '+esc(s.title||'this topic')+' gets it free after you.</p></div>'; }
+  if(s.status==='premium') return '<div class="mbt-card"><div class="mbt-h">3D Tutor</div><p class="mbt-t">A 3D lesson built from your own note</p><p class="mbt-s">MedBank builds an animated plate for '+esc(s.title||'this topic')+', then the tutor walks you through your note on it, with questions and explain-back. It is part of Premium.</p><button class="btn primary" onclick="if(window.MB_PAYWALL)MB_PAYWALL.nudge(\'3D lessons for your own notes\',\'Premium builds a 3D lesson for every topic you import.\',\'Upgrade\')">See Premium</button></div>';
+  if(s.status==='failed') return '<div class="mbt-card"><div class="mbt-h">3D Tutor</div><p class="mbt-t">The quick 3D version didn’t pass its checks</p><p class="mbt-s">It’s queued for the full build, which checks every stop in a browser. You’ll see a banner here when it’s ready.</p></div>';
+  return '<div class="empty" style="text-align:left">No 3D lesson for this topic yet'+(s.status==='none'?' — the note is too short to build one from.':'.')+'</div>';
 }
 /* 3D Tutor insights (feature 7): what happens in a lesson is queued on the device and sent a few seconds later in one call
    (kept while offline, sent next time). No note text is sent — only stop numbers and titles, scores and the questions asked. */
@@ -3224,7 +3301,7 @@ function renderPlateTutor(t, pl){
     if(_mbpCur){ try{ var S0=_mbpCur.api.state; if(_mbpCur.tid===t.id&&_mbpCur.api.alive()&&S0.mode==='lesson'&&S0.k>=0) resume={tier:S0.tier,k:S0.k,play:!!S0.playing}; _mbpCur.api.destroy(); }catch(e){} _mbpCur=null; }
     mbpLoad().then(function(P){
       if(!host.isConnected) return;
-      var plate=P.PLATES.filter(function(x){ return x.id===pl.id; })[0]; if(!plate) throw new Error('This plate is not in the library yet.');
+      var plate=pl.draftPlate||P.PLATES.filter(function(x){ return x.id===pl.id; })[0]; if(!plate) throw new Error('This plate is not in the library yet.');
       var api=P.mount(host,{ plate:plate, resume:resume, note:String(t.note||''), getLesson:function(){ return mbpLesson(t,pl); },
         speak:function(text,done){ try{ voiceSpeak(text, done||null, 'read'); }catch(e){ if(done) done(); } },
         stopSpeak:function(){ try{ stopSpeak(); }catch(e){} },
@@ -3248,8 +3325,11 @@ function renderPlateTutor(t, pl){
 }
 function mbxShow(t){
   try{ if(!t||localStorage.mbmech==='0') return false; }catch(e){}
-  return !!mbxPlateFor(t) || !!mbxTemplateFor(t) || MBX_CHEM.test((t.name||'')+' '+((t.subject&&t.subject.name)||'')+' '+String(t.note||'').slice(0,20000));
+  return !!mbxPlateFor(t) || mbxIsChem(t) || String(t.note||'').replace(/\s+/g,' ').trim().length>=200;   // any real note can get a 3D lesson built for it
 }
+/* the chemistry 3D builder is for chemistry topics: a chemistry template, or a title/subject that is chemistry. A medical note that
+   merely says "mechanism" or "hydrolysis" gets a guided-tour plate instead (it used to fall into the chemistry builder). */
+function mbxIsChem(t){ return !!mbxTemplateFor(t) || /chemi|organic|biochem|pharmacol/i.test((t.name||'')+' '+((t.subject&&t.subject.name)||'')); }
 var _mbxLoad=null, _MBX_LESSON={}, _mbxCur=null, _MBX_SCAN={}, _MBX_AUTO={}, _MBX_PICK={};
 function mbxLoad(){
   if(window.MBMech&&window.MBMech.mountAuto) return Promise.resolve(window.MBMech);
@@ -3288,6 +3368,7 @@ function mbxPick(tid, name){ _MBX_PICK[tid]=name; render(); }
 function mbxBuildTyped(tid){ var i=document.getElementById('mbxAsk'); var v=(i&&i.value||'').trim(); if(v.length>2) mbxPick(tid, v); }
 function renderMech3d(t){
   var pl=mbxPlateFor(t); if(pl) return renderPlateTutor(t, pl);
+  if(!mbxIsChem(t)) return renderTourFor(t);   // not chemistry: the 3D lesson built for this topic's note
   if(_mbpCur){ try{ _mbpCur.api.destroy(); }catch(e){} _mbpCur=null; }
   if(!mbxShow(t)) return '<div class="empty" style="text-align:left">No 3D Tutor for this topic yet.</div>';
   var tpl=mbxTemplateFor(t), pick=_MBX_PICK[t.id]||(tpl?'@'+tpl.id:null), scan=_MBX_SCAN[t.id];
@@ -5703,11 +5784,18 @@ async function taQuarantine(ev, target_id, qh){ if(ev&&ev.preventDefault)ev.prev
 var _PA={plate:'', days:30, data:null};
 function pagePlateAdmin(){
   if(!window.IS_ADMIN) return pageHome();
-  setTimeout(paFetch,40);
+  setTimeout(function(){ paFetch(); paTours(); },40);
   return crumbs([{label:'Home',route:'home'},{label:'Admin · 3D Tutor insights'}])+
     `<h1>🧪 3D Tutor insights</h1><p class="sub">What students do with the 3D lessons · every student, no names</p>
-     <div id="paBody"><div class="empty">Loading…</div></div>`;
+     <div id="paBody"><div class="empty">Loading…</div></div>
+     <div id="paTours" style="margin-top:14px"></div>`;
 }
+async function paTours(){ var host=$('#paTours'); if(!host) return;
+  try{ var r=await admApi('/admin/tours'); if(!r.ok) throw new Error((r.data&&r.data.error)||'Could not load'); var d=r.data, rows=d.rows||[];
+    var st=function(x){ return x.running?'<span class="pa-st run">building · '+esc(x.running)+'</span>':x.status==='draft'?'<span class="pa-st ok">draft ready</span>':x.status==='full'?'<span class="pa-st ok">full plate</span>':x.status==='failed'?'<span class="pa-st bad" title="'+esc(x.error||'')+'">failed</span>':'<span class="pa-st">'+esc(x.status)+'</span>'; };
+    host.innerHTML='<div class="card pa-card"><h3>3D plates built for students’ topics · $'+(d.total_usd||0).toFixed(2)+' so far</h3><p class="sub">Quick drafts by '+esc(d.model||'Claude')+' (about $0.77–1.40 each, once per topic; students with similar notes share it) · the full checked plate replaces each draft later</p>'
+      +(rows.length?'<div style="overflow-x:auto"><table class="pa-tbl"><tr><th>Topic</th><th>Status</th><th>Students</th><th>Studied</th><th>Cost</th><th>Built</th></tr>'+rows.map(function(x){ return '<tr><td><b>'+esc(x.title)+'</b><div class="sub">'+esc(x.course||'')+' · '+esc(x.slug)+'</div></td><td>'+st(x)+'</td><td>'+(x.students||0)+'</td><td>'+(x.wanted||0)+'</td><td>$'+Number(x.usd||0).toFixed(2)+'</td><td>'+(x.built_at?new Date(x.built_at).toLocaleDateString():'—')+'</td></tr>'; }).join('')+'</table></div>':'<p class="sub">None yet. The first premium student to import a topic with no plate starts one.</p>')+'</div>'; }
+  catch(e){ host.innerHTML='<div class="card"><b>3D plates built:</b> <span class="sub">'+esc(e.message)+'</span></div>'; } }
 function paSet(k,v){ _PA[k]=v; paFetch(); }
 async function paFetch(){
   var host=$('#paBody'); if(!host) return;
