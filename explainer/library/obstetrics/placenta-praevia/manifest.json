@@ -1,0 +1,251 @@
+{
+ "id": "placenta-praevia",
+ "title": "Placenta praevia, up close",
+ "course": "obstetrics",
+ "kind": "tour",
+ "version": 1,
+ "conditions": [],
+ "phases": [
+  {
+   "name": "A placenta in the way out",
+   "shows": "Basic concept · The placenta should implant in the upper uterus, away from the cervix. In placenta praevia it lies over the internal os, the only way out for the baby. Covers: The idea; How it's defined today."
+  },
+  {
+   "name": "Why the placenta implants low",
+   "shows": "Risk factors · Where the placenta ends up depends on where the blastocyst implants, and on where the lining gives it the best blood supply as it grows. Covers: The mechanism; Risk factors to quote."
+  },
+  {
+   "name": "The lower segment grows, so the placenta seems to move",
+   "shows": "Week by week · The placenta stays attached in the same place, but the tissue under it grows. Covers: What you're seeing; So the scan schedule is."
+  },
+  {
+   "name": "Painless, bright-red and recurrent",
+   "shows": "Antepartum haemorrhage · As the lower segment forms and the cervix starts to efface, the wall under the placenta stretches. The placenta cannot stretch with it. Covers: The mechanism; Typical picture; Praevia vs abruption vs vasa praevia."
+  },
+  {
+   "name": "Diagnose it without a finger",
+   "shows": "Examination · In any antepartum bleed, assume praevia until the placenta has been located. That changes how you examine. Covers: What to do."
+  },
+  {
+   "name": "The first hour",
+   "shows": "Antepartum haemorrhage · The pathway and the orders update together. Covers: Every bleed, straight away; If she is shocked or the bleed is massive; If she is stable; Orders now."
+  },
+  {
+   "name": "Expectant care, laid out across the weeks",
+   "shows": "Weeks 20 → 37 · Once she is stable, the aim is to gain fetal maturity safely and then deliver in a planned way, before labour or a big bleed forces it. The lens lays the plan out by week. Covers: Where she should be; While she waits; When to deliver (planned caesarean)."
+  },
+  {
+   "name": "Each drug, and where it acts",
+   "shows": "Doses · The ring on the pelvis shows where it acts, and the tray shows its first 48 hours. Covers: Antenatal drugs in praevia."
+  },
+  {
+   "name": "A planned caesarean, planned around the placenta",
+   "shows": "Planned delivery · If the placenta covers the os, the baby can't pass through it, so birth is by caesarean. Covers: Mode of birth; Who and what must be ready; The incision."
+  },
+  {
+   "name": "Why it keeps bleeding, and how to stop it",
+   "shows": "After the placenta · After the placenta comes out, the bed it leaves is in the lower segment . Normally the muscle fibres around the open vessels clamp them shut (\"living ligatures\"). Covers: Watch the lens; Doses, in order."
+  },
+  {
+   "name": "Placenta accreta spectrum",
+   "shows": "The dangerous partner · On a caesarean scar the decidua is missing. Nothing stops the villi from growing into the muscle, so the placenta cannot separate at birth. Covers: The spectrum; Who to screen; Management."
+  }
+ ],
+ "parts": [
+  {
+   "id": "placenta",
+   "name": "Placenta",
+   "shows": "Implanted over or near the internal os; its edge-to-os distance on TVS decides low-lying vs praevia"
+  },
+  {
+   "id": "cervix",
+   "name": "Cervix and internal os",
+   "shows": "The way out; the placental edge is measured to the internal os"
+  },
+  {
+   "id": "uterus",
+   "name": "Uterine wall",
+   "shows": "Upper segment muscle that contracts; the thin lower segment that forms from 28 weeks and clamps vessels poorly"
+  },
+  {
+   "id": "scar",
+   "name": "Caesarean scar",
+   "shows": "Scarred lower segment: raises the risk of praevia and of accreta when the placenta lies over it"
+  },
+  {
+   "id": "fetus",
+   "name": "Fetus",
+   "shows": "High head or abnormal lie because the placenta occupies the pelvis; target of steroids and MgSO4"
+  },
+  {
+   "id": "cord",
+   "name": "Umbilical cord",
+   "shows": "Joins placenta and fetus"
+  },
+  {
+   "id": "fluid",
+   "name": "Amniotic fluid",
+   "shows": "Fills the uterine cavity"
+  },
+  {
+   "id": "blood",
+   "name": "Bleeding",
+   "shows": "Maternal blood from sheared placental bed, tracking out through the os: painless, bright red"
+  },
+  {
+   "id": "probe",
+   "name": "Transvaginal probe",
+   "shows": "Sits 2-3 cm from the cervix, never in the os: the safe and most accurate test"
+  },
+  {
+   "id": "balloon",
+   "name": "Bakri balloon",
+   "shows": "Intrauterine tamponade pressing on the lower-segment placental bed after delivery"
+  },
+  {
+   "id": "accreta",
+   "name": "Invading villi",
+   "shows": "Placenta accreta spectrum: villi grow into or through the myometrium at the scar"
+  },
+  {
+   "id": "bladder",
+   "name": "Bladder",
+   "shows": "In front of the lower segment; invaded in percreta"
+  },
+  {
+   "id": "vagina",
+   "name": "Vagina",
+   "shows": "Bleeding shows here; a finger must not go through the os"
+  },
+  {
+   "id": "abdwall",
+   "name": "Abdominal wall",
+   "shows": "Skin, fat and rectus over the growing uterus"
+  },
+  {
+   "id": "rectum",
+   "name": "Rectum",
+   "shows": "Behind the uterus"
+  },
+  {
+   "id": "sacrum",
+   "name": "Sacrum",
+   "shows": "Posterior pelvis"
+  },
+  {
+   "id": "symphysis",
+   "name": "Pubic symphysis",
+   "shows": "Front of the pelvis"
+  }
+ ],
+ "readouts": [],
+ "lenses": [],
+ "whatifs": [],
+ "predictions": [],
+ "concepts": [
+  "placenta praevia",
+  "low-lying placenta",
+  "risk factors",
+  "lower segment formation",
+  "antepartum haemorrhage",
+  "vasa praevia",
+  "abruption",
+  "transvaginal ultrasound",
+  "no digital vaginal examination",
+  "major haemorrhage protocol",
+  "expectant management",
+  "corticosteroids",
+  "magnesium sulphate",
+  "anti-D",
+  "caesarean section",
+  "postpartum haemorrhage",
+  "uterotonics",
+  "tranexamic acid",
+  "Bakri balloon",
+  "placenta accreta spectrum"
+ ],
+ "not_shown": [
+  "histology of the villi",
+  "neonatal resuscitation",
+  "long-term outcomes"
+ ],
+ "stops": [
+  {
+   "title": "A placenta in the way out",
+   "chip": "What it is",
+   "grp": "The idea",
+   "kicker": "Basic concept",
+   "lens": "Where the placental edge can sit"
+  },
+  {
+   "title": "Why the placenta implants low",
+   "chip": "Why it happens",
+   "grp": "",
+   "kicker": "Risk factors",
+   "lens": "Where the blastocyst settles"
+  },
+  {
+   "title": "The lower segment grows, so the placenta seems to move",
+   "chip": "Rescans",
+   "grp": "Weeks",
+   "kicker": "Week by week",
+   "lens": "Edge-to-os distance, live"
+  },
+  {
+   "title": "Painless, bright-red and recurrent",
+   "chip": "Why it bleeds",
+   "grp": "",
+   "kicker": "Antepartum haemorrhage",
+   "lens": "The wall stretches, the placenta can't"
+  },
+  {
+   "title": "Diagnose it without a finger",
+   "chip": "Diagnosis",
+   "grp": "",
+   "kicker": "Examination",
+   "lens": "Digital exam vs transvaginal scan"
+  },
+  {
+   "title": "The first hour",
+   "chip": "Acute bleed",
+   "grp": "Management",
+   "kicker": "Antepartum haemorrhage",
+   "lens": "Triage from the moment she arrives"
+  },
+  {
+   "title": "Expectant care, laid out across the weeks",
+   "chip": "Expectant care",
+   "grp": "",
+   "kicker": "Weeks 20 → 37",
+   "lens": "What happens in which week"
+  },
+  {
+   "title": "Each drug, and where it acts",
+   "chip": "The drugs",
+   "grp": "",
+   "kicker": "Doses",
+   "lens": "Dose, route and timing"
+  },
+  {
+   "title": "A planned caesarean, planned around the placenta",
+   "chip": "Caesarean",
+   "grp": "Delivery",
+   "kicker": "Planned delivery",
+   "lens": "Where to cut"
+  },
+  {
+   "title": "Why it keeps bleeding, and how to stop it",
+   "chip": "PPH",
+   "grp": "",
+   "kicker": "After the placenta",
+   "lens": "Tone, suction and the placental bed"
+  },
+  {
+   "title": "Placenta accreta spectrum",
+   "chip": "Accreta",
+   "grp": "",
+   "kicker": "The dangerous partner",
+   "lens": "How deep the villi go"
+  }
+ ]
+}

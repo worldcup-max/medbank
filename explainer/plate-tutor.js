@@ -22,6 +22,7 @@
  * Reviews (feature 4): when the student finishes the full walk-through or exam revision, the note's exam questions are
  * handed to the app (onCards) as review cards tied to their moment on the plate; MBPlate.replay() replays that moment.
  *
+ *   plate: a PLATES entry, or a draft built for the topic: { id, title, kind:"tour", html, manifestData, draft:true }
  *   MBPlate.mount(host, { plate, note, getLesson, speak, stopSpeak, warm, isDark, loadProgress, saveProgress, whatifUI, onCards, onReady, onStart, offline, ask, explain, onReport, onEvent })  → { destroy, voiceTexts, refresh, … }
  * Data-light (feature 5): the plate loads as <id>.lite.html (no baked voice); onStart(api) fires when the student first picks a length (onReady(api) once the lesson and manifest are in), so the app can
  * save the plate files, the lesson and api.voiceTexts() (every line the tutor can say) for offline; offline() → {state:"saved"|"saving", n, of} draws the chip.
@@ -35,6 +36,9 @@
       re: /\bnephron|urine (formation|concentration)|loop of henle|countercurrent|tubular (reabsorption|function)|glomerular filtration\b/i },
     { id: "cardiac-cycle-wiggers", course: "physiology", title: "The cardiac cycle",
       re: /\bcardiac cycle|wiggers|heart sounds|pressure.volume loop|systole and diastole\b/i },
+    /* guided-tour plates (explainer/tours): clinical topics with their management and drugs, driven by the student's note the same way */
+    { id: "placenta-praevia", course: "obstetrics", title: "Placenta praevia", kind: "tour",
+      re: /\bplacenta(l)? pr(a)?evia|low.lying placenta\b/i },
   ].map((p) => { const dir = BASE + "library/" + p.course + "/" + p.id + "/";
     /* .lite.html is the same plate without its baked voice (about 40 KB instead of 1 MB): the tutor never plays that voice, it speaks the student's own lesson */
     return { ...p, src: dir + p.id + ".lite.html", full: dir + p.id + ".html", manifest: dir + "manifest.json", files: [dir + p.id + ".lite.html", dir + "manifest.json", BASE + "studio/tutor-link.js"] }; });
@@ -103,7 +107,7 @@
 .mbp-tin{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--panel);color:var(--text);font:15px/1.45 system-ui;resize:vertical;margin:2px 0 8px}
 .mbp-mark{color:var(--accent);letter-spacing:3px;font-size:15px;margin:0 0 4px}.mbp-got,.mbp-miss{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:4px;font-size:14px;line-height:1.4}.mbp-got li{color:#047857}.mbp-miss li{color:var(--text)}.mbp-miss span{color:var(--dim);font-size:12.5px}
 :root[data-theme="dark"] .mbp-got li{color:#6ee7b7}.mbp-off2{border:0;background:none;color:var(--dim);font:12.5px system-ui;text-decoration:underline;padding:6px 0 0;cursor:pointer}
-.mbp-off{display:inline-flex;align-items:center;gap:6px;font:700 12.5px system-ui;border-radius:99px;padding:5px 11px;margin:0 0 8px;border:1px solid var(--line);color:var(--dim)}.mbp-off.ok{color:#047857;border-color:#a7f3d0;background:#ecfdf5}:root[data-theme="dark"] .mbp-off.ok{color:#6ee7b7;border-color:#065f46;background:rgba(16,185,129,.12)}
+.mbp-off{display:inline-flex;align-items:center;gap:6px;font:700 12.5px system-ui;border-radius:99px;padding:5px 11px;margin:0 0 8px;border:1px solid var(--line);color:var(--dim)}.mbp-off.draft{color:#b45309;border-color:#fcd34d;background:#fffbeb;margin-right:6px}:root[data-theme="dark"] .mbp-off.draft{color:#fcd34d;border-color:#92400e;background:rgba(245,158,11,.12)}.mbp-off.ok{color:#047857;border-color:#a7f3d0;background:#ecfdf5}:root[data-theme="dark"] .mbp-off.ok{color:#6ee7b7;border-color:#065f46;background:rgba(16,185,129,.12)}
 .mbp-head .mbp-bar{flex-wrap:wrap;row-gap:2px}.mbp-head .mbp-dots{order:9;flex:1 0 100%;justify-content:flex-start}.mbp-head [data-a="voice"]{margin-left:auto}
 .mbp-sheet{grid-template-columns:minmax(0,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--panel);border-top:1px solid var(--line);border-radius:18px 18px 0 0;
  box-shadow:0 -10px 30px rgba(0,0,0,.14);padding:6px 14px calc(12px + env(safe-area-inset-bottom,0px));display:grid;gap:9px;max-width:100vw}
@@ -138,7 +142,7 @@ html[data-theme="dark"] .mbp-sheet{box-shadow:0 -10px 30px rgba(0,0,0,.5)}
 .mbp-btn.p{background:var(--accent);border-color:var(--accent);color:#fff}
 .mbp-wi{display:flex;gap:7px;overflow-x:auto;padding:1px 0 3px;align-items:center}.mbp-wi .lb{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dimmer);white-space:nowrap}
 .mbp-wi button{flex:none;min-height:38px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:600 13px system-ui;padding:0 13px;cursor:pointer;white-space:nowrap}
-.mbp-wi button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}.mbp-note.pk:not(.wion) .mbp-wi{display:none}
+.mbp-wi button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}.mbp-note.pk:not(.wion) .mbp-wi{display:none}.mbp-wi[hidden]{display:none!important}
 .mbp-tbl{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:5px 10px;align-items:baseline;font-size:13.5px;color:var(--text)}.mbp-tbl .l{color:var(--dim)}.mbp-tbl b{font-variant-numeric:tabular-nums;text-align:right}.mbp-tbl .a{color:var(--dimmer)}
 .mbp-tbl .up{color:#b91c1c}.mbp-tbl .dn{color:#1d4ed8}html[data-theme="dark"] .mbp-tbl .up{color:#f87171}html[data-theme="dark"] .mbp-tbl .dn{color:#93c5fd}
 .mbp-offer{border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));background:color-mix(in srgb,var(--accent) 6%,var(--panel));border-radius:12px;padding:12px;display:grid;gap:8px}
@@ -237,7 +241,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
       st.manifest.parts.forEach((p) => { parts[p.id] = { name: p.name, shows: p.shows, covered: !un.has(p.id), qs: o.ask ? partQuestions(p) : [] }; });
       post({ type: "mbx-link", parts, unlocked: [...st.unlocked], dark: o.isDark ? o.isDark() : false }); }
     frame.addEventListener("load", () => { try { const d = frame.contentDocument, s = d.createElement("script"); s.src = BASE + "studio/tutor-link.js"; d.head.appendChild(s); } catch (e) { console.warn("[plate] tutor-link not injected", e); } });
-    frame.src = P.src;
+    if (P.html) frame.srcdoc = P.html; else frame.src = P.src;   // a draft plate built for this topic comes as HTML (srcdoc keeps it same-origin)
     function onMsg(e) { if (e.source !== frame.contentWindow) return; const m = e.data || {};
       if (m.type === "mbx-linked") { st.linked = true; st.linkWhatif = m.whatif !== false; st.fallback = m.lesson || null; const ld = root.querySelector(".mbp-load"); if (ld) ld.remove(); linkPlate(); if (st.mode === "fallback") useFallback(); }
       else if (m.type === "mbx-height") frame.style.height = Math.max(320, m.h) + "px";
@@ -366,6 +370,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
       if (st.picking === "start") {
         const r = resumable(), fb = st.mode === "fallback";
         let h = `<div class="mbp-h">${fb ? "Standard lesson · not matched to your note" : "How long have you got?"}</div>`;
+        if (P.draft) h += `<div class="mbp-off draft">✏️ Draft plate · a full, checked version is being built</div>`;
         const off = !fb && o.offline ? o.offline() : null;
         if (off && off.state === "saved") h += `<div class="mbp-off ok">✓ Saved for offline · plays with no data</div>`;
         else if (off && off.state === "saving") h += `<div class="mbp-off">Saving for offline… ${off.n} of ${off.of}</div>`;
@@ -460,7 +465,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
       const p = loadProg() || {}; const d = Object.assign({}, p.done, { [st.tier]: true }); saveProg({ k: st.stops.length - 1, finished: st.tier, done: d }); openPick("done"); }
     st.voice = store.get("mbp-voice", st.voice);
     layout();
-    fetch(P.manifest).then((r) => r.json()).then((m) => { st.manifest = m; linkPlate(); renderLines(); renderChips(); ready(); }).catch(() => {});
+    (P.manifestData ? Promise.resolve({ json: () => P.manifestData }) : fetch(P.manifest)).then((r) => r.json()).then((m) => { st.manifest = m; linkPlate(); renderLines(); renderChips(); ready(); }).catch(() => {});
     Promise.resolve(o.lesson || (o.getLesson ? o.getLesson() : null)).then((l) => { if (destroyed) return;
       if (l && l.steps && l.steps.length) { useLesson(l); ready(); } else useFallback("Your note couldn't be matched to this plate right now, so this is the plate's standard walk-through.");
       if (st.mode === "fallback") { const ff = st.fallback; if (ff) useFallback(); } })
@@ -577,7 +582,7 @@ html[data-theme="dark"] .mbp-c .ok{color:#4ade80}html[data-theme="dark"] .mbp-op
     function onMsg(e) { if (e.source !== frame.contentWindow) return; const m = e.data || {};
       if (m.type === "mbx-linked") { linked = true; const ld = host.querySelector(".mbp-load"); if (ld) ld.remove(); post({ type: "mbx-link", parts: {}, unlocked: [], dark: r.isDark ? r.isDark() : false, mini: true }); setTimeout(go, 80); }
       else if (m.type === "mbx-height" && linked) frame.style.height = Math.max(160, m.h) + "px"; }
-    window.addEventListener("message", onMsg); frame.src = P.src; frame.style.height = Math.round((host.clientWidth || 340) * 640 / 760 + 10) + "px";
+    window.addEventListener("message", onMsg); if (P.html) frame.srcdoc = P.html; else frame.src = P.src; frame.style.height = Math.round((host.clientWidth || 340) * 640 / 760 + 10) + "px";
     host.querySelector(".mbp-rpb").onclick = (e) => { e.stopPropagation(); go(); };
     const watch = setInterval(() => { if (!host.isConnected) stop(); }, 1000);
     function stop() { if (gone) return; gone = true; clearInterval(timer); clearInterval(watch); window.removeEventListener("message", onMsg); }

@@ -1,0 +1,897 @@
+"use strict";
+/* ======================= helpers ======================= */
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, a = {}, p) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const f1 = (n) => Math.round(n * 10) / 10;
+const P2 = (p) => `${f1(p[0])} ${f1(p[1])}`;
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const sm = (x) => { x = clamp(x, 0, 1); return x * x * (3 - 2 * x); };
+const $ = (id) => document.getElementById(id);
+const tx = (g, x, y, s, cls = "lt", anchor = "start", extra = {}) => { const t = el("text", { x, y, class: cls, "text-anchor": anchor, ...extra }, g); t.textContent = s; return t; };
+let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+function spline(pts, closed) { const n = pts.length, P = (i) => closed ? pts[(i + n) % n] : pts[clamp(i, 0, n - 1)];
+  let d = `M${P2(pts[0])}`; for (let i = 0; i < (closed ? n : n - 1); i++) { const a = P(i - 1), b = P(i), c = P(i + 1), e = P(i + 2);
+    d += `C${f1(b[0] + (c[0] - a[0]) / 6)} ${f1(b[1] + (c[1] - a[1]) / 6)} ${f1(c[0] - (e[0] - b[0]) / 6)} ${f1(c[1] - (e[1] - b[1]) / 6)} ${P2(c)}`; } return d + (closed ? "Z" : ""); }
+function sampleClosed(pts, per) { const n = pts.length, P = (i) => pts[(i + n) % n], out = [];
+  for (let i = 0; i < n; i++) { const a = P(i - 1), b = P(i), c = P(i + 1), e = P(i + 2), c1 = [b[0] + (c[0] - a[0]) / 6, b[1] + (c[1] - a[1]) / 6], c2 = [c[0] - (e[0] - b[0]) / 6, c[1] - (e[1] - b[1]) / 6];
+    for (let k = 0; k < per; k++) { const t = k / per, m = 1 - t; out.push([m*m*m*b[0] + 3*m*m*t*c1[0] + 3*m*t*t*c2[0] + t*t*t*c[0], m*m*m*b[1] + 3*m*m*t*c1[1] + 3*m*t*t*c2[1] + t*t*t*c[1]]); } }
+  return out; }
+const cumOf = (pts) => { const c = [0]; for (let i = 1; i < pts.length; i++) c.push(c[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1])); return c; };
+const poly = (pts) => "M" + pts.map(P2).join("L") + "Z";
+const polyOpen = (pts) => "M" + pts.map(P2).join("L");
+const rot = (p, a) => [p[0] * Math.cos(a) - p[1] * Math.sin(a), p[0] * Math.sin(a) + p[1] * Math.cos(a)];
+const norm = (v) => { const L = Math.hypot(v[0], v[1]) || 1; return [v[0] / L, v[1] / L]; };
+
+/* ======================= the pregnancy model ======================= */
+// base cavity at term, in mm, internal os at the origin, +x posterior, y up negative
+const BASE = [[0, -326], [46, -316], [88, -284], [112, -230], [118, -170], [104, -110], [78, -62], [40, -26], [14, -6], [0, 0], [-14, -6], [-44, -26], [-82, -62], [-110, -112], [-124, -172], [-118, -236], [-92, -290], [-46, -318]];
+const BPTS = sampleClosed(BASE, 22), BCUM = cumOf(BPTS);
+let B_OS = 0; BPTS.forEach((p, i) => { if (p[1] > BPTS[B_OS][1]) B_OS = i; });
+const BSIGNED = BCUM.map((c) => c - BCUM[B_OS]);                 // signed arc from the os: − posterior, + anterior
+const LS0 = 52;                                                   // the isthmus that becomes the lower segment, mm
+const LOWNESS = BPTS.map((p) => sm((p[1] + LS0 + 20) / 30));       // 1 in the lower segment, 0 in the upper
+const OS0 = [430, 560], K = 1.38, TILT = -12 * Math.PI / 180;
+const CASES = {
+  A: { name: "Low-lying placenta, posterior", pl: [-182, -27], side: "posterior", scar: false },
+  B: { name: "Complete placenta praevia", pl: [-118, 70], side: "posterior", scar: false },
+  C: { name: "Anterior praevia over a caesarean scar", pl: [-22, 168], side: "anterior", scar: true },
+};
+const scOf = (ga) => 0.1 + 0.9 * Math.pow(clamp(ga, 6, 41) / 40, 1.4);
+const stOf = (ga) => 1 + 0.95 * sm((ga - 26) / 11);                // lower segment forms from ~26–28 weeks
+function geometry(ga, opt = {}) {
+  const sc = opt.sc ?? scOf(ga), st = opt.st ?? stOf(ga);
+  const pts = BPTS.map(([x, y]) => { const yy = y >= -LS0 ? y * st : y - LS0 * (st - 1); const r = rot([x * (opt.wide ?? 1), yy], TILT); return [OS0[0] + r[0] * sc * K, OS0[1] + r[1] * sc * K]; });
+  const cum = cumOf(pts), n = pts.length, cx = pts.reduce((s, p) => s + p[0], 0) / n, cy = pts.reduce((s, p) => s + p[1], 0) / n;
+  const nrm = pts.map((p, i) => { const a = pts[(i - 1 + n) % n], b = pts[(i + 1) % n]; let v = norm([-(b[1] - a[1]), b[0] - a[0]]); if (v[0] * (cx - p[0]) + v[1] * (cy - p[1]) > 0) v = [-v[0], -v[1]]; return v; });
+  return { ga, sc, st, pts, cum, nrm, c: [cx, cy], os: pts[B_OS] };
+}
+const idxOfSigned = (s) => { let best = 0, bd = 1e9; for (let i = 0; i < BSIGNED.length; i++) { const d = Math.abs(BSIGNED[i] - s); if (d < bd) { bd = d; best = i; } } return best; };
+function placentaEdge(G, cs) {   // the edge nearest the os, its distance in mm (straight line, as on TVS), and whether it covers the os
+  const [a, b] = cs.pl, covers = a < 0 && b > 0;
+  const iE = idxOfSigned(b <= 0 ? b : a >= 0 ? a : (Math.abs(a) < Math.abs(b) ? a : b));
+  const e = G.pts[iE], mm = Math.hypot(e[0] - G.os[0], e[1] - G.os[1]) / K;
+  const over = covers ? Math.min(-a, b) * G.sc * G.st : 0;
+  return { iE, e, mm, covers, over };
+}
+const classify = (pe) => pe.covers ? { k: "praevia", label: "Placenta praevia", cls: "bad", why: `covers the internal os` } : pe.mm <= 20 ? { k: "low", label: "Low-lying placenta", cls: "mid", why: `edge ${pe.mm.toFixed(0)} mm from the os` } : { k: "normal", label: "Clear of the os", cls: "ok", why: `edge ${pe.mm.toFixed(0)} mm from the os` };
+
+/* ======================= stage drawing ======================= */
+const svg = $("stage");
+const defs = el("defs", {}, svg);
+{ const g1 = el("radialGradient", { id: "gMus", cx: "40%", cy: "35%", r: "80%" }, defs); el("stop", { offset: 0, "stop-color": "var(--muscle-hi)" }, g1); el("stop", { offset: 1, "stop-color": "var(--muscle)" }, g1);
+  const g2 = el("radialGradient", { id: "gPl", cx: "50%", cy: "50%", r: "70%" }, defs); el("stop", { offset: 0, "stop-color": "var(--placenta-hi)" }, g2); el("stop", { offset: 1, "stop-color": "var(--placenta)" }, g2);
+  const g3 = el("radialGradient", { id: "gFetus", cx: "40%", cy: "35%", r: "75%" }, defs); el("stop", { offset: 0, "stop-color": "var(--fetus)" }, g3); el("stop", { offset: 1, "stop-color": "var(--fetus-deep)", "stop-opacity": 0.85 }, g3); }
+const L = {}; for (const k of ["back", "abd", "pelvis", "uterus", "inside", "front", "fx", "over", "labels"]) L[k] = el("g", {}, svg);
+
+// abdominal contents behind and above the uterus: peritoneal cavity with bowel loops
+for (let k = 0; k < 26; k++) { const x = 290 + rnd() * 320, y = -10 + rnd() * 420, r = 16 + rnd() * 18;
+  el("path", { d: `M${f1(x - r)} ${f1(y)} c ${f1(r * 0.2)} ${f1(-r)} ${f1(r * 1.8)} ${f1(-r)} ${f1(r * 2)} 0 c ${f1(-r * 0.2)} ${f1(r)} ${f1(-r * 1.8)} ${f1(r)} ${f1(-r * 2)} 0`, fill: "none", stroke: "var(--rectum)", "stroke-width": 7, opacity: 0.35 }, L.back); }
+// spine, sacrum, rectum (static, posterior)
+for (let k = 0; k < 6; k++) { const y = 38 + k * 54; el("rect", { x: 628, y, width: 64, height: 44, rx: 8, fill: "var(--bone)", stroke: "var(--bone-deep)" }, L.back); el("rect", { x: 632, y: y + 44, width: 56, height: 10, fill: "var(--glass)", stroke: "var(--bone-deep)", "stroke-width": 0.6 }, L.back); }
+TK.part("sacrum", el("path", { d: "M640 364 C 660 420 664 500 640 566 C 624 612 600 640 574 660 L 560 644 C 584 622 604 592 616 556 C 634 498 632 428 614 372 Z", fill: "var(--bone)", stroke: "var(--bone-deep)" }, L.back));
+for (let k = 0; k < 4; k++) el("path", { d: `M${622 + k * 2} ${396 + k * 52} l 22 -6`, stroke: "var(--bone-deep)", "stroke-width": 1 }, L.back);
+TK.part("rectum", el("path", { d: "M600 352 C 586 430 580 500 566 560 C 552 616 520 660 488 714", fill: "none", stroke: "var(--rectum)", "stroke-width": 30, "stroke-linecap": "round" }, L.back));
+el("path", { d: "M600 352 C 586 430 580 500 566 560 C 552 616 520 660 488 714", fill: "none", stroke: "var(--muscle-deep)", "stroke-width": 1, "stroke-dasharray": "2 7", opacity: 0.5 }, L.back);
+// pubic symphysis + bladder
+TK.part("symphysis", el("path", { d: "M236 612 C 250 596 280 594 296 612 C 304 632 296 668 276 678 C 256 684 236 668 232 648 Z", fill: "var(--bone)", stroke: "var(--bone-deep)" }, L.pelvis));
+const bladder = el("path", { d: "M296 602 C 288 566 316 540 352 540 C 384 540 398 562 394 590 C 390 620 366 644 334 650 C 314 652 302 632 296 602 Z", fill: "var(--bladder)", stroke: "var(--muted)", "stroke-width": 0.9 }, L.pelvis);
+el("path", { d: "M306 600 C 304 574 326 556 352 556 C 376 556 386 572 382 592", fill: "none", stroke: "var(--muted)", "stroke-width": 0.6, opacity: 0.5 }, L.pelvis);
+el("path", { d: "M330 650 C 322 676 316 696 312 716", fill: "none", stroke: "var(--bladder)", "stroke-width": 7, "stroke-linecap": "round" }, L.pelvis);
+// abdominal wall (rebuilt per frame: follows the uterus)
+const skinFat = el("path", { fill: "var(--fat)", stroke: "none", opacity: 0.85 }, L.abd);
+const rectus = el("path", { fill: "none", stroke: "var(--muscle-hi)", "stroke-width": 7, "stroke-linecap": "round", opacity: 0.9 }, L.abd);
+const skin = el("path", { fill: "none", stroke: "var(--skin)", "stroke-width": 4, "stroke-linecap": "round" }, L.abd);
+const umb = el("circle", { r: 4, fill: "var(--skin)", stroke: "var(--fetus-deep)" }, L.abd);
+// cervix + vagina (built once around the os)
+const CDIR = norm([0.28, 0.96]), CN = [-CDIR[1], CDIR[0]];
+const at = (o, a, b) => [o[0] + CDIR[0] * a + CN[0] * b, o[1] + CDIR[1] * a + CN[1] * b];
+const EXOS = at(OS0, 48, 0);
+TK.part("cervix", el("path", { d: `M${P2(at(OS0, -6, -24))}C${P2(at(OS0, 18, -28))} ${P2(at(OS0, 40, -26))} ${P2(at(OS0, 52, -16))}L${P2(at(OS0, 52, 16))}C${P2(at(OS0, 40, 26))} ${P2(at(OS0, 18, 28))} ${P2(at(OS0, -6, 24))}Z`, fill: "url(#gMus)", stroke: "var(--muscle-deep)" }, L.uterus));
+el("path", { d: `M${P2(at(OS0, 0, 0))}L${P2(EXOS)}`, stroke: "var(--muscle-deep)", "stroke-width": 2 }, L.uterus);
+for (let k = 1; k < 5; k++) el("path", { d: `M${P2(at(OS0, k * 9, -3))}l${f1(CN[0] * 6)} ${f1(CN[1] * 6)}`, stroke: "var(--muscle-deep)", "stroke-width": 0.7, opacity: 0.6 }, L.uterus);
+const VAG = [EXOS, at(OS0, 74, -6), at(OS0, 108, -26), at(OS0, 146, -54)];
+TK.part("vagina", el("path", { d: `M${P2(at(OS0, 46, -18))}C${P2(at(OS0, 70, -34))} ${P2(at(OS0, 108, -46))} ${P2(at(OS0, 150, -74))}`, fill: "none", stroke: "var(--muscle-deep)", "stroke-width": 1.6 }, L.uterus));
+TK.part("vagina", el("path", { d: `M${P2(at(OS0, 52, 18))}C${P2(at(OS0, 78, 12))} ${P2(at(OS0, 112, -6))} ${P2(at(OS0, 150, -34))}`, fill: "none", stroke: "var(--muscle-deep)", "stroke-width": 1.6 }, L.uterus));
+// uterus, fluid, placenta, membranes, fetus, cord
+const wall = el("path", { fill: "url(#gMus)", "fill-rule": "evenodd", stroke: "var(--muscle-deep)", "stroke-width": 1.2 }, L.uterus);
+const serosa = el("path", { fill: "none", stroke: "var(--muscle-deep)", "stroke-width": 0.6, opacity: 0.5 }, L.uterus);
+const fluid = el("path", { fill: "var(--fluid)" }, L.uterus);
+const decid = el("path", { fill: "none", stroke: "var(--decidua)", "stroke-width": 2.5 }, L.uterus);
+const scarMark = el("path", { fill: "none", stroke: "var(--ink)", "stroke-width": 2, "stroke-dasharray": "3 2" }, L.uterus);
+const bedG = el("path", { fill: "var(--o2)", opacity: 0 }, L.uterus);
+const placenta = el("path", { fill: "url(#gPl)", stroke: "var(--muscle-deep)", "stroke-width": 1 }, L.inside);
+const lobules = el("path", { fill: "none", stroke: "var(--muscle-deep)", "stroke-width": 0.8, opacity: 0.45 }, L.inside);
+const invade = el("path", { fill: "none", stroke: "var(--placenta)", "stroke-width": 3, "stroke-linecap": "round", opacity: 0 }, L.inside);
+const cord = el("path", { fill: "none", stroke: "var(--co2)", "stroke-width": 4, "stroke-linecap": "round", opacity: 0.85 }, L.inside);
+const cord2 = el("path", { fill: "none", stroke: "var(--o2)", "stroke-width": 1.2, "stroke-dasharray": "5 5", opacity: 0.8 }, L.inside);
+const fetusG = el("g", {}, L.inside);
+{ const sk = { fill: "url(#gFetus)", stroke: "var(--fetus-deep)", "stroke-width": 1.2 };
+  const limb = (d, w) => { el("path", { d, fill: "none", stroke: "var(--fetus-deep)", "stroke-width": w + 2, "stroke-linecap": "round" }, fetusG); el("path", { d, fill: "none", stroke: "var(--fetus)", "stroke-width": w, "stroke-linecap": "round" }, fetusG); };
+  limb("M10 38 C 40 50 38 74 12 76 C -2 76 -8 66 0 60", 10);          // leg
+  limb("M-4 46 C 20 58 22 84 -2 88", 9);                               // other leg
+  el("path", { d: "M-8 -26 C 32 -32 48 4 38 36 C 30 62 -4 70 -24 56 C -40 42 -38 10 -28 -8 Z", ...sk }, fetusG);
+  limb("M-20 2 C -4 12 4 22 -2 34", 8);                                // arm
+  el("circle", { cx: -6, cy: -56, r: 33, ...sk }, fetusG);
+  el("path", { d: "M-36 -50 q -6 6 -2 12 M-30 -66 q 3 -2 6 0", fill: "none", stroke: "var(--fetus-deep)", "stroke-width": 1.2 }, fetusG);
+  el("path", { d: "M10 -84 C 24 -76 28 -60 24 -46", fill: "none", stroke: "var(--fetus-deep)", "stroke-width": 0.8, opacity: 0.6 }, fetusG); }
+const balloon = el("path", { fill: "var(--glass)", stroke: "var(--co2)", "stroke-width": 1.8, opacity: 0 }, L.front);
+const balloonTube = el("path", { fill: "none", stroke: "var(--co2)", "stroke-width": 3, opacity: 0 }, L.front);
+const probeG = el("g", { opacity: 0 }, L.fx);
+{ const tip = at(OS0, 66, -16), base = at(OS0, 190, -86); el("path", { d: `M${P2(base)}L${P2(tip)}`, stroke: "var(--ink)", "stroke-width": 15, "stroke-linecap": "round", opacity: 0.88 }, probeG);
+  const d = norm([tip[0] - base[0], tip[1] - base[1]]), n2 = [-d[1], d[0]], fanL = [tip[0] + (d[0] * 0.94 + n2[0] * 0.34) * 120, tip[1] + (d[1] * 0.94 + n2[1] * 0.34) * 120], fanR = [tip[0] + (d[0] * 0.94 - n2[0] * 0.34) * 120, tip[1] + (d[1] * 0.94 - n2[1] * 0.34) * 120];
+  el("path", { d: `M${P2(tip)}L${P2(fanL)}L${P2(fanR)}Z`, fill: "var(--accent)", opacity: 0.12 }, probeG);
+  tx(probeG, base[0] + 8, base[1] - 4, "TVS probe", "lab halo", "start"); }
+const bloodG = el("g", {}, L.fx);
+const BLOOD = Array.from({ length: 46 }, () => ({ p: rnd(), off: rnd() * 2 - 1, e: el("circle", { r: 2.6, fill: "var(--o2-hi)", opacity: 0 }, bloodG) }));
+// labels
+const LAB = {};
+for (const [k, s] of [["bladder", "bladder"], ["sym", "pubic symphysis"], ["sac", "sacrum"], ["rect", "rectum"], ["vag", "vagina"], ["cx", "cervix"], ["os", "internal os"], ["pl", "placenta"], ["ls", "lower segment"], ["us", "upper segment"], ["abd", "abdominal wall"], ["scar", "CS scar"], ["fl", "amniotic fluid"]]) LAB[k] = tx(L.labels, 0, 0, s, "lab halo", "middle");
+const place = (k, p, a = "middle") => { LAB[k].setAttribute("x", f1(p[0])); LAB[k].setAttribute("y", f1(p[1])); LAB[k].setAttribute("text-anchor", a); };
+place("sym", [250, 702]); place("sac", [690, 520]); place("rect", [560, 628], "start"); place("vag", [at(OS0, 112, -30)[0] + 14, at(OS0, 112, -30)[1] + 26], "start"); place("cx", [at(OS0, 26, 34)[0] + 4, at(OS0, 26, 34)[1]], "start");
+
+/* ---------------- draw the pelvis for a given state ---------------- */
+let lastG = null;
+function drawStage(S) {
+  // S: { ga, cs, mode: "preg"|"post", tone, bal, bleed, pas, t }
+  const cs = CASES[S.cs], post = S.mode === "post";
+  const G = post ? geometry(38, { sc: lerp(0.72, 0.56, S.tone), st: 1.9, wide: 1.05 }) : geometry(S.ga);
+  lastG = G;
+  const thick = (i) => (lerp(11, 4, LOWNESS[i]) * (post ? lerp(1.25, 2.1, S.tone) : 1)) * K * (0.65 + 0.35 * G.sc);
+  const outer = G.pts.map((p, i) => [p[0] + G.nrm[i][0] * thick(i), p[1] + G.nrm[i][1] * thick(i)]);
+  wall.setAttribute("d", poly(outer) + poly([...G.pts].reverse()));
+  serosa.setAttribute("d", polyOpen(G.pts.map((p, i) => [p[0] + G.nrm[i][0] * thick(i) * 0.82, p[1] + G.nrm[i][1] * thick(i) * 0.82]).filter((_, i) => LOWNESS[i] < 0.5)));
+  fluid.setAttribute("d", poly(G.pts));
+  decid.setAttribute("d", poly(G.pts)); decid.setAttribute("opacity", post ? 0 : 0.7);
+  // abdominal wall: a resting curve in front of the bladder, pushed forward wherever the uterus bulges
+  const antPts = []; for (let i = idxOfSigned(30); i < G.pts.length; i++) antPts.push(outer[i]); antPts.push(outer[0]);
+  const rest = (y) => y > 560 ? lerp(244, 236, (y - 560) / 50) : y > 380 ? lerp(262, 244, (y - 380) / 180) : lerp(282, 262, (y + 20) / 400);
+  const bulge = (y) => { let best = 1e9; for (let k = 1; k < antPts.length; k++) { const p = antPts[k - 1], q = antPts[k]; if ((p[1] - y) * (q[1] - y) <= 0 && p[1] !== q[1]) { const x = p[0] + (q[0] - p[0]) * (y - p[1]) / (q[1] - p[1]); best = Math.min(best, x); } } return best; };
+  const ys = []; for (let y = -20; y <= 606; y += 14) ys.push(y);
+  const wallX = ys.map((y) => Math.min(rest(y), bulge(y) - 6));
+  for (let k = 0; k < 3; k++) for (let j = 1; j < wallX.length - 1; j++) wallX[j] = Math.min(wallX[j], (wallX[j - 1] + wallX[j] + wallX[j + 1]) / 3 + 0.5);
+  const line = (d) => ys.map((y, j) => [wallX[j] - d, y]);
+  const inL = line(0), rL = line(7), outL = line(26);
+  skinFat.setAttribute("d", polyOpen(outL) + "L" + polyOpen([...inL].reverse()).slice(1) + "Z");
+  rectus.setAttribute("d", polyOpen(rL)); skin.setAttribute("d", polyOpen(outL));
+  const yU = Math.min(Math.max(OS0[1] - 260 * G.sc, 200), 470), jU = ys.findIndex((y) => y >= yU); umb.setAttribute("cx", f1(outL[jU][0])); umb.setAttribute("cy", f1(outL[jU][1]));
+  place("abd", [outL[Math.floor(ys.length * 0.62)][0] - 6, outL[Math.floor(ys.length * 0.62)][1]], "end");
+  place("bladder", [344, 604]);
+  // CS scar
+  const sc0 = G.pts[idxOfSigned(28)], sc1 = outer[idxOfSigned(28)];
+  scarMark.setAttribute("d", cs.scar ? `M${P2(sc0)}L${P2(sc1)}` : ""); LAB.scar.setAttribute("opacity", cs.scar && !post ? 1 : 0); place("scar", [sc1[0] - 10, sc1[1] + 14], "end");
+  // placenta
+  let pe = null, fpts = null;
+  if (!post) {
+    const [a, b] = cs.pl, i0 = idxOfSigned(a), i1 = idxOfSigned(b), inner = [], outerP = [], N = i1 - i0;
+    for (let i = i0; i <= i1; i++) { const u = (i - i0) / N, t = (24 * Math.pow(Math.sin(Math.PI * u), 0.5) + 3) * K * Math.sqrt(G.sc); inner.push([G.pts[i][0] - G.nrm[i][0] * t, G.pts[i][1] - G.nrm[i][1] * t]); outerP.push(G.pts[i]); }
+    placenta.setAttribute("d", poly([...outerP, ...inner.reverse()]));
+    let lob = ""; for (let k = 1; k < 7; k++) { const i = Math.round(i0 + N * k / 7), t = 18 * K * Math.sqrt(G.sc); lob += `M${P2(G.pts[i])}L${P2([G.pts[i][0] - G.nrm[i][0] * t, G.pts[i][1] - G.nrm[i][1] * t])}`; }
+    lobules.setAttribute("d", lob);
+    pe = placentaEdge(G, cs);
+    const pm = inner[Math.floor(inner.length / 2)]; place("pl", [pm[0] + (cs.side === "anterior" ? 40 : -34), pm[1] - 8], "middle");
+    // PAS: villi through the scar toward the bladder
+    if (S.pas > 0 && cs.scar) { let d = ""; for (let k = -3; k <= 3; k++) { const i = idxOfSigned(28 + k * 9), p = G.pts[i], n = G.nrm[i], L2 = thick(i) * (0.6 + 1.5 * S.pas) + (S.pas > 0.8 ? 10 : 0); d += `M${P2(p)}l${f1(n[0] * L2)} ${f1(n[1] * L2)}`; } invade.setAttribute("d", d); invade.setAttribute("opacity", 1); }
+    else invade.setAttribute("opacity", 0);
+  } else { placenta.setAttribute("d", ""); lobules.setAttribute("d", ""); invade.setAttribute("opacity", 0); }
+  // placental bed after delivery
+  if (post) { const [a, b] = CASES.B.pl, pts = []; for (let i = idxOfSigned(a); i <= idxOfSigned(b); i++) pts.push(G.pts[i]); const inn = pts.map((p, j) => { const i = idxOfSigned(a) + j; return [p[0] - G.nrm[i][0] * 4, p[1] - G.nrm[i][1] * 4]; }); bedG.setAttribute("d", poly([...pts, ...inn.reverse()])); bedG.setAttribute("opacity", 0.9); }
+  else bedG.setAttribute("opacity", 0);
+  // fetus
+  if (!post) {
+    const cephalic = S.cs === "A" ? S.ga >= 31 : false, trans = S.cs === "C";
+    const fs = G.sc * K * 1.12, ang = cephalic ? 168 : trans ? 82 : -6;
+    const c = [G.c[0] + (cephalic ? 6 : 0), G.c[1] + (cephalic ? 24 * G.sc : trans ? 6 : -10 * G.sc)];
+    fetusG.setAttribute("transform", `translate(${f1(c[0])} ${f1(c[1])}) rotate(${ang}) scale(${f1(fs * 100) / 100})`); fetusG.setAttribute("opacity", 1);
+    const tf = (p) => { const r = rot(p, ang * Math.PI / 180); return [c[0] + r[0] * fs, c[1] + r[1] * fs]; };
+    fpts = { head: tf([-6, -56]), chest: tf([4, 6]), r: 34 * fs };
+    const pmid = G.pts[idxOfSigned((cs.pl[0] + cs.pl[1]) / 2)], belly = [c[0] + 8 * fs * Math.cos(ang * Math.PI / 180), c[1] + 8 * fs * Math.sin(ang * Math.PI / 180)];
+    const cd = `M${P2(pmid)}C${P2([lerp(pmid[0], G.c[0], 0.7), pmid[1] - 40 * G.sc])} ${P2([belly[0] + 30 * G.sc, belly[1] + 30 * G.sc])} ${P2(belly)}`;
+    cord.setAttribute("d", cd); cord2.setAttribute("d", cd); cord.setAttribute("opacity", 0.85); cord2.setAttribute("opacity", 0.8);
+  } else { fetusG.setAttribute("opacity", 0); cord.setAttribute("opacity", 0); cord2.setAttribute("opacity", 0); }
+  // balloon (postpartum tamponade)
+  if (post && S.bal > 0.02) { const c = G.pts[B_OS], ax = rot([0, -1], TILT), nx = [-ax[1], ax[0]], h = 70 * S.bal * K * 0.6, w = 52 * S.bal * K * 0.6, cc = [c[0] + ax[0] * (h + 4), c[1] + ax[1] * (h + 4)];
+    const q = (a, b) => [cc[0] + ax[0] * a + nx[0] * b, cc[1] + ax[1] * a + nx[1] * b];
+    balloon.setAttribute("d", `M${P2(q(-h, 0))}C${P2(q(-h, w * 1.1))} ${P2(q(h, w * 1.1))} ${P2(q(h, 0))}C${P2(q(h, -w * 1.1))} ${P2(q(-h, -w * 1.1))} ${P2(q(-h, 0))}Z`); balloon.setAttribute("opacity", 0.92);
+    balloonTube.setAttribute("d", `M${P2(c)}L${P2(EXOS)}L${P2(at(OS0, 150, -40))}`); balloonTube.setAttribute("opacity", 0.9); }
+  else { balloon.setAttribute("opacity", 0); balloonTube.setAttribute("opacity", 0); }
+  // bleeding: from the placental edge (or bed) through the os, down the canal and vagina
+  const src = post ? G.pts[idxOfSigned(-40)] : pe ? pe.e : G.os;
+  const route = [src, G.os, EXOS, ...VAG.slice(1)], rc = cumOf(route), rl = rc[rc.length - 1];
+  for (const b of BLOOD) {
+    b.p += S.dt * (0.25 + 0.6 * S.bleed); if (b.p > 1) { b.p -= 1; b.off = rnd() * 2 - 1; }
+    let s = b.p * rl, k = 1; while (k < rc.length - 1 && rc[k] < s) k++;
+    const a = route[k - 1], c = route[k], f = (s - rc[k - 1]) / ((rc[k] - rc[k - 1]) || 1), n = norm([-(c[1] - a[1]), c[0] - a[0]]);
+    b.e.setAttribute("cx", f1(lerp(a[0], c[0], f) + n[0] * b.off * 5)); b.e.setAttribute("cy", f1(lerp(a[1], c[1], f) + n[1] * b.off * 5));
+    b.e.setAttribute("opacity", f1(S.bleed * (b.p < 0.9 ? 0.9 : (1 - b.p) * 9)));
+  }
+  probeG.setAttribute("opacity", S.probe ? 1 : 0);
+  // os + segment labels
+  place("os", [G.os[0] + 30, G.os[1] - 6], "start");
+  const usP = G.pts[idxOfSigned(-260)], lsP = G.pts[idxOfSigned(-46)];
+  place("us", [usP[0] + 16 + thick(idxOfSigned(-260)), usP[1]], "start"); place("ls", [lsP[0] + 14 + thick(idxOfSigned(-46)), lsP[1] + 4], "start");
+  place("fl", [G.c[0] - 60 * G.sc, G.c[1] - 120 * G.sc]); LAB.fl.setAttribute("opacity", post ? 0 : 1); LAB.pl.setAttribute("opacity", post ? 0 : 1);
+  return { G, pe, fpts };
+}
+
+/* ======================= parts the 3D Tutor can spotlight (TK.part) ======================= */
+TK.part("bladder", bladder); TK.part("abdwall", skin, skinFat, rectus); TK.part("uterus", wall); TK.part("fluid", fluid); TK.part("scar", scarMark);
+TK.part("placenta", placenta, lobules); TK.part("cord", cord, cord2); TK.part("fetus", fetusG); TK.part("balloon", balloon, balloonTube); TK.part("probe", probeG); TK.part("blood", bloodG); TK.part("accreta", invade);
+/* ======================= lenses: (g) => update(S) ======================= */
+const LENSES = {};
+const box = (g, x, y, w, h, a = {}) => el("rect", { x, y, width: w, height: h, rx: a.rx ?? 6, fill: a.fill ?? "var(--sheet)", stroke: a.stroke ?? "var(--hair)", "stroke-width": a.sw ?? 1.2, ...(a.extra || {}) }, g);
+const wrapText = (g, x, y, s, cls, anchor, width, lh = 14) => { const words = s.split(" "); let line = "", yy = y; const out = [];
+  for (const w of words) { const t = line ? line + " " + w : w; if (t.length * (cls === "lm" ? 6.6 : 6.8) > width && line) { out.push(tx(g, x, yy, line, cls, anchor)); line = w; yy += lh; } else line = t; }
+  if (line) out.push(tx(g, x, yy, line, cls, anchor)); return out; };
+
+/* 1 · three ways a placenta can sit (2018 terms vs the old grades) */
+LENSES.concept = (g) => {
+  tx(g, 200, 24, "Measured from the placental edge to the internal os", "ls", "middle");
+  const P = [{ k: "normal", t: "Clear", s: "edge > 20 mm", pl: [-150, -60] }, { k: "low", t: "Low-lying", s: "edge ≤ 20 mm", pl: [-150, -14] }, { k: "praevia", t: "Praevia", s: "covers the os", pl: [-120, 40] }];
+  const frames = [];
+  P.forEach((p, j) => {
+    const x0 = 10 + j * 130, gp = el("g", {}, g);
+    const fr = box(gp, x0, 38, 120, 196, { rx: 8 });
+    // mini lower uterus: a U-shaped wall above a cervix
+    const cx = x0 + 60, oy = 176, mini = (sgn) => { const pts = []; for (let k = 0; k <= 20; k++) { const a = Math.PI * (1 - k / 20); pts.push([cx + Math.cos(a) * 46 * sgn, oy - 4 - Math.sin(a) * 0 - (1 - Math.cos(a * 0)) ]); } return pts; };
+    el("path", { d: `M${cx - 50} 62 C ${cx - 52} 130 ${cx - 30} ${oy - 4} ${cx - 8} ${oy}L${cx + 8} ${oy}C ${cx + 30} ${oy - 4} ${cx + 52} 130 ${cx + 50} 62`, fill: "var(--fluid)", stroke: "var(--muscle)", "stroke-width": 9, "stroke-linejoin": "round" }, gp);
+    el("path", { d: `M${cx - 14} ${oy + 2} L${cx + 14} ${oy + 2} L${cx + 11} ${oy + 40} L${cx - 11} ${oy + 40} Z`, fill: "var(--muscle)", stroke: "var(--muscle-deep)" }, gp);
+    el("line", { x1: cx, x2: cx, y1: oy + 2, y2: oy + 40, stroke: "var(--muscle-deep)", "stroke-width": 1.5 }, gp);
+    // placenta along the inner wall: posterior is the right side here
+    const along = (s) => { // s: signed mm-ish from os, − right wall going up, + left wall going up
+      const t = Math.abs(s) / 120, side = s < 0 ? 1 : -1; const y = oy - t * 112, xx = cx + side * (8 + 38 * Math.sqrt(clamp(t * 1.4, 0, 1))); return [xx, y]; };
+    const pts = [], inn = []; for (let k = 0; k <= 24; k++) { const s = lerp(p.pl[0], p.pl[1], k / 24), q = along(s), u = k / 24, th = 12 * Math.pow(Math.sin(Math.PI * u), 0.5) + 2; pts.push(q); inn.push([q[0] + (s < 0 ? -th : th), q[1] - (Math.abs(s) < 12 ? th : 0)]); }
+    el("path", { d: poly([...pts, ...inn.reverse()]), fill: "url(#gPl)", stroke: "var(--muscle-deep)" }, gp);
+    el("circle", { cx, cy: oy, r: 3, fill: "var(--ink)" }, gp);
+    // 20 mm ruler from the os up the posterior wall
+    el("path", { d: `M${cx + 6} ${oy - 2} L${cx + 22} ${oy - 16}`, stroke: "var(--accent)", "stroke-width": 2 }, gp);
+    if (j === 0) tx(gp, cx + 26, oy + 18, "20 mm", "lm", "start", { style: "fill:var(--accent)" });
+    tx(gp, cx, 252, p.t, "lh", "middle"); tx(gp, cx, 268, p.s, "lm", "middle");
+    frames.push({ k: p.k, fr });
+  });
+  // the old grades and where they went
+  tx(g, 200, 300, "Older textbooks: grades I–IV", "ls", "middle");
+  const G4 = [["I", "lateral"], ["II", "marginal"], ["III", "partial"], ["IV", "complete"]];
+  G4.forEach(([n, s], j) => { const x = 20 + j * 92; box(g, x, 310, 84, 44, { rx: 6 }); tx(g, x + 42, 328, "Grade " + n, "lt", "middle"); tx(g, x + 42, 344, s, "lm", "middle"); });
+  el("path", { d: "M62 358 v10 H154 v-10 M108 368 v10", fill: "none", stroke: "var(--warn)", "stroke-width": 1.5 }, g);
+  el("path", { d: "M246 358 v10 H338 v-10 M292 368 v10", fill: "none", stroke: "var(--shut)", "stroke-width": 1.5 }, g);
+  tx(g, 108, 392, "→ now 'low-lying'*", "lm", "middle", { style: "fill:var(--warn)" }); tx(g, 292, 392, "→ now 'praevia'", "lm", "middle", { style: "fill:var(--shut)" });
+  return (S) => { const k = classify(S.pe || { covers: false, mm: 99 }).k; for (const f of frames) { f.fr.setAttribute("stroke", f.k === k ? "var(--accent)" : "var(--hair)"); f.fr.setAttribute("stroke-width", f.k === k ? 2.6 : 1.2); } };
+};
+
+/* 2 · why it implants low */
+LENSES.implant = (g) => {
+  // early uterine cavity, decidua with glands, a caesarean scar niche, a tube at the fundus
+  const cav = [[110, 60], [168, 70], [196, 120], [190, 200], [160, 270], [128, 318], [112, 330], [96, 318], [62, 270], [34, 200], [30, 120], [56, 70]];
+  const PT = sampleClosed(cav, 16);
+  el("path", { d: spline(cav, true), fill: "var(--decidua)", stroke: "var(--muscle)", "stroke-width": 22, "stroke-linejoin": "round" }, g);
+  el("path", { d: spline(cav, true), fill: "none", stroke: "var(--muscle-deep)", "stroke-width": 0.8, transform: "translate(0 0)" }, g);
+  const inner = cav.map(([x, y]) => [110 + (x - 110) * 0.8, 200 + (y - 200) * 0.86]);
+  el("path", { d: spline(inner, true), fill: "var(--fluid)", stroke: "var(--decidua)", "stroke-width": 2 }, g);
+  for (let k = 0; k < 22; k++) { const p = PT[Math.floor(rnd() * PT.length)], q = [110 + (p[0] - 110) * 0.9, 200 + (p[1] - 200) * 0.93]; el("ellipse", { cx: f1(q[0]), cy: f1(q[1]), rx: 2.2, ry: 4, fill: "var(--sheet)", opacity: 0.5, transform: `rotate(${f1(rnd() * 180)} ${f1(q[0])} ${f1(q[1])})` }, g); }
+  el("path", { d: "M180 78 C 214 60 250 64 270 44", fill: "none", stroke: "var(--muscle)", "stroke-width": 9, "stroke-linecap": "round" }, g);
+  tx(g, 262, 34, "tube", "lm", "middle");
+  const scarG = el("g", {}, g);
+  el("path", { d: "M44 262 l -16 6 l 4 10 l 16 -6 z", fill: "var(--sheet)", stroke: "var(--ink)", "stroke-width": 1 }, scarG);
+  el("path", { d: "M22 270 l 24 -9", stroke: "var(--ink)", "stroke-width": 1.6, "stroke-dasharray": "3 2" }, scarG);
+  tx(scarG, 16, 296, "scar niche: thin, poorly", "lm"); tx(scarG, 16, 309, "vascularised decidua", "lm");
+  const bl = el("g", {}, g);
+  el("circle", { r: 9, fill: "var(--sheet)", stroke: "var(--placenta)", "stroke-width": 2.5 }, bl);
+  el("circle", { cx: -3, cy: -2, r: 3.5, fill: "var(--placenta-hi)" }, bl);
+  const trail = el("path", { fill: "none", stroke: "var(--accent)", "stroke-width": 1.4, "stroke-dasharray": "3 4" }, g);
+  const site = el("circle", { r: 14, fill: "none", stroke: "var(--accent)", "stroke-width": 2 }, g);
+  // risk factors
+  tx(g, 222, 112, "Raises the risk", "lh");
+  const RF = ["Previous caesarean (more with each)", "Other uterine surgery, D&C", "Previous praevia", "Multiparity", "Maternal age ≥ 35", "Smoking", "IVF / assisted conception", "Twins (large placenta)"];
+  let ry2 = 132; RF.forEach((s) => { el("circle", { cx: 228, cy: ry2 - 4, r: 2.5, fill: "var(--accent)" }, g); const n = wrapText(g, 236, ry2, s, "ls", "start", 150, 14).length; ry2 += 14 * n + 7; });
+  tx(g, 16, 356, "Where the lining is scarred or thin, the", "ls"); tx(g, 16, 372, "placenta grows toward better blood supply,", "ls"); tx(g, 16, 388, "which can mean down toward the os.", "ls");
+  let t = 0;
+  return (S) => {
+    t += S.dt; const u = (t % 7) / 7;
+    const target = S.cs === "C" ? [44, 258] : S.cs === "B" ? [120, 312] : [170, 268];
+    const pts = [[262, 50], [196, 82], [150, 120], [lerp(150, target[0], 0.5), lerp(120, target[1], 0.5) - 10], target];
+    const p = (() => { const s = sm(u / 0.75) * (pts.length - 1), k = Math.min(pts.length - 2, Math.floor(s)), f = s - k; return [lerp(pts[k][0], pts[k + 1][0], f), lerp(pts[k][1], pts[k + 1][1], f)]; })();
+    bl.setAttribute("transform", `translate(${f1(p[0])} ${f1(p[1])}) scale(${f1(1 - 0.25 * sm((u - 0.75) / 0.2))})`);
+    trail.setAttribute("d", polyOpen(pts)); site.setAttribute("cx", target[0]); site.setAttribute("cy", target[1]); site.setAttribute("opacity", f1(sm((u - 0.7) / 0.15)));
+    scarG.setAttribute("opacity", S.cs === "C" ? 1 : 0.35);
+  };
+};
+
+/* 3 · transvaginal ultrasound, built from the same geometry as the stage */
+LENSES.tvs = (g) => {
+  const apex = [200, 50], R = 330, a0 = -42 * Math.PI / 180, a1 = 42 * Math.PI / 180, fp = (a) => [apex[0] + Math.sin(a) * R, apex[1] + Math.cos(a) * R];
+  const fanD = `M${P2(apex)}L${P2(fp(a0))}A${R} ${R} 0 0 0 ${P2(fp(a1))}Z`;
+  el("rect", { x: 0, y: 0, width: 400, height: 400, fill: "var(--us-bg)" }, g);
+  const cp = el("clipPath", { id: "tvsFan" }, g); el("path", { d: fanD }, cp);
+  const pat = el("pattern", { id: "spk", width: 12, height: 12, patternUnits: "userSpaceOnUse" }, g);
+  for (let k = 0; k < 18; k++) el("circle", { cx: f1(rnd() * 12), cy: f1(rnd() * 12), r: f1(0.3 + rnd() * 0.8), fill: "#fff", opacity: f1(0.12 + rnd() * 0.5) }, pat);
+  const fan = el("g", { "clip-path": "url(#tvsFan)" }, g);
+  el("path", { d: fanD, fill: "#16191a" }, fan);
+  const inner = el("g", {}, fan);
+  const uw = el("path", { fill: "var(--us-2)", "fill-rule": "evenodd" }, inner), cx = el("path", { fill: "var(--us-2)" }, inner), bl = el("path", { fill: "#050606" }, inner);
+  const pl = el("path", { fill: "var(--us-3)" }, inner), pls = el("path", { fill: "url(#spk)" }, inner), fh = el("circle", { fill: "none", stroke: "var(--us-3)", "stroke-width": 3 }, inner);
+  el("path", { d: fanD, fill: "url(#spk)", opacity: 0.35 }, fan);
+  for (let k = 1; k <= 6; k++) { el("line", { x1: 386, x2: 392, y1: apex[1] + k * 50, y2: apex[1] + k * 50, stroke: "#8a9296" }, g); tx(g, 380, apex[1] + k * 50 + 4, `${k * 2}`, "lm", "end", { style: "fill:#8a9296;font-size:9px" }); }
+  tx(g, 392, 30, "cm", "lm", "end", { style: "fill:#8a9296" });
+  tx(g, 14, 24, "TVS · sagittal", "lm", "start", { style: "fill:#9aa3a8" });
+  const cal = el("g", {}, g), cl = el("line", { stroke: "#ffd84a", "stroke-width": 1.6, "stroke-dasharray": "5 4" }, cal), ca = el("path", { stroke: "#ffd84a", "stroke-width": 2, fill: "none" }, cal);
+  const lab = { cx: tx(g, 0, 0, "cervix", "lm", "start", { style: "fill:#c3c9cc" }), pl: tx(g, 0, 0, "placenta", "lm", "middle", { style: "fill:#f0f2f3" }), os: tx(g, 0, 0, "internal os", "lm", "start", { style: "fill:#ffd84a" }) };
+  const read = tx(g, 14, 388, "", "lm", "start", { style: "fill:#ffd84a;font-size:12.5px" });
+  return (S) => {
+    const Z = 2.15, ang = Math.atan2(-1, 0) - Math.atan2(CDIR[1], CDIR[0]), probe = at(OS0, 74, 0);
+    const T = `translate(${apex[0]} ${apex[1]}) rotate(${f1(ang * 180 / Math.PI)}) scale(${f1(Z * 100) / 100}) translate(${f1(-probe[0])} ${f1(-probe[1])})`;
+    inner.setAttribute("transform", T);
+    uw.setAttribute("d", wall.getAttribute("d")); cx.setAttribute("d", `M${P2(at(OS0, -6, -24))}L${P2(at(OS0, 52, -16))}L${P2(at(OS0, 52, 16))}L${P2(at(OS0, -6, 24))}Z`);
+    bl.setAttribute("d", bladder.getAttribute("d")); pl.setAttribute("d", placenta.getAttribute("d")); pls.setAttribute("d", placenta.getAttribute("d"));
+    const m = (p) => { const q = rot([p[0] - probe[0], p[1] - probe[1]], ang); return [apex[0] + q[0] * Z, apex[1] + q[1] * Z]; };
+    if (S.fpts) { const h = m(S.fpts.head); fh.setAttribute("cx", f1(S.fpts.head[0])); fh.setAttribute("cy", f1(S.fpts.head[1])); fh.setAttribute("r", f1(S.fpts.r)); }
+    const A = m(S.pe.e), B = m(S.G.os), X = (p) => `M${f1(p[0] - 6)} ${f1(p[1])}h12M${f1(p[0])} ${f1(p[1] - 6)}v12`;
+    cl.setAttribute("x1", f1(A[0])); cl.setAttribute("y1", f1(A[1])); cl.setAttribute("x2", f1(B[0])); cl.setAttribute("y2", f1(B[1])); ca.setAttribute("d", X(A) + X(B));
+    const c0 = m(at(OS0, 24, 0)); lab.cx.setAttribute("x", f1(c0[0] + 30)); lab.cx.setAttribute("y", f1(c0[1]));
+    lab.os.setAttribute("x", f1(B[0] + 10)); lab.os.setAttribute("y", f1(B[1] + 16));
+    const pm = m(S.G.pts[idxOfSigned((CASES[S.cs].pl[0] * 0.4 + CASES[S.cs].pl[1] * 0.6))]); lab.pl.setAttribute("x", f1(clamp(pm[0], 60, 340))); lab.pl.setAttribute("y", f1(clamp(pm[1], 90, 360)));
+    const c = classify(S.pe);
+    read.textContent = S.pe.covers ? `placenta crosses the os · ${c.label}` : `edge → os  ${S.pe.mm.toFixed(0)} mm · ${c.label}`;
+  };
+};
+
+/* 4 · why it bleeds: shear at the placental bed */
+LENSES.shear = (g) => {
+  el("rect", { x: 0, y: 0, width: 400, height: 400, fill: "var(--sheet)" }, g);
+  // chorionic plate + intervillous space (fixed: the placenta cannot stretch)
+  el("rect", { x: 0, y: 28, width: 400, height: 18, fill: "var(--placenta)" }, g);
+  tx(g, 10, 22, "chorionic plate (fetal side)", "lm");
+  el("rect", { x: 0, y: 46, width: 400, height: 150, fill: "var(--o2-lumen)", opacity: 0.55 }, g);
+  for (let k = 0; k < 7; k++) { const x = 30 + k * 56; let d = `M${x} 46 C ${x - 4} 80 ${x + 6} 110 ${x} 150`;
+    for (let b = 0; b < 4; b++) { const y = 70 + b * 22, s = b % 2 ? 1 : -1; d += `M${x + (b % 2 ? 2 : -2)} ${y} q ${s * 14} 8 ${s * 18} 24`; }
+    el("path", { d, fill: "none", stroke: "var(--placenta-hi)", "stroke-width": 5, "stroke-linecap": "round" }, g);
+    el("path", { d, fill: "none", stroke: "var(--placenta)", "stroke-width": 1, "stroke-linecap": "round", opacity: 0.6 }, g); }
+  tx(g, 392, 64, "villi bathed in", "lm halo", "end"); tx(g, 392, 77, "maternal blood", "lm halo", "end");
+  // the uterine side (moves with the stretching lower segment)
+  const uter = el("g", {}, g);
+  el("rect", { x: -120, y: 212, width: 640, height: 26, fill: "var(--decidua)" }, uter);
+  el("rect", { x: -120, y: 238, width: 640, height: 110, fill: "url(#gMus)" }, uter);
+  for (let k = 0; k < 18; k++) el("path", { d: `M${-120 + k * 38} 250 q 20 30 40 90`, fill: "none", stroke: "var(--muscle-deep)", "stroke-width": 0.8, opacity: 0.35 }, uter);
+  const arteries = [40, 150, 260, 370].map((x) => ({ x, e: el("path", { d: `M${x} 330 C ${x + 16} 300 ${x - 16} 270 ${x} 238 C ${x + 10} 228 ${x - 6} 218 ${x} 212`, fill: "none", stroke: "var(--o2)", "stroke-width": 6, "stroke-linecap": "round" }, uter) }));
+  tx(uter, 10, 360, "lower-segment wall, stretching →", "lm"); tx(uter, 10, 230, "decidua basalis", "lm");
+  const gap = el("rect", { x: 0, y: 196, width: 400, height: 16, fill: "var(--o2)", opacity: 0 }, g);
+  const anchors = [60, 130, 200, 270, 340].map((x) => ({ x, e: el("path", { fill: "none", stroke: "var(--placenta-hi)", "stroke-width": 6, "stroke-linecap": "round" }, g), b: el("path", { fill: "none", stroke: "var(--placenta-hi)", "stroke-width": 6, "stroke-linecap": "round" }, g) }));
+  const drops = Array.from({ length: 34 }, () => ({ p: rnd(), y: 198 + rnd() * 12, e: el("circle", { r: 2.6, fill: "var(--o2-hi)" }, g) }));
+  const arrow = tx(g, 10, 388, "", "lm halo"), st = tx(g, 392, 388, "", "lm halo", "end");
+  tx(g, 10, 192, "anchoring villi", "lm halo");
+  let t = 0;
+  return (S) => {
+    t += S.dt; const cyc = (t % 8) / 8, shift = 46 * sm(cyc / 0.55) * (1 - sm((cyc - 0.8) / 0.2));
+    uter.setAttribute("transform", `translate(${f1(shift)} 0)`);
+    const torn = shift > 26, sep = clamp((shift - 26) / 20, 0, 1);
+    for (const a of anchors) { const top = [a.x, 160], bot = [a.x + shift, 212];
+      if (!torn) { a.e.setAttribute("d", `M${P2(top)}C${a.x} 186 ${f1(a.x + shift)} 190 ${P2(bot)}`); a.b.setAttribute("d", ""); }
+      else { a.e.setAttribute("d", `M${P2(top)}C${a.x} 180 ${f1(a.x + 4)} 188 ${f1(a.x + 6)} 194`); a.b.setAttribute("d", `M${f1(a.x + shift - 4)} 206 L${P2(bot)}`); } }
+    gap.setAttribute("opacity", f1(0.85 * sep));
+    for (const d of drops) { d.p += S.dt * 0.5 * sep; if (d.p > 1) { d.p -= 1; d.y = 198 + rnd() * 12; } d.e.setAttribute("cx", f1(400 - d.p * 420)); d.e.setAttribute("cy", f1(d.y)); d.e.setAttribute("opacity", f1(sep)); }
+    for (const a of arteries) a.e.setAttribute("stroke-width", torn ? 8 : 6);
+    arrow.textContent = sep > 0.2 ? "← maternal blood tracks to the os" : "";
+    st.textContent = torn ? "villi torn · sinuses open" : shift > 6 ? "shearing…" : "attached";
+  };
+};
+
+/* 5 · no finger, yes probe */
+LENSES.nove = (g) => {
+  const half = (x0, ok) => { const gp = el("g", {}, g);
+    el("rect", { x: x0, y: 0, width: 196, height: 400, fill: "var(--sheet)" }, gp);
+    // lower segment + placenta over the os, cervix, vagina (local frame)
+    el("path", { d: `M${x0 + 18} 40 C ${x0 + 24} 120 ${x0 + 70} 168 ${x0 + 98} 176 C ${x0 + 126} 168 ${x0 + 172} 120 ${x0 + 178} 40`, fill: "var(--fluid)", stroke: "var(--muscle)", "stroke-width": 12 }, gp);
+    el("path", { d: `M${x0 + 40} 60 C ${x0 + 52} 130 ${x0 + 80} 156 ${x0 + 98} 160 C ${x0 + 120} 156 ${x0 + 150} 130 ${x0 + 160} 80 L${x0 + 150} 76 C ${x0 + 140} 120 ${x0 + 118} 142 ${x0 + 98} 146 C ${x0 + 80} 142 ${x0 + 60} 122 ${x0 + 52} 62 Z`, fill: "url(#gPl)", stroke: "var(--muscle-deep)" }, gp);
+    el("path", { d: `M${x0 + 78} 178 L${x0 + 118} 178 L${x0 + 114} 236 L${x0 + 82} 236 Z`, fill: "url(#gMus)", stroke: "var(--muscle-deep)" }, gp);
+    el("line", { x1: x0 + 98, x2: x0 + 98, y1: 178, y2: 236, stroke: "var(--muscle-deep)", "stroke-width": 2 }, gp);
+    el("path", { d: `M${x0 + 72} 230 C ${x0 + 60} 290 ${x0 + 60} 350 ${x0 + 70} 400 M${x0 + 124} 230 C ${x0 + 136} 290 ${x0 + 136} 350 ${x0 + 126} 400`, fill: "none", stroke: "var(--muscle-deep)", "stroke-width": 1.5 }, gp);
+    tx(gp, x0 + 98, 24, ok ? "Transvaginal ultrasound" : "Digital examination", "lh", "middle");
+    return gp; };
+  const L1 = half(0, false), R1 = half(204, true);
+  el("line", { x1: 200, x2: 200, y1: 0, y2: 400, stroke: "var(--hair)", "stroke-width": 2 }, g);
+  // finger
+  const finger = el("path", { fill: "var(--skin)", stroke: "var(--fetus-deep)", "stroke-width": 1.2 }, L1);
+  const burst = Array.from({ length: 14 }, (_, k) => ({ a: (k / 14) * 6.28, e: el("circle", { r: 3, fill: "var(--o2-hi)" }, L1) }));
+  const X1 = tx(L1, 168, 74, "✕", "lb", "middle", { style: "fill:var(--shut);font-size:34px" });
+  tx(L1, 98, 376, "can tear the placenta", "ls halo", "middle"); tx(L1, 98, 392, "→ torrential bleeding", "ls halo", "middle");
+  // probe and beam
+  const beam = el("path", { fill: "var(--accent)", opacity: 0.16 }, R1);
+  el("path", { d: `M${204 + 98} 400 L${204 + 98} 288`, stroke: "var(--ink)", "stroke-width": 16, "stroke-linecap": "round" }, R1);
+  el("path", { d: `M${204 + 98} 280 a 9 6 0 0 1 0 2`, stroke: "var(--ink)", "stroke-width": 1 }, R1);
+  el("path", { d: `M${204 + 140} 286 v-46`, stroke: "var(--accent)", "stroke-width": 1.4 }, R1); el("path", { d: `M${204 + 134} 286 h12 M${204 + 134} 240 h12`, stroke: "var(--accent)", "stroke-width": 1.4 }, R1);
+  tx(R1, 204 + 150, 268, "2–3 cm", "lm", "start");
+  tx(R1, 204 + 168, 74, "✓", "lb", "middle", { style: "fill:var(--open);font-size:32px" });
+  tx(R1, 204 + 60, 330, "stays below", "ls halo", "end"); tx(R1, 204 + 60, 346, "the cervix", "ls halo", "end");
+  tx(R1, 204 + 98, 392, "safe · most accurate", "ls halo", "middle");
+  let t = 0;
+  return (S) => { t += S.dt; const u = (t % 4) / 4, push = sm(u / 0.4) * (1 - sm((u - 0.7) / 0.3));
+    const tip = 400 - push * 228, w = 12;
+    finger.setAttribute("d", `M${98 - w} 410 L${98 - w} ${f1(tip + 10)} Q ${98 - w} ${f1(tip - 4)} 98 ${f1(tip - 6)} Q ${98 + w} ${f1(tip - 4)} ${98 + w} ${f1(tip + 10)} L${98 + w} 410 Z`);
+    const b = sm((push - 0.85) / 0.15);
+    for (const d of burst) { d.e.setAttribute("cx", f1(98 + Math.cos(d.a) * 26 * b)); d.e.setAttribute("cy", f1(160 + Math.sin(d.a) * 18 * b)); d.e.setAttribute("opacity", f1(b)); }
+    X1.setAttribute("opacity", f1(0.3 + 0.7 * b));
+    const sw = 0.5 + 0.08 * Math.sin(t * 3); beam.setAttribute("d", `M${204 + 98} 282 L${f1(204 + 98 - 120 * sw)} 40 L${f1(204 + 98 + 120 * sw)} 40 Z`); };
+};
+
+/* 6 · the acute bleed: triage pathway */
+LENSES.path = (g) => {
+  const N = {
+    s: [200, 26, "Painless PV bleeding · praevia known or suspected"],
+    a: [200, 70, "ABCDE · obs · CTG · speculum, no digital VE"],
+    u1: [104, 132, "Massive APH or shock"], u2: [104, 176, "2 × 14G · MHP · 4–6 units"], u3: [104, 220, "Category 1 caesarean"], u4: [104, 264, "Any gestation"],
+    m1: [298, 132, "Stable · minor / major"], m2: [298, 176, "Admit · bloods · Kleihauer"], m3: [298, 220, ""], m4: [298, 264, ""],
+  };
+  const E = [["s", "a", "*"], ["a", "u1", "u"], ["u1", "u2", "u"], ["u2", "u3", "u"], ["u3", "u4", "u"], ["a", "m1", "m"], ["m1", "m2", "m"], ["m2", "m3", "m"], ["m3", "m4", "m"]];
+  const eE = E.map(([a, b, k]) => { const A = N[a], B = N[b], d = `M${A[0]} ${A[1] + 13}C${A[0]} ${(A[1] + B[1]) / 2 + 4} ${B[0]} ${(A[1] + B[1]) / 2 - 4} ${B[0]} ${B[1] - 13}`;
+    el("path", { d, fill: "none", stroke: "var(--hair)", "stroke-width": 3 }, g); return { k, e: el("path", { d, fill: "none", stroke: "var(--accent)", "stroke-width": 3, "stroke-dasharray": "2 9", "stroke-linecap": "round" }, g) }; });
+  const nE = {}; for (const k in N) { const [x, y, s] = N[k], w = k === "s" || k === "a" ? 360 : 184;
+    nE[k] = { r: box(g, x - w / 2, y - 13, w, 26, { rx: 13 }), t: tx(g, x, y + 4.5, s, "lt", "middle", { style: "font-size:12px" }) }; }
+  // severity scale
+  tx(g, 14, 304, "RCOG severity", "lm");
+  const SEV = [["Spotting", "staining"], ["Minor", "< 50 mL"], ["Major", "50–1000 mL"], ["Massive", "> 1000 mL / shock"]];
+  SEV.forEach(([a, b], j) => { const x = 14 + j * 94; const r = box(g, x, 312, 88, 36, { rx: 6 }); r.dataset.j = j; tx(g, x + 44, 327, a, "lt", "middle", { style: "font-size:12px" }); tx(g, x + 44, 341, b, "lm", "middle", { style: "font-size:9.5px" }); });
+  const sevR = [...g.querySelectorAll("rect[data-j]")];
+  const foot = tx(g, 200, 378, "", "ls", "middle");
+  let off = 0;
+  return (S) => { const un = !S.mg.stable, w0 = S.mg.pas ? 35 : S.mg.bled ? 34 : 36, ga = S.ga;
+    for (const k in nE) { const on = k === "s" || k === "a" || (un ? k[0] === "u" : k[0] === "m"); nE[k].r.setAttribute("stroke", on ? "var(--accent)" : "var(--hair)"); nE[k].t.setAttribute("opacity", on ? 1 : 0.4); }
+    off -= S.dt * 22; for (const e of eE) { e.e.setAttribute("opacity", e.k === "*" || (un ? e.k === "u" : e.k === "m") ? 1 : 0); e.e.setAttribute("stroke-dashoffset", f1(off)); }
+    nE.m3.t.textContent = ga < 34 + 6 / 7 ? "Steroids · anti-D if Rh−" : ga < 36 ? "Steroids (34+0–35+6) · anti-D" : "Anti-D if Rh− · no steroids";
+    nE.m4.t.textContent = ga >= w0 ? "Deliver: planned CS now" : `Expectant → CS ${S.mg.pas ? "35+0–36+6" : S.mg.bled ? "34+0–36+6" : "36+0–37+0"}`;
+    sevR.forEach((r, j) => r.setAttribute("stroke", (un ? j === 3 : j === 1 || j === 2) ? "var(--accent)" : "var(--hair)"));
+    foot.textContent = un ? "Resuscitate and deliver at the same time; don't wait for steroids" : `At ${fmtW(ga)}: admit at least until bleeding settles (often 24–48 h)`; };
+};
+
+/* 7 · the weeks planner */
+LENSES.planner = (g) => {
+  const X = (w) => 92 + (w - 20) / 20 * 296, rows = ["Scans", "Bleeds", "Care", "Steroids", "MgSO₄", "Anti-D", "Hb / iron", "Delivery"], ry = (j) => 40 + j * 40;
+  for (let w = 20; w <= 40; w += 2) { el("line", { x1: X(w), x2: X(w), y1: 26, y2: 362, stroke: "var(--hair)", "stroke-width": w % 4 ? 0.5 : 1 }, g); if (w % 4 === 0) tx(g, X(w), 378, String(w), "lm", "middle"); }
+  tx(g, 388, 394, "weeks", "lm", "end");
+  rows.forEach((r, j) => { tx(g, 8, ry(j) + 4, r, "ls"); el("line", { x1: 92, x2: 388, y1: ry(j) + 18, y2: ry(j) + 18, stroke: "var(--hair)", "stroke-width": 0.5 }, g); });
+  const dyn = el("g", {}, g), cur = el("line", { y1: 26, y2: 362, stroke: "var(--accent)", "stroke-width": 2 }, g), curT = tx(g, 0, 20, "", "lm", "middle", { style: "fill:var(--accent)" });
+  let key = "";
+  const bar = (j, a, b, fill, label, op = 0.55, dash) => { el("rect", { x: X(a), y: ry(j) - 8, width: Math.max(4, X(b) - X(a)), height: 16, rx: 5, fill, opacity: op, ...(dash ? { stroke: fill, "stroke-dasharray": "3 3", "fill-opacity": 0.15 } : {}) }, dyn); if (label && X(b) - X(a) > label.length * 6 + 6) tx(dyn, X(a) + 4, ry(j) + 4, label, "lm", "start", { style: "fill:var(--ink);font-size:9.5px" }); };
+  const dot = (j, w, fill, label) => { el("circle", { cx: X(w), cy: ry(j), r: 6, fill, stroke: "var(--sheet)", "stroke-width": 1.5 }, dyn); if (label) tx(dyn, X(w) + 8, ry(j) + 4, label, "lm", "start", { style: "font-size:9.5px" }); };
+  return (S) => {
+    const k = S.cs + (S.mg.rh ? "r" : "") + (S.mg.pas ? "p" : "");
+    if (k !== key) { key = k; dyn.innerHTML = ""; const P = PLAN[S.cs];
+      dot(0, 20, "var(--muted)", "anomaly"); dot(0, 32, "var(--accent)", "TVS"); if (P.scan36) dot(0, 36, "var(--accent)", "TVS");
+      for (const b of P.bleeds) { el("path", { d: `M${X(b)} ${ry(1) - 9} c 6 8 6 14 0 16 c -6 -2 -6 -8 0 -16 z`, fill: "var(--o2)" }, dyn); }
+      for (const [a, b2, l] of P.care) bar(2, a, b2, l === "home" ? "var(--hair)" : "var(--warn)", l);
+      if (P.steroid) { dot(3, P.steroid, "var(--ca)", "12 mg ×2"); }
+      bar(4, 20, 32, "var(--muted)", "only if birth < 24 h", 0.5, true);
+      if (S.mg.rh) { dot(5, 28, "var(--co2)", "RAADP"); for (const b of P.bleeds) dot(5, b + 0.15, "var(--co2)", ""); }
+      bar(6, 20, 38, "var(--muscle-hi)", "check Hb each bleed · iron", 0.4);
+      const dw = S.mg.pas || S.cs === "C" ? [35, 37] : P.bleeds.length ? [34, 37] : P.vaginal ? [37, 41] : [36, 37 + 1 / 7];
+      bar(7, dw[0], dw[1], P.vaginal ? "var(--open)" : "var(--accent)", P.vaginal ? "labour OK" : "planned CS", 0.6);
+    }
+    cur.setAttribute("x1", f1(X(clamp(S.ga, 20, 40)))); cur.setAttribute("x2", f1(X(clamp(S.ga, 20, 40)))); curT.setAttribute("x", f1(X(clamp(S.ga, 20, 40)))); curT.textContent = fmtW(S.ga);
+  };
+};
+const PLAN = {
+  A: { bleeds: [], care: [[20, 38, "home"]], steroid: null, scan36: false, vaginal: true },
+  B: { bleeds: [29.4, 33.1], care: [[20, 29.4, "home"], [29.4, 31, "ward"], [31, 33.1, "home"], [33.1, 34.6, "ward"]], steroid: 29.45, scan36: true },
+  C: { bleeds: [31.0], care: [[20, 31, "home"], [31, 32.5, "ward"], [32.5, 34, "home"], [34, 35.4, "ward"]], steroid: 31.05, scan36: true },
+};
+
+/* 8 · the drug tray */
+LENSES.drugs = (g) => {
+  const s = 2.6, O = [200, 70], iso = (x, y, z) => [O[0] + (x - y) * 0.866 * s, O[1] + (x + y) * 0.5 * s - z * s];
+  const prism = (gp, x, y, z, w, d, h, fill) => { const p = (a, b, c) => P2(iso(a, b, c));
+    el("path", { d: `M${p(x, y + d, z)}L${p(x + w, y + d, z)}L${p(x + w, y + d, z + h)}L${p(x, y + d, z + h)}Z`, fill, stroke: "var(--muted)", "stroke-width": 0.6, style: "filter:brightness(.9)" }, gp);
+    el("path", { d: `M${p(x + w, y, z)}L${p(x + w, y + d, z)}L${p(x + w, y + d, z + h)}L${p(x + w, y, z + h)}Z`, fill, stroke: "var(--muted)", "stroke-width": 0.6, style: "filter:brightness(.78)" }, gp);
+    el("path", { d: `M${p(x, y, z + h)}L${p(x + w, y, z + h)}L${p(x + w, y + d, z + h)}L${p(x, y + d, z + h)}Z`, fill, stroke: "var(--muted)", "stroke-width": 0.6, style: "filter:brightness(1.06)" }, gp); };
+  const vial = (gp, x, y, r, h, body, cap, liquid) => { const top = iso(x, y, h), bot = iso(x, y, 0), rx = r * s, ry = r * s * 0.55;
+    el("path", { d: `M${f1(bot[0] - rx)} ${f1(bot[1])}A${f1(rx)} ${f1(ry)} 0 0 0 ${f1(bot[0] + rx)} ${f1(bot[1])}L${f1(top[0] + rx)} ${f1(top[1])}A${f1(rx)} ${f1(ry)} 0 0 1 ${f1(top[0] - rx)} ${f1(top[1])}Z`, fill: body, stroke: "var(--muted)", "stroke-width": 0.8 }, gp);
+    if (liquid) { const lq = iso(x, y, h * 0.55); el("path", { d: `M${f1(bot[0] - rx)} ${f1(bot[1])}A${f1(rx)} ${f1(ry)} 0 0 0 ${f1(bot[0] + rx)} ${f1(bot[1])}L${f1(lq[0] + rx)} ${f1(lq[1])}A${f1(rx)} ${f1(ry)} 0 0 1 ${f1(lq[0] - rx)} ${f1(lq[1])}Z`, fill: liquid, opacity: 0.6 }, gp); }
+    el("ellipse", { cx: f1(top[0]), cy: f1(top[1]), rx: f1(rx), ry: f1(ry), fill: body, stroke: "var(--muted)", "stroke-width": 0.8 }, gp);
+    const ct = iso(x, y, h + 4); el("path", { d: `M${f1(top[0] - rx * 0.7)} ${f1(top[1])}L${f1(ct[0] - rx * 0.7)} ${f1(ct[1])}A${f1(rx * 0.7)} ${f1(ry * 0.7)} 0 0 1 ${f1(ct[0] + rx * 0.7)} ${f1(ct[1])}L${f1(top[0] + rx * 0.7)} ${f1(top[1])}Z`, fill: cap }, gp);
+    el("ellipse", { cx: f1(ct[0]), cy: f1(ct[1]), rx: f1(rx * 0.7), ry: f1(ry * 0.7), fill: cap, style: "filter:brightness(1.15)" }, gp); };
+  prism(g, -8, -8, -4, 82, 62, 4, "var(--glass)");
+  const IT = {
+    beta: (gp) => { for (let k = 0; k < 2; k++) vial(gp, 2 + k * 7, 6, 2.4, 12, "var(--glass)", "var(--muted)", "var(--fat)"); prism(gp, -4, 12, 0, 20, 9, 3, "var(--bed, var(--fat))"); },
+    antid: (gp) => { prism(gp, 28, 2, 0, 24, 5, 4, "var(--glass)"); prism(gp, 52, 3, 0.5, 6, 3, 3, "var(--muted)"); prism(gp, 22, 3, 0.5, 6, 3, 3, "var(--co2)"); },
+    mag: (gp) => { vial(gp, 44, 34, 3.6, 15, "var(--glass)", "var(--accent)", "var(--glass)"); prism(gp, 52, 20, 0, 20, 26, 12, "var(--hair)"); },
+    nif: (gp) => { prism(gp, 0, 34, 0, 22, 13, 1.4, "var(--muted)"); for (let a = 0; a < 2; a++) for (let b = 0; b < 4; b++) { const c = iso(4 + b * 4.6, 37.5 + a * 6, 2); el("ellipse", { cx: f1(c[0]), cy: f1(c[1]), rx: 5.2, ry: 3, fill: "var(--warn)", stroke: "var(--muscle-deep)", "stroke-width": 0.5 }, gp); } },
+    txa: (gp) => { for (let k = 0; k < 3; k++) vial(gp, 30 + k * 6, 52, 2, 10, "var(--glass)", "var(--shut)", "var(--glass)"); },
+  };
+  const G2 = {}; for (const k of ["antid", "beta", "txa", "nif", "mag"]) { G2[k] = el("g", {}, g); IT[k](G2[k]); G2[k].lift = 0; }
+  const lo = iso(56, 22, 12), M = `matrix(${f1(0.866 * s * 100) / 100} ${f1(0.5 * s * 100) / 100} ${f1(-0.866 * s * 100) / 100} ${f1(0.5 * s * 100) / 100} ${f1(lo[0])} ${f1(lo[1])})`;
+  const top = el("g", { transform: M }, G2.mag);
+  el("rect", { x: 0, y: 0, width: 14, height: 8, rx: 1, fill: "#0e2a24", stroke: "var(--muted)", "stroke-width": 0.3 }, top);
+  const lcd = el("text", { x: 7, y: 3.8, "text-anchor": "middle", style: "fill:#7cf5c9;font-family:var(--mono);font-size:2.4px" }, top);
+  const lcd2 = el("text", { x: 7, y: 6.6, "text-anchor": "middle", style: "fill:#7cf5c9;font-family:var(--mono);font-size:2px" }, top);
+  // 48-hour timeline
+  const T0 = 30, T1 = 384, ty = 316, X = (h) => T0 + (h / 48) * (T1 - T0);
+  el("line", { x1: T0, x2: T1, y1: ty, y2: ty, stroke: "var(--hair)", "stroke-width": 2 }, g);
+  for (let h = 0; h <= 48; h += 12) { el("line", { x1: X(h), x2: X(h), y1: ty - 3, y2: ty + 3, stroke: "var(--muted)" }, g); tx(g, X(h), ty + 18, h + " h", "lm", "middle"); }
+  const marks = el("g", {}, g), head = el("line", { y1: ty - 20, y2: ty + 8, stroke: "var(--accent)", "stroke-width": 2 }, g), name = tx(g, T0, ty - 34, "", "lh");
+  const PLAN2 = { beta: { d: [0, 24], n: "Betamethasone · 12 mg IM, 24 h apart" }, antid: { d: [0], bar: [0, 72], n: "Anti-D · ≥ 500 IU IM within 72 h" }, mag: { d: [0], bar: [0.25, 24], n: "MgSO₄ · 4 g load, then 1 g/h" }, nif: { d: [0, 6, 12, 18, 24, 30, 36, 42], n: "Nifedipine · 20 mg, then 10–20 mg" }, txa: { d: [0, 0.5], n: "Tranexamic acid · 1 g IV, repeat once" } };
+  let curK = "", clock = 0;
+  return (S) => {
+    const k = S.drug; if (k !== curK) { curK = k; clock = 0; marks.innerHTML = ""; const p = PLAN2[k]; name.textContent = p.n;
+      if (p.bar) el("rect", { x: X(p.bar[0]), y: ty - 6, width: X(Math.min(48, p.bar[1])) - X(p.bar[0]), height: 12, rx: 6, fill: "var(--accent)", opacity: 0.25 }, marks);
+      for (const h of p.d) el("circle", { cx: X(h), cy: ty, r: 6, fill: "var(--sheet)", stroke: "var(--accent)", "stroke-width": 2.2 }, marks);
+      if (k === "mag") el("rect", { x: X(0), y: ty - 7, width: X(0.25) - X(0) + 3, height: 14, fill: "var(--warn)" }, marks); }
+    clock = (clock + S.dt * 4) % 48; head.setAttribute("x1", f1(X(clock))); head.setAttribute("x2", f1(X(clock)));
+    for (const q in G2) { const tgt = q === k ? 1 : 0; G2[q].lift += (tgt - G2[q].lift) * (1 - Math.exp(-S.dt / 0.18)); G2[q].setAttribute("transform", `translate(0 ${f1(-G2[q].lift * 16)})`); }
+    const gr = clock < 0.25 ? clock / 0.25 * 4 : 4 + (Math.min(clock, 24) - 0.25);
+    lcd.textContent = k === "mag" ? (clock < 0.25 ? "LOAD 4 g" : clock < 24 ? "1.0 g/h" : "STOPPED") : "STANDBY"; lcd2.textContent = k === "mag" ? `given ${Math.min(gr, 27.75).toFixed(1)} g` : "";
+  };
+};
+
+/* 9 · the surgeon's view of the lower segment */
+LENSES.cs = (g) => {
+  el("rect", { x: 0, y: 0, width: 400, height: 400, fill: "var(--fat)" }, g);
+  el("path", { d: "M10 380 C 0 200 60 40 200 30 C 340 40 400 200 390 380 Z", fill: "var(--muscle-hi)", opacity: 0.6 }, g);
+  const ut = el("path", { d: "M40 360 C 30 180 90 60 200 54 C 310 60 370 180 360 360 Z", fill: "url(#gMus)", stroke: "var(--muscle-deep)", "stroke-width": 1.5 }, g);
+  const shadow = el("path", { fill: "var(--placenta)", opacity: 0.45 }, g);
+  const vessels = el("g", {}, g);
+  for (let k = 0; k < 9; k++) { const x = 80 + k * 30; el("path", { d: `M${x} 300 C ${x + 10} 270 ${x - 12} 250 ${x + 4} 220 C ${x + 14} 204 ${x - 6} 190 ${x + 6} 176`, fill: "none", stroke: "var(--co2)", "stroke-width": 3 + (k % 3), opacity: 0.8, "stroke-linecap": "round" }, vessels); }
+  el("path", { d: "M60 344 C 130 318 270 318 340 344 L 344 400 L 56 400 Z", fill: "var(--bladder)", stroke: "var(--muted)" }, g);
+  tx(g, 200, 378, "bladder (reflected down)", "lm", "middle");
+  el("path", { d: "M0 400 L 0 330 C 20 320 40 330 50 360 L 50 400 Z M400 400 L 400 330 C 380 320 360 330 350 360 L 350 400 Z", fill: "var(--hair)", stroke: "var(--muted)" }, g);
+  tx(g, 14, 22, "Abdomen open · looking at the front of the uterus", "lm");
+  const low = el("path", { fill: "none", stroke: "var(--ink)", "stroke-width": 3, "stroke-dasharray": "8 5" }, g);
+  const high = el("path", { fill: "none", stroke: "var(--ink)", "stroke-width": 3, "stroke-dasharray": "8 5" }, g);
+  const xmark = tx(g, 200, 282, "", "lb", "middle", { style: "fill:var(--shut);font-size:24px" }), ok = tx(g, 0, 0, "", "lb", "middle", { style: "fill:var(--open);font-size:24px" });
+  el("path", { d: "M70 312 C 140 296 260 296 330 312", fill: "none", stroke: "var(--muscle-deep)", "stroke-width": 1.2, "stroke-dasharray": "2 3" }, g);
+  tx(g, 64, 324, "uterovesical fold", "lm", "start", { style: "font-size:9.5px" });
+  for (const sx2 of [-1, 1]) { el("path", { d: `M${200 + sx2 * 120} 120 C ${200 + sx2 * 160} 116 ${200 + sx2 * 190} 100 ${200 + sx2 * 210} 92`, fill: "none", stroke: "var(--muscle-hi)", "stroke-width": 7, "stroke-linecap": "round" }, g); }
+  tx(g, 362, 84, "round lig.", "lm", "end", { style: "font-size:9.5px" });
+  const lowT = tx(g, 200, 340, "", "lm halo", "middle"), highT = tx(g, 200, 112, "", "lm halo", "middle");
+  tx(g, 200, 160, "upper segment", "lm", "middle", { style: "fill:var(--sheet)" }); tx(g, 200, 250, "lower segment", "lm", "middle", { style: "fill:var(--sheet)" });
+  let t = 0;
+  return (S) => { t += S.dt; const ant = CASES[S.cs].side === "anterior", u = (t % 6) / 6, draw = sm(u / 0.5);
+    shadow.setAttribute("d", ant ? "M90 300 C 90 230 140 196 200 192 C 260 196 310 230 310 300 C 260 318 140 318 90 300 Z" : "");
+    vessels.setAttribute("opacity", ant && S.mg.pas ? 1 : 0);
+    const L1 = 260; low.setAttribute("d", `M${f1(200 - 120 * draw)} 296 Q 200 ${f1(306)} ${f1(200 + 120 * draw)} 296`);
+    high.setAttribute("d", ant ? `M${f1(200 - 70 * draw)} 132 Q 200 128 ${f1(200 + 70 * draw)} 132` : "");
+    xmark.textContent = ant ? "✕" : ""; lowT.textContent = ant ? "transverse lower-segment incision would cut the placenta" : "transverse lower-segment incision: clear of the placenta";
+    ok.textContent = ant ? "" : "✓"; ok.setAttribute("x", 330); ok.setAttribute("y", 300);
+    highT.textContent = ant ? (S.mg.pas ? "PAS: upper incision away from placenta → caesarean hysterectomy" : "map with ultrasound · higher incision avoids the placenta") : ""; };
+};
+
+/* 10 · PPH: tone, canister, and the lower-segment bed */
+LENSES.pph = (g) => {
+  const K2 = { x: 26, y: 44, w: 70, h: 270 }, KY = (ml) => K2.y + K2.h - (ml / 3000) * K2.h;
+  el("ellipse", { cx: K2.x + 35, cy: K2.y + K2.h, rx: 35, ry: 9, fill: "var(--glass)", stroke: "var(--muted)" }, g);
+  el("rect", { x: K2.x, y: K2.y, width: 70, height: K2.h, fill: "var(--glass)", stroke: "var(--muted)" }, g);
+  const fr = el("rect", { x: K2.x + 1, width: 68, fill: "var(--o2)", opacity: 0.85 }, g), ft = el("ellipse", { cx: K2.x + 35, rx: 34, ry: 7, fill: "var(--o2-hi)" }, g);
+  el("ellipse", { cx: K2.x + 35, cy: K2.y, rx: 35, ry: 9, fill: "var(--hair)", stroke: "var(--muted)" }, g);
+  for (let ml = 500; ml <= 3000; ml += 500) { el("line", { x1: K2.x, x2: K2.x + 10, y1: KY(ml), y2: KY(ml), stroke: "var(--ink)" }, g); tx(g, K2.x - 4, KY(ml) + 4, String(ml), "lm", "end", { style: "font-size:9px" }); }
+  el("line", { x1: K2.x, x2: K2.x + 70, y1: KY(1000), y2: KY(1000), stroke: "var(--warn)", "stroke-dasharray": "4 3" }, g); el("line", { x1: K2.x, x2: K2.x + 70, y1: KY(2000), y2: KY(2000), stroke: "var(--shut)", "stroke-dasharray": "4 3" }, g);
+  const mlT = tx(g, K2.x + 35, 30, "", "lh", "middle"); tx(g, K2.x + 35, 342, "suction (mL)", "lm", "middle");
+  const G0 = [262, 112]; el("path", { d: `M${G0[0] - 70} ${G0[1]} A70 70 0 0 1 ${G0[0] + 70} ${G0[1]}`, fill: "none", stroke: "var(--hair)", "stroke-width": 13 }, g);
+  const arc = el("path", { fill: "none", stroke: "var(--accent)", "stroke-width": 13 }, g), nd = el("line", { x1: G0[0], y1: G0[1], stroke: "var(--ink)", "stroke-width": 2.5, "stroke-linecap": "round" }, g);
+  el("circle", { cx: G0[0], cy: G0[1], r: 5, fill: "var(--ink)" }, g);
+  tx(g, G0[0] - 70, G0[1] + 18, "boggy", "lm", "middle"); tx(g, G0[0] + 70, G0[1] + 18, "firm", "lm", "middle"); tx(g, G0[0], G0[1] + 32, "upper-segment tone", "lm", "middle");
+  const bx = 130, by = 170; box(g, bx, by, 260, 160, { rx: 8 });
+  tx(g, bx + 8, by + 16, "lower-segment placental bed", "lm");
+  el("rect", { x: bx + 1, y: by + 104, width: 258, height: 55, fill: "url(#gMus)" }, g); el("rect", { x: bx + 1, y: by + 98, width: 258, height: 8, fill: "var(--o2)" }, g);
+  const ves = [30, 80, 130, 180, 230].map((x) => ({ x: bx + x, jets: Array.from({ length: 4 }, () => ({ p: rnd(), e: el("circle", { r: 2.4, fill: "var(--o2-hi)" }, g) })) }));
+  for (const v of ves) el("ellipse", { cx: v.x, cy: by + 104, rx: 7, ry: 4, fill: "var(--o2)", stroke: "var(--muscle-deep)" }, g);
+  const bal = el("path", { fill: "var(--glass)", stroke: "var(--co2)", "stroke-width": 2 }, g);
+  const vT = tx(g, bx + 8, by + 152, "", "lm", "start", { style: "fill:var(--sheet)" });
+  const rateT = tx(g, 200, 366, "", "ls", "middle"), sev = tx(g, 200, 386, "", "lm", "middle");
+  return (S) => { const P = S.pph;
+    const y = KY(P.ml); fr.setAttribute("y", f1(y)); fr.setAttribute("height", f1(K2.y + K2.h - y)); ft.setAttribute("cy", f1(y)); mlT.textContent = `${Math.round(P.ml)} mL`;
+    const a = Math.PI * (1 - P.toneShown), e = [G0[0] + Math.cos(a) * 70, G0[1] - Math.sin(a) * 70]; arc.setAttribute("d", `M${G0[0] - 70} ${G0[1]} A70 70 0 0 1 ${f1(e[0])} ${f1(e[1])}`);
+    nd.setAttribute("x2", f1(G0[0] + Math.cos(a) * 60)); nd.setAttribute("y2", f1(G0[1] - Math.sin(a) * 60));
+    const bh = 80 * P.balShown, top = by + 98 - bh; bal.setAttribute("d", P.balShown > 0.02 ? `M${bx + 1} ${by + 98}L${bx + 1} ${f1(top + 24)}Q${bx + 130} ${f1(top - 22)} ${bx + 259} ${f1(top + 24)}L${bx + 259} ${by + 98}Z` : "");
+    const open = 1 - 0.95 * P.balShown;
+    for (const v of ves) for (const j of v.jets) { j.p += S.dt * (P.lower / 170) * 0.9; if (j.p > 1) j.p -= 1; j.e.setAttribute("cx", f1(v.x + (j.p - 0.5) * 6)); j.e.setAttribute("cy", f1(by + 100 - j.p * 74 * open)); j.e.setAttribute("opacity", f1((1 - j.p) * open)); }
+    vT.textContent = P.balShown > 0.5 ? "balloon presses the vessels shut" : "thin muscle can't clamp these vessels";
+    rateT.textContent = `bleeding ≈ ${Math.round(P.rate)} mL/min · upper ${Math.round(P.upper)} · lower ${Math.round(P.lower)}`;
+    sev.textContent = P.ml >= 2000 ? "severe PPH (> 2000 mL)" : P.ml >= 1000 ? "major PPH (> 1000 mL)" : "minor PPH (500–1000 mL)"; sev.setAttribute("style", `fill:var(--${P.ml >= 2000 ? "shut" : P.ml >= 1000 ? "warn" : "open"})`);
+  };
+};
+
+/* 11 · placenta accreta spectrum */
+LENSES.pas = (g) => {
+  const layers = [["placenta (villi)", 30, 64, "var(--placenta-hi)"], ["decidua · Nitabuch layer", 94, 14, "var(--decidua)"], ["myometrium", 108, 90, "url(#gMus)"], ["serosa", 198, 6, "var(--muscle-deep)"], ["bladder wall", 214, 30, "var(--bladder)"], ["bladder", 244, 30, "var(--glass)"]];
+  for (const [n, y, h, f] of layers) { el("rect", { x: 0, y, width: 400, height: h, fill: f }, g); }
+  const lt = layers.map(([n, y, h]) => tx(g, 394, y + Math.min(h, 22) / 2 + 4, n, "lm halo", "end"));
+  const vil = Array.from({ length: 9 }, (_, k) => ({ x: 26 + k * 38 + (k % 2) * 6, e: el("path", { fill: "none", stroke: "var(--placenta)", "stroke-width": 7, "stroke-linecap": "round" }, g), e2: el("path", { fill: "none", stroke: "var(--placenta-hi)", "stroke-width": 3.5, "stroke-linecap": "round" }, g) }));
+  const vessels = el("g", {}, g);
+  for (let k = 0; k < 5; k++) el("path", { d: `M${40 + k * 74} 214 C ${60 + k * 74} 204 ${30 + k * 74} 190 ${52 + k * 74} 176`, fill: "none", stroke: "var(--co2)", "stroke-width": 4, "stroke-linecap": "round" }, vessels);
+  const name = tx(g, 14, 22, "", "lh"), depth = tx(g, 200, 22, "", "lm");
+  // risk by number of previous caesareans (with praevia), Silver 2006
+  tx(g, 14, 296, "Accreta risk if praevia, by number of previous CS", "ls");
+  const R = [[1, 3], [2, 11], [3, 40], [4, 61], [5, 67]];
+  R.forEach(([n, p], j) => { const x = 24 + j * 74, h = p * 0.8; el("rect", { x, y: 380 - h, width: 46, height: h, rx: 3, fill: "var(--shut)", opacity: 0.35 + j * 0.12 }, g); tx(g, x + 23, 376 - h, p + "%", "lm", "middle"); tx(g, x + 23, 394, n === 5 ? "5+" : String(n), "lm", "middle"); });
+  let shown = 0;
+  return (S) => { const lv = S.mg.pasLevel; shown += (lv - shown) * (1 - Math.exp(-S.dt / 0.45));
+    const reach = shown <= 1 ? lerp(98, 112, shown) : shown <= 2 ? lerp(112, 186, shown - 1) : lerp(186, 236, shown - 2);
+    vil.forEach((v, k) => { const r = reach - (k % 3) * 6 * Math.min(shown, 1), d = `M${v.x} 40 C ${v.x - 6} 70 ${v.x + 8} ${f1(r * 0.6 + 30)} ${v.x + (k % 2 ? 4 : -4)} ${f1(r)}`; v.e.setAttribute("d", d); v.e2.setAttribute("d", d); });
+    vessels.setAttribute("opacity", f1(sm(shown - 1.5)));
+    name.textContent = ["Normal: decidua separates villi from muscle", "Accreta: villi attach to myometrium", "Increta: villi invade myometrium", "Percreta: through serosa into bladder"][lv];
+    depth.textContent = "";
+  };
+};
+/* ======================= tour ======================= */
+function fmtW(w) { const d = Math.round((w % 1) * 7); return d === 7 ? `${Math.floor(w) + 1}+0` : `${Math.floor(w)}+${d}`; }
+const LV = (k) => `<span class="live" data-live="${k}">–</span>`;
+const DOSES = {
+  beta: { n: "Betamethasone", big: "12 mg IM, two doses 24 h apart", rows: [["Window", "24+0 to 34+6 wk if preterm birth is likely (e.g. after a bleed). In praevia, a single course at 34+0–35+6 before planned delivery"], ["How", "Induces surfactant and matures the fetal lung; also reduces IVH and NEC"], ["Alt.", "Dexamethasone 6 mg IM, four doses 12 h apart"], ["Best", "Birth 24 h to 7 days after the first dose"], ["Mistake", "Not 24 mg once; and never delay a category 1 CS to give it"]], target: "chest" },
+  mag: { n: "Magnesium sulfate", big: "4 g IV over 15 min, then 1 g/h", rows: [["When", "Birth planned or expected within 24 h: offer at 24+0–29+6, consider at 30+0–33+6"], ["Why", "Fetal neuroprotection: less cerebral palsy"], ["Stop", "At birth or after 24 h"], ["Watch", "Patellar reflexes, RR > 12/min, urine output, SpO₂"], ["Antidote", "Calcium gluconate 10%, 10 mL IV over 10 min"]], target: "head" },
+  antid: { n: "Anti-D immunoglobulin", big: "≥ 500 IU IM within 72 h of each bleed", rows: [["Who", "RhD-negative, not already sensitised, any bleed ≥ 20 wk"], ["Plus", "Kleihauer test: give more if the fetomaternal haemorrhage is > 4 mL"], ["Repeat", "Recurrent bleeding: at least every 6 weeks"], ["Separate", "Routine antenatal prophylaxis at 28 wk still applies"], ["Why", "Fetal RhD+ cells crossing to the mother would sensitise her"]], target: "placenta" },
+  nif: { n: "Nifedipine (tocolysis)", big: "20 mg PO, then 10–20 mg 3–4 times daily, ≤ 48 h", rows: [["Role", "Only for contractions with a minor bleed, to buy 48 h for steroids (specialist decision)"], ["Never", "With heavy bleeding, maternal instability, or when delivery is indicated"], ["How", "L-type Ca²⁺ channel block relaxes the myometrium"], ["Watch", "Hypotension, tachycardia, headache"]], target: "wall" },
+  txa: { n: "Tranexamic acid", big: "1 g IV over 10 min; a second 1 g after 30 min if still bleeding", rows: [["When", "Postpartum haemorrhage, as early as possible (within 3 h)"], ["How", "Blocks plasminogen → stops clots breaking down"], ["Note", "Not a routine antenatal treatment for praevia bleeds"]], target: "placenta" },
+};
+const PPH_STEPS = [
+  { n: "Birth of baby and placenta", d: "the placental bed lies in the thin lower segment", tone: 0 },
+  { n: "Call for help, MHP, 2 × 14G", d: "massage the uterus, empty the bladder, warm fluids, crossmatch", tone: 0.05 },
+  { n: "Oxytocin", d: "5 IU slow IV (may repeat), then 40 IU in 500 mL at 125 mL/h", tone: 0.3 },
+  { n: "Ergometrine", d: "0.5 mg IV/IM; not if hypertensive or pre-eclamptic", tone: 0.16 },
+  { n: "Carboprost", d: "0.25 mg IM every 15 min, max 8 doses; not if asthmatic", tone: 0.16 },
+  { n: "Misoprostol", d: "800 µg sublingual", tone: 0.08 },
+  { n: "Tranexamic acid", d: "1 g IV over 10 min; repeat once after 30 min", tone: 0, txa: true },
+  { n: "Bakri balloon", d: "intrauterine tamponade: presses the lower-segment bed", tone: 0, bal: true },
+  { n: "Surgery", d: "haemostatic sutures, uterine artery ligation, hysterectomy", tone: 0.1, surg: true },
+];
+const STOPS = [
+  { grp: "The idea", chip: "What it is", kicker: "Basic concept", title: "A placenta in the way out", parts: ["placenta", "cervix"], lens: "concept", lensKicker: "Lens · three positions", lensTitle: "Where the placental edge can sit", cam: [470, 380, 860], corner: "tr", ga: 34, cs: "B", focus: (R) => [R.G.os[0], R.G.os[1], 46],
+    html: () => `<p class="lead">The placenta should implant in the upper uterus, away from the cervix. In placenta praevia it lies over the internal os, the only way out for the baby.</p>
+<h3>The idea</h3><ul><li><b>Praevia</b> literally means "going before": the placenta is ahead of the baby in the birth canal.</li><li>It matters for two reasons. It <b>bleeds</b>, and it <b>blocks a vaginal birth</b>.</li><li>About 1 in 200 pregnancies at term.</li></ul>
+<h3>How it's defined today</h3><ul><li><b>Placenta praevia</b>: the placenta lies directly over the internal os.</li><li><b>Low-lying placenta</b>: the edge is less than 20 mm from the os, after 16 weeks.</li><li>The measurement is the straight distance from the placental edge to the os on <b>transvaginal ultrasound</b>.</li></ul>
+<div class="confuse"><h3>What students mix up</h3><ul><li><b>Old grades vs new words.</b> Grades I–IV (lateral, marginal, partial, complete) are older, palpation-era terms. Current guidelines use only "low-lying" and "praevia", based on millimetres on TVS. The lens maps old to new. (*Grade II at the os edge counts as low-lying, but any overlap of the os is praevia.)</li><li><b>Low at 20 weeks ≠ praevia at term.</b> About 9 in 10 low placentas found at the anomaly scan are clear of the os by the third trimester (see stop 3).</li></ul></div>`,
+    q: ["A 20-week scan reports the placental edge 15 mm from the os. Is this placenta praevia?", "No. It is a low-lying placenta (edge < 20 mm, not covering the os). It needs a TVS rescan at 32 weeks, and most resolve as the lower segment forms."] },
+  { grp: "", chip: "Why it happens", kicker: "Risk factors", title: "Why the placenta implants low", parts: ["placenta", "scar", "uterus"], lens: "implant", lensKicker: "Lens · early pregnancy", lensTitle: "Where the blastocyst settles", cam: [500, 440, 420], corner: "tr", ga: 10, cs: "C", focus: (R) => [R.G.c[0], R.G.c[1] + 20, 40],
+    html: () => `<p class="lead">Where the placenta ends up depends on where the blastocyst implants, and on where the lining gives it the best blood supply as it grows.</p>
+<h3>The mechanism</h3><ul><li>Normally the blastocyst implants high, on the posterior or fundal wall, where the decidua is thick and well vascularised.</li><li>Scarred or damaged endometrium (previous caesarean, D&amp;C, myomectomy) supplies blood poorly. The placenta implants or spreads toward lower, better-perfused areas, so it ends up near the os.</li><li>A large placenta (twins, smoking, high altitude) is simply more likely to reach the os.</li></ul>
+<h3>Risk factors to quote</h3><ul><li><b>Previous caesarean</b>: the strongest common factor, and the risk rises with each one.</li><li>Previous praevia, other uterine surgery, multiparity, age ≥ 35, smoking, IVF, multiple pregnancy.</li></ul>
+<div class="confuse"><h3>What students mix up</h3><ul><li>Praevia is commoner in <b>multiparous</b> women, not first pregnancies.</li><li>A previous caesarean raises the risk of <b>two</b> things: praevia, and placenta accreta when the praevia sits over the scar (stop 11). In the exam, "anterior praevia + previous CS" means you must think of accreta.</li></ul></div>`,
+    q: ["Why does smoking increase the risk of praevia?", "Smoking reduces uteroplacental perfusion, so the placenta grows larger (compensatory hypertrophy). A larger surface area is more likely to extend over the os."] },
+  { grp: "Weeks", chip: "Rescans", kicker: "Week by week", title: "The lower segment grows, so the placenta seems to move", parts: ["placenta", "cervix", "probe"], lens: "tvs", lensKicker: "Lens · transvaginal ultrasound", lensTitle: "Edge-to-os distance, live", cam: [410, 470, 480], corner: "tr", ga: { loop: [18, 37.5], rate: 2.2 }, cs: "A", focus: (R) => [R.G.os[0], R.G.os[1], 30],
+    html: () => `<p class="lead">Watch the timeline run from 18 to 37 weeks. The placenta stays attached in the same place, but the tissue under it grows.</p>
+<h3>What you're seeing</h3><ul><li>From about 28 weeks the isthmus unfolds into the <b>lower segment</b>, growing from about 5 cm to 10 cm.</li><li>A placental edge sitting on that tissue is carried <b>away from the os</b>. The distance now is ${LV("mm")} mm (${LV("cls")}).</li><li>The placenta also grows preferentially toward the better-perfused fundus (<b>trophotropism</b>).</li></ul>
+<h3>So the scan schedule is</h3><ul><li><b>20 weeks</b>: the anomaly scan records the placental site.</li><li>If low-lying or praevia, <b>TVS at 32 weeks</b>.</li><li>If it persists and she is asymptomatic, <b>TVS again at about 36 weeks</b> to plan the mode of birth.</li></ul>
+<p>Switch to <b>Complete praevia</b>: a placenta that crosses the os stays across it whatever the lower segment does.</p>
+<div class="confuse"><h3>What students mix up</h3><ul><li>"Placental migration" is a <b>figure of speech</b>. Villi don't crawl; the uterus grows under them.</li><li>Less likely to resolve: placentas that <b>cover</b> the os, posterior placentas, and anterior placentas over a <b>caesarean scar</b> (the scarred lower segment stretches less).</li></ul></div>`,
+    q: ["Why is a posterior low-lying placenta less likely to 'migrate' than an anterior one?", "The lower segment forms and stretches mainly anteriorly, so a posterior edge is carried away from the os less. Posterior placentas are also harder to see on transabdominal scanning."] },
+  { grp: "", chip: "Why it bleeds", kicker: "Antepartum haemorrhage", title: "Painless, bright-red and recurrent", parts: ["placenta", "blood"], lens: "shear", lensKicker: "Lens · ×100 · the placental bed", lensTitle: "The wall stretches, the placenta can't", cam: [430, 470, 420], corner: "tr", ga: 30, cs: "B", bleed: 1, focus: (R) => [R.pe.e[0], R.pe.e[1], 24],
+    html: () => `<p class="lead">As the lower segment forms and the cervix starts to efface, the wall under the placenta stretches. The placenta cannot stretch with it.</p>
+<h3>The mechanism</h3><ul><li>Anchoring villi shear off the decidua, and the opened maternal sinuses bleed. Blood tracks to the os, so it shows <b>early and externally</b>.</li><li>The bleeding is <b>maternal</b> blood, so the baby is usually well unless the mother becomes shocked.</li><li>The lower segment has little muscle to clamp the vessels (stop 10), so bleeds <b>recur</b>. A first small "sentinel" bleed often comes before a larger one.</li><li>There is no pain because there is no bleeding into the muscle and no tetanic contraction.</li></ul>
+<h3>Typical picture</h3><ul><li>Painless bright-red PV bleeding after 20 weeks, often at rest or after intercourse.</li><li>The uterus is <b>soft and non-tender</b>. The head is <b>high</b> or the lie is <b>abnormal</b>, because the placenta occupies the pelvis.</li><li>Shock is in proportion to the visible loss.</li></ul>
+<div class="confuse"><h3>Praevia vs abruption vs vasa praevia</h3><div class="tablewrap"><table class="cmp"><tr><th></th><th>Praevia</th><th>Abruption</th><th>Vasa praevia</th></tr>
+<tr><td>Pain</td><td>None</td><td>Constant pain</td><td>None</td></tr><tr><td>Uterus</td><td>Soft</td><td>Tense, "woody", tender</td><td>Soft</td></tr>
+<tr><td>Blood</td><td>Bright red, maternal</td><td>Dark; may be concealed</td><td><b>Fetal</b>, at membrane rupture</td></tr>
+<tr><td>Shock</td><td>Matches visible loss</td><td>Out of proportion</td><td>Mother well</td></tr><tr><td>Fetus</td><td>Usually fine; malpresented</td><td>Often distressed</td><td>Rapid fetal bradycardia</td></tr></table></div></div>`,
+    q: ["A woman at 32 weeks has painless bleeding and a CTG with sudden severe bradycardia straight after her membranes rupture; she is haemodynamically stable. What is the likely diagnosis?", "Vasa praevia: fetal vessels running over the os tear when the membranes rupture. The bleeding is fetal, so the baby decompensates while the mother is well. It needs an immediate category 1 caesarean."] },
+  { grp: "", chip: "Diagnosis", kicker: "Examination", title: "Diagnose it without a finger", parts: ["probe", "cervix", "vagina"], lens: "nove", lensKicker: "Lens · two ways to examine", lensTitle: "Digital exam vs transvaginal scan", cam: [400, 520, 420], corner: "bl", ga: 32, cs: "B", focus: (R) => [R.G.os[0], R.G.os[1] + 20, 34],
+    html: () => `<p class="lead">In any antepartum bleed, assume praevia until the placenta has been located. That changes how you examine.</p>
+<h3>What to do</h3><ul><li><b>No digital vaginal examination</b> until praevia is excluded. A finger through the os can tear the placenta and cause torrential bleeding.</li><li><b>Speculum is allowed</b>: it shows the bleeding source, cervical dilatation, and whether liquor is draining.</li><li><b>TVS is safe and the most accurate test.</b> The probe sits in the vagina 2–3 cm from the cervix at an angle, and never enters the os.</li><li>Abdominal exam: soft, non-tender uterus, high or non-engaged head, abnormal lie.</li><li>Transabdominal scanning misclassifies the edge, especially for posterior placentas or with a full bladder or fetal head in the way.</li></ul>
+<div class="confuse"><h3>What students mix up</h3><ul><li>"Vaginal scan is contraindicated in praevia" is <b>wrong</b>. The digital exam is the contraindicated one.</li><li>Historically a "double set-up" exam was done in theatre, ready for caesarean. Ultrasound has replaced it.</li><li>Before 2018 some notes used transabdominal ultrasound for diagnosis. Now <b>TVS confirms it</b>.</li></ul></div>`,
+    q: ["Why is the transvaginal probe safe when a finger isn't?", "The probe stays in the vaginal fornix about 2–3 cm from the cervix and is angled; it never enters the cervical canal. A finger goes through the os and touches the placenta directly."] },
+  { grp: "Management", chip: "Acute bleed", kicker: "Antepartum haemorrhage", title: "The first hour", parts: ["blood", "placenta"], lens: "path", lensKicker: "Lens · the pathway", lensTitle: "Triage from the moment she arrives", cam: [470, 380, 860], corner: "tr", ga: 31, cs: "B", bleed: 0.8, focus: (R) => [R.G.os[0], R.G.os[1], 46],
+    controls: () => `<div class="opts"><div class="seg" role="group" aria-label="Maternal state"><button data-mg="stable" aria-pressed="true">Stable</button><button data-mg="unstable" aria-pressed="false">Shocked / massive</button></div><label><input type="checkbox" data-mgc="rh"> Rh-negative</label><label><input type="checkbox" data-mgc="pas"> PAS suspected</label></div>`,
+    html: () => `<p class="lead">Drag the timeline to change the gestation, and set her state above. The pathway and the orders update together.</p>
+<h3>Every bleed, straight away</h3><ul><li><b>ABCDE</b>, left lateral tilt, pulse, BP, RR, SpO₂, temperature, and an estimate of blood loss. Pads and clots count.</li><li><b>Two large-bore cannulae (14–16 G)</b>. Bloods: FBC, coagulation and fibrinogen, U&amp;E, group-and-save or <b>crossmatch 4–6 units</b>, Kleihauer if RhD-negative.</li><li><b>CTG</b> from about 26 weeks. Check fetal heart and lie.</li><li>Speculum, <b>no digital VE</b>, and TVS once stable.</li></ul>
+<h3>If she is shocked or the bleed is massive</h3><ul><li>Activate the <b>major haemorrhage protocol</b>. Call the senior obstetrician, anaesthetist, haematologist and theatre.</li><li>Use O-negative or group-specific blood, and FFP and platelets per protocol.</li><li><b>Category 1 caesarean, whatever the gestation.</b> Resuscitate and deliver in parallel. The mother's life comes first.</li></ul>
+<h3>If she is stable</h3><ul><li>Admit, at least until bleeding has stopped (often 24–48 h). Give <b>steroids</b> if &lt; 34+6 weeks, <b>anti-D</b> if RhD-negative, and <b>MgSO₄</b> only if birth is expected within 24 h and &lt; 32–34 weeks.</li></ul>
+<h3>Orders now</h3><ul class="checks" id="orders"></ul>
+<div class="confuse"><h3>What students mix up</h3><ul><li><b>Tocolysis is not a treatment for bleeding.</b> Never give it in a major bleed.</li><li>Steroids or MgSO₄ must never delay a category 1 caesarean.</li><li>Severity is graded by volume <i>and</i> maternal signs. A young woman can lose 1.5 L before her BP falls, so watch the heart rate.</li></ul></div>`,
+    q: ["She is 28 weeks, bleeding heavily, BP 80/50, pulse 130, and the CTG is normal. Steroids first?", "No. This is massive APH with shock: activate the MHP and do a category 1 caesarean now. Give steroids or MgSO₄ only if they won't cause any delay."] },
+  { grp: "", chip: "Expectant care", kicker: "Weeks 20 → 37", title: "Expectant care, laid out across the weeks", parts: ["placenta", "fetus"], lens: "planner", lensKicker: "Lens · the plan", lensTitle: "What happens in which week", cam: [470, 380, 860], corner: "tr", ga: { loop: [20, 38], rate: 1.4 }, cs: "B", focus: (R) => [R.G.os[0], R.G.os[1], 46],
+    controls: () => `<div class="opts"><label><input type="checkbox" data-mgc="rh"> Rh-negative</label><label><input type="checkbox" data-mgc="pas"> PAS suspected</label></div>`,
+    html: () => `<p class="lead">Once she is stable, the aim is to gain fetal maturity safely and then deliver in a planned way, before labour or a big bleed forces it. The lens lays the plan out by week. Try each case.</p>
+<h3>Where she should be</h3><ul><li><b>Admit</b> after a bleed, at least until it has stopped.</li><li><b>Home care</b> is acceptable (individualised) if she lives close to hospital, has a companion and transport, understands she must come in for any bleeding, contractions or period-like pain, and accepts blood.</li><li>Recurrent bleeding, poor access or refusal of blood → more likely <b>admitted until delivery</b>.</li></ul>
+<h3>While she waits</h3><ul><li><b>Steroids</b>: one course when preterm birth is likely (after a bleed &lt; 34+6), or 34+0–35+6 before a planned delivery.</li><li><b>Hb</b>: check at each bleed. Treat anaemia with oral or IV iron so she enters delivery with reserve.</li><li><b>Anti-D</b> after each bleed if RhD-negative, on top of the routine 28-week dose.</li><li><b>VTE</b>: encourage mobility and stockings. Low-molecular-weight heparin is weighed against bleeding risk.</li><li>Avoid intercourse. Scan for growth if there is recurrent bleeding.</li><li><b>Consent</b> antenatally for caesarean, transfusion, cell salvage and the possibility of hysterectomy.</li></ul>
+<h3>When to deliver (planned caesarean)</h3><ul><li>Uncomplicated praevia: <b>36+0–37+0 weeks</b>.</li><li>Previous bleeding or other preterm risk: <b>34+0–36+6 weeks</b>.</li><li>Suspected <b>accreta</b>: <b>35+0–36+6 weeks</b>, at a specialist centre.</li><li>Low-lying with edge &gt; 20 mm at 36 weeks (case A): labour and vaginal birth are reasonable.</li></ul>
+<div class="confuse"><h3>What students mix up</h3><ul><li>"Macafee regimen" (expectant care) is the old name for exactly this. The principle hasn't changed: wait while it's safe.</li><li>Not every praevia stays in hospital until 37 weeks. Admission is decided by bleeds and social circumstances, not by the diagnosis alone.</li><li>MgSO₄ appears in the plan only if birth is imminent and &lt; 32–34 weeks. It is not given "just in case".</li></ul></div>`,
+    q: ["Complete praevia, bled at 29 and 33 weeks, now settled. When should she be delivered?", "Because she has bled, consider late-preterm planned caesarean at 34+0–36+6 weeks rather than waiting to 36+0–37+0, after a course of steroids."] },
+  { grp: "", chip: "The drugs", kicker: "Doses", title: "Each drug, and where it acts", parts: ["fetus", "uterus", "placenta"], lens: "drugs", lensKicker: "Lens · the tray", lensTitle: "Dose, route and timing", cam: [330, 360, 860], corner: "bl", ga: 31, cs: "B", focus: (R) => drugFocus(R),
+    controls: () => `<div class="opts"><div class="seg" role="group" aria-label="Drug" id="drugSeg">${Object.keys(DOSES).map((k) => `<button data-drug="${k}">${DOSES[k].n.split(" ")[0]}</button>`).join("")}</div></div><div class="dose" id="doseCard"></div>`,
+    html: () => `<p class="lead">Pick a drug. The ring on the pelvis shows where it acts, and the tray shows its first 48 hours.</p>
+<h3>Antenatal drugs in praevia</h3><ul><li><b>Steroids</b> act on the fetal lung, <b>MgSO₄</b> on the fetal brain, <b>anti-D</b> on the mother's immune system (blocking sensitisation by fetal cells), and <b>nifedipine</b> on the myometrium.</li><li><b>Tranexamic acid</b> is for postpartum haemorrhage (stop 10), not routinely before birth.</li></ul>
+<div class="confuse"><h3>What students mix up</h3><ul><li>The MgSO₄ regimen for <b>neuroprotection</b> (4 g then 1 g/h) is the same as the eclampsia regimen, but the indication and the stopping rule (birth or 24 h) differ.</li><li>Steroids work best between 24 hours and 7 days after the first dose. Giving them too early "to be safe" wastes them; a rescue course is only considered in specific cases.</li><li>Anti-D after a bleed is <b>in addition to</b> routine antenatal prophylaxis, not instead of it.</li></ul></div>`,
+    q: ["A RhD-negative woman bleeds at 30 weeks and received routine anti-D at 28 weeks. Does she need more?", "Yes. Give at least 500 IU anti-D within 72 h of the bleed and send a Kleihauer test to see if more is needed. Routine prophylaxis doesn't cover a sensitising event."] },
+  { grp: "Delivery", chip: "Caesarean", kicker: "Planned delivery", title: "A planned caesarean, planned around the placenta", parts: ["uterus", "placenta", "fetus", "scar"], lens: "cs", lensKicker: "Lens · surgeon's view", lensTitle: "Where to cut", cam: [400, 470, 520], corner: "tr", ga: 36.4, cs: "B", focus: (R) => { const p = R.G.pts[idxOfSigned(40)]; return [p[0] - 10, p[1], 30]; },
+    html: () => `<p class="lead">If the placenta covers the os, the baby can't pass through it, so birth is by caesarean. Switch between the cases to see why the incision itself must be planned.</p>
+<h3>Mode of birth</h3><ul><li><b>Praevia</b>: caesarean section.</li><li><b>Low-lying</b> at 36 weeks: decide on the TVS distance, the head's position relative to the placental edge, and her wishes. With the edge &gt; 20 mm, labour is reasonable. With 0–20 mm, caesarean is more likely but not mandatory.</li></ul>
+<h3>Who and what must be ready</h3><ul><li><b>Consultant obstetrician and anaesthetist</b> present, or immediately available for an emergency.</li><li>Blood crossmatched, <b>cell salvage</b> available, and the major haemorrhage protocol known to the team.</li><li><b>Regional anaesthesia</b> is safe. Warn her it may need converting to general anaesthesia, and get consent for that.</li></ul>
+<h3>The incision</h3><ul><li><b>Posterior praevia</b>: the usual transverse lower-segment incision is clear of it.</li><li><b>Anterior praevia</b>: a lower-segment incision goes through the placenta, so the fetus bleeds and the mother bleeds. Map the placenta with ultrasound first, and consider a higher or upper-segment incision.</li><li>Delivering through the placenta quickly is sometimes unavoidable. Then clamp the cord fast.</li></ul>
+<div class="confuse"><h3>What students mix up</h3><ul><li>"Praevia = classical caesarean" is wrong. The incision is chosen by where the placenta is; most posterior ones use a normal lower-segment incision.</li><li>Bleeding is not over when the baby is out. The risk peaks <b>after</b> the placenta is removed (next stop).</li></ul></div>`,
+    q: ["Why might an anterior praevia make a 'routine' lower-segment incision dangerous for the baby as well as the mother?", "Cutting through the placenta opens fetal vessels in the villi; the fetus can lose blood quickly before the cord is clamped, as well as heavy maternal bleeding from the bed."] },
+  { grp: "", chip: "PPH", kicker: "After the placenta", title: "Why it keeps bleeding, and how to stop it", parts: ["uterus", "balloon", "blood"], lens: "pph", lensKicker: "Lens · live", lensTitle: "Tone, suction and the placental bed", cam: [430, 440, 560], corner: "tr", mode: "post", ga: 38, cs: "B", focus: (R) => { const p = R.G.pts[idxOfSigned(-40)]; return [p[0], p[1], 30]; },
+    controls: () => `<div class="opts"><button id="pphNext">Give next step ▶</button><button id="pphReset">Reset</button><button id="pphAuto" aria-pressed="true">Auto-demo</button></div><div class="ladder" id="pphLadder"></div>`,
+    html: () => `<p class="lead">After the placenta comes out, the bed it leaves is in the <b>lower segment</b>. Normally the muscle fibres around the open vessels clamp them shut ("living ligatures"). There are few of those fibres down here.</p>
+<h3>Watch the lens</h3><ul><li>Each uterotonic firms the <b>upper</b> segment, and that share of the bleeding falls.</li><li>The <b>lower-segment</b> bed barely responds until the <b>balloon</b> presses on it. That is why tamponade works well in praevia.</li></ul>
+<h3>Doses, in order</h3><ul><li><b>Oxytocin</b> 5 IU slow IV, then an infusion of 40 IU in 500 mL at 125 mL/h.</li><li><b>Ergometrine</b> 0.5 mg IV or IM. Avoid in hypertension or pre-eclampsia.</li><li><b>Carboprost</b> 0.25 mg IM every 15 min, up to 8 doses (2 mg). Avoid in asthma.</li><li><b>Misoprostol</b> 800 µg sublingual.</li><li><b>Tranexamic acid</b> 1 g IV over 10 min, repeated once after 30 min if bleeding continues.</li><li>Then <b>tamponade</b> (Bakri balloon), haemostatic sutures, uterine artery ligation, interventional radiology, and <b>hysterectomy</b> early rather than late if it's failing.</li></ul>
+<div class="confuse"><h3>What students mix up</h3><ul><li>The drugs run in <b>parallel</b> with resuscitation, not after it.</li><li>A firm fundus does not mean the bleeding has stopped. In praevia the source can be the lower segment.</li><li>Define PPH by volume: &gt; 500 mL; <b>major</b> &gt; 1000 mL; severe &gt; 2000 mL. The canister shows these lines.</li></ul></div>`,
+    q: ["After an oxytocin bolus the fundus is firm, yet blood keeps coming from the lower segment. What next?", "Continue the uterotonics and tranexamic acid, but treat the lower-segment bed directly: balloon tamponade or haemostatic sutures, while escalating towards surgery or interventional radiology."] },
+  { grp: "", chip: "Accreta", kicker: "The dangerous partner", title: "Placenta accreta spectrum", parts: ["placenta", "scar", "bladder", "accreta"], lens: "pas", lensKicker: "Lens · ×20 · through the scar", lensTitle: "How deep the villi go", cam: [380, 520, 380], corner: "tr", ga: 34, cs: "C", pas: 1, focus: (R) => { const p = R.G.pts[idxOfSigned(28)]; return [p[0] - 12, p[1], 26]; },
+    controls: () => `<div class="opts"><div class="seg" role="group" aria-label="Depth" id="pasSeg"><button data-pas="0">Normal</button><button data-pas="1">Accreta</button><button data-pas="2">Increta</button><button data-pas="3">Percreta</button></div></div>`,
+    html: () => `<p class="lead">On a caesarean scar the decidua is missing. Nothing stops the villi from growing into the muscle, so the placenta cannot separate at birth.</p>
+<h3>The spectrum</h3><ul><li><b>Accreta</b>: villi attach to the myometrium (no decidua between).</li><li><b>Increta</b>: villi invade into the myometrium.</li><li><b>Percreta</b>: villi pass through the serosa, often into the <b>bladder</b>.</li></ul>
+<h3>Who to screen</h3><ul><li>Any <b>low-lying or praevia placenta over a previous caesarean scar</b> → specialist ultrasound. Use MRI to assess depth or lateral spread.</li><li>Ultrasound signs: loss of the clear zone behind the placenta, placental <b>lacunae</b> ("Swiss cheese"), myometrial thinning, bladder-wall interruption, and bridging vessels on Doppler.</li></ul>
+<h3>Management</h3><ul><li><b>MDT</b> at a specialist centre: senior obstetricians, anaesthetists, urology, interventional radiology, haematology.</li><li>Planned delivery at <b>35+0–36+6 weeks</b>, with blood products and cell salvage ready.</li><li>Usually a <b>caesarean hysterectomy with the placenta left in place</b>. Do not attempt to peel it off. Conservative options are only for selected cases.</li></ul>
+<div class="confuse"><h3>What students mix up</h3><ul><li>Accreta is <b>not</b> a type of praevia. It is about <b>depth</b>, while praevia is about <b>position</b>, but the two often occur together.</li><li>Trying to remove an adherent placenta causes catastrophic bleeding. If it doesn't separate, leave it and call for help.</li></ul></div>`,
+    q: ["Third caesarean, anterior placenta praevia over the scar: roughly what is her risk of accreta?", "About 40% (Silver 2006: 3%, 11%, 40%, 61% and 67% for the first to fifth-or-more caesarean in the presence of praevia). She needs specialist imaging and MDT planning."] },
+];
+function drugFocus(R) { const t = DOSES[ST.drug].target;
+  if (t === "chest" && R.fpts) return [R.fpts.chest[0], R.fpts.chest[1], R.fpts.r * 0.9];
+  if (t === "head" && R.fpts) return [R.fpts.head[0], R.fpts.head[1], R.fpts.r * 1.1];
+  if (t === "wall") { const p = R.G.pts[idxOfSigned(-260)]; return [p[0] + 10, p[1], 26]; }
+  const p = R.G.pts[idxOfSigned((CASES[ST.cs].pl[0] + CASES[ST.cs].pl[1]) / 2)]; return [p[0], p[1], 30]; }
+
+/* ---------------- state ---------------- */
+const ST = { stop: 0, ga: 34, cs: "B", playing: true, drug: "beta", mg: { stable: true, rh: false, pas: false, pasLevel: 1 }, pph: null, pphAuto: true, gaDir: 1, gaHold: 0 };
+const resetPPH = () => { ST.pph = { step: 0, tone: 0.12, toneShown: 0.12, txa: false, bal: 0, balShown: 0, surg: false, ml: 600, idle: 0, rate: 0, upper: 0, lower: 0 }; markLadder(); };
+function markLadder() { const L2 = $("pphLadder"); if (!L2) return; L2.innerHTML = PPH_STEPS.map((s, i) => `<div class="step ${i < ST.pph.step ? "done" : i === ST.pph.step ? "cur" : ""}"><b>${i ? i + ". " : ""}${s.n}</b><i>${s.d}</i></div>`).join(""); }
+function givePPH() { const P = ST.pph; if (P.step >= PPH_STEPS.length - 1) return; P.step++; const s = PPH_STEPS[P.step]; P.tone = Math.min(0.96, P.tone + s.tone); if (s.txa) P.txa = true; if (s.bal) P.bal = 1; if (s.surg) P.surg = true; P.idle = 0; markLadder(); }
+resetPPH();
+
+/* ---------------- timeline strip ---------------- */
+const strip = $("strip"), SX0 = 56, SX1 = 990, sx = (w) => SX0 + (w - 8) / 32 * (SX1 - SX0);
+let cursor, bleedG;
+function drawStrip() {
+  strip.innerHTML = ""; const g = el("g", {}, strip);
+  el("rect", { x: sx(28), y: 8, width: sx(36) - sx(28), height: 94, fill: "var(--accent)", opacity: 0.06 }, g);
+  tx(g, (sx(28) + sx(36)) / 2, 20, "lower segment forms", "", "middle");
+  for (let w = 8; w <= 40; w++) { el("line", { x1: sx(w), x2: sx(w), y1: 100, y2: w % 4 ? 104 : 108, stroke: "var(--muted)", "stroke-width": w % 4 ? 0.6 : 1 }, g); if (w % 4 === 0) tx(g, sx(w), 122, String(w), "", "middle"); }
+  el("line", { x1: sx(8), x2: sx(40), y1: 100, y2: 100, stroke: "var(--hair)", "stroke-width": 1.5 }, g);
+  tx(g, 4, 122, "weeks", "");
+  const row = (y, a, b, fill, label, op = 0.5, hatch) => { el("rect", { x: sx(a), y, width: sx(b) - sx(a), height: 12, rx: 4, fill, opacity: op, ...(hatch ? { "fill-opacity": 0.15, stroke: fill, "stroke-dasharray": "3 3" } : {}) }, g); tx(g, sx(b) + 4, y + 10, label, "", "start"); };
+  tx(g, 4, 44, "scans", ""); for (const w of [12, 20, 32, 36]) { el("path", { d: `M${sx(w)} 32 l 6 10 h -12 z`, fill: w >= 32 ? "var(--accent)" : "var(--muted)" }, g); }
+  tx(g, sx(20), 30, "anomaly", "", "middle"); tx(g, sx(32), 30, "TVS", "", "middle"); tx(g, sx(36), 30, "TVS", "", "middle");
+  tx(g, 4, 62, "steroids", ""); row(52, 24, 34 + 6 / 7, "var(--ca)", ""); row(52, 34, 35 + 6 / 7, "var(--ca)", "", 0.5, true);
+  tx(g, sx(24) - 6, 62, "if birth likely · 24+0–34+6 (praevia: to 35+6)", "", "end");
+  tx(g, 4, 82, "deliver", ""); row(72, 34, 36 + 6 / 7, "var(--accent)", "", 0.18, true); row(72, 36, 37 + 1 / 7, "var(--accent)", "", 0.6);
+  tx(g, sx(34) - 6, 82, "planned CS 36+0–37+0 · if bled 34+0–36+6 · PAS 35+0–36+6", "", "end");
+  bleedG = el("g", {}, g);
+  cursor = el("g", {}, strip); el("line", { y1: 4, y2: 110, stroke: "var(--ink)", "stroke-width": 2 }, cursor); el("circle", { cy: 100, r: 5, fill: "var(--ink)" }, cursor);
+  drawBleeds();
+}
+function drawBleeds() { if (!bleedG) return; bleedG.innerHTML = ""; for (const b of PLAN[ST.cs].bleeds) { el("path", { d: `M${f1(sx(b))} 84 c 6 8 6 14 0 16 c -6 -2 -6 -8 0 -16 z`, fill: "var(--o2)" }, bleedG); } }
+
+/* ---------------- camera + cone ---------------- */
+const cam = { x: 0, y: 0, w: 760 }, HOF = 720 / 760;
+const stagebox = $("stagebox"), lensBox = $("lensBox"), lensSvg = $("lens"), cone = $("cone");
+const floating = () => getComputedStyle(lensBox).position === "absolute";
+let lastR = null;
+function camTarget() { const s = STOPS[ST.stop]; let c = s.cam;
+  if (!floating()) { const f = lastR ? s.focus(lastR) : [c[0], c[1]]; c = [f[0], f[1] - 20, Math.min(c[2], 520)]; }
+  return { x: c[0] - c[2] / 2, y: c[1] - c[2] * HOF / 2, w: c[2] }; }
+function applyCam() { svg.setAttribute("viewBox", `${f1(cam.x)} ${f1(cam.y)} ${f1(cam.w)} ${f1(cam.w * HOF)}`); svg.style.setProperty("--ls", (cam.w / 760).toFixed(3)); }
+const ring = el("circle", { fill: "none", stroke: "var(--accent)", "stroke-width": 2.2, "vector-effect": "non-scaling-stroke" }, L.over);
+const ring2 = el("circle", { fill: "none", stroke: "var(--accent)", "stroke-width": 1, "stroke-dasharray": "3 4", "vector-effect": "non-scaling-stroke" }, L.over);
+function drawCone(f) {
+  if (!f || !floating()) { cone.innerHTML = ""; return; }
+  const sb = stagebox.getBoundingClientRect(), hr = svg.getBoundingClientRect(), lr = lensBox.getBoundingClientRect(), k = hr.width / cam.w;
+  const cx = hr.left - sb.left + (f[0] - cam.x) * k, cy = hr.top - sb.top + (f[1] - cam.y) * k, rr = f[2] * k;
+  const cs = [[lr.left, lr.top], [lr.right, lr.top], [lr.right, lr.bottom], [lr.left, lr.bottom]].map(([x, y]) => [x - sb.left, y - sb.top]);
+  const lc = [(cs[0][0] + cs[2][0]) / 2, (cs[0][1] + cs[2][1]) / 2], d = norm([lc[0] - cx, lc[1] - cy]);
+  const ang = cs.map((p) => { const v = [p[0] - cx, p[1] - cy]; return Math.atan2(d[0] * v[1] - d[1] * v[0], d[0] * v[0] + d[1] * v[1]); });
+  let lo = 0, hi = 0; ang.forEach((a, j) => { if (a < ang[lo]) lo = j; if (a > ang[hi]) hi = j; });
+  const n = [-d[1], d[0]], p1 = [cx - n[0] * rr, cy - n[1] * rr], p2 = [cx + n[0] * rr, cy + n[1] * rr];
+  cone.setAttribute("viewBox", `0 0 ${f1(sb.width)} ${f1(sb.height)}`);
+  cone.innerHTML = `<path d="M${P2(p1)}L${P2(cs[lo])}L${P2(cs[hi])}L${P2(p2)}Z" fill="var(--accent)" fill-opacity="0.07"/><path d="M${P2(p1)}L${P2(cs[lo])}M${P2(p2)}L${P2(cs[hi])}" stroke="var(--accent)" stroke-opacity="0.55" stroke-width="1.2" fill="none"/>`;
+}
+
+/* ---------------- stop switching ---------------- */
+const chips = $("stops"); let lensUpdate = null, liveEls = [];
+STOPS.forEach((s, k) => { if (s.grp) { const sp = document.createElement("span"); sp.className = "grp"; sp.textContent = s.grp; chips.appendChild(sp); } const b = document.createElement("button"); b.innerHTML = `<b>${k + 1}</b>${s.chip}`; b.onclick = () => goStop(k); chips.appendChild(b); s.btn = b; });
+function setCase(c) { ST.cs = c; for (const b of document.querySelectorAll("[data-case]")) b.setAttribute("aria-pressed", String(b.dataset.case === c)); drawBleeds(); }
+for (const b of document.querySelectorAll("[data-case]")) b.onclick = () => setCase(b.dataset.case);
+function updateOrders() { const ol = $("orders"); if (!ol) return; const un = !ST.mg.stable, ga = ST.ga, bled = true, w0 = ST.mg.pas ? 35 : 34;
+  const items = [
+    [true, un ? "Major haemorrhage protocol · senior obstetrician, anaesthetist, haematology · theatre now" : "Admit to the antenatal ward · obs every 15–30 min until settled"],
+    [true, "2 × 14–16 G cannulae · FBC, coag + fibrinogen, U&E · crossmatch 4–6 units"],
+    [ST.mg.rh, "Kleihauer and anti-D ≥ 500 IU IM within 72 h (RhD-negative)"],
+    [ga < 35 + 6 / 7 && !un, `Betamethasone 12 mg IM, repeat at 24 h${ga >= 34 ? " (34+0–35+6 in praevia)" : ""}`],
+    [ga < 34 && (un || ga >= w0), "MgSO₄ 4 g IV over 15 min, then 1 g/h, if birth expected within 24 h"],
+    [!un, "Iron if Hb low · VTE assessment · no intercourse · no digital VE"],
+    [ST.mg.pas, "PAS suspected: specialist imaging, MDT, transfer to a specialist centre if possible"],
+    [true, un ? "Category 1 caesarean now, whatever the gestation" : ga >= (ST.mg.pas ? 35 : 36) ? "Planned caesarean this admission (consultant-led, blood ready)" : `Plan a caesarean at ${ST.mg.pas ? "35+0–36+6" : "34+0–36+6 (has bled)"} weeks`],
+  ];
+  ol.innerHTML = items.map(([on, s]) => `<li class="${on ? "" : "off"}">${s}</li>`).join(""); }
+function showDose() { const c = $("doseCard"); if (!c) return; const d = DOSES[ST.drug];
+  c.innerHTML = `<div class="eyebrow">${d.n}</div><div class="big">${d.big}</div>` + d.rows.map(([a, b]) => `<div class="row"><span>${a}</span><span>${b}</span></div>`).join("");
+  for (const b of document.querySelectorAll("[data-drug]")) b.setAttribute("aria-pressed", String(b.dataset.drug === ST.drug)); }
+function goStop(k, first = false) {
+  ST.stop = (k + STOPS.length) % STOPS.length; const s = STOPS[ST.stop];
+  STOPS.forEach((x, j) => { if (j === ST.stop) x.btn.setAttribute("aria-current", "step"); else x.btn.removeAttribute("aria-current"); });
+  s.btn.scrollIntoView({ block: "nearest", inline: "nearest" });
+  $("count").textContent = `Stop ${ST.stop + 1} of ${STOPS.length}`; $("kicker").textContent = s.kicker; $("title").textContent = s.title;
+  $("body").innerHTML = (s.controls ? s.controls() : "") + s.html() + `<details><summary><span>Check yourself</span>${s.q[0]}</summary><p>${s.q[1]}</p></details>`;
+  liveEls = [...document.querySelectorAll("#body [data-live]")];
+  setCase(s.cs); if (typeof s.ga === "number") ST.ga = s.ga; else { ST.ga = s.ga.loop[0]; ST.gaDir = 1; ST.gaHold = 0.6; }
+  if (s.lens === "pas") ST.mg.pasLevel = 1;
+  if (s.lens === "pph") resetPPH();
+  // bind stop controls
+  for (const b of document.querySelectorAll("[data-mg]")) b.onclick = () => { ST.mg.stable = b.dataset.mg === "stable"; for (const x of document.querySelectorAll("[data-mg]")) x.setAttribute("aria-pressed", String(x === b)); updateOrders(); };
+  for (const c of document.querySelectorAll("[data-mgc]")) { c.checked = ST.mg[c.dataset.mgc]; c.onchange = () => { ST.mg[c.dataset.mgc] = c.checked; updateOrders(); }; }
+  for (const b of document.querySelectorAll("[data-drug]")) b.onclick = () => { ST.drug = b.dataset.drug; showDose(); };
+  for (const b of document.querySelectorAll("[data-pas]")) { b.setAttribute("aria-pressed", String(+b.dataset.pas === ST.mg.pasLevel)); b.onclick = () => { ST.mg.pasLevel = +b.dataset.pas; for (const x of document.querySelectorAll("[data-pas]")) x.setAttribute("aria-pressed", String(x === b)); }; }
+  if ($("pphNext")) { markLadder(); $("pphNext").onclick = () => { ST.pphAuto = false; $("pphAuto").setAttribute("aria-pressed", "false"); givePPH(); }; $("pphReset").onclick = resetPPH; $("pphAuto").onclick = (e) => { ST.pphAuto = !ST.pphAuto; e.currentTarget.setAttribute("aria-pressed", String(ST.pphAuto)); }; }
+  updateOrders(); showDose();
+  lensBox.classList.add("swap");
+  const build = () => { lensBox.className = "lens " + s.corner; lensSvg.innerHTML = ""; lensSvg.setAttribute("aria-label", s.lensTitle); $("lensKicker").textContent = s.lensKicker; $("lensTitle").textContent = s.lensTitle; lensUpdate = LENSES[s.lens](el("g", {}, lensSvg)); };
+  if (first) build(); else setTimeout(build, 180);
+  try { history.replaceState(null, "", "#stop-" + (ST.stop + 1)); } catch (e) {}
+}
+
+/* ---------------- frame ---------------- */
+const still = matchMedia("(prefers-reduced-motion: reduce)");
+let last = 0, visible = true;
+function liveVal(k, R) { if (k === "mm") return R.pe ? (R.pe.covers ? "0 (covers)" : R.pe.mm.toFixed(0)) : "–"; if (k === "cls") return R.pe ? classify(R.pe).label.toLowerCase() : ""; return ""; }
+function tick(now) {
+  const rdt = last ? Math.min((now - last) / 1000, 1 / 20) : 0; last = now;
+  const dt = ST.playing && !still.matches ? rdt : 0, s = STOPS[ST.stop];
+  if (typeof s.ga !== "number" && dt > 0) { if (ST.gaHold > 0) ST.gaHold -= dt; else { ST.ga += dt * s.ga.rate; if (ST.ga >= s.ga.loop[1]) { ST.ga = s.ga.loop[0]; ST.gaHold = 1.2; } } }
+  // PPH model (stop 10)
+  if (s.lens === "pph") { const P = ST.pph; P.balShown += (P.bal - P.balShown) * (1 - Math.exp(-dt / 0.8)); P.toneShown += (P.tone - P.toneShown) * (1 - Math.exp(-dt / 0.6));
+    P.upper = 260 * (1 - P.toneShown) * (P.surg ? 0.3 : 1); P.lower = 170 * (1 - 0.92 * P.balShown) * (P.txa ? 0.85 : 1) * (P.surg ? 0.2 : 1); P.rate = P.upper + P.lower;
+    P.ml = Math.min(3000, P.ml + P.rate * dt * 0.25); P.idle += dt; if (ST.pphAuto && P.idle > 3.2) { if (P.step < 7) givePPH(); else if (P.idle > 9) resetPPH(); } }
+  const plan = PLAN[ST.cs], bleedNow = s.bleed ?? (plan.bleeds.some((b) => ST.ga >= b && ST.ga < b + 0.45) ? 1 : 0);
+  const R = drawStage({ ga: ST.ga, cs: ST.cs, mode: s.mode || "preg", tone: s.mode ? ST.pph.toneShown : 0, bal: s.mode ? ST.pph.balShown : 0, bleed: s.mode ? clamp(ST.pph.rate / 250, 0.15, 1) : bleedNow, pas: s.pas ? sm(ST.mg.pasLevel / 3) : 0, probe: s.lens === "tvs" || s.lens === "nove", dt: dt || 0 });
+  lastR = R;
+  const tgt = camTarget(), a = still.matches ? 1 : 1 - Math.exp(-rdt / 0.32);
+  cam.x += (tgt.x - cam.x) * a; cam.y += (tgt.y - cam.y) * a; cam.w += (tgt.w - cam.w) * a; applyCam();
+  const f = s.focus(R);
+  ring.setAttribute("cx", f1(f[0])); ring.setAttribute("cy", f1(f[1])); ring.setAttribute("r", f1(f[2])); ring2.setAttribute("cx", f1(f[0])); ring2.setAttribute("cy", f1(f[1])); ring2.setAttribute("r", f1(f[2] + 6));
+  if (lensUpdate && visible) lensUpdate({ ...R, ga: ST.ga, cs: ST.cs, dt, t: now / 1000, mg: { ...ST.mg, bled: plan.bleeds.some((b) => b <= ST.ga) }, drug: ST.drug, pph: ST.pph });
+  drawCone(f);
+  cursor && cursor.setAttribute("transform", `translate(${f1(sx(clamp(ST.ga, 8, 40)))} 0)`);
+  strip.setAttribute("aria-valuenow", f1(ST.ga)); strip.setAttribute("aria-valuetext", `${fmtW(ST.ga)} weeks`);
+  $("nowWeek").textContent = s.mode === "post" ? "After delivery" : `${fmtW(ST.ga)} weeks`;
+  const c = R.pe ? classify(R.pe) : null;
+  $("nowState").textContent = s.mode === "post" ? `blood loss ${Math.round(ST.pph.ml)} mL` : `${CASES[ST.cs].name} · ${c.label.toLowerCase()} · ${c.why}${bleedNow > 0.5 ? " · bleeding" : ""}`;
+  for (const e of liveEls) { const v = liveVal(e.dataset.live, R); if (e.textContent !== v) e.textContent = v; }
+  if (s.lens === "path" && Math.random() < 0.05) updateOrders();
+  requestAnimationFrame(tick);
+}
+new IntersectionObserver((e) => { visible = e[e.length - 1].isIntersecting; }, { rootMargin: "120px 0px" }).observe(stagebox);
+
+/* ---------------- controls ---------------- */
+const playBtn = $("play");
+const setPlaying = (p) => { ST.playing = p; playBtn.textContent = p ? "Pause" : "Play"; playBtn.setAttribute("aria-pressed", String(p)); };
+playBtn.onclick = () => setPlaying(!ST.playing);
+$("prev").onclick = () => goStop(ST.stop - 1); $("next").onclick = () => goStop(ST.stop + 1);
+let dragging = false;
+const stripW = (ev) => { const r = strip.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * 1000; return clamp(8 + (x - SX0) / (SX1 - SX0) * 32, 8, 40); };
+const holdWeek = (w) => { const s = STOPS[ST.stop]; if (typeof s.ga !== "number") s._ga = s.ga; s.ga = w; ST.ga = w; updateOrders(); };
+strip.addEventListener("pointerdown", (ev) => { dragging = true; strip.setPointerCapture(ev.pointerId); holdWeek(stripW(ev)); });
+strip.addEventListener("pointermove", (ev) => { if (dragging) holdWeek(stripW(ev)); });
+const endDrag = () => { dragging = false; }; strip.addEventListener("pointerup", endDrag); strip.addEventListener("pointercancel", endDrag);
+document.addEventListener("keydown", (ev) => {
+  if (ev.target.closest && ev.target.closest("button, summary, input") && (ev.key === " " || ev.key === "Enter")) return;
+  if (ev.key === " ") { ev.preventDefault(); setPlaying(!ST.playing); }
+  else if (ev.key === "ArrowRight" || ev.key === "ArrowLeft") { ev.preventDefault(); const d = ev.key === "ArrowRight" ? 1 : -1; if (ev.shiftKey) holdWeek(clamp(ST.ga + d / 7 * 3, 8, 40)); else goStop(ST.stop + d); }
+});
+// restore a stop's looping weeks when you come back to it
+const _go = goStop; goStop = function (k, first) { const s = STOPS[(k + STOPS.length) % STOPS.length]; if (s._ga) { s.ga = s._ga; delete s._ga; } return _go(k, first); };
+
+drawStrip();
+function drawChart() { drawStrip(); }
+let start = 0; { const m = (location.hash || "").match(/stop-(\d+)/); if (m) start = clamp(+m[1] - 1, 0, STOPS.length - 1); }
+goStop(start, true);
+{ const R = drawStage({ ga: ST.ga, cs: ST.cs, mode: "preg", tone: 0, bal: 0, bleed: 0, pas: 0, dt: 0 }); lastR = R; const t = camTarget(); Object.assign(cam, t); applyCam(); }
+if (still.matches) setPlaying(false);
+requestAnimationFrame(tick);
+
+
+/* ======================= hand the tutor its controls (explainer/tours/tour-kit.js) ======================= */
+const TOUR_META = { id: "placenta-praevia", title: "Placenta praevia" };
+const PARTS_INFO = [
+  { id: "placenta", name: "Placenta", shows: "Implanted over or near the internal os; its edge-to-os distance on TVS decides low-lying vs praevia" },
+  { id: "cervix", name: "Cervix and internal os", shows: "The way out; the placental edge is measured to the internal os" },
+  { id: "uterus", name: "Uterine wall", shows: "Upper segment muscle that contracts; the thin lower segment that forms from 28 weeks and clamps vessels poorly" },
+  { id: "scar", name: "Caesarean scar", shows: "Scarred lower segment: raises the risk of praevia and of accreta when the placenta lies over it" },
+  { id: "fetus", name: "Fetus", shows: "High head or abnormal lie because the placenta occupies the pelvis; target of steroids and MgSO4" },
+  { id: "cord", name: "Umbilical cord", shows: "Joins placenta and fetus" },
+  { id: "fluid", name: "Amniotic fluid", shows: "Fills the uterine cavity" },
+  { id: "blood", name: "Bleeding", shows: "Maternal blood from sheared placental bed, tracking out through the os: painless, bright red" },
+  { id: "probe", name: "Transvaginal probe", shows: "Sits 2-3 cm from the cervix, never in the os: the safe and most accurate test" },
+  { id: "balloon", name: "Bakri balloon", shows: "Intrauterine tamponade pressing on the lower-segment placental bed after delivery" },
+  { id: "accreta", name: "Invading villi", shows: "Placenta accreta spectrum: villi grow into or through the myometrium at the scar" },
+  { id: "bladder", name: "Bladder", shows: "In front of the lower segment; invaded in percreta" },
+  { id: "vagina", name: "Vagina", shows: "Bleeding shows here; a finger must not go through the os" },
+  { id: "abdwall", name: "Abdominal wall", shows: "Skin, fat and rectus over the growing uterus" },
+  { id: "rectum", name: "Rectum", shows: "Behind the uterus" },
+  { id: "sacrum", name: "Sacrum", shows: "Posterior pelvis" },
+  { id: "symphysis", name: "Pubic symphysis", shows: "Front of the pelvis" },
+];
+TK.connect({ meta: TOUR_META, parts: PARTS_INFO, stops: STOPS, goStop: (k) => goStop(k), setPlaying, isPlaying: () => ST.playing, current: () => ST.stop });
