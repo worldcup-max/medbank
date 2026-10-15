@@ -46,6 +46,19 @@ secrets. Enter them directly in the host's dashboard.
 The app and website call this server cross-origin. CORS is built in and controlled by
 `ALLOWED_ORIGINS` (defaults to `*` for easy first setup; lock it to your real origins for launch).
 
+## Shared class library (one build per lecture)
+
+When a student imports a lecture a classmate already built (same PDF file, same YouTube video, same
+slide photos or same pasted text, at the same level and build prompt), `/import` copies that build
+into the student's own topic instead of calling the AI again. Q-bank, written tests, podcast scripts
+and the topic preview built on any copy are shared back the same way. A classmate who imports the
+same upload while it is still building waits for it rather than paying for a second build.
+
+- Turn it on: run `sql/lecture_cache.sql` once in Supabase → SQL Editor. Until then imports build as before.
+- A student can ask for their own build with `fresh: true` on `/import` (an admin `model` override never uses the cache).
+- Logic: `lecture-cache.mjs`; offline test: `node test-lecture-cache.mjs`.
+- Savings so far: `select count(*) builds, sum(hits) free_copies from lecture_cache;`
+
 ## Local test
 
 ```bash

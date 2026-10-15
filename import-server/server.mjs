@@ -29,11 +29,16 @@ import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPla
 import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
+import { makeLectureCache, inputKey, contentKey, cacheScope, shareableExtras } from "./lecture-cache.mjs";   // shared class library
 import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
 const anthropic = new Anthropic();
+const lectureCache = makeLectureCache(admin);
+/* the shared build a topic was copied from (or offered to the class as), so lazily built extras flow both ways.
+   Separate best-effort read: works (returns null) before sql/lecture_cache.sql adds the column. */
+async function sharedSourceOf(topic_id){ try{ const r=await admin.from("topics").select("shared_source").eq("id",topic_id).maybeSingle(); return (r && !r.error && r.data && r.data.shared_source) || null; }catch(_){ return null; } }
 const app = express();
 // CORS: the app + website call this from a different origin. Set ALLOWED_ORIGINS
 // (comma-separated) on the host to restrict; defaults to "*" for easy first setup.
@@ -1273,6 +1278,7 @@ setInterval(loadLearnedPronunciations, 30*60*1000);   // refresh every 30 min
 
 app.post("/import", async (req,res)=>{
   let importId = null;   // hoisted so the catch below can mark a crashed build as failed
+  let endInflight = () => {};   // releases classmates waiting on this same upload (shared class library)
   try{
     const user = await getUser(req);
     if(!user) return res.status(401).json({ error:"not signed in" });
@@ -1306,14 +1312,40 @@ app.post("/import", async (req,res)=>{
     const paid = await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
     let model = (paid.data && paid.data.status==="active") ? PREMIUM_MODEL : BASIC_MODEL;
     // admins may override the model per import (for A/B testing)
-    if(req.body.model){ const adm = await admin.from("accounts").select("is_admin").eq("id",account_id).maybeSingle(); if(adm.data && adm.data.is_admin) model = req.body.model; }
+    let adminModel = false;
+    if(req.body.model){ const adm = await admin.from("accounts").select("is_admin").eq("id",account_id).maybeSingle(); if(adm.data && adm.data.is_admin){ model = req.body.model; adminModel = true; } }
 
     const prompt = pt.data.template
       .replace(/\{\{topicName\}\}/g, topicName).replace(/\{\{lecturer\}\}/g, lecturer||"").replace(/\{\{subject\}\}/g, subject||"")
       + "\n\nADDITIONAL REQUIREMENT — source anchors: For EVERY primer card and EVERY recall card, also include a field \"src\": a SHORT verbatim quote (6 to 12 words) copied EXACTLY (same words and casing) from note_md that this card is based on, so the app can jump the reader to the exact spot in the built note. Prefer a distinctive sentence fragment over a heading. If you truly cannot find a matching phrase, use the nearest heading text from note_md. Keep \"src\" inside each card object alongside its other fields."
       + "\n\nADDITIONAL REQUIREMENT — option length parity (recall cards): never let the correct answer stand out by its wording. Keep all 4 options the same length, detail and grammatical register. If the correct option needs to be long or qualified, make every distractor equally long and qualified — a student must NOT be able to guess the answer because it is the longest, most specific, most hedged, or the only one with a caveat. Distractors must be plausible, and phrased in the same style as the correct option.";
-    const { parts, images, transcript } = await extractContent(req.body);
 
+    // --- shared class library: if a classmate already built this exact source (same PDF, video, photos or
+    // text) at this level with this prompt, copy their build instead of paying for another (lecture-cache.mjs).
+    // "fresh" = the student asked for their own build; an admin model test never reads or writes the cache.
+    const scope = cacheScope(level, pt.data.template);
+    const inKey = inputKey(req.body);
+    const useCache = !req.body.fresh && !adminModel;
+    let shared = null;
+    if(useCache && inKey){
+      shared = await lectureCache.byInput(inKey, scope);
+      if(!shared && await lectureCache.waitInflight(inKey, scope)) shared = await lectureCache.byInput(inKey, scope);   // classmate mid-build → wait, don't pay twice
+    }
+    let parts = [], images = [], transcript = null, ctKey = null;
+    if(!shared){
+      if(!adminModel) endInflight = lectureCache.begin(inKey, scope);
+      ({ parts, images, transcript } = await extractContent(req.body));
+      ctKey = contentKey(parts, images);
+      if(useCache) shared = await lectureCache.byContent(ctKey, scope);   // same lecture, re-saved as a different file
+    }
+
+    let obj=null, winGen=null, lastErrs=[], lastErr="", lastDiag=null, sharedId=null;
+    if(shared){
+      obj = { note_md:shared.note_md, simplified_md:shared.simplified_md, primer:{ cards:shared.primer||[] }, recall:{ cards:shared.recall||[] } };
+      if(!transcript && shared.transcript) transcript = shared.transcript;
+      sharedId = shared.id;
+      console.log("[import] shared build "+shared.id+" reused for "+account_id+" (no model call)");
+    } else {
     // Nothing readable came out of the source (image-only/scanned PDF, a recording that transcribed
     // to silence, captions with no text). Without this the build ran on a prompt containing no
     // lecture at all — two full model calls, then the useless "unreadable response" message.
@@ -1325,7 +1357,6 @@ app.post("/import", async (req,res)=>{
     // generate → parse → validate, with ONE automatic retry (BUG-03). LLM output is stochastic, so a
     // single flaky response shouldn't hard-fail the whole build. On the retry we tell the model exactly
     // what was wrong; on final failure we return the SPECIFIC reason, not a bare "validation failed".
-    let obj=null, winGen=null, lastErrs=[], lastErr="", lastDiag=null;
     for(let attempt=1; attempt<=2; attempt++){
       const fixNote = attempt>1
         ? "\n\nIMPORTANT — your previous output was rejected for: "+lastErrs.join("; ")+". Return STRICT valid JSON that fixes ALL of these. Requirements: note_md and simplified_md must each be at least 200 characters; include a primer deck and a recall deck; EVERY recall card must have exactly 4 items in \"opts\", an integer \"ans\" between 0 and 3, and an answer note \"a\"; every primer card must have q, lecturer, explain and tie."
@@ -1354,16 +1385,29 @@ app.post("/import", async (req,res)=>{
         : "Couldn't build a complete study set from this input ("+(lastErrs[0]||"missing content")+"). Try adding a little more detail to the lecture, then rebuild.";
       return res.status(502).json({ error:friendly, details:lastErrs, diag:lastDiag });
     }
+    // offer this build to the class (no-op until sql/lecture_cache.sql has run), then release any waiters
+    if(!adminModel) sharedId = await lectureCache.put({ input_key:inKey, content_key:ctKey, scope, level, source_kind:sourceKind, model, obj, transcript, built_by:account_id });
+    endInflight();
+    }
 
     // --- save the topic + cards ---
+    const startExtras = shared ? shareableExtras(shared.extras) : {};
     const topicRow = {
       course_id, account_id, title:topicName, lecturer:lecturer||null, status:"ready",
       source_kind: sourceKind,
       note_md: obj.note_md, simplified_md: obj.simplified_md
     };
     if(transcript && transcript.length) topicRow.transcript = transcript;   // needs a jsonb "transcript" column
+    if(sharedId) topicRow.shared_source = sharedId;                         // needs sql/lecture_cache.sql
+    if(Object.keys(startExtras).length) topicRow.extras = startExtras;      // a classmate's Q-bank / written / podcast scripts
+    if(shared && shared.preview && shared.preview.status==="ready") topicRow.preview = shared.preview;
     let topic = await admin.from("topics").insert(topicRow).select("id").single();
-    if(topic.error && /transcript/i.test(topic.error.message||"")){ delete topicRow.transcript; topic = await admin.from("topics").insert(topicRow).select("id").single(); } // column not added yet → save without it
+    // optional columns not added yet → drop the one named in the error and save without it
+    for(let i=0; i<4 && topic.error; i++){
+      const col = ["transcript","shared_source","preview","extras"].find(c=>topicRow[c]!==undefined && new RegExp(c,"i").test(topic.error.message||""));
+      if(!col) break;
+      delete topicRow[col]; topic = await admin.from("topics").insert(topicRow).select("id").single();
+    }
     if(topic.error) throw topic.error;
     const topicId = topic.data.id;
 
@@ -1375,26 +1419,32 @@ app.post("/import", async (req,res)=>{
 
     // --- optional extras the student ticked in the "what to build" box (fill_blank / written) ---
     const wantBuilds = Array.isArray(req.body.builds) ? req.body.builds.filter(b=>b==="qbank"||b==="written") : [];
-    if(wantBuilds.length){
+    if(wantBuilds.some(k=>!startExtras[k])){
       const extras={};
       for(const kind of wantBuilds){
+        if(startExtras[kind]) continue;   // already shared by a classmate's build
         try{ const r = await buildExtra(kind, level, obj.note_md, model);
           if(r && r.items && r.items.length && !r.partial) extras[kind]=r.items;                                    // QB-06: only cache a COMPLETE build
           else if(r && r.partial) console.warn("[import] extra '"+kind+"' partial ("+r.items.length+" item(s)) — not caching; first open will rebuild (topic "+topicId+")");
           else console.warn("[import] extra '"+kind+"' produced no items (topic "+topicId+")"); }
         catch(e){ console.warn("[import] extra '"+kind+"' failed (topic "+topicId+"): "+((e&&e.message)||e)); }   // was swallowed silently
       }
-      if(Object.keys(extras).length){ await admin.from("topics").update({ extras }).eq("id",topicId); }   // needs a jsonb "extras" column; ignored if absent
+      if(Object.keys(extras).length){
+        await admin.from("topics").update({ extras:Object.assign({}, startExtras, extras) }).eq("id",topicId);   // needs a jsonb "extras" column; ignored if absent
+        lectureCache.addExtras(sharedId, extras);   // classmates who import this lecture next get these free
+      }
       if(extras.qbank && targetsMode()!=="off") annotateTargets(extras.qbank, { topic_id:topicId, account_id }).catch(()=>{});   // shadow-mode annotation
     }
 
     // --- meter usage ---
     const usage = (winGen && winGen.usage) || {};
-    await admin.from("imports").update({ status:"done", topic_id:topicId, model, input_tokens:usage.input_tokens||null, output_tokens:usage.output_tokens||null }).eq("id",importId);
-    await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:"import", p_tokens:(usage.output_tokens||0) });
-
-    harvestFromNote(obj.note_md);   // fire-and-forget: learn new medical pronunciations from this lecture
-    res.json({ ok:true, topic_id:topicId, primer:obj.primer.cards.length, recall:obj.recall.cards.length });
+    await admin.from("imports").update({ status:"done", topic_id:topicId, model: shared ? "shared:"+(shared.model||"") : model, input_tokens:usage.input_tokens||null, output_tokens:usage.output_tokens||null }).eq("id",importId);
+    if(shared) lectureCache.hit(shared.id);
+    else {
+      await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:"import", p_tokens:(usage.output_tokens||0) });
+      harvestFromNote(obj.note_md);   // fire-and-forget: learn new medical pronunciations from this lecture
+    }
+    res.json({ ok:true, topic_id:topicId, primer:obj.primer.cards.length, recall:obj.recall.cards.length, shared:!!shared });
   }catch(e){
     console.error(e);
     // without this the row sat at status:"processing" forever whenever the build threw
@@ -1402,7 +1452,7 @@ app.post("/import", async (req,res)=>{
     // "failed" on the validation path.
     if(importId){ try{ await admin.from("imports").update({ status:"failed", error:String((e&&e.message)||e).slice(0,400) }).eq("id",importId); }catch(_){} }
     res.status(500).json({ error:(e&&e.message)||"server error" });
-  }
+  }finally{ endInflight(); }
 });
 
 /* Build one optional extra (fill_blank / written) on demand for an existing topic,
@@ -1424,6 +1474,17 @@ app.post("/build-extra", async (req,res)=>{
     // sent to the model as an EMPTY lecture — 5 paid calls that either fail or invent questions from nothing
     if(!String(t.data.note_md||"").trim()) return res.status(422).json({ error:"no_note", reason:"This lecture has no note to build questions from — rebuild the lecture first." });
     const level = Number(req.body.level) || null;
+    // shared class library: a classmate may already have built this for the same lecture
+    const src = await sharedSourceOf(topic_id);
+    if(src && !req.body.force){
+      const row = await lectureCache.byId(src);
+      const it = row && (row.level||0)===(level||0) && row.extras && row.extras[kind];
+      if(Array.isArray(it) && it.length){
+        await admin.from("topics").update({ extras:Object.assign({}, t.data.extras||{}, { [kind]: it }) }).eq("id",topic_id);
+        console.log("[build-extra] shared "+kind+" from "+src+" → topic "+topic_id+" (no model call)");
+        return res.json({ ok:true, items:it, shared:true });
+      }
+    }
     // in-app extras use EXTRAS_MODEL (defaults to Flash; can be pointed at a faster non-reasoning model)
     const model = EXTRAS_MODEL;
     const _t0 = Date.now();
@@ -1439,6 +1500,7 @@ app.post("/build-extra", async (req,res)=>{
     }
     const extras = Object.assign({}, t.data.extras||{}, { [kind]: r.items });
     await admin.from("topics").update({ extras }).eq("id",topic_id);   // ignored if extras column absent
+    lectureCache.addExtras(src, { [kind]: r.items });                  // the rest of the class gets it free
     res.json({ ok:true, items:r.items });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
@@ -1463,8 +1525,16 @@ app.post("/podcast", async (req,res)=>{
     // either fails ("try again" forever) or invents a podcast from nothing. Same guard as /build-extra.
     if(!String(t.data.note_md||"").trim()) return res.status(422).json({ error:"no_note", reason:"This lecture has no note to build a podcast from — rebuild the lecture first." });
     const level = Number(req.body.level) || null;
-    const model = await resolveModel(user.id, level);
-    const lines = await podcastScript(level, t.data.note_md, model, mode);
+    // shared class library: reuse a classmate's script for this lecture (its voice clips are cached by line text, so audio is shared too)
+    const src = await sharedSourceOf(topic_id);
+    const row = src ? await lectureCache.byId(src) : null;
+    const sharedLines = row && (row.level||0)===(level||0) && row.extras && row.extras.podcast && row.extras.podcast.scripts && row.extras.podcast.scripts[mode];
+    let lines = (Array.isArray(sharedLines) && sharedLines.length) ? sharedLines : null;
+    if(!lines){
+      const model = await resolveModel(user.id, level);
+      lines = await podcastScript(level, t.data.note_md, model, mode);
+      if(lines && lines.length) lectureCache.addExtras(src, { podcast:{ scripts:{ [mode]: lines } } });
+    }
     if(!lines || !lines.length) return res.status(502).json({ error:"couldn't write the script — try again" });
     scripts[mode] = lines;
     extras.podcast = Object.assign({}, extras.podcast, { scripts, script:lines });   // keep .script as the latest (back-compat)
@@ -2154,8 +2224,15 @@ app.post("/topic-preview", async (req,res)=>{
     if(!force){ try{ const c = await admin.from("topics").select("preview").eq("id",topic_id).maybeSingle(); if(c.data && c.data.preview && c.data.preview.status==="ready") return res.json(c.data.preview); }catch(_){} }
     const note = String(t.data.note_md||"");
     if(note.replace(/\s+/g," ").trim().length < 400){ const skip={status:"skipped",scenes:[]}; try{ await admin.from("topics").update({ preview:skip }).eq("id",topic_id); }catch(_){}; return res.json(skip); }
+    // shared class library: a classmate's preview of the same lecture
+    const src = await sharedSourceOf(topic_id);
+    if(src && !force){
+      const row = await lectureCache.byId(src);
+      if(row && row.preview && row.preview.status==="ready"){ try{ await admin.from("topics").update({ preview: row.preview }).eq("id",topic_id); }catch(_){} return res.json(row.preview); }
+    }
     const built = await buildTopicPreview(note, t.data.title||"Medicine");   // topic title is the subject hint for the viz prompt
     try{ await admin.from("topics").update({ preview: built }).eq("id",topic_id); }catch(_){}   // needs a jsonb "preview" column; ignored if absent
+    lectureCache.setPreview(src, built);
     try{ await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:"preview", p_tokens:0 }); }catch(_){}
     res.json(built);
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
