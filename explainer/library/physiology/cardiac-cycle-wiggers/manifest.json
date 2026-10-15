@@ -1,0 +1,688 @@
+{
+ "schema": "medbank-plate-manifest/1",
+ "id": "cardiac-cycle-wiggers",
+ "course": "physiology",
+ "title": "The four-chamber heart in motion",
+ "sub": "A frontal cutaway driven by a pressure model. Every valve opens only when the pressure behind it beats the pressure ahead of it; watch the gradients, not the clock.",
+ "kind": "cycle",
+ "timeUnit": "s",
+ "duration": 0.8,
+ "conditions": [
+  "Heart rate 75 bpm (cycle 0.8 s)",
+  "Normal adult resting heart",
+  "Frontal cutaway of all four chambers with both circulations"
+ ],
+ "phases": [
+  {
+   "name": "Diastasis",
+   "windows": [
+    [
+     0,
+     0.008
+    ],
+    [
+     0.685,
+     0.8
+    ]
+   ],
+   "shows": "Atrial and ventricular pressures nearly equal; slow filling straight from the veins."
+  },
+  {
+   "name": "Atrial systole",
+   "windows": [
+    [
+     0.008,
+     0.12
+    ]
+   ],
+   "shows": "The atria contract (a wave) and top up the ventricles; atrioventricular valves open, semilunar valves shut."
+  },
+  {
+   "name": "Isovolumetric contraction",
+   "windows": [
+    [
+     0.12,
+     0.219
+    ]
+   ],
+   "shows": "Ventricles contract with all four valves shut (S1 at AV closure); pressure rises steeply at constant volume."
+  },
+  {
+   "name": "Ventricular ejection",
+   "windows": [
+    [
+     0.219,
+     0.424
+    ]
+   ],
+   "shows": "LV pressure exceeds aortic (~80 mmHg) and RV exceeds pulmonary pressure; semilunar valves open and the stroke volume is ejected; LV peaks near 120 mmHg."
+  },
+  {
+   "name": "Isovolumetric relaxation",
+   "windows": [
+    [
+     0.424,
+     0.531
+    ]
+   ],
+   "shows": "Ventricles relax with all valves shut; aortic valve closure gives S2 and the dicrotic notch; pressure falls at constant volume (ESV)."
+  },
+  {
+   "name": "Rapid filling",
+   "windows": [
+    [
+     0.531,
+     0.685
+    ]
+   ],
+   "shows": "Ventricular pressure falls below atrial; AV valves open and most ventricular filling occurs passively."
+  }
+ ],
+ "parts": [
+  {
+   "id": "RA",
+   "name": "Right atrium",
+   "shows": "Right atrium: receives deoxygenated blood from the venae cavae; contracts in atrial systole."
+  },
+  {
+   "id": "RV",
+   "name": "Right ventricle",
+   "shows": "Right ventricle: pumps into the pulmonary artery at low pressure (~20 mmHg systolic)."
+  },
+  {
+   "id": "LA",
+   "name": "Left atrium",
+   "shows": "Left atrium: receives oxygenated blood from the pulmonary veins; pressure ~5–10 mmHg."
+  },
+  {
+   "id": "LV",
+   "name": "Left ventricle",
+   "shows": "Left ventricle: thick-walled pump into the aorta; pressure 0–120 mmHg, volume ~125 → ~55 mL."
+  },
+  {
+   "id": "tricuspid",
+   "name": "Tricuspid valve",
+   "shows": "Tricuspid valve: right atrioventricular valve; opens when RA pressure > RV pressure."
+  },
+  {
+   "id": "pulmonary",
+   "name": "Pulmonary valve",
+   "shows": "Pulmonary valve: right semilunar valve; opens when RV pressure > pulmonary artery pressure."
+  },
+  {
+   "id": "mitral",
+   "name": "Mitral valve",
+   "shows": "Mitral valve: left atrioventricular valve; opens when LA pressure > LV pressure; its closure contributes to S1."
+  },
+  {
+   "id": "aortic",
+   "name": "Aortic valve",
+   "shows": "Aortic valve: left semilunar valve; opens when LV pressure > aortic pressure; its closure contributes to S2."
+  },
+  {
+   "id": "aorta",
+   "name": "Aorta",
+   "shows": "Aorta: receives the LV stroke volume; elastic recoil keeps diastolic pressure ~80 mmHg."
+  },
+  {
+   "id": "pa",
+   "name": "Pulmonary artery",
+   "shows": "Pulmonary trunk and arteries: carry RV output to the lungs."
+  },
+  {
+   "id": "cavae",
+   "name": "Venae cavae",
+   "shows": "Superior and inferior venae cavae: return systemic venous blood to the right atrium."
+  },
+  {
+   "id": "pveins",
+   "name": "Pulmonary veins",
+   "shows": "Pulmonary veins: return oxygenated blood to the left atrium."
+  }
+ ],
+ "readouts": [
+  {
+   "key": "LVP",
+   "label": "LV pressure",
+   "unit": "mmHg",
+   "range": [
+    3.746,
+    117.1
+   ],
+   "shows": "Left ventricular pressure."
+  },
+  {
+   "key": "AoP",
+   "label": "Aortic pressure",
+   "unit": "mmHg",
+   "range": [
+    77.85,
+    116.5
+   ],
+   "shows": "Aortic pressure (systolic/diastolic arterial pressure)."
+  },
+  {
+   "key": "LAP",
+   "label": "LA pressure",
+   "unit": "mmHg",
+   "range": [
+    5.418,
+    9.321
+   ],
+   "shows": "Left atrial pressure (a, c and v waves)."
+  },
+  {
+   "key": "RVP",
+   "label": "RV pressure",
+   "unit": "mmHg",
+   "range": [
+    1.5,
+    21.29
+   ],
+   "shows": "Right ventricular pressure."
+  },
+  {
+   "key": "PAP",
+   "label": "Pulmonary artery pressure",
+   "unit": "mmHg",
+   "range": [
+    10.31,
+    20.55
+   ],
+   "shows": "Pulmonary artery pressure."
+  },
+  {
+   "key": "RAP",
+   "label": "RA pressure",
+   "unit": "mmHg",
+   "range": [
+    1.923,
+    5.231
+   ],
+   "shows": "Right atrial pressure (≈ central venous pressure)."
+  },
+  {
+   "key": "LAV",
+   "label": "LA volume",
+   "unit": "mL",
+   "range": [
+    29.79,
+    61.79
+   ],
+   "shows": "Left atrial volume."
+  },
+  {
+   "key": "RAV",
+   "label": "RA volume",
+   "unit": "mL",
+   "range": [
+    27.34,
+    64.67
+   ],
+   "shows": "Right atrial volume."
+  },
+  {
+   "key": "ecg",
+   "label": "ECG",
+   "unit": "mV (schematic)",
+   "range": [
+    -0.1103,
+    0.9631
+   ],
+   "shows": "Schematic surface ECG on the same clock: P wave starts atrial contraction, QRS just before ventricular contraction, T wave during late ejection."
+  },
+  {
+   "key": "vmSA",
+   "label": "SA-node cell voltage",
+   "unit": "mV",
+   "range": [
+    -60,
+    10
+   ],
+   "shows": "Membrane voltage of an SA-node pacemaker cell: drifts up to threshold (funny current), fires, resets."
+  },
+  {
+   "key": "vmV",
+   "label": "Ventricular cell voltage",
+   "unit": "mV",
+   "range": [
+    -88,
+    25
+   ],
+   "shows": "Membrane voltage of a ventricular muscle cell: resting −88 mV, fast upstroke, plateau, repolarisation."
+  },
+  {
+   "key": "ca",
+   "label": "Ventricular Ca²⁺ transient",
+   "unit": "0–1",
+   "range": [
+    0,
+    1
+   ],
+   "shows": "Ventricular intracellular Ca²⁺ transient (0–1): rises just after the upstroke and drives contraction."
+  },
+  {
+   "key": "actV",
+   "label": "Ventricular activation",
+   "unit": "0–1",
+   "range": [
+    0,
+    1
+   ],
+   "shows": "Ventricular activation (0–1): how strongly the ventricular muscle is contracting."
+  },
+  {
+   "key": "LVV",
+   "label": "LV volume",
+   "unit": "mL",
+   "range": [
+    56.36,
+    126.5
+   ],
+   "shows": "Left ventricular volume: end-diastolic volume at its peak, end-systolic volume at its trough."
+  },
+  {
+   "key": "RVV",
+   "label": "RV volume",
+   "unit": "mL",
+   "range": [
+    44.78,
+    114.9
+   ],
+   "shows": "Right ventricular volume."
+  },
+  {
+   "key": "SV",
+   "label": "Stroke vol · EF",
+   "unit": "",
+   "range": [
+    70.12,
+    70.12
+   ],
+   "shows": "Stroke volume = end-diastolic minus end-systolic volume."
+  },
+  {
+   "key": "EF",
+   "label": "Ejection fraction",
+   "unit": "%",
+   "range": [
+    55.44,
+    55.44
+   ],
+   "shows": "Ejection fraction = stroke volume / end-diastolic volume."
+  }
+ ],
+ "concepts": [
+  "phases of the cardiac cycle",
+  "Wiggers diagram: pressure and volume against time",
+  "pressure gradients open and close the valves",
+  "atrioventricular vs semilunar valves",
+  "first heart sound (S1) and second heart sound (S2)",
+  "isovolumetric contraction and relaxation",
+  "atrial contribution to filling (atrial kick)",
+  "rapid filling and diastasis",
+  "end-diastolic volume, end-systolic volume, stroke volume, ejection fraction",
+  "left vs right heart pressures",
+  "aortic pressure: systolic, diastolic, dicrotic notch",
+  "pulmonary and systemic circulations through the four chambers"
+ ],
+ "not_shown": [
+  "ECG waves (P, QRS, T) as a trace",
+  "jugular venous pulse trace",
+  "pressure–volume loop",
+  "Frank–Starling mechanism / changing preload or afterload",
+  "effect of heart rate on the cycle",
+  "third and fourth heart sounds",
+  "valve disease murmurs",
+  "coronary blood flow",
+  "cardiac output regulation"
+ ],
+ "lenses": [
+  {
+   "id": "ap",
+   "title": "Inside two heart cells",
+   "kicker": "Lens · membrane voltage",
+   "shows": "Action potentials of an SA-node pacemaker cell and a ventricular muscle cell over one beat, the ions behind each phase, and the ECG they add up to; the conduction system lights up on the heart.",
+   "phases": [
+    "Atrial systole",
+    "Isovolumetric contraction",
+    "Ventricular ejection"
+   ],
+   "parts": [
+    "RA",
+    "LV"
+   ],
+   "concepts": [
+    "pacemaker potential and the funny current",
+    "ventricular action potential phases 0–4 and the plateau",
+    "conduction: SA node, AV node delay, bundle of His, Purkinje fibres",
+    "ECG waves P, QRS, T and the PR interval"
+   ]
+  },
+  {
+   "id": "mitral",
+   "title": "Looking down through the left atrium",
+   "kicker": "Lens · surgeon's view",
+   "shows": "The mitral valve seen from the left atrium: anterior and posterior (P1–P3) leaflets, commissures and chordae; it opens only while LA pressure exceeds LV pressure.",
+   "phases": [
+    "Rapid filling",
+    "Diastasis",
+    "Atrial systole",
+    "Isovolumetric contraction"
+   ],
+   "parts": [
+    "mitral",
+    "LA",
+    "LV"
+   ],
+   "concepts": [
+    "mitral valve anatomy",
+    "AV valve opening and closure by pressure gradient",
+    "atrial kick",
+    "S1 from AV valve closure"
+   ]
+  },
+  {
+   "id": "sarcomere",
+   "title": "One sarcomere in the LV wall",
+   "kicker": "Lens · ×20,000",
+   "shows": "Ca²⁺ release from the sarcoplasmic reticulum, myosin cross-bridges binding actin, and sarcomere length against tension across the beat (isometric in the isovolumetric phases).",
+   "phases": [
+    "Isovolumetric contraction",
+    "Ventricular ejection",
+    "Isovolumetric relaxation",
+    "Rapid filling"
+   ],
+   "parts": [
+    "LV"
+   ],
+   "concepts": [
+    "excitation–contraction coupling",
+    "Ca²⁺ and troponin–tropomyosin",
+    "isometric vs shortening contraction",
+    "Frank–Starling length–tension",
+    "SERCA and active relaxation"
+   ]
+  },
+  {
+   "id": "aortic",
+   "title": "The aortic valve from above",
+   "kicker": "Lens · view down the aorta",
+   "shows": "The three aortic cusps opening into a triangle during ejection and closing (S2), with blood jetting through and the coronary ostia filling in diastole.",
+   "phases": [
+    "Ventricular ejection",
+    "Isovolumetric relaxation",
+    "Isovolumetric contraction"
+   ],
+   "parts": [
+    "aortic",
+    "aorta",
+    "LV"
+   ],
+   "concepts": [
+    "semilunar valve opening and closure",
+    "S2 and the dicrotic notch",
+    "right, left and non-coronary cusps",
+    "coronary filling in diastole",
+    "aortic stenosis"
+   ]
+  },
+  {
+   "id": "shortaxis",
+   "title": "The heart cut across the ventricles",
+   "kicker": "Lens · short-axis slice",
+   "shows": "A slice through both ventricles: the thick round LV and the thin crescent RV, the LV wall thickening as the cavity empties, and the cavity at end-diastole for comparison.",
+   "phases": [
+    "Ventricular ejection",
+    "Rapid filling",
+    "Isovolumetric contraction"
+   ],
+   "parts": [
+    "LV",
+    "RV"
+   ],
+   "concepts": [
+    "LV vs RV wall thickness",
+    "systolic wall thickening",
+    "Laplace's law",
+    "end-diastolic and end-systolic volume"
+   ]
+  },
+  {
+   "id": "pv",
+   "title": "LV pressure–volume loop",
+   "kicker": "Lens · a new graph",
+   "shows": "LV pressure plotted against LV volume over the beat: one loop whose corners are the four valve events, whose width is the stroke volume and whose area is stroke work.",
+   "phases": [
+    "Rapid filling",
+    "Diastasis",
+    "Atrial systole",
+    "Isovolumetric contraction",
+    "Ventricular ejection",
+    "Isovolumetric relaxation"
+   ],
+   "parts": [
+    "LV",
+    "mitral",
+    "aortic"
+   ],
+   "concepts": [
+    "pressure–volume loop",
+    "stroke volume and ejection fraction",
+    "stroke work",
+    "ESPVR (contractility) and EDPVR (compliance)"
+   ]
+  },
+  {
+   "id": "chest",
+   "title": "Listening points on the chest",
+   "kicker": "Lens · surface anatomy",
+   "shows": "Where each valve is heard on the chest wall, lighting up at S1 (mitral, tricuspid) and S2 (aortic, pulmonary), with the phonocardiogram of this beat.",
+   "phases": [
+    "Isovolumetric contraction",
+    "Isovolumetric relaxation"
+   ],
+   "parts": [
+    "mitral",
+    "tricuspid",
+    "aortic",
+    "pulmonary"
+   ],
+   "concepts": [
+    "first and second heart sounds",
+    "auscultation areas",
+    "what causes heart sounds"
+   ]
+  }
+ ],
+ "whatifs": [
+  {
+   "id": "afterload",
+   "label": "Raised afterload",
+   "params": {
+    "afterload": 1.6
+   },
+   "at": "Ventricular ejection",
+   "note": [
+    "afterload",
+    "hypertension",
+    "aortic stenosis",
+    "peripheral resistance"
+   ],
+   "shows": "Raised afterload (systemic resistance up 60%): the LV must generate more pressure before the aortic valve opens, so pressures rise and less blood is ejected each beat.",
+   "effect": {
+    "AoP:max": [
+     116.5,
+     150.5
+    ],
+    "AoP:min": [
+     77.9,
+     115.3
+    ],
+    "LVP:max": [
+     117.1,
+     151
+    ],
+    "SV": [
+     70.1,
+     61.1
+    ],
+    "EF": [
+     55.4,
+     46.7
+    ]
+   }
+  },
+  {
+   "id": "weaklv",
+   "label": "Weak LV",
+   "params": {
+    "contractility": 0.6
+   },
+   "at": "Ventricular ejection",
+   "note": [
+    "contractility",
+    "heart failure",
+    "inotrop",
+    "myocardial infarction"
+   ],
+   "shows": "Weaker LV contraction (peak elastance down 40%): the ventricle empties less, so stroke volume and ejection fraction fall and left atrial pressure rises.",
+   "effect": {
+    "AoP:max": [
+     116.5,
+     107.1
+    ],
+    "LVP:max": [
+     117.1,
+     107.6
+    ],
+    "SV": [
+     70.1,
+     64
+    ],
+    "EF": [
+     55.4,
+     44.4
+    ],
+    "LAP:max": [
+     9.3,
+     10.7
+    ]
+   }
+  },
+  {
+   "id": "bleed",
+   "label": "10% blood loss",
+   "params": {
+    "bleed": 0.1
+   },
+   "at": "Rapid filling",
+   "note": [
+    "haemorrhage",
+    "hemorrhage",
+    "blood loss",
+    "preload",
+    "venous return",
+    "frank-starling",
+    "frank starling"
+   ],
+   "shows": "A 10% blood loss, before any reflex compensation, empties the veins: less venous return means a smaller end-diastolic volume (less preload), so by Frank–Starling the stroke volume and blood pressure fall.",
+   "effect": {
+    "LVV:max": [
+     126.5,
+     66.4
+    ],
+    "SV": [
+     70.1,
+     33.3
+    ],
+    "AoP:max": [
+     116.5,
+     55.3
+    ],
+    "AoP:min": [
+     77.9,
+     37
+    ],
+    "EF": [
+     55.4,
+     50.2
+    ]
+   }
+  }
+ ],
+ "predictions": [
+  {
+   "id": "aorticopens",
+   "before": "Ventricular ejection",
+   "ask": "LV pressure is about to rise above aortic pressure. Which valve opens next?",
+   "answer": [
+    "aortic"
+   ],
+   "choices": [
+    "mitral",
+    "aortic",
+    "tricuspid"
+   ],
+   "concepts": [
+    "pressure gradients open and close the valves",
+    "atrioventricular vs semilunar valves",
+    "isovolumetric contraction and relaxation"
+   ]
+  },
+  {
+   "id": "aorticcloses",
+   "before": "Isovolumetric relaxation",
+   "ask": "LV pressure has just fallen below aortic pressure. Which valve closes now?",
+   "answer": [
+    "aortic"
+   ],
+   "choices": [
+    "aortic",
+    "mitral",
+    "pulmonary"
+   ],
+   "concepts": [
+    "pressure gradients open and close the valves",
+    "first heart sound (S1) and second heart sound (S2)",
+    "aortic pressure: systolic, diastolic, dicrotic notch"
+   ]
+  },
+  {
+   "id": "mitralopens",
+   "before": "Rapid filling",
+   "ask": "LV pressure is falling below left atrial pressure. Which valve opens to let the ventricle fill?",
+   "answer": [
+    "mitral"
+   ],
+   "choices": [
+    "aortic",
+    "mitral",
+    "tricuspid"
+   ],
+   "concepts": [
+    "pressure gradients open and close the valves",
+    "rapid filling and diastasis"
+   ]
+  }
+ ],
+ "tutor": {
+  "rule": "The student's note drives the tutor. Explain only what the note says, in the note's terms, order and depth. Never teach concepts of this topic that are not in the note.",
+  "use": "Pick only the phases and parts the note covers; parts the note does not mention stay dimmed and silent. Note content this plate cannot show is explained in words (no phase/focus) and listed in 'extend'.",
+  "lenses": "A step may open one lens (lens: lenses[].id) only when the note covers what that lens shows (match its concepts and shows against the note); skip every lens the note does not cover. When a lens is open, the narration should talk about what the lens shows.",
+  "step": {
+   "title": "short heading",
+   "phase": "one of phases[].name",
+   "focus": "array of parts[].id",
+   "lens": "optional: one of lenses[].id",
+   "win": "optional: [t0, t1] model-time window to loop (default: the phase, padded)",
+   "speed": "playback speed (see the default lesson)",
+   "say": "2–4 sentences, written for the ear, in the note's own terms"
+  },
+  "output": {
+   "steps": "[step]",
+   "extend": "[note concepts this plate cannot show]"
+  },
+  "fallbackLesson": "lesson.json (recorded voice, used only when there is no note)"
+ }
+}

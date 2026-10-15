@@ -1,0 +1,596 @@
+{
+ "schema": "medbank-plate-manifest/1",
+ "id": "nephron-urine-journey",
+ "course": "physiology",
+ "title": "How the nephron makes urine",
+ "sub": "Follow one parcel of filtrate: each segment's wall decides whether water or salt may leave, and the depth of the medulla decides how far it goes.",
+ "kind": "journey",
+ "timeUnit": "s",
+ "duration": 133,
+ "conditions": [
+  "Juxtamedullary (long-loop) nephron",
+  "ADH on: concentrated urine",
+  "GFR 125 mL/min",
+  "Steady medullary gradient 300 → 1200 mOsm/kg"
+ ],
+ "phases": [
+  {
+   "name": "Glomerular filtration",
+   "windows": [
+    [
+     0,
+     3.103
+    ]
+   ],
+   "shows": "Plasma is filtered from the glomerular capillaries into Bowman's space by a net filtration pressure of 10 mmHg (55 − 15 − 30); the parcel starts as 300 mOsm/kg filtrate."
+  },
+  {
+   "name": "Proximal convoluted tubule",
+   "windows": [
+    [
+     3.103,
+     15.073
+    ]
+   ],
+   "shows": "Iso-osmotic reabsorption: Na⁺ is pumped out and water follows, so ~65% of the volume leaves while osmolality stays 300; all glucose and most bicarbonate are reclaimed."
+  },
+  {
+   "name": "Thin descending limb",
+   "windows": [
+    [
+     15.073,
+     35.023
+    ]
+   ],
+   "shows": "Water-only wall: water leaves into the increasingly salty medulla, so the fluid concentrates to ~1200 mOsm/kg at the loop tip."
+  },
+  {
+   "name": "Thick ascending limb",
+   "windows": [
+    [
+     35.023,
+     57.19
+    ]
+   ],
+   "shows": "Water-tight wall: NKCC2 pumps NaCl out, so the fluid dilutes (to ~100) while the interstitium is kept salty; the single effect that builds the gradient."
+  },
+  {
+   "name": "Distal convoluted tubule",
+   "windows": [
+    [
+     57.19,
+     73.15
+    ]
+   ],
+   "shows": "NCC (thiazide-sensitive) removes more NaCl with no water; the fluid becomes most dilute; the macula densa sits at its start."
+  },
+  {
+   "name": "Cortical collecting duct",
+   "windows": [
+    [
+     73.15,
+     85.12
+    ]
+   ],
+   "shows": "Principal cells: aldosterone drives ENaC Na⁺ uptake and K⁺ secretion; with ADH, water leaves and the fluid returns to ~300."
+  },
+  {
+   "name": "Medullary collecting duct",
+   "windows": [
+    [
+     85.12,
+     133
+    ]
+   ],
+   "shows": "With ADH (AQP2), water leaves into the deep medulla so the urine concentrates toward ~1200 mOsm/kg, with under 1% of the filtrate left."
+  }
+ ],
+ "parts": [
+  {
+   "id": "aff",
+   "name": "Afferent arteriole",
+   "shows": "Afferent arteriole: brings blood into the glomerulus; its pressure sets glomerular capillary pressure."
+  },
+  {
+   "id": "glom",
+   "name": "Glomerulus",
+   "shows": "Glomerular capillary tuft where plasma is filtered."
+  },
+  {
+   "id": "eff",
+   "name": "Efferent arteriole",
+   "shows": "Efferent arteriole: carries blood out of the glomerulus into the peritubular capillaries and vasa recta."
+  },
+  {
+   "id": "bowman",
+   "name": "Bowman's capsule",
+   "shows": "Bowman's capsule: collects the filtrate; its pressure (15 mmHg) opposes filtration."
+  },
+  {
+   "id": "pct",
+   "name": "Proximal convoluted tubule",
+   "shows": "Proximal convoluted tubule with brush border: bulk iso-osmotic reabsorption (Na⁺, water, glucose, HCO₃⁻)."
+  },
+  {
+   "id": "tdl",
+   "name": "Thin descending limb",
+   "shows": "Thin descending limb: permeable to water (AQP1), not salt."
+  },
+  {
+   "id": "tal",
+   "name": "Thick ascending limb",
+   "shows": "Thick ascending limb: NKCC2 salt pump, impermeable to water; target of loop diuretics."
+  },
+  {
+   "id": "md",
+   "name": "Macula densa",
+   "shows": "Macula densa: tall cells of the late thick limb that sense NaCl delivery next to the glomerulus (tubuloglomerular feedback)."
+  },
+  {
+   "id": "dct",
+   "name": "Distal convoluted tubule",
+   "shows": "Distal convoluted tubule: NCC salt uptake, water-tight; target of thiazides."
+  },
+  {
+   "id": "cd",
+   "name": "Collecting duct",
+   "shows": "Collecting duct: aldosterone (ENaC, ROMK) and ADH-controlled water reabsorption (AQP2); sets final urine concentration."
+  },
+  {
+   "id": "ptc",
+   "name": "Peritubular capillaries",
+   "shows": "Peritubular capillaries: take back what the cortical tubule reabsorbs."
+  },
+  {
+   "id": "vr",
+   "name": "Vasa recta",
+   "shows": "Vasa recta: hairpin capillaries in the medulla that supply it without washing out the gradient (countercurrent exchange)."
+  },
+  {
+   "id": "interstitium",
+   "name": "Medullary interstitium",
+   "shows": "Medullary interstitium: osmolality rising from 300 at the corticomedullary border to 1200 at the papilla."
+  }
+ ],
+ "readouts": [
+  {
+   "key": "osm",
+   "label": "Tubular fluid",
+   "unit": "mOsm/kg",
+   "range": [
+    89.17,
+    1183
+   ],
+   "shows": "Osmolality of the tubular fluid in the parcel right now."
+  },
+  {
+   "key": "vol",
+   "label": "Filtrate left",
+   "unit": "%",
+   "range": [
+    0.6269,
+    100
+   ],
+   "shows": "Percentage of the original filtrate volume still left in the tubule."
+  },
+  {
+   "key": "intOsm",
+   "label": "Interstitium here",
+   "unit": "mOsm/kg",
+   "range": [
+    300,
+    1200
+   ],
+   "shows": "Osmolality of the interstitium around the parcel at its current depth."
+  },
+  {
+   "key": "flowDay",
+   "label": "Flow at this point",
+   "unit": "L/day",
+   "range": [
+    1.128,
+    180
+   ],
+   "shows": "Tubular flow at this point scaled to both kidneys, in litres per day."
+  },
+  {
+   "key": "gap",
+   "label": "Lumen minus interstitium",
+   "unit": "mOsm/kg",
+   "range": [
+    -210.8,
+    0.6862
+   ],
+   "shows": "Tubular fluid minus interstitial osmolality: negative means the fluid is more dilute than its surroundings."
+  },
+  {
+   "key": "waterOut",
+   "label": "Water leaving parcel",
+   "unit": "%/s",
+   "range": [
+    0,
+    45.94
+   ],
+   "shows": "Rate at which water is leaving the parcel."
+  },
+  {
+   "key": "saltOut",
+   "label": "Solute leaving parcel",
+   "unit": "%/s",
+   "range": [
+    0,
+    33.34
+   ],
+   "shows": "Rate at which solute is leaving the parcel."
+  },
+  {
+   "key": "glucose",
+   "label": "Glucose left",
+   "unit": "%",
+   "range": [
+    0.01179,
+    100
+   ],
+   "shows": "Percentage of filtered glucose still in the tubule."
+  },
+  {
+   "key": "hco3",
+   "label": "Bicarbonate left",
+   "unit": "%",
+   "range": [
+    19.97,
+    100
+   ],
+   "shows": "Percentage of filtered bicarbonate still in the tubule."
+  },
+  {
+   "key": "depth",
+   "label": "Depth into medulla",
+   "unit": "0–1",
+   "range": [
+    -0.4773,
+    1.007
+   ],
+   "shows": "How deep the parcel is in the medulla (0 = corticomedullary border, 1 = papilla tip; negative = cortex)."
+  },
+  {
+   "key": "nfp",
+   "label": "Net filtration pressure",
+   "unit": "mmHg",
+   "range": [
+    10,
+    10
+   ],
+   "shows": "Net filtration pressure across the glomerular membrane."
+  },
+  {
+   "key": "pGC",
+   "label": "Glomerular capillary pressure",
+   "unit": "mmHg",
+   "range": [
+    55,
+    55
+   ],
+   "shows": "Hydrostatic pressure in the glomerular capillaries, pushing fluid out."
+  },
+  {
+   "key": "pBS",
+   "label": "Bowman's space pressure",
+   "unit": "mmHg",
+   "range": [
+    15,
+    15
+   ],
+   "shows": "Hydrostatic pressure in Bowman's space, pushing back."
+  },
+  {
+   "key": "piGC",
+   "label": "Plasma oncotic pressure",
+   "unit": "mmHg",
+   "range": [
+    30,
+    30
+   ],
+   "shows": "Plasma oncotic pressure (proteins in the capillary), pulling fluid back."
+  }
+ ],
+ "concepts": [
+  "glomerular filtration and Starling forces",
+  "GFR",
+  "nephron segments in order",
+  "proximal iso-osmotic reabsorption",
+  "glucose and bicarbonate reabsorption",
+  "loop of Henle permeabilities",
+  "countercurrent multiplier",
+  "medullary osmotic gradient",
+  "vasa recta countercurrent exchange",
+  "macula densa",
+  "distal tubule NaCl reabsorption",
+  "aldosterone action on principal cells",
+  "ADH and aquaporin-2",
+  "concentrated urine formation",
+  "sites of action of diuretics (loop, thiazide)"
+ ],
+ "not_shown": [
+  "urea recycling",
+  "dilute urine (ADH off)",
+  "renin–angiotensin system",
+  "tubuloglomerular feedback dynamics",
+  "acid secretion by intercalated cells",
+  "potassium handling in detail",
+  "renal clearance calculations",
+  "cortical (short-loop) nephrons",
+  "afferent or efferent arteriole constriction (the plate keeps both arterioles fixed)"
+ ],
+ "lenses": [
+  {
+   "id": "barrier",
+   "title": "The filtration barrier",
+   "kicker": "Lens · ×50,000",
+   "shows": "The three layers between blood and Bowman's space (fenestrated endothelium, negatively charged basement membrane, podocyte slit diaphragms), water and small solutes crossing while albumin and red cells are held back, and the Starling pressures that add up to the net filtration pressure.",
+   "phases": [
+    "Glomerular filtration"
+   ],
+   "parts": [
+    "glom",
+    "bowman",
+    "aff",
+    "eff"
+   ],
+   "concepts": [
+    "glomerular filtration barrier",
+    "size and charge selectivity",
+    "Starling forces and net filtration pressure",
+    "GFR"
+   ]
+  },
+  {
+   "id": "pctcell",
+   "title": "Inside a proximal tubule cell",
+   "kicker": "Lens · one cell",
+   "shows": "SGLT2, NHE3 and aquaporin-1 on the brush border and the Na⁺/K⁺ pump, GLUT2 and NBCe1 on the blood side: Na⁺ is pumped out, water follows, and glucose and bicarbonate are reclaimed while the fluid stays at 300 mOsm/kg.",
+   "phases": [
+    "Proximal convoluted tubule"
+   ],
+   "parts": [
+    "pct",
+    "ptc"
+   ],
+   "concepts": [
+    "iso-osmotic reabsorption",
+    "Na⁺/K⁺-ATPase as the driving force",
+    "SGLT2 glucose reabsorption",
+    "bicarbonate reabsorption via H⁺ secretion",
+    "brush border"
+   ]
+  },
+  {
+   "id": "multiplier",
+   "title": "The countercurrent multiplier",
+   "kicker": "Lens · the loop unfolded",
+   "shows": "The loop of Henle as a hairpin against the medullary gradient: water leaves the thin descending limb so the fluid concentrates toward 1200, NaCl is pumped out of the water-tight thick ascending limb so the fluid dilutes, with the parcel's own values at each depth.",
+   "phases": [
+    "Thin descending limb",
+    "Thick ascending limb"
+   ],
+   "parts": [
+    "tdl",
+    "tal",
+    "interstitium"
+   ],
+   "concepts": [
+    "countercurrent multiplication",
+    "different permeabilities of the two limbs",
+    "single effect",
+    "medullary osmotic gradient"
+   ]
+  },
+  {
+   "id": "talcell",
+   "title": "Inside a thick ascending limb cell",
+   "kicker": "Lens · one cell",
+   "shows": "NKCC2 taking up Na⁺, K⁺ and 2Cl⁻, K⁺ recycling through ROMK that makes the lumen positive and drives Mg²⁺ and Ca²⁺ between cells, and the water-tight wall, so salt leaves without water; loop diuretics block NKCC2.",
+   "phases": [
+    "Thick ascending limb"
+   ],
+   "parts": [
+    "tal",
+    "md"
+   ],
+   "concepts": [
+    "NKCC2",
+    "K⁺ recycling and lumen-positive potential",
+    "paracellular Mg²⁺ and Ca²⁺ reabsorption",
+    "diluting segment",
+    "loop diuretics"
+   ]
+  },
+  {
+   "id": "principal",
+   "title": "A principal cell and ADH",
+   "kicker": "Lens · one cell",
+   "shows": "ADH binding V2 receptors, cAMP moving aquaporin-2 into the apical membrane so water leaves toward the salty interstitium; aldosterone driving ENaC Na⁺ uptake and ROMK K⁺ secretion.",
+   "phases": [
+    "Cortical collecting duct",
+    "Medullary collecting duct"
+   ],
+   "parts": [
+    "cd",
+    "interstitium"
+   ],
+   "concepts": [
+    "ADH, V2 receptor and aquaporin-2",
+    "urine concentration",
+    "aldosterone, ENaC and K⁺ secretion"
+   ]
+  },
+  {
+   "id": "ledger",
+   "title": "Where the filtrate goes",
+   "kicker": "Lens · the whole trip",
+   "shows": "The share of the 180 L/day of filtrate still in the tubule after each segment, how much water each segment removes and the osmolality leaving it, ending at the final urine volume and concentration.",
+   "phases": [
+    "Glomerular filtration",
+    "Proximal convoluted tubule",
+    "Thin descending limb",
+    "Thick ascending limb",
+    "Distal convoluted tubule",
+    "Cortical collecting duct",
+    "Medullary collecting duct"
+   ],
+   "parts": [
+    "bowman",
+    "pct",
+    "tdl",
+    "tal",
+    "dct",
+    "cd"
+   ],
+   "concepts": [
+    "fractional reabsorption by segment",
+    "GFR versus urine output",
+    "urine osmolality"
+   ]
+  }
+ ],
+ "whatifs": [
+  {
+   "id": "furosemide",
+   "label": "Furosemide",
+   "params": {
+    "nkcc2": 0.2
+   },
+   "at": "Thick ascending limb",
+   "note": [
+    "furosemide",
+    "loop diuretic"
+   ],
+   "shows": "High-dose furosemide (most NKCC2 blocked): the gradient collapses and a large volume of poorly concentrated urine is made.",
+   "effect": {
+    "osm": [
+     1136,
+     467.2
+    ],
+    "vol": [
+     0.6,
+     9.2
+    ],
+    "flowDay": [
+     1.1,
+     16.5
+    ],
+    "intOsm": [
+     1200,
+     480
+    ]
+   }
+  },
+  {
+   "id": "noadh",
+   "label": "No ADH",
+   "params": {
+    "adh": 0
+   },
+   "at": "Medullary collecting duct",
+   "note": [
+    "without adh",
+    "no adh",
+    "adh off",
+    "absence of adh",
+    "dilute urine"
+   ],
+   "shows": "No ADH: the collecting duct stays water-tight, so a large volume of dilute urine is made.",
+   "effect": {
+    "osm": [
+     1136,
+     80.2
+    ],
+    "vol": [
+     0.6,
+     12.6
+    ],
+    "flowDay": [
+     1.1,
+     22.8
+    ],
+    "intOsm": [
+     1200,
+     840
+    ]
+   }
+  }
+ ],
+ "predictions": [
+  {
+   "id": "concentrate",
+   "before": "Thin descending limb",
+   "ask": "The fluid leaves the proximal tubule at about 300. Which segment will concentrate it next?",
+   "answer": [
+    "tdl"
+   ],
+   "choices": [
+    "tdl",
+    "tal",
+    "dct"
+   ],
+   "concepts": [
+    "loop of Henle permeabilities",
+    "medullary osmotic gradient"
+   ]
+  },
+  {
+   "id": "dilute",
+   "before": "Thick ascending limb",
+   "ask": "The fluid reached about 1200 at the tip of the loop. Which segment dilutes it next?",
+   "answer": [
+    "tal"
+   ],
+   "choices": [
+    "tdl",
+    "tal",
+    "cd"
+   ],
+   "concepts": [
+    "loop of Henle permeabilities",
+    "countercurrent multiplier",
+    "diluting segment"
+   ]
+  },
+  {
+   "id": "adhwater",
+   "before": "Medullary collecting duct",
+   "ask": "With ADH on, where does water leave to make the urine concentrated?",
+   "answer": [
+    "cd"
+   ],
+   "choices": [
+    "cd",
+    "dct",
+    "tal"
+   ],
+   "concepts": [
+    "ADH and aquaporin-2",
+    "concentrated urine formation"
+   ]
+  }
+ ],
+ "tutor": {
+  "rule": "The student's note drives the tutor. Explain only what the note says, in the note's terms, order and depth. Never teach concepts of this topic that are not in the note.",
+  "use": "Pick only the phases and parts the note covers; parts the note does not mention stay dimmed and silent. Note content this plate cannot show is explained in words (no phase/focus) and listed in 'extend'.",
+  "lenses": "A step may open one lens (lens: lenses[].id) only when the note covers what that lens shows (match its concepts and shows against the note); skip every lens the note does not cover. When a lens is open, the narration should talk about what the lens shows.",
+  "step": {
+   "title": "short heading",
+   "phase": "one of phases[].name",
+   "focus": "array of parts[].id",
+   "lens": "optional: one of lenses[].id",
+   "win": "optional: [t0, t1] model-time window to loop (default: the phase, padded)",
+   "speed": "playback speed (see the default lesson)",
+   "say": "2–4 sentences, written for the ear, in the note's own terms"
+  },
+  "output": {
+   "steps": "[step]",
+   "extend": "[note concepts this plate cannot show]"
+  },
+  "fallbackLesson": "lesson.json (recorded voice, used only when there is no note)"
+ }
+}

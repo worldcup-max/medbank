@@ -1,0 +1,865 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The four-chamber heart</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,500&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--ground:#eef1f3;--sheet:#fbfcfc;--ink:#1d2730;--muted:#5d6a75;--hair:#d5dbe0;--wall:#b9706b;--wall-deep:#8d4a49;--wall-hi:#d39892;--fat:#e7cf9a;
+ --hot:#c3283a;--hot-lumen:#e7a2a6;--hot-hi:#ff5a68;--cold:#3a56a6;--cold-lumen:#a9b7e0;--cold-hi:#4f78e6;--fluid:#dfe7ee;--bed:#e6dcd3;
+ --leaflet:#f6eadf;--leaflet-edge:#6b4b44;--accent:#0f6d6a;--open:#1c7a4a;--shut:#9a3a2e;--spark:#d68a00;--ca:#c79a00;
+ --display:"Spectral",Georgia,"Times New Roman",serif;--body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0f1418;--sheet:#151c21;--ink:#e5eaee;--muted:#93a1ac;--hair:#2a343c;--wall:#8e4a4c;--wall-deep:#5f2d31;--wall-hi:#b26d6d;--fat:#6d5b36;
+ --hot:#e0465a;--hot-lumen:#6e2a33;--hot-hi:#ff7482;--cold:#6a86d8;--cold-lumen:#2b3a66;--cold-hi:#8eaaff;--fluid:#1f2a33;--bed:#2b2a29;--leaflet:#efe3d6;--leaflet-edge:#2a1d1a;--accent:#4fc2bb;--open:#4fc28a;--shut:#ff8a77;--spark:#ffc94d;--ca:#ffd84a;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--ground);color:var(--ink);font:14px/1.5 var(--body);padding:20px 16px 40px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(24px,4vw,34px);margin:0;letter-spacing:-.01em}h1 em{font-style:italic;font-weight:500;color:var(--muted)}
+.sub{color:var(--muted);max-width:64ch;margin:2px 0 0}.fig,.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.plate{background:var(--sheet);border:1px solid var(--hair);border-radius:6px}
+.main{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}@media (max-width:860px){.main{grid-template-columns:1fr}}
+.stage{position:relative;padding:10px;border-right:1px solid var(--hair);min-width:0}@media (max-width:860px){.stage{border-right:0;border-bottom:1px solid var(--hair)}}
+.stage svg{width:100%;height:auto;display:block;touch-action:pan-y}
+.figwrap{position:relative}.figwrap img{display:block;width:100%;height:auto;border-radius:4px}.figwrap svg{position:absolute;inset:0;width:100%;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);padding:4px 8px 2px}.legend span{display:inline-flex;align-items:center;gap:6px}.sw{width:10px;height:10px;border-radius:50%;display:inline-block}
+.ledger{padding:18px 20px;display:grid;gap:16px;align-content:start;min-width:0}
+.phase{font-family:var(--display);font-size:27px;font-weight:600;line-height:1.1;margin:2px 0 0}.clock{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.why{margin:0}.why b{font-weight:600}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}th{text-align:left;font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:0 0 6px;border-bottom:1px solid var(--hair)}
+td{padding:6px 0;border-bottom:1px solid var(--hair)}td.g{font-family:var(--mono);font-size:12.5px}td.r{text-align:right}
+.pill{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:2px 8px;border-radius:99px;border:1px solid currentColor;display:inline-block;min-width:58px;text-align:center}.pill.on{color:var(--open)}.pill.off{color:var(--shut)}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}.num{border-top:1px solid var(--hair);padding-top:6px}.num .v{font-family:var(--mono);font-size:17px}.num .l{font-size:11.5px;color:var(--muted)}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--hair)}
+button{font:500 13px var(--body);color:var(--ink);background:transparent;border:1px solid var(--hair);border-radius:5px;padding:6px 11px;cursor:pointer}button:hover{border-color:var(--muted)}
+button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}.seg{display:inline-flex}.seg button{border-radius:0;margin-left:-1px;font-family:var(--mono);font-size:12px}.seg button:first-child{border-radius:5px 0 0 5px;margin-left:0}.seg button:last-child{border-radius:0 5px 5px 0}
+.spacer{flex:1}.lbl{font-size:12px;color:var(--muted)}
+.chartwrap{padding:8px 10px 12px;overflow-x:auto}.chart{width:100%;min-width:560px;height:auto;display:block;cursor:ew-resize;touch-action:pan-y}.chart text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.tutor{padding:14px 18px;display:grid;gap:10px}.say{font-size:16px;line-height:1.55;min-height:3em}.say span.on{background:color-mix(in srgb,var(--accent) 16%,transparent);border-radius:3px}
+.steps{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}.steps button{flex:none;font-size:12px}.steps button.on{background:var(--accent);border-color:var(--accent);color:var(--sheet)}
+.notes{color:var(--muted);font-size:12.5px;max-width:90ch;margin:0}
+.lab{font-family:var(--body);font-size:10.5px;fill:var(--muted);font-style:italic}.lab.strong{fill:var(--ink);font-style:normal;font-weight:600}
+.tag{font-family:var(--mono);font-size:11px;font-weight:500;fill:var(--ink)}.tagtitle{font-family:var(--display);font-size:18px;font-weight:600}
+.halo{paint-order:stroke;stroke:var(--sheet);stroke-width:3.5px;stroke-linejoin:round}
+.err{color:var(--shut);font-family:var(--mono);font-size:12px;white-space:pre-wrap}
+@media (max-width:600px){.phase{font-size:22px}.controls{gap:6px}.lbl{display:none}}
+/* lenses: split stage, never overlapping. Closed: the main drawing fills the stage. Open: it animates to ~40% (still live, the magnified
+   region boxed, a faint cone to the lens) and the lens takes the other 60%. Phones: a small live locator above a full-width lens. */
+.split{position:relative;display:grid;grid-template-columns:1fr 0fr;column-gap:0;align-items:center;transition:grid-template-columns .55s cubic-bezier(.2,.8,.2,1),column-gap .55s}
+.split.lensing{grid-template-columns:2fr 3fr;column-gap:16px}
+.mainv{min-width:0;position:relative}
+.lenspane{min-width:0;overflow:hidden;border:1px solid var(--hair);border-radius:8px;background:var(--sheet);box-shadow:0 10px 28px -16px rgba(10,20,30,.35);opacity:0;visibility:hidden;transition:opacity .3s .2s,visibility 0s .5s}
+.split.lensing .lenspane{opacity:1;visibility:visible;transition:opacity .3s .2s,visibility 0s}
+.split:not(.lensing) .lenspane{max-height:0;border-width:0}   /* closed: no height either, or its text wraps tall in the 0-width column and pushes the drawing down */
+.lenshead{display:flex;align-items:flex-start;gap:8px;padding:7px 8px 6px 12px;border-bottom:1px solid var(--hair)}.lenshead>div{flex:1;min-width:0;display:grid}
+.lenstitle{font-family:var(--display);font-weight:600;font-size:15px;line-height:1.25}.lenshead button{padding:1px 9px;font-size:16px;line-height:1.3}
+.stage .lenspane svg{width:100%;height:auto;aspect-ratio:1}
+.lensshows{font-size:12px;color:var(--muted);padding:3px 12px 10px;line-height:1.45}
+.stage svg.cone{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.lensbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 8px 0}.lensbar .lbl{margin-right:2px}.lensbar button{font-size:12px;padding:4px 9px}.lensbar button.on{background:var(--accent);border-color:var(--accent);color:var(--sheet)}
+.steps button .lz{opacity:.65;margin-left:5px}
+.lt{font:500 14px var(--body);fill:var(--ink)}.lh{font:600 15.5px var(--display);fill:var(--ink)}.lm{font:12px var(--mono);fill:var(--muted)}.ls{font:12.5px var(--body);fill:var(--muted)}.big{font:600 30px var(--display);fill:var(--ink)}
+#stage .lab{font-size:calc(10.5px * var(--ls,1))}#stage .halo{stroke-width:calc(3.5px * var(--ls,1))}#stage .tag{font-size:calc(11px * var(--ls,1))}#stage .tagtitle{font-size:calc(18px * var(--ls,1))}
+@media (max-width:640px){.split.lensing{grid-template-columns:1fr;row-gap:10px}.split.lensing .mainv{width:50%;justify-self:center}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}</style></head><body>
+<div class="wrap">
+  <header><div class="fig">Plate 1 · Cardiac cycle</div><h1>The four-chamber heart <em>in motion</em></h1><p class="sub">A frontal cutaway driven by a pressure model. Every valve opens only when the pressure behind it beats the pressure ahead of it; watch the gradients, not the clock.</p></header>
+  <section class="plate main"><div class="stage"><div class="split" id="split"><div class="mainv"><svg id="stage" viewBox="0 0 760 640" role="img" aria-label="The four-chamber heart"></svg></div>
+    <div class="lenspane" id="lensPane"><div class="lenshead"><div><span class="eyebrow" id="lensKicker"></span><span class="lenstitle" id="lensTitle"></span></div><button id="lensClose" aria-label="Close the lens">×</button></div>
+      <svg id="lens" viewBox="0 0 400 400" role="img" aria-label="Lens"></svg><div class="lensshows" id="lensShows"></div></div><svg class="cone" id="cone" aria-hidden="true"></svg></div>
+    <div class="lensbar" id="lensBar" hidden><span class="lbl">Look closer</span></div><div class="legend"><span><i class='sw' style='background:var(--cold-hi)'></i>Deoxygenated</span><span><i class='sw' style='background:var(--hot-hi)'></i>Oxygenated</span><span><i class='sw' style='background:var(--wall)'></i>Myocardium (cut)</span><span>Chamber size changes are true to the model's volumes</span></div></div>
+    <div class="ledger"><div><div class="eyebrow">Phase</div><p class="phase" id="phase">—</p><div class="clock" id="clock"></div></div>
+      <p class="why" id="why"></p><table id="gatesT"><thead><tr><th id="gatesH">Gate</th><th id="gatesW">Why</th><th class="r">State</th></tr></thead><tbody id="gates"></tbody></table>
+      <div class="nums" id="nums"></div></div></section>
+  <section class="plate tutor" aria-label="Tutor"><div class="eyebrow">Tutor</div><div class="say" id="say">Press “Tutor me” for a guided walk-through, or explore on your own.</div>
+    <div class="steps" id="steps"></div><div><button id="tutor">▶ Tutor me</button> <button id="mute" aria-pressed="false">Voice on</button></div></section>
+  <section class="plate"><div class="controls"><button id="play" aria-pressed="true">Pause</button><button id="prev">◀ Phase</button><button id="next">Phase ▶</button>
+      <span class="lbl">Speed</span><div class="seg" id="speed"></div><button id="loop" aria-pressed="true" hidden title="Replay only the part of the cycle this step is about">Loop this moment</button><span class="spacer"></span><span class="lbl" id="modesL" hidden>Chart</span><div class="seg" id="modes" hidden></div><button id="sound" aria-pressed="false" hidden>Sound off</button></div>
+    <div class="chartwrap"><svg id="chart" class="chart" viewBox="0 0 1000 330" tabindex="0" role="slider" aria-label="Timeline. Drag or use arrow keys."></svg></div></section>
+  <p class="notes" id="notes"></p><div class="err" id="err"></div>
+</div><script>window.LENS_META = [{"id":"ap","title":"Inside two heart cells","kicker":"Lens · membrane voltage","shows":"Action potentials of an SA-node pacemaker cell and a ventricular muscle cell over one beat, the ions behind each phase, and the ECG they add up to; the conduction system lights up on the heart."},{"id":"mitral","title":"Looking down through the left atrium","kicker":"Lens · surgeon's view","shows":"The mitral valve seen from the left atrium: anterior and posterior (P1–P3) leaflets, commissures and chordae; it opens only while LA pressure exceeds LV pressure."},{"id":"sarcomere","title":"One sarcomere in the LV wall","kicker":"Lens · ×20,000","shows":"Ca²⁺ release from the sarcoplasmic reticulum, myosin cross-bridges binding actin, and sarcomere length against tension across the beat (isometric in the isovolumetric phases)."},{"id":"aortic","title":"The aortic valve from above","kicker":"Lens · view down the aorta","shows":"The three aortic cusps opening into a triangle during ejection and closing (S2), with blood jetting through and the coronary ostia filling in diastole."},{"id":"shortaxis","title":"The heart cut across the ventricles","kicker":"Lens · short-axis slice","shows":"A slice through both ventricles: the thick round LV and the thin crescent RV, the LV wall thickening as the cavity empties, and the cavity at end-diastole for comparison."},{"id":"pv","title":"LV pressure–volume loop","kicker":"Lens · a new graph","shows":"LV pressure plotted against LV volume over the beat: one loop whose corners are the four valve events, whose width is the stroke volume and whose area is stroke work."},{"id":"chest","title":"Listening points on the chest","kicker":"Lens · surface anatomy","shows":"Where each valve is heard on the chest wall, lighting up at S1 (mitral, tricuspid) and S2 (aortic, pulmonary), with the phonocardiogram of this beat."}];</script><script>/* Explainer Studio kit — the drawing toolkit every generated explainer gets (window.K).
+ * Distilled from the hand-built Four-Chamber Heart plate: tubes with walls and lumens, organic cavities that
+ * deform with a model volume, valves with leaflets, particles that move along routes at the model's flow rates,
+ * labels with halos that never pile on each other, and registered parts the lesson can spotlight. */
+(function () {
+  const NS = "http://www.w3.org/2000/svg";
+  const f1 = (n) => Math.round(n * 10) / 10;
+  const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) if (attrs[k] !== undefined) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+  const lerp = (a, b, t) => a + (b - a) * t, mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const norm = (v) => { const L = Math.hypot(v[0], v[1]) || 1; return [v[0] / L, v[1] / L]; };
+  function spline(pts, closed) {
+    const n = pts.length; if (n < 2) return ""; const P = (i) => closed ? pts[(i + n) % n] : pts[Math.max(0, Math.min(n - 1, i))];
+    let d = `M${f1(pts[0][0])} ${f1(pts[0][1])}`; const last = closed ? n : n - 1;
+    for (let i = 0; i < last; i++) { const p0 = P(i - 1), p1 = P(i), p2 = P(i + 1), p3 = P(i + 2);
+      d += `C${f1(p1[0] + (p2[0] - p0[0]) / 6)} ${f1(p1[1] + (p2[1] - p0[1]) / 6)} ${f1(p2[0] - (p3[0] - p1[0]) / 6)} ${f1(p2[1] - (p3[1] - p1[1]) / 6)} ${f1(p2[0])} ${f1(p2[1])}`; }
+    return d + (closed ? "Z" : "");
+  }
+  function sampleSpline(pts, per = 10) {
+    const out = [], n = pts.length, P = (i) => pts[Math.max(0, Math.min(n - 1, i))]; if (n < 2) return pts.slice();
+    for (let i = 0; i < n - 1; i++) { const p0 = P(i - 1), p1 = P(i), p2 = P(i + 1), p3 = P(i + 2);
+      const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6], c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+      for (let k = 0; k < per; k++) { const t = k / per, m = 1 - t; out.push([m*m*m*p1[0] + 3*m*m*t*c1[0] + 3*m*t*t*c2[0] + t*t*t*p2[0], m*m*m*p1[1] + 3*m*m*t*c1[1] + 3*m*t*t*c2[1] + t*t*t*p2[1]]); } }
+    out.push(pts[n - 1]); return out;
+  }
+  const TONE = { hot: ["var(--hot)", "var(--hot-lumen)"], cold: ["var(--cold)", "var(--cold-lumen)"], neutral: ["var(--wall-deep)", "var(--fluid)"], tissue: ["var(--wall-deep)", "var(--wall)"] };
+
+  const K = { el, f1, lerp, mid, clamp, norm, spline, sampleSpline, NS };
+  let svgRoot = null, top = null, defs = null; const LABELS = [], PARTS = {}, LENSES = {};
+  K.init = (svg) => { svgRoot = svg; defs = el("defs", {}, svg); top = null; LABELS.length = 0; for (const k in PARTS) delete PARTS[k]; for (const k in LENSES) delete LENSES[k];
+    const g = el("radialGradient", { id: "kTissue", cx: "45%", cy: "35%", r: "75%" }, defs); el("stop", { offset: "0", "stop-color": "var(--wall-hi)" }, g); el("stop", { offset: "1", "stop-color": "var(--wall)" }, g);
+    const glow = el("filter", { id: "kGlow", x: "-30%", y: "-30%", width: "160%", height: "160%" }, defs); el("feGaussianBlur", { stdDeviation: "3", result: "b" }, glow); const m = el("feMerge", {}, glow); el("feMergeNode", { in: "b" }, m); el("feMergeNode", { in: "SourceGraphic" }, m);
+  };
+  /* back-to-front drawing layers: K.layers("bg","back","mid","front") → { bg:<g>, … } ; a "top" layer for labels is always added last */
+  K.layers = (...names) => { const o = {}; names.forEach((n) => o[n] = el("g", { "data-layer": n }, svgRoot)); top = el("g", { "data-layer": "labels" }, svgRoot); o.labels = top; return o; };
+  K.defs = () => defs;
+  /* a tube: wall then lumen, along a smooth centreline (vessels, ducts, airways, tubules) */
+  K.vessel = (parent, pts, r, opt = {}) => { const [wall, lumen] = TONE[opt.tone || "neutral"]; const d = spline(pts, false), cap = opt.cap || "round";
+    const g = el("g", {}, parent); el("path", { d, fill: "none", stroke: opt.wall || "var(--wall-deep)", "stroke-width": 2 * r + (opt.wallWidth || 5), "stroke-linecap": cap, "stroke-linejoin": "round", opacity: 0.92 }, g);
+    const l = el("path", { d, fill: "none", stroke: opt.lumen || lumen, "stroke-width": 2 * r, "stroke-linecap": cap, "stroke-linejoin": "round" }, g); g.lumen = l; return g; };
+  /* a closed organic shape (chamber, cell, organ outline) whose points you can change every frame */
+  K.blob = (parent, pts, opt = {}) => { const p = el("path", { d: spline(pts, true), fill: opt.fill || "url(#kTissue)", stroke: opt.stroke || "var(--wall-deep)", "stroke-width": opt.width || 1.4, "stroke-linejoin": "round", opacity: opt.opacity }, parent);
+    p.set = (q) => p.setAttribute("d", spline(q, true)); return p; };
+  /* deform points about a fixed line (a valve ring, a hilum…): far points scale by s, points on the line stay put */
+  K.deformer = (A, B, reach, s) => { const M = mid(A, B), dx = B[0] - A[0], dy = B[1] - A[1], L = Math.hypot(dx, dy) || 1, nx = -dy / L, ny = dx / L;
+    return (p) => { const d = Math.abs((p[0] - M[0]) * nx + (p[1] - M[1]) * ny), w = Math.min(1, d / reach * 2.2), f = 1 + (s - 1) * w; return [M[0] + (p[0] - M[0]) * f, M[1] + (p[1] - M[1]) * f]; }; };
+  K.volumeScale = (V, Vref, k = 0.45) => Math.pow(Math.max(1e-6, V) / Vref, k);
+  /* an exchange bed (capillaries, alveoli, glomerulus…) */
+  K.bed = (parent, x, y, w, h, label, opt = {}) => { const g = el("g", {}, parent); el("rect", { x, y, width: w, height: h, rx: Math.min(h, w) / 2, fill: opt.fill || "var(--bed)", stroke: "var(--hair)" }, g);
+    const n = Math.max(6, Math.round(w / 14)); for (let i = 0; i < n; i++) { const xx = x + 12 + i * (w - 24) / (n - 1); el("path", { d: `M${f1(xx)} ${y + 5} q 4 ${f1(h / 2 - 5)} 0 ${f1(h - 10)}`, fill: "none", stroke: i % 2 ? "var(--hot)" : "var(--cold)", "stroke-width": 0.8, opacity: 0.35 }, g); }
+    if (label) K.label(x + w / 2, y + h + 13, label, "middle"); g.set = (a) => g.setAttribute("opacity", f1(0.55 + 0.45 * clamp(+a || 0, 0, 1))); return g; };
+  /* a tracer: the parcel being followed on a journey (a bolus of filtrate, food, an impulse). paths = { partId: centreline pts }.
+     .set(partId, u 0..1 along that part, "live text") puts it on that part's drawn path; unknown part → hidden */
+  K.tracer = (parent, paths, opt = {}) => { const g = el("g", { class: "tracer" }, parent), poly = {};
+    for (const id in paths) { const q = sampleSpline(paths[id], 12), cum = [0]; for (let i = 1; i < q.length; i++) cum.push(cum[i - 1] + Math.hypot(q[i][0] - q[i - 1][0], q[i][1] - q[i - 1][1])); poly[id] = { q, cum }; }
+    const halo = el("circle", { r: (opt.r || 7) + 6, fill: "var(--accent)", opacity: 0.22 }, g), dot = el("circle", { r: opt.r || 7, fill: "var(--accent)", stroke: "var(--sheet)", "stroke-width": 2 }, g);
+    const txt = el("text", { class: "lab halo strong", "text-anchor": "start" }, g);
+    g.set = (id, u, text) => { const P = poly[id]; if (!P) { g.setAttribute("opacity", 0); return; } g.setAttribute("opacity", 1);
+      const L = P.cum[P.cum.length - 1] * clamp(+u || 0, 0, 1); let k = 1; while (k < P.cum.length - 1 && P.cum[k] < L) k++;
+      const a = P.q[k - 1], b = P.q[k], t = (L - P.cum[k - 1]) / ((P.cum[k] - P.cum[k - 1]) || 1), x = lerp(a[0], b[0], t), y = lerp(a[1], b[1], t);
+      [halo, dot].forEach((c) => { c.setAttribute("cx", f1(x)); c.setAttribute("cy", f1(y)); }); txt.setAttribute("x", f1(x + 14)); txt.setAttribute("y", f1(y + 4)); txt.textContent = text || ""; };
+    return g; };
+  /* a valve or gate: two leaflets hinged at A and B. down = unit vector of forward flow. kind "av" (hangs open into the next space) or "sl" (cusps lie along the wall) */
+  K.valve = (parent, A, B, down, kind = "sl") => { const g = el("g", {}, parent), half = Math.hypot(B[0] - A[0], B[1] - A[1]) / 2, M = mid(A, B);
+    const outer = [0, 1].map(() => el("path", { fill: "none", stroke: "var(--leaflet-edge)", "stroke-width": 6, "stroke-linecap": "round" }, g)), inner = [0, 1].map(() => el("path", { fill: "none", stroke: "var(--leaflet)", "stroke-width": 3.4, "stroke-linecap": "round" }, g));
+    for (const p of [A, B]) el("circle", { cx: p[0], cy: p[1], r: 3, fill: "var(--fat)", stroke: "var(--wall-deep)", "stroke-width": 1 }, g);
+    const ring = el("circle", { cx: f1(M[0]), cy: f1(M[1]), r: 10, fill: "none", stroke: "var(--accent)", "stroke-width": 2, opacity: 0 }, g);
+    g.tips = [A, B]; g.set = (o) => { o = clamp(o, 0, 1);
+      [[A, B], [B, A]].forEach(([H], j) => { const toward = [(M[0] - H[0]) / half, (M[1] - H[1]) / half], len = kind === "av" ? half * 1.08 : half * 0.98;
+        const cd = kind === "av" ? [toward[0] - down[0] * 0.18, toward[1] - down[1] * 0.18] : [toward[0] - down[0] * 0.35, toward[1] - down[1] * 0.35];
+        const od = kind === "av" ? [down[0] + toward[0] * 0.18, down[1] + toward[1] * 0.18] : [down[0] + toward[0] * 0.08, down[1] + toward[1] * 0.08];
+        const a0 = Math.atan2(cd[1], cd[0]); let a1 = Math.atan2(od[1], od[0]); while (a1 - a0 > Math.PI) a1 -= 2 * Math.PI; while (a1 - a0 < -Math.PI) a1 += 2 * Math.PI;
+        const a = lerp(a0, a1, o), tip = [H[0] + Math.cos(a) * len, H[1] + Math.sin(a) * len]; g.tips[j] = tip;
+        const side = (toward[0] * down[1] - toward[1] * down[0]) > 0 ? 1 : -1, bow = (kind === "av" ? 3.5 : -5) * side * (1 - o) + 1.5 * side * o, m = mid(H, tip), dx = tip[0] - H[0], dy = tip[1] - H[1], L = Math.hypot(dx, dy) || 1;
+        const d = `M${f1(H[0])} ${f1(H[1])}Q${f1(m[0] - dy / L * bow)} ${f1(m[1] + dx / L * bow)} ${f1(tip[0])} ${f1(tip[1])}`; outer[j].setAttribute("d", d); inner[j].setAttribute("d", d); }); };
+    g.flash = (v) => { ring.setAttribute("opacity", f1(v * 0.9)); ring.setAttribute("r", f1(10 + (1 - v) * 12)); };
+    g.set(0); return g; };
+  /* labels: small italic names with a halo. Collected, then K.settleLabels() moves any that overlap apart. */
+  K.label = (x, y, text, anchor = "start", opt = {}) => { const t = el("text", { x: f1(x), y: f1(y), "text-anchor": anchor, class: "lab halo" + (opt.strong ? " strong" : "") }, opt.parent || top); t.textContent = text; LABELS.push(t); return t; };
+  /* a big two-line tag (name + live value), e.g. "LV / 117 mmHg · 62 mL" */
+  K.tag = (x, y, title) => { const t = el("text", { x: f1(x), y: f1(y), "text-anchor": "middle", class: "tag halo" }, top);
+    t.innerHTML = `<tspan x="${f1(x)}" class="tagtitle">${title}</tspan><tspan x="${f1(x)}" dy="15"></tspan>`; LABELS.push(t); return { el: t, set: (s) => { t.lastChild.textContent = s; } }; };
+  K.settleLabels = () => { for (let pass = 0; pass < 6; pass++) { let moved = false; const boxes = LABELS.map((t) => { try { return t.getBBox(); } catch (_) { return null; } });
+      for (let i = 0; i < LABELS.length; i++) for (let j = i + 1; j < LABELS.length; j++) { const a = boxes[i], b = boxes[j]; if (!a || !b) continue;
+        const ox = Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x), oy = Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y);
+        if (ox > 2 && oy > 1) { const t = LABELS[j], dy = (b.y > a.y ? 1 : -1) * (oy + 2); t.setAttribute("y", f1(+t.getAttribute("y") + dy)); t.querySelectorAll("tspan").forEach((s) => { if (s.getAttribute("y")) s.setAttribute("y", f1(+s.getAttribute("y") + dy)); }); boxes[j] = t.getBBox(); moved = true; } }
+      if (!moved) break; } };
+  /* register a structure under a model part id so the lesson can spotlight it (K.focus) */
+  K.part = (id, ...els) => { (PARTS[id] = PARTS[id] || []).push(...els); return els[0]; };
+  K.parts = () => PARTS;
+  K.focus = (ids) => { const on = new Set(ids || []); for (const id in PARTS) PARTS[id].forEach((e) => { e.style.transition = "opacity .5s, filter .5s"; e.style.opacity = on.size && !on.has(id) ? 0.35 : ""; e.style.filter = on.has(id) ? "url(#kGlow)" : ""; }); };
+  /* particles flowing along routes. segments: { id: { pts, w (spread px), layer (<g>), rate(i,s) px-per-tick, gate?(i,s) 0..1 (closed below .25), tone: 0 cold … 1 hot | "up" | "down", warp?(p) } }
+     routes: [[segId, …], …] closed loops or open paths. Call .update(i, s, dBeat) every frame. */
+  K.flows = (segments, routes, opt = {}) => {
+    const SEG = {}; for (const id in segments) { const s = segments[id], poly = sampleSpline(s.pts, 10), cum = [0]; for (let i = 1; i < poly.length; i++) cum.push(cum[i - 1] + Math.hypot(poly[i][0] - poly[i - 1][0], poly[i][1] - poly[i - 1][1])); SEG[id] = { ...s, id, poly, cum, len: cum[cum.length - 1] || 1 }; }
+    let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    const P = []; const spacing = opt.spacing || 13;
+    routes.forEach((r, ri) => { const L = r.reduce((t, id) => t + SEG[id].len, 0), n = Math.max(3, Math.round(L / spacing));
+      for (let i = 0; i < n; i++) { let s = (i + rnd() * 0.6) * L / n, k = 0; while (k < r.length - 1 && s > SEG[r[k]].len) { s -= SEG[r[k]].len; k++; } const c = el("circle", { r: 0 }, SEG[r[k]].layer); P.push({ r: ri, k, s, off: rnd() * 2 - 1, gap: 3 + rnd() * 10, c }); } });
+    const cs = getComputedStyle(document.documentElement), rgb = (v) => { const c = document.createElement("canvas").getContext("2d"); c.fillStyle = v; const h = c.fillStyle; return h[0] === "#" ? [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)) : (h.match(/\d+/g) || [128, 128, 128]).slice(0, 3).map(Number); };
+    const RAMP = []; const C0 = rgb(cs.getPropertyValue("--cold-hi").trim() || "#4f78e6"), C1 = rgb(cs.getPropertyValue("--hot-hi").trim() || "#ff5a68");
+    for (let i = 0; i <= 16; i++) RAMP.push(`rgb(${C0.map((v, j) => Math.round(lerp(v, C1[j], i / 16))).join(",")})`);
+    function at(sg, s) { const c = sg.cum; let lo = 0, hi = c.length - 1; s = clamp(s, 0, sg.len); while (hi - lo > 1) { const m = (lo + hi) >> 1; if (c[m] <= s) lo = m; else hi = m; }
+      const a = sg.poly[lo], b = sg.poly[hi], t = (s - c[lo]) / ((c[hi] - c[lo]) || 1), dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1; return [a[0] + dx * t, a[1] + dy * t, -dy / L, dx / L]; }
+    return { update(i, st, dBeat) {
+      for (const p of P) { const route = routes[p.r]; let sg = SEG[route[p.k]];
+        if (dBeat) { p.s += Math.max(0, sg.rate(i, st)) * dBeat * (opt.speed || 1500); let guard = 0;
+          while (p.s > sg.len && guard++ < 4) { if (sg.gate && sg.gate(i, st) < 0.25) { p.s = Math.min(p.s, sg.len - p.gap); break; } if (p.k === route.length - 1 && opt.open) { p.k = 0; p.s = 0; sg = SEG[route[0]]; break; } p.s -= sg.len; p.k = (p.k + 1) % route.length; sg = SEG[route[p.k]]; }
+          if (sg.gate && sg.gate(i, st) < 0.25 && p.s > sg.len - p.gap) p.s = Math.max(0, sg.len - p.gap); }
+        sg = SEG[route[p.k]]; let [x, y, nx, ny] = at(sg, p.s); const taper = Math.min(1, p.s / 14, (sg.len - p.s) / 14 + 0.25); x += nx * p.off * (sg.w || 6) * taper; y += ny * p.off * (sg.w || 6) * taper;
+        if (sg.warp) [x, y] = sg.warp([x, y], i, st);
+        const tone = sg.tone === "up" ? p.s / sg.len : sg.tone === "down" ? 1 - p.s / sg.len : (sg.tone ?? 0);
+        if (p.c.parentNode !== sg.layer) sg.layer.appendChild(p.c);
+        p.c.setAttribute("cx", f1(x)); p.c.setAttribute("cy", f1(y)); p.c.setAttribute("r", opt.r || 2.5); p.c.setAttribute("fill", RAMP[Math.round(clamp(tone, 0, 1) * 16)]); } } };
+  };
+  /* lenses: a magnified, model-driven second view of one region of the plate (inside a cell, looking down a valve, a graph of the same beat…).
+     K.lens(id, { focus: [x, y, w, h]   the region on the main drawing it magnifies (boxed, with a cone to the lens),
+                  cam?: [cx, cy, w]     optional main-drawing camera while this lens is open (default: the whole drawing),
+                  build(g, ctx) → update(i, s, dBeat) })   draw once into g on a 400 × 400 canvas; update every frame from the SAME
+     model sample s and frame index i as the main scene (ctx = { S, M, N, T }). Title, kicker and "shows" come from shows.json, not code.
+     The shell owns the layout (split stage / phone locator), the cone, the tour and "Loop this moment". */
+  K.lens = (id, spec) => { LENSES[id] = spec; return spec; };
+  K.lenses = () => LENSES;
+  /* lens text: classes lt (body 14), lh (display heading), lm (mono small), ls (body small), big (display 30); add " halo" over drawings */
+  K.text = (parent, x, y, str, cls = "lt", anchor = "start", attrs = {}) => { const t = el("text", { x: f1(x), y: f1(y), class: cls, "text-anchor": anchor, ...attrs }, parent); t.textContent = str; return t; };
+  window.K = K;
+})();
+</script><script>
+window.__studio = { errors: [], frames: 0 };
+window.addEventListener("error", (e) => { window.__studio.errors.push(String(e.message || e)); const x = document.getElementById("err"); if (x) x.textContent += "⚠ " + e.message + "\n"; });
+const $ = (id) => document.getElementById(id);
+function runStudio(createScene, LESSON) {
+  const M = createModel(); const N = M.N || 600, T = M.T, unit = M.timeUnit || "s";
+  const S = []; for (let i = 0; i < N; i++) S.push(M.sample(i * T / N));
+  window.__studio.model = { N, T, parts: (M.parts || []).map((p) => p.id), phases: [...new Set(S.map((s) => s.phase))] };
+  const BANDS = []; { let s0 = 0; for (let i = 1; i <= N; i++) if (i === N || S[i].phase !== S[s0].phase) { BANDS.push({ name: S[s0].phase, a: s0, b: i }); s0 = i; } }
+  const EV = (M.events ? M.events(S, T) : []) || [];
+  const svg = $("stage"); K.init(svg); const scene = createScene(svg, K, M, S) || { update() {} }; try { K.settleLabels(); } catch (_) {}
+  // journeys: the runtime (not the AI) puts the followed parcel on the drawn path, straight from the model's parcel
+  const TR = S[0] && S[0].parcel && scene.paths ? K.tracer(K.el("g", {}, svg), scene.paths) : null;
+  const parcelText = (s) => { try { if (M.parcelLabel) return M.parcelLabel(s); } catch (_) {} return (M.readouts || []).filter((r) => r.big).slice(0, 2).map((r) => fmt(s.readouts[r.key], r.digits) + " " + (r.unit || "")).join(" · "); };
+  window.__studio.tracer = !!TR; window.__studio.parcelParts = [...new Set(S.map((s) => s.parcel && s.parcel.part).filter(Boolean))]; window.__studio.paths = Object.keys(scene.paths || {});
+  window.__studio.registered = Object.keys(K.parts());
+  // ---- lenses (K.lens in the scene) + the main-drawing camera
+  const LZ = K.lenses(), LMETA = {}; ((window.LENS_META) || []).forEach((m) => { LMETA[m.id] = m; });
+  const split = $("split"), lensPane = $("lensPane"), lensSvg = $("lens"), cone = $("cone");
+  let lensId = null, stepCam = null;
+  const lensOrder = Object.keys(LMETA).filter((id) => LZ[id]).concat(Object.keys(LZ).filter((id) => !LMETA[id]));
+  window.__studio.lenses = Object.keys(LZ); window.__studio.lensErrors = [];
+  const lensToggle = (id, on) => { const L = id && LZ[id]; if (L && L.toggle) { try { L.toggle(on); } catch (e) { window.__studio.errors.push("lens " + id + ".toggle: " + e.message); } } };
+  function openLens(id) { const L = LZ[id]; if (!L) { closeLens(); return; } if (lensId === id) return; lensToggle(lensId, false); lensId = id; lensToggle(id, true);
+    if (!L._g) { L._g = K.el("g", {}, lensSvg); try { L._u = L.build(L._g, { S, M, N, T }) || (() => {}); } catch (e) { L._u = () => {}; window.__studio.lensErrors.push(id + ": " + e.message); window.__studio.errors.push("lens " + id + ": " + e.message); } }
+    for (const k in LZ) if (LZ[k]._g) LZ[k]._g.style.display = k === id ? "" : "none";
+    const m = LMETA[id] || {}; $("lensKicker").textContent = m.kicker || "Lens"; $("lensTitle").textContent = m.title || id; $("lensShows").textContent = m.shows || ""; lensSvg.setAttribute("aria-label", m.title || id);
+    split.classList.add("lensing"); $("lensBar").querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.id === id)); window.__studio.lens = id; prevI = -1; render(0); }
+  function closeLens() { lensToggle(lensId, false); lensId = null; split.classList.remove("lensing"); $("lensBar").querySelectorAll("button").forEach((b) => b.classList.remove("on")); window.__studio.lens = null; }
+  window.__studio.openLens = openLens; window.__studio.closeLens = closeLens;
+  $("lensClose").onclick = closeLens;
+  if (lensOrder.length) { $("lensBar").hidden = false; lensOrder.forEach((id) => { const b = document.createElement("button"); b.dataset.id = id; b.textContent = (LMETA[id] && LMETA[id].title) || id; b.onclick = () => (lensId === id ? closeLens() : openLens(id)); $("lensBar").appendChild(b); }); }
+  const vb = svg.viewBox.baseVal, BASE = { x: vb.x, y: vb.y, w: vb.width || 760, h: vb.height || 640 }, cam = { ...BASE };
+  function camTarget() { const c = (lensId && LZ[lensId].cam) || (!lensId && stepCam) || null; if (!c) return BASE;
+    const w = Math.min(BASE.w, c[2]), h = w * BASE.h / BASE.w; return { x: Math.max(BASE.x, Math.min(BASE.x + BASE.w - w, c[0] - w / 2)), y: Math.max(BASE.y, Math.min(BASE.y + BASE.h - h, c[1] - h / 2)), w, h }; }
+  let camKey = "";
+  function moveCam(a) { const g = camTarget(); for (const k of ["x", "y", "w", "h"]) cam[k] += (g[k] - cam[k]) * a; const key = [cam.x, cam.y, cam.w, cam.h].map((v) => v.toFixed(1)).join(" ");
+    if (key !== camKey) { camKey = key; svg.setAttribute("viewBox", key); svg.style.setProperty("--ls", (cam.w / BASE.w).toFixed(3)); } }
+  const P2 = (p) => p[0].toFixed(1) + " " + p[1].toFixed(1);
+  function drawCone() { const L = lensId && LZ[lensId]; if (!L || !L.focus) { if (cone.innerHTML) cone.innerHTML = ""; return; }
+    const sr = split.getBoundingClientRect(), m = svg.getScreenCTM(); if (!m || !sr.width) return;
+    const pt = (x, y) => { const p = svg.createSVGPoint(); p.x = x; p.y = y; const q = p.matrixTransform(m); return [q.x - sr.left, q.y - sr.top]; };
+    const f = L.focus, a = pt(f[0], f[1]), b = pt(f[0] + f[2], f[1] + f[3]), lr = lensPane.getBoundingClientRect(), l = [lr.left - sr.left, lr.top - sr.top, lr.right - sr.left, lr.bottom - sr.top];
+    const stacked = l[1] >= b[1] - 2;   // phone: the locator sits above the lens
+    const [p1, p2, c1, c2] = stacked ? [[a[0], b[1]], [b[0], b[1]], [l[0], l[1]], [l[2], l[1]]] : [[b[0], a[1]], [b[0], b[1]], [l[0], l[1]], [l[0], l[3]]];
+    cone.setAttribute("viewBox", "0 0 " + sr.width.toFixed(0) + " " + sr.height.toFixed(0)); cone.style.opacity = getComputedStyle(lensPane).opacity;
+    cone.innerHTML = '<path d="M' + P2(p1) + "L" + P2(c1) + "L" + P2(c2) + "L" + P2(p2) + 'Z" fill="var(--accent)" fill-opacity="0.06"/><path d="M' + P2(p1) + "L" + P2(c1) + "M" + P2(p2) + "L" + P2(c2) + '" stroke="var(--accent)" stroke-opacity="0.5" stroke-width="1.1" fill="none"/>'
+      + '<rect x="' + Math.min(a[0], b[0]).toFixed(1) + '" y="' + Math.min(a[1], b[1]).toFixed(1) + '" width="' + Math.abs(b[0] - a[0]).toFixed(1) + '" height="' + Math.abs(b[1] - a[1]).toFixed(1) + '" rx="4" fill="var(--accent)" fill-opacity="0.07" stroke="var(--accent)" stroke-width="1.6"/>'; }
+  // "Loop this moment": replay only the part of the cycle the current step is about
+  let loopWin = null, loopOn = true;
+  const setLoopBtn = () => { $("loop").hidden = !loopWin; $("loop").setAttribute("aria-pressed", String(loopOn)); };
+  // ledger
+  const gates = M.gates || []; if (!gates.length) $("gatesT").hidden = true; else $("gatesH").textContent = M.gateTitle || "Gate"; if (M.gateWhy) $("gatesW").textContent = M.gateWhy;
+  const grows = gates.map((g) => { const tr = document.createElement("tr"); tr.innerHTML = "<td></td><td class='g'></td><td class='r'><span class='pill'></span></td>"; tr.children[0].textContent = g.label; $("gates").appendChild(tr); return { g, d: tr.children[1], p: tr.querySelector(".pill") }; });
+  const big = (M.readouts || []).filter((r) => r.big).slice(0, 4);
+  big.forEach((r) => { const d = document.createElement("div"); d.className = "num"; d.innerHTML = "<div class='v'></div><div class='l'></div>"; d.lastChild.textContent = r.label + (r.unit ? ", " + r.unit : ""); r.el = d.firstChild; $("nums").appendChild(d); });
+  $("notes").textContent = M.notes || "";
+  const fmt = (v, d) => (typeof v === "number" ? v.toFixed(d ?? 0) : String(v ?? "—"));
+  function ledger(i) { const s = S[i]; $("phase").textContent = s.phase; $("clock").textContent = "t = " + fmt(i * T / N, unit === "s" ? 3 : 1) + " " + unit + " of " + fmt(T, unit === "s" ? 3 : 1) + " " + unit + (M.clockNote ? " · " + M.clockNote : "");
+    try { $("why").innerHTML = M.explain ? M.explain(s, i * T / N) : ""; } catch (e) { $("why").textContent = ""; }
+    grows.forEach((r) => { let on = false; try { on = !!r.g.on(s); r.d.textContent = r.g.detail ? r.g.detail(s) : ""; } catch (_) {} r.p.textContent = on ? (M.onWord || "OPEN") : (M.offWord || "SHUT"); r.p.className = "pill " + (on ? "on" : "off"); });
+    big.forEach((r) => { let v; try { v = r.text ? r.text(s) : null; } catch (_) {} r.el.textContent = v != null ? v : fmt(s.readouts[r.key], r.digits); }); }
+  // chart
+  const chart = $("chart"), CX0 = 58, CX1 = 985, xOf = (i) => CX0 + (CX1 - CX0) * i / N; let cursor;
+  // lanes: M.chart, or M.chartModes [{label, lanes}] with a toggle (e.g. left / right heart). Optional per lane: weight (relative height),
+  // step (gridline every step), grid:false, marks [{t, label}] (e.g. P, QRS, T), noEvents (event lines start below this lane), dot (series key
+  // that gets a cursor dot); per series: at (0–1 of the cycle, where its label sits), label "" (no label), width.
+  const modes = M.chartModes && M.chartModes.length ? M.chartModes : null; let mode = 0, dots = [];
+  const lanesNow = () => { const l = modes ? modes[mode].lanes : null; return ((Array.isArray(l) ? l : M.chart) || []).slice(0, 3); };  // a mode with lanes:null shows M.chart
+  function drawChart() { chart.innerHTML = ""; const g = K.el("g", {}, chart), lanes = lanesNow(); dots = [];
+    BANDS.forEach((b, j) => { K.el("rect", { x: xOf(b.a), y: 4, width: xOf(b.b) - xOf(b.a), height: 300, fill: j % 2 ? "var(--ground)" : "var(--sheet)" }, g);
+      if (xOf(b.b) - xOf(b.a) > 40) { const t = K.el("text", { x: (xOf(b.a) + xOf(b.b)) / 2, y: 322, "text-anchor": "middle" }, g); const room = Math.floor((xOf(b.b) - xOf(b.a) - 8) / 7), nm = (M.short && M.short[b.name]) || b.name; t.textContent = nm.length > room ? nm.slice(0, Math.max(3, room - 1)) + "…" : nm; } });
+    const W = lanes.map((l) => l.weight || 1), WT = W.reduce((a, b) => a + b, 0) || 1; let yAcc = 8, evTop = 6;
+    lanes.forEach((ln, li) => { const H = 296 * W[li] / WT, y0 = yAcc, y1 = y0 + H - 18; yAcc += H; if (ln.noEvents) evTop = yAcc - 4; let lo = ln.min, hi = ln.max;
+      if (lo == null || hi == null) { let a = Infinity, b = -Infinity; ln.series.forEach((sr) => S.forEach((s) => { const v = s.readouts[sr.key]; if (typeof v === "number" && isFinite(v)) { a = Math.min(a, v); b = Math.max(b, v); } })); const pad = (b - a) * 0.08 || 1; lo = lo ?? a - pad; hi = hi ?? b + pad; }
+      const yv = (v) => y1 - (v - lo) / ((hi - lo) || 1) * (y1 - y0 - 8);
+      if (ln.grid !== false) { const ticks = []; if (ln.step) { for (let v = Math.ceil(lo / ln.step - 1e-9) * ln.step; v <= hi + 1e-9; v += ln.step) ticks.push(v); } else ticks.push(lo, hi);
+        ticks.forEach((v) => { K.el("line", { x1: CX0, x2: CX1, y1: yv(v), y2: yv(v), stroke: "var(--hair)", "stroke-width": 0.8 }, g); K.el("text", { x: CX0 - 6, y: yv(v) + 4, "text-anchor": "end" }, g).textContent = fmt(v, Math.abs(hi - lo) < 5 ? 1 : 0); }); }
+      K.el("text", ln.step || ln.grid === false ? { x: 6, y: y0 + (ln.grid === false ? H / 2 - 4 : 12) } : { x: CX0 + 6, y: y0 + 12 }, g).textContent = ln.unit || ln.lane;
+      (ln.marks || []).forEach((m) => { const t = K.el("text", { x: xOf(Math.round(m.t / T * N)), y: y0 + 4, "text-anchor": "middle" }, g); t.textContent = m.label; });
+      ln.series.forEach((sr, k) => { let d = ""; S.forEach((s, i) => { const v = s.readouts[sr.key]; if (typeof v === "number" && isFinite(v)) d += (d ? "L" : "M") + K.f1(xOf(i)) + " " + K.f1(yv(v)); });
+        const col = { hot: "var(--hot)", cold: "var(--cold)", accent: "var(--accent)", muted: "var(--muted)", ink: "var(--ink)" }[sr.tone] || ["var(--hot)", "var(--cold)", "var(--accent)", "var(--muted)"][k % 4];
+        K.el("path", { d, fill: "none", stroke: col, "stroke-width": sr.width || (sr.dash ? 1.6 : 2.1), "stroke-dasharray": sr.dash ? "6 3" : "", "stroke-linejoin": "round" }, g);
+        if (sr.label === "") return; const bi = sr.at != null ? Math.round(N * sr.at) % N : Math.round(N * (0.12 + 0.27 * k)) % N, bv = S[bi].readouts[sr.key];
+        const t = K.el("text", { x: xOf(bi) + 4, y: yv(typeof bv === "number" ? bv : lo) - 6 }, g); t.textContent = sr.label; t.setAttribute("style", "fill:var(--ink)"); });
+      if (ln.dot) dots.push({ key: ln.dot, yv }); });
+    EV.forEach((ev) => { const i = Math.round(ev.t / T * N); K.el("line", { x1: xOf(i), x2: xOf(i), y1: evTop, y2: 304, stroke: "var(--ink)", "stroke-width": 0.8, "stroke-dasharray": "2 3" }, g); const t = K.el("text", { x: xOf(i) + 4, y: evTop + 10 }, g); t.textContent = ev.label; t.setAttribute("style", "fill:var(--ink)"); });
+    cursor = K.el("line", { x1: 0, x2: 0, y1: 2, y2: 306, stroke: "var(--accent)", "stroke-width": 2 }, chart);
+    dots.forEach((d) => { d.c = K.el("circle", { r: 4, fill: "var(--accent)" }, chart); }); }
+  if (modes) { $("modes").hidden = false; $("modesL").hidden = false; modes.forEach((m, k) => { const b = document.createElement("button"); b.textContent = m.label; b.setAttribute("aria-pressed", String(k === 0));
+    b.onclick = () => { mode = k; $("modes").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); drawChart(); prevI = -1; render(0); }; $("modes").appendChild(b); }); }
+  drawChart(); matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawChart);
+  // playback
+  let t = (M.startAt || 0) * T, playing = !matchMedia("(prefers-reduced-motion: reduce)").matches, speed = (M.speeds || [0.25])[Math.min(1, (M.speeds || [0.25]).length - 1)], prevI = -1, sound = false, actx = null;
+  const sp = $("speed"); (M.speeds || [0.1, 0.25, 0.5, 1]).forEach((v) => { const b = document.createElement("button"); b.textContent = v + "×"; b.dataset.s = v; b.setAttribute("aria-pressed", String(v === speed)); b.onclick = () => { speed = v; sp.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); }; sp.appendChild(b); });
+  if (EV.some((e) => e.sound)) $("sound").hidden = false;
+  function thump(f) { if (!sound) return; try { actx = actx || new AudioContext(); const o = actx.createOscillator(), gN = actx.createGain(), now = actx.currentTime; o.frequency.setValueAtTime(f || 60, now); o.frequency.exponentialRampToValueAtTime(30, now + 0.12); gN.gain.setValueAtTime(0.0001, now); gN.gain.exponentialRampToValueAtTime(0.8, now + 0.01); gN.gain.exponentialRampToValueAtTime(0.0001, now + 0.15); o.connect(gN).connect(actx.destination); o.start(now); o.stop(now + 0.2); } catch (_) {} }
+  const idx = () => Math.floor(((t % T + T) % T) / T * N) % N;
+  function render(dBeat) { const i = idx(); if (TR) TR.set(S[i].parcel.part, S[i].parcel.u, parcelText(S[i])); try { scene.update(i, S[i], dBeat); } catch (e) { if (!window.__studio.sceneError) { window.__studio.sceneError = String(e.message); window.__studio.errors.push("scene.update: " + e.message); } }
+    if (i !== prevI) { ledger(i); cursor.setAttribute("transform", "translate(" + K.f1(xOf(i)) + " 0)"); dots.forEach((d) => { const v = S[i].readouts[d.key]; d.c.setAttribute("cx", K.f1(xOf(i))); d.c.setAttribute("cy", K.f1(d.yv(typeof v === "number" ? v : 0))); });
+      if (playing && prevI >= 0) EV.forEach((ev) => { const k = Math.round(ev.t / T * N); if ((prevI < i && k > prevI && k <= i) || (prevI > i && (k > prevI || k <= i))) if (ev.sound) thump(ev.freq); }); prevI = i; }
+    if (lensId && LZ[lensId]._u) { try { LZ[lensId]._u(i, S[i], Math.max(0, dBeat)); } catch (e) { if (!LZ[lensId]._err) { LZ[lensId]._err = 1; window.__studio.lensErrors.push(lensId + ": " + e.message); window.__studio.errors.push("lens " + lensId + ".update: " + e.message); } } }
+    window.__studio.frames++; window.__studio.i = i; }
+  const still = matchMedia("(prefers-reduced-motion: reduce)");
+  let last = 0; function tick(now) { const dt = last ? Math.min((now - last) / 1000, 0.05) : 0; last = now;
+    moveCam(still.matches ? 1 : 1 - Math.exp(-dt / 0.3));
+    if (playing) { const d = dt * speed * (M.playRate || 1); let tn = t + d; if (loopOn && loopWin && (tn > loopWin[1] || tn < loopWin[0] - 1e-9)) tn = loopWin[0]; t = ((tn % T) + T) % T; render(d / T * (M.flowScale || 1)); }
+    drawCone(); requestAnimationFrame(tick); }
+  for (let k = 0; k < 90; k++) { t = (t + T / N * 2) % T; render(2 / N); } render(0); requestAnimationFrame(tick);
+  const setPlaying = (p) => { playing = p; $("play").textContent = p ? "Pause" : "Play"; $("play").setAttribute("aria-pressed", String(p)); }; setPlaying(playing);
+  $("play").onclick = () => setPlaying(!playing);
+  function scrubTo(tt) { let d = tt - t; if (d > T / 2) d -= T; if (d < -T / 2) d += T; const n = Math.max(1, Math.ceil(Math.abs(d) / (T / N * 3))); for (let k = 0; k < n; k++) { t = ((t + d / n) % T + T) % T; render(d / n / T); } }
+  const freeRoam = () => { loopOn = false; stepCam = null; setLoopBtn(); };
+  function jump(dir) { freeRoam(); setPlaying(false); const i = idx(); let b = BANDS.findIndex((x) => i >= x.a && i < x.b); b = dir > 0 ? (b + 1) % BANDS.length : (i - BANDS[b].a > 20 ? b : (b - 1 + BANDS.length) % BANDS.length); scrubTo((BANDS[b].a + 2) / N * T); }
+  $("prev").onclick = () => jump(-1); $("next").onclick = () => jump(1);
+  $("sound").onclick = (e) => { sound = !sound; e.currentTarget.setAttribute("aria-pressed", String(sound)); e.currentTarget.textContent = sound ? "Sound on" : "Sound off"; };
+  let drag = false; const chartT = (ev) => { const r = chart.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * 1000; return Math.min(N - 1, Math.max(0, (x - CX0) / (CX1 - CX0) * N)) / N * T; };
+  chart.addEventListener("pointerdown", (ev) => { drag = true; chart.setPointerCapture(ev.pointerId); setPlaying(false); freeRoam(); scrubTo(chartT(ev)); });
+  chart.addEventListener("pointermove", (ev) => { if (drag) scrubTo(chartT(ev)); }); chart.addEventListener("pointerup", () => drag = false);
+  document.addEventListener("keydown", (ev) => { if (ev.key === " ") { ev.preventDefault(); setPlaying(!playing); } else if (ev.key === "ArrowRight") { ev.preventDefault(); jump(1); } else if (ev.key === "ArrowLeft") { ev.preventDefault(); jump(-1); } });
+  // tutor: each step jumps to its phase, spotlights its parts and is read aloud (the app's voice when embedded)
+  const steps = (LESSON && LESSON.steps) || []; let si = -1, tutoring = false, muted = false, sayId = 0;
+  $("steps").innerHTML = steps.map((s, k) => "<button data-k='" + k + "'" + (s.lens ? " title='Opens a lens'" : "") + ">" + (k + 1) + ". " + String(s.title || "").replace(/[<>&]/g, "") + (s.lens && LZ[s.lens] ? "<span class='lz'>◎</span>" : "") + "</button>").join("");
+  $("loop").onclick = () => { loopOn = !loopOn; setLoopBtn(); };
+  const sentences = (x) => String(x || "").split(/(?<=[.!?])\s+/).filter(Boolean);
+  let clip = null;
+  function voice(text, done, rec) { if (muted) return setTimeout(done, 700 + text.length * 55);
+    window.__studio.lastVoice = rec ? "recorded" : window.parent !== window ? "app" : "browser";
+    if (rec) { let ended = false; const fin = () => { if (!ended) { ended = true; done(); } }; try { clip = new Audio(rec); clip.onended = fin; clip.onerror = () => { clip = null; voice(text, done, null); }; clip.play().catch(() => { clip = null; voice(text, fin, null); }); return; } catch (_) {} }
+    if (window.parent !== window) { const id = "s" + Math.random(); const h = (e) => { if (e.data && e.data.type === "mbx-said" && e.data.id === id) { window.removeEventListener("message", h); done(); } }; window.addEventListener("message", h); window.parent.postMessage({ type: "mbx-speak", id, text }, "*"); setTimeout(() => { window.removeEventListener("message", h); }, 30000); return; }
+    try { const u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.onend = done; u.onerror = done; speechSynthesis.speak(u); } catch (_) { setTimeout(done, 800 + text.length * 55); } }
+  function goStep(k) { si = k; const s = steps[k]; if (!s) return; $("steps").querySelectorAll("button").forEach((b, j) => b.classList.toggle("on", j === k));
+    try { if (clip) clip.pause(); } catch (_) {}
+    const band = BANDS.filter((b) => b.name === s.phase).sort((x, y) => (y.b - y.a) - (x.b - x.a))[0]; /* a phase can recur in one cycle: use its longest window */
+    // the moment this step is about: s.win [t0, t1] in model time, else its phase window padded a little either side
+    loopWin = Array.isArray(s.win) ? [Math.max(0, s.win[0]), Math.min(T, s.win[1])] : band ? [Math.max(0, band.a / N * T - 0.03 * T), Math.min(T - T / N, band.b / N * T + 0.03 * T)] : null; loopOn = true; setLoopBtn();
+    stepCam = Array.isArray(s.cam) ? s.cam : null; if (s.lens) openLens(s.lens); else closeLens();
+    if (Array.isArray(s.win)) scrubTo(loopWin[0]); else if (band) { scrubTo((band.a + 2) / N * T); } else if (typeof s.at === "number") scrubTo(s.at * T);
+    setPlaying(true); speed = s.speed || 0.1; K.focus(s.focus || []);
+    const parts = sentences(s.say), id = ++sayId, rec = Array.isArray(s.audio) && s.audio.length === parts.length ? s.audio : null; let j = 0;
+    const next = () => { if (id !== sayId) return; if (j >= parts.length) { if (tutoring && k + 1 < steps.length) setTimeout(() => goStep(k + 1), 900); else { tutoring = false; $("tutor").textContent = "▶ Tutor me"; K.focus([]); } return; }
+      $("say").innerHTML = parts.map((p, q) => "<span class='" + (q === j ? "on" : "") + "'>" + p.replace(/[<>&]/g, "") + "</span>").join(" "); voice(parts[j], next, rec && rec[j]); j++; };
+    next(); }
+  $("steps").querySelectorAll("button").forEach((b) => b.onclick = () => { tutoring = false; goStep(+b.dataset.k); });
+  $("tutor").onclick = () => { if (tutoring) { tutoring = false; sayId++; try { speechSynthesis.cancel(); } catch (_) {} try { if (clip) clip.pause(); } catch (_) {} $("tutor").textContent = "▶ Tutor me"; K.focus([]); return; } tutoring = true; $("tutor").textContent = "❚❚ Stop"; goStep(si < 0 || si >= steps.length - 1 ? 0 : si); };
+  $("mute").onclick = (e) => { muted = !muted; e.currentTarget.textContent = muted ? "Voice off" : "Voice on"; e.currentTarget.setAttribute("aria-pressed", String(muted)); };
+  window.__studio.seek = (f) => { setPlaying(false); scrubTo(f * T); };
+  /* "what if": re-run the model with changed settings (createModel(params); M.whatifs lists the plate's own) and redraw
+   * everything that comes from it: samples, phase bands, events, chart, gates, ledger. Same objects are refilled in place,
+   * so the scene and lenses keep reading the live model. setParams({}) goes back to normal. */
+  window.__studio.setParams = (params) => { const nm = createModel(params || {}); if (nm.T !== T || (nm.N || 600) !== N) { window.__studio.errors.push("setParams: model length changed"); return false; }
+    for (const k of Object.keys(M)) delete M[k]; Object.assign(M, nm);
+    S.length = 0; for (let i = 0; i < N; i++) S.push(M.sample(i * T / N));
+    BANDS.length = 0; { let s0 = 0; for (let i = 1; i <= N; i++) if (i === N || S[i].phase !== S[s0].phase) { BANDS.push({ name: S[s0].phase, a: s0, b: i }); s0 = i; } }
+    EV.length = 0; ((M.events ? M.events(S, T) : []) || []).forEach((e) => EV.push(e));
+    grows.forEach((r, k) => { if (M.gates && M.gates[k]) r.g = M.gates[k]; });
+    const nb = (M.readouts || []).filter((r) => r.big).slice(0, 4); big.forEach((r, k) => { if (nb[k]) r.text = nb[k].text; });
+    $("notes").textContent = M.notes || ""; window.__studio.params = M.params || params || {};
+    drawChart(); prevI = -1; render(0); return true; };
+  window.__studio.ready = true;
+}</script><script>
+/* Library plate: the cardiac cycle (Wiggers) as a time-varying-elastance model of all four chambers and both circulations. */
+function createModel(params) {
+  /* "what if" settings (each what-if re-runs this whole model): afterload multiplies systemic resistance, contractility
+   * multiplies the LV's peak elastance, bleed is the fraction of blood volume lost. Defaults are the normal heart. */
+  const PRM = Object.assign({ afterload: 1, contractility: 1, bleed: 0 }, params || {});
+  const HR = 75, T = 60 / HR, N = 800, DT = T / N;
+  const ATR = { start: 0, dur: 0.17, rise: 0.085 }, VEN = { start: 0.12, dur: 0.43, rise: 0.30 };
+  const act = (t, a) => { const u = ((t - a.start) % T + T) % T; if (u > a.dur) return 0; return u < a.rise ? 0.5 * (1 - Math.cos(Math.PI * u / a.rise)) : 0.5 * (1 + Math.cos(Math.PI * (u - a.rise) / (a.dur - a.rise))); };
+  const CH = { LV: [0.07, 2.6 * PRM.contractility, 12], RV: [0.035, 0.6, 12], LA: [0.16, 0.35, 6], RA: [0.07, 0.2, 6] };
+  const CAP = { SA: 1.35, SV: 60, PA: 4.2, PV: 18 }, UV = { SA: 680, SV: 2700, PA: 120, PV: 520 };
+  const R = { sys: 1.05 * PRM.afterload, sven: 0.035, pul: 0.075, pven: 0.012, mv: 0.006, av: 0.005, tv: 0.005, pv: 0.004 };
+  const pos = (x) => (x > 0 ? x : 0);
+  function pressures(t, V) { const ev = act(t, VEN), ea = act(t, ATR), P = {};
+    for (const k of ["LV", "RV"]) { const c = CH[k]; P[k] = (c[0] + (c[1] - c[0]) * ev) * (V[k] - c[2]); }
+    for (const k of ["LA", "RA"]) { const c = CH[k]; P[k] = (c[0] + (c[1] - c[0]) * ea) * (V[k] - c[2]); }
+    for (const k of ["SA", "SV", "PA", "PV"]) P[k] = (V[k] - UV[k]) / CAP[k]; return P; }
+  const flows = (P) => ({ mitral: pos(P.LA - P.LV) / R.mv, aortic: pos(P.LV - P.SA) / R.av, systemic: (P.SA - P.SV) / R.sys, cava: (P.SV - P.RA) / R.sven,
+    tricuspid: pos(P.RA - P.RV) / R.tv, pulmonic: pos(P.RV - P.PA) / R.pv, pulmonary: (P.PA - P.PV) / R.pul, pveins: (P.PV - P.LA) / R.pven });
+  // simulate to a steady beat, then record one beat
+  const V = { LV: 130, RV: 135, LA: 60, RA: 60, SA: 820, SV: 3000, PA: 205, PV: 600 };
+  { const total = Object.values(V).reduce((a, b) => a + b, 0); V.SV -= total * Math.max(0, Math.min(0.4, PRM.bleed)); }   // a bleed comes out of the veins first
+  let t = 0; const h = DT / 5;
+  const step = () => { const P = pressures(t, V), Q = flows(P); V.LV += h * (Q.mitral - Q.aortic); V.SA += h * (Q.aortic - Q.systemic); V.SV += h * (Q.systemic - Q.cava); V.RA += h * (Q.cava - Q.tricuspid);
+    V.RV += h * (Q.tricuspid - Q.pulmonic); V.PA += h * (Q.pulmonic - Q.pulmonary); V.PV += h * (Q.pulmonary - Q.pveins); V.LA += h * (Q.pveins - Q.mitral); t += h; };
+  for (let i = 0; i < 40 * N * 5; i++) step(); t = Math.round(t / T) * T;
+  const REC = []; for (let i = 0; i < N; i++) { const P = pressures(t, V), Q = flows(P); REC.push({ P, Q, V: { ...V } }); for (let j = 0; j < 5; j++) step(); }
+  const maxQ = {}; for (const k of Object.keys(REC[0].Q)) maxQ[k] = Math.max(...REC.map((r) => Math.abs(r.Q[k]))) || 1;
+  const EDV = Math.max(...REC.map((r) => r.V.LV)), ESV = Math.min(...REC.map((r) => r.V.LV));
+  // rapid filling runs from mitral opening until mitral inflow has peaked and fallen back (no one-frame "diastasis" at opening)
+  let kPeak = 0; for (let k = 0; k < N; k++) if (k * DT > VEN.start + VEN.rise && REC[k].Q.mitral > REC[kPeak].Q.mitral) kPeak = k;
+  function phaseOf(k) { const r = REC[k], u = k * DT;
+    if (r.P.LV > r.P.SA) return "Ventricular ejection";
+    if (r.P.LA > r.P.LV) { if (act(u, ATR) > 0.02) return "Atrial systole"; return (r.Q.mitral > 120 || (k <= kPeak && u > VEN.start + VEN.rise)) ? "Rapid filling" : "Diastasis"; }
+    if (u < VEN.start) return "Atrial systole"; return u < VEN.start + VEN.rise ? "Isovolumetric contraction" : "Isovolumetric relaxation"; }
+  const open = (k, v) => (REC[k].Q[v] > 0.01 ? 1 : 0);
+  // surface ECG, drawn on the same clock as the activation that drives the chambers (P at atrial onset, QRS just before ventricular onset)
+  const g = (u, c, w) => Math.exp(-((u - c) * (u - c)) / (2 * w * w));
+  // membrane voltage of an SA-node pacemaker cell and a ventricular muscle cell, and the ventricular Ca²⁺ transient, on the same activation clock
+  // (SA fires at t = 0 = atrial onset; the ventricular upstroke at 0.10 s, just before ventricular force rises at 0.12 s)
+  const vmSA = (u) => u < 0.03 ? -40 + 50 * Math.sin(Math.PI / 2 * u / 0.03) : u < 0.17 ? 10 - 70 * (0.5 - 0.5 * Math.cos(Math.PI * (u - 0.03) / 0.14)) : -60 + 20 * Math.pow((u - 0.17) / (T - 0.17), 1.35);
+  const vmV = (u) => u < 0.10 ? -88 : u < 0.106 ? -88 + 113 * (u - 0.10) / 0.006 : u < 0.12 ? 25 - 20 * (u - 0.106) / 0.014 : u < 0.30 ? 5 - 10 * (u - 0.12) / 0.18 : u < 0.40 ? -5 - 83 * (0.5 - 0.5 * Math.cos(Math.PI * (u - 0.30) / 0.10)) : -88;
+  const CA = { start: 0.105, dur: 0.30, rise: 0.06 };
+  const ecg = (u) => 0.13 * g(u, 0.05, 0.022) - 0.10 * g(u, 0.092, 0.006) + 1.0 * g(u, 0.104, 0.008) - 0.22 * g(u, 0.118, 0.007) + 0.28 * g(u, 0.36, 0.04);
+  return {
+    T, N, timeUnit: "s", clockNote: HR + " bpm" + (PRM.afterload > 1.05 ? " · raised afterload" : "") + (PRM.contractility < 0.95 ? " · weak LV" : "") + (PRM.bleed > 0.01 ? " · " + Math.round(PRM.bleed * 100) + "% blood loss" : ""),
+    params: PRM,
+    /* what-ifs this plate can run; the app offers only those the student's note mentions (note: words that trigger it) */
+    whatifs: [
+      { id: "afterload", label: "Raised afterload", params: { afterload: 1.6 }, at: "Ventricular ejection", watch: ["AoP:max", "AoP:min", "LVP:max", "SV", "EF"], note: ["afterload", "hypertension", "aortic stenosis", "peripheral resistance"],
+        shows: "Raised afterload (systemic resistance up 60%): the LV must generate more pressure before the aortic valve opens, so pressures rise and less blood is ejected each beat." },
+      { id: "weaklv", label: "Weak LV", params: { contractility: 0.6 }, at: "Ventricular ejection", watch: ["AoP:max", "LVP:max", "SV", "EF", "LAP:max"], note: ["contractility", "heart failure", "inotrop", "myocardial infarction"],
+        shows: "Weaker LV contraction (peak elastance down 40%): the ventricle empties less, so stroke volume and ejection fraction fall and left atrial pressure rises." },
+      { id: "bleed", label: "10% blood loss", params: { bleed: 0.1 }, at: "Rapid filling", watch: ["LVV:max", "SV", "AoP:max", "AoP:min", "EF"], note: ["haemorrhage", "hemorrhage", "blood loss", "preload", "venous return", "frank-starling", "frank starling"],
+        shows: "A 10% blood loss, before any reflex compensation, empties the veins: less venous return means a smaller end-diastolic volume (less preload), so by Frank–Starling the stroke volume and blood pressure fall." }], speeds: [0.1, 0.25, 0.5, 1],
+    parts: [{ id: "RA", name: "Right atrium" }, { id: "RV", name: "Right ventricle" }, { id: "LA", name: "Left atrium" }, { id: "LV", name: "Left ventricle" },
+      { id: "tricuspid", name: "Tricuspid valve" }, { id: "pulmonary", name: "Pulmonary valve" }, { id: "mitral", name: "Mitral valve" }, { id: "aortic", name: "Aortic valve" },
+      { id: "aorta", name: "Aorta" }, { id: "pa", name: "Pulmonary artery" }, { id: "cavae", name: "Venae cavae" }, { id: "pveins", name: "Pulmonary veins" }],
+    readouts: [{ key: "LVP", label: "LV pressure", unit: "mmHg" }, { key: "AoP", label: "Aortic pressure", unit: "mmHg" }, { key: "LAP", label: "LA pressure", unit: "mmHg" },
+      { key: "RVP", label: "RV pressure", unit: "mmHg" }, { key: "PAP", label: "Pulmonary artery pressure", unit: "mmHg" }, { key: "RAP", label: "RA pressure", unit: "mmHg" },
+      { key: "LAV", label: "LA volume", unit: "mL" }, { key: "RAV", label: "RA volume", unit: "mL" }, { key: "ecg", label: "ECG", unit: "mV (schematic)" },
+      { key: "vmSA", label: "SA-node cell voltage", unit: "mV" }, { key: "vmV", label: "Ventricular cell voltage", unit: "mV" },
+      { key: "ca", label: "Ventricular Ca²⁺ transient", unit: "0–1" }, { key: "actV", label: "Ventricular activation", unit: "0–1" },
+      { key: "LVV", label: "LV volume", unit: "mL", big: true }, { key: "RVV", label: "RV volume", unit: "mL", big: true }, { key: "SV", label: "Stroke vol · EF", unit: "", big: true, text: (s) => s.readouts.SV.toFixed(0) + " · " + s.readouts.EF.toFixed(0) + "%" }, { key: "EF", label: "Ejection fraction", unit: "%" }],
+    chart: [{ lane: "ECG", unit: "ECG", min: -0.3, max: 1.05, weight: 0.7, grid: false, noEvents: true, marks: [{ t: 0.05, label: "P" }, { t: 0.104, label: "QRS" }, { t: 0.36, label: "T" }], series: [{ key: "ecg", label: "", tone: "ink", width: 1.3 }] },
+      { lane: "Pressure", unit: "mmHg", min: 0, max: 130, step: 20, weight: 2.3, dot: "LVP", series: [{ key: "AoP", label: "Aorta", tone: "hot", dash: true, at: 0.38 }, { key: "LVP", label: "LV", tone: "hot", at: 0.29 }, { key: "LAP", label: "LA", tone: "muted", at: 0.04 }] },
+      { lane: "Volume", unit: "LV mL", min: 40, max: 140, step: 60, weight: 1, series: [{ key: "LVV", label: "", tone: "accent" }] }],
+    chartModes: [
+      { label: "Left heart", lanes: null },
+      { label: "Right heart", lanes: [{ lane: "ECG", unit: "ECG", min: -0.3, max: 1.05, weight: 0.7, grid: false, noEvents: true, marks: [{ t: 0.05, label: "P" }, { t: 0.104, label: "QRS" }, { t: 0.36, label: "T" }], series: [{ key: "ecg", label: "", tone: "ink", width: 1.3 }] },
+        { lane: "Pressure", unit: "mmHg", min: 0, max: 30, step: 5, weight: 2.3, dot: "RVP", series: [{ key: "PAP", label: "Pulm. artery", tone: "cold", dash: true, at: 0.74 }, { key: "RVP", label: "RV", tone: "cold", at: 0.29 }, { key: "RAP", label: "RA", tone: "muted", at: 0.04 }] },
+        { lane: "Volume", unit: "RV mL", min: 40, max: 140, step: 60, weight: 1, series: [{ key: "RVV", label: "", tone: "accent" }] }] }],
+    startAt: 0.275, gateWhy: "Behind · ahead (mmHg)",
+    gateTitle: "Valve", gates: [
+      { label: "Tricuspid", on: (s) => s.parts.tricuspid.open > 0.5, detail: (s) => "RA " + s.readouts.RAP.toFixed(1) + (s.readouts.RAP > s.readouts.RVP ? " > " : " < ") + "RV " + s.readouts.RVP.toFixed(1) },
+      { label: "Pulmonary", on: (s) => s.parts.pulmonary.open > 0.5, detail: (s) => "RV " + s.readouts.RVP.toFixed(1) + (s.readouts.RVP > s.readouts.PAP ? " > " : " < ") + "PA " + s.readouts.PAP.toFixed(1) },
+      { label: "Mitral", on: (s) => s.parts.mitral.open > 0.5, detail: (s) => "LA " + s.readouts.LAP.toFixed(1) + (s.readouts.LAP > s.readouts.LVP ? " > " : " < ") + "LV " + s.readouts.LVP.toFixed(1) },
+      { label: "Aortic", on: (s) => s.parts.aortic.open > 0.5, detail: (s) => "LV " + s.readouts.LVP.toFixed(1) + (s.readouts.LVP > s.readouts.AoP ? " > " : " < ") + "Aorta " + s.readouts.AoP.toFixed(1) }],
+    events: (S, T) => { const ev = []; for (let k = 1; k < N; k++) { if (S[k - 1].parts.mitral.open > 0.5 && S[k].parts.mitral.open <= 0.5) ev.push({ t: k * DT, label: "S1", sound: true, freq: 55 }); if (S[k - 1].parts.aortic.open > 0.5 && S[k].parts.aortic.open <= 0.5) ev.push({ t: k * DT, label: "S2", sound: true, freq: 80 }); } return ev; },
+    short: { "Atrial systole": "atrial kick", "Isovolumetric contraction": "isovol. contr.", "Ventricular ejection": "ejection", "Isovolumetric relaxation": "isovol. relax.", "Rapid filling": "rapid filling", "Diastasis": "diastasis" },
+    sample(tt) { const k = Math.min(N - 1, Math.floor(tt / DT)), r = REC[k];
+      return { phase: phaseOf(k),
+        q: r.Q,
+        readouts: { ecg: ecg(k * DT), vmSA: vmSA(k * DT), vmV: vmV(k * DT), ca: act(k * DT, CA), actV: act(k * DT, VEN), LVP: r.P.LV, AoP: r.P.SA, LAP: r.P.LA, RVP: r.P.RV, PAP: r.P.PA, RAP: r.P.RA, LVV: r.V.LV, RVV: r.V.RV, LAV: r.V.LA, RAV: r.V.RA, SV: EDV - ESV, EF: (EDV - ESV) / EDV * 100 },
+        parts: { tricuspid: { open: open(k, "tricuspid") }, pulmonary: { open: open(k, "pulmonic") }, mitral: { open: open(k, "mitral") }, aortic: { open: open(k, "aortic") },
+          RA: { active: act(k * DT, ATR), flow: r.Q.tricuspid / maxQ.tricuspid }, LA: { active: act(k * DT, ATR), flow: r.Q.mitral / maxQ.mitral },
+          RV: { active: act(k * DT, VEN), flow: r.Q.pulmonic / maxQ.pulmonic }, LV: { active: act(k * DT, VEN), flow: r.Q.aortic / maxQ.aortic },
+          aorta: { flow: r.Q.aortic / maxQ.aortic }, pa: { flow: r.Q.pulmonic / maxQ.pulmonic }, cavae: { flow: r.Q.cava / maxQ.cava }, pveins: { flow: r.Q.pveins / maxQ.pveins } } }; },
+    explain(s) { const r = s.readouts, f = (v) => v.toFixed(0);
+      switch (s.phase) {
+        case "Atrial systole": return "The P wave has fired and the <b>atria contract</b>. LA pressure (" + f(r.LAP) + ") sits above LV pressure (" + f(r.LVP) + "), so the mitral valve stays open and tops up the ventricle with its last ~15–20% of filling. The aortic valve is shut because the aorta (" + f(r.AoP) + ") is far above the relaxed LV.";
+        case "Isovolumetric contraction": return "After the QRS the <b>ventricles contract</b>. As soon as LV pressure (" + f(r.LVP) + ") passed LA pressure (" + f(r.LAP) + ") the mitral valve was pushed shut, giving <b>S1</b>. LV pressure is still below the aorta (" + f(r.AoP) + "), so the aortic valve is shut too. With both doors closed the volume is fixed at " + f(r.LVV) + " mL and pressure climbs steeply.";
+        case "Ventricular ejection": return "LV pressure (" + f(r.LVP) + ") has overtaken the aorta (" + f(r.AoP) + "), so the <b>aortic valve is forced open</b> and blood leaves. On the right, RV (" + f(r.RVP) + ") beats the pulmonary artery (" + f(r.PAP) + ") with a much smaller push: same stroke volume at about a fifth of the pressure, because the lungs offer far less resistance.";
+        case "Isovolumetric relaxation": return "The ventricles <b>relax</b>. LV pressure (" + f(r.LVP) + ") fell below the aorta (" + f(r.AoP) + "); the brief backflow snapped the aortic valve shut, giving <b>S2</b> and the dicrotic notch. LV pressure is still above LA (" + f(r.LAP) + "), so the mitral valve stays shut and volume holds at " + f(r.LVV) + " mL while pressure falls.";
+        case "Rapid filling": return "LV pressure (" + f(r.LVP) + ") dropped below LA pressure (" + f(r.LAP) + "), so the <b>mitral valve swings open</b> and blood that pooled in the atrium during systole rushes in. Most ventricular filling happens here, passively, before the atria ever contract.";
+        default: return "<b>Diastasis.</b> LA (" + f(r.LAP) + ") and LV (" + f(r.LVP) + ") pressures have nearly equalised, so filling slows to a trickle. Venous blood keeps arriving in both atria. The next P wave will start atrial systole."; } },
+    notes: "Four time-varying-elastance chambers, arterial and venous compliances and ideal one-way valves, simulated to a steady beat at 75 bpm (LV 117/4, aorta 117/78, PA 21/10 mmHg, stroke volume ≈ 70 mL, cardiac output ≈ 5.3 L/min). Ventricular contraction starts 0.12 s after the atria (the AV-node delay). Leaflets are drawn two per valve in this section; the tricuspid, pulmonary and aortic valves really have three cusps.",
+  };
+}
+
+</script><script>
+/* Library plate: the Four-Chamber Heart. A frontal cutaway (atria, ventricles, outflow tracts, four valves with chordae and papillary
+   muscles, coronary grooves, great vessels, both lungs and the systemic beds), every chamber sized by the model's volumes every frame,
+   every valve set by the model's flows, and the blood moved by the model's flows. Ported from the hand-built Four-Chamber Heart. */
+function createScene(svg, K, M, S) {
+  const L = K.layers("bg", "back", "pback", "mid", "pmid", "front", "pfront", "top");
+  const el = K.el, f1 = K.f1, N = S.length, T = M.T;
+  // the hand-built plate was drawn on 730×690; fit it to the 760×640 plate
+  const SC = 0.9275, TX = 38, TY = 2;
+  // show exactly the hand-built frame (730×690 → 677×640 here), so the heart is drawn as large as the original; QA bounds still hold
+  svg.setAttribute("viewBox", `${TX} 0 ${f1(730 * SC)} 640`);
+  const P = (p) => [p[0] * SC + TX, p[1] * SC + TY], mp = (pts) => pts.map(P), R = (r) => r * SC, mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+  const norm = (v) => { const l = Math.hypot(v[0], v[1]) || 1; return [v[0] / l, v[1] / l]; };
+  const sh = (pts, dx) => pts.map(([x, y]) => [x + dx, y]);
+
+  // ---------------- anatomy at rest (hand-built coordinates, mapped) ----------------
+  const TRI = mp([[256, 380], [322, 374]]), MIT = mp([[452, 354], [516, 350]]);
+  const CH = {
+    RA: { ann: TRI, Vref: 45, k: 0.5, reach: R(120), vol: "RAV", fill: "var(--cold-lumen)", pts: mp([[256, 380], [232, 372], [214, 352], [208, 316], [213, 282], [226, 258], [248, 248], [272, 252], [292, 270], [302, 302], [310, 342], [322, 374]]) },
+    LA: { ann: MIT, Vref: 45, k: 0.5, reach: R(90), vol: "LAV", fill: "var(--hot-lumen)", pts: mp(sh([[446, 354], [436, 330], [434, 300], [442, 276], [465, 263], [505, 263], [527, 277], [536, 301], [530, 329], [510, 350]], 6)) },
+    RV: { ann: TRI, Vref: 80, k: 0.45, reach: R(170), vol: "RVV", fill: "var(--cold-lumen)", pts: mp([[256, 382], [322, 376], [346, 387], [372, 407], [392, 442], [404, 492], [410, 536], [400, 562], [370, 560], [322, 532], [284, 494], [264, 448], [256, 414]]) },
+    LV: { ann: MIT, Vref: 90, k: 0.45, reach: R(220), vol: "LVV", fill: "var(--hot-lumen)", pts: mp(sh([[446, 356], [437, 390], [433, 442], [440, 504], [458, 560], [478, 598], [498, 596], [514, 556], [524, 496], [527, 428], [523, 378], [510, 352]], 6)) },
+  };
+  const BODY = { ann: mp([[244, 392], [560, 340]]), k: 0.12, reach: R(260), pts: mp([[204, 262], [190, 318], [195, 366], [222, 389], [244, 402], [244, 444], [258, 494], [298, 548], [368, 594], [438, 632], [480, 632], [516, 604], [542, 552], [558, 482], [566, 404], [563, 344], [552, 294], [534, 262], [506, 248], [474, 250], [452, 258], [432, 266], [396, 270], [360, 268], [334, 254], [322, 236], [300, 232], [276, 240], [250, 242], [224, 248]]) };
+  const LVOT = { c: mp([[458, 424], [446, 380], [404, 332], [362, 302]]), r: R(15) }, RVOT = { c: mp([[366, 446], [372, 394], [398, 330], [425, 270]]), r: R(16) };
+  const AO_ASC = mp([[362, 302], [346, 276], [340, 240], [348, 200], [372, 162], [410, 142], [460, 136], [503, 146], [528, 172], [538, 214], [538, 280]]);
+  const AO_DESC = mp([[538, 250], [538, 420], [538, 560], [538, 634]]);
+  const TRUNK = mp([[425, 270], [430, 241], [433, 216]]), LPA = mp([[433, 216], [470, 211], [520, 214], [562, 226], [592, 240]]), RPA = mp([[433, 216], [396, 207], [322, 203], [252, 212], [182, 236]]);
+  const SVC = mp([[246, 46], [246, 150], [248, 212], [250, 254]]), IVC = mp([[212, 650], [208, 560], [210, 470], [216, 400], [222, 364]]);
+  const LPV = [mp([[614, 282], [578, 283], [540, 286]]), mp([[614, 318], [578, 316], [538, 318]])];
+  const RPV = [mp([[154, 282], [240, 272], [330, 276], [452, 292]]), mp([[154, 318], [250, 316], [340, 318], [452, 320]])];
+  const BRANCH = [mp([[392, 150], [384, 100], [378, 50]]), mp([[446, 137], [448, 90], [450, 50]]), mp([[492, 142], [508, 94], [522, 50]])];
+  const LUNG_R = mp([[172, 158], [128, 150], [86, 178], [56, 240], [42, 320], [46, 400], [70, 462], [118, 474], [160, 450], [176, 390], [178, 300], [176, 220]]);
+  const LUNG_L = mp([[578, 158], [620, 150], [658, 178], [686, 240], [696, 320], [692, 400], [670, 462], [626, 474], [594, 452], [584, 400], [598, 352], [588, 300], [582, 220]]);
+  const PAP = { RV: mp([[332, 516], [380, 526]]), LV: mp([[466, 528], [508, 516]]) };
+
+  // ---------------- static plate ----------------
+  const vessel = (pts, r, tone, layer, cap = "round") => K.vessel(layer, pts, R(r), { tone, cap, wallWidth: 5 * SC });
+  // systemic capillary beds (head and arms above, trunk and legs below)
+  const bed = (x, y, w, h, label) => { [x, y] = P([x, y]); w = R(w); h = R(h);
+    el("rect", { x: f1(x), y: f1(y), width: f1(w), height: f1(h), rx: f1(h / 2), fill: "var(--bed)", stroke: "var(--hair)" }, L.bg);
+    for (let k = 0; k < 26; k++) { const xx = x + 13 + k * (w - 26) / 25; el("path", { d: `M${f1(xx)} ${f1(y + 5)} q 4 ${f1(h / 2 - 5)} 0 ${f1(h - 10)}`, fill: "none", stroke: k % 2 ? "var(--hot)" : "var(--cold)", "stroke-width": 0.8, opacity: 0.35 }, L.bg); }
+    K.label(x + w / 2, y + h / 2 + 3.5, label, "middle"); };
+  bed(186, 22, 360, 30, "Head and arms · systemic capillaries");
+  bed(176, 640, 400, 30, "Trunk and legs · systemic capillaries");
+  // lungs, with their bronchovascular tree
+  const lungFill = "color-mix(in srgb, var(--hot-lumen) 45%, var(--bed))", lungLine = "color-mix(in srgb, var(--wall-hi) 70%, var(--bed))";
+  for (const [pts, name, x0] of [[LUNG_R, "Right lung", 108], [LUNG_L, "Left lung", 636]]) {
+    el("path", { d: K.spline(pts, true), fill: lungFill, stroke: lungLine, "stroke-width": 1.2 }, L.bg);
+    const [cx, cy] = P([x0, 320]);
+    for (let i = 0; i < 9; i++) { const a = 0.3 + i * 0.32;
+      el("path", { d: `M${f1(cx)} ${f1(cy)} q ${f1(R(Math.cos(a) * 30))} ${f1(R(Math.sin(a) * 50 - 40))} ${f1(R(Math.cos(a + 0.4) * 52))} ${f1(R(Math.sin(a + 0.4) * 110 - 40))}`, fill: "none", stroke: lungLine, "stroke-width": 0.8, opacity: 0.8 }, L.bg); }
+    const lp = P([x0, 494]); K.label(lp[0], lp[1], name, "middle"); }
+  // behind the heart: descending aorta, right pulmonary veins and artery, inferior vena cava
+  K.part("aorta", vessel(AO_DESC, 15, "hot", L.back));
+  RPV.forEach((v) => K.part("pveins", vessel(v, 7, "hot", L.back)));
+  K.part("pa", vessel(RPA, 12, "cold", L.back));
+  K.part("cavae", vessel(IVC, 13, "cold", L.back, "butt"));
+  // arch branches and the far half of the arch
+  BRANCH.forEach((b) => K.part("aorta", vessel(b, 7, "hot", L.mid)));
+  K.part("aorta", vessel(AO_ASC.slice(4), 15, "hot", L.mid));
+  // the heart: outer surface, AV-groove fat with the coronary arteries in section, chambers, outflow tracts
+  const body = K.blob(L.mid, BODY.pts, { width: 1.6 });
+  const fatR = el("path", { fill: "none", stroke: "var(--fat)", "stroke-width": R(9), "stroke-linecap": "round" }, L.mid);
+  const fatL = el("path", { fill: "none", stroke: "var(--fat)", "stroke-width": R(7), "stroke-linecap": "round" }, L.mid);
+  const rca = el("circle", { r: R(4.2), fill: "var(--hot-lumen)", stroke: "var(--hot)", "stroke-width": 1.5 }, L.mid);
+  const lcx = el("circle", { r: R(3.8), fill: "var(--hot-lumen)", stroke: "var(--hot)", "stroke-width": 1.5 }, L.mid);
+  const cav = {}; const cavity = (k) => (cav[k] = K.part(k, K.blob(L.mid, CH[k].pts, { fill: CH[k].fill, width: 1.3 })));
+  cavity("RA"); cavity("LA");
+  const tract = (t, lumen, wallG, lumG, part) => { const d = K.spline(t.c, false);
+    el("path", { d, fill: "none", stroke: "var(--wall-deep)", "stroke-width": f1(2 * t.r + R(15)), "stroke-linecap": "butt" }, wallG);
+    el("path", { d, fill: "none", stroke: "url(#kTissue)", "stroke-width": f1(2 * t.r + R(12)), "stroke-linecap": "butt" }, wallG);
+    el("path", { d, fill: "none", stroke: "var(--wall-deep)", "stroke-width": f1(2 * t.r + R(2.6)), "stroke-linecap": "butt" }, wallG);
+    K.part(part, el("path", { d, fill: "none", stroke: lumen, "stroke-width": f1(2 * t.r), "stroke-linecap": "butt" }, lumG)); };
+  const gLVOTw = el("g", {}, L.mid), gLVOTl = el("g", {}, L.mid); cavity("LV");
+  const gRVOTw = el("g", {}, L.mid); cavity("RV"); const gRVOTl = el("g", {}, L.mid);
+  tract(LVOT, "var(--hot-lumen)", gLVOTw, gLVOTl, "LV"); tract(RVOT, "var(--cold-lumen)", gRVOTw, gRVOTl, "RV");
+  K.part("RV", el("circle", { cx: f1(RVOT.c[0][0]), cy: f1(RVOT.c[0][1]), r: f1(RVOT.r), fill: "var(--cold-lumen)" }, gRVOTl));
+  const papG = el("g", {}, L.mid), papEls = { RV: [0, 1].map(() => K.part("RV", el("path", { fill: "url(#kTissue)", stroke: "var(--wall-deep)", "stroke-width": 1 }, papG))), LV: [0, 1].map(() => K.part("LV", el("path", { fill: "url(#kTissue)", stroke: "var(--wall-deep)", "stroke-width": 1 }, papG))) };
+  K.part("cavae", vessel(SVC, 12, "cold", L.mid, "butt"));
+  K.part("aorta", vessel(AO_ASC.slice(0, 6), 15, "hot", L.mid, "butt"));
+  LPV.forEach((v) => K.part("pveins", vessel(v, 7, "hot", L.mid, "butt")));
+  // in front: the pulmonary trunk and left pulmonary artery are the most anterior structures
+  K.part("pa", vessel(TRUNK, 15, "cold", L.front, "butt")); K.part("pa", vessel(LPA, 11, "cold", L.front));
+  { const c = P([433, 216]); K.part("pa", el("circle", { cx: f1(c[0]), cy: f1(c[1]), r: R(14), fill: "var(--cold-lumen)" }, L.front)); }
+
+  // ---------------- valves, chordae ----------------
+  const ringOf = (c, r) => { const p = c[c.length - 1], q = c[c.length - 2], d = norm([p[0] - q[0], p[1] - q[1]]); return { A: [p[0] - d[1] * r, p[1] + d[0] * r], B: [p[0] + d[1] * r, p[1] - d[0] * r], down: d }; };
+  const AOR = ringOf(LVOT.c, LVOT.r), PUR = ringOf(RVOT.c, RVOT.r);
+  const chordG = el("g", {}, L.top);
+  const VG = { tricuspid: { A: TRI[0], B: TRI[1], down: norm([0.1, 1]), kind: "av", ch: "RV", q: "tricuspid" }, mitral: { A: MIT[0], B: MIT[1], down: norm([0.05, 1]), kind: "av", ch: "LV", q: "mitral" },
+    pulmonary: { A: PUR.A, B: PUR.B, down: PUR.down, kind: "sl", q: "pulmonic" }, aortic: { A: AOR.A, B: AOR.B, down: AOR.down, kind: "sl", q: "aortic" } };
+  const valve = {}, chords = {};
+  for (const id in VG) { valve[id] = K.part(id, K.valve(L.top, VG[id].A, VG[id].B, VG[id].down, VG[id].kind));
+    if (VG[id].kind === "av") chords[id] = [0, 1, 2, 3].map(() => K.part(id, el("path", { fill: "none", stroke: "var(--leaflet-edge)", "stroke-width": 0.9, opacity: 0.8 }, chordG))); }
+  // valve openness from forward flow, eased (leaflets swing rather than snap); heart sounds where the AV and semilunar valves close
+  const OPEN = {}; for (const id in VG) { const o = new Float32Array(N), a = 1 - Math.exp(-(T / N) / 0.016); let x = 0;
+    for (let pass = 0; pass < 3; pass++) for (let i = 0; i < N; i++) { x += ((S[i].q[VG[id].q] > 0.01 ? 1 : 0) - x) * a; o[i] = x; } OPEN[id] = o; }
+  // closure flash: AV rings light at S1 (mitral closes), semilunar rings at S2 (aortic closes), fading over ~60 ms
+  const FLASH = { av: new Float32Array(N), sl: new Float32Array(N) };
+  for (const [qk, kind] of [["mitral", "av"], ["aortic", "sl"]]) for (let k = 0; k < N; k++) if (S[(k + N - 1) % N].q[qk] > 0.01 && S[k].q[qk] <= 0.01)
+    for (let j = 0; j < 45; j++) { const m = (k + j) % N; FLASH[kind][m] = Math.max(FLASH[kind][m], 1 - j / 45); }
+
+  // ---------------- labels and live chamber tags ----------------
+  const lab = (x, y, t, a) => { const p = P([x, y]); K.label(p[0], p[1], t, a); };
+  [[238, 112, "Superior vena cava", "end"], [200, 560, "Inferior vena cava", "end"], [566, 204, "Pulmonary artery", "start"],
+   [640, 352, "Pulmonary veins", "middle"], [564, 604, "Descending aorta", "start"], [528, 370, "mitral", "start"], [334, 338, "aortic valve", "end"]].forEach((a) => lab(...a));
+  // placed in plate coordinates, in measured free space next to their structures
+  K.label(340, 239, "Aorta", "end"); K.label(466, 247, "pulmonary", "start"); K.label(466, 258, "valve", "start");
+  { const a = P([338, 333]), v = mid(AOR.A, AOR.B); el("path", { d: `M${f1(a[0])} ${f1(a[1])}L${f1(v[0] - 4)} ${f1(v[1] + 6)}`, stroke: "var(--muted)", "stroke-width": 0.7 }, L.top); }
+  K.label(300, 396, "tricuspid", "middle"); el("path", { d: "M301 386L305 362", stroke: "var(--muted)", "stroke-width": 0.7 }, L.top);
+  const TAGPOS = { RA: [256, 298], RV: [324, 470], LA: [492, 300], LV: [484, 470] }, tags = {};
+  for (const k in TAGPOS) { const p = P(TAGPOS[k]); tags[k] = K.tag(p[0], p[1], k); }
+
+  // ---------------- blood: each segment moves at its own model flow; chamber segments ride the deforming chambers ----------------
+  let DEF = {};
+  const q = (id, f = 1) => (i, s) => s.q[id] * f, qmax = (a, b) => (i, s) => Math.max(s.q[a], s.q[b]);
+  const gate = (id) => (i) => OPEN[id][i];
+  const warp = (ch) => (p) => (DEF[ch] ? DEF[ch](p) : p);
+  const triM = mid(...TRI), mitM = mid(...MIT);
+  const seg = (pts, rate, w, tone, layer, extra = {}) => ({ pts, rate, w: R(w), tone, layer, ...extra });
+  const SEGS = {
+    svc: seg(SVC, q("cava", 0.9), 8, 0, L.pmid), ivc: seg(IVC, q("cava", 0.9), 9, 0, L.pback),
+    raS: seg(mp([[250, 254], [262, 290], [280, 334]]).concat([triM]), qmax("cava", "tricuspid"), 20, 0, L.pmid, { warp: warp("RA"), gate: gate("tricuspid") }),
+    raI: seg(mp([[222, 364], [246, 366]]).concat([triM]), qmax("cava", "tricuspid"), 8, 0, L.pmid, { warp: warp("RA"), gate: gate("tricuspid") }),
+    rv: seg([triM].concat(mp([[296, 432], [322, 490], [366, 524], [376, 486]]), [RVOT.c[0]]), qmax("tricuspid", "pulmonic"), 15, 0, L.pmid, { warp: warp("RV") }),
+    rvot: seg(RVOT.c, (i, s) => Math.max(s.q.pulmonic, 0.3 * s.q.tricuspid), 10, 0, L.pfront, { gate: gate("pulmonary") }),
+    trunk: seg(TRUNK, q("pulmonic"), 9, 0, L.pfront), lpa: seg(LPA, q("pulmonary", 0.5), 7, 0, L.pfront), rpa: seg(RPA, q("pulmonary", 0.5), 7, 0, L.pback),
+    lungL1: seg(mp([[592, 240], [636, 232], [672, 262], [644, 280], [614, 282]]), q("pulmonary", 0.5), 13, "up", L.pmid),
+    lungL2: seg(mp([[592, 240], [656, 300], [676, 362], [646, 334], [614, 318]]), q("pulmonary", 0.5), 13, "up", L.pmid),
+    lungR1: seg(mp([[182, 236], [120, 222], [70, 252], [112, 278], [154, 282]]), q("pulmonary", 0.5), 13, "up", L.pmid),
+    lungR2: seg(mp([[182, 236], [90, 302], [66, 382], [118, 352], [154, 318]]), q("pulmonary", 0.5), 13, "up", L.pmid),
+    lpv1: seg(LPV[0], q("pveins", 0.5), 4.5, 1, L.pmid), lpv2: seg(LPV[1], q("pveins", 0.5), 4.5, 1, L.pmid),
+    rpv1: seg(RPV[0], q("pveins", 0.5), 4.5, 1, L.pback), rpv2: seg(RPV[1], q("pveins", 0.5), 4.5, 1, L.pback),
+    laR1: seg(mp([[540, 286], [508, 298]]).concat([mitM]), qmax("pveins", "mitral"), 13, 1, L.pmid, { warp: warp("LA"), gate: gate("mitral") }),
+    laR2: seg(mp([[538, 318], [512, 330]]).concat([mitM]), qmax("pveins", "mitral"), 10, 1, L.pmid, { warp: warp("LA"), gate: gate("mitral") }),
+    laL1: seg(mp([[452, 292], [470, 310]]).concat([mitM]), qmax("pveins", "mitral"), 11, 1, L.pmid, { warp: warp("LA"), gate: gate("mitral") }),
+    laL2: seg(mp([[452, 320], [468, 334]]).concat([mitM]), qmax("pveins", "mitral"), 9, 1, L.pmid, { warp: warp("LA"), gate: gate("mitral") }),
+    lv: seg([mitM].concat(mp([[498, 430], [490, 530], [466, 496]]), [LVOT.c[0]]), qmax("mitral", "aortic"), 17, 1, L.pmid, { warp: warp("LV") }),
+    lvot: seg(LVOT.c, (i, s) => Math.max(s.q.aortic, 0.3 * s.q.mitral), 9, 1, L.pmid, { gate: gate("aortic") }),
+    asc: seg(AO_ASC.slice(0, 5), q("aortic"), 10, 1, L.pmid),
+    arch2: seg(mp([[372, 162], [410, 142], [446, 137]]), (i, s) => 0.5 * (s.q.aortic + s.q.systemic), 10, 1, L.pmid),
+    arch3: seg(mp([[372, 162], [410, 142], [460, 136], [492, 142]]), (i, s) => 0.5 * (s.q.aortic + s.q.systemic), 10, 1, L.pmid),
+    arch4: seg(AO_ASC.slice(4, 10), (i, s) => 0.5 * (s.q.aortic + s.q.systemic), 10, 1, L.pmid),
+    desc: seg(mp([[538, 214], [538, 280], [538, 420], [538, 560], [538, 634]]), q("systemic", 0.7), 9, 1, L.pback),
+    br1: seg([P([372, 162])].concat(BRANCH[0].slice(1)), q("systemic", 0.6), 4, 1, L.pmid), br2: seg(BRANCH[1], q("systemic", 0.6), 4, 1, L.pmid), br3: seg(BRANCH[2], q("systemic", 0.6), 4, 1, L.pmid),
+    headA: seg(mp([[378, 50], [330, 38], [280, 40], [246, 46]]), q("systemic", 0.6), 9, "down", L.pmid),
+    headB: seg(mp([[450, 50], [380, 34], [300, 40], [246, 46]]), q("systemic", 0.6), 9, "down", L.pmid),
+    headC: seg(mp([[522, 50], [450, 36], [330, 42], [246, 46]]), q("systemic", 0.6), 9, "down", L.pmid),
+    legs: seg(mp([[538, 634], [480, 662], [360, 650], [250, 662], [212, 650]]), q("systemic", 0.7), 9, "down", L.pmid),
+  };
+  // rate is in model units (mL/s); K.flows moves rate × dBeat × speed px, so speed = T × 1.35 × scale gives the hand-built pace
+  for (const id in SEGS) { const r = SEGS[id].rate; SEGS[id].rate = (i, s) => r(i, s) * 1.35 * SC; }
+  const after = ["ivc", "raI", "rv", "rvot", "trunk"];
+  const flows = K.flows(SEGS, [
+    ["lv", "lvot", "asc", "br1", "headA", "svc", "raS", "rv", "rvot", "trunk", "rpa", "lungR1", "rpv1", "laL1"],
+    ["lv", "lvot", "asc", "arch2", "br2", "headB", "svc", "raS", "rv", "rvot", "trunk", "lpa", "lungL1", "lpv1", "laR1"],
+    ["lv", "lvot", "asc", "arch3", "br3", "headC", "svc", "raS", "rv", "rvot", "trunk", "lpa", "lungL2", "lpv2", "laR2"],
+    ["lv", "lvot", "asc", "arch4", "desc", "legs", ...after, "rpa", "lungR2", "rpv2", "laL2"],
+    ["lv", "lvot", "asc", "arch4", "desc", "legs", ...after, "lpa", "lungL2", "lpv2", "laR2"],
+  ], { spacing: 12, r: 2.3, speed: T });
+
+
+  // =================== LENSES: seven magnified views, each driven by the same sample s and frame index i as the heart ===================
+  const DT = T / N, TX_ = K.text, rgn = (x, y, w, h) => { const a = P([x, y]); return [f1(a[0]), f1(a[1]), f1(R(w)), f1(R(h))]; };
+  const PK = { LV: "LVP", SA: "AoP", LA: "LAP", RV: "RVP", PA: "PAP", RA: "RAP" }, pr = (s, k) => s.readouts[PK[k]], vl = (s, k) => s.readouts[k + "V"];
+  const LVVs = S.map((s) => s.readouts.LVV), RVVs = S.map((s) => s.readouts.RVV), EDV = Math.max(...LVVs), ESV = Math.min(...LVVs), RVmax = Math.max(...RVVs), RVmin = Math.min(...RVVs);
+  const SVOL = EDV - ESV, EF = SVOL / EDV;
+  const edge = (q, opening) => { for (let k = 0; k < N; k++) { const a = S[(k + N - 1) % N].q[q] > 0.01, b = S[k].q[q] > 0.01; if (opening ? (!a && b) : (a && !b)) return k; } return 0; };
+  const EVT = { MVO: edge("mitral", true), MVC: edge("mitral", false), AVO: edge("aortic", true), AVC: edge("aortic", false) };
+  const SND = [{ k: EVT.MVC, s: "S1" }, { k: EVT.AVC, s: "S2" }];
+  const sndAmp = {}; for (const ev of SND) { const a = new Float32Array(N); for (let j = 0; j < 70; j++) a[(ev.k + j) % N] = 1 - j / 70; sndAmp[ev.s] = a; }
+  let lseed = 23; const rnd = () => ((lseed = (lseed * 16807) % 2147483647) / 2147483647);
+  const qpt = (a, c, b, t) => { const m = 1 - t; return [m * m * a[0] + 2 * m * t * c[0] + t * t * b[0], m * m * a[1] + 2 * m * t * c[1] + t * t * b[1]]; };
+  const cpt = (a, c1, c2, b, t) => { const m = 1 - t; return [m * m * m * a[0] + 3 * m * m * t * c1[0] + 3 * m * t * t * c2[0] + t * t * t * b[0], m * m * m * a[1] + 3 * m * m * t * c1[1] + 3 * m * t * t * c2[1] + t * t * t * b[1]]; };
+  const smooth = (x) => { x = K.clamp(x, 0, 1); return x * x * (3 - 2 * x); };
+  const lerp = K.lerp;
+
+  // ---- overlays on the main heart that belong to a lens (shown only while that lens is open)
+  const OV = el("g", { "pointer-events": "none", opacity: 0 }, L.top), condG = el("g", {}, OV);
+  const CP = [
+    { pts: [[262, 262], [292, 300], [312, 340], [328, 372]], ts: [0, 0.014, 0.028, 0.04], fade: [0.14, 0.24] },
+    { pts: [[262, 258], [340, 248], [420, 262], [482, 292]], ts: [0, 0.02, 0.04, 0.062], fade: [0.14, 0.24] },
+    { pts: [[328, 372], [384, 398], [404, 420]], ts: [0.10, 0.106, 0.11], fade: [0.30, 0.42] },
+    { pts: [[404, 420], [424, 470], [440, 530], [464, 588], [520, 560], [536, 480]], ts: [0.11, 0.113, 0.117, 0.121, 0.128, 0.136], fade: [0.30, 0.42] },
+    { pts: [[404, 420], [400, 470], [394, 530], [378, 562], [330, 542], [284, 500]], ts: [0.11, 0.113, 0.117, 0.121, 0.128, 0.136], fade: [0.30, 0.42] },
+  ].map((c) => ({ ...c, pts: mp(c.pts) }));
+  for (const c of CP) { const d = "M" + c.pts.map((p) => f1(p[0]) + " " + f1(p[1])).join("L");
+    el("path", { d, fill: "none", stroke: "var(--sheet)", "stroke-width": 5.5, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: 0.6 }, condG);
+    el("path", { d, fill: "none", stroke: "var(--spark)", "stroke-width": 1.5, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: 0.45 }, condG);
+    c.glow = el("path", { fill: "none", stroke: "var(--spark)", "stroke-width": 6.5, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: 0.3 }, condG);
+    c.lit = el("path", { fill: "none", stroke: "var(--spark)", "stroke-width": 2.8, "stroke-linecap": "round", "stroke-linejoin": "round" }, condG);
+    c.head = el("circle", { r: 4.2, fill: "var(--sheet)", stroke: "var(--spark)", "stroke-width": 2.3 }, condG); }
+  const saN = P([262, 260]), avN = P([328, 372]);
+  const saNode = el("circle", { cx: f1(saN[0]), cy: f1(saN[1]), r: 6.5, fill: "var(--spark)", stroke: "var(--sheet)", "stroke-width": 1.5 }, condG);
+  el("circle", { cx: f1(avN[0]), cy: f1(avN[1]), r: 6, fill: "var(--spark)", stroke: "var(--sheet)", "stroke-width": 1.5 }, condG);
+  const avRing = el("circle", { cx: f1(avN[0]), cy: f1(avN[1]), r: 9, fill: "none", stroke: "var(--spark)", "stroke-width": 1.5 }, condG);
+  for (const [x, y, t, a] of [[248, 246, "SA node", "end"], [318, 392, "AV node", "end"], [412, 412, "Bundle of His", "start"], [452, 612, "Purkinje fibres", "end"]]) { const p = P([x, y]); TX_(condG, p[0], p[1], t, "tag halo", a); }
+  function conduction(u) {
+    for (const c of CP) { const pts = c.pts, ts = c.ts; const lit = []; let head = null;
+      if (u >= ts[0]) { lit.push(pts[0]); for (let k = 1; k < pts.length; k++) { if (u >= ts[k]) lit.push(pts[k]); else { const f = (u - ts[k - 1]) / (ts[k] - ts[k - 1]); head = [lerp(pts[k - 1][0], pts[k][0], f), lerp(pts[k - 1][1], pts[k][1], f)]; lit.push(head); break; } } }
+      const fade = u < c.fade[0] ? 1 : 1 - smooth((u - c.fade[0]) / (c.fade[1] - c.fade[0])), d = lit.length > 1 ? "M" + lit.map((p) => f1(p[0]) + " " + f1(p[1])).join("L") : "";
+      c.lit.setAttribute("d", d); c.glow.setAttribute("d", d); c.lit.setAttribute("opacity", f1(fade)); c.glow.setAttribute("opacity", f1(0.3 * fade));
+      if (head) { c.head.setAttribute("cx", f1(head[0])); c.head.setAttribute("cy", f1(head[1])); c.head.setAttribute("opacity", 1); } else c.head.setAttribute("opacity", 0); }
+    saNode.setAttribute("r", f1(6.5 + (u < 0.03 ? 4 * (1 - u / 0.03) : 0))); const hold = u > 0.04 && u < 0.10; avRing.setAttribute("opacity", hold ? 0.9 : 0); avRing.setAttribute("r", f1(9 + (hold ? 3.5 * Math.sin((u - 0.04) * 120) ** 2 : 0))); }
+  const sliceG = el("g", { opacity: 0 }, L.top); { const c = P([410, 500]);
+    el("ellipse", { cx: f1(c[0]), cy: f1(c[1]), rx: f1(R(178)), ry: f1(R(30)), transform: `rotate(-18.6 ${f1(c[0])} ${f1(c[1])})`, fill: "var(--accent)", "fill-opacity": 0.12, stroke: "var(--accent)", "stroke-width": 1.8, "stroke-dasharray": "7 5" }, sliceG);
+    const q = P([236, 566]); TX_(sliceG, q[0], q[1], "cut plane", "tag halo", "start", { style: "fill:var(--accent)" }); }
+  let condOn = false;
+
+  // 1 · inside two heart cells: action potentials and the ECG they sum to
+  K.lens("ap", { focus: rgn(214, 238, 130, 150), toggle: (on) => { condOn = on; OV.setAttribute("opacity", on ? 1 : 0); },
+    build(g) { const X = (u) => 50 + 332 * u / T, ySA = (v) => 118 - (v + 70) / 90 * 80, yV = (v) => 262 - (v + 95) / 125 * 92, yE = (v) => 360 - v * 30;
+      TX_(g, 16, 22, "SA node cell · the pacemaker", "lh"); TX_(g, 16, 160, "Ventricular muscle cell", "lh"); TX_(g, 16, 306, "ECG · the sum of every cell", "lh");
+      for (const [y, t] of [[ySA(0), "0"], [ySA(-60), "−60"], [yV(0), "0"], [yV(-90), "−90"]]) { el("line", { x1: 50, x2: 382, y1: f1(y), y2: f1(y), stroke: "var(--hair)" }, g); TX_(g, 44, y + 4, t, "lm", "end"); }
+      el("line", { x1: 50, x2: 382, y1: f1(ySA(-40)), y2: f1(ySA(-40)), stroke: "var(--spark)", "stroke-dasharray": "4 4" }, g); TX_(g, 380, ySA(-40) - 5, "threshold", "lm", "end");
+      let a = "", b = "", c = ""; S.forEach((s, k) => { const x = f1(X(k * DT)); a += (k ? "L" : "M") + x + " " + f1(ySA(s.readouts.vmSA)); b += (k ? "L" : "M") + x + " " + f1(yV(s.readouts.vmV)); c += (k ? "L" : "M") + x + " " + f1(yE(s.readouts.ecg)); });
+      el("path", { d: a, fill: "none", stroke: "var(--spark)", "stroke-width": 2.4 }, g); el("path", { d: b, fill: "none", stroke: "var(--hot)", "stroke-width": 2.4 }, g); el("path", { d: c, fill: "none", stroke: "var(--ink)", "stroke-width": 1.6 }, g);
+      el("path", { d: `M${f1(X(0.07))} 372v6H${f1(X(0.098))}v-6`, fill: "none", stroke: "var(--accent)", "stroke-width": 1.4 }, g); TX_(g, X(0.084), 394, "PR · AV delay", "lm");
+      for (const [u, t] of [[0.05, "P"], [0.104, "QRS"], [0.36, "T"]]) { const k = Math.round(u / DT); TX_(g, X(u), yE(S[k].readouts.ecg) - 8, t, "lm", "middle"); }
+      const cur = el("line", { y1: 30, y2: 380, stroke: "var(--accent)", "stroke-width": 1.5 }, g);
+      const d1 = el("circle", { r: 4.5, fill: "var(--spark)", stroke: "var(--sheet)", "stroke-width": 1.5 }, g), d2 = el("circle", { r: 4.5, fill: "var(--hot)", stroke: "var(--sheet)", "stroke-width": 1.5 }, g);
+      const t1 = TX_(g, 50, 140, "", "lm halo"), t2 = TX_(g, 50, 284, "", "lm halo");
+      const ionSA = (u) => u < 0.03 ? "Phase 0 · Ca²⁺ rushes in → fires" : u < 0.17 ? "Phase 3 · K⁺ leaves → resets" : "Phase 4 · 'funny' Na⁺ leak drifts up";
+      const ionV = (u) => u < 0.10 ? "Phase 4 · resting, K⁺ holds −88 mV" : u < 0.106 ? "Phase 0 · fast Na⁺ channels open" : u < 0.12 ? "Phase 1 · brief K⁺ out (notch)" : u < 0.30 ? "Phase 2 · plateau: Ca²⁺ in ≈ K⁺ out" : u < 0.40 ? "Phase 3 · K⁺ out → repolarising" : "Phase 4 · resting, K⁺ holds −88 mV";
+      return (i, s) => { const u = i * DT, x = f1(X(u)); cur.setAttribute("x1", x); cur.setAttribute("x2", x);
+        d1.setAttribute("cx", x); d1.setAttribute("cy", f1(ySA(s.readouts.vmSA))); d2.setAttribute("cx", x); d2.setAttribute("cy", f1(yV(s.readouts.vmV)));
+        t1.textContent = ionSA(u); t2.textContent = ionV(u); if (condOn) conduction(u); }; } });
+
+  // 2 · the surgeon's view of the mitral valve, looking down from the left atrium
+  K.lens("mitral", { focus: rgn(444, 318, 82, 72),
+    build(g) { const Lp = [72, 205], Rp = [328, 205], A1 = [95, 112], A2 = [305, 112], B1 = [330, 330], B2 = [70, 330], P2 = (p) => f1(p[0]) + " " + f1(p[1]);
+      el("rect", { x: 0, y: 0, width: 400, height: 400, fill: "var(--hot-lumen)" }, g);
+      el("circle", { cx: 200, cy: 46, r: 30, fill: "var(--hot)", stroke: "var(--wall-deep)", "stroke-width": 3 }, g);
+      for (const a of [-90, 30, 150]) el("line", { x1: 200, y1: 46, x2: f1(200 + 29 * Math.cos(a * Math.PI / 180)), y2: f1(46 + 29 * Math.sin(a * Math.PI / 180)), stroke: "var(--leaflet)", "stroke-width": 2 }, g);
+      TX_(g, 238, 40, "aortic valve", "ls halo"); TX_(g, 238, 56, "(fibrous continuity)", "lm halo");
+      const orifice = el("path", { fill: "var(--hot)" }, g), chords = el("path", { fill: "none", stroke: "var(--leaflet-edge)", "stroke-width": 1.3 }, g);
+      const pms = [0, 1].map(() => el("ellipse", { rx: 10, ry: 6, fill: "var(--wall)", stroke: "var(--wall-deep)" }, g));
+      const ant = el("path", { fill: "var(--leaflet)", stroke: "var(--leaflet-edge)", "stroke-width": 1.8, "stroke-linejoin": "round" }, g), post = el("path", { fill: "var(--leaflet)", stroke: "var(--leaflet-edge)", "stroke-width": 1.8, "stroke-linejoin": "round" }, g);
+      const cleft = el("path", { fill: "none", stroke: "var(--leaflet-edge)", "stroke-width": 1.1 }, g);
+      const annD = `M${P2(Lp)}C${P2(A1)} ${P2(A2)} ${P2(Rp)}C${P2(B1)} ${P2(B2)} ${P2(Lp)}Z`;
+      el("path", { d: annD, fill: "none", stroke: "var(--fat)", "stroke-width": 8 }, g); el("path", { d: annD, fill: "none", stroke: "var(--wall-deep)", "stroke-width": 1.4 }, g);
+      const dots = Array.from({ length: 28 }, () => ({ a: rnd() * 6.283, r: 0.3 + rnd() * 0.7, e: el("circle", { fill: "var(--hot-hi)", opacity: 0.75 }, g) }));
+      const aLab = TX_(g, 200, 0, "Anterior leaflet", "ls", "middle", { style: "fill:var(--leaflet-edge)" }); TX_(g, 200, 316, "Posterior leaflet", "ls halo", "middle");
+      const sc = ["P1", "P2", "P3"].map((p) => TX_(g, 0, 0, p, "lm", "middle", { style: "fill:var(--leaflet-edge)" }));
+      TX_(g, 38, 200, "AL", "lm halo", "middle"); TX_(g, 38, 214, "comm.", "lm halo", "middle"); TX_(g, 362, 200, "PM", "lm halo", "middle"); TX_(g, 362, 214, "comm.", "lm halo", "middle");
+      const status = TX_(g, 200, 376, "", "lm halo", "middle");
+      return (i, s, d) => { const o = OPEN.mitral[i], aY = lerp(258, 140, o), pY = lerp(258, 318, o), Ca = [200, aY], Cp = [200, pY];
+        orifice.setAttribute("d", `M${P2(Lp)}Q${P2(Ca)} ${P2(Rp)}Q${P2(Cp)} ${P2(Lp)}Z`);
+        ant.setAttribute("d", `M${P2(Lp)}C${P2(A1)} ${P2(A2)} ${P2(Rp)}Q${P2(Ca)} ${P2(Lp)}Z`); post.setAttribute("d", `M${P2(Lp)}Q${P2(Cp)} ${P2(Rp)}C${P2(B1)} ${P2(B2)} ${P2(Lp)}Z`);
+        let cl = ""; for (const t of [1 / 3, 2 / 3]) { const e = qpt(Lp, Cp, Rp, t), b = cpt(Rp, B1, B2, Lp, 1 - t); cl += `M${P2(e)}L${P2(b)}`; } cleft.setAttribute("d", cl);
+        const tips = [0.3, 0.7].map((t, k) => [k ? 250 : 150, (qpt(Lp, Ca, Rp, t)[1] + qpt(Lp, Cp, Rp, t)[1]) / 2]);
+        let cd = ""; for (const t of [0.15, 0.3, 0.45, 0.55, 0.7, 0.85]) { const tip = tips[t < 0.5 ? 0 : 1]; cd += `M${P2(qpt(Lp, Ca, Rp, t))}L${P2(tip)}M${P2(qpt(Lp, Cp, Rp, t))}L${P2(tip)}`; }
+        chords.setAttribute("d", cd); chords.setAttribute("opacity", f1(o)); pms.forEach((p, k) => { p.setAttribute("cx", f1(tips[k][0])); p.setAttribute("cy", f1(tips[k][1])); p.setAttribute("opacity", f1(o)); });
+        aLab.setAttribute("y", f1(lerp(178, 136, o)));
+        [1 / 6, 0.5, 5 / 6].forEach((t, k) => { const e = qpt(Lp, Cp, Rp, t), b = cpt(Rp, B1, B2, Lp, 1 - t); sc[k].setAttribute("x", f1((e[0] + b[0]) / 2)); sc[k].setAttribute("y", f1((e[1] + b[1]) / 2 + 4)); });
+        const q = s.q.mitral, dS = d * T;
+        for (const p of dots) { p.r -= q * dS * 0.035; if (p.r < 0.06) { p.r = 1; p.a = rnd() * 6.283; } p.e.setAttribute("cx", f1(200 + Math.cos(p.a) * 150 * p.r)); p.e.setAttribute("cy", f1(222 + Math.sin(p.a) * 100 * p.r)); p.e.setAttribute("r", f1(1.4 + 2.6 * p.r)); p.e.setAttribute("opacity", f1(o > 0.05 ? 0.75 : 0)); }
+        const la = pr(s, "LA"), lv = pr(s, "LV"); status.textContent = `LA ${la.toFixed(1)} ${la > lv ? ">" : "<"} LV ${lv.toFixed(1)} mmHg · ${q > 0.01 ? "OPEN · " + Math.round(q) + " mL/s" : "SHUT"}`; }; } });
+
+  // 3 · one sarcomere in the LV wall: Ca²⁺, cross-bridges, length and tension
+  K.lens("sarcomere", { focus: rgn(506, 440, 46, 64),
+    build(g) { el("rect", { x: 14, y: 34, width: 372, height: 26, rx: 13, fill: "var(--bed)", stroke: "var(--hair)" }, g); TX_(g, 200, 52, "sarcoplasmic reticulum · the Ca²⁺ store", "lm", "middle");
+      el("rect", { x: 0, y: 108, width: 400, height: 176, fill: "var(--wall-hi)", opacity: 0.25 }, g);
+      const ca = Array.from({ length: 46 }, () => el("circle", { cx: f1(18 + rnd() * 364), cy: f1(66 + rnd() * 214), r: 2.6, fill: "var(--ca)", stroke: "var(--sheet)", "stroke-width": 0.8 }, g));
+      const thin = el("path", { "data-bleed": 1, fill: "none", stroke: "var(--cold)", "stroke-width": 2.6, "stroke-dasharray": "3.2 1.6" }, g), heads = el("path", { "data-bleed": 1, fill: "none", stroke: "var(--hot)", "stroke-width": 1.8, "stroke-linecap": "round" }, g);
+      const bound = el("path", { "data-bleed": 1, fill: "none", stroke: "var(--hot)", "stroke-width": 2.2, "stroke-linecap": "round" }, g), thick = el("path", { "data-bleed": 1, fill: "none", stroke: "var(--hot)", "stroke-width": 6.5, "stroke-linecap": "round" }, g);
+      const zs = el("path", { "data-bleed": 1, fill: "none", stroke: "var(--ink)", "stroke-width": 2.4, "stroke-linejoin": "round" }, g);
+      el("line", { x1: 200, x2: 200, y1: 116, y2: 276, stroke: "var(--muted)", "stroke-width": 1, "stroke-dasharray": "2 3" }, g);
+      const zl = TX_(g, 0, 102, "Z-disc", "lm", "middle"), zr = TX_(g, 0, 102, "Z-disc", "lm", "middle"); TX_(g, 200, 102, "M-line", "lm", "middle");
+      const dim = el("path", { fill: "none", stroke: "var(--accent)", "stroke-width": 1.4 }, g), dimT = TX_(g, 200, 310, "", "lm halo", "middle");
+      TX_(g, 16, 334, "Tension", "ls"); TX_(g, 16, 360, "[Ca²⁺] inside", "ls");
+      el("rect", { x: 118, y: 324, width: 266, height: 12, rx: 6, fill: "var(--ground)", stroke: "var(--hair)" }, g); el("rect", { x: 118, y: 350, width: 266, height: 12, rx: 6, fill: "var(--ground)", stroke: "var(--hair)" }, g);
+      const barT = el("rect", { x: 118, y: 324, height: 12, rx: 6, fill: "var(--hot)" }, g), barC = el("rect", { x: 118, y: 350, height: 12, rx: 6, fill: "var(--ca)" }, g);
+      const st = TX_(g, 200, 388, "", "lm halo", "middle"), rowsThin = [128, 160, 192, 224, 256], rowsThick = [144, 176, 208, 240, 272];
+      let beat = 0;   // accumulated cycle time: cross-bridges cycle asynchronously while Ca²⁺ is up
+      return (i, s, d) => { const V = s.readouts.LVV, SL = 1.8 + 0.45 * (V - ESV) / (EDV - ESV), Kp = 138, w = SL * Kp, zL = 200 - w / 2, zR = 200 + w / 2;
+        const ac = s.readouts.actV, cav = s.readouts.ca, tension = ac * (0.62 + 0.38 * (SL - 1.8) / 0.45); beat += d * T;
+        let tn = "", th = "", hd = "", bd = "", zz = "";
+        for (const zx of [zL - w, zL, zR, zR + w]) { let p = `M${f1(zx)} 112`; for (let y = 112, k = 0; y <= 280; y += 12, k++) p += `L${f1(zx + (k % 2 ? 4 : -4))} ${y}`; zz += p; }
+        for (const y of rowsThin) for (const zx of [zL - w, zL, zR, zR + w]) tn += `M${f1(zx - Kp)} ${y}H${f1(zx + Kp)}`;
+        for (const cx of [200 - w, 200, 200 + w]) for (const y of rowsThick) { th += `M${f1(cx - Kp * 0.8)} ${y}H${f1(cx + Kp * 0.8)}`;
+          for (let x = cx - Kp * 0.78; x <= cx + Kp * 0.78; x += 11) { if (Math.abs(x - cx) < 18) continue; const dir = x < cx ? -1 : 1, nearZ = x < cx ? cx - w / 2 : cx + w / 2, inThin = Math.abs(x - nearZ) < Kp;
+            for (const sy of [-1, 1]) { const ph = Math.sin(beat * 38 + x * 0.7 + y + sy), att = inThin && cav > 0.12 && ph > -0.2;
+              if (att) { const tilt = 6 * (0.5 + 0.5 * Math.sin(beat * 38 + x)); bd += `M${f1(x)} ${y + sy * 3}L${f1(x + dir * tilt)} ${y + sy * 13}`; } else hd += `M${f1(x)} ${y + sy * 3}l${f1(-dir * 4)} ${sy * 5}`; } } }
+        thin.setAttribute("d", tn); thick.setAttribute("d", th); heads.setAttribute("d", hd); bound.setAttribute("d", bd); zs.setAttribute("d", zz);
+        zl.setAttribute("x", f1(Math.max(26, zL))); zr.setAttribute("x", f1(Math.min(374, zR)));
+        dim.setAttribute("d", `M${f1(zL)} 288v8M${f1(zL)} 292H${f1(zR)}M${f1(zR)} 288v8`); dimT.textContent = `sarcomere ${SL.toFixed(2)} µm`;
+        const nCa = Math.round(cav * ca.length + 4); ca.forEach((c, k) => c.setAttribute("opacity", k < nCa ? 1 : 0));
+        barT.setAttribute("width", f1(Math.max(12, 266 * tension))); barC.setAttribute("width", f1(Math.max(12, 266 * (0.08 + 0.92 * cav))));
+        const ph = s.phase; st.textContent = ph === "Isovolumetric contraction" ? "both valves shut → length fixed, tension climbing" : ph === "Ventricular ejection" ? "aortic valve open → fibres shorten as they pull" : ph === "Isovolumetric relaxation" ? "Ca²⁺ pumped back (SERCA) → tension falls, length fixed" : ph === "Atrial systole" ? "atrial kick stretches the fibres a little more" : "relaxed fibres are stretched as the LV fills"; }; } });
+
+  // 4 · looking down the aorta at the aortic valve
+  K.lens("aortic", { focus: rgn(334, 274, 56, 56),
+    build(g) { const C = [200, 192], Rr = 116, rad = (a) => a * Math.PI / 180, at = (a, r) => [C[0] + Math.cos(rad(a)) * r, C[1] + Math.sin(rad(a)) * r], P2 = (p) => f1(p[0]) + " " + f1(p[1]);
+      const COM = [-90, 30, 150], SIN = [-30, 90, 210], root = []; for (let k = 0; k < 3; k++) { root.push(at(COM[k], Rr)); root.push(at(SIN[k], Rr * 1.16)); }
+      const rootD = K.spline(root, true); el("path", { d: rootD, fill: "var(--hot-lumen)" }, g); el("circle", { cx: C[0], cy: C[1], r: f1(Rr * 0.98), fill: "var(--hot)" }, g);
+      const cusps = [0, 1, 2].map(() => el("path", { fill: "var(--leaflet)", stroke: "var(--leaflet-edge)", "stroke-width": 1.8, "stroke-linejoin": "round" }, g));
+      const nod = [0, 1, 2].map(() => el("circle", { r: 3, fill: "var(--leaflet-edge)", opacity: 0.6 }, g));
+      el("path", { d: rootD, fill: "none", stroke: "var(--wall-deep)", "stroke-width": 5 }, g);
+      const ost = [SIN[0], SIN[1]].map((a) => { const p = at(a, Rr * 1.02); return { ring: el("circle", { cx: f1(p[0]), cy: f1(p[1]), r: 9, fill: "none", stroke: "var(--hot-hi)", "stroke-width": 2 }, g), hole: el("circle", { cx: f1(p[0]), cy: f1(p[1]), r: 7, fill: "var(--hot)", stroke: "var(--wall-deep)", "stroke-width": 2 }, g) }; });
+      const dots = Array.from({ length: 36 }, () => ({ a: rnd() * 6.283, r: Math.sqrt(rnd()), z: rnd(), e: el("circle", { fill: "var(--hot-hi)" }, g) }));
+      for (const [a, l1, l2] of [[SIN[0], "Left", "coronary cusp"], [SIN[1], "Right", "coronary cusp"], [SIN[2], "Non-", "coronary cusp"]]) { const p = at(a, Rr * (a === SIN[1] ? 1.36 : 1.5)); TX_(g, p[0], p[1] - 3, l1, "ls halo", "middle"); TX_(g, p[0], p[1] + 12, l2, "lm halo", "middle"); }
+      const pL = at(SIN[0], Rr * 1.02), pR = at(SIN[1], Rr * 1.02); TX_(g, pL[0] + 12, pL[1] + 22, "LCA ostium", "lm halo"); TX_(g, pR[0] + 14, pR[1] + 4, "RCA ostium", "lm halo");
+      const status = TX_(g, 200, 388, "", "lm halo", "middle");
+      const corMax = Math.max(...S.map((s) => Math.max(0, s.readouts.AoP - 0.92 * s.readouts.LVP)));
+      return (i, s, d) => { const o = OPEN.aortic[i];
+        for (let k = 0; k < 3; k++) { const A = at(COM[k], Rr), B = at(COM[(k + 1) % 3], Rr), Sx = at(SIN[k], Rr * 1.16), Mx = K.mid(A, B), tip = at(SIN[k], Rr * 0.9);
+          const Pm = [lerp(C[0], tip[0], o * 0.62), lerp(C[1], tip[1], o * 0.62)], c1 = [2 * Sx[0] - Mx[0], 2 * Sx[1] - Mx[1]], c2 = [2 * Pm[0] - Mx[0], 2 * Pm[1] - Mx[1]];
+          cusps[k].setAttribute("d", `M${P2(A)}Q${P2(c1)} ${P2(B)}Q${P2(c2)} ${P2(A)}Z`); const nd = qpt(B, c2, A, 0.5); nod[k].setAttribute("cx", f1(nd[0])); nod[k].setAttribute("cy", f1(nd[1])); }
+        const q = s.q.aortic, open = Rr * 0.36 * o, dS = d * T;
+        for (const p of dots) { p.z += q * dS * 0.012; if (p.z > 1) { p.z -= 1; p.a = rnd() * 6.283; p.r = Math.sqrt(rnd()); } const rr = p.r * open * (0.25 + 0.75 * p.z);
+          p.e.setAttribute("cx", f1(C[0] + Math.cos(p.a) * rr)); p.e.setAttribute("cy", f1(C[1] + Math.sin(p.a) * rr)); p.e.setAttribute("r", f1(1 + 4 * p.z)); p.e.setAttribute("opacity", f1(o > 0.05 ? (1 - p.z) * 0.9 : 0)); }
+        const cf = Math.max(0, s.readouts.AoP - 0.92 * s.readouts.LVP) / corMax; for (const o2 of ost) { o2.ring.setAttribute("r", f1(9 + 9 * cf)); o2.ring.setAttribute("opacity", f1(0.15 + 0.75 * cf)); }
+        const lv = pr(s, "LV"), sa = pr(s, "SA"); status.textContent = `LV ${lv.toFixed(0)} ${lv > sa ? ">" : "<"} aorta ${sa.toFixed(0)} mmHg · ${q > 0.01 ? "OPEN · " + Math.round(q) + " mL/s" : "SHUT"}`; }; } });
+
+  // 5 · short-axis slice across both ventricles (the cut plane is drawn on the heart while this lens is open)
+  K.lens("shortaxis", { focus: rgn(244, 452, 334, 100), toggle: (on) => sliceG.setAttribute("opacity", on ? 1 : 0),
+    build(g) { const C = [236, 180], Aw = 128 * 128 - 82 * 82;
+      const rvW = el("circle", { fill: "var(--wall)", stroke: "var(--wall-deep)", "stroke-width": 1.5 }, g), rvC = el("circle", { fill: "var(--cold-lumen)" }, g);
+      const lvW = el("circle", { cx: C[0], cy: C[1], fill: "url(#kTissue)", stroke: "var(--wall-deep)", "stroke-width": 1.5 }, g), lvC = el("circle", { cx: C[0], cy: C[1], fill: "var(--hot-lumen)", stroke: "var(--wall-deep)", "stroke-width": 1.2 }, g);
+      const ghost = el("circle", { cx: C[0], cy: C[1], fill: "none", stroke: "var(--ink)", "stroke-width": 1, "stroke-dasharray": "4 4", opacity: 0.5 }, g);
+      const pm = [0, 1].map(() => el("ellipse", { fill: "var(--wall)", stroke: "var(--wall-deep)" }, g)), dimL = el("path", { fill: "none", stroke: "var(--accent)", "stroke-width": 1.8 }, g);
+      const lvT = TX_(g, C[0], C[1], "LV", "big halo", "middle"), rvT = TX_(g, 0, 0, "RV", "lh halo", "middle"), sep = TX_(g, 0, 0, "septum", "lm halo", "middle"), pmT = TX_(g, C[0], 0, "papillary muscles", "lm halo", "middle");
+      TX_(g, 16, 22, "Seen from the apex, looking toward the base", "lm");
+      const t1 = TX_(g, 16, 346, "", "ls"), t2 = TX_(g, 16, 366, "", "ls"); TX_(g, 16, 388, "dashed ring = cavity size at end-diastole", "lm");
+      const ri = (V) => 82 * Math.pow(V / 128, 0.6), RiED = ri(EDV), wED = Math.sqrt(RiED * RiED + Aw) - RiED; ghost.setAttribute("r", f1(RiED));
+      return (i, s) => { const Ri = ri(s.readouts.LVV), Ro = Math.sqrt(Ri * Ri + Aw), tk = 16 + 40 * (s.readouts.RVV - RVmin) / (RVmax - RVmin), dx = (tk + 12) / 2, Rc = Ro + dx - 12, cx = C[0] - dx;
+        rvW.setAttribute("cx", f1(cx - 3.5)); rvW.setAttribute("cy", C[1]); rvW.setAttribute("r", f1(Rc + 7)); rvC.setAttribute("cx", f1(cx)); rvC.setAttribute("cy", C[1]); rvC.setAttribute("r", f1(Rc));
+        lvW.setAttribute("r", f1(Ro)); lvC.setAttribute("r", f1(Ri));
+        pm.forEach((p, k) => { const a = (k ? 128 : 52) * Math.PI / 180; p.setAttribute("cx", f1(C[0] + Math.cos(a) * (Ri - 7))); p.setAttribute("cy", f1(C[1] + Math.sin(a) * (Ri - 7))); p.setAttribute("rx", f1(Ri * 0.2)); p.setAttribute("ry", f1(Ri * 0.15)); });
+        pmT.setAttribute("y", f1(C[1] + (Ri - 7) * 0.79 - Ri * 0.2 - 6)); lvT.setAttribute("y", f1(C[1] - Ri * 0.12));
+        rvT.setAttribute("x", f1(C[0] - Ro - tk / 2 - 1)); rvT.setAttribute("y", f1(C[1] + 5)); sep.setAttribute("x", f1(C[0] - Ro + (Ro - Ri) / 2)); sep.setAttribute("y", f1(C[1] - Ri - 16));
+        dimL.setAttribute("d", `M${f1(C[0] + Ri)} ${C[1] - 6}v12M${f1(C[0] + Ri)} ${C[1]}H${f1(C[0] + Ro)}M${f1(C[0] + Ro)} ${C[1] - 6}v12`);
+        const wall = Ro - Ri; t1.textContent = `LV wall ${(wall * 0.21).toFixed(1)} mm  (${wall > wED ? "+" : ""}${Math.round((wall / wED - 1) * 100)}% vs relaxed)`; t2.textContent = `LV cavity ${Math.round(s.readouts.LVV)} mL · RV cavity ${Math.round(s.readouts.RVV)} mL`; }; } });
+
+  // 6 · the LV pressure–volume loop: the whole beat as one loop, valve events at the corners
+  K.lens("pv", { focus: rgn(432, 352, 104, 252),
+    build(g) { const X = (v) => 66 + (v - 40) / 100 * 312, Y = (p) => 334 - p / 130 * 290;
+      for (let v = 40; v <= 140; v += 20) { el("line", { x1: f1(X(v)), x2: f1(X(v)), y1: 44, y2: 334, stroke: "var(--hair)" }, g); TX_(g, X(v), 350, String(v), "lm", "middle"); }
+      for (let p = 0; p <= 120; p += 20) { el("line", { x1: 66, x2: 378, y1: f1(Y(p)), y2: f1(Y(p)), stroke: "var(--hair)" }, g); TX_(g, 60, Y(p) + 4, String(p), "lm", "end"); }
+      TX_(g, 378, 370, "LV volume (mL)", "lm", "end"); TX_(g, 14, 30, "LV pressure (mmHg)", "lm");
+      let d = ""; S.forEach((s, k) => { d += (k ? "L" : "M") + f1(X(s.readouts.LVV)) + " " + f1(Y(s.readouts.LVP)); });
+      el("path", { d: d + "Z", fill: "var(--accent)", "fill-opacity": 0.1, stroke: "var(--hot)", "stroke-width": 2 }, g);
+      el("path", { d: `M${f1(X(40))} ${f1(Y(2.6 * 28))}L${f1(X(62))} ${f1(Y(2.6 * 50))}`, stroke: "var(--muted)", "stroke-width": 1.4, "stroke-dasharray": "5 4", fill: "none" }, g); TX_(g, 140, 44, "ESPVR · contractility", "lm halo");
+      el("path", { d: `M${f1(X(40))} ${f1(Y(0.07 * 28))}L${f1(X(140))} ${f1(Y(0.07 * 128))}`, stroke: "var(--muted)", "stroke-width": 1.4, "stroke-dasharray": "5 4", fill: "none" }, g); TX_(g, 376, 290, "EDPVR", "lm halo", "end"); TX_(g, 376, 305, "stiffness", "lm halo", "end");
+      let area = 0; for (let k = 0; k < N; k++) { const a = S[k].readouts, b = S[(k + 1) % N].readouts; area += a.LVV * b.LVP - b.LVV * a.LVP; } area = Math.abs(area) / 2;
+      for (const [k, t, ox, oy] of [[EVT.MVC, "mitral closes", -9, 17], [EVT.AVO, "aortic opens", -9, -8], [EVT.AVC, "aortic closes", 9, -11], [EVT.MVO, "mitral opens", -9, 5]]) { const r = S[k].readouts, x = X(r.LVV), y = Y(r.LVP);
+        el("circle", { cx: f1(x), cy: f1(y), r: 4, fill: "var(--sheet)", stroke: "var(--ink)", "stroke-width": 1.6 }, g); TX_(g, x + ox, y + oy, t, "ls halo", ox < 0 ? "end" : "start"); }
+      TX_(g, X(90), Y(56), "stroke work", "ls halo", "middle"); TX_(g, X(90), Y(56) + 15, `${(area * 1.333e-4).toFixed(2)} J per beat`, "lm halo", "middle");
+      TX_(g, 378, 30, `SV ${Math.round(SVOL)} mL · EF ${Math.round(EF * 100)}%`, "lm", "end");
+      const trail = el("path", { fill: "none", stroke: "var(--accent)", "stroke-width": 5, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: 0.55 }, g);
+      const dot = el("circle", { r: 6.5, fill: "var(--accent)", stroke: "var(--sheet)", "stroke-width": 2 }, g), st = TX_(g, 200, 390, "", "lm halo", "middle");
+      return (i, s) => { let t = ""; for (let k = 40; k >= 0; k--) { const r = S[(i - k + N) % N].readouts; t += (k === 40 ? "M" : "L") + f1(X(r.LVV)) + " " + f1(Y(r.LVP)); }
+        trail.setAttribute("d", t); dot.setAttribute("cx", f1(X(s.readouts.LVV))); dot.setAttribute("cy", f1(Y(s.readouts.LVP)));
+        const ph = s.phase; st.textContent = (ph === "Ventricular ejection" ? "top edge · ejecting" : ph === "Isovolumetric contraction" ? "right edge · isovolumetric" : ph === "Isovolumetric relaxation" ? "left edge · isovolumetric" : "bottom edge · filling") + ` · ${Math.round(s.readouts.LVV)} mL, ${Math.round(s.readouts.LVP)} mmHg`; }; } });
+
+  // 7 · on the chest: where each valve's closure is heard, with the phonocardiogram of this beat
+  K.lens("chest", { focus: rgn(190, 236, 380, 396),
+    build(g) { const rib = (k) => 72 + k * 30;
+      el("path", { d: "M164 8L166 34Q120 44 62 58Q30 70 28 112L36 300M236 8L234 34Q280 44 338 58Q370 70 372 112L364 300", fill: "none", stroke: "var(--ink)", "stroke-width": 1.6 }, g);
+      el("path", { d: "M186 126C160 138 150 196 168 236C190 270 246 262 292 244C312 230 300 192 270 160C250 136 212 120 186 126Z", fill: "var(--wall)", opacity: 0.32 }, g);
+      for (let k = 1; k <= 7; k++) { const y = rib(k); el("path", { d: `M188 ${y}Q120 ${y + 2} 52 ${y + 40}`, fill: "none", stroke: "var(--hair)", "stroke-width": 7, "stroke-linecap": "round" }, g); el("path", { d: `M212 ${y}Q280 ${y + 2} 348 ${y + 40}`, fill: "none", stroke: "var(--hair)", "stroke-width": 7, "stroke-linecap": "round" }, g); }
+      el("path", { d: "M196 62Q130 46 66 62M204 62Q270 46 334 62", fill: "none", stroke: "var(--hair)", "stroke-width": 9, "stroke-linecap": "round" }, g);
+      el("rect", { x: 188, y: 62, width: 24, height: 196, rx: 8, fill: "var(--bed)", stroke: "var(--hair)" }, g);
+      TX_(g, 16, 22, "Patient facing you · their left is your right", "lm");
+      const PTS = [{ s: "S2", p: [176, rib(2) + 15], n: ["Aortic", "2nd ICS · RSE"], at: [160, rib(2) + 11], a: "end" }, { s: "S2", p: [224, rib(2) + 15], n: ["Pulmonary", "2nd ICS · LSE"], at: [240, rib(2) + 11], a: "start" },
+        { s: "S1", p: [224, rib(4) + 15], n: ["Tricuspid", "4th ICS · LLSE"], at: [240, rib(4) + 11], a: "start" }, { s: "S1", p: [292, rib(5) + 17], n: ["Mitral (apex)", "5th ICS · MCL"], at: [292, rib(5) + 46], a: "middle" }];
+      for (const q of PTS) { q.wave = el("circle", { cx: q.p[0], cy: q.p[1], r: 9, fill: "none", stroke: "var(--accent)", "stroke-width": 2 }, g); q.dot = el("circle", { cx: q.p[0], cy: q.p[1], r: 7, fill: "var(--sheet)", stroke: "var(--accent)", "stroke-width": 2.5 }, g);
+        TX_(g, q.at[0], q.at[1], q.n[0], "lt halo", q.a); TX_(g, q.at[0], q.at[1] + 15, q.n[1], "lm halo", q.a); }
+      const lub = TX_(g, 346, 196, "LUB", "big halo", "middle"), dub = TX_(g, 86, 112, "DUB", "big halo", "middle");
+      const steth = el("g", { "data-bleed": 1 }, g); el("path", { d: "M0 0C10 -40 60 -60 90 -110", fill: "none", stroke: "var(--ink)", "stroke-width": 3 }, steth); el("circle", { r: 15, fill: "var(--sheet)", stroke: "var(--ink)", "stroke-width": 3, opacity: 0.85 }, steth); el("circle", { r: 9, fill: "none", stroke: "var(--muted)", "stroke-width": 1.2 }, steth);
+      el("rect", { x: 10, y: 316, width: 380, height: 76, rx: 6, fill: "var(--sheet)", stroke: "var(--hair)" }, g); TX_(g, 18, 332, "phonocardiogram", "lm");
+      const X = (u) => 22 + 360 * u / T; let d = "";
+      for (let k = 0; k <= 1400; k++) { const u = k / 1400 * T; let a = 0; for (const ev of SND) { let dt = u - ev.k * DT; dt -= Math.round(dt / T) * T; a += Math.exp(-((dt / 0.016) ** 2)) * (ev.s === "S1" ? 1 : 0.7) * Math.sin(2 * Math.PI * (ev.s === "S1" ? 70 : 95) * dt); } d += (k ? "L" : "M") + f1(X(u)) + " " + f1(362 - a * 22); }
+      el("path", { d, fill: "none", stroke: "var(--ink)", "stroke-width": 1.2 }, g); for (const ev of SND) TX_(g, X(ev.k * DT), 386, ev.s, "lm", "middle");
+      const cur = el("line", { y1: 322, y2: 390, stroke: "var(--accent)", "stroke-width": 1.5 }, g); const sp = [...PTS[3].p]; let lastP = PTS[3];
+      return (i) => { const f = { S1: sndAmp.S1[i], S2: sndAmp.S2[i] };
+        for (const q of PTS) { const v = f[q.s]; q.wave.setAttribute("r", f1(9 + 22 * (1 - v))); q.wave.setAttribute("opacity", f1(v)); q.dot.setAttribute("fill", v > 0.05 ? "var(--accent)" : "var(--sheet)"); }
+        lub.setAttribute("opacity", f1(f.S1)); dub.setAttribute("opacity", f1(f.S2)); if (f.S2 > 0.9) lastP = PTS[0]; else if (f.S1 > 0.9) lastP = PTS[3];
+        sp[0] += (lastP.p[0] - sp[0]) * 0.08; sp[1] += (lastP.p[1] - sp[1]) * 0.08; steth.setAttribute("transform", `translate(${f1(sp[0] + 16)} ${f1(sp[1] + 16)})`);
+        const x = f1(X(i * DT)); cur.setAttribute("x1", x); cur.setAttribute("x2", x); }; } });
+
+
+  return {
+    update(i, s, d) {
+      const r = s.readouts;
+      DEF = {}; for (const k in CH) { const c = CH[k]; DEF[k] = K.deformer(c.ann[0], c.ann[1], c.reach, K.volumeScale(r[c.vol], c.Vref, c.k)); cav[k].set(c.pts.map(DEF[k])); }
+      const dM = K.deformer(BODY.ann[0], BODY.ann[1], BODY.reach, K.volumeScale(r.LVV + r.RVV, 170, BODY.k)); body.set(BODY.pts.map(dM));
+      fatR.setAttribute("d", K.spline(mp([[197, 364], [222, 389], [243, 401]]).map(dM), false)); fatL.setAttribute("d", K.spline(mp([[566, 360], [563, 340], [558, 318]]).map(dM), false));
+      const rc = dM(P([222, 389])), lc = dM(P([563, 340])); rca.setAttribute("cx", f1(rc[0] + 2)); rca.setAttribute("cy", f1(rc[1] - 2)); lcx.setAttribute("cx", f1(lc[0] - 1)); lcx.setAttribute("cy", f1(lc[1]));
+      // papillary muscles ride their ventricle; chordae run from each AV leaflet to its papillary tip
+      const tips = {}; for (const k of ["RV", "LV"]) PAP[k].forEach((p, j) => { const base = DEF[k]([p[0] + (k === "LV" && j ? 9 : 0), p[1] + 13]), tip = DEF[k](p); tips[k + j] = tip;
+        papEls[k][j].setAttribute("d", `M${f1(base[0] - 6.5)} ${f1(base[1])}Q${f1(tip[0] - 5.5)} ${f1(tip[1] + 2)} ${f1(tip[0])} ${f1(tip[1] - 3)}Q${f1(tip[0] + 5.5)} ${f1(tip[1] + 2)} ${f1(base[0] + 6.5)} ${f1(base[1])}Z`); });
+      for (const id in VG) { const v = valve[id]; v.set(OPEN[id][i]);
+        if (chords[id]) v.tips.forEach((tp, j) => { const pp = tips[VG[id].ch + j], A = j ? VG[id].B : VG[id].A, m = mid(A, tp);
+          chords[id][j * 2].setAttribute("d", `M${f1(tp[0])} ${f1(tp[1])}L${f1(pp[0])} ${f1(pp[1] - 3)}`); chords[id][j * 2 + 1].setAttribute("d", `M${f1(m[0])} ${f1(m[1])}L${f1(pp[0])} ${f1(pp[1] - 3)}`); });
+        v.flash(FLASH[VG[id].kind][i]); }
+      for (const k in tags) tags[k].set(`${Math.round(r[k + "P"])} mmHg · ${Math.round(r[k + "V"])} mL`);
+      flows.update(i, s, d);
+    },
+  };
+}
+
+</script><script>try{ runStudio(createScene, {"steps":[{"title":"The rule","phase":"Diastasis","focus":["mitral","aortic","tricuspid","pulmonary"],"speed":0.25,"say":"Every valve in the heart is passive. It opens only when the pressure behind it is higher than the pressure in front, and it shuts the moment that reverses. Watch the four valves and the pressures beside each chamber, and the whole cycle explains itself."},{"title":"The spark","phase":"Atrial systole","lens":"ap","win":[0,0.46],"focus":["RA","LV"],"speed":0.1,"say":"Every beat starts with an electrical wave. The pacemaker cell in the S A node has no stable resting voltage, so it drifts up to threshold and fires on its own. The wave sweeps across the atria, which is the P wave, then waits in the A V node for about a tenth of a second. It then races down the bundle of His and the Purkinje fibres, and the ventricular cells fire together. That is the Q R S, and their long plateau is why the heart cannot be tetanised."},{"title":"Atrial kick","phase":"Atrial systole","lens":"mitral","focus":["RA","LA","tricuspid","mitral"],"speed":0.15,"say":"Now the atria contract. In the lens we are looking down at the mitral valve from inside the left atrium, the way a surgeon sees it. While left atrial pressure is above left ventricular pressure, the two leaflets part, and the atrium tops up the ventricle with its last fifth of filling. The ventricle reaches its end-diastolic volume, about 125 millilitres here."},{"title":"Isovolumetric contraction","phase":"Isovolumetric contraction","lens":"sarcomere","focus":["LV","RV","mitral","aortic"],"speed":0.1,"say":"The ventricles now contract. Calcium floods out of the sarcoplasmic reticulum, myosin heads grab actin and pull, and tension rises. As soon as ventricular pressure passes the atrium, the mitral valve shuts, which is the first heart sound. But pressure is still below the aorta's 80, so the aortic valve stays shut too. With both valves closed, the sarcomere cannot shorten: tension climbs at a fixed length and a fixed volume."},{"title":"Ejection","phase":"Ventricular ejection","lens":"aortic","focus":["LV","aortic","aorta","RV","pulmonary","pa"],"speed":0.2,"say":"When left ventricular pressure passes about 80 millimetres of mercury, the aortic valve is forced open. In the lens we are looking straight down the aorta, and the three cusps fold back into a triangle as blood jets towards us. Pressure in the ventricle and aorta rises together to about 120. The right ventricle ejects the same volume into the lungs at only about 20."},{"title":"Stroke volume","phase":"Ventricular ejection","lens":"pv","win":[0,0.8],"focus":["LV"],"speed":0.25,"say":"Plot ventricular pressure against volume, and one beat draws one loop. The bottom edge is filling, the right edge is isovolumetric contraction, the top is ejection and the left edge is relaxation. Each corner is a valve opening or closing. The loop's width is the stroke volume: about 125 minus 55, which is 70 millilitres, an ejection fraction of about 55 percent."},{"title":"Heart sounds","phase":"Isovolumetric relaxation","lens":"chest","focus":["LV","aortic","mitral"],"speed":0.15,"say":"Now the ventricle relaxes. Its pressure falls below the aorta, a brief backflow snaps the aortic valve shut, and that is the second heart sound and the dicrotic notch. You hear valves closing, never opening. The second sound is best heard at the second intercostal spaces beside the sternum, and the first at the apex, in the fifth space in the mid-clavicular line."},{"title":"Rapid filling","phase":"Rapid filling","lens":"shortaxis","focus":["LA","LV","mitral","RA","tricuspid"],"speed":0.2,"say":"When ventricular pressure falls below the atrium, the mitral and tricuspid valves open, and blood that pooled in the atria rushes in. In this slice across the ventricles, watch the thick left ventricular wall thin out again as its cavity refills, and the thin right ventricle wrapped around it. Most filling happens now, passively, before the atria ever contract."},{"title":"Diastasis","phase":"Diastasis","focus":["LA","LV","pveins","cavae"],"speed":0.25,"say":"Atrial and ventricular pressures have nearly equalised, so filling slows to a trickle, fed straight through from the veins. Then the next P wave fires, and the cycle repeats about 75 times a minute, each beat taking 0.8 seconds."}]}); }catch(e){ window.__studio.errors.push("start: "+e.message); document.getElementById("err").textContent = "⚠ " + e.message; }</script></body></html>

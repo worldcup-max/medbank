@@ -180,7 +180,7 @@
       var prevHadCards = !!prev && prev.indexOf('"q":') !== -1;
       if(raw.courses.length && !(cardCount === 0 && prevHadCards)) saveCache(pid, raw);
       markReady();
-      try{ if(typeof render === "function") render(); }catch(e){}
+      try{ if(typeof render === "function") (window.mbSoftRender||render)(); }catch(e){}   // not mid-3D-lesson (see mbSoftRender in app.html)
       return added;
     }catch(e){ /* real error: DON'T mark ready — the 9s watchdog recovers, so a valid deep link waits instead of 404-ing (CNT-09) */ }
   }

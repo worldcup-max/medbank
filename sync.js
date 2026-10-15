@@ -146,7 +146,7 @@
     out.study  = (function(a,b){ a=a||{}; b=b||{}; var o={},k; for(k in a) o[k]=a[k]||0; for(k in b) o[k]=Math.max(o[k]||0, b[k]||0); return o; })(localD.study, remoteD.study); // seconds/day: keep the larger
     out.streak = mergeStreak(localD.streak, remoteD.streak);
     // progress maps: union, prefer local (device just used)
-    ["topics","done","read","notes","missLog","dayTopics","exams","pos","flags","cardEdits","cardFlags"].forEach(function(k){
+    ["topics","done","read","notes","missLog","dayTopics","exams","pos","flags","cardEdits","cardFlags","tutor","plateCards"].forEach(function(k){
       out[k] = mergeMap(localD[k], remoteD[k], "a");
     });
     // plan: prefer whichever is non-empty & local if both
@@ -167,7 +167,7 @@
     Object.keys(DATA).forEach(function(k){ if(!(k in next)) return; DATA[k]=next[k]; });
     Object.keys(next).forEach(function(k){ DATA[k]=next[k]; });
     try{ localStorage.setItem("medbank_v1", JSON.stringify(DATA)); }catch(e){}
-    try{ if(typeof render==="function") render(); }catch(e){}
+    try{ if(typeof render==="function") (window.mbSoftRender||render)(); }catch(e){}   // not mid-3D-lesson (see mbSoftRender in app.html)
   }
 
   /* Does a synced state carry any real study progress? Used to refuse adopting an

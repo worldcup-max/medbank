@@ -1,0 +1,274 @@
+{
+ "steps": [
+  {
+   "title": "Into the glomerulus",
+   "lines": [
+    "L2"
+   ],
+   "phase": "Glomerular filtration",
+   "focus": [
+    "aff",
+    "glom",
+    "eff"
+   ],
+   "speed": 0.15,
+   "say": "Blood enters the glomerulus through the afferent arteriole and leaves through the efferent arteriole. Watch the tuft: this is where plasma is filtered out into Bowman's capsule."
+  },
+  {
+   "title": "Net filtration pressure",
+   "lines": [
+    "L3",
+    "L4"
+   ],
+   "phase": "Glomerular filtration",
+   "focus": [
+    "glom",
+    "bowman"
+   ],
+   "speed": 0.15,
+   "say": "The pressure pushing fluid out of the glomerular capillaries is about 55 millimetres of mercury. Bowman's capsule pushes back with about 15, and plasma oncotic pressure pulls back with about 30, so the net filtration pressure is about 10. That gives a GFR of about 125 millilitres a minute, or 180 litres a day."
+  },
+  {
+   "title": "Afferent vs efferent",
+   "lines": [
+    "L5"
+   ],
+   "words": true,
+   "say": "Your note adds a control point. Constricting the efferent arteriole raises glomerular pressure and GFR, while constricting the afferent arteriole lowers both. This plate keeps both arterioles fixed, so take this one in words."
+  },
+  {
+   "title": "Proximal tubule",
+   "lines": [
+    "L7",
+    "L8"
+   ],
+   "phase": "Proximal convoluted tubule",
+   "focus": [
+    "pct"
+   ],
+   "speed": 0.6,
+   "say": "In the proximal convoluted tubule, about 65 percent of the filtered sodium and water is reabsorbed, with all the glucose and amino acids and about 80 percent of the bicarbonate. Because water follows the salt, reabsorption is iso-osmotic: the fluid stays at about 300 milliosmoles per kilogram.",
+   "lens": "pctcell"
+  },
+  {
+   "title": "Thin descending limb",
+   "lines": [
+    "L10"
+   ],
+   "phase": "Thin descending limb",
+   "focus": [
+    "tdl",
+    "interstitium"
+   ],
+   "speed": 1,
+   "say": "The thin descending limb is permeable to water but not to salt. As it dives into the medulla, water leaves, so the fluid concentrates to about 1200 milliosmoles per kilogram at the tip of the loop."
+  },
+  {
+   "title": "Thick ascending limb",
+   "lines": [
+    "L11",
+    "L12"
+   ],
+   "phase": "Thick ascending limb",
+   "focus": [
+    "tal",
+    "interstitium"
+   ],
+   "speed": 1,
+   "say": "The thick ascending limb is impermeable to water, and it actively pumps out sodium, potassium and chloride through NKCC2. So the fluid is diluted to about 100, which is why it is called the diluting segment. That pumping builds the medullary osmotic gradient from 300 to 1200, and furosemide works by blocking NKCC2.",
+   "lens": "talcell"
+  },
+  {
+   "title": "Distal tubule",
+   "lines": [
+    "L14"
+   ],
+   "phase": "Distal convoluted tubule",
+   "focus": [
+    "dct"
+   ],
+   "speed": 0.8,
+   "say": "In the distal convoluted tubule, sodium and chloride are reabsorbed. This is the thiazide-sensitive step."
+  },
+  {
+   "title": "Aldosterone",
+   "lines": [
+    "L15"
+   ],
+   "phase": "Cortical collecting duct",
+   "focus": [
+    "cd"
+   ],
+   "speed": 0.6,
+   "say": "Aldosterone acts on the principal cells, increasing sodium reabsorption and potassium secretion."
+  },
+  {
+   "title": "ADH and concentrated urine",
+   "lines": [
+    "L16"
+   ],
+   "phase": "Medullary collecting duct",
+   "focus": [
+    "cd",
+    "interstitium"
+   ],
+   "speed": 2.5,
+   "say": "ADH, also called vasopressin, inserts aquaporin 2 into the collecting duct. Water then moves out into the hypertonic medulla, giving concentrated urine of up to about 1200 milliosmoles per kilogram. Without ADH the urine stays dilute, about 50 to 100.",
+   "lens": "principal"
+  },
+  {
+   "title": "Key numbers",
+   "lines": [
+    "L18"
+   ],
+   "phase": "Medullary collecting duct",
+   "focus": [
+    "cd"
+   ],
+   "speed": 2.5,
+   "say": "So only about 1 to 2 litres of urine leave each day, which means more than 99 percent of the filtrate is reabsorbed."
+  }
+ ],
+ "mentions": {
+  "aff": [
+   "L2",
+   "L5"
+  ],
+  "eff": [
+   "L2",
+   "L5"
+  ],
+  "glom": [
+   "L2",
+   "L3",
+   "L5"
+  ],
+  "bowman": [
+   "L3"
+  ],
+  "pct": [
+   "L6",
+   "L7",
+   "L8"
+  ],
+  "tdl": [
+   "L10"
+  ],
+  "tal": [
+   "L11",
+   "L12"
+  ],
+  "interstitium": [
+   "L10",
+   "L12",
+   "L16"
+  ],
+  "dct": [
+   "L14"
+  ],
+  "cd": [
+   "L15",
+   "L16"
+  ]
+ },
+ "flags": [],
+ "extend": [
+  "afferent and efferent arteriole constriction",
+  "dilute urine without ADH"
+ ],
+ "overview": [
+  {
+   "stop": 2,
+   "say": "A net filtration pressure of about 10 millimetres of mercury filters about 180 litres a day."
+  },
+  {
+   "stop": 4,
+   "say": "The proximal tubule takes back about 65 percent of the sodium and water, and the fluid stays at about 300."
+  },
+  {
+   "stop": 6,
+   "say": "The thick ascending limb pumps out salt but not water, diluting the fluid and building the medullary osmotic gradient."
+  },
+  {
+   "stop": 9,
+   "say": "ADH inserts aquaporin 2, so water leaves into the hypertonic medulla and the urine is concentrated."
+  },
+  {
+   "stop": 10,
+   "say": "In the end more than 99 percent of the filtrate is reabsorbed."
+  }
+ ],
+ "exam": [
+  {
+   "stop": 2,
+   "q": "What is the net filtration pressure at the glomerulus?",
+   "options": [
+    "About 10 mmHg",
+    "About 55 mmHg",
+    "About 30 mmHg"
+   ],
+   "answer": 0,
+   "why": "Glomerular pressure of 55, minus 15 in Bowman's capsule and 30 oncotic pressure, leaves about 10."
+  },
+  {
+   "stop": 4,
+   "q": "How is fluid reabsorbed in the proximal convoluted tubule?",
+   "options": [
+    "Iso-osmotically, so it stays at about 300",
+    "Water only, so it concentrates",
+    "Salt only, so it dilutes"
+   ],
+   "answer": 0,
+   "why": "Reabsorption in the proximal tubule is iso-osmotic, so the tubular fluid stays at about 300."
+  },
+  {
+   "stop": 5,
+   "q": "Which part of the loop is permeable to water but not to salt?",
+   "options": [
+    "Thick ascending limb",
+    "Thin descending limb",
+    "Distal convoluted tubule"
+   ],
+   "answer": 1,
+   "why": "The thin descending limb lets water leave but not salt, so the fluid concentrates."
+  },
+  {
+   "stop": 6,
+   "q": "What does the thick ascending limb do to the tubular fluid?",
+   "options": [
+    "Concentrates it to about 1200",
+    "Keeps it at about 300",
+    "Dilutes it to about 100"
+   ],
+   "answer": 2,
+   "why": "It pumps out sodium, potassium and chloride but is impermeable to water, so the fluid is diluted."
+  },
+  {
+   "stop": 9,
+   "q": "What does ADH insert into the collecting duct?",
+   "options": [
+    "Aquaporin 2",
+    "NKCC2",
+    "A thiazide-sensitive carrier"
+   ],
+   "answer": 0,
+   "why": "ADH inserts aquaporin 2, so water moves out into the hypertonic medulla."
+  }
+ ],
+ "end": [
+  {
+   "type": "tap",
+   "stop": 6,
+   "q": "Tap the segment your note calls the diluting segment.",
+   "parts": [
+    "tal"
+   ]
+  },
+  {
+   "type": "seek",
+   "stop": 9,
+   "q": "Move the parcel to where ADH lets water leave into the hypertonic medulla.",
+   "phase": "Medullary collecting duct"
+  }
+ ]
+}

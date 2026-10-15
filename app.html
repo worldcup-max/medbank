@@ -937,6 +937,19 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .pstep.on i{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent)22}
 .pstep.on span{color:var(--text);font-weight:700}
 .pline{flex:1;height:2px;background:var(--line);min-width:14px;margin-top:-16px}
+.mbprpbtn{display:flex;align-items:center;gap:8px;width:100%;border:1px dashed var(--line);background:var(--panel2);color:var(--accent);border-radius:12px;padding:12px 14px;font-weight:700;font-size:13.5px;margin:10px 0 12px;cursor:pointer;text-align:left}
+.mbprpbtn span{margin-left:auto;font-weight:500;color:var(--dimmer);font-size:12px}.mbprp{margin:10px 0 12px}
+</style>
+<style id="mb-plate-admin">
+.pa-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 14px}.pa-chip{min-height:36px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:600 13px system-ui;padding:0 14px;cursor:pointer}
+.pa-chip.on{background:var(--accent);border-color:var(--accent);color:#fff}.pa-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:10px;margin-bottom:12px}
+.pa-tile{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:12px 14px;display:grid;gap:2px}.pa-tile b{font:800 24px system-ui;color:var(--text)}.pa-tile span{font-size:12.5px;color:var(--dim)}.pa-tile i{font-style:normal;font-size:12px;color:var(--dim)}.pa-tile i.bad{color:#dc2626}
+.pa-grid2{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:12px;margin-bottom:12px}.pa-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:1100px){.pa-grid3{grid-template-columns:1fr}}@media(max-width:820px){.pa-grid2{grid-template-columns:1fr}}
+.pa-card{display:grid;gap:8px;align-content:start;margin:0}.pa-card h3{margin:0;font-size:15px}.pa-card>.sub{margin:-4px 0 4px;font-size:12.5px}
+.pa-bar{display:grid;grid-template-columns:minmax(0,130px) 1fr 42px;gap:8px;align-items:center;font-size:12.5px}.pa-bar span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pa-bar em{height:12px;border-radius:6px;background:var(--line);overflow:hidden}
+.pa-bar em i{display:block;height:100%;background:var(--accent);border-radius:6px}.pa-bar em i.bad{background:#dc2626}.pa-bar b{text-align:right;font-variant-numeric:tabular-nums}
+.pa-item{border-top:1px solid var(--line);padding-top:9px;display:grid;gap:3px;font-size:13.5px}.pa-item .sub{margin:0;font-size:12.5px}.pa-item.done{opacity:.6}.pa-item .ok{color:#059669;font-weight:700}.btn.sm{min-height:32px;padding:0 10px;font-size:12.5px}
 </style>
 <style id="mb-polish">
   #sidebar{background:#efe9fb;border-right-color:#e3ddf1}
@@ -1095,6 +1108,7 @@ window.MB_STUDY_GET = function(){ try{ return DATA.study || {}; }catch(e){ retur
 window.MB_DOCK = {
   onStudyScreen: function(){ var r=(location.hash.slice(2)||'').split('/')[0];   // DCK-02: Mega/exam/gap are state overlays on their own routes; the dock's precondition is "content on screen"
     if((typeof QB!=='undefined'&&QB)||(typeof GAPLOOP!=='undefined'&&GAPLOOP)) return true;
+    if(r==='topic'&&typeof topicTab!=='undefined'&&topicTab==='mech3d') return false;   // the 3D Tutor needs the whole width: no Ask panel or Ask AI tab while it is open (comes back on the other tabs)
     return ['topic','study','review','cram','hard','leeches','mistakes','nudge','hardnudge','mega','exam','solve'].indexOf(r)>=0; },   // NOT 'today' (the hub is a menu, not reading/study content)
   ctx: function(){
     var t=null, card=null, cardId=null;
@@ -1266,6 +1280,7 @@ let DATA = (()=>{
   d.done     = d.done     || {};  // topicId -> 'YYYY-MM-DD' completed
   d.dayTopics= d.dayTopics|| {};  // 'YYYY-MM-DD' -> { topicId: 1 }  (topics touched that day)
   d.read     = d.read     || {};  // topicId -> 'YYYY-MM-DD' simplified note read
+  d.tutor    = d.tutor    || {};  // topicId -> 3D Tutor progress {tier,k,n,title,done:{overview,full,exam},exam:{right,of},at}
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
   d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
   d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
@@ -1781,15 +1796,39 @@ window.warmSpeak=function(text, use){
     const voice=DATA.settings.ttsVoiceAI||'nova', key=_ttsKey(text,voice,use);
     if(_ttsBlobCache[key]) return Promise.resolve();
     if(_ttsPending[key]) return _ttsPending[key];                     // already being generated → wait on that one
-    const p=_warmSpeakOnce(text,use,key,voice).then(function(){ delete _ttsPending[key]; },function(){ delete _ttsPending[key]; });
+    const p=_vcGet(key).then(function(u){ if(u){ _ttsBlobCache[key]=u; return; } return _warmSpeakOnce(text,use,key,voice); }).then(function(){ delete _ttsPending[key]; },function(){ delete _ttsPending[key]; });
     _ttsPending[key]=p; return p;
   }catch(e){ return Promise.resolve(); }
 };
+/* Voice saved for offline (3D Tutor, feature 5): each clip is kept in Cache Storage under a made-up same-origin URL, in a cache
+   the service worker never purges (mb-keep-*). serverSpeak looks there before the network, so a saved lesson speaks with no data. */
+var MB_VOICE_CACHE='mb-keep-voice';
+function _vcUrl(key){ var h=2166136261>>>0; for(var i=0;i<key.length;i++){ h^=key.charCodeAt(i); h=Math.imul(h,16777619)>>>0; } return './__mbvoice/'+h.toString(16)+'-'+key.length+'.mp3'; }
+async function _vcGet(key){ try{ if(!('caches' in window)) return null; var c=await caches.open(MB_VOICE_CACHE), r=await c.match(_vcUrl(key)); return r? URL.createObjectURL(await r.blob()) : null; }catch(e){ return null; } }
+async function _vcPut(key, blob){ try{ if(!('caches' in window)||!blob||!blob.size) return; var c=await caches.open(MB_VOICE_CACHE); await c.put(_vcUrl(key), new Response(blob,{headers:{'Content-Type':'audio/mpeg'}})); }catch(e){} }
+async function _vcHas(key){ try{ if(!('caches' in window)) return false; var c=await caches.open(MB_VOICE_CACHE); return !!(await c.match(_vcUrl(key))); }catch(e){ return false; } }
+/* save every line in the MedBank voice (two at a time); onStep(done,total). Resolves to {done,total} — done < total means some failed */
+window.mbVoiceSave=async function(texts, onStep){
+  var voice=DATA.settings.ttsVoiceAI||'nova', list=(texts||[]).filter(function(t){ return (t||'').trim(); }), done=0, total=list.length;
+  var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) return {done:0,total:total};
+  var ses=await window.__mbSB.auth.getSession(), token=ses.data.session&&ses.data.session.access_token;
+  async function one(t){ var key=_ttsKey(t,voice,'read');
+    if(_ttsPending[key]) try{ await _ttsPending[key]; }catch(e){}
+    if(!(await _vcHas(key))&&_ttsBlobCache[key]){ try{ await _vcPut(key, await (await fetch(_ttsBlobCache[key])).blob()); }catch(e){} }   // already played or warmed: keep that clip, no second download
+    if(!(await _vcHas(key))){ if(!token) return false;
+      try{ var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:stripMd(t).slice(0,3000),voice:voice,use:'read'})});
+        if(!r.ok) return false; var b=await r.blob(); await _vcPut(key,b); if(!_ttsBlobCache[key]) _ttsBlobCache[key]=URL.createObjectURL(b); }catch(e){ return false; } }
+    return true; }
+  var q=list.slice(), ok=0;
+  async function worker(){ while(q.length){ var t=q.shift(); if(await one(t)) ok++; done++; try{ onStep&&onStep(done,total); }catch(e){} } }
+  await Promise.all([worker(),worker()]); return {done:ok,total:total};
+};
 async function serverSpeak(text, cb, use){
   try{
-    const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) return false;
     const voice=DATA.settings.ttsVoiceAI||'nova', key=_ttsKey(text,voice,use);
     if(_ttsBlobCache[key]){ playCloudSrc(_ttsBlobCache[key], cb); return true; }   // already generated → instant
+    { const kept=await _vcGet(key); if(kept){ _ttsBlobCache[key]=kept; playCloudSrc(kept, cb); return true; } }   // saved for offline (works before sign-in loads, with no data)
+    const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) return false;
     const ses=await window.__mbSB.auth.getSession(); const token=ses.data.session&&ses.data.session.access_token; if(!token) return false;
     const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:stripMd(text).slice(0,3000),voice:voice,use:(use||'read')})});
     if(!r.ok) return false;
@@ -1926,8 +1965,19 @@ function buildQueue(){
   return { due:orderItems(due), neu, newTotal:neu.length };
 }
 /* ---- Visualize quiz misses become real recall cards (fed into the SRS deck) ---- */
-function mergeVizCards(){ try{ if(!DATA.vizCards)return; Object.keys(DATA.vizCards).forEach(function(tid){ var t=topById(tid); if(!t)return; t.recall=t.recall||[];
-  (DATA.vizCards[tid]||[]).forEach(function(card){ if(!t.recall.some(function(c){return c.q===card.q;})) t.recall.push(card); }); }); }catch(e){} }
+function mergeVizCards(){ try{ [DATA.vizCards, DATA.plateCards].forEach(function(store){ if(!store) return; Object.keys(store).forEach(function(tid){ var t=topById(tid); if(!t)return; t.recall=t.recall||[];
+  (store[tid]||[]).forEach(function(card){ if(!t.recall.some(function(c){return c.q===card.q;})) t.recall.push(card); }); }); }); }catch(e){} }
+/* ---- 3D Tutor review cards: the note's exam questions, each tied to its moment on a library plate (explainer/plate-tutor.js).
+ * Added when the student finishes the full walk-through or exam revision: first review tomorrow; one they missed comes back today. */
+function addPlateCards(topicId,cards){ try{ if(!topicId||!cards||!cards.length) return 0;
+  DATA.plateCards=DATA.plateCards||{}; var arr=DATA.plateCards[topicId]=DATA.plateCards[topicId]||[], t=topById(topicId), added=0, today=dayNum();
+  cards.forEach(function(card){ if(!card||!card.q||!card.opts) return; var c={q:card.q, opts:card.opts, ans:card.ans, a:card.a, plate:card.plate, caption:card.caption||'', src3d:card.src3d};
+    if(!arr.some(function(x){return x.q===c.q;})){ arr.push(c); added++; }
+    if(t){ t.recall=t.recall||[]; if(!t.recall.some(function(x){return x.q===c.q;})) t.recall.push(c); }
+    var id=cid(topicId,'recall',c), st=DATA.cards[id];
+    if(!st) DATA.cards[id]={box:0, due:card.missed?today:today+1, seen:today, ivl:card.missed?0:1, ease:2.5, reps:0, isNew:false};
+    else if(card.missed && st.due>today){ st.due=today; } });
+  persist(); return added; }catch(e){ return 0; } }
 function addVizCard(topicId,card){ try{ if(!topicId||!card||!card.q)return;
   DATA.vizCards=DATA.vizCards||{}; var arr=DATA.vizCards[topicId]=DATA.vizCards[topicId]||[];
   if(arr.some(function(x){return x.q===card.q;}))return; arr.push(card);
@@ -2196,6 +2246,7 @@ function renderNav(){
   h += it('settings','⚙','Settings','',r==='settings');
   if(window.IS_ADMIN) h += it('admin','🛠','Prompt editor','',r==='admin');
   if(window.IS_ADMIN) h += it('vizadmin','🎨','Visualize assets','',r==='vizadmin');
+  if(window.IS_ADMIN) h += it('plateadmin','🧪','3D Tutor insights','',r==='plateadmin');
   $('#nav').innerHTML = h;
 }
 function go(route){location.hash='#/'+route;document.body.classList.remove('navopen');}
@@ -2733,6 +2784,10 @@ function pageLecturer(id){
 let topicTab='note', topicTabFor=null;
 /* ===== Topic Preview — the pre-read "orientation video" (SPEC-TOPIC-PREVIEW.md; flag-gated) ===== */
 var _PREVIEW={};   // in-memory per-topic cache (kept OUT of DATA so big blueprints never bloat the synced blob)
+/* Background redraws (sync landing, fresh content, a preview finishing) must not rebuild a 3D lesson that is running: rebuilding reloads the
+   plate and loses an open answer or explain-back. They wait until the student leaves the 3D Tutor tab (any tab change redraws anyway). */
+function mbSoftRender(){ try{ if(_mbpCur&&_mbpCur.api.alive&&_mbpCur.api.alive()&&typeof topicTab!=='undefined'&&topicTab==='mech3d'&&/^#\/topic\//.test(location.hash||'')){ window.__mbRenderLater=true; return; } }catch(e){} render(); }
+window.mbSoftRender=mbSoftRender;
 function previewOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES&&C.FEATURES.TOPIC_PREVIEW); }catch(e){ return false; } }
 /* The preview used to collapse every possible setback into one dead end: no auth session YET (the
    commonest one — on a cold load Supabase has not finished restoring it when the first note opens),
@@ -2742,7 +2797,7 @@ function previewOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES
    session. Only a real, final refusal should look final; everything else is worth another go. */
 function _pvSoft(t, why, attempt){
   var waits=[1500,4000,10000,20000];
-  if(attempt>=waits.length){ _PREVIEW[t.id]={status:'failed', why:why}; try{ render(); }catch(e){} return; }
+  if(attempt>=waits.length){ _PREVIEW[t.id]={status:'failed', why:why}; try{ mbSoftRender(); }catch(e){} return; }
   _PREVIEW[t.id]={status:'building'};
   setTimeout(function(){ _pvFetch(t, attempt+1); }, waits[attempt]);
 }
@@ -2770,7 +2825,7 @@ async function _pvFetch(t, attempt){
     try{ if(window.smartLog&&j.status==='ready') smartLog({t:'preview_generated', topic_id:t.id, scenes:(j.scenes||[]).length}); }catch(e){}
   }catch(e){ return _pvSoft(t,'offline',attempt); }                                      // network blip
   finally{
-    try{ if((location.hash||'').indexOf(t.id)>=0 && (window.scrollY||window.pageYOffset||0) < 240) render(); }catch(e){}   // refresh the card when ready — but never yank a student who's already scrolled into the note
+    try{ if((location.hash||'').indexOf(t.id)>=0 && (window.scrollY||window.pageYOffset||0) < 240) mbSoftRender(); }catch(e){}   // refresh the card when ready — but never yank a student who's already scrolled into the note
   }
 }
 function ensureTopicPreview(t){
@@ -2854,6 +2909,8 @@ function pageTopic(id){
     body = renderVizList(t);
   } else if(topicTab==='model3d'){
     body = renderModel3d(t);
+  } else if(topicTab==='mech3d'){
+    body = renderMech3d(t);
   } else {
     const rp=DATA.pos['pos:'+t.id+'recall'], pp=DATA.pos['pos:'+t.id+'primer'];
     const mast=Math.round(topicMastery(t)*100);
@@ -2915,6 +2972,7 @@ function modeSwitcher(t){
     ${sw('🎧 Podcast',"topicTab='podcast';render()",topicTab==='podcast')}
     ${(()=>{ const n=topicVizList(t).length; return sw('🎬 Videos'+(n?' ('+n+')':''),"topicTab='videos';render()",topicTab==='videos'); })()}
     ${(()=>{ return mb3dScenes(t).length ? sw('🧬 3D',"topicTab='model3d';render()",topicTab==='model3d') : ''; })()}
+    ${mbxShow(t) ? sw('⚗️ 3D Tutor'+(mbxPlateFor(t)?mbpTabNote(t):''),"topicTab='mech3d';render()",topicTab==='mech3d') : ''}
   </div>`;
 }
 
@@ -3056,6 +3114,210 @@ function renderModel3d(t){
   return chips
     + (cur.learning_goal?'<div style="color:var(--dim);font-size:13px;margin-bottom:10px">'+esc(cur.learning_goal)+'</div>':'')
     + '<div id="mb3dHost"></div>';
+}
+/* ===== 3D Tutor (mech3d) — chemistry mechanisms as real 3D molecules, narrated =====
+ * Two kinds of lesson, one tab:
+ *  · hand-built templates (SN2 today) play instantly, then swap in narration matched to the note (POST /explainer);
+ *  · the instant builder: POST /explainer/scan lists the mechanisms in the note, POST /explainer/build writes one as
+ *    checked atom-mapped states + curly arrows, and the app turns it into 3D molecules (≈30–90 s the first time,
+ *    instant for everyone after — lessons are cached and shared).
+ * The engine (explainer/mech3d.js, three.js bundled in) only downloads when the tab is opened. */
+var MBX_TEMPLATES=[ {id:'sn2', label:'SN2', re:/\bS\s?N\s?2\b|bimolecular nucleophilic|backside attack|back-side attack|walden inversion/i} ];   /* keep in step with import-server/explainer.mjs */
+var MBX_CHEM=/chemi|organic|biochem|pharmacol|mechanism|nucleophil|electrophil|carbocation|carbanion|esterif|hydrolys|halogenoalkane|haloalkane|alkene|alkyne|aldehyde|ketone|carbonyl|carboxylic|benzene|aromatic|\bS\s?N\s?[12]\b|\bE[12]\b|redox|acid[- ]base|curly arrow/i;
+function mbxTemplateFor(t){
+  try{ if(!t) return null; if(localStorage.mbmech==='0') return null; }catch(e){}
+  var hay=(t.name||'')+' \n'+((t.subject&&t.subject.name)||'')+' \n'+String(t.note||'').slice(0,60000);
+  for(var i=0;i<MBX_TEMPLATES.length;i++) if(MBX_TEMPLATES[i].re.test(hay)) return MBX_TEMPLATES[i];
+  return null;
+}
+/* library plates (explainer/library/…): a hand-built, model-driven plate is the stage and the student's note is the
+ * script — POST /explainer/plate writes the tutor from the note (import-server/plate-tutor.mjs); explainer/plate-tutor.js
+ * shows the note beside the plate and links them both ways. Keep this list in step with PLATES in explainer/plate-tutor.js. */
+var MBX_PLATES=[
+  {id:'nephron-urine-journey', re:/\bnephron|urine (formation|concentration)|loop of henle|countercurrent|tubular (reabsorption|function)|glomerular filtration\b/i},
+  {id:'cardiac-cycle-wiggers', re:/\bcardiac cycle|wiggers|heart sounds|pressure.volume loop|systole and diastole\b/i} ];
+function mbxPlateFor(t){
+  try{ if(!t||localStorage.mbmech==='0'||localStorage.mbplate==='0') return null; }catch(e){}
+  var hay=(t.name||'')+' \n'+String(t.note||'').slice(0,600);   // the title and the note's opening, not every passing mention
+  for(var i=0;i<MBX_PLATES.length;i++) if(MBX_PLATES[i].re.test(hay)) return MBX_PLATES[i];
+  return null;
+}
+var _mbpLoad=null, _MBP_LESSON={}, _mbpCur=null, _mbpSaveT=null;
+/* "· 4/10" or "· ✓" on the 3D Tutor tab, from the student's synced progress */
+function mbpTabNote(t){ try{ var p=(DATA.tutor||{})[t.id]; if(!p) return ''; if(p.done&&(p.done.full||p.done.exam)) return ' · ✓'; if(p.k!=null&&p.n) return ' · '+(p.k+1)+'/'+p.n; }catch(e){} return ''; }
+var MBP_V='1.5.0';
+function mbpLoad(){
+  if(window.MBPlate&&window.MBPlate.mount) return Promise.resolve(window.MBPlate);
+  if(_mbpLoad) return _mbpLoad;
+  _mbpLoad=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='explainer/plate-tutor.js?v='+MBP_V; s.async=true;
+    s.onload=function(){ window.MBPlate?res(window.MBPlate):rej(new Error('3D Tutor failed to start')); };
+    s.onerror=function(){ _mbpLoad=null; rej(new Error('Could not download the 3D Tutor — check your connection.')); };
+    document.head.appendChild(s); });
+  return _mbpLoad;
+}
+function mbpHash(s){ var h=2166136261>>>0; s=String(s||''); for(var i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619)>>>0; } return h.toString(16)+'-'+s.length; }
+function mbpKept(pl,t){ try{ var x=JSON.parse(localStorage.getItem('mbp-les:'+pl.id+'|'+t.id)||'null'); return x&&x.h===mbpHash(String(t.note||'').slice(0,60000))? x : null; }catch(e){ return null; } }
+function mbpLesson(t, pl){
+  var k=pl.id+'|'+t.id; if(_MBP_LESSON[k]) return _MBP_LESSON[k];
+  /* data-light: the lesson for this exact note is kept on the device for a week, so reopening it costs no data and works offline */
+  var kept=mbpKept(pl,t); if(kept&&kept.lesson&&(Date.now()-kept.at<7*864e5||navigator.onLine===false)) return (_MBP_LESSON[k]=Promise.resolve(kept.lesson));
+  _MBP_LESSON[k]=mbxCall('/explainer/plate',{plate:pl.id, topic:t.name, text:String(t.note||'').slice(0,60000)},3)
+    .then(function(j){ var l=j.lesson||null; if(l) try{ localStorage.setItem('mbp-les:'+k, JSON.stringify({h:mbpHash(String(t.note||'').slice(0,60000)), at:Date.now(), lesson:l})); }catch(e){} return l; })
+    .catch(function(e){ delete _MBP_LESSON[k]; if(kept&&kept.lesson) return kept.lesson; throw e; });
+  return _MBP_LESSON[k];
+}
+/* 3D Tutor insights (feature 7): what happens in a lesson is queued on the device and sent a few seconds later in one call
+   (kept while offline, sent next time). No note text is sent — only stop numbers and titles, scores and the questions asked. */
+var MBP_EVQ='mbp-ev', _mbpEvT=null;
+function mbpTrack(plate,topic,session,kind,data){ try{ var q=JSON.parse(localStorage.getItem(MBP_EVQ)||'[]'); q.push({plate:plate,topic:topic,session:session,kind:kind,data:data||{},at:new Date().toISOString()}); if(q.length>500) q=q.slice(-500); localStorage.setItem(MBP_EVQ,JSON.stringify(q)); }catch(e){} clearTimeout(_mbpEvT); _mbpEvT=setTimeout(mbpFlushEvents,4000); }
+var _mbpFlushing=false;
+async function mbpFlushEvents(){ if(_mbpFlushing||navigator.onLine===false) return; var q=[]; try{ q=JSON.parse(localStorage.getItem(MBP_EVQ)||'[]'); }catch(e){} if(!q.length) return; _mbpFlushing=true;
+  try{ var groups={}; q.forEach(function(e){ var k=e.plate+'|'+(e.topic||''); (groups[k]=groups[k]||[]).push(e); });
+    for(var k in groups){ var g=groups[k]; for(var i=0;i<g.length;i+=80){ var part=g.slice(i,i+80);
+      await mbxCall('/explainer/plate/events',{plate:part[0].plate, topic:part[0].topic, events:part.map(function(e){ return {kind:e.kind,data:e.data,at:e.at,session:e.session}; })},1); } }
+    try{ var now=JSON.parse(localStorage.getItem(MBP_EVQ)||'[]'); localStorage.setItem(MBP_EVQ,JSON.stringify(now.slice(q.length))); }catch(e){}
+  }catch(e){ /* keep them for next time */ } finally{ _mbpFlushing=false; } }
+setTimeout(function(){ try{ mbpFlushEvents(); }catch(e){} },12000);   // anything left from last time
+/* Ask the plate (feature 6): answers are kept on the device per topic (the same question again costs nothing and works offline) */
+function mbpAskNorm(q){ return String(q||'').toLowerCase().replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim(); }
+function mbpAsk(t,pl,x){
+  var k='mbp-ask:'+pl.id+'|'+t.id, h=mbpHash(String(t.note||'').slice(0,60000)), nq=mbpAskNorm(x.q), box={};
+  try{ box=JSON.parse(localStorage.getItem(k)||'{}'); if(box.h!==h) box={h:h,a:{}}; }catch(e){ box={h:h,a:{}}; }
+  if(box.a&&box.a[nq]) return Promise.resolve(box.a[nq]);
+  if(navigator.onLine===false) return Promise.reject(new Error('Asking a new question needs a connection — the questions you asked before still answer offline.'));
+  return mbxCall('/explainer/plate/ask',{plate:pl.id, topic:t.name, session:x.session||'', text:String(t.note||'').slice(0,60000), q:x.q, phase:x.phase||'', focus:x.focus||[]},2).then(function(j){
+    var a=j.answer||null; if(a){ try{ box.a=box.a||{}; box.a[nq]=a; var ks=Object.keys(box.a); if(ks.length>60) delete box.a[ks[0]]; localStorage.setItem(k,JSON.stringify(box)); }catch(e){} }
+    return a; });
+}
+/* Save a lesson for offline (feature 5), on any connection, once the student starts it: the plate files, then every line in the MedBank voice.
+   Status per topic in localStorage mbp-off:<plate>|<topic> = {h, at, n} once complete; the start card shows the chip; a toast says it once. */
+var _MBP_OFF={};
+function mbpOffline(pl,t){ var k=pl.id+'|'+t.id; if(_MBP_OFF[k]) return _MBP_OFF[k];
+  try{ var x=JSON.parse(localStorage.getItem('mbp-off:'+k)||'null'); if(x&&x.h===mbpHash(String(t.note||'').slice(0,60000))) return {state:'saved'}; }catch(e){} return null; }
+function mbpSaveOffline(pl,t,plate,api){
+  var k=pl.id+'|'+t.id, h=mbpHash(String(t.note||'').slice(0,60000));
+  if(mbpOffline(pl,t)||!('caches' in window)) return;
+  var texts=[]; try{ texts=api.voiceTexts(); }catch(e){} if(!texts.length) return;
+  _MBP_OFF[k]={state:'saving', n:0, of:texts.length}; try{ api.refresh(); }catch(e){}
+  try{ navigator.storage&&navigator.storage.persist&&navigator.storage.persist(); }catch(e){}
+  caches.open('mb-keep-plates').then(function(c){ return c.addAll((plate.files||[]).concat(['explainer/plate-tutor.js?v='+MBP_V])); })
+    .then(function(){ return window.mbVoiceSave(texts,function(n,of){ _MBP_OFF[k]={state:'saving', n:n, of:of}; try{ api.refresh(); }catch(e){} }); })
+    .then(function(r){ delete _MBP_OFF[k];
+      if(r.done<r.total){ try{ api.refresh(); }catch(e){} return; }    // something failed: the chip goes away and the next visit finishes the rest
+      try{ localStorage.setItem('mbp-off:'+k, JSON.stringify({h:h, at:Date.now(), n:r.total})); }catch(e){}
+      try{ api.refresh(); }catch(e){}
+      try{ mbToast('Saved for offline — this 3D lesson now plays with no data.'); }catch(e){} })
+    .catch(function(){ delete _MBP_OFF[k]; try{ api.refresh(); }catch(e){} });
+}
+function renderPlateTutor(t, pl){
+  setTimeout(function(){
+    var host=document.getElementById('mbpHost'); if(!host) return;
+    var sess='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);   // one opening of the tutor (feature 7 insights)
+    var resume=null;   // a redraw of this same page while a lesson is running: the new tutor carries on at that stop
+    if(_mbpCur){ try{ var S0=_mbpCur.api.state; if(_mbpCur.tid===t.id&&_mbpCur.api.alive()&&S0.mode==='lesson'&&S0.k>=0) resume={tier:S0.tier,k:S0.k,play:!!S0.playing}; _mbpCur.api.destroy(); }catch(e){} _mbpCur=null; }
+    mbpLoad().then(function(P){
+      if(!host.isConnected) return;
+      var plate=P.PLATES.filter(function(x){ return x.id===pl.id; })[0]; if(!plate) throw new Error('This plate is not in the library yet.');
+      var api=P.mount(host,{ plate:plate, resume:resume, note:String(t.note||''), getLesson:function(){ return mbpLesson(t,pl); },
+        speak:function(text,done){ try{ voiceSpeak(text, done||null, 'read'); }catch(e){ if(done) done(); } },
+        stopSpeak:function(){ try{ stopSpeak(); }catch(e){} },
+        warm:function(lines){ try{ (lines||[]).forEach(function(l){ window.warmSpeak&&window.warmSpeak(l,'read'); }); }catch(e){} },
+        isDark:function(){ return document.documentElement.getAttribute('data-theme')==='dark'; },
+        progressKey:t.id,
+        onStart:function(a){ mbpSaveOffline(pl,t,plate,a); },
+        ask:function(x){ return mbpAsk(t,pl,Object.assign({session:sess},x)); },
+        explain:function(x){ return mbxCall('/explainer/plate/explain',{plate:pl.id, topic:t.name, session:sess, text:String(t.note||'').slice(0,60000), lines:x.lines, q:x.q, answer:x.answer},2).then(function(j){ return j.result||null; }); },
+        onEvent:function(kind,data){ mbpTrack(pl.id,t.name,sess,kind,data); },
+        onReport:function(r){ mbxCall('/explainer/plate/report',Object.assign({plate:pl.id, topic:t.name, session:sess},r),2)
+          .then(function(){ mbToast('Thanks — sent to the MedBank team'+(r.k>=0?' with stop '+(r.k+1):'')+'.'); }, function(){ mbToast('Couldn’t send that — check your connection and try again.'); }); },   // saved once the student starts a lesson, on any connection
+        offline:function(){ return mbpOffline(pl,t); },
+        onCards:function(cards){ try{ touchTopic(t.id); }catch(e){} var n=addPlateCards(t.id,cards); if(n){ try{ mbToast(n+' card'+(n===1?'':'s')+' from this lesson added to your reviews — first one tomorrow.'); }catch(e){} } },
+        loadProgress:function(){ return (DATA.tutor||{})[t.id]||null; },
+        saveProgress:function(p){ DATA.tutor=DATA.tutor||{}; DATA.tutor[t.id]=p; clearTimeout(_mbpSaveT); _mbpSaveT=setTimeout(function(){ try{ persist(); }catch(e){} },1500); } });
+      _mbpCur={tid:t.id, api:api};
+    }).catch(function(e){ if(host.isConnected) host.innerHTML='<div class="empty" style="text-align:left">'+esc(e.message)+'</div>'; });
+  },0);
+  return '<div id="mbpHost"><div class="empty">Loading the 3D Tutor…</div></div>';
+}
+function mbxShow(t){
+  try{ if(!t||localStorage.mbmech==='0') return false; }catch(e){}
+  return !!mbxPlateFor(t) || !!mbxTemplateFor(t) || MBX_CHEM.test((t.name||'')+' '+((t.subject&&t.subject.name)||'')+' '+String(t.note||'').slice(0,20000));
+}
+var _mbxLoad=null, _MBX_LESSON={}, _mbxCur=null, _MBX_SCAN={}, _MBX_AUTO={}, _MBX_PICK={};
+function mbxLoad(){
+  if(window.MBMech&&window.MBMech.mountAuto) return Promise.resolve(window.MBMech);
+  if(_mbxLoad) return _mbxLoad;
+  _mbxLoad=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='explainer/mech3d.js?v=1.1.0'; s.async=true;
+    s.onload=function(){ window.MBMech?res(window.MBMech):rej(new Error('3D Tutor failed to start')); };
+    s.onerror=function(){ _mbxLoad=null; rej(new Error('Could not download the 3D Tutor — check your connection.')); };
+    document.head.appendChild(s); });
+  return _mbxLoad;
+}
+async function mbxCall(path, body, tries){
+  var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) throw new Error('The 3D Tutor needs an internet connection.');
+  var ses=await window.__mbSB.auth.getSession(); var token=ses.data.session&&ses.data.session.access_token; if(!token) throw new Error('Please sign in to build 3D lessons.');
+  var last=null;
+  for(var attempt=0; attempt<(tries||3); attempt++){   // Render free tier may be asleep — retry while it wakes
+    try{
+      var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+path,{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body)});
+      var j=await r.json().catch(function(){return {};});
+      if(r.ok) return j;
+      if(r.status===502||r.status===503||r.status===504){ if(j&&j.error){ var e5=new Error(j.error); e5.status=r.status; throw e5; } last=new Error('Waking the server…'); await new Promise(function(x){setTimeout(x,2000*(attempt+1));}); continue; }
+      var e=new Error((j&&(j.message||j.error))||'Something went wrong.'); e.status=r.status; e.queued=j&&j.queued; throw e;
+    }catch(err){ if(err&&err.status) throw err; last=err; if(attempt<(tries||3)-1) await new Promise(function(x){setTimeout(x,2000*(attempt+1));}); }
+  }
+  throw last||new Error('Could not reach the server.');
+}
+async function mbxPersonalise(t, tpl){
+  if(_MBX_LESSON[t.id]!==undefined) return _MBX_LESSON[t.id];
+  try{ var j=await mbxCall('/explainer',{template:tpl.id,topicId:t.id,text:String(t.note||'').slice(0,60000)},3); _MBX_LESSON[t.id]=j.lesson||null; }catch(e){ _MBX_LESSON[t.id]=null; }
+  return _MBX_LESSON[t.id];
+}
+function mbxSpeakers(){
+  return { speak:function(text,done){ if(text===null||text===undefined){ try{ stopSpeak(); }catch(e){} return; } try{ voiceSpeak(text, done||null, 'read'); }catch(e){ if(done) done(); } },
+           warm:function(lines){ try{ (lines||[]).slice(0,8).forEach(function(l){ window.warmSpeak&&window.warmSpeak(l,'read'); }); }catch(e){} } };
+}
+function mbxPick(tid, name){ _MBX_PICK[tid]=name; render(); }
+function mbxBuildTyped(tid){ var i=document.getElementById('mbxAsk'); var v=(i&&i.value||'').trim(); if(v.length>2) mbxPick(tid, v); }
+function renderMech3d(t){
+  var pl=mbxPlateFor(t); if(pl) return renderPlateTutor(t, pl);
+  if(_mbpCur){ try{ _mbpCur.api.destroy(); }catch(e){} _mbpCur=null; }
+  if(!mbxShow(t)) return '<div class="empty" style="text-align:left">No 3D Tutor for this topic yet.</div>';
+  var tpl=mbxTemplateFor(t), pick=_MBX_PICK[t.id]||(tpl?'@'+tpl.id:null), scan=_MBX_SCAN[t.id];
+  if(scan===undefined){ _MBX_SCAN[t.id]='pending'; mbxCall('/explainer/scan',{text:String(t.note||'').slice(0,60000)},3).then(function(j){ _MBX_SCAN[t.id]=j.mechanisms||[]; if((location.hash||'').indexOf(t.id)>=0&&topicTab==='mech3d') render(); }).catch(function(e){ _MBX_SCAN[t.id]={error:e.message}; if((location.hash||'').indexOf(t.id)>=0&&topicTab==='mech3d') render(); }); }
+  var chip=function(label,on,click){ return '<button onclick="'+click+'" style="flex:none;border:1px solid '+(on?'var(--accent)':'var(--line)')+';background:'+(on?'var(--accent)':'var(--panel)')+';color:'+(on?'#fff':'var(--text)')+';border-radius:9px;padding:7px 12px;font-weight:600;font-size:12.5px;cursor:pointer;white-space:nowrap">'+label+'</button>'; };
+  var chips=[];
+  if(tpl) chips.push(chip('⭐ '+esc(tpl.label)+' (polished)', pick==='@'+tpl.id, "mbxPick('"+t.id+"','@"+tpl.id+"')"));
+  if(Array.isArray(scan)) scan.forEach(function(m){ if(m.template&&tpl&&m.template===tpl.id) return; chips.push(chip(esc(m.name), pick===m.name, "mbxPick('"+t.id+"',"+JSON.stringify(m.name).replace(/"/g,'&quot;')+")")); });
+  var scanNote = scan==='pending' ? '<span style="color:var(--dim);font-size:12.5px">Finding the mechanisms in this note…</span>' : (scan&&scan.error ? '<span style="color:var(--dim);font-size:12.5px">'+esc(scan.error)+'</span>' : (Array.isArray(scan)&&!scan.length&&!tpl ? '<span style="color:var(--dim);font-size:12.5px">No mechanisms found in this note — type one below.</span>' : ''));
+  var head='<div style="color:var(--dim);font-size:13px;margin-bottom:8px">Chemistry as real 3D molecules — narrated step by step and matched to this note. Pick a mechanism or type one.</div>'
+    +'<div style="display:flex;gap:7px;overflow-x:auto;padding-bottom:6px;margin-bottom:6px">'+chips.join('')+scanNote+'</div>'
+    +'<div style="display:flex;gap:7px;margin-bottom:12px"><input id="mbxAsk" placeholder="e.g. acid-catalysed esterification of ethanoic acid" style="flex:1;min-width:0;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:9px;padding:8px 10px;font:inherit;font-size:13px" onkeydown="if(event.key===\'Enter\')mbxBuildTyped(\''+t.id+'\')"><button class="btn" style="font-size:12.5px" onclick="mbxBuildTyped(\''+t.id+'\')">Build in 3D</button></div>';
+  if(!pick) return head+'<div class="empty" style="text-align:left">Choose a mechanism above to build its 3D lesson.</div>';
+  setTimeout(function(){
+    var host=document.getElementById('mbxHost'); if(!host) return;
+    mbxLoad().then(function(M){
+      if(!host.isConnected) return;
+      if(pick.charAt(0)==='@'){   // hand-built template
+        var api=M.mount(host,Object.assign({ template:tpl.id, lesson:_MBX_LESSON[t.id]||null }, mbxSpeakers()));
+        _mbxCur={tid:t.id, api:api};
+        if(_MBX_LESSON[t.id]===undefined) mbxPersonalise(t,tpl).then(function(l){ if(l&&_mbxCur&&_mbxCur.tid===t.id&&_mbxCur.api.setLesson) _mbxCur.api.setLesson(l); }).catch(function(){});
+        return;
+      }
+      var ak=t.id+'|'+pick, have=_MBX_AUTO[ak];
+      var mountIt=function(lesson){ if(!host.isConnected) return; try{ _mbxCur={tid:t.id, api:M.mountAuto(host,Object.assign({ lesson:lesson, onFlag:function(){ mbxCall('/explainer/flag',{name:pick,topic:t.name},1).catch(function(){}); } }, mbxSpeakers()))}; }catch(e){ host.innerHTML='<div class="empty" style="text-align:left">'+esc(e.message)+'</div>'; } };
+      if(have&&have.lesson) return mountIt(have.lesson);
+      if(have&&have.error){ host.innerHTML='<div class="empty" style="text-align:left">'+esc(have.error)+'</div>'; return; }
+      var t0=Date.now(), phases=['Reading the note','Writing the mechanism','Checking the chemistry','Drawing it in 3D'];
+      host.innerHTML='<div class="empty" style="text-align:left"><b style="color:var(--text)">Building “'+esc(pick)+'” in 3D…</b><br><span id="mbxProg">'+phases[0]+'</span><br><span style="font-size:12px">Usually 30–90 seconds the first time — then it opens instantly for everyone.</span></div>';
+      var timer=setInterval(function(){ var p=document.getElementById('mbxProg'); if(!p){ clearInterval(timer); return; } var s=Math.round((Date.now()-t0)/1000); p.textContent=phases[Math.min(phases.length-2, Math.floor(s/15))]+' · '+s+'s'; },1000);
+      if(!have){ _MBX_AUTO[ak]={pending:true};
+        mbxCall('/explainer/build',{name:pick,text:String(t.note||'').slice(0,60000),topic:t.name},2).then(function(j){ _MBX_AUTO[ak]={lesson:j.lesson}; }).catch(function(e){ _MBX_AUTO[ak]={error:e.message}; })
+          .then(function(){ clearInterval(timer); if(_MBX_PICK[t.id]===pick&&topicTab==='mech3d'&&(location.hash||'').indexOf(t.id)>=0) render(); });
+      }
+    }).catch(function(e){ if(host.isConnected) host.innerHTML='<div class="empty" style="text-align:left">'+esc(e.message)+'</div>'; });
+  },0);
+  return head+'<div id="mbxHost"><div class="empty">Loading the 3D Tutor…</div></div>';
 }
 /* dev-only route #/viz3d[/sceneId] — not in student nav; lets any scene be opened without a topic */
 function pageViz3d(id){
@@ -5430,6 +5692,51 @@ async function taQuarantine(ev, target_id, qh){ if(ev&&ev.preventDefault)ev.prev
 
 
 /* ===== Admin: Visualize asset library — automated growth (is_admin only) ===== */
+/* ===== 3D Tutor insights (feature 7) — admins only. Every student, no names. Data: plate_events (import-server/sql/plate-events.sql). ===== */
+var _PA={plate:'', days:30, data:null};
+function pagePlateAdmin(){
+  if(!window.IS_ADMIN) return pageHome();
+  setTimeout(paFetch,40);
+  return crumbs([{label:'Home',route:'home'},{label:'Admin · 3D Tutor insights'}])+
+    `<h1>🧪 3D Tutor insights</h1><p class="sub">What students do with the 3D lessons · every student, no names</p>
+     <div id="paBody"><div class="empty">Loading…</div></div>`;
+}
+function paSet(k,v){ _PA[k]=v; paFetch(); }
+async function paFetch(){
+  var host=$('#paBody'); if(!host) return;
+  try{ var r=await admApi('/admin/plate/insights?days='+_PA.days+(_PA.plate?'&plate='+encodeURIComponent(_PA.plate):''));
+    if(!r.ok) throw new Error((r.data&&(r.data.error||r.data.message))||'Could not load insights'); _PA.data=r.data; host.innerHTML=paHtml(r.data); }
+  catch(e){ host.innerHTML='<div class="card"><b>Couldn’t load the insights.</b><p class="sub" style="margin:6px 0 0">'+esc(e.message)+'</p></div>'; }
+}
+function paHtml(d){
+  var H=d.headline||{}, chip=function(on,label,js){ return '<button class="pa-chip'+(on?' on':'')+'" onclick="'+js+'">'+esc(label)+'</button>'; };
+  var tile=function(n,l,s,bad){ return '<div class="pa-tile"><b>'+n+'</b><span>'+l+'</span>'+(s?'<i class="'+(bad?'bad':'')+'">'+s+'</i>':'')+'</div>'; };
+  var dash=function(v,suf){ return v==null?'—':v+(suf||''); };
+  var h='<div class="pa-row">'+chip(!_PA.plate,'All plates',"paSet('plate','')")+(d.plates||[]).map(function(p){ return chip(_PA.plate===p.id,p.title,"paSet('plate','"+esc(p.id)+"')"); }).join('')
+    +'<span style="flex:1"></span>'+[7,30,90].map(function(n){ return chip(_PA.days===n,n+' days',"paSet('days',"+n+")"); }).join('')+'</div>';
+  if(!d.rows){ return h+'<div class="card"><b>Nothing yet.</b><p class="sub" style="margin:6px 0 0">Insights appear as soon as students open 3D lessons'+(_PA.plate?' on this plate':'')+'.</p></div>'; }
+  var ws=H.worstStop&&(d.reach||[])[H.worstStop.k];
+  h+='<div class="pa-tiles">'+tile(H.opened,'lessons opened',H.students+' students')+tile(dash(H.finishedFullPct,'%'),'finished the full walk-through',ws?'most leave before '+esc(ws.title):'',!!ws)
+    +tile(dash(H.examPct,'%'),'exam revision score',H.examN?H.examN+' finished':'')+tile(H.explainAvg==null?'—':H.explainAvg+'/3','explain-back score',H.explainN?H.explainN+' answers':'')
+    +tile(H.asks,'questions asked','')+tile(H.openReports,'open reports','',H.openReports>0)+'</div>';
+  var reach=(d.reach||[]).map(function(x){ var bad=H.worstStop&&H.worstStop.k===x.k; return '<div class="pa-bar"><span>'+(x.k+1)+'. '+esc(x.title)+'</span><em><i style="width:'+(x.pct||0)+'%"'+(bad?' class="bad"':'')+'></i></em><b>'+dash(x.pct,'%')+'</b></div>'; }).join('')||'<p class="sub">No full walk-throughs yet.</p>';
+  var title=function(id){ var p=(d.plates||[]).find(function(x){ return x.id===id; }); return p?p.title:id; };
+  var reps=(d.reports||[]).map(function(x){ var open=x.status==='open';
+    return '<div class="pa-item'+(open?'':' done')+'"><div><b>'+esc(x.reason||'Report')+'</b> · '+(x.k!=null&&x.k>=0?'stop '+(x.k+1)+(x.title?' '+esc(x.title):''):'the plate')+(_PA.plate?'':' · '+esc(title(x.plate)))+(open?'':' · <span class="ok">fixed</span>')+'</div>'
+      +'<div class="sub">'+(x.comments&&x.comments.length?x.comments.map(function(c){ return '“'+esc(c)+'”'; }).join(' · ')+' · ':'')+x.n+' student'+(x.n>1?'s':'')+(x.version?' · lesson '+esc(x.version):'')+'</div>'
+      +(x.lineText?'<div class="sub">Note: “'+esc(x.lineText.slice(0,160))+'”</div>':'')
+      +'<div class="btnrow" style="gap:6px;margin-top:4px"><a class="btn sm" target="_blank" rel="noopener" href="'+paPlateUrl(x.plate)+'">Open the plate</a><button class="btn sm'+(open?' primary':'')+'" onclick="paStatus(['+x.ids.join(',')+'],\''+(open?'fixed':'open')+'\',this)">'+(open?'Mark fixed':'Reopen')+'</button></div></div>'; }).join('')||'<p class="sub">No reports. ⚑ on the player sends one with the exact stop.</p>';
+  var nin=(d.notInNote||[]).map(function(x){ return '<div class="pa-item"><div>'+esc(x.q)+' <b>· '+x.n+'</b></div><div class="sub">'+(x.failed?(x.failed===x.n?'couldn’t be answered':'sometimes couldn’t be answered'):'answered from the plate')+(_PA.plate?'':' · '+esc(title(x.plate)))+'</div>'
+    +'<div class="btnrow" style="margin-top:4px"><button class="btn sm" onclick="paQueue(\''+esc(title(x.plate)+' · '+x.q).replace(/'/g,"\\'")+'\',this)">Add to build queue</button></div></div>'; }).join('')||'<p class="sub">Nothing yet.</p>';
+  var mq=(d.missedQs||[]).map(function(x){ return '<div class="pa-item"><div>'+esc(x.q)+' <b>· '+x.pct+'% right</b></div><div class="sub">'+x.n+' answer'+(x.n>1?'s':'')+(x.commonWrong?' · most chose “'+esc(x.commonWrong)+'”':'')+'</div></div>'; }).join('')||'<p class="sub">No exam revision answers yet.</p>';
+  var wk=(d.weakest||[]).map(function(x){ return '<div class="pa-item"><div>'+esc(x.concept)+' <b>· '+x.avg+'/3</b></div><div class="sub">'+x.n+' answer'+(x.n>1?'s':'')+(x.topMissed?' · most missed: “'+esc(x.topMissed)+'”':'')+'</div></div>'; }).join('')||'<p class="sub">No explain-back answers yet.</p>';
+  var card=function(t,sub,body){ return '<div class="card pa-card"><h3>'+t+'</h3>'+(sub?'<p class="sub">'+sub+'</p>':'')+body+'</div>'; };
+  return h+'<div class="pa-grid2">'+card('Where students stop','Share of full walk-throughs that reached each stop',reach)+card('Reports from students · '+H.openReports+' open','From ⚑ on the player, grouped by stop and reason',reps)+'</div>'
+    +'<div class="pa-grid3">'+card('Asked, but not in their notes','What students want the plates (or their lecturers) to cover',nin)+card('Most-missed exam questions','',mq)+card('Weakest explain-back','',wk)+'</div>';
+}
+function paPlateUrl(id){ var P=(window.MBPlate&&MBPlate.PLATES||[]).find(function(x){ return x.id===id; }); return P?P.full:'explainer/library/physiology/'+id+'/'+id+'.html'; }
+async function paStatus(ids,status,btn){ try{ btn.disabled=true; var r=await admApi('/admin/plate/report-status',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ids:ids,status:status})}); if(!r.ok) throw new Error((r.data&&r.data.error)||'failed'); mbToast(status==='fixed'?'Marked fixed.':'Reopened.'); paFetch(); }catch(e){ btn.disabled=false; mbToast('Couldn’t update: '+e.message); } }
+async function paQueue(name,btn){ try{ btn.disabled=true; var r=await admApi('/admin/plate/queue',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name})}); if(!r.ok) throw new Error((r.data&&r.data.error)||'failed'); btn.textContent='✓ In the build queue'; }catch(e){ btn.disabled=false; mbToast('Couldn’t add: '+e.message); } }
 function pageVizAdmin(){
   if(!window.IS_ADMIN) return pageHome();
   setTimeout(vizAdmFetch,40);
@@ -5613,6 +5920,7 @@ function startBucket(k){
   go('review');
 }
 function startRecallSession(limit){
+  try{ mergeVizCards(); }catch(e){}
   const b=buildRecallSession();
   let items=b.capped.concat(b.conf);                    // priority order: hard → reviews → new → confidence
   if(limit&&limit>0&&items.length>limit) items=items.slice(0,limit);   // size-limited session keeps the most important cards
@@ -6269,6 +6577,7 @@ function mcqView(session){
       <div class="qlabel">${c.img?'Look at this — then answer':'Question'}${session?' · '+esc(t.subject.short):''}</div>
       <div class="q">${esc(c.q)}</div>
       ${c.img?`<div onclick="event.stopPropagation()">${imgBlock(c.img,c.imgCaption||'')}</div>`:''}
+      ${c.plate?mbpReviewSlot(it.id,c,picked):''}
       ${body}</div>
     ${picked?noteBlock(it):''}
     ${(c.src&&picked)?`<div style="text-align:center;margin-top:10px"><button onclick="event.stopPropagation();try{MB_DOCK_SOURCE()}catch(e){}" style="border:1px solid var(--line);background:var(--panel2);color:var(--accent);border-radius:999px;padding:6px 13px;font-weight:700;font-size:12.5px;cursor:pointer">${c.src_t!=null?('🎙 '+Math.floor(c.src_t/60)+':'+String(c.src_t%60).padStart(2,'0')+' · in the lecture'):'📄 Show in the note'}</button></div>`:''}
@@ -6335,6 +6644,20 @@ function cardView(session){
     ${(c.src&&S.show)?`<div style="text-align:center;margin-top:10px"><button onclick="event.stopPropagation();try{MB_DOCK_SOURCE()}catch(e){}" style="border:1px solid var(--line);background:var(--panel2);color:var(--accent);border-radius:999px;padding:6px 13px;font-weight:700;font-size:12.5px;cursor:pointer">${c.src_t!=null?('🎙 '+Math.floor(c.src_t/60)+':'+String(c.src_t%60).padStart(2,'0')+' · in the lecture'):'📄 Show in the note'}</button></div>`:''}
     ${cardActionsRow(it.id,it.deck)}
     ${controls}</div>`;
+}
+
+/* ---- 3D Tutor review cards: an optional 30-second replay of the card's moment before answering; after answering it
+ * plays as the explanation. The plate only downloads when it is shown (data-light). ---- */
+var _mbpRP={open:null, api:null};
+function mbpReviewSlot(id,c,picked){
+  var show = picked || _mbpRP.open===id, where=(c.plate&&c.plate.phase)||'';
+  if(!show) return `<button class="mbprpbtn" onclick="event.stopPropagation();_mbpRP.open='${id}';render()">▶ Watch the 30-second replay first <span>${esc(where.toLowerCase())}</span></button>`;
+  setTimeout(function(){ var host=document.getElementById('mbpRP'); if(!host||host.dataset.card===id) return; host.dataset.card=id;
+    mbpLoad().then(function(P){ if(!host.isConnected) return; var plate=P.PLATES.filter(function(x){return x.id===c.plate.id;})[0];
+      if(!plate){ host.innerHTML='<div class="empty" style="text-align:left">This plate is not in the library any more.</div>'; return; }
+      _mbpRP.api=P.replay(host,{ plate:plate, stop:c.plate, seconds:30, caption:c.caption||'', isDark:function(){ return document.documentElement.getAttribute('data-theme')==='dark'; } });
+    }).catch(function(e){ if(host.isConnected) host.innerHTML='<div class="empty" style="text-align:left">'+esc(e.message)+'</div>'; }); },0);
+  return `<div id="mbpRP" class="mbprp" onclick="event.stopPropagation()"><div class="empty">Loading the replay…</div></div>`;
 }
 
 /* ---- MCQ interaction (Recall cards with options) ---- */
@@ -7721,6 +8044,7 @@ function render(){
     case 'admin-integrated': html=pageIntegratedWorkbench(); break;
     case 'intel':     html=pagePilot(); break;   // dev-only pilot readout (not in student nav)
     case 'vizadmin':  html=pageVizAdmin(); break;
+    case 'plateadmin': html=pagePlateAdmin(); break;
     case 'viz3d':     html=pageViz3d(p[1]); break;   // dev-only 3D scene opener (not in student nav)
     case 'builder':   html=pageBuilder(); break;
     case 'subject':   html=pageSubject(p[1]); break;
@@ -7968,11 +8292,11 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
   // of presenting the first-paint numbers as final.
   window.__MB_SYNC_PENDING = true;
   var p = MB_SYNC.init();
-  var clearPending=function(){ window.__MB_SYNC_PENDING=false; try{ if(typeof render==='function') render(); }catch(e){} try{ if(window.MB_refreshAccountCard) window.MB_refreshAccountCard(); }catch(e){} };
+  var clearPending=function(){ window.__MB_SYNC_PENDING=false; try{ if(typeof render==='function') mbSoftRender(); }catch(e){} try{ if(window.MB_refreshAccountCard) window.MB_refreshAccountCard(); }catch(e){} };
   if(p && typeof p.then==='function') p.then(clearPending).catch(clearPending); else clearPending();
 } }catch(e){} });
 /* safety: never let the "Loading your notes…" state stick if content can't load */
-setTimeout(function(){ if(!window.__MB_CONTENT_READY){ window.__MB_CONTENT_READY=true; try{ render(); }catch(e){} } },9000);
+setTimeout(function(){ if(!window.__MB_CONTENT_READY){ window.__MB_CONTENT_READY=true; try{ mbSoftRender(); }catch(e){} } },9000);
 /* admin: check whether the free Kokoro voice is up (so basic tier isn't silently spending Fish credits) */
 setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }catch(e){} },6000);
 /* ============================================================

@@ -1,0 +1,69 @@
+{
+ "id": "cardiac-cycle-wiggers",
+ "title": "The four-chamber heart",
+ "titleEm": "in motion",
+ "figLabel": "Plate 1 · Cardiac cycle",
+ "sub": "A frontal cutaway driven by a pressure model. Every valve opens only when the pressure behind it beats the pressure ahead of it; watch the gradients, not the clock.",
+ "kind": "cycle",
+ "timeUnit": "s",
+ "duration": 0.8,
+ "legend": "<span><i class='sw' style='background:var(--cold-hi)'></i>Deoxygenated</span><span><i class='sw' style='background:var(--hot-hi)'></i>Oxygenated</span><span><i class='sw' style='background:var(--wall)'></i>Myocardium (cut)</span><span>Chamber size changes are true to the model's volumes</span>",
+ "parts": [
+  {
+   "id": "RA",
+   "name": "Right atrium"
+  },
+  {
+   "id": "RV",
+   "name": "Right ventricle"
+  },
+  {
+   "id": "LA",
+   "name": "Left atrium"
+  },
+  {
+   "id": "LV",
+   "name": "Left ventricle"
+  },
+  {
+   "id": "tricuspid",
+   "name": "Tricuspid valve"
+  },
+  {
+   "id": "pulmonary",
+   "name": "Pulmonary valve"
+  },
+  {
+   "id": "mitral",
+   "name": "Mitral valve"
+  },
+  {
+   "id": "aortic",
+   "name": "Aortic valve"
+  },
+  {
+   "id": "aorta",
+   "name": "Aorta"
+  },
+  {
+   "id": "pa",
+   "name": "Pulmonary artery"
+  },
+  {
+   "id": "cavae",
+   "name": "Venae cavae"
+  },
+  {
+   "id": "pveins",
+   "name": "Pulmonary veins"
+  }
+ ],
+ "phases": [
+  "Atrial systole",
+  "Isovolumetric contraction",
+  "Ventricular ejection",
+  "Isovolumetric relaxation",
+  "Rapid filling",
+  "Diastasis"
+ ]
+}

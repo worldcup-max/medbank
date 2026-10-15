@@ -1,0 +1,24 @@
+{
+ "title": "How the nephron",
+ "titleEm": "makes urine",
+ "figLabel": "Plate 2 · Renal tubule",
+ "sub": "Follow one parcel of filtrate: each segment's wall decides whether water or salt may leave, and the depth of the medulla decides how far it goes.",
+ "kind": "journey",
+ "timeUnit": "s",
+ "duration": 133,
+ "parts": [
+  {"id": "aff", "name": "Afferent arteriole"}, {"id": "glom", "name": "Glomerulus"}, {"id": "eff", "name": "Efferent arteriole"},
+  {"id": "bowman", "name": "Bowman's capsule"}, {"id": "pct", "name": "Proximal convoluted tubule"}, {"id": "tdl", "name": "Thin descending limb"},
+  {"id": "tal", "name": "Thick ascending limb"}, {"id": "md", "name": "Macula densa"}, {"id": "dct", "name": "Distal convoluted tubule"},
+  {"id": "cd", "name": "Collecting duct"}, {"id": "ptc", "name": "Peritubular capillaries"}, {"id": "vr", "name": "Vasa recta"},
+  {"id": "interstitium", "name": "Medullary interstitium"}
+ ],
+ "phases": ["Glomerular filtration", "Proximal convoluted tubule", "Thin descending limb", "Thick ascending limb", "Distal convoluted tubule", "Cortical collecting duct", "Medullary collecting duct"],
+ "quantities": [
+  {"key": "osm", "label": "Tubular fluid osmolality", "unit": "mOsm/kg", "typical": [100, 1200]},
+  {"key": "vol", "label": "Filtrate volume left", "unit": "%", "typical": [0.5, 100]},
+  {"key": "intOsm", "label": "Local interstitial osmolality", "unit": "mOsm/kg", "typical": [300, 1200]},
+  {"key": "flowDay", "label": "Tubular flow (whole kidneys)", "unit": "L/day", "typical": [1, 180]},
+  {"key": "glucose", "label": "Filtered glucose left", "unit": "%", "typical": [0, 100]}
+ ]
+}

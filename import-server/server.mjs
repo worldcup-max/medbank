@@ -24,6 +24,9 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
+import { EXPLAINER_TEMPLATES, explainerExcerpt, explainerKey, buildExplainerPrompt, parseExplainerLesson } from "./explainer.mjs";   // 3D Tutor
+import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPlateTutor, plateAskKey, buildAskPrompt, checkAsk, buildExplainPrompt, checkExplain, plateInsights, PLATE_EVENT_KINDS } from "./plate-tutor.mjs";   // 3D Tutor · library plates, tutor from the note
+import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
 import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
@@ -1101,13 +1104,32 @@ async function _ttsRaw(p, text, voiceId){
   const spoken = (p==="kokoro") ? kokoroPrep(text) : sayPrep(text);
   const key = _ttsKey(p, voiceId, spoken);
   if(_ttsCache.has(key)) return _ttsCache.get(key);
+  const remember = (b) => { _ttsCache.set(key, b); if(_ttsCache.size > _TTS_MAX){ _ttsCache.delete(_ttsCache.keys().next().value); } return b; };
+  const kept = await ttsStoreGet(p, key); if(kept) return remember(kept);          // made before (any student, any server restart) → free
   let buf;
   if(p==="fish")        buf = await fishTTS(spoken, voiceId);
   else if(p==="kokoro") buf = await kokoroTTS(spoken, voiceId);
   else throw new Error("Unsupported TTS provider '"+p+"' (OpenAI TTS is disabled on this account)");
-  _ttsCache.set(key, buf);
-  if(_ttsCache.size > _TTS_MAX){ _ttsCache.delete(_ttsCache.keys().next().value); }
-  return buf;
+  ttsStorePut(p, key, buf);                                                         // not awaited: the student never waits on the upload
+  return remember(buf);
+}
+/* Every clip is kept in Supabase Storage (private bucket "tts-cache", created on first use), keyed by provider + voice + the exact
+ * spoken text. So a line is paid for once, ever: replays, a new phone, a cleared app, the server waking from sleep and classmates with
+ * the same lecture note all get the stored clip. TTS_STORE=0 turns it off. Storage trouble never breaks speech, it just skips the cache. */
+const TTS_BUCKET = "tts-cache", TTS_STORE_ON = process.env.TTS_STORE !== "0";
+const TTS_STORE = { hits:0, misses:0, puts:0, errors:0, lastError:null }; let _ttsBucketReady = null;
+function ttsBucket(){ if(!_ttsBucketReady) _ttsBucketReady = admin.storage.createBucket(TTS_BUCKET, { public:false }).then(()=>true, ()=>true); return _ttsBucketReady; }
+async function ttsStoreGet(p, key){
+  if(!TTS_STORE_ON) return null;
+  try{ const { data, error } = await admin.storage.from(TTS_BUCKET).download(p+"/"+key+".mp3");
+    if(error || !data){ TTS_STORE.misses++; return null; } TTS_STORE.hits++; return Buffer.from(await data.arrayBuffer()); }
+  catch(e){ TTS_STORE.errors++; TTS_STORE.lastError = String(e.message||e).slice(0,200); return null; }
+}
+function ttsStorePut(p, key, buf){
+  if(!TTS_STORE_ON || !buf || !buf.length) return;
+  ttsBucket().then(()=>admin.storage.from(TTS_BUCKET).upload(p+"/"+key+".mp3", buf, { contentType:"audio/mpeg", upsert:true }))
+    .then((r)=>{ if(r && r.error){ TTS_STORE.errors++; TTS_STORE.lastError = r.error.message; } else TTS_STORE.puts++; })
+    .catch((e)=>{ TTS_STORE.errors++; TTS_STORE.lastError = String(e.message||e).slice(0,200); });
 }
 /* Live Kokoro health — so the app can warn you (admin) when basic tier is silently
  * burning paid Fish credits because the self-hosted Kokoro box is down. */
@@ -1152,6 +1174,7 @@ async function uploadPodcastAudio(path, buf){
 }
 
 app.get("/health", (_req,res)=>res.json({ ok:true,
+  store:{ on:TTS_STORE_ON, bucket:TTS_BUCKET, ...TTS_STORE },
   kokoro:{ ok:KOKORO_HEALTH.ok, configured:!!process.env.KOKORO_TTS_URL, lastError:KOKORO_HEALTH.lastError,
            lastFailAt:KOKORO_HEALTH.lastFailAt, lastOkAt:KOKORO_HEALTH.lastOkAt, fallbacks:KOKORO_HEALTH.fallbacks },
   fish:{ configured:!!FISH_KEY, keyLen:FISH_KEY.length, source:FISH_KEY_SOURCE,
@@ -1879,6 +1902,244 @@ async function buildTopicPreview(note, subject){
   }
   return { status: scenes.length>=3 ? "ready" : "failed", title:(plan&&plan.title)||"", scenes };
 }
+/* 3D Tutor — personalise a template lesson to the student's note. The app plays the template's own lesson
+ * instantly and swaps these words in when they arrive, so this call is never on the critical path.
+ * Cached per (template, note excerpt) in "explainers" and shared by every student with the same note. */
+app.post("/explainer", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const template = (req.body.template||"").toString();
+    if(!EXPLAINER_TEMPLATES[template]) return res.status(400).json({ error:"unknown template" });
+    const excerpt = explainerExcerpt((req.body.text||"").toString().slice(0,60000), template);
+    if(excerpt.length < 80) return res.json({ ok:true, lesson:null, reason:"note too short to personalise" });
+    const key = explainerKey(template, excerpt);
+    try{ const c = await admin.from("explainers").select("lesson").eq("cache_key",key).maybeSingle();
+      if(c.data && c.data.lesson && c.data.lesson.steps) return res.json({ ok:true, cached:true, lesson:c.data.lesson }); }catch(_){}
+    // daily cap on NEW builds only (cached replays are free and unlimited)
+    try{
+      const premium = await isPremium(user.id, user.email).catch(()=>false);
+      const since = new Date(); since.setUTCHours(0,0,0,0);
+      const cnt = await admin.from("explainers").select("cache_key",{ count:"exact", head:true }).eq("account_id",user.id).gte("created_at",since.toISOString());
+      if(!cnt.error && (cnt.count||0) >= (premium ? 30 : 10)) return res.status(429).json({ error:"daily limit", message:"You’ve personalised all of today’s 3D lessons — the standard lesson still plays." });
+    }catch(_){}
+    const prompt = buildExplainerPrompt(template, excerpt);
+    let lesson = null;
+    for(let attempt=0; attempt<2 && !lesson; attempt++){
+      const gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:4500, temperature:0.4, json:true });
+      lesson = parseExplainerLesson(gen.text, template);
+    }
+    if(!lesson) return res.status(502).json({ error:"could not personalise this lesson — the standard lesson still plays" });
+    try{ await admin.from("explainers").upsert({ cache_key:key, template, account_id:user.id, lesson }); }catch(_){}
+    res.json({ ok:true, cached:false, lesson });
+  }catch(e){ console.error("[explainer]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* 3D Tutor — instant builder: scan a note for mechanisms, build a checked 3D lesson for one, and keep a queue of
+ * what students ask for so the most-wanted ones get a polished hand-built version (explainer/tools/queue.mjs). */
+async function mbxRecordRequest(name, field, topic){
+  try{
+    const key = mechKey(name); if(!key) return;
+    const cur = await admin.from("explainer_requests").select("*").eq("mech_key",key).maybeSingle();
+    const row = cur.data || { mech_key:key, name, requests:0, built:0, failed:0, flags:0 };
+    row[field] = (row[field]||0) + 1; row.name = name; row.updated_at = new Date().toISOString(); if(topic) row.last_topic = String(topic).slice(0,120);
+    await admin.from("explainer_requests").upsert(row);
+  }catch(_){}
+}
+app.post("/explainer/scan", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const note = (req.body.text||"").toString().slice(0,60000); if(note.trim().length < 80) return res.json({ ok:true, mechanisms:[] });
+    const key = scanCacheKey(note);
+    try{ const c = await admin.from("explainers").select("lesson").eq("cache_key",key).maybeSingle(); if(c.data && c.data.lesson && Array.isArray(c.data.lesson.mechanisms)) return res.json({ ok:true, cached:true, mechanisms:c.data.lesson.mechanisms }); }catch(_){}
+    const gen = await generate({ model: BASIC_MODEL, prompt: buildScanPrompt(note), parts:[], images:[], max_tokens:1200, temperature:0.2, json:true });
+    const mechanisms = parseScan(gen.text).map(m => ({ ...m, template: Object.keys(EXPLAINER_TEMPLATES).find(id => EXPLAINER_TEMPLATES[id].match.test(m.name)) || null }));
+    try{ await admin.from("explainers").upsert({ cache_key:key, template:"scan", account_id:user.id, lesson:{ mechanisms } }); }catch(_){}
+    res.json({ ok:true, mechanisms });
+  }catch(e){ console.error("[explainer/scan]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/explainer/build", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const name = (req.body.name||"").toString().replace(/\s+/g," ").trim().slice(0,90);
+    if(name.length < 3) return res.status(400).json({ error:"name the mechanism you want to see" });
+    const note = (req.body.text||"").toString().slice(0,60000), topic = (req.body.topic||"").toString();
+    const excerpt = autoExcerpt(note, name) || name;
+    const key = autoCacheKey(name, excerpt);
+    try{ const c = await admin.from("explainers").select("lesson").eq("cache_key",key).maybeSingle(); if(c.data && c.data.lesson && c.data.lesson.mechanism){ mbxRecordRequest(name,"requests",topic); return res.json({ ok:true, cached:true, lesson:c.data.lesson }); } }catch(_){}
+    try{
+      const premium = await isPremium(user.id, user.email).catch(()=>false);
+      const since = new Date(); since.setUTCHours(0,0,0,0);
+      const cnt = await admin.from("explainers").select("cache_key",{ count:"exact", head:true }).eq("account_id",user.id).neq("template","scan").gte("created_at",since.toISOString());
+      if(!cnt.error && (cnt.count||0) >= (premium ? 30 : 10)) return res.status(429).json({ error:"daily limit", message:"You’ve built all of today’s new 3D lessons. Lessons other students already built still open instantly." });
+    }catch(_){}
+    let errors = null, lesson = null;
+    for(let attempt=0; attempt<3 && !lesson; attempt++){
+      const gen = await generate({ model: BASIC_MODEL, prompt: buildAutoPrompt(name, excerpt, errors), parts:[], images:[], max_tokens:6000, temperature: attempt ? 0.2 : 0.35, json:true });
+      const r = checkAutoLesson(gen.text, name);
+      if(r.lesson) lesson = r.lesson; else { errors = r.errors; console.warn("[explainer/build] attempt", attempt+1, "failed:", (errors||[]).slice(0,4).join(" | ")); }
+    }
+    if(!lesson){ mbxRecordRequest(name,"failed",topic); return res.status(422).json({ error:"Couldn’t build a reliable 3D version of this one yet — it’s been added to the build queue.", queued:true }); }
+    try{ await admin.from("explainers").upsert({ cache_key:key, template:"auto", account_id:user.id, lesson }); }catch(_){}
+    mbxRecordRequest(name,"built",topic);
+    res.json({ ok:true, cached:false, lesson });
+  }catch(e){ console.error("[explainer/build]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/explainer/flag", async (req,res)=>{
+  try{ const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const name = (req.body.name||"").toString().slice(0,90); if(name) await mbxRecordRequest(name,"flags",req.body.topic); res.json({ ok:true }); }
+  catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+/* 3D Tutor · library plates — the tutor is written FROM THE STUDENT'S NOTE onto the plate's manifest (plate-tutor.mjs).
+ * Body {plate, text, topic}. Cached per (plate, note lines) in "explainers" (template "plate") and shared by students
+ * with the same note. Every stop is checked; bad stops get one regeneration with the errors, then are dropped.
+ * Note content the plate cannot show ("extend") is queued in explainer_requests so the plate can be extended. */
+app.post("/explainer/plate", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const plate = (req.body.plate||"").toString().trim(), topic = (req.body.topic||"").toString().slice(0,120);
+    let M; try{ M = await loadManifest(plate); }catch(e){ return res.status(404).json({ error:"unknown plate" }); }
+    const lines = splitNote((req.body.text||"").toString().slice(0,60000)).slice(0,260);
+    if(lines.filter(l=>!l.h).length < 2) return res.json({ ok:true, lesson:null, reason:"note too short to follow" });
+    const key = plateTutorKey(plate, lines);
+    try{ const c = await admin.from("explainers").select("lesson").eq("cache_key",key).maybeSingle();
+      if(c.data && c.data.lesson && c.data.lesson.steps) return res.json({ ok:true, cached:true, lesson:c.data.lesson }); }catch(_){}
+    try{
+      const premium = await isPremium(user.id, user.email).catch(()=>false);
+      const since = new Date(); since.setUTCHours(0,0,0,0);
+      const cnt = await admin.from("explainers").select("cache_key",{ count:"exact", head:true }).eq("account_id",user.id).neq("template","scan").gte("created_at",since.toISOString());
+      if(!cnt.error && (cnt.count||0) >= (premium ? 30 : 10)) return res.status(429).json({ error:"daily limit", message:"You’ve used today’s new 3D lessons. Lessons already made from the same note still open." });
+    }catch(_){}
+    let best = null, errors = null;
+    for(let attempt=0; attempt<2; attempt++){
+      const gen = await generate({ model: BASIC_MODEL, prompt: buildPlateTutorPrompt(M, lines, errors), parts:[], images:[], max_tokens:5000, temperature: attempt ? 0.2 : 0.35, json:true });
+      const r = checkPlateTutor(gen.text, M, lines);
+      if(r.lesson && (!best || r.lesson.steps.length > best.steps.length || !r.errors.length)) best = r.lesson;
+      if(!r.errors.length) break;
+      errors = r.errors; console.warn("[explainer/plate]", plate, "attempt", attempt+1, "dropped:", errors.slice(0,4).join(" | "));
+    }
+    if(!best || !best.steps.length) return res.status(502).json({ error:"Couldn’t follow your note on this plate yet — the standard lesson still plays." });
+    try{ await admin.from("explainers").upsert({ cache_key:key, template:"plate", account_id:user.id, lesson:best }); }catch(_){}
+    (best.extend||[]).forEach(x => mbxRecordRequest(M.title+" · "+x, "requests", topic));
+    res.json({ ok:true, cached:false, lesson:best });
+  }catch(e){ console.error("[explainer/plate]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+/* Ask the plate (feature 6): one question → an answer from the student's note (or, marked, from the plate itself), checked like the
+ * lesson and cached per note + question, so a question asked again (by anyone with the same note) is free. */
+async function plateDailyCount(uid, template){ const since = new Date(); since.setUTCHours(0,0,0,0);
+  const c = await admin.from("explainers").select("cache_key",{ count:"exact", head:true }).eq("account_id",uid).eq("template",template).gte("created_at",since.toISOString());
+  return c.error ? 0 : (c.count||0); }
+app.post("/explainer/plate/ask", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const plate = (req.body.plate||"").toString().trim(), topic = (req.body.topic||"").toString().slice(0,120), q = (req.body.q||"").toString().replace(/\s+/g," ").trim().slice(0,300);
+    if(q.length < 3) return res.status(400).json({ error:"Ask a question about the plate." });
+    let M; try{ M = await loadManifest(plate); }catch(e){ return res.status(404).json({ error:"unknown plate" }); }
+    const lines = splitNote((req.body.text||"").toString().slice(0,60000)).slice(0,260);
+    const at = { phase: (req.body.phase||"").toString().slice(0,80), focus: (Array.isArray(req.body.focus)?req.body.focus:[]).map(String).slice(0,4) };
+    const key = plateAskKey(plate, lines, q);
+    const sess = (req.body.session||"").toString().slice(0,60);
+    const logAsk = (a, failed) => plateEvent(user.id, sess, plate, topic, "ask", { q, inNote: !!(a && a.inNote), offTopic: !!(a && a.offTopic), failed: !!failed, phase: at.phase || null });
+    try{ const c = await admin.from("explainers").select("lesson").eq("cache_key",key).maybeSingle(); if(c.data && c.data.lesson && c.data.lesson.say){ logAsk(c.data.lesson); return res.json({ ok:true, cached:true, answer:c.data.lesson }); } }catch(_){}
+    try{ const premium = await isPremium(user.id, user.email).catch(()=>false);
+      if(await plateDailyCount(user.id, "plate-ask") >= (premium ? 200 : 60)) return res.status(429).json({ error:"daily limit", message:"You’ve asked the plate a lot today — questions you’ve asked before still answer." }); }catch(_){}
+    let answer = null, errors = null;
+    for(let attempt=0; attempt<2 && !answer; attempt++){
+      const gen = await generate({ model: BASIC_MODEL, prompt: buildAskPrompt(M, lines, q, at, errors), parts:[], images:[], max_tokens:700, temperature: attempt ? 0.1 : 0.25, json:true });
+      const r = checkAsk(gen.text, M, lines); if(!r.errors.length) answer = r.answer; else { errors = r.errors; console.warn("[plate/ask]", plate, "attempt", attempt+1, errors.slice(0,3).join(" | ")); }
+    }
+    if(!answer){ logAsk(null, true); return res.status(502).json({ error:"I couldn’t answer that from your note on this plate — try asking it another way." }); }
+    logAsk(answer);
+    try{ await admin.from("explainers").upsert({ cache_key:key, template:"plate-ask", account_id:user.id, lesson:{ ...answer, q } }); }catch(_){}
+    if(!answer.inNote && !answer.offTopic) mbxRecordRequest(M.title+" · asked: "+q.slice(0,80), "requests", topic);
+    res.json({ ok:true, cached:false, answer });
+  }catch(e){ console.error("[plate/ask]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+/* Explain it back (feature 6): the student's own explanation of one concept, marked against that concept's note lines.
+ * Kept (template "plate-explain") for the student's history and for analytics; never cached, every answer is new. */
+app.post("/explainer/plate/explain", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const plate = (req.body.plate||"").toString().trim(), q = (req.body.q||"").toString().slice(0,200), answer = (req.body.answer||"").toString().replace(/\s+/g," ").trim().slice(0,900);
+    if(answer.length < 2) return res.status(400).json({ error:"Say or type your explanation first." });
+    let M; try{ M = await loadManifest(plate); }catch(e){ return res.status(404).json({ error:"unknown plate" }); }
+    const lines = splitNote((req.body.text||"").toString().slice(0,60000)).slice(0,260);
+    const ids = (Array.isArray(req.body.lines)?req.body.lines:[]).map(String).filter(x => lines.some(l => l.id===x && !l.h)).slice(0,12);
+    if(!ids.length) return res.status(400).json({ error:"no note lines for this concept" });
+    try{ if(await plateDailyCount(user.id, "plate-explain") >= 150) return res.status(429).json({ error:"daily limit", message:"That’s a lot of explaining for one day — the tutor carries on without marking." }); }catch(_){}
+    let result = null, partial = null, errors = null;
+    for(let attempt=0; attempt<2 && !result; attempt++){
+      const gen = await generate({ model: BASIC_MODEL, prompt: buildExplainPrompt(M, lines, ids, q, answer, errors), parts:[], images:[], max_tokens:700, temperature: attempt ? 0.1 : 0.2, json:true });
+      const r = checkExplain(gen.text, M, lines, ids); if(!r.errors.length) result = r.result; else { errors = r.errors; partial = r.result || partial; console.warn("[plate/explain]", plate, "attempt", attempt+1, errors.slice(0,3).join(" | ")); }
+    }
+    result = result || (partial ? { v:1, ...partial, say:null } : null);   // say:null → the app reads the missed lines from the note itself
+    if(!result) return res.status(502).json({ error:"Couldn’t mark that just now." });
+    try{ await admin.from("explainers").upsert({ cache_key:"explain-"+crypto.randomUUID(), template:"plate-explain", account_id:user.id, lesson:{ plate, q, answer, ids, result } }); }catch(_){}
+    plateEvent(user.id, (req.body.session||"").toString().slice(0,60), plate, (req.body.topic||"").toString().slice(0,120), "explain", { concept: q, score: result.score, missed: (result.missed||[]).map(m => m.point), got: (result.got||[]).length });
+    res.json({ ok:true, result });
+  }catch(e){ console.error("[plate/explain]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+/* 3D Tutor insights (feature 7): what students do with the plates, in plate_events (sql/plate-events.sql). Writing never blocks a lesson. */
+function plateEvent(uid, session, plate, topic, kind, data, status){
+  return admin.from("plate_events").insert({ account_id:uid||null, session:session||null, plate, topic:topic||null, kind, data:data||{}, status:status||null }).then(r => { if(r && r.error) console.warn("[plate_events]", r.error.message); }, () => {});
+}
+app.post("/explainer/plate/events", async (req,res)=>{
+  try{ const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const plate = (req.body.plate||"").toString().slice(0,80), topic = (req.body.topic||"").toString().slice(0,120), session = (req.body.session||"").toString().slice(0,60);
+    if(!/^[a-z0-9-]{3,80}$/.test(plate)) return res.status(400).json({ error:"bad plate" });
+    const rows = (Array.isArray(req.body.events)?req.body.events:[]).slice(0,80).filter(e => e && PLATE_EVENT_KINDS.has(e.kind))
+      .map(e => ({ account_id:user.id, session:(e.session||session||"").toString().slice(0,60)||null, plate, topic:topic||null, kind:e.kind, data:JSON.parse(JSON.stringify(e.data||{}).slice(0,2000)), at:(e.at && !isNaN(Date.parse(e.at)) && Date.parse(e.at) <= Date.now()+60000) ? new Date(e.at).toISOString() : new Date().toISOString() }));
+    if(rows.length){ const r = await admin.from("plate_events").insert(rows); if(r.error) return res.status(500).json({ error:"insights table missing — run import-server/sql/plate-events.sql in Supabase", detail:r.error.message }); }
+    res.json({ ok:true, saved:rows.length });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/explainer/plate/report", async (req,res)=>{
+  try{ const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const plate = (req.body.plate||"").toString().slice(0,80), topic = (req.body.topic||"").toString().slice(0,120);
+    let M; try{ M = await loadManifest(plate); }catch(e){ return res.status(404).json({ error:"unknown plate" }); }
+    const b = req.body, d = { k: Number.isFinite(+b.k) ? +b.k : null, stop: Number.isFinite(+b.stop) ? +b.stop : null, title:(b.title||"").toString().slice(0,80), phase:(b.phase||"").toString().slice(0,80), tier:(b.tier||"").toString().slice(0,20),
+      lines:(Array.isArray(b.lines)?b.lines:[]).map(String).slice(0,8), lineText:(b.lineText||"").toString().slice(0,400), reason:(b.reason||"").toString().slice(0,60), comment:(b.comment||"").toString().slice(0,500), version:(b.version||"").toString().slice(0,10) };
+    if(!d.reason) return res.status(400).json({ error:"pick what's wrong" });
+    const r = await admin.from("plate_events").insert({ account_id:user.id, session:(b.session||"").toString().slice(0,60)||null, plate, topic:topic||null, kind:"report", data:d, status:"open" });
+    if(r.error) return res.status(500).json({ error:"insights table missing — run import-server/sql/plate-events.sql in Supabase" });
+    mbxRecordRequest(M.title+(d.title ? " · "+d.title : ""), "flags", topic);
+    res.json({ ok:true });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/admin/plate/insights", async (req,res)=>{
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const days = Math.max(1, Math.min(365, +req.query.days || 30)), plate = (req.query.plate||"").toString(), since = new Date(Date.now() - days*864e5).toISOString();
+    let q = admin.from("plate_events").select("id,at,account_id,session,plate,topic,kind,data,status").gte("at", since).order("at",{ ascending:false }).limit(50000);
+    if(plate) q = q.eq("plate", plate);
+    const r = await q; if(r.error) return res.status(500).json({ error:"Run import-server/sql/plate-events.sql in Supabase first.", detail:r.error.message });
+    const all = await admin.from("plate_events").select("plate").gte("at", since).limit(50000);
+    const ids = [...new Set((all.data||[]).map(x => x.plate))], plates = [];
+    for(const id of ids){ try{ plates.push({ id, title:(await loadManifest(id)).title }); }catch(_){ plates.push({ id, title:id }); } }
+    res.json({ ok:true, days, plate:plate||null, plates, rows:(r.data||[]).length, ...plateInsights(r.data||[]) });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/admin/plate/report-status", async (req,res)=>{
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const ids = (Array.isArray(req.body.ids)?req.body.ids:[]).map(Number).filter(Number.isFinite).slice(0,200), status = req.body.status === "open" ? "open" : "fixed";
+    if(!ids.length) return res.status(400).json({ error:"no reports" });
+    const r = await admin.from("plate_events").update({ status }).in("id", ids).eq("kind","report"); if(r.error) return res.status(500).json({ error:r.error.message });
+    res.json({ ok:true, status, n:ids.length });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/admin/plate/queue", async (req,res)=>{
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const name = (req.body.name||"").toString().slice(0,120); if(!name) return res.status(400).json({ error:"no name" });
+    await mbxRecordRequest(name, "requests", (req.body.topic||"").toString()); res.json({ ok:true });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/admin/explainer/queue", async (req,res)=>{
+  try{ const u = await requireAdmin(req); if(!u) return res.status(403).json({ error:"admins only" });
+    const r = await admin.from("explainer_requests").select("*").order("updated_at",{ ascending:false }).limit(500);
+    const rows = (r.data||[]).map(x => ({ ...x, score:(x.requests||0)+(x.built||0)+3*(x.failed||0)+5*(x.flags||0),
+      has_template: Object.values(EXPLAINER_TEMPLATES).some(t => t.match.test(x.name)) })).filter(x => !x.has_template).sort((a,b)=>b.score-a.score);
+    res.json({ ok:true, queue:rows });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
 app.post("/topic-preview", async (req,res)=>{
   try{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });

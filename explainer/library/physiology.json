@@ -1,0 +1,3329 @@
+{
+ "course": "Physiology",
+ "level": "200L-300L (MB1)",
+ "textbook": "Guyton and Hall Textbook of Medical Physiology, 15th edition (Elsevier, July 2025)",
+ "units": [
+  {
+   "unit": "I",
+   "title": "Introduction: the cell and general physiology",
+   "chapters": [
+    {
+     "chapter": 1,
+     "title": "Functional organization of the body and control of the internal environment",
+     "topics": [
+      {
+       "id": "body-fluid-compartments-overview",
+       "title": "Body fluid compartments: ICF, ECF, plasma and interstitium",
+       "kind": "structure",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "negative-feedback-control",
+       "title": "Negative feedback control: gain of a control system (baroreflex example)",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "positive-feedback-vicious-cycle",
+       "title": "Positive feedback: helpful (clotting, labour, action potential) vs vicious cycle (haemorrhage)",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "feedforward-adaptive-control",
+       "title": "Feed-forward and adaptive control (cerebellum example)",
+       "kind": "sequence",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 2,
+     "title": "The cell and its functions",
+     "topics": [
+      {
+       "id": "cell-membrane-structure",
+       "title": "Cell membrane: lipid bilayer, proteins, glycocalyx",
+       "kind": "structure",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "endocytosis-pinocytosis-phagocytosis",
+       "title": "Endocytosis, phagocytosis and lysosomal digestion",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "er-golgi-secretory-pathway",
+       "title": "ER to Golgi to secretory vesicle: the secretory pathway",
+       "kind": "journey",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "mitochondria-atp-production",
+       "title": "Mitochondria and ATP formation (overview)",
+       "kind": "journey",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "cytoskeleton-cilia-amoeboid-movement",
+       "title": "Cytoskeleton, ciliary beating and amoeboid movement",
+       "kind": "cycle",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 3,
+     "title": "Genetic control of protein synthesis, cell function and reproduction",
+     "topics": [
+      {
+       "id": "transcription",
+       "title": "Transcription: DNA to mRNA",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "translation-ribosome",
+       "title": "Translation at the ribosome: mRNA to protein",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "gene-regulation-operon",
+       "title": "Control of gene expression: promoters, enhancers, the operon",
+       "kind": "sequence",
+       "priority": 3,
+       "status": "todo"
+      },
+      {
+       "id": "cell-cycle-mitosis",
+       "title": "The cell cycle and mitosis",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "dna-replication-repair",
+       "title": "DNA replication and repair",
+       "kind": "sequence",
+       "priority": 3,
+       "status": "todo"
+      },
+      {
+       "id": "apoptosis",
+       "title": "Apoptosis: programmed cell death",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "II",
+   "title": "Membrane physiology, nerve and muscle",
+   "chapters": [
+    {
+     "chapter": 4,
+     "title": "Transport of substances through cell membranes",
+     "topics": [
+      {
+       "id": "simple-diffusion-fick",
+       "title": "Simple diffusion and Fick's law (factors affecting net diffusion)",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "channels-gating",
+       "title": "Ion channels: selectivity and voltage/ligand gating",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "facilitated-diffusion-saturation",
+       "title": "Facilitated (carrier) diffusion and saturation kinetics",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "osmosis-osmotic-pressure",
+       "title": "Osmosis and osmotic pressure; osmolarity vs tonicity",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "na-k-atpase",
+       "title": "The Na+/K+ ATPase pump cycle",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "building",
+       "wave": 1,
+       "order": 4,
+       "claimed_at": "2026-10-14T12:45:10Z"
+      },
+      {
+       "id": "secondary-active-transport",
+       "title": "Secondary active transport: SGLT co-transport and Na+/Ca2+ / Na+/H+ exchange",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "transepithelial-transport",
+       "title": "Transport across epithelial sheets (gut, renal tubule)",
+       "kind": "journey",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 5,
+     "title": "Membrane potentials and action potentials",
+     "topics": [
+      {
+       "id": "nernst-diffusion-potential",
+       "title": "Diffusion potentials and the Nernst equation",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "goldman-resting-potential",
+       "title": "Resting membrane potential: Goldman equation and K+ leak",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "building",
+       "wave": 1,
+       "order": 5,
+       "claimed_at": "2026-10-14T12:45:10Z"
+      },
+      {
+       "id": "action-potential-nerve",
+       "title": "The nerve action potential: Na+ and K+ channel gating",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "building",
+       "wave": 1,
+       "order": 3,
+       "claimed_at": "2026-10-14T12:45:10Z"
+      },
+      {
+       "id": "refractory-periods",
+       "title": "Absolute and relative refractory periods",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "threshold-all-or-none",
+       "title": "Threshold, all-or-none and accommodation",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "ap-propagation-unmyelinated",
+       "title": "Propagation of the action potential along an unmyelinated axon",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "saltatory-conduction",
+       "title": "Myelination and saltatory conduction",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 6
+      },
+      {
+       "id": "plateau-action-potential",
+       "title": "Plateau action potentials (cardiac and smooth muscle)",
+       "kind": "cycle",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "rhythmicity-pacemaker-tissue",
+       "title": "Rhythmicity of excitable tissue: repetitive discharge",
+       "kind": "cycle",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 6,
+     "title": "Contraction of skeletal muscle",
+     "topics": [
+      {
+       "id": "skeletal-muscle-structure",
+       "title": "Skeletal muscle: fibre, myofibril, sarcomere",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "sliding-filament-cross-bridge",
+       "title": "Sliding filament mechanism and the cross-bridge cycle",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 8
+      },
+      {
+       "id": "length-tension",
+       "title": "Length-tension relationship of the sarcomere",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "force-velocity",
+       "title": "Force-velocity relationship and muscle work",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "energetics-muscle-atp",
+       "title": "Energy sources for contraction: phosphocreatine, glycolysis, oxidative",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "fast-slow-fibres",
+       "title": "Fast vs slow muscle fibres",
+       "kind": "compare",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "motor-unit-recruitment-summation",
+       "title": "Motor units, recruitment, summation and tetanus",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "muscle-remodelling-rigor",
+       "title": "Muscle remodelling: hypertrophy, atrophy, rigor mortis",
+       "kind": "sequence",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 7,
+     "title": "Neuromuscular transmission and excitation-contraction coupling",
+     "topics": [
+      {
+       "id": "neuromuscular-junction",
+       "title": "Neuromuscular junction: ACh release, receptors, end-plate potential",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 7
+      },
+      {
+       "id": "nmj-drugs-myasthenia",
+       "title": "Drugs and disease at the NMJ: curare, neostigmine, myasthenia gravis",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "excitation-contraction-coupling-skeletal",
+       "title": "Excitation-contraction coupling: T-tubule, DHP and ryanodine receptors, Ca2+ release",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 9
+      }
+     ]
+    },
+    {
+     "chapter": 8,
+     "title": "Excitation and contraction of smooth muscle",
+     "topics": [
+      {
+       "id": "smooth-muscle-contraction",
+       "title": "Smooth muscle contraction: calmodulin, MLCK and the latch state",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 10
+      },
+      {
+       "id": "smooth-muscle-control",
+       "title": "Nervous and hormonal control of smooth muscle; slow waves",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "III",
+   "title": "The heart",
+   "chapters": [
+    {
+     "chapter": 9,
+     "title": "Cardiac muscle; the heart as a pump; heart valves",
+     "topics": [
+      {
+       "id": "cardiac-muscle-ecc",
+       "title": "Cardiac muscle: syncytium, plateau and Ca2+-induced Ca2+ release",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "cardiac-cycle-wiggers",
+       "title": "The cardiac cycle (Wiggers diagram): pressures, volumes, valves, sounds",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "built",
+       "wave": 1,
+       "order": 1,
+       "note": "Ported from the hand-built Four-Chamber Heart artifact (same drawing, chart with ECG and Left/Right heart toggle), manifest.json",
+       "built_at": "2026-10-14T08:51:45+00:00",
+       "plate": "explainer/library/physiology/cardiac-cycle-wiggers/cardiac-cycle-wiggers.html"
+      },
+      {
+       "id": "pressure-volume-loop",
+       "title": "The left ventricular pressure-volume loop: preload, afterload, contractility",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 14
+      },
+      {
+       "id": "heart-valves-function",
+       "title": "Function of the heart valves and papillary muscles",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "frank-starling",
+       "title": "Frank-Starling mechanism",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 15
+      },
+      {
+       "id": "autonomic-control-heart",
+       "title": "Sympathetic and parasympathetic control of the heart",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "ions-temperature-heart",
+       "title": "Effect of K+, Ca2+ and temperature on heart function",
+       "kind": "time-course",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 10,
+     "title": "Rhythmical excitation of the heart",
+     "topics": [
+      {
+       "id": "sa-node-pacemaker-potential",
+       "title": "SA node pacemaker potential (funny current)",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 11
+      },
+      {
+       "id": "conduction-system",
+       "title": "Conduction system: SA node, AV node delay, His-Purkinje",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 12
+      },
+      {
+       "id": "av-nodal-delay",
+       "title": "AV nodal delay and why it matters",
+       "kind": "journey",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "ectopic-pacemakers",
+       "title": "Ectopic pacemakers and Stokes-Adams attacks",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 11,
+     "title": "Fundamentals of electrocardiography",
+     "topics": [
+      {
+       "id": "ecg-genesis-waves",
+       "title": "Genesis of the normal ECG: P, QRS, T and the cardiac action potential",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 13
+      },
+      {
+       "id": "ecg-leads-einthoven",
+       "title": "ECG leads and Einthoven's triangle",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "ecg-intervals",
+       "title": "ECG intervals and heart-rate calculation",
+       "kind": "cycle",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 12,
+     "title": "ECG interpretation: vectorial analysis",
+     "topics": [
+      {
+       "id": "cardiac-vectors-mean-axis",
+       "title": "Cardiac vectors and the mean electrical axis",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "axis-deviation",
+       "title": "Left and right axis deviation (hypertrophy, bundle branch block)",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "current-of-injury-st",
+       "title": "Current of injury and ST changes in myocardial ischaemia",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 13,
+     "title": "Cardiac arrhythmias",
+     "topics": [
+      {
+       "id": "sinus-rhythms",
+       "title": "Sinus tachycardia, bradycardia and sinus arrhythmia",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "heart-blocks",
+       "title": "First, second and third degree heart block",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "premature-contractions",
+       "title": "Premature atrial and ventricular contractions",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "re-entry-circus-movement",
+       "title": "Re-entry (circus movement) and how it causes tachyarrhythmias",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 16
+      },
+      {
+       "id": "atrial-fibrillation-flutter",
+       "title": "Atrial fibrillation and flutter",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "ventricular-fibrillation-defibrillation",
+       "title": "Ventricular fibrillation and defibrillation",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "IV",
+   "title": "The circulation",
+   "chapters": [
+    {
+     "chapter": 14,
+     "title": "Overview: pressure, flow and resistance",
+     "topics": [
+      {
+       "id": "pressure-flow-resistance",
+       "title": "Pressure, flow and resistance (Ohm's law of the circulation)",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "poiseuille-radius",
+       "title": "Poiseuille's law: why radius dominates resistance",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "laminar-turbulent-flow",
+       "title": "Laminar vs turbulent flow and Reynolds number",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "series-parallel-resistance",
+       "title": "Series and parallel vascular resistance",
+       "kind": "structure",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "pressures-along-circulation",
+       "title": "Pressure and velocity along the systemic circulation",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 15,
+     "title": "Vascular distensibility; arterial and venous systems",
+     "topics": [
+      {
+       "id": "compliance-capacitance",
+       "title": "Vascular compliance and capacitance; stress relaxation",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "pulse-pressure-arterial-waveform",
+       "title": "Arterial pressure pulse: pulse pressure, damping and transmission",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "bp-measurement-auscultation",
+       "title": "Measuring blood pressure by auscultation (Korotkoff sounds)",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "venous-return-pump",
+       "title": "Venous pressure, venous valves and the muscle pump",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "cvp-jvp",
+       "title": "Central venous / right atrial pressure",
+       "kind": "cycle",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 16,
+     "title": "Microcirculation and lymphatics",
+     "topics": [
+      {
+       "id": "capillary-structure-exchange",
+       "title": "Capillary structure and diffusion exchange",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "starling-forces",
+       "title": "Starling forces and capillary filtration",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 17
+      },
+      {
+       "id": "lymphatic-pump",
+       "title": "The lymphatic pump and lymph flow",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "interstitium-safety-factors",
+       "title": "Interstitial fluid gel and safety factors against oedema",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 17,
+     "title": "Local and humoral control of tissue blood flow",
+     "topics": [
+      {
+       "id": "autoregulation-myogenic-metabolic",
+       "title": "Autoregulation: metabolic and myogenic theories",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "active-reactive-hyperaemia",
+       "title": "Active and reactive hyperaemia",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "endothelial-no",
+       "title": "Endothelial nitric oxide and flow-mediated vasodilation",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "long-term-flow-angiogenesis",
+       "title": "Long-term flow regulation and angiogenesis",
+       "kind": "time-course",
+       "priority": 3,
+       "status": "todo"
+      },
+      {
+       "id": "humoral-vasoactive",
+       "title": "Humoral control: noradrenaline, angiotensin II, ADH, bradykinin, histamine",
+       "kind": "compare",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 18,
+     "title": "Nervous regulation and rapid control of arterial pressure",
+     "topics": [
+      {
+       "id": "vasomotor-centre",
+       "title": "The vasomotor centre and sympathetic vasoconstrictor tone",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "baroreceptor-reflex",
+       "title": "The baroreceptor reflex",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 18
+      },
+      {
+       "id": "chemoreceptor-cns-ischaemic",
+       "title": "Chemoreceptor reflex and CNS ischaemic (Cushing) reaction",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "standing-orthostatic",
+       "title": "Response to standing: orthostatic hypotension",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 19,
+     "title": "Kidneys in long-term control of arterial pressure; hypertension",
+     "topics": [
+      {
+       "id": "pressure-natriuresis",
+       "title": "Pressure natriuresis and the renal-body fluid feedback system",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "raas",
+       "title": "Renin-angiotensin-aldosterone system",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 19
+      },
+      {
+       "id": "salt-sensitive-hypertension",
+       "title": "Salt intake, RAAS and salt-sensitive hypertension",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "integrated-bp-control",
+       "title": "Integrated control of arterial pressure: seconds to weeks",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 20,
+     "title": "Cardiac output, venous return and their regulation",
+     "topics": [
+      {
+       "id": "venous-return-curve",
+       "title": "Venous return curve and mean systemic filling pressure",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "co-vr-curves-equilibrium",
+       "title": "Cardiac output and venous return curves together: the equilibrium point",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 20
+      },
+      {
+       "id": "fick-co-measurement",
+       "title": "Measuring cardiac output: Fick principle and indicator dilution",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 21,
+     "title": "Muscle blood flow in exercise; coronary circulation",
+     "topics": [
+      {
+       "id": "muscle-blood-flow-exercise",
+       "title": "Muscle blood flow and cardiac output during exercise",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "coronary-blood-flow-phasic",
+       "title": "Phasic coronary blood flow: systole vs diastole",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 22
+      },
+      {
+       "id": "myocardial-infarction-physiology",
+       "title": "Ischaemic heart disease and the physiology of myocardial infarction",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 22,
+     "title": "Heart failure",
+     "topics": [
+      {
+       "id": "compensated-heart-failure",
+       "title": "Acute and compensated heart failure: the cardiac output curve shift",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "decompensated-heart-failure",
+       "title": "Decompensated heart failure and pulmonary oedema",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "high-output-failure",
+       "title": "High-output failure (AV fistula, beriberi)",
+       "kind": "time-course",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 23,
+     "title": "Heart valves and heart sounds; valvular and congenital defects",
+     "topics": [
+      {
+       "id": "heart-sounds",
+       "title": "Heart sounds S1, S2, S3, S4 and splitting",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "aortic-stenosis-regurgitation",
+       "title": "Aortic stenosis and regurgitation: pressures and murmurs",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "mitral-stenosis-regurgitation",
+       "title": "Mitral stenosis and regurgitation",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "pda",
+       "title": "Patent ductus arteriosus (left-to-right shunt)",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "tetralogy-of-fallot",
+       "title": "Tetralogy of Fallot (right-to-left shunt)",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 24,
+     "title": "Circulatory shock",
+     "topics": [
+      {
+       "id": "haemorrhagic-shock-stages",
+       "title": "Haemorrhagic shock: non-progressive, progressive and irreversible stages",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 21
+      },
+      {
+       "id": "shock-types",
+       "title": "Types of shock: hypovolaemic, cardiogenic, septic, anaphylactic, neurogenic",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "V",
+   "title": "Body fluids and kidneys",
+   "chapters": [
+    {
+     "chapter": 25,
+     "title": "Body fluid compartments; oedema",
+     "topics": [
+      {
+       "id": "icf-ecf-osmotic-shifts",
+       "title": "Fluid shifts between ICF and ECF after adding saline (iso-, hypo-, hypertonic)",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 30
+      },
+      {
+       "id": "indicator-dilution-volumes",
+       "title": "Measuring fluid volumes by indicator dilution",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "hyponatraemia-hypernatraemia",
+       "title": "Hyponatraemia and hypernatraemia: cell swelling and shrinking",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "oedema-mechanisms",
+       "title": "Oedema: intracellular and extracellular causes",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 26,
+     "title": "Urinary system: functional anatomy and urine formation",
+     "topics": [
+      {
+       "id": "nephron-structure",
+       "title": "Nephron structure: cortical vs juxtamedullary nephrons",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "renal-blood-supply",
+       "title": "Renal blood supply: two capillary beds in series",
+       "kind": "journey",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "filtration-reabsorption-secretion-excretion",
+       "title": "Filtration, reabsorption, secretion and excretion: the four processes",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "micturition-reflex",
+       "title": "The micturition reflex",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 27,
+     "title": "Glomerular filtration and renal blood flow",
+     "topics": [
+      {
+       "id": "glomerular-membrane",
+       "title": "The glomerular filtration barrier: endothelium, basement membrane, podocytes",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "gfr-starling-forces",
+       "title": "GFR determinants: glomerular Starling forces",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 23
+      },
+      {
+       "id": "afferent-efferent-constriction",
+       "title": "Afferent vs efferent arteriolar constriction and GFR",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "tubuloglomerular-feedback",
+       "title": "Tubuloglomerular feedback and the macula densa",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 24
+      },
+      {
+       "id": "renal-autoregulation",
+       "title": "Autoregulation of GFR and renal blood flow",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 28,
+     "title": "Renal tubular reabsorption and secretion",
+     "topics": [
+      {
+       "id": "nephron-urine-journey",
+       "title": "How the nephron makes urine: one parcel through every segment",
+       "kind": "journey",
+       "priority": 1,
+       "status": "built",
+       "wave": 1,
+       "order": 2,
+       "note": "Opus plate, polished: decluttered cortex, labels off tubes, manifest.json",
+       "built_at": "2026-10-14T08:27:56+00:00",
+       "plate": "explainer/library/physiology/nephron-urine-journey/nephron-urine-journey.html"
+      },
+      {
+       "id": "pct-reabsorption",
+       "title": "Proximal tubule reabsorption: Na+, glucose, amino acids, HCO3-",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "transport-maximum-glucose",
+       "title": "Transport maximum and glucose threshold (glycosuria)",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "thick-ascending-limb",
+       "title": "Thick ascending limb: NKCC2 and the diluting segment",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "distal-collecting-principal-intercalated",
+       "title": "Late distal tubule and collecting duct: principal and intercalated cells",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "clearance-concepts",
+       "title": "Renal clearance: inulin, creatinine, PAH",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "glomerulotubular-balance",
+       "title": "Glomerulotubular balance and peritubular capillary forces",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 29,
+     "title": "Urine concentration and dilution; ECF osmolarity and sodium",
+     "topics": [
+      {
+       "id": "countercurrent-multiplier",
+       "title": "The countercurrent multiplier",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 25
+      },
+      {
+       "id": "vasa-recta-exchanger",
+       "title": "Vasa recta: the countercurrent exchanger",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "urea-recycling",
+       "title": "Urea recycling in the medulla",
+       "kind": "journey",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "adh-aquaporin-2",
+       "title": "ADH and aquaporin-2 in the collecting duct",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 26
+      },
+      {
+       "id": "dilute-vs-concentrated-urine",
+       "title": "Forming dilute vs concentrated urine",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "osmoreceptor-adh-thirst",
+       "title": "Osmoreceptor-ADH and thirst feedback",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "diabetes-insipidus-siadh",
+       "title": "Diabetes insipidus and SIADH",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 30,
+     "title": "Renal regulation of K+, Ca2+, phosphate, Mg2+; blood volume",
+     "topics": [
+      {
+       "id": "potassium-secretion",
+       "title": "Potassium handling and principal-cell K+ secretion",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "aldosterone-k-feedback",
+       "title": "Aldosterone-K+ feedback",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "renal-calcium-phosphate",
+       "title": "Renal handling of calcium and phosphate",
+       "kind": "journey",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "blood-volume-control",
+       "title": "Integrated control of blood volume and ECF volume (ANP, sympathetic, RAAS)",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 31,
+     "title": "Acid-base regulation",
+     "topics": [
+      {
+       "id": "buffer-systems-henderson",
+       "title": "Buffer systems and the Henderson-Hasselbalch equation",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "respiratory-compensation",
+       "title": "Respiratory regulation of acid-base balance",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "renal-hco3-reabsorption",
+       "title": "Renal HCO3- reabsorption and H+ secretion",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 27
+      },
+      {
+       "id": "ammonia-phosphate-buffers",
+       "title": "Ammonium and phosphate buffers: excreting acid and making new HCO3-",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "acid-base-disorders",
+       "title": "Metabolic and respiratory acidosis/alkalosis and compensation",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 28
+      },
+      {
+       "id": "anion-gap",
+       "title": "Anion gap",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 32,
+     "title": "Diuretics and kidney diseases",
+     "topics": [
+      {
+       "id": "diuretics-sites",
+       "title": "Diuretics and their sites of action along the nephron",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 29
+      },
+      {
+       "id": "aki",
+       "title": "Acute kidney injury: prerenal, intrarenal, postrenal",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "ckd-vicious-cycle",
+       "title": "Chronic kidney disease: the vicious cycle of nephron loss",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "nephrotic-syndrome",
+       "title": "Nephrotic syndrome: proteinuria and oedema",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "VI",
+   "title": "Blood cells, immunity and coagulation",
+   "chapters": [
+    {
+     "chapter": 33,
+     "title": "Red blood cells, anaemia and polycythaemia",
+     "topics": [
+      {
+       "id": "erythropoiesis",
+       "title": "Erythropoiesis and its control by erythropoietin",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 32
+      },
+      {
+       "id": "haemoglobin-synthesis-iron",
+       "title": "Haemoglobin synthesis and iron metabolism",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "b12-folate-maturation",
+       "title": "Vitamin B12 and folate in RBC maturation (megaloblastic anaemia)",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "rbc-destruction-bilirubin",
+       "title": "RBC destruction and bilirubin formation",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "anaemia-circulatory-effects",
+       "title": "Anaemia and its effects on the circulation",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "polycythaemia",
+       "title": "Polycythaemia: secondary vs vera",
+       "kind": "compare",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 34,
+     "title": "Leukocytes, macrophages and inflammation",
+     "topics": [
+      {
+       "id": "leukocyte-diapedesis",
+       "title": "Leukocyte margination, diapedesis and chemotaxis",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "phagocytosis-killing",
+       "title": "Phagocytosis and intracellular killing",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "inflammation-lines-of-defence",
+       "title": "Inflammation: macrophage and neutrophil lines of defence",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "leukaemias-leukopenia",
+       "title": "Leukopenia and leukaemias: physiological effects",
+       "kind": "compare",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 35,
+     "title": "Immunity and allergy",
+     "topics": [
+      {
+       "id": "innate-vs-adaptive",
+       "title": "Innate vs acquired immunity",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "b-cell-antibodies",
+       "title": "B cells, clonal selection and antibody structure",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "t-cell-mhc",
+       "title": "T cells: MHC presentation, helper and cytotoxic",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "complement-system",
+       "title": "Complement: classical and alternative pathways",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "primary-secondary-response",
+       "title": "Primary vs secondary immune response",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "hypersensitivity-allergy",
+       "title": "Allergy and hypersensitivity (IgE, mast cells, anaphylaxis)",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 36,
+     "title": "Blood types, transfusion and transplantation",
+     "topics": [
+      {
+       "id": "abo-rh",
+       "title": "ABO and Rh blood groups",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "transfusion-reaction",
+       "title": "Transfusion reactions",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "erythroblastosis-fetalis",
+       "title": "Haemolytic disease of the newborn (erythroblastosis fetalis)",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "transplant-rejection",
+       "title": "Tissue typing and transplant rejection",
+       "kind": "sequence",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 37,
+     "title": "Haemostasis and blood coagulation",
+     "topics": [
+      {
+       "id": "platelet-plug",
+       "title": "Vascular spasm and platelet plug formation",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "coagulation-cascade",
+       "title": "The coagulation cascade: intrinsic, extrinsic and common pathways",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 31
+      },
+      {
+       "id": "fibrinolysis",
+       "title": "Clot retraction and fibrinolysis",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "anticoagulants",
+       "title": "Intravascular anticoagulants: antithrombin, heparin, protein C",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "bleeding-disorders",
+       "title": "Bleeding disorders: vitamin K deficiency, haemophilia, thrombocytopenia",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "thrombosis-dic",
+       "title": "Thromboembolism and DIC",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "VII",
+   "title": "Respiration",
+   "chapters": [
+    {
+     "chapter": 38,
+     "title": "Pulmonary ventilation",
+     "topics": [
+      {
+       "id": "mechanics-of-breathing",
+       "title": "Mechanics of breathing: muscles, pleural and alveolar pressure",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 33
+      },
+      {
+       "id": "lung-compliance",
+       "title": "Lung compliance and the pressure-volume curve",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "surfactant-laplace",
+       "title": "Surfactant, surface tension and Laplace's law",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 34
+      },
+      {
+       "id": "lung-volumes-spirometry",
+       "title": "Lung volumes and capacities (spirometry)",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "dead-space-alveolar-ventilation",
+       "title": "Dead space and alveolar ventilation",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "airway-resistance",
+       "title": "Airway resistance and bronchial control",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 39,
+     "title": "Pulmonary circulation, pulmonary oedema, pleural fluid",
+     "topics": [
+      {
+       "id": "pulmonary-circulation-pressures",
+       "title": "Pulmonary circulation: low pressure, high compliance",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "hypoxic-vasoconstriction",
+       "title": "Hypoxic pulmonary vasoconstriction",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "lung-zones-west",
+       "title": "Zones 1, 2 and 3 of pulmonary blood flow",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "pulmonary-oedema",
+       "title": "Pulmonary capillary dynamics and pulmonary oedema",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "pleural-fluid",
+       "title": "Pleural fluid and pleural effusion",
+       "kind": "time-course",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 40,
+     "title": "Gas exchange; diffusion through the respiratory membrane",
+     "topics": [
+      {
+       "id": "partial-pressures-gas-diffusion",
+       "title": "Partial pressures and the physics of gas diffusion",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "alveolar-po2-pco2",
+       "title": "Alveolar PO2 and PCO2: how ventilation sets them",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "respiratory-membrane",
+       "title": "The respiratory membrane and diffusing capacity",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "va-q-matching",
+       "title": "Ventilation-perfusion ratio: shunt vs dead space",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 37
+      }
+     ]
+    },
+    {
+     "chapter": 41,
+     "title": "Transport of O2 and CO2",
+     "topics": [
+      {
+       "id": "o2-uptake-pulmonary-capillary",
+       "title": "O2 uptake along the pulmonary capillary",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "oxygen-dissociation-curve",
+       "title": "The oxygen-haemoglobin dissociation curve",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 35
+      },
+      {
+       "id": "curve-shifts-bohr",
+       "title": "Shifts of the O2 curve: Bohr effect, 2,3-BPG, temperature",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "co2-transport-chloride-shift",
+       "title": "CO2 transport: bicarbonate, carbamino, chloride shift, Haldane effect",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 36
+      },
+      {
+       "id": "carbon-monoxide",
+       "title": "Carbon monoxide poisoning",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 42,
+     "title": "Regulation of respiration",
+     "topics": [
+      {
+       "id": "respiratory-centres",
+       "title": "Respiratory centres: DRG, VRG, pneumotaxic",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "central-chemoreceptors",
+       "title": "Central chemoreceptors and CO2/H+",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 38
+      },
+      {
+       "id": "peripheral-chemoreceptors",
+       "title": "Peripheral chemoreceptors and hypoxic drive",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "exercise-ventilation",
+       "title": "Control of ventilation during exercise",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "periodic-breathing-sleep-apnoea",
+       "title": "Cheyne-Stokes breathing and sleep apnoea",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 43,
+     "title": "Respiratory insufficiency",
+     "topics": [
+      {
+       "id": "copd-emphysema",
+       "title": "Emphysema: compliance, airway collapse, gas exchange",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "asthma",
+       "title": "Asthma: airway obstruction and air trapping",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "pneumonia-atelectasis",
+       "title": "Pneumonia and atelectasis: shunt physiology",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "hypoxia-types-oxygen-therapy",
+       "title": "Types of hypoxia and response to oxygen therapy",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "cyanosis-hypercapnia-dyspnoea",
+       "title": "Cyanosis, hypercapnia and dyspnoea",
+       "kind": "compare",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "VIII",
+   "title": "Aviation, space and deep-sea diving",
+   "chapters": [
+    {
+     "chapter": 44,
+     "title": "High altitude, aviation and space physiology",
+     "topics": [
+      {
+       "id": "high-altitude-acclimatisation",
+       "title": "High altitude: hypoxia and acclimatisation",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "acute-chronic-mountain-sickness",
+       "title": "Acute and chronic mountain sickness",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "acceleratory-forces-space",
+       "title": "Acceleratory forces and weightlessness",
+       "kind": "time-course",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 45,
+     "title": "Deep-sea diving and hyperbaric conditions",
+     "topics": [
+      {
+       "id": "nitrogen-narcosis-decompression",
+       "title": "Nitrogen narcosis and decompression sickness",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "oxygen-toxicity-hyperbaric",
+       "title": "Oxygen toxicity and hyperbaric oxygen therapy",
+       "kind": "time-course",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "IX",
+   "title": "Nervous system A: general principles and sensory physiology",
+   "chapters": [
+    {
+     "chapter": 46,
+     "title": "Organization of the nervous system; synapses and neurotransmitters",
+     "topics": [
+      {
+       "id": "chemical-synapse",
+       "title": "Chemical synapse: release, receptor, removal",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 39
+      },
+      {
+       "id": "epsp-ipsp-summation",
+       "title": "EPSPs, IPSPs and spatial/temporal summation",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "neurotransmitters",
+       "title": "Small-molecule transmitters vs neuropeptides",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "synaptic-fatigue-plasticity",
+       "title": "Synaptic fatigue, facilitation and the effect of drugs/acidosis",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 47,
+     "title": "Sensory receptors and neuronal circuits",
+     "topics": [
+      {
+       "id": "receptor-potential-transduction",
+       "title": "Receptor potentials and transduction (Pacinian corpuscle)",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "receptor-adaptation",
+       "title": "Receptor adaptation: tonic vs phasic receptors",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "nerve-fibre-classification",
+       "title": "Nerve fibre classification (A-alpha to C)",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "neuronal-pools-circuits",
+       "title": "Neuronal pools: divergence, convergence, reverberation, lateral inhibition",
+       "kind": "structure",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 48,
+     "title": "Somatic sensations I: tactile and position senses",
+     "topics": [
+      {
+       "id": "dorsal-column-pathway",
+       "title": "Dorsal column-medial lemniscal pathway",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "anterolateral-pathway",
+       "title": "Anterolateral (spinothalamic) pathway",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "somatosensory-cortex",
+       "title": "Somatosensory cortex and the homunculus",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "two-point-discrimination",
+       "title": "Two-point discrimination and lateral inhibition",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 49,
+     "title": "Somatic sensations II: pain, headache, thermal",
+     "topics": [
+      {
+       "id": "fast-slow-pain",
+       "title": "Fast and slow pain pathways",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "gate-control-analgesia",
+       "title": "Gate control and the descending analgesia system (endorphins)",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "referred-pain",
+       "title": "Referred and visceral pain",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "thermal-receptors",
+       "title": "Thermal receptors",
+       "kind": "time-course",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "X",
+   "title": "Nervous system B: special senses",
+   "chapters": [
+    {
+     "chapter": 50,
+     "title": "The eye I: optics of vision",
+     "topics": [
+      {
+       "id": "refraction-lens",
+       "title": "Refraction, the lens and image formation",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "accommodation-pupil",
+       "title": "Accommodation and pupillary aperture",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "refractive-errors",
+       "title": "Myopia, hypermetropia, astigmatism and their correction",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "aqueous-humour-glaucoma",
+       "title": "Aqueous humour flow and intraocular pressure (glaucoma)",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 51,
+     "title": "The eye II: retina",
+     "topics": [
+      {
+       "id": "phototransduction-rods",
+       "title": "Phototransduction in rods: rhodopsin cascade",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 41
+      },
+      {
+       "id": "dark-light-adaptation",
+       "title": "Dark and light adaptation",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "colour-vision-cones",
+       "title": "Colour vision: trichromatic theory and colour blindness",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "retinal-circuitry",
+       "title": "Retinal circuitry: bipolar, horizontal, ganglion cells (on/off centres)",
+       "kind": "structure",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 52,
+     "title": "The eye III: central neurophysiology of vision",
+     "topics": [
+      {
+       "id": "visual-pathway-lesions",
+       "title": "The visual pathway and visual field defects",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 43
+      },
+      {
+       "id": "visual-cortex",
+       "title": "Primary visual cortex: columns and analysis",
+       "kind": "structure",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "pupillary-light-reflex",
+       "title": "Pupillary light and accommodation reflexes",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "eye-movements",
+       "title": "Control of eye movements and fixation",
+       "kind": "structure",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 53,
+     "title": "The sense of hearing",
+     "topics": [
+      {
+       "id": "middle-ear-impedance",
+       "title": "Tympanic membrane, ossicles and impedance matching",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "cochlea-travelling-wave",
+       "title": "The cochlea: basilar membrane travelling wave and frequency coding",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 42
+      },
+      {
+       "id": "hair-cell-transduction",
+       "title": "Organ of Corti: hair cell transduction",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "auditory-pathway",
+       "title": "Central auditory pathway and sound localisation",
+       "kind": "journey",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "deafness-types",
+       "title": "Conductive vs sensorineural deafness (Rinne, Weber)",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 54,
+     "title": "Chemical senses: taste and smell",
+     "topics": [
+      {
+       "id": "taste-transduction",
+       "title": "Taste receptors and the five primary tastes",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "smell-transduction",
+       "title": "Olfactory transduction and pathway",
+       "kind": "journey",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "XI",
+   "title": "Nervous system C: motor and integrative neurophysiology",
+   "chapters": [
+    {
+     "chapter": 55,
+     "title": "Spinal cord motor functions; cord reflexes",
+     "topics": [
+      {
+       "id": "muscle-spindle-stretch-reflex",
+       "title": "Muscle spindle and the stretch reflex",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 40
+      },
+      {
+       "id": "golgi-tendon-reflex",
+       "title": "Golgi tendon organ and the inverse stretch reflex",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "withdrawal-crossed-extensor",
+       "title": "Withdrawal and crossed extensor reflexes",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "gamma-loop",
+       "title": "Gamma motor neurons and the gamma loop",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "spinal-shock",
+       "title": "Spinal cord transection and spinal shock",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 56,
+     "title": "Cortical and brain stem control of motor function",
+     "topics": [
+      {
+       "id": "corticospinal-tract",
+       "title": "Motor cortex and the corticospinal tract",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "umn-lmn-lesions",
+       "title": "Upper vs lower motor neuron lesions",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "brainstem-posture",
+       "title": "Brainstem control of posture: decerebrate rigidity",
+       "kind": "structure",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "vestibular-apparatus",
+       "title": "Vestibular apparatus: utricle, saccule, semicircular canals",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 57,
+     "title": "Cerebellum and basal ganglia",
+     "topics": [
+      {
+       "id": "cerebellar-circuit",
+       "title": "Cerebellar circuit and error correction",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "cerebellar-lesions",
+       "title": "Cerebellar lesions: ataxia, dysmetria, intention tremor",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "basal-ganglia-loops",
+       "title": "Basal ganglia: direct and indirect pathways",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "parkinson-huntington",
+       "title": "Parkinson's and Huntington's disease",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 58,
+     "title": "Cerebral cortex, learning and memory",
+     "topics": [
+      {
+       "id": "cortical-functional-areas",
+       "title": "Functional areas of the cortex and language (Wernicke, Broca)",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "memory-ltp",
+       "title": "Memory and long-term potentiation",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "corpus-callosum",
+       "title": "Corpus callosum and interhemispheric transfer",
+       "kind": "structure",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 59,
+     "title": "Limbic system and hypothalamus",
+     "topics": [
+      {
+       "id": "hypothalamic-functions",
+       "title": "Hypothalamic control: temperature, water, feeding, endocrine",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "reward-punishment",
+       "title": "Reward and punishment centres; the amygdala",
+       "kind": "structure",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 60,
+     "title": "States of brain activity",
+     "topics": [
+      {
+       "id": "sleep-stages",
+       "title": "Sleep stages: slow-wave vs REM",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "reticular-activating-system",
+       "title": "Reticular activating system and wakefulness",
+       "kind": "structure",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "eeg-waves",
+       "title": "Brain waves (EEG)",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "epilepsy",
+       "title": "Epilepsy: generalised and focal seizures",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 61,
+     "title": "Autonomic nervous system and adrenal medulla",
+     "topics": [
+      {
+       "id": "ans-organisation",
+       "title": "Sympathetic vs parasympathetic organisation",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "ans-receptors",
+       "title": "Adrenergic and cholinergic receptors",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "adrenal-medulla",
+       "title": "Adrenal medulla and the stress (fight-or-flight) response",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "ans-reflexes-drugs",
+       "title": "Autonomic reflexes and autonomic drugs",
+       "kind": "compare",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 62,
+     "title": "Cerebral blood flow, CSF and brain metabolism",
+     "topics": [
+      {
+       "id": "cerebral-blood-flow",
+       "title": "Cerebral blood flow and its autoregulation (CO2 effect)",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "csf-circulation",
+       "title": "CSF formation, circulation and absorption",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "blood-brain-barrier",
+       "title": "Blood-brain barrier and brain oedema",
+       "kind": "structure",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "XII",
+   "title": "Gastrointestinal physiology",
+   "chapters": [
+    {
+     "chapter": 63,
+     "title": "General principles of GI function",
+     "topics": [
+      {
+       "id": "enteric-nervous-system",
+       "title": "Enteric nervous system: myenteric and submucosal plexuses",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "gi-slow-waves",
+       "title": "Slow waves and spike potentials in GI smooth muscle",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "gi-hormones",
+       "title": "GI hormones: gastrin, CCK, secretin, GIP, motilin",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "splanchnic-circulation",
+       "title": "Splanchnic circulation and the hepatic portal system",
+       "kind": "journey",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 64,
+     "title": "Propulsion and mixing",
+     "topics": [
+      {
+       "id": "swallowing",
+       "title": "Swallowing: oral, pharyngeal and oesophageal stages",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 46
+      },
+      {
+       "id": "gastric-emptying",
+       "title": "Gastric mixing and emptying (and its control)",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "peristalsis-small-intestine",
+       "title": "Peristalsis and segmentation in the small intestine",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "mmc",
+       "title": "Migrating motor complex",
+       "kind": "cycle",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "colon-defecation",
+       "title": "Colonic movements and the defecation reflex",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 65,
+     "title": "Secretory functions",
+     "topics": [
+      {
+       "id": "salivary-secretion",
+       "title": "Salivary secretion: primary secretion and ductal modification",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "gastric-acid-parietal-cell",
+       "title": "Parietal cell HCl secretion (proton pump)",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 44
+      },
+      {
+       "id": "gastric-phases",
+       "title": "Cephalic, gastric and intestinal phases of gastric secretion",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "pancreatic-secretion",
+       "title": "Pancreatic enzyme and bicarbonate secretion",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "bile-secretion-enterohepatic",
+       "title": "Bile secretion and the enterohepatic circulation",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 66,
+     "title": "Digestion and absorption",
+     "topics": [
+      {
+       "id": "carbohydrate-digestion-absorption",
+       "title": "Carbohydrate digestion and absorption",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "protein-digestion-absorption",
+       "title": "Protein digestion and absorption",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "fat-digestion-micelles",
+       "title": "Fat digestion, micelles and chylomicrons",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 45
+      },
+      {
+       "id": "water-electrolyte-absorption",
+       "title": "Water and electrolyte absorption in the gut",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "iron-b12-absorption",
+       "title": "Iron and B12 absorption",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 67,
+     "title": "GI disorders",
+     "topics": [
+      {
+       "id": "peptic-ulcer",
+       "title": "Peptic ulcer: acid vs mucosal defence (H. pylori)",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "malabsorption",
+       "title": "Malabsorption: coeliac disease and pancreatic insufficiency",
+       "kind": "compare",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "diarrhoea-cholera",
+       "title": "Diarrhoea and cholera toxin mechanism",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "vomiting-reflex",
+       "title": "The vomiting reflex",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "gi-obstruction",
+       "title": "GI obstruction and its effects",
+       "kind": "time-course",
+       "priority": 3,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "XIII",
+   "title": "Metabolism and temperature regulation",
+   "chapters": [
+    {
+     "chapter": 68,
+     "title": "Carbohydrate metabolism and ATP",
+     "topics": [
+      {
+       "id": "glucose-transport-phosphorylation",
+       "title": "Glucose transport into cells and phosphorylation",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "glycolysis-krebs-etc",
+       "title": "Glycolysis, Krebs cycle and oxidative phosphorylation (overview)",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "glycogen-metabolism",
+       "title": "Glycogenesis and glycogenolysis",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "gluconeogenesis",
+       "title": "Gluconeogenesis",
+       "kind": "journey",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 69,
+     "title": "Lipid metabolism",
+     "topics": [
+      {
+       "id": "lipoprotein-transport",
+       "title": "Lipoproteins and fat transport (chylomicrons, VLDL, LDL, HDL)",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "fatty-acid-oxidation-ketones",
+       "title": "Beta-oxidation and ketone body formation",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "cholesterol-atherosclerosis",
+       "title": "Cholesterol and atherosclerosis",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 70,
+     "title": "Protein metabolism",
+     "topics": [
+      {
+       "id": "amino-acid-transamination-urea",
+       "title": "Deamination and the urea cycle",
+       "kind": "cycle",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "plasma-proteins",
+       "title": "Plasma proteins and their functions",
+       "kind": "compare",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 71,
+     "title": "The liver",
+     "topics": [
+      {
+       "id": "hepatic-lobule-blood-flow",
+       "title": "Hepatic lobule and blood flow",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "liver-functions-bilirubin",
+       "title": "Liver metabolic functions and bilirubin handling (jaundice types)",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 72,
+     "title": "Dietary balances; feeding; obesity and starvation; vitamins",
+     "topics": [
+      {
+       "id": "feeding-regulation-leptin",
+       "title": "Regulation of food intake: hypothalamus, leptin, ghrelin",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "starvation",
+       "title": "Starvation: fuel switching over days",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "vitamins-deficiencies",
+       "title": "Vitamins and deficiency states",
+       "kind": "compare",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 73,
+     "title": "Energetics and metabolic rate",
+     "topics": [
+      {
+       "id": "bmr",
+       "title": "Basal metabolic rate and what changes it",
+       "kind": "compare",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 74,
+     "title": "Body temperature regulation and fever",
+     "topics": [
+      {
+       "id": "heat-loss-mechanisms",
+       "title": "Heat production and heat loss (radiation, conduction, evaporation)",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "thermoregulation-set-point",
+       "title": "Hypothalamic thermostat and set point",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "fever",
+       "title": "Fever: pyrogens and the shifted set point",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "heatstroke-hypothermia",
+       "title": "Heatstroke and hypothermia",
+       "kind": "compare",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "XIV",
+   "title": "Endocrinology and reproduction",
+   "chapters": [
+    {
+     "chapter": 75,
+     "title": "Introduction to endocrinology",
+     "topics": [
+      {
+       "id": "hormone-classes-receptors",
+       "title": "Hormone classes and receptor mechanisms (cell-surface vs intracellular)",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "second-messengers",
+       "title": "Second messengers: cAMP, IP3/DAG, calcium-calmodulin",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "hormone-feedback",
+       "title": "Feedback control of hormone secretion",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 76,
+     "title": "Pituitary hormones and hypothalamic control",
+     "topics": [
+      {
+       "id": "hypothalamic-pituitary-axis",
+       "title": "Hypothalamic-pituitary portal system and posterior pituitary",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "growth-hormone-igf1",
+       "title": "Growth hormone and IGF-1",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "gh-disorders",
+       "title": "Gigantism, acromegaly and dwarfism",
+       "kind": "compare",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "oxytocin",
+       "title": "Oxytocin: milk ejection and uterine contraction",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 77,
+     "title": "Thyroid hormones",
+     "topics": [
+      {
+       "id": "thyroid-hormone-synthesis",
+       "title": "Thyroid hormone synthesis in the follicle",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 48
+      },
+      {
+       "id": "thyroid-hormone-actions",
+       "title": "Actions of thyroid hormone",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "hpt-axis-goitre",
+       "title": "Hypothalamic-pituitary-thyroid axis and goitre",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "hyper-hypothyroidism",
+       "title": "Hyperthyroidism (Graves) and hypothyroidism",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 78,
+     "title": "Adrenocortical hormones",
+     "topics": [
+      {
+       "id": "adrenal-cortex-zones-steroidogenesis",
+       "title": "Adrenal cortex zones and steroid synthesis",
+       "kind": "structure",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "aldosterone-actions",
+       "title": "Aldosterone: actions and control",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "cortisol-stress",
+       "title": "Cortisol: actions and the stress response (HPA axis)",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "cushing-addison",
+       "title": "Cushing's syndrome and Addison's disease",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "cah",
+       "title": "Congenital adrenal hyperplasia",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 79,
+     "title": "Insulin, glucagon and diabetes mellitus",
+     "topics": [
+      {
+       "id": "insulin-secretion-beta-cell",
+       "title": "Insulin secretion by the beta cell (K-ATP channel)",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 47
+      },
+      {
+       "id": "insulin-actions",
+       "title": "Insulin actions on liver, muscle and fat",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "glucagon",
+       "title": "Glucagon actions and control",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "glucose-homeostasis-fed-fasted",
+       "title": "Blood glucose regulation: fed vs fasted",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "type1-dka",
+       "title": "Type 1 diabetes and diabetic ketoacidosis",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "type2-insulin-resistance",
+       "title": "Type 2 diabetes and insulin resistance",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 80,
+     "title": "Parathyroid hormone, calcitonin, calcium, vitamin D, bone",
+     "topics": [
+      {
+       "id": "calcium-homeostasis",
+       "title": "Calcium homeostasis: PTH, vitamin D and calcitonin",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 49
+      },
+      {
+       "id": "vitamin-d-activation",
+       "title": "Vitamin D activation pathway",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "bone-remodelling",
+       "title": "Bone remodelling: osteoblasts and osteoclasts",
+       "kind": "cycle",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "hypo-hypercalcaemia",
+       "title": "Hypocalcaemia (tetany) and hypercalcaemia",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 81,
+     "title": "Male reproductive physiology",
+     "topics": [
+      {
+       "id": "spermatogenesis",
+       "title": "Spermatogenesis and Sertoli cells",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "testosterone-hpg-male",
+       "title": "Testosterone and the male hypothalamic-pituitary-gonadal axis",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "erection-ejaculation",
+       "title": "Male sexual act: erection and ejaculation",
+       "kind": "sequence",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 82,
+     "title": "Female physiology before pregnancy",
+     "topics": [
+      {
+       "id": "ovarian-cycle-follicle",
+       "title": "Ovarian cycle: follicle development and ovulation",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "menstrual-cycle-hormones",
+       "title": "Hormonal changes across the menstrual cycle (LH surge)",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 50
+      },
+      {
+       "id": "endometrial-cycle",
+       "title": "Endometrial cycle: proliferative, secretory, menstrual",
+       "kind": "cycle",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "oestrogen-progesterone-actions",
+       "title": "Oestrogen and progesterone actions",
+       "kind": "compare",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "menopause-contraception",
+       "title": "Menopause and hormonal contraception",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 83,
+     "title": "Pregnancy and lactation",
+     "topics": [
+      {
+       "id": "fertilisation-implantation",
+       "title": "Fertilisation and implantation",
+       "kind": "sequence",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "placental-exchange",
+       "title": "Placental exchange and placental hormones (hCG, hPL)",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "maternal-adaptations",
+       "title": "Maternal physiological adaptations to pregnancy",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "parturition",
+       "title": "Parturition: positive feedback of labour",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "lactation",
+       "title": "Lactation: prolactin and milk ejection",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      }
+     ]
+    },
+    {
+     "chapter": 84,
+     "title": "Fetal and neonatal physiology",
+     "topics": [
+      {
+       "id": "fetal-circulation",
+       "title": "Fetal circulation: shunts and oxygenation",
+       "kind": "journey",
+       "priority": 1,
+       "status": "todo",
+       "wave": 1,
+       "order": 51
+      },
+      {
+       "id": "circulation-changes-at-birth",
+       "title": "Circulatory changes at birth",
+       "kind": "time-course",
+       "priority": 1,
+       "status": "todo"
+      },
+      {
+       "id": "neonatal-adjustments",
+       "title": "Neonatal adjustments: breathing, thermoregulation, jaundice",
+       "kind": "compare",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "unit": "XV",
+   "title": "Sports physiology",
+   "chapters": [
+    {
+     "chapter": 85,
+     "title": "Sports physiology",
+     "topics": [
+      {
+       "id": "exercise-energy-systems",
+       "title": "Exercise energy systems: phosphagen, glycolytic, aerobic",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      },
+      {
+       "id": "vo2max-training",
+       "title": "VO2 max and cardiovascular adaptation to training",
+       "kind": "time-course",
+       "priority": 2,
+       "status": "todo"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "plan": {
+  "wave1": [
+   "cardiac-cycle-wiggers",
+   "nephron-urine-journey",
+   "action-potential-nerve",
+   "na-k-atpase",
+   "goldman-resting-potential",
+   "saltatory-conduction",
+   "neuromuscular-junction",
+   "sliding-filament-cross-bridge",
+   "excitation-contraction-coupling-skeletal",
+   "smooth-muscle-contraction",
+   "sa-node-pacemaker-potential",
+   "conduction-system",
+   "ecg-genesis-waves",
+   "pressure-volume-loop",
+   "frank-starling",
+   "re-entry-circus-movement",
+   "starling-forces",
+   "baroreceptor-reflex",
+   "raas",
+   "co-vr-curves-equilibrium",
+   "haemorrhagic-shock-stages",
+   "coronary-blood-flow-phasic",
+   "gfr-starling-forces",
+   "tubuloglomerular-feedback",
+   "countercurrent-multiplier",
+   "adh-aquaporin-2",
+   "renal-hco3-reabsorption",
+   "acid-base-disorders",
+   "diuretics-sites",
+   "icf-ecf-osmotic-shifts",
+   "coagulation-cascade",
+   "erythropoiesis",
+   "mechanics-of-breathing",
+   "surfactant-laplace",
+   "oxygen-dissociation-curve",
+   "co2-transport-chloride-shift",
+   "va-q-matching",
+   "central-chemoreceptors",
+   "chemical-synapse",
+   "muscle-spindle-stretch-reflex",
+   "phototransduction-rods",
+   "cochlea-travelling-wave",
+   "visual-pathway-lesions",
+   "gastric-acid-parietal-cell",
+   "fat-digestion-micelles",
+   "swallowing",
+   "insulin-secretion-beta-cell",
+   "thyroid-hormone-synthesis",
+   "calcium-homeostasis",
+   "menstrual-cycle-hormones",
+   "fetal-circulation"
+  ],
+  "statuses": [
+   "todo",
+   "building",
+   "built",
+   "reviewed",
+   "published"
+  ],
+  "kinds": {
+   "cycle": "repeats (heartbeat, breathing)",
+   "journey": "follow one parcel along a path",
+   "time-course": "one run of something changing over time",
+   "sequence": "discrete steps",
+   "structure": "explorable anatomy, little motion",
+   "compare": "side-by-side states"
+  }
+ }
+}
