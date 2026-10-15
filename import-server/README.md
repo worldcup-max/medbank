@@ -51,8 +51,18 @@ Paystack work (`payments.mjs`), so the app never holds a Paystack key and can't 
 | `GET /paystack/verify?reference=` | Confirms a payment the moment the student is back in the app |
 | `POST /paystack/webhook` | Charges, renewals and cancellations from Paystack |
 
-**Plans**: monthly (₦2,000, 1 month), semester (₦8,000, 6 months), annual (₦15,000, 12 months).
-Change a price with `PRICE_NGN_MONTHLY` / `PRICE_NGN_SEMESTER` / `PRICE_NGN_ANNUAL`.
+**Plans**: two tiers, each monthly or annual (annual = 12 months at 20% off).
+
+| Tier | Monthly | Annual | Gets |
+|---|---|---|---|
+| Free | — | — | 1 built lecture |
+| Basic | ₦4,999 | ₦47,990 | Unlimited lecture imports |
+| Premium | ₦7,999 | ₦76,790 | Everything `isPremium` gates: Solve, Pro-model builds, natural voices, higher daily limits |
+
+Change a price with `PRICE_NGN_BASIC_MONTHLY`, `PRICE_NGN_BASIC_ANNUAL`, `PRICE_NGN_PREMIUM_MONTHLY`,
+`PRICE_NGN_PREMIUM_ANNUAL`. Switching tier mid-period converts the time left at the two monthly
+prices (a month of Basic left becomes about 19 days of Premium), then adds the new plan.
+Subscriptions from before tiers existed count as Premium.
 
 **Expiry**: each payment sets `subscriptions.current_period_end`, extended from the current end
 if the student pays early. Premium ends on that date; cancelling a recurring plan keeps access
@@ -69,8 +79,9 @@ webhook answers 500 and Paystack retries.
 2. On the host set `PAYSTACK_SECRET_KEY` (start with `sk_test_…`, then `sk_live_…`) and `APP_URL`.
 3. Paystack → Settings → API Keys & Webhooks: set the webhook URL to
    `https://<server>/paystack/webhook`.
-4. Optional auto-renew: create Plans in Paystack and set `PAYSTACK_PLAN_MONTHLY`
-   (and `_SEMESTER` / `_ANNUAL`). Plan amounts must match the prices above. Without plan codes,
+4. Optional auto-renew: create Plans in Paystack and set `PAYSTACK_PLAN_BASIC_MONTHLY`,
+   `PAYSTACK_PLAN_BASIC_ANNUAL`, `PAYSTACK_PLAN_PREMIUM_MONTHLY`, `PAYSTACK_PLAN_PREMIUM_ANNUAL`.
+   Plan amounts must match the prices above. Without plan codes,
    each payment is one-off and students renew from the app.
 5. Test with a Paystack test card, then switch to the live key.
 

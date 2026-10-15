@@ -1,6 +1,6 @@
 /* =====================================================================
  * MedBank — in-app checkout (Paystack)
- * MB_CHECKOUT.open()  plan picker → Paystack popup (or its hosted page as a fallback)
+ * MB_CHECKOUT.open({ tier })  Basic/Premium × Monthly/Annual picker → Paystack popup (or its hosted page as a fallback)
  *                     → the server confirms the payment → Premium unlocks in place.
  * The import server opens every transaction (amount + plan are decided there) and
  * confirms it with Paystack, so nothing here is trusted and no Paystack key is needed.
@@ -16,10 +16,16 @@
   function store(k, v){ try{ if(v==null) localStorage.removeItem(k); else localStorage.setItem(k, v); }catch(e){} }
   function read(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
 
-  var FALLBACK = function(){ var p=cfg().PRICES_NGN||{}; return [
-    { id:"monthly",  label:"Monthly",  months:1,  ngn:p.monthly  || 2000 },
-    { id:"semester", label:"Semester", months:6,  ngn:p.semester || 8000 },
-    { id:"annual",   label:"Annual",   months:12, ngn:p.annual   || 15000 } ]; };
+  /* Shown only if the server's /plans can't be reached; the server's prices are what's charged. */
+  var FALLBACK = function(){ var p=cfg().PRICES_NGN||{}, b=p.basic||{}, m=p.premium||{}; return [
+    { id:"basic_monthly",   tier:"basic",   interval:"monthly", months:1,  ngn:b.monthly || 4999 },
+    { id:"basic_annual",    tier:"basic",   interval:"annual",  months:12, ngn:b.annual  || 47990 },
+    { id:"premium_monthly", tier:"premium", interval:"monthly", months:1,  ngn:m.monthly || 7999 },
+    { id:"premium_annual",  tier:"premium", interval:"annual",  months:12, ngn:m.annual  || 76790 } ]; };
+  var TIER_INFO = {
+    basic:   { name:"Basic",   points:["Unlimited lecture imports", "Notes, cards, Q-bank, podcast and AI tutor on every lecture"] },
+    premium: { name:"Premium", points:["Everything in Basic", "Snap & solve any question", "Best-quality builds and natural podcast voices", "More explainers and 3D lessons each day"] }
+  };
   var plansCache = null;
   function loadPlans(){
     if(plansCache) return Promise.resolve(plansCache);
@@ -62,42 +68,70 @@
     return c;
   }
 
+  /* opts.tier preselects "basic" or "premium" (a Premium-only feature passes "premium"). */
   async function open(opts){
     opts = opts || {};
     if(cfg().PAYMENTS && cfg().PAYMENTS.ENABLED === false){ message("Subscriptions open soon", "Payments aren't switched on yet. Your free lecture and everything on it keep working."); return; }
     var c = frame();
-    c.appendChild(el("div", "font-weight:800;font-size:19px;margin-bottom:4px", opts.title || "Go Premium"));
-    c.appendChild(el("div", "color:var(--dim,#5b6b86);font-size:14px;margin-bottom:14px",
-      opts.reason || "Unlimited lecture imports, Snap & solve, more explainers each day. Everything you've built stays yours either way."));
-    var list = el("div", "display:flex;flex-direction:column;gap:8px"); c.appendChild(list);
-    list.appendChild(el("div", "color:var(--dim,#5b6b86);font-size:13px", "Loading plans…"));
+    c.appendChild(el("div", "font-weight:800;font-size:19px;margin-bottom:4px", opts.title || "Choose your plan"));
+    c.appendChild(el("div", "color:var(--dim,#5b6b86);font-size:14px;margin-bottom:12px",
+      opts.reason || "Everything you've already built stays yours on any plan."));
+    var body = el("div"); c.appendChild(body);
+    body.appendChild(el("div", "color:var(--dim,#5b6b86);font-size:13px", "Loading plans…"));
     var plans = await loadPlans();
     if(!sheet || sheet.c !== c) return;                               // closed while loading
-    list.textContent = "";
-    var chosen = plans[1] ? plans[1].id : plans[0].id;                 // semester is the best value per month
-    var monthly = (plans.filter(function(p){ return p.id === "monthly"; })[0] || plans[0]).ngn;
-    var rows = {};
-    plans.forEach(function(p){
-      var r = el("button", "display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;width:100%;border-radius:12px;padding:12px 14px;cursor:pointer;font:inherit;color:inherit;background:var(--panel,#fff)");
-      var left = el("div"); left.appendChild(el("div", "font-weight:800", p.label));
-      var per = p.months > 1 ? naira(Math.round(p.ngn / p.months)) + " a month" : "Billed monthly";
-      var save = p.months > 1 ? Math.round(100 - (p.ngn / (monthly * p.months)) * 100) : 0;
-      left.appendChild(el("div", "font-size:12.5px;color:var(--dim,#5b6b86)", per + (save > 0 ? " · save " + save + "%" : "")));
-      r.appendChild(left); r.appendChild(el("div", "font-weight:800;font-size:16px", naira(p.ngn)));
-      r.onclick = function(){ chosen = p.id; paint(); };
-      rows[p.id] = r; list.appendChild(r);
+    body.textContent = "";
+    function find(tier, interval){ return plans.filter(function(p){ return p.tier === tier && p.interval === interval; })[0]; }
+    var tier = opts.tier === "basic" ? "basic" : "premium", interval = "monthly";
+    var maxSave = 0;
+    ["basic", "premium"].forEach(function(t){ var m = find(t, "monthly"), a = find(t, "annual");
+      if(m && a) maxSave = Math.max(maxSave, Math.round(100 - a.ngn / (m.ngn * 12) * 100)); });
+
+    // Monthly | Annual switch
+    var sw = el("div", "display:flex;background:var(--bg2,#f2f3f9);border-radius:12px;padding:4px;margin-bottom:10px");
+    var swBtns = {};
+    [["monthly", "Monthly"], ["annual", "Annual" + (maxSave > 0 ? " · save " + maxSave + "%" : "")]].forEach(function(x){
+      var b = el("button", "flex:1;border:0;border-radius:9px;padding:9px;font:inherit;font-weight:800;font-size:13.5px;cursor:pointer;color:var(--text,#0f1729)", x[1]);
+      b.onclick = function(){ interval = x[0]; paint(); };
+      swBtns[x[0]] = b; sw.appendChild(b);
     });
+    body.appendChild(sw);
+
+    var cards = {};
+    ["basic", "premium"].forEach(function(t){
+      var r = el("button", "display:block;text-align:left;width:100%;border-radius:12px;padding:12px 14px;margin-top:8px;cursor:pointer;font:inherit;color:inherit;background:var(--panel,#fff)");
+      var top = el("div", "display:flex;align-items:baseline;justify-content:space-between;gap:10px");
+      top.appendChild(el("div", "font-weight:800;font-size:16px", TIER_INFO[t].name));
+      var price = el("div", "text-align:right"); top.appendChild(price);
+      r.appendChild(top);
+      var ul = el("div", "font-size:13px;color:var(--dim,#5b6b86);margin-top:4px;line-height:1.5");
+      TIER_INFO[t].points.forEach(function(pt){ ul.appendChild(el("div", "", "✓ " + pt)); });
+      r.appendChild(ul);
+      r.onclick = function(){ tier = t; paint(); };
+      cards[t] = { r:r, price:price }; body.appendChild(r);
+    });
+
     var pay = btn("", true); pay.style.marginTop = "14px"; c.appendChild(pay);
     var err = el("div", "color:#c0392b;font-size:13.5px;margin-top:8px;text-align:center;display:none"); c.appendChild(err);
     var no = btn("Not now"); no.onclick = close; c.appendChild(no);
     c.appendChild(el("div", "color:var(--dim,#5b6b86);font-size:12px;margin-top:10px;text-align:center", "Secure payment by Paystack · card, bank transfer or USSD"));
     function paint(){
-      plans.forEach(function(p){ rows[p.id].style.border = (p.id === chosen ? "2px solid var(--brand,#4f46e5)" : "1px solid var(--line,#e3e6ef)"); });
-      var p = plans.filter(function(x){ return x.id === chosen; })[0];
-      pay.textContent = "Pay " + naira(p.ngn);
+      ["monthly", "annual"].forEach(function(i){ var on = i === interval;
+        swBtns[i].style.background = on ? "var(--panel,#fff)" : "transparent"; swBtns[i].style.boxShadow = on ? "0 1px 4px rgba(0,0,0,.12)" : "none"; });
+      ["basic", "premium"].forEach(function(t){
+        var p = find(t, interval), card = cards[t];
+        card.r.style.border = t === tier ? "2px solid var(--brand,#4f46e5)" : "1px solid var(--line,#e3e6ef)";
+        card.price.textContent = "";
+        if(!p) return;
+        card.price.appendChild(el("div", "font-weight:800;font-size:16px", naira(p.ngn) + (interval === "annual" ? " / year" : " / month")));
+        if(interval === "annual") card.price.appendChild(el("div", "font-size:12px;color:var(--dim,#5b6b86)", "about " + naira(Math.round(p.ngn / 12)) + " a month"));
+      });
+      var sel = find(tier, interval);
+      pay.textContent = sel ? "Pay " + naira(sel.ngn) + " for " + TIER_INFO[tier].name : "Unavailable";
+      pay.disabled = !sel;
     }
     paint();
-    pay.onclick = function(){ err.style.display = "none"; start(chosen, pay, err); };
+    pay.onclick = function(){ var sel = find(tier, interval); if(!sel) return; err.style.display = "none"; start(sel.id, pay, err); };
   }
 
   async function start(planId, payBtn, errEl){
@@ -182,7 +216,8 @@
     try{ if(window.MB_SYNC && MB_SYNC.refreshEntitlement) MB_SYNC.refreshEntitlement(); }catch(e){}
     try{ if(typeof window.loadPlanBadge === "function") window.loadPlanBadge(); }catch(e){}
     try{ var nudge = document.getElementById("mbPaywallNudge"); if(nudge) nudge.remove(); }catch(e){}
-    message("You're on Premium 🎉", j.current_period_end ? "Paid up until " + fmtDate(j.current_period_end) + ". Thank you for supporting MedBank." : "Thank you for supporting MedBank.",
+    var tierName = j.tier === "basic" ? "Basic" : "Premium";
+    message("You're on " + tierName + " 🎉", j.current_period_end ? "Paid up until " + fmtDate(j.current_period_end) + ". Thank you for supporting MedBank." : "Thank you for supporting MedBank.",
       [{ text:"Back to studying", onClick:close }]);
   }
 
@@ -190,7 +225,7 @@
   function boot(){
     var q; try{ q = new URLSearchParams(location.search); }catch(e){ return; }
     var ref = q.get("reference") || q.get("trxref");
-    var wantPlans = q.get("subscribe") === "1";
+    var wantPlans = q.get("subscribe");                                // "1", "basic" or "premium"
     if(ref || wantPlans){
       q.delete("reference"); q.delete("trxref"); q.delete("subscribe");
       try{ history.replaceState(null, "", location.pathname + (q.toString() ? "?" + q : "") + location.hash); }catch(e){}
@@ -200,7 +235,7 @@
     (function go(){
       if(!window.__mbSB && waited < 8000){ waited += 400; return setTimeout(go, 400); }
       if(ref) confirm(ref, { tries:4 });
-      else if(wantPlans) open();
+      else if(wantPlans) open({ tier:wantPlans });
       else if(read(PENDING)) confirm(read(PENDING), { silent:true });
     })();
   }

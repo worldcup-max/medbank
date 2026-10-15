@@ -333,7 +333,7 @@
                                             : "The import server didn't respond properly ("+resp.status+"). Try again in a moment."));
           return; }
         if(!resp.ok){
-          if(out.error==="upgrade" && window.MB_PAYWALL){ buildUI.stop(); if(o.parentNode) document.body.removeChild(o); MB_PAYWALL.nudge("Upgrade to import more", out.reason||"Subscribe to build more lectures — your built work stays free.", "Subscribe"); return; }
+          if(out.error==="upgrade" && window.MB_PAYWALL){ buildUI.stop(); if(o.parentNode) document.body.removeChild(o); MB_PAYWALL.nudge("Upgrade to import more", out.reason||"Subscribe to build more lectures — your built work stays free.", "See plans", window.MB_CHECKOUT ? function(){ MB_CHECKOUT.open({tier:"basic"}); } : null); return; }
           buildUI.stop(); show(out.reason||out.error||"That didn't work. Try again."); return; }
         /* success — swap the building screen for the in-app "ready" screen (no native alert) */
         buildUI.success(out, topicName, course_id);

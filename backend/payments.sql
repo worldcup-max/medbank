@@ -4,6 +4,7 @@
 --
 -- The subscriptions table already exists in the live project (it was created by hand and
 -- never committed). This file creates it if missing, then adds what payments need:
+--   tier                'basic' or 'premium' (rows from before tiers count as premium)
 --   current_period_end  when paid access ends (expiry)
 --   auto_renew          false once a recurring plan is cancelled
 --   paystack_*          codes to look a subscription up on Paystack
@@ -23,6 +24,7 @@ create table if not exists public.subscriptions (
   trial_ends_at  timestamptz,
   created_at     timestamptz not null default now()
 );
+alter table public.subscriptions add column if not exists tier                        text check (tier in ('basic','premium'));
 alter table public.subscriptions add column if not exists current_period_end          timestamptz;
 alter table public.subscriptions add column if not exists auto_renew                  boolean not null default false;
 alter table public.subscriptions add column if not exists paystack_customer_code      text;
@@ -50,16 +52,22 @@ create table if not exists public.payments (
 );
 alter table public.payments enable row level security;   -- no policies: server only
 
--- 5) apply a payment: extend from whichever is later, now or the current end, so paying
---    early never loses days. A reference seen before changes nothing (applied = false).
+-- 5) apply a payment. Same tier: extend from whichever is later, now or the current end, so paying
+--    early never loses days. Switching tier with time left: that time is converted at the two
+--    tiers' monthly prices (p_tier_prices, e.g. {"basic":4999,"premium":7999}), so 1 month of Basic
+--    left becomes ~19 days of Premium, then the new plan's months are added.
+--    A reference seen before changes nothing (applied = false).
+drop function if exists public.medbank_apply_payment(text, uuid, text, int, bigint, text);
 create or replace function public.medbank_apply_payment(
   p_reference text, p_account_id uuid, p_plan text, p_months int,
-  p_amount_kobo bigint, p_customer_code text
+  p_amount_kobo bigint, p_customer_code text, p_tier text, p_tier_prices jsonb
 ) returns table(applied boolean, current_period_end timestamptz)
 language plpgsql security definer set search_path = public as $$
 declare
-  v_end  timestamptz;
-  v_new  timestamptz;
+  v_end   timestamptz;
+  v_tier  text;
+  v_left  interval;
+  v_new   timestamptz;
 begin
   -- serialise payments for one account so two at once can't both read the same end date
   perform pg_advisory_xact_lock(hashtext(p_account_id::text));
@@ -69,20 +77,31 @@ begin
     return;
   end if;
 
-  select s.current_period_end into v_end from subscriptions s
+  select s.current_period_end,
+         coalesce(s.tier, case when s.plan like 'basic%' then 'basic' else 'premium' end)
+    into v_end, v_tier
+    from subscriptions s
    where s.account_id = p_account_id and s.status = 'active';
-  v_new := greatest(now(), coalesce(v_end, now())) + make_interval(months => p_months);
+
+  if v_end is null or v_end <= now() then
+    v_left := interval '0';
+  elsif v_tier = p_tier then
+    v_left := v_end - now();
+  else
+    v_left := (v_end - now()) * ((p_tier_prices->>v_tier)::float8 / (p_tier_prices->>p_tier)::float8);
+  end if;
+  v_new := now() + v_left + make_interval(months => p_months);
 
   insert into payments(reference, account_id, plan, amount_kobo, period_end)
   values (p_reference, p_account_id, p_plan, p_amount_kobo, v_new);
 
-  insert into subscriptions as s (account_id, status, plan, current_period_end, paystack_customer_code, updated_at)
-  values (p_account_id, 'active', p_plan, v_new, p_customer_code, now())
+  insert into subscriptions as s (account_id, status, plan, tier, current_period_end, paystack_customer_code, updated_at)
+  values (p_account_id, 'active', p_plan, p_tier, v_new, p_customer_code, now())
   on conflict (account_id) do update
-    set status = 'active', plan = excluded.plan, current_period_end = excluded.current_period_end,
+    set status = 'active', plan = excluded.plan, tier = excluded.tier, current_period_end = excluded.current_period_end,
         paystack_customer_code = coalesce(excluded.paystack_customer_code, s.paystack_customer_code),
         updated_at = now();
 
   return query select true, v_new;
 end $$;
-revoke all on function public.medbank_apply_payment(text, uuid, text, int, bigint, text) from public, anon, authenticated;
+revoke all on function public.medbank_apply_payment(text, uuid, text, int, bigint, text, text, jsonb) from public, anon, authenticated;

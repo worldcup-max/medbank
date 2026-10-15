@@ -5,7 +5,7 @@
  *   - startCheckout(): opens a Paystack transaction for the signed-in student
  *   - verifyReference(): the app's "I just paid" check (doesn't wait for the webhook)
  *   - handleWebhook(): charge / subscription events from Paystack
- *   - isActiveSub(): the single rule for "is this subscription live right now"
+ *   - isActiveSub() / tierOf(): "is this subscription live right now" and "Basic or Premium"
  *
  * A payment is applied by the SQL function medbank_apply_payment (backend/payments.sql)
  * in one transaction, keyed on the Paystack reference. That makes the webhook and the
@@ -16,15 +16,34 @@ import crypto from "node:crypto";
 
 const PAYSTACK_API = "https://api.paystack.co";
 
-/* Prices in Naira; months of access each payment buys. Override a price with
-   PRICE_NGN_MONTHLY / PRICE_NGN_SEMESTER / PRICE_NGN_ANNUAL on the host. */
+/* Two paid tiers, each monthly or annual (annual = 12 months at 20% off).
+     basic   — unlimited lecture imports (free accounts get 1)
+     premium — everything: Snap & solve, Pro-model builds, natural voices, higher daily limits
+   Prices in Naira. Override one with PRICE_NGN_BASIC_MONTHLY / _BASIC_ANNUAL / _PREMIUM_MONTHLY /
+   _PREMIUM_ANNUAL; make one auto-renew with the matching PAYSTACK_PLAN_* Paystack plan code. */
+export const TIERS = ["basic", "premium"];
+export const ANNUAL_DISCOUNT = 0.2;
 export function loadPlans(env = process.env){
-  const p = (k, d) => { const n = Number(env["PRICE_NGN_" + k]); return Number.isFinite(n) && n > 0 ? n : d; };
-  return {
-    monthly:  { id:"monthly",  label:"Monthly",  months:1,  ngn:p("MONTHLY", 2000),  planCode: env.PAYSTACK_PLAN_MONTHLY  || "" },
-    semester: { id:"semester", label:"Semester", months:6,  ngn:p("SEMESTER", 8000), planCode: env.PAYSTACK_PLAN_SEMESTER || "" },
-    annual:   { id:"annual",   label:"Annual",   months:12, ngn:p("ANNUAL", 15000),  planCode: env.PAYSTACK_PLAN_ANNUAL   || "" },
-  };
+  const price = (k, d) => { const n = Number(env["PRICE_NGN_" + k]); return Number.isFinite(n) && n > 0 ? n : d; };
+  const monthly = { basic:price("BASIC_MONTHLY", 4999), premium:price("PREMIUM_MONTHLY", 7999) };
+  const plans = {};
+  TIERS.forEach(tier => {
+    const T = tier.toUpperCase(), label = tier[0].toUpperCase() + tier.slice(1);
+    plans[tier + "_monthly"] = { id:tier + "_monthly", tier, interval:"monthly", label:label + " · Monthly", months:1,
+      ngn:monthly[tier], planCode:env["PAYSTACK_PLAN_" + T + "_MONTHLY"] || "" };
+    plans[tier + "_annual"] = { id:tier + "_annual", tier, interval:"annual", label:label + " · Annual", months:12,
+      ngn:price(T + "_ANNUAL", Math.round(monthly[tier] * 12 * (1 - ANNUAL_DISCOUNT))), planCode:env["PAYSTACK_PLAN_" + T + "_ANNUAL"] || "" };
+  });
+  return plans;
+}
+/* monthly price per tier — used to convert time left when someone switches tier */
+export function tierPrices(plans){ const o = {}; TIERS.forEach(t => { o[t] = plans[t + "_monthly"].ngn; }); return o; }
+
+/* Rows written before tiers existed (plan "monthly", or granted by hand) were all Premium. */
+export function tierOf(row){
+  if(!row) return null;
+  if(row.tier) return row.tier;
+  return /^basic/.test(row.plan || "") ? "basic" : "premium";
 }
 
 /* Live = status active AND the paid period hasn't ended. A row with no period end
@@ -96,12 +115,14 @@ export async function applyCharge(db, data, plans, { expectAccount } = {}){
     p_account_id: account_id,
     p_plan: plan.id,
     p_months: plan.months,
+    p_tier: plan.tier,
+    p_tier_prices: tierPrices(plans),
     p_amount_kobo: Number(data.amount) || 0,
     p_customer_code: customer.customer_code || null,
   });
   if(r.error) throw new Error("medbank_apply_payment failed: " + (r.error.message || r.error));
   const row = Array.isArray(r.data) ? r.data[0] : r.data;
-  return { applied: !!(row && row.applied), duplicate: !!(row && !row.applied), account_id, plan: plan.id,
+  return { applied: !!(row && row.applied), duplicate: !!(row && !row.applied), account_id, plan: plan.id, tier: plan.tier,
            current_period_end: row && row.current_period_end };
 }
 
@@ -165,7 +186,7 @@ export async function startCheckout({ user, planId, callbackUrl, plans, secret, 
   if(callbackUrl) body.callback_url = callbackUrl;
   if(plan.planCode) body.plan = plan.planCode;                 // recurring: Paystack renews and sends charge.success each time
   const d = await paystack("/transaction/initialize", { method:"POST", body, secret, fetchImpl });
-  return { authorization_url:d.authorization_url, access_code:d.access_code, reference:d.reference, plan:plan.id, amount_ngn:plan.ngn };
+  return { authorization_url:d.authorization_url, access_code:d.access_code, reference:d.reference, plan:plan.id, tier:plan.tier, amount_ngn:plan.ngn };
 }
 
 export async function verifyReference({ db, user, reference, plans, secret, fetchImpl }){
@@ -174,5 +195,5 @@ export async function verifyReference({ db, user, reference, plans, secret, fetc
   if(data.status !== "success") return { paid:false, status:data.status };
   const out = await applyCharge(db, data, plans, { expectAccount:user.id });
   if(out.skipped) return { paid:false, status:"not applied", reason:out.skipped };
-  return { paid:true, plan:out.plan, current_period_end:out.current_period_end };
+  return { paid:true, plan:out.plan, tier:out.tier, current_period_end:out.current_period_end };
 }

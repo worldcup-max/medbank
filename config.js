@@ -14,8 +14,9 @@ window.MEDBANK_CONFIG = {
 
   // Payments (Paystack). The import server opens and confirms every payment, so no Paystack
   // key goes in this file: set PAYSTACK_SECRET_KEY (sk_live_… or sk_test_…) on the server
-  // (Render → Environment). Prices and optional recurring plan codes live there too
-  // (PRICE_NGN_*, PAYSTACK_PLAN_*); see import-server/README.md → Payments.
+  // (Render → Environment). Two tiers, Basic and Premium, each monthly or annual (20% off);
+  // prices and optional recurring plan codes live there too (PRICE_NGN_*, PAYSTACK_PLAN_*);
+  // see import-server/README.md → Payments.
   // ENABLED:false shows "Subscriptions open soon" instead of the checkout.
   PAYMENTS: { ENABLED: true, PAYSTACK_INLINE_JS: "https://js.paystack.co/v2/inline.js" },
 
@@ -64,7 +65,7 @@ window.MEDBANK_CONFIG = {
   },
 
   // Fallback prices in Naira, shown only if the server's /plans can't be reached (the server's prices are what's charged)
-  PRICES_NGN: { monthly: 2000, semester: 8000, annual: 15000 },
+  PRICES_NGN: { basic: { monthly: 4999, annual: 47990 }, premium: { monthly: 7999, annual: 76790 } },
   TRIAL_DAYS: 14,
 
   // Feature flags — default OFF so new work is dormant for the live pilot until validated.

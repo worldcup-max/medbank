@@ -14,7 +14,7 @@
  *
  * Env (set on the host):
  *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, ANTHROPIC_API_KEY, PAYSTACK_SECRET_KEY
- *   optional: APP_URL, PAYSTACK_PLAN_MONTHLY/_SEMESTER/_ANNUAL, PRICE_NGN_MONTHLY/_SEMESTER/_ANNUAL
+ *   optional: APP_URL, PAYSTACK_PLAN_{BASIC,PREMIUM}_{MONTHLY,ANNUAL}, PRICE_NGN_{BASIC,PREMIUM}_{MONTHLY,ANNUAL}
  *
  * Setup:  npm i express @supabase/supabase-js @anthropic-ai/sdk pdf-parse
  * Run:    node server.mjs
@@ -33,7 +33,7 @@ import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPla
 import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
-import { loadPlans, isActiveSub, verifySignature, handleEvent, startCheckout, verifyReference } from "./payments.mjs";
+import { loadPlans, isActiveSub, tierOf, verifySignature, handleEvent, startCheckout, verifyReference } from "./payments.mjs";
 import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
@@ -94,12 +94,23 @@ async function getUser(req){
 }
 /* test override: emails in PREMIUM_TEST_EMAILS (comma-separated) count as premium — for building/QA only */
 const PREMIUM_TEST = (process.env.PREMIUM_TEST_EMAILS||"").toLowerCase().split(",").map(s=>s.trim()).filter(Boolean);
-async function isPremium(account_id, emailHint){ try{
+/* Paid tiers (payments.mjs): Basic = unlimited imports; Premium = everything isPremium gates.
+   isPaid is true for either tier; isPremium only for Premium (and PREMIUM_TEST_EMAILS). */
+async function readSub(account_id){
+  // select("*") so this works before and after backend/payments.sql adds tier/current_period_end
   const s=await admin.from("subscriptions").select("*").eq("account_id",account_id).maybeSingle();
   // ENT-04: maybeSingle() RETURNS an error, it doesn't throw — so a DB blip silently downgraded a
-  // paying subscriber to Basic ("Solve is a premium feature — subscribe") with nothing in the logs.
-  if(s.error) console.error("[isPremium] subscriptions read FAILED for %s — treating as NOT premium: %s", account_id, s.error.message||s.error);
-  if(isActiveSub(s.data)) return true;                       // active AND the paid period hasn't ended. select("*") so this works before and after backend/payments.sql
+  // paying subscriber ("Solve is a premium feature — subscribe") with nothing in the logs.
+  if(s.error) console.error("[subscriptions] read FAILED for %s — treating as NOT paid: %s", account_id, s.error.message||s.error);
+  return isActiveSub(s.data) ? s.data : null;               // active AND the paid period hasn't ended
+}
+async function isPaid(account_id, emailHint){
+  try{ if(await readSub(account_id)) return true; }catch(e){ return false; }
+  return isPremium(account_id, emailHint);
+}
+async function isPremium(account_id, emailHint){ try{
+  const sub=await readSub(account_id);
+  if(sub && tierOf(sub)==="premium") return true;
   if(PREMIUM_TEST.length){                                   // only runs when a test list is set (empty in production)
     // Prefer the caller's auth-token email (always present); only hit the accounts table
     // if no hint was passed. This fixes premium test-accounts whose accounts.email row is blank.
@@ -1194,9 +1205,9 @@ app.get("/me", async (req,res)=>{
   try{ const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
     const premium = await isPremium(user.id, user.email).catch(()=>false);
     const isTest = PREMIUM_TEST.length>0 && PREMIUM_TEST.indexOf((user.email||"").toLowerCase())>=0;
-    const sub = await admin.from("subscriptions").select("*").eq("account_id",user.id).maybeSingle();
-    const s = (premium && sub.data) || {};
+    const s = (await readSub(user.id).catch(()=>null)) || {};
     res.json({ ok:true, email:user.email||"", premium, test:(premium && isTest),
+               tier: premium ? "premium" : (s.account_id ? tierOf(s) : null),
                plan:s.plan||null, current_period_end:s.current_period_end||null, auto_renew:!!s.auto_renew });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
@@ -1286,10 +1297,10 @@ app.post("/import", async (req,res)=>{
     if(!user) return res.status(401).json({ error:"not signed in" });
     const account_id = user.id;
 
-    // --- freemium gate: premium = unlimited imports; free = 1 built lecture ---
-    if(!await isPremium(account_id, user.email)){
+    // --- freemium gate: Basic or Premium = unlimited imports; free = 1 built lecture ---
+    if(!await isPaid(account_id, user.email)){
       if(await builtCount(account_id) >= FREE_BUILD_LIMIT)
-        return res.status(402).json({ error:"upgrade", reason:"Your free account includes 1 lecture. Subscribe to import more — everything you've already built stays free to study, and the AI tutor and podcast keep working on it." });
+        return res.status(402).json({ error:"upgrade", reason:"Your free account includes 1 lecture. Subscribe to Basic or Premium to import more — everything you've already built stays free to study, and the AI tutor and podcast keep working on it." });
     }
 
     const { topicName, subject, lecturer, course_id } = req.body;
@@ -1311,8 +1322,8 @@ app.post("/import", async (req,res)=>{
     const pt = { data: await loadImportPrompt(level) };
     if(!pt.data){ await admin.from("imports").update({ status:"failed", error:"no active prompt" }).eq("id",importId); return res.status(500).json({ error:"no active prompt" }); }
     // IMPORT BUILD ONLY — the one place tiering applies: basic → Flash, premium → Pro
-    const paid = await admin.from("subscriptions").select("*").eq("account_id",account_id).maybeSingle();
-    let model = isActiveSub(paid.data) ? PREMIUM_MODEL : BASIC_MODEL;
+    const paid = await readSub(account_id).catch(()=>null);
+    let model = (paid && tierOf(paid)==="premium") ? PREMIUM_MODEL : BASIC_MODEL;
     // admins may override the model per import (for A/B testing)
     if(req.body.model){ const adm = await admin.from("accounts").select("is_admin").eq("id",account_id).maybeSingle(); if(adm.data && adm.data.is_admin) model = req.body.model; }
 
@@ -1676,7 +1687,7 @@ app.post("/podcast-audio", async (req,res)=>{
 app.post("/solve", async (req,res)=>{
   try{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
-    if(!await isPremium(user.id, user.email)) return res.status(402).json({ error:"upgrade", reason:"Solve is a premium feature — subscribe to snap and solve any question." });
+    if(!await isPremium(user.id, user.email)) return res.status(402).json({ error:"upgrade", reason:"Snap & solve is part of Premium. Upgrade to snap and solve any question." });
     const { image_base64, media_type, text } = req.body || {};
     const q = (text||"").toString().trim().slice(0,6000);     // a pasted chapter is not a question — cap it
     if(!image_base64 && !q) return res.status(400).json({ error:"send a photo or type the question" });
@@ -3138,7 +3149,7 @@ function checkoutReturnUrl(asked){
 }
 
 app.get("/plans", (req,res)=>{
-  res.json({ ok:true, enabled:!!PAYSTACK_SECRET, plans:Object.values(PLANS).map(p=>({ id:p.id, label:p.label, months:p.months, ngn:p.ngn, recurring:!!p.planCode })) });
+  res.json({ ok:true, enabled:!!PAYSTACK_SECRET, plans:Object.values(PLANS).map(p=>({ id:p.id, tier:p.tier, interval:p.interval, label:p.label, months:p.months, ngn:p.ngn, recurring:!!p.planCode })) });
 });
 
 app.post("/paystack/checkout", async (req,res)=>{

@@ -21,7 +21,10 @@ services:
         sync: false            # Paystack → Settings → API Keys (sk_...). KEEP SECRET. (optional until you charge)
       - key: APP_URL
         value: https://medbank.com.ng/app.html   # where Paystack returns students after paying
-      - key: PAYSTACK_PLAN_MONTHLY
-        sync: false            # optional: a Paystack Plan code (PLN_...) to make monthly auto-renew. Leave unset for one-off payments.
+      # optional: Paystack Plan codes (PLN_...) to make a plan auto-renew. Leave unset for one-off payments.
+      - key: PAYSTACK_PLAN_BASIC_MONTHLY
+        sync: false
+      - key: PAYSTACK_PLAN_PREMIUM_MONTHLY
+        sync: false
       - key: ALLOWED_ORIGINS
         sync: false            # comma-separated, e.g. https://worldcup-max.github.io,https://your-website
