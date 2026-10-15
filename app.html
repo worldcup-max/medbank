@@ -3134,13 +3134,20 @@ function mbxTemplateFor(t){
  * script — POST /explainer/plate writes the tutor from the note (import-server/plate-tutor.mjs); explainer/plate-tutor.js
  * shows the note beside the plate and links them both ways. Keep this list in step with PLATES in explainer/plate-tutor.js. */
 var MBX_PLATES=[
-  {id:'nephron-urine-journey', re:/\bnephron|urine (formation|concentration)|loop of henle|countercurrent|tubular (reabsorption|function)|glomerular filtration\b/i},
-  {id:'cardiac-cycle-wiggers', re:/\bcardiac cycle|wiggers|heart sounds|pressure.volume loop|systole and diastole\b/i} ];
+  {id:'nephron-urine-journey', re:/\bnephron|urine (formation|concentration)|loop of henle|countercurrent|tubular (reabsorption|function)|glomerular filtration\b/i,
+   terms:[/\bnephrons?\b/i,/\bglomerul/i,/bowman/i,/proximal (convoluted )?tubule|\bPCT\b/i,/loop of henle/i,/descending limb/i,/ascending limb/i,/distal (convoluted )?tubule|\bDCT\b/i,/collecting duct/i,/\bGFR\b|glomerular filtration/i,/tubular (reabsorption|secretion)|\breabsorb/i,/\bADH\b|vasopressin|antidiuretic/i,/aldosterone/i,/aquaporin/i,/countercurrent/i,/juxtaglomerular|macula densa/i,/\bafferent arteriole|\befferent arteriole/i,/urine (formation|concentration|osmolality)/i]},
+  {id:'cardiac-cycle-wiggers', re:/\bcardiac cycle|wiggers|heart sounds|pressure.volume loop|systole and diastole\b/i,
+   terms:[/cardiac cycle/i,/\bsystol/i,/\bdiastol/i,/isovolum(etric|ic)/i,/\bmitral\b/i,/aortic valve/i,/\bS1\b|first heart sound/i,/\bS2\b|second heart sound/i,/ejection/i,/end.diastolic|end.systolic/i,/stroke volume/i,/pressure.volume/i,/atrial (systole|kick|contraction)/i,/ventricular (filling|pressure|systole)/i,/\bwiggers/i,/dicrotic|incisura/i]} ];
+/* Which library plate fits a topic: its title or opening names it, or the WHOLE note covers enough of what the plate shows
+   (at least 4 different parts or processes, e.g. a "Renal investigations" note that discusses GFR, glomeruli, tubules and ADH).
+   The tutor then follows only the lines the plate can show; the rest of the note is explained in words. */
 function mbxPlateFor(t){
   try{ if(!t||localStorage.mbmech==='0'||localStorage.mbplate==='0') return null; }catch(e){}
-  var hay=(t.name||'')+' \n'+String(t.note||'').slice(0,600);   // the title and the note's opening, not every passing mention
-  for(var i=0;i<MBX_PLATES.length;i++) if(MBX_PLATES[i].re.test(hay)) return MBX_PLATES[i];
-  return null;
+  var head=(t.name||'')+' \n'+String(t.note||'').slice(0,600), all=String(t.note||'').slice(0,60000);
+  for(var i=0;i<MBX_PLATES.length;i++) if(MBX_PLATES[i].re.test(head)) return MBX_PLATES[i];
+  var best=null, bestN=0;
+  for(var j=0;j<MBX_PLATES.length;j++){ var n=MBX_PLATES[j].terms.filter(function(re){ return re.test(all); }).length; if(n>bestN){ best=MBX_PLATES[j]; bestN=n; } }
+  return bestN>=4 ? best : null;
 }
 var _mbpLoad=null, _MBP_LESSON={}, _mbpCur=null, _mbpSaveT=null;
 /* "· 4/10" or "· ✓" on the 3D Tutor tab, from the student's synced progress */
