@@ -1,0 +1,32 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "opencode/deepseek-v4.1-flash-free",
+  "small_model": "opencode/deepseek-v4.1-flash-free",
+  "permission": {
+    "edit": {
+      "*": "allow",
+      "explainer/library/*": "deny",
+      "viz-training/*": "deny",
+      "backend/*.sql": "ask",
+      "import-server/sql/*": "ask",
+      ".github/*": "deny"
+    },
+    "bash": {
+      "*": "ask",
+      "node --check *": "allow",
+      "node -e *": "ask",
+      "grep *": "allow",
+      "rg *": "allow",
+      "ls *": "allow",
+      "cat *": "allow",
+      "git *": "deny",
+      "gh *": "deny",
+      "rm *": "deny",
+      "del *": "deny",
+      "rmdir *": "deny",
+      "Remove-Item *": "deny",
+      "npm publish *": "deny"
+    },
+    "webfetch": "ask"
+  }
+}
