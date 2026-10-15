@@ -82,5 +82,5 @@ window.MEDBANK_CONFIG = {
   //   LEARNING_EVENTS = build 01: the durable append-only learning ledger (learning-events.js →
   //                  Supabase learning_events). Write-only: nothing in the learning path reads it.
   //                  Ships DARK. Turn on only after the verification report passes.
-  FEATURES: { LEARNING_EVENTS: false, INTEGRATED_MODE: true, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false }
+  FEATURES: { LEARNING_EVENTS: false, INTEGRATED_MODE: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false }
 };
