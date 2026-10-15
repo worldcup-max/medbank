@@ -1,0 +1,31 @@
+# Keeps the AI import server (Render free plan) from going to sleep.
+# Render spins a free service down after 15 minutes without traffic and takes about a minute
+# to wake, so a student's first import, podcast or tutor answer after a quiet spell waits.
+# Pinging /health every 10 minutes keeps it up. Free for a public repo.
+#
+# Limits worth knowing:
+# - GitHub can run scheduled jobs late at busy times, so an occasional sleep can still slip through.
+# - Render gives 750 free hours per workspace per month and this uses ~744. Any OTHER free
+#   service on the same Render workspace (e.g. a Kokoro voice service) shares that pool, and
+#   when it runs out Render suspends every free service until the next month.
+# - Delete this workflow once the server moves to a paid Render instance.
+name: Keep server awake
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Ping /health
+        run: |
+          # A cold wake takes about a minute, so allow 90s and one retry.
+          curl -fsS --max-time 90 --retry 1 --retry-delay 5 -o /dev/null \
+            -w "HTTP %{http_code} in %{time_total}s\n" \
+            https://medbank-import.onrender.com/health
