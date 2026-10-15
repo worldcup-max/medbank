@@ -129,7 +129,7 @@ V1.8.2 hardened the QA engine; it did NOT advance the phase. We are still in Pha
    PHASE A  CORPUS GROWTH → READINESS         🟢 CURRENT  (47 / 100 approved, 10 families)
      gate: ≥100 approved · ≥8 families · ≥10/family · no family >30% · ≥3/integration-pair
                       ↓
-   PHASE B  INTEGRATED MODE (student-facing)  🔜  one primary target_id; integrated_topics[]/case_id = metadata; selector serves; requested-vs-delivered
+   PHASE B  INTEGRATED MODE (student-facing)  🔒 BUILT LOCKED (fail-closed; opens at gate)  one primary target_id; integrated_topics[]/case_id = metadata; selector serves; requested-vs-delivered
                       ↓
    PHASE C  REASONING PROFILE — integration axis  🔜  evidence-gated, NO premature claims; [Drill this] → Smart Drill
                       ↓

@@ -1,6 +1,8 @@
 # Phase B — Integrated Mode: CONTRACT (draft, pre-implementation)
 
-_Status: 📝 CONTRACT — written during Phase A while the corpus grows. NO code until the readiness gate is genuinely met and this contract is agreed. Attaches to roadmap box "PHASE B — INTEGRATED MODE"._
+_Status: ✅ BUILT LOCKED (2026-10-15, at Frank's request to be ready the day the gate opens) — implemented behind the fail-closed gate: students see the lock reason and receive zero integrated items until `readinessGate` is ready. Acceptance tests: qa/phase-b-integrated.mjs 29/29. Live validation (requested-vs-delivered on real sessions) still waits for the gate. Attaches to roadmap box "PHASE B — INTEGRATED MODE"._
+
+_Implementation notes: `GET /integrated/mode` (signed-in) → `integratedModeView`; primary target_id = the item's own, else its source question's authoritative Target (MATCH or human), else null (own-hash fallback, same as AMBIGUOUS). Client: `mgIntegRow` / `integratedSelect` / `mgAssemble` in app.html, flag `FEATURES.INTEGRATED_MODE`. Integrated items count toward the session total; a shortfall is filled by the session's ordinary questions (never relabelled) and recorded on `_sessions[].integrated`. Surfaced in Customize only for now (not Quick Exam / Smart Drill)._
 
 ## Purpose
 Expose the approved integrated questions to students as a first-class practice surface, WITHOUT disturbing the frozen scheduling/supply architecture (A6/A7) or the frozen QA engine (R1/R2/R3/R4).

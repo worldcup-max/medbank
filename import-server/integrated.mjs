@@ -391,3 +391,28 @@ export function reviewQueueOrder(items, approved, cfg){
     .sort((a,b)=> (b.s-a.s) || (sev(a.it)-sev(b.it)) || (String(a.it.created_at||"")<String(b.it.created_at||"")?-1:String(a.it.created_at||"")>String(b.it.created_at||"")?1:a.i-b.i))
     .map(x=>Object.assign({}, x.it, { queue_priority:{ family_shortfall:x.s, family_approved:have[x.it.integration_family||"?"]||0 } }));
 }
+
+/* PHASE B — Integrated Mode, student view (PHASE-B-INTEGRATED-MODE-CONTRACT.md). FAIL CLOSED: the single canonical
+   readinessGate decides; below the gate the student gets the lock reason and ZERO items. At the gate, approved items
+   are projected to the ordinary question shape. Identity invariant: each item carries ONE primary target_id — the
+   item's own (set at approval) or else its source question's authoritative Target — or null, which falls back to the
+   question's own hash exactly like an AMBIGUOUS canonical question. integrated_topics / family are metadata only. */
+const INTEGRATED_SKILL = { mechanistic:"complications", diagnostic:"diagnosis", management:"management", competing:"next_step", longitudinal:"next_step" };
+export function integratedModeView(approved, sources){
+  approved=(Array.isArray(approved)?approved:[]).filter(r=>r && r.review_status==="approved");
+  sources=sources||{};   // { targets:{qh:target_id (authoritative only)}, topics:{qh:{id,name}} }
+  const tg=sources.targets||{}, tp=sources.topics||{};
+  const gate=readinessGate(approved.map(r=>({ integration_family:r.integration_family })));
+  const view={ integrated_mode: gate.ready?"available":"locked", total:gate.total, need:gate.gate.minApproved,
+    families:gate.families, blockers:gate.blockers, items:[] };
+  if(!gate.ready) return view;
+  view.items=approved.filter(r=>r.transformed_content && r.transformed_content.stem && Array.isArray(r.transformed_content.options) && r.transformed_content.options.length>=2)
+    .map(r=>{ const c=r.transformed_content, srcs=(Array.isArray(r.source_question_ids)?r.source_question_ids:[]).concat(r.question_id?[r.question_id]:[]);
+      const inherited=srcs.map(q=>tg[q]).find(Boolean)||null, topic=srcs.map(q=>tp[q]).find(Boolean)||null;
+      return { id:"ig:"+r.id, stem:c.stem, options:c.options.slice(), answer:Number.isInteger(c.answer)?c.answer:0, rationales:(c.rationales||[]).slice(),
+        skill:INTEGRATED_SKILL[r.integration_type]||"management", cognitive_level:"complex_reasoning",
+        target_id:r.target_id||inherited, integration_family:r.integration_family||null, integrated_topics:r.integrated_topics||[],
+        integration_type:r.integration_type||null, source_topic:topic, integrated:true }; })
+    .sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0);
+  return view;
+}

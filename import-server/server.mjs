@@ -29,7 +29,7 @@ import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPla
 import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
-import { runCandidate, applyHumanReview, resubmitEdited, reviewQueueOrder, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
+import { runCandidate, applyHumanReview, resubmitEdited, reviewQueueOrder, integratedModeView, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -2914,6 +2914,26 @@ app.post("/admin/integrated/edit", async (req,res)=>{
     const w=await admin.from("integrated_items").update(up).eq("id",b.id);
     if(w.error) return res.status(500).json({ error:w.error.message });
     res.json({ ok:true, review_status:up.review_status, severity:out.severity||null, reason:out.reason||null });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/integrated/mode", async (req,res)=>{
+  /* PHASE B student endpoint. The client keys Integrated Mode off THIS (never a local recomputation). Fail-closed:
+     locked → the reason + no items. Available → approved items only, each with one primary target_id. */
+  try{
+    const user=await getUser(req); if(!user) return res.status(401).json({ error:"sign in" });
+    const r=await admin.from("integrated_items").select("id,question_id,target_id,integration_family,integration_type,integrated_topics,transformed_content,source_question_ids,review_status").eq("review_status","approved");
+    const rows=r.data||[];
+    const pre=integratedModeView(rows);
+    if(pre.integrated_mode!=="available") return res.json(Object.assign({ ok:true }, pre));
+    const qhs=[...new Set(rows.flatMap(x=>(x.source_question_ids||[]).concat(x.question_id?[x.question_id]:[])))];
+    const targets={}, topics={};
+    if(qhs.length){
+      const qt=await admin.from("question_targets").select("qh,target_id,map_state,mapping_source").in("qh",qhs);
+      (qt.data||[]).forEach(t=>{ if(t.target_id && (t.map_state==="MATCH"||t.mapping_source==="human")) targets[t.qh]=t.target_id; });   // same authority rule as stampTargetIds
+      const want=new Set(qhs), tr=await admin.from("topics").select("id,title,extras").not("extras","is",null).limit(3000);
+      (tr.data||[]).forEach(t=>((t.extras&&t.extras.qbank)||[]).forEach(q=>{ if(q&&q.stem){ const h=qhOf(q); if(want.has(h)&&!topics[h]) topics[h]={ id:t.id, name:t.title||t.name||"" }; } }));
+    }
+    res.json(Object.assign({ ok:true }, integratedModeView(rows, { targets, topics })));
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 app.get("/admin/integrated/readiness", async (req,res)=>{

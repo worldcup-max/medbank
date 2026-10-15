@@ -1252,7 +1252,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.10.15a';   // bump this each release
+const APP_VERSION='2026.10.15b';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -3552,7 +3552,8 @@ function qbFinalize(){ if(!QB||QB._saved) return; QB._saved=true; var s=qbStore(
      chart and the dashboard grade a 3-of-20 exit as 15% while the results screen showed 100% (qbScore). */
   var ansN=(QB.results||[]).length;
   s._sessions.push({ sid:QB.sid||qbUid(), topicId:QB.topicId, mode:QB.mode, ts:Date.now(), n:(QB.endedEarly?ansN:QB.items.length), correct:QB.correct, ms:totMs, mistakes:!!QB.mistakes,
-    session_type:stype, kind:stype, smart:!!QB.smart, exposure:QB.exposure||'', blueprint:(QB.blueprint?{ requested:QB.blueprint.requested, delivered:QB.blueprint.delivered, shortfall:QB.blueprint.shortfall }:null) });
+    session_type:stype, kind:stype, smart:!!QB.smart, exposure:QB.exposure||'', blueprint:(QB.blueprint?{ requested:QB.blueprint.requested, delivered:QB.blueprint.delivered, shortfall:QB.blueprint.shortfall }:null),
+    integrated:(QB.integrated?{ requested:QB.integrated.requested, delivered:QB.integrated.delivered, shortfall:QB.integrated.shortfall, available:QB.integrated.available, byFamily:QB.integrated.byFamily }:null) });
   if(s._sessions.length>200) s._sessions=s._sessions.slice(s._sessions.length-200);
   // smart-drill completion event (paired with smart_drill_started) — planned vs completed, minimal metadata
   if(QB.smart){ smartLog({t:'smart_drill_completed', sid:QB.sid, session_type:stype,
@@ -3869,7 +3870,9 @@ function qbDoneHtml(){
     megaBreak='<div class="card" style="cursor:default;margin-top:12px"><div class="qbsec-h">This session</div>'
       +'<div class="mgb-h">By course</div>'+qbSessBars(byC)
       +'<div class="mgb-h">By cognitive level</div>'+qbSessBars(byL)
-      +'<div class="mgb-h">By clinical skill</div>'+qbSessBars(byS)+'</div>';
+      +'<div class="mgb-h">By clinical skill</div>'+qbSessBars(byS)
+      +(QB.integrated&&QB.integrated.requested?('<div class="mgb-h">Integrated questions</div><div class="qbnodata" style="margin:2px 0 0">'+QB.integrated.delivered+' of '+QB.integrated.requested+' requested'
+        +(QB.integrated.shortfall?(' — only '+QB.integrated.available+' approved so far, so the rest were regular questions'):'')+'</div>'):'')+'</div>';
   }
   return '<div class="card" style="cursor:default;text-align:center"><div style="font-size:32px;font-weight:900;color:'+(pct>=60?'var(--recall)':'#e2574b')+'">'+pct+'%</div>'
     +'<div style="font-weight:700">'+c+' / '+n+' correct'+(totS?' · '+Math.floor(totS/60)+'m '+(totS%60)+'s':'')+' — '+msg+'</div>'+endedNote
@@ -4177,12 +4180,65 @@ function blueprintSelect(pool, blueprint){
   var deliveredSkill={}; selected.forEach(function(q){ deliveredSkill[q.skill||'?']=(deliveredSkill[q.skill||'?']||0)+1; });
   return { selected:selected, shortfall:shortfall, requested:{count:count, skillMix:skillMix, cogMix:cogMix}, delivered:{count:selected.length, skill:deliveredSkill} };
 }
+/* ===== PHASE B — Integrated Mode (PHASE-B-INTEGRATED-MODE-CONTRACT.md). The server's readiness gate decides,
+   fail-closed: locked → the reason, no items. integratedSelect is PURE + deterministic: round-robin across families
+   (sorted) so no family dominates; never more than exist; a shortfall is REPORTED and never backfilled with
+   non-integrated questions relabelled. It only chooses which approved items run — each keeps its one target_id. ===== */
+window._mgInteg = window._mgInteg || { state:'idle' };
+function mgIntegOn(){ var F=(window.MEDBANK_CONFIG||{}).FEATURES||{}; return !!F.INTEGRATED_MODE; }
+async function mgIntegLoad(force){ var I=window._mgInteg;
+  if(!mgIntegOn() || I.state==='loading') return;
+  if(!force && (I.state==='locked'||I.state==='available') && (Date.now()-(I.at||0))<10*60000) return;
+  var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API){ window._mgInteg={ state:'error', at:Date.now() }; return; }
+  window._mgInteg={ state:'loading', at:Date.now() };
+  try{ var token=null; if(window.__mbSB){ var ses=await window.__mbSB.auth.getSession(); token=ses.data.session&&ses.data.session.access_token; }
+    if(!token){ window._mgInteg={ state:'signed_out', at:Date.now() }; }
+    else { var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/integrated/mode',{ headers:{ 'Authorization':'Bearer '+token } }); var d=await r.json();
+      var avail=(r.ok && d.integrated_mode==='available' && Array.isArray(d.items) && d.items.length);
+      window._mgInteg={ state:(r.ok?(avail?'available':'locked'):'error'), at:Date.now(), total:d.total||0, need:d.need||100, blockers:d.blockers||[],
+        items:(avail?d.items.map(function(q){ var t=q.source_topic||{}; return Object.assign({}, q, { _topicId:(t.id||'integrated'), _topicName:(t.name?t.name+' · integrated':'Integrated case'), _subject:'Integrated', _integrated:true }); }):[]) }; }
+  }catch(e){ window._mgInteg={ state:'error', at:Date.now() }; }
+  if((location.hash||'').indexOf('mega')>=0 && !(QB && QB.mega)) render();
+}
+function integratedSelect(pool, n){
+  n=Math.max(0, n|0); pool=(pool||[]).slice().sort(function(a,b){ var x=a.id||'', y=b.id||''; return x<y?-1:(x>y?1:0); });
+  var fams={}, order=[]; pool.forEach(function(q){ var f=q.integration_family||'?'; if(!fams[f]){ fams[f]=[]; order.push(f); } fams[f].push(q); });
+  order.sort();
+  var out=[], seen={}, fi=0, guard=0;
+  while(out.length<n && guard<pool.length*2+order.length){ var f=order[fi%order.length]; var d=f?fams[f]:null;
+    if(d && d.length){ var q=d.shift(); if(!seen[q.id]){ seen[q.id]=1; out.push(q); } }
+    fi++; guard++; if(order.every(function(k){ return !fams[k].length; })) break; }
+  var byFamily={}; out.forEach(function(q){ var f=q.integration_family||'?'; byFamily[f]=(byFamily[f]||0)+1; });
+  return { selected:out, requested:n, available:pool.length, delivered:out.length, shortfall:Math.max(0, n-out.length), byFamily:byFamily };
+}
+function mgIntegRow(){ if(!mgIntegOn()) return ''; var I=window._mgInteg||{}, cfg=_mgCfg;
+  if(I.state==='idle'){ setTimeout(function(){ mgIntegLoad(); },0); }
+  var body;
+  if(I.state==='available'){
+    body='<div class="qbcfg-c">'+['0','5','10','20'].map(function(v){ return '<button class="qbchipbtn'+(String(cfg.integratedN|0)===v?' on':'')+'" onclick="_mgCfg.integratedN='+v+';render()">'+(v==='0'?'None':v)+'</button>'; }).join('')+'</div>';
+    return '<div class="qbcfg"><div class="qbcfg-l">🔗 Integrated</div>'+body+'</div><div class="qbnodata" style="margin:-4px 0 6px 102px">Cross-topic questions where two systems decide the answer together. '+I.items.length+' available. They count toward “How many”.</div>';
+  }
+  var msg = I.state==='locked' ? ('Integrated Mode locked — '+esc((I.blockers||[]).join(' · ')||((I.total||0)+' / '+(I.need||100)+' approved')))
+          : I.state==='signed_out' ? 'Sign in to see Integrated Mode.'
+          : I.state==='error' ? 'Integrated Mode is unavailable right now.' : 'Checking Integrated Mode…';
+  return '<div class="qbcfg"><div class="qbcfg-l">🔗 Integrated</div><div class="qbcfg-c"><span class="qbnodata" style="margin:0">'+msg+'</span></div></div>';
+}
 /* Focused = plain shuffle of selected topics; Mixed/Blind = balanced round-robin so a big topic can't dominate (point 8) */
 function mgAssemble(count){ var cfg=_mgCfg, groups=mgTopicGroups();
+  window._mgLastInteg=null;
+  var I=window._mgInteg||{};
+  if(mgIntegOn() && (cfg.integratedN|0)>0 && cfg.exposure!=='adaptive'){   // Phase B: only when the server says available
+    var ig=integratedSelect(I.state==='available'?I.items:[], cfg.integratedN|0);
+    window._mgLastInteg=ig;
+    if(ig.delivered){ var rest=_mgAssembleCore(groups, Math.max(0,(count|| (cfg.count||20))-ig.delivered), cfg.exposure==='blueprint'?Math.max(0,(cfg.count||0)-ig.delivered):null);
+      return qbShuffle(rest.concat(ig.selected)); }
+  }
+  return _mgAssembleCore(groups, count, null); }
+function _mgAssembleCore(groups, count, bpCount){ var cfg=_mgCfg;
   var flat=[]; groups.forEach(function(g){ flat=flat.concat(g.items); });
   var target = count ? Math.min(count, flat.length) : flat.length;
   if(cfg.exposure==='blueprint'){                                  // V1.7 Phase 2: additive session-composition layer
-    var bp=blueprintSelect(flat, { count:(cfg.count||flat.length), skillMix:cfg.skillMix||{}, cogMix:cfg.cogMix||null });
+    var bp=blueprintSelect(flat, { count:(bpCount!=null?bpCount:(cfg.count||flat.length)), skillMix:cfg.skillMix||{}, cogMix:cfg.cogMix||null });
     window._mgLastBlueprint=bp;                                    // requested/delivered/shortfall for the UI + analytics (never touches attempts/A6)
     return qbShuffle(bp.selected.slice()); }
   if(cfg.exposure==='focused'){ return qbShuffle(flat).slice(0, target); }
@@ -4209,7 +4265,7 @@ function mgStart(quick){ var cfg=_mgCfg;
   try{ items=mgAssemble(cfg.count); } finally{ if(restore) window._mgCfg=restore; }
   if(!items.length){ alert('No questions match your selection yet. Build a few topic Q-banks first, or widen the filter.'); return; }
   var _bp=(cfg.exposure==='blueprint'); var _bpTimed=(_bp && (cfg.examMins|0)>0);
-  QB={ topicId:'*', mode:(_bpTimed?'timed':cfg.mode), items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:cfg.exposure, kind:(quick?'quick_exam':(_bp?'blueprint':'custom')), examDeadline:(_bpTimed?(Date.now()+(cfg.examMins|0)*60000):0), blueprint:(_bp?window._mgLastBlueprint:null) };
+  QB={ topicId:'*', mode:(_bpTimed?'timed':cfg.mode), items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:cfg.exposure, kind:(quick?'quick_exam':(_bp?'blueprint':'custom')), examDeadline:(_bpTimed?(Date.now()+(cfg.examMins|0)*60000):0), blueprint:(_bp?window._mgLastBlueprint:null), integrated:(quick?null:window._mgLastInteg) };
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
 }
 /* point 13 — Drill my weaknesses: build a tutor set from the existing pool, weighted to weak skills/levels (pure analytics + filter, no generation) */
@@ -4849,7 +4905,7 @@ function pageMega(){
   var startBtn='<div class="btnrow" style="margin-top:16px"><button class="btn primary" style="min-width:200px" '+(canStart?'onclick="mgStart(false)"':'disabled style="opacity:.45"')+'>🚀 Start '+(needPick?'— choose a topic':(n?nStart+' questions':'— none match'))+'</button></div>';
   var poolInfo='<div class="qbnodata" style="margin-top:6px">'+(needPick?'No topics ticked yet — tap the ones you want above, or switch back to “All topics”.':(n+' question'+(n===1?'':'s')+' in your current selection.'))+'</div>';
   var bpPanel=(cfg.exposure==='blueprint')?mgBlueprintPanel():'';
-  var custom='<div class="mgcustom">Customize your session</div><div class="card" style="cursor:default">'+subjChips+chooseBtn+'<div class="mgdiv"></div>'+expoRow+expoNote+(cfg.exposure==='blueprint'?bpPanel:(modeRow+lvlRow+skillRow))+cntRow+startBtn+poolInfo+'</div>';
+  var custom='<div class="mgcustom">Customize your session</div><div class="card" style="cursor:default">'+subjChips+chooseBtn+'<div class="mgdiv"></div>'+expoRow+expoNote+(cfg.exposure==='blueprint'?bpPanel:(modeRow+lvlRow+skillRow))+(cfg.exposure==='adaptive'?'':mgIntegRow())+cntRow+startBtn+poolInfo+'</div>';
   return '<div class="wrap">'+head+quick+smart+custom+'</div>';
 }
 

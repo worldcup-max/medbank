@@ -76,8 +76,11 @@ window.MEDBANK_CONFIG = {
   //                  reading viz-training/scenes/*.json. Default OFF: with the flag false nothing loads,
   //                  no tab appears and no network request is made. To test without flipping it live,
   //                  run localStorage.mb3d = '1' in the console on your own device.
+  //   INTEGRATED_MODE = Phase B: the "🔗 Integrated" row in Mega → Customize. It does NOT unlock anything by
+  //                  itself — the server's readiness gate (≥100 approved, ≥8 families, …) decides, fail-closed.
+  //                  Below the gate students see the lock reason and get no integrated questions. Off = row hidden.
   //   LEARNING_EVENTS = build 01: the durable append-only learning ledger (learning-events.js →
   //                  Supabase learning_events). Write-only: nothing in the learning path reads it.
   //                  Ships DARK. Turn on only after the verification report passes.
-  FEATURES: { LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false }
+  FEATURES: { LEARNING_EVENTS: false, INTEGRATED_MODE: true, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false }
 };
