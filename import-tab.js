@@ -256,7 +256,8 @@
             '<div style="width:60px;height:60px;border-radius:50%;background:'+TEAL+';color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px">✓</div>'+
             '<div style="font-weight:800;font-size:18px;margin:14px 0 2px;color:'+INK+'">Your study set is ready</div>'+
             (chips?'<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0 4px">'+chips+'</div>':"")+
-            '<div style="font-size:13.5px;color:'+DIM+';margin:6px 0 18px">'+esc2(topicTitle2)+' is built and ready to study.</div>'+
+            '<div style="font-size:13.5px;color:'+DIM+';margin:6px 0 18px">'+esc2(topicTitle2)+' is built and ready to study.'+
+              (out.shared?'<br><span style="color:'+VD+';font-weight:700">A classmate already imported this lecture, so it was ready instantly.</span>':'')+'</div>'+
             '<button class="mbi-open" style="width:100%;max-width:280px;border:0;border-radius:12px;padding:14px;font-weight:800;font-size:15px;cursor:pointer;background:'+V+';color:#fff">Open topic →</button>'+
             '<div class="mbi-again" style="color:'+DIM+';font-size:13px;margin-top:14px;cursor:pointer">Add another lecture</div>';
           var stEl=document.createElement("style"); stEl.textContent=".mbi-chip{background:"+TINT+";border:1px solid "+TINTB+";color:"+VD+";border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:700}"; p.appendChild(stEl);
