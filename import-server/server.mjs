@@ -28,6 +28,7 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
+import { buildBoardPrompt, normalizeBoard, boardKey, BOARD_MODES } from "./board.mjs";   // whiteboard Visualize (Standard / Layman)
 import { EXPLAINER_TEMPLATES, explainerExcerpt, explainerKey, buildExplainerPrompt, parseExplainerLesson } from "./explainer.mjs";   // 3D Tutor
 import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPlateTutor, plateAskKey, buildAskPrompt, checkAsk, buildExplainPrompt, checkExplain, plateInsights, PLATE_EVENT_KINDS } from "./plate-tutor.mjs";   // 3D Tutor · library plates, tutor from the note
 import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
@@ -1864,6 +1865,51 @@ app.post("/visualize", async (req,res)=>{
 });
 
 /* =====================================================================
+ * WHITEBOARD VISUALIZE — POST /board {text, subject, mode:"standard"|"layman"}
+ * The new Visualize: a narrated whiteboard lesson (board.mjs). Shares the
+ * daily explainer limit and the visualizations cache with /visualize; the
+ * cache key includes the mode, so Standard and Layman are cached apart and a
+ * replay of either is free.
+ * ===================================================================== */
+app.post("/board", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const text = (req.body.text||"").toString().trim();
+    if(!text) return res.status(400).json({ error:"highlight some text first" });
+    if(text.length>2000) return res.status(400).json({ error:"that passage is very long — highlight one or two sentences (a single idea)" });
+    const subject = (req.body.subject||"").toString().slice(0,80);
+    const mode = BOARD_MODES.has(req.body.mode) ? req.body.mode : "standard";
+    const key = boardKey(textKey, text, mode);
+    try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
+      if(c.data && c.data.blueprint && c.data.blueprint.kind==="board"){ const n=normalizeBoard(c.data.blueprint, mode); if(n.board) return res.json({ ok:true, cached:true, board:n.board, viz_quota:await vizQuota(user.id, user.email) }); } }catch(_){}
+    const premium = await isPremium(user.id, user.email).catch(()=>false);
+    const limit = premium ? 10 : 3;
+    let used = 0;
+    try{ const since=new Date(); since.setUTCHours(0,0,0,0);
+      const cnt = await admin.from("viz_events").select("id",{ count:"exact", head:true }).eq("account_id",user.id).gte("created_at",since.toISOString());
+      if(cnt && cnt.error) console.error("[board] viz_events count FAILED for %s — daily cap NOT enforced this call: %s", user.id, cnt.error.message||cnt.error);
+      used = (cnt && !cnt.error) ? (cnt.count||0) : 0;
+      if(used >= limit) return res.status(429).json({ error:"daily_limit", limit, premium, viz_quota:{ limit, remaining:0, premium },
+        message: premium ? "You've used all 10 of today's explainers. They reset tomorrow."
+                         : "You've used all 3 of today's explainers. Upgrade to Premium for 10 a day." });
+    }catch(_){}
+    const prompt = buildBoardPrompt(text, subject, mode);
+    const gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:3000, temperature:mode==="layman"?0.6:0.25, json:true });
+    let out = normalizeBoard(parseBlueprint(gen.text), mode);
+    if(out.issues.length){                                   // one corrective retry; keep whichever drew
+      const fix = prompt + "\n\nYour previous JSON had these problems — fix ALL of them and return ONLY corrected JSON:\n- " + out.issues.join("\n- ") + "\n\nPREVIOUS:\n" + (gen.text||"").slice(0,3000);
+      try{ const gen2 = await generate({ model: BASIC_MODEL, prompt:fix, parts:[], images:[], max_tokens:3000, temperature:0.25, json:true });
+        const out2 = normalizeBoard(parseBlueprint(gen2.text), mode);
+        if(out2.board && (!out.board || out2.issues.length <= out.issues.length)) out = out2; }catch(e){ console.warn("[board] retry failed:", e.message); }
+    }
+    if(!out.board) return res.status(502).json({ error:"couldn't build this explainer — try selecting one clear idea, or try again in a moment" });
+    try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:"board:"+mode, subject, blueprint:out.board, verified:!out.issues.length }); }catch(_){}
+    try{ await admin.from("viz_events").insert({ account_id:user.id }); }catch(_){}
+    res.json({ ok:true, cached:false, board:out.board, viz_quota:{ limit, remaining:Math.max(0,limit-(used+1)), premium } });
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* =====================================================================
  * TOPIC PREVIEW — the "pre-read orientation video" (SPEC-TOPIC-PREVIEW.md)
  * A 3–4 min guided visual tour of a WHOLE note: an overview MAP, one scene per
  * heading (right visual per relationship), auto-inserted CONTRAST scenes at
@@ -1920,6 +1966,46 @@ async function buildTopicPreview(note, subject){
     catch(e){ console.warn("[preview] scene failed:", (e&&e.message)||e); }
   }
   return { status: scenes.length>=3 ? "ready" : "failed", title:(plan&&plan.title)||"", scenes };
+}
+/* Whiteboard preview (FEATURES.WHITEBOARD): the same scene plan, but every scene is a whiteboard
+ * board (board.mjs) in the student's preview style — "standard" by default, "layman" when they
+ * switch Settings → Preview style. Each scene's source is its plain-words focus PLUS the note's own
+ * text under that heading, so the board stays faithful to the note. Built 3 scenes at a time. */
+function noteSection(note, heading){
+  const h = String(heading||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim(); if(!h) return "";
+  const lines = String(note||"").split(/\n/);
+  const norm = l => l.toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();
+  let at = lines.findIndex(l => /^\s*#{1,6}\s/.test(l) && norm(l).includes(h));
+  if(at < 0) at = lines.findIndex(l => norm(l).includes(h));
+  if(at < 0) return "";
+  return lines.slice(at, at+40).join("\n").slice(0,1500);
+}
+async function renderPreviewBoard(scene, note, subject, mode){
+  const sect = scene.beat==="map"||scene.beat==="takeaway" ? "" : noteSection(note, scene.heading);
+  const src = "[PREVIEW SCENE ("+(scene.beat||"segment")+") — orient the student BEFORE they read the full note: the organising idea and how the pieces connect, not every detail. Use 3–5 short steps.]\n"
+    + (scene.heading?("HEADING: "+scene.heading+"\n"):"") + "WHAT TO SHOW: " + (scene.focus||scene.heading||"") + (sect?("\n\nFROM THE NOTE:\n"+sect):"");
+  const prompt = buildBoardPrompt(src, subject, mode);
+  let best = null;
+  for(let attempt=1; attempt<=2 && !(best && !best.issues.length); attempt++){
+    const p = attempt>1 && best ? prompt+"\n\nYour previous JSON had these problems — fix ALL of them and return ONLY corrected JSON:\n- "+best.issues.join("\n- ") : prompt;
+    try{ const gen = await generate({ model: BASIC_MODEL, prompt:p, parts:[], images:[], max_tokens:3000, temperature:mode==="layman"?0.55:0.25, json:true });
+      const out = normalizeBoard(parseBlueprint(gen.text), mode);
+      if(out.board && (!best || out.issues.length < best.issues.length)) best = out; }catch(e){ console.warn("[preview-board] scene attempt failed:", e.message); }
+  }
+  return best && best.board;
+}
+async function buildBoardPreview(note, subject, mode){
+  const planGen = await generate({ model: BASIC_MODEL, prompt: previewPlanPrompt(note, subject), parts:[], images:[], max_tokens:4000, temperature:0.3, json:true });
+  const plan = extractJsonObject(planGen.text||"");
+  const list = (plan && Array.isArray(plan.scenes)) ? plan.scenes.slice(0,12) : [];
+  if(!list.length) return { status:"failed", kind:"board", mode, scenes:[] };
+  const out = new Array(list.length).fill(null); let next = 0;
+  async function worker(){ while(next < list.length){ const k = next++, sc = list[k];
+    try{ const board = await renderPreviewBoard(sc, note, subject, mode); if(board) out[k] = { heading: sc.heading||"", beat: sc.beat||"segment", board }; }
+    catch(e){ console.warn("[preview-board] scene failed:", (e&&e.message)||e); } } }
+  await Promise.all([worker(), worker(), worker()]);
+  const scenes = out.filter(Boolean);
+  return { status: scenes.length>=3 ? "ready" : "failed", kind:"board", mode, title:(plan&&plan.title)||"", scenes };
 }
 /* 3D Tutor — personalise a template lesson to the student's note. The app plays the template's own lesson
  * instantly and swaps these words in when they arrive, so this call is never on the critical path.
@@ -2164,18 +2250,23 @@ app.post("/topic-preview", async (req,res)=>{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
     const account_id = user.id;
     const { topic_id, force } = req.body||{};
+    const boardMode = BOARD_MODES.has(req.body&&req.body.mode) ? req.body.mode : null;   // whiteboard preview in this style; absent = the old diagram preview
+    const slot = boardMode ? "board_"+boardMode : null;                                  // kept beside the old preview in topics.preview
     if(!topic_id) return res.status(400).json({ error:"topic_id required" });
     const t = await admin.from("topics").select("id,account_id,title,note_md").eq("id",topic_id).maybeSingle();   // NB: topics has no "subject" column — selecting it errored the query and 404'd
     if(t.error) return res.status(500).json({ error:"topic lookup failed: "+t.error.message });   // surface a real error instead of masking it as "not found"
     if(!t.data) return res.status(404).json({ error:"topic not found" });
     if(t.data.account_id !== account_id) return res.status(403).json({ error:"not your topic" });
     // cache read is best-effort and SEPARATE, so the feature works even if the topics.preview column doesn't exist yet
-    if(!force){ try{ const c = await admin.from("topics").select("preview").eq("id",topic_id).maybeSingle(); if(c.data && c.data.preview && c.data.preview.status==="ready") return res.json(c.data.preview); }catch(_){} }
+    let stored = null; try{ const c = await admin.from("topics").select("preview").eq("id",topic_id).maybeSingle(); stored = (c.data && c.data.preview) || null; }catch(_){}
+    if(!force){ const hit = slot ? (stored && stored[slot]) : stored; if(hit && hit.status==="ready") return res.json(hit); }
     const note = String(t.data.note_md||"");
-    if(note.replace(/\s+/g," ").trim().length < 400){ const skip={status:"skipped",scenes:[]}; try{ await admin.from("topics").update({ preview:skip }).eq("id",topic_id); }catch(_){}; return res.json(skip); }
-    const built = await buildTopicPreview(note, t.data.title||"Medicine");   // topic title is the subject hint for the viz prompt
-    try{ await admin.from("topics").update({ preview: built }).eq("id",topic_id); }catch(_){}   // needs a jsonb "preview" column; ignored if absent
-    try{ await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:"preview", p_tokens:0 }); }catch(_){}
+    const keep = (val)=> slot ? { ...(stored && typeof stored==="object" ? stored : {}), [slot]: val } : { ...val, ...(stored ? Object.fromEntries(Object.entries(stored).filter(([k])=>k.startsWith("board_"))) : {}) };   // never overwrite the other style's preview
+    if(note.replace(/\s+/g," ").trim().length < 400){ const skip={status:"skipped",scenes:[]}; try{ await admin.from("topics").update({ preview:keep(skip) }).eq("id",topic_id); }catch(_){}; return res.json(skip); }
+    const built = boardMode ? await buildBoardPreview(note, t.data.title||"Medicine", boardMode)
+                            : await buildTopicPreview(note, t.data.title||"Medicine");   // topic title is the subject hint for the viz prompt
+    try{ await admin.from("topics").update({ preview: keep(built) }).eq("id",topic_id); }catch(_){}   // needs a jsonb "preview" column; ignored if absent
+    try{ await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:boardMode?("preview_"+boardMode):"preview", p_tokens:0 }); }catch(_){}
     res.json(built);
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
