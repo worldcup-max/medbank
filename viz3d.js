@@ -358,6 +358,15 @@
         });
         var mesh = new T.Mesh(geo, mat);
         mesh.userData = s;
+        /* STAND THE BODY UP. BodyParts3D is authored Z-up (superior = +z, anterior = -y), but this player,
+           VIEW_DIR and every authored view name assume Y-up with anterior = +z. Without this every scan
+           scene was lying on its back: "lateral" showed a horizontal spine and a rib cage on its side.
+           Rotating the MESH (not the geometry) keeps per-vertex patches and uvw anchors — both live in the
+           mesh's own frame — exactly where they were; anchors are children and turn with it.
+           MEDBANK_CONFIG.MESH_ZUP = false turns it off if a scene was hand-tuned to the old orientation. */
+        var zup = true;
+        try { if (window.MEDBANK_CONFIG && window.MEDBANK_CONFIG.MESH_ZUP === false) zup = false; } catch (e) {}
+        if (zup) mesh.rotation.x = -Math.PI / 2;
         return mesh;
       }
 
@@ -705,6 +714,9 @@
       '.mb3d-status{position:absolute;left:12px;top:11px;font-size:12.5px;background:rgba(20,18,37,.78);border:1px solid #35315a;padding:6px 11px;border-radius:9px;color:var(--m3dim);max-width:74%}',
       '.mb3d-status.ok{color:var(--m3ok)}.mb3d-status.warn{color:var(--m3warn)}',
       '.mb3d-hint{position:absolute;right:12px;bottom:10px;font-size:11px;color:#8681ab}',
+      '.mb3d-qv{position:absolute;left:12px;bottom:8px;display:flex;gap:6px;z-index:3}',
+      '.mb3d-qv button{font:inherit;font-size:11.5px;padding:5px 9px;border-radius:8px;border:1px solid var(--m3line);background:rgba(20,18,35,.55);color:#e9e6ff;cursor:pointer}',
+      '.mb3d-qv button:hover{background:#7c5cff;border-color:#7c5cff}',
       '.mb3d-side{width:270px;flex:none;border-left:1px solid var(--m3line);background:var(--m3pan);display:flex;flex-direction:column;min-height:0}',
       '.mb3d-sh{padding:10px 13px;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--m3dim);border-bottom:1px solid var(--m3line);display:flex;justify-content:space-between;align-items:center}',
       '.mb3d-sh a{font-size:11px;color:#b3a6ff;text-transform:none;letter-spacing:0;cursor:pointer;text-decoration:underline}',
@@ -1340,7 +1352,8 @@
         '<div class="mb3d-main">' +
           '<div class="mb3d-stage" data-r="stage"><canvas data-r="canvas"></canvas>' +
             '<div class="mb3d-pins" data-r="pins"><svg class="mb3d-leads" data-r="leads"></svg></div>' +
-            '<div class="mb3d-status" data-r="status">Loading meshes…</div><div class="mb3d-hint">drag to rotate · scroll to zoom</div></div>' +
+            '<div class="mb3d-status" data-r="status">Loading meshes…</div><div class="mb3d-hint">drag to rotate · scroll to zoom</div>' +
+            '<div class="mb3d-qv" data-r="qv"><button data-v="anterior">Front</button><button data-v="lateral">Side</button><button data-v="posterior">Back</button><button data-v="inferior">Below</button></div></div>' +
           '<div class="mb3d-side">' +
             '<div class="mb3d-sh"><span data-r="sidehd">Parts</span><a data-r="showall">show all</a></div>' +
             '<div class="mb3d-find">🔎<input data-r="find" type="search" placeholder="Find a part…" aria-label="Find a part"></div>' +
@@ -1354,11 +1367,13 @@
               '<button class="mb3d-btn" data-r="labels" title="Name every part on the model">🏷 Labels</button>' +
               '<button class="mb3d-btn" data-r="reset" title="Recentre and show everything">⟲ Reset</button>' +
               '<button class="mb3d-btn" data-r="full" title="Full screen">⛶</button>' +
+              '<select class="mb3d-btn" data-r="look" title="How the model is drawn" style="padding:7px 8px"><option value="natural">Natural</option><option value="colour">Colour</option><option value="xray">X-ray</option></select>' +
               '<select class="mb3d-btn" data-r="speed" title="Narration speed" style="padding:7px 8px">' +
                 [0.75,0.9,1,1.25,1.5,1.75,2].map(function(v){ return '<option value="'+v+'"'+(v===1?' selected':'')+'>'+v+'\u00d7</option>'; }).join('') +
               '</select></div>' +
           '</div>' +
         '</div>' +
+        '<div class="mb3d-slider" data-r="exrow">Explode<input type="range" data-r="explode" min="0" max="1" step="0.01" value="0" aria-label="Pull the parts apart"></div>' +
         '<div class="mb3d-slider" data-r="cliprow" style="display:none">Cut plane<input type="range" data-r="clip" min="-1" max="1" step="0.01" value="0"></div>' +
         '<div class="mb3d-warm" data-r="warm"><span>Loading the narration so it plays without any breaks</span>' + '<span class="mb3d-warmbar"><i data-r="warmbar"></i></span><b data-r="warmnum"></b></div>' +
         '<div class="mb3d-conn" data-r="conn"></div>' +
@@ -1735,6 +1750,29 @@
       holder.children.forEach(function (m) { m.position.sub(c); });
       var mx = Math.max(s.x, s.y, s.z) || 1;
       holder.scale.setScalar(4.2 / mx);
+      holder.children.forEach(function (m) { m.__mb3dExBase = m.position.clone(); m.__mb3dExDir = null; });
+      if (explodeK) applyExplode();
+    }
+
+    /* ---------- explode ----------
+       Pull every part straight out from the model's centre, in proportion to how far out it already sits,
+       so a skull comes apart into its bones the way a student would take a plastic one apart. Measured in
+       the holder's own frame (rotation zeroed, like fit()), and always from the post-fit base position, so
+       dragging the slider back to 0 puts every part exactly where it was. */
+    var explodeK = 0;
+    function applyExplode() {
+      var rot = holder.rotation.clone(), sc = holder.scale.clone(), pos = holder.position.clone();
+      holder.rotation.set(0, 0, 0); holder.scale.setScalar(1); holder.position.set(0, 0, 0); holder.updateMatrixWorld(true);
+      holder.children.forEach(function (m) {
+        if (!m.__mb3dExBase) m.__mb3dExBase = m.position.clone();
+        if (!m.__mb3dExDir) {
+          m.position.copy(m.__mb3dExBase); m.updateMatrixWorld(true);
+          var b = new T.Box3().setFromObject(m);
+          m.__mb3dExDir = b.isEmpty() ? new T.Vector3() : b.getCenter(new T.Vector3());
+        }
+        m.position.copy(m.__mb3dExBase).addScaledVector(m.__mb3dExDir, explodeK * 1.1);
+      });
+      holder.rotation.copy(rot); holder.scale.copy(sc); holder.position.copy(pos); holder.updateMatrixWorld(true);
     }
 
     /* ---------- parts list ---------- */
@@ -2432,6 +2470,8 @@
     }
 
     var labelsAll = false;
+    var look = 'natural';
+    var LOOK_PAL = ['#8fc6ff', '#c4a3f2', '#ff9d8a', '#9be3b5', '#ffd27a', '#8ee0e6', '#f7a8cf', '#b3c4ff', '#ffb38a', '#a7e07a'];
     function paint() {
       var anySel = selected.length > 0;
       structures.forEach(function (s) {
@@ -2464,6 +2504,11 @@
            student has selected still comes forward, but never past its authored ceiling — otherwise
            tapping the cavity would black out everything it contains. */
         var baseOp = (s && typeof s.opacity === 'number') ? Math.max(0.02, Math.min(1, s.opacity)) : 1;
+        /* LOOK. "X-ray" draws everything that is not picked as faint glass so the picked part reads through
+           the rest (the drill's look); "Colour" gives each structure its own soft colour so neighbours
+           separate at a glance. Both only change the unpicked parts — a selection always looks the same. */
+        var xr = look === 'xray' && !(isSel || isHi);
+        if (xr) baseOp = Math.min(baseOp, 0.16);
         m.material.opacity = (isSel || isHi) ? baseOp : (ghosting ? Math.min(0.10, baseOp) : baseOp);
         m.material.depthWrite = baseOp >= 0.98;
         /* A selected part takes a colour of its own, not a brighter version of the colour it already had.
@@ -2473,7 +2518,8 @@
            and the pin on the model take the same colour, so list and model always agree. */
         var approx = !!(s.approx && s.approx.detail);
         var glow = approx ? APPROX_COL : (isSel ? HILITE[selIdx % HILITE.length] : (s.color || '#7c5cff'));
-        m.material.color.copy(srgbColor(isSel ? glow : s.color, '#c9c3d8'));
+        var lookCol = look === 'colour' ? LOOK_PAL[structures.indexOf(s) % LOOK_PAL.length] : look === 'xray' ? '#dfe3f5' : s.color;
+        m.material.color.copy(srgbColor(isSel ? glow : lookCol, '#c9c3d8'));
         /* Remember what this structure's colour SHOULD be. paintPatches() blanks material.color to white
            and moves the colour into the vertices, so on the next paint the material is no longer a
            record of anything — reading it back would make the bone white, then white again, for ever. */
@@ -2523,6 +2569,9 @@
       this.classList.toggle('pri', solo); paint();
     });
     $('tour').addEventListener('click', function () { tourTimer ? stopTour() : startTour(); });
+    $('look').addEventListener('change', function () { look = this.value; paint(); });
+    $('explode').addEventListener('input', function () { explodeK = parseFloat(this.value) || 0; applyExplode(); });
+    $('qv').addEventListener('click', function (e) { var b = e.target.closest && e.target.closest('[data-v]'); if (b) { stopSpin(); holder.rotation.y = 0; holder.updateMatrixWorld(true); state.dir = b.getAttribute('data-v'); rotateTo(state.dir); } });   // true anatomical views: undo the scene's opening yaw first
 
     /* ---------- "show me how it sits" ----------
        The thing a student highlighting a structure actually wants: that structure, in place, with what
@@ -2777,6 +2826,7 @@
     $('reset').addEventListener('click', function () {
       stopTour(); stopPlay(); stopSpin();
       selected = []; ghost = false; solo = false; labelsAll = false;
+      if (explodeK) { explodeK = 0; $('explode').value = 0; applyExplode(); }
       state.only = null; state.ghosted = false; state.hi = {};
       structures.forEach(function (st2) { state.visible[st2.key] = true; });
       Array.prototype.forEach.call(host.querySelectorAll('.mb3d-part'), function (b) { b.classList.remove('on'); });

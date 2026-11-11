@@ -1252,7 +1252,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.11.11a';   // bump this each release
+const APP_VERSION='2026.11.11b';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -8321,7 +8321,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 <script src="content-loader.js"></script>
 <script src="learning-events.js?v=20260908b"></script>   <!-- build 01: durable learning ledger (FEATURES.LEARNING_EVENTS); inert while the flag is off -->
 <script src="auth-ui.js?v=20260908"></script>
-<script src="viz3d.js?v=20261111"></script>   <!-- 3D anatomy player (FEATURES.MODEL3D); inert while the flag is off -->
+<script src="viz3d.js?v=20261111b"></script>   <!-- 3D anatomy player (FEATURES.MODEL3D); inert while the flag is off -->
 
 <script>document.addEventListener('DOMContentLoaded',function(){ try{ if(window.MB_SYNC){
   // AUDIT-06: the sidebar chip (updateChip in auth-ui.js) paints its "Synced"/"Not syncing" pill
