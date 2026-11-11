@@ -92,6 +92,55 @@
     return _three;
   }
 
+  /* ---------- smooth shading for scan meshes ----------
+     An STL is a soup of separate triangles: no two share a vertex, so computeVertexNormals() gives every
+     triangle its own flat normal and a bone renders as hundreds of little facets — carved soap, not bone.
+     This welds corners that sit at the same point and averages the normals of the triangles meeting
+     there, so the surface shades as one smooth form. A crease angle keeps genuinely sharp edges sharp
+     (a crest, the rim of a foramen): a neighbour only contributes if it faces within CREASE of this one.
+     The geometry stays non-indexed, so per-vertex colour painting downstream is untouched. */
+  var CREASE = Math.cos(60 * Math.PI / 180);
+  function smoothNormals(geo) {
+    var pos = geo.attributes && geo.attributes.position;
+    if (!pos || geo.index || pos.count % 3) { geo.computeVertexNormals(); return geo; }
+    var p = pos.array, n = pos.count, nf = n / 3, i, j, k;
+    var fn = new Float32Array(nf * 3);              // area-weighted face normals
+    for (i = 0; i < nf; i++) {
+      var a = i * 9;
+      var ux = p[a + 3] - p[a], uy = p[a + 4] - p[a + 1], uz = p[a + 5] - p[a + 2];
+      var vx = p[a + 6] - p[a], vy = p[a + 7] - p[a + 1], vz = p[a + 8] - p[a + 2];
+      fn[i * 3] = uy * vz - uz * vy; fn[i * 3 + 1] = uz * vx - ux * vz; fn[i * 3 + 2] = ux * vy - uy * vx;
+    }
+    // bucket corners by position (quantised to 1e-4 of the model's size, so float noise still welds)
+    var minx = Infinity, maxx = -Infinity;
+    for (i = 0; i < p.length; i++) { if (p[i] < minx) minx = p[i]; if (p[i] > maxx) maxx = p[i]; }
+    var q = ((maxx - minx) || 1) * 1e-4, map = {}, keys = new Array(n);
+    for (i = 0; i < n; i++) {
+      var key = Math.round(p[i * 3] / q) + '_' + Math.round(p[i * 3 + 1] / q) + '_' + Math.round(p[i * 3 + 2] / q);
+      keys[i] = key;
+      (map[key] || (map[key] = [])).push((i / 3) | 0);
+    }
+    var unit = new Float32Array(nf * 3);
+    for (i = 0; i < nf; i++) {
+      var l = Math.hypot(fn[i * 3], fn[i * 3 + 1], fn[i * 3 + 2]) || 1;
+      unit[i * 3] = fn[i * 3] / l; unit[i * 3 + 1] = fn[i * 3 + 1] / l; unit[i * 3 + 2] = fn[i * 3 + 2] / l;
+    }
+    var out = new Float32Array(n * 3);
+    for (i = 0; i < n; i++) {
+      var f = (i / 3) | 0, faces = map[keys[i]], sx = 0, sy = 0, sz = 0;
+      for (j = 0; j < faces.length; j++) {
+        k = faces[j];
+        if (unit[k * 3] * unit[f * 3] + unit[k * 3 + 1] * unit[f * 3 + 1] + unit[k * 3 + 2] * unit[f * 3 + 2] < CREASE) continue;
+        sx += fn[k * 3]; sy += fn[k * 3 + 1]; sz += fn[k * 3 + 2];
+      }
+      var m = Math.hypot(sx, sy, sz) || 1;
+      out[i * 3] = sx / m; out[i * 3 + 1] = sy / m; out[i * 3 + 2] = sz / m;
+    }
+    if (geo.setAttribute) geo.setAttribute('normal', new (window.THREE.BufferAttribute)(out, 3));
+    else geo.addAttribute('normal', new (window.THREE.BufferAttribute)(out, 3));
+    return geo;
+  }
+
   /* ======================= provider adapters ======================= */
   var ADAPTERS = {};
   function register(name, adapter) { ADAPTERS[name] = adapter; }
@@ -290,7 +339,7 @@
       var ATTEMPTS = 3, STALL_MS = 15000;
 
       function makeMesh(geo) {
-        geo.computeVertexNormals();
+        smoothNormals(geo);
         /* Bone is chalk, not porcelain.
            At roughness 0.80 with a touch of metalness the scapula still carried a broad specular
            sheen, and a specular highlight is the enemy of surface detail: it is brightest exactly

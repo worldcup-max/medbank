@@ -1252,7 +1252,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.21s';   // bump this each release
+const APP_VERSION='2026.11.11a';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -2223,6 +2223,7 @@ function renderNav(){
   h += it('plan','🗓','This week',planCount()||'',r==='plan');
   h += it('exam','📝','Mock exam','',r==='exam');
   h += it('mega','🧩','Mega Q-bank','',r==='mega');
+  if(drillAllowed()) h += it('drill','🦴','Anatomy Drill','',r==='drill');
   h += it('week','📊','Progress','',r==='week');
   h += '<div class="navdiv"></div>';
   h += grp('lib','📚','Library');
@@ -8015,10 +8016,45 @@ function pageLoadingTopic(){
     <div class="explload" style="justify-content:center"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div>
     <div style="margin-top:14px;color:var(--muted);font-weight:600">Loading your notes…</div></div>`;
 }
+/* ===== Anatomy Drill (anatomy-drill.js) — type-the-name on an x-ray 3D model =====
+   Side tab for students whose CURRENT level is 100L–300L (the anatomy years). localStorage.mbdrill='1' forces it on
+   for testing on any account, '0' forces it off. The drill file is loaded only when the tab is opened. */
+function drillAllowed(){
+  try{ var f=localStorage.getItem('mbdrill'); if(f==='1') return true; if(f==='0') return false; }catch(e){}
+  try{ var lv=window.MB_SYNC&&MB_SYNC.currentLevel?Number(MB_SYNC.currentLevel()):null; return lv===100||lv===200||lv===300; }catch(e){ return false; }
+}
+var DRILL_SET=null;
+function drillLoad(){
+  if(window.MBDrill) return Promise.resolve(window.MBDrill);
+  if(window._drillP) return window._drillP;
+  window._drillP=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='anatomy-drill.js?v=20261111';
+    s.onload=function(){ res(window.MBDrill); }; s.onerror=function(){ window._drillP=null; rej(new Error('offline')); }; document.head.appendChild(s); });
+  return window._drillP;
+}
+function pageDrill(setId){
+  if(!drillAllowed()) return `<h1>🦴 Anatomy Drill</h1><p class="sub">Anatomy Drill is for 100L, 200L and 300L students. Switch level in Settings if you're in one of those years.</p>`;
+  DRILL_SET=setId||DRILL_SET||null;
+  return `<h1>🦴 Anatomy Drill</h1><p class="sub">A part lights up on the 3D model. Type its name — first with the word shown, then with only the first letter, then from memory.</p>
+    <div id="drillsets" style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px"></div><div id="drillhost"><p class="sub">Loading…</p></div>`;
+}
+function drillMount(){
+  var host=document.getElementById('drillhost'); if(!host) return;
+  drillLoad().then(function(D){
+    if(!document.getElementById('drillhost')) return;
+    var best=(function(){ try{ return JSON.parse(localStorage.getItem('mbdrill:best')||'{}'); }catch(e){ return {}; } })();
+    var cur=DRILL_SET||D.SETS[0].id;
+    document.getElementById('drillsets').innerHTML=D.SETS.map(function(s){
+      var b=best[s.id]; return `<button class="qbchipbtn${s.id===cur?' on':''}" onclick="DRILL_SET='${s.id}';go('drill/${s.id}')">${esc(s.title)}${b?` · ${b.acc}%`:''}</button>`; }).join('');
+    var tall=Math.max(520,Math.min(760,window.innerHeight-170));
+    D.mount(host,{set:cur,height:tall,onSet:function(id){ DRILL_SET=id; history.replaceState(null,'','#/drill/'+id); }});
+  }).catch(function(){ host.innerHTML='<p class="sub">Anatomy Drill needs a connection the first time. Check your internet and reopen this tab.</p>'; });
+}
+
 function render(){
   const p=(location.hash.slice(2)||'home').split('/');
   try{ if(!window._qbSchedMigrated && typeof qbMigrateSched==='function'){ window._qbSchedMigrated=true; qbMigrateSched(); } }catch(e){}   // A6: one-time idempotent fold of legacy qh-keyed schedule records into Target-keyed records
-  try{ if(window.MB3D) MB3D.dispose(); }catch(e){}   // free the 3D canvas/GPU memory before the page is replaced (re-mounts below if the new page needs it)
+  try{ if(window.MB3D) MB3D.dispose(); }catch(e){}
+  try{ if(window.MBDrill) MBDrill.dispose(); }catch(e){}   // Anatomy Drill: free its canvas + key listener before the page is replaced   // free the 3D canvas/GPU memory before the page is replaced (re-mounts below if the new page needs it)
   // TOP-08: leaving a topic (or switching to a different topic) stops podcast audio — it lived on document.body and kept playing forever otherwise.
   try{ if(typeof podStopAudio==='function' && (p[0]!=='topic' || (typeof POD!=='undefined' && POD && p[1]!==POD.topicId))) podStopAudio(); }catch(e){}
   // Topic-bound routes: if content hasn't loaded yet, show a loader instead of flashing Home.
@@ -8039,6 +8075,7 @@ function render(){
     case 'mistakes':  html=pageMistakes(); break;
     case 'exam':      html=pageExam(); break;
     case 'mega':      html=pageMega(); break;
+    case 'drill':     html=pageDrill(p[1]); break;
     case 'ai':        html=pageAI(p[1]); break;
     case 'cram':      html=pageCram(p[1]); break;
     case 'week':      html=pageWeek(); break;
@@ -8070,6 +8107,7 @@ function render(){
   $('#main').classList.toggle('wide', p[0]===''||p[0]==='home');   // home fills the wide screen (no Ask-AI panel here)
   if(p[0]==='topic' && topicTab==='note') setTimeout(mb3dScanNote,60);   // mark structures the 3D corpus can show (no-op when the flag is off)
   if(p[0]==='settings' && window.loadPlanBadge) setTimeout(loadPlanBadge,40);
+  if(p[0]==='drill' && drillAllowed()) setTimeout(drillMount,30);
   if(p[0]==='search'){ const b=$('#sbox'); if(b){ searchRun(); b.focus(); b.setSelectionRange(b.value.length,b.value.length); } }
   if(p[0]==='ai') aiScroll();
   if(p[0]==='topic' && window.markWatchedNote) setTimeout(window.markWatchedNote,30);
@@ -8283,7 +8321,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 <script src="content-loader.js"></script>
 <script src="learning-events.js?v=20260908b"></script>   <!-- build 01: durable learning ledger (FEATURES.LEARNING_EVENTS); inert while the flag is off -->
 <script src="auth-ui.js?v=20260908"></script>
-<script src="viz3d.js?v=20260828"></script>   <!-- 3D anatomy player (FEATURES.MODEL3D); inert while the flag is off -->
+<script src="viz3d.js?v=20261111"></script>   <!-- 3D anatomy player (FEATURES.MODEL3D); inert while the flag is off -->
 
 <script>document.addEventListener('DOMContentLoaded',function(){ try{ if(window.MB_SYNC){
   // AUDIT-06: the sidebar chip (updateChip in auth-ui.js) paints its "Synced"/"Not syncing" pill
