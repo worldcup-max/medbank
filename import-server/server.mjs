@@ -1951,6 +1951,22 @@ app.post("/board/ask", async (req,res)=>{
   }catch(e){ console.error("[board/ask]", e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
+/* MOST ASKED — POST /board/questions {board}: the top questions other students asked on this board
+ * (from the shared Ask Auntie bank), with their answers, so a student can tap one and hear it free.
+ * Ready-made questions nobody has asked yet are left out; nothing about who asked is stored or sent. */
+app.post("/board/questions", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const raw = req.body.board||{}; const board = normalizeBoard(raw, raw.mode).board;
+    if(!board) return res.json({ ok:true, top:[], total:0 });
+    const key = textKey("ask|"+boardIdentity(board));
+    let bank = [];
+    try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle(); if(c.data && c.data.blueprint && Array.isArray(c.data.blueprint.qa)) bank = c.data.blueprint.qa; }catch(_){}
+    const asked = bank.filter(x=>(x.n||0)>0).sort((a,b)=>(b.n||0)-(a.n||0));
+    res.json({ ok:true, total: asked.reduce((t,x)=>t+(x.n||0),0), top: asked.slice(0,3).map(x=>({ q:x.q, a:x.a, note:x.note||"", beyond:!!x.beyond, n:x.n||0 })) });
+  }catch(e){ console.error("[board/questions]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
 /* =====================================================================
  * TOPIC PREVIEW — the "pre-read orientation video" (SPEC-TOPIC-PREVIEW.md)
  * A 3–4 min guided visual tour of a WHOLE note: an overview MAP, one scene per
