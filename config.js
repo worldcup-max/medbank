@@ -72,6 +72,7 @@ window.MEDBANK_CONFIG = {
   // Independent switches so the two V1.6 surfaces can be trialled separately.
   //   GAP_LOOP             = at-miss Knowledge-Gap → Learn → Practice → Retest loop (SPEC-GAP-LEARN-LOOP.md)
   //   POST_SESSION_FIX_QUEUE = post-session "3 things to fix" prioritisation layer that routes to interventions
+  //   WHITEBOARD = Visualize is the narrated whiteboard lesson (whiteboard.js, POST /board) with Standard / Layman modes; false = the old diagram player
   //   TOPIC_PREVIEW = the pre-read "orientation video" at the top of the note (SPEC-TOPIC-PREVIEW.md)
   //   MODEL3D      = the 3D anatomy player (viz3d.js) — a NEW renderer beside the SVG Visualize engine,
   //                  reading viz-training/scenes/*.json. Default OFF: with the flag false nothing loads,
@@ -80,5 +81,5 @@ window.MEDBANK_CONFIG = {
   //   LEARNING_EVENTS = build 01: the durable append-only learning ledger (learning-events.js →
   //                  Supabase learning_events). Write-only: nothing in the learning path reads it.
   //                  Ships DARK. Turn on only after the verification report passes.
-  FEATURES: { LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false }
+  FEATURES: { LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, WHITEBOARD: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false }
 };

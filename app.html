@@ -1252,7 +1252,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.11.11a';   // bump this each release
+const APP_VERSION='2026.11.11c';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -2789,6 +2789,10 @@ var _PREVIEW={};   // in-memory per-topic cache (kept OUT of DATA so big bluepri
    plate and loses an open answer or explain-back. They wait until the student leaves the 3D Tutor tab (any tab change redraws anyway). */
 function mbSoftRender(){ try{ if(_mbpCur&&_mbpCur.api.alive&&_mbpCur.api.alive()&&typeof topicTab!=='undefined'&&topicTab==='mech3d'&&/^#\/topic\//.test(location.hash||'')){ window.__mbRenderLater=true; return; } }catch(e){} render(); }
 window.mbSoftRender=mbSoftRender;
+function boardOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES&&C.FEATURES.WHITEBOARD); }catch(e){ return false; } }
+/* whiteboard preview style: Standard unless the student switched Settings → Preview style to Layman */
+function previewMode(){ try{ return (DATA.settings&&DATA.settings.previewMode==='layman')?'layman':'standard'; }catch(e){ return 'standard'; } }
+function pvKey(id){ return boardOn()? id+'|'+previewMode() : id; }   // each style is built and cached on its own
 function previewOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES&&C.FEATURES.TOPIC_PREVIEW); }catch(e){ return false; } }
 /* The preview used to collapse every possible setback into one dead end: no auth session YET (the
    commonest one — on a cold load Supabase has not finished restoring it when the first note opens),
@@ -2798,8 +2802,8 @@ function previewOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES
    session. Only a real, final refusal should look final; everything else is worth another go. */
 function _pvSoft(t, why, attempt){
   var waits=[1500,4000,10000,20000];
-  if(attempt>=waits.length){ _PREVIEW[t.id]={status:'failed', why:why}; try{ mbSoftRender(); }catch(e){} return; }
-  _PREVIEW[t.id]={status:'building'};
+  if(attempt>=waits.length){ _PREVIEW[pvKey(t.id)]={status:'failed', why:why}; try{ mbSoftRender(); }catch(e){} return; }
+  _PREVIEW[pvKey(t.id)]={status:'building'};
   setTimeout(function(){ _pvFetch(t, attempt+1); }, waits[attempt]);
 }
 async function _pvFetch(t, attempt){
@@ -2810,19 +2814,19 @@ async function _pvFetch(t, attempt){
     var ses=null; try{ ses=await window.__mbSB.auth.getSession(); }catch(e){}
     var token=ses&&ses.data&&ses.data.session&&ses.data.session.access_token;
     if(!token) return _pvSoft(t,'signin',attempt);                                      // session still restoring — wait, don't give up
-    var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/topic-preview',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({topic_id:t.id})});
+    var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/topic-preview',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify(boardOn()?{topic_id:t.id,mode:previewMode()}:{topic_id:t.id})});
     if(r.status===401||r.status===403) return _pvSoft(t,'signin',attempt);
     if(r.status===429) return _pvSoft(t,'busy',Math.max(attempt,2));                    // rate-limited: wait long, try twice
     if(r.status>=500) return _pvSoft(t,'server',attempt);
     var j=null; try{ j=await r.json(); }catch(e){}
     if(!j||!j.status) return _pvSoft(t,'server',attempt);
     if(j.status==='building'||j.status==='queued'||j.status==='pending'){               // the server is on it — keep checking
-      _PREVIEW[t.id]={status:'building'};
+      _PREVIEW[pvKey(t.id)]={status:'building'};
       if(attempt<12) setTimeout(function(){ _pvFetch(t, attempt+1); }, 6000);
-      else _PREVIEW[t.id]={status:'failed', why:'slow'};
+      else _PREVIEW[pvKey(t.id)]={status:'failed', why:'slow'};
       return;
     }
-    _PREVIEW[t.id]=j;                                                                    // ready / skipped / a real refusal
+    _PREVIEW[pvKey(t.id)]=j;                                                             // ready / skipped / a real refusal
     try{ if(window.smartLog&&j.status==='ready') smartLog({t:'preview_generated', topic_id:t.id, scenes:(j.scenes||[]).length}); }catch(e){}
   }catch(e){ return _pvSoft(t,'offline',attempt); }                                      // network blip
   finally{
@@ -2830,15 +2834,15 @@ async function _pvFetch(t, attempt){
   }
 }
 function ensureTopicPreview(t){
-  if(!previewOn()||!t||!t.id||_PREVIEW[t.id]) return;
-  var note=(t.note||''); if(note.replace(/\s+/g,' ').trim().length<400){ _PREVIEW[t.id]={status:'skipped'}; return; }
-  _PREVIEW[t.id]={status:'building'};                                      // first note-open → build quietly in the background
+  if(!previewOn()||!t||!t.id||_PREVIEW[pvKey(t.id)]) return;
+  var note=(t.note||''); if(note.replace(/\s+/g,' ').trim().length<400){ _PREVIEW[pvKey(t.id)]={status:'skipped'}; return; }
+  _PREVIEW[pvKey(t.id)]={status:'building'};                                      // first note-open → build quietly in the background
   _pvFetch(t,0);
 }
-function retryTopicPreview(tid){ try{ delete _PREVIEW[tid]; }catch(e){} var t=topById(tid); if(t){ ensureTopicPreview(t); render(); } }
+function retryTopicPreview(tid){ try{ delete _PREVIEW[pvKey(tid)]; }catch(e){} var t=topById(tid); if(t){ ensureTopicPreview(t); render(); } }
 function topicPreviewCard(t){
   if(!previewOn()||!t) return '';
-  var pv=_PREVIEW[t.id]||{status:'building'};
+  var pv=_PREVIEW[pvKey(t.id)]||{status:'building'};
   if(pv.status==='skipped') return '';                                     // note too short → nothing to show
   if(pv.status==='failed'){                                                // don't vanish silently — offer a retry
     var WHY={signin:['Sign in to get the preview','Your session dropped — sign in again, then tap ↻.'],
@@ -2858,16 +2862,17 @@ function topicPreviewCard(t){
     : '<div class="tpv-prep"><div class="tpv-spin"></div>Preparing your preview…</div>';
   return '<div class="tpv-card">'
     + '<div class="tpv-poster'+(ready?" ready":"")+'"'+(ready?" onclick=\"playTopicPreview('"+t.id+"')\"":"")+'>'
-    +   '<span class="tpv-chip">▶ PREVIEW</span><span class="tpv-dur">~3 min · visual + narrated</span>'+center
+    +   '<span class="tpv-chip">▶ PREVIEW'+(boardOn()?(previewMode()==='layman'?' · 👩🏾 LAYMAN':' · 🎓 STANDARD'):'')+'</span><span class="tpv-dur">~3 min · '+(boardOn()?'whiteboard':'visual')+' + narrated</span>'+center
     + '</div>'
     + '<div class="tpv-meta"><div class="tpv-t">Get the picture first</div>'
     +   '<div class="tpv-s">A quick visual tour of '+esc(t.name||'this topic')+' — build a mental map before you read.</div></div>'
     + '</div>';
 }
 function playTopicPreview(tid){
-  var pv=_PREVIEW[tid];
+  var pv=_PREVIEW[pvKey(tid)];
   if(!pv||pv.status!=='ready'||!pv.scenes||!pv.scenes.length){ if(window.mbToast)mbToast('Your preview is still building — one moment.'); return; }
-  try{ if(window.smartLog) smartLog({t:'preview_shown', topic_id:tid}); }catch(e){}
+  try{ if(window.smartLog) smartLog({t:'preview_shown', topic_id:tid, mode:pv.mode||null}); }catch(e){}
+  if(pv.scenes[0]&&pv.scenes[0].board&&window.MBBoard&&MBBoard.playPreview){ var _t=topById(tid); MBBoard.playPreview(pv.scenes, tid, (_t&&_t.name)||pv.title||''); return; }
   if(window.MB_playPreview) window.MB_playPreview(pv.scenes, tid);
 }
 var _leSeen={};   /* build 01: one note_read per topic+tab per session */
@@ -7332,7 +7337,11 @@ function pageSettings(){
     <div class="setrow"><div><b>"Let AI explain" model</b><span>When reading a note, highlight text and tap ✨ Let AI explain for a step-by-step breakdown. Runs on DeepSeek V4 Flash through the MedBank server — fast, no sign-in.</span></div>
       <select class="numin" style="width:210px" onchange="setExplainModel(this.value)">
         ${[['deepseek-v4-flash','DeepSeek Flash (recommended)'],['deepseek-v4-pro','DeepSeek Pro (deepest)']].map(([v,l])=>`<option value="${v}" ${(s.explainModel||'deepseek-v4-flash')===v?'selected':''}>${l}</option>`).join('')}
-      </select></div>`;
+      </select></div>
+    ${boardOn()?`<div class="setrow"><div><b>🎬 Preview style</b><span>The whiteboard preview at the top of every note. Standard explains it simply but keeps the exam terms. Layman is Auntie: an everyday story with no jargon. Changing it rebuilds your previews in that style as you open each note.</span></div>
+      <select class="numin" style="width:210px" onchange="setPreviewMode(this.value)">
+        ${[['standard','🎓 Standard'],['layman','👩🏾 Layman (Auntie)']].map(([v,l])=>`<option value="${v}" ${previewMode()===v?'selected':''}>${l}</option>`).join('')}
+      </select></div>`:''}`;
 
   S.data=`
     <h2>Backup &amp; restore</h2>
@@ -7947,6 +7956,7 @@ async function geminiExplain(prompt){
     setExplBodyMd(txt);
   }catch(e){ setExplBody('<p>Explanation failed: '+esc(e.message||String(e))+'</p>'); }
 }
+function setPreviewMode(v){ DATA.settings.previewMode=(v==='layman')?'layman':'standard'; persist(); try{ if(window.MB_SYNC&&MB_SYNC.flush)MB_SYNC.flush(); }catch(e){} if(window.mbToast)mbToast(v==='layman'?'Previews will now be in Layman — Auntie explains.':'Previews will now be in Standard.'); render(); }
 function setExplainModel(v){ DATA.settings.explainModel=v||'deepseek-v4-flash'; persist(); render(); }
 function setTutorEngine(v){ DATA.settings.tutorEngine=v||'deepseek-v4-flash'; persist(); loadPuter(); render(); }
 
@@ -10854,6 +10864,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     document.getElementById("obGot").onclick=close; document.getElementById("obSkip").onclick=close;
     ov.addEventListener("click",function(e){ if(e.target===ov)close(); });
   }catch(e){} };
+  window._mbRecordViz=function(a,b){ return recordViz(a,b); };   // whiteboard.js saves its explainers to the note's Videos list through this
   function recordViz(topicId,text){
     if(!topicId){ try{ topicId=(location.hash.match(/#\/topic\/([^\/?#]+)/)||[])[1]||''; }catch(e){} }   // recover the topic id from the URL if it wasn't passed — never silently drop the video
     if(!topicId||!window.DATA)return; try{ DATA.viz=DATA.viz||{}; var a=DATA.viz[topicId]=DATA.viz[topicId]||[]; var t=(text||'').trim();
@@ -10894,5 +10905,6 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   }
 })();
 </script>
+<script src="whiteboard.js?v=20261111b"></script>   <!-- whiteboard Visualize (Standard / Layman) — takes over aiVisualize; FEATURES.WHITEBOARD=false turns it off -->
 </body>
 </html>
