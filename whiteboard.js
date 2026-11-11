@@ -69,6 +69,7 @@
     + '.wbread{border:0;background:#2b2540;color:#fff;border-radius:9px;height:32px;padding:0 11px;font-weight:800;font-size:12.5px;cursor:pointer;white-space:nowrap}'
     + '.wbinline{background:#f6f4fb;border:1px solid #e7e3f0;border-radius:16px;padding-top:8px;margin-top:10px}'
     + '.wbinline .wbhd{padding-top:2px}'
+    + '#vtP2 .wbhd{display:none}#vtP2 .wbinline{margin-top:0;padding-top:10px;border:0;background:transparent}'
     + '.wbsheet{position:fixed;inset:0;z-index:9100;background:rgba(30,20,60,.4);display:flex;align-items:flex-end;justify-content:center}'
     + '.wbsheet .in{background:#fff;width:100%;max-width:520px;border-radius:20px 20px 0 0;padding:18px 16px 22px;box-shadow:0 -10px 40px rgba(40,20,90,.25)}'
     + '.wbsheet h3{margin:0 0 4px;font-size:17px;color:#2b2540}.wbsheet p{margin:0 0 12px;font-size:13px;color:#6b6580}'
@@ -282,7 +283,7 @@
   var ACTIVE=[];   // live players (so leaving a card / closing can stop them)
   function Player(host, board, opts){
     opts=opts||{}; this.opts=opts; this.b=board; this.k=-1; this.playing=false; this.tok=0;
-    this.muted=!!settings().boardMuted; this.speed=settings().boardSpeed||1;
+    this.muted=(opts.muted!=null)?!!opts.muted:!!settings().boardMuted; this.speed=settings().boardSpeed||1;
     var mode=MODES[board.mode]||MODES.standard, self=this;
     host.innerHTML=''
       +'<div class="wbhd"><b>'+esc(opts.label||'🎬 Visualize')+'</b><span class="wbchip'+(board.mode==='layman'?' lay':'')+'">'+mode.icon+' '+mode.label+'</span><span class="wbq" data-r="q"></span><span class="wbsp"></span>'
@@ -320,6 +321,7 @@
   Player.prototype.go=function(k){
     var self=this, tok=++this.tok, st=this.b.steps[k]; this.clearTimers(); this.closeEnd();
     try{ if(window.stopSpeak) stopSpeak(); }catch(e){}
+    if(!this.host.isConnected){ this.destroy(); return; }   // its popup was closed under it (e.g. a page change)
     if(!st){ this.finish(); return; }
     this.k=k; this.dash(); this.showUpTo(k,false);
     var spans=this.caption(st.say), text=st.say, rate=this.speed;
@@ -452,10 +454,10 @@
       document.body.appendChild(sh);
     });
   }
-  function pickModeInline(host){
+  function pickModeInline(host, heading){
     var last=settings().boardLastMode||'';
     return new Promise(function(resolve){
-      host.innerHTML='<div class="wbpick"><div class="hd">How should we explain it?</div><div class="row">'+optHtml('standard',last)+optHtml('layman',last)+'</div></div>';
+      host.innerHTML='<div class="wbpick"><div class="hd">'+esc(heading||'How should we explain it?')+'</div><div class="row">'+optHtml('standard',last)+optHtml('layman',last)+'</div></div>';
       Array.prototype.forEach.call(host.querySelectorAll('.wbopt'),function(b){ b.onclick=function(e){ e.stopPropagation(); var m=b.getAttribute('data-m'); settings().boardLastMode=m; save(); resolve(m); }; });
     });
   }
@@ -504,6 +506,95 @@
     }catch(e){ var h=document.getElementById(hostId); if(h) h.innerHTML='<div class="wbgen err">'+esc((e&&e.message)||'Something went wrong')+'</div>'; if(e&&e.status===429) limitHit(e); }
   }
 
+
+  /* ---------------- in-note teaser: a silent ~15s demo of the new Visualize, once per subject ----------------
+     The cursor highlights a sentence → taps 🎬 Visualize this → picks a style → a small whiteboard plays (muted,
+     captions only). Replaces the old diagram teaser; same rules: only after a minute of reading, never for a
+     student who has already used Visualize, once per subject. */
+  function B(mode,title,subtitle,layout,items,says,extra){ var b={kind:'board',mode:mode,title:title,subtitle:subtitle,layout:layout,
+      items:items.map(function(x,k){ var o={id:'i'+k,label:x[0],note:x[1],doodle:x[2]}; if(x[3]!=null) o.col=x[3]; return o; }),
+      steps:says.map(function(x){ return {say:x[0],show:x[1].map(function(k){ return 'i'+k; })}; })};
+    for(var k in (extra||{})) b[k]=extra[k]; return b; }
+  var DEMOS={
+    'default':{ sent:'Injured tissue releases histamine, so nearby vessels widen and leak, causing redness, heat and swelling.',
+      board:B('layman','The injury alarm','Your body calls for backup','chain',
+        [['Tissue injured','someone fell at the party','cross'],['Histamine','the alarm bell rings','bolt'],['Vessels widen','doors flung wide open','vessel'],['Red, hot, swollen','the whole crowd rushes in','fire']],
+        [['Somebody fell at the party, the tissue is injured.',[0]],['Mast cells ring the alarm. That bell is histamine.',[1]],['The vessels fling their doors wide open and leak.',[2]],['Everyone rushes in, so it goes red, hot and swollen.',[3]]]) },
+    chem:{ sent:'A galvanic cell turns a spontaneous redox reaction into a flow of electric current.',
+      board:B('standard','Galvanic cell','Redox becomes current','chain',
+        [['Anode (−)','oxidation: loses electrons','down'],['Electrons flow','through the wire, anode → cathode','wave'],['Cathode (+)','reduction: gains electrons','up'],['Current','a steady flow of charge','bolt']],
+        [['At the anode, zinc is oxidised and loses electrons.',[0]],['The electrons travel through the wire to the cathode.',[1]],['At the cathode, copper ions are reduced.',[2]],['That flow of electrons is the current.',[3]]]) },
+    math:{ sent:'The gradient of the curve y = x² at any point is exactly twice the x-value.',
+      board:B('standard','Gradient of y = x²','From average slope to the derivative','chain',
+        [['Secant','average slope between P and Q','wave'],['Q slides to P','the gap shrinks to zero','down'],['Tangent','slope at one point','check'],['Derivative','dy/dx = 2x','star']],
+        [['A secant gives the average slope between two points.',[0]],['Slide Q towards P and the gap shrinks.',[1]],['In the limit the secant becomes the tangent.',[2]],['Its slope is the derivative: two x.',[3]]]) },
+    bio:{ sent:'Two unaffected carriers can still have an affected child, one chance in four, every time.',
+      board:B('standard','Aa × Aa','Two carrier parents','list',
+        [['AA','unaffected · 1 in 4','check'],['Aa','carrier · 2 in 4','shield'],['aa','affected · 1 in 4','cross']],
+        [['Each parent passes on one allele, A or a.',[0]],['Two in four children are carriers, like their parents.',[1]],['One in four gets two recessive alleles and is affected.',[2]]]) },
+    org:{ sent:'Hydroxide attacks the carbon from the back, and the bromide leaves in the same step, so the carbon inverts.',
+      board:B('standard','SN2 in one step','Concerted: no intermediate','chain',
+        [['HO⁻ attacks','from the back of the carbon','key'],['Transition state','bonds half made, half broken','scale'],['Br⁻ leaves','the leaving group','door'],['Inversion','the carbon turns inside out','up']],
+        [['Hydroxide attacks the carbon from the back.',[0]],['There is one transition state, never an intermediate.',[1]],['Bromide leaves in the same step.',[2]],['The carbon inverts, like an umbrella in the wind.',[3]]]) },
+    phys:{ sent:'A 4 kg block is released on a rough slope at 28°. Draw the forces on it and find its acceleration.',
+      board:B('standard','Block on a slope','Free-body diagram','hub',
+        [['Weight','mg, by the Earth','down'],['Normal','the surface pushes back','up'],['Friction','up the slope','wave'],['Net force','down the slope','star']],
+        [['Lift the block out of the scene. What acts on it?',[0]],['The surface pushes back. That is the normal force, not mg.',[1]],['Friction acts up the slope.',[2]],['Add them up: a net force down the slope.',[3]]],{center:{label:'4 kg block',doodle:'scale'}}) },
+    cs:{ sent:'In binary there is no digit 2, so 1 + 1 gives a sum bit of 0 and carries a 1 into the next column.',
+      board:B('standard','Half adder','Two bits in, two bits out','chain',
+        [['Inputs A, B','two single bits','gear'],['XOR → SUM','1 when the bits differ','bolt'],['AND → CARRY','1 when both are 1','lock'],['1 + 1 = 10','sum 0, carry 1','check']],
+        [['Two bits go in, A and B.',[0]],['XOR gives the sum bit.',[1]],['AND gives the carry bit.',[2]],['So one plus one is one zero in binary.',[3]]]) }
+  };
+  function demoKey(subj){ return /biolog|genetic|zoolog|botan|ecolog|microbiolog/i.test(subj)?'bio'
+    :/physics|mechanic|electromagnet|thermodynam|astronom|kinematic/i.test(subj)?'phys'
+    :/organic|orgo/i.test(subj)?'org'
+    :/chem/i.test(subj)&&!/bio/i.test(subj)?'chem'
+    :/comput|informatic|\bict\b|programming|software eng/i.test(subj)?'cs'
+    :/math|calcul|algebra|trig|statist|geometry|further maths/i.test(subj)?'math':'default'; }
+  var _tz=[], _tzPlayer=null;
+  function tzAt(ms,fn){ _tz.push(setTimeout(fn,ms)); }
+  function closeTeaser(){ _tz.forEach(clearTimeout); _tz=[]; if(_tzPlayer){ _tzPlayer.destroy(); _tzPlayer=null; } var o=document.getElementById('vtov'); if(o) o.remove(); }
+  function playDemo(demo, label, gotText){
+    injectStyles(); closeTeaser();
+    var b=demo.board, ov=document.createElement('div'); ov.className='vtov'; ov.id='vtov';
+    ov.innerHTML='<div class="vtcard">'
+      +'<div class="vthd"><b>🎬 Visualize</b><span>'+esc(label)+'</span><button class="vtx" id="vtX">✕</button></div>'
+      +'<div class="vtphase" id="vtP1"><div class="vtnote"><span class="vttext" id="vtText">'+esc(demo.sent)+'</span></div>'
+        +'<button class="vtbtn" id="vtBtn">🎬 Visualize this</button>'
+        +'<div class="wbpick" id="vtPick" style="display:none;margin-top:12px"><div class="hd">How should we explain it?</div><div class="row">'+optHtml('standard','')+optHtml('layman','')+'</div></div>'
+        +'<div class="vtcursor" id="vtCur"><svg viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div></div>'
+      +'<div id="vtP2" style="display:none;margin:0 -16px"></div>'
+      +'<button class="vtgot" id="vtGot">'+esc(gotText)+'</button></div>';
+    document.body.appendChild(ov);
+    var $=function(id){ return document.getElementById(id); };
+    $('vtX').onclick=closeTeaser; $('vtGot').onclick=closeTeaser;
+    ov.addEventListener('click',function(e){ if(e.target===ov) closeTeaser(); });
+    Array.prototype.forEach.call(ov.querySelectorAll('#vtPick .wbopt'),function(o){ o.style.pointerEvents='none'; });
+    tzAt(250,function(){ var t=$('vtText'); if(t) t.classList.add('sel'); var c=$('vtCur'); if(c){ c.style.left='84%'; c.style.top='30px'; } });
+    tzAt(1550,function(){ var x=$('vtBtn'); if(x) x.classList.add('show'); });
+    tzAt(1800,function(){ var c=$('vtCur'); if(c){ c.style.left='50%'; c.style.top='86px'; } });
+    tzAt(2450,function(){ var x=$('vtBtn'); if(x) x.classList.add('clicked'); });
+    tzAt(2850,function(){ var x=$('vtBtn'); if(x) x.style.display='none'; var p=$('vtPick'); if(p) p.style.display='block';
+      var c=$('vtCur'); if(c){ c.style.left=b.mode==='layman'?'74%':'24%'; c.style.top='150px'; } });
+    tzAt(4000,function(){ var o=ov.querySelector('#vtPick .wbopt[data-m="'+b.mode+'"]'); if(o) o.classList.add('last'); });
+    tzAt(4500,function(){ var p1=$('vtP1'), p2=$('vtP2'); if(!p1||!p2) return; p1.style.display='none'; p2.style.display='block';
+      _tzPlayer=new Player(p2, b, { inline:true, muted:true, onDone:function(){ if(_tzPlayer){ _tzPlayer.pause(); } } });
+      _tzPlayer.speed=1.25; _tzPlayer.play(); });
+  }
+  window.mountVizTeaser=function(){ try{
+    if(window.hasUsedViz && hasUsedViz()) return;
+    var subj=(window.currentTopicSubject?currentTopicSubject():'')||'', skey=(subj||'general').toLowerCase();
+    try{ window.DATA=window.DATA||{}; DATA.teaserSeen=DATA.teaserSeen||{}; if(DATA.teaserSeen[skey]) return; DATA.teaserSeen[skey]=1; if(window.persist) persist(); }catch(e){}
+    var d=DEMOS[demoKey(subj)]||DEMOS['default'];
+    playDemo(d, 'turn any line into a whiteboard lesson', 'Got it — I\'ll try it ✨');
+  }catch(e){} };
+  window.showVizOnboarding=function(){ try{
+    if(!window.localStorage || localStorage.getItem('mb_onboard_viz')==='1') return;
+    localStorage.setItem('mb_onboard_viz','1');
+    if(window.hasUsedViz && hasUsedViz()) return;
+    playDemo(DEMOS['default'], 'a 15-second tour', 'Got it — let me try ✨');
+  }catch(e){} };
+
   /* ---------------- take over the app's Visualize entry points ---------------- */
   var old={ viz:window.aiVisualize, inline:window.aiVisualizeInline, saved:window.aiVisualizeInlineSaved, stop:window.vizInlineStop };
   window.aiVisualize=function(text, topicName, topicId){
@@ -524,9 +615,15 @@
       var p=mountInline(hostId, rec.board, { onSwitchMode:function(m){ buildInline(rec.text||'', '', topicId, hostId, cardId, m); } });
       if(p) setTimeout(function(){ p.play(); },250); return;
     }
-    if(old.saved) return old.saved(cardId, topicId, hostId);   // an explainer saved before the whiteboard: old player
+    // an explainer saved before the whiteboard (old diagram blueprint): rebuild it on the whiteboard in the style they pick.
+    // A rebuild of the same text is cached on the server after the first student, so it is usually free.
+    var host=document.getElementById(hostId); if(!host) return;
+    var text=(rec&&rec.text)||'';
+    if(!text){ host.innerHTML='<div class="wbgen err">That saved explainer is missing — tap the card again to rebuild it.</div>'; return; }
+    injectStyles();
+    pickModeInline(host,'Visualize is now a whiteboard lesson. Pick a style to rebuild this one:').then(function(mode){ buildInline(text, '', topicId, hostId, cardId, mode); });
   };
   window.vizInlineStop=function(){ stopAllInline(); if(old.stop) try{ old.stop(); }catch(e){} };
 
-  window.MBBoard={ playPreview:playPreview, open:openModal, close:closeModal, mount:mountInline, pickMode:pickMode, fetch:fetchBoard, Player:Player, Board:Board, DOODLES:Object.keys(D), _injectStyles:injectStyles };
+  window.MBBoard={ playPreview:playPreview, demo:function(k){ playDemo(DEMOS[k]||DEMOS['default'],'demo','Close'); }, DEMOS:DEMOS, open:openModal, close:closeModal, mount:mountInline, pickMode:pickMode, fetch:fetchBoard, Player:Player, Board:Board, DOODLES:Object.keys(D), _injectStyles:injectStyles };
 })();

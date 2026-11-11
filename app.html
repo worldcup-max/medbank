@@ -1252,7 +1252,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.11.11b';   // bump this each release
+const APP_VERSION='2026.11.11c';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -10759,7 +10759,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     _vtTimer=setTimeout(function(){ _vtTimer=null;
       try{ if(!window.currentTopicId||currentTopicId()!==topicId)return; }catch(e){ return; }   // still on this note?
       if(document.hidden) return;                          // reading (tab visible)
-      if(document.getElementById('vizov')||document.getElementById('vtov')||document.getElementById('obov')) return;
+      if(document.getElementById('vizov')||document.getElementById('wbov')||document.getElementById('vtov')||document.getElementById('obov')) return;
       window.mountVizTeaser();
     }, 60000);   // 1 minute
   };
@@ -10867,6 +10867,6 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   }
 })();
 </script>
-<script src="whiteboard.js?v=20261111b"></script>   <!-- whiteboard Visualize (Standard / Layman) — takes over aiVisualize; FEATURES.WHITEBOARD=false turns it off -->
+<script src="whiteboard.js?v=20261111c"></script>   <!-- whiteboard Visualize (Standard / Layman) — takes over aiVisualize; FEATURES.WHITEBOARD=false turns it off -->
 </body>
 </html>
