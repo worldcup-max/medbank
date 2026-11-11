@@ -28,7 +28,7 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
-import { buildBoardPrompt, normalizeBoard, boardKey, BOARD_MODES } from "./board.mjs";   // whiteboard Visualize (Standard / Layman)
+import { buildBoardPrompt, normalizeBoard, boardKey, BOARD_MODES, normQ, boardIdentity, buildAskPrompt as buildBoardAskPrompt, parseAsk } from "./board.mjs";   // whiteboard Visualize (Standard / Layman)
 import { EXPLAINER_TEMPLATES, explainerExcerpt, explainerKey, buildExplainerPrompt, parseExplainerLesson } from "./explainer.mjs";   // 3D Tutor
 import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPlateTutor, plateAskKey, buildAskPrompt, checkAsk, buildExplainPrompt, checkExplain, plateInsights, PLATE_EVENT_KINDS } from "./plate-tutor.mjs";   // 3D Tutor · library plates, tutor from the note
 import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
@@ -1881,7 +1881,7 @@ app.post("/board", async (req,res)=>{
     const mode = BOARD_MODES.has(req.body.mode) ? req.body.mode : "standard";
     const key = boardKey(textKey, text, mode);
     try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
-      if(c.data && c.data.blueprint && c.data.blueprint.kind==="board"){ const n=normalizeBoard(c.data.blueprint, mode); if(n.board) return res.json({ ok:true, cached:true, board:n.board, viz_quota:await vizQuota(user.id, user.email) }); } }catch(_){}
+      if(c.data && c.data.blueprint && c.data.blueprint.kind==="board"){ const n=normalizeBoard(c.data.blueprint, mode); if(n.board){ n.board.src = c.data.blueprint.src || text; return res.json({ ok:true, cached:true, board:n.board, viz_quota:await vizQuota(user.id, user.email) }); } } }catch(_){}
     const premium = await isPremium(user.id, user.email).catch(()=>false);
     const limit = premium ? 10 : 3;
     let used = 0;
@@ -1902,11 +1902,79 @@ app.post("/board", async (req,res)=>{
         const out2 = normalizeBoard(parseBlueprint(gen2.text), mode);
         if(out2.board && (!out.board || out2.issues.length <= out.issues.length)) out = out2; }catch(e){ console.warn("[board] retry failed:", e.message); }
     }
+    if(out.board) out.board.src = text;   // the highlighted text travels with the board, so Ask Auntie can answer from it
     if(!out.board) return res.status(502).json({ error:"couldn't build this explainer — try selecting one clear idea, or try again in a moment" });
     try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:"board:"+mode, subject, blueprint:out.board, verified:!out.issues.length }); }catch(_){}
     try{ await admin.from("viz_events").insert({ account_id:user.id }); }catch(_){}
     res.json({ ok:true, cached:false, board:out.board, viz_quota:{ limit, remaining:Math.max(0,limit-(used+1)), premium } });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+
+/* ASK AUNTIE — POST /board/ask {board, step, q}. One shared question bank per board (visualizations row
+ * "ask|<board identity>"): a question that means the same as one already answered replays that answer
+ * (free); a new one is answered once and saved for every later student. Only the question text is kept,
+ * never who asked. A student gets ASK_DAILY new answers a day, counted in the board_asks table
+ * (board-asks.sql); replayed, "most asked" and ready-made answers are free. If that table is missing or
+ * unreachable, an in-memory count keeps the cap working until the server restarts. */
+const ASK_DAILY = 2;
+const _askDaily = new Map();
+async function askUsed(uid){
+  const d=new Date().toISOString().slice(0,10), k=uid+"|"+d, mem=_askDaily.get(k)||0;
+  try{ const since=new Date(); since.setUTCHours(0,0,0,0);
+    const c = await admin.from("board_asks").select("id",{ count:"exact", head:true }).eq("account_id",uid).gte("created_at",since.toISOString());
+    if(!c.error) return { k, n:Math.max(c.count||0, mem), db:true };
+    console.error("[board/ask] board_asks count failed — using in-memory cap: %s", c.error.message||c.error);
+  }catch(e){ console.error("[board/ask] board_asks count threw — using in-memory cap:", e.message); }
+  return { k, n:mem, db:false };
+}
+app.post("/board/ask", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const q = (req.body.q||"").toString().replace(/\s+/g," ").trim().slice(0,300);
+    if(q.length < 3) return res.status(400).json({ error:"ask a question first" });
+    const raw = req.body.board||{};
+    const nb = normalizeBoard(raw, raw.mode); const board = nb.board;
+    if(!board) return res.status(400).json({ error:"unknown lesson" });
+    board.src = (raw.src||"").toString().slice(0,2000);
+    const step = Math.max(0, Math.min(board.steps.length-1, Number(req.body.step)||0));
+    const key = textKey("ask|"+boardIdentity(board));
+    let bank = [];
+    try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle(); if(c.data && c.data.blueprint && Array.isArray(c.data.blueprint.qa)) bank = c.data.blueprint.qa; }catch(_){}
+    if(!bank.length && board.faq) bank = board.faq.map(f=>({ q:f.q, a:f.a, note:f.note||"", beyond:false, n:0, ready:true }));
+    const save = async()=>{ try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:"ask", subject:"", blueprint:{ kind:"askbank", qa:bank.slice(0,60) }, verified:true }); }catch(_){} };
+    const reply = (x, reused)=> res.json({ ok:true, reused, answer:{ q:x.q, a:x.a, note:x.note||"", beyond:!!x.beyond } });
+    const nq = normQ(q), hit = bank.findIndex(x=>normQ(x.q)===nq);
+    if(hit>=0){ bank[hit].n=(bank[hit].n||0)+1; save(); return reply(bank[hit], true); }
+    const u = await askUsed(user.id);
+    if(u.n >= ASK_DAILY) return res.status(429).json({ error:"daily_limit", message:"That's your "+ASK_DAILY+" new questions for today. Tap one of the questions below to hear its answer, or ask again tomorrow." });
+    const gen = await generate({ model: BASIC_MODEL, prompt: buildBoardAskPrompt(board, step, q, bank), parts:[], images:[], max_tokens:700, temperature: board.mode==="layman"?0.5:0.25, json:true });
+    const out = parseAsk(parseBlueprint(gen.text), bank.length);
+    if(!out) return res.status(502).json({ error:"Auntie didn't catch that — try asking again" });
+    if(out.same != null){ bank[out.same].n=(bank[out.same].n||0)+1; save(); return reply(bank[out.same], true); }
+    _askDaily.set(u.k, u.n+1);
+    try{ await admin.from("board_asks").insert({ account_id:user.id }); }catch(_){}   // count this new answer against today's limit
+    const entry = { q: out.q || q, a: out.a, note: out.note, beyond: out.beyond, n:1 };
+    bank.push(entry); bank.sort((a,b)=>(b.n||0)-(a.n||0)); await save();
+    try{ await admin.rpc("bump_ai_usage", { p_account:user.id, p_feature:"board_ask", p_tokens:0 }); }catch(_){}
+    reply(entry, false);
+  }catch(e){ console.error("[board/ask]", e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* MOST ASKED — POST /board/questions {board}: the top questions other students asked on this board
+ * (from the shared Ask Auntie bank), with their answers, so a student can tap one and hear it free.
+ * Ready-made questions nobody has asked yet are left out; nothing about who asked is stored or sent. */
+app.post("/board/questions", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const raw = req.body.board||{}; const board = normalizeBoard(raw, raw.mode).board;
+    if(!board) return res.json({ ok:true, top:[], total:0 });
+    const key = textKey("ask|"+boardIdentity(board));
+    let bank = [];
+    try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle(); if(c.data && c.data.blueprint && Array.isArray(c.data.blueprint.qa)) bank = c.data.blueprint.qa; }catch(_){}
+    const asked = bank.filter(x=>(x.n||0)>0).sort((a,b)=>(b.n||0)-(a.n||0));
+    res.json({ ok:true, total: asked.reduce((t,x)=>t+(x.n||0),0), top: asked.slice(0,3).map(x=>({ q:x.q, a:x.a, note:x.note||"", beyond:!!x.beyond, n:x.n||0 })) });
+  }catch(e){ console.error("[board/questions]", e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
 /* =====================================================================
@@ -1992,6 +2060,7 @@ async function renderPreviewBoard(scene, note, subject, mode){
       const out = normalizeBoard(parseBlueprint(gen.text), mode);
       if(out.board && (!best || out.issues.length < best.issues.length)) best = out; }catch(e){ console.warn("[preview-board] scene attempt failed:", e.message); }
   }
+  if(best && best.board) best.board.src = (sect || scene.focus || scene.heading || "").slice(0,2000);
   return best && best.board;
 }
 async function buildBoardPreview(note, subject, mode){
