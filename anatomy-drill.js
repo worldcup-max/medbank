@@ -25,7 +25,7 @@
 
   /* ---------------- the drill sets ----------------
      fma: one or more meshes that make up the structure. ctx: scenery drawn as glass.
-     view: camera direction for rounds 1–2, view3: the "another view" for round 3 (model space, Y up, +Z = anterior,
+     view: the camera direction the set opens on (later views are picked at random per round), view3: legacy fallback (model space, Y up, +Z = anterior,
      -X = the body's right). accept: other spellings that count as correct. */
   var SKULL_R = ['FMA52734', 'FMA52788', 'FMA52738', 'FMA52735', 'FMA52736', 'FMA52892', 'FMA53649', 'FMA52748',
     'FMA52789', 'FMA52739', 'FMA52893', 'FMA53650', 'FMA52740', 'FMA9710', 'FMA53647', 'FMA53648',
@@ -272,8 +272,8 @@
       return b.isEmpty() ? new T.Vector3() : b.getCenter(new T.Vector3());
     }
     var camGoal = { pos: new T.Vector3(0, 0, R * 2), look: new T.Vector3() }, camLook = new T.Vector3();
-    function aim(it, round) {
-      var v = new T.Vector3().fromArray(round === 3 ? set.view3 : set.view).normalize();
+    function aim(it, round, view) {
+      var v = new T.Vector3().fromArray(view ? view.v : (round === 3 ? set.view3 : set.view)).normalize();
       var tc = targetCenter(it), look = tc.clone().multiplyScalar(set.bias || 0.35);
       camGoal.look.copy(look);
       camGoal.pos.copy(look).add(v.multiplyScalar(R * (set.zoom || 1) * (W < H ? 2.35 : 2.0)));
@@ -286,13 +286,29 @@
     }
 
     // ---------- game state ----------
+    /* Every round, every item gets its own view, never the same one twice running for one structure — so a
+       student learns the structure, not one picture of it. The glass model keeps the target visible from
+       any side. set.view stays the first view a set opens on. */
+    var VIEWS = [
+      { n: 'front', v: [0, 0.1, 1] }, { n: 'behind', v: [0, 0.1, -1] },
+      { n: 'right side', v: [-1, 0.1, 0.05] }, { n: 'left side', v: [1, 0.1, 0.05] },
+      { n: 'below', v: [0.05, -1, 0.25] }, { n: 'above', v: [0.05, 1, 0.25] },
+      { n: 'front-right', v: [-0.7, 0.3, 0.7] }, { n: 'front-left', v: [0.7, 0.3, 0.7] },
+      { n: 'back-right, from below', v: [-0.6, -0.35, -0.7] }, { n: 'back-left, from below', v: [0.6, -0.35, -0.7] }
+    ];
+    var lastView = {};
+    function pickView(it, first) {
+      if (first && !lastView[it.name]) { lastView[it.name] = 'set'; return { n: 'start', v: set.view }; }
+      var pool = VIEWS.filter(function (x) { return x.n !== lastView[it.name]; });
+      var c = pool[Math.floor(Math.random() * pool.length)]; lastView[it.name] = c.n; return c;
+    }
     var rounds = [
       { n: 1, label: 'type it' },
       { n: 2, label: 'first letter' },
       { n: 3, label: 'from memory, another view' }
     ];
     var queue = [];
-    rounds.forEach(function (r) { shuffle(playable).forEach(function (it) { queue.push({ it: it, r: r }); }); });
+    rounds.forEach(function (r) { shuffle(playable).forEach(function (it, k) { queue.push({ it: it, r: r, view: pickView(it, r.n === 1 && k === 0) }); }); });
     var qi = 0, typed = '', wrong = 0, stats = { keys: 0, miss: 0, t0: Date.now(), per: {} };
     var wordEl = hud.querySelector('.word'), clueEl = hud.querySelector('.clue'), rndEl = hud.querySelector('.rnd'), kbEl = hud.querySelector('.kb');
 
@@ -330,7 +346,8 @@
     }
     function show() {
       var cur = queue[qi], it = cur.it, r = cur.r.n, tgt = target(it);
-      rndEl.textContent = 'Round ' + r + ' · ' + cur.r.label + ' · ' + ((qi % playable.length) + 1) + ' / ' + playable.length;
+      rndEl.textContent = 'Round ' + r + ' · ' + cur.r.label + ' · ' + ((qi % playable.length) + 1) + ' / ' + playable.length
+        + (cur.view && cur.view.n !== 'start' ? ' · seen from ' + cur.view.n : '');
       var html = '<span class="ok">' + esc(typed) + '</span><span class="cur"></span>';
       var rest = tgt.slice(typed.length);
       if (r === 1) html += '<span class="gh">' + esc(rest) + '</span>';
@@ -341,7 +358,7 @@
     }
     function start(i) {
       qi = i; typed = ''; wrong = 0;
-      var cur = queue[qi]; paint(cur.it); aim(cur.it, cur.r.n); show();
+      var cur = queue[qi]; paint(cur.it); aim(cur.it, cur.r.n, cur.view); show();
     }
     function press(k) {
       if (qi >= queue.length) return;
@@ -404,7 +421,7 @@
     function resize() {
       var w = stage.clientWidth, h = stage.clientHeight; if (!w || !h) return;
       W = w; H = h; renderer.setSize(w, h); cam.aspect = w / h; cam.updateProjectionMatrix();
-      if (qi < queue.length) aim(queue[qi].it, queue[qi].r.n);
+      if (qi < queue.length) aim(queue[qi].it, queue[qi].r.n, queue[qi].view);
     }
     window.addEventListener('resize', resize);
 
