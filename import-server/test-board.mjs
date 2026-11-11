@@ -33,3 +33,19 @@ test("modes get different voices and different cache keys", ()=>{
   assert.match(buildBoardPrompt("t","s","standard"), /KEEP the real medical terms/);
   const k = s=>s; assert.notEqual(boardKey(k,"t","layman"), boardKey(k,"t","standard"));
 });
+
+import { normQ, parseAsk, buildAskPrompt, boardIdentity } from "./board.mjs";
+test("ask: same question in other words normalises, and 'same' must point into the bank", ()=>{
+  assert.equal(normQ("Auntie, please, WHY does it need ATP?"), normQ("why does it need atp"));
+  assert.deepEqual(parseAsk({ same:1 }, 2), { same:1 });
+  assert.equal(parseAsk({ same:5 }, 2), null);                    // out of range and no answer → nothing
+  const a = parseAsk({ q:"Why ATP?", answer:"Because…", note:"ATP = cash", beyond:1 }, 0);
+  assert.equal(a.a, "Because…"); assert.equal(a.beyond, true);
+});
+test("ask: prompt carries the board, the paused step, the bank and the voice", ()=>{
+  const { board } = normalizeBoard({ ...good, faq:[{ q:"Why?", a:"Because.", note:"n" }] }, "layman");
+  assert.equal(board.faq.length, 1);
+  const p = buildAskPrompt(board, 1, "what is GLUT2", [{ q:"Why?" }]);
+  assert.match(p, /STEP 2/); assert.match(p, /\[0\] Why\?/); assert.match(p, /Auntie/); assert.match(p, /beyond/);
+  assert.equal(boardIdentity(board), boardIdentity(JSON.parse(JSON.stringify(board))));
+});

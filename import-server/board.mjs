@@ -60,10 +60,12 @@ DOODLES: every item (and the center) gets ONE doodle from this list, the closest
 
 STEPS: 3–9 steps, in the order of the source. Each step is 1–2 short spoken sentences (max 40 words) in the chosen voice, and lists the item ids it reveals in "show". Reveal items in the order you talk about them; every item must be shown by some step. The first step introduces the board (it may show nothing or the first item). The last step sums up in one line.
 
+READY QUESTIONS: add 2–3 questions a student is most likely to ask about this board ("faq"), each with a 1–3 sentence spoken answer in the same voice, faithful to the source, and a sticky-note summary of ≤ 8 words.
+
 LIMITS: item labels ≤ 3 words; notes ≤ 8 words; 2–7 items.
 
 Return ONLY JSON in exactly this shape:
-{"title":"","subtitle":"","layout":"hub|chain|cycle|compare|list","center":{"label":"","doodle":""},"columns":["",""],"items":[{"id":"a","label":"","note":"","doodle":"","col":0}],"steps":[{"say":"","show":["a"]}]}
+{"title":"","subtitle":"","layout":"hub|chain|cycle|compare|list","center":{"label":"","doodle":""},"columns":["",""],"items":[{"id":"a","label":"","note":"","doodle":"","col":0}],"steps":[{"say":"","show":["a"]}],"faq":[{"q":"","a":"","note":""}]}
 ("center" only for hub/cycle; "columns" and "col" only for compare.)
 
 SUBJECT: ${subject || "medicine"}
@@ -116,8 +118,57 @@ export function normalizeBoard(raw, mode){
   const missing = b.items.filter(i => !shown.has(i.id)).map(i => i.id);
   if(missing.length && b.steps.length) b.steps[b.steps.length - 1].show.push(...missing);
   // an item shown twice is only drawn once — keep the first
+  b.faq = (Array.isArray(raw.faq) ? raw.faq : []).map(f => ({ q: clip(f && f.q, 120), a: clip(f && f.a, LIMITS.say), note: clip(f && f.note, 60) })).filter(f => f.q && f.a).slice(0, 3);
   const drawn = new Set(); b.steps.forEach(s => { s.show = s.show.filter(id => !drawn.has(id) && drawn.add(id)); });
   return { board: issues.length && !(b.items.length >= 2 && b.steps.length >= 3) ? null : b, issues };
 }
 
 export function boardKey(textKeyFn, text, mode){ return textKeyFn("board|" + (BOARD_MODES.has(mode) ? mode : "standard") + "|" + (text || "")); }
+
+/* =====================================================================
+ * ASK AUNTIE — a student pauses a board and asks a question.
+ * Every board keeps one shared question bank. A new question is first
+ * matched against the bank (same meaning, different words → the saved
+ * answer plays, free); only a genuinely new question gets a new answer,
+ * which is then saved for the next student. One model call does both.
+ * ===================================================================== */
+export function normQ(q){ return String(q||"").toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\b(please|auntie|aunty|um|uh|so|like|can you|could you|tell me)\b/g," ").replace(/\s+/g," ").trim(); }
+export function boardIdentity(b){ return JSON.stringify({ t:b&&b.title, m:b&&b.mode, i:(b&&b.items||[]).map(x=>x.label), s:(b&&b.steps||[]).map(x=>x.say) }); }
+
+export function buildAskPrompt(board, step, question, bank){
+  const mode = board && board.mode === "layman" ? "layman" : "standard";
+  const voice = mode === "layman"
+    ? `Answer as Auntie: warm, witty, plain words, using the SAME everyday analogy as the board ("${board.title}"). Name the medical term once if needed.`
+    : `Answer as a clear, calm medical lecturer. Keep the real medical terms and define them in a few words.`;
+  const lines = (board.steps||[]).map((s,k)=>`${k+1}. ${s.say}`).join("\n");
+  const items = (board.items||[]).map(i=>`- ${i.label}: ${i.note||""}`).join("\n");
+  const prev = (bank||[]).map((x,k)=>`[${k}] ${x.q}`).join("\n") || "(none yet)";
+  return (
+`A student paused a narrated whiteboard lesson to ask a question by voice (it may be mis-transcribed: read it charitably).
+
+BOARD: "${board.title}"${board.subtitle?` (${board.subtitle})`:""}
+ON THE BOARD:
+${items}
+WHAT THE LESSON SAYS:
+${lines}
+${board.src?`SOURCE (the student's own note):\n${String(board.src).slice(0,2000)}\n`:""}
+THE STUDENT PAUSED AT STEP ${Number(step)+1}.
+STUDENT'S QUESTION: "${question}"
+
+QUESTIONS ALREADY ANSWERED FOR THIS BOARD:
+${prev}
+
+1. If the student's question asks the SAME thing as one already answered (same meaning, even in different words), return ONLY {"same": <its number>}.
+2. Otherwise answer it. ${voice}
+   - 1–3 short spoken sentences (max 60 words), then the lesson carries on, so do not ask them anything back.
+   - Answer from the board and the source first. If the source does not cover it, still answer briefly and correctly from standard medical knowledge, and set "beyond": true.
+   - "note": the key point for a sticky note on the board, max 8 words.
+   - "q": the question rewritten cleanly (fix mis-transcription), max 15 words.
+   Return ONLY {"q":"","answer":"","note":"","beyond":false}.`);
+}
+export function parseAsk(o, bankLen){
+  if(!o || typeof o !== "object") return null;
+  if(o.same != null && Number.isInteger(Number(o.same)) && Number(o.same) >= 0 && Number(o.same) < bankLen) return { same: Number(o.same) };
+  const a = clip(o.answer || o.a, 400); if(!a) return null;
+  return { q: clip(o.q, 120), a, note: clip(o.note, 60), beyond: !!o.beyond };
+}

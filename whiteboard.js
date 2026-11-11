@@ -70,6 +70,23 @@
     + '.wbinline{background:#f6f4fb;border:1px solid #e7e3f0;border-radius:16px;padding-top:8px;margin-top:10px}'
     + '.wbinline .wbhd{padding-top:2px}'
     + '#vtP2 .wbhd{display:none}#vtP2 .wbinline{margin-top:0;padding-top:10px;border:0;background:transparent}'
+    + '.wbask{margin-left:auto;border:1px solid #e3def0;background:#fff;border-radius:99px;height:36px;padding:0 12px;font-weight:800;font-size:13px;color:#b45309;cursor:pointer}'
+    + '.wbask+.wbplay{margin-left:0}'
+    + '.wbaskp{position:absolute;inset:0;background:rgba(255,255,255,.96);z-index:4;display:flex;flex-direction:column;padding:12px}'
+    + '.wbaskx{align-self:flex-start;border:0;background:transparent;color:#6b6580;font-weight:800;font-size:13px;cursor:pointer;padding:4px}'
+    + '.wbaskbody{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center}'
+    + '.wborb{width:96px;height:96px;border-radius:50%;border:0;background:#6d28d9;color:#fff;font-size:36px;cursor:pointer;box-shadow:0 10px 30px rgba(109,40,217,.35)}'
+    + '.wborb.on{animation:wborb 1.1s ease-in-out infinite;background:#dc2626;box-shadow:0 0 0 0 rgba(220,38,38,.45)}'
+    + '.wborb.think{background:#a78bfa;animation:wbthink 1.4s ease-in-out infinite}'
+    + '@keyframes wborb{0%{box-shadow:0 0 0 0 rgba(220,38,38,.45)}70%{box-shadow:0 0 0 22px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}'
+    + '@keyframes wbthink{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}'
+    + '.wbasks{font-weight:800;color:#3a3550;font-size:14px}'
+    + '.wbaskor{font-size:11.5px;color:#8b84a3;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:6px}'
+    + '.wbfaq{display:flex;flex-direction:column;gap:6px;width:100%;max-width:320px}'
+    + '.wbfaq button{border:1px solid #e3def0;background:#faf7ff;border-radius:12px;padding:9px 12px;font-weight:700;font-size:13px;color:#3a3550;text-align:left;cursor:pointer}'
+    + '.wbaskty{display:flex;gap:6px;width:100%;max-width:320px}.wbaskty input{flex:1;border:1px solid #d8d0ee;border-radius:10px;padding:10px;font-size:14px}.wbaskty button{border:0;background:#6d28d9;color:#fff;border-radius:10px;padding:0 14px;font-weight:800}'
+    + '.wbnote{position:absolute;left:12px;bottom:12px;max-width:62%;background:#fef08a;border-radius:4px;padding:10px 12px;transform:rotate(-2deg);box-shadow:0 6px 14px rgba(120,100,0,.18);z-index:3;animation:wbnotein .4s ease-out}@keyframes wbnotein{0%{opacity:0;transform:rotate(-8deg) scale(.8)}100%{opacity:1;transform:rotate(-2deg) scale(1)}}'
+    + '.wbnote b{display:block;font-size:20px;line-height:1.1;color:#3b3551}.wbnote i{display:inline-block;margin-top:5px;font-size:10.5px;font-weight:800;font-style:normal;color:#b45309;background:#fff7ed;border-radius:6px;padding:2px 6px}'
     + '.wbsheet{position:fixed;inset:0;z-index:9100;background:rgba(30,20,60,.4);display:flex;align-items:flex-end;justify-content:center}'
     + '.wbsheet .in{background:#fff;width:100%;max-width:520px;border-radius:20px 20px 0 0;padding:18px 16px 22px;box-shadow:0 -10px 40px rgba(40,20,90,.25)}'
     + '.wbsheet h3{margin:0 0 4px;font-size:17px;color:#2b2540}.wbsheet p{margin:0 0 12px;font-size:13px;color:#6b6580}'
@@ -294,7 +311,7 @@
       +'<div class="wbboard"><span class="wbbadge">Built from your note</span><svg xmlns="'+NS+'" viewBox="0 0 400 480" role="img" aria-label="'+esc(board.title)+'"></svg></div>'
       +'<div class="wbcap" data-r="cap" aria-live="polite"></div>'
       +'<div class="wbdash" data-r="dash">'+board.steps.map(function(_,k){ return '<i data-k="'+k+'"></i>'; }).join('')+'</div>'
-      +'<div class="wbft"><span class="wbeq" data-r="eq"><i></i><i></i><i></i><i></i><i></i></span><span>'+mode.narrator+'</span><button class="wbplay" data-r="play">▶ Play</button></div>';
+      +'<div class="wbft"><span class="wbeq" data-r="eq"><i></i><i></i><i></i><i></i><i></i></span><span>'+mode.narrator+'</span>'+(opts.noAsk?'':'<button class="wbask" data-r="ask">✋ '+(board.mode==='layman'?'Ask Auntie':'Ask')+'</button>')+'<button class="wbplay" data-r="play">▶ Play</button></div>';
     this.host=host; this.$=function(r){ return host.querySelector('[data-r="'+r+'"]'); };
     this.board=new Board(host.querySelector('svg'), board); this.board.draw();
     this.board.reveal('_title',true);
@@ -303,6 +320,7 @@
     this.$('restart').onclick=function(){ self.restart(); };
     this.$('play').onclick=function(){ if(self.playing) self.pause(); else { try{ if(window.unlockAudio) unlockAudio(); }catch(e){} self.play(); } };
     if(this.$('close')) this.$('close').onclick=function(){ if(opts.onClose) opts.onClose(); };
+    if(this.$('ask')) this.$('ask').onclick=function(){ try{ if(window.unlockAudio) unlockAudio(); }catch(e){} self.openAsk(); };
     Array.prototype.forEach.call(this.$('dash').children,function(d){ d.onclick=function(){ self.jump(+d.getAttribute('data-k')); }; });
     if(opts.quota) this.setQuota(opts.quota);
     this.warm(); ACTIVE.push(this);
@@ -324,14 +342,17 @@
     if(!this.host.isConnected){ this.destroy(); return; }   // its popup was closed under it (e.g. a page change)
     if(!st){ this.finish(); return; }
     this.k=k; this.dash(); this.showUpTo(k,false);
-    var spans=this.caption(st.say), text=st.say, rate=this.speed;
+    this.say(st.say, tok, function(){ if(!self.playing) return; self.gap=setTimeout(function(){ if(tok===self.tok&&self.playing) self.go(k+1); },550); });
+  };
+  /* speak one line with the word-by-word caption; then() runs once, only if nothing interrupted it */
+  Player.prototype.say=function(text, tok, then){
+    var self=this, spans=this.caption(text), rate=this.speed;
     var est=Math.max(1800, text.length*62)/rate;            // rough speaking time, used for the word highlight and as a safety net
     var total=spans.reduce(function(a,s){ return a+s.textContent.length+1; },0)||1, acc=0, t0=Date.now();
     var marks=spans.map(function(s){ acc+=s.textContent.length+1; return acc/total; });
     this.kTimer=setInterval(function(){ var f=(Date.now()-t0)/est; spans.forEach(function(s,i){ if(marks[i]-0.04<=f) s.classList.add('on'); }); },90);
     var eq=this.$('eq'); if(eq) eq.classList.toggle('on',!this.muted);
-    var done=false; function fin(){ if(done||tok!==self.tok) return; done=true; self.clearTimers(); spans.forEach(function(s){ s.classList.add('on'); });
-      if(!self.playing) return; self.gap=setTimeout(function(){ if(tok===self.tok&&self.playing) self.go(k+1); },550); }
+    var done=false; function fin(){ if(done||tok!==self.tok) return; done=true; self.clearTimers(); spans.forEach(function(s){ s.classList.add('on'); }); if(then) then(); }
     if(this.muted || typeof window.voiceSpeak!=='function'){ this.watch=setTimeout(fin, est+400); return; }
     var warm=false; try{ warm=!!(window._ttsHas&&window._ttsHas(text,'read')); }catch(e){}
     this.watch=setTimeout(fin, est+2600+(warm?0:15000));
@@ -359,11 +380,90 @@
     var sw=box.querySelector('[data-a=switch]'); if(sw) sw.onclick=function(){ self.opts.onSwitchMode(other); };
     box.querySelector('[data-a=done]').onclick=function(){ self.closeEnd(); if(self.opts.onClose) self.opts.onClose(); }; };
   Player.prototype.closeEnd=function(){ if(this.endBox){ try{ this.endBox.remove(); }catch(e){} this.endBox=null; } };
-  Player.prototype.destroy=function(){ this.pause(); try{ if(this._rate0!=null&&window.mbVoiceRate) mbVoiceRate(this._rate0); }catch(e){} var i=ACTIVE.indexOf(this); if(i>=0) ACTIVE.splice(i,1); };
+  Player.prototype.destroy=function(){ this.closeAsk(); this.pause(); try{ if(this._rate0!=null&&window.mbVoiceRate) mbVoiceRate(this._rate0); }catch(e){} var i=ACTIVE.indexOf(this); if(i>=0) ACTIVE.splice(i,1); };
   Player.prototype.poster=function(label){ var self=this, p=document.createElement('div'); p.className='wbposter';
     p.innerHTML='<div class="pb">▶</div><span>'+esc(label||'Watch the explainer')+'</span>';
     p.onclick=function(){ try{ if(window.unlockAudio) unlockAudio(); }catch(e){} self.play(); };
     this.host.querySelector('.wbboard').appendChild(p); };
+
+
+  /* ---------------- Ask Auntie: pause, speak a question, hear the answer, carry on ----------------
+     The student never sees their own words: they talk, see a listening orb, then "thinking…", then the
+     answer is spoken (with its caption, like every other line) and a sticky note lands on the board.
+     Ready-made questions (board.faq) answer instantly with no server call. The server keeps one shared
+     question bank per board, so a question someone already asked replays that answer for free. */
+  function micMode(){ if(window.SpeechRecognition||window.webkitSpeechRecognition) return 'sr';
+    if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder&&typeof window.loadPuter==='function') return 'rec'; return ''; }
+  Player.prototype.openAsk=function(){
+    var self=this, b=this.b, who=b.mode==='layman'?'Auntie':'your tutor';
+    this.pause(); this.closeEnd(); this.closeAsk();
+    var mm=micMode(), box=document.createElement('div'); box.className='wbaskp';
+    box.innerHTML='<button class="wbaskx" data-a="back">← Back to the lesson</button>'
+      +'<div class="wbaskbody">'
+      +(mm?'<button class="wborb" data-a="mic" aria-label="Ask by voice"><span>🎤</span></button><div class="wbasks" data-a="status">Tap and ask '+who+' anything</div>'
+          :'<div class="wbasks">Type your question for '+who+'</div><div class="wbaskty"><input data-a="txt" maxlength="300" placeholder="Type here…"><button data-a="send">Ask</button></div>')
+      +((b.faq&&b.faq.length)?'<div class="wbaskor">or tap one</div><div class="wbfaq">'+b.faq.map(function(f,i){ return '<button data-faq="'+i+'">'+esc(f.q)+'</button>'; }).join('')+'</div>':'')
+      +'</div>';
+    this.host.querySelector('.wbboard').appendChild(box); this.askBox=box;
+    var q=function(a){ return box.querySelector('[data-a="'+a+'"]'); };
+    q('back').onclick=function(){ self.closeAsk(); self.resume(); };
+    Array.prototype.forEach.call(box.querySelectorAll('[data-faq]'),function(x){ x.onclick=function(){ var f=b.faq[+x.getAttribute('data-faq')]; self.answer({a:f.a,note:f.note,beyond:false}); }; });
+    if(q('send')){ var go=function(){ var v=(q('txt').value||'').trim(); if(v.length>2) self.ask(v); }; q('send').onclick=go; q('txt').onkeydown=function(e){ if(e.key==='Enter') go(); }; setTimeout(function(){ try{ q('txt').focus(); }catch(e){} },50); }
+    if(q('mic')) q('mic').onclick=function(){ self.listen(mm); };
+  };
+  Player.prototype.askStatus=function(state,msg){ var box=this.askBox; if(!box) return; var o=box.querySelector('.wborb'), st=box.querySelector('[data-a=status]');
+    if(o){ o.classList.toggle('on',state==='listen'); o.classList.toggle('think',state==='think'); o.disabled=(state==='think'); o.querySelector('span').textContent=state==='think'?'💭':'🎤'; }
+    if(st) st.textContent=msg; var f=box.querySelector('.wbfaq'), or=box.querySelector('.wbaskor'); if(f) f.style.display=state==='idle'?'':'none'; if(or) or.style.display=state==='idle'?'':'none'; };
+  Player.prototype.listen=function(mm){
+    var self=this, who=this.b.mode==='layman'?'Auntie':'your tutor';
+    if(this._rec){ try{ this._rec.stop(); }catch(e){} return; }           // second tap = done talking
+    try{ if(window.stopSpeak) stopSpeak(); }catch(e){}
+    var heard='', fail=function(){ self._rec=null; self.askStatus('idle', 'I didn\'t catch that. Tap and try again'); };
+    if(mm==='sr'){
+      var SR=window.SpeechRecognition||window.webkitSpeechRecognition, r=new SR();
+      try{ r.lang=(settings().sttLang)||'en-NG'; }catch(e){} r.interimResults=false; r.maxAlternatives=1; r.continuous=false;
+      r.onresult=function(e){ try{ heard=Array.prototype.map.call(e.results,function(x){ return x[0].transcript; }).join(' '); }catch(_){ } };
+      r.onerror=function(e){ if(e&&e.error==='not-allowed'){ self._rec=null; self.askStatus('idle','Allow the microphone to ask by voice'); } };
+      r.onend=function(){ self._rec=null; if(heard.trim().length>2) self.ask(heard.trim()); else fail(); };
+      this._rec=r; this.askStatus('listen',who==='Auntie'?'Auntie is listening… tap when you\'re done':'Listening… tap when you\'re done');
+      try{ r.start(); }catch(e){ fail(); }
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+      var chunks=[], rec=new MediaRecorder(stream); self._rec=rec; self._stream=stream;
+      rec.ondataavailable=function(e){ if(e.data&&e.data.size) chunks.push(e.data); };
+      rec.onstop=function(){ try{ stream.getTracks().forEach(function(t){ t.stop(); }); }catch(e){} self._rec=null; clearTimeout(self._recCap);
+        self.askStatus('think', who==='Auntie'?'Auntie is thinking…':'Thinking…');
+        window.loadPuter(function(){ try{ window.puter.ai.speech2txt(new Blob(chunks,{type:'audio/webm'}),{model:'gpt-4o-mini-transcribe'}).then(function(r){ var t=((r&&(r.text||r))||'').toString().trim(); if(t.length>2) self.ask(t); else fail(); },fail); }catch(e){ fail(); } }); };
+      rec.start(); self._recCap=setTimeout(function(){ try{ if(rec.state==='recording') rec.stop(); }catch(e){} },20000);
+      self.askStatus('listen',who==='Auntie'?'Auntie is listening… tap when you\'re done':'Listening… tap when you\'re done');
+    },function(){ self.askStatus('idle','Allow the microphone to ask by voice'); });
+  };
+  Player.prototype.ask=async function(question){
+    var self=this, who=this.b.mode==='layman'?'Auntie':'your tutor';
+    this.askStatus('think', who==='Auntie'?'Auntie is thinking…':'Thinking…');
+    try{
+      var C=window.MEDBANK_CONFIG||{}; if(!C.IMPORT_API||!window.__mbSB) throw new Error('offline');
+      var ses=await window.__mbSB.auth.getSession(); var token=ses.data.session&&ses.data.session.access_token; if(!token) throw new Error('signin');
+      var r=await fetch(C.IMPORT_API.replace(/\/$/,'')+'/board/ask',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({board:this.b,step:Math.max(0,this.k),q:question})});
+      var j=await r.json().catch(function(){ return {}; });
+      if(!this.askBox) return;                                           // they went back to the lesson meanwhile
+      if(r.status===429){ this.askStatus('idle', j.message||'That\'s all the new questions for today.'); return; }
+      if(!r.ok||!j.answer) throw new Error(j.error||'failed');
+      this.answer(j.answer);
+    }catch(e){ if(this.askBox) this.askStatus('idle', e&&e.message==='signin'?'Sign in to ask questions':(e&&e.message==='offline'?'Asking needs a connection':'I didn\'t catch that. Tap and try again')); }
+  };
+  Player.prototype.answer=function(ans){
+    var self=this; this.closeAsk(); this.clearNote();
+    var n=document.createElement('div'); n.className='wbnote';
+    n.innerHTML=(ans.note?'<b class="wbhand">'+esc(ans.note)+'</b>':'')+(ans.beyond?'<i>beyond your note</i>':'');
+    if(ans.note||ans.beyond) this.host.querySelector('.wbboard').appendChild(n); this.noteEl=n;
+    var tok=++this.tok; this.$('play').textContent='▶ Play';
+    this.say(ans.a, tok, function(){ self.gap=setTimeout(function(){ if(tok!==self.tok) return; self.clearNote(); self.resume(); },1200); });
+  };
+  Player.prototype.resume=function(){ this.clearNote(); if(this.k>=this.b.steps.length){ this.finish(); return; } this.playing=true; this.$('play').textContent='❚❚ Pause'; this.go(Math.max(0,Math.min(this.k,this.b.steps.length-1))); };
+  Player.prototype.clearNote=function(){ if(this.noteEl){ try{ this.noteEl.remove(); }catch(e){} this.noteEl=null; } };
+  Player.prototype.closeAsk=function(){ if(this._rec){ try{ this._rec.onend=null; this._rec.onstop=null; this._rec.abort?this._rec.abort():this._rec.stop(); }catch(e){} this._rec=null; } if(this._stream){ try{ this._stream.getTracks().forEach(function(t){ t.stop(); }); }catch(e){} this._stream=null; } if(this.askBox){ try{ this.askBox.remove(); }catch(e){} this.askBox=null; } };
 
   /* ---------------- modal ---------------- */
   var MODAL=null;
@@ -578,7 +678,7 @@
       var c=$('vtCur'); if(c){ c.style.left=b.mode==='layman'?'74%':'24%'; c.style.top='150px'; } });
     tzAt(4000,function(){ var o=ov.querySelector('#vtPick .wbopt[data-m="'+b.mode+'"]'); if(o) o.classList.add('last'); });
     tzAt(4500,function(){ var p1=$('vtP1'), p2=$('vtP2'); if(!p1||!p2) return; p1.style.display='none'; p2.style.display='block';
-      _tzPlayer=new Player(p2, b, { inline:true, muted:true, onDone:function(){ if(_tzPlayer){ _tzPlayer.pause(); } } });
+      _tzPlayer=new Player(p2, b, { inline:true, muted:true, noAsk:true, onDone:function(){ if(_tzPlayer){ _tzPlayer.pause(); } } });
       _tzPlayer.speed=1.25; _tzPlayer.play(); });
   }
   window.mountVizTeaser=function(){ try{
