@@ -1252,7 +1252,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.11.11d';   // bump this each release
+const APP_VERSION='2026.11.11f';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -8037,7 +8037,7 @@ var DRILL_SET=null;
 function drillLoad(){
   if(window.MBDrill) return Promise.resolve(window.MBDrill);
   if(window._drillP) return window._drillP;
-  window._drillP=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='anatomy-drill.js?v=20261111';
+  window._drillP=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='anatomy-drill.js?v=20261111b';
     s.onload=function(){ res(window.MBDrill); }; s.onerror=function(){ window._drillP=null; rej(new Error('offline')); }; document.head.appendChild(s); });
   return window._drillP;
 }
