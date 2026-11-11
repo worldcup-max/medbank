@@ -28,6 +28,7 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
+import { buildBoardPrompt, normalizeBoard, boardKey, BOARD_MODES } from "./board.mjs";   // whiteboard Visualize (Standard / Layman)
 import { EXPLAINER_TEMPLATES, explainerExcerpt, explainerKey, buildExplainerPrompt, parseExplainerLesson } from "./explainer.mjs";   // 3D Tutor
 import { splitNote, loadManifest, plateTutorKey, buildPlateTutorPrompt, checkPlateTutor, plateAskKey, buildAskPrompt, checkAsk, buildExplainPrompt, checkExplain, plateInsights, PLATE_EVENT_KINDS } from "./plate-tutor.mjs";   // 3D Tutor · library plates, tutor from the note
 import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcerpt, autoCacheKey, scanCacheKey, mechKey } from "./explainer-auto.mjs";   // 3D Tutor instant builder
@@ -1860,6 +1861,51 @@ app.post("/visualize", async (req,res)=>{
     }
     try{ bp._chain = chainOf(bp); }catch(_){ bp._chain = []; }                 // the causal chain / tree traversal, in order (transparency / debugging) — QCV-02 guarded
     res.json({ ok:true, cached:false, blueprint:bp, qc_issues:ev.issues, completeness, viz_quota:{ limit, remaining:Math.max(0,limit-(used+1)), premium } });
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* =====================================================================
+ * WHITEBOARD VISUALIZE — POST /board {text, subject, mode:"standard"|"layman"}
+ * The new Visualize: a narrated whiteboard lesson (board.mjs). Shares the
+ * daily explainer limit and the visualizations cache with /visualize; the
+ * cache key includes the mode, so Standard and Layman are cached apart and a
+ * replay of either is free.
+ * ===================================================================== */
+app.post("/board", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const text = (req.body.text||"").toString().trim();
+    if(!text) return res.status(400).json({ error:"highlight some text first" });
+    if(text.length>2000) return res.status(400).json({ error:"that passage is very long — highlight one or two sentences (a single idea)" });
+    const subject = (req.body.subject||"").toString().slice(0,80);
+    const mode = BOARD_MODES.has(req.body.mode) ? req.body.mode : "standard";
+    const key = boardKey(textKey, text, mode);
+    try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
+      if(c.data && c.data.blueprint && c.data.blueprint.kind==="board"){ const n=normalizeBoard(c.data.blueprint, mode); if(n.board) return res.json({ ok:true, cached:true, board:n.board, viz_quota:await vizQuota(user.id, user.email) }); } }catch(_){}
+    const premium = await isPremium(user.id, user.email).catch(()=>false);
+    const limit = premium ? 10 : 3;
+    let used = 0;
+    try{ const since=new Date(); since.setUTCHours(0,0,0,0);
+      const cnt = await admin.from("viz_events").select("id",{ count:"exact", head:true }).eq("account_id",user.id).gte("created_at",since.toISOString());
+      if(cnt && cnt.error) console.error("[board] viz_events count FAILED for %s — daily cap NOT enforced this call: %s", user.id, cnt.error.message||cnt.error);
+      used = (cnt && !cnt.error) ? (cnt.count||0) : 0;
+      if(used >= limit) return res.status(429).json({ error:"daily_limit", limit, premium, viz_quota:{ limit, remaining:0, premium },
+        message: premium ? "You've used all 10 of today's explainers. They reset tomorrow."
+                         : "You've used all 3 of today's explainers. Upgrade to Premium for 10 a day." });
+    }catch(_){}
+    const prompt = buildBoardPrompt(text, subject, mode);
+    const gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:3000, temperature:mode==="layman"?0.6:0.25, json:true });
+    let out = normalizeBoard(parseBlueprint(gen.text), mode);
+    if(out.issues.length){                                   // one corrective retry; keep whichever drew
+      const fix = prompt + "\n\nYour previous JSON had these problems — fix ALL of them and return ONLY corrected JSON:\n- " + out.issues.join("\n- ") + "\n\nPREVIOUS:\n" + (gen.text||"").slice(0,3000);
+      try{ const gen2 = await generate({ model: BASIC_MODEL, prompt:fix, parts:[], images:[], max_tokens:3000, temperature:0.25, json:true });
+        const out2 = normalizeBoard(parseBlueprint(gen2.text), mode);
+        if(out2.board && (!out.board || out2.issues.length <= out.issues.length)) out = out2; }catch(e){ console.warn("[board] retry failed:", e.message); }
+    }
+    if(!out.board) return res.status(502).json({ error:"couldn't build this explainer — try selecting one clear idea, or try again in a moment" });
+    try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:"board:"+mode, subject, blueprint:out.board, verified:!out.issues.length }); }catch(_){}
+    try{ await admin.from("viz_events").insert({ account_id:user.id }); }catch(_){}
+    res.json({ ok:true, cached:false, board:out.board, viz_quota:{ limit, remaining:Math.max(0,limit-(used+1)), premium } });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
