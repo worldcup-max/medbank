@@ -1914,10 +1914,20 @@ app.post("/board", async (req,res)=>{
 /* ASK AUNTIE — POST /board/ask {board, step, q}. One shared question bank per board (visualizations row
  * "ask|<board identity>"): a question that means the same as one already answered replays that answer
  * (free); a new one is answered once and saved for every later student. Only the question text is kept,
- * never who asked. New answers are capped per student per day (in memory, so the cap resets if the
- * server restarts; reused and ready-made answers are never capped). */
+ * never who asked. A student gets ASK_DAILY new answers a day, counted in the board_asks table
+ * (board-asks.sql); replayed, "most asked" and ready-made answers are free. If that table is missing or
+ * unreachable, an in-memory count keeps the cap working until the server restarts. */
+const ASK_DAILY = 2;
 const _askDaily = new Map();
-function askUsed(uid){ const d=new Date().toISOString().slice(0,10), k=uid+"|"+d; return { k, n:_askDaily.get(k)||0 }; }
+async function askUsed(uid){
+  const d=new Date().toISOString().slice(0,10), k=uid+"|"+d, mem=_askDaily.get(k)||0;
+  try{ const since=new Date(); since.setUTCHours(0,0,0,0);
+    const c = await admin.from("board_asks").select("id",{ count:"exact", head:true }).eq("account_id",uid).gte("created_at",since.toISOString());
+    if(!c.error) return { k, n:Math.max(c.count||0, mem), db:true };
+    console.error("[board/ask] board_asks count failed — using in-memory cap: %s", c.error.message||c.error);
+  }catch(e){ console.error("[board/ask] board_asks count threw — using in-memory cap:", e.message); }
+  return { k, n:mem, db:false };
+}
 app.post("/board/ask", async (req,res)=>{
   try{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
@@ -1936,14 +1946,14 @@ app.post("/board/ask", async (req,res)=>{
     const reply = (x, reused)=> res.json({ ok:true, reused, answer:{ q:x.q, a:x.a, note:x.note||"", beyond:!!x.beyond } });
     const nq = normQ(q), hit = bank.findIndex(x=>normQ(x.q)===nq);
     if(hit>=0){ bank[hit].n=(bank[hit].n||0)+1; save(); return reply(bank[hit], true); }
-    const premium = await isPremium(user.id, user.email).catch(()=>false);
-    const cap = premium ? 30 : 10, u = askUsed(user.id);
-    if(u.n >= cap) return res.status(429).json({ error:"daily_limit", premium, message: premium ? "You've asked all 30 of today's new questions. Ready-made ones still work." : "You've asked all 10 of today's new questions. Ready-made ones still work, or upgrade to Premium for 30 a day." });
+    const u = await askUsed(user.id);
+    if(u.n >= ASK_DAILY) return res.status(429).json({ error:"daily_limit", message:"That's your "+ASK_DAILY+" new questions for today. Tap one of the questions below to hear its answer, or ask again tomorrow." });
     const gen = await generate({ model: BASIC_MODEL, prompt: buildBoardAskPrompt(board, step, q, bank), parts:[], images:[], max_tokens:700, temperature: board.mode==="layman"?0.5:0.25, json:true });
     const out = parseAsk(parseBlueprint(gen.text), bank.length);
     if(!out) return res.status(502).json({ error:"Auntie didn't catch that — try asking again" });
     if(out.same != null){ bank[out.same].n=(bank[out.same].n||0)+1; save(); return reply(bank[out.same], true); }
     _askDaily.set(u.k, u.n+1);
+    try{ await admin.from("board_asks").insert({ account_id:user.id }); }catch(_){}   // count this new answer against today's limit
     const entry = { q: out.q || q, a: out.a, note: out.note, beyond: out.beyond, n:1 };
     bank.push(entry); bank.sort((a,b)=>(b.n||0)-(a.n||0)); await save();
     try{ await admin.rpc("bump_ai_usage", { p_account:user.id, p_feature:"board_ask", p_tokens:0 }); }catch(_){}
