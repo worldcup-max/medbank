@@ -17,5 +17,6 @@ create table if not exists public.intervention_events (
   diagnosis_version    text,                 -- e.g. v1.5
   intervention_version text                  -- e.g. v1.6-phase1
 );
+alter table public.intervention_events enable row level security;   -- server only (service_role); no browser access
 create index if not exists intervention_events_acct_idx   on public.intervention_events (account_id, created_at);
 create index if not exists intervention_events_target_idx on public.intervention_events (target_id, created_at);

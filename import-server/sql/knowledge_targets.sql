@@ -86,4 +86,5 @@ create table if not exists public.retest_pool (
   served_at     timestamptz,
   unique(target_id, qh)                                          -- idempotent: same generated item can't double-insert
 );
+alter table public.retest_pool enable row level security;   -- server only (service_role); no browser access
 create index if not exists retest_pool_target_status_idx on public.retest_pool (target_id, status);

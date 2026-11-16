@@ -103,8 +103,13 @@
     overlay=ui(); document.body.appendChild(overlay);
     var timeEl=overlay.querySelector("#mbRecTime");
     overlay.querySelector("#mbRecCancel").onclick=function(){
-      if(elapsedSec()>15 && !confirm("Discard this recording? This can't be undone.")) return;   // REC-04
-      try{ if(rec&&rec.state!=="inactive"){ rec.onstop=null; rec.stop(); } }catch(_){} teardown();
+      var discard=function(){ try{ if(rec&&rec.state!=="inactive"){ rec.onstop=null; rec.stop(); } }catch(_){} teardown(); };
+      if(elapsedSec()>15){   // REC-04 — in-app modal (recording keeps going behind it), native confirm only as a fallback
+        if(window.mbConfirm) window.mbConfirm("Discard this recording?","What you've recorded so far will be lost. This can't be undone.",discard,{ok:"Discard",danger:true,cancel:"Keep recording"});
+        else if(confirm("Discard this recording? This can't be undone.")) discard();
+        return;
+      }
+      discard();
     };
 
     try{
