@@ -23,6 +23,7 @@ create table if not exists public.integrated_items (
   model                text,
   created_at           timestamptz not null default now()
 );
+alter table public.integrated_items enable row level security;   -- server only (service_role); no browser access
 create index if not exists integrated_items_status_idx on public.integrated_items (review_status);
 create index if not exists integrated_items_family_idx on public.integrated_items (integration_family);
 create index if not exists integrated_items_qid_idx on public.integrated_items (question_id);
