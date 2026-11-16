@@ -39,13 +39,14 @@
 try{ if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone){ location.replace('app.html'); } }catch(e){}</script>
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 
 <header>
   <div class="bar">
-    <a class="logo" href="index.html"><img src="icon.svg" alt="MedBank"> Med<span>Bank</span></a>
-    <input type="checkbox" class="navtog" id="navtog" aria-hidden="true">
-    <label class="hamb" for="navtog" aria-label="Open menu">☰</label>
-    <nav class="nav">
+    <a class="logo" href="index.html"><img src="icon.svg" alt=""> Med<span>Bank</span></a>
+    <input type="checkbox" class="navtog" id="navtog" aria-label="Menu" aria-controls="sitenav">
+    <label class="hamb" for="navtog" aria-hidden="true">☰</label>
+    <nav class="nav" id="sitenav" aria-label="Main">
       <a class="nl" href="#how">How it works</a>
       <div class="hasmenu" tabindex="0">
         <span class="nl">Features</span>
@@ -67,6 +68,7 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
     </nav>
   </div>
 </header>
+<main id="content" tabindex="-1">
 
 <!-- HERO -->
 <div class="hero">
@@ -95,8 +97,8 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
           </div>
           <div class="chips">
             <span class="chip" style="background:#eceaf1;color:#6b6480">12 Unfamiliar</span>
-            <span class="chip" style="background:#dcf3ee;color:#0d9488">6 Mastered</span>
-            <span class="chip" style="background:#fdf0dd;color:#b3791a">🔥 5-day streak</span>
+            <span class="chip" style="background:#dcf3ee;color:#0f766e">6 Mastered</span>
+            <span class="chip" style="background:#fdf0dd;color:#8a5a0f">🔥 5-day streak</span>
           </div>
         </div>
       </div></div>
@@ -177,7 +179,7 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
   <h2 class="h2">MedBank vs re-reading your slides</h2>
   <p class="sub">Highlighting and re-reading feel productive but fade fast. MedBank is built on what the evidence says actually works.</p>
   <div class="cmp"><table>
-    <thead><tr><th></th><th>MedBank</th><th>Re-reading &amp; highlighting</th></tr></thead>
+    <thead><tr><td></td><th>MedBank</th><th>Re-reading &amp; highlighting</th></tr></thead>
     <tbody>
       <tr><td>Active recall &amp; spaced repetition</td><td class="y">Built in</td><td class="n">Passive</td></tr>
       <tr><td>Study materials made for you</td><td class="y">In seconds</td><td class="n">Hours by hand</td></tr>
@@ -237,6 +239,8 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
   <p>Build your first study set free and feel the difference active recall makes.</p>
   <a class="btn big" href="app.html?welcome=1">Start free — build your first lecture</a>
 </div></div></section>
+
+</main>
 
 <footer><div class="wrap">
   <div class="fgrid">

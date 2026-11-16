@@ -25,13 +25,14 @@
 <link rel="stylesheet" href="../site.css">
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 
 <header>
   <div class="bar">
-    <a class="logo" href="../index.html"><img src="../icon.svg" alt="MedBank"> Med<span>Bank</span></a>
-    <input type="checkbox" class="navtog" id="navtog" aria-hidden="true">
-    <label class="hamb" for="navtog" aria-label="Open menu">☰</label>
-    <nav class="nav">
+    <a class="logo" href="../index.html"><img src="../icon.svg" alt=""> Med<span>Bank</span></a>
+    <input type="checkbox" class="navtog" id="navtog" aria-label="Menu" aria-controls="sitenav">
+    <label class="hamb" for="navtog" aria-hidden="true">☰</label>
+    <nav class="nav" id="sitenav" aria-label="Main">
       <a class="nl" href="../index.html#how">How it works</a>
       <div class="hasmenu" tabindex="0">
         <span class="nl">Features</span>
@@ -52,6 +53,7 @@
     </nav>
   </div>
 </header>
+<main id="content" tabindex="-1">
 
 <!-- HERO -->
 <div class="hero">
@@ -98,7 +100,7 @@
 #stWin .stq{font-size:16px;font-weight:700;line-height:1.4;margin:8px 0 14px;color:var(--ink)}
 #stWin .stopt{border:1.6px solid var(--line);border-radius:11px;padding:11px 13px;margin-top:9px;font-size:13.5px;display:flex;gap:11px;color:var(--ink)}
 #stWin .stopt .tag{width:23px;height:23px;border-radius:7px;background:#efeaf3;color:var(--dim);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
-#stWin .stopt.correct{border-color:#0d9488;background:#dcf3ee}#stWin .stopt.correct .tag{background:#0d9488;color:#fff}
+#stWin .stopt.correct{border-color:#0f766e;background:#dcf3ee}#stWin .stopt.correct .tag{background:#0d9488;color:#fff}
 #stWin .sthome{margin-top:14px}
 #stWin .sthh{font-size:19px;font-weight:800;color:var(--ink)}
 #stWin .sths{font-size:12.5px;color:var(--dim);margin:3px 0 14px}
@@ -185,6 +187,8 @@
   <p>Open MedBank and the timer does the honest counting — you just study.</p>
   <a class="btn big" href="../app.html?welcome=1">Start tracking free</a>
 </div></div></section>
+
+</main>
 
 <footer><div class="wrap">
   <div class="fgrid">

@@ -25,13 +25,14 @@
 <link rel="stylesheet" href="../site.css">
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 
 <header>
   <div class="bar">
-    <a class="logo" href="../index.html"><img src="../icon.svg" alt="MedBank"> Med<span>Bank</span></a>
-    <input type="checkbox" class="navtog" id="navtog" aria-hidden="true">
-    <label class="hamb" for="navtog" aria-label="Open menu">☰</label>
-    <nav class="nav">
+    <a class="logo" href="../index.html"><img src="../icon.svg" alt=""> Med<span>Bank</span></a>
+    <input type="checkbox" class="navtog" id="navtog" aria-label="Menu" aria-controls="sitenav">
+    <label class="hamb" for="navtog" aria-hidden="true">☰</label>
+    <nav class="nav" id="sitenav" aria-label="Main">
       <a class="nl" href="../index.html#how">How it works</a>
       <div class="hasmenu" tabindex="0">
         <span class="nl">Features</span>
@@ -52,6 +53,7 @@
     </nav>
   </div>
 </header>
+<main id="content" tabindex="-1">
 
 <!-- HERO -->
 <div class="hero">
@@ -68,7 +70,7 @@
     </div>
     <div>
       <div class="ftry">
-        <h4>Build a deck from…</h4>
+        <p class="ftry-h">Build a deck from…</p>
         <div class="tiles">
           <a class="tile" href="../app.html?welcome=1"><div class="ic">📄</div><b>A PDF or slides</b><span>lecture handout</span></a>
           <a class="tile" href="../app.html?welcome=1"><div class="ic">📷</div><b>Photos of notes</b><span>handwritten too</span></a>
@@ -178,6 +180,8 @@
   <p>Turn a lecture into flashcards and start studying in minutes — free.</p>
   <a class="btn big" href="../app.html?welcome=1">Make flashcards free</a>
 </div></div></section>
+
+</main>
 
 <footer><div class="wrap">
   <div class="fgrid">
