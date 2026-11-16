@@ -1,0 +1,19 @@
+# MedBank — https://medbank.com.ng
+# Crawlers may read the marketing pages and the app shell. Internal tooling, specs and
+# build material are kept out of search results. (This is not access control: everything
+# in this repository is public on GitHub Pages.)
+User-agent: *
+Disallow: /backend/
+Disallow: /import-server/
+Disallow: /viz-training/
+Disallow: /qa/
+Disallow: /OG/
+Disallow: /Claude%20outputs/
+Disallow: /explainer/tools/
+Disallow: /explainer/tests/
+Disallow: /*.md$
+Disallow: /*.pdf$
+Disallow: /*.txt$
+Allow: /robots.txt
+
+Sitemap: https://medbank.com.ng/sitemap.xml
