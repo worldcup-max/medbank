@@ -31,6 +31,9 @@
    {"@type":"Offer","name":"Premium (monthly)","price":"7999","priceCurrency":"NGN"}]}
 ]}
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap">
 <link rel="stylesheet" href="site.css">
 <script>/* installed-app users skip the marketing page and go straight into MedBank */
 try{ if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone){ location.replace('app.html'); } }catch(e){}</script>
@@ -70,13 +73,13 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
   <div class="wrap hgrid">
     <div>
       <span class="eyebrow">Built for medical &amp; health students</span>
-      <h1 class="h1">Turn any lecture into <span class="grad">active recall</span> that actually sticks.</h1>
+      <h1 class="h1">Turn any lecture into active recall that actually sticks.</h1>
       <p class="lead">Add a lecture — a PDF, photos of your notes, a YouTube link, or record it live — and MedBank builds your notes, flashcards, quizzes, a cram sheet and even a two-host podcast. Then it schedules your revision so you remember it on exam day.</p>
       <div class="cta-row">
         <a class="btn big" href="app.html?welcome=1">Start free — build your first lecture</a>
         <a class="btn sec big" href="#how">See how it works</a>
       </div>
-      <div class="social"><span class="dots"><i></i><i></i><i></i><i></i></span> Made by a medical student, for medical students.</div>
+      <div class="social">Made by a medical student, for medical students.</div>
     </div>
     <div>
       <div class="phone"><div class="screen">
@@ -99,6 +102,28 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
       </div></div>
     </div>
   </div>
+  <!-- RECALL CURVE: the signature moment. Positions are % of width; the SVG stretches, the pins and labels don't. -->
+  <div class="curve" aria-labelledby="curve-h">
+    <div class="wrap">
+      <div class="curve-head">
+        <h2 id="curve-h">Each review lands just before you'd forget, so it's still there on exam day.</h2>
+        <div class="curve-key" aria-hidden="true"><span><i></i>Reviewing on MedBank's schedule</span><span><i class="fade"></i>Reading it once</span></div>
+      </div>
+      <div class="curve-plot" role="img" aria-label="Chart: memory of a lecture read once fades steadily toward exam day. With reviews on day 1, 3, 7 and 16, memory is lifted back each time and fades more slowly, staying high at the exam.">
+        <svg viewBox="0 0 1000 150" preserveAspectRatio="none" aria-hidden="true">
+          <line class="axis" x1="0" y1="140" x2="1000" y2="140" vector-effect="non-scaling-stroke"/>
+          <path class="forget" d="M40,16 C110,100 260,128 960,138" vector-effect="non-scaling-stroke"/>
+          <path class="recall" d="M40,16 C70,70 105,86 150,92 L150,16 C190,58 240,74 290,79 L290,16 C350,48 420,62 490,66 L490,16 C580,40 690,50 790,53 L790,16 C850,26 910,30 960,32" vector-effect="non-scaling-stroke"/>
+        </svg>
+        <i class="rv" style="left:4%;--at:0"></i><span class="lb hide-sm" style="left:4%;--at:0">Lecture</span>
+        <i class="rv" style="left:15%;--at:.14"></i><span class="lb" style="left:15%;--at:.14">Day 1</span>
+        <i class="rv" style="left:29%;--at:.3"></i><span class="lb" style="left:29%;--at:.3">Day 3</span>
+        <i class="rv" style="left:49%;--at:.52"></i><span class="lb" style="left:49%;--at:.52">Day 7</span>
+        <i class="rv" style="left:79%;--at:.84"></i><span class="lb" style="left:79%;--at:.84">Day 16</span>
+        <i class="rv exam" style="left:96%;--at:1"></i><span class="lb exam" style="left:96%;--at:1">Exam</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- 60-SECOND PREVIEW -->
@@ -110,7 +135,7 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
 
 <!-- TRUST -->
 <div class="trust"><div class="wrap"><div class="row">
-  <span>📥 <b>PDF · Photos · YouTube · Live recording</b></span>
+  <span>📥 <b>PDFs, photos, YouTube or a live recording</b></span>
   <span>🧠 <b>Active recall + spaced repetition</b></span>
   <span>🎧 <b>Lecture podcasts</b></span>
   <span>📱 <b>Any device, add to home screen</b></span>
@@ -163,8 +188,8 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
   </table></div>
 </div></section>
 
-<!-- TESTIMONIALS (placeholder quotes — replace with real ones as you collect them) -->
-<section style="background:var(--soft)"><div class="wrap center">
+<!-- TESTIMONIALS: hidden until there are real student quotes. Remove "hidden" to show it again. -->
+<section hidden style="background:var(--soft)"><div class="wrap center">
   <div class="kicker">Loved by students</div>
   <h2 class="h2">Built with real med-school revision in mind</h2>
   <div class="tgrid" style="text-align:left">
@@ -176,7 +201,6 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
 
 <!-- PRICING -->
 <section id="pricing" style="background:var(--soft)"><div class="wrap center">
-  <div class="kicker">Pricing</div>
   <h2 class="h2">Start free. Upgrade when you need more.</h2>
   <p class="sub">Your first lecture is free forever, with everything on it. Pay monthly, or yearly and save 20%.</p>
   <div class="prices">
@@ -196,7 +220,6 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
 
 <!-- FAQ -->
 <section id="faq"><div class="wrap center">
-  <div class="kicker">FAQ</div>
   <h2 class="h2">Questions, answered</h2>
   <div class="faq" style="text-align:left">
     <details class="qa"><summary>Is it really free to start?</summary><div class="a">Yes. You can build one full lecture and use everything on it — notes, flashcards, quizzes, the podcast, the AI tutor and active recall — free, forever. You only pay when you want to import more lectures.</div></details>
