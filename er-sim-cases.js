@@ -25,6 +25,7 @@ window.ERSIM_CASES = [
 {
   id:'fever-body-pains', title:'Fever and body pains', setting:'gh', level:'Beginner', tutorial:true,
   patient:{ name:'Chidi Okonkwo', age:'23', ageYears:23, sex:'male', weight:'68 kg' },
+  look:{ build:'adult', skin:'#7a4a2a', shirt:'#3E7CB1', hair:'short' },
   speaker:'Chidi', persona:'A tired but chatty final-year engineering student. Speaks Nigerian English, answers clearly.',
   arrival:'Chidi walks in with his roommate. "Doctor, this fever has refused to go."',
   triage:'Triage nurse: alert, walking, febrile. Category: yellow.',
@@ -59,7 +60,7 @@ window.ERSIM_CASES = [
     rbg:'5.6 mmol/L'
   },
   problems:[
-    { id:'fever', cue:'Feverish and shivering.', fixedBy:['paracetamol','cool'], onFix:{ temp:-1.6, hr:-14 }, over:30 },
+    { id:'fever', look:'hot', cue:'Feverish and shivering.', fixedBy:['paracetamol','cool'], onFix:{ temp:-1.6, hr:-14 }, over:30 },
     { id:'malaria', fixedBy:['act','artesunate'] }
   ],
   critical:[
@@ -110,6 +111,7 @@ window.ERSIM_CASES = [
 {
   id:'child-fever-fit', title:'A child with fever who is fitting', setting:'phc', level:'Core',
   patient:{ name:'Aisha Lawal', age:'3', ageYears:3, sex:'female', weight:'13 kg' },
+  look:{ build:'child', skin:'#6b3f22', shirt:'#F2B134', hair:'puffs' },
   speaker:'Aisha\'s mother', persona:'Aisha\'s mother, frightened, speaks Hausa; a community health worker translates in short sentences. She answers what she is asked.',
   arrival:'A mother runs in carrying a limp child who is jerking. The CHEW translates: "She has been fitting since they left the house."',
   triage:'Emergency: child convulsing on arrival.',
@@ -144,10 +146,10 @@ window.ERSIM_CASES = [
     urinalysis:'Unable to obtain: no urine passed yet.'
   },
   problems:[
-    { id:'seizure', cue:'Still convulsing.', drift:{ spo2:-3, hr:2 }, fixedBy:['benzo'], onFix:{ spo2:4, hr:-14, gcs:2 }, fixText:'The jerking stops. She is post-ictal.' },
+    { id:'seizure', look:'fitting', cue:'Still convulsing.', drift:{ spo2:-3, hr:2 }, fixedBy:['benzo'], onFix:{ spo2:4, hr:-14, gcs:2 }, fixText:'The jerking stops. She is post-ictal.' },
     { id:'hypo', drift:{ gcs:-0.8, rbg:-0.3 }, fixedBy:['dextrose10'], onFix:{ gcs:3, rbg:4.6 }, over:10, fixText:'After the dextrose she starts to move and moan.' },
     { id:'hypoxia', fixedBy:['o2_nasal','o2_mask'], onFix:{ spo2:5 } },
-    { id:'fever', fixedBy:['paracetamol','cool'], onFix:{ temp:-1.4, hr:-10 }, over:30 },
+    { id:'fever', look:'hot', fixedBy:['paracetamol','cool'], onFix:{ temp:-1.4, hr:-10 }, over:30 },
     { id:'malaria', fixedBy:['artesunate','artesunate_pr'] }
   ],
   critical:[
@@ -196,6 +198,7 @@ window.ERSIM_CASES = [
 {
   id:'scd-chest-pain', title:'Chest pain and fast breathing in a teenager', setting:'gh', level:'Core',
   patient:{ name:'Tobi Adeyemi', age:'16', ageYears:16, sex:'female', weight:'42 kg' },
+  look:{ build:'teen', skin:'#6e4327', shirt:'#C2577A', hair:'braids' },
   speaker:'Tobi (her mother sometimes adds details)', persona:'A 16-year-old girl in pain who speaks in short phrases because she is breathless. Her mother is anxious and helpful.',
   arrival:'Tobi is wheeled in, holding her right side. Her mother says: "Her crisis started in her legs, now she can\'t breathe well."',
   triage:'Triage: tachypnoeic, SpO₂ 88% on air. Category: orange.',
@@ -234,10 +237,10 @@ window.ERSIM_CASES = [
     rbg:'6.0 mmol/L'
   },
   problems:[
-    { id:'hypoxia', cue:'Breathing fast, SpO₂ low.', drift:{ spo2:-1.5, rr:1 }, fixedBy:['o2_nasal','o2_mask'], onFix:{ spo2:8, rr:-4 } },
-    { id:'pain', cue:'Crying with pain.', drift:{ hr:1 }, fixedBy:['morphine'], onFix:{ hr:-12, rr:-4 }, fixText:'The pain settles. She can take deeper breaths.' },
+    { id:'hypoxia', look:'distress', cue:'Breathing fast, SpO₂ low.', drift:{ spo2:-1.5, rr:1 }, fixedBy:['o2_nasal','o2_mask'], onFix:{ spo2:8, rr:-4 } },
+    { id:'pain', look:'pain', cue:'Crying with pain.', drift:{ hr:1 }, fixedBy:['morphine'], onFix:{ hr:-12, rr:-4 }, fixText:'The pain settles. She can take deeper breaths.' },
     { id:'infection', fixedBy:['ceftriaxone'], onFix:{ temp:-0.8 }, over:60 },
-    { id:'anaemia', drift:{ spo2:-0.4, hr:0.5 }, fixedBy:['blood'], onFix:{ hr:-8, spo2:2 }, over:30 }
+    { id:'anaemia', look:'pale', drift:{ spo2:-0.4, hr:0.5 }, fixedBy:['blood'], onFix:{ hr:-8, spo2:2 }, over:30 }
   ],
   critical:[
     { label:'Gave oxygen for SpO₂ under 94%', any:['o2_nasal','o2_mask'], by:10, pts:12 },
@@ -286,6 +289,7 @@ window.ERSIM_CASES = [
 {
   id:'farm-snakebite', title:'Bitten on the foot at the farm', setting:'gh', level:'Core',
   patient:{ name:'Musa Ibrahim', age:'34', ageYears:34, sex:'male', weight:'70 kg' },
+  look:{ build:'adult', skin:'#5c3a21', shirt:'#7B8F4A', hair:'cap', footOut:true, tourniquet:true },
   speaker:'Musa (his brother sometimes speaks)', persona:'A groundnut farmer in pain and frightened, speaks Hausa-accented English. His brother brought him and helps.',
   arrival:'Musa limps in supported by his brother. A rope is tied tightly above his right knee. "A snake bite me in the farm."',
   triage:'Triage: snakebite, bleeding from the gums. Category: orange.',
@@ -322,10 +326,10 @@ window.ERSIM_CASES = [
     rbg:'5.8 mmol/L'
   },
   problems:[
-    { id:'coagulopathy', cue:'Oozing blood from the gums and the bite.', drift:{ sbp:-2.5, hr:2 }, fixedBy:['antivenom'], onFix:{ sbp:10, hr:-10 }, over:30, fixText:'The oozing from the gums slows.' },
+    { id:'coagulopathy', look:'bleeding', cue:'Oozing blood from the gums and the bite.', drift:{ sbp:-2.5, hr:2 }, fixedBy:['antivenom'], onFix:{ sbp:10, hr:-10 }, over:30, fixText:'The oozing from the gums slows.' },
     { id:'tourniquet', cue:'A tight rope is still tied round the leg.', fixedBy:['remove_tourniquet'] },
-    { id:'pain', fixedBy:['paracetamol','morphine'], onFix:{ hr:-6 } },
-    { id:'reaction', latent:true, cue:'Itchy rash, wheeze and dropping BP after the antivenom.', wakeText:'Fifteen minutes into the antivenom he becomes itchy with hives, wheezes and his BP falls.',
+    { id:'pain', look:'pain', fixedBy:['paracetamol','morphine'], onFix:{ hr:-6 } },
+    { id:'reaction', look:'rash', latent:true, cue:'Itchy rash, wheeze and dropping BP after the antivenom.', wakeText:'Fifteen minutes into the antivenom he becomes itchy with hives, wheezes and his BP falls.',
       drift:{ sbp:-8, spo2:-3, hr:4 }, fixedBy:['adrenaline_im'], onFix:{ sbp:22, spo2:5, hr:-12 }, fixText:'The rash and wheeze settle after the adrenaline.' }
   ],
   triggers:[ { after:'antivenom', delay:15, problem:'reaction' } ],
@@ -377,6 +381,7 @@ window.ERSIM_CASES = [
 {
   id:'pregnant-fit', title:'A pregnant woman with headache who had a fit', setting:'gh', level:'Core',
   patient:{ name:'Blessing Eze', age:'24', ageYears:24, sex:'female', weight:'68 kg' },
+  look:{ build:'adult', skin:'#7a4a2a', shirt:'#8E5BB5', hair:'headwrap', wrap:'#E0A23B', pregnant:true },
   speaker:'Blessing\'s husband (Blessing is drowsy)', persona:'Her husband, worried, speaks Nigerian English. Blessing is drowsy and answers only simple questions.',
   arrival:'Her husband brings Blessing in a taxi. "She fell down and was shaking in the house. She is pregnant."',
   triage:'Triage: pregnant, post-convulsion, BP very high. Category: red.',
@@ -417,7 +422,7 @@ window.ERSIM_CASES = [
   },
   problems:[
     { id:'bp', cue:'Blood pressure dangerously high.', drift:{ sbp:1.5, dbp:1 }, fixedBy:['hydralazine','labetalol','nifedipine'], onFix:{ sbp:-26, dbp:-14 } },
-    { id:'refit', latent:true, preventable:true, fixedBy:['mgso4'], cue:'Convulsing again.', wakeText:'She starts to convulse again.', drift:{ spo2:-5, hr:3 }, onFix:{ spo2:6, hr:-8 }, fixText:'The fit stops.' }
+    { id:'refit', look:'fitting', latent:true, preventable:true, fixedBy:['mgso4'], cue:'Convulsing again.', wakeText:'She starts to convulse again.', drift:{ spo2:-5, hr:3 }, onFix:{ spo2:6, hr:-8 }, fixText:'The fit stops.' }
   ],
   timers:[ { at:14, problem:'refit', unless:['mgso4'] } ],
   critical:[
@@ -466,6 +471,7 @@ window.ERSIM_CASES = [
 {
   id:'okada-crash', title:'Motorbike crash, struggling to breathe', setting:'th', level:'Advanced',
   patient:{ name:'Emeka Nwosu', age:'29', ageYears:29, sex:'male', weight:'75 kg' },
+  look:{ build:'adult', skin:'#5c3a21', shirt:'#E5A33A', hair:'short', abrasions:true },
   speaker:'Emeka (very breathless)', persona:'A commercial motorcycle rider, very breathless, answers in one or two words. A bystander who brought him adds details.',
   arrival:'Emeka is carried in by bystanders. "Car jam his okada. He no fit breathe well."',
   triage:'Triage: trauma, RR 36, SpO₂ 84%. Category: red.',
@@ -500,11 +506,11 @@ window.ERSIM_CASES = [
     rbg:'6.4 mmol/L'
   },
   problems:[
-    { id:'tension', cue:'Getting more breathless, neck veins distended.', drift:{ spo2:-4, sbp:-6, hr:5, rr:1 }, fixedBy:['needle_decomp','chest_drain'], onFix:{ spo2:10, sbp:26, hr:-22, rr:-10 }, over:10, fixText:'There\'s a hiss of air. His colour and breathing improve.' },
+    { id:'tension', look:'distress', cue:'Getting more breathless, neck veins distended.', drift:{ spo2:-4, sbp:-6, hr:5, rr:1 }, fixedBy:['needle_decomp','chest_drain'], onFix:{ spo2:10, sbp:26, hr:-22, rr:-10 }, over:10, fixText:'There\'s a hiss of air. His colour and breathing improve.' },
     { id:'hypoxia', fixedBy:['o2_mask','o2_nasal'], onFix:{ spo2:4 } },
     { id:'bleed', drift:{ sbp:-0.8, hr:0.6 }, fixedBy:['blood','ns_bolus'], onFix:{ sbp:8, hr:-8 } },
-    { id:'pain', fixedBy:['morphine'], onFix:{ hr:-6, rr:-3 } },
-    { id:'reaccumulate', latent:true, preventable:true, cue:'Breathless again: the pneumothorax is re-accumulating.', wakeText:'His breathing worsens again. The cannula has kinked.', drift:{ spo2:-3, sbp:-4, hr:3 }, fixedBy:['chest_drain'], onFix:{ spo2:8, sbp:16, hr:-14 } },
+    { id:'pain', look:'pain', fixedBy:['morphine'], onFix:{ hr:-6, rr:-3 } },
+    { id:'reaccumulate', look:'distress', latent:true, preventable:true, cue:'Breathless again: the pneumothorax is re-accumulating.', wakeText:'His breathing worsens again. The cannula has kinked.', drift:{ spo2:-3, sbp:-4, hr:3 }, fixedBy:['chest_drain'], onFix:{ spo2:8, sbp:16, hr:-14 } },
     { id:'drain', latent:true, preventable:true, fixedBy:['chest_drain'] }
   ],
   triggers:[ { after:'needle_decomp', delay:25, problem:'reaccumulate', unless:['chest_drain'] } ],
@@ -555,6 +561,7 @@ window.ERSIM_CASES = [
 {
   id:'diabetic-vomiting', title:'Vomiting and belly pain in a young diabetic', setting:'gh', level:'Core',
   patient:{ name:'Fatima Bello', age:'19', ageYears:19, sex:'female', weight:'52 kg' },
+  look:{ build:'teen', skin:'#6e4327', shirt:'#2F9E8F', hair:'hijab', wrap:'#3A3F7A' },
   speaker:'Fatima (her aunt adds details)', persona:'A 19-year-old student, drowsy and breathing deeply. Her aunt answers when Fatima is too tired.',
   arrival:'Fatima\'s aunt helps her in. "She has been vomiting since yesterday. She has sugar disease."',
   triage:'Triage: drowsy, deep rapid breathing, glucometer reads HI. Category: orange.',
@@ -591,8 +598,8 @@ window.ERSIM_CASES = [
     bcult:'Pending'
   },
   problems:[
-    { id:'dehydration', cue:'Dry, weak fast pulse.', drift:{ sbp:-2, hr:2 }, fixedBy:['ns_bolus'], onFix:{ sbp:16, hr:-16 }, over:30, fixText:'Her pulse settles a little with the fluids.' },
-    { id:'ketoacidosis', cue:'Deep sighing breaths.', drift:{ gcs:-0.4, rr:0.6 }, fixedBy:['insulin_frii'], onFix:{ rr:-10, gcs:1, rbg:-14 }, over:90 },
+    { id:'dehydration', look:'dry', cue:'Dry, weak fast pulse.', drift:{ sbp:-2, hr:2 }, fixedBy:['ns_bolus'], onFix:{ sbp:16, hr:-16 }, over:30, fixText:'Her pulse settles a little with the fluids.' },
+    { id:'ketoacidosis', look:'distress', cue:'Deep sighing breaths.', drift:{ gcs:-0.4, rr:0.6 }, fixedBy:['insulin_frii'], onFix:{ rr:-10, gcs:1, rbg:-14 }, over:90 },
     { id:'hypok', latent:true, preventable:true, cue:'Potassium is falling with insulin: arrhythmia risk.', wakeText:'The monitor shows ectopic beats. Potassium is falling.', drift:{ sbp:-5, hr:-3 }, fixedBy:['kcl'], onFix:{ sbp:10, hr:4 } },
     { id:'vomit', fixedBy:['ngt'] }
   ],
@@ -644,6 +651,7 @@ window.ERSIM_CASES = [
 {
   id:'watery-diarrhoea', title:'Watery diarrhoea during the rainy season', setting:'phc', level:'Core',
   patient:{ name:'Halima Yusuf', age:'27', ageYears:27, sex:'female', weight:'55 kg' },
+  look:{ build:'adult', skin:'#6b3f22', shirt:'#D0643A', hair:'headwrap', wrap:'#2E7D5B' },
   speaker:'Halima (her husband helps)', persona:'A trader, weak and lethargic, speaks slowly. Her husband is worried and mentions that neighbours are also sick.',
   arrival:'Her husband carries Halima in. "She has been passing water like rice water since morning. Many people in our area are sick like this."',
   triage:'Triage: lethargic, weak pulse. Category: red.',
@@ -677,7 +685,7 @@ window.ERSIM_CASES = [
     upt:'Negative'
   },
   problems:[
-    { id:'dehydration', cue:'Severe dehydration: weak pulse, cold hands.', drift:{ sbp:-3, hr:3, gcs:-0.2 }, fixedBy:['rl_planc','ns_bolus'], need:1, onFix:{ sbp:32, hr:-36, gcs:1 }, over:45, fixText:'Her pulse becomes stronger as the Ringer\'s lactate runs in.' },
+    { id:'dehydration', look:'dry', cue:'Severe dehydration: weak pulse, cold hands.', drift:{ sbp:-3, hr:3, gcs:-0.2 }, fixedBy:['rl_planc','ns_bolus'], need:1, onFix:{ sbp:32, hr:-36, gcs:1 }, over:45, fixText:'Her pulse becomes stronger as the Ringer\'s lactate runs in.' },
     { id:'ongoing', fixedBy:['ors','doxy'] }
   ],
   critical:[

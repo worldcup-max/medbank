@@ -421,7 +421,7 @@ function caseById(id){ return cases().filter(function(c){ return c.id===id; })[0
 function e(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]; }); }
 function on(){ try{ var C=root.MEDBANK_CONFIG||{}; if(C.FEATURES&&C.FEATURES.ER_SIM) return true; return root.localStorage&&localStorage.mbersim==='1'; }catch(_){ return false; } }
 
-var RUN=null, CASE=null, TAB='talk', CHAT=[], BUSY=false, DEBRIEF=null, FILTER='all';
+var RUN=null, CASE=null, TAB='talk', CHAT=[], BUSY=false, DEBRIEF=null, FILTER='all', LAST=null;
 var RUN_KEY='mb_ersim_run';
 function saveRun(){ try{ if(RUN&&!RUN.ended) localStorage.setItem(RUN_KEY, JSON.stringify({ run:RUN, chat:CHAT })); else localStorage.removeItem(RUN_KEY); }catch(_){} }
 function loadRun(id){ try{ var o=JSON.parse(localStorage.getItem(RUN_KEY)||'null'); if(o&&o.run&&o.run.caseId===id&&!o.run.ended){ RUN=o.run; CHAT=o.chat||[]; return true; } }catch(_){} return false; }
@@ -453,6 +453,7 @@ function css(){
   '.ers-top{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0 10px;margin:-8px 0 8px}',
   '.ers-pt{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}',
   '.ers-pt b{font-size:15px}',
+  '.ers-bed{margin-top:8px;max-width:760px}',
   '.ers-clock{font-variant-numeric:tabular-nums;font-weight:800;background:var(--panel2);border-radius:8px;padding:4px 10px;font-size:14px}',
   '.ers-mon{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:8px;background:#0e1420;border-radius:12px;padding:8px}',
   '.ers-vt{text-align:center;padding:4px 2px;border-radius:8px}',
@@ -509,6 +510,7 @@ function css(){
   '.ers-items .n{display:block;color:var(--dim);font-size:12.5px;margin-top:2px}',
   '.ers-teach li{margin-bottom:6px;font-size:14px;line-height:1.5}'
   ].join('\n');
+  if(root.ERSIM_SCENE) st.textContent+='\n'+root.ERSIM_SCENE.css;
   document.head.appendChild(st);
 }
 
@@ -645,6 +647,7 @@ function shift(){
   var h='<div class="ers-top"><div class="ers-pt"><div><a href="#/ersim" class="ers-meta">← Cases</a><br><b>'+e(p.name)+', '+e(p.age)+' '+e(p.sex)+(p.weight?' · '+e(p.weight):'')+'</b><div class="ers-meta">'+e(SETTINGS[CASE.setting].label)+' · '+e(CASE.title)+'</div></div>'+
     '<div style="display:flex;gap:6px;align-items:center"><span class="ers-clock" aria-label="Time since arrival">⏱ '+RUN.t+' min</span>'+
     '<button class="btn" '+(RUN.ended?'disabled':'')+' onclick="MB_ERSIM.wait(5)">Watch 5 min</button></div></div>'+
+    (root.ERSIM_SCENE?'<div class="ers-bed">'+root.ERSIM_SCENE.svg(CASE, RUN, LAST)+'</div>':'')+
     monitor()+
     '<div class="ers-status'+(st.stable?' ok':'')+'" role="status">'+(st.cues.concat(st.warn).map(e).join(' · ')||'No new concerns on the monitor. Keep reassessing.')+'</div>'+
     hint()+
@@ -689,7 +692,7 @@ function page(caseId){
   if(!on()) return '<h1>🚑 ER Sim</h1><div class="empty" style="text-align:left">ER Sim is switched off. Turn on <b>FEATURES.ER_SIM</b> in config.js, or run <code>localStorage.mbersim=\'1\'</code> on your own device and reload.</div>';
   if(!caseId){ CASE=null; DEBRIEF=null; return lobby(); }
   var c=caseById(caseId); if(!c){ return '<h1>Case not found</h1><p><a href="#/ersim">Back to cases</a></p>'; }
-  if(!CASE || CASE.id!==c.id){ CASE=c; DEBRIEF=null; TAB='talk'; if(!loadRun(c.id)){ RUN=ENGINE.newRun(c); CHAT=[]; } }
+  if(!CASE || CASE.id!==c.id){ CASE=c; DEBRIEF=null; TAB='talk'; LAST=null; if(!loadRun(c.id)){ RUN=ENGINE.newRun(c); CHAT=[]; } }
   if(DEBRIEF) return debrief();
   if(RUN.ended && RUN.outcome==='died' && !DEBRIEF){ /* fall through: show the shift with the arrest in the log, then Decide to debrief */ }
   return shift();
@@ -736,7 +739,7 @@ root.MB_ERSIM={
   open:function(id){ CASE=null; DEBRIEF=null; location.hash='#/ersim/'+id; },
   filter:function(f){ FILTER=f; draw(); },
   tab:function(t){ TAB=t; draw(); },
-  act:function(id){ var r=ENGINE.act(CASE, RUN, id); after(r&&r.text); },
+  act:function(id){ var r=ENGINE.act(CASE, RUN, id); if(r&&r.ok) LAST={ id:id, at:Date.now() }; after(r&&r.text); },
   ask:function(id){ var h=(CASE.history||[]).filter(function(x){ return x.id===id; })[0]; if(!h) return; CHAT.push({who:'me',text:h.q}); var a=ENGINE.ask(CASE, RUN, id); CHAT.push({who:'pt',text:a}); after(); },
   askFree:askFree,
   exam:function(id){ ENGINE.examine(CASE, RUN, id); after(); },
@@ -749,6 +752,6 @@ root.MB_ERSIM={
     try{ localStorage.removeItem(RUN_KEY); }catch(_){}
     draw(); root.scrollTo&&root.scrollTo(0,0);
   },
-  restart:function(){ RUN=ENGINE.newRun(CASE); CHAT=[]; DEBRIEF=null; TAB='talk'; saveRun(); draw(); }
+  restart:function(){ LAST=null; RUN=ENGINE.newRun(CASE); CHAT=[]; DEBRIEF=null; TAB='talk'; saveRun(); draw(); }
 };
 })(typeof window!=='undefined'?window:globalThis);
