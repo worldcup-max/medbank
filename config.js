@@ -81,5 +81,7 @@ window.MEDBANK_CONFIG = {
   //   LEARNING_EVENTS = build 01: the durable append-only learning ledger (learning-events.js →
   //                  Supabase learning_events). Write-only: nothing in the learning path reads it.
   //                  Ships DARK. Turn on only after the verification report passes.
-  FEATURES: { LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, WHITEBOARD: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false }
+  //   ER_SIM      = the emergency room simulator (er-sim.js, route #/ersim). Default OFF until a clinician has
+  //                  reviewed the cases (ER-SIM.md). To try it on your own device: localStorage.mbersim='1', reload.
+  FEATURES: { ER_SIM: false, LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, WHITEBOARD: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false }
 };

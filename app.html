@@ -1273,7 +1273,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.11.16d';   // bump this each release
+const APP_VERSION='2026.11.16e';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -2250,6 +2250,7 @@ function renderNav(){
   h += it('plan','🗓','This week',planCount()||'',r==='plan');
   h += it('exam','📝','Mock exam','',r==='exam');
   h += it('mega','🧩','Mega Q-bank','',r==='mega');
+  try{ if(window.MB_ERSIM && MB_ERSIM.on()) h += it('ersim','🚑','ER Sim','',r==='ersim'||r.startsWith('ersim/')); }catch(e){}
   h += it('week','📊','Progress','',r==='week');
   h += '<div class="navdiv"></div>';
   h += grp('lib','📚','Library');
@@ -8114,6 +8115,7 @@ function render(){
     case 'folders':   html=pageFolders(); break;
     case 'folder':    html=pageFolder(p[1]); break;
     case 'solve':     html=pageSolve(); break;
+    case 'ersim':     html=window.MB_ERSIM?MB_ERSIM.page(p[1]):pageHome(); break;   // ER Sim (er-sim.js); FEATURES.ER_SIM or localStorage.mbersim='1'
     case 'lecturer':  html=pageLecturer(p[1]); break;
     case 'topic':     html=pageTopic(p[1]); break;
     case 'cards':     html=pageCards(p[1]); break;
@@ -10914,6 +10916,8 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 })();
 </script>
 <script src="whiteboard.js?v=20261111e"></script>   <!-- whiteboard Visualize (Standard / Layman) — takes over aiVisualize; FEATURES.WHITEBOARD=false turns it off -->
+<script src="er-sim.js?v=20261116"></script>   <!-- ER Sim engine + screens (FEATURES.ER_SIM); inert while the flag is off -->
+<script src="er-sim-cases.js?v=20261116"></script>   <!-- ER Sim cases: original, clinician review before going live -->
 <script src="a11y.js?v=20261116"></script>   <!-- accessibility layer: keyboard access for clickable cards, dialog focus, toggle states, live toasts -->
 </body>
 </html>
