@@ -11,13 +11,14 @@
 <link rel="stylesheet" href="../site.css">
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 
 <header>
   <div class="bar">
-    <a class="logo" href="../index.html"><img src="../icon.svg" alt="MedBank"> Med<span>Bank</span></a>
-    <input type="checkbox" class="navtog" id="navtog" aria-hidden="true">
-    <label class="hamb" for="navtog" aria-label="Open menu">☰</label>
-    <nav class="nav">
+    <a class="logo" href="../index.html"><img src="../icon.svg" alt=""> Med<span>Bank</span></a>
+    <input type="checkbox" class="navtog" id="navtog" aria-label="Menu" aria-controls="sitenav">
+    <label class="hamb" for="navtog" aria-hidden="true">☰</label>
+    <nav class="nav" id="sitenav" aria-label="Main">
       <a class="nl" href="../index.html#how">How it works</a>
       <div class="hasmenu" tabindex="0">
         <span class="nl">Features</span>
@@ -38,6 +39,7 @@
     </nav>
   </div>
 </header>
+<main id="content" tabindex="-1">
 
 <!-- HERO -->
 <div class="hero">
@@ -54,7 +56,7 @@
     </div>
     <div>
       <div class="ftry">
-        <h4>📝 It marks what you write</h4>
+        <p class="ftry-h">📝 It marks what you write</p>
         <div style="font-size:13px;color:var(--dim);margin:4px 0 8px">Q: Why not examine the throat in epiglottitis?</div>
         <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:12.5px;color:var(--ink)">"It can trigger complete airway obstruction."</div>
         <div style="display:flex;align-items:center;gap:10px;margin-top:10px"><div style="font-size:22px;font-weight:800;color:var(--violet-d)">8/10</div><div style="flex:1;height:7px;background:#ece7f5;border-radius:5px;overflow:hidden"><div style="width:80%;height:100%;background:linear-gradient(90deg,#3ecf8e,#14b8a6)"></div></div></div>
@@ -70,7 +72,7 @@
 #wtWin .wtag.fib{background:#e7edfb;color:#3b5bdb}#wtWin .wtag.sa{background:#efe7fb;color:var(--violet-d)}
 #wtWin .wsent{font-size:16px;line-height:1.75;color:var(--ink);font-weight:600}
 #wtWin .wblank{border:none;border-bottom:2px solid var(--violet);min-width:118px;font-size:15px;font-weight:800;color:var(--violet-d);text-align:center;padding:0 4px}
-#wtWin .wblank.ok{border-color:#0d9488;color:#0d7a68}
+#wtWin .wblank.ok{border-color:#0f766e;color:#0d7a68}
 #wtWin .wbtn{border:none;background:var(--violet);color:#fff;font-weight:800;font-size:13px;padding:9px 16px;border-radius:10px;margin-top:16px}
 #wtWin .wres{margin-top:14px;font-weight:800;font-size:13.5px}
 #wtWin .wres.ok{color:#0d7a68}
@@ -166,6 +168,8 @@
   <p>Build a lecture and write your first answer — free.</p>
   <a class="btn big" href="../app.html?welcome=1">Test yourself free</a>
 </div></div></section>
+
+</main>
 
 <footer><div class="wrap">
   <div class="fgrid">

@@ -11,13 +11,14 @@
 <link rel="stylesheet" href="../site.css">
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 
 <header>
   <div class="bar">
-    <a class="logo" href="../index.html"><img src="../icon.svg" alt="MedBank"> Med<span>Bank</span></a>
-    <input type="checkbox" class="navtog" id="navtog" aria-hidden="true">
-    <label class="hamb" for="navtog" aria-label="Open menu">☰</label>
-    <nav class="nav">
+    <a class="logo" href="../index.html"><img src="../icon.svg" alt=""> Med<span>Bank</span></a>
+    <input type="checkbox" class="navtog" id="navtog" aria-label="Menu" aria-controls="sitenav">
+    <label class="hamb" for="navtog" aria-hidden="true">☰</label>
+    <nav class="nav" id="sitenav" aria-label="Main">
       <a class="nl" href="../index.html#how">How it works</a>
       <div class="hasmenu" tabindex="0">
         <span class="nl">Features</span>
@@ -38,6 +39,7 @@
     </nav>
   </div>
 </header>
+<main id="content" tabindex="-1">
 
 <!-- HERO -->
 <div class="hero">
@@ -54,7 +56,7 @@
     </div>
     <div>
       <div class="ftry">
-        <h4>💬 Ask it anything about your lecture</h4>
+        <p class="ftry-h">💬 Ask it anything about your lecture</p>
         <div style="background:#f4f0fd;border-radius:12px;padding:12px 14px;font-size:13px;color:var(--ink);margin-top:4px"><b>You:</b> Why is the vomiting non-bilious?</div>
         <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--ink);margin-top:8px"><b>Tutor:</b> The block is at the pylorus — above where bile enters. So feed comes back up, but bile never reaches it.<div style="margin-top:8px;font-size:11px;color:var(--violet-d);font-weight:700">📖 Pyloric stenosis · your note</div></div>
         <a class="btn block" href="../app.html?welcome=1" style="margin-top:12px;justify-content:center">Try the tutor →</a>
@@ -179,6 +181,8 @@
   <p>Build a lecture and ask your tutor anything — free.</p>
   <a class="btn big" href="../app.html?welcome=1">Ask your first question free</a>
 </div></div></section>
+
+</main>
 
 <footer><div class="wrap">
   <div class="fgrid">

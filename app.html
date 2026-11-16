@@ -14,7 +14,8 @@
 <style>
 :root{
   --bg:#f6f5fb; --panel:#ffffff; --panel2:#f1eefb; --line:#e6e3f0;
-  --text:#1c1830; --dim:#5c5570; --dimmer:#8b84a0;
+  --text:#1c1830; --dim:#5c5570; --dimmer:#6e6787;   /* a11y: --dimmer was #8b84a0 (3.6:1 on white), now 5.3:1 */
+  --recall-tx:#0f766e; --com-tx:#a16207;   /* text-safe teal/amber (≥4.5:1 on white); --recall/--com stay as fills */
   --accent:#5b21b6; --ped:#0d9488; --og:#5b21b6; --com:#c2790a;
   --primer:#5b21b6; --recall:#0d9488;
   --card:#ffffff; --brand:#5b3df5;
@@ -27,7 +28,8 @@
 /* ---- dark theme: same layout, night palette ---- */
 html[data-theme="dark"]{
   --bg:#100d1b; --panel:#191529; --panel2:#221c37; --line:#302847;
-  --text:#ece9f6; --dim:#a49cbd; --dimmer:#7d7597;
+  --text:#ece9f6; --dim:#a49cbd; --dimmer:#8f88a8;   /* a11y: was #7d7597 (4.1:1 on panel), now 5.3:1 */
+  --recall-tx:#2dd4bf; --com-tx:#fbbf24;
   --accent:#a78bfa; --ped:#2dd4bf; --og:#a78bfa; --com:#fbbf24;
   --primer:#a78bfa; --recall:#2dd4bf;
   --card:#191529; --brand:#a78bfa;
@@ -109,7 +111,7 @@ h2{font-size:20px;margin:34px 0 12px}
 .row .meta{font-size:12.5px;color:var(--dim);margin-top:2px}
 .row .st{flex:0 0 auto;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
   padding:4px 10px;border-radius:99px;white-space:nowrap}
-.st.ready{background:#3ecf8e1f;color:var(--recall)}
+.st.ready{background:#3ecf8e1f;color:var(--recall-tx)}
 .st.todo{background:#6b78891f;color:var(--dimmer)}
 .row.todo .tt{color:var(--dim);font-weight:500}
 @media(max-width:560px){
@@ -232,8 +234,8 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 
 /* ---- status chips on topic rows ---- */
 .st.new{background:#6b78891f;color:var(--dim)}
-.st.learn{background:#ffb4541f;color:var(--com)}
-.st.done{background:#3ecf8e1f;color:var(--recall)}
+.st.learn{background:#ffb4541f;color:var(--com-tx)}
+.st.done{background:#3ecf8e1f;color:var(--recall-tx)}
 
 /* ---- dashboard ---- */
 .dash{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 20px 18px;margin-bottom:28px}
@@ -248,7 +250,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .dgrow b{font-size:18px;color:var(--text);font-variant-numeric:tabular-nums}
 .dbar{height:10px;background:var(--panel2);border-radius:99px;overflow:hidden}
 .dbar>div{height:100%;background:linear-gradient(90deg,var(--recall),#6be3ad);transition:width .3s}
-.goalhit{margin-top:9px;font-size:13px;color:var(--recall);font-weight:600}
+.goalhit{margin-top:9px;font-size:13px;color:var(--recall-tx);font-weight:600}
 .dmetrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
 .dm{background:var(--panel2);border-radius:11px;padding:11px 6px;text-align:center}
 .dm b{display:block;font-size:22px;line-height:1.2;font-variant-numeric:tabular-nums}
@@ -280,7 +282,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .todaybar{display:flex;align-items:center;gap:12px;margin-bottom:16px;max-width:760px;margin-left:auto;margin-right:auto}
 .alldone,.summary{max-width:640px;margin:20px auto;background:var(--panel);border:1px solid var(--line);
   border-radius:16px;padding:32px 26px;text-align:center}
-.alldone .big{font-size:52px;color:var(--recall);line-height:1}
+.alldone .big{font-size:52px;color:var(--recall-tx);line-height:1}
 .alldone b{display:block;font-size:20px;margin:12px 0 8px}
 .alldone p{color:var(--dim);font-size:14.5px;margin:0 auto 20px;max-width:440px}
 .sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
@@ -319,13 +321,13 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .hintbtn:hover{background:#f0e2c4}
 .mcqopt.correct{border-color:var(--recall);background:#3ecf8e1c}
 .mcqopt.correct .mcqtag{background:var(--recall);color:#04231a}
-.mcqopt.correct .mcqmark{color:var(--recall)}
+.mcqopt.correct .mcqmark{color:var(--recall-tx)}
 .mcqopt.wrong{border-color:#7a3b4d;background:#2a1c22}
 .mcqopt.wrong .mcqtag{background:#7a3b4d;color:#ff9db1}
 .mcqopt.wrong .mcqmark{color:#ff9db1}
 .mcqopt.dim{opacity:.45}
 .mcqresult{margin-top:18px;font-weight:700;font-size:15px;padding:11px 14px;border-radius:10px;text-align:center;animation:fade .2s ease}
-.mcqresult.ok{background:#3ecf8e1c;color:var(--recall)}
+.mcqresult.ok{background:#3ecf8e1c;color:var(--recall-tx)}
 .mcqresult.no{background:#2a1c22;color:#ff9db1}
 .nextrev{margin-top:9px;font-size:13.5px;text-align:center;color:var(--dim)}
 .nextrev b{color:var(--text)}
@@ -334,7 +336,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
   background:var(--panel2);border:1px solid var(--line);color:var(--text);
   padding:11px 18px;border-radius:22px;font-size:14px;font-weight:600;
   box-shadow:0 10px 34px rgba(0,0,0,.5);animation:fade .2s ease;max-width:90vw}
-.revtoast .rt{color:var(--recall)}.revtoast .rt.no{color:#ff9db1}
+.revtoast .rt{color:var(--recall-tx)}.revtoast .rt.no{color:#ff9db1}
 
 /* ---- weekly progress + jump back in ---- */
 .wkcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;margin-bottom:14px}
@@ -349,8 +351,8 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .jb-row:hover{border-color:var(--accent)}
 .jb-name{flex:1;font-size:14.5px;font-weight:600}
 .jb-st{font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap}
-.jb-st.done{background:#3ecf8e22;color:var(--recall)}
-.jb-st.learn{background:#ffb45422;color:var(--com)}
+.jb-st.done{background:#3ecf8e22;color:var(--recall-tx)}
+.jb-st.learn{background:#ffb45422;color:var(--com-tx)}
 .jb-st.new{background:var(--panel2);color:var(--dim)}
 @media(max-width:560px){.jb-row{flex-wrap:wrap}.jb-row .btn{width:100%;justify-content:center}}
 
@@ -369,8 +371,8 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .flash{position:relative}
 .starbtn{position:absolute;top:14px;right:14px;background:transparent;border:0;cursor:pointer;
   font-size:22px;line-height:1;color:var(--dimmer);padding:4px;font-family:inherit}
-.starbtn:hover{color:var(--com)}
-.starbtn.on{color:var(--com)}
+.starbtn:hover{color:var(--com-tx)}
+.starbtn.on{color:var(--com-tx)}
 .flash .qlabel{padding-right:38px}
 
 /* ---- today's plan ---- */
@@ -379,7 +381,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .planitem.done{opacity:.66}
 .pi-ic{flex:0 0 34px;height:34px;border-radius:9px;background:var(--panel2);display:flex;align-items:center;
   justify-content:center;font-size:17px}
-.planitem.done .pi-ic{background:#3ecf8e22;color:var(--recall)}
+.planitem.done .pi-ic{background:#3ecf8e22;color:var(--recall-tx)}
 .pi-mid{flex:1;min-width:0}
 .pi-mid b{display:block;font-size:15.5px;margin-bottom:3px}
 .pi-mid span{color:var(--dim);font-size:13.5px}
@@ -427,7 +429,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .home2 .hero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:14px}
 .home2 .herorow{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .home2 .herohi{font-size:15px;color:var(--dim)}
-.home2 .herostreak{display:inline-flex;align-items:center;gap:5px;font-weight:800;font-size:14px;color:var(--com);background:var(--warnbg);padding:4px 11px;border-radius:20px}
+.home2 .herostreak{display:inline-flex;align-items:center;gap:5px;font-weight:800;font-size:14px;color:var(--com-tx);background:var(--warnbg);padding:4px 11px;border-radius:20px}
 .home2 .herolab{font-size:12.5px;color:var(--dimmer)}
 .home2 .herobig{font-size:27px;font-weight:800;letter-spacing:-.3px;margin:2px 0 15px}
 .home2 .herobtns{display:flex;gap:9px;flex-wrap:wrap}
@@ -453,8 +455,8 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .segbar div{height:100%}
 .goalleg{display:flex;gap:14px;align-items:center;margin-top:9px;font-size:12px;color:var(--dim);flex-wrap:wrap}
 .goalleg i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:middle}
-.goalleg .gstat{margin-left:auto;font-weight:700;color:var(--com)}
-.goalleg .gstat.ok{color:var(--recall)}
+.goalleg .gstat{margin-left:auto;font-weight:700;color:var(--com-tx)}
+.goalleg .gstat.ok{color:var(--recall-tx)}
 .shelfhd,.progtt{font-size:15px;font-weight:700;margin:0 2px 10px}
 .shelf{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;min-width:0;max-width:100%}
 .shelfcard{flex:0 0 158px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 12px;cursor:pointer;transition:border-color .15s}
@@ -635,7 +637,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .leechrow{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);
   border-radius:10px;padding:10px 13px;margin-bottom:9px}
 .lcount{flex:none;min-width:42px;text-align:center;font-weight:700;color:#ff6b6b;background:#ff6b6b18;border-radius:7px;padding:5px 4px;font-size:13px}
-.lcount.miss{color:var(--com);background:#ffb45418;font-size:11px;min-width:58px}
+.lcount.miss{color:var(--com-tx);background:#ffb45418;font-size:11px;min-width:58px}
 .lmid{flex:1;min-width:0}.lmid b{display:block;font-size:14px;line-height:1.35}
 .lmid span{font-size:12px;color:var(--dim)}
 .leechrow .btn{flex:none}
@@ -645,12 +647,12 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .cramrow:last-child{border-bottom:0}
 .cramrow .cq{font-weight:600;font-size:14.5px;display:flex;gap:9px;align-items:baseline}
 .cramrow .cn{flex:none;color:var(--dim);font-size:12px;min-width:20px}
-.cramrow .ca{margin:5px 0 0 29px;color:var(--recall);font-size:14px;font-weight:600}
+.cramrow .ca{margin:5px 0 0 29px;color:var(--recall-tx);font-size:14px;font-weight:600}
 .cramrow .ct{margin:4px 0 0 29px;color:var(--dim);font-size:13px}
 @media print{ .nav,.topbar,.btnrow{display:none!important} .cramsheet{border:0} body{background:var(--card);color:#000} .cramrow .ca{color:#0a7} }
 /* exam */
 .examhead{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.extime{font-variant-numeric:tabular-nums;font-weight:700;color:var(--com)}
+.extime{font-variant-numeric:tabular-nums;font-weight:700;color:var(--com-tx)}
 .examhead .counter{margin-left:auto;font-size:12.5px;color:var(--dim)}
 .mcqopt.sel{border-color:var(--com);background:#ffb45418}
 .subscores{margin-top:16px;display:flex;flex-direction:column;gap:8px;text-align:left}
@@ -662,7 +664,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .exmiss .q{font-weight:600;margin-bottom:8px}
 .exopt{font-size:13.5px;padding:5px 9px;border-radius:7px;margin-bottom:5px}
 .exopt.bad{background:#ff6b6b18;color:#ff9db1}
-.exopt.good{background:#3ecf8e18;color:var(--recall)}
+.exopt.good{background:#3ecf8e18;color:var(--recall-tx)}
 .exexpl{margin-top:8px;font-size:13.5px;color:var(--dim);border-top:1px solid var(--line);padding-top:9px}
 /* AI tutor — modern chat */
 .aikey{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;text-align:center}
@@ -700,10 +702,10 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .cbtop{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px}
 .cbtop b{font-variant-numeric:tabular-nums}
 .pchip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:10px;background:var(--panel2,var(--line));color:var(--dim)}
-.pchip.act{background:#3ecf8e22;color:var(--recall)}
+.pchip.act{background:#3ecf8e22;color:var(--recall-tx)}
 .pchip.done{background:#8895aa22;color:var(--dim)}
-.strkstat{margin-top:9px;font-size:12.5px;font-weight:600;color:var(--com);text-align:center}
-.strkstat.ok{color:var(--recall)}
+.strkstat{margin-top:9px;font-size:12.5px;font-weight:600;color:var(--com-tx);text-align:center}
+.strkstat.ok{color:var(--recall-tx)}
 .explov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:240;display:flex;justify-content:flex-end}
 .explpanel{position:relative;background:var(--bg);border-left:1px solid var(--line);width:min(480px,92vw);height:100%;display:flex;flex-direction:column;
   box-shadow:-8px 0 30px rgba(0,0,0,.4);animation:explslide .25s ease}
@@ -823,7 +825,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .arwrap{animation:homefade .28s ease}
 .arhero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:14px}
 .arhero.done{text-align:center;padding:32px 20px}
-.arhero.done .big{font-size:36px;color:var(--recall);line-height:1}
+.arhero.done .big{font-size:36px;color:var(--recall-tx);line-height:1}
 .arhero.done b{display:block;font-size:17px;margin-top:8px}
 .arh-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .arh-lab{font-size:13px;color:var(--dim)}
@@ -883,7 +885,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .weakrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
 .weakrow:first-of-type{border-top:0}
 .weakrow .wnm{flex:1;font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.weakrow .wacc{font-size:12.5px;font-weight:800;color:var(--com)}
+.weakrow .wacc{font-size:12.5px;font-weight:800;color:var(--com-tx)}
 .weakrow .wacc.bad{color:#c0492d}
 .weakrow .wdrill{flex:0 0 auto;font-size:12px;padding:6px 14px}
 .arcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:26px}
@@ -898,7 +900,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .arrow .aic{font-size:15px;width:22px;text-align:center}
 .arrow .alabel{flex:1;font-size:14.5px}
 .arrow .acount{font-weight:700;font-variant-numeric:tabular-nums;font-size:15px}
-.arover{font-size:12.5px;color:var(--com);margin-bottom:12px}
+.arover{font-size:12.5px;color:var(--com-tx);margin-bottom:12px}
 .arprog{margin-bottom:14px}
 .arprog .dbar{margin-bottom:6px}
 .arprog span{font-size:12.5px;color:var(--dim)}
@@ -939,6 +941,18 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .pline{flex:1;height:2px;background:var(--line);min-width:14px;margin-top:-16px}
 .mbprpbtn{display:flex;align-items:center;gap:8px;width:100%;border:1px dashed var(--line);background:var(--panel2);color:var(--accent);border-radius:12px;padding:12px 14px;font-weight:700;font-size:13.5px;margin:10px 0 12px;cursor:pointer;text-align:left}
 .mbprpbtn span{margin-left:auto;font-weight:500;color:var(--dimmer);font-size:12px}.mbprp{margin:10px 0 12px}
+
+/* ===== accessibility (WCAG 2.2 AA) — see a11y.js ===== */
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.aiin:focus-visible,#main:focus,#main [tabindex="-1"]:focus{outline:none}
+:has(> .aiin:focus-visible){outline:3px solid var(--accent);outline-offset:2px}
+.mbskip{position:fixed;left:12px;top:-70px;z-index:100001;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:800;cursor:pointer}
+.mbskip:focus{top:12px}
+.mb-sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+[role="button"]{cursor:pointer}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
 </style>
 <style id="mb-plate-admin">
 .pa-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 14px}.pa-chip{min-height:36px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:600 13px system-ui;padding:0 14px;cursor:pointer}
@@ -1079,12 +1093,13 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 </script>
 </head>
 <body>
+<button class="mbskip" type="button" onclick="var m=document.getElementById('main');m.setAttribute('tabindex','-1');m.focus()">Skip to content</button>
 
-<button id="hamburger" onclick="document.body.classList.toggle('navopen')">☰</button>
+<button id="hamburger" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false" onclick="document.body.classList.toggle('navopen')">☰</button>
 <div id="scrim" onclick="document.body.classList.remove('navopen')"></div>
 
 <div id="shell">
-  <nav id="sidebar">
+  <nav id="sidebar" aria-label="Main">
     <div class="brand" onclick="go('home')" style="cursor:pointer" title="Home"><img src="icon.svg" alt="" width="26" height="26" style="border-radius:7px"> MedBank</div>
     <button class="mbtheme" type="button" onclick="mbTheme()" title="Switch between light, dark and matching your device"><span class="ic">☀</span><span class="lb">Light mode</span><span class="st">auto</span></button>
     <div id="nav"></div>
@@ -1252,7 +1267,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.11.11e';   // bump this each release
+const APP_VERSION='2026.11.16a';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -2385,7 +2400,7 @@ function pageHome(){
       </div>
       <div class="h2stat" onclick="go('today')">
         <div class="h2stat-hd"><span class="h2stat-t">Streak</span><span class="h2stat-ic">🔥</span></div>
-        <b style="color:var(--com)">${st}</b><span class="h2stat-s">day${st===1?'':'s'} · ${met?'safe today':'study today'}</span>
+        <b style="color:var(--com-tx)">${st}</b><span class="h2stat-s">day${st===1?'':'s'} · ${met?'safe today':'study today'}</span>
       </div>
       <div class="h2stat" onclick="${ws.weak?`reviewWeak('${lecArg}')`:`go('today')`}">
         <div class="h2stat-hd"><span class="h2stat-t">Weakest</span><span class="h2stat-ic">🎯</span></div>
@@ -2429,7 +2444,7 @@ function homeMore(){
   ${(()=>{ const wp=weekProgress(); return `<div class="wkcard">
       <div class="wkmetrics">
         <div class="wm"><b style="color:var(--ped)">${wp.complete}</b><span>completed</span></div>
-        <div class="wm"><b style="color:var(--com)">${wp.inprog}</b><span>in progress</span></div>
+        <div class="wm"><b style="color:var(--com-tx)">${wp.inprog}</b><span>in progress</span></div>
         <div class="wm"><b>${wp.notStarted}</b><span>not started</span></div>
         <div class="wm"><b>${wp.touched}</b><span>topics touched</span></div>
       </div>
@@ -2478,7 +2493,7 @@ function pageHomeClassic(){
       </div>
     </div>
     <div class="dmetrics">
-      <div class="dm" style="cursor:pointer" onclick="go('duenow')"><b style="color:var(--recall)">${due}</b><span>Due now ›</span></div>
+      <div class="dm" style="cursor:pointer" onclick="go('duenow')"><b style="color:var(--recall-tx)">${due}</b><span>Due now ›</span></div>
       <div class="dm" style="cursor:pointer" onclick="go('inprogress')"><b>${started}</b><span>In progress ›</span></div>
       <div class="dm" style="cursor:pointer" onclick="go('completed')"><b style="color:var(--ped)">${complete}</b><span>Completed ›</span></div>
       <div class="dm"><b>${st>DATA.streak.best?st:(DATA.streak.best||0)}</b><span>Best streak</span></div>
@@ -2499,7 +2514,7 @@ function pageHomeClassic(){
   ${(()=>{ const wp=weekProgress(); return `<div class="wkcard">
       <div class="wkmetrics">
         <div class="wm"><b style="color:var(--ped)">${wp.complete}</b><span>completed</span></div>
-        <div class="wm"><b style="color:var(--com)">${wp.inprog}</b><span>in progress</span></div>
+        <div class="wm"><b style="color:var(--com-tx)">${wp.inprog}</b><span>in progress</span></div>
         <div class="wm"><b>${wp.notStarted}</b><span>not started</span></div>
         <div class="wm"><b>${wp.touched}</b><span>topics touched</span></div>
       </div>
@@ -2539,7 +2554,7 @@ function pageHomeClassic(){
       <p>Question and answer, used <b>before</b> reading. The answer comes first in the lecturer's own words, then the concept is explained from first principles and tied back to the topic.</p>
     </div>
     <div class="card" style="cursor:default">
-      <span class="pill" style="background:#3ecf8e22;color:var(--recall)">Deck B</span>
+      <span class="pill" style="background:#3ecf8e22;color:var(--recall-tx)">Deck B</span>
       <h3>Recall Cards</h3>
       <p>Question and answer, used <b>after</b> reading. Strict Q/A straight from the lecturer's slides — pure retrieval practice.</p>
     </div>
@@ -2681,7 +2696,7 @@ function pageSolve(){
   return `<h1>🧮 Solve</h1>
     <p class="sub">Snap or upload a question — an MCQ, a past question, or a diagram — and get the answer explained step by step.</p>
     <div class="card" style="cursor:default">
-      <label style="font-size:12.5px;font-weight:700;color:var(--dim)">Photo of the question</label>
+      <label for="solveImg" style="font-size:12.5px;font-weight:700;color:var(--dim)">Photo of the question</label>
       <input id="solveImg" type="file" accept="image/*" style="width:100%;font-size:14px;margin-top:6px" onchange="solvePreview()">
       <div id="solvePrev" style="margin-top:10px"></div>
       <textarea id="solveText" class="notebox" rows="2" placeholder="Optional — type the question, or add context…" style="margin-top:12px"></textarea>
@@ -2925,8 +2940,8 @@ function pageTopic(id){
         <span class="pill" style="background:#4f8cff22;color:var(--primer)">Deck A · before reading</span>
         <h3>Primer Cards</h3><p>${nPrimer} cards — lecturer's answer, then the concept explained and tied to the topic.${pp?` <b style="color:var(--primer)">· resume at ${pp+1}</b>`:''}</p></div>
       <div class="card" onclick="go('study/${t.id}/recall')">
-        <span class="pill" style="background:#3ecf8e22;color:var(--recall)">Deck B · after reading</span>
-        <h3>Recall Cards</h3><p>${nRecall} cards — strict Q/A, drives your daily review.${rp?` <b style="color:var(--recall)">· resume at ${rp+1}</b>`:''}</p>
+        <span class="pill" style="background:#3ecf8e22;color:var(--recall-tx)">Deck B · after reading</span>
+        <h3>Recall Cards</h3><p>${nRecall} cards — strict Q/A, drives your daily review.${rp?` <b style="color:var(--recall-tx)">· resume at ${rp+1}</b>`:''}</p>
         <div class="pbar" style="margin-top:10px"><div style="width:${mast}%;background:var(--recall)"></div></div>
         <p style="margin-top:6px;font-size:12.5px">${mast}% of Recall cards right on your last attempt</p></div></div>
       <div class="btnrow" style="margin-top:14px">
@@ -5489,7 +5504,7 @@ async function admSave(){
   try{
     const r=await admApi('/admin/prompt',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
     if(!r.ok) throw new Error((r.data&&r.data.error)||'save failed');
-    if(msg) msg.innerHTML='<span style="color:var(--recall);font-weight:700">✓ Saved. New imports at this level use it right away.</span>';
+    if(msg) msg.innerHTML='<span style="color:var(--recall-tx);font-weight:700">✓ Saved. New imports at this level use it right away.</span>';
   }catch(e){ if(msg) msg.innerHTML='<span style="color:#ff9db1">Could not save: '+esc(e.message||e)+'</span>'; }
 }
 
@@ -5804,7 +5819,7 @@ async function vizAdmGrow(btn){ var msg=$('#vizAdmMsg'); if(btn)btn.disabled=tru
   try{ var r=await admApi('/admin/viz/grow',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({max:6})});
     if(!r.ok) throw new Error((r.data&&r.data.error)||'grow failed');
     var n=(r.data&&r.data.drafted&&r.data.drafted.length)||0;
-    if(msg)msg.innerHTML=n?('<span style="color:var(--recall);font-weight:700">✓ Drafted '+n+' asset(s).</span>'):'No new demand to draft right now.';
+    if(msg)msg.innerHTML=n?('<span style="color:var(--recall-tx);font-weight:700">✓ Drafted '+n+' asset(s).</span>'):'No new demand to draft right now.';
     vizAdmFetch();
   }catch(e){ if(msg)msg.innerHTML='<span style="color:#ff9db1">'+esc(e.message||e)+'</span>'; }
   finally{ if(btn)btn.disabled=false; }
@@ -5812,7 +5827,7 @@ async function vizAdmGrow(btn){ var msg=$('#vizAdmMsg'); if(btn)btn.disabled=tru
 async function vizAdmApprove(id,btn){ if(btn)btn.disabled=true;
   try{ var r=await admApi('/admin/viz/approve',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id})});
     if(!r.ok) throw new Error((r.data&&r.data.error)||'approve failed');
-    var msg=$('#vizAdmMsg'); if(msg)msg.innerHTML='<span style="color:var(--recall);font-weight:700">✓ “'+esc(id)+'” is live — the generator can use it now.</span>';
+    var msg=$('#vizAdmMsg'); if(msg)msg.innerHTML='<span style="color:var(--recall-tx);font-weight:700">✓ “'+esc(id)+'” is live — the generator can use it now.</span>';
     vizAdmFetch();
   }catch(e){ var m=$('#vizAdmMsg'); if(m)m.innerHTML='<span style="color:#ff9db1">'+esc(e.message||e)+'</span>'; if(btn)btn.disabled=false; }
 }
@@ -6307,7 +6322,7 @@ function pageReview(){
   const w=n=>total?(n/total*100):0;
   const seg=(c,n)=>n>0?`<div style="width:${w(n)}%;background:${c}"></div>`:'';
   const mixTxt=[mix.hard?`<span style="color:#c0492d">★ ${mix.hard}</span>`:'',
-                mix.rev?`<span style="color:var(--recall)">↻ ${mix.rev}</span>`:'',
+                mix.rev?`<span style="color:var(--recall-tx)">↻ ${mix.rev}</span>`:'',
                 mix.new?`<span style="color:var(--primer)">＋ ${mix.new}</span>`:''].filter(Boolean).join(' · ');
   return `<div class="meter">
       <div class="mbar2">
@@ -6331,7 +6346,7 @@ function pageHard(){
       <div class="btnrow" style="justify-content:center"><button class="btn primary" onclick="go('today')">Go to today’s plan</button></div></div>`;
   if(S.i>=S.items.length) return sessionSummary('Back to dashboard','home');
   IMGBASE = S.items[S.order[S.i]].t.imgBase || '';
-  return `<div class="todaybar"><span class="pill" style="background:#ffb45422;color:var(--com);margin:0">★ Hard cards</span>
+  return `<div class="todaybar"><span class="pill" style="background:#ffb45422;color:var(--com-tx);margin:0">★ Hard cards</span>
       <span class="counter">${S.session.done} done · ${Math.max(0,S.items.length-S.i)} left</span></div>`
     + cardView(true);
 }
@@ -6544,7 +6559,7 @@ function mcqView(session){
       const revTxt=reviewIntervalText(it.id);
       body += `<div class="mcqresult ${correct?'ok':'no'}" id="mcqAnswerTop">${correct?'✓ Correct':'✗ Not quite — added to your hard cards ★'}</div>`
             + `<div class="nextrev ${correct?'ok':'no'}">↻ You'll see this again <b>${revTxt}</b>${correct?'':' · it\'s now a hard card (also in your reminders)'}</div>`
-            + `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall)">Answer — explained</div><div class="body">${para(c.a)}</div></div></div>`
+            + `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall-tx)">Answer — explained</div><div class="body">${para(c.a)}</div></div></div>`
             + `<div class="vizmiss" onclick="event.stopPropagation()">${(window.DATA&&DATA.cardViz&&DATA.cardViz[it.id])
                  ? `<button class="vizsavedbtn" onclick="event.stopPropagation();vizWatchSaved()">▶ Watch your explainer <span class="vsaved">saved for this card</span></button>`
                  : `<button class="vizmissbtn" onclick="event.stopPropagation();vizFromCard()">🎬 Visualize how to get this answer</button>`}<div id="vizInlineHost" class="vizinlinehost"></div></div>`;
@@ -6605,9 +6620,9 @@ function cardView(session){
       ? `<div class="ansblock">
           <div class="seg lecturer"><div class="seglabel" style="background:#8895aa22;color:var(--dim)">In the lecturer's words</div><div class="body">${para(c.lecturer)}</div></div>
           <div class="seg"><div class="seglabel" style="background:#4f8cff22;color:var(--primer)">Explained</div><div class="body">${para(c.explain)}</div></div>
-          ${c.tie?`<div class="seg tie"><div class="seglabel" style="background:#ffb45422;color:var(--com)">Why it matters here</div><div class="body">${para(c.tie)}</div></div>`:''}
+          ${c.tie?`<div class="seg tie"><div class="seglabel" style="background:#ffb45422;color:var(--com-tx)">Why it matters here</div><div class="body">${para(c.tie)}</div></div>`:''}
         </div>`
-      : `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall)">Answer</div><div class="body">${para(c.a)}</div></div></div>`;
+      : `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall-tx)">Answer</div><div class="body">${para(c.a)}</div></div></div>`;
   }
   const canRate = !isP;
   let controls;
@@ -6966,7 +6981,7 @@ function pageJumpback(){
       <div class="wktitle">This week so far</div>
       <div class="wkmetrics">
         <div class="wm"><b style="color:var(--ped)">${wp.complete}</b><span>completed</span></div>
-        <div class="wm"><b style="color:var(--com)">${wp.inprog}</b><span>in progress</span></div>
+        <div class="wm"><b style="color:var(--com-tx)">${wp.inprog}</b><span>in progress</span></div>
         <div class="wm"><b>${wp.touched}</b><span>topics touched</span></div>
       </div>
     </div>
@@ -6982,7 +6997,7 @@ function pageWeek(){
   return `<h1>Weekly report</h1><p class="sub">Your last 7 days.</p>
     <div class="stats">
       <div class="stat"><b>${w.cards}</b><span>cards reviewed</span></div>
-      <div class="stat"><b style="color:var(--recall)">${w.acc}%</b><span>accuracy</span></div>
+      <div class="stat"><b style="color:var(--recall-tx)">${w.acc}%</b><span>accuracy</span></div>
       <div class="stat"><b>${w.active}/7</b><span>days active</span></div>
       <div class="stat"><b>${w.perDay}</b><span>per day avg</span></div>
       <div class="stat"><b style="color:var(--ped)">${w.completed}</b><span>topics completed</span></div>
@@ -7456,7 +7471,7 @@ function pageExam(){
   const opts=c.opts.map((o,i)=>`<button class="mcqopt${picked===i?' sel':''}" onclick="examPick(${i})">
       <span class="mcqtag">${String.fromCharCode(65+i)}</span><span class="mcqtext">${esc(o)}</span></button>`).join('');
   const last=S.i>=n-1;
-  return `<div class="examhead"><span class="pill" style="background:#ffb45422;color:var(--com);margin:0">📝 Exam</span>
+  return `<div class="examhead"><span class="pill" style="background:#ffb45422;color:var(--com-tx);margin:0">📝 Exam</span>
       <span class="extime">⏱ ${mm}:${ss}</span><span class="counter">${S.i+1}/${n} · ${answered} answered</span></div>
     <div class="bar"><div style="width:${((S.i+1)/n*100).toFixed(1)}%;background:var(--com)"></div></div>
     <div class="studywrap"><div class="flash" style="cursor:default">
@@ -7497,8 +7512,8 @@ function examResult(){
       <p class="sub" style="margin-bottom:16px">${correct} / ${n} correct · ${mm}m ${ss}s · ${esc(examScopeName(S.scope))}</p>
       <div class="sgrid">
         <div class="sm"><b>${n}</b><span>questions</span></div>
-        <div class="sm"><b style="color:var(--recall)">${correct}</b><span>correct</span></div>
-        <div class="sm"><b style="color:var(--com)">${n-correct}</b><span>missed</span></div>
+        <div class="sm"><b style="color:var(--recall-tx)">${correct}</b><span>correct</span></div>
+        <div class="sm"><b style="color:var(--com-tx)">${n-correct}</b><span>missed</span></div>
         <div class="sm"><b>${pct}%</b><span>score</span></div>
       </div>
       ${subRows?`<div class="subscores">${subRows}</div>`:''}
@@ -10868,5 +10883,6 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 })();
 </script>
 <script src="whiteboard.js?v=20261111e"></script>   <!-- whiteboard Visualize (Standard / Layman) — takes over aiVisualize; FEATURES.WHITEBOARD=false turns it off -->
+<script src="a11y.js?v=20261116"></script>   <!-- accessibility layer: keyboard access for clickable cards, dialog focus, toggle states, live toasts -->
 </body>
 </html>
