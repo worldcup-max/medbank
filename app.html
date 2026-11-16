@@ -866,7 +866,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .planbadge{font-size:12.5px;font-weight:800;padding:5px 13px;border-radius:999px;background:var(--panel2);color:var(--dim);white-space:nowrap}
 .planbadge.prem{background:#eeedfe;color:#5b21b6}
 .planbadge.free{background:#f1eef7;color:#5c5570}
-.mbtoast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:100004;background:#141026;color:#fff;font-size:13px;font-weight:600;line-height:1.4;padding:12px 18px;border-radius:14px;box-shadow:0 12px 30px rgba(20,12,38,.35);max-width:min(440px,88vw);text-align:center;transition:opacity .3s}
+.mbtoast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:100040;background:#141026;color:#fff;font-size:13px;font-weight:600;line-height:1.4;padding:12px 18px;border-radius:14px;box-shadow:0 12px 30px rgba(20,12,38,.35);max-width:min(440px,88vw);text-align:center;transition:opacity .3s}
 /* review pipeline (Today) */
 .pipe{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:14px}
 .pipe-hd{font-size:12px;color:var(--dimmer);font-weight:600;margin-bottom:4px}
@@ -1258,7 +1258,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.11.16a';   // bump this each release
+const APP_VERSION='2026.11.16b';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -1346,7 +1346,11 @@ function persist(){ var ok=true;
   return ok; }
 /* non-blocking toast — replaces blocking alert() for errors so a failure never freezes the page */
 function mbToast(msg){ try{ var n=document.createElement('div'); n.className='mbtoast'; n.textContent=String(msg||'');
-  document.body.appendChild(n); setTimeout(function(){ n.style.opacity='0'; setTimeout(function(){ if(n.parentNode)n.remove(); },300); },3600);
+  // one toast at a time (they share one spot, so a second one used to sit on top of the first), and long
+  // messages stay up long enough to read (~60ms a character, 3.6s–9s) now that they replace alert()s
+  document.querySelectorAll('.mbtoast').forEach(function(o){ o.remove(); });
+  var ms=Math.min(9000, Math.max(3600, n.textContent.length*60));
+  document.body.appendChild(n); setTimeout(function(){ n.style.opacity='0'; setTimeout(function(){ if(n.parentNode)n.remove(); },300); },ms);
 }catch(e){ try{ alert(msg); }catch(_){} } }
 
 /* ---- dates ---- */
@@ -1589,10 +1593,11 @@ function saveEditCard(id,deck){
   EDITING=null; persist(); render();
 }
 function flagCard(id){
-  if(!confirm('Report this card as wrong and hide it from your studying? You can also just edit it instead.')) return;
+  mbConfirm('Report this card as wrong?','It will be hidden from your studying. If only part of it is off, you can edit it instead.', ()=>{
   DATA.cardFlags[id]=1; persist();
   try{ if(S && typeof sessionNext==='function' && S.items){ S.items=S.items.filter(it=>it.id!==id); if(S.order) S.order=S.items.map((_,k)=>k); if(S.i>=S.items.length) S.i=Math.max(0,S.items.length-1); } }catch(e){}
-  render();
+  render(); mbToast('Card reported and hidden');
+  }, {ok:'Report & hide'});
 }
 function unflagCard(id){ delete DATA.cardFlags[id]; persist(); render(); }
 async function regenCard(id,deck,btn){
@@ -1632,30 +1637,31 @@ function cardEditor(id,deck,c){
 /* ---- reset progress on a single topic / export a topic to PDF ---- */
 function resetTopicProgress(id){
   const t=topById(id); if(!t) return;
-  if(!confirm('Reset your progress on "'+t.name+'"? This clears your card history, resume position and read/done marks for this topic only. Your notes and cards stay.')) return;
+  mbConfirm('Reset progress on “'+t.name+'”?','This clears your card history, resume position and read/done marks for this topic only. Your notes and cards stay.', ()=>{
   (t.primer||[]).forEach(c=>{ delete DATA.cards[cid(t.id,'primer',c)]; });
   (t.recall||[]).forEach(c=>{ const k=cid(t.id,'recall',c); delete DATA.cards[k]; delete DATA.starred[k]; delete DATA.missLog[k]; });
   delete DATA.pos['pos:'+t.id+'primer']; delete DATA.pos['pos:'+t.id+'recall'];
   delete DATA.done[t.id]; delete DATA.read[t.id]; delete DATA.topics[t.id];
-  persist(); render();
+  persist(); render(); mbToast('Progress reset for “'+t.name+'”');
+  }, {ok:'Reset progress', danger:true});
 }
 /* Rename / remove a topic (your own content; server-backed so it persists across reload). */
-async function mbRenameTopic(id){ var t=topById(id); if(!t) return;
-  var name=prompt('Rename this topic:', t.name||''); if(name==null) return; name=String(name).trim();
+function mbRenameTopic(id){ var t=topById(id); if(!t) return;
+  mbPrompt('Rename topic','', t.name||'', 'Topic name', async function(name){ if(name==null) return; name=String(name).trim();
   if(!name || name===t.name) return;
   try{ var r=await admApi('/topic/rename',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic_id:id, name:name})});
     if(r&&r.ok&&r.data&&r.data.ok){ t.name=name; if(typeof MB_loadProfileContent==='function'){ try{ await MB_loadProfileContent(); }catch(e){} } render(); try{mbToast('Renamed');}catch(e){} }
-    else alert('Rename failed: '+((r&&r.data&&r.data.error)||'server error')); }
-  catch(e){ alert('Rename failed: '+(e.message||e)); } }
-async function mbDeleteTopic(id){ var t=topById(id); if(!t) return;
-  if(!confirm('Delete the topic "'+(t.name||'')+'" and all its cards & questions? This cannot be undone.')) return;
+    else mbToast('Couldn’t rename: '+((r&&r.data&&r.data.error)||'server error')+'. Check your connection and try again.'); }
+  catch(e){ mbToast('Couldn’t rename: '+(e.message||e)+'. Check your connection and try again.'); } }, 'Rename'); }
+function mbDeleteTopic(id){ var t=topById(id); if(!t) return;
+  mbConfirm('Delete “'+(t.name||'')+'”?','All its cards and questions go with it. This can’t be undone.', async function(){
   try{ var r=await admApi('/topic/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic_id:id})});
     if(r&&r.ok&&r.data&&r.data.ok){ if(typeof MB_loadProfileContent==='function'){ try{ await MB_loadProfileContent(); }catch(e){} } location.hash='#/home'; render(); try{mbToast('Topic deleted');}catch(e){} }
-    else alert('Delete failed: '+((r&&r.data&&r.data.error)||'server error')); }
-  catch(e){ alert('Delete failed: '+(e.message||e)); } }
+    else mbToast('Couldn’t delete: '+((r&&r.data&&r.data.error)||'server error')+'. Check your connection and try again.'); }
+  catch(e){ mbToast('Couldn’t delete: '+(e.message||e)+'. Check your connection and try again.'); } }, {ok:'Delete topic', danger:true}); }
 function exportTopicPDF(id){
   const t=topById(id); if(!t) return;
-  const w=window.open('','_blank'); if(!w){ alert('Allow pop-ups for this site to export, then try again.'); return; }
+  const w=window.open('','_blank'); if(!w){ mbToast('Allow pop-ups for this site to export, then try again.'); return; }
   IMGBASE = t.imgBase || '';
   const html='<!doctype html><html><head><meta charset="utf-8"><base href="'+location.origin+'/"><title>'+esc(t.name)+'</title>'
     +'<style>body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:760px;margin:26px auto;padding:0 18px;color:#111;line-height:1.6}h1{font-size:23px;margin:0 0 4px}.meta{color:#666;margin:0 0 22px}h2,h3{margin-top:1.3em}img{max-width:100%}.simp{margin-top:34px;padding-top:20px;border-top:2px solid #ddd}</style></head><body>'
@@ -2223,7 +2229,7 @@ function renderNav(){
   const inSubj = r.startsWith('subject/')||r.startsWith('topic/');
   let h  = it('home','⌂','Home',st?('🔥'+st):'',r==='home');
   h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');MB_openImport&&MB_openImport()}catch(e){}"><span class="ic">＋</span><span>Add lecture</span></div>`;
-  h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');window.MB_openRecorder?MB_openRecorder():alert('Recording isn\\'t available right now — reload the app, or use File / YouTube / Paste.')}catch(e){}"><span class="ic">🎙</span><span>Record lecture</span></div>`;
+  h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');window.MB_openRecorder?MB_openRecorder():mbToast('Recording isn\\'t available right now — reload the app, or use File / YouTube / Paste.')}catch(e){}"><span class="ic">🎙</span><span>Record lecture</span></div>`;
   h += it('today','🧠','Active recall',dueCount()||'',inRecall);
   h += it('solve','🧮','Solve','',r==='solve');
   h += it('plan','🗓','This week',planCount()||'',r==='plan');
@@ -2589,7 +2595,9 @@ function mbModalEsc(e){ if(e.key==='Escape') mbModalClose(); }
 function mbModalBase(title,sub){
   mbModalClose();
   const ov=document.createElement('div'); ov.id='mbModalOv';
-  ov.style.cssText='position:fixed;inset:0;background:rgba(8,6,16,.6);display:flex;align-items:center;justify-content:center;z-index:100000;padding:16px';
+  // z-index above every sheet that opens one (import 100001, recorder 100002, stats 100003, course sheet 100020) —
+  // at 100000 the recorder's "Discard?" and the importer's "Start recording?" opened BEHIND their own sheet
+  ov.style.cssText='position:fixed;inset:0;background:rgba(8,6,16,.6);display:flex;align-items:center;justify-content:center;z-index:100030;padding:16px';
   const box=document.createElement('div');
   box.style.cssText='background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 20px 16px;max-width:400px;width:100%;max-height:86vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.45)';
   box.onclick=e=>e.stopPropagation();
@@ -2604,20 +2612,31 @@ function mbModalBase(title,sub){
 }
 function mbModalBtnRow(box,btns){ // btns: [{label, primary, onClick}]
   const row=document.createElement('div'); row.style.cssText='display:flex;gap:8px;margin-top:14px';
-  btns.forEach(b=>{ const el=document.createElement('button'); el.className='btn'+(b.primary?' primary':''); el.style.flex='1';
+  btns.forEach(b=>{ const el=document.createElement('button'); el.className='btn'+(b.danger?' danger':b.primary?' primary':''); el.style.flex='1';
     el.textContent=b.label; el.onclick=()=>{ mbModalClose(); b.onClick&&b.onClick(); }; row.appendChild(el); });
   box.appendChild(row);
 }
-function mbConfirm(title,sub,onOk){
+// opts: {ok:'Delete topic', danger:true, cancel:'Keep it', onCancel:fn} — name the action on the button
+// instead of a generic "Confirm", and colour destructive ones red
+function mbConfirm(title,sub,onOk,opts){
+  opts=opts||{};
   const box=mbModalBase(title,sub);
-  mbModalBtnRow(box,[{label:'Cancel'},{label:'Confirm',primary:true,onClick:onOk}]);
+  mbModalBtnRow(box,[{label:opts.cancel||'Cancel',onClick:opts.onCancel},{label:opts.ok||'Confirm',primary:true,danger:!!opts.danger,onClick:onOk}]);
 }
-function mbPrompt(title,sub,defVal,placeholder,onOk){
+// a message the student has to read and act on (install steps, browser settings) — stays until dismissed,
+// unlike a toast, but doesn't block the page the way alert() did
+function mbNotice(msg,title){
+  const parts=String(msg||'').split(/\n\n+/);
+  if(!title && parts.length>1) title=parts.shift();   // "Headline.\n\nDetail" → headline as the title
+  const box=mbModalBase(title||'', parts.join(' '));
+  mbModalBtnRow(box,[{label:'OK',primary:true}]);
+}
+function mbPrompt(title,sub,defVal,placeholder,onOk,okLabel){
   const box=mbModalBase(title,sub);
   const inp=document.createElement('input'); inp.type='text'; inp.value=defVal||''; inp.placeholder=placeholder||'';
   inp.style.cssText='width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--text);font-size:15.5px';
   box.appendChild(inp);
-  mbModalBtnRow(box,[{label:'Cancel'},{label:'Save',primary:true,onClick:()=>onOk(inp.value)}]);
+  mbModalBtnRow(box,[{label:'Cancel'},{label:okLabel||'Save',primary:true,onClick:()=>onOk(inp.value)}]);
   setTimeout(()=>{ inp.focus(); inp.select(); },10);
   inp.onkeydown=e=>{ if(e.key==='Enter'){ mbModalClose(); onOk(inp.value); } };
 }
@@ -2638,7 +2657,7 @@ function createFolderWith(topicId){
     if(!nm||!nm.trim()) return;
     const f={ id:'f'+Date.now().toString(36), name:nm.trim(), topics:topicId?[topicId]:[] };
     DATA.folders.push(f); persist();
-    if(topicId){ alert('Created “'+f.name+'” and added this topic.'); } render();
+    if(topicId){ mbToast('Created “'+f.name+'” and added this topic'); } render();
   });
 }
 function renameFolder(id){ const f=(DATA.folders||[]).find(x=>x.id===id); if(!f) return;
@@ -2658,7 +2677,7 @@ function addToFolderPrompt(topicId){
     if(val==='__new__'){ createFolderWith(topicId); return; }
     const f=fs.find(x=>x.id===val); if(!f) return;
     f.topics=f.topics||[];
-    if(f.topics.indexOf(topicId)<0){ f.topics.push(topicId); persist(); alert('Added to “'+f.name+'”.'); } else { alert('Already in “'+f.name+'”.'); }
+    if(f.topics.indexOf(topicId)<0){ f.topics.push(topicId); persist(); mbToast('Added to “'+f.name+'”'); } else { mbToast('Already in “'+f.name+'”'); }
   });
 }
 function pageFolders(){
@@ -3370,13 +3389,14 @@ function renderVizList(t){
 }
 function playVizIdx(i){ try{ var v=_VIZLIST[i]; if(!v)return; var t=topById(_VIZTID); window.aiVisualize(v.text,(t&&t.name)||'',_VIZTID); }catch(e){} }
 function delVizIdx(i){ try{ var v=_VIZLIST[i]; if(!v)return;
-  if(!confirm('Remove this saved explainer? Replaying it later has to build it again.')) return;
+  mbConfirm('Remove this saved explainer?','Replaying it later means building it again.', function(){ try{
   // the list is de-duped BY TEXT across DATA.viz and DATA.cardViz, so deleting only the source the row
   // came from left the twin behind and the row reappeared on the next render — remove both copies
   if(DATA.viz&&DATA.viz[_VIZTID]){ DATA.viz[_VIZTID]=DATA.viz[_VIZTID].filter(function(x){return !x||x.text!==v.text;}); if(!DATA.viz[_VIZTID].length)delete DATA.viz[_VIZTID]; }
   if(DATA.cardViz) Object.keys(DATA.cardViz).forEach(function(k){
     if(k.indexOf(_VIZTID+'|')!==0) return; var r=DATA.cardViz[k]; if(r&&r.text===v.text) delete DATA.cardViz[k]; });
   persist(); render();
+  }catch(e){} }, {ok:'Remove', danger:true});
 }catch(e){} }
 function genPrompt(topicId,kind,label){
   return `<div class="empty" style="text-align:center">
@@ -3518,10 +3538,12 @@ function qbCfgRow(label, opts, cur, kind){ kind=kind||'skill';
 function qbSetCfg(kind,val){ _qbCfg[kind]=(kind==='count'?parseInt(val,10):val); render(); }
 function qbStart(id,mode){ var t=topById(id); var all=(t&&t.extras&&t.extras.qbank)||[]; if(!all.length)return;
   // TOP-10: don't silently discard a live Mega / mistakes / drill session (answered questions + grading) with no warning.
-  if(typeof QB!=='undefined' && QB && !QB.done && QB.results && QB.results.length && !confirm('You have a question session in progress — start a new one and discard it?')) return;
+  if(typeof QB!=='undefined' && QB && !QB.done && QB.results && QB.results.length && !qbStart._ok){
+    mbConfirm('Discard your session in progress?','You’ve answered '+QB.results.length+' question'+(QB.results.length>1?'s':'')+' that haven’t been graded yet.', function(){ qbStart._ok=1; try{ qbStart(id,mode); }finally{ qbStart._ok=0; } }, {ok:'Start new session', danger:true, cancel:'Keep going'});
+    return; }
   var cfg=_qbCfg||{};
   var items=all.filter(function(q){ return (!cfg.skill||cfg.skill==='all'||(q.skill||'')===cfg.skill) && (!cfg.level||cfg.level==='all'||qbCogOf(q)===cfg.level); });
-  if(!items.length){ alert('No questions match that filter — try All.'); return; }
+  if(!items.length){ mbToast('No questions match that filter — try All.'); return; }
   items=qbShuffle(items); if(cfg.count && cfg.count<items.length) items=items.slice(0,cfg.count);
   QB={topicId:id,mode:mode,items:items,i:0,picked:null,answered:false,correct:0,results:[],done:false,startTs:Date.now(),qStart:Date.now(),sid:qbUid()};
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
@@ -3531,17 +3553,20 @@ function qbExit(){ QB=null; if(window._qbInt){ clearInterval(window._qbInt); win
    for an early exit it's just the answered subset, so the score is never diluted by skipped questions. */
 function qbScore(){ var answered=(QB.results||[]).length; var n=(QB.endedEarly?answered:QB.items.length); var c=QB.correct||0; return {answered:answered, n:n, c:c, pct:n?Math.round(c/n*100):0}; }
 /* leave a Mega/Smart/Adaptive session early and grade what's been answered (Test AND Tutor) */
-function qbEndEarly(){ if(!QB || QB.done) return;
+// force=true when the exam clock runs out: grade straight away. It used to ask "End now?" here too, and
+// tapping Cancel left the exam running past 0:00 with no further auto-submit (QB._autosub was already set).
+function qbEndEarly(force){ if(!QB || QB.done) return;
   var answered=(QB.results||[]).length;
-  if(!answered){ if(confirm('Leave this session? You haven’t answered anything yet, so there’s nothing to grade.')) qbExit(); return; }
+  var end=function(){ if(!QB || QB.done) return; QB.endedEarly=true; qbFinalize(); QB.done=true; render(); };
+  if(force===true){ if(!answered){ qbExit(); mbToast('Time’s up — you hadn’t answered anything, so there’s nothing to grade.'); return; } end(); return; }
+  if(!answered){ mbConfirm('Leave this session?','You haven’t answered anything yet, so there’s nothing to grade.', qbExit, {ok:'Leave', cancel:'Stay'}); return; }
   var planned=(QB.adaptive?QB.adaptTarget:QB.items.length), remaining=Math.max(0, planned-answered);
-  if(!confirm('End now and grade the '+answered+' question'+(answered>1?'s':'')+' you’ve answered'+(remaining>0?(' (skipping the remaining '+remaining+')'):'')+'?')) return;
-  QB.endedEarly=true; qbFinalize(); QB.done=true; render();
+  mbConfirm('End and grade now?','You’ll be graded on the '+answered+' question'+(answered>1?'s':'')+' you’ve answered'+(remaining>0?(' and the remaining '+remaining+' will be skipped'):'')+'.', end, {ok:'End & grade', cancel:'Keep going'});
 }
-function qbReset(id){ if(!confirm('Reset your question-bank stats for this topic? Your attempt history for it will be cleared.'))return; var s=qbStore(); DATA.qbank[id]={seen:0,correct:0,byTag:{}}; s._attempts=(s._attempts||[]).filter(function(a){return a.topicId!==id;}); s._sessions=(s._sessions||[]).filter(function(x){return x.topicId!==id;}); s._events=(s._events||[]).filter(function(e){return e.topicId!==id;});   /* SET-01: also drop this topic's telemetry events (was never cleared). NOTE: sync's union merge can still re-adopt cloud copies — an authoritative reset (tombstone/rev-bump) needs a product decision. */ persist(); render(); }
+function qbReset(id){ mbConfirm('Reset question-bank stats?','Your attempt history for this topic will be cleared.', function(){ var s=qbStore(); DATA.qbank[id]={seen:0,correct:0,byTag:{}}; s._attempts=(s._attempts||[]).filter(function(a){return a.topicId!==id;}); s._sessions=(s._sessions||[]).filter(function(x){return x.topicId!==id;}); s._events=(s._events||[]).filter(function(e){return e.topicId!==id;});   /* SET-01: also drop this topic's telemetry events (was never cleared). NOTE: sync's union merge can still re-adopt cloud copies — an authoritative reset (tombstone/rev-bump) needs a product decision. */ persist(); render(); }, {ok:'Reset stats', danger:true}); }
 function qbTick(){ var el=document.getElementById('qbTimer'); if(el&&QB&&QB.startTs&&!QB.done){
   if(QB.examDeadline){ var rem=Math.max(0,Math.floor((QB.examDeadline-Date.now())/1000)); el.textContent='⏱ '+Math.floor(rem/60)+':'+String(rem%60).padStart(2,'0');
-    if(rem<=0 && !QB._autosub){ QB._autosub=true; try{ qbEndEarly(); }catch(e){} } return; }
+    if(rem<=0 && !QB._autosub){ QB._autosub=true; try{ qbEndEarly(true); }catch(e){} } return; }
   var s=Math.floor((Date.now()-QB.startTs)/1000); el.textContent='⏱ '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); } }
 function qbRecord(j){ var q=QB.items[QB.i], ok=(j===q.answer); if(ok)QB.correct++;
   var ms = QB.qStart ? (Date.now()-QB.qStart) : 0;
@@ -4102,7 +4127,7 @@ function qbStartCell(tagEnc, cog){
     if(seenQh[a.qh]) return; seenQh[a.qh]=1;
     items.push({ stem:mt.stem, lead_in:mt.lead_in, options:mt.options, answer:mt.answer, rationales:mt.rationales, objective:mt.objective, teaching:mt.teaching, trap:mt.trap, trap_type:mt.trap_type, trap_explanation:mt.trap_explanation, tag:mt.tag, subtopic:mt.subtopic, system:mt.system, cognitive_level:mt.cognitive_level, difficulty:mt.difficulty, skill:mt.skill, src:mt.src, _topicId:mt.topicId });
   });
-  if(!items.length){ alert('No stored '+(drill==='diff'?qbCogLabel(cog)+' ':'')+'questions for “'+tag+'” yet.'); return; }
+  if(!items.length){ mbToast('No stored '+(drill==='diff'?qbCogLabel(cog)+' ':'')+'questions for “'+tag+'” yet.'); return; }
   QB={ topicId:(scope||'*'), mode:'tutor', items:qbShuffle(items), i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mistakes:true };
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
 }
@@ -4143,7 +4168,7 @@ function qbDashHtml(t){
   return back+kpis+recCard+sysCard+tagCard+gridCard+diffCard+skillCard+msCard+calCard+fpCard+modeCard+trendCard+mkCard;
 }
 function qbStartMistakes(scope){ var agg=qbAgg(scope); var pool=agg.mistakes;
-  if(!pool.length){ alert('No mistakes to practise — nice work!'); return; }
+  if(!pool.length){ mbToast('No mistakes to practise — nice work!'); return; }
   var items=pool.map(function(m){ var mt=m.meta; return { stem:mt.stem, lead_in:mt.lead_in, options:mt.options, answer:mt.answer, rationales:mt.rationales, objective:mt.objective, teaching:mt.teaching, trap:mt.trap, trap_type:mt.trap_type, trap_explanation:mt.trap_explanation, tag:mt.tag, subtopic:mt.subtopic, system:mt.system, cognitive_level:mt.cognitive_level, difficulty:mt.difficulty, skill:mt.skill, src:mt.src, _topicId:mt.topicId }; });
   QB={ topicId:scope, mode:'tutor', items:qbShuffle(items), i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mistakes:true };
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
@@ -4218,13 +4243,13 @@ function mgStart(quick){ var cfg=_mgCfg;
     window._mgCfg=cfg; }
   var items;
   try{ items=mgAssemble(cfg.count); } finally{ if(restore) window._mgCfg=restore; }
-  if(!items.length){ alert('No questions match your selection yet. Build a few topic Q-banks first, or widen the filter.'); return; }
+  if(!items.length){ mbToast('No questions match your selection yet. Build a few topic Q-banks first, or widen the filter.'); return; }
   var _bp=(cfg.exposure==='blueprint'); var _bpTimed=(_bp && (cfg.examMins|0)>0);
   QB={ topicId:'*', mode:(_bpTimed?'timed':cfg.mode), items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:cfg.exposure, kind:(quick?'quick_exam':(_bp?'blueprint':'custom')), examDeadline:(_bpTimed?(Date.now()+(cfg.examMins|0)*60000):0), blueprint:(_bp?window._mgLastBlueprint:null) };
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
 }
 /* point 13 — Drill my weaknesses: build a tutor set from the existing pool, weighted to weak skills/levels (pure analytics + filter, no generation) */
-function mgDrillWeak(){ var agg=qbAgg('*'); if(!agg.cumulative.seen){ alert('Answer a few questions first so I know your weak areas.'); return; }
+function mgDrillWeak(){ var agg=qbAgg('*'); if(!agg.cumulative.seen){ mbToast('Answer a few questions first so I know your weak areas.'); return; }
   var weakSk={}, weakCg={};
   Object.keys(agg.bySkill).forEach(function(k){ var b=agg.bySkill[k]; if(b.seen>=3 && b.correct/b.seen<0.7) weakSk[k]=1; });
   Object.keys(agg.byCog).forEach(function(k){ var b=agg.byCog[k]; if(b.seen>=3 && b.correct/b.seen<0.7) weakCg[k]=1; });
@@ -4505,7 +4530,7 @@ function smartDrillPlan(scope, count, previewOnly){ scope=scope||'*'; count=coun
   return {ok:true, items:out, reasons:reasons, focus:focusChips, exposure:expo, mode:'tutor', count:out.length, why:(reasons[0]||'Recommended from your recent performance.')};
 }
 function startSmartDrill(scope){ var plan=smartDrillPlan(scope||'*', 20);
-  if(!plan.ok || !plan.items.length){ alert('Not enough data yet — keep practising and MedBank will personalise your drills as it learns your performance.'); return; }
+  if(!plan.ok || !plan.items.length){ mbToast('Not enough data yet — keep practising and MedBank will personalise your drills as it learns your performance.'); return; }
   QB={ topicId:(scope||'*'), mode:plan.mode, items:plan.items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, smart:true, exposure:plan.exposure, kind:'smart_drill', smartWhy:plan.why, smartReasons:plan.reasons, smartFocus:plan.focus };
   smartLog({t:'smart_drill_started', sid:QB.sid, session_type:'smart_drill', dimension:(plan.focus&&plan.focus[0]?plan.focus[0].type:''), reason:plan.why||'', mode:QB.mode, planned:plan.items.length});
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
@@ -4526,7 +4551,7 @@ function smartDrillDim(type,key,scope){ scope=scope||'*'; var pool=smartPool(), 
   key=decodeURIComponent(key);
   var cands=pool.filter(function(q){ if(type==='skill') return (q.skill||'')===key; if(type==='cog') return qbCogOf(q)===key; if(type==='tag') return (q.tag||q.subtopic||'General')===key; if(type==='topic') return q._topicId===key; return false; });
   if(scope && scope!=='*' && type!=='topic') cands=cands.filter(function(q){ return q._topicId===scope; });   // topic-scoped dashboard → keep the drill in that topic
-  if(!cands.length){ alert('No questions available for that area yet.'); return; }
+  if(!cands.length){ mbToast('No questions available for that area yet.'); return; }
   var uns=cands.filter(function(q){return !seen[q._qh];}), sn=cands.filter(function(q){return seen[q._qh];});
   var items=qbShuffle(uns).concat(qbShuffle(sn)).slice(0,10);
   var lbl=(type==='skill')?qbSkillLabel(key):(type==='cog')?qbCogLabel(key):(type==='topic')?((topById(key)||{}).name||'Topic'):key;
@@ -4536,13 +4561,13 @@ function smartDrillDim(type,key,scope){ scope=scope||'*'; var pool=smartPool(), 
 }
 /* ---- Concept retest — a DIFFERENT existing question on the same topic+skill+objective (spec point 18) ---- */
 function conceptRetest(qh){ var s=qbStore(), mt=(s._qmeta||{})[qh];
-  if(!mt){ alert('Concept details not found.'); return; }
+  if(!mt){ mbToast('Concept details not found.'); return; }
   var pool=smartPool(), seen=smartStats('*').seenQh;
   var sameTag=(mt.tag||mt.subtopic||'General'), sameSkill=(mt.skill||''), obj=(mt.objective||mt.teaching||'');
   var cands=pool.filter(function(q){ if(q._qh===qh) return false; if((q.tag||q.subtopic||'General')!==sameTag) return false; if(sameSkill && (q.skill||'')!==sameSkill) return false; return true; });
   var byObj=cands.filter(function(q){ return obj && (q.objective||q.teaching||'')===obj; });
   var use=byObj.length?byObj:cands;
-  if(!use.length){ alert('No other question tests that exact concept yet — the original is in your mistakes to review.'); return; }
+  if(!use.length){ mbToast('No other question tests that exact concept yet — the original is in your mistakes to review.'); return; }
   var uns=use.filter(function(q){return !seen[q._qh];}), sn=use.filter(function(q){return seen[q._qh];});
   var items=qbShuffle(uns).concat(qbShuffle(sn)).slice(0,5);
   var lbl=(sameSkill?qbSkillLabel(sameSkill)+' · ':'')+sameTag;
@@ -4755,14 +4780,14 @@ function smartMasteryCard(scope){ var st=smartStats(scope);
 function adaptStart(){ var cfg=_mgCfg;
   var chosen=Object.keys(cfg.subj).filter(function(k){return cfg.subj[k];});
   var pool=smartPool().filter(function(q){ var okC=!chosen.length||chosen.indexOf(q._subjId)>=0; return okC && (cfg.skill==='all'||(q.skill||'')===cfg.skill); });
-  if(pool.length<3){ alert('Adaptive needs a few more questions in this selection — widen the courses or skill.'); return; }
+  if(pool.length<3){ mbToast('Adaptive needs a few more questions in this selection — widen the courses or skill.'); return; }
   var target=Math.min(cfg.count||20, pool.length);
   // seed each skill's starting level from the student's own history where we have enough evidence
   var st=smartStats('*'), perSkillLvl={};
   QB_SKILLS.forEach(function(sk){ var ss=smartState(st.bySkill[sk[0]]); if(ss.ev){ perSkillLvl[sk[0]] = ss.score>=0.8?2 : ss.score>=0.6?1 : 0; } });
   QB={ topicId:'*', mode:cfg.mode, items:[], i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:'adaptive', adaptive:{lvl:1, perSkillLvl:perSkillLvl, hist:[], perSkill:{}, served:{}}, adaptPool:pool, adaptSeen:{}, adaptTarget:target, kind:'adaptive', smart:true, smartWhy:'Adaptive: each skill’s difficulty rises as you succeed and eases when you struggle.' };
   smartLog({t:'smart_drill_started', sid:QB.sid, session_type:'adaptive', dimension:'adaptive', reason:QB.smartWhy||'', mode:QB.mode, planned:target});
-  var first=adaptPick(); if(!first){ alert('No questions available.'); return; } QB.items.push(first); QB.adaptSeen[first._qh]=1;
+  var first=adaptPick(); if(!first){ mbToast('No questions available.'); return; } QB.items.push(first); QB.adaptSeen[first._qh]=1;
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
 }
 /* pick the next question: rotate to the least-served skill that still has unseen items, at THAT skill's own level */
@@ -6243,7 +6268,7 @@ function examPool(scope){                        // MCQ-capable recall cards for
 function startExam(scope,count){
   const n=Math.max(1, Math.floor(+count)||20);
   const pool=shuf(examPool(scope)); const items=pool.slice(0,Math.min(n,pool.length));
-  if(!items.length){ alert('No exam questions yet.\n\nMock exams are built from the multiple-choice cards in your lectures — add a lecture (Import) and let it finish building, then come back.'); return; }   // BUG: was a silent no-op on an empty account; and it used to point at 🧠 Q-bank, which never feeds this pool
+  if(!items.length){ mbNotice('No exam questions yet.\n\nMock exams are built from the multiple-choice cards in your lectures — add a lecture (Import) and let it finish building, then come back.'); return; }   // BUG: was a silent no-op on an empty account; and it used to point at 🧠 Q-bank, which never feeds this pool
   S={mode:'exam',key:'exam',items,order:items.map((_,k)=>k),i:0,scope,
      answers:new Array(items.length).fill(null), started:Date.now(), finished:0,
      session:{total:items.length}};
@@ -6262,9 +6287,9 @@ function examSubmit(){ if(!S||S.mode!=='exam'||S.finished)return;
 function examMissedItems(){ const out=[]; S.items.forEach((it,k)=>{ if(S.answers[k]!==it.c.ans) out.push(it); }); return out; }
 function examSendHard(){ if(!S)return; examMissedItems().forEach(it=>{ DATA.starred[it.id]=1; logMiss(it.id); });
   persist(); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){}
-  alert(examMissedItems().length+' missed card(s) added to your hard cards.'); }
+  var nMiss=examMissedItems().length; mbToast(nMiss+' missed card'+(nMiss===1?'':'s')+' added to your hard cards'); }
 function examDrillMissed(){ if(!S)return; const items=shuf(examMissedItems().slice());
-  if(!items.length){ alert('Nothing missed — perfect score!'); return; }
+  if(!items.length){ mbToast('Nothing missed — perfect score!'); return; }
   S={mode:'daily',key:'exammiss',label:'Missed in exam',items,order:items.map((_,k)=>k),i:0,show:false,
      session:{done:0,correct:0,total:items.length}}; go('review'); }
 
@@ -7059,15 +7084,14 @@ function exportData(){ try{
     const url=URL.createObjectURL(blob), a=document.createElement('a');
     a.href=url; a.download='medbank-backup-'+dstr()+'.json'; document.body.appendChild(a); a.click();
     setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); },500);
-  }catch(e){ alert('Export failed: '+e.message); } }
+  }catch(e){ mbToast('Export failed: '+e.message); } }
 function importData(input){ const f=input.files&&input.files[0]; if(!f) return; const rd=new FileReader();
   rd.onload=()=>{ try{ const d=JSON.parse(rd.result);
       if(!d||typeof d!=='object'||(!('cards'in d)&&!('log'in d)&&!('streak'in d))) throw new Error('Not a MedBank backup file');
-      if(!confirm('Restore this backup? It REPLACES all current progress on this device.')) return;
-      localStorage.setItem(SKEY,JSON.stringify(d)); location.reload();
-    }catch(e){ alert('Import failed: '+e.message); } };
+      mbConfirm('Restore this backup?','It replaces all current progress on this device.', function(){ localStorage.setItem(SKEY,JSON.stringify(d)); location.reload(); }, {ok:'Replace & restore', danger:true});
+    }catch(e){ mbToast('Import failed: '+e.message+'. Pick a MedBank backup file (.json) and try again.'); } };
   /* SET-08: without onerror an unreadable file (iCloud placeholder, permission, IO) is a totally silent no-op */
-  rd.onerror=()=>{ alert('Import failed — that file could not be read. Export it again, or use "Restore from text" below.'); };
+  rd.onerror=()=>{ mbToast('Import failed — that file couldn’t be read. Export it again, or use “Restore from text” below.'); };
   rd.readAsText(f);
   /* SET-07: clear the input so picking the SAME file again still fires `change`.
      Without this, cancelling the confirm (or any failure) leaves Import looking like a dead button. */
@@ -7102,7 +7126,7 @@ async function writeBackup(force){
 function scheduleBackup(){ if(!DATA.settings.autoBackup||!_bakHandle) return;
   clearTimeout(_bakTimer); _bakTimer=setTimeout(()=>writeBackup(false),1200); }   // debounced auto-save
 async function enableAutoBackup(){
-  if(!fsSupported()){ alert('Automatic file backup needs Chrome or Edge (works on Android Chrome and desktop). On this browser, use Export / Import below instead.'); return; }
+  if(!fsSupported()){ mbNotice('Automatic file backup needs Chrome or Edge (works on Android Chrome and desktop). On this browser, use Export / Import below instead.'); return; }
   try{
     const h=await window.showSaveFilePicker({suggestedName:'medbank-backup.json',
       types:[{description:'MedBank backup',accept:{'application/json':['.json']}}]});
@@ -7137,21 +7161,20 @@ async function shareBackup(){
 async function copyBackup(){
   const txt=JSON.stringify(DATA);
   try{ await navigator.clipboard.writeText(txt);
-    alert('Backup copied. Now open MedBank in the OTHER browser → Settings → "Restore from text" → paste → Restore.');
+    mbNotice('Backup copied. Now open MedBank in the OTHER browser → Settings → "Restore from text" → paste → Restore.');
   }catch(e){
     try{ const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select();
-      document.execCommand('copy'); ta.remove(); alert('Backup copied. Paste it into "Restore from text" in the other browser.'); }
-    catch(e2){ alert('Copy failed — use Export or Share instead.'); }
+      document.execCommand('copy'); ta.remove(); mbNotice('Backup copied. Paste it into "Restore from text" in the other browser.'); }
+    catch(e2){ mbToast('Copy failed — use Export or Share instead.'); }
   }
 }
 function restoreFromText(){
   const el=document.getElementById('restoretext'); if(!el) return;
-  const txt=(el.value||'').trim(); if(!txt){ alert('Paste your backup text into the box first.'); return; }
+  const txt=(el.value||'').trim(); if(!txt){ mbToast('Paste your backup text into the box first.'); el.focus(); return; }
   try{ const d=JSON.parse(txt);
     if(!d||typeof d!=='object'||(!('cards'in d)&&!('log'in d)&&!('streak'in d))) throw new Error('That is not MedBank backup text.');
-    if(!confirm('Restore this backup? It REPLACES all current progress on THIS device.')) return;
-    localStorage.setItem(SKEY,JSON.stringify(d)); location.reload();
-  }catch(e){ alert('Restore failed: '+e.message); }
+    mbConfirm('Restore this backup?','It replaces all current progress on this device.', function(){ localStorage.setItem(SKEY,JSON.stringify(d)); location.reload(); }, {ok:'Replace & restore', danger:true});
+  }catch(e){ mbToast('Restore failed: '+e.message+' — copy the whole backup text again and paste it in.'); }
 }
 /* SET-01: Reset only ever cleared the LOCAL copy. For a signed-in student sync.js re-adopts the
    cloud state on the very next load, so "Cannot be undone" was exactly backwards — the reset
@@ -7160,11 +7183,12 @@ function restoreFromText(){
 function mbResetAll(){
   let signedIn=false;
   try{ signedIn=!!(window.MB_SYNC && MB_SYNC.currentProfileId && MB_SYNC.currentProfileId()); }catch(e){}
-  let msg='Reset ALL your progress on this device?';
-  if(signedIn) msg+='\n\nYou are signed in, so your progress is also saved to your account and will sync back down after the reload. Sign out first if you want this device left empty.';
-  if(!confirm(msg)) return;
+  const sub=signedIn
+    ? 'You’re signed in, so your progress is also saved to your account and will sync back down after the reload. Sign out first if you want this device left empty.'
+    : 'Every card, streak and score on this device will be cleared. This can’t be undone.';
+  mbConfirm('Reset all progress on this device?', sub, function(){
   try{ localStorage.removeItem(SKEY); }catch(e){}
-  location.reload();
+  location.reload(); }, {ok:'Reset everything', danger:true});
 }
 function backupRel(){ const t=DATA.settings.lastBackup; if(!t) return 'not yet';
   const s=Math.floor((Date.now()-t)/1000);
@@ -7173,10 +7197,10 @@ function backupRel(){ const t=DATA.settings.lastBackup; if(!t) return 'not yet';
 async function setUseIdle(on){ DATA.settings.useIdle=!!on; persist(); if(on) await startIdle(true); render(); }
 function setQuiet(which,v){ v=Math.max(0,Math.min(23,parseInt(v)||0)); if(which==='start')DATA.settings.quietStart=v; else DATA.settings.quietEnd=v; persist(); render(); }
 function testNudge(){
-  if(!('Notification' in window)){ alert('Notifications are not supported here.'); return; }
+  if(!('Notification' in window)){ mbToast('Notifications are not supported here.'); return; }
   if(Notification.permission!=='granted'){ enableReminders(); return; }
   const items=nudgeItems(10);
-  if(!items.length){ alert('No hard or due cards to show yet — study a topic first, then star a few cards.'); return; }
+  if(!items.length){ mbToast('No hard or due cards to show yet — study a topic first, then star a few cards.'); return; }
   DATA.settings.lastNudge=Date.now(); persist();
   const n=habitNudge();
   swPing('notify',{title:n.title,body:n.body,url:n.url,strict:DATA.settings.strict});
@@ -7188,14 +7212,14 @@ function testNudge(){
    nudgeTick bailed at its permission check on every single tick. Only turn on if it can actually fire. */
 async function enableReminders(){
   if(!('Notification' in window)){
-    alert("This browser can't show notifications. Install MedBank to your home screen (Settings → App) and try again — MedBank will still nudge you in-app while it's open.");
+    mbNotice("This browser can't show notifications. Install MedBank to your home screen (Settings → App) and try again — MedBank will still nudge you in-app while it's open.");
     return;
   }
   let perm='denied';
   try{ perm=await Notification.requestPermission(); }catch(e){ perm='denied'; }
   if(perm!=='granted'){
     DATA.settings.remindOn=false; persist(); render();
-    alert("Notifications are blocked for MedBank, so reminders can't be turned on. Allow notifications for this site in your browser (or phone) settings, then tap Turn on again.");
+    mbNotice("Notifications are blocked for MedBank, so reminders can't be turned on. Allow notifications for this site in your browser (or phone) settings, then tap Turn on again.");
     return;
   }
   DATA.settings.remindOn=true; persist();
@@ -7535,7 +7559,7 @@ function testCloudVoice(id){ const ent=CLOUD_VOICES.find(v=>v.id===id)||CLOUD_VO
   let done=false;
   const devFallback=(msg)=>{ if(done)return; done=true;
     try{ if('speechSynthesis'in window){ const u=tuneUtter(new SpeechSynthesisUtterance(SAMPLE)); speechSynthesis.cancel(); speechSynthesis.speak(u); } }catch(e){}
-    if(msg){ try{ alert(msg); }catch(e){} } };
+    if(msg){ try{ mbToast(msg); }catch(e){} } };
   if(location.protocol==='file:'){ devFallback('Realistic online voices only work on the live site (medbank.com.ng), not when the app is opened as a local file. Playing your device voice for now.'); return; }
   loadPuter(()=>{
     if(!(window.puter&&window.puter.ai&&window.puter.ai.txt2speech)){ devFallback('Could not reach the online voice service — check your internet. Using your device voice instead.'); return; }
@@ -7696,7 +7720,7 @@ async function finishRecording(topicId){
   if(!chunks.length){ VOICE.phase=''; render(); return; }
   const blob=new Blob(chunks,{type:chunks[0].type||'audio/webm'});
   await new Promise(res=>loadPuter(res));
-  if(!(window.puter&&window.puter.ai&&window.puter.ai.speech2txt)){ VOICE.phase=''; render(); alert('Speech service unavailable — check your internet, or type your answer.'); return; }
+  if(!(window.puter&&window.puter.ai&&window.puter.ai.speech2txt)){ VOICE.phase=''; render(); mbToast('Speech service unavailable — check your internet, or type your answer.'); return; }
   try{
     const r=await window.puter.ai.speech2txt(blob,{model:'gpt-4o-mini-transcribe'});
     const txt=((r&&r.text)||(typeof r==='string'?r:'')||'').trim();
@@ -7706,7 +7730,7 @@ async function finishRecording(topicId){
 function startVoiceQuiz(topicId){
   warmTTS();
   VOICE.on=true; VOICE.topic=topicId; VOICE.phase='';
-  if(!recorderSupported()) alert('Your browser blocks microphone recording — you can still type, and the tutor will read replies aloud.');
+  if(!recorderSupported()) mbToast('Your browser blocks microphone recording — you can still type, and the tutor will read replies aloud.');
   if(!(AICHAT[topicId]&&AICHAT[topicId].length)) aiSend(topicId, 'Start quizzing me now. Ask your first question.');
   else { render(); aiListen(topicId); }
 }
@@ -7716,15 +7740,16 @@ function stopVoice(){ VOICE.on=false; VOICE.phase='';
 function aiMicOnce(topicId){                        // push-to-talk outside the loop: tap to record, tap to stop
   warmTTS();
   if(VOICE.rec && VOICE.rec.state==='recording'){ micDone(); return; }
-  if(!recorderSupported()){ alert('Your browser blocks microphone recording here — type your answer instead.'); return; }
+  if(!recorderSupported()){ mbToast('Your browser blocks microphone recording here — type your answer instead.'); return; }
   VOICE.topic=topicId; aiListen(topicId);
 }
 function aiSendFromInput(topicId){ warmTTS(); const el=document.getElementById('aiin'); if(!el)return;
   const v=el.value.trim(); if(!v)return;
   if(typeof AIBUSY!=='undefined' && AIBUSY) return;   // SCA-04: tutor still replying — leave the message in the box instead of clearing + dropping it
   el.value=''; aiSend(topicId, v); }
-function clearAI(topicId){ if((AICHAT[topicId]||[]).length && !confirm('Clear this tutor chat?')) return;   // SCA-08: confirm the one-tap wipe (it sits right next to "Start voice quiz")
-  AICHAT[topicId]=[]; if(VOICE.on) stopVoice(); else render(); }
+function clearAI(topicId){   // SCA-08: confirm the one-tap wipe (it sits right next to "Start voice quiz")
+  const go=()=>{ AICHAT[topicId]=[]; if(VOICE.on) stopVoice(); else render(); };
+  if((AICHAT[topicId]||[]).length) mbConfirm('Clear this tutor chat?','The conversation can’t be brought back.', go, {ok:'Clear chat', danger:true}); else go(); }
 function aiAudioOn(){ return DATA.settings.aiVoice!==false; }
 function toggleAiVoice(){ DATA.settings.aiVoice=!aiAudioOn(); persist();
   if(DATA.settings.aiVoice) warmTTS(); else { try{speechSynthesis.cancel();}catch(e){} stopCloud(); } render(); }
@@ -8211,7 +8236,7 @@ let deferredInstall=null;
 window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferredInstall=e;
   const b=document.getElementById('installbtn'); if(b) b.style.display='inline-flex'; });
 async function doInstall(){
-  if(!deferredInstall){ alert('To install: on iPhone use Share → “Add to Home Screen”; on Android use the browser menu → “Install app”.'); return; }
+  if(!deferredInstall){ mbNotice('To install: on iPhone use Share → “Add to Home Screen”; on Android use the browser menu → “Install app”.'); return; }
   deferredInstall.prompt(); try{ await deferredInstall.userChoice; }catch(e){} deferredInstall=null;
   const b=document.getElementById('installbtn'); if(b) b.style.display='none';
 }
