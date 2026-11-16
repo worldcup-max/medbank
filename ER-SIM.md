@@ -20,3 +20,14 @@ An emergency room simulator inside the app (`#/ersim`). The student is the docto
 
 ## Adding a case
 Copy an existing case in `er-sim-cases.js`, keep the title to the presenting complaint (never the diagnosis), add its ideal path to `IDEAL` in `test-ersim.mjs`, and run `node --test test-ersim.mjs` in `import-server/`.
+
+## Painted patients (case.art)
+
+A case can carry `art` (see `okada-crash` in er-sim-cases.js). Its pictures live in `er-sim-art/<case-id>/`: one base picture of the bay, then edits of that same picture (distress, critical, treated) so the room never moves between them. They were made in Google Flow for MedBank; nothing is taken from other simulators.
+
+- The state is picked live: critical (SpO₂ < 80, SBP < 70 or dead), distress (a `distress`/`fitting` look is active), treated (`treatedWhen` met), else base. Changes crossfade.
+- `baked` lists the equipment a picture already shows, so it is not drawn twice. Everything else is drawn on top at the `at` anchors (image pixels).
+- Live layers: chest rise at the real RR, the monitor screen (ECG, pleth, numbers, alarm flash), drip, drain bubbles, curtain sway, sunlight, a wall clock on real time.
+- Sound is off until the student taps 🔇 on the picture: a beep per beat at the HR, pitch falling with SpO₂, alarms, a soft room hum.
+- Cases without `art` keep the drawn SVG patient.
+- To add art for a case: 1206×674 WebP (~70 KB each), then fill `at` by eye from the base picture.

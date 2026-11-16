@@ -52,7 +52,9 @@ function siteFor(id, cat){
 }
 
 function svg(c, run, last){
+  if(c.art && typeof document!=='undefined') return photo(c, run, last);
   var lk=c.look||{}, L=looks(c, run), v=run.v, dead=run.outcome==='died';
+  SND.set(run);
   var age=lk.build||'adult', scale= age==='child'?0.78 : age==='teen'?0.9 : 1;
   var skinBase=lk.skin||'#7a4a2a';
   var pale = L.pale || v.sbp<85 || v.spo2<85;
@@ -237,6 +239,229 @@ function svg(c, run, last){
   return o.join('');
 }
 
+/* ---------------------------------------------------------------------
+ * Painted scenes. A case with `art` shows painted images of the same bay
+ * (base / distress / critical / treated, made from one picture so the room
+ * never moves) and crossfades between them as the patient changes. On top,
+ * live SVG layers keep the room real: the chest rises at the real RR, the
+ * monitor screen runs the ECG at the real HR and alarms, the drip drips, the
+ * drain bubbles, the curtain sways, sunlight drifts, the wall clock ticks,
+ * and equipment you add appears where it goes (unless the picture already
+ * shows it: art.baked).
+ * art = { dir, w, h, states:{base,distress,critical,treated},
+ *         treatedWhen:{ fixed:[problem ids], done:[action ids] },
+ *         baked:{ state:[action ids] }, live:{ state:{ drip:[x,y], bubble:[x,y] } },
+ *         at:{ head, mouth, nose, neck, chest, arm, hand, side, leg, foot, bedside,
+ *              pole, floor, bagHook, monitor:[x,y,w,h], body:[cx,cy,rx,ry], curtain:[x,y,w,h],
+ *              window:[x,y,w,h], clock:[x,y,r] } }   (image pixels)
+ * --------------------------------------------------------------------- */
+var PREV={}, PRELOADED={};
+function artState(c, run, L){
+  var a=c.art, v=run.v;
+  if(run.outcome==='died' || v.spo2<80 || v.sbp<70) return 'critical';
+  if(L.distress || L.fitting) return 'distress';
+  var tw=a.treatedWhen;
+  if(a.states.treated && tw &&
+     (tw.fixed||[]).every(function(id){ var s=run.probs[id]; return s && s.fixed; }) &&
+     (tw.done||[]).every(function(id){ return did(run,[id]); })) return 'treated';
+  return 'base';
+}
+function photo(c, run, last){
+  var A=c.art, T=A.at, L=looks(c, run), v=run.v, dead=run.outcome==='died';
+  SND.set(run);
+  var st=artState(c, run, L), prev=PREV[c.id]; PREV[c.id]=st;
+  var fade = prev && prev!==st;
+  var src=function(s){ return A.dir+A.states[s]; };
+  if(!PRELOADED[c.id]){ PRELOADED[c.id]=1; Object.keys(A.states).forEach(function(k){ var im=new Image(); im.src=src(k); }); }
+  var baked=(A.baked&&A.baked[st])||[], live=(A.live&&A.live[st])||{};
+  var has=function(id){ return did(run,[id]) && baked.indexOf(id)<0; };
+  var rr=Math.max(6,Math.min(60,v.rr||16)), hr=Math.max(20,Math.min(220,v.hr||80));
+  var W=A.w, H=A.h, o=[];
+  o.push('<div class="ers-scene ers-photo'+(dead?' ers-dead':'')+'" role="img" aria-label="'+e(sceneLabel(c, run, L))+'" style="aspect-ratio:'+W+'/'+H+'">');
+  if(fade) o.push('<img class="ers-ph" src="'+e(src(prev))+'" alt="">');
+  o.push('<img class="ers-ph'+(fade?' ers-in':'')+'" src="'+e(src(st))+'" alt="">');
+  o.push('<svg class="ers-ov'+(fade?' ers-in':'')+'" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" aria-hidden="true">');
+  var b=T.body, cu=T.curtain, wi=T.window;
+  o.push('<defs><radialGradient id="ersBg"><stop offset=".55" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>'+
+    '<mask id="ersBm"><ellipse cx="'+b[0]+'" cy="'+b[1]+'" rx="'+b[2]+'" ry="'+b[3]+'" fill="url(#ersBg)"/></mask>'+
+    '<clipPath id="ersCu"><rect x="'+cu[0]+'" y="'+cu[1]+'" width="'+cu[2]+'" height="'+cu[3]+'"/></clipPath>'+
+    '<linearGradient id="ersSun" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff4d6" stop-opacity=".34"/><stop offset="1" stop-color="#fff4d6" stop-opacity="0"/></linearGradient></defs>');
+  // curtain: a copy of its strip, swaying from the rail
+  o.push('<g clip-path="url(#ersCu)"><image class="ers-sway" href="'+e(src(st))+'" width="'+W+'" height="'+H+'" style="transform-origin:'+(cu[0]+cu[2]/2)+'px '+cu[1]+'px"/></g>');
+  // sunlight through the window, drifting as clouds pass, with dust in it
+  o.push('<g class="ers-sun"><path d="M'+wi[0]+' '+(wi[1]+wi[3])+' L'+(wi[0]+wi[2])+' '+(wi[1]+wi[3])+' L'+(wi[0]+wi[2]+300)+' '+H+' L'+(wi[0]+60)+' '+H+' Z" fill="url(#ersSun)"/>'+
+    [0,1,2,3,4].map(function(i){ return '<circle class="ers-mote m'+i+'" cx="'+(wi[0]+40+i*48)+'" cy="'+(wi[1]+wi[3]+40+(i%3)*50)+'" r="'+(1.6+(i%2))+'" fill="#fffbe8"/>'; }).join('')+'</g>');
+  // wall clock: real time, ticking
+  if(T.clock){
+    var k=T.clock, now=new Date(), mi=now.getMinutes(), hh=(now.getHours()%12)+mi/60, sec=now.getSeconds();
+    var hand=function(deg,len,w,col){ var r=deg*Math.PI/180; return '<line x1="'+k[0]+'" y1="'+k[1]+'" x2="'+(k[0]+Math.sin(r)*len).toFixed(1)+'" y2="'+(k[1]-Math.cos(r)*len).toFixed(1)+'" stroke="'+col+'" stroke-width="'+w+'" stroke-linecap="round"/>'; };
+    o.push('<g><circle cx="'+k[0]+'" cy="'+(k[1]+3)+'" r="'+k[2]+'" fill="#000" opacity=".12"/><circle cx="'+k[0]+'" cy="'+k[1]+'" r="'+k[2]+'" fill="#fbf7ee" stroke="#5a4a36" stroke-width="4"/>');
+    for(var q=0;q<12;q++){ var r0=q*Math.PI/6; o.push('<line x1="'+(k[0]+Math.sin(r0)*(k[2]-4)).toFixed(1)+'" y1="'+(k[1]-Math.cos(r0)*(k[2]-4)).toFixed(1)+'" x2="'+(k[0]+Math.sin(r0)*(k[2]-(q%3?8:11))).toFixed(1)+'" y2="'+(k[1]-Math.cos(r0)*(k[2]-(q%3?8:11))).toFixed(1)+'" stroke="#5a4a36" stroke-width="'+(q%3?1.5:2.5)+'"/>'); }
+    o.push(hand(hh*30,k[2]*0.5,3.5,'#2b2b2b')+hand(mi*6,k[2]*0.75,2.5,'#2b2b2b')+
+      '<g class="ers-sec" style="transform-origin:'+k[0]+'px '+k[1]+'px;animation-delay:-'+sec+'s">'+hand(0,k[2]*0.82,1.2,'#c0392b')+'</g><circle cx="'+k[0]+'" cy="'+k[1]+'" r="2.5" fill="#2b2b2b"/></g>');
+  }
+  // the patient breathing: the chest and blanket rise at the real RR
+  if(!dead) o.push('<g mask="url(#ersBm)"><image class="ers-breathe2'+(L.fitting?' ers-fit':'')+'" href="'+e(src(st))+'" width="'+W+'" height="'+H+'" style="animation-duration:'+(60/rr).toFixed(2)+'s;transform-origin:'+b[0]+'px '+(b[1]+b[3]*0.7)+'px"/></g>');
+  else o.push('<rect width="'+W+'" height="'+H+'" fill="#1b1b1b" opacity=".3"/>');
+
+  // ---- equipment that the picture does not already show
+  var P=function(kk){ return T[kk]; };
+  var mouth=P('mouth'), nose=P('nose'), hand=P('hand'), chest=P('chest'), arm=P('arm'), neck=P('neck'), side=P('side');
+  var tube='#d9eef6';
+  if(has('o2_nasal') && !did(run,['o2_mask','bvm','intubate'])) o.push('<path d="M'+nose[0]+' '+nose[1]+' C'+(nose[0]-20)+' '+(nose[1]+30)+' '+(nose[0]-60)+' '+(nose[1]+20)+' '+(nose[0]-130)+' '+(nose[1]+70)+'" stroke="'+tube+'" stroke-width="4" fill="none"/><circle cx="'+nose[0]+'" cy="'+nose[1]+'" r="4" fill="'+tube+'"/>');
+  if(has('o2_mask') && !did(run,['bvm','intubate'])) o.push('<g><path d="M'+mouth[0]+' '+(mouth[1]+16)+' C'+(mouth[0]-30)+' '+(mouth[1]+70)+' '+(mouth[0]-90)+' '+(mouth[1]+40)+' '+(mouth[0]-150)+' '+(mouth[1]+90)+'" stroke="'+tube+'" stroke-width="5" fill="none"/>'+
+    '<ellipse cx="'+mouth[0]+'" cy="'+(mouth[1]-4)+'" rx="22" ry="18" fill="#bfe8d5" fill-opacity=".55" stroke="#6fbf9c" stroke-width="2"/><ellipse cx="'+(mouth[0]+6)+'" cy="'+(mouth[1]+22)+'" rx="15" ry="10" fill="#bfe8d5" fill-opacity=".5" stroke="#6fbf9c" stroke-width="2"/>'+
+    '<path d="M'+(mouth[0]-20)+' '+(mouth[1]-8)+' C'+(mouth[0]-40)+' '+(mouth[1]-14)+' '+(mouth[0]-44)+' '+(mouth[1]-2)+' '+(mouth[0]-40)+' '+(mouth[1]+8)+'" stroke="#e6e6e6" stroke-width="2" fill="none"/></g>');
+  if(has('bvm')) o.push('<g><ellipse cx="'+mouth[0]+'" cy="'+(mouth[1]-4)+'" rx="22" ry="18" fill="#9fd0ea" fill-opacity=".6" stroke="#5b9bc0" stroke-width="2"/><ellipse class="ers-bag" cx="'+(mouth[0]+10)+'" cy="'+(mouth[1]-55)+'" rx="36" ry="17" fill="#e7f2f9" stroke="#5b9bc0" stroke-width="2"/></g>');
+  if(has('intubate')) o.push('<path d="M'+mouth[0]+' '+mouth[1]+' L'+(mouth[0]+4)+' '+(mouth[1]-55)+' L'+(mouth[0]+50)+' '+(mouth[1]-75)+'" stroke="#eef5fa" stroke-width="7" fill="none"/>');
+  if(has('ngt')) o.push('<path d="M'+nose[0]+' '+nose[1]+' C'+(nose[0]+30)+' '+(nose[1]-20)+' '+(nose[0]+50)+' '+(nose[1]+10)+' '+(nose[0]+75)+' '+(nose[1]+45)+'" stroke="#f2e2a8" stroke-width="4" fill="none"/>');
+  if(has('cspine')) o.push('<path d="M'+(neck[0]-22)+' '+(neck[1]-16)+' q24 -8 46 4 l-4 30 q-22 -8 -44 0 z" fill="#efe9d8" stroke="#b3a98f" stroke-width="2"/>');
+  if(has('cool')) o.push('<rect x="'+(T.head[0]-24)+'" y="'+(T.head[1]-34)+'" width="44" height="14" rx="5" fill="#fff" stroke="#c9d6e0" stroke-width="2"/>');
+  // IV: bag on the pole, drip chamber, line to the cannula in the hand
+  var line=did(run,['iv_access','io_access']);
+  var fluidIds=['blood','rl_planc','ns_bolus','dextrose10','maint','kcl','antivenom','insulin_frii','mgso4','artesunate'], bag=null, lt=-1;
+  fluidIds.forEach(function(id){ var t=lastOf(run,[id]); if(t>lt){ lt=t; bag=id; } });
+  if(line && baked.indexOf('iv_access')<0){
+    o.push('<rect x="'+(hand[0]-14)+'" y="'+(hand[1]-8)+'" width="20" height="13" rx="3" fill="#f7f7f2" stroke="#b9c3cc" stroke-width="1.5"/>');
+    if(bag){
+      var hk=T.bagHook, red=bag==='blood';
+      o.push('<g><rect x="'+(hk[0]-17)+'" y="'+hk[1]+'" width="34" height="62" rx="9" fill="'+(red?'#9b1c1c':'#eaf3fa')+'" fill-opacity=".9" stroke="#9aa7b4" stroke-width="2"/>'+
+        '<rect x="'+(hk[0]-5)+'" y="'+(hk[1]+62)+'" width="10" height="18" rx="3" fill="#dfe8ef" stroke="#9aa7b4" stroke-width="1.5"/>'+
+        '<path d="M'+hk[0]+' '+(hk[1]+80)+' C'+hk[0]+' '+(hk[1]+190)+' '+(hand[0]-120)+' '+(hand[1]-90)+' '+(hand[0]-10)+' '+(hand[1]-2)+'" stroke="'+(red?'#b33a3a':'#cfe3f2')+'" stroke-width="3" fill="none"/>'+
+        '<circle class="ers-drip2" cx="'+hk[0]+'" cy="'+(hk[1]+67)+'" r="2.4" fill="'+(red?'#9b1c1c':'#7fb6e0')+'"/></g>');
+    }
+  }
+  if(live.drip) o.push('<circle class="ers-drip2" cx="'+live.drip[0]+'" cy="'+live.drip[1]+'" r="2.4" fill="#7fb6e0"/>');
+  if(has('needle_decomp')) o.push('<g><line x1="'+(chest[0]-24)+'" y1="'+(chest[1]-4)+'" x2="'+(chest[0]-16)+'" y2="'+(chest[1]-26)+'" stroke="#cfd6dc" stroke-width="3"/><rect x="'+(chest[0]-22)+'" y="'+(chest[1]-40)+'" width="11" height="14" rx="2" fill="#f08a24"/></g>');
+  if(has('chest_drain')){
+    var fl=T.floor;
+    o.push('<g><path d="M'+side[0]+' '+side[1]+' C'+(side[0]-10)+' '+(side[1]+120)+' '+(fl[0]+10)+' '+(fl[1]-120)+' '+fl[0]+' '+(fl[1]-60)+'" stroke="#d6e3ec" stroke-width="5" fill="none"/>'+
+      '<rect x="'+(fl[0]-24)+'" y="'+(fl[1]-62)+'" width="48" height="66" rx="8" fill="#e9f3fb" fill-opacity=".85" stroke="#90a8bb" stroke-width="2"/><rect x="'+(fl[0]-20)+'" y="'+(fl[1]-28)+'" width="40" height="28" rx="4" fill="#bfe0f5"/></g>');
+    live = { drip:live.drip, bubble:[fl[0], fl[1]-6] };
+  }
+  if(live.bubble && !dead) o.push('<g style="animation-duration:'+(60/rr).toFixed(2)+'s" class="ers-swing"><circle class="ers-bubble2" cx="'+live.bubble[0]+'" cy="'+live.bubble[1]+'" r="3.2" fill="#fff"/><circle class="ers-bubble2 b2" cx="'+(live.bubble[0]+7)+'" cy="'+(live.bubble[1]+3)+'" r="2.4" fill="#fff"/></g>');
+  if(has('catheter')){
+    var bs=T.bedside, dry=L.dry && !(run.probs.dehydration&&run.probs.dehydration.fixed);
+    o.push('<g><path d="M'+(bs[0]-60)+' '+(bs[1]-90)+' C'+(bs[0]-50)+' '+(bs[1]-30)+' '+(bs[0]-10)+' '+(bs[1]-30)+' '+bs[0]+' '+(bs[1]-10)+'" stroke="#e7d9a5" stroke-width="4" fill="none"/>'+
+      '<rect x="'+(bs[0]-22)+'" y="'+(bs[1]-12)+'" width="44" height="58" rx="8" fill="#f6f1df" fill-opacity=".9" stroke="#b9ad86" stroke-width="2"/>'+
+      '<rect x="'+(bs[0]-18)+'" y="'+(bs[1]+(dry?32:14))+'" width="36" height="'+(dry?10:28)+'" rx="4" fill="'+(dry?'#b8732a':'#e8c95a')+'"/></g>');
+  }
+  // monitor: leads, SpO2 probe, BP cuff, and the live screen
+  var mon=did(run,['monitor']), M=T.monitor;
+  if(mon){
+    var jack=[M[0]+12, M[1]+M[3]+12];
+    o.push('<g fill="none" stroke-width="2"><path d="M'+chest[0]+' '+chest[1]+' C'+(chest[0]+120)+' '+(chest[1]-120)+' '+(jack[0]-200)+' '+(jack[1]-40)+' '+jack[0]+' '+jack[1]+'" stroke="#e05555"/>'+
+      '<path d="M'+(chest[0]+20)+' '+(chest[1]-6)+' C'+(chest[0]+140)+' '+(chest[1]-110)+' '+(jack[0]-180)+' '+(jack[1]-30)+' '+(jack[0]+4)+' '+(jack[1]+2)+'" stroke="#e6c34a"/>'+
+      '<path d="M'+(hand[0]+16)+' '+hand[1]+' C'+(hand[0]+160)+' '+(hand[1]+40)+' '+(jack[0]-120)+' '+(jack[1]+40)+' '+(jack[0]+8)+' '+(jack[1]+4)+'" stroke="#6aa9d8"/></g>'+
+      '<circle cx="'+(chest[0])+'" cy="'+chest[1]+'" r="5" fill="#f2f2f2" stroke="#999"/><circle cx="'+(chest[0]+20)+'" cy="'+(chest[1]-6)+'" r="5" fill="#f2f2f2" stroke="#999"/>'+
+      '<rect x="'+(hand[0]+10)+'" y="'+(hand[1]-7)+'" width="16" height="12" rx="4" fill="#3a3f47"/><circle class="ers-led" cx="'+(hand[0]+18)+'" cy="'+(hand[1]-1)+'" r="4" fill="#ff3b3b"/>'+
+      '<rect x="'+(arm[0]-11)+'" y="'+(arm[1]-12)+'" width="22" height="22" rx="5" fill="#3f6d9c" opacity=".92"/>');
+  }
+  var alarm=SND.level(run);
+  o.push('<g><rect x="'+M[0]+'" y="'+M[1]+'" width="'+M[2]+'" height="'+M[3]+'" rx="3" fill="#060a10"/>');
+  if(mon){
+    var gx=M[0]+3, gy=M[1]+5, gw=M[2]*0.62, gh=M[3]*0.36;
+    o.push('<svg x="'+gx+'" y="'+gy+'" width="'+gw+'" height="'+gh+'" viewBox="0 0 88 20" preserveAspectRatio="none"><g class="'+(dead?'':'ers-ecg')+'" style="animation-duration:'+(dead?0:(60/hr)).toFixed(2)+'s"><path d="'+(dead?'M0 12 H176':ecgPath())+'" stroke="'+(dead?'#ff6b6b':'#7CF29A')+'" stroke-width="2" fill="none"/></g></svg>'+
+      '<svg x="'+gx+'" y="'+(gy+gh+2)+'" width="'+gw+'" height="'+(gh*0.8)+'" viewBox="0 0 88 20" preserveAspectRatio="none"><g class="'+(dead?'':'ers-ecg')+'" style="animation-duration:'+(dead?0:(60/hr)).toFixed(2)+'s"><path d="'+(dead?'M0 16 H176':plethPath())+'" stroke="#7fd7ff" stroke-width="2" fill="none"/></g></svg>'+
+      '<text class="ers-hrnum" x="'+(M[0]+M[2]-3)+'" y="'+(M[1]+20)+'" text-anchor="end" font-size="16" font-weight="800" fill="'+(dead?'#ff6b6b':'#7CF29A')+'" font-family="system-ui,sans-serif" style="animation-duration:'+(60/hr).toFixed(2)+'s">'+(dead?'0':Math.round(hr))+'</text>'+
+      '<text x="'+(M[0]+M[2]-3)+'" y="'+(M[1]+38)+'" text-anchor="end" font-size="11" font-weight="800" fill="#7fd7ff" font-family="system-ui,sans-serif">'+(dead?'--':Math.round(v.spo2))+'</text>'+
+      '<text x="'+(M[0]+3)+'" y="'+(M[1]+M[3]-5)+'" font-size="10" font-weight="700" fill="#ffd166" font-family="system-ui,sans-serif">'+(dead?'--/--':Math.round(v.sbp)+'/'+Math.round(v.dbp))+'</text>'+
+      '<text x="'+(M[0]+M[2]-3)+'" y="'+(M[1]+M[3]-5)+'" text-anchor="end" font-size="9" font-weight="700" fill="#e6e6e6" font-family="system-ui,sans-serif">'+Math.round(v.rr)+'</text>');
+    if(alarm) o.push('<rect class="ers-alarm'+(alarm>1?' hi':'')+'" x="'+M[0]+'" y="'+M[1]+'" width="'+M[2]+'" height="'+M[3]+'" rx="3" fill="none" stroke="'+(alarm>1?'#ff3b3b':'#ffb020')+'" stroke-width="5"/>');
+    o.push('<rect x="'+(M[0]-40)+'" y="'+(M[1]-30)+'" width="'+(M[2]+80)+'" height="'+(M[3]+70)+'" fill="'+(alarm>1?'#ff5a5a':'#7CF29A')+'" opacity=".06" class="'+(alarm>1?'ers-glow':'')+'"/>');
+  } else {
+    o.push('<circle class="ers-led" cx="'+(M[0]+M[2]-8)+'" cy="'+(M[1]+M[3]-8)+'" r="2.5" fill="#ffb020"/>');
+  }
+  o.push('</g>');
+
+  // ---- the spot you just acted on
+  if(last && last.id && (Date.now()-last.at)<2600){
+    var Ad=(root.ERSIM_ENGINE&&ERSIM_ENGINE.BYID[last.id])||{};
+    var sk=siteFor(last.id, Ad.cat);
+    var s=sk && (T[sk] || (sk==='belly'?T.chest:null));
+    if(s){
+      var lab=shortLabel(last.id, Ad.label||'');
+      var lw=230, lx=Math.min(Math.max(s[0]-lw/2,10),W-lw-10), ly=s[1]<200?s[1]+40:s[1]-90;
+      o.push('<g class="ers-ping"><circle cx="'+s[0]+'" cy="'+s[1]+'" r="24" fill="none" stroke="#ffb020" stroke-width="6"/>'+
+        '<rect x="'+lx+'" y="'+ly+'" width="'+lw+'" height="40" rx="20" fill="#1d2433" opacity=".88"/><text x="'+(lx+lw/2)+'" y="'+(ly+27)+'" text-anchor="middle" font-size="20" font-weight="700" fill="#fff" font-family="system-ui,sans-serif">'+e(lab)+'</text></g>');
+    }
+  }
+  o.push('</svg>');
+  o.push('<button type="button" class="ers-snd" onclick="ERSIM_SCENE.sound.toggle()" aria-pressed="'+SND.isOn()+'" aria-label="Monitor sound">'+(SND.isOn()?'🔊':'🔇')+'</button>');
+  o.push('</div>');
+  return o.join('');
+}
+function plethPath(){
+  var b=function(x){ return 'L'+(x+10)+' 16 C'+(x+18)+' 2 '+(x+26)+' 2 '+(x+34)+' 10 C'+(x+38)+' 13 '+(x+42)+' 9 '+(x+48)+' 12 C'+(x+60)+' 16 '+(x+76)+' 17 '+(x+88)+' 16'; };
+  return 'M0 16 '+b(0)+' '+b(88);
+}
+
+/* ---------------------------------------------------------------------
+ * Bedside sound (WebAudio, no files): the monitor beeps on every beat at
+ * the real HR, and the pitch drops as SpO₂ falls, like a real oximeter.
+ * Alarms sound when vitals are dangerous (3 fast high tones) or abnormal
+ * (3 slower tones), asystole after death; a soft room hum underneath.
+ * Off until the student taps 🔇 (browsers need a tap to play sound).
+ * Stops by itself when the scene leaves the page or the tab is hidden.
+ * --------------------------------------------------------------------- */
+var SND=(function(){
+  var ctx=null, on=false, cur=null, timer=null, alarmAt=0, hum=null;
+  try{ on=root.localStorage && localStorage.getItem('mbersimSound')==='1'; }catch(_){}
+  function level(run){
+    if(!run || !did(run,['monitor'])) return 0;
+    var v=run.v; if(run.outcome==='died') return 2;
+    if(v.spo2<85 || v.sbp<80 || v.hr>150 || v.hr<40 || v.rr>40 || v.rr<8) return 2;
+    if(v.spo2<92 || v.sbp<90 || v.hr>120 || v.hr<50 || v.rr>28 || v.temp>=39) return 1;
+    return 0;
+  }
+  function ac(){
+    if(!ctx){ var C=root.AudioContext||root.webkitAudioContext; if(!C) return null; try{ ctx=new C(); }catch(_){ return null; } }
+    if(ctx.state==='suspended' && ctx.resume) ctx.resume();
+    return ctx;
+  }
+  function tone(f, dur, vol, type, delay){
+    var a=ac(); if(!a) return;
+    var t=a.currentTime+(delay||0), o=a.createOscillator(), g=a.createGain();
+    o.type=type||'sine'; o.frequency.value=f;
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+0.01); g.gain.setValueAtTime(vol,t+dur-0.02); g.gain.linearRampToValueAtTime(0,t+dur);
+    o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+dur+0.03);
+  }
+  function startHum(){
+    var a=ac(); if(!a || hum) return;
+    var n=a.sampleRate*2, buf=a.createBuffer(1,n,a.sampleRate), d=buf.getChannelData(0), last=0;
+    for(var i=0;i<n;i++){ last=(last+0.02*(Math.random()*2-1))/1.02; d[i]=last*3.5; }
+    var s=a.createBufferSource(), f=a.createBiquadFilter(), g=a.createGain();
+    s.buffer=buf; s.loop=true; f.type='lowpass'; f.frequency.value=320; g.gain.value=0.05;
+    s.connect(f); f.connect(g); g.connect(a.destination); s.start(); hum={ s:s, g:g };
+  }
+  function stopHum(){ if(hum){ try{ hum.s.stop(); }catch(_){} hum=null; } }
+  function present(){ return typeof document!=='undefined' && !document.hidden && document.querySelector('.ers-scene'); }
+  function beat(){
+    timer=null;
+    if(!on || !cur || !present()){ stopHum(); return; }
+    startHum();
+    var run=cur, v=run.v, mon=did(run,['monitor']), lv=level(run), now=Date.now(), next=1000;
+    if(mon && run.outcome==='died'){
+      tone(980,0.9,0.05,'square'); next=1000;
+    } else if(mon){
+      var spo2=Math.max(50,Math.min(100,v.spo2));
+      tone(Math.round(880-(100-spo2)*12), 0.08, 0.14, 'sine');
+      next=60000/Math.max(20,Math.min(220,v.hr||80));
+      if(lv===2 && now-alarmAt>2600){ alarmAt=now; [0,0.14,0.28].forEach(function(d){ tone(988,0.11,0.07,'triangle',0.25+d); }); }
+      else if(lv===1 && now-alarmAt>6000){ alarmAt=now; [0,0.3,0.6].forEach(function(d){ tone(660,0.18,0.05,'triangle',0.3+d); }); }
+    }
+    timer=setTimeout(beat, next);
+  }
+  function set(run){ cur=run; if(on && !timer && typeof setTimeout!=='undefined') timer=setTimeout(beat, 120); }
+  function toggle(){
+    on=!on; try{ localStorage.setItem('mbersimSound', on?'1':'0'); }catch(_){}
+    if(on){ ac(); if(!timer) beat(); } else { stopHum(); if(timer){ clearTimeout(timer); timer=null; } }
+    if(typeof document!=='undefined') document.querySelectorAll('.ers-snd').forEach(function(btn){ btn.textContent=on?'🔊':'🔇'; btn.setAttribute('aria-pressed', String(on)); });
+  }
+  if(typeof document!=='undefined') document.addEventListener('visibilitychange', function(){ if(!document.hidden && on && cur && !timer) beat(); });
+  return { set:set, toggle:toggle, level:level, isOn:function(){ return on; } };
+})();
+
 function shortLabel(id, label){
   var M={ o2_nasal:'O₂ nasal prongs', o2_mask:'O₂ mask 15 L', iv_access:'IV line in', io_access:'IO needle in', monitor:'Monitor on', cspine:'Collar on',
     needle_decomp:'Needle decompression', chest_drain:'Chest drain in', catheter:'Catheter in', immobilise:'Limb splinted', remove_tourniquet:'Tourniquet off',
@@ -316,8 +541,28 @@ var CSS=[
   '.ers-ping circle{transform-box:fill-box;transform-origin:center;animation:ersPing 1.2s ease-out 2}.ers-ping{animation:ersFade 2.6s forwards}',
   '@keyframes ersPing{0%{transform:scale(.4);opacity:1}100%{transform:scale(1.8);opacity:0}}@keyframes ersFade{0%,80%{opacity:1}100%{opacity:0}}',
   '.ers-dead{filter:grayscale(1)}',
-  '@media (prefers-reduced-motion:reduce){.ers-scene *{animation:none!important}}'
+  '.ers-photo{position:relative;overflow:hidden;background:#d9cfbd}',
+  '.ers-photo>.ers-ph,.ers-photo>.ers-ov{position:absolute;inset:0;width:100%;height:100%;display:block}',
+  '.ers-photo>.ers-ph{object-fit:cover}',
+  '.ers-in{animation:ersIn 1.1s ease both}@keyframes ersIn{from{opacity:0}to{opacity:1}}',
+  '.ers-breathe2{animation:ersBr2 3s ease-in-out infinite}@keyframes ersBr2{0%,100%{transform:scale(1,1)}45%{transform:scale(1.008,1.03)}}',
+  '.ers-breathe2.ers-fit{animation:ersFit .16s steps(2) infinite}',
+  '.ers-sway{animation:ersSway 7s ease-in-out infinite alternate}@keyframes ersSway{from{transform:skewX(-.35deg)}to{transform:skewX(.45deg)}}',
+  '.ers-sun{animation:ersSun 14s ease-in-out infinite}@keyframes ersSun{0%,100%{opacity:1}40%{opacity:.45}60%{opacity:.8}}',
+  '.ers-mote{animation:ersMote 9s linear infinite;opacity:.0}.ers-mote.m1{animation-delay:-2s}.ers-mote.m2{animation-delay:-4s}.ers-mote.m3{animation-delay:-6s}.ers-mote.m4{animation-delay:-7.5s}',
+  '@keyframes ersMote{0%{transform:translate(0,0);opacity:0}20%{opacity:.8}80%{opacity:.6}100%{transform:translate(40px,90px);opacity:0}}',
+  '.ers-sec{animation:ersSec 60s steps(60) infinite}@keyframes ersSec{to{transform:rotate(360deg)}}',
+  '.ers-drip2{animation:ersDrip2 1.5s ease-in infinite}@keyframes ersDrip2{0%{transform:translateY(0);opacity:1}100%{transform:translateY(11px);opacity:0}}',
+  '.ers-bubble2{animation:ersBub2 1.4s ease-out infinite}.ers-bubble2.b2{animation-delay:.5s}@keyframes ersBub2{0%{transform:translateY(0);opacity:1}100%{transform:translateY(-22px);opacity:0}}',
+  '.ers-swing{animation:ersSwing 3s ease-in-out infinite}@keyframes ersSwing{50%{transform:translateY(-4px)}}',
+  '.ers-hrnum{animation:ersHr 1s ease-out infinite}@keyframes ersHr{0%{opacity:1}12%{opacity:.55}30%{opacity:1}}',
+  '.ers-alarm{animation:ersAl 1.2s steps(2) infinite}.ers-alarm.hi{animation-duration:.5s}@keyframes ersAl{50%{opacity:0}}',
+  '.ers-glow{animation:ersAl .5s steps(2) infinite}',
+  '.ers-led{animation:ersLed 2s ease-in-out infinite}@keyframes ersLed{50%{opacity:.35}}',
+  '.ers-snd{position:absolute;right:8px;top:8px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(29,36,51,.72);color:#fff;font-size:18px;cursor:pointer}',
+  '.ers-snd:focus-visible{outline:3px solid #ffb020;outline-offset:2px}',
+  '@media (prefers-reduced-motion:reduce){.ers-scene *{animation:none!important}.ers-in{opacity:1}}'
 ].join('\n');
 
-root.ERSIM_SCENE={ svg:svg, css:CSS, siteFor:siteFor, looks:looks };
+root.ERSIM_SCENE={ svg:svg, css:CSS, siteFor:siteFor, looks:looks, sound:SND, artState:artState };
 })(typeof window!=='undefined'?window:globalThis);
