@@ -59,13 +59,28 @@
     document.body.appendChild(overlay);
     return s;
   }
-  function input(s,label,type,ph){
+  // ac = the autocomplete token ("name", "email", "current-password", "new-password") so phones and
+  // password managers can fill these in; password fields get a Show/Hide toggle (typing a password
+  // blind on a phone keyboard is the commonest sign-in failure)
+  function input(s,label,type,ph,ac){
     s.appendChild(el("div","font-size:12.5px;font-weight:700;color:"+C.dim+";margin:13px 0 5px",label));
     var i=el("input","width:100%;padding:12px 13px;border:1px solid "+C.line+";border-radius:11px;font-size:16px;box-sizing:border-box;outline:none");
     i.type=type||"text"; if(ph)i.placeholder=ph;
+    if(ac){ i.setAttribute("autocomplete",ac); i.name=ac; }
+    if(type==="email"){ i.setAttribute("autocapitalize","off"); i.setAttribute("autocorrect","off"); i.spellcheck=false; i.setAttribute("inputmode","email"); }
     i.onfocus=function(){ i.style.borderColor=C.violet; }; i.onblur=function(){ i.style.borderColor=C.line; };
+    if(type==="password"){
+      var wrap=el("div","position:relative");
+      i.style.paddingRight="64px";
+      var eye=el("button","position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;color:"+C.violet+";font-weight:700;font-size:13px;padding:8px 10px;cursor:pointer","Show");
+      eye.type="button";
+      eye.onclick=function(){ var show=i.type==="password"; i.type=show?"text":"password"; eye.textContent=show?"Hide":"Show"; i.focus(); };
+      wrap.appendChild(i); wrap.appendChild(eye); s.appendChild(wrap); return i;
+    }
     s.appendChild(i); return i;
   }
+  // Enter in any of these fields presses the button (these cards aren't <form>s, so it did nothing)
+  function enterSubmits(inputs,b){ inputs.forEach(function(i){ i.addEventListener("keydown",function(ev){ if(ev.key==="Enter" && !b.disabled){ ev.preventDefault(); b.click(); } }); }); }
   function btn(s,label,primary){
     var b=el("button","width:100%;margin-top:14px;border:0;border-radius:12px;padding:14px;font-weight:800;font-size:15px;cursor:pointer;transition:.15s;"+
       (primary?("background:"+C.violet+";color:#fff"):("background:"+C.tint+";color:"+C.violetD)),label);
@@ -179,11 +194,12 @@
   /* ---- step 3: create account (value already delivered) ---- */
   function renderAccount(sb){
     var s=card({ step:3, title:"Create your account", sub:"Save your progress and sync across your phone and laptop." });
-    var name=input(s,"Full name","text","e.g. Frank Wiz"); name.value=CHOSEN.name||"";
-    var email=input(s,"Email","email","you@example.com");
-    var pass=input(s,"Password","password","Create a password");
+    var name=input(s,"Full name","text","e.g. Ada Okafor","name"); name.value=CHOSEN.name||"";
+    var email=input(s,"Email","email","you@example.com","email");
+    var pass=input(s,"Password","password","At least 6 characters","new-password");
     var e=err(s);
     var go=btn(s,"Create account & start",true);
+    enterSubmits([name,email,pass],go);
     go.onclick=async function(){
       e.style.display="none";
       var nm=(name.value||"").trim(), em=(email.value||"").trim(), pw=pass.value;
@@ -221,11 +237,12 @@
     opts=opts||{};
     var s=card({ title:"Welcome back", sub:"Sign in to pick up where you left off." });
     if(opts.note){ s.appendChild(el("div","background:#f2eafe;color:#4c1d95;border-radius:10px;padding:10px 12px;font-size:13.5px;margin-bottom:2px",opts.note)); }
-    var email=input(s,"Email","email","you@example.com");
+    var email=input(s,"Email","email","you@example.com","email");
     if(opts.email){ email.value=opts.email; }
-    var pass=input(s,"Password","password","Your password");
+    var pass=input(s,"Password","password","Your password","current-password");
     var e=err(s);
     var go=btn(s,"Sign in",true);
+    enterSubmits([email,pass],go);
     go.onclick=async function(){
       e.style.display="none";
       var em=(email.value||"").trim(), pw=pass.value;
@@ -249,9 +266,10 @@
   /* ---- password reset landing (opened from the emailed link) ---- */
   function renderResetPassword(sb){
     var s=card({ title:"Set a new password", sub:"Choose a new password for your MedBank account.", dismiss:false });
-    var p1=input(s,"New password","password","At least 6 characters");
+    var p1=input(s,"New password","password","At least 6 characters","new-password");
     var e=err(s);
     var go=btn(s,"Update password & sign in",true);
+    enterSubmits([p1],go);
     go.onclick=async function(){
       e.style.display="none";
       var pw=p1.value; if(!pw||pw.length<6){ fail(e,"Use at least 6 characters for your password."); return; }
@@ -370,7 +388,7 @@
     if(signedIn){
       rows=[
         ["＋","Add a lecture",function(){ if(window.MB_openImport) MB_openImport(); }],
-        ["🎙","Record a lecture",function(){ if(window.MB_openRecorder) MB_openRecorder(); else alert("Recording isn't available right now — reload the app, or use File / YouTube / Paste."); }],
+        ["🎙","Record a lecture",function(){ if(window.MB_openRecorder) MB_openRecorder(); else toast("Recording isn't available right now — reload the app, or use File / YouTube / Paste."); }],
         ["⚙","Settings",function(){ if(window.go) go("settings"); }],
         ["🎚","Switch level",function(){ if(window.MB_openLevelSwitcher) MB_openLevelSwitcher(); }],
         ["👤","Account & sync",function(){ open(); }],
@@ -532,7 +550,8 @@
     }catch(_){}
   }
 
-  function toast(m){ try{ alert(m); }catch(_){} }
+  // the app's non-blocking toast when it's loaded (app.html); alert() only on pages without it
+  function toast(m){ try{ if(typeof window.mbToast==="function") window.mbToast(m); else alert(m); }catch(_){} }
 
   window.MB_openAuth=open;
   window.MB_openWelcome=openWelcome;

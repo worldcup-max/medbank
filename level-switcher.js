@@ -65,9 +65,10 @@
       var go = el("button","width:100%;margin-top:4px;border:0;background:#0d9488;color:#fff;border-radius:12px;padding:14px;font-weight:800;cursor:pointer;font-size:15px",
         "Go to next level  →  "+(curLevel+100)+" level");
       go.onclick=function(){
-        if(confirm("Move up to "+(curLevel+100)+" level?\n\nYour "+curLevel+" level notes and progress stay saved and viewable, but its import & AI features will stop.")){
-          document.body.removeChild(overlay); MB_SYNC.goToNextLevel();
-        }
+        var up=function(){ if(overlay.parentNode) document.body.removeChild(overlay); MB_SYNC.goToNextLevel(); };
+        var sub="Your "+curLevel+" level notes and progress stay saved and viewable, but its import & AI features will stop.";
+        if(window.mbConfirm) window.mbConfirm("Move up to "+(curLevel+100)+" level?",sub,up,{ok:"Move up to "+(curLevel+100)});
+        else if(confirm("Move up to "+(curLevel+100)+" level?\n\n"+sub)) up();
       };
       sheet.appendChild(go);
     }
