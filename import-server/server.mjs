@@ -41,6 +41,18 @@ const require = createRequire(import.meta.url);
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
 const anthropic = new Anthropic();
 const app = express();
+app.disable("x-powered-by");   // don't advertise Express to scanners
+/* Security headers. This server only returns JSON and audio to the app (never a page), so the
+   strictest page policy is safe: nothing it sends may run scripts, be framed or be MIME-sniffed.
+   Cross-Origin-Resource-Policy is deliberately NOT set: the app plays this server's audio cross-origin. */
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("Referrer-Policy", "no-referrer");
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'");
+  res.setHeader("Strict-Transport-Security", "max-age=31536000");
+  next();
+});
 // CORS: the app + website call this from a different origin. Set ALLOWED_ORIGINS
 // (comma-separated) on the host to restrict; defaults to "*" for easy first setup.
 const ALLOWED = (process.env.ALLOWED_ORIGINS || "*").split(",").map(s=>s.trim());

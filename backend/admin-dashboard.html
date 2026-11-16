@@ -4,7 +4,9 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>MedBank — Admin</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js" integrity="sha384-BWcjm9OdFth9TbhCxZPdm+gAOUMAzQy9nmTs12ioXdCcbVnJaPMn+fMUoQCLt60R" crossorigin="anonymous"></script>
 <style>
   :root{--line:#e3e0ef;--dim:#5c5570;--dimmer:#8b84a0;--panel:#faf9ff;--accent:#5b21b6}
   *{box-sizing:border-box}
@@ -68,7 +70,7 @@ document.getElementById('url').value  = localStorage.getItem(URLK)||'';
 document.getElementById('anon').value = localStorage.getItem(ANONK)||'';
 document.getElementById('email').value= localStorage.getItem(EMAILK)||'';
 var sb=null;
-function esc(s){ return String(s==null?'':s).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
 function err(m){ document.getElementById('err').textContent=m||''; }
 
 function client(){
