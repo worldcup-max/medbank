@@ -1,0 +1,38 @@
+# What GitHub Pages publishes (read by .github/workflows/pages.yml with rsync --filter).
+# Everything in the repo is published EXCEPT what is excluded here. First matching rule wins.
+# The repository itself stays public on GitHub; this only keeps these files off medbank.com.ng.
+
+# git and tooling
+- /.git/
+- /.github/
+- /.gitignore
+- /.fuse_hidden*
+- /.pagesfilter
+- /opencode.json
+- /package.json
+- /package-lock.json
+- node_modules/
+
+# specs, QA notes, briefs and build logs
+- *.md
+- /*.pdf
+- /COMMIT-MSG.txt
+- /probe.mjs
+- /Claude outputs/
+
+# private material: admin dashboards and SQL, the server, lecturers' notes, QA scripts
+- /backend/
+- /import-server/
+- /OG/
+- /qa/
+
+# 3D: the app loads only viz-training/scenes/ at runtime; the rest is the authoring workshop
++ /viz-training/
++ /viz-training/scenes/***
+- /viz-training/*
+
+# 3D Tutor: keep the plates and the player, drop the authoring tools and tests
+- /explainer/tools/
+- /explainer/tests/
+- /explainer/package.json
+- /explainer/studio/*.mjs

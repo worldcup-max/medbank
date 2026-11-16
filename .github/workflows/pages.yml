@@ -1,0 +1,49 @@
+# Publishes medbank.com.ng from main, leaving out everything listed in .pagesfilter
+# (specs, QA notes, admin pages, the server, lecturers' notes, 3D authoring files).
+# Needs Settings → Pages → Source set to "GitHub Actions".
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the public site
+        run: |
+          SITE="$RUNNER_TEMP/site"
+          mkdir "$SITE"
+          rsync -a --filter='merge .pagesfilter' ./ "$SITE/"
+          cd "$SITE"
+          # fail loudly if the app shell or anything private is wrong
+          for f in index.html app.html sw.js config.js CNAME .nojekyll viz3d.js whiteboard.js viz-training/scenes/index.json; do
+            test -e "$f" || { echo "missing $f"; exit 1; }
+          done
+          for d in backend import-server OG qa "Claude outputs"; do
+            test ! -e "$d" || { echo "$d should not be published"; exit 1; }
+          done
+          test -z "$(find . -name '*.md' -print -quit)" || { echo "a .md file would be published"; exit 1; }
+          echo "Publishing $(find . -type f | wc -l) files, $(du -sh . | cut -f1)"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/site
+      - id: deployment
+        uses: actions/deploy-pages@v4
