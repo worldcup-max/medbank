@@ -365,6 +365,79 @@ function sawHtml(q){
   return hits.length ? '<div class="cs-grid">'+hits.map(function(it){ return caseCard(it, 'open', 'From the ward'); }).join('')+'</div>' : '<div class="cs-meta" style="margin-top:6px">No case like that yet.</div>';
 }
 
+/* ---------- 🎓 Mock OSCE day
+ * A circuit of stations back to back, shaped like PLAB 2 and MB finals OSCEs:
+ *   - 1.5 minutes' reading time before each station (the candidate instructions), then 8 minutes;
+ *   - each station marked on the same three domains, with one pre-set feedback statement;
+ *   - no results between stations: one report at the end;
+ *   - you pass the day with at least 60% of stations passed AND an average of at least 60%
+ *     (PLAB 2 likewise needs a minimum number of stations and a minimum total score).
+ * Stations run blind (no topic shown, diagnosis asked). Circuits like Geeky Medics' can be any length:
+ * 4, 6 or 8 stations, from the chosen course or a finals mix across specialties. */
+var READ_SEC=90, MOCK=null, MOCK_TIMER=null;
+var MOCK_FB={
+  data:'History: you missed key questions. Use one structure every time: the complaint and its story, past history, drugs and allergies, family, social, then a systems review.',
+  mgmt:'Management: your diagnosis or plan was off. Before you present, ask yourself what must not be missed and where this patient should go.',
+  ip:'Communication: introduce yourself, open with an open question, explore their worries, summarise, and check for questions before you close.',
+  ok:'Good station. Keep the same structure.'
+};
+function mockFeedback(sc){ var lo=[['data',sc.data],['mgmt',sc.mgmt],['ip',sc.ip]].sort(function(a,b){ return a[1]-b[1]; })[0]; return lo[1]>=60 ? MOCK_FB.ok : MOCK_FB[lo[0]]; }
+function mockPick(n, course, seed){
+  var all=stations('all'), pool=all.filter(function(s){ return isFree(all, s) && inCourse(s, course); });
+  var mix=function(l, sd){ return l.map(function(x,i){ return { x:x, r:seeded(sd*97+i+1) }; }).sort(function(a,b){ return a.r-b.r; }).map(function(o){ return o.x; }); };
+  if(!course){   // finals mix: take turns across specialties so no one area fills the day
+    var bySpec={}; mix(pool, seed).forEach(function(s){ var sp=(s.spec&&s.spec[0])||'Your lectures'; (bySpec[sp]=bySpec[sp]||[]).push(s); });
+    var out=[], keys=Object.keys(bySpec).sort();
+    for(var r=0; out.length<n && keys.some(function(k){ return bySpec[k].length>r; }); r++) keys.forEach(function(k){ if(out.length<n && bySpec[k][r]) out.push(bySpec[k][r]); });
+    return out.map(function(s){ return s.id; });
+  }
+  return mix(pool, seed).slice(0, n).map(function(s){ return s.id; });
+}
+function mockResult(results){
+  var n=results.length, passed=results.filter(function(r){ return r.pass; }).length;
+  var avg=n?Math.round(results.reduce(function(a,r){ return a+r.total; },0)/n):0;
+  var dom=function(k){ return n?Math.round(results.reduce(function(a,r){ return a+r[k]; },0)/n):0; };
+  return { n:n, passed:passed, avg:avg, data:dom('data'), mgmt:dom('mgmt'), ip:dom('ip'), pass:n>0 && passed>=Math.ceil(0.6*n) && avg>=60 };
+}
+function mockStop(){ if(MOCK_TIMER){ clearInterval(MOCK_TIMER); MOCK_TIMER=null; } }
+function mockRead(){
+  mockStop();
+  MOCK_TIMER=setInterval(function(){
+    var el=document.getElementById('mockClock'); if(!MOCK || MOCK.phase!=='read' || !el){ mockStop(); return; }
+    var left=Math.max(0, Math.ceil((MOCK.readEnds-Date.now())/1000)); el.textContent=Math.floor(left/60)+':'+((left%60)<10?'0':'')+(left%60);
+    if(left<=0){ mockStop(); root.MB_CLINSIM.mockGo(); }
+  }, 500);
+}
+function mockPage(){
+  var h='<a href="#/clinsim" class="cs-back" onclick="MB_CLINSIM.mockEnd()">← Clinical Simulation</a><h1>🎓 Mock OSCE day</h1>';
+  if(!MOCK){
+    var c=curCourse(), last=(store().mocks||[]).slice(-3).reverse();
+    return h+'<p class="cs-sub">Stations back to back, like the real exam: 1.5 minutes to read each brief, 8 minutes with the patient, and one report at the end. No topic is shown, so you are asked the diagnosis.</p>'+
+      '<div class="cs-panel"><h4>How many stations</h4><div class="cs-subs">'+[4,6,8].map(function(n){ return '<button class="cs-chip" onclick="MB_CLINSIM.mockStart('+n+')">'+n+' stations · about '+Math.round(n*9.5)+' min</button>'; }).join('')+'</div>'+
+      '<div class="cs-meta" style="margin-top:8px">'+(c?'From <b>'+e(c.name)+'</b>. '+'<a href="javascript:void 0" onclick="MB_CLINSIM.course(\'all\');return false">Use a finals mix instead</a>':'A finals mix across specialties. Pick a course on the first screen to sit one course instead.')+'</div>'+
+      '<div class="cs-meta" style="margin-top:6px">To pass the day: pass at least 60% of the stations and average at least 60%. A station passes at 60% with at least 40% in every part.</div></div>'+
+      (last.length?'<div class="cs-panel"><h4>Your last mock days</h4><ul class="cs-list">'+last.map(function(m){ return '<li><span aria-hidden="true">'+(m.pass?'✅':'❌')+'</span><span>'+e(m.at.slice(0,10))+' · '+m.passed+' of '+m.n+' stations · average '+m.avg+'%</span></li>'; }).join('')+'</ul></div>':'');
+  }
+  var n=MOCK.ids.length;
+  if(MOCK.phase==='read'){
+    var s=byId(stations('all'), MOCK.ids[MOCK.i]);
+    if(!s){ MOCK.i++; return mockPage(); }
+    setTimeout(mockRead, 0);
+    return h+'<div class="cs-meta">Station '+(MOCK.i+1)+' of '+n+'</div><div class="cs-top"><h4 class="cs-h" style="margin:8px 0">Reading time</h4><span class="cs-clock" id="mockClock">1:30</span></div>'+
+      '<div class="cs-panel"><h4>Candidate instructions</h4><p style="margin:0;line-height:1.6">You are the doctor in a '+e(s.area||'hospital')+' clinic. <b>'+e(s.patient.name)+'</b>, '+e(s.patient.age)+', '+e(s.patient.sex)+(s.speaker&&!/^the patient$/i.test(s.speaker)&&s.speaker.indexOf(s.patient.name.split(' ')[0])!==0?', is here with '+e(s.speaker)+'':'')+'. They came with: <b>'+e(s.title)+'</b>.</p>'+
+      '<ul class="cs-teach"><li>Take a focused history.</li><li>Then give the examiner your working diagnosis and where the patient should go.</li><li>You have 8 minutes.</li></ul></div>'+
+      '<div class="btnrow" style="margin-top:12px"><button class="btn primary" onclick="MB_CLINSIM.mockGo()">Enter the station now</button><button class="btn" onclick="MB_CLINSIM.mockEnd()">End the day</button></div>';
+  }
+  if(MOCK.phase==='station') return h+'<div class="cs-panel">Station '+(MOCK.i+1)+' of '+n+' is in progress.</div><div class="btnrow"><a class="btn primary" href="#/clinsim/osce/timed/'+e(MOCK.ids[MOCK.i])+'">Back to the station</a><button class="btn" onclick="MB_CLINSIM.mockEnd()">End the day</button></div>';
+  // report
+  var R=mockResult(MOCK.results), col=R.pass?'var(--recall-tx)':'var(--badtx)';
+  h+='<div class="cs-panel"><div class="cs-score"><div class="cs-ring" style="border:8px solid '+col+';color:'+col+'">'+R.avg+'%</div><div><div style="font-size:22px;font-weight:800;color:'+col+'">'+(R.pass?'PASS':'FAIL')+'</div>'+
+    '<div class="cs-meta">'+R.passed+' of '+R.n+' stations passed · average '+R.avg+'%</div><div class="cs-meta">Pass: at least '+Math.ceil(0.6*R.n)+' stations and an average of 60%.</div></div></div>'+domainsHtml(R)+'</div>';
+  h+='<div class="cs-panel"><h4>Station by station</h4><ul class="cs-list">'+MOCK.results.map(function(r, i){ return '<li><span aria-hidden="true">'+(r.pass?'✅':'❌')+'</span><span><b>'+(i+1)+'. '+e(r.title)+'</b> · '+r.total+'%'+
+    '<span class="cs-meta" style="display:block">History '+r.data+'% · Management '+r.mgmt+'% · Communication '+r.ip+'%'+(r.dxOk===false?' · diagnosis missed':'')+'</span><span class="cs-meta" style="display:block">'+e(r.fb)+'</span></span></li>'; }).join('')+'</ul></div>';
+  return h+'<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.mockEnd();MB_CLINSIM.mockStart('+R.n+')">Another mock day</button><button class="btn" onclick="MB_CLINSIM.mockEnd()">Done</button></div>';
+}
+
 /* ---------- free rotation: one built-in station and one quick case a week for unpaid students */
 function weekNo(){ return Math.floor((Date.now()+3600e3)/(7*864e5)); }
 function dayNo(){ return Math.floor((Date.now()+3600e3)/864e5); }   // Lagos days (UTC+1)
@@ -451,6 +524,8 @@ var MODES=[
     subs:[['today','Today\'s case'],['archive','Past days'],['mine','From my lectures']] },
   { id:'rotation', ic:'🗓️', name:'My Posting', blurb:'Set the posting you are on. Get 3 cases a week for it, and a mixed ward round in exam week.',
     subs:[['plan','This week']] },
+  { id:'mock', ic:'🎓', name:'Mock OSCE Day', blurb:'4 to 8 stations back to back: 1.5 minutes to read, 8 minutes each, one report at the end.',
+    subs:[['day','Sit a mock day']] },
   { id:'duel', ic:'⚔️', name:'Duel', blurb:'Two phones side by side, same patient, same clock. Leave the app and you lose.',
     subs:[['home','Start or join a duel']] },
   { id:'group', ic:'👥', name:'Study Group OSCE', blurb:'Practise with friends on one phone: one plays the patient, one examines, one is the candidate.',
@@ -577,7 +652,7 @@ function osceTalk(){
   var s=OS.s, timed=!!OS.endsAt;
   var h='<a href="#/clinsim/osce/'+(OS.mode==='practice'?'practice':(s.source==='mine'?'mine':'timed'))+'" class="cs-back" onclick="MB_CLINSIM.stop()">← Stations</a>'+
     '<div class="cs-top"><h1 style="margin:6px 0">'+e(s.title)+'</h1>'+(timed?'<span class="cs-clock" id="csClock" aria-live="off">'+clockText()+'</span>':'<span class="cs-meta">Practice: no clock</span>')+'</div>'+
-    '<div class="cs-meta">'+e(s.patient.name)+', '+e(s.patient.age)+' '+e(s.patient.sex)+(s.speaker&&!/^the patient$/i.test(s.speaker)?' · speaking: '+e(s.speaker):'')+'</div>'+ctxNote(OS.ctx)+
+    '<div class="cs-meta">'+(MOCK&&MOCK.phase==='station'?'🎓 Mock OSCE · station '+(MOCK.i+1)+' of '+MOCK.ids.length+' · ':'')+e(s.patient.name)+', '+e(s.patient.age)+' '+e(s.patient.sex)+(s.speaker&&!/^the patient$/i.test(s.speaker)?' · speaking: '+e(s.speaker):'')+'</div>'+(MOCK&&MOCK.phase==='station'?'':ctxNote(OS.ctx))+
     '<div class="cs-panel"><div class="cs-chat" id="csChat" aria-live="polite">'+OS.chat.map(function(m){ return '<div class="cs-msg '+m.who+'">'+e(m.text)+'</div>'; }).join('')+(OS.busy?'<div class="cs-msg pt">…</div>':'')+'</div>'+
     '<form class="cs-ask" onsubmit="MB_CLINSIM.say();return false"><input id="csQ" autocomplete="off" placeholder="Speak to '+e(s.speaker&&!/^the patient$/i.test(s.speaker)?s.speaker:s.patient.name.split(' ')[0])+'…" aria-label="What you say"'+(OS.busy?' disabled':'')+'><button class="btn primary"'+(OS.busy?' disabled':'')+'>Say</button></form>'+
     '<div class="btnrow" style="margin-top:10px"><button class="btn" onclick="MB_CLINSIM.present()">I\'m ready to present</button></div></div>';
@@ -875,6 +950,7 @@ function page(parts){
   var g=gate(); if(g) return g;
   var mode=parts[0], sub=parts[1], id=parts.slice(2).join('/');
   if(mode!=='osce') stopTimer();
+  if(mode!=='mock') mockStop();
   if(mode!=='duel' && root.MB_CLINDUEL && root.MB_CLINDUEL.live()) root.MB_CLINDUEL.leaving();   // walking out of a live duel forfeits it
   switch(mode){
     case 'er':    return erMode(sub||'tut');
@@ -891,6 +967,7 @@ function page(parts){
     case 'mine':  return mineMode();
     case 'round': return roundPage();
     case 'rotation': return rotationPage();
+    case 'mock':  return mockPage();
     case 'duel':  return root.MB_CLINDUEL ? root.MB_CLINDUEL.page(sub, id) : '<h1>Duel</h1><p>Reload to load duels.</p>';
     default:      return hub();
   }
@@ -898,7 +975,7 @@ function page(parts){
 
 root.MB_CLINSIM={
   on:on, visible:visible, page:page, locked:locked,
-  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext, order:order, weekCases:weekCases, weekOf:weekOf, rotPool:rotPool, doneSince:doneSince, gradeOf:gradeOf, pointsOf:pointsOf, standing:standing, rankOf:rankOf, roundItems:roundItems, forCtx:forCtx },
+  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext, order:order, mockPick:mockPick, mockResult:mockResult, mockFeedback:mockFeedback, weekCases:weekCases, weekOf:weekOf, rotPool:rotPool, doneSince:doneSince, gradeOf:gradeOf, pointsOf:pointsOf, standing:standing, rankOf:rankOf, roundItems:roundItems, forCtx:forCtx },
   stop:function(){ stopTimer(); },
   openOsce:function(id, mode, ctx){ stopTimer(); var all=stations('all'), s=byId(all,id); if(s && !isFree(all,s)) return locked(); osceStart(id, mode, ctx); location.hash='#/clinsim/osce/'+mode+'/'+id; CUR=['osce',mode,id]; draw(); },
   say:say,
@@ -906,7 +983,15 @@ root.MB_CLINSIM={
   back:function(){ if(!OS) return; OS.phase='talk'; draw(); if(OS.endsAt) startTimer(); },
   pick:function(k, i){ if(!OS) return; OS[k]=i; draw(); },
   mark:function(){ if(!OS) return; OS.score=osceScore(OS); OS.phase='result'; stopTimer();
-    var ex={ pass:OS.score.pass, mode:OS.mode, ctx:OS.ctx }; OS.pts=award('osce', OS.s.id, OS.score.total, ex); record('osce', OS.s.id, OS.score.total, ex); draw(); root.scrollTo&&root.scrollTo(0,0); },
+    var ex={ pass:OS.score.pass, mode:OS.mode, ctx:OS.ctx }; OS.pts=award('osce', OS.s.id, OS.score.total, ex); record('osce', OS.s.id, OS.score.total, ex);
+    if(MOCK && MOCK.phase==='station' && MOCK.ids[MOCK.i]===OS.s.id){   // mock day: no result between stations
+      var sc=OS.score; MOCK.results.push({ id:OS.s.id, title:OS.s.title, total:sc.total, pass:sc.pass, data:sc.data, mgmt:sc.mgmt, ip:sc.ip, dxOk:OS.s.dx?OS.dx===OS.s.dx.correct:null, fb:mockFeedback(sc) });
+      MOCK.i++; OS=null;
+      if(MOCK.i<MOCK.ids.length){ MOCK.phase='read'; MOCK.readEnds=Date.now()+READ_SEC*1000; }
+      else { MOCK.phase='report'; var R=mockResult(MOCK.results); var st=store(); st.mocks=(st.mocks||[]).concat([{ at:new Date().toISOString(), n:R.n, passed:R.passed, avg:R.avg, pass:R.pass }]).slice(-50); save(); }
+      location.hash='#/clinsim/mock'; CUR=['mock']; draw(); root.scrollTo&&root.scrollTo(0,0); return;
+    }
+    draw(); root.scrollTo&&root.scrollTo(0,0); },
   openQuick:function(id, ctx){ var all=quickCases('all'), q=byId(all,id); if(!q) return; if(!isFree(all,q)) return locked(); QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:ctx||'open', nonce:nonce() }; location.hash='#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'/'+id; CUR=['quick',(q.source==='mine'?'mine':'builtin'),id]; draw(); },
   choose:function(i, k){ if(!QS || QS.picks[i]!==undefined) return; QS.picks[i]=k; draw(); },
   next:function(){ if(!QS) return; if(QS.step+1<QS.q.steps.length){ QS.step++; draw(); return; } QS.score=quickScore(QS.q, QS.picks); QS.phase=(QS.q.mcqs||[]).length?'mcq':'done'; if(QS.phase==='done') quickDone(); draw(); },
@@ -934,6 +1019,9 @@ root.MB_CLINSIM={
   build:buildFor,
   course:function(id){ setCourse(id||'all'); SEARCH=''; draw(); },
   newRound:function(){ ROUND_SEED++; draw(); },
+  mockStart:function(n){ var ids=mockPick(n||6, curCourse(), Date.now()%100000); if(!ids.length){ if(!entitled()) return locked(); return; } MOCK={ ids:ids, i:0, phase:'read', readEnds:Date.now()+READ_SEC*1000, results:[] }; location.hash='#/clinsim/mock'; CUR=['mock']; draw(); },
+  mockGo:function(){ if(!MOCK||MOCK.phase!=='read') return; mockStop(); MOCK.phase='station'; var id=MOCK.ids[MOCK.i]; stopTimer(); osceStart(id, 'timed', 'blind'); location.hash='#/clinsim/osce/timed/'+id; CUR=['osce','timed',id]; draw(); setTimeout(startTimer,0); },
+  mockEnd:function(){ mockStop(); MOCK=null; draw(); },
   setRotation:function(){
     var w=document.getElementById('rotWhat'), st=document.getElementById('rotStart'), n=document.getElementById('rotWeeks'); if(!w) return;
     var v=w.value, c=v.indexOf('spec:')===0?null:byId(myCourses(), v);

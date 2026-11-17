@@ -346,3 +346,17 @@ test("my posting: 3 cases a week, core first, fixed once opened, exam week last"
   assert.match(CS.page([]), /Paediatrics · week 2 of 4/);
   delete win.MB_SYNC; delete sandbox.DATA;
 });
+
+test("mock OSCE day: a mix across specialties, one report, pass needs stations and average", () => {
+  const ids = T.mockPick(6, null, 7);
+  assert.ok(ids.length >= 4 && ids.length <= 6);
+  assert.equal(new Set(ids).size, ids.length);
+  const st = T.stations("all").filter(s => ids.includes(s.id));
+  assert.ok(new Set(st.map(s => s.spec[0])).size >= 3, "a finals mix spreads across specialties");
+  const r = (total, pass, d) => ({ total, pass, data: d, mgmt: d, ip: d });
+  assert.ok(T.mockResult([r(70, true, 70), r(65, true, 65), r(62, true, 62), r(40, false, 40), r(80, true, 80)]).pass);
+  assert.ok(!T.mockResult([r(90, true, 90), r(90, true, 90), r(40, false, 40), r(40, false, 40), r(40, false, 40)]).pass, "3 of 5 stations failed");
+  assert.ok(!T.mockResult([r(61, true, 61), r(61, true, 61), r(61, true, 61), r(20, false, 20)]).pass, "average under 60");
+  assert.match(T.mockFeedback({ data: 30, mgmt: 80, ip: 90 }), /History/);
+  assert.match(T.mockFeedback({ data: 80, mgmt: 80, ip: 90 }), /Good station/);
+});
