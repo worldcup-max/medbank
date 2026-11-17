@@ -51,6 +51,7 @@ RETURN STRICT JSON with this shape:
    "background":"extra facts the patient knows (social, drugs, allergies)",
    "history":[ 8 to 12 {"id":"short_id","q":"a question a doctor asks","a":"the patient's answer in lay words","key":true or false} ],
    "dx":{"options":["4 or 5 diagnoses"],"correct":0},
+   "form":{"q":"a question someone who already knows the topic still has to think about: which type, severity or complication this patient has","options":["3 or 4 look-alikes within the topic"],"correct":0},
    "plan":{"options":["4 next steps"],"correct":0},
    "teaching":["2 to 4 learning points from the note"]
  } ],
@@ -85,6 +86,12 @@ function cleanPatient(p){ p = p || {}; return { name: cap(p.name, 60) || "The pa
 function cleanOpts(arr, n){ return (Array.isArray(arr) ? arr : []).map(o => cap(o, 160)).filter(Boolean).slice(0, n); }
 function idx(v, len){ const k = Number(v); return Number.isInteger(k) && k >= 0 && k < len ? k : -1; }
 
+// optional "form" question, asked instead of the diagnosis when the case is opened from its own topic
+function cleanForm(f){
+  const options = cleanOpts(f && f.options, 4), correct = idx(f && f.correct, options.length);
+  return options.length >= 2 && correct >= 0 ? { q: cap(f.q, 160) || "These look alike. Which one fits this patient?", options, correct } : null;
+}
+
 function cleanOsce(c, i){
   const history = (Array.isArray(c.history) ? c.history : []).slice(0, 14).map((h, j) => ({
     id: cap(h && h.id, 30).replace(/[^a-z0-9_]/gi, "_") || ("h" + j),
@@ -98,7 +105,7 @@ function cleanOsce(c, i){
     id: "imp-osce-" + slug(c.title, i), kind: "osce", title: cap(c.title, 90), src: cap(c.src, 200),
     patient: cleanPatient(c.patient), speaker: cap(c.speaker, 80) || "the patient",
     persona: cap(c.persona, 300), opening: cap(c.opening, 300), background: cap(c.background, 600),
-    history, dx: { options: dxO, correct: dxC }, plan: { options: plO, correct: plC },
+    history, dx: { options: dxO, correct: dxC }, plan: { options: plO, correct: plC }, form: cleanForm(c.form),
     teaching: cleanOpts(c.teaching, 4)
   };
 }

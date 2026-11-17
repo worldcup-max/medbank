@@ -207,3 +207,54 @@ test("cases are chosen by course, then topic", () => {
   assert.match(html, /Neonatal Jaundice/); assert.match(html, /A yellow baby/); assert.match(html, /Up next for you/);
   CS.course("all"); delete win.MB_SYNC; sandbox.allTopics.length = 0;
 });
+
+test("topic practice does not ask for the diagnosis the topic gives away", () => {
+  const st = T.stations("builtin");
+  const mal = st.find(s => s.id === "er-fever-body-pains") || st[0];
+  const viewed = T.forCtx(mal, "topic");
+  assert.ok(viewed.dxGiven);
+  if(mal.form){ assert.equal(viewed.dx.q, mal.form.q); assert.ok(viewed.dx.options.length >= 2 && viewed.dx.options.length < mal.dx.options.length); }
+  const snake = st.find(s => s.id === "er-farm-snakebite");
+  assert.equal(T.forCtx(snake, "topic").dx, null, "no look-alikes: the diagnosis question is dropped");
+  assert.equal(T.forCtx(snake, "open").dx, snake.dx, "elsewhere the diagnosis is still asked");
+  // a station with no diagnosis question is marked on the plan alone
+  const s2 = T.forCtx(snake, "topic"), all = {}; s2.history.forEach(h => { all[h.id] = 1; });
+  const sc = T.osceScore({ s: s2, asked: all, dx: null, plan: s2.plan.correct, said: [] });
+  assert.equal(sc.mgmt, 100);
+  // the topic panel holds no puzzles, and a pack's form question survives validation
+  const v = validateCasePack(Object.assign(goodPack(), { osce: [Object.assign(goodPack().osce[0], { form: { q: "Which form?", options: ["Cerebral", "Severe anaemia", "Uncomplicated"], correct: 0 } })] }), NOTE);
+  assert.equal(v.osce[0].form.options.length, 3);
+});
+
+test("one scoring system: grades, points, ranks, no farming by replay", () => {
+  assert.equal(T.gradeOf(90), "Excellent"); assert.equal(T.gradeOf(60), "Pass"); assert.equal(T.gradeOf(55), "Borderline"); assert.equal(T.gradeOf(30), "Fail");
+  assert.equal(T.gradeOf(95, { unsafe: true }), "Unsafe"); assert.equal(T.gradeOf(75, { fail: true }), "Fail");
+  assert.equal(T.pointsOf(100, { diff: "Core", ctx: "topic" }), 13);
+  assert.ok(T.pointsOf(100, { diff: "Core", ctx: "blind" }) > T.pointsOf(100, { diff: "Core", ctx: "open" }));
+  assert.ok(T.pointsOf(100, { diff: "Advanced", ctx: "open" }) > T.pointsOf(100, { diff: "Beginner", ctx: "open" }));
+  assert.equal(T.pointsOf(100, { diff: "Core", ctx: "topic", unsafe: true }), T.pointsOf(40, { diff: "Core", ctx: "topic" }));
+  assert.equal(T.rankOf(0).name, "Student"); assert.equal(T.rankOf(350).name, "House Officer"); assert.equal(T.rankOf(9999).next, null);
+  // only the best run of a case counts
+  sandbox.DATA = { clinsim: { runs: [], daily: {} } };
+  const one = { kind: "quick", id: "q-yellow-baby", pct: 80, ctx: "open", at: "2026-11-17T08:00:00Z" };
+  sandbox.DATA.clinsim.runs.push(one, Object.assign({}, one, { at: "2026-11-17T08:05:00Z" }), Object.assign({}, one, { pct: 50, at: "2026-11-17T08:10:00Z" }));
+  const st = T.standing();
+  assert.equal(st.total, T.pointsOf(80, { diff: "Core", ctx: "open" }));
+  assert.equal(st.safeStreak, 3);
+  sandbox.DATA.clinsim.runs.push({ kind: "quick", id: "q-long-cough", pct: 90, ctx: "open", unsafe: true, at: "2026-11-17T09:00:00Z" });
+  assert.equal(T.standing().safeStreak, 0);
+  delete sandbox.DATA;
+});
+
+test("a mixed ward round hides the topic and mixes in another specialty", () => {
+  const course = { id: "spec:Paediatrics", name: "Paediatrics", spec: "Paediatrics" };
+  const r = T.roundItems(course, 42, 5);
+  assert.ok(r.length >= 2 && r.length <= 5);
+  assert.ok(r.some(it => !T.inCourse(it, course)), "one patient comes from outside the course");
+  assert.equal(new Set(r.map(it => it.title.toLowerCase())).size, r.length);
+  assert.equal(JSON.stringify(T.roundItems(course, 42, 5).map(x => x.id)), JSON.stringify(r.map(x => x.id)), "the same seed gives the same round");
+  win.MB_SYNC = { currentLevel: () => 500, status: () => ({ syncing: false }) };
+  const html = CS.page(["round"]);
+  assert.match(html, /Mixed ward round/); assert.match(html, /Patient 1/);
+  delete win.MB_SYNC;
+});

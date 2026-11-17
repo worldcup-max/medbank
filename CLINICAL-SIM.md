@@ -11,6 +11,16 @@ The first screen goes **course → topic → cases**:
 
 A search box finds any case by name, topic word or specialty.
 
+**The topic does not give the diagnosis away.** A case opened from its own topic panel is *topic practice*: the OSCE asks "These look alike. Which one fits this patient?" (the right diagnosis plus its look-alikes, from `dx.close` in ER cases or `form` in lecture packs) instead of the diagnosis, or drops that question and marks management on the plan. Topic panels hold no puzzles, and lecture case lists show the course name, not the lecture title. The diagnosis is tested in the **🎲 Mixed ward round** (`#/clinsim/round`): up to five patients from the course plus one from another specialty, with no topic or specialty shown. ER Sim cases still ask the diagnosis inside ER Sim.
+
+## Scoring (one system for every mode)
+- Each run scores 0 to 100 in its own mode (OSCE domains, quick-case points, ER Sim, Case of the Day guesses).
+- **Grade:** Excellent 85+, Pass 60+, Borderline 50 to 59, Fail under 50. A dangerous decision (or a patient death in ER Sim) makes it **Unsafe** whatever the score. An OSCE with any part under 40% is Fail.
+- **Clinical points** = score × difficulty (Beginner 1, Core 1.25, Advanced 1.5) × how it was opened (topic 1, open 1.1, mixed round 1.3) ÷ 10. OSCE practice mode counts half. Unsafe runs count as 40% at most.
+- Only the best run of each case counts towards the total, so replaying cannot farm points. Study-group runs are ticked by friends and earn no points.
+- **Ranks:** Student 0, Clerk 100, House Officer 300, Medical Officer 700, Registrar 1500, Consultant 3000.
+- The hub shows rank, points, the **safe streak** (runs in a row with no dangerous decision) and the weakest specialties.
+
 How matching works (`clinsim.js`): every case has `spec[]` (specialties) and `words` (topic words). Built-in quick cases and puzzles carry them in `clinsim-cases.js`. ER cases get them from `ER_TAGS` in `clinsim.js`, so `er-sim-cases.js` stays as the ER thread wrote it. A course is matched to a specialty by its name (`specOf`). Lecture cases already belong to their course and topic. When you add a built-in case, give it `spec`, `words` and `diff`.
 
 ## Modes

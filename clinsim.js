@@ -25,6 +25,7 @@
 if(typeof document==='undefined') return;
 
 var CLIN_LEVELS=[400,500,600];
+var FORM_Q='These look alike. Which one fits this patient?';
 var OSCE_MIN=8;
 function e(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]; }); }
 function cfg(){ return root.MEDBANK_CONFIG||{}; }
@@ -70,7 +71,11 @@ function stationFromEr(c){
     var k=(c.id.length)%opts.length; opts=opts.slice(k).concat(opts.slice(0,k));   // stable shuffle so the answer is not always first
     plan={ q:'Where should '+(c.patient.name.split(' ')[0])+' go now?', options:opts.map(function(d){ return d.label; }), correct:opts.map(function(d){ return d.id; }).indexOf(best) };
   }
-  return { id:'er-'+c.id, source:'builtin', title:c.title, patient:c.patient, speaker:c.speaker, persona:c.persona,
+  // topic practice: the topic names the condition, so ask which look-alike this patient has instead
+  var cl=(c.dx.options||[]).filter(function(o){ return (c.dx.close||[]).indexOf(o.id)>=0; }).map(function(o){ return o.label; });
+  var form=null;
+  if(cl.length && dxC>=0){ var fo=[dxO[dxC]].concat(cl), fk=c.id.length%fo.length; fo=fo.slice(fk).concat(fo.slice(0,fk)); form={ q:FORM_Q, options:fo, correct:fo.indexOf(dxO[dxC]) }; }
+  return { id:'er-'+c.id, source:'builtin', title:c.title, form:form, patient:c.patient, speaker:c.speaker, persona:c.persona,
     opening:'Good day, doctor.', background:c.background||'', history:c.history||[],
     dx:{ q:'What is your working diagnosis?', options:dxO, correct:dxC }, plan:plan, teaching:c.teaching||[], refs:c.refs||[], area:(E&&E.SETTINGS[c.setting]||{}).short||'',
     spec:erTags(c).spec, words:erTags(c).words, diff:c.level||'' };
@@ -79,6 +84,7 @@ function stationFromPack(t, s){
   return { id:t.id+'~'+s.id, source:'mine', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id, title:s.title, patient:s.patient, speaker:s.speaker, persona:s.persona,
     opening:s.opening||'Good day, doctor.', background:s.background||'', history:s.history||[],
     dx:{ q:'What is your working diagnosis?', options:s.dx.options, correct:s.dx.correct },
+    form:s.form&&s.form.options?{ q:s.form.q||FORM_Q, options:s.form.options, correct:s.form.correct }:null, courseName:t.subject&&t.subject.name,
     plan:s.plan?{ q:'What is the most appropriate next step?', options:s.plan.options, correct:s.plan.correct }:null, teaching:s.teaching||[], refs:[] };
 }
 function stations(src){
@@ -90,13 +96,13 @@ function stations(src){
 function quickCases(src){
   var out=[];
   if(src!=='mine') (root.CLINSIM_QUICK||[]).forEach(function(q){ out.push(Object.assign({ source:'builtin' }, q)); });
-  if(src!=='builtin') myTopics().forEach(function(t){ var p=pack(t); ((p&&p.quick)||[]).forEach(function(q){ out.push(Object.assign({}, q, { id:t.id+'~'+q.id, source:'mine', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id, area:t.name })); }); });
+  if(src!=='builtin') myTopics().forEach(function(t){ var p=pack(t); ((p&&p.quick)||[]).forEach(function(q){ out.push(Object.assign({}, q, { id:t.id+'~'+q.id, source:'mine', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id, courseName:t.subject&&t.subject.name, area:t.subject&&t.subject.name||'Your lecture' })); }); });
   return out;
 }
 function dailies(src){
   var out=[];
   if(src!=='mine') (root.CLINSIM_DAILY||[]).forEach(function(d){ out.push(Object.assign({ source:'builtin' }, d)); });
-  if(src!=='builtin') myTopics().forEach(function(t){ var p=pack(t); ((p&&p.daily)||[]).forEach(function(d){ out.push(Object.assign({}, d, { id:t.id+'~'+d.id, source:'mine', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id })); }); });
+  if(src!=='builtin') myTopics().forEach(function(t){ var p=pack(t); ((p&&p.daily)||[]).forEach(function(d){ out.push(Object.assign({}, d, { id:t.id+'~'+d.id, source:'mine', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id, courseName:t.subject&&t.subject.name })); }); });
   return out;
 }
 function byId(list, id){ return list.filter(function(x){ return x.id===id; })[0]||null; }
@@ -176,13 +182,97 @@ function upNext(course, n){
     .map(function(it){ var sp=it.spec.length?it.spec:['Lectures']; return { it:it, w:Math.min.apply(null, sp.map(avg)) - (it.source==='mine'?5:0) }; })   // own lectures first on a tie
     .sort(function(a,b){ return a.w-b.w; }).filter(function(x){ var k=x.it.title.toLowerCase(); if(this[k]) return false; this[k]=1; return true; }, {}).slice(0, n||3).map(function(x){ return x.it; });   // one card per patient (an ER case and its OSCE station share a title)
 }
-function caseCard(it){
-  var k=KIND[it.kind], b=played(it), free=it.kind==='er'||it.kind==='daily'||isFreeAny(it);
-  var open=it.href?'href="'+e(it.href)+'"':'href="javascript:void 0" onclick="MB_CLINSIM.'+(free?e(it.act):'locked()')+';return false"';
-  return '<a class="cs-card" style="text-decoration:none" '+open+'><div><span class="cs-tag">'+k[0]+' '+k[1]+'</span>'+(it.source==='mine'?'<span class="cs-tag">Your lecture</span>':(it.spec||[]).slice(0,1).map(function(sp){ return '<span class="cs-tag">'+e(sp)+'</span>'; }).join(''))+(!free?'<span class="cs-tag lock">🔒</span>':'')+'</div>'+
+// ctx: 'topic' (opened from its topic, so the diagnosis is not asked), 'blind' (mixed ward round:
+// no topic or specialty shown, the diagnosis is asked and scores more) or 'open' (anywhere else)
+function actFor(it, ctx){ ctx=ctx||'open'; return it.kind==='osce' ? "openOsce('"+it.id+"','timed','"+ctx+"')" : it.kind==='quick' ? "openQuick('"+it.id+"','"+ctx+"')" : it.act; }
+function caseCard(it, ctx, label){
+  var k=KIND[it.kind], b=played(it), free=it.kind==='er'||it.kind==='daily'||isFreeAny(it), blind=ctx==='blind';
+  var href=it.kind==='daily'&&blind ? it.href+'/blind' : it.href;
+  var open=href?'href="'+e(href)+'"':'href="javascript:void 0" onclick="MB_CLINSIM.'+(free?e(actFor(it, ctx)):'locked()')+';return false"';
+  var tags=blind ? '' : (it.source==='mine'?'<span class="cs-tag">Your lecture</span>':(it.spec||[]).slice(0,1).map(function(sp){ return '<span class="cs-tag">'+e(sp)+'</span>'; }).join(''));
+  return '<a class="cs-card" style="text-decoration:none" '+open+'><div>'+(label?'<span class="cs-tag">'+e(label)+'</span>':'')+'<span class="cs-tag">'+k[0]+' '+k[1]+'</span>'+tags+(!free?'<span class="cs-tag lock">🔒</span>':'')+'</div>'+
     '<h3>'+e(it.title)+'</h3>'+(b!==null?'<div class="cs-best">Best: '+b+'%</div>':'<div class="cs-meta">Not played yet</div>')+'</a>';
 }
 function isFreeAny(it){ if(it.kind==='osce') return isFree(stations('all'), it); if(it.kind==='quick') return isFree(quickCases('all'), it); return true; }
+
+/* ---------- one scoring system for every mode
+ * Each run scores 0-100 in its own mode (OSCE domains, quick-case points, ER Sim, guesses).
+ * grade : Excellent 85+, Pass 60+, Borderline 50-59, Fail below 50. A dangerous decision makes
+ *         it Unsafe whatever the score; an OSCE part under 40% makes it Fail.
+ * points: score x difficulty x how it was opened, divided by 10. Unsafe runs count as 40% at most.
+ *         Only your best run of each case counts, so replaying a case cannot farm points.
+ * rank  : from your total points. Study-group runs are ticked by friends, so they earn no points. */
+var DIFF_X={ Beginner:1, Foundation:1, Core:1.25, Advanced:1.5 };
+var CTX_X={ topic:1, open:1.1, blind:1.3 };
+var RANKS=[[0,'Student'],[100,'Clerk'],[300,'House Officer'],[700,'Medical Officer'],[1500,'Registrar'],[3000,'Consultant']];
+function gradeOf(pct, o){ o=o||{}; if(o.unsafe) return 'Unsafe'; if(o.fail&&pct>=60) return 'Fail'; if(pct>=85&&!o.fail) return 'Excellent'; if(pct>=60&&!o.fail) return 'Pass'; return pct>=50?'Borderline':'Fail'; }
+function pointsOf(pct, o){ o=o||{}; var p=Math.max(0, Math.min(100, o.unsafe?Math.min(pct,40):pct)); return Math.round(p*(DIFF_X[o.diff]||1.25)*(CTX_X[o.ctx]||1.1)*(o.mode==='practice'?0.5:1)/10); }
+function rankOf(total){ var r=RANKS[0], nx=null; RANKS.forEach(function(x, i){ if(total>=x[0]){ r=x; nx=RANKS[i+1]||null; } }); return { name:r[1], at:r[0], next:nx?{ name:nx[1], at:nx[0] }:null }; }
+function diffOf(kind, id){ var it=catalogue().filter(function(x){ return x.kind===kind && x.id===id; })[0]; return (it&&it.diff)||'Core'; }
+function allRuns(){
+  var out=store().runs.filter(function(r){ return r.kind!=='group'; }).map(function(r){ return { kind:r.kind, id:r.id, pct:r.pct, at:r.at, ctx:r.ctx, mode:r.mode, unsafe:!!r.unsafe }; });
+  var er=(typeof DATA!=='undefined'&&DATA.ersim&&DATA.ersim.runs)||[];
+  er.forEach(function(r){ out.push({ kind:'er', id:r.caseId, pct:r.pct, at:r.at, ctx:'open', unsafe:r.outcome==='died'||/unsafe/i.test(r.grade||'') }); });
+  return out.sort(function(a,b){ return String(a.at).localeCompare(String(b.at)); });
+}
+function standing(){
+  var bestPts={}, bestPct={}, runs=allRuns();
+  runs.forEach(function(r){ var k=r.kind+':'+r.id, p=pointsOf(r.pct, { diff:diffOf(r.kind, r.id), ctx:r.ctx, mode:r.mode, unsafe:r.unsafe });
+    if(!(k in bestPts) || p>bestPts[k]) bestPts[k]=p; if(!(k in bestPct) || r.pct>bestPct[k]) bestPct[k]=r.pct; });
+  var total=Object.keys(bestPts).reduce(function(a,k){ return a+bestPts[k]; }, 0), streak=0;
+  for(var i=runs.length-1; i>=0 && !runs[i].unsafe; i--) streak++;
+  var specs={};
+  catalogue().forEach(function(it){ if(it.tutorial || it.kind==='daily') return; (it.spec.length?it.spec:[]).forEach(function(sp){ var x=specs[sp]=specs[sp]||{ n:0, played:0, sum:0 }; x.n++; var b=bestPct[it.kind+':'+it.id]; if(b!=null){ x.played++; x.sum+=b; } }); });
+  var bySpec=Object.keys(specs).map(function(sp){ var x=specs[sp]; return { spec:sp, cases:x.n, played:x.played, avg:x.played?Math.round(x.sum/x.played):null }; });
+  return { total:total, rank:rankOf(total), safeStreak:streak, runs:runs.length, unsafe:runs.filter(function(r){ return r.unsafe; }).length, bySpec:bySpec };
+}
+// points this run adds on top of your previous best for the case (0 when it does not beat it)
+function award(kind, id, pct, ex){
+  var o={ diff:diffOf(kind, id), ctx:ex.ctx, mode:ex.mode, unsafe:ex.unsafe }, p=pointsOf(pct, o), prev=0;
+  allRuns().forEach(function(r){ if(r.kind===kind && r.id===id) prev=Math.max(prev, pointsOf(r.pct, { diff:o.diff, ctx:r.ctx, mode:r.mode, unsafe:r.unsafe })); });
+  return { pts:p, gain:Math.max(0, p-prev), grade:gradeOf(pct, { unsafe:ex.unsafe, fail:ex.pass===false }), ctx:ex.ctx };
+}
+function pointsLine(a){
+  if(!a) return '';
+  var why=a.ctx==='blind'?' · mixed round bonus':a.ctx==='topic'?' · topic practice':'';
+  return '<div class="cs-meta" style="margin:6px 0 2px"><b>'+e(a.grade)+'</b> · '+a.pts+' clinical points'+why+(a.gain?' · <b>+'+a.gain+'</b> to your total':' · your best on this case stays')+'</div>';
+}
+function standingHtml(){
+  var st=standing(); if(!st.runs) return '';
+  var r=st.rank, prog=r.next?Math.round(100*(st.total-r.at)/(r.next.at-r.at)):100;
+  var sp=st.bySpec.filter(function(x){ return x.played; }).sort(function(a,b){ return a.avg-b.avg; }).slice(0,4);
+  return '<div class="cs-panel"><div class="cs-top"><b>'+e(r.name)+' · '+st.total+' clinical points</b><span class="cs-meta">'+(r.next?(r.next.at-st.total)+' to '+e(r.next.name):'Top rank')+'</span></div>'+
+    '<div class="cs-bar" style="margin:8px 0"><i style="width:'+prog+'%"></i></div>'+
+    '<div class="cs-meta">Safe streak: '+st.safeStreak+' case'+(st.safeStreak===1?'':'s')+' without a dangerous decision'+(st.unsafe?' · '+st.unsafe+' unsafe so far':'')+'</div>'+
+    (sp.length?'<div class="cs-doms" style="margin-top:10px">'+sp.map(function(x){ return '<div class="cs-dom"><span class="cs-meta">'+e(x.spec)+' · '+x.played+' of '+x.cases+' cases</span><b>'+x.avg+'%</b><div class="cs-bar"><i style="width:'+x.avg+'%"></i></div></div>'; }).join('')+'</div>':'')+'</div>';
+}
+function ctxNote(ctx){
+  if(ctx==='topic') return '<div class="cs-meta" style="margin-top:4px">📖 Topic practice: the diagnosis is not marked, the rest is.</div>';
+  if(ctx==='blind') return '<div class="cs-meta" style="margin-top:4px">🎲 Mixed ward round: work out the diagnosis yourself. Worth 30% more points.</div>';
+  return '';
+}
+
+/* ---------- 🎲 Mixed ward round: cases from across the course (plus one from outside it), with no topic
+ * or specialty shown, so the diagnosis is tested properly. */
+var ROUND_SEED=0;
+function seeded(n){ var x=Math.sin(n*9301+49297)*233280; return x-Math.floor(x); }
+function roundItems(course, seed, n){
+  n=n||5; var all=catalogue().filter(function(it){ return !it.tutorial && (it.kind!=='daily' || it.source==='mine'); });
+  var mix=function(list, s){ return list.map(function(it, i){ return { it:it, r:seeded(s*131+i+1) }; }).sort(function(a,b){ return a.r-b.r; }).map(function(x){ return x.it; }); };
+  var seen={}, uniq=function(it){ var k=it.title.toLowerCase(); if(seen[k]) return false; seen[k]=1; return true; };
+  var inC=mix(all.filter(function(it){ return inCourse(it, course); }), seed).filter(uniq);
+  var out=inC.slice(0, course ? n-1 : n);
+  if(course){ var other=mix(all.filter(function(it){ return !inCourse(it, course); }), seed+7).filter(uniq); if(other.length) out.push(other[0]); else if(inC[n-1]) out.push(inC[n-1]); }
+  return mix(out, seed+3);
+}
+function roundBtn(course){ return '<div class="btnrow" style="margin:4px 0 8px"><a class="btn" href="#/clinsim/round">🎲 Mixed ward round'+(course?' for '+e(course.name):'')+': diagnosis hidden</a></div>'; }
+function roundPage(){
+  var course=curCourse(), items=roundItems(course, dayNo()+ROUND_SEED, 5);
+  var h='<a href="#/clinsim" class="cs-back">← Clinical Simulation</a><h1>🎲 Mixed ward round</h1><p class="cs-sub">'+(items.length===1?'One patient':items.length+' patients')+(course?' from '+e(course.name)+', with one from another specialty mixed in,':'')+' and no topic shown. Work out what each one has. Every case here is worth 30% more points.</p>';
+  if(!items.length) return h+'<div class="cs-panel">No cases yet. Import a clinical lecture or pick a specialty.</div>';
+  return h+'<div class="cs-grid">'+items.map(function(it, i){ return caseCard(it, 'blind', 'Patient '+(i+1)); }).join('')+'</div>'+
+    '<div class="btnrow" style="margin-top:14px"><button class="btn" onclick="MB_CLINSIM.newRound()">🔀 New round</button></div>';
+}
 
 /* ---------- free rotation: one built-in station and one quick case a week for unpaid students */
 function weekNo(){ return Math.floor((Date.now()+3600e3)/(7*864e5)); }
@@ -276,7 +366,7 @@ var MODES=[
 function hub(){
   var course=curCourse(), courses=myCourses(), sel=courseSel(), runs=store().runs, all=catalogue();
   var h='<h1>🏥 Clinical Simulation</h1><p class="cs-sub">Pick your course, then a topic. Every kind of case for that topic sits together.</p>'+
-    '<div class="cs-meta" style="margin-top:6px">'+level()+' level · '+runs.length+' case'+(runs.length===1?'':'s')+' played</div>';
+    '<div class="cs-meta" style="margin-top:6px">'+level()+' level · '+runs.length+' case'+(runs.length===1?'':'s')+' played</div>'+standingHtml();
   // 1 · your course
   var covered={}; courses.forEach(function(c){ if(c.spec) covered[c.spec]=1; });
   var extra=['Medicine','Surgery','Paediatrics','Obstetrics & Gynaecology','Community Health'].filter(function(sp){ return !covered[sp]; });
@@ -287,12 +377,13 @@ function hub(){
   if(!courses.length) h+='<div class="cs-meta" style="margin-top:6px">Your imported courses appear here. Until then, pick a specialty.</div>';
   // Up next
   var nx=upNext(course, 3);
-  if(nx.length) h+='<h4 class="cs-h">Up next for you</h4><div class="cs-meta">Cases you haven\'t played'+(course?' in '+e(course.name):'')+', from the area where your scores are lowest.</div><div class="cs-grid">'+nx.map(caseCard).join('')+'</div>';
+  if(nx.length) h+='<h4 class="cs-h">Up next for you</h4><div class="cs-meta">Cases you haven\'t played'+(course?' in '+e(course.name):'')+', from the area where your scores are lowest.</div><div class="cs-grid">'+nx.map(function(it){ return caseCard(it); }).join('')+'</div>';
   // search
   h+='<div class="cs-ask" style="margin-top:16px"><input id="csSearch" type="search" autocomplete="off" placeholder="Search cases: malaria, jaundice, trauma…" aria-label="Search cases" oninput="MB_CLINSIM.search(this.value)" value="'+e(SEARCH)+'"></div><div id="csResults">'+searchHtml(SEARCH)+'</div>';
   // 2 · topics
   h+='<h4 class="cs-h">2 · Topics'+(course?' in '+e(course.name):'')+'</h4>';
   if(!course){
+    h+=roundBtn(null);
     if(!courses.length) h+='<div class="cs-panel">Pick a course above to see its topics and cases.</div>';
     else h+='<div class="cs-grid">'+courses.map(function(c){ var n=all.filter(function(it){ return inCourse(it,c); }).length, tn=myTopics().filter(function(t){ return t.subject&&t.subject.id===c.id; }).length;
       return '<button class="cs-card" onclick="MB_CLINSIM.course(\''+e(c.id)+'\')"><h3>'+e(c.name)+'</h3><div class="cs-meta">'+tn+' lecture'+(tn===1?'':'s')+' · '+n+' case'+(n===1?'':'s')+(c.spec?' · '+e(c.spec):'')+'</div></button>'; }).join('')+'</div>';
@@ -300,16 +391,18 @@ function hub(){
     var shown={};
     var tps=myTopics().filter(function(t){ return t.subject && t.subject.id===course.id; });
     tps.forEach(function(t){
-      var items=all.filter(function(it){ return it.kind!=='er'||!it.tutorial; }).filter(function(it){ return it.source==='mine' ? it.topicId===t.id : (it.kind!=='daily' && !it.tutorial && topicHit(it, t.name)); });
+      var items=all.filter(function(it){ return it.kind!=='daily' && !it.tutorial; }).filter(function(it){ return it.source==='mine' ? it.topicId===t.id : topicHit(it, t.name); });
       items.forEach(function(it){ shown[it.kind+it.id]=1; });
       var p=pack(t);
       h+='<div class="cs-panel"><div class="cs-top"><b>'+e(t.name)+'</b><span class="cs-meta">'+items.length+' case'+(items.length===1?'':'s')+'</span></div>'+
-        (items.length?'<div class="cs-grid">'+items.map(caseCard).join('')+'</div>':'')+
+        (items.length?'<div class="cs-grid">'+items.map(function(it){ return caseCard(it, 'topic'); }).join('')+'</div>':'')+
         (!packCount(p) && !(p&&p.none) ? '<div class="btnrow" style="margin-top:10px"><button class="btn" '+(BUILDING[t.id]?'disabled':'')+' onclick="MB_CLINSIM.build(\''+e(t.id)+'\')">'+(BUILDING[t.id]?'Building cases… about 30 s':'✨ Build cases from this lecture')+'</button></div>' : '')+'</div>';
     });
+    if(tps.length) h+='<div class="cs-meta" style="margin:-4px 0 10px">You know the condition from the topic, so these cases test history, management and look-alikes, not the diagnosis. To be tested on the diagnosis, play a mixed ward round.</div>';
     var core=all.filter(function(it){ return it.source==='builtin' && it.kind!=='daily' && !it.tutorial && inCourse(it, course) && !shown[it.kind+it.id]; });
-    if(core.length) h+='<div class="cs-panel"><div class="cs-top"><b>Core '+e(course.spec||course.name)+' cases</b><span class="cs-meta">'+core.length+' case'+(core.length===1?'':'s')+'</span></div><div class="cs-grid">'+core.map(caseCard).join('')+'</div></div>';
+    if(core.length) h+='<div class="cs-panel"><div class="cs-top"><b>Core '+e(course.spec||course.name)+' cases</b><span class="cs-meta">'+core.length+' case'+(core.length===1?'':'s')+'</span></div><div class="cs-grid">'+core.map(function(it){ return caseCard(it); }).join('')+'</div></div>';
     if(!tps.length && !core.length) h+='<div class="cs-panel">No cases for this course yet. Import a clinical lecture and MedBank builds cases from it.</div>';
+    else h+=roundBtn(course);
   }
   // 3 · practise by mode
   h+='<h4 class="cs-h">3 · Or practise by mode</h4><div class="cs-grid">';
@@ -324,7 +417,7 @@ var SEARCH='';
 function searchHtml(q){
   var x=normW(q).trim(); if(x.length<2) return '';
   var hits=catalogue().filter(function(it){ return it.kind!=='daily' && normW(it.title+' '+it.words+' '+(it.spec||[]).join(' ')).indexOf(x)>=0; }).slice(0,12);
-  return hits.length ? '<div class="cs-grid">'+hits.map(caseCard).join('')+'</div>' : '<div class="cs-meta" style="margin-top:8px">No cases match "'+e(q)+'" yet.</div>';
+  return hits.length ? '<div class="cs-grid">'+hits.map(function(it){ return caseCard(it); }).join('')+'</div>' : '<div class="cs-meta" style="margin-top:8px">No cases match "'+e(q)+'" yet.</div>';
 }
 function courseBar(){
   var c=curCourse(); if(!c) return '';
@@ -361,15 +454,16 @@ function osceList(sub){
   list.forEach(function(s){
     var free=isFree(all, s), b=best('osce', s.id), mode=sub==='practice'?'practice':'timed';
     h+='<button class="cs-card" onclick="MB_CLINSIM.'+(free?'openOsce(\''+e(s.id)+'\',\''+mode+'\')':'locked()')+'">'+
-      '<div>'+(s.source==='mine'?'<span class="cs-tag">'+e(s.topicName)+'</span>':'<span class="cs-tag">'+e(s.area)+'</span>')+(!entitled()&&s.source==='builtin'?(free?'<span class="cs-tag free">Free this week</span>':'<span class="cs-tag lock">🔒 Subscribe</span>'):'')+'</div>'+
+      '<div>'+(s.source==='mine'?'<span class="cs-tag">'+e(s.courseName||'Your lecture')+'</span>':'<span class="cs-tag">'+e(s.area)+'</span>')+(!entitled()&&s.source==='builtin'?(free?'<span class="cs-tag free">Free this week</span>':'<span class="cs-tag lock">🔒 Subscribe</span>'):'')+'</div>'+
       '<h3>'+e(s.title)+'</h3><div class="cs-meta">'+e(s.patient.name)+', '+e(s.patient.age)+' '+e(s.patient.sex)+(s.speaker&&!/patient/i.test(s.speaker)?' · you speak with '+e(s.speaker):'')+'</div>'+
       (b!==null?'<div class="cs-best">Best: '+b+'%</div>':'<div class="cs-meta">Not played yet</div>')+'</button>';
   });
   return h+'</div>';
 }
-function osceStart(id, mode){
-  var s=byId(stations('all'), id); if(!s) return false;
-  OS={ s:s, mode:mode, chat:[{ who:'sys', text:'You are the doctor. '+s.patient.name+' ('+s.patient.age+', '+s.patient.sex+') is waiting. Start by greeting them.' }],
+function forCtx(s, ctx){ return ctx==='topic' ? Object.assign({}, s, { dx:s.form||null, dxGiven:true }) : s; }
+function osceStart(id, mode, ctx){
+  var s=byId(stations('all'), id); if(!s) return false; ctx=ctx||'open';
+  OS={ s:forCtx(s, ctx), ctx:ctx, mode:mode, chat:[{ who:'sys', text:'You are the doctor. '+s.patient.name+' ('+s.patient.age+', '+s.patient.sex+') is waiting. Start by greeting them.' }],
        said:[], asked:{}, phase:'talk', endsAt: mode==='timed' ? Date.now()+OSCE_MIN*60e3 : null, dx:null, plan:null, busy:false };
   return true;
 }
@@ -388,7 +482,7 @@ function osceTalk(){
   var s=OS.s, timed=!!OS.endsAt;
   var h='<a href="#/clinsim/osce/'+(OS.mode==='practice'?'practice':(s.source==='mine'?'mine':'timed'))+'" class="cs-back" onclick="MB_CLINSIM.stop()">← Stations</a>'+
     '<div class="cs-top"><h1 style="margin:6px 0">'+e(s.title)+'</h1>'+(timed?'<span class="cs-clock" id="csClock" aria-live="off">'+clockText()+'</span>':'<span class="cs-meta">Practice: no clock</span>')+'</div>'+
-    '<div class="cs-meta">'+e(s.patient.name)+', '+e(s.patient.age)+' '+e(s.patient.sex)+(s.speaker&&!/^the patient$/i.test(s.speaker)?' · speaking: '+e(s.speaker):'')+'</div>'+
+    '<div class="cs-meta">'+e(s.patient.name)+', '+e(s.patient.age)+' '+e(s.patient.sex)+(s.speaker&&!/^the patient$/i.test(s.speaker)?' · speaking: '+e(s.speaker):'')+'</div>'+ctxNote(OS.ctx)+
     '<div class="cs-panel"><div class="cs-chat" id="csChat" aria-live="polite">'+OS.chat.map(function(m){ return '<div class="cs-msg '+m.who+'">'+e(m.text)+'</div>'; }).join('')+(OS.busy?'<div class="cs-msg pt">…</div>':'')+'</div>'+
     '<form class="cs-ask" onsubmit="MB_CLINSIM.say();return false"><input id="csQ" autocomplete="off" placeholder="Speak to '+e(s.speaker&&!/^the patient$/i.test(s.speaker)?s.speaker:s.patient.name.split(' ')[0])+'…" aria-label="What you say"'+(OS.busy?' disabled':'')+'><button class="btn primary"'+(OS.busy?' disabled':'')+'>Say</button></form>'+
     '<div class="btnrow" style="margin-top:10px"><button class="btn" onclick="MB_CLINSIM.present()">I\'m ready to present</button></div></div>';
@@ -401,8 +495,8 @@ function osceTalk(){
 function oscePresent(){
   var s=OS.s;
   function q(name, block, val){ if(!block) return ''; return '<h4>'+e(block.q)+'</h4><div class="cs-opts">'+block.options.map(function(o,i){ return '<button class="cs-opt'+(val===i?' picked':'')+'" onclick="MB_CLINSIM.pick(\''+name+'\','+i+')">'+e(o)+'</button>'; }).join('')+'</div>'; }
-  return '<h1>'+e(s.title)+'</h1><p class="cs-sub">The examiner asks you to present.</p><div class="cs-panel">'+q('dx', s.dx, OS.dx)+q('plan', s.plan, OS.plan)+
-    '<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.mark()"'+(OS.dx===null||(s.plan&&OS.plan===null)?' disabled':'')+'>Finish the station</button>'+(OS.endsAt&&Date.now()<OS.endsAt?'<button class="btn" onclick="MB_CLINSIM.back()">Back to the patient</button>':'')+'</div></div>';
+  return '<h1>'+e(s.title)+'</h1><p class="cs-sub">The examiner asks you to present.'+(s.dxGiven?' You picked this from its topic, so you are not asked to name the diagnosis.':'')+'</p><div class="cs-panel">'+q('dx', s.dx, OS.dx)+q('plan', s.plan, OS.plan)+
+    '<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.mark()"'+((s.dx&&OS.dx===null)||(s.plan&&OS.plan===null)?' disabled':'')+'>Finish the station</button>'+(OS.endsAt&&Date.now()<OS.endsAt?'<button class="btn" onclick="MB_CLINSIM.back()">Back to the patient</button>':'')+'</div></div>';
 }
 // Interpersonal skills, checked from what the student actually said.
 var IP=[
@@ -446,9 +540,9 @@ function resultHtml(s, sc, opts){
 }
 function osceResult(){
   var s=OS.s, sc=OS.score;
-  var h='<h1>Station result: '+e(s.title)+'</h1>'+resultHtml(s, sc, { picks:{ dx:OS.dx, plan:OS.plan }, time:OS.endsAt?OSCE_MIN+'-minute station':'practice' });
+  var h='<h1>Station result: '+e(s.title)+'</h1>'+pointsLine(OS.pts)+resultHtml(s, sc, { picks:{ dx:OS.dx, plan:OS.plan }, time:OS.endsAt?OSCE_MIN+'-minute station':'practice' });
   h+='<div class="cs-panel"><h4>Your conversation</h4><div class="cs-chat">'+OS.chat.map(function(m){ return '<div class="cs-msg '+m.who+'">'+e(m.text)+'</div>'; }).join('')+'</div></div>';
-  h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.openOsce(\''+e(s.id)+'\',\''+OS.mode+'\')">Try again</button><button class="btn" onclick="location.hash=\'#/clinsim/osce/'+(s.source==='mine'?'mine':OS.mode)+'\'">Other stations</button></div>';
+  h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.openOsce(\''+e(s.id)+'\',\''+OS.mode+'\',\''+OS.ctx+'\')">Try again</button><button class="btn" onclick="location.hash=\'#/clinsim/osce/'+(s.source==='mine'?'mine':OS.mode)+'\'">Other stations</button></div>';
   return h;
 }
 async function token(){ try{ if(!root.__mbSB) return null; var s=await root.__mbSB.auth.getSession(); return s&&s.data&&s.data.session?s.data.session.access_token:null; }catch(_){ return null; } }
@@ -502,12 +596,12 @@ function quickScore(q, picks){
   var got=0, max=10*q.steps.length, danger=[];
   q.steps.forEach(function(st,i){ var o=st.options[picks[i]]; if(!o) return; got+=o.pts; if(o.pts<=-10) danger.push({ step:st.prompt, t:o.t, why:o.why }); });
   var pct=Math.max(0, Math.min(100, Math.round(100*got/max)));
-  var grade=danger.length?'Unsafe: dangerous decision':pct>=85?'Excellent':pct>=70?'Safe':pct>=50?'Borderline':'Unsafe';
+  var grade=danger.length?'Unsafe: dangerous decision':gradeOf(pct);
   return { pct:pct, grade:grade, danger:danger };
 }
 function quickView(){
   var q=QS.q, back='<a href="#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'" class="cs-back">← Quick cases</a>';
-  var h=back+'<h1>'+e(q.title)+'</h1><div class="cs-meta">'+e(q.patient.name)+', '+e(q.patient.age)+' '+e(q.patient.sex)+(q.source==='mine'?' · from your lecture '+e(q.topicName):'')+'</div>'+
+  var h=back+'<h1>'+e(q.title)+'</h1><div class="cs-meta">'+e(q.patient.name)+', '+e(q.patient.age)+' '+e(q.patient.sex)+(q.source==='mine'&&QS.ctx!=='blind'?' · from your lecture '+e(q.topicName):'')+'</div>'+ctxNote(QS.ctx)+
     '<div class="cs-panel"><p style="margin:0;line-height:1.55">'+e(q.stem)+'</p></div>';
   if(QS.phase==='steps'){
     q.steps.forEach(function(st,i){
@@ -532,12 +626,17 @@ function quickView(){
   }
   var sc=QS.score, col=sc.danger.length||sc.pct<50?'var(--badtx)':sc.pct<70?'var(--warntx)':'var(--recall-tx)';
   var mcqN=(q.mcqs||[]).length, mcqOk=(q.mcqs||[]).filter(function(m,i){ return QS.mcq[i]===m.ans; }).length;
-  h+='<div class="cs-panel"><div class="cs-score"><div class="cs-ring" style="border:8px solid '+col+';color:'+col+'">'+sc.pct+'%</div><div><div style="font-size:20px;font-weight:800;color:'+col+'">'+e(sc.grade)+'</div>'+
+  h+=pointsLine(QS.pts)+'<div class="cs-panel"><div class="cs-score"><div class="cs-ring" style="border:8px solid '+col+';color:'+col+'">'+sc.pct+'%</div><div><div style="font-size:20px;font-weight:800;color:'+col+'">'+e(sc.grade)+'</div>'+
     (mcqN?'<div class="cs-meta">Exam questions: '+mcqOk+' of '+mcqN+' right</div>':'')+'</div></div>'+
     (sc.danger.length?'<h4>Dangerous decisions</h4><ul class="cs-teach">'+sc.danger.map(function(d){ return '<li><b>'+e(d.t)+'</b>. '+e(d.why)+'</li>'; }).join('')+'</ul>':'')+'</div>';
   if((q.teaching||[]).length) h+='<div class="cs-panel"><h4>Learning points</h4><ul class="cs-teach">'+q.teaching.map(function(t){ return '<li>'+e(t)+'</li>'; }).join('')+'</ul>'+((q.refs||[]).length?'<h4>Further reading</h4><ul class="cs-teach">'+q.refs.map(function(t){ return '<li>'+e(t)+'</li>'; }).join('')+'</ul>':'')+'</div>';
-  h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.openQuick(\''+e(q.id)+'\')">Play again</button>'+(q.topicId?'<a class="btn" href="#/topic/'+e(q.topicId)+'">Open the lecture</a>':'')+'<button class="btn" onclick="location.hash=\'#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'\'">Other cases</button></div>';
+  h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.openQuick(\''+e(q.id)+'\',\''+(QS.ctx||'open')+'\')">Play again</button>'+(q.topicId?'<a class="btn" href="#/topic/'+e(q.topicId)+'">Open the lecture</a>':'')+'<button class="btn" onclick="location.hash=\'#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'\'">Other cases</button></div>';
   return h;
+}
+function quickDone(){
+  var mq=QS.q.mcqs||[], ex={ grade:QS.score.grade, ctx:QS.ctx||'open', unsafe:QS.score.danger.length>0 };
+  if(mq.length) ex.mcq=mq.filter(function(m,i){ return QS.mcq[i]===m.ans; }).length;
+  QS.pts=award('quick', QS.q.id, QS.score.pct, ex); record('quick', QS.q.id, QS.score.pct, ex);
 }
 // MCQ options in a stable shuffled order (the answer is not always first)
 function shuffled(opts, seed){ var a=opts.map(function(t,i){ return { t:t, i:i }; }), n=(seed*7+3)%a.length; return a.slice(n).concat(a.slice(0,n)); }
@@ -564,14 +663,16 @@ function dailyHtml(p, key, title){
   }
   return h+'</div>';
 }
+var DAILY_BLIND=false;
 function squares(p, st){ var s=st.g.map(function(g){ return isRight(p,g)?'🟩':'🟥'; }); while(s.length<6) s.push('⬜'); return s.join(''); }
 function dailyMode(sub, id){
-  var h=modeHead('daily', sub);
+  var h=modeHead('daily', sub); DAILY_BLIND=/\/blind$/.test(id||'');
   if(sub==='mine'){
     var cc=curCourse(), list=dailies('mine').filter(function(d){ return inCourse(d, cc); });
-    if(id){ var p=byId(list, id); if(!p) return h+'<div class="cs-panel">Puzzle not found.</div>'; return h+dailyHtml(p, dailyKeyFor(p), 'From '+(p.topicName||'your lecture')); }
+    var blind=/\/blind$/.test(id||''); if(blind) id=id.replace(/\/blind$/,'');
+    if(id){ var p=byId(list, id)||byId(dailies('mine'), id); if(!p) return h+'<div class="cs-panel">Puzzle not found.</div>'; return h+dailyHtml(p, dailyKeyFor(p), blind?'Mixed ward round: mystery patient':'From '+(p.courseName||'your lecture')); }
     if(!list.length) return h+emptyMine('puzzles');
-    return h+'<div class="cs-grid">'+list.map(function(p){ var st=store().daily[dailyKeyFor(p)]; return '<a class="cs-card" style="text-decoration:none" href="#/clinsim/daily/mine/'+e(p.id)+'"><div><span class="cs-tag">'+e(p.topicName)+'</span></div><h3>'+(st&&st.done?e(p.answer):'Mystery patient')+'</h3><div class="cs-meta">'+(st&&st.done?(st.won?'Solved in '+st.g.length:'Not solved'):'Not played yet')+'</div></a>'; }).join('')+'</div>';
+    return h+'<div class="cs-grid">'+list.map(function(p){ var st=store().daily[dailyKeyFor(p)]; return '<a class="cs-card" style="text-decoration:none" href="#/clinsim/daily/mine/'+e(p.id)+'"><div><span class="cs-tag">'+e(p.courseName||'Your lecture')+'</span></div><h3>'+(st&&st.done?e(p.answer):'Mystery patient')+'</h3><div class="cs-meta">'+(st&&st.done?(st.won?'Solved in '+st.g.length:'Not solved'):'Not played yet')+'</div></a>'; }).join('')+'</div>';
   }
   if(sub==='archive'){
     var rows=''; for(var k=1;k<=7;k++){ var n=dayNo()-k, pz=todayPuzzle(n), ky=dayKey(n), s2=store().daily[ky];
@@ -588,7 +689,7 @@ var GS=null;
 function groupList(){
   var cc=curCourse(), all=stations('all'), shownS=all.filter(function(s){ return inCourse(s, cc); });
   return modeHead('group','pick')+'<p class="cs-sub">For three people and one phone. The <b>patient</b> reads their script first. Then hand the phone to the <b>examiner</b>, who starts the clock and ticks what the <b>candidate</b> does. The candidate never sees the screen.</p><div class="cs-grid">'+
-    shownS.map(function(s){ var free=isFree(all, s); return '<button class="cs-card" onclick="MB_CLINSIM.'+(free?'openGroup(\''+e(s.id)+'\')':'locked()')+'"><div><span class="cs-tag">'+e(s.source==='mine'?s.topicName:s.area)+'</span>'+(!entitled()&&s.source==='builtin'&&!free?'<span class="cs-tag lock">🔒 Subscribe</span>':'')+'</div><h3>'+e(s.title)+'</h3><div class="cs-meta">'+e(s.patient.name)+', '+e(s.patient.age)+' '+e(s.patient.sex)+'</div></button>'; }).join('')+'</div>';
+    shownS.map(function(s){ var free=isFree(all, s); return '<button class="cs-card" onclick="MB_CLINSIM.'+(free?'openGroup(\''+e(s.id)+'\')':'locked()')+'"><div><span class="cs-tag">'+e(s.source==='mine'?(s.courseName||'Your lecture'):s.area)+'</span>'+(!entitled()&&s.source==='builtin'&&!free?'<span class="cs-tag lock">🔒 Subscribe</span>':'')+'</div><h3>'+e(s.title)+'</h3><div class="cs-meta">'+e(s.patient.name)+', '+e(s.patient.age)+' '+e(s.patient.sex)+'</div></button>'; }).join('')+'</div>';
 }
 function groupView(){
   var s=GS.s, back='<a href="#/clinsim/group/pick" class="cs-back" onclick="MB_CLINSIM.stop()">← Stations</a>';
@@ -674,41 +775,43 @@ function page(parts){
   switch(mode){
     case 'er':    return erMode(sub||'tut');
     case 'osce':
-      if(id){ if(!OS || OS.s.id!==id){ if(!osceStart(id, sub==='practice'?'practice':'timed')) return '<h1>Station not found</h1><p><a href="#/clinsim/osce/timed">Back to stations</a></p>'; } if(OS.phase==='talk'&&OS.endsAt) setTimeout(startTimer,0); return osceView(); }
+      if(id){ if(!OS || OS.s.id!==id){ if(!osceStart(id, sub==='practice'?'practice':'timed', 'open')) return '<h1>Station not found</h1><p><a href="#/clinsim/osce/timed">Back to stations</a></p>'; } if(OS.phase==='talk'&&OS.endsAt) setTimeout(startTimer,0); return osceView(); }
       OS=null; return osceList(sub||'timed');
     case 'quick':
-      if(id){ if(!QS || QS.q.id!==id){ var q=byId(quickCases('all'), id); if(!q) return '<h1>Case not found</h1><p><a href="#/clinsim/quick/builtin">Back</a></p>'; QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[] }; } return quickView(); }
+      if(id){ if(!QS || QS.q.id!==id){ var q=byId(quickCases('all'), id); if(!q) return '<h1>Case not found</h1><p><a href="#/clinsim/quick/builtin">Back</a></p>'; QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:'open' }; } return quickView(); }
       QS=null; return quickList(sub||'builtin');
     case 'daily': return dailyMode(sub||'today', id);
     case 'group':
       if(id){ if(!GS || GS.s.id!==id){ var s=byId(stations('all'), id); if(!s) return '<h1>Station not found</h1>'; GS={ s:s, tab:'patient', endsAt:null, ticks:{ h:{}, ip:{}, dx:null, plan:null } }; } return groupView(); }
       GS=null; return groupList();
     case 'mine':  return mineMode();
+    case 'round': return roundPage();
     default:      return hub();
   }
 }
 
 root.MB_CLINSIM={
   on:on, visible:visible, page:page, locked:locked,
-  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext },
+  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext, gradeOf:gradeOf, pointsOf:pointsOf, standing:standing, rankOf:rankOf, roundItems:roundItems, forCtx:forCtx },
   stop:function(){ stopTimer(); },
-  openOsce:function(id, mode){ stopTimer(); var all=stations('all'), s=byId(all,id); if(s && !isFree(all,s)) return locked(); osceStart(id, mode); location.hash='#/clinsim/osce/'+mode+'/'+id; draw(); },
+  openOsce:function(id, mode, ctx){ stopTimer(); var all=stations('all'), s=byId(all,id); if(s && !isFree(all,s)) return locked(); osceStart(id, mode, ctx); location.hash='#/clinsim/osce/'+mode+'/'+id; draw(); },
   say:say,
   present:function(){ if(!OS) return; OS.phase='present'; stopTimer(); draw(); root.scrollTo&&root.scrollTo(0,0); },
   back:function(){ if(!OS) return; OS.phase='talk'; draw(); if(OS.endsAt) startTimer(); },
   pick:function(k, i){ if(!OS) return; OS[k]=i; draw(); },
-  mark:function(){ if(!OS) return; OS.score=osceScore(OS); OS.phase='result'; stopTimer(); record('osce', OS.s.id, OS.score.total, { pass:OS.score.pass, mode:OS.mode }); draw(); root.scrollTo&&root.scrollTo(0,0); },
-  openQuick:function(id){ var all=quickCases('all'), q=byId(all,id); if(!q) return; if(!isFree(all,q)) return locked(); QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[] }; location.hash='#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'/'+id; draw(); },
+  mark:function(){ if(!OS) return; OS.score=osceScore(OS); OS.phase='result'; stopTimer();
+    var ex={ pass:OS.score.pass, mode:OS.mode, ctx:OS.ctx }; OS.pts=award('osce', OS.s.id, OS.score.total, ex); record('osce', OS.s.id, OS.score.total, ex); draw(); root.scrollTo&&root.scrollTo(0,0); },
+  openQuick:function(id, ctx){ var all=quickCases('all'), q=byId(all,id); if(!q) return; if(!isFree(all,q)) return locked(); QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:ctx||'open' }; location.hash='#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'/'+id; draw(); },
   choose:function(i, k){ if(!QS || QS.picks[i]!==undefined) return; QS.picks[i]=k; draw(); },
-  next:function(){ if(!QS) return; if(QS.step+1<QS.q.steps.length){ QS.step++; draw(); return; } QS.score=quickScore(QS.q, QS.picks); QS.phase=(QS.q.mcqs||[]).length?'mcq':'done'; if(QS.phase==='done') record('quick', QS.q.id, QS.score.pct, { grade:QS.score.grade }); draw(); },
+  next:function(){ if(!QS) return; if(QS.step+1<QS.q.steps.length){ QS.step++; draw(); return; } QS.score=quickScore(QS.q, QS.picks); QS.phase=(QS.q.mcqs||[]).length?'mcq':'done'; if(QS.phase==='done') quickDone(); draw(); },
   answer:function(k){ if(!QS || QS.mcq[QS.m]!==undefined) return; QS.mcq[QS.m]=k; draw(); },
-  nextMcq:function(){ if(!QS) return; if(QS.m+1<QS.q.mcqs.length){ QS.m++; draw(); return; } QS.phase='done'; record('quick', QS.q.id, QS.score.pct, { grade:QS.score.grade, mcq:QS.q.mcqs.filter(function(m,i){ return QS.mcq[i]===m.ans; }).length }); draw(); root.scrollTo&&root.scrollTo(0,0); },
+  nextMcq:function(){ if(!QS) return; if(QS.m+1<QS.q.mcqs.length){ QS.m++; draw(); return; } QS.phase='done'; quickDone(); draw(); root.scrollTo&&root.scrollTo(0,0); },
   guess:function(key, pid){
     var p=byId(dailies('all'), pid); var inp=document.getElementById('csGuess'); var g=(inp&&inp.value||'').trim(); if(!p||!g) return;
     var st=dailyState(key); if(st.done) return;
     st.g.push(g.slice(0,80));
     if(isRight(p,g)){ st.done=true; st.won=true; } else if(st.g.length>=6){ st.done=true; st.won=false; }
-    if(st.done) record('daily', p.id, st.won?Math.round(100*(7-st.g.length)/6):0, { day:key });
+    if(st.done) record('daily', p.id, st.won?Math.round(100*(7-st.g.length)/6):0, { day:key, ctx:/^mine:/.test(key)&&DAILY_BLIND?'blind':'open' });
     save(); draw(); var i2=document.getElementById('csGuess'); if(i2) i2.focus();
   },
   share:function(key, pid){
@@ -724,6 +827,7 @@ root.MB_CLINSIM={
   gpick:function(k, i){ if(!GS) return; GS.ticks[k]=i; draw(); },
   build:buildFor,
   course:function(id){ setCourse(id||'all'); SEARCH=''; draw(); },
+  newRound:function(){ ROUND_SEED++; draw(); },
   search:function(q){ SEARCH=String(q||'').slice(0,60); var r=document.getElementById('csResults'); if(r) r.innerHTML=searchHtml(SEARCH); }
 };
 })(typeof window!=='undefined'?window:globalThis);
