@@ -14,9 +14,10 @@ A search box finds any case by name, topic word or specialty.
 **The topic does not give the diagnosis away.** A case opened from its own topic panel is *topic practice*: the OSCE asks "These look alike. Which one fits this patient?" (the right diagnosis plus its look-alikes, from `dx.close` in ER cases or `form` in lecture packs) instead of the diagnosis, or drops that question and marks management on the plan. Topic panels hold no puzzles, and lecture case lists show the course name, not the lecture title. The diagnosis is tested in the **🎲 Mixed ward round** (`#/clinsim/round`): up to five patients from the course plus one from another specialty, with no topic or specialty shown. ER Sim cases still ask the diagnosis inside ER Sim.
 
 ## Scoring (one system for every mode)
+- Options are shuffled on screen per case, step and play (`order()`), because the content lists the best option first.
 - Each run scores 0 to 100 in its own mode (OSCE domains, quick-case points, ER Sim, Case of the Day guesses).
 - **Grade:** Excellent 85+, Pass 60+, Borderline 50 to 59, Fail under 50. A dangerous decision (or a patient death in ER Sim) makes it **Unsafe** whatever the score. An OSCE with any part under 40% is Fail.
-- **Clinical points** = score × difficulty (Beginner 1, Core 1.25, Advanced 1.5) × how it was opened (topic 1, open 1.1, mixed round 1.3) ÷ 10. OSCE practice mode counts half. Unsafe runs count as 40% at most.
+- **Clinical points** = score × difficulty (Beginner 1, Core 1.25, Advanced 1.5) × how it was opened (topic 1, open 1.1, verified duel 1.2, mixed round 1.3) ÷ 10. OSCE practice mode counts half. Unsafe runs count as 40% at most.
 - Only the best run of each case counts towards the total, so replaying cannot farm points. Study-group runs are ticked by friends and earn no points.
 - **Ranks:** Student 0, Clerk 100, House Officer 300, Medical Officer 700, Registrar 1500, Consultant 3000.
 - The hub shows rank, points, the **safe streak** (runs in a row with no dangerous decision) and the weakest specialties.
@@ -31,7 +32,12 @@ How matching works (`clinsim.js`): every case has `spec[]` (specialties) and `wo
 | ⚡ Quick Cases | MedBank cases, From my lectures | 3 to 4 decisions with weighted points (best 10, dangerous -10), then 3 MCQs. One dangerous decision grades the case Unsafe. |
 | 📅 Case of the Day | Today's case, Past days, From my lectures | One shared puzzle a day (Lagos time), six clues revealed one per wrong guess, six guesses, share to WhatsApp. |
 | 👥 Study Group OSCE | Pick a station | Pass-and-play on one phone: patient script, examiner sheet with ticks and an 8-minute clock, then the same three-part mark. |
+| 🗓️ My Posting | This week | The student sets their posting (one of their courses or a specialty, first day, 4 to 12 weeks). Each week gets 3 cases (clerkships pace Aquifer cases at 2 to 3 a week), fixed the first time the week is opened: their own lectures for the course first, then Beginner/Core before Advanced; when new cases run out, the lowest-scored come back. A row of weekly checkpoints, a "Saw a patient on the ward?" box that finds a matching case, and in the last week a mixed ward round before the end-of-posting exam. Stored in `DATA.clinsim.rotation`. |
+| 🎓 Mock OSCE Day | Sit a mock day | 4, 6 or 8 stations back to back, from the chosen course or a finals mix across specialties. Like PLAB 2: 1.5 minutes' reading time with candidate instructions, then 8 minutes; no results between stations; one report with stations passed, average, the three domains and one pre-set feedback statement per station. Pass = at least 60% of stations passed and an average of 60%. Stations run blind (diagnosis asked). Kept in `DATA.clinsim.mocks`. |
+| ⚔️ Duel | Start or join | Two students side by side play the same quick case on one 6-minute clock (`clinsim-duel.js`). Join by 4-digit code, link or QR, then copy a 4-emoji pattern off the host's screen (Kahoot's 2-step join). Focus lock: one slip under 5 s, then leaving the app forfeits (Forest's Plant Together). A phone silent for 30 s has abandoned (chess.com). At the end each reads the other's 3-digit code: matched codes mark the duel **verified**. Score = decisions 80% + exam questions 20%; a tie goes to fewer dangerous decisions, then speed. Runs over Supabase Realtime (channel `mbduel-<code>`, no tables); with no account it links tabs of one browser for testing. |
 | 📚 My Lecture Cases | | Every lecture a clinical-year student imports gets its own OSCE stations, quick cases and puzzles. |
+
+**📖 Revise this.** When a student misses a case (OSCE below pass, quick case under 60% or with a dangerous decision, or any duel), the result shows what to revise: the line of their own note the case came from (the case's quoted `src`, else the note sentence sharing the most case words), an **Open this line** button that opens the topic and highlights that line, and up to three related Q-bank questions from the same topic (`relatedQs`). Built-in cases are linked to the student's imported topics by topic words (`linkedTopics`). It shows nothing when no imported note matches.
 
 ## Cases from imported lectures
 - `import-server/clinsim.mjs` builds a case pack from the built note. `POST /import` starts it after responding (so imports are no slower) when the level is 400, 500 or 600, and saves it to `topics.extras.clinsim`. `POST /build-extra` with `kind:"clinsim"` builds it for older lectures (the "Build cases" button), and returns the cached pack when there is one.
@@ -47,6 +53,7 @@ Unpaid students (trial ended) get one built-in OSCE station and one quick case a
 
 ## Files
 - `clinsim.js`: the hub, every mode, scoring and the router (`MB_CLINSIM.page`).
+- `clinsim-duel.js`: the duel (room, checks, focus lock, scoring of a duel).
 - `clinsim-cases.js`: built-in quick cases (`CLINSIM_QUICK`) and daily puzzles (`CLINSIM_DAILY`).
 - `import-server/clinsim.mjs`: case-pack prompt and validation.
 - `import-server/test-clinsim.mjs`: run `node --test test-clinsim.mjs` in `import-server/`.
