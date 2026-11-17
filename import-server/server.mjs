@@ -36,7 +36,7 @@ import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseP
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
 import { loadPlans, isActiveSub, tierOf, verifySignature, handleEvent, startCheckout, verifyReference } from "./payments.mjs";
 import { cleanPatientRequest, buildPatientPrompt, parsePatientReply, ersimQuota } from "./ersim.mjs";   // ER Sim: the AI patient
-import { isClinicalLevel, buildCasePackPrompt, validateCasePack, packSize } from "./clinsim.mjs";   // Clinical Simulation: cases built from imported lectures
+import { isClinicalLevel, isClinicalTopic, buildCasePackPrompt, validateCasePack, packSize } from "./clinsim.mjs";   // Clinical Simulation: cases built from imported lectures
 import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
@@ -406,6 +406,7 @@ function extractJsonObject(raw){
  * Only for clinical-year students (400/500/600 level); the caller checks the level. */
 async function buildCasePack(note, topicName, model){
   if(!String(note||"").trim()) return null;
+  if(!isClinicalTopic(topicName, note)){ console.log("[clinsim] "+String(topicName||"topic").slice(0,80)+": not a clinical topic, no case pack"); return null; }   // no patient to see: no model call
   const gen = await generate({ model: model || EXTRAS_MODEL, prompt: buildCasePackPrompt(note, topicName), parts:[], images:[], max_tokens:12000, temperature:0.4, json:true });
   const cand = extractJsonObject(gen.text || "");
   if(!cand) return null;
@@ -1446,7 +1447,7 @@ app.post("/import", async (req,res)=>{
     await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:"import", p_tokens:(usage.output_tokens||0) });
 
     harvestFromNote(obj.note_md);   // fire-and-forget: learn new medical pronunciations from this lecture
-    const wantCases = isClinicalLevel(level);
+    const wantCases = isClinicalLevel(level) && isClinicalTopic(topicName, obj.note_md);   // clinical years only, and only topics with a patient to see
     res.json({ ok:true, topic_id:topicId, primer:obj.primer.cards.length, recall:obj.recall.cards.length, clinsim: wantCases ? "building" : null });
     // Clinical Simulation: 400-600 level students get cases built from every lecture they import.
     // After the response, so the import is no slower; the app picks the pack up on its next topic load

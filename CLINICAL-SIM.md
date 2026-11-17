@@ -38,6 +38,7 @@ How matching works (`clinsim.js`): every case has `spec[]` (specialties) and `wo
 - Each pack mixes two kinds of case (`basis`):
   - **note** (about two thirds): built on what the note teaches. Each quotes the note verbatim (`src`), and a note case whose quote is not in the note is dropped.
   - **general** (at most one per mode, so about a third): standard, widely taught content on the same topic that the note may leave out (Nigerian and WHO guidance, standard textbooks). It must name the topic (`onTopic`), and it is kept only when the note gave at least one case of its own, so non-clinical notes still get no cases.
+- **Only topics with a patient to see get a pack** (`isClinicalTopic`, checked before any model call). A topic named for biostatistics, research methods, epidemiological methods, ethics, law, histology, embryology or pure basic science gets none, and any other note must read like a clinical note (several clinical words of several kinds: patient, presents, signs, diagnosis, management, doses and so on). The import then doesn't show "Clinical cases on the way".
 - The tab tags them "From your note" and "📘 General topic case". Packs built before this change count as note cases.
 - Generated cases are labelled as AI-made from the student's note.
 

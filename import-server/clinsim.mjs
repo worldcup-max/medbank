@@ -37,6 +37,21 @@ export function quoteInNote(quote, note){
   return false;
 }
 
+/* Does this topic have a patient to see? Non-clinical topics (biostatistics, research methods,
+ * ethics, law, pure basic science) get no case pack, so we check before calling the model.
+ * 1. a topic name that is about methods, ethics or law is non-clinical;
+ * 2. otherwise the note must talk like a clinical note: several clinical words, of several kinds. */
+const NONCLINICAL_TOPIC = /\b(bio-?statistic|statistic|research method|methodolog|study design|sampling|hypothesis test|epidemiolog\w* method|measures? of (association|disease frequency)|ethic|bioethic|jurisprudence|medical law|legal|history of medicine|health economic|health (care )?management|health informatic|demograph|biochemi|molecular biology|genetics? basics|histolog|embryolog|gross anatomy)/i;   // prefixes: no closing \b, so plurals and -ical forms match
+const CLINICAL_WORDS = [/\bpatients?\b/g, /\bpresent(s|ed|ing|ation)\b/g, /\bsymptoms?\b/g, /\bsigns?\b/g, /\bdiagnos\w*/g, /\btreat(ment|ed|s)?\b/g, /\bmanagement\b/g,
+  /\b\d+(\.\d+)?\s?(mg|g|ml|mcg|iu|units?)\b/g, /\bhistory of\b/g, /\bexamination\b/g, /\bcomplications?\b/g, /\binvestigations?\b/g, /\bdifferential\b/g, /\bprognosis\b/g];
+export function isClinicalTopic(topicName, note){
+  if(NONCLINICAL_TOPIC.test(String(topicName || ""))) return false;
+  const t = String(note || "").toLowerCase();
+  let hits = 0, kinds = 0;
+  CLINICAL_WORDS.forEach(re => { const n = (t.match(re) || []).length; hits += n; if(n) kinds++; });
+  return hits >= 8 && kinds >= 4;
+}
+
 export function buildCasePackPrompt(note, topicName){
   return `You write clinical training cases for Nigerian medical students in their clinical years (400 to 600 level).
 Build them from the lecture note below, plus a few on the same topic as it is generally taught. Topic: "${cap(topicName, 120)}".

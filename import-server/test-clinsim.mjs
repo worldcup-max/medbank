@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import vm from "node:vm";
-import { isClinicalLevel, quoteInNote, buildCasePackPrompt, validateCasePack, packSize, onTopic, GENERAL_MAX } from "./clinsim.mjs";
+import { isClinicalLevel, quoteInNote, buildCasePackPrompt, validateCasePack, packSize, onTopic, GENERAL_MAX, isClinicalTopic } from "./clinsim.mjs";
 
 const require = createRequire(import.meta.url);
 const E = require("../er-sim.js");
@@ -292,4 +292,12 @@ test("lecture cases show whether they came from the note or are general", () => 
   const html = CS.page([]);
   assert.match(html, /From your note/); assert.match(html, /General topic case/);
   CS.course("all"); delete win.MB_SYNC; sandbox.allTopics.length = 0;
+});
+
+test("non-clinical topics get no case pack: no patient to see", () => {
+  assert.ok(isClinicalTopic("Severe malaria in children", NOTE + " The patient presents with fever. Signs include pallor. Diagnosis is by microscopy. Management: treatment with artesunate 2.4 mg/kg. Complications include anaemia. History of travel. Investigation: blood film."));
+  for(const name of ["Biostatistics: measures of central tendency", "Research methodology and study design", "Medical ethics and consent", "Epidemiological methods", "Medical jurisprudence", "Histology of the kidney"])
+    assert.ok(!isClinicalTopic(name, NOTE + " patient presents signs diagnosis treatment management complications history of"), name);
+  const stats = "The mean is the sum of values divided by their number. The median is the middle value. Standard deviation measures spread. A p value below 0.05 is called significant.";
+  assert.ok(!isClinicalTopic("Week 3 lecture", stats), "a note with no clinical talk is not clinical, whatever its name");
 });
