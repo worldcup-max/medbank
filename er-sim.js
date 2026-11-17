@@ -592,6 +592,10 @@ function css(){
   '.ers-tab[aria-selected="true"]{background:var(--accent);color:#fff}',
   '.ers-body{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:14px}',
   '@media (max-width:860px){.ers-body{grid-template-columns:1fr}.ers-top{position:static;margin:0 0 8px;padding-top:0}}',
+  /* The top (patient, picture, monitor, tabs) only sticks when the screen is tall enough to show the panels under it too.
+     On a shorter screen a sticky top covered the whole window, so the tabs seemed dead and the page would not scroll. */
+  '@media (max-height:1300px){.ers-top{position:static;margin:0 0 8px}}',
+  '.ers-bed{width:min(100%, calc((100vh - 330px) * 1.79))}',
   '.ers-panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}',
   '.ers-panel h4{margin:14px 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}',
   '.ers-panel h4:first-child{margin-top:0}',
