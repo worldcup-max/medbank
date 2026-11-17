@@ -9,7 +9,7 @@ An emergency room simulator inside the app (`#/ersim`). The student is the docto
 - `import-server/test-ersim.mjs`: plays every case end to end (the ideal path must score Excellent with the patient alive, neglect must score under 50%), plus harm rules, timers, triggers, facility limits and the AI-patient contract.
 
 ## Switching it on
-`FEATURES.ER_SIM` in `config.js` is **false**. To try it on your own device: `localStorage.mbersim='1'`, then reload. Turn the flag on only after the clinical review below.
+`FEATURES.ER_SIM` in `config.js` is **true** (switched on for students on 2026-11-17, before the clinical review below). Set it to `false` to hide ER Sim again.
 
 ## Clinical review before launch (one checklist per case)
 - [ ] Vitals, history, exam and results are internally consistent and realistic for the setting.
