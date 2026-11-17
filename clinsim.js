@@ -81,7 +81,7 @@ function stationFromEr(c){
     spec:erTags(c).spec, words:erTags(c).words, diff:c.level||'' };
 }
 function stationFromPack(t, s){
-  return { id:t.id+'~'+s.id, source:'mine', basis:s.basis||'note', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id, title:s.title, patient:s.patient, speaker:s.speaker, persona:s.persona,
+  return { id:t.id+'~'+s.id, source:'mine', basis:s.basis||'note', src:s.src||'', words:'', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id, title:s.title, patient:s.patient, speaker:s.speaker, persona:s.persona,
     opening:s.opening||'Good day, doctor.', background:s.background||'', history:s.history||[],
     dx:{ q:'What is your working diagnosis?', options:s.dx.options, correct:s.dx.correct },
     form:s.form&&s.form.options?{ q:s.form.q||FORM_Q, options:s.form.options, correct:s.form.correct }:null, courseName:t.subject&&t.subject.name,
@@ -438,6 +438,61 @@ function mockPage(){
   return h+'<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.mockEnd();MB_CLINSIM.mockStart('+R.n+')">Another mock day</button><button class="btn" onclick="MB_CLINSIM.mockEnd()">Done</button></div>';
 }
 
+/* ---------- 📖 Revise this: from a case back to the note and the Q-bank
+ * Like AMBOSS linking each question to the article section and to practice on the same topic:
+ * after a case, show the exact line of the student's own lecture note it came from (a lecture case
+ * carries a verbatim quote, src), or for a MedBank case the line of a matching imported lecture,
+ * with one tap to open the note scrolled to that line, and that lecture's related Q-bank questions. */
+function caseWords(c){ return normW([c.words||'', c.title||''].join(' ')).trim().split(' ').filter(function(w){ return w.length>=5; }); }
+function sentences(note){ return String(note||'').replace(/[#*_>`|]/g,' ').replace(/([.!?])\s+/g,'$1\n').split(/\n+/).map(function(x){ return x.replace(/\s+/g,' ').trim(); }).filter(function(x){ return x.length>=25; }); }
+// the best line of a note for this case: its own quote if it has one, else the sentence sharing most case words
+function bestLine(note, c){
+  var ss=sentences(note); if(!ss.length) return null;
+  if(c.src){ var q=normW(c.src).trim(); var hit=ss.filter(function(x){ return normW(x).indexOf(q.split(' ').slice(0,6).join(' '))>=0; })[0]; if(hit) return hit; }
+  var ws=caseWords(c); if(!ws.length) return null;
+  var best=null, bn=0; ss.forEach(function(x){ var t=normW(x), n=ws.filter(function(w){ return t.indexOf(' '+w)>=0; }).length; if(n>bn){ bn=n; best=x; } });
+  return bn>=2 ? best : null;
+}
+// imported lectures this case belongs to: its own topic, or lectures whose title or note match its topic words
+function linkedTopics(c){
+  var ts=myTopics();
+  if(c.topicId) return ts.filter(function(t){ return t.id===c.topicId; });
+  var byTitle=ts.filter(function(t){ return topicHit(c, t.name); });
+  if(byTitle.length) return byTitle.slice(0,2);
+  return ts.filter(function(t){ return bestLine(t.note, c); }).slice(0,1);
+}
+function relatedQs(t, c, n){
+  var qs=(t.extras&&t.extras.qbank)||[], ws=caseWords(c);
+  return qs.map(function(q){ var x=normW((q.stem||q.q||'')+' '+(q.explanation||q.why||'')); return { q:q, n:ws.filter(function(w){ return x.indexOf(' '+w)>=0; }).length }; })
+    .filter(function(o){ return o.n>0; }).sort(function(a,b){ return b.n-a.n; }).slice(0, n||3).map(function(o){ return o.q; });
+}
+function reviseHtml(c, missed){
+  var ts=linkedTopics(c); if(!ts.length) return '';
+  var h='<div class="cs-panel"><h4>📖 Revise this'+(missed?': what you missed':'')+'</h4>';
+  ts.forEach(function(t){
+    var line=bestLine(t.note, c), qs=relatedQs(t, c, 3), all=((t.extras&&t.extras.qbank)||[]).length;
+    h+='<div style="margin:8px 0"><b>'+e(t.name)+'</b>'+(line?'<blockquote class="cs-reveal" style="margin:6px 0">'+e(line.slice(0,260))+'</blockquote>':'')+
+      '<div class="btnrow" style="margin-top:6px"><button class="btn" onclick="MB_CLINSIM.toNote(\''+e(t.id)+'\','+(line?'\''+e(line.slice(0,120).replace(/\\/g,'').replace(/'/g,'’'))+'\'':'null')+')">Open '+(line?'this line':'the note')+'</button>'+
+      (all?'<button class="btn" onclick="MB_CLINSIM.toQbank(\''+e(t.id)+'\')">🧠 '+(qs.length?qs.length+' related question'+(qs.length===1?'':'s'):'Q-bank')+'</button>':'')+'</div>'+
+      (qs.length?'<ul class="cs-teach" style="margin-top:6px">'+qs.map(function(q){ return '<li>'+e(String(q.stem||q.q||'').slice(0,140))+'</li>'; }).join('')+'</ul>':'')+'</div>';
+  });
+  return h+'</div>';
+}
+// open a lecture's note and bring a line into view, highlighted for a few seconds
+function jumpToLine(text){
+  var want=normW(text).trim().split(' ').slice(0,8).join(' '), tries=0;
+  (function look(){
+    var body=document.querySelector('.notebody'); if(!body){ if(++tries<20) setTimeout(look, 150); return; }
+    var els=[].slice.call(body.querySelectorAll('p,li,td,h2,h3,h4,blockquote')), hit=null;
+    for(var i=0;i<els.length;i++){ if(normW(els[i].textContent).indexOf(want)>=0){ hit=els[i]; break; } }
+    if(!hit){ var ws=want.split(' ').filter(function(w){ return w.length>=5; }), bn=0; els.forEach(function(el){ var t=normW(el.textContent), n=ws.filter(function(w){ return t.indexOf(' '+w)>=0; }).length; if(n>bn){ bn=n; hit=el; } }); }
+    if(!hit) return;
+    hit.scrollIntoView({ block:'center', behavior:'smooth' });
+    var old=hit.style.background; hit.style.background='var(--warnbg, #fff3c4)'; hit.style.transition='background 1.2s'; hit.setAttribute('tabindex','-1');
+    setTimeout(function(){ hit.style.background=old||''; }, 4000);
+  })();
+}
+
 /* ---------- free rotation: one built-in station and one quick case a week for unpaid students */
 function weekNo(){ return Math.floor((Date.now()+3600e3)/(7*864e5)); }
 function dayNo(){ return Math.floor((Date.now()+3600e3)/864e5); }   // Lagos days (UTC+1)
@@ -711,6 +766,7 @@ function resultHtml(s, sc, opts){
 function osceResult(){
   var s=OS.s, sc=OS.score;
   var h='<h1>Station result: '+e(s.title)+'</h1>'+pointsLine(OS.pts)+resultHtml(s, sc, { picks:{ dx:OS.dx, plan:OS.plan }, time:OS.endsAt?OSCE_MIN+'-minute station':'practice' });
+  h+=reviseHtml(s, !sc.pass);
   h+='<div class="cs-panel"><h4>Your conversation</h4><div class="cs-chat">'+OS.chat.map(function(m){ return '<div class="cs-msg '+m.who+'">'+e(m.text)+'</div>'; }).join('')+'</div></div>';
   h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.openOsce(\''+e(s.id)+'\',\''+OS.mode+'\',\''+OS.ctx+'\')">Try again</button><button class="btn" onclick="location.hash=\'#/clinsim/osce/'+(s.source==='mine'?'mine':OS.mode)+'\'">Other stations</button></div>';
   return h;
@@ -789,7 +845,7 @@ function quickView(){
   if(QS.phase==='mcq'){
     var mq=q.mcqs[QS.m], mp=QS.mcq[QS.m], md=mp!==undefined;
     h+='<div class="cs-panel"><h4>Exam question '+(QS.m+1)+' of '+q.mcqs.length+'</h4><div style="font-weight:700;margin-bottom:8px">'+e(mq.stem)+'</div><div class="cs-opts">'+
-      order(mq.options.length, q.id+'|m'+QS.m+'|'+QS.nonce).map(function(k){ var x={ t:mq.options[k] }; cls=md?(k===mq.ans?' best':(k===mp?' bad':''))+(k===mp?' picked':''):'';
+      order(mq.options.length, q.id+'|m'+QS.m+'|'+QS.nonce).map(function(k){ var x={ t:mq.options[k] }, cls=md?(k===mq.ans?' best':(k===mp?' bad':''))+(k===mp?' picked':''):'';
         return '<button class="cs-opt'+cls+'"'+(md?' disabled':' onclick="MB_CLINSIM.answer('+k+')"')+'>'+e(x.t)+'</button>'; }).join('')+'</div>'+
       (md?'<div class="cs-reveal">'+(mp===mq.ans?'✅ ':'❌ ')+e(mq.why||'')+'</div><div class="btnrow" style="margin-top:12px"><button class="btn primary" onclick="MB_CLINSIM.nextMcq()">'+(QS.m+1<q.mcqs.length?'Next question':'See my score')+'</button></div>':'')+'</div>';
     return h;
@@ -799,6 +855,7 @@ function quickView(){
   h+=pointsLine(QS.pts)+'<div class="cs-panel"><div class="cs-score"><div class="cs-ring" style="border:8px solid '+col+';color:'+col+'">'+sc.pct+'%</div><div><div style="font-size:20px;font-weight:800;color:'+col+'">'+e(sc.grade)+'</div>'+
     (mcqN?'<div class="cs-meta">Exam questions: '+mcqOk+' of '+mcqN+' right</div>':'')+'</div></div>'+
     (sc.danger.length?'<h4>Dangerous decisions</h4><ul class="cs-teach">'+sc.danger.map(function(d){ return '<li><b>'+e(d.t)+'</b>. '+e(d.why)+'</li>'; }).join('')+'</ul>':'')+'</div>';
+  h+=reviseHtml(q, sc.danger.length>0 || sc.pct<60);
   if((q.teaching||[]).length) h+='<div class="cs-panel"><h4>Learning points</h4><ul class="cs-teach">'+q.teaching.map(function(t){ return '<li>'+e(t)+'</li>'; }).join('')+'</ul>'+((q.refs||[]).length?'<h4>Further reading</h4><ul class="cs-teach">'+q.refs.map(function(t){ return '<li>'+e(t)+'</li>'; }).join('')+'</ul>':'')+'</div>';
   h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.openQuick(\''+e(q.id)+'\',\''+(QS.ctx||'open')+'\')">Play again</button>'+(q.topicId?'<a class="btn" href="#/topic/'+e(q.topicId)+'">Open the lecture</a>':'')+'<button class="btn" onclick="location.hash=\'#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'\'">Other cases</button></div>';
   return h;
@@ -975,7 +1032,7 @@ function page(parts){
 
 root.MB_CLINSIM={
   on:on, visible:visible, page:page, locked:locked,
-  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext, order:order, mockPick:mockPick, mockResult:mockResult, mockFeedback:mockFeedback, weekCases:weekCases, weekOf:weekOf, rotPool:rotPool, doneSince:doneSince, gradeOf:gradeOf, pointsOf:pointsOf, standing:standing, rankOf:rankOf, roundItems:roundItems, forCtx:forCtx },
+  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext, order:order, bestLine:bestLine, linkedTopics:linkedTopics, relatedQs:relatedQs, reviseHtml:reviseHtml, mockPick:mockPick, mockResult:mockResult, mockFeedback:mockFeedback, weekCases:weekCases, weekOf:weekOf, rotPool:rotPool, doneSince:doneSince, gradeOf:gradeOf, pointsOf:pointsOf, standing:standing, rankOf:rankOf, roundItems:roundItems, forCtx:forCtx },
   stop:function(){ stopTimer(); },
   openOsce:function(id, mode, ctx){ stopTimer(); var all=stations('all'), s=byId(all,id); if(s && !isFree(all,s)) return locked(); osceStart(id, mode, ctx); location.hash='#/clinsim/osce/'+mode+'/'+id; CUR=['osce',mode,id]; draw(); },
   say:say,
@@ -1019,6 +1076,8 @@ root.MB_CLINSIM={
   build:buildFor,
   course:function(id){ setCourse(id||'all'); SEARCH=''; draw(); },
   newRound:function(){ ROUND_SEED++; draw(); },
+  toNote:function(id, line){ try{ topicTab='note'; topicTabFor=id; }catch(_){} location.hash='#/topic/'+id; if(line) jumpToLine(line); },
+  toQbank:function(id){ try{ topicTab='qbank'; topicTabFor=id; }catch(_){} location.hash='#/topic/'+id; },
   mockStart:function(n){ var ids=mockPick(n||6, curCourse(), Date.now()%100000); if(!ids.length){ if(!entitled()) return locked(); return; } MOCK={ ids:ids, i:0, phase:'read', readEnds:Date.now()+READ_SEC*1000, results:[] }; location.hash='#/clinsim/mock'; CUR=['mock']; draw(); },
   mockGo:function(){ if(!MOCK||MOCK.phase!=='read') return; mockStop(); MOCK.phase='station'; var id=MOCK.ids[MOCK.i]; stopTimer(); osceStart(id, 'timed', 'blind'); location.hash='#/clinsim/osce/timed/'+id; CUR=['osce','timed',id]; draw(); setTimeout(startTimer,0); },
   mockEnd:function(){ mockStop(); MOCK=null; draw(); },
@@ -1032,7 +1091,7 @@ root.MB_CLINSIM={
   endRotation:function(){ store().rotation=null; ROT_FORM=false; save(); draw(); },
   saw:function(q){ SAW=String(q||'').slice(0,60); var el=document.getElementById('rotSawHits'); if(el) el.innerHTML=sawHtml(SAW); },
   // what the duel (clinsim-duel.js) borrows from here
-  _duel:{ draw:function(){ draw(); }, order:order, quickCases:quickCases, quickScore:quickScore, inCourse:inCourse, curCourse:curCourse,
+  _duel:{ draw:function(){ draw(); }, order:order, revise:reviseHtml, quickCases:quickCases, quickScore:quickScore, inCourse:inCourse, curCourse:curCourse,
     recordRun:function(kind, id, pct, ex){ record(kind, id, pct, ex); },
     recordDuel:function(d){ var s=store(); s.duels=(s.duels||[]).concat([d]).slice(-100); save(); },
     duels:function(){ return store().duels||[]; } },

@@ -360,3 +360,33 @@ test("mock OSCE day: a mix across specialties, one report, pass needs stations a
   assert.match(T.mockFeedback({ data: 30, mgmt: 80, ip: 90 }), /History/);
   assert.match(T.mockFeedback({ data: 80, mgmt: 80, ip: 90 }), /Good station/);
 });
+
+test("revise this: a case links to the line of the student's note and related Q-bank questions", () => {
+  const paeds = { id: "course_p", name: "Paediatrics" };
+  const note = "## Neonatal jaundice\nPhysiological jaundice appears after 24 hours and fades by two weeks.\nJaundice in the first 24 hours of life is always pathological and needs a serum bilirubin at once.\nPhototherapy is started from the treatment chart for the baby's age in hours.";
+  const qbank = [{ stem: "A baby is yellow at 12 hours of life. What is the next step?", explanation: "Jaundice in the first day is pathological." }, { stem: "What is the dose of paracetamol?", explanation: "Weight based." }];
+  sandbox.allTopics.push({ id: "tj", name: "Neonatal Jaundice", ready: true, note, subject: paeds, extras: { qbank } });
+  const baby = win.CLINSIM_QUICK.find(q => q.id === "q-yellow-baby");
+  const ts = T.linkedTopics(baby);
+  assert.equal(ts.length, 1); assert.equal(ts[0].id, "tj");
+  assert.match(T.bestLine(note, baby), /jaundice/i);
+  assert.equal(T.relatedQs(ts[0], baby, 3).length, 1, "only the question about jaundice");
+  assert.match(T.reviseHtml(baby, true), /what you missed/); assert.match(T.reviseHtml(baby, false), /1 related question/);
+  // a lecture case finds its own quote
+  assert.match(T.bestLine(note, { src: "always pathological and needs a serum bilirubin", title: "x" }), /first 24 hours/);
+  // a case with no matching lecture shows nothing
+  assert.equal(T.reviseHtml(win.CLINSIM_QUICK.find(q => q.id === "q-long-cough"), false), "");
+  sandbox.allTopics.length = 0;
+});
+
+test("a quick case plays through every screen: decisions, exam questions, result", () => {
+  win.MB_SYNC = { currentLevel: () => 500, status: () => ({ syncing: false }) };
+  const q = win.CLINSIM_QUICK[0], html = [];
+  CS.openQuick(q.id); html.push(CS.page(["quick", "builtin", q.id]));
+  q.steps.forEach((st, i) => { CS.choose(i, 0); html.push(CS.page(["quick", "builtin", q.id])); CS.next(); });
+  (q.mcqs || []).forEach(() => { html.push(CS.page(["quick", "builtin", q.id])); CS.answer(0); html.push(CS.page(["quick", "builtin", q.id])); CS.nextMcq(); });
+  const last = CS.page(["quick", "builtin", q.id]);
+  assert.match(last, /Play again/);
+  assert.ok(html.every(h => typeof h === "string" && h.length > 100));
+  delete win.MB_SYNC;
+});

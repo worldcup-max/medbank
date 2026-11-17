@@ -268,6 +268,7 @@ function resultView(){
     h+='<div class="cs-panel"><h4>The case, with answers</h4>'+D.q.steps.map(function(st,i){ var p=st.options[D.picks[i]], b=st.options.filter(function(o){ return o.pts===10; })[0];
       return '<div style="margin:8px 0"><b>'+e(st.prompt)+'</b><div class="cs-meta">'+(p?(p.pts===10?'✅ ':p.pts<=-10?'⚠️ ':'❌ ')+'You: '+e(p.t):'No answer')+(p&&p.pts!==10?' · Best: '+e(b.t):'')+'</div><div class="cs-meta">'+e((p&&p.pts!==10?p:b).why||'')+'</div></div>'; }).join('')+'</div>';
   }
+  if(D.q && !me.forfeit) h+=CS().revise(D.q, me.danger>0 || me.pct<60);
   return h+'<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINDUEL.again()">New duel</button><a class="btn" href="#/clinsim" onclick="MB_CLINDUEL.quit()">Done</a></div>';
 }
 function page(sub, id){
