@@ -42,6 +42,7 @@ Close-up wrapper: "Using this exact [patient] as the reference for identity and 
 
 | Set | Eyes | Hands | Mouth | Skin | Abdomen |
 | --- | --- | --- | --- | --- | --- |
+| f-child-gh-02 | very pale lower-lid lining, clear white sclera (eye extreme close-up) | very pale palms and nails; red string bracelet (distractor) | new back tooth erupting + drool (look-alike), slightly pale tongue | shins: ashy dry patches + 2 healed insect bites (distractors) | lower-rib indrawing with fast breathing (sign) + small umbilical hernia (distractor) |
 | m-child-private-03 | pale conjunctiva, faint yellow sclera | pale palms and nail beds; healed knuckle scratch (distractor) | dry cracked lips (look-alike), thin white tongue coat | shins: mosquito bites + old knee scar (distractors), no rash | soft, hand palpating left upper quadrant, old faded scar lower right (distractor) |
 
 Night (m-child-private-03): same room, dark blue sky, palm in silhouette, blinds half down, warm reading lamp, AC glow; boy awake, restless, flushed.
@@ -49,3 +50,7 @@ Discharge (m-child-private-03): bed made and empty, boy well and smiling on the 
 Arrival (m-child-private-03): private hospital front desk (pale blue, curved wooden counter, wall clock, plant, blue chairs, glass doors), mother in green-gold ankara and head tie carrying the boy, nurse in light blue behind counter.
 
 Note: the first hands close-up ("close-up of both his hands ... healed scratch") was refused by Flow's policy filter. This wording worked: "a doctor's examination view of a child's two hands lying open, palms facing up, on a white hospital bed sheet ... palms and fingernails are a pale, washed-out pinkish colour ... Calm, clinical teaching picture."
+
+f-child-gh-02 extras: night = same ward, black-blue sky, palm silhouette, hurricane-style lamp on locker, girl awake and uneasy. Discharge = yellow dress, white sandals, cloth doll, folded pink dress, medicine bag, blanket folded. Arrival = government GH children's emergency waiting area (mint/cream walls, peeling paint, wooden triage desk with folders, bench with mothers and babies, ceiling fan), father in blue kaftan carrying her, nurse in white. Add "walls are completely bare: no signs, no posters, no notices, no writing anywhere" or Flow paints made-up words on signs.
+f-child-gh-02 fast-breathing frames (edits of distress): f2 chest rising, mouth open, nostrils flared, shoulders lifted; f3 chest sunk, sub-rib indrawing, lips pursed, head tipped back; f4 head towards camera, hand on chest, mouth open, eyes wide.
+Tip: close-ups come out best when the prompt says "extreme close-up of one eye filling most of the picture" / "close-up of only her lower face and open mouth filling the picture"; otherwise Flow returns a half-body view.
