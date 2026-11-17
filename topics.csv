@@ -153,3 +153,60 @@ Surgery,600,ENT emergencies (epistaxis and airway foreign body),narrow,nosebleed
 Surgery,600,Ophthalmology (red eye and eye trauma),narrow,red eye; penetrating eye injury; cataract
 Surgery,600,Neurosurgery: spinal cord injury,narrow,paraplegia; spinal board; catheter
 Surgery,600,Principles of surgery and wound healing,none,
+Junior Medicine,400,Lassa fever,broad,fever; sore throat; facial swelling; bleeding gums; shock; deafness; encephalopathy
+Junior Medicine,400,Acute viral hepatitis and chronic hepatitis B,broad,jaundice; dark urine; fatigue; right upper quadrant pain; itching; confusion
+Junior Medicine,400,Nephrotic syndrome and glomerulonephritis (adult),narrow,facial swelling; leg oedema; frothy urine; cola-coloured urine; hypertension
+Junior Medicine,400,Pleural effusion and empyema,narrow,breathlessness; chest pain; stony dull chest; fever; weight loss
+Junior Medicine,400,Pneumothorax,narrow,sudden breathlessness; pleuritic chest pain; tracheal shift; hyper-resonant chest
+Junior Medicine,400,Bronchiectasis and lung cancer,narrow,chronic cough; copious sputum; haemoptysis; finger clubbing; weight loss
+Junior Medicine,400,Pericarditis and pericardial effusion,narrow,chest pain worse lying flat; breathlessness; raised JVP; muffled heart sounds; pulsus paradoxus
+Junior Medicine,400,Cardiomyopathy (peripartum and endomyocardial fibrosis),narrow,breathlessness; leg swelling; ascites; palpitations; raised JVP
+Junior Medicine,400,Gout and septic arthritis (adult),narrow,hot swollen big toe; joint pain; fever; tophi; limping
+Junior Medicine,400,Osteoarthritis and low back pain,narrow,knee pain; stiffness; limping; back pain; crepitus
+Junior Medicine,400,Cholera and acute gastroenteritis (adult),narrow,profuse rice-water stools; vomiting; sunken eyes; cramps; shock
+Junior Medicine,400,Rabies,narrow,dog bite; fever; fear of water; agitation; drooling; spasms
+Junior Medicine,400,Yellow fever and viral haemorrhagic fevers,narrow,fever; jaundice; bleeding; vomiting blood; shock
+Junior Medicine,400,Schistosomiasis,narrow,blood in urine; abdominal pain; big spleen; vomiting blood; leg swelling
+Junior Medicine,400,Lymphatic filariasis and onchocerciasis,narrow,leg swelling; scrotal swelling; itchy skin; skin depigmentation; eye problems
+Junior Medicine,400,Leprosy,narrow,pale numb skin patches; claw hand; foot ulcers; thickened nerves; nodules
+Junior Medicine,400,Herpes zoster and mpox,narrow,painful band of blisters; fever; pustules; rash on palms; swollen glands
+Junior Medicine,400,Parkinsonism and peripheral neuropathy,narrow,tremor; slow walking; stiffness; numb feet; foot ulcers
+Junior Medicine,400,Guillain-Barre syndrome and myasthenia gravis,narrow,ascending weakness; drooping eyelids; double vision; breathing difficulty
+Junior Medicine,400,Bleeding disorders and DIC,narrow,bruising; bleeding gums; nosebleed; joint swelling; oozing from drip sites
+Junior Medicine,400,Clinical methods: history and examination,none,
+Junior Surgery,400,Lumps and bumps (lipoma sebaceous cyst keloid),broad,painless lump; scar overgrowth; discharging cyst; neck lump
+Junior Surgery,400,Abscesses and cellulitis,broad,hot red swelling; pus; fever; spreading redness; pain
+Junior Surgery,400,Chronic leg ulcer and Buruli ulcer,narrow,non-healing ulcer; foul smell; leg swelling; scarring
+Junior Surgery,400,Varicose veins and peripheral arterial disease,narrow,twisted leg veins; leg pain on walking; cold pale foot; gangrene
+Junior Surgery,400,Haemorrhoids anal fissure and fistula,narrow,rectal bleeding; anal pain; perianal discharge; prolapse
+Junior Surgery,400,Scrotal swellings (hydrocele and testicular torsion),narrow,scrotal swelling; sudden testicular pain; vomiting; high-riding testis
+Junior Surgery,400,Undescended testis and hypospadias,narrow,empty scrotum; abnormal urine stream; abnormal penis opening
+Junior Surgery,400,Cleft lip and palate,narrow,cleft lip; feeding difficulty; nasal regurgitation; speech problems
+Junior Surgery,400,Chest trauma and empyema thoracis,narrow,chest pain; breathlessness; reduced breath sounds; chest drain; fever
+Junior Surgery,400,Caustic ingestion and oesophageal stricture,narrow,difficulty swallowing; drooling; weight loss; mouth burns
+Junior Surgery,400,Pressure sores and wound care,narrow,sacral ulcer; slough; foul wound; bedbound patient
+Junior Surgery,400,Bone tumours and amputation,narrow,bone swelling; pain at night; pathological fracture; stump care
+Junior Surgery,400,Surgical history and examination of lumps,none,
+ENT,400,Otitis media and chronic suppurative otitis media,broad,ear pain; ear discharge; fever; deafness; pulling at ear
+ENT,400,Tonsillitis and peritonsillar abscess,narrow,sore throat; fever; drooling; muffled voice; trismus
+ENT,400,Sinusitis and allergic rhinitis,narrow,blocked nose; facial pain; nasal discharge; sneezing
+ENT,400,Hearing loss,narrow,deafness; poor speech; ear wax; ringing in ears
+ENT,400,Nasopharyngeal and laryngeal cancer,narrow,hoarseness; neck mass; blocked nose; nosebleeds; stridor
+ENT,400,Foreign bodies in ear and nose,narrow,unilateral foul nasal discharge; ear pain; object in ear
+ENT,400,Deep neck abscess and Ludwig's angina,narrow,neck swelling; fever; trismus; difficulty swallowing; stridor
+Ophthalmology,400,Cataract,broad,blurred vision; white pupil; glare; poor vision in old age
+Ophthalmology,400,Glaucoma,narrow,gradual vision loss; painful red eye; halos; tunnel vision
+Ophthalmology,400,Conjunctivitis and allergic eye disease,narrow,red eye; discharge; itching; swollen lids
+Ophthalmology,400,Trachoma and corneal ulcer,narrow,inturned lashes; corneal scarring; painful eye; white spot on cornea
+Ophthalmology,400,Vitamin A deficiency and xerophthalmia,narrow,night blindness; Bitot spots; dry eye; corneal melting
+Ophthalmology,400,Retinoblastoma and orbital cellulitis,narrow,white pupil; squint; eye bulging; swollen lids; fever
+Ophthalmology,400,Diabetic and hypertensive retinopathy,narrow,blurred vision; floaters; sudden vision loss
+Ophthalmology,400,Chemical and blunt eye injury,narrow,painful eye; blood in front of eye; tearing; burns
+Dermatology,400,Fungal skin infections (tinea),broad,itchy ring rash; scaly scalp patches; hair loss; nail changes
+Dermatology,400,Scabies,narrow,night itching; burrows; rash between fingers; family affected
+Dermatology,400,Eczema and contact dermatitis,narrow,itchy dry skin; weeping rash; thickened skin
+Dermatology,400,Acne and skin-bleaching complications,narrow,pimples; dark patches; thin fragile skin; stretch marks
+Dermatology,400,Vitiligo and psoriasis,narrow,white patches; scaly plaques; nail pitting
+Dermatology,400,Kaposi sarcoma and HIV skin disease,narrow,purple skin nodules; itchy papules; mouth lesions
+Dermatology,400,Pemphigus and urticaria,narrow,blisters; raw skin; itchy wheals; lip swelling
+Pathology and Pharmacology,400,Pathology and pharmacology principles,none,
