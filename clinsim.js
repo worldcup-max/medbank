@@ -274,6 +274,97 @@ function roundPage(){
     '<div class="btnrow" style="margin-top:14px"><button class="btn" onclick="MB_CLINSIM.newRound()">🔀 New round</button></div>';
 }
 
+/* ---------- 🗓️ My posting (rotation mode)
+ * Clinical years run in postings. The student sets theirs (say Paediatrics, 8 weeks) and gets a small
+ * set of cases each week, the way clerkships pace Aquifer cases:
+ *   - 3 cases a week (clerkships settle on 2 to 3), so it never piles up;
+ *   - a checkpoint every week instead of one deadline at the end;
+ *   - common, core cases first and harder ones later; the student's own lectures for that course first;
+ *   - "I saw a patient with…": a case from the ward pulls a matching case into this week;
+ *   - the last week is exam week: a mixed ward round of the posting plus the cases they scored lowest on.
+ * A week's cases are fixed the first time that week is opened, so the plan doesn't shift under them. */
+var PER_WEEK=3, DIFF_RANK={ Beginner:0, Foundation:0, Core:1, Advanced:2 };
+function rotation(){ return store().rotation||null; }
+function weekOf(r, now){ return Math.floor(((now||Date.now()) - new Date(r.start).getTime())/(7*864e5)); }
+function rotPool(r){
+  var course=r.courseId ? (byId(myCourses(), r.courseId) || { id:r.courseId, name:r.name, spec:r.spec }) : { id:'spec:'+r.spec, name:r.spec, spec:r.spec };
+  return catalogue().filter(function(it){ return !it.tutorial && it.kind!=='daily' && inCourse(it, course); })
+    .filter(function(it, i, a){ var k=it.title.toLowerCase(); return a.findIndex(function(x){ return x.title.toLowerCase()===k; })===i; })   // one card per patient
+    .sort(function(a, b){ return (a.source==='mine'?0:1)-(b.source==='mine'?0:1) || (DIFF_RANK[a.diff]==null?1:DIFF_RANK[a.diff])-(DIFF_RANK[b.diff]==null?1:DIFF_RANK[b.diff]); });
+}
+function key(it){ return it.kind+':'+it.id; }
+function findKey(k){ return catalogue().filter(function(it){ return key(it)===k; })[0]||null; }
+// the cases for week w, fixed the first time the week is opened
+function weekCases(r, w){
+  r.plan=r.plan||{};
+  if(!r.plan[w]){
+    var used={}; Object.keys(r.plan).forEach(function(k){ r.plan[k].forEach(function(x){ used[x]=1; }); });
+    var pool=rotPool(r), fresh=pool.filter(function(it){ return !used[key(it)]; });
+    var pick=fresh.slice(0, PER_WEEK);
+    if(pick.length<PER_WEEK){   // the posting has run out of new cases: bring back the ones scored lowest
+      var redo=pool.filter(function(it){ return pick.indexOf(it)<0; }).map(function(it){ return { it:it, b:played(it) }; }).sort(function(a,b){ return (a.b==null?101:a.b)-(b.b==null?101:b.b); });
+      pick=pick.concat(redo.slice(0, PER_WEEK-pick.length).map(function(x){ return x.it; }));
+    }
+    r.plan[w]=pick.map(key); save();
+  }
+  return r.plan[w].map(findKey).filter(Boolean);
+}
+// has this case been played since the posting started?
+function doneSince(it, since){
+  var t=String(since);
+  if(it.kind==='er'){ var er=(typeof DATA!=='undefined'&&DATA.ersim&&DATA.ersim.runs)||[]; return er.some(function(r){ return r.caseId===it.id && String(r.at)>=t; }); }
+  return store().runs.some(function(r){ return r.kind===it.kind && r.id===it.id && String(r.at)>=t; });
+}
+function rotationCard(){
+  var r=rotation(); if(!r) return '';
+  var w=weekOf(r); if(w<0 || w>=r.weeks) return '<div class="cs-panel"><div class="cs-top"><b>🗓️ '+e(r.name)+' posting</b><a class="cs-meta" href="#/clinsim/rotation">'+(w<0?'Starts '+e(r.start.slice(0,10)):'Finished · set your next posting')+'</a></div></div>';
+  var cs=weekCases(r, w), done=cs.filter(function(it){ return doneSince(it, r.start); }).length;
+  return '<a class="cs-panel" style="display:block;text-decoration:none;color:inherit" href="#/clinsim/rotation"><div class="cs-top"><b>🗓️ '+e(r.name)+' · week '+(w+1)+' of '+r.weeks+(w===r.weeks-1?' · exam week':'')+'</b><span class="cs-meta">'+done+' of '+cs.length+' done this week</span></div>'+
+    '<div class="cs-bar" style="margin-top:8px"><i style="width:'+Math.round(100*done/Math.max(1,cs.length))+'%"></i></div></a>';
+}
+function rotationSetup(){
+  var courses=myCourses(), r=rotation(), today=new Date(Date.now()+3600e3).toISOString().slice(0,10);
+  var opts=courses.map(function(c){ return '<option value="'+e(c.id)+'">'+e(c.name)+'</option>'; }).join('')+
+    ['Medicine','Surgery','Paediatrics','Obstetrics & Gynaecology','Community Health','Psychiatry'].map(function(sp){ return '<option value="spec:'+e(sp)+'">'+e(sp)+'</option>'; }).join('');
+  return '<div class="cs-panel"><h4>'+(r?'Set your next posting':'Set your posting')+'</h4>'+
+    '<label class="cs-meta" for="rotWhat">Posting</label><select id="rotWhat" class="cs-sel" style="width:100%;padding:10px;margin:4px 0 10px">'+opts+'</select>'+
+    '<label class="cs-meta" for="rotStart">First day</label><input id="rotStart" type="date" value="'+today+'" style="width:100%;padding:10px;margin:4px 0 10px">'+
+    '<label class="cs-meta" for="rotWeeks">How many weeks</label><select id="rotWeeks" style="width:100%;padding:10px;margin:4px 0 10px">'+[4,6,8,10,12].map(function(n){ return '<option'+(n===8?' selected':'')+'>'+n+'</option>'; }).join('')+'</select>'+
+    '<div class="cs-meta">You get '+PER_WEEK+' cases a week: common cases first, your own lectures for the course first, and a mixed ward round in the last week before your end-of-posting exam.</div>'+
+    '<div class="btnrow" style="margin-top:12px"><button class="btn primary" onclick="MB_CLINSIM.setRotation()">Start my posting</button>'+(r?'<button class="btn" onclick="MB_CLINSIM.rotationForm(false)">Cancel</button>':'')+'</div></div>';
+}
+var ROT_FORM=false, SAW='';
+function rotationPage(){
+  var r=rotation(), h='<a href="#/clinsim" class="cs-back">← Clinical Simulation</a><h1>🗓️ My posting</h1>';
+  if(!r || ROT_FORM) return h+'<p class="cs-sub">Tell MedBank which posting you are on. It paces your cases week by week, like a clerkship does.</p>'+rotationSetup();
+  var w=weekOf(r);
+  if(w<0) return h+'<div class="cs-panel">'+e(r.name)+' starts on '+e(r.start.slice(0,10))+'. Your first 3 cases appear then.</div><div class="btnrow"><button class="btn" onclick="MB_CLINSIM.rotationForm(true)">Change posting</button></div>';
+  if(w>=r.weeks){
+    var all=Object.keys(r.plan||{}).reduce(function(a,k){ return a.concat(r.plan[k]); }, []).map(findKey).filter(Boolean), dn=all.filter(function(it){ return doneSince(it, r.start); }).length;
+    return h+'<div class="cs-panel"><b>'+e(r.name)+' posting finished.</b><div class="cs-meta">You played '+dn+' of '+all.length+' planned cases.</div></div>'+rotationSetup();
+  }
+  var cs=weekCases(r, w), done=cs.filter(function(it){ return doneSince(it, r.start); }).length, exam=w===r.weeks-1;
+  h+='<p class="cs-sub">'+e(r.name)+' · week '+(w+1)+' of '+r.weeks+(exam?' · <b>exam week</b>':'')+'</p>';
+  // the weeks so far, as checkpoints
+  h+='<div class="cs-subs" aria-label="Weeks">'+Array.apply(null, Array(r.weeks)).map(function(_, i){
+    var pl=(r.plan&&r.plan[i])||null;   // a week never opened (the posting was set late) has no cases: shown as a dash
+    var st=i<w ? (!pl||!pl.length?'–':(pl.map(findKey).filter(Boolean).filter(function(it){ return doneSince(it, r.start); }).length>=pl.length?'✅':'◻️')) : i===w?'▶️':'·';
+    return '<span class="cs-chip" style="'+(i===w?'font-weight:800':'')+'">'+st+' '+(i+1)+'</span>'; }).join('')+'</div>';
+  h+='<h4 class="cs-h">This week · '+done+' of '+cs.length+' done</h4><div class="cs-grid">'+cs.map(function(it){ var d=doneSince(it, r.start); return caseCard(it, 'open', d?'✅ Done':'This week'); }).join('')+'</div>';
+  if(exam) h+='<div class="cs-panel"><b>Exam week.</b> Play a mixed ward round of your posting: no topic shown, so you practise the diagnosis like the exam.<div class="btnrow" style="margin-top:8px"><a class="btn primary" href="#/clinsim/round" onclick="MB_CLINSIM.course(\''+e(r.courseId||('spec:'+r.spec))+'\')">🎲 Mixed ward round</a></div></div>';
+  // from the ward
+  h+='<div class="cs-panel"><h4>Saw a patient on the ward?</h4><div class="cs-meta">Type what they had or came with. MedBank finds a case like it.</div><div class="cs-ask"><input id="rotSaw" autocomplete="off" placeholder="e.g. jaundice, sickle cell crisis, eclampsia" value="'+e(SAW)+'" oninput="MB_CLINSIM.saw(this.value)" aria-label="What the patient had"></div><div id="rotSawHits">'+sawHtml(SAW)+'</div></div>';
+  if(w+1<r.weeks){ var nx=rotPool(r).filter(function(it){ var used={}; Object.keys(r.plan||{}).forEach(function(k){ r.plan[k].forEach(function(x){ used[x]=1; }); }); return !used[key(it)]; }).slice(0, PER_WEEK);
+    if(nx.length) h+='<div class="cs-meta" style="margin-top:6px">Next week: '+nx.map(function(it){ return e(it.title); }).join(' · ')+'</div>'; }
+  return h+'<div class="btnrow" style="margin-top:14px"><button class="btn" onclick="MB_CLINSIM.rotationForm(true)">Change posting</button><button class="btn" onclick="MB_CLINSIM.endRotation()">End posting</button></div>';
+}
+function sawHtml(q){
+  var x=normW(q).trim(); if(x.length<3) return '';
+  var words=x.split(' ').filter(function(w){ return w.length>=4; }); if(!words.length) return '';
+  var hits=catalogue().filter(function(it){ var t=normW(it.title+' '+it.words); return it.kind!=='daily' && !it.tutorial && words.some(function(w){ return t.indexOf(' '+w)>=0; }); }).slice(0,4);
+  return hits.length ? '<div class="cs-grid">'+hits.map(function(it){ return caseCard(it, 'open', 'From the ward'); }).join('')+'</div>' : '<div class="cs-meta" style="margin-top:6px">No case like that yet.</div>';
+}
+
 /* ---------- free rotation: one built-in station and one quick case a week for unpaid students */
 function weekNo(){ return Math.floor((Date.now()+3600e3)/(7*864e5)); }
 function dayNo(){ return Math.floor((Date.now()+3600e3)/864e5); }   // Lagos days (UTC+1)
@@ -358,6 +449,8 @@ var MODES=[
     subs:[['builtin','MedBank cases'],['mine','From my lectures']] },
   { id:'daily', ic:'📅', name:'Case of the Day', blurb:'One mystery patient a day for everyone. Six clues, six guesses. Share your result.',
     subs:[['today','Today\'s case'],['archive','Past days'],['mine','From my lectures']] },
+  { id:'rotation', ic:'🗓️', name:'My Posting', blurb:'Set the posting you are on. Get 3 cases a week for it, and a mixed ward round in exam week.',
+    subs:[['plan','This week']] },
   { id:'duel', ic:'⚔️', name:'Duel', blurb:'Two phones side by side, same patient, same clock. Leave the app and you lose.',
     subs:[['home','Start or join a duel']] },
   { id:'group', ic:'👥', name:'Study Group OSCE', blurb:'Practise with friends on one phone: one plays the patient, one examines, one is the candidate.',
@@ -368,7 +461,7 @@ var MODES=[
 function hub(){
   var course=curCourse(), courses=myCourses(), sel=courseSel(), runs=store().runs, all=catalogue();
   var h='<h1>🏥 Clinical Simulation</h1><p class="cs-sub">Pick your course, then a topic. Every kind of case for that topic sits together.</p>'+
-    '<div class="cs-meta" style="margin-top:6px">'+level()+' level · '+runs.length+' case'+(runs.length===1?'':'s')+' played</div>'+standingHtml();
+    '<div class="cs-meta" style="margin-top:6px">'+level()+' level · '+runs.length+' case'+(runs.length===1?'':'s')+' played</div>'+standingHtml()+rotationCard()+(rotation()?'':'<div class="cs-meta" style="margin-top:4px"><a href="#/clinsim/rotation">🗓️ On a posting? Set it, and get 3 cases a week for it.</a></div>');
   // 1 · your course
   var covered={}; courses.forEach(function(c){ if(c.spec) covered[c.spec]=1; });
   var extra=['Medicine','Surgery','Paediatrics','Obstetrics & Gynaecology','Community Health'].filter(function(sp){ return !covered[sp]; });
@@ -797,6 +890,7 @@ function page(parts){
       GS=null; return groupList();
     case 'mine':  return mineMode();
     case 'round': return roundPage();
+    case 'rotation': return rotationPage();
     case 'duel':  return root.MB_CLINDUEL ? root.MB_CLINDUEL.page(sub, id) : '<h1>Duel</h1><p>Reload to load duels.</p>';
     default:      return hub();
   }
@@ -804,7 +898,7 @@ function page(parts){
 
 root.MB_CLINSIM={
   on:on, visible:visible, page:page, locked:locked,
-  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext, order:order, gradeOf:gradeOf, pointsOf:pointsOf, standing:standing, rankOf:rankOf, roundItems:roundItems, forCtx:forCtx },
+  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext, order:order, weekCases:weekCases, weekOf:weekOf, rotPool:rotPool, doneSince:doneSince, gradeOf:gradeOf, pointsOf:pointsOf, standing:standing, rankOf:rankOf, roundItems:roundItems, forCtx:forCtx },
   stop:function(){ stopTimer(); },
   openOsce:function(id, mode, ctx){ stopTimer(); var all=stations('all'), s=byId(all,id); if(s && !isFree(all,s)) return locked(); osceStart(id, mode, ctx); location.hash='#/clinsim/osce/'+mode+'/'+id; CUR=['osce',mode,id]; draw(); },
   say:say,
@@ -840,6 +934,15 @@ root.MB_CLINSIM={
   build:buildFor,
   course:function(id){ setCourse(id||'all'); SEARCH=''; draw(); },
   newRound:function(){ ROUND_SEED++; draw(); },
+  setRotation:function(){
+    var w=document.getElementById('rotWhat'), st=document.getElementById('rotStart'), n=document.getElementById('rotWeeks'); if(!w) return;
+    var v=w.value, c=v.indexOf('spec:')===0?null:byId(myCourses(), v);
+    store().rotation={ courseId:c?c.id:null, spec:c?(c.spec||'Medicine'):v.slice(5), name:c?c.name:v.slice(5), start:new Date((st&&st.value)||Date.now()).toISOString(), weeks:Number(n&&n.value)||8, plan:{} };
+    ROT_FORM=false; save(); draw();
+  },
+  rotationForm:function(on){ ROT_FORM=!!on; draw(); },
+  endRotation:function(){ store().rotation=null; ROT_FORM=false; save(); draw(); },
+  saw:function(q){ SAW=String(q||'').slice(0,60); var el=document.getElementById('rotSawHits'); if(el) el.innerHTML=sawHtml(SAW); },
   // what the duel (clinsim-duel.js) borrows from here
   _duel:{ draw:function(){ draw(); }, order:order, quickCases:quickCases, quickScore:quickScore, inCourse:inCourse, curCourse:curCourse,
     recordRun:function(kind, id, pct, ex){ record(kind, id, pct, ex); },

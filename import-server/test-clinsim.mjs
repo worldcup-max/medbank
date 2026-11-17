@@ -324,3 +324,25 @@ test("duel: winner by score, then fewer dangerous decisions, then speed; leaving
   assert.equal(p.length, 4); assert.equal(new Set(p).size, 4);
   assert.ok(S(p, p.slice())); assert.ok(!S(p, p.slice().reverse()));
 });
+
+test("my posting: 3 cases a week, core first, fixed once opened, exam week last", () => {
+  sandbox.DATA = { clinsim: { runs: [], daily: {} } };
+  const start = new Date(Date.now() - 8 * 864e5).toISOString();   // we are in week 2
+  const r = { courseId: null, spec: "Paediatrics", name: "Paediatrics", start, weeks: 4, plan: {} };
+  sandbox.DATA.clinsim.rotation = r;
+  assert.equal(T.weekOf(r), 1);
+  const w0 = T.weekCases(r, 0), w1 = T.weekCases(r, 1);
+  assert.ok(w0.length >= 1 && w0.length <= 3);
+  w0.concat(w1).forEach(it => assert.ok(it.spec.includes("Paediatrics"), it.id));
+  assert.deepEqual(T.weekCases(r, 0).map(x => x.id), w0.map(x => x.id), "a week's cases stay fixed");
+  // a case played after the posting began counts as done
+  const q = w0.find(x => x.kind === "quick") || w0[0];
+  assert.ok(!T.doneSince(q, start));
+  sandbox.DATA.clinsim.runs.push({ kind: q.kind, id: q.id, pct: 70, at: new Date().toISOString() });
+  if(q.kind !== "er") assert.ok(T.doneSince(q, start));
+  win.MB_SYNC = { currentLevel: () => 500, status: () => ({ syncing: false }) };
+  const html = CS.page(["rotation"]);
+  assert.match(html, /week 2 of 4/); assert.match(html, /Saw a patient on the ward/);
+  assert.match(CS.page([]), /Paediatrics · week 2 of 4/);
+  delete win.MB_SYNC; delete sandbox.DATA;
+});
