@@ -48,3 +48,22 @@ A case can deal a different start every run. `child-very-sick-fever` is the firs
 **Pictures.** A variant names a picture-library set with `art:{ topic, set, treatedWhen }`. The scene asks `window.MB_ART.resolve(topic, set)` (built by the picture library work) and otherwise falls back to `er-sim-art/<topic>/<set>/` with standard file names. It shows the arrival picture before the first action, looping flipbook frames (`distress-f1..f4`) for fits, rigors and fast breathing, close-ups when you examine (airway → mouth, circulation → hands, abdomen → abdomen, skin → eyes, hands and skin; the same five sites for every patient), and the discharge picture on the debrief when the patient went home well. The three severe malaria sets are in `er-sim-art/severe-malaria/` as a pilot. Long term, the plan is Supabase Storage.
 
 **Switching it on.** `FEATURES.PATIENT_CASES` in `config.js` is **false**. To try it on your own device, run `localStorage.mbcases='1'` (and `localStorage.mbclinsimlevel='500'` with no account), then open Mega Q-bank. The card only shows for 400 to 600 level, and it doesn't switch the rest of ER Sim on. Branching cases are not used as OSCE stations, because there is no single patient to interview.
+
+## Patient cases, phase 1 ("Make the case right")
+
+Behind `FEATURES.CASES_PHASE1` in `config.js` (**false**). The owner preview (`?mbcases=1`) has it on. The UI sets `phase1:true` on the dealt case; without it every case plays and scores exactly as before. Rules live in the engine (`er-sim.js`, "phase 1 rules"), content in `er-sim-cases.js` (`firstMove`, `recheck`, `handover`, `unneededWhy`, harmful `tier`).
+
+1. **No blood before a crossmatch.** Transfusion stays locked until the group and crossmatch is back. `blood_oneg` (emergency O-negative, General, Private and Teaching only) is there instead; giving it when the patient was not crashing (SpO₂ ≥ 85, SBP ≥ 70, HR ≤ 190) is Dangerous and adds a learning point on transfusion reactions. On a night shift the transfusion target moves with the slower crossmatch.
+2. **Off-path tiers.** Unneeded −3 (a drug or fluid with no reason at that moment, worked out from the case's problems), Harmful −8 (the case's `harmful` list, or a dose more than 25% off), Dangerous −15 (uncrossmatched blood with time to wait, discharging a sick child), and a Dangerous step makes the grade Unsafe.
+3. **Doses.** Artesunate, rectal artesunate, 10% dextrose, blood, O-negative, saline bolus and rectal diazepam open a dose box. 300–400 level sees the formula, 500+ only the weight. Within 10% full credit, within 25% half and a learning point, further off Harmful.
+4. **Nurse warning by level (option D).** 300–400 a pause card ("Go to the patient"), 500 a flashing red strip, red dot, vibration and beep (if sound is on) without pausing, 600 a 10-second speech bubble over the picture only.
+5. **Step costs** on every button, and a "+N" on the clock when it moves.
+6. **Search** on the Treat tab.
+7. **What do you do first?** on arrival: the right pick costs no time, a wrong one a minute and a pointer to the right tab.
+8. **Last result on each test button** (red if abnormal) and a **Recheck due** tag: glucose 30 min after the first, PCV 60 min after blood. On time earns a Good practice point.
+9. **Scored handover.** Situation, What was done (built from the student's own run), Now, Watch for: 3 choices each, 2.5 points per right part. 600 level types it and is checked for the 4 key facts.
+10. **Replay from the mistake.** Each run records its steps; "Try again from N min" rebuilds it 2 minutes before the first late or missed step was due. A replay earns half points.
+
+**Clinical points.** Patient cases already count in the Clinical Simulation rank total (`clinsim.js`, `allRuns`). Phase 1 runs also store the harder-start bonuses (late ×1.25, night ×1.25, complication handled within 15 min +10) and replays as practice (×0.5). Only the best run of a case counts.
+
+To try a level on your own device: `localStorage.mbclinsimlevel='400'` (or 500, 600).

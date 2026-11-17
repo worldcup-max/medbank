@@ -276,3 +276,159 @@ test("daily quota counts per account and per day", ()=>{
   assert.equal(ersimQuota("u2", false, d).ok, true);
   assert.equal(ersimQuota("u1", false, new Date("2026-11-17T10:00:00Z")).ok, true);
 });
+
+/* ---------------------------------------------------------- phase 1 rules (c.phase1) */
+const p1 = (opts) => Object.assign(E.instantiate(sm, Object.assign({ seed:7, severity:1, night:false, complication:null }, opts)), { phase1:true });
+// A good doctor under the phase 1 rules: right first move, every dose worked out, blood only once crossmatched,
+// rechecks when due, and a complete handover.
+function playP1(c, plan){
+  const run = E.newRun(c);
+  E.firstMove(c, run, c.firstMove.correct);
+  const doIt = id => {
+    if(id==="blood") while(!run.results.gxm && !run.ended) E.wait(c, run, 1);
+    const d = E.doseInfo(c, id);
+    assert.ok(E.act(c, run, id, d?{ dose:d.right }:null).ok, c.variant.id+": "+id+" refused");
+  };
+  (plan.acts||[]).forEach(doIt);
+  if(plan.wait) E.wait(c, run, plan.wait);
+  (plan.then||[]).forEach(doIt);
+  if(plan.ask==="*") (c.history||[]).filter(h=>h.key).forEach(h=>E.ask(c, run, h.id));
+  if(plan.exam==="*") (c.keyExam||[]).forEach(x=>E.examine(c, run, x));
+  for(const r of E.rechecks(c, run)) if(!r.done && run.t>=r.dueAt-5 && run.t<=r.dueAt+15 && !run.pending.some(p=>p.id===r.test)) E.act(c, run, r.test);
+  const picks = {}; E.handoverParts(c, run).forEach(p=>{ picks[p.id]=p.right; });
+  return { run, sc:E.finish(c, run, plan.dx, plan.dispo, { picks }) };
+}
+
+test("phase 1: off by default — no O-negative button, no new rows, blood needs no crossmatch", ()=>{
+  const c = E.instantiate(sm, { seed:7, variant:1, severity:1, night:false, complication:null }), run = E.newRun(c);
+  assert.equal(E.act(c, run, "blood_oneg").ok, false);
+  assert.equal(E.act(c, run, "blood").ok, true);
+  const sc = E.finish(c, run, "severe-malaria", "admit_ward");
+  assert.ok(!sc.items.some(i=>i.group==="handover" || /Unneeded|doses/.test(i.label)));
+});
+
+test("phase 1: the ideal path, every variant x severity x shift, survives and scores Excellent", ()=>{
+  sm.variants.forEach((v,vi)=>{
+    for(let si=0; si<sm.severity.length; si++) for(const night of [false,true]){
+      const c = p1({ variant:vi, severity:si, night });
+      const { run, sc } = playP1(c, BIDEAL[v.id]);
+      const tag = v.id+" sev "+si+(night?" night":"");
+      assert.notEqual(run.outcome, "died", tag+" died at "+run.t);
+      assert.equal(sc.grade, "Excellent", tag+" scored "+sc.pct+"%: "+JSON.stringify(sc.items.filter(i=>i.earned<i.pts||i.group==="harm").map(i=>i.label+" "+i.earned+"/"+i.pts)));
+      const ho = sc.items.find(i=>i.group==="handover"); assert.equal(ho.earned, 10, tag+" handover");
+      assert.ok(sc.items.some(i=>/Worked out the doses/.test(i.label) && i.earned===i.pts), tag+" doses");
+    }
+  });
+});
+
+test("phase 1 (1): no blood before the crossmatch; uncrossmatched blood is dangerous unless the patient is crashing", ()=>{
+  const c = p1({ variant:1 }), run = E.newRun(c);
+  assert.match(E.act(c, run, "blood").text, /crossmatch first/);
+  E.act(c, run, "gxm");
+  assert.match(E.act(c, run, "blood").text, /not back yet/);
+  assert.equal(E.act(c, run, "blood_oneg", { dose:110 }).ok, true);
+  assert.equal(run.probs.anaemia.fixed, true, "O-negative blood treats the anaemia");
+  const sc = E.finish(c, run, "severe-malaria", "admit_ward");
+  assert.equal(sc.grade, "Unsafe");
+  assert.ok(sc.items.some(i=>/Dangerous: uncrossmatched/.test(i.label) && i.earned===-15));
+  assert.ok(E.extraTeaching(c, run).some(t=>/transfusion reaction/.test(t)));
+  assert.equal(E.act(c, E.newRun(c), "blood_oneg").ok, true);
+  const phc = p1({ variant:0 }); assert.equal(E.act(phc, E.newRun(phc), "blood_oneg").ok, false, "not at a PHC");
+  const late = p1({ variant:1, severity:2 }), r2 = E.newRun(late); E.wait(late, r2, 200);   // left long enough to be crashing
+  if(r2.outcome!=="died"){ r2.v.spo2=80; E.act(late, r2, "blood_oneg"); assert.equal(r2.oneg.justified, true); }
+});
+
+test("phase 1 (1): on a night shift the transfusion target moves with the slower crossmatch", ()=>{
+  const day = p1({ variant:1 }), nite = p1({ variant:1, night:true });
+  const r = sm.variants[1].critical.find(x=>x.any.includes("blood"));
+  assert.equal(E.byOf(day, r), 90); assert.equal(E.byOf(nite, r), 135);
+});
+
+test("phase 1 (2): unneeded -3, harmful -8, dangerous -15 caps the grade", ()=>{
+  const c = p1({ variant:1 }), run = E.newRun(c);
+  E.act(c, run, "dextrose10", { dose:55 });   // sugar is normal
+  E.act(c, run, "ns_bolus", { dose:220 });    // harmful in severe anaemia
+  const sc = E.finish(c, run, "severe-malaria", "discharge");
+  const u = sc.items.find(i=>/^Unneeded: 10% dextrose/.test(i.label)); assert.ok(u && u.earned===-3 && /sugar was not low/.test(u.note));
+  assert.ok(sc.items.some(i=>/^Harmful: Gave a fluid bolus/.test(i.label) && i.earned===-8));
+  assert.ok(sc.items.some(i=>i.group==="dispo" && i.earned===-15));
+  assert.equal(sc.grade, "Unsafe");
+  const pc = E.pathCompare(c, run); assert.deepEqual(pc.off.map(o=>o.tier), ["unneeded","harmful"]);
+  const a = p1({ variant:0 }), ra = E.newRun(a);
+  E.act(a, ra, "benzo", { dose:7.5 }); assert.equal(ra.unneeded.length, 0, "first benzo stops the fit");
+  E.act(a, ra, "benzo", { dose:7.5 }); assert.equal(ra.unneeded.length, 1, "a second with no fit has no reason");
+});
+
+test("phase 1 (3): doses within 10% full, within 25% half, further off harmful", ()=>{
+  const c = p1({ variant:1 });   // Hauwa, 11 kg: artesunate 3 mg/kg = 33 mg
+  assert.equal(E.doseInfo(c, "artesunate").right, 33);
+  assert.equal(E.doseCheck(c, "artesunate", 35).band, "full");
+  assert.equal(E.doseCheck(c, "artesunate", 40).band, "half");
+  assert.equal(E.doseCheck(c, "artesunate", 24).band, "wrong");
+  assert.equal(E.doseInfo(p1({ variant:2 }), "artesunate").right, 52.8, "2.4 mg/kg from 20 kg");
+  const run = E.newRun(c); E.act(c, run, "artesunate", { dose:40 }); E.act(c, run, "o2_nasal"); E.act(c, run, "dextrose10", { dose:200 });
+  const sc = E.score(c, run);
+  assert.equal(sc.items.find(i=>/Worked out the doses/.test(i.label)).earned, 1.5);
+  assert.ok(sc.items.some(i=>/^Harmful: wrong dose of 10% dextrose/.test(i.label)));
+  assert.equal(E.extraTeaching(c, run).length, 2);
+});
+
+test("phase 1 (7): the right first move costs nothing, a wrong one a minute and points to the right tab", ()=>{
+  const c = p1({ variant:2 }), a = E.newRun(c), b = E.newRun(c);
+  assert.equal(E.firstMove(c, a, "bloods").right, true); assert.equal(a.t, 0);
+  const w = E.firstMove(c, b, "abc"); assert.equal(w.right, false); assert.equal(w.tab, "tests"); assert.equal(b.t, 1);
+  assert.equal(E.firstMove(c, b, "bloods"), null, "only once");
+});
+
+test("phase 1 (8): the glucose recheck is due 30 min after the first one, and a PCV after the blood", ()=>{
+  const c = p1({ variant:1 }), run = E.newRun(c);
+  E.act(c, run, "rbg"); E.wait(c, run, 26);
+  let r = E.rechecks(c, run).find(x=>x.test==="rbg"); assert.equal(r.dueAt, 30); assert.equal(r.due, true);
+  E.act(c, run, "rbg"); r = E.rechecks(c, run).find(x=>x.test==="rbg"); assert.equal(r.done, true); assert.equal(r.due, false);
+  assert.ok(E.score(c, run).items.some(i=>/Rechecked on time: blood glucose/.test(i.label) && i.earned===3));
+  assert.ok(!E.rechecks(c, run).some(x=>x.test==="pcv"), "no PCV recheck before any blood");
+});
+
+test("phase 1 (9): the handover scores 2.5 per right part, built from the student's own run", ()=>{
+  const c = p1({ variant:0 }), run = E.newRun(c);
+  E.act(c, run, "benzo", { dose:7.5 }); E.act(c, run, "rbg");
+  const parts = E.handoverParts(c, run);
+  assert.deepEqual(parts.map(p=>p.id), ["situation","done","now","watch"]);
+  parts.forEach(p=>{ assert.equal(p.options.length, 3); assert.equal(new Set(p.options).size, 3, p.id+" options differ"); assert.ok(p.options.includes(p.right)); });
+  const done = parts.find(p=>p.id==="done");
+  assert.match(done.right, /stopped the fit/); assert.doesNotMatch(done.right, /dextrose/, "forgotten dextrose is not claimed");
+  const picks = {}; parts.forEach(p=>{ picks[p.id] = p.id==="watch" ? p.options.find(o=>o!==p.right) : p.right; });
+  const sc = E.finish(c, run, "severe-malaria", "refer", { picks });
+  assert.equal(sc.items.find(i=>i.group==="handover").earned, 7.5);
+  const c2 = p1({ variant:0 }), r2 = E.newRun(c2);
+  E.finish(c2, r2, "severe-malaria", "refer", { text:"Severe malaria. Gave artesunate. Stable sats 96. Watch the sugar." });
+  assert.equal(E.score(c2, r2).items.find(i=>i.group==="handover").earned, 10, "typed handover with the 4 key facts");
+});
+
+test("phase 1 (10): a run replays exactly from its steps, and Try again restarts before the first late step", ()=>{
+  const c = p1({ variant:1, complication:"hypo2" }), run = E.newRun(c);
+  E.firstMove(c, run, "abc"); E.act(c, run, "o2_nasal"); E.ask(c, run, "fever"); E.examine(c, run, "general"); E.wait(c, run, 20);
+  E.freeAsk(c, run, "any cough?", "No cough.", ["breath"]); E.act(c, run, "pcv");
+  const again = E.replay(c, run.steps, Infinity);
+  assert.equal(again.t, run.t); assert.deepEqual(again.v, run.v); assert.deepEqual(again.asked, run.asked); assert.deepEqual(again.steps, run.steps);
+  const rp = E.replayPoint(c, run);
+  assert.equal(rp.label, "Checked the haemoglobin (PCV or FBC)");
+  assert.ok(rp.at<=13, "restored at "+rp.at); assert.ok(!rp.run.done.pcv);
+});
+
+test("phase 1 (4): a complication pushes a nurse warning", ()=>{
+  const c = p1({ variant:1, complication:"hypo2" }), run = E.newRun(c);
+  E.wait(c, run, c.variant.complication.at+1);
+  assert.equal(run.alerts.length, 1); assert.match(run.alerts[0].text, /nurse calls/);
+  const off = E.instantiate(sm, { seed:7, variant:1, severity:1, night:false, complication:"hypo2" }), r2 = E.newRun(off);
+  E.wait(off, r2, off.variant.complication.at+1); assert.equal(r2.alerts.length, 0);
+});
+
+test("phase 1: clinical points use the harder-start bonuses, and a replay earns half", ()=>{
+  const c = p1({ variant:1, severity:2, night:true, complication:null }), run = E.newRun(c);
+  const b = E.bonusOf(c, run); assert.equal(b.x, 1.5625); assert.equal(b.add, 0);
+  assert.equal(E.clinicalPoints(80, { x:1 }), 11);
+  assert.equal(E.clinicalPoints(80, { x:b.x }), 17);
+  assert.equal(E.clinicalPoints(80, { x:1, mode:"practice" }), 6);
+  assert.equal(E.clinicalPoints(90, { unsafe:true }), 6);
+});
