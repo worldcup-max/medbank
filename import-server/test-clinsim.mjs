@@ -19,6 +19,7 @@ const sandbox = { window: win, document: doc, location: { hash: "" }, localStora
 vm.runInNewContext(src("er-sim-cases.js"), sandbox);
 vm.runInNewContext(src("clinsim-cases.js"), sandbox);
 vm.runInNewContext(src("clinsim.js"), sandbox);
+vm.runInNewContext(src("clinsim-duel.js"), sandbox);
 const CS = win.MB_CLINSIM, T = CS._test;
 
 const NOTE = `## Severe malaria in children
@@ -300,4 +301,92 @@ test("non-clinical topics get no case pack: no patient to see", () => {
     assert.ok(!isClinicalTopic(name, NOTE + " patient presents signs diagnosis treatment management complications history of"), name);
   const stats = "The mean is the sum of values divided by their number. The median is the middle value. Standard deviation measures spread. A p value below 0.05 is called significant.";
   assert.ok(!isClinicalTopic("Week 3 lecture", stats), "a note with no clinical talk is not clinical, whatever its name");
+});
+
+test("options are shuffled on screen: the best answer is not always first", () => {
+  const o = T.order(4, "q-x|s0|abc");
+  assert.deepEqual([...o].sort(), [0, 1, 2, 3]);
+  assert.deepEqual(T.order(4, "q-x|s0|abc"), o, "stable while you play");
+  let first = 0, n = 0;
+  for(const q of win.CLINSIM_QUICK) q.steps.forEach((s, i) => { n++; if(T.order(s.options.length, q.id + "|s" + i + "|n1")[0] === s.options.findIndex(x => x.pts === 10)) first++; });
+  assert.ok(first < n / 2, "best shown first in " + first + " of " + n);
+});
+
+test("duel: winner by score, then fewer dangerous decisions, then speed; leaving loses", () => {
+  const W = win.MB_CLINDUEL._test.winner;
+  assert.equal(W({ pct: 80, danger: 0, ms: 9 }, { pct: 70, danger: 0, ms: 1 }), "a");
+  assert.equal(W({ pct: 80, danger: 1, ms: 1 }, { pct: 80, danger: 0, ms: 9 }), "b");
+  assert.equal(W({ pct: 80, danger: 0, ms: 5 }, { pct: 80, danger: 0, ms: 9 }), "a");
+  assert.equal(W({ pct: 80, danger: 0, ms: 5 }, { pct: 80, danger: 0, ms: 5 }), null);
+  assert.equal(W({ pct: 100, danger: 0, ms: 1, forfeit: true }, { pct: 0, danger: 0, ms: 9 }), "b");
+  assert.equal(W({ forfeit: true }, { forfeit: true }), null);
+  const S = win.MB_CLINDUEL._test.samePattern, p = win.MB_CLINDUEL._test.newPattern();
+  assert.equal(p.length, 4); assert.equal(new Set(p).size, 4);
+  assert.ok(S(p, p.slice())); assert.ok(!S(p, p.slice().reverse()));
+});
+
+test("my posting: 3 cases a week, core first, fixed once opened, exam week last", () => {
+  sandbox.DATA = { clinsim: { runs: [], daily: {} } };
+  const start = new Date(Date.now() - 8 * 864e5).toISOString();   // we are in week 2
+  const r = { courseId: null, spec: "Paediatrics", name: "Paediatrics", start, weeks: 4, plan: {} };
+  sandbox.DATA.clinsim.rotation = r;
+  assert.equal(T.weekOf(r), 1);
+  const w0 = T.weekCases(r, 0), w1 = T.weekCases(r, 1);
+  assert.ok(w0.length >= 1 && w0.length <= 3);
+  w0.concat(w1).forEach(it => assert.ok(it.spec.includes("Paediatrics"), it.id));
+  assert.deepEqual(T.weekCases(r, 0).map(x => x.id), w0.map(x => x.id), "a week's cases stay fixed");
+  // a case played after the posting began counts as done
+  const q = w0.find(x => x.kind === "quick") || w0[0];
+  assert.ok(!T.doneSince(q, start));
+  sandbox.DATA.clinsim.runs.push({ kind: q.kind, id: q.id, pct: 70, at: new Date().toISOString() });
+  if(q.kind !== "er") assert.ok(T.doneSince(q, start));
+  win.MB_SYNC = { currentLevel: () => 500, status: () => ({ syncing: false }) };
+  const html = CS.page(["rotation"]);
+  assert.match(html, /week 2 of 4/); assert.match(html, /Saw a patient on the ward/);
+  assert.match(CS.page([]), /Paediatrics · week 2 of 4/);
+  delete win.MB_SYNC; delete sandbox.DATA;
+});
+
+test("mock OSCE day: a mix across specialties, one report, pass needs stations and average", () => {
+  const ids = T.mockPick(6, null, 7);
+  assert.ok(ids.length >= 4 && ids.length <= 6);
+  assert.equal(new Set(ids).size, ids.length);
+  const st = T.stations("all").filter(s => ids.includes(s.id));
+  assert.ok(new Set(st.map(s => s.spec[0])).size >= 3, "a finals mix spreads across specialties");
+  const r = (total, pass, d) => ({ total, pass, data: d, mgmt: d, ip: d });
+  assert.ok(T.mockResult([r(70, true, 70), r(65, true, 65), r(62, true, 62), r(40, false, 40), r(80, true, 80)]).pass);
+  assert.ok(!T.mockResult([r(90, true, 90), r(90, true, 90), r(40, false, 40), r(40, false, 40), r(40, false, 40)]).pass, "3 of 5 stations failed");
+  assert.ok(!T.mockResult([r(61, true, 61), r(61, true, 61), r(61, true, 61), r(20, false, 20)]).pass, "average under 60");
+  assert.match(T.mockFeedback({ data: 30, mgmt: 80, ip: 90 }), /History/);
+  assert.match(T.mockFeedback({ data: 80, mgmt: 80, ip: 90 }), /Good station/);
+});
+
+test("revise this: a case links to the line of the student's note and related Q-bank questions", () => {
+  const paeds = { id: "course_p", name: "Paediatrics" };
+  const note = "## Neonatal jaundice\nPhysiological jaundice appears after 24 hours and fades by two weeks.\nJaundice in the first 24 hours of life is always pathological and needs a serum bilirubin at once.\nPhototherapy is started from the treatment chart for the baby's age in hours.";
+  const qbank = [{ stem: "A baby is yellow at 12 hours of life. What is the next step?", explanation: "Jaundice in the first day is pathological." }, { stem: "What is the dose of paracetamol?", explanation: "Weight based." }];
+  sandbox.allTopics.push({ id: "tj", name: "Neonatal Jaundice", ready: true, note, subject: paeds, extras: { qbank } });
+  const baby = win.CLINSIM_QUICK.find(q => q.id === "q-yellow-baby");
+  const ts = T.linkedTopics(baby);
+  assert.equal(ts.length, 1); assert.equal(ts[0].id, "tj");
+  assert.match(T.bestLine(note, baby), /jaundice/i);
+  assert.equal(T.relatedQs(ts[0], baby, 3).length, 1, "only the question about jaundice");
+  assert.match(T.reviseHtml(baby, true), /what you missed/); assert.match(T.reviseHtml(baby, false), /1 related question/);
+  // a lecture case finds its own quote
+  assert.match(T.bestLine(note, { src: "always pathological and needs a serum bilirubin", title: "x" }), /first 24 hours/);
+  // a case with no matching lecture shows nothing
+  assert.equal(T.reviseHtml(win.CLINSIM_QUICK.find(q => q.id === "q-long-cough"), false), "");
+  sandbox.allTopics.length = 0;
+});
+
+test("a quick case plays through every screen: decisions, exam questions, result", () => {
+  win.MB_SYNC = { currentLevel: () => 500, status: () => ({ syncing: false }) };
+  const q = win.CLINSIM_QUICK[0], html = [];
+  CS.openQuick(q.id); html.push(CS.page(["quick", "builtin", q.id]));
+  q.steps.forEach((st, i) => { CS.choose(i, 0); html.push(CS.page(["quick", "builtin", q.id])); CS.next(); });
+  (q.mcqs || []).forEach(() => { html.push(CS.page(["quick", "builtin", q.id])); CS.answer(0); html.push(CS.page(["quick", "builtin", q.id])); CS.nextMcq(); });
+  const last = CS.page(["quick", "builtin", q.id]);
+  assert.match(last, /Play again/);
+  assert.ok(html.every(h => typeof h === "string" && h.length > 100));
+  delete win.MB_SYNC;
 });
