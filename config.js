@@ -90,5 +90,5 @@ window.MEDBANK_CONFIG = {
   //                  Even when ON, the server serves nothing until the integrated bank passes its readiness gate
   //                  (≥100 approved, ≥8 families, ≥10 each, top family ≤30%); before that the cards show what is missing.
   //                  Run import-server/sql/mega-qbank-phases-b-e.sql first. Try it: localStorage.mbint='1' / mbcase='1'.
-  FEATURES: { CLINICAL_SIM: false, ER_SIM: false, LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, WHITEBOARD: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false, INTEGRATED_MODE: false, CASE_MODE: false }
+  FEATURES: { CLINICAL_SIM: false, ER_SIM: false, PATIENT_CASES: false, LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, WHITEBOARD: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false, INTEGRATED_MODE: false, CASE_MODE: false }
 };

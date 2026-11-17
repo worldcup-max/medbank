@@ -120,9 +120,9 @@ test("built-in daily puzzles have six clues and their own answer counts as right
   assert.ok(!T.isRight(lassa, "Malaria"));
 });
 
-test("every ER Sim case becomes a valid OSCE station", () => {
+test("every ER Sim case becomes a valid OSCE station (branching cases have no single patient, so they don't)", () => {
   const S = T.stations("builtin");
-  assert.equal(S.length, win.ERSIM_CASES.filter(c => !c.tutorial).length);
+  assert.equal(S.length, win.ERSIM_CASES.filter(c => !c.tutorial && !c.variants).length);
   for(const s of S){
     assert.ok(s.history.some(h => h.key), s.id);
     assert.ok(s.dx.correct >= 0, s.id + " dx");
