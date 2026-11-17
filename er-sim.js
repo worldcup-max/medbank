@@ -530,7 +530,11 @@ function e(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(ch){ retu
 function on(){ try{ var C=root.MEDBANK_CONFIG||{}; if(C.FEATURES&&C.FEATURES.ER_SIM) return true; if(root.MB_CLINSIM&&root.MB_CLINSIM.on()) return true; return root.localStorage&&localStorage.mbersim==='1'; }catch(_){ return false; } }   // also on inside Clinical Simulation (clinsim.js)
 /* Patient cases: the branching cases, opened from Mega Qbank for 400-600 level. FEATURES.PATIENT_CASES (default false),
    or localStorage.mbcases='1' on your own device. They play in this simulator but don't switch the rest of ER Sim on. */
-function casesOn(){ try{ var C=root.MEDBANK_CONFIG||{}; if(C.FEATURES&&C.FEATURES.PATIENT_CASES) return true; return root.localStorage&&localStorage.mbcases==='1'; }catch(_){ return false; } }
+/* Owner preview: opening the app with ?mbcases=1 (or #...?mbcases=1) switches Patient cases on for this device only,
+   whatever the account's level; ?mbcases=0 switches it off again. Students never get the link, and the flag stays off. */
+(function(){ try{ var m=/[?&]mbcases=([01])/.exec(String(root.location&&(root.location.search+root.location.hash)||'')); if(m){ if(m[1]==='1') localStorage.mbcases='1'; else localStorage.removeItem('mbcases'); } }catch(_){} })();
+function preview(){ try{ return root.localStorage&&localStorage.mbcases==='1'; }catch(_){ return false; } }
+function casesOn(){ try{ var C=root.MEDBANK_CONFIG||{}; if(C.FEATURES&&C.FEATURES.PATIENT_CASES) return true; return preview(); }catch(_){ return false; } }
 function clinicalLevel(){
   var l=null;
   try{ l=root.MB_SYNC&&root.MB_SYNC.currentLevel&&root.MB_SYNC.currentLevel(); }catch(_){}
@@ -936,7 +940,7 @@ root.MB_ERSIM={
   casesOn:casesOn,
   /* The "Patient cases" card in Mega Qbank (pageMega in app.html). Empty unless switched on and the student is 400-600 level. */
   patientCasesCard:function(){
-    if(!casesOn() || !clinicalLevel()) return '';
+    if(!casesOn() || !(clinicalLevel() || preview())) return '';   // the owner preview shows it at any level
     var list=branchCases(); if(!list.length) return '';
     css();
     return '<div class="card ers-pcard" style="cursor:default"><div class="mgq-t">🩺 Patient cases</div>'+
