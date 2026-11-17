@@ -1273,7 +1273,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.11.17n';   // bump this each release
+const APP_VERSION='2026.11.17o';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -4284,8 +4284,210 @@ function mgDrillWeak(){ var agg=qbAgg('*'); if(!agg.cumulative.seen){ mbToast('A
   QB={ topicId:'*', mode:'tutor', items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:'blind', kind:'drill_weak' };
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
 }
+/* INT-CORE-BEGIN — GENERATED from import-server/integrated-serve.mjs + readinessGate (integrated.mjs). Do not edit by hand:
+   run `node qa/v19-int-core-parity.mjs --write`. Lets Integrated/Case Mode run from Supabase without the import server. */
+window.MBIC=(function(){
+const READINESS = { minApproved:100, minFamilies:8, minPerFamily:10, maxFamilyShare:0.30, minPerPairAnalytics:3 };
+function readinessGate(approved, cfg){
+  const R=Object.assign({}, READINESS, cfg||{});
+  approved=Array.isArray(approved)?approved:[];
+  const byFamily={}; approved.forEach(it=>{ const f=(it&&it.integration_family)||"?"; byFamily[f]=(byFamily[f]||0)+1; });
+  const total=approved.length, families=Object.keys(byFamily);
+  const familiesFull = families.filter(f=>byFamily[f]>=R.minPerFamily);        // present families at the ≥10 full gate
+  const pairsReady   = families.filter(f=>byFamily[f]>=R.minPerPairAnalytics); // present pairs at the ≥3 analytics gate
+  const biggestShare = total ? Math.max(0, ...families.map(f=>byFamily[f]/total)) : 0;
+  const enoughFamilies = families.length>=R.minFamilies;
+  const checks={
+    enough_total: total>=R.minApproved,
+    enough_families: enoughFamilies,
+    every_family_full: enoughFamilies && families.length>0 && familiesFull.length===families.length,   // each present family ≥10
+    every_pair_ready:  enoughFamilies && families.length>0 && pairsReady.length===families.length,      // each present pair ≥3
+    no_family_dominates: total>0 && biggestShare<=R.maxFamilyShare
+  };
+  const ready = total>0 && Object.values(checks).every(Boolean);   // FAIL CLOSED
+  const blockers=[];
+  if(!checks.enough_total) blockers.push(total+" / "+R.minApproved+" approved");
+  if(!checks.enough_families) blockers.push(families.length+" / "+R.minFamilies+" families present");
+  if(!checks.every_pair_ready) blockers.push((families.length-pairsReady.length)+" pair(s) below "+R.minPerPairAnalytics);
+  if(!checks.every_family_full) blockers.push((families.length-familiesFull.length)+" family(ies) below "+R.minPerFamily);
+  if(!checks.no_family_dominates) blockers.push("top family "+Math.round(biggestShare*100)+"% > "+Math.round(R.maxFamilyShare*100)+"%");
+  const deficits={}; families.forEach(f=>{ deficits[f]=Math.max(0, R.minPerFamily-byFamily[f]); });   // shortfall to the ≥10 full gate, per family — drives deficit-aware acquisition
+  return { ready, total, families:families.length, byFamily, biggest_family_share:Math.round(biggestShare*100)/100,
+    checks, analytics_ready_families:pairsReady, blockers, deficits, gate:R };
+}
+/* ==========================================================================
+ * Phase B (Integrated Mode) + Phase E (linear Case Mode) — PURE serve core.
+ * NO AI, NO network, NO DB. Everything here only READS approved integrated_items rows and decides what may be
+ * shown to a student. It never writes questions, never derives or alters target_id, never touches A6/A7
+ * scheduling or the frozen R1–R4 QA engine (see PHASE-B-INTEGRATED-MODE-CONTRACT.md, CASE-MODE-SCOPE.md).
+ *
+ * Invariants pinned by qa/v19-integrated-serve.mjs:
+ *  - only review_status==='approved' rows are ever servable (fail closed on anything else / malformed content)
+ *  - ONE primary target_id per item, passed through untouched; integrated_topics/case_id/case_stage = metadata
+ *  - shortfall is REPORTED, never substituted (no non-integrated padding, no relabelling)
+ *  - a case is N approved rows sharing case_id with contiguous stages 1..N, served in FIXED order
+ * ========================================================================== */
+
+function _norm(s){ return String(s==null?"":s).toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim(); }
+
+/* Map ONE integrated_items row → a qbank-shaped student item, or null if it is not servable. */
+function toServable(row){
+  if(!row || row.review_status!=="approved") return null;
+  const tc=row.transformed_content||{};
+  const stem=String(tc.stem||"").trim();
+  const options=Array.isArray(tc.options)?tc.options.map(o=>String(o==null?"":o).trim()):[];
+  const answer=tc.answer;
+  if(!stem || options.length<2 || options.length>6 || options.some(o=>!o)) return null;
+  if(new Set(options.map(_norm)).size!==options.length) return null;                  // duplicate options → not servable
+  if(!Number.isInteger(answer) || answer<0 || answer>=options.length) return null;
+  const rationales=Array.isArray(tc.rationales)?tc.rationales.slice(0,options.length).map(r=>String(r==null?"":r)):[];
+  return {
+    id: row.id,
+    stem, options, answer, rationales,
+    lead_in: tc.lead_in||"",
+    teaching: tc.teaching||tc.objective||row.integration_rationale||"",
+    objective: tc.objective||tc.teaching||"",
+    skill: tc.skill||"",
+    cognitive_level: tc.cognitive_level||"",
+    difficulty: tc.difficulty||"",
+    target_id: row.target_id||null,                                                    // ONE primary target, untouched
+    primary_topic: row.primary_topic||null,
+    integrated_topics: Array.isArray(row.integrated_topics)?row.integrated_topics.slice():[],   // metadata only
+    integration_family: row.integration_family||null,
+    integration_type: row.integration_type||null,
+    integration_dependency: row.integration_dependency||"",
+    case_id: row.case_id||null,                                                        // metadata only
+    case_stage: Number.isInteger(row.case_stage)?row.case_stage:null
+  };
+}
+
+/* Deterministic, family-balanced selection. Round-robins across the requested families (or all present) so no
+   family dominates a session; within a family the order is a seeded shuffle (reproducible per seed). Requests
+   beyond what exists are reported as shortfall — NEVER padded. */
+function _seed(s){ let h=2166136261>>>0; s=String(s||""); for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+function _rng(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function selectIntegrated(items, req){
+  req=req||{}; const count=Math.max(0, req.count|0); const exclude=new Set(req.exclude||[]);
+  const pool=(items||[]).filter(it=>it && it.id && !exclude.has(it.id));
+  const wanted=Array.isArray(req.families)&&req.families.length ? req.families.slice() : null;
+  const byFam={}; pool.forEach(it=>{ const f=it.integration_family||"?"; if(wanted && wanted.indexOf(f)<0) return; (byFam[f]=byFam[f]||[]).push(it); });
+  const fams=Object.keys(byFam).sort();
+  const rnd=_rng(_seed(req.seed||"mb"));
+  fams.forEach(f=>{ const d=byFam[f].slice().sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0);
+    for(let i=d.length-1;i>0;i--){ const j=Math.floor(rnd()*(i+1)); const t=d[i]; d[i]=d[j]; d[j]=t; } byFam[f]=d; });
+  const selected=[]; let gi=0, guard=0;
+  while(selected.length<count && fams.some(f=>byFam[f].length) && guard<100000){
+    const f=fams[gi%fams.length]; if(byFam[f].length) selected.push(byFam[f].shift()); gi++; guard++;
+  }
+  const deliveredByFamily={}; selected.forEach(it=>{ const f=it.integration_family||"?"; deliveredByFamily[f]=(deliveredByFamily[f]||0)+1; });
+  const missingFamilies = wanted ? wanted.filter(f=>!(f in deliveredByFamily)) : [];
+  return { selected, requested:count, delivered:selected.length, shortfall:Math.max(0, count-selected.length),
+           deliveredByFamily, missingFamilies };
+}
+
+/* ---- Phase E: linear cases ---- */
+const CASE_CFG = { minStages:2, maxStages:6, leakMinChars:12 };
+
+/* Cross-stage leakage guard. An EARLIER stage's visible text (stem, lead-in, options, rationales, teaching) must not
+   contain a LATER stage's keyed answer — otherwise answering stage 1 hands you stage 3. Earlier answers appearing
+   in later stems are allowed (the student has already answered them; that's the case progressing). */
+function caseLeakage(stages, cfg){
+  const R=Object.assign({}, CASE_CFG, cfg||{}); const leaks=[];
+  for(let k=0;k<stages.length;k++){
+    const s=stages[k]; const shown=_norm([s.stem,s.lead_in,(s.options||[]).join(" "),(s.rationales||[]).join(" "),s.teaching].join(" "));
+    for(let m=k+1;m<stages.length;m++){
+      const later=stages[m]; const key=_norm((later.options||[])[later.answer]);
+      if(key.length>=R.leakMinChars && shown.indexOf(key)>=0) leaks.push({ from_stage:k+1, leaks_stage:m+1, answer:(later.options||[])[later.answer] });
+    }
+  }
+  return leaks;
+}
+
+/* Group approved rows into playable cases. Rejects (with a reason) any case that is incomplete, out of order,
+   mixes unapproved stages, is too short/long, or leaks a later answer. Returns playable cases in fixed stage order. */
+function assembleCases(rows, meta, cfg){
+  const R=Object.assign({}, CASE_CFG, cfg||{}); meta=meta||{};
+  const groups={};
+  (rows||[]).forEach(r=>{ if(r && r.case_id) (groups[r.case_id]=groups[r.case_id]||[]).push(r); });
+  const cases=[], rejected=[];
+  Object.keys(groups).sort().forEach(cid=>{
+    const g=groups[cid];
+    const bad=g.filter(r=>r.review_status!=="approved");
+    if(bad.length){ rejected.push({ case_id:cid, reason:bad.length+" stage(s) not approved" }); return; }
+    const stages=g.map(toServable);
+    if(stages.some(s=>!s)){ rejected.push({ case_id:cid, reason:"a stage has malformed content" }); return; }
+    if(stages.some(s=>!Number.isInteger(s.case_stage))){ rejected.push({ case_id:cid, reason:"a stage has no case_stage" }); return; }
+    stages.sort((a,b)=>a.case_stage-b.case_stage);
+    const contiguous=stages.every((s,i)=>s.case_stage===i+1);
+    if(!contiguous){ rejected.push({ case_id:cid, reason:"stages are not 1.."+stages.length+" without gaps/duplicates" }); return; }
+    if(stages.length<R.minStages || stages.length>R.maxStages){ rejected.push({ case_id:cid, reason:stages.length+" stages (need "+R.minStages+"–"+R.maxStages+")" }); return; }
+    const leaks=caseLeakage(stages, R);
+    if(leaks.length){ rejected.push({ case_id:cid, reason:"stage "+leaks[0].from_stage+" reveals the answer to stage "+leaks[0].leaks_stage, leaks }); return; }
+    const first=g.find(r=>r.case_stage===1)||g[0]; const m=meta[cid]||{};
+    const families=[...new Set(stages.map(s=>s.integration_family).filter(Boolean))];
+    cases.push({ case_id:cid, title:m.title||first.case_title||"Clinical case", intro:m.intro||first.case_intro||"",
+                 stages, n:stages.length, families });
+  });
+  return { cases, rejected };
+}
+
+/* Case scoring: each stage graded exactly as a standalone question; the case score is a DERIVED summary. */
+function caseScore(stages, results){
+  const byStage=(stages||[]).map((s,i)=>{ const r=(results||[]).find(x=>x.i===i); return { stage:i+1, answered:!!r, ok:!!(r&&r.ok) }; });
+  const answered=byStage.filter(s=>s.answered).length, correct=byStage.filter(s=>s.ok).length;
+  const firstMiss=byStage.find(s=>s.answered && !s.ok);
+  return { n:byStage.length, answered, correct, pct:answered?Math.round(correct/answered*100):0, byStage, first_miss_stage:firstMiss?firstMiss.stage:null };
+}
+return { READINESS, readinessGate, toServable, selectIntegrated, CASE_CFG, caseLeakage, assembleCases, caseScore };
+})();
+/* INT-CORE-END */
+/* Integrated / Case Mode data source. These routes now run against Supabase (functions in
+   import-server/sql/integrated-supabase-rpc.sql), so they work without the import server. The database computes the
+   readiness gate and returns approved rows ONLY when it is ready; the app runs the same pure serve core (MBIC, generated
+   from integrated-serve.mjs) the server used. Anything else still goes to the import server through admApi. */
+var _intBankP=null, _intBankAt=0;
+async function intRpc(fn, args){ var sb=window.__mbSB; if(!sb||!sb.rpc) throw new Error('offline');
+  var r=await sb.rpc(fn, args||{}); if(r.error) return { ok:false, data:{ error:(r.error.message||'error') } };
+  return { ok:true, data:r.data }; }
+function intBank(fresh){ if(fresh||!_intBankP||Date.now()-_intBankAt>60000){ _intBankAt=Date.now();
+    _intBankP=intRpc('mb_int_bank').then(function(r){ if(!r.ok) _intBankP=null; return r; }, function(e){ _intBankP=null; throw e; }); }
+  return _intBankP; }
+async function intApi(path, opts){
+  var u=new URL(path,'https://x.invalid'), p=u.pathname, q=u.searchParams, body={};
+  try{ body=(opts&&opts.body)?JSON.parse(opts.body):{}; }catch(e){ body={}; }
+  if(p==='/qbank/integrated/status'||p==='/qbank/integrated/items'||p==='/qbank/cases'){
+    var r=await intBank(p==='/qbank/integrated/status'); if(!r.ok) return r;
+    var g=(r.data&&r.data.gate)||{ ready:false, blockers:['unavailable'] }, rows=(r.data&&r.data.rows)||[];
+    if(p==='/qbank/integrated/status'){ var nc=g.ready?MBIC.assembleCases(rows.filter(function(x){ return x.case_id; })).cases.length:0;
+      return { ok:true, data:{ ok:true, integrated_mode:g.ready?'available':'locked', case_mode:(g.ready&&nc>0)?'available':'locked', total:g.total, families:g.byFamily, blockers:g.blockers, cases:nc } }; }
+    if(!g.ready) return { ok:false, data:{ ok:false, integrated_mode:'locked', case_mode:'locked', blockers:g.blockers } };
+    if(p==='/qbank/cases'){ var cs=MBIC.assembleCases(rows.filter(function(x){ return x.case_id; })).cases; return { ok:true, data:{ ok:true, case_mode:cs.length?'available':'locked', cases:cs } }; }
+    var count=Math.max(1, Math.min(50, parseInt(q.get('n'),10)||20));
+    var fams=String(q.get('families')||'').split(',').map(function(x){ return x.trim(); }).filter(Boolean);
+    var excl=String(q.get('exclude')||'').split(',').map(function(x){ return x.trim(); }).filter(Boolean).slice(0,500);
+    var items=rows.filter(function(x){ return !x.case_id; }).map(MBIC.toServable).filter(Boolean);   // case stages are served as cases
+    var sel=MBIC.selectIntegrated(items, { count:count, families:fams, exclude:excl, seed:String(Date.now())+Math.random() });
+    return { ok:true, data:{ ok:true, integrated_mode:'available', items:sel.selected, requested:sel.requested, delivered:sel.delivered, shortfall:sel.shortfall, delivered_by_family:sel.deliveredByFamily, missing_families:sel.missingFamilies } }; }
+  if(p==='/qbank/integrated/log'){ var lr=await intRpc('mb_int_log', { p:body }); return { ok:lr.ok, data:{ ok:lr.ok, stored:!!(lr.ok&&lr.data) } }; }
+  if(p==='/admin/integrated/export') return intRpc('mb_int_admin', { p_action:'export', p:{ status:String(q.get('status')||'ai_reviewed,needs_edit').split(',').map(function(x){ return x.trim(); }).filter(Boolean) } });
+  if(p==='/admin/integrated/readiness'){ var rr=await intRpc('mb_int_admin', { p_action:'readiness' }); if(!rr.ok) return rr; var gg=rr.data.readiness||{};
+    return { ok:true, data:{ ok:true, integrated_mode:gg.ready?'available':'locked', readiness:gg, blockers:gg.blockers, deficits:gg.deficits, by_status:rr.data.by_status||{} } }; }
+  if(p==='/admin/integrated/cases'){ var er=await intRpc('mb_int_admin', { p_action:'export', p:{ status:['approved'] } }); if(!er.ok) return er;
+    var ac=MBIC.assembleCases((er.data.items||[]).filter(function(x){ return x.case_id; })); return { ok:true, data:{ ok:true, cases:ac.cases, rejected:ac.rejected } }; }
+  if(p==='/admin/integrated/case'){
+    if(body.dissolve){ var dr=await intRpc('mb_int_admin', { p_action:'dissolve', p:{ case_id:body.case_id } }); _intBankP=null; return dr; }
+    var ids=(body.ids||[]).filter(Boolean), cid=String(body.case_id||'').trim()||('case-'+Date.now().toString(36));
+    if(ids.length<MBIC.CASE_CFG.minStages||ids.length>MBIC.CASE_CFG.maxStages) return { ok:false, data:{ error:'a case needs '+MBIC.CASE_CFG.minStages+'–'+MBIC.CASE_CFG.maxStages+' stages' } };
+    var ex=await intRpc('mb_int_admin', { p_action:'export', p:{ status:['approved'] } }); if(!ex.ok) return ex;
+    var got=(ex.data.items||[]).filter(function(x){ return ids.indexOf(x.id)>=0; });
+    if(got.length!==ids.length) return { ok:false, data:{ error:'some ids are not approved questions' } };
+    // same check the student side runs at serve time: stage order, 2–6 stages, and no later answer leaked earlier
+    var draft=ids.map(function(id,i){ return Object.assign({}, got.filter(function(x){ return x.id===id; })[0], { case_id:cid, case_stage:i+1, case_title:body.title||null, case_intro:body.intro||null }); });
+    var chk=MBIC.assembleCases(draft); if(!chk.cases.length) return { ok:false, data:{ error:(chk.rejected[0]&&chk.rejected[0].reason)||'case invalid', rejected:chk.rejected } };
+    var sr=await intRpc('mb_int_admin', { p_action:'set_case', p:{ ids:ids, title:body.title||'', intro:body.intro||'', case_id:cid } }); _intBankP=null; return sr; }
+  return admApi(path, opts); }
 /* ===== Mega QBank Phase B — Integrated Mode · Phase E — linear Case Mode (FEATURES.INTEGRATED_MODE / CASE_MODE).
-   The SERVER decides availability: items/cases are served only when the one canonical readiness gate says ready
+   The DATABASE decides availability (mb_int_bank, see intApi above): items/cases are served only when the one canonical readiness gate says ready
    (≥100 approved · ≥8 families · ≥10/family · ≤30% top family). The client never recomputes readiness. Items keep their
    ONE primary target_id; integration_family / case_id are metadata only. Runs on the normal QB runner — nothing frozen
    (Smart Drill engine, A6/A7) is touched. ===== */
@@ -4296,7 +4498,7 @@ function intFamLabel(f){ var m={cardio:'Cardio',renal:'Renal',endocrine:'Endocri
   return String(f||'').split('_').filter(Boolean).map(function(p){ return m[p]||(p.charAt(0).toUpperCase()+p.slice(1)); }).join(' + ')||'Integrated'; }
 function intLoadStatus(){ var st=_intState; if(st.loading) return; st.loading=true;
   var again=function(){ if(location.hash.indexOf('mega')>=0 && !(QB&&QB.mega)) render(); };
-  admApi('/qbank/integrated/status').then(function(r){ st.loading=false; st.status=r.ok?r.data:null; st.err=r.ok?null:((r.data&&r.data.error)||'unavailable'); st.errAt=Date.now(); again(); })
+  intApi('/qbank/integrated/status').then(function(r){ st.loading=false; st.status=r.ok?r.data:null; st.err=r.ok?null:((r.data&&r.data.error)||'unavailable'); st.errAt=Date.now(); again(); })
     .catch(function(e){ st.loading=false; st.errAt=Date.now();
       // config/auth may not be ready on the very first render — retry a few times instead of caching the failure
       if((st.tries=(st.tries||0)+1)<4){ setTimeout(function(){ intLoadStatus(); },1200); return; }
@@ -4316,7 +4518,7 @@ function intToItem(it){ var fam=intFamLabel(it.integration_family);
   return Object.assign({}, it, { _topicId:'_integrated', _topicName:fam, _subject:'Integrated · '+fam, _integrated:true, tag:fam, subtopic:(it.primary_topic||fam), system:fam }); }
 function intStart(){ var cfg=_mgCfg, n=Math.max(1,Math.min(50,cfg.count||20));
   mbToast('Loading integrated questions…');
-  admApi('/qbank/integrated/items?n='+n).then(function(r){
+  intApi('/qbank/integrated/items?n='+n).then(function(r){
     if(!r.ok){ if(r.data&&r.data.integrated_mode==='locked'){ _intState.status=null; intLoadStatus(); } mbToast((r.data&&r.data.blockers)?'Integrated questions are locked right now.':'Could not load integrated questions.'); return; }
     var items=(r.data.items||[]).map(intToItem); if(!items.length){ mbToast('No integrated questions available yet.'); return; }
     QB={ topicId:'*', mode:cfg.mode||'timed', items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:'integrated', kind:'integrated',
@@ -4325,7 +4527,7 @@ function intStart(){ var cfg=_mgCfg, n=Math.max(1,Math.min(50,cfg.count||20));
   }).catch(function(){ mbToast('Could not load integrated questions — check your connection.'); }); }
 /* Phase E — linear cases: ONE patient, stages revealed one at a time in a FIXED order (no branching). */
 function caseLoad(){ var st=_intState; if(st.casesLoading) return; st.casesLoading=true;
-  admApi('/qbank/cases').then(function(r){ st.casesLoading=false; st.cases=r.ok?(r.data.cases||[]):[]; st.casesLocked=!r.ok; if(location.hash.indexOf('mega')>=0 && !(QB&&QB.mega)) render(); })
+  intApi('/qbank/cases').then(function(r){ st.casesLoading=false; st.cases=r.ok?(r.data.cases||[]):[]; st.casesLocked=!r.ok; if(location.hash.indexOf('mega')>=0 && !(QB&&QB.mega)) render(); })
     .catch(function(){ st.casesLoading=false; st.cases=[]; st.casesLocked=true; }); }
 function caseCardHtml(){ var st=_intState;
   var head='<div class="mgq-t">🩺 Case Mode</div><div class="mgq-s">One patient, several linked questions. Each step opens after you answer the one before.</div>';
@@ -4358,7 +4560,7 @@ function intDoneHtml(){ var g=QB.integrated; if(!g) return '';
   return note?'<div class="card" style="cursor:default;margin-top:12px"><div class="qbsec-h">🔗 Integrated set</div>'+note+'</div>':''; }
 function intLogSession(){ try{ var g=QB.integrated, c=QB.caseRun; if(!g && !c) return;
   var body={ kind:(c?'case':'integrated'), requested:(g?g.requested:(c?c.n:0)), delivered:(g?g.delivered:(c?c.n:0)), shortfall:(g?g.shortfall:0), delivered_by_family:(g?g.by_family:{}), case_id:(c?c.id:null), answered:(QB.results||[]).length, correct:QB.correct||0 };
-  admApi('/qbank/integrated/log',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).catch(function(){}); }catch(e){} }
+  intApi('/qbank/integrated/log',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).catch(function(){}); }catch(e){} }
 /* Phase C — integration axis of the Reasoning Profile. Same evidence tiers as every other row (profileTier):
    thin data says "not enough evidence", never a claim. Reads only attempts on integrated items (_qmeta.integrated). */
 function integratedProfileBands(scope){ var s=qbStore(), meta=s._qmeta||{}, all={seen:0,correct:0}, byFam={};
@@ -5677,7 +5879,7 @@ function iwToolsHtml(){
 }
 function iwDownload(name, obj){ try{ var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}); var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(url); },5000); }catch(e){ mbToast('Download failed'); } }
 async function iwExport(btn, status){ var m=document.getElementById('iwToolMsg'); if(btn) btn.disabled=true;
-  try{ var r=await admApi('/admin/integrated/export?status='+encodeURIComponent(status)); if(btn) btn.disabled=false;
+  try{ var r=await intApi('/admin/integrated/export?status='+encodeURIComponent(status)); if(btn) btn.disabled=false;
     if(!r.ok){ if(m) m.textContent='Export failed: '+((r.data&&r.data.error)||'?'); return; }
     iwDownload('integrated-'+status.replace(/,/g,'-')+'-'+new Date().toISOString().slice(0,10)+'.json', r.data); if(m) m.textContent='Exported '+r.data.count+' item(s).';
   }catch(e){ if(btn) btn.disabled=false; if(m) m.textContent='Export failed: '+(e.message||e); } }
@@ -5701,13 +5903,13 @@ async function iwSaveCase(btn){ var ids=((document.getElementById('iwCaseIds')||
   var body={ ids:ids, title:((document.getElementById('iwCaseTitle')||{}).value||'').trim(), intro:((document.getElementById('iwCaseIntro')||{}).value||'').trim() };
   if(!body.title){ mbToast('Give the case a title.'); return; }
   if(btn) btn.disabled=true;
-  try{ var r=await admApi('/admin/integrated/case',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); if(btn) btn.disabled=false;
+  try{ var r=await intApi('/admin/integrated/case',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); if(btn) btn.disabled=false;
     if(m) m.textContent=r.ok?('Saved case '+r.data.case_id+' with '+r.data.stages+' steps.'):('Not saved: '+((r.data&&r.data.error)||'?')); if(r.ok) iwLoadCases(); }catch(e){ if(btn) btn.disabled=false; if(m) m.textContent='Failed: '+(e.message||e); } }
-async function iwLoadCases(btn){ var el=document.getElementById('iwCases'); try{ var r=await admApi('/admin/integrated/cases'); if(!el) return; if(!r.ok){ el.textContent='Could not load cases'; return; }
+async function iwLoadCases(btn){ var el=document.getElementById('iwCases'); try{ var r=await intApi('/admin/integrated/cases'); if(!el) return; if(!r.ok){ el.textContent='Could not load cases'; return; }
   var ok=(r.data.cases||[]).map(function(c){ return '<div style="padding:6px 0;border-bottom:1px solid var(--line)"><b>'+esc(c.title)+'</b> · '+c.n+' steps · <span class="sub">'+esc(c.case_id)+'</span> <button class="btn sm" onclick="iwDissolveCase(\''+esc(c.case_id)+'\')">Dissolve</button></div>'; }).join('');
   var bad=(r.data.rejected||[]).map(function(c){ return '<div style="padding:6px 0;color:#c0392b">⚠ '+esc(c.case_id)+': '+esc(c.reason)+' <button class="btn sm" onclick="iwDissolveCase(\''+esc(c.case_id)+'\')">Dissolve</button></div>'; }).join('');
   el.innerHTML=(ok||bad)?(ok+bad):'<span class="sub">No cases yet.</span>'; }catch(e){} }
-function iwDissolveCase(id){ mbConfirm('Dissolve this case?','The questions stay approved. Only the case grouping is removed.', async function(){ await admApi('/admin/integrated/case',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({case_id:id, dissolve:true})}); iwLoadCases(); }, {ok:'Dissolve', danger:true}); }
+function iwDissolveCase(id){ mbConfirm('Dissolve this case?','The questions stay approved. Only the case grouping is removed.', async function(){ await intApi('/admin/integrated/case',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({case_id:id, dissolve:true})}); iwLoadCases(); }, {ok:'Dissolve', danger:true}); }
 async function iwA8Load(btn){ var el=document.getElementById('iwA8'); if(btn) btn.disabled=true;
   try{ var r=await admApi('/admin/a8/candidates'); if(btn) btn.disabled=false; if(!el) return; if(!r.ok){ el.textContent='Could not load: '+((r.data&&r.data.error)||'?'); return; }
     el.innerHTML='<div class="sub">'+r.data.count+' served · '+r.data.eligible+' eligible</div>'+(r.data.items||[]).map(function(x){ var g=x.gate||{};
@@ -5715,7 +5917,7 @@ async function iwA8Load(btn){ var el=document.getElementById('iwA8'); if(btn) bt
         +(g.eligible&&!x.promoted_at?'<button class="btn sm primary" onclick="iwA8Promote(\''+x.id+'\')">Promote</button>':('<div class="sub">'+esc((g.reasons||[]).join(' · '))+'</div>'))+'</div>'; }).join('');
   }catch(e){ if(btn) btn.disabled=false; } }
 function iwA8Promote(id){ mbConfirm('Promote this retest to canonical?','It keeps its target. This is recorded with your name.', async function(){ var r=await admApi('/admin/a8/promote',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id})}); mbToast(r.ok?'Promoted':('Not promoted: '+(((r.data&&r.data.reasons)||[]).join('; ')||(r.data&&r.data.error)||'?'))); iwA8Load(); }, {ok:'Promote'}); }
-async function iwReadiness(){ try{ var r=await admApi('/admin/integrated/readiness'); var el=document.getElementById('iwReady'); if(!el)return;
+async function iwReadiness(){ try{ var r=await intApi('/admin/integrated/readiness'); var el=document.getElementById('iwReady'); if(!el)return;
   if(!r.ok){ el.textContent='Could not load readiness'; return; }
   var g=r.data.readiness||{}, by=r.data.by_status||{}, fam=g.byFamily||{};
   var famRows=Object.keys(fam).sort(function(a,b){return fam[b]-fam[a];}).map(function(k){return '<span class="iw-fam">'+esc(k)+' <b>'+fam[k]+'</b></span>';}).join('') || '<span class="sub">none yet</span>';
