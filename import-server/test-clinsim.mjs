@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import vm from "node:vm";
-import { isClinicalLevel, quoteInNote, buildCasePackPrompt, validateCasePack, packSize } from "./clinsim.mjs";
+import { isClinicalLevel, quoteInNote, buildCasePackPrompt, validateCasePack, packSize, onTopic, GENERAL_MAX } from "./clinsim.mjs";
 
 const require = createRequire(import.meta.url);
 const E = require("../er-sim.js");
@@ -56,7 +56,7 @@ test("quotes are checked against the note, ignoring case, punctuation and markdo
 
 test("the prompt carries the note and the grounding rule", () => {
   const p = buildCasePackPrompt(NOTE, "Severe malaria");
-  assert.match(p, /ONLY from the lecture note/);
+  assert.match(p, /"note" cases .*verbatim quote/s);
   assert.ok(p.includes("hypoglycaemia is common"));
 });
 
@@ -257,4 +257,39 @@ test("a mixed ward round hides the topic and mixes in another specialty", () => 
   const html = CS.page(["round"]);
   assert.match(html, /Mixed ward round/); assert.match(html, /Patient 1/);
   delete win.MB_SYNC;
+});
+
+test("packs mix note cases with a general case on the same topic", () => {
+  const g = goodPack();
+  const genOsce = Object.assign({}, g.osce[0], { basis: "general", src: "", title: "A child with fever and dark urine", topic_link: "severe malaria complications" });
+  const genOsce2 = Object.assign({}, genOsce, { title: "A second general station" });
+  const offTopic = Object.assign({}, g.quick[0], { basis: "general", src: "", title: "Chest pain on exertion", topic_link: "angina",
+    stem: "A man has chest pain.", teaching: [], mcqs: [], steps: g.quick[0].steps.map(s => Object.assign({}, s, { prompt: "p", reveal: "" })) });
+  const p = validateCasePack(Object.assign(g, { osce: [g.osce[0], genOsce, genOsce2], quick: [g.quick[0], offTopic] }), NOTE, "Severe malaria in children");
+  assert.equal(p.osce.length, 2, "one note station plus at most one general");
+  assert.equal(p.osce.filter(x => x.basis === "general").length, 1);
+  assert.equal(p.osce.find(x => x.basis === "general").src, "");
+  assert.equal(p.quick.length, 1, "a general case off the topic is dropped");
+  assert.equal(p.quick[0].basis, "note");
+  assert.equal(p.general, 1);
+  // a note with no clinical case of its own gets no general cases either
+  const onlyGeneral = validateCasePack({ osce: [genOsce], quick: [], daily: [] }, NOTE, "Severe malaria in children");
+  assert.equal(packSize(onlyGeneral), 0);
+  // a general case still has to pass the shape checks
+  assert.ok(onTopic({ title: "Fever in a child", teaching: ["Severe malaria kills"] }, "Severe Malaria"));
+  assert.ok(!onTopic({ title: "Chest pain" }, "Severe Malaria"));
+  assert.equal(GENERAL_MAX.osce, 1);
+  assert.match(buildCasePackPrompt(NOTE, "Severe malaria"), /"general" cases \(at most ONE per list\)/);
+});
+
+test("lecture cases show whether they came from the note or are general", () => {
+  const paeds = { id: "course_p", name: "Paediatrics" };
+  const q = (id, basis) => ({ id, basis, title: "Case " + id, patient: { name: "B", age: "1", sex: "male" }, stem: "s",
+    steps: [0, 1, 2].map(() => ({ prompt: "p", reveal: "", options: [{ t: "a", pts: 10, why: "" }, { t: "b", pts: 0, why: "" }, { t: "c", pts: -10, why: "" }] })), mcqs: [] });
+  sandbox.allTopics.push({ id: "t9", name: "Neonatal Jaundice", ready: true, note: "x", subject: paeds, extras: { clinsim: { osce: [], daily: [], quick: [q("a", "note"), q("b", "general")] } } });
+  win.MB_SYNC = { currentLevel: () => 500, status: () => ({ syncing: false }) };
+  CS.course("course_p");
+  const html = CS.page([]);
+  assert.match(html, /From your note/); assert.match(html, /General topic case/);
+  CS.course("all"); delete win.MB_SYNC; sandbox.allTopics.length = 0;
 });

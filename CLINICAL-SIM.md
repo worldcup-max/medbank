@@ -35,7 +35,10 @@ How matching works (`clinsim.js`): every case has `spec[]` (specialties) and `wo
 
 ## Cases from imported lectures
 - `import-server/clinsim.mjs` builds a case pack from the built note. `POST /import` starts it after responding (so imports are no slower) when the level is 400, 500 or 600, and saves it to `topics.extras.clinsim`. `POST /build-extra` with `kind:"clinsim"` builds it for older lectures (the "Build cases" button), and returns the cached pack when there is one.
-- The note drives the cases, like the tutor rule: every case must quote the note verbatim (`src`), and a case whose quote is not in the note is dropped. Non-clinical notes get no cases.
+- Each pack mixes two kinds of case (`basis`):
+  - **note** (about two thirds): built on what the note teaches. Each quotes the note verbatim (`src`), and a note case whose quote is not in the note is dropped.
+  - **general** (at most one per mode, so about a third): standard, widely taught content on the same topic that the note may leave out (Nigerian and WHO guidance, standard textbooks). It must name the topic (`onTopic`), and it is kept only when the note gave at least one case of its own, so non-clinical notes still get no cases.
+- The tab tags them "From your note" and "📘 General topic case". Packs built before this change count as note cases.
 - Generated cases are labelled as AI-made from the student's note.
 
 ## Free and paid

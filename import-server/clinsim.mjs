@@ -7,10 +7,17 @@
  *   quick : short branching cases, weighted scoring, then MCQs
  *   daily : progressive-clue diagnosis puzzles for Case of the Day
  *
- * The note drives the cases, the same rule as the tutor: every case must be about something
- * the note teaches, and each case carries a verbatim quote ("src") from the note that we check.
- * A case whose quote is not in the note is dropped, so the model cannot drift off the lecture.
+ * Two kinds of case in each pack ("basis"):
+ *   note    : most of the pack. Built on what the note teaches, with a verbatim quote ("src") that
+ *             we check; a note case whose quote is not in the note is dropped.
+ *   general : about a third. Standard, widely taught content on the same topic that the note may
+ *             leave out (Nigerian and WHO guidance, standard textbooks), so students also meet the
+ *             topic as examiners know it. At most one per mode, it must name the topic, and it is
+ *             only kept when the note itself gave at least one case (so non-clinical notes stay empty).
+ * The tab labels which is which, and both are labelled as made by AI.
  */
+export const GENERAL_MAX = { osce: 1, quick: 1, daily: 1 };   // general cases per mode; note cases fill the rest
+export const PACK_MAX = { osce: 3, quick: 3, daily: 4 };
 
 export const CLINICAL_LEVELS = [400, 500, 600];
 export function isClinicalLevel(level){ return CLINICAL_LEVELS.indexOf(Number(level)) >= 0; }
@@ -32,18 +39,20 @@ export function quoteInNote(quote, note){
 
 export function buildCasePackPrompt(note, topicName){
   return `You write clinical training cases for Nigerian medical students in their clinical years (400 to 600 level).
-Build them ONLY from the lecture note below. Topic: "${cap(topicName, 120)}".
+Build them from the lecture note below, plus a few on the same topic as it is generally taught. Topic: "${cap(topicName, 120)}".
 
 RULES
-1. Every case must be about a condition, presentation or management point that THIS NOTE teaches. Do not add diseases, drugs or doses the note does not mention. If the note is not clinical (for example pure anatomy or biochemistry with no patients), return {"osce":[],"quick":[],"daily":[]}.
-2. Each case has "src": a SHORT verbatim quote (6 to 14 words) copied EXACTLY from the note that the case is built on.
+1. Each case has "basis": "note" or "general".
+   - "note" cases (about two thirds of each list) are about a condition, presentation or management point that THIS NOTE teaches, with no diseases, drugs or doses the note does not mention. Each has "src": a SHORT verbatim quote (6 to 14 words) copied EXACTLY from the note that the case is built on.
+   - "general" cases (at most ONE per list) cover standard, widely taught content on this same topic that the note leaves out or only touches on: what a Nigerian examiner would expect, following current Nigerian and WHO guidance and standard textbooks. They stay strictly on the topic "${cap(topicName, 120)}", name it (or the condition) in "topic_link", and use "src":"".
+2. If the note is not clinical (for example pure anatomy or biochemistry with no patients), return {"osce":[],"quick":[],"daily":[]}: no general cases either.
 3. Patients are fictional Nigerians with Nigerian names, in a Nigerian hospital. Titles name the presenting complaint, NEVER the diagnosis.
 4. Keep every text field short and plain. Nigerian English is fine for what patients say.
 
 RETURN STRICT JSON with this shape:
 {
- "osce":[ up to 2 history-taking stations {
-   "title":"presenting complaint", "src":"...",
+ "osce":[ up to 3 history-taking stations {
+   "basis":"note or general", "topic_link":"", "title":"presenting complaint", "src":"...",
    "patient":{"name":"","age":"34","sex":"female"},
    "speaker":"who answers (the patient, or e.g. 'Musa's mother')",
    "persona":"one sentence on how they speak",
@@ -55,8 +64,8 @@ RETURN STRICT JSON with this shape:
    "plan":{"options":["4 next steps"],"correct":0},
    "teaching":["2 to 4 learning points from the note"]
  } ],
- "quick":[ up to 2 short cases {
-   "title":"presenting complaint", "src":"...",
+ "quick":[ up to 3 short cases {
+   "basis":"note or general", "topic_link":"", "title":"presenting complaint", "src":"...",
    "patient":{"name":"","age":"","sex":""},
    "stem":"2 to 3 sentences: who walks in and what you see",
    "steps":[ 3 to 4 decision points {
@@ -67,8 +76,8 @@ RETURN STRICT JSON with this shape:
    "mcqs":[ 3 {"stem":"","options":["4 options"],"ans":0,"why":"one sentence"} ],
    "teaching":["2 to 3 learning points"]
  } ],
- "daily":[ up to 3 {
-   "answer":"the diagnosis", "aliases":["other accepted names"], "src":"...",
+ "daily":[ up to 4 {
+   "basis":"note or general", "topic_link":"", "answer":"the diagnosis", "aliases":["other accepted names"], "src":"...",
    "clues":[ exactly 6 clues, vaguest first, most specific last ],
    "why":"one or two sentences tying the clues to the diagnosis"
  } ]
@@ -136,14 +145,40 @@ function cleanDaily(c, i){
            src: cap(c.src, 200), clues, why: cap(c.why, 300) };
 }
 
-/* Validate a model response against the note. Returns { osce, quick, daily, dropped } (possibly empty lists). */
-export function validateCasePack(obj, note){
+// does a general case stay on the topic? It must name the topic (or a word of it) somewhere in its text
+const STOP = new Set("with from that this have their into about over under after before what which when where while lecture topic notes note part introduction overview management".split(" "));
+export function onTopic(c, topicName){
+  const words = norm(topicName).split(" ").filter(w => w.length >= 4 && !STOP.has(w));
+  if(!words.length) return true;   // a topic name with nothing to match on: trust the prompt
+  const text = " " + norm(JSON.stringify(c)) + " ";
+  return words.some(w => text.indexOf(" " + w) >= 0);
+}
+
+/* Validate a model response. Note cases must quote the note; general cases must stay on the topic,
+ * are capped per mode and kept only when the note gave a case too.
+ * Returns { osce, quick, daily, dropped, general } (possibly empty lists). */
+export function validateCasePack(obj, note, topicName){
   const o = obj || {}; let dropped = 0;
-  const keep = (arr, fn) => (Array.isArray(arr) ? arr : []).slice(0, 3).map((c, i) => {
-    if(!c || !quoteInNote(c.src, note)){ dropped++; return null; }
-    const out = fn(c, i); if(!out) dropped++; return out;
-  }).filter(Boolean);
-  return { osce: keep(o.osce, cleanOsce), quick: keep(o.quick, cleanQuick), daily: keep(o.daily, cleanDaily), dropped };
+  const keep = (kind, fn) => {
+    let gen = 0;
+    const out = (Array.isArray(o[kind]) ? o[kind] : []).slice(0, PACK_MAX[kind] + 2).map((c, i) => {
+      if(!c){ dropped++; return null; }
+      const general = c.basis === "general";
+      if(general){ if(gen >= GENERAL_MAX[kind] || !onTopic(c, topicName)){ dropped++; return null; } }
+      else if(!quoteInNote(c.src, note)){ dropped++; return null; }
+      const x = fn(c, i); if(!x){ dropped++; return null; }
+      if(general){ gen++; x.basis = "general"; x.src = ""; x.topicLink = cap(c.topic_link, 120); } else x.basis = "note";
+      return x;
+    }).filter(Boolean);
+    const notes = out.filter(x => x.basis === "note"), gens = out.filter(x => x.basis === "general");
+    return notes.slice(0, PACK_MAX[kind] - Math.min(gens.length, 1)).concat(gens.slice(0, 1));
+  };
+  const p = { osce: keep("osce", cleanOsce), quick: keep("quick", cleanQuick), daily: keep("daily", cleanDaily) };
+  // a note that gave no case of its own (not clinical) gets no general cases either
+  if(!["osce", "quick", "daily"].some(k => p[k].some(x => x.basis === "note"))){ dropped += packSize(p); p.osce = []; p.quick = []; p.daily = []; }
+  p.dropped = dropped;
+  p.general = ["osce", "quick", "daily"].reduce((n, k) => n + p[k].filter(x => x.basis === "general").length, 0);
+  return p;
 }
 
 export function packSize(p){ return p ? (p.osce || []).length + (p.quick || []).length + (p.daily || []).length : 0; }

@@ -406,11 +406,11 @@ function extractJsonObject(raw){
  * Only for clinical-year students (400/500/600 level); the caller checks the level. */
 async function buildCasePack(note, topicName, model){
   if(!String(note||"").trim()) return null;
-  const gen = await generate({ model: model || EXTRAS_MODEL, prompt: buildCasePackPrompt(note, topicName), parts:[], images:[], max_tokens:9000, temperature:0.4, json:true });
+  const gen = await generate({ model: model || EXTRAS_MODEL, prompt: buildCasePackPrompt(note, topicName), parts:[], images:[], max_tokens:12000, temperature:0.4, json:true });
   const cand = extractJsonObject(gen.text || "");
   if(!cand) return null;
-  const pack = validateCasePack(cand, note);
-  if(pack.dropped) console.warn("[clinsim] dropped "+pack.dropped+" case(s) that did not match the note");
+  const pack = validateCasePack(cand, note, topicName);
+  if(pack.dropped) console.warn("[clinsim] dropped "+pack.dropped+" case(s) that did not match the note or the topic");
   delete pack.dropped;
   pack.built_at = new Date().toISOString();
   return pack;

@@ -81,7 +81,7 @@ function stationFromEr(c){
     spec:erTags(c).spec, words:erTags(c).words, diff:c.level||'' };
 }
 function stationFromPack(t, s){
-  return { id:t.id+'~'+s.id, source:'mine', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id, title:s.title, patient:s.patient, speaker:s.speaker, persona:s.persona,
+  return { id:t.id+'~'+s.id, source:'mine', basis:s.basis||'note', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id, title:s.title, patient:s.patient, speaker:s.speaker, persona:s.persona,
     opening:s.opening||'Good day, doctor.', background:s.background||'', history:s.history||[],
     dx:{ q:'What is your working diagnosis?', options:s.dx.options, correct:s.dx.correct },
     form:s.form&&s.form.options?{ q:s.form.q||FORM_Q, options:s.form.options, correct:s.form.correct }:null, courseName:t.subject&&t.subject.name,
@@ -162,8 +162,8 @@ function inCourse(item, course){
 function catalogue(){
   var out=[];
   erCases().forEach(function(c){ var tg=erTags(c); out.push({ kind:'er', id:c.id, title:c.title, spec:tg.spec, words:tg.words, diff:c.level||'', source:'builtin', tutorial:!!c.tutorial, href:'#/ersim/'+c.id }); });
-  stations('all').forEach(function(s){ out.push({ kind:'osce', id:s.id, title:s.title, spec:s.spec||[], words:s.words||'', diff:s.diff||'', source:s.source, topicId:s.topicId, courseId:s.courseId, act:"openOsce('"+s.id+"','timed')" }); });
-  quickCases('all').forEach(function(q){ out.push({ kind:'quick', id:q.id, title:q.title, spec:q.spec||[], words:q.words||'', diff:q.diff||'', source:q.source, topicId:q.topicId, courseId:q.courseId, act:"openQuick('"+q.id+"')" }); });
+  stations('all').forEach(function(s){ out.push({ kind:'osce', id:s.id, title:s.title, spec:s.spec||[], words:s.words||'', diff:s.diff||'', source:s.source, basis:s.basis, topicId:s.topicId, courseId:s.courseId, act:"openOsce('"+s.id+"','timed')" }); });
+  quickCases('all').forEach(function(q){ out.push({ kind:'quick', id:q.id, title:q.title, spec:q.spec||[], words:q.words||'', diff:q.diff||'', source:q.source, basis:q.basis, topicId:q.topicId, courseId:q.courseId, act:"openQuick('"+q.id+"')" }); });
   dailies('mine').forEach(function(d){ out.push({ kind:'daily', id:d.id, title:'Mystery patient', spec:[], words:'', source:'mine', topicId:d.topicId, courseId:d.courseId, href:'#/clinsim/daily/mine/'+d.id }); });
   return out;
 }
@@ -189,7 +189,7 @@ function caseCard(it, ctx, label){
   var k=KIND[it.kind], b=played(it), free=it.kind==='er'||it.kind==='daily'||isFreeAny(it), blind=ctx==='blind';
   var href=it.kind==='daily'&&blind ? it.href+'/blind' : it.href;
   var open=href?'href="'+e(href)+'"':'href="javascript:void 0" onclick="MB_CLINSIM.'+(free?e(actFor(it, ctx)):'locked()')+';return false"';
-  var tags=blind ? '' : (it.source==='mine'?'<span class="cs-tag">Your lecture</span>':(it.spec||[]).slice(0,1).map(function(sp){ return '<span class="cs-tag">'+e(sp)+'</span>'; }).join(''));
+  var tags=blind ? '' : (it.source==='mine'?'<span class="cs-tag">'+(it.basis==='general'?'📘 General topic case':'From your note')+'</span>':(it.spec||[]).slice(0,1).map(function(sp){ return '<span class="cs-tag">'+e(sp)+'</span>'; }).join(''));
   return '<a class="cs-card" style="text-decoration:none" '+open+'><div>'+(label?'<span class="cs-tag">'+e(label)+'</span>':'')+'<span class="cs-tag">'+k[0]+' '+k[1]+'</span>'+tags+(!free?'<span class="cs-tag lock">🔒</span>':'')+'</div>'+
     '<h3>'+e(it.title)+'</h3>'+(b!==null?'<div class="cs-best">Best: '+b+'%</div>':'<div class="cs-meta">Not played yet</div>')+'</a>';
 }
@@ -410,7 +410,7 @@ function hub(){
     h+='<div class="cs-card"><div class="cs-ic" aria-hidden="true">'+m.ic+'</div><h3>'+e(m.name)+'</h3><div class="cs-meta">'+e(m.blurb)+'</div><div class="cs-subs">'+
       m.subs.map(function(s){ return '<a class="cs-chip" href="#/clinsim/'+m.id+'/'+s[0]+'">'+e(s[1])+'</a>'; }).join('')+'</div></div>';
   });
-  h+='</div><p class="cs-note">All patients are fictional. This is practice, not a clinical guideline. Check doses and protocols against your hospital and national guidelines. Cases built from your lectures are made by AI from your note: check them against what your lecturer taught.</p>';
+  h+='</div><p class="cs-note">All patients are fictional. This is practice, not a clinical guideline. Check doses and protocols against your hospital and national guidelines. Cases built from your lectures are made by AI: most come from your note, and about a third (marked 📘 General topic case) cover the topic as it is generally taught. Check them against what your lecturer taught.</p>';
   return h;
 }
 var SEARCH='';
@@ -454,7 +454,7 @@ function osceList(sub){
   list.forEach(function(s){
     var free=isFree(all, s), b=best('osce', s.id), mode=sub==='practice'?'practice':'timed';
     h+='<button class="cs-card" onclick="MB_CLINSIM.'+(free?'openOsce(\''+e(s.id)+'\',\''+mode+'\')':'locked()')+'">'+
-      '<div>'+(s.source==='mine'?'<span class="cs-tag">'+e(s.courseName||'Your lecture')+'</span>':'<span class="cs-tag">'+e(s.area)+'</span>')+(!entitled()&&s.source==='builtin'?(free?'<span class="cs-tag free">Free this week</span>':'<span class="cs-tag lock">🔒 Subscribe</span>'):'')+'</div>'+
+      '<div>'+(s.source==='mine'?'<span class="cs-tag">'+e(s.courseName||'Your lecture')+'</span>'+(s.basis==='general'?'<span class="cs-tag">📘 General topic case</span>':''):'<span class="cs-tag">'+e(s.area)+'</span>')+(!entitled()&&s.source==='builtin'?(free?'<span class="cs-tag free">Free this week</span>':'<span class="cs-tag lock">🔒 Subscribe</span>'):'')+'</div>'+
       '<h3>'+e(s.title)+'</h3><div class="cs-meta">'+e(s.patient.name)+', '+e(s.patient.age)+' '+e(s.patient.sex)+(s.speaker&&!/patient/i.test(s.speaker)?' · you speak with '+e(s.speaker):'')+'</div>'+
       (b!==null?'<div class="cs-best">Best: '+b+'%</div>':'<div class="cs-meta">Not played yet</div>')+'</button>';
   });
@@ -601,7 +601,7 @@ function quickScore(q, picks){
 }
 function quickView(){
   var q=QS.q, back='<a href="#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'" class="cs-back">← Quick cases</a>';
-  var h=back+'<h1>'+e(q.title)+'</h1><div class="cs-meta">'+e(q.patient.name)+', '+e(q.patient.age)+' '+e(q.patient.sex)+(q.source==='mine'&&QS.ctx!=='blind'?' · from your lecture '+e(q.topicName):'')+'</div>'+ctxNote(QS.ctx)+
+  var h=back+'<h1>'+e(q.title)+'</h1><div class="cs-meta">'+e(q.patient.name)+', '+e(q.patient.age)+' '+e(q.patient.sex)+(q.source==='mine'&&QS.ctx!=='blind'?(q.basis==='general'?' · a general case on '+e(q.topicName)+', beyond your note':' · from your lecture '+e(q.topicName)):'')+'</div>'+ctxNote(QS.ctx)+
     '<div class="cs-panel"><p style="margin:0;line-height:1.55">'+e(q.stem)+'</p></div>';
   if(QS.phase==='steps'){
     q.steps.forEach(function(st,i){
