@@ -1,3 +1,5 @@
+_Status 2026-11-17: Gates 1, 3 and 4 BUILT (additive case_id/case_stage schema with branch fields reserved; linear runner with progressive reveal, per-step grading and a derived case score; serve log). Gate 0 is still enforced by the server (no cases served until the readiness gate is met). Gate 2 (clinician-validated case set) is content work in the Workbench case builder. Tests: qa/v19-integrated-serve.mjs E1–E9._
+
 # Case Mode (linear) — SCOPING PASS (analysis/architecture only; NO schema or UI designed; implementation HELD)
 
 _Grounded in V1.7-CONTRACT.md decisions D1–D5 and the Phase-5 line. This is the next BUILDABLE step above the integrated

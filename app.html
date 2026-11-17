@@ -1273,7 +1273,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.11.17g';   // bump this each release
+const APP_VERSION='2026.11.17h';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -3590,7 +3590,7 @@ function qbRecord(j){ var q=QB.items[QB.i], ok=(j===q.answer); if(ok)QB.correct+
   var tid = q._topicId || QB.topicId;
   var s=qbStore(); var qh = q._qh || (q._qh = qbHash(q.stem+'|'+(q.options||[]).join('|'))); QB._lastQh=qh;
   // snapshot the question so it can be re-served & analysed even after the topic is rebuilt
-  s._qmeta[qh] = { topicId:tid, target_id:(q.target_id||null), stem:q.stem, lead_in:q.lead_in||'', options:q.options, answer:q.answer, rationales:q.rationales||[], objective:(q.objective||q.teaching||''), teaching:(q.teaching||q.objective||''), trap:(q.trap_explanation||q.trap||''), trap_type:(q.trap_type||''), trap_explanation:(q.trap_explanation||q.trap||''), tag:(q.tag||q.subtopic||'General'), subtopic:(q.subtopic||q.tag||''), system:(q.system||''), cognitive_level:qbCogOf(q), difficulty:(q.difficulty||''), skill:(q.skill||''), src:(q.src||'') };
+  s._qmeta[qh] = { topicId:tid, target_id:(q.target_id||null), stem:q.stem, lead_in:q.lead_in||'', options:q.options, answer:q.answer, rationales:q.rationales||[], objective:(q.objective||q.teaching||''), teaching:(q.teaching||q.objective||''), trap:(q.trap_explanation||q.trap||''), trap_type:(q.trap_type||''), trap_explanation:(q.trap_explanation||q.trap||''), tag:(q.tag||q.subtopic||'General'), subtopic:(q.subtopic||q.tag||''), system:(q.system||''), cognitive_level:qbCogOf(q), difficulty:(q.difficulty||''), skill:(q.skill||''), src:(q.src||''), integrated:!!q._integrated, integration_family:(q.integration_family||''), case_id:(q.case_id||null) };
   s._attempts.push({ u:qbUid(), qh:qh, topicId:tid, chosen:j, answer:q.answer, ok:ok, ms:ms, mode:QB.mode, ts:Date.now() });
   if(s._attempts.length>4000) s._attempts=s._attempts.slice(s._attempts.length-4000);
   // legacy per-topic cache (keeps the old quick-accuracy line working with no recompute)
@@ -3606,6 +3606,7 @@ function qbFinalize(){ if(!QB||QB._saved) return; QB._saved=true; var s=qbStore(
   s._sessions.push({ sid:QB.sid||qbUid(), topicId:QB.topicId, mode:QB.mode, ts:Date.now(), n:(QB.endedEarly?ansN:QB.items.length), correct:QB.correct, ms:totMs, mistakes:!!QB.mistakes,
     session_type:stype, kind:stype, smart:!!QB.smart, exposure:QB.exposure||'', blueprint:(QB.blueprint?{ requested:QB.blueprint.requested, delivered:QB.blueprint.delivered, shortfall:QB.blueprint.shortfall }:null) });
   if(s._sessions.length>200) s._sessions=s._sessions.slice(s._sessions.length-200);
+  if(QB.integrated||QB.caseRun){ var _ls=s._sessions[s._sessions.length-1]; if(_ls){ _ls.integrated=QB.integrated||null; _ls.case_id=QB.caseRun?QB.caseRun.id:null; } intLogSession(); }   // Phase B requested-vs-delivered
   // smart-drill completion event (paired with smart_drill_started) — planned vs completed, minimal metadata
   if(QB.smart){ smartLog({t:'smart_drill_completed', sid:QB.sid, session_type:stype,
     dimension:(QB.smartFocus&&QB.smartFocus[0]?QB.smartFocus[0].type:''), reason:QB.smartWhy||'', mode:QB.mode,
@@ -3862,12 +3863,14 @@ function qbQuestionHtml(){
   var expo='';
   // point 5: never show topic/skill/level metadata BEFORE answering, in any Mega mode. Blind/Adaptive just get a flavour tag.
   if(QB.mega && !QB.answered && QB.exposure==='blind') expo='<div class="qbexpo">🙈 Blind — recognise it cold</div>';
+  else if(QB.exposure==='integrated' && !QB.answered) expo='<div class="qbexpo">🔗 Integrated — two areas decide this one</div>';
+  if(QB.caseRun) expo=caseBannerHtml()+expo;
   else if(QB.adaptive && !QB.answered) expo='<div class="qbexpo">🎚 Adaptive — difficulty auto-tunes to you</div>';
   // V1.5 — explainable Smart Drill: "Why this?" available without cluttering the stem
   var why=(QB.smart||QB.adaptive)?'<details class="qbwhy"><summary>ⓘ Why this drill?</summary><div>'+esc(QB.smartWhy||'Chosen from your recent performance.')+((QB.smartReasons&&QB.smartReasons.length)?'<ul>'+QB.smartReasons.slice(0,3).map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul>':'')+'</div></details>':'';
   var count=(QB.adaptive?QB.adaptTarget:QB.items.length);
   return '<div class="card" style="cursor:default">'
-    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:12px;color:var(--dim)">Question '+(QB.i+1)+' / '+count+(QB.smart?' · Smart Drill':(QB.mega?' · Mega':''))+'</span><span style="display:flex;align-items:center;gap:12px">'+(QB.mode==='timed'?'<span id="qbTimer" style="font-size:12px;color:var(--dim)"></span>':'')+'<button class="qbendbtn" onclick="qbEndEarly()" title="End now and grade what you\'ve answered so far">End &amp; grade</button></span></div>'+expo+why
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:12px;color:var(--dim)">Question '+(QB.i+1)+' / '+count+(QB.smart?' · Smart Drill':(QB.caseRun?' · Case':(QB.integrated?' · Integrated':(QB.mega?' · Mega':''))))+'</span><span style="display:flex;align-items:center;gap:12px">'+(QB.mode==='timed'?'<span id="qbTimer" style="font-size:12px;color:var(--dim)"></span>':'')+'<button class="qbendbtn" onclick="qbEndEarly()" title="End now and grade what you\'ve answered so far">End &amp; grade</button></span></div>'+expo+why
     +'<div style="font-size:15px;line-height:1.55;margin-bottom:'+(lead?'0':'14px')+'">'+esc(q.stem)+'</div>'+lead
     +'<div class="qbopts">'+opts+'</div>'+rationale+conf+nextBtn+'</div>';
 }
@@ -3906,7 +3909,9 @@ function qbDoneHtml(){
   var scope=(QB.topicId==='*'?'*':QB.topicId);
   var profileCard = QB.mega ? reasoningProfileHtml(scope) : '';
   var wasQuick = (QB.kind==='quick_exam');
-  var retry = QB.mega ? '<button class="btn primary" onclick="mgStart('+(wasQuick?'true':'false')+')">↻ '+(wasQuick?'New Quick Exam':'New Mega set')+'</button>'
+  var retry = QB.caseRun ? '<button class="btn primary" onclick="caseStart(\''+esc(QB.caseRun.id)+'\')">↻ Redo this case</button>'
+            : QB.integrated ? '<button class="btn primary" onclick="intStart()">↻ New integrated set</button>'
+            : QB.mega ? '<button class="btn primary" onclick="mgStart('+(wasQuick?'true':'false')+')">↻ '+(wasQuick?'New Quick Exam':'New Mega set')+'</button>'
             : QB.mistakes ? '<button class="btn primary" onclick="qbStartMistakes(\''+scope+'\')">↻ Retry these</button>'
                           : '<button class="btn primary" onclick="qbStart(\''+QB.topicId+'\',\''+QB.mode+'\')">↻ Retry</button>';
   // point 9 — Mega results break down THIS session by course / cognitive level / skill
@@ -3927,6 +3932,7 @@ function qbDoneHtml(){
     +'<div style="font-weight:700">'+c+' / '+n+' correct'+(totS?' · '+Math.floor(totS/60)+'m '+(totS%60)+'s':'')+' — '+msg+'</div>'+endedNote
     +'<div class="btnrow" style="justify-content:center;margin-top:14px;gap:10px;flex-wrap:wrap">'+retry+'<button class="btn" onclick="qbOpenDash(\''+scope+'\')">📊 My performance</button><button class="btn" onclick="qbExit()">Done</button></div></div>'
     +(typeof fixQueueHtml==='function'?fixQueueHtml(scope):'')   // V1.6 (flag-gated) — post-session "3 things to fix" prioritisation layer
+    +(QB.caseRun?caseDoneHtml():'')+(QB.integrated?intDoneHtml():'')
     +megaBreak+profileCard
     +(QB.adaptive?adaptRecapHtml():'')
     +((QB.mega||QB.smart)?smartNextCard(QB.topicId||'*'):'')
@@ -4077,7 +4083,7 @@ function reasoningProfileHtml(scope){ scope=scope||'*'; var agg=qbAgg(scope), ov
   var nar=profileNarrative(dims, baseline), insight;
   if(nar.ok){ insight='<div class="rp-insight">🧭 '+esc(nar.text)+'</div><div class="btnrow" style="margin-top:6px"><button class="btn sm primary" onclick="smartDrillDim(\''+nar._type+'\',\''+encodeURIComponent(nar._k)+'\',\''+scope+'\')">Drill this ▶</button></div>'; }
   else { insight='<div class="qbnodata">'+(nar.reason==='no clear pattern'?'No single area stands out clearly yet — your accuracy is fairly even.':'Not enough evidence for a cross-cutting insight yet — keep going.')+'</div>'; }
-  var combo='<div class="rp-row"><div class="rp-k">Integrated / cross-topic reasoning</div><div class="rp-v ins">Insufficient — needs Integrated Mode to measure how you combine areas.</div></div>';
+  var combo=integratedProfileHtml(scope, baseline);   // Phase C — evidence-gated integration axis
   return '<div class="card" style="cursor:default;margin-top:12px"><div class="qbsec-h">🧭 Reasoning profile <span class="sub" style="font-weight:400">(accumulated performance)</span></div>'
     +'<div class="rp-overall">Overall <b>'+baseline+'%</b> · '+overall.seen+' questions</div>'
     +'<div class="rp-sec">Clinical skills</div>'+(skillRows||'<div class="qbnodata">No skill data yet.</div>')
@@ -4278,6 +4284,94 @@ function mgDrillWeak(){ var agg=qbAgg('*'); if(!agg.cumulative.seen){ mbToast('A
   QB={ topicId:'*', mode:'tutor', items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:'blind', kind:'drill_weak' };
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
 }
+/* ===== Mega QBank Phase B — Integrated Mode · Phase E — linear Case Mode (FEATURES.INTEGRATED_MODE / CASE_MODE).
+   The SERVER decides availability: items/cases are served only when the one canonical readiness gate says ready
+   (≥100 approved · ≥8 families · ≥10/family · ≤30% top family). The client never recomputes readiness. Items keep their
+   ONE primary target_id; integration_family / case_id are metadata only. Runs on the normal QB runner — nothing frozen
+   (Smart Drill engine, A6/A7) is touched. ===== */
+function intOn(){ try{ var C=window.MEDBANK_CONFIG||{}; if(C.FEATURES&&C.FEATURES.INTEGRATED_MODE) return true; return localStorage.getItem('mbint')==='1'; }catch(e){ return false; } }
+function caseOn(){ try{ var C=window.MEDBANK_CONFIG||{}; if(C.FEATURES&&C.FEATURES.CASE_MODE) return true; return localStorage.getItem('mbcase')==='1'; }catch(e){ return false; } }
+window._intState = window._intState || { status:null, loading:false, err:null, cases:null, casesLoading:false };
+function intFamLabel(f){ var m={cardio:'Cardio',renal:'Renal',endocrine:'Endocrine',resp:'Respiratory',cardiac:'Cardiac',neuro:'Neuro',pregnancy:'Pregnancy',gi:'GI',hepatic:'Liver',pharm:'Pharmacology',infect:'Infection',immunology:'Immunology',onco:'Oncology',haem:'Haematology'};
+  return String(f||'').split('_').filter(Boolean).map(function(p){ return m[p]||(p.charAt(0).toUpperCase()+p.slice(1)); }).join(' + ')||'Integrated'; }
+function intLoadStatus(){ var st=_intState; if(st.loading) return; st.loading=true;
+  var again=function(){ if(location.hash.indexOf('mega')>=0 && !(QB&&QB.mega)) render(); };
+  admApi('/qbank/integrated/status').then(function(r){ st.loading=false; st.status=r.ok?r.data:null; st.err=r.ok?null:((r.data&&r.data.error)||'unavailable'); st.errAt=Date.now(); again(); })
+    .catch(function(e){ st.loading=false; st.errAt=Date.now();
+      // config/auth may not be ready on the very first render — retry a few times instead of caching the failure
+      if((st.tries=(st.tries||0)+1)<4){ setTimeout(function(){ intLoadStatus(); },1200); return; }
+      st.err=(e&&e.message)||'offline'; again(); }); }
+function intMaybeRetry(){ var st=_intState; if(st.err && st.errAt && Date.now()-st.errAt>20000){ st.err=null; st.status=null; st.tries=0; setTimeout(intLoadStatus,0); } }
+function intLockedHtml(st){ var b=(st&&st.blockers)||[];
+  return '<div class="qbnodata" style="margin-top:6px">🔒 Locked until the integrated bank is ready'+(b.length?(' — '+b.map(esc).join(' · ')):'')+'.</div>'; }
+function intCardHtml(){ var st=_intState; intMaybeRetry();
+  if(!st.status && !st.err && !st.loading) setTimeout(intLoadStatus,0);
+  var head='<div><div class="mgq-t">🔗 Integrated questions</div><div class="mgq-s">Questions where two areas decide the answer together, e.g. heart + kidney, pregnancy + heart</div></div>';
+  if(st.err) return '<div class="card mgquick mgint" style="cursor:default;display:block">'+head+'<div class="qbnodata" style="margin-top:6px">Sign in and go online to use Integrated questions.</div></div>';
+  if(!st.status) return '<div class="card mgquick mgint" style="cursor:default;display:block">'+head+'<div class="qbnodata" style="margin-top:6px">Checking…</div></div>';
+  if(st.status.integrated_mode!=='available') return '<div class="card mgquick mgint" style="cursor:default;display:block">'+head+intLockedHtml(st.status)+'</div>';
+  var fams=Object.keys(st.status.families||{}).sort();
+  return '<div class="card mgquick mgint" style="cursor:default"><div><div class="mgq-t">🔗 Integrated questions</div><div class="mgq-s">'+fams.length+' pairings · '+st.status.total+' questions · uses your Mode and How many settings below</div></div><button class="btn primary" onclick="intStart()">Start ▶</button></div>'; }
+function intToItem(it){ var fam=intFamLabel(it.integration_family);
+  return Object.assign({}, it, { _topicId:'_integrated', _topicName:fam, _subject:'Integrated · '+fam, _integrated:true, tag:fam, subtopic:(it.primary_topic||fam), system:fam }); }
+function intStart(){ var cfg=_mgCfg, n=Math.max(1,Math.min(50,cfg.count||20));
+  mbToast('Loading integrated questions…');
+  admApi('/qbank/integrated/items?n='+n).then(function(r){
+    if(!r.ok){ if(r.data&&r.data.integrated_mode==='locked'){ _intState.status=null; intLoadStatus(); } mbToast((r.data&&r.data.blockers)?'Integrated questions are locked right now.':'Could not load integrated questions.'); return; }
+    var items=(r.data.items||[]).map(intToItem); if(!items.length){ mbToast('No integrated questions available yet.'); return; }
+    QB={ topicId:'*', mode:cfg.mode||'timed', items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:'integrated', kind:'integrated',
+      integrated:{ requested:r.data.requested, delivered:r.data.delivered, shortfall:r.data.shortfall, by_family:r.data.delivered_by_family||{} } };
+    _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
+  }).catch(function(){ mbToast('Could not load integrated questions — check your connection.'); }); }
+/* Phase E — linear cases: ONE patient, stages revealed one at a time in a FIXED order (no branching). */
+function caseLoad(){ var st=_intState; if(st.casesLoading) return; st.casesLoading=true;
+  admApi('/qbank/cases').then(function(r){ st.casesLoading=false; st.cases=r.ok?(r.data.cases||[]):[]; st.casesLocked=!r.ok; if(location.hash.indexOf('mega')>=0 && !(QB&&QB.mega)) render(); })
+    .catch(function(){ st.casesLoading=false; st.cases=[]; st.casesLocked=true; }); }
+function caseCardHtml(){ var st=_intState;
+  var head='<div class="mgq-t">🩺 Case Mode</div><div class="mgq-s">One patient, several linked questions. Each step opens after you answer the one before.</div>';
+  if(!st.status && !st.err){ if(!st.loading) setTimeout(intLoadStatus,0); return '<div class="card mgquick" style="cursor:default;display:block">'+head+'<div class="qbnodata" style="margin-top:6px">Checking…</div></div>'; }
+  if(st.err) return '<div class="card mgquick" style="cursor:default;display:block">'+head+'<div class="qbnodata" style="margin-top:6px">Sign in and go online to use Case Mode.</div></div>';
+  if(st.status.integrated_mode!=='available') return '<div class="card mgquick" style="cursor:default;display:block">'+head+intLockedHtml(st.status)+'</div>';
+  if(st.cases==null){ setTimeout(caseLoad,0); return '<div class="card mgquick" style="cursor:default;display:block">'+head+'<div class="qbnodata" style="margin-top:6px">Loading cases…</div></div>'; }
+  if(!st.cases.length) return '<div class="card mgquick" style="cursor:default;display:block">'+head+'<div class="qbnodata" style="margin-top:6px">No cases published yet.</div></div>';
+  var rows=st.cases.map(function(c){ return '<div class="mgcase-row"><div><b>'+esc(c.title)+'</b><div class="mgq-s">'+c.n+' steps · '+(c.families||[]).map(intFamLabel).map(esc).join(', ')+'</div></div><button class="btn sm primary" onclick="caseStart(\''+esc(c.case_id)+'\')">Start ▶</button></div>'; }).join('');
+  return '<div class="card mgquick" style="cursor:default;display:block">'+head+'<div class="mgcase-list">'+rows+'</div></div>'; }
+function caseStart(id){ var c=((_intState.cases)||[]).filter(function(x){ return x.case_id===id; })[0]; if(!c){ mbToast('Case not found.'); return; }
+  var items=c.stages.map(function(s){ return Object.assign(intToItem(s), { _caseStage:s.case_stage }); });   // FIXED order — never shuffled
+  QB={ topicId:'*', mode:(_mgCfg.mode||'tutor'), items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:'case', kind:'case',
+    caseRun:{ id:c.case_id, title:c.title, intro:c.intro||'', n:c.n } };
+  _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render(); }
+function caseBannerHtml(){ var c=QB&&QB.caseRun; if(!c) return '';
+  var intro=c.intro?(QB.i===0?'<div class="case-intro">'+esc(c.intro)+'</div>':'<details class="case-intro-d"><summary>Patient so far</summary><div class="case-intro">'+esc(c.intro)+'</div></details>'):'';
+  var dots=''; for(var k=0;k<c.n;k++){ var r=(QB.results||[]).filter(function(x){return x.i===k;})[0]; dots+='<span class="case-dot'+(k===QB.i?' cur':'')+(r?(r.ok?' ok':' no'):'')+'"></span>'; }
+  return '<div class="case-hd"><div class="case-t">🩺 '+esc(c.title)+'</div><div class="case-st">Step '+(QB.i+1)+' of '+c.n+' <span class="case-dots">'+dots+'</span></div>'+intro+'</div>'; }
+/* case score: each step graded exactly like a standalone question; the case score is a derived summary */
+function caseScoreOf(items, results){ var by=(items||[]).map(function(_,i){ var r=(results||[]).filter(function(x){return x.i===i;})[0]; return { stage:i+1, answered:!!r, ok:!!(r&&r.ok) }; });
+  var ans=by.filter(function(s){return s.answered;}).length, cor=by.filter(function(s){return s.ok;}).length, fm=by.filter(function(s){return s.answered&&!s.ok;})[0];
+  return { n:by.length, answered:ans, correct:cor, pct:ans?Math.round(cor/ans*100):0, byStage:by, first_miss_stage:fm?fm.stage:null }; }
+function caseDoneHtml(){ var c=QB.caseRun; if(!c) return ''; var sc=caseScoreOf(QB.items, QB.results);
+  var steps=sc.byStage.map(function(s){ return '<span class="case-step '+(s.answered?(s.ok?'ok':'no'):'')+'">'+s.stage+(s.answered?(s.ok?' ✓':' ✗'):' –')+'</span>'; }).join('');
+  return '<div class="card" style="cursor:default;margin-top:12px"><div class="qbsec-h">🩺 '+esc(c.title)+'</div><div class="case-steps">'+steps+'</div>'
+    +'<div class="qbnodata" style="margin-top:6px">'+(sc.first_miss_stage?('Your first miss was step '+sc.first_miss_stage+'. Later steps build on it, so start your review there.'):'You got every step right.')+'</div></div>'; }
+function intDoneHtml(){ var g=QB.integrated; if(!g) return '';
+  var note=g.shortfall>0?('<div class="qbnodata" style="margin-top:6px">You asked for '+g.requested+' but only '+g.delivered+' integrated questions were available. Nothing else was added to fill the gap.</div>'):'';
+  return note?'<div class="card" style="cursor:default;margin-top:12px"><div class="qbsec-h">🔗 Integrated set</div>'+note+'</div>':''; }
+function intLogSession(){ try{ var g=QB.integrated, c=QB.caseRun; if(!g && !c) return;
+  var body={ kind:(c?'case':'integrated'), requested:(g?g.requested:(c?c.n:0)), delivered:(g?g.delivered:(c?c.n:0)), shortfall:(g?g.shortfall:0), delivered_by_family:(g?g.by_family:{}), case_id:(c?c.id:null), answered:(QB.results||[]).length, correct:QB.correct||0 };
+  admApi('/qbank/integrated/log',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).catch(function(){}); }catch(e){} }
+/* Phase C — integration axis of the Reasoning Profile. Same evidence tiers as every other row (profileTier):
+   thin data says "not enough evidence", never a claim. Reads only attempts on integrated items (_qmeta.integrated). */
+function integratedProfileBands(scope){ var s=qbStore(), meta=s._qmeta||{}, all={seen:0,correct:0}, byFam={};
+  (s._attempts||[]).forEach(function(a){ if(scope && scope!=='*' && a.topicId!==scope) return; var mt=meta[a.qh]; if(!mt||!mt.integrated) return;
+    all.seen++; if(a.ok) all.correct++; var f=mt.integration_family||'?'; var b=byFam[f]||(byFam[f]={seen:0,correct:0}); b.seen++; if(a.ok) b.correct++; });
+  return { all:all, byFam:byFam }; }
+function integratedProfileHtml(scope, baseline){ var ip=integratedProfileBands(scope);
+  if(!ip.all.seen) return '<div class="rp-row"><div class="rp-k">Integrated / cross-topic reasoning</div><div class="rp-v ins">No integrated questions answered yet'+(intOn()?' — try 🔗 Integrated questions in the Mega Q-bank.':'.')+'</div></div>';
+  var rows=rpRow('Integrated questions (all)', ip.all, baseline);
+  Object.keys(ip.byFam).sort().forEach(function(f){ rows+=rpRow(intFamLabel(f), ip.byFam[f], baseline); });
+  var t=profileTier(ip.all.seen), p=qbPct(ip.all);
+  if((t==='measured'||t==='confident') && baseline-p>=RP_SEP && intOn()) rows+='<div class="btnrow" style="margin-top:6px"><button class="btn sm primary" onclick="go(\'mega\');setTimeout(intStart,60)">Practise integrated ▶</button></div>';
+  return rows; }
 function mgChipRow(label, opts, cur, kind){ return '<div class="qbcfg"><div class="qbcfg-l">'+label+'</div><div class="qbcfg-c">'+opts.map(function(o){
     return '<button class="qbchipbtn'+(cur===o.v?' on':'')+'" onclick="mgSet(\''+kind+'\',\''+o.v+'\')">'+esc(o.t)+'</button>';
   }).join('')+'</div></div>'; }
@@ -4860,7 +4954,7 @@ function pageMega(){
   if(QB && (QB.mega||QB.mistakes)) return '<div class="wrap">'+(QB.done?qbDoneHtml():qbQuestionHtml())+'</div>';
   var pools=mgPools();
   var head='<h1>🧠 Mega Q-bank</h1><p class="sub">Test whether you can use your knowledge when you don\'t know what\'s coming. Pulls questions across every topic you\'ve built.</p>';
-  if(!pools.length) return '<div class="wrap">'+head+'<div class="empty">No Q-banks built yet. Open any topic → 🧠 Q-bank → and it builds one. Come back once you have a couple.</div></div>';
+  if(!pools.length) return '<div class="wrap">'+head+(intOn()?intCardHtml():'')+(caseOn()?caseCardHtml():'')+'<div class="empty">No Q-banks built yet. Open any topic → 🧠 Q-bank → and it builds one. Come back once you have a couple.</div></div>';
   var cfg=_mgCfg;
   // knowledge pool — subjects
   var subjChips='<div class="qbcfg"><div class="qbcfg-l">🗂 Courses</div><div class="qbcfg-c">'
@@ -4902,7 +4996,8 @@ function pageMega(){
   var poolInfo='<div class="qbnodata" style="margin-top:6px">'+(needPick?'No topics ticked yet — tap the ones you want above, or switch back to “All topics”.':(n+' question'+(n===1?'':'s')+' in your current selection.'))+'</div>';
   var bpPanel=(cfg.exposure==='blueprint')?mgBlueprintPanel():'';
   var custom='<div class="mgcustom">Customize your session</div><div class="card" style="cursor:default">'+subjChips+chooseBtn+'<div class="mgdiv"></div>'+expoRow+expoNote+(cfg.exposure==='blueprint'?bpPanel:(modeRow+lvlRow+skillRow))+cntRow+startBtn+poolInfo+'</div>';
-  return '<div class="wrap">'+head+quick+smart+custom+'</div>';
+  var integ=intOn()?intCardHtml():'', cases=caseOn()?caseCardHtml():'';   // Phase B / E (flag-gated; server-gated on readiness)
+  return '<div class="wrap">'+head+quick+smart+integ+cases+custom+'</div>';
 }
 
 /* ===== #4/#5 AI Podcast — two-host episode + character voices + Raise Hand ===== */
@@ -5557,9 +5652,68 @@ function pageIntegratedWorkbench(){ if(!window.IS_ADMIN) return pageHome();
       +'<button class="btn primary" onclick="iwTransform(this)">Transform →</button>'
       +'<button class="btn" onclick="iwMine(this)">Mine a batch (10)</button></div>'
       +'<div id="iwSeedMsg" class="sub" style="margin-top:6px"></div></div>'
+    +iwToolsHtml()
     +'<h2 style="margin-top:6px">Pending review <span class="sub" style="font-weight:400">(ai_reviewed + needs_edit)</span></h2>'
     +'<div id="iwPending"><p class="sub">Loading…</p></div>';
 }
+/* ---- Workbench tools for Phase A/D/E: export the queue, import authored drafts, assemble cases, A8 promotion ---- */
+function iwToolsHtml(){
+  return '<div class="card" style="cursor:default;margin-bottom:12px"><div class="qbsec-h">Queue export / authored import</div>'
+    +'<div class="sub" style="margin-bottom:6px">Export downloads every pending item as JSON (for an offline first-pass review). Import sends authored drafts through the same R1–R4 checks; they land here as pending, never approved.</div>'
+    +'<div class="btnrow" style="gap:8px;flex-wrap:wrap"><button class="btn" onclick="iwExport(this,\'ai_reviewed,needs_edit\')">⬇ Export pending</button><button class="btn" onclick="iwExport(this,\'approved\')">⬇ Export approved</button>'
+    +'<label class="btn" style="cursor:pointer">⬆ Import authored JSON<input type="file" accept=".json,application/json" style="display:none" onchange="iwImportFile(this)"></label></div>'
+    +'<div id="iwToolMsg" class="sub" style="margin-top:6px"></div></div>'
+    +'<div class="card" style="cursor:default;margin-bottom:12px"><div class="qbsec-h">🩺 Case builder <span class="sub" style="font-weight:400">(linear Case Mode)</span></div>'
+    +'<div class="sub" style="margin-bottom:6px">Pick 2–6 approved items in stage order. Only case metadata is written; content and target_id are untouched. A later step\'s answer must not appear in an earlier step.</div>'
+    +'<input id="iwCaseTitle" class="sbox" style="width:100%;margin-bottom:6px" placeholder="Case title, e.g. 34-year-old in labour with breathlessness">'
+    +'<textarea id="iwCaseIntro" class="sbox" style="width:100%;min-height:54px;margin-bottom:6px" placeholder="Opening patient story shown before step 1"></textarea>'
+    +'<textarea id="iwCaseIds" class="sbox" style="width:100%;min-height:44px;margin-bottom:6px" placeholder="approved item ids, one per line, in stage order"></textarea>'
+    +'<div class="btnrow" style="gap:8px;flex-wrap:wrap"><button class="btn" onclick="iwLoadApproved(this)">Load approved items</button><button class="btn primary" onclick="iwSaveCase(this)">Save case</button><button class="btn" onclick="iwLoadCases(this)">Show cases</button></div>'
+    +'<div id="iwCaseMsg" class="sub" style="margin-top:6px"></div><div id="iwApproved" style="margin-top:6px;max-height:320px;overflow:auto"></div><div id="iwCases" style="margin-top:6px"></div></div>'
+    +'<div class="card" style="cursor:default;margin-bottom:12px"><div class="qbsec-h">A8 — promote retests to canonical <span class="sub" style="font-weight:400">(human only)</span></div>'
+    +'<div class="sub" style="margin-bottom:6px">Served A7 retests that have earned promotion. Target is always preserved. Needs answer data from FEATURES.LEARNING_EVENTS.</div>'
+    +'<button class="btn" onclick="iwA8Load(this)">Load candidates</button><div id="iwA8" style="margin-top:6px"></div></div>';
+}
+function iwDownload(name, obj){ try{ var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}); var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(url); },5000); }catch(e){ mbToast('Download failed'); } }
+async function iwExport(btn, status){ var m=document.getElementById('iwToolMsg'); if(btn) btn.disabled=true;
+  try{ var r=await admApi('/admin/integrated/export?status='+encodeURIComponent(status)); if(btn) btn.disabled=false;
+    if(!r.ok){ if(m) m.textContent='Export failed: '+((r.data&&r.data.error)||'?'); return; }
+    iwDownload('integrated-'+status.replace(/,/g,'-')+'-'+new Date().toISOString().slice(0,10)+'.json', r.data); if(m) m.textContent='Exported '+r.data.count+' item(s).';
+  }catch(e){ if(btn) btn.disabled=false; if(m) m.textContent='Export failed: '+(e.message||e); } }
+function iwImportFile(inp){ var f=inp&&inp.files&&inp.files[0]; if(!f) return; var m=document.getElementById('iwToolMsg');
+  var rd=new FileReader(); rd.onload=async function(){ var data; try{ data=JSON.parse(rd.result); }catch(e){ if(m) m.textContent='Not valid JSON.'; return; }
+    var items=Array.isArray(data)?data:(data.items||[]); if(!items.length){ if(m) m.textContent='No items in the file.'; return; }
+    var done=0, rev=0, rej=0, skip=0;
+    for(var i=0;i<items.length;i+=5){ if(m) m.textContent='Checking '+Math.min(i+5,items.length)+' of '+items.length+'… (each item runs the full review, this takes a while)';
+      try{ var r=await admApi('/admin/integrated/import-authored',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:items.slice(i,i+5)})});
+        if(r.ok){ (r.data.results||[]).forEach(function(x){ done++; if(x.review_status==='ai_reviewed') rev++; else if(x.review_status==='rejected') rej++; else skip++; }); } }catch(e){} }
+    if(m) m.textContent='Imported '+done+': '+rev+' pending review · '+rej+' rejected by the checks · '+skip+' skipped.'; inp.value=''; iwReadiness(); iwFetchPending(); };
+  rd.readAsText(f); }
+async function iwLoadApproved(btn){ var el=document.getElementById('iwApproved'); if(btn) btn.disabled=true;
+  try{ var r=await admApi('/admin/integrated/export?status=approved'); if(btn) btn.disabled=false; if(!el) return;
+    if(!r.ok){ el.textContent='Could not load'; return; }
+    var items=(r.data.items||[]).filter(function(x){ return !x.case_id; });
+    el.innerHTML=items.map(function(it){ var tc=it.transformed_content||{}; return '<div class="iw-pick" style="padding:6px 0;border-bottom:1px solid var(--line);font-size:12.5px"><button class="btn sm" onclick="iwAddCaseId(\''+it.id+'\')">+ add</button> <b>'+esc(it.integration_family||'?')+'</b> · '+esc(String(tc.stem||'').slice(0,140))+'… <span class="sub">'+esc(it.id.slice(0,8))+'</span></div>'; }).join('')||'<span class="sub">No uncased approved items.</span>';
+  }catch(e){ if(btn) btn.disabled=false; } }
+function iwAddCaseId(id){ var t=document.getElementById('iwCaseIds'); if(!t) return; var v=t.value.trim(); if((v.split(/\s+/)).indexOf(id)>=0) return; t.value=(v?v+'\n':'')+id; }
+async function iwSaveCase(btn){ var ids=((document.getElementById('iwCaseIds')||{}).value||'').split(/\s+/).filter(Boolean), m=document.getElementById('iwCaseMsg');
+  var body={ ids:ids, title:((document.getElementById('iwCaseTitle')||{}).value||'').trim(), intro:((document.getElementById('iwCaseIntro')||{}).value||'').trim() };
+  if(!body.title){ mbToast('Give the case a title.'); return; }
+  if(btn) btn.disabled=true;
+  try{ var r=await admApi('/admin/integrated/case',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); if(btn) btn.disabled=false;
+    if(m) m.textContent=r.ok?('Saved case '+r.data.case_id+' with '+r.data.stages+' steps.'):('Not saved: '+((r.data&&r.data.error)||'?')); if(r.ok) iwLoadCases(); }catch(e){ if(btn) btn.disabled=false; if(m) m.textContent='Failed: '+(e.message||e); } }
+async function iwLoadCases(btn){ var el=document.getElementById('iwCases'); try{ var r=await admApi('/admin/integrated/cases'); if(!el) return; if(!r.ok){ el.textContent='Could not load cases'; return; }
+  var ok=(r.data.cases||[]).map(function(c){ return '<div style="padding:6px 0;border-bottom:1px solid var(--line)"><b>'+esc(c.title)+'</b> · '+c.n+' steps · <span class="sub">'+esc(c.case_id)+'</span> <button class="btn sm" onclick="iwDissolveCase(\''+esc(c.case_id)+'\')">Dissolve</button></div>'; }).join('');
+  var bad=(r.data.rejected||[]).map(function(c){ return '<div style="padding:6px 0;color:#c0392b">⚠ '+esc(c.case_id)+': '+esc(c.reason)+' <button class="btn sm" onclick="iwDissolveCase(\''+esc(c.case_id)+'\')">Dissolve</button></div>'; }).join('');
+  el.innerHTML=(ok||bad)?(ok+bad):'<span class="sub">No cases yet.</span>'; }catch(e){} }
+function iwDissolveCase(id){ mbConfirm('Dissolve this case?','The questions stay approved. Only the case grouping is removed.', async function(){ await admApi('/admin/integrated/case',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({case_id:id, dissolve:true})}); iwLoadCases(); }, {ok:'Dissolve', danger:true}); }
+async function iwA8Load(btn){ var el=document.getElementById('iwA8'); if(btn) btn.disabled=true;
+  try{ var r=await admApi('/admin/a8/candidates'); if(btn) btn.disabled=false; if(!el) return; if(!r.ok){ el.textContent='Could not load: '+((r.data&&r.data.error)||'?'); return; }
+    el.innerHTML='<div class="sub">'+r.data.count+' served · '+r.data.eligible+' eligible</div>'+(r.data.items||[]).map(function(x){ var g=x.gate||{};
+      return '<div style="padding:6px 0;border-bottom:1px solid var(--line);font-size:12.5px"><b>'+esc(x.target_id)+'</b> · served '+(x.served_count||0)+(x.promoted_at?' · ✅ promoted':'')+'<div>'+esc(String(x.stem||'').slice(0,160))+'</div>'
+        +(g.eligible&&!x.promoted_at?'<button class="btn sm primary" onclick="iwA8Promote(\''+x.id+'\')">Promote</button>':('<div class="sub">'+esc((g.reasons||[]).join(' · '))+'</div>'))+'</div>'; }).join('');
+  }catch(e){ if(btn) btn.disabled=false; } }
+function iwA8Promote(id){ mbConfirm('Promote this retest to canonical?','It keeps its target. This is recorded with your name.', async function(){ var r=await admApi('/admin/a8/promote',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id})}); mbToast(r.ok?'Promoted':('Not promoted: '+(((r.data&&r.data.reasons)||[]).join('; ')||(r.data&&r.data.error)||'?'))); iwA8Load(); }, {ok:'Promote'}); }
 async function iwReadiness(){ try{ var r=await admApi('/admin/integrated/readiness'); var el=document.getElementById('iwReady'); if(!el)return;
   if(!r.ok){ el.textContent='Could not load readiness'; return; }
   var g=r.data.readiness||{}, by=r.data.by_status||{}, fam=g.byFamily||{};
@@ -5567,7 +5721,7 @@ async function iwReadiness(){ try{ var r=await admApi('/admin/integrated/readine
   var checks=g.checks||{};
   el.innerHTML='<div class="qbsec-h">Readiness — <b style="color:'+(g.ready?'#0a9d55':'#c0392b')+'">'+(g.ready?'READY':'NOT READY')+'</b> · approved '+(g.total||0)+'/'+((g.gate&&g.gate.minApproved)||100)+'</div>'
     +'<div class="sub" style="margin:4px 0">status: approved '+(by.approved||0)+' · pending(ai) '+(by.ai_reviewed||0)+' · needs_edit '+(by.needs_edit||0)+' · rejected '+(by.rejected||0)+'</div>'
-    +'<div class="iw-checks">'+['enough_total','enough_families','families_over_min_size','no_family_dominates'].map(function(c){return '<span class="'+(checks[c]?'ok':'no')+'">'+(checks[c]?'✓':'✗')+' '+c+'</span>';}).join(' ')+'</div>'
+    +'<div class="iw-checks">'+['enough_total','enough_families','every_family_full','every_pair_ready','no_family_dominates'].map(function(c){return '<span class="'+(checks[c]?'ok':'no')+'">'+(checks[c]?'✓':'✗')+' '+c+'</span>';}).join(' ')+'</div>'
     +'<div style="margin-top:6px">'+famRows+'</div>';
 }catch(e){} }
 async function iwFetchPending(){ try{ var r=await admApi('/admin/integrated/pending'); var el=document.getElementById('iwPending'); if(!el)return;
@@ -8599,6 +8753,20 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .mgtsub{flex-basis:100%;font-size:11px;font-weight:800;color:var(--dim);text-transform:uppercase;letter-spacing:.4px;margin-top:6px}
 @media(max-width:560px){.mgtopics{margin-left:0}.qbcfg{flex-direction:column;gap:4px}.qbcfg-l{min-width:0}.mg .expo{margin-left:0}}
 .mgquick{display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(0deg,var(--panel2),var(--panel2))}
+/* Phase B/E — Integrated questions + Case Mode */
+.mgcase-list{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.mgcase-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.case-hd{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:12px;background:var(--panel2)}
+.case-t{font-weight:800;font-size:14px}
+.case-st{font-size:12px;color:var(--dim);margin-top:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.case-dots{display:inline-flex;gap:4px}
+.case-dot{width:8px;height:8px;border-radius:50%;background:var(--line);display:inline-block}
+.case-dot.cur{background:var(--brand)}.case-dot.ok{background:#0d9488}.case-dot.no{background:#e2574b}
+.case-intro{font-size:13.5px;line-height:1.5;margin-top:8px}
+.case-intro-d summary{font-size:12px;color:var(--dim);cursor:pointer;margin-top:6px}
+.case-steps{display:flex;gap:6px;flex-wrap:wrap}
+.case-step{padding:4px 10px;border-radius:999px;border:1px solid var(--line);font-size:12.5px;font-weight:700}
+.case-step.ok{color:#0d9488;border-color:#0d9488}.case-step.no{color:#e2574b;border-color:#e2574b}
 .mgq-t{font-weight:800;font-size:16px}
 .mgq-s{font-size:12px;color:var(--dim);margin-top:2px}
 .mgweak .mgw-h{font-weight:800;margin-bottom:8px}
