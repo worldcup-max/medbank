@@ -79,6 +79,9 @@
       else if(t==='▶') b.setAttribute('aria-label','Play');
       else if(!t && b.title) b.setAttribute('aria-label',b.title);
     }
+    // Q-bank filter chips (Practice / Level / How many / Courses …) say which one is selected.
+    var chips=root.querySelectorAll ? root.querySelectorAll('button.qbchipbtn:not([aria-pressed])') : [];
+    for(var c=0;c<chips.length;c++) chips[c].setAttribute('aria-pressed', chips[c].classList.contains('on')?'true':'false');
   }
 
   /* Enter / Space on an upgraded element = click (native buttons already do this). */
@@ -102,6 +105,9 @@
     vizov:   function(){ var x=document.getElementById('vizX'); if(x) x.click(); },
     vtov:    function(){ var x=document.getElementById('vtX'); if(x) x.click(); },
     obov:    function(){ var x=document.getElementById('obSkip'); if(x) x.click(); },
+    wbov:    null,   // whiteboard player / preview: whiteboard.js closes it on Escape itself
+    wbreelov:function(){ var x=document.querySelector('#wbreelov [data-a=x]'); if(x) x.click(); },
+    wbsheet: function(){ var x=document.querySelector('#wbsheet .wbcancel'); if(x) x.click(); },
     strictov:null
   };
   var stack=[];   // {el, ret}

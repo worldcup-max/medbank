@@ -27,6 +27,7 @@
   --card:#ffffff; --brand:#5b3df5;
   --warnbg:#fff6e6; --warnline:#f3d79a; --warntx:#8a5a12;
   --badbg:#fff0ec;  --badline:#f6c3b4;  --badtx:#a83f28;
+  --qb-ok:#0f766e; --qb-info:#1d4ed8; --qb-mid:#8a5a00; --qb-bad:#b42318; --qb-vio:#6d28d9;   /* a11y: Q-bank score/level colours, ≥4.5:1 as text on white and lavender */
   --shadow:rgba(20,16,38,.10);
   --radius:12px;
   color-scheme:light;
@@ -41,6 +42,7 @@ html[data-theme="dark"]{
   --card:#191529; --brand:#a78bfa;
   --warnbg:#33260f; --warnline:#6b5220; --warntx:#f5c877;
   --badbg:#3a1d1a; --badline:#7a3a30; --badtx:#ffb0a0;
+  --qb-ok:#2dd4bf; --qb-info:#93c5fd; --qb-mid:#fbbf24; --qb-bad:#ff8a7a; --qb-vio:#c4b5fd;
   --shadow:rgba(0,0,0,.55);
   color-scheme:dark;
 }
@@ -161,6 +163,8 @@ h2{font-size:20px;margin:34px 0 12px}
   min-height:230px;cursor:pointer}
 .flash .qlabel{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dimmer);font-weight:700;margin-bottom:11px}
 .flash .q{font-size:20.5px;font-weight:600;line-height:1.45}
+#cardQ:focus,#cardAns:focus,#mcqAnswerTop:focus{outline:none}
+#cardQ:focus-visible,#cardAns:focus-visible,#mcqAnswerTop:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
 .taphint{text-align:center;color:var(--dimmer);font-size:13px;margin-top:26px}
 .ansblock{margin-top:24px;padding-top:22px;border-top:1px solid var(--line);animation:fade .2s ease}
 @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1}}
@@ -331,7 +335,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .mcqopt.wrong{border-color:#7a3b4d;background:#2a1c22}
 .mcqopt.wrong .mcqtag{background:#7a3b4d;color:#ff9db1}
 .mcqopt.wrong .mcqmark{color:#ff9db1}
-.mcqopt.dim{opacity:.45}
+.mcqopt.dim{opacity:.6}   /* a11y: was .45, too faint to read the other options back */
 .mcqresult{margin-top:18px;font-weight:700;font-size:15px;padding:11px 14px;border-radius:10px;text-align:center;animation:fade .2s ease}
 .mcqresult.ok{background:#3ecf8e1c;color:var(--recall-tx)}
 .mcqresult.no{background:#2a1c22;color:#ff9db1}
@@ -1273,7 +1277,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.11.16d';   // bump this each release
+const APP_VERSION='2026.11.17a';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
@@ -3495,10 +3499,10 @@ var _QB_D2C={easy:'interpretation',medium:'clinical_reasoning',hard:'complex_rea
 function qbCogOf(q){ if(!q) return 'clinical_reasoning'; return q.cognitive_level || _QB_D2C[q.difficulty] || 'clinical_reasoning'; }
 function qbCogLabel(k){ var m={interpretation:'Interpretation',clinical_reasoning:'Clinical reasoning',complex_reasoning:'Complex reasoning',exam_trap:'Exam trap'}; return m[k]||k; }
 function qbCogShort(k){ var m={interpretation:'Interp',clinical_reasoning:'Clinical',complex_reasoning:'Complex',exam_trap:'Trap'}; return m[k]||k; }
-function qbCogColor(k){ var m={interpretation:'#3b82f6',clinical_reasoning:'#0d9488',complex_reasoning:'#c98a00',exam_trap:'#8b5cf6'}; return m[k]||'#6b6b78'; }
+function qbCogColor(k){ var m={interpretation:'var(--qb-info)',clinical_reasoning:'var(--qb-ok)',complex_reasoning:'var(--qb-mid)',exam_trap:'var(--qb-vio)'}; return m[k]||'var(--dim)'; }   // a11y: theme-aware, readable as text
 function qbSkillLabel(k){ if(!k) return 'General'; var m={diagnosis:'Diagnosis',investigation:'Investigation',management:'Management',complications:'Complications',differential:'Differential dx',next_step:'Next best step'}; return m[k]||k; }
 function qbShuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),x=a[i];a[i]=a[j];a[j]=x;} return a; }
-function qbWeakest(acc){ var w=null; Object.keys(acc.byTag||{}).forEach(function(k){ var b=acc.byTag[k]; if(b.seen>=2){ var p=b.correct/b.seen; if(!w||p<w.p) w={k:k,p:p}; } }); return (w&&w.p<0.8)?(' · weakest: <b style="color:#c2410c">'+esc(w.k)+'</b>'):''; }
+function qbWeakest(acc){ var w=null; Object.keys(acc.byTag||{}).forEach(function(k){ var b=acc.byTag[k]; if(b.seen>=2){ var p=b.correct/b.seen; if(!w||p<w.p) w={k:k,p:p}; } }); return (w&&w.p<0.8)?(' · weakest: <b style="color:var(--qb-bad)">'+esc(w.k)+'</b>'):''; }
 function qbLetter(j){ return String.fromCharCode(65+j); }
 function renderQbank(t){
   const items=(t.extras&&t.extras.qbank)||null;
@@ -3548,7 +3552,7 @@ function renderQbank(t){
 }
 function qbCfgRow(label, opts, cur, kind){ kind=kind||'skill';
   return '<div class="qbcfg"><div class="qbcfg-l">'+label+'</div><div class="qbcfg-c">'+opts.map(function(o){
-    return '<button class="qbchipbtn'+(cur===o.v?' on':'')+'" onclick="qbSetCfg(\''+kind+'\',\''+o.v+'\')">'+esc(o.t)+'</button>';
+    return '<button class="qbchipbtn'+(cur===o.v?' on':'')+'" aria-pressed="'+(cur===o.v)+'" onclick="qbSetCfg(\''+kind+'\',\''+o.v+'\')">'+esc(o.t)+'</button>';
   }).join('')+'</div></div>'; }
 function qbSetCfg(kind,val){ _qbCfg[kind]=(kind==='count'?parseInt(val,10):val); render(); }
 function qbStart(id,mode){ var t=topById(id); var all=(t&&t.extras&&t.extras.qbank)||[]; if(!all.length)return;
@@ -3839,11 +3843,17 @@ function qbQuestionHtml(){
   var opts=q.options.map(function(o,j){ var cls='qbopt';
     if(QB.answered){ if(j===q.answer)cls+=' right'; else if(j===QB.picked)cls+=' wrong'; }
     else if(QB.picked===j)cls+=' sel';
-    return '<button class="'+cls+'" '+(QB.answered?'disabled':'onclick="qbPick('+j+')"')+'><span class="qbol">'+qbLetter(j)+'</span><span>'+esc(o)+'</span></button>';
+    // a11y: right/wrong was shown by colour alone; now a ✓/✗ mark plus words a screen reader reads out
+    var mark='', sr='';
+    if(QB.answered){ if(j===q.answer){ mark='<span class="qbmark" aria-hidden="true">✓</span>'; sr=(j===QB.picked?' — your answer, correct':' — correct answer'); }
+                     else if(j===QB.picked){ mark='<span class="qbmark" aria-hidden="true">✗</span>'; sr=' — your answer, incorrect'; } }
+    return '<button class="'+cls+'" '+(QB.answered?'disabled':'onclick="qbPick('+j+')" aria-keyshortcuts="'+qbLetter(j)+'"')+'><span class="qbol" aria-hidden="true">'+qbLetter(j)+'</span><span><span class="mb-sr-only">'+qbLetter(j)+'. </span>'+esc(o)+(sr?'<span class="mb-sr-only">'+sr+'</span>':'')+'</span>'+mark+'</button>';
   }).join('');
   var rationale='';
   if(QB.answered && QB.mode==='tutor'){
-    rationale='<div class="qbrat">'+q.options.map(function(o,j){ var r=(q.rationales&&q.rationales[j])||''; if(!r)return ''; var right=(j===q.answer);
+    var _ok=(QB.picked===q.answer);
+    rationale='<div class="qbfb '+(_ok?'ok':'bad')+'" id="qbFb" tabindex="-1">'+(_ok?'✓ Correct — '+qbLetter(q.answer)+' is right.':'✗ Not quite. The answer is '+qbLetter(q.answer)+'.')+'</div>'
+      +'<div class="qbrat">'+q.options.map(function(o,j){ var r=(q.rationales&&q.rationales[j])||''; if(!r)return ''; var right=(j===q.answer);
       return '<div class="qbrat-row '+(right?'r':'w')+'"><b>'+qbLetter(j)+(right?' — correct':'')+'</b> '+esc(r)+'</div>'; }).join('')+'</div>'+qbTeachHtml(q,QB.i);
     if(QB.picked!==q.answer){ var qhc=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|')));
       var _gapDg=(typeof gapEligible==='function')?gapEligible(q,QB.picked):null;   // V1.6 (flag-gated): gap miss → offer the Learn loop instead of the plain retest
@@ -3855,8 +3865,8 @@ function qbQuestionHtml(){
   // V1.5 — non-interruptive confidence capture (tutor reveal), asked once per question
   // Confidence capture: tutor / Smart Drill only (never in timed exams), non-blocking, and clearly optional —
   // you can advance without answering it, so it never becomes a forced answer→confidence→next treadmill.
-  var conf=(QB.answered && QB.mode==='tutor' && !QB._confDone) ? '<div class="qbconf"><span>How sure were you? <em style="opacity:.5;font-style:normal;font-weight:600">· optional</em></span><div class="qbconf-b">'+QB_CONF.map(function(c){return '<button onclick="qbSetConf('+c[0]+')" title="'+c[2]+'">'+c[1]+'</button>';}).join('')+'</div></div>' : '';
-  var nextBtn = QB.answered ? '<div class="btnrow" style="justify-content:center;margin-top:14px"><button class="btn primary" style="min-width:120px" onclick="qbNext()">'+((QB.adaptive?(QB.items.length<QB.adaptTarget):(QB.i<QB.items.length-1))?'Next →':'See results')+'</button></div>' : '';
+  var conf=(QB.answered && QB.mode==='tutor' && !QB._confDone) ? '<div class="qbconf" role="group" aria-label="How sure were you? (optional)"><span>How sure were you? <em style="opacity:.5;font-style:normal;font-weight:600">· optional</em></span><div class="qbconf-b">'+QB_CONF.map(function(c){return '<button onclick="qbSetConf('+c[0]+')" title="'+c[2]+'" aria-label="'+c[2]+'">'+c[1]+'</button>';}).join('')+'</div></div>' : '';
+  var nextBtn = QB.answered ? '<div class="btnrow" style="justify-content:center;margin-top:14px"><button class="btn primary" id="qbNextBtn" style="min-width:120px" onclick="qbNext()" aria-keyshortcuts="N">'+((QB.adaptive?(QB.items.length<QB.adaptTarget):(QB.i<QB.items.length-1))?'Next →':'See results')+'</button></div>' : '';
   var lead = q.lead_in ? '<div style="font-weight:700;margin:8px 0 14px">'+esc(q.lead_in)+'</div>' : '';
   var expo='';
   // point 5: never show topic/skill/level metadata BEFORE answering, in any Mega mode. Blind/Adaptive just get a flavour tag.
@@ -3866,11 +3876,52 @@ function qbQuestionHtml(){
   var why=(QB.smart||QB.adaptive)?'<details class="qbwhy"><summary>ⓘ Why this drill?</summary><div>'+esc(QB.smartWhy||'Chosen from your recent performance.')+((QB.smartReasons&&QB.smartReasons.length)?'<ul>'+QB.smartReasons.slice(0,3).map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul>':'')+'</div></details>':'';
   var count=(QB.adaptive?QB.adaptTarget:QB.items.length);
   return '<div class="card" style="cursor:default">'
-    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:12px;color:var(--dim)">Question '+(QB.i+1)+' / '+count+(QB.smart?' · Smart Drill':(QB.mega?' · Mega':''))+'</span><span style="display:flex;align-items:center;gap:12px">'+(QB.mode==='timed'?'<span id="qbTimer" style="font-size:12px;color:var(--dim)"></span>':'')+'<button class="qbendbtn" onclick="qbEndEarly()" title="End now and grade what you\'ve answered so far">End &amp; grade</button></span></div>'+expo+why
-    +'<div style="font-size:15px;line-height:1.55;margin-bottom:'+(lead?'0':'14px')+'">'+esc(q.stem)+'</div>'+lead
-    +'<div class="qbopts">'+opts+'</div>'+rationale+conf+nextBtn+'</div>';
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:12px;color:var(--dim)">Question '+(QB.i+1)+' / '+count+(QB.smart?' · Smart Drill':(QB.mega?' · Mega':''))+'</span><span style="display:flex;align-items:center;gap:12px">'+(QB.mode==='timed'?'<span id="qbTimer" role="timer" aria-label="Time on this question" style="font-size:12px;color:var(--dim)"></span>':'')+'<button class="qbendbtn" onclick="qbEndEarly()" title="End now and grade what you\'ve answered so far">End &amp; grade</button></span></div>'+expo+why
+    +'<div id="qbStem" tabindex="-1" style="font-size:15px;line-height:1.55;margin-bottom:'+(lead?'0':'14px')+'"><span class="mb-sr-only">Question '+(QB.i+1)+' of '+count+'. </span>'+esc(q.stem)+'</div>'+lead
+    +'<div class="qbopts" role="group" aria-label="Answer options">'+opts+'</div>'
+    +(QB.answered?'':'<div class="qbkeys" aria-hidden="true">Keyboard: press '+qbLetter(0)+'–'+qbLetter(q.options.length-1)+' to answer'+(QB.mode==='tutor'?', then N for next':'')+'</div>')
+    +rationale+conf+nextBtn+'</div>';
 }
-function qbDiffChip(q){ if(!q.difficulty) return ''; var c=q.difficulty==='hard'?'#e2574b':q.difficulty==='easy'?'#0d9488':'#c98a00'; return ' · <span style="color:'+c+';font-weight:700;text-transform:capitalize">'+esc(q.difficulty)+'</span>'; }
+/* a11y — Q-bank focus + keyboard.
+   render() replaces the whole page, which drops keyboard focus to <body>. After each render, if the
+   question, its answer state or the results screen changed (or focus was lost), put focus where the
+   student needs to be: the new question, the right/wrong line, or the score. Scrolls only as needed. */
+var _qbA11y={qb:null,key:''};
+function qbA11yFocus(el){ if(!el) return; try{ el.focus({preventScroll:true}); }catch(e){ el.focus(); } try{ el.scrollIntoView({block:'nearest'}); }catch(e){} }
+function qbA11yAfterRender(){
+  var stem=document.getElementById('qbStem'), done=document.getElementById('qbDone');
+  if(!QB || (!stem && !done)){ _qbA11y.qb=null; _qbA11y.key=''; return; }
+  var key=QB.done?'done':(QB.i+':'+(QB.answered?1:0));
+  var changed=(_qbA11y.qb!==QB || _qbA11y.key!==key);
+  _qbA11y.qb=QB; _qbA11y.key=key;
+  var a=document.activeElement, lost=(!a || a===document.body || !a.isConnected);
+  if(!changed && !lost) return;
+  if(document.querySelector('[aria-modal="true"]')) return;   // a dialog is open on top — leave it alone
+  if(!changed){   // same state redrawn (e.g. confidence picked): let a11y.js restore focus first; if it can't, go to Next
+    setTimeout(function(){ var b=document.activeElement; if(b && b!==document.body && b.isConnected) return; if(document.querySelector('[aria-modal="true"]')) return;
+      qbA11yFocus(document.getElementById('qbNextBtn')||document.getElementById('qbStem')||document.getElementById('qbDone')); },0);
+    return; }
+  var t = QB.done ? done : !QB.answered ? stem : (document.getElementById('qbFb')||document.getElementById('qbNextBtn'));
+  qbA11yFocus(t||stem||done);
+}
+/* Keys on a question: A–E (or 1–9) answers; after answering, N / → / Enter goes on. Never while typing or in a dialog. */
+document.addEventListener('keydown',function(e){
+  if(!QB || QB.done || e.ctrlKey || e.metaKey || e.altKey) return;
+  if(!document.getElementById('qbStem')) return;
+  var t=e.target; if(t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable)) return;
+  if(document.querySelector('[aria-modal="true"]')) return;
+  var q=QB.items[QB.i]; if(!q) return;
+  if(!QB.answered){
+    var j=-1;
+    if(/^[a-z]$/i.test(e.key)) j=e.key.toUpperCase().charCodeAt(0)-65;
+    else if(/^[1-9]$/.test(e.key)) j=parseInt(e.key,10)-1;
+    if(j>=0 && j<q.options.length){ e.preventDefault(); qbPick(j); }
+    return;
+  }
+  var onCtl=t && t.closest && t.closest('button,a[href],summary,[role="button"]');
+  if(e.key==='n' || e.key==='N' || e.key==='ArrowRight' || (e.key==='Enter' && !onCtl)){ e.preventDefault(); qbNext(); }
+});
+function qbDiffChip(q){ if(!q.difficulty) return ''; var c=q.difficulty==='hard'?'var(--qb-bad)':q.difficulty==='easy'?'var(--qb-ok)':'var(--qb-mid)'; return ' · <span style="color:'+c+';font-weight:700;text-transform:capitalize">'+esc(q.difficulty)+'</span>'; }
 function qbTeachHtml(q,idx){
   var cg=qbCogOf(q);
   var chips='<span class="qbchip lvl" style="color:'+qbCogColor(cg)+';border-color:'+qbCogColor(cg)+'">'+qbCogLabel(cg)+'</span>'
@@ -3896,7 +3947,7 @@ function qbDoneHtml(){
   var endedNote=QB.endedEarly?'<div style="font-size:12.5px;color:var(--dim);margin-top:4px">Ended early — graded on the '+sc.answered+' question'+(sc.answered>1?'s':'')+' you answered.</div>':'';
   var review=QB.items.map(function(q,idx){ var r=QB.results.filter(function(x){return x.i===idx;})[0]||{}, picked=r.picked; var ts=r.ms?Math.round(r.ms/1000):0;
     if(QB.endedEarly && !QB.results.some(function(x){return x.i===idx;})) return '';   // hide questions never reached
-    return '<div class="card" style="cursor:default;margin-top:8px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:'+(q.lead_in?'2px':'8px')+'"><div style="font-size:13.5px;font-weight:700">'+(idx+1)+'. '+esc(q.stem)+'</div><span style="font-size:11px;color:var(--dim);white-space:nowrap">'+(r.ok?'✓':'✗')+(ts?' · '+ts+'s':'')+'</span></div>'+(q.lead_in?'<div style="font-size:13px;font-weight:700;color:var(--dim);margin-bottom:8px">'+esc(q.lead_in)+'</div>':'')
+    return '<div class="card" style="cursor:default;margin-top:8px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:'+(q.lead_in?'2px':'8px')+'"><div style="font-size:13.5px;font-weight:700">'+(idx+1)+'. '+esc(q.stem)+'</div><span style="font-size:11px;color:var(--dim);white-space:nowrap"><span aria-hidden="true">'+(r.ok?'✓':'✗')+'</span><span class="mb-sr-only">'+(r.ok?'Correct':'Incorrect')+'</span>'+(ts?' · '+ts+'s':'')+'</span></div>'+(q.lead_in?'<div style="font-size:13px;font-weight:700;color:var(--dim);margin-bottom:8px">'+esc(q.lead_in)+'</div>':'')
       +q.options.map(function(o,j){ var right=(j===q.answer),mine=(j===picked); var r2=(q.rationales&&q.rationales[j])||'';
         return '<div class="qbrev '+(right?'r':(mine?'w':''))+'"><div><b>'+qbLetter(j)+'</b> '+esc(o)+(right?' ✓':(mine?' ✗ your answer':''))+'</div>'+(r2?'<div class="qbrev-rat">'+esc(r2)+'</div>':'')+'</div>'; }).join('')
       +qbTeachHtml(q,idx)
@@ -3922,14 +3973,14 @@ function qbDoneHtml(){
       +'<div class="mgb-h">By cognitive level</div>'+qbSessBars(byL)
       +'<div class="mgb-h">By clinical skill</div>'+qbSessBars(byS)+'</div>';
   }
-  return '<div class="card" style="cursor:default;text-align:center"><div style="font-size:32px;font-weight:900;color:'+(pct>=60?'var(--recall)':'#e2574b')+'">'+pct+'%</div>'
+  return '<div class="card" id="qbDone" tabindex="-1" role="region" aria-label="Results: '+pct+' percent, '+c+' of '+n+' correct" style="cursor:default;text-align:center"><div style="font-size:32px;font-weight:900;color:'+(pct>=60?'var(--recall-tx)':'var(--qb-bad)')+'">'+pct+'%</div>'
     +'<div style="font-weight:700">'+c+' / '+n+' correct'+(totS?' · '+Math.floor(totS/60)+'m '+(totS%60)+'s':'')+' — '+msg+'</div>'+endedNote
     +'<div class="btnrow" style="justify-content:center;margin-top:14px;gap:10px;flex-wrap:wrap">'+retry+'<button class="btn" onclick="qbOpenDash(\''+scope+'\')">📊 My performance</button><button class="btn" onclick="qbExit()">Done</button></div></div>'
     +(typeof fixQueueHtml==='function'?fixQueueHtml(scope):'')   // V1.6 (flag-gated) — post-session "3 things to fix" prioritisation layer
     +megaBreak+profileCard
     +(QB.adaptive?adaptRecapHtml():'')
     +((QB.mega||QB.smart)?smartNextCard(QB.topicId||'*'):'')
-    +'<div style="margin-top:16px;font-weight:700">Review &amp; explanations</div>'+review;
+    +'<h2 style="margin:16px 0 0;font-size:inherit;font-weight:700">Review &amp; explanations</h2>'+review;
 }
 /* =====================================================================
  * V1.6 — Post-session "3 things to fix" prioritisation layer
@@ -4083,7 +4134,7 @@ function reasoningProfileHtml(scope){ scope=scope||'*'; var agg=qbAgg(scope), ov
     +'<div class="rp-sec">Cognitive tasks</div>'+(cogRows||'<div class="qbnodata">No cognitive data yet.</div>')
     +'<div class="rp-sec">Cross-topic</div>'+combo
     +'<div class="rp-sec">Insight</div>'+insight+'</div>'; }
-function qbBandColor(p){ return p>=80?'#0d9488':p>=65?'#3b82f6':p>=50?'#c98a00':'#e2574b'; }
+function qbBandColor(p){ return p>=80?'var(--qb-ok)':p>=65?'var(--qb-info)':p>=50?'var(--qb-mid)':'var(--qb-bad)'; }   // a11y: theme-aware, readable as text (SVG uses it via style=, not fill=)
 function qbBar(label,b,note){ var p=qbPct(b),c=qbBandColor(p),avg=b.seen?Math.round(b.ms/b.seen/1000):0;
   return '<div class="qbbar"><div class="qbbar-l"><span class="qbbar-k">'+esc(label)+'</span><span class="qbbar-n">'+b.correct+'/'+b.seen+(note?' · '+note:(avg?' · '+avg+'s':''))+'</span></div><div class="qbbar-t"><div class="qbbar-f" style="width:'+Math.max(p,2)+'%;background:'+c+'"></div></div><div class="qbbar-p" style="color:'+c+'">'+p+'%</div></div>'; }
 function qbBarsFrom(map){ var ks=Object.keys(map); if(!ks.length) return '<div class="qbnodata">Not enough data yet.</div>'; ks.sort(function(a,b){ return (map[a].correct/map[a].seen)-(map[b].correct/map[b].seen); }); return ks.map(function(k){ return qbBar(k,map[k]); }).join(''); }
@@ -4095,7 +4146,7 @@ function qbSpark(sessions){ var ss=sessions.filter(function(s){return s.n;}).sli
   var W=280,H=54,pad=4, vals=ss.map(function(s){return s.correct/s.n;});
   var xs=function(i){return pad+i*(W-2*pad)/(ss.length-1);}, ys=function(v){return H-pad-v*(H-2*pad);};
   var line=vals.map(function(v,i){return (i?'L':'M')+xs(i).toFixed(1)+' '+ys(v).toFixed(1);}).join(' ');
-  var dots=vals.map(function(v,i){var p=Math.round(v*100);return '<circle cx="'+xs(i).toFixed(1)+'" cy="'+ys(v).toFixed(1)+'" r="3" fill="'+qbBandColor(p)+'"><title>'+p+'% ('+ss[i].correct+'/'+ss[i].n+')</title></circle>';}).join('');
+  var dots=vals.map(function(v,i){var p=Math.round(v*100);return '<circle cx="'+xs(i).toFixed(1)+'" cy="'+ys(v).toFixed(1)+'" r="3" style="fill:'+qbBandColor(p)+'"><title>'+p+'% ('+ss[i].correct+'/'+ss[i].n+')</title></circle>';}).join('');
   return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="'+H+'" preserveAspectRatio="none" style="overflow:visible"><line x1="'+pad+'" y1="'+ys(0.8).toFixed(1)+'" x2="'+(W-pad)+'" y2="'+ys(0.8).toFixed(1)+'" stroke="var(--line)" stroke-dasharray="3 3"/><path d="'+line+'" fill="none" stroke="var(--brand)" stroke-width="2"/>'+dots+'</svg><div class="qbnodata" style="text-align:right;margin-top:2px">dashed line = 80% target · hover a dot for the session</div>'; }
 function qbRecs(agg){ var out=[];
   var tags=Object.keys(agg.byTag).filter(function(k){return agg.byTag[k].seen>=3;}).map(function(k){return {k:k,p:agg.byTag[k].correct/agg.byTag[k].seen};}).sort(function(a,b){return a.p-b.p;});
@@ -4123,7 +4174,7 @@ function qbGridHtml(grid){
     var cells=QB_COGS.map(function(c){ var b=g[c[0]];
       if(!b||!b.seen) return '<div class="qbcell empty">–</div>';
       var p=Math.round(b.correct/b.seen*100), col=qbBandColor(p);
-      return '<div class="qbcell" style="background:'+col+'" title="'+esc(tg)+' · '+c[1]+': '+b.correct+'/'+b.seen+'" onclick="qbStartCell(\''+encodeURIComponent(tg)+'\',\''+c[0]+'\')">'+p+'</div>';
+      return '<div class="qbcell" style="background:'+col+'" title="'+esc(tg)+' · '+c[1]+': '+b.correct+'/'+b.seen+'" aria-label="'+esc(tg)+', '+c[1]+': '+p+'% ('+b.correct+' of '+b.seen+'). Practise these" onclick="qbStartCell(\''+encodeURIComponent(tg)+'\',\''+c[0]+'\')">'+p+'</div>';
     }).join('');
     return '<div class="qbheat qbhrow"><div class="qbhlbl">'+esc(tg)+'</div>'+cells+'</div>';
   }).join('');
@@ -4278,7 +4329,7 @@ function mgDrillWeak(){ var agg=qbAgg('*'); if(!agg.cumulative.seen){ mbToast('A
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
 }
 function mgChipRow(label, opts, cur, kind){ return '<div class="qbcfg"><div class="qbcfg-l">'+label+'</div><div class="qbcfg-c">'+opts.map(function(o){
-    return '<button class="qbchipbtn'+(cur===o.v?' on':'')+'" onclick="mgSet(\''+kind+'\',\''+o.v+'\')">'+esc(o.t)+'</button>';
+    return '<button class="qbchipbtn'+(cur===o.v?' on':'')+'" aria-pressed="'+(cur===o.v)+'" onclick="mgSet(\''+kind+'\',\''+o.v+'\')">'+esc(o.t)+'</button>';
   }).join('')+'</div></div>'; }
 /* V1.7 Phase 2 — Blueprint config setters (session-composition only; never touch questions/A6/A7) */
 function mgSetSkillPct(sk,val){ _mgCfg.skillMix=_mgCfg.skillMix||{}; var v=Math.max(0,Math.min(100,parseInt(val,10)||0)); if(v) _mgCfg.skillMix[sk]=v; else delete _mgCfg.skillMix[sk]; render(); }
@@ -4764,7 +4815,7 @@ function smartCalCard(scope){ var c=smartCalibration(scope); if(!c) return '';
     +'<div class="sdcal-grid"><div><div class="sdcal-v">'+c.hiPct+'%</div><div class="sdcal-k">right when confident</div></div>'
     +'<div><div class="sdcal-v">'+c.loPct+'%</div><div class="sdcal-k">right when unsure</div></div>'
     +'<div><div class="sdcal-v">'+c.confShare+'%</div><div class="sdcal-k">answered confidently</div></div>'
-    +(c.miscon?'<div><div class="sdcal-v" style="color:#e2574b">'+c.miscon+'</div><div class="sdcal-k">🚨 likely misconceptions</div></div>':'')
+    +(c.miscon?'<div><div class="sdcal-v" style="color:var(--qb-bad)">'+c.miscon+'</div><div class="sdcal-k">🚨 likely misconceptions</div></div>':'')
     +'</div>'); }
 /* ---- Mastery states (recency-weighted) — by skill, topic AND course (spec points 7, 11, 12) ---- */
 function smartStateRows(entries){
@@ -6578,17 +6629,18 @@ function mcqView(session){
       const removed = (!picked && S.hint && S.hintHide && S.hintHide.indexOf(i)>=0);
       if(picked){ if(i===c.ans) cls+=' correct'; else if(i===pickIdx) cls+=' wrong'; else cls+=' dim'; }
       else if(removed) cls+=' removed';
-      const mark = picked ? (i===c.ans?'<span class="mcqmark">✓</span>':(i===pickIdx?'<span class="mcqmark">✗</span>':'')) : '';
-      return `<button class="${cls}" ${(picked||removed)?'disabled':''} onclick="event.stopPropagation();pickOpt(${i})">
-          <span class="mcqtag">${String.fromCharCode(65+i)}</span><span class="mcqtext">${esc(o)}</span>${mark}</button>`;
+      const mark = picked ? (i===c.ans?'<span class="mcqmark" aria-hidden="true">✓</span>':(i===pickIdx?'<span class="mcqmark" aria-hidden="true">✗</span>':'')) : '';
+      const sr = picked ? (i===c.ans?(i===pickIdx?' — your answer, correct':' — correct answer'):(i===pickIdx?' — your answer, incorrect':'')) : (removed?' — removed by hint':'');   // a11y: say it, don't only colour it
+      return `<button class="${cls}" ${(picked||removed)?'disabled':''} onclick="event.stopPropagation();pickOpt(${i})" ${(!picked&&!removed)?`aria-keyshortcuts="${i+1}"`:''}>
+          <span class="mcqtag" aria-hidden="true">${String.fromCharCode(65+i)}</span><span class="mcqtext"><span class="mb-sr-only">${String.fromCharCode(65+i)}. </span>${esc(o)}${sr?`<span class="mb-sr-only">${sr}</span>`:''}</span>${mark}</button>`;
     }).join('');
-    body = `<div class="mcqopts">${optsHtml}</div>`;
+    body = `<div class="mcqopts" role="group" aria-label="Answer options">${optsHtml}</div>`;
     if(!picked && isHard && !S.hint && c.opts.length>2){
       body += `<button class="hintbtn" onclick="event.stopPropagation();mcqHint()">💡 Hint · remove two wrong options</button>`;
     }
     if(picked){
       const revTxt=reviewIntervalText(it.id);
-      body += `<div class="mcqresult ${correct?'ok':'no'}" id="mcqAnswerTop">${correct?'✓ Correct':'✗ Not quite — added to your hard cards ★'}</div>`
+      body += `<div class="mcqresult ${correct?'ok':'no'}" id="mcqAnswerTop" tabindex="-1">${correct?'✓ Correct':'✗ Not quite — added to your hard cards ★'}</div>`
             + `<div class="nextrev ${correct?'ok':'no'}">↻ You'll see this again <b>${revTxt}</b>${correct?'':' · it\'s now a hard card (also in your reminders)'}</div>`
             + `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall-tx)">Answer — explained</div><div class="body">${para(c.a)}</div></div></div>`
             + `<div class="vizmiss" onclick="event.stopPropagation()">${(window.DATA&&DATA.cardViz&&DATA.cardViz[it.id])
@@ -6618,15 +6670,15 @@ function mcqView(session){
   }
   return `<div class="studywrap">
     <div class="studytop">
-      <span class="pill" style="background:${col}22;color:${col};margin:0">${session?esc(t.name):'Recall · Deck B'}</span>
+      <span class="pill" style="background:${col}22;color:${col==='var(--recall)'?'var(--recall-tx)':col};margin:0">${session?esc(t.name):'Recall · Deck B'}</span>
       <span class="name">${session?'◎ Recall (MCQ)':esc(t.name)}</span>
-      ${ttsBtn()}<span class="counter">${S.i+1} / ${n}</span></div>
-    <div class="bar"><div style="width:${pctBar}%;background:${col}"></div></div>
+      ${ttsBtn()}<span class="counter" aria-label="Card ${S.i+1} of ${n}">${S.i+1} / ${n}</span></div>
+    <div class="bar" aria-hidden="true"><div style="width:${pctBar}%;background:${col}"></div></div>
     ${masteryChips(sessionRecallIds())}
     <div class="flash" onclick="cardTap()">
-      <button class="starbtn ${star?'on':''}" title="Add to hard cards" onclick="event.stopPropagation();toggleStar('${it.id}')">${star?'★':'☆'}</button>
+      <button class="starbtn ${star?'on':''}" title="Add to hard cards" aria-label="Hard card" aria-pressed="${star}" onclick="event.stopPropagation();toggleStar('${it.id}')">${star?'★':'☆'}</button>
       <div class="qlabel">${c.img?'Look at this — then answer':'Question'}${session?' · '+esc(t.subject.short):''}</div>
-      <div class="q">${esc(c.q)}</div>
+      <div class="q" id="cardQ" tabindex="-1"><span class="mb-sr-only">Card ${S.i+1} of ${n}. </span>${esc(c.q)}</div>
       ${c.img?`<div onclick="event.stopPropagation()">${imgBlock(c.img,c.imgCaption||'')}</div>`:''}
       ${c.plate?mbpReviewSlot(it.id,c,picked):''}
       ${body}</div>
@@ -6648,12 +6700,12 @@ function cardView(session){
   let ans='';
   if(S.show){
     ans = isP
-      ? `<div class="ansblock">
+      ? `<div class="ansblock" id="cardAns" tabindex="-1">
           <div class="seg lecturer"><div class="seglabel" style="background:#8895aa22;color:var(--dim)">In the lecturer's words</div><div class="body">${para(c.lecturer)}</div></div>
           <div class="seg"><div class="seglabel" style="background:#4f8cff22;color:var(--primer)">Explained</div><div class="body">${para(c.explain)}</div></div>
           ${c.tie?`<div class="seg tie"><div class="seglabel" style="background:#ffb45422;color:var(--com-tx)">Why it matters here</div><div class="body">${para(c.tie)}</div></div>`:''}
         </div>`
-      : `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall-tx)">Answer</div><div class="body">${para(c.a)}</div></div></div>`;
+      : `<div class="ansblock" id="cardAns" tabindex="-1"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall-tx)">Answer</div><div class="body">${para(c.a)}</div></div></div>`;
   }
   const canRate = !isP;
   let controls;
@@ -6680,15 +6732,15 @@ function cardView(session){
   }
   return `<div class="studywrap">
     <div class="studytop">
-      <span class="pill" style="background:${col}22;color:${col};margin:0">${session?esc(t.name):(isP?'Primer · Deck A':'Recall · Deck B')}</span>
+      <span class="pill" style="background:${col}22;color:${col==='var(--recall)'?'var(--recall-tx)':col};margin:0">${session?esc(t.name):(isP?'Primer · Deck A':'Recall · Deck B')}</span>
       <span class="name">${session?('◎ '+(isP?'Primer':'Recall')):esc(t.name)}</span>
-      ${ttsBtn()}<span class="counter">${S.i+1} / ${n}</span></div>
-    <div class="bar"><div style="width:${pctBar}%;background:${col}"></div></div>
+      ${ttsBtn()}<span class="counter" aria-label="Card ${S.i+1} of ${n}">${S.i+1} / ${n}</span></div>
+    <div class="bar" aria-hidden="true"><div style="width:${pctBar}%;background:${col}"></div></div>
     ${masteryChips(sessionRecallIds())}
     <div class="flash" onclick="reveal()">
-      <button class="starbtn ${star?'on':''}" title="Star as a hard card" onclick="event.stopPropagation();toggleStar('${it.id}')">${star?'★':'☆'}</button>
+      <button class="starbtn ${star?'on':''}" title="Star as a hard card" aria-label="Hard card" aria-pressed="${star}" onclick="event.stopPropagation();toggleStar('${it.id}')">${star?'★':'☆'}</button>
       <div class="qlabel">${c.img?'Look at this — then answer':'Question'}${session?' · '+esc(t.subject.short):''}</div>
-      <div class="q">${esc(c.q)}</div>
+      <div class="q" id="cardQ" tabindex="-1"><span class="mb-sr-only">Card ${S.i+1} of ${n}. </span>${esc(c.q)}</div>
       ${c.img?`<div onclick="event.stopPropagation()">${imgBlock(c.img,c.imgCaption||'')}</div>`:''}
       ${ans || '<div class="taphint">Tap to reveal</div>'}</div>
     ${S.show?noteBlock(it):''}
@@ -6711,6 +6763,24 @@ function mbpReviewSlot(id,c,picked){
   return `<div id="mbpRP" class="mbprp" onclick="event.stopPropagation()"><div class="empty">Loading the replay…</div></div>`;
 }
 
+/* a11y — card player focus. render() redraws the card, which drops keyboard focus. When the card, its
+   reveal or its answer changed, move focus to what is new so keyboard and screen-reader users hear it. */
+var _cdA11y={s:null,key:''};
+function cardA11yAfterRender(){
+  var q=document.getElementById('cardQ');
+  if(!q || typeof S==='undefined' || !S){ _cdA11y.s=null; _cdA11y.key=''; return; }
+  var key=S.i+':'+(S.show?1:0)+':'+(S.opts?1:0)+':'+(S.pick!=null?1:0);
+  var sameS=(_cdA11y.s===S), prevKey=_cdA11y.key;
+  _cdA11y.s=S; _cdA11y.key=key;
+  if(sameS && prevKey===key) return;                 // same card state (e.g. starred) — a11y.js puts focus back on the twin button
+  if(document.querySelector('[aria-modal="true"]')) return;
+  var t=null, newCard=(!sameS || prevKey.split(':')[0]!==String(S.i));
+  if(newCard) t=q;
+  else if(S.pick!=null) t=document.getElementById('mcqAnswerTop');
+  else if(S.opts) t=document.querySelector('.mcqopt:not([disabled])');
+  else if(S.show) t=document.getElementById('cardAns');
+  qbA11yFocus(t||q);
+}
 /* ---- MCQ interaction (Recall cards with options) ---- */
 function isMcqCard(it){ return it && it.deck!=='primer' && it.c && it.c.opts && it.c.opts.length; }
 function cardTap(){
@@ -8122,6 +8192,8 @@ function render(){
   }
   if(p[0]==='today'||p[0]==='hard'||p[0]==='mistakes'||p[0]==='leeches') html = recallTabs(p[0]) + html;
   $('#main').innerHTML=html; renderNav();
+  try{ qbA11yAfterRender(); }catch(e){}
+  try{ cardA11yAfterRender(); }catch(e){}   // a11y: same for the card player (new card → question, reveal → answer, pick → result)   // a11y: move focus to the new question / feedback / results so keyboard + screen-reader users follow along
   try{ if(window.MB_DOCK_REFRESH) MB_DOCK_REFRESH(); }catch(e){}   // DCK-01: re-bind the study dock to the CURRENT card on every render (card advance doesn't change the hash)
   $('#main').classList.toggle('wide', p[0]===''||p[0]==='home');   // home fills the wide screen (no Ask-AI panel here)
   if(p[0]==='topic' && topicTab==='note') setTimeout(mb3dScanNote,60);   // mark structures the 3D corpus can show (no-op when the flag is off)
@@ -8562,12 +8634,20 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .qbopt.sel{border-color:var(--primer);background:rgba(124,58,237,.06)}
 .qbopt.right{border-color:#1d9e75;background:rgba(29,158,117,.10)}
 .qbopt.wrong{border-color:#e2574b;background:rgba(226,87,75,.10)}
+.qbmark{margin-left:auto;flex:0 0 auto;font-weight:900;font-size:15px;line-height:22px}
+.qbopt.right .qbmark{color:var(--qb-ok)}.qbopt.wrong .qbmark{color:var(--qb-bad)}
+.qbfb{margin-top:14px;font-size:14px;font-weight:800;border-radius:10px;padding:9px 12px}
+.qbfb.ok{color:var(--qb-ok);background:rgba(29,158,117,.10)}.qbfb.bad{color:var(--qb-bad);background:rgba(226,87,75,.10)}
+.qbfb:focus{outline:none}.qbfb:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+#qbStem:focus,#qbDone:focus{outline:none}
+.qbkeys{display:none;margin-top:10px;font-size:11.5px;color:var(--dim)}
+@media (hover:hover) and (pointer:fine){.qbkeys{display:block}}
 .qbol{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--panel2);color:var(--text);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
 .qbopt.right .qbol{background:#1d9e75;color:#fff}
 .qbopt.wrong .qbol{background:#e2574b;color:#fff}
 .qbrat{margin-top:14px;display:flex;flex-direction:column;gap:7px}
 .qbrat-row{font-size:12.5px;line-height:1.45;border-radius:9px;padding:8px 11px;background:var(--panel2)}
-.qbrat-row.r{background:rgba(29,158,117,.10)}.qbrat-row.r b{color:#0d7a68}
+.qbrat-row.r{background:rgba(29,158,117,.10)}.qbrat-row.r b{color:var(--qb-ok)}
 .qbrat-row.w b{color:var(--dim)}
 .qbrev{font-size:13px;line-height:1.45;border-radius:9px;padding:8px 11px;margin:5px 0;background:var(--panel2)}
 .qbrev.r{background:rgba(29,158,117,.10)}.qbrev.w{background:rgba(226,87,75,.10)}
@@ -8581,9 +8661,10 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .qbcfg{display:flex;gap:10px;align-items:flex-start;margin:8px 0}
 .qbcfg-l{font-size:12px;font-weight:700;color:var(--dim);min-width:92px;padding-top:5px}
 .qbcfg-c{display:flex;flex-wrap:wrap;gap:6px;flex:1}
-.qbchipbtn{border:1px solid var(--line);background:var(--card);color:var(--text);font-size:12px;font-weight:600;border-radius:20px;padding:5px 12px;cursor:pointer}
+.qbchipbtn{border:1px solid var(--line);background:var(--card);color:var(--text);font-size:12px;font-weight:600;border-radius:20px;padding:5px 12px;min-height:32px;cursor:pointer}
 .qbchipbtn:hover{border-color:var(--brand)}
 .qbchipbtn.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+html[data-theme="dark"] .qbchipbtn.on,html[data-theme="dark"] .qbm-badge{color:#140f24}   /* a11y: white on light violet was 2.7:1 */
 .qbreveal{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .qbchip{font-size:11px;font-weight:700;border:1px solid var(--line);color:var(--dim);border-radius:20px;padding:3px 10px}
 .qbchip.lvl{background:transparent}
@@ -8616,11 +8697,11 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .qbconf{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
 .qbconf>span{font-size:12.5px;color:var(--dim);font-weight:700}
 .qbconf-b{display:flex;gap:6px}
-.qbconf-b button{font-size:18px;line-height:1;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:6px 9px;cursor:pointer;transition:transform .08s}
+.qbconf-b button{font-size:18px;line-height:1;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:6px 9px;min-width:40px;min-height:40px;cursor:pointer;transition:transform .08s}
 .qbconf-b button:hover{transform:translateY(-2px);border-color:#8b5cf6}
 /* V1.5 — why this? */
 .qbwhy{margin-bottom:10px}
-.qbwhy>summary{font-size:12px;color:var(--brand);cursor:pointer;font-weight:700;list-style:none}
+.qbwhy>summary{font-size:12px;color:var(--brand);cursor:pointer;font-weight:700;list-style:none;display:inline-block;padding:6px 0;min-height:24px}
 .qbwhy>summary::-webkit-details-marker{display:none}
 .qbwhy>div{font-size:12.5px;color:var(--dim);margin-top:6px;line-height:1.5;background:var(--panel2);border-radius:10px;padding:9px 11px}
 .qbwhy ul{margin:6px 0 0;padding-left:18px}
@@ -8648,8 +8729,8 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .pilotnote{border-radius:12px;padding:11px 14px;font-size:13.5px;font-weight:600;margin:10px 0;background:var(--panel2);border:1px solid var(--line)}
 .pilotnote.good{background:#eafaf3;border-color:#0d948855;color:#0a6b52}
 .pilotnote.warn{background:#fdf4e7;border-color:#e08a3c66;color:#9a5a12}
-.qbendbtn{font-size:11.5px;font-weight:700;color:var(--dim);background:var(--panel2);border:1px solid var(--line);border-radius:99px;padding:4px 11px;cursor:pointer;font-family:inherit;white-space:nowrap;transition:color .12s,border-color .12s}
-.qbendbtn:hover{color:#e2574b;border-color:#e2574b}
+.qbendbtn{font-size:11.5px;font-weight:700;color:var(--dim);background:var(--panel2);border:1px solid var(--line);border-radius:99px;padding:4px 11px;min-height:32px;cursor:pointer;font-family:inherit;white-space:nowrap;transition:color .12s,border-color .12s}
+.qbendbtn:hover{color:var(--qb-bad);border-color:var(--qb-bad)}
 .btn.sm{font-size:12px;padding:5px 12px;min-width:0}
 /* V1.5 — calibration + mastery */
 .sdcal-msg{font-size:13px;line-height:1.5;margin-bottom:10px}
@@ -8735,6 +8816,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .qbheat{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:4px;align-items:center;margin:5px 0}
 .qbheat.head span{font-size:10.5px;color:var(--dim);text-align:center;font-weight:700}
 .qbhlbl{font-size:12px;font-weight:600;line-height:1.2}
+html[data-theme="dark"] .qbcell{color:#140f24}
 .qbcell{height:34px;border-radius:8px;display:grid;place-items:center;color:#fff;font-size:12.5px;font-weight:800;cursor:pointer}
 .qbcell.empty{background:var(--panel2)!important;color:var(--dim);font-weight:400;cursor:default}
 .qbgctrl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;font-size:11.5px;color:var(--dim)}
@@ -10913,7 +10995,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   }
 })();
 </script>
-<script src="whiteboard.js?v=20261111e"></script>   <!-- whiteboard Visualize (Standard / Layman) — takes over aiVisualize; FEATURES.WHITEBOARD=false turns it off -->
-<script src="a11y.js?v=20261116"></script>   <!-- accessibility layer: keyboard access for clickable cards, dialog focus, toggle states, live toasts -->
+<script src="whiteboard.js?v=20261117"></script>   <!-- whiteboard Visualize (Standard / Layman) — takes over aiVisualize; FEATURES.WHITEBOARD=false turns it off -->
+<script src="a11y.js?v=20261117"></script>   <!-- accessibility layer: keyboard access for clickable cards, dialog focus, toggle states, live toasts -->
 </body>
 </html>
