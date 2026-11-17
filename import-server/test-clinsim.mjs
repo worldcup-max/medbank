@@ -14,7 +14,8 @@ const src = f => readFileSync(new URL("../" + f, import.meta.url), "utf8");
 // a browser-ish sandbox: clinsim.js needs `document` to exist, nothing more until it draws
 const win = { ERSIM_ENGINE: E, MEDBANK_CONFIG: { FEATURES: { CLINICAL_SIM: true } } };
 const doc = { getElementById: () => null, createElement: () => ({}), head: { appendChild(){} } };
-const sandbox = { window: win, document: doc, location: { hash: "" }, localStorage: {}, navigator: {} };
+const LS = { _: {}, getItem(k){ return this._[k] ?? null; }, setItem(k, v){ this._[k] = String(v); }, removeItem(k){ delete this._[k]; } };
+const sandbox = { window: win, document: doc, location: { hash: "" }, localStorage: LS, navigator: {}, allTopics: [] };
 vm.runInNewContext(src("er-sim-cases.js"), sandbox);
 vm.runInNewContext(src("clinsim-cases.js"), sandbox);
 vm.runInNewContext(src("clinsim.js"), sandbox);
@@ -164,4 +165,45 @@ test("the tab is gated to clinical levels", () => {
   assert.ok(CS.visible());
   assert.match(CS.page([]), /Clinical Simulation/);
   delete win.MB_SYNC;
+});
+
+test("course names map to specialties", () => {
+  const S = T.specOf;
+  assert.equal(S("Obstetrics & Gynaecology"), "Obstetrics & Gynaecology");
+  assert.equal(S("O&G 500L"), "Obstetrics & Gynaecology");
+  assert.equal(S("Paediatrics"), "Paediatrics");
+  assert.equal(S("General Surgery II"), "Surgery");
+  assert.equal(S("Community Medicine"), "Community Health");
+  assert.equal(S("Internal Medicine"), "Medicine");
+  assert.equal(S("Cardiology"), "Medicine");
+  assert.equal(S("Biochemistry"), null);
+});
+
+test("cases are chosen by course, then topic", () => {
+  const paeds = { id: "course_p", name: "Paediatrics", modules: [] };
+  const topic = { id: "t1", name: "Neonatal Jaundice", ready: true, note: "x", subject: paeds,
+    extras: { clinsim: { osce: [], daily: [], quick: [{ id: "imp-quick-a-0", title: "A yellow baby", patient: { name: "B", age: "1 day", sex: "male" }, stem: "s",
+      steps: [0, 1, 2].map(() => ({ prompt: "p", reveal: "", options: [{ t: "a", pts: 10, why: "" }, { t: "b", pts: 0, why: "" }, { t: "c", pts: -10, why: "" }] })), mcqs: [] }] } } };
+  sandbox.allTopics.push(topic);
+  const cat = T.catalogue();
+  const course = { id: "course_p", name: "Paediatrics", spec: "Paediatrics" };
+  const mine = cat.filter(it => it.source === "mine");
+  assert.equal(mine.length, 1); assert.ok(T.inCourse(mine[0], course));
+  // built-in: the jaundiced baby belongs to Paediatrics and to the topic, the pre-eclampsia case does not
+  const baby = cat.find(it => it.id === "q-yellow-baby"), preg = cat.find(it => it.id === "q-headache-pregnant");
+  assert.ok(T.inCourse(baby, course)); assert.ok(!T.inCourse(preg, course));
+  assert.ok(T.topicHit(baby, topic.name)); assert.ok(!T.topicHit(preg, topic.name));
+  // a specialty pick takes lecture cases from courses of that specialty
+  assert.ok(T.inCourse(mine[0], { id: "spec:Paediatrics", name: "Paediatrics", spec: "Paediatrics" }));
+  assert.ok(!T.inCourse(mine[0], { id: "spec:Surgery", name: "Surgery", spec: "Surgery" }));
+  // Up next stays inside the course and skips tutorials and puzzles
+  const nx = T.upNext(course, 10);
+  assert.ok(nx.length > 0);
+  nx.forEach(it => { assert.ok(T.inCourse(it, course), it.id); assert.ok(!it.tutorial && it.kind !== "daily"); });
+  // the hub renders the course, its topic and the case
+  win.MB_SYNC = { currentLevel: () => 500, status: () => ({ syncing: false }) };
+  CS.course("course_p");
+  const html = CS.page([]);
+  assert.match(html, /Neonatal Jaundice/); assert.match(html, /A yellow baby/); assert.match(html, /Up next for you/);
+  CS.course("all"); delete win.MB_SYNC; sandbox.allTopics.length = 0;
 });

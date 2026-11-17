@@ -72,10 +72,11 @@ function stationFromEr(c){
   }
   return { id:'er-'+c.id, source:'builtin', title:c.title, patient:c.patient, speaker:c.speaker, persona:c.persona,
     opening:'Good day, doctor.', background:c.background||'', history:c.history||[],
-    dx:{ q:'What is your working diagnosis?', options:dxO, correct:dxC }, plan:plan, teaching:c.teaching||[], refs:c.refs||[], area:(E&&E.SETTINGS[c.setting]||{}).short||'' };
+    dx:{ q:'What is your working diagnosis?', options:dxO, correct:dxC }, plan:plan, teaching:c.teaching||[], refs:c.refs||[], area:(E&&E.SETTINGS[c.setting]||{}).short||'',
+    spec:erTags(c).spec, words:erTags(c).words, diff:c.level||'' };
 }
 function stationFromPack(t, s){
-  return { id:t.id+'~'+s.id, source:'mine', topicId:t.id, topicName:t.name, title:s.title, patient:s.patient, speaker:s.speaker, persona:s.persona,
+  return { id:t.id+'~'+s.id, source:'mine', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id, title:s.title, patient:s.patient, speaker:s.speaker, persona:s.persona,
     opening:s.opening||'Good day, doctor.', background:s.background||'', history:s.history||[],
     dx:{ q:'What is your working diagnosis?', options:s.dx.options, correct:s.dx.correct },
     plan:s.plan?{ q:'What is the most appropriate next step?', options:s.plan.options, correct:s.plan.correct }:null, teaching:s.teaching||[], refs:[] };
@@ -89,16 +90,99 @@ function stations(src){
 function quickCases(src){
   var out=[];
   if(src!=='mine') (root.CLINSIM_QUICK||[]).forEach(function(q){ out.push(Object.assign({ source:'builtin' }, q)); });
-  if(src!=='builtin') myTopics().forEach(function(t){ var p=pack(t); ((p&&p.quick)||[]).forEach(function(q){ out.push(Object.assign({}, q, { id:t.id+'~'+q.id, source:'mine', topicId:t.id, topicName:t.name, area:t.name })); }); });
+  if(src!=='builtin') myTopics().forEach(function(t){ var p=pack(t); ((p&&p.quick)||[]).forEach(function(q){ out.push(Object.assign({}, q, { id:t.id+'~'+q.id, source:'mine', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id, area:t.name })); }); });
   return out;
 }
 function dailies(src){
   var out=[];
   if(src!=='mine') (root.CLINSIM_DAILY||[]).forEach(function(d){ out.push(Object.assign({ source:'builtin' }, d)); });
-  if(src!=='builtin') myTopics().forEach(function(t){ var p=pack(t); ((p&&p.daily)||[]).forEach(function(d){ out.push(Object.assign({}, d, { id:t.id+'~'+d.id, source:'mine', topicId:t.id, topicName:t.name })); }); });
+  if(src!=='builtin') myTopics().forEach(function(t){ var p=pack(t); ((p&&p.daily)||[]).forEach(function(d){ out.push(Object.assign({}, d, { id:t.id+'~'+d.id, source:'mine', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id })); }); });
   return out;
 }
 function byId(list, id){ return list.filter(function(x){ return x.id===id; })[0]||null; }
+
+/* ---------- course → topic → case (how cases are chosen)
+ * Every case carries spec[] (specialties) and words (topic words). Built-in quick cases and
+ * puzzles carry them in clinsim-cases.js; ER Sim cases get them here, so er-sim-cases.js stays
+ * untouched. A student's course is matched to a specialty by its name, and their imported
+ * topics are matched to built-in cases by topic words. Lecture cases belong to their own
+ * course and topic already. */
+var ER_TAGS={
+  'fever-body-pains':  { spec:['Medicine'], words:'malaria fever infectious tropical' },
+  'child-fever-fit':   { spec:['Paediatrics'], words:'severe malaria febrile convulsion seizure fever hypoglycaemia' },
+  'scd-chest-pain':    { spec:['Paediatrics','Medicine'], words:'sickle cell acute chest syndrome haemoglobinopathy anaemia' },
+  'farm-snakebite':    { spec:['Medicine','Surgery'], words:'snakebite envenoming toxicology antivenom emergency' },
+  'pregnant-fit':      { spec:['Obstetrics & Gynaecology'], words:'eclampsia pre-eclampsia hypertension pregnancy seizure' },
+  'okada-crash':       { spec:['Surgery'], words:'trauma road traffic chest injury pneumothorax atls' },
+  'diabetic-vomiting': { spec:['Medicine'], words:'diabetes dka ketoacidosis endocrine' },
+  'watery-diarrhoea':  { spec:['Medicine','Community Health'], words:'cholera diarrhoea dehydration outbreak gastroenteritis' }
+};
+function erTags(c){ return ER_TAGS[c.id] || { spec:['Medicine'], words:'' }; }
+var SPECS=[
+  ['Obstetrics & Gynaecology', /\b(obs|obstet|gyn|gynae|o\s*&\s*g|o\s*and\s*g|midwif|labou?r)/i],
+  ['Paediatrics', /\b(paed|pediat|child|neonat)/i],
+  ['Surgery', /\b(surg|ortho|trauma|urolog|anaesth|ent\b|ophthal)/i],
+  ['Community Health', /\b(community|public health|epidemiol|preventive|cm\b)/i],
+  ['Psychiatry', /\b(psych|mental)/i],
+  ['Medicine', /\b(med|internal|cardio|nephro|gastro|neuro|endocrin|haemat|hemat|respir|infect|dermat)/i]
+];
+function specOf(name){ var n=String(name||''); for(var i=0;i<SPECS.length;i++) if(SPECS[i][1].test(n)) return SPECS[i][0]; return null; }
+function myCourses(){
+  var seen={}, out=[];
+  myTopics().forEach(function(t){ var s=t.subject; if(!s||seen[s.id]) return; seen[s.id]=1; out.push({ id:s.id, name:s.name||s.short||'My course', spec:specOf(s.name) }); });
+  return out;
+}
+var COURSE_KEY='mbclinsimcourse';
+function courseSel(){ try{ return localStorage.getItem(COURSE_KEY)||'all'; }catch(_){ return 'all'; } }
+function setCourse(id){ try{ localStorage.setItem(COURSE_KEY, id); }catch(_){} }
+function curCourse(){
+  var id=courseSel(); if(id==='all') return null;
+  if(id.indexOf('spec:')===0){ var sp=id.slice(5); return { id:id, name:sp, spec:sp }; }
+  return byId(myCourses(), id);
+}
+function normW(s){ return ' '+String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()+' '; }
+// does a built-in case belong with this topic title?
+function topicHit(item, title){
+  var t=normW(title); if(t.length<4) return false;
+  return String(item.words||'').toLowerCase().split(/\s+/).some(function(w){ return w.length>=4 && t.indexOf(' '+w.replace(/[^a-z0-9]+/g,' ').trim()+' ')>=0; });
+}
+// does a case belong to the chosen course? (null course = everything)
+function inCourse(item, course){
+  if(!course) return true;
+  if(item.source==='mine'){ if(item.courseId===course.id) return true; if(String(course.id).indexOf('spec:')!==0) return false; var mc=byId(myCourses(), item.courseId); return !!(mc && mc.spec===course.spec); }   // a specialty pick also takes lecture cases from courses of that specialty
+  return !!(course.spec && (item.spec||[]).indexOf(course.spec)>=0);
+}
+// one list of every playable case, whatever its mode
+function catalogue(){
+  var out=[];
+  erCases().forEach(function(c){ var tg=erTags(c); out.push({ kind:'er', id:c.id, title:c.title, spec:tg.spec, words:tg.words, diff:c.level||'', source:'builtin', tutorial:!!c.tutorial, href:'#/ersim/'+c.id }); });
+  stations('all').forEach(function(s){ out.push({ kind:'osce', id:s.id, title:s.title, spec:s.spec||[], words:s.words||'', diff:s.diff||'', source:s.source, topicId:s.topicId, courseId:s.courseId, act:"openOsce('"+s.id+"','timed')" }); });
+  quickCases('all').forEach(function(q){ out.push({ kind:'quick', id:q.id, title:q.title, spec:q.spec||[], words:q.words||'', diff:q.diff||'', source:q.source, topicId:q.topicId, courseId:q.courseId, act:"openQuick('"+q.id+"')" }); });
+  dailies('mine').forEach(function(d){ out.push({ kind:'daily', id:d.id, title:'Mystery patient', spec:[], words:'', source:'mine', topicId:d.topicId, courseId:d.courseId, href:'#/clinsim/daily/mine/'+d.id }); });
+  return out;
+}
+var KIND={ er:['🚑','ER case'], osce:['🩺','OSCE station'], quick:['⚡','Quick case'], daily:['📅','Puzzle'] };
+function played(item){
+  if(item.kind==='er'){ var runs=(typeof DATA!=='undefined'&&DATA.ersim&&DATA.ersim.runs)||[], b=null; runs.forEach(function(r){ if(r.caseId===item.id&&(b===null||r.pct>b)) b=r.pct; }); return b; }
+  if(item.kind==='daily'){ var st=store().daily['mine:'+item.id]; return st&&st.done?(st.won?100:0):null; }
+  return best(item.kind, item.id);
+}
+// Up next: unplayed cases in the chosen course, from the specialty where the student scores lowest
+function upNext(course, n){
+  var runsBySpec={}, all=catalogue();
+  all.forEach(function(it){ var b=played(it); if(b===null) return; (it.spec.length?it.spec:['Lectures']).forEach(function(sp){ (runsBySpec[sp]=runsBySpec[sp]||[]).push(b); }); });
+  var avg=function(sp){ var a=runsBySpec[sp]; return a&&a.length ? a.reduce(function(x,y){ return x+y; },0)/a.length : 60; };   // untried areas sit just under a pass
+  return all.filter(function(it){ return it.kind!=='daily' && !it.tutorial && inCourse(it, course) && played(it)===null; })
+    .map(function(it){ var sp=it.spec.length?it.spec:['Lectures']; return { it:it, w:Math.min.apply(null, sp.map(avg)) - (it.source==='mine'?5:0) }; })   // own lectures first on a tie
+    .sort(function(a,b){ return a.w-b.w; }).filter(function(x){ var k=x.it.title.toLowerCase(); if(this[k]) return false; this[k]=1; return true; }, {}).slice(0, n||3).map(function(x){ return x.it; });   // one card per patient (an ER case and its OSCE station share a title)
+}
+function caseCard(it){
+  var k=KIND[it.kind], b=played(it), free=it.kind==='er'||it.kind==='daily'||isFreeAny(it);
+  var open=it.href?'href="'+e(it.href)+'"':'href="javascript:void 0" onclick="MB_CLINSIM.'+(free?e(it.act):'locked()')+';return false"';
+  return '<a class="cs-card" style="text-decoration:none" '+open+'><div><span class="cs-tag">'+k[0]+' '+k[1]+'</span>'+(it.source==='mine'?'<span class="cs-tag">Your lecture</span>':(it.spec||[]).slice(0,1).map(function(sp){ return '<span class="cs-tag">'+e(sp)+'</span>'; }).join(''))+(!free?'<span class="cs-tag lock">🔒</span>':'')+'</div>'+
+    '<h3>'+e(it.title)+'</h3>'+(b!==null?'<div class="cs-best">Best: '+b+'%</div>':'<div class="cs-meta">Not played yet</div>')+'</a>';
+}
+function isFreeAny(it){ if(it.kind==='osce') return isFree(stations('all'), it); if(it.kind==='quick') return isFree(quickCases('all'), it); return true; }
 
 /* ---------- free rotation: one built-in station and one quick case a week for unpaid students */
 function weekNo(){ return Math.floor((Date.now()+3600e3)/(7*864e5)); }
@@ -167,6 +251,8 @@ function css(){
   '.cs-squares{font-size:22px;letter-spacing:2px}',
   '.cs-note{font-size:12.5px;color:var(--dim);margin-top:14px;line-height:1.5}',
   '.cs-back{font-size:13px;color:var(--dim);text-decoration:none}',
+  '.cs-h{margin:22px 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}',
+  'a.cs-card:hover,a.cs-card:focus-visible{border-color:var(--accent)}',
   '@media (max-width:520px){.cs-grid{grid-template-columns:1fr}}'
   ].join('\n');
   document.head.appendChild(st);
@@ -188,10 +274,45 @@ var MODES=[
     subs:[['all','See my cases']] }
 ];
 function hub(){
-  var runs=store().runs, mine=myTopics(), built=mine.filter(function(t){ return packCount(pack(t)); }).length;
-  var h='<h1>🏥 Clinical Simulation</h1><p class="cs-sub">Practise being the doctor. Pick a mode, then a way to play it.</p>'+
-    '<div class="cs-meta" style="margin-top:6px">'+level()+' level · '+runs.length+' case'+(runs.length===1?'':'s')+' played · '+built+' of '+mine.length+' lecture'+(mine.length===1?'':'s')+' with cases</div>'+
-    '<div class="cs-grid">';
+  var course=curCourse(), courses=myCourses(), sel=courseSel(), runs=store().runs, all=catalogue();
+  var h='<h1>🏥 Clinical Simulation</h1><p class="cs-sub">Pick your course, then a topic. Every kind of case for that topic sits together.</p>'+
+    '<div class="cs-meta" style="margin-top:6px">'+level()+' level · '+runs.length+' case'+(runs.length===1?'':'s')+' played</div>';
+  // 1 · your course
+  var covered={}; courses.forEach(function(c){ if(c.spec) covered[c.spec]=1; });
+  var extra=['Medicine','Surgery','Paediatrics','Obstetrics & Gynaecology','Community Health'].filter(function(sp){ return !covered[sp]; });
+  h+='<h4 class="cs-h">1 · Your course</h4><div class="cs-subs" role="group" aria-label="Course">'+
+    '<button class="cs-chip" aria-pressed="'+(sel==='all')+'" onclick="MB_CLINSIM.course(\'all\')">All courses</button>'+
+    courses.map(function(c){ return '<button class="cs-chip" aria-pressed="'+(sel===c.id)+'" onclick="MB_CLINSIM.course(\''+e(c.id)+'\')">'+e(c.name)+'</button>'; }).join('')+
+    extra.map(function(sp){ return '<button class="cs-chip" aria-pressed="'+(sel==='spec:'+sp)+'" onclick="MB_CLINSIM.course(\'spec:'+e(sp)+'\')">'+e(sp)+'</button>'; }).join('')+'</div>';
+  if(!courses.length) h+='<div class="cs-meta" style="margin-top:6px">Your imported courses appear here. Until then, pick a specialty.</div>';
+  // Up next
+  var nx=upNext(course, 3);
+  if(nx.length) h+='<h4 class="cs-h">Up next for you</h4><div class="cs-meta">Cases you haven\'t played'+(course?' in '+e(course.name):'')+', from the area where your scores are lowest.</div><div class="cs-grid">'+nx.map(caseCard).join('')+'</div>';
+  // search
+  h+='<div class="cs-ask" style="margin-top:16px"><input id="csSearch" type="search" autocomplete="off" placeholder="Search cases: malaria, jaundice, trauma…" aria-label="Search cases" oninput="MB_CLINSIM.search(this.value)" value="'+e(SEARCH)+'"></div><div id="csResults">'+searchHtml(SEARCH)+'</div>';
+  // 2 · topics
+  h+='<h4 class="cs-h">2 · Topics'+(course?' in '+e(course.name):'')+'</h4>';
+  if(!course){
+    if(!courses.length) h+='<div class="cs-panel">Pick a course above to see its topics and cases.</div>';
+    else h+='<div class="cs-grid">'+courses.map(function(c){ var n=all.filter(function(it){ return inCourse(it,c); }).length, tn=myTopics().filter(function(t){ return t.subject&&t.subject.id===c.id; }).length;
+      return '<button class="cs-card" onclick="MB_CLINSIM.course(\''+e(c.id)+'\')"><h3>'+e(c.name)+'</h3><div class="cs-meta">'+tn+' lecture'+(tn===1?'':'s')+' · '+n+' case'+(n===1?'':'s')+(c.spec?' · '+e(c.spec):'')+'</div></button>'; }).join('')+'</div>';
+  } else {
+    var shown={};
+    var tps=myTopics().filter(function(t){ return t.subject && t.subject.id===course.id; });
+    tps.forEach(function(t){
+      var items=all.filter(function(it){ return it.kind!=='er'||!it.tutorial; }).filter(function(it){ return it.source==='mine' ? it.topicId===t.id : (it.kind!=='daily' && !it.tutorial && topicHit(it, t.name)); });
+      items.forEach(function(it){ shown[it.kind+it.id]=1; });
+      var p=pack(t);
+      h+='<div class="cs-panel"><div class="cs-top"><b>'+e(t.name)+'</b><span class="cs-meta">'+items.length+' case'+(items.length===1?'':'s')+'</span></div>'+
+        (items.length?'<div class="cs-grid">'+items.map(caseCard).join('')+'</div>':'')+
+        (!packCount(p) && !(p&&p.none) ? '<div class="btnrow" style="margin-top:10px"><button class="btn" '+(BUILDING[t.id]?'disabled':'')+' onclick="MB_CLINSIM.build(\''+e(t.id)+'\')">'+(BUILDING[t.id]?'Building cases… about 30 s':'✨ Build cases from this lecture')+'</button></div>' : '')+'</div>';
+    });
+    var core=all.filter(function(it){ return it.source==='builtin' && it.kind!=='daily' && !it.tutorial && inCourse(it, course) && !shown[it.kind+it.id]; });
+    if(core.length) h+='<div class="cs-panel"><div class="cs-top"><b>Core '+e(course.spec||course.name)+' cases</b><span class="cs-meta">'+core.length+' case'+(core.length===1?'':'s')+'</span></div><div class="cs-grid">'+core.map(caseCard).join('')+'</div></div>';
+    if(!tps.length && !core.length) h+='<div class="cs-panel">No cases for this course yet. Import a clinical lecture and MedBank builds cases from it.</div>';
+  }
+  // 3 · practise by mode
+  h+='<h4 class="cs-h">3 · Or practise by mode</h4><div class="cs-grid">';
   MODES.forEach(function(m){
     h+='<div class="cs-card"><div class="cs-ic" aria-hidden="true">'+m.ic+'</div><h3>'+e(m.name)+'</h3><div class="cs-meta">'+e(m.blurb)+'</div><div class="cs-subs">'+
       m.subs.map(function(s){ return '<a class="cs-chip" href="#/clinsim/'+m.id+'/'+s[0]+'">'+e(s[1])+'</a>'; }).join('')+'</div></div>';
@@ -199,16 +320,27 @@ function hub(){
   h+='</div><p class="cs-note">All patients are fictional. This is practice, not a clinical guideline. Check doses and protocols against your hospital and national guidelines. Cases built from your lectures are made by AI from your note: check them against what your lecturer taught.</p>';
   return h;
 }
+var SEARCH='';
+function searchHtml(q){
+  var x=normW(q).trim(); if(x.length<2) return '';
+  var hits=catalogue().filter(function(it){ return it.kind!=='daily' && normW(it.title+' '+it.words+' '+(it.spec||[]).join(' ')).indexOf(x)>=0; }).slice(0,12);
+  return hits.length ? '<div class="cs-grid">'+hits.map(caseCard).join('')+'</div>' : '<div class="cs-meta" style="margin-top:8px">No cases match "'+e(q)+'" yet.</div>';
+}
+function courseBar(){
+  var c=curCourse(); if(!c) return '';
+  return '<div class="cs-meta" style="margin-top:8px">Showing <b>'+e(c.name)+'</b> cases · <a href="javascript:void 0" onclick="MB_CLINSIM.course(\'all\');return false">show all</a></div>';
+}
 function modeHead(mid, sub){
   var m=MODES.filter(function(x){ return x.id===mid; })[0];
   return '<a href="#/clinsim" class="cs-back">← Clinical Simulation</a><h1>'+m.ic+' '+e(m.name)+'</h1>'+
-    (m.subs.length>1?'<div class="cs-subs" role="group" aria-label="Sub-mode">'+m.subs.map(function(s){ return '<a class="cs-chip" aria-pressed="'+(s[0]===sub)+'" href="#/clinsim/'+m.id+'/'+s[0]+'">'+e(s[1])+'</a>'; }).join('')+'</div>':'');
+    (m.subs.length>1?'<div class="cs-subs" role="group" aria-label="Sub-mode">'+m.subs.map(function(s){ return '<a class="cs-chip" aria-pressed="'+(s[0]===sub)+'" href="#/clinsim/'+m.id+'/'+s[0]+'">'+e(s[1])+'</a>'; }).join('')+'</div>':'')+
+    (mid!=='mine'&&!(mid==='daily'&&sub!=='mine')?courseBar():'');
 }
 function emptyMine(what){ return '<div class="cs-panel">No '+what+' from your lectures yet. Import a clinical lecture and MedBank builds them for you, or open <a href="#/clinsim/mine/all">My Lecture Cases</a> to build them for lectures you already have.</div>'; }
 
 /* ---------- 🚑 Emergency Room (ER Sim lives in er-sim.js) */
 function erMode(sub){
-  var E=engine(); var list=erCases().filter(function(c){ return sub==='tut' ? c.tutorial : (!c.tutorial && c.setting===sub); });
+  var E=engine(), cc=curCourse(); var list=erCases().filter(function(c){ return sub==='tut' ? c.tutorial : (!c.tutorial && c.setting===sub && inCourse({ spec:erTags(c).spec, source:'builtin' }, cc)); });
   var h=modeHead('er', sub)+'<p class="cs-sub">'+(sub==='tut'?'A guided first case: hints show you the next step.':e(((E&&E.SETTINGS[sub])||{}).label||'')+': only what that facility has is available.')+'</p><div class="cs-grid">';
   list.forEach(function(c){
     var runs=(typeof DATA!=='undefined'&&DATA.ersim&&DATA.ersim.runs)||[], b=null; runs.forEach(function(r){ if(r.caseId===c.id&&(b===null||r.pct>b)) b=r.pct; });
@@ -221,7 +353,7 @@ function erMode(sub){
 /* ---------- 🩺 OSCE stations */
 var OS=null, TIMER=null;
 function osceList(sub){
-  var list=stations(sub==='mine'?'mine':'builtin');
+  var cc=curCourse(), list=stations(sub==='mine'?'mine':'builtin').filter(function(s){ return inCourse(s, cc); });
   var h=modeHead('osce', sub)+'<p class="cs-sub">'+(sub==='practice'?'No clock. The questions an examiner expects are shown as prompts.':sub==='mine'?'Stations built from your own lectures. Timed, 8 minutes.':'8 minutes. Greet the patient, take the history, then give your diagnosis and plan.')+'</p>';
   if(sub==='mine' && !list.length) return h+emptyMine('stations');
   h+='<div class="cs-grid">';
@@ -355,7 +487,7 @@ function osceView(){
 /* ---------- ⚡ Quick cases */
 var QS=null;
 function quickList(sub){
-  var src=sub==='mine'?'mine':'builtin', list=quickCases(src), all=quickCases('all');
+  var cc=curCourse(), src=sub==='mine'?'mine':'builtin', list=quickCases(src).filter(function(q){ return inCourse(q, cc); }), all=quickCases('all');
   var h=modeHead('quick', sub)+'<p class="cs-sub">3 to 4 decisions, then 3 exam questions. The best choice scores most; a dangerous one sinks the case.</p>';
   if(src==='mine' && !list.length) return h+emptyMine('quick cases');
   h+='<div class="cs-grid">';
@@ -436,7 +568,7 @@ function squares(p, st){ var s=st.g.map(function(g){ return isRight(p,g)?'🟩':
 function dailyMode(sub, id){
   var h=modeHead('daily', sub);
   if(sub==='mine'){
-    var list=dailies('mine');
+    var cc=curCourse(), list=dailies('mine').filter(function(d){ return inCourse(d, cc); });
     if(id){ var p=byId(list, id); if(!p) return h+'<div class="cs-panel">Puzzle not found.</div>'; return h+dailyHtml(p, dailyKeyFor(p), 'From '+(p.topicName||'your lecture')); }
     if(!list.length) return h+emptyMine('puzzles');
     return h+'<div class="cs-grid">'+list.map(function(p){ var st=store().daily[dailyKeyFor(p)]; return '<a class="cs-card" style="text-decoration:none" href="#/clinsim/daily/mine/'+e(p.id)+'"><div><span class="cs-tag">'+e(p.topicName)+'</span></div><h3>'+(st&&st.done?e(p.answer):'Mystery patient')+'</h3><div class="cs-meta">'+(st&&st.done?(st.won?'Solved in '+st.g.length:'Not solved'):'Not played yet')+'</div></a>'; }).join('')+'</div>';
@@ -454,9 +586,9 @@ function dailyMode(sub, id){
 /* ---------- 👥 Study group OSCE (pass and play on one phone) */
 var GS=null;
 function groupList(){
-  var all=stations('all');
+  var cc=curCourse(), all=stations('all'), shownS=all.filter(function(s){ return inCourse(s, cc); });
   return modeHead('group','pick')+'<p class="cs-sub">For three people and one phone. The <b>patient</b> reads their script first. Then hand the phone to the <b>examiner</b>, who starts the clock and ticks what the <b>candidate</b> does. The candidate never sees the screen.</p><div class="cs-grid">'+
-    all.map(function(s){ var free=isFree(all, s); return '<button class="cs-card" onclick="MB_CLINSIM.'+(free?'openGroup(\''+e(s.id)+'\')':'locked()')+'"><div><span class="cs-tag">'+e(s.source==='mine'?s.topicName:s.area)+'</span>'+(!entitled()&&s.source==='builtin'&&!free?'<span class="cs-tag lock">🔒 Subscribe</span>':'')+'</div><h3>'+e(s.title)+'</h3><div class="cs-meta">'+e(s.patient.name)+', '+e(s.patient.age)+' '+e(s.patient.sex)+'</div></button>'; }).join('')+'</div>';
+    shownS.map(function(s){ var free=isFree(all, s); return '<button class="cs-card" onclick="MB_CLINSIM.'+(free?'openGroup(\''+e(s.id)+'\')':'locked()')+'"><div><span class="cs-tag">'+e(s.source==='mine'?s.topicName:s.area)+'</span>'+(!entitled()&&s.source==='builtin'&&!free?'<span class="cs-tag lock">🔒 Subscribe</span>':'')+'</div><h3>'+e(s.title)+'</h3><div class="cs-meta">'+e(s.patient.name)+', '+e(s.patient.age)+' '+e(s.patient.sex)+'</div></button>'; }).join('')+'</div>';
 }
 function groupView(){
   var s=GS.s, back='<a href="#/clinsim/group/pick" class="cs-back" onclick="MB_CLINSIM.stop()">← Stations</a>';
@@ -558,7 +690,7 @@ function page(parts){
 
 root.MB_CLINSIM={
   on:on, visible:visible, page:page, locked:locked,
-  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP },
+  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext },
   stop:function(){ stopTimer(); },
   openOsce:function(id, mode){ stopTimer(); var all=stations('all'), s=byId(all,id); if(s && !isFree(all,s)) return locked(); osceStart(id, mode); location.hash='#/clinsim/osce/'+mode+'/'+id; draw(); },
   say:say,
@@ -590,6 +722,8 @@ root.MB_CLINSIM={
   gstart:function(){ if(!GS) return; GS.endsAt=Date.now()+OSCE_MIN*60e3; draw(); },
   gtick:function(k, id, v){ if(!GS) return; GS.ticks[k][id]=!!v; },
   gpick:function(k, i){ if(!GS) return; GS.ticks[k]=i; draw(); },
-  build:buildFor
+  build:buildFor,
+  course:function(id){ setCourse(id||'all'); SEARCH=''; draw(); },
+  search:function(q){ SEARCH=String(q||'').slice(0,60); var r=document.getElementById('csResults'); if(r) r.innerHTML=searchHtml(SEARCH); }
 };
 })(typeof window!=='undefined'?window:globalThis);

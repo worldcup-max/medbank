@@ -2,6 +2,18 @@
 
 One tab (`#/clinsim`) for clinical-year students, **400, 500 and 600 level only**, that holds every simulator as a mode. Each mode has sub-modes.
 
+## How the tab is arranged
+The first screen goes **course → topic → cases**:
+1. **Your course**: the courses the student imports into (plus specialties they have no course for yet).
+2. **Up next**: three unplayed cases in that course, from the specialty where their scores are lowest.
+3. **Topics in that course**: each imported lecture, holding its own lecture cases plus built-in cases whose topic words match its title, then the course's remaining **core cases**.
+4. **Or practise by mode**: the six modes below. Their lists follow the chosen course.
+
+A search box finds any case by name, topic word or specialty.
+
+How matching works (`clinsim.js`): every case has `spec[]` (specialties) and `words` (topic words). Built-in quick cases and puzzles carry them in `clinsim-cases.js`. ER cases get them from `ER_TAGS` in `clinsim.js`, so `er-sim-cases.js` stays as the ER thread wrote it. A course is matched to a specialty by its name (`specOf`). Lecture cases already belong to their course and topic. When you add a built-in case, give it `spec`, `words` and `diff`.
+
+## Modes
 | Mode | Sub-modes | What the student does |
 | --- | --- | --- |
 | 🚑 Emergency Room | Tutorial, Primary Health Centre, General Hospital, Teaching Hospital | ER Sim (`er-sim.js`, see ER-SIM.md). The debrief now shows a vitals trace with a marker at each treatment. |
