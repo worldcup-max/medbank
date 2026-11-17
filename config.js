@@ -86,5 +86,9 @@ window.MEDBANK_CONFIG = {
   //   CLINICAL_SIM = the Clinical Simulation tab (clinsim.js, route #/clinsim) for 400, 500 and 600 level only: ER Sim,
   //                  OSCE stations, quick cases, Case of the Day, study group OSCE and cases built from imported lectures.
   //                  ON since 2026-11-17 (level-gated by clinsim.js). Clinician review (CLINICAL-SIM.md) still to do.
-  FEATURES: { CLINICAL_SIM: true, ER_SIM: true, LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, WHITEBOARD: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false }
+  //   INTEGRATED_MODE = Mega Q-bank 🔗 Integrated questions (Phase B). CASE_MODE = Mega Q-bank 🩺 Case Mode (Phase E, linear).
+  //                  Even when ON, the server serves nothing until the integrated bank passes its readiness gate
+  //                  (≥100 approved, ≥8 families, ≥10 each, top family ≤30%); before that the cards show what is missing.
+  //                  Run import-server/sql/mega-qbank-phases-b-e.sql first. Try it: localStorage.mbint='1' / mbcase='1'.
+  FEATURES: { CLINICAL_SIM: true, ER_SIM: true, LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, WHITEBOARD: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false, INTEGRATED_MODE: false, CASE_MODE: false }
 };
