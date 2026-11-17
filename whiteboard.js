@@ -33,7 +33,7 @@
     + '.wbhd b{font-size:15px;color:#2b2540;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:45%}.wbhd .wbchip{white-space:nowrap}'
     + '.wbchip{font-size:11px;font-weight:800;border-radius:99px;padding:3px 9px;background:#ede7fb;color:#5b21b6}'
     + '.wbchip.lay{background:#fff1dc;color:#b45309}'
-    + '.wbq{font-size:11px;color:#6b6580;font-weight:700}.wbq.low{color:#dc2626}'
+    + '.wbq{font-size:11px;color:#6b6580;font-weight:700}.wbq.low{color:#b91c1c}'
     + '.wbsp{flex:1}'
     + '.wbbtn{border:1px solid #e3def0;background:#fff;border-radius:9px;min-width:34px;height:32px;padding:0 9px;font-weight:800;font-size:13px;color:#3a3550;cursor:pointer}'
     + '.wbbtn:active{transform:scale(.96)}'
@@ -42,10 +42,10 @@
     + '.wbboard svg{display:block;width:100%;height:auto}'
     + '.wbbadge{position:absolute;bottom:8px;right:10px;font-size:10.5px;font-weight:800;color:#5b21b6;background:#efe9fd;border-radius:7px;padding:3px 7px;z-index:2}'
     + '.wbcap{min-height:58px;padding:12px 16px 4px;text-align:center;font-weight:800;font-size:17px;line-height:1.35;color:#2b2540}'
-    + '.wbcap .w{color:#c9c4d8;transition:color .12s}.wbcap .w.on{color:#2b2540}'
+    + '.wbcap .w{color:#6b6580;transition:color .12s}.wbcap .w.on{color:#2b2540}'
     + '.wbdash{display:flex;gap:4px;padding:8px 16px 4px}'
-    + '.wbdash i{flex:1;height:5px;border-radius:3px;background:#e2ddef;cursor:pointer}'
-    + '.wbdash i.done{background:#6d28d9}.wbdash i.cur{background:#f59e0b}'
+    + '.wbdash i{flex:1;height:24px;display:flex;align-items:center;cursor:pointer;border-radius:4px}.wbdash i::before{content:"";flex:1;height:5px;border-radius:3px;background:#e2ddef}'
+    + '.wbdash i.done::before{background:#6d28d9}.wbdash i.cur::before{background:#f59e0b}'
     + '.wbft{display:flex;align-items:center;gap:8px;padding:8px 14px 14px;font-size:13px;font-weight:700;color:#4b4565}'
     + '.wbeq{display:inline-flex;gap:2px;align-items:center;height:16px}.wbeq i{width:3px;height:4px;background:#6d28d9;border-radius:2px}'
     + '.wbeq.on i{animation:wbeq .7s ease-in-out infinite}.wbeq.on i:nth-child(2){animation-delay:.1s}.wbeq.on i:nth-child(3){animation-delay:.25s}.wbeq.on i:nth-child(4){animation-delay:.05s}.wbeq.on i:nth-child(5){animation-delay:.18s}'
@@ -81,15 +81,15 @@
     + '@keyframes wborb{0%{box-shadow:0 0 0 0 rgba(220,38,38,.45)}70%{box-shadow:0 0 0 22px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}'
     + '@keyframes wbthink{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}'
     + '.wbasks{font-weight:800;color:#3a3550;font-size:14px}'
-    + '.wbaskor{font-size:11.5px;color:#8b84a3;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:6px}'
+    + '.wbaskor{font-size:11.5px;color:#6b6580;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:6px}'
     + '.wbfaq{display:flex;flex-direction:column;gap:6px;width:100%;max-width:320px}'
     + '.wbfaq button{border:1px solid #e3def0;background:#faf7ff;border-radius:12px;padding:9px 12px;font-weight:700;font-size:13px;color:#3a3550;text-align:left;cursor:pointer}'
     + '.wbaskty{display:flex;gap:6px;width:100%;max-width:320px}.wbaskty input{flex:1;border:1px solid #d8d0ee;border-radius:10px;padding:10px;font-size:14px}.wbaskty button{border:0;background:#6d28d9;color:#fff;border-radius:10px;padding:0 14px;font-weight:800}'
     + '.wbnote{position:absolute;left:12px;bottom:12px;max-width:62%;background:#fef08a;border-radius:4px;padding:10px 12px;transform:rotate(-2deg);box-shadow:0 6px 14px rgba(120,100,0,.18);z-index:3;animation:wbnotein .4s ease-out}@keyframes wbnotein{0%{opacity:0;transform:rotate(-8deg) scale(.8)}100%{opacity:1;transform:rotate(-2deg) scale(1)}}'
     + '.wbnote b{display:block;font-size:20px;line-height:1.1;color:#3b3551}.wbnote i{display:inline-block;margin-top:5px;font-size:10.5px;font-weight:800;font-style:normal;color:#b45309;background:#fff7ed;border-radius:6px;padding:2px 6px}'
-    + '.wbendask{display:flex;flex-direction:column;gap:6px;width:100%;max-width:260px;margin-top:4px}.wbendask span{font-size:11.5px;font-weight:800;color:#8b84a3;text-transform:uppercase;letter-spacing:.04em}.wbendask button{padding:8px 10px!important;font-size:12.5px!important;font-weight:700!important;text-align:left;background:#faf7ff!important}'
+    + '.wbendask{display:flex;flex-direction:column;gap:6px;width:100%;max-width:260px;margin-top:4px}.wbendask span{font-size:11.5px;font-weight:800;color:#6b6580;text-transform:uppercase;letter-spacing:.04em}.wbendask button{padding:8px 10px!important;font-size:12.5px!important;font-weight:700!important;text-align:left;background:#faf7ff!important}'
     + '.wbtop{width:100%;display:flex;flex-direction:column;align-items:center;gap:6px}'
-    + '.wbfaq button em{font-style:normal;font-size:11px;color:#8b84a3;font-weight:700;margin-left:4px;white-space:nowrap}'
+    + '.wbfaq button em{font-style:normal;font-size:11px;color:#6b6580;font-weight:700;margin-left:4px;white-space:nowrap}'
     + '.wbreelov{z-index:9600}.wbreel{background:#fff;border-radius:18px;padding:12px;width:100%;max-width:360px;display:flex;flex-direction:column;gap:10px;max-height:100%;overflow:auto}'
     + '.wbreelhd{display:flex;align-items:center}.wbreelhd b{flex:1;font-size:15px;color:#2b2540}'
     + '.wbreelcv canvas,.wbreelvid{width:100%;border-radius:12px;display:block;background:#f3effc;aspect-ratio:9/16}'
@@ -312,33 +312,34 @@
     var mode=MODES[board.mode]||MODES.standard, self=this;
     host.innerHTML=''
       +'<div class="wbhd"><b>'+esc(opts.label||'🎬 Visualize')+'</b><span class="wbchip'+(board.mode==='layman'?' lay':'')+'">'+mode.icon+' '+mode.label+'</span><span class="wbq" data-r="q"></span><span class="wbsp"></span>'
-      +'<button class="wbbtn" data-r="speed" title="Speed">'+this.speed+'×</button>'
-      +'<button class="wbbtn" data-r="mute" title="Sound">'+(this.muted?'🔇':'🔊')+'</button>'
-      +'<button class="wbbtn" data-r="restart" title="Start again">↻</button>'
+      +'<button class="wbbtn" data-r="speed" title="Speed" aria-label="Speed '+this.speed+'×">'+this.speed+'×</button>'
+      +'<button class="wbbtn" data-r="mute" title="Sound" aria-label="Mute narration" aria-pressed="'+this.muted+'">'+(this.muted?'🔇':'🔊')+'</button>'
+      +'<button class="wbbtn" data-r="restart" title="Start again" aria-label="Start again">↻</button>'
 
       +(opts.inline?'':'<button class="wbx" data-r="close" aria-label="Close">✕</button>')+'</div>'
       +'<div class="wbboard"><span class="wbbadge">Built from your note</span><svg xmlns="'+NS+'" viewBox="0 0 400 480" role="img" aria-label="'+esc(board.title)+'"></svg></div>'
       +'<div class="wbcap" data-r="cap" aria-live="polite"></div>'
-      +'<div class="wbdash" data-r="dash">'+board.steps.map(function(_,k){ return '<i data-k="'+k+'"></i>'; }).join('')+'</div>'
+      +'<div class="wbdash" data-r="dash" role="group" aria-label="Lesson steps">'+board.steps.map(function(_,k){ return '<i data-k="'+k+'" role="button" tabindex="0" aria-label="Go to step '+(k+1)+' of '+board.steps.length+'"></i>'; }).join('')+'</div>'
       +'<div class="wbft"><span class="wbeq" data-r="eq"><i></i><i></i><i></i><i></i><i></i></span><span>'+mode.narrator+'</span>'+(opts.noAsk?'':'<button class="wbask" data-r="ask">✋ '+(board.mode==='layman'?'Ask Auntie':'Ask')+'</button>')+'<button class="wbplay" data-r="play">▶ Play</button></div>';
     this.host=host; this.$=function(r){ return host.querySelector('[data-r="'+r+'"]'); };
     this.board=new Board(host.querySelector('svg'), board); this.board.draw();
     this.board.reveal('_title',true);
-    this.$('speed').onclick=function(){ var i=SPEEDS.indexOf(self.speed); self.speed=SPEEDS[(i+1)%SPEEDS.length]; this.textContent=self.speed+'×'; settings().boardSpeed=self.speed; if(self.playing) self.go(self.k); };
-    this.$('mute').onclick=function(){ self.muted=!self.muted; this.textContent=self.muted?'🔇':'🔊'; settings().boardMuted=self.muted; if(self.playing) self.go(self.k); };
+    this.$('speed').onclick=function(){ var i=SPEEDS.indexOf(self.speed); self.speed=SPEEDS[(i+1)%SPEEDS.length]; this.textContent=self.speed+'×'; this.setAttribute('aria-label','Speed '+self.speed+'×'); settings().boardSpeed=self.speed; if(self.playing) self.go(self.k); };
+    this.$('mute').onclick=function(){ self.muted=!self.muted; this.textContent=self.muted?'🔇':'🔊'; this.setAttribute('aria-pressed',String(self.muted)); settings().boardMuted=self.muted; if(self.playing) self.go(self.k); };
     this.$('restart').onclick=function(){ self.restart(); };
     this.$('play').onclick=function(){ if(self.playing) self.pause(); else { try{ if(window.unlockAudio) unlockAudio(); }catch(e){} self.play(); } };
     if(this.$('close')) this.$('close').onclick=function(){ if(opts.onClose) opts.onClose(); };
     if(this.$('reel')) this.$('reel').onclick=function(){ self.pause(); makeReel(self.b); };
     if(this.$('ask')) this.$('ask').onclick=function(){ try{ if(window.unlockAudio) unlockAudio(); }catch(e){} self.openAsk(); };
-    Array.prototype.forEach.call(this.$('dash').children,function(d){ d.onclick=function(){ self.jump(+d.getAttribute('data-k')); }; });
+    Array.prototype.forEach.call(this.$('dash').children,function(d){ d.onclick=function(){ self.jump(+d.getAttribute('data-k')); };
+      d.onkeydown=function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); d.click(); } }; });   // a11y: steps work from the keyboard
     if(opts.quota) this.setQuota(opts.quota);
     this.warm(); ACTIVE.push(this);
   }
   Player.prototype.setQuota=function(q){ var e=this.$('q'); if(!e||!q||q.remaining==null) return; e.textContent=q.remaining+' left today'; e.className='wbq'+(q.remaining<=1?' low':''); };
   Player.prototype.warm=function(){ try{ if(!window.warmSpeak) return; var q=this.b.steps.map(function(s){ return s.say; }), i=0;
     (function nx(){ if(i>=q.length) return; window.warmSpeak(q[i++],'read').then(nx,nx); })(); (function nx2(){ if(i>=q.length) return; window.warmSpeak(q[i++],'read').then(nx2,nx2); })(); }catch(e){} };
-  Player.prototype.dash=function(){ var k=this.k; Array.prototype.forEach.call(this.$('dash').children,function(d,i){ d.className=i<k?'done':(i===k?'cur':''); }); };
+  Player.prototype.dash=function(){ var k=this.k; Array.prototype.forEach.call(this.$('dash').children,function(d,i){ d.className=i<k?'done':(i===k?'cur':''); if(i===k) d.setAttribute('aria-current','step'); else d.removeAttribute('aria-current'); }); };
   Player.prototype.caption=function(text){ var words=String(text||'').split(/\s+/).filter(Boolean);
     this.$('cap').innerHTML=words.map(function(w){ return '<span class="w">'+esc(w)+'</span>'; }).join(' ');
     return Array.prototype.slice.call(this.$('cap').querySelectorAll('.w')); };
@@ -387,6 +388,7 @@
       +(reelSupported()?'<button data-a="reel">📲 Share as a reel</button>':'')
       +'<button data-a="done">Done</button><div class="wbendask" data-a="asked"></div>';
     this.host.querySelector('.wbboard').appendChild(box); this.endBox=box;
+    try{ var ae=document.activeElement; if(!ae||ae===document.body||this.host.contains(ae)) box.querySelector('[data-a=again]').focus({preventScroll:true}); }catch(e){}   // a11y: keyboard users land on the end card
     var rb=box.querySelector('[data-a=reel]'); if(rb) rb.onclick=function(){ makeReel(self.b); };
     this.loadTop().then(function(t){ var el=box.querySelector('[data-a=asked]'); if(!el||!t||!t.top||!t.top.length) return;
       el.innerHTML='<span>💬 Students asked</span>'+t.top.slice(0,2).map(function(x,i){ return '<button data-i="'+i+'">'+esc(x.q)+'</button>'; }).join('');
@@ -398,7 +400,9 @@
   Player.prototype.destroy=function(){ this.closeAsk(); this.pause(); try{ if(this._rate0!=null&&window.mbVoiceRate) mbVoiceRate(this._rate0); }catch(e){} var i=ACTIVE.indexOf(this); if(i>=0) ACTIVE.splice(i,1); };
   Player.prototype.poster=function(label){ var self=this, p=document.createElement('div'); p.className='wbposter';
     p.innerHTML='<div class="pb">▶</div><span>'+esc(label||'Watch the explainer')+'</span>';
+    p.setAttribute('role','button'); p.setAttribute('tabindex','0'); p.setAttribute('aria-label',label||'Watch the explainer');
     p.onclick=function(){ try{ if(window.unlockAudio) unlockAudio(); }catch(e){} self.play(); };
+    p.onkeydown=function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); p.click(); } };
     this.host.querySelector('.wbboard').appendChild(p); };
 
 
@@ -540,8 +544,8 @@
     if(!reelSupported()){ toast('This phone can\'t record a reel. Try Chrome.'); return; }
     injectStyles(); var muted=!!settings().boardMuted;
     var W=720,H=1280, cv=document.createElement('canvas'); cv.width=W; cv.height=H; var g=cv.getContext('2d');
-    var ov=document.createElement('div'); ov.className='wbov wbreelov';
-    ov.innerHTML='<div class="wbreel"><div class="wbreelhd"><b>📲 Making your reel…</b><button class="wbx" data-a="x">✕</button></div><div class="wbreelcv"></div><div class="wbreelst" data-a="st">Recording · keep this screen open</div></div>';
+    var ov=document.createElement('div'); ov.className='wbov wbreelov'; ov.id='wbreelov';
+    ov.innerHTML='<div class="wbreel"><div class="wbreelhd"><b>📲 Making your reel…</b><button class="wbx" data-a="x" aria-label="Close">✕</button></div><div class="wbreelcv"></div><div class="wbreelst" data-a="st">Recording · keep this screen open</div></div>';
     ov.querySelector('.wbreelcv').appendChild(cv); document.body.appendChild(ov);
     var hid=document.createElement('div'); hid.style.cssText='position:fixed;left:-2000px;top:0;width:420px;pointer-events:none'; document.body.appendChild(hid);
     var stopped=false, rec=null, voice=null, raf=null, chunks=[], t0=0, img=new Image(), imgReady=false, fontCss='', busy=false;
@@ -585,7 +589,7 @@
         var name='medbank-'+(board.title||'lesson').toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,40)+(mp4?'.mp4':'.webm');
         var file=null; try{ file=new File([blob],name,{type:blob.type}); }catch(e){}
         var url=URL.createObjectURL(blob), body=ov.querySelector('.wbreel');
-        body.innerHTML='<div class="wbreelhd"><b>✓ Your reel is ready</b><button class="wbx" data-a="x">✕</button></div><video src="'+url+'" controls playsinline class="wbreelvid"></video>'
+        body.innerHTML='<div class="wbreelhd"><b>✓ Your reel is ready</b><button class="wbx" data-a="x" aria-label="Close">✕</button></div><video src="'+url+'" controls playsinline class="wbreelvid"></video>'
           +'<div class="wbreelbtns">'+(file&&navigator.canShare&&navigator.canShare({files:[file]})?'<button class="pri" data-a="share">Share to WhatsApp, TikTok…</button>':'')
           +'<a class="wbreeldl" href="'+url+'" download="'+name+'">⬇ Save video</a></div>'
           +(mp4?'':'<div class="wbreelst">Saved as WebM. Some apps want MP4; Chrome on Android saves MP4.</div>');
@@ -606,7 +610,7 @@
   function openModal(board, ctx){
     injectStyles(); closeModal(); stopAllInline();
     var ov=document.createElement('div'); ov.className='wbov'; ov.id='wbov';
-    ov.innerHTML='<div class="wbpanel" role="dialog" aria-modal="true"></div>';
+    ov.innerHTML='<div class="wbpanel"></div>';
     ov.onclick=function(e){ if(e.target===ov) closeModal(); };
     document.body.appendChild(ov); document.addEventListener('keydown',onKey);
     var p=new Player(ov.firstChild, board, { quota:ctx&&ctx.quota, onClose:closeModal,
@@ -621,7 +625,7 @@
     scenes=(scenes||[]).filter(function(sc){ return sc&&sc.board&&sc.board.steps&&sc.board.steps.length; }); if(!scenes.length) return;
     var n=scenes.length, k=0, player=null, done=false, mode=scenes[0].board.mode;
     var ov=document.createElement('div'); ov.className='wbov'; ov.id='wbov';
-    ov.innerHTML='<div class="wbpanel" role="dialog" aria-modal="true">'
+    ov.innerHTML='<div class="wbpanel">'
       +'<div class="wbpvbar"><span class="wbpvt" data-r="t"></span><button class="wbbtn" data-r="prev" aria-label="Previous scene">‹</button><button class="wbbtn" data-r="next" aria-label="Next scene">›</button><button class="wbread" data-r="read">Start reading →</button></div>'
       +'<div data-r="host"></div></div>';
     document.body.appendChild(ov); document.addEventListener('keydown',onKey);
@@ -679,7 +683,7 @@
   function pickMode(){
     injectStyles(); var last=settings().boardLastMode||'';
     return new Promise(function(resolve){
-      var sh=document.createElement('div'); sh.className='wbsheet';
+      var sh=document.createElement('div'); sh.className='wbsheet'; sh.id='wbsheet';
       sh.innerHTML='<div class="in"><h3>How should we explain it?</h3><p>Pick a style. Your explainer is built in that style.</p>'+optHtml('standard',last)+optHtml('layman',last)+'<button class="wbcancel">Cancel</button></div>';
       function done(m){ try{ sh.remove(); }catch(e){} if(m){ settings().boardLastMode=m; save(); } resolve(m||null); }
       sh.onclick=function(e){ if(e.target===sh) done(null); };
