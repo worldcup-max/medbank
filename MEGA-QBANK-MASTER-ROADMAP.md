@@ -42,8 +42,8 @@ MEGA QBANK
 │   ├── hygiene: per-account persistent budget ✅ · admin panel ✅ · canonical anti-dup stems ✅ · retention-key hardening ✅ · quarantine ✅
 │   └── deferred: in-memory backoff→persistent 🟡
 │
-├── A8 — RETEST POOL → CANONICAL PROMOTION  ⬜ (contract required, NOT auto)
-│   └── promotion contract ⬜ · quality gate ⬜ · Target preservation ⬜ · canonical insertion ⬜
+├── A8 — RETEST POOL → CANONICAL PROMOTION  ✅ BUILT (human-only; A8-PROMOTION-CONTRACT.md) · 22/22
+│   └── promotion contract ✅ · quality gate ✅ · Target preservation ✅ · canonical record ✅ (beside the A7 row; A7 status untouched) · evidence needs FEATURES.LEARNING_EVENTS 🟡 · serving promoted items ahead of A7 🟡 deferred
 │
 ├── V1.6 — INTERVENTION ENGINE  🔒 ARCHITECTURALLY COMPLETE + FROZEN (adversarial 20/20) · gap+fragile live · misconception built/off
 │   ├── SPEC re-baselined (target_id identity; A6 owns scheduling; A7 owns supply; reads smartDiagnose) ✅
@@ -129,13 +129,13 @@ V1.8.2 hardened the QA engine; it did NOT advance the phase. We are still in Pha
    PHASE A  CORPUS GROWTH → READINESS         🟢 CURRENT  (47 / 100 approved, 10 families)
      gate: ≥100 approved · ≥8 families · ≥10/family · no family >30% · ≥3/integration-pair
                       ↓
-   PHASE B  INTEGRATED MODE (student-facing)  🔜  one primary target_id; integrated_topics[]/case_id = metadata; selector serves; requested-vs-delivered
+   PHASE B  INTEGRATED MODE (student-facing)  ✅ BUILT, gate-locked (FEATURES.INTEGRATED_MODE) · v19-integrated-serve 35/35  one primary target_id; integrated_topics[]/case_id = metadata; selector serves; requested-vs-delivered
                       ↓
-   PHASE C  REASONING PROFILE — integration axis  🔜  evidence-gated, NO premature claims; [Drill this] → Smart Drill
+   PHASE C  REASONING PROFILE — integration axis  ✅ BUILT · v19-phase-c 9/9  evidence-gated, NO premature claims; [Drill this] → Smart Drill
                       ↓
-   PHASE D  A8 RETEST POOL → CANONICAL PROMOTION  🔜  promotion contract + quality gate; PRESERVE target identity
+   PHASE D  A8 RETEST POOL → CANONICAL PROMOTION  ✅ BUILT (human-only) · v19-a8 22/22  promotion contract + quality gate; PRESERVE target identity
                       ↓
-   PHASE E  CASE MODE — multi-stage clinical cases  🔜  content-gated on genuine integrated inventory (NOT yet branching)
+   PHASE E  CASE MODE — multi-stage clinical cases  ✅ BUILT, gate-locked (FEATURES.CASE_MODE) · linear only  content-gated on genuine integrated inventory (NOT yet branching)
                       ↓
    PHASE F  BRANCHING  🔜  evolving patient state · multi-step decisions · adaptive paths
 ```
@@ -157,5 +157,6 @@ Do NOT: reopen Target retrieval, redo A6, tune V1 adjudicator, modify the frozen
 
 **Working protocol (agreed):** each run I re-open this file and tick what shipped. Before starting any box, I state what I understand and ask for context — no code until the contract is agreed.
 
-_Last ticked: 2026-08-30 — 🔒 QA ENGINE V1.8.2 FROZEN: R1 dependency → R2 clinical/mechanism → R3 SBA → R4 deterministic medication-redundancy. Live gate passed (6-case #3 hard citing Na trajectory; V18-4 SGLT2i + V18-5 β-blocker caught via R4 with R1 passing, 3× stable; V18-6 legit combo not false-flagged). Offline 92/92. V1.8/1.8.1/1.8.2 scope docs written. Weekday integrated-qbank-acquisition schedule RESUMED into human-review queue. Canonical phase spine A→F established; branching correctly seated at Phase F. Phase A is current (47/100 approved). A6/A7/R1/R3 untouched._
+_Last ticked: 2026-11-17 — Phases B, C, D, E BUILT (branch claude/mega-qbank-roadmap). Content gate unchanged: Integrated Mode and Case Mode are served by the server ONLY when the one readinessGate says ready (still ≥100 approved etc.); until then the student cards show the blockers. B: /qbank/integrated/{status,items,log}, family-balanced selector, shortfall reported never padded, requested-vs-delivered log (integrated_serve_log). C: evidence-gated integrated rows per pairing in the Reasoning profile; no Smart Drill engine change. D: A8 gate + human promote; target preserved; A7 row status untouched. E: linear cases = approved rows sharing case_id with stages 1..N, fixed order, cross-stage leakage guard, case builder in the Workbench. Phase A tooling: Workbench export of the queue (offline first-pass), authored-draft import through the same R1–R4 gates (14 drafts for source-blocked hepatic_pharm + endocrine_renal in content/integrated-authored/batch-1.json). Schema: import-server/sql/mega-qbank-phases-b-e.sql. Phase A (reach the gate) remains the only blocker to switching B/E on. Frozen layers untouched; all prior harnesses green._
+_Prior tick: 2026-08-30 — 🔒 QA ENGINE V1.8.2 FROZEN: R1 dependency → R2 clinical/mechanism → R3 SBA → R4 deterministic medication-redundancy. Live gate passed (6-case #3 hard citing Na trajectory; V18-4 SGLT2i + V18-5 β-blocker caught via R4 with R1 passing, 3× stable; V18-6 legit combo not false-flagged). Offline 92/92. V1.8/1.8.1/1.8.2 scope docs written. Weekday integrated-qbank-acquisition schedule RESUMED into human-review queue. Canonical phase spine A→F established; branching correctly seated at Phase F. Phase A is current (47/100 approved). A6/A7/R1/R3 untouched._
 _Prior tick: 2026-08-25 — 🔒 V1.6 ARCHITECTURALLY COMPLETE + FROZEN. Adversarial 20/20; 15/15 harnesses green. Open item: no bounded-escalation rule for Targets that repeatedly fail intervention — deferred. gap+fragile live, misconception built/off._

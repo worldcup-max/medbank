@@ -1,6 +1,6 @@
 # Phase B — Integrated Mode: CONTRACT (draft, pre-implementation)
 
-_Status: 📝 CONTRACT — written during Phase A while the corpus grows. NO code until the readiness gate is genuinely met and this contract is agreed. Attaches to roadmap box "PHASE B — INTEGRATED MODE"._
+_Status: ✅ BUILT 2026-11-17 behind FEATURES.INTEGRATED_MODE and fail-closed on the readiness gate (the server serves nothing until ready===true; the client shows the blockers). Tests: qa/v19-integrated-serve.mjs. Live validation (requested-vs-delivered on real sessions) waits for the gate. Attaches to roadmap box "PHASE B — INTEGRATED MODE"._
 
 ## Purpose
 Expose the approved integrated questions to students as a first-class practice surface, WITHOUT disturbing the frozen scheduling/supply architecture (A6/A7) or the frozen QA engine (R1/R2/R3/R4).
