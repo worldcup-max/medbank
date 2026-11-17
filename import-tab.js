@@ -252,6 +252,7 @@
           if(isFinite(rc)) chips+='<span class="mbi-chip">'+rc+' recall</span>';
           if(builds.qbank) chips+='<span class="mbi-chip">Q-bank</span>';
           if(builds.written) chips+='<span class="mbi-chip">Written</span>';
+          if(out.clinsim==='building' && window.MB_CLINSIM && MB_CLINSIM.visible()) chips+='<span class="mbi-chip">🏥 Clinical cases on the way</span>';   // built from the note after import (400-600 level)
           p.innerHTML=
             '<div style="width:60px;height:60px;border-radius:50%;background:'+TEAL+';color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px">✓</div>'+
             '<div style="font-weight:800;font-size:18px;margin:14px 0 2px;color:'+INK+'">Your study set is ready</div>'+
