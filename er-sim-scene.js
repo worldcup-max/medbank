@@ -449,6 +449,14 @@ function setPhoto(c, run, A){
   o.push('</div>');
   return o.join('');
 }
+/* The picture the scene shows right now (for the pinned mini bar). Null for drawn (non-painted) cases. */
+function currentSrc(c, run){
+  if(!c.art) return null;
+  var A=artOf(c);
+  if(A.files){ var st=setState(c, run, A, looks(c, run)); if(st==='distress' && A.files['distress-f1']) st='distress-f1'; return A.files[st]?A.dir+A.files[st]:null; }
+  if(A.states){ var s2=artState(c, run, looks(c, run)); return A.dir+A.states[s2]; }
+  return null;
+}
 /* Close-ups for an examined system. Every patient has the same five sites, so which pictures exist never hints at the answer. */
 var CLOSE={ airway:['exam-mouth'], circulation:['exam-hands'], abdomen:['exam-abdomen'], skin:['exam-eyes','exam-hands','exam-skin'] };
 var CLOSE_LABEL={ 'exam-eyes':'Eyes', 'exam-hands':'Hands and nails', 'exam-mouth':'Mouth and tongue', 'exam-skin':'Skin', 'exam-abdomen':'Abdomen' };
@@ -644,5 +652,5 @@ var CSS=[
   '@media (prefers-reduced-motion:reduce){.ers-scene *{animation:none!important}.ers-in{opacity:1}.ers-flip img:first-child{opacity:1}}'
 ].join('\n');
 
-root.ERSIM_SCENE={ svg:svg, css:CSS, siteFor:siteFor, looks:looks, sound:SND, artState:artState, artOf:artOf, setState:setState, closeups:closeups, picture:picture };
+root.ERSIM_SCENE={ svg:svg, css:CSS, siteFor:siteFor, looks:looks, sound:SND, artState:artState, artOf:artOf, setState:setState, closeups:closeups, picture:picture, currentSrc:currentSrc };
 })(typeof window!=='undefined'?window:globalThis);
