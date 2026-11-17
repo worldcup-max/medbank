@@ -52,7 +52,7 @@ function siteFor(id, cat){
 }
 
 function svg(c, run, last){
-  if(c.art && typeof document!=='undefined') return photo(c, run, last);
+  if(c.art && typeof document!=='undefined'){ var A0=artOf(c); return A0.at ? photo(c, run, last) : setPhoto(c, run, A0); }
   var lk=c.look||{}, L=looks(c, run), v=run.v, dead=run.outcome==='died';
   SND.set(run);
   var age=lk.build||'adult', scale= age==='child'?0.78 : age==='teen'?0.9 : 1;
@@ -391,6 +391,76 @@ function photo(c, run, last){
   o.push('</div>');
   return o.join('');
 }
+/* ---------------------------------------------------------------------
+ * Picture-library sets (branching cases). A case variant names a set:
+ *   art = { topic, set, treatedWhen:{ fixed:[], done:[] } }
+ * window.MB_ART.resolve(topic, set) (the picture library's picker) returns
+ * { dir, files:{ base, distress, critical, treated, night, discharge, arrival,
+ *   '<state>-f1..f4', 'exam-eyes|hands|mouth|skin|abdomen' } } with only the files that exist.
+ * Without it, files are looked for in er-sim-art/<topic>/<set>/ under the standard names.
+ * These sets have no equipment anchors, so the picture itself carries the story: the state
+ * picture (crossfading), a looping flipbook for a moving state (fits, rigors, fast breathing),
+ * the arrival picture before the first action, and the night picture on a night shift.
+ * --------------------------------------------------------------------- */
+var STD_FILES=['base','distress','critical','treated','night','discharge','arrival','distress-f1','distress-f2','distress-f3','distress-f4',
+  'exam-eyes','exam-hands','exam-mouth','exam-skin','exam-abdomen'];
+var ART_CACHE={};
+function artOf(c){
+  var a=c.art||{}; if(a.dir || !a.set) return a;
+  var key=(a.topic||'')+'/'+a.set;
+  if(!ART_CACHE[key]){
+    var r=null; try{ r=root.MB_ART && root.MB_ART.resolve ? root.MB_ART.resolve(a.topic, a.set) : null; }catch(_){ r=null; }
+    if(!r || !r.dir || !r.files){ r={ dir:'er-sim-art/'+a.topic+'/'+a.set+'/', files:{} }; STD_FILES.forEach(function(k){ r.files[k]=k+'.webp'; }); }
+    ART_CACHE[key]={ dir:r.dir, files:r.files };
+  }
+  var R=ART_CACHE[key];
+  return { dir:R.dir, files:R.files, key:key, treatedWhen:a.treatedWhen, states:{ base:R.files.base, distress:R.files.distress, critical:R.files.critical, treated:R.files.treated } };
+}
+function setState(c, run, A, L){
+  if(!run.t && !(run.log||[]).length && A.files.arrival) return 'arrival';
+  if(run.outcome==='died' || run.v.spo2<80 || run.v.sbp<70) return A.files.critical?'critical':'base';
+  if((L.distress || L.fitting) && A.files.distress) return 'distress';
+  var tw=A.treatedWhen;
+  if(A.files.treated && tw && (tw.fixed||[]).every(function(id){ var s=run.probs[id]; return s && s.fixed; }) &&
+     (tw.done||[]).every(function(id){ return did(run,[id]); })) return 'treated';
+  if(c.variant && c.variant.night && A.files.night) return 'night';
+  return 'base';
+}
+var SETPREV={}, SETLOADED={};
+function setPhoto(c, run, A){
+  var L=looks(c, run), dead=run.outcome==='died';
+  SND.set(run);
+  var st=setState(c, run, A, L), pk=A.key, prev=SETPREV[pk]; SETPREV[pk]=st;
+  var fade=prev && prev!==st;
+  var url=function(k){ return A.dir+A.files[k]; };
+  if(!SETLOADED[pk]){ SETLOADED[pk]=1; ['base','distress','critical','treated','night','arrival','distress-f2','distress-f3','distress-f4'].forEach(function(k){ if(A.files[k]){ var im=new Image(); im.src=url(k); } }); }
+  var frames=[]; if(st==='distress') for(var i=1;i<=4;i++){ if(A.files['distress-f'+i]) frames.push(url('distress-f'+i)); }
+  var tint=c.variant && c.variant.night && st!=='night' && st!=='arrival';   // night shift: the day pictures are dimmed and cooled
+  var o=['<div class="ers-scene ers-photo ers-set'+(dead?' ers-dead':'')+(tint?' ers-nite':'')+'" role="img" aria-label="'+e(sceneLabel(c, run, L))+'" style="aspect-ratio:1206/674">'];
+  if(fade && A.files[prev]) o.push('<img class="ers-ph" src="'+e(url(prev))+'" alt="">');
+  if(frames.length>1 && !dead){
+    o.push('<div class="ers-ph ers-flip'+(fade?' ers-in':'')+'">'+frames.map(function(f, k){ return '<img src="'+e(f)+'" alt="" style="animation-delay:'+(k*0.18).toFixed(2)+'s;animation-duration:'+(frames.length*0.18).toFixed(2)+'s">'; }).join('')+'</div>');
+  } else o.push('<img class="ers-ph'+(fade?' ers-in':'')+'" src="'+e(url(st))+'" alt="">');
+  if(st==='arrival') o.push('<div class="ers-cap">Arriving at the '+e(((root.ERSIM_ENGINE||{}).SETTINGS||{})[c.setting]?ERSIM_ENGINE.SETTINGS[c.setting].label:'hospital')+'</div>');
+  o.push('<button type="button" class="ers-snd" onclick="ERSIM_SCENE.sound.toggle()" aria-pressed="'+SND.isOn()+'" aria-label="Monitor sound">'+(SND.isOn()?'🔊':'🔇')+'</button>');
+  o.push('</div>');
+  return o.join('');
+}
+/* Close-ups for an examined system. Every patient has the same five sites, so which pictures exist never hints at the answer. */
+var CLOSE={ airway:['exam-mouth'], circulation:['exam-hands'], abdomen:['exam-abdomen'], skin:['exam-eyes','exam-hands','exam-skin'] };
+var CLOSE_LABEL={ 'exam-eyes':'Eyes', 'exam-hands':'Hands and nails', 'exam-mouth':'Mouth and tongue', 'exam-skin':'Skin', 'exam-abdomen':'Abdomen' };
+function closeups(c, examId){
+  if(!c.art) return '';
+  var A=artOf(c); if(!A.files) return '';
+  var ks=(CLOSE[examId]||[]).filter(function(k){ return A.files[k]; }); if(!ks.length) return '';
+  return '<div class="ers-close">'+ks.map(function(k){ return '<figure><img src="'+e(A.dir+A.files[k])+'" alt="Close-up: '+e(CLOSE_LABEL[k])+'" loading="lazy" width="1206" height="674"><figcaption>'+e(CLOSE_LABEL[k])+'</figcaption></figure>'; }).join('')+'</div>';
+}
+/* One named picture of the set (the discharge picture on the debrief). */
+function picture(c, key, caption){
+  if(!c.art) return '';
+  var A=artOf(c); if(!A.files || !A.files[key]) return '';
+  return '<figure class="ers-fig"><img src="'+e(A.dir+A.files[key])+'" alt="'+e(caption||'')+'" loading="lazy" width="1206" height="674">'+(caption?'<figcaption>'+e(caption)+'</figcaption>':'')+'</figure>';
+}
 function plethPath(){
   var b=function(x){ return 'L'+(x+10)+' 16 C'+(x+18)+' 2 '+(x+26)+' 2 '+(x+34)+' 10 C'+(x+38)+' 13 '+(x+42)+' 9 '+(x+48)+' 12 C'+(x+60)+' 16 '+(x+76)+' 17 '+(x+88)+' 16'; };
   return 'M0 16 '+b(0)+' '+b(88);
@@ -561,8 +631,15 @@ var CSS=[
   '.ers-led{animation:ersLed 2s ease-in-out infinite}@keyframes ersLed{50%{opacity:.35}}',
   '.ers-snd{position:absolute;right:8px;top:8px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(29,36,51,.72);color:#fff;font-size:18px;cursor:pointer}',
   '.ers-snd:focus-visible{outline:3px solid #ffb020;outline-offset:2px}',
-  '@media (prefers-reduced-motion:reduce){.ers-scene *{animation:none!important}.ers-in{opacity:1}}'
+  '.ers-flip{animation:ersShake .4s ease-in-out infinite}.ers-flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:ersFlip .72s steps(1,end) infinite}',
+  '@keyframes ersFlip{0%{opacity:1}25%{opacity:0}100%{opacity:0}}@keyframes ersShake{0%,100%{transform:translate(0,0)}25%{transform:translate(.6px,-.4px)}75%{transform:translate(-.6px,.4px)}}',
+  '.ers-nite .ers-ph{filter:brightness(.6) saturate(.7) hue-rotate(-8deg)}.ers-nite::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 45% 55%,rgba(255,214,150,.16),rgba(14,22,48,.42) 75%);pointer-events:none}',
+  '.ers-cap{position:absolute;left:10px;bottom:10px;background:rgba(29,36,51,.78);color:#fff;font-size:13px;font-weight:700;padding:5px 10px;border-radius:999px}',
+  '.ers-close{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:-4px 0 12px}',
+  '.ers-close figure,.ers-fig{margin:0}.ers-close img,.ers-fig img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);display:block}',
+  '.ers-close figcaption,.ers-fig figcaption{font-size:12px;color:var(--dim);margin-top:3px}.ers-fig{margin-top:12px;max-width:520px}',
+  '@media (prefers-reduced-motion:reduce){.ers-scene *{animation:none!important}.ers-in{opacity:1}.ers-flip img:first-child{opacity:1}}'
 ].join('\n');
 
-root.ERSIM_SCENE={ svg:svg, css:CSS, siteFor:siteFor, looks:looks, sound:SND, artState:artState };
+root.ERSIM_SCENE={ svg:svg, css:CSS, siteFor:siteFor, looks:looks, sound:SND, artState:artState, artOf:artOf, setState:setState, closeups:closeups, picture:picture };
 })(typeof window!=='undefined'?window:globalThis);

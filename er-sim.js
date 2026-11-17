@@ -137,7 +137,8 @@ var EXAM=[
 var SETTINGS={
   phc:{ label:'Primary Health Centre', short:'PHC', note:'Bedside tests only. No X-ray, no lab, no theatre. Stabilise and refer.' },
   gh: { label:'General Hospital', short:'General', note:'Basic lab, X-ray and ECG. No CT. Specialists on call.' },
-  th: { label:'Teaching Hospital ED', short:'Teaching', note:'Full lab, ultrasound, CT and every specialty.' }
+  th: { label:'Teaching Hospital ED', short:'Teaching', note:'Full lab, ultrasound, CT and every specialty.' },
+  pv: { label:'Private Hospital', short:'Private', note:'Own lab, X-ray and ECG, a doctor on site, specialists by phone. No CT.', as:'gh' }   // equipped like a General Hospital (`as`)
 };
 
 var DISPOSITIONS=[
@@ -154,7 +155,71 @@ var LIMITS={ hr:[0,240], sbp:[0,260], dbp:[0,160], rr:[0,70], spo2:[40,100], tem
 /* ---------------------------------------------------------------- engine */
 function clone(o){ return JSON.parse(JSON.stringify(o)); }
 function clamp(k,v){ var l=LIMITS[k]; return l ? Math.max(l[0],Math.min(l[1],v)) : v; }
-function available(a, setting){ return !a.at || a.at.indexOf(setting)>=0; }
+function available(a, setting){ var s=(SETTINGS[setting]&&SETTINGS[setting].as)||setting; return !a.at || a.at.indexOf(s)>=0; }
+
+/* ------------------------------------------------- branching starts (variants)
+ * A case may carry any of these. Each run then starts differently, from one seed:
+ *   variants[]    partial cases (a different patient, hospital, presentation and art set).
+ *                 Plain objects are merged key by key (exam, tests, responses, vitals, patient...),
+ *                 arrays of {id} are merged by id (history, problems), other arrays replace,
+ *                 drop:{history:[ids], problems:[ids]} removes items.
+ *   severity[]    {id, label, vitals:{k:+/-}, drift:x}: how late the patient came. drift scales every problem's drift.
+ *   nightShift    {chance, tatX, note}: lab tests (those with `at`) take tatX times as long at night.
+ *   complications[] {id, label, problem, at:[from,to], chance, unless[]}: at most one is drawn per run.
+ *                 It wakes a latent problem of the case (so it reuses the distress / critical pictures).
+ * instantiate(c, opts) returns the case to play (c itself when it has none of these) with
+ * c.variant = {seed, variant, severity, night, complication, ...} so the same start can be rebuilt. */
+function rng(seed){ var a=seed>>>0; return function(){ a=(a+0x6D2B79F5)>>>0; var t=a; t=Math.imul(t^(t>>>15), t|1); t^=t+Math.imul(t^(t>>>7), t|61); return ((t^(t>>>14))>>>0)/4294967296; }; }
+function isPlain(o){ return o && typeof o==='object' && !Array.isArray(o); }
+function mergeCase(base, v){
+  var out=clone(base);
+  Object.keys(v).forEach(function(k){
+    if(k==='drop'||k==='id'||k==='label') return;
+    var val=v[k], cur=out[k];
+    if(Array.isArray(val) && Array.isArray(cur) && val.length && val.every(function(x){ return isPlain(x)&&x.id; }) && cur.every(function(x){ return isPlain(x)&&x.id; })){
+      val.forEach(function(x){ var i=-1; cur.forEach(function(y,j){ if(y.id===x.id) i=j; }); if(i>=0) cur[i]=Object.assign({}, cur[i], clone(x)); else cur.push(clone(x)); });
+    } else if(isPlain(val) && isPlain(cur)) out[k]=Object.assign(cur, clone(val));
+    else out[k]=clone(val);
+  });
+  Object.keys(v.drop||{}).forEach(function(k){ out[k]=(out[k]||[]).filter(function(x){ return v.drop[k].indexOf(x.id)<0; }); });
+  return out;
+}
+function branching(c){ return !!(c && ((c.variants||[]).length || (c.severity||[]).length || c.nightShift || (c.complications||[]).length)); }
+function instantiate(c, opts){
+  if(!branching(c)) return c;
+  opts=opts||{};
+  var seed=(opts.seed!==undefined && opts.seed!==null) ? (opts.seed>>>0) : Math.floor(Math.random()*4294967296);
+  var r=rng(seed), r1=r(), r2=r(), r3=r();   // always drawn in this order, so a seed rebuilds the same start
+  var vs=c.variants||[], vi=vs.length ? (opts.variant!=null ? opts.variant : Math.floor(r1*vs.length)) : -1;
+  var out=vi>=0 ? mergeCase(c, vs[vi]) : clone(c);
+  delete out.variants;
+  var sv=c.severity||[], si=sv.length ? (opts.severity!=null ? opts.severity : Math.floor(r2*sv.length)) : -1, sev=si>=0?sv[si]:null;
+  if(sev){
+    Object.keys(sev.vitals||{}).forEach(function(k){ if(typeof out.vitals[k]==='number') out.vitals[k]=Math.round(clamp(k, out.vitals[k]+sev.vitals[k])*10)/10; });
+    if(out.vitals.gcs>15) out.vitals.gcs=15;
+    if(sev.drift && sev.drift!==1) (out.problems||[]).forEach(function(p){ if(p.drift) Object.keys(p.drift).forEach(function(k){ p.drift[k]=p.drift[k]*sev.drift; }); });
+  }
+  var ns=c.nightShift, night=ns ? (opts.night!=null ? !!opts.night : r3<(ns.chance==null?0.33:ns.chance)) : false;
+  if(night){
+    out.tat=out.tat||{};
+    CATALOG.forEach(function(a){ if(a.cat==='tests' && a.at) out.tat[a.id]=Math.round(a.tat*(ns.tatX||2)); });
+    if(ns.note) out.triage=(out.triage?out.triage+' ':'')+ns.note;
+  }
+  var comp=null, pool=(out.complications||c.complications||[]).slice();
+  if(opts.complication!==undefined){ comp=opts.complication===null?null:(pool.filter(function(x){ return x.id===opts.complication; })[0]||null); }
+  else for(var i=0;i<pool.length && !comp;i++){ if(r()<(pool[i].chance==null?0.5:pool[i].chance)) comp=pool[i]; }
+  var compAt=null;
+  if(comp){
+    var w=comp.at||[20,40]; compAt=w[0]+Math.floor(r()*(w[1]-w[0]+1));
+    out.timers=(out.timers||[]).concat([{ at:compAt, problem:comp.problem, unless:comp.unless||[] }]);
+  }
+  delete out.severity; delete out.nightShift; delete out.complications;
+  out.variant={ seed:seed, variant:vi, id:vi>=0?(vs[vi].id||String(vi)):null, label:vi>=0?(vs[vi].label||''):'',
+    severity:si, severityId:sev?sev.id:null, severityLabel:sev?(sev.label||''):'', night:night,
+    complication:comp?{ id:comp.id, label:comp.label||comp.id, problem:comp.problem, at:compAt }:null };
+  return out;
+}
+function variantOpts(run){ var v=run&&run.variant; return v ? { seed:v.seed, variant:v.variant<0?null:v.variant, severity:v.severity<0?null:v.severity, night:v.night, complication:v.complication?v.complication.id:null } : null; }
 
 function newRun(c){
   var probs={};
@@ -169,6 +234,7 @@ function newRun(c){
     results:{},       // testId -> {t, text}
     recover:[],       // {k, perMin, until}
     timers:(c.timers||[]).map(function(tm){ return { at:tm.at, problem:tm.problem, unless:tm.unless||[] }; }),   // {at, problem, unless:[ids]}
+    variant:c.variant||null,   // the branching start this run was dealt (instantiate), so a reload rebuilds the same case
     dx:null, dispo:null, ended:false, outcome:null, startedAt:Date.now()
   };
 }
@@ -199,7 +265,7 @@ function tick(c, run, minutes){
     });
     run.pending=run.pending.filter(function(p){
       if(run.t<p.ready) return true;
-      var text=testResult(c, run, p.id, p.orderedState);
+      var text=testResult(c, run, p.id, p.orderedState, p.orderedActive);
       run.results[p.id]={ t:run.t, text:text };
       log(run,'result', BYID[p.id].label+': '+text);
       return false;
@@ -232,10 +298,14 @@ function startRecovery(run, deltas, over){
   });
 }
 
-function testResult(c, run, id, stateAtOrder){
+function testResult(c, run, id, stateAtOrder, activeAtOrder){
   var spec=(c.tests||{})[id], a=BYID[id];
   if(spec===undefined) return a.norm;
   if(typeof spec==='string') return spec;
+  if(spec.active){   // a result that only shows while a (latent) problem is active, e.g. glucose when late hypoglycaemia has set in
+    var ak=Object.keys(spec.active);
+    for(var j=0;j<ak.length;j++){ if(activeAtOrder && activeAtOrder[ak[j]]) return spec.active[ak[j]]; }
+  }
   if(spec.fixed){
     var keys=Object.keys(spec.fixed);
     for(var i=0;i<keys.length;i++){ if(stateAtOrder && stateAtOrder[keys[i]]) return spec.fixed[keys[i]]; }
@@ -247,12 +317,15 @@ function examFinding(c, run, id){
   var spec=(c.exam||{})[id];
   if(spec===undefined) return 'Nothing abnormal found.';
   if(typeof spec==='string') return spec;
+  var ak=Object.keys(spec.active||{});
+  for(var j=0;j<ak.length;j++){ var sa=run.probs[ak[j]]; if(sa&&sa.active&&!sa.fixed) return spec.active[ak[j]]; }
   var keys=Object.keys(spec.fixed||{});
   for(var i=0;i<keys.length;i++){ var st=run.probs[keys[i]]; if(st&&st.fixed) return spec.fixed[keys[i]]; }
   return spec.r;
 }
 
 function fixedMap(run){ var m={}; Object.keys(run.probs).forEach(function(k){ m[k]=run.probs[k].fixed; }); return m; }
+function activeMap(run){ var m={}; Object.keys(run.probs).forEach(function(k){ var s=run.probs[k]; m[k]=!!(s.active&&!s.fixed); }); return m; }
 
 // Do one thing. Returns {ok, text} for the UI to show.
 function act(c, run, id){
@@ -262,10 +335,11 @@ function act(c, run, id){
   if(a.cat==='tests'){
     if(run.pending.some(function(p){ return p.id===id; })) return { ok:false, text:'Already sent. Waiting for the result.' };
     (run.done[id]=run.done[id]||[]).push(run.t);
-    run.pending.push({ id:id, ready:run.t+a.tat, orderedState:fixedMap(run) });
+    var tat=(c.tat&&c.tat[id])||a.tat;
+    run.pending.push({ id:id, ready:run.t+tat, orderedState:fixedMap(run), orderedActive:activeMap(run) });
     log(run,'test','Sent: '+a.label);
     tick(c, run, 1);
-    return { ok:true, text:a.label+' sent. Result in about '+fmtDur(a.tat)+'.' };
+    return { ok:true, text:a.label+' sent. Result in about '+fmtDur(tat)+'.' };
   }
   (run.done[id]=run.done[id]||[]).push(run.t);
   var reply=(c.responses||{})[id] || (a.cat==='team' ? 'They will come when they can. Keep managing the patient.' : null);
@@ -277,7 +351,7 @@ function act(c, run, id){
     st.count+=1;
     if(!st.active){ if(p.preventable){ st.fixed=true; } return; }
     if(st.count>=(p.need||1)){
-      st.fixed=true;
+      st.fixed=true; st.fixedAt=run.t;
       startRecovery(run, p.onFix, p.over);
       if(p.fixText) log(run,'event',p.fixText);
     }
@@ -383,10 +457,43 @@ function score(c, run){
   else if((dp.harm||[]).indexOf(run.dispo)>=0){ dpEarned=-10; dpNote='Unsafe. '+(dp.why||''); }
   else dpNote='Not the best choice. '+(dp.why||'');
   add('dispo', 'Disposition'+(dpLabel?': '+dpLabel:''), dpPts, dpEarned, dpNote);
+  var cb=curveball(c, run);
+  if(cb && cb.happened) add('critical', 'Handled the curveball: '+cb.label, 10, cb.fixed?(cb.response<=15?10:5):0,
+    cb.fixed ? 'It started at '+cb.at+' min. You treated it '+cb.response+' min later'+(cb.response>15?' (aim for within 15).':'.') : 'It started at '+cb.at+' min and was never treated.');
   if(run.outcome==='died') add('harm','The patient died', 0, -30, 'Deterioration was not reversed in time.');
   var pct=max?Math.max(0,Math.min(100,Math.round(100*got/max))):0;
   var grade = run.outcome==='died' ? 'Patient died' : pct>=85?'Excellent': pct>=70?'Safe': pct>=50?'Borderline':'Unsafe';
   return { pct:pct, got:got, max:max, grade:grade, items:items, minutes:run.t };
+}
+/* The complication this run was dealt, and what became of it. */
+function curveball(c, run){
+  var cp=c.variant&&c.variant.complication; if(!cp) return null;
+  var st=run.probs[cp.problem]; if(!st) return null;
+  var happened=st.since!==null && st.since!==undefined;
+  return { label:cp.label, at:happened?st.since:cp.at, happened:happened, prevented:!happened && st.fixed, fixed:happened && st.fixed,
+    response:(happened && st.fixed && st.fixedAt!=null) ? Math.max(0, st.fixedAt-st.since) : null };
+}
+/* The student's path next to the best path: every critical step in its target order, when (or whether) they did it,
+   then the curveball, what they did that was off the path, and where the patient went. Derived from the run only. */
+function pathCompare(c, run){
+  var steps=(c.critical||[]).map(function(r, i){ return { r:r, i:i }; });
+  steps.sort(function(a,b){ var x=a.r.by==null?1e9:a.r.by, y=b.r.by==null?1e9:b.r.by; return x-y || a.i-b.i; });
+  var rows=steps.map(function(s){
+    var r=s.r, t=firstTime(run, r.any), did=(r.any||[]).filter(function(id){ return run.done[id]; })[0];
+    return { label:r.label, best:r.by!=null?('by '+r.by+' min'):'during the case', yours:t===null?null:t, what:did?BYID[did].label:null,
+      status:t===null?'missed':(r.by!=null && t>r.by?'late':'on-time') };
+  });
+  var off=[];
+  (c.harmful||[]).forEach(function(r){
+    var ts=[]; (r.any||[]).forEach(function(id){ (run.done[id]||[]).forEach(function(t){ ts.push(t); }); });
+    var bad=ts.some(function(t){ if(!r.unless) return true; var b=firstTime(run, r.unless); return b===null || b>t; });
+    if(r.repeat) bad=ts.length>r.repeat;
+    if(bad) off.push({ label:r.label, at:Math.min.apply(null, ts), why:r.why||'' });
+  });
+  var dp=c.dispo||{}, lab=function(id){ return (DISPOSITIONS.filter(function(d){ return d.id===id; })[0]||{}).label||id; };
+  return { rows:rows, curveball:curveball(c, run), off:off,
+    dispo:{ best:(dp.best||[]).map(lab), yours:run.dispo?lab(run.dispo):null, ok:(dp.best||[]).indexOf(run.dispo)>=0 },
+    dx:{ best:dxLabel(c, c.dx.correct[0]), yours:run.dx?dxLabel(c, run.dx):null, ok:c.dx.correct.indexOf(run.dx)>=0 } };
 }
 function dxLabel(c, id){ var o=(c.dx.options||[]).filter(function(x){ return x.id===id; })[0]; return o?o.label:id; }
 
@@ -409,7 +516,8 @@ function fmtDur(m){ if(m>=1440) return Math.round(m/1440)+' day'+(m>=2880?'s':''
 
 var ENGINE={ CATALOG:CATALOG, BYID:BYID, EXAM:EXAM, SETTINGS:SETTINGS, DISPOSITIONS:DISPOSITIONS, VITAL_KEYS:VITAL_KEYS,
   newRun:newRun, act:act, ask:ask, examine:examine, wait:wait, tick:tick, score:score, finish:finish, status:status,
-  matchHistory:matchHistory, available:available, fmtDur:fmtDur, examFinding:examFinding };
+  matchHistory:matchHistory, available:available, fmtDur:fmtDur, examFinding:examFinding,
+  instantiate:instantiate, branching:branching, variantOpts:variantOpts, pathCompare:pathCompare, curveball:curveball, rng:rng };
 root.ERSIM_ENGINE=ENGINE;
 if(typeof module!=='undefined' && module.exports) module.exports=ENGINE;
 
@@ -420,6 +528,17 @@ function cases(){ return root.ERSIM_CASES||[]; }
 function caseById(id){ return cases().filter(function(c){ return c.id===id; })[0]||null; }
 function e(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]; }); }
 function on(){ try{ var C=root.MEDBANK_CONFIG||{}; if(C.FEATURES&&C.FEATURES.ER_SIM) return true; if(root.MB_CLINSIM&&root.MB_CLINSIM.on()) return true; return root.localStorage&&localStorage.mbersim==='1'; }catch(_){ return false; } }   // also on inside Clinical Simulation (clinsim.js)
+/* Patient cases: the branching cases, opened from Mega Qbank for 400-600 level. FEATURES.PATIENT_CASES (default false),
+   or localStorage.mbcases='1' on your own device. They play in this simulator but don't switch the rest of ER Sim on. */
+function casesOn(){ try{ var C=root.MEDBANK_CONFIG||{}; if(C.FEATURES&&C.FEATURES.PATIENT_CASES) return true; return root.localStorage&&localStorage.mbcases==='1'; }catch(_){ return false; } }
+function clinicalLevel(){
+  var l=null;
+  try{ l=root.MB_SYNC&&root.MB_SYNC.currentLevel&&root.MB_SYNC.currentLevel(); }catch(_){}
+  try{ if(!l && localStorage.mbclinsimlevel) l=localStorage.mbclinsimlevel; }catch(_){}   // testing on a device with no account
+  return [400,500,600].indexOf(Number(l))>=0;
+}
+function branchCases(){ return cases().filter(function(c){ return ENGINE.branching(c); }); }
+function backHref(){ return on() ? '#/ersim' : '#/mega'; }
 
 var RUN=null, CASE=null, TAB='talk', CHAT=[], BUSY=false, DEBRIEF=null, FILTER='all', LAST=null;
 var RUN_KEY='mb_ersim_run';
@@ -508,7 +627,13 @@ function css(){
   '.ers-items li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}',
   '.ers-items .pt{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}',
   '.ers-items .n{display:block;color:var(--dim);font-size:12.5px;margin-top:2px}',
-  '.ers-teach li{margin-bottom:6px;font-size:14px;line-height:1.5}'
+  '.ers-teach li{margin-bottom:6px;font-size:14px;line-height:1.5}',
+  '.ers-tag.night{background:#1e2a4a;color:#dfe6ff}',
+  '.ers-path{display:grid;font-size:13.5px}',
+  '.ers-path-h,.ers-path-r{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}',
+  '.ers-path-h{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);font-weight:700}',
+  '.ers-path-r.late span:last-child{color:var(--warntx);font-weight:700}.ers-path-r.missed span:last-child{color:var(--badtx);font-weight:700}',
+  '@media (max-width:520px){.ers-path-h{display:none}.ers-path-r{grid-template-columns:1fr 1fr}.ers-path-r span:first-child{grid-column:1/-1;font-weight:700}.ers-path-r [data-k]::before{content:attr(data-k) ": ";color:var(--dim);font-weight:400}}'
   ].join('\n');
   if(root.ERSIM_SCENE) st.textContent+='\n'+root.ERSIM_SCENE.css;
   document.head.appendChild(st);
@@ -521,20 +646,21 @@ function lobby(){
   var list=cases();
   var runs=store().runs, done={}; runs.forEach(function(r){ done[r.caseId]=1; });
   var avg=runs.length?Math.round(runs.reduce(function(s,r){ return s+r.pct; },0)/runs.length):null;
-  var shown=list.filter(function(c){ return FILTER==='all'||c.setting===FILTER; });
+  var settingsOf=function(c){ return ENGINE.branching(c)&&(c.variants||[]).length ? c.variants.map(function(v){ return v.setting||c.setting; }) : [c.setting]; };
+  var shown=list.filter(function(c){ return FILTER==='all'||settingsOf(c).indexOf(FILTER)>=0; });
   var h='<div class="ers-lobby"><h1>🚑 ER Sim</h1>'+
     '<p class="sub">You are the doctor on duty. A patient arrives. Take the history, examine, send tests, treat, call for help, then decide where they go. The patient gets better or worse depending on what you do and how fast you do it.</p>'+
     '<div class="ers-meta">'+list.length+' cases · '+Object.keys(done).length+' played'+(avg!==null?' · average score '+avg+'%':'')+'</div>'+
     '<div class="ers-filter" role="group" aria-label="Facility">'+
-      [['all','All'],['phc','Primary Health Centre'],['gh','General Hospital'],['th','Teaching Hospital']].map(function(f){
+      [['all','All'],['phc','Primary Health Centre'],['gh','General Hospital'],['pv','Private Hospital'],['th','Teaching Hospital']].map(function(f){
         return '<button class="ers-chip" aria-pressed="'+(FILTER===f[0])+'" onclick="MB_ERSIM.filter(\''+f[0]+'\')">'+f[1]+'</button>'; }).join('')+
     '</div><div class="ers-grid">';
   shown.forEach(function(c){
     var b=bestFor(c.id);
     h+='<button class="ers-case" onclick="MB_ERSIM.open(\''+c.id+'\')">'+
-      '<div>'+(c.tutorial?'<span class="ers-tag tut">Tutorial</span>':'')+'<span class="ers-tag">'+e(SETTINGS[c.setting].short)+'</span><span class="ers-tag">'+e(c.level||'')+'</span></div>'+
+      '<div>'+(c.tutorial?'<span class="ers-tag tut">Tutorial</span>':'')+(ENGINE.branching(c)?'<span class="ers-tag">🔀 Branching</span><span class="ers-tag">Varies</span>':'<span class="ers-tag">'+e(SETTINGS[c.setting].short)+'</span>')+'<span class="ers-tag">'+e(c.level||'')+'</span></div>'+
       '<h3>'+e(c.title)+'</h3>'+
-      '<div class="ers-meta">'+e(c.patient.name)+', '+e(c.patient.age)+' '+e(c.patient.sex)+'</div>'+
+      '<div class="ers-meta">'+(ENGINE.branching(c)&&(c.variants||[]).length?(c.variants.length+' different patients'):(e(c.patient.name)+', '+e(c.patient.age)+' '+e(c.patient.sex)))+'</div>'+
       (b!==null?'<div class="ers-best">Best: '+b+'%</div>':'<div class="ers-meta">Not played yet</div>')+
     '</button>';
   });
@@ -595,7 +721,7 @@ function examPanel(){
   });
   h+='</div><h4>Findings</h4>';
   var any=false;
-  EXAM.forEach(function(x){ if(RUN.examined[x.id]!==undefined){ any=true; h+='<p class="ers-find"><b>'+e(x.label)+':</b> '+e(ENGINE.examFinding(CASE,RUN,x.id))+'</p>'; } });
+  EXAM.forEach(function(x){ if(RUN.examined[x.id]!==undefined){ any=true; h+='<p class="ers-find"><b>'+e(x.label)+':</b> '+e(ENGINE.examFinding(CASE,RUN,x.id))+'</p>'+(root.ERSIM_SCENE&&root.ERSIM_SCENE.closeups?root.ERSIM_SCENE.closeups(CASE, x.id):''); } });
   return h+(any?'':'<p class="ers-meta">Nothing examined yet.</p>');
 }
 function testsPanel(){
@@ -644,7 +770,7 @@ function hint(){
 }
 function shift(){
   var st=ENGINE.status(CASE, RUN), p=CASE.patient;
-  var h='<div class="ers-top"><div class="ers-pt"><div><a href="#/ersim" class="ers-meta">← Cases</a><br><b>'+e(p.name)+', '+e(p.age)+' '+e(p.sex)+(p.weight?' · '+e(p.weight):'')+'</b><div class="ers-meta">'+e(SETTINGS[CASE.setting].label)+' · '+e(CASE.title)+'</div></div>'+
+  var h='<div class="ers-top"><div class="ers-pt"><div><a href="'+backHref()+'" class="ers-meta">← Cases</a><br><b>'+e(p.name)+', '+e(p.age)+' '+e(p.sex)+(p.weight?' · '+e(p.weight):'')+'</b><div class="ers-meta">'+e(SETTINGS[CASE.setting].label)+' · '+e(CASE.title)+'</div>'+startTags()+'</div>'+
     '<div style="display:flex;gap:6px;align-items:center"><span class="ers-clock" aria-label="Time since arrival">⏱ '+RUN.t+' min</span>'+
     '<button class="btn" '+(RUN.ended?'disabled':'')+' onclick="MB_ERSIM.wait(5)">Watch 5 min</button></div></div>'+
     (root.ERSIM_SCENE?'<div class="ers-bed">'+root.ERSIM_SCENE.svg(CASE, RUN, LAST)+'</div>':'')+
@@ -661,13 +787,46 @@ function shift(){
   return h;
 }
 
+/* What kind of start this run was dealt (branching cases only). */
+function startTags(){
+  var v=CASE.variant; if(!v) return '';
+  var t=[];
+  if(v.night) t.push('<span class="ers-tag night">🌙 Night shift</span>');
+  if(v.severityLabel) t.push('<span class="ers-tag">'+e(v.severityLabel)+'</span>');
+  return t.length?'<div style="margin-top:4px">'+t.join('')+'</div>':'';
+}
+/* Debrief: the student's path next to the best path. */
+function pathPanel(){
+  var pc=ENGINE.pathCompare(CASE, RUN);
+  var ic={ 'on-time':'✅', late:'🟡', missed:'❌' };
+  var h='<div class="ers-panel" style="margin-top:12px"><h4>Your path and the best path</h4>'+
+    '<div class="ers-path" role="table" aria-label="Your path compared with the best path"><div class="ers-path-h" role="row"><span role="columnheader">Step</span><span role="columnheader">Best</span><span role="columnheader">You</span></div>';
+  pc.rows.forEach(function(r){
+    h+='<div class="ers-path-r '+r.status+'" role="row"><span role="cell"><span aria-hidden="true">'+ic[r.status]+'</span> '+e(r.label)+'</span><span role="cell" data-k="Best">'+e(r.best)+'</span><span role="cell" data-k="You">'+
+      (r.yours===null?'Not done':'At '+r.yours+' min'+(r.status==='late'?' (late)':''))+'</span></div>';
+  });
+  h+='<div class="ers-path-r '+(pc.dx.ok?'on-time':'missed')+'" role="row"><span role="cell"><span aria-hidden="true">'+(pc.dx.ok?'✅':'❌')+'</span> Diagnosis</span><span role="cell" data-k="Best">'+e(pc.dx.best)+'</span><span role="cell" data-k="You">'+e(pc.dx.yours||'None')+'</span></div>';
+  h+='<div class="ers-path-r '+(pc.dispo.ok?'on-time':'missed')+'" role="row"><span role="cell"><span aria-hidden="true">'+(pc.dispo.ok?'✅':'❌')+'</span> Where the patient goes</span><span role="cell" data-k="Best">'+e(pc.dispo.best.join(' or '))+'</span><span role="cell" data-k="You">'+e(pc.dispo.yours||'None')+'</span></div></div>';
+  var cb=pc.curveball;
+  if(cb){
+    h+='<h4>The curveball</h4><p class="ers-find">'+
+      (cb.happened ? (cb.fixed ? e(cb.label)+' started at '+cb.at+' min. You treated it '+cb.response+' min later.' : e(cb.label)+' started at '+cb.at+' min and was not treated.')
+                   : (cb.prevented ? 'You prevented it: '+e(cb.label)+' was due at about '+cb.at+' min.' : 'It never came: '+e(cb.label)+' was due at about '+cb.at+' min, after you handed over.'))+'</p>';
+  }
+  if(pc.off.length) h+='<h4>Off the best path</h4>'+pc.off.map(function(o){ return '<p class="ers-find"><b>At '+o.at+' min: '+e(o.label)+'.</b> '+e(o.why)+'</p>'; }).join('');
+  var v=CASE.variant;
+  if(v) h+='<p class="ers-meta">This start: '+e(SETTINGS[CASE.setting].label)+(v.severityLabel?' · '+e(v.severityLabel):'')+(v.night?' · night shift':'')+'. Play again for a different patient, hospital or shift.</p>';
+  return h+'</div>';
+}
 function debrief(){
   var sc=DEBRIEF, c=CASE;
   var col= sc.grade==='Patient died'||sc.pct<50 ? 'var(--badtx)' : sc.pct<70 ? 'var(--warntx)' : 'var(--recall-tx)';
-  var h='<a href="#/ersim" class="ers-meta">← Cases</a><h1>Debrief: '+e(c.title)+'</h1>'+
+  var h='<a href="'+backHref()+'" class="ers-meta">← Cases</a><h1>Debrief: '+e(c.title)+'</h1>'+
     '<div class="ers-panel"><div class="ers-score"><div class="ers-ring" style="border:8px solid '+col+';color:'+col+'">'+sc.pct+'%</div>'+
     '<div><div style="font-size:20px;font-weight:800;color:'+col+'">'+e(sc.grade)+'</div><div class="ers-meta">'+sc.minutes+' minutes · '+e(RUN.outcome==='died'?'The patient died':'Handed over alive')+'</div>'+
-    '<div class="ers-meta">The diagnosis was <b>'+e(dxLabel(c,c.dx.correct[0]))+'</b>.</div></div></div></div>';
+    '<div class="ers-meta">The diagnosis was <b>'+e(dxLabel(c,c.dx.correct[0]))+'</b>.</div></div></div>'+
+    (RUN.outcome!=='died' && sc.pct>=70 && root.ERSIM_SCENE && root.ERSIM_SCENE.picture ? root.ERSIM_SCENE.picture(c, 'discharge', 'Going home a few days later') : '')+'</div>';
+  if(c.variant) h+=pathPanel();
   var groups=[['critical','Critical actions'],['history','History and examination'],['exam',''],['good','Good practice'],['dx','Diagnosis and disposition'],['dispo',''],['harm','Harm and penalties']];
   h+='<div class="ers-panel" style="margin-top:12px">';
   groups.forEach(function(g){
@@ -684,7 +843,7 @@ function debrief(){
     ((c.refs||[]).length?'<h4>Further reading</h4><ul class="ers-teach">'+c.refs.map(function(t){ return '<li>'+e(t)+'</li>'; }).join('')+'</ul>':'')+'</div>';
   h+=vitalsTrace();
   h+='<div class="ers-panel" style="margin-top:12px"><h4>Your timeline</h4><div class="ers-log">'+RUN.log.map(function(l){ return '<div class="k-'+l.kind+'"><time>'+l.t+'′</time>'+e(l.text)+'</div>'; }).join('')+'</div></div>';
-  h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_ERSIM.restart()">Play again</button><button class="btn" onclick="go(\'ersim\')">Back to cases</button></div>';
+  h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_ERSIM.restart()">Play again</button><button class="btn" onclick="location.hash=\''+backHref()+'\'">Back to cases</button></div>';
   return h;
 }
 
@@ -707,10 +866,13 @@ function vitalsTrace(){
 
 function page(caseId){
   css();
-  if(!on()) return '<h1>🚑 ER Sim</h1><div class="empty" style="text-align:left">ER Sim is switched off. Turn on <b>FEATURES.ER_SIM</b> in config.js, or run <code>localStorage.mbersim=\'1\'</code> on your own device and reload.</div>';
+  var asCase=!on() && casesOn() && caseId && caseById(caseId) && ENGINE.branching(caseById(caseId));
+  if(!on() && !asCase) return '<h1>🚑 ER Sim</h1><div class="empty" style="text-align:left">ER Sim is switched off. Turn on <b>FEATURES.ER_SIM</b> in config.js, or run <code>localStorage.mbersim=\'1\'</code> on your own device and reload.</div>';
   if(!caseId){ CASE=null; DEBRIEF=null; return lobby(); }
-  var c=caseById(caseId); if(!c){ return '<h1>Case not found</h1><p><a href="#/ersim">Back to cases</a></p>'; }
-  if(!CASE || CASE.id!==c.id){ CASE=c; DEBRIEF=null; TAB='talk'; LAST=null; if(!loadRun(c.id)){ RUN=ENGINE.newRun(c); CHAT=[]; } }
+  var c=caseById(caseId); if(!c){ return '<h1>Case not found</h1><p><a href="'+backHref()+'">Back to cases</a></p>'; }
+  if(!CASE || CASE.id!==c.id){ DEBRIEF=null; TAB='talk'; LAST=null;
+    if(loadRun(c.id)) CASE=ENGINE.instantiate(c, ENGINE.variantOpts(RUN)||{});   // a saved run rebuilds the start it was dealt
+    else { CASE=ENGINE.instantiate(c); RUN=ENGINE.newRun(CASE); CHAT=[]; } }
   if(DEBRIEF) return debrief();
   if(RUN.ended && RUN.outcome==='died' && !DEBRIEF){ /* fall through: show the shift with the arrest in the log, then Decide to debrief */ }
   return shift();
@@ -770,6 +932,20 @@ root.MB_ERSIM={
     try{ localStorage.removeItem(RUN_KEY); }catch(_){}
     draw(); root.scrollTo&&root.scrollTo(0,0);
   },
-  restart:function(){ LAST=null; RUN=ENGINE.newRun(CASE); CHAT=[]; DEBRIEF=null; TAB='talk'; saveRun(); draw(); }
+  restart:function(){ LAST=null; CASE=ENGINE.instantiate(caseById(CASE.id)||CASE); RUN=ENGINE.newRun(CASE); CHAT=[]; DEBRIEF=null; TAB='talk'; saveRun(); draw(); root.scrollTo&&root.scrollTo(0,0); },   // a branching case deals a new start
+  casesOn:casesOn,
+  /* The "Patient cases" card in Mega Qbank (pageMega in app.html). Empty unless switched on and the student is 400-600 level. */
+  patientCasesCard:function(){
+    if(!casesOn() || !clinicalLevel()) return '';
+    var list=branchCases(); if(!list.length) return '';
+    css();
+    return '<div class="card ers-pcard" style="cursor:default"><div class="mgq-t">🩺 Patient cases</div>'+
+      '<div class="mgq-s">A patient arrives and your choices decide what happens next. Each time, the patient, hospital, how sick they are and the shift can change, and something may go wrong along the way.</div>'+
+      list.map(function(c){ var b=bestFor(c.id);
+        return '<button class="ers-case" style="margin-top:10px;width:100%" onclick="MB_ERSIM.open(\''+c.id+'\')"><div><span class="ers-tag">🔀 Branching</span><span class="ers-tag">'+e(c.level||'')+'</span></div>'+
+          '<h3>'+e(c.title)+'</h3><div class="ers-meta">'+(c.variants||[]).length+' patients · PHC to private hospital · day or night</div>'+
+          (b!==null?'<div class="ers-best">Best: '+b+'%</div>':'<div class="ers-meta">Not played yet</div>')+'</button>'; }).join('')+
+      '</div>';
+  }
 };
 })(typeof window!=='undefined'?window:globalThis);

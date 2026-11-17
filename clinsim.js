@@ -89,7 +89,7 @@ function stationFromPack(t, s){
 }
 function stations(src){
   var out=[];
-  if(src!=='mine') erCases().forEach(function(c){ if(!c.tutorial) out.push(stationFromEr(c)); });
+  if(src!=='mine') erCases().forEach(function(c){ if(!c.tutorial && !(engine()&&engine().branching&&engine().branching(c))) out.push(stationFromEr(c)); });   // a branching case has no single patient to interview
   if(src!=='builtin') myTopics().forEach(function(t){ var p=pack(t); ((p&&p.osce)||[]).forEach(function(s){ out.push(stationFromPack(t,s)); }); });
   return out;
 }
@@ -121,7 +121,8 @@ var ER_TAGS={
   'pregnant-fit':      { spec:['Obstetrics & Gynaecology'], words:'eclampsia pre-eclampsia hypertension pregnancy seizure' },
   'okada-crash':       { spec:['Surgery'], words:'trauma road traffic chest injury pneumothorax atls' },
   'diabetic-vomiting': { spec:['Medicine'], words:'diabetes dka ketoacidosis endocrine' },
-  'watery-diarrhoea':  { spec:['Medicine','Community Health'], words:'cholera diarrhoea dehydration outbreak gastroenteritis' }
+  'watery-diarrhoea':  { spec:['Medicine','Community Health'], words:'cholera diarrhoea dehydration outbreak gastroenteritis' },
+  'child-very-sick-fever': { spec:['Paediatrics'], words:'severe malaria anaemia transfusion hypoglycaemia convulsion prostration jaundice fever' }
 };
 function erTags(c){ return ER_TAGS[c.id] || { spec:['Medicine'], words:'' }; }
 var SPECS=[

@@ -736,6 +736,317 @@ window.ERSIM_CASES = [
     'Report every suspected case to the LGA disease surveillance and notification officer (DSNO) or NCDC. Isolate, use chlorine and trace the water source.'
   ],
   refs:['WHO / Global Task Force on Cholera Control: cholera outbreak response field manual','NCDC Cholera guidelines']
+},
+/* ----------------------------------------- 9 · branching: one illness, many starts
+ * The first branching case. Each run deals one of three patients (each with their own hospital,
+ * presentation and picture set from the picture library), how late they were brought in, day or
+ * night shift, and maybe one complication partway through. See instantiate() in er-sim.js.
+ * Shared parts sit here; each variant overrides them (history answers by id, exam, tests...). */
+{
+  id:'child-very-sick-fever', title:'A very sick child with fever', setting:'gh', level:'Core',
+  patient:{ name:'A child', age:'2–7', ageYears:4, sex:'child', weight:'' },
+  look:{ build:'child', skin:'#5a3520', shirt:'#F2C230', hair:'short' },
+  speaker:'The parent', persona:'A worried parent.',
+  arrival:'A parent brings in a very sick child.',
+  triage:'Triage: febrile child, unwell.',
+  background:'',
+  vitals:{ hr:150, sbp:90, dbp:54, rr:40, spo2:94, temp:39.5, gcs:13, rbg:4.5 },
+  history:[
+    { id:'fever', q:'How long has the child had fever?', a:'Some days now.', key:true, k:'hot temperature days long' },
+    { id:'fit', q:'Has the child had any fits or shaking?', a:'No.', key:true, k:'convulsion seizure jerk shake' },
+    { id:'feeding', q:'Is the child eating, drinking or vomiting?', a:'Not eating well.', key:true, k:'eat drink food vomit vomiting' },
+    { id:'weak', q:'Can the child sit, stand or feed alone?', a:'Weaker than usual.', key:true, k:'sit stand walk weak prostrate' },
+    { id:'breath', q:'Any fast or difficult breathing?', a:'No.', key:true, k:'breathe breathing fast chest cough' },
+    { id:'urine', q:'Is the child passing urine? What colour?', a:'Yes, normal.', k:'pee wee colour dark' },
+    { id:'colour', q:'Have you noticed yellow eyes or very pale palms?', a:'No.', key:true, k:'yellow jaundice pale palm white' },
+    { id:'meds', q:'What medicine has the child had?', a:'Paracetamol.', k:'drugs medication chemist herbs agbo injection' },
+    { id:'net', q:'Does the child sleep under a mosquito net?', a:'Sometimes.', k:'mosquito itn' },
+    { id:'blood', q:'Has the child ever had a blood transfusion? Do you know the genotype?', a:'No transfusion. Genotype AA.', k:'transfusion genotype sickle' },
+    { id:'imm', q:'Are the immunisations complete?', a:'Yes.', k:'vaccine immunization card' }
+  ],
+  exam:{},
+  keyExam:['general','neuro','abdomen','skin'],
+  tests:{ mrdt:'POSITIVE (P. falciparum HRP2 band)' },
+  problems:[
+    // latent: woken only by a complication this run was dealt (they reuse the distress / critical pictures)
+    { id:'refit', look:'fitting', latent:true, cue:'Fitting again.', wakeText:'The child starts to fit again: eyes rolled up, arms and legs jerking.', drift:{ spo2:-3, hr:2, gcs:-0.5 }, fixedBy:['benzo'], onFix:{ spo2:4, hr:-10, gcs:1 }, fixText:'The fit stops.' },
+    { id:'hypo2', latent:true, cue:'Harder to wake, cold and sweaty.', wakeText:'The nurse calls: "Doctor, the child is getting harder to wake and is sweating."', drift:{ gcs:-0.8, rbg:-0.35 }, fixedBy:['dextrose10'], onFix:{ gcs:3, rbg:4 }, over:10, fixText:'After the dextrose the child stirs and cries.' },
+    { id:'shock', look:'pale', latent:true, cue:'Cold hands, weak fast pulse.', wakeText:'The hands have gone cold and the pulse is weak and fast. Capillary refill is 4 seconds.', drift:{ sbp:-8, hr:3, spo2:-1 }, fixedBy:['ns_bolus'], onFix:{ sbp:22, hr:-20, spo2:2 }, over:20, fixText:'After the bolus the pulse is stronger and the hands are warmer.' }
+  ],
+  severity:[
+    { id:'early', label:'Brought in early', vitals:{ hr:-10, rr:-4, spo2:2, sbp:6, gcs:1 }, drift:0.75 },
+    { id:'usual', label:'', vitals:{}, drift:1 },
+    { id:'late', label:'Brought in late', vitals:{ hr:8, rr:4, spo2:-2, sbp:-6, gcs:-1 }, drift:1.25 }
+  ],
+  nightShift:{ chance:0.33, tatX:2, note:'Night shift: fewer staff, and lab results take twice as long.' },
+  critical:[], good:[], harmful:[],
+  dx:{ options:[
+    { id:'severe-malaria', label:'Severe falciparum malaria' },
+    { id:'uncomplicated', label:'Uncomplicated malaria' },
+    { id:'meningitis', label:'Bacterial meningitis' },
+    { id:'sepsis', label:'Sepsis / bacteraemia' },
+    { id:'febrile', label:'Simple febrile seizure' },
+    { id:'pneumonia', label:'Severe pneumonia' },
+    { id:'scd', label:'Sickle cell crisis' },
+    { id:'hepatitis', label:'Acute viral hepatitis' }
+  ], correct:['severe-malaria'], close:['meningitis','sepsis'] },
+  dispo:{ best:['admit_ward'], ok:['admit_hdu'], harm:['discharge'], why:'' },
+  responses:{
+    mrdt:'The nurse runs the RDT.',
+    paracetamol:'Paracetamol 15 mg/kg given.',
+    cool:'Tepid sponging started.'
+  },
+  teaching:[
+    'Severe malaria in a child is any of: prostration (cannot sit, stand or feed), impaired consciousness, convulsions, respiratory distress, severe anaemia, hypoglycaemia, jaundice, shock or dark urine, with P. falciparum on an RDT or film.',
+    'Artesunate is the drug of choice: 3 mg/kg IV or IM for children under 20 kg (2.4 mg/kg from 20 kg) at 0, 12 and 24 hours, then daily until the child can take a full 3-day oral ACT.',
+    'Check the glucose in every very sick child with malaria, and check it again later: hypoglycaemia can appear hours into treatment. Give 10% dextrose 5 mL/kg when it is low.',
+    'At a PHC, give a first dose of IM or rectal artesunate (10 mg/kg rectally), stop any fit, correct the sugar, and refer. Do not wait for the child to get worse.',
+    'Severe anaemia with fast breathing needs blood (whole blood 20 mL/kg or packed cells 10 mL/kg), not fluid boluses: in the FEAST trial, boluses increased deaths in African children with severe febrile illness.',
+    'Stop a fit that lasts over 5 minutes with a benzodiazepine. After two doses, move to a second-line drug such as phenobarbital.',
+    'A vomiting or prostrate child cannot be treated with oral ACT. Give parenteral artesunate first.'
+  ],
+  refs:[
+    'WHO Guidelines for malaria: management of severe malaria (current edition).',
+    'Federal Ministry of Health, Nigeria. National Guidelines for the Diagnosis and Treatment of Malaria.',
+    'WHO Pocket Book of Hospital Care for Children, 2nd edition (2013).',
+    'Maitland K et al. Mortality after fluid bolus in African children with severe infection (FEAST). N Engl J Med 2011;364:2483-95.'
+  ],
+  variants:[
+    /* --- A: a fitting boy at a Primary Health Centre (picture set m-child-phc-01) */
+    { id:'phc-fits', label:'Fits and low sugar at a PHC', setting:'phc',
+      art:{ topic:'severe-malaria', set:'m-child-phc-01', treatedWhen:{ fixed:['seizure','hypo'], done:['iv_access'] } },
+      patient:{ name:'Musa Abdullahi', age:'4', ageYears:4, sex:'male', weight:'15 kg' },
+      look:{ build:'child', skin:'#5a3520', shirt:'#F2C230', hair:'short' },
+      speaker:'Musa\'s mother', persona:'Musa\'s mother, frightened, speaks Hausa and a little English. A community health extension worker (CHEW) translates. Short answers.',
+      arrival:'A mother carries a jerking boy up the steps of the health centre. The CHEW translates: "He has been shaking since they left the house."',
+      triage:'Emergency: child convulsing on arrival.',
+      background:'Farming village 30 minutes away by okada. Fever for 3 days. Mother gave paracetamol syrup and agbo from the grandmother. Nothing to eat since yesterday, vomits all drinks. First fit ever, today. Immunised. Torn mosquito net. Genotype not known.',
+      vitals:{ hr:162, sbp:86, dbp:50, rr:42, spo2:91, temp:39.8, gcs:7, rbg:2.4 },
+      history:[
+        { id:'fever', a:'Three days. It is worse at night.' },
+        { id:'fit', a:'It started about twenty minutes ago and it has not stopped. He never fitted before.' },
+        { id:'feeding', a:'Nothing since yesterday. Everything he drinks comes out again.' },
+        { id:'weak', a:'Since this morning he could not sit up, even before the shaking.' },
+        { id:'breath', a:'He breathes fast, but no cough.' },
+        { id:'urine', a:'Very little today. It was dark.' },
+        { id:'colour', a:'I have not seen yellow eyes. His palms are a bit pale.' },
+        { id:'meds', a:'Paracetamol syrup and agbo from his grandmother.' },
+        { id:'net', a:'We have one, but it is torn.' },
+        { id:'blood', a:'He never had blood. We don\'t know his genotype.' },
+        { id:'imm', a:'Yes, the card is complete.' }
+      ],
+      exam:{
+        general:{ r:'Generalised jerking, very hot, pale palms, dry lips.', fixed:{ seizure:'Post-ictal and drowsy, pale and hot.' } },
+        airway:{ r:'Frothy saliva and a fresh tongue bite. The airway is at risk while he fits.', fixed:{ seizure:'Airway clear in the recovery position.' } },
+        breathing:'RR 42, deep breathing, chest clear.',
+        circulation:'Fast pulse, capillary refill 3 s, cool hands.',
+        abdomen:'Soft. Spleen 3 cm below the left costal margin. Faded traditional marks beside the navel.',
+        neuro:{ r:'Generalised tonic-clonic seizure in progress. Pupils equal and reactive.', fixed:{ seizure:'No longer fitting. Responds to pain only. No neck stiffness.' } },
+        skin:'Mild palmar pallor. Scratched mosquito bites and an old burn scar on the legs. No rash, no jaundice.'
+      },
+      tests:{
+        rbg:{ r:'2.4 mmol/L (43 mg/dL), LOW', fixed:{ hypo:'6.1 mmol/L' }, active:{ hypo2:'2.0 mmol/L (36 mg/dL), LOW' } },
+        pcv:'25%',
+        urinalysis:'Cannot get a sample: no urine passed yet.'
+      },
+      problems:[
+        { id:'seizure', look:'fitting', cue:'Still convulsing.', drift:{ spo2:-3, hr:2 }, fixedBy:['benzo'], onFix:{ spo2:4, hr:-14, gcs:2 }, fixText:'The jerking stops. He is post-ictal.' },
+        { id:'hypo', drift:{ gcs:-0.8, rbg:-0.3 }, fixedBy:['dextrose10'], onFix:{ gcs:3, rbg:4.2 }, over:10, fixText:'After the dextrose he starts to move and moan.' },
+        { id:'hypoxia', fixedBy:['o2_nasal','o2_mask'], onFix:{ spo2:5 } },
+        { id:'fever', look:'hot', fixedBy:['paracetamol','cool'], onFix:{ temp:-1.4, hr:-10 }, over:30 },
+        { id:'malaria', fixedBy:['artesunate','artesunate_pr'] }
+      ],
+      complications:[
+        { id:'refit', label:'Another fit', problem:'refit', at:[18,35], chance:0.55 },
+        { id:'shock', label:'Shock: cold hands and a weak pulse', problem:'shock', at:[25,45], chance:0.45 }
+      ],
+      critical:[
+        { label:'Stopped the fit with a benzodiazepine', any:['benzo'], by:10, pts:15 },
+        { label:'Checked the blood glucose', any:['rbg'], by:10, pts:12 },
+        { label:'Corrected the low sugar with 10% dextrose', any:['dextrose10'], by:20, pts:15 },
+        { label:'Gave the first artesunate dose (IM, IV or rectal)', any:['artesunate','artesunate_pr'], by:60, pts:12 }
+      ],
+      good:[
+        { label:'Positioned and protected the airway', any:['position','suction'], pts:5 },
+        { label:'Gave oxygen', any:['o2_nasal','o2_mask'], pts:4 },
+        { label:'Confirmed malaria with an RDT', any:['mrdt'], pts:4 },
+        { label:'Treated the fever', any:['paracetamol','cool'], pts:3 },
+        { label:'Gave a pre-referral antibiotic (meningitis not excluded)', any:['ceftriaxone'], pts:3 }
+      ],
+      harmful:[
+        { label:'Gave oral ACT to a fitting, vomiting child', any:['act'], pts:-10, why:'He cannot swallow safely and vomits everything. Severe malaria needs injectable or rectal artesunate.' },
+        { label:'More than two benzodiazepine doses', any:['benzo'], repeat:2, pts:-6, why:'After two doses, use a second-line drug: more benzodiazepine depresses breathing.' }
+      ],
+      dx:{ close:['meningitis','febrile'] },
+      dispo:{ best:['refer'], ok:[], harm:['discharge'], why:'A PHC cannot give repeat artesunate doses, transfuse or watch a child overnight. Stop the fit, correct the sugar, give the first artesunate dose, and refer with a note.' },
+      responses:{
+        call_senior:'The officer-in-charge: "Stop the fit, check the sugar, give artesunate, then we refer to the General Hospital. I\'ll call for the ambulance."',
+        benzo:'Rectal diazepam 7.5 mg (0.5 mg/kg) given.',
+        dextrose10:'75 mL of 10% dextrose (5 mL/kg) through the cannula.',
+        artesunate:'IM artesunate 45 mg (3 mg/kg) into the front of the thigh.',
+        artesunate_pr:'Rectal artesunate 150 mg (10 mg/kg) given.',
+        ns_bolus:'300 mL of 0.9% saline (20 mL/kg) over 15 minutes.'
+      }
+    },
+    /* --- B: a pale, breathless girl at a General Hospital (picture set f-child-gh-02) */
+    { id:'gh-anaemia', label:'Severe anaemia and fast breathing at a General Hospital', setting:'gh',
+      art:{ topic:'severe-malaria', set:'f-child-gh-02', treatedWhen:{ fixed:['anaemia'], done:[] } },
+      patient:{ name:'Hauwa Garba', age:'2', ageYears:2, sex:'female', weight:'11 kg' },
+      look:{ build:'child', skin:'#5a3520', shirt:'#F29BB8', hair:'puffs' },
+      speaker:'Hauwa\'s father', persona:'Hauwa\'s father, calm but worried, speaks English and Hausa. He answers clearly.',
+      arrival:'A father hurries into children\'s emergency carrying a little girl who is breathing fast. "Doctor, her breathing is not normal since morning."',
+      triage:'Triage: fast breathing, very pale. Category: red.',
+      background:'Fever on and off for 5 days, treated at a chemist with a "malaria injection" and syrup. Since this morning, fast breathing and too weak to sit. Taking small sips of pap. Genotype AA (tested at the clinic). Never transfused. Immunised. Has a net but kicks it off.',
+      vitals:{ hr:174, sbp:84, dbp:48, rr:62, spo2:90, temp:38.4, gcs:14, rbg:4.6 },
+      history:[
+        { id:'fever', a:'Five days, on and off. The chemist gave an injection and a syrup.' },
+        { id:'fit', a:'No, she has not shaken.' },
+        { id:'feeding', a:'Only small sips of pap. She vomited once.' },
+        { id:'weak', a:'Since this morning she is too weak to sit up.' },
+        { id:'breath', a:'Since this morning she breathes very fast and her chest pulls in under the ribs.' },
+        { id:'urine', a:'Less than usual. The colour looked normal.' },
+        { id:'colour', a:'Her palms are white, and inside her eyes is pale. Not yellow.' },
+        { id:'meds', a:'An injection and a syrup from the chemist. I don\'t know the names.' },
+        { id:'net', a:'We have a net, but she kicks it off at night.' },
+        { id:'blood', a:'She has never had blood. Her genotype is AA, they tested it at the clinic.' },
+        { id:'imm', a:'Yes, all of them.' }
+      ],
+      exam:{
+        general:{ r:'Very pale, drowsy but rousable, breathing fast with nasal flaring.', fixed:{ anaemia:'Pinker and calmer, breathing easier.' } },
+        airway:'Clear. Crying weakly. A new back tooth coming through.',
+        breathing:{ r:'RR 62, lower chest wall indrawing, nasal flaring. Chest clear, no crackles.', fixed:{ anaemia:'RR 38 after the blood. Mild indrawing only.' } },
+        circulation:{ r:'HR 174, gallop rhythm, soft flow murmur. Liver 3 cm. Capillary refill 2 s.', fixed:{ anaemia:'HR 128. The murmur is softer.' } },
+        abdomen:'Soft. Spleen 4 cm, liver 3 cm. A small umbilical hernia.',
+        neuro:'Drowsy but rousable. No neck stiffness, no fits.',
+        skin:'Severe pallor of the palms, nails and lower eyelids. White sclerae, no jaundice. Ashy dry patches and two healed bites on the shins. No rash.'
+      },
+      tests:{
+        pcv:{ r:'12% (Hb about 4 g/dL), VERY LOW', fixed:{ anaemia:'24%' } },
+        fbc:{ r:'Hb 3.9 g/dL · WBC 11.8 ×10⁹/L · platelets 62 ×10⁹/L', fixed:{ anaemia:'Hb 8.1 g/dL · WBC 11.0 ×10⁹/L · platelets 70 ×10⁹/L' } },
+        mp_film:'P. falciparum trophozoites, parasitaemia 4%.',
+        gxm:'Group O RhD positive. One unit of whole blood crossmatched.',
+        rbg:{ r:'4.6 mmol/L', active:{ hypo2:'2.2 mmol/L (40 mg/dL), LOW' } },
+        cxr:'Large heart shadow. No consolidation.',
+        urinalysis:'No blood, no protein.'
+      },
+      problems:[
+        { id:'anaemia', look:'distress', cue:'Very pale, breathing fast with chest indrawing.', drift:{ hr:2, spo2:-1.2, sbp:-1.5, rr:1 }, fixedBy:['blood'], onFix:{ hr:-40, spo2:6, sbp:14, rr:-22 }, over:60, fixText:'Halfway through the blood her breathing settles and her lips pink up.' },
+        { id:'hypoxia', fixedBy:['o2_nasal','o2_mask'], onFix:{ spo2:5 } },
+        { id:'fever', look:'hot', fixedBy:['paracetamol','cool'], onFix:{ temp:-1, hr:-8 }, over:30 },
+        { id:'malaria', fixedBy:['artesunate'] }
+      ],
+      complications:[
+        { id:'refit', label:'A fit (cerebral malaria)', problem:'refit', at:[20,40], chance:0.45 },
+        { id:'hypo2', label:'Low blood sugar later in the case', problem:'hypo2', at:[20,40], chance:0.5 }
+      ],
+      critical:[
+        { label:'Gave oxygen', any:['o2_nasal','o2_mask'], by:10, pts:10 },
+        { label:'Checked the haemoglobin (PCV or FBC)', any:['pcv','fbc'], by:15, pts:12 },
+        { label:'Sent a group and crossmatch', any:['gxm'], by:30, pts:8 },
+        { label:'Gave IV/IM artesunate', any:['artesunate'], by:60, pts:12 },
+        { label:'Transfused blood', any:['blood'], by:90, pts:18 }
+      ],
+      good:[
+        { label:'Checked the blood glucose', any:['rbg'], pts:4 },
+        { label:'Confirmed malaria with an RDT or film', any:['mrdt','mp_film'], pts:4 },
+        { label:'Put her on a monitor', any:['monitor'], pts:3 },
+        { label:'Called paediatrics', any:['consult_paeds'], pts:4 },
+        { label:'Treated the fever', any:['paracetamol','cool'], pts:2 }
+      ],
+      harmful:[
+        { label:'Gave a fluid bolus to a child with severe anaemia', any:['ns_bolus','rl_planc'], pts:-8, why:'Boluses can tip a child with severe anaemia into heart failure. FEAST showed more deaths. She needs blood.' },
+        { label:'Gave furosemide before any blood', any:['furosemide'], unless:['blood'], pts:-4, why:'She is not overloaded. A diuretic before the blood only drops her pressure.' },
+        { label:'Gave oral ACT to a prostrate child', any:['act'], pts:-8, why:'Prostration and severe anaemia make this severe malaria. Give parenteral artesunate first.' }
+      ],
+      dx:{ close:['pneumonia','sepsis'] },
+      dispo:{ best:['admit_ward'], ok:['admit_hdu'], harm:['discharge'], why:'She needs the transfusion finished, IV artesunate every 12 hours and close watching on the children\'s ward (HDU if she worsens). A General Hospital can do all of this, so she should not be referred.' },
+      responses:{
+        blood:'Whole blood 220 mL (20 mL/kg) running over 4 hours, observations every 15 minutes.',
+        artesunate:'IV artesunate 33 mg (3 mg/kg).',
+        consult_paeds:'The paediatric registrar: "Oxygen, blood, IV artesunate, and no fluid boluses. I\'m coming."',
+        call_senior:'Your senior: "How pale is she? Get a PCV and crossmatch, give oxygen and artesunate, and ask paediatrics to come."',
+        dextrose10:'55 mL of 10% dextrose (5 mL/kg) IV.',
+        benzo:'Rectal diazepam 5 mg (0.5 mg/kg) given.',
+        ns_bolus:'220 mL of 0.9% saline started. Her breathing gets faster.'
+      }
+    },
+    /* --- C: a shivering, yellow-eyed boy at a private hospital (picture set m-child-private-03) */
+    { id:'pv-prostrate', label:'Rigors, prostration and jaundice at a private hospital', setting:'pv',
+      art:{ topic:'severe-malaria', set:'m-child-private-03', treatedWhen:{ fixed:['malaria','rigors'], done:['iv_access'] } },
+      patient:{ name:'Tobi Adeyemi', age:'7', ageYears:7, sex:'male', weight:'22 kg' },
+      look:{ build:'child', skin:'#6b3f22', shirt:'#7FA8D8', hair:'short' },
+      speaker:'Tobi\'s mother', persona:'Tobi\'s mother, an anxious banker in Lagos. Speaks English and gives detailed answers.',
+      arrival:'A mother carries her shivering son through the glass doors of the private hospital. "Doctor, he has been shaking and vomiting since last night."',
+      triage:'Triage: febrile, rigors, drowsy. Category: orange.',
+      background:'Lives in Lekki. Back a week ago from holiday at his grandparents\' village in Ogun State, where he slept without a net. Fever for 3 days, shaking chills since last night, vomited 5 times today and could not keep the pharmacy tablets down. Too weak to sit since this morning. No fits. Genotype AA. No allergies. Immunised.',
+      vitals:{ hr:138, sbp:96, dbp:58, rr:30, spo2:96, temp:40.3, gcs:14, rbg:4.0 },
+      history:[
+        { id:'fever', a:'Three days. Since last night he shakes with cold, then burns hot.' },
+        { id:'fit', a:'No fits. Only the shaking with cold, his teeth knock together.' },
+        { id:'feeding', a:'He vomits everything, even the tablets the pharmacist gave.' },
+        { id:'weak', a:'Since this morning he cannot even sit up on his own.' },
+        { id:'breath', a:'No, his breathing is fine.' },
+        { id:'urine', a:'Only a small amount today, dark like tea.' },
+        { id:'colour', a:'His eyes look a little yellow today.' },
+        { id:'meds', a:'Paracetamol and Coartem from a pharmacy yesterday, but he vomited them.' },
+        { id:'net', a:'At home, yes. Not at the village, we came back a week ago.' },
+        { id:'blood', a:'Never had blood. He is AA.' },
+        { id:'imm', a:'Fully immunised.' }
+      ],
+      exam:{
+        general:{ r:'Prostrate: cannot sit unaided. Shaking chills, very hot.', fixed:{ rigors:'No longer shaking. Still weak and cannot sit unaided.' } },
+        airway:'Clear, talking in short sentences. Dry cracked lips, thin white coat on the tongue.',
+        breathing:'RR 30, chest clear.',
+        circulation:'HR 138, capillary refill 2 s, warm hands.',
+        abdomen:'Soft. Spleen just palpable, liver 2 cm and a little tender. An old faded scar low on the right.',
+        neuro:'Drowsy but oriented. No neck stiffness. No focal signs.',
+        skin:'Pale lower eyelids and a faint yellow tinge to the sclerae. Pale palms and nail beds. Mosquito bites and an old knee scar. No rash.'
+      },
+      tests:{
+        mp_film:'P. falciparum trophozoites and schizonts, parasitaemia 7% (high).',
+        fbc:'Hb 8.6 g/dL · WBC 9.4 ×10⁹/L · platelets 48 ×10⁹/L',
+        pcv:'27%',
+        rbg:{ r:'4.0 mmol/L', active:{ hypo2:'2.1 mmol/L (38 mg/dL), LOW' } },
+        eucr:'Na 133 · K 3.8 · urea 9.1 · creatinine 84 · HCO₃ 17',
+        lft:'Bilirubin 58 µmol/L (raised) · ALT 64 U/L',
+        urinalysis:'Bilirubin ++, urobilinogen +, no blood',
+        vbg:'pH 7.31 · HCO₃ 17 · lactate 3.4'
+      },
+      problems:[
+        { id:'rigors', look:'distress', cue:'Shaking chills, teeth chattering.', fixedBy:['paracetamol','cool'], onFix:{ temp:-1.6, hr:-14 }, over:30, fixText:'The shaking settles.' },
+        { id:'malaria', cue:'Prostrate and getting drowsier.', drift:{ gcs:-0.15, hr:0.8, sbp:-0.8 }, fixedBy:['artesunate'], onFix:{ gcs:1, hr:-10, sbp:6 }, over:60, fixText:'Over the next hour he is more awake.' }
+      ],
+      complications:[
+        { id:'hypo2', label:'Low blood sugar later in the case', problem:'hypo2', at:[15,35], chance:0.55 },
+        { id:'shock', label:'Shock: cold hands and a weak pulse', problem:'shock', at:[25,45], chance:0.45 }
+      ],
+      critical:[
+        { label:'Checked the blood glucose', any:['rbg'], by:20, pts:10 },
+        { label:'Confirmed malaria with an RDT or film', any:['mrdt','mp_film'], by:30, pts:10 },
+        { label:'Gave IV/IM artesunate', any:['artesunate'], by:45, pts:18 }
+      ],
+      good:[
+        { label:'IV access and maintenance fluids (he vomits everything)', any:['maint'], pts:4 },
+        { label:'Treated the fever and rigors', any:['paracetamol','cool'], pts:4 },
+        { label:'Checked the blood count', any:['fbc','pcv'], pts:3 },
+        { label:'Checked the kidneys and liver', any:['eucr','lft'], pts:3 },
+        { label:'Put him on a monitor', any:['monitor'], pts:3 }
+      ],
+      harmful:[
+        { label:'Treated with oral ACT', any:['act'], pts:-10, why:'He is prostrate, jaundiced and vomiting everything: that is severe malaria. Oral ACT will not stay down and is not enough. Give IV artesunate, then a full ACT course once he can eat.' },
+        { label:'Gave rectal artesunate', any:['artesunate_pr'], pts:-3, why:'Rectal artesunate is a pre-referral drug. This hospital can give IV artesunate.' }
+      ],
+      dx:{ close:['sepsis','hepatitis'] },
+      dispo:{ best:['admit_ward'], ok:['admit_hdu'], harm:['discharge'], why:'Prostration and jaundice make this severe malaria. He needs IV artesunate at 0, 12 and 24 hours, glucose checks and fluids on the ward. This hospital can do that. Refer only if he worsens (fits, coma, kidney failure).' },
+      responses:{
+        artesunate:'IV artesunate 53 mg (2.4 mg/kg) given.',
+        maint:'Maintenance fluid with 5% dextrose running.',
+        call_senior:'The consultant on the phone: "Prostrate with jaundice? Treat it as severe. IV artesunate now, check his sugar and admit him."',
+        dextrose10:'110 mL of 10% dextrose (5 mL/kg) IV.',
+        ns_bolus:'440 mL of 0.9% saline (20 mL/kg) over 15 minutes.'
+      }
+    }
+  ]
 }
 
 ];
