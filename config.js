@@ -81,14 +81,14 @@ window.MEDBANK_CONFIG = {
   //   LEARNING_EVENTS = build 01: the durable append-only learning ledger (learning-events.js →
   //                  Supabase learning_events). Write-only: nothing in the learning path reads it.
   //                  Ships DARK. Turn on only after the verification report passes.
-  //   ER_SIM      = the emergency room simulator (er-sim.js, route #/ersim). Default OFF until a clinician has
-  //                  reviewed the cases (ER-SIM.md). To try it on your own device: localStorage.mbersim='1', reload.
+  //   ER_SIM      = the emergency room simulator (er-sim.js, route #/ersim). ON for students since 2026-11-17.
+  //                  Clinician review (ER-SIM.md checklist) still to do. Set false to hide it again.
   //   CLINICAL_SIM = the Clinical Simulation tab (clinsim.js, route #/clinsim) for 400, 500 and 600 level only: ER Sim,
   //                  OSCE stations, quick cases, Case of the Day, study group OSCE and cases built from imported lectures.
-  //                  Default OFF until a clinician has reviewed the cases (CLINICAL-SIM.md). Try it: localStorage.mbclinsim='1'.
+  //                  ON since 2026-11-17 (level-gated by clinsim.js). Clinician review (CLINICAL-SIM.md) still to do.
   //   INTEGRATED_MODE = Mega Q-bank 🔗 Integrated questions (Phase B). CASE_MODE = Mega Q-bank 🩺 Case Mode (Phase E, linear).
   //                  Even when ON, the server serves nothing until the integrated bank passes its readiness gate
   //                  (≥100 approved, ≥8 families, ≥10 each, top family ≤30%); before that the cards show what is missing.
   //                  Run import-server/sql/mega-qbank-phases-b-e.sql first. Try it: localStorage.mbint='1' / mbcase='1'.
-  FEATURES: { CLINICAL_SIM: false, ER_SIM: false, LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, WHITEBOARD: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false, INTEGRATED_MODE: false, CASE_MODE: false }
+  FEATURES: { CLINICAL_SIM: true, ER_SIM: true, LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, WHITEBOARD: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false, INTEGRATED_MODE: false, CASE_MODE: false }
 };
