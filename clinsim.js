@@ -203,7 +203,7 @@ function isFreeAny(it){ if(it.kind==='osce') return isFree(stations('all'), it);
  *         Only your best run of each case counts, so replaying a case cannot farm points.
  * rank  : from your total points. Study-group runs are ticked by friends, so they earn no points. */
 var DIFF_X={ Beginner:1, Foundation:1, Core:1.25, Advanced:1.5 };
-var CTX_X={ topic:1, open:1.1, blind:1.3 };
+var CTX_X={ topic:1, open:1.1, duel:1.2, blind:1.3 };   // duel = a verified in-person duel (clinsim-duel.js)
 var RANKS=[[0,'Student'],[100,'Clerk'],[300,'House Officer'],[700,'Medical Officer'],[1500,'Registrar'],[3000,'Consultant']];
 function gradeOf(pct, o){ o=o||{}; if(o.unsafe) return 'Unsafe'; if(o.fail&&pct>=60) return 'Fail'; if(pct>=85&&!o.fail) return 'Excellent'; if(pct>=60&&!o.fail) return 'Pass'; return pct>=50?'Borderline':'Fail'; }
 function pointsOf(pct, o){ o=o||{}; var p=Math.max(0, Math.min(100, o.unsafe?Math.min(pct,40):pct)); return Math.round(p*(DIFF_X[o.diff]||1.25)*(CTX_X[o.ctx]||1.1)*(o.mode==='practice'?0.5:1)/10); }
@@ -358,6 +358,8 @@ var MODES=[
     subs:[['builtin','MedBank cases'],['mine','From my lectures']] },
   { id:'daily', ic:'📅', name:'Case of the Day', blurb:'One mystery patient a day for everyone. Six clues, six guesses. Share your result.',
     subs:[['today','Today\'s case'],['archive','Past days'],['mine','From my lectures']] },
+  { id:'duel', ic:'⚔️', name:'Duel', blurb:'Two phones side by side, same patient, same clock. Leave the app and you lose.',
+    subs:[['home','Start or join a duel']] },
   { id:'group', ic:'👥', name:'Study Group OSCE', blurb:'Practise with friends on one phone: one plays the patient, one examines, one is the candidate.',
     subs:[['pick','Pick a station']] },
   { id:'mine', ic:'📚', name:'My Lecture Cases', blurb:'Every lecture you import gets its own patients, stations and puzzles, built from your note.',
@@ -608,7 +610,7 @@ function quickView(){
       if(i>QS.step) return;
       var picked=QS.picks[i], done=picked!==undefined;
       h+='<div class="cs-panel"><h4>Decision '+(i+1)+' of '+q.steps.length+'</h4><div style="font-weight:700;margin-bottom:8px">'+e(st.prompt)+'</div><div class="cs-opts">'+
-        st.options.map(function(o,k){ var cls=done?(o.pts===10?' best':(k===picked&&o.pts<0?' bad':''))+(k===picked?' picked':''):'';
+        order(st.options.length, q.id+'|s'+i+'|'+QS.nonce).map(function(k){ var o=st.options[k]; var cls=done?(o.pts===10?' best':(k===picked&&o.pts<0?' bad':''))+(k===picked?' picked':''):'';
           return '<button class="cs-opt'+cls+'"'+(done?' disabled':' onclick="MB_CLINSIM.choose('+i+','+k+')"')+'>'+e(o.t)+(done&&(k===picked||o.pts===10)?'<small>'+(o.pts>0?'+':'')+o.pts+' · '+e(o.why)+'</small>':'')+'</button>'; }).join('')+'</div>'+
         (done&&st.options[picked].pts<=-10?'<div class="cs-danger">⚠️ Dangerous decision. In real life this could seriously harm the patient.</div>':'')+
         (done&&st.reveal?'<div class="cs-reveal">'+e(st.reveal)+'</div>':'')+'</div>';
@@ -619,7 +621,7 @@ function quickView(){
   if(QS.phase==='mcq'){
     var mq=q.mcqs[QS.m], mp=QS.mcq[QS.m], md=mp!==undefined;
     h+='<div class="cs-panel"><h4>Exam question '+(QS.m+1)+' of '+q.mcqs.length+'</h4><div style="font-weight:700;margin-bottom:8px">'+e(mq.stem)+'</div><div class="cs-opts">'+
-      shuffled(mq.options, QS.m).map(function(x){ var k=x.i, cls=md?(k===mq.ans?' best':(k===mp?' bad':''))+(k===mp?' picked':''):'';
+      order(mq.options.length, q.id+'|m'+QS.m+'|'+QS.nonce).map(function(k){ var x={ t:mq.options[k] }; cls=md?(k===mq.ans?' best':(k===mp?' bad':''))+(k===mp?' picked':''):'';
         return '<button class="cs-opt'+cls+'"'+(md?' disabled':' onclick="MB_CLINSIM.answer('+k+')"')+'>'+e(x.t)+'</button>'; }).join('')+'</div>'+
       (md?'<div class="cs-reveal">'+(mp===mq.ans?'✅ ':'❌ ')+e(mq.why||'')+'</div><div class="btnrow" style="margin-top:12px"><button class="btn primary" onclick="MB_CLINSIM.nextMcq()">'+(QS.m+1<q.mcqs.length?'Next question':'See my score')+'</button></div>':'')+'</div>';
     return h;
@@ -638,8 +640,16 @@ function quickDone(){
   if(mq.length) ex.mcq=mq.filter(function(m,i){ return QS.mcq[i]===m.ans; }).length;
   QS.pts=award('quick', QS.q.id, QS.score.pct, ex); record('quick', QS.q.id, QS.score.pct, ex);
 }
-// MCQ options in a stable shuffled order (the answer is not always first)
-function shuffled(opts, seed){ var a=opts.map(function(t,i){ return { t:t, i:i }; }), n=(seed*7+3)%a.length; return a.slice(n).concat(a.slice(0,n)); }
+// The order options are shown in. The content keeps the best answer first, so the screen must not:
+// a seeded shuffle per case, step and play (nonce), stable while you play, new each time you replay.
+function order(n, key){
+  var h=2166136261, k=String(key), a=[], i;
+  for(i=0;i<k.length;i++){ h^=k.charCodeAt(i); h=Math.imul(h,16777619)>>>0; }
+  for(i=0;i<n;i++) a.push(i);
+  for(i=n-1;i>0;i--){ h=Math.imul(h^(h>>>15), 2246822519)>>>0; h=(h^(h>>>13))>>>0; var j=h%(i+1), t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a;
+}
+function nonce(){ return Math.random().toString(36).slice(2,8); }
 
 /* ---------- 📅 Case of the Day */
 function normA(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\b(acute|the|a)\b/g,' ').replace(/\s+/g,' ').trim(); }
@@ -772,13 +782,14 @@ function page(parts){
   var g=gate(); if(g) return g;
   var mode=parts[0], sub=parts[1], id=parts.slice(2).join('/');
   if(mode!=='osce') stopTimer();
+  if(mode!=='duel' && root.MB_CLINDUEL && root.MB_CLINDUEL.live()) root.MB_CLINDUEL.leaving();   // walking out of a live duel forfeits it
   switch(mode){
     case 'er':    return erMode(sub||'tut');
     case 'osce':
       if(id){ if(!OS || OS.s.id!==id){ if(!osceStart(id, sub==='practice'?'practice':'timed', 'open')) return '<h1>Station not found</h1><p><a href="#/clinsim/osce/timed">Back to stations</a></p>'; } if(OS.phase==='talk'&&OS.endsAt) setTimeout(startTimer,0); return osceView(); }
       OS=null; return osceList(sub||'timed');
     case 'quick':
-      if(id){ if(!QS || QS.q.id!==id){ var q=byId(quickCases('all'), id); if(!q) return '<h1>Case not found</h1><p><a href="#/clinsim/quick/builtin">Back</a></p>'; QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:'open' }; } return quickView(); }
+      if(id){ if(!QS || QS.q.id!==id){ var q=byId(quickCases('all'), id); if(!q) return '<h1>Case not found</h1><p><a href="#/clinsim/quick/builtin">Back</a></p>'; QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:'open', nonce:nonce() }; } return quickView(); }
       QS=null; return quickList(sub||'builtin');
     case 'daily': return dailyMode(sub||'today', id);
     case 'group':
@@ -786,13 +797,14 @@ function page(parts){
       GS=null; return groupList();
     case 'mine':  return mineMode();
     case 'round': return roundPage();
+    case 'duel':  return root.MB_CLINDUEL ? root.MB_CLINDUEL.page(sub, id) : '<h1>Duel</h1><p>Reload to load duels.</p>';
     default:      return hub();
   }
 }
 
 root.MB_CLINSIM={
   on:on, visible:visible, page:page, locked:locked,
-  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext, gradeOf:gradeOf, pointsOf:pointsOf, standing:standing, rankOf:rankOf, roundItems:roundItems, forCtx:forCtx },
+  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext, order:order, gradeOf:gradeOf, pointsOf:pointsOf, standing:standing, rankOf:rankOf, roundItems:roundItems, forCtx:forCtx },
   stop:function(){ stopTimer(); },
   openOsce:function(id, mode, ctx){ stopTimer(); var all=stations('all'), s=byId(all,id); if(s && !isFree(all,s)) return locked(); osceStart(id, mode, ctx); location.hash='#/clinsim/osce/'+mode+'/'+id; CUR=['osce',mode,id]; draw(); },
   say:say,
@@ -801,7 +813,7 @@ root.MB_CLINSIM={
   pick:function(k, i){ if(!OS) return; OS[k]=i; draw(); },
   mark:function(){ if(!OS) return; OS.score=osceScore(OS); OS.phase='result'; stopTimer();
     var ex={ pass:OS.score.pass, mode:OS.mode, ctx:OS.ctx }; OS.pts=award('osce', OS.s.id, OS.score.total, ex); record('osce', OS.s.id, OS.score.total, ex); draw(); root.scrollTo&&root.scrollTo(0,0); },
-  openQuick:function(id, ctx){ var all=quickCases('all'), q=byId(all,id); if(!q) return; if(!isFree(all,q)) return locked(); QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:ctx||'open' }; location.hash='#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'/'+id; CUR=['quick',(q.source==='mine'?'mine':'builtin'),id]; draw(); },
+  openQuick:function(id, ctx){ var all=quickCases('all'), q=byId(all,id); if(!q) return; if(!isFree(all,q)) return locked(); QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:ctx||'open', nonce:nonce() }; location.hash='#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'/'+id; CUR=['quick',(q.source==='mine'?'mine':'builtin'),id]; draw(); },
   choose:function(i, k){ if(!QS || QS.picks[i]!==undefined) return; QS.picks[i]=k; draw(); },
   next:function(){ if(!QS) return; if(QS.step+1<QS.q.steps.length){ QS.step++; draw(); return; } QS.score=quickScore(QS.q, QS.picks); QS.phase=(QS.q.mcqs||[]).length?'mcq':'done'; if(QS.phase==='done') quickDone(); draw(); },
   answer:function(k){ if(!QS || QS.mcq[QS.m]!==undefined) return; QS.mcq[QS.m]=k; draw(); },
@@ -828,6 +840,11 @@ root.MB_CLINSIM={
   build:buildFor,
   course:function(id){ setCourse(id||'all'); SEARCH=''; draw(); },
   newRound:function(){ ROUND_SEED++; draw(); },
+  // what the duel (clinsim-duel.js) borrows from here
+  _duel:{ draw:function(){ draw(); }, order:order, quickCases:quickCases, quickScore:quickScore, inCourse:inCourse, curCourse:curCourse,
+    recordRun:function(kind, id, pct, ex){ record(kind, id, pct, ex); },
+    recordDuel:function(d){ var s=store(); s.duels=(s.duels||[]).concat([d]).slice(-100); save(); },
+    duels:function(){ return store().duels||[]; } },
   search:function(q){ SEARCH=String(q||'').slice(0,60); var r=document.getElementById('csResults'); if(r) r.innerHTML=searchHtml(SEARCH); }
 };
 })(typeof window!=='undefined'?window:globalThis);

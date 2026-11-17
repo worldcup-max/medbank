@@ -19,6 +19,7 @@ const sandbox = { window: win, document: doc, location: { hash: "" }, localStora
 vm.runInNewContext(src("er-sim-cases.js"), sandbox);
 vm.runInNewContext(src("clinsim-cases.js"), sandbox);
 vm.runInNewContext(src("clinsim.js"), sandbox);
+vm.runInNewContext(src("clinsim-duel.js"), sandbox);
 const CS = win.MB_CLINSIM, T = CS._test;
 
 const NOTE = `## Severe malaria in children
@@ -300,4 +301,26 @@ test("non-clinical topics get no case pack: no patient to see", () => {
     assert.ok(!isClinicalTopic(name, NOTE + " patient presents signs diagnosis treatment management complications history of"), name);
   const stats = "The mean is the sum of values divided by their number. The median is the middle value. Standard deviation measures spread. A p value below 0.05 is called significant.";
   assert.ok(!isClinicalTopic("Week 3 lecture", stats), "a note with no clinical talk is not clinical, whatever its name");
+});
+
+test("options are shuffled on screen: the best answer is not always first", () => {
+  const o = T.order(4, "q-x|s0|abc");
+  assert.deepEqual([...o].sort(), [0, 1, 2, 3]);
+  assert.deepEqual(T.order(4, "q-x|s0|abc"), o, "stable while you play");
+  let first = 0, n = 0;
+  for(const q of win.CLINSIM_QUICK) q.steps.forEach((s, i) => { n++; if(T.order(s.options.length, q.id + "|s" + i + "|n1")[0] === s.options.findIndex(x => x.pts === 10)) first++; });
+  assert.ok(first < n / 2, "best shown first in " + first + " of " + n);
+});
+
+test("duel: winner by score, then fewer dangerous decisions, then speed; leaving loses", () => {
+  const W = win.MB_CLINDUEL._test.winner;
+  assert.equal(W({ pct: 80, danger: 0, ms: 9 }, { pct: 70, danger: 0, ms: 1 }), "a");
+  assert.equal(W({ pct: 80, danger: 1, ms: 1 }, { pct: 80, danger: 0, ms: 9 }), "b");
+  assert.equal(W({ pct: 80, danger: 0, ms: 5 }, { pct: 80, danger: 0, ms: 9 }), "a");
+  assert.equal(W({ pct: 80, danger: 0, ms: 5 }, { pct: 80, danger: 0, ms: 5 }), null);
+  assert.equal(W({ pct: 100, danger: 0, ms: 1, forfeit: true }, { pct: 0, danger: 0, ms: 9 }), "b");
+  assert.equal(W({ forfeit: true }, { forfeit: true }), null);
+  const S = win.MB_CLINDUEL._test.samePattern, p = win.MB_CLINDUEL._test.newPattern();
+  assert.equal(p.length, 4); assert.equal(new Set(p).size, 4);
+  assert.ok(S(p, p.slice())); assert.ok(!S(p, p.slice().reverse()));
 });
