@@ -177,7 +177,7 @@ function caseProblem(c,id){ for(var i=0;i<(c.problems||[]).length;i++) if(c.prob
 function didAny(run, ids){ return (ids||[]).some(function(id){ return !!run.done[id]; }); }
 function firstTime(run, ids){ var best=null; (ids||[]).forEach(function(id){ var ts=run.done[id]; if(ts&&ts.length&&(best===null||ts[0]<best)) best=ts[0]; }); return best; }
 
-function log(run, kind, text){ run.log.push({ t:Math.round(run.t), kind:kind, text:text }); }
+function log(run, kind, text){ var v=run.v||{}; run.log.push({ t:Math.round(run.t), kind:kind, text:text, v:{ hr:Math.round(v.hr), sbp:Math.round(v.sbp), spo2:Math.round(v.spo2) } }); }   // v: vitals at that moment, for the debrief's vitals trace
 
 // Advance the clock: problems drift vitals, recoveries play out, latent problems wake, tests come back.
 function tick(c, run, minutes){
@@ -419,7 +419,7 @@ if(typeof document==='undefined') return;
 function cases(){ return root.ERSIM_CASES||[]; }
 function caseById(id){ return cases().filter(function(c){ return c.id===id; })[0]||null; }
 function e(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]; }); }
-function on(){ try{ var C=root.MEDBANK_CONFIG||{}; if(C.FEATURES&&C.FEATURES.ER_SIM) return true; return root.localStorage&&localStorage.mbersim==='1'; }catch(_){ return false; } }
+function on(){ try{ var C=root.MEDBANK_CONFIG||{}; if(C.FEATURES&&C.FEATURES.ER_SIM) return true; if(root.MB_CLINSIM&&root.MB_CLINSIM.on()) return true; return root.localStorage&&localStorage.mbersim==='1'; }catch(_){ return false; } }   // also on inside Clinical Simulation (clinsim.js)
 
 var RUN=null, CASE=null, TAB='talk', CHAT=[], BUSY=false, DEBRIEF=null, FILTER='all', LAST=null;
 var RUN_KEY='mb_ersim_run';
@@ -682,9 +682,27 @@ function debrief(){
   h+='</div>';
   if((c.teaching||[]).length) h+='<div class="ers-panel" style="margin-top:12px"><h4>Learning points</h4><ul class="ers-teach">'+c.teaching.map(function(t){ return '<li>'+e(t)+'</li>'; }).join('')+'</ul>'+
     ((c.refs||[]).length?'<h4>Further reading</h4><ul class="ers-teach">'+c.refs.map(function(t){ return '<li>'+e(t)+'</li>'; }).join('')+'</ul>':'')+'</div>';
+  h+=vitalsTrace();
   h+='<div class="ers-panel" style="margin-top:12px"><h4>Your timeline</h4><div class="ers-log">'+RUN.log.map(function(l){ return '<div class="k-'+l.kind+'"><time>'+l.t+'′</time>'+e(l.text)+'</div>'; }).join('')+'</div></div>';
   h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_ERSIM.restart()">Play again</button><button class="btn" onclick="go(\'ersim\')">Back to cases</button></div>';
   return h;
+}
+
+/* Vitals against time, with a marker for each treatment, so the student sees WHEN they acted, not just what.
+   Built from the vitals each log entry carries (log() stores them). Old runs without them show nothing. */
+function vitalsTrace(){
+  var pts=(RUN.log||[]).filter(function(l){ return l.v && isFinite(l.v.hr); });
+  if(pts.length<2) return '';
+  var W=640, H=200, L=34, R=10, T=12, B=26, tMax=Math.max(10, pts[pts.length-1].t);
+  var x=function(t){ return L+(W-L-R)*t/tMax; }, y=function(v){ return T+(H-T-B)*(1-Math.max(0,Math.min(200,v))/200); };
+  var series=[['hr','Heart rate','#e5484d'],['sbp','Systolic BP','#3e63dd'],['spo2','SpO₂ %','#12a594']];
+  var grid=[0,50,100,150,200].map(function(g){ return '<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(g)+'" y2="'+y(g)+'" stroke="var(--line)"/><text x="'+(L-6)+'" y="'+(y(g)+4)+'" text-anchor="end" font-size="10" fill="var(--dim)">'+g+'</text>'; }).join('');
+  var lines=series.map(function(s){ return '<polyline fill="none" stroke="'+s[2]+'" stroke-width="2" points="'+pts.map(function(p){ return x(p.t).toFixed(1)+','+y(p.v[s[0]]).toFixed(1); }).join(' ')+'"/>'; }).join('');
+  var marks=(RUN.log||[]).filter(function(l){ return l.kind==='tx'; }).map(function(l){ return '<line x1="'+x(l.t)+'" x2="'+x(l.t)+'" y1="'+T+'" y2="'+(H-B)+'" stroke="var(--accent)" stroke-dasharray="3 3" opacity=".7"><title>'+e(l.t+' min: '+l.text)+'</title></line>'; }).join('');
+  var ticks=[0,Math.round(tMax/2),tMax].map(function(t){ return '<text x="'+x(t)+'" y="'+(H-8)+'" text-anchor="middle" font-size="10" fill="var(--dim)">'+t+' min</text>'; }).join('');
+  return '<div class="ers-panel" style="margin-top:12px"><h4>Vitals and your treatments</h4>'+
+    '<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Heart rate, systolic blood pressure and oxygen saturation over the case, with a dashed line at each treatment">'+grid+marks+lines+ticks+'</svg>'+
+    '<div class="ers-meta">'+series.map(function(s){ return '<span style="color:'+s[2]+';font-weight:800">━</span> '+s[1]; }).join(' &nbsp; ')+' &nbsp; <span style="color:var(--accent)">┆</span> a treatment</div></div>';
 }
 
 function page(caseId){

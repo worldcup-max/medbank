@@ -83,5 +83,8 @@ window.MEDBANK_CONFIG = {
   //                  Ships DARK. Turn on only after the verification report passes.
   //   ER_SIM      = the emergency room simulator (er-sim.js, route #/ersim). Default OFF until a clinician has
   //                  reviewed the cases (ER-SIM.md). To try it on your own device: localStorage.mbersim='1', reload.
-  FEATURES: { ER_SIM: false, LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, WHITEBOARD: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false }
+  //   CLINICAL_SIM = the Clinical Simulation tab (clinsim.js, route #/clinsim) for 400, 500 and 600 level only: ER Sim,
+  //                  OSCE stations, quick cases, Case of the Day, study group OSCE and cases built from imported lectures.
+  //                  Default OFF until a clinician has reviewed the cases (CLINICAL-SIM.md). Try it: localStorage.mbclinsim='1'.
+  FEATURES: { CLINICAL_SIM: false, ER_SIM: false, LEARNING_EVENTS: false, GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, WHITEBOARD: true, MODEL3D: true, A7: true, V16_TELEMETRY: true, FRAGILE: true, MISCONCEPTION: false }
 };

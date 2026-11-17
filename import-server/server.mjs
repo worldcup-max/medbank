@@ -36,6 +36,7 @@ import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseP
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
 import { loadPlans, isActiveSub, tierOf, verifySignature, handleEvent, startCheckout, verifyReference } from "./payments.mjs";
 import { cleanPatientRequest, buildPatientPrompt, parsePatientReply, ersimQuota } from "./ersim.mjs";   // ER Sim: the AI patient
+import { isClinicalLevel, isClinicalTopic, buildCasePackPrompt, validateCasePack, packSize } from "./clinsim.mjs";   // Clinical Simulation: cases built from imported lectures
 import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
@@ -219,6 +220,7 @@ const BASIC_MODEL   = process.env.MEDBANK_BASIC_MODEL   || "deepseek-v4-flash"; 
 const PREMIUM_MODEL = process.env.MEDBANK_PREMIUM_MODEL || "deepseek-v4-pro";    // higher accuracy → premium tier
 const GEN_TIMEOUT_MS = Number(process.env.GEN_TIMEOUT_MS) || 300000;            // text-model calls must never hang forever, but allow big reasoning+JSON gens (fail fast → the UI can show a real error)
 const EXTRAS_MODEL = process.env.MEDBANK_EXTRAS_MODEL || BASIC_MODEL;           // model for in-app extras (qbank/written). Set to a non-reasoning model (e.g. deepseek-chat) for much faster builds.
+const CLINSIM_ON_IMPORT = process.env.MEDBANK_CLINSIM_ON_IMPORT === "1";   // Clinical Simulation case packs built at import (one extra model call per clinical lecture). Off until FEATURES.CLINICAL_SIM goes live; "Build cases" in the tab works either way.
 const QBANK_BATCHES = Number(process.env.QBANK_BATCHES) || 5;                   // qbank is generated in N parallel focused calls → wall-clock ≈ one small call, not the whole set
 const TEXT_MODEL    = process.env.MEDBANK_TEXT_MODEL    || BASIC_MODEL;          // fallback when tier is unknown; retires Claude
 async function generate({ model, prompt, parts, images, max_tokens, temperature, json }){
@@ -400,6 +402,25 @@ function extractJsonObject(raw){
   }
   if(best) return best;
   try{ return JSON.parse(t.slice(t.indexOf("{"), t.lastIndexOf("}")+1)); }catch(_){ return null; }   // last resort
+}
+/* Clinical Simulation case pack from the built note (clinsim.mjs). Returns the pack or null.
+ * Only for clinical-year students (400/500/600 level); the caller checks the level. */
+async function buildCasePack(note, topicName, model){
+  if(!String(note||"").trim()) return null;
+  if(!isClinicalTopic(topicName, note)){ console.log("[clinsim] "+String(topicName||"topic").slice(0,80)+": not a clinical topic, no case pack"); return null; }   // no patient to see: no model call
+  const gen = await generate({ model: model || EXTRAS_MODEL, prompt: buildCasePackPrompt(note, topicName), parts:[], images:[], max_tokens:12000, temperature:0.4, json:true });
+  const cand = extractJsonObject(gen.text || "");
+  if(!cand) return null;
+  const pack = validateCasePack(cand, note, topicName);
+  if(pack.dropped) console.warn("[clinsim] dropped "+pack.dropped+" case(s) that did not match the note or the topic");
+  delete pack.dropped;
+  pack.built_at = new Date().toISOString();
+  return pack;
+}
+async function saveCasePack(topicId, pack){
+  const t = await admin.from("topics").select("extras").eq("id",topicId).maybeSingle();   // re-read: other extras may have landed since
+  const extras = Object.assign({}, (t.data && t.data.extras) || {}, { clinsim: pack });
+  await admin.from("topics").update({ extras }).eq("id",topicId);
 }
 /* generate one optional extra (fill_blank / written) from the built note; returns items[] or null */
 async function buildExtra(kind, level, note, model){
@@ -1427,7 +1448,16 @@ app.post("/import", async (req,res)=>{
     await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:"import", p_tokens:(usage.output_tokens||0) });
 
     harvestFromNote(obj.note_md);   // fire-and-forget: learn new medical pronunciations from this lecture
-    res.json({ ok:true, topic_id:topicId, primer:obj.primer.cards.length, recall:obj.recall.cards.length });
+    const wantCases = CLINSIM_ON_IMPORT && isClinicalLevel(level) && isClinicalTopic(topicName, obj.note_md);   // clinical years only, and only topics with a patient to see
+    res.json({ ok:true, topic_id:topicId, primer:obj.primer.cards.length, recall:obj.recall.cards.length, clinsim: wantCases ? "building" : null });
+    // Clinical Simulation: 400-600 level students get cases built from every lecture they import.
+    // After the response, so the import is no slower; the app picks the pack up on its next topic load
+    // (or builds it on demand through /build-extra kind "clinsim").
+    if(wantCases){
+      buildCasePack(obj.note_md, topicName, EXTRAS_MODEL)
+        .then(pack => { if(pack && packSize(pack)) return saveCasePack(topicId, pack).then(()=>console.log("[clinsim] topic "+topicId+": "+packSize(pack)+" case(s)")); console.warn("[clinsim] topic "+topicId+": no cases built"); })
+        .catch(e => console.warn("[clinsim] build failed (topic "+topicId+"): "+((e&&e.message)||e)));
+    }
   }catch(e){
     console.error(e);
     // without this the row sat at status:"processing" forever whenever the build threw
@@ -1446,7 +1476,7 @@ app.post("/build-extra", async (req,res)=>{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
     const account_id = user.id;
     const { topic_id, kind } = req.body;
-    if(!topic_id || (kind!=="written" && kind!=="qbank")) return res.status(400).json({ error:"bad request" });
+    if(!topic_id || (kind!=="written" && kind!=="qbank" && kind!=="clinsim")) return res.status(400).json({ error:"bad request" });
     // open to any signed-in student — runs on their own built lecture
     const t = await admin.from("topics").select("id,account_id,note_md,extras").eq("id",topic_id).maybeSingle();
     if(!t.data) return res.status(404).json({ error:"topic not found" });
@@ -1459,6 +1489,15 @@ app.post("/build-extra", async (req,res)=>{
     const level = Number(req.body.level) || null;
     // in-app extras use EXTRAS_MODEL (defaults to Flash; can be pointed at a faster non-reasoning model)
     const model = EXTRAS_MODEL;
+    if(kind==="clinsim"){
+      // Clinical Simulation case pack: clinical-year students only (400/500/600 level)
+      if(!isClinicalLevel(level)) return res.status(403).json({ error:"clinical_only", reason:"Clinical Simulation cases are built for 400, 500 and 600 level students." });
+      if(have && packSize(have) && !req.body.force) return res.json({ ok:true, items:have });   // already built at import
+      const pack = await buildCasePack(t.data.note_md, req.body.topic_name || "", model);
+      if(!pack || !packSize(pack)) return res.status(422).json({ error:"no_cases", reason:"This lecture doesn't have enough clinical content to build patient cases from." });
+      await saveCasePack(topic_id, pack);
+      return res.json({ ok:true, items:pack });
+    }
     const _t0 = Date.now();
     console.log("[build-extra] start topic="+topic_id+" kind="+kind+" model="+model+" force="+(!!req.body.force));
     const r = await buildExtra(kind, level, t.data.note_md, model);
