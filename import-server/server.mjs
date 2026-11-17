@@ -35,6 +35,7 @@ import { buildScanPrompt, parseScan, buildAutoPrompt, checkAutoLesson, autoExcer
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
 import { loadPlans, isActiveSub, tierOf, verifySignature, handleEvent, startCheckout, verifyReference } from "./payments.mjs";
+import { cleanPatientRequest, buildPatientPrompt, parsePatientReply, ersimQuota } from "./ersim.mjs";   // ER Sim: the AI patient
 import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
@@ -2381,6 +2382,24 @@ Return ONLY JSON: {"text":"the simpler explanation"}`;
     if(!out) return res.status(502).json({ error:"try again" });
     try{ await admin.from("viz_events").insert({ account_id:user.id }); }catch(_){}   // count this regeneration against the daily limit
     res.json({ ok:true, text:out.slice(0,400), viz_quota:{ limit, remaining:Math.max(0,limit-(used+1)), premium } });
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* ---- ER Sim: the AI patient (ersim.mjs). The student asks in their own words; the model answers in
+ * character from the case's history facts only. The app falls back to its own matcher on any error. ---- */
+app.post("/ersim/patient", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const r = cleanPatientRequest(req.body);
+    if(!r.question || !r.facts.length) return res.status(400).json({ error:"nothing to answer" });
+    const premium = await isPremium(user.id, user.email).catch(()=>false);
+    const q = ersimQuota(user.id, premium);
+    if(!q.ok) return res.status(429).json({ error:"daily_limit", limit:q.limit });
+    const gen = await generate({ model: BASIC_MODEL, prompt: buildPatientPrompt(r), parts:[], images:[], max_tokens:300, temperature:0.4, json:true });
+    const out = parsePatientReply(gen.text, r.facts.map(f=>f.id));
+    if(!out) return res.status(502).json({ error:"try again" });
+    q.take();
+    res.json({ ok:true, reply:out.reply, about:out.about, remaining: Math.max(0, q.limit-q.used-1) });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
