@@ -81,7 +81,7 @@ function stationFromEr(c){
     spec:erTags(c).spec, words:erTags(c).words, diff:c.level||'' };
 }
 function stationFromPack(t, s){
-  return { id:t.id+'~'+s.id, source:'mine', basis:s.basis||'note', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id, title:s.title, patient:s.patient, speaker:s.speaker, persona:s.persona,
+  return { id:t.id+'~'+s.id, source:'mine', basis:s.basis||'note', src:s.src||'', words:'', topicId:t.id, topicName:t.name, courseId:t.subject&&t.subject.id, title:s.title, patient:s.patient, speaker:s.speaker, persona:s.persona,
     opening:s.opening||'Good day, doctor.', background:s.background||'', history:s.history||[],
     dx:{ q:'What is your working diagnosis?', options:s.dx.options, correct:s.dx.correct },
     form:s.form&&s.form.options?{ q:s.form.q||FORM_Q, options:s.form.options, correct:s.form.correct }:null, courseName:t.subject&&t.subject.name,
@@ -204,7 +204,7 @@ function isFreeAny(it){ if(it.kind==='osce') return isFree(stations('all'), it);
  *         Only your best run of each case counts, so replaying a case cannot farm points.
  * rank  : from your total points. Study-group runs are ticked by friends, so they earn no points. */
 var DIFF_X={ Beginner:1, Foundation:1, Core:1.25, Advanced:1.5 };
-var CTX_X={ topic:1, open:1.1, blind:1.3 };
+var CTX_X={ topic:1, open:1.1, duel:1.2, blind:1.3 };   // duel = a verified in-person duel (clinsim-duel.js)
 var RANKS=[[0,'Student'],[100,'Clerk'],[300,'House Officer'],[700,'Medical Officer'],[1500,'Registrar'],[3000,'Consultant']];
 function gradeOf(pct, o){ o=o||{}; if(o.unsafe) return 'Unsafe'; if(o.fail&&pct>=60) return 'Fail'; if(pct>=85&&!o.fail) return 'Excellent'; if(pct>=60&&!o.fail) return 'Pass'; return pct>=50?'Borderline':'Fail'; }
 function pointsOf(pct, o){ o=o||{}; var p=Math.max(0, Math.min(100, o.unsafe?Math.min(pct,40):pct)); return Math.round(p*(DIFF_X[o.diff]||1.25)*(CTX_X[o.ctx]||1.1)*(o.mode==='practice'?0.5:1)/10); }
@@ -273,6 +273,225 @@ function roundPage(){
   if(!items.length) return h+'<div class="cs-panel">No cases yet. Import a clinical lecture or pick a specialty.</div>';
   return h+'<div class="cs-grid">'+items.map(function(it, i){ return caseCard(it, 'blind', 'Patient '+(i+1)); }).join('')+'</div>'+
     '<div class="btnrow" style="margin-top:14px"><button class="btn" onclick="MB_CLINSIM.newRound()">🔀 New round</button></div>';
+}
+
+/* ---------- 🗓️ My posting (rotation mode)
+ * Clinical years run in postings. The student sets theirs (say Paediatrics, 8 weeks) and gets a small
+ * set of cases each week, the way clerkships pace Aquifer cases:
+ *   - 3 cases a week (clerkships settle on 2 to 3), so it never piles up;
+ *   - a checkpoint every week instead of one deadline at the end;
+ *   - common, core cases first and harder ones later; the student's own lectures for that course first;
+ *   - "I saw a patient with…": a case from the ward pulls a matching case into this week;
+ *   - the last week is exam week: a mixed ward round of the posting plus the cases they scored lowest on.
+ * A week's cases are fixed the first time that week is opened, so the plan doesn't shift under them. */
+var PER_WEEK=3, DIFF_RANK={ Beginner:0, Foundation:0, Core:1, Advanced:2 };
+function rotation(){ return store().rotation||null; }
+function weekOf(r, now){ return Math.floor(((now||Date.now()) - new Date(r.start).getTime())/(7*864e5)); }
+function rotPool(r){
+  var course=r.courseId ? (byId(myCourses(), r.courseId) || { id:r.courseId, name:r.name, spec:r.spec }) : { id:'spec:'+r.spec, name:r.spec, spec:r.spec };
+  return catalogue().filter(function(it){ return !it.tutorial && it.kind!=='daily' && inCourse(it, course); })
+    .filter(function(it, i, a){ var k=it.title.toLowerCase(); return a.findIndex(function(x){ return x.title.toLowerCase()===k; })===i; })   // one card per patient
+    .sort(function(a, b){ return (a.source==='mine'?0:1)-(b.source==='mine'?0:1) || (DIFF_RANK[a.diff]==null?1:DIFF_RANK[a.diff])-(DIFF_RANK[b.diff]==null?1:DIFF_RANK[b.diff]); });
+}
+function key(it){ return it.kind+':'+it.id; }
+function findKey(k){ return catalogue().filter(function(it){ return key(it)===k; })[0]||null; }
+// the cases for week w, fixed the first time the week is opened
+function weekCases(r, w){
+  r.plan=r.plan||{};
+  if(!r.plan[w]){
+    var used={}; Object.keys(r.plan).forEach(function(k){ r.plan[k].forEach(function(x){ used[x]=1; }); });
+    var pool=rotPool(r), fresh=pool.filter(function(it){ return !used[key(it)]; });
+    var pick=fresh.slice(0, PER_WEEK);
+    if(pick.length<PER_WEEK){   // the posting has run out of new cases: bring back the ones scored lowest
+      var redo=pool.filter(function(it){ return pick.indexOf(it)<0; }).map(function(it){ return { it:it, b:played(it) }; }).sort(function(a,b){ return (a.b==null?101:a.b)-(b.b==null?101:b.b); });
+      pick=pick.concat(redo.slice(0, PER_WEEK-pick.length).map(function(x){ return x.it; }));
+    }
+    r.plan[w]=pick.map(key); save();
+  }
+  return r.plan[w].map(findKey).filter(Boolean);
+}
+// has this case been played since the posting started?
+function doneSince(it, since){
+  var t=String(since);
+  if(it.kind==='er'){ var er=(typeof DATA!=='undefined'&&DATA.ersim&&DATA.ersim.runs)||[]; return er.some(function(r){ return r.caseId===it.id && String(r.at)>=t; }); }
+  return store().runs.some(function(r){ return r.kind===it.kind && r.id===it.id && String(r.at)>=t; });
+}
+function rotationCard(){
+  var r=rotation(); if(!r) return '';
+  var w=weekOf(r); if(w<0 || w>=r.weeks) return '<div class="cs-panel"><div class="cs-top"><b>🗓️ '+e(r.name)+' posting</b><a class="cs-meta" href="#/clinsim/rotation">'+(w<0?'Starts '+e(r.start.slice(0,10)):'Finished · set your next posting')+'</a></div></div>';
+  var cs=weekCases(r, w), done=cs.filter(function(it){ return doneSince(it, r.start); }).length;
+  return '<a class="cs-panel" style="display:block;text-decoration:none;color:inherit" href="#/clinsim/rotation"><div class="cs-top"><b>🗓️ '+e(r.name)+' · week '+(w+1)+' of '+r.weeks+(w===r.weeks-1?' · exam week':'')+'</b><span class="cs-meta">'+done+' of '+cs.length+' done this week</span></div>'+
+    '<div class="cs-bar" style="margin-top:8px"><i style="width:'+Math.round(100*done/Math.max(1,cs.length))+'%"></i></div></a>';
+}
+function rotationSetup(){
+  var courses=myCourses(), r=rotation(), today=new Date(Date.now()+3600e3).toISOString().slice(0,10);
+  var opts=courses.map(function(c){ return '<option value="'+e(c.id)+'">'+e(c.name)+'</option>'; }).join('')+
+    ['Medicine','Surgery','Paediatrics','Obstetrics & Gynaecology','Community Health','Psychiatry'].map(function(sp){ return '<option value="spec:'+e(sp)+'">'+e(sp)+'</option>'; }).join('');
+  return '<div class="cs-panel"><h4>'+(r?'Set your next posting':'Set your posting')+'</h4>'+
+    '<label class="cs-meta" for="rotWhat">Posting</label><select id="rotWhat" class="cs-sel" style="width:100%;padding:10px;margin:4px 0 10px">'+opts+'</select>'+
+    '<label class="cs-meta" for="rotStart">First day</label><input id="rotStart" type="date" value="'+today+'" style="width:100%;padding:10px;margin:4px 0 10px">'+
+    '<label class="cs-meta" for="rotWeeks">How many weeks</label><select id="rotWeeks" style="width:100%;padding:10px;margin:4px 0 10px">'+[4,6,8,10,12].map(function(n){ return '<option'+(n===8?' selected':'')+'>'+n+'</option>'; }).join('')+'</select>'+
+    '<div class="cs-meta">You get '+PER_WEEK+' cases a week: common cases first, your own lectures for the course first, and a mixed ward round in the last week before your end-of-posting exam.</div>'+
+    '<div class="btnrow" style="margin-top:12px"><button class="btn primary" onclick="MB_CLINSIM.setRotation()">Start my posting</button>'+(r?'<button class="btn" onclick="MB_CLINSIM.rotationForm(false)">Cancel</button>':'')+'</div></div>';
+}
+var ROT_FORM=false, SAW='';
+function rotationPage(){
+  var r=rotation(), h='<a href="#/clinsim" class="cs-back">← Clinical Simulation</a><h1>🗓️ My posting</h1>';
+  if(!r || ROT_FORM) return h+'<p class="cs-sub">Tell MedBank which posting you are on. It paces your cases week by week, like a clerkship does.</p>'+rotationSetup();
+  var w=weekOf(r);
+  if(w<0) return h+'<div class="cs-panel">'+e(r.name)+' starts on '+e(r.start.slice(0,10))+'. Your first 3 cases appear then.</div><div class="btnrow"><button class="btn" onclick="MB_CLINSIM.rotationForm(true)">Change posting</button></div>';
+  if(w>=r.weeks){
+    var all=Object.keys(r.plan||{}).reduce(function(a,k){ return a.concat(r.plan[k]); }, []).map(findKey).filter(Boolean), dn=all.filter(function(it){ return doneSince(it, r.start); }).length;
+    return h+'<div class="cs-panel"><b>'+e(r.name)+' posting finished.</b><div class="cs-meta">You played '+dn+' of '+all.length+' planned cases.</div></div>'+rotationSetup();
+  }
+  var cs=weekCases(r, w), done=cs.filter(function(it){ return doneSince(it, r.start); }).length, exam=w===r.weeks-1;
+  h+='<p class="cs-sub">'+e(r.name)+' · week '+(w+1)+' of '+r.weeks+(exam?' · <b>exam week</b>':'')+'</p>';
+  // the weeks so far, as checkpoints
+  h+='<div class="cs-subs" aria-label="Weeks">'+Array.apply(null, Array(r.weeks)).map(function(_, i){
+    var pl=(r.plan&&r.plan[i])||null;   // a week never opened (the posting was set late) has no cases: shown as a dash
+    var st=i<w ? (!pl||!pl.length?'–':(pl.map(findKey).filter(Boolean).filter(function(it){ return doneSince(it, r.start); }).length>=pl.length?'✅':'◻️')) : i===w?'▶️':'·';
+    return '<span class="cs-chip" style="'+(i===w?'font-weight:800':'')+'">'+st+' '+(i+1)+'</span>'; }).join('')+'</div>';
+  h+='<h4 class="cs-h">This week · '+done+' of '+cs.length+' done</h4><div class="cs-grid">'+cs.map(function(it){ var d=doneSince(it, r.start); return caseCard(it, 'open', d?'✅ Done':'This week'); }).join('')+'</div>';
+  if(exam) h+='<div class="cs-panel"><b>Exam week.</b> Play a mixed ward round of your posting: no topic shown, so you practise the diagnosis like the exam.<div class="btnrow" style="margin-top:8px"><a class="btn primary" href="#/clinsim/round" onclick="MB_CLINSIM.course(\''+e(r.courseId||('spec:'+r.spec))+'\')">🎲 Mixed ward round</a></div></div>';
+  // from the ward
+  h+='<div class="cs-panel"><h4>Saw a patient on the ward?</h4><div class="cs-meta">Type what they had or came with. MedBank finds a case like it.</div><div class="cs-ask"><input id="rotSaw" autocomplete="off" placeholder="e.g. jaundice, sickle cell crisis, eclampsia" value="'+e(SAW)+'" oninput="MB_CLINSIM.saw(this.value)" aria-label="What the patient had"></div><div id="rotSawHits">'+sawHtml(SAW)+'</div></div>';
+  if(w+1<r.weeks){ var nx=rotPool(r).filter(function(it){ var used={}; Object.keys(r.plan||{}).forEach(function(k){ r.plan[k].forEach(function(x){ used[x]=1; }); }); return !used[key(it)]; }).slice(0, PER_WEEK);
+    if(nx.length) h+='<div class="cs-meta" style="margin-top:6px">Next week: '+nx.map(function(it){ return e(it.title); }).join(' · ')+'</div>'; }
+  return h+'<div class="btnrow" style="margin-top:14px"><button class="btn" onclick="MB_CLINSIM.rotationForm(true)">Change posting</button><button class="btn" onclick="MB_CLINSIM.endRotation()">End posting</button></div>';
+}
+function sawHtml(q){
+  var x=normW(q).trim(); if(x.length<3) return '';
+  var words=x.split(' ').filter(function(w){ return w.length>=4; }); if(!words.length) return '';
+  var hits=catalogue().filter(function(it){ var t=normW(it.title+' '+it.words); return it.kind!=='daily' && !it.tutorial && words.some(function(w){ return t.indexOf(' '+w)>=0; }); }).slice(0,4);
+  return hits.length ? '<div class="cs-grid">'+hits.map(function(it){ return caseCard(it, 'open', 'From the ward'); }).join('')+'</div>' : '<div class="cs-meta" style="margin-top:6px">No case like that yet.</div>';
+}
+
+/* ---------- 🎓 Mock OSCE day
+ * A circuit of stations back to back, shaped like PLAB 2 and MB finals OSCEs:
+ *   - 1.5 minutes' reading time before each station (the candidate instructions), then 8 minutes;
+ *   - each station marked on the same three domains, with one pre-set feedback statement;
+ *   - no results between stations: one report at the end;
+ *   - you pass the day with at least 60% of stations passed AND an average of at least 60%
+ *     (PLAB 2 likewise needs a minimum number of stations and a minimum total score).
+ * Stations run blind (no topic shown, diagnosis asked). Circuits like Geeky Medics' can be any length:
+ * 4, 6 or 8 stations, from the chosen course or a finals mix across specialties. */
+var READ_SEC=90, MOCK=null, MOCK_TIMER=null;
+var MOCK_FB={
+  data:'History: you missed key questions. Use one structure every time: the complaint and its story, past history, drugs and allergies, family, social, then a systems review.',
+  mgmt:'Management: your diagnosis or plan was off. Before you present, ask yourself what must not be missed and where this patient should go.',
+  ip:'Communication: introduce yourself, open with an open question, explore their worries, summarise, and check for questions before you close.',
+  ok:'Good station. Keep the same structure.'
+};
+function mockFeedback(sc){ var lo=[['data',sc.data],['mgmt',sc.mgmt],['ip',sc.ip]].sort(function(a,b){ return a[1]-b[1]; })[0]; return lo[1]>=60 ? MOCK_FB.ok : MOCK_FB[lo[0]]; }
+function mockPick(n, course, seed){
+  var all=stations('all'), pool=all.filter(function(s){ return isFree(all, s) && inCourse(s, course); });
+  var mix=function(l, sd){ return l.map(function(x,i){ return { x:x, r:seeded(sd*97+i+1) }; }).sort(function(a,b){ return a.r-b.r; }).map(function(o){ return o.x; }); };
+  if(!course){   // finals mix: take turns across specialties so no one area fills the day
+    var bySpec={}; mix(pool, seed).forEach(function(s){ var sp=(s.spec&&s.spec[0])||'Your lectures'; (bySpec[sp]=bySpec[sp]||[]).push(s); });
+    var out=[], keys=Object.keys(bySpec).sort();
+    for(var r=0; out.length<n && keys.some(function(k){ return bySpec[k].length>r; }); r++) keys.forEach(function(k){ if(out.length<n && bySpec[k][r]) out.push(bySpec[k][r]); });
+    return out.map(function(s){ return s.id; });
+  }
+  return mix(pool, seed).slice(0, n).map(function(s){ return s.id; });
+}
+function mockResult(results){
+  var n=results.length, passed=results.filter(function(r){ return r.pass; }).length;
+  var avg=n?Math.round(results.reduce(function(a,r){ return a+r.total; },0)/n):0;
+  var dom=function(k){ return n?Math.round(results.reduce(function(a,r){ return a+r[k]; },0)/n):0; };
+  return { n:n, passed:passed, avg:avg, data:dom('data'), mgmt:dom('mgmt'), ip:dom('ip'), pass:n>0 && passed>=Math.ceil(0.6*n) && avg>=60 };
+}
+function mockStop(){ if(MOCK_TIMER){ clearInterval(MOCK_TIMER); MOCK_TIMER=null; } }
+function mockRead(){
+  mockStop();
+  MOCK_TIMER=setInterval(function(){
+    var el=document.getElementById('mockClock'); if(!MOCK || MOCK.phase!=='read' || !el){ mockStop(); return; }
+    var left=Math.max(0, Math.ceil((MOCK.readEnds-Date.now())/1000)); el.textContent=Math.floor(left/60)+':'+((left%60)<10?'0':'')+(left%60);
+    if(left<=0){ mockStop(); root.MB_CLINSIM.mockGo(); }
+  }, 500);
+}
+function mockPage(){
+  var h='<a href="#/clinsim" class="cs-back" onclick="MB_CLINSIM.mockEnd()">← Clinical Simulation</a><h1>🎓 Mock OSCE day</h1>';
+  if(!MOCK){
+    var c=curCourse(), last=(store().mocks||[]).slice(-3).reverse();
+    return h+'<p class="cs-sub">Stations back to back, like the real exam: 1.5 minutes to read each brief, 8 minutes with the patient, and one report at the end. No topic is shown, so you are asked the diagnosis.</p>'+
+      '<div class="cs-panel"><h4>How many stations</h4><div class="cs-subs">'+[4,6,8].map(function(n){ return '<button class="cs-chip" onclick="MB_CLINSIM.mockStart('+n+')">'+n+' stations · about '+Math.round(n*9.5)+' min</button>'; }).join('')+'</div>'+
+      '<div class="cs-meta" style="margin-top:8px">'+(c?'From <b>'+e(c.name)+'</b>. '+'<a href="javascript:void 0" onclick="MB_CLINSIM.course(\'all\');return false">Use a finals mix instead</a>':'A finals mix across specialties. Pick a course on the first screen to sit one course instead.')+'</div>'+
+      '<div class="cs-meta" style="margin-top:6px">To pass the day: pass at least 60% of the stations and average at least 60%. A station passes at 60% with at least 40% in every part.</div></div>'+
+      (last.length?'<div class="cs-panel"><h4>Your last mock days</h4><ul class="cs-list">'+last.map(function(m){ return '<li><span aria-hidden="true">'+(m.pass?'✅':'❌')+'</span><span>'+e(m.at.slice(0,10))+' · '+m.passed+' of '+m.n+' stations · average '+m.avg+'%</span></li>'; }).join('')+'</ul></div>':'');
+  }
+  var n=MOCK.ids.length;
+  if(MOCK.phase==='read'){
+    var s=byId(stations('all'), MOCK.ids[MOCK.i]);
+    if(!s){ MOCK.i++; return mockPage(); }
+    setTimeout(mockRead, 0);
+    return h+'<div class="cs-meta">Station '+(MOCK.i+1)+' of '+n+'</div><div class="cs-top"><h4 class="cs-h" style="margin:8px 0">Reading time</h4><span class="cs-clock" id="mockClock">1:30</span></div>'+
+      '<div class="cs-panel"><h4>Candidate instructions</h4><p style="margin:0;line-height:1.6">You are the doctor in a '+e(s.area||'hospital')+' clinic. <b>'+e(s.patient.name)+'</b>, '+e(s.patient.age)+', '+e(s.patient.sex)+(s.speaker&&!/^the patient$/i.test(s.speaker)&&s.speaker.indexOf(s.patient.name.split(' ')[0])!==0?', is here with '+e(s.speaker)+'':'')+'. They came with: <b>'+e(s.title)+'</b>.</p>'+
+      '<ul class="cs-teach"><li>Take a focused history.</li><li>Then give the examiner your working diagnosis and where the patient should go.</li><li>You have 8 minutes.</li></ul></div>'+
+      '<div class="btnrow" style="margin-top:12px"><button class="btn primary" onclick="MB_CLINSIM.mockGo()">Enter the station now</button><button class="btn" onclick="MB_CLINSIM.mockEnd()">End the day</button></div>';
+  }
+  if(MOCK.phase==='station') return h+'<div class="cs-panel">Station '+(MOCK.i+1)+' of '+n+' is in progress.</div><div class="btnrow"><a class="btn primary" href="#/clinsim/osce/timed/'+e(MOCK.ids[MOCK.i])+'">Back to the station</a><button class="btn" onclick="MB_CLINSIM.mockEnd()">End the day</button></div>';
+  // report
+  var R=mockResult(MOCK.results), col=R.pass?'var(--recall-tx)':'var(--badtx)';
+  h+='<div class="cs-panel"><div class="cs-score"><div class="cs-ring" style="border:8px solid '+col+';color:'+col+'">'+R.avg+'%</div><div><div style="font-size:22px;font-weight:800;color:'+col+'">'+(R.pass?'PASS':'FAIL')+'</div>'+
+    '<div class="cs-meta">'+R.passed+' of '+R.n+' stations passed · average '+R.avg+'%</div><div class="cs-meta">Pass: at least '+Math.ceil(0.6*R.n)+' stations and an average of 60%.</div></div></div>'+domainsHtml(R)+'</div>';
+  h+='<div class="cs-panel"><h4>Station by station</h4><ul class="cs-list">'+MOCK.results.map(function(r, i){ return '<li><span aria-hidden="true">'+(r.pass?'✅':'❌')+'</span><span><b>'+(i+1)+'. '+e(r.title)+'</b> · '+r.total+'%'+
+    '<span class="cs-meta" style="display:block">History '+r.data+'% · Management '+r.mgmt+'% · Communication '+r.ip+'%'+(r.dxOk===false?' · diagnosis missed':'')+'</span><span class="cs-meta" style="display:block">'+e(r.fb)+'</span></span></li>'; }).join('')+'</ul></div>';
+  return h+'<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.mockEnd();MB_CLINSIM.mockStart('+R.n+')">Another mock day</button><button class="btn" onclick="MB_CLINSIM.mockEnd()">Done</button></div>';
+}
+
+/* ---------- 📖 Revise this: from a case back to the note and the Q-bank
+ * Like AMBOSS linking each question to the article section and to practice on the same topic:
+ * after a case, show the exact line of the student's own lecture note it came from (a lecture case
+ * carries a verbatim quote, src), or for a MedBank case the line of a matching imported lecture,
+ * with one tap to open the note scrolled to that line, and that lecture's related Q-bank questions. */
+function caseWords(c){ return normW([c.words||'', c.title||''].join(' ')).trim().split(' ').filter(function(w){ return w.length>=5; }); }
+function sentences(note){ return String(note||'').replace(/[#*_>`|]/g,' ').replace(/([.!?])\s+/g,'$1\n').split(/\n+/).map(function(x){ return x.replace(/\s+/g,' ').trim(); }).filter(function(x){ return x.length>=25; }); }
+// the best line of a note for this case: its own quote if it has one, else the sentence sharing most case words
+function bestLine(note, c){
+  var ss=sentences(note); if(!ss.length) return null;
+  if(c.src){ var q=normW(c.src).trim(); var hit=ss.filter(function(x){ return normW(x).indexOf(q.split(' ').slice(0,6).join(' '))>=0; })[0]; if(hit) return hit; }
+  var ws=caseWords(c); if(!ws.length) return null;
+  var best=null, bn=0; ss.forEach(function(x){ var t=normW(x), n=ws.filter(function(w){ return t.indexOf(' '+w)>=0; }).length; if(n>bn){ bn=n; best=x; } });
+  return bn>=2 ? best : null;
+}
+// imported lectures this case belongs to: its own topic, or lectures whose title or note match its topic words
+function linkedTopics(c){
+  var ts=myTopics();
+  if(c.topicId) return ts.filter(function(t){ return t.id===c.topicId; });
+  var byTitle=ts.filter(function(t){ return topicHit(c, t.name); });
+  if(byTitle.length) return byTitle.slice(0,2);
+  return ts.filter(function(t){ return bestLine(t.note, c); }).slice(0,1);
+}
+function relatedQs(t, c, n){
+  var qs=(t.extras&&t.extras.qbank)||[], ws=caseWords(c);
+  return qs.map(function(q){ var x=normW((q.stem||q.q||'')+' '+(q.explanation||q.why||'')); return { q:q, n:ws.filter(function(w){ return x.indexOf(' '+w)>=0; }).length }; })
+    .filter(function(o){ return o.n>0; }).sort(function(a,b){ return b.n-a.n; }).slice(0, n||3).map(function(o){ return o.q; });
+}
+function reviseHtml(c, missed){
+  var ts=linkedTopics(c); if(!ts.length) return '';
+  var h='<div class="cs-panel"><h4>📖 Revise this'+(missed?': what you missed':'')+'</h4>';
+  ts.forEach(function(t){
+    var line=bestLine(t.note, c), qs=relatedQs(t, c, 3), all=((t.extras&&t.extras.qbank)||[]).length;
+    h+='<div style="margin:8px 0"><b>'+e(t.name)+'</b>'+(line?'<blockquote class="cs-reveal" style="margin:6px 0">'+e(line.slice(0,260))+'</blockquote>':'')+
+      '<div class="btnrow" style="margin-top:6px"><button class="btn" onclick="MB_CLINSIM.toNote(\''+e(t.id)+'\','+(line?'\''+e(line.slice(0,120).replace(/\\/g,'').replace(/'/g,'’'))+'\'':'null')+')">Open '+(line?'this line':'the note')+'</button>'+
+      (all?'<button class="btn" onclick="MB_CLINSIM.toQbank(\''+e(t.id)+'\')">🧠 '+(qs.length?qs.length+' related question'+(qs.length===1?'':'s'):'Q-bank')+'</button>':'')+'</div>'+
+      (qs.length?'<ul class="cs-teach" style="margin-top:6px">'+qs.map(function(q){ return '<li>'+e(String(q.stem||q.q||'').slice(0,140))+'</li>'; }).join('')+'</ul>':'')+'</div>';
+  });
+  return h+'</div>';
+}
+// open a lecture's note and bring a line into view, highlighted for a few seconds
+function jumpToLine(text){
+  var want=normW(text).trim().split(' ').slice(0,8).join(' '), tries=0;
+  (function look(){
+    var body=document.querySelector('.notebody'); if(!body){ if(++tries<20) setTimeout(look, 150); return; }
+    var els=[].slice.call(body.querySelectorAll('p,li,td,h2,h3,h4,blockquote')), hit=null;
+    for(var i=0;i<els.length;i++){ if(normW(els[i].textContent).indexOf(want)>=0){ hit=els[i]; break; } }
+    if(!hit){ var ws=want.split(' ').filter(function(w){ return w.length>=5; }), bn=0; els.forEach(function(el){ var t=normW(el.textContent), n=ws.filter(function(w){ return t.indexOf(' '+w)>=0; }).length; if(n>bn){ bn=n; hit=el; } }); }
+    if(!hit) return;
+    hit.scrollIntoView({ block:'center', behavior:'smooth' });
+    var old=hit.style.background; hit.style.background='var(--warnbg, #fff3c4)'; hit.style.transition='background 1.2s'; hit.setAttribute('tabindex','-1');
+    setTimeout(function(){ hit.style.background=old||''; }, 4000);
+  })();
 }
 
 /* ---------- free rotation: one built-in station and one quick case a week for unpaid students */
@@ -359,6 +578,12 @@ var MODES=[
     subs:[['builtin','MedBank cases'],['mine','From my lectures']] },
   { id:'daily', ic:'📅', name:'Case of the Day', blurb:'One mystery patient a day for everyone. Six clues, six guesses. Share your result.',
     subs:[['today','Today\'s case'],['archive','Past days'],['mine','From my lectures']] },
+  { id:'rotation', ic:'🗓️', name:'My Posting', blurb:'Set the posting you are on. Get 3 cases a week for it, and a mixed ward round in exam week.',
+    subs:[['plan','This week']] },
+  { id:'mock', ic:'🎓', name:'Mock OSCE Day', blurb:'4 to 8 stations back to back: 1.5 minutes to read, 8 minutes each, one report at the end.',
+    subs:[['day','Sit a mock day']] },
+  { id:'duel', ic:'⚔️', name:'Duel', blurb:'Two phones side by side, same patient, same clock. Leave the app and you lose.',
+    subs:[['home','Start or join a duel']] },
   { id:'group', ic:'👥', name:'Study Group OSCE', blurb:'Practise with friends on one phone: one plays the patient, one examines, one is the candidate.',
     subs:[['pick','Pick a station']] },
   { id:'mine', ic:'📚', name:'My Lecture Cases', blurb:'Every lecture you import gets its own patients, stations and puzzles, built from your note.',
@@ -367,7 +592,7 @@ var MODES=[
 function hub(){
   var course=curCourse(), courses=myCourses(), sel=courseSel(), runs=store().runs, all=catalogue();
   var h='<h1>🏥 Clinical Simulation</h1><p class="cs-sub">Pick your course, then a topic. Every kind of case for that topic sits together.</p>'+
-    '<div class="cs-meta" style="margin-top:6px">'+level()+' level · '+runs.length+' case'+(runs.length===1?'':'s')+' played</div>'+standingHtml();
+    '<div class="cs-meta" style="margin-top:6px">'+level()+' level · '+runs.length+' case'+(runs.length===1?'':'s')+' played</div>'+standingHtml()+rotationCard()+(rotation()?'':'<div class="cs-meta" style="margin-top:4px"><a href="#/clinsim/rotation">🗓️ On a posting? Set it, and get 3 cases a week for it.</a></div>');
   // 1 · your course
   var covered={}; courses.forEach(function(c){ if(c.spec) covered[c.spec]=1; });
   var extra=['Medicine','Surgery','Paediatrics','Obstetrics & Gynaecology','Community Health'].filter(function(sp){ return !covered[sp]; });
@@ -483,7 +708,7 @@ function osceTalk(){
   var s=OS.s, timed=!!OS.endsAt;
   var h='<a href="#/clinsim/osce/'+(OS.mode==='practice'?'practice':(s.source==='mine'?'mine':'timed'))+'" class="cs-back" onclick="MB_CLINSIM.stop()">← Stations</a>'+
     '<div class="cs-top"><h1 style="margin:6px 0">'+e(s.title)+'</h1>'+(timed?'<span class="cs-clock" id="csClock" aria-live="off">'+clockText()+'</span>':'<span class="cs-meta">Practice: no clock</span>')+'</div>'+
-    '<div class="cs-meta">'+e(s.patient.name)+', '+e(s.patient.age)+' '+e(s.patient.sex)+(s.speaker&&!/^the patient$/i.test(s.speaker)?' · speaking: '+e(s.speaker):'')+'</div>'+ctxNote(OS.ctx)+
+    '<div class="cs-meta">'+(MOCK&&MOCK.phase==='station'?'🎓 Mock OSCE · station '+(MOCK.i+1)+' of '+MOCK.ids.length+' · ':'')+e(s.patient.name)+', '+e(s.patient.age)+' '+e(s.patient.sex)+(s.speaker&&!/^the patient$/i.test(s.speaker)?' · speaking: '+e(s.speaker):'')+'</div>'+(MOCK&&MOCK.phase==='station'?'':ctxNote(OS.ctx))+
     '<div class="cs-panel"><div class="cs-chat" id="csChat" aria-live="polite">'+OS.chat.map(function(m){ return '<div class="cs-msg '+m.who+'">'+e(m.text)+'</div>'; }).join('')+(OS.busy?'<div class="cs-msg pt">…</div>':'')+'</div>'+
     '<form class="cs-ask" onsubmit="MB_CLINSIM.say();return false"><input id="csQ" autocomplete="off" placeholder="Speak to '+e(s.speaker&&!/^the patient$/i.test(s.speaker)?s.speaker:s.patient.name.split(' ')[0])+'…" aria-label="What you say"'+(OS.busy?' disabled':'')+'><button class="btn primary"'+(OS.busy?' disabled':'')+'>Say</button></form>'+
     '<div class="btnrow" style="margin-top:10px"><button class="btn" onclick="MB_CLINSIM.present()">I\'m ready to present</button></div></div>';
@@ -542,6 +767,7 @@ function resultHtml(s, sc, opts){
 function osceResult(){
   var s=OS.s, sc=OS.score;
   var h='<h1>Station result: '+e(s.title)+'</h1>'+pointsLine(OS.pts)+resultHtml(s, sc, { picks:{ dx:OS.dx, plan:OS.plan }, time:OS.endsAt?OSCE_MIN+'-minute station':'practice' });
+  h+=reviseHtml(s, !sc.pass);
   h+='<div class="cs-panel"><h4>Your conversation</h4><div class="cs-chat">'+OS.chat.map(function(m){ return '<div class="cs-msg '+m.who+'">'+e(m.text)+'</div>'; }).join('')+'</div></div>';
   h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.openOsce(\''+e(s.id)+'\',\''+OS.mode+'\',\''+OS.ctx+'\')">Try again</button><button class="btn" onclick="location.hash=\'#/clinsim/osce/'+(s.source==='mine'?'mine':OS.mode)+'\'">Other stations</button></div>';
   return h;
@@ -609,7 +835,7 @@ function quickView(){
       if(i>QS.step) return;
       var picked=QS.picks[i], done=picked!==undefined;
       h+='<div class="cs-panel"><h4>Decision '+(i+1)+' of '+q.steps.length+'</h4><div style="font-weight:700;margin-bottom:8px">'+e(st.prompt)+'</div><div class="cs-opts">'+
-        st.options.map(function(o,k){ var cls=done?(o.pts===10?' best':(k===picked&&o.pts<0?' bad':''))+(k===picked?' picked':''):'';
+        order(st.options.length, q.id+'|s'+i+'|'+QS.nonce).map(function(k){ var o=st.options[k]; var cls=done?(o.pts===10?' best':(k===picked&&o.pts<0?' bad':''))+(k===picked?' picked':''):'';
           return '<button class="cs-opt'+cls+'"'+(done?' disabled':' onclick="MB_CLINSIM.choose('+i+','+k+')"')+'>'+e(o.t)+(done&&(k===picked||o.pts===10)?'<small>'+(o.pts>0?'+':'')+o.pts+' · '+e(o.why)+'</small>':'')+'</button>'; }).join('')+'</div>'+
         (done&&st.options[picked].pts<=-10?'<div class="cs-danger">⚠️ Dangerous decision. In real life this could seriously harm the patient.</div>':'')+
         (done&&st.reveal?'<div class="cs-reveal">'+e(st.reveal)+'</div>':'')+'</div>';
@@ -620,7 +846,7 @@ function quickView(){
   if(QS.phase==='mcq'){
     var mq=q.mcqs[QS.m], mp=QS.mcq[QS.m], md=mp!==undefined;
     h+='<div class="cs-panel"><h4>Exam question '+(QS.m+1)+' of '+q.mcqs.length+'</h4><div style="font-weight:700;margin-bottom:8px">'+e(mq.stem)+'</div><div class="cs-opts">'+
-      shuffled(mq.options, QS.m).map(function(x){ var k=x.i, cls=md?(k===mq.ans?' best':(k===mp?' bad':''))+(k===mp?' picked':''):'';
+      order(mq.options.length, q.id+'|m'+QS.m+'|'+QS.nonce).map(function(k){ var x={ t:mq.options[k] }, cls=md?(k===mq.ans?' best':(k===mp?' bad':''))+(k===mp?' picked':''):'';
         return '<button class="cs-opt'+cls+'"'+(md?' disabled':' onclick="MB_CLINSIM.answer('+k+')"')+'>'+e(x.t)+'</button>'; }).join('')+'</div>'+
       (md?'<div class="cs-reveal">'+(mp===mq.ans?'✅ ':'❌ ')+e(mq.why||'')+'</div><div class="btnrow" style="margin-top:12px"><button class="btn primary" onclick="MB_CLINSIM.nextMcq()">'+(QS.m+1<q.mcqs.length?'Next question':'See my score')+'</button></div>':'')+'</div>';
     return h;
@@ -630,6 +856,7 @@ function quickView(){
   h+=pointsLine(QS.pts)+'<div class="cs-panel"><div class="cs-score"><div class="cs-ring" style="border:8px solid '+col+';color:'+col+'">'+sc.pct+'%</div><div><div style="font-size:20px;font-weight:800;color:'+col+'">'+e(sc.grade)+'</div>'+
     (mcqN?'<div class="cs-meta">Exam questions: '+mcqOk+' of '+mcqN+' right</div>':'')+'</div></div>'+
     (sc.danger.length?'<h4>Dangerous decisions</h4><ul class="cs-teach">'+sc.danger.map(function(d){ return '<li><b>'+e(d.t)+'</b>. '+e(d.why)+'</li>'; }).join('')+'</ul>':'')+'</div>';
+  h+=reviseHtml(q, sc.danger.length>0 || sc.pct<60);
   if((q.teaching||[]).length) h+='<div class="cs-panel"><h4>Learning points</h4><ul class="cs-teach">'+q.teaching.map(function(t){ return '<li>'+e(t)+'</li>'; }).join('')+'</ul>'+((q.refs||[]).length?'<h4>Further reading</h4><ul class="cs-teach">'+q.refs.map(function(t){ return '<li>'+e(t)+'</li>'; }).join('')+'</ul>':'')+'</div>';
   h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_CLINSIM.openQuick(\''+e(q.id)+'\',\''+(QS.ctx||'open')+'\')">Play again</button>'+(q.topicId?'<a class="btn" href="#/topic/'+e(q.topicId)+'">Open the lecture</a>':'')+'<button class="btn" onclick="location.hash=\'#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'\'">Other cases</button></div>';
   return h;
@@ -639,8 +866,16 @@ function quickDone(){
   if(mq.length) ex.mcq=mq.filter(function(m,i){ return QS.mcq[i]===m.ans; }).length;
   QS.pts=award('quick', QS.q.id, QS.score.pct, ex); record('quick', QS.q.id, QS.score.pct, ex);
 }
-// MCQ options in a stable shuffled order (the answer is not always first)
-function shuffled(opts, seed){ var a=opts.map(function(t,i){ return { t:t, i:i }; }), n=(seed*7+3)%a.length; return a.slice(n).concat(a.slice(0,n)); }
+// The order options are shown in. The content keeps the best answer first, so the screen must not:
+// a seeded shuffle per case, step and play (nonce), stable while you play, new each time you replay.
+function order(n, key){
+  var h=2166136261, k=String(key), a=[], i;
+  for(i=0;i<k.length;i++){ h^=k.charCodeAt(i); h=Math.imul(h,16777619)>>>0; }
+  for(i=0;i<n;i++) a.push(i);
+  for(i=n-1;i>0;i--){ h=Math.imul(h^(h>>>15), 2246822519)>>>0; h=(h^(h>>>13))>>>0; var j=h%(i+1), t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a;
+}
+function nonce(){ return Math.random().toString(36).slice(2,8); }
 
 /* ---------- 📅 Case of the Day */
 function normA(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\b(acute|the|a)\b/g,' ').replace(/\s+/g,' ').trim(); }
@@ -773,13 +1008,15 @@ function page(parts){
   var g=gate(); if(g) return g;
   var mode=parts[0], sub=parts[1], id=parts.slice(2).join('/');
   if(mode!=='osce') stopTimer();
+  if(mode!=='mock') mockStop();
+  if(mode!=='duel' && root.MB_CLINDUEL && root.MB_CLINDUEL.live()) root.MB_CLINDUEL.leaving();   // walking out of a live duel forfeits it
   switch(mode){
     case 'er':    return erMode(sub||'tut');
     case 'osce':
       if(id){ if(!OS || OS.s.id!==id){ if(!osceStart(id, sub==='practice'?'practice':'timed', 'open')) return '<h1>Station not found</h1><p><a href="#/clinsim/osce/timed">Back to stations</a></p>'; } if(OS.phase==='talk'&&OS.endsAt) setTimeout(startTimer,0); return osceView(); }
       OS=null; return osceList(sub||'timed');
     case 'quick':
-      if(id){ if(!QS || QS.q.id!==id){ var q=byId(quickCases('all'), id); if(!q) return '<h1>Case not found</h1><p><a href="#/clinsim/quick/builtin">Back</a></p>'; QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:'open' }; } return quickView(); }
+      if(id){ if(!QS || QS.q.id!==id){ var q=byId(quickCases('all'), id); if(!q) return '<h1>Case not found</h1><p><a href="#/clinsim/quick/builtin">Back</a></p>'; QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:'open', nonce:nonce() }; } return quickView(); }
       QS=null; return quickList(sub||'builtin');
     case 'daily': return dailyMode(sub||'today', id);
     case 'group':
@@ -787,13 +1024,16 @@ function page(parts){
       GS=null; return groupList();
     case 'mine':  return mineMode();
     case 'round': return roundPage();
+    case 'rotation': return rotationPage();
+    case 'mock':  return mockPage();
+    case 'duel':  return root.MB_CLINDUEL ? root.MB_CLINDUEL.page(sub, id) : '<h1>Duel</h1><p>Reload to load duels.</p>';
     default:      return hub();
   }
 }
 
 root.MB_CLINSIM={
   on:on, visible:visible, page:page, locked:locked,
-  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext, gradeOf:gradeOf, pointsOf:pointsOf, standing:standing, rankOf:rankOf, roundItems:roundItems, forCtx:forCtx },
+  _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext, order:order, bestLine:bestLine, linkedTopics:linkedTopics, relatedQs:relatedQs, reviseHtml:reviseHtml, mockPick:mockPick, mockResult:mockResult, mockFeedback:mockFeedback, weekCases:weekCases, weekOf:weekOf, rotPool:rotPool, doneSince:doneSince, gradeOf:gradeOf, pointsOf:pointsOf, standing:standing, rankOf:rankOf, roundItems:roundItems, forCtx:forCtx },
   stop:function(){ stopTimer(); },
   openOsce:function(id, mode, ctx){ stopTimer(); var all=stations('all'), s=byId(all,id); if(s && !isFree(all,s)) return locked(); osceStart(id, mode, ctx); location.hash='#/clinsim/osce/'+mode+'/'+id; CUR=['osce',mode,id]; draw(); },
   say:say,
@@ -801,8 +1041,16 @@ root.MB_CLINSIM={
   back:function(){ if(!OS) return; OS.phase='talk'; draw(); if(OS.endsAt) startTimer(); },
   pick:function(k, i){ if(!OS) return; OS[k]=i; draw(); },
   mark:function(){ if(!OS) return; OS.score=osceScore(OS); OS.phase='result'; stopTimer();
-    var ex={ pass:OS.score.pass, mode:OS.mode, ctx:OS.ctx }; OS.pts=award('osce', OS.s.id, OS.score.total, ex); record('osce', OS.s.id, OS.score.total, ex); draw(); root.scrollTo&&root.scrollTo(0,0); },
-  openQuick:function(id, ctx){ var all=quickCases('all'), q=byId(all,id); if(!q) return; if(!isFree(all,q)) return locked(); QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:ctx||'open' }; location.hash='#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'/'+id; CUR=['quick',(q.source==='mine'?'mine':'builtin'),id]; draw(); },
+    var ex={ pass:OS.score.pass, mode:OS.mode, ctx:OS.ctx }; OS.pts=award('osce', OS.s.id, OS.score.total, ex); record('osce', OS.s.id, OS.score.total, ex);
+    if(MOCK && MOCK.phase==='station' && MOCK.ids[MOCK.i]===OS.s.id){   // mock day: no result between stations
+      var sc=OS.score; MOCK.results.push({ id:OS.s.id, title:OS.s.title, total:sc.total, pass:sc.pass, data:sc.data, mgmt:sc.mgmt, ip:sc.ip, dxOk:OS.s.dx?OS.dx===OS.s.dx.correct:null, fb:mockFeedback(sc) });
+      MOCK.i++; OS=null;
+      if(MOCK.i<MOCK.ids.length){ MOCK.phase='read'; MOCK.readEnds=Date.now()+READ_SEC*1000; }
+      else { MOCK.phase='report'; var R=mockResult(MOCK.results); var st=store(); st.mocks=(st.mocks||[]).concat([{ at:new Date().toISOString(), n:R.n, passed:R.passed, avg:R.avg, pass:R.pass }]).slice(-50); save(); }
+      location.hash='#/clinsim/mock'; CUR=['mock']; draw(); root.scrollTo&&root.scrollTo(0,0); return;
+    }
+    draw(); root.scrollTo&&root.scrollTo(0,0); },
+  openQuick:function(id, ctx){ var all=quickCases('all'), q=byId(all,id); if(!q) return; if(!isFree(all,q)) return locked(); QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:ctx||'open', nonce:nonce() }; location.hash='#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'/'+id; CUR=['quick',(q.source==='mine'?'mine':'builtin'),id]; draw(); },
   choose:function(i, k){ if(!QS || QS.picks[i]!==undefined) return; QS.picks[i]=k; draw(); },
   next:function(){ if(!QS) return; if(QS.step+1<QS.q.steps.length){ QS.step++; draw(); return; } QS.score=quickScore(QS.q, QS.picks); QS.phase=(QS.q.mcqs||[]).length?'mcq':'done'; if(QS.phase==='done') quickDone(); draw(); },
   answer:function(k){ if(!QS || QS.mcq[QS.m]!==undefined) return; QS.mcq[QS.m]=k; draw(); },
@@ -829,6 +1077,25 @@ root.MB_CLINSIM={
   build:buildFor,
   course:function(id){ setCourse(id||'all'); SEARCH=''; draw(); },
   newRound:function(){ ROUND_SEED++; draw(); },
+  toNote:function(id, line){ try{ topicTab='note'; topicTabFor=id; }catch(_){} location.hash='#/topic/'+id; if(line) jumpToLine(line); },
+  toQbank:function(id){ try{ topicTab='qbank'; topicTabFor=id; }catch(_){} location.hash='#/topic/'+id; },
+  mockStart:function(n){ var ids=mockPick(n||6, curCourse(), Date.now()%100000); if(!ids.length){ if(!entitled()) return locked(); return; } MOCK={ ids:ids, i:0, phase:'read', readEnds:Date.now()+READ_SEC*1000, results:[] }; location.hash='#/clinsim/mock'; CUR=['mock']; draw(); },
+  mockGo:function(){ if(!MOCK||MOCK.phase!=='read') return; mockStop(); MOCK.phase='station'; var id=MOCK.ids[MOCK.i]; stopTimer(); osceStart(id, 'timed', 'blind'); location.hash='#/clinsim/osce/timed/'+id; CUR=['osce','timed',id]; draw(); setTimeout(startTimer,0); },
+  mockEnd:function(){ mockStop(); MOCK=null; draw(); },
+  setRotation:function(){
+    var w=document.getElementById('rotWhat'), st=document.getElementById('rotStart'), n=document.getElementById('rotWeeks'); if(!w) return;
+    var v=w.value, c=v.indexOf('spec:')===0?null:byId(myCourses(), v);
+    store().rotation={ courseId:c?c.id:null, spec:c?(c.spec||'Medicine'):v.slice(5), name:c?c.name:v.slice(5), start:new Date((st&&st.value)||Date.now()).toISOString(), weeks:Number(n&&n.value)||8, plan:{} };
+    ROT_FORM=false; save(); draw();
+  },
+  rotationForm:function(on){ ROT_FORM=!!on; draw(); },
+  endRotation:function(){ store().rotation=null; ROT_FORM=false; save(); draw(); },
+  saw:function(q){ SAW=String(q||'').slice(0,60); var el=document.getElementById('rotSawHits'); if(el) el.innerHTML=sawHtml(SAW); },
+  // what the duel (clinsim-duel.js) borrows from here
+  _duel:{ draw:function(){ draw(); }, order:order, revise:reviseHtml, quickCases:quickCases, quickScore:quickScore, inCourse:inCourse, curCourse:curCourse,
+    recordRun:function(kind, id, pct, ex){ record(kind, id, pct, ex); },
+    recordDuel:function(d){ var s=store(); s.duels=(s.duels||[]).concat([d]).slice(-100); save(); },
+    duels:function(){ return store().duels||[]; } },
   search:function(q){ SEARCH=String(q||'').slice(0,60); var r=document.getElementById('csResults'); if(r) r.innerHTML=searchHtml(SEARCH); }
 };
 })(typeof window!=='undefined'?window:globalThis);
