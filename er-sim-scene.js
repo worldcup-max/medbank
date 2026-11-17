@@ -410,11 +410,14 @@ function artOf(c){
   var key=(a.topic||'')+'/'+a.set;
   if(!ART_CACHE[key]){
     var r=null; try{ r=root.MB_ART && root.MB_ART.resolve ? root.MB_ART.resolve(a.topic, a.set) : null; }catch(_){ r=null; }
-    if(!r || !r.dir || !r.files){ r={ dir:'er-sim-art/'+a.topic+'/'+a.set+'/', files:{} }; STD_FILES.forEach(function(k){ r.files[k]=k+'.webp'; }); }
+    var fromLib=!!(r && r.dir && r.files);
+    if(!fromLib){ r={ dir:'er-sim-art/'+a.topic+'/'+a.set+'/', files:{} }; STD_FILES.forEach(function(k){ r.files[k]=k+'.webp'; }); }
+    if(!fromLib) return pack(r);   // MB_ART not loaded yet (or this set is unknown to it): use the local copy, and ask again next time
     ART_CACHE[key]={ dir:r.dir, files:r.files };
   }
-  var R=ART_CACHE[key];
-  return { dir:R.dir, files:R.files, key:key, treatedWhen:a.treatedWhen, states:{ base:R.files.base, distress:R.files.distress, critical:R.files.critical, treated:R.files.treated } };
+  return pack(ART_CACHE[key]);
+  function pack(R){
+  return { dir:R.dir, files:R.files, key:key, treatedWhen:a.treatedWhen, states:{ base:R.files.base, distress:R.files.distress, critical:R.files.critical, treated:R.files.treated } }; }
 }
 function setState(c, run, A, L){
   if(!run.t && !(run.log||[]).length && A.files.arrival) return 'arrival';
