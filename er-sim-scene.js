@@ -423,6 +423,7 @@ function setState(c, run, A, L){
   if(!run.t && !(run.log||[]).length && A.files.arrival) return 'arrival';
   if(run.outcome==='died' || run.v.spo2<80 || run.v.sbp<70) return A.files.critical?'critical':'base';
   if((L.distress || L.fitting) && A.files.distress) return 'distress';
+  if(A.files.distress && (c.problems||[]).some(function(p){ var x=run.probs[p.id]; return p.latent && x && x.active && !x.fixed; })) return 'distress';
   var tw=A.treatedWhen;
   if(A.files.treated && tw && (tw.fixed||[]).every(function(id){ var s=run.probs[id]; return s && s.fixed; }) &&
      (tw.done||[]).every(function(id){ return did(run,[id]); })) return 'treated';
@@ -448,6 +449,14 @@ function setPhoto(c, run, A){
   o.push('<button type="button" class="ers-snd" onclick="ERSIM_SCENE.sound.toggle()" aria-pressed="'+SND.isOn()+'" aria-label="Monitor sound">'+(SND.isOn()?'🔊':'🔇')+'</button>');
   o.push('</div>');
   return o.join('');
+}
+/* The picture the scene shows right now (for the pinned mini bar). Null for drawn (non-painted) cases. */
+function currentSrc(c, run){
+  if(!c.art) return null;
+  var A=artOf(c);
+  if(A.files){ var st=setState(c, run, A, looks(c, run)); if(st==='distress' && A.files['distress-f1']) st='distress-f1'; return A.files[st]?A.dir+A.files[st]:null; }
+  if(A.states){ var s2=artState(c, run, looks(c, run)); return A.dir+A.states[s2]; }
+  return null;
 }
 /* Close-ups for an examined system. Every patient has the same five sites, so which pictures exist never hints at the answer. */
 var CLOSE={ airway:['exam-mouth'], circulation:['exam-hands'], abdomen:['exam-abdomen'], skin:['exam-eyes','exam-hands','exam-skin'] };
@@ -644,5 +653,5 @@ var CSS=[
   '@media (prefers-reduced-motion:reduce){.ers-scene *{animation:none!important}.ers-in{opacity:1}.ers-flip img:first-child{opacity:1}}'
 ].join('\n');
 
-root.ERSIM_SCENE={ svg:svg, css:CSS, siteFor:siteFor, looks:looks, sound:SND, artState:artState, artOf:artOf, setState:setState, closeups:closeups, picture:picture };
+root.ERSIM_SCENE={ svg:svg, css:CSS, siteFor:siteFor, looks:looks, sound:SND, artState:artState, artOf:artOf, setState:setState, closeups:closeups, picture:picture, currentSrc:currentSrc };
 })(typeof window!=='undefined'?window:globalThis);

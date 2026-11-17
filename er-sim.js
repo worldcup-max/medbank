@@ -596,6 +596,14 @@ function css(){
      On a shorter screen a sticky top covered the whole window, so the tabs seemed dead and the page would not scroll. */
   '@media (max-height:1300px){.ers-top{position:static;margin:0 0 8px}}',
   '.ers-bed{width:min(100%, calc((100vh - 330px) * 1.79))}',
+  '.ers-minihost{position:sticky;top:0;height:0;z-index:30}',
+  '.ers-mini{position:absolute;left:0;right:0;top:0;display:grid;grid-template-columns:min(var(--ers-mini-w),32vw) minmax(0,1fr);gap:12px;align-items:start;background:var(--bg);padding:46px 0 10px;box-shadow:0 10px 18px -14px rgba(40,20,80,.45);opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .18s,transform .18s}',
+  '.ers-mini.show{opacity:1;transform:none;pointer-events:auto}.ers-mini.nopic{grid-template-columns:1fr}',
+  '.ers-mini-pic{width:100%;aspect-ratio:1206/674;object-fit:cover;border-radius:10px;border:1px solid var(--line);display:block}',
+  '.ers-mini-h{font-size:13px;line-height:1.3}.ers-mini .ers-mon{margin-top:4px;padding:5px;gap:4px}.ers-mini .ers-vt span{font-size:16px}',
+  '.ers-mini .ers-status{margin-top:5px;padding:5px 9px;font-size:12.5px}.ers-mini .ers-tabs{margin-top:6px}.ers-mini .ers-tab{padding:6px 11px;font-size:13px}',
+  '@media (max-width:600px){.ers-mini{padding-top:60px}.ers-mini .ers-status,.ers-mini-h .ers-meta{display:none}.ers-mini .ers-vt small{font-size:9px}.ers-mini .ers-vt span{font-size:13px}.ers-mini{gap:8px}}',
+  '@media (prefers-reduced-motion:reduce){.ers-mini{transition:none}}',
   '.ers-panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}',
   '.ers-panel h4{margin:14px 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}',
   '.ers-panel h4:first-child{margin-top:0}',
@@ -647,7 +655,7 @@ function css(){
   document.head.appendChild(st);
 }
 
-function draw(){ var m=document.getElementById('main'); if(!m) return; m.innerHTML=page(CASE?CASE.id:null); try{ if(root.renderNav) root.renderNav(); }catch(_){} }
+function draw(){ var m=document.getElementById('main'); if(!m) return; m.innerHTML=page(CASE?CASE.id:null); try{ if(root.renderNav) root.renderNav(); }catch(_){} watchMini(); }
 
 /* ---------- lobby */
 function lobby(){
@@ -698,6 +706,31 @@ function monitor(){
     vt('TEMP',v.temp.toFixed(1),band('temp',v.temp,a))+
     vt('GCS',Math.round(v.gcs),band('gcs',v.gcs,a))+
   '</div>';
+}
+/* Pinned mini bar: once the full picture and tabs scroll out of view, a compact bar pins to the top with a smaller
+   picture, the monitor, the status line and the tabs, so the panels scroll underneath it. Width: MINI_W. */
+var MINI_W=420;
+function miniBar(st){
+  var src=root.ERSIM_SCENE&&root.ERSIM_SCENE.currentSrc ? root.ERSIM_SCENE.currentSrc(CASE, RUN) : null;
+  var mtab=function(id,label){ return '<button class="ers-tab" aria-selected="'+(TAB===id)+'" onclick="MB_ERSIM.miniTab(\''+id+'\')">'+label+'</button>'; };
+  return '<div class="ers-minihost" aria-hidden="true"><div class="ers-mini'+(src?'':' nopic')+'" id="ersMini" style="--ers-mini-w:'+MINI_W+'px">'+
+    (src?'<img class="ers-mini-pic'+(RUN.outcome==='died'?' ers-dead':'')+'" src="'+e(src)+'" alt="">':'')+
+    '<div class="ers-mini-r"><div class="ers-mini-h"><b>'+e(CASE.patient.name)+'</b> <span class="ers-meta">'+e(SETTINGS[CASE.setting].short)+' · ⏱ '+RUN.t+' min</span></div>'+
+    monitor()+'<div class="ers-status'+(st.stable?' ok':'')+'">'+(st.cues.concat(st.warn).map(e).join(' · ')||'No new concerns on the monitor.')+'</div>'+
+    '<div class="ers-tabs">'+mtab('talk','💬 History')+mtab('exam','🩺 Examine')+mtab('tests','🧪 Tests')+mtab('treat','💉 Treat')+mtab('team','📞 Team')+mtab('decide','✅ Decide')+'</div></div></div></div>';
+}
+var MINI_OBS=null;
+function watchMini(){
+  try{
+    if(MINI_OBS){ MINI_OBS.disconnect(); MINI_OBS=null; }
+    var tabs=document.querySelector('.ers-top .ers-tabs'), bar=document.getElementById('ersMini');
+    if(!tabs || !bar || !root.IntersectionObserver) return;
+    MINI_OBS=new IntersectionObserver(function(es){ es.forEach(function(x){
+      var gone=!x.isIntersecting && x.boundingClientRect.top<0;
+      bar.classList.toggle('show', gone); bar.parentNode.setAttribute('aria-hidden', String(!gone));
+    }); }, { threshold:0 });
+    MINI_OBS.observe(tabs);
+  }catch(_){}
 }
 function tabBtn(id,label){ return '<button class="ers-tab" role="tab" aria-selected="'+(TAB===id)+'" onclick="MB_ERSIM.tab(\''+id+'\')">'+label+'</button>'; }
 
@@ -785,7 +818,8 @@ function shift(){
     monitor()+
     '<div class="ers-status'+(st.stable?' ok':'')+'" role="status">'+(st.cues.concat(st.warn).map(e).join(' · ')||'No new concerns on the monitor. Keep reassessing.')+'</div>'+
     hint()+
-    '<div class="ers-tabs" role="tablist">'+tabBtn('talk','💬 History')+tabBtn('exam','🩺 Examine')+tabBtn('tests','🧪 Tests')+tabBtn('treat','💉 Treat')+tabBtn('team','📞 Team')+tabBtn('decide','✅ Decide')+'</div></div>';
+    '<div class="ers-tabs" role="tablist">'+tabBtn('talk','💬 History')+tabBtn('exam','🩺 Examine')+tabBtn('tests','🧪 Tests')+tabBtn('treat','💉 Treat')+tabBtn('team','📞 Team')+tabBtn('decide','✅ Decide')+'</div></div>'+
+    miniBar(st);
   var panel = TAB==='exam'?examPanel(): TAB==='tests'?testsPanel(): TAB==='treat'?treatPanel(): TAB==='team'?teamPanel(): TAB==='decide'?decidePanel(): talkPanel();
   h+='<div class="ers-body"><div class="ers-panel" role="tabpanel">'+panel+'</div>'+
      '<div class="ers-panel"><h4>Timeline</h4><div class="ers-log">'+
@@ -833,7 +867,7 @@ function debrief(){
     '<div class="ers-panel"><div class="ers-score"><div class="ers-ring" style="border:8px solid '+col+';color:'+col+'">'+sc.pct+'%</div>'+
     '<div><div style="font-size:20px;font-weight:800;color:'+col+'">'+e(sc.grade)+'</div><div class="ers-meta">'+sc.minutes+' minutes · '+e(RUN.outcome==='died'?'The patient died':'Handed over alive')+'</div>'+
     '<div class="ers-meta">The diagnosis was <b>'+e(dxLabel(c,c.dx.correct[0]))+'</b>.</div></div></div>'+
-    (RUN.outcome!=='died' && sc.pct>=70 && root.ERSIM_SCENE && root.ERSIM_SCENE.picture ? root.ERSIM_SCENE.picture(c, 'discharge', 'Going home a few days later') : '')+'</div>';
+    (RUN.outcome!=='died' && sc.pct>=70 && !(c.problems||[]).some(function(p){ var x=RUN.probs[p.id]; return x && x.active && !x.fixed; }) && root.ERSIM_SCENE && root.ERSIM_SCENE.picture ? root.ERSIM_SCENE.picture(c, 'discharge', 'Going home a few days later') : '')+'</div>';
   if(c.variant) h+=pathPanel();
   var groups=[['critical','Critical actions'],['history','History and examination'],['exam',''],['good','Good practice'],['dx','Diagnosis and disposition'],['dispo',''],['harm','Harm and penalties']];
   h+='<div class="ers-panel" style="margin-top:12px">';
@@ -882,6 +916,7 @@ function page(caseId){
     if(loadRun(c.id)) CASE=ENGINE.instantiate(c, ENGINE.variantOpts(RUN)||{});   // a saved run rebuilds the start it was dealt
     else { CASE=ENGINE.instantiate(c); RUN=ENGINE.newRun(CASE); CHAT=[]; } }
   if(DEBRIEF) return debrief();
+  setTimeout(watchMini, 0);   // the router inserts this page's HTML after page() returns
   if(RUN.ended && RUN.outcome==='died' && !DEBRIEF){ /* fall through: show the shift with the arrest in the log, then Decide to debrief */ }
   return shift();
 }
@@ -927,6 +962,8 @@ root.MB_ERSIM={
   open:function(id){ CASE=null; DEBRIEF=null; location.hash='#/ersim/'+id; },
   filter:function(f){ FILTER=f; draw(); },
   tab:function(t){ TAB=t; draw(); },
+  miniTab:function(t){ TAB=t; draw(); var b=document.querySelector('.ers-body'), bar=document.getElementById('ersMini');
+    if(b && bar && root.scrollTo){ var y=b.getBoundingClientRect().top+root.scrollY-bar.offsetHeight-8; if(root.scrollY>y) root.scrollTo(0,y); } },
   act:function(id){ var r=ENGINE.act(CASE, RUN, id); if(r&&r.ok) LAST={ id:id, at:Date.now() }; after(r&&r.text); },
   ask:function(id){ var h=(CASE.history||[]).filter(function(x){ return x.id===id; })[0]; if(!h) return; CHAT.push({who:'me',text:h.q}); var a=ENGINE.ask(CASE, RUN, id); CHAT.push({who:'pt',text:a}); after(); },
   askFree:askFree,
