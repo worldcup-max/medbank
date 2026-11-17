@@ -423,6 +423,7 @@ function setState(c, run, A, L){
   if(!run.t && !(run.log||[]).length && A.files.arrival) return 'arrival';
   if(run.outcome==='died' || run.v.spo2<80 || run.v.sbp<70) return A.files.critical?'critical':'base';
   if((L.distress || L.fitting) && A.files.distress) return 'distress';
+  if(A.files.distress && (c.problems||[]).some(function(p){ var x=run.probs[p.id]; return p.latent && x && x.active && !x.fixed; })) return 'distress';
   var tw=A.treatedWhen;
   if(A.files.treated && tw && (tw.fixed||[]).every(function(id){ var s=run.probs[id]; return s && s.fixed; }) &&
      (tw.done||[]).every(function(id){ return did(run,[id]); })) return 'treated';

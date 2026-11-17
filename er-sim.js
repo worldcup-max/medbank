@@ -709,7 +709,7 @@ function monitor(){
 }
 /* Pinned mini bar: once the full picture and tabs scroll out of view, a compact bar pins to the top with a smaller
    picture, the monitor, the status line and the tabs, so the panels scroll underneath it. Width: MINI_W. */
-var MINI_W=300;
+var MINI_W=420;
 function miniBar(st){
   var src=root.ERSIM_SCENE&&root.ERSIM_SCENE.currentSrc ? root.ERSIM_SCENE.currentSrc(CASE, RUN) : null;
   var mtab=function(id,label){ return '<button class="ers-tab" aria-selected="'+(TAB===id)+'" onclick="MB_ERSIM.miniTab(\''+id+'\')">'+label+'</button>'; };
@@ -867,7 +867,7 @@ function debrief(){
     '<div class="ers-panel"><div class="ers-score"><div class="ers-ring" style="border:8px solid '+col+';color:'+col+'">'+sc.pct+'%</div>'+
     '<div><div style="font-size:20px;font-weight:800;color:'+col+'">'+e(sc.grade)+'</div><div class="ers-meta">'+sc.minutes+' minutes · '+e(RUN.outcome==='died'?'The patient died':'Handed over alive')+'</div>'+
     '<div class="ers-meta">The diagnosis was <b>'+e(dxLabel(c,c.dx.correct[0]))+'</b>.</div></div></div>'+
-    (RUN.outcome!=='died' && sc.pct>=70 && root.ERSIM_SCENE && root.ERSIM_SCENE.picture ? root.ERSIM_SCENE.picture(c, 'discharge', 'Going home a few days later') : '')+'</div>';
+    (RUN.outcome!=='died' && sc.pct>=70 && !(c.problems||[]).some(function(p){ var x=RUN.probs[p.id]; return x && x.active && !x.fixed; }) && root.ERSIM_SCENE && root.ERSIM_SCENE.picture ? root.ERSIM_SCENE.picture(c, 'discharge', 'Going home a few days later') : '')+'</div>';
   if(c.variant) h+=pathPanel();
   var groups=[['critical','Critical actions'],['history','History and examination'],['exam',''],['good','Good practice'],['dx','Diagnosis and disposition'],['dispo',''],['harm','Harm and penalties']];
   h+='<div class="ers-panel" style="margin-top:12px">';
