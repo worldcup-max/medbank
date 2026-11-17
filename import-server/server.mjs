@@ -220,6 +220,7 @@ const BASIC_MODEL   = process.env.MEDBANK_BASIC_MODEL   || "deepseek-v4-flash"; 
 const PREMIUM_MODEL = process.env.MEDBANK_PREMIUM_MODEL || "deepseek-v4-pro";    // higher accuracy → premium tier
 const GEN_TIMEOUT_MS = Number(process.env.GEN_TIMEOUT_MS) || 300000;            // text-model calls must never hang forever, but allow big reasoning+JSON gens (fail fast → the UI can show a real error)
 const EXTRAS_MODEL = process.env.MEDBANK_EXTRAS_MODEL || BASIC_MODEL;           // model for in-app extras (qbank/written). Set to a non-reasoning model (e.g. deepseek-chat) for much faster builds.
+const CLINSIM_ON_IMPORT = process.env.MEDBANK_CLINSIM_ON_IMPORT === "1";   // Clinical Simulation case packs built at import (one extra model call per clinical lecture). Off until FEATURES.CLINICAL_SIM goes live; "Build cases" in the tab works either way.
 const QBANK_BATCHES = Number(process.env.QBANK_BATCHES) || 5;                   // qbank is generated in N parallel focused calls → wall-clock ≈ one small call, not the whole set
 const TEXT_MODEL    = process.env.MEDBANK_TEXT_MODEL    || BASIC_MODEL;          // fallback when tier is unknown; retires Claude
 async function generate({ model, prompt, parts, images, max_tokens, temperature, json }){
@@ -1447,7 +1448,7 @@ app.post("/import", async (req,res)=>{
     await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:"import", p_tokens:(usage.output_tokens||0) });
 
     harvestFromNote(obj.note_md);   // fire-and-forget: learn new medical pronunciations from this lecture
-    const wantCases = isClinicalLevel(level) && isClinicalTopic(topicName, obj.note_md);   // clinical years only, and only topics with a patient to see
+    const wantCases = CLINSIM_ON_IMPORT && isClinicalLevel(level) && isClinicalTopic(topicName, obj.note_md);   // clinical years only, and only topics with a patient to see
     res.json({ ok:true, topic_id:topicId, primer:obj.primer.cards.length, recall:obj.recall.cards.length, clinsim: wantCases ? "building" : null });
     // Clinical Simulation: 400-600 level students get cases built from every lecture they import.
     // After the response, so the import is no slower; the app picks the pack up on its next topic load

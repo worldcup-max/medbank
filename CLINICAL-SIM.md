@@ -52,7 +52,7 @@ Unpaid students (trial ended) get one built-in OSCE station and one quick case a
 - `import-server/test-clinsim.mjs`: run `node --test test-clinsim.mjs` in `import-server/`.
 
 ## Switching it on
-`FEATURES.CLINICAL_SIM` in `config.js` is **false**. It also switches ER Sim on inside the tab. To try it on your own device: `localStorage.mbclinsim='1'`, then reload. With no account, `localStorage.mbclinsimlevel='500'` sets a level for testing. The nav shows **Clinical Sim** instead of **ER Sim** for 400 to 600 level.
+Two switches. On the server, set `MEDBANK_CLINSIM_ON_IMPORT=1` so imports build case packs (one extra model call per clinical lecture); it is off by default, so merging costs nothing until launch. In the app, `FEATURES.CLINICAL_SIM` in `config.js` is **false**. It also switches ER Sim on inside the tab. To try it on your own device: `localStorage.mbclinsim='1'`, then reload. With no account, `localStorage.mbclinsimlevel='500'` sets a level for testing. The nav shows **Clinical Sim** instead of **ER Sim** for 400 to 600 level.
 
 ## Clinical review before launch
 - [ ] Each built-in quick case: the best option, points and explanations match current Nigerian / WHO guidance.
