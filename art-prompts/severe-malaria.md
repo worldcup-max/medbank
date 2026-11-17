@@ -14,10 +14,11 @@ Shared edit wrapper:
 | Set | Patient | Setting | Distress | Critical | Treated |
 | --- | --- | --- | --- | --- | --- |
 | m-child-phc-01 | boy, 4, yellow t-shirt | primary health centre, wooden bench, peeling paint | generalised seizure, eyes rolled up, froth | pale grey, unresponsive, limp arm off bed | IV bag + cannula on splint, damp cloth on forehead |
+| f-child-gh-02 | girl, 2, pink dress, beaded braids | general hospital children's ward, cot-side bed, locker | respiratory distress from severe anaemia, frightened | very sick and drowsy, pale greyish, hand off mattress | blood transfusion + nasal oxygen prongs |
+| m-child-private-03 | boy, 7, blue-white striped pyjamas | private hospital single room: pale blue walls, split AC unit, lagoon print, electric bed at 3/4 angle, wall oxygen, monitor | shaking chills (rigors) under sheet, teeth chattering | very sick and drowsy, faint yellow sclera, hand off mattress | IV infusion, cannula on left hand, monitor on with finger clip |
 
 ### m-child-phc-01 base
 > Side view of a bay in a small Nigerian primary health centre: plain cream walls with a mint-green lower band and some peeling paint, a simple wooden bench against the back wall, terrazzo floor. A 4-year-old Nigerian boy (dark brown skin, short black hair, slim, faded yellow t-shirt and blue shorts) lies on his back on a narrow metal hospital bed, head on a pillow on the LEFT of the frame, feet to the right, a thin wrapper cloth over his legs. He looks unwell and tired: flushed face, half-closed eyes, sweaty forehead, lips slightly dry. Green privacy curtain on the far left, an empty IV pole beside the head of the bed, a barred window with a palm tree outside, a switched-off patient monitor on a stand at the RIGHT with a dark screen. No other people, no text, no logos. Camera at bed height, whole bed visible with some empty floor around it.
-| f-child-gh-02 | girl, 2, pink dress, beaded braids | general hospital children's ward, cot-side bed, locker | respiratory distress from severe anaemia, frightened | very sick and drowsy, pale greyish, hand off mattress | blood transfusion + nasal oxygen prongs |
 
 Note: Flow's minor-safety filter refused "collapsing / floppy / limp arm hanging" for a child. Use: "very sick and drowsy, in a deep sleep: dull pale greyish skin, pale lips, eyes closed, lying very still, one hand resting off the edge of the mattress".
 
@@ -28,3 +29,23 @@ m-child-phc-01 frame prompts (wrapper: "Edit this exact image for a medical trai
 - f2: both arms straightened and pushed down along his sides with fists clenched, both legs straight and stiff, chin tilted slightly up.
 - f3: right arm bent up towards his chest and left arm stretched out to the side, right knee bent up and left leg straight, head turned a little towards the camera.
 - f4: both elbows bent with fists raised level with his shoulders, both knees bent and drawn up slightly higher, head pressed back into the pillow.
+
+m-child-private-03 shiver frames (edits of distress, wrapper: "Edit this exact image for a medical training animation frame. Keep the room, camera, bed, lighting, white sheet and the boy's identity, clothes, face, sweat and body position on the bed exactly the same. Change only, as another instant of the same shaking chill: …"):
+- f2: shoulders hunched higher, head tilted further right, hands gripping the sheet lower, sheet folds over the legs shifted.
+- f3: head pressed back, eyes squeezed shut, fists pulled up under the chin, knees drawn up more.
+- f4: head turned towards camera, jaw trembling, right hand on belly, body curled slightly towards camera.
+
+## Extras per patient (Frank's picks 1, 3, 4, 5)
+Files: `exam-eyes`, `exam-hands`, `exam-mouth`, `exam-skin`, `exam-abdomen`, `arrival`, `night`, `discharge` (.webp).
+Close-up rule: same 5 sites for every patient. Topic signs only where relevant; other sites normal or with a harmless look-alike, varied per patient, so the menu never gives the answer away.
+Close-up wrapper: "Using this exact [patient] as the reference for identity and skin tone, make a new wide 16:9 painterly semi-realistic storybook illustration with soft ink lines in the same style: a close-up examination view of …. Only the gloved hand, no other people. Do not add text."
+
+| Set | Eyes | Hands | Mouth | Skin | Abdomen |
+| --- | --- | --- | --- | --- | --- |
+| m-child-private-03 | pale conjunctiva, faint yellow sclera | pale palms and nail beds; healed knuckle scratch (distractor) | dry cracked lips (look-alike), thin white tongue coat | shins: mosquito bites + old knee scar (distractors), no rash | soft, hand palpating left upper quadrant, old faded scar lower right (distractor) |
+
+Night (m-child-private-03): same room, dark blue sky, palm in silhouette, blinds half down, warm reading lamp, AC glow; boy awake, restless, flushed.
+Discharge (m-child-private-03): bed made and empty, boy well and smiling on the bed edge in yellow t-shirt, blue shorts, sandals; backpack, folded pyjamas, paper medicine bag; monitor off, IV pole empty.
+Arrival (m-child-private-03): private hospital front desk (pale blue, curved wooden counter, wall clock, plant, blue chairs, glass doors), mother in green-gold ankara and head tie carrying the boy, nurse in light blue behind counter.
+
+Note: the first hands close-up ("close-up of both his hands ... healed scratch") was refused by Flow's policy filter. This wording worked: "a doctor's examination view of a child's two hands lying open, palms facing up, on a white hospital bed sheet ... palms and fingernails are a pale, washed-out pinkish colour ... Calm, clinical teaching picture."
