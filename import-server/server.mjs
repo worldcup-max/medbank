@@ -37,6 +37,8 @@ import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
 import { loadPlans, isActiveSub, tierOf, verifySignature, handleEvent, startCheckout, verifyReference } from "./payments.mjs";
 import { cleanPatientRequest, buildPatientPrompt, parsePatientReply, ersimQuota } from "./ersim.mjs";   // ER Sim: the AI patient
 import { isClinicalLevel, isClinicalTopic, buildCasePackPrompt, validateCasePack, packSize } from "./clinsim.mjs";   // Clinical Simulation: cases built from imported lectures
+import { toServable, selectIntegrated, assembleCases, CASE_CFG } from "./integrated-serve.mjs";   // Phase B/E student serve (pure)
+import { a8PromotionGate, promotionRecord } from "./a8.mjs";   // Phase D promotion gate (pure, human-only)
 import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, redundancyGate, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
@@ -3051,6 +3053,47 @@ app.post("/admin/integrated/transform", async (req,res)=>{
     res.json({ ok:true, review_status:rec.review_status, severity:rec.severity||null, reason:rec.reason||null, family:rec.integration_family||family, transformed:!!rec.transformed_content, diversity:diversity?diversity.tier:null });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
+app.post("/admin/integrated/import-authored", async (req,res)=>{
+  /* Phase A: authored candidates (written outside the miner, e.g. for source-blocked families) enter through the
+     SAME frozen gates as a transform — R1 adversarial dependency → R2 clinical → R3 SBA → R4 redundancy → diversity.
+     Hard fail → rejected; everything else → ai_reviewed for the human. NOTHING here can approve. Max 20 per call. */
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const list=Array.isArray((req.body||{}).items)?req.body.items.slice(0,20):[];
+    if(!list.length) return res.status(400).json({ error:"items[] required" });
+    const out=[];
+    for(const a of list){
+      try{
+        const opts=normalizeOptions(a.options||[]);
+        if(!a.stem || opts.length<4 || !a.integration_family || !Number.isInteger(a.answer) || a.answer<0 || a.answer>=opts.length){ out.push({ ref:a.ref||null, review_status:"skipped", reason:"missing stem/options/answer/family" }); continue; }
+        const bal=rebalanceOptions({ options:opts, answer:a.answer }, a.stem);
+        const rats=Array.isArray(a.rationales)?bal.order.map(i=>a.rationales[i]||""):[];
+        const ref="authored:"+(a.ref||qhOf({ stem:a.stem, options:opts }));
+        const dup=await admin.from("integrated_items").select("id").eq("question_id",ref).limit(1);
+        if((dup.data||[]).length){ out.push({ ref:a.ref||null, review_status:"skipped", reason:"already imported" }); continue; }
+        const tc={ stem:a.stem, options:bal.options, answer:bal.answer, rationales:rats, teaching:a.teaching||"", lead_in:a.lead_in||"", skill:a.skill||"", difficulty:a.difficulty||"" };
+        const proposal={ primary_topic:a.primary_topic||null, integrated_topics:a.integrated_topics||[], integration_type:a.integration_type||null,
+          integration_family:a.integration_family, rationale:a.rationale||null, dependency:a.dependency||null, transformed_content:tc, source_question_ids:[ref] };
+        const rec=await runCandidate({ id:ref, stem:a.stem, options:bal.options, answer:bal.answer }, { mine:async()=>proposal, adversarial:a17Adversarial, clinical:a17ClinicalReview, sba:a17SbaReview });
+        let diversity=null;
+        if(rec.review_status!=="rejected"){
+          const cx=await admin.from("integrated_items").select("id,integration_family,transformed_content").eq("integration_family",a.integration_family).limit(500);
+          const corpus=(cx.data||[]).map(r=>({ id:r.id, integration_family:r.integration_family, stem:(r.transformed_content||{}).stem, options:(r.transformed_content||{}).options||[], answer:(r.transformed_content||{}).answer }));
+          diversity=diversitySignal({ stem:tc.stem, options:tc.options, answer:tc.answer, integration_family:a.integration_family }, corpus);
+          if(diversity.tier==="exact"){ rec.review_status="rejected"; rec.reason=(rec.reason?rec.reason+" | ":"")+"exact duplicate"; }
+          else if(diversity.tier==="high"){ rec.qa=Object.assign({}, rec.qa, { diversity }); if(!rec.severity||rec.severity==="none"||rec.severity==="minor"){ rec.severity="major"; if(rec.qa) rec.qa.severity="major"; rec.reason=(rec.reason?rec.reason+" | ":"")+"diversity[high]: "+(diversity.reasons||[]).join("; "); } }
+          else rec.qa=Object.assign({}, rec.qa, { diversity });
+        }
+        await admin.from("integrated_items").insert({ question_id:ref, primary_topic:rec.primary_topic||null, integrated_topics:rec.integrated_topics||[],
+          integration_type:rec.integration_type||null, integration_family:a.integration_family, integration_rationale:rec.integration_rationale||null,
+          integration_dependency:rec.integration_dependency||null, transformed_content:tc, source_question_ids:[ref],
+          dependency_evidence:rec.dependency_evidence||null, qa:rec.qa||null, review_status:rec.review_status, model:"authored" });
+        out.push({ ref:a.ref||null, review_status:rec.review_status, severity:rec.severity||null, reason:rec.reason||null, diversity:diversity?diversity.tier:null });
+      }catch(e){ out.push({ ref:a.ref||null, review_status:"error", reason:e.message||String(e) }); }
+    }
+    res.json({ ok:true, results:out, ai_reviewed:out.filter(x=>x.review_status==="ai_reviewed").length, rejected:out.filter(x=>x.review_status==="rejected").length });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
 app.post("/admin/integrated/mine", async (req,res)=>{
   /* Run the candidate pipeline over a batch of not-yet-processed questions. Inserts ai_reviewed|rejected rows.
      NEVER touches topics.extras.qbank. Admin-only; bounded by limit (AI cost). */
@@ -3220,6 +3263,132 @@ app.get("/admin/integrated/inventory", async (req,res)=>{
         note:"Gate1 enough candidates? Gate2 enough breadth (distinct combos)? Gate3 enough per-combo for MIN_EV=3 learning analytics?" } });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
+/* ===================== Phase B — Integrated Mode · Phase E — Case Mode (student serve) =====================
+   READ-ONLY on integrated_items. Fail closed: nothing is served unless the ONE canonical readinessGate says
+   ready===true. Shapes come from integrated-serve.mjs (pure, pinned by qa/v19-integrated-serve.mjs).
+   Phase B/E never write questions, never touch target_id, A6/A7 or the frozen R1–R4 QA engine. */
+async function integratedApprovedRows(){
+  const out=[]; for(let from=0; from<5000; from+=1000){
+    const r=await admin.from("integrated_items").select("*").eq("review_status","approved").range(from, from+999);
+    const d=r.data||[]; out.push(...d); if(d.length<1000) break; }
+  return out;
+}
+async function integratedGateNow(){
+  const rows=await integratedApprovedRows();
+  const gate=readinessGate(rows.map(x=>({ integration_family:x.integration_family })));
+  return { rows, gate };
+}
+app.get("/qbank/integrated/status", async (req,res)=>{
+  try{ const user=await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const { rows, gate }=await integratedGateNow();
+    const caseRows=rows.filter(r=>r.case_id);
+    const cases=gate.ready ? assembleCases(caseRows).cases.length : 0;
+    res.json({ ok:true, integrated_mode: gate.ready?"available":"locked", case_mode: (gate.ready && cases>0)?"available":"locked",
+      total:gate.total, families:gate.byFamily, blockers:gate.blockers, cases });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/qbank/integrated/items", async (req,res)=>{
+  try{ const user=await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const { rows, gate }=await integratedGateNow();
+    if(!gate.ready) return res.status(423).json({ ok:false, integrated_mode:"locked", blockers:gate.blockers });
+    const count=Math.max(1, Math.min(50, parseInt(req.query.n,10)||20));
+    const families=String(req.query.families||"").split(",").map(s=>s.trim()).filter(Boolean);
+    const exclude=String(req.query.exclude||"").split(",").map(s=>s.trim()).filter(Boolean).slice(0,500);
+    const items=rows.filter(r=>!r.case_id).map(toServable).filter(Boolean);   // case stages are served as cases, not loose
+    const sel=selectIntegrated(items, { count, families, exclude, seed:user.id+"|"+Date.now() });
+    res.json({ ok:true, integrated_mode:"available", items:sel.selected, requested:sel.requested, delivered:sel.delivered,
+      shortfall:sel.shortfall, delivered_by_family:sel.deliveredByFamily, missing_families:sel.missingFamilies });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/qbank/cases", async (req,res)=>{
+  try{ const user=await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const { rows, gate }=await integratedGateNow();
+    if(!gate.ready) return res.status(423).json({ ok:false, case_mode:"locked", blockers:gate.blockers });
+    const { cases }=assembleCases(rows.filter(r=>r.case_id));
+    res.json({ ok:true, case_mode: cases.length?"available":"locked", cases });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+/* requested-vs-delivered analytics (the Phase B production metric). Soft-fails if the table isn't created yet. */
+app.post("/qbank/integrated/log", async (req,res)=>{
+  try{ const user=await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const b=req.body||{};
+    const row={ account_id:user.id, kind:(b.kind==="case"?"case":"integrated"), requested:b.requested|0, delivered:b.delivered|0,
+      shortfall:b.shortfall|0, delivered_by_family:(b.delivered_by_family&&typeof b.delivered_by_family==="object")?b.delivered_by_family:{},
+      requested_families:Array.isArray(b.requested_families)?b.requested_families.slice(0,20):[], case_id:b.case_id||null,
+      answered:b.answered|0, correct:b.correct|0 };
+    const r=await admin.from("integrated_serve_log").insert(row);
+    res.json({ ok:!r.error, stored:!r.error });
+  }catch(e){ res.json({ ok:false, stored:false }); }
+});
+
+/* ---- Phase A helpers (admin): full export of the review queue + case assembly ---- */
+app.get("/admin/integrated/export", async (req,res)=>{
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const st=String(req.query.status||"ai_reviewed,needs_edit").split(",").map(s=>s.trim()).filter(Boolean);
+    const out=[]; for(let from=0; from<10000; from+=1000){
+      const r=await admin.from("integrated_items").select("*").in("review_status",st).order("created_at",{ascending:true}).range(from,from+999);
+      const d=r.data||[]; out.push(...d); if(d.length<1000) break; }
+    res.json({ ok:true, exported_at:new Date().toISOString(), statuses:st, count:out.length, items:out });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/admin/integrated/case", async (req,res)=>{
+  /* Assemble ONE linear case from APPROVED items: ids[] in stage order. Writes only case_id/case_stage/title/intro
+     metadata on those rows (never content, never target_id). Validates with the same assembleCases() the serve uses. */
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const b=req.body||{}; const ids=Array.isArray(b.ids)?b.ids.filter(Boolean):[];
+    const case_id=String(b.case_id||"").trim() || ("case-"+Date.now().toString(36));
+    if(b.dissolve){ await admin.from("integrated_items").update({ case_id:null, case_stage:null, case_title:null, case_intro:null }).eq("case_id",case_id);
+      return res.json({ ok:true, dissolved:case_id }); }
+    if(ids.length<CASE_CFG.minStages || ids.length>CASE_CFG.maxStages) return res.status(400).json({ error:"a case needs "+CASE_CFG.minStages+"–"+CASE_CFG.maxStages+" stages" });
+    const r=await admin.from("integrated_items").select("*").in("id",ids); const got=r.data||[];
+    if(got.length!==ids.length) return res.status(404).json({ error:"some ids not found" });
+    const busy=got.filter(x=>x.case_id && x.case_id!==case_id); if(busy.length) return res.status(409).json({ error:busy.length+" item(s) already belong to another case" });
+    const draft=ids.map((id,i)=>Object.assign({}, got.find(x=>x.id===id), { case_id, case_stage:i+1, case_title:b.title||null, case_intro:b.intro||null }));
+    const chk=assembleCases(draft);
+    if(!chk.cases.length) return res.status(400).json({ error:(chk.rejected[0]&&chk.rejected[0].reason)||"case invalid", rejected:chk.rejected });
+    for(let i=0;i<ids.length;i++){ await admin.from("integrated_items").update({ case_id, case_stage:i+1, case_title:b.title||null, case_intro:b.intro||null }).eq("id",ids[i]); }
+    res.json({ ok:true, case_id, stages:ids.length });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/admin/integrated/cases", async (req,res)=>{
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const rows=(await integratedApprovedRows()).filter(r=>r.case_id);
+    res.json({ ok:true, ...assembleCases(rows) });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* ===================== Phase D — A8 promotion (human-only; A7 untouched) ===================== */
+async function a8Evidence(row){
+  let attempts=0, correct=0;
+  try{ const r=await admin.from("learning_events").select("correct").eq("event_type","question_answered").eq("object_id",row.qh).limit(5000);
+    (r.data||[]).forEach(e=>{ if(e.correct===true||e.correct===false){ attempts++; if(e.correct) correct++; } }); }catch(e){}
+  let canonicalStems=[];
+  try{ const q=await admin.from("question_targets").select("proposed").eq("target_id",row.target_id).limit(200);
+    canonicalStems=(q.data||[]).map(x=>(x.proposed&&(x.proposed.stem||x.proposed.statement))||"").filter(Boolean); }catch(e){}
+  const flags=(row.promotion&&row.promotion.flags)|0;
+  return { attempts, correct, flags, canonicalStems };
+}
+app.get("/admin/a8/candidates", async (req,res)=>{
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const r=await admin.from("retest_pool").select("*").eq("status","served").order("served_count",{ascending:false}).limit(100);
+    const out=[]; for(const row of (r.data||[])){ const gate=a8PromotionGate(row, await a8Evidence(row));
+      out.push({ id:row.id, target_id:row.target_id, qh:row.qh, served_count:row.served_count, stem:(row.content||{}).stem||"", promoted_at:row.promoted_at||null, gate }); }
+    res.json({ ok:true, count:out.length, eligible:out.filter(x=>x.gate.eligible).length, items:out });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/admin/a8/promote", async (req,res)=>{
+  try{ const user=await requireAdmin(req); if(!user) return res.status(403).json({ error:"admins only" });
+    const id=(req.body||{}).id; if(!id) return res.status(400).json({ error:"id required" });
+    const cur=await admin.from("retest_pool").select("*").eq("id",id).maybeSingle(); if(!cur.data) return res.status(404).json({ error:"not found" });
+    const gate=a8PromotionGate(cur.data, await a8Evidence(cur.data));
+    if(!gate.eligible) return res.status(409).json({ error:"not eligible", reasons:gate.reasons });
+    const rec=promotionRecord(cur.data, gate, user.email||user.id);
+    const u=await admin.from("retest_pool").update(rec).eq("id",id);   // status untouched → A7 anti-repeat/pool accounting unchanged
+    if(u.error) return res.status(500).json({ error:u.error.message });
+    res.json({ ok:true, promoted:id, target_id:rec.promotion.target_id });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
 app.get("/admin/targets/health", async (req,res)=>{
   /* Read-only target-layer diagnostics (no mutation). Surfaces the evidence for the deferred decisions:
      orphans (targets with 0 authoritative question mappings), over-broad targets (atomicity candidates),

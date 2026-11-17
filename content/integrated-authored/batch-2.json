@@ -1,0 +1,285 @@
+{
+ "batch": "authored-batch-2",
+ "note": "Fills the last gaps to the 100 gate: cardio_renal 4, gi_hepatic 3, infect_immunology 1, neuro_endocrine 1. Import via Integrated Workbench → Import authored JSON (runs R1–R4, lands as pending).",
+ "items": [
+  {
+   "ref": "cr-01-atheroembolic",
+   "integration_family": "cardio_renal",
+   "integration_type": "diagnostic",
+   "primary_topic": "Acute kidney injury",
+   "integrated_topics": [
+    "Cardiology: coronary angiography"
+   ],
+   "skill": "diagnosis",
+   "difficulty": "hard",
+   "stem": "A 71-year-old man with hypertension and a 50-pack-year smoking history had coronary angiography through the femoral artery 3 weeks ago, with contrast and heparin. His creatinine was 110 µmol/L afterwards and is now 290 µmol/L. He has new mottled, lace-like discolouration over both feet and a painful blue left toe with good foot pulses. Eosinophils are 1.2 × 10⁹/L, complement C3 is low, and urine shows a few white cells and no red-cell casts.",
+   "lead_in": "What is the most likely cause of his kidney injury?",
+   "options": [
+    "Contrast-associated acute kidney injury",
+    "Cholesterol (atheroembolic) renal disease",
+    "Acute interstitial nephritis from a new medicine",
+    "Post-infectious glomerulonephritis",
+    "Renal artery dissection from the catheter"
+   ],
+   "answer": 1,
+   "rationales": [
+    "Contrast injury starts within 24–72 hours and usually recovers in a week. It doesn't cause livedo, blue toes, eosinophilia or low complement.",
+    "Correct. A catheter passing an atheromatous aorta can shower cholesterol crystals. Kidney injury that appears weeks later, with livedo reticularis, blue toes despite good pulses, eosinophilia and low complement, is classic atheroembolic disease.",
+    "Interstitial nephritis can cause eosinophilia, but not livedo, blue toes or low C3, and no new medicine is mentioned.",
+    "Post-infectious GN gives red-cell casts and follows an infection, not a procedure.",
+    "Dissection would cause sudden flank pain and early injury, not delayed injury with skin signs."
+   ],
+   "teaching": "Kidney injury weeks after an arterial catheter procedure, with livedo, blue toes, eosinophilia and low complement, suggests cholesterol emboli, not contrast.",
+   "rationale": "The timing and signs of the cardiac procedure must be combined with the renal pattern to tell atheroemboli from contrast injury.",
+   "dependency": "Without the cardiology procedure (arterial catheter through atheroma), the kidney findings have no source. Without the renal reasoning (timing of contrast injury vs delayed embolic injury, low complement, eosinophilia), the procedure suggests the wrong cause: contrast."
+  },
+  {
+   "ref": "cr-02-flash-oedema-ras",
+   "integration_family": "cardio_renal",
+   "integration_type": "diagnostic",
+   "primary_topic": "Recurrent pulmonary oedema",
+   "integrated_topics": [
+    "Renal: bilateral renal artery stenosis"
+   ],
+   "skill": "investigation",
+   "difficulty": "hard",
+   "stem": "A 74-year-old woman with peripheral arterial disease has had three admissions in 6 months with sudden pulmonary oedema at night. Each time her BP is about 210/110 mmHg. Echocardiography shows an ejection fraction of 60% with no valve disease, and troponin is normal. She was started on ramipril 2 weeks ago, and her creatinine has risen from 120 to 205 µmol/L. An abdominal bruit is heard.",
+   "lead_in": "What is the most appropriate next investigation?",
+   "options": [
+    "Coronary angiography to look for silent ischaemia",
+    "Renal artery imaging (Doppler ultrasound or CT angiography)",
+    "Plasma metanephrines for phaeochromocytoma",
+    "Repeat echocardiography with a stress test",
+    "Kidney biopsy"
+   ],
+   "answer": 1,
+   "rationales": [
+    "With normal troponin and EF, recurrent ischaemia is less likely to explain the pattern than the renal clues.",
+    "Correct. Sudden 'flash' pulmonary oedema with severe hypertension and preserved EF, a big rise in creatinine after an ACE inhibitor, an abdominal bruit and known vascular disease point to bilateral renal artery stenosis (Pickering syndrome). Image the renal arteries.",
+    "Phaeochromocytoma doesn't explain the creatinine rise after ACE inhibition or the bruit.",
+    "The heart pumps normally. The problem is the renal-driven pressure and volume surges.",
+    "A biopsy doesn't diagnose a vascular cause and is risky with uncontrolled BP."
+   ],
+   "teaching": "Flash pulmonary oedema with preserved EF plus a creatinine jump on an ACE inhibitor suggests bilateral renal artery stenosis.",
+   "rationale": "The cardiac presentation is explained by a renal vascular cause, which is uncovered by the response to ACE inhibition.",
+   "dependency": "Without the renal clues (creatinine jump after ACE inhibitor, bruit), it's managed as heart failure. Without the cardiac picture (flash oedema with normal EF), the creatinine rise looks like simple CKD progression."
+  },
+  {
+   "ref": "cr-03-digoxin-aki",
+   "integration_family": "cardio_renal",
+   "integration_type": "management",
+   "primary_topic": "Digoxin toxicity",
+   "integrated_topics": [
+    "Renal: acute kidney injury and drug clearance"
+   ],
+   "skill": "management",
+   "difficulty": "medium",
+   "stem": "An 82-year-old woman with heart failure and atrial fibrillation takes digoxin 250 µg daily, furosemide and bisoprolol. After 4 days of diarrhoea she presents with nausea, confusion and yellow-tinted vision. Pulse is 42/min and irregular. Creatinine is 260 µmol/L (baseline 95), potassium 5.9 mmol/L, and digoxin level 4.1 ng/mL (taken more than 6 hours after the last dose). ECG shows slow AF with frequent ventricular ectopics.",
+   "lead_in": "What is the most appropriate treatment?",
+   "options": [
+    "Atropine and observation",
+    "Digoxin-specific antibody fragments (Fab)",
+    "Haemodialysis to remove digoxin",
+    "IV calcium gluconate for the hyperkalaemia",
+    "Restart digoxin at half the dose once the diarrhoea settles"
+   ],
+   "answer": 1,
+   "rationales": [
+    "Atropine may help the rate briefly but doesn't treat the toxicity.",
+    "Correct. Digoxin is cleared by the kidneys, so AKI from diarrhoea caused it to accumulate. Life-threatening toxicity (bradyarrhythmia, ventricular ectopy, hyperkalaemia, a high level) is treated with digoxin Fab, which also corrects the potassium.",
+    "Digoxin has a large volume of distribution, so dialysis removes very little.",
+    "Calcium in digoxin toxicity is controversial, and it doesn't treat the cause. Fab corrects the hyperkalaemia.",
+    "Restarting digoxin before toxicity is treated is unsafe."
+   ],
+   "teaching": "Digoxin builds up when the kidneys fail. Bradyarrhythmia with hyperkalaemia and a high level needs digoxin Fab. Dialysis doesn't remove it.",
+   "rationale": "The toxicity arose from the renal clearance of a cardiac drug, and treatment choice depends on digoxin's distribution and the kidney state.",
+   "dependency": "Without the AKI, there is no reason for the level to rise. Without the cardiac pharmacology (Fab, why dialysis doesn't work, cautions with calcium), the AKI suggests the wrong fix (dialysis)."
+  },
+  {
+   "ref": "cr-04-uraemic-pericarditis",
+   "integration_family": "cardio_renal",
+   "integration_type": "management",
+   "primary_topic": "Pericarditis",
+   "integrated_topics": [
+    "Renal: end-stage kidney disease and dialysis"
+   ],
+   "skill": "management",
+   "difficulty": "medium",
+   "stem": "A 45-year-old man with end-stage kidney disease has missed several haemodialysis sessions over 3 weeks. He has pleuritic chest pain that eases when he sits forward, and a pericardial rub. BP is 150/90 mmHg with no pulsus paradoxus. Urea is 48 mmol/L. ECG shows no diffuse ST elevation. Echocardiography shows a small pericardial effusion without tamponade.",
+   "lead_in": "What is the most appropriate treatment?",
+   "options": [
+    "High-dose NSAIDs and colchicine as for viral pericarditis",
+    "Intensive daily haemodialysis, avoiding or minimising heparin",
+    "Urgent pericardiocentesis",
+    "Oral prednisolone",
+    "Start anticoagulation for presumed pulmonary embolism"
+   ],
+   "answer": 1,
+   "rationales": [
+    "NSAIDs and colchicine treat viral pericarditis, but this is caused by uraemia, and colchicine needs care in ESKD. Dialysis treats the cause.",
+    "Correct. Uraemic pericarditis improves with more dialysis that clears the toxins. Heparin is minimised because of bleeding into the pericardium. The typical ECG changes are often absent because the inflammation does not reach the heart muscle.",
+    "There is no tamponade, so drainage isn't needed now.",
+    "Steroids don't treat the cause and don't help uraemic pericarditis.",
+    "The pain pattern and rub point to pericarditis, not embolism."
+   ],
+   "teaching": "Pericarditis in a dialysis patient who has missed sessions is treated with intensive dialysis. Keep heparin to a minimum.",
+   "rationale": "Choosing the treatment depends on recognising that the kidney failure is the cause of the pericarditis.",
+   "dependency": "Without the renal context (missed dialysis, high urea), it's treated as viral pericarditis with NSAIDs and colchicine. Without the cardiac assessment (rub, effusion size, no tamponade), the dialysis decision and the heparin caution have no basis."
+  },
+  {
+   "ref": "gh-01-gallstone-pancreatitis-cholangitis",
+   "integration_family": "gi_hepatic",
+   "integration_type": "management",
+   "primary_topic": "Acute pancreatitis",
+   "integrated_topics": [
+    "Hepatobiliary: biliary obstruction and cholangitis"
+   ],
+   "skill": "management",
+   "difficulty": "medium",
+   "stem": "A 48-year-old woman presents with severe epigastric pain going to her back. Lipase is 12 times normal and ultrasound shows gallbladder stones with a common bile duct of 11 mm. Over 24 hours she develops a fever of 39.2°C, rigors and jaundice. Bilirubin has risen from 40 to 110 µmol/L, and BP is 100/60 mmHg after fluids. IV antibiotics have been started.",
+   "lead_in": "What is the most appropriate next step?",
+   "options": [
+    "Continue supportive care and arrange cholecystectomy at 6 weeks",
+    "Urgent ERCP with duct clearance within 24 hours",
+    "Contrast CT of the abdomen to assess pancreatic necrosis",
+    "Start total parenteral nutrition and keep her nil by mouth",
+    "Percutaneous drainage of the pancreas"
+   ],
+   "answer": 1,
+   "rationales": [
+    "Supportive care alone is right for gallstone pancreatitis without cholangitis. The cholangitis changes this.",
+    "Correct. Gallstone pancreatitis with cholangitis (fever, jaundice, a dilated duct) needs urgent ERCP to clear the duct. Without cholangitis, routine early ERCP gives no benefit.",
+    "CT for necrosis is useful later. It doesn't treat the infected, obstructed bile duct.",
+    "Early oral or tube feeding is preferred. Feeding isn't the urgent issue.",
+    "There is no collection to drain this early."
+   ],
+   "teaching": "In gallstone pancreatitis, urgent ERCP is for cholangitis or a persistently obstructed duct, not for the pancreatitis alone.",
+   "rationale": "The pancreatitis would be managed supportively; the biliary findings change the decision to urgent ERCP.",
+   "dependency": "Without the biliary signs, the right answer is supportive care. Without the pancreatitis context, cholangitis has the same answer, but the decision here is exactly when pancreatitis needs ERCP."
+  },
+  {
+   "ref": "gh-02-uc-psc",
+   "integration_family": "gi_hepatic",
+   "integration_type": "diagnostic",
+   "primary_topic": "Ulcerative colitis",
+   "integrated_topics": [
+    "Hepatology: primary sclerosing cholangitis"
+   ],
+   "skill": "investigation",
+   "difficulty": "medium",
+   "stem": "A 32-year-old man has had ulcerative colitis for 6 years, controlled on mesalazine. Routine blood tests show ALP 410 U/L (upper limit 120) and GGT 290 U/L. ALT is mildly raised and bilirubin is normal. He has no symptoms, drinks little alcohol, and takes no new medicines. Ultrasound shows a normal liver and no gallstones or duct dilatation. Antimitochondrial antibody is negative.",
+   "lead_in": "What is the most appropriate next investigation?",
+   "options": [
+    "Liver biopsy",
+    "Magnetic resonance cholangiopancreatography (MRCP)",
+    "ERCP with brushings",
+    "Stop mesalazine and repeat liver tests in 3 months",
+    "Hepatitis E serology"
+   ],
+   "answer": 1,
+   "rationales": [
+    "Biopsy is not first-line. Imaging of the bile ducts usually makes the diagnosis.",
+    "Correct. A cholestatic pattern in a patient with UC suggests primary sclerosing cholangitis. MRCP is the non-invasive first test to show the beading and strictures of the ducts. A normal ultrasound doesn't exclude it.",
+    "ERCP is invasive and kept for treating strictures or taking brushings when cancer is suspected.",
+    "Mesalazine rarely causes this cholestatic picture, and stopping it risks a colitis flare.",
+    "Hepatitis E causes a hepatitic rise in ALT, not an isolated cholestatic pattern."
+   ],
+   "teaching": "Cholestatic liver tests in a patient with ulcerative colitis: think PSC and order an MRCP.",
+   "rationale": "The link between the bowel disease and the liver test pattern drives the choice of investigation.",
+   "dependency": "Without the UC, an isolated raised ALP has a long differential. Without the hepatology pattern (cholestatic, AMA-negative, normal ultrasound), the UC alone doesn't point to the bile ducts."
+  },
+  {
+   "ref": "gh-03-coeliac-transaminitis",
+   "integration_family": "gi_hepatic",
+   "integration_type": "management",
+   "primary_topic": "Coeliac disease",
+   "integrated_topics": [
+    "Hepatology: unexplained raised transaminases"
+   ],
+   "skill": "management",
+   "difficulty": "medium",
+   "stem": "A 27-year-old woman is referred with ALT 110 U/L and AST 85 U/L on three tests over 6 months. Viral hepatitis, autoimmune liver serology, ferritin, caeruloplasmin and ultrasound are normal, and she drinks no alcohol. She has iron-deficiency anaemia and occasional bloating. Tissue transglutaminase IgA is 18 times the upper limit, and duodenal biopsy shows villous atrophy.",
+   "lead_in": "What is the most appropriate management of her liver tests?",
+   "options": [
+    "Liver biopsy to look for autoimmune hepatitis",
+    "Start a strict gluten-free diet and recheck liver tests in 6–12 months",
+    "Start ursodeoxycholic acid",
+    "Start prednisolone",
+    "Refer for weight loss as presumed fatty liver disease"
+   ],
+   "answer": 1,
+   "rationales": [
+    "With a clear explanation and no autoimmune markers, a biopsy is not needed yet.",
+    "Correct. Coeliac disease commonly causes a mild rise in transaminases ('coeliac hepatitis'). It usually returns to normal within a year of a strict gluten-free diet, which confirms the link. Persistent abnormality afterwards would prompt more tests.",
+    "UDCA is for cholestatic disease. This is a hepatocellular pattern.",
+    "Steroids treat autoimmune hepatitis, which the serology does not support.",
+    "Her ultrasound is normal and nothing suggests fatty liver."
+   ],
+   "teaching": "Unexplained mildly raised transaminases can be coeliac disease. A gluten-free diet usually normalises them.",
+   "rationale": "The liver abnormality is explained and treated through the bowel diagnosis.",
+   "dependency": "Without the coeliac diagnosis, the liver tests lead to a biopsy. Without the hepatology work-up excluding other causes, the coeliac disease would not be credited for the liver tests."
+  },
+  {
+   "ref": "ii-01-eculizumab-meningococcus",
+   "integration_family": "infect_immunology",
+   "integration_type": "management",
+   "primary_topic": "Complement inhibition",
+   "integrated_topics": [
+    "Infectious disease: Neisseria meningitidis"
+   ],
+   "skill": "management",
+   "difficulty": "medium",
+   "stem": "A 30-year-old woman with paroxysmal nocturnal haemoglobinuria is to start eculizumab, a complement C5 inhibitor, in 3 weeks. She had a splenectomy for trauma as a teenager and her routine childhood vaccines are up to date.",
+   "lead_in": "Which infection-prevention step is essential before she starts?",
+   "options": [
+    "Pneumococcal vaccination only, because she is asplenic",
+    "Meningococcal vaccination against serogroups A, C, W, Y and B at least 2 weeks before the first dose",
+    "No extra steps, because her childhood vaccines are complete",
+    "Lifelong oral fluconazole prophylaxis",
+    "Check her HIV status and give co-trimoxazole prophylaxis"
+   ],
+   "answer": 1,
+   "rationales": [
+    "Pneumococcal vaccination is right for asplenia, but it misses the main risk that eculizumab adds.",
+    "Correct. Blocking C5 stops the membrane attack complex, which is the body's main defence against Neisseria. The risk of meningococcal disease rises around 1,000–2,000 times. Vaccinate against ACWY and B at least 2 weeks before, or give antibiotic cover if treatment can't wait.",
+    "Childhood vaccines don't give reliable meningococcal ACWY and B protection, and the eculizumab risk needs specific cover.",
+    "Fungal infection is not the main risk with C5 blockade.",
+    "HIV testing is reasonable, but co-trimoxazole doesn't prevent meningococcal disease."
+   ],
+   "teaching": "Terminal complement blockade (eculizumab) mimics C5–C9 deficiency: vaccinate against meningococcus ACWY + B before starting.",
+   "rationale": "The prevention plan depends on linking what the drug does to the immune system with the specific organism it exposes the patient to.",
+   "dependency": "Without the immunology (C5 and the membrane attack complex), one defaults to asplenia vaccines. Without the infection knowledge (Neisseria depends on the membrane attack complex), the immune defect doesn't point to a vaccine."
+  },
+  {
+   "ref": "ne-01-sreat",
+   "integration_family": "neuro_endocrine",
+   "integration_type": "diagnostic",
+   "primary_topic": "Encephalopathy",
+   "integrated_topics": [
+    "Endocrine: autoimmune thyroid disease"
+   ],
+   "skill": "management",
+   "difficulty": "hard",
+   "stem": "A 49-year-old woman has 3 weeks of fluctuating confusion, tremor, myoclonic jerks and two seizures. TSH and free T4 are normal on no treatment. Anti-thyroid peroxidase antibodies are very high. CSF shows protein 0.9 g/L, no cells, and negative HSV PCR. MRI brain is normal. EEG shows diffuse slowing. Sodium, glucose, calcium, ammonia and a drug screen are normal.",
+   "lead_in": "What is the most appropriate treatment?",
+   "options": [
+    "Start levothyroxine",
+    "High-dose corticosteroids (e.g., IV methylprednisolone)",
+    "IV aciclovir for 21 days",
+    "Start haloperidol for delirium",
+    "Carbimazole"
+   ],
+   "answer": 1,
+   "rationales": [
+    "She is euthyroid, so levothyroxine won't help, and the problem isn't hypothyroidism.",
+    "Correct. Encephalopathy with seizures and myoclonus, high anti-TPO antibodies, normal thyroid function, raised CSF protein and normal imaging, after excluding other causes, fits steroid-responsive encephalopathy with autoimmune thyroiditis (Hashimoto encephalopathy). It usually responds quickly to steroids.",
+    "HSV PCR is negative and MRI is normal. Continuing aciclovir isn't justified.",
+    "Haloperidol may lower the seizure threshold and doesn't treat the cause.",
+    "She isn't thyrotoxic."
+   ],
+   "teaching": "Unexplained encephalopathy with high anti-TPO antibodies and normal thyroid function: think SREAT and treat with steroids.",
+   "rationale": "The neurological syndrome is linked to its cause and treatment through the thyroid autoimmunity.",
+   "dependency": "Without the thyroid antibody finding, this is an unexplained encephalopathy. Without the neurological picture, high anti-TPO antibodies with normal thyroid function would be ignored."
+  }
+ ]
+}
