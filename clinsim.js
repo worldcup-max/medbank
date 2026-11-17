@@ -794,14 +794,14 @@ root.MB_CLINSIM={
   on:on, visible:visible, page:page, locked:locked,
   _test:{ osceScore:osceScore, quickScore:quickScore, isRight:isRight, stationFromEr:stationFromEr, stations:stations, IP:IP, specOf:specOf, inCourse:inCourse, topicHit:topicHit, catalogue:catalogue, upNext:upNext, gradeOf:gradeOf, pointsOf:pointsOf, standing:standing, rankOf:rankOf, roundItems:roundItems, forCtx:forCtx },
   stop:function(){ stopTimer(); },
-  openOsce:function(id, mode, ctx){ stopTimer(); var all=stations('all'), s=byId(all,id); if(s && !isFree(all,s)) return locked(); osceStart(id, mode, ctx); location.hash='#/clinsim/osce/'+mode+'/'+id; draw(); },
+  openOsce:function(id, mode, ctx){ stopTimer(); var all=stations('all'), s=byId(all,id); if(s && !isFree(all,s)) return locked(); osceStart(id, mode, ctx); location.hash='#/clinsim/osce/'+mode+'/'+id; CUR=['osce',mode,id]; draw(); },
   say:say,
   present:function(){ if(!OS) return; OS.phase='present'; stopTimer(); draw(); root.scrollTo&&root.scrollTo(0,0); },
   back:function(){ if(!OS) return; OS.phase='talk'; draw(); if(OS.endsAt) startTimer(); },
   pick:function(k, i){ if(!OS) return; OS[k]=i; draw(); },
   mark:function(){ if(!OS) return; OS.score=osceScore(OS); OS.phase='result'; stopTimer();
     var ex={ pass:OS.score.pass, mode:OS.mode, ctx:OS.ctx }; OS.pts=award('osce', OS.s.id, OS.score.total, ex); record('osce', OS.s.id, OS.score.total, ex); draw(); root.scrollTo&&root.scrollTo(0,0); },
-  openQuick:function(id, ctx){ var all=quickCases('all'), q=byId(all,id); if(!q) return; if(!isFree(all,q)) return locked(); QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:ctx||'open' }; location.hash='#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'/'+id; draw(); },
+  openQuick:function(id, ctx){ var all=quickCases('all'), q=byId(all,id); if(!q) return; if(!isFree(all,q)) return locked(); QS={ q:q, step:0, picks:[], phase:'steps', m:0, mcq:[], ctx:ctx||'open' }; location.hash='#/clinsim/quick/'+(q.source==='mine'?'mine':'builtin')+'/'+id; CUR=['quick',(q.source==='mine'?'mine':'builtin'),id]; draw(); },
   choose:function(i, k){ if(!QS || QS.picks[i]!==undefined) return; QS.picks[i]=k; draw(); },
   next:function(){ if(!QS) return; if(QS.step+1<QS.q.steps.length){ QS.step++; draw(); return; } QS.score=quickScore(QS.q, QS.picks); QS.phase=(QS.q.mcqs||[]).length?'mcq':'done'; if(QS.phase==='done') quickDone(); draw(); },
   answer:function(k){ if(!QS || QS.mcq[QS.m]!==undefined) return; QS.mcq[QS.m]=k; draw(); },
@@ -820,7 +820,7 @@ root.MB_CLINSIM={
     if(navigator.share){ navigator.share({ text:text }).catch(function(){}); return; }
     root.open('https://wa.me/?text='+encodeURIComponent(text), '_blank', 'noopener');
   },
-  openGroup:function(id){ stopTimer(); var all=stations('all'), s=byId(all,id); if(!s) return; if(!isFree(all,s)) return locked(); GS={ s:s, tab:'patient', endsAt:null, ticks:{ h:{}, ip:{}, dx:null, plan:null } }; location.hash='#/clinsim/group/pick/'+id; draw(); },
+  openGroup:function(id){ stopTimer(); var all=stations('all'), s=byId(all,id); if(!s) return; if(!isFree(all,s)) return locked(); GS={ s:s, tab:'patient', endsAt:null, ticks:{ h:{}, ip:{}, dx:null, plan:null } }; location.hash='#/clinsim/group/pick/'+id; CUR=['group','pick',id]; draw(); },
   gtab:function(t){ if(!GS) return; GS.tab=t; if(t!=='examiner') stopTimer(); if(t==='result') record('group', GS.s.id, osceScore({ s:GS.s }, GS.ticks).total); draw(); root.scrollTo&&root.scrollTo(0,0); },
   gstart:function(){ if(!GS) return; GS.endsAt=Date.now()+OSCE_MIN*60e3; draw(); },
   gtick:function(k, id, v){ if(!GS) return; GS.ticks[k][id]=!!v; },

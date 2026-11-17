@@ -36,7 +36,7 @@ const CACHE = 'medbank-v252';   // v252: Clinical Simulation stops giving the di
 const ASSETS = ['./', './index.html', './app.html', './content.js', './icon.svg', './manifest.webmanifest',
   './site.css', './config.js', './sync.js', './level-switcher.js', './paywall.js', './checkout.js', './import-tab.js',
   './lecture-record.js', './study-timer.js', './study-dock.js?v=20260908', './content-loader.js', './auth-ui.js?v=20260908', './learning-events.js?v=20260908b',
-  './restore.js', './mb-personal-restore.js', './viz3d.js?v=20260828', './whiteboard.js?v=20261111e', './a11y.js?v=20261116', './er-sim.js?v=20261116d', './er-sim-scene.js?v=20261116c', './er-sim-cases.js?v=20261116c', './clinsim.js?v=20261117b', './clinsim-cases.js?v=20261117', './404.html'];
+  './restore.js', './mb-personal-restore.js', './viz3d.js?v=20260828', './whiteboard.js?v=20261111e', './a11y.js?v=20261116', './er-sim.js?v=20261116d', './er-sim-scene.js?v=20261116c', './er-sim-cases.js?v=20261116c', './clinsim.js?v=20261117c', './clinsim-cases.js?v=20261117', './404.html'];
 
 const FLAGS = 'medbank-flags';                                   // SW-02: unversioned — survives deploys
 const FLAG_BASE = new URL('__mbflag/', self.location).href;     // SW-01: a real http(s) URL, not the 'flag:' scheme
