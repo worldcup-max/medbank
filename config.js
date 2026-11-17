@@ -30,6 +30,11 @@ window.MEDBANK_CONFIG = {
   // No scene file changes — only the adapter reads this.
   MESH_BASE: "https://tytbrhuzikqkscxdnkmr.supabase.co/storage/v1/object/public/viz-meshes/",
 
+  // Where the patient pictures live (picture library). art-resolver.js reads art-manifest.json here
+  // and defines window.MB_ART. Empty = use the copy bundled in er-sim-art/. Upload with
+  //   node tools/upload-art.mjs <art folder>      (needs SUPABASE_SERVICE_KEY in the environment)
+  ART_BASE: "https://tytbrhuzikqkscxdnkmr.supabase.co/storage/v1/object/public/er-sim-art/",
+
   // RESOLUTION FOLLOWS ROLE (engine__mesh-resolution-by-role, 2026-09-10).
   // Two tiers of the same mesh set. The adapter picks per structure: role 'part'/'primary' -> full,
   // role 'context' -> lite. A 'full' miss falls back to 'lite', so the full tier may be uploaded
