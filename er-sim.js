@@ -856,6 +856,16 @@ function css(){
   '.ers-panel h4{margin:14px 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}',
   '.ers-panel h4:first-child{margin-top:0}',
   '.ers-acts{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px}',
+  '.ers-notav{grid-column:1/-1;margin:2px 0 0;font-size:12px;color:var(--dim);line-height:1.4}',
+  '.ers-more{margin-top:8px;border:0;background:none;color:var(--accent);font:inherit;font-size:13px;font-weight:700;cursor:pointer;padding:4px 0}',
+  '.ers-ti{margin-right:5px}',
+  '.ers-pc{margin-top:12px;border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--panel)}',
+  '.ers-pc-h{display:flex;gap:8px;align-items:center;justify-content:space-between}.ers-pc-h h3{margin:0;font-size:16px;line-height:1.3}',
+  '.ers-pc-pts{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}',
+  '.ers-pc-pt{font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--panel2)}.ers-pc-pt small{font-weight:600;color:var(--dim)}',
+  '.ers-pc-f{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}',
+  '@media (max-width:600px){.ers-tabs{gap:3px}.ers-tab{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 2px;font-size:11.5px;border-radius:9px}.ers-ti{margin:0;font-size:16px}.ers-tl{max-width:100%;overflow:hidden;text-overflow:ellipsis}}',
+  '@media (max-width:600px){.ers-acts{grid-template-columns:1fr 1fr;gap:6px}.ers-act{font-size:13px;padding:8px 9px}.ers-act small{font-size:11.5px}.ers-first .ers-acts{grid-template-columns:1fr 1fr}.ers-panel{padding:12px}}',
   '.ers-act{text-align:left;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:9px 11px;font:inherit;font-size:13.5px;cursor:pointer;line-height:1.35}',
   '.ers-act:hover:not(:disabled),.ers-act:focus-visible{border-color:var(--accent)}',
   '.ers-act small{display:block;color:var(--dim);font-size:12px;margin-top:2px}',
@@ -887,6 +897,30 @@ function css(){
   '.ers-opt:has(input:checked){border-color:var(--accent);background:var(--panel2)}',
   '.ers-score{display:flex;align-items:center;gap:16px;flex-wrap:wrap}',
   '.ers-ring{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;font-size:26px;font-weight:800}',
+  /* debrief */
+  '.ers-db{max-width:760px;padding-bottom:8px}',
+  '.ers-hero{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:8px}',
+  '.ers-hero-top{display:flex;gap:16px;align-items:center}',
+  '.ers-hero .ers-ring{flex:0 0 auto;width:92px;height:92px;background:conic-gradient(var(--c) calc(var(--p)*1%),var(--panel2) 0);color:var(--c);font-size:24px}',
+  '.ers-hero .ers-ring span{display:grid;place-items:center;width:74px;height:74px;border-radius:50%;background:var(--card)}',
+  '.ers-hero-t{min-width:0}.ers-grade{font-size:24px;font-weight:800;line-height:1.1}.ers-hero-pt{font-size:14px;margin:4px 0 2px}',
+  '.ers-pts{display:inline-block;margin-top:8px;font-size:13px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--panel2);color:var(--accent)}',
+  '.ers-dx{margin-top:12px;font-size:14.5px;padding-top:12px;border-top:1px solid var(--line)}',
+  '.ers-hero .ers-pic,.ers-hero img{margin-top:12px;border-radius:12px;max-width:100%}',
+  '.ers-fix{margin-top:12px}.ers-fix ol{margin:0;padding-left:20px}.ers-fix li{margin:0 0 10px;font-size:14.5px;line-height:1.4}',
+  '.ers-fix li>div:first-child{display:flex;gap:10px;justify-content:space-between;align-items:baseline}',
+  '.ers-lost{flex:0 0 auto;font-weight:800;color:var(--badtx);font-variant-numeric:tabular-nums}',
+  '.ers-replay{width:100%;margin-top:4px}',
+  '.ers-sec{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:12px}',
+  '.ers-sec>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:14px;font-weight:800;font-size:15px}',
+  '.ers-sec>summary::-webkit-details-marker{display:none}',
+  '.ers-sec>summary::after{content:"›";font-size:20px;line-height:1;color:var(--dim);transition:transform .15s;margin-left:2px}.ers-sec[open]>summary::after{transform:rotate(90deg)}',
+  '.ers-sec>summary>span:first-child{flex:1}.ers-sec>summary .ers-meta{font-weight:600;white-space:nowrap}',
+  '.ers-sec-b{padding:0 14px 14px}.ers-sec-b h4:first-child{margin-top:0}',
+  '.ers-teach li.own{font-weight:600;color:var(--warntx)}',
+  '.ers-dbar{position:sticky;bottom:0;z-index:6;display:flex;gap:8px;margin-top:14px;padding:10px 0 calc(10px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--line)}',
+  '.ers-dbar .btn{flex:1;white-space:nowrap}',
+  '@media (prefers-reduced-motion:reduce){.ers-sec>summary::after{transition:none}}',
   '.ers-items{list-style:none;padding:0;margin:0}',
   '.ers-items li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}',
   '.ers-items .pt{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}',
@@ -986,7 +1020,7 @@ function monitor(){
 var MINI_W=420;
 function miniBar(st){
   var src=root.ERSIM_SCENE&&root.ERSIM_SCENE.currentSrc ? root.ERSIM_SCENE.currentSrc(CASE, RUN) : null;
-  var mtab=function(id,label){ return '<button class="ers-tab" aria-selected="'+(TAB===id)+'" onclick="MB_ERSIM.miniTab(\''+id+'\')">'+label+'</button>'; };
+  var mtab=function(id,label){ return '<button class="ers-tab" aria-selected="'+(TAB===id)+'" onclick="MB_ERSIM.miniTab(\''+id+'\')">'+tabLabel(label)+'</button>'; };
   return '<div class="ers-minihost" aria-hidden="true"><div class="ers-mini'+(src?'':' nopic')+'" id="ersMini" style="--ers-mini-w:'+MINI_W+'px">'+
     (src?'<img class="ers-mini-pic'+(RUN.outcome==='died'?' ers-dead':'')+'" src="'+e(src)+'" alt="">':'')+
     '<div class="ers-mini-r"><div class="ers-mini-h"><b>'+e(CASE.patient.name)+'</b> <span class="ers-meta">'+e(SETTINGS[CASE.setting].short)+' · ⏱ '+RUN.t+' min</span></div>'+
@@ -1006,7 +1040,9 @@ function watchMini(){
     MINI_OBS.observe(tabs);
   }catch(_){}
 }
-function tabBtn(id,label){ return '<button class="ers-tab" role="tab" aria-selected="'+(TAB===id)+'" onclick="MB_ERSIM.tab(\''+id+'\')">'+label+'</button>'; }
+function tabBtn(id,label){ return '<button class="ers-tab" role="tab" aria-selected="'+(TAB===id)+'" onclick="MB_ERSIM.tab(\''+id+'\')">'+tabLabel(label)+'</button>'; }
+/* "💬 History" -> icon and word in their own spans, so a phone can stack them and fit all six tabs. */
+function tabLabel(label){ var i=label.indexOf(' '); return i<0 ? label : '<span class="ers-ti" aria-hidden="true">'+label.slice(0,i)+'</span><span class="ers-tl">'+label.slice(i+1)+'</span>'; }
 
 function actBtn(id){
   var a=ENGINE.BYID[id]; if(!a) return '';
@@ -1026,7 +1062,13 @@ function actBtn(id){
   }
   return '<button class="ers-act'+(n?' done':'')+'" data-l="'+e(a.label.toLowerCase())+'" '+(avail&&!pend&&!lock&&!RUN.ended?'':'disabled')+' onclick="MB_ERSIM.act(\''+id+'\')">'+e(a.label)+(n>1?' ×'+n:'')+(sub?'<small>'+e(sub)+'</small>':'')+extra+'</button>';
 }
-function groupActs(cat){ return CATALOG.filter(function(a){ return a.cat===cat && (!a.p1 || CASE.phase1); }).map(function(a){ return actBtn(a.id); }).join(''); }
+function groupActs(cat){ return actList(CATALOG.filter(function(a){ return a.cat===cat && (!a.p1 || CASE.phase1); }).map(function(a){ return a.id; })); }
+/* Buttons for what this hospital has; what it doesn't have folds into one line instead of a column of greyed-out buttons. */
+function actList(ids){
+  var here=[], not=[];
+  ids.forEach(function(id){ var a=ENGINE.BYID[id]; if(!a) return; (available(a, CASE.setting)?here:not).push(id); });
+  return here.map(actBtn).join('')+(not.length?'<p class="ers-notav">Not at this hospital: '+not.map(function(id){ return e(ENGINE.BYID[id].label); }).join(' · ')+'</p>':'');
+}
 
 function talkPanel(){
   var who=CASE.speaker||'the patient';
@@ -1051,8 +1093,8 @@ function examPanel(){
 }
 function testsPanel(){
   var bedside=['rbg','mrdt','pcv','urinalysis','upt','wbct20','cholera_rdt','fetal_heart'];
-  var h='<h4>Bedside</h4><div class="ers-acts">'+bedside.map(actBtn).join('')+'</div><h4>Laboratory and imaging</h4><div class="ers-acts">'+
-    CATALOG.filter(function(a){ return a.cat==='tests'&&bedside.indexOf(a.id)<0; }).map(function(a){ return actBtn(a.id); }).join('')+'</div>';
+  var h='<h4>Bedside</h4><div class="ers-acts">'+actList(bedside)+'</div><h4>Laboratory and imaging</h4><div class="ers-acts">'+
+    actList(CATALOG.filter(function(a){ return a.cat==='tests'&&bedside.indexOf(a.id)<0; }).map(function(a){ return a.id; }))+'</div>';
   return h+resultsBlock();
 }
 function resultsBlock(){
@@ -1120,7 +1162,7 @@ function handoverBox(){
   return h+'<p class="ers-find" id="ersHoRead" hidden></p>';
 }
 /* What the student picked on the Decide tab survives a redraw (Watch 5 min, a nurse call, the pinned tabs). */
-var DSEL={};
+var DSEL={}, LOGALL=false, LOG_SHOW=6;
 function ck(name, val){ return DSEL[name]===val ? ' checked' : ''; }
 function hoPicks(){ var o={}; ['situation','done','now','watch'].forEach(function(k){ var x=document.querySelector('input[name="ersHo_'+k+'"]:checked'); if(x) o[k]=x.value; }); return o; }
 function hint(){
@@ -1154,7 +1196,8 @@ function shift(){
   var panel = TAB==='exam'?examPanel(): TAB==='tests'?testsPanel(): TAB==='treat'?treatPanel(): TAB==='team'?teamPanel(): TAB==='decide'?decidePanel(): talkPanel();
   h+='<div class="ers-body"><div class="ers-panel" role="tabpanel">'+panel+'</div>'+
      '<div class="ers-panel"><h4>Timeline</h4><div class="ers-log">'+
-       RUN.log.slice().reverse().map(function(l){ return '<div class="k-'+l.kind+'"><time>'+l.t+'′</time>'+e(l.text)+'</div>'; }).join('')+
+       RUN.log.slice().reverse().slice(0, LOGALL?1e9:LOG_SHOW).map(function(l){ return '<div class="k-'+l.kind+'"><time>'+l.t+'′</time>'+e(l.text)+'</div>'; }).join('')+
+       (RUN.log.length>LOG_SHOW?'<button class="ers-more" onclick="MB_ERSIM.logAll()">'+(LOGALL?'Show the latest only':'Show all '+RUN.log.length+' entries')+'</button>':'')+
        (RUN.log.length?'':'<p class="ers-meta">'+e(CASE.triage||'')+'</p>')+
      '</div>'+(TAB!=='tests'?resultsBlock():'')+'</div></div>';
   return h;
@@ -1212,35 +1255,35 @@ function startTags(){
 var TIERS={ unneeded:'Unneeded', harmful:'Harmful', dangerous:'Dangerous' };
 /* 10: "Try again from N min", next to the first late or missed step. */
 var REPLAY=null;
-function replayRow(){
-  REPLAY=null;
-  if(!CASE.phase1) return '';
-  var rp=ENGINE.replayPoint(CASE, RUN); if(!rp) return '';
-  REPLAY=rp;
-  return '<div class="ers-path-r" role="row"><span role="cell" style="grid-column:1/-1"><button class="btn" onclick="MB_ERSIM.replayFrom()">↩ Try again from '+rp.at+' min</button> '+
-    '<span class="ers-meta">Fix “'+e(rp.label)+'” and play on from there. A replay earns half points, so your first run still counts.</span></span></div>';
-}
+function uiReplayPoint(){ REPLAY=CASE.phase1 ? ENGINE.replayPoint(CASE, RUN) : null; return REPLAY; }
 /* Clinical points for this run (the same points and ranks as Clinical Simulation). */
-function pointsPanel(sc){
-  if(!CASE.phase1) return '';
+function runPoints(sc){
+  if(!CASE.phase1) return null;
   var b=ENGINE.bonusOf(CASE, RUN), unsafe=RUN.outcome==='died'||/unsafe/i.test(sc.grade||'');
   var pts=ENGINE.clinicalPoints(sc.pct, { unsafe:unsafe, x:b.x, add:b.add, mode:RUN.replay?'practice':null, diff:CASE.level });
   var why=[sc.pct+'% case score'+(unsafe?' (counted as 40% at most, because it was unsafe)':'')].concat(b.notes);
   if(RUN.replay) why.push('replay from '+RUN.replay.from+' min ×0.5');
-  return '<div class="ers-panel" style="margin-top:12px"><h4>Clinical points</h4><div style="font-size:20px;font-weight:800">'+pts+' clinical points</div>'+
-    '<div class="ers-meta">'+e(why.join(' · '))+'. Only your best run of this case counts toward your rank.</div></div>';
+  return { pts:pts, why:why.join(' · ') };
+}
+/* The few things that cost the most, biggest first: harm, missed and late steps, a wrong call. */
+function fixList(sc){
+  return sc.items.map(function(i){ return { i:i, lost:i.group==='harm' ? -i.earned : (i.pts>0 ? i.pts-i.earned : 0) }; })
+    .filter(function(x){ return x.lost>0 && x.i.label!=='The patient died'; })
+    .sort(function(a,b){ return b.lost-a.lost; }).slice(0,3);
+}
+function sec(title, meta, body, open){
+  return '<details class="ers-sec"'+(open?' open':'')+'><summary><span>'+title+'</span>'+(meta?'<span class="ers-meta">'+meta+'</span>':'')+'</summary><div class="ers-sec-b">'+body+'</div></details>';
 }
 /* Debrief: the student's path next to the best path. */
 function pathPanel(){
   var pc=ENGINE.pathCompare(CASE, RUN);
   var ic={ 'on-time':'✅', late:'🟡', missed:'❌' };
-  var h='<div class="ers-panel" style="margin-top:12px"><h4>Your path and the best path</h4>'+
-    '<div class="ers-path" role="table" aria-label="Your path compared with the best path"><div class="ers-path-h" role="row"><span role="columnheader">Step</span><span role="columnheader">Best</span><span role="columnheader">You</span></div>';
+  var h='<div class="ers-path" role="table" aria-label="Your path compared with the best path"><div class="ers-path-h" role="row"><span role="columnheader">Step</span><span role="columnheader">Best</span><span role="columnheader">You</span></div>';
   pc.rows.forEach(function(r){
     h+='<div class="ers-path-r '+r.status+'" role="row"><span role="cell"><span aria-hidden="true">'+ic[r.status]+'</span> '+e(r.label)+'</span><span role="cell" data-k="Best">'+e(r.best)+'</span><span role="cell" data-k="You">'+
       (r.yours===null?'Not done':'At '+r.yours+' min'+(r.status==='late'?' (late)':''))+'</span></div>';
   });
-  h+=replayRow()+'<div class="ers-path-r '+(pc.dx.ok?'on-time':'missed')+'" role="row"><span role="cell"><span aria-hidden="true">'+(pc.dx.ok?'✅':'❌')+'</span> Diagnosis</span><span role="cell" data-k="Best">'+e(pc.dx.best)+'</span><span role="cell" data-k="You">'+e(pc.dx.yours||'None')+'</span></div>';
+  h+='<div class="ers-path-r '+(pc.dx.ok?'on-time':'missed')+'" role="row"><span role="cell"><span aria-hidden="true">'+(pc.dx.ok?'✅':'❌')+'</span> Diagnosis</span><span role="cell" data-k="Best">'+e(pc.dx.best)+'</span><span role="cell" data-k="You">'+e(pc.dx.yours||'None')+'</span></div>';
   h+='<div class="ers-path-r '+(pc.dispo.ok?'on-time':'missed')+'" role="row"><span role="cell"><span aria-hidden="true">'+(pc.dispo.ok?'✅':'❌')+'</span> Where the patient goes</span><span role="cell" data-k="Best">'+e(pc.dispo.best.join(' or '))+'</span><span role="cell" data-k="You">'+e(pc.dispo.yours||'None')+'</span></div></div>';
   var cb=pc.curveball;
   if(cb){
@@ -1249,38 +1292,52 @@ function pathPanel(){
                    : (cb.prevented ? 'You prevented it: '+e(cb.label)+' was due at about '+cb.at+' min.' : 'It never came: '+e(cb.label)+' was due at about '+cb.at+' min, after you handed over.'))+'</p>';
   }
   if(pc.off.length) h+='<h4>Off the best path</h4>'+pc.off.map(function(o){ return '<p class="ers-find'+(o.tier?' ers-off-'+o.tier:'')+'"><b>At '+o.at+' min: '+(o.tier?e(TIERS[o.tier])+' ('+ENGINE.TIER_PTS[o.tier]+'). ':'')+e(o.label)+'.</b> '+e(o.why)+'</p>'; }).join('');
-  var v=CASE.variant;
-  if(v) h+='<p class="ers-meta">This start: '+e(SETTINGS[CASE.setting].label)+(v.severityLabel?' · '+e(v.severityLabel):'')+(v.night?' · night shift':'')+'. Play again for a different patient, hospital or shift.</p>';
-  return h+'</div>';
+  var done=pc.rows.filter(function(r){ return r.status==='on-time'; }).length;
+  return { html:h, meta:done+' of '+pc.rows.length+' steps on time' };
 }
+var TIERS={ unneeded:'Unneeded', harmful:'Harmful', dangerous:'Dangerous' };
 function debrief(){
-  var sc=DEBRIEF, c=CASE;
-  var col= sc.grade==='Patient died'||sc.pct<50 ? 'var(--badtx)' : sc.pct<70 ? 'var(--warntx)' : 'var(--recall-tx)';
-  var h='<a href="'+backHref()+'" class="ers-meta">← Cases</a><h1>Debrief: '+e(c.title)+'</h1>'+
-    '<div class="ers-panel"><div class="ers-score"><div class="ers-ring" style="border:8px solid '+col+';color:'+col+'">'+sc.pct+'%</div>'+
-    '<div><div style="font-size:20px;font-weight:800;color:'+col+'">'+e(sc.grade)+'</div><div class="ers-meta">'+sc.minutes+' minutes · '+e(RUN.outcome==='died'?'The patient died':'Handed over alive')+'</div>'+
-    '<div class="ers-meta">The diagnosis was <b>'+e(dxLabel(c,c.dx.correct[0]))+'</b>.</div></div></div>'+
-    (RUN.outcome!=='died' && sc.pct>=70 && !(c.problems||[]).some(function(p){ var x=RUN.probs[p.id]; return x && x.active && !x.fixed; }) && root.ERSIM_SCENE && root.ERSIM_SCENE.picture ? root.ERSIM_SCENE.picture(c, 'discharge', 'Going home a few days later') : '')+'</div>';
-  h+=pointsPanel(sc);
-  if(c.variant) h+=pathPanel();
+  var sc=DEBRIEF, c=CASE, died=RUN.outcome==='died';
+  var col= sc.grade==='Patient died'||sc.pct<50||sc.grade==='Unsafe' ? 'var(--badtx)' : sc.pct<70 ? 'var(--warntx)' : 'var(--recall-tx)';
+  var pts=runPoints(sc), rp=uiReplayPoint(), v=c.variant, fixes=fixList(sc);
+  var well=!died && sc.pct>=70 && !(c.problems||[]).some(function(p){ var x=RUN.probs[p.id]; return x && x.active && !x.fixed; });
+  var h='<div class="ers-db"><a href="'+backHref()+'" class="ers-meta">← Cases</a>'+
+    '<div class="ers-hero"><div class="ers-hero-top"><div class="ers-ring" style="--c:'+col+';--p:'+sc.pct+'"><span>'+sc.pct+'%</span></div>'+
+    '<div class="ers-hero-t"><div class="ers-grade" style="color:'+col+'">'+e(sc.grade)+'</div>'+
+    '<div class="ers-hero-pt"><b>'+e(c.patient.name)+'</b> · '+e(died?'died':'handed over alive')+' at '+sc.minutes+' min</div>'+
+    '<div class="ers-meta">'+e(SETTINGS[c.setting].label)+(v&&v.severityLabel?' · '+e(v.severityLabel.toLowerCase()):'')+(v&&v.night?' · night shift':'')+'</div>'+
+    (pts?'<div class="ers-pts" title="'+e(pts.why)+'">'+(pts.pts?'+':'')+pts.pts+' clinical points</div>':'')+'</div></div>'+
+    '<div class="ers-dx">It was <b>'+e(dxLabel(c,c.dx.correct[0]))+'</b>'+(RUN.dx&&c.dx.correct.indexOf(RUN.dx)>=0?' and you got it.':'.')+'</div>'+
+    (well && root.ERSIM_SCENE && root.ERSIM_SCENE.picture ? root.ERSIM_SCENE.picture(c, 'discharge', 'Going home a few days later') : '')+'</div>';
+  // What to fix first
+  h+='<div class="ers-panel ers-fix"><h4>'+(fixes.length?'Fix these first':'A clean run')+'</h4>';
+  if(fixes.length) h+='<ol>'+fixes.map(function(f){ var n=f.i.note||'';
+      return '<li><div><b>'+e(f.i.label.replace(/^(Unneeded|Harmful|Dangerous): /,''))+'</b><span class="ers-lost">−'+(Math.round(f.lost*10)/10)+'</span></div>'+(n?'<div class="ers-meta">'+e(n.length>160?n.slice(0,158)+'…':n)+'</div>':'')+'</li>'; }).join('')+'</ol>';
+  else h+='<p class="ers-meta">Nothing lost points. Play again for a different patient, hospital or shift.</p>';
+  if(rp) h+='<button class="btn primary ers-replay" onclick="MB_ERSIM.replayFrom()">↩ Try again from '+rp.at+' min</button><div class="ers-meta" style="margin-top:6px">Fix “'+e(rp.label)+'” and play on from there. A replay earns half points.</div>';
+  h+='</div>';
+  if(c.variant){ var pp=pathPanel(); h+=sec('Your path and the best path', pp.meta, pp.html, true); }
   var groups=[['critical','Critical actions'],['history','History and examination'],['exam',''],['good','Good practice'],['handover','Handover'],['dx','Diagnosis and disposition'],['dispo',''],['harm','Harm and penalties']];
-  h+='<div class="ers-panel" style="margin-top:12px">';
+  var b='';
   groups.forEach(function(g){
     var its=sc.items.filter(function(i){ return i.group===g[0]; }); if(!its.length) return;
-    if(g[1]) h+='<h4>'+g[1]+'</h4>';
-    h+='<ul class="ers-items">'+its.map(function(i){
+    if(g[1]) b+='<h4>'+g[1]+'</h4>';
+    b+='<ul class="ers-items">'+its.map(function(i){
       var ok=i.group==='harm'?false:(i.earned>=i.pts?true:(i.earned>0?null:false));
       var ic=i.group==='harm'?'⚠️':(ok===true?'✅':(ok===null?'🟡':'❌'));
       return '<li><span aria-hidden="true">'+ic+'</span><span>'+e(i.label)+(i.note?'<span class="n">'+e(i.note)+'</span>':'')+'</span><span class="pt">'+(i.group==='harm'?i.earned:(i.earned+'/'+i.pts))+'</span></li>';
     }).join('')+'</ul>';
   });
-  h+='</div>';
-  var teach=(c.phase1?ENGINE.extraTeaching(c, RUN):[]).concat(c.teaching||[]);
-  if(teach.length) h+='<div class="ers-panel" style="margin-top:12px"><h4>Learning points</h4><ul class="ers-teach">'+teach.map(function(t){ return '<li>'+e(t)+'</li>'; }).join('')+'</ul>'+
-    ((c.refs||[]).length?'<h4>Further reading</h4><ul class="ers-teach">'+c.refs.map(function(t){ return '<li>'+e(t)+'</li>'; }).join('')+'</ul>':'')+'</div>';
-  h+=vitalsTrace();
-  h+='<div class="ers-panel" style="margin-top:12px"><h4>Your timeline</h4><div class="ers-log">'+RUN.log.map(function(l){ return '<div class="k-'+l.kind+'"><time>'+l.t+'′</time>'+e(l.text)+'</div>'; }).join('')+'</div></div>';
-  h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="MB_ERSIM.restart()">Play again</button><button class="btn" onclick="location.hash=\''+backHref()+'\'">Back to cases</button></div>';
+  if(pts) b+='<p class="ers-meta" style="margin-top:10px"><b>Clinical points: '+pts.pts+'.</b> '+e(pts.why)+'. Only your best run of this case counts toward your rank.</p>';
+  h+=sec('Score breakdown', sc.pct+'%', b, false);
+  var own=c.phase1?ENGINE.extraTeaching(c, RUN):[], teach=own.concat(c.teaching||[]);
+  if(teach.length) h+=sec('Learning points', own.length?own.length+' from your run':teach.length+' points',
+    '<ul class="ers-teach">'+teach.map(function(t, i){ return '<li'+(i<own.length?' class="own"':'')+'>'+e(t)+'</li>'; }).join('')+'</ul>'+
+    ((c.refs||[]).length?'<h4>Further reading</h4><ul class="ers-teach">'+c.refs.map(function(t){ return '<li>'+e(t)+'</li>'; }).join('')+'</ul>':''), own.length>0);
+  var vt=vitalsTrace(); if(vt) h+=sec('Vitals and your treatments', '', vt, false);
+  h+=sec('Your timeline', RUN.log.length+' entries', '<div class="ers-log">'+RUN.log.map(function(l){ return '<div class="k-'+l.kind+'"><time>'+l.t+'′</time>'+e(l.text)+'</div>'; }).join('')+'</div>', false);
+  h+='<div class="ers-dbar">'+(rp?'<button class="btn" onclick="MB_ERSIM.replayFrom()">↩ From '+rp.at+' min</button>':'')+
+    '<button class="btn primary" onclick="MB_ERSIM.restart()">Play again</button><button class="btn" onclick="location.hash=\''+backHref()+'\'">Cases</button></div></div>';
   return h;
 }
 
@@ -1296,9 +1353,8 @@ function vitalsTrace(){
   var lines=series.map(function(s){ return '<polyline fill="none" stroke="'+s[2]+'" stroke-width="2" points="'+pts.map(function(p){ return x(p.t).toFixed(1)+','+y(p.v[s[0]]).toFixed(1); }).join(' ')+'"/>'; }).join('');
   var marks=(RUN.log||[]).filter(function(l){ return l.kind==='tx'; }).map(function(l){ return '<line x1="'+x(l.t)+'" x2="'+x(l.t)+'" y1="'+T+'" y2="'+(H-B)+'" stroke="var(--accent)" stroke-dasharray="3 3" opacity=".7"><title>'+e(l.t+' min: '+l.text)+'</title></line>'; }).join('');
   var ticks=[0,Math.round(tMax/2),tMax].map(function(t){ return '<text x="'+x(t)+'" y="'+(H-8)+'" text-anchor="middle" font-size="10" fill="var(--dim)">'+t+' min</text>'; }).join('');
-  return '<div class="ers-panel" style="margin-top:12px"><h4>Vitals and your treatments</h4>'+
-    '<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Heart rate, systolic blood pressure and oxygen saturation over the case, with a dashed line at each treatment">'+grid+marks+lines+ticks+'</svg>'+
-    '<div class="ers-meta">'+series.map(function(s){ return '<span style="color:'+s[2]+';font-weight:800">━</span> '+s[1]; }).join(' &nbsp; ')+' &nbsp; <span style="color:var(--accent)">┆</span> a treatment</div></div>';
+  return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Heart rate, systolic blood pressure and oxygen saturation over the case, with a dashed line at each treatment">'+grid+marks+lines+ticks+'</svg>'+
+    '<div class="ers-meta">'+series.map(function(s){ return '<span style="color:'+s[2]+';font-weight:800">━</span> '+s[1]; }).join(' &nbsp; ')+' &nbsp; <span style="color:var(--accent)">┆</span> a treatment</div>';
 }
 
 function page(caseId){
@@ -1367,6 +1423,7 @@ root.MB_ERSIM={
     if(!id) return; if(!inp || inp.value==='' || !isFinite(v) || v<=0){ if(inp) inp.focus(); return; }
     DOSEQ=null; var r=ENGINE.act(CASE, RUN, id, { dose:v }); if(r&&r.ok) LAST={ id:id, at:Date.now() }; after(r&&r.text); },
   doseCancel:function(){ DOSEQ=null; draw(); },
+  logAll:function(){ LOGALL=!LOGALL; draw(); },
   pick:function(el){ if(el && el.name) DSEL[el.name]=el.value; },
   pickText:function(v){ DSEL.hoText=String(v||''); },
   txFilter:function(q){ TXQ=String(q||''); txApply(); },
@@ -1405,11 +1462,14 @@ root.MB_ERSIM={
     var list=branchCases(); if(!list.length) return '';
     css();
     return '<div class="card ers-pcard" style="cursor:default"><div class="mgq-t">🩺 Patient cases</div>'+
-      '<div class="mgq-s">A patient arrives and your choices decide what happens next. Each time, the patient, hospital, how sick they are and the shift can change, and something may go wrong along the way.</div>'+
-      list.map(function(c){ var b=bestFor(c.id);
-        return '<button class="ers-case" style="margin-top:10px;width:100%" onclick="MB_ERSIM.open(\''+c.id+'\')"><div><span class="ers-tag">🔀 Branching</span><span class="ers-tag">'+e(c.level||'')+'</span></div>'+
-          '<h3>'+e(c.title)+'</h3><div class="ers-meta">'+(c.variants||[]).length+' patients · PHC to private hospital · day or night</div>'+
-          (b!==null?'<div class="ers-best">Best: '+b+'%</div>':'<div class="ers-meta">Not played yet</div>')+'</button>'; }).join('')+
+      '<div class="mgq-s">A patient arrives and your choices decide what happens next. The patient, hospital, shift and complications change every time.</div>'+
+      list.map(function(c){
+        var b=bestFor(c.id), runs=store().runs.filter(function(r){ return r.caseId===c.id; }).length;
+        var pts=(c.variants||[]).map(function(v){ var n=String((v.patient||{}).name||'').split(' ')[0]; return '<span class="ers-pc-pt">'+e(n)+' <small>'+e((SETTINGS[v.setting||c.setting]||{}).short||'')+'</small></span>'; }).join('');
+        return '<div class="ers-pc"><div class="ers-pc-h"><h3>'+e(c.title)+'</h3><span class="ers-tag">'+e(c.level||'')+'</span></div>'+
+          '<div class="ers-pc-pts">'+pts+'</div>'+
+          '<div class="ers-pc-f"><span class="ers-meta">'+(b!==null?'Best <b class="ers-best">'+b+'%</b> · '+runs+' run'+(runs===1?'':'s'):'Not played yet')+'</span>'+
+          '<button class="btn primary" onclick="MB_ERSIM.open(\''+c.id+'\')">'+(b!==null?'Play again':'Start a case')+'</button></div></div>'; }).join('')+
       '</div>';
   }
 };
