@@ -541,7 +541,8 @@ var SND=(function(){
     if(typeof document!=='undefined') document.querySelectorAll('.ers-snd').forEach(function(btn){ btn.textContent=on?'🔊':'🔇'; btn.setAttribute('aria-pressed', String(on)); });
   }
   if(typeof document!=='undefined') document.addEventListener('visibilitychange', function(){ if(!document.hidden && on && cur && !timer) beat(); });
-  return { set:set, toggle:toggle, level:level, isOn:function(){ return on; } };
+  function nurse(){ if(!on) return; [0,0.22,0.44].forEach(function(d){ tone(1175,0.16,0.09,'square',d); }); }   // the nurse warning (phase 1, option B)
+  return { set:set, toggle:toggle, level:level, nurse:nurse, isOn:function(){ return on; } };
 })();
 
 function shortLabel(id, label){

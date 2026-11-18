@@ -791,6 +791,23 @@ window.ERSIM_CASES = [
     { id:'hepatitis', label:'Acute viral hepatitis' }
   ], correct:['severe-malaria'], close:['meningitis','sepsis'] },
   dispo:{ best:['admit_ward'], ok:['admit_hdu'], harm:['discharge'], why:'' },
+  /* Phase 1 rules (er-sim.js, c.phase1): read only while FEATURES.CASES_PHASE1 is on or on the owner preview. */
+  recheck:[
+    { id:'rbg-30', test:'rbg', after:30, label:'blood glucose about 30 min after the first check', why:'In severe malaria the sugar can fall hours into treatment, even after a normal first reading. Check it again.' }
+  ],
+  unneededWhy:{
+    dextrose10:'The blood sugar was not low at that moment. Give dextrose for a measured low sugar (under 3 mmol/L, or under 2.2 in a well-nourished child), then recheck.',
+    benzo:'The child was not fitting at that moment. A benzodiazepine without a fit only depresses the breathing.',
+    ns_bolus:'There was no shock at that moment. In a febrile African child, a bolus without shock raises the risk of death (FEAST).'
+  },
+  handover:{
+    keys:{
+      situation:['malaria'],
+      done:['artesunate','dextrose','diazepam','benzo','blood','transfus','oxygen','fit stopped','sugar'],
+      now:['stable','unstable','spo2','sats','saturat','gcs','heart rate','pulse','breathing','bp','pressure'],
+      watch:['sugar','glucose','fit','convuls','urine','pcv','haemoglobin','12 h','next dose','conscious']
+    }
+  },
   responses:{
     mrdt:'The nurse runs the RDT.',
     paracetamol:'Paracetamol 15 mg/kg given.',
@@ -879,6 +896,16 @@ window.ERSIM_CASES = [
       ],
       dx:{ close:['meningitis','febrile'] },
       dispo:{ best:['refer'], ok:[], harm:['discharge'], why:'A PHC cannot give repeat artesunate doses, transfuse or watch a child overnight. Stop the fit, correct the sugar, give the first artesunate dose, and refer with a note.' },
+      firstMove:{ correct:'abc', why:{
+        abc:'He is fitting with froth at the mouth: protect the airway, give oxygen, then stop the fit.',
+        history:'The history can wait a minute. A fitting child needs the airway protected and the fit stopped first.',
+        bloods:'The glucose matters, but a fitting child needs the airway protected and oxygen first. Check the sugar right after.',
+        senior:'Call for help, but not before the airway: he is fitting now and you are the one at the bedside.' } },
+      handover:{
+        situation:{ right:'Musa Abdullahi, 4, 15 kg: severe falciparum malaria with convulsions and hypoglycaemia, being referred from the PHC.',
+          incomplete:'Musa, 4, with fever and a fit.', wrong:'Musa, 4: a simple febrile seizure, now settled.' },
+        watch:{ right:'Another fit, a low sugar again (check it every hour on the way), and his breathing. He needs IV artesunate at 12 hours.',
+          incomplete:'Watch his temperature.', wrong:'Nothing more: the fit has stopped, so he can go home after referral review.' } },
       responses:{
         call_senior:'The officer-in-charge: "Stop the fit, check the sugar, give artesunate, then we refer to the General Hospital. I\'ll call for the ambulance."',
         benzo:'Rectal diazepam 7.5 mg (0.5 mg/kg) given.',
@@ -960,6 +987,19 @@ window.ERSIM_CASES = [
       ],
       dx:{ close:['pneumonia','sepsis'] },
       dispo:{ best:['admit_ward'], ok:['admit_hdu'], harm:['discharge'], why:'She needs the transfusion finished, IV artesunate every 12 hours and close watching on the children\'s ward (HDU if she worsens). A General Hospital can do all of this, so she should not be referred.' },
+      firstMove:{ correct:'abc', why:{
+        abc:'She is breathing very fast with chest indrawing and her SpO₂ is low: oxygen first, then find out why (the pallor says anaemia).',
+        history:'Her father can tell you a lot, but she is hypoxic now. Oxygen first, history while it runs.',
+        bloods:'A PCV and crossmatch are urgent, but oxygen comes first: her SpO₂ is low and she is breathing fast.',
+        senior:'Paediatrics should come, but give oxygen while you wait.' } },
+      recheck:[
+        { id:'pcv-tx', test:'pcv', afterAction:'blood', after:60, label:'PCV after the transfusion', why:'Recheck the PCV after the blood to see if she needs a second unit.' }
+      ],
+      handover:{
+        situation:{ right:'Hauwa Garba, 2, 11 kg: severe falciparum malaria with severe anaemia (Hb about 4) and respiratory distress.',
+          incomplete:'Hauwa, 2, with malaria.', wrong:'Hauwa, 2: severe pneumonia.' },
+        watch:{ right:'Her breathing and signs of fluid overload during the blood, the sugar every few hours, the PCV after the transfusion, and IV artesunate at 12 hours.',
+          incomplete:'Watch her temperature.', wrong:'Give a fluid bolus if her heart rate goes up.' } },
       responses:{
         blood:'Whole blood 220 mL (20 mL/kg) running over 4 hours, observations every 15 minutes.',
         artesunate:'IV artesunate 33 mg (3 mg/kg).',
@@ -1034,10 +1074,20 @@ window.ERSIM_CASES = [
       ],
       harmful:[
         { label:'Treated with oral ACT', any:['act'], pts:-10, why:'He is prostrate, jaundiced and vomiting everything: that is severe malaria. Oral ACT will not stay down and is not enough. Give IV artesunate, then a full ACT course once he can eat.' },
-        { label:'Gave rectal artesunate', any:['artesunate_pr'], pts:-3, why:'Rectal artesunate is a pre-referral drug. This hospital can give IV artesunate.' }
+        { label:'Gave rectal artesunate', any:['artesunate_pr'], pts:-3, tier:'unneeded', why:'Rectal artesunate is a pre-referral drug. This hospital can give IV artesunate.' }
       ],
       dx:{ close:['sepsis','hepatitis'] },
       dispo:{ best:['admit_ward'], ok:['admit_hdu'], harm:['discharge'], why:'Prostration and jaundice make this severe malaria. He needs IV artesunate at 0, 12 and 24 hours, glucose checks and fluids on the ward. This hospital can do that. Refer only if he worsens (fits, coma, kidney failure).' },
+      firstMove:{ correct:'bloods', why:{
+        bloods:'He is talking and his SpO₂ is in the mid-90s, so the airway and breathing are safe. A drowsy, prostrate child needs a glucose check and a malaria test now.',
+        abc:'Always look at the airway, but he is talking and his SpO₂ is fine. The urgent gap is the sugar: he is drowsy and has vomited everything.',
+        history:'His mother gives a clear story, but a drowsy child who has vomited all day needs his sugar checked first.',
+        senior:'You can treat this yourself. Check the sugar and confirm malaria, then call the consultant.' } },
+      handover:{
+        situation:{ right:'Tobi Adeyemi, 7, 22 kg: severe falciparum malaria with prostration, jaundice and 7% parasitaemia.',
+          incomplete:'Tobi, 7, with fever and vomiting.', wrong:'Tobi, 7: acute viral hepatitis.' },
+        watch:{ right:'A low sugar (check it every 4 hours and if he gets drowsier), his urine output and kidneys, and IV artesunate at 12 and 24 hours.',
+          incomplete:'Watch for more vomiting.', wrong:'Switch to oral Coartem tonight even if he is still vomiting.' } },
       responses:{
         artesunate:'IV artesunate 53 mg (2.4 mg/kg) given.',
         maint:'Maintenance fluid with 5% dextrose running.',

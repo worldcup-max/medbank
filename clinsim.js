@@ -207,18 +207,19 @@ var DIFF_X={ Beginner:1, Foundation:1, Core:1.25, Advanced:1.5 };
 var CTX_X={ topic:1, open:1.1, duel:1.2, blind:1.3 };   // duel = a verified in-person duel (clinsim-duel.js)
 var RANKS=[[0,'Student'],[100,'Clerk'],[300,'House Officer'],[700,'Medical Officer'],[1500,'Registrar'],[3000,'Consultant']];
 function gradeOf(pct, o){ o=o||{}; if(o.unsafe) return 'Unsafe'; if(o.fail&&pct>=60) return 'Fail'; if(pct>=85&&!o.fail) return 'Excellent'; if(pct>=60&&!o.fail) return 'Pass'; return pct>=50?'Borderline':'Fail'; }
-function pointsOf(pct, o){ o=o||{}; var p=Math.max(0, Math.min(100, o.unsafe?Math.min(pct,40):pct)); return Math.round(p*(DIFF_X[o.diff]||1.25)*(CTX_X[o.ctx]||1.1)*(o.mode==='practice'?0.5:1)/10); }
+// x / add: a Patient case's harder-start bonuses (late x1.25, night x1.25, complication handled within 15 min +10), from er-sim.js
+function pointsOf(pct, o){ o=o||{}; var p=Math.max(0, Math.min(100, o.unsafe?Math.min(pct,40):pct))+(o.add||0); return Math.round(p*(DIFF_X[o.diff]||1.25)*(CTX_X[o.ctx]||1.1)*(o.x||1)*(o.mode==='practice'?0.5:1)/10); }
 function rankOf(total){ var r=RANKS[0], nx=null; RANKS.forEach(function(x, i){ if(total>=x[0]){ r=x; nx=RANKS[i+1]||null; } }); return { name:r[1], at:r[0], next:nx?{ name:nx[1], at:nx[0] }:null }; }
 function diffOf(kind, id){ var it=catalogue().filter(function(x){ return x.kind===kind && x.id===id; })[0]; return (it&&it.diff)||'Core'; }
 function allRuns(){
   var out=store().runs.filter(function(r){ return r.kind!=='group'; }).map(function(r){ return { kind:r.kind, id:r.id, pct:r.pct, at:r.at, ctx:r.ctx, mode:r.mode, unsafe:!!r.unsafe }; });
   var er=(typeof DATA!=='undefined'&&DATA.ersim&&DATA.ersim.runs)||[];
-  er.forEach(function(r){ out.push({ kind:'er', id:r.caseId, pct:r.pct, at:r.at, ctx:'open', unsafe:r.outcome==='died'||/unsafe/i.test(r.grade||'') }); });
+  er.forEach(function(r){ out.push({ kind:'er', id:r.caseId, pct:r.pct, at:r.at, ctx:'open', mode:r.mode, x:r.x, add:r.add, unsafe:r.outcome==='died'||/unsafe/i.test(r.grade||'') }); });
   return out.sort(function(a,b){ return String(a.at).localeCompare(String(b.at)); });
 }
 function standing(){
   var bestPts={}, bestPct={}, runs=allRuns();
-  runs.forEach(function(r){ var k=r.kind+':'+r.id, p=pointsOf(r.pct, { diff:diffOf(r.kind, r.id), ctx:r.ctx, mode:r.mode, unsafe:r.unsafe });
+  runs.forEach(function(r){ var k=r.kind+':'+r.id, p=pointsOf(r.pct, { diff:diffOf(r.kind, r.id), ctx:r.ctx, mode:r.mode, unsafe:r.unsafe, x:r.x, add:r.add });
     if(!(k in bestPts) || p>bestPts[k]) bestPts[k]=p; if(!(k in bestPct) || r.pct>bestPct[k]) bestPct[k]=r.pct; });
   var total=Object.keys(bestPts).reduce(function(a,k){ return a+bestPts[k]; }, 0), streak=0;
   for(var i=runs.length-1; i>=0 && !runs[i].unsafe; i--) streak++;
@@ -230,7 +231,7 @@ function standing(){
 // points this run adds on top of your previous best for the case (0 when it does not beat it)
 function award(kind, id, pct, ex){
   var o={ diff:diffOf(kind, id), ctx:ex.ctx, mode:ex.mode, unsafe:ex.unsafe }, p=pointsOf(pct, o), prev=0;
-  allRuns().forEach(function(r){ if(r.kind===kind && r.id===id) prev=Math.max(prev, pointsOf(r.pct, { diff:o.diff, ctx:r.ctx, mode:r.mode, unsafe:r.unsafe })); });
+  allRuns().forEach(function(r){ if(r.kind===kind && r.id===id) prev=Math.max(prev, pointsOf(r.pct, { diff:o.diff, ctx:r.ctx, mode:r.mode, unsafe:r.unsafe, x:r.x, add:r.add })); });
   return { pts:p, gain:Math.max(0, p-prev), grade:gradeOf(pct, { unsafe:ex.unsafe, fail:ex.pass===false }), ctx:ex.ctx };
 }
 function pointsLine(a){
