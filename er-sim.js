@@ -928,7 +928,8 @@ function css(){
   document.head.appendChild(st);
 }
 
-function draw(){ var m=document.getElementById('main'); if(!m) return; m.innerHTML=page(CASE?CASE.id:null); try{ if(root.renderNav) root.renderNav(); }catch(_){} watchMini(); txApply(); alertEffects(); }
+function draw(){ var m=document.getElementById('main'); if(!m) return; m.innerHTML=page(CASE?CASE.id:null); try{ if(root.renderNav) root.renderNav(); }catch(_){} watchMini(); txApply(); alertEffects();
+  try{ if(document.getElementById('ersHoRead')) root.MB_ERSIM.hoRead(); var nb=document.querySelector('.ers-nurse-ov button'); if(nb) nb.focus(); }catch(_){} }
 
 /* ---------- lobby */
 function lobby(){
@@ -1018,7 +1019,7 @@ function actBtn(id){
     var tat=(CASE.tat&&CASE.tat[id])||a.tat;
     if(a.cat==='tests') sub=!avail?'Not available here':(pend?'Waiting for result… back in '+fmtDur(Math.max(0,(RUN.pending.filter(function(p){ return p.id===id; })[0].ready-RUN.t))):'1 min · result in '+fmtDur(tat));
     else if(avail){ var dose=(ENGINE.DOSES[id]&&advanced())?'':(a.dose||''); sub=(dose?dose+' · ':'')+(a.min||1)+' min'; }
-    if(avail && !RUN.ended){ lock=ENGINE.bloodLock(CASE, RUN, id); if(lock) sub=RUN.pending.some(function(p){ return p.id==='gxm'; })?'Waiting for the crossmatch':'Send a group and crossmatch first'; }
+    if(avail && !RUN.ended){ lock=ENGINE.bloodLock(CASE, RUN, id); if(lock){ var gx=RUN.pending.filter(function(p){ return p.id==='gxm'; })[0]; sub=gx?'Waiting for the crossmatch, back in about '+fmtDur(Math.max(1,gx.ready-RUN.t)):'Send a group and crossmatch first'; } }
     var res=RUN.results[id];
     if(res){ var ab=/LOW|HIGH|POSITIVE|VERY|raised|\(high\)/.test(res.text); extra+='<small class="ers-last '+(ab?'ab':'ok')+'">Last, at '+res.t+' min: '+e(res.text.length>70?res.text.slice(0,68)+'…':res.text)+'</small>'; }
     if(a.cat==='tests' && !pend && ENGINE.rechecks(CASE, RUN).some(function(r){ return r.test===id && r.due; })) extra+='<span class="ers-due">Recheck due</span>';
@@ -1097,11 +1098,11 @@ function teamPanel(){
 }
 function decidePanel(){
   var h='<h4>Working diagnosis</h4><div class="ers-opts">';
-  (CASE.dx.options||[]).forEach(function(o){ h+='<label class="ers-opt"><input type="radio" name="ersDx" value="'+e(o.id)+'"> '+e(o.label)+'</label>'; });
+  (CASE.dx.options||[]).forEach(function(o){ h+='<label class="ers-opt"><input type="radio" name="ersDx" value="'+e(o.id)+'"'+ck('ersDx',o.id)+' onchange="MB_ERSIM.pick(this)"> '+e(o.label)+'</label>'; });
   h+='</div><h4>Where does the patient go?</h4><div class="ers-opts">';
   DISPOSITIONS.forEach(function(d){
     var dis=(d.id==='theatre'&&CASE.setting==='phc')||(d.id==='admit_hdu'&&CASE.setting==='phc');
-    h+='<label class="ers-opt" '+(dis?'style="opacity:.45"':'')+'><input type="radio" name="ersDispo" value="'+d.id+'" '+(dis?'disabled':'')+'> '+e(d.label)+(dis?' (not at a PHC)':'')+'</label>';
+    h+='<label class="ers-opt" '+(dis?'style="opacity:.45"':'')+'><input type="radio" name="ersDispo" value="'+d.id+'" '+(dis?'disabled':ck('ersDispo',d.id))+' onchange="MB_ERSIM.pick(this)"> '+e(d.label)+(dis?' (not at a PHC)':'')+'</label>';
   });
   h+='</div>'+handoverBox()+'<div class="btnrow" style="margin-top:12px"><button class="btn primary" onclick="MB_ERSIM.end()">Hand over and end the case</button></div><p class="ers-meta" id="ersEndMsg"></p>';
   return h;
@@ -1111,13 +1112,16 @@ function handoverBox(){
   if(!CASE.phase1 || !CASE.handover || RUN.outcome==='died') return '';
   var h='<h4>Hand over to the ward doctor</h4>';
   if(typedHandover()) return h+'<p class="ers-meta">Say it as you would on the phone: the situation, what was done, how the patient is now, and what to watch for.</p>'+
-    '<textarea id="ersHoText" class="ers-hotxt" rows="4" aria-label="Your handover"></textarea>';
+    '<textarea id="ersHoText" class="ers-hotxt" rows="4" aria-label="Your handover" oninput="MB_ERSIM.pickText(this.value)">'+e(DSEL.hoText||'')+'</textarea>';
   ENGINE.handoverParts(CASE, RUN).forEach(function(p){
     h+='<div class="ers-ho"><b>'+e(p.label)+'</b><div class="ers-opts">'+p.options.map(function(o){
-      return '<label class="ers-opt"><input type="radio" name="ersHo_'+p.id+'" value="'+e(o)+'" onchange="MB_ERSIM.hoRead()"> '+e(o)+'</label>'; }).join('')+'</div></div>';
+      return '<label class="ers-opt"><input type="radio" name="ersHo_'+p.id+'" value="'+e(o)+'"'+ck('ersHo_'+p.id,o)+' onchange="MB_ERSIM.pick(this);MB_ERSIM.hoRead()"> '+e(o)+'</label>'; }).join('')+'</div></div>';
   });
   return h+'<p class="ers-find" id="ersHoRead" hidden></p>';
 }
+/* What the student picked on the Decide tab survives a redraw (Watch 5 min, a nurse call, the pinned tabs). */
+var DSEL={};
+function ck(name, val){ return DSEL[name]===val ? ' checked' : ''; }
 function hoPicks(){ var o={}; ['situation','done','now','watch'].forEach(function(k){ var x=document.querySelector('input[name="ersHo_'+k+'"]:checked'); if(x) o[k]=x.value; }); return o; }
 function hint(){
   if(!CASE.tutorial || RUN.ended) return '';
@@ -1306,7 +1310,7 @@ function page(caseId){
   if(!CASE || CASE.id!==c.id){ DEBRIEF=null; TAB='talk'; LAST=null;
     if(loadRun(c.id)) CASE=deal(c, ENGINE.variantOpts(RUN)||{});   // a saved run rebuilds the start it was dealt
     else { CASE=deal(c); RUN=ENGINE.newRun(CASE); CHAT=[]; }
-    SHOWN_T=RUN.t; DOSEQ=null; FIRSTMSG=null; }
+    SHOWN_T=RUN.t; DOSEQ=null; FIRSTMSG=null; DSEL={}; }
   if(DEBRIEF) return debrief();
   setTimeout(watchMini, 0);   // the router inserts this page's HTML after page() returns
   if(RUN.ended && RUN.outcome==='died' && !DEBRIEF){ /* fall through: show the shift with the arrest in the log, then Decide to debrief */ }
@@ -1363,6 +1367,8 @@ root.MB_ERSIM={
     if(!id) return; if(!inp || inp.value==='' || !isFinite(v) || v<=0){ if(inp) inp.focus(); return; }
     DOSEQ=null; var r=ENGINE.act(CASE, RUN, id, { dose:v }); if(r&&r.ok) LAST={ id:id, at:Date.now() }; after(r&&r.text); },
   doseCancel:function(){ DOSEQ=null; draw(); },
+  pick:function(el){ if(el && el.name) DSEL[el.name]=el.value; },
+  pickText:function(v){ DSEL.hoText=String(v||''); },
   txFilter:function(q){ TXQ=String(q||''); txApply(); },
   first:function(id){ var r=ENGINE.firstMove(CASE, RUN, id); if(!r) return; TAB=r.tab; FIRSTMSG=(r.right?'Right first move. ':'Better first: '+r.best+'. ')+r.why; after(null, true); },
   ack:function(){ var al=liveAlert(); if(al){ al.seen=true; } TAB='exam'; after(); root.scrollTo&&root.scrollTo(0,0); },
@@ -1370,7 +1376,8 @@ root.MB_ERSIM={
     el.hidden=!t.length; el.textContent=t.length?'Your handover: '+t.join(' '):''; },
   replayFrom:function(){
     var rp=REPLAY||ENGINE.replayPoint(CASE, RUN); if(!rp) return;
-    RUN=rp.run; RUN.replay={ from:rp.at }; DEBRIEF=null; TAB='talk'; DOSEQ=null; LAST=null; SHOWN_T=RUN.t;
+    RUN=rp.run; RUN.replay={ from:rp.at }; DEBRIEF=null; TAB='talk'; DOSEQ=null; LAST=null; SHOWN_T=RUN.t; DSEL={};
+    (RUN.alerts||[]).forEach(function(a){ a.seen=true; });   // warnings from before the replay point were already answered
     CHAT=[]; (RUN.steps||[]).forEach(function(s){
       if(s.k==='ask'){ var hq=(CASE.history||[]).filter(function(x){ return x.id===s.id; })[0]; if(hq){ CHAT.push({ who:'me', text:hq.q }); CHAT.push({ who:'pt', text:hq.a }); } }
       if(s.k==='free'){ CHAT.push({ who:'me', text:s.q }); CHAT.push({ who:'pt', text:s.reply }); } });
@@ -1390,7 +1397,7 @@ root.MB_ERSIM={
     try{ localStorage.removeItem(RUN_KEY); }catch(_){}
     draw(); root.scrollTo&&root.scrollTo(0,0);
   },
-  restart:function(){ LAST=null; CASE=deal(caseById(CASE.id)||CASE); RUN=ENGINE.newRun(CASE); CHAT=[]; DEBRIEF=null; TAB='talk'; DOSEQ=null; FIRSTMSG=null; SHOWN_T=0; saveRun(); draw(); root.scrollTo&&root.scrollTo(0,0); },   // a branching case deals a new start
+  restart:function(){ LAST=null; CASE=deal(caseById(CASE.id)||CASE); RUN=ENGINE.newRun(CASE); CHAT=[]; DEBRIEF=null; TAB='talk'; DOSEQ=null; FIRSTMSG=null; SHOWN_T=0; DSEL={}; saveRun(); draw(); root.scrollTo&&root.scrollTo(0,0); },   // a branching case deals a new start
   casesOn:casesOn,
   /* The "Patient cases" card in Mega Qbank (pageMega in app.html). Empty unless switched on and the student is 400-600 level. */
   patientCasesCard:function(){

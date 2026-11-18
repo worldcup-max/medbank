@@ -51,7 +51,7 @@ A case can deal a different start every run. `child-very-sick-fever` is the firs
 
 ## Patient cases, phase 1 ("Make the case right")
 
-Behind `FEATURES.CASES_PHASE1` in `config.js` (**false**). The owner preview (`?mbcases=1`) has it on. The UI sets `phase1:true` on the dealt case; without it every case plays and scores exactly as before. Rules live in the engine (`er-sim.js`, "phase 1 rules"), content in `er-sim-cases.js` (`firstMove`, `recheck`, `handover`, `unneededWhy`, harmful `tier`).
+Behind `FEATURES.CASES_PHASE1` in `config.js` (**true** since 2026-11-18, so it applies wherever patient cases show; `PATIENT_CASES` still decides who sees them). The owner preview (`?mbcases=1`) always has it on. The UI sets `phase1:true` on the dealt case; without it every case plays and scores exactly as before. Rules live in the engine (`er-sim.js`, "phase 1 rules"), content in `er-sim-cases.js` (`firstMove`, `recheck`, `handover`, `unneededWhy`, harmful `tier`).
 
 1. **No blood before a crossmatch.** Transfusion stays locked until the group and crossmatch is back. `blood_oneg` (emergency O-negative, General, Private and Teaching only) is there instead; giving it when the patient was not crashing (SpO₂ ≥ 85, SBP ≥ 70, HR ≤ 190) is Dangerous and adds a learning point on transfusion reactions. On a night shift the transfusion target moves with the slower crossmatch.
 2. **Off-path tiers.** Unneeded −3 (a drug or fluid with no reason at that moment, worked out from the case's problems), Harmful −8 (the case's `harmful` list, or a dose more than 25% off), Dangerous −15 (uncrossmatched blood with time to wait, discharging a sick child), and a Dangerous step makes the grade Unsafe.

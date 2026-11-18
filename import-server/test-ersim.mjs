@@ -299,7 +299,7 @@ function playP1(c, plan){
   return { run, sc:E.finish(c, run, plan.dx, plan.dispo, { picks }) };
 }
 
-test("phase 1: off by default — no O-negative button, no new rows, blood needs no crossmatch", ()=>{
+test("phase 1: a case without phase1 — no O-negative button, no new rows, blood needs no crossmatch", ()=>{
   const c = E.instantiate(sm, { seed:7, variant:1, severity:1, night:false, complication:null }), run = E.newRun(c);
   assert.equal(E.act(c, run, "blood_oneg").ok, false);
   assert.equal(E.act(c, run, "blood").ok, true);
